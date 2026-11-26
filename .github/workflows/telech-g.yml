@@ -1,0 +1,88 @@
+# 🏰 Grands noms et remparts (lot G) : refaire assets/data/tg-*.json.gz, puis les enregistrer dans la branche lancée.
+#  - 🗺 tg-osm-forts, tg-osm-poudres, tg-osm-semaphores, tg-osm-lazarets, tg-osm-wallace : OpenStreetMap (ODbL 1.0) par Overpass —
+#    injoignable depuis l'atelier de développement, d'où ce travail ici (quoi = osm).
+#  - 👰 tg-filles, ⚔️ tg-carignan, 🏛 tg-deputes, ✠ tg-compagnons : Wikidata (CC0) + tableaux de Wikipédia (CC BY-SA 4.0) ;
+#    ✈️ tg-aviateurs : Wikipédia en anglais (CC BY-SA 4.0) ; ⚓ tg-lloyd : index d'Internet Archive (aucune page copiée) ;
+#    🏰 tg-forts, 💥 tg-poudres, 📡 tg-semaphores, ⚕️ tg-lazarets, ⛲ tg-wallace : Wikidata (CC0).
+# Puis le sommaire assets/data/manifest.json (Réglages → 🗂 Données : « ↻ Vérifier » voit la nouvelle version).
+#
+# Lancer : onglet « Actions » → « Grands noms et remparts (lot G) » → « Run workflow » (choisir ce qu'on refait).
+
+name: Grands noms et remparts (lot G)
+
+on:
+  workflow_dispatch:
+    inputs:
+      quoi:
+        description: 'tout, osm, noms, aviateurs, lloyd ou lieux'
+        required: false
+        default: 'tout'
+  push:
+    branches: ['claude/**']
+    paths: ['.github/workflows/telech-g.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: telech-g-donnees
+  cancel-in-progress: false
+
+jobs:
+  donnees:
+    # le « push » sert seulement à faire connaître ce travail à GitHub : il ne fabrique rien
+    if: github.event_name != 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    env:
+      QUOI: ${{ github.event.inputs.quoi || 'tout' }}
+    steps:
+      - name: Dossier de travail
+        run: echo "TG_RAW=$RUNNER_TEMP/tg-cache" >> "$GITHUB_ENV"
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: "Préférer IPv4 (pas d’IPv6 sur la machine GitHub, « Network is unreachable »)"
+        run: echo 'precedence ::ffff:0:0/96 100' | sudo tee -a /etc/gai.conf
+      - name: Reprendre les réponses déjà téléchargées
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ runner.temp }}/tg-cache
+          key: telech-g-${{ github.run_id }}
+          restore-keys: telech-g-
+      - name: "🗺 OpenStreetMap : forts, poudres, sémaphores, lazarets, fontaines Wallace"
+        if: env.QUOI == 'tout' || env.QUOI == 'osm'
+        timeout-minutes: 150
+        run: python3 -I scripts/telech-g/build_osm.py assets/data
+      - name: "👥 Filles du Roy, Carignan-Salières, députés, Compagnons (Wikidata)"
+        if: env.QUOI == 'tout' || env.QUOI == 'noms'
+        run: python3 -I scripts/telech-g/build_noms.py assets/data
+      - name: "✈️ Brevets de pilote 1909-1911 (Wikipédia)"
+        if: env.QUOI == 'tout' || env.QUOI == 'aviateurs'
+        run: python3 -I scripts/telech-g/build_aviateurs.py assets/data
+      - name: "⚓ Lloyd’s Register (index des volumes)"
+        if: env.QUOI == 'tout' || env.QUOI == 'lloyd'
+        run: python3 -I scripts/telech-g/build_lloyd.py assets/data
+      - name: "🏰 Forts, poudres, sémaphores, lazarets, fontaines (Wikidata)"
+        if: env.QUOI == 'tout' || env.QUOI == 'lieux'
+        run: python3 -I scripts/telech-g/build_lieux.py assets/data
+      - name: Garder les réponses pour la prochaine fois
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ runner.temp }}/tg-cache
+          key: telech-g-${{ github.run_id }}
+      - name: Sommaire des données
+        run: node scripts/donnees-manifest.js
+      - name: Enregistrer dans la branche
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/data/tg-*.json.gz assets/data/manifest.json
+          git diff --cached --quiet && { echo "rien de neuf"; exit 0; }
+          git commit -m "Grands noms et remparts (lot G) : données refaites sur GitHub (OpenStreetMap ODbL, Wikidata CC0, Wikipédia CC BY-SA 4.0…)"
+          for i in 1 2 3; do git pull --rebase origin "$GITHUB_REF_NAME" && git push origin "HEAD:$GITHUB_REF_NAME" && break; sleep 10; done

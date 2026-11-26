@@ -86,7 +86,7 @@ def main():
                     if plain[:1] in '-–•' or not (40 <= len(plain) <= 360) or plain.count('|') or plain.count('{') or BROKEN.search(plain):
                         continue  # trop court, trop long, ou un modèle perdu (« depuis le , ») : on ne cite pas une phrase abîmée
                     ys = [int(y) for y in re.findall(r'\b(1[0-9]{3}|20[0-9]{2})\b', plain)]
-                    if ys and min(ys) >= 1960:
+                    if ys and (min(ys) >= 1960 or max(ys) >= 1990):
                         continue  # une phrase d'aujourd'hui (chiffre d'affaires, label…) : hors sujet pour des ancêtres
                     if j < 2 and not ctx.get(k) and t not in towns and kre.search(plain):
                         ctx.setdefault(k, []).append({'q': plain, 'title': t, 'url': wm.wp_url(t)})

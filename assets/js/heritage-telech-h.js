@@ -52,7 +52,11 @@
     }
     const jobsText = life => fold([...(life?.jobs || []).map(j => j.text), life?.text || ''].join(' '));
     /** le métier qui correspond (le mot trouvé), ou '' */
-    const jobOf = (life, re) => { if (!re) return ''; const m = re.exec(jobsText(life)); return m ? m[0] : ''; };
+    const jobOf = (life, re) => {
+        if (!re) return '';
+        for (const j of life?.jobs || []) if (re.test(fold(j.text))) return String(j.text || '').trim().slice(0, 60); // le mot tel qu'il est écrit
+        const m = re.exec(fold(life?.text || '')); return m ? m[0] : '';
+    };
     /** existait pendant sa vie (dates inconnues : oui) */
     const during = (life, r) => { const s = lifeSpan(life); return (num(r.from) === null || s.to === null || r.from <= s.to) && (num(r.to) === null || s.from === null || r.to >= s.from); };
     /** les métiers de chaque sujet (texte sans accents, en minuscules) */
@@ -219,13 +223,13 @@
     const ptLi = kind => x => (x.r.via === 'mer' ? `<li>🏛 ${link(x.r.url, x.r.n)} <small class="muted">(${esc(x.r.k)}${x.r.siecle ? ` · ${esc(x.r.siecle)}` : ''})</small> ${srcLink(x.r.url)}</li>`
         : `<li>${PT[kind][1]} <b>${link(urlOf(x.r), x.r.n || word(kind, x.r.k))}</b> <small class="muted">(${esc(word(kind, x.r.k))}${yearsTxt(x.r) ? `, ${esc(yearsTxt(x.r))}` : ''}${x.r.commune ? ` · ${esc(x.r.commune)}` : ''}${x.km !== undefined ? `, ${esc(kmTxt(x.km))}` : ''}${x.r.mh ? ` · ${esc(T('monument historique'))}` : ''})</small> ${srcLink(srcOf(x.r))}</li>`);
     const ptSrc = list => [list.some(x => x.r.via === 'wd') ? LIC.wd() : '', list.some(x => x.r.via === 'osm') ? LIC.osm() : '', list.some(x => x.r.via === 'mer') ? LIC.mer() : ''].filter(Boolean).join(' · ');
-    const NOTE = {kiosques: 'Les kiosques à musique se multiplient après 1870 : les fanfares et harmonies municipales y jouent le dimanche et pour les fêtes. Les sociétés de musique sont rarement dans Wikidata.',
+    const NOTE = {kiosques: 'Les fanfares et harmonies municipales jouaient au kiosque le dimanche et pour les fêtes. Les sociétés de musique sont rarement dans Wikidata.',
         marianne: 'Sous la IIIe République, les communes inaugurent statues de la République et bustes de Marianne ; la liste de Wikidata est très incomplète. L’inventaire e-monumen (lien) en recense bien plus.',
         halles: 'La halle abritait le marché et souvent les poids et mesures ; beaucoup datent du Moyen Âge ou du XIXe siècle (halles en fer).',
         fours: 'Le four banal appartenait au seigneur (banalité) puis souvent à la commune : on y cuisait son pain contre une redevance. Données du lot « Village et nature ».',
-        funiculaires: 'Les ponts transbordeurs (Rouen 1899, Marseille 1905, Nantes 1903, Rochefort 1900…) faisaient passer piétons et voitures dans une nacelle suspendue.',
+        funiculaires: 'Le pont transbordeur faisait passer piétons et voitures d’une rive à l’autre dans une nacelle suspendue, sans gêner les bateaux.',
         eclusieres: 'L’éclusier logeait dans la maison éclusière, au bord du canal ; les mariniers attendaient le passage, s’approvisionnaient, échangeaient les nouvelles. La gare d’eau : un bassin où les bateaux se garaient.',
-        tramways: 'De 1880 à 1950, des centaines de tramways et petits trains d’intérêt local desservaient les bourgs ; presque tous ont fermé avant 1960.'};
+        tramways: 'Tramways et petits trains d’intérêt local desservaient les bourgs à la fin du XIXe et au début du XXe siècle ; la plupart ont fermé depuis. Seulement ceux qui ont fermé avant 1975.'};
     const EMON = 'https://e-monumen.net/';
     function pointsHtml(kind, list, lead) {
         const first = list[0].r;
@@ -257,9 +261,10 @@
     }
     function craftLead(kind, texts, ateliers, where, job, P) {
         const pre = job ? `${esc(T(isShe(P) ? 'Elle était {j}.' : 'Il était {j}.', {j: job}))} ` : '';
-        if (texts.length) { const x = texts[0]; return `${pre}${T('{w}, à {c} ({k}), Wikipédia dit :', {w: esc(where), c: `<b>${esc(x.r.commune)}</b>`, k: esc(kmTxt(x.km))})}<q class="th-quote">${esc(x.r.quote)}</q> ${srcLink(wp(x.r.title))}`; }
+        if (texts.length) { const x = texts[0], c = `<b>${esc(x.r.commune)}</b>`;
+            return `${pre}${x.km < 1 ? T('À {c}, Wikipédia dit :', {c}) : T('À {c} ({k} de {p}), Wikipédia dit :', {c, k: esc(kmTxt(x.km)), p: esc(x.place || where)})}<q class="th-quote">${esc(x.r.quote)}</q> ${srcLink(wp(x.r.title))}`; }
         const x = ateliers[0];
-        return `${pre}${T('{w} : {n} ({k}){y}.', {w: esc(where), n: `<b>${esc(x.r.n)}</b>`, k: esc(kmTxt(x.km)), y: x.r.from ? ` — ${esc(T('fondée en {y}', {y: String(x.r.from)}))}` : ''})} ${srcLink(wd(x.r.q))}`;
+        return `${pre}${T('{w} : {n} ({k}){y}.', {w: esc(T('Près de {p}', {p: x.place || where})), n: `<b>${esc(x.r.n)}</b>`, k: esc(kmTxt(x.km)), y: x.r.from ? ` — ${esc(T('fondée en {y}', {y: String(x.r.from)}))}` : ''})} ${srcLink(wd(x.r.q))}`;
     }
     const bastideTxt = r => (r.y && r.by ? T('{c} est une bastide, fondée en {y} par {b}.', {c: `<b>${esc(r.wp)}</b>`, y: esc(String(r.y)), b: esc(r.by)})
         : r.y ? T('{c} est une bastide, fondée en {y}.', {c: `<b>${esc(r.wp)}</b>`, y: esc(String(r.y))}) : r.by ? T('{c} est une bastide, fondée par {b}.', {c: `<b>${esc(r.wp)}</b>`, b: esc(r.by)}) : T('{c} est une bastide.', {c: `<b>${esc(r.wp)}</b>`}));
@@ -312,7 +317,7 @@
             const {job, texts, ateliers} = craftFor(C.texts, C.ateliers, life, JOBS_RE[k], CR[k][3], 10);
             if (!texts.length && !ateliers.length) return '';
             const where = (texts[0] || ateliers[0]).place || '';
-            return craftHtml(k, C, texts, ateliers, craftLead(k, texts, ateliers, T('Près de {p}', {p: where}), job, life.person));
+            return craftHtml(k, C, texts, ateliers, craftLead(k, texts, ateliers, where, job, life.person));
         }]))};
     async function personInto(host, id, opts = {}) {
         const s = settings(), want = (opts.parts || PERSON_PARTS).filter(k => opts.force || s[k]);
@@ -390,7 +395,7 @@
             const C = await craftRows(kind);
             const texts = near(C.texts, ll.lat, ll.lon, 15, 20).filter((x, i, a) => a.findIndex(y => y.r.quote === x.r.quote) === i), ateliers = near(C.ateliers, ll.lat, ll.lon, 15, 10);
             if (!texts.length && !ateliers.length) return '';
-            return craftHtml(kind, C, texts, ateliers, craftLead(kind, texts, ateliers, T('Près de {p}', {p: name}), '', null));
+            return craftHtml(kind, C, texts, ateliers, craftLead(kind, texts, ateliers, name, '', null));
         }
         return '';
     }

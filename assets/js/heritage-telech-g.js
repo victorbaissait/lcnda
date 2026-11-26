@@ -171,9 +171,8 @@
     const yrs = r => (num(r.b) !== null || num(r.d) !== null ? `${num(r.b) ?? '?'}–${num(r.d) ?? '?'}` : '');
     const URLS = {
         combattants: 'https://archive.org/details/combattantsfranc00fran', bastille: 'https://gallica.bnf.fr/ark:/12148/bpt6k853088f/f1.item', bastilleWp: 'https://fr.wikipedia.org/wiki/Vainqueurs_de_la_Bastille',
-        poilus: 'https://testamentsdepoilus.huma-num.fr/', poilusAn: 'https://www.siv.archives-nationales.culture.gouv.fr/siv/rechercheconsultation/consultation/ir/consultationIR.action?irId=FRAN_IR_054488',
-        lloyd: 'https://archive.org/details/lloydsregisters', ordre: 'https://www.ordredelaliberation.fr/fr/compagnons', aecf: 'https://fr.wikipedia.org/wiki/A%C3%A9ro-Club_de_France',
-        prdh: 'https://www.prdh-igd.com/', fillesWp: 'https://fr.wikipedia.org/wiki/Filles_du_Roy', carignanWp: 'https://fr.wikipedia.org/wiki/R%C3%A9giment_de_Carignan-Sali%C3%A8res'};
+        poilus: 'https://testamentsdepoilus.huma-num.fr/',
+        lloyd: 'https://archive.org/details/lloydsregisters', ordre: 'https://www.ordredelaliberation.fr/fr/compagnons', fillesWp: 'https://fr.wikipedia.org/wiki/Filles_du_Roy', carignanWp: 'https://fr.wikipedia.org/wiki/R%C3%A9giment_de_Carignan-Sali%C3%A8res'};
     const LIC = {wd: () => `${link('https://www.wikidata.org/wiki/Wikidata:Copyright', 'Wikidata')} (CC0)`,
         wp: (u, label = 'Wikipédia') => `${link(u || 'https://fr.wikipedia.org', label)} (${link('https://creativecommons.org/licenses/by-sa/4.0/deed.fr', 'CC BY-SA 4.0')}, ${esc(T('les contributeurs de Wikipédia'))})`,
         osm: () => `${link('https://www.openstreetmap.org/copyright', T('© les contributeurs d’OpenStreetMap'))} (ODbL)`,
@@ -257,7 +256,7 @@
             ok: life => aliveIn(life, 1789) && (ageIn(life, 1789) === null || (ageIn(life, 1789) >= 14 && ageIn(life, 1789) <= 75)) && placedEvents(life).some(e => km(e.lat, e.lon, 48.8534, 2.3488) <= 40 && (e.year === null || Math.abs(e.year - 1789) <= 30)),
             lead: () => T('Une piste : il vivait près de Paris en 1789. Les quelque 950 « vainqueurs de la Bastille » sont nommés dans un tableau imprimé en 1790.'),
             note: () => T('Le tableau est sur Gallica (conditions d’utilisation de la BnF, pas une licence ouverte) : rien n’en est copié.')},
-        poilus: {icon: '📜', url: URLS.poilus, url2: URLS.poilusAn, label: 'Testaments de Poilus (Archives nationales, édition collaborative)',
+        poilus: {icon: '📜', url: URLS.poilus, label: 'Testaments de Poilus (Archives nationales, édition collaborative)',
             ok: life => life.person?.gender !== 'female' && aliveIn(life, 1914, 1918) && (ageIn(life, 1914) === null || (ageIn(life, 1914) >= 17 && ageIn(life, 1914) <= 50)),
             lead: () => T('Une piste : des soldats de la Grande Guerre ont fait leur testament chez un notaire de Paris ou des Yvelines ; ces testaments sont transcrits en ligne.'),
             note: () => T('Le site « Testaments de Poilus » n’a pas pu être lu ici (ni sa licence) : rien n’en est copié, l’app ouvre seulement la page.')}};

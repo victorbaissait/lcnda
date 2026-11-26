@@ -19,8 +19,9 @@ CAT = 'Category:Atlas de Trudaine'
 API = 'https://commons.wikimedia.org/w/api.php?'
 
 
-def api(params):
-    return json.loads(wm.get(API + urllib.parse.urlencode({**params, 'format': 'json', 'formatversion': '2'})))
+def api(params, post=False):
+    q = urllib.parse.urlencode({**params, 'format': 'json', 'formatversion': '2'})
+    return json.loads(wm.get(API.rstrip('?'), 'application/json', q) if post else wm.get(API + q))
 
 
 def members(cat, depth, seen, files):
@@ -50,8 +51,8 @@ def main():
     print(f'  {len(files)} fichiers dans la catégorie et ses sous-catégories')
     lic = {}
     titles = list(files)
-    for i in range(0, len(titles), 50):
-        d = api({'action': 'query', 'prop': 'imageinfo', 'iiprop': 'extmetadata', 'iiextmetadatafilter': 'LicenseShortName|DateTimeOriginal', 'titles': '|'.join(titles[i:i + 50])})
+    for i in range(0, len(titles), 25):
+        d = api({'action': 'query', 'prop': 'imageinfo', 'iiprop': 'extmetadata', 'iiextmetadatafilter': 'LicenseShortName|DateTimeOriginal', 'titles': '|'.join(titles[i:i + 25])}, post=True)
         for p in d['query']['pages']:
             md = (p.get('imageinfo') or [{}])[0].get('extmetadata', {})
             lic[p['title']] = re.sub(r'<[^>]+>', '', md.get('LicenseShortName', {}).get('value', ''))
@@ -59,13 +60,15 @@ def main():
     byname = {}
     for insee, (n, lat, lon) in com.items():
         byname.setdefault(fold(n), []).append((insee, n, lat, lon))
-    uniq = {k: v[0] for k, v in byname.items() if len(v) == 1 and len(k) >= 4}
+    # des noms de communes qui sont aussi des mots courants des titres (« Plan… », « Château… », « Ponts… ») : écartés
+    STOP = {'plan', 'ponts', 'pont', 'chateau', 'maillot', 'route', 'carte', 'vue', 'extrait', 'detail', 'paris', 'atlas', 'archives', 'port', 'moulin', 'ferme'}
+    uniq = {k: v[0] for k, v in byname.items() if len(v) == 1 and len(k) >= 4 and k not in STOP}
     rows = []
     for t in titles:
         if not re.match(r'(?i)^(public domain|pd|cc0|cc[- ]by)', lic.get(t, '')):
             continue
         name = re.sub(r'^File:', '', t).rsplit('.', 1)[0]
-        clean = re.sub(r'(?i)g[ée]n[ée]ralit[ée] (de |du |d.)\S+( \S+)?|archives nationales|atlas( de)? trudaine|cp[- ]f[- ]14\S*|btv1b\w+', ' ', name)
+        clean = re.sub(r'(?i)g[ée]n[ée]ralit[ée] (de |du |d.)\S+( \S+)?|\bduc d\S+|\b[iîIÎ][lL][eE] \S+|archives nationales|atlas( de)? trudaine|cp[- ]f[- ]14\S*|btv1b\w+', ' ', name)
         words = fold(clean).split()
         hit = None
         for n in (4, 3, 2, 1):  # le nom le plus long d'abord (« Saint-Denis » avant « Denis »)

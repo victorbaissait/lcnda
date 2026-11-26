@@ -73,10 +73,10 @@
         const s = lifeSpan(life); if (s.from === null) return [];
         return nearLife(rows, life, radius, (r, e) => num(r.from) !== null && r.from >= (s.birth ?? s.from) + 10 && r.from <= s.to && (e.year === null || Math.abs(e.year - r.from) <= 30));
     }
-    /** 🏥 un sanatorium à moins de 2 km de son lieu de décès (décédé seulement ; ouvert avant sa mort si la date est connue) */
+    /** 🏥 un sanatorium à moins de 4 km de son lieu de décès (le centre de la commune) (décédé seulement ; ouvert avant sa mort si la date est connue) */
     function sanasFor(rows, life) {
         if (!isDead(life)) return [];
-        return nearLife(rows, life, 2, (r, e) => num(r.from) === null || e.year === null || r.from <= e.year, r => r.q, deathEvents(life));
+        return nearLife(rows, life, 4, (r, e) => num(r.from) === null || e.year === null || r.from <= e.year, r => r.q, deathEvents(life));
     }
     /** 🔒 seulement si sa fiche parle de prison (détenu, condamné, gardien…), et décédé : les maisons centrales et prisons à moins de 30 km */
     function prisonFor(rows, life) { return isDead(life) && PRISON_WORD.test(jobsText(life)) ? nearLife(rows, life, 30) : []; }

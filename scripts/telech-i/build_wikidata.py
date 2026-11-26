@@ -4,7 +4,7 @@
  ⚓ ti-navals      chantiers navals (Q190928), corderies (Q1249556, Q41085665), arsenaux (Q81669), bases navales (Q1324633)
  🚗 ti-autos      constructeurs automobiles (Q786820) fondés avant 1914, placés par leur siège (P159) ou leur lieu de fondation (P740)
  🍬 ti-sucreries  sucreries et raffineries de sucre (Q227857, Q61941965)
- 🏥 ti-sanas      sanatoriums (Q46124, Q1792936 et leurs sous-classes directes)
+ 🏥 ti-sanas      sanatoriums (Q46124, Q1792936)
  🔒 ti-centrales  maisons centrales (Q130246829, Q3279120) — les autres prisons et bagnes sont déjà dans ha-institutions (non recopiés)
  🏛 ti-romains    ponts romains (Q1223230) et aqueducs romains (Q13218676) ; « dup » marque ceux déjà dans et-ouvrages (lot « Son époque »)
  🐎 ti-hippodromes hippodromes (Q11822917)
@@ -22,9 +22,9 @@ SETS = {
     'navals': ({'Q190928': 'chantier naval', 'Q1249556': 'corderie', 'Q41085665': 'corderie', 'Q81669': 'arsenal', 'Q1324633': 'base navale'}, False,
                'Chantiers navals, corderies et arsenaux connus de Wikidata'),
     'sucreries': ({'Q227857': 'sucrerie', 'Q61941965': 'sucrerie'}, False, 'Sucreries et raffineries de sucre connues de Wikidata'),
-    'sanas': ({'Q46124': 'sanatorium', 'Q1792936': 'sanatorium'}, True, 'Sanatoriums connus de Wikidata'),
+    'sanas': ({'Q46124': 'sanatorium', 'Q1792936': 'sanatorium'}, False, 'Sanatoriums connus de Wikidata'),
     'centrales': ({'Q130246829': 'maison centrale', 'Q3279120': 'maison centrale'}, False, 'Maisons centrales connues de Wikidata'),
-    'romains': ({'Q1223230': 'pont romain', 'Q13218676': 'aqueduc romain'}, True, 'Ponts et aqueducs romains connus de Wikidata'),
+    'romains': ({'Q1223230': 'pont romain', 'Q13218676': 'aqueduc romain'}, False, 'Ponts et aqueducs romains connus de Wikidata'),
     'hippodromes': ({'Q11822917': 'hippodrome'}, False, 'Hippodromes connus de Wikidata'),
 }
 FIELDS = ['q', 'n', 'k', 'lat', 'lon', 'from', 'to', 'insee', 'commune', 'frwiki']
@@ -72,6 +72,18 @@ def build(name, kinds, sub, what):
       {COMMON.format()} }}'''
     rows = rows_of(wm.sparql(q), kinds)
     extra = None
+    if name == 'navals':
+        # « arsenal » (Q81669) compte aussi les arsenaux d'armes de l'intérieur : on ne garde que ceux à moins de 15 km d'un phare
+        # (ha-phares, déjà dans l'app) ; pour les corderies et arsenaux, une date de création après 1945 est celle du musée ou du
+        # bâtiment d'aujourd'hui (Corderie royale : 1985) : elle n'est pas gardée (sinon la fiche croirait qu'ils n'existaient pas avant)
+        ph = json.load(gzip.open(os.path.join(ROOT, 'assets', 'data', 'ha-phares.json.gz')))
+        fi = ph['fields']
+        pts = [(r[fi.index('lat')], r[fi.index('lon')]) for r in ph['rows'] if r[fi.index('lat')] is not None]
+        coast = lambda la, lo: any(abs(a - la) < 0.15 and abs(b - lo) < 0.22 for a, b in pts)
+        rows = [r for r in rows if r['k'] != 'arsenal' or coast(r['lat'], r['lon'])]
+        for r in rows:
+            if r['k'] in ('corderie', 'arsenal') and r['from'] and r['from'] > 1945:
+                r['from'] = None
     if name == 'romains':
         # déjà dans l'app : les ponts et aqueducs datés du pack « Son époque » (et-ouvrages) — marqués, pas cachés (la fiche le dit)
         et = json.load(gzip.open(os.path.join(ROOT, 'assets', 'data', 'et-ouvrages.json.gz')))
