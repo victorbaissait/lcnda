@@ -479,7 +479,7 @@
         const seenP = seen ? Promise.resolve() : new Promise(ok => W(host, () => { seen = true; ok(); }, {now: true}));
         const moreP = heavy.length ? seenP.then(() => (host.isConnected ? runAll(heavy, x => { done++; results = [...results, x]; drawSoon(); }) : [])) : Promise.resolve([]);
         const got = await runAll(light, x => { done++; results = [...results, x]; drawSoon(); });
-        if (!seen) startOnline(); // les éclipses attendent l'écran : les sources en ligne partent sans elles (2,5 s après le reste, comme avant)
+        // les sources en ligne partent 2,5 s après TOUTES les données de l'app, comme avant : si les éclipses attendent l'écran, elles attendent aussi
         const more = await moreP;
         if (!host.isConnected) return;
         // dans l'ordre des tâches, comme avant (les réponses en ligne déjà arrivées restent)
