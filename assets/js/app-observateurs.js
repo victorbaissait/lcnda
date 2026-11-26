@@ -46,3 +46,21 @@
     ParImage.Native = Native;
     window.MutationObserver = ParImage;
 })();
+
+/* ⏱ LCNDA_PERF.whenSeen(el, fn) : fn(el) quand l'élément arrive près de l'écran (200 px), puis au premier moment calme (au plus 1,5 s).
+ * Pour un widget ou un bloc qui calcule beaucoup ou interroge Internet : rien n'est fait pour ce qu'on ne regarde pas.
+ * Sans IntersectionObserver (ancien navigateur) : tout de suite. Renvoie une fonction qui annule. */
+(function () {
+    'use strict';
+    var idle = function (fn) { return typeof window.requestIdleCallback === 'function' ? window.requestIdleCallback(fn, { timeout: 1500 }) : setTimeout(fn, 1); };
+    var whenSeen = function (el, fn, opts) {
+        if (!el || typeof fn !== 'function') return function () {};
+        var done = false, io = null;
+        var go = function () { if (done) return; done = true; if (io) io.disconnect(); if (opts && opts.now) fn(el); else idle(function () { fn(el); }); };
+        if (typeof window.IntersectionObserver !== 'function') { go(); return function () {}; }
+        io = new IntersectionObserver(function (es) { for (var i = 0; i < es.length; i++) if (es[i].isIntersecting) { go(); return; } }, { rootMargin: (opts && opts.margin) || '200px' });
+        io.observe(el);
+        return function () { done = true; io.disconnect(); };
+    };
+    window.LCNDA_PERF = Object.assign(window.LCNDA_PERF || {}, { whenSeen: whenSeen, idle: idle });
+})();

@@ -134,7 +134,9 @@
     const GRIPS = '.dnd-grip, .order-grip, .saved-grip, .tile-cat-grip, .h-rt-grip, .ar-grip, .h-sc-grip, .qp-grip, .investigation-item-grip, [data-event-order-grip], .ui-grip';
     const GRIP_LABEL = 'Déplacer : glisse la poignée, ou Alt + ↑ / ↓';
     function gripsReady() {
-        document.querySelectorAll(`#workspace :is(${GRIPS}), dialog[open] :is(${GRIPS})`).forEach(g => {
+        // ⏱ cherché dans #workspace et les fenêtres ouvertes seulement, sans les poignées déjà prêtes (avant : toute la page à chaque fois)
+        const ws = document.getElementById('workspace'), sel = `:is(${GRIPS}):not([data-grip-done])`;
+        [...(ws ? ws.querySelectorAll(sel) : []), ...[...document.querySelectorAll('dialog[open]')].flatMap(d => [...d.querySelectorAll(sel)])].forEach(g => {
             if (g.dataset.gripDone) return; g.dataset.gripDone = '1';
             if (/^[☰≡↕⋮]+$/.test(g.textContent.trim())) g.textContent = '⠿'; // une seule poignée : ⠿
             if (!g.matches('button, a, input') && !g.hasAttribute('tabindex')) g.tabIndex = 0;

@@ -630,6 +630,7 @@
     const icMode = new WeakMap(); // la façon dont les icônes de chaque page sont dessinées
     /** tout ce qui se dessine sur l'écran d'un réglage, sur une page ou un aperçu */
     function decorate(root, G, ctx = {}) {
+        everDecorated = true;
         if (!root) return;
         const iconsOn = isOn(G, 'a3');
         const want = iconsOn ? G.a3.v : '';
@@ -642,9 +643,10 @@
         if (ctx.detail) decorateHero(root.querySelector('.person-hero'), ctx.detail, G);
     }
     // sur la page : un seul passage par image, seulement quand un réglage le demande
-    let queued = false, mo = null, busy = false;
+    let queued = false, mo = null, busy = false, everDecorated = false;
+    // ⏱ la page n'est relue (décorations à enlever) que si elle a déjà été décorée : avant, toute la page à chaque image (≈ 0,4 s à l'ouverture)
     const needsWork = G => isOn(G, 'a3') || (isOn(G, 'a8') && G.a8.av) || isOn(G, 'a5') || (isOn(G, 'a7') && !G.a7.bar)
-        || document.querySelector('.lc-ic, .lc-row-av, .lc-tree-sosa, .lc-toast-s, [data-lc-title]');
+        || (everDecorated && document.querySelector('.lc-ic, .lc-row-av, .lc-tree-sosa, .lc-toast-s, [data-lc-title]'));
     function scheduleDecorate() {
         if (queued || typeof requestAnimationFrame !== 'function') return; queued = true;
         requestAnimationFrame(() => {
@@ -1304,7 +1306,7 @@
     }
     let snapTimer = 0;
     if (typeof document !== 'undefined' && typeof MutationObserver !== 'undefined') {
-        const watchWs = () => { const ws = document.getElementById('workspace'); if (!ws) return false; new MutationObserver(() => { clearTimeout(snapTimer); snapTimer = setTimeout(snapshot, 900); }).observe(ws, {childList: true, subtree: true}); return true; };
+        const watchWs = () => { const ws = document.getElementById('workspace'); if (!ws) return false; new MutationObserver(() => { clearTimeout(snapTimer); snapTimer = setTimeout(() => (window.LCNDA_PERF?.idle || (f => f()))(snapshot), 900); }).observe(ws, {childList: true, subtree: true}); return true; };
         if (!watchWs()) document.addEventListener?.('DOMContentLoaded', watchWs, {once: true});
     }
     // si le réglage change dans un autre onglet du navigateur

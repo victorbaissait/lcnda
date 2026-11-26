@@ -24,7 +24,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 args = sys.argv[1:]
 OUT = args[0] if args and not re.match(r'^[a-z]+$', args[0]) else os.path.join(ROOT, 'assets', 'data')
 WANT = [a for a in args if re.match(r'^[a-z]+$', a)] or ['memoriaux', 'cimetieres', 'villages', 'mesures']
-LANGS = 'fr,en,de,nl,it,es,pt,pl,da,sv,nb,fi,cs,hu,ro,el,ru,uk,ja,zh,mul'
+LANGS = 'fr,en,de,nl,it,es,pt,pl,da,sv,nb,mul'
 LIC = 'https://www.wikidata.org/wiki/Wikidata:Copyright'
 
 
@@ -35,10 +35,14 @@ def licence():
 
 
 def parts(body):
-    """la même requête en 10 morceaux (le dernier chiffre du Q)"""
+    """la même requête en 10 morceaux (le dernier chiffre du Q) ; un morceau trop lourd (réponse coupée) est recoupé en 10 (les deux derniers chiffres)"""
     out = []
     for d in '0123456789':
-        out += wm.sparql(body.replace('#PART#', f'FILTER(STRENDS(STR(?i), "{d}"))'))
+        try:
+            out += wm.sparql(body.replace('#PART#', f'FILTER(STRENDS(STR(?i), "{d}"))'))
+        except RuntimeError:
+            for e in '0123456789':
+                out += wm.sparql(body.replace('#PART#', f'FILTER(STRENDS(STR(?i), "{e}{d}"))'))
     return out
 
 

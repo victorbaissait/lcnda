@@ -308,7 +308,18 @@
         });
     }
     let mentionScan = 0;
-    new MutationObserver(() => { clearTimeout(mentionScan); mentionScan = setTimeout(() => linkMentions(document.body), 80); }).observe(document.body, {childList: true, subtree: true, characterData: true});
+    // ⏱ seulement ce qui vient d'apparaître ou de changer (avant : toute la page relue à chaque changement, ≈ 0,8 s à l'ouverture)
+    const mentionRoots = new Set();
+    new MutationObserver(recs => {
+        for (const r of recs) { if (r.type === 'characterData') mentionRoots.add(r.target.parentNode || r.target); else for (const a of r.addedNodes) mentionRoots.add(a.nodeType === 3 ? a.parentNode || a : a); }
+        clearTimeout(mentionScan);
+        mentionScan = setTimeout(() => {
+            const roots = new Set([...mentionRoots].filter(x => x && x.isConnected && x.nodeType === 1)); mentionRoots.clear();
+            const inside = x => { for (let p = x.parentNode; p; p = p.parentNode) if (roots.has(p)) return true; return false; };
+            for (const x of roots) if (!inside(x) && (x.textContent || '').includes('@[')) linkMentions(x);
+        }, 80);
+    }).observe(document.body, {childList: true, subtree: true, characterData: true});
+    linkMentions(document.body);
     ext.personBlocks.mentions = (index, detail) => {
         const rows = detail.heritage?.mentions || [];
         if (!rows.length) return '';

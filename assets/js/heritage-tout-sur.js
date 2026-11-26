@@ -685,7 +685,8 @@
     }
     ext.dashboard[WIDGET] = {load: async () => null, render: (index, widget, span) => {
         const id = `ts-w-${++wN}`, c = widget?.config || {}, n = /span-(3|4)\b|^(3|4)$/.test(String(span)) ? 3 : /span-(12|8|9)\b|^(12|8|9)$/.test(String(span)) ? 6 : 4;
-        setTimeout(() => fillWidget(document.getElementById(id), c, n), 0);
+        // ⏱ rempli quand on le voit (toutes les données installées sont interrogées : ≈ 2 s de calcul) — app-observateurs.js
+        setTimeout(() => { const h = document.getElementById(id); if (window.LCNDA_PERF?.whenSeen) window.LCNDA_PERF.whenSeen(h, x => fillWidget(x, c, n)); else fillWidget(h, c, n); }, 0);
         return A().card(index, String(c.title || '').trim() || T('🔎 Ce qui le/la concerne'), '', `<div class="ts-widget" id="${id}">${UI().skeleton ? UI().skeleton(2) : ''}</div>`, span);
     }};
     async function fillWidget(host, c, n) {

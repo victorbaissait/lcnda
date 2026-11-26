@@ -71,7 +71,7 @@
     ]);
     const CODES = LANGS.map(l => l.code);
     const KEY = 'lcnda-langue', COOKIE = 'lcnda_lang', BANNER_KEY = 'lcnda-i18n-banner-closed';
-    const VERSION = 121; // monter avec ?v= de assets/i18n/*.json dans index.php
+    const VERSION = 122; // monter avec ?v= de assets/i18n/*.json dans index.php
     const hasDom = typeof document !== 'undefined' && typeof window !== 'undefined';
     const isCode = c => CODES.includes(String(c || ''));
 
@@ -183,7 +183,11 @@
         if (!r) return OWN_RULES[code] ? OWN_RULES[code](x) : (x === 1 ? 'one' : 'other');
         return r.select(x);
     }
-    function fmtNumber(n, opts) { const v = Number(n); if (!Number.isFinite(v)) return String(n); try { return v.toLocaleString(locale(), opts); } catch (_) { return String(v); } }
+    // ⏱ un seul Intl.NumberFormat par langue (toLocaleString en crée un à chaque nombre : ≈ 0,3 s à l'ouverture, pour les {n} des textes)
+    const NF = new Map();
+    const nfOf = loc => { let f = NF.get(loc); if (!f) { f = new Intl.NumberFormat(loc); NF.set(loc, f); } return f; };
+    function frNumber(v) { try { return nfOf('fr-FR').format(v); } catch (_) { return v.toLocaleString('fr-FR'); } }
+    function fmtNumber(n, opts) { const v = Number(n); if (!Number.isFinite(v)) return String(n); try { return opts === undefined ? nfOf(locale()).format(v) : v.toLocaleString(locale(), opts); } catch (_) { return String(v); } }
     function fmtDate(d, opts = {day: 'numeric', month: 'short', year: 'numeric'}) {
         const x = d instanceof Date ? d : new Date(d); if (isNaN(x)) return '';
         try { return x.toLocaleDateString(locale(), opts); } catch (_) { return x.toISOString().slice(0, 10); }
@@ -194,7 +198,7 @@
         return s.replace(/\{([a-z_][a-z0-9_]*)\}/gi, (m, k) => {
             if (!Object.prototype.hasOwnProperty.call(vars, k) || k === 'ctx') return m;
             const v = vars[k];
-            return typeof v === 'number' ? (lang === 'fr' ? v.toLocaleString('fr-FR') : fmtNumber(v)) : String(v ?? '');
+            return typeof v === 'number' ? (lang === 'fr' ? frNumber(v) : fmtNumber(v)) : String(v ?? '');
         });
     }
     function pick(v, vars) {

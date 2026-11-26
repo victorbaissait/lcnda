@@ -384,7 +384,7 @@
         if (e.key !== '/' || e.defaultPrevented || e.metaKey || e.ctrlKey || e.altKey || !S.host?.isConnected || document.querySelector('dialog[open]')) return;
         const t = e.target; if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
         const inp = S.host.querySelector('[data-nlm-q]'); if (!inp || !inp.offsetParent) return;
-        e.preventDefault(); inp.focus(); inp.select?.();
+        e.preventDefault(); e.stopPropagation(); inp.focus(); inp.select?.(); // avant « / » de l'app (la case de la colonne)
     }, true);
     function bind(host) {
         const inp = host.querySelector('[data-nlm-q]'); let tq = 0;
