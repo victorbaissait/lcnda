@@ -398,7 +398,7 @@
         return `${head}
             ${folder ? `<details class="h-at-fnotes" ${folder.notes ? 'open' : ''}><summary>${i18n('📝 Notes du dossier')}${folder.notes ? '' : ` <small class="muted">${i18n('(vides)')}</small>`}</summary><textarea data-at-fnotes rows="4" placeholder="Ce que ce dossier doit contenir, le plan de la section, les idées…">${esc(folder.notes || '')}</textarea></details>` : ''}
             ${sub.length ? `<div class="h-at-subs">${sub.map(f => `<button type="button" class="h-at-sub" data-at-go="${f.id}" data-at-folder-drop="${f.id}">${esc(f.icon || CFG.folders.closed)} ${esc(f.name)}</button>`).join('')}</div>` : ''}
-            <div class="h-at-toolbar">${trash ? (items.length ? '<button type="button" class="button small danger" data-at-emptytrash>Vider la corbeille</button>' : '') : `<div class="h-at-addmenu"><button type="button" class="button small" data-at-addmenu>＋ Ajouter ▾</button><div class="h-at-menu" hidden>${CFG.types.filter(t => !t.hidden).map(t => `<button type="button" data-at-add="${esc(t.key)}" title="${esc(t.help || '')}">${esc(t.icon)} ${esc(t.label)}</button>`).join('')}<button type="button" data-at-library title="Des numéros de revue, des articles, des livres, des chapitres, des documentaires et leurs moments">📚 Revues, livres, documentaires…</button>${ext.connexions?.enabled?.() !== false && ext.connexions ? `<button type="button" data-at-take title="${esc(i18n('Une fiche, un acte, une source, une donnée (météo d’un jour…), une ligne de liste, un fichier : dans ce projet, ou dans l’élément choisi'))}">📥 ${esc(i18n('Prendre depuis…'))}${ext.connexions.count?.() ? ` <small>· 🧺 ${ext.connexions.count()}</small>` : ''}</button>` : ''}<button type="button" class="h-at-menu-cfg" data-at-settings>⚙️ Réglages des sortes…</button></div></div>
+            <div class="h-at-toolbar">${trash ? (items.length ? '<button type="button" class="button small danger" data-at-emptytrash>Vider la corbeille</button>' : '') : `<div class="h-at-addmenu"><button type="button" class="button small" data-at-addmenu>＋ Ajouter ▾</button><div class="h-at-menu" hidden>${CFG.types.filter(t => !t.hidden).map(t => `<button type="button" data-at-add="${esc(t.key)}" title="${esc(t.help || '')}">${esc(t.icon)} ${esc(t.label)}</button>${t.key === 'app' && ext.atelierData ? `<button type="button" data-at-add="app_data" title="${esc(i18n('Une liste de données (séismes, guerres, Tour de France…) : quelques lignes ou toute la liste filtrée'))}">📊 ${esc(i18n('Données téléchargées'))}</button>` : ''}`).join('')}<button type="button" data-at-library title="Des numéros de revue, des articles, des livres, des chapitres, des documentaires et leurs moments">📚 Revues, livres, documentaires…</button>${ext.connexions?.enabled?.() !== false && ext.connexions ? `<button type="button" data-at-take title="${esc(i18n('Une fiche, un acte, une source, une donnée (météo d’un jour…), une ligne de liste, un fichier : dans ce projet, ou dans l’élément choisi'))}">📥 ${esc(i18n('Prendre depuis…'))}${ext.connexions.count?.() ? ` <small>· 🧺 ${ext.connexions.count()}</small>` : ''}</button>` : ''}<button type="button" class="h-at-menu-cfg" data-at-settings>⚙️ Réglages des sortes…</button></div></div>
                 <button type="button" class="button small secondary" data-at-import title="Zotero (.rdf), CSL JSON, EndNote (.xml), BibTeX (.bib), RIS (.ris)">⤒ Importer…</button>`}
                 ${folder && kids(node).length ? `<label class="ui-toggle h-at-deep"><input type="checkbox" data-at-deep ${v.deep ? 'checked' : ''}><i></i>avec les sous-dossiers</label>` : ''}
                 <select data-at-type><option value="">Toutes les sortes</option>${CFG.types.filter(t => !t.hidden || t.key === v.type).map(t => `<option value="${esc(t.key)}" ${v.type === t.key ? 'selected' : ''}>${esc(t.icon)} ${esc(t.label)}</option>`).join('')}</select>
@@ -587,7 +587,7 @@
     }
     /* ─── 🔗 Venant du logiciel : une fiche, un bloc, un village, une liste, un recueil… ─── */
     const APP_KINDS = {person: ['👤', 'Une fiche (personne)'], person_block: ['🧩', 'Un bloc d’une fiche'], village: ['🏘️', 'La fiche d’un village'], list: ['📋', 'Une liste'],
-        recueil: ['📚', 'Un recueil (ou quelques pages)'], investigation: ['🔍', 'Une enquête'], battue: ['🧭', 'Une battue'], media: ['🖼️', 'Une image, un son, une vidéo'], atelier_project: ['🗂️', 'Un autre projet de l’Atelier'], workbook: ['🧾', 'Un classeur (budget, planning, tableau des sources…)']};
+        recueil: ['📚', 'Un recueil (ou quelques pages)'], investigation: ['🔍', 'Une enquête'], battue: ['🧭', 'Une battue'], media: ['🖼️', 'Une image, un son, une vidéo'], atelier_project: ['🗂️', 'Un autre projet de l’Atelier'], workbook: ['🧾', 'Un classeur (budget, planning, tableau des sources…)'], data: ['📊', 'Une donnée téléchargée']}; // data : heritage-atelier-donnees.js
     // ces sortes se choisissent avec le menu de choix unique (docs/PICKER.md) ; villages, listes, recueils et projets gardent leur recherche
     const APP_PK = {person: 'person', person_block: 'person', investigation: 'investigation', battue: 'battue', media: 'media', workbook: 'workbook'};
     async function appSearch(kind, q) {
@@ -598,8 +598,9 @@
             const lq = q.toLowerCase(); return all.filter(x => !lq || x.label.toLowerCase().includes(lq)).slice(0, 60); }
         return [];
     }
-    function appDialog(item = null) {
-        const v = st(), d = item?.data || {};
+    function appDialog(item = null, preKind = '') {
+        const v = st(), d = item?.data || (preKind ? {kind: preKind} : {});
+        let dataForm = null; // 📊 Une donnée téléchargée : le choix commun (LCNDA_EXT.atelierData)
         let chosen = item ? {key: d.key, label: d.label, extra: d.extra} : null, pages = [];
         const blocks = (A().defaultPersonBlocks || []).filter(([k]) => !['person_exports'].includes(k));
         dialog({eyebrow: 'VENANT DU LOGICIEL', title: item ? 'Modifier' : 'Ajouter un élément du logiciel', wide: true, submitLabel: item ? 'Enregistrer' : 'Ajouter',
@@ -614,6 +615,8 @@
             onOpen: dl => {
                 const kindSel = dl.querySelector('[name=kind]'), q = dl.querySelector('[data-app-q]'), res = dl.querySelector('[data-app-res]'), more = dl.querySelector('[data-app-more]');
                 const drawMore = async () => { const k = kindSel.value;
+                    if (k !== 'data') dataForm = null;
+                    if (k === 'data') { if (!dataForm) dataForm = ext.atelierData?.appForm(more, d.kind === 'data' ? d.ds : null) || null; return; }
                     if (k === 'person_block') more.innerHTML = `<label>Quel bloc ?<select name="sub">${blocks.map(([bk, bl]) => `<option value="${esc(bk)}" ${d.sub === bk ? 'selected' : ''}>${esc(bl)}</option>`).join('')}</select></label>`;
                     else if (k === 'recueil' && chosen) { const rd = await api('recueil', {id: chosen.key}).catch(() => ({pages: []})); pages = rd.pages || [];
                         more.innerHTML = pages.length ? `<fieldset class="h-rc-modes"><legend>Quelles pages ?</legend><label class="checkbox-line"><input type="radio" name="scope" value="all" ${d.page_from ? '' : 'checked'}> Tout le recueil</label>
@@ -628,6 +631,8 @@
                 });
                 pk.addEventListener('picker-change', e => { const it = e.detail.item; chosen = it?.id ? {key: String(it.id), label: it.title, extra: it.short || ''} : null; drawMore(); });
                 const search = async () => {
+                    if (kindSel.value === 'data') { pk.hidden = true; pk.innerHTML = ''; res.hidden = true; res.innerHTML = ''; dl.querySelector('[data-app-qbox]').hidden = true; return; }
+                    res.hidden = false;
                     const pkKind = APP_PK[kindSel.value]; pk.hidden = !pkKind; dl.querySelector('[data-app-qbox]').hidden = !!pkKind;
                     res.hidden = !!pkKind;
                     if (pkKind) { res.innerHTML = ''; const val = chosen && APP_PK[d.kind] === pkKind ? {id: Number(chosen.key), title: chosen.label, short: chosen.extra || ''} : null;
@@ -642,6 +647,14 @@
                 search(); drawMore();
             },
             onSubmit: async form => {
+                if (form.kind.value === 'data') { // 📊 quelques lignes, ou toute la liste filtrée (le texte et la source, jamais le pack)
+                    let x = null; try { x = await dataForm?.collect(); } catch (e) { return window.LCNDA_UI.fail(form.querySelector('[data-atd-rows]') || form.querySelector('[data-app-more]'), e.message); }
+                    if (!x) return window.LCNDA_UI.fail(form.querySelector('[data-ld-ov-q]') || form.querySelector('[data-app-more]'), i18n('Choisis une liste, ou pose une question.'));
+                    const f0 = Object.fromEntries(new FormData(form));
+                    const saved = await post('save_atelier_item', {id: item?.id || 0, project_id: P.project.id, type: 'app', title: (f0.title || '').trim() || x.label, data: {kind: 'data', key: x.key, sub: '', label: x.label, extra: x.extra, ds: x.ds, notes: f0.notes, related: d.related || []}, tags: item?.tags || [],
+                        folder_ids: item ? item.folders : (typeof v.node === 'number' ? [v.node] : []), starred: item ? Number(item.starred) : 0});
+                    v.sel = [Number(saved.result.id)]; toast(item ? 'Enregistré.' : 'Ajouté.'); await reload(); return;
+                }
                 const tplKey = form.wb_tpl?.value || '';
                 if (!chosen && !(form.kind.value === 'workbook' && tplKey)) return window.LCNDA_UI.fail(form.querySelector('.pk') || form.querySelector('[data-app-q]'), 'Choisis dans la liste.');
                 const f = Object.fromEntries(new FormData(form)), kind = f.kind;
@@ -663,6 +676,7 @@
     /** Ouvre dans le logiciel ce que montre un élément « Venant du logiciel ». */
     function openApp(i) {
         const d = i.data || {}, s = S();
+        if (d.kind === 'data') return ext.atelierData?.open({...(d.ds?.cfg || {}), src: d.ds?.list || d.key});
         if (d.kind === 'person' || d.kind === 'person_block') { s.currentPersonId = Number(d.key); A().setModule('personnes');
             if (d.kind === 'person_block' && d.sub) { let n = 0; const t = setInterval(() => { const el = document.querySelector(`[data-pblock="${CSS.escape(d.sub)}"]`); if (el || ++n > 40) { clearInterval(t); if (el) { el.scrollIntoView({behavior: 'smooth', block: 'start'}); el.classList.add('h-flash'); setTimeout(() => el.classList.remove('h-flash'), 2500); } } }, 100); } return; }
         if (d.kind === 'village') { s.listType = 'villages'; s.hVillage = d.key; return A().setModule('listes'); }
@@ -678,6 +692,7 @@
     async function fillAppPreview(i) {
         const box = document.querySelector(`[data-at-apppreview="${i.id}"]`); if (!box) return;
         const d = i.data || {}; let html = '';
+        if (d.kind === 'data') { if (ext.atelierData) await ext.atelierData.preview(box, d.ds); return; } // 📊 vivant : les lignes d'aujourd'hui, ↗ source
         try {
             if (d.kind === 'person' || d.kind === 'person_block') { const r = await api('person', {id: d.key}); const p = r.person || {};
                 const ev = (r.events || []).slice(0, 8);
@@ -697,6 +712,7 @@
     }
     function itemDialog(type, item = null, preset = {}) {
         if (type === 'app') return appDialog(item);
+        if (type === 'app_data') return appDialog(null, 'data'); // « ＋ Ajouter ▾ → 📊 Données téléchargées »
         if (type === 'custom' || !TYPES[type]) return customDialog(item ? item.data?.ctype : type, item);
         const v = st(), d = item?.data || preset.data || {}, isNew = !item;
         const people = P.people || {};
@@ -881,7 +897,7 @@
             else if (i.type === 'note') B.push({k: 'note', t: d.text || i.title});
             else if (i.type === 'quote') { const s = d.source_id ? P.byId.get(Number(d.source_id)) : null; if (s) refsUsed.set(s.id, s); B.push({k: 'quote', t: `« ${d.text || ''} »`, src: s ? `— ${shortCite(s)}${d.page ? ', ' + d.page : ''}` : ''}); }
             else if (i.type === 'reference') { refsUsed.set(i.id, i); B.push({k: 'li', t: cite(i, false)}); }
-            else B.push({k: 'li', t: `${i.title}${d.notes ? ' — ' + String(d.notes).replace(/\n/g, ' ') : ''}`});
+            else B.push({k: 'li', t: `${i.title}${i.type === 'app' && d.kind === 'data' && ext.atelierData ? ' — ' + ext.atelierData.exportText(d.ds) : ''}${d.notes ? ' — ' + String(d.notes).replace(/\n/g, ' ') : ''}`});
         };
         const walk = (parent, depth) => kids(parent).forEach(f => {
             B.push({k: 'h', lvl: Math.min(6, depth + 1), t: f.name}); if (f.notes) B.push({k: 'p', t: f.notes});
@@ -932,7 +948,7 @@
             if (i.type === 'note') return `\n> 📝 ${String(d.text || '').replace(/\n/g, '\n> ')}\n`;
             if (i.type === 'quote') { const s = d.source_id ? P.byId.get(Number(d.source_id)) : null; return `\n> « ${String(d.text || '').replace(/\n/g, '\n> ')} »${s ? `\n> — ${cite(s, false)}${d.page ? ', ' + d.page : ''}` : ''}\n`; }
             if (i.type === 'reference') return `- ${cite(i, 'md')}`;
-            return `- ${ti(i)} ${i.title}${d.notes ? ' — ' + d.notes.replace(/\n/g, ' ') : ''}`;
+            return `- ${ti(i)} ${i.title}${i.type === 'app' && d.kind === 'data' && ext.atelierData ? ' — ' + ext.atelierData.exportText(d.ds) : ''}${d.notes ? ' — ' + d.notes.replace(/\n/g, ' ') : ''}`;
         };
         const walk = (parent, depth) => kids(parent).forEach(f => {
             out.push('', `${'#'.repeat(Math.min(6, depth + 2))} ${f.name}`);

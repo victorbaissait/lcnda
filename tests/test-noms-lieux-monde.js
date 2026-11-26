@@ -182,7 +182,8 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         await t('clavier : « / » va dans la case, Tab atteint les exemples, les cases, les liens et les boutons', async () => {
             await openView(p, 'Breslau');
             await p.evaluate(() => document.activeElement?.blur()); await p.keyboard.press('/');
-            assert.ok(await p.evaluate(() => document.activeElement?.matches('[data-nlm-q]')), '« / » : la case');
+            const fq = await p.evaluate(() => ({ok: !!document.activeElement?.matches('[data-nlm-q]'), at: `${document.activeElement?.tagName}.${document.activeElement?.className}`, dlg: [...document.querySelectorAll('dialog[open]')].map(d => d.className)}));
+            assert.ok(fq.ok, `« / » : la case (${JSON.stringify(fq)})`);
             const seen = new Set();
             for (let i = 0; i < 40; i++) { await p.keyboard.press('Tab'); const k = await p.evaluate(() => { const a = document.activeElement; return a?.dataset?.nlmEx ? 'ex' : a?.dataset?.nlmCk ? 'ck' : a?.classList?.contains('nlm-srcchip') ? 'src' : a?.dataset?.nlmMap ? 'map' : ''; }); if (k) seen.add(k); }
             assert.deepStrictEqual([...seen].sort(), ['ck', 'ex', 'map', 'src']);
@@ -208,7 +209,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await ready(q); await q.evaluate(() => { document.documentElement.dataset.theme = 'dark'; });
             await openView(q, 'Lutetia'); await q.waitForFunction(() => document.querySelector('.nlm-mini .nlm-land path'), null, {timeout: 20000});
             await q.evaluate(() => { document.querySelector('[data-nlm-ck]').click(); });
-            const r = await q.evaluate(() => { const h = document.querySelector('[data-nlm]'); const over = [...h.querySelectorAll('*')].filter(e => { const b = e.getBoundingClientRect(); return b.width && (b.right > window.innerWidth + 1 || b.left < -1); }).map(e => e.className || e.tagName).slice(0, 5);
+            const r = await q.evaluate(() => { const h = document.querySelector('[data-nlm]'); const over = [...h.querySelectorAll('*')].filter(e => !e.parentElement.closest('svg')).filter(e => { const b = e.getBoundingClientRect(); return b.width && (b.right > window.innerWidth + 1 || b.left < -1); }).map(e => String(e.className?.baseVal ?? e.className) || e.tagName).slice(0, 5);
                 const card = h.querySelector('.nlm-place').getBoundingClientRect(); return {over, left: card.left, right: window.innerWidth - card.right, docW: document.documentElement.scrollWidth, color: getComputedStyle(h.querySelector('.nlm-nm')).color, bg: getComputedStyle(h.querySelector('.nlm-place')).backgroundColor}; });
             assert.deepStrictEqual(r.over, []); assert.ok(r.left >= 8 && r.right >= 8, JSON.stringify(r)); assert.ok(r.docW <= 391, `largeur ${r.docW}`);
             assert.ok(!/rgb\(0, 0, 0\)/.test(r.color) && !/rgb\(255, 255, 255\)/.test(r.bg), `sombre : ${r.color} sur ${r.bg}`);

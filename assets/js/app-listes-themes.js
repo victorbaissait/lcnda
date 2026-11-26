@@ -221,7 +221,7 @@
         let tq = 0;
         input.addEventListener('input', e => { clearTimeout(tq); tq = setTimeout(() => { q = e.target.value; paint(); if (!custom) ext.listesValeurs?.warm(q, () => { if (page.isConnected && q.trim()) paint(); }); }, 60); });
         if (compact) input.addEventListener('keydown', e => { // ↑ ↓ Entrée Échap
-            const cs = cards();
+            const cs = cards(); if (['ArrowDown', 'ArrowUp', 'Enter'].includes(e.key)) e.stopPropagation();
             if (e.key === 'Escape' && input.value) { e.preventDefault(); e.stopPropagation(); input.value = ''; q = ''; paint(); return; }
             if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { if (!cs.length) return; e.preventDefault(); kb = e.key === 'ArrowDown' ? Math.min(cs.length - 1, kb + 1) : Math.max(0, kb - 1); cs.forEach((c, i) => c.classList.toggle('is-kb', i === kb)); cs[kb].scrollIntoView({block: 'nearest'}); return; }
             if (e.key === 'Enter') { e.preventDefault(); const c = cs[kb >= 0 ? kb : 0]; if (c) pick(c.dataset.ldPick); }

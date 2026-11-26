@@ -9,7 +9,7 @@
  *  - à froid : contexte neuf (aucun cache) ;
  *  - à chaud : 2e et 3e ouverture dans le même contexte (cache HTTP + code JavaScript déjà compilé gardé par Chromium).
  * Puis, dans l'app ouverte : une fiche personne, une fiche village, Listes → 🧰 Données (Récap), l'onglet Carte, Réglages.
- * --electron-cache : simule le relais de l'app de bureau (Cache-Control immutable sur /assets/…?v=) en réécrivant les en-têtes.
+ * Internet coupé par un proxy qui n'existe pas (et non page.route, qui désactiverait le cache du navigateur).
  */
 const fs = require('node:fs');
 const os = require('node:os');
@@ -23,8 +23,9 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 const arg = (k, d) => { const i = process.argv.indexOf(k); return i > 0 ? process.argv[i + 1] : d; };
 const RUNS = Number(arg('--runs', 2)) || 2;
 const OUT = arg('--json', '');
-const ELECTRON_CACHE = process.argv.includes('--electron-cache');
+const ROOT = path.resolve(arg('--root', path.resolve(__dirname, '..'))); // une autre copie de l'app (ex. la version d'avant, git archive) à comparer
 const INIT = arg('--init', ''); // script ajouté à chaque page (instrumentation) ; ce qu'il range dans window.__report est affiché
+const PROFILE_NAV = arg('--profile-nav', ''); // dossier : un profil processeur par étape de navigation
 const PROFILE = arg('--profile', ''); // profil processeur de la 1re ouverture à froid (.cpuprofile) + résumé par fichier
 
 async function main() {
@@ -32,30 +33,21 @@ async function main() {
     const phpPath = findPhp([devBundledPhp()]) || 'php';
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'lcnda-mesure-'));
     const dataDir = path.join(tmp, 'base');
-    const mk = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), path.join(appRoot, 'scripts', 'exemple-base.php'), dataDir], { cwd: appRoot, encoding: 'utf8', timeout: 120000 });
+    const mk = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), path.join(ROOT, 'scripts', 'exemple-base.php'), dataDir], { cwd: ROOT, encoding: 'utf8', timeout: 120000 });
     if (mk.status !== 0) throw new Error(mk.stderr || mk.stdout);
     const env = { ...process.env, GENEALOGY_DATA_DIR: dataDir, GENEALOGY_MEDIA_DIR: path.join(dataDir, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4',
         http_proxy: 'http://127.0.0.1:9', https_proxy: 'http://127.0.0.1:9', HTTP_PROXY: 'http://127.0.0.1:9', HTTPS_PROXY: 'http://127.0.0.1:9', no_proxy: '', NO_PROXY: '' };
     const port = await new Promise(res => { const s = net.createServer(); s.listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => res(p)); }); });
-    const proc = spawn(phpPath, [...phpRuntimeArgs(phpPath), '-d', 'memory_limit=1024M', '-S', `127.0.0.1:${port}`, '-t', appRoot, path.join(appRoot, 'router.php')], { cwd: appRoot, env, stdio: 'ignore', detached: true });
+    const proc = spawn(phpPath, [...phpRuntimeArgs(phpPath), '-d', 'memory_limit=1024M', '-S', `127.0.0.1:${port}`, '-t', ROOT, path.join(ROOT, 'router.php')], { cwd: ROOT, env, stdio: 'ignore', detached: true });
     const stop = () => { try { process.kill(-proc.pid, 'SIGTERM'); } catch (_) { try { proc.kill(); } catch (_) { /* arrêté */ } } };
     process.on('exit', stop);
     const base = `http://127.0.0.1:${port}/`;
     for (let i = 0; i < 150; i++) { try { await fetch(base + 'robots.txt'); break; } catch (_) { await sleep(100); } }
-    const browser = await chromium.launch();
+    const browser = await chromium.launch({ proxy: { server: 'http://127.0.0.1:9', bypass: '127.0.0.1' } });
     const results = { open: [], nav: {} };
     try {
         for (let run = 0; run < RUNS; run++) {
             const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
-            await ctx.route(/^https?:\/\/(?!127\.0\.0\.1)/, r => r.abort());
-            if (ELECTRON_CACHE) {
-                await ctx.route(/\/assets\/.*\?(.*&)?v=/, async r => {
-                    const resp = await r.fetch();
-                    const h = { ...resp.headers() }; delete h['cache-control']; delete h.expires; delete h.pragma;
-                    h['cache-control'] = 'private, max-age=31536000, immutable';
-                    await r.fulfill({ response: resp, headers: h });
-                });
-            }
             if (INIT) await ctx.addInitScript({ path: INIT });
             await ctx.addInitScript(() => {
                 window.__lt = []; window.__ready = 0;
@@ -150,7 +142,9 @@ async function measureNav(page, cdp, results) {
     ];
     for (const [name, code, sel] of steps) {
         await page.evaluate(() => { window.__lt = []; window.__navMark = performance.now(); document.querySelector('#workspace')?.setAttribute('data-mesure-old', '1'); });
-        reqs = 0; const t0 = Date.now();
+        reqs = 0;
+        if (PROFILE_NAV) { await cdp.send('Profiler.enable'); await cdp.send('Profiler.setSamplingInterval', { interval: 500 }); await cdp.send('Profiler.start'); }
+        const t0 = Date.now();
         await page.evaluate(code);
         let shown = 0;
         try {
@@ -162,6 +156,7 @@ async function measureNav(page, cdp, results) {
             const lastLong = await page.evaluate(() => { let m = window.__navMark; for (const [s, d] of window.__lt) if (d > 50) m = Math.max(m, s + d); return performance.now() - m; });
             if ((inflight <= 0 && Date.now() - last > 800 && lastLong > 800) || Date.now() - t0 > 30000) break;
         }
+        if (PROFILE_NAV) { const { profile } = await cdp.send('Profiler.stop'); fs.mkdirSync(PROFILE_NAV, { recursive: true }); fs.writeFileSync(path.join(PROFILE_NAV, name.replace(/[^a-z]+/gi, '-') + '.cpuprofile'), JSON.stringify(profile)); }
         const lt = await page.evaluate(() => { let n = 0, tot = 0, max = 0, end = 0; for (const [s, d] of window.__lt) { if (s < window.__navMark) continue; n++; tot += d; max = Math.max(max, d); end = Math.max(end, s + d - window.__navMark); } return { n, tot: Math.round(tot), max: Math.round(max), end: Math.round(end) }; });
         const pm = Object.fromEntries((await cdp.send('Performance.getMetrics')).metrics.map(x => [x.name, x.value]));
         results.nav[name] = { shownMs: shown, calmMs: Math.max(lt.end, shown), longTasks: lt.n, ltTotal: lt.tot, ltMax: lt.max, reqs, heapMB: +(pm.JSHeapUsedSize / 1048576).toFixed(1) };

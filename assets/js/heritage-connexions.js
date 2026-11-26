@@ -1346,11 +1346,15 @@
         const all = dataSourcesAll();
         const cur = all.find(d => d.id === st.dataId) || null;
         const groups = [...new Set(all.map(d => d.group || T('Autres')))];
+        const shared = !!ext.dataListPicker; // 🧰 le choix commun (app-listes-themes.js) : 🔍, les 20 thèmes, installé / à télécharger, ↑ ↓ Entrée
         res.innerHTML = `<div class="cx-pad cx-data"><h6 class="cx-step">1. ${esc(T('Quelle donnée ?'))}</h6>
-            <label class="cx-dsel"><span class="cx-sr">${esc(T('Une source de données'))}</span><select data-cx-ds aria-label="${esc(T('Une source de données'))}"><option value="">${esc(T('— choisir —'))}</option>${groups.map(g => `<optgroup label="${esc(T(g))}">${all.filter(d => (d.group || T('Autres')) === g).map(d => `<option value="${esc(d.id)}" ${cur?.id === d.id ? 'selected' : ''}>${esc(`${d.icon || '🧰'} ${T(d.label)}`)}</option>`).join('')}</optgroup>`).join('')}</select></label>
+            ${cur && shared ? `<div class="cx-dchosen"><b>${esc(`${cur.icon || '🧰'} ${T(cur.label)}`)}</b> <button type="button" class="cx-b is-sec is-sm" data-cx-dchange>${esc(T('Changer'))}</button></div>` : shared ? '<div class="cx-dpick" data-cx-dpick></div>' : `<label class="cx-dsel"><span class="cx-sr">${esc(T('Une source de données'))}</span><select data-cx-ds aria-label="${esc(T('Une source de données'))}"><option value="">${esc(T('— choisir —'))}</option>${groups.map(g => `<optgroup label="${esc(T(g))}">${all.filter(d => (d.group || T('Autres')) === g).map(d => `<option value="${esc(d.id)}" ${cur?.id === d.id ? 'selected' : ''}>${esc(`${d.icon || '🧰'} ${T(d.label)}`)}</option>`).join('')}</optgroup>`).join('')}</select></label>`}
             ${cur ? '' : `<p class="cx-muted">${esc(T('Une info précise pour une date, un lieu, une personne : la météo d’un jour, les cimetières autour d’une commune, les prénoms d’une année… Chaque info garde sa source.'))}</p>`}
             <div data-cx-dform></div></div>`;
-        res.querySelector('[data-cx-ds]').addEventListener('change', e => { st.dataId = e.target.value; drawData(st, res); });
+        res.querySelector('[data-cx-ds]')?.addEventListener('change', e => { st.dataId = e.target.value; drawData(st, res); });
+        res.querySelector('[data-cx-dchange]')?.addEventListener('click', () => { st.dataId = ''; drawData(st, res); });
+        const pkBox = res.querySelector('[data-cx-dpick]');
+        if (pkBox) { ext.dataListPicker(pkBox, {compact: true, items: dataSourcesAll, onPick: d => { st.dataId = d.id; drawData(st, res); }}); setTimeout(() => { try { pkBox.querySelector('[data-ld-ov-q]')?.focus({preventScroll: true}); } catch (_) {} }, 30); }
         if (!cur) return;
         const host = res.querySelector('[data-cx-dform]');
         let ok = true; try { ok = typeof cur.installed === 'function' ? (await cur.installed()) !== false : true; } catch (_) { ok = true; }

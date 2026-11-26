@@ -458,3 +458,20 @@ dialog.cx-put { width: var(--modal-m); max-width: 94vw; height: min(680px, 90vh)
 .cx-qi-muted { color: var(--q-mut); }
 .cx-qi-ok { color: #1a7f37; font-weight: 700; }
 .cx-qi-in { flex: none; font-size: 12px; color: #1a7f37; }
+
+/* ── 📥 Prendre depuis… : la colonne de gauche au dessin de l'app (cartes bordées, ombre bleue décalée, l'élément choisi en bleu plein ;
+   titres de rubrique en capitales bleues) — mêmes jetons que .side-menu-item, le mode sombre suit ── */
+.cx-take .cx-rail { background: var(--paper, var(--cx-grey)); padding: 14px 16px 14px 14px; display: flex; flex-direction: column; gap: 9px; scrollbar-gutter: stable; }
+.cx-take .cx-rail h5 { margin: 10px 0 0; font: 800 10.5px system-ui, sans-serif; letter-spacing: .12em; text-transform: uppercase; color: var(--blue); }
+.cx-take .cx-rail h5:first-child { margin-top: 0; }
+.cx-take .cx-rail button { border: 2px solid var(--ink); border-radius: 0; background: var(--white); color: var(--ink); font-weight: 700; padding: 8px 10px; box-shadow: 3px 3px 0 rgba(5, 93, 255, .18); transition: transform .15s ease, box-shadow .15s ease; width: calc(100% - 3px); }
+.cx-take .cx-rail button:hover { background: var(--white); transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--blue); }
+.cx-take .cx-rail button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.cx-take .cx-rail button[aria-selected="true"] { background: var(--blue); color: var(--on-blue, #fff); box-shadow: 4px 4px 0 var(--ink); }
+.cx-take .cx-rail button[aria-selected="true"] .cx-rn { background: var(--white); color: var(--blue); }
+.cx-take .cx-prev { background: var(--white); }
+.cx-take .cx-prev h4 { border-bottom: 2px solid var(--ink); padding-bottom: 6px; }
+.cx-take .cx-prev .cx-help, .cx-take .cx-prev .cx-dl { border: var(--line); background: var(--white); padding: 10px 12px; box-shadow: 3px 3px 0 rgba(5, 93, 255, .18); margin-right: 3px; }
+.cx-dpick { margin: 0 0 8px; }
+.cx-dchosen { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; margin: 0 0 8px; padding: 8px 10px; border: var(--line); background: var(--blue-soft, #eaf2ff); }
+@media (prefers-reduced-motion: reduce) { .cx-take .cx-rail button { transition: none; } .cx-take .cx-rail button:hover { transform: none; } }

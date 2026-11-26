@@ -212,9 +212,13 @@
         const sheet = life ? onSheet(r.task.d.id, life.pid) : false; if (sheet) s -= 6;
         return {score: s + Math.min(2, (r.items || 0) / 5), hints, sheet};
     }
+    // ⏱ chaque résultat n'est noté qu'une fois par personne (la liste est redessinée à chaque réponse : sinon N² notes, ≈ 2 s à l'ouverture)
+    const SCORED = new WeakMap();
     function suggestions(results, life) {
         const pid = life?.pid || 0;
-        return results.filter(r => r?.state === 'found').map(r => { const fid = fidOf(r), sc = score(r, life); return {...r, fid, ...sc, src: sourceOf(r), kept: marked('kept', pid, fid), nope: marked('nope', pid, fid)}; })
+        return results.filter(r => r?.state === 'found').map(r => {
+            let m = SCORED.get(r); if (!m || m.life !== life) { const fid = fidOf(r); m = {life, fid, sc: score(r, life), src: sourceOf(r)}; SCORED.set(r, m); }
+            const {fid, sc, src} = m; return {...r, fid, ...sc, src, kept: marked('kept', pid, fid), nope: marked('nope', pid, fid)}; })
             .sort((a, b) => b.score - a.score);
     }
 
