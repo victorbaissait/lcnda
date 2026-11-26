@@ -1,0 +1,180 @@
+# 🗺 OpenStreetMap France SANS Overpass : refaire les fichiers OpenStreetMap des lots B, E, F, G, H depuis UN extrait téléchargé.
+#  - L'extrait France de Geofabrik (https://download.geofabrik.de/europe/france-latest.osm.pbf, ~4,5 Go, ODbL 1.0,
+#    « © les contributeurs d'OpenStreetMap ») est téléchargé une fois par version (somme MD5 vérifiée), gardé dans le cache GitHub,
+#    puis filtré ici avec osmium-tool (scripts/osm-france/filtrer.sh) ; pour l'arbre de la Liberté (lot E), aussi les extraits
+#    Belgique, Suisse, Luxembourg.
+#  - Chaque script garde SA fabrication des lignes (mêmes champs, l'app ne change pas) ; il lit les objets filtrés au lieu de
+#    questionner Overpass quand OSM_OPL donne le fichier (scripts/osm-france/osm_local.py : centre des chemins et relations comme
+#    « out center » ; tracés complets puis simplifiés pour th-osm-traces).
+#      b → tb-osm-croix, -eau, -village, -bornes, -berger, -cultes         (scripts/telech-b/build.py osm)
+#      e → te-libertes (Wikidata + OpenStreetMap)                         (scripts/telech-e/build_libertes.py --osm)
+#      f → tf-osm-cocher, -forges, -salines                               (scripts/telech-f/build_osm.py)
+#      g → tg-osm-forts, -poudres, -semaphores, -lazarets, -wallace       (scripts/telech-g/build_osm.py)
+#      h → th-osm-kiosques, -halles, -eclusieres, -traces                 (scripts/telech-h/build_osm.py)
+#  - Pourquoi : les questions « toute la France » au service public Overpass tombaient pendant des heures (délais, 502/504), et
+#    elles chargent un service partagé. Les anciens chemins Overpass restent dans telech-b/e/f/g/h.yml, en secours seulement.
+# Puis le sommaire assets/data/manifest.json, et l'enregistrement dans la branche lancée (docs/telechargements-lot-*.md).
+#
+# Lancer : onglet « Actions » → « OpenStreetMap France (extrait Geofabrik) » → « Run workflow » (quoi : tout, b, e, f, g ou h).
+
+name: OpenStreetMap France (extrait Geofabrik)
+
+on:
+  workflow_dispatch:
+    inputs:
+      quoi:
+        description: 'tout, b, e, f, g ou h'
+        required: false
+        default: 'tout'
+  push:
+    branches: ['claude/**']
+    paths: ['.github/workflows/osm-france.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: osm-france-donnees
+  cancel-in-progress: false
+
+jobs:
+  osm:
+    # le « push » sert seulement à faire connaître ce travail à GitHub : il ne fabrique rien
+    if: github.event_name != 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    env:
+      QUOI: ${{ github.event.inputs.quoi || 'tout' }}
+    steps:
+      - name: Ce qu'on refait
+        id: lots
+        run: |
+          case "$QUOI" in
+            tout) lots="b e f g h" ;;
+            b|e|f|g|h) lots="$QUOI" ;;
+            *) echo "inconnu : $QUOI (tout, b, e, f, g ou h)"; exit 1 ;;
+          esac
+          echo "lots=$lots" >> "$GITHUB_OUTPUT"
+          case " $lots " in *" e "*) echo "voisins=1" >> "$GITHUB_OUTPUT" ;; esac
+      - name: Faire de la place sur le disque
+        run: |
+          df -h / /mnt || true
+          sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/lib/android /usr/local/.ghcup /usr/share/swift /opt/hostedtoolcache/CodeQL || true
+          df -h / /mnt || true
+      - name: Dossiers de travail
+        run: |
+          # le second disque (/mnt) s'il est là et assez grand, sinon le dossier temporaire de la machine
+          d="$RUNNER_TEMP/osm"
+          if sudo mkdir -p /mnt/osm 2>/dev/null && sudo chown "$(id -u):$(id -g)" /mnt/osm \
+             && [ "$(df --output=avail -B1G /mnt | tail -1 | tr -d ' ')" -ge 20 ]; then d=/mnt/osm; fi
+          mkdir -p "$d/fr" "$d/voisins" "$d/filtre"
+          echo "OSM_DIR=$d" >> "$GITHUB_ENV"
+          df -h "$d"
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # les dates git des fichiers sans « built » (scripts/donnees-manifest.js)
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: "Préférer IPv4 (pas d’IPv6 sur la machine GitHub, « Network is unreachable »)"
+        run: echo 'precedence ::ffff:0:0/96 100' | sudo tee -a /etc/gai.conf
+      - name: osmium-tool
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q osmium-tool
+          osmium --version | head -2
+          python3 -I scripts/osm-france/osm_local.py essai
+      # ─── l'extrait France : la somme MD5 du jour (petite) donne la clé du cache ───
+      - name: "Geofabrik : somme MD5 de l'extrait France"
+        id: md5fr
+        run: bash scripts/osm-france/geofabrik.sh md5 "$OSM_DIR/fr" europe/france >> "$GITHUB_OUTPUT"
+      - name: Reprendre l'extrait France déjà téléchargé
+        id: cachefr
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ env.OSM_DIR }}/fr/france-latest.osm.pbf
+          key: osm-geofabrik-france-${{ steps.md5fr.outputs.cle }}
+      - name: "Geofabrik : télécharger l'extrait France (si besoin) et vérifier sa somme MD5"
+        run: |
+          bash scripts/osm-france/geofabrik.sh pbf "$OSM_DIR/fr" europe/france
+          osmium fileinfo -g header.option.osmosis_replication_timestamp "$OSM_DIR/fr/france-latest.osm.pbf" || true
+          df -h "$OSM_DIR"
+      - name: Garder l'extrait France pour la prochaine fois
+        if: steps.cachefr.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ env.OSM_DIR }}/fr/france-latest.osm.pbf
+          key: osm-geofabrik-france-${{ steps.md5fr.outputs.cle }}
+      # ─── lot E seulement : Belgique, Suisse, Luxembourg (comme l'ancienne question Overpass FR+BE+CH+LU) ───
+      - name: "Geofabrik : sommes MD5 des extraits voisins (lot E)"
+        id: md5vo
+        if: steps.lots.outputs.voisins == '1'
+        run: bash scripts/osm-france/geofabrik.sh md5 "$OSM_DIR/voisins" europe/belgium europe/switzerland europe/luxembourg >> "$GITHUB_OUTPUT"
+      - name: Reprendre les extraits voisins déjà téléchargés
+        id: cachevo
+        if: steps.lots.outputs.voisins == '1'
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ env.OSM_DIR }}/voisins/*.osm.pbf
+          key: osm-geofabrik-voisins-${{ steps.md5vo.outputs.cle }}
+      - name: "Geofabrik : télécharger les extraits voisins (si besoin)"
+        if: steps.lots.outputs.voisins == '1'
+        run: bash scripts/osm-france/geofabrik.sh pbf "$OSM_DIR/voisins" europe/belgium europe/switzerland europe/luxembourg
+      - name: Garder les extraits voisins pour la prochaine fois
+        if: steps.lots.outputs.voisins == '1' && steps.cachevo.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ env.OSM_DIR }}/voisins/*.osm.pbf
+          key: osm-geofabrik-voisins-${{ steps.md5vo.outputs.cle }}
+      # ─── le tri (osmium) puis la fabrication par chaque script ───
+      - name: Trier les objets utiles (osmium tags-filter, add-locations-to-ways)
+        env:
+          LOTS: ${{ steps.lots.outputs.lots }}
+        run: |
+          if [ -f "$OSM_DIR/voisins/belgium-latest.osm.pbf" ]; then
+            export VOISINS="$OSM_DIR/voisins/belgium-latest.osm.pbf $OSM_DIR/voisins/switzerland-latest.osm.pbf $OSM_DIR/voisins/luxembourg-latest.osm.pbf"
+          fi
+          bash scripts/osm-france/filtrer.sh "$OSM_DIR/fr/france-latest.osm.pbf" "$OSM_DIR/filtre" $LOTS
+          rm -f "$OSM_DIR/filtre/union.osm.pbf"
+          df -h "$OSM_DIR"
+      - name: "✝️ ⛲ 🍞 🪨 🐑 🕍 Lot B (tb-osm-*)"
+        if: ${{ !cancelled() && contains(steps.lots.outputs.lots, 'b') }}
+        run: OSM_OPL="$OSM_DIR/filtre/b.opl" python3 -I scripts/telech-b/build.py osm
+      - name: "🌳 Lot E (te-libertes : Wikidata + OpenStreetMap)"
+        if: ${{ !cancelled() && contains(steps.lots.outputs.lots, 'e') }}
+        run: OSM_OPL="$OSM_DIR/filtre/e.opl" python3 -I scripts/telech-e/build_libertes.py assets/data --osm
+      - name: "🗺 Lot F (tf-osm-*)"
+        if: ${{ !cancelled() && contains(steps.lots.outputs.lots, 'f') }}
+        run: OSM_OPL="$OSM_DIR/filtre/f.opl" python3 -I scripts/telech-f/build_osm.py assets/data
+      - name: "🗺 Lot G (tg-osm-*)"
+        if: ${{ !cancelled() && contains(steps.lots.outputs.lots, 'g') }}
+        run: OSM_OPL="$OSM_DIR/filtre/g.opl" python3 -I scripts/telech-g/build_osm.py assets/data
+      - name: "🗺 Lot H (th-osm-*)"
+        if: ${{ !cancelled() && contains(steps.lots.outputs.lots, 'h') }}
+        run: OSM_OPL="$OSM_DIR/filtre/h.opl" python3 -I scripts/telech-h/build_osm.py assets/data
+      - name: Sommaire des données
+        if: ${{ !cancelled() }}
+        run: node scripts/donnees-manifest.js --branch "$GITHUB_REF_NAME"
+      - name: Enregistrer dans la branche
+        if: ${{ !cancelled() }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # seulement les fichiers OpenStreetMap de ces lots, et le sommaire
+          for f in assets/data/tb-osm-*.json.gz assets/data/te-libertes.json.gz assets/data/tf-osm-*.json.gz \
+                   assets/data/tg-osm-*.json.gz assets/data/th-osm-*.json.gz assets/data/manifest.json; do
+            [ -e "$f" ] && git add -- "$f"
+          done
+          git diff --cached --quiet && { echo "rien de neuf"; exit 0; }
+          git commit -m "OpenStreetMap France (lots B, E, F, G, H) : refait sur GitHub depuis l'extrait Geofabrik (ODbL 1.0, © les contributeurs d'OpenStreetMap)"
+          for i in 1 2 3; do
+            if ! git pull --rebase origin "$GITHUB_REF_NAME"; then
+              # le sommaire a changé entre-temps : on garde celui de la branche et on le refait par-dessus
+              git checkout --ours assets/data/manifest.json && node scripts/donnees-manifest.js --branch "$GITHUB_REF_NAME" \
+                && git add assets/data/manifest.json && GIT_EDITOR=true git rebase --continue || { git rebase --abort; sleep 10; continue; }
+            fi
+            git push origin "HEAD:$GITHUB_REF_NAME" && break; sleep 10
+          done

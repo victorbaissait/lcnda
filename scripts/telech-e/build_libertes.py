@@ -6,8 +6,9 @@ Sources :
    sous-classes) et les arbres (Q10884 et sous-classes) de France, Belgique, Suisse, Luxembourg dont le nom contient « liberté » ;
    année de plantation (P571), commune (P131 → P374), article de Wikipédia.
  - OpenStreetMap (ODbL 1.0, © les contributeurs d'OpenStreetMap, https://www.openstreetmap.org/copyright) : arbres et
-   monuments nommés « Arbre de la Liberté » (Overpass) ; seulement avec --osm (sur GitHub : overpass-api.de n'est pas joignable
-   depuis l'atelier de développement).
+   monuments nommés « Arbre de la Liberté » ; seulement avec --osm, sur GitHub : de préférence depuis les extraits Geofabrik
+   filtrés par osmium (.github/workflows/osm-france.yml, variable OSM_OPL, lus par scripts/osm-france/osm_local.py), sinon par
+   Overpass (.github/workflows/telech-e.yml ; overpass-api.de n'est pas joignable depuis l'atelier de développement).
 L'année (1792, 1830, 1848, 1889, 1989…) vient de P571, de « start_date », ou du nom (« … de 1848 ») : sinon inconnue.
 
 Lancer : python3 -I scripts/telech-e/build_libertes.py [dossier de sortie] [--osm]   (TE_RAW = cache)
@@ -57,14 +58,31 @@ def wikidata():
     return list(rows.values())
 
 
-def osm():
+OSM_SEL = ['nwr["name"~"[Aa]rbre de la [Ll]ibert"]', 'nwr["memorial"="tree"]["name"~"[Ll]ibert"]', 'nwr["natural"="tree"]["name"~"[Ll]ibert"]']
+
+
+def osm_elements():
+    opl = os.environ.get('OSM_OPL')   # extraits Geofabrik France + Belgique + Suisse + Luxembourg filtrés par osmium (osm-france.yml)
+    if opl:
+        sys.path.insert(0, os.path.join(ROOT, 'scripts', 'osm-france'))
+        import osm_local
+        seen, out = set(), []
+        for sel in OSM_SEL:
+            for e in osm_local.select(opl, sel):
+                if (e['type'], e['id']) not in seen:
+                    seen.add((e['type'], e['id'])); out.append(e)
+        return out
     q = '''[out:json][timeout:300];
 (area["ISO3166-1"="FR"][admin_level=2];area["ISO3166-1"="BE"][admin_level=2];area["ISO3166-1"="CH"][admin_level=2];area["ISO3166-1"="LU"][admin_level=2];)->.a;
-(nwr["name"~"[Aa]rbre de la [Ll]ibert"](area.a);nwr["memorial"="tree"]["name"~"[Ll]ibert"](area.a);nwr["natural"="tree"]["name"~"[Ll]ibert"](area.a););
+(''' + ''.join(f'{s}(area.a);' for s in OSM_SEL) + ''');
 out center tags;'''
     j = json.loads(wm.get(os.environ.get('TE_OVERPASS') or 'https://overpass-api.de/api/interpreter', 'application/json', urllib.parse.urlencode({'data': q})))
+    return j.get('elements', [])
+
+
+def osm():
     out = []
-    for e in j.get('elements', []):
+    for e in osm_elements():
         t = e.get('tags', {}); lat = e.get('lat') or e.get('center', {}).get('lat'); lon = e.get('lon') or e.get('center', {}).get('lon')
         if lat is None:
             continue

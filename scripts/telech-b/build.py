@@ -5,8 +5,9 @@
     python3 scripts/telech-b/build.py osm [--out DOSSIER]        # ✝️ ⛲ 🍞 🪨 🐑 🕍 depuis OpenStreetMap (ODbL) — sur GitHub seulement
     python3 scripts/telech-b/build.py essai --out DOSSIER        # petits fichiers INVENTÉS (marqués « fixture ») pour les essais
 
-Le service Overpass (OpenStreetMap) ne répond pas depuis l'atelier de développement : cette fabrication se fait sur GitHub
-(.github/workflows/telech-b.yml, lancé à la main).
+La partie OpenStreetMap se fait sur GitHub : de préférence depuis l'extrait Geofabrik de la France filtré par osmium
+(.github/workflows/osm-france.yml ; OSM_OPL=…/b.opl python3 -I scripts/telech-b/build.py osm, lu par scripts/osm-france/osm_local.py),
+sinon par le service Overpass (.github/workflows/telech-b.yml, quoi = osm ; injoignable depuis l'atelier de développement).
 Pas de fichier de proverbes régionaux : le Wiktionnaire n'en a presque pas (« Proverbes en occitan » : 4 pages ; alsacien, picard,
 corse, provençal : pas de catégorie ; breton : une seule annexe) — l'app donne le lien (docs/telechargements-lot-b.md).
 
@@ -206,11 +207,18 @@ def osm_year(tags):
 
 
 def build_osm(out, server):
+    opl = os.environ.get('OSM_OPL')
+    if opl:
+        sys.path.insert(0, os.path.join(ROOT, 'scripts', 'osm-france'))
+        import osm_local
     for theme, filters in OSM_KINDS.items():
         rows, seen = [], set()
         for kind, f in filters:
-            q = f'[out:json][timeout:900];area["ISO3166-1"="FR"][admin_level=2]->.fr;({f}(area.fr););out center tags;'
-            res = wm.overpass(q, server)
+            if opl:   # extrait Geofabrik filtré par osmium (.github/workflows/osm-france.yml) : même forme qu'Overpass « out center tags »
+                res = {'elements': osm_local.select(opl, f)}
+            else:
+                q = f'[out:json][timeout:900];area["ISO3166-1"="FR"][admin_level=2]->.fr;({f}(area.fr););out center tags;'
+                res = wm.overpass(q, server)
             n0 = len(rows)
             for e in res.get('elements', []):
                 key = f'{e["type"][0]}{e["id"]}'

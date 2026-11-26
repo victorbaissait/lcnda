@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 """🗺 Lot H — Les mêmes sujets depuis OpenStreetMap (ODbL 1.0, « © les contributeurs d'OpenStreetMap ») : fabriqué SUR GITHUB
-(.github/workflows/telech-h.yml, quoi = osm) ; Overpass n'est pas joignable depuis l'atelier de développement. France seulement.
+(.github/workflows/osm-france.yml : extrait
+Geofabrik de la France filtré par osmium, lu par scripts/osm-france/osm_local.py quand OSM_OPL donne le fichier OPL ; à défaut,
+.github/workflows/telech-h.yml, quoi = osm, questionne Overpass — injoignable depuis l'atelier de développement, souvent en panne). France seulement.
  - th-osm-kiosques    : leisure=bandstand, amenity=bandstand, et les kiosques dont le nom dit « musique » ;
  - th-osm-halles      : amenity=marketplace bâti ou couvert (building=*, covered=yes), bâtiments nommés « Halle(s)… », « Marché couvert… » ;
  - th-osm-eclusieres  : bâtiments nommés « Maison éclusière », « Maison de l'éclusier », et les « Gare d'eau » ;
  - th-osm-traces      : voies ferrées et de tramway disparues — railway=abandoned|disused|razed et abandoned:railway=*,
                         razed:railway=*, disused:railway=* — tracés SIMPLIFIÉS (Douglas-Peucker, ~150 m ; 4 décimales) pour rester petits.
 Rien n'est gardé au-delà de 15 Mo par fichier. Lancer : python3 -I scripts/telech-h/build_osm.py [dossier de sortie] [sujet…]
+        OSM_OPL=…/h.opl python3 -I scripts/telech-h/build_osm.py …   (sans Overpass)
 """
 import json
 import math, os, re, sys, time, urllib.parse
@@ -29,7 +32,15 @@ WHAT = {'kiosques': 'Kiosques à musique (OpenStreetMap)', 'halles': 'Halles et 
         'traces': 'Voies ferrées et de tramway disparues, tracés simplifiés (OpenStreetMap)'}
 
 
+OPL = os.environ.get('OSM_OPL')  # extrait Geofabrik filtré par osmium (.github/workflows/osm-france.yml) : plus d'Overpass
+if OPL:
+    sys.path.insert(0, os.path.join(ROOT, 'scripts', 'osm-france'))
+    import osm_local
+
+
 def run(sel, geom=False):
+    if OPL:  # même forme que « out center tags » / « out geom tags » d'Overpass
+        return osm_local.select(OPL, sel, geom=geom)
     if geom:  # les tracés de toute la France d'un coup font tomber Overpass (502/504) : par carreaux de 2,5° × 2,5°
         out = []
         for la in (41.0, 43.5, 46.0, 48.5):
@@ -118,7 +129,8 @@ def build_one(name, qs):
                 seen.add(key)
                 k2 = 'gare' if re.match(r'(?i)gare d.eau', t.get('name', '')) else kind
                 rows.append([key, (t.get('name') or '')[:120], k2, round(lat, 5), round(lon, 5), year(t, 'start_date', 'construction_date'), None])
-            time.sleep(10)
+            if not OPL:
+                time.sleep(10)  # politesse envers Overpass
         fields = ['osm', 'n', 'k', 'from', 'to', 'km', 'line'] if name == 'traces' else ['osm', 'n', 'k', 'lat', 'lon', 'from', 'to']
         meta = {'source': 'OpenStreetMap', 'licence': 'ODbL 1.0 — © les contributeurs d’OpenStreetMap', 'licence_url': 'https://www.openstreetmap.org/copyright', 'url': 'https://www.openstreetmap.org',
                 'built': wm.today(), 'what': WHAT[name], 'queries': [s for _, s in qs], 'fields': fields, 'rows': rows}
