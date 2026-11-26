@@ -295,7 +295,7 @@
         const h = Math.round(W * .62);
         return {h, svg: `<g data-geo-wait="${tok}"><rect width="${r1(W)}" height="${h}" rx="10" fill="#eef2f6"/>${T(W / 2, h / 2, '🗺️ Chargement du fond de carte…', {anchor: 'middle', size: Math.max(11, W / 40), fill: '#667'})}</g>`};
     }
-    const attrOf = (base, ctx) => ctx && ctx.attr && ctx.attr !== base.attr ? `${base.attr} ; ${ctx.attr.replace(/^Fond : /, '')}` : base.attr;
+    const attrOf = (base, ctx) => ctx && ctx.attr && !base.attr.includes(ctx.attr.replace(/^Fond : /, '')) ? `${base.attr} ; ${ctx.attr.replace(/^Fond : /, '')}` : base.attr;
     const unitFor = (v, unit) => Math.abs(v) < 2 ? String(unit).replace(/(\S)s\b/g, '$1') : unit; // « 1 personne », « 6 personnes »
     const PARENT_LINE = '#4a4f57'; // limites des départements par-dessus les communes
     const SEA = '#e3edf6', LAND = '#f1f0ec', LAND_LINE = '#c9c6bd';
@@ -529,7 +529,7 @@
         const {byZone, missing} = joinRows(spec, base);
         const vals = [...byZone.values()].filter(e => e.has).map(e => e.v), sc = vals.length ? scaleOf(vals, o) : null, noData = color(o.noData, '#e4e4e7');
         const hoverAll = o.hoverAll ?? !base.communes; // 35 000 bulles : seulement si on le demande
-        const nameOf = z => `${z.name}${z.id && !/^x-/.test(z.id) ? ` (${z.old ? 'ancienne commune, ' : ''}${z.id})` : ''}`;
+        const nameOf = z => `${z.name}${z.id && !/^[xr]-/.test(z.id) ? ` (${z.old ? 'ancienne commune, ' : ''}${z.id})` : ''}`;
         const fillOf = z => { const e = byZone.get(z); if (!e) return {fill: noData, title: hoverAll ? i18n('{name} : pas de chiffre', {name: nameOf(z)}) : ''};
             return {fill: e.has && sc ? sc.color(e.v) : noData, title: `${e.has ? `${nameOf(z)} : ${fmt(e.v) + unit}` : i18n('{name} : pas de chiffre', {name: nameOf(z)})}${series && e.has ? ' — ' + series : ''}${e.notes.length ? '\n' + e.notes.join('\n') : ''}`, v: e.has ? e.v : null}; };
         pr.allOutre = o.frame === 'custom' || (o.frame && o.frame !== '') || !MAPS[mapOf(o)].insets || o.insets === false;

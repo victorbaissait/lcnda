@@ -835,7 +835,8 @@
         clearTimeout(redrawT); redrawT = setTimeout(() => {
             const st = A().state, host = ws(); if (!st || !host || !['donnees', 'listes'].includes(st.module)) return; // Réglages : relu en y revenant
             const page = host.querySelector('.ld-page');
-            if (page ? !page.matches('[data-ld-missing]') : st.module !== 'donnees' && !host.querySelector('.ldt-overview, .ldt-theme-page')) return; // une liste déjà affichée : rien à redessiner
+            const gone = /_(undo|remove|restore)$/.test(String(e.detail?.action || '')); // un pack retiré (ou ↶) : une liste affichée peut ne plus l'être
+            if (page ? !page.matches('[data-ld-missing]') && !(gone && cur.base?.installed) : st.module !== 'donnees' && !host.querySelector('.ldt-overview, .ldt-theme-page')) return; // une liste déjà affichée : rien à redessiner
             try { A().refreshScreen ? A().refreshScreen() : (page && cur.base && renderList(cur.base, st.workspaceToken)); } catch (err) { console.error(err); }
         }, 300);
     });

@@ -151,7 +151,7 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             const recap1 = await recapMissing(); assert.ok(recap1 <= recap0 - 6, `récap ⤓ ${recap0} → ${recap1}`);
         });
         await t('Réglages → 🗂 Données : « Histoire du lieu » installé', async () => {
-            await p.evaluate(() => { const st = window.LCNDA_APP.state; st.maintenanceTab = 'donnees'; window.LCNDA_APP.setModule('maintenance'); }); await idle();
+            await p.evaluate(() => { const st = window.LCNDA_APP.state; st.maintenanceTab = 'donnees_installees'; window.LCNDA_APP.setModule('maintenance'); }); await idle();
             await p.waitForSelector('[data-dmaj-panel]', {timeout: 20000}); await sleep(1500);
             const line = await p.evaluate(() => [...document.querySelectorAll('[data-dmaj-panel] tr, [data-dmaj-panel] li, [data-dmaj-panel] [data-dmaj-row]')].map(x => x.textContent).find(x => /Histoire du lieu/.test(x)) || '');
             assert.match(line, /installé/, line.slice(0, 200)); assert.ok(!/pas installé/.test(line), line.slice(0, 200));
