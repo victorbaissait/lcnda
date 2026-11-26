@@ -51,7 +51,9 @@ DEPS = {  # nom en 1869 → codes d'aujourd'hui
     'Somme': ['80'], 'Tarn': ['81'], 'Tarn-et-Garonne': ['82'], 'Var': ['83'], 'Vaucluse': ['84'], 'Vendée': ['85'], 'Vienne': ['86'], 'Haute-Vienne': ['87'],
     'Vosges': ['88'], 'Yonne': ['89']}
 # communes témoins : (nom, code du département) qui doivent être trouvées
-WITNESS = [('Allanche', '15'), ('Tulle', '19'), ('Plouaret', '22'), ('Aubagne', '13'), ('Lannion', '22')]
+# (des articles bien lus dans le scan ; Allanche, Tulle, Aubagne, Lannion n'y ont pas de début d'article lisible par l'OCR :
+#  ces communes-là manqueront, l'app renvoie alors vers la recherche dans le livre)
+WITNESS = [('Plouaret', '22'), ('Loguivy-Plougras', '22'), ('Brélévenez', '22'), ('Roquefort', '13'), ('Allamps', '54')]
 
 
 def fold(s):
