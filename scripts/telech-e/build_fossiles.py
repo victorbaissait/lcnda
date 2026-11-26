@@ -30,6 +30,10 @@ def licence(*texts):
             q = m.group(0).strip()
             if re.search(r'\bCC[- ]?BY\b|Attribution', q, re.I) and not re.search(r'\bNC\b|NonCommercial|Non-Commercial', q, re.I):
                 return q
+    for t in texts:  # CC0 (domaine public) : encore plus ouvert que CC BY — c'est ce que la PBDB déclare dans « data_license »
+        m = re.search(r'"data_license":\s*"(Creative Commons CC0[^"]*)"', str(t)) or re.search(r'creativecommons\.org/publicdomain/zero/[0-9.]+/?', str(t))
+        if m:
+            return m.group(1) if m.groups() else m.group(0)
     for t in texts:  # l'adresse de la licence suffit aussi (creativecommons.org/licenses/by/…, sans « -nc »)
         m = re.search(r'creativecommons\.org/licenses/by/[0-9.]+/?', str(t))
         if m:
@@ -62,6 +66,7 @@ def main():
                     c.get('max_ma'), c.get('min_ma'), sum(t.values()), [[n, k] for (n, k), _ in t.most_common(8)], (c.get('cc') or '').upper()])
     fields = ['no', 'lat', 'lon', 'name', 'formation', 'early', 'late', 'max_ma', 'min_ma', 'n', 'taxa', 'cc']
     meta = {'source': 'The Paleobiology Database (PBDB), API data1.2', 'licence': 'CC BY 4.0', 'licence_url': 'https://creativecommons.org/licenses/by/4.0/deed.fr', 'quote': quote,
+            'licence_note': "L'API de la PBDB déclare « Creative Commons CC0 » ; le site paleobiodb.org parle de CC BY 4.0 : on applique la plus exigeante (on cite toujours la source).",
             'url': 'https://paleobiodb.org/', 'item_url': 'https://paleobiodb.org/classic/basicCollectionSearch?collection_no={no}', 'built': time.strftime('%Y-%m-%d'),
             'cite': 'Données de la Paleobiology Database (paleobiodb.org), CC BY 4.0',
             'what': 'Gisements de fossiles de France, Belgique, Suisse et Luxembourg : position, âge, formation, les fossiles les plus fréquents',

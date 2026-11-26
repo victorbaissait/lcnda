@@ -26,7 +26,7 @@ def get(url, accept='application/json', data=None, tries=6):
         try:
             req = urllib.request.Request(url, data=data.encode() if data else None, headers={'User-Agent': UA, 'Accept': accept,
                                          **({'Content-Type': 'application/x-www-form-urlencoded'} if data else {})})
-            with urllib.request.urlopen(req, timeout=120) as r:
+            with urllib.request.urlopen(req, timeout=(1000 if 'overpass' in url else 120)) as r:  # Overpass : la réponse peut prendre jusqu'à 15 min
                 body = r.read()
             if body.lstrip()[:9] == b'{"error":' or b'too many requests' in body[:2000].lower() or b'making too many requests' in body[:400].lower():
                 raise RuntimeError('réponse d’erreur : ' + body[:160].decode('utf-8', 'replace'))
