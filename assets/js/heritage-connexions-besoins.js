@@ -263,7 +263,7 @@
         const who = a => { const [pi, pl] = PROV[a.provider] || ['•', a.provider]; return `<span class="cx-who ${a.have === 'yes' ? 'is-yes' : a.have === 'searched' ? 'is-no' : ''}">${a.have === 'yes' ? '✓' : a.have === 'searched' ? '🚫' : ''} ${pi} ${esc(T(pl))}</span>`; };
         const framed = !!UI().framesOn?.() && rows.some(n => n.person_id);
         const line = (n, i) => { const yes = (n.answers || []).find(a => a.have === 'yes');
-            return `<tr><td>${(WHAT[n.what] || WHAT.other)[0]} <span data-i18n-off>${esc(framed && n.person_id ? T((WHAT[n.what] || WHAT.other)[1]) : needTitle(n))}</span>${needMeta(n) ? ` <small class="muted" data-i18n-off>· ${esc(needMeta(n))}</small>` : ''}</td>
+            return `<tr><td>${(WHAT[n.what] || WHAT.other)[0]} <span data-i18n-off>${esc(needTitle(n))}</span>${needMeta(n) ? ` <small class="muted" data-i18n-off>· ${esc(needMeta(n))}</small>` : ''}</td>
                 <td>${n.investigation_id ? `🕵️ <span data-i18n-off>${esc(n.investigation_title || '')}</span>` : ''}${n.hypothesis_id ? ` 🤔 <span data-i18n-off>${esc(n.hypothesis || '')}</span>` : ''}</td>
                 <td>${(n.answers || []).map(who).join(' ') || `<span class="muted">${esc(T('rien pour l’instant'))}</span>`}</td>
                 <td class="cx-sem-act">${yes && !kiosk() ? `<button type="button" class="button small" data-cx-sfile="${i}">${esc(T('Ranger'))}</button>` : ''}${n.investigation_id ? `<button type="button" class="button small secondary" data-cx-sopen="${i}">${esc(T('Voir'))}</button>` : n.hypothesis_id ? `<button type="button" class="button small secondary" data-cx-shyp="${n.hypothesis_id}">${esc(T('Voir'))}</button>` : ''}</td></tr>`; };

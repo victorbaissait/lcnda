@@ -238,7 +238,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             const txt = await p.textContent('dialog.msr-big .cx-sem-table');
             assert.match(txt, /Acte de naissance — Jean MAZAUD/); assert.match(txt, /Les parents de Jean MAZAUD/); assert.match(txt, /Photo — Marie LACOMBE/); assert.match(txt, /1 lieu sans coordonnées/);
             await p.click('dialog.msr-big [data-cx-sf="have"]');
-            const rows = await p.evaluate(() => [...document.querySelectorAll('dialog.msr-big .cx-sem-table tbody tr')].map(r => r.textContent));
+            const rows = await p.evaluate(() => [...document.querySelectorAll('dialog.msr-big .cx-sem-table tbody tr:not(.ui-person-tb-head)')].map(r => r.textContent));
             assert.ok(rows.length >= 2 && rows.every(r => /✓/.test(r)), rows.join('\n'));
             await p.click('dialog.msr-big [data-msr-tab="todo"]');
             await p.waitForFunction(() => !document.querySelector('dialog.msr-big .cx-sem-table') && !document.querySelector('dialog.msr-big .msr-big-bar').hidden, null, {timeout: 10000});

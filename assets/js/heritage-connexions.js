@@ -1047,27 +1047,26 @@
                 const d = await api('investigation', {id: base.investigation_id}), folders = d.folders || [];
                 const depth = f => { let n = 0, x = f; while (x?.parent_id && n < 9) { x = folders.find(y => Number(y.id) === Number(x.parent_id)); n++; } return n; };
                 const tree = (pid, out = []) => { folders.filter(f => Number(f.parent_id || 0) === pid).sort((x, y) => String(x.name).localeCompare(String(y.name), 'fr')).forEach(f => { out.push(f); tree(Number(f.id), out); }); return out; };
-                opts = [{v: 'all', l: `🕵️ ${T('l’enquête entière')}`, ctx: {item_id: 0, folder_id: 0}, pill: ['🕵️', T('l’enquête « {t} »', {t: d.investigation?.title || ''})]},
-                    ...(d.items || []).map(it => ({v: 'i' + it.id, l: `📌 ${String(it.title || '').slice(0, 70)}`, ctx: {item_id: Number(it.id), folder_id: 0, mode: 'one'}, pill: ['📌', T('la piste « {t} »', {t: it.title})]})),
-                    ...tree(0).map(f => ({v: 'f' + f.id, l: `${'\u2003'.repeat(depth(f))}📁 ${String(f.name).slice(0, 60)}`, ctx: {item_id: 0, folder_id: Number(f.id)}, pill: ['📁', T('{f} (enquête « {t} »)', {f: f.name, t: d.investigation?.title || ''})], media: true}))];
+                opts = [{v: 'all', l: `🕵️ ${T('l’enquête entière')}`, ctx: {item_id: 0, folder_id: 0}, pill: ['🕵️', T('l’enquête « {t} »', {t: d.investigation?.title || ''})], here: T('Ici : l’enquête « {t} »', {t: d.investigation?.title || ''})},
+                    ...(d.items || []).map(it => ({v: 'i' + it.id, l: `📌 ${String(it.title || '').slice(0, 70)}`, ctx: {item_id: Number(it.id), folder_id: 0, mode: 'one'}, pill: ['📌', T('la piste « {t} »', {t: it.title})], here: T('Ici : la piste « {t} »', {t: it.title})})),
+                    ...tree(0).map(f => ({v: 'f' + f.id, l: `${'\u2003'.repeat(depth(f))}📁 ${String(f.name).slice(0, 60)}`, ctx: {item_id: 0, folder_id: Number(f.id)}, pill: ['📁', T('{f} (enquête « {t} »)', {f: f.name, t: d.investigation?.title || ''})], here: T('Ici : le dossier « {t} »', {t: f.name}), media: true}))];
             } else if (tg === 'atelier' && base.project) {
                 const d = await api('atelier_project', {id: base.project}), folders = d.folders || [];
                 const tree = (pid, dep = 0, out = []) => { folders.filter(f => Number(f.parent_id || 0) === pid).sort((x, y) => (x.position - y.position) || (x.id - y.id)).forEach(f => { out.push([f, dep]); tree(Number(f.id), dep + 1, out); }); return out; };
                 const pt = d.project?.title || base.projectTitle || '';
-                opts = [{v: 'p', l: `📚 ${T('le projet')}`, ctx: {folder: 0, item: 0}, pill: ['📚', T('le projet « {t} »', {t: pt})]},
-                    ...tree(0).map(([f, dep]) => ({v: 'f' + f.id, l: `${'\u2003'.repeat(dep)}📁 ${String(f.name).slice(0, 60)}`, ctx: {folder: Number(f.id), item: 0}, pill: ['📁', T('{f} (projet « {t} »)', {f: f.name, t: pt})]})),
-                    ...(base.item ? [{v: 'it' + base.item, l: `🗒 ${String(base.itemTitle || '').slice(0, 60)}`, ctx: {item: base.item, folder: base.folder || 0}, pill: ['🗒', T('l’élément « {t} »', {t: base.itemTitle || ''})]}] : [])];
+                opts = [{v: 'p', l: `📚 ${T('le projet')}`, ctx: {folder: 0, item: 0}, pill: ['📚', T('le projet « {t} »', {t: pt})], here: T('Ici : dans le projet « {t} »', {t: pt})},
+                    ...tree(0).map(([f, dep]) => ({v: 'f' + f.id, l: `${'\u2003'.repeat(dep)}📁 ${String(f.name).slice(0, 60)}`, ctx: {folder: Number(f.id), item: 0}, pill: ['📁', T('{f} (projet « {t} »)', {f: f.name, t: pt})], here: T('Ici : {t}', {t: T('{f} (projet « {t} »)', {f: f.name, t: pt})})})),
+                    ...(base.item ? [{v: 'it' + base.item, l: `🗒 ${String(base.itemTitle || '').slice(0, 60)}`, ctx: {item: base.item, folder: base.folder || 0}, pill: ['🗒', T('l’élément « {t} »', {t: base.itemTitle || ''})], here: T('Ici : dans l’élément « {t} »', {t: base.itemTitle || ''})}] : [])];
             }
         } catch (_) { return; }
         const foot = st.dlg?.querySelector('.cx-cnt'); if (!foot || opts.length < 2) return;
         const pre = tg === 'investigation' ? (base.item_id ? 'i' + base.item_id : base.folder_id ? 'f' + base.folder_id : 'all') : (base.item ? 'it' + base.item : base.folder ? 'f' + base.folder : 'p');
         foot.insertAdjacentHTML('beforeend', `<label class="cx-pchoice">${esc(T('Où ranger :'))} <select data-cx-piste data-cx-where>${opts.map(o => `<option value="${esc(o.v)}" ${o.v === pre ? 'selected' : ''}>${esc(o.l)}</option>`).join('')}</select></label>`);
         const sel = foot.querySelector('[data-cx-where]');
-        const apply = () => { const o = opts.find(x => x.v === sel.value) || opts[0];
-            st.ctx = {...base, ...o.ctx, label: `${o.pill[0]} ${o.pill[1]}`};
-            const pill = st.dlg.querySelector('.cx-destpill'); if (pill) pill.innerHTML = `<span aria-hidden="true">${esc(o.pill[0])}</span> ${esc(o.pill[1])}`;
-            if (o.media) st.ctx.folderNote = true; };
-        sel.addEventListener('change', apply); apply();
+        const apply = first => { const o = opts.find(x => x.v === sel.value) || opts[0];
+            st.ctx = {...base, ...o.ctx, label: first && base.label ? base.label : o.here}; // ouvert d'une sous-partie : son nom reste
+            const pill = st.dlg.querySelector('.cx-destpill'); if (pill && (!first || o.v !== opts[0].v)) pill.innerHTML = `<span aria-hidden="true">${esc(o.pill[0])}</span> ${esc(o.pill[1])}`; };
+        sel.addEventListener('change', () => apply(false)); apply(true);
     }
     function goTab(st, k) {
         if (st.tab !== k) { st.tab = k; st.q = ''; st.filters = new Set(); st.list = null; st.dlg.querySelector('[data-cx-q]').value = ''; }

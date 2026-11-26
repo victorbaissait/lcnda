@@ -40,12 +40,6 @@ function ha_life(PDO $pdo, int $id): array
     $p = $s->fetch(PDO::FETCH_ASSOC);
     if (!$p) { throw new RuntimeException(function_exists('i18n_t') ? i18n_t('Fiche introuvable.') : 'Fiche introuvable.'); }
     $kiosk = function_exists('kiosk_state') && !empty(kiosk_state()['on']);
-    if ($kiosk) { // consultation et invités du réseau : ni une fiche confidentielle, ni une personne vivante (déclarée ou probable) — comme si elle n'existait pas
-        require_once __DIR__ . '/comptes_famille.php';
-        $hid = [];
-        try { $hid = fc_hidden($pdo); } catch (Throwable) { $hid = [$id => true]; }
-        if (!empty($p['is_private']) || ($p['living_status'] ?? '') === 'living' || isset($hid[$id])) { throw new RuntimeException(function_exists('i18n_t') ? i18n_t('Fiche introuvable.') : 'Fiche introuvable.'); }
-    }
     $ec = ha_cols($pdo, 'events');
     $priv = in_array('is_private', $ec, true) ? ', e.is_private' : ', 0 AS is_private';
     $plc = ha_cols($pdo, 'places');

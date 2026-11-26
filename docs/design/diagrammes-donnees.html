@@ -363,7 +363,7 @@ details.more[open]>summary{margin-bottom:8px}
   </div>
 
   <nav class="toc" aria-label="Sommaire">
-    <a href="#s1">1 · Partir des données</a><a href="#s2">2 · Les dessins <small>14</small></a><a href="#s3">3 · Exemples <small>5</small></a><a href="#s4">4 · Personnaliser</a><a href="#s5">5 · S’en servir</a><a href="#s6">6 · Vie privée</a><a href="#qs">? Questions</a>
+    <a href="#s1">1 · Partir des données</a><a href="#s2">2 · Les dessins <small>14</small></a><a href="#s3">3 · Exemples <small>5</small></a><a href="#s4">4 · Personnaliser</a><a href="#s5">5 · S’en servir</a><a href="#s6">6 · Vie privée</a><a href="#qs">? Questions</a><a href="#dec">✓ Décisions</a>
   </nav>
 
   <!-- ═══════════ 1 ═══════════ -->
@@ -542,6 +542,21 @@ details.more[open]>summary{margin-bottom:8px}
       <li class="card"><b>Les 14 dessins : tous visibles au départ ?</b><p class="opt">A. Les 14. — B. Seulement les « ✨ conseillés » pour la source choisie, les autres derrière « Tous ».</p><p class="reco"><b>Ma reco : B.</b> 4 à 6 dessins conseillés selon la source (des dates → colonnes, frise, calendrier ; des lieux → carte) ; « Tous » est à un clic. Moins de boutons, même liberté.</p></li>
       <li class="card"><b>« Près des lieux de la famille » : quel rayon par défaut ?</b><p class="opt">A. 15 km, comme les listes. — B. Selon la sorte : 15 km (Tour de France, monuments), 150 km (séismes, batailles).</p><p class="reco"><b>Ma reco : B.</b> Chaque liste dit déjà son rayon (familyKm) ; un séisme se ressent loin, une étape non. Le − / + reste sur la pastille.</p></li>
       <li class="card"><b>Que faire des « ⭐ Modèles » ?</b><p class="opt">A. Seulement pour moi. — B. Aussi partageables (fichier, site familial), sans aucune donnée dedans.</p><p class="reco"><b>Ma reco : B.</b> Un modèle = la source, les filtres, les champs et les réglages, jamais les chiffres ni les noms : un cousin l’ouvre et il se remplit avec <i>son</i> arbre.</p></li>
+    </ol>
+  </section>
+
+  <!-- ═══════════ ✓ Décisions ═══════════ -->
+  <section class="sec" id="dec" aria-labelledby="dech">
+    <div class="sec-h"><span class="eyebrow">Validé</span><h2 id="dech">✓ Décisions</h2><p>Les six recommandations sont acceptées, plus un réglage. Fait dans <code>assets/js/heritage-diagram-donnees.js</code> (et quelques lignes dans l’éditeur commun) ; essai : <code>tests/test-diagrammes-donnees.js</code>.</p></div>
+    <ol class="qs">
+      <li class="card"><b>Un seul écran, trois portes</b><p class="reco">L’onglet « Depuis l’app » de l’éditeur s’appelle <b>« 📊 Partir des données »</b> (🌳 Mon arbre · 🧰 Une liste · 💬 Une question). La galerie « ＋ Nouveau » a une tuile « 📊 Partir des données », et chaque liste de données (Listes → 🧰 Données) un bouton « 📊 Faire un diagramme » qui ouvre ce même écran, la liste et ses filtres déjà choisis. 🌳 Mon arbre garde exactement ce qu’il faisait.</p></li>
+      <li class="card"><b>Deux séries différentes : deux panneaux</b><p class="reco">« ＋ Une 2e série » donne deux panneaux l’un sous l’autre, même frise des années, chacun son échelle (petites courbes en grille). Le deuxième axe à droite reste dans ⚙️ Personnaliser (« Deux séries : Deux panneaux | Deuxième axe à droite »).</p></li>
+      <li class="card"><b>À jour dans l’app, figé quand il sort</b><p class="reco">Une seule case, le nom de toujours : <b>« Tenir à jour »</b> (cochée au départ). PNG, SVG, PDF, impression, fichier du diagramme, Studio et Présentation sont calculés au moment de sortir, datés (« chiffres du … ») et ne changent plus. Pas de 🔄 / 📌 en plus.</p></li>
+      <li class="card"><b>Les dessins conseillés d’abord</b><p class="reco">Seulement les dessins qui vont avec la source (des dates → colonnes, courbe, frise, calendrier ; des lieux → carte), puis « Tous » à un clic et « Tous les types du catalogue ▾ ». <b>Le nombre est un réglage</b> : Réglages → Graphiques — Diagrammes → « Diagrammes : nombre de types conseillés » (clé <code>genealogie-diagrammes-conseilles</code>, 5 au départ, de 3 à 12, ou « Tous » : pas d’étape « conseillés »). Les 14 dessins existaient déjà dans le catalogue (soleil = soleil des lignées, réseau, vie d’un ancêtre = frise des membres) : ils savent maintenant lire une liste, aucun type en double.</p></li>
+      <li class="card"><b>Le rayon, liste par liste</b><p class="reco">« 📍 Près de la famille » prend le rayon de la liste (<code>familyKm</code> : 150 km pour les séismes réunis), sinon celui de sa sorte (séismes, batailles 150 km ; Tour de France, monuments 15 km), sinon le réglage des listes (15 km). Le − / + de la pastille le change, et il est retenu pour cette liste.</p></li>
+      <li class="card"><b>⭐ Modèles partageables, sans données</b><p class="reco">« ⭐ Enregistrer comme modèle » (⚙️ Personnaliser) garde la mise en forme et la recette (liste, période, rayon, champs, dessin) : jamais un chiffre, un lieu, un nom ni la phrase d’une question. « ⤓ Partager (fichier) » et « ⤒ Ouvrir un modèle » : un cousin l’ouvre, il se remplit avec son arbre.</p></li>
+      <li class="card"><b>Vie privée</b><p class="reco">Ce qui sort est calculé sans les personnes vivantes ni leurs lieux (<code>ld_famille?share=1</code>) ; une fiche ou un événement confidentiel n’entre jamais dans le calcul. Mode consultation : lecture seule, rien n’est exporté ni envoyé, rien n’est téléchargé (seulement les listes présentes sur l’ordinateur).</p></li>
+      <li class="card"><b>Rapide</b><p class="reco">Rien n’est lu avant qu’on choisisse une liste ; au-delà de 50 000 lignes, le calcul avance par morceaux de 10 000 (la page ne gèle pas). Les sources et leurs licences sont écrites sous le dessin (et dans les exports), avec ↗ vers la liste d’origine.</p></li>
     </ol>
   </section>
 </div>

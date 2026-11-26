@@ -220,7 +220,7 @@ echo json_encode(['o' => array_diff_key($o, ['snap' => 1]), 'n' => count($o['sna
             const item = p.locator('.ui-actmenu .ui-actmenu-i', {hasText: 'Dans une fiche → nouveau bloc Données (figé)'});
             await item.waitFor({timeout: 5000}); await item.click();
             const target = p.locator('.ui-actmenu .ui-actmenu-i', {hasText: 'Tulle'}); await target.waitFor({timeout: 5000}); await target.click();
-            await p.waitForFunction(async ([i, n]) => (await window.LCNDA_APP.api('topic_sheet', {id: i})).blocks.filter(x => x.type === 'data').length === n + 1, [id, n0], {timeout: 10000});
+            for (let k = 0; k < 50 && (await sheet(id)).blocks.filter(x => x.type === 'data').length !== n0 + 1; k++) await sleep(200); // (waitForFunction ne sait pas attendre une promesse)
             const all = (await sheet(id)).blocks, nb = all.filter(x => x.type === 'data').at(-1);
             assert.strictEqual(nb.mode, 'frozen', JSON.stringify(all.map(x => [x.id, x.type, x.mode, x.list, x.snap?.rows?.length]))); assert.strictEqual(nb.list, 'test_batailles'); assert.strictEqual(nb.snap.rows.length, 2);
             assert.ok(nb.snap.rows.every(r => /^https:\/\//.test(r.u) && r.s), JSON.stringify(nb.snap.rows));

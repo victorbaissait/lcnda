@@ -183,7 +183,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/versions.css?v=2">
     <link rel="stylesheet" href="assets/css/premier.css?v=2">
     <link rel="stylesheet" href="assets/css/apparence-traits.css?v=43" id="lc-frame-css" media="not all">
-    <link rel="stylesheet" href="assets/css/designs-gen.css?v=63" id="lc-designs-gen" media="not all">
+    <link rel="stylesheet" href="assets/css/designs-gen.css?v=65" id="lc-designs-gen" media="not all">
     <link rel="stylesheet" href="assets/css/designs.css?v=15">
     <link rel="stylesheet" href="assets/css/a-trier.css?v=1">
     <link rel="stylesheet" href="assets/css/colonne-espacement.css?v=2">
@@ -1530,7 +1530,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-image-prints.js?v=1" defer></script>
 <script src="assets/js/heritage-images-similaires.js?v=2" defer></script>
 <script src="assets/js/heritage-lightbox-layout.js?v=5" defer></script>
-<script src="assets/js/heritage-diagram-kinds.js?v=16" defer></script>
+<script src="assets/js/heritage-diagram-kinds.js?v=17" defer></script>
 <script src="assets/js/heritage-graphs.js?v=7" defer></script>
 <script src="assets/js/heritage-diagram-chiffres.js?v=6" defer></script>
 <script src="assets/js/heritage-diagram-cartes.js?v=12" defer></script>
@@ -1734,7 +1734,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-pistes-auto.js?v=3" defer></script>
 <script src="assets/js/heritage-branches-isolees.js?v=1" defer></script>
 <script src="assets/js/heritage-parents-celebres.js?v=1" defer></script>
-<script src="assets/js/heritage-connexions.js?v=12" defer></script>
+<script src="assets/js/heritage-connexions.js?v=13" defer></script>
 <script src="assets/js/app-paniers-core.js?v=4" defer></script>
 <script src="assets/js/app-paniers.js?v=6" defer></script><!-- 🧺 l’onglet Paniers (caché au départ ; lib/paniers.php) -->
 <script src="assets/js/app-inserer.js?v=5" defer></script><!-- 📎 Insérer une info à l’endroit du curseur, dans tout texte libre (« / », 📎, ⌥⌘K) -->

@@ -392,7 +392,8 @@
         if (!hit || Date.now() - hit.t > 60000) { hit = {t: Date.now(), p: compute(cfg, spec, {share})}; liveMem.set(key, hit); }
         let r; try { r = await hit.p; } catch (_) { liveMem.delete(key); return spec; }
         if (!r.spec) return spec;
-        const out = {...clone(r.spec), live: spec.live}; out.o = {...out.o, title: spec.o?.title || out.o.title, subtitle: spec.o?.subtitle ?? out.o.subtitle};
+        const out = {...clone(r.spec), live: spec.live}; out.o = {...out.o, ...clone(spec.o || {}), source: out.o.source}; // la mise en forme d'aujourd'hui (⚙️ Personnaliser), les chiffres et les sources recalculés
+        if (spec.dataRecipe) out.dataRecipe = spec.dataRecipe;
         delete out.__auto; return out;
     }
     /** ce qui part dans un fichier : les chiffres d'aujourd'hui, sans les vivants, sans la recette « tenue à jour » */
@@ -482,7 +483,7 @@
         const start = api.start?.(); const live = api.spec().live?.data || api.spec().dataRecipe;
         st.cfg = st.cfg || (live ? clone(live) : {src: start?.src || 'tree', live: true, ...(start || {})});
         if (start) Object.assign(st.cfg, start);
-        if (st.cfg.list && !st.cfg.km) { const d = listById(st.cfg.list); if (d) st.cfg.km = kmFor(d); }
+        if (st.cfg.list) { const d = listById(st.cfg.list); if (d) { if (!st.cfg.km) st.cfg.km = kmFor(d); if (st.cfg.fam === undefined) st.cfg.fam = !!d.geo && !!LF() && !st.cfg.near; } }
         st.galAll = st.galAll ?? (suggestN() === 'all');
         const ro = kiosk();
         const paint = () => {
@@ -493,7 +494,7 @@
             if (ro) { box.innerHTML = sw + `<p class="dgd-ro">🖥 ${esc(T('Mode consultation : lecture seule. On regarde, on survole ; pas de modification, pas d’export, pas d’envoi.'))}</p>`; return; }
             const d = c.list ? listById(c.list) : null;
             const one = src === 'list' ? `${d ? `<div class="dgd-chosen"><b>${esc(d.icon || '📋')} ${esc(T(d.label))}</b><button type="button" class="link-button" data-dgd-change>${esc(T('Changer'))}</button></div>` : ''}<div data-dgd-picker${d ? ' hidden' : ''}></div>`
-                : `<form class="dgd-ask" data-dgd-askform><span aria-hidden="true">💬</span><input type="search" data-dgd-ask value="${esc(c.ask || '')}" placeholder="${esc(T('ex. les séismes près de Tulle 1700–1900'))}" aria-label="${esc(T('Ta question'))}"><button type="submit" class="button small">${esc(T('Comprendre'))}</button></form>${st.chips ? `<div class="dgd-understood"><span class="dgd-lab">${esc(T('J’ai compris'))}</span>${st.chips.map(([k, v]) => `<button type="button" class="ui-listbar-chip" data-dgd-fix>${esc(k)} : ${esc(v)}</button>`).join('')}</div>` : ''}`;
+                : `<div class="dgd-ask" data-dgd-askform role="search"><span aria-hidden="true">💬</span><input type="search" data-dgd-ask value="${esc(c.ask || '')}" placeholder="${esc(T('ex. les séismes près de Tulle 1700–1900'))}" aria-label="${esc(T('Ta question'))}"><button type="button" class="button small" data-dgd-askgo>${esc(T('Comprendre'))}</button></div>${st.chips ? `<div class="dgd-understood"><span class="dgd-lab">${esc(T('J’ai compris'))}</span>${st.chips.map(([k, v]) => `<button type="button" class="ui-listbar-chip" data-dgd-fix>${esc(k)} : ${esc(v)}</button>`).join('')}</div>` : ''}`;
             const models0 = models();
             const head = sw + (models0.length ? `<details class="dgd-models"><summary>⭐ ${esc(T('Mes modèles'))} (${models0.length})</summary><div>${models0.map((m, i) => `<button type="button" class="ui-listbar-chip" data-dgd-usemodel="${i}">⭐ ${esc(m.name || T('Sans nom'))}</button>`).join('')}<button type="button" class="link-button" data-dgd-modexp>⤓ ${esc(T('Partager (fichier)'))}</button><label class="link-button dgd-imp">⤒ ${esc(T('Ouvrir un modèle'))}<input type="file" accept=".json,application/json" data-dgd-modimp hidden></label></div></details>` : `<label class="link-button dgd-imp">⤒ ${esc(T('Ouvrir un modèle'))}<input type="file" accept=".json,application/json" data-dgd-modimp hidden></label>`);
             let html = head + step(1, T('Choisir'), one);
@@ -562,13 +563,15 @@
             if (t.hasAttribute('data-dgd-modimp') && t.files?.[0]) { try { const j = JSON.parse(await t.files[0].text()); const list = j.lcnda_diagram_models === 1 ? j.models : [j]; let n = 0; list.forEach(m => { if (m?.lcnda_diagram_model === 1) { const clean = modelOf({kind: m.kind, o: m.o, live: {data: m.data}}, m.name); const all = models().filter(x => x.name !== clean.name); all.unshift(clean); writeJ(K_MOD, all.slice(0, 40)); n++; } }); if (!n) throw new Error(T('Ce fichier n’est pas un modèle de diagramme.')); toast(T('Modèles ajoutés à ⭐ Mes modèles : {n}.', {n})); paint(); } catch (err) { toast(err.message || String(err), 'error'); } }
             if (t.dataset.dgdFkey !== undefined) { const h = box.querySelector('[data-dgd-addf]'); h.innerHTML = await addFilterHtml(listById(c.list), c, t.value); }
         });
-        box.addEventListener('submit', async e => {
-            if (!e.target.matches('[data-dgd-askform]')) return; e.preventDefault();
-            const c = st.cfg, q = e.target.querySelector('[data-dgd-ask]').value.trim(); if (!q) return;
-            const btn = e.target.querySelector('button'); btn.disabled = true;
+        box.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.matches?.('[data-dgd-ask]')) { e.preventDefault(); e.stopPropagation(); ask(); } });
+        box.addEventListener('click', e => { if (e.target.closest('[data-dgd-askgo]')) ask(); });
+        const ask = async () => {
+            const form = box.querySelector('[data-dgd-askform]'); if (!form) return;
+            const c = st.cfg, q = form.querySelector('[data-dgd-ask]').value.trim(); if (!q) return;
+            const btn = form.querySelector('button'); btn.disabled = true;
             try { const u = await understand(q); st.chips = u.chips; ['from', 'to', 'fam', 'km', 'near', 'filt', 'famOnly', 'x', 'y', 'color', 'gal', 'two'].forEach(k => delete c[k]); Object.assign(c, u.cfg, {ask: q}); if (!c.list) { paint(); toast(T('Je n’ai pas trouvé de liste pour cette question.'), 'error'); return; } paint(); run(); }
             catch (err) { toast(err.message || String(err), 'error'); } finally { btn.disabled = false; }
-        });
+        };
         paint();
         if (st.cfg.list && st.cfg.src !== 'tree' && !ro) run();
     }
@@ -664,8 +667,8 @@
         if (typeof document === 'undefined' || kiosk()) return;
         const page = document.querySelector('#workspace .ld-page:not(.ld-overview)'); if (!page || page.querySelector('[data-dgd-fromlist]')) return;
         const pa = E().page?.(); if (!pa?.d || !ext.openDiagramEditor) return;
-        const anchor = page.querySelector('[data-ld-send]') || page.querySelector('[data-ld-export]'); if (!anchor) return;
-        anchor.insertAdjacentHTML('afterend', `<button type="button" class="button small secondary" data-dgd-fromlist title="${esc(T('Cette liste, avec ses filtres, dans un diagramme'))}">📊 ${esc(T('Faire un diagramme'))}</button>`);
+        const anchor = page.querySelector('.ld-bar-row'); if (!anchor) return;
+        anchor.insertAdjacentHTML('beforeend', `<button type="button" class="ui-listbar-btn" data-dgd-fromlist title="${esc(T('Cette liste, avec ses filtres, dans un diagramme'))}">📊 ${esc(T('Faire un diagramme'))}</button>`);
     }
     if (typeof document !== 'undefined' && document.addEventListener) {
         document.addEventListener('click', e => {
@@ -678,7 +681,7 @@
         });
         let mt = 0;
         const watch = () => { clearTimeout(mt); mt = setTimeout(() => { try { listButton(); recapBlock(); } catch (_) {} }, 80); };
-        const boot = () => { const ws = document.getElementById('workspace'); if (ws) new MutationObserver(watch).observe(ws, {childList: true, subtree: true}); installFinish(); };
+        const boot = () => { const ws = document.getElementById?.('workspace'); if (ws && typeof MutationObserver === 'function') new MutationObserver(watch).observe(ws, {childList: true, subtree: true}); installFinish(); };
         if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
     }
     function recapBlock() {
@@ -690,5 +693,5 @@
         s.addEventListener('click', e => { const b = e.target.closest('[data-dgd-unrecap]'); if (!b) return; const id = Number(b.dataset.dgdUnrecap), before = readJ(K_RECAP, []); writeJ(K_RECAP, before.filter(x => x !== id)); b.closest('.dgd-recap-it')?.remove(); A().undoToast?.(T('Retiré du récap'), {undo: () => { writeJ(K_RECAP, before); s.remove(); recapBlock(); }}); });
     }
 
-    ext.diagramData = {mount, resolve, frozen, compute, suggestFields, suggestKinds, profileOf, modelOf, applyModel, saveModel, models, GALLERY, kindOf, suggestN, settingHtml, galleryTileHtml, afterEmbed, kmFor, finish, understand, listRows, crossTab, famData, KEYS: {suggest: K_N, km: K_KM, models: K_MOD, recap: K_RECAP}};
+    ext.diagramData = {forget: () => { rowsMem.clear(); liveMem.clear(); shareFam = null; }, mount, resolve, frozen, compute, suggestFields, suggestKinds, profileOf, modelOf, applyModel, saveModel, models, GALLERY, kindOf, suggestN, settingHtml, galleryTileHtml, afterEmbed, kmFor, finish, understand, listRows, crossTab, famData, KEYS: {suggest: K_N, km: K_KM, models: K_MOD, recap: K_RECAP}};
 })();

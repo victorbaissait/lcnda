@@ -4237,6 +4237,40 @@
 :root[data-lc-density] .h-dgp-play{gap:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .h-dgp-play{margin-top:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .h-dgp-play{padding:calc(6px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+/* heritage-diagram-donnees.css */
+:root[data-lc-density] .dgd{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .dgd{margin-bottom:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .dgd-head{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .dgd-ro{padding:calc(10px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .dgd-step{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .dgd-step{padding:calc(10px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .dgd-step>h4{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .dgd-chosen{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .dgd-ask{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .dgd-understood,:root[data-lc-density] .dgd-chips{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .dgd-chip{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .dgd-chip input{padding:1px calc(4px * var(--lc-sp))}
+:root[data-lc-density] .dgd-chip .mini{padding:0 calc(4px * var(--lc-sp))}
+:root[data-lc-density] .dgd-addf{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .dgd-more>summary{padding:calc(2px * var(--lc-sp)) 0}
+:root[data-lc-density] .dgd-two{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .dgd-galbar{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .dgd-gal{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .dgd-gt{gap:calc(3px * var(--lc-sp))}
+:root[data-lc-density] .dgd-gt{padding:calc(8px * var(--lc-sp)) calc(9px * var(--lc-sp))}
+:root[data-lc-density] .dgd-use{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .dgd-src-line{gap:calc(4px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-dg-embed .dgd-src-line{padding:calc(4px * var(--lc-sp)) calc(8px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-density] .dgd-models>div{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .dgd-perso{gap:calc(9px * var(--lc-sp))}
+:root[data-lc-density] .dgd-perso-act{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .dgd-setting{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .dgd-recap-list{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .dgd-recap-list{padding:0 calc(12px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .dgd-recap-it{gap:calc(4px * var(--lc-sp))}
+@media (max-width:520px){
+  :root[data-lc-density] .dgd-step{padding:calc(9px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+}
 /* layout.css */
 :root[data-lc-density] .h-book-studio{gap:calc(14px * var(--lc-sp))}
 :root[data-lc-density] .h-book-studio{padding:calc(14px * var(--lc-sp)) calc(16px * var(--lc-sp))}
@@ -4624,6 +4658,7 @@
 @media print{
   :root .ui-item-card:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
 }
+:root[data-lc-density] .ui-person-card-side{gap:calc(8px * var(--lc-sp)) calc(10px * var(--lc-sp))}
 /* saisies.css */
 :root[data-lc-density] .ui-hm{gap:calc(3px * var(--lc-sp))}
 /* board-shapelib.css */
@@ -6380,6 +6415,10 @@
 :root[data-lc-density] .hist-dl{gap:calc(8px * var(--lc-sp))}
 :root .hist-prog:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
 :root[data-lc-density] .hist-about .hist-body{padding:calc(14px * var(--lc-sp)) calc(18px * var(--lc-sp))}
+/* veille-synchro.css */
+:root[data-lc-density] .vd-acts{gap:calc(9px * var(--lc-sp))}
+:root[data-lc-density] .vd-doubt{gap:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .vd-note{gap:calc(9px * var(--lc-sp))}
 /* pistes-branches-celebres.css */
 :root[data-lc-density] .pst-float{gap:calc(2px * var(--lc-sp))}
 /* connexions.css */
@@ -7186,6 +7225,9 @@
   :root[data-lc-density] .dr-trs-more{padding:calc(8px * var(--lc-sp)) calc(4px * var(--lc-sp))}
   :root[data-lc-density] .dr-ask{padding-left:calc(10px * var(--lc-sp))}
 }
+/* donnees-onglet.css */
+:root[data-lc-density] .dno-more{padding:calc(2px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-density] .dno-showhid{gap:calc(6px * var(--lc-sp))}
 /* donnees-plus.css */
 :root[data-lc-density] .dp-grid{gap:calc(16px * var(--lc-sp))}
 :root[data-lc-density] .dp-bh{gap:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}

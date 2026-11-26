@@ -125,8 +125,6 @@
                 count: mode === 'new' ? plural(g.items.length, 'décès possible', 'décès possibles') : plural(g.items.length, 'piste écartée', 'pistes écartées'), body: g.items.map(it => cardHtml(it, mode, true)).join('')}); }).join('')));
     const FILTER = 'lcnda-vd-filter';
     const vdFilter = () => { const v = ls.get(FILTER, 'all'); return ['all', 'todo', 'doubt'].includes(v) ? v : 'all'; };
-    let BACK = null; // {y} : la position dans la page quand on est allé sur une fiche
-    const rememberPlace = () => { const ws = document.getElementById('workspace'); BACK = {y: Math.max(document.scrollingElement?.scrollTop || 0, ws?.scrollTop || 0)}; };
     /** 🤔 poser / enlever le doute ; ↶ remet l'état d'avant */
     async function doubt(id, body, msg) {
         let r; try { r = await post('vd_doubt', {id, ...body}); } catch (e) { A().toast?.(e.message, 'error'); return null; }
@@ -135,7 +133,8 @@
         return r;
     }
     const refillPersons = () => document.querySelectorAll('#workspace [data-vd-person]').forEach(h => fillPerson(h, Number(h.dataset.vdPerson)));
-    const keepPlace = async fn => { rememberPlace(); await fn(); };
+    /** redessiner sans bouger : la même position dans la page (aller sur une fiche puis revenir : l'app remet la position de l'écran) */
+    const keepPlace = async fn => { const ws = document.getElementById('workspace'), y = ws?.scrollTop || 0, y2 = document.scrollingElement?.scrollTop || 0; await fn(); if (ws) ws.scrollTop = y; if (document.scrollingElement) document.scrollingElement.scrollTop = y2; };
     function noteField(id) {
         const card = document.querySelector(`#workspace [data-vd-card="${id}"]`); if (!card || card.querySelector('[data-vd-note]')) return;
         const cur = card.querySelector('.vd-doubt-text')?.textContent || '';
@@ -171,13 +170,10 @@
                 <p class="muted">${esc(T('Les avis de décès des journaux et des sites (Libra Memoria, Dans nos cœurs, Avis-de-deces…) ne sont pas des données ouvertes : l’app ne les lit pas. Elle propose seulement des liens de recherche dans « Où chercher » d’une personne.'))}</p></div></section>`;
         if (!A().escapeHtml) return;
         A().bindTableLinks?.();
-        // revenir d'une fiche : la même position dans la page
-        if (BACK && BACK.y != null) { const y = BACK.y; BACK = null; requestAnimationFrame(() => { const sc = document.scrollingElement; sc.scrollTop = y; ws.scrollTop = y; }); }
     }
     document.addEventListener('click', e => {
-        // 👤 ouvrir une fiche depuis l'écran : on retient la position (filtre gardé), « retour » la retrouve
-        if (e.target.closest?.('[data-vd-page] [data-h-person], [data-vd-page] [data-open-person]')) rememberPlace();
-        const fb = e.target.closest?.('[data-vd-fiche]'); if (fb) { rememberPlace(); const st = A().state; st.currentPersonId = Number(fb.dataset.vdFiche); A().setModule?.('personnes'); return; }
+        // 👤 ouvrir une fiche : le filtre est retenu (localStorage), la position de l'écran aussi (l'app la remet au retour)
+        const fb = e.target.closest?.('[data-vd-fiche]'); if (fb) { const st = A().state; st.currentPersonId = Number(fb.dataset.vdFiche); A().setModule?.('personnes'); return; }
         const fl = e.target.closest?.('[data-vd-filter]'); if (fl) { ls.set(FILTER, fl.dataset.vdFilter); keepPlace(draw); return; }
         if (e.target.closest?.('[data-vd-note-cancel]')) { e.target.closest('form')?.remove(); return; }
         const ne = e.target.closest?.('[data-vd-note-edit]'); if (ne) { if (!kiosk()) noteField(Number(ne.dataset.vdNoteEdit)); return; }

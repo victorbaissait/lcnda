@@ -124,9 +124,10 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.click('[data-vd-filter="all"]'); await sleep(300);
             const pid = await p.$eval('[data-vd-page] .ui-person-card [data-vd-fiche]', b => b.dataset.vdFiche);
             assert.strictEqual(await p.$$eval('[data-vd-page] .ui-person-card-head [data-vd-fiche]', l => l.length) > 0, true, 'le bouton est dans l’en-tête du cadre');
-            const y0 = await p.evaluate(() => { const ws = document.getElementById('workspace'); const el = document.querySelectorAll('[data-vd-page] [data-vd-fiche]'); el[el.length - 1].scrollIntoView(); return Math.max(document.scrollingElement.scrollTop, ws.scrollTop); });
+            await p.mouse.move(900, 300); await p.mouse.wheel(0, 900); await sleep(700); // on fait défiler soi-même, à la molette
+            const y0 = await p.evaluate(() => Math.max(document.scrollingElement.scrollTop, document.getElementById('workspace').scrollTop));
             assert.ok(y0 > 50, 'la page a défilé : ' + y0);
-            await p.evaluate(() => { const el = document.querySelectorAll('[data-vd-page] [data-vd-fiche]'); el[el.length - 1].click(); });
+            await p.evaluate(() => { const el = [...document.querySelectorAll('[data-vd-page] [data-vd-fiche]')]; const r = el.find(b => { const x = b.getBoundingClientRect(); return x.top > 0 && x.bottom < innerHeight; }) || el[el.length - 1]; r.click(); });
             await p.waitForFunction(() => window.LCNDA_APP.state.module === 'personnes' && document.querySelector('.person-page h2'), null, {timeout: 20000});
             await p.goBack().catch(() => {});
             let back = await p.waitForFunction(() => document.querySelector('[data-vd-page]'), null, {timeout: 6000}).then(() => true).catch(() => false);
@@ -156,8 +157,8 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.match(s[0].title, /^https:\/\/www\.data\.gouv\.fr\/fr\/datasets\/fichier-des-personnes-decedees\/$/, 'le fichier (data.gouv.fr) sur la source');
             assert.match(s[0].view, /^https:\/\/deces\.matchid\.io\/search\?q=/); assert.match(s[0].rel, /noopener/);
             await p.click('.ui-toast:has-text("Décès ajouté") button:has-text("Annuler"), .toast:has-text("Décès ajouté") button:has-text("Annuler")');
-            await sleep(1200);
-            assert.strictEqual(q(`SELECT count(*) n FROM source_links sl JOIN sources s ON s.id=sl.source_record_id WHERE s.title LIKE '%INSEE%'`)[0].n, 0, '↶ : la citation est partie');
+            for (let i = 0; i < 40 && q(`SELECT status FROM vd_pistes WHERE id=${id}`)[0].status !== 'new'; i++) await sleep(250);
+            assert.strictEqual(q(`SELECT count(*) n FROM source_links sl JOIN sources s ON s.id=sl.source_record_id WHERE s.title LIKE '%INSEE%'`)[0].n, 0, '↶ : la citation est partie ' + await toasts());
             assert.strictEqual(q(`SELECT status FROM vd_pistes WHERE id=${id}`)[0].status, 'new');
         });
 

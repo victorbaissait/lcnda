@@ -350,7 +350,7 @@
     /* ═════════ ⚙️ Le panneau « Personnaliser » de l'éditeur ═════════ */
     const openSecs = () => { const v = ls.get(OPEN_KEY, null); return v && typeof v === 'object' ? v : {style: 1}; };
     /** 🧩 sections apportées par d'autres fichiers : ext.diagramPersoExtra = [{id, title, html(spec), hint?, when?(spec), bind?(el, api, {signal})}] */
-    const extraSecs = s => (ext.diagramPersoExtra || []).map(x => { try { return x.when && !x.when(s) ? '' : sec(x.id, x.title, x.html(s), x.hint || ''); } catch (e) { console.error(e); return ''; } }).join('');
+    const extraSecs = s => (ext.diagramPersoExtra || []).map(x => { try { return x.when && !x.when(s) ? '' : `<details class="h-dgp-sec" data-dgp-xsec="${esc(x.id)}"${openSecs()['x:' + x.id] ? ' open' : ''}><summary>${x.title}</summary><div class="h-dgp-body">${x.hint ? `<p class="ui-hint">${x.hint}</p>` : ''}${x.html(s)}</div></details>`; } catch (e) { console.error(e); return ''; } }).join('');
     const sec = (id, title, body, help = '') => `<details class="h-dgp-sec" data-dgp-sec="${id}"${openSecs()[id] ? ' open' : ''}><summary>${title}</summary><div class="h-dgp-body">${help ? `<p class="ui-hint">${help}</p>` : ''}${body}</div></details>`;
     const sel = (attr, choices, v) => `<select ${attr}>${choices.map(([k, l]) => `<option value="${esc(k)}" ${String(v ?? '') === String(k) ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select>`;
     const swatches = c => `<span class="h-dgp-sw">${(c || []).slice(0, 8).map(x => `<i style="background:${esc(col(x, '#888'))}"></i>`).join('')}</span>`;
@@ -433,7 +433,7 @@
         const o = () => { const s = spec(); s.o = s.o || {}; return s.o; };
         const ownColors = () => { const oo = o(); if (!Array.isArray(oo.colors) || !oo.colors.length) oo.colors = (defStyle?.v?.colors && !oo.style ? defStyle.v.colors : (R().PALETTES[oo.palette] || R().PALETTES.vive).slice(0, 8)).slice(); return oo.colors; };
         const mineStyle = () => { const oo = o(); if (!oo.style || oo.style === 'none' || oo.style === 'default') { const base = !oo.style && defStyle ? defStyle.v : {}; STYLE_KEYS.forEach(k => { if (oo[k] === undefined && base[k] !== undefined) oo[k] = clone(base[k]); }); oo.style = 'custom'; } else if (!String(oo.style).endsWith('*') && oo.style !== 'custom') oo.style = String(oo.style) + '*'; };
-        el.addEventListener('toggle', e => { const d = e.target.closest?.('[data-dgp-sec]'); if (!d) return; const v = openSecs(); if (d.open) v[d.dataset.dgpSec] = 1; else delete v[d.dataset.dgpSec]; ls.set(OPEN_KEY, v); }, {capture: true, signal: ac.signal});
+        el.addEventListener('toggle', e => { const d = e.target.closest?.('[data-dgp-sec], [data-dgp-xsec]'); if (!d) return; const v = openSecs(), id = d.dataset.dgpSec || 'x:' + d.dataset.dgpXsec; if (d.open) v[id] = 1; else delete v[id]; ls.set(OPEN_KEY, v); }, {capture: true, signal: ac.signal});
         el.addEventListener('input', e => {
             const t = e.target;
             if (t.dataset.dgpK) { mineStyle(); const k = t.dataset.dgpK; o()[k] = t.type === 'range' ? Number(t.value) : t.value; return changed(t.tagName === 'SELECT'); }
