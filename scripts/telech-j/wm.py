@@ -49,6 +49,12 @@ def get(url, accept='application/json', data=None, tries=6, check=None):
     raise RuntimeError(f'{url[:160]} : {last}')
 
 
+def cached_sparql(q):
+    """la réponse à cette requête est-elle déjà dans le cache ?"""
+    data = urllib.parse.urlencode({'query': q})
+    return os.path.exists(os.path.join(CACHE, hashlib.sha1(('https://query.wikidata.org/sparql' + '\n' + data).encode()).hexdigest()))
+
+
 def sparql(q):
     body = get('https://query.wikidata.org/sparql', 'application/sparql-results+json', urllib.parse.urlencode({'query': q}), check=json.loads, tries=3)
     return json.loads(body)['results']['bindings']

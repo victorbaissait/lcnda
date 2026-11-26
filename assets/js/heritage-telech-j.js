@@ -98,14 +98,15 @@
         for (const h of hits) { const k = h.q || h.now ? `${h.q || ''}|${fold(h.now)}` : nameKey(h.name, h.lat, h.lon); const cur = by.get(k) || {now: h.now, lat: h.lat, lon: h.lon, q: h.q, hits: []}; cur.hits.push(h); if (!cur.now && h.now) cur.now = h.now; by.set(k, cur); }
         const exact = g => (g.hits.some(h => fold(h.name) === q) ? 0 : 1);
         const same = (g, r) => (g.q && r.q === g.q) || (g.now && fold(r.now) === fold(g.now) && num(r.lat) !== null && num(g.lat) !== null && km(r.lat, r.lon, g.lat, g.lon) < 15);
-        return [...by.values()].sort((a, b) => exact(a) - exact(b) || b.hits.length - a.hits.length).slice(0, max).map(g => {
+        return [...by.values()].sort((a, b) => exact(a) - exact(b) || b.hits.length - a.hits.length).slice(0, max * 3).map(g => {
             // un lieu antique : son nom moderne quand il est parmi ses noms (Burdigala → Bordeaux), sinon le nom d'aujourd'hui le plus porté autour
             const own = g.now ? [] : namesAt(recs, g.lat, g.lon, 3), nows = g.now ? null : new Set(near(recs.filter(r => r.now && !NOT_TOWN.test(r.now)), g.lat, g.lon, 15, 400).map(x => fold(x.r.now)));
             const guess = g.now ? '' : (own.find(r => nows.has(fold(r.name)))?.name || nowNear(recs, g.lat, g.lon)), now = g.now || guess;
             const all = [...g.hits, ...recs.filter(r => same(g, r) || (guess && fold(r.now) === fold(guess) && num(r.lat) !== null && km(r.lat, r.lon, g.lat, g.lon) < 15)), ...own.filter(r => !r.now || fold(r.now) === fold(now))];
             const names = all.filter((r, i) => all.findIndex(x => fold(x.name) === fold(r.name) && x.src === r.src) === i).sort((a, b) => (a.from ?? a.to ?? 9999) - (b.from ?? b.to ?? 9999));
             return {...g, now, guessed: !!guess, names};
-        }).filter((g, i, a) => !a.slice(0, i).some(o => o.now && fold(o.now) === fold(g.now) && num(o.lat) !== null && km(o.lat, o.lon, g.lat, g.lon) < 15)); // le même lieu d'aujourd'hui une fois
+        }).sort((a, b) => exact(a) - exact(b) || b.names.length - a.names.length) // le lieu le mieux connu d'abord (Lutetia → Paris avant Lučenec)
+            .filter((g, i, a) => !a.slice(0, i).some(o => o.now && fold(o.now) === fold(g.now) && num(o.lat) !== null && km(o.lat, o.lon, g.lat, g.lon) < 15)).slice(0, max); // le même lieu d'aujourd'hui une fois
     }
     /** les noms d'autrefois d'un lieu (à moins de r km : même lieu) */
     const namesAt = (recs, lat, lon, r = 3) => near(recs, lat, lon, r, 200).map(x => x.r);

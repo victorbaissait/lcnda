@@ -69,3 +69,10 @@ a.fam-chip:hover { border-color: var(--fam-blue); }
   .fam-mine li { grid-template-columns: 24px 1fr; }
   .fam-mine li > button { grid-column: 2; justify-self: start; }
 }
+
+/* 📊 Listes partagées depuis l'ordinateur (lib/donnees_plus.php) */
+.fam-list { margin: 0 0 18px; }
+.fam-list h2 { font-size: 17px; margin: 0 0 4px; }
+.fam-tw { max-width: 100%; overflow-x: auto; }
+.fam-tw table { border-collapse: collapse; width: 100%; font-size: 14px; }
+.fam-tw th, .fam-tw td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--fam-line); vertical-align: top; }

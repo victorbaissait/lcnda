@@ -7,7 +7,7 @@
 #                  le chef-lieu) ; les 22 paroisses de l'Acadiane (résolution 496 du parlement de Louisiane, 1971 : un fait)
 #  🧊 tj-charcot   les membres des expéditions de Jean-Baptiste Charcot connus de Wikidata (CC0) ; les morts du naufrage du
 #                  « Pourquoi-Pas ? » (16 septembre 1936) connus de Wikidata
-#  📘 tj-oberamt   les Oberämter du Wurtemberg et leur « Beschreibung des Oberamts » (1824-1886, domaine public) sur Wikisource
+#  📘 tj-oberamt   les Oberämter du Wurtemberg (Wikidata : P31 = Q1702612 « Oberamt (Württemberg) ») et leur « Beschreibung des Oberamts » (1824-1886, domaine public) sur Wikisource
 #                  en allemand (lien trouvé par Wikidata ; sinon une recherche sur Wikisource)
 import os, re, sys, urllib.parse
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -157,7 +157,7 @@ def charcot():
 
 # ───────── 📘 les Oberamtsbeschreibungen ─────────
 def oberamt():
-    Q = '''SELECT ?o ?ol ?c ?sc ?seatl ?e ?ws WHERE { ?cls rdfs:label "Oberamt"@de . ?o wdt:P31 ?cls .
+    Q = '''SELECT ?o ?ol ?c ?sc ?seatl ?e ?ws WHERE { ?o wdt:P31 wd:Q1702612 .
  OPTIONAL { ?o wdt:P625 ?c } OPTIONAL { ?o wdt:P36 ?seat . ?seat wdt:P625 ?sc . ?seat rdfs:label ?seatl FILTER(lang(?seatl) = "de") }
  OPTIONAL { ?o wdt:P576 ?e }
  OPTIONAL { ?b wdt:P921 ?o . ?ws schema:about ?b ; schema:isPartOf <https://de.wikisource.org/> }
@@ -170,10 +170,24 @@ def oberamt():
         x = by.setdefault(q, {'n': g(r, 'ol'), 'lat': la if la is not None else sla, 'lon': lo if lo is not None else slo, 'seat': g(r, 'seatl'), 'end': wm.year(g(r, 'e')), 'ws': ''})
         if g(r, 'ws') and not x['ws']:
             x['ws'] = g(r, 'ws')
+    # sans position : la ville du même nom en Bade-Wurtemberg (clé communale allemande P439 commençant par 08)
+    miss = sorted({x['n'][len('Oberamt '):] for x in by.values() if x['lat'] is None and x['n'].startswith('Oberamt ')})
+    town = {}
+    if miss:
+        vals = ' '.join('"' + n.replace('"', '') + '"@de' for n in miss)
+        for r in wm.sparql('SELECT ?n ?c WHERE { VALUES ?n { %s } ?t rdfs:label ?n ; wdt:P439 ?ags ; wdt:P625 ?c . FILTER(STRSTARTS(?ags, "08")) }' % vals):
+            la, lo = wm.point(g(r, 'c'))
+            if la is not None:
+                town.setdefault(g(r, 'n'), (la, lo))
     for q, x in sorted(by.items(), key=lambda kv: kv[1]['n']):
-        if x['lat'] is None or not re.match(r'^Oberamt ', x['n']):
+        if not re.match(r'^Oberamt ', x['n']):
             continue
         short = x['n'][len('Oberamt '):]
+        if x['lat'] is None and short in town:
+            x['lat'], x['lon'] = town[short]
+            x['seat'] = x['seat'] or short
+        if x['lat'] is None:
+            continue
         search = 'https://de.wikisource.org/w/index.php?' + urllib.parse.urlencode({'search': f'Beschreibung des Oberamts {short}'})
         rows.append([q, short, x['seat'] or short, x['end'], x['lat'], x['lon'], x['ws'], search])
     meta = {**WD, 'url': 'https://de.wikisource.org/wiki/Oberamtsbeschreibung', 'built': wm.today(),

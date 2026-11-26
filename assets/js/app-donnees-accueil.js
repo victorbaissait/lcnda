@@ -176,6 +176,7 @@
             <button type="button" class="dr-trs-more" data-dr-trs-more aria-expanded="false">⌄ ${esc(T('{n} autres thèmes', {n: nf(Math.max(0, tl.length - 3))}))}</button>
             <p class="dr-foot muted" data-dr-foot></p>`;
         fillStats(page); fillHighlights(page);
+        try { ext.dataPlus?.recap?.(page, body); } catch (e) { console.error(e); } // ⭐ 🕘 🆕 💾 🕳 💽, « ⚙ Organiser le récap » (app-donnees-plus.js)
     }
     /** les comptes par thème : listes installées, lignes (les paquets livrés le disent), ⤓, ↻ — l'état de Réglages → 🗂 Données */
     let statsP = null, statsAt = 0;
@@ -436,6 +437,7 @@
             ${nope.length ? `<div class="dr-nope"><h4>${esc(T('Je n’ai pas compris'))}</h4>${nope.join('')}${sugg.length ? `<p class="dr-sugg"><span>${esc(T('Essaie'))}</span>${sugg.map(x => `<button type="button" class="dr-k" data-dr-exq="${esc(x)}">${esc(x)}</button>`).join('')}</p>` : ''}</div>` : ''}
             ${missing}<div data-dr-rows>${list}</div>${foot}${selBar}<p class="dr-lock">${esc(lock)}</p></div>`;
         bindAnswer(page);
+        try { ext.dataPlus?.answer?.(page, ST); } catch (e) { console.error(e); } // 💾 Garder cette question (app-donnees-plus.js)
     }
     function suggestions(u) {
         const F = LF()?.data?.(), pl = (F?.places || [])[0]?.name || 'Tulle', who = (F?.people || []).find(p => p.b);
@@ -561,6 +563,6 @@
     }
     if (!wrapSettings()) document.addEventListener('DOMContentLoaded', () => { if (!wrapSettings()) setTimeout(wrapSettings, 500); });
 
-    ext.dataHome = {mount, render, ask, setView, view: () => ST.view, place, setPlace, inListes, RADIUS, radiusOf, HL, highlights, resetHighlights: () => { hlMem = null; writeLS(K_CACHE, null); }, pickList, provider, themesForParse, _st: ST};
+    ext.dataHome = {mount, render, ask, setView, view: () => ST.view, place, setPlace, inListes, RADIUS, radiusOf, HL, highlights, resetHighlights: () => { hlMem = null; writeLS(K_CACHE, null); }, pickList, provider, themesForParse, titleOf, stats, _st: ST};
     ext.dataAsk = q => dataAsk(q);
 })();

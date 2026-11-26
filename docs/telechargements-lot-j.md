@@ -5,6 +5,19 @@ ou seulement en lien, et où l'utilisateur le voit. Maquettes suivies : `docs/de
 réunie « Anciens noms réunis » prévue au § 7) ; **nouvelle maquette à valider** : `docs/design/noms-de-lieux-monde.html` (« Noms de
 lieux d'autrefois : une seule recherche pour tous les pays », dans le style réel de l'app, comme `carte-guerres-temps.html`).
 
+## En chiffres (fabriqués ici le 26 novembre 2026)
+
+| Paquet | Lignes | Taille | Source |
+|---|---|---|---|
+| `tj-cyclones` | 2 025 tempêtes (1848 → 2027 austral), 45 129 points | 335 Ko | NOAA NCEI IBTrACS v04r01 |
+| `tj-noms` | 53 294 noms de 25 080 lieux, dont 36 447 noms officiels datés | 1,2 Mo | Wikidata (CC0) |
+| `tj-fusions` | 13 936 communes disparues (18 pays) | 350 Ko | Wikidata (CC0) |
+| `tj-pleiades` | 29 277 noms antiques de 16 172 lieux | 530 Ko | Pleiades (CC BY 3.0) |
+| `tj-villages` | 25 lieux | 4 Ko | Wikipédia (CC BY-SA 4.0), Wikidata (CC0) |
+| `tj-cajuns` | 64 paroisses, 22 en Acadiane | 3 Ko | Wikipédia (en), Wikidata (CC0) |
+| `tj-charcot` | 4 personnes (5 lignes : Gourdon est des deux expéditions) | 1 Ko | Wikidata (CC0) |
+| `tj-oberamt` | 55 Oberämter, 45 avec le lien de leur description | 2 Ko | Wikidata (CC0), Wikisource (domaine public) |
+
 ## Fichiers
 
 | Rôle | Fichier |
@@ -156,9 +169,12 @@ tempête est passé à cette distance ; les vents et les pluies portent bien plu
 - `tj-cajuns` : les 64 paroisses (date de création, chef-lieu, nom français), 22 en **Acadiane** (résolution 496 du parlement de Louisiane,
   1971 : un fait). La paroisse d'un lieu : son nom dans le texte du lieu (« Lafayette Parish », « paroisse … »), sinon le centre le plus
   proche à moins de 35 km, et la fiche dit alors « sans doute ».
-- `tj-charcot` : les membres connus de Wikidata des deux expéditions antarctiques (1903-1905, 1908-1910) et du « Pourquoi-Pas ? ».
+- `tj-charcot` : les membres connus de Wikidata des deux expéditions antarctiques (1903-1905, 1908-1910) et du « Pourquoi-Pas ? » —
+  seulement 4 personnes (Charcot, Gourdon, Liouville, Quidor) : Wikidata ne relie presque aucun marin à ces expéditions ; l'équipage
+  complet n'est qu'en lien (articles de Wikipédia des expéditions, dans le paquet).
   Homonyme (même premier prénom et même nom) seulement pour une personne décédée, jamais en consultation ; « seulement le même nom ».
-- `tj-oberamt` : les Oberämter (Wikidata) et le lien de leur description ; sur la fiche, l'Oberamt dont le chef-lieu est le plus proche
+- `tj-oberamt` : les Oberämter (Wikidata, classe Q1702612 ; sans position, la ville du même nom en Bade-Wurtemberg, clé communale P439
+  « 08… ») et le lien de leur description (45 sur 55 trouvés par Wikidata, sinon une recherche Wikisource) ; sur la fiche, l'Oberamt dont le chef-lieu est le plus proche
   (≤ 15 km, dans le Wurtemberg), « à vérifier, les limites ont changé ».
 
 ## ⛓ Saint-Domingue, la traite — dit sobrement

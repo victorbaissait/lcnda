@@ -151,7 +151,7 @@
         if (c.op === 'eq') return `${l} = « ${c.value} »`;
         return T('{l} contient « {v} »', {l, v: c.value});
     }
-    const periodText = p => (p.mode === 'in' ? T('📅 En {y}', {y: p.from}) : p.mode === 'within' ? T('📅 Entièrement entre {a} et {b}', {a: p.from, b: p.to}) : T('📅 Touche {a}–{b}', {a: p.from, b: p.to}));
+    const periodText = p => (p.label ? String(p.label) : p.mode === 'in' ? T('📅 En {y}', {y: p.from}) : p.mode === 'within' ? T('📅 Entièrement entre {a} et {b}', {a: p.from, b: p.to}) : T('📅 Touche {a}–{b}', {a: p.from, b: p.to}));
     const nearText = n => T('📍 À {km} km autour de {p}', {km: nf(n.km, 1), p: n.title});
     function buildQuery(st, extra = {}) {
         const q = {q: st.q || '', filters: st.crit.flatMap(critFilters)};
@@ -335,6 +335,7 @@
         try { ext.connexions?.listBar?.(host.querySelector('.ld-page'), {d, state: () => cur.st, total: () => cur.total, rows: () => cur.rows, allRows, table2d, critSummary}); } catch (e) { console.error(e); } // 🧺 « Prendre… » (heritage-connexions.js)
         try { ext.listesChoix?.listBar?.(host.querySelector('.ld-page'), pageApi()); } catch (e) { console.error(e); } // ☑ choisir plusieurs lignes, la barre du bas (app-listes-choix.js)
         try { ext.guerresTemps?.listBar?.(host.querySelector('.ld-page'), pageApi()); } catch (e) { console.error(e); } // ▶ Dans le temps (d.timeMap : heritage-guerres-temps.js)
+        try { ext.donneesPlus?.listBar?.(host.querySelector('.ld-page'), pageApi()); } catch (e) { console.error(e); } // ⭐ 👤 📶 📜 ➕ (app-donnees-plus.js)
         paintSaved(); paintChips(); await refresh();
     }
 
@@ -402,6 +403,7 @@
         try { d.painted?.(res, pageApi()); } catch (e) { console.error(e); } // une liste qui ajoute un mot sous son tableau (ex. 🔀 « 4 doublons fondus »)
         try { ext.connexions?.listRowsPainted?.(res, cur.rows, {d, total: cur.total}); } catch (e) { console.error(e); } // 📥 cases « Tu choisis des lignes… » (heritage-connexions.js)
         try { ext.listesPersonnes?.rowsPainted?.(res, cur.rows, {d}); } catch (e) { console.error(e); } // 👤 « dans ta base : … », 🔗 Relier à une fiche (app-listes-personnes.js)
+        try { ext.donneesPlus?.rowsPainted?.(res, cur.rows, pageApi()); } catch (e) { console.error(e); } // 🔎 marques, 📝 ⚠️ 📖, ✋ mes lignes (app-donnees-plus.js)
     }
     function paintMore() {
         const host = ws()?.querySelector('[data-ld-more-host]'); if (!host) return;

@@ -71,6 +71,7 @@
             <form class="fam-search" data-fam-search role="search"><input type="search" name="q" placeholder="${esc(t('Chercher un nom…'))}" aria-label="${esc(t('Chercher un nom…'))}" autocomplete="off"><button type="submit">${esc(t('Chercher'))}</button></form>
             ${a ? `<div class="fam-me"><span class="fam-who">${esc(a.name)} · ${esc(t(ROLE[a.role] || a.role))}</span>
                 ${a.can_propose ? `<button type="button" class="fam-link" data-fam-mine>${esc(t('📋 Mes propositions'))}</button>` : ''}
+                <button type="button" class="fam-link" data-fam-lists>${esc(t('📊 Listes partagées'))}</button>
                 <button type="button" class="fam-link" data-fam-logout>${esc(t('Se déconnecter'))}</button></div>` : ''}</header>`;
     };
     const page = inner => { root.innerHTML = head() + `<div class="fam-page">${inner}</div>`; };
@@ -135,6 +136,7 @@
         const m = h.match(/^#p=(\d+)$/);
         if (m) return showPerson(Number(m[1]));
         if (h === '#mes') return showMine();
+        if (h === '#listes') return showLists();
         if (S.state?.home) return showPerson(S.state.home);
         page(`<section class="fam-card"><p>${esc(t('Cherche un nom pour commencer.'))}</p></section>`);
         root.querySelector('[data-fam-search] input')?.focus();
@@ -269,11 +271,23 @@
                 ${x.status === 'attente' ? `<button type="button" class="fam-link" data-fam-withdraw="${Number(x.id)}">${esc(t('Retirer'))}</button>` : ''}</li>`).join('')}</ul>` : `<p class="fam-muted">${esc(t('Aucune proposition pour l’instant.'))}</p>`}</section>`);
     }
 
+    /** 📊 les listes de données partagées depuis l'ordinateur (lecture seule ; le serveur retire toute ligne qui nomme une personne vivante) */
+    async function showLists() {
+        let d;
+        try { d = await call('listes'); } catch (e) { if (!e.silent) toast(e.message, {kind: 'error'}); return; }
+        page(`<section class="fam-card fam-lists"><h1>${esc(t('📊 Listes partagées'))}</h1>
+            ${d.lists.length ? d.lists.map(l => `<article class="fam-list"><h2>${esc(l.name)}</h2>${l.filters ? `<p class="fam-muted">${esc(l.filters)}</p>` : ''}
+                <div class="fam-tw"><table><thead><tr>${l.cols.map(c => `<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>${l.rows.map(r => `<tr>${l.cols.map((c, i) => `<td>${esc(r[i] ?? '')}</td>`).join('')}</tr>`).join('')}</tbody></table></div>
+                ${l.sources.length ? `<p class="fam-muted">${esc(t('Sources et licences :'))} ${l.sources.map(s => esc([s.source, s.licence].filter(Boolean).join(' — '))).join(' · ')}</p>` : ''}</article>`).join('')
+            : `<p class="fam-muted">${esc(t('Aucune liste partagée pour l’instant.'))}</p>`}</section>`);
+    }
+
     /* ═════ les gestes ═════ */
     root.addEventListener('click', async e => {
         const tg = e.target;
         if (tg.closest('[data-fam-home]')) { e.preventDefault(); location.hash = ''; route(); return; }
         if (tg.closest('[data-fam-mine]')) { location.hash = '#mes'; return; }
+        if (tg.closest('[data-fam-lists]')) { location.hash = '#listes'; return; }
         if (tg.closest('[data-fam-logout]')) { try { await call('logout', {body: {}}); } catch (_) {} S.state = await call('state').catch(() => S.state); showLogin(); return; }
         const ed = tg.closest('[data-fam-edit]'); if (ed) { factEditor(ed.dataset.famEdit); return; }
         if (tg.closest('[data-fam-add]')) { addEditor(''); return; }

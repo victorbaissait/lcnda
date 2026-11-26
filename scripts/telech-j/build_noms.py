@@ -2,7 +2,7 @@
 #   python3 -I scripts/telech-j/build_noms.py assets/data [noms|fusions]
 #  🏷 tj-noms     les noms officiels datés (P1448 avec début P580 et/ou fin P582) des lieux de ~85 pays (la France est déjà dans
 #                 assets/data/wikidata/oldnames.json.gz) ; et, pour les villes de plus de 30 000 habitants, leurs noms en français,
-#                 allemand, anglais, italien, espagnol, polonais et latin (libellés et alias) : Presbourg, Breslau, Lemberg, Cracovie…
+#                 allemand, polonais et latin (libellés et alias) : Presbourg, Breslau, Lemberg, Cracovie…
 #  🔀 tj-fusions  les communes disparues dans une fusion (P576 fin + P1366 remplacé par) de 18 pays d'Europe : ce que donnent les
 #                 registres nationaux (Suisse OFS, Espagne INE, Pays-Bas…), vu par Wikidata ; les registres restent en lien.
 # Le service de requêtes est limité : une requête à la fois, une pause longue (wm.py, TJ_WDQS_GAP) ; les pays sont groupés, et un
@@ -25,8 +25,11 @@ C = dict(DE='Q183', PL='Q36', CZ='Q213', SK='Q214', AT='Q40', HU='Q28', CH='Q39'
          BJ='Q962', TG='Q945', GN='Q1006', BF='Q965', NE='Q1032', TD='Q657', GA='Q1000', DJ='Q977', KM='Q970', SC='Q1042', MC='Q235', AD='Q228',
          LI='Q347', CU='Q241', DO='Q786', PE='Q419', CO='Q739', VE='Q717', PY='Q733', BO='Q750', )
 ALONE = ['US', 'DE', 'RU', 'IT', 'ES', 'PL', 'GB', 'CA', 'BR', 'UA', 'CZ', 'AT', 'HU', 'NL', 'BE', 'CH']
+# trop lourds pour une requête avec libellés (le service coupe à 60 s) : directement sans libellés, puis libellés à part
+HEAVY = {'DE', 'CZ', 'US'}
 FUSION = ['CH', 'ES', 'NL', 'BE', 'DE', 'IT', 'AT', 'LU', 'PT', 'DK', 'CZ', 'SK', 'PL', 'HU', 'SE', 'NO', 'FI', 'SI']
 LANGS = ['fr', 'de', 'en', 'it', 'es', 'pl', 'la']
+XLANGS = {'fr', 'de', 'pl', 'la'}  # les autres noms gardés : français, allemand, polonais, latin (ceux des actes et des registres)
 
 
 def groups(codes, size=8):
@@ -56,6 +59,8 @@ def run(q_of, codes, light=None):
         g = todo.pop(0)
         vals = ' '.join('wd:' + C[c] for c in g)
         try:
+            if light and len(g) == 1 and g[0] in HEAVY and not wm.cached_sparql(q_of(vals)):
+                raise RuntimeError('trop lourd avec les libellés : directement sans')
             res = wm.sparql(q_of(vals))
             print(f'  {",".join(g)} : {len(res)} réponses', flush=True)
             out += res
@@ -82,7 +87,17 @@ def run(q_of, codes, light=None):
 
 CC_OF = {v: k for k, v in C.items()}
 g = lambda r, k: r.get(k, {}).get('value', '')  # noqa: E731
-JUNK = re.compile(r'(?i)(\d|\bville de\b|\bcity of\b|\bstadt\b|\bcittà di\b|\bciudad de\b|\bmiasto\b|^[A-Z]{2,3}-|\(|"|ville-lumi|capital)')
+JUNK = re.compile(r'(?i)(\d|\bville de\b|\bcity of\b|\bstadt\b|\bcittà di\b|\bciudad de\b|\bmiasto\b|^[A-Z]{2,3}-|\(|"|/|ville-lumi|capital|'
+                  r'\b(municipality|municipio|municipal|province|provincia|prowincja|district|distretto|distrito|partido|canton|kanton|county|comté|oblast|obwód|'
+                  r'region|région|regione|región|department|département|dipartimento|departamento|kreis|landkreis|powiat|gmina|bezirk|raion|rajon|okres|okrug|'
+                  r'comune|commune|gemeinde|città|ciudad|prefecture|governorate|gouvernorat|voivodeship|województwo|metropolitan|urban|area|borough|parish|'
+                  r'township|island|isla|île|insel|valley|river|lake|airport|dioc\w*|archdioc\w*|archidioc\w*|dioecesis|vicariat\w*|eparch\w*|condado|hrabstwo|comté|okręg|óblast|'
+                  r'municipalité|municipalità|bashkia|arrondissement|état|state|estado|stato|land|wahlkreis|woiwodschaft|rejon|metropolregion|hromada|raïon|paroecia|regio)\b|,)')
+import unicodedata as _ud
+
+
+def _fold(t):
+    return ''.join(c for c in _ud.normalize('NFD', t.lower()) if not _ud.combining(c)).replace('ß', 'ss')
 
 
 def noms():
@@ -103,7 +118,7 @@ def noms():
         la, lo = wm.point(g(r, 'c'))
         now = g(r, 'lab') or g(r, 'en')
         n = g(r, 'n').strip()
-        if la is None or not now or not n or (q, n, 'o') in seen or re.match(r'^Q\d+$', now):
+        if la is None or not now or not n or n.startswith('http') or (q, n, 'o') in seen or re.match(r'^Q\d+$', now):
             continue
         a, b = wm.year(g(r, 's')), wm.year(g(r, 'e'))
         if b is None and n.lower() == now.lower():
@@ -120,18 +135,23 @@ def noms():
         lang = r.get('v', {}).get('xml:lang', '')
         if la is None or not now or not v or re.match(r'^Q\d+$', now) or len(v) > 40 or len(v) < 3 or len(v.split()) > 3 or JUNK.search(v):
             continue
+        if lang not in XLANGS or not now[:1].isupper() or not v[:1].isupper():  # seulement les noms qu'on lit dans les registres d'ici ; pas les comtés, diocèses… (« comté de … »)
+            continue
         d = names.setdefault(q, {'now': now, 'la': la, 'lo': lo, 'cc': CC_OF.get(wm.qid(g(r, 'cty')), ''), 'v': {}})
         d['v'].setdefault(v, set()).add(lang)
+    off = {}
+    for x in rows:
+        off.setdefault(x[0], set()).add(_fold(x[2]))
     for q, d in names.items():
         for v, langs in d['v'].items():
-            if v.lower() == d['now'].lower() or (q, v, 'o') in seen or (q, v, 'x') in seen:
+            if _fold(v) == _fold(d['now']) or (q, v, 'o') in seen or (q, v, 'x') in seen or _fold(v) in off.get(q, ()):
                 continue
             seen.add((q, v, 'x'))
             rows.append([q, d['now'], v, 'x', None, None, d['la'], d['lo'], d['cc'], ' '.join(l for l in LANGS if l in langs)])
     rows.sort(key=lambda r: (r[8], r[1], r[4] or 0, r[2]))
     meta = {**WD, 'url': 'https://www.wikidata.org/wiki/Property:P1448', 'built': wm.today(),
             'what': 'Noms de lieux d’autrefois hors de France (Wikidata) : noms officiels datés (P1448 + P580/P582) ; pour les villes de plus de '
-                    '30 000 habitants, leurs autres noms en français, allemand, anglais, italien, espagnol, polonais, latin (libellés et alias, sans date)',
+                    '30 000 habitants, leurs autres noms en français, allemand, polonais et latin (libellés et alias, sans date)',
             'countries': sorted(C), 'kinds': {'o': 'nom officiel daté', 'x': 'autre nom ou nom en une autre langue (sans date)'},
             'fields': ['q', 'now', 'name', 'k', 'from', 'to', 'lat', 'lon', 'cc', 'langs'], 'rows': rows}
     size = wm.write_gz(OUT, 'tj-noms.json.gz', meta)
