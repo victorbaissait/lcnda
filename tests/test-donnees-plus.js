@@ -255,7 +255,8 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             await p.click('[data-dp-share]'); await p.waitForSelector('dialog[open] [data-dp-prev] table', {timeout: 20000});
             await p.waitForFunction(() => /1 lignes qui parlent|1 ligne/.test(document.querySelector('dialog[open] [data-dp-sd]')?.textContent || ''), null, {timeout: 10000});
             assert.match(await p.textContent('dialog[open] [data-dp-sd]'), /personne vivante/);
-            assert.strictEqual(await p.getAttribute('dialog[open] [data-dp-aud] [data-a="membres"]', 'aria-pressed'), 'true');
+            assert.strictEqual(await p.locator('dialog[open] [data-dp-aud]').count(), 0, 'plus de choix « Tout le monde » : un seul public');
+            assert.match(await p.textContent('dialog[open] .dp-goes ~ .dp-row'), /membres de la famille qui ont un compte/);
             await p.click('dialog[open] button[type="submit"]'); await sleep(800);
             const sh = await B.api('dplus_shares'); assert.strictEqual(sh.shares.length, 1); assert.strictEqual(sh.shares[0].rows, 6);
             const lists = await p.evaluate(async () => { const r = await fetch('api.php?action=dplus_shares'); return r.ok; }); assert.ok(lists);

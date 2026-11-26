@@ -16,7 +16,7 @@
  *  🎞 Sa vie, année par année (17) : 3,5 s par année (lent / normal / vite), sans musique ; Espace, ← →, Échap ; ⛶ plein écran ;
  *     « ✏️ Ouvrir dans 🎤 Présentation » : la même chose en présentation modifiable (heritage-keynote.js : keynoteFromText ; enregistrée
  *     par l'éditeur dans lib/slideshows.php, mode « keynote » ; export PDF, vidéo, .pptx depuis l'éditeur).
- *  🔗 Partager sur le site familial (18) : l'aperçu de ce qui part et de ce qui ne part pas ; membres du site au départ, « Tout le monde »
+ *  🔗 Partager sur le site familial (18) : l'aperçu de ce qui part et de ce qui ne part pas ; visible par les membres de la famille qui ont un compte (« Tout le monde » retiré : c'était pareil)
  *     demande une confirmation ; jamais les vivants (le serveur les retire encore, et à chaque lecture par famille.php) ; ni mes notes ni mes
  *     lignes sauf si cochées.
  *  💽 Place prise (19) et 🕰 Versions (21) : dans Réglages → 🗂 Données (app-listes-maj.js), à côté de ce qui existe : la place par
@@ -339,7 +339,7 @@
         try { rows = (await pg.allRows()).slice(0, 500); } catch (e) { return toast(e.message, 'error'); }
         const t2 = pg.table2d(rows), cols0 = t2[0] || [], body0 = t2.slice(1);
         const notes = P().notes?.(d.id) || {}, mine = P().mine?.(d.id) || [];
-        let aud = P().opt?.('shareAud') || 'membres', withNotes = !!P().opt?.('shareNotes'), withMine = false, preview = null;
+        const aud = 'membres'; let withNotes = !!P().opt?.('shareNotes'), withMine = false, preview = null;
         const sources = [(() => { const sp = splitSource(d.source); return {source: sp.name || T(d.label), licence: sp.lic, url: d.sourceUrl || ''}; })()];
         const filters = pg.critSummary ? (() => { try { return String(pg.critSummary() || ''); } catch (_) { return ''; } })() : P().critLabel?.(d, pg.state()) || '';
         const build = () => { const cols = [...cols0, ...(withNotes ? [T('Note')] : [])]; const rs = body0.map((r, i) => [...r.map(v => String(v ?? '')), ...(withNotes ? [notes[P().rkey(pg.d, rows[i])]?.note || ''] : [])]);
@@ -349,7 +349,7 @@
             body: `<div class="dp-goes"><div class="dp-ok-box"><b>${esc(T('Ce qui part'))}</b><ul><li data-dp-sn></li><li>${esc(T('Colonnes : {c}', {c: cols0.join(', ')}))}</li><li>${esc(T('Sources et licences, en bas'))}</li></ul></div>
                 <div class="dp-no-box"><b>${esc(T('Ce qui ne part pas'))}</b><ul><li data-dp-sd></li><li>${esc(T('Tes notes 📝 · tes lignes ✋ · tes ⚠️ (cases ci-dessous)'))}</li></ul></div></div>
                 <div class="dp-row"><label class="dp-chk"><input type="checkbox" data-dp-sh="notes" ${withNotes ? 'checked' : ''}> ${esc(T('joindre mes notes'))}</label><label class="dp-chk"><input type="checkbox" data-dp-sh="mine"> ${esc(T('joindre mes lignes ajoutées'))}</label>
-                <span class="segmented dp-seg" role="group" aria-label="${esc(T('Qui voit'))}" data-dp-aud>${[['membres', 'Membres du site'], ['tous', 'Tout le monde']].map(([v, l]) => `<button type="button" data-a="${v}" aria-pressed="${aud === v}">${esc(T(l))}</button>`).join('')}</span></div>
+                <span class="dp-chk muted">👪 ${esc(T('Visible par les membres de la famille qui ont un compte'))}</span></div>
                 ${acc ? '' : `<p class="dp-warn small">${esc(T('Aucun compte du site familial pour l’instant : la liste attendra qu’un proche ait un compte (Réglages → 👪 Site familial).'))}</p>`}
                 <div class="dp-visitor"><div class="dp-vh"><span>👁 ${esc(T('Aperçu : ce que voit un membre'))}</span><span>${esc(T('site familial · lecture seule'))}</span></div><div class="data-table-wrap" data-dp-prev></div></div>
                 <p class="muted small">${esc(T('Retirer plus tard : ici, « Mes partages », ou en publiant à nouveau.'))}</p><div data-dp-mysh></div>`,
@@ -361,12 +361,9 @@
                     dl.querySelector('[data-dp-sd]').textContent = preview.dropped ? T('{n} lignes qui parlent d’une personne vivante ou confidentielle : retirées', {n: nf(preview.dropped)}) : T('Rien sur les personnes vivantes (jamais).');
                     dl.querySelector('[data-dp-prev]').innerHTML = `<table class="data-table"><thead><tr>${b.cols.map(c => `<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>${b.rows.slice(0, 8).map(r => `<tr>${r.map(v => `<td>${esc(v)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
                 };
-                const mysh = async () => { let r; try { r = await api('dplus_shares'); } catch (_) { return; } const box = dl.querySelector('[data-dp-mysh]'); box.innerHTML = r.shares.length ? `<div class="dp-subh">${esc(T('Mes partages'))}</div><ul class="dp-shl">${r.shares.map(s => `<li><span>${esc(s.name)} <small class="muted">${esc(T('{n} lignes', {n: nf(s.rows)}))} · ${esc(s.audience === 'tous' ? T('tout le monde') : T('les membres'))}</small></span><button type="button" class="dp-x" data-dp-unshare="${s.id}" aria-label="${esc(T('Retirer ce partage'))}" title="${esc(T('Retirer ce partage'))}">×</button></li>`).join('')}</ul>` : ''; };
+                const mysh = async () => { let r; try { r = await api('dplus_shares'); } catch (_) { return; } const box = dl.querySelector('[data-dp-mysh]'); box.innerHTML = r.shares.length ? `<div class="dp-subh">${esc(T('Mes partages'))}</div><ul class="dp-shl">${r.shares.map(s => `<li><span>${esc(s.name)} <small class="muted">${esc(T('{n} lignes', {n: nf(s.rows)}))} · ${esc(T('les membres'))}</small></span><button type="button" class="dp-x" data-dp-unshare="${s.id}" aria-label="${esc(T('Retirer ce partage'))}" title="${esc(T('Retirer ce partage'))}">×</button></li>`).join('')}</ul>` : ''; };
                 paint(); mysh();
                 dl.addEventListener('change', e => { const c = e.target.closest('[data-dp-sh]'); if (!c) return; if (c.dataset.dpSh === 'notes') withNotes = c.checked; else withMine = c.checked; paint(); });
-                dl.querySelector('[data-dp-aud]').addEventListener('click', async e => { const b = e.target.closest('[data-a]'); if (!b) return;
-                    if (b.dataset.a === 'tous' && aud !== 'tous') { const ok = A().confirmBox ? await A().confirmBox(T('Toute personne qui ouvre la page de la famille verra cette liste (jamais les personnes vivantes).'), {title: T('Partager avec tout le monde ?'), okLabel: T('Tout le monde'), danger: false}) : true; if (!ok) return; }
-                    aud = b.dataset.a; dl.querySelectorAll('[data-dp-aud] button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); });
                 dl.addEventListener('click', async e => { const x = e.target.closest('[data-dp-unshare]'); if (!x) return;
                     try { const r = await post('dplus_share_remove', {id: Number(x.dataset.dpUnshare)}); mysh(); A().undoToast?.(T('Partage retiré du site familial'), {undo: async () => { await post('dplus_share_restore', {share: r.share}); mysh(); }}); } catch (er) { toast(er.message, 'error'); } });
             },

@@ -1352,7 +1352,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-editeurs.js?v=4" defer></script>
 <script src="assets/js/app-versions.js?v=5" defer></script>
 <script src="assets/js/app-formats.js?v=1" defer></script>
-<script src="assets/js/app-pages.js?v=18" defer></script>
+<script src="assets/js/app-pages.js?v=19" defer></script>
 <script src="assets/js/app-access.js?v=20" defer></script>
 <script src="assets/js/app-mode-simple.js?v=16" defer></script>
 <script src="assets/js/app-sidegroups.js?v=15" defer></script>
@@ -1367,8 +1367,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-listes-maj.js?v=3" defer></script>
 <script src="assets/js/app-donnees-accueil.js?v=5" defer></script><!-- 📊 Récap des données et la question en français : Listes → 🧰 Données et l’onglet 📊 Données (un seul écran) -->
 <script src="assets/js/app-donnees-onglet.js?v=1" defer></script><!-- 📊 l’onglet Données : on y reste (thèmes, listes réunies, listes), sa colonne de gauche, ranger / masquer les thèmes -->
-<script src="assets/js/app-donnees-plus.js?v=3" defer></script><!-- 📊 Données, en plus : ⚙ Organiser le récap, Réglages → 📊 Données, ⭐ 🕘 🆕 💾 📊 👤 🕳 📝 ➕ ⚠️ 🔎 📶 -->
-<script src="assets/js/app-donnees-plus-outils.js?v=2" defer></script><!-- ⚖️ 🗺 🕳 📖 📜 📄 🎞 🔗 💽 🕰 -->
+<script src="assets/js/app-donnees-plus.js?v=5" defer></script><!-- 📊 Données, en plus : ⚙ Organiser le récap, Réglages → 📊 Données, ⭐ 🕘 🆕 💾 📊 👤 🕳 📝 ➕ ⚠️ 🔎 📶 -->
+<script src="assets/js/app-donnees-plus-outils.js?v=4" defer></script><!-- ⚖️ 🗺 🕳 📖 📜 📄 🎞 🔗 💽 🕰 -->
 <script src="assets/js/app-listes-personnes.js?v=3" defer></script>
 <script src="assets/js/app-listes-perso-core.js?v=1" defer></script>
 <script src="assets/js/app-listes-perso.js?v=2" defer></script>

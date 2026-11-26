@@ -218,7 +218,7 @@ function dplus_clean_body(array $b, array $hidden, int &$dropped = 0): array
 
 function dplus_share(PDO $pdo, array $d): array
 {
-    $aud = in_array($d['audience'] ?? '', ['membres', 'tous'], true) ? (string) $d['audience'] : 'membres';
+    $aud = 'membres'; // un seul public : les membres du site familial (comptes) — « Tout le monde » retiré, c'était la même chose
     if (!is_array($d['cols'] ?? null) || !$d['cols']) { throw new LcndaBadInput('Rien à partager.'); }
     $dropped = 0;
     $body = dplus_clean_body($d, dplus_hidden_names($pdo), $dropped);

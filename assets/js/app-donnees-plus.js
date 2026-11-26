@@ -81,7 +81,7 @@
         {n: 15, g: 3, ic: '📜', name: 'Crédits et licences', why: 'Toutes les sources et leurs licences, par thème.', lock: true},
         {n: 16, g: 3, ic: '📄', name: 'Livret « Le monde de mes ancêtres »', why: 'Pour une personne ou une branche, à imprimer ou en PDF.', opts: [seg('bookFormat', 'Format', ['A4', 'A5'])]},
         {n: 17, g: 3, ic: '🎞', name: 'Diaporama de sa vie', why: 'Année par année, ce que les données disent autour d’elle.', opts: [seg('speed', 'Vitesse', ['6000', '3500', '1800'], ['Lent', 'Normal', 'Vite'])]},
-        {n: 18, g: 3, ic: '🔗', name: 'Partager sur le site familial', why: 'Une liste filtrée, avec un aperçu de ce qui part. Jamais les vivants.', opts: [seg('shareAud', 'Par défaut pour', ['membres', 'tous'], ['les membres', 'tout le monde']), tog('shareNotes', 'joindre mes notes')]},
+        {n: 18, g: 3, ic: '🔗', name: 'Partager sur le site familial', why: 'Une liste filtrée, avec un aperçu de ce qui part. Jamais les vivants.', opts: [tog('shareNotes', 'joindre mes notes')]},
         {n: 19, g: 4, ic: '💽', name: 'Place prise', why: 'La place de chaque pack, et ceux jamais ouverts qu’on peut retirer.', opts: [num('warnGo', 'Prévenir sous', 'Go libres', 0, 500)]},
         {n: 20, g: 4, ic: '📶', name: 'Badge « sans Internet »', why: 'Sur chaque liste : marche sans Internet, sauf les photos, ou pas.'},
         {n: 21, g: 4, ic: '🕰', name: 'Versions des packs', why: 'Revenir à la version gardée d’un pack, voir ce qui a changé.'}];
@@ -471,7 +471,7 @@
         if (t.closest('[data-dp-forget]')) { const done = undoable(T('Récents oubliés'), [K_REC], rerenderRecap); writeJ(K_REC, []); done(); return rerenderRecap(); }
         if ((b = t.closest('[data-dp-ask]'))) return H().ask?.(b.dataset.dpAsk);
         if ((b = t.closest('[data-dp-unq]'))) { const q = b.dataset.dpUnq, done = undoable(T('Question oubliée'), [K_Q], rerenderRecap); writeJ(K_Q, savedQs().filter(x => x.q !== q)); done(); return rerenderRecap(); }
-        if (t.closest('[data-dp-seen]')) { const done = undoable(T('Tout est vu'), [K_SEEN], rerenderRecap); markSeen(); done(); return rerenderRecap(); }
+        if (t.closest('[data-dp-seen]')) { const done = undoable(T('Tout est vu'), [K_SEEN], rerenderRecap); return markSeen().then(() => { done(); rerenderRecap(); }); } // attendre l'enregistrement (avant : le récap se redessinait avec l'ancien « vu »)
         if ((b = t.closest('[data-dp-newgo]'))) { const x = b.dataset.dpNewgo; if (x.startsWith('theme:')) { const k = TH()?.keyOf?.(x.slice(6)); if (k) E().openKey?.(k); return; } return openList(x); }
         if (t.closest('[data-dp-missgo]')) return ext.donneesPlusOutils?.missing?.();
         if (t.closest('[data-dp-disk]')) return ext.donneesPlusOutils?.disk?.();
