@@ -50,7 +50,7 @@ $pdo->commit();
 $t0 = microtime(true); $d = research_gaps_data($pdo, ['gen' => 30]); $dt = microtime(true) - $t0;
 $t1 = microtime(true); $d12 = research_gaps_data($pdo, ['gen' => 12]);
 $lin = gaps_positions($pdo, $id[1], 30, 500);
-$maxGen = max(array_map(fn($i) => $i['generation'], $d['items']));
+$all = research_gaps_data($pdo, ['gen' => 30, 'limit' => 20000]); $maxGen = max(array_map(fn($i) => $i['generation'], $all['items']));
 echo json_encode(['dt' => $dt, 'gens' => $d['generations'], 'ancestors' => $d['ancestors'], 'total' => $d['total'], 'shown' => count($d['items']), 'maxGen' => $maxGen,
     'a12' => $d12['ancestors'], 'trunc' => $lin['truncated'], 'n500' => count(array_unique($lin['positions'])), 'sosa3000' => array_values(array_filter($d['items'], fn($i) => $i['person_id'] === $id[3000]))[0]['sosa'] ?? 0,
     'parents12' => count(array_filter($d12['items'], fn($i) => $i['kind'] === 'parents' && $i['generation'] === 12))]);
@@ -64,7 +64,7 @@ echo json_encode(['dt' => $dt, 'gens' => $d['generations'], 'ancestors' => $d['a
     await t('30 générations sur une grosse lignée (4 000 ancêtres, implexe) : rapide, toutes les générations, limite de personnes', async () => {
         const r = bigTree();
         assert.equal(r.gens, 30);
-        assert.ok(r.dt < 8, `trop lent : ${r.dt.toFixed(2)} s`);
+        assert.ok(r.dt < 8, `trop lent : ${r.dt.toFixed(2)} s`); console.log(`  (30 générations, ${r.ancestors} ancêtres : ${r.dt.toFixed(2)} s)`);
         assert.ok(r.ancestors >= 4095 + 17, 'les 4 095 de la lignée et la branche haute : ' + r.ancestors);
         assert.equal(r.maxGen, 30, 'jusqu’à la 30e génération');
         assert.equal(r.shown, Math.min(600, r.total), '600 lignes d’abord, le total à côté');

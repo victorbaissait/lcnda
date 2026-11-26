@@ -37,6 +37,7 @@
         ['widget', '📊', 'Widget ou graphique à soi', 'Ceux de l’Éditeur de widgets / de graphiques'],
         ['photomap', '📸', 'Carte de photos', 'Une de tes cartes de photos (ou toutes), avec sa période'], // heritage-photomaps.js
         ['auto', '🤖', 'Les personnes de la base qui…', 'Tenu à jour tout seul : un métier, un lieu, une période'], // lib/topic_sheets.php (topic_auto_people)
+        ['data', '📊', 'Données', 'Une liste de données : séismes, batailles, Tour de France… avec filtres, ou une question'], // 📊 plus bas : listes de données (app-listes-donnees.js), à jour ou figées
     ];
     const kindOf = t => KINDS.find(k => k[0] === t) || KINDS[0];
     const WIDTHS = [['12', 'toute la largeur'], ['6', '½'], ['4', '⅓'], ['3', '¼'], ['8', '⅔'], ['9', '¾']];
@@ -135,7 +136,7 @@
     /** Les blocs vidés de leur contenu : même ordre, mêmes titres, largeurs, couleurs et réglages (écran, widget, disposition des images) */
     const emptyBlocks = (blocks, keepContent = false) => JSON.parse(JSON.stringify(blocks)).map(b => {
         const o = {...b, id: uid()};
-        if (!keepContent) { if ('text' in o) o.text = ''; if (o.source !== undefined) o.source = ''; if (o.caption !== undefined) o.caption = ''; if (o.note !== undefined) o.note = ''; if (Array.isArray(o.rows)) o.rows = []; if (Array.isArray(o.ids)) o.ids = []; }
+        if (!keepContent) { if ('text' in o) o.text = ''; if (o.source !== undefined) o.source = ''; if (o.caption !== undefined) o.caption = ''; if (o.note !== undefined) o.note = ''; if (Array.isArray(o.rows)) o.rows = []; if (Array.isArray(o.ids)) o.ids = []; if (o.snap) { delete o.snap; o.mode = 'live'; } }
         return o;
     });
     async function newSheet() {
@@ -229,11 +230,12 @@
             }
             case 'diagram': return Number(b.diagram) && ext.diagramEmbedHtml ? ext.diagramEmbedHtml(b.diagram) : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📭</span><span class="empty-line-text">Aucun diagramme choisi : ✎ pour en choisir un.</span></p>';
             case 'photomap': return `<div class="pm-widget" data-fi-photomap="${esc(JSON.stringify(b.config || {}))}">${window.LCNDA_UI.spinner('Chargement de la carte…')}</div>`;
+            case 'data': return dBody(b);
             case 'widget': return b.widget ? `<div class="h-fi-widget" data-fi-widget="${esc(b.widget)}">${window.LCNDA_UI.spinner('Calcul…')}</div>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🧩</span><span class="empty-line-text">Aucun widget choisi : ✎ pour en choisir un.</span></p>';
             default: return '';
         }
     }
-    const titleOf = b => b.title || (b.type === 'screen' && ext.appScreen ? ext.appScreen.label(b.target) : b.type === 'widget' ? (ext.customWidgetDefs?.()[b.widget]?.name || 'Widget') : b.type === 'diagram' ? ((ext.diagramItems?.() || []).find(x => Number(x[0]) === Number(b.diagram))?.[1].replace(/^\S+\s/, '') || 'Diagramme') : kindOf(b.type)[2]);
+    const titleOf = b => b.title || (b.type === 'data' ? dTitle(b) : b.type === 'screen' && ext.appScreen ? ext.appScreen.label(b.target) : b.type === 'widget' ? (ext.customWidgetDefs?.()[b.widget]?.name || 'Widget') : b.type === 'diagram' ? ((ext.diagramItems?.() || []).find(x => Number(x[0]) === Number(b.diagram))?.[1].replace(/^\S+\s/, '') || 'Diagramme') : kindOf(b.type)[2]);
     function renderSheet(token) {
         const c = cur;
         const blocks = c.blocks.map((b, i) => {
@@ -261,12 +263,13 @@
         const ws = A().$('#workspace');
         ws.querySelectorAll('[data-fi-photomap]').forEach(el => { let c = {}; try { c = JSON.parse(el.dataset.fiPhotomap || '{}'); } catch (_) {} if (ext.photomapEmbed) ext.photomapEmbed(el, c); else el.innerHTML = '<p class="muted">Carte de photos indisponible.</p>'; });
         ws.querySelectorAll('[data-fi-widget]').forEach(el => { if (ext.renderCustomWidgetInto) ext.renderCustomWidgetInto(el, el.dataset.fiWidget).catch?.(() => { el.innerHTML = '<p class="muted">Ce widget n’existe plus.</p>'; }); else el.innerHTML = '<p class="muted">Widget indisponible.</p>'; });
+        dMount(ws, c); // 📊 les blocs « Données » à jour : la liste relue à chaque ouverture
         A().bindTableLinks?.();
         pageFind(ws.querySelector('.h-fi'));
         ws.querySelector('.h-fi').addEventListener('click', async e => {
             const t = e.target.closest('button'); if (!t) return;
             const d = t.dataset, i = Number(d.fiUp ?? d.fiDown ?? d.fiEdit ?? d.fiDel ?? d.fiDup ?? -1);
-            if (kiosk() && (d.fiMode !== undefined || d.fiAdd !== undefined || d.fiProps !== undefined || d.fiEdit !== undefined || d.fiDelete !== undefined || d.fiCopy !== undefined || d.fiUse !== undefined || d.fiVersions !== undefined)) return toast(i18n('Mode consultation : rien ne peut être modifié.'), 'error');
+            if (kiosk() && (d.fiDfreeze !== undefined || d.fiMode !== undefined || d.fiAdd !== undefined || d.fiProps !== undefined || d.fiEdit !== undefined || d.fiDelete !== undefined || d.fiCopy !== undefined || d.fiUse !== undefined || d.fiVersions !== undefined)) return toast(i18n('Mode consultation : rien ne peut être modifié.'), 'error');
             if (d.fiMode !== undefined) { editing = !editing; return renderSheet(token); }
             if (d.fiAdd !== undefined) return addBlock();
             if (d.fiProps !== undefined) return editProps();
@@ -274,6 +277,8 @@
             if (d.fiExport !== undefined) return exportMenu(t);
             if (d.fiVersions !== undefined) { t.closest('details')?.removeAttribute('open'); return openVersions(); }
             if (d.fiCiteGo !== undefined) return citeGo(d.fiCiteGo);
+            if (d.fiDfreeze !== undefined) return dFreeze(d.fiDfreeze);
+            if (d.fiDopen !== undefined) return dOpenList(c.blocks.find(x => x.id === d.fiDopen), c);
             if (d.fiCopy !== undefined) return duplicateSheet();
             if (d.fiUse !== undefined) { const r = await post('save_topic_sheet', {title: 'Nouvelle fiche', subtitle: '', icon: c.icon, color: c.color, blocks: emptyBlocks(c.blocks, true)}); toast('Fiche créée avec ce modèle : change son titre dans « ⚙️ Titre, icône, couleur ».'); S().ficheId = Number(r.result?.id || r.id); editing = true; return A().setModule('fiches'); }
             if (d.fiDelete !== undefined) { // R7 : supprimée tout de suite, « ↶ Annuler » la remet (même numéro, images et étiquettes)
@@ -329,6 +334,7 @@
             else if (b.type === 'dates') out.push((b.rows || []).map(r => `- **${r.date}** — ${r.text}`).join('\n'));
             else if (b.type === 'links') out.push((b.rows || []).map(r => `- ${r.url ? `[${r.label || r.url}](${r.url})` : r.label}${r.note ? ` — ${r.note}` : ''}`).join('\n'));
             else if (b.type === 'people' || b.type === 'auto') out.push((b.ids || []).map(i => cur.people?.[i]).filter(Boolean).map(p => `- ${`${p.first_name || ''} ${p.last_name || ''}`.trim()}${p.birth_year || p.death_year ? ` (${p.birth_year || '?'}–${p.death_year || '?'})` : ''}`).join('\n'));
+            else if (b.type === 'data') out.push(dMarkdown(b));
             else if (b.type === 'images') out.push(mediaOf(b).map(m => `![${m.title || ''}](media/${encodeURIComponent(m.filename || '')})`).join('\n') + (b.caption ? `\n\n_${b.caption}_` : ''));
             else out.push(i18n('_(écran de l’app : à voir dans LCNDA)_'));
         });
@@ -341,10 +347,11 @@
             let inner = '';
             if (b.type === 'images') inner = mediaOf(b).filter(m => /\.(jpe?g|png|gif|webp)$/i.test(m.filename || '')).map(m => `<img src="${esc(abs('media/' + encodeURIComponent(m.filename)))}" alt="${esc(m.title || '')}">`).join('') + (b.caption ? `<p><i>${esc(b.caption)}</i></p>` : '');
             else if (['screen', 'widget', 'diagram', 'photomap'].includes(b.type)) inner = `<p><i>${esc(i18n('(écran de l’app : à voir dans LCNDA)'))}</i></p>`;
+            else if (b.type === 'data') inner = dStatic(b);
             else inner = blockBody(b).replace(/<button[^>]*>/g, '<div class="p">').replace(/<\/button>/g, '</div>');
             return `<section><h3>${esc(titleOf(b))}</h3>${inner}</section>`;
         }).join('');
-        return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${esc(c.title)}</title><style>body{font-family:Georgia,serif;max-width:860px;margin:2rem auto;padding:0 16px;color:#111;line-height:1.5}h2{border-bottom:2px solid #111}img{max-width:100%;margin:4px 0}blockquote{border-left:3px solid #999;margin:0;padding-left:12px;font-style:italic}.p{margin:2px 0}@media (prefers-color-scheme:dark){body{background:#111;color:#eee}h2{border-color:#eee}}</style></head><body><h1>${esc(c.icon || '')} ${esc(c.title)}</h1>${c.subtitle ? `<p><i>${esc(c.subtitle)}</i></p>` : ''}${body}<footer><small>${esc(i18n('Fiche exportée de LCNDA le {d}', {d: new Date().toLocaleDateString('fr-FR')}))}</small></footer></body></html>`;
+        return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${esc(c.title)}</title><style>body{font-family:Georgia,serif;max-width:860px;margin:2rem auto;padding:0 16px;color:#111;line-height:1.5}h2{border-bottom:2px solid #111}img{max-width:100%;margin:4px 0}blockquote{border-left:3px solid #999;margin:0;padding-left:12px;font-style:italic}.p{margin:2px 0}${D_CSS}@media (prefers-color-scheme:dark){body{background:#111;color:#eee}h2{border-color:#eee}}</style></head><body><h1>${esc(c.icon || '')} ${esc(c.title)}</h1>${c.subtitle ? `<p><i>${esc(c.subtitle)}</i></p>` : ''}${body}<footer><small>${esc(i18n('Fiche exportée de LCNDA le {d}', {d: new Date().toLocaleDateString('fr-FR')}))}</small></footer></body></html>`;
     }
     function download(text, name, type) {
         const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], {type})); a.download = name;
@@ -368,6 +375,7 @@
         el.querySelector('[data-fi-embedopen]')?.addEventListener('click', () => { S().ficheId = Number(id); editing = false; A().setModule('fiches'); });
         el.querySelectorAll('[data-fi-widget]').forEach(w => { if (ext.renderCustomWidgetInto) ext.renderCustomWidgetInto(w, w.dataset.fiWidget).catch?.(() => {}); });
         el.querySelectorAll('[data-fi-photomap]').forEach(w => { let c = {}; try { c = JSON.parse(w.dataset.fiPhotomap || '{}'); } catch (_) {} ext.photomapEmbed?.(w, c); });
+        dMount(el, d);
         return d;
     };
     ext.fiches.list = async () => { await loadList(); return sheets.map(x => ({id: x.id, title: x.title, icon: x.icon})); };
@@ -392,10 +400,10 @@
     /* ─── Ajouter un bloc ─── */
     function addBlock() {
         ext.openDialog({eyebrow: 'FICHE', title: '＋ Ajouter un bloc', wide: true, submitLabel: 'Ajouter',
-            body: `<div class="h-fi-kinds">${KINDS.map(([k, ic, l, h], i) => `<label class="h-fi-tpl"><input type="radio" name="kind" value="${k}" ${i ? '' : 'checked'}><span>${ic}</span><strong>${esc(l)}</strong><small>${esc(h)}</small></label>`).join('')}</div>`,
+            body: `<div class="h-fi-kinds">${KINDS.map(([k, ic, l, h], i) => `<label class="h-fi-tpl"><input type="radio" name="kind" value="${k}" ${i ? '' : 'checked'}><span>${ic}</span><strong>${esc(i18n(l))}</strong><small>${esc(i18n(h))}</small></label>`).join('')}</div>`,
             onSubmit: form => {
                 const k = new FormData(form).get('kind') || 'text';
-                const b = {id: uid(), type: k, title: '', width: k === 'divider' || k === 'screen' ? '12' : '6', text: '', rows: [], ids: [], layout: 'grid', target: 'module:carte', height: 560};
+                const b = {id: uid(), type: k, title: '', width: k === 'divider' || k === 'screen' || k === 'data' ? '12' : '6', text: '', rows: [], ids: [], layout: 'grid', target: 'module:carte', height: 560};
                 setTimeout(() => editBlock(-1, b), 50);
             }});
     }
@@ -426,6 +434,7 @@
             <div class="form-grid"><label>${esc(i18n('Métier'))}<input name="occupation" value="${esc(b.occupation || '')}" maxlength="120" placeholder="${esc(i18n('ex. sabotier'))}"></label><label>${esc(i18n('Lieu'))}<input name="place" value="${esc(b.place || '')}" maxlength="120" placeholder="${esc(i18n('ex. Naves'))}"></label>
             <label>${esc(i18n('De l’année'))}<input name="from" type="number" min="0" max="2999" value="${b.from || ''}" placeholder="1800"></label><label>${esc(i18n('À l’année'))}<input name="to" type="number" min="0" max="2999" value="${b.to || ''}" placeholder="1900"></label>
             <label>${esc(i18n('Combien au plus'))}<input name="limit" type="number" min="5" max="300" value="${Number(b.limit) || 60}"></label><label>${esc(i18n('Note'))} <small>(${esc(i18n('facultatif'))})</small><input name="note" value="${esc(b.note || '')}" maxlength="2000"></label></div>`;
+        if (b.type === 'data') body = dEditorHtml(b);
         if (b.type === 'photomap') body = ext.photomapConfigHtml ? ext.photomapConfigHtml(b.config || {}) : '<p class="muted">Cartes de photos indisponibles.</p>';
         if (b.type === 'widget') {
             // 📈 le menu de choix commun (sorte « graph », tous mes widgets) ; le champ caché garde l'identifiant cw_…
@@ -436,6 +445,7 @@
         const onOpen = dlg => {
                 const root = dlg.querySelector('.h-dialog-body') || dlg;
                 ext.bindMediaEditor?.(root);
+                if (b.type === 'data') dBind(root, b);
                 root.addEventListener('picker-change', e => { if (e.detail.name === 'fi_person') root.dataset.fiPersonName = e.detail.item?.title || ''; });
                 root.addEventListener('picker-change', e => { const box = e.target.closest?.('[data-fi-widgetpk]'); if (box) { box.querySelector('input[name=widget]').value = e.detail.item?.uid || ''; const slot = root.querySelector('[data-sc-panelslot]'); if (slot) slot.innerHTML = ext.shortcuts?.panelHtml?.(e.detail.item?.uid || '') || ''; } });
                 root.addEventListener('click', e => {
@@ -458,8 +468,11 @@
                 if (b.type === 'widget') b.widget = f.widget || '';
                 if (b.type === 'photomap') b.config = ext.photomapConfigRead ? ext.photomapConfigRead(form) : {};
                 if (b.type === 'diagram') b.diagram = Number(f.diagram) || 0;
+                if (b.type === 'data' && await dRead(form, b) === false) return false;
+                const before = fresh ? null : cur.blocks[i], c0 = cur;
                 if (fresh) cur.blocks.push(b); else cur.blocks[i] = b;
                 await save();
+                if (b.type === 'data') dUndo(c0, before, b, fresh); // ↶ le bloc d'avant (ou pas de bloc)
                 if (b.type === 'images' && ext.uploadMediaEditor) await ext.uploadMediaEditor(form, 'topic_sheet', cur.id);
                 refresh();
             };
@@ -503,7 +516,7 @@
         const c = cur, UI = window.LCNDA_UI; if (!UI?.openPrintDialog) return toast('La fenêtre « Imprimer » n’est pas chargée.', 'error');
         const abs = u => new URL(u, location.href).href;
         // L1 : ce qu'on imprime — textes et images, personnes et dates, écrans et widgets (en titre), citations et liens
-        const group = t => (['text', 'images', 'diagram', 'photomap'].includes(t) ? 'texts' : ['people', 'dates'].includes(t) ? 'people' : ['screen', 'widget'].includes(t) ? 'screens' : ['quote', 'links'].includes(t) ? 'quotes' : 'texts');
+        const group = t => (t === 'data' ? 'data' : ['text', 'images', 'diagram', 'photomap'].includes(t) ? 'texts' : ['people', 'dates'].includes(t) ? 'people' : ['screen', 'widget'].includes(t) ? 'screens' : ['quote', 'links'].includes(t) ? 'quotes' : 'texts');
         const body = o => c.blocks.map(b => {
             if (b.type === 'divider') return `<h2>${esc(b.title)}</h2>`;
             if (!o[group(b.type)]) return '';
@@ -511,12 +524,13 @@
             if (b.type === 'images') inner = mediaOf(b).filter(m => m.media_type === 'image' || /\.(jpe?g|png|gif|webp)$/i.test(m.filename || '')).map(m => `<img src="${esc(abs('media/' + encodeURIComponent(m.filename)))}" alt="">`).join('') + (b.caption ? `<p><i>${esc(b.caption)}</i></p>` : '');
             else if (b.type === 'diagram') inner = document.querySelector(`[data-dg-embed="${Number(b.diagram)}"] .h-dg-svg`)?.innerHTML || '';
             else if (b.type === 'screen' || b.type === 'widget') inner = '<p><i>(écran de l’app : à voir dans LCNDA)</i></p>';
+            else if (b.type === 'data') inner = dStatic(b);
             else inner = blockBody(b).replace(/<button[^>]*data-h-person[^>]*>/g, '<div class="p">').replace(/<\/button>/g, '</div>');
             return `<section style="width:${Math.round(Number(b.width || 12) / 12 * 100) - 2}%"><h3>${esc(titleOf(b))}</h3>${inner}</section>`;
         }).join('');
         UI.openPrintDialog({title: c.title || 'La fiche', key: 'fiche', zone: 'Fiche', margin: 12,
-            options: [{key: 'texts', label: 'Textes et images', checked: true}, {key: 'people', label: 'Personnes et dates', checked: true}, {key: 'screens', label: 'Écrans et widgets (en titre)', checked: false}, {key: 'quotes', label: 'Citations et liens', checked: true}],
-            html: o => `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(c.title)}</title><style>body{font-family:Georgia,serif;margin:0;color:#111}h1{margin:0}main{display:flex;flex-wrap:wrap;gap:2%}section{break-inside:avoid;margin-bottom:14px}h2{width:100%;border-bottom:2px solid #111;margin:18px 0 8px}h3{font-size:15px;margin:6px 0}img{max-width:100%;max-height:340px;margin:4px 4px 0 0}blockquote{margin:0;padding-left:12px;border-left:3px solid #999;font-style:italic}ol,ul{padding-left:18px}.p{margin:2px 0}.p small{color:#666;margin-left:6px}</style></head><body><h1>${esc(c.icon || '')} ${esc(c.title)}</h1>${c.subtitle ? `<p>${esc(c.subtitle)}</p>` : ''}<main>${body(o)}</main></body></html>`});
+            options: [{key: 'texts', label: 'Textes et images', checked: true}, {key: 'people', label: 'Personnes et dates', checked: true}, {key: 'screens', label: 'Écrans et widgets (en titre)', checked: false}, {key: 'quotes', label: 'Citations et liens', checked: true}, {key: 'data', label: i18n('📊 Données (tableaux, avec leurs sources)'), checked: true}],
+            html: o => `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(c.title)}</title><style>body{font-family:Georgia,serif;margin:0;color:#111}h1{margin:0}main{display:flex;flex-wrap:wrap;gap:2%}section{break-inside:avoid;margin-bottom:14px}h2{width:100%;border-bottom:2px solid #111;margin:18px 0 8px}h3{font-size:15px;margin:6px 0}img{max-width:100%;max-height:340px;margin:4px 4px 0 0}blockquote{margin:0;padding-left:12px;border-left:3px solid #999;font-style:italic}ol,ul{padding-left:18px}.p{margin:2px 0}.p small{color:#666;margin-left:6px}${D_CSS}</style></head><body><h1>${esc(c.icon || '')} ${esc(c.title)}</h1>${c.subtitle ? `<p>${esc(c.subtitle)}</p>` : ''}<main>${body(o)}</main></body></html>`});
     }
     /* ─── Listes → 📒 Fiches ─── */
     ext.lists = ext.lists || {};

@@ -63,6 +63,9 @@
         ws.querySelector('[data-trl-bar]').replaceWith(bar);
         // o.page : une longue liste (une très grosse base) montre o.page lignes, puis « Voir les N suivants ↓ » (C6)
         let shownN = o.page || 0, pageSig = '';
+        // 🗂 o.group {key, head} : un tbody par personne, sa ligne d'en-tête comme un cadre (réglage genealogie-cadres) ; sinon un seul tbody
+        const tbodies = list => (o.group && UI.framesOn?.() ? UI.groupByPerson(list, o.group.key).map(g => (g.key ? UI.personTbodyHtml({cols: o.cols.length + 1, ...o.group.head(g.items), rows: g.items.map(o.row).join('')}) : `<tbody>${g.items.map(o.row).join('')}</tbody>`)).join('')
+            : `<tbody>${list.map(o.row).join('')}</tbody>`);
         function paint() {
             const st = bar.state, words = fold(st.q).split(/\s+/).filter(Boolean);
             let rows = o.items.filter(it => (!words.length || words.every(w => fold(o.search.text(it)).includes(w))) && o.filters.every(f => !isOn(f, st.filters[f.id]) || f.test(it, st.filters[f.id])));
@@ -74,7 +77,7 @@
             const sig = JSON.stringify([st.q, st.filters, st.sort]); if (sig !== pageSig) { pageSig = sig; shownN = o.page || 0; }
             const shown = o.max ? rows.slice(0, o.max) : shownN ? rows.slice(0, shownN) : rows;
             const mark = c => { const [up, down] = colIds(c); return st.sort === up ? '<span class="sort-mark"> ↑</span>' : st.sort === down ? '<span class="sort-mark"> ↓</span>' : ''; };
-            body.innerHTML = rows.length ? `<div class="data-table-wrap"><table class="data-table h-trl-table"><thead><tr>${o.cols.map(c => `<th><button type="button" data-trl-col="${esc(c.key)}" title="Trier par cette colonne">${esc(c.label)}${mark(c)}</button></th>`).join('')}<th></th></tr></thead><tbody>${shown.map(o.row).join('')}</tbody></table></div>${o.max && rows.length > o.max ? A().empty(i18n('Les {nm} premières lignes sont montrées.', {nm: o.max}), {icon: 'ℹ️', hint: o.moreHint || ''}) : ''}`
+            body.innerHTML = rows.length ? `<div class="data-table-wrap"><table class="data-table h-trl-table"><thead><tr>${o.cols.map(c => `<th><button type="button" data-trl-col="${esc(c.key)}" title="Trier par cette colonne">${esc(c.label)}${mark(c)}</button></th>`).join('')}<th></th></tr></thead>${tbodies(shown)}</table></div>${o.max && rows.length > o.max ? A().empty(i18n('Les {nm} premières lignes sont montrées.', {nm: o.max}), {icon: 'ℹ️', hint: o.moreHint || ''}) : ''}`
                 : A().emptyState({icon: '🔍', text: o.noneText || 'Rien ne correspond', hint: 'Change les mots cherchés ou retire un filtre.', action: {label: 'Tout effacer', attrs: 'data-trl-clear'}});
             if (shownN && rows.length > shownN && !o.max && UI.moreButton) { body.appendChild(UI.moreButton({remaining: rows.length - shownN, step: o.page, onClick: () => { shownN += o.page; paint(); }})); }
             A().bindTableLinks?.();
@@ -181,6 +184,7 @@
             sorts: [['sosa', 'Sosa', (a, b) => cmpVal(Number(a.sosa) || '', Number(b.sosa) || '')], ['az', 'A → Z', (a, b) => cmpTxt(a.name, b.name)], ['za', 'Z → A', (a, b) => cmpTxt(b.name, a.name)], ['years', 'Années', (a, b) => cmpVal(years(a), years(b))]],
             cols: [{label: 'Ancêtre', key: 'name', val: it => it.name || '', sort: ['az', 'za']}, {label: 'Sosa', key: 'sosa', val: it => Number(it.sosa) || '', num: true, sort: ['sosa', null]}, {label: 'L’acte', key: 'kind', val: kindOf}, {label: 'Commune', key: 'place', val: it => it.place || ''},
                 {label: 'Années', key: 'years', val: years, num: true, sort: ['years', null]}, {label: 'Archives', key: 'arch', val: arch}],
+            group: {key: it => it.person_id, head: l => ({id: l[0].person_id, name: l[0].name || '', sub: l[0].sosa ? `Sosa ${Number(l[0].sosa)} · ${i18n('génération {n}', {n: l[0].generation})}` : '', count: A().plural(l.length, 'acte manquant', 'actes manquants')})},
             row: it => `<tr><td>${it.person_id ? `<button type="button" class="table-link" data-h-person="${Number(it.person_id)}">${esc(it.name || '')}</button>` : esc(it.name || '')}</td><td>${Number(it.sosa) || ''}</td><td>${esc(kindOf(it))}</td><td>${esc(it.place || '')}</td><td>${esc([it.from, it.to].filter(Boolean).join('–'))}</td><td>${esc(arch(it))}</td><td></td></tr>`,
             empty: d.root_id ? {icon: '🏛️', text: 'Rien ne manque sur 5 générations', hint: 'Bravo ! L’assistant peut chercher plus loin (jusqu’à 12 générations).', action: {label: '🔍 Ouvrir l’assistant', attrs: 'data-trl-gaps'}} : {icon: '🏛️', text: 'Choisis d’abord une personne de départ', hint: 'Personnes → sa fiche → « Personne de départ ».'}});
         r.ws.onclick = e => clicks(e, r.ws, '.h-trl');

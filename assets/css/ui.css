@@ -632,3 +632,10 @@ tbody.ui-person-tb > tr.ui-person-tb-head .ui-person-card-head { padding-bottom:
 .ctl-list:has(> .ui-person-cards) { border: 0; background: transparent; display: block; }
 .ui-person-card .ctl-row { padding: 12px 4px 12px 12px; }
 .ui-person-card .ctl-row:last-child { border-bottom: 0; }
+:root .ui-person-card .ui-person-card-body > .vd-card { border: 0; border-top: 1px solid var(--line-color, #d6d6d6); border-radius: 0; margin: 0; padding: 12px 2px; background: transparent; }
+:root .ui-person-card .ui-person-card-body > .vd-card:first-child { border-top: 0; }
+.ui-person-cards:has(> .ui-person-card.is-light) { gap: 10px; margin: 4px 0; }
+.ui-person-card.is-light { border: 1px solid var(--line-color, #d6d6d6); box-shadow: none; padding: 10px 14px 6px; }
+.ui-person-card.is-light .ui-person-card-head { padding-bottom: 6px; }
+.ui-person-card.is-light .ui-person-card-name { font-size: 1em; }
+.ui-person-card.is-light .h-sugg { padding-top: 6px; }

@@ -61,9 +61,16 @@
     function sectionHtml(id, icon, label, rows, cfg, big) {
         if (!rows.length) return '';
         const lim = big ? Infinity : cfg.limit;
-        const more = rows.length - lim;
+        // 🗂 « Par sorte », la section 💡 À chercher : un cadre par personne (réglage genealogie-cadres) ; « Voir les suivants » montre les cadres suivants
+        const framed = id === 'manque' && cfg.group === 'sorte' && UI().framesOn?.() && rows.some(r => r.person_id);
+        const groups = framed ? UI().groupByPerson(rows, r => r.person_id) : null;
+        const more = (framed ? groups.length : rows.length) - lim;
+        const list = framed ? UI().personCardsHtml(groups.map((g, i) => { const r0 = g.items[0];
+            return UI().personCardHtml({id: g.key, name: r0.person || '', sub: r0.sosa ? `Sosa ${r0.sosa}` : '', cls: 'is-light msr-pc', attrs: i >= lim ? 'hidden' : '', count: g.items.length > 1 ? String(g.items.length) : '',
+                body: `<ul class="msr-list">${g.items.map(r => rowHtml(r, cfg, false)).join('')}</ul>`}); }).join(''))
+            : `<ul class="msr-list">${rows.map((r, i) => rowHtml(r, cfg, i >= lim)).join('')}</ul>`;
         return `<section class="msr-sec" data-msr-sec="${esc(id)}"><h4 class="msr-sec-h"><span aria-hidden="true">${icon}</span> ${esc(label)} <small>${rows.length}</small>${id === 'verifier' && ext.doutes ? ` <button type="button" class="link-button msr-all" data-doutes-all>${esc(i18n('Tout voir →'))}</button>` : ''}</h4>
-            <ul class="msr-list">${rows.map((r, i) => rowHtml(r, cfg, i >= lim)).join('')}</ul>${more > 0 ? `<button type="button" class="link-button msr-more" data-msr-more="${lim}">Voir les ${Math.min(more, lim)} suivants ↓</button>` : ''}</section>`;
+            ${list}${more > 0 ? `<button type="button" class="link-button msr-more" data-msr-more="${lim}">Voir les ${Math.min(more, lim)} suivants ↓</button>` : ''}</section>`;
     }
     function countersHtml(items, done) {
         const c = {late: 0, today: 0, week: 0, later: 0}; items.forEach(i => { c[i.urgency] = (c[i.urgency] || 0) + 1; });
@@ -270,7 +277,7 @@
         if (t.closest?.('[data-msr-big]')) { e.preventDefault(); const card = t.closest('.dashboard-widget'); openBig(card?.dataset.dashboardWidget || ''); return; }
         const go = t.closest?.('[data-msr-go]'); if (go) { e.preventDefault(); bigDlg?.close(); A().state.researchKind = 'gaps'; A().setModule('recherche'); return; }
         const more = t.closest?.('[data-msr-more]');
-        if (more) { const n = Number(more.dataset.msrMore) || 5; const hid = [...more.closest('.msr-sec').querySelectorAll('.msr-row[hidden]')]; hid.slice(0, n).forEach(r => { r.hidden = false; }); const left = hid.length - n; if (left > 0) more.textContent = moreLabel(Math.min(left, n)); else more.remove(); return; }
+        if (more) { const n = Number(more.dataset.msrMore) || 5; const hid = [...more.closest('.msr-sec').querySelectorAll('.msr-row[hidden], .msr-pc[hidden]')]; hid.slice(0, n).forEach(r => { r.hidden = false; }); const left = hid.length - n; if (left > 0) more.textContent = moreLabel(Math.min(left, n)); else more.remove(); return; }
         const row = t.closest?.('[data-msr-key]'); if (!row || !t.closest('[data-msr-open], [data-msr-done], [data-msr-snooze]')) return;
         const it = byKey(row.dataset.msrKey); if (!it) return;
         e.preventDefault();

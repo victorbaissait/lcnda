@@ -207,7 +207,7 @@ function semaine_manques(PDO $pdo): array
         $pid = (int) ($it['person_id'] ?? 0); $kind = (string) ($it['kind'] ?? '');
         $years = $it['from'] && $it['to'] ? ($it['from'] === $it['to'] ? (string) $it['from'] : $it['from'] . '–' . $it['to']) : (string) ($it['from'] ?: $it['to'] ?: '');
         $place = trim((string) ($it['place'] ?? ''));
-        $row = ['key' => 'manque:' . $pid . ':' . $kind . ':' . (int) ($it['from'] ?? 0), 'sort' => 'manque', 'urgency' => 'later', 'person_id' => $pid,
+        $row = ['key' => 'manque:' . $pid . ':' . $kind . ':' . (int) ($it['from'] ?? 0), 'sort' => 'manque', 'urgency' => 'later', 'person_id' => $pid, 'person' => (string) ($it['name'] ?? ''), 'sosa' => (int) ($it['sosa'] ?? 0),
             'badge' => $it['sosa'] ? 'Sosa ' . $it['sosa'] : '', 'open' => ['kind' => 'gaps', 'id' => $pid], 'done_label' => i18n_t('Cherché'), 'snooze' => 'mark'];
         if ($kind === 'socface') {
             if (($perSf[$pid] = ($perSf[$pid] ?? 0) + 1) > 2) { continue; } // deux recensements par ancêtre au plus : la liste reste lisible

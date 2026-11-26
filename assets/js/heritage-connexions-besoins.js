@@ -261,15 +261,20 @@
         const pills = [['all', T('Tout')], ['have', `✓ ${T('Je l’ai déjà')}`], ['find', `🔎 ${T('Je peux le trouver')}`], ['none', T('Sans réponse')]]
             .map(([k, l]) => `<button type="button" class="${semFilter === k ? 'is-active' : ''}" data-cx-sf="${k}">${esc(l)} (${nf(c[k] || 0)})</button>`).join('');
         const who = a => { const [pi, pl] = PROV[a.provider] || ['•', a.provider]; return `<span class="cx-who ${a.have === 'yes' ? 'is-yes' : a.have === 'searched' ? 'is-no' : ''}">${a.have === 'yes' ? '✓' : a.have === 'searched' ? '🚫' : ''} ${pi} ${esc(T(pl))}</span>`; };
+        const framed = !!UI().framesOn?.() && rows.some(n => n.person_id);
         const line = (n, i) => { const yes = (n.answers || []).find(a => a.have === 'yes');
-            return `<tr><td>${(WHAT[n.what] || WHAT.other)[0]} <span data-i18n-off>${esc(needTitle(n))}</span>${needMeta(n) ? ` <small class="muted" data-i18n-off>· ${esc(needMeta(n))}</small>` : ''}</td>
+            return `<tr><td>${(WHAT[n.what] || WHAT.other)[0]} <span data-i18n-off>${esc(framed && n.person_id ? T((WHAT[n.what] || WHAT.other)[1]) : needTitle(n))}</span>${needMeta(n) ? ` <small class="muted" data-i18n-off>· ${esc(needMeta(n))}</small>` : ''}</td>
                 <td>${n.investigation_id ? `🕵️ <span data-i18n-off>${esc(n.investigation_title || '')}</span>` : ''}${n.hypothesis_id ? ` 🤔 <span data-i18n-off>${esc(n.hypothesis || '')}</span>` : ''}</td>
                 <td>${(n.answers || []).map(who).join(' ') || `<span class="muted">${esc(T('rien pour l’instant'))}</span>`}</td>
                 <td class="cx-sem-act">${yes && !kiosk() ? `<button type="button" class="button small" data-cx-sfile="${i}">${esc(T('Ranger'))}</button>` : ''}${n.investigation_id ? `<button type="button" class="button small secondary" data-cx-sopen="${i}">${esc(T('Voir'))}</button>` : n.hypothesis_id ? `<button type="button" class="button small secondary" data-cx-shyp="${n.hypothesis_id}">${esc(T('Voir'))}</button>` : ''}</td></tr>`; };
         const compLine = x => (x.tool === 'map' ? `<tr><td>📍 ${esc(T('{n} sans coordonnées', {n: plural(x.count, T('lieu'), T('lieux'))}))}</td><td>🗺 ${esc(T('Carte'))}</td><td><span class="cx-who">🏛 ${esc(T('Communes'))}</span></td><td class="cx-sem-act">${kiosk() ? '' : `<button type="button" class="button small" data-lap-open>${esc(T('📍 Placer'))}</button>`}</td></tr>` : '');
-        const list = rows.map(n => line(n, d.rows.indexOf(n))).join('') + comp.map(compLine).join('');
+        const ix = new Map(d.rows.map((n, i) => [n, i]));
+        // 🗂 un cadre par personne (réglage genealogie-cadres) : un tbody par personne, sa ligne d'en-tête comme un cadre
+        const list = framed ? UI().groupByPerson(rows, n => n.person_id).map(g => (g.key ? UI().personTbodyHtml({cols: 4, id: g.key, name: g.items[0].person || '', count: plural(g.items.length, T('chose qui manque'), T('choses qui manquent')), rows: g.items.map(n => line(n, ix.get(n))).join('')})
+            : `<tbody>${g.items.map(n => line(n, ix.get(n))).join('')}</tbody>`)).join('') + (comp.length ? `<tbody>${comp.map(compLine).join('')}</tbody>` : '')
+            : rows.map(n => line(n, ix.get(n))).join('') + comp.map(compLine).join('');
         host.innerHTML = `<div class="cx-sem"><div class="ui-filters cx-sem-filters" role="tablist">${pills}</div>
-            ${list ? `<div class="cx-sem-scroll"><table class="cx-sem-table"><thead><tr><th>${esc(T('Ce qui manque'))}</th><th>${esc(T('Pour'))}</th><th>${esc(T('Qui peut répondre'))}</th><th></th></tr></thead><tbody>${list}</tbody></table></div>`
+            ${list ? `<div class="cx-sem-scroll"><table class="cx-sem-table"><thead><tr><th>${esc(T('Ce qui manque'))}</th><th>${esc(T('Pour'))}</th><th>${esc(T('Qui peut répondre'))}</th><th></th></tr></thead>${framed ? list : `<tbody>${list}</tbody>`}</table></div>`
                 : (A().empty ? A().empty(T('Rien ne manque ici : les pistes « à explorer » de tes enquêtes diront ce qu’elles cherchent.'), {icon: '🧩'}) : '')}
             <p class="ui-hint">${esc(T('Les pistes « à explorer » des enquêtes ouvertes, les besoins écrits (✎ sur une piste) et ce que les outils calculent. Rien n’est rangé tout seul.'))}</p></div>`;
         if (host.dataset.cxSemBound) return; host.dataset.cxSemBound = '1';

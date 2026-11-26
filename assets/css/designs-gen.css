@@ -3236,6 +3236,8 @@
 :root[data-lc-density] .h-gap-dig{padding:0 calc(6px * var(--lc-sp))}
 :root[data-lc-density] .h-gaps-who{gap:calc(3px * var(--lc-sp))}
 :root[data-lc-density] .h-gaps-who-row{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .h-gaps-bar .h-gaps-frames{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .h-gaps-bar .h-gaps-frames{padding-bottom:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .h-gaps-more{gap:calc(10px * var(--lc-sp))}
 :root[data-lc-density] .h-gap-card{padding:calc(14px * var(--lc-sp)) calc(18px * var(--lc-sp)) calc(6px * var(--lc-sp))}
 :root[data-lc-density] .h-gap-card-head{gap:calc(6px * var(--lc-sp)) calc(14px * var(--lc-sp))}
@@ -4582,6 +4584,27 @@
 :root[data-lc-density] .design-order-grid.reg-a-solo .order-list{margin-top:calc(18px * var(--lc-sp))}
 :root[data-lc-density] .design-order-grid.reg-a-solo .order-row{gap:calc(12px * var(--lc-sp))}
 :root[data-lc-density] .design-order-grid.reg-a-solo .order-row{padding:calc(12px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root[data-lc-density] .ui-person-cards{gap:calc(16px * var(--lc-sp))}
+:root[data-lc-density] .ui-person-card{padding:calc(14px * var(--lc-sp)) calc(18px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .ui-person-card-head{gap:calc(6px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root[data-lc-density] .ui-person-card-head{padding-bottom:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .ui-person-card-who{gap:calc(4px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .ui-person-card-count{padding:calc(2px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .ui-person-card-body{padding-top:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .ui-person-card .ui-cards{padding:calc(10px * var(--lc-sp)) 0}
+:root[data-lc-density] .ui-person-card-body > .ui-pc-row{gap:calc(8px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .ui-person-card-body > .ui-pc-row{padding:calc(12px * var(--lc-sp)) calc(2px * var(--lc-sp))}
+:root[data-lc-density] .ui-pc-row > .ui-pc-act{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .ui-person-card-more{padding:calc(10px * var(--lc-sp)) calc(2px * var(--lc-sp)) calc(4px * var(--lc-sp))}
+:root[data-lc-density] tbody.ui-person-tb > tr.ui-person-tb-head > th{padding:calc(12px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+@media (max-width: 640px){
+  :root[data-lc-density] .ui-person-card{padding:calc(12px * var(--lc-sp)) calc(14px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+}
+@media print{
+  :root .ui-person-card:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+}
+:root[data-lc-density] .ui-person-card .ctl-row{padding:calc(12px * var(--lc-sp)) calc(4px * var(--lc-sp)) calc(12px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .ui-person-card .ui-person-card-body > .vd-card{padding:calc(12px * var(--lc-sp)) calc(2px * var(--lc-sp))}
 /* saisies.css */
 :root[data-lc-density] .ui-hm{gap:calc(3px * var(--lc-sp))}
 /* board-shapelib.css */
@@ -6841,6 +6864,46 @@
 :root[data-lc-density] .tj-opt{gap:calc(6px * var(--lc-sp)) calc(8px * var(--lc-sp))}
 @media (max-width: 600px){
   :root[data-lc-density] .tj-ul{padding-left:calc(18px * var(--lc-sp))}
+}
+/* noms-lieux-monde.css */
+:root[data-lc-density] .ld-page.ld-self .ld-bar{margin-bottom:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .nlm-big{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .nlm-ex{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .nlm-res{gap:calc(16px * var(--lc-sp))}
+:root[data-lc-density] .nlm-list{gap:calc(16px * var(--lc-sp))}
+:root .nlm-place:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .nlm-ph{gap:calc(6px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .nlm-ph{padding:calc(12px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root .nlm-guess:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .nlm-guess{padding:0 calc(6px * var(--lc-sp))}
+:root[data-lc-density] .nlm-names{padding:calc(10px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root[data-lc-density] .nlm-names{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .nlm-names li{gap:calc(4px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .nlm-nm{padding:0 calc(4px * var(--lc-sp))}
+:root[data-lc-density] .nlm-srcs{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .nlm-srcchip{padding:1px calc(6px * var(--lc-sp))}
+:root[data-lc-density] .nlm-morep{padding:0 calc(14px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .nlm-link{padding:calc(2px * var(--lc-sp)) 0}
+:root[data-lc-density] .nlm-mini{padding:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .nlm-mini{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .nlm-fam{gap:calc(6px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .nlm-fam{padding:0 calc(14px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root .nlm-famb:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .nlm-famb{padding:calc(3px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .nlm-acts{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .nlm-acts{padding:calc(4px * var(--lc-sp)) calc(14px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .nlm-none{padding:calc(14px * var(--lc-sp))}
+:root .nlm-none:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .nlm-else{margin-top:calc(16px * var(--lc-sp))}
+:root[data-lc-density] .nlm-else ul{padding-left:calc(18px * var(--lc-sp))}
+:root[data-lc-density] .nlm-selbar .ldc-acts{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .nlm-ans{padding:calc(10px * var(--lc-sp)) calc(14px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root .nlm-ans:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .nlm-ans ul{padding-left:calc(18px * var(--lc-sp))}
+@media (max-width: 760px){
+  :root[data-lc-density] .nlm-names{padding:calc(10px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+  :root[data-lc-density] .nlm-ph,:root[data-lc-density] .nlm-acts,:root[data-lc-density] .nlm-fam,:root[data-lc-density] .nlm-morep{padding-left:calc(12px * var(--lc-sp))}
+  :root[data-lc-density] .nlm-ph,:root[data-lc-density] .nlm-acts,:root[data-lc-density] .nlm-fam,:root[data-lc-density] .nlm-morep{padding-right:calc(12px * var(--lc-sp))}
 }
 /* epoque-travail.css */
 :root[data-lc-density] .et-quote{padding:calc(4px * var(--lc-sp)) calc(10px * var(--lc-sp))}

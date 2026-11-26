@@ -33,7 +33,7 @@
 /* la colonne de gauche : en mode thèmes, la liste ouverte se montre sous son thème */
 /* (les thèmes eux-mêmes, « data_theme_… », restent alignés sur les autres cartes ; la liste ouverte est décalée en entier, par sa marge :
    son icône et son texte gardent leur place dans la carte — tests/test-rien-de-colle.js, « textes alignés ») */
-.ld-themes-on .mt-gitems [data-side-value^="data_"]:not([data-side-value^="data_theme_"]) { margin-left: 1.6em; }
+.ld-themes-on .mt-gitems [data-side-value^="data_"]:not([data-side-value^="data_theme_"]) { margin-left: 1.6em; width: calc(100% - 1.6em); max-width: calc(100% - 1.6em); }
 
 /* ── 🔀 une liste réunie ── */
 .ldr-sub { display: block; color: var(--muted, #6d6d6d); font-size: 12px; }

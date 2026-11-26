@@ -77,7 +77,7 @@
     }
     function open() { const st = A().state; if (!st) return; st.maintenanceTab = TAB[0]; A().persistUiState?.(); A().setModule?.('maintenance'); }
 
-    function cardHtml(it, mode = 'new') {
+    function cardHtml(it, mode = 'new', inFrame = false) {
         const d = it.detail || {};
         const why = [d.name === 1 ? T('même nom') : d.near ? T('nom proche') : d.name ? T('nom composé') : '', d.first === 1 ? T('même prénom') : d.first ? T('prénom proche') : '',
             d.birth === 'day' ? T('même date de naissance') : d.birth === 'month' ? T('même mois de naissance') : d.birth === 'year' ? T('même année de naissance') : d.birth === 'near' ? T('naissance à un an près') : '',
@@ -87,7 +87,7 @@
             : `<button type="button" class="button small secondary" data-vd-undo="${it.id}">${esc(T('↶ Remettre dans les décès possibles'))}</button>`;
         return `<article class="vd-card" data-vd-card="${it.id}">
             <p class="vd-sentence"><b>${esc(sentence(it))}</b> <span class="vd-src">(${link(it.insee.url, T('INSEE, Licence Ouverte'))}) ${link(it.source.url, T('↗ source'))}</span></p>
-            <p class="muted vd-mine">${esc(T('Ta fiche :'))} <button type="button" class="table-link" data-open-person="${it.person.id}">${esc(it.person.name)}</button>${mine ? ` — ${esc(mine)}` : ''}</p>
+            ${inFrame ? '' : `<p class="muted vd-mine">${esc(T('Ta fiche :'))} <button type="button" class="table-link" data-open-person="${it.person.id}">${esc(it.person.name)}</button>${mine ? ` — ${esc(mine)}` : ''}</p>`}
             <p class="vd-why"><span class="ui-badge">${esc(T('{n} % de ressemblance', {n: it.score}))}</span> ${esc(why.join(' · '))}${it.insee.acte ? ` · ${esc(T('acte n° {n}', {n: it.insee.acte}))}` : ''}</p>
             <div class="page-actions vd-acts">${acts}</div></article>`;
     }
@@ -104,6 +104,11 @@
         } catch (e) { A().toast?.(e.message, 'error'); }
     }
 
+    /** 🗂 un cadre par personne de l'arbre (réglage genealogie-cadres) : ses fiches INSEE possibles dedans ; on décide toujours fiche par fiche */
+    const cards = (items, mode = 'new') => (!UI().framesOn?.() ? items.map(it => cardHtml(it, mode)).join('')
+        : UI().personCardsHtml(UI().groupByPerson(items, it => it.person?.id).map(g => { const p = g.items[0].person || {};
+            return UI().personCardHtml({id: p.id, name: p.name || '', life: [p.birth ? T('naissance : {d}', {d: p.birth}) : '', p.birth_place].filter(Boolean).join(', '), cls: 'vd-frame',
+                count: plural(g.items.length, mode === 'new' ? T('décès possible') : T('piste écartée'), mode === 'new' ? T('décès possibles') : T('pistes écartées')), body: g.items.map(it => cardHtml(it, mode, true)).join('')}); }).join('')));
     async function draw(token) {
         const ws = document.getElementById('workspace'); if (!ws) return;
         if (A().state?.maintenanceTab !== TAB[0] && token === undefined && !ws.querySelector('[data-vd-page]')) return;
@@ -120,8 +125,8 @@
                 <p>${esc(insLine)}</p><p class="muted">${lastLine}</p>
                 <div class="page-actions"><button type="button" class="button secondary" data-vd-run ${ins.installed && !kiosk() ? '' : 'disabled'}>${esc(T('🔎 Vérifier maintenant (tout le fichier)'))}</button></div></div>
             <div class="maintenance-panel"><h3>${esc(T('Décès possibles'))} ${list.items.length ? `<span class="ui-badge">${list.items.length}</span>` : ''}</h3>
-                ${list.items.length ? list.items.map(it => cardHtml(it)).join('') : `<p class="muted">${esc(ins.installed ? T('Aucun décès possible pour l’instant.') : T('Rien à montrer tant que le fichier INSEE n’est pas installé.'))}</p>`}
-                ${gone.items.length ? `<details class="cplus-more"><summary>${esc(T('▸ Pistes écartées ({n})', {n: gone.items.length}))}</summary>${gone.items.map(it => cardHtml(it, 'gone')).join('')}</details>` : ''}</div>
+                ${list.items.length ? cards(list.items) : `<p class="muted">${esc(ins.installed ? T('Aucun décès possible pour l’instant.') : T('Rien à montrer tant que le fichier INSEE n’est pas installé.'))}</p>`}
+                ${gone.items.length ? `<details class="cplus-more"><summary>${esc(T('▸ Pistes écartées ({n})', {n: gone.items.length}))}</summary>${cards(gone.items, 'gone')}</details>` : ''}</div>
             <div class="maintenance-panel"><h3>${esc(T('À propos des données'))}</h3>
                 <p>${esc(T('Source :'))} ${link(st.source?.url || 'https://www.data.gouv.fr/fr/datasets/fichier-des-personnes-decedees/', T('Fichier des personnes décédées (INSEE), data.gouv.fr'))} — ${link(st.source?.licence_url || 'https://www.etalab.gouv.fr/licence-ouverte-open-licence/', st.source?.licence || 'Licence Ouverte 2.0 (Etalab)')}. ${esc(T('Chaque décès ajouté porte cette source et le numéro de l’acte ; « ↗ » ouvre la recherche de la personne dans matchID, le moteur libre du même fichier.'))}</p>
                 <p class="muted">${esc(T('Les avis de décès des journaux et des sites (Libra Memoria, Dans nos cœurs, Avis-de-deces…) ne sont pas des données ouvertes : l’app ne les lit pas. Elle propose seulement des liens de recherche dans « Où chercher » d’une personne.'))}</p></div></section>`;
