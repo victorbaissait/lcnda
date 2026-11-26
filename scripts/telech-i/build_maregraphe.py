@@ -27,10 +27,15 @@ def main():
     # la page « Obtaining data » et les pages de conditions qu'elle désigne (data policy, terms, licence…), sur psmsl.org seulement
     raw = wm.get(BASE, 'text/html').decode('utf-8', 'replace')
     pages = {BASE: raw}
-    for href, text in re.findall(r'<a[^>]+href="([^"#]+)"[^>]*>(.*?)</a>', raw, re.I | re.S):
-        if re.search(r'(?i)polic|terms|licen|condition|citing|acknowledg', href + ' ' + text):
+    links = re.findall(r'<a[^>]+href="([^"#]+)"[^>]*>(.*?)</a>', raw, re.I | re.S)
+    print('Liens de la page :', sorted({h for h, _ in links})[:80], flush=True)
+    # la politique des données du PSMSL n'est pas sur « Obtaining » : les pages « about us », « help », « faq », « policy »…
+    cands = [h for h, t in links if re.search(r'(?i)polic|terms|licen|condition|citing|acknowledg|about|help|faq', h + ' ' + t)]
+    cands += ['/about_us/', '/about_us/data_policy.php', '/data/obtaining/terms.php', '/data/data_policy.php']
+    for href in cands:
+        if True:
             u = urljoin(BASE, html.unescape(href))
-            if urlparse(u).hostname in ('psmsl.org', 'www.psmsl.org') and u not in pages and len(pages) < 8:
+            if urlparse(u).hostname in ('psmsl.org', 'www.psmsl.org') and u not in pages and len(pages) < 14:
                 try:
                     pages[u] = wm.get(u, 'text/html').decode('utf-8', 'replace')
                 except Exception as e:  # noqa
@@ -41,7 +46,7 @@ def main():
         t = ' '.join(html.unescape(re.sub(r'<[^>]+>', ' ', re.sub(r'(?is)<(script|style)\b.*?</\1>', ' ', t))).split())
         for x in re.split(r'(?<=[.!?])\s+', t):
             sent.append(x); src[x] = u
-    free = [s for s in sent if re.search(r'(?i)\bfree(ly)?\b|free of charge|without (any )?restriction|no restriction|creative commons|\bCC[ -]BY\b|open licen[cs]e|without charge', s)]
+    free = [s for s in sent if re.search(r'(?i)\bdata\b', s) and re.search(r'(?i)\bfree(ly)?\b|free of charge|without (any )?restriction|no restriction|creative commons|\bCC[ -]BY\b|open licen[cs]e|without charge', s)]
     cite = [s for s in sent if re.search(r'(?i)\bcit(e|ed|ation|ing)\b|acknowledg', s)]
     if not free:
         print('  phrases qui parlent de données / d’usage :', [s[:200] for s in sent if re.search(r'(?i)\b(data|use|policy|terms)\b', s)][:12], flush=True)
