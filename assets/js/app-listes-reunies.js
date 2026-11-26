@@ -170,7 +170,7 @@
             keywords: M.keywords || [], cards: true, defaultView: M.defaultView, familyColumn: M.familyColumn, familyKm: M.familyKm, familyBefore: M.familyBefore, defaultSort: M.defaultSort, hideCols: M.hideCols, chips: M.chips, views: M.views,
             get fields() { return fieldsOf(M).map(f => (f.key === 'sources' ? {type: 'enum', values: sourcesOf(M).map(s => s.short), html: srcLinks, ...f} : f)); },
             period: M.period || (r => [r.year, r.year]), geo: M.geo || (r => [r.lat, r.lon]),
-            rowKey: r => r._k, sourceCount: () => sourcesOf(M).length, mergeLine: () => T('{s}, sans doublons', {s: sourcesOf(M).map(s => s.short).join(' + ')}),
+            rowKey: r => r._k, cardTitle: M.title, sourceCount: () => sourcesOf(M).length, mergeLine: () => T('{s}, sans doublons', {s: sourcesOf(M).map(s => s.short).join(' + ')}),
             installed: async () => (await activeSources(M)).length > 0,
             install: host => installOffer(M, host),
             load: async () => (await build(M.id)).rows,

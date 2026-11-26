@@ -38,15 +38,43 @@ les chiffres de travail (longues tâches, temps JavaScript, appels, octets, mém
 | 🔎 widget : rempli quand on le voit ; chaque résultat noté une fois (WeakMap) ; redessin au plus une fois par image. Bloc de la fiche : redessin par image ; sources **en ligne** seulement quand le bloc est à l'écran (ou « ▸ plus »). | `heritage-tout-sur.js` |
 | « Le village tel qu'il était » (CORINE, en ligne) : demandé quand la partie arrive à l'écran ; rien si on est parti. | `heritage-telech-a.js` |
 | Mentions : seulement ce qui vient d'apparaître ou de changer. | `heritage-links.js` |
-| Poignées ⠿ : cherchées dans `#workspace` et les fenêtres ouvertes, sans celles déjà prêtes. | `heritage-dnd.js` |
+| Poignées ⠿ : cherchées dans `#workspace` et les fenêtres ouvertes, sans celles déjà prêtes ; un bouton déjà examiné n'est plus relu (WeakSet, rien d'écrit dans la page). | `heritage-dnd.js` |
 | Designs : la page n'est relue (décorations à enlever) que si elle a été décorée ; l'aperçu de la page pris au calme. | `app-designs.js` |
 | Diagrammes posés dans une page, « ſ » des transcriptions : seulement quand des éléments arrivent (au plus toutes les 60 ms). | `heritage-diagrams.js`, `app.js` |
-| `{n}` des textes : un seul `Intl.NumberFormat` (même écriture). | `app-i18n.js` |
+| `{n}` des textes : un seul `Intl.NumberFormat` (même écriture). La traduction de la page garde un observateur immédiat (`lcndaImmediate`) : aucun texte français entre deux tâches. | `app-i18n.js` |
+| K2 « ✓ Enregistré » : `genealogie-organiser-vus` (les « Nouveau » déjà vus, écrits au premier dessin) ne compte pas comme un réglage changé (sinon un « Réglage changé » de trop pouvait apparaître avant celui de l'utilisateur). | `app-pages.js` |
 | L'endroit de la page (« Listes · … ») gardé 1 s (et recalculé dès que l'ordre / les groupes changent). | `app-pages.js` |
 
 ## Avant / après
 
-Ouverture (tableau de bord), deux paires alternées A/B, même charge (médiane ou fourchette) :
+**Ordinateur au calme** (charge 1 à 5, une mesure chacune, ouverture du tableau de bord puis 2 réouvertures) :
+
+| | avant (froid / chaud 1 / chaud 2) | après |
+|---|---|---|
+| première peinture | 0,99 / 0,41 / 0,74 s | 0,83 / 0,45 / 0,35 s |
+| utilisable (jeton + écran) | 2,6 / 2,2 / 3,5 s | 2,8 / 2,5 / 2,4 s |
+| **calme** (plus de longue tâche > 200 ms ni de requête) | **19,2 / 20,5 / 20,2 s** | **4,1 / 3,2 / 3,1 s** |
+| longues tâches (> 50 ms) : nombre / total | 85 – 100 / 8,3 – 10,2 s | 2 – 4 / 0,7 – 1,3 s |
+| temps JavaScript (CDP ScriptDuration) | 9,6 / 8,0 / 6,9 s | 3,0 / 0,9 / 1,2 s |
+| temps des tâches (CDP TaskDuration) | 23,3 / 20,8 / 19,8 s | 9,5 / 3,5 / 3,5 s |
+| requêtes / octets | 1 156 / 55 Mo à chaque fois | 875 / 34,7 Mo, puis 839 / **1,3 Mo** (304) |
+| mémoire JavaScript | 264 – 314 Mo | 28 – 36 Mo |
+
+Dans l'app ouverte, au calme (affiché → calme ; longues tâches : nombre / total / la plus longue) :
+
+| | avant | après |
+|---|---|---|
+| fiche personne | 0,8 → 31,0 s ; 80 / 25,0 s / 3,8 s | 1,1 → 29,6 s ; 83 / 11,6 s / 1,6 s |
+| fiche village | 6,0 → 18,3 s ; 33 / 9,6 s / 3,8 s | 1,1 → 3,6 s ; 4 / 1,1 s / 0,9 s |
+| Listes → 🧰 Données (Récap) | 5,0 → 9,9 s ; 7 / 9,0 s / 4,3 s | 0,4 → 0,4 s ; 1 / 0,1 s |
+| Carte | 0,3 → 0,3 s ; 2 / 0,1 s | 1,0 → 1,4 s ; 7 / 0,6 s / 0,1 s |
+| Réglages | 0,2 → 14,6 s ; 11 / 5,0 s / 4,3 s | 0,2 → 2,2 s ; 5 / 0,7 s / 0,3 s |
+| retour au tableau de bord | 5,6 → 29,8 s ; 14 / 5,4 s / 4,4 s | 1,1 → 11,1 s ; 3 / 0,4 s / 0,2 s |
+
+(La fiche personne reste longue à se calmer : son bloc 🔎 « Ce qui le concerne » calcule vraiment — éclipses visibles de ses lieux de vie,
+données téléchargées — par petits morceaux, sans longue tâche de plus de 1,6 s. La Carte, plus lente ici, varie d'un essai à l'autre.)
+
+**Ordinateur très chargé** (charge 25 à 30), deux paires alternées A/B (fourchettes) :
 
 | | avant | après |
 |---|---|---|
@@ -62,7 +90,7 @@ Ouverture (tableau de bord), deux paires alternées A/B, même charge (médiane 
 | requêtes / octets, 2e ouverture | 1 017 – 1 134 / 45 – 55 Mo | 839 – 869 / **1,3 – 2,6 Mo** (304) |
 | mémoire JavaScript | 145 – 300 Mo | 28 – 40 Mo |
 
-Dans l'app ouverte (une mesure chacune, chargée ; « longues tâches » = total des tâches > 50 ms jusqu'au calme) :
+Dans l'app ouverte, ordinateur chargé (une mesure chacune) :
 
 | | avant : affiché / longues tâches / la plus longue | après |
 |---|---|---|

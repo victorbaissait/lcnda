@@ -504,7 +504,7 @@
     }
     function dBody(b) {
         if (!b.list && !b.snap) return `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📊</span><span class="empty-line-text">${esc(i18n('Aucune liste choisie : ✎ pour en choisir une, ou pour poser une question.'))}</span></p>`;
-        if (b.mode === 'frozen' && b.snap) return `<div class="h-fi-data is-frozen">${dHtml(b.snap, b, {actions: true})}</div>`;
+        if (b.mode === 'frozen' && b.snap) return `<div class="h-fi-data is-frozen" data-fi-frozen="${esc(b.id)}">${dHtml(b.snap, b, {actions: true})}</div>`;
         return `<div class="h-fi-data" data-fi-data="${esc(b.id)}">${UIx().spinner ? UIx().spinner(i18n('Lecture des données…')) : esc(i18n('Lecture des données…'))}</div>`;
     }
     /** les blocs « à jour » d'une page (la fiche, ou une fiche posée dans un onglet) : relus maintenant */
@@ -517,8 +517,21 @@
                 if (res.error) html = `<p class="muted">${esc(res.error)}</p>${b.snap ? dHtml(b.snap, {...b, mode: 'frozen'}) : ''}`;
                 else { const m = await dModel(b, res); dataLast.set(b.id, m); html = dHtml(m, b, {actions: true}); }
             } catch (e) { html = `<p class="muted">${esc(e.message || String(e))}</p>`; }
-            if (el.isConnected) el.innerHTML = html;
+            if (el.isConnected) { el.innerHTML = html; dMapCards(el, dataLast.get(b.id) || b.snap); }
         });
+        scope.querySelectorAll('[data-fi-frozen]').forEach(el => { const b = (sheet.blocks || []).find(x => x.id === el.dataset.fiFrozen); if (b?.snap) dMapCards(el, b.snap); });
+    }
+    /** 🗺 la vue carte d'un bloc : un clic sur un point ouvre sa fiche sur la carte (app-carte-fiche.js) ; ☰ Voir la ligne = la liste dessous */
+    function dMapCards(el, m) {
+        const host = el.querySelector('.h-fi-dmap'), CF = ext.carteFiche; if (!host || !CF || !m) return;
+        const rows = (m.rows || []).filter(r => Array.isArray(r.g)), cols = m.cols || [], all = m.rows || [];
+        host.querySelectorAll('.h-map-point').forEach((g, i) => { if (!rows[i]) return; g.dataset.cfI = String(i); g.setAttribute('tabindex', '0'); g.setAttribute('role', 'button'); g.style.cursor = 'pointer'; g.setAttribute('aria-label', i18n('Voir la fiche : {name}', {name: rows[i].c[0] || '—'})); });
+        const src = r => (r.u ? `<a href="${esc(r.u)}" target="_blank" rel="noopener noreferrer">${esc(r.s || i18n('source'))} ↗</a>` : esc(r.s || ''));
+        CF.attach(host, {label: i => rows[i]?.c[0] || '—', sub: i => rows[i]?.c[1] || '',
+            card: i => { const r = rows[i]; if (!r) return null; const fj = cols.findIndex(c => c.k === '_fam');
+                return {title: r.c[0] || '—', lines: cols.slice(1).map((c, j) => (j + 1 === fj ? null : [c.l, esc(r.c[j + 1] ?? '')])).filter(Boolean), fam: fj >= 0 && r.c[fj] ? esc(r.c[fj]) : null, src: src(r), line: true}; },
+            onAct: (k, i) => { if (k !== 'line') return; const li = el.querySelectorAll('.h-fi-dlist li')[all.indexOf(rows[i])]; if (!li) return;
+                li.classList.add('ld-row-hl'); li.tabIndex = -1; li.scrollIntoView?.({block: 'center'}); li.focus({preventScroll: true}); setTimeout(() => li.classList.remove('ld-row-hl'), 6000); }});
     }
     /** pour ⤓ Exporter et 🖨 Imprimer : la copie figée, sinon la dernière lecture */
     const dModelOf = b => (b.mode === 'frozen' ? b.snap : dataLast.get(b.id) || b.snap) || null;

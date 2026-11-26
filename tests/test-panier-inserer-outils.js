@@ -102,9 +102,9 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
         });
         await t('7 · 📊 Diagrammes : 📎 dans le titre (une ligne) : le texte sans « [↗ ] », la source dans « Source / note en bas » ; ↶', async () => {
             await closeAll();
-            await p.evaluate(() => window.LCNDA_EXT.openDiagramEditor(null, {spec: window.LCNDA_EXT.diagramsInternals.presetSpec({kind: Object.keys(window.LCNDA_EXT.diagramRender.KINDS)[0]}), name: 'Essai DURAND'})); await p.waitForSelector('.h-dg-dlg[open] [data-opt="title"]', {timeout: 20000}); await sleep(500);
+            await p.evaluate(() => window.LCNDA_EXT.openDiagramEditor(null, {spec: window.LCNDA_EXT.diagramsInternals.presetSpec({kind: Object.keys(window.LCNDA_EXT.diagramRender.KINDS)[0]}), name: 'Essai DURAND'})); await p.waitForSelector('.h-dg-dlg[open] .cx-tool-btns', {timeout: 20000}); await sleep(500);
             assert.ok(await p.$('.h-dg-dlg .cx-tool-btns [data-cx-tool-ins]'), 'le 📎 dans la barre'); assert.ok(!await p.$('.h-dg-dlg .cx-tool-btns [data-cx-tool-add]'), 'rien à recevoir : pas de 📥');
-            await p.click('.h-dg-dlg [data-cx-tool-ins]'); await p.waitForSelector('.cx-qi'); await p.keyboard.type('Léonard MAZAUD');
+            await p.click('.h-dg-dlg [data-cx-tool-ins]'); await p.waitForSelector('.cx-qi'); assert.ok(await p.$('.h-dg-dlg [data-opt="title"]'), 'l’onglet Réglages, le titre'); await p.keyboard.type('Léonard MAZAUD');
             await p.waitForFunction(() => [...document.querySelectorAll('.cx-qi .cx-qi-r')].some(r => /Naissance de Léonard/.test(r.textContent)), null, {timeout: 15000});
             await p.evaluate(() => [...document.querySelectorAll('.cx-qi .cx-qi-r')].find(x => /Naissance de Léonard/.test(x.textContent)).click()); await sleep(800);
             const v = await p.evaluate(() => ({t: document.querySelector('.h-dg-dlg [data-opt="title"]').value, s: document.querySelector('.h-dg-dlg [data-opt="source"]')?.value}));
@@ -138,6 +138,10 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             await p.evaluate(() => { localStorage.setItem('genealogie-inserer', JSON.stringify({on: false})); window.LCNDA_EXT.toolConnexions.paint(); });
             assert.ok(await p.$eval('.wp-dlg [data-cx-tool-ins]', b => b.hidden), '📎 éteint : caché');
             await p.evaluate(() => { localStorage.removeItem('genealogie-inserer'); window.LCNDA_EXT.toolConnexions.paint(); });
+        });
+        await t('11 · 🎞 Studio d’animation, 🎚️ Retouche : « Mettre dans… » une image du panier (par « 📤 Envoyer vers… ») ; un texte ne leur va pas', async () => {
+            const r = await p.evaluate(() => ['send_anim-new', 'send_retouch'].map(id => { const d = window.LCNDA_EXT.dropTargets.find(t => t.id === id); return {id, ok: !!d && d.enabled() !== false, kinds: d?.kinds}; }));
+            r.forEach(x => { assert.ok(x.ok, x.id); assert.deepStrictEqual(x.kinds, ['media']); });
         });
         await t('10 · 390 px et sombre : le groupe tient dans la barre, ne colle pas aux bords ; aucune erreur JS', async () => {
             await p.setViewportSize({width: 390, height: 800}); await p.evaluate(() => document.documentElement.setAttribute('data-theme', 'dark')); await sleep(500);

@@ -158,7 +158,7 @@
     /* 📊 Diagrammes : les titres comptent ; la source va dans « Source / note en bas » */
     const dgSrc = el => el.closest('.h-dg-dlg')?.querySelector('[data-opt="source"]');
     tool({id: 'diagram', icon: '📊', dlg: '.h-dg-dlg', bar: '.h-dg-dlg .h-dg-top', inst: () => document.querySelector('dialog.h-dg-dlg[open]'), name: () => T('le diagramme'), noReceive: true,
-        main: d => d.querySelector('[data-opt="title"]'),
+        main: d => { let el = d.querySelector('[data-opt="title"]'); if (!el) { d.querySelector('[data-dg-tab="opts"]')?.click(); el = d.querySelector('[data-opt="title"]'); } return el; }, // le titre (onglet « Réglages »)
         host: {field: el => !!el.closest?.('.h-dg-dlg') && el.matches('[data-opt="title"], [data-opt="subtitle"], [data-opt="source"]'), match: el => !!el.closest?.('.h-dg-dlg') && el.matches?.('[data-opt]'),
             said: (items, el) => (el?.matches?.('[data-opt="source"]') || !items.some(srcOf) ? '' : '📎 Inséré ; la source est dans « Source / note en bas »'),
             render: ({text}, el) => (el.matches('[data-opt="source"]') ? null : {text: text.replace(/\s*\[↗ [^\]]*\]/g, '')}),

@@ -61,3 +61,44 @@
 .ld-gps-act button:hover, .ld-gps-act a:hover { border-color: var(--blue-bright, #055dff); }
 :root[data-theme="dark"] .ld-gps-act button, :root[data-theme="dark"] .ld-gps-act a { background: #1d1d1d; border-color: #555; }
 .ld-cols-list { max-height: 320px; }
+/* 🗺 la fiche d'un point (assets/js/app-carte-fiche.js) : une bulle sur le point, 📌 un panneau à droite, une feuille en bas sur téléphone — toujours dans le cadre de la carte */
+.cf-card { position: absolute; z-index: 6; width: min(300px, calc(100% - 16px)); max-height: calc(100% - 16px); overflow: auto; box-sizing: border-box; padding: 10px 12px 12px; background: var(--card-bg, #fff); color: var(--ink, #111); border: 1.5px solid var(--ink, #111); box-shadow: 0 6px 22px rgba(0, 0, 0, .18); font-size: 13.5px; line-height: 1.4; cursor: auto; touch-action: auto; -webkit-user-select: text; user-select: text; text-align: left; }
+.cf-card:focus { outline: none; }
+.cf-card:focus-visible { outline: 3px solid var(--blue-bright, #055dff); outline-offset: 1px; }
+.cf-card.cf-panel { top: 8px; right: 8px; bottom: 24px; left: auto !important; width: min(320px, 46%); max-height: none; }
+.cf-card.cf-sheet { left: 8px !important; right: 8px; bottom: 8px; top: auto !important; width: auto; max-height: min(62%, 340px); }
+.person-map-stage.cf-has-panel .mm-ctl { right: auto; left: 8px; align-items: flex-start; }
+.cf-head { display: flex; gap: 6px; align-items: flex-start; margin: 0 0 6px; }
+.cf-title { flex: 1 1 auto; min-width: 0; font-size: 14.5px; overflow-wrap: anywhere; }
+.cf-tools { display: inline-flex; gap: 4px; flex: none; }
+.cf-ico { min-width: 30px; height: 30px; padding: 0 6px; border: 1.5px solid var(--line, rgba(0, 0, 0, .25)); background: transparent; color: inherit; font: inherit; font-size: 14px; line-height: 1; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 4px; }
+.cf-ico:hover { border-color: var(--blue-bright, #055dff); }
+.cf-ico:focus-visible { outline: 3px solid var(--blue-bright, #055dff); outline-offset: 1px; }
+.cf-ico[aria-pressed="true"] { background: var(--blue-soft, #eaf1ff); border-color: var(--blue-bright, #055dff); }
+.cf-lab { font-size: 12px; font-weight: 600; }
+.cf-sheet .cf-lab { display: none; }
+.cf-sub { margin: -2px 0 6px; font-size: 12.5px; }
+.cf-lines { display: grid; gap: 2px; margin: 0 0 6px; }
+.cf-lines > div { display: grid; grid-template-columns: minmax(70px, 38%) 1fr; gap: 8px; }
+.cf-lines dt { color: var(--muted, #667); font-size: 12.5px; }
+.cf-lines dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.cf-lines dd small { display: block; color: var(--muted, #667); }
+.cf-fam { margin: 0 0 6px; padding: 5px 8px; background: rgba(46, 125, 50, .09); border-left: 3px solid #2e7d32; }
+.cf-src { margin: 0 0 8px; overflow-wrap: anywhere; }
+.cf-src a { white-space: nowrap; }
+.cf-acts { display: flex; flex-wrap: wrap; gap: 6px; }
+.cf-list { list-style: none; margin: 0 0 6px; padding: 0; display: grid; gap: 2px; }
+.cf-list button { width: 100%; display: grid; gap: 1px; text-align: left; border: 0; border-bottom: 1px solid var(--line, rgba(0, 0, 0, .12)); background: transparent; color: inherit; font: inherit; padding: 5px 4px; cursor: pointer; }
+.cf-list button:hover { background: var(--blue-soft, rgba(5, 93, 255, .08)); }
+.cf-list button:focus-visible { outline: 3px solid var(--blue-bright, #055dff); outline-offset: -3px; }
+.cf-list small { font-size: 12px; }
+.cf-more { margin: 0 0 8px; font-size: 12.5px; }
+.ld-row-hl > td { background: var(--blue-soft, rgba(5, 93, 255, .1)) !important; transition: background 1.2s; }
+.ld-back-map { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 8px; }
+:root[data-theme="dark"] .cf-card { background: #1d1d1d; color: #eee; border-color: #777; box-shadow: 0 6px 22px rgba(0, 0, 0, .55); }
+:root[data-theme="dark"] .cf-ico { border-color: #555; }
+:root[data-theme="dark"] .cf-ico[aria-pressed="true"] { background: #23324d; border-color: #6ea0ff; }
+:root[data-theme="dark"] .cf-lines dt, :root[data-theme="dark"] .cf-lines dd small { color: #aaa; }
+:root[data-theme="dark"] .cf-fam { background: rgba(102, 187, 106, .14); border-left-color: #66bb6a; }
+:root[data-theme="dark"] .cf-list button { border-bottom-color: #333; }
+@media print { .cf-card { display: none !important; } }

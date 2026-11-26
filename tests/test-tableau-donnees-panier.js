@@ -153,6 +153,8 @@ const FAKE = () => {
             await openBoard(bid); const n0 = (await cur()).length;
             await p.click('.h-board [data-bd-basket]'); await p.waitForSelector('.cx-panel li[data-cx-bi]', {timeout: 10000});
             const li = p.locator('.cx-panel li[data-cx-bi]', {hasText: 'Naissance de Jean MAZAUD'}).first();
+            console.log('RAF', await p.evaluate(() => new Promise(r => { const t0 = performance.now(); let n = 0; const f = () => { n++; if (performance.now() - t0 > 1000) r(n); else requestAnimationFrame(f); }; requestAnimationFrame(f); setTimeout(() => r('timeout ' + n), 3000); })), await p.evaluate(() => [document.visibilityState, document.hasFocus(), [...document.querySelectorAll('dialog')].map(d => d.open + d.className).join('|'), document.body.className, getComputedStyle(document.documentElement).scrollBehavior]));
+            console.log('DBG', await p.evaluate(() => JSON.stringify({sy: scrollY, sx: scrollX, de: document.documentElement.scrollTop, ws: document.querySelector('#workspace')?.scrollTop, li: document.querySelector('.cx-panel li[data-cx-bi]').getBoundingClientRect(), panel: document.querySelector('.cx-panel').getBoundingClientRect(), vh: innerHeight, mainScroll: [...document.querySelectorAll('*')].filter(e => e.scrollTop > 0).map(e => e.className + ':' + e.scrollTop).slice(0, 8)})));
             const sb = await p.$eval('.h-board-stage', x => { const r = x.getBoundingClientRect(); return {x: r.left, y: r.top, w: r.width, h: r.height}; });
             await li.dragTo(p.locator('.h-board-stage'), {targetPosition: {x: 120, y: Math.round(sb.h - 120)}});
             await p.waitForFunction(n => window.LCNDA_EXT.boardsInternals.current.items.length === n + 1, n0, {timeout: 15000});

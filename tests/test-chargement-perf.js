@@ -9,7 +9,7 @@
  *     type exact ; un fichier absent → 404 ; les dossiers protégés (lib, data…) → toujours 404 ;
  *  4. navigateur (Playwright ; sinon sauté), base d'exemple, Internet coupé, 1440 px :
  *     - observateurs regroupés : plusieurs changements de la même image → un appel avec TOUS les changements ; disconnect / takeRecords ;
- *       un observateur d'un élément précis n'est pas retardé ;
+ *       un observateur d'un élément précis, ou { lcndaImmediate: true } (la traduction), n'est pas retardé ;
  *     - budgets (larges, tiennent sur un ordinateur chargé) : utilisable < 45 s ; appels des observateurs de la page < 45 000 (avant : ≈ 80 000) ;
  *     - 2e ouverture : les scripts et feuilles de style ne sont plus retéléchargés (304 ou cache) ;
  *     - ce qui attend d'être vu apparaît quand on le regarde : le widget 🔎 « Ce qui le concerne » posé loin en bas ne calcule rien,
@@ -136,6 +136,9 @@ const get = (url, headers = {}, method = 'GET') => new Promise((res, rej) => { c
                     // un élément précis : rien ne change (microtâche, à chaque fois)
                     const el = []; const o2 = new MutationObserver(recs => el.push(recs.length)); o2.observe(box, { childList: true });
                     box.append('a'); await Promise.resolve(); box.append('b'); await Promise.resolve(); out.el = el.slice();
+                    // toute la page mais { lcndaImmediate: true } (la traduction) : immédiat aussi
+                    const im = []; const o3 = new MutationObserver(recs => im.push(recs.length)); o3.observe(document.body, { childList: true, subtree: true, lcndaImmediate: true });
+                    box.append('c'); await Promise.resolve(); box.append('d'); await Promise.resolve(); out.im = im.slice(); o3.disconnect();
                     // takeRecords rend ce qui attend ; disconnect l'oublie
                     box.append(document.createElement('i')); await Promise.resolve(); box.append(document.createElement('b')); out.taken = o.takeRecords().length;
                     box.append(document.createElement('u')); await new Promise(r => setTimeout(r, 0)); box.append(document.createElement('s')); await new Promise(r => setTimeout(r, 0));
@@ -149,6 +152,7 @@ const get = (url, headers = {}, method = 'GET') => new Promise((res, rej) => { c
                 assert.equal(total, 6, 'aucun changement perdu : ' + JSON.stringify(r.after));
                 assert.ok(r.after.length <= 3, 'regroupés : ' + JSON.stringify(r.after));
                 assert.deepEqual(r.el, [1, 1], 'un élément précis : à chaque microtâche, comme avant');
+                assert.deepEqual(r.im, [1, 1], '{ lcndaImmediate: true } : à chaque microtâche');
                 assert.ok(r.taken >= 1, 'takeRecords');
                 assert.ok(r.afterDisconnect <= 1, 'disconnect oublie ce qui attendait');
                 assert.ok(r.proto);

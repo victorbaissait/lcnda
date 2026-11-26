@@ -23,6 +23,7 @@
  *     familyColumn: true, familyKm, familyBefore,  // 👪 « Dans la famille » (app-listes-famille.js ; rayon : Réglages, 15 km au départ)
  *     hideCols: [...], defaultSort: [clé, 'asc'|'desc'], cards: true,   // colonnes cachées au départ ; tri de départ ; en cartes à 390 px
  *     painted: (res, page) => …                    // après chaque dessin du tableau (ex. « 4 doublons fondus »)
+ *     cardTitle: row => …,                         // facultatif : le titre de la fiche d'un point de la 🗺 carte (app-carte-fiche.js), sinon le 1er texte
  *   });
  *   Une case peut contenir plusieurs valeurs (un tableau : ex. Sources) : le filtre « liste » en trouve une, l'export les joint.
  *   L'enregistrement marche avant ou après le chargement de ce fichier.
@@ -370,13 +371,27 @@
         const my = ++cur.seq;
         res.innerHTML = UI().spinner ? UI().spinner(T('On cherche…')) : '…';
         let page;
-        try { page = await fetchPage(d, st, 0, st.view === 'map' ? MAP_MAX : PAGE); } catch (e) { if (my === cur.seq) res.innerHTML = A().empty ? A().empty(e.message || T('Liste impossible à lire.'), {icon: '⛔'}) : esc(e.message); return; }
+        const find = st.view !== 'map' ? cur.findRow : null; cur.findRow = null; // ☰ Voir la ligne (la fiche d'un point de la carte) : on lit assez loin pour la trouver
+        try { page = await fetchPage(d, st, 0, st.view === 'map' || find ? MAP_MAX : PAGE); } catch (e) { if (my === cur.seq) res.innerHTML = A().empty ? A().empty(e.message || T('Liste impossible à lire.'), {icon: '⛔'}) : esc(e.message); return; }
         if (my !== cur.seq) return;
+        let found = -1;
+        if (find) { found = page.rows.findIndex(r => rowKeyOf(d, r) === find); const keep = Math.max(PAGE, Math.ceil((found + 1) / PAGE) * PAGE); if (page.rows.length > keep) page = {...page, rows: page.rows.slice(0, keep)}; }
         cur.rows = page.rows; cur.total = page.total; cur.more = page.more; cur.zone = null;
         const c = ws()?.querySelector('[data-ld-count]'); if (c) c.textContent = countText();
         try { if (ext.guerresTemps?.paint?.(res, pageApi())) return; } catch (e) { console.error(e); } // ▶ Dans le temps : la carte année après année (heritage-guerres-temps.js)
         if (st.view === 'map' && d.geo) { paintMap(res); try { ext.listesChoix?.rowsPainted?.(res, cur.rows, pageApi()); } catch (e) { console.error(e); } return; }
         paintTable(res);
+        if (find) showFound(res, found);
+    }
+    /** ☰ Voir la ligne : la ligne en couleur, au milieu de l'écran, et « 🗺 Revenir à la carte » (même cadrage, la fiche rouverte) */
+    function showFound(res, i) {
+        const back = cur.backMap; let bar = ws()?.querySelector('[data-ld-back-map]');
+        if (back && !bar) { bar = document.createElement('div'); bar.className = 'ld-back-map'; bar.dataset.ldBackMap = ''; res.before(bar); }
+        if (bar) bar.innerHTML = `<button type="button" class="button small secondary" data-ld-back-map-go>🗺 ${esc(T('Revenir à la carte'))}</button>${i < 0 ? `<small class="muted">${esc(T('Cette ligne n’est pas dans les premières lignes du tableau : ajoute un critère pour la retrouver.'))}</small>` : ''}`;
+        const tr = i >= 0 ? res.querySelector(`tr[data-ld-row="${i}"]`) : null; if (!tr) return;
+        tr.classList.add('ld-row-hl'); tr.scrollIntoView?.({block: 'center'});
+        (tr.querySelector('[data-ld-open], button, a') || tr).focus?.({preventScroll: true});
+        setTimeout(() => tr.classList.remove('ld-row-hl'), 6000);
     }
     function cellHtml(f, row) {
         if (typeof f.html === 'function') { let h = ''; try { h = f.html(row); } catch (_) {} return h ? `<td class="ld-html">${h}</td>` : '<td class="muted">—</td>'; } // f.html(row) : du HTML déjà échappé par la liste (ex. Sources ↗)
@@ -426,8 +441,9 @@
     }
     /* 🗺 la carte : zoom, déplacement, points regroupés (heritage-mini-carte.js) ; au plus MAP_MAX points, et on dit combien */
     function paintMap(res) {
-        const d = cur.d, st = cur.st, pts = [], rows = [], f = cols(d, st).find(c => !c.gps && !c.dist);
-        cur.rows.forEach(r => { const g = geoOf(d, r); if (g) { rows.push(r); pts.push({lat: g[0], lon: g[1], label: String(r[f?.key] ?? ''), color: '#0066cc'}); } });
+        const d = cur.d, st = cur.st, pts = [], rows = [];
+        ws()?.querySelector('[data-ld-back-map]')?.remove();
+        cur.rows.forEach(r => { const g = geoOf(d, r); if (g) { rows.push(r); pts.push({lat: g[0], lon: g[1], label: pointLabel(d, r), color: '#0066cc'}); } }); // au survol : le titre et la date
         if (st.near) pts.push({lat: st.near.lat, lon: st.near.lon, label: st.near.title, color: '#d4380d', n: '★'});
         if (!rows.length) { res.innerHTML = A().empty ? A().empty(T('Aucune de ces lignes n’a de position sur la carte.'), {icon: '🗺'}) : ''; paintMore(); return; }
         const view = cur.mapView; cur.mapView = null;
@@ -435,8 +451,10 @@
             ...(ext.listesCarteFamille?.(d, st, pts, () => { if (cur.st === st && st.view === 'map' && res.isConnected) paintMap(res); }) || [])];
         res.innerHTML = `${ext.miniMap ? ext.miniMap(pts, [], {height: 520, view, circles}) : `<p>${esc(T('La carte n’est pas chargée.'))}</p>`}<div class="ld-map-note" data-ld-map-note aria-live="polite"></div>`;
         const marks = [...res.querySelectorAll('.h-map-point')];
+        const CF = ext.carteFiche;
         marks.forEach((m, i) => {
             if (!rows[i]) return; m.dataset.ldMapRow = String(i);
+            if (CF) { m.dataset.cfI = String(i); m.style.cursor = 'pointer'; m.setAttribute('tabindex', '0'); m.setAttribute('role', 'button'); m.setAttribute('aria-label', T('Voir la fiche : {name}', {name: pts[i].label || '—'})); return; } // un clic : la fiche du point, sur la carte (app-carte-fiche.js)
             if (!d.open) return;
             m.style.cursor = 'pointer'; m.setAttribute('tabindex', '0'); m.setAttribute('role', 'button'); m.setAttribute('aria-label', T('Ouvrir : {name}', {name: pts[i].label || '—'}));
             const go = () => { try { d.open(rows[i]); } catch (e) { toast(e.message, 'error'); } };
@@ -459,9 +477,66 @@
         paintNote(false);
         res.querySelector('.h-map')?.addEventListener('minimap-view', e => { const z = e.detail || {}; paintNote(z.zoom > (z.fitZoom ?? 0) + 0.9); });
         const ctl = ext.miniMapOf?.(res);
+        const cf = CF?.attach(res, {card: i => (rows[i] ? pointCard(d, st, rows[i]) : null), label: i => (rows[i] ? pointTitle(d, rows[i]).title : ''), sub: i => (rows[i] ? pointDate(d, rows[i], true) : ''),
+            onAct: (k, i, b) => pointAct(k, rows[i], b, res)});
+        const reopen = cur.mapReopen; cur.mapReopen = null;
+        if (reopen && cf) { const i = rows.findIndex(r => rowKeyOf(d, r) === reopen); if (i >= 0) setTimeout(() => { if (res.isConnected) cf.open(i); }, 0); }
         if (cur.mapFocus && ctl) { const g = cur.mapFocus, i = rows.findIndex(r => { const x = geoOf(d, r); return x && Math.abs(x[0] - g[0]) < 1e-9 && Math.abs(x[1] - g[1]) < 1e-9; }); if (marks[i]) { marks[i].focus({preventScroll: true}); } }
         cur.mapFocus = null;
         paintMore();
+    }
+    /* ── 🗺 la fiche d'un point (app-carte-fiche.js) : un titre, les colonnes montrées (au plus 6), 👪 Dans la famille, ↗ la source ── */
+    const plain = h => { const t = document.createElement('template'); t.innerHTML = String(h ?? ''); return (t.content.textContent || '').replace(/\s+/g, ' ').trim(); };
+    function valText(f, r) {
+        if (typeof f.html === 'function') { try { const h = f.html(r); if (h) { const s = plain(h); return s === '—' ? '' : s; } } catch (_) {} }
+        const v = Array.isArray(r[f.key]) ? r[f.key].join(' · ') : r[f.key]; if (v == null || v === '') return '';
+        if (f.type === 'number' || f.dist) return nf(v, 2);
+        if (f.type === 'bool') return v && v !== 'non' && v !== '0' ? T('oui') : T('non');
+        return String(v);
+    }
+    function valHtml(f, r) {
+        if (typeof f.html === 'function') { try { const h = f.html(r); const s = h ? plain(h) : ''; if (s && s !== '—') return h; } catch (_) {} }
+        const s = valText({...f, html: null}, r); return s ? esc(s.length > 160 ? s.slice(0, 157) + '…' : s) : '';
+    }
+    const rowKeyOf = (d, r) => (ext.listesChoix?.rowKey ? ext.listesChoix.rowKey(d, r) : JSON.stringify((d.fields || []).map(f => r[f.key] ?? null)));
+    /** le titre : d.cardTitle(row) (ex. « Naves, 30 septembre 2002 »), sinon le premier texte de la ligne, sinon le nom de la liste */
+    function pointTitle(d, r) {
+        for (const fn of [d.cardTitle, d._base?.cardTitle]) if (typeof fn === 'function') { try { const t = String(fn(r) ?? '').trim(); if (t) return {title: t, own: true}; } catch (_) {} }
+        const f = (d.fields || []).find(x => x.type !== 'url' && !x.hidden && x.key !== 'sources' && ['text', 'place', 'enum', undefined].includes(x.type) && valText(x, r));
+        return {title: f ? valText(f, r) : T(d.label), key: f?.key || ''};
+    }
+    /** la date de la ligne (le premier champ date, sinon année) ; notIn : rien si le titre la dit déjà */
+    function pointDate(d, r, notIn) {
+        const fs = d.fields || [], f = fs.find(x => x.type === 'date') || fs.find(x => x.type === 'year'); const s = f ? valText(f, r) : '';
+        return s && notIn && pointTitle(d, r).title.includes(s) ? '' : s;
+    }
+    const pointLabel = (d, r) => { const t = pointTitle(d, r).title, s = pointDate(d, r, true); return s ? `${t} · ${s}` : t; };
+    function pointSource(d, r) {
+        const http = u => (/^https?:\/\/[^\s"'<>]+$/i.test(String(u || '')) ? String(u) : ''), a = (u, t) => (u ? `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(t)} ↗</a>` : esc(t));
+        const ms = Array.isArray(r._members) ? r._members : [];
+        if (ms.length) { const seen = new Set(); return ms.filter(m => { const k = m.src?.short || ''; if (seen.has(k)) return false; seen.add(k); return true; }).map(m => a(http(m.rec?.url) || http(m.src?.url), m.src?.short || T('source'))).join(' · '); }
+        return a(urlFields(d).map(f => http(r[f.key])).find(Boolean) || http(d.sourceUrl), d.source || T(d.label));
+    }
+    /** 👪 qui vivait près de là cette année-là (app-listes-famille.js : jamais une fiche confidentielle ; en consultation, pas les vivants) */
+    function pointFamily(d, r) {
+        const LF = ext.listesFamille, g = geoOf(d, r), p = periodOf(d, r); if (!d.familyColumn || !LF || !g || !p) return null;
+        const max = Number(d.familyKm) > 0 ? Number(d.familyKm) : Number(LF.km?.()) || 15;
+        return Promise.resolve(LF.ready?.()).then(() => {
+            const pr = LF.presence(g[0], g[1], p[0], max);
+            if (!pr.who.length) return pr.before ? `<span class="muted">${esc(T('avant la famille'))}</span>` : '';
+            const one = w => (w.born ? T('{name} naît cette année-là', {name: w.n}) : w.age != null ? T('{name}, {age} ans', {name: w.n, age: w.age}) : w.n);
+            return `${esc(pr.who.slice(0, 4).map(one).join(' · '))}${pr.who.length > 4 ? ` ${esc(T('+{n}', {n: pr.who.length - 4}))}` : ''} <small class="muted">${esc(T('à moins de {km} km', {km: nf(max)}))}</small>`;
+        });
+    }
+    function pointCard(d, st, r) {
+        const t = pointTitle(d, r), CH = ext.listesChoix, ro = kiosk() || document.documentElement.classList.contains('base-readonly');
+        const lines = cols(d, st).filter(f => !f.gps && f.key !== 'sources' && (t.own || f.key !== t.key)).map(f => [flab(f), valHtml(f, r)]).filter(l => l[1]).slice(0, 6);
+        return {title: t.title, lines, fam: pointFamily(d, r), src: pointSource(d, r), ins: !!CH, bk: !!(CH && ext.connexions), line: true, roWhy: ro ? T('Mode consultation : rien ne peut être écrit.') : ''};
+    }
+    function pointAct(kind, r, btn, res) {
+        if (!r) return;
+        if (kind === 'ins' || kind === 'bk') return ext.listesChoix?.act?.(kind === 'ins' ? 'insert' : 'basket', [r], btn, pageApi());
+        if (kind === 'line') { const key = rowKeyOf(cur.d, r); cur.backMap = {view: ext.miniMapOf?.(res)?.getView?.() || null, key}; cur.findRow = key; cur.st.view = 'table'; rerun(); }
     }
     /** « Charger les points de cette zone » : les lignes dont la position est dans le cadre de la carte (filtre sur place ; ou le serveur
      *  cherche dans le cercle qui contient le cadre, et on garde ce qui est dans le cadre) */
@@ -686,6 +761,7 @@
             if (t.closest('[data-ld-cols]')) return openCols();
             if ((b = t.closest('[data-ld-zone]'))) return loadZone(b);
             if (t.closest('[data-ld-zone-reset]')) return refresh();
+            if (t.closest('[data-ld-back-map-go]')) { const b0 = cur.backMap; cur.backMap = null; if (b0?.view) cur.mapView = b0.view; cur.mapReopen = b0?.key || null; cur.st.view = 'map'; return rerun(); }
             if ((b = t.closest('[data-ld-gps-copy]'))) { const g = geoOf(cur.d, cur.rows[Number(b.dataset.ldGpsCopy)] || {}); if (g) copyText(gpsPlain(g)).then(ok => toast(ok ? T('Coordonnées copiées : {v}', {v: gpsPlain(g)}) : T('Copie impossible : {v}', {v: gpsPlain(g)}), ok ? undefined : 'error')); return; }
             if ((b = t.closest('[data-ld-gps-map]'))) { const g = geoOf(cur.d, cur.rows[Number(b.dataset.ldGpsMap)] || {}); if (g) { cur.mapView = {lat: g[0], lon: g[1], zoom: 13}; cur.mapFocus = g; cur.st.view = 'map'; rerun(); } return; }
             if ((b = t.closest('[data-ld-chip]'))) {
