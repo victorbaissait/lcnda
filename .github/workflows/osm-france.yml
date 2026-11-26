@@ -114,19 +114,22 @@ jobs:
       - name: "Geofabrik : sommes MD5 des extraits voisins (lot E)"
         id: md5vo
         if: steps.lots.outputs.voisins == '1'
+        continue-on-error: true   # sans les voisins, seul le lot E est sauté (voir « Trier »)
         run: bash scripts/osm-france/geofabrik.sh md5 "$OSM_DIR/voisins" europe/belgium europe/switzerland europe/luxembourg >> "$GITHUB_OUTPUT"
       - name: Reprendre les extraits voisins déjà téléchargés
         id: cachevo
-        if: steps.lots.outputs.voisins == '1'
+        if: steps.lots.outputs.voisins == '1' && steps.md5vo.outcome == 'success'
         uses: actions/cache/restore@v4
         with:
           path: ${{ env.OSM_DIR }}/voisins/*.osm.pbf
           key: osm-geofabrik-voisins-${{ steps.md5vo.outputs.cle }}
       - name: "Geofabrik : télécharger les extraits voisins (si besoin)"
-        if: steps.lots.outputs.voisins == '1'
+        id: pbfvo
+        if: steps.lots.outputs.voisins == '1' && steps.md5vo.outcome == 'success'
+        continue-on-error: true
         run: bash scripts/osm-france/geofabrik.sh pbf "$OSM_DIR/voisins" europe/belgium europe/switzerland europe/luxembourg
       - name: Garder les extraits voisins pour la prochaine fois
-        if: steps.lots.outputs.voisins == '1' && steps.cachevo.outputs.cache-hit != 'true'
+        if: steps.lots.outputs.voisins == '1' && steps.pbfvo.outcome == 'success' && steps.cachevo.outputs.cache-hit != 'true'
         uses: actions/cache/save@v4
         with:
           path: ${{ env.OSM_DIR }}/voisins/*.osm.pbf
@@ -136,9 +139,15 @@ jobs:
         env:
           LOTS: ${{ steps.lots.outputs.lots }}
         run: |
-          if [ -f "$OSM_DIR/voisins/belgium-latest.osm.pbf" ]; then
-            export VOISINS="$OSM_DIR/voisins/belgium-latest.osm.pbf $OSM_DIR/voisins/switzerland-latest.osm.pbf $OSM_DIR/voisins/luxembourg-latest.osm.pbf"
+          v="$OSM_DIR/voisins/belgium-latest.osm.pbf $OSM_DIR/voisins/switzerland-latest.osm.pbf $OSM_DIR/voisins/luxembourg-latest.osm.pbf"
+          if ls $v >/dev/null 2>&1; then
+            export VOISINS="$v"
+          elif [ "${{ steps.lots.outputs.voisins }}" = 1 ]; then
+            # te-libertes couvre FR+BE+CH+LU : sans les voisins on ne le refait pas (il perdrait des arbres)
+            echo "::warning::Lot E sauté : extraits Belgique/Suisse/Luxembourg indisponibles"
+            LOTS=$(echo " $LOTS " | sed 's/ e / /; s/^ *//; s/ *$//')
           fi
+          [ -n "$LOTS" ] || { echo "plus aucun lot à trier"; exit 0; }
           bash scripts/osm-france/filtrer.sh "$OSM_DIR/fr/france-latest.osm.pbf" "$OSM_DIR/filtre" $LOTS
           rm -f "$OSM_DIR/filtre/union.osm.pbf"
           df -h "$OSM_DIR"
