@@ -262,13 +262,13 @@
      * Les trajets « ocean » suivent le grand cercle. Écrite fixe ici, puis réveillée par heritage-mini-carte.js (zoom, déplacement,
      * points regroupés, ◐ noir et blanc) ; options : view {lat, lon, zoom}, circles [{lat, lon, km}], cluster, interactive (false = sans gestes).
      */
-    function miniMap(points = [], paths = [], {height = 360, emptyText = 'Rien à placer sur la carte (lieux sans coordonnées).', view = null, circles = [], cluster, interactive} = {}) {
+    function miniMap(points = [], paths = [], {height = 360, emptyText = 'Rien à placer sur la carte (lieux sans coordonnées).', view = null, circles = [], cluster, interactive, bg: bgOpt = ''} = {}) { // bg : un fond imposé (ex. « offline » en consultation)
         const app = A();
         // En mer : le trajet qui ne passe que par la mer (sea-route.js) ; en attendant sa carte, le grand cercle
         const seaPath = p => window.LCNDA_SEA?.route(p.coords, p.year) || p.coords.slice(1).reduce((acc, c, i) => acc.concat(greatCircle(p.coords[i], c).slice(i ? 1 : 0)), []);
         // Carte terre / mer pas encore chargée : cette carte se redessine d'elle-même dès qu'elle l'est
         const mapId = paths.some(p => p.ocean) && window.LCNDA_SEA && !window.LCNDA_SEA.ready() ? 'h-map-' + Math.random().toString(36).slice(2, 9) : '';
-        if (mapId) window.LCNDA_SEA.onReady(() => { const el = document.getElementById(mapId); if (el) el.outerHTML = miniMap(points, paths, {height, emptyText, view, circles, cluster, interactive}); });
+        if (mapId) window.LCNDA_SEA.onReady(() => { const el = document.getElementById(mapId); if (el) el.outerHTML = miniMap(points, paths, {height, emptyText, view, circles, cluster, interactive, bg: bgOpt}); });
         const drawn = paths.map(p => ({...p, coords: p.ocean ? seaPath(p) : p.coords}))
             .filter(p => p.coords.length > 1);
         const all = [...points.filter(p => Number.isFinite(p.lat) && Number.isFinite(p.lon)).map(p => [p.lat, p.lon]), ...drawn.flatMap(p => p.coords)];
@@ -283,7 +283,7 @@
         if (all.length === 1) zoom = Math.min(zoom, 10);
         const xs = all.map(c => app.lngToX(c[1], zoom)), ys = all.map(c => app.latToY(c[0], zoom));
         const left = (Math.min(...xs) + Math.max(...xs)) / 2 - width / 2, top = (Math.min(...ys) + Math.max(...ys)) / 2 - height / 2;
-        const bg = designBg(), world = 2 ** zoom;
+        const bg = bgOpt || designBg(), world = 2 ** zoom;
         let tiles = '';
         if (bg !== 'grid') {
             for (let tx = Math.floor(left / 256); tx <= Math.ceil((left + width) / 256); tx++) {

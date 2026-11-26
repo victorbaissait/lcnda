@@ -1,0 +1,21 @@
+fr ¦ en ¦ es ¦ de ¦ it ¦ pt ¦ pl ¦ nl
+# 🌍 Diagrammes « Cartes » : un autre pays (assets/js/heritage-diagram-cartes.js, scripts/build-geo-pays.js)
+🌍 Un autre pays… ¦ 🌍 Another country… ¦ 🌍 Otro país… ¦ 🌍 Ein anderes Land… ¦ 🌍 Un altro paese… ¦ 🌍 Outro país… ¦ 🌍 Inny kraj… ¦ 🌍 Een ander land…
+Chercher un pays… ¦ Search for a country… ¦ Buscar un país… ¦ Land suchen… ¦ Cerca un paese… ¦ Procurar um país… ¦ Szukaj kraju… ¦ Land zoeken…
+Régions, États, provinces ¦ Regions, states, provinces ¦ Regiones, estados, provincias ¦ Regionen, Staaten, Provinzen ¦ Regioni, stati, province ¦ Regiões, estados, províncias ¦ Regiony, stany, prowincje ¦ Regio’s, staten, provincies
+NUTS 3 (départements, Kreise, provinces…) ¦ NUTS 3 (departments, districts, provinces…) ¦ NUTS 3 (departamentos, distritos, provincias…) ¦ NUTS 3 (Départements, Kreise, Provinzen…) ¦ NUTS 3 (dipartimenti, circondari, province…) ¦ NUTS 3 (departamentos, distritos, províncias…) ¦ NUTS 3 (departamenty, powiaty, prowincje…) ¦ NUTS 3 (departementen, kreise, provincies…)
+Comtés ¦ Counties ¦ Condados ¦ Countys ¦ Contee ¦ Condados ¦ Hrabstwa ¦ County’s
+Arrondissements (NUTS 3) ¦ Arrondissements (NUTS 3) ¦ Distritos (NUTS 3) ¦ Arrondissements (NUTS 3) ¦ Circondari (NUTS 3) ¦ Distritos (NUTS 3) ¦ Okręgi (NUTS 3) ¦ Arrondissementen (NUTS 3)
+Provinces ¦ Provinces ¦ Provincias ¦ Provinzen ¦ Province ¦ Províncias ¦ Prowincje ¦ Provincies
+Communautés autonomes ¦ Autonomous communities ¦ Comunidades autónomas ¦ Autonome Gemeinschaften ¦ Comunità autonome ¦ Comunidades autónomas ¦ Wspólnoty autonomiczne ¦ Autonome gemeenschappen
+États fédérés ¦ States ¦ Estados ¦ Bundesstaaten ¦ Stati federati ¦ Estados ¦ Stany ¦ Staten
+Grandes régions (Census) ¦ Census regions ¦ Grandes regiones (Census) ¦ Census-Regionen ¦ Grandi regioni (Census) ¦ Grandes regiões (Census) ¦ Regiony spisowe (Census) ¦ Census-regio’s
+Länder ¦ States (Länder) ¦ Estados federados (Länder) ¦ Bundesländer ¦ Länder ¦ Estados (Länder) ¦ Kraje związkowe ¦ Deelstaten
+Provinces et territoires ¦ Provinces and territories ¦ Provincias y territorios ¦ Provinzen und Territorien ¦ Province e territori ¦ Províncias e territórios ¦ Prowincje i terytoria ¦ Provincies en territoria
+Le pays entier ¦ The whole country ¦ Todo el país ¦ Das ganze Land ¦ Tutto il paese ¦ O país inteiro ¦ Cały kraj ¦ Het hele land
+Source du fond de carte : ¦ Base map source: ¦ Fuente del mapa de fondo: ¦ Quelle der Grundkarte: ¦ Fonte della mappa di base: ¦ Fonte do mapa de base: ¦ Źródło mapy podkładowej: ¦ Bron van de basiskaart:
+niveau|comté ¦ county ¦ condado ¦ County ¦ contea ¦ condado ¦ hrabstwo ¦ county
+son comté ¦ its county ¦ su condado ¦ sein County ¦ la sua contea ¦ o seu condado ¦ jego hrabstwo ¦ zijn county
+leur comté ¦ their county ¦ su condado ¦ ihr County ¦ la loro contea ¦ o seu condado ¦ ich hrabstwo ¦ hun county
+un comté ¦ a county ¦ un condado ¦ ein County ¦ una contea ¦ um condado ¦ hrabstwo ¦ een county
+Liste des pays introuvable. ¦ Country list not found. ¦ No se encuentra la lista de países. ¦ Länderliste nicht gefunden. ¦ Elenco dei paesi non trovato. ¦ Lista de países não encontrada. ¦ Nie znaleziono listy krajów. ¦ Landenlijst niet gevonden.

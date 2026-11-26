@@ -41,6 +41,12 @@
         if ((m = t.match(/\b(\d{2})e siecle/))) { const c = +m[1]; out.from = (c - 1) * 100 + 1; out.to = c * 100; }
         if (/\b(hommes?|garcons?)\b/.test(t) && !/\b(femmes?|filles?)\b/.test(t)) out.sex = 'm'; else if (/\b(femmes?|filles?)\b/.test(t) && !/\b(hommes?|garcons?)\b/.test(t)) out.sex = 'f';
         if (/\b(hommes?|garcons?)\b/.test(t) && /\b(femmes?|filles?)\b/.test(t) && !out.intents.includes('compare')) out.intents.push('compare');
+        // 🌍 un pays nommé (« en Italie », « aux États-Unis ») : les cartes proposées sont celles de ce pays (heritage-diagram-cartes.js)
+        const own = {france: 'fr', belgique: 'be', suisse: 'ch', luxembourg: 'lu'}, word = w => new RegExp(`(^|[^a-z0-9])${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}([^a-z0-9]|$)`).test(t);
+        const ownHit = Object.keys(own).find(word);
+        if (ownHit) out.map = {map: own[ownHit]};
+        else { const hit = (ext.diagramCartes?.paysList?.() || []).find(([, n, a]) => [n, ...a].some(w => String(w).length > 3 && word(fold(w)))); if (hit) out.map = {map: 'pays', country: hit[0]}; }
+        if (out.map && !out.intents.includes('map')) out.intents.push('map');
         if (D) {
             const names = Object.values(D.places || {}).map(p => p[0]).filter(Boolean).sort((a, b) => b.length - a.length);
             out.place = names.find(n => n.length > 2 && t.includes(` ${fold(n)} `)) || '';
@@ -83,7 +89,7 @@
     /** suggest(texte, D) → {q, items: [{kind, title, reason, spec}], message} */
     function suggest(text, D) {
         const q = parse(text, D), I = new Set(q.intents), items = [];
-        const add = (kind, title, reason, spec) => { if (!R()?.KINDS?.[kind] || !spec) return; spec.kind = kind; spec.o = {...(spec.o || {}), title}; items.push({kind, title, reason: i18n(reason), spec}); };
+        const add = (kind, title, reason, spec) => { if (!R()?.KINDS?.[kind] || !spec) return; spec.kind = kind; spec.o = {...(spec.o || {}), title, ...(q.map && /map$|choropleth/.test(kind) ? q.map : {})}; items.push({kind, title, reason: i18n(reason), spec}); };
         const evt = {births: ['Naissances', p => p.by], deaths: ['Décès', p => p.dy]};
         const S = q.subject || (I.has('map') ? 'origins' : '');
         if (S === 'births' || S === 'deaths') {
@@ -164,6 +170,7 @@
     const loadD = async () => (D ||= await (M()?.loadBase ? M().loadBase() : window.LCNDA_APP.api('anim_people').then(d => ({...d, byId: new Map((d.people || []).map(p => [p.id, p]))}))));
     /** bind(racine, onPick({kind, spec})) */
     function bind(root, onPick) {
+        ext.diagramCartes?.paysIndex?.().catch(() => {}); // 🌍 les noms de tous les pays (« en Croatie »…), lus en ouvrant la galerie
         const box = root.querySelector('[data-dga]'); if (!box) return;
         const out = box.querySelector('[data-dga-out]'), inp = box.querySelector('[data-dga-q]');
         const run = async () => {

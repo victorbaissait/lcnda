@@ -258,5 +258,60 @@
         if (!items.length) return A().toast?.(T('Le panier est vide.'));
         return CX().deliver(dtOf(t), items, {ctx: {inst: i}, fromBasket: true});
     }
-    ext.toolConnexions = {TOOLS, paint: paintGroups, front};
+    /* ═════════ 🧺 clic droit sur TOUT élément de l'app (une fiche, un événement, un média, un lieu, un acte…) : un seul écouteur ═════════
+     *  Les écrans marquent déjà leurs lignes et cartes : data-open-person="12", data-event-id="40", data-media-id="3", data-place="5"…
+     *  Le menu (clic droit, ou ⋯ d'une ligne) gagne « 🧺 Prendre « … » » et « 📍 Mettre « … » dans… », l'élément gardé AVEC SA SORTE et son numéro. */
+    const ENT_RX = /^data-(?:[a-z]+-)*?(person|event|media|place|act|source)(?:-(?:id|card-id|card|block|journal))?$/, ENT_NO = /remove|delete|unlink|del-|-del|detach|tab|lat|lon|index|-i$|map-|view-|census/;
+    const KIND_OF = {person: 'person', event: 'event', media: 'media', place: 'place', act: 'act', source: 'source'};
+    function entityAt(target) {
+        const root = target.closest('#workspace, dialog[open], .cx-qi'); if (!root || root.matches('.cx-qi') || target.closest('.cx-modal, .cx-panel, [data-ctx-off]')) return null;
+        for (let n = target; n && n !== root.parentElement; n = n.parentElement) {
+            for (const a of n.attributes || []) {
+                const m = ENT_RX.exec(a.name); if (!m || ENT_NO.test(a.name) || !/^\d+$/.test(a.value) || !Number(a.value)) continue;
+                const row = n.closest('tr, li, article, [class*="-row"], [class*="-card"], [class*="-item"]') || n;
+                const lab = (row.querySelector('.table-link, h3, h4, strong, b, a') || n).textContent || row.textContent || '';
+                const title = lab.replace(/\s+/g, ' ').trim().slice(0, 200) || n.getAttribute('title') || `${CX().KIND?.[m[1]]?.[1] || m[1]} ${a.value}`;
+                const whole = row.textContent.replace(/\s+/g, ' ').trim(), value = whole.startsWith(title) ? whole.slice(title.length).replace(/^[\s·—:,-]+/, '').slice(0, 300) : '';
+                const img = m[1] === 'media' ? (row.querySelector('img')?.getAttribute('src') || '').match(/media\/(?:thumbs\/)?([^?#"]+)/)?.[1] || '' : '';
+                return {kind: KIND_OF[m[1]], ref_id: Number(a.value), title, value, data: img ? {filename: decodeURIComponent(img)} : undefined, origin: CX().screenOrigin?.(row) || null};
+            }
+        }
+        return null;
+    }
+    const ctxEntity = e => {
+        if (!on() || CX().settings?.().ctx === false) return [];
+        const it = entityAt(e.target); if (!it) return [];
+        const short = it.title.length > 40 ? `${it.title.slice(0, 38)}…` : it.title;
+        return [{icon: '🧺', label: T('Prendre « {t} »', {t: short}), run: () => CX().take([it])}, {icon: '📍', label: T('Mettre « {t} » dans…', {t: short}), run: () => CX().putInto([it])}];
+    };
+    ctxEntity._entity = true; if (!(UI().ctxExtras || []).some(f => f._entity)) (UI().ctxExtras = UI().ctxExtras || []).unshift(ctxEntity);
+
+    /* ═════════ 📎 « Insérer… » dans les menus « 📤 Envoyer vers… » et dans les fenêtres d'export qui donnent un tableau ═════════ */
+    const rowsOf = r => { if (typeof r !== 'string') return (r || []).map(x => (x || []).map(v => String(v ?? ''))); const S = window.LCNDA_SHEET; return S?.parseCSV ? S.parseCSV(r.replace(/^﻿/, ''), {sep: S.sniffSep(r.slice(0, 4000))}) : r.split(/\r?\n/).map(l => l.split(/[;\t,]/)); };
+    const blockOfRows = (rows, name, src) => { const [head = [], ...body] = rows; const s = src || CX().screenOrigin?.()?.label || '';
+        return {title: name, text: `${name}\n${head.join(' | ')}\n${body.map(r => r.join(' | ')).join('\n')}${s ? `\n${T('Source :')} ${s}` : ''}`,
+            html: `<p><b>${esc(name)}</b></p><table><tr>${head.map(c => `<th>${esc(c)}</th>`).join('')}</tr>${body.map(r => `<tr>${r.map(c => `<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</table>${s ? `<p><small>${esc(T('Source :'))} ${esc(s)}</small></p>` : ''}`,
+            items: [{kind: 'set', ref_id: 0, title: name, value: '', data: {columns: head, rows: body, source: s}, origin: CX().screenOrigin?.() || null}]}; };
+    const insertOk = () => !!QI().insertBlock && QI().live?.() !== false && !kiosk();
+    const addSendInsert = () => { const L = ext.sendTargets; if (!Array.isArray(L)) return false; if (L.some(x => x.key === 'cx_insert')) return true;
+        L.push({key: 'cx_insert', icon: '📎', label: 'Insérer… (au curseur, dans une note)', group: 'Insérer', kinds: ['text', 'rows'], ready: insertOk,
+            run: (kind, d, o) => { const name = d.name || o.title || T('Élément'), origin = CX().screenOrigin?.() || null;
+                if (kind === 'rows') return QI().insertBlock(blockOfRows(rowsOf(d.rows), name), {anchor: o.anchor});
+                const txt = textOf(d.html); return QI().insertBlock({title: name, text: `${txt}${origin?.label ? `\n${T('Source :')} ${origin.label}` : ''}`, html: `${String(d.html || '')}${origin?.label ? `<p><small>${esc(T('Source :'))} ${esc(origin.label)}</small></p>` : ''}`,
+                    items: [{kind: 'text', ref_id: 0, title: name.slice(0, 200), value: txt.slice(0, 20000), origin}]}, {anchor: o.anchor}); }});
+        return true; };
+    if (!addSendInsert()) { const w = setInterval(() => { if (addSendInsert()) clearInterval(w); }, 200); setTimeout(() => clearInterval(w), 30000); }
+    const wrapExport = () => {
+        const sx = ext.sheetExportFormat; if (sx && !sx._cx) { ext.sheetExportFormat = (getRows, name) => ({...sx(getRows, name), _rows: getRows}); ext.sheetExportFormat._cx = true; } // le tableau d'un export : aussi pour « 📎 Insérer… »
+        const U = UI(); if (!U.openExportDialog || U.openExportDialog._cx) return !!U.openExportDialog;
+        const orig = U.openExportDialog;
+        U.openExportDialog = o => { const f = (o?.formats || []).find(x => x && x._rows);
+            if (f && insertOk() && !o.formats.some(x => x.id === 'cx_insert')) o = {...o, formats: [...o.formats, {id: 'cx_insert', label: T('📎 Insérer…'), hint: T('au curseur, dans une note, avec la source'), ext: '', quality: false, copy: false, goLabel: T('📎 Insérer…'),
+                run: async () => { const r = rowsOf(await f._rows()); if (r.length) setTimeout(() => QI().insertBlock(blockOfRows(r, o.title || o.defaultName || T('Tableau'))), 80); }}]};
+            return orig(o); };
+        U.openExportDialog._cx = true;
+        return true; };
+    if (!wrapExport() || !ext.sheetExportFormat) { const w = setInterval(() => { if (wrapExport() && ext.sheetExportFormat?._cx) clearInterval(w); else wrapExport(); }, 200); setTimeout(() => clearInterval(w), 30000); }
+
+    ext.toolConnexions = {TOOLS, paint: paintGroups, front, entityAt};
 })();

@@ -56,7 +56,7 @@
     // copie de pays/index.json (r : grandes régions, nuts : NUTS 3) : les réglages se construisent avant la liste
     const PAYS_REG = new Set('AZ BE BT BF CA ES US GN GW HK HU IE IT XK LV MV MT NP NZ UG PH RU SI SD SS LK TW TH'.split(' '));
     const PAYS_NUTS = new Set('AL DE AT BE BG CY HR DK ES EE FI FR GR HU IE IS IT XK LV LI LT LU MK MT ME NO NL PL PT RO RS SK SI SE CH CZ TR'.split(' '));
-    const PAYS_LV = {IT: {reg: 'Régions', adm1: 'Provinces'}, ES: {reg: 'Communautés autonomes', adm1: 'Provinces'}, US: {adm1: 'États', reg: 'Grandes régions (Census)'}, DE: {adm1: 'Länder'}, AT: {adm1: 'Länder'}, CA: {adm1: 'Provinces et territoires'}};
+    const PAYS_LV = {IT: {reg: 'Régions', adm1: 'Provinces'}, ES: {reg: 'Communautés autonomes', adm1: 'Provinces'}, US: {adm1: 'États fédérés', reg: 'Grandes régions (Census)'}, DE: {adm1: 'Länder'}, AT: {adm1: 'Länder'}, CA: {adm1: 'Provinces et territoires'}};
     const PAYS_REG_FIRST = new Set(['IT', 'ES']); // des provinces nombreuses : les régions d'abord
     const fileOf = id => {
         if (FILES[id]) return {url: `${GEO_DIR}${id}.json${GZ.has(id) ? '.gz' : ''}`, gz: GZ.has(id), attr: ATTR[FILES[id]], shared: id === 'eu-nuts3'};
@@ -1035,6 +1035,16 @@
         return s;
     }
 
+    /** 🌍 la carte qui va à des points [lon, lat] : celle de leur pays (≥ 75 % des points), l'Europe, sinon null (la carte par défaut) */
+    async function mapForPoints(pts) {
+        const P = (Array.isArray(pts) ? pts : []).filter(p => isF(p?.[0]) && isF(p?.[1])).slice(0, 3000); if (!P.length) return null;
+        const [w] = await Promise.all([load('monde-110m'), paysIndex().catch(() => null)]);
+        const n = new Map(); let eu = 0; P.forEach(([lo, la]) => { const z = zoneAtPoint(w, lo, la); if (!z) return; n.set(z.id, (n.get(z.id) || 0) + 1); if (z.parent === 'EU') eu++; });
+        const [cc, k] = [...n].sort((a, b) => b[1] - a[1])[0] || [];
+        if (cc && k >= P.length * .75) { const m = {FR: 'fr', BE: 'be', CH: 'ch', LU: 'lu'}[cc]; if (m) return {map: m}; if (paysEntry(cc)) return {map: 'pays', country: cc}; }
+        return eu >= P.length * .75 ? {map: 'eu'} : null;
+    }
+
     /* ═════════ Dans l'éditeur : le cadrage à la souris ═════════ */
     const geoReg = new Map(); // uid → {pr, w, h} (pour retrouver les degrés sous la souris)
     function remember(fn) { return (spec, W, fs) => { const out = fn(spec, W, fs); if (out.geo) { geoReg.set(out.geo.uid, out.geo); if (geoReg.size > 60) geoReg.delete(geoReg.keys().next().value); } return out; }; }
@@ -1408,7 +1418,7 @@
             describe: spec => i18n('Carte à symboles proportionnels : {n} lieux.', {n: rowsOf(spec).length})},
     };
     for (const [k, kind] of Object.entries(KINDS)) { if (!DR.KINDS[k]) DR.KINDS[k] = kind; }
-    ext.diagramCartes = {MAPS, paysIndex, paysLevels, paysName, paysOf, fileOf, FRAMES_WORLD, FRAMES_FR, load, loaded, decode, makeProj, fitProj, matchZone, matchCommune, joinRows, zoneOfRow, zoneSuggest, rowStatus, rememberPick, zoneOfPlace, placeOf, flowsOf, breaksOf, scaleOf, resolve, parseLive, liveKey, inZone, idfOf, SRC_GROUPS, bubblesOf,
+    ext.diagramCartes = {MAPS, paysIndex, paysLevels, paysName, paysOf, fileOf, mapForPoints, paysList: () => (paysIdx ? paysIdx.map(x => [x.c, x.n, x.a || []]) : PAYS_SHORT.map(c => [c, PAYS_FR[c], []])), FRAMES_WORLD, FRAMES_FR, load, loaded, decode, makeProj, fitProj, matchZone, matchCommune, joinRows, zoneOfRow, zoneSuggest, rowStatus, rememberPick, zoneOfPlace, placeOf, flowsOf, breaksOf, scaleOf, resolve, parseLive, liveKey, inZone, idfOf, SRC_GROUPS, bubblesOf,
         // pour les cartes de heritage-diagram-cartes2.js (points, hexagones, cartogramme, carte qui raconte) : mêmes fonds, mêmes projections
         mapOf, levelOf, viewOf, baseIdOf, ctxIdOf, needBases, drawBase, attrOf, autoProj, fitView, mapOpts, remember, afterDraw, fillZones, communeOfPlace, zoneAt, RAMPS, rampAt, SEA, LAND, FROM_APP};
 })();

@@ -302,6 +302,8 @@
             s.rows = tuples.filter(t => t.g).slice(0, 3000).map(t => { let lab = (cfg.label ? String(val(t.r, cfg.label)) : pickTitle(t)).slice(0, 60) || T('Sans nom'); const k0 = fold(lab); const n = (seen.get(k0) || 0) + 1; seen.set(k0, n); if (n > 1) lab = `${lab} (${n})`;
                 s.places[fold(lab)] = {lat: t.g[0], lon: t.g[1], n: lab}; return {label: lab, date: Number.isFinite(t.y) ? String(t.y) : '', kind: cfg.color ? String(keyOf(t, cfg.color, step) ?? '') : T(d.label), name: ''}; });
             o.colorBy = cfg.color ? 'kind' : o.colorBy || 'one';
+            // 🌍 des points tous en Italie, aux États-Unis… : la carte de ce pays (ses régions), sauf carte déjà choisie
+            if (!base.o?.map && ext.diagramCartes?.mapForPoints) { const m = await ext.diagramCartes.mapForPoints(Object.values(s.places).map(p => [p.lon, p.lat])).catch(() => null); if (m) Object.assign(o, m); }
         } else if (kind === 'chrono') {
             s.rows = sortT(tuples).slice(0, 120).map(t => ({date: String(val(t.r, dateField(d)?.key) || t.y), label: (cfg.label ? String(val(t.r, cfg.label)) : pickTitle(t)).slice(0, 60)}));
         } else if (kind === 'histogram') {

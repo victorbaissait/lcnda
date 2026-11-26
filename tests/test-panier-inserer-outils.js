@@ -139,6 +139,37 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             assert.ok(await p.$eval('.wp-dlg [data-cx-tool-ins]', b => b.hidden), '📎 éteint : caché');
             await p.evaluate(() => { localStorage.removeItem('genealogie-inserer'); window.LCNDA_EXT.toolConnexions.paint(); });
         });
+        await t('12 · 🧺 clic droit partout (un seul écouteur) : un événement de la fiche → « 🧺 Prendre « … » » garde la SORTE et le numéro ; ↶', async () => {
+            await closeAll(); await B.go('personnes', {currentPersonId: 1}); await p.waitForSelector('#workspace .event-row[data-event-id]', {timeout: 20000}); await sleep(500);
+            const id = Number(await p.getAttribute('#workspace .event-row[data-event-id]', 'data-event-id'));
+            const c0 = await p.evaluate(() => window.LCNDA_EXT.connexions.count() || 0);
+            await p.click('#workspace .event-row[data-event-id] .event-date, #workspace .event-row[data-event-id] strong', {button: 'right'});
+            const b = p.locator('.ui-actmenu button', {hasText: '🧺'}).first(); await b.waitFor({timeout: 6000});
+            assert.match(await b.textContent(), /Prendre « /); await b.click(); await sleep(900);
+            const its = (await B.api('cx_basket', {})).items || [];
+            assert.ok(its.some(x => x.kind === 'event' && Number(x.ref_id) === id), JSON.stringify(its.map(x => [x.kind, x.ref_id, x.title])).slice(0, 300));
+            assert.strictEqual(await p.evaluate(() => window.LCNDA_EXT.connexions.count()), c0 + 1);
+            await clickUndo(); assert.strictEqual(await p.evaluate(() => window.LCNDA_EXT.connexions.count()), c0);
+        });
+        await t('13 · 🧺 un échantillon de chaque écran : fiche (événements, médias, proches), listes, tableau de bord, enquêtes, documents, données, graphiques — des éléments à prendre', async () => {
+            const scan = () => p.evaluate(() => { const seen = new Map(); document.querySelectorAll('#workspace *').forEach(el => { if (seen.size > 400) return; for (const a of el.attributes) { if (/^data-.*(person|event|media|place|act|source)/.test(a.name) && /^\d+$/.test(a.value)) { const it = window.LCNDA_EXT.toolConnexions.entityAt(el); if (it) seen.set(`${it.kind}:${it.ref_id}`, it.kind); break; } } });
+                const k = {}; seen.forEach(v => { k[v] = (k[v] || 0) + 1; }); return k; });
+            const out = {};
+            for (const [m, extra] of [['personnes', {currentPersonId: 1}], ['listes', {}], ['dashboard', {}], ['enquetes', {currentInvestigationId: 1}], ['documents', {}], ['donnees', {}], ['graphiques', {}]]) {
+                await closeAll(); await B.go(m, extra); await sleep(1800); out[m] = await scan(); }
+            console.log('    ', JSON.stringify(out));
+            assert.ok(out.personnes.event && out.personnes.person, 'la fiche : événements et proches');
+            assert.ok(Object.values(out).filter(k => Object.keys(k).length).length >= 3, 'au moins 3 écrans');
+        });
+        await t('14 · 📎 « Insérer… » dans « 📤 Envoyer vers… » (texte, tableau) et dans un export qui donne un tableau', async () => {
+            await closeAll();
+            assert.ok(await p.evaluate(() => (window.LCNDA_EXT.sendTargetsFor('rows') || []).some(t => t.key === 'cx_insert') && (window.LCNDA_EXT.sendTargetsFor('text') || []).some(t => t.key === 'cx_insert')));
+            await p.evaluate(() => { window.LCNDA_UI.openExportDialog({title: 'Naissances MAZAUD', formats: [{id: 'pdf', run: async () => {}}, window.LCNDA_EXT.sheetExportFormat(() => [['Nom', 'Année'], ['Léonard MAZAUD', '1872']], 'Naissances')]}); });
+            await p.waitForSelector('dialog.ui-export[open] [data-fmt="cx_insert"]', {timeout: 8000});
+            await p.click('dialog.ui-export [data-fmt="cx_insert"]'); await p.click('dialog.ui-export [data-ui-go]');
+            const b = p.locator('.ui-actmenu button', {hasText: 'Copier le texte'}).first(); await b.waitFor({timeout: 6000}); // le menu « Insérer un bloc » : curseur, note…, copier
+            await p.evaluate(() => document.querySelectorAll('.ui-actmenu').forEach(x => x.remove()));
+        });
         await t('11 · 🎞 Studio d’animation, 🎚️ Retouche : « Mettre dans… » une image du panier (par « 📤 Envoyer vers… ») ; un texte ne leur va pas', async () => {
             const r = await p.evaluate(() => ['send_anim-new', 'send_retouch'].map(id => { const d = window.LCNDA_EXT.dropTargets.find(t => t.id === id); return {id, ok: !!d && d.enabled() !== false, kinds: d?.kinds}; }));
             r.forEach(x => { assert.ok(x.ok, x.id); assert.deepStrictEqual(x.kinds, ['media']); });

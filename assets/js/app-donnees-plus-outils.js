@@ -195,7 +195,7 @@
     }
 
     /* ═════════════ 📜 crédits et licences (15) ═════════════ */
-    const BASEMAPS = [['Natural Earth', 'domaine public', 'https://www.naturalearthdata.com/'], ['IGN Admin Express', 'Licence Ouverte 2.0', 'https://geoservices.ign.fr/adminexpress'], ['OpenStreetMap', 'ODbL · © les contributeurs', 'https://www.openstreetmap.org/copyright']];
+    const BASEMAPS = [['Natural Earth', 'domaine public', 'https://www.naturalearthdata.com/'], ['IGN Admin Express', 'Licence Ouverte 2.0', 'https://geoservices.ign.fr/adminexpress'], ['OpenStreetMap', 'ODbL · © les contributeurs', 'https://www.openstreetmap.org/copyright'], ['Eurostat GISCO (NUTS)', '© EuroGeographics', 'https://ec.europa.eu/eurostat/web/gisco/geodata/administrative-units'], ['U.S. Census Bureau (comtés)', 'domaine public', 'https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html']];
     async function creditsData() {
         let st = null; try { st = await M().status?.(); } catch (_) {}
         const packs = st?.packs || [], byTheme = new Map();

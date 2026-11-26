@@ -78,6 +78,7 @@ c.commit()`, db], {encoding: 'utf8'});
         await t('un clic sur un point : la fiche accrochée au point (titre, lignes, ↗ source) ; la carte reste ; rien demandé à Internet', async () => {
             extReq.length = 0;
             await p.click(pt(nice)); await p.waitForSelector(card);
+            await p.waitForFunction(() => !document.querySelector('.ld-results .cf-card [data-cf-fam]'), null, {timeout: 20000}); // 👪 personne près de Nice : la ligne s'en va
             assert.ok(await p.$('.ld-results .h-map-point'), 'toujours la carte');
             assert.strictEqual((await p.textContent(`${card} .cf-title`)).trim(), 'Séisme de Nice');
             const lines = await p.$$eval(`${card} .cf-lines > div`, a => a.map(x => [x.querySelector('dt').textContent, x.querySelector('dd').textContent]));
