@@ -261,6 +261,8 @@
         return {rows: rows.slice(offset, offset + limit), total: rows.length, more: false, all: rows};
     }
     async function isInstalled(d) { if (!d.installed) return true; try { return !!(await d.installed()); } catch (_) { return false; } }
+    /** {ok, err} : err = la vérification elle-même a échoué (serveur, réseau) — ce n'est pas « pas installé » */
+    async function installState(d) { if (!d.installed) return {ok: true}; try { return {ok: !!(await d.installed())}; } catch (e) { return {ok: false, err: e?.message || String(e)}; } }
 
     /* ═════════════ la page d'une liste ═════════════ */
     const cur = {d: null, base: null, st: null, rows: [], total: 0, more: false, token: 0, seq: 0};
@@ -297,15 +299,17 @@
         const app = A(), host = ws(); if (!host) return; ensureCss();
         cur.base = d; cur.st = stateOf(d.id, d); cur.d = viewDef(d, cur.st); cur.token = token; cur.parent = null;
         host.innerHTML = `<section class="page collection-page ld-page" data-ld-page="${esc(d.id)}">${header(d)}${UI().spinner ? UI().spinner(T('Chargement…')) : ''}</section>`;
-        const ok = await isInstalled(d);
+        const chk = await installState(d), ok = chk.ok;
         if (token !== undefined && token !== app.state?.workspaceToken) return;
         if (!ok) {
-            host.innerHTML = `<section class="page collection-page ld-page" data-ld-page="${esc(d.id)}">${header(d, {help: esc(T('Ces données ne sont pas encore sur cet ordinateur.'))})}
-                <div class="ld-install" data-ld-install-host><p>${esc(T('Installe-les d’abord : ensuite, tu pourras chercher dedans par année, par lieu, autour d’une ville…'))}</p>
+            const why = chk.err ? `<p class="error" role="alert" data-ld-install-err>${esc(T('Impossible de vérifier si ces données sont installées : {e}', {e: chk.err}))} ${esc(T('Réessaie avec « ↻ C’est installé : recharger » ; si ça recommence, ferme puis rouvre l’app.'))}</p>` : '';
+            host.innerHTML = `<section class="page collection-page ld-page" data-ld-page="${esc(d.id)}" data-ld-missing>${header(d, {help: esc(T(chk.err ? 'Impossible de vérifier si ces données sont sur cet ordinateur.' : 'Ces données ne sont pas encore sur cet ordinateur.'))})}
+                <div class="ld-install" data-ld-install-host>${why}<p>${esc(T('Installe-les d’abord : ensuite, tu pourras chercher dedans par année, par lieu, autour d’une ville…'))}</p>
                 ${d.install && !kiosk() ? `<button type="button" class="button" data-ld-install>⤓ ${esc(T('Installer'))}</button>` : ''}
                 <button type="button" class="button secondary" data-ld-reload>↻ ${esc(T('C’est installé : recharger'))}</button></div>${sourceLine(d)}</section>`;
-            host.querySelector('[data-ld-install]')?.addEventListener('click', () => { try { d.install(host.querySelector('[data-ld-install-host]')); } catch (e) { toast(e.message, 'error'); } });
-            host.querySelector('[data-ld-reload]')?.addEventListener('click', () => renderList(d, A().state?.workspaceToken));
+            // l'installation finie (un POST …_finish, …_apply) : forgetInstalls() puis la page se redessine toute seule (plus bas)
+            host.querySelector('[data-ld-install]')?.addEventListener('click', () => { const fail = e => toast(T('L’installation n’a pas marché : {e}', {e: e?.message || String(e)}), 'error'); try { Promise.resolve(d.install(host.querySelector('[data-ld-install-host]'))).catch(fail); } catch (e) { fail(e); } });
+            host.querySelector('[data-ld-reload]')?.addEventListener('click', () => { forgetInstalls(); renderList(d, A().state?.workspaceToken); }); // ↻ relit vraiment (rien de gardé en mémoire)
             return;
         }
         const exp = `<button type="button" class="button small secondary" data-ld-export title="${esc(T('Toutes les lignes trouvées, dans un fichier pour un tableur'))}">⤓ ${esc(T('Exporter'))}</button>`;
@@ -807,14 +811,30 @@
     }
     /** ouvrir une liste de données d'ailleurs, déjà filtrée : LCNDA_EXT.dataListsEngine.open('hist_gares', {near: {lat, lon, km, title}}) */
     ext.dataListsEngine = {open: (id, preset) => { const d = all().find(x => x.id === id); if (d) openKey(d.link ? null : keyOf(d), preset); }, keyOf, list: () => all(), applyLocal: localFilter, fetchPage, stateOf, critText, periodText, nearText, buildQuery,
-        render: (d, token) => renderList(d, token), crumb, overview: token => renderOverview(token), sync: () => sync(), openKey, forget, loadAll, isInstalled, shown, groupOf, geoOf, periodOf, km, fold, page: () => (cur.d && ws()?.querySelector('.ld-page') ? pageApi() : null), blank, sortRows, viewDef};
+        render: (d, token) => renderList(d, token), crumb, overview: token => renderOverview(token), sync: () => sync(), openKey, forget, loadAll, isInstalled, installState, forgetInstalls, shown, groupOf, geoOf, periodOf, km, fold, page: () => (cur.d && ws()?.querySelector('.ld-page') ? pageApi() : null), blank, sortRows, viewDef};
 
     /* ═════════════════════════════════════════════════════════════════════════════════════════
      * Les données déjà dans l'app (packs, fichiers livrés) : leurs listes, sans toucher à leurs fichiers.
      * ═════════════════════════════════════════════════════════════════════════════════════════ */
     const api = (a, q) => A().api(a, q);
     let ldStatus = null, ldStatusAt = 0;
-    const ldInstalled = async src => { if (!ldStatus || Date.now() - ldStatusAt > 15000) { ldStatusAt = Date.now(); ldStatus = api('ld_status').catch(() => ({installed: {}})); } return !!(await ldStatus).installed?.[src]; };
+    // une erreur du serveur n'est pas « pas installé » : elle remonte (installState → le message), et rien n'est gardé
+    const ldInstalled = async src => { if (!ldStatus || Date.now() - ldStatusAt > 15000) { ldStatusAt = Date.now(); const p = ldStatus = api('ld_status').catch(e => { if (ldStatus === p) ldStatus = null; throw e; }); } return !!(await ldStatus).installed?.[src]; };
+    /** ⤓ une installation finie, retirée ou ↶ : plus rien de gardé en mémoire (ici ; 🗂 thèmes, 📊 récap, 🗂 Données écoutent « lcnda:installs-changed ») */
+    function forgetInstalls() { ldStatus = null; ldStatusAt = 0; try { window.dispatchEvent(new CustomEvent('lcnda:installs-changed')); } catch (_) {} }
+    // chaque pack s'installe par un POST …_finish (hist_pack_finish, meteo_pack_finish, bo_dl_finish…), donnees_maj_apply, …_undo / _remove / _restore :
+    // la page ouverte de 📊 Données (liste « pas encore installée », thèmes, récap) se redessine toute seule, sans recharger l'app
+    let redrawT = 0;
+    window.addEventListener('lcnda:data-changed', e => {
+        if (!/_(finish|apply|undo|remove|restore)$|^donnees_maj_/.test(String(e.detail?.action || ''))) return;
+        forgetInstalls();
+        clearTimeout(redrawT); redrawT = setTimeout(() => {
+            const st = A().state, host = ws(); if (!st || !host || !['donnees', 'listes'].includes(st.module)) return; // Réglages : relu en y revenant
+            const page = host.querySelector('.ld-page');
+            if (page ? !page.matches('[data-ld-missing]') : st.module !== 'donnees' && !host.querySelector('.ldt-overview, .ldt-theme-page')) return; // une liste déjà affichée : rien à redessiner
+            try { A().refreshScreen ? A().refreshScreen() : (page && cur.base && renderList(cur.base, st.workspaceToken)); } catch (err) { console.error(err); }
+        }, 300);
+    });
     const ldQuery = src => async query => { const r = await api('ld_query', {src, query: JSON.stringify(query || {})}); return {rows: r.rows || [], total: r.total || 0, more: !!r.more}; };
     const ldFacet = src => async (key, query) => (await api('ld_facet', {src, key, query: JSON.stringify(query || {})})).values || [];
     const goSettings = tab => { const st = A().state; if (!st) return; st.maintenanceTab = tab; A().persistUiState?.(); A().setModule?.('maintenance'); };

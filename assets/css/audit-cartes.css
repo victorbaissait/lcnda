@@ -34,7 +34,7 @@
 .map-gravity-layer .map-grav-pt { pointer-events: auto; }
 .map-legend { position: absolute; left: 10px; bottom: 26px; z-index: 4; pointer-events: none; max-width: 300px; background: rgba(255,255,255,.94); border: 2px solid var(--ink); padding: 7px 10px; display: flex; flex-direction: column; gap: 3px; font-size: 12px; }
 /* la mention « © OpenStreetMap · connexion requise… » est aussi en bas à gauche : la légende monte au-dessus au lieu de la cacher */
-.map-stage:has(> .map-caption:not([hidden])) > .map-legend { bottom: 84px !important; } /* !important : le style écrit sur la légende (bottom:26px) passait devant */
+.map-stage:has(> .map-caption:not([hidden])) > .map-legend { bottom: var(--map-legend-bottom, 84px) !important; } /* !important : le style écrit sur la légende (bottom:26px) passait devant ; --map-legend-bottom = la vraie hauteur de la mention + 8 px (app-carte.js, placeLegend) */
 /* la barre du haut défile de côté : ses boutons gardent leur largeur (plus « 📍 Lieux / à / placer » sur trois lignes) */
 .map-layout .tool-strip > :is(button, .button, label, details, select) { flex-shrink: 0; white-space: nowrap; }
 .map-legend[hidden] { display: none; }
@@ -116,3 +116,49 @@ body.is-kiosk #sidebar-content .saved-grip, body.is-kiosk #open-graph-reorder { 
 
 :root[data-theme="dark"] .map-filter-panel, :root[data-theme="dark"] .map-zone-panel, :root[data-theme="dark"] .map-legend, :root[data-theme="dark"] .gp-numbers, :root[data-theme="dark"] .gp-compare, :root[data-theme="dark"] .gp-minimap, :root[data-theme="dark"] .map-filter-btn { background: #222; color: #e8e8e8; border-color: #666; }
 :root[data-theme="dark"] .map-zone-list button { background: #2a2a2a; color: #e8e8e8; border-color: #444; }
+
+/* 🎨 Couleurs de la carte (app-carte-couleurs.js) : le chiffre lisible sur toute couleur, une forme par sorte au choix */
+.map-cluster, .map-marker.is-kind.has-count span { color: var(--kind-text, #fff); }
+.map-marker.is-kind.has-count:hover span { color: var(--blue); }
+.map-marker.is-kind.is-past { background: #111; }
+.map-marker.is-kind.is-future { background: #fff; }
+.map-marker.is-kind.is-past.has-count span { color: #fff; }
+.map-marker.is-kind.is-future.has-count span { color: #111; }
+.map-marker.is-shape { background: transparent !important; border: 0 !important; box-shadow: none !important; transform: translate(-50%, -50%); display: grid; place-items: center; width: 22px; height: 22px; }
+.map-marker.is-shape.has-count { width: 30px; height: 30px; }
+.map-marker.is-shape:hover { transform: translate(-50%, -50%) scale(1.35); }
+.map-marker.is-shape .kc-shape { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(2px 2px 0 rgba(0,0,0,.25)); pointer-events: none; }
+.map-marker.is-shape span { position: relative; transform: none !important; }
+.map-marker.is-shape:hover .kc-shape path { fill: #fff; }
+.map-marker.is-shape.is-past .kc-shape path { fill: #111; }
+.map-marker.is-shape.is-future .kc-shape path { fill: #fff; }
+.map-legend .map-legend-row { display: flex; align-items: center; gap: 6px; }
+.map-legend .map-legend-sw { pointer-events: auto; border: 0; background: none; padding: 3px; margin: -3px; cursor: pointer; display: inline-flex; line-height: 0; color: inherit; }
+.map-legend .map-legend-sw:hover i, .map-legend .map-legend-sw:focus-visible i { outline: 2px solid var(--blue); outline-offset: 1px; }
+.map-legend i.is-shape { width: 13px; height: 13px; border: 0; background: none; }
+.map-legend i.is-shape svg { display: block; }
+.map-legend .map-legend-cfg { pointer-events: auto; align-self: flex-start; font-size: 11px; font-weight: 700; color: var(--blue); text-decoration: none; margin-top: 2px; }
+.map-legend .map-legend-cfg:hover { text-decoration: underline; }
+:root[data-theme="dark"] .map-legend i:not(.is-shape):not(.is-grav) { border-color: #bbb; }
+:root[data-theme="dark"] .map-legend small { color: #bbb; }
+.person-map-point[data-kc] text { fill: var(--kind-text, #fff); }
+.person-map-point[data-kc]:is(:hover, :focus-visible, .is-hovered) text { fill: var(--blue); }
+.person-map-point .kc-pm-shape { fill: var(--event-color, var(--blue)); stroke: var(--ink); stroke-width: 3; stroke-linejoin: round; filter: drop-shadow(4px 4px 0 rgba(5,93,255,.2)); }
+.person-map-point:is(:hover, :focus-visible, .is-hovered) .kc-pm-shape { fill: #fff; stroke: var(--blue); }
+.kc-panel { grid-column: 1 / -1; }
+.kc-panel.is-flash { outline: 3px solid var(--blue); outline-offset: 3px; }
+.kc-presets { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+.kc-preset { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line-soft, #c9ced8); background: var(--paper, #fff); color: inherit; padding: 5px 10px; cursor: pointer; font: inherit; font-size: 13px; }
+.kc-preset:hover { border-color: var(--blue); }
+.kc-preset.is-on { border: 2px solid var(--blue); padding: 4px 9px; font-weight: 700; }
+.kc-preset-sw { display: inline-flex; gap: 2px; align-items: center; }
+.kc-preset-sw i { width: 10px; height: 10px; display: inline-block; border: 1px solid rgba(0,0,0,.45); }
+.kc-rows { display: grid; gap: 4px; margin: 6px 0 10px; }
+.kc-row { display: grid; grid-template-columns: 24px minmax(110px, 180px) auto minmax(0, 1fr) auto; align-items: center; gap: 8px; min-height: 32px; }
+.kc-prev svg { display: block; }
+.kc-hex { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.kc-shapes { margin: 6px 0 10px; }
+.kc-foot { display: flex; gap: 8px; }
+@media (max-width: 700px) { .kc-row { grid-template-columns: 24px 1fr auto; } .kc-hex { display: none; } .kc-shape-sel { grid-column: 2 / -1; } }
+:root[data-theme="dark"] .kc-preset { background: #2a2a2a; border-color: #555; }
+:root[data-theme="dark"] .kc-preset-sw i { border-color: rgba(255,255,255,.5); }

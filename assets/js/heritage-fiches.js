@@ -444,7 +444,7 @@
     async function dRun(b, sheet) {
         const E = DE(), d0 = dListOf(b.list);
         if (!E || !d0) return {error: i18n('Cette liste n’est pas disponible ici.')};
-        if (!(await E.isInstalled(d0))) return {error: i18n('Ces données ne sont pas encore sur cet ordinateur (Réglages → 🗂 Données).')};
+        if (!(await E.isInstalled(d0))) return {error: i18n('Ces données ne sont pas encore sur cet ordinateur (Réglages → 🗂 Données).'), notInstalled: true};
         const st = {...E.blank()}, d = E.viewDef ? E.viewDef(d0, st) : d0;
         if (b.q) st.q = b.q;
         if (b.from != null || b.to != null) st.period = {from: b.from ?? -9999, to: b.to ?? 9999, mode: 'overlap'};
@@ -514,7 +514,7 @@
             let html;
             try {
                 const res = await dRun(b, sheet);
-                if (res.error) html = `<p class="muted">${esc(res.error)}</p>${b.snap ? dHtml(b.snap, {...b, mode: 'frozen'}) : ''}`;
+                if (res.error) html = `<p class="muted">${esc(res.error)}</p>${res.notInstalled && !kiosk() ? `<p><button type="button" class="button small" data-fi-dopen="${esc(b.id)}">${esc(i18n('⤓ Installer'))}</button></p>` : ''}${b.snap ? dHtml(b.snap, {...b, mode: 'frozen'}) : ''}`; // ⤓ : la liste en grand propose de l'installer
                 else { const m = await dModel(b, res); dataLast.set(b.id, m); html = dHtml(m, b, {actions: true}); }
             } catch (e) { html = `<p class="muted">${esc(e.message || String(e))}</p>`; }
             if (el.isConnected) { el.innerHTML = html; dMapCards(el, dataLast.get(b.id) || b.snap); }
@@ -572,61 +572,118 @@
     function dUndo(c, before, after, fresh) {
         A().undoToast?.(i18n(fresh ? 'Bloc « {nm} » ajouté' : 'Bloc « {nm} » enregistré', {nm: titleOf(after)}), {undo: () => dPut(c.id, after.id, before), redo: () => dPut(c.id, after.id, after)});
     }
-    /* ✎ les réglages : la liste (par thème, listes réunies en tête) ou une question, les filtres, les colonnes, l'affichage, le mode */
-    function dPickerOptions(sel) {
-        const E = DE(); if (!E) return '';
-        const TH = ext.listesThemes, ok = d => !d.link && E.shown?.(d) !== false;
-        const opt = d => `<option value="${esc(d.id)}" ${d.id === sel ? 'selected' : ''}>${esc(`${d.merged ? '🔀 ' : ''}${d.icon || '📋'} ${i18n(d.label)}`)}</option>`;
-        const byName = (a, z) => (z.merged ? 1 : 0) - (a.merged ? 1 : 0) || String(i18n(a.label)).localeCompare(String(i18n(z.label)), 'fr');
-        if (!TH?.index || !TH.themes) return E.list().filter(ok).sort(byName).map(opt).join('');
-        const I = TH.index();
-        return TH.themes().map(t => { const ds = (I.by.get(t.id) || []).filter(ok).sort(byName); return ds.length ? `<optgroup label="${esc(`${t.icon || ''} ${i18n(t.label)}`.trim())}">${ds.map(opt).join('')}</optgroup>` : ''; }).join('');
-    }
+    /* ✎ les réglages, en quatre sections repliées (comme ⚙️ Personnaliser du widget 📊) : 📋 Données (la liste, choisie avec le choix
+     * commun LCNDA_EXT.dataListPicker — recherche, les 20 thèmes en pastilles, cartes par thème, installé / à télécharger, clavier — ou une
+     * question), 🔎 Filtres, 👁 Affichage, 🎨 Apparence (titre, largeur, couleur : les champs communs à tous les blocs). Seule la première
+     * est ouverte ; fermée, chacune dit en une ligne ce qu'elle règle (« 1850–1900 · 30 km autour de Tulle »). Les noms des champs
+     * enregistrés n'ont pas changé (list, ask, q, from, to, near, center, km, family, famcol, cols, limit, sort, dir, view, mode) :
+     * un bloc enregistré avant s'ouvre tel quel (dNorm ne fait que ranger les valeurs d'une vieille version). */
+    const dNorm = b => { // un bloc d'avant : des valeurs en texte (« 1850 », « 30 »), un sens de tri absent
+        if (b.from === '' || b.from === undefined) b.from = null; if (b.to === '' || b.to === undefined) b.to = null;
+        ['from', 'to'].forEach(k => { if (b[k] != null && Number.isFinite(Number(b[k]))) b[k] = Math.round(Number(b[k])); else if (b[k] != null) b[k] = null; });
+        if (b.dir !== 'desc') b.dir = 'asc'; if (!Array.isArray(b.cols)) b.cols = []; if (!['place', 'subject'].includes(b.near)) b.near = '';
+        return b;
+    };
+    const dThemeOf = d => { const TH = ext.listesThemes; if (!d || !TH?.themeOf) return null; const id = TH.themeOf(d); return (TH.themes?.() || []).find(t => t.id === id) || null; };
+    const D_WIDTHS = {12: '1', 6: '1/2', 4: '1/3', 3: '1/4', 8: '2/3', 9: '3/4'};
     function dColsHtml(d, b) {
         const fs = dFields(d); if (!fs.length) return `<p class="muted">${esc(i18n('Choisis d’abord une liste.'))}</p>`;
         const on = (b.cols || []).filter(k => fs.some(f => f.key === k)), keys = on.length ? on : fs.slice(0, 4).map(f => f.key);
         return fs.map(f => `<label class="checkbox-line"><input type="checkbox" name="dcol" value="${esc(f.key)}" ${keys.includes(f.key) ? 'checked' : ''}> ${esc(i18n(f.label))}</label>`).join('');
     }
     const dSortHtml = (d, b) => `<option value="">${esc(i18n('l’ordre de la liste'))}</option>${dFields(d).map(f => `<option value="${esc(f.key)}" ${b.sort === f.key ? 'selected' : ''}>${esc(i18n(f.label))}</option>`).join('')}${d?.geo ? `<option value="_km" ${b.sort === '_km' ? 'selected' : ''}>${esc(i18n('la distance'))}</option>` : ''}`;
-    function dEditorHtml(b) {
-        if (!DE()) return `<p class="muted">${esc(i18n('Les listes de données ne sont pas chargées.'))}</p>`;
+    /** la liste choisie, sur une ligne calme : « 📋 ⚔️ Batailles · ⚔️ Guerres et soldats — Changer », la source et la licence */
+    function dChosenHtml(d) {
+        const th = dThemeOf(d), ic = d.merged ? '🔀' : d.icon || '📋', lic = dLicence(d);
+        const who = d.source ? (httpUrl(d.sourceUrl) ? `<a href="${esc(d.sourceUrl)}" target="_blank" rel="noopener noreferrer">${esc(d.source)}</a>` : esc(d.source)) : '';
+        return `<div class="h-fi-dchosen" data-fi-dchosen-line="${esc(d.id)}">
+            <p class="h-fi-dchosen-name"><span aria-hidden="true">${esc(ic === '📋' ? '📋' : `📋 ${ic}`)}</span> <b>${esc(i18n(d.label))}</b>${th ? ` <span class="muted">· ${esc(`${th.icon || ''} ${i18n(th.label)}`.trim())}</span>` : ''} <span class="muted" aria-hidden="true">—</span> <button type="button" class="link-button" data-fi-dchange>${esc(i18n('Changer'))}</button></p>
+            ${who || lic ? `<p class="h-fi-dchosen-src muted"><small>${who ? `${esc(i18n('Source :'))} ${who}` : ''}${who && lic ? ' · ' : ''}${lic ? esc(i18n('Licence : {l}', {l: lic})) : ''}</small></p>` : ''}
+            <div data-fi-dinst aria-live="polite"></div></div>`;
+    }
+    function dEditorHtml(b, common = '') {
+        if (!DE()) return `${common}<p class="muted">${esc(i18n('Les listes de données ne sont pas chargées.'))}</p>`;
+        dNorm(b);
         const d = dListOf(b.list), v = x => (x == null ? '' : esc(x)), radio = (name, val, cur0, ic, l) => `<label class="h-fi-dchoice"><input type="radio" name="${name}" value="${val}" ${cur0 === val ? 'checked' : ''}><span>${ic} ${esc(i18n(l))}</span></label>`;
         const snapNote = b.snap ? `<label class="checkbox-line" data-fi-dresnap><input type="checkbox" name="resnap" ${b.mode === 'frozen' ? '' : 'checked'}> ${esc(i18n('Refaire la copie avec ces réglages (copie actuelle : {d}, {n} lignes)', {d: dDate(b.snap.at), n: (b.snap.rows || []).length}))}</label>` : '';
-        return `<div class="h-fi-dbox" data-fi-dbox>
-            <div class="h-fi-dask"><label for="fi-dask-${esc(b.id)}">${esc(i18n('Une question'))} <small>(${esc(i18n('facultatif'))})</small></label>
-                <div class="h-fi-dask-row"><input id="fi-dask-${esc(b.id)}" name="ask" value="${v(b.ask)}" maxlength="300" placeholder="${esc(i18n('ex. les séismes près de Tulle entre 1850 et 1900'))}"><button type="button" class="button small secondary" data-fi-dask>${esc(i18n('🔎 Comprendre'))}</button></div>
-                <div class="h-fi-dpills" data-fi-dpills aria-live="polite"></div></div>
-            <div class="form-grid">
-                <label class="span-2">${esc(i18n('Liste'))}<span class="h-fi-dlistrow"><input type="search" data-fi-dfind placeholder="${esc(i18n('Chercher une liste…'))}" aria-label="${esc(i18n('Chercher une liste…'))}"><select name="list"><option value="">${esc(i18n('— choisir —'))}</option>${dPickerOptions(b.list)}</select></span></label>
-                <label>${esc(i18n('Mots à chercher'))}<input name="q" value="${v(b.q)}" maxlength="120"></label>
-                <label>${esc(i18n('Combien de lignes au plus'))}<input name="limit" type="number" min="1" max="${DMAX}" value="${Number(b.limit) || 20}"></label>
-                <label>${esc(i18n('De l’année'))}<input name="from" type="number" min="-9999" max="2999" value="${v(b.from)}" placeholder="1850"></label>
-                <label>${esc(i18n('À l’année'))}<input name="to" type="number" min="-9999" max="2999" value="${v(b.to)}" placeholder="1900"></label>
+        const sec = (id, title, html, open = false) => `<details class="h-fi-dsec" data-fi-dsec="${id}" ${open ? 'open' : ''}><summary><span class="h-fi-dsec-t">${esc(i18n(title))}</span><small class="h-fi-dsec-sum muted" data-fi-dsum="${id}"></small></summary><div class="h-fi-dsec-body">${html}</div></details>`;
+        const id = esc(b.id);
+        return `<div class="h-fi-dbox" data-fi-dbox><input type="hidden" name="list" value="${v(b.list)}">
+            ${sec('data', '📋 Données', `<div data-fi-dchosen></div><div class="h-fi-dpick" data-fi-dpicker hidden></div>
+                <details class="h-fi-dask" data-fi-daskbox ${b.ask ? 'open' : ''}><summary>${esc(i18n('💬 ou pose une question'))}</summary>
+                    <div class="h-fi-dask-in"><label for="fi-dask-${id}">${esc(i18n('Une question'))} <small>(${esc(i18n('facultatif'))})</small></label>
+                    <div class="h-fi-dask-row"><input id="fi-dask-${id}" name="ask" value="${v(b.ask)}" maxlength="300" placeholder="${esc(i18n('ex. les séismes près de Tulle entre 1850 et 1900'))}"><button type="button" class="button small secondary" data-fi-dask>${esc(i18n('🔎 Comprendre'))}</button></div>
+                    <div class="h-fi-dpills" data-fi-dpills aria-live="polite"></div></div></details>`, true)}
+            ${sec('filt', '🔎 Filtres', `<div class="h-fi-dgrid">
+                <label class="is-wide">${esc(i18n('Mots à chercher'))}<input name="q" value="${v(b.q)}" maxlength="120" placeholder="${esc(i18n('facultatif'))}"></label>
+                <label>${esc(i18n('De l’année'))}<input name="from" type="number" inputmode="numeric" min="-9999" max="2999" value="${v(b.from)}" placeholder="1850"></label>
+                <label>${esc(i18n('À l’année'))}<input name="to" type="number" inputmode="numeric" min="-9999" max="2999" value="${v(b.to)}" placeholder="1900"></label>
                 <label>${esc(i18n('Autour de'))}<select name="near"><option value="">${esc(i18n('partout'))}</option><option value="place" ${b.near === 'place' ? 'selected' : ''}>${esc(i18n('un lieu'))}</option><option value="subject" ${b.near === 'subject' ? 'selected' : ''}>${esc(i18n('le sujet de la fiche (son titre)'))}</option></select></label>
-                <label>${esc(i18n('Lieu'))}<input name="place" value="${v(b.center?.title)}" maxlength="160" placeholder="${esc(i18n('ex. Tulle'))}"></label>
-                <label>${esc(i18n('Rayon (km)'))}<input name="km" type="number" min="1" max="2000" value="${Number(b.km) || 30}"></label>
-                <label>${esc(i18n('Trier par'))}<span class="h-fi-dlistrow"><select name="sort" data-fi-dsort>${dSortHtml(d, b)}</select><select name="dir" aria-label="${esc(i18n('Ordre'))}"><option value="asc">↑</option><option value="desc" ${b.dir === 'desc' ? 'selected' : ''}>↓</option></select></span></label>
-                <label class="checkbox-line span-2"><input type="checkbox" name="family" ${b.family ? 'checked' : ''}> ${esc(i18n('👪 Seulement près des lieux de la famille'))}</label>
-                <label class="checkbox-line span-2"><input type="checkbox" name="famcol" ${b.famcol ? 'checked' : ''}> ${esc(i18n('Colonne « 👪 Dans la famille » (qui vivait là, cette année-là)'))}</label>
-            </div>
-            <fieldset class="h-fi-dset"><legend>${esc(i18n('Colonnes'))}</legend><div class="h-fi-dcols" data-fi-dcols>${dColsHtml(d, b)}</div></fieldset>
-            <fieldset class="h-fi-dset"><legend>${esc(i18n('Affichage'))}</legend><div class="h-fi-dchoices">${DVIEWS.map(([k, ic, l]) => radio('view', k, b.view || 'table', ic, l)).join('')}</div></fieldset>
-            <fieldset class="h-fi-dset"><legend>${esc(i18n('Mode'))}</legend><div class="h-fi-dchoices">${radio('mode', 'live', b.mode === 'frozen' ? 'frozen' : 'live', '🔄', 'À jour : relue à chaque ouverture')}${radio('mode', 'frozen', b.mode === 'frozen' ? 'frozen' : 'live', '📌', 'Figé : une copie datée des lignes, avec leurs sources')}</div>${snapNote}</fieldset>
+                <label data-fi-dplacebox>${esc(i18n('Lieu'))}<input name="place" value="${v(b.center?.title)}" maxlength="160" placeholder="${esc(i18n('ex. Tulle'))}"></label>
+                <label data-fi-dkmbox>${esc(i18n('Rayon (km)'))}<input name="km" type="number" inputmode="numeric" min="1" max="2000" value="${Number(b.km) || 30}"></label>
+                <label class="checkbox-line is-row"><input type="checkbox" name="family" ${b.family ? 'checked' : ''}> ${esc(i18n('👪 Seulement près des lieux de la famille'))}</label></div>`)}
+            ${sec('show', '👁 Affichage', `<div class="h-fi-dchoices" role="group" aria-label="${esc(i18n('Affichage'))}">${DVIEWS.map(([k, ic, l]) => radio('view', k, b.view || 'table', ic, l)).join('')}</div>
+                <fieldset class="h-fi-dset"><legend>${esc(i18n('Colonnes'))}</legend><div class="h-fi-dcols" data-fi-dcols>${dColsHtml(d, b)}</div></fieldset>
+                <div class="h-fi-dgrid">
+                    <label>${esc(i18n('Combien de lignes au plus'))}<input name="limit" type="number" inputmode="numeric" min="1" max="${DMAX}" value="${Number(b.limit) || 20}"></label>
+                    <label>${esc(i18n('Trier par'))}<select name="sort" data-fi-dsort>${dSortHtml(d, b)}</select></label>
+                    <label>${esc(i18n('Ordre'))}<select name="dir"><option value="asc">${esc(i18n('↑ croissant'))}</option><option value="desc" ${b.dir === 'desc' ? 'selected' : ''}>${esc(i18n('↓ décroissant'))}</option></select></label>
+                    <label class="checkbox-line is-row"><input type="checkbox" name="famcol" ${b.famcol ? 'checked' : ''}> ${esc(i18n('Colonne « 👪 Dans la famille » (qui vivait là, cette année-là)'))}</label></div>
+                <div class="h-fi-dchoices" role="group" aria-label="${esc(i18n('Mode'))}">${radio('mode', 'live', b.mode === 'frozen' ? 'frozen' : 'live', '🔄', 'À jour : relue à chaque ouverture')}${radio('mode', 'frozen', b.mode === 'frozen' ? 'frozen' : 'live', '📌', 'Figé : une copie datée des lignes, avec leurs sources')}</div>${snapNote}`)}
+            ${common ? sec('look', '🎨 Apparence', `<div class="h-fi-dlook">${common}</div>`) : ''}
             <p class="muted h-fi-help">${esc(i18n('Chaque ligne garde sa source ↗ ; la source et la licence sont écrites sous le bloc, et suivent la fiche quand on l’imprime ou l’exporte.'))}</p></div>`;
+    }
+    /** la ligne de résumé de chaque section (quand elle est fermée) */
+    function dSummaries(box, root) {
+        const el = n => (root || box).querySelector(`[name="${n}"]`), val = n => String(el(n)?.value ?? '').trim(), on = n => !!el(n)?.checked;
+        const d = dListOf(val('list')), set = (k, s) => { const x = box.querySelector(`[data-fi-dsum="${k}"]`); if (x) x.textContent = s; };
+        set('data', d ? [`${d.merged ? '🔀' : d.icon || '📋'} ${i18n(d.label)}`, dThemeOf(d) ? i18n(dThemeOf(d).label) : ''].filter(Boolean).join(' · ') : val('ask') ? `« ${val('ask')} »` : i18n('aucune liste choisie'));
+        const near = val('near'), km = Number(val('km')) || 30, from = val('from'), to = val('to');
+        set('filt', [val('q') ? `« ${val('q')} »` : '', from || to ? `${from || '…'}–${to || '…'}` : '',
+            near === 'place' ? i18n('{km} km autour de {p}', {km, p: val('place') || '…'}) : near === 'subject' ? i18n('{km} km autour du sujet de la fiche', {km}) : '',
+            on('family') ? i18n('👪 près des lieux de la famille') : ''].filter(Boolean).join(' · ') || i18n('aucun filtre : toute la liste'));
+        const view = (root || box).querySelector('[name="view"]:checked')?.value || 'table', vw = DVIEWS.find(x => x[0] === view), nc = (root || box).querySelectorAll('[name="dcol"]:checked').length;
+        const so = el('sort'), sl = so && so.value ? so.selectedOptions[0]?.textContent : '';
+        set('show', [vw ? `${vw[1]} ${i18n(vw[2])}` : '', nc ? i18n('{n} colonnes', {n: nc}) : '', i18n('{n} lignes au plus', {n: Number(val('limit')) || 20}), sl ? `${i18n('tri : {f}', {f: sl})} ${val('dir') === 'desc' ? '↓' : '↑'}` : '',
+            on('famcol') ? '👪' : '', (root || box).querySelector('[name="mode"]:checked')?.value === 'frozen' ? i18n('📌 Figé') : i18n('🔄 À jour')].filter(Boolean).join(' · '));
+        set('look', [val('title') ? `« ${val('title')} »` : i18n('le nom de la liste'), el('width') ? i18n('largeur {w}', {w: D_WIDTHS[val('width')] || val('width')}) : '', on('hascolor') ? i18n('en couleur') : ''].filter(Boolean).join(' · '));
+        const w = val('near'); const pb = box.querySelector('[data-fi-dplacebox]'), kb = box.querySelector('[data-fi-dkmbox]');
+        if (pb) pb.hidden = w !== 'place'; if (kb) kb.hidden = !w;
     }
     function dBind(root, b) {
         const box = root.querySelector('[data-fi-dbox]'); if (!box) return;
-        const el = n => box.querySelector(`[name="${n}"]`);
-        const repaint = () => { const d = dListOf(el('list').value); box.querySelector('[data-fi-dcols]').innerHTML = dColsHtml(d, {cols: d && d.id === b.list ? b.cols : []}); box.querySelector('[data-fi-dsort]').innerHTML = dSortHtml(d, d && d.id === b.list ? b : {}); };
-        el('list').addEventListener('change', repaint);
-        box.querySelector('[data-fi-dfind]').addEventListener('input', e => { const w = foldT(e.target.value).trim(); el('list').querySelectorAll('option').forEach(o => { o.hidden = !!w && !!o.value && !foldT(o.textContent).includes(w); }); el('list').querySelectorAll('optgroup').forEach(g => { g.hidden = !!w && ![...g.children].some(o => !o.hidden); }); });
+        const el = n => box.querySelector(`[name="${n}"]`), chosenBox = box.querySelector('[data-fi-dchosen]'), pk = box.querySelector('[data-fi-dpicker]');
+        const sums = () => dSummaries(box, root);
+        const repaint = () => { const d = dListOf(el('list').value); box.querySelector('[data-fi-dcols]').innerHTML = dColsHtml(d, {cols: d && d.id === b.list ? b.cols : []}); box.querySelector('[data-fi-dsort]').innerHTML = dSortHtml(d, d && d.id === b.list ? b : {}); sums(); };
+        /* ⚠ une liste pas encore sur cet ordinateur : « ⤓ Installer » sur place (le pack s'installe comme dans Listes), puis ↻ vérifier */
+        const checkInst = async d => {
+            const slot = chosenBox.querySelector('[data-fi-dinst]'); if (!slot || !DE()?.isInstalled) return;
+            const ok = await DE().isInstalled(d); if (!slot.isConnected || el('list').value !== d.id) return;
+            slot.innerHTML = ok ? '' : `<p class="h-fi-dwarn">⚠ ${esc(i18n('Ces données ne sont pas encore sur cet ordinateur : installe-les pour voir les lignes.'))}</p>
+                <div class="h-fi-dinstrow">${d.install && !kiosk() ? `<button type="button" class="button small" data-fi-dinstall>${esc(i18n('⤓ Installer'))}</button>` : ''}<button type="button" class="button small secondary" data-fi-drecheck>${esc(i18n('↻ C’est installé : vérifier'))}</button></div><div data-fi-dinsthost></div>`;
+        };
+        const paintChosen = () => {
+            const d = dListOf(el('list').value);
+            if (d) { chosenBox.innerHTML = dChosenHtml(d); pk.hidden = true; pk.innerHTML = ''; checkInst(d); }
+            else { chosenBox.innerHTML = el('list').value ? `<p class="h-fi-dwarn">⚠ ${esc(i18n('Cette liste n’est pas disponible ici.'))}</p>` : ''; mountPicker(); }
+            sums();
+        };
+        const setList = d => { el('list').value = d.id; paintChosen(); repaint(); };
+        const mountPicker = (keep = null) => {
+            pk.hidden = false;
+            if (!ext.dataListPicker) { pk.innerHTML = `<p class="muted">${esc(i18n('Chargement…'))}</p>`; return; }
+            ext.dataListPicker(pk, {compact: true, filter: d => !d.link, selected: el('list').value,
+                head: keep ? `<p class="h-fi-dkeep"><button type="button" class="link-button" data-fi-dkeep>${esc(i18n('✕ Garder « {nm} »', {nm: i18n(keep.label)}))}</button></p>` : '',
+                onPick: d => setList(d)});
+        };
+        paintChosen();
         const ask = async () => {
             const q = el('ask').value.trim(), out = box.querySelector('[data-fi-dpills]'); if (!q) return el('ask').focus();
             if (!ext.dataAsk) { out.innerHTML = `<p class="muted">${esc(i18n('La lecture des questions n’est pas chargée.'))}</p>`; return; }
             out.innerHTML = UIx().spinner ? UIx().spinner(i18n('Je lis la question…')) : esc(i18n('Je lis la question…'));
             let r; try { r = await ext.dataAsk(q); } catch (e) { out.innerHTML = `<p class="muted">${esc(e.message || String(e))}</p>`; return; }
             const u = r.u || {}, pills = [];
-            if (r.d) { el('list').value = r.d.id; repaint(); pills.push([`${r.d.icon || '📋'} ${i18n(r.d.label)}`, 'list']); }
+            if (r.d) { setList(r.d); pills.push([`${r.d.icon || '📋'} ${i18n(r.d.label)}`, 'list']); }
             if (Array.isArray(u.years)) { el('from').value = u.years[0]; el('to').value = u.years[1]; pills.push([`📅 ${u.years[0]} → ${u.years[1]}`, 'from']); } else { el('from').value = ''; el('to').value = ''; }
             if (u.where === 'place' && u.center) { el('near').value = 'place'; el('place').value = u.center.title; el('km').value = u.km || 30; box.dataset.fiDcenter = JSON.stringify(u.center); pills.push([i18n('📍 À {km} km autour de {p}', {km: u.km || 30, p: u.center.title}), 'place']); }
             else { el('near').value = ''; }
@@ -634,13 +691,20 @@
             const notes = [u.whoNote, u.whereNote].filter(Boolean);
             out.innerHTML = `<h4>${esc(i18n('Ce que j’ai compris'))} <small class="muted">${esc(i18n('touche une pastille pour la changer'))}</small></h4>
                 <div class="h-fi-dpillrow">${pills.map(([l, f]) => `<button type="button" class="h-fi-dpill" data-fi-dfocus="${f}">${esc(l)}</button>`).join('')}</div>
-                ${notes.map(n => `<p class="muted">${esc(n)}</p>`).join('')}<p class="muted">${esc(r.d ? i18n('{n} lignes trouvées : règle les colonnes et l’affichage, puis enregistre.', {n: r.total || 0}) : i18n('Je n’ai pas compris de quelle liste il s’agit : choisis-la ci-dessous.'))}</p>`;
+                ${notes.map(n => `<p class="muted">${esc(n)}</p>`).join('')}<p class="muted">${esc(r.d ? i18n('{n} lignes trouvées : règle les colonnes et l’affichage, puis enregistre.', {n: r.total || 0}) : i18n('Je n’ai pas compris de quelle liste il s’agit : choisis-la ci-dessus.'))}</p>`;
+            sums();
         };
         box.addEventListener('click', e => {
             if (e.target.closest('[data-fi-dask]')) { e.preventDefault(); ask(); }
-            const f = e.target.closest('[data-fi-dfocus]'); if (f) { e.preventDefault(); el(f.dataset.fiDfocus)?.focus(); }
+            const f = e.target.closest('[data-fi-dfocus]');
+            if (f) { e.preventDefault(); const k = f.dataset.fiDfocus, x = k === 'list' ? box.querySelector('[data-fi-dchange]') || pk.querySelector('[data-ld-ov-q]') : el(k); const sec = x?.closest('details.h-fi-dsec'); if (sec) sec.open = true; x?.focus(); }
+            if (e.target.closest('[data-fi-dchange]')) { e.preventDefault(); const d = dListOf(el('list').value); chosenBox.innerHTML = ''; mountPicker(d); setTimeout(() => { try { pk.querySelector('[data-ld-ov-q]')?.focus({preventScroll: true}); } catch (_) {} }, 30); }
+            if (e.target.closest('[data-fi-dkeep]')) { e.preventDefault(); paintChosen(); box.querySelector('[data-fi-dchange]')?.focus(); }
+            if (e.target.closest('[data-fi-dinstall]')) { e.preventDefault(); const d = dListOf(el('list').value); try { d?.install?.(chosenBox.querySelector('[data-fi-dinsthost]')); } catch (err) { toast(err.message, 'error'); } }
+            if (e.target.closest('[data-fi-drecheck]')) { e.preventDefault(); const d = dListOf(el('list').value); if (d) checkInst(d); }
         });
         el('ask').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); ask(); } });
+        root.addEventListener('input', sums); root.addEventListener('change', sums); root.addEventListener('click', e => { if (e.target.closest('[data-fi-w]')) setTimeout(sums, 0); });
     }
     /** ✎ Enregistrer : lire les réglages ; un lieu tapé est cherché dans la base ; « Figé » refait la copie (sauf si on garde l'ancienne) */
     async function dRead(form, b) {
@@ -709,7 +773,7 @@
         const W_CHOICES = [['12', '1'], ['6', '1/2'], ['4', '1/3'], ['3', '1/4'], ['8', '2/3'], ['9', '3/4']];
         const common = `<label>Titre du bloc <small>(facultatif)</small><input name="title" value="${esc(b.title || '')}" maxlength="200" placeholder="${esc(label)}"></label>
             ${b.type === 'divider' ? '' : `<div class="h-fi-wrow"><span>Largeur</span><input type="hidden" name="width" value="${esc(b.width || '12')}"><div class="block-widths dashboard-widget-widths">${W_CHOICES.map(([v, l]) => `<button type="button" data-fi-w="${v}" aria-pressed="${String(b.width || '12') === v ? 'true' : 'false'}" title="Largeur ${l}">${l}</button>`).join('')}</div></div>`}
-            <div class="h-fi-wrow"><span>Couleur</span><span class="h-fi-colrow"><input type="color" name="color" value="${esc(b.color || '#0066cc')}"><label class="checkbox-line"><input type="checkbox" name="hascolor" ${b.color ? 'checked' : ''}> utiliser</label></span></div>`;
+            <div class="h-fi-wrow"><span>Couleur</span><span class="h-fi-colrow"><label class="checkbox-line"><input type="checkbox" name="hascolor" ${b.color ? 'checked' : ''}> ${esc(i18n('Une couleur pour ce bloc'))}</label><input type="color" name="color" value="${esc(b.color || '#0066cc')}" aria-label="${esc(i18n('Couleur du bloc'))}"></span></div>`;
         let body = '';
         const rowsEditor = (rows, cols) => `<div class="h-fi-rows" data-fi-rows>${(rows.length ? rows : [{}]).map(r => `<div class="h-fi-row">${cols.map(([k, l, w]) => `<input data-k="${k}" placeholder="${esc(l)}" value="${esc(r[k] || '')}" style="flex:${w}">`).join('')}<button type="button" class="h-bt" data-fi-rowdel title="Retirer">×</button></div>`).join('')}</div><button type="button" class="button small secondary" data-fi-rowadd>＋ Une ligne</button>`;
         if (b.type === 'text') body = `<label class="h-fi-big">Texte<textarea name="text" rows="8">${esc(b.text || '')}</textarea></label><p class="muted h-fi-help"># Titre · ## Sous-titre · - liste · 1. liste numérotée · **gras** · *italique* · __souligné__ · [texte du lien](https://…) · > citation · --- trait</p>`;
@@ -727,7 +791,7 @@
             <div class="form-grid"><label>${esc(i18n('Métier'))}<input name="occupation" value="${esc(b.occupation || '')}" maxlength="120" placeholder="${esc(i18n('ex. sabotier'))}"></label><label>${esc(i18n('Lieu'))}<input name="place" value="${esc(b.place || '')}" maxlength="120" placeholder="${esc(i18n('ex. Naves'))}"></label>
             <label>${esc(i18n('De l’année'))}<input name="from" type="number" min="0" max="2999" value="${b.from || ''}" placeholder="1800"></label><label>${esc(i18n('À l’année'))}<input name="to" type="number" min="0" max="2999" value="${b.to || ''}" placeholder="1900"></label>
             <label>${esc(i18n('Combien au plus'))}<input name="limit" type="number" min="5" max="300" value="${Number(b.limit) || 60}"></label><label>${esc(i18n('Note'))} <small>(${esc(i18n('facultatif'))})</small><input name="note" value="${esc(b.note || '')}" maxlength="2000"></label></div>`;
-        if (b.type === 'data') body = dEditorHtml(b);
+        if (b.type === 'data') body = dEditorHtml(b, common); // 🎨 titre, largeur, couleur : dans sa section « Apparence »
         if (b.type === 'photomap') body = ext.photomapConfigHtml ? ext.photomapConfigHtml(b.config || {}) : '<p class="muted">Cartes de photos indisponibles.</p>';
         if (b.type === 'widget') {
             // 📈 le menu de choix commun (sorte « graph », tous mes widgets) ; le champ caché garde l'identifiant cw_…
@@ -739,6 +803,7 @@
                 const root = dlg.querySelector('.h-dialog-body') || dlg;
                 ext.bindMediaEditor?.(root);
                 if (b.type === 'data') dBind(root, b);
+                root.addEventListener('input', e => { if (e.target.type === 'color' && e.target.name === 'color') { const h = root.querySelector('[name=hascolor]'); if (h) h.checked = true; } }); // choisir une couleur, c'est vouloir une couleur
                 root.addEventListener('picker-change', e => { if (e.detail.name === 'fi_person') root.dataset.fiPersonName = e.detail.item?.title || ''; });
                 root.addEventListener('picker-change', e => { const box = e.target.closest?.('[data-fi-widgetpk]'); if (box) { box.querySelector('input[name=widget]').value = e.detail.item?.uid || ''; const slot = root.querySelector('[data-sc-panelslot]'); if (slot) slot.innerHTML = ext.shortcuts?.panelHtml?.(e.detail.item?.uid || '') || ''; } });
                 root.addEventListener('click', e => {
@@ -777,24 +842,24 @@
         const target = host ? (host.querySelector(':scope > .card-body') || host) : null;
         if (target) { // sur place, comme le verso d'un widget
             host.classList.add('is-back');
-            target.innerHTML = `<form class="h-fi-back dashboard-widget-back" novalidate><div class="dashboard-widget-back-title"><strong>${fresh ? 'Nouveau bloc' : 'Réglages du bloc'}</strong><span>${ic} ${esc(label)}</span></div>${common}${body}<div class="page-actions compact h-fi-back-actions"><button type="submit" class="button small">${fresh ? 'Ajouter' : 'Enregistrer'}</button><button type="button" class="button small secondary" data-fi-cancel>Annuler</button></div></form>`;
+            target.innerHTML = `<form class="h-fi-back dashboard-widget-back" novalidate><div class="dashboard-widget-back-title"><strong>${fresh ? 'Nouveau bloc' : 'Réglages du bloc'}</strong><span>${ic} ${esc(label)}</span></div>${b.type === 'data' ? '' : common}${body}<div class="page-actions compact h-fi-back-actions"><button type="submit" class="button small">${fresh ? 'Ajouter' : 'Enregistrer'}</button><button type="button" class="button small secondary" data-fi-cancel>Annuler</button></div></form>`;
             const form = target.querySelector('form');
             onOpen(form);
             form.querySelector('[data-fi-cancel]').addEventListener('click', () => refresh());
             // la largeur se voit tout de suite, comme pour un widget
             form.addEventListener('click', e => { const w = e.target.closest('[data-fi-w]'); if (!w) return; form.elements.width.value = w.dataset.fiW; form.querySelectorAll('[data-fi-w]').forEach(x => x.setAttribute('aria-pressed', String(x === w))); host.className = host.className.replace(/\bspan-\d+\b/, 'span-' + w.dataset.fiW); });
             form.addEventListener('submit', async e => { e.preventDefault(); const btn = form.querySelector('[type=submit]'); btn.disabled = true; try { if (await onSubmit(form) === false) btn.disabled = false; } catch (err) { toast(err.message, 'error'); btn.disabled = false; } });
-            form.querySelector('input[name=title]')?.focus();
+            if (b.type === 'data') setTimeout(() => { try { form.querySelector('[data-fi-dpicker]:not([hidden]) [data-ld-ov-q]')?.focus({preventScroll: true}); } catch (_) {} }, 30); else form.querySelector('input[name=title]')?.focus();
             return;
         }
-        ext.openDialog({eyebrow: 'FICHE', title: `${ic} ${fresh ? 'Nouveau bloc' : 'Modifier le bloc'} — ${label}`, wide: true, submitLabel: fresh ? 'Ajouter' : 'Enregistrer', body: common + body, onOpen, onSubmit});
+        ext.openDialog({eyebrow: 'FICHE', title: `${ic} ${fresh ? 'Nouveau bloc' : 'Modifier le bloc'} — ${label}`, wide: true, submitLabel: fresh ? 'Ajouter' : 'Enregistrer', body: (b.type === 'data' ? '' : common) + body, onOpen, onSubmit});
     }
 
     /* ─── Titre, icône, sous-titre, couleur de la fiche ─── */
     function editProps() {
         ext.openDialog({eyebrow: 'FICHE', title: '⚙️ La fiche', submitLabel: 'Enregistrer',
             body: `<div class="form-grid"><label class="span-2">Titre<input name="title" value="${esc(cur.title)}" required maxlength="200"></label><label>Icône<input name="icon" value="${esc(cur.icon || '📒')}" class="h-fi-iconin" readonly title="Choisir une icône"></label>
-                <label>Couleur<span class="h-fi-colrow"><input type="color" name="color" value="${esc(cur.color || '#0066cc')}"><label class="checkbox-line"><input type="checkbox" name="hascolor" ${cur.color ? 'checked' : ''}> utiliser</label></span></label>
+                <div class="h-fi-wrow"><span>Couleur</span><span class="h-fi-colrow"><label class="checkbox-line"><input type="checkbox" name="hascolor" ${cur.color ? 'checked' : ''}> ${esc(i18n('Une couleur pour la fiche'))}</label><input type="color" name="color" value="${esc(cur.color || '#0066cc')}" aria-label="${esc(i18n('Couleur de la fiche'))}"></span></div>
                 <label class="span-2">Sous-titre<input name="subtitle" value="${esc(cur.subtitle || '')}" maxlength="600"></label></div>
                 ${ext.labelsPicker ? ext.labelsPicker('topic_sheet', cur.labels || []) : ''}
                 ${ext.mediaEditorHtml ? `<div class="h-fi-coverpick">${ext.mediaEditorHtml('topic_sheet', cur.id, (cur.media || []).filter(m => m.role === 'cover'), [['cover', '🖼️ Image de couverture (la vignette de la fiche dans la liste ; sinon la première image de la fiche)', 'image/*']])}</div>` : ''}`,

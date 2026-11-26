@@ -16,7 +16,7 @@
  *    noms à la fois (cases, barre du bas, app-listes-choix.js).
  *  « Même lieu » : même identifiant Wikidata, sinon même nom d'aujourd'hui à moins de 15 km ; un nom antique de Pleiades prend le nom
  *    d'aujourd'hui du lieu à moins de 5 km (marqué « ≈ »). Les autres noms sans date sont montrés, avec « sans date ».
- *  Rapide : l'index (noms pliés et triés, cases d'un degré, identifiants, noms d'aujourd'hui) est fait UNE fois, à la première recherche ;
+ *  Rapide : l'index (noms pliés et triés, cases d'un dixième de degré, identifiants, noms d'aujourd'hui) est fait UNE fois, à la première recherche ;
  *    une recherche = une recherche par dichotomie + quelques cases autour. GOV (paquet installé) est lu sur TON serveur, au besoin.
  *  Rien ne part sur Internet (ni nom, ni lieu) : seuls les liens « ↗ » ouvrent une page, sur un clic. Mode consultation : lecture seule
  *    (＋ et 📎 🧺 éteints, avec la raison), aucun lien vers un site de cartes ni « Chercher ailleurs ».
@@ -37,7 +37,8 @@
     const RANK = {Registre: 1, GOV: 2, WHG: 3, Pleiades: 4, Wikidata: 5};
     const rankOf = src => RANK[String(src || '').split(/[\s(]/)[0]] || 9;
     const NOT_TOWN = /^(place|rue|quartier|pont|jardin|port|square|avenue|boulevard|cours|gare|r[ée]gion|d[ée]partement|arrondissement|canton|province|[ée]glise|ch[aâ]teau|parc|[îi]le)\b/i;
-    const cell = (lat, lon) => `${Math.floor(lat)}:${Math.floor(lon)}`;
+    const G = 0.1; // les cases de l'index : un dixième de degré (≈ 11 km) — dans une région dense, « à moins de 15 km » ne lit que quelques cases
+    const cell = (lat, lon) => `${Math.floor(lat / G)}:${Math.floor(lon / G)}`;
     const half = (lat, lon) => (num(lat) === null ? 'x' : `${Math.round(Number(lat) * 2) / 2},${Math.round(Number(lon) * 2) / 2}`);
 
     /** recs : [{name, now, from, to, lat, lon, q, kind, lang, src, url, cc}] → l'index (une fois) */
@@ -62,9 +63,9 @@
         const out = []; for (let k = lo; k < o.length && out.length < cap && f[o[k]].startsWith(q); k++) out.push(o[k]);
         return out;
     }
-    /** les noms à moins de r km : [{i, km}] (les cases d'un degré autour, jamais tout l'index) */
+    /** les noms à moins de r km : [{i, km}] (les cases autour, jamais tout l'index) */
     function near(I, lat, lon, r) {
-        const out = [], dl = Math.ceil(r / 111), dn = Math.ceil(r / (111 * Math.max(0.05, Math.cos(lat * RAD)))), la = Math.floor(lat), lo = Math.floor(lon);
+        const out = [], dl = Math.ceil(r / (111 * G)), dn = Math.ceil(r / (111 * G * Math.max(0.05, Math.cos(lat * RAD)))), la = Math.floor(lat / G), lo = Math.floor(lon / G);
         for (let a = la - dl; a <= la + dl; a++) for (let b = lo - dn; b <= lo + dn; b++) {
             const c = I.grid.get(`${a}:${b}`); if (!c) continue;
             for (const i of c) { const x = I.recs[i], k = km(lat, lon, x.lat, x.lon); if (k <= r) out.push({i, km: k}); }
@@ -83,7 +84,7 @@
     function namesOf(entries) {
         const by = new Map();
         for (const e of entries) {
-            const k = /^https?:\/\//i.test(String(e.r.name || '')) ? '' : fold(e.r.name); if (!k) continue;
+            const k = e.k !== undefined ? e.k : /^https?:\/\//i.test(String(e.r.name || '')) ? '' : fold(e.r.name); if (!k) continue; // e.k : le nom déjà plié par l'index
             const x = {...e, rank: rankOf(e.r.src)}, cur = by.get(k);
             if (!cur) by.set(k, {best: x, all: [x]}); else { cur.all.push(x); if (better(x, cur.best)) cur.best = x; }
         }
@@ -118,11 +119,11 @@
             if (nf && okLL(g)) (I.byNow.get(nf) || []).forEach(i => { if (okLL(R[i]) && km(R[i].lat, R[i].lon, g.lat, g.lon) < 15) set.add(i); });
             own.forEach(i => { if (!I.nowF[i] || I.nowF[i] === nf) set.add(i); });
             if (!cc) for (const i of set) if (R[i].cc) { cc = R[i].cc; break; }
-            const hs = new Set(g.hits), names = namesOf([...set].map(i => ({r: R[i], hit: hs.has(i)})));
+            const hs = new Set(g.hits), ents = [...set].map(i => ({r: R[i], hit: hs.has(i), k: I.f[i]})), names = namesOf(ents);
             const hitName = (g.hits.find(i => I.f[i] === q) ?? g.hits[0]);
-            return {now: now || R[hitName].name, guessed, cc, lat: okLL(g) ? Number(g.lat) : null, lon: okLL(g) ? Number(g.lon) : null, q: g.q, hit: R[hitName].name, exact: isExact(g), names, _e: [...set].map(i => ({r: R[i], hit: hs.has(i)}))};
+            return {now: now || R[hitName].name, guessed, cc, lat: okLL(g) ? Number(g.lat) : null, lon: okLL(g) ? Number(g.lon) : null, q: g.q, hit: R[hitName].name, exact: isExact(g), names, _e: ents, _nf: fold(now || R[hitName].name)};
         }).sort((a, b) => b.exact - a.exact || b.names.length - a.names.length) // le lieu le mieux connu d'abord (Lutetia → Paris avant Lučenec)
-            .filter((g, i, a) => !a.slice(0, i).some(o => fold(o.now) === fold(g.now) && okLL(o) && okLL(g) && km(o.lat, o.lon, g.lat, g.lon) < 15)); // le même lieu d'aujourd'hui une fois
+            .filter((g, i, a) => !a.slice(0, i).some(o => o._nf === g._nf && okLL(o) && okLL(g) && km(o.lat, o.lon, g.lat, g.lon) < 15)); // le même lieu d'aujourd'hui une fois
         return out.slice(0, max);
     }
     /** GOV (paquet installé) : ses lignes {name, lang, kind, from, to, gov, lat, lon} rejoignent le lieu du même nom à moins de 15 km, sinon un lieu à part */

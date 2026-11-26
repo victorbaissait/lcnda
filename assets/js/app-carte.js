@@ -238,8 +238,8 @@
         const clusters=mapClusters(groups);
         const sampled=clusters?groups:(state.mapDisplay==='markers'&&groups.length>700?groups.filter((_,i)=>i%Math.ceil(groups.length/700)===0):groups);
         const gKey=group=>String(group._groupKey||group.place_id||`${group.latitude},${group.longitude}`);
-        const markerHtml=group=>{const kind=state.mapMode!=='life'&&state.mapMode!=='timeline'?groupKind(group):null;return `<button class="map-marker ${state.mapMode==='life'?'is-route':''} ${kind?'is-kind':''} ${group.count>1?'has-count':''} ${group._timeClass?`is-${group._timeClass}`:''}" style="left:${group._x}px;top:${group._y}px;--route-color:${escapeHtml(group.route_color||'var(--blue)')}${kind?`;--kind-color:${kind[2]}`:''}" data-map-group="${escapeHtml(gKey(group))}" aria-label="${escapeHtml(group.name||'Lieu')}">${group.count>1?`<span>${group.count}</span>`:''}</button>`;};
-        const clusterHtml=(c,i)=>c.items.length===1?markerHtml(c.items[0]):`<button type="button" class="map-cluster" style="left:${c._x.toFixed(1)}px;top:${c._y.toFixed(1)}px;--kind-color:${groupKind({events:c.items.flatMap(g=>g.events)})[2]}" data-map-cluster="${i}" title="${escapeHtml(i18n('{n} événements dans {p} lieux : clique pour zoomer',{n:c.count,p:c.items.length}))}" aria-label="${escapeHtml(i18n('{n} événements',{n:c.count}))}"><span>${c.count>999?Math.round(c.count/100)/10+' k':c.count}</span></button>`;
+        const markerHtml=group=>{const kind=state.mapMode!=='life'?groupKind(group):null,shp=kind&&KC()?.shapesOn()?KC().shapeOf(kind[0]):'';return `<button class="map-marker ${state.mapMode==='life'?'is-route':''} ${kind?'is-kind':''} ${shp?`is-shape kc-${shp}`:''} ${group.count>1?'has-count':''} ${group._timeClass?`is-${group._timeClass}`:''}" style="left:${group._x}px;top:${group._y}px;--route-color:${escapeHtml(group.route_color||'var(--blue)')}${kind?kindVars(kind):''}"${kind?` data-kc="${kind[0]}"`:''} data-map-group="${escapeHtml(gKey(group))}" aria-label="${escapeHtml(group.name||'Lieu')}">${shp?KC().shapeSvg(shp,'var(--kind-color)'):''}${group.count>1?`<span>${group.count}</span>`:''}</button>`;};
+        const clusterHtml=(c,i)=>{if(c.items.length===1)return markerHtml(c.items[0]);const ck=groupKind({events:c.items.flatMap(g=>g.events)});return `<button type="button" class="map-cluster" style="left:${c._x.toFixed(1)}px;top:${c._y.toFixed(1)}px${kindVars(ck)}" data-kc="${ck[0]}" data-map-cluster="${i}" title="${escapeHtml(i18n('{n} événements dans {p} lieux : clique pour zoomer',{n:c.count,p:c.items.length}))}" aria-label="${escapeHtml(i18n('{n} événements',{n:c.count}))}"><span>${c.count>999?Math.round(c.count/100)/10+' k':c.count}</span></button>`;};
         $('#map-overlay').innerHTML=sampled.length?(clusters?clusters.map(clusterHtml).join(''):sampled.map(group=>state.mapDisplay==='heat'?`<span class="heat-spot" style="left:${group._x}px;top:${group._y}px"></span>`:markerHtml(group)).join('')):state.mapMode==='mine'?'':empty('Aucun événement dans cette zone',{icon:'🗺',action:{label:'⤢ Voir tout',attrs:'data-empty-click="#map-france"'}}).replace('class="empty-line"','class="empty-line map-empty-overlay"');
         $$('[data-map-group]').forEach(button=>{const group=sampled.find(g=>gKey(g)===String(button.dataset.mapGroup));button.addEventListener('mouseenter',event=>{showMapTooltip(event,group);});button.addEventListener('click',event=>showMapTooltip(event,group,true));});
         $$('[data-map-cluster]').forEach(button=>button.addEventListener('click',event=>{event.stopPropagation();zoomOnCluster(clusters[Number(button.dataset.mapCluster)]);}));
@@ -367,9 +367,14 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
     }
 
     /* ── couleurs des sortes, regroupement ── */
-    const KINDS=[['births','Naissances','#2b8a3e',['BIRT','CHR','BAPM']],['marriages','Mariages','#c2255c',['MARR','MARC','ENGA','MARB','MARL','MARS']],['deaths','Décès','#495057',['DEAT']],['burials','Inhumations','#7048e8',['BURI','CREM']],['residences','Résidences','#1971c2',['RESI']],['census','Recensements','#0b7285',['CENS']],['events','Autres événements','#e8590c',[]]];
-    function kindOf(p){if(p?.is_cemetery)return KINDS[3];const t=String(p?.gedcom_tag||'').toUpperCase();return KINDS.find(k=>k[3].includes(t))||KINDS[6];}
-    function groupKind(group){const n=new Map();(group.events||[group]).forEach(e=>{const k=kindOf(e);n.set(k,(n.get(k)||0)+1);});let best=KINDS[6],m=-1;n.forEach((v,k)=>{if(v>m){m=v;best=k;}});return best;}
+    // 🎨 les couleurs et les formes : Réglages → Cartes et fonds de carte → « Couleurs de la carte » (app-carte-couleurs.js), les mêmes partout
+    const KC=()=>window.LCNDA_CARTE_COULEURS;
+    const KINDS=(KC()?.KINDS||[['events','Autres événements',[]]]).map(([key,name,tags])=>[key,name,null,tags]);
+    const kindByKey=key=>KINDS.find(k=>k[0]===key)||KINDS[KINDS.length-1];
+    const kindColor=k=>KC()?.color(k[0])||'#0066cc';
+    const kindVars=k=>{const c=kindColor(k);return `;--kind-color:${c};--kind-text:${KC()?.textOn(c)||'#fff'}`;};
+    function kindOf(p){return kindByKey(KC()?.kindOf(p)||'events');}
+    function groupKind(group){return kindByKey(KC()?.groupKind(group.events||[group])||'events');}
     function mapClusters(groups){
         if(state.mapDisplay!=='markers'||!mapOpts().cluster||state.mapMode==='life'||state.mapZoom>12||groups.length<2)return null;
         // au plus près : chaque lieu rejoint la pastille la plus proche à moins de 48 px (les plus gros d'abord), sinon il en commence une
@@ -437,12 +442,17 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
     }
 
     /* ── 🗒 légende ── */
+    window.addEventListener('lcnda-carte-couleurs',()=>{if(state.module==='carte'&&$('#map-stage')&&state.mapLastDraw)drawMap();});
     function drawLegend(visible){
         const box=$('#map-legend');if(!box)return;
         if(!mapOpts().legend||state.mapMode==='mine'){box.hidden=true;return;}
         let rows='';
         if(state.mapMode==='life'){rows=routePeopleSelection().map((p,i)=>`<span><i style="background:${mapRouteColor(i)}"></i>${escapeHtml(p.name||'')}</span>`).join('');}
-        else if(state.mapDisplay==='markers'&&state.mapMode!=='timeline'){const n=new Map();visible.forEach(p=>{const k=kindOf(p);n.set(k,(n.get(k)||0)+1);});rows=KINDS.filter(k=>n.has(k)).map(k=>`<span><i style="background:${k[2]}"></i>${escapeHtml(i18n(k[1]))} <small>${n.get(k).toLocaleString('fr-FR')}</small></span>`).join('');}
+        else if(state.mapDisplay==='markers'){const n=new Map();visible.forEach(p=>{const k=kindOf(p);n.set(k,(n.get(k)||0)+1);});const ro=kiosk(),shp=!!KC()?.shapesOn();
+            // 🎨 une pastille = un raccourci vers la couleur de cette sorte (le réglage complet : « ⚙ Couleurs… »)
+            rows=KINDS.filter(k=>n.has(k)).map(k=>{const c=kindColor(k),nm=escapeHtml(i18n(k[1])),sw=shp?`<i class="is-shape" data-kc="${k[0]}">${KC().shapeSvg(KC().shapeOf(k[0]),c,{size:13,sw:2.4})}</i>`:`<i data-kc="${k[0]}" style="background:${c}"></i>`;
+                return `<span class="map-legend-row">${ro?sw:`<button type="button" class="map-legend-sw" data-kc-pick="${k[0]}" title="${escapeHtml(i18n('Changer la couleur des « {k} »',{k:i18n(k[1])}))}" aria-label="${escapeHtml(i18n('Changer la couleur des « {k} »',{k:i18n(k[1])}))}">${sw}</button>`}${nm} <small>${n.get(k).toLocaleString('fr-FR')}</small></span>`;}).join('');
+            if(rows&&!ro)rows+=`<a href="#" class="map-legend-cfg" data-kc-settings title="${escapeHtml(i18n(KC()?.HELP||''))}">⚙ ${escapeHtml(i18n('Couleurs…'))}</a>`;}
         if(mapOpts().gravity&&(state.mapGravity?.data?.generations||[]).length)rows+=`<span><i class="is-grav"></i>${escapeHtml(i18n('Centre de gravité (G1 = la personne de départ)'))}</span>`;
         const yr=mapPointYearRange(mapDisplayPoints());
         const lin=mapActiveFilters(choicesCache?.v).map(x=>x.t).join(' · ');
@@ -480,14 +490,16 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         $$('#map-overlay .heat-spot',stage).forEach(el=>{const x=parseFloat(el.style.left),y=parseFloat(el.style.top),g=ctx.createRadialGradient(x,y,0,x,y,28);g.addColorStop(0,'rgba(230,40,0,.55)');g.addColorStop(1,'rgba(230,40,0,0)');ctx.fillStyle=g;ctx.fillRect(x-28,y-28,56,56);});
         $$('#map-overlay .map-marker, #map-overlay .map-cluster',stage).forEach(el=>{
             const r=el.getBoundingClientRect(),x=r.left-sr.left+r.width/2,y=r.top-sr.top+r.height/2,cs=getComputedStyle(el),cl=el.classList.contains('map-cluster'),size=cl?Math.max(r.width,r.height)/2:(el.offsetWidth||18)/2;
-            ctx.fillStyle=cs.backgroundColor||'#0066cc';ctx.strokeStyle='#111';ctx.lineWidth=2;ctx.beginPath();
-            if(cl)ctx.arc(x,y,size,0,Math.PI*2);else{ctx.moveTo(x,y-size*1.3);ctx.lineTo(x+size*1.3,y);ctx.lineTo(x,y+size*1.3);ctx.lineTo(x-size*1.3,y);ctx.closePath();}
-            ctx.fill();ctx.stroke();
-            const t=el.querySelector('span')?.textContent||'';if(t){ctx.fillStyle='#fff';ctx.font='900 11px system-ui,sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(t,x,y);}
+            // 🎨 la couleur et la forme de la sorte (réglage « Couleurs de la carte ») ; le chiffre en blanc ou en noir selon le fond
+            const kk=el.dataset.kc,past=el.classList.contains('is-past'),future=el.classList.contains('is-future'),fill=kk&&KC()&&!past&&!future?KC().color(kk):(cs.backgroundColor&&cs.backgroundColor!=='rgba(0, 0, 0, 0)'?cs.backgroundColor:past?'#111111':future?'#ffffff':'#0066cc');
+            const shp=cl?'circle':el.classList.contains('is-shape')&&kk?KC().shapeOf(kk):'diamond';
+            if(KC()?.drawShape&&!(cl&&r.width>r.height+4))KC().drawShape(ctx,shp,x,y,cl||shp!=='diamond'?size:size*1.3,fill,'#111',2);
+            else{ctx.fillStyle=fill;ctx.strokeStyle='#111';ctx.lineWidth=2;ctx.beginPath();if(cl){const w=r.width/2,hh=r.height/2;ctx.moveTo(x-w+hh,y-hh);ctx.arcTo(x+w,y-hh,x+w,y+hh,hh);ctx.arcTo(x+w,y+hh,x-w,y+hh,hh);ctx.arcTo(x-w,y+hh,x-w,y-hh,hh);ctx.arcTo(x-w,y-hh,x+w,y-hh,hh);ctx.closePath();}else{ctx.moveTo(x,y-size*1.3);ctx.lineTo(x+size*1.3,y);ctx.lineTo(x,y+size*1.3);ctx.lineTo(x-size*1.3,y);ctx.closePath();}ctx.fill();ctx.stroke();}
+            const t=el.querySelector('span')?.textContent||'';if(t){ctx.fillStyle=getComputedStyle(el.querySelector('span')).color||'#fff';ctx.font='900 11px system-ui,sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(t,x,y);}
         });
         const lg=$('#map-legend');
-        if(lg&&!lg.hidden){const items=[...lg.children],lh=18,w=Math.min(320,W-20),h=12+items.length*lh;ctx.fillStyle='rgba(255,255,255,.94)';ctx.strokeStyle='#111';ctx.lineWidth=1.5;ctx.fillRect(10,H-h-30,w,h);ctx.strokeRect(10,H-h-30,w,h);ctx.textAlign='left';ctx.textBaseline='middle';
-            items.forEach((it,i)=>{const y=H-h-30+12+i*lh;const dot=it.querySelector('i');let x=18;if(dot){ctx.fillStyle=getComputedStyle(dot).backgroundColor||'#d9480f';ctx.fillRect(x,y-5,10,10);x+=16;}ctx.fillStyle='#111';ctx.font=`${it.tagName==='B'?'800 12px':'11px'} system-ui,sans-serif`;ctx.fillText(it.textContent.trim().slice(0,60),x,y+1);});}
+        if(lg&&!lg.hidden){const items=[...lg.children].filter(it=>!it.matches('.map-legend-cfg')),lh=18,w=Math.min(320,W-20),h=12+items.length*lh;ctx.fillStyle='rgba(255,255,255,.94)';ctx.strokeStyle='#111';ctx.lineWidth=1.5;ctx.fillRect(10,H-h-30,w,h);ctx.strokeRect(10,H-h-30,w,h);ctx.textAlign='left';ctx.textBaseline='middle';
+            items.forEach((it,i)=>{const y=H-h-30+12+i*lh;const dot=it.querySelector('i');let x=18;if(dot&&dot.dataset.kc&&KC()?.drawShape){KC().drawShape(ctx,dot.classList.contains('is-shape')?KC().shapeOf(dot.dataset.kc):'square',x+5,y,5.5,KC().color(dot.dataset.kc),'#111',1);x+=16;}else if(dot){ctx.fillStyle=getComputedStyle(dot).backgroundColor||'#d9480f';ctx.fillRect(x,y-5,10,10);x+=16;}ctx.fillStyle='#111';ctx.font=`${it.tagName==='B'?'800 12px':'11px'} system-ui,sans-serif`;ctx.fillText(it.textContent.trim().slice(0,60),x,y+1);});}
         ctx.fillStyle='rgba(255,255,255,.85)';ctx.fillRect(W-260,H-18,260,18);ctx.fillStyle='#333';ctx.font='10px system-ui,sans-serif';ctx.textAlign='right';ctx.fillText(i18n('© contributeurs OpenStreetMap'),W-6,H-8);
         return c;
     }

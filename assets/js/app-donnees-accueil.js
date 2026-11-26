@@ -208,6 +208,7 @@
     }
     /** les comptes par thème : listes installées, lignes (les paquets livrés le disent), ⤓, ↻ — l'état de Réglages → 🗂 Données */
     let statsP = null, statsAt = 0;
+    window.addEventListener('lcnda:installs-changed', () => { statsP = null; }); // ⤓ un pack installé : les comptes « ⤓ à installer » sont refaits
     function stats() {
         if (statsP && Date.now() - statsAt < 300000) return statsP;
         statsAt = Date.now();

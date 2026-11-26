@@ -39,6 +39,7 @@
 
     /* ═════════════ les données livrées (lib/donnees_maj.php) ═════════════ */
     let statusP = null;
+    window.addEventListener('lcnda:installs-changed', () => { statusP = null; }); // ⤓ installé ailleurs (Réglages d'un pack, une liste) : relu
     const status = (fresh = false) => { if (fresh || !statusP) statusP = api('donnees_maj_status').catch(e => { statusP = null; throw e; }); return statusP; };
     const packOf = async id => (await status()).packs.find(p => p.id === id) || null;
 

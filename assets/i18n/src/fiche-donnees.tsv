@@ -53,3 +53,25 @@ Bloc figé : « {nm} » ¦ Block frozen: “{nm}” ¦ Bloque fijado: «{nm}» �
 📌 Figer maintenant ¦ 📌 Freeze now ¦ 📌 Fijar ahora ¦ 📌 Jetzt einfrieren ¦ 📌 Fissa ora ¦ 📌 Fixar agora ¦ 📌 Zamroź teraz ¦ 📌 Nu vastzetten
 Bloc « {nm} » ajouté ¦ Block “{nm}” added ¦ Bloque «{nm}» añadido ¦ Block „{nm}“ hinzugefügt ¦ Blocco «{nm}» aggiunto ¦ Bloco «{nm}» adicionado ¦ Dodano blok „{nm}” ¦ Blok ‘{nm}’ toegevoegd
 Bloc « {nm} » enregistré ¦ Block “{nm}” saved ¦ Bloque «{nm}» guardado ¦ Block „{nm}“ gespeichert ¦ Blocco «{nm}» salvato ¦ Bloco «{nm}» guardado ¦ Zapisano blok „{nm}” ¦ Blok ‘{nm}’ opgeslagen
+Une couleur pour ce bloc ¦ A colour for this block ¦ Un color para este bloque ¦ Eine Farbe für diesen Block ¦ Un colore per questo blocco ¦ Uma cor para este bloco ¦ Kolor dla tego bloku ¦ Een kleur voor dit blok
+Couleur du bloc ¦ Block colour ¦ Color del bloque ¦ Farbe des Blocks ¦ Colore del blocco ¦ Cor do bloco ¦ Kolor bloku ¦ Kleur van het blok
+Une couleur pour la fiche ¦ A colour for the sheet ¦ Un color para la ficha ¦ Eine Farbe für das Blatt ¦ Un colore per la scheda ¦ Uma cor para a ficha ¦ Kolor dla karty ¦ Een kleur voor de fiche
+Couleur de la fiche ¦ Sheet colour ¦ Color de la ficha ¦ Farbe des Blatts ¦ Colore della scheda ¦ Cor da ficha ¦ Kolor karty ¦ Kleur van de fiche
+📋 Données ¦ 📋 Data ¦ 📋 Datos ¦ 📋 Daten ¦ 📋 Dati ¦ 📋 Dados ¦ 📋 Dane ¦ 📋 Gegevens
+🔎 Filtres ¦ 🔎 Filters ¦ 🔎 Filtros ¦ 🔎 Filter ¦ 🔎 Filtri ¦ 🔎 Filtros ¦ 🔎 Filtry ¦ 🔎 Filters
+👁 Affichage ¦ 👁 Display ¦ 👁 Visualización ¦ 👁 Anzeige ¦ 👁 Visualizzazione ¦ 👁 Exibição ¦ 👁 Wyświetlanie ¦ 👁 Weergave
+💬 ou pose une question ¦ 💬 or ask a question ¦ 💬 o haz una pregunta ¦ 💬 oder stelle eine Frage ¦ 💬 o fai una domanda ¦ 💬 ou faz uma pergunta ¦ 💬 albo zadaj pytanie ¦ 💬 of stel een vraag
+↑ croissant ¦ ↑ ascending ¦ ↑ ascendente ¦ ↑ aufsteigend ¦ ↑ crescente ¦ ↑ crescente ¦ ↑ rosnąco ¦ ↑ oplopend
+↓ décroissant ¦ ↓ descending ¦ ↓ descendente ¦ ↓ absteigend ¦ ↓ decrescente ¦ ↓ decrescente ¦ ↓ malejąco ¦ ↓ aflopend
+aucune liste choisie ¦ no list chosen ¦ ninguna lista elegida ¦ keine Liste gewählt ¦ nessun elenco scelto ¦ nenhuma lista escolhida ¦ nie wybrano listy ¦ geen lijst gekozen
+{km} km autour du sujet de la fiche ¦ {km} km around the sheet’s subject ¦ {km} km alrededor del tema de la ficha ¦ {km} km um das Thema des Blatts ¦ {km} km intorno al soggetto della scheda ¦ {km} km em torno do tema da ficha ¦ {km} km wokół tematu karty ¦ {km} km rond het onderwerp van de fiche
+aucun filtre : toute la liste ¦ no filter: the whole list ¦ sin filtro: toda la lista ¦ kein Filter: die ganze Liste ¦ nessun filtro: tutto l’elenco ¦ sem filtro: a lista inteira ¦ bez filtra: cała lista ¦ geen filter: de hele lijst
+{n} lignes au plus ¦ {n} rows at most ¦ {n} filas como máximo ¦ höchstens {n} Zeilen ¦ {n} righe al massimo ¦ {n} linhas no máximo ¦ najwyżej {n} wierszy ¦ hoogstens {n} rijen
+tri : {f} ¦ sort: {f} ¦ orden: {f} ¦ Sortierung: {f} ¦ ordine: {f} ¦ ordem: {f} ¦ sortowanie: {f} ¦ sortering: {f}
+📌 Figé ¦ 📌 Frozen ¦ 📌 Fijo ¦ 📌 Eingefroren ¦ 📌 Fisso ¦ 📌 Fixo ¦ 📌 Zamrożone ¦ 📌 Vastgezet
+🔄 À jour ¦ 🔄 Up to date ¦ 🔄 Actualizado ¦ 🔄 Aktuell ¦ 🔄 Aggiornato ¦ 🔄 Atualizado ¦ 🔄 Aktualne ¦ 🔄 Actueel
+largeur {w} ¦ width {w} ¦ ancho {w} ¦ Breite {w} ¦ larghezza {w} ¦ largura {w} ¦ szerokość {w} ¦ breedte {w}
+Ces données ne sont pas encore sur cet ordinateur : installe-les pour voir les lignes. ¦ This data is not on this computer yet: install it to see the rows. ¦ Estos datos aún no están en este ordenador: instálalos para ver las filas. ¦ Diese Daten sind noch nicht auf diesem Computer: installiere sie, um die Zeilen zu sehen. ¦ Questi dati non sono ancora su questo computer: installali per vedere le righe. ¦ Estes dados ainda não estão neste computador: instala-os para ver as linhas. ¦ Tych danych nie ma jeszcze na tym komputerze: zainstaluj je, aby zobaczyć wiersze. ¦ Deze gegevens staan nog niet op deze computer: installeer ze om de rijen te zien.
+↻ C’est installé : vérifier ¦ ↻ It’s installed: check ¦ ↻ Está instalado: comprobar ¦ ↻ Es ist installiert: prüfen ¦ ↻ È installato: verifica ¦ ↻ Está instalado: verificar ¦ ↻ Zainstalowane: sprawdź ¦ ↻ Het is geïnstalleerd: controleren
+✕ Garder « {nm} » ¦ ✕ Keep “{nm}” ¦ ✕ Mantener «{nm}» ¦ ✕ „{nm}“ behalten ¦ ✕ Tieni «{nm}» ¦ ✕ Manter «{nm}» ¦ ✕ Zostaw „{nm}” ¦ ✕ „{nm}” houden
+Je n’ai pas compris de quelle liste il s’agit : choisis-la ci-dessus. ¦ I did not understand which list you mean: choose it above. ¦ No entendí de qué lista se trata: elígela arriba. ¦ Ich habe nicht verstanden, welche Liste gemeint ist: wähle sie oben. ¦ Non ho capito di quale elenco si tratta: sceglilo qui sopra. ¦ Não percebi de que lista se trata: escolhe-a acima. ¦ Nie zrozumiałem, o którą listę chodzi: wybierz ją powyżej. ¦ Ik begreep niet om welke lijst het gaat: kies hem hierboven.

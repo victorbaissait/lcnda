@@ -154,6 +154,7 @@
     /* ═════════════ « 🧰 Toutes les données » : recherche, pastilles, thèmes ═════════════ */
     const ws = () => document.getElementById('workspace');
     const notInstalled = new Set(); let installChecked = false;
+    window.addEventListener('lcnda:installs-changed', () => { installChecked = false; notInstalled.clear(); }); // ⤓ un pack installé ou retiré : « à installer » se revérifie (app-listes-donnees.js)
     async function checkInstalls(onDone, list = null) {
         const ds = (list || index().ds).filter(d => d.installed && !d.link);
         await Promise.all(ds.map(async d => { let ok = true; try { ok = E().isInstalled ? await E().isInstalled(d) : (await d.installed()) !== false; } catch (_) { ok = false; } if (ok) notInstalled.delete(d.id); else notInstalled.add(d.id); }));

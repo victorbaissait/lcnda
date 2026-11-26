@@ -39,7 +39,8 @@ const FAKE = () => {
     const mclick = async (loc, o = {}) => { const bb = await loc.boundingBox(); assert.ok(bb, 'visible'); await p.mouse.click(bb.x + bb.width / 2, bb.y + bb.height / 2, o); };
     const clean = () => p.evaluate(() => { document.querySelectorAll('.ui-actmenu, .cx-qi, .cx-panel').forEach(x => x.remove()); document.querySelectorAll('dialog[open]').forEach(d => d.close()); document.querySelectorAll('.toast').forEach(x => x.remove()); });
     let bid = 0, bid2 = 0;
-    const openBoard = async id => { await clean(); await p.evaluate(x => window.LCNDA_EXT.openBoardById(x), id); await p.waitForSelector('.h-board-stage', {timeout: 20000});
+    const openBoard = async id => { await clean(); if (await p.$('.h-board [data-bd-save]')) { await p.click('.h-board [data-bd-save]'); await sleep(1200); } // enregistré avant de rouvrir (sinon « modifié ailleurs »)
+        await p.evaluate(x => window.LCNDA_EXT.openBoardById(x), id); await p.waitForSelector('.h-board-stage', {timeout: 20000});
         await p.waitForFunction(x => window.LCNDA_EXT.boardsInternals?.current?.isOpen?.() && window.LCNDA_EXT.boardsInternals.current.id === x, id, {timeout: 20000}); await sleep(300); };
     const addMenu = async () => { await clean(); await p.click('.h-board [data-bd-add]'); await p.waitForSelector('dialog[open] .h-bd-add'); };
     const pickList = async () => { const S = 'dialog[open] section[data-k="data"]'; await p.waitForSelector(`${S} [data-ld-ov-q]`, {timeout: 15000}); await p.fill(`${S} [data-ld-ov-q]`, 'savon'); await p.click(`${S} [data-ld-pick="test_caisses"]`); await p.waitForSelector(`${S} .atd-chosen`); return S; };
@@ -156,11 +157,12 @@ const FAKE = () => {
             await p.click('.h-board [data-bd-basket]'); await p.waitForSelector('.cx-panel li[data-cx-bi]', {timeout: 10000});
             const li = p.locator('.cx-panel li[data-cx-bi]', {hasText: 'Naissance de Jean MAZAUD'}).first();
             const sb = await p.$eval('.h-board-stage', x => { const r = x.getBoundingClientRect(); return {x: r.left, y: r.top, w: r.width, h: r.height}; });
-            const lb = await li.boundingBox(); await p.mouse.move(lb.x + 40, lb.y + lb.height / 2); await p.mouse.down(); await p.mouse.move(lb.x + 60, lb.y + lb.height / 2 + 10, {steps: 3}); await p.mouse.move(sb.x + 120, sb.y + sb.h - 120, {steps: 8}); await p.mouse.up();
+            const tx = Math.round(sb.x + sb.w - 220), ty = Math.round(sb.y + 160); // à droite du panneau du panier
+            const lb = await li.boundingBox(); await p.mouse.move(lb.x + 40, lb.y + lb.height / 2); await p.mouse.down(); await p.mouse.move(lb.x + 60, lb.y + lb.height / 2 + 10, {steps: 3}); await p.mouse.move(tx, ty, {steps: 8}); await p.mouse.up();
             await p.waitForFunction(n => window.LCNDA_EXT.boardsInternals.current.items.length === n + 1, n0, {timeout: 15000});
-            const c = (await cur()).at(-1);
+            const c = (await cur()).at(-1); console.log('DROPDBG', JSON.stringify(sb), await p.$eval('.h-board-stage', x => JSON.stringify(x.getBoundingClientRect())));
             const pos = await p.evaluate(id => { const el = document.querySelector(`.h-bi[data-bi="${id}"]`).getBoundingClientRect(); return {x: el.left + el.width / 2, y: el.top + el.height / 2}; }, c.id);
-            assert.ok(Math.abs(pos.x - (sb.x + 120)) < 40 && Math.abs(pos.y - (sb.y + sb.h - 120)) < 40, `au pointeur : ${JSON.stringify(pos)} ≈ ${sb.x + 120},${sb.y + sb.h - 120}`);
+            assert.ok(Math.abs(pos.x - tx) < 40 && Math.abs(pos.y - ty) < 40, `au pointeur : ${JSON.stringify(pos)} ≈ ${tx},${ty}`);
             await undo();
         });
         await t('📎 de la barre, rien de choisi : l’info est posée au centre avec sa source', async () => {
@@ -198,7 +200,7 @@ const FAKE = () => {
         });
         await t('clic droit sur un élément du tableau → « 🧺 Prendre » le met au panier', async () => {
             await openBoard(bid); await clean();
-            const id = await p.evaluate(() => window.LCNDA_EXT.boardsInternals.current.items.find(i => i.type === 'card' && i.title === 'Grand prix de Chamberet').id);
+            const id = await p.evaluate(async () => (await window.LCNDA_EXT.boardsInternals.current.placeCx([{kind: 'row', title: 'Grand prix de Chamberet', value: '1777 · Chamberet', origin: {label: 'Listes · Courses de caisses à savon', url: 'https://example.org/gp'}}])).ids[0]); await sleep(400);
             const before = (await B.api('cx_basket', {})).items.length; await p.evaluate(x => window.LCNDA_EXT.boardsInternals.current.focus([x]), id); await sleep(600);
             await mclick(p.locator(`.h-bi[data-bi="${id}"]`), {button: 'right'}); await p.waitForSelector('.ui-actmenu');
             await mclick(p.locator('.ui-actmenu button, .ui-actmenu [role="menuitem"]', {hasText: /Prendre/}).first()); await sleep(800);
