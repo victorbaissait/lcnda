@@ -5477,7 +5477,7 @@ function date_search_data(PDO $pdo): never
     if($occupationFilter!==''){$occLike='%'.$occupationFilter.'%';$dateWhere.=" AND (EXISTS(SELECT 1 FROM persons pp WHERE pp.id IN (e.person_id,f.partner1_id,f.partner2_id) AND pp.occupation LIKE ? COLLATE NOCASE) OR EXISTS(SELECT 1 FROM events eo JOIN event_types to2 ON to2.id=eo.event_type_id WHERE eo.person_id IN (e.person_id,f.partner1_id,f.partner2_id) AND to2.gedcom_tag='OCCU' AND (eo.title LIKE ? COLLATE NOCASE OR eo.description LIKE ? COLLATE NOCASE)) OR EXISTS(SELECT 1 FROM census_members cm WHERE cm.person_id IN (e.person_id,f.partner1_id,f.partner2_id) AND cm.occupation LIKE ? COLLATE NOCASE))";$params=array_merge($params,[$occLike,$occLike,$occLike,$occLike]);}
     if($query!=='')
 {$like='%'.$query.'%';$dateWhere.=' AND (t.label LIKE ? COLLATE NOCASE OR pl.name LIKE ? COLLATE NOCASE OR pl.subdivision LIKE ? COLLATE NOCASE OR pl.country LIKE ? COLLATE NOCASE OR p.first_name LIKE ? COLLATE NOCASE OR p.last_name LIKE ? COLLATE NOCASE OR p1.first_name LIKE ? COLLATE NOCASE OR p1.last_name LIKE ? COLLATE NOCASE OR p2.first_name LIKE ? COLLATE NOCASE OR p2.last_name LIKE ? COLLATE NOCASE)';$params=array_merge($params,array_fill(0,10,$like));}
-    $sql="SELECT e.id,e.date_text,e.date_calendar,e.date_converted,e.year,e.person_id,e.family_id,t.label AS type,t.gedcom_tag,t.icon,t.color,pl.name AS place,pl.subdivision,pl.country,
+    $sql="SELECT e.id,e.date_text,e.date_calendar,e.date_converted,e.year,e.person_id,e.family_id,t.label AS type,t.gedcom_tag,t.icon,t.color,pl.name AS place,pl.subdivision,pl.country,e.place_id,pl.latitude AS lat,pl.longitude AS lon,
         p.first_name,p.last_name,f.partner1_id,f.partner2_id,p1.first_name AS p1_first,p1.last_name AS p1_last,p2.first_name AS p2_first,p2.last_name AS p2_last
         FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id LEFT JOIN persons p ON p.id=e.person_id
         LEFT JOIN families f ON f.id=e.family_id LEFT JOIN persons p1 ON p1.id=f.partner1_id LEFT JOIN persons p2 ON p2.id=f.partner2_id
@@ -5554,7 +5554,7 @@ function proximity_search_data(PDO $pdo): never
                 $dist=haversine_km($lat1,$lon1,(float)$cand['latitude'],(float)$cand['longitude']);
                 if($dist<=$radiusKm){
                     $placeIds[]=(int)$cand['id'];
-                    $nearbyPlaces[]=['id'=>(int)$cand['id'],'name'=>trim($cand['name'].($cand['subdivision']?', '.$cand['subdivision']:'')),'distance_km'=>round($dist,1)];
+                    $nearbyPlaces[]=['id'=>(int)$cand['id'],'name'=>trim($cand['name'].($cand['subdivision']?', '.$cand['subdivision']:'')),'distance_km'=>round($dist,1),'lat'=>(float)$cand['latitude'],'lon'=>(float)$cand['longitude']];
                 }
             }
             usort($nearbyPlaces,static fn($a,$b)=>$a['distance_km']<=>$b['distance_km']);
@@ -5562,7 +5562,7 @@ function proximity_search_data(PDO $pdo): never
     }
     $placeMarks=implode(',',array_fill(0,count($placeIds),'?'));
     $sql="SELECT e.id,e.date_text,e.date_calendar,e.date_converted,e.year,e.person_id,e.family_id,t.label AS type,t.gedcom_tag,t.icon,t.color,
-        pl.name AS place_name,pl.subdivision AS place_subdivision,
+        pl.name AS place_name,pl.subdivision AS place_subdivision,e.place_id,pl.latitude AS place_lat,pl.longitude AS place_lon,
         p.first_name,p.last_name,f.partner1_id,f.partner2_id,p1.first_name AS p1_first,p1.last_name AS p1_last,p2.first_name AS p2_first,p2.last_name AS p2_last
         FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN persons p ON p.id=e.person_id
         LEFT JOIN places pl ON pl.id=e.place_id
@@ -5578,7 +5578,7 @@ function proximity_search_data(PDO $pdo): never
     $addOccurrence=static function(int $personId,string $name,array $event,string $role) use (&$peopleMap){
         if(!$personId)return;
         if(!isset($peopleMap[$personId]))$peopleMap[$personId]=['id'=>$personId,'name'=>trim($name),'events'=>[]];
-        $peopleMap[$personId]['events'][]=['id'=>(int)$event['id'],'date_text'=>$event['date_text'],'year'=>$event['year']!==null?(int)$event['year']:null,'type'=>$event['type'],'icon'=>$event['icon'],'color'=>$event['color'],'role'=>$role,'place'=>trim(($event['place_name']??'').($event['place_subdivision']?', '.$event['place_subdivision']:''))];
+        $peopleMap[$personId]['events'][]=['id'=>(int)$event['id'],'date_text'=>$event['date_text'],'year'=>$event['year']!==null?(int)$event['year']:null,'type'=>$event['type'],'gedcom_tag'=>$event['gedcom_tag'],'place_id'=>$event['place_id']!==null?(int)$event['place_id']:null,'lat'=>$event['place_lat']!==null?(float)$event['place_lat']:null,'lon'=>$event['place_lon']!==null?(float)$event['place_lon']:null,'icon'=>$event['icon'],'color'=>$event['color'],'role'=>$role,'place'=>trim(($event['place_name']??'').($event['place_subdivision']?', '.$event['place_subdivision']:''))];
     };
     foreach($events as $event){
         if($event['person_id'])$addOccurrence((int)$event['person_id'],($event['first_name']??'').' '.($event['last_name']??''),$event,'principal');
@@ -5590,7 +5590,7 @@ function proximity_search_data(PDO $pdo): never
     foreach($people as &$person){$person['count']=count($person['events']);}
     unset($person);
     usort($people,static fn($a,$b)=>($b['count']<=>$a['count'])?:strcmp($a['name'],$b['name']));
-    json_response(['placeId'=>$placeId,'placeName'=>$placeName,'dateMode'=>$dateMode,'yearFrom'=>$yearFrom,'yearTo'=>$yearTo,'dateLabel'=>$dateLabel,'excludePersonId'=>$excludePersonId,'radiusKm'=>$radiusKm,'geocoded'=>$geocoded,'nearbyPlaces'=>$nearbyPlaces,'people'=>$people]);
+    json_response(['placeId'=>$placeId,'placeName'=>$placeName,'dateMode'=>$dateMode,'yearFrom'=>$yearFrom,'yearTo'=>$yearTo,'dateLabel'=>$dateLabel,'excludePersonId'=>$excludePersonId,'radiusKm'=>$radiusKm,'geocoded'=>$geocoded,'placeLat'=>$place&&$place['latitude']!==null?(float)$place['latitude']:null,'placeLon'=>$place&&$place['longitude']!==null?(float)$place['longitude']:null,'nearbyPlaces'=>$nearbyPlaces,'people'=>$people]);
 }
 
 // ─── Fichier des personnes décédées de l'INSEE : import CSV + recherche dédiée ───

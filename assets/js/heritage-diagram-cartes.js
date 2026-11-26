@@ -1049,9 +1049,10 @@
                 if (b.dataset.dgm === 'reset') return a.set({frame: '', view: ''});
                 if (b.dataset.dgm === 'box') { prev._dgmBox = !prev._dgmBox; b.setAttribute('aria-pressed', String(!!prev._dgmBox)); b.classList.toggle('is-active', !!prev._dgmBox); return; }
                 const g = geoOf(prev); if (!g) return; zoomAt(prev, g, g.w / 2, g.h / 2, b.dataset.dgm === 'in' ? 1.6 : 1 / 1.6); });
-            new MutationObserver(() => { bar.hidden = !prev.querySelector('[data-geo-map]'); }).observe(prev, {childList: true});
+            new MutationObserver(() => { bar.hidden = !prev.querySelector('[data-geo-map]'); srcNote(prev); }).observe(prev, {childList: true});
         }
         if (bar) bar.hidden = !prev.querySelector('[data-geo-map]');
+        srcNote(prev);
         if (prev._dgmBound) return; prev._dgmBound = true;
         let drag = null, wheelT = 0, wheelK = 1, wheelAt = null;
         const pt = (g, e) => { const r = g.hit.getBoundingClientRect(); return [(e.clientX - r.left) / r.width * g.w, (e.clientY - r.top) / r.height * g.h, r]; };
@@ -1084,6 +1085,19 @@
             g.el.style.transformOrigin = `${wheelAt[0] / g.w * 100}% ${wheelAt[1] / g.h * 100}%`; g.el.style.transform = `scale(${wheelK})`;
             clearTimeout(wheelT); wheelT = setTimeout(() => { const [wx, wy, wg] = wheelAt, k = wheelK; wheelAt = null; wheelK = 1; zoomAt(prev, wg, wx, wy, k); }, 260);
         }, {passive: false});
+    }
+    /** sous l'aperçu : la source du fond de carte, avec un lien vers sa licence (↗) — le dessin, lui, la rappelle en petit */
+    const SRC_LINKS = [[/Natural Earth/, 'Natural Earth', 'https://www.naturalearthdata.com/about/terms-of-use/'], [/EuroGeographics|GISCO/, 'Eurostat GISCO, © EuroGeographics', 'https://ec.europa.eu/eurostat/web/gisco/geodata/administrative-units'],
+        [/Census/, 'U.S. Census Bureau', 'https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html'], [/IGN Admin|INSEE/, 'IGN Admin Express (Licence Ouverte)', 'https://geoservices.ign.fr/adminexpress'],
+        [/OpenStreetMap/, '© OpenStreetMap (ODbL)', 'https://www.openstreetmap.org/copyright'], [/swisstopo/, '© swisstopo', 'https://www.swisstopo.admin.ch/fr/conditions-d-utilisation-des-geodonnees-ogd'], [/IGN-NGI|Statbel/, 'Statbel (CC BY 4.0)', 'https://creativecommons.org/licenses/by/4.0/'], [/ACT Luxembourg/, 'ACT Luxembourg (CC0)', 'https://data.public.lu/']];
+    function srcNote(prev) {
+        const t = [...(prev.querySelectorAll('[data-geo-map] text') || [])].map(x => x.textContent || '').find(x => /^Fond : /.test(x)) || '';
+        let el = prev.nextElementSibling?.classList?.contains('dgm-src') ? prev.nextElementSibling : null;
+        const hits = SRC_LINKS.filter(([rx]) => rx.test(t));
+        if (!hits.length) { if (el) el.remove(); return; }
+        if (!el) { el = document.createElement('p'); el.className = 'dgm-src'; prev.after(el); }
+        const html = `${esc(i18n('Source du fond de carte :'))} ${hits.map(([, n, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(n)} ↗</a>`).join(' · ')}`;
+        if (el.innerHTML !== html) el.innerHTML = html;
     }
     function geoOf(prev) { const el = prev.querySelector('[data-geo-map]'); const g = el && geoReg.get(el.getAttribute('data-geo-map')); const hit = el?.querySelector('[data-geo-hit]'); return g && hit ? {...g, el, hit} : null; }
     function zoomAt(prev, g, x, y, k) {
