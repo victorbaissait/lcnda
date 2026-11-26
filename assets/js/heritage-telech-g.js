@@ -297,9 +297,7 @@
     const placesSrc = list => [list.some(x => x.r.via !== 'osm') ? LIC.wd() : '', list.some(x => x.r.via === 'osm') ? LIC.osm() : ''].filter(Boolean).join(' · ');
     function placesHtml(kind, list, lead) {
         const P = PLACES[kind];
-        let extra = '';
-        if (kind === 'wallace') extra = '';
-        return row(P.icon, `${lead} ${srcLink(placeUrl(list[0].r))}`, placesSrc(list), more(`<ul class="hist-ul tg-ul">${list.slice(0, 15).map(placeLi).join('')}</ul>${extra}${hyp(T(P.note))}`, list.length));
+        return row(P.icon, `${lead} ${srcLink(placeUrl(list[0].r))}`, placesSrc(list), more(`<ul class="hist-ul tg-ul">${list.slice(0, 15).map(placeLi).join('')}</ul>${hyp(T(P.note))}`, list.length));
     }
     const names2 = list => list.slice(0, 2).map(x => `<b>${esc(x.r.n || T(KIND_WORD[x.r.k] || x.r.k))}</b> (${esc(kmTxt(x.km))})`).join(', ');
     async function placesForLife(kind, life) {
