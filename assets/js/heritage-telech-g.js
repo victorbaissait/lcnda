@@ -237,7 +237,7 @@
         let lead;
         if (homo.length) { const x = homo[0];
             lead = T(x.level === 'probable' ? 'Dans la liste « {l} », une personne porte son nom et concorde ({w}) : {n}.' : 'Dans la liste « {l} », une personne porte le même nom : {n} — un homonyme, à vérifier.',
-                {l: esc(T(PARTS.find(p => p[0] === kind)[1].replace(/^\S+\s/, ''))), w: esc(x.why.map(w => T(w === 'year' ? 'même année de naissance' : 'né au même endroit')).join(T(' et '))), n: `<b>${esc(x.r.n)}</b>`}); }
+                {l: esc(T(PARTS.find(p => p[0] === kind)[1]).replace(/^\S+\s/, '')), w: esc(x.why.map(w => T(w === 'year' ? 'même année de naissance' : 'né au même endroit')).join(T(' et '))), n: `<b>${esc(x.r.n)}</b>`}); }
         else { const x = same[0];
             lead = T('Né(e) près de {p}, de son vivant : {n}, {r}.', {p: esc(x.place), n: `<b>${esc(x.r.n)}</b>`, r: esc(N.role(x.r))}); }
         let extra = '';
@@ -414,7 +414,7 @@
 
     /* ─────────── 📜 Monographie de commune ─────────── */
     const MONO = [['forts', 'tg_forts', '🏰', 'Forts et fortifications', 'Le lieu'], ['poudres', 'tg_poudres', '💥', 'Poudrières et poudreries', 'Le lieu'], ['semaphores', 'tg_semaphores', '📡', 'Les sémaphores', 'Le lieu'],
-        ['lazarets', 'tg_lazarets', '⚕️', 'Lazarets et quarantaines', 'Le lieu'], ['wallace', 'tg_wallace', '⛲', 'Les fontaines Wallace', 'Le lieu'], ['nes', 'tg_nes', '🎖', 'Nés ici : députés, Compagnons, Filles du Roy', 'Les gens']];
+        ['lazarets', 'tg_lazarets', '⚕️', 'Lazarets et quarantaines', 'Le lieu'], ['wallace', 'tg_wallace', '⛲', 'Les fontaines Wallace', 'Le lieu'], ['nes', 'tg_nes', '🎖', 'Nés ici : députés, Compagnons, Filles du Roy', 'Le monde']];
     const SRC_TXT = {forts: 'Wikidata (CC0) ; OpenStreetMap (ODbL)', poudres: 'Wikidata (CC0) ; OpenStreetMap (ODbL)', semaphores: 'Wikidata (CC0) ; OpenStreetMap (ODbL)', lazarets: 'Wikidata (CC0) ; OpenStreetMap (ODbL)',
         wallace: 'Wikidata (CC0) ; OpenStreetMap (ODbL)', nes: 'Wikidata (CC0)'};
     (ext.monographSections = ext.monographSections || []).push(...MONO.map(([kind, id, icon, label, group]) => ({

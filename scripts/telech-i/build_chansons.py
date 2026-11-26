@@ -35,6 +35,10 @@ def search(word):
     return [t.replace('&#039;', "'").replace('&amp;', '&') for t in re.findall(r'<a href="/wiki/[^"]+" title="([^"]+)" data-serp', h)]
 
 
+def fold_t(s):
+    return re.sub(r'\W+', ' ', s.lower()).strip()
+
+
 def year_of(h):
     h = re.sub(r'<[^>]+>', '', h[:30000])
     m = re.search(r',(?:&nbsp;|\s)*(1[5-9]\d\d)(?:&nbsp;|\s)*\(', h) or re.search(r'itemprop="datePublished"[^>]*>(1[5-9]\d\d)', h) or re.search(r'(?:&nbsp;|,\s)(1[5-9]\d\d)</span>', h)
@@ -65,8 +69,10 @@ def main():
             if y is None or y > 1900:
                 print(f'  - {t} : année {y}', file=sys.stderr)
                 continue
-            body = [l for l in wm.text_of(h).split('\n') if len(l) > 12 and not re.search(r'\(p\.|◄|►|^\d+$', l) and leaf.lower() not in l.lower()]
-            first = next((l for l in body if not l.isupper()), '')
+            body = [l for l in wm.text_of(h).split('\n') if len(l) > 12 and not re.search(r'\(p\.|◄|►|^\d+$', l) and fold_t(l) != fold_t(leaf)]
+            # le premier vers : pas l'air indiqué (« Air : … »), une dédicace, une note de l'éditeur ou une mention du site
+            body = [l.replace('\ufeff', '').lstrip('_ ').strip() for l in body]
+            first = next((l for l in body if len(l) > 12 and not l.isupper() and not re.match(r'(?i)(air\b|\(|pour les autres éditions|voir aussi|à la mémoire|à mon|à m\.|les partitions|musique|paroles|version|refrain|dédié)', l)), '')
             if not first:
                 continue
             first = first if len(first) <= 160 else first[:157].rsplit(' ', 1)[0] + ' …'

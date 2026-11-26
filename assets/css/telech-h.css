@@ -1,0 +1,12 @@
+/* LCNDA — 🧺 Places, métiers et rivages (assets/js/heritage-telech-h.js) : le reste vient de histoire.css (hist-row…) */
+.th-life { display: grid; gap: 12px; }
+.th-ul li { margin-bottom: 6px; overflow-wrap: anywhere; }
+.th-quote { display: block; margin: 4px 0; padding-left: 8px; border-left: 3px solid var(--border, rgba(127, 127, 127, .35)); color: var(--muted); font-size: 12.5px; quotes: "« " " »"; }
+.th-src-link { font-size: 12px; white-space: nowrap; }
+.th-more > summary { cursor: pointer; color: var(--accent, inherit); font-size: 12.5px; margin-top: 2px; }
+.th-more[open] > summary { margin-bottom: 6px; }
+.th-panel { margin-top: 12px; }
+@media (max-width: 600px) { .th-ul { padding-left: 18px; } }
+@media print { .th-more:not([open]) { display: none; } }
+.th-toggles { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr)); gap: 4px 16px; }
+.th-life q.th-quote + a.th-src-link { display: inline-block; margin-bottom: 4px; }

@@ -24,8 +24,8 @@ THEMES = {
     'vannerie': (['Vannerie', 'Osier'], r'vann|osier|panier'),
     'chocolat': (['Chocolaterie', 'Biscuit', 'Chocolat'], r'chocolat|biscuit'),
     'conserverie': (["Conserve de sardines à l'huile", 'Conserve', 'Sardina pilchardus'], r'sardin|conserver?ie|friture'),
-    'terreneuvas': (['Terre-neuvas', 'Grande pêche', 'Morue'], r'morue|terre-neuv|grande pêche|armement|arm[ée]'),
-    'mer': (['Ostréiculture', 'Goémonier', 'Pêche à pied'], r'huîtr|ostréi|goémon|varech|pêche à pied|algue|parcs?\b'),
+    'terreneuvas': (['Terre-neuvas', 'Grande pêche', 'Morue'], r'morue|terre-neuv|grande pêche|\barmateurs?\b|\barmement'),
+    'mer': (['Ostréiculture', 'Goémonier', 'Pêche à pied'], r'huîtr|ostréi|goémon|varech|pêche à pied|conchyli|mytili|moules?\b|parcs? à huîtres'),
     'teinture': (['Garance des teinturiers', 'Pastel des teinturiers', 'Pays de Cocagne'], r'garance|pastel|teintur|cocagne|guède|coque'),
 }
 BROKEN = re.compile(r'\s[,.;:)]|\(\s*\)|[,:;]$|\b(le|la|du|au|des|de|en)\s*[,.]|[a-z]{2}[A-Z][a-z]|\benviron\s+(des|de|les)\b')
@@ -83,7 +83,7 @@ def main():
             for j, p in enumerate(pars):
                 for s in sentences(p.lstrip('*: ')):
                     plain = wm.plain(s)
-                    if not (40 <= len(plain) <= 360) or plain.count('|') or plain.count('{') or BROKEN.search(plain):
+                    if plain[:1] in '-–•' or not (40 <= len(plain) <= 360) or plain.count('|') or plain.count('{') or BROKEN.search(plain):
                         continue  # trop court, trop long, ou un modèle perdu (« depuis le , ») : on ne cite pas une phrase abîmée
                     ys = [int(y) for y in re.findall(r'\b(1[0-9]{3}|20[0-9]{2})\b', plain)]
                     if ys and min(ys) >= 1960:

@@ -1,0 +1,88 @@
+# 🧺 Places, métiers et rivages (lot H) : refaire assets/data/th-*.json.gz, puis les enregistrer dans la branche lancée.
+#  - 🗺 th-osm-kiosques, th-osm-halles, th-osm-eclusieres, th-osm-traces : OpenStreetMap (ODbL 1.0) par Overpass — injoignable
+#    depuis l'atelier de développement, d'où ce travail ici (quoi = osm). Les tracés de voies ferrées disparues sont simplifiés.
+#  - 🎺 th-kiosques, 🗽 th-marianne, 🏪 th-halles, 🚡 th-funiculaires, 🛶 th-eclusieres, 🚋 th-tramways, 🏭 th-ateliers : Wikidata (CC0) ;
+#    🏰 th-bastides et 📖 th-textes : Wikipédia (CC BY-SA 4.0, texte de la page lu une fois) + Wikidata (CC0) ;
+#    🗺 th-trudaine : titres des planches de l'Atlas de Trudaine sur Wikimedia Commons (domaine public ; l'image n'est pas copiée).
+# Puis le sommaire assets/data/manifest.json (Réglages → 🗂 Données : « ↻ Vérifier » voit la nouvelle version).
+#
+# Lancer : onglet « Actions » → « Places, métiers et rivages (lot H) » → « Run workflow » (choisir ce qu'on refait).
+
+name: Places, métiers et rivages (lot H)
+
+on:
+  workflow_dispatch:
+    inputs:
+      quoi:
+        description: 'tout, osm, wikidata, bastides, textes ou trudaine'
+        required: false
+        default: 'tout'
+  push:
+    branches: ['claude/**']
+    paths: ['.github/workflows/telech-h.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: telech-h-donnees
+  cancel-in-progress: false
+
+jobs:
+  donnees:
+    # le « push » sert seulement à faire connaître ce travail à GitHub : il ne fabrique rien
+    if: github.event_name != 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    env:
+      QUOI: ${{ github.event.inputs.quoi || 'tout' }}
+    steps:
+      - name: Dossier de travail
+        run: echo "TH_RAW=$RUNNER_TEMP/th-cache" >> "$GITHUB_ENV"
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: "Préférer IPv4 (pas d’IPv6 sur la machine GitHub, « Network is unreachable »)"
+        run: echo 'precedence ::ffff:0:0/96 100' | sudo tee -a /etc/gai.conf
+      - name: Reprendre les réponses déjà téléchargées
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ runner.temp }}/th-cache
+          key: telech-h-${{ github.run_id }}
+          restore-keys: telech-h-
+      - name: "🗺 OpenStreetMap : kiosques, halles, maisons éclusières, tracés disparus"
+        if: env.QUOI == 'tout' || env.QUOI == 'osm'
+        timeout-minutes: 150
+        run: python3 -I scripts/telech-h/build_osm.py assets/data
+      - name: "🎺 🗽 🏪 🚡 🛶 🚋 🏭 Wikidata"
+        if: env.QUOI == 'tout' || env.QUOI == 'wikidata'
+        run: python3 -I scripts/telech-h/build_wikidata.py assets/data
+      - name: "🏰 Bastides du Sud-Ouest"
+        if: env.QUOI == 'tout' || env.QUOI == 'bastides'
+        run: python3 -I scripts/telech-h/build_bastides.py assets/data
+      - name: "📖 Métiers et pays dans Wikipédia"
+        if: env.QUOI == 'tout' || env.QUOI == 'textes'
+        run: python3 -I scripts/telech-h/build_textes.py assets/data
+      - name: "🗺 Atlas de Trudaine (Wikimedia Commons)"
+        if: env.QUOI == 'tout' || env.QUOI == 'trudaine'
+        run: python3 -I scripts/telech-h/build_trudaine.py assets/data
+      - name: Garder les réponses pour la prochaine fois
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ runner.temp }}/th-cache
+          key: telech-h-${{ github.run_id }}
+      - name: Sommaire des données
+        run: node scripts/donnees-manifest.js
+      - name: Enregistrer dans la branche
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/data/th-*.json.gz assets/data/manifest.json
+          git diff --cached --quiet && { echo "rien de neuf"; exit 0; }
+          git commit -m "Places, métiers et rivages (lot H) : données refaites sur GitHub (OpenStreetMap ODbL, Wikidata CC0, Wikipédia CC BY-SA 4.0, Wikimedia Commons)"
+          for i in 1 2 3; do git pull --rebase origin "$GITHUB_REF_NAME" && git push origin "HEAD:$GITHUB_REF_NAME" && break; sleep 10; done

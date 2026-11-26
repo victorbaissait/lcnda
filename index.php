@@ -105,6 +105,8 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/telech-b.css?v=1">
     <link rel="stylesheet" href="assets/css/telech-e.css?v=2">
     <link rel="stylesheet" href="assets/css/telech-f.css?v=1">
+    <link rel="stylesheet" href="assets/css/telech-h.css?v=1">
+    <link rel="stylesheet" href="assets/css/telech-g.css?v=1">
     <link rel="stylesheet" href="assets/css/telech-i.css?v=1">
     <link rel="stylesheet" href="assets/css/epoque-travail.css?v=1">
     <link rel="stylesheet" href="assets/css/lot8-ciel-metier.css?v=1">
@@ -1715,7 +1717,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/ia-serveur.js?v=1" defer></script><!-- 🖥 serveur d’IA : Ollama, Unsloth ou compatible OpenAI (lib/ia_serveur.php) -->
 <script src="assets/js/heritage-assistant-ia.js?v=3" defer></script>
 <script src="assets/js/heritage-reseau.js?v=1" defer></script>
-<script src="assets/js/heritage-tout-sur.js?v=18" defer></script>
+<script src="assets/js/heritage-tout-sur.js?v=20" defer></script>
 <script src="assets/js/heritage-monographie-plus.js?v=3" defer></script>
 <script src="assets/js/heritage-territoires.js?v=2" defer></script>
 <script src="assets/js/heritage-carto-donnees.js?v=1" defer></script>
@@ -1730,6 +1732,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-telech-b-village.js?v=2" defer></script>
 <script src="assets/js/heritage-telech-e.js?v=2" defer></script>
 <script src="assets/js/heritage-telech-f.js?v=2" defer></script>
+<script src="assets/js/heritage-telech-h.js?v=1" defer></script>
+<script src="assets/js/heritage-telech-g.js?v=1" defer></script>
 <script src="assets/js/heritage-telech-i.js?v=1" defer></script>
 <script src="assets/js/heritage-fiche-edifice.js?v=3" defer></script>
 <script src="assets/js/app-suivi-core.js?v=2" defer></script>
