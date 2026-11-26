@@ -4956,6 +4956,8 @@
 :root[data-lc-density] .rp-history-list{gap:calc(2px * var(--lc-sp))}
 :root[data-lc-density] .mc-list{gap:calc(2px * var(--lc-sp))}
 :root[data-lc-density] .lr-list{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] #research-form .rk-menu{padding-bottom:calc(18px * var(--lc-sp))}
+:root[data-lc-density] #research-form .rk-menu{margin-bottom:calc(18px * var(--lc-sp))}
 /* audit-enquetes.css */
 :root[data-lc-density] .enq-row-act{gap:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .enq-conclusion{padding:calc(10px * var(--lc-sp)) calc(14px * var(--lc-sp))}

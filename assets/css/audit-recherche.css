@@ -80,3 +80,8 @@ body.is-kiosk [data-delete-event-type], body.is-kiosk [data-delete-personal-dict
     .archive-digest-row .row-actions { flex-wrap: wrap; }
     .rp-replace-form .checkbox-group, .lr-form .form-grid, .rp-kinship .form-grid { grid-template-columns: minmax(0, 1fr); }
 }
+/* un trait entre la liste des sortes de recherche et le formulaire ; rien de collé dans le formulaire « autour d'une commune » */
+#research-form .rk-menu { padding-bottom: 18px; margin-bottom: 18px; border-bottom: 1px solid var(--line-soft, rgba(0,0,0,.15)); }
+#research-form .rk-menu[hidden], #research-form .rk-menu:empty { border: 0; padding: 0; margin: 0; }
+#research-proximity-fields .proximity-radius-value { display: block; margin: 6px 0 14px; }
+#research-proximity-fields .year-range-fields { margin-top: 10px; }
