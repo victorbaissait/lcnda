@@ -214,7 +214,7 @@ function sideDetect() {
     const overlay = box.offsetWidth - box.clientWidth - box.clientLeft * 2 < 1;
     const barLeft = br.left + box.clientLeft + box.clientWidth - (overlay ? 12 : 0);
     const shadow = el => { const m = getComputedStyle(el).boxShadow; if (!m || m === 'none') return [0, 0]; const px = (m.match(/-?[\d.]+px/g) || []).map(parseFloat); return [Math.max(0, px[0] || 0), Math.max(0, px[1] || 0)]; };
-    const cards = [...box.querySelectorAll('.side-menu-item, .saved-item, .person-list-item')].filter(el => el.offsetParent && el.getBoundingClientRect().width > 40);
+    const cards = [...box.querySelectorAll('.side-menu-item, .saved-item, .person-list-item, .h-fi-sitem')].filter(el => el.offsetParent && el.getBoundingClientRect().width > 40);
     for (const el of cards) {
         const r = el.getBoundingClientRect(), [sx] = shadow(el), gap = barLeft - (r.right + sx);
         if (gap < 12 - 0.5) { out.push(`carte « ${el.textContent.trim().slice(0, 30)} » : ${Math.round(gap * 10) / 10} px avant la barre de défilement (12 attendus)`); break; }
@@ -264,7 +264,7 @@ function sideDetect() {
     }
     return out;
 }
-const sideTabs = ['recherche', 'listes', 'maintenance', 'graphiques', 'carte'];
+const sideTabs = ['recherche', 'listes', 'maintenance', 'graphiques', 'carte', 'fiches'];
 
 
 module.exports = {detect, sideDetect, start, settle, newPage, go, scan, closeDialogs};

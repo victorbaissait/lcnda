@@ -123,7 +123,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/fiche-edifice.css?v=2">
     <link rel="stylesheet" href="assets/css/histoire-autour.css?v=1">
     <link rel="stylesheet" href="assets/css/listes-donnees.css?v=3">
-    <link rel="stylesheet" href="assets/css/listes-themes.css?v=2">
+    <link rel="stylesheet" href="assets/css/listes-themes.css?v=3">
     <link rel="stylesheet" href="assets/css/donnees-maj.css?v=2">
     <link rel="stylesheet" href="assets/css/donnees-recap.css?v=1"><!-- 📊 Récap des données -->
     <link rel="stylesheet" href="assets/css/donnees-plus.css?v=1"><!-- 📊 Données, en plus -->
@@ -178,10 +178,10 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/versions.css?v=2">
     <link rel="stylesheet" href="assets/css/premier.css?v=2">
     <link rel="stylesheet" href="assets/css/apparence-traits.css?v=43" id="lc-frame-css" media="not all">
-    <link rel="stylesheet" href="assets/css/designs-gen.css?v=57" id="lc-designs-gen" media="not all">
+    <link rel="stylesheet" href="assets/css/designs-gen.css?v=58" id="lc-designs-gen" media="not all">
     <link rel="stylesheet" href="assets/css/designs.css?v=15">
     <link rel="stylesheet" href="assets/css/a-trier.css?v=1">
-    <link rel="stylesheet" href="assets/css/colonne-espacement.css?v=1">
+    <link rel="stylesheet" href="assets/css/colonne-espacement.css?v=2">
     <link rel="stylesheet" href="assets/css/fiche-village-organiser.css?v=1">
     <script>/* 🎨 Designs au choix (app-designs.js) : le style choisi est posé avant le premier dessin, sans clignotement */
     (function(){try{var c=JSON.parse(localStorage.getItem('lcnda-designs-ui-v2')||'null');if(!c||typeof c!=='object'||!c.a)return;var r=document.documentElement,k;
@@ -1353,21 +1353,21 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-sidegroups.js?v=15" defer></script>
 <script src="assets/js/app-reordonner.js?v=3" defer></script>
 <script src="assets/js/app-listes.js?v=67" defer></script>
-<script src="assets/js/app-listes-donnees.js?v=14" defer></script>
+<script src="assets/js/app-listes-donnees.js?v=15" defer></script>
 <script src="assets/js/app-listes-themes.js?v=3" defer></script><!-- 🗂 Listes → Données par thème (20 thèmes), recherche sur toutes les listes ; Réglages → 🧰 Listes de données -->
-<script src="assets/js/app-listes-reunies.js?v=3" defer></script><!-- 🔀 listes réunies (🌋 Séismes réunis) : plusieurs sources, sans doublons -->
+<script src="assets/js/app-listes-reunies.js?v=4" defer></script><!-- 🔀 listes réunies (🌋 Séismes réunis) : plusieurs sources, sans doublons -->
 <script src="assets/js/app-listes-famille.js?v=3" defer></script><!-- 👪 « Dans la famille » : calculé ici (GET ld_famille) -->
 <script src="assets/js/app-listes-reunies-plus.js?v=1" defer></script><!-- 🔀 Éruptions, Crues, Batailles, Monuments, Soldats réunis ; 🔎 chercher dans les valeurs ; 👪 cercles de la famille sur la carte -->
 <script src="assets/js/app-listes-choix.js?v=3" defer></script><!-- ☑ plusieurs lignes d’un coup : cases, Tout cocher, barre du bas (📎 · 🧺 · ⤓) -->
 <script src="assets/js/app-listes-maj.js?v=3" defer></script>
-<script src="assets/js/app-donnees-accueil.js?v=2" defer></script><!-- 📊 Récap des données et la question en français : Listes → 🧰 Données et l’onglet 📊 Données (un seul écran) -->
-<script src="assets/js/app-donnees-plus.js?v=1" defer></script><!-- 📊 Données, en plus : ⚙ Organiser le récap, Réglages → 📊 Données, ⭐ 🕘 🆕 💾 📊 👤 🕳 📝 ➕ ⚠️ 🔎 📶 -->
+<script src="assets/js/app-donnees-accueil.js?v=3" defer></script><!-- 📊 Récap des données et la question en français : Listes → 🧰 Données et l’onglet 📊 Données (un seul écran) -->
+<script src="assets/js/app-donnees-plus.js?v=2" defer></script><!-- 📊 Données, en plus : ⚙ Organiser le récap, Réglages → 📊 Données, ⭐ 🕘 🆕 💾 📊 👤 🕳 📝 ➕ ⚠️ 🔎 📶 -->
 <script src="assets/js/app-donnees-plus-outils.js?v=1" defer></script><!-- ⚖️ 🗺 🕳 📖 📜 📄 🎞 🔗 💽 🕰 -->
 <script src="assets/js/app-listes-personnes.js?v=3" defer></script>
 <script src="assets/js/app-listes-perso-core.js?v=1" defer></script>
 <script src="assets/js/app-listes-perso.js?v=2" defer></script>
 <script src="assets/js/app-maintenance.js?v=68" defer></script>
-<script src="assets/js/app-recherche.js?v=35" defer></script>
+<script src="assets/js/app-recherche.js?v=36" defer></script>
 <script src="assets/js/app-recherche-outils.js?v=2" defer></script>
 <script src="assets/js/app-graphiques.js?v=29" defer></script>
 <script src="assets/js/app-side-folders.js?v=3" defer></script>
@@ -1705,7 +1705,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-commune-plus.js?v=1" defer></script>
 <script src="assets/js/heritage-lieux-patrimoine.js?v=2" defer></script>
 <script src="assets/js/heritage-metiers-rivieres.js?v=3" defer></script>
-<script src="assets/js/heritage-histoire-autour.js?v=6" defer></script>
+<script src="assets/js/heritage-histoire-autour.js?v=7" defer></script>
 <script src="assets/js/heritage-guerres-temps.js?v=1" defer></script><!-- ▶ Dans le temps : les batailles sur la carte, année après année, autour de nos lieux -->
 <script src="assets/js/heritage-commune-culture.js?v=2" defer></script>
 <script src="assets/js/heritage-boussole-rues.js?v=4" defer></script>
@@ -1727,9 +1727,9 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-branches-isolees.js?v=1" defer></script>
 <script src="assets/js/heritage-parents-celebres.js?v=1" defer></script>
 <script src="assets/js/heritage-connexions.js?v=9" defer></script>
-<script src="assets/js/app-paniers-core.js?v=3" defer></script>
+<script src="assets/js/app-paniers-core.js?v=4" defer></script>
 <script src="assets/js/app-paniers.js?v=6" defer></script><!-- 🧺 l’onglet Paniers (caché au départ ; lib/paniers.php) -->
-<script src="assets/js/app-inserer.js?v=3" defer></script><!-- 📎 Insérer une info à l’endroit du curseur, dans tout texte libre (« / », 📎, ⌥⌘K) -->
+<script src="assets/js/app-inserer.js?v=4" defer></script><!-- 📎 Insérer une info à l’endroit du curseur, dans tout texte libre (« / », 📎, ⌥⌘K) -->
 <script src="assets/js/heritage-connexions-besoins.js?v=2" defer></script><!-- 🧩 les besoins : pistes qui disent ce qui leur manque, « Cet acte répond à… », Ma semaine → Ce qui manque, carte (lib/connexions_besoins.php) -->
 <script src="assets/js/ia-serveur.js?v=1" defer></script><!-- 🖥 serveur d’IA : Ollama, Unsloth ou compatible OpenAI (lib/ia_serveur.php) -->
 <script src="assets/js/heritage-assistant-ia.js?v=3" defer></script>
@@ -1752,7 +1752,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-telech-h.js?v=1" defer></script>
 <script src="assets/js/heritage-telech-g.js?v=2" defer></script>
 <script src="assets/js/heritage-telech-i.js?v=2" defer></script>
-<script src="assets/js/heritage-telech-m.js?v=3" defer></script>
+<script src="assets/js/heritage-telech-m.js?v=4" defer></script>
 <script src="assets/js/heritage-telech-k.js?v=1" defer></script>
 <script src="assets/js/heritage-telech-j.js?v=1" defer></script>
 <script src="assets/js/heritage-fiche-edifice.js?v=4" defer></script>

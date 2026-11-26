@@ -3234,6 +3234,19 @@
 :root[data-lc-density] .h-gap-where{padding-left:calc(16px * var(--lc-sp))}
 :root[data-lc-density] .h-gap-foot{gap:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .h-gap-dig{padding:0 calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-gaps-who{gap:calc(3px * var(--lc-sp))}
+:root[data-lc-density] .h-gaps-who-row{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .h-gaps-more{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-gap-card{padding:calc(14px * var(--lc-sp)) calc(18px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-gap-card-head{gap:calc(6px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root[data-lc-density] .h-gap-card-head{padding-bottom:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-gap-card-who{gap:calc(4px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-gap-card-count{padding:calc(2px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-gaps .h-gap-card .h-gap{padding:calc(12px * var(--lc-sp)) calc(2px * var(--lc-sp))}
+:root[data-lc-density] .h-gap-card .h-gap-act{gap:calc(6px * var(--lc-sp))}
+@media (max-width:640px){
+  :root[data-lc-density] .h-gap-card{padding:calc(12px * var(--lc-sp)) calc(14px * var(--lc-sp)) calc(4px * var(--lc-sp))}
+}
 :root[data-lc-density] .h-dna-auto{gap:calc(16px * var(--lc-sp))}
 :root[data-lc-density] .h-dna-matrix{padding:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .h-dna-cl-list{gap:calc(10px * var(--lc-sp))}
@@ -8938,6 +8951,7 @@
   :root[data-lc-density] #sidebar-footer.sidebar-footer{padding:calc(10px * var(--lc-sp)) calc(16px * var(--lc-sp)) calc(12px * var(--lc-sp)) !important}
   :root[data-lc-density] #sidebar-content.sidebar-content{padding-bottom:calc(24px * var(--lc-sp))}
 }
+:root[data-lc-density] #sidebar-content .h-fi-side [data-fi-rows]{gap:calc(9px * var(--lc-sp))}
 /* fiche-village-organiser.css */
 :root[data-lc-density] .h-village-flow .h-village-collect{gap:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .h-village-flow > .is-vnarrow :is(.h-panel-head){gap:calc(6px * var(--lc-sp))}
