@@ -1841,7 +1841,7 @@
             if (![...(e.dataTransfer?.types || [])].includes('application/x-lcnda-cx')) return;
             const r = stage.getBoundingClientRect(); if (e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom) cxDrop = {at: toWorld(e.clientX, e.clientY), t: Date.now()};
         }, true);
-        Object.assign(ext.boardsInternals.current, {id: Number(b.id), title: boardTitle, isOpen: () => root.isConnected, locked: () => boardLocked || kioskOn(), placeCx, removeIds, asCx, cite: citeInto,
+        Object.assign(ext.boardsInternals.current, {id: Number(b.id), title: boardTitle, isOpen: () => root.isConnected, locked: () => boardLocked || kioskOn(), placeCx, removeIds, asCx, cite: citeInto, focus: ids => focusOn(ids.map(byId).filter(Boolean), 1),
             takeDrop: () => { const d = cxDrop; cxDrop = null; return d && Date.now() - d.t < 3000 ? d.at : null; }});
         // ── « Ajouter » : tout ce qu'on peut poser ──
         function addMenu() {

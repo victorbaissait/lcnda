@@ -377,7 +377,7 @@
                  ${last ? ` · <small class="muted">${esc(T('Vérifié le {d}', {d: new Date(last).toLocaleDateString(lang() === 'fr' ? 'fr-FR' : lang())}))}</small>` : ''}</p>
               ${kiosk() ? `<p class="muted">${esc(T('Mode consultation : rien ne se télécharge.'))}</p>` : `<div class="dmaj-acts">
                 <button type="button" class="button small secondary" data-dmaj-checkall>↻ ${esc(T('Vérifier tout'))}</button>
-                <button type="button" class="button small" data-dmaj-getall ${C.checkedAt && !missing.length ? 'disabled' : ''}>⤓ ${esc(C.checkedAt ? T('Tout télécharger ({s})', {s: fmtSize(sum(missing))}) : T('Tout télécharger'))}</button>
+                <button type="button" class="button small" data-dmaj-getall ${C.checkedAt && !missing.length ? 'disabled' : ''} title="${esc(C.checkedAt ? T('Le poids de tout ce qui n’est pas encore installé') : T('Poids estimé de ce qui n’est pas encore installé ; « ↻ Vérifier tout » donne le poids exact'))}">⤓ ${esc(C.checkedAt ? T('Tout télécharger ({s})', {s: fmtSize(sum(missing))}) : (est => est ? T('Tout télécharger (≈ {s})', {s: fmtSize(est)}) : T('Tout télécharger'))(all.filter(r => r.state === 'missing').reduce((n, r) => n + (r.size || 0), 0)))}</button>
                 <button type="button" class="button small" data-dmaj-updall ${C.checkedAt && !updates.length ? 'disabled' : ''}>↻ ${esc(C.checkedAt ? T('Tout mettre à jour ({n})', {n: updates.length}) : T('Tout mettre à jour'))}</button></div>`}
               ${offline ? `<p class="dmaj-off" data-dmaj-offline>⚠ ${esc(offline)}</p>` : ''}
               <div data-dmaj-queue></div>
