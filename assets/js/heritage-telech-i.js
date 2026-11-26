@@ -242,7 +242,7 @@
             return row('🌊', `${lead} ${esc(T('({e} à {p}, au bord de la mer.)', {e: r.ev.tag === 'MARR' ? T('Son mariage') : T('Sa naissance'), p: r.ev.name}))} ${srcLink('https://psmsl.org/data/obtaining/')}`, LIC.psmsl(),
                 `${ctxLine(await ctx('maregraphe'))}${hyp(T('Niveau moyen de l’année, mesuré par le marégraphe de la station (référence locale révisée du PSMSL). Ailleurs sur la côte, la différence peut être un peu autre.'))}`); },
         grottes: async life => { const D = await rowsOf('tq_sites'); const list = cavesFor(D.rows, life); if (!list.length) return '';
-            const x = list[0]; return row('🎨', `${T('À {k} de {p}, où {e} est né : la grotte ornée {n}.', {k: esc(kmTxt(x.km)), p: esc(x.place), e: esc(he(life.person)), n: `<b>${link(wp(x.r.frwiki) || wd(x.r.q), x.r.n)}</b>`})} ${srcLink(wd(x.r.q))}`, LIC.tq(),
+            const x = list[0]; return row('🎨', `${T('À {k} de {p}, son lieu de naissance : la grotte ornée {n}.', {k: esc(kmTxt(x.km)), p: esc(x.place), n: `<b>${link(wp(x.r.frwiki) || wd(x.r.q), x.r.n)}</b>`})} ${srcLink(wd(x.r.q))}`, LIC.tq(),
                 more(`${list.length > 1 ? `<ul class="hist-ul ti-ul">${list.slice(1, 8).map(y => placeLi({...y, r: {...y.r, k: 'grotte'}})).join('')}</ul>` : ''}${ctxLine(await ctx('grottes'))}`, list.length - 1)); },
         romains: async life => { const D = await rowsOf('romains'); const list = romansFor(D.rows, life); if (!list.length) return '';
             return listHtml('🏛', list, T('Près de ses lieux, un ouvrage romain : {l}.', {l: list.slice(0, 2).map(nameKm).join(', ')}), LIC.wd(), ctxLine(await ctx('romains'))); },

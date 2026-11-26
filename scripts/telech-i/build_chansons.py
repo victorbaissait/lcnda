@@ -35,8 +35,14 @@ def search(word):
     return [t.replace('&#039;', "'").replace('&amp;', '&') for t in re.findall(r'<a href="/wiki/[^"]+" title="([^"]+)" data-serp', h)]
 
 
+def year_of(h):
+    h = re.sub(r'<[^>]+>', '', h[:30000])
+    m = re.search(r',(?:&nbsp;|\s)*(1[5-9]\d\d)(?:&nbsp;|\s)*\(', h) or re.search(r'itemprop="datePublished"[^>]*>(1[5-9]\d\d)', h) or re.search(r'(?:&nbsp;|,\s)(1[5-9]\d\d)</span>', h)
+    return int(m.group(1)) if m else None
+
+
 def main():
-    seen, rows = set(), []
+    seen, rows, books = set(), [], {}
     for word, key in JOBS.items():
         for t in search(word):
             if '/' not in t or t in seen:
@@ -49,9 +55,13 @@ def main():
             if not h:
                 continue
             full = re.sub(r'<style.*?</style>', '', h, flags=re.S)
-            ym = re.search(r',(?:&nbsp;|\s)*(1[5-9]\d\d)(?:&nbsp;|\s)*\(', full) or re.search(r'itemprop="datePublished"[^>]*>(1[5-9]\d\d)', full)
-            y = int(ym.group(1)) if ym else None
-            am = re.search(r'title="Auteur:([^"]+)"', full)
+            y, am = year_of(full), re.search(r'title="Auteur:([^"]+)"', full)
+            if y is None or not am:  # la page d'une chanson n'a souvent ni année ni auteur : ceux du recueil
+                if parent not in books:
+                    ph = wm.render(parent)
+                    books[parent] = re.sub(r'<style.*?</style>', '', ph, flags=re.S) if ph else ''
+                y = y if y is not None else year_of(books[parent])
+                am = am or re.search(r'title="Auteur:([^"]+)"', books[parent])
             if y is None or y > 1900:
                 print(f'  - {t} : année {y}', file=sys.stderr)
                 continue

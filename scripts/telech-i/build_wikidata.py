@@ -4,7 +4,7 @@
  ⚓ ti-navals      chantiers navals (Q190928), corderies (Q1249556, Q41085665), arsenaux (Q81669), bases navales (Q1324633)
  🚗 ti-autos      constructeurs automobiles (Q786820) fondés avant 1914, placés par leur siège (P159) ou leur lieu de fondation (P740)
  🍬 ti-sucreries  sucreries et raffineries de sucre (Q227857, Q61941965)
- 🏥 ti-sanas      sanatoriums (Q46124, Q1792936 et leurs sous-classes)
+ 🏥 ti-sanas      sanatoriums (Q46124, Q1792936 et leurs sous-classes directes)
  🔒 ti-centrales  maisons centrales (Q130246829, Q3279120) — les autres prisons et bagnes sont déjà dans ha-institutions (non recopiés)
  🏛 ti-romains    ponts romains (Q1223230) et aqueducs romains (Q13218676) ; « dup » marque ceux déjà dans et-ouvrages (lot « Son époque »)
  🐎 ti-hippodromes hippodromes (Q11822917)
@@ -67,7 +67,7 @@ def write(name, rows, what, url, extra=None):
 
 def build(name, kinds, sub, what):
     vals = ' '.join('wd:' + k for k in kinds)
-    p31 = 'wdt:P31/wdt:P279*' if sub else 'wdt:P31'
+    p31 = 'wdt:P31/wdt:P279?' if sub else 'wdt:P31'
     q = f'''SELECT ?x ?xl ?k ?c ?s ?e ?ins ?coml ?fr WHERE {{ VALUES ?k {{ {vals} }} ?x {p31} ?k ; wdt:P17 wd:Q142 ; wdt:P625 ?c .
       {COMMON.format()} }}'''
     rows = rows_of(wm.sparql(q), kinds)

@@ -29,6 +29,17 @@ THEMES = {
     'teinture': (['Garance des teinturiers', 'Pastel des teinturiers', 'Pays de Cocagne'], r'garance|pastel|teintur|cocagne|guède|coque'),
 }
 BROKEN = re.compile(r'\s[,.;:)]|\(\s*\)|[,:;]$|\b(le|la|du|au|des|de|en)\s*[,.]|[a-z]{2}[A-Z][a-z]|\benviron\s+(des|de|les)\b')
+# les articles de communes connues pour ce métier : la phrase (avec le mot du métier) est rattachée à la commune de l'article
+TOWNS = {
+    'coutellerie': ['Thiers', 'Nogent (Haute-Marne)', 'Laguiole (Aveyron)'],
+    'ganterie': ['Millau', 'Grenoble', 'Annonay', 'Saint-Junien', 'Chaumont (Haute-Marne)'],
+    'vannerie': ['Villaines-les-Rochers', 'Fayl-Billot', 'Origny-en-Thiérache'],
+    'chocolat': ['Noisiel', 'Blois'],
+    'conserverie': ['Douarnenez', 'Concarneau', 'Quiberon'],
+    'terreneuvas': ['Fécamp', 'Saint-Malo', 'Granville (Manche)', 'Bègles', 'Saint-Pierre (Saint-Pierre-et-Miquelon)'],
+    'mer': ['Cancale', 'Marennes (Charente-Maritime)', 'Arcachon', 'Plouguerneau'],
+    'teinture': ['Avignon', 'Albi', 'Lauragais'],
+}
 SKIP = re.compile(r'^\s*(\{\{|\[\[(Fichier|File|Image|Catégorie)|\||!|=|<|\*\s*\[\[(Fichier|Catégorie)|__)', re.I)
 
 
@@ -58,7 +69,8 @@ def main():
     for k, (titles, kw) in THEMES.items():
         kre = re.compile(kw, re.I)
         cand = []
-        for t in titles:
+        towns = set(TOWNS.get(k, []))
+        for t in titles + TOWNS.get(k, []):
             try:
                 w = wm.wp_raw(t)
             except Exception as e:  # noqa
@@ -76,10 +88,10 @@ def main():
                     ys = [int(y) for y in re.findall(r'\b(1[0-9]{3}|20[0-9]{2})\b', plain)]
                     if ys and min(ys) >= 1960:
                         continue  # une phrase d'aujourd'hui (chiffre d'affaires, label…) : hors sujet pour des ancêtres
-                    if j < 2 and not ctx.get(k) and kre.search(plain):
+                    if j < 2 and not ctx.get(k) and t not in towns and kre.search(plain):
                         ctx.setdefault(k, []).append({'q': plain, 'title': t, 'url': wm.wp_url(t)})
                     if kre.search(plain):
-                        cand.append((t, plain, wm.links(s)))
+                        cand.append((t, plain, wm.links(s) + ([t] if t in towns else [])))
         places = wm.wd_of_titles([l for _, _, ls in cand for l in ls])
         seen = set()
         for t, plain, ls in cand:
@@ -91,7 +103,10 @@ def main():
                     continue
                 nm = re.sub(r'\s*\(.*\)$', '', l).lower()
                 at = low.find(nm)
-                if at < 0 or not any(abs(at - h) <= 80 for h in hits):
+                if l == t and t in towns:
+                    if sum(1 for r in rows if r[0] == k and r[1] == t) >= 3:
+                        continue  # trois phrases au plus par commune
+                elif at < 0 or not any(abs(at - h) <= 80 for h in hits):
                     continue  # la commune doit être nommée près du mot du métier (« Lyon, Paris ou Bordeaux » : non)
                 seen.add((p['insee'], plain))
                 y = re.search(r'\b(1[0-9]{3})\b', plain)
