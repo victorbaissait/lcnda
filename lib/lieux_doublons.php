@@ -34,7 +34,7 @@ require_once __DIR__ . '/recherche_outils.php'; // ro_undo_save, ro_undo_row, ro
 const LD_COUNTRIES = ['france', 'belgique', 'suisse', 'italie', 'espagne', 'allemagne', 'luxembourg', 'canada', 'algerie', 'pays bas', 'portugal',
     'royaume uni', 'etats unis', 'usa', 'monaco', 'andorre', 'pologne', 'autriche', 'tunisie', 'maroc', 'quebec', 'irlande', 'angleterre'];
 
-function ld_fold(?string $s): string
+function ldd_fold(?string $s): string
 {
     $s = ascii_fold(mb_strtolower(trim((string) $s)));
     $s = preg_replace('/[\s\-’\'.]+/u', ' ', $s) ?? $s;
@@ -51,7 +51,7 @@ function ld_parse(array $r): array
     $rest = array_slice($parts, 1);
     $county = ''; $state = ''; $country = ''; $code = '';
     $rest = array_values(array_filter($rest, static function ($x) use (&$code) { if (preg_match('/^(\d{2,3}|2a|2b)$/i', $x)) { $code = strtoupper($x); return false; } return true; }));
-    $isCountry = static fn($x) => in_array(ld_fold($x), LD_COUNTRIES, true);
+    $isCountry = static fn($x) => in_array(ldd_fold($x), LD_COUNTRIES, true);
     $n = count($rest);
     if ($n === 1) { if ($isCountry($rest[0])) { $country = $rest[0]; } else { $county = $rest[0]; } }
     elseif ($n === 2) { if ($isCountry($rest[1])) { $county = $rest[0]; $country = $rest[1]; } else { $county = $rest[0]; $state = $rest[1]; } }
@@ -60,7 +60,7 @@ function ld_parse(array $r): array
     $lat = $r['latitude'] ?? null; $lon = $r['longitude'] ?? null;
     $hasXY = $lat !== null && $lon !== null && $lat !== '' && $lon !== '' && !((float) $lat == 0.0 && (float) $lon == 0.0);
     return [
-        'id' => (int) $r['id'], 'name' => (string) $r['name'], 'key' => ld_fold($base), 'base' => $base, 'split' => count($parts) > 1,
+        'id' => (int) $r['id'], 'name' => (string) $r['name'], 'key' => ldd_fold($base), 'base' => $base, 'split' => count($parts) > 1,
         'county' => $f('county') !== '' ? $f('county') : $county, 'state' => $f('state') !== '' ? $f('state') : $state,
         'country' => $f('country') !== '' ? $f('country') : $country, 'code' => $f('admin2_code') !== '' ? $f('admin2_code') : $code,
         'insee' => $f('admin4_code'), 'lat' => $hasXY ? (float) $lat : null, 'lon' => $hasXY ? (float) $lon : null,
@@ -68,7 +68,7 @@ function ld_parse(array $r): array
     ];
 }
 
-function ld_km(float $la1, float $lo1, float $la2, float $lo2): float
+function ldd_km(float $la1, float $lo1, float $la2, float $lo2): float
 {
     $a = sin(deg2rad($la2 - $la1) / 2) ** 2 + cos(deg2rad($la1)) * cos(deg2rad($la2)) * sin(deg2rad($lo2 - $lo1) / 2) ** 2;
     return 6371 * 2 * asin(min(1, sqrt($a)));
@@ -78,10 +78,10 @@ function ld_km(float $la1, float $lo1, float $la2, float $lo2): float
 function ld_pair(array $a, array $b): ?array
 {
     if ($a['key'] === '' || $a['key'] !== $b['key']) { return null; }
-    foreach (['county', 'country'] as $k) { if ($a[$k] !== '' && $b[$k] !== '' && ld_fold($a[$k]) !== ld_fold($b[$k])) { return null; } }
+    foreach (['county', 'country'] as $k) { if ($a[$k] !== '' && $b[$k] !== '' && ldd_fold($a[$k]) !== ldd_fold($b[$k])) { return null; } }
     if ($a['code'] !== '' && $b['code'] !== '' && ltrim($a['code'], '0') !== ltrim($b['code'], '0')) { return null; }
     if ($a['insee'] !== '' && $b['insee'] !== '' && $a['insee'] !== $b['insee']) { return null; }
-    $km = $a['lat'] !== null && $b['lat'] !== null ? ld_km($a['lat'], $a['lon'], $b['lat'], $b['lon']) : null;
+    $km = $a['lat'] !== null && $b['lat'] !== null ? ldd_km($a['lat'], $a['lon'], $b['lat'], $b['lon']) : null;
     if ($km !== null && $km > 10) { return null; }
     if ($a['insee'] !== '' && $a['insee'] === $b['insee']) { return ['sure', 'insee']; }
     if ($km !== null && $km <= 1) { return ['sure', 'coords']; }
@@ -290,11 +290,11 @@ function ld_enrich(array $keep, array $dup): array
     if ((int) ($dup['population'] ?? 0) > (int) ($keep['population'] ?? 0) && $empty($keep['population'] ?? null)) { $set['population'] = $dup['population']; }
     // le nom du doublon devient un autre nom du lieu gardé (s'il dit autre chose)
     $alts = array_values(array_filter(array_map('trim', explode(',', (string) ($keep['alternate_names'] ?? ''))), static fn($x) => $x !== ''));
-    $foldAlts = array_map('ld_fold', $alts);
+    $foldAlts = array_map('ldd_fold', $alts);
     $add = [];
     foreach (array_merge([$d['base']], array_filter(array_map('trim', explode(',', (string) ($dup['alternate_names'] ?? ''))))) as $n) {
-        $f = ld_fold($n);
-        if ($f === '' || $f === ld_fold($k['base']) || in_array($f, $foldAlts, true)) { continue; }
+        $f = ldd_fold($n);
+        if ($f === '' || $f === ldd_fold($k['base']) || in_array($f, $foldAlts, true)) { continue; }
         $add[] = $n; $foldAlts[] = $f;
     }
     if ($add) { $set['alternate_names'] = implode(', ', array_merge($alts, $add)); }

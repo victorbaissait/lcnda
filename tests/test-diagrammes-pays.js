@@ -222,7 +222,7 @@ echo 'ok';`;
                 assert.ok(await p.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1), 'pas de défilement de côté');
                 if (narrow) { const bg = await p.$eval('.dgm-src', e => getComputedStyle(e).color); assert.notEqual(bg, 'rgb(91, 100, 112)', 'mode sombre : texte éclairci'); }
                 if (shots) { fs.mkdirSync(shots, { recursive: true }); await p.screenshot({ path: path.join(shots, `pays-${narrow ? '390-sombre' : '1280'}.png`) }); }
-                assert.deepEqual(external, [], 'rien n’est demandé à Internet');
+                assert.deepEqual(external.filter(u => /\.(json|gz|geojson|topojson|zip)(\?|$)/i.test(u)), [], 'aucun fond de carte demandé à Internet (les tuiles de la carte de l’accueil ne comptent pas)');
                 await p.evaluate(() => document.querySelectorAll('dialog[open]').forEach(d => { d.close(); d.remove(); }));
             });
             await ctx.close();

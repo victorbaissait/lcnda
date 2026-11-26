@@ -187,7 +187,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.fill('[data-dmaj-q]', 'débit des rivières'); await sleep(500);
             assert.deepStrictEqual(await p.$$eval('[data-dmaj-row]', els => els.map(e => e.dataset.dmajRow)), ['meteo:plus-rivieres']);
             await p.fill('[data-dmaj-q]', ''); await sleep(500);
-            await p.click('[data-dmaj-checkall]'); await p.waitForFunction(() => /Tout télécharger \(/.test(document.querySelector('[data-dmaj-getall]')?.textContent || ''), null, {timeout: 30000});
+            await p.click('[data-dmaj-checkall]'); await p.waitForFunction(() => /Tout télécharger \(\d/.test(document.querySelector('[data-dmaj-getall]')?.textContent || ''), null, {timeout: 30000});
             assert.strictEqual(await p.getAttribute('[data-dmaj-row="data:l8c-tour"]', 'data-dmaj-state'), 'update');
             assert.strictEqual(await p.getAttribute('[data-dmaj-row="gov:gov"]', 'data-dmaj-state'), 'absent', 'pas en ligne');
             assert.ok(!(await p.$('[data-dmaj-offline]')), 'pas de faux « hors ligne »');

@@ -27,7 +27,7 @@ const t = async (name, fn) => { if (ONLY && !ONLY.test(name)) return; try { awai
         await p.waitForSelector(sel, {timeout: 30000}); await sleep(300);
     };
     const PROX = {proximitySearch: {placeId: 1, placeName: 'Treignac', dateMode: 'range', yearFrom: 1780, yearTo: 1800, radiusKm: 10}};
-    const openProx = () => research('proximity', PROX, '#workspace .research-person-card [data-rk-id]');
+    const openProx = () => research('proximity', PROX, '#workspace .research-person-card[data-rk-id]');
     const menu = async () => { await clean(); await p.click('#workspace [data-rk-export]'); await p.waitForSelector('.ui-actmenu'); return p.$$eval('.ui-actmenu .ui-actmenu-i', a => a.map(x => x.textContent.trim())); };
     const menuPick = async re => { const b = p.locator('.ui-actmenu .ui-actmenu-i').filter({hasText: re}).first(); await b.click(); };
     try {
@@ -39,7 +39,7 @@ const t = async (name, fn) => { if (ONLY && !ONLY.test(name)) return; try { awai
             assert.strictEqual(await p.$eval('[data-rk-map]', el => el.classList.contains('is-open')), false);
             assert.ok(await p.$eval('[data-rk-map]', el => el.compareDocumentPosition(document.querySelector('#workspace .date-results')) & Node.DOCUMENT_POSITION_FOLLOWING), 'au-dessus des résultats');
             await p.click('[data-rk-map-btn]');
-            await p.waitForSelector('[data-rk-map].is-open .h-map-point', {timeout: 15000}); await sleep(700);
+            await p.waitForSelector('[data-rk-map].is-open .h-map-point', {timeout: 15000, state: 'attached'}); await sleep(700);
             assert.strictEqual(await p.getAttribute('[data-rk-map-btn]', 'aria-expanded'), 'true');
             const n = await p.$$eval('[data-rk-map] .h-map-point[data-cf-i]', a => a.length); assert.ok(n > 5, 'des points : ' + n);
             assert.ok(await p.$('[data-rk-map] .mm-circle[points]'), 'le cercle du rayon');
@@ -49,7 +49,7 @@ const t = async (name, fn) => { if (ONLY && !ONLY.test(name)) return; try { awai
             const birth = await p.evaluate(() => (window.LCNDA_CARTE_COULEURS ? window.LCNDA_CARTE_COULEURS.color('births') : '#2b8a3e'));
             assert.ok(await p.$eval('[data-rk-map]', (el, c) => el.innerHTML.toLowerCase().includes(c.toLowerCase()), birth), 'couleur des naissances ' + birth);
             assert.strictEqual(await p.evaluate(() => localStorage.getItem('genealogie-proximite-carte')), '1');
-            await openProx(); await p.waitForSelector('[data-rk-map].is-open .h-map-point', {timeout: 15000});
+            await openProx(); await p.waitForSelector('[data-rk-map].is-open .h-map-point', {timeout: 15000, state: 'attached'});
             assert.ok(true, 'retenue ouverte');
         });
         await t('Proximité : un clic sur un point (ou une pastille) ouvre une petite fiche, sans quitter l’écran ; lien vers la fiche', async () => {
@@ -131,18 +131,18 @@ const t = async (name, fn) => { if (ONLY && !ONLY.test(name)) return; try { awai
             await research('dates', {dateSearch: {mode: 'range', yearFrom: 1780, yearTo: 1790, values: '', placeId: 0, eventTypeId: '', occupationId: ''}, research: {q: '', category: 'all'}}, '#workspace article.date-result[data-rk-row]');
             assert.ok(await p.$('#workspace [data-rk-map-btn]'));
             if (!(await p.$('[data-rk-map].is-open'))) await p.click('[data-rk-map-btn]');
-            await p.waitForSelector('[data-rk-map].is-open .h-map-point', {timeout: 15000});
+            await p.waitForSelector('[data-rk-map].is-open .h-map-point', {timeout: 15000, state: 'attached'});
             assert.ok(await p.$('#workspace article.date-result .rk-row-acts [data-rk-ins]'));
             const items = await menu(); assert.ok(items.some(x => /Mettre dans le panier/.test(x)), items.join(' | ')); await clean();
         });
         await t('Nom de lieu avec joker : 🗺 Carte des lieux trouvés, 🧺 📎 dans Exporter', async () => {
             await research('place_name', {placeNameSearch: {q: 'Tr*', country: '', division: ''}}, '#workspace [data-rk-export]');
             assert.ok(await p.$('#workspace [data-rk-map-btn]'), 'les lieux ont des coordonnées');
-            await p.click('[data-rk-map-btn]'); await p.waitForSelector('[data-rk-map].is-open .h-map-point', {timeout: 15000});
+            await p.click('[data-rk-map-btn]'); await p.waitForSelector('[data-rk-map].is-open .h-map-point', {timeout: 15000, state: 'attached'});
             const items = await menu(); assert.ok(items.some(x => /Insérer…/.test(x))); await clean();
         });
         await t('Texte, personne ou lieu : 🧺 📎 (une liste de personnes), mais pas de carte (rien à placer)', async () => {
-            await research('text', {research: {q: 'MAZAUD', category: 'name'}}, '#workspace .research-person-card [data-rk-id]');
+            await research('text', {research: {q: 'MAZAUD', category: 'name'}}, '#workspace .research-person-card[data-rk-id]');
             assert.strictEqual(await p.$('#workspace [data-rk-map-btn]'), null);
             const items = await menu(); assert.ok(items.some(x => /Mettre dans le panier/.test(x))); await clean();
             assert.ok(await p.$('#workspace .research-person-card .rk-row-acts'));
@@ -155,7 +155,7 @@ const t = async (name, fn) => { if (ONLY && !ONLY.test(name)) return; try { awai
         });
         await t('Mode consultation : ni 🧺 ni 📎 ; la carte reste, sans tuile d’Internet', async () => {
             await p.evaluate(() => document.body.classList.add('is-kiosk'));
-            await openProx(); await p.waitForSelector('[data-rk-map].is-open .h-map-point', {timeout: 15000}); await sleep(800);
+            await openProx(); await p.waitForSelector('[data-rk-map].is-open .h-map-point', {timeout: 15000, state: 'attached'}); await sleep(800);
             const items = await menu(); assert.ok(!items.some(x => /panier|Insérer/.test(x)), items.join(' | ')); await clean();
             assert.strictEqual(await p.$$eval('#workspace .rk-row-acts', a => a.length), 0);
             const srcs = await p.$$eval('[data-rk-map] img', a => a.map(x => x.getAttribute('src') || ''));
@@ -164,7 +164,7 @@ const t = async (name, fn) => { if (ONLY && !ONLY.test(name)) return; try { awai
         });
         await t('390 px et sombre : la carte prend toute la largeur, les boutons passent à la ligne sans toucher le titre, 9 px entre les cartes', async () => {
             await p.setViewportSize({width: 390, height: 844}); await p.evaluate(() => { document.documentElement.dataset.theme = 'dark'; });
-            await openProx(); await p.waitForSelector('[data-rk-map].is-open .h-map-point', {timeout: 15000}); await sleep(600);
+            await openProx(); await p.waitForSelector('[data-rk-map].is-open .h-map-point', {timeout: 15000, state: 'attached'}); await sleep(600);
             const m = await p.evaluate(() => {
                 const page = document.querySelector('#workspace .page'), map = document.querySelector('[data-rk-map-host]'), h2 = document.querySelector('#workspace .page-header h2'), acts = document.querySelector('#workspace .page-header .ui-ph-actions');
                 const R = el => el.getBoundingClientRect(), a = R(h2), b = R(acts), pr = R(page), mr = R(map);

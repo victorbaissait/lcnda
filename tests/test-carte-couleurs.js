@@ -191,7 +191,7 @@ echo json_encode($ids);`], {cwd: root, encoding: 'utf8', env});
             });
             assert.strictEqual(px.rgb, rgb(px.want), 'export ' + px.kc);
             // carte d'une fiche
-            await p.evaluate(id => window.LCNDA_APP.selectPerson(id), ID.jean);
+            await p.evaluate(async id => { const A = window.LCNDA_APP; A.state.currentPersonId = id; await A.setModule('personnes'); await A.selectPerson(id); }, ID.jean);
             const got = await p.waitForSelector('.person-map-point[data-kc]', {timeout: 15000}).then(() => true, () => false);
             if (got) {
                 const pts = await p.$$eval('.person-map-point[data-kc]', g => g.map(x => [x.dataset.kc, x.style.getPropertyValue('--event-color').trim(), !!x.querySelector('.kc-pm-shape')]));
