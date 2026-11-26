@@ -176,7 +176,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.fill('.ld-ed-form input[name="km"]', '10'); await p.click('.ld-ed-form button[type="submit"]');
             await waitCount(/^3 lignes/);
             const heads = await p.$$eval('.ld-table thead th', a => a.map(x => x.textContent)); assert.ok(heads.some(h => /Distance/.test(h)), heads.join('|'));
-            const km = await p.$$eval('.ld-table tbody tr', trs => trs.map(tr => Number(tr.querySelector('td.ld-num:last-of-type')?.dataset.sortValue)));
+            const km = await p.$$eval('.ld-table tbody tr', trs => trs.map(tr => Number([...tr.querySelectorAll('td.ld-num')].pop()?.dataset.sortValue))); // la Distance : la dernière colonne de nombres (📎 🧺 viennent après)
             assert.ok(km.every((x, i) => !i || km[i - 1] <= x), km.join(','));
             assert.match(await p.textContent('[data-ld-chips]'), /10 km autour de Tulle/);
         });

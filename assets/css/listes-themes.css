@@ -62,9 +62,8 @@
 .ldc-all { border: 1.5px solid var(--line-color, #d6d6d6); background: var(--card-bg, #fff); color: inherit; font: inherit; font-size: 13px; border-radius: 8px; padding: 3px 10px; cursor: pointer; }
 .ldc-all:hover, .ldc-all:focus-visible { border-color: var(--blue-bright, #055dff); }
 .ldc-hint { font-size: 12px; }
-.ld-table th.ld-ck, .ld-table td.ld-ck { width: 34px; max-width: 34px; padding-left: 6px; padding-right: 2px; text-align: center; }
-.ld-table:has(.cx-ldck) .ld-ck { display: none; } /* « ☑ Choisir des lignes » de Prendre depuis… a déjà ses cases */
-.ld-ck-b { width: 22px; height: 22px; border: 1.5px solid var(--muted, #6d6d6d); border-radius: 5px; background: var(--card-bg, #fff); padding: 0; cursor: pointer; display: inline-grid; place-items: center; color: #fff; font-size: 14px; line-height: 1; opacity: 0; transition: opacity .12s; vertical-align: middle; }
+.ld-table:has(.cx-ldck) .ld-ck-b { display: none; } /* « ☑ Choisir des lignes » de Prendre depuis… a déjà ses cases */
+.ld-ck-b { margin: 0 8px 0 -2px; flex: none; width: 22px; height: 22px; border: 1.5px solid var(--muted, #6d6d6d); border-radius: 5px; background: var(--card-bg, #fff); padding: 0; cursor: pointer; display: inline-grid; place-items: center; color: #fff; font-size: 14px; line-height: 1; opacity: 0; transition: opacity .12s; vertical-align: middle; }
 .ld-ck-b::after { content: ''; }
 .ld-ck-b[aria-checked="true"] { background: var(--blue-bright, #055dff); border-color: var(--blue-bright, #055dff); }
 .ld-ck-b[aria-checked="true"]::after { content: '✓'; }
@@ -103,12 +102,11 @@
   .ldc-hint { display: none; }
   .ld-table--cards thead { display: none; }
   .ld-table--cards, .ld-table--cards tbody { display: block; }
-  .ld-table--cards tr[data-ld-row] { display: grid; grid-template-columns: auto 1fr auto; gap: 2px 8px; padding: 10px 6px; border-bottom: 1px solid var(--line-color, #d6d6d6); }
-  .ld-table--cards tr[data-ld-row] > td { display: block; border: 0; padding: 0; max-width: none; grid-column: 2; }
+  .ld-table--cards tr[data-ld-row] { display: grid; grid-template-columns: 1fr auto; gap: 2px 8px; padding: 10px 6px; border-bottom: 1px solid var(--line-color, #d6d6d6); }
+  .ld-table--cards tr[data-ld-row] > td { display: block; border: 0; padding: 0; max-width: none; grid-column: 1; }
   .ld-table--cards tr[data-ld-row] > td.muted { display: none; }
-  .ld-table--cards tr[data-ld-row] > td.ld-ck { grid-column: 1; grid-row: 1 / span 6; }
-  .ld-table--cards tr[data-ld-row] > td.ld-acts { grid-column: 3; grid-row: 1 / span 6; align-self: center; }
-  .ld-table--cards tr[data-ld-row] > td:nth-child(2) { font-weight: 700; }
+  .ld-table--cards tr[data-ld-row] > td.ld-acts { grid-column: 2; grid-row: 1 / span 6; align-self: center; }
+  .ld-table--cards tr[data-ld-row] > td:first-child { font-weight: 700; display: flex; align-items: center; }
   .ld-table--cards .ld-act { font-size: 20px; padding: 6px 8px; opacity: 1; }
   .ld-table--cards tr.ldr-detail-tr { display: block; }
   .ld-table--cards tr.ldr-detail-tr > td { display: block; }

@@ -78,16 +78,23 @@
     const spectaclesNear = (rows, lat, lon, radius = 5) => rows.filter(r => r.lat !== null && km(lat, lon, r.lat, r.lon) <= radius).sort((a, b) => a.y - b.y);
 
     /* ── 🚲 le Tour de France ── */
-    const stageAt = (s, p, radius = 3) => {
+    /** le rayon « près de chez lui » pour le Tour : 15 km par défaut, réglable dans Réglages → 🏆 Sport et Expositions (lot M) */
+    const tourKm = () => { try { const v = Number(JSON.parse(root.localStorage?.getItem('genealogie-telech-m') || '{}')?.km); return v >= 1 && v <= 100 ? v : 15; } catch (_) { return 15; } };
+    /** départ / arrivée d'une étape dans sa commune (code INSEE) ou à moins de `radius` km ; hit.km = la distance (0 = la commune même) */
+    const stageAt = (s, p, radius = tourKm()) => {
         const hit = [];
-        if (p.ins && s.ai === p.ins || p.ll && s.ala !== null && km(p.ll.lat, p.ll.lon, s.ala, s.alo) <= radius) hit.push('depart');
-        if (p.ins && s.bi === p.ins || p.ll && s.bla !== null && km(p.ll.lat, p.ll.lon, s.bla, s.blo) <= radius) hit.push('arrivee');
+        const da = p.ins && s.ai === p.ins ? 0 : p.ll && s.ala !== null ? km(p.ll.lat, p.ll.lon, s.ala, s.alo) : Infinity;
+        const db = p.ins && s.bi === p.ins ? 0 : p.ll && s.bla !== null ? km(p.ll.lat, p.ll.lon, s.bla, s.blo) : Infinity;
+        if (da <= radius) hit.push('depart');
+        if (db <= radius) hit.push('arrivee');
+        hit.km = Math.min(da <= radius ? da : Infinity, db <= radius ? db : Infinity);
+        hit.town = db <= da ? s.b : s.a;
         return hit;
     };
-    function tourAt(rows, place) {
+    function tourAt(rows, place, radius = tourKm()) {
         const p = {ins: inseeOf(place), ll: llOf(place)};
         if (!p.ins && !p.ll) return [];
-        return rows.map(s => ({s, hit: stageAt(s, p)})).filter(x => x.hit.length).sort((a, b) => a.s.y - b.s.y || String(a.s.d).localeCompare(String(b.s.d)));
+        return rows.map(s => { const hit = stageAt(s, p, radius); return {s, hit, km: hit.km, town: hit.town}; }).filter(x => x.hit.length).sort((a, b) => a.s.y - b.s.y || String(a.s.d).localeCompare(String(b.s.d)));
     }
     /** les étapes passées par ses lieux pendant sa vie ; « quand il y vivait » si l'année tombe dans ses années là (± 5 ans) */
     function tourForLife(rows, life) {
@@ -100,7 +107,7 @@
             }
         }
         const seen = new Set();
-        return out.filter(x => (seen.has(x.s.q) ? false : seen.add(x.s.q))).sort((a, b) => Number(b.lived) - Number(a.lived) || a.s.y - b.s.y);
+        return out.sort((a, b) => a.km - b.km).filter(x => (seen.has(x.s.q) ? false : seen.add(x.s.q))).sort((a, b) => Number(b.lived) - Number(a.lived) || Number(b.km < 1.5) - Number(a.km < 1.5) || a.s.y - b.s.y);
     }
 
     /* ── 🎡 les Expositions ── */
@@ -297,11 +304,21 @@
         return row('🎭', `${lead}${near} ${refLinks(x)}`, SRC.spectacles(), more(li ? `<p class="muted">${esc(T('Créés aussi en {y} :', {y: String(res.y)}))}</p><ul class="hist-ul">${li}</ul>` : '', res.list.length > 1 ? res.list.length - 1 : null));
     }
     const stageName = s => `${esc(s.a)}–${esc(s.b)}`;
-    const stageLi = x => `<li><b>${esc(dateTxt(x.s.d, x.s.y))}</b> : ${esc(T('étape', {ctx: 'tour'}))} ${stageName(x.s)}${x.s.km ? ` <small class="muted">${esc(T('{n} km', {n: String(x.s.km)}))}</small>` : ''} <small class="muted">· ${esc(x.hit.includes('depart') && x.hit.includes('arrivee') ? T('départ et arrivée') : x.hit.includes('depart') ? T('départ') : T('arrivée', {ctx: 'tour'}))}</small> ${link(x.s.edwiki ? wpUrl(x.s.edwiki) : wdUrl(x.s.q), T('↗ source'))}</li>`;
+    const hyp = t => `<small class="muted hist-hyp">${esc(t)}</small>`;
+    /* les vainqueurs (lot M, ts-competitions / ts-etapes, s'il est là) : chargés avant d'écrire les phrases */
+    const tourX = async () => { const M = ext.telechM; if (!M) return {W: null, S: null}; try { const [W, S] = await Promise.all([M.tourWinners?.(), M.stageWinners?.()]); return {W: W || null, S: S || null}; } catch (_) { return {W: null, S: null}; } };
+    let TX = {W: null, S: null};
+    const yellowTxt = y => { const w = TX.W?.get(y); if (!w) return ''; if (w.retired) return T('titre retiré'); return (w.winners || []).map(v => v[0]).join(', '); };
+    const hitWord = x => (x.hit.includes('depart') && x.hit.includes('arrivee') ? T('départ et arrivée') : x.hit.includes('depart') ? T('départ') : T('arrivée', {ctx: 'tour'}));
+    const stageLi = x => { const sw = TX.S?.get(x.s.q);
+        return `<li><b>${esc(dateTxt(x.s.d, x.s.y))}</b> : ${esc(T('étape', {ctx: 'tour'}))} ${stageName(x.s)}${x.s.km ? ` <small class="muted">${esc(T('{n} km', {n: String(x.s.km)}))}</small>` : ''} <small class="muted">· ${esc(hitWord(x))}${x.km !== undefined && x.km >= 1.5 && Number.isFinite(x.km) ? ` ${esc(T('à {n} km', {n: String(Math.round(x.km))}))}` : ''}${sw?.w ? ` · ${esc(T('vainqueur d’étape : {w}', {w: sw.w}))}` : ''}</small> ${link(x.s.edwiki ? wpUrl(x.s.edwiki) : wdUrl(x.s.q), T('↗ source'))}</li>`; };
     function tourHtml(list, life) {
         if (!list.length) return '';
         const x = list[0], P = life.person;
-        let lead = T('Le Tour de France est passé à {p} en {y} (étape {s})', {p: esc(x.place), y: String(x.s.y), s: stageName(x.s)});
+        // jamais « passé devant chez lui » : le fichier ne connaît que la ville de départ et la ville d'arrivée
+        let lead = x.km !== undefined && x.km >= 1.5 && Number.isFinite(x.km)
+            ? T(x.hit.includes('arrivee') ? 'Le Tour de France est arrivé à {t}, à {k} km de {p}, en {y} (étape {s})' : 'Le Tour de France est parti de {t}, à {k} km de {p}, en {y} (étape {s})', {t: esc(x.town), k: String(Math.round(x.km)), p: esc(x.place), y: String(x.s.y), s: stageName(x.s)})
+            : T('Le Tour de France est passé à {p} en {y} (étape {s})', {p: esc(x.place), y: String(x.s.y), s: stageName(x.s)});
         if (x.lived) lead += esc(T(', quand {he} y vivait', {he: he(P)}));
         lead += x.age !== null && x.age >= 0 ? esc(T(' : {he} avait {a}.', {he: he(P), a: ageTxt(x.age)})) : '.';
         const li = list.slice(1, 20).map(stageLi).join('');
@@ -383,7 +400,10 @@
         if (D.dates) html.push(coincHtml(coincidences(D.dates.rows, life), life));
         if (D.spectacles) html.push(spectaclesHtml(spectaclesForLife(D.spectacles.rows, life), life));
         if (D.expos) html.push(exposHtml(exposForLife(D.expos.rows, life), life));
-        if (D.tour) html.push(tourHtml(tourForLife(D.tour.rows, life), life));
+        if (D.tour) { TX = await tourX(); html.push(tourHtml(tourForLife(D.tour.rows, life), life));
+            const b = num(life.person?.birth), dead = num(life.person?.death) !== null || (life.events || []).some(e => DEATH.includes(String(e.tag || '').toUpperCase()));
+            const w = b !== null && dead ? yellowTxt(b) : '';
+            if (w) html.push(row('🏆', `${T('L’année de sa naissance ({y}), {w} gagnait le Tour de France.', {y: String(b), w: `<b>${esc(w)}</b>`})} ${link(wdUrl(D.tour.rows.find(s => s.y === b)?.ed), T('↗ source'))}`, SRC.tour())); }
         if (D.seigneurs) { const ins = placesOf(life).map(p => p.ins).filter(Boolean); html.push(lordsHtml(lordsForLife(D.seigneurs.rows, life, await ownersByInsee(ins)), life)); }
         if (D.foires) html.push(fairsHtml(fairsForLife(D.foires.rows, life), life));
         if (!host.isConnected && !opts.detached) return 0;
@@ -427,10 +447,16 @@
         }
         if (kind === 'tour') {
             const list = tourAt(rows, place); if (!list.length) return '';
-            const first = list[0], last = list[list.length - 1];
-            const lead = list.length > 1 ? T('Le Tour de France est passé ici {n} fois : la première en {y} (étape {s}), la dernière en {z}.', {n: String(list.length), y: String(first.s.y), s: stageName(first.s), z: String(last.s.y)})
-                : T('Le Tour de France est passé ici en {y} (étape {s}).', {y: String(first.s.y), s: stageName(first.s)});
-            return row('🚲', `${lead} ${link(first.s.edwiki ? wpUrl(first.s.edwiki) : wdUrl(first.s.q), T('↗ source'))}`, SRC.tour(), more(`<ul class="hist-ul">${list.map(stageLi).join('')}</ul>`, list.length));
+            TX = await tourX();
+            const r = tourKm(), here = list.filter(x => x.km < 1.5), around = list.filter(x => x.km >= 1.5);
+            const L0 = here.length ? here : around, first = L0[0], last = L0[L0.length - 1];
+            let lead = here.length > 1 ? T('Le Tour de France est passé ici {n} fois : la première en {y} (étape {s}), la dernière en {z}.', {n: String(here.length), y: String(first.s.y), s: stageName(first.s), z: String(last.s.y)})
+                : here.length ? T('Le Tour de France est passé ici en {y} (étape {s}).', {y: String(first.s.y), s: stageName(first.s)})
+                : T('Le Tour de France est parti ou arrivé à moins de {r} km d’ici {n} fois : la première en {y} ({t}), la dernière en {z}.', {r: String(r), n: String(around.length), y: String(first.s.y), t: esc(first.town), z: String(last.s.y)});
+            if (here.length && around.length) lead += ' ' + esc(T('Et {n} fois à moins de {r} km.', {n: String(around.length), r: String(r)}));
+            const yw = yellowTxt(last.s.y); if (yw) lead += ' ' + T('Maillot jaune en {y} : {w}.', {y: String(last.s.y), w: `<b>${esc(yw)}</b>`});
+            const toSport = ext.telechM && ext.dataListsEngine ? `<p class="muted"><button type="button" class="btn-link" data-tm-open="ts_competitions" data-tm-q="Tour de France">${esc(T('🏆 Tout le Tour de France dans 🏆 Sport'))}</button></p>` : '';
+            return row('🚲', `${lead} ${link(first.s.edwiki ? wpUrl(first.s.edwiki) : wdUrl(first.s.q), T('↗ source'))}`, SRC.tour(), more(`<ul class="hist-ul">${list.map(stageLi).join('')}</ul>${hyp(T('Départ ou arrivée seulement : le fichier ne connaît pas les villages traversés.'))}${toSport}`, list.length));
         }
         if (kind === 'expos') {
             if (!ll) return '';
@@ -519,15 +545,18 @@
             fields: [{key: 'title', label: T('Œuvre'), type: 'text'}, {key: 'by', label: T('Auteur'), type: 'text'}, {key: 'kind', label: T('Genre'), type: 'enum', values: Object.values(KIND_N).map(x => T(x))}, {key: 'date', label: T('Première'), type: 'date'},
                 {key: 'year', label: T('Année'), type: 'year'}, {key: 'venue', label: T('Salle'), type: 'text'}, {key: 'city', label: T('Ville'), type: 'text'}, {key: 'country', label: T('Pays'), type: 'enum'}, {key: 'fame', label: T('Wikipédias (renommée)'), type: 'number'}, {key: 'src', label: T('Source'), type: 'url'}],
             period: r => [r.y, r.y], geo: r => (r.lat !== null ? [r.lat, r.lon] : null)},
-        {id: 'l8c_clubs', icon: '⚽', label: T('Clubs sportifs de France et leur fondation'), group: 'Le lieu', source: SRC_TXT.clubs, sourceUrl: SRC_URL.clubs, enabled: () => on('clubs'),
+        {id: 'l8c_clubs', icon: '⚽', label: T('Clubs sportifs de France et leur fondation'), group: 'Le lieu', theme: 'sport', source: SRC_TXT.clubs, sourceUrl: SRC_URL.clubs, enabled: () => on('clubs'),
             load: async () => (await rowsOf('clubs')).map(r => ({...r, name: r.n, sport: r.sp, year: r.y, fame: r.sl, src: srcOf(r)})),
             fields: [{key: 'name', label: T('Club'), type: 'text'}, {key: 'sport', label: T('Sport'), type: 'enum'}, {key: 'year', label: T('Fondé en'), type: 'year'}, {key: 'end', label: T('Disparu en'), type: 'year'}, {key: 'commune', label: T('Commune'), type: 'place'}, {key: 'ins', label: T('Code INSEE'), type: 'text'}, {key: 'src', label: T('Source'), type: 'url'}],
             period: r => [r.y, r.end ?? null], geo: r => [r.lat, r.lon]},
-        {id: 'l8c_tour', icon: '🚲', label: T('Étapes du Tour de France (1903–2025)'), group: 'Le lieu', source: SRC_TXT.tour, sourceUrl: SRC_URL.tour, enabled: () => on('tour'),
-            load: async () => (await rowsOf('tour')).map(s => ({...s, name: `${s.a} – ${s.b}`, date: s.d || '', year: s.y, stage: s.no, from: s.a, to: s.b, src: s.edwiki ? wpUrl(s.edwiki) : wdUrl(s.q)})),
-            fields: [{key: 'date', label: T('Date'), type: 'date'}, {key: 'year', label: T('Année'), type: 'year'}, {key: 'stage', label: T('Étape'), type: 'text'}, {key: 'from', label: T('Départ'), type: 'place'}, {key: 'to', label: T('Arrivée'), type: 'place'}, {key: 'km', label: T('Distance (km)'), type: 'number'}, {key: 'src', label: T('Source'), type: 'url'}],
+        {id: 'l8c_tour', icon: '🚲', label: T('Étapes du Tour de France (1903–2025)'), group: 'Le lieu', theme: 'sport', source: SRC_TXT.tour, sourceUrl: SRC_URL.tour, enabled: () => on('tour'),
+            load: async () => { const rows = await rowsOf('tour'), M = ext.telechM; TX = await tourX();
+                // la lettre des demi-étapes (5a, 5b) et le prologue, comme on le dit d'habitude (lot M)
+                const lab = new Map(); if (M?.tourStages) { const by = new Map(); for (const s of rows) { if (!by.has(s.y)) by.set(s.y, []); by.get(s.y).push(s); } for (const l of by.values()) for (const s of M.tourStages(l)) lab.set(s.q, s.label); }
+                return rows.map(s => ({...s, name: `${s.a} – ${s.b}`, date: s.d || '', year: s.y, stage: lab.get(s.q) || s.no, from: s.a, to: s.b, winner: TX.S?.get(s.q)?.w || '', yellow: TX.S?.get(s.q)?.jaune || '', src: s.edwiki ? wpUrl(s.edwiki) : wdUrl(s.q)})); },
+            fields: [{key: 'date', label: T('Date'), type: 'date'}, {key: 'year', label: T('Année'), type: 'year'}, {key: 'stage', label: T('Étape'), type: 'text'}, {key: 'from', label: T('Départ'), type: 'place'}, {key: 'to', label: T('Arrivée'), type: 'place'}, {key: 'km', label: T('Distance (km)'), type: 'number'}, {key: 'winner', label: T('Vainqueur d’étape'), type: 'text'}, {key: 'yellow', label: T('Maillot jaune ce soir-là'), type: 'text'}, {key: 'src', label: T('Source'), type: 'url'}],
             period: s => [s.y, s.y], geo: s => (s.bla !== null ? [s.bla, s.blo] : s.ala !== null ? [s.ala, s.alo] : null)},
-        {id: 'l8c_expos', icon: '🎡', label: T('Expositions universelles et internationales'), group: 'Le monde', source: SRC_TXT.expos, sourceUrl: SRC_URL.expos, enabled: () => on('expos'),
+        {id: 'l8c_expos', icon: '🎡', label: T('Expositions universelles et internationales'), group: 'Le monde', theme: 'fetes', source: SRC_TXT.expos, sourceUrl: SRC_URL.expos, enabled: () => on('expos'),
             load: async () => (await rowsOf('expos')).map(e => ({...e, name: e.n, year: e.y, kind: T(e.k), quote: [e.visitors_sentence, e.highlight].filter(Boolean).join(' — '), src: e.url})),
             fields: [{key: 'name', label: T('Exposition'), type: 'text'}, {key: 'year', label: T('Année'), type: 'year'}, {key: 'city', label: T('Ville'), type: 'place'}, {key: 'kind', label: T('Genre'), type: 'enum'}, {key: 'visitors', label: T('Visiteurs'), type: 'number'}, {key: 'quote', label: T('La phrase de la source'), type: 'text'}, {key: 'src', label: T('Source'), type: 'url'}],
             period: e => [e.y, e.y2 ?? e.y], geo: e => (e.lat !== null ? [e.lat, e.lon] : null)},
@@ -570,7 +599,11 @@
         const y = num(ctx.year); if (y === null) { host.innerHTML = emptyLine(T('Choisis une année.'), '📅'); return null; }
         let html = '';
         if (kind === 'spectacles') { const list = spectaclesOfYear(await rowsOf('spectacles'), y); if (list.length) html = row('🎭', T('En {y}, création de {n} ({w}).', {y: String(y), n: `<i>${esc(list[0].r.n)}</i>${list[0].r.by ? `, ${esc(list[0].r.by)}` : ''}`, w: esc(specWhere(list[0].r))}) + ' ' + refLinks(list[0].r), SRC.spectacles(), more(`<ul class="hist-ul">${list.slice(1, 15).map(specLi).join('')}</ul>`, list.length - 1 || null)); }
-        if (kind === 'tour') { const list = (await rowsOf('tour')).filter(s => s.y === y); if (list.length) html = row('🚲', T('Le Tour de France {y} : {n} étapes, de {a} à {b}.', {y: String(y), n: String(list.length), a: esc(list[0].a), b: esc(list[list.length - 1].b)}) + ' ' + link(list[0].edwiki ? wpUrl(list[0].edwiki) : wdUrl(list[0].ed), T('↗ source')), SRC.tour(), more(`<ul class="hist-ul">${list.map(s => stageLi({s, hit: []})).join('')}</ul>`)); }
+        if (kind === 'tour') { const list = (await rowsOf('tour')).filter(s => s.y === y); if (list.length) { TX = await tourX();
+            // « 22 étapes + prologue » : les demi-étapes (5a, 5b) comptent pour une, le prologue à part
+            const nums = new Set(list.filter(s => String(s.no) !== '0').map(s => String(s.no))), pro = list.some(s => String(s.no) === '0');
+            const yw = yellowTxt(y);
+            html = row('🚲', T(pro ? 'Le Tour de France {y} : {n} étapes + prologue, de {a} à {b}.' : 'Le Tour de France {y} : {n} étapes, de {a} à {b}.', {y: String(y), n: String(nums.size), a: esc(list[0].a), b: esc(list[list.length - 1].b)}) + (yw ? ' ' + T('Maillot jaune : {w}.', {w: `<b>${esc(yw)}</b>`}) : '') + ' ' + link(list[0].edwiki ? wpUrl(list[0].edwiki) : wdUrl(list[0].ed), T('↗ source')), SRC.tour(), more(`<ul class="hist-ul">${list.map(s => stageLi({s, hit: []})).join('')}</ul>`)); } }
         if (kind === 'expos') { const list = (await rowsOf('expos')).filter(e => e.y <= y && (e.y2 ?? e.y) >= y); if (list.length) html = list.map(e => row('🎡', `${esc(cap(expoShort(e)))} (${esc(e.city)}${e.visitors ? ', ' + esc(visitorsTxt(e.visitors)) : ''}). ${srcLink(e.url)}`, SRC.expos(e.url), more(expoQuote(e)))).join(''); }
         if (kind === 'dates') { const list = (await rowsOf('dates')).filter(x => x.d.startsWith(String(y))); if (list.length) html = row('🎂', T('Les jours célèbres de {y} :', {y: String(y)}), SRC.dates(), `<ul class="hist-ul">${list.map(x => `<li><b>${esc(dateTxt(x.d))}</b> : ${esc(evWhat(x))} ${coincSrc(x)}</li>`).join('')}</ul>`); }
         host.innerHTML = html ? `<div class="hist-life l8c-life">${html}</div>` : '';

@@ -44,8 +44,9 @@
     function clear() { S.map.clear(); S.all = null; S.except.clear(); S.last = -1; paint(); }
 
     /* ═════════════ les cases et les boutons des lignes (le moteur les pose) ═════════════ */
-    const cellBefore = i => `<td class="ld-ck"><button type="button" class="ld-ck-b" role="checkbox" aria-checked="false" data-ld-ck="${i}" aria-label="${esc(T('Choisir cette ligne'))}"></button></td>`;
-    const headBefore = () => `<th class="ld-ck"><button type="button" class="ld-ck-b" role="checkbox" aria-checked="false" data-ld-ckall aria-label="${esc(T('Cocher les lignes affichées'))}"></button></th>`;
+    // la case se pose au début de la 1re case de la ligne (le moteur l'y met) : les colonnes du tableau restent les mêmes
+    const cellBefore = i => `<button type="button" class="ld-ck-b" role="checkbox" aria-checked="false" data-ld-ck="${i}" aria-label="${esc(T('Choisir cette ligne'))}"></button>`;
+    const headBefore = () => `<button type="button" class="ld-ck-b" role="checkbox" aria-checked="false" data-ld-ckall aria-label="${esc(T('Cocher les lignes affichées'))}"></button>`;
     const cellAfter = i => { const ro = kiosk(), why = ro ? ` disabled title="${esc(RO())}"` : '';
         return `<td class="ld-acts"><button type="button" class="ld-act" data-ld-ins="${i}"${why || ` title="${esc(T('Insérer cette ligne (avec sa source)'))}"`} aria-label="${esc(T('Insérer cette ligne'))}">📎</button>${CX() ? `<button type="button" class="ld-act" data-ld-bk="${i}"${why || ` title="${esc(T('Mettre cette ligne au panier'))}"`} aria-label="${esc(T('Mettre cette ligne au panier'))}">🧺</button>` : ''}</td>`; };
     const headAfter = () => `<th class="ld-acts"><span class="sr-only">${esc(T('Prendre'))}</span></th>`;

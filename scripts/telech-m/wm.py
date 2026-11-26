@@ -117,7 +117,7 @@ def wd_of_titles(titles, host='fr.wikipedia.org'):
     out, titles = {}, [t for t in dict.fromkeys(titles) if t]
     for i in range(0, len(titles), 60):
         part = titles[i:i + 60]
-        vals = ' '.join('"' + t.replace('\\', '\\\\').replace('"', '\\"') + '"@fr' for t in part)
+        vals = ' '.join('"' + t.replace('\\', '\\\\').replace('"', '\\"') + '"@' + host.split('.')[0] for t in part)
         q = ('SELECT ?t ?x ?c ?ins WHERE { VALUES ?t { ' + vals + ' } ?a schema:name ?t ; schema:isPartOf <https://' + host + '/> ; schema:about ?x .'
              ' OPTIONAL { ?x wdt:P625 ?c } OPTIONAL { ?x wdt:P374 ?ins } }')
         for b in sparql(q):

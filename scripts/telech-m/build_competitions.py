@@ -56,6 +56,7 @@ COMPS = [
     ('marathon_ny', 'Q752138', '🏃', 'Marathon de New York', 'course à pied', ('New York', 40.7128, -74.006, ''), [('List of winners of the New York City Marathon', 'marathon')], 0),
     ('marathon_boston', 'Q826087', '🏃', 'Marathon de Boston', 'course à pied', ('Boston', 42.3497, -71.0782, ''), [('List of winners of the Boston Marathon', 'marathon')], 0),
 ]
+NOCOORD = {'tdf', 'giro', 'vuelta', '6n', 'top14', 'l1', 'cdf', 'ucl', 'dakar'}
 LINK_ONLY = [
     ('boxe', '🥊', 'Championnats du monde de boxe', 'BoxRec (base privée, conditions d’utilisation restrictives)', 'https://boxrec.com/'),
     ('f1', '🏎', 'Grands Prix de Formule 1', 'Ergast / jolpica-f1 (licence à lire ; site non joignable d’ici)', 'https://github.com/jolpica/jolpica-f1'),
@@ -238,7 +239,7 @@ def main():
                 continue
             ws, retired = winners_of(e)
             src = 'wd'
-            if cid in ('rg', 'wimbledon', 'usopen', 'ao') and wpw.get(y):
+            if cid in ('rg', 'wimbledon', 'usopen', 'ao', 'lemans') and wpw.get(y):
                 ws, src = [[n, 'wp:' + t, role] for n, t, role in wpw[y]], 'wp'
                 for n, t, role in wpw[y]:
                     enq[t] = None
@@ -258,6 +259,9 @@ def main():
                 pl, la, lo, ins = place
             else:
                 pl, la, lo, ins = (', '.join(sorted(e['cty'].values())), None, None, '')
+            # un pays ou une région n'est pas un lieu : pas de position (sinon « près de chez lui » au centre du pays)
+            if cid in NOCOORD or pl in e['cty'].values() or re.search(r'(?i)^(France|France métropolitaine|Angleterre|Écosse|Irlande|Pays de Galles|Italie|Espagne|Europe|Afrique|Amérique du Sud|Arabie saoudite|Argentine|Chili|Pérou|Bolivie)$', pl or ''):
+                la = lo = None
             rows.append({'c': cid, 'y': y, 'd1': e['d1'], 'd2': e['d2'], 'n': e['n'], 'place': pl, 'lat': la, 'lon': lo, 'ins': ins or '',
                          'w': ws, 'ret': 1 if retired else 0, 'src': src, 'x': extra, 'q': e['q'], 'fr': e['fr']})
             seen_years.add(y)
@@ -312,19 +316,19 @@ def build_stages():
     by = {}
     for b in wm.sparql(Q):
         s, w, wl, qv = wm.qid(b['s']['value']), wm.qid(b['w']['value']), b['wl']['value'], wm.qid(b.get('qv', {}).get('value', ''))
-        if re.match(r'^Q\d+$', wl):
+        if re.match(r'^Q\d+$', wl) and w != WITHDRAWN:
             continue
-        if qv and qv not in ('Q20882667', 'Q20893983'):   # le vainqueur de l'étape seulement (pas le maillot jaune du jour)
-            continue
-        if w == WITHDRAWN:
-            by[s] = ['titre retiré', '']
-            continue
-        if s not in by or not qv:
-            by.setdefault(s, [wl, w])
+        cur = by.setdefault(s, ['', '', ''])
+        name = 'titre retiré' if w == WITHDRAWN else wl
+        if qv == 'Q20882747' or (not qv and not cur[0]):      # vainqueur d'étape
+            cur[0], cur[1] = name, '' if w == WITHDRAWN else w
+        elif qv == 'Q20882763':                                # maillot jaune à l'issue de l'étape
+            cur[2] = name
+    by = {k: v for k, v in by.items() if v[0] or v[2]}
     rows = sorted([[s, *v] for s, v in by.items()])
     meta = {'source': 'Wikidata', 'licence': 'CC0 1.0', 'licence_url': 'https://creativecommons.org/publicdomain/zero/1.0/deed.fr', 'url': 'https://www.wikidata.org/wiki/Q33881',
-            'built': wm.today(), 'what': 'Vainqueurs d’étape du Tour de France (P1346 des étapes) ; les étapes elles-mêmes sont dans l8c-tour',
-            'fields': ['s', 'w', 'wq'], 'rows': rows}
+            'built': wm.today(), 'what': 'Vainqueurs d’étape du Tour de France et maillot jaune à l’issue de l’étape (P1346 des étapes, qualificatif P2501) ; les étapes elles-mêmes sont dans l8c-tour',
+            'fields': ['s', 'w', 'wq', 'jaune'], 'rows': rows}
     size = wm.write_gz(OUT, 'ts-etapes.json.gz', meta)
     print(f'ts-etapes : {len(rows)} étapes avec vainqueur, {size} octets')
 
