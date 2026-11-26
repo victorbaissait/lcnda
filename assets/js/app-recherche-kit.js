@@ -290,5 +290,28 @@
             rows: () => list.map(row), items: () => list.map(s => ({kind: 'source', ref_id: Number(s.id) || 0, title: s.title || T('Source sans titre'), value: s.author || '', origin}))});
     }
 
-    ext.researchKit = {mount, personItem, setOf, kindOf, colorOf, proximity, dates, places, people, sources, table};
+    /* 🌍 Où chercher ? : les sites proposés (l'onglet montré) → 🧺 au panier comme liens, 📎 un tableau « site · pourquoi · lien » ; pas de carte (des sites, pas des lieux) */
+    const linkCells = a => [a.label, a.why, a.href];
+    const linkItem = (crit) => a => ({kind: 'datum', ref_id: 0, title: a.label, value: a.href, data: {url: a.href, why: a.why}, origin: {kind: 'link', label: a.label, url: a.href}});
+    {
+        const oc = ext.ouChercher = ext.ouChercher || {};
+        (oc.afterRedraw = oc.afterRedraw || []).push((view, body) => {
+            const page = body?.closest?.('.page'); if (!page || S0().researchKind !== 'ou_chercher') return;
+            const list = () => [...body.querySelectorAll('.ouc-row')].map(li => ({label: li.querySelector('.ouc-name b')?.textContent.trim() || '', why: li.querySelector('.ouc-why')?.textContent.trim() || '', href: li.querySelector('a[data-ouc-go]')?.href || ''})).filter(x => x.label && /^https?:/i.test(x.href));
+            if (!list().length) { page.__rk?.destroy?.(); return; }
+            const name = view?.res?.ctx?.name || '', crit = `${T('Où chercher ?')}${name ? ` · ${name}` : ''}`;
+            table(page, {key: 'ou_chercher', title: crit, criteria: crit, columns: [T('Site'), T('Pourquoi'), T('Lien')], list, cells: linkCells, itemOf: linkItem(crit)});
+        });
+    }
+    const S0 = () => A().state || {};
+    /** 🌐 Chercher sur internet : les liens des sites (les cochés, sinon tous) */
+    function webLinks(page, {criteria}) {
+        const all = () => [...page.querySelectorAll('a[data-ws-site]')].filter(a => /^https?:/i.test(a.getAttribute('href') || ''));
+        const list = () => { const on = all().filter(a => page.querySelector(`[data-ws-pick="${CSS.escape(a.dataset.wsSite)}"]`)?.checked); return (on.length ? on : all()).map(a => ({label: a.textContent.replace(/\s+/g, ' ').replace(/↗/g, '').trim(), why: '', href: a.href})); };
+        const K = table(page, {key: 'web', title: T('Chercher sur internet'), criteria: criteria(), columns: [T('Site'), T('Pourquoi'), T('Lien')], list, cells: linkCells, itemOf: linkItem()});
+        if (K) Object.defineProperty(K.cfg, 'criteria', {get: criteria, configurable: true}); // la source suit ce qui est tapé
+        return K;
+    }
+
+    ext.researchKit = {mount, personItem, setOf, kindOf, colorOf, proximity, dates, places, people, sources, table, webLinks};
 })();

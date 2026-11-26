@@ -243,6 +243,7 @@
         $('[data-ws-open-picked]',panel)?.addEventListener('click',()=>{$$('[data-ws-pick]:checked',panel).forEach(input=>{const link=$(`[data-ws-site="${CSS.escape(input.dataset.wsPick)}"]`,panel);if(link?.href&&!link.href.endsWith('#'))window.open(link.href,'_blank','noopener');});});
         panel.addEventListener('click',event=>{const link=event.target.closest('[data-ws-site]');if(link&&link.getAttribute('href')==='#'){event.preventDefault();toast('Tape au moins un prénom ou un nom.');}});
         $('#wst-clear').addEventListener('click',()=>{state.webSearchForm=null;renderWebSearchTool();});
+        window.LCNDA_EXT?.researchKit?.webLinks($('#workspace .page'),{criteria:()=>`${i18n('Chercher sur internet')} : ${[f.first,f.middle,f.last,f.place,f.y1&&f.y2?`${f.y1}–${f.y2}`:(f.y1||f.y2||'')].filter(Boolean).join(' ')}`}); // 🧺 les liens au panier · 📎 (app-recherche-kit.js)
         // Remplir depuis une fiche de la base
         // la fiche de départ : menu de choix unique
         $('#wst-person').addEventListener('picker-change',async event=>{const it=event.detail.item;if(!it||it.free||!it.id)return;

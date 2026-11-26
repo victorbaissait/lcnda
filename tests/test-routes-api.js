@@ -47,7 +47,7 @@ function callArgs(src, from) {
     }
     return src.slice(from, i);
 }
-const isPost = s => /method\s*:\s*['"]POST['"]|sendBeacon\(/i.test(s);
+const isPost = s => /method\s*[:=]\s*['"]POST['"]|sendBeacon\(/i.test(s);
 /** POST seulement quand on lui passe un 2e argument (function call(action, body = null) { … body ? {method: 'POST'…} : {…} }) */
 const condPost = (kind, args) => { const m = /^COND:(\d+)$/.exec(kind || ''); if (!m) return false; const a = restArgs(args)[Number(m[1]) - 1]; return !!a && !/^(null|undefined|false|0|'')$/.test(a); };
 const isCondPost = s => /\b\w+\s*\?\s*\{[^}]*method\s*:\s*['"]POST|\bif\s*\(\s*\w+(\s*\|\|\s*\w+)?\s*\)\s*\{?[^}]{0,120}method\s*=\s*['"]POST/.test(s);
@@ -71,6 +71,7 @@ function extractActions(dir = JS) {
     const out = new Map(); // nom → {methods: Set, files: Set, variants: {GET: Set, POST: Set}} ; une variante = '{"op":"save"}'
     const add = (name, method, file, variant = null) => {
         if (!NAME.test(name)) return;
+        if (process.env.LCNDA_ROUTES_WHY === name) console.log(method, file, variant, new Error().stack.split('\n')[2]);
         const e = out.get(name) || {methods: new Set(), files: new Set(), variants: {GET: new Set(), POST: new Set()}};
         e.methods.add(method); e.files.add(file); if (variant) e.variants[method].add(JSON.stringify(variant)); out.set(name, e);
     };
@@ -113,7 +114,7 @@ function extractActions(dir = JS) {
             if (!fx) continue;
             const via = wrappers.get(fx[1]), rest = callArgs(body, fx.index + fx[0].length);
             const method = isPost(body) || fx[1] === 'apiPost' || via === 'POST' || condPost(via, rest) ? 'POST' : 'GET';
-            const key = (body.match(new RegExp(`\\b(${SUBKEY})\\s*:\\s*${p}\\b`)) || [])[1] || (new RegExp(`\\{\\s*${p}\\s*[,}]`).test(body) ? param : null);
+            const key = (body.match(new RegExp(`\\b(${SUBKEY})\\s*:\\s*${p}\\s*[,}]`)) || [])[1] || (new RegExp(`\\{\\s*${p}\\s*[,}]`).test(body) ? param : null);
             if (key && new RegExp(`^(${SUBKEY})$`).test(key)) fixed.push({name, action: fx[3], method, key});
             else if (new RegExp(`body\\s*:\\s*${p}\\b|[{,]\\s*${p === 'body' ? 'body\\s*[,}]' : '\\b$^'}|JSON\\.stringify\\(\\s*\\{\\s*\\.\\.\\.${p}\\b|^\\s*,\\s*(?:\\{\\}\\s*,\\s*)?${p}\\s*[,)]`).test(body.slice(0, 600)) || new RegExp(`^\\s*,\\s*(?:\\{\\}\\s*,\\s*)?${p}\\s*$`).test(rest)) fixed.push({name, action: fx[3], method, key: null}); // post({op: 'save', …})
         }
