@@ -124,3 +124,43 @@ ensembles, l'index des thèmes.)
   observateurs du navigateur (ils passent après la tâche).
 - Le widget « Ce qui le concerne » et la partie CORINE d'un village ne se remplissent qu'à l'écran : une capture de page entière sans
   défilement les montre en attente.
+
+## 2ᵉ passe (2026-11-26, soir)
+
+Avant = l'état validé après la 1ʳᵉ passe (`git archive` de HEAD avant ces changements) ; même méthode, une mesure alternée A/B,
+ordinateur peu chargé (charge 2 à 4). Mesures ajoutées : Données (onglet), Recherche, Enquêtes, Atelier, Graphiques, le widget 📊 Données
+téléchargées (deux widgets « éclipses » : liste et graphique, posés dans la page).
+
+| Changement | Fichier |
+|---|---|
+| 🔎 bloc de la fiche : les calculs lourds (« éclipses qu'il a pu voir », « éclipses vues de ce lieu ») attendent que le bloc arrive à l'écran ; le reste part tout de suite ; les sources en ligne partent 2,5 s après TOUTES les données de l'app (comme avant : elles attendent donc aussi l'écran quand il y a des éclipses). Le rapport « ⤢ Tout voir » : redessiné au plus une fois par image (600 réponses), puis à la fin. | `heritage-tout-sur.js` |
+| 🌘 « vu d'ici » gardé par lieu + années + filtres + langue (8 lieux, en mémoire et dans **sessionStorage** — jamais dans les réglages ni la base, ≤ 1,5 Mo). | `heritage-eclipses-liste.js` |
+| Ce qui modifiait la fiche **≈ 12 fois par seconde au repos** : `applyFree` (sites payants de « Chercher sur le web ») réécrivait `hidden` et le compteur à chaque passage, ce qui réveillait son propre observateur (80 ms) : une boucle. N'écrit plus que ce qui change. | `heritage-sources-ouvertes-6.js` |
+| Pays à l'époque : la page n'est relue que quand un hôte `[data-mc-host]` arrive. | `heritage-monde-contexte.js` |
+| Poignées ⠿ : seulement quand une poignée arrive. | `heritage-dnd.js` |
+| `menuHiddenKeys()` gardé tant que rien n'est écrit dans localStorage (compteur d'écritures sur `setItem` / `removeItem` / `clear` et l'évènement `storage` d'un autre onglet) ; une copie à chaque fois. | `app.js` |
+| Listes réunies : pas de calcul de distance exact quand l'écart en latitude dépasse déjà le rayon ; « séparées » vérifiées seulement s'il y en a (4,5 s → 1,1 s pour la plus grosse). | `app-listes-reunies.js` |
+
+| | avant : affiché → calme ; longues tâches (nombre / total / la plus longue) | après |
+|---|---|---|
+| ouverture (froid) | utilisable 2,6 s, calme 4,0 s ; 4 / 1,4 s | utilisable 2,6 s, calme 3,6 s ; 2 / 0,5 s |
+| **fiche personne** | 1,2 → 29,9 s ; 90 / **12,8 s** / 2,0 s | 0,9 → 23,0 s ; 51 / **7,9 s** / 0,8 s |
+| fiche village | 1,0 → 4,3 s ; 5 / 1,3 s / 1,0 s | 1,2 → 7,5 s ; 6 / 3,1 s / 2,7 s ¹ |
+| Listes → 🧰 Données (Récap) | 0,3 → 3,9 s ; 3 / 3,5 s / 3,2 s ¹ | 0,2 → 2,0 s ; 2 / 0,4 s / 0,3 s |
+| Données (onglet) | 0,3 s ; 1 / 0,1 s | 0,1 s ; 1 / 0,1 s |
+| Carte | 0,7 → 1,9 s ; 5 / 0,4 s | 0,2 → 1,3 s ; 1 / 0,05 s |
+| Réglages | 0,6 → 1,7 s ; 2 / 0,4 s | 0,4 → 2,0 s ; 2 / 0,3 s |
+| Recherche | 0,2 s ; 1 / 0,06 s | 0,1 s ; 1 / 0,06 s |
+| Enquêtes | 0,2 s ; 0 | 0,1 s ; 0 |
+| Atelier | 0,3 s ; 1 / 0,09 s | 0,15 s ; 0 |
+| Graphiques (diagrammes) | 0,3 s ; 0 | 0,1 s ; 0 |
+| retour au tableau de bord | 1,1 → 3,8 s ; 5 / 0,5 s | 1,5 → 4,4 s ; 4 / 0,5 s |
+| 📊 widget Données (×2) | 0,4 → 10,9 s ; 2 / 0,3 s | 0,4 → 1,5 s ; 1 / 0,2 s |
+
+¹ La grosse liste réunie (séismes, crues… de plusieurs sources) se construit une fois, à la première page qui en a besoin : avant, c'était
+Listes → Données (3,2 s d'un bloc) ; après, la fiche village (1,1 s de calcul, 2,7 s de tâche sur cet essai). Profil : `merge` 4,5 s → 1,1 s.
+Sur la fiche personne, au repos : avant ≈ 60 changements de la page par seconde (boucle `applyFree` + redessins du bloc), après quelques-uns
+(le bloc 🔎 qui reçoit ses dernières réponses en ligne, puis plus rien).
+
+Reste à voir : la fiche personne se calme encore lentement (≈ 20 s) — ce sont les sources **en ligne** de « Ce qui le concerne »
+(délai de 25 s chacune sans Internet) ; la construction des listes réunies pourrait se faire au calme (`requestIdleCallback`).

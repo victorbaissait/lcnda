@@ -500,6 +500,7 @@ try {
     }
     // seulement SES actions : ld_status, ld_query, ld_facet (🧰 Données, lib/listes_donnees.php) et ld_famille (lib/listes_famille.php) ont le même début
     if (is_string($action) && in_array($action, ['ld_groups', 'ld_preview', 'ld_merge', 'ld_merge_safe', 'ld_undo'], true)) { require_once __DIR__ . '/lib/lieux_doublons.php'; ld_dispatch($pdo, $action, $isWrite, is_array($payload) ? $payload : []); } // 📍 Lieux en double probables : trouver, fusionner, ↶ (lib/lieux_doublons.php)
+    if (is_string($action) && str_starts_with($action, 'ukus_')) { require_once __DIR__ . '/lib/archives_ukus.php'; ukus_dispatch($pdo, $action, $isWrite, is_array($payload) ? $payload : []); } // 🇬🇧🇺🇸 Où chercher ? → The National Archives, NARA : à la demande, rien pour les vivants ni en consultation (lib/archives_ukus.php)
     if (is_string($action) && str_starts_with($action, 'rt_')) { require_once __DIR__ . '/lib/rapports_traitements.php'; rt_dispatch($pdo, $action, $isWrite, is_array($payload) ? $payload : []); } // 📊 Mes rapports, 🧰 Traitements en lot (lib/rapports_traitements.php)
     // Fusion de l'arbre d'un cousin : hors de la transaction générale (copie de sécurité VACUUM INTO d'abord)
     if ($isWrite && $action === 'merge_gedcom_analyse') {

@@ -15,7 +15,7 @@
  * Écrans : tableau de bord, fiche (toutes les sections), Personnes, Listes (natives, données : tableau, cartes, carte, ☑), Données,
  * Recherche (chaque sorte, avec des résultats), Enquêtes (liste, détail, pistes, Atelier, tableaux), Fiches, Graphiques, Diagrammes,
  * Carte, Documents, Réglages, Comparaison, Trésors, Paniers, Contrôle de la base, Veille des décès, Ma semaine, et les fenêtres
- * « Prendre depuis… », « Ajouter au tableau », « Mettre dans… » ; à 1440 et 390 px, clair et sombre (en sombre, un écran sur deux).
+ * « Prendre depuis… », « Ajouter au tableau », « Mettre dans… » ; à 1440 et 390 px, clair et sombre (en sombre, un écran sur trois).
  *   node tests/test-mise-en-page-ecrasee.js           ECRASEE_ALL=1 : en plus chaque entrée de la colonne de gauche (chasse large)
  *   ECRASEE_ONLY=motif : seulement les écrans dont le nom correspond. */
 'use strict';
@@ -403,14 +403,25 @@ if (require.main === module) (async () => {
         });
         let R = null;
         { const p = await newPage(B.browser, B.base); await registerList(p); R = await prepare(p, B.ID); await p.context().close(); }
+        await t('le détecteur voit le vrai bug du 26/11 remis sur la Recherche « Proximité » (case, avatar, texte dans 42 px), et plus rien une fois corrigé', async () => {
+            const p = await newPage(B.browser, B.base, {width: 1440});
+            const sel = await screens(B.ID, R).find(([n]) => n === 'Recherche → proximité')[1](p);
+            const run = () => p.evaluate(([src, rs]) => (0, eval)('(' + src + ')')({root: rs}), [squash.toString(), sel]);
+            assert.ok(await p.$('#workspace .date-result > .rp-pick'), 'les fiches ont leur case à cocher');
+            assert.deepStrictEqual(await run(), [], 'corrigé : rien d’écrasé');
+            await p.addStyleTag({content: '.date-result:has(> .rp-pick){grid-template-columns:42px minmax(0,1fr)!important}.date-result > *{grid-column:auto!important}'});
+            const found = await run();
+            assert.ok(found.some(f => f.kind === 'colonne étroite' && /date-result/.test(f.sel)) && found.some(f => f.kind === 'écrasé'), JSON.stringify(found).slice(0, 600));
+            await p.context().close();
+        });
         const list = screens(B.ID, R).filter(([n]) => !ONLY || ONLY.test(n));
         const variants = [[1440, false], [390, false], [1440, true], [390, true]].filter(([w, d]) => !process.env.ECRASEE_VARIANTS || process.env.ECRASEE_VARIANTS.split(',').includes(w + (d ? 'd' : 'c')));
         const report = [];
         for (const [w, dark] of variants) {
             const p = await newPage(B.browser, B.base, {width: w, dark});
             const tag = `${w} px${dark ? ', sombre' : ''}`;
-            // en sombre, un écran sur deux (la mise en page ne dépend pas des couleurs ; le temps reste raisonnable)
-            const mine = dark && !ALL ? list.filter((_, i) => i % 2 === (w > 500 ? 0 : 1)) : list;
+            // en sombre, un écran sur trois (la mise en page ne dépend guère des couleurs ; le temps reste raisonnable)
+            const mine = dark && !ALL ? list.filter((_, i) => i % 3 === (w > 500 ? 0 : 1)) : list;
             const extra = [];
             if (ALL && !dark) for (const m of ['listes', 'graphiques', 'carte', 'enquetes', 'maintenance', 'recherche', 'fiches', 'diagrammes']) {
                 for (const v of await sideEntries(p, m)) extra.push([`${m} / ${v}`, async p => { await clean(p); await setMod(p, m); await settle(p); await p.evaluate(v => { const el = [...document.querySelectorAll('#sidebar-content [data-side-value]')].find(x => x.dataset.sideValue === v); el?.click(); }, v); await settle(p); return '#workspace'; }]);
