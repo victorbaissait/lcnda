@@ -3,6 +3,7 @@
  * assets/data/ha-*.json.gz fabriqués par scripts/histoire-autour/build.py). Les données livrées sont les VRAIES.
  *  1. données : présentes, tailles mesurées (< 15 Mo en tout), colonnes, source et licence dans chaque fichier ;
  *  2. calcul (Node) : Pierre MAZAUD né à Gorze en 1862 → bataille de Mars-la-Tour, 16 août 1870, à ≈ 11 km, il a 8 ans ;
+ *     🎖 la guerre franco-allemande est passée près de chez lui (ses batailles par « partie de ») ; des batailles placées par leur lieu ;
  *     Saintes est sur une voie romaine ; « mort à l'Hôtel-Dieu » retrouve l'hôtel-Dieu de sa ville ; Marie LACOMBE à Saint-Pierre
  *     (Martinique) en 1902 → la montagne Pelée ; rien pour Tulle (métropole) ; un matelot « embarqué sur … » → son navire ;
  *     un gardien de phare → le phare tout près ; la lumière d'un phare arrive jusqu'à la côte voisine ;
@@ -26,7 +27,7 @@ let fails = 0;
 const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } catch (e) { fails++; console.log('✗ ' + name + '\n  ' + String(e && e.stack || e).split('\n').slice(0, 6).join('\n  ')); } };
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const DATA = path.join(root, 'assets/data');
-const FILES = {batailles: 'ha-batailles', voies: 'ha-voies-romaines', compostelle: 'ha-compostelle', institutions: 'ha-institutions', catastrophes: 'ha-catastrophes', navires: 'ha-navires', phares: 'ha-phares'};
+const FILES = {batailles: 'ha-batailles', guerres: 'ha-guerres', voies: 'ha-voies-romaines', compostelle: 'ha-compostelle', institutions: 'ha-institutions', catastrophes: 'ha-catastrophes', navires: 'ha-navires', phares: 'ha-phares'};
 const has = k => fs.existsSync(path.join(DATA, FILES[k] + '.json.gz'));
 const raw = k => JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(DATA, FILES[k] + '.json.gz'))).toString('utf8'));
 const D = {}; const rows = k => (D[k] ||= H.PREP[k](raw(k)));
@@ -59,6 +60,34 @@ const life = (p, places, events = [], jobs = [], text = '') => ({ok: true, perso
         assert.ok(got.every(x => x.b.y >= 1862 && x.b.y <= 1930 && x.km <= 30));
         assert.ok(!H.battlesForLife(rows('batailles'), life({birth: 1900, death: 1910}, [{name: 'Gorze', ...GORZE}])).some(x => x.b.y < 1900), 'pas avant sa naissance');
         assert.deepStrictEqual(H.battlesForLife(rows('batailles'), life({birth: 1862, death: 1930}, [])), [], 'sans lieu placé : rien');
+    });
+
+    await t('⚔️ batailles placées par leur lieu (approx) ; 🎖 guerres : dates, camps, leurs batailles par « partie de »', async () => {
+        const B = rows('batailles'), G = rows('guerres'), f = raw('batailles');
+        assert.ok(f.fields.includes('approx') && f.fields.includes('wq'));
+        const ap = B.filter(b => b.approx), di = B.filter(b => !b.approx);
+        assert.ok(di.length > 10000 && ap.length > 3000, `${di.length} + ${ap.length}`);
+        assert.ok(ap.every(b => Number.isFinite(b.lat) && Number.isFinite(b.lon) && Number.isFinite(b.y)));
+        assert.ok(ap.filter(b => b.loc).length > ap.length * 0.9, 'le lieu qui les place est nommé');
+        assert.strictEqual(B.find(b => /Mars-la-Tour/.test(b.n)).approx, false);
+        const fp = G.find(w => w.q === 'Q46083');
+        assert.ok(fp, 'guerre franco-allemande (Q46083)'); assert.strictEqual(fp.y, 1870); assert.strictEqual(fp.y2, 1871); assert.ok(fp.frwiki && fp.nb >= 10, JSON.stringify(fp));
+        const bs = H.battlesOfWar(B, 'Q46083');
+        assert.strictEqual(bs.length, fp.nb); assert.ok(bs.some(b => /Mars-la-Tour/.test(b.n))); assert.ok(bs.every(b => b.y >= 1870 && b.y <= 1871));
+        assert.ok(G.length > 1500 && G.filter(w => w.nb).length > 500, `${G.length} guerres`);
+        console.log(`  (batailles : ${di.length} par leurs coordonnées + ${ap.length} par leur lieu ; ${G.length} guerres, ${G.filter(w => w.nb).length} avec des batailles placées)`);
+    });
+
+    await t('🎖 Pierre MAZAUD (Gorze, 1862–1930) : la guerre franco-allemande est passée près de chez lui (Mars-la-Tour), il avait 8 ans ; rien sans lieu', async () => {
+        const L = life({birth: 1862, death: 1930}, [{name: 'Gorze', ...GORZE}]);
+        const got = H.warsForLife(rows('batailles'), rows('guerres'), L, 50);
+        const fp = got.find(x => x.w.q === 'Q46083');
+        assert.ok(fp, got.map(x => x.w.n).join(', ')); assert.strictEqual(fp.age, 8);
+        assert.ok(fp.list.some(x => /Mars-la-Tour/.test(x.b.n))); assert.ok(fp.near.km < 15, String(fp.near.km));
+        assert.ok(got.every(x => x.list.every(y => y.km <= 50 && y.b.y >= 1862 && y.b.y <= 1930)));
+        const seen = got.flatMap(x => x.list.map(y => y.b.q)); assert.strictEqual(new Set(seen).size, seen.length, 'une bataille ne compte que pour une guerre');
+        assert.deepStrictEqual(H.warsForLife(rows('batailles'), rows('guerres'), life({birth: 1862, death: 1930}, [])), []);
+        assert.ok(!H.warsForLife(rows('batailles'), rows('guerres'), life({birth: 1880, death: 1900}, [{name: 'Gorze', ...GORZE}])).some(x => x.w.q === 'Q46083'), 'né après la guerre : non');
     });
 
     await t('🛣️ Saintes (Mediolanum Santonum) est sur une voie romaine ; un point en mer, non', async () => {
@@ -166,6 +195,8 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             const txt = await p.textContent('[data-ha-person="1"]');
             assert.match(txt, /(Le|En) [^,]+, bataille [^.]+ à \d+(,\d)? km de Gorze\. Il avait \d+ ans\./); assert.match(txt, /Source : Wikidata/);
             assert.match(txt, /16 août 1870 : bataille de Mars-la-Tour, à 11 km de Gorze \(Pierre a 8 ans\)/);
+            assert.match(txt, /Une guerre est passée près de chez lui : [^—]+\(\d{4}(–\d{4})?\) — (\d+ batailles ou sièges|une bataille ou un siège) à moins de 50 km/);
+            assert.match(txt, /Guerre franco-allemande de 1870 \(1870–1871\) — \d+ batailles ou sièges à moins de 50 km \(Pierre a 8 ans\)/i);
             assert.strictEqual(await p.evaluate(() => document.querySelector('[data-ha-person="1"]').closest('section.card').hidden), false);
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 3; A.setModule('personnes'); });
             await p.waitForSelector('[data-ha-person="3"]', {state: 'attached', timeout: 20000}); await sleep(2500);
@@ -199,10 +230,22 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
                 return {ids: L.map(d => d.id), circle: ph.geoCircle(withR), geo: ph.geo(withR), line: vo.geoLine(vr).length, mono: [ok, mt], ds, src: L.every(d => d.source && d.fields.length && d.load),
                     secs: E.monographSections.filter(s => s.id.startsWith('ha_')).map(s => s.id), srcs: E.dataSources.filter(s => s.id.startsWith('ha_')).length};
             });
-            ['ha_batailles', 'ha_voies_romaines', 'ha_compostelle', 'ha_institutions', 'ha_catastrophes', 'ha_navires', 'ha_phares'].forEach(id => assert.ok(r.ids.includes(id), id));
+            ['ha_batailles', 'ha_guerres', 'ha_voies_romaines', 'ha_compostelle', 'ha_institutions', 'ha_catastrophes', 'ha_navires', 'ha_phares'].forEach(id => assert.ok(r.ids.includes(id), id));
             assert.ok(r.src); assert.ok(r.circle.km > 0 && Number.isFinite(r.circle.lat)); assert.ok(r.line >= 2);
             assert.strictEqual(r.mono[0], true); assert.match(r.mono[1], /Mars-la-Tour/);
-            assert.match(r.ds, /Mediolanum Santonum/); assert.ok(r.secs.length >= 6 && r.srcs >= 9);
+            assert.match(r.ds, /Mediolanum Santonum/); assert.ok(r.secs.length >= 6 && r.srcs >= 10);
+        });
+
+        await t('📋 Listes → « Guerres » : dates, camps, nombre de batailles ; la carte d’une guerre liste ses batailles avec « ↗ » Wikidata', async () => {
+            const r = await p.evaluate(async () => {
+                const d = window.LCNDA_EXT.dataLists.find(x => x.id === 'ha_guerres'), rows = await d.load(), w = rows.find(x => x.q === 'Q46083');
+                d.open(w); await new Promise(res => setTimeout(res, 600));
+                const dlg = document.querySelector('dialog.ha-dialog'), out = {label: d.label, n: rows.length, w: {name: w.name, start: w.start, end: w.end, battles: w.battles, url: w.url, geo: d.geo(w), period: d.period(w)}, card: dlg?.textContent || '', links: dlg ? dlg.querySelectorAll('a[href*="wikidata.org/wiki/Q"]').length : 0};
+                dlg?.close(); return out;
+            });
+            assert.strictEqual(r.label, 'Guerres'); assert.ok(r.n > 1500);
+            assert.deepStrictEqual([r.w.start, r.w.end], [1870, 1871]); assert.ok(r.w.battles >= 10); assert.match(r.w.url, /fr\.wikipedia\.org/); assert.ok(r.w.geo && r.w.geo[0] > 40 && r.w.geo[0] < 55);
+            assert.match(r.card, /Mars-la-Tour/); assert.match(r.card, /\d+ batailles et sièges placés/); assert.match(r.card, /Source : Wikidata/); assert.ok(r.links > 5);
         });
 
         await t('Réglages → 🧭 Histoire autour : éteindre « Batailles » le retire de la fiche (↶ le remet)', async () => {

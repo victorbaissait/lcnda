@@ -46,7 +46,8 @@ def main():
         m = re.match(r"\*\s*(?:Par\s*)?'''\[\[([^\]|]+)(?:\|([^\]]+))?\]\]'''(.*)", line)
         if not m:
             continue
-        who = wm.plain('[[' + m.group(1) + ('|' + m.group(2) if m.group(2) else '') + ']]')
+        lab = re.sub(r'\{\{([IVX]+)(er|e)?\}\}', r'\1\2', m.group(2) or '')
+        who = wm.plain('[[' + m.group(1) + ('|' + lab if lab else '') + ']]').replace('Edouard', 'Édouard')
         for t in wm.links(re.sub(r'<ref[^>]*>.*?</ref>', '', m.group(3)))[0:]:
             if t in rows and not rows[t]['by'] and t != m.group(1):
                 rows[t]['by'] = who

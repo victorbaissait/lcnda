@@ -28,6 +28,7 @@ THEMES = {
     'mer': (['Ostréiculture', 'Goémonier', 'Pêche à pied'], r'huîtr|ostréi|goémon|varech|pêche à pied|algue|parcs?\b'),
     'teinture': (['Garance des teinturiers', 'Pastel des teinturiers', 'Pays de Cocagne'], r'garance|pastel|teintur|cocagne|guède|coque'),
 }
+BROKEN = re.compile(r'\s[,.;:)]|\(\s*\)|[,:;]$|\b(le|la|du|au|des|de|en)\s*[,.]|[a-z]{2}[A-Z][a-z]')
 SKIP = re.compile(r'^\s*(\{\{|\[\[(Fichier|File|Image|Catégorie)|\||!|=|<|\*\s*\[\[(Fichier|Catégorie)|__)', re.I)
 
 
@@ -70,19 +71,25 @@ def main():
             for j, p in enumerate(pars):
                 for s in sentences(p.lstrip('*: ')):
                     plain = wm.plain(s)
-                    if not (40 <= len(plain) <= 360) or plain.count('|') or plain.count('{'):
-                        continue
-                    if j < 2 and len(ctx.get(k, [])) < 2 and kre.search(plain):
+                    if not (40 <= len(plain) <= 360) or plain.count('|') or plain.count('{') or BROKEN.search(plain):
+                        continue  # trop court, trop long, ou un modèle perdu (« depuis le , ») : on ne cite pas une phrase abîmée
+                    if j < 2 and not ctx.get(k) and kre.search(plain):
                         ctx.setdefault(k, []).append({'q': plain, 'title': t, 'url': wm.wp_url(t)})
                     if kre.search(plain):
                         cand.append((t, plain, wm.links(s)))
         places = wm.wd_of_titles([l for _, _, ls in cand for l in ls])
         seen = set()
         for t, plain, ls in cand:
+            low = plain.lower()
+            hits = [m.start() for m in kre.finditer(plain)]
             for l in ls:
                 p = places.get(l)
                 if not p or not p['insee'] or p['lat'] is None or (p['insee'], plain) in seen:
                     continue
+                nm = re.sub(r'\s*\(.*\)$', '', l).lower()
+                at = low.find(nm)
+                if at < 0 or not any(abs(at - h) <= 80 for h in hits):
+                    continue  # la commune doit être nommée près du mot du métier (« Lyon, Paris ou Bordeaux » : non)
                 seen.add((p['insee'], plain))
                 y = re.search(r'\b(1[0-9]{3})\b', plain)
                 rows.append([k, l, p['insee'], p['lat'], p['lon'], int(y.group(1)) if y else None, plain, t, p['q']])
