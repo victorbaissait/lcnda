@@ -37,7 +37,7 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             await clickUndo();
             assert.ok(!/Léonard MAZAUD/.test(await p.textContent('.wp-dlg .wp-body')), 'annulé');
             // 📎 au curseur : « / » dans le texte, la source → une note de bas de page (pas de « [↗ …] »)
-            await p.click('.wp-dlg .wp-body'); await p.keyboard.type('Il naît '); await p.keyboard.type('/'); await p.waitForSelector('.cx-qi'); await p.keyboard.type('Léonard MAZAUD');
+            await p.click('.wp-dlg .wp-body'); await p.keyboard.type('Il naît.'); await p.keyboard.press('Enter'); await p.keyboard.type('/'); await p.waitForSelector('.cx-qi'); await p.keyboard.type('Léonard MAZAUD');
             await p.waitForFunction(() => [...document.querySelectorAll('.cx-qi .cx-qi-r')].some(r => /Léonard MAZAUD/.test(r.textContent)), null, {timeout: 15000});
             await p.evaluate(() => { const rs = [...document.querySelectorAll('.cx-qi .cx-qi-r')]; const r = rs.find(x => /Naissance de Léonard/.test(x.textContent)) || rs.find(x => /Léonard MAZAUD/.test(x.textContent)); r.click(); }); await sleep(900);
             const body = await p.evaluate(() => document.querySelector('.wp-dlg .wp-body').innerHTML);
@@ -50,7 +50,7 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
         });
         await t('2 · 🎞️ Présentation : du panier, une diapositive, la source dans les notes ; ↶ ; 📎 de la barre → une diapositive sourcée ; 🧺 la diapositive', async () => {
             await closeAll(); await fillBasket();
-            await p.evaluate(() => window.LCNDA_EXT.newPresentation({name: 'Les MAZAUD'})); await p.waitForSelector('.kn-dlg[open] .cx-tool-btns [data-cx-tool-add]', {timeout: 20000}); await sleep(400);
+            await p.evaluate(() => window.LCNDA_EXT.keynoteFromText('<h1>Les MAZAUD</h1>', 'Les MAZAUD')); await p.waitForSelector('.kn-dlg[open] .cx-tool-btns [data-cx-tool-add]', {timeout: 20000}); await sleep(400);
             assert.ok(await here('tool_keynote'));
             const n0 = await p.evaluate(() => window.LCNDA_EXT.keynoteCurrent.show.slides.length);
             await menuPick('.kn-dlg', 'Depuis le panier');
@@ -86,7 +86,7 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
         await t('5 · ✒️ Dessin vectoriel : du panier, une étiquette et sa source ; ↶', async () => {
             await closeAll(); await fillBasket();
             await p.evaluate(() => window.LCNDA_EXT.openVectorEditor({})); await p.waitForSelector('.vx-dlg[open] .cx-tool-btns [data-cx-tool-add]', {timeout: 20000}); await sleep(500);
-            const texts = () => p.evaluate(() => { const out = []; const w = l => (l || []).forEach(o => { if (o.kids) w(o.kids); if (o.type === 'text') out.push(o.text); }); w(window.LCNDA_EXT.vectorCurrent.doc.objs); return out; });
+            const texts = () => p.evaluate(() => { const out = []; const w = l => (l || []).forEach(o => { if (o.children) w(o.children); if (o.type === 'text') out.push(o.text); }); w(window.LCNDA_EXT.vectorCurrent.doc.objs); return out; });
             await menuPick('.vx-dlg', 'Depuis le panier');
             const tx = await texts(); assert.ok(tx.some(x => /Léonard MAZAUD/.test(x)) && tx.some(x => /Source : Registres paroissiaux de Treignac/.test(x)), JSON.stringify(tx));
             await clickUndo(); assert.ok(!(await texts()).some(x => /Léonard/.test(x)), 'annulé');
@@ -102,7 +102,7 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
         });
         await t('7 · 📊 Diagrammes : 📎 dans le titre (une ligne) : le texte sans « [↗ ] », la source dans « Source / note en bas » ; ↶', async () => {
             await closeAll();
-            await p.evaluate(() => window.LCNDA_EXT.openDiagramEditor(null, {kind: 'bars'})); await p.waitForSelector('.h-dg-dlg[open] [data-opt="title"]', {timeout: 20000}); await sleep(500);
+            await p.evaluate(() => window.LCNDA_EXT.openDiagramEditor(null, {spec: window.LCNDA_EXT.diagramsInternals.presetSpec({kind: Object.keys(window.LCNDA_EXT.diagramRender.KINDS)[0]}), name: 'Essai DURAND'})); await p.waitForSelector('.h-dg-dlg[open] [data-opt="title"]', {timeout: 20000}); await sleep(500);
             assert.ok(await p.$('.h-dg-dlg .cx-tool-btns [data-cx-tool-ins]'), 'le 📎 dans la barre'); assert.ok(!await p.$('.h-dg-dlg .cx-tool-btns [data-cx-tool-add]'), 'rien à recevoir : pas de 📥');
             await p.click('.h-dg-dlg [data-cx-tool-ins]'); await p.waitForSelector('.cx-qi'); await p.keyboard.type('Léonard MAZAUD');
             await p.waitForFunction(() => [...document.querySelectorAll('.cx-qi .cx-qi-r')].some(r => /Naissance de Léonard/.test(r.textContent)), null, {timeout: 15000});

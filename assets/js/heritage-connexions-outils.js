@@ -135,7 +135,7 @@
             return {message: T('✒️ {n} dans « {d} »', {n: A().plural ? A().plural(items.length, T('élément')) : nf(items.length), d: vxName(v)}),
                 undo: async () => { if (!vx()) throw new Error(T('Le dessin est fermé.')); if (v.hi !== h0 + 1) throw new Error(T('d’autres changements ont suivi : utilise ↶ dans le dessin')); v.cmd('undo'); }};
         },
-        takeSel: v => { const ids = new Set(v.selected || []), all = []; const walk = l => (l || []).forEach(o => { if (o.kids) walk(o.kids); if (ids.has(o.id)) all.push(o); }); walk(v.doc?.objs);
+        takeSel: v => { const ids = new Set(v.selected || []), all = []; const walk = l => (l || []).forEach(o => { if (o.children) walk(o.children); if (ids.has(o.id)) all.push(o); }); walk(v.doc?.objs);
             const origin = {kind: 'vector', label: T('Dessin « {n} »', {n: vxName(v)})};
             return all.map(o => (o.type === 'image' && /^media\//.test(o.src || '') ? {kind: 'media', ref_id: 0, title: o.name || T('Image'), value: '', data: {filename: decodeURIComponent(o.src.slice(6))}, origin}
                 : o.text ? {kind: 'text', ref_id: 0, title: String(o.text).slice(0, 120), value: String(o.text).slice(0, 20000), origin} : null)).filter(Boolean); },

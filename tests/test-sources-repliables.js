@@ -15,7 +15,8 @@ const net = require('net');
 const {spawn, spawnSync} = require('child_process');
 const root = path.join(__dirname, '..');
 let fails = 0;
-const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } catch (e) { fails++; console.log('✗ ' + name + '\n  ' + String(e && e.stack || e).split('\n').slice(0, 8).join('\n  ')); } };
+const ONLY = process.env.ONLY || '';
+const t = async (name, fn) => { if (ONLY && !name.includes(ONLY) && !name.startsWith('aucune')) return; try { await fn(); console.log('✓ ' + name); } catch (e) { fails++; console.log('✗ ' + name + '\n  ' + String(e && e.stack || e).split('\n').slice(0, 8).join('\n  ')); } };
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 (async () => {
@@ -107,7 +108,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.strictEqual(stateOf(await boxes(p), 'l101').open, false, 'Entrée replie');
             await p.keyboard.press(' '); await sleep(50);
             assert.strictEqual(stateOf(await boxes(p), 'l101').open, true, 'Espace déplie');
-            await p.keyboard.press('Enter'); await sleep(50);
+            await p.keyboard.press('Enter'); await sleep(400);
             const saved = await p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-sources-ouvertes')));
             assert.deepStrictEqual(saved, {l101: false});
             // le corps replié n'a plus de lien qu'on atteint à la tabulation
@@ -132,7 +133,9 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
 
         await t('Réglages : « Sources sous les événements » ouvertes · fermées · ouvertes s’il y en a une', async () => {
             const p = await open();
-            await p.goto(base + '#maintenance/design_sheets'); await p.waitForSelector('[name="sourcesDefault"]', {timeout: 30000}); await sleep(300);
+            await p.goto(base + '#maintenance/design_sheets'); await p.waitForSelector('[name="sourcesDefault"]', {state: 'attached', timeout: 30000}); await sleep(300);
+            await p.evaluate(() => [...document.querySelectorAll('.reg-a-tabs [data-reg-a-tab]')].find(b => /Ce qu’on y voit/.test(b.textContent))?.click());
+            await p.waitForSelector('[name="sourcesDefault"]', {timeout: 30000});
             const opts = await p.evaluate(() => { const s = document.querySelector('[name="sourcesDefault"]'); return {v: s.value, o: [...s.options].map(o => o.textContent), lab: s.closest('label').textContent, vis: !!s.offsetParent}; });
             assert.strictEqual(opts.v, 'open'); assert.deepStrictEqual(opts.o, ['Ouvertes', 'Fermées', 'Ouvertes seulement s’il y en a une']);
             assert.match(opts.lab, /Sources sous les événements/); assert.ok(opts.vis, 'visible dans la page Fiches');
@@ -159,7 +162,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.strictEqual(await btn.count(), 1);
             assert.ok(await p.evaluate(() => !!document.querySelector('[data-src-all]').closest('.card-head-actions')), 'dans l’en-tête du bloc');
             await btn.click(); await sleep(300);
-            assert.ok((await boxes(p)).every(b => !b.open)); assert.strictEqual(await btn.innerText(), 'Tout ouvrir');
+            assert.ok((await boxes(p)).every(b => !b.open), JSON.stringify([await boxes(p), await btn.innerText(), await p.evaluate(() => localStorage.getItem('genealogie-sources-ouvertes'))])); assert.strictEqual(await btn.innerText(), 'Tout ouvrir');
             assert.deepStrictEqual(Object.values(await p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-sources-ouvertes')))), [false, false, false]);
             await p.reload(); await p.waitForSelector('.event-source-list .source-item', {timeout: 30000}); await sleep(300);
             assert.ok((await boxes(p)).every(b => !b.open), 'gardé'); assert.strictEqual(await btn.innerText(), 'Tout ouvrir');

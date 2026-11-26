@@ -125,7 +125,7 @@ const FAKE = () => {
         });
         await t('📥 Prendre depuis… → « Ajouter à 🧩 ce tableau »', async () => {
             await openBoard(bid); const n0 = (await cur()).length; await addMenu();
-            console.log('DBG', await p.evaluate(() => { const b = document.querySelector('dialog[open] section[data-k="basket"] [data-bd-bktake]'); b.scrollIntoView(); const r = b.getBoundingClientRect(); const e = document.elementFromPoint(r.left + 5, r.top + 5); return JSON.stringify({r, vh: innerHeight, at: e && (e.className + ' ' + e.tagName + ' ' + (e.closest('dialog') ? 'in-dlg' : ''))}); }));
+            await p.$eval('dialog[open] section[data-k="basket"] [data-bd-bktake]', x => x.scrollIntoView({block: 'center'}));
             await p.click('dialog[open] section[data-k="basket"] [data-bd-bktake]'); await p.waitForSelector('.cx-take');
             assert.match(await p.textContent('.cx-take h2'), /Les courses MAZAUD/);
             await p.click('.cx-take [data-cx-tab="basket"]');
