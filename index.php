@@ -131,7 +131,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/donnees-maj.css?v=2">
     <link rel="stylesheet" href="assets/css/donnees-recap.css?v=1"><!-- 📊 Récap des données -->
     <link rel="stylesheet" href="assets/css/donnees-onglet.css?v=1"><!-- 📊 l’onglet Données : sa colonne de gauche -->
-    <link rel="stylesheet" href="assets/css/donnees-plus.css?v=1"><!-- 📊 Données, en plus -->
+    <link rel="stylesheet" href="assets/css/donnees-plus.css?v=2"><!-- 📊 Données, en plus -->
     <link rel="stylesheet" href="assets/css/guerres-temps.css?v=2"><!-- ▶ Dans le temps -->
     <link rel="stylesheet" href="assets/css/listes-personnes.css?v=1">
     <link rel="stylesheet" href="assets/css/metiers-rivieres.css?v=1">
@@ -1367,7 +1367,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-listes-maj.js?v=3" defer></script>
 <script src="assets/js/app-donnees-accueil.js?v=5" defer></script><!-- 📊 Récap des données et la question en français : Listes → 🧰 Données et l’onglet 📊 Données (un seul écran) -->
 <script src="assets/js/app-donnees-onglet.js?v=1" defer></script><!-- 📊 l’onglet Données : on y reste (thèmes, listes réunies, listes), sa colonne de gauche, ranger / masquer les thèmes -->
-<script src="assets/js/app-donnees-plus.js?v=2" defer></script><!-- 📊 Données, en plus : ⚙ Organiser le récap, Réglages → 📊 Données, ⭐ 🕘 🆕 💾 📊 👤 🕳 📝 ➕ ⚠️ 🔎 📶 -->
+<script src="assets/js/app-donnees-plus.js?v=3" defer></script><!-- 📊 Données, en plus : ⚙ Organiser le récap, Réglages → 📊 Données, ⭐ 🕘 🆕 💾 📊 👤 🕳 📝 ➕ ⚠️ 🔎 📶 -->
 <script src="assets/js/app-donnees-plus-outils.js?v=2" defer></script><!-- ⚖️ 🗺 🕳 📖 📜 📄 🎞 🔗 💽 🕰 -->
 <script src="assets/js/app-listes-personnes.js?v=3" defer></script>
 <script src="assets/js/app-listes-perso-core.js?v=1" defer></script>
@@ -1764,7 +1764,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-telech-k.js?v=1" defer></script>
 <script src="assets/js/heritage-telech-l.js?v=1" defer></script><!-- 🌐 Les équivalents d’ailleurs (lot L) -->
 <script src="assets/js/heritage-telech-j.js?v=1" defer></script>
-<script src="assets/js/noms-lieux-monde.js?v=1" defer></script><!-- 🔎 Noms de lieux d’autrefois, tous pays : « un nom → le lieu d’aujourd’hui » (vue de 🗺 Anciens noms de lieux, 📊 Récap, ⌘K) -->
+<script src="assets/js/noms-lieux-monde.js?v=2" defer></script><!-- 🔎 Noms de lieux d’autrefois, tous pays : « un nom → le lieu d’aujourd’hui » (vue de 🗺 Anciens noms de lieux, 📊 Récap, ⌘K) -->
 <script src="assets/js/heritage-fiche-edifice.js?v=4" defer></script>
 <script src="assets/js/app-suivi-core.js?v=2" defer></script>
 <script src="assets/js/heritage-suivi.js?v=13" defer></script>

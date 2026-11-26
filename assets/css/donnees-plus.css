@@ -216,3 +216,5 @@ tr.dp-mine > td { background: color-mix(in srgb, var(--dp-green) 7%, transparent
 .dp-ib { display: inline-flex; align-items: center; justify-content: center; min-width: 30px; height: 28px; border: 1.5px solid var(--line-color, #c9ced8); background: var(--card-bg, #fff); color: var(--ink, #111); font-size: 13px; cursor: pointer; padding: 0 4px; }
 .dp-ib:hover, .dp-ib:focus-visible { border-color: var(--blue-bright, #055dff); background: var(--blue-soft, #eaf2ff); }
 @media (hover: hover) { tr:not(:hover):not(:focus-within) .dp-ra .dp-ib:not(.is-on) { opacity: .45; } }
+/* 📖 📝 ⚠️ de la première case : l'icône est dessinée ici, pas dans le texte de la ligne */
+.dp-ib[data-ic]::before { content: attr(data-ic); }

@@ -382,7 +382,7 @@
             const nt = !kio && on(10) ? notes[k]?.note : '';
             if (nt) first.insertAdjacentHTML('beforeend', `<span class="dp-note-line" data-dp-x>📝 ${esc(nt)}</span>`);
             // 📖 📝 ⚠️ dans la première case : 📎 et 🧺 restent seuls au bout de chaque ligne (comme décidé)
-            const btn = (act, ic, lab, pressed) => `<button type="button" class="dp-ib${pressed ? ' is-on' : ''}" data-dp-act="${act}" data-dp-row="${i}" title="${esc(lab)}" aria-label="${esc(lab)}"${pressed != null ? ` aria-pressed="${!!pressed}"` : ''}>${ic}</button>`;
+            const btn = (act, ic, lab, pressed) => `<button type="button" class="dp-ib${pressed ? ' is-on' : ''}" data-dp-act="${act}" data-dp-row="${i}" title="${esc(lab)}" aria-label="${esc(lab)}"${pressed != null ? ` aria-pressed="${!!pressed}"` : ''} data-ic="${esc(ic)}"></button>`; // l'icône par le CSS (::before) : le texte de la case reste le nom de la ligne (copie, essais, lecteur d'écran)
             const add = [on(14) ? btn('cite', '📖', T('Citer cette ligne')) : '', !kio && on(10) ? btn('note', '📝', T('Ma note sur cette ligne'), !!nt) : '', !kio && on(12) ? btn('doubt', '⚠️', T('Marquer douteuse'), !!db) : ''].join('');
             if (add) first.insertAdjacentHTML('beforeend', `<span class="dp-ra" data-dp-x>${add}</span>`);
         });
