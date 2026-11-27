@@ -135,7 +135,7 @@
         if (ro()) return '';
         if (DL.run) return `<span class="ppx-dl" data-ppx-dl-box><span class="ppx-prog"><i style="width:${pct(DL.run.received, DL.run.size)}%"></i></span><small data-ppx-dl-txt>${esc(`${pct(DL.run.received, DL.run.size)} % · ${fmtSize(DL.run.received)} ${i18n('sur')} ${fmtSize(DL.run.size)}`)}</small><button type="button" class="button small secondary" data-ppx-pause>⏸ ${esc(i18n('Pause'))}</button></span>`;
         if (DL.paused) return `<span class="ppx-dl"><span class="ppx-prog"><i style="width:${pct(DL.paused.received, DL.paused.size)}%"></i></span><small>${esc(i18n('En pause : {p} %', {p: String(pct(DL.paused.received, DL.paused.size))}))}</small><button type="button" class="button small" data-ppx-dl>▶ ${esc(i18n('Reprendre'))}</button><button type="button" class="button small secondary" data-ppx-cancel>✕ ${esc(i18n('Abandonner'))}</button></span>`;
-        if (DL.online === undefined) return `<small class="muted">${esc(i18n('Recherche des données en ligne…'))}</small>`;
+        if (DL.online === undefined) return `${window.LCNDA_UI.spinner(i18n('Recherche des données en ligne…'), {inline: true})}`;
         if (!DL.online) return `<small class="muted" title="${esc(DL.err)}">${esc(DL.err ? i18n('Pas de connexion aux données en ligne.') : i18n('Pas encore en ligne.'))}</small>`;
         return `<button type="button" class="button small" data-ppx-dl>⤓ ${esc(i18n('Installer ({s})', {s: fmtSize(DL.online.size)}))}</button>`;
     }

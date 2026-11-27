@@ -1306,7 +1306,7 @@ Aucun événement avec un lieu pour ce choix. ¦ Bu seçim için yeri olan hiçb
 {what} de la famille ¦ Ailenin olayları: {what}
 {n} pris dans l’arbre (les 12 000 premiers). ¦ Ağaçtan alınan: {n} (ilk 12 000).
 {n} pris dans l’arbre. ¦ Ağaçtan alınan: {n}.
-{n} : « 🔎 Retrouver les lieux sans position ». ¦ {n}: “🔎 Konumu olmayan yerleri bul”.
+{n} : « 🔍 Retrouver les lieux sans position ». ¦ {n}: “🔍 Konumu olmayan yerleri bul”.
 Ses événements (naissance, baptême, mariages, résidences, métiers, décès…) deviennent les étapes, dans l’ordre des dates. Le tableau est remplacé. ¦ Olayları (doğum, vaftiz, evlilikler, ikamet yerleri, meslekler, ölüm…) tarih sırasıyla duraklar olur. Tablonun yerine yenisi konur.
 Garder aussi les étapes sans lieu (sur la frise seulement) ¦ Yeri olmayan durakları da tut (yalnızca zaman çizelgesinde)
 Aucun événement avec un lieu pour cette personne. ¦ Bu kişi için yeri olan hiçbir olay yok.

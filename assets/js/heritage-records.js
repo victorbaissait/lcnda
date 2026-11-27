@@ -242,7 +242,7 @@
         const firstDate = d.fields.find(x => x.type === 'date');
         const stepWord = (d.fields.find(x => x.type === 'steps' && x.checkable !== false)?.item || 'ligne').toLowerCase();
         let rows = data.rows.filter(rec => v.filter === 'all' || !r.status || (v.filter === 'done' ? rec.status === 'done' : rec.status !== 'done'));
-        if (v.q) { const q = v.q.toLowerCase(); rows = rows.filter(rec => [...Object.values(rec.cells || {}), ...(rec.labels || []).map(l => l.name)].join(' ').toLowerCase().includes(q)); }
+        if (v.q) { const m = (window.LCNDA_UI?.listMatch?.text || ((q, ...h) => h.join(' ').toLowerCase().includes(String(q).toLowerCase()))); rows = rows.filter(rec => m(v.q, ...Object.values(rec.cells || {}), ...(rec.labels || []).map(l => l.name))); } // C1 : sans accents ni majuscules
         if (r.sort === 'title') rows.sort((a, b) => titleOf(a).localeCompare(titleOf(b), 'fr', {numeric: true}));
         if (r.sort === 'date' && firstDate) rows.sort((a, b) => String(a.data[firstDate.key] || '9999').localeCompare(String(b.data[firstDate.key] || '9999')));
         const placesOf = rec => { const pts = [], t = titleOf(rec);

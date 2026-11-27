@@ -56,7 +56,7 @@
     const nameOf = f => [f.first, f.last].filter(Boolean).join(' ').trim();
     function rowsHtml(r, source) {
         if (!r) return '';
-        if (!r.rows?.length) return `<p class="muted">${esc(T('Aucune notice avec ces critères.'))}</p>`;
+        if (!r.rows?.length) return `${window.LCNDA_APP.empty(T('Aucune notice avec ces critères.'))}`;
         return `<p class="ouc-oa-count"><b>${esc(T('{n} notices trouvées', {n: Number(r.found || r.rows.length).toLocaleString('fr-FR')}))}</b>${r.rows.length < r.found ? ` <span class="muted">${esc(T('— les {n} premières', {n: r.rows.length}))}</span>` : ''}${r.cached ? ` <span class="muted">· ${esc(T('réponse gardée du {date}', {date: r.fetched_at}))}</span>` : ''}</p>
             <ul class="ouc-list">${r.rows.map(x => `<li class="ouc-row"><span class="ouc-ico" aria-hidden="true">📜</span><div class="ouc-main"><div class="ouc-name"><b>${esc(x.title || x.reference || T('Notice'))}</b>${x.dates ? ` <span class="ouc-period">🗓 ${esc(x.dates)}</span>` : ''}</div>
                 ${x.description && x.description !== x.title ? `<div class="ouc-why">${esc(x.description.slice(0, 240))}</div>` : ''}<div class="ouc-why2">${esc([x.reference, x.held_by].filter(Boolean).join(' · '))}</div></div>

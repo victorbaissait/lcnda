@@ -492,8 +492,8 @@
         let body;
         if (!rows.length) body = `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔎</span><span class="empty-line-text">${esc(i18n('Aucune ligne ne correspond à ces critères.'))}</span></p>`;
         else if (view === 'list') body = listHtml(rows);
-        else if (view === 'timeline') { const ts = rows.filter(r => r.y != null && r.y !== '').sort((a, z) => Number(a.y) - Number(z.y)); body = ts.length ? `<ol class="h-fi-dates h-fi-dtime">${ts.map(r => `<li><span>${esc(r.y)}</span><p>${esc(r.c.filter(Boolean).join(' · '))} ${src(r)}</p></li>`).join('')}</ol>` : `<p class="muted">${esc(i18n('Aucune de ces lignes n’a de date.'))}</p>`; }
-        else if (view === 'map') { const pts = rows.filter(r => Array.isArray(r.g)).map(r => ({lat: r.g[0], lon: r.g[1], label: r.c[0] || '', color: '#0066cc'})); body = (pts.length && ext.miniMap ? `<div class="h-fi-dmap">${ext.miniMap(pts, [], {height: 300, interactive: !kiosk()})}</div>` : `<p class="muted">${esc(i18n('Aucune de ces lignes n’a de position sur la carte.'))}</p>`) + listHtml(rows); }
+        else if (view === 'timeline') { const ts = rows.filter(r => r.y != null && r.y !== '').sort((a, z) => Number(a.y) - Number(z.y)); body = ts.length ? `<ol class="h-fi-dates h-fi-dtime">${ts.map(r => `<li><span>${esc(r.y)}</span><p>${esc(r.c.filter(Boolean).join(' · '))} ${src(r)}</p></li>`).join('')}</ol>` : `${window.LCNDA_APP.empty(i18n('Aucune de ces lignes n’a de date.'))}`; }
+        else if (view === 'map') { const pts = rows.filter(r => Array.isArray(r.g)).map(r => ({lat: r.g[0], lon: r.g[1], label: r.c[0] || '', color: '#0066cc'})); body = (pts.length && ext.miniMap ? `<div class="h-fi-dmap">${ext.miniMap(pts, [], {height: 300, interactive: !kiosk()})}</div>` : `${window.LCNDA_APP.empty(i18n('Aucune de ces lignes n’a de position sur la carte.'))}`) + listHtml(rows); }
         else body = `<div class="data-table-wrap h-fi-dwrap"><table class="data-table h-fi-dtable"><thead><tr>${cols.map(c => `<th scope="col">${esc(c.l)}</th>`).join('')}<th scope="col">${esc(i18n('Source'))}</th></tr></thead><tbody>${rows.map(r => `<tr>${cols.map((c, j) => `<td>${esc(r.c[j] ?? '')}</td>`).join('')}<td>${src(r)}</td></tr>`).join('')}</tbody></table></div>`;
         const frozen = b.mode === 'frozen', lic = m.licence ? ` · ${esc(i18n('Licence : {l}', {l: m.licence}))}` : '';
         const who = m.source ? (httpUrl(m.sourceUrl) ? `<a href="${esc(m.sourceUrl)}" target="_blank" rel="noopener noreferrer">${esc(m.source)}</a>` : esc(m.source)) : esc(m.label || '');
@@ -673,7 +673,7 @@
         const setList = d => { el('list').value = d.id; paintChosen(); repaint(); };
         const mountPicker = (keep = null) => {
             pk.hidden = false;
-            if (!ext.dataListPicker) { pk.innerHTML = `<p class="muted">${esc(i18n('Chargement…'))}</p>`; return; }
+            if (!ext.dataListPicker) { pk.innerHTML = `${window.LCNDA_UI.spinner(i18n('Chargement…'))}`; return; }
             ext.dataListPicker(pk, {compact: true, filter: d => !d.link, selected: el('list').value,
                 head: keep ? `<p class="h-fi-dkeep"><button type="button" class="link-button" data-fi-dkeep>${esc(i18n('✕ Garder « {nm} »', {nm: i18n(keep.label)}))}</button></p>` : '',
                 onPick: d => setList(d)});

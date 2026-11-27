@@ -375,8 +375,7 @@
         },
         async delete(id) {
             const meta = STORE.get(id).meta;
-            const ok = await (A().confirmBox ? A().confirmBox({title: T('Supprimer « {n} » ?', {n: meta.name}), message: T('La liste et ses {n} lignes. ↶ Annuler reste possible.', {n: nf(meta.row_count)}), okLabel: T('Supprimer')}) : Promise.resolve(confirm(T('Supprimer « {n} » ?', {n: meta.name}))));
-            if (!ok) return;
+            // H7 : la liste est mise de côté (deleted_at), « ↶ Annuler » la remet : pas de question avant
             await post({op: 'delete', id}); STORE.delete(id); unregister(id);
             const st = A().state; if (st) { st.listType = 'donnees'; if (st.module === 'listes') ext.lists?.donnees?.(++st.workspaceToken); }
             undoToast(T('Liste supprimée : {n}', {n: meta.name}), async () => { await post({op: 'restore', id}); await reload(id); openList(id); }, '🗑');

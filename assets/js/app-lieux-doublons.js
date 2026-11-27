@@ -120,7 +120,7 @@
             <ul class="ld-dups">${g.duplicates.map(x => `<li class="ld-dup"><span class="ld-dup-name">${esc(x.place.name)}<small>${esc(i18n(x.reason_text))} · ${esc(i18n('Liens : {n}', {n: x.place.links}))}</small></span>
                 <span class="ld-conf is-${esc(x.confidence)}">${esc(i18n(CONF[x.confidence] || x.confidence))}</span>
                 ${ro ? '' : `<span class="ld-dup-acts">${x.empty ? `<button class="button small secondary" type="button" data-ld-empty="${Number(x.place.id)}" data-ld-into="${Number(g.survivor.id)}">${esc(i18n('Supprimer ce lieu vide (doublon)'))}</button>` : ''}<button class="button small secondary" type="button" data-ld-merge="${Number(x.place.id)}" data-ld-into="${Number(g.survivor.id)}">${esc(i18n('Fusionner…'))}</button></span>`}</li>`).join('')}</ul></article>`).join('')}</div>`
-            : `<p class="muted">${esc(i18n('Aucun lieu en double probable.'))}</p>`}`;
+            : `${window.LCNDA_APP.empty(i18n('Aucun lieu en double probable.'))}`}`;
         const replace = ws.querySelector('[data-pr-panel]');
         if (replace) replace.after(sec); else ws.append(sec);
         sec.addEventListener('click', async e => {

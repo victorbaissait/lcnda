@@ -66,7 +66,7 @@
         const chosen = v.person && d.root_id && Number(d.root_id) !== Number(d.default_root_id);
         const items = (d.items || []).map((it, i) => ({...it, _i: i}));
         const draw = () => {
-            const q = v.q.trim().toLowerCase(), vis = items.filter(it => !v.off.includes(it.kind) && (!q || `${it.name} ${it.place} ${it.archive?.label} ${it.what}`.toLowerCase().includes(q)));
+            const q = v.q.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''), vis = items.filter(it => !v.off.includes(it.kind) && (!q || `${it.name} ${it.place} ${it.archive?.label} ${it.what}`.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(q)));
             const groups = new Map();
             const keyOf = it => v.group === 'person' ? `p${it.person_id}` : v.group === 'kind' ? it.kind : v.group === 'commune' ? `c${it.place || '?'}` : `a${it.archive?.key}`;
             if (v.group === 'archives') (d.archives || []).forEach(a => groups.set(`a${a.key}`, [])); // les services les plus chargés d'abord

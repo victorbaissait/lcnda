@@ -237,7 +237,7 @@
         const ic = {chat: '🤖', gen: '🕵️', recit: '✍️'};
         th.innerHTML = `<h4 class="aia-h">🤖 ${esc(T('Mes conversations'))} <small class="muted">(${r.total})</small></h4><p class="muted"><small>${esc(T('Gardées sur cet ordinateur : {f}.', {f: r.folder}))}</small></p>
             ${r.rows.length ? `<ul class="aia-hist">${r.rows.map(c => `<li><button type="button" class="aia-hist-open" data-aia-open="${esc(c.id)}">${ic[c.kind] || '🤖'} ${esc(c.title)} <small class="muted">${esc(fmtDate(c.updated))}</small></button><button type="button" class="aia-ibtn" data-aia-del="${esc(c.id)}" title="${esc(T('Effacer'))}">🗑</button></li>`).join('')}</ul>`
-            : `<p class="muted">${esc(T('Aucune conversation gardée.'))}</p>`}`;
+            : `${window.LCNDA_APP.empty(T('Aucune conversation gardée.'))}`}`;
     }
 
     /* ═════════ 🕵️ le généalogiste IA, depuis une fiche ═════════ */

@@ -458,7 +458,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
             // 🎨 une pastille = un raccourci vers la couleur de cette sorte (le réglage complet : « ⚙ Couleurs… »)
             rows=KINDS.filter(k=>n.has(k)).map(k=>{const c=kindColor(k),nm=escapeHtml(i18n(k[1])),sw=shp?`<i class="is-shape" data-kc="${k[0]}">${KC().shapeSvg(KC().shapeOf(k[0]),c,{size:13,sw:2.4})}</i>`:`<i data-kc="${k[0]}" style="background:${c}"></i>`;
                 return `<span class="map-legend-row">${ro?sw:`<button type="button" class="map-legend-sw" data-kc-pick="${k[0]}" title="${escapeHtml(i18n('Changer la couleur des « {k} »',{k:i18n(k[1])}))}" aria-label="${escapeHtml(i18n('Changer la couleur des « {k} »',{k:i18n(k[1])}))}">${sw}</button>`}${nm} <small>${n.get(k).toLocaleString('fr-FR')}</small></span>`;}).join('');
-            if(rows&&!ro)rows+=`<a href="#" class="map-legend-cfg" data-kc-settings title="${escapeHtml(i18n(KC()?.HELP||''))}">⚙ ${escapeHtml(i18n('Couleurs…'))}</a>`;}
+            if(rows&&!ro)rows+=`<a href="#" class="map-legend-cfg" data-kc-settings title="${escapeHtml(i18n(KC()?.HELP||''))}">⚙️ ${escapeHtml(i18n('Couleurs…'))}</a>`;}
         if(mapOpts().gravity&&(state.mapGravity?.data?.generations||[]).length)rows+=`<span><i class="is-grav"></i>${escapeHtml(i18n('Centre de gravité (G1 = la personne de départ)'))}</span>`;
         const yr=mapPointYearRange(mapDisplayPoints());
         const lin=mapActiveFilters(choicesCache?.v).map(x=>x.t).join(' · ');

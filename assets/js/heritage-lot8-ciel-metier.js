@@ -535,7 +535,7 @@
         e.preventDefault();
         const panel = m.closest('[data-l8a-host]') || m.closest('.l8a-host-any'); const place = panel?._l8aPlace || m.closest('[data-l8a-mono]')?._l8aPlace; if (!place) return;
         const host = panel?.querySelector('[data-l8a-maps-host]') || m.parentElement;
-        m.disabled = true; host.innerHTML = `<p class="muted">${esc(T('On cherche sur Wikimedia Commons…'))}</p>`;
+        m.disabled = true; host.innerHTML = `${window.LCNDA_UI.spinner(T('On cherche sur Wikimedia Commons…'))}`;
         const html = await mapsHtml(place, {fresh: m.matches('[data-l8a-maps-retry]')});
         host.innerHTML = html ? `<div class="hist-life l8a-life">${html}</div>` : emptyLine(T('Pas de plan ancien de cette commune sur Wikimedia Commons (ou pas de catégorie de cartes).'), '🗺️');
         m.closest('.l8a-maps-ask')?.remove();

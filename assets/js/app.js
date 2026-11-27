@@ -3463,8 +3463,8 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         let all;
         try{all=await ensureLabelsCache();}catch(error){box.innerHTML=`<div class="labels-suggestion-empty">${escapeHtml(error.message)}</div>`;box.hidden=false;return;}
         const currentIds=new Set($$('[data-label-chip]',field).map(chip=>Number(chip.dataset.labelChip)));
-        const q=(query||'').trim().toLowerCase();
-        const matches=all.filter(l=>!currentIds.has(Number(l.id))&&(!q||String(l.name||'').toLowerCase().includes(q))).slice(0,8);
+        const q=(query||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        const matches=all.filter(l=>!currentIds.has(Number(l.id))&&(!q||String(l.name||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(q))).slice(0,8);
         const optionsHtml=matches.map(l=>`<button type="button" class="labels-suggestion" data-pick-label="${l.id}">${labelChip(l)}</button>`).join('');
         // Aucune étiquette de ce nom : on peut la créer sur place (au lieu de passer par Listes → Étiquettes)
         const typed=(query||'').trim();
@@ -4861,8 +4861,10 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
     const findState={ranges:[],index:-1};
     function findRoots(){const open=[...document.querySelectorAll('dialog[open]')];return open.length?[open[open.length-1]]:[$('#workspace'),$('#sidebar')].filter(Boolean);}
     function findCollect(q){
-        const ranges=[];if(!q)return ranges;const needle=q.toLocaleLowerCase('fr');
-        const fold=t=>t.toLocaleLowerCase('fr');
+        // C1 : sans accents ni majuscules, comme les cases de recherche (« eglise » trouve « Église ») ; lettre par lettre pour garder les positions
+        const fold1=ch=>{const f=ch.toLocaleLowerCase('fr').normalize('NFD').replace(/[\u0300-\u036f]/g,'');return f.length===ch.length?f:ch.toLocaleLowerCase('fr').length===ch.length?ch.toLocaleLowerCase('fr'):ch;};
+        const fold=t=>t.replace(/[^\x00-\x40\x5b-\x60\x7b-\x7f]/gu,fold1).replace(/[A-Z]/g,c=>c.toLowerCase());
+        const ranges=[];if(!q)return ranges;const needle=fold(q);
         findRoots().forEach(root=>{const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:node=>{const p=node.parentElement;if(!p||p.closest('script,style,textarea,#find-bar,[hidden]'))return NodeFilter.FILTER_REJECT;if(!p.offsetParent&&p.getClientRects().length===0)return NodeFilter.FILTER_REJECT;return node.nodeValue.trim()?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;}});
             let node;while((node=walker.nextNode())){const text=fold(node.nodeValue);let at=text.indexOf(needle);while(at>=0){const r=document.createRange();r.setStart(node,at);r.setEnd(node,at+q.length);ranges.push(r);at=text.indexOf(needle,at+Math.max(1,q.length));}}
         });
@@ -5216,7 +5218,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         let panel=$('#side-panel');
         if(!panel){
             panel=document.createElement('aside');panel.id='side-panel';panel.className='side-panel';
-            panel.innerHTML=`<div class="side-panel-resize" title="Glisser pour changer la largeur"></div><header class="side-panel-head"><strong id="side-panel-title">À côté</strong><div class="side-panel-actions"><button type="button" class="button small secondary side-panel-orient" data-orientation="right" title="Côte à côte" aria-label="Côte à côte"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><line x1="12" y1="4" x2="12" y2="20" stroke="currentColor" stroke-width="2"/></svg></button><button type="button" class="button small secondary side-panel-orient" data-orientation="bottom" title="En haut et en bas" aria-label="En haut et en bas"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2"/></svg></button><button type="button" class="button small secondary" id="side-panel-here" title="Afficher cet écran dans la partie principale">⇠ Ici</button><button type="button" class="button small secondary" id="side-panel-window" title="Ouvrir ce panneau dans une vraie fenêtre (pratique avec deux écrans)">Fenêtre ↗</button><button type="button" class="button small secondary" id="side-panel-close" aria-label="Fermer le panneau">✕</button></div></header><iframe id="side-panel-frame" title="Deuxième écran"></iframe>`;
+            panel.innerHTML=`<div class="side-panel-resize" title="Glisser pour changer la largeur"></div><header class="side-panel-head"><strong id="side-panel-title">À côté</strong><div class="side-panel-actions"><button type="button" class="button small secondary side-panel-orient" data-orientation="right" title="Côte à côte" aria-label="Côte à côte"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><line x1="12" y1="4" x2="12" y2="20" stroke="currentColor" stroke-width="2"/></svg></button><button type="button" class="button small secondary side-panel-orient" data-orientation="bottom" title="En haut et en bas" aria-label="En haut et en bas"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2"/></svg></button><button type="button" class="button small secondary" id="side-panel-here" title="Afficher cet écran dans la partie principale">⇠ Ici</button><button type="button" class="button small secondary" id="side-panel-window" title="Ouvrir ce panneau dans une vraie fenêtre (pratique avec deux écrans)">Fenêtre ↗</button><button type="button" class="button small secondary" id="side-panel-close" aria-label="Fermer le panneau">×</button></div></header><iframe id="side-panel-frame" title="Deuxième écran"></iframe>`;
             document.body.append(panel);
             let width=0,height=0,orientation='right';try{width=Number(localStorage.getItem('lcnda-side-panel-width'))||0;height=Number(localStorage.getItem('lcnda-side-panel-height'))||0;orientation=localStorage.getItem('lcnda-side-panel-orientation')||'right';}catch(_){}
             setSidePanelWidth(width||Math.round(window.innerWidth*0.45));setSidePanelHeight(height||Math.round(window.innerHeight*0.45));setSidePanelOrientation(orientation);
@@ -7369,9 +7371,9 @@ ${backupSectionHtml()}
         const hide=()=>{box.hidden=true;box.innerHTML='';};
         const commit=value=>{state.mapSurname=value;persistUiState();renderMap();};
         const search=()=>{
-            const q=input.value.trim().toLowerCase();
+            const q=input.value.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
             if(q.length<1){hide();return;}
-            const matches=(state.bootstrap?.surnames||[]).filter(s=>s.name.toLowerCase().includes(q)).slice(0,8);
+            const matches=(state.bootstrap?.surnames||[]).filter(s=>s.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(q)).slice(0,8);
             box.innerHTML=matches.map(s=>`<button type="button" data-surname-name="${escapeHtml(s.name)}"><strong>${escapeHtml(s.name)}</strong><small>${Number(s.person_count).toLocaleString('fr-FR')} personne${Number(s.person_count)>1?'s':''}</small></button>`).join('');
             if(box.innerHTML){position();box.hidden=false;}else hide();
         };
@@ -9166,10 +9168,10 @@ ${backupSectionHtml()}
     function renderLabelPickerSuggestions(container,containerSelector,entityType,entityId,query=''){
         const box=$('[data-label-picker-suggestions]',container);
         if(!box)return;
-        const q=(query||'').trim().toLowerCase();
+        const q=(query||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
         const selected=selectedLabelIdsFromPicker(container);
         const matches=(state.currentLabelsCache||[])
-            .filter(label=>!selected.has(Number(label.id))&&(!q||String(label.name||'').toLowerCase().includes(q)))
+            .filter(label=>!selected.has(Number(label.id))&&(!q||String(label.name||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(q)))
             .slice(0,8);
         box.innerHTML=matches.length?matches.map(label=>`<button type="button" class="labels-suggestion" data-label-picker-pick="${label.id}">${labelChip(label)}</button>`).join(''):'<div class="labels-suggestion-empty">Aucune étiquette existante trouvée.</div>';
         box.hidden=false;
@@ -9464,7 +9466,7 @@ ${backupSectionHtml()}
         try{const d=await api('person',{id:personId});now=row.entity_type==='person'?d.person:(d.events||[]).find(e=>Number(e.id)===Number(row.entity_id));}catch(error){box.innerHTML=`<p class="error-text">${escapeHtml(error.message)}</p>`;return;}
         if(!now){box.innerHTML=`<p class="muted">${escapeHtml(i18n('Cet élément n’existe plus : utilise « Restaurer » s’il a été supprimé.'))}</p>`;return;}
         const fields=Object.keys(PA_FIELDS[row.entity_type]).filter(k=>k in before&&String(before[k]??'')!==String(now[k]??''));
-        if(!fields.length){box.innerHTML=`<p class="muted">${escapeHtml(i18n('Aucune différence : la fiche est comme avant cette modification.'))}</p>`;return;}
+        if(!fields.length){box.innerHTML=`${window.LCNDA_APP.empty(i18n('Aucune différence : la fiche est comme avant cette modification.'))}`;return;}
         const show=v=>v===null||v===undefined||v===''?'—':String(v);
         box.innerHTML=`<table class="pa-diff"><thead><tr><th>${escapeHtml(i18n('Champ'))}</th><th>${escapeHtml(i18n('Avant cette modification'))}</th><th>${escapeHtml(i18n('Maintenant'))}</th><th></th></tr></thead><tbody>${fields.map(f=>`<tr><th>${escapeHtml(i18n(PA_FIELDS[row.entity_type][f]))}</th><td>${escapeHtml(show(before[f]))}</td><td>${escapeHtml(show(now[f]))}</td><td><button type="button" class="button small secondary" data-pa-restore-field="${escapeHtml(f)}">${escapeHtml(i18n('↩ Remettre'))}</button></td></tr>`).join('')}</tbody></table>`;
         box.querySelectorAll('[data-pa-restore-field]').forEach(b=>b.addEventListener('click',async()=>{

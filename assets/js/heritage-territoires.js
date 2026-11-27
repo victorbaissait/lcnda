@@ -333,7 +333,7 @@
                 const q = fold(e.target.value), box = $('[data-ct-sugg]'); if (!M || q.length < 2) { box.hidden = true; return; }
                 const hits = /^\d[\dab]\d{0,3}$/.test(q) ? M.communes.filter(z => z.code.toLowerCase().startsWith(q)) : M.communes.filter(z => z.k.startsWith(q) || z.k.includes(' ' + q) || z.alt.some(a => fold(a).startsWith(q)));
                 hits.sort((a, b) => (a.k.startsWith(q) ? 0 : 1) - (b.k.startsWith(q) ? 0 : 1) || a.name.length - b.name.length);
-                box.innerHTML = hits.slice(0, 12).map(z => `<button type="button" data-ct-pick="${z.code}">${sel.has(z.code) ? '✓ ' : ''}${esc(z.name)} <small>${esc((D?.dep || {})[z.dep] || z.dep)} · ${esc(z.code)}</small></button>`).join('') || `<p class="muted">${esc(T('Aucune commune de ce nom.'))}</p>`;
+                box.innerHTML = hits.slice(0, 12).map(z => `<button type="button" data-ct-pick="${z.code}">${sel.has(z.code) ? '✓ ' : ''}${esc(z.name)} <small>${esc((D?.dep || {})[z.dep] || z.dep)} · ${esc(z.code)}</small></button>`).join('') || `${window.LCNDA_APP.empty(T('Aucune commune de ce nom.'))}`;
                 box.hidden = false;
             });
             $('[data-ct-g]').addEventListener('input', e => {
@@ -346,7 +346,7 @@
                 box.hidden = false;
             });
             async function placesPanel() {
-                const box = $('[data-ct-plist]'); box.hidden = false; box.innerHTML = `<p class="muted">${esc(T('Chargement de tes lieux…'))}</p>`;
+                const box = $('[data-ct-plist]'); box.hidden = false; box.innerHTML = `${window.LCNDA_UI.spinner(T('Chargement de tes lieux…'))}`;
                 try {
                     const ps = (await api('terr_places')).places || [];
                     const rows = []; const seenC = new Set();
@@ -356,7 +356,7 @@
                         if (z && !seenC.has(z.code)) { seenC.add(z.code); rows.push({p, z}); }
                     }
                     box.innerHTML = rows.length ? `<div class="ct-plist">${rows.map(({p, z}) => `<label class="checkbox-line"><input type="checkbox" data-ct-pc value="${z.code}" ${sel.has(z.code) ? 'checked disabled' : ''}> ${esc(z.name)} <small class="muted">${esc(p.name !== z.name ? p.name + ' · ' : '')}${esc(plural(p.n, T('événement')))}</small></label>`).join('')}</div><button type="button" class="button small" data-ct-padd>${esc(T('Ajouter les communes cochées'))}</button>`
-                        : `<p class="muted">${esc(T('Aucun lieu de ta base n’est placé en France sur la carte.'))}</p>`;
+                        : `${window.LCNDA_APP.empty(T('Aucun lieu de ta base n’est placé en France sur la carte.'))}`;
                 } catch (err) { box.innerHTML = `<p class="muted">${esc(errText(err))}</p>`; }
             }
             dlg.addEventListener('input', e => {
@@ -393,7 +393,7 @@
                     <p class="muted">${esc(T('Des communes réunies en un seul territoire, à poser sur les cartes, les diagrammes et les dessins.'))}</p>
                     <div class="ct-list">${l.map(t => `<article class="ct-item">${thumb(t)}<div><b>${esc(t.name)}</b><br><small class="muted">${esc(plural(t.communes?.length || 0, T('commune')))}</small></div>
                         <div class="ct-row">${picking ? `<button type="button" class="button small" data-ct-use="${t.id}">${esc(T('Choisir'))}</button>` : ''}<button type="button" class="button small secondary" data-ct-edit="${t.id}">✏️ ${esc(T('Modifier'))}</button><button type="button" class="button small secondary" data-ct-dup="${t.id}">⧉ ${esc(T('Copier'))}</button><button type="button" class="button small danger" data-ct-del="${t.id}">🗑</button></div></article>`).join('')
-                        || `<p class="muted">${esc(T('Pas encore de territoire.'))}</p>`}</div>
+                        || `${window.LCNDA_APP.empty(T('Pas encore de territoire.'))}`}</div>
                     <footer class="ct-foot"><button type="button" class="button" data-ct-new>＋ ${esc(T('Nouveau territoire à partir de communes'))}</button><span class="ct-sp"></span><button type="button" class="button secondary" data-ct-x>${esc(T('Fermer'))}</button></footer></div>`;
             };
             paint();

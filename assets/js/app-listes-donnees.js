@@ -326,7 +326,7 @@
                 ${d.geo ? `<button type="button" class="ui-listbar-btn" data-ld-near aria-haspopup="true">📍 ${esc(T('Autour de…'))}</button>` : ''}
                 ${viewsOf(d).length ? `<span class="segmented ld-view" role="group" aria-label="${esc(T('Affichage'))}">${viewsOf(d).map(v => `<button type="button" data-ld-dview="${esc(v.id)}">${v.icon ? `${esc(v.icon)} ` : ''}${esc(T(v.label))}</button>`).join('')}${wantsMap(d) ? `<button type="button" data-ld-view="map">🗺 ${esc(T('Carte'))}</button>` : ''}</span>`
                     : d.geo ? `<span class="segmented ld-view" role="group" aria-label="${esc(T('Affichage'))}"><button type="button" data-ld-view="table">${esc(T('Tableau'))}</button><button type="button" data-ld-view="map">🗺 ${esc(T('Carte'))}</button></span>` : ''}
-                <button type="button" class="ui-listbar-btn" data-ld-cols aria-haspopup="true" title="${esc(T('Choisir les colonnes du tableau'))}">⚙ ${esc(T('Colonnes'))}</button>
+                <button type="button" class="ui-listbar-btn" data-ld-cols aria-haspopup="true" title="${esc(T('Choisir les colonnes du tableau'))}">⚙️ ${esc(T('Colonnes'))}</button>
                 <button type="button" class="ui-listbar-btn" data-ld-save title="${esc(T('Garder ces critères sous un nom, pour les retrouver d’un clic'))}">★ ${esc(T('Enregistrer cette recherche'))}</button>
               </div>
               ${d.chips?.length || valueChips(d) ? `<div class="ld-qchips" data-ld-qchips role="group" aria-label="${esc(T('Pastilles'))}"></div>` : ''}
@@ -581,7 +581,7 @@
     /** ⚙ Colonnes : cocher celles à montrer (retenu avec la recherche de cette liste) ; 📍 GPS pour les listes avec positions */
     function openCols() {
         const d = cur.d, st = cur.st, base = (d.fields || []).filter(f => f.type !== 'url' && !f.hidden), hide = Array.isArray(st.hide) ? st.hide : [];
-        editor(`<b>⚙ ${esc(T('Colonnes'))}</b><div class="ld-ed-list ld-cols-list">${base.map(f => `<label class="checkbox-line"><input type="checkbox" name="c" value="${esc(f.key)}" ${hide.includes(f.key) ? '' : 'checked'}> ${esc(flab(f))}</label>`).join('')}
+        editor(`<b>⚙️ ${esc(T('Colonnes'))}</b><div class="ld-ed-list ld-cols-list">${base.map(f => `<label class="checkbox-line"><input type="checkbox" name="c" value="${esc(f.key)}" ${hide.includes(f.key) ? '' : 'checked'}> ${esc(flab(f))}</label>`).join('')}
             ${d.geo ? `<label class="checkbox-line"><input type="checkbox" name="gps" data-ld-col-gps ${st.gps ? 'checked' : ''}> ${esc(T('📍 GPS'))} <small class="muted">${esc(T('(latitude, longitude ; aussi dans l’export)'))}</small></label>` : ''}</div>`,
         form => {
             const on = [...form.querySelectorAll('input[name="c"]')].filter(i => i.checked).map(i => i.value);

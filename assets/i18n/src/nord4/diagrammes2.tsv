@@ -1306,7 +1306,7 @@ Aucun événement avec un lieu pour ce choix. ¦ Tällä valinnalla ei ole yhtä
 {what} de la famille ¦ Suvun {what} ¦ A család: {what}
 {n} pris dans l’arbre (les 12 000 premiers). ¦ {n} otettu sukupuusta (12 000 ensimmäistä). ¦ {n} a családfából (az első 12 000).
 {n} pris dans l’arbre. ¦ {n} otettu sukupuusta. ¦ {n} a családfából.
-{n} : « 🔎 Retrouver les lieux sans position ». ¦ {n}: ”🔎 Etsi paikat ilman sijaintia”. ¦ {n}: „🔎 Pozíció nélküli helyek megkeresése”.
+{n} : « 🔍 Retrouver les lieux sans position ». ¦ {n}: ”🔍 Etsi paikat ilman sijaintia”. ¦ {n}: „🔍 Pozíció nélküli helyek megkeresése”.
 Ses événements (naissance, baptême, mariages, résidences, métiers, décès…) deviennent les étapes, dans l’ordre des dates. Le tableau est remplacé. ¦ Hänen tapahtumistaan (syntymä, kaste, avioliitot, asuinpaikat, ammatit, kuolema…) tulee pysähdyksiä päivämääräjärjestyksessä. Taulukko korvataan. ¦ Az eseményei (születés, keresztelő, házasságok, lakóhelyek, foglalkozások, halál…) lesznek az állomások, dátum szerinti sorrendben. A táblázat lecserélődik.
 Garder aussi les étapes sans lieu (sur la frise seulement) ¦ Säilytä myös pysähdykset ilman paikkaa (vain aikajanalla) ¦ A hely nélküli állomások megtartása is (csak az idővonalon)
 Aucun événement avec un lieu pour cette personne. ¦ Tällä henkilöllä ei ole yhtään tapahtumaa, jolla on paikka. ¦ Ennek a személynek nincs helyhez kötött eseménye.

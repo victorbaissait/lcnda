@@ -176,7 +176,17 @@
         const ed = event.target.closest?.('[data-h-lang-edit]');
         if (ed) { const L = S().currentPerson?.heritage?.languages; const l = L?.own.find(x => Number(x.id) === Number(ed.dataset.hLangEdit)); if (l) personLanguageDialog(Number(l.person_id), l); }
         const del = event.target.closest?.('[data-h-lang-delete]');
-        if (del && await A().confirmBox('Supprimer cette langue ?', {title: 'Supprimer la langue', okLabel: 'Supprimer la langue'})) { await api('delete_person_language', {}, {method: 'POST', body: {id: del.dataset.hLangDelete}}); toast('Langue supprimée.'); await refresh(); }
+        if (del) { // H7 : supprimée tout de suite, « ↶ Annuler » la remet (même langue, même certitude, même note)
+            const l = S().currentPerson?.heritage?.languages?.own?.find(x => Number(x.id) === Number(del.dataset.hLangDelete));
+            await api('delete_person_language', {}, {method: 'POST', body: {id: del.dataset.hLangDelete}}); await refresh();
+            const back = l ? {person_id: l.person_id, language: l.language, certainty: l.certainty, to_descendants: Number(l.to_descendants) ? 1 : 0, note: l.note || ''} : null;
+            if (!back) { toast('Langue supprimée.'); return; }
+            let again = 0; // l'id change quand la langue revient : « ↷ Rétablir » supprime la nouvelle
+            A().undoToast(i18n('Langue « {nm} » supprimée', {nm: l.language}), {
+                undo: async () => { const r = await api('save_person_language', {}, {method: 'POST', body: back}); again = Number(r?.result?.id || r?.id) || 0; await refresh(); },
+                redo: async () => { if (again) await api('delete_person_language', {}, {method: 'POST', body: {id: again}}); await refresh(); },
+            });
+        }
     });
     document.addEventListener('change', async event => {
         const c = event.target.closest?.('[data-h-lang-noinherit]');

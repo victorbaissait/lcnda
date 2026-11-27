@@ -316,7 +316,7 @@
             <p class="ouc-intro">${esc(T('Pour chaque ancêtre mort (pas les vivants, pas les fiches confidentielles), on demande à la BnF les auteurs du même nom, même prénom, nés la même année. Lentement exprès : un ancêtre toutes les 3 secondes ; ce qui a déjà été demandé n’est pas redemandé avant 90 jours.'))}</p>
             <p class="adnl-batch-bar">${same && Q.running ? `<button type="button" class="button small secondary" data-adnl-pause>${esc(T('⏸ Pause'))}</button>` : `<button type="button" class="button small" data-adnl-go>${esc(same && Q.list.length && Q.i < Q.list.length ? T('▶ Reprendre') : T('🔍 Chercher'))}</button>`}
             <span class="muted" data-adnl-prog>${esc(prog)}</span>${same && Q.err ? ` <span class="adnl-err">${esc(Q.err)}</span>` : ''}</p>
-            <div data-adnl-batch-list>${items}</div>${same && !Q.running && Q.list.length && Q.i >= Q.list.length && !Q.found.length ? `<p class="muted">${esc(T('Aucun de tes ancêtres n’a été trouvé comme auteur à la BnF.'))}</p>` : ''}
+            <div data-adnl-batch-list>${items}</div>${same && !Q.running && Q.list.length && Q.i >= Q.list.length && !Q.found.length ? `${window.LCNDA_APP.empty(T('Aucun de tes ancêtres n’a été trouvé comme auteur à la BnF.'))}` : ''}
             <p class="ui-hint">${esc(T('Données : Bibliothèque nationale de France, data.bnf.fr — Licence Ouverte.'))}</p></details>`;
     }
     const BATCH_BODIES = new Set();
@@ -440,7 +440,7 @@
             const res = await lookup(pid);
             if (!res.eligible) return nothing(host, T(res.reason === 'living' ? 'On ne cherche jamais une personne peut-être vivante.' : res.reason === 'private' ? 'Fiche confidentielle : rien n’est demandé.' : 'Il faut son prénom, son nom et son année de naissance.'));
             const html = booksHtml(res);
-            host.innerHTML = html ? `<div class="adnl-books">${html}</div>` : `<p class="muted">${esc(T('Aucun auteur de ce nom, né en {y}, à la BnF.', {y: res.person.birth}))}</p>`; }});
+            host.innerHTML = html ? `<div class="adnl-books">${html}</div>` : `${window.LCNDA_APP.empty(T('Aucun auteur de ce nom, né en {y}, à la BnF.', {y: res.person.birth}))}`; }});
 
     ext.adnLivres = {...core, load, renderAncient, ancientHtml, lookup, booksHtml, settings, openAbout, register, queue: Q, startBatch};
 })(typeof window !== 'undefined' ? window : globalThis);

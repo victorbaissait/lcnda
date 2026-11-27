@@ -101,7 +101,7 @@
     function keep(r, f, isArticle) {
         const iss = isArticle ? issueOf(r) : r, per = pOf(r);
         if (f.fam && famOf(iss) !== f.fam) return false;
-        if (f.q && !f.q.toLowerCase().split(/\s+/).filter(Boolean).every(w => (isArticle ? textOfArticle(r) : textOfIssue(r)).includes(w))) return false;
+        if (f.q && !(window.LCNDA_UI?.listMatch?.text || ((q, ...h) => h.join(' ').toLowerCase().includes(String(q).toLowerCase())))(f.q, isArticle ? textOfArticle(r) : textOfIssue(r))) return false; // C1 : sans accents ni majuscules, chaque mot (UI.listMatch)
         if (f.periodical && String(per?.id) !== f.periodical) return false;
         if (f.kind && per?.kind !== f.kind) return false;
         if (f.cat && (iss?.data?.category || '') !== (f.cat === '__none' ? '' : f.cat)) return false;

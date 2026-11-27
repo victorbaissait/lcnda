@@ -21,7 +21,7 @@
     const A = () => window.LCNDA_APP || {};
     const T = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (_, k) => (v && k in v ? v[k] : `{${k}}`)));
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
-    const V = '2'; // le ?v= des deux fichiers chargés à la demande
+    const V = '3'; // le ?v= des deux fichiers chargés à la demande
     const KEY = 'genealogie-je-veux', HKEY = 'genealogie-je-veux-hist';
     const DEF = {on: true, cmdk: true, recherche: true, top: false, widget: false, bubbles: false, show: 'first', n: 3, ia: false, hist: true, often: true};
     const read = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v && typeof v === 'object' ? v : d; } catch (_) { return d; } };
@@ -122,7 +122,7 @@
         dlg.dataset.jv = '1'; QK.mode = 'goal'; QK.dlg = dlg;
         const box = dlg.querySelector('.quick-search'), input = dlg.querySelector('input'); if (!box || !input) return;
         const bar = document.createElement('div'); bar.className = 'jv-qk-modes';
-        bar.innerHTML = `<span class="segmented sm" role="group" aria-label="${esc(T('Mode de la recherche rapide'))}"><button type="button" data-jv-mode="goal" aria-pressed="true">🧭 ${esc(T('Je veux…'))}</button><button type="button" data-jv-mode="find" aria-pressed="false">🔎 ${esc(T('Trouver'))}</button></span><small class="muted">${esc(T('Tab pour changer'))}</small>`;
+        bar.innerHTML = `<span class="segmented sm" role="group" aria-label="${esc(T('Mode de la recherche rapide'))}"><button type="button" data-jv-mode="goal" aria-pressed="true">🧭 ${esc(T('Je veux…'))}</button><button type="button" data-jv-mode="find" aria-pressed="false">🔍 ${esc(T('Trouver'))}</button></span><small class="muted">${esc(T('Tab pour changer'))}</small>`;
         box.insertBefore(bar, input);
         const und = document.createElement('div'); und.className = 'jv-qk-und'; und.hidden = true; und.setAttribute('aria-live', 'polite');
         input.after(und);

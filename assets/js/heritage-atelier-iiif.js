@@ -36,7 +36,7 @@
         };
         const look = async () => {
             const u = $('[data-aii-url]').value.trim(); if (!u) return;
-            $('[data-aii-info]').innerHTML = `<p class="muted">${esc(i18n('Lecture du manifeste…'))}</p>`; $('[data-aii-go]').disabled = true; $('[data-aii-all]').hidden = true;
+            $('[data-aii-info]').innerHTML = `${window.LCNDA_UI.spinner(i18n('Lecture du manifeste…'))}`; $('[data-aii-go]').disabled = true; $('[data-aii-all]').hidden = true;
             try { info = await A().api('atelier_idees', {op: 'iiif_preview', url: u}); info.url = u; }
             catch (e) { info = null; $('[data-aii-info]').innerHTML = `<div class="ui-msg is-error aii-err">⛔ ${esc(e.message)}</div>`; return; }
             n = Math.max(1, Math.min(info.count, n));

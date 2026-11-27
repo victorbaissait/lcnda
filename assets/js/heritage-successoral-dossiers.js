@@ -150,7 +150,7 @@
         m.innerHTML = `<button type="button" class="succ-fm-all${ids.length ? '' : ' is-on'}" data-sf-all>👁 ${esc(i18n('Tout montrer'))}</button>
             ${here.length ? `<b class="succ-fm-h">${esc(i18n('Un dossier'))}</b>${here.map(c => `<label class="succ-fm-row"><input type="radio" name="succ-fm-one" value="${c.id}" data-sf-one${one === c.id ? ' checked' : ''}> <span>${esc(caseShort(c))}</span> ${badge(stateLabel(c.state), stateKind(c.state))}</label>`).join('')}
             <b class="succ-fm-h">${esc(i18n('Plusieurs'))}</b>${here.map(c => `<label class="succ-fm-row"><input type="checkbox" value="${c.id}" data-sf-many${ids.includes(c.id) && ids.length > 1 ? ' checked' : ''}> <span>${esc(caseShort(c))}</span></label>`).join('')}
-            <button type="button" class="button small" data-sf-apply>${esc(i18n('⚖️ Ne montrer que ceux-ci'))}</button>` : `<p class="muted">${esc(i18n('Aucun dossier dans cette généalogie.'))}</p>`}
+            <button type="button" class="button small" data-sf-apply>${esc(i18n('⚖️ Ne montrer que ceux-ci'))}</button>` : `${window.LCNDA_APP.empty(i18n('Aucun dossier dans cette généalogie.'))}`}
             ${away.length ? `<b class="succ-fm-h">${esc(i18n('Dans une autre généalogie'))}</b>${away.map(c => `<button type="button" class="succ-fm-away" data-sf-away="${esc(c.base.id)}:${c.id}">↗ ${esc(caseShort(c))} <small class="muted">${esc(c.base.name)}</small></button>`).join('')}` : ''}
             <button type="button" class="succ-fm-board" data-sf-board>⚖️ ${esc(i18n('Tous les dossiers…'))} <small class="muted">${esc(i18n('tableau de bord'))}</small></button>`;
         document.body.appendChild(m); menuEl = m;
@@ -305,7 +305,7 @@
             <h4>⚖️ ${esc(i18n('Où ranger les dossiers'))}</h4><p class="muted">${esc(i18n('Les nouveaux dossiers vont…'))}</p>
             <div class="segmented succ-store-seg" role="radiogroup">${[['here', 'Dans cette généalogie'], ['apart', st.apart_id ? i18n('Dans « {name} »', {name: gname(st.apart_id)}) : 'Dans une généalogie à part'], ['each', 'Un par dossier']].map(([k, l]) => `<button type="button" data-succ-store="${k}" class="${st.store === k ? 'is-active' : ''}" aria-pressed="${st.store === k}">${esc(i18n(l))}</button>`).join('')}</div>
             <h4>${esc(i18n('Les dossiers et où ils sont'))}</h4>
-            ${cases.length ? `<div class="succ-scroll"><table class="succ-table succ-where"><thead><tr><th>${esc(i18n('Dossier'))}</th><th>${esc(i18n('Rangé dans'))}</th><th></th></tr></thead><tbody>${cases.map(c => `<tr><td>${esc(caseShort(c))}</td><td>${c.base.main ? '🌳' : '⚖️'} ${esc(c.base.name)}</td><td><button type="button" class="button small secondary" data-succ-move="${esc(c.base.id)}:${c.id}">${esc(i18n('⇄ Déplacer…'))}</button></td></tr>`).join('')}</tbody></table></div>` : `<p class="muted">${esc(i18n('Aucun dossier pour l’instant.'))}</p>`}
+            ${cases.length ? `<div class="succ-scroll"><table class="succ-table succ-where"><thead><tr><th>${esc(i18n('Dossier'))}</th><th>${esc(i18n('Rangé dans'))}</th><th></th></tr></thead><tbody>${cases.map(c => `<tr><td>${esc(caseShort(c))}</td><td>${c.base.main ? '🌳' : '⚖️'} ${esc(c.base.name)}</td><td><button type="button" class="button small secondary" data-succ-move="${esc(c.base.id)}:${c.id}">${esc(i18n('⇄ Déplacer…'))}</button></td></tr>`).join('')}</tbody></table></div>` : `${window.LCNDA_APP.empty(i18n('Aucun dossier pour l’instant.'))}`}
             <h4>⚙️ ${esc(i18n('Réglages des dossiers'))}</h4>
             <div class="succ-set-grid">
             <div><b>${esc(i18n('Arbre et graphiques filtrés par ⚖️ : les fiches hors dossier'))}</b>${opt('outside', 'grey', 'grisées, sans nom')}${opt('outside', 'hide', 'cachées')}</div>
@@ -930,7 +930,7 @@
             const html = cases.map(c => folder(String(c.id), `⚖️ ${c.number}${c.deceased ? ' ' + lastName(c.deceased) : ''}`, c.people.length, c.people.map(p => person(p, c)).join(''), {grip: true})).join('');
             const noFolder = !fids.length && st.nodossier !== 'hide' ? folder('none', i18n('Sans dossier'), d.without, `<div data-succ-pvnone></div>`, {isCase: false}) : '';
             list.innerHTML = `<div class="succ-pv-order"><span>${esc(i18n('Ranger les dossiers :'))}</span><span class="segmented"><button type="button" data-succ-pvo="az" class="${v.order === 'az' ? 'is-active' : ''}">${esc(i18n('A → Z'))}</button><button type="button" data-succ-pvo="hand" class="${v.order === 'hand' ? 'is-active' : ''}">${esc(i18n('À la main'))}</button></span></div>
-                <div class="succ-pv-list" data-succ-pvlist>${html || `<p class="muted">${esc(i18n('Aucun dossier.'))}</p>`}${noFolder}</div>`;
+                <div class="succ-pv-list" data-succ-pvlist>${html || `${window.LCNDA_APP.empty(i18n('Aucun dossier.'))}`}${noFolder}</div>`;
             if (noFolder && !closed.includes('none')) loadWithout(list);
             bindPv(list);
             return true;

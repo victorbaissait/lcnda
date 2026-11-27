@@ -80,7 +80,7 @@
     function openInAtelier(plug) {
         const P = panel({compact: true, onOpen: h => { dg.close(); if (h.act_id === plug.t.id && h.goto?.e > h.goto?.s) return plug.gotoRange(h.goto.s, h.goto.e); plug.switchTo({id: h.act_id, goto: h.goto?.e > h.goto?.s ? h.goto : null}); }});
         const dg = document.createElement('dialog'); dg.className = 'modal air-dlg';
-        dg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">📜 ${esc(i18n('ATELIER'))}</span><h2>🔎 ${esc(i18n('Chercher dans tous les actes'))}</h2></div><button type="button" class="icon-button" data-air-x aria-label="${esc(i18n('Fermer'))}">×</button></div>
+        dg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">📜 ${esc(i18n('ATELIER'))}</span><h2>🔍 ${esc(i18n('Chercher dans tous les actes'))}</h2></div><button type="button" class="icon-button" data-air-x aria-label="${esc(i18n('Fermer'))}">×</button></div>
             <input type="search" class="air-q" data-air-q placeholder="${esc(i18n('Un nom, un mot… (2 lettres suffisent)'))}" aria-label="${esc(i18n('Chercher dans tous les actes'))}" autocomplete="off" spellcheck="false">`;
         dg.appendChild(P.el); document.body.appendChild(dg); dg.showModal();
         dg.addEventListener('close', () => dg.remove());

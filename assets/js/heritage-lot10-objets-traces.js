@@ -528,7 +528,7 @@
                 <tr><td>${esc(T('🗞️ Journaux'))}</td><td colspan="4" class="muted">${esc(T('Déjà dans « 🌍 Monde et coutumes » : les journaux de son département (BnF), avec le lien vers Gallica.'))}</td></tr></tbody></table></div>
                 <p class="muted">${esc(T('Ce qui part sur Internet : le code INSEE, la position ou le nom de la commune, et les références POP. Jamais un nom de personne, et rien pour une fiche vivante ou confidentielle.'))}</p>
                 <p class="muted">${esc(T('Pas copiés (licence pas ouverte ou site pas lisible) : les collections du MuCEM (lien seulement), les images des musées (droits de chaque musée), Gallica (lecture libre, pas de copie).'))}</p>
-                <p class="muted">${esc(T('Réponses gardées sur l’ordinateur : {n}.', {n: nf(about?.cache?.count || 0)}))} <button type="button" class="button small secondary" data-l10o-cache-clear>${esc(T('🗑 Vider'))}</button></p></div></section>`;
+                <p class="muted">${esc(T('Réponses gardées sur l’ordinateur : {n}.', {n: nf(about?.cache?.count || 0)}))} <button type="button" class="button small secondary" data-l10o-cache-clear>${esc(T('🗑 Effacer les réponses gardées'))}</button></p></div></section>`;
     }
     document.addEventListener('change', e => {
         const t = e.target.closest?.('[data-l10o-tg]'); if (!t || !e.target.matches('input')) return;

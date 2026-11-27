@@ -123,7 +123,7 @@
     }
     const head = door => (UI().pageHeader ? UI().pageHeader({where: door === 'onglet' ? `📊 ${T('Données')}` : `${T('Listes')} · 🧰 ${T('Données')}`, icon: '📊', title: T('Récap des données'),
         help: esc(T('Ce que les listes savent, et ce qu’elles disent de ta famille. Tout est calculé ici, dans ton navigateur.')),
-        actions: [`<button type="button" class="button small secondary" data-dr-settings title="${esc(T('Où sont les données, les rayons « près de » par thème'))}">⚙ ${esc(T('Réglages'))}</button>`]})
+        actions: [`<button type="button" class="button small secondary" data-dr-settings title="${esc(T('Où sont les données, les rayons « près de » par thème'))}">⚙️ ${esc(T('Réglages'))}</button>`]})
         : `<header class="page-header"><div><span class="eyebrow">${esc(door === 'onglet' ? T('Données') : T('Listes'))}</span><h2>📊 ${esc(T('Récap des données'))}</h2></div></header>`);
     const tabsHtml = () => `<nav class="dr-tabs" aria-label="${esc(T('Vue'))}"><span class="segmented" role="group"><button type="button" data-dr-view="recap" aria-pressed="${ST.view !== 'themes'}" class="${ST.view !== 'themes' ? 'is-active' : ''}">📊 ${esc(T('Récap'))}</button><button type="button" data-dr-view="themes" aria-pressed="${ST.view === 'themes'}" class="${ST.view === 'themes' ? 'is-active' : ''}">🧰 ${esc(T('Thèmes'))}</button></span></nav>`;
     function onTabs(e) { const b = e.target.closest('[data-dr-view]'); if (!b) return; setView(b.dataset.drView); }
@@ -585,7 +585,7 @@
             <section class="maintenance-panel dr-set-rad"><h3>📍 ${esc(T('« Près de » sans distance : le rayon de chaque thème'))}</h3>
                 <p class="muted"><small>${esc(T('Pour une question sans distance (« les musées autour de Brive »). Toujours modifiable dans la réponse : − / + ou le nombre tapé, ou écrit dans la question (« à 20 km de Tulle »).'))}</small></p>
                 <div class="dr-rads">${tl.map(t => `<label class="dr-radrow"><span>${esc(t.icon)} ${esc(T(t.label))}</span><span><input type="number" min="1" max="2000" step="1" inputmode="numeric" data-dr-rad="${esc(t.id)}" value="${esc(radiusOf(t.id))}" ${ro ? 'disabled' : ''} aria-label="${esc(T('Rayon : {t}', {t: T(t.label)}))}"> km${Number(R[t.id]) > 0 && Number(R[t.id]) !== RADIUS[t.id] ? ` <small class="muted">(${esc(T('au départ : {n}', {n: RADIUS[t.id] || 30}))})</small>` : ''}</span></label>`).join('')}</div>
-                ${Object.keys(R).length && !ro ? `<button type="button" class="button small secondary" data-dr-rad-reset>↺ ${esc(T('Les rayons de départ'))}</button>` : ''}</section>`;
+                ${Object.keys(R).length && !ro ? `<button type="button" class="button small secondary" data-dr-rad-reset>${esc(T('↺ Remettre comme au départ'))}</button>` : ''}</section>`;
         page.appendChild(box);
         const redraw = () => { if (A().state?.module === 'maintenance' && A().state.maintenanceTab === SETTINGS_TAB) ext.maintenance[SETTINGS_TAB]?.(); };
         box.addEventListener('change', e => {

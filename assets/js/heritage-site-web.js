@@ -658,7 +658,7 @@
                     <small class="sw-hint"><code>@media ${esc(b.query || '…')}</code> · ${n ? i18n('{what} dans le CSS', {what: plural(n, 'bloc')}) : i18n('pas encore de CSS')}${b.was && normMq(b.was) !== normMq(b.query) && n ? ' · ' + i18n('ces blocs suivront la nouvelle requête') : ''}${mqSimulated(b.query) ? ' · ' + i18n('l’aperçu le montre même si ton appareil ne l’est pas') : ''}</small>`}</div>`;
             };
             const orphans = () => { const known = new Set(list.map(b => normMq(b.was)).concat(list.map(b => normMq(b.query)))); return [...new Set(scan().map(m => m.query))].filter(q => q && !known.has(q)); };
-            ext.openDialog({eyebrow: 'MON SITE WEB', title: '⚙ Les écrans du site (@media)', wide: true, submitLabel: 'Appliquer',
+            ext.openDialog({eyebrow: 'MON SITE WEB', title: '⚙️ Les écrans du site (@media)', wide: true, submitLabel: 'Appliquer',
                 body: `<p class="sw-hint" style="margin-top:0">${i18n('Chaque écran est un bouton au-dessus de l’aperçu, et un choix « Écran » quand tu règles un élément : ses styles vont dans son bloc {code} du CSS du site.', {code: '<code>@media</code>'})}</p>
                     <div class="sw-row"><span>Partir de :</span>${PRESETS.map(([l], j) => `<button type="button" class="button small secondary" data-bp-preset="${j}">${esc(l)}</button>`).join('')}</div>
                     <div data-bp-list class="sw-bps"></div>

@@ -106,11 +106,11 @@
     }
     const progHtml = r => `<span class="ba-prog" data-ba-prog><span class="ba-bar"><i style="width:${pct(r.received, r.size)}%"></i></span> <small>${esc(`${pct(r.received, r.size)} % · ${fmtSize(r.received)} ${i18n('sur')} ${fmtSize(r.size)}`)}</small></span>`;
     function actsHtml(installed) {
-        if (installed) return `<button type="button" class="button small secondary" data-ba-list>🔎 ${esc(i18n('Chercher dans les annuaires'))}</button> <button type="button" class="button small secondary" data-ba-remove>🗑 ${esc(i18n('Supprimer'))}</button>`;
+        if (installed) return `<button type="button" class="button small secondary" data-ba-list>🔍 ${esc(i18n('Chercher dans les annuaires'))}</button> <button type="button" class="button small secondary" data-ba-remove>🗑 ${esc(i18n('Supprimer'))}</button>`;
         if (DL.run) return `${progHtml(DL.run)} <button type="button" class="button small secondary" data-ba-pause>⏸ ${esc(i18n('Pause'))}</button>`;
         const p = DL.paused;
         if (p) return `<span class="ba-prog"><span class="ba-bar"><i style="width:${pct(p.received, p.size)}%"></i></span> <small>${esc(i18n('En pause : {p} %', {p: String(pct(p.received, p.size))}))}</small></span> <button type="button" class="button small" data-ba-install>▶ ${esc(i18n('Reprendre'))}</button> <button type="button" class="button small secondary" data-ba-cancel>✕ ${esc(i18n('Abandonner'))}</button>`;
-        if (DL.online === undefined) return `<small class="muted">${esc(i18n('Recherche des données en ligne…'))}</small>`;
+        if (DL.online === undefined) return `${window.LCNDA_UI.spinner(i18n('Recherche des données en ligne…'), {inline: true})}`;
         if (!DL.online) return `<small class="muted" title="${esc(DL.err)}">${esc(DL.err ? i18n('Pas de connexion aux données en ligne.') : i18n('Pas encore en ligne.'))}</small>`;
         return `<button type="button" class="button small" data-ba-install>⤓ ${esc(i18n('Installer ({s})', {s: fmtSize(DL.online.size)}))}</button>`;
     }

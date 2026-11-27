@@ -103,11 +103,11 @@
             try { r = await write('link', {ids, kind, target, keep_gps: !!keep}); } catch (e) { toast(e.message, 'error'); return; }
             const done = (r.linked || []).map(x => x.id);
             picked.clear();
-            toast(i18n('✓ Reliées à {name} : {n}', {name: r.label || title, n: pl(done.length, 'photo')}), 'success', {duration: 10000, action: {label: i18n('↶ Annuler'), run: async () => { try { await write('unlink', {ids: done}); toast(i18n('Annulé'), 'success'); } catch (e) { toast(e.message, 'error'); } load(); }}});
+            toast(i18n('✓ Reliées à {name} : {n}', {name: r.label || title, n: pl(done.length, 'photo')}), '', {kind: 'undo', duration: 10000, action: {label: i18n('↶ Annuler'), run: async () => { try { await write('unlink', {ids: done}); toast(i18n('Annulé'), 'success'); } catch (e) { toast(e.message, 'error'); } load(); }}});
             if (r.tomb && r.kind === 'person' && r.burial_type) {
                 toast(i18n('🪦 Une photo de tombe : ajouter aussi l’inhumation à {name} ?', {name: r.label}), '', {duration: 15000, action: {label: i18n('＋ Ajouter'), run: async () => {
                     try { const ev = await A().api('add_event', {}, {method: 'POST', body: {person_id: r.target, event_type_id: r.burial_type, date_text: ''}});
-                        toast(i18n('✓ Inhumation ajoutée à {name}.', {name: r.label}), 'success', {duration: 10000, action: {label: i18n('↶ Annuler'), run: () => A().api('delete_event', {}, {method: 'POST', body: {id: ev.id}}).catch(e => toast(e.message, 'error'))}});
+                        toast(i18n('✓ Inhumation ajoutée à {name}.', {name: r.label}), '', {kind: 'undo', duration: 10000, action: {label: i18n('↶ Annuler'), run: () => A().api('delete_event', {}, {method: 'POST', body: {id: ev.id}}).catch(e => toast(e.message, 'error'))}});
                     } catch (e) { toast(e.message, 'error'); }
                 }}});
             }
@@ -147,7 +147,7 @@
             dl.querySelector('form').addEventListener('submit', async e => {
                 e.preventDefault(); const prev = r.note; dl.close();
                 try { await write('note', {id: r.id, note: inp.value}); } catch (err) { toast(err.message, 'error'); return; }
-                toast(i18n('Texte enregistré'), 'success', {action: {label: i18n('↶ Annuler'), run: async () => { await write('note', {id: r.id, note: prev}).catch(() => {}); load(); }}});
+                toast(i18n('Texte enregistré'), '', {kind: 'undo', action: {label: i18n('↶ Annuler'), run: async () => { await write('note', {id: r.id, note: prev}).catch(() => {}); load(); }}});
                 load();
             });
             dl.showModal(); inp.focus();

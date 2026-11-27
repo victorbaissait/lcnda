@@ -433,7 +433,7 @@
                 <p class="muted">${esc(T('La Human Mortality Database et la Human Fertility Database sont libres (CC BY 4.0), mais il faut un compte gratuit pour télécharger. Télécharge le fichier texte sur leur site (par exemple « fltper_1x1.txt » ou « FRATNPtfrRR.txt »), puis ouvre-le ici : il est lu sur ton ordinateur, rien n’est envoyé.'))}</p>
                 <p>${link(LINKS.hmd(), 'mortality.org — France ↗')} · ${link(LINKS.hfd(), 'humanfertility.org — France ↗')}</p>
                 <label class="button small">📂 ${esc(T('Ouvrir un fichier HMD ou HFD'))}<input type="file" accept=".txt,text/plain" multiple hidden data-tc-file></label>
-                ${ts.length ? `<ul class="hist-ul tc-ul" data-tc-tables>${ts.map(tRow).join('')}</ul>` : `<p class="muted">${esc(T('Aucune table ouverte.'))}</p>`}</div>
+                ${ts.length ? `<ul class="hist-ul tc-ul" data-tc-tables>${ts.map(tRow).join('')}</ul>` : `${window.LCNDA_APP.empty(T('Aucune table ouverte.'))}`}</div>
             <div class="maintenance-panel"><h3>${esc(T('À propos des données'))}</h3>
                 <p class="muted">${esc(T('Pour chaque idée : ce que l’app avait déjà, la licence lue sur le site officiel (le 2026-11-25), et ce qui en est fait. Le détail : docs/telechargements-lot-c.md.'))}</p>
                 <div class="cplus-scroll"><table class="data-table"><thead><tr><th>${esc(T('Sujet'))}</th><th>${esc(T('Ici'))}</th><th>${esc(T('Licence'))}</th><th>${esc(T('Où'))}</th></tr></thead><tbody>

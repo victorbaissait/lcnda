@@ -103,11 +103,11 @@
     }
     const progHtml = (kind, r) => `<span class="bo-prog" data-bo-prog="${kind}"><span class="bo-bar"><i style="width:${pct(r.received, r.size)}%"></i></span> <small>${esc(`${pct(r.received, r.size)} % · ${fmtSize(r.received)} ${i18n('sur')} ${fmtSize(r.size)}`)}</small></span>`;
     function actsHtml(kind, installed) {
-        if (installed) return `<button type="button" class="button small secondary" data-bo-search="${kind}">🔎 ${esc(i18n('Chercher dans la base'))}</button> <button type="button" class="button small secondary" data-bo-remove="${kind}">🗑 ${esc(i18n('Supprimer'))}</button>`;
+        if (installed) return `<button type="button" class="button small secondary" data-bo-search="${kind}">🔍 ${esc(i18n('Chercher dans la base'))}</button> <button type="button" class="button small secondary" data-bo-remove="${kind}">🗑 ${esc(i18n('Supprimer'))}</button>`;
         if (DL.run[kind]) return `${progHtml(kind, DL.run[kind])} <button type="button" class="button small secondary" data-bo-pause="${kind}">⏸ ${esc(i18n('Pause'))}</button>`;
         const p = DL.paused[kind];
         if (p) return `<span class="bo-prog"><span class="bo-bar"><i style="width:${pct(p.received, p.size)}%"></i></span> <small>${esc(i18n('En pause : {p} %', {p: String(pct(p.received, p.size))}))}</small></span> <button type="button" class="button small" data-bo-install="${kind}">▶ ${esc(i18n('Reprendre'))}</button> <button type="button" class="button small secondary" data-bo-cancel="${kind}">✕ ${esc(i18n('Abandonner'))}</button>`;
-        if (DL.online === undefined) return `<small class="muted">${esc(i18n('Recherche des données en ligne…'))}</small>`;
+        if (DL.online === undefined) return `${window.LCNDA_UI.spinner(i18n('Recherche des données en ligne…'), {inline: true})}`;
         const o = DL.online[kind];
         if (!o) return `<small class="muted" title="${esc(DL.err)}">${esc(DL.err ? i18n('Pas de connexion aux données en ligne.') : i18n('Pas encore en ligne.'))}</small>`;
         return `<button type="button" class="button small" data-bo-install="${kind}">⤓ ${esc(i18n('Installer ({s})', {s: fmtSize(o.size)}))}</button>`;
@@ -151,7 +151,7 @@
             if (b.installed && b.matches.length) {
                 parts.push(`<section class="bo-hit" data-bo-base="${k}"><h4>${NAMES[k][0]} ${esc(i18n(NAMES[k][2]))}</h4>
                     ${b.matches.map(r => recordHtml(k, r, {pid: d.person.id, locked})).join('')}
-                    <p class="bo-foot"><button type="button" class="link-button" data-bo-search="${k}" data-bo-nom="${esc(d.person.last)}">🔎 ${esc(i18n('Chercher ce nom dans la base'))}</button> · <small class="muted">${esc(i18n('Même nom, même prénom, né(e) à un an près : rien n’est sûr, compare avec tes actes.'))}</small></p></section>`);
+                    <p class="bo-foot"><button type="button" class="link-button" data-bo-search="${k}" data-bo-nom="${esc(d.person.last)}">🔍 ${esc(i18n('Chercher ce nom dans la base'))}</button> · <small class="muted">${esc(i18n('Même nom, même prénom, né(e) à un an près : rien n’est sûr, compare avec tes actes.'))}</small></p></section>`);
             } else if (!b.installed && b.could && (only || !dismiss[k])) {
                 const o = DL.online?.[k], r = DL.run[k];
                 parts.push(`<div class="bo-offer" data-bo-offer="${k}"><span>${NAMES[k][0]} ${esc(k === 'mpf' ? i18n('Mort pendant la Grande Guerre ? La base des Morts pour la France 1914–1918 peut le dire.') : i18n('Décoré(e) de la Légion d’honneur ? La base Léonore peut le dire.'))}</span>
@@ -244,7 +244,7 @@
         const res = v.res;
         let body = '';
         if (!b.installed) body = A().empty ? A().empty(i18n('Cette base n’est pas installée.'), {icon: NAMES[v.kind][0]}) : esc(i18n('Cette base n’est pas installée.'));
-        else if (v.busy) body = `<p class="muted">${esc(i18n('Recherche…'))}</p>`;
+        else if (v.busy) body = `${window.LCNDA_UI.spinner(i18n('Recherche…'))}`;
         else if (res?.short) body = `<p class="muted">${esc(i18n('Écris au moins deux lettres du nom.'))}</p>`;
         else if (res && !res.rows.length) body = A().empty ? A().empty(i18n('Personne sous ce nom dans la base.'), {icon: '🔎'}) : esc(i18n('Personne sous ce nom dans la base.'));
         else if (res) body = `<p class="muted">${esc(res.more ? i18n('{n} fiches : les 100 premières (précise le prénom ou l’année).', {n: num(res.total)}) : i18n('{n} fiche(s)', {n: num(res.total)}))}</p><div class="bo-results">${res.rows.map(r => recordHtml(v.kind, r, {why: false})).join('')}</div>`;
@@ -255,7 +255,7 @@
                 <label>${esc(i18n('Nom'))} <input name="nom" value="${esc(v.nom || '')}" autocomplete="off" required></label>
                 <label>${esc(i18n('Prénom'))} <input name="prenom" value="${esc(v.prenom || '')}" autocomplete="off"></label>
                 <label>${esc(i18n('Né(e) vers'))} <input name="annee" value="${esc(v.annee || '')}" inputmode="numeric" size="5" autocomplete="off"></label>
-                <button type="submit" class="button small">🔎 ${esc(i18n('Chercher'))}</button></form>${body}</section></section>`;
+                <button type="submit" class="button small">🔍 ${esc(i18n('Chercher'))}</button></form>${body}</section></section>`;
     }
     async function runSearch() {
         const v = PAGE.view; if (!v) return;
@@ -362,7 +362,7 @@
             if (!pid) { host.innerHTML = `<p class="muted">${esc(i18n('Choisis une personne.'))}</p>`; return; }
             host.innerHTML = `<div class="bo-person" data-bo-person="${pid}" data-bo-only="${k}" data-bo-locked="${kiosk() ? 1 : 0}"></div>`;
             const h = host.firstElementChild; await fillPerson(h);
-            if (h.hidden) { h.hidden = false; h.innerHTML = `<p class="muted">${esc(i18n('Personne de ce nom, né(e) à un an près, dans {t}.', {t: i18n(NAMES[k][3])}))}</p><p><button type="button" class="link-button" data-bo-search="${k}">🔎 ${esc(i18n('Chercher un autre nom dans la base'))}</button></p>`; }
+            if (h.hidden) { h.hidden = false; h.innerHTML = `<p class="muted">${esc(i18n('Personne de ce nom, né(e) à un an près, dans {t}.', {t: i18n(NAMES[k][3])}))}</p><p><button type="button" class="link-button" data-bo-search="${k}">🔍 ${esc(i18n('Chercher un autre nom dans la base'))}</button></p>`; }
         },
     })));
 

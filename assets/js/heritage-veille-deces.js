@@ -225,7 +225,7 @@
         render: (index, widget, span, d) => {
             const n = d?.items?.length || 0;
             const body = !d ? `<p class="muted">${esc(T('La veille n’a pas pu être lue.'))}</p>` : !d.insee?.installed ? `<p class="muted">${esc(T('Installe le fichier des décès de l’INSEE (Recherche → Décès INSEE) pour surveiller les décès des personnes vivantes de ton arbre.'))}</p>`
-                : n ? `<ul class="vd-w-list">${d.items.slice(0, 3).map(it => `<li>${esc(sentence(it))}</li>`).join('')}</ul>` : `<p class="muted">${esc(T('Aucun décès possible pour l’instant.'))}</p>`;
+                : n ? `<ul class="vd-w-list">${d.items.slice(0, 3).map(it => `<li>${esc(sentence(it))}</li>`).join('')}</ul>` : `${window.LCNDA_APP.empty(T('Aucun décès possible pour l’instant.'))}`;
             const html = `<div class="vd-widget">${body}<p class="cplus-src">${esc(T('Source :'))} ${link('https://www.data.gouv.fr/fr/datasets/fichier-des-personnes-decedees/', 'INSEE')} — Licence Ouverte</p></div>`;
             return A().card ? A().card(index, `⚰️ ${T('Veille des décès')}`, n || '', html, span, `<button type="button" class="button small secondary" data-vd-open>${esc(T('Voir'))}</button>`) : html;
         },
@@ -252,7 +252,7 @@
     /* à la demande (« 🧰 Données ») : les décès possibles d'une personne */
     (ext.dataSources = ext.dataSources || []).push({id: 'veille_deces', icon: '⚰️', label: T('Décès possible (fichier INSEE)'), group: 'La personne', needs: ['person'],
         installed: () => get('vd_status').then(s => !!s.insee?.installed), // une erreur remonte : ce n'est pas « pas installé »
-        run: async (ctx, host) => { LIST = null; const id = Number(ctx.person?.id || ctx.person); if (!(await fillPerson(host, id))) host.innerHTML = `<p class="muted">${esc(T('Aucun décès possible pour cette personne dans le fichier INSEE installé.'))}</p>`; }});
+        run: async (ctx, host) => { LIST = null; const id = Number(ctx.person?.id || ctx.person); if (!(await fillPerson(host, id))) host.innerHTML = `${window.LCNDA_APP.empty(T('Aucun décès possible pour cette personne dans le fichier INSEE installé.'))}`; }});
 
     /* « Où chercher » : les avis de décès des journaux (liens seulement) — registre lu par heritage-ou-chercher.js */
     root.LCNDA_SO21 = root.LCNDA_SO21 || {

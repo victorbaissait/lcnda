@@ -188,7 +188,7 @@
             const L = $('[data-an-list]');
             L.innerHTML = D().scenes.map((s, i) => `<div class="an-sc${i === sel ? ' is-on' : ''}" data-an-sc="${i}" role="button" tabindex="0" aria-pressed="${i === sel}"><span class="an-sc-ico" aria-hidden="true">${TYPES[s.type]?.icon || '•'}</span><span class="an-sc-txt"><b>${i + 1} · ${esc(s.name || T(TYPES[s.type]?.label || ''))}</b><small>${esc(T('{s} s', {s: String(Math.round(RN().durOf(s) * 10) / 10)}))}${s.type !== 'title' && s.type !== 'image' && (s.from || s._from) ? ` · ${esc(String(s.from || s._from || ''))} → ${esc(String(s.to || s._to || ''))}` : ''}</small></span>
                 ${ro ? '' : `<span class="an-sc-act"><button type="button" class="icon-button small" data-an-mv="${i}|-1" title="${esc(T('Monter'))}" aria-label="${esc(T('Monter'))}" ${i ? '' : 'disabled'}>↑</button><button type="button" class="icon-button small" data-an-mv="${i}|1" title="${esc(T('Descendre'))}" aria-label="${esc(T('Descendre'))}" ${i < D().scenes.length - 1 ? '' : 'disabled'}>↓</button><button type="button" class="icon-button small" data-an-scm="${i}" title="${esc(T('Plus'))}" aria-label="${esc(T('Plus'))}">⋯</button></span>`}</div>`).join('')
-                || `<p class="muted">${esc(T('Aucune scène : « ＋ Scène ».'))}</p>`;
+                || `${window.LCNDA_APP.empty(T('Aucune scène : « ＋ Scène ».'))}`;
         }
         function addMenu(btn) {
             // les photos et les vidéos se montent dans le 🎬 Montage vidéo (pas de doublon) : ici, ce qui s'anime à partir de la base

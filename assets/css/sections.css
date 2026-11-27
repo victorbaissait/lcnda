@@ -65,8 +65,8 @@
 .fsec-tabs-wrap.is-place-avant .fsec-tab.is-all:last-child { margin-left: auto; }
 .fsec-gear { flex: 0 0 auto; }
 /* A6 : les onglets non choisis suivent les boutons (contour, texte seul) ; l'onglet ouvert reste bleu plein (C5) */
-:root[data-lc-btn="contour"] .segmented button:not(.is-active) { background: transparent; }
-:root[data-lc-btn="texte"] .segmented button:not(.is-active) { background: transparent; border-color: transparent; }
+:root[data-lc-btn="contour"] .segmented button:not(.is-active):not([aria-pressed="true"]) { background: transparent; }
+:root[data-lc-btn="texte"] .segmented button:not(.is-active):not([aria-pressed="true"]) { background: transparent; border-color: transparent; }
 /* Rangement propre à une fiche */
 .fsec-own { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 0 0 -24px; font-size: 13px; color: var(--muted); }
 .fsec-own-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--blue); }

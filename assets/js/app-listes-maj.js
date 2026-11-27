@@ -100,7 +100,7 @@
 
     async function checkLine(line, ids, ps) {
         const res = line.querySelector('[data-dmaj-res]'), btn = line.querySelector('[data-dmaj-check]');
-        res.hidden = false; res.innerHTML = `<small class="muted">${esc(T('Vérification…'))}</small>`; if (btn) btn.disabled = true;
+        res.hidden = false; res.innerHTML = `${window.LCNDA_UI.spinner(T('Vérification…'), {inline: true})}`; if (btn) btn.disabled = true;
         try {
             const r = await api('donnees_maj_check', {packs: ids.join(','), fresh: 1});
             writeLS(LAST, String(Date.now()));

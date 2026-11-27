@@ -217,7 +217,7 @@
     function dialog() {
         if (dlg?.isConnected) return dlg;
         dlg = document.createElement('dialog'); dlg.className = 'modal fe-dlg';
-        dlg.innerHTML = `<div class="modal-head"><h2 data-fe-title></h2><button type="button" class="icon-button" data-fe-close aria-label="${esc(T('Fermer'))}" title="${esc(T('Fermer'))}">✕</button></div><div class="modal-body" data-fe-body></div>`;
+        dlg.innerHTML = `<div class="modal-head"><h2 data-fe-title></h2><button type="button" class="icon-button" data-fe-close aria-label="${esc(T('Fermer'))}" title="${esc(T('Fermer'))}">×</button></div><div class="modal-body" data-fe-body></div>`;
         document.body.appendChild(dlg);
         dlg.addEventListener('close', () => { current = null; });
         dlg.addEventListener('click', e => { if (e.target === dlg || e.target.closest('[data-fe-close]')) dlg.close(); });
@@ -276,12 +276,12 @@
                 ${D.events.length ? `<p>${esc(counts.join(', '))} ${esc(T('de ta famille.'))}</p><ul class="fe-l">${D.events.slice(0, 8).map(e => evRow(e, false)).join('')}</ul>${D.events.length > 8 ? more(`<ul class="fe-l">${D.events.slice(8).map(e => evRow(e, false)).join('')}</ul>`, D.events.length - 8) : ''}
                     ${st.decades.length > 1 ? more(`<ul class="fe-dec">${st.decades.map(([d, n]) => `<li><span class="fe-yr">${d}</span><i style="width:${Math.round(n / Math.max(...st.decades.map(x => x[1])) * 100)}%"></i><span>${n}</span></li>`).join('')}</ul>`, 0, T('▸ par décennie')) : ''}` : ''}
                 ${D.proposed.length ? `<div class="fe-prop"><p><b>${esc(T('À confirmer :'))}</b> ${esc(T('{n} acte(s) de la commune dont l’adresse parle de cet édifice.', {n: String(D.proposed.length)}))} ${edit && D.proposed.length > 1 ? `<button type="button" class="button small" data-fe-elink-all>${esc(T('✓ Tout relier'))}</button>` : ''}</p><ul class="fe-l">${D.proposed.slice(0, 12).map(e => evRow(e, true)).join('')}</ul>${D.proposed.length > 12 ? more(`<ul class="fe-l">${D.proposed.slice(12).map(e => evRow(e, true)).join('')}</ul>`, D.proposed.length - 12) : ''}</div>` : ''}
-                ${!D.events.length && !D.proposed.length ? `<p class="muted">${esc(T('Aucun acte relié pour l’instant. Un acte se relie depuis cette fiche, ou depuis la fiche de la personne (« 🔗 Relier à une fiche ? »).'))}</p>` : ''}
+                ${!D.events.length && !D.proposed.length ? `${window.LCNDA_APP.empty(T('Aucun acte relié pour l’instant. Un acte se relie depuis cette fiche, ou depuis la fiche de la personne (« 🔗 Relier à une fiche ? »).'))}` : ''}
                 <p class="fe-note">${esc(T('La liste vient des actes reliés à la fiche, et des actes de la commune dont l’adresse parle de l’édifice (proposés, à confirmer d’un clic).'))}</p></section>
             <section class="fe-sec"><h4>${esc(T(g.regTitle))}</h4>${D.registers.length ? `<ul class="fe-l">${regRows}</ul>` : ''}<div data-fe-x="registers"></div>
                 ${edit ? `<p><button type="button" class="button small secondary" data-fe-radd>${esc(T('＋ Ajouter des registres'))}</button></p>` : ''}</section>
             <section class="fe-sec" data-fe-x="objects" hidden></section>
-            <section class="fe-sec"><h4>${esc(T('🖼 Photos et plans'))}</h4>${s.image && offline() ? `<p class="muted">🖼 ${link(fileUrl(s.image), s.image)}</p>` : s.image ? `<figure class="fe-fig"><a href="${esc(fileUrl(s.image))}" target="_blank" rel="noopener noreferrer"><img src="${esc(imgUrl(s.image, 640))}" alt="${esc(s.name)}" loading="lazy" onerror="this.remove()"></a><figcaption>${esc(s.image)} · ${link(fileUrl(s.image), T('↗ auteur et licence'))}</figcaption></figure>` : `<p class="muted">${esc(T('Pas encore d’image. « ✎ Modifier » → une image de Wikimedia Commons (son nom de fichier) : l’auteur et la licence restent sur sa page.'))}</p>`}</section>
+            <section class="fe-sec"><h4>${esc(T('🖼 Photos et plans'))}</h4>${s.image && offline() ? `<p class="muted">🖼 ${link(fileUrl(s.image), s.image)}</p>` : s.image ? `<figure class="fe-fig"><a href="${esc(fileUrl(s.image))}" target="_blank" rel="noopener noreferrer"><img src="${esc(imgUrl(s.image, 640))}" alt="${esc(s.name)}" loading="lazy" onerror="this.remove()"></a><figcaption>${esc(s.image)} · ${link(fileUrl(s.image), T('↗ auteur et licence'))}</figcaption></figure>` : `${window.LCNDA_APP.empty(T('Pas encore d’image. « ✎ Modifier » → une image de Wikimedia Commons (son nom de fichier) : l’auteur et la licence restent sur sa page.'))}`}</section>
             ${s.lat != null ? `<section class="fe-sec"><h4>${esc(T('🗺 Sur la carte'))}</h4>${miniMap(s)}</section>` : ''}
             <section class="fe-sec"><h4>${esc(T('📑 Sources'))}</h4>${sources.length ? `<ul class="fe-src-list">${sources.map(x => `<li>${x}</li>`).join('')}</ul>` : ''}<div data-fe-x="sources"></div><p class="muted">${esc(T('Ce que tu as écrit toi-même est marqué « ta saisie ». Tes sources se citent comme partout dans l’app, sur les actes.'))}</p></section>
         </article>`;
@@ -715,7 +715,7 @@
     /* ─────────── ⚙️ Réglages → 🏰⛪ Fiches des édifices ─────────── */
     async function drawMine(host) {
         const list = await allSites(true);
-        host.innerHTML = list.length ? `<ul class="fe-l">${list.map(siteLi).join('')}</ul>` : `<p class="muted">${esc(T('Aucune fiche pour l’instant. Elles se font depuis la fiche d’un village, la monographie, la petite fiche d’un château, ou un acte (« 🔗 Relier à une fiche ? »).'))}</p>`;
+        host.innerHTML = list.length ? `<ul class="fe-l">${list.map(siteLi).join('')}</ul>` : `${window.LCNDA_APP.empty(T('Aucune fiche pour l’instant. Elles se font depuis la fiche d’un village, la monographie, la petite fiche d’un château, ou un acte (« 🔗 Relier à une fiche ? »).'))}`;
     }
     async function drawSettings(token) {
         const ws = document.getElementById('workspace'); if (!ws) return;

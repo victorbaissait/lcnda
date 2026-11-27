@@ -216,7 +216,7 @@
             el.querySelectorAll('[data-rc-open]').forEach(x => x.addEventListener('click', () => ctx.openPage(Number(x.dataset.rcOpen))));
             el.querySelectorAll('[data-rs-goto]').forEach(x => x.addEventListener('click', () => ctx.openTab?.('sommaire')));
         }).catch(() => { el.textContent = ''; });
-        return `<p class="muted">${esc(T('Chargement du sommaire…'))}</p>`;
+        return `${window.LCNDA_UI.spinner(T('Chargement du sommaire…'))}`;
     }
     function pagePath(el, p, ctx) {
         if (!el || !p) return;

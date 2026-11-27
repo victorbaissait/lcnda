@@ -241,7 +241,7 @@
         const run = DL.run, pz = DL.paused, on = DL.online && DL.online.histoire;
         if (run) return `<span class="hist-dl" data-hist-dl-box><span class="hist-prog"><i style="width:${pct(run.received, run.size)}%"></i></span><small data-hist-dl-txt>${esc(pct(run.received, run.size) + ' %')}</small><button type="button" class="button small secondary" data-hist-dl-pause>⏸ ${esc(i18n('Pause'))}</button></span>`;
         if (pz) return `<span class="hist-dl"><span class="hist-prog"><i style="width:${pct(pz.received, pz.size)}%"></i></span><small>${esc(i18n('En pause : {p} %', {p: String(pct(pz.received, pz.size))}))}</small><button type="button" class="button small" data-hist-dl>▶ ${esc(i18n('Reprendre'))}</button><button type="button" class="button small secondary" data-hist-dl-cancel>✕ ${esc(i18n('Abandonner'))}</button></span>`;
-        if (DL.online === null) return `<small class="muted">${esc(i18n('Recherche des données en ligne…'))}</small>`;
+        if (DL.online === null) return `${window.LCNDA_UI.spinner(i18n('Recherche des données en ligne…'), {inline: true})}`;
         if (!on) return `<small class="muted" title="${esc(DL.err)}">${esc(DL.err ? i18n('Pas de connexion aux données en ligne.') : i18n('Pas encore en ligne.'))}</small>${st.removed ? `<button type="button" class="button small secondary" data-hist-restore>↶ ${esc(i18n('Remettre le pack supprimé'))}</button>` : ''}`;
         return `<button type="button" class="button small" data-hist-dl>⤓ ${esc(i18n('Installer ({s})', {s: fmtSize(on.size)}))}</button>`;
     }

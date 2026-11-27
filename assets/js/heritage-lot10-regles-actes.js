@@ -410,7 +410,7 @@
                 ${r.year ? '' : `<p class="muted"><small>${esc(T('Ajoute l’année pour avoir le jour de la semaine.'))}</small></p>`}
                 ${srcLine(T('Wikipédia, pages des jours (partie « Saints »)'), 'CC BY-SA 4.0', 'https://fr.wikipedia.org/wiki/Calendrier_liturgique_romain', ` · <small>${esc(T('Le calendrier des saints a changé selon les époques et les diocèses : choisis le saint qui convient.'))}</small>`)}`;
         }
-        return html || `<p class="muted">${esc(T('Aucune fête reconnue (il faut le nom du saint ; l’année donne le jour exact).'))}</p>`;
+        return html || `${window.LCNDA_APP.empty(T('Aucune fête reconnue (il faut le nom du saint ; l’année donne le jour exact).'))}`;
     }
     // la date d'un événement : si le calcul habituel (heritage-tools.js) ne reconnaît pas la fête, les saints du jour proposent leurs dates
     if (W.document) {
@@ -496,7 +496,7 @@
         // un seul mot part sur Internet : une phrase (venue d’un autre onglet, « le jour de la Sainte-Blandine 1750 ») n’est pas cherchée
         const words = String(q || '').trim().split(/\s+/).filter(Boolean), w = words.length === 1 ? words[0] : '';
         if (!w) { host.innerHTML = `${yearField(tabState)}<p class="cplus-lead">📚 ${esc(T('Écris un mot ancien (« bru », « ondoyer », « chartrier ») : son sens dans le Wiktionnaire et dans les dictionnaires anciens (Académie, Godefroy), en ligne.'))}</p>`; bindYear(host, () => renderMots(host, {q})); return; }
-        host.innerHTML = `${yearField(tabState)}${motsKnownHtml(w)}<p class="muted">${esc(T('Recherche en ligne…'))}</p>`; bindYear(host, () => renderMots(host, {q}));
+        host.innerHTML = `${yearField(tabState)}${motsKnownHtml(w)}${window.LCNDA_UI.spinner(T('Recherche en ligne…'))}`; bindYear(host, () => renderMots(host, {q}));
         clearTimeout(motsTimer);
         motsTimer = setTimeout(async () => { const r = await motsLookup(w); if (!host.isConnected && host.parentNode) return; host.innerHTML = `${yearField(tabState)}${motsHtml(r, Number(tabState.year) || null)}`; bindYear(host, () => renderMots(host, {q})); }, 500);
     }

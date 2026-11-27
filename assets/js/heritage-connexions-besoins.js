@@ -80,7 +80,7 @@
         return `<div class="cx-need" data-cx-need="${n.item_id}"><span class="cx-need-t" title="${esc(n.guessed ? T('Deviné d’après le titre de la piste : ✎ pour le préciser') : T('Ce que cette piste cherche'))}">🧩 <b>${esc(T('Il manque :'))}</b> ${ic} <span data-i18n-off>${esc(needTitle(n))}</span>${meta ? ` <small class="muted" data-i18n-off>· ${esc(meta)}</small>` : ''}${n.guessed ? ` <small class="muted">${esc(T('(deviné)'))}</small>` : ''}${n.hypothesis_id ? ` <button type="button" class="link-button cx-need-hyp" data-cx-need-hyp="${n.hypothesis_id}" title="${esc(T('Pour trancher l’hypothèse'))}">🤔 <span data-i18n-off>${esc(String(n.hypothesis || '').slice(0, 60))}</span></button>` : ''}</span>
             ${yes ? `<button type="button" class="cx-need-yes" data-cx-need-open aria-expanded="false" title="${esc(T('Ce que l’app a déjà : voir'))}">✓ ${nf(yes)}</button>` : `<button type="button" class="link-button cx-need-more" data-cx-need-open aria-expanded="false">${esc(T('Où le trouver ?'))}</button>`}
             ${kiosk() ? '' : `<button type="button" class="icon-button small" data-cx-need-edit title="${esc(T('Préciser ce qui manque'))}" aria-label="${esc(T('Préciser ce qui manque'))}">✎</button>`}
-            <div class="cx-need-ans" hidden>${(n.answers || []).map((a, i) => answerHtml(n, a, i)).join('') || `<p class="muted">${esc(T('Rien pour l’instant.'))}</p>`}</div></div>`;
+            <div class="cx-need-ans" hidden>${(n.answers || []).map((a, i) => answerHtml(n, a, i)).join('') || `${window.LCNDA_APP.empty(T('Rien pour l’instant.'))}`}</div></div>`;
     }
     async function paintInvestigation(page, data, id, reload) {
         if (!page || !enabled()) return;

@@ -152,7 +152,7 @@
     /* ─────────── 📝 une note écrite dans une autre langue ─────────── */
     function openDialog(text, lang) {
         const dlg = document.createElement('dialog'); dlg.className = 'td-dlg';
-        dlg.innerHTML = `<form method="dialog" class="td-dlg-head"><h3>🌐 ${esc(T('Traduction hors ligne'))}</h3><button class="icon-button" aria-label="${esc(T('Fermer'))}">✕</button></form>
+        dlg.innerHTML = `<form method="dialog" class="td-dlg-head"><h3>🌐 ${esc(T('Traduction hors ligne'))}</h3><button class="icon-button" aria-label="${esc(T('Fermer'))}">×</button></form>
             <p class="muted td-tr-src">${esc(text.slice(0, 600))}${text.length > 600 ? '…' : ''}</p><label>${esc(T('Langue du texte'))} <select data-tdt-lang>${['', ...Object.keys(LANGS), 'la'].map(k => `<option value="${k}" ${k === lang ? 'selected' : ''}>${esc(k ? (k === 'la' ? 'Latin' : T(LANGS[k])) : T('— à choisir —'))}</option>`).join('')}</select></label><div data-tdt-body></div>`;
         document.body.appendChild(dlg); dlg.addEventListener('close', () => dlg.remove()); dlg.showModal();
         const go = () => panel(dlg.querySelector('[data-tdt-body]'), {text, lang: dlg.querySelector('[data-tdt-lang]').value});

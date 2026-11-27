@@ -351,7 +351,7 @@
         } finally { fetching = false; const b = document.querySelector('[data-trr-base]'); if (b?.isConnected) api('tr_base_names', {}).then(r => { b.innerHTML = baseHtml(r); }).catch(() => {}); }
     }
     function baseHtml(r, busy = false) {
-        if (!r?.total) return `<p class="muted">${esc(T('Pas encore de prénoms dans ta base.'))}</p>`;
+        if (!r?.total) return `${window.LCNDA_APP.empty(T('Pas encore de prénoms dans ta base.'))}`;
         return `<p>${esc(T('{f} prénoms de ta base ont un sens connu, sur {t}.', {f: r.found, t: r.total}))}${r.left ? ` ${esc(T('{n} n’ont pas encore été cherchés.', {n: r.left}))}` : ''}</p>
             <div class="page-actions"><button type="button" class="button secondary" data-trr-fetch ${r.left && !busy && !kiosk() ? '' : 'disabled'}>${esc(busy ? T('On cherche sur le Wiktionnaire…') : T('📖 Chercher le sens des autres prénoms (en ligne)'))}</button></div>
             <p class="muted"><small>${esc(T('Seuls les prénoms partent sur Internet (jamais ceux des fiches confidentielles ni des personnes vivantes). Les réponses sont gardées sur l’ordinateur.'))}</small></p>`;

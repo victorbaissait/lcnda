@@ -662,7 +662,7 @@
         if (run) return `<span class="wx-dl" data-wx-dl-box="${k}"><span class="wx-prog"><i style="width:${pct(run.received, run.size)}%"></i></span><small data-wx-dl-txt>${esc(dlText(run))}</small><button type="button" class="button small secondary" data-wx-dl-pause="${k}">⏸ ${esc(i18n('Pause'))}</button></span>`;
         const imp = `<button type="button" class="button small secondary" data-wx-import="${k}" title="${esc(i18n('Un fichier .lcmeteo déjà téléchargé ou fabriqué'))}">⤒ ${esc(i18n('Importer un fichier…'))}</button>`;
         if (pz) return `<span class="wx-dl"><span class="wx-prog"><i style="width:${pct(pz.received, pz.size)}%"></i></span><small>${esc(i18n('En pause : {p} %', {p: String(pct(pz.received, pz.size))}))}</small><button type="button" class="button small" data-wx-dl="${k}">▶ ${esc(i18n('Reprendre'))}</button><button type="button" class="button small secondary" data-wx-dl-cancel="${k}">✕ ${esc(i18n('Abandonner'))}</button></span>`;
-        if (DL.online === null) return `<small class="muted">${esc(i18n('Recherche des données en ligne…'))}</small>${imp}`;
+        if (DL.online === null) return `${window.LCNDA_UI.spinner(i18n('Recherche des données en ligne…'), {inline: true})}${imp}`;
         if (!on) return `<small class="muted" title="${esc(DL.err)}">${esc(DL.err ? i18n('Pas de connexion aux données en ligne.') : i18n('Pas encore en ligne.'))}</small>${imp}<button type="button" class="link-button" data-wx-howto="${k}">${esc(i18n('Le fabriquer soi-même'))}</button>`;
         return `<button type="button" class="button small" data-wx-dl="${k}">⤓ ${esc(i18n('Installer ({s})', {s: fmtSize(on.size)}))}</button>${imp}`;
     }

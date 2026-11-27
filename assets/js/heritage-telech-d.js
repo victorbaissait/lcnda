@@ -370,7 +370,7 @@
         if (!res?.ok) { A().toast?.(res?.message || T('Article introuvable.'), 'error'); return; }
         memo.delete(`td_wiki|${JSON.stringify({insee, title: ''})}`);
         const dlg = document.createElement('dialog'); dlg.className = 'td-dlg td-wiki-dlg';
-        dlg.innerHTML = `<form method="dialog" class="td-dlg-head"><h3>📖 ${esc(res.title)}</h3><button class="icon-button" aria-label="${esc(T('Fermer'))}">✕</button></form>
+        dlg.innerHTML = `<form method="dialog" class="td-dlg-head"><h3>📖 ${esc(res.title)}</h3><button class="icon-button" aria-label="${esc(T('Fermer'))}">×</button></form>
             <div class="td-wiki-body">${res.sections.map(s => `${s.h ? `<h${s.lvl === 3 ? 5 : 4}>${esc(s.h)}</h${s.lvl === 3 ? 5 : 4}>` : ''}${s.text.split('\n').map(p => `<p>${esc(p)}</p>`).join('')}`).join('')}</div>
             <p class="muted td-wiki-foot">${esc(T('Texte de Wikipédia, gardé le {d}.', {d: new Date((res.fetched_at || Date.now() / 1000) * 1000).toLocaleDateString('fr-FR')}))} ${SRC.wiki(res)} ${srcLink(res.url)}${res.stale ? ` · ${esc(T('pas de connexion : version gardée'))}` : ''}</p>`;
         document.body.appendChild(dlg); dlg.addEventListener('close', () => dlg.remove()); dlg.showModal();
@@ -508,14 +508,14 @@
             <div class="maintenance-panel"><h3>${esc(T('Ce qui s’affiche'))}</h3><p class="muted">${esc(T('Sur la fiche d’une personne (bloc « 🧭 Mémoire et vieux papiers »), sur la fiche d’un village et dans la monographie de commune. Les listes sont dans Listes, les points dans Cartes.'))}</p>${PARTS.map(tg).join('')}</div>
             <div class="maintenance-panel" data-td-tr-panel></div>
             <div class="maintenance-panel"><h3>${esc(T('📖 Wikipédia hors ligne'))}</h3><p class="muted">${esc(T('Le fichier complet de Wikipédia en français (Kiwix, plus de 30 Go) est trop gros : l’app garde seulement les articles des communes que tu ouvres (bouton « 📖 Garder et lire » sur la fiche d’un village).'))}</p>
-                ${wl.length ? `<ul class="hist-ul td-ul">${wl.map(w => `<li>${link(w.url, w.title)} <small class="muted">(${esc(new Date(w.at * 1000).toLocaleDateString('fr-FR'))})</small></li>`).join('')}</ul>` : `<p class="muted">${esc(T('Aucun article gardé pour l’instant.'))}</p>`}</div>
+                ${wl.length ? `<ul class="hist-ul td-ul">${wl.map(w => `<li>${link(w.url, w.title)} <small class="muted">(${esc(new Date(w.at * 1000).toLocaleDateString('fr-FR'))})</small></li>`).join('')}</ul>` : `${window.LCNDA_APP.empty(T('Aucun article gardé pour l’instant.'))}`}</div>
             <div class="maintenance-panel"><h3>${esc(T('À propos des données'))}</h3><div class="cplus-scroll"><table class="data-table"><thead><tr><th>${esc(T('Sujet'))}</th><th>${esc(T('Source'))}</th><th>${esc(T('Lignes'))}</th><th>${esc(T('Licence'))}</th><th>${esc(T('Fabriqué le'))}</th></tr></thead><tbody>
                 ${fileRow('necropoles', '⚱️ Nécropoles')}${fileRow('camps', '🕯 Camps et maisons d’enfants')}${fileRow('jeux', '🎲 Jeux traditionnels')}${fileRow('latin', '📜 Latin (Wiktionnaire)')}${fileRow('almanachs', '📅 Almanachs')}
                 ${onl('loc', '📷 Photos de l’émigration')}${onl('wiki', '📖 Wikipédia')}${onl('ws', '📚 Wikisource')}
                 <tr><td>${esc(T('🎶 78 tours'))}</td><td colspan="4" class="muted">${esc(T('Déjà dans « 🔊 Sons et enfance » (Internet Archive, licence de chaque notice) : ici, l’année du mariage.'))}</td></tr></tbody></table></div>
                 <p class="muted">${esc(T('Ce qui part sur Internet : « Ellis Island » et des années, le code INSEE ou le nom de la commune. Jamais un nom de personne, et rien pour une fiche vivante ou confidentielle.'))}</p>
                 <p class="muted">${esc(T('Liens seulement (licence pas ouverte ou pas lisible) : Mémoire des hommes (sépultures de guerre), Gallica (almanachs, sons), Archives nationales d’outre-mer, la base des relais de poste de Cybergeo (licence pas vérifiée).'))}</p>
-                <p class="muted">${esc(T('Réponses gardées sur l’ordinateur : {n}.', {n: nf(about?.cache?.count || 0)}))} <button type="button" class="button small secondary" data-td-cache-clear>${esc(T('🗑 Vider'))}</button></p></div></section>`;
+                <p class="muted">${esc(T('Réponses gardées sur l’ordinateur : {n}.', {n: nf(about?.cache?.count || 0)}))} <button type="button" class="button small secondary" data-td-cache-clear>${esc(T('🗑 Effacer les réponses gardées'))}</button></p></div></section>`;
         ext.telechTraduire?.settingsInto?.(ws.querySelector('[data-td-tr-panel]'));
     }
     document.addEventListener('change', e => {

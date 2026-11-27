@@ -140,7 +140,7 @@
 
     function shellHtml(s) {
         return `<section class="place-monograph-section mp-sec no-export" data-mp="${esc(s.id)}" data-mp-state="wait"><header><span class="eyebrow">${esc(regLabel(s))}</span><strong hidden></strong></header>
-            <div class="mp-body">${UI().skeleton ? UI().skeleton(2) : `<p class="muted">${esc(T('Chargement…'))}</p>`}</div><p class="mp-src" hidden></p></section>`;
+            <div class="mp-body">${UI().skeleton ? UI().skeleton(2) : `${window.LCNDA_UI.spinner(T('Chargement…'))}`}</div><p class="mp-src" hidden></p></section>`;
     }
     function addShells() {
         if (!cur?.box) return;
@@ -210,7 +210,7 @@
     function addButton() {
         const strip = document.querySelector('#workspace .place-monograph-layout .tool-strip');
         if (!strip || strip.querySelector('[data-mp-custom]')) return;
-        const b = `<button type="button" class="button small secondary no-export" data-mp-custom aria-expanded="false" title="${esc(T('Choisir l’ordre des parties, en montrer ou en masquer'))}">⚙︎ ${esc(T('Personnaliser'))}</button>`;
+        const b = `<button type="button" class="button small secondary no-export" data-mp-custom aria-expanded="false" title="${esc(T('Choisir l’ordre des parties, en montrer ou en masquer'))}">⚙️ ${esc(T('Personnaliser'))}</button>`;
         const ex = strip.querySelector('.graph-export-toolbar'); if (ex) ex.insertAdjacentHTML('beforebegin', b); else strip.insertAdjacentHTML('beforeend', b);
     }
     function openPanel(toggle = true) {
@@ -238,7 +238,7 @@
                 ${top || ro ? '' : `<span class="mp-moves"><button type="button" class="icon-button small" data-mp-move="-1" aria-label="${esc(T('Monter'))}" title="${esc(T('Monter'))}">↑</button><button type="button" class="icon-button small" data-mp-move="1" aria-label="${esc(T('Descendre'))}" title="${esc(T('Descendre'))}">↓</button></span>`}</li>`; };
         const topIds = TOP.map(x => x[0]);
         const focusK = document.activeElement?.closest?.('.mp-panel li')?.dataset.k, focusWhat = document.activeElement?.dataset?.mpMove ?? (document.activeElement?.matches?.('[data-mp-show]') ? 'show' : '');
-        const html = `<div class="mp-panel-head"><strong>⚙︎ ${esc(T('Personnaliser la monographie'))}</strong><span class="spacer"></span><button type="button" class="icon-button" data-mp-close aria-label="${esc(T('Fermer'))}" title="${esc(T('Fermer'))}">✕</button></div>
+        const html = `<div class="mp-panel-head"><strong>⚙️ ${esc(T('Personnaliser la monographie'))}</strong><span class="spacer"></span><button type="button" class="icon-button" data-mp-close aria-label="${esc(T('Fermer'))}" title="${esc(T('Fermer'))}">×</button></div>
             ${ro ? `<p class="muted">${esc(T('Cet écran a sa propre organisation : elle se change dans son onglet (crayon de l’onglet).'))}</p>` : `<p class="muted">${esc(T('Glisse ⠿ (ou ↑ ↓) pour choisir l’ordre, décoche pour masquer. Une partie vide pour cette commune est passée toute seule.'))}</p>
             <label class="checkbox-line mp-local"><input type="checkbox" data-mp-local ${from === 'place' ? 'checked' : ''}> ${esc(T('Seulement pour cette commune ({c})', {c: name || T('celle-ci')}))}</label>`}
             <h4>${esc(T('En haut de la page'))}</h4><ul class="mp-list mp-top">${topIds.map(k => li(k, true)).join('')}</ul>

@@ -80,7 +80,7 @@
         const r = ctx.D().recueil;
         A().api('recueil_sens', {id: r.id}).then(d => { if (!el.isConnected) return; el.innerHTML = html(d); bindGaps(el, d, {recueil: r}); })
             .catch(e => { if (el.isConnected) el.innerHTML = `<p class="muted">${esc(e.message || '')}</p>`; });
-        return `<p class="muted">${esc(T('Calcul…'))}</p>`;
+        return `${window.LCNDA_UI.spinner(T('Calcul…'))}`;
     }
     /** sur la page d'un service d'archives : tous ses recueils ensemble */
     async function serviceBlock(el, s) {

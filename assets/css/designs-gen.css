@@ -7037,6 +7037,16 @@
 @media (max-width: 600px){
   :root[data-lc-density] .tsx-ul{padding-left:calc(18px * var(--lc-sp))}
 }
+/* lot-n2.css */
+:root[data-lc-density] .ln2-life{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .ln2-quote{padding-left:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .ln2-long{padding-right:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .ln2-panel{margin-top:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .ln2-opt{gap:calc(6px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .ln2-opt{margin-top:calc(10px * var(--lc-sp))}
+@media (max-width: 600px){
+  :root[data-lc-density] .ln2-ul{padding-left:calc(18px * var(--lc-sp))}
+}
 /* telech-k.css */
 :root[data-lc-density] .tkx-life{gap:calc(12px * var(--lc-sp))}
 :root[data-lc-density] .tkx-panel{margin-top:calc(12px * var(--lc-sp))}
@@ -8623,6 +8633,9 @@
 :root[data-lc-density] .ouc-oa-yy{gap:calc(4px * var(--lc-sp))}
 :root[data-lc-density] .ouc-oa-credit{margin-top:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .ouc-oa-no summary{margin-top:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .ouc-ukus .ouc-oa-go{gap:calc(8px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .ouc-ukus-set{margin-top:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .so27-place{gap:calc(4px * var(--lc-sp))}
 /* archives-dispo.css */
 :root[data-lc-density] .ad-why-acts{gap:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .ad-why-acts{margin-top:calc(12px * var(--lc-sp)) !important}

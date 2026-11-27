@@ -100,7 +100,7 @@
             const body = row('Service d’archives', svc) + row('Fonds', esc(r.fonds)) + row('Série', esc(r.series)) + row('Cote', esc(r.reference)) + row('Dates', esc(r.date_text))
                 + row('En ligne', safeUrl(r.url) ? `<a href="${esc(safeUrl(r.url))}" target="_blank" rel="noopener noreferrer">${esc(String(r.url).replace(/^https?:\/\//, '').slice(0, 60))} ↗</a>` : '')
                 + row('Lien d’une vue', r.view_url ? esc(T('vue = page + {n}', {n: String(r.view_offset || 0)})) : '') + row('Autre exemplaire', twin);
-            return `${body ? `<dl class="rf-dl">${body}</dl>` : `<p class="muted">${esc(T('Pas encore dit : « Modifier » → « 🏛 Où il est, qui peut le voir ».'))}</p>`}
+            return `${body ? `<dl class="rf-dl">${body}</dl>` : `${window.LCNDA_APP.empty(T('Pas encore dit : « Modifier » → « 🏛 Où il est, qui peut le voir ».'))}`}
                 <p class="rf-cite"><span class="muted">${esc(T('Citer :'))}</span> <q>${esc(citation(r))}</q> <button type="button" class="button small secondary" data-rf-cite>⧉ ${esc(T('Copier'))}</button></p>`;
         }
         if (type === 'access') {

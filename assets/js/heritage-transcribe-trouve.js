@@ -100,7 +100,7 @@
             const out = [];
             if (P.show.people) {
                 const ppl = rf.people;
-                out.push(`<section class="h-tf-sec" data-tf-sec="people">${head('people', ppl.length)}${ppl.map(card).join('') || `<p class="muted">${esc(i18n('Aucune personne repérée.'))}</p>`}
+                out.push(`<section class="h-tf-sec" data-tf-sec="people">${head('people', ppl.length)}${ppl.map(card).join('') || `${window.LCNDA_APP.empty(i18n('Aucune personne repérée.'))}`}
                     ${rf.rejected.length ? `<details class="h-tf-rej"${st.open.has('rej') ? ' open' : ''} data-tf-rej><summary>${esc(i18n('Écartés : pas des noms ({n})', {n: rf.rejected.length}))}</summary><ul>${rf.rejected.map(r => `<li><button type="button" class="link-button"${gotoAttr(r.s, r.e)}>${raw(r.label)}</button> <small class="muted">${esc(i18n({particle: 'finit par une particule seule', letters: 'lettres mal lues', common: 'mot courant', job: 'c’est un métier', place: 'c’est un lieu'}[r.why] || 'pas un nom'))}</small></li>`).join('')}</ul></details>` : ''}</section>`);
             }
             if (P.show.places) out.push(`<section class="h-tf-sec" data-tf-sec="places">${head('places', rf.places.length)}<div class="h-tf-list">${rf.places.map(p => { const m = st.match?.places?.[p.name] || [];

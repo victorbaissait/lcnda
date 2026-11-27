@@ -580,7 +580,7 @@
                 <tr><td>${esc(T('🐦🌼 Observations'))}</td><td>${link('https://www.gbif.org', 'GBIF.org')}</td><td>${esc(T('en ligne'))}</td><td>${esc(T('jeux de données CC0 et CC BY 4.0'))}</td><td></td></tr>
                 <tr><td>${esc(T('🐦 Chants'))}</td><td>${link('https://xeno-canto.org', 'xeno-canto')}</td><td>${esc(T('en ligne'))}</td><td>${esc(T('la licence de chaque enregistrement (souvent CC BY-NC-SA)'))}</td><td></td></tr></tbody></table></div>
                 ${certifTxt ? `<p class="muted">${esc(certifTxt)}</p>` : ''}${skipped ? `<p class="muted">${esc(T('Livres de cuisine écartés (pas encore libres) :'))}</p><ul class="hist-ul">${skipped}</ul>` : ''}
-                <p class="muted">${esc(T('Réponses gardées sur l’ordinateur : {n}.', {n: nf(about?.cache?.count || 0)}))} <button type="button" class="button small secondary" data-l9a-cache-clear>${esc(T('🗑 Vider'))}</button></p></div></section>`;
+                <p class="muted">${esc(T('Réponses gardées sur l’ordinateur : {n}.', {n: nf(about?.cache?.count || 0)}))} <button type="button" class="button small secondary" data-l9a-cache-clear>${esc(T('🗑 Effacer les réponses gardées'))}</button></p></div></section>`;
     }
     document.addEventListener('change', e => {
         const t = e.target.closest?.('[data-l9a-tg]'); if (!t || !e.target.matches('input')) return;

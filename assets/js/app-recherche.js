@@ -1107,7 +1107,7 @@
     /** le cadre « Décès INSEE » : en cours / nouveau / tout installer / ce qui est là */
     function imBoxHtml(){
         const s=IM.status;
-        if(!s)return `<p class="muted">${i18n('Lecture de ce qui est installé…')}</p>`;
+        if(!s)return `${window.LCNDA_UI.spinner(i18n('Lecture de ce qui est installé…'))}`;
         const ro=imKiosk(),inst=s.installed||{years:[],rows:0},on=s.online,job=s.job&&['running','paused','error'].includes(s.job.status)?s.job:null;
         const parts=[];
         if(job)parts.push(imJobHtml(job));
@@ -1309,7 +1309,7 @@
         if(!Number(s?.installed?.rows)){host.innerHTML=imKiosk()?'':`<p class="muted">⚰️ ${i18n('Les décès INSEE ne sont pas installés.')} <button type="button" class="button small" data-im-all>⤓ ${i18n('Tout installer (1970 → aujourd’hui)')}</button> <button type="button" class="button small secondary" data-im-years>${i18n('Seulement certaines années…')}</button></p>`;return;}
         const by=Number(p.birth_year||String(p.birth_date||'').match(/\d{4}/)?.[0]||0);
         const q={nom,prenom,limit:20,offset:0};if(by){q.birth_year_from=by-1;q.birth_year_to=by+1;}
-        host.innerHTML=`<p class="muted">${i18n('Recherche dans les décès INSEE…')}</p>`;
+        host.innerHTML=`${window.LCNDA_UI.spinner(i18n('Recherche dans les décès INSEE…'))}`;
         try{const r=await api('insee_search',q);host.innerHTML=r.rows?.length?`<p>${i18n('⚰️ {n} dans le fichier des décès de l’INSEE.',{n:plural(Number(r.total||0),'correspondance')})}</p>${inseeResultsTableHtml(r.rows)}`:'';}
         catch(error){host.innerHTML=`<p class="muted">${escapeHtml(error.message)}</p>`;}
     }

@@ -601,9 +601,9 @@
                 row(T('Montrer les vignettes'), T('Éteint : une icône à la place du dessin (plus rapide sur un vieil ordinateur).'), tog('thumbs', T('Montrer les vignettes'), p.thumbs)),
                 row(T('Demander avant de supprimer'), T('Éteint au départ : un diagramme supprimé va à la 🗑 Corbeille (30 jours) et « ↶ Annuler » le remet.'), tog('ask', T('Demander avant de supprimer'), p.ask)),
                 row(T('Montrer aussi mes graphiques'), T('Ceux de l’Éditeur de graphiques (Réglages), mêlés aux diagrammes, avec 📈.'), tog('graphs', T('Montrer aussi mes graphiques'), p.graphs))].join(''); };
-        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">📈 ${esc(T('Diagrammes'))}</span><h2>⚙ ${esc(T('Réglages de l’onglet'))}</h2></div><button class="icon-button" type="button" data-close aria-label="${esc(T('Fermer'))}">×</button></div>
+        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">📈 ${esc(T('Diagrammes'))}</span><h2>⚙️ ${esc(T('Réglages de l’onglet'))}</h2></div><button class="icon-button" type="button" data-close aria-label="${esc(T('Fermer'))}">×</button></div>
             <div class="modal-body dgo-setbody" data-dgo-setbody></div>
-            <div class="modal-actions"><button type="button" class="button secondary" data-dgo-setreset>↺ ${esc(T('Valeurs de départ'))}</button><span class="spacer"></span><button type="button" class="button" data-close>${esc(T('Fermer'))}</button></div>`;
+            <div class="modal-actions"><button type="button" class="button secondary" data-dgo-setreset>${esc(T('↺ Remettre comme au départ'))}</button><span class="spacer"></span><button type="button" class="button" data-close>${esc(T('Fermer'))}</button></div>`;
         document.body.appendChild(dlg); paint();
         const changed = () => { paint(); rerender(); };
         dlg.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return;

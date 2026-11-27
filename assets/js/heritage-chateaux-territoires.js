@@ -248,7 +248,7 @@
     }
     function dialog(title, body) {
         const d = document.createElement('dialog'); d.className = 'modal cht-dlg';
-        d.innerHTML = `<div class="modal-head"><h2>${esc(title)}</h2><button type="button" class="icon-button" data-cht-close aria-label="${esc(T('Fermer'))}" title="${esc(T('Fermer'))}">✕</button></div><div class="modal-body">${body}</div>`;
+        d.innerHTML = `<div class="modal-head"><h2>${esc(title)}</h2><button type="button" class="icon-button" data-cht-close aria-label="${esc(T('Fermer'))}" title="${esc(T('Fermer'))}">×</button></div><div class="modal-body">${body}</div>`;
         document.body.appendChild(d);
         d.addEventListener('close', () => d.remove());
         d.addEventListener('click', e => { if (e.target === d || e.target.closest('[data-cht-close]')) d.close(); if (e.target.closest('[data-cht-map]')) d.close(); });
@@ -444,7 +444,7 @@
     function popup(stage, x, y, html) {
         stage.querySelector('.cht-pop')?.remove();
         const d = document.createElement('div'); d.className = 'cht-pop'; d.style.left = Math.min(x, stage.clientWidth - 260) + 'px'; d.style.top = Math.min(y, stage.clientHeight - 120) + 'px';
-        d.innerHTML = `<button type="button" class="icon-button small" aria-label="${esc(T('Fermer'))}" data-cht-popclose>✕</button>${html}`;
+        d.innerHTML = `<button type="button" class="icon-button small" aria-label="${esc(T('Fermer'))}" data-cht-popclose>×</button>${html}`;
         stage.appendChild(d);
         d.querySelector('[data-cht-popclose]').addEventListener('click', ev => { ev.stopPropagation(); d.remove(); });
     }

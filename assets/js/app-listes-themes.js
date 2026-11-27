@@ -249,7 +249,7 @@
         const app = A(), I = index(), all = I.ds;
         host.innerHTML = '<section class="page collection-page ld-page ld-overview ldt-overview"></section>';
         picker(host.querySelector('.ldt-overview'), {onPaint: () => { try { ext.donneesOnglet?.arrangeCards?.(host.querySelector('.ldt-overview')); } catch (e) { console.error(e); } }, head: UI().pageHeader ? UI().pageHeader({where: `${T('Listes')} · 🧰 ${T('Données')}`, icon: '🧰', title: T('Toutes les données'), help: esc(T('Des listes toutes prêtes pour comprendre la vie de ta famille, rangées par thème. Lecture seule.')),
-            actions: [`<button type="button" class="button small secondary" data-ldt-settings title="${esc(T('Par thème ou par groupe, ce qu’ouvre un thème, le rayon « Dans la famille »'))}">⚙ ${esc(T('Réglages des listes'))}</button>`]}) : ''});
+            actions: [`<button type="button" class="button small secondary" data-ldt-settings title="${esc(T('Par thème ou par groupe, ce qu’ouvre un thème, le rayon « Dans la famille »'))}">⚙️ ${esc(T('Réglages des listes'))}</button>`]}) : ''});
         void token; void app; void all;
     }
     ext.dataListPicker = (box, o) => picker(box, o);

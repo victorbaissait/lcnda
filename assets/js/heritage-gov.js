@@ -177,7 +177,7 @@
         if (!host.isConnected) return;
         if (!r.installed || r.how === 'none') { host.hidden = true; return; }
         host.hidden = false;
-        const head = `<h4>🏰 ${esc(i18n('Ce lieu dans GOV'))} <button type="button" class="link-button gov-muted" data-gov-search>🔎 ${esc(i18n('Trouver un lieu ancien'))}</button></h4>`;
+        const head = `<h4>🏰 ${esc(i18n('Ce lieu dans GOV'))} <button type="button" class="link-button gov-muted" data-gov-search>🔍 ${esc(i18n('Trouver un lieu ancien'))}</button></h4>`;
         if (r.how === 'choose') {
             host.innerHTML = `${head}<p class="gov-muted">${esc(i18n('Plusieurs lieux de GOV portent ce nom : lequel est le tien ?'))}</p>${r.choices.map(c => `<div class="gov-choice"><span><b>${esc(c.name_today)}</b> <span class="gov-muted">${esc([c.type, c.where, c.km != null ? i18n('à {n} km', {n: c.km}) : ''].filter(Boolean).join(' · '))}</span></span>
                 <span class="gov-acts">${kiosk() ? '' : `<button type="button" class="button small" data-gov-link="${esc(c.gov)}" data-gov-place-id="${pid}">${esc(i18n('C’est celui-ci'))}</button>`}<button type="button" class="button small secondary" data-gov-open="${esc(c.gov)}">🏰</button></span></div>`).join('')}${srcLine()}`;
@@ -315,7 +315,7 @@
                     ${K(i18n('Sur la page d’un lieu'), {checked: s.place, attrs: 'data-gov-opt="place"', sub: i18n('« 🏰 Ce lieu dans GOV » : anciens noms, paroisse, Kreis, province, État.')})}
                     ${K(i18n('Sous les événements des fiches'), {checked: s.events, attrs: 'data-gov-opt="events"', sub: i18n('« 🏰 en 1870 : Kirchspiel…, Kreis…, Province de… »')})}
                     ${K(i18n('Dans le choix d’un lieu'), {checked: s.picker, attrs: 'data-gov-opt="picker"', sub: i18n('« 🏰 Chercher dans les lieux anciens (GOV) »')})}
-                    <p><button type="button" class="button" data-gov-search ${st.installed ? '' : 'disabled'}>🔎 ${esc(i18n('Trouver un lieu ancien'))}</button></p>
+                    <p><button type="button" class="button" data-gov-search ${st.installed ? '' : 'disabled'}>🔍 ${esc(i18n('Trouver un lieu ancien'))}</button></p>
                 </section></section>`;
         };
         draw();

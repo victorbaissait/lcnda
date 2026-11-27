@@ -22,7 +22,7 @@
         dg.addEventListener('cancel', e => { if (busy) { e.preventDefault(); stop = true; return; } close(); });
         const look = async () => {
             const url = $('[data-rq-url]').value.trim(); if (!url) return;
-            $('[data-rq-info]').innerHTML = `<p class="muted">${esc(T('Lecture du manifeste…'))}</p>`; $('[data-rq-go]').disabled = true;
+            $('[data-rq-info]').innerHTML = `${window.LCNDA_UI.spinner(T('Lecture du manifeste…'))}`; $('[data-rq-go]').disabled = true;
             try { info = await A().api('recueil_iiif_preview', {url}); }
             catch (e) { info = null; $('[data-rq-info]').innerHTML = `<div class="ui-msg is-error">⛔ ${esc(e.message)}</div>`; return; }
             const L = info.labels || [];

@@ -199,8 +199,8 @@
 
     document.addEventListener('input', e => {
         const f = e.target.closest?.('[data-lp-filter]'); if (!f) return;
-        const q = f.value.trim().toLowerCase();
-        f.parentElement.querySelectorAll('.lp-ld > li, .lp-places > li').forEach(li => { li.hidden = !!q && !li.textContent.toLowerCase().includes(q); });
+        const q = f.value.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        f.parentElement.querySelectorAll('.lp-ld > li, .lp-places > li').forEach(li => { li.hidden = !!q && !li.textContent.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(q); });
     });
     document.addEventListener('click', e => {
         const t = e.target;
@@ -286,7 +286,7 @@
                 if (DL.queue.includes(key)) return `<td><small class="muted">${esc(T('en attente'))}</small></td>`;
                 if (p) return `<td>${UI().badge ? UI().badge(T('Installé'), 'green') : '✓'} <small>${esc(fmtSize(p.size))} · ${esc(nf(p.count))}</small>${kiosk() ? '' : ` <button type="button" class="icon-button" data-lp-remove="${esc(key)}" title="${esc(T('🗑 Supprimer'))}">🗑</button>`}</td>`;
                 if (DL.paused[key]) return `<td><button type="button" class="button small" data-lp-install-one="${esc(key)}">▶ ${esc(T('Reprendre'))}</button></td>`;
-                if (DL.online === null) return `<td><small class="muted">${esc(T('Recherche des données en ligne…'))}</small></td>`;
+                if (DL.online === null) return `<td>${window.LCNDA_UI.spinner(T('Recherche des données en ligne…'), {inline: true})}</td>`;
                 if (!on) return `<td><small class="muted" title="${esc(DL.err)}">${esc(DL.err ? T('Pas de connexion') : T('Pas encore en ligne'))}</small></td>`;
                 return `<td><button type="button" class="button small secondary" data-lp-install-one="${esc(key)}" ${kiosk() ? 'disabled' : ''}>⤓ ${esc(fmtSize(on.size))}</button></td>`;
             };

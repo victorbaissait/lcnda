@@ -73,7 +73,7 @@
         };
         async function load(append = false) {
             const n = ++loading, b = bar?.state || {q: '', filters: {}, sort: 'recent'};
-            if (!append) body.innerHTML = U.skeleton ? U.skeleton(5) : `<p class="muted">${esc(i18n('Chargement…'))}</p>`;
+            if (!append) body.innerHTML = U.skeleton ? U.skeleton(5) : `${window.LCNDA_UI.spinner(i18n('Chargement…'))}`;
             try {
                 const r = await A().api('act_transcriptions_page', params(b, append ? items.length : 0));
                 if (n !== loading || !isCurrent()) return;

@@ -776,7 +776,7 @@
         return acts.map((a, i) => { const st = TXST[a.status] || TXST.doing;
             const meta = [a.place, a.date_text, a.source, a.zones ? A().plural(a.zones, 'zone') : ''].filter(Boolean).join(' · ');
             return `<section class="card ong-sec ong-trsec" data-ong-act="${a.id}"><div class="ong-sh"><h3>📜 ${esc(acts.length > 1 ? a.title || T('Transcription') : T('Transcription'))}</h3>${bdg(ext.actKindLabel ? ext.actKindLabel(a.kind) : a.kind, 'grey')}${bdg(T(st[0]), st[1])}<span class="spacer"></span>${open(a.id)}${i === 0 ? wp : ''}</div>
-                ${acts.length === 1 && a.title ? `<p class="ong-trtitle">${esc(a.title)}</p>` : ''}${a.reason && ext.txCtx ? `<p class="ong-trwhy">${ext.txCtx.reasonHtml(a.reason)}</p>` : ''}${String(a.body || '').trim() ? trText(a.body) : `<p class="muted">${esc(T('Rien d’écrit pour l’instant.'))}</p>`}
+                ${acts.length === 1 && a.title ? `<p class="ong-trtitle">${esc(a.title)}</p>` : ''}${a.reason && ext.txCtx ? `<p class="ong-trwhy">${ext.txCtx.reasonHtml(a.reason)}</p>` : ''}${String(a.body || '').trim() ? trText(a.body) : `${window.LCNDA_APP.empty(T('Rien d’écrit pour l’instant.'))}`}
                 ${meta ? `<p class="ong-trmeta">${esc(meta)}</p>` : ''}</section>`; }).join('');
     }
     /** les noms relevés dans l'Atelier pas encore reliés à une fiche (ils se relient dans l'Atelier, ou sur la fiche qui leur ressemble) */
@@ -865,7 +865,7 @@
             <span class="ong-zoombar"><button type="button" class="icon-button small" data-ong-zoom="-1" aria-label="${esc(T('Zoom arrière'))}" title="${esc(T('Zoom arrière'))}">−</button><output data-ong-zoomval>100 %</output><button type="button" class="icon-button small" data-ong-zoom="1" aria-label="${esc(T('Zoom avant'))}" title="${esc(T('Zoom avant'))}">＋</button><button type="button" class="button small secondary" data-ong-zoom="0">${esc(T('Taille d’origine'))}</button>
             <label class="checkbox-line ong-linkscroll"><input type="checkbox" data-ong-linkscroll ${readPref().linkScroll === false ? '' : 'checked'}> ${esc(T('Défilement lié'))}</label></span></div>
             <div class="ong-sbs-grid"><div class="ong-zoombox" data-ong-zoombox tabindex="0" aria-label="${esc(T('Image : molette pour zoomer, glisser pour se déplacer'))}"><img src="${src}" alt="" draggable="false" data-ong-zoomimg></div>
-            <div class="ong-sbs-text" data-ong-sbstext>${tx.trim() ? trText(tx) : `<p class="muted">${esc(T('Pas encore de transcription : « 📜 Atelier de transcription » pour l’écrire.'))}</p>`}</div></div>`;
+            <div class="ong-sbs-text" data-ong-sbstext>${tx.trim() ? trText(tx) : `${window.LCNDA_APP.empty(T('Pas encore de transcription : « 📜 Atelier de transcription » pour l’écrire.'))}`}</div></div>`;
     }
     function bindSbs(sec) {
         const box = sec.querySelector('[data-ong-zoombox]'), img = sec.querySelector('[data-ong-zoomimg]'), text = sec.querySelector('[data-ong-sbstext]'), out = sec.querySelector('[data-ong-zoomval]');

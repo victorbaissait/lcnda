@@ -325,7 +325,7 @@
         if (typeof node === 'string' && node.startsWith('v_')) items = viewFilter(navEntry(node)?.filter || {}, items);
         if (v.type) items = items.filter(i => tkey(i) === v.type);
         if (v.tags.length) items = items.filter(i => v.tags.every(t => (i.tags || []).includes(t)));
-        if (v.q) { const q = v.q.toLowerCase(); items = items.filter(i => [i.title, JSON.stringify(i.data), (i.tags || []).join(' ')].join(' ').toLowerCase().includes(q)); }
+        if (v.q) { const m = (window.LCNDA_UI?.listMatch?.text || ((q, ...h) => h.join(' ').toLowerCase().includes(String(q).toLowerCase()))); items = items.filter(i => m(v.q, i.title, JSON.stringify(i.data), (i.tags || []).join(' '))); } // C1 : sans accents ni majuscules
         const s = v.sort, key = i => s.col === 'creator' ? firstAuthor(i) || i.data?.creator || '' : s.col === 'year' ? dateKey(i) : s.col === 'type' ? tl(i) : s.col === 'added' ? i.created_at : i.title;
         return items.sort((a, b) => { const x = String(key(a) || ''), y = String(key(b) || ''); if (!x !== !y) return x ? -1 : 1; return x.localeCompare(y, 'fr', {numeric: true, sensitivity: 'base'}) * s.dir; });
     }

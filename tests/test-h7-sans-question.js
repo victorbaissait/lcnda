@@ -28,9 +28,16 @@ step('plus de question avant pour ce qui se défait', () => {
         ['assets/js/heritage-records.js', "confirmBox('Retirer cette ligne ?'"],
         ['assets/js/heritage-recueils.js', 'Retirer cette photo du recueil ?'],
         ['assets/js/heritage-recueils.js', 'Détacher'],
+        // harmonisation des comportements (26/11) : ce qui se défait ne demande plus avant
+        ['assets/js/heritage-pets.js', 'Supprimer ce champ ?'],
+        ['assets/js/heritage-pets.js', 'Supprimer cette catégorie et ses champs ?'],
+        ['assets/js/heritage-pets.js', 'Supprimer cette espèce ?'],
+        ['assets/js/heritage-links.js', 'Supprimer cette langue ?'],
+        ['assets/js/app-jeu.js', 'La partie et sa progression seront supprimées.'],
+        ['assets/js/app-listes-perso.js', '↶ Annuler reste possible.'],
     ];
     for (const [f, s] of gone) assert.ok(!read(f).includes(s), `${f} contient encore « ${s} »`);
-    for (const f of ['heritage-atelier-widgets', 'heritage-depouillements', 'heritage-records', 'heritage-recueils']) assert.match(read(`assets/js/${f}.js`), /undoToast\(/, f);
+    for (const f of ['heritage-atelier-widgets', 'heritage-depouillements', 'heritage-records', 'heritage-recueils', 'heritage-links']) assert.match(read(`assets/js/${f}.js`), /undoToast\(/, f);
 });
 
 const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'carnet-h7-'));

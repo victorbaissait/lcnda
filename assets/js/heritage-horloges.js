@@ -289,7 +289,7 @@
             <div class="hz-offs">${all.map(o => `<label class="hz-off${used.includes(o) ? ' is-used' : ''}${P.custom[String(o)] ? ' is-own' : ''}"><input type="color" value="${offColor(o, P)}" data-hzc-off="${o}"><span>${esc(fmtOffset(o))}</span>${P.custom[String(o)] ? `<button type="button" class="icon-button small" data-hzc-reset="${o}" title="${esc(T('Revenir à la couleur du jeu'))}" aria-label="${esc(T('Revenir à la couleur du jeu'))}">↺</button>` : ''}</label>`).join('')}</div>`; };
         dg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">🕰 ${esc(T('Heures du monde'))}</span><h2>🎨 ${esc(T('Couleurs des fuseaux'))}</h2></div><button type="button" class="icon-button" data-hzc-x aria-label="${esc(T('Fermer'))}">×</button></div>
             <div data-hzc-body></div>
-            <div class="modal-actions"><button type="button" class="button secondary" data-hzc-all>↺ ${esc(T('Tout remettre comme au départ'))}</button><span class="spacer"></span><button type="button" class="button secondary" data-hzc-x>${esc(T('Annuler'))}</button><button type="button" class="button" data-hzc-ok>${esc(T('Enregistrer'))}</button></div></form>`;
+            <div class="modal-actions"><button type="button" class="button secondary" data-hzc-all>${esc(T('↺ Remettre comme au départ'))}</button><span class="spacer"></span><button type="button" class="button secondary" data-hzc-x>${esc(T('Annuler'))}</button><button type="button" class="button" data-hzc-ok>${esc(T('Enregistrer'))}</button></div></form>`;
         dg.showModal(); paint();
         const close = () => { dg.close(); dg.parentNode?.removeChild(dg); };
         dg.addEventListener('input', e => { const o = e.target.dataset.hzcOff, a = e.target.dataset.hzcAtlas; if (o !== undefined) { P.custom[o] = e.target.value; e.target.closest('.hz-off').classList.add('is-own'); } if (a !== undefined) { P.atlas[Number(a)] = e.target.value; } });
@@ -487,7 +487,7 @@
         dg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">🕰 ${esc(T('Heures du monde'))}</span><h2>🎨 ${esc(T('Style des horloges'))}</h2></div><button type="button" class="icon-button" data-hz-x aria-label="${esc(T('Fermer'))}">×</button></div>
             <div class="hz-presets">${PRESETS.map(([n], i) => `<button type="button" class="button small secondary" data-hz-preset="${i}">${esc(T(n))}</button>`).join('')}</div>
             <div class="hz-sgrid"><div data-hz-form>${styleFormHtml(st)}</div><div class="hz-prev" data-hz-prev></div></div>
-            <div class="modal-actions"><button type="button" class="button secondary" data-hz-reset>↺ ${esc(T('Comme au départ'))}</button><span class="spacer"></span><button type="button" class="button secondary" data-hz-x>${esc(T('Annuler'))}</button><button type="button" class="button" data-hz-ok>${esc(T('Enregistrer'))}</button></div></form>`;
+            <div class="modal-actions"><button type="button" class="button secondary" data-hz-reset>${esc(T('↺ Remettre comme au départ'))}</button><span class="spacer"></span><button type="button" class="button secondary" data-hz-x>${esc(T('Annuler'))}</button><button type="button" class="button" data-hz-ok>${esc(T('Enregistrer'))}</button></div></form>`;
         dg.showModal(); prev();
         const close = () => { dg.close(); dg.parentNode?.removeChild(dg); };
         dg.addEventListener('input', () => { st = {...st, ...readStyle(dg)}; const sv = dg.querySelector('[data-hz-sv="size"]'); if (sv) sv.textContent = `${st.size} px`; prev(); });

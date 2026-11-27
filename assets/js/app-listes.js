@@ -447,8 +447,8 @@
         const rows=externalLinks();
         const countries=[...new Set(rows.map(row=>String(row.country||'').trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'fr',{sensitivity:'base'}));
         // H10 : recherche, filtre Pays, Liste | Fiches et tri dans la barre commune (retenus : « lcnda-listbar:listes:external_links »)
-        const pick=()=>{const q=(state.externalLinksQuery||'').toLowerCase(),sortMode=state.externalLinksSort||'created_desc';
-            const filtered=rows.filter(row=>(!q||[row.name,row.url,row.category,row.description,row.access,row.cost,row.country].some(value=>String(value||'').toLowerCase().includes(q)))&&(!state.externalLinksCountry||String(row.country||'')===state.externalLinksCountry));
+        const pick=()=>{const q=(state.externalLinksQuery||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''),sortMode=state.externalLinksSort||'created_desc';
+            const filtered=rows.filter(row=>(!q||[row.name,row.url,row.category,row.description,row.access,row.cost,row.country].some(value=>String(value||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(q)))&&(!state.externalLinksCountry||String(row.country||'')===state.externalLinksCountry));
             return [...filtered].sort((a,b)=>{
                 if(sortMode==='alpha')return String(a.name||'').localeCompare(String(b.name||''),'fr',{sensitivity:'base'});
                 if(sortMode==='alpha_desc')return String(b.name||'').localeCompare(String(a.name||''),'fr',{sensitivity:'base'});

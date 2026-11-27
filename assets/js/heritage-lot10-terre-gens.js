@@ -502,7 +502,7 @@
 
     /* ═════════════ les clics ═════════════ */
     async function findParcel(out, insee, lieudit, pid, placeId) {
-        out.innerHTML = `<p class="muted">${esc(T('Recherche en ligne…'))}</p>`;
+        out.innerHTML = `${window.LCNDA_UI.spinner(T('Recherche en ligne…'))}`;
         const r = await api('l10t_parcelle', {insee, lieudit}).catch(e => ({ok: false, message: e.message}));
         out.innerHTML = parcelleHtml(r, {pid, place: placeId ? {id: placeId} : null});
     }

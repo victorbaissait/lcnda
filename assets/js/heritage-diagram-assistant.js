@@ -175,7 +175,7 @@
         const out = box.querySelector('[data-dga-out]'), inp = box.querySelector('[data-dga-q]');
         const run = async () => {
             const text = inp.value.trim(); if (!text) { out.innerHTML = ''; return; }
-            out.innerHTML = `<p class="muted">${esc(i18n('Lecture de ta généalogie…'))}</p>`;
+            out.innerHTML = `${window.LCNDA_UI.spinner(i18n('Lecture de ta généalogie…'))}`;
             try {
                 const base = await loadD(), r = suggest(text, base), q = r.q;
                 const chips = [q.subject && i18n({births: 'naissances', deaths: 'décès', marriages: 'mariages', agedeath: 'âge au décès', agemarriage: 'âge au mariage', firstnames: 'prénoms', surnames: 'noms de famille', occupations: 'métiers', origins: 'lieux de naissance', migrations: 'migrations', distance: 'distances', months: 'mois', lifespans: 'vies', uncertain: 'dates approchées', alliances: 'mariages entre familles', ancestors: 'ancêtres'}[q.subject]), q.place && i18n('lieu : {p}', {p: q.place}), q.surname && i18n('nom : {n}', {n: q.surname}), q.sex === 'm' ? i18n('hommes') : q.sex === 'f' ? i18n('femmes') : '', q.from || q.to ? `${q.from || '…'} → ${q.to || '…'}` : '', ...q.intents.map(x => i18n({compare: 'comparer', evolution: 'évolution', share: 'répartition', top: 'classement', map: 'carte', flow: 'parcours'}[x]))].filter(Boolean);

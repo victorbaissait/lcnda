@@ -350,7 +350,7 @@
         if (kind === 'chiffres') {
             const d = depOf(ins); if (!d) return '';
             const D = await rowsOf('territoire'); if (!D.meta) return '';
-            const picks = sgfPick(D.meta, d, [/^Population totale.*(18[0-3]\d)/i, /superficie|étendue/i], null);
+            const picks = sgfPick(D.meta, d, [/^Population totale.*(18[0-3]\d)/i, /^(Superficie|Étendue \(en hectares\))/i], null);
             if (!picks.length) return '';
             const pop = picks.filter(x => /^Population totale/i.test(x.label)).sort((a, b) => (a.y ?? 0) - (b.y ?? 0));
             const x = pop[0] || picks[0], z = pop.at(-1);

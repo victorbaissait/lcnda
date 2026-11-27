@@ -2087,7 +2087,7 @@
             <label>Disposition de « ＋ Diapositive »<select data-knp="layout">${opt(LAYOUTS, p.layout)}</select></label>
             <label>Aimanter les objets (guides)<select data-knp="snap">${opt([['1', 'Oui'], ['0', 'Non']], p.snap === false ? '0' : '1')}</select></label>
             <label>Couleur du pointeur laser<input type="color" data-knp="laser" value="${esc(hexOk(p.laser) ? p.laser : '#ff2d2d')}"></label></div>
-            <div class="h-mtp-row"><button type="button" class="button small secondary" data-knp-reset>↺ Réglages de départ</button></div>
+            <div class="h-mtp-row"><button type="button" class="button small secondary" data-knp-reset>↺ Remettre comme au départ</button></div>
             <p class="muted">Les boutons du haut, les onglets et les sections de l’inspecteur se rangent, se montrent ou se cachent dans « Boutons et options » (éditeur 🎤 Présentation), avec ses raccourcis clavier.</p>`; },
         bind: (box, redraw) => {
             box.addEventListener('change', e => { const k = e.target.dataset.knp; if (!k) return; const p = readJ(PREF, {}); let v = e.target.value; if (['w', 'h', 'transDur'].includes(k)) v = Number(v); if (k === 'snap') v = v === '1'; p[k] = v; writeJ(PREF, p); toast(i18n('Enregistré.')); if (k === 'aspect') redraw(); });

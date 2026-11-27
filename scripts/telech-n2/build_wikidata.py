@@ -94,25 +94,31 @@ def ordres(out):
 def patrons(out):
     rows = {}
     for prop in ('P825', 'P417'):
-        B = wm.sparql(f'''SELECT ?it ?itLabel ?s ?sLabel ?feastLabel ?inc ?c ?ins ?comLabel WHERE {{
+        B = wm.sparql(f'''SELECT ?it (SAMPLE(?n) AS ?name) ?s (SAMPLE(?sn) AS ?sname) (SAMPLE(?c) AS ?coord) (SAMPLE(?i) AS ?ins) (SAMPLE(?cn) AS ?com) WHERE {{
   ?it wdt:{prop} ?s ; wdt:P17 wd:Q142 .
-  OPTIONAL {{ ?s wdt:P841 ?feast }} OPTIONAL {{ ?it wdt:P571 ?inc }} OPTIONAL {{ ?it wdt:P625 ?c }}
-  OPTIONAL {{ ?it wdt:P131 ?com . ?com wdt:P374 ?ins }}
-  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "fr,en". }} }}''')
+  OPTIONAL {{ ?it rdfs:label ?n . FILTER(lang(?n) = "fr") }} OPTIONAL {{ ?s rdfs:label ?sn . FILTER(lang(?sn) = "fr") }}
+  OPTIONAL {{ ?it wdt:P625 ?c }} OPTIONAL {{ ?it wdt:P131 ?cm . ?cm wdt:P374 ?i . OPTIONAL {{ ?cm rdfs:label ?cn . FILTER(lang(?cn) = "fr") }} }}
+}} GROUP BY ?it ?s''')
         for b in B:
             q, sq = q_of(v(b, 'it')), q_of(v(b, 's'))
-            n, sn = v(b, 'itLabel'), v(b, 'sLabel')
+            n, sn = v(b, 'name'), v(b, 'sname')
             if not label_ok(n, q) or not label_ok(sn, sq):
                 continue
-            lat, lon = pt(v(b, 'c'))
-            r = rows.setdefault(q, {'q': q, 'n': n, 's': [], 'feast': '', 'from': year(v(b, 'inc')), 'lat': lat, 'lon': lon, 'ins': v(b, 'ins'), 'commune': v(b, 'comLabel')})
+            lat, lon = pt(v(b, 'coord'))
+            r = rows.setdefault(q, {'q': q, 'n': n, 's': [], 'feast': '', 'from': None, 'lat': lat, 'lon': lon, 'ins': v(b, 'ins'), 'commune': v(b, 'com')})
             if [sq, sn] not in r['s']:
                 r['s'].append([sq, sn])
-            f = v(b, 'feastLabel')
-            if f and not r['feast'] and not re.fullmatch(r'Q\d+', f):
-                r['feast'] = f
             if not r['ins'] and v(b, 'ins'):
-                r['ins'], r['commune'] = v(b, 'ins'), v(b, 'comLabel')
+                r['ins'], r['commune'] = v(b, 'ins'), v(b, 'com')
+    # la fête de chaque saint (P841), par paquets de saints
+    saints = sorted({s[0] for r in rows.values() for s in r['s']})
+    feast = {}
+    for i in range(0, len(saints), 300):
+        vals = ' '.join('wd:' + x for x in saints[i:i + 300])
+        for b in wm.sparql(f'''SELECT ?s (SAMPLE(?fl) AS ?f) WHERE {{ VALUES ?s {{ {vals} }} ?s wdt:P841 ?d . ?d rdfs:label ?fl . FILTER(lang(?fl) = "fr") }} GROUP BY ?s'''):
+            feast[q_of(v(b, 's'))] = v(b, 'f')
+    for r in rows.values():
+        r['feast'] = next((feast[s[0]] for s in r['s'] if feast.get(s[0])), '')
     rs = sorted((r for r in rows.values() if r['ins'] or r['lat'] is not None), key=lambda r: (r['ins'], r['n']))
     fields = ['q', 'n', 's', 'feast', 'from', 'lat', 'lon', 'ins', 'commune']
     meta = {**CC0, 'built': wm.today(), 'url': 'https://www.wikidata.org/wiki/Property:P825',

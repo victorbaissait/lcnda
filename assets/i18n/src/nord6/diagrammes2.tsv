@@ -1306,7 +1306,7 @@ Aucun événement avec un lieu pour ce choix. ¦ Šiam pasirinkimui nėra įvyki
 {what} de la famille ¦ Šeimos {what} ¦ Ģimenes {what} ¦ Suguvõsa {what}
 {n} pris dans l’arbre (les 12 000 premiers). ¦ Paimta iš medžio: {n} (pirmieji 12 000). ¦ Paņemts no koka: {n} (pirmie 12 000). ¦ Sugupuust võetud: {n} (esimesed 12 000).
 {n} pris dans l’arbre. ¦ Paimta iš medžio: {n}. ¦ Paņemts no koka: {n}. ¦ Sugupuust võetud: {n}.
-{n} : « 🔎 Retrouver les lieux sans position ». ¦ {n}: „🔎 Surasti vietas be koordinačių“. ¦ {n}: „🔎 Atrast vietas bez koordinātām“. ¦ {n}: „🔎 Leia koordinaatideta kohad“.
+{n} : « 🔍 Retrouver les lieux sans position ». ¦ {n}: „🔍 Surasti vietas be koordinačių“. ¦ {n}: „🔍 Atrast vietas bez koordinātām“. ¦ {n}: „🔍 Leia koordinaatideta kohad“.
 Ses événements (naissance, baptême, mariages, résidences, métiers, décès…) deviennent les étapes, dans l’ordre des dates. Le tableau est remplacé. ¦ Jo ar jos įvykiai (gimimas, krikštas, santuokos, gyvenamosios vietos, profesijos, mirtis…) tampa etapais pagal datų tvarką. Lentelė pakeičiama. ¦ Viņa vai viņas notikumi (dzimšana, kristības, laulības, dzīvesvietas, profesijas, nāve…) kļūst par posmiem datumu secībā. Tabula tiek aizstāta. ¦ Tema sündmused (sünd, ristimine, abielud, elukohad, ametid, surm…) muutuvad etappideks kuupäevade järjekorras. Tabel asendatakse.
 Garder aussi les étapes sans lieu (sur la frise seulement) ¦ Palikti ir etapus be vietos (tik laiko juostoje) ¦ Saglabāt arī posmus bez vietas (tikai laika joslā) ¦ Jäta alles ka kohata etapid (ainult ajajoonel)
 Aucun événement avec un lieu pour cette personne. ¦ Šis asmuo neturi įvykių su vieta. ¦ Šai personai nav neviena notikuma ar vietu. ¦ Sellel isikul pole ühtegi kohaga sündmust.

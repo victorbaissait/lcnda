@@ -76,7 +76,7 @@
             <div class="form-grid ias-form"><label>${esc(T('Adresse du serveur'))}<input type="text" name="ias_url" value="${esc(cfg.url)}" placeholder="${esc(DEFAULTS[cfg.kind])}" spellcheck="false" autocomplete="off" inputmode="url"></label>
                 <label data-ias-keyrow ${cfg.kind === 'ollama' ? 'hidden' : ''}>${esc(T('Clé d’API locale (facultative)'))}<input type="password" name="ias_key" value="" autocomplete="off" spellcheck="false" placeholder="${esc(cfg.has_key ? T('•••• déjà enregistrée (laisser vide pour la garder)') : 'sk-unsloth-…')}"></label></div>
             <p class="ui-hint" data-ias-hint></p>
-            <div class="aia-row"><button type="button" class="button small" data-ias-save>💾 ${esc(T('Enregistrer'))}</button><button type="button" class="button small secondary" data-ias-test>↻ ${esc(T('Tester la connexion'))}</button><button type="button" class="button small secondary" data-ias-detect>🔎 ${esc(T('Chercher sur cet ordinateur'))}</button></div>
+            <div class="aia-row"><button type="button" class="button small" data-ias-save>💾 ${esc(T('Enregistrer'))}</button><button type="button" class="button small secondary" data-ias-test>↻ ${esc(T('Tester la connexion'))}</button><button type="button" class="button small secondary" data-ias-detect>🔍 ${esc(T('Chercher sur cet ordinateur'))}</button></div>
             <div data-ias-out aria-live="polite"></div>
             <p class="ui-hint">🔒 ${esc(T('Seulement sur cet ordinateur (127.0.0.1, localhost ou ::1, en http://) : toute autre adresse est refusée, rien ne part sur Internet. Les règles de vie privée ne changent pas (vivants et fiches 🔒 jamais transmis).'))}</p>`;
         const $ = s => host.querySelector(s);
@@ -122,7 +122,7 @@
                 return;
             }
             if (b.matches('[data-ias-detect]')) {
-                busy(b, true); out.innerHTML = `<p class="muted">${esc(T('Recherche des serveurs d’IA sur cet ordinateur…'))}</p>`;
+                busy(b, true); out.innerHTML = `${window.LCNDA_UI.spinner(T('Recherche des serveurs d’IA sur cet ordinateur…'))}`;
                 try {
                     const r = await post('ia_srv_detect', {});
                     out.innerHTML = r.found.length ? `<div class="aia-notice is-ok" data-ias-found="${r.found.length}"><b>${esc(T('Trouvé sur cet ordinateur :'))}</b><ul>${r.found.map((x, i) => `<li>${esc(x.name)} · <code>${esc(x.url)}</code> · ${x.ok ? esc(T('{n} modèle(s)', {n: x.models})) : esc(T('demande une clé d’API'))} <button type="button" class="button small secondary" data-ias-use="${i}">${esc(T('Utiliser'))}</button></li>`).join('')}</ul></div>`

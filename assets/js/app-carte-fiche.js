@@ -105,7 +105,7 @@
             return box;
         }
         const head = (title, back) => `<div class="cf-head">${back ? `<button type="button" class="cf-ico" data-cf-back aria-label="${esc(T('Revenir à la liste de cet endroit'))}" title="${esc(T('Revenir à la liste de cet endroit'))}">←</button>` : ''}<b class="cf-title">${esc(title)}</b>
-            <span class="cf-tools"><button type="button" class="cf-ico" data-cf-pin aria-pressed="${mode() === 'panel'}" title="${esc(mode() === 'panel' ? T('Revenir à la bulle sur le point') : T('Garder ouvert : un panneau à droite, qui suit les points cliqués'))}">📌<span class="cf-lab">${esc(mode() === 'panel' ? T('Détacher') : T('Garder ouvert'))}</span></button><button type="button" class="cf-ico" data-cf-x aria-label="${esc(T('Fermer (Échap)'))}" title="${esc(T('Fermer (Échap)'))}">✕</button></span></div>`;
+            <span class="cf-tools"><button type="button" class="cf-ico" data-cf-pin aria-pressed="${mode() === 'panel'}" title="${esc(mode() === 'panel' ? T('Revenir à la bulle sur le point') : T('Garder ouvert : un panneau à droite, qui suit les points cliqués'))}">📌<span class="cf-lab">${esc(mode() === 'panel' ? T('Détacher') : T('Garder ouvert'))}</span></button><button type="button" class="cf-ico" data-cf-x aria-label="${esc(T('Fermer (Échap)'))}" title="${esc(T('Fermer (Échap)'))}">×</button></span></div>`;
         function show(html, label, at, from) {
             const box = ensureBox(), had = box.contains(document.activeElement);
             box.innerHTML = html; box.setAttribute('aria-label', label);

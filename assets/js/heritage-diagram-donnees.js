@@ -512,7 +512,7 @@
             const pk = box.querySelector('[data-dgd-picker]');
             if (pk && !pk.hidden) {
                 if (ext.dataListPicker) ext.dataListPicker(pk, {compact: true, onlyInstalled: true, filter: eligible, selected: c.list, onPick: dd => { setList(dd); }});
-                else pk.innerHTML = `<p class="muted">${esc(T('Chargement…'))}</p>`;
+                else pk.innerHTML = `${window.LCNDA_UI.spinner(T('Chargement…'))}`;
             }
         };
         const setList = dd => { const c = st.cfg; c.list = dd.id; c.km = kmFor(dd); c.fam = !!dd.geo && !!(LF()); c.famOnly = false; c.filt = []; delete c.x; delete c.y; delete c.color; delete c.gal; delete c.two; delete c.near; st.sug = null; paint(); run(); };

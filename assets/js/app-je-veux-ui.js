@@ -380,7 +380,7 @@
             const all = reg(), things = coverage();
             const aiReady = aiInstalled();
             ws.innerHTML = `<section class="page jv-settings" data-jv-settings>${UI().pageHeader({where: T('Réglages · Navigation'), icon: '🧭', title: T('Je veux…'), help: esc(T('Dire ce qu’on veut faire, et y aller. Rien ne part sur Internet.')), saved: true,
-                actions: [`<button type="button" class="button secondary" data-jv-reset${ro ? ' disabled' : ''}>↺ ${esc(T('Comme au départ'))}</button>`]})}
+                actions: [`<button type="button" class="button secondary" data-jv-reset${ro ? ' disabled' : ''}>${esc(T('↺ Remettre comme au départ'))}</button>`]})}
                 ${ro ? UI().notice?.('info', T('Mode consultation : les réglages se regardent, ils ne se changent pas.')) || '' : ''}
                 <div class="jv-set-grid">
                 <section class="maintenance-panel"><h3>${esc(T('Allumer et où le montrer'))}</h3>

@@ -240,8 +240,8 @@
             onChange: s => draw(s)});
         panel.querySelector('[data-bar]').replaceWith(bar);
         function draw(s) {
-            const q = String(s.q || '').toLowerCase(), f = s.filters || {};
-            let rows = det.observations.filter(o => (!f.year || (o.iso || '').startsWith(f.year)) && (!(f.rel || []).length || f.rel.includes(o.reliability)) && (!q || [U().placeOfObs(o, D), o.observer, o.note, o.reading].join(' ').toLowerCase().includes(q)));
+            const q = String(s.q || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''), f = s.filters || {};
+            let rows = det.observations.filter(o => (!f.year || (o.iso || '').startsWith(f.year)) && (!(f.rel || []).length || f.rel.includes(o.reliability)) && (!q || [U().placeOfObs(o, D), o.observer, o.note, o.reading].join(' ').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(q)));
             rows = UI().sortItems ? UI().sortItems(rows, s.sort || 'recent', {name: o => o.iso, date: o => `${o.iso} ${o.time}`}) : rows;
             const thisYear = String(new Date().getFullYear()), sites = new Set(rows.map(o => o.site_id || o.place_id || U().placeOfObs(o, D)));
             bar.setCount?.(`${U().plural(rows.length, 'observation')}${rows.length ? ` · ${i18n('{n} en {yr}', {n: rows.filter(o => (o.iso || '').startsWith(thisYear)).length, yr: String(thisYear)})} · ${i18n('vu sur {what}', {what: U().plural(sites.size, 'site')})}` : ''}`);

@@ -550,7 +550,7 @@
         btn.addEventListener('click', async () => { btn.disabled = true; if (msg) msg.innerHTML = window.LCNDA_UI.spinner('Lecture de ta généalogie…', {inline: true});
             try { const t = await run(); if (msg?.isConnected) msg.textContent = t ? '✓ ' + t : ''; A().toast?.(t || 'Données prises dans l’app.'); } catch (e) { if (msg) msg.textContent = '⚠️ ' + (e.message || e); } finally { btn.disabled = false; } });
     }
-    const findBtn = '<button type="button" class="button small secondary" data-c2-find>🔎 Retrouver les lieux sans position</button>';
+    const findBtn = '<button type="button" class="button small secondary" data-c2-find>🔍 Retrouver les lieux sans position</button>';
     /** « Retrouver les lieux sans position » : chaque lieu du tableau sans position est cherché dans la base et les villes du monde */
     function bindFind(pane, io, key) {
         pane.querySelector('[data-c2-find]')?.addEventListener('click', async e => {
@@ -584,7 +584,7 @@
                 s.o = {...s.o}; if (!s.o.title || s.o.title === smp.title) s.o.title = i18n(q.ancestors ? '{what} de mes ancêtres' : '{what} de la famille', {what: q.ev === 'type' ? v('type').selectedOptions[0]?.textContent || i18n(what) : i18n(what)}); if (s.o.subtitle === smp.subtitle) s.o.subtitle = q.from || q.to ? `${q.from ?? '…'} – ${q.to ?? '…'}` : '';
                 if (s.kind === 'hexmap' && (!s.o.unit || s.o.unit === 'événement')) s.o.unit = ''; s.o.frame = s.o.frame === 'custom' ? '' : s.o.frame;
                 io.apply(s);
-                return (r.truncated ? i18n('{n} pris dans l’arbre (les 12 000 premiers).', {n: pl(s.rows.length, 'point')}) : i18n('{n} pris dans l’arbre.', {n: pl(s.rows.length, 'point')})) + (lost ? ' ' + i18n('{n} : « 🔎 Retrouver les lieux sans position ».', {n: pl(lost, 'lieu sans position', 'lieux sans position')}) : '');
+                return (r.truncated ? i18n('{n} pris dans l’arbre (les 12 000 premiers).', {n: pl(s.rows.length, 'point')}) : i18n('{n} pris dans l’arbre.', {n: pl(s.rows.length, 'point')})) + (lost ? ' ' + i18n('{n} : « 🔍 Retrouver les lieux sans position ».', {n: pl(lost, 'lieu sans position', 'lieux sans position')}) : '');
             });
         },
     };

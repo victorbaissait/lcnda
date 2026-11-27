@@ -420,7 +420,7 @@
         if (!page || !body) return;
         const head = page.querySelector('.page-header .page-actions');
         if (head && !head.querySelector('[data-dp-org]')) {
-            head.insertAdjacentHTML('beforeend', `<button type="button" class="button small secondary" data-dp-org>⚙ ${esc(T('Organiser le récap'))}</button>`);
+            head.insertAdjacentHTML('beforeend', `<button type="button" class="button small secondary" data-dp-org>⚙️ ${esc(T('Organiser le récap'))}</button>`);
             head.addEventListener('click', e => { if (e.target.closest('[data-dp-org]')) openOrganiser(); });
         }
         const fam = body.querySelector('.dr-fam'), todo = body.querySelector('.dr-todo'), rc = body.querySelector('.dr-rc');
@@ -707,7 +707,7 @@
                     <td class="vl-show"><label class="ui-toggle"><input type="checkbox" data-dp-show="${k}" ${off ? '' : 'checked'} ${na ? 'disabled' : ''} aria-label="${esc(T('Montrer « {b} »', {b: lab(k)}))}"><i></i></label></td><td class="dp-sz-l">${sizeSeg(k)}</td></tr>`; }).join('')}</tbody></table></div>
             <div class="vl-foot"><button type="button" class="button small secondary" data-dp-reset>↺ ${esc(T('Remettre comme au départ'))}</button><button type="button" class="button small secondary" data-dp-undo ${undo.length ? '' : 'disabled'}>↶ ${esc(T('Annuler'))}</button><span class="muted vl-count">${esc(T('{n} blocs montrés sur {t}', {n: l.order.filter(k => avail(k) && !l.hidden.includes(k)).length, t: l.order.length}))}</span></div>
             <p class="muted small dp-org-note">${esc(T('Un bloc grisé est éteint dans'))} <button type="button" class="dr-link" data-dp-goset>${esc(T('Réglages → 📊 Données'))}</button>.</p>`;
-        ext.openDialog({eyebrow: T('Récap des données'), title: `⚙ ${T('Organiser le récap')}`, wide: true, submitLabel: 'Fermer', body: body(),
+        ext.openDialog({eyebrow: T('Récap des données'), title: `⚙️ ${T('Organiser le récap')}`, wide: true, submitLabel: 'Fermer', body: body(),
             onOpen: dl => {
                 dl.classList.add('vl-dialog', 'dp-org-dlg'); const box = dl.querySelector('.h-dialog-body');
                 const repaint = focusSel => { box.innerHTML = body(); const f = focusSel && box.querySelector(focusSel); if (f) { if (f.disabled) f.closest('tr')?.querySelector('[data-dp-grip]')?.focus(); else f.focus(); } };

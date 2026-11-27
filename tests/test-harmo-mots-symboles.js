@@ -55,6 +55,7 @@ const t = async (name, fn) => { try { await fn(); count++; console.log('✓', na
     const none = (re, msg, skip) => assert.deepEqual(hits(re, skip), [], msg);
     await t('K3 « ↺ Remettre comme au départ » : plus de Réinitialiser, Revenir au standard, Tout remettre…', () => {
         none(/>\s*(↺\s*)?(Tout )?[Rr]éinitialiser|okLabel: ?'(↺ )?Réinitialiser|title: ?'↺ Réinitialiser/g, 'Réinitialiser');
+        none(/↺ \$\{(esc|escapeHtml)\((T|i18n)\('(Comme au départ|Valeurs de départ|Les rayons de départ|Tout remettre comme au départ|Réglages de départ)'|>↺ Réglages de départ</g, 'symbole hors de la traduction + ancien mot');
         none(/Revenir au standard|Tout remettre à zéro|↺ Remettre à zéro|↺ Tout remettre comme|>Tout remettre<|↺ Comme au départ|↺ Réglage de départ|↺ Réglages par défaut|Revenir à l’apparence de départ|Remettre l’ordre de l’app<|>Remettre les réglages de départ<|>Revenir aux réglages de départ<|aria-label="Revenir au départ"/g, 'variantes de « remettre comme au départ »');
         assert.ok(hits(/↺ Remettre comme au départ/g).length >= 60, 'le mot validé est partout');
     });
@@ -95,6 +96,9 @@ const t = async (name, fn) => { try { await fn(); count++; console.log('✓', na
         none(/>(🎧|📁|👪|🎨|📊) Nouve|>(📅|🖼|🧭|📚) Ajouter|>(✎|🧱|📊) Créer (mon propre|le profil|une sorte|un widget|le tableau)/g, '« ＋ Nouveau… » seul');
         none(/🖨️ ?[A-Za-zÀ-ÿ]|✏️ Modifier|🔎 (Chercher|Rechercher)|⚙ (Réglages|Personnaliser|Créer)/g, '🖨, ✎, 🔍, ⚙️');
         none(/>(📊|🧩|🎨|📐|🏠|🔎|🗓️) Ouvrir/g, '↗ Ouvrir');
+        // le symbole posé hors de la traduction (« ⚙ ${esc(T('Colonnes'))} ») : ⚙️ aussi (le ⚙ sans sa forme émoji s’affiche en petit trait)
+        none(/>⚙(?!\uFE0F) ?(\$\{|Colonnes)|title: [`']⚙(?!\uFE0F) /g, '⚙ / ⚙︎ → ⚙️');
+        none(/🔎 (\$\{(esc|escapeHtml)\((T|i18n)\('(Chercher|Rechercher|Trouver|Filtrer))|>🔎 (Retrouver|Trouver|Filtrer)/g, 'chercher : 🔍 (🔎 reste le signe de l’onglet Recherche et de « Tout ce qui le concerne »)');
         none(/✕ Annuler/g, '« Annuler » sans ✕');
     });
 
