@@ -34,11 +34,16 @@
 .lo-viz .lo-c3, .lo-legend .lo-c3 { fill: var(--lo-c3); background: var(--lo-c3); }
 .lo-viz .lo-c4, .lo-legend .lo-c4 { fill: var(--lo-c4); background: var(--lo-c4); }
 .lo-legend { display: flex; flex-wrap: wrap; gap: 4px 12px; margin: 0; font-size: 12px; color: var(--muted); align-items: center; }
+.lo-legend > span { display: inline-flex; align-items: center; }
 .lo-legend i { display: inline-block; width: 12px; height: 12px; border: 1px solid var(--line-color, #d6d6d6); vertical-align: -2px; margin-right: 4px; }
 .lo-legend i.lo-bar { background: var(--blue, #0066cc); }
 .lo-legend i.lo-bar.is-clos { background: var(--lo-orange); }
 .lo-legend i.lo-zone { background: var(--lo-orange-soft); }
-.lo-more > summary, .lo-perso > summary { cursor: pointer; font-size: 13px; font-weight: 700; }
+.lo-more > summary, .lo-perso > summary, .lo-pgrp > summary, .lo-heritage > summary { cursor: pointer; font-size: 13px; font-weight: 700; list-style: none; }
+.lo-more > summary::-webkit-details-marker, .lo-perso > summary::-webkit-details-marker, .lo-pgrp > summary::-webkit-details-marker, .lo-heritage > summary::-webkit-details-marker { display: none; }
+.lo-pgrp > summary { display: flex; align-items: center; gap: 6px; }
+.lo-pgrp > summary::after { content: '›'; margin-left: auto; font-size: 15px; transition: transform .15s; }
+.lo-pgrp[open] > summary::after { transform: rotate(90deg); }
 .lo-more > summary { color: var(--blue, #0066cc); }
 .lo-more[open] > summary { margin-bottom: 6px; }
 .lo-more p, .lo-more li { font-size: 13px; line-height: 1.45; margin: 0 0 6px; }

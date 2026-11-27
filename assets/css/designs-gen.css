@@ -2244,7 +2244,7 @@
 :root[data-lc-density] .h-rc-dots{gap:calc(3px * var(--lc-sp))}
 :root[data-lc-density] .h-rc-loose-list{gap:calc(12px * var(--lc-sp))}
 :root[data-lc-density] .h-rc-loose-item{gap:calc(4px * var(--lc-sp))}
-:root[data-lc-density] .h-rc-pick{padding:0 calc(2px * var(--lc-sp))}
+:root[data-lc-density] .h-rc-pick,:root[data-lc-density] .h-rc-loose-item > .sel-box{padding:0 calc(2px * var(--lc-sp))}
 :root[data-lc-density] .h-rc-loose-head{gap:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .h-rc-loose-head{margin-bottom:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .h-rc-loose-tools{gap:calc(6px * var(--lc-sp))}
@@ -6960,6 +6960,36 @@
 :root[data-lc-density] .l8b-quote{padding:calc(2px * var(--lc-sp)) 0 calc(2px * var(--lc-sp)) calc(10px * var(--lc-sp))}
 /* lot10-regles-actes.css */
 :root[data-lc-density] .l10r-bars{gap:calc(3px * var(--lc-sp))}
+/* lot-o-arbre.css */
+:root[data-lc-density] .lo-page .lo-bar{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .lo-grid{gap:calc(20px * var(--lc-sp))}
+:root[data-lc-density] .lo-card .card-head{gap:calc(8px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .lo-body{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .lo-verdict{padding:calc(8px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .lo-legend{gap:calc(4px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root .lo-perso:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .lo-perso{padding:calc(7px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .lo-pgrp > summary{padding:calc(7px * var(--lc-sp)) calc(2px * var(--lc-sp))}
+:root[data-lc-density] .lo-row{gap:calc(8px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .lo-row{padding:calc(2px * var(--lc-sp)) calc(2px * var(--lc-sp)) calc(9px * var(--lc-sp))}
+:root[data-lc-density] .lo-set{gap:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .lo-num{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .lo-num input{padding:calc(3px * var(--lc-sp)) calc(7px * var(--lc-sp))}
+:root .lo-num input:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .lo-acts{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .lo-acts{padding-top:calc(9px * var(--lc-sp))}
+:root[data-lc-density] .lo-src{gap:calc(4px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .lo-btns{gap:calc(6px * var(--lc-sp))}
+:root .lo-ib:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .lo-ib{padding:0 calc(4px * var(--lc-sp))}
+:root[data-lc-density] .lo-chips{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .lo-pchip{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .lo-pchip{padding:calc(4px * var(--lc-sp)) calc(9px * var(--lc-sp))}
+:root[data-lc-density] .lo-sigs{gap:calc(10px * var(--lc-sp))}
+:root .lo-sig:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .lo-sig{padding:calc(6px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .lo-sig{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .lo-sig figcaption{gap:calc(2px * var(--lc-sp)) calc(6px * var(--lc-sp))}
 /* lot10-terre-gens.css */
 :root[data-lc-density] .l10-bars{gap:calc(2px * var(--lc-sp))}
 /* commune-reseau.css */

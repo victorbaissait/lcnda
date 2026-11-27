@@ -267,6 +267,7 @@
         if (!P?.ok || P.kind === 'animal') { host.innerHTML = ''; return P; }
         const out = await personParts(P, want);
         host.innerHTML = PERSON_ORDER.map(k => line(k, out[k])).join('');
+        host.dataset.l10rFilled = '1'; // rempli : d'autres fichiers peuvent ajouter leur phrase (app-lot-o-arbre.js)
         const card = host.closest?.('section.card'); if (card) card.hidden = !host.querySelector('.l10r-line');
         return P;
     }

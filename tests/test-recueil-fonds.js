@@ -96,7 +96,8 @@ echo json_encode(['ok' => 1, 'a' => $a, 'b' => $b, 'c' => $c, 'd' => $d, 's1' =>
         await t('« Colonnes… » : ajouter « Série » (retenu) ; « ⤓ Tableur » ; « Reste » ouvre l’état du recueil', async () => {
             await p.click('[data-rf-cols]'); await p.waitForSelector('dialog[open] [name=c]'); await p.check('dialog[open] [name=c][value="series"]'); await p.click('dialog[open] [type=submit]'); await sleep(300);
             assert.ok(await p.evaluate(() => [...document.querySelectorAll('.rf-table th')].some(th => th.textContent === 'Série')));
-            const [dl] = await Promise.all([p.waitForEvent('download'), p.click('[data-rf-csv]')]);
+            await p.click('[data-rf-csv]'); await p.waitForSelector('dialog.ui-export[open]'); // ⤓ la fenêtre d'export commune (CSV choisi d'office)
+            const [dl] = await Promise.all([p.waitForEvent('download'), p.click('dialog.ui-export [data-ui-go]')]);
             const text = fs.readFileSync(await dl.path(), 'utf8');
             assert.match(text, /"Service d’archives";"Fonds";"Recueil";"Cote"/); assert.match(text, /"Archives départementales du Cher";"Paroisse de Sancoins";"Registre paroissial 1789-1792";"3 E 1234"/);
             assert.match(text, /"2 à transcrire"/);

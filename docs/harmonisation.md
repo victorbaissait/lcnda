@@ -21,72 +21,29 @@ La règle de base est déjà écrite dans `docs/REGLES-INTERFACE.md` (C1 à C8, 
 | **« ↺ Remettre comme au départ »** (K3) : 7 boutons gardaient un autre mot parce que le ↺ était posé à part : « Comme au départ », « Valeurs de départ », « Les rayons de départ », « Tout remettre comme au départ », « Réglages de départ ». | 🧭 Je veux…, Horloges (2), réglages de l’onglet Diagrammes, rayons des Données, Keynote, arbre vectoriel. | Tous « ↺ Remettre comme au départ ». |
 | **Chercher = 🔍** (K11). 13 boutons pour chercher avaient 🔎. (🔎 reste le signe de l’onglet Recherche et de « Tout ce qui le concerne ».) | Chercher dans tous les actes, bases officielles (4), annuaires, « Trouver un lieu ancien » (2), « Chercher sur cet ordinateur » (IA), « Retrouver les lieux sans position » (2 cartes), mode « Trouver » de 🧭 Je veux…. | Tous en 🔍 (traductions mises à jour). |
 | **Les onglets segmentés** : 12 groupes marquaient le choix seulement « pour les lecteurs d’écran » : **à l’écran, aucun bouton n’était allumé**. | 📈 Diagrammes (Vignettes / Liste, réglages), 🧭 Je veux… (Jamais / La 1re fois / Toujours…), Données plus (Comparer, Style, Format, Vitesse, Taille…). | Le choix pressé s’allume en bleu, comme partout, en clair, en sombre et avec les styles de bouton « contour » et « texte ». |
+| **Les fenêtres faites à la main** : le titre était parfois un petit titre, le × absent ou dans le corps, les boutons du bas dans un autre ordre. | Paniers (les 16 fenêtres : renommer, ranger, échéance, partager, récupérer, supprimer un dossier…), Comptes de la famille (inviter, l’invitation, « une fiche existe peut-être déjà », les petites questions), Coutumes du monde (médailles), Téléchargements D (article de Wikipédia, traduction hors ligne), Lieux à placer (vrai titre). | Toutes passent par la fenêtre commune (`openDialog`) : titre en haut à gauche, × en haut à droite, en bas « Annuler » puis le bouton bleu ; les autres choix (« Y laisser un panier vide »…) juste avant « Annuler ». Les éditeurs plein écran (Tableur, Traitement de texte, Site web, Diaporama, Keynote, Dessin, Bunker, Transcription) gardent leur cadre : le × est bien tout à droite de leur barre (vérifié). |
+| **Un même symbole pour des choses différentes.** | 📋 « Mes listes », « Recensements », « Tous les doutes », « Registre matricule », « Partir d’un modèle », « Ranger dans le Registre de courriers », « Questionnaire », « Mes propositions » ; 📎 « Médias », « Fiche liée », « Fichiers des médias » ; ⤓ « Installer » (82 boutons et phrases). | 📋 = copier / coller ; 📎 = insérer / joindre ; ⤓ = un fichier qui sort de l’app ; **📦 = installer** des données. Les listes prennent leur signe : 📑 Mes listes, 🏠 Recensements, ❓ Tous les doutes, 🪖 Registre matricule, 🧩 Partir d’un modèle, 📮 Ranger dans le Registre, 📝 Questionnaire, 📁 Fichiers des médias, 🔗 Fiche liée. Traductions mises à jour. (📋 reste le signe de l’onglet Listes.) |
+| **Les liens qui sortent de l’app** : environ 160 n’avaient pas le ↗ (« FranceArchives », « Ouvrir », « la source », un simple 🔗…). | Partout : sources des listes de données, crédits des cartes, archives, Où chercher, fiches de lieu, bases officielles, réglages… | Une seule pièce, `UI.extLink(adresse, nom du site)` : toujours « ↗ Nom du site », l’adresse en bulle. « Ouvrir », « la source » deviennent le nom du site (« ↗ Gallica »). 114 liens passent par elle, les autres ont reçu le ↗ et la bulle. Restent sans ↗ : ce qu’on colle dans un texte (📎), les vignettes, un fichier qu’on télécharge (⤓). |
+| **Supprimer, Effacer, Vider, Retirer** : plusieurs mots pour le même geste. | Assistant IA (« Effacer » une conversation, « Effacer le journal »), 🧭 Je veux… (« Effacer maintenant »), Studio son (« Effacer les temps »), les cases de recherche (« Effacer la recherche »). | **Supprimer** = la chose disparaît ; **Retirer** = elle reste ailleurs ; **Vider** = un contenant (corbeille, panier, journal, case, liste) ; **Effacer** = un dessin, une retouche, le contenu ou la mise en forme dans un éditeur, et « les réponses gardées ». Écrit dans la règle K3. |
+| **Les « rien ici » faits à la main.** | 📈 Diagrammes (liste vide, corbeille), fiche (variantes de nom, étiquettes, témoins, parrains, foyer), Jeu de l’oie, Listes Sosa / d’Aboville, Étiquettes (règles), ADN, cotes, vues enregistrées, horloges, Données plus. | La petite ligne commune (ou la grande boîte pour une liste entière), avec son bouton quand on peut commencer d’ici : « ＋ Nouveau diagramme », « ⭐ Choisir la personne de départ » (Sosa, d’Aboville). |
+| **Combien de temps restent les messages** : 16 messages avaient leur propre durée (10 à 60 s). | À trier, Réseau de la maison, Studio, besoins des enquêtes, veille des décès, arbres en ligne, décès INSEE, mises à jour des listes. | 6 s pour tous (le réglage de l’utilisateur s’applique), la souris dessus le garde. Deux exceptions : le message très long d’une image trop grande, et « la généalogie a changé, ↻ Recharger ». |
+| **« Remettre » qui dit ce qu’il remet** : 6 boutons. | Carte (couleurs), Données et Diagrammes (ordre de départ, 3), transcription (l’image), recueils (état calculé). | Tous « ↺ Remettre comme au départ » ; ce qui est remis est dans la bulle (ou sous le mot dans un menu). |
+| **Choisir une étiquette** : 5 cases « Tape pour chercher une étiquette… » faites à la main. | Fiche d’une personne (deux champs), fenêtres avec étiquettes, Listes (personnes d’un métier), blocs de la fiche. | Le menu de choix unique (loupe, liste, pastille de couleur), avec « ＋ Créer l’étiquette « … » » partout. |
+| **Les onglets segmentés : deux façons de les écrire.** | 19 groupes (Diagrammes, 🧭 Je veux…, Données plus, Partir des données…). | Une seule petite pièce, `UI.segmented` (et `UI.segPick` au clic) : elle met toujours les deux marques (le bleu et celle des lecteurs d’écran). |
+| **Deux petits signes.** | « ✕ Fermer l’essai » (mode simple), le ✕ du musée, « ✕ Fermer » (Tableaux, traduction, jeux) ; 📥 « Prendre depuis… ». | « Fermer… » sans signe, × pour un bouton d’icône. 📥 est admis pour « Prendre depuis… » (c’est son vrai sens), et « + 3 » pour un nombre en plus : écrit dans la règle K11. |
 
 **Gardes ajoutées** (ces écarts ne peuvent plus revenir) : `tests/test-harmo-pieces.js` (nouveau : ×, « Effacer les réponses gardées », messages noirs, onglets allumés vérifiés dans le navigateur, en clair et en sombre), et trois gardes élargies : `tests/test-harmo-indicateurs.js` (les « Aucun… » traduits), `tests/test-harmo-chargement.js` (les « Chargement… » traduits), `tests/test-harmo-mots-symboles.js` (⚙/⚙︎ → ⚙️, 🔎 pour chercher, les anciens mots de « Remettre » posés à côté du ↺).
 
+**Gardes ajoutées pour ces dix points** : `tests/test-harmo-pieces.js` (fenêtres communes, liens ↗ avec `UI.extLink`, durée des messages, `UI.segmented`, menu de choix des étiquettes, « Fermer » sans ✕), `tests/test-harmo-mots-symboles.js` (📋 📎 ⤓ 📦, Supprimer / Vider / Effacer, « ↺ Remettre comme au départ » avec la bulle, 📥 « Prendre depuis… » admis), `tests/test-harmo-indicateurs.js` (les derniers « rien ici »).
+
 ---
 
-## 2. Ce qui reste à décider ou à faire (par ordre de ce qui se voit le plus)
+## 2. Ce qui reste à décider ou à faire
 
-Pour chaque point : ce qui change d’un écran à l’autre, où, ce que je te conseille, et le travail que ça demande (petit = une heure ou deux, moyen = une demi-journée à une journée, gros = plusieurs jours, à faire par lots).
+Les dix points sont faits (voir le tableau plus haut). Ce qui pourrait venir ensuite, sans urgence :
 
-### 1. Les fenêtres faites à la main (titre, × et boutons du bas pas toujours à la même place)
-- **Ce qui change** : la plupart des fenêtres passent par la fenêtre commune (titre en haut à gauche, × en haut à droite, en bas « Annuler » puis le bouton bleu). Environ **30 outils** fabriquent encore leur propre fenêtre : le titre est parfois un petit titre (h3), le × est parfois absent ou dans le corps, la phrase d’aide est à une autre place.
-- **Où** : choix d’une image, Paniers, Artistes et œuvres (assistant, métiers), Assembler, son rapide, blocs de la fiche, Bunker, Cartes et données, Comptes de la famille, Diagrammes, Employeurs, Keynote, Lieux à placer, Coutumes du monde, Comparer deux photos, retouche simple, Site web, Diaporama, Tableur, Téléchargements D (article, traduction), Territoires, Traitement de texte, Relecture et Atelier de transcription, Dessin vectoriel.
-- **Je te conseille** : les passer une par une sur la fenêtre commune (`openDialog`), en commençant par les plus ouvertes (Paniers, Tableur, Site web, Transcription). Les éditeurs plein écran (Keynote, Dessin, Bunker) gardent leur cadre : seulement le × à droite.
-- **Travail** : gros (par lots de 5 outils).
-
-### 2. Un même symbole pour des choses différentes
-- **Ce qui change** :
-  - **📋** veut dire « Copier » (13 fois), « Coller » (4), mais aussi « Mes listes », « Tous les doutes », « Registre matricule », « Partir d’un modèle », « Ranger dans le Registre », « Recensements »…
-  - **📎** veut dire « Insérer une info » (le standard), mais aussi « photo jointe », « fiche liée », « Médias », « Autre ».
-  - **⤓** veut dire « Exporter » (le standard) et « Télécharger », mais aussi **« Installer »** un paquet de données (61 boutons, dans les Réglages des données).
-  - **🔎 / 🔍** : 🔍 = chercher ; 🔎 = l’onglet Recherche, « Tout ce qui le concerne », « Pistes », « Introuvable », « OCR »…
-- **Je te conseille** : garder 📋 pour copier / coller, 📎 pour insérer / joindre, ⤓ pour sortir un fichier de l’app ; prendre un autre signe pour « Installer » (par exemple 📦 « Installer ») ; pour les listes et registres, le signe de la liste concernée (📑, 🎖…). Je peux te préparer une page d’essai avec les deux versions côte à côte.
-- **Travail** : moyen (c’est surtout choisir ; le changement est mécanique, traductions comprises).
-
-### 3. Les liens qui sortent de l’app (↗ et le nom du site)
-- **Ce qui change** : environ **180 liens** vers un site extérieur ont le ↗ (« ↗ Geneanet »), **160 ne l’ont pas** (« FranceArchives », « swisstopo », « Ouvrir », « la source », un simple 🔗 ou 🪦). On ne sait pas toujours qu’on va quitter l’app, ni vers quel site.
-- **Où** : un peu partout (téléchargements de données, cartes, archives, Où chercher, fiches de lieu, bases officielles…).
-- **Je te conseille** : une seule pièce `UI.extLink(adresse, nom du site)` qui écrit toujours « ↗ Nom du site » (et l’adresse en bulle), puis l’utiliser partout.
-- **Travail** : moyen.
-
-### 4. Le même geste, plusieurs mots : Supprimer, Effacer, Vider, Retirer
-- **Ce qui change** : « Supprimer » est le mot validé. On trouve aussi « Effacer » (19 boutons : « Effacer les temps », « Effacer les lignes du registre », « Effacer les petites taches »…) et « Vider » (9 : « Vider la corbeille », « 🗑 Vider le journal », « Vider »…).
-- **Je te conseille** : **Supprimer** = la chose disparaît ; **Retirer** = elle reste ailleurs (déjà la règle) ; **Vider** = seulement pour un contenant (corbeille, panier, journal) ; **Effacer** = seulement pour un dessin ou une retouche (gomme, taches) et pour « les réponses gardées ».
-- **Travail** : petit.
-
-### 5. Les « rien ici » encore faits à la main
-- **Ce qui change** : quelques listes vides ont encore leur propre phrase ou leur propre boîte, sans l’icône ni le bouton pour commencer (K10).
-- **Où** : 📈 Diagrammes (« Pas encore de diagramme. ＋ crée-en un »), fiche (« Aucune variante enregistrée », « Aucune étiquette »), Jeu de l’oie (« Aucune case ajoutée »), Listes Sosa / d’Aboville (« Aucune personne racine définie »), Étiquettes (« Aucune règle pour l’instant »), et une dizaine de petites phrases dans des listes à puces.
-- **Je te conseille** : la petite ligne commune, avec le bouton « ＋ … » quand on peut commencer d’ici (pour Sosa : « ⭐ Choisir la personne de départ »).
-- **Travail** : petit.
-
-### 6. Combien de temps restent les messages
-- **Ce qui change** : la règle H7 dit 6 secondes pour tous. 16 messages ont leur propre durée : 10 s (4), 12 s, 15 s (9), 30 s, 60 s.
-- **Je te conseille** : 6 s partout ; seulement un message qui demande de lire quelque chose de long peut rester plus (et c’est la souris dessus qui le garde, comme aujourd’hui). À voir avec le travail sur le comportement (annuler).
-- **Travail** : petit.
-
-### 7. Les boutons « Remettre » qui disent ce qu’ils remettent
-- **Ce qui change** : quelques boutons gardent un mot précis : « ↺ Remettre les couleurs de départ » (Carte), « ↺ Rétablir l’ordre de départ » (3 : onglets Données et Diagrammes), « ↺ Remettre l’image comme au départ » (transcription), « ↺ Revenir à l’état calculé » (recueils).
-- **Je te conseille** : c’est une question de goût. Soit tout « ↺ Remettre comme au départ » (le plus simple, la bulle dit ce qui est remis), soit on garde la précision **seulement** quand l’écran a plusieurs boutons « remettre ».
-- **Travail** : petit.
-
-### 8. Les cases pour choisir une étiquette
-- **Ce qui change** : 5 cases « Tape pour chercher une étiquette… » sont faites à la main, au lieu du menu de choix unique (loupe, liste, pastille, « ＋ Créer… »).
-- **Où** : fiche d’une personne (étiquettes), Listes, aide.
-- **Je te conseille** : le menu de choix unique pour les étiquettes (pastille de couleur), comme pour les lieux et les sources.
-- **Travail** : moyen.
-
-### 9. Les onglets segmentés : deux façons de les écrire dans le code
-- **Ce qui change** : à l’écran c’est corrigé (voir plus haut), mais dans le code, 12 groupes marquent le choix d’une façon et les autres d’une autre. Un nouveau style d’onglet risquerait d’oublier l’une des deux.
-- **Je te conseille** : une seule petite pièce pour fabriquer un groupe d’onglets, qui met les deux marques.
-- **Travail** : petit.
-
-### 10. Deux petits signes à trancher
-- « ✕ Fermer l’essai » (mode simple) et le ✕ « Retour » du musée : le texte dit fermer, le signe dit retirer. Je conseille « × » (ou pas de signe du tout sur un bouton écrit).
-- **📥 « Prendre depuis… »** en bouton d’icône seule (Connexions, Recherche) et « + N » dans deux phrases d’aide : le test K11 les refuse déjà (il est rouge aujourd’hui, ce n’est pas venu de ce travail). Soit on admet 📥 pour « Prendre depuis… » (c’est son vrai sens) et on l’écrit dans la règle, soit on change le signe.
-- **Travail** : petit.
+- Une centaine de groupes d’onglets segmentés anciens mettent seulement le bleu (pas la marque des lecteurs d’écran) : ils peuvent passer sur `UI.segmented` quand on y touche (à l’écran, rien ne change).
+- Quelques boutons ouvrent un site par le code (pas par un lien) : ils pourraient aussi dire « ↗ Nom du site ».
 
 ---
 
@@ -123,28 +80,26 @@ Bonne nouvelle d’abord : l’essentiel est déjà commun. « ↶ Annuler » (H
 | **Le nom d’une personne recollé à la main** (« prénom nom » : double espace, « sans nom » oublié). | 35 endroits dans 17 fichiers : chronologie, comparaison, listes d’étiquettes, tableau de bord, carte, sépultures, étiquettes sur les photos, fusions, dépouillements, employeurs, fiches à thème, mise en page, métiers anciens, recensements, musée, questions, studio, arbre décoratif… | La pièce commune (`A().personName`) partout. |
 | **Listes qui oubliaient leur tri.** | Onglet Diagrammes, Réglages → journal des modifications, saints du jour (personnes). (Le Jeu retenait déjà le sien.) | Le tri est retenu pour chaque liste, comme les listes avec la barre commune. |
 | **Supprimer un projet d’outil** : la question, puis parfois aussi « ↶ Annuler ». | Listes → Outils de modification et les fenêtres « 📂 Projets » : montage, son, retouche, dessin (et arbre décoratif, faire-part, carte, sceau), livre, maison, diaporama, classeur, comparaison de photos, site web, document, cousinade, trésors, animation. | Plus de question : le projet part tout de suite, « ↶ Annuler » le remet (même numéro, gardé un jour), puis « ↷ Rétablir ». La question reste seulement pour les outils qui ne savent pas encore remettre (tableaux, transcriptions, rapports). |
+| **« Es-tu sûr ? » avant ce qui se défait** (H7) : les ~20 dernières questions. | Recherche enregistrée (Recherche → Poser une question, et l’écran Recherche), demande d’entraide, musée (message du livre d’or, œuvre retirée d’une salle, salle entière avec ce qui y est exposé), fiche d’employeur, article de revue, Registres et Mes listes (une liste entière avec ses fiches, une fiche), lignes et colonnes d’un tableau de recueil, personne d’un dépouillement, ligne d’un bloc de la fiche, copie chez un cousin (coffre), cartes d’électeur d’une fiche, parcours de résistant. | Supprimé tout de suite, « ↶ Annuler » remet tout (avec les étiquettes, les photos rattachées, les liens, le rattachement d’une ligne à sa fiche), puis « ↷ Rétablir ». Côté serveur, une seule pièce : juste avant de supprimer, l’app garde une copie dans le journal des modifications (`undo_keep`), et « ↶ Annuler » la remet (`restore_last_delete`). Les fichiers (son d’une salle, copie chiffrée du coffre) restent un jour sur le disque, le temps de pouvoir annuler. La question reste pour ce qui ne se remet pas (une fiche entière, vider la corbeille, écraser une base, un fichier importé entier). |
+| **Cocher plusieurs photos** avec des cases faites à la main (« Tout cocher », pas de Maj+clic). | Recueils : les photos « 🧺 À ranger ». | La barre commune : « 3 photos cochées · 📁 Mettre dans un dossier · 📄 Mettre sur une page · ✕ Décocher », « Tout cocher », Maj+clic pour une suite. |
+| **⤓ Exporter : chaque outil faisait son CSV lui-même**, d’un clic, sans choix du nom ni du format. | Toutes les listes de l’onglet Listes (avec KML, GeoJSON, vCard quand la liste en a), Mes listes et les Registres (ce qu’on voit ou toute la liste), Revues et journaux, Paniers, Contrôle de la base, Successions (héritiers à contacter, dossiers cochés, journal d’un dossier), Tableau de bord (chiffres, bilan PDF, page web), Suivi des animaux (observations, et Movebank, GPX, KML), pedigree d’un animal, Journal des recherches, état d’un recueil, état des fonds, catalogue (onglet Documents), Statistiques, recensements (tous les foyers), correspondances ADN, personnes d’un graphique. | La même fenêtre « ⤓ Exporter » partout : 📄 CSV, 🧮 Ouvrir dans le tableur, 📊 Excel, le nom du fichier à choisir, et « Les lignes : ce qu’on voit / toute la liste » quand c’est utile. Une case qui commence par « = » reste du texte (pas de formule glissée dans le tableur). Ce qui note une trace (journal d’un dossier de succession, « qui a vu quoi ») la note toujours. |
 
-**Gardes** : `tests/test-harmonisation-comportements.js` (nouveau : vérifie le code des 13 recherches, puis dans le navigateur ⌘F, la langue, le champ des animaux et la partie du Jeu, avec Annuler et Rétablir) ; `tests/test-h7-sans-question.js` élargi (les 6 questions retirées ne peuvent pas revenir) ; `tests/test-listes-perso.js` mis à jour (supprimer une liste sans question, puis ↶ Annuler). ; `tests/test-harmonisation-gestes.js` (nouveau : sections qui retiennent leur état, recherche « chaque mot », fiche ouverte par un nom ajouté plus tard et clic droit, noms, tris retenus, projet supprimé puis « ↶ Annuler ») ; `tests/test-site-web-complet.js` mis à jour (supprimer un site sans question, puis ↶ Annuler).
+**Gardes** : `tests/test-harmonisation-comportements.js` (nouveau : vérifie le code des 13 recherches, puis dans le navigateur ⌘F, la langue, le champ des animaux et la partie du Jeu, avec Annuler et Rétablir) ; `tests/test-h7-sans-question.js` élargi (les 6 questions retirées ne peuvent pas revenir) ; `tests/test-listes-perso.js` mis à jour (supprimer une liste sans question, puis ↶ Annuler). ; `tests/test-harmonisation-gestes.js` (nouveau : sections qui retiennent leur état, recherche « chaque mot », fiche ouverte par un nom ajouté plus tard et clic droit, noms, tris retenus, projet supprimé puis « ↶ Annuler ») ; `tests/test-site-web-complet.js` mis à jour (supprimer un site sans question, puis ↶ Annuler). ; `tests/test-h7-remises.js` (nouveau : pour chacune des 14 sortes, supprimer puis « ↶ Annuler » remet tout sur un vrai serveur, un deuxième « ↶ Annuler » dit « déjà remis », et rien ne revient si ce à quoi c’était rattaché a disparu) ; `tests/test-h7-sans-question.js` élargi ; `tests/test-harmonisation-lot2.js` (nouveau : cartes d’électeur supprimées puis remises dans le navigateur, la barre commune sur les photos d’un recueil avec Maj+clic, la fenêtre d’export commune avec « toute la liste » et sans formule glissée, et la liste des outils qui y passent) ; tests de l’export mis à jour (graphiques, tableau de bord, Mes listes, successions, Suivi des animaux).
 
 ## 2. Ce qui reste à décider ou à faire (par ordre de ce qui se voit le plus)
 
 Petit = une heure ou deux · moyen = une demi-journée à une journée · gros = plusieurs jours, par lots.
 
-### 1. Encore des « Es-tu sûr ? » avant des choses qu’on pourrait défaire
-- **Ce qui change** : la règle H7 dit « on supprime et on propose ↶ Annuler ». Une vingtaine de suppressions posent encore la question, parce que l’app ne sait pas (encore) remettre la chose une fois partie.
-- **Où** : une recherche enregistrée (Recherche → Poser une question), une demande d’entraide, un message du livre d’or et un objet retiré d’une salle (Musée), une salle du musée, une fiche d’employeur, un article de revue, une liste et une fiche des Registres, des lignes d’un tableau de recueil, une personne d’un dépouillement, une ligne d’un bloc de la fiche, une copie chez un cousin, une liste de l’Atelier (Mes listes, Réglages → Éditeur de listes), les cartes d’électeur d’une fiche, le parcours de résistant, un projet de montage (la question **et** « ↶ Annuler » quand l’outil sait le remettre).
-- **Je te conseille** : pour chacun, garder une copie au moment de supprimer (le journal des modifications le fait déjà pour les notes, sources, événements, rappels…) et brancher « ↶ Annuler » dessus, puis retirer la question. Garder la question seulement pour ce qui ne se remet pas (une fiche entière, vider la corbeille, écraser une base, un fichier importé entier).
-- **Travail** : moyen à gros (par lots de 5 ; chaque sorte a besoin de sa petite « remise » côté serveur).
-
 ### 2. Cocher plusieurs lignes : une barre commune peu utilisée
 - **Ce qui change** : la barre « 3 fiches cochées · 🏷 Étiqueter · ★ Mes listes · ⤓ Exporter · 🗑 Supprimer · ✕ Décocher » (avec Maj+clic pour une suite) existe, mais seulement dans Personnes, Événements, Sources, l’onglet Documents et les événements d’une fiche. Les listes de données ont leur propre « ☑ Choisir des lignes » (« Tout cocher (N) », « × Désélectionner »). Une vingtaine d’autres listes ont leurs cases faites à la main (Recueils, Revues, Paniers, ADN, Atelier, Imports…), chacune avec ses mots (« Tout sélectionner », « Tout cocher », rien du tout) et sans Maj+clic.
 - **Je te conseille** : une seule façon : le bouton « ☑ Choisir des lignes » dans la barre H10, puis la barre commune en bas (Tout cocher (N), Maj+clic, les actions de la liste, ✕ Décocher). Commencer par les listes où l’on agit souvent sur plusieurs lignes : Médias, Recueils, Revues, Paniers.
+- **Déjà fait** : les photos « À ranger » d’un recueil (voir plus haut). **Reste** : Paniers (sa barre du bas agit aussi sur « les trouvés » quand rien n’est coché : à garder ou non ?), ADN, Atelier, Imports, À trier, Recherche, et les listes de données (« ☑ Choisir des lignes » à elles).
 - **Travail** : gros (par lots).
 
-### 4. Exporter : la fenêtre commune pour tout ce qui sort en fichier
-- **Ce qui change** : 31 outils passent par la fenêtre « ⤓ Exporter » commune (formats, nom du fichier, aperçu, « Ranger aussi une copie dans les médias »). Environ 35 autres fabriquent leur fichier CSV eux-mêmes, d’un clic, sans choix du nom ni des colonnes (Revues, Paniers, Registres, Suivi des animaux, Contrôle de la base, Successions, Tableau de bord, Rapports, ADN des cousins…).
-- **Je te conseille** : tout « ⤓ Exporter » ouvre la même fenêtre ; pour une liste : 📄 CSV, 🧮 Ouvrir dans le tableur, 📊 Excel, et « ce qu’on voit / toute la liste » (comme Mes listes).
-- **Travail** : moyen à gros.
+### 4. Exporter : les derniers CSV faits à la main
+- **Ce qui change** : presque tous les « ⤓ Exporter » ouvrent maintenant la fenêtre commune (voir plus haut). Restent à part : Rapports (son CSV met des guillemets partout et garde les lignes de groupe), Successions → recherches et activité (chaque export laisse une trace dans le dossier), Atelier de recherche (sa propre fenêtre : projet complet, Word, CSV, tableur), Cousinade (sa propre fenêtre avec « avec ou sans les coordonnées »), les fichiers à un format imposé (DNA Painter, Movebank d’un seul animal, modèle de dépouillement).
+- **Je te conseille** : Rapports et Successions dans la fenêtre commune en gardant leur trace ; laisser à part les formats imposés et les fenêtres qui ont déjà leurs choix.
+- **Travail** : petit.
 
 ## 3. Ce qui est déjà pareil partout (vérifié)
 

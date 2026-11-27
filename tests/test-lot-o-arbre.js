@@ -108,7 +108,7 @@ const SHOT = process.env.LOT_O_SHOT || '';
         assert.strictEqual(l.lines[0].surname, 'MAZAUD'); assert.strictEqual(l.lines[0].left.name, 'Louis MAZAUD'); assert.strictEqual(l.lines[0].left.job, 'Cheminot');
         assert.ok(l.gens.length >= 3 && l.gens.every(x => x.roman));
         const s = (await get('lot_o_arbre', {card: 'signatures'})).body;
-        assert.deepStrictEqual(s.chain.map(x => [x.name, x.year, x.signed]), [['Léonard MAZAUD', 1788, 0], ['Pierre MAZAUD', 1850, 0], ['Jean MAZAUD', 1876, 1], ['Louis MAZAUD', null, null]]);
+        assert.deepStrictEqual(s.chain.map(x => [x.name, x.year, x.signed]), [['Léonard MAZAUD', 1788, 0], ['Pierre MAZAUD', 1850, 0], ['Jean MAZAUD', 1876, 1], ['Louis MAZAUD', 1905, null]]);
     });
     await t('serveur : la fiche — orphelin à 4 ans, canton, dispense ; posthume ; quitter la terre ; rien pour une fiche vivante ; erreurs', async () => {
         const j = (await get('lot_o_person', {id: 2})).body;
@@ -145,12 +145,12 @@ const SHOT = process.env.LOT_O_SHOT || '';
             assert.match(await text('[data-lo-card="dispense"] .lo-lead'), /cousins « issus de germain ».*3ᵉ degré pour l’Église, 5ᵉ pour la loi civile en 1876.*Il fallait une dispense/);
             assert.ok(await p.$('[data-lo-card="dispense"] .lo-verdict'));
             assert.match(await text('[data-lo-card="land"] .lo-lead'), /Ta lignée MAZAUD a quitté la terre à la génération I.*Louis MAZAUD, devenu cheminot/);
-            assert.match(await text('[data-lo-card="orphans"] .lo-lead'), /1 enfants sont nés après la mort de leur père/);
+            assert.match(await text('[data-lo-card="orphans"] .lo-lead'), /1 enfant est né après la mort de son père, et 3 ont perdu un parent avant 10 ans/);
             assert.match(await text('[data-lo-card="signatures"] .lo-lead'), /la première signature arrive en 1876/);
             const all = await text('[data-lo-page]'); assert.ok(!LIVING.test(all), 'aucune fiche vivante nommée');
             assert.ok(await p.$('[data-lo-card="tempsclos"] a[href^="https://fr.wikisource.org/"][target="_blank"]'), 'source ↗');
             assert.ok(await p.$('[data-lo-card="widow"] [data-lo-diag="vieveuvage"]'), 'le diagramme existant');
-            if (SHOT) { fs.mkdirSync(SHOT, {recursive: true}); await p.screenshot({path: path.join(SHOT, 'page.png'), fullPage: true}); }
+            if (SHOT) { fs.mkdirSync(SHOT, {recursive: true}); await p.screenshot({path: path.join(SHOT, 'page.png'), fullPage: true}); for (const el of await p.$$('[data-lo-card]')) { await el.scrollIntoViewIfNeeded(); await el.screenshot({path: path.join(SHOT, `carte-${await el.getAttribute('data-lo-card')}.png`)}); } }
         });
         await t('écran : 🤰 avec tact — aucun nom au départ ; « Montrer les couples » dans ⚙️ les montre ; ↶ Comme avant + ↶ Annuler', async () => {
             const card = '[data-lo-card="prenup"]';
@@ -190,12 +190,14 @@ const SHOT = process.env.LOT_O_SHOT || '';
             await p.click('[data-lo-filter="all"]');
         });
         await t('écran : thème sombre (les barres changent de couleur) et écran de téléphone (390 px, rien ne déborde)', async () => {
-            const fill = () => p.$eval('[data-lo-card="tempsclos"] rect.lo-bar', el => getComputedStyle(el).fill);
-            const light = await fill();
-            await p.evaluate(() => document.documentElement.setAttribute('data-theme', 'dark')); const dark = await fill();
-            assert.notStrictEqual(light, dark);
+            const fill = () => p.$eval('[data-lo-card="tempsclos"]', el => [getComputedStyle(el.querySelector('rect.lo-zone')).fill, getComputedStyle(el.querySelector('svg.lo-viz text')).fill].join(' '));
+            const light = (await fill()).split(' rgb');
+            const theme = async preset => { await p.evaluate(x => { if (x) localStorage.setItem('genealogie-design', JSON.stringify({preset: x})); else localStorage.removeItem('genealogie-design'); }, preset); await p.reload(); await p.waitForFunction(() => window.LCNDA_APP?.state?.csrf && window.LCNDA_EXT?.lotO, null, {timeout: 60000}); await openPage(); };
+            await theme('dark'); assert.strictEqual(await p.evaluate(() => document.documentElement.dataset.theme), 'dark');
+            const dark = (await fill()).split(' rgb');
+            light.forEach((v, i) => assert.notStrictEqual(v, dark[i], `couleur ${i} : ${v}`));
             if (SHOT) await p.screenshot({path: path.join(SHOT, 'page-sombre.png'), fullPage: true});
-            await p.evaluate(() => document.documentElement.removeAttribute('data-theme'));
+            await theme('');
             await p.setViewportSize({width: 390, height: 844}); await sleep(400);
             const over = await p.evaluate(() => [...document.querySelectorAll('[data-lo-page] .lo-card')].filter(c => !c.hidden && c.getBoundingClientRect().right > window.innerWidth + 1).map(c => c.dataset.loCard));
             assert.deepStrictEqual(over, []);
@@ -209,13 +211,13 @@ const SHOT = process.env.LOT_O_SHOT || '';
             const hasRules = await p.$('[data-l10r-person="2"]');
             if (hasRules) {
                 await p.waitForSelector('[data-l10r-person="2"] [data-lo-line="dispense"]', {timeout: 20000});
-                assert.match(await text('[data-l10r-person="2"] [data-lo-line="dispense"]'), /Il et Marie DURAND|Marie DURAND étaient parents au 3ᵉ degré pour l’Église : dispense nécessaire en 1876/);
+                assert.match(await text('[data-l10r-person="2"] [data-lo-line="dispense"]'), /Marie DURAND et lui étaient parents au 3ᵉ degré pour l’Église : dispense nécessaire en 1876/);
                 assert.match(await text('[data-l10r-person="2"] [data-lo-line="paix"]'), /conseil de famille, chez le juge de paix du canton/);
             }
             await sleep(500);
             assert.strictEqual(await p.$$eval('#workspace .person-page section.card', a => a.length), blocks0, 'aucun bloc en plus');
             assert.strictEqual(await p.$$eval('[data-lo-line="fam"]', a => a.length), 1, 'une seule phrase');
-            if (SHOT) await p.screenshot({path: path.join(SHOT, 'fiche.png'), fullPage: true});
+            if (SHOT) { for (const [nm, sel] of [['famille', '.pa-family-bar'], ['regles', 'section.card:has([data-l10r-person])']]) { const el = await p.$(sel); if (el) { await el.scrollIntoViewIfNeeded(); await el.screenshot({path: path.join(SHOT, `fiche-${nm}.png`)}); } } }
             await p.evaluate(async () => { const A = window.LCNDA_APP; A.state.currentPersonId = 13; await A.setModule('personnes'); });
             await p.waitForSelector('.pa-family-bar [data-lo-line="fam"]', {timeout: 20000});
             assert.match(await text('.pa-family-bar [data-lo-line="fam"]'), /Il est né 7 mois après la mort de son père/);

@@ -12396,6 +12396,7 @@
   "other": "artikels"
  },
  "Article": "Artikel",
+ "ARTICLE": "ARTIKEL",
  "Article « {name} » supprimé": "Artikel ‘{name}’ verwijderd",
  "Article de revue": "Tijdschriftartikel",
  "Article du DHS": "HLS-artikel",
@@ -61216,6 +61217,7 @@
  "Tracteur vert": "Groene tractor",
  "Traction avant": "Citroën Traction Avant",
  "Traduction": "Vertaling",
+ "TRADUCTION": "VERTALING",
  "Traduction copiée.": "Vertaling gekopieerd.",
  "Traduction en cours (le modèle tourne sur cet ordinateur)…": "Bezig met vertalen (het model draait op deze computer)…",
  "Traduction en cours, sur cet ordinateur…": "Bezig met vertalen, op deze computer…",

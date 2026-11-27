@@ -139,6 +139,8 @@ box.innerHTML = UI.itemsHtml(view, list.map(r => ({thumb: '<img …>', name: r.t
     lines: ['ligne grise', '…'], date: 'Modifié le …', actions: '<button …>'})));   // ou UI.cardsHtml / UI.rowsHtml
 ```
 
+- `UI.segmented({items: [{on, attrs, html, title, disabled}], label, cls, attrs, tag})` : un groupe d’onglets segmentés qui met **toujours les deux marques** (`.is-active` pour l’œil, `aria-pressed` pour les lecteurs d’écran) ; au clic, `UI.segPick(bouton)` (ou `UI.segMark(bouton, on)`). Ne plus écrire un groupe `aria-pressed` à la main (garde : `tests/test-harmo-pieces.js`).
+- `UI.extLink(adresse, nomDuSite, {cls, title, attrs})` : un lien qui sort de l’app, toujours « ↗ Nom du site », l’adresse en bulle, `target="_blank" rel="noopener noreferrer"` ; sans nom (ou « Ouvrir », « la source ») : le nom du site tiré de l’adresse (`UI.siteName`, « ↗ Gallica ») ; un signe devant le nom est retiré (un seul signe : ↗) ; `javascript:`, `data:`… → « # ».
 - `UI.viewToggle({key, value, onChange, what, dflt})` seul (classe `.segmented.ui-viewtoggle`, `.value`, `.set(v)`) ; sans `key`, l'appelant retient le choix lui-même. `UI.putViewToggle(bar, toggle)` le pose dans une barre C6 déjà faite. Aussi `A().viewToggle`.
 - « Liste » = tableau existant ou `UI.rowsHtml` (petite vignette, nom, ligne grise, date) ; « Fiches » = `UI.cardsHtml` (grande vignette 150 px) ou les cartes propres à la liste. Styles dans `ui.css` (clair, sombre, téléphone).
 
@@ -208,7 +210,7 @@ Jamais de « Chargement… » écrit seul (`<p class="muted">Chargement…</p>`)
 
 ### H7 — Messages après une action : `toast()` et « ↶ Annuler » au lieu de « Es-tu sûr ? »
 
-Un seul composant, toujours en bas à gauche, 6 s (× le réglage d’accessibilité), barre bleue du temps qui reste, en pause sous la souris ou le clavier ; 4 messages au plus.
+Un seul composant, toujours en bas à gauche, 6 s (× le réglage d’accessibilité), barre bleue du temps qui reste, en pause sous la souris ou le clavier ; 4 messages au plus. Pas de durée à part (`{duration: 15000}`) : le réglage de l’utilisateur s’applique partout ; seules exceptions, un message très long à lire (image trop grande) et « la généalogie a changé, ↻ Recharger » (garde : `tests/test-harmo-pieces.js`).
 
 ```js
 const A = window.LCNDA_APP;

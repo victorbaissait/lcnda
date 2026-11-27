@@ -21,7 +21,7 @@
     const A = () => window.LCNDA_APP || {};
     const T = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (_, k) => (v && k in v ? v[k] : `{${k}}`)));
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
-    const V = '4'; // le ?v= des deux fichiers chargés à la demande
+    const V = '5'; // le ?v= des deux fichiers chargés à la demande
     const KEY = 'genealogie-je-veux', HKEY = 'genealogie-je-veux-hist';
     const DEF = {on: true, cmdk: true, recherche: true, top: false, widget: false, bubbles: false, show: 'first', n: 3, ia: false, hist: true, often: true};
     const read = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v && typeof v === 'object' ? v : d; } catch (_) { return d; } };

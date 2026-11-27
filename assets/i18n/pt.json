@@ -12480,6 +12480,7 @@
   "many": "artigos"
  },
  "Article": "Artigo",
+ "ARTICLE": "ARTIGO",
  "Article « {name} » supprimé": "Artigo «{name}» eliminado",
  "Article de revue": "Artigo de revista",
  "Article du DHS": "Artigo do DHS",
@@ -61924,6 +61925,7 @@
  "Tracteur vert": "Trator verde",
  "Traction avant": "Citroën Arrastadeira",
  "Traduction": "Tradução",
+ "TRADUCTION": "TRADUÇÃO",
  "Traduction copiée.": "Tradução copiada.",
  "Traduction en cours (le modèle tourne sur cet ordinateur)…": "A traduzir (o modelo corre neste computador)…",
  "Traduction en cours, sur cet ordinateur…": "A traduzir, neste computador…",

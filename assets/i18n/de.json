@@ -12396,6 +12396,7 @@
   "other": "Artikel"
  },
  "Article": "Artikel",
+ "ARTICLE": "ARTIKEL",
  "Article « {name} » supprimé": "Artikel „{name}“ gelöscht",
  "Article de revue": "Zeitschriftenartikel",
  "Article du DHS": "HLS-Artikel",
@@ -61216,6 +61217,7 @@
  "Tracteur vert": "Grüner Traktor",
  "Traction avant": "Citroën Traction Avant",
  "Traduction": "Übersetzung",
+ "TRADUCTION": "ÜBERSETZUNG",
  "Traduction copiée.": "Übersetzung kopiert.",
  "Traduction en cours (le modèle tourne sur cet ordinateur)…": "Übersetzung läuft (das Modell läuft auf diesem Computer)…",
  "Traduction en cours, sur cet ordinateur…": "Wird übersetzt, auf diesem Computer …",

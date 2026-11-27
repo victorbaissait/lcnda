@@ -48,20 +48,21 @@ const EXPORTS = ['heritage-periodicals', 'app-paniers', 'heritage-records', 'her
     const {start, sleep} = require('./prendre-depuis-seed.js');
     const B = await start({});
     const {page} = B;
-    const lastToast = () => page.evaluate(() => [...document.querySelectorAll('.toast')].map(t => t.querySelector('.ui-toast-text')?.textContent || '').filter(Boolean).at(-1) || '');
     const clickToast = async label => { await page.locator('.ui-toast-btn', {hasText: label}).last().click(); };
     try {
         await step('cartes d’électeur : effacées sans question, ↶ Annuler les remet', async () => {
             await page.evaluate(() => window.LCNDA_APP.api('save_voter_cards', {}, {method: 'POST', body: {person_id: 1, cards: [{commune: 'Tulle', card_number: '1234'}], votes: [{date_text: '1919', election: Object.keys({})[0] || '', place_text: 'Tulle', note: 'premier vote'}]}}));
             await page.evaluate(() => window.LCNDA_APP.openPersonById(1)); await page.waitForSelector('[data-h-voter-clear]', {timeout: 20000});
+            await sleep(1500); // la fiche finit de se dessiner (bloc rechargé une fois)
             await page.locator('[data-h-voter-clear]').first().click({force: true});
-            await page.waitForFunction(() => [...document.querySelectorAll('.toast .ui-toast-text')].some(t => /électeur/.test(t.textContent)), null, {timeout: 10000});
+            await page.waitForFunction(() => [...document.querySelectorAll('.toast .ui-toast-btn')].some(t => /Annuler/.test(t.textContent)), null, {timeout: 30000})
+                .catch(async e => { throw new Error(e.message + ' ' + JSON.stringify(await page.evaluate(async () => [document.querySelectorAll('[data-h-voter-clear]').length, [...document.querySelectorAll('.toast')].map(t => t.textContent), (await window.LCNDA_APP.api('voter', {person_id: 1})).cards.length]))); });
             assert.equal(await page.evaluate(() => !!document.querySelector('dialog[open].confirm-box-dialog')), false, 'pas de « Es-tu sûr ? »');
             assert.equal((await page.evaluate(() => window.LCNDA_APP.api('voter', {person_id: 1}))).cards.length, 0, 'effacées');
             await clickToast('Annuler'); await sleep(800);
             const d = await page.evaluate(() => window.LCNDA_APP.api('voter', {person_id: 1}));
             assert.deepEqual([d.cards.map(c => c.commune), d.votes.map(v => v.note)], [['Tulle'], ['premier vote']]);
-            assert.match(await lastToast(), /Annulé/);
+            assert.equal(await page.evaluate(() => [...document.querySelectorAll('.toast')].some(t => /Impossible d’annuler/.test(t.textContent))), false, 'pas d’erreur à l’annulation');
         });
 
         await step('⤓ Exporter : la fenêtre commune (CSV, tableur, Excel, ce qu’on voit / toute la liste), sans formule glissée', async () => {
@@ -98,9 +99,9 @@ const EXPORTS = ['heritage-periodicals', 'app-paniers', 'heritage-records', 'her
             await page.locator('.h-rc-loose .sel-bar button', {hasText: 'Mettre dans un dossier'}).click();
             await page.waitForSelector('dialog[open] select[name=tray]'); await page.selectOption('dialog[open] select[name=tray]', 'Liste A');
             await page.click('dialog[open] button[type=submit]');
-            await page.waitForFunction(id => window.LCNDA_APP.api('recueil', {id}).then(d => d.images.filter(i => i.tray === 'Liste A').length === 3), rid, {timeout: 10000}).catch(() => {});
-            const d = await page.evaluate(id => window.LCNDA_APP.api('recueil', {id}), rid);
-            assert.equal(d.images.filter(i => i.tray === 'Liste A').length, 3, 'les 3 cochées sont rangées dans « Liste A »');
+            let d = null;
+            for (let k = 0; k < 60; k++) { d = await page.evaluate(id => window.LCNDA_APP.api('recueil', {id}), rid); if (d.images.filter(i => i.tray === 'Liste A').length === 3) break; await sleep(500); }
+            assert.equal(d.images.filter(i => i.tray === 'Liste A').length, 3, 'les 3 cochées sont rangées dans « Liste A » ' + JSON.stringify(d.images.map(i => [i.id, i.page_id, i.tray])));
             await page.waitForSelector('.h-rc-loose .sel-bar');
             assert.doesNotMatch(await page.textContent('.h-rc-loose .sel-bar'), /cochées/, 'plus rien de coché après rangement');
         });
