@@ -11,7 +11,8 @@
  *   show(el)            ce bloc (ou tous ceux contenus dans el) tout de suite
  *   showAll()           toute la fiche (⌘F, imprimer, exporter, « Tout sur », aller à une section) — renvoie une promesse
  *   eager(key)          un bloc qui ne doit jamais attendre (un lot le déclare une fois)
- *   pending()           le nombre de blocs en attente }
+ *   pending()           le nombre de blocs en attente
+ *   holds(el)           el attend avec son bloc (sorti de la page, pas perdu : « if (!box.isConnected) return » le perdrait) }
  * Sans IntersectionObserver (ancien navigateur) ou dans un aperçu : rien n'est mis en attente.
  */
 (function () {
@@ -119,5 +120,7 @@
     window.addEventListener('beforeprint', () => { [...held.keys()].forEach(restore); });
     document.addEventListener('keydown', e => { if ((e.metaKey || e.ctrlKey) && !e.altKey && String(e.key).toLowerCase() === 'f' && held.size) [...held.keys()].forEach(restore); }, true);
 
-    window.LCNDA_SHEET_LAZY = {veil, capture, show, showAll, eager: key => { EAGER.add(String(key)); }, pending: () => held.size, MARGIN};
+    // un élément mis de côté avec son bloc (le temps qu'il arrive à l'écran) est toujours là : ce qui le remplit après une lecture le remplit quand même
+    const holds = el => !!el && [...held.values()].some(f => f.contains(el));
+    window.LCNDA_SHEET_LAZY = {veil, capture, show, showAll, holds, eager: key => { EAGER.add(String(key)); }, pending: () => held.size, MARGIN};
 })();

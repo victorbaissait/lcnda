@@ -1266,8 +1266,8 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_RFR_DATA = <?= json_encode(json_decode((string) @file_get_contents(__DIR__ . '/assets/data/recherche-fr.json'), true) ?: new stdClass(), JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP) ?>;</script>
 <script src="assets/js/app-recherche-fr.js?v=1" defer></script>
 <script>window.LCNDA_MEDIA_LIMITS = <?= json_encode($ready ? media_limits_for_page() : null) ?>;</script>
-<script src="assets/js/app-fiche-lazy.js?v=10" defer></script><!-- ⏱ la fiche se charge à mesure qu’on la lit -->
-<script src="assets/js/app.js?v=630" defer></script>
+<script src="assets/js/app-fiche-lazy.js?v=11" defer></script><!-- ⏱ la fiche se charge à mesure qu’on la lit -->
+<script src="assets/js/app.js?v=633" defer></script>
 <script src="assets/js/app-media-limits.js?v=2" defer></script>
 <script src="assets/js/app-verrou.js?v=7" defer></script>
 <script src="assets/js/app-reseau-local.js?v=5" defer></script>

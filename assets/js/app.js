@@ -151,7 +151,7 @@
         'lcnda-faces-speed':'genealogie-faces-speed','lcnda-tr-era':'genealogie-tr-era','lcnda-fond-ecran':'genealogie-fond-ecran',
         // les jeux (lcnda-jeux-famille-prefs-v1, lcnda-laby-*) restent sur cet ordinateur : une partie n'écrit jamais dans la base (tests/test-jeux-cartes.js)
     };
-    var LS_WRITES={n:0,on:false}; // var : lu avant cette ligne au démarrage
+    var LS_WRITES={n:0,on:false,echo:null}; // var : lu avant cette ligne au démarrage ; echo : les clés écrites pendant qu'on reprend un changement d'une autre fenêtre (plus bas)
     (function renameSettingKeys(){
         let store;try{store=window.localStorage;store.length;}catch(_){return;}
         try{Object.freeze(SETTING_RENAMES);window.LCNDA_SETTING_RENAMES=SETTING_RENAMES;}catch(_){}
@@ -167,8 +167,11 @@
         proto.getItem=function(key){if(this===store&&toNew.has(String(key)))return get.call(this,toNew.get(String(key)));return get.call(this,key);};
         // écrire l'un écrit les deux (le nouveau part dans la base) ; retirer l'un retire les deux
         // ⏱ LS_WRITES : compte les écritures (ici, un autre onglet, clear) : ce qui est relu de localStorage peut être gardé tant qu'il ne bouge pas
-        proto.setItem=function(key,value){if(this===store)LS_WRITES.n++;set.call(this,key,value);if(this===store){const k=String(key),twin=toNew.get(k)||toOld.get(k);if(twin)set.call(this,twin,value);}};
-        proto.removeItem=function(key){if(this===store)LS_WRITES.n++;remove.call(this,key);if(this===store){const k=String(key),twin=toNew.get(k)||toOld.get(k);if(twin)remove.call(this,twin);}};
+        proto.setItem=function(key,value){if(this===store){LS_WRITES.n++;if(LS_WRITES.echo&&get.call(this,key)!==String(value))LS_WRITES.mark(key);}set.call(this,key,value);if(this===store){const k=String(key),twin=toNew.get(k)||toOld.get(k);if(twin)set.call(this,twin,value);}};
+        proto.removeItem=function(key){if(this===store){LS_WRITES.n++;if(LS_WRITES.echo&&get.call(this,key)!==null)LS_WRITES.mark(key);}remove.call(this,key);if(this===store){const k=String(key),twin=toNew.get(k)||toOld.get(k);if(twin)remove.call(this,twin);}};
+        /* 🔁 l'écho (plus bas, « Plusieurs fenêtres ») : ce qu'on écrit en redessinant un changement venu d'une autre fenêtre, sans y avoir touché
+         * soi-même (ni clic ni touche depuis 1 s), est annoncé juste avant (lcnda-cross-echo) : l'autre fenêtre sait que ce n'est pas un réglage */
+        LS_WRITES.mark=key=>{const k=String(key);if(k==='lcnda-cross-echo'||Date.now()-(LS_WRITES.input||0)<1000)return;try{set.call(store,'lcnda-cross-echo',JSON.stringify({k,n:`${Date.now()}.${Math.random().toString(36).slice(2,8)}`}));}catch(_){}};
         const clear=proto.clear;proto.clear=function(){if(this===store)LS_WRITES.n++;return clear.call(this);};
         window.addEventListener('storage',()=>{LS_WRITES.n++;});LS_WRITES.on=true;
         proto.__lcndaRenames=true;
@@ -2679,7 +2682,8 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
             mapCenter:state.mapCenter,listType:state.listType,listGender:state.listGender,listReminderMode:state.listReminderMode,listReminderCategory:state.listReminderCategory,listDisplay:state.listDisplay,listMediaCity:state.listMediaCity,listMediaDateFrom:state.listMediaDateFrom,listMediaDateTo:state.listMediaDateTo,listMediaKind:state.listMediaKind,listSosaSort:state.listSosaSort,listSosaMissing:state.listSosaMissing,listSosaImpossible:state.listSosaImpossible,listSosaRootId:state.listSosaRootId,listSosaRootName:state.listSosaRootName,listDabovilleSort:state.listDabovilleSort,listDabovilleRootId:state.listDabovilleRootId,listDabovilleRootName:state.listDabovilleRootName,listCourrierFilter:state.listCourrierFilter,externalLinksSort:state.externalLinksSort,externalLinksCountry:state.externalLinksCountry,externalLinksQuery:state.externalLinksQuery,researchKind:state.researchKind,researchDisplay:state.researchDisplay,research:state.research,placeNameSearch:state.placeNameSearch,dateSearch:state.dateSearch,proximitySearch:state.proximitySearch,transcriptionSearch:state.transcriptionSearch,inseeSearch:state.inseeSearch,investigationStatus:state.investigationStatus,investigationDisplay:state.investigationDisplay,investigationQuery:state.investigationQuery,currentInvestigationId:state.currentInvestigationId,currentBattueId:state.currentBattueId,enquetesTab:state.enquetesTab,comparison:state.comparison,comparisonMode:state.comparisonMode,maintenanceTab:state.maintenanceTab,timeline:state.timeline,investigationSort:state.investigationSort,battueSort:state.battueSort,
             sidebarCollapsed:$('#app')?.classList.contains('sidebar-collapsed') || false,scrollPositions:state.scrollPositions,
         };
-        try { localStorage.setItem(PERSIST_KEY,JSON.stringify(data)); } catch (_) {}
+        const json=JSON.stringify(data);if(json===persistUiState.last)return;persistUiState.last=json; // (toutes les 0,5 s : seulement quand quelque chose a bougé)
+        try { localStorage.setItem(PERSIST_KEY,json); } catch (_) {}
     }
 
     function saveScrollPosition() {
@@ -4595,18 +4599,31 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
     /* ── Plusieurs fenêtres (ou écran divisé) : un réglage changé dans l'une est repris par les autres ──
      * Les fenêtres de l'application partagent le même stockage local : le navigateur prévient les AUTRES fenêtres
      * (événement « storage »). On réapplique l'apparence et on réaffiche l'écran, sauf pendant une saisie (on attend). */
-    const CROSS_WINDOW_IGNORED=/^(genealogie-(last-route|baissait-ui-v2|auto-backup-lock|auto-backup-settings|dashboard-recent-people|sosa-map|daboville-map|goose-active-v1|goose-games-v1)$|lcnda-side-panel-)/;
-    let crossWindowTimer=null,crossWindowPending=false;
+    // ce qui n'est pas un réglage (place, mémoire d'écran, caches, comptes, rappels déjà montrés) ne redessine pas l'autre fenêtre
+    const CROSS_WINDOW_IGNORED=/^(genealogie-(last-route|baissait-ui-v2|auto-backup-lock|auto-backup-settings|dashboard-recent-people|sosa-map|daboville-map|goose-active-v1|goose-games-v1|settings-unsent|online-sheets-open)$|lcnda-side-panel-|lcnda-(donnees-pastille|donnees-vu|journal-erreurs|succ-chrono-act)$)|-(cache|seen|vus?|recent|history|notified|reminded|warned)(-|$)/;
+    /* 🔁 deux fenêtres ne se renvoient jamais la balle : ce qu'une fenêtre écrit EN redessinant un changement venu de l'autre (une clé
+     * remise en ordre, un état d'écran, une mémoire) est son écho, annoncé juste avant (lcnda-cross-echo, LS_WRITES.mark plus haut) ;
+     * l'autre fenêtre ne se redessine pas pour un écho (sinon A redessine → écrit → B redessine → écrit → A… sans fin : la page se fige,
+     * la mémoire monte, la fenêtre se recharge). Et, quoi qu'il arrive, au plus quelques fois de suite : au-delà, on attend de plus en plus. */
+    let crossWindowTimer=null,crossWindowPending=false,crossRuns=[],crossEchoKey=null;
+    ['pointerdown','keydown'].forEach(ev=>window.addEventListener(ev,()=>{LS_WRITES.input=Date.now();},{capture:true,passive:true}));
     window.addEventListener('storage',event=>{
         if(event.storageArea&&event.storageArea!==localStorage)return;
+        if(event.key==='lcnda-cross-echo'){try{crossEchoKey=JSON.parse(event.newValue||'null')?.k||null;}catch(_){crossEchoKey=null;}return;}
+        const echo=event.key&&event.key===crossEchoKey;crossEchoKey=null;if(echo)return;
         if(event.key&&(!/^(genealogie-|lcnda-)/.test(event.key)||CROSS_WINDOW_IGNORED.test(event.key)))return;
+        if(event.key&&event.newValue===event.oldValue)return;
         crossWindowPending=true;clearTimeout(crossWindowTimer);crossWindowTimer=setTimeout(applyCrossWindowChange,500);
     });
     function applyCrossWindowChange(){
         if(!crossWindowPending)return;
         const busy=isTypingTarget(document.activeElement)||openModalDialog()||$('#lightbox')?.open||shortcutCaptureHandler;
         if(busy){clearTimeout(crossWindowTimer);crossWindowTimer=setTimeout(applyCrossWindowChange,1500);return;}
-        crossWindowPending=false;
+        const now=Date.now();crossRuns=crossRuns.filter(t=>now-t<20000);
+        if(crossRuns.length>=4){const wait=Math.min(30000,1000*2**(crossRuns.length-3));if(now-crossRuns[crossRuns.length-1]<wait){clearTimeout(crossWindowTimer);crossWindowTimer=setTimeout(applyCrossWindowChange,wait-(now-crossRuns[crossRuns.length-1]));return;}}
+        crossRuns.push(now);crossWindowPending=false;
+        // les écritures de ce redessin et de ce qu'il lance juste après (blocs, aperçus, mémoires) : 3 s d'écho
+        const echo=LS_WRITES.echo={};setTimeout(()=>{if(LS_WRITES.echo===echo)LS_WRITES.echo=null;},3000);
         try{applyDesign();}catch(_){}
         try{applyMenuOrder();}catch(_){}
         try{document.documentElement.classList.toggle('transcription-stacked',localStorage.getItem('genealogie-transcription-layout')==='stacked');}catch(_){}
@@ -9510,7 +9527,7 @@ ${backupSectionHtml()}
     async function paFillGrowth(){
         const box=$('[data-pa-growth]');const pet=Number(box?.dataset.paGrowth)||0;if(!box||!pet)return;
         let data;try{data=await api('suivi');}catch(error){box.innerHTML=`<small class="muted">${escapeHtml(error.message)}</small>`;return;}
-        if(!box.isConnected)return;
+        if(!box.isConnected&&!window.LCNDA_SHEET_LAZY?.holds?.(box))return; // ⏱ son bloc attend d'arriver à l'écran : on le remplit quand même
         const an=(data.animals||[]).find(a=>Number(a.id)===pet);
         const pts=(an?.weights||[]).map(w=>({iso:String(w.iso||''),g:Number(w.g),t:Date.parse(String(w.iso||'').slice(0,10))})).filter(p=>Number.isFinite(p.g)&&Number.isFinite(p.t)).sort((a,b)=>a.t-b.t);
         if(!pts.length){box.innerHTML=empty(i18n('Pas encore de pesée : ajoute un poids dans 🩺 Santé.'),{icon:'⚖️'});return;}
