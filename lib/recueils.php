@@ -615,8 +615,8 @@ function recueil_media_targets(PDO $pdo, string $type, string $key): array
             }
         } elseif ($type === 'investigation') {
             $add("investigation:$id:0", '📂 Racine de l’enquête');
-            $s = $pdo->prepare('SELECT id, name FROM investigation_media_folders WHERE investigation_id=? ORDER BY name COLLATE NOCASE'); $s->execute([$id]);
-            foreach ($s as $f) { $add("investigation:$id:" . $f['id'], '📁 ' . $f['name']); }
+            $s = $pdo->prepare('SELECT * FROM investigation_media_folders WHERE investigation_id=? ORDER BY name COLLATE NOCASE'); $s->execute([$id]);
+            foreach ($s as $f) { $add("investigation:$id:" . $f['id'], (($f['icon'] ?? '') ?: '📁') . ' ' . $f['name']); }
         } elseif ($type === 'atelier_project') {
             $add("atelier:$id:0", '📂 Racine du projet');
             $s = $pdo->prepare('SELECT id, name FROM atelier_folders WHERE project_id=? ORDER BY position, id'); $s->execute([$id]);

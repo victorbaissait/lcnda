@@ -12742,6 +12742,8 @@ function save_investigation_media_folder(PDO $pdo,array $data): array
         $investigationId=(int)$stmt->fetchColumn();
         if(!$investigationId)throw new RuntimeException('Dossier introuvable');
         $pdo->prepare('UPDATE investigation_media_folders SET name=? WHERE id=?')->execute([$name,$id]);
+        // 🎨 couleur et icône : seulement celles qu'on envoie (un simple renommage n'y touche pas)
+        foreach(investigation_folder_style($data) as $col=>$val)$pdo->prepare("UPDATE investigation_media_folders SET $col=? WHERE id=?")->execute([$val,$id]);
         return ['id'=>$id,'investigation_id'=>$investigationId];
     }
     if(!$investigationId)throw new RuntimeException('Enquête manquante');
@@ -12752,8 +12754,18 @@ function save_investigation_media_folder(PDO $pdo,array $data): array
         $stmt->execute([$parentId,$investigationId]);
         if(!$stmt->fetchColumn())throw new RuntimeException('Dossier parent invalide');
     }
-    $pdo->prepare('INSERT INTO investigation_media_folders(investigation_id,parent_id,name) VALUES(?,?,?)')->execute([$investigationId,$parentId,$name]);
+    $style=investigation_folder_style($data);
+    $pdo->prepare('INSERT INTO investigation_media_folders(investigation_id,parent_id,name,color,icon) VALUES(?,?,?,?,?)')->execute([$investigationId,$parentId,$name,$style['color']??'',$style['icon']??'']);
     return ['id'=>(int)$pdo->lastInsertId(),'investigation_id'=>$investigationId];
+}
+
+/** 🎨 la couleur (« #rrggbb », vide = aucune) et l'icône (un emoji, vide = 📁) d'un dossier de pièces, parmi celles envoyées */
+function investigation_folder_style(array $data): array
+{
+    $out=[];
+    if(array_key_exists('color',$data)){$c=strtolower(trim((string)$data['color']));$out['color']=preg_match('/^#[0-9a-f]{6}$/',$c)?$c:'';}
+    if(array_key_exists('icon',$data)){$i=trim(safe_text($data['icon']));$i=mb_substr($i,0,8);$out['icon']=$i==='📁'?'':$i;}
+    return $out;
 }
 
 function delete_investigation_media_folder(PDO $pdo,array $data): array

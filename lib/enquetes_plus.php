@@ -234,7 +234,8 @@ function enqp_post(PDO $pdo, array $d): array
             $fid = safe_int($f['id'] ?? 0); $inv = safe_int($f['investigation_id'] ?? 0); $parent = safe_int($f['parent_id'] ?? 0) ?: null;
             if (!$fid || !enqp_inv_exists($pdo, $inv)) { throw new RuntimeException('L’enquête de ce dossier n’existe plus.'); }
             if ($parent) { $c = $pdo->prepare('SELECT 1 FROM investigation_media_folders WHERE id=? AND investigation_id=?'); $c->execute([$parent, $inv]); if (!$c->fetchColumn()) { $parent = null; } }
-            $pdo->prepare('INSERT OR IGNORE INTO investigation_media_folders(id, investigation_id, parent_id, name) VALUES(?,?,?,?)')->execute([$fid, $inv, $parent, safe_text($f['name'] ?? 'Dossier') ?: 'Dossier']);
+            $st = function_exists('investigation_folder_style') ? investigation_folder_style(['color' => $f['color'] ?? '', 'icon' => $f['icon'] ?? '']) : ['color' => '', 'icon' => '']; // 🎨 sa couleur et son icône aussi
+            $pdo->prepare('INSERT OR IGNORE INTO investigation_media_folders(id, investigation_id, parent_id, name, color, icon) VALUES(?,?,?,?,?,?)')->execute([$fid, $inv, $parent, safe_text($f['name'] ?? 'Dossier') ?: 'Dossier', $st['color'], $st['icon']]);
             $m = $pdo->prepare('UPDATE investigation_media SET folder_id=? WHERE id=? AND investigation_id=?');
             foreach ((array) ($d['media_links'] ?? []) as $l) { $m->execute([$fid, safe_int($l), $inv]); }
             $c = $pdo->prepare('UPDATE investigation_media_folders SET parent_id=? WHERE id=? AND investigation_id=?');
