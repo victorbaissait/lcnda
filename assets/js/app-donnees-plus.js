@@ -151,8 +151,12 @@
                 if (tid === 'aranger') continue;
                 const ok = ds.filter(d => !d.link && d.geo && d.period && !d.query && !d.heavy && typeof d.load === 'function'); // heavy : trop grosse pour être lue à chaque fiche (ex. 🏛 1,7 million de biens protégés) : seulement quand on l’ouvre
                 const inst = []; for (const d of ok) { try { if (await E().isInstalled?.(d)) inst.push(d); } catch (_) { candAt = 0; } } // une vérification ratée : cette liste est sautée, et on revérifie la prochaine fois
-                const mg = inst.filter(d => d.merged);
-                const plain = inst.filter(d => !d.merged && !(mg.length && (src.has(d.id) || d.merge))); // une source déjà dans une liste réunie installée ne compte pas deux fois
+                // une liste réunie dont une source se lit au serveur page après page (mr_list, ld_query…) n'est pas lue à chaque fiche,
+                // comme ces listes-là seules (!d.query) : sinon chaque fiche relisait des dizaines de milliers de lignes en arrière-plan
+                const LR = ext.listesReunies, srcOf = d => { const M = (LR?.defs?.() || []).find(m => m.id === d.mergeId); return M ? (LR.sourcesOf?.(M) || []) : []; };
+                const mg = inst.filter(d => d.merged && !srcOf(d).some(x => x.d?.query || x.d?.heavy));
+                const kept = new Set(mg.flatMap(d => srcOf(d).map(x => x.list)));
+                const plain = inst.filter(d => !d.merged && !(mg.length && (kept.has(d.id) || d.merge))); // une source déjà dans une liste réunie gardée ne compte pas deux fois
                 plain.sort((a, b) => (b.familyColumn ? 1 : 0) - (a.familyColumn ? 1 : 0)); // celles faites pour « Dans la famille » d'abord
                 [...mg.slice(0, 2), ...plain.slice(0, 5)].forEach(d => out.push({d, theme: tid}));
             }

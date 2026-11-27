@@ -1428,6 +1428,13 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
     }
 
     const API_INFLIGHT = new Map(); // lectures en route (api ci-dessous)
+    /* ⏱ les lectures (api() en GET) : 4 à la fois au plus, les autres attendent leur tour dans la page. Une fiche en demande des dizaines
+     * d'un coup à un serveur PHP qui les sert une par une : elles n'encombrent plus le navigateur, et une lecture demandée juste après un
+     * clic ou une touche (ce que l'on attend vraiment) passe devant celles de fond. Les écritures ne passent jamais par là. */
+    const READ_MAX=4,READ_Q=[];let readActive=0,lastInput=0;
+    ['pointerdown','keydown'].forEach(ev=>window.addEventListener(ev,()=>{lastInput=performance.now();},{capture:true,passive:true}));
+    function readSlot(){return new Promise(ok=>{const go=()=>{readActive++;let done=false;const t=setTimeout(free,15000);function free(){if(done)return;done=true;clearTimeout(t);readActive--;const n=READ_Q.shift();if(n)n();}ok(free);};
+        if(readActive<READ_MAX)go();else if(performance.now()-lastInput<800)READ_Q.unshift(go);else READ_Q.push(go);});}
     async function api(action, params = {}, options = {}) {
         const url = new URL('api.php', location.href);
         url.searchParams.set('action', action);
@@ -1456,7 +1463,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
                 const key = (state.writeCount || 0) + '\n' + url.href + '\n' + JSON.stringify(init.headers);
                 let pending = API_INFLIGHT.get(key);
                 if (!pending) {
-                    pending = fetch(url, init).then(async r => ({status: r.status, ok: r.ok, text: await r.text().catch(() => '')}));
+                    pending = readSlot().then(free => fetch(url, init).then(async r => ({status: r.status, ok: r.ok, text: await r.text().catch(() => '')})).finally(free));
                     API_INFLIGHT.set(key, pending);
                     const done = () => { if (API_INFLIGHT.get(key) === pending) API_INFLIGHT.delete(key); };
                     pending.then(done, done);

@@ -69,7 +69,7 @@ function ta_http(string $step, string $url): string
     $wait = 0.15 - (microtime(true) - $last); if ($wait > 0) { usleep((int) ($wait * 1e6)); }
     $body = ''; $too = false;
     $ch = curl_init($url);
-    curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER => false, CURLOPT_FOLLOWLOCATION => false, CURLOPT_CONNECTTIMEOUT => 10, CURLOPT_TIMEOUT => 40, CURLOPT_PROTOCOLS => CURLPROTO_HTTPS, CURLOPT_USERAGENT => TA_UA,
+    curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER => false, CURLOPT_FOLLOWLOCATION => false, CURLOPT_CONNECTTIMEOUT => 4, CURLOPT_TIMEOUT => 15, CURLOPT_PROTOCOLS => CURLPROTO_HTTPS, CURLOPT_USERAGENT => TA_UA, // court : la fiche n'attend jamais longtemps Internet
         CURLOPT_WRITEFUNCTION => static function ($c, $chunk) use (&$body, &$too) { $body .= $chunk; if (strlen($body) > 4_000_000) { $too = true; return 0; } return strlen($chunk); }] + (function_exists('lcnda_curl_tls') ? lcnda_curl_tls() : []));
     curl_exec($ch);
     $code = (int) curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
@@ -89,8 +89,12 @@ function ta_cached(string $key, callable $make, bool $only = false): array
     $f = ta_dir('cache') . '/' . sha1($key) . '.json';
     if (is_file($f)) { $j = json_decode((string) @file_get_contents($f), true); if (is_array($j) && isset($j['data'])) { return $j['data'] + ['cached' => true, 'fetched_at' => (int) $j['at']]; } }
     if ($only) { return ['ok' => true, 'notcached' => true]; }
+    // pas de connexion il y a peu (10 min) : on ne redemande pas Internet à chaque fiche (les essais, avec leurs réponses enregistrées, jamais)
+    $down = ta_test_dir() !== '' ? '' : ta_dir('cache') . '/offline.flag';
+    if ($down !== '' && is_file($down) && (int) @filemtime($down) > time() - 600) { return ['ok' => false, 'offline' => true, 'message' => i18n_t('Pas de connexion à Internet : réessaie quand tu seras connecté.')]; }
     try { $data = $make(); }
-    catch (Throwable $e) { return ['ok' => false, 'offline' => true, 'message' => $e->getMessage()]; }
+    catch (Throwable $e) { if ($down !== '' && preg_match('/connexion|connect|timed? ?out|resolve/i', $e->getMessage())) { @mkdir(dirname($down), 0775, true); @touch($down); } return ['ok' => false, 'offline' => true, 'message' => $e->getMessage()]; }
+    if ($down !== '') { @unlink($down); }
     @file_put_contents(ta_dir('cache', true) . '/' . sha1($key) . '.json', json_encode(['key' => $key, 'at' => time(), 'data' => $data], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), LOCK_EX);
     return $data + ['cached' => false, 'fetched_at' => time()];
 }
