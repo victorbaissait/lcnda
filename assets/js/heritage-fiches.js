@@ -389,6 +389,26 @@
         if (inList) out.push('\\end{itemize}');
         return `\\documentclass[11pt]{article}\n\\usepackage[utf8]{inputenc}\n\\usepackage[T1]{fontenc}\n\\usepackage[french]{babel}\n\\usepackage{hyperref}\n\\date{}\n\\begin{document}\n${out.join('\n')}\n\\end{document}\n`;
     }
+    /** 📱 la fiche en ePub (liseuse, téléphone) : une seule page XHTML tirée de la page web de la fiche ; images incluses si elles sont dans le fichier */
+    async function sheetEpub(c) {
+        const Z = window.LCNDA_SHEET?.makeZip; if (!Z) throw new Error(i18n('ePub indisponible ici.'));
+        const src = new DOMParser().parseFromString(sheetHtml(c), 'text/html');
+        src.querySelectorAll('script, iframe, button, form').forEach(n => n.remove());
+        const imgs = []; let k = 0;
+        for (const im of [...src.querySelectorAll('img')]) {
+            const m = /^data:(image\/(png|jpeg|gif|webp));base64,(.*)$/.exec(im.getAttribute('src') || '');
+            if (!m) { im.remove(); continue; }
+            const bin = atob(m[3]), u8 = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
+            const file = `images/i${++k}.${m[2] === 'jpeg' ? 'jpg' : m[2]}`; imgs.push({file, mt: m[1], u8}); im.setAttribute('src', file);
+        }
+        const body = new XMLSerializer().serializeToString(src.body).replace(/^<body[^>]*>|<\/body>$/g, '');
+        const title = String(c.title || i18n('Fiche')), id = 'lcnda-' + Date.now().toString(36), xe = t => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+        const page = `<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE html>\n<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr"><head><meta charset="utf-8"/><title>${xe(title)}</title><style>body{font-family:serif;line-height:1.5}img{max-width:100%}h1,h2,h3{font-family:sans-serif}</style></head><body>${body}</body></html>`;
+        const nav = `<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE html>\n<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops"><head><title>${xe(title)}</title></head><body><nav epub:type="toc"><ol><li><a href="fiche.xhtml">${xe(title)}</a></li></ol></nav></body></html>`;
+        const opf = `<?xml version="1.0" encoding="UTF-8"?>\n<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="uid"><metadata xmlns:dc="http://purl.org/dc/elements/1.1/"><dc:identifier id="uid">${id}</dc:identifier><dc:title>${xe(title)}</dc:title><dc:language>fr</dc:language><meta property="dcterms:modified">${new Date().toISOString().replace(/\.\d+Z$/, 'Z')}</meta></metadata><manifest><item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/><item id="p" href="fiche.xhtml" media-type="application/xhtml+xml"/>${imgs.map((im, i) => `<item id="i${i}" href="${im.file}" media-type="${im.mt}"/>`).join('')}</manifest><spine><itemref idref="p"/></spine></package>`;
+        const container = '<?xml version="1.0" encoding="UTF-8"?>\n<container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container"><rootfiles><rootfile full-path="OEBPS/content.opf" media-type="application/oebps-package+xml"/></rootfiles></container>';
+        return Z([{name: 'mimetype', data: 'application/epub+zip', store: true}, {name: 'META-INF/container.xml', data: container}, {name: 'OEBPS/content.opf', data: opf}, {name: 'OEBPS/nav.xhtml', data: nav}, {name: 'OEBPS/fiche.xhtml', data: page}, ...imgs.map(im => ({name: `OEBPS/${im.file}`, data: im.u8, store: true}))], 'application/epub+zip');
+    }
     function exportMenu(anchor) {
         const c = cur, base = A().safeExportFilename ? A().safeExportFilename(c.title, 'fiche') : 'fiche';
         const items = [{icon: '📝', label: i18n('Markdown (.md)'), run: () => { download(sheetMarkdown(c), `${base}.md`, 'text/markdown;charset=utf-8'); toast(i18n('Fiche exportée en Markdown.'), 'success'); }},
@@ -398,6 +418,7 @@
                 const save = async (fn, ext, type) => { try { const out = await fn(doc()); const blob = out instanceof Blob ? out : new Blob([out], {type}); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${base}.${ext}`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); toast(i18n('Fiche exportée ({f}).', {f: '.' + ext}), 'success'); } catch (e) { toast(e.message || String(e), 'error'); } };
                 return [TX.toDocx && {icon: '📄', label: i18n('Word (.docx)'), run: () => save(TX.toDocx, 'docx')}, TX.toOdt && {icon: '📄', label: i18n('LibreOffice (.odt)'), run: () => save(TX.toOdt, 'odt')}, TX.toRtf && {icon: '📄', label: i18n('RTF (.rtf)'), run: () => save(TX.toRtf, 'rtf', 'application/rtf')}, TX.toText && {icon: '🗒', label: i18n('Texte simple (.txt)'), run: () => save(TX.toText, 'txt', 'text/plain;charset=utf-8')}].filter(Boolean);
             })() : []),
+            {icon: '📱', label: i18n('ePub (.epub)'), help: i18n('liseuse, téléphone, tablette'), run: async () => { try { const blob = await sheetEpub(c); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${base}.epub`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); toast(i18n('Fiche exportée ({f}).', {f: '.epub'}), 'success'); } catch (e) { toast(e.message || String(e), 'error'); } }},
             {icon: '🧾', label: i18n('LaTeX (.tex)'), run: () => { download(sheetLatex(c), `${base}.tex`, 'application/x-tex;charset=utf-8'); toast(i18n('Fiche exportée ({f}).', {f: '.tex'}), 'success'); }},
             {icon: '🧩', label: i18n('Données (.json)'), help: i18n('la fiche telle quelle, pour la garder ou la réutiliser'), run: () => { download(JSON.stringify({format: 'lcnda-fiche', version: 1, exported: new Date().toISOString(), fiche: c}, null, 2), `${base}.json`, 'application/json;charset=utf-8'); toast(i18n('Fiche exportée ({f}).', {f: '.json'}), 'success'); }},
             '-', {icon: '🖨', label: i18n('PDF (par 🖨 Imprimer)'), run: () => printSheet()}];
