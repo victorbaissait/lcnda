@@ -141,6 +141,10 @@
     /* ═════════════ les lignes autour d'une personne, d'un lieu (5, 7, 8, 16, 17) ═════════════ */
     /** les listes qui comptent : placées, datées, lues d'un coup ; par thème, ses listes réunies installées d'abord (sinon deux listes du thème) */
     let candP = null, candAt = 0;
+    /** les listes que le serveur sert entières à chaque lecture (pas un fichier lu une fois dans le navigateur) : 🪨 terre et mots, 🌾 terroir,
+     *  🎭 culture de la commune, ➕ commune, 🏘 voir le village, 🏰 mes fiches d'édifices, 🤝 réseau — la pastille ne les relit pas à chaque
+     *  fiche (elles restent dans « ⤢ Tout voir » et dans Listes) ; un module peut aussi le dire lui-même (d.server) */
+    const SERVER = d => !!d.server || /^(tm|tr|cc|cplus|l10v)_/.test(String(d.id)) || ['reseau', 'fiches_edifices'].includes(String(d.id));
     function candLists() {
         if (candP && Date.now() - candAt < 600000) return candP;
         candAt = Date.now();
@@ -149,7 +153,7 @@
             (ext.listesReunies?.defs?.() || []).forEach(M => { try { (ext.listesReunies.sourcesOf?.(M) || []).forEach(x => src.add(x.list)); } catch (_) {} });
             for (const [tid, ds] of I?.by.entries() || []) {
                 if (tid === 'aranger') continue;
-                const ok = ds.filter(d => !d.link && d.geo && d.period && !d.query && !d.heavy && typeof d.load === 'function'); // heavy : trop grosse pour être lue à chaque fiche (ex. 🏛 1,7 million de biens protégés) : seulement quand on l’ouvre
+                const ok = ds.filter(d => !d.link && d.geo && d.period && !d.query && !d.heavy && !SERVER(d) && typeof d.load === 'function'); // heavy : trop grosse pour être lue à chaque fiche (ex. 🏛 1,7 million de biens protégés) : seulement quand on l’ouvre
                 const inst = []; for (const d of ok) { try { if (await E().isInstalled?.(d)) inst.push(d); } catch (_) { candAt = 0; } } // une vérification ratée : cette liste est sautée, et on revérifie la prochaine fois
                 // une liste réunie dont une source se lit au serveur page après page (mr_list, ld_query…) n'est pas lue à chaque fiche,
                 // comme ces listes-là seules (!d.query) : sinon chaque fiche relisait des dizaines de milliers de lignes en arrière-plan
@@ -631,13 +635,24 @@
         if (!kiosk()) writeJ(K_PAST, all);
         return v;
     }
+    /** la pastille relit beaucoup de listes : seulement quand on s'est posé sur la fiche (2,5 s sans clic, touche ni molette),
+     *  jamais pendant qu'on l'ouvre ou qu'on passe à autre chose (elle n'est qu'un plus) */
+    function calm(host, fn) {
+        let t = 0; const evs = ['pointerdown', 'keydown', 'wheel'];
+        const stop = () => { clearTimeout(t); evs.forEach(e => window.removeEventListener(e, again, true)); };
+        const again = () => { clearTimeout(t); t = setTimeout(go, 2500); };
+        const go = () => { stop(); if (host.isConnected) idle(fn); };
+        evs.forEach(e => window.addEventListener(e, again, {capture: true, passive: true})); again();
+    }
     function pastilleHtml(v) { return `<button type="button" class="dp-pastille" data-dp-pastille>📊 ${esc(v.n > 1 ? T('{n} données la concernent', {n: nf(v.n)}) : T('1 donnée la concerne'))}</button>`; }
     function afterPerson(detail) {
         if (!on(5) || !opt('pPerson')) return;
         const P = detail?.person; if (!P || Number(P.is_private) === 1 || (P.living_status === 'living' && kiosk())) return;
         const hero = document.querySelector('#workspace .person-page .person-hero'); if (!hero) return;
-        const host = document.createElement('p'); host.className = 'dp-past-wrap'; host.hidden = true; hero.after(host);
-        idle(async () => {
+        // à côté de « Fiche familiale » et « ＋ Famille » quand la barre existe (une seule ligne de boutons), sinon sous le haut de la fiche
+        const bar = document.querySelector('#workspace .person-page .pa-family-bar');
+        const host = document.createElement(bar ? 'span' : 'p'); host.className = 'dp-past-wrap'; host.hidden = true; if (bar) bar.append(host); else hero.after(host);
+        calm(host, async () => {
             let p; try { p = await personInfo(P.id); } catch (_) { return; }
             if (!p.places.length || !p.b) return;
             const v = await countFor(`p${p.id}`, {places: p.places, from: p.b, to: p.end});
