@@ -100,6 +100,17 @@ const hits = (re, skip = []) => files.filter(f => !skip.includes(f)).flatMap(f =
         assert.match(all['heritage-vector.js'], /data-vx-close title="Fermer" aria-label="Fermer">×<\/button><\/header>/, 'Dessin : × au bout de la barre');
     });
 
+    await t('Choisir une étiquette : le menu de choix unique (loupe, liste, pastille de couleur, « ＋ Créer… »)', () => {
+        // harmonisation.md (Apparence 8) : plus de case « Tape pour chercher une étiquette… » faite à la main
+        assert.deepEqual(hits(/chercher (ou créer )?une étiquette|labels-autocomplete-input|data-lp-q\b|data-label-picker-search|labels-suggestions/g), []);
+        assert.match(all['app.js'], /function labelPickRow\(\)\{return `<div class="labels-input-row" hidden>\$\{pkFieldLocal\(\{name:'label_pick',kind:'label',allowCreate:true\}\)\}<\/div>`;\}/);
+        assert.equal((all['app.js'].match(/const inputRow=locked\?'':labelPickRow\(\);/g) || []).length, 2, 'fiche : les deux champs d’étiquettes');
+        assert.match(all['app.js'], /const search=`<div class="label-picker-search">\$\{pkFieldLocal\(\{name:'label_pick',kind:'label',allowCreate:true\}\)\}<\/div>`;/, 'fenêtres : le champ des étiquettes');
+        assert.match(all['app.js'], /document\.addEventListener\('picker-create',async event=>\{const d=event\.detail\|\|\{\};if\(event\.defaultPrevented\|\|d\.kind!=='label'\)return;/, '« ＋ Créer l’étiquette » partout');
+        assert.match(all['app-listes.js'], /const inputRow=`<div class="labels-input-row" hidden>\$\{pk\(\{name:'label_pick',kind:'label',allowCreate:true\}\)\}<\/div>`;/, 'Listes');
+        assert.match(all['heritage-more.js'], /<span class="h-lp-box" hidden>\$\{window\.LCNDA_PICKER\?\.pickerField\?\.\(\{name: 'label_pick', hiddenName: false, kind: 'label', allowCreate: true\}\)/, 'blocs');
+    });
+
     /* ── 2. navigateur ── */
     let ok = true;
     try { require.resolve('playwright'); } catch (_) { try { require.resolve('/opt/node22/lib/node_modules/playwright'); } catch (__) { ok = false; } }
