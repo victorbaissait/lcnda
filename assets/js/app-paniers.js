@@ -202,7 +202,7 @@
         const s = C().statusOf(it), S = C().STATUSES.find(x => x[0] === s), on = st.picked.has(Number(it.id)), d = dups.get(C().sameKey(it));
         return `<li class="pn-it${s === 'utilise' ? ' is-done' : ''}${on ? ' is-on' : ''}" data-pn-i="${it.id}"${manual ? ' draggable="true"' : ' draggable="true"'}>
             ${manual ? `<span class="pn-grip" aria-hidden="true" title="${esc(T('Glisser pour changer l’ordre'))}">⋮⋮</span>` : ''}
-            ${st.pick || st.find ? `<span class="pn-pk"><input type="checkbox" data-pn-pick="${it.id}" ${on ? 'checked' : ''} aria-label="${esc(T('Cocher'))}"></span>` : ''}
+            ${st.pick || st.find ? `<span class="pn-pk"><input type="checkbox" data-pn-pick="${it.id}" data-sel-check ${on ? 'checked' : ''} aria-label="${esc(T('Cocher'))}"></span>` : ''}
             <span class="pn-ico" aria-hidden="true">${esc(icoOf(it))}</span>
             <div class="pn-itx"><b>${esc(it.title)}</b>${it.value ? `<small>${esc(String(it.value).slice(0, 300))}</small>` : ''}${srcHtml(it)}
                 ${d ? `<span class="pn-dup">⧉ ${esc(T('aussi dans « {b} »', {b: d.slice(0, 2).join(' », « ')}))}</span>` : ''}
@@ -238,7 +238,7 @@
             </div></div>
             <div class="pn-dests"><span class="pn-lab">${esc(T('Va d’habitude vers'))}</span>${(b.dests || []).length ? b.dests.map(d => `<span class="pn-dest">→ ${esc(d.label)}</span>`).join('') : `<span class="pn-mini">${esc(T('nulle part encore'))}</span>`}<button type="button" class="pn-b is-ter is-sm" data-pn-a="dests">✎ ${esc((b.dests || []).length ? T('changer') : T('choisir'))}</button></div>
             ${liveHtml(b)}
-            <div class="pn-acts"><button type="button" class="pn-b is-pri is-sm" data-pn-a="putall">📍 ${esc(T('Mettre tout dans…'))}</button><button type="button" class="pn-b is-sec is-sm" data-pn-a="pick" aria-pressed="${st.pick}">☑ ${esc(T('Une partie…'))}</button>
+            <div class="pn-acts"><button type="button" class="pn-b is-pri is-sm" data-pn-a="putall">📍 ${esc(T('Mettre tout dans…'))}</button><button type="button" class="pn-b is-sec is-sm" data-pn-a="pick" aria-pressed="${st.pick}">☑ ${esc(T('Choisir des lignes'))}</button>
                 <button type="button" class="pn-b is-sec is-sm" data-pn-a="rename">✎ ${esc(T('Renommer'))}</button><button type="button" class="pn-b is-sec is-sm" data-pn-a="dup">⧉ ${esc(T('Dupliquer'))}</button><button type="button" class="pn-b is-sec is-sm" data-pn-a="share">⇪ ${esc(T('Partager'))}</button><button type="button" class="pn-b is-sec is-sm" data-pn-a="more" aria-label="${esc(T('Toutes les autres actions'))}">⋯</button></div></div>
             ${sIdeas.length ? `<div class="pn-bs"><h5>💡 ${esc(T('Des idées pour ce panier'))}<span class="pn-sp"></span><button type="button" class="pn-b is-ter is-sm" data-pn-a="ideas-off">${esc(T('Masquer les suggestions'))}</button></h5>${sIdeas.map(s => `<div class="pn-bsr"><span class="pn-ico" aria-hidden="true">${esc(s.icon)}</span><div class="pn-t"><b>${esc(s.t)}</b><small>${esc(s.s)}</small><small class="pn-why">${esc(T('Pourquoi : {w}', {w: s.why}))}</small></div><span class="pn-sga"><button type="button" class="pn-b is-pri is-sm" data-pn-sadd="${esc(s.id)}">＋ ${esc(T('Ajouter'))}</button><button type="button" class="pn-b is-ter is-sm" data-pn-sno="${esc(s.id)}">✕ ${esc(T('Pas utile'))}</button></span></div>`).join('')}</div>` : ''}
             <div class="pn-ltools"><label class="pn-srch"><span class="pn-sr">${esc(T('Chercher dans ce panier'))}</span><input type="search" data-pn-find value="${esc(st.find)}" placeholder="${esc(T('Chercher dans ce panier…'))}"></label>
@@ -276,18 +276,25 @@
             ${none.length ? `<p class="pn-mini pn-apart">${esc(T('Sans lieu ({n}) : {l}', {n: none.length, l: none.map(x => x.title).slice(0, 8).join(' · ')}))}</p>` : ''}`;
     }
     /** le pied : ce qui est coché (☑ Une partie…) ou trouvé (🔎) → agir dessus */
+    /** le pied : la barre de sélection commune (app-selection.js) — Tout cocher, Maj+clic, ✕ Décocher ;
+     *  rien de coché pendant une recherche : les actions portent sur « Les N trouvés » (dit dans la barre) */
+    let pnSel = null;
     function paintFoot(b, vis) {
         const F = root().querySelector('[data-pn-foot]');
+        pnSel?.destroy(); pnSel = null;
         if (!st.pick && !st.find) { F.innerHTML = ''; F.hidden = true; return; }
-        F.hidden = false;
-        const ids = [...st.picked].filter(id => vis.some(x => Number(x.id) === id)), n = ids.length || (st.find ? vis.length : 0), what = ids.length ? T('les {n} cochés', {n: ids.length}) : T('les {n} trouvés', {n});
-        F.innerHTML = `<div class="pn-cnt"><b>${esc(st.find ? T('{a} cochés parmi les {b} trouvés', {a: ids.length, b: vis.length}) : T('{a} cochés', {a: ids.length}))}</b><span class="pn-mini">${esc(ids.length ? '' : st.find ? T('Sans case cochée, ce qui suit agit sur tous les trouvés.') : T('Coche les éléments à prendre.'))}</span></div>
-            <button type="button" class="pn-b is-ter is-sm" data-pn-a="pick-all">${esc(T('Tout cocher'))}</button>
-            <button type="button" class="pn-b is-pri is-sm" data-pn-a="sel-put"${n ? '' : ' disabled'}>📍 ${esc(T('Mettre {w} dans…', {w: what}))}</button>
-            <button type="button" class="pn-b is-sec is-sm" data-pn-a="sel-move"${n ? '' : ' disabled'}>→ ${esc(T('Prendre dans un autre panier'))}</button>
-            <button type="button" class="pn-b is-sec is-sm" data-pn-a="sel-dup"${n ? '' : ' disabled'}>⧉ ${esc(T('Dupliquer {w}', {w: what}))}</button>
-            <button type="button" class="pn-b is-sec is-sm" data-pn-a="sel-status"${n ? '' : ' disabled'}>${esc(T('Statut…'))}</button>
-            <button type="button" class="pn-b is-ter is-sm" data-pn-a="sel-x"${n ? '' : ' disabled'}>× ${esc(T('Retirer'))}</button>`;
+        F.hidden = false; F.innerHTML = '<span data-pn-selph hidden></span>';
+        const host = root().querySelector('[data-pn-items]') || root().querySelector('[data-pn-main]');
+        if (!ext.selectionBar || !host) return;
+        const keep = [...st.picked].filter(id => vis.some(x => Number(x.id) === id)).map(String);
+        // les boutons gardent leur data-pn-a : la délégation des clics du Panier fait le travail (menus ancrés sur le bouton)
+        const viaDelegation = (id, icon, label, edit = true) => ({id, icon, label, attr: `data-pn-a="${id}"`, edit, run: () => {}});
+        pnSel = ext.selectionBar({host, rowSelector: '.pn-it[data-pn-i]', idOf: el => el.dataset.pnI, what: [T('coché'), T('cochés')], place: F.querySelector('[data-pn-selph]'),
+            onChange: ids => { st.picked = new Set(ids.map(Number)); },
+            fallback: () => (st.find && vis.length ? {ids: vis.map(x => String(x.id)), text: T('Les {n} trouvés', {n: vis.length})} : null),
+            actions: [viaDelegation('sel-put', '📍', T('Mettre dans…'), false), viaDelegation('sel-move', '→', T('Prendre dans un autre panier')), viaDelegation('sel-dup', '⧉', T('Dupliquer')),
+                viaDelegation('sel-status', '', T('Statut…')), viaDelegation('sel-x', '×', T('Retirer'))]});
+        pnSel?.set(keep);
     }
     const selIds = () => { const b = bOf(st.sel?.id); if (!b) return []; const vis = C().findIn(itemsOf(b.id), st.find), p = [...st.picked].filter(id => vis.some(x => Number(x.id) === id)); return p.length ? p : st.find ? vis.map(x => Number(x.id)) : []; };
     const selItems = () => { const ids = new Set(selIds()); return itemsOf(st.sel?.id).filter(x => ids.has(Number(x.id))); };
@@ -301,7 +308,7 @@
         const walk = (id, d) => [...fKids(id).map(k => row(k, d) + walk(k.id, d + 1)), ...bIn(id).map(b => bRow(b, d))].join('');
         R.querySelector('[data-pn-main]').innerHTML = `<div class="pn-bh"><div class="pn-crumbs">${f.path.slice(0, -1).map(x => '📂 ' + esc(x)).join(' › ') || esc(T('À la racine'))}</div>
             <h3>📂 ${esc(f.name)} <span class="pn-mini">${esc(T('{b} paniers · {n} éléments', {b: f.baskets, n: f.total}))}</span></h3>
-            <div class="pn-acts"><button type="button" class="pn-b is-pri is-sm" data-pn-a="fnewb">＋ ${esc(T('Panier ici'))}</button><button type="button" class="pn-b is-sec is-sm" data-pn-a="fnewf">＋ ${esc(T('Sous-dossier'))}</button><button type="button" class="pn-b is-sec is-sm" data-pn-a="pick" aria-pressed="${st.pick}">☑ ${esc(T('Une partie…'))}</button><button type="button" class="pn-b is-sec is-sm" data-pn-a="frename">✎ ${esc(T('Renommer'))}</button><button type="button" class="pn-b is-ter is-sm" data-pn-a="fdel">🗑 ${esc(T('Supprimer le dossier'))}</button></div></div>
+            <div class="pn-acts"><button type="button" class="pn-b is-pri is-sm" data-pn-a="fnewb">＋ ${esc(T('Panier ici'))}</button><button type="button" class="pn-b is-sec is-sm" data-pn-a="fnewf">＋ ${esc(T('Sous-dossier'))}</button><button type="button" class="pn-b is-sec is-sm" data-pn-a="pick" aria-pressed="${st.pick}">☑ ${esc(T('Choisir des lignes'))}</button><button type="button" class="pn-b is-sec is-sm" data-pn-a="frename">✎ ${esc(T('Renommer'))}</button><button type="button" class="pn-b is-ter is-sm" data-pn-a="fdel">🗑 ${esc(T('Supprimer le dossier'))}</button></div></div>
             <ul class="pn-ftree">${walk(f.id, 0) || `<li class="pn-empty">${esc(T('Dossier vide.'))}</li>`}</ul>`;
         const F = R.querySelector('[data-pn-foot]');
         if (st.pick) { F.hidden = false; F.innerHTML = `<div class="pn-cnt"><b data-pn-fcount>${esc(T('{a} cochés', {a: 0}))}</b></div><button type="button" class="pn-b is-pri is-sm" data-pn-a="fput" disabled>📍 ${esc(T('Mettre les cochés dans…'))}</button>`; }
@@ -854,7 +861,6 @@
                 if (d.pnStt) { if (write()) await cycleStatus(d.pnStt); return; }
                 if (d.pnX) { if (write()) await removeItems([Number(d.pnX)]); return; }
                 if (d.pnUp || d.pnDown) { if (!write()) return; const ids = C().arrange(itemsOf(b.id), {k: 'main'})[0].items.map(x => Number(x.id)), id = Number(d.pnUp || d.pnDown), i = ids.indexOf(id), j = i + (d.pnUp ? -1 : 1); if (j < 0 || j >= ids.length) return; [ids[i], ids[j]] = [ids[j], ids[i]]; await reorder(b, ids); return; }
-                if (d.pnPick) { const id = Number(d.pnPick); t.checked ? st.picked.add(id) : st.picked.delete(id); t.closest('.pn-it')?.classList.toggle('is-on', t.checked); paintFoot(b, C().findIn(itemsOf(b.id), st.find)); return; }
                 if (d.pnFpick) { folderPickSync(t); return; }
                 if (d.pnG) { const s = C().normSort(b.sort), c = new Set(s.closed); c.has(d.pnG) ? c.delete(d.pnG) : c.add(d.pnG); await meta(b, {sort: {...s, closed: [...c]}}); return; }
                 if (d.pnView) { await meta(b, {view: d.pnView}); return; }
@@ -876,7 +882,6 @@
                 if (a === 'search-close') { st.view = 'basket'; paint(); return; }
                 if (a === 'import') { if (write()) R.querySelector('[data-pn-file]').click(); return; }
                 if (a === 'pick') { st.pick = !st.pick; st.picked = new Set(); paintMain(); return; }
-                if (a === 'pick-all') { C().findIn(itemsOf(b.id), st.find).forEach(x => st.picked.add(Number(x.id))); st.pick = true; paintMain(); return; }
                 if (!write()) return;
                 if (a === 'newf') return newFolder(f ? f.id : 0);
                 if (a === 'newb') return newBasket(f ? f.id : Number(b?.folder_id || 0));

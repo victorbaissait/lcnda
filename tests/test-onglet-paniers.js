@@ -324,9 +324,12 @@ const FIXTURES = () => {
             await p.fill('[data-pn-find]', 'comète'); await p.waitForFunction(() => /trouvés sur/.test(document.querySelector('.pn-found')?.textContent || ''));
             const found = await p.$$eval('[data-pn-items] [data-pn-i]', l => l.map(x => Number(x.dataset.pnI)));
             assert.ok(found.length >= 2, String(found.length));
-            assert.match(await p.textContent('[data-pn-foot]'), new RegExp(`0 cochés parmi les ${found.length} trouvés`));
+            // la barre de sélection commune : rien de coché → les actions portent sur « Les N trouvés » (dit dans la barre) ; une case → « 1 coché »
+            assert.match(await p.textContent('[data-pn-foot] .sel-bar'), new RegExp(`Les ${found.length} trouvés`));
+            assert.ok(await p.$('[data-pn-foot] .sel-bar [data-pn-a="sel-status"]'), 'les actions sont là, sur les trouvés');
             await p.check(`[data-pn-pick="${found[0]}"]`);
-            assert.match(await p.textContent('[data-pn-foot]'), new RegExp(`1 cochés parmi les ${found.length} trouvés`));
+            assert.match(await p.textContent('[data-pn-foot] .sel-bar'), /1 coché\b/);
+            assert.doesNotMatch(await p.textContent('[data-pn-foot] .sel-bar'), /trouvés/);
             await menu('[data-pn-a="sel-status"]', 'vérifié'); await sleep(1200);
             const its = await itemsOf(tem);
             assert.strictEqual(its.find(x => x.id === found[0]).status, 'verifie'); assert.notStrictEqual(its.find(x => x.id === found[1]).status, 'verifie', 'seulement le coché');

@@ -12,6 +12,7 @@
 (() => {
     'use strict';
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     for (const key of ['exportPanels', 'afterExport']) ext[key] = ext[key] || [];
     const A = () => window.LCNDA_APP || {};
     const UI = () => window.LCNDA_UI || {};
@@ -240,7 +241,7 @@
                     const choose = p.kind === 'choose' ? `<select data-ip-place><option value="">— lequel ? —</option>${p.candidates.map(c => `<option value="${c.id}">${esc(c.title)}${c.km != null ? ` (à ${c.km.toLocaleString('fr-FR')} km)` : ' (sans coordonnées)'}</option>`).join('')}<option value="new">＋ Créer un lieu à part</option></select>` : '';
                     const where = [p.county, p.state, p.country].filter(Boolean).join(', ');
                     const cur = p.place_id ? p.candidates.find(c => c.id === p.place_id) : null;
-                    return `<tr data-i="${p.i}" class="${cls}"><td><input type="checkbox" data-ip-on ${p.kind === 'same' ? 'disabled' : ['add', 'create'].includes(p.kind) ? 'checked' : ''} aria-label="Prendre cette ligne"></td><td><b>${esc(p.name)}</b>${where ? `<br><small>${esc(where)}</small>` : ''}</td><td>${p.lat.toFixed(5)}, ${p.lon.toFixed(5)}</td><td>${esc(label)}${cur && p.kind === 'differ' ? `<br><small>aujourd’hui à ${cur.km.toLocaleString('fr-FR')} km de là</small>` : ''}${cur && p.kind !== 'differ' ? `<br><small>${esc(cur.title)}</small>` : ''}${choose}</td></tr>`;
+                    return `<tr data-i="${p.i}" class="${cls}"${p.kind === 'same' ? ' data-ip-same' : ''}${['add', 'create'].includes(p.kind) ? ' data-ip-pre' : ''}><td class="ip-ck"></td><td><b>${esc(p.name)}</b>${where ? `<br><small>${esc(where)}</small>` : ''}</td><td>${p.lat.toFixed(5)}, ${p.lon.toFixed(5)}</td><td>${esc(label)}${cur && p.kind === 'differ' ? `<br><small>aujourd’hui à ${cur.km.toLocaleString('fr-FR')} km de là</small>` : ''}${cur && p.kind !== 'differ' ? `<br><small>${esc(cur.title)}</small>` : ''}${choose}</td></tr>`;
                 }).join('');
                 const c = a.counts;
                 const notices = [];
@@ -248,19 +249,22 @@
                 if (a.invalid) notices.push({kind: 'warn', text: `${plural(a.invalid, 'point sans nom ou aux coordonnées impossibles laissé', 'points sans nom ou aux coordonnées impossibles laissés')} de côté.`});
                 return {count: todo, noun: 'lieu', many: 'lieux', data: a, allowEmpty: false, notices,
                     summaryHtml: `${[c.add ? `<b>${esc(plural(c.add, 'lieu à compléter', 'lieux à compléter'))}</b>` : '', c.create ? `<b>${c.create} à créer</b>` : '', c.differ ? `${c.differ} avec d’autres coordonnées` : '', c.choose ? `${c.choose} à choisir` : '', c.same ? `${c.same} déjà ${c.same > 1 ? 'justes' : 'juste'}` : ''].filter(Boolean).join(', ')} (${esc(plural(a.points.length, 'lieu', 'lieux'))} dans le fichier ${esc(a.format)})`,
-                    extra: `<div class="ip-bar"><span data-ip-n></span><span class="spacer"></span><button type="button" class="button small secondary" data-ip-geo="all">Tout cocher</button><button type="button" class="button small secondary" data-ip-geo="none">Tout décocher</button></div><div class="ip-links-wrap"><table class="ip-links ip-geo"><thead><tr><th></th><th>Lieu du fichier</th><th>Latitude, longitude</th><th>Dans ta base</th></tr></thead><tbody>${rows}</tbody></table></div>`,
+                    extra: `<div class="ip-links-wrap"><table class="ip-links ip-geo"><thead><tr><th></th><th>Lieu du fichier</th><th>Latitude, longitude</th><th>Dans ta base</th></tr></thead><tbody>${rows}</tbody></table></div>`,
                     onShow: body => {
                         wide(body);
-                        const count = () => { const n = body.querySelectorAll('[data-ip-on]:checked').length; body.querySelector('[data-ip-n]').textContent = `${plural(n, 'ligne cochée', 'lignes cochées')}`; const g = goBtn(body); if (g) { g.textContent = `⤒ Importer ${plural(n, 'lieu', 'lieux')}`; g.disabled = !n; } };
-                        body.addEventListener('change', e => { if (e.target.matches('[data-ip-place]')) { const tr = e.target.closest('tr'); tr.querySelector('[data-ip-on]').checked = !!e.target.value; } count(); });
-                        body.querySelector('.ip-bar').addEventListener('click', e => { const b = e.target.closest('[data-ip-geo]'); if (!b) return; body.querySelectorAll('[data-ip-on]:not(:disabled)').forEach(x => { x.checked = b.dataset.ipGeo === 'all' && (x.closest('tr').querySelector('[data-ip-place]')?.value ?? 'ok') !== ''; }); count(); });
-                        count();
+                        // ☑ la barre de sélection commune (app-selection.js) : Tout cocher, Maj+clic, ✕ Décocher ; « déjà juste » n'a pas de case
+                        const tb = body.querySelector('tr[data-i]')?.closest('tbody');
+                        const count = ids => { const n = ids.length, g = goBtn(body); if (g) { g.textContent = `⤒ Importer ${plural(n, 'lieu', 'lieux')}`; g.disabled = !n; } };
+                        const sel = tb && ext.selectionBar ? ext.selectionBar({host: tb, rowSelector: 'tr[data-i]:not([data-ip-same])', idOf: r => r.dataset.i, what: [i18n('ligne cochée'), i18n('lignes cochées')], place: tb.closest('.ip-links-wrap') || tb.closest('table'), onChange: count}) : null;
+                        body._ipSel = sel;
+                        sel?.set([...body.querySelectorAll('tr[data-ip-pre]')].map(tr => tr.dataset.i));
+                        body.addEventListener('change', e => { if (!e.target.matches('[data-ip-place]') || !sel) return; const i = e.target.closest('tr').dataset.i, on = new Set(sel.ids()); if (e.target.value) on.add(i); else on.delete(i); sel.set([...on]); });
                     }};
             },
             run: async (an, fs, body) => {
                 const items = [];
                 body.querySelectorAll('tr[data-i]').forEach(tr => {
-                    if (!tr.querySelector('[data-ip-on]')?.checked) return;
+                    if (!body._ipSel?.ids().includes(tr.dataset.i)) return;
                     const p = an.data.points[Number(tr.dataset.i)]; if (!p) return;
                     const sel = tr.querySelector('[data-ip-place]')?.value;
                     const id = p.kind === 'choose' ? (sel && sel !== 'new' ? Number(sel) : 0) : p.place_id || 0;

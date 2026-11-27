@@ -403,10 +403,6 @@
                 ${folder && kids(node).length ? `<label class="ui-toggle h-at-deep"><input type="checkbox" data-at-deep ${v.deep ? 'checked' : ''}><i></i>avec les sous-dossiers</label>` : ''}
                 <select data-at-type><option value="">Toutes les sortes</option>${CFG.types.filter(t => !t.hidden || t.key === v.type).map(t => `<option value="${esc(t.key)}" ${v.type === t.key ? 'selected' : ''}>${esc(t.icon)} ${esc(t.label)}</option>`).join('')}</select>
                 <input type="search" data-at-q value="${esc(v.q)}" placeholder="Chercher (titre, auteur, texte, étiquette…)"></div>
-            ${v.sel.length > 1 ? `<div class="h-at-bulk"><strong>${plural(v.sel.length, 'élément choisi', 'éléments choisis')}</strong>
-                ${trash ? '<button type="button" class="button small" data-at-bulk="restore">Restaurer</button><button type="button" class="button small danger" data-at-bulk="delete">Supprimer définitivement</button>'
-                    : `<select data-at-bulkfolder><option value="">Ranger dans…</option>${folderOptions()}</select><button type="button" class="button small secondary" data-at-bulk="tag">🏷 Étiquette…</button><button type="button" class="button small secondary" data-at-bulk="star">⭐ Favoris</button>${folder ? '<button type="button" class="button small secondary" data-at-bulk="remove">Retirer de ce dossier</button>' : ''}<button type="button" class="button small secondary danger" data-at-bulk="trash">🗑 Corbeille</button>`}
-                <button type="button" class="link-button" data-at-unsel>Aucun</button></div>` : ''}
             ${items.length ? `<div data-at-sortbar data-count="${items.length}"></div><table class="data-table h-at-table"><thead><tr><th class="h-at-c-star"></th>${sortTh('type', '')}${sortTh('title', 'Titre')}${sortTh('creator', 'Auteur, créateur')}${sortTh('year', 'Date')}<th class="h-at-c-att" title="Fichiers joints">📎</th></tr></thead>
                 <tbody>${items.map(i => `<tr data-at-item="${i.id}" class="${v.sel.includes(Number(i.id)) ? 'is-sel' : ''} ${i.type === 'task' && Number(i.data.done) ? 'is-done' : ''}" draggable="true">
                     <td class="h-at-c-star"><button type="button" class="h-at-star ${Number(i.starred) ? 'is-on' : ''}" data-at-star="${i.id}" title="Favori">${Number(i.starred) ? '★' : '☆'}</button></td>
@@ -972,6 +968,26 @@
         ws.querySelector('[data-at-home]').addEventListener('click', () => { v.project = 0; P = null; ext.atelier(++S().workspaceToken); });
         ws.querySelector('[data-at-pedit]').addEventListener('click', () => projectDialog(P.project, P.kinds));
         ws.querySelector('[data-at-export]').addEventListener('click', exportDialog);
+        // ☑ cocher plusieurs éléments : la barre de sélection commune (app-selection.js), en accord avec le choix au clic (v.sel)
+        const SB = ext.selectionBar, tb = ws.querySelector('.h-at-table tbody');
+        if (SB && tb) {
+            const trash = v.node === 'trash', inFolder = typeof v.node === 'number', after = async (a) => { if (['trash', 'delete', 'restore', 'remove'].includes(a)) { v.sel = []; renderProject(S().workspaceToken, true); } };
+            const run = a => async (ids, extra = {}) => { await act(a, ids.map(Number), {folder_id: inFolder ? v.node : 0, ...extra}); await after(a); };
+            let ready = false;
+            const bar = SB({host: tb, rowSelector: 'tr[data-at-item]', idOf: r => r.dataset.atItem, what: [i18n('élément coché'), i18n('éléments cochés')], place: ws.querySelector('[data-at-sortbar]') || tb.closest('table'),
+                onChange: ids => { if (!ready) return; const n = ids.map(Number); if (n.length === v.sel.length && n.every(x => v.sel.includes(x))) return; v.sel = n; renderProject(S().workspaceToken, true); },
+                actions: trash ? [
+                    {id: 'restore', icon: '↩', label: i18n('Restaurer'), edit: true, run: ids => run('restore')(ids)},
+                    {id: 'delete', icon: '🗑', label: i18n('Supprimer définitivement'), edit: true, danger: true, run: async ids => { if (!await A().confirmBox(i18n('Supprimer définitivement {n} ?', {n: plural(ids.length, 'élément', 'éléments')}), {title: 'Supprimer définitivement', okLabel: 'Supprimer définitivement'})) return; await run('delete')(ids); }},
+                ] : [
+                    SB.choiceAction({id: 'file', icon: '📁', label: i18n('Ranger dans'), field: i18n('Dossier'), options: () => { const d = document.createElement('select'); d.innerHTML = folderOptions(); return [...d.options].map(o => [o.value, o.textContent]); }, run: async (ids, f) => { if (await act('add', ids.map(Number), {folder_id: Number(f)})) toast('Rangé.'); }}),
+                    {id: 'tag', icon: '🏷', label: i18n('Étiquette'), edit: true, run: async ids => { const tg = await A().askText({title: 'Étiquette', message: 'Étiquette à ajouter aux éléments choisis :', okLabel: 'Ajouter'}); if (tg?.trim()) await act('tag', ids.map(Number), {tag: tg.trim()}); }},
+                    {id: 'star', icon: '⭐', label: i18n('Favoris'), edit: true, run: ids => run('star')(ids)},
+                    ...(inFolder ? [{id: 'remove', icon: '−', label: i18n('Retirer de ce dossier'), edit: true, run: ids => run('remove')(ids)}] : []),
+                    {id: 'trash', icon: '🗑', label: i18n('Corbeille'), edit: true, danger: true, run: ids => run('trash')(ids)},
+                ]});
+            bar?.set(v.sel); ready = true;
+        }
         ws.addEventListener('click', async e => {
             const t = e.target;
             const q = sel => t.closest(sel);
@@ -1008,14 +1024,6 @@
             if (q('[data-at-unfile]')) return act('remove', v.sel, {folder_id: Number(q('[data-at-unfile]').dataset.atUnfile)});
             if (q('[data-at-unrel]')) { const i = P.byId.get(v.sel[0]); const rel = (i.data.related || []).filter(x => Number(x) !== Number(q('[data-at-unrel]').dataset.atUnrel)); return saveData(i, {related: rel}); }
             if (q('[data-at-emptytrash]')) { const ids = P.items.filter(i => Number(i.trashed)).map(i => Number(i.id)); if (await A().confirmBox(i18n('Supprimer définitivement {n} ?', {n: plural(ids.length, 'élément', 'éléments')}), {title: 'Vider la corbeille', okLabel: 'Supprimer définitivement'})) { await act('delete', ids); v.sel = []; } return; }
-            if (q('[data-at-unsel]')) { v.sel = []; return renderProject(S().workspaceToken, true); }
-            if (q('[data-at-bulk]')) {
-                const a = q('[data-at-bulk]').dataset.atBulk;
-                if (a === 'tag') { const tg = await A().askText({title: 'Étiquette', message: 'Étiquette à ajouter aux éléments choisis :', okLabel: 'Ajouter'}); if (tg?.trim()) await act('tag', v.sel, {tag: tg.trim()}); return; }
-                if (a === 'delete' && !await A().confirmBox(i18n('Supprimer définitivement {n} ?', {n: plural(v.sel.length, 'élément', 'éléments')}), {title: 'Supprimer définitivement', okLabel: 'Supprimer définitivement'})) return;
-                await act(a, v.sel, {folder_id: typeof v.node === 'number' ? v.node : 0}); if (['trash', 'delete', 'restore', 'remove'].includes(a)) { v.sel = []; renderProject(S().workspaceToken, true); }
-                return;
-            }
             if (q('[data-at-copybib]')) { const txt = ws.querySelector('[data-at-biblio]').innerText; try { await navigator.clipboard.writeText(txt); toast('Bibliographie copiée.'); } catch (_) { toast('Copie impossible : sélectionne le texte à la main.', 'error'); } return; }
             if (q('[data-at-printbib]')) { const bib = `<!doctype html><meta charset="utf-8"><title>Bibliographie</title><style>body{font:12pt/1.5 Georgia,serif;max-width:46rem;margin:2rem auto}li{margin:.3rem 0;list-style:none;text-indent:-1.5rem;padding-left:1.5rem}button{all:unset}</style><h1>${esc(P.project.title)}</h1>${ws.querySelector('[data-at-biblio]').innerHTML}`; if (window.LCNDA_UI?.openPrintDialog) { window.LCNDA_UI.openPrintDialog({title: 'Bibliographie', html: bib, photos: false}); return; } const w = window.open('', '_blank'); if (!w) return; w.document.write(bib); w.document.close(); w.print(); return; } // K13
             if (q('[data-at-exp]')) { const x = q('[data-at-exp]').dataset.atExp, refs = live().filter(i => i.type === 'reference'); ext.downloadText('references.' + x, x === 'bib' ? toBibtex(refs) : toRis(refs), 'text/plain'); return; }
@@ -1038,7 +1046,6 @@
             if (t.matches('[data-at-q]')) { v.q = t.value.trim(); if (SPECIAL_VIEWS.includes(v.node)) v.node = 'all'; return renderProject(S().workspaceToken, true); }
             if (t.matches('[data-at-biblioscope]')) { v.biblioScope = Number(t.value) || 0; return renderProject(S().workspaceToken, true); }
             if (t.matches('[data-at-taskdone]')) { const i = P.byId.get(Number(t.dataset.atTaskdone)); return saveData(i, {done: t.checked ? 1 : 0}); }
-            if (t.matches('[data-at-bulkfolder]') && t.value) { if (await act('add', v.sel, {folder_id: Number(t.value)})) toast('Rangé.'); return; }
             if (t.matches('[data-at-file]') && t.value) return act('add', v.sel, {folder_id: Number(t.value)});
             if (t.matches('[data-at-addtag]') && t.value.trim()) return act('tag', v.sel, {tag: t.value.trim()});
             if (t.matches('[data-at-relq]') && t.value) { const m = t.value.match(/#(\d+)$/); if (!m) return; const i = P.byId.get(v.sel[0]); return saveData(i, {related: [...new Set([...(i.data.related || []), Number(m[1])])]}); }

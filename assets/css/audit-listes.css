@@ -5,6 +5,7 @@
 .sel-bar { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .6rem; margin: .4rem 0; padding: .35rem .6rem; border-radius: 10px; border: 1px solid var(--line, #d8dde6); background: var(--panel, #fff); font-size: .9rem; }
 .sel-bar.has-sel { position: sticky; top: 0; z-index: 5; border-color: var(--accent, #0066cc); background: color-mix(in srgb, var(--accent, #0066cc) 8%, var(--panel, #fff)); box-shadow: 0 2px 8px rgba(0, 0, 0, .08); }
 .sel-bar .sel-all { margin: 0; font-weight: 600; white-space: nowrap; }
+.sel-bar .sel-fallback { font-weight: 600; white-space: nowrap; color: var(--muted, #555); }
 .sel-bar .sel-acts { display: flex; flex-wrap: wrap; gap: .3rem; align-items: center; }
 .sel-box { display: inline-flex; align-items: center; margin-right: .4rem; vertical-align: middle; cursor: pointer; }
 .sel-box input { width: 1rem; height: 1rem; margin: 0; cursor: pointer; }

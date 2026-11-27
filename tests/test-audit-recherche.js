@@ -246,7 +246,7 @@ echo json_encode(compact('gp', 'gm', 'f1', 'f2', 'm1', 'm2', 'c1', 'c2', 'c3', '
             await p.waitForSelector('#workspace [data-rp-pick]');
             const ids = await p.$$eval('#workspace [data-rp-pick]', b => b.slice(0, 2).map(x => Number(x.dataset.rpPick)));
             for (const id of ids) await p.check(`#workspace [data-rp-pick="${id}"]`);
-            assert.match(await p.textContent('[data-rp-count]'), /2 cochée/);
+            assert.match(await p.textContent('#workspace [data-rp-bar]'), /2 personnes cochées/); // la barre de sélection commune
             await p.click('[data-rp-label]');
             await p.waitForSelector('.ui-actmenu');
             await p.evaluate(() => { window.LCNDA_APP.askText = async () => 'Branche Tulle'; });
@@ -271,7 +271,7 @@ echo json_encode(compact('gp', 'gm', 'f1', 'f2', 'm1', 'm2', 'c1', 'c2', 'c3', '
             assert.ok(await p.$(`[data-rp-rkey="persons:occupation:${ID.f1}"]:checked`));
             assert.ok(await p.$(`[data-rp-rkey="persons:occupation:${ID.f2}"]:disabled`), 'la fiche verrouillée est grisée');
             assert.ok(await p.$('.rp-before mark'));
-            await p.uncheck('[data-rp-rall]');
+            await p.uncheck('[data-rp-replace-out] .sel-bar [data-sel-all]'); // « Tout cocher » de la barre de sélection commune
             assert.strictEqual(await p.$eval('[data-rp-apply]', b => b.disabled), true, 'rien de coché : rien à faire');
             await p.check(`[data-rp-rkey="persons:occupation:${ID.f1}"]`);
             assert.match(await p.textContent('[data-rp-apply]'), /\(1\)/);

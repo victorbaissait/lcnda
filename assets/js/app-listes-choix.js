@@ -30,7 +30,7 @@
     const RO = () => T('Mode consultation : rien ne peut être écrit.');
 
     /* ═════════════ ce qui est coché (une liste à la fois) ═════════════ */
-    const S = {list: '', map: new Map(), all: null, except: new Set(), last: -1, api: null, page: null, bar: null};
+    const S = {list: '', map: new Map(), all: null, except: new Set(), last: -1, api: null, page: null, bar: null, subs: []};
     const filterSig = st => JSON.stringify([st.q || '', st.crit || [], st.period || null, st.near || null, st.chips || [], st.dview || '', st.inBase || false]);
     function rowKey(d, r) {
         try { const k = d.rowKey?.(r); if (k != null && k !== '') return String(k); } catch (_) {}
@@ -61,7 +61,7 @@
         page.querySelector('.ld-bar')?.appendChild(tools);
         const bar = S.bar = document.createElement('div'); bar.className = 'ldc-bar'; bar.hidden = true; bar.setAttribute('role', 'region'); bar.setAttribute('aria-label', T('Lignes choisies'));
         const ro = kiosk(), why = ro ? ` disabled title="${esc(RO())}"` : '';
-        bar.innerHTML = `<span class="ldc-n" data-ldc-n aria-live="polite"></span><span class="ldc-acts"><button type="button" class="ldc-b" data-ldc-ins${why}>📎 <span>${esc(T('Insérer…'))}</span></button>${CX() ? `<button type="button" class="ldc-b" data-ldc-bk${why}>🧺 <span>${esc(T('Mettre dans un panier…'))}</span></button>` : ''}<button type="button" class="ldc-b" data-ldc-exp>⤓ <span>${esc(T('Exporter'))}</span></button></span><button type="button" class="ldc-x" data-ldc-x aria-label="${esc(T('Tout décocher (Échap)'))}" title="${esc(T('Tout décocher (Échap)'))}">✕</button>`;
+        bar.innerHTML = `<span class="ldc-n" data-ldc-n aria-live="polite"></span><span class="ldc-acts"><button type="button" class="ldc-b" data-ldc-ins${why}>📎 <span>${esc(T('Insérer…'))}</span></button>${CX() ? `<button type="button" class="ldc-b" data-ldc-bk${why}>🧺 <span>${esc(T('Mettre dans un panier…'))}</span></button>` : ''}<button type="button" class="ldc-b" data-ldc-exp>⤓ <span>${esc(T('Exporter'))}</span></button></span><button type="button" class="ldc-x" data-ldc-x title="${esc(T('Tout décocher (Échap)'))}">${esc(T('✕ Décocher'))}</button>`;
         page.appendChild(bar);
         page.addEventListener('click', onClick);
         page.addEventListener('keydown', onKey);
@@ -118,8 +118,13 @@
         page.classList.toggle('ldc-has-sel', n > 0);
         const bar = S.bar; if (!bar) return;
         bar.hidden = !n;
-        const lab = bar.querySelector('[data-ldc-n]'); if (lab) lab.textContent = n === 1 ? T('1 choisi') : T('{n} choisis', {n: nf(n)});
+        const lab = bar.querySelector('[data-ldc-n]'); if (lab) lab.textContent = n === 1 ? T('1 ligne cochée') : T('{n} lignes cochées', {n: nf(n)}); // les mots de la barre commune (app-selection.js)
+        S.subs.forEach(f => { try { f(n); } catch (_) {} });
     }
+    /** pour « 🧺 Prendre… » et le bandeau « Tu choisis des lignes pour… » (heritage-connexions.js) : une seule sorte de cases par liste */
+    function onChange(f) { if (typeof f === 'function' && !S.subs.includes(f)) S.subs.push(f); }
+    function pick(rows) { const d = dNow(); (rows || []).forEach(r => setOn(d, r, true)); paint(); }
+    const pickedRows = () => (S.all ? null : [...S.map.values()]);
 
     /* ═════════════ les lignes choisies → éléments, bloc, fichier ═════════════ */
     async function selectedRows() {
@@ -188,9 +193,10 @@
         const csv = () => { const cell = A().csvCell ? (v => A().csvCell(v, {sep: ';'})) : (v => { const s = String(safe(v) ?? ''); return /[";\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s; });
             download(new Blob(['﻿' + t2.map(r => r.map(cell).join(';')).join('\r\n')], {type: 'text/csv;charset=utf-8'}), `${base}.csv`); toast(T('{n} lignes exportées.', {n: nf(rows.length)})); };
         const xlsx = async () => { const wb = SH.newWorkbook(); wb.sheets[0].name = SH.cleanSheetName ? SH.cleanSheetName(T(d.label), []) : 'Liste'; wb.sheets[0].cells = SH.rowsToCells(t2.map(r => r.map(safe))); download(await SH.toXlsx(wb), `${base}.xlsx`); toast(T('{n} lignes exportées.', {n: nf(rows.length)})); };
+        if (UI().exportRows) return UI().exportRows({title: T('Exporter {n} lignes', {n: nf(rows.length)}), name: base, rows: () => t2}); // ⤓ la fenêtre d'export commune
         if (!SH?.toXlsx || !UI().menuAt) return csv();
         UI().menuAt(anchor, [{icon: '📄', label: T('CSV (tableur, Excel)'), run: csv}, {icon: '📊', label: T('Fichier Excel (.xlsx)'), run: xlsx}], {title: T('Exporter {n} lignes', {n: nf(rows.length)})});
     }
 
-    ext.listesChoix = {listBar, rowsPainted, cellBefore, cellAfter, headBefore, headAfter, act, count, clear, rowKey, selectedRows};
+    ext.listesChoix = {listBar, rowsPainted, cellBefore, cellAfter, headBefore, headAfter, act, count, clear, rowKey, selectedRows, onChange, pick, pickedRows};
 })();

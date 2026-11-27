@@ -131,7 +131,7 @@
     const personRow = p => [personName(p), yr(p.birth_date, p.birth_year), yr(p.death_date, p.death_year)];
     /**
      * researchBar.attach(root, people, {title, head, row}) : root contient des cases [data-rp-pick="id"] ;
-     * la barre se pose en haut des résultats : Tout cocher · n cochées · 🏷 Étiqueter · 📑 Ajouter à Mes listes ;
+     * la barre de sélection commune se pose en haut des résultats : Tout cocher · n cochées · 🏷 Étiqueter · 📑 Ajouter à Mes listes ;
      * sans case cochée, les actions portent sur tous les résultats. L'en-tête de la page reçoit Exporter / Imprimer.
      */
     function attachBar(root, people, o = {}) {
@@ -139,29 +139,31 @@
         const page = root.closest('.page') || root;
         const title = o.title || i18n('Résultats de la recherche');
         const byId = new Map(people.map(p => [Number(p.id), p]));
-        const picked = () => [...root.querySelectorAll('[data-rp-pick]:checked')].map(c => Number(c.dataset.rpPick));
-        const targets = () => { const p = picked(); return p.length ? p : people.map(x => Number(x.id)); };
-        const bar = document.createElement('div'); bar.className = 'rp-bar'; bar.dataset.rpBar = '';
-        bar.innerHTML = `<label class="rp-bar-all"><input type="checkbox" data-rp-all> ${esc(i18n('Tout cocher'))}</label><span class="rp-bar-count" data-rp-count></span>
-            ${kiosk() ? '' : `<button type="button" class="button small secondary" data-rp-label>${esc(i18n('🏷 Étiqueter'))}</button><button type="button" class="button small secondary" data-rp-list>${esc(i18n('📑 Ajouter à Mes listes'))}</button>`}`;
+        // ☑ la barre de sélection commune (app-selection.js) : Tout cocher, Maj+clic, ✕ Décocher ; sans case cochée, les actions portent sur tous les résultats (dit dans la barre)
+        root.querySelectorAll('[data-rp-pick]').forEach(c => { c.setAttribute('data-sel-check', ''); (c.closest('tr, article, .research-person-card, li') || c.parentElement)?.setAttribute('data-rp-row', c.dataset.rpPick); });
+        const all = () => people.map(x => Number(x.id));
         const first = root.querySelector('.data-table-wrap, .date-results, .rp-results, table') || root.firstElementChild;
-        if (first) first.before(bar); else root.prepend(bar);
-        const count = () => { const n = picked().length; bar.querySelector('[data-rp-count]').textContent = n ? i18n('{n} cochée(s) sur {t}', {n, t: people.length}) : i18n('Rien de coché : les actions portent sur les {t} résultats', {t: people.length}); const all = bar.querySelector('[data-rp-all]'); all.checked = n > 0 && n === people.length; all.indeterminate = n > 0 && n < people.length; };
-        root.addEventListener('change', e => { if (e.target.matches('[data-rp-pick]')) count(); });
-        bar.querySelector('[data-rp-all]').addEventListener('change', e => { root.querySelectorAll('[data-rp-pick]').forEach(c => { c.checked = e.target.checked; }); count(); });
-        count();
-        bar.querySelector('[data-rp-label]')?.addEventListener('click', async e => {
-            const btn = e.currentTarget;
+        const menuOf = attr => sel?.el.querySelector(`[${attr}]`) || sel?.el;
+        const labelGo = async ids => {
+            const btn = menuOf('data-rp-label');
             let labels = []; try { labels = (await api('ro_label_rules')).labels || []; } catch (err) { toast(err.message, 'error'); return; }
-            const go = async body => { try { const ids = targets(); const r = await post('ro_people_label', {...body, ids}); undoable(i18n('🏷 « {label} » posée sur {n} personne(s)', {label: r.label, n: r.added}), r.undo_id); } catch (err) { toast(err.message, 'error'); } };
-            UI().menuAt(btn, [...labels.map(l => ({icon: '🏷', label: l.name, run: () => go({label_id: l.id})})), '-', {icon: '＋', label: i18n('Nouvelle étiquette…'), run: async () => { const name = await A().askText({title: i18n('Nouvelle étiquette'), placeholder: i18n('Ex : Poilu, À vérifier…'), okLabel: i18n('Étiqueter')}); if (name && name.trim()) go({label_name: name.trim()}); }}], {title: i18n('Étiqueter {n} personne(s)', {n: targets().length})});
-        });
-        bar.querySelector('[data-rp-list]')?.addEventListener('click', async e => {
-            const btn = e.currentTarget;
+            const go = async body => { try { const r = await post('ro_people_label', {...body, ids}); undoable(i18n('🏷 « {label} » posée sur {n} personne(s)', {label: r.label, n: r.added}), r.undo_id); } catch (err) { toast(err.message, 'error'); } };
+            UI().menuAt(btn, [...labels.map(l => ({icon: '🏷', label: l.name, run: () => go({label_id: l.id})})), '-', {icon: '＋', label: i18n('Nouvelle étiquette…'), run: async () => { const name = await A().askText({title: i18n('Nouvelle étiquette'), placeholder: i18n('Ex : Poilu, À vérifier…'), okLabel: i18n('Étiqueter')}); if (name && name.trim()) go({label_name: name.trim()}); }}], {title: i18n('Étiqueter {n} personne(s)', {n: ids.length})});
+        };
+        const listGo = async ids => {
+            const btn = menuOf('data-rp-list');
             let lists = []; try { lists = ((await api('my_lists')).lists || []).filter(l => l.source === 'persons'); } catch (err) { toast(err.message, 'error'); return; }
             if (!lists.length) { toast(i18n('Aucune de « Mes listes » ne contient des personnes : crée-en une dans Réglages → Éditeur de listes.'), 'error'); return; }
-            UI().menuAt(btn, lists.map(l => ({icon: l.icon || '📋', label: l.name, run: async () => { try { const r = await post('ro_people_to_list', {list_id: l.id, ids: targets()}); undoable(i18n('📑 {n} personne(s) ajoutée(s) à « {list} »', {n: r.added, list: r.list}), r.undo_id); } catch (err) { toast(err.message, 'error'); } }})), {title: i18n('Ajouter à une liste')});
-        });
+            UI().menuAt(btn, lists.map(l => ({icon: l.icon || '📋', label: l.name, run: async () => { try { const r = await post('ro_people_to_list', {list_id: l.id, ids}); undoable(i18n('📑 {n} personne(s) ajoutée(s) à « {list} »', {n: r.added, list: r.list}), r.undo_id); } catch (err) { toast(err.message, 'error'); } }})), {title: i18n('Ajouter à une liste')});
+        };
+        const sel = window.LCNDA_EXT?.selectionBar ? window.LCNDA_EXT.selectionBar({host: root, rowSelector: '[data-rp-row]', idOf: el => el.dataset.rpRow, what: [i18n('personne cochée'), i18n('personnes cochées')], place: first || null,
+            fallback: () => ({ids: all(), text: i18n('Rien de coché : les actions portent sur les {t} résultats', {t: people.length})}),
+            actions: [
+                {id: 'label', icon: '🏷', label: i18n('Étiqueter'), attr: 'data-rp-label', edit: true, run: ids => labelGo(ids.map(Number))},
+                {id: 'list', icon: '📑', label: i18n('Ajouter à Mes listes'), attr: 'data-rp-list', edit: true, run: ids => listGo(ids.map(Number))},
+            ]}) : null;
+        if (sel) sel.el.dataset.rpBar = '';
+        const picked = () => (sel ? sel.ids().map(Number) : [...root.querySelectorAll('[data-rp-pick]:checked')].map(c => Number(c.dataset.rpPick)));
         const head = o.head || PEOPLE_HEAD(), row = o.row || personRow;
         bindExportPrint(page, () => { const ids = picked(); const list = ids.length ? ids.map(id => byId.get(id)).filter(Boolean) : people; return {title, head, rows: list.map(row)}; });
         if (o.kit !== false) window.LCNDA_EXT?.researchKit?.people(page, {people, title, criteria: o.criteria || title, head, row, nameOf: personName, key: o.key || 'people'}); // 🧺 📎 dans « ⤓ Exporter ▾ » et au bout de chaque ligne (app-recherche-kit.js)
@@ -206,11 +208,13 @@
             last = {q, rows: d.rows};
             if (record) history.add('replace');
             if (!d.total) { out.innerHTML = A().emptyState({icon: '🔁', text: i18n('Rien à remplacer.'), hint: i18n('Aucune ligne ne contient « {find} ».', {find: q.find})}); return; }
-            out.innerHTML = `<div class="rp-bar rp-replace-bar"><label class="rp-bar-all"><input type="checkbox" data-rp-rall checked> ${esc(i18n('Tout cocher'))}</label><span class="rp-bar-count" data-rp-rcount></span>${d.locked ? `<span class="muted">${esc(i18n('🔒 {n} ligne(s) d’une fiche verrouillée : elles ne changeront pas.', {n: d.locked}))}</span>` : ''}${d.total > d.shown ? `<span class="muted">${esc(i18n('Seules les {n} premières lignes sont montrées ; « Remplacer » change les lignes cochées.', {n: d.shown}))}</span>` : ''}${kiosk() ? '' : `<button type="button" class="button" data-rp-apply data-ro-edit>${esc(i18n('🔁 Remplacer'))}</button>`}</div>
-                <div class="data-table-wrap"><table class="data-table rp-replace-table"><thead><tr><th class="rp-pick-cell"></th><th>${esc(i18n('Où'))}</th><th>${esc(i18n('Avant'))}</th><th>${esc(i18n('Après'))}</th></tr></thead><tbody>${d.rows.map(r => `<tr class="${r.locked ? 'is-locked' : ''}"><td class="rp-pick-cell"><input type="checkbox" data-rp-rkey="${esc(r.key)}" ${r.locked ? 'disabled title="' + esc(i18n('Fiche verrouillée')) + '"' : 'checked'} aria-label="${esc(i18n('Changer cette ligne'))}"></td><td>${r.person_id ? `<button class="table-link" data-open-person="${r.person_id}">${esc(r.who)}</button>` : esc(r.who)}</td><td class="rp-before">${markHtml(r.before, q.find, q.case, q.word)}</td><td class="rp-after">${esc(r.after)}</td></tr>`).join('')}</tbody></table></div>`;
+            out.innerHTML = `<div class="rp-bar rp-replace-bar"><span class="rp-bar-count" data-rp-rcount></span>${d.locked ? `<span class="muted">${esc(i18n('🔒 {n} ligne(s) d’une fiche verrouillée : elles ne changeront pas.', {n: d.locked}))}</span>` : ''}${d.total > d.shown ? `<span class="muted">${esc(i18n('Seules les {n} premières lignes sont montrées ; « Remplacer » change les lignes cochées.', {n: d.shown}))}</span>` : ''}${kiosk() ? '' : `<button type="button" class="button" data-rp-apply data-ro-edit>${esc(i18n('🔁 Remplacer'))}</button>`}</div>
+                <div class="data-table-wrap"><table class="data-table rp-replace-table"><thead><tr><th class="rp-pick-cell"></th><th>${esc(i18n('Où'))}</th><th>${esc(i18n('Avant'))}</th><th>${esc(i18n('Après'))}</th></tr></thead><tbody>${d.rows.map(r => `<tr class="${r.locked ? 'is-locked' : ''}"${r.locked ? '' : ` data-rp-rrow="${esc(r.key)}"`}><td class="rp-pick-cell"><input type="checkbox" data-rp-rkey="${esc(r.key)}" ${r.locked ? '' : 'data-sel-check '}${r.locked ? 'disabled title="' + esc(i18n('Fiche verrouillée')) + '"' : 'checked'} aria-label="${esc(i18n('Changer cette ligne'))}"></td><td>${r.person_id ? `<button class="table-link" data-open-person="${r.person_id}">${esc(r.who)}</button>` : esc(r.who)}</td><td class="rp-before">${markHtml(r.before, q.find, q.case, q.word)}</td><td class="rp-after">${esc(r.after)}</td></tr>`).join('')}</tbody></table></div>`;
             const keys = () => [...out.querySelectorAll('[data-rp-rkey]:checked')].map(c => c.dataset.rpRkey);
             const count = () => { const n = keys().length; out.querySelector('[data-rp-rcount]').textContent = i18n('{n} ligne(s) cochée(s) sur {t}', {n, t: d.total}); const b = out.querySelector('[data-rp-apply]'); if (b) { b.disabled = !n; b.textContent = i18n('🔁 Remplacer ({n})', {n}); } };
-            out.addEventListener('change', e => { if (e.target.matches('[data-rp-rall]')) out.querySelectorAll('[data-rp-rkey]:not(:disabled)').forEach(c => { c.checked = e.target.checked; }); count(); });
+            // ☑ la barre de sélection commune (app-selection.js) : Tout cocher, Maj+clic pour une suite, ✕ Décocher ; une fiche verrouillée n'a pas de case active
+            const rsel = window.LCNDA_EXT?.selectionBar?.({host: out.querySelector('.rp-replace-table tbody'), rowSelector: 'tr[data-rp-rrow]', idOf: el => el.dataset.rpRrow, what: [i18n('ligne cochée'), i18n('lignes cochées')], place: out.querySelector('.rp-replace-bar'), onChange: () => count()});
+            rsel?.set(d.rows.filter(r => !r.locked).map(r => r.key));
             count(); A().bindTableLinks?.();
             out.querySelector('[data-rp-apply]')?.addEventListener('click', async () => {
                 const k = keys(); if (!k.length) return;

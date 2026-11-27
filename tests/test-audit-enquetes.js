@@ -431,7 +431,12 @@ echo json_encode($ids + ['inv' => $inv, 'inv2' => $inv2, 'bat' => $bat, 'media' 
             await t('ADN en consultation : ni ＋, ni import, ni suppression ; la fiche d’une correspondance en lecture seule', async () => {
                 await p.evaluate(() => document.body.classList.add('is-kiosk'));
                 await go('matches');
-                for (const sel of ['[data-dna-newmatch]', '[data-dna-import]', '[data-dna-chk]', '.h-dna-bulk']) assert.strictEqual(await p.$(`.h-dna-page ${sel}`), null, sel);
+                for (const sel of ['[data-dna-newmatch]', '[data-dna-import]']) assert.strictEqual(await p.$(`.h-dna-page ${sel}`), null, sel);
+                // la barre de sélection commune : en consultation, seulement ce qui ne change rien (⤓ Exporter)
+                await p.locator('.h-dna-page tr[data-dna-row] .sel-box input').first().click(); await sleep(200);
+                const acts = await p.$$eval('.h-dna-page .sel-bar [data-sel-act]', b => b.map(x => x.textContent));
+                assert.ok(acts.some(x => /Exporter/.test(x)) && !acts.some(x => /Supprimer|Côté|Suivi|groupe/.test(x)), acts.join(' | '));
+                await p.click('.h-dna-page .sel-bar [data-sel-clear]');
                 await p.click(`[data-dna-rmenu="${mAnne}"]`); await p.waitForSelector('.ui-actmenu'); assert.ok(!(await menuLabels()).some(x => /Supprimer|Modifier|Relancer/.test(x))); await p.keyboard.press('Escape'); await sleep(200);
                 await p.click(`[data-dna-match="${mAnne}"]`); await p.waitForSelector('dialog[open] [name=shared_cm]');
                 assert.ok(await p.$eval('dialog[open] [name=shared_cm]', i => i.disabled)); assert.strictEqual(await p.$('dialog[open] [data-h-delete]'), null);

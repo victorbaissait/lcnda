@@ -12,7 +12,8 @@
  *   sel.refresh();   // après avoir redessiné les lignes : les cases reviennent, cochées comme avant
  *   sel.ids();       // les numéros cochés ;  sel.clear() ;  sel.destroy()
  *
- * Une action : {id, icon, label, help, edit (cachée en mode consultation), danger, min (cochées au moins), run(ids, sel)}.
+ * Une action : {id, icon, label, help, edit (cachée en mode consultation), danger, min (cochées au moins), attr (un attribut de plus sur le bouton), run(ids, sel)}.
+ * fallback() → {ids, text} : quand rien n'est coché, les actions portent sur ces lignes-là, dit en clair dans la barre (« Les 12 trouvés »).
  * Maj + clic coche toutes les lignes entre deux cases. Mode consultation (body.is-kiosk) : seules les actions sans « edit ».
  * Actions toutes prêtes : personActions, eventActions, labelAction(type), exportAction(), deleteAction(…).
  * Serveur : POST listes_plus_write (lib/listes_plus.php) ; chaque action a son « ↶ Annuler ».
@@ -42,12 +43,15 @@
         // 🧺 « Au panier » et 📍 « Mettre dans… » (heritage-connexions.js) : ajoutées à chaque barre ; kind = la sorte des lignes (person, event, note, source, media…)
         if (!o.kind) o.kind = (o.actions || []).find(a => a && a._kind)?._kind || '';
         const actions = () => [...(o.actions || []), ...(selectionBar.extraActions || []).flatMap(f => { try { return f(o) || []; } catch (_) { return []; } })].filter(a => a && !(a.edit && kiosk()));
+        // o.fallback() → {ids, text} : quand rien n'est coché, les actions agissent sur ces lignes-là (ex. « Les 12 trouvés »), dit en clair
+        const fallback = () => { if (set.size || !o.fallback) return null; try { const f = o.fallback(); return f && f.ids?.length ? f : null; } catch (_) { return null; } };
         function paint() {
-            const n = set.size, all = rows(), on = all.filter(r => set.has(String(idOf(r)))).length;
+            const n = set.size, all = rows(), on = all.filter(r => set.has(String(idOf(r)))).length, fb = fallback(), k = n || fb?.ids.length || 0;
             const acts = actions();
-            bar.classList.toggle('has-sel', n > 0);
+            bar.classList.toggle('has-sel', n > 0); bar.classList.toggle('has-fallback', !!fb);
             bar.innerHTML = `<label class="sel-all checkbox-line"><input type="checkbox" data-sel-all${all.length && on === all.length ? ' checked' : ''}${on && on < all.length ? ' data-mixed' : ''} aria-label="${esc(T('Tout cocher'))}"> <span>${n ? esc(`${n.toLocaleString('fr-FR')} ${n > 1 ? many : one}`) : esc(T('Tout cocher'))}</span></label>`
-                + (n ? `<span class="sel-acts">${acts.map((a, i) => `<button type="button" class="button small ${a.danger ? 'secondary danger' : 'secondary'}" data-sel-act="${i}"${(a.min || 1) > n ? ' disabled' : ''} title="${esc(a.help || a.label)}">${esc(a.icon ? `${a.icon} ${a.label}` : a.label)}</button>`).join('')}<button type="button" class="link-button" data-sel-clear>${esc(T('✕ Décocher'))}</button></span>` : '');
+                + (fb ? `<span class="sel-fallback" data-sel-fallback>${esc(fb.text)}</span>` : '')
+                + (k ? `<span class="sel-acts">${acts.map((a, i) => `<button type="button" class="button small ${a.danger ? 'secondary danger' : 'secondary'}" data-sel-act="${i}"${a.attr ? ` ${a.attr}` : ''}${(a.min || 1) > k ? ' disabled' : ''} title="${esc(a.help || a.label)}">${esc(a.icon ? `${a.icon} ${a.label}` : a.label)}</button>`).join('')}${n ? `<button type="button" class="link-button" data-sel-clear>${esc(T('✕ Décocher'))}</button>` : ''}</span>` : '');
             const allBox = bar.querySelector('[data-sel-all]'); if (allBox && allBox.hasAttribute('data-mixed')) allBox.indeterminate = true;
             o.onChange?.(ids());
         }
@@ -82,11 +86,11 @@
             if (b.matches('[data-sel-clear]')) { clear(); return; }
             const a = actions()[Number(b.dataset.selAct)]; if (!a) return;
             b.disabled = true;
-            try { await a.run(ids(), api); } catch (err) { toast(err?.message || String(err), 'error'); } finally { b.disabled = false; }
+            try { const fb = fallback(); await a.run(fb ? fb.ids.map(String) : ids(), api); } catch (err) { toast(err?.message || String(err), 'error'); } finally { b.disabled = false; }
         });
         bar.addEventListener('change', e => { if (!e.target.matches('[data-sel-all]')) return; const on = e.target.checked; rows().forEach(r => toggle(r, on)); paint(); });
         function clear() { set.clear(); attach(); }
-        const api = {el: bar, ids, clear, refresh: attach, set: list => { set.clear(); (list || []).forEach(x => set.add(String(x))); attach(); }, rows: () => rows().filter(r => set.has(String(idOf(r)))), destroy: () => { bar.remove(); }, host};
+        const api = {el: bar, ids, clear, refresh: attach, repaint: paint, set: list => { set.clear(); (list || []).forEach(x => set.add(String(x))); attach(); }, rows: () => rows().filter(r => set.has(String(idOf(r)))), destroy: () => { bar.remove(); }, host};
         if (o.place !== false) (o.place || host).before(bar);
         attach();
         return api;
@@ -148,6 +152,7 @@
                 const keep = head.map((h, i) => i).filter(i => head[i] !== '' || picked.some(r => text(r.cells?.[i] || {}) !== ''));
                 m = table ? [keep.map(i => head[i] || T('Colonne {n}', {n: i + 1})), ...picked.map(r => keep.map(i => text(r.cells[i] || {})))] : [[T('Ligne')], ...picked.map(r => [text(r)])];
             }
+            if (UI().exportRows) return UI().exportRows({title: name, name, rows: () => m, info: plural(m.length - 1, T('ligne'))}); // ⤓ la fenêtre d'export commune
             const cell = v => (A().csvCell ? A().csvCell(v, {sep: ';'}) : `"${String(v ?? '').replace(/"/g, '""')}"`);
             const csv = '﻿' + m.map(r => r.map(cell).join(';')).join('\r\n');
             const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type: 'text/csv;charset=utf-8'}));
@@ -171,6 +176,18 @@
     const personActions = (o = {}) => [labelAction('person', o), myListAction(o), lockAction(true, o), lockAction(false, o), exportAction({name: o.name || T('fiches')}), deleteAction('person', o)];
     const eventActions = (o = {}) => [labelAction('event', o), exportAction({name: o.name || T('événements')}), deleteAction('event', o)];
 
+    /** Une action qui demande un choix dans une liste (« Côté… », « Statut… », « Ajouter au groupe… ») :
+     *  choiceAction({id, icon, label, help, title, field, options: [[valeur, texte], …] | () => […], edit, danger, run: (ids, valeur, sel) => …}) */
+    function choiceAction({id, icon = '', label, help = '', title = '', field = '', options = [], edit = true, danger = false, run}) {
+        return {id, icon, label, help: help || label, edit, danger, run: async (ids, sel) => {
+            const opts = typeof options === 'function' ? options() : options;
+            const v = await pickDialog({eyebrow: label.toUpperCase(), title: title || T('{what} pour {n}', {what: label, n: plural(ids.length, T('ligne cochée'), T('lignes cochées'))}), submitLabel: T('Appliquer'),
+                body: `<div class="form-grid one-column"><label>${esc(field || label)}<select name="v" required>${opts.map(([a, b]) => `<option value="${esc(a)}">${esc(b)}</option>`).join('')}</select></label></div>`});
+            if (!v || v.v === undefined || v.v === '') return;
+            await run(ids, v.v, sel);
+        }};
+    }
+    selectionBar.choiceAction = choiceAction; selectionBar.pickDialog = pickDialog;
     selectionBar.labelAction = labelAction; selectionBar.myListAction = myListAction; selectionBar.lockAction = lockAction;
     selectionBar.exportAction = exportAction; selectionBar.deleteAction = deleteAction;
     selectionBar.personActions = personActions; selectionBar.eventActions = eventActions;

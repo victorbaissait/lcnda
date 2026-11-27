@@ -28,7 +28,7 @@
     const undoToast = (msg, o) => (A().undoToast ? A().undoToast(msg, o) : toast(msg));
     /** ↶ une suppression : le serveur a rendu ce qui est parti (undo) ; « ↶ Annuler » le remet avec les mêmes numéros */
     const undoRestore = (msg, undo, redo) => undoToast(msg, {undo: async () => { await post('dna_plus', {op: 'restore', undo}); await refresh(); }, redo: redo ? async () => { await redo(); await refresh(); } : null});
-    const RO_SEL = '[data-dna-newkit], [data-dna-newmatch], [data-dna-import], [data-dna-segimport], [data-dna-segadd], [data-dna-segdel], [data-dna-newgroup], [data-dna-leedsmake], [data-auto-make], .h-dna-bulk, [data-dna-chk], [data-dna-all], [data-dna-reset], [data-dna-group], [data-dna-kit], [data-dna-edit], [data-ph-edit]';
+    const RO_SEL = '[data-dna-newkit], [data-dna-newmatch], [data-dna-import], [data-dna-segimport], [data-dna-segadd], [data-dna-segdel], [data-dna-newgroup], [data-dna-leedsmake], [data-auto-make], [data-dna-reset], [data-dna-group], [data-dna-kit], [data-dna-edit], [data-ph-edit]';
     function readOnly(root) { if (!kiosk() || !root) return; root.querySelectorAll(RO_SEL).forEach(el => el.remove()); root.querySelectorAll('.h-dna-settings input, .h-dna-settings button, [data-sm-cell]').forEach(el => { el.disabled = true; el.removeAttribute('data-sm-cell'); }); }
     /** R13 : « chercher dans cette page » sur une longue rubrique */
     function pageFind(page) {
@@ -274,14 +274,12 @@
                 ${sel('side', [['', 'Tous les côtés'], ...SIDES.slice(1)], f.side)}${sel('status', [['', 'Tout suivi'], ...STATUSES.slice(1)], f.status)}${sel('group', [[0, 'Tous les groupes'], [-1, 'Sans groupe'], ...data.groups.map(g => [g.id, g.name])], f.group)}
                 <input type="number" data-dna-f="min" value="${esc(f.min || '')}" placeholder="cM min" min="0"><input type="number" data-dna-f="max" value="${esc(f.max || '')}" placeholder="cM max" min="0">
 </div>
-            <div class="h-dna-bulk" hidden><span data-dna-nsel></span>${sel('bside', [['', 'Côté…'], ...SIDES.slice(1)], '')}${sel('bstatus', [['', 'Suivi…'], ...STATUSES.slice(1)], '')}${sel('bgroup', [[0, 'Ajouter au groupe…'], ...data.groups.map(g => [g.id, g.name])], 0)}${sel('bungroup', [[0, 'Retirer du groupe…'], ...data.groups.map(g => [g.id, g.name])], 0)}<button type="button" class="button small danger" data-dna-bdel>Supprimer</button></div>
-            <div data-dna-sortbar></div><div class="data-table-wrap"><table class="data-table h-dna-table"><thead><tr><th><input type="checkbox" data-dna-all title="Tout cocher"></th>${p.columns.map(k => `<th>${esc(i18n(label(COLUMNS, k), {ctx: 'adn'}))}</th>`).join('')}<th></th></tr></thead>
-            <tbody>${shown.map(m => `<tr data-id="${m.id}" data-dna-row="${m.id}"><td><input type="checkbox" data-dna-chk="${m.id}"></td>${p.columns.map(k => `<td class="c-${k}">${cell(k, m)}</td>`).join('')}<td class="h-dna-row-act"><button type="button" class="icon-button small enq-more" data-dna-rmenu="${m.id}" aria-label="${esc(i18n('Plus d’actions'))}" title="${esc(i18n('Plus d’actions'))}">⋯</button></td></tr>`).join('') || `<tr><td colspan="${p.columns.length + 2}">${A().empty('Aucune correspondance pour ces filtres.')}</td></tr>`}</tbody></table></div>
+            <div data-dna-sortbar></div><div class="data-table-wrap"><table class="data-table h-dna-table"><thead><tr><th class="h-dna-ck"></th>${p.columns.map(k => `<th>${esc(i18n(label(COLUMNS, k), {ctx: 'adn'}))}</th>`).join('')}<th></th></tr></thead>
+            <tbody>${shown.map(m => `<tr data-id="${m.id}" data-dna-row="${m.id}"><td class="h-dna-ck"></td>${p.columns.map(k => `<td class="c-${k}">${cell(k, m)}</td>`).join('')}<td class="h-dna-row-act"><button type="button" class="icon-button small enq-more" data-dna-rmenu="${m.id}" aria-label="${esc(i18n('Plus d’actions'))}" title="${esc(i18n('Plus d’actions'))}">⋯</button></td></tr>`).join('') || `<tr><td colspan="${p.columns.length + 2}">${A().empty('Aucune correspondance pour ces filtres.')}</td></tr>`}</tbody></table></div>
             <div data-dna-morebox data-rest="${list.length - shown.length}" data-step="${size}"></div>`;
     }, bind(root) {
         const f = filt();
         root.querySelectorAll('[data-dna-f]:not([data-dna-f="q"])').forEach(el => el.addEventListener('change', () => { const k = el.dataset.dnaF;
-            if (['bside', 'bstatus', 'bgroup', 'bungroup'].includes(k)) return bulk(root, k, el.value);
             f[k] = el.type === 'number' ? el.value : ['kit', 'group'].includes(k) ? Number(el.value) : el.value; f.shown = 0; go('matches'); }));
         root.querySelector('[data-dna-f="q"]').addEventListener('input', e => { clearTimeout(root._t); root._t = setTimeout(() => { f.q = e.target.value; f.shown = 0; go('matches'); setTimeout(() => { const i = A().$('#workspace [data-dna-f="q"]'); if (i) { i.focus(); i.setSelectionRange(i.value.length, i.value.length); } }, 50); }, 350); });
         // C6 : « N correspondances · Trier : [menu] » et « Voir les N suivantes ↓ »
@@ -302,13 +300,21 @@
         root.addEventListener('click', e => { const b = e.target.closest('[data-dna-rmenu]'); if (!b) return; e.stopPropagation(); const m = data.matches.find(x => x.id === Number(b.dataset.dnaRmenu)); if (m) UIx().menuAt?.(b, matchMenu(m), {title: `« ${m.name.slice(0, 50)} »`}); });
         root.addEventListener('contextmenu', e => { const r = e.target.closest('[data-dna-row]'); if (!r || e.shiftKey || e.target.closest('a, input, select') || !UIx().contextMenu) return; const m = data.matches.find(x => x.id === Number(r.dataset.dnaRow)); if (!m) return; e.preventDefault(); UIx().contextMenu(e, matchMenu(m), {title: `« ${m.name.slice(0, 50)} »`}); });
         root.querySelector('[data-dna-cols]').addEventListener('click', () => go('settings'));
-        const upd = () => { const n = root.querySelectorAll('[data-dna-chk]:checked').length; root.querySelector('.h-dna-bulk').hidden = !n; root.querySelector('[data-dna-nsel]').textContent = `${plural(n, 'cochée', 'cochées')} :`; };
-        root.addEventListener('change', e => { if (e.target.matches('[data-dna-all]')) root.querySelectorAll('[data-dna-chk]').forEach(c => { c.checked = e.target.checked; }); if (e.target.matches('[data-dna-chk], [data-dna-all]')) upd(); });
-        root.querySelector('[data-dna-bdel]').addEventListener('click', () => bulk(root, 'delete', 1));
+        // ☑ la barre de sélection commune (app-selection.js) : Tout cocher, Maj+clic, Côté, Suivi, groupes, ⤓ Exporter, 🗑 Supprimer, ✕ Décocher
+        const SB = ext.selectionBar, tb = root.querySelector('.h-dna-table tbody');
+        if (SB && tb) SB({host: tb, rowSelector: 'tr[data-dna-row]', idOf: r => r.dataset.dnaRow, key: 'adn:matches', what: [i18n('correspondance cochée'), i18n('correspondances cochées')], place: root.querySelector('.h-dna-table')?.closest('.data-table-wrap'),
+            actions: [
+                SB.choiceAction({id: 'side', icon: '↔', label: i18n('Côté'), options: SIDES.slice(1).map(([v, l]) => [v, i18n(l)]), run: (ids, v) => bulk(ids, 'bside', v)}),
+                SB.choiceAction({id: 'status', icon: '📌', label: i18n('Suivi'), options: STATUSES.slice(1).map(([v, l]) => [v, i18n(l)]), run: (ids, v) => bulk(ids, 'bstatus', v)}),
+                ...(data.groups.length ? [SB.choiceAction({id: 'group', icon: '＋', label: i18n('Ajouter au groupe'), options: () => data.groups.map(g => [g.id, g.name]), run: (ids, v) => bulk(ids, 'bgroup', v)}),
+                    SB.choiceAction({id: 'ungroup', icon: '−', label: i18n('Retirer du groupe'), options: () => data.groups.map(g => [g.id, g.name]), run: (ids, v) => bulk(ids, 'bungroup', v)})] : []),
+                {id: 'export', icon: '⤓', label: i18n('Exporter'), run: ids => exportCsv(data.matches.filter(m => ids.includes(String(m.id))))},
+                {id: 'delete', icon: '🗑', label: i18n('Supprimer'), edit: true, danger: true, run: (ids, sel) => { sel.clear(); return bulk(ids, 'delete', 1); }},
+            ]});
         bindMatchLinks(root);
     }};
-    async function bulk(root, k, v) {
-        const ids = [...root.querySelectorAll('[data-dna-chk]:checked')].map(c => Number(c.dataset.dnaChk)); if (!ids.length || !v || v === '0') return;
+    async function bulk(list, k, v) {
+        const ids = list.map(Number).filter(Boolean); if (!ids.length || !v || v === '0') return;
         const body = {ids}; if (k === 'bside') body.side = v; if (k === 'bstatus') body.status = v; if (k === 'bgroup') body.add_group = Number(v); if (k === 'bungroup') body.remove_group = Number(v);
         if (k === 'delete') { body.delete = 1; try { const r = await post('bulk_dna_matches', body); await refresh(); undoRestore(ids.length > 1 ? i18n('{n} correspondances supprimées', {n: ids.length}) : i18n('Correspondance supprimée'), r.result?.undo, () => post('bulk_dna_matches', body)); } catch (e) { toast(e.message, 'error'); } return; }
         try { await post('bulk_dna_matches', body); toast('Fait.'); await refresh(); } catch (e) { toast(e.message, 'error'); }
