@@ -30,7 +30,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/app.css?v=294">
     <link rel="stylesheet" href="assets/css/picker.css?v=7">
     <link rel="stylesheet" href="assets/css/lieux-doublons.css?v=2">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=285">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=286">
     <link rel="stylesheet" href="assets/css/recueil-etat.css?v=12">
     <link rel="stylesheet" href="assets/css/transcription-actes.css?v=14">
     <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=2">
@@ -1453,9 +1453,9 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-livrets.js?v=17" defer></script>
 <script src="assets/js/heritage-pets.js?v=37" defer></script>
 <script src="assets/js/heritage-board-shapes.js?v=2" defer></script>
-<script src="assets/js/heritage-board-kit.js?v=31" defer></script>
+<script src="assets/js/heritage-board-kit.js?v=32" defer></script>
 <script src="assets/js/heritage-board-shapelib.js?v=2" defer></script>
-<script src="assets/js/heritage-boards.js?v=58" defer></script>
+<script src="assets/js/heritage-boards.js?v=59" defer></script>
 <script src="assets/js/heritage-dnd.js?v=18" defer></script>
 <script src="assets/js/heritage-retouch-rotation.js?v=2" defer></script>
 <script src="assets/js/heritage-studio.js?v=123" defer></script>

@@ -83,7 +83,7 @@ function board_clean_read(string $json): array
 /** Garde ce qui est sûr dans un élément du tableau (les textes restent des textes, les adresses web sont vérifiées) */
 function board_clean_item(array $it): ?array
 {
-    $types = ['shape', 'text', 'note', 'draw', 'line', 'media', 'webimage', 'link', 'tag', 'folder', 'recueil', 'widget', 'screen', 'person', 'weblink', 'table', 'timeline', 'map', 'frame', 'card', 'data'];
+    $types = ['shape', 'text', 'note', 'draw', 'line', 'media', 'webimage', 'link', 'tag', 'folder', 'recueil', 'widget', 'screen', 'person', 'weblink', 'table', 'timeline', 'map', 'frame', 'card', 'data', 'gaps', 'agecalc', 'checklist'];
     if (!in_array($it['type'] ?? '', $types, true)) { return null; }
     $num = static fn($v, $min = -1e6, $max = 1e6) => is_numeric($v) ? max($min, min($max, (float) $v)) : 0.0;
     $str = static fn($v, $n = 300) => mb_substr((string) ($v ?? ''), 0, $n);
@@ -111,6 +111,13 @@ function board_clean_item(array $it): ?array
     if (isset($out['font'])) { $out['font'] = trim((string) preg_replace("/[^\\w\\s,'\\-.\\x{C0}-\\x{FF}]/u", '', $out['font'])); }
     foreach (['headStart', 'headEnd'] as $k) { if (isset($out[$k]) && !in_array($out[$k], ['none', 'triangle', 'stealth', 'open', 'double', 'half', 'circle', 'ring', 'dot', 'square', 'square_o', 'diamond', 'diamond_o', 'bar', 'fork', 'tail', 'triangle_o', 'line_arrow', 'chevron2', 'cross', 'plus', 'star', 'heart', 'one', 'many', 'semicircle'], true) && !preg_match('/^myh_[\w-]{1,30}$/', $out[$k])) { $out[$k] = 'triangle'; } }
     if (isset($it['layout'])) { $out['layout'] = $str($it['layout'], 40); }
+    // 🏷 tampon de solidité (tout élément), 🧮 calculette d'âge, ☐ liste à cocher
+    if (in_array($it['stamp'] ?? '', ['proved', 'probable', 'supposed', 'refuted'], true)) { $out['stamp'] = (string) $it['stamp']; }
+    if (($it['type'] ?? '') === 'agecalc') {
+        $out['calcMode'] = ($it['calcMode'] ?? '') === 'birth' ? 'birth' : 'age';
+        foreach (['calcAge' => [0, 150], 'calcYear' => [0, 3000], 'calcBorn' => [0, 3000]] as $k => [$a, $z]) { if (isset($it[$k]) && is_numeric($it[$k])) { $out[$k] = (int) $num($it[$k], $a, $z); } }
+    }
+    if (($it['type'] ?? '') === 'checklist') { $out['checks'] = array_values(array_map(static fn($c) => ['t' => mb_substr(is_scalar($c['t'] ?? null) ? (string) $c['t'] : '', 0, 300), 'done' => !empty($c['done'])], array_slice(array_filter(is_array($it['checks'] ?? null) ? $it['checks'] : [], 'is_array'), 0, 100))); }
     // 📊 🧺 📎 ce qui est posé avec sa source : carte d'info (icône, ligne, source, d'où elle vient), données vivantes (le réglage du widget), sources d'un texte
     foreach (['icon' => 8, 'sub' => 600, 'source' => 300, 'cxkind' => 20] as $k => $n) { if (isset($it[$k]) && is_scalar($it[$k])) { $out[$k] = $str($it[$k], $n); } }
     if (isset($it['ref_id'])) { $out['ref_id'] = max(0, (int) $it['ref_id']); }
@@ -455,10 +462,10 @@ function board_people(PDO $pdo, array $ids, bool $withEvents = false): array
     if (!$ids) { return []; }
     $in = implode(',', $ids);
     $out = [];
-    foreach ($pdo->query("SELECT p.id, p.first_name, p.middle_name, p.last_name, p.gender, COALESCE(p.occupation,'') AS occupation, p.living_status, m.filename AS portrait, m.thumbnail AS portrait_thumb
+    foreach ($pdo->query("SELECT p.id, p.first_name, p.middle_name, p.last_name, p.gender, COALESCE(p.occupation,'') AS occupation, p.living_status, COALESCE(p.is_private, 0) AS is_private, m.filename AS portrait, m.thumbnail AS portrait_thumb
         FROM persons p LEFT JOIN media m ON m.id=p.portrait_media_id WHERE p.id IN ($in)") as $r) {
         $out[(int) $r['id']] = ['id' => (int) $r['id'], 'name' => trim(preg_replace('/\s+/', ' ', $r['first_name'] . ' ' . $r['middle_name'] . ' ' . $r['last_name'])), 'first_name' => (string) $r['first_name'], 'last_name' => (string) $r['last_name'],
-            'gender' => (string) $r['gender'], 'occupation' => (string) $r['occupation'], 'living' => (string) $r['living_status'], 'portrait' => (string) ($r['portrait'] ?: ''),
+            'gender' => (string) $r['gender'], 'occupation' => (string) $r['occupation'], 'living' => (string) $r['living_status'], 'private' => !empty($r['is_private']), 'portrait' => (string) ($r['portrait'] ?: ''),
             'birth' => null, 'death' => null, 'parents' => [], 'partners' => [], 'children' => [], 'events' => []];
     }
     if (!$out) { return []; }

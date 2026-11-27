@@ -5972,3 +5972,33 @@ button.lb-acts-chip.is-unlinked{border-style:dashed}
 .h-badge.is-ok { background: #e3f4e8; color: #1e6b3a; }
 :root[data-theme="dark"] .h-badge.is-ok { background: #1f3a29; color: #9fe0b4; }
 .h-crisis-acts { display: inline-flex; gap: 2px; margin-left: 6px; vertical-align: middle; }
+
+/* 🧩 Tableaux : 🏷 tampons de solidité, 🔎 ce qui manque, 🧮 calculette d'âge, ☐ liste à cocher, 🧵 choix du fil rouge */
+.h-bi-stamp{position:absolute;top:-10px;right:-8px;z-index:3;padding:2px 8px;border:2px solid var(--st);border-radius:4px;color:var(--st);background:rgba(255,255,255,.85);font:800 12px/1.3 system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;transform:rotate(-12deg);pointer-events:none;box-shadow:0 0 0 1px rgba(255,255,255,.6)}
+.h-bi-gaps,.h-bi-agecalc,.h-bi-check{width:100%;height:100%;box-sizing:border-box;display:flex;flex-direction:column;background:#fff;border:1px solid #c9ced6;border-radius:10px;overflow:hidden;color:#1d2433}
+.h-bi-gaps header,.h-bi-agecalc header,.h-bi-check header{display:flex;align-items:center;gap:6px;padding:7px 10px;background:#f3f5f8;font-weight:700;font-size:14px;border-bottom:1px solid #e1e5eb}
+.h-bi-gapsbody{flex:1;overflow:auto;padding:4px}
+.h-bi-gapline{display:block;width:100%;text-align:left;border:0;background:none;padding:5px 6px;border-radius:6px;cursor:pointer;color:inherit;font:inherit}
+.h-bi-gapline:hover{background:#eef4ff}
+.h-bi-gapline strong{display:block;font-size:13px}
+.h-bi-gapline small{color:#b5523b;font-size:12px}
+.h-bi-gapok{margin:8px;color:#1a7f37}
+.h-bi-agecalc header button,.h-bi-check header .h-bi-ckcount{margin-left:auto}
+.h-bi-agecalc header button{border:1px solid #c9ced6;background:#fff;border-radius:6px;cursor:pointer}
+.h-bi-agerow{display:flex;gap:8px;padding:8px 10px;font-size:13px}
+.h-bi-agerow label{display:flex;flex-direction:column;gap:2px;flex:1}
+.h-bi-agerow input{width:100%;box-sizing:border-box;font-size:15px;padding:3px 5px}
+.h-bi-agecalc output{display:block;padding:0 10px 8px}
+.h-bi-agecalc output b{display:block;font-size:17px}
+.h-bi-agecalc output small{color:#5b6475}
+.h-bi-ckcount{font-weight:600;font-size:12px;color:#5b6475}
+.h-bi-check ul{list-style:none;margin:0;padding:4px 8px;flex:1;overflow:auto}
+.h-bi-check li{display:flex;align-items:center;gap:6px;min-height:28px}
+.h-bi-check li input[type=text]{flex:1;min-width:0;border:0;border-bottom:1px dashed transparent;background:none;font:inherit;font-size:13px;color:inherit}
+.h-bi-check li input[type=text]:focus{border-bottom-color:#9fb7d9;outline:none}
+.h-bi-check li.is-done input[type=text]{text-decoration:line-through;color:#8a92a0}
+.h-bi-check li button{border:0;background:none;cursor:pointer;color:#8a92a0;font-size:15px}
+.h-bi-ckadd{margin:0 8px 8px;align-self:flex-start;border:0;background:none;color:#0066cc;cursor:pointer;font-size:13px}
+.h-board.is-picking .h-board-stage{cursor:crosshair}
+:root[data-theme="dark"] .h-bi-gaps,:root[data-theme="dark"] .h-bi-agecalc,:root[data-theme="dark"] .h-bi-check{background:#1e2430;color:#e6e9ef;border-color:#3a4252}
+:root[data-theme="dark"] .h-bi-gaps header,:root[data-theme="dark"] .h-bi-agecalc header,:root[data-theme="dark"] .h-bi-check header{background:#262d3b;border-color:#3a4252}

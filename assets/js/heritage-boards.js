@@ -557,7 +557,7 @@
         const els = new Map(), sigs = new Map();
         let hiddenIds = new Set(), lockedIds = new Set(); // calques cachés ou verrouillés, cadres repliés
         // ce qui change le dessin d'un élément (pas sa place) ; un trait qui contourne change aussi quand un obstacle bouge
-        const contentSig = it => { const {x, y, z, w, h, locked, ...rest} = it; if (it.type === 'line') return JSON.stringify(it) + (it.path === 'avoid' && !it.bends?.length ? JSON.stringify(routePts(it)) : ''); if (it.type === 'gaps') return JSON.stringify(rest) + items.filter(i => i.type === 'person').map(i => i.person_id).join(','); // 🔎 relu quand on pose ou retire une fiche return ['timeline', 'map', 'frame'].includes(it.type) ? JSON.stringify({...rest, w, h}) : JSON.stringify(rest); };
+        const contentSig = it => { const {x, y, z, w, h, locked, ...rest} = it; if (it.type === 'line') return JSON.stringify(it) + (it.path === 'avoid' && !it.bends?.length ? JSON.stringify(routePts(it)) : ''); if (it.type === 'gaps') return JSON.stringify(rest) + items.filter(i => i.type === 'person').map(i => i.person_id).join(','); return ['timeline', 'map', 'frame'].includes(it.type) ? JSON.stringify({...rest, w, h}) : JSON.stringify(rest); };
         function itemInner(it) {
             it = safeItem(it); // couleurs et masque filtrés (voir safeItem)
             const LIST_CSS = {bullet: 'disc', num: 'decimal', roman: 'upper-roman', alpha: 'lower-alpha', ALPHA: 'upper-alpha', dash: '"– "', check: '"☐ "'};
@@ -937,11 +937,13 @@
             if (e.target.closest('[data-bd-brushmenu]')) { brushMenu(e.target.closest('[data-bd-brushmenu]')); return; }
             const pw = e.target.closest('[data-bd-penwidth]'); if (pw) { penWidth = Number(pw.dataset.bdPenwidth); setTool('pen'); return; }
             const em = e.target.closest('[data-bd-erasemode]'); if (em) { eraserMode = em.dataset.bdErasemode; setTool('eraser'); return; }
-            const pc = e.target.closest('[data-bd-pencolor]'); if (pc) { penColor = pc.dataset.bdPencolor; setTool('pen'); return; }
-            const tc = e.target.closest('[data-bd-toolcolor]'); if (tc) { toolColor[tc.dataset.bdToolcolor] = tc.dataset.v; setTool(tool); return; }
+            // une pastille : seule la pastille choisie change, la barre n'est pas refaite (sinon le carré « autre couleur » se redessine et tout bouge)
+            const markSw = (sel, on, custom, v) => { root.querySelectorAll(`[data-bd-opts] ${sel}`).forEach(x => x.classList.toggle('is-on', on(x))); const ci = custom && root.querySelector(`[data-bd-opts] ${custom}`); if (ci && /^#[0-9a-f]{6}$/i.test(v || '')) ci.value = v; };
+            const pc = e.target.closest('[data-bd-pencolor]'); if (pc) { penColor = pc.dataset.bdPencolor; markSw('[data-bd-pencolor]', x => x.dataset.bdPencolor === penColor, '[data-bd-pencustom]', penColor); return; }
+            const tc = e.target.closest('[data-bd-toolcolor]'); if (tc) { const k = tc.dataset.bdToolcolor; toolColor[k] = tc.dataset.v; markSw(`[data-bd-toolcolor="${CSS.escape(k)}"]`, x => x.dataset.v === toolColor[k], `[data-bd-toolcustom="${CSS.escape(k)}"]`, toolColor[k]); return; }
             const sk = e.target.closest('[data-bd-shapekind]'); if (sk) { shapeKind = sk.dataset.bdShapekind; setTool('shape'); return; }
             if (e.target.closest('[data-bd-shapeall]')) { shapeLibrary(e.target.closest('[data-bd-shapeall]'), k => { shapeKind = k; setTool('shape'); }); return; }
-            const nc = e.target.closest('[data-bd-notecolor]'); if (nc) { noteColor = nc.dataset.bdNotecolor; setTool('note'); return; }
+            const nc = e.target.closest('[data-bd-notecolor]'); if (nc) { noteColor = nc.dataset.bdNotecolor; markSw('[data-bd-notecolor]', x => x.dataset.bdNotecolor === noteColor, '[data-bd-notecustom]', noteColor); return; }
             const z = e.target.closest('[data-bd-zoom]'); if (z) return zoomAt(view.k * (z.dataset.bdZoom === '1' ? 1.25 : 0.8));
             if (e.target.closest('[data-bd-fit]')) { fitAll(); queueSave(false); return; }
             if (e.target.closest('[data-bd-groups]')) { showGroups = !showGroups; try { localStorage.setItem('genealogie-board-groups', showGroups ? '1' : '0'); } catch (_) {} drawGroups(); toast(i18n(showGroups ? 'Les groupes sont montrés.' : 'Groupes cachés.')); return; }
