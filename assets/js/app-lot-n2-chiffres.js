@@ -37,8 +37,8 @@
     /* ── 🩺 📜 un dictionnaire de mots anciens : trouver ses mots dans un texte (le plus long d'abord, mots entiers) ── */
     function dictIndex(rows) {
         const forms = [];
-        for (const r of rows) for (const f of [r.w, ...(r.alt || [])]) { const k = fold(f); if (k.length >= 3) forms.push({k, r}); }
-        forms.sort((a, b) => b.k.length - a.k.length);
+        for (const r of rows) for (const f of [r.w, ...(r.alt || [])]) { const k = fold(f); if (k.length >= 3) forms.push({k, r, own: f === r.w ? 1 : 0}); }
+        forms.sort((a, b) => b.k.length - a.k.length || b.own - a.own);   // le plus long d'abord ; à égalité, le mot qui a sa propre ligne
         return forms;
     }
     function findTerms(text, idx, max = 6) {

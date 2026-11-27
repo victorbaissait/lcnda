@@ -97,3 +97,88 @@ Pour chaque point : ce qui change d’un écran à l’autre, où, ce que je te 
 - Onglets (C5) : tous les groupes trouvés utilisent la même classe pour le choix actif.
 - Bas des fenêtres : aucune fenêtre trouvée avec le bouton bleu avant « Annuler ».
 - Mode sombre et 390 px : déjà vérifiés par les gardes existantes (`test-harmo-pages.js`, `test-rien-de-colle.js`, `test-mise-en-page-ecrasee.js`).
+
+---
+
+# Comportements : que le même geste marche de la même façon partout
+
+Cette partie-ci parle des **gestes** (et pas du dessin) : supprimer puis « ↶ Annuler », chercher dans une liste, cocher plusieurs lignes, exporter, trier, replier une section, ouvrir une fiche… Même méthode : une recherche dans tout le code, puis l’app ouverte pour de vrai dans un navigateur avec la petite généalogie inventée (MAZAUD, LACOMBE, DURAND).
+
+Bonne nouvelle d’abord : l’essentiel est déjà commun. « ↶ Annuler » (H7) sert dans plus de 220 fichiers, la barre des listes (H10) dans 72, plus aucun `confirm()` ni `alert()` du navigateur (seulement en secours), l’impression passe par la fenêtre commune (L1) partout où elle existe, les dates « mises à jour » passent par le même petit texte (« il y a 3 jours »).
+
+## 1. Déjà corrigé (en reprenant la pièce commune, rien d’inventé)
+
+| Ce qui changeait | Où | Ce qui est fait |
+|---|---|---|
+| **Chercher sans les accents** : dans la plupart des listes, « eglise » trouve « Église » et « LACOMBE » = « lacombe ». Dans 13 cases de recherche, il fallait taper l’accent exact. | Revues et journaux, Atelier de recherche (bibliothèque), listes des Registres, Actes manquants, recherche dans les pages d’un recueil, Suivi des animaux (observations, animaux), fiche d’un animal suivi (observations), Lieux à placer, Liens utiles, Métiers et rivières, Lieux-dits et patrimoine, les noms de famille proposés (Carte), les étiquettes proposées (fiche, Listes). | Toutes cherchent comme les autres : sans accents ni majuscules (la même règle que `UI.listMatch`). |
+| **⌘F (chercher dans l’écran)** ne trouvait « Église » que si on tapait l’accent. | Partout (⌘F / Ctrl+F). | « eglise » trouve « Église », le surlignage tombe toujours juste sur le mot. |
+| **« Es-tu sûr ? » avant ce qui se défait** (H7). | Réglages → Animaux : supprimer un champ, une catégorie, une espèce. | Supprimé tout de suite, message « 🗑 Champ « … » supprimé · ↶ Annuler » (et « ↷ Rétablir »). |
+| Idem. | Fiche → Langues parlées : supprimer une langue. | Supprimée tout de suite ; « ↶ Annuler » la remet avec sa certitude, sa note et « transmise à la descendance ». |
+| Idem. | Jeu (oie, serpents, petits chevaux) : supprimer une partie. | Supprimée tout de suite ; « ↶ Annuler » la remet **avec sa progression**. |
+| **Question ET « ↶ Annuler »** pour la même chose (deux fois la même précaution). | Mes listes de données : supprimer une liste (la question disait déjà « ↶ Annuler reste possible »). | Plus de question : la liste est mise de côté, « ↶ Annuler » la remet. |
+
+**Gardes** : `tests/test-harmonisation-comportements.js` (nouveau : vérifie le code des 13 recherches, puis dans le navigateur ⌘F, la langue, le champ des animaux et la partie du Jeu, avec Annuler et Rétablir) ; `tests/test-h7-sans-question.js` élargi (les 6 questions retirées ne peuvent pas revenir) ; `tests/test-listes-perso.js` mis à jour (supprimer une liste sans question, puis ↶ Annuler).
+
+## 2. Ce qui reste à décider ou à faire (par ordre de ce qui se voit le plus)
+
+Petit = une heure ou deux · moyen = une demi-journée à une journée · gros = plusieurs jours, par lots.
+
+### 1. Encore des « Es-tu sûr ? » avant des choses qu’on pourrait défaire
+- **Ce qui change** : la règle H7 dit « on supprime et on propose ↶ Annuler ». Une vingtaine de suppressions posent encore la question, parce que l’app ne sait pas (encore) remettre la chose une fois partie.
+- **Où** : une recherche enregistrée (Recherche → Poser une question), une demande d’entraide, un message du livre d’or et un objet retiré d’une salle (Musée), une salle du musée, une fiche d’employeur, un article de revue, une liste et une fiche des Registres, des lignes d’un tableau de recueil, une personne d’un dépouillement, une ligne d’un bloc de la fiche, une copie chez un cousin, une liste de l’Atelier (Mes listes, Réglages → Éditeur de listes), les cartes d’électeur d’une fiche, le parcours de résistant, un projet de montage (la question **et** « ↶ Annuler » quand l’outil sait le remettre).
+- **Je te conseille** : pour chacun, garder une copie au moment de supprimer (le journal des modifications le fait déjà pour les notes, sources, événements, rappels…) et brancher « ↶ Annuler » dessus, puis retirer la question. Garder la question seulement pour ce qui ne se remet pas (une fiche entière, vider la corbeille, écraser une base, un fichier importé entier).
+- **Travail** : moyen à gros (par lots de 5 ; chaque sorte a besoin de sa petite « remise » côté serveur).
+
+### 2. Cocher plusieurs lignes : une barre commune peu utilisée
+- **Ce qui change** : la barre « 3 fiches cochées · 🏷 Étiqueter · ★ Mes listes · ⤓ Exporter · 🗑 Supprimer · ✕ Décocher » (avec Maj+clic pour une suite) existe, mais seulement dans Personnes, Événements, Sources, l’onglet Documents et les événements d’une fiche. Les listes de données ont leur propre « ☑ Choisir des lignes » (« Tout cocher (N) », « × Désélectionner »). Une vingtaine d’autres listes ont leurs cases faites à la main (Recueils, Revues, Paniers, ADN, Atelier, Imports…), chacune avec ses mots (« Tout sélectionner », « Tout cocher », rien du tout) et sans Maj+clic.
+- **Je te conseille** : une seule façon : le bouton « ☑ Choisir des lignes » dans la barre H10, puis la barre commune en bas (Tout cocher (N), Maj+clic, les actions de la liste, ✕ Décocher). Commencer par les listes où l’on agit souvent sur plusieurs lignes : Médias, Recueils, Revues, Paniers.
+- **Travail** : gros (par lots).
+
+### 3. Une section repliée ne reste pas toujours repliée
+- **Ce qui change** : les sections des panneaux d’outils (`UI.panelSection`, 16 outils) retiennent ouvert / fermé. Les quelque 340 autres sections repliables (« ▸ Plus d’options », « Pour aller plus loin », parties des Réglages…) se rouvrent comme au départ à chaque visite.
+- **Je te conseille** : que toute section repliable retienne son état sur l’ordinateur (une petite marque sur la section, la même pièce que les panneaux). Exception : ce qui doit s’ouvrir seulement pour un message (une erreur).
+- **Travail** : moyen (mécanique, mais beaucoup d’endroits).
+
+### 4. Exporter : la fenêtre commune pour tout ce qui sort en fichier
+- **Ce qui change** : 31 outils passent par la fenêtre « ⤓ Exporter » commune (formats, nom du fichier, aperçu, « Ranger aussi une copie dans les médias »). Environ 35 autres fabriquent leur fichier CSV eux-mêmes, d’un clic, sans choix du nom ni des colonnes (Revues, Paniers, Registres, Suivi des animaux, Contrôle de la base, Successions, Tableau de bord, Rapports, ADN des cousins…).
+- **Je te conseille** : tout « ⤓ Exporter » ouvre la même fenêtre ; pour une liste : 📄 CSV, 🧮 Ouvrir dans le tableur, 📊 Excel, et « ce qu’on voit / toute la liste » (comme Mes listes).
+- **Travail** : moyen à gros.
+
+### 5. Chercher « un mot puis un autre »
+- **Ce qui change** : sans accents partout maintenant, mais pas avec la même règle pour plusieurs mots. La plupart des listes gardent une ligne qui contient **chaque** mot, dans n’importe quel ordre (« jean tulle » trouve « Jean MAZAUD, né à Tulle »). Une quinzaine cherchent la phrase exacte (« jean tulle » ne trouve rien) : Liens utiles, Lieux à placer, pages d’un recueil, Suivi des animaux, Actes manquants, Métiers et rivières, Lieux-dits…
+- **Je te conseille** : la règle « chaque mot » partout (`UI.listMatch.text`), c’est la plus utile.
+- **Travail** : petit.
+
+### 6. Ouvrir une fiche : deux façons dans le code
+- **Ce qui change** : un nom cliquable ouvre la fiche par deux chemins différents (`data-open-person`, 107 endroits, et `data-h-person`, 56). Le premier ne marche que si l’écran a pensé à « brancher » ses liens : un nom ajouté plus tard (après « Voir les suivants », un tri, un filtre) peut rester sans effet. Les deux ne font pas exactement la même chose (l’un ouvre la fiche, l’autre peut ouvrir un aperçu selon l’écran).
+- **Je te conseille** : un seul geste partout : clic = la fiche, ⌘ ou Ctrl + clic = dans un nouvel onglet de l’app, clic droit = le menu de la personne ; écouté une fois pour toute l’app.
+- **Travail** : moyen.
+
+### 7. Le nom d’une personne écrit à la main
+- **Ce qui change** : le nom est presque partout écrit par la pièce commune (Prénom NOM, nom en capitales, « sans nom » si vide). 25 endroits (14 fichiers) le recollent eux-mêmes « prénom nom » : capitales oubliées, double espace quand le prénom manque.
+- **Je te conseille** : la pièce commune partout.
+- **Travail** : petit.
+
+### 8. Les listes qui ne retiennent pas leur tri
+- **Ce qui change** : les listes avec la barre H10 retiennent recherche, filtres, tri et affichage. Trois écrans ont encore leur propre menu « Trier » qui revient au départ : le Jeu (parties), la colonne de gauche (réglages), l’onglet Diagrammes.
+- **Je te conseille** : la barre commune (ou, au moins, retenir le choix).
+- **Travail** : petit.
+
+### 9. Un projet de montage : question ou « ↶ Annuler » selon l’outil
+- **Ce qui change** : supprimer un projet (Montage, Retouche, Mise en page, Son…) pose toujours la question, puis propose aussi « ↶ Annuler » quand l’outil sait remettre le projet. Selon l’outil, on a donc deux précautions, ou une seule.
+- **Je te conseille** : que chaque outil sache remettre son projet, puis plus de question (H7).
+- **Travail** : moyen.
+
+### 10. Petites cases de recherche dans les fenêtres (sans accents)
+- **Ce qui change** : quelques petites cases pour filtrer une courte liste dans une fenêtre cherchent encore avec l’accent exact : étiquettes à poser (Réglages des blocs), personnes des horloges, mots-clés de l’Atelier, calques du dessin, personnes de l’assistant de diagramme.
+- **Je te conseille** : la même règle sans accents (comme corrigé plus haut). Laissé de côté ici parce que certaines de ces cases servent aussi à savoir si un nom existe déjà (pour proposer « ＋ Créer ») : il faut vérifier chacune.
+- **Travail** : petit.
+
+## 3. Ce qui est déjà pareil partout (vérifié)
+
+- **Annuler** : un seul message en bas à gauche, 6 s, « ↶ Annuler » puis « ↷ Rétablir », un deuxième Annuler dit « Déjà remis ».
+- **Confirmer** : une seule fenêtre (`confirmBox`), bouton rouge pour ce qui supprime, le bouton « Annuler » choisi d’office (Entrée ne supprime pas par erreur).
+- **Échap** ferme les fenêtres, les menus et la barre ⌘F ; **Entrée** valide les fenêtres ; **/** va dans la case de recherche de la liste.
+- **Listes** : recherche, filtres, tri et affichage retenus pour chaque liste (72 écrans) ; « Voir les N suivants ↓ » la même pièce partout.
+- **🧺 Panier et 📎 Insérer une info** : déjà audités et branchés, voir `docs/audit-panier-inserer.md`.
+- **Liens qui sortent** : ils s’ouvrent hors de l’app sans lui donner la main (`noopener`) ; ce qui reste est le ↗ écrit ou non (voir la partie Apparence, point 3).

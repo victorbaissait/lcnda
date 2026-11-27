@@ -58,6 +58,21 @@ def fold(s):
     return re.sub(r'[^a-z]+', ' ', s).strip()
 
 
+ACCENTS = {'Ardeche': 'Ardèche', 'Ariege': 'Ariège', 'Bouches-du-Rhone': 'Bouches-du-Rhône', 'Charente-Inferieure': 'Charente-Inférieure', 'Correze': 'Corrèze',
+           "Cote-d'Or": "Côte-d'Or", 'Cotes-du-Nord': 'Côtes-du-Nord', 'Drome': 'Drôme', 'Finistere': 'Finistère', 'Herault': 'Hérault', 'Isere': 'Isère',
+           'Loire-Inferieure': 'Loire-Inférieure', 'Lozere': 'Lozère', 'Nievre': 'Nièvre', 'Puy-de-Dome': 'Puy-de-Dôme', 'Basses-Pyrenees': 'Basses-Pyrénées',
+           'Hautes-Pyrenees': 'Hautes-Pyrénées', 'Pyrenees-Orientales': 'Pyrénées-Orientales', 'Rhone': 'Rhône', 'Haute-Saone': 'Haute-Saône',
+           'Saone-et-Loire': 'Saône-et-Loire', 'Seine-Inferieure': 'Seine-Inférieure', 'Deux-Sevres': 'Deux-Sèvres', 'Vendee': 'Vendée'}
+# noms mal écrits ou coupés dans les tableaux → le nom juste (affiché)
+FIX = {'vancluse': 'Vaucluse', 'audb': 'Aube', 'hatue savoie': 'Haute-Savoie', 'meurth et mosell': 'Meurthe-et-Moselle', 'basses pyreness': 'Basses-Pyrénées',
+       'loire et cher': 'Loir-et-Cher', 'indre et loir': 'Indre-et-Loire', 'cote du nord': 'Côtes-du-Nord', 'maritimes alpes': 'Alpes-Maritimes', 'haute rhin': 'Haut-Rhin',
+       'cote d or': "Côte-d'Or", 'eure et loir': 'Eure-et-Loir', 'haute loire': 'Haute-Loire', 'charente inferieu': 'Charente-Inférieure', 'pyrenees oriental': 'Pyrénées-Orientales', 'seine inferieur': 'Seine-Inférieure'}
+
+
+def pretty(name):
+    return FIX.get(fold(name)) or ACCENTS.get(name, name)
+
+
 def dep_name(raw):
     """« ALPES(BASSES-) » → « Basses-Alpes »"""
     name = str(raw).strip()
@@ -128,7 +143,7 @@ def build(theme, out_dir):
             if lvl in ('0', '9') and fold(nm) == 'france':
                 key = ('FR',)
             elif lvl == '1':
-                key = ('D', dep_name(nm))
+                key = ('D', fold(pretty(dep_name(nm))))   # « Cote-D-Or » et « Côte-d'Or », « CHARENTE-INFERIEU » : un seul département
             elif keep_towns and lvl in ('3', '4'):
                 key = ('V', dep_name(nm), str(row[2].value).strip(), lvl)
             else:
@@ -137,11 +152,11 @@ def build(theme, out_dir):
                 if key[0] == 'FR':
                     u = ['France', 'FR', ['FR'], '']
                 elif key[0] == 'D':
-                    codes = dep_codes(key[1])
+                    codes = dep_codes(dep_name(nm))
                     if codes is None:
                         print(f'{tid} : département inconnu {nm}', file=sys.stderr)
                         continue
-                    u = [key[1], 'D', codes, str(row[2].value).strip()]
+                    u = [pretty(dep_name(nm)), 'D', codes, str(row[2].value).strip()]
                 else:
                     u = [key[1], 'A' if key[3] == '3' else 'V', [], key[2]]
                 uidx[key] = len(units)

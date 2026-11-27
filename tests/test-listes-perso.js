@@ -247,11 +247,12 @@ echo 'ok';`);
             await p.evaluate(() => document.documentElement.removeAttribute('data-theme'));
             await p.setViewportSize({width: 1280, height: 900});
         });
-        await t('🗑 Supprimer puis ↶ Annuler', async () => {
+        await t('🗑 Supprimer (sans question) puis ↶ Annuler', async () => {
             await p.evaluate(i => window.LCNDA_EXT.listesPerso.open(i), id); await waitRows(5);
             await p.click('[data-lpx-act="delete"]');
-            await p.locator('dialog[open] button', {hasText: /Supprimer/}).last().click();
+            // H7 : pas de « Es-tu sûr ? » (la liste est mise de côté, « ↶ Annuler » la remet)
             await p.waitForFunction(i => !window.LCNDA_EXT.dataLists.some(y => y.id === 'perso_' + i), id, {timeout: 8000});
+            assert.strictEqual(await p.evaluate(() => !!document.querySelector('dialog[open].confirm-box-dialog')), false, 'pas de question avant de supprimer');
             assert.ok(sql(`SELECT deleted_at FROM ulist_lists WHERE id=${id}`)[0].deleted_at);
             await undo();
             await p.waitForFunction(i => window.LCNDA_EXT.dataLists.some(y => y.id === 'perso_' + i), id, {timeout: 8000});

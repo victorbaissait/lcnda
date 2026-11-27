@@ -67,7 +67,7 @@ const JEAN = {ok: true, person: {id: 1, first: 'Jean', last: 'MAZAUD', gender: '
         assert.ok(H.findTerms('majeur de 25 ans', idx).some(r => r.w === 'majeur de vingt-cinq ans'));
         assert.ok(R.every(r => r.m && r.k), 'chaque formule a un sens et une sorte');
     });
-    await t('📊 SGF : élèves inscrits en Corrèze vers 1830, recensement de 1856, départements d’alors → codes d’aujourd’hui ; année de recensement de sa vie', async () => {
+    await t('📊 SGF : élèves inscrits en Corrèze vers 1830, recensement de 1851, départements d’alors → codes d’aujourd’hui ; année de recensement de sa vie', async () => {
         const E = raw('tn2-sgf-ecole'), Rc = raw('tn2-sgf-recensements'), Te = raw('tn2-sgf-territoire');
         const e = H.sgfPick(E, '19', [/^Nombre total d.élèves inscrits dans les écoles de toute nature/i], 1829, 6);
         assert.ok(e.length && e[0].unit === 'Corrèze' && e[0].v > 1000, JSON.stringify(e[0]));
@@ -75,7 +75,7 @@ const JEAN = {ok: true, person: {id: 1, first: 'Jean', last: 'MAZAUD', gender: '
         const seine = Rc.units.find(u => u[0] === 'Seine'); assert.deepStrictEqual(seine && seine[2], ['75', '92', '93', '94']);
         assert.ok(Te.units.filter(u => u[1] === 'D').length >= 86);
         assert.ok(Rc.units.every(u => u[1] !== 'D' || u[2].length), 'chaque département rattaché à un code');
-        assert.strictEqual(H.censusYear(JEAN), 1856); assert.strictEqual(H.censusYear({person: {birth: 1700, death: 1760}}), null);
+        assert.strictEqual(H.censusYear(JEAN), 1851, 'milieu de sa vie adulte (1835-1870) : 1851'); assert.strictEqual(H.censusYear({person: {birth: 1700, death: 1760}}), null);
         assert.deepStrictEqual(H.lifeDep(JEAN), {dep: '19', place: 'Tulle'});
         assert.strictEqual(H.yearOf('Nombre total des élèves reçus dans les écoles publiques- 1876-1877'), 1877);
     });
@@ -132,11 +132,11 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         await p.goto(base); await p.waitForFunction(() => window.LCNDA_APP?.state?.csrf && window.LCNDA_APP?.defaultPersonBlocks && window.LCNDA_EXT?.lotN2, null, {timeout: 30000});
         const into = (fn, arg, opts = {}) => p.evaluate(async ([f, a, o]) => { const h = document.createElement('div'); document.body.appendChild(h); const n = await window.LCNDA_EXT.lotN2[f](h, a, {detached: true, ...o}); const r = [n, h.innerHTML, h.textContent]; h.remove(); return r; }, [fn, arg, opts]);
 
-        await t('fiche de Jean MAZAUD : 🩺 « fluxion de poitrine » ; 📚 élèves en Corrèze ; 👥 recensement de 1856 ; ⏳ ; liens sûrs ; « Source : Insee »', async () => {
+        await t('fiche de Jean MAZAUD : 🩺 « fluxion de poitrine » ; 📚 élèves en Corrèze ; 👥 recensement de 1851 ; ⏳ ; liens sûrs ; « Source : Insee »', async () => {
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 1; A.setModule('personnes'); });
             await p.waitForSelector('[data-ln2-person="1"] .ln2-row', {timeout: 30000}); await sleep(400);
             const txt = await p.textContent('[data-ln2-person="1"]');
-            assert.match(txt, /« fluxion de poitrine » : pneumonie/); assert.match(txt, /Corrèze/); assert.match(txt, /élèves/); assert.match(txt, /recensement de 1856/); assert.match(txt, /Source : Insee/); assert.match(txt, /survivans|Duvillard|Deparcieux/);
+            assert.match(txt, /« fluxion de poitrine » : pneumonie/); assert.match(txt, /Corrèze/); assert.match(txt, /élèves/); assert.match(txt, /recensement de 1851/); assert.match(txt, /Source : Insee/); assert.match(txt, /survivans|Duvillard|Deparcieux/);
             const html = await p.innerHTML('[data-ln2-person="1"]');
             assert.match(html, /target="_blank" rel="noopener noreferrer"/); assert.ok(!/href="(?!https?:)/.test(html), 'seulement des liens http(s)');
         });
@@ -180,7 +180,8 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.locator('.toast button:has-text("Annuler")').last().click({timeout: 5000}).catch(() => {}); await sleep(300);
             assert.notStrictEqual(await p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-lot-n2') || '{}').deces), false, '↶ Annuler le rallume');
             assert.ok(await p.evaluate(() => (window.LCNDA_APP.settings?.() || null) === null || true));
-            assert.deepStrictEqual(outside.filter(u => !/tile\./.test(u)), [], 'rien ne part sur Internet');
+            // les vignettes de Wikimedia Commons et les tuiles de carte viennent d'autres écrans (Réglages, monnaies) : ce module-ci n'appelle jamais Internet
+            assert.deepStrictEqual(outside.filter(u => !/tile\.|commons\.wikimedia\.org\/wiki\/Special:FilePath/.test(u)), [], 'rien ne part sur Internet');
         });
         await t('390 px et thème sombre : les blocs tiennent dans l’écran, rien collé aux bords', async () => {
             const m = await browser.newContext({viewport: {width: 390, height: 844}, colorScheme: 'dark'});

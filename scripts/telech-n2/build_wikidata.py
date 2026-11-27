@@ -94,8 +94,11 @@ def ordres(out):
 def patrons(out):
     rows = {}
     for prop in ('P825', 'P417'):
-        B = wm.sparql(f'''SELECT ?it (SAMPLE(?n) AS ?name) ?s (SAMPLE(?sn) AS ?sname) (SAMPLE(?c) AS ?coord) (SAMPLE(?i) AS ?ins) (SAMPLE(?cn) AS ?com) WHERE {{
+        # un édifice religieux (église, chapelle…), ou la commune elle-même (son saint patron : la fête patronale)
+        B = wm.sparql(f'''SELECT ?it (SAMPLE(?n) AS ?name) ?s (SAMPLE(?sn) AS ?sname) (SAMPLE(?c) AS ?coord) (SAMPLE(COALESCE(?self, ?i)) AS ?ins) (SAMPLE(?cn) AS ?com) (SAMPLE(?self) AS ?isCommune) WHERE {{
   ?it wdt:{prop} ?s ; wdt:P17 wd:Q142 .
+  OPTIONAL {{ ?it wdt:P374 ?self }}
+  FILTER(BOUND(?self) || EXISTS {{ ?it wdt:P31/wdt:P279* wd:Q24398318 }})
   OPTIONAL {{ ?it rdfs:label ?n . FILTER(lang(?n) = "fr") }} OPTIONAL {{ ?s rdfs:label ?sn . FILTER(lang(?sn) = "fr") }}
   OPTIONAL {{ ?it wdt:P625 ?c }} OPTIONAL {{ ?it wdt:P131 ?cm . ?cm wdt:P374 ?i . OPTIONAL {{ ?cm rdfs:label ?cn . FILTER(lang(?cn) = "fr") }} }}
 }} GROUP BY ?it ?s''')
@@ -105,7 +108,7 @@ def patrons(out):
             if not label_ok(n, q) or not label_ok(sn, sq):
                 continue
             lat, lon = pt(v(b, 'coord'))
-            r = rows.setdefault(q, {'q': q, 'n': n, 's': [], 'feast': '', 'from': None, 'lat': lat, 'lon': lon, 'ins': v(b, 'ins'), 'commune': v(b, 'com')})
+            r = rows.setdefault(q, {'q': q, 'n': n, 's': [], 'feast': '', 'from': None, 'lat': lat, 'lon': lon, 'ins': v(b, 'ins'), 'commune': n if v(b, 'isCommune') else v(b, 'com'), 'k': 'commune' if v(b, 'isCommune') else 'edifice'})
             if [sq, sn] not in r['s']:
                 r['s'].append([sq, sn])
             if not r['ins'] and v(b, 'ins'):
@@ -120,7 +123,7 @@ def patrons(out):
     for r in rows.values():
         r['feast'] = next((feast[s[0]] for s in r['s'] if feast.get(s[0])), '')
     rs = sorted((r for r in rows.values() if r['ins'] or r['lat'] is not None), key=lambda r: (r['ins'], r['n']))
-    fields = ['q', 'n', 's', 'feast', 'from', 'lat', 'lon', 'ins', 'commune']
+    fields = ['q', 'n', 's', 'feast', 'from', 'lat', 'lon', 'ins', 'commune', 'k']
     meta = {**CC0, 'built': wm.today(), 'url': 'https://www.wikidata.org/wiki/Property:P825',
             'what': 'Églises et chapelles de France avec leur saint patron (Wikidata P825 « dédié à », P417 « saint patron ») et le jour de sa fête (P841)',
             'note': 'C’est l’église d’aujourd’hui : la paroisse d’avant 1790 portait le plus souvent le même vocable, mais pas toujours (église reconstruite, paroisses réunies). La fête patronale du village se tenait le jour du saint, ou le dimanche le plus proche.',
