@@ -304,7 +304,7 @@
         const o = spec.o || {}, src = rows(spec, 'rows', 2000).map(r => ({name: str(r.name, 120), cm: r.cm, shared: str(r.shared, 4000), pid: pid(r.pid)}));
         const lo = isNum(o.lo) ? num(o.lo) : 90, hi = isNum(o.hi) ? num(o.hi) : 400, max = clamp(Math.round(num(o.max) || 4), 1, 12);
         const Ld = P.leeds(src, {lo, hi, max});
-        if (o.tree && Ld.pool.length > 1) treeGroups(Ld, src.length, o, max); // 🌳 l'arbre de regroupement (lot B) : l'ordre des lignes, et les groupes s'il les donne
+        if (o.tree && Ld.pool.length > 1) treeGroups(Ld, src.length, o, max); // 🌳 l'arbre de regroupement : l'ordre des lignes, et les groupes s'il les donne
         if (!Ld.pool.length) return empty(W, fs, i18n('Ajoute des correspondances de {lo} à {hi} cM avec leurs correspondances en commun (ou « Depuis l’app »).', {lo: fmt(lo, 0), hi: fmt(hi, 0)}));
         const names = str(o.names, 400) ? str(o.names, 400).split(',').map(x => x.trim()).filter(Boolean) : GP;
         const cOf = k => color(rows(spec, 'colors', 12)[k]?.color, LEEDS_C[k % LEEDS_C.length]);

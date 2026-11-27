@@ -38,7 +38,7 @@
     const yearOf = v => { const m = String(v ?? '').match(/-?\d{3,4}/); return m ? Number(m[0]) : null; };
     const H_OPT = C('height', 'Hauteur au plus', 'number', {unit: 'px', min: 120, max: 3000});
     const plural = (n, one, many = one + 's') => `${fmt(n, 0)} ${Math.abs(n) >= 2 ? many : one}`;
-    const tplural = (n, one, many) => (window.LCNDA_I18N?.plural ? window.LCNDA_I18N.plural(n, one, many) : plural(n, one, many)); // traduit (lot B)
+    const tplural = (n, one, many) => (window.LCNDA_I18N?.plural ? window.LCNDA_I18N.plural(n, one, many) : plural(n, one, many)); // traduit
     const median = a => { const s = [...a].sort((x, y) => x - y); if (!s.length) return null; const m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; };
     const MONTHS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
     const rgb = c => { const m = String(c).match(/^#([0-9a-f]{6})$/i); return m ? [0, 2, 4].map(i => parseInt(m[1].slice(i, i + 2), 16)) : null; };
@@ -375,7 +375,7 @@
     const GENS = (def, min, max) => `<label>Générations${sel('gens', Array.from({length: max - min + 1}, (_, i) => [min + i, `${min + i} générations`]), def)}</label>`;
     function bindApp(pane, run) {
         const btn = pane.querySelector('[data-dfa-go]'), msg = pane.querySelector('[data-dfa-msg]'); if (!btn) return;
-        pane.querySelector('[data-dvi="line"]')?.addEventListener('change', e => { const d = pane.querySelector('[data-dvi-lin]'); if (d) d.hidden = !e.target.value; }); // lignées directes (lot B) : la personne suivie
+        pane.querySelector('[data-dvi="line"]')?.addEventListener('change', e => { const d = pane.querySelector('[data-dvi-lin]'); if (d) d.hidden = !e.target.value; }); // lignées directes : la personne suivie
         btn.addEventListener('click', async () => { btn.disabled = true; if (msg) msg.innerHTML = window.LCNDA_UI.spinner('Lecture de ta généalogie…', {inline: true});
             try { const t = await run(); A().toast?.(t || 'Données prises dans ta base.'); if (msg?.isConnected) msg.textContent = ''; } catch (e) { if (msg) msg.textContent = '⚠️ ' + (e.message || e); } finally { btn.disabled = false; } });
     }
@@ -407,7 +407,7 @@
         vieparents: app('vieparents', () => box('👴 Les naissances de ma base', 'Pour chaque enfant : l’âge de son père et de sa mère le jour de sa naissance.', `${SCOPE}${rootField()}<label>${esc(i18n('Naissances'))}${sel('line', [['', 'Toutes les naissances du groupe'], ['p', 'Seulement la lignée paternelle directe (père du père…)'], ['m', 'Seulement la lignée maternelle directe (mère de la mère…)'], ['pm', 'Les deux lignées directes']].map(([k, l]) => [k, i18n(l)]))}</label><div data-dvi-lin hidden><span class="pk-lab">${esc(i18n('La personne dont on suit les lignées'))}</span>${PK('dvi_lroot', {value: startId()})}</div>`),
             async (pane, s) => {
                 const line = val(pane, 'line');
-                if (line) { // 🌳 lignées directes (lot B) : calculées dans l'arbre léger (heritage-diagram-lot-b.js)
+                if (line) { // 🌳 lignées directes : calculées dans l'arbre léger (heritage-diagram-lot-b.js)
                     const LB = ext.diagramLotB; if (!LB) throw new Error('Données inconnues.');
                     const tr = await LB.tree(), who = Number(pane.querySelector('[name="dvi_lroot"]')?.value) || rootOf(pane), out = [...(line !== 'm' ? LB.lineage(tr, who, 'p') : []), ...(line !== 'p' ? LB.lineage(tr, who, 'm') : [])];
                     if (!out.length) throw new Error(i18n('Aucune génération datée dans cette lignée (il faut la naissance de l’enfant et celle du parent).'));

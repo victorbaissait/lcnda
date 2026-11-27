@@ -520,7 +520,7 @@
                 ${GP && countries.length ? `${missing.length > 1 && !kiosk() ? `<p>${GP.offerHtml(missing.map(c => `tk-patrimoine_${c}`), {label: T('Tout installer (≈ {s})', {s: GP.fmtSize(missing.reduce((n, c) => n + GP.approx(`tk-patrimoine_${c}`), 0))})})}</p>` : ''}
                 <div class="cplus-scroll"><table class="data-table tkx-gp"><thead><tr><th>${esc(T('Pack'))}</th><th>${esc(T('État'))}</th><th>${esc(T('Licence'))}</th><th></th></tr></thead><tbody>${countries.map(gpRow).join('')}</tbody></table></div>` : ''}
                 ${P.mus.length ? '' : `<p class="muted">${esc(T('L’annuaire des musées n’est pas encore fabriqué : la liste « 🖼 Musées du monde » montre déjà les œuvres du domaine public.'))}</p>`}
-                <p class="muted">${esc(T('Le ciel la nuit et les étés secs du monde entier prolongent « 🌌 Ciel, climat et mémoire » (lot E) : ils s’y affichent.'))}</p>
+                <p class="muted">${esc(T('Le ciel la nuit et les étés secs du monde entier prolongent « 🌌 Ciel, climat et mémoire » : ils s’y affichent.'))}</p>
                 <h4>${esc(T('En lien seulement'))}</h4><ul class="hist-ul tkx-ul">${LINK_ONLY.map(([i, l, why, u]) => `<li>${esc(i)} <b>${esc(T(l))}</b> — ${esc(T(why))} ${link(u, T('↗ ouvrir'))}</li>`).join('')}</ul>
                 <p class="muted">${esc(T('Tout est lu sur l’ordinateur : rien ne part sur Internet, ni nom ni lieu, pour personne. Les liens « ↗ » et « 🔍 Chercher dans les collections » ouvrent une page seulement quand on clique, jamais en consultation ; aucune image n’est chargée toute seule.'))}</p></div></section>`;
     }

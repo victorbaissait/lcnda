@@ -2584,7 +2584,7 @@ ${gb.map(([l, v]) => `        <interp n="${x(l)}">${x(v)}</interp>`).join('\n')}
         const fichierLinks = () => [ext.sendTo ? {icon: '📤', label: i18n('Envoyer vers…'), run: sendMenu} : null, ext.openTextDoc ? {icon: '📝', label: i18n('Dans le traitement de texte'), run: toTextDoc} : null,
             ext.retouchMedia ? {icon: '🎚️', label: i18n('Éclaircir / restaurer l’image'), disabled: !curMedia(), run: retouchImage} : null].filter(Boolean);
         /* 🧩 idées 35 à 40 (heritage-atelier-*.js) : ext.txPlugins (f(plug) à l'ouverture), ext.txMenus (f(menu, plug) → [items], mis avant le dernier groupe) */
-        const plug = {dlg, ctx, get t() { return t; }, area, $, touch, save, status, drawZones, gotoRange, selectText, setTool, onHere, kindNow, curPid, isDirty: () => dirty,
+        const plug = {dlg, ctx, get t() { return t; }, area, $, touch, save, status, drawZones, gotoRange, selectText, setTool, onHere, kindNow, curPid, isDirty: () => dirty, findDates,
             geo: () => ({zoom, panX, panY, imgW, imgH, rotPt, unrot, stage}), reveal: z => reveal(z), runHtr: (o = {}) => runHtr(o),
             switchTo: async next => { if (dirty) { await save(); if (dirty) return; } switching = true; teardown(); return open({...next, onClose: ctx.onClose, onSaved: ctx.onSaved}); }};
         const txPlugMenus = defs => Object.fromEntries(Object.entries(defs).map(([k, f]) => [k, () => { const base = f(), more = (ext.txMenus || []).flatMap(g => { try { return g(k, plug) || []; } catch (_) { return []; } }).filter(Boolean);

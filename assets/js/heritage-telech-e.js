@@ -147,7 +147,7 @@
     /* 🌾 ❄️ les carreaux de 0,5° (sécheresses, hivers) */
     function cellAt(rows, lat, lon) {
         let best = null;
-        for (const r of rows) { const d = Math.max(Math.abs(r.lat - lat), Math.abs(r.lon - lon) * Math.cos(lat * Math.PI / 180)); if (d <= (r.s ? r.s * 0.6 : 0.5) && (!best || d < best.d)) best = {r, d}; } // r.s : carreaux de 2,5° (lot K)
+        for (const r of rows) { const d = Math.max(Math.abs(r.lat - lat), Math.abs(r.lon - lon) * Math.cos(lat * Math.PI / 180)); if (d <= (r.s ? r.s * 0.6 : 0.5) && (!best || d < best.d)) best = {r, d}; } // r.s : carreaux de 2,5°
         return best ? best.r : null;
     }
     const pdsiAt = (cell, y) => { const i = y - cell.y0; return i >= 0 && i < cell.v.length ? cell.v[i] : null; };

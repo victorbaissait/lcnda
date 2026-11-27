@@ -37,7 +37,7 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
         const db = path.join(B.tmp, 'genealogy.sqlite');
         const r0 = spawnSync('python3', ['-c', `import sqlite3,sys;c=sqlite3.connect(sys.argv[1]);c.execute("UPDATE persons SET living_status='living' WHERE id=2");c.execute("UPDATE persons SET is_private=1 WHERE id=3");c.commit()`, db], {encoding: 'utf8'});
         assert.strictEqual(r0.status, 0, r0.stderr);
-        const names = Object.fromEntries(Object.entries((await B.api('board_people', {ids: '1,2,3,4'})).people).map(([k, v]) => [k, v.name]));
+        const names = Object.fromEntries(Object.entries((await B.api('board_people', {ids: '1,2,3,5'})).people).map(([k, v]) => [k, v.name]));
         const bid = Number((await post('save_board', {title: 'Les fils MAZAUD', data: {items: [
             {id: 'n1', type: 'note', x: 0, y: 0, w: 200, h: 120, text: 'Témoin LACOMBE'},
             {id: 'g1', type: 'gaps', x: 600, y: 0, w: 340, h: 300, title: 'Ce qui manque'}]}})).id);
@@ -58,8 +58,8 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             const txt = await p.textContent('.h-bi.is-type-gaps');
             assert.ok(txt.includes(names[1]), txt); assert.match(txt, /date de décès/);
             assert.ok(!txt.includes(names[2]) && !txt.includes(names[3]), 'rien sur la vivante ni la confidentielle : ' + txt);
-            await p.evaluate(() => window.LCNDA_EXT.boardsInternals.current.placeCx([{kind: 'person', ref_id: 4, title: 'w'}], {at: [300, 700]}));
-            await p.waitForFunction(n => document.querySelector('.h-bi.is-type-gaps').textContent.includes(n) || document.querySelector('.h-bi.is-type-gaps').textContent.includes('Rien ne manque'), names[4], {timeout: 10000});
+            await p.evaluate(() => window.LCNDA_EXT.boardsInternals.current.placeCx([{kind: 'person', ref_id: 5, title: 'w'}], {at: [300, 700]}));
+            await p.waitForFunction(n => document.querySelector('.h-bi.is-type-gaps').textContent.includes(n), names[5], {timeout: 10000});
             assert.strictEqual(await p.$eval('.h-bi.is-type-gaps [data-bd-gapopen]', b => b.dataset.bdGapopen), '1');
         });
         await t('🧵 clic droit → « Relier par un fil rouge à… » → l’autre élément → « même témoin » ; il suit ; ↶', async () => {

@@ -1551,7 +1551,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-diagram-cartes.js?v=15" defer></script>
 <script src="assets/js/heritage-diagram-more.js?v=9" defer></script>
 <script src="assets/js/heritage-diagram-famille.js?v=6" defer></script>
-<script src="assets/js/heritage-diagram-vie.js?v=4" defer></script>
+<script src="assets/js/heritage-diagram-vie.js?v=5" defer></script>
 <script src="assets/js/heritage-diagram-adn-chiffres.js?v=9" defer></script>
 <script src="assets/js/heritage-diagram-cartes2.js?v=8" defer></script>
 <script src="assets/js/heritage-prenoms-france.js?v=5" defer></script>
@@ -1564,7 +1564,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-diagram-assistant.js?v=4" defer></script>
 <script src="assets/js/heritage-diagram-lot-c.js?v=2" defer></script>
 <script src="assets/js/app-diagram-plus-core.js?v=2" defer></script>
-<script src="assets/js/heritage-diagram-plus.js?v=4" defer></script>
+<script src="assets/js/heritage-diagram-plus.js?v=5" defer></script>
 <script src="assets/js/heritage-diagram-lot-b.js?v=1" defer></script>
 <script src="assets/js/heritage-diagram-perso.js?v=6" defer></script>
 <script src="assets/js/heritage-diagram-donnees.js?v=5" defer></script><!-- 📊 Partir des données : une liste, une question (maquette docs/design/diagrammes-donnees.html) -->
@@ -1743,7 +1743,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-lot-o-arbre.js?v=2" defer></script>
 <script src="assets/js/app-lot-o-vie.js?v=2" defer></script>
 <script src="assets/js/app-lot-o-poste.js?v=3" defer></script>
-<script src="assets/js/app-lot-o-packs.js?v=2" defer></script>
+<script src="assets/js/app-lot-o-packs.js?v=3" defer></script>
 <script src="assets/js/heritage-lot10-terre-gens.js?v=6" defer></script>
 <script src="assets/js/heritage-lot8-soldats-noms.js?v=2" defer></script>
 <script src="assets/js/heritage-lot9-sons-enfance.js?v=4" defer></script>
@@ -1776,7 +1776,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-telech-d-traduire.js?v=5" defer></script>
 <script src="assets/js/heritage-telech-c.js?v=4" defer></script>
 <script src="assets/js/heritage-telech-b-village.js?v=3" defer></script>
-<script src="assets/js/heritage-telech-e.js?v=6" defer></script>
+<script src="assets/js/heritage-telech-e.js?v=7" defer></script>
 <script src="assets/js/heritage-telech-f.js?v=5" defer></script>
 <script src="assets/js/heritage-telech-h.js?v=3" defer></script>
 <script src="assets/js/heritage-telech-g.js?v=4" defer></script>
@@ -1785,7 +1785,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-lot-n-archives.js?v=3" defer></script>
 <script src="assets/js/app-lot-n2-chiffres.js?v=3" defer></script>
 <script src="assets/js/app-grands-packs.js?v=1" defer></script><!-- 📦 grands packs des lots K et L, installés à la demande (lib/grands_packs.php) -->
-<script src="assets/js/heritage-telech-k.js?v=6" defer></script>
+<script src="assets/js/heritage-telech-k.js?v=7" defer></script>
 <script src="assets/js/heritage-telech-l.js?v=4" defer></script><!-- 🌐 Les équivalents d’ailleurs (lot L) -->
 <script src="assets/js/heritage-telech-j.js?v=2" defer></script>
 <script src="assets/js/noms-lieux-monde.js?v=4" defer></script><!-- 🔎 Noms de lieux d’autrefois, tous pays : « un nom → le lieu d’aujourd’hui » (vue de 🗺 Anciens noms de lieux, 📊 Récap, ⌘K) -->
