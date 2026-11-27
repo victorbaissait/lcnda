@@ -155,6 +155,11 @@
 .txh-signs li span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .txh-prog{border-collapse:collapse;width:100%;margin:6px 0}
 .txh-prog th,.txh-prog td{text-align:left;padding:2px 4px;border-bottom:1px solid var(--line,#eceef2);font-size:12.5px}
+.txh-chart{display:block;width:100%;height:auto;max-height:90px;margin:6px 0}
+.txh-chart rect{fill:#055dff}
+.txh-chart text{fill:var(--muted,#555)}
+.air-reg{display:flex;align-items:center;gap:6px;margin:6px 0;font-size:13px}
+.air-reg[hidden]{display:none}
 .txh-bar{display:inline-block;height:8px;border-radius:4px;background:#055dff;vertical-align:middle}
 .txh-hint{display:flex;flex-wrap:wrap;gap:6px;padding:6px 8px;margin:4px 0;border:1px solid var(--line,#eceef2);border-radius:8px;background:var(--paper,#fff);font-size:13px}
 .txh-hint[hidden]{display:none}

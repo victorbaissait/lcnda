@@ -45,7 +45,7 @@ function board_detail(PDO $pdo, int $id): array
     $data = board_clean_read((string) $b['data_json']);
     // médias posés sur le tableau : leurs fichiers et leur sorte
     $mids = [];
-    foreach ($data['items'] ?? [] as $it) { if (!empty($it['media_id'])) { $mids[] = (int) $it['media_id']; } }
+    foreach ($data['items'] ?? [] as $it) { if (!empty($it['media_id'])) { $mids[] = (int) $it['media_id']; } if (!empty($it['media_id2'])) { $mids[] = (int) $it['media_id2']; } }
     $media = [];
     if ($mids) {
         $in = implode(',', array_map('intval', array_unique($mids)));
@@ -83,7 +83,7 @@ function board_clean_read(string $json): array
 /** Garde ce qui est sûr dans un élément du tableau (les textes restent des textes, les adresses web sont vérifiées) */
 function board_clean_item(array $it): ?array
 {
-    $types = ['shape', 'text', 'note', 'draw', 'line', 'media', 'webimage', 'link', 'tag', 'folder', 'recueil', 'widget', 'screen', 'person', 'weblink', 'table', 'timeline', 'map', 'frame', 'card', 'data', 'gaps', 'agecalc', 'checklist'];
+    $types = ['shape', 'text', 'note', 'draw', 'line', 'media', 'webimage', 'link', 'tag', 'folder', 'recueil', 'widget', 'screen', 'person', 'weblink', 'table', 'timeline', 'map', 'frame', 'card', 'data', 'gaps', 'agecalc', 'checklist', 'columns', 'compare'];
     if (!in_array($it['type'] ?? '', $types, true)) { return null; }
     $num = static fn($v, $min = -1e6, $max = 1e6) => is_numeric($v) ? max($min, min($max, (float) $v)) : 0.0;
     $str = static fn($v, $n = 300) => mb_substr((string) ($v ?? ''), 0, $n);
@@ -116,6 +116,13 @@ function board_clean_item(array $it): ?array
     if (($it['type'] ?? '') === 'agecalc') {
         $out['calcMode'] = ($it['calcMode'] ?? '') === 'birth' ? 'birth' : 'age';
         foreach (['calcAge' => [0, 150], 'calcYear' => [0, 3000], 'calcBorn' => [0, 3000]] as $k => [$a, $z]) { if (isset($it[$k]) && is_numeric($it[$k])) { $out[$k] = (int) $num($it[$k], $a, $z); } }
+    }
+    // 📋 colonnes (leurs noms), 🔍 deux actes côte à côte (la seconde image, la loupe commune)
+    if (($it['type'] ?? '') === 'columns') { $out['cols'] = array_values(array_map(static fn($c) => mb_substr(is_scalar($c) ? (string) $c : '', 0, 60), array_slice(is_array($it['cols'] ?? null) ? $it['cols'] : [], 0, 6))); }
+    if (($it['type'] ?? '') === 'compare') {
+        if (isset($it['media_id2'])) { $out['media_id2'] = max(0, (int) $it['media_id2']); }
+        if (isset($it['url2'])) { $out['url2'] = $url($it['url2']); }
+        if (isset($it['cz']) && is_array($it['cz'])) { $out['cz'] = ['k' => $num($it['cz']['k'] ?? 1, 1, 12), 'x' => $num($it['cz']['x'] ?? 0, -1e5, 1e5), 'y' => $num($it['cz']['y'] ?? 0, -1e5, 1e5)]; }
     }
     if (($it['type'] ?? '') === 'checklist') { $out['checks'] = array_values(array_map(static fn($c) => ['t' => mb_substr(is_scalar($c['t'] ?? null) ? (string) $c['t'] : '', 0, 300), 'done' => !empty($c['done'])], array_slice(array_filter(is_array($it['checks'] ?? null) ? $it['checks'] : [], 'is_array'), 0, 100))); }
     // 📊 🧺 📎 ce qui est posé avec sa source : carte d'info (icône, ligne, source, d'où elle vient), données vivantes (le réglage du widget), sources d'un texte

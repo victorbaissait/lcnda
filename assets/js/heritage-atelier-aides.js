@@ -150,12 +150,21 @@
             const txt = z => (z.e > z.s ? area.value.slice(z.s, Math.min(z.e, z.s + 60)) : '') || i18n('Signature');
             box.innerHTML = `${!plug.t.id || plug.isDirty() ? `<p class="ui-hint">${esc(i18n('Enregistre l’acte pour voir ses signatures en image.'))}</p>` : ''}<ul class="txh-signs">${mine.map(z => `<li><span>${esc(txt(z))}</span><button type="button" class="button small secondary" data-txh-cmp="${esc(z.id)}">${esc(i18n('Comparer avec…'))}</button></li>`).join('')}</ul>`;
         }
+        /** 📊 le petit graphique en barres : les actes transcrits mois par mois (le survol donne le mois et le nombre) */
+        function progChart(months, max) {
+            if (months.length < 2) return '';
+            const bw = 14, H = 56, W = months.length * bw;
+            const bars = months.map((m, i) => { const h = Math.max(2, Math.round(m.acts / max * (H - 14))); return `<rect x="${i * bw + 2}" y="${H - 12 - h}" width="${bw - 4}" height="${h}" rx="2"><title>${esc(m.month)} : ${esc(String(m.acts))}</title></rect>`; }).join('');
+            return `<svg class="txh-chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(i18n('Actes transcrits mois par mois'))}">${bars}
+                <text x="1" y="${H - 1}" font-size="9" data-i18n-off>${esc(months[0].month)}</text><text x="${W - 1}" y="${H - 1}" font-size="9" text-anchor="end" data-i18n-off>${esc(months[months.length - 1].month)}</text></svg>`;
+        }
         async function paintProgress() {
             const box = panel.querySelector('[data-txh-body="prog"]'); if (!box) return;
             box.textContent = '…';
             let r; try { r = await api('txaid_progress'); } catch (_) { box.textContent = i18n('Pas disponible pour l’instant.'); return; }
             const T = r.total || {}, pct = (u, w) => (w ? Math.round(u / w * 100) : 0), max = Math.max(1, ...(r.months || []).map(m => m.acts));
             box.innerHTML = `<p><b>${esc(String(T.acts || 0))}</b> ${esc(i18n('actes transcrits'))} · <b>${esc(String(pct(T.unsure, T.words)))} %</b> ${esc(i18n('de mots douteux'))}</p>
+                ${progChart(r.months || [], max)}
                 ${(r.months || []).length ? `<table class="txh-prog"><thead><tr><th>${esc(i18n('Mois'))}</th><th>${esc(i18n('Actes'))}</th><th>${esc(i18n('Douteux'))}</th></tr></thead><tbody>${r.months.map(m => `<tr><td>${esc(m.month)}</td><td><span class="txh-bar" style="width:${Math.round(m.acts / max * 60) + 4}px"></span> ${esc(String(m.acts))}</td><td>${esc(String(pct(m.unsure, m.words)))} %</td></tr>`).join('')}</tbody></table>` : ''}
                 <p class="ui-hint">${esc(i18n('Mots douteux : [?], [illisible] et les mots avec « ? » ou « … ». Moins il y en a, mieux tu lis !'))}</p>`;
         }

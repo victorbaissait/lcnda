@@ -44,7 +44,7 @@ function txi_idees_dispatch(PDO $pdo, string $action, bool $isWrite, array $payl
             if (str_starts_with($op, 'train_')) { require_once __DIR__ . '/atelier_entrainer.php'; json_response(txi_train_get($pdo, $op, $_GET)); }
             json_response(match ($op) {
                 'reg' => txi_reg_info($pdo, safe_int($_GET['act_id'] ?? 0), safe_int($_GET['media_id'] ?? 0), txi_idees_clean_extra(['reg' => ['manifest' => $_GET['manifest'] ?? '', 'n' => $_GET['n'] ?? 0, 'total' => $_GET['total'] ?? 0, 'register' => $_GET['register'] ?? '', 'page_url' => $_GET['page_url'] ?? '']])['reg'] ?? []),
-                'search' => txi_search($pdo, (string) ($_GET['q'] ?? ''), !empty($_GET['near']), safe_int($_GET['limit'] ?? 60) ?: 60),
+                'search' => txi_search($pdo, (string) ($_GET['q'] ?? ''), !empty($_GET['near']), safe_int($_GET['limit'] ?? 60) ?: 60, safe_int($_GET['reg_of'] ?? 0)),
                 'iiif_preview' => txi_iiif_preview((string) ($_GET['url'] ?? '')),
                 'stats' => txi_stats($pdo),
                 default => throw new LcndaBadInput('Opération inconnue.'),
@@ -397,7 +397,24 @@ function txi_zone_of(array $zones, int $s, int $e): ?array
  * GET search {q, near} → {hits: [{act_id, title, kind, date_text, place, line, text, words, variant, layer, zone, goto: {s, e}}], acts, lines, indexed}
  * Les résultats exacts d'abord ; avec near, les orthographes voisines (variant : le mot trouvé), bien distinguées.
  */
-function txi_search(PDO $pdo, string $q, bool $near, int $limit = 60): array
+/** les actes du même registre qu'un acte (recueil, ou registre IIIF : le même manifeste) ; null : l'acte n'est pas dans un registre */
+function txi_register_acts(PDO $pdo, int $actId): ?array
+{
+    $a = txi_act_row($pdo, $actId); if (!$a) { return null; }
+    $rec = txi_recueil_of($pdo, (int) ($a['media_id'] ?? 0));
+    if ($rec) {
+        $s = $pdo->prepare('SELECT DISTINCT t.id FROM act_transcriptions t JOIN recueil_images ri ON ri.media_id=t.media_id WHERE ri.recueil_id=?'); $s->execute([$rec['recueil_id']]);
+        return array_values(array_unique(array_merge([$actId], array_map('intval', $s->fetchAll(PDO::FETCH_COLUMN)))));
+    }
+    $man = (string) ($a['data']['reg']['manifest'] ?? ''); if ($man === '') { return null; }
+    $ids = [];
+    $s = $pdo->prepare('SELECT id, data_json FROM act_transcriptions WHERE data_json LIKE ?'); $s->execute(['%"manifest"%']);
+    foreach ($s->fetchAll(PDO::FETCH_ASSOC) as $r) { $d = json_decode((string) $r['data_json'], true); if ((string) ($d['reg']['manifest'] ?? '') === $man) { $ids[] = (int) $r['id']; } }
+    return $ids ?: [$actId];
+}
+
+/** $regOf (un acte) : seulement les actes de son registre (« seulement ce registre » dans l'Atelier) */
+function txi_search(PDO $pdo, string $q, bool $near, int $limit = 60, int $regOf = 0): array
 {
     try { $pdo->query('SELECT 1 FROM atelier_fts LIMIT 1'); } catch (Throwable $e) { throw new RuntimeException(i18n_t('La recherche plein texte n’est pas possible ici (SQLite sans FTS5).')); }
     txi_fts_sync($pdo);
@@ -407,7 +424,9 @@ function txi_search(PDO $pdo, string $q, bool $near, int $limit = 60): array
     $indexed = (int) $pdo->query("SELECT COUNT(*) FROM atelier_fts WHERE layer='f'")->fetchColumn();
     if (!$toks) { return ['hits' => [], 'acts' => 0, 'lines' => 0, 'indexed' => $indexed, 'q' => $q]; }
     $exactQ = implode(' AND ', array_map(static fn($t) => 'text : "' . str_replace('"', '', $t) . '"*', array_slice($toks, 0, 8)));
-    $sel = 'SELECT f.rowid AS rid, f.text, f.act_id, f.line, f.layer, f.s, f.e FROM atelier_fts f WHERE atelier_fts MATCH ? ORDER BY f.act_id, f.layer, f.line LIMIT ' . ($limit * 3);
+    $only = $regOf > 0 ? txi_register_acts($pdo, $regOf) : null;
+    $in = $only !== null ? ' AND f.act_id IN (' . implode(',', array_map('intval', $only ?: [0])) . ')' : '';
+    $sel = 'SELECT f.rowid AS rid, f.text, f.act_id, f.line, f.layer, f.s, f.e FROM atelier_fts f WHERE atelier_fts MATCH ?' . $in . ' ORDER BY f.act_id, f.layer, f.line LIMIT ' . ($limit * 3);
     $st = $pdo->prepare($sel);
     $st->execute([$exactQ]); $exact = $st->fetchAll(PDO::FETCH_ASSOC);
     $var = [];
@@ -445,7 +464,7 @@ function txi_search(PDO $pdo, string $q, bool $near, int $limit = 60): array
     };
     foreach ($exact as $r) { if (count($hits) >= $limit) { break; } $add($r, false); }
     foreach ($var as $r) { if (count($hits) >= $limit) { break; } $add($r, true); }
-    return ['hits' => $hits, 'acts' => count(array_unique(array_column($hits, 'act_id'))), 'lines' => count($hits), 'indexed' => $indexed, 'q' => $q];
+    return ['hits' => $hits, 'acts' => count(array_unique(array_column($hits, 'act_id'))), 'lines' => count($hits), 'indexed' => $indexed, 'q' => $q, 'register_only' => $only !== null];
 }
 
 /** GET stats : combien d'actes et de lignes (le haut de « Transcriptions d'actes ») */

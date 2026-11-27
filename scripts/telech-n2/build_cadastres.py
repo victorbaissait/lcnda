@@ -109,8 +109,24 @@ def rues(out):
         if lic not in OPEN or not res:
             link_only.append({'n': d['title'], 'org': org, 'url': d.get('page'), 'why': f'licence « {lic or "non dite"} »' + ('' if res else ', aucun fichier')})
             continue
-        r = sorted(res, key=lambda r: (r.get('format') or '').lower() != 'json')[0]
-        body = wm.get(r['url'], 'application/json' if r['format'].lower() == 'json' else 'text/csv')
+        # un fichier disparu (ex. Grenoble : 404) ne fait pas échouer tout le lot : on essaie les autres fichiers du jeu,
+        # puis l'adresse stable « latest » que l'API donne pour chaque fichier ; sinon le jeu passe en simple lien (noté)
+        body, r, errs = None, None, []
+        for r0 in sorted(res, key=lambda r: (r.get('format') or '').lower() != 'json'):
+            for u in dict.fromkeys([r0.get('url'), r0.get('latest')]):
+                if not u or not u.startswith('https://'):
+                    continue
+                try:
+                    body, r = wm.get(u, 'application/json' if r0['format'].lower() == 'json' else 'text/csv', tries=2), r0
+                    break
+                except Exception as e:  # noqa
+                    errs.append(f'{u} : {e}')
+            if body is not None:
+                break
+        if body is None:
+            print(f'tn2-rues : « {d["title"]} » ({org}) sauté, fichier injoignable :', *errs, sep='\n  ', file=sys.stderr)
+            link_only.append({'n': d['title'], 'org': org, 'url': d.get('page'), 'why': 'fichier injoignable (disparu ?)'})
+            continue
         if r['format'].lower() == 'json':
             items = json.loads(body)
             items = items if isinstance(items, list) else items.get('results') or items.get('records') or []

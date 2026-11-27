@@ -6002,5 +6002,25 @@ button.lb-acts-chip.is-unlinked{border-style:dashed}
 .h-bi-check li button{border:0;background:none;cursor:pointer;color:#8a92a0;font-size:15px}
 .h-bi-ckadd{margin:0 8px 8px;align-self:flex-start;border:0;background:none;color:#0066cc;cursor:pointer;font-size:13px}
 .h-board.is-picking .h-board-stage{cursor:crosshair}
+.h-bi-cols{width:100%;height:100%;display:flex;gap:6px;box-sizing:border-box;padding:6px;background:rgba(238,244,255,.55);border:1px solid #9fb7d9;border-radius:12px}
+.h-bi-cols section{flex:1;min-width:0;border-radius:8px;background:rgba(255,255,255,.6);border:1px dashed #b8c8e0}
+.h-bi-cols header{display:flex;align-items:center;gap:6px;padding:6px 8px;border-bottom:1px solid #d5dfee}
+.h-bi-cols header input{flex:1;min-width:0;border:0;background:none;font:inherit;font-weight:700;font-size:14px;color:#1d2433}
+.h-bi-colcount{min-width:22px;text-align:center;border-radius:11px;background:#0066cc;color:#fff;font-size:12px;font-weight:700;padding:1px 6px}
+.h-bi-cmp{width:100%;height:100%;display:flex;flex-direction:column;background:#fff;border:1px solid #c9ced6;border-radius:10px;overflow:hidden;color:#1d2433}
+.h-bi-cmp header{display:flex;align-items:center;gap:6px;padding:6px 10px;background:#f3f5f8;font-weight:700;font-size:14px}
+.h-bi-cmp header button{margin-left:auto;border:1px solid #c9ced6;background:#fff;border-radius:6px;cursor:pointer;font-size:12px}
+.h-bi-cmpbody{flex:1;display:flex;gap:4px;min-height:0;padding:4px}
+.h-bi-cmpimg{flex:1;overflow:hidden;position:relative;background:#eef0f3;border-radius:6px;cursor:zoom-in}
+.h-bi-cmpimg img{width:100%;height:100%;object-fit:contain;transform-origin:0 0;display:block;user-select:none}
+.h-bd-tmsum ul{list-style:none;margin:0;padding:0;max-height:50vh;overflow:auto}
+.h-bd-tmrow{border:0;background:none;padding:4px 6px;cursor:pointer;color:inherit;font:inherit;text-align:left;width:100%;border-radius:6px}
+.h-bd-tmrow:hover{background:#eef4ff}
+[data-bd-timer].is-on{background:#fff3cd;font-variant-numeric:tabular-nums}
+:root[data-theme="dark"] .h-bi-cols{background:rgba(40,52,72,.55);border-color:#3a4252}
+:root[data-theme="dark"] .h-bi-cols section{background:rgba(30,36,48,.6);border-color:#3a4252}
+:root[data-theme="dark"] .h-bi-cols header input{color:#e6e9ef}
+:root[data-theme="dark"] .h-bi-cmp{background:#1e2430;color:#e6e9ef;border-color:#3a4252}
+:root[data-theme="dark"] .h-bi-cmp header{background:#262d3b}
 :root[data-theme="dark"] .h-bi-gaps,:root[data-theme="dark"] .h-bi-agecalc,:root[data-theme="dark"] .h-bi-check{background:#1e2430;color:#e6e9ef;border-color:#3a4252}
 :root[data-theme="dark"] .h-bi-gaps header,:root[data-theme="dark"] .h-bi-agecalc header,:root[data-theme="dark"] .h-bi-check header{background:#262d3b;border-color:#3a4252}

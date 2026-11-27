@@ -35,13 +35,13 @@
     /**
      * Le panneau des lignes trouvées : panel({onOpen(hit)}) → {el, search(q)} ; rien d'affiché tant qu'il n'y a pas 2 lettres.
      */
-    function panel({onOpen, compact = false} = {}) {
+    function panel({onOpen, compact = false, regOf = () => 0} = {}) {
         const el = document.createElement('section'); el.className = `air-panel${compact ? ' is-compact' : ''}`; el.hidden = true; el.setAttribute('aria-live', 'polite'); el.dataset.airPanel = '';
         let q = '', seq = 0, hits = [];
         async function search(nq = q) {
             q = String(nq || '').trim(); const n = ++seq;
             if (q.replace(/[^\p{L}\p{N}]/gu, '').length < 2) { el.hidden = true; el.innerHTML = ''; hits = []; return; }
-            let r; try { r = await A().api('atelier_idees', {op: 'search', q, near: near() ? 1 : ''}); } catch (e) { if (n !== seq) return; el.hidden = false; el.innerHTML = `<div class="ui-msg is-error">⛔ ${esc(e.message)}</div>`; return; }
+            let r; try { r = await A().api('atelier_idees', {op: 'search', q, near: near() ? 1 : '', ...(regOf() ? {reg_of: regOf()} : {})}); } catch (e) { if (n !== seq) return; el.hidden = false; el.innerHTML = `<div class="ui-msg is-error">⛔ ${esc(e.message)}</div>`; return; }
             if (n !== seq) return; hits = r.hits || [];
             const nv = hits.filter(h => h.variant).length;
             el.hidden = false;
@@ -78,16 +78,24 @@
 
     /* ─── dans l'Atelier : Édition → 🔍 Chercher dans tous les actes… ─── */
     function openInAtelier(plug) {
-        const P = panel({compact: true, onOpen: h => { dg.close(); if (h.act_id === plug.t.id && h.goto?.e > h.goto?.s) return plug.gotoRange(h.goto.s, h.goto.e); plug.switchTo({id: h.act_id, goto: h.goto?.e > h.goto?.s ? h.goto : null}); }});
+        let onlyReg = false;
+        const P = panel({compact: true, regOf: () => (onlyReg ? plug.t.id : 0), onOpen: h => { dg.close(); if (h.act_id === plug.t.id && h.goto?.e > h.goto?.s) return plug.gotoRange(h.goto.s, h.goto.e); plug.switchTo({id: h.act_id, goto: h.goto?.e > h.goto?.s ? h.goto : null}); }});
         const dg = document.createElement('dialog'); dg.className = 'modal air-dlg';
         dg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">📜 ${esc(i18n('ATELIER'))}</span><h2>🔍 ${esc(i18n('Chercher dans tous les actes'))}</h2></div><button type="button" class="icon-button" data-air-x aria-label="${esc(i18n('Fermer'))}">×</button></div>
-            <input type="search" class="air-q" data-air-q placeholder="${esc(i18n('Un nom, un mot… (2 lettres suffisent)'))}" aria-label="${esc(i18n('Chercher dans tous les actes'))}" autocomplete="off" spellcheck="false">`;
+            <input type="search" class="air-q" data-air-q placeholder="${esc(i18n('Un nom, un mot… (2 lettres suffisent)'))}" aria-label="${esc(i18n('Chercher dans tous les actes'))}" autocomplete="off" spellcheck="false">
+            <label class="ui-toggle air-reg" data-air-regbox hidden><input type="checkbox" data-air-reg><i></i>📚 ${esc(i18n('seulement ce registre'))} <small class="muted" data-air-regname data-i18n-off></small></label>`;
         dg.appendChild(P.el); document.body.appendChild(dg); dg.showModal();
         dg.addEventListener('close', () => dg.remove());
         dg.addEventListener('click', e => { if (e.target.closest('[data-air-x]')) dg.close(); });
         const inp = dg.querySelector('[data-air-q]'); let tm = 0;
         const sel = plug.area.value.slice(plug.area.selectionStart, plug.area.selectionEnd).trim(); if (sel && sel.length < 60 && !sel.includes('\n')) { inp.value = sel; P.search(sel); }
         inp.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(() => P.search(inp.value), 250); });
+        // « seulement ce registre » : quand l'acte est dans un recueil ou un registre en ligne (IIIF)
+        if (plug.t.id) A().api('atelier_idees', {op: 'reg', act_id: plug.t.id}).then(r => {
+            if (!r?.register || !dg.isConnected) return;
+            const box = dg.querySelector('[data-air-regbox]'); box.hidden = false; dg.querySelector('[data-air-regname]').textContent = r.title ? `(${r.title})` : '';
+            box.querySelector('[data-air-reg]').addEventListener('change', e => { onlyReg = e.target.checked; P.search(inp.value); });
+        }).catch(() => {});
         setTimeout(() => inp.focus(), 30);
         return dg;
     }

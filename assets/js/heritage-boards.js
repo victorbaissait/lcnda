@@ -210,6 +210,10 @@
         const a = Number(it.calcAge); if (it.calcAge === undefined || it.calcAge === '' || !it.calcYear) return ['', ''];
         return [i18n('né vers {y}', {y: String(y - a)}), i18n('entre {a} et {b}', {a: String(y - a - 1), b: String(y - a)})];
     };
+    /** 📋 colonnes « À chercher / En cours / Trouvé » : des bandes calculées depuis le cadre ; ce qui y est lâché s'y range */
+    const COLS0 = ['À chercher', 'En cours', 'Trouvé'], NOCOL = ['columns', 'frame', 'line', 'draw'];
+    const colsOf = it => (it.cols?.length ? it.cols : COLS0.map(t => i18n(t))).slice(0, 6);
+    const colAt = (c, i) => { const cx = i.x + i.w / 2, cy = i.y + i.h / 2; if (cx < c.x || cx > c.x + c.w || cy < c.y || cy > c.y + c.h) return -1; const n = colsOf(c).length; return Math.max(0, Math.min(n - 1, Math.floor((cx - c.x) / (c.w / n)))); };
     const HEADS_LIST = new Proxy([], {get: (t, k) => { const l = (KIT().allHeads?.() || ['none', 'triangle']).map(h => [h, KIT().headName?.(h) || h]); const v = l[k]; return typeof v === 'function' ? v.bind(l) : v; }});
     const LINE_PATHS = [['straight', '— droit'], ['curve', '⌒ courbe'], ['elbow', '⌐ coudé'], ['wave', '∿ vague'], ['zigzag', '⩘ zigzag'], ['avoid', '⤳ contourne les éléments']].map(([k, l]) => [k, i18n(l, {ctx: 'trait'})]);
     const LINE_DASHES = [['', '──── plein'], ['dash', '- - - tirets'], ['long', '— — — longs tirets'], ['dot', '· · · points'], ['dashdot', '-·-· tiret-point']];
@@ -420,6 +424,7 @@
             layers: () => '<span class="h-bd-menuwrap"><button type="button" class="button small secondary" data-bd-layers title="Calques : montrer, cacher, verrouiller">🗂</button></span>',
             snapgrid: () => `<button type="button" class="button small secondary ed-old-hidden ${snapOn ? 'is-on' : ''}" data-bd-snapgrid title="Grille aimantée et guides d’alignement">🧲</button>`,
             minimap: () => '<button type="button" class="button small secondary" data-bd-minimap title="Mini-carte du tableau (montrer ou cacher)">🗺</button>',
+            timer: () => '<span class="h-bd-menuwrap"><button type="button" class="button small secondary" data-bd-timer title="Minuteur de séance : 25 minutes, puis ce qui a été ajouté ou changé">⏱ 25:00</button></span>',
             present: () => '<span class="h-bd-menuwrap"><button type="button" class="button small secondary" data-bd-present title="Présenter : un parcours d’étapes">▶ Présenter</button></span>',
             prefs: () => '<button type="button" class="button small secondary" data-bd-prefs title="Réglages des tableaux : disposition, ordre des outils, boutons montrés ou cachés">⚙️ Personnaliser</button>',
             full: () => '<button type="button" class="button small secondary" data-bd-full title="Plein écran">⛶</button>', lockall: () => '<button type="button" class="button small secondary" data-bd-lockall title="Verrouiller ou déverrouiller tout le tableau">🔓</button>',
@@ -557,7 +562,7 @@
         const els = new Map(), sigs = new Map();
         let hiddenIds = new Set(), lockedIds = new Set(); // calques cachés ou verrouillés, cadres repliés
         // ce qui change le dessin d'un élément (pas sa place) ; un trait qui contourne change aussi quand un obstacle bouge
-        const contentSig = it => { const {x, y, z, w, h, locked, ...rest} = it; if (it.type === 'line') return JSON.stringify(it) + (it.path === 'avoid' && !it.bends?.length ? JSON.stringify(routePts(it)) : ''); if (it.type === 'gaps') return JSON.stringify(rest) + items.filter(i => i.type === 'person').map(i => i.person_id).join(','); return ['timeline', 'map', 'frame'].includes(it.type) ? JSON.stringify({...rest, w, h}) : JSON.stringify(rest); };
+        const contentSig = it => { const {x, y, z, w, h, locked, ...rest} = it; if (it.type === 'line') return JSON.stringify(it) + (it.path === 'avoid' && !it.bends?.length ? JSON.stringify(routePts(it)) : ''); if (it.type === 'gaps') return JSON.stringify(rest) + items.filter(i => i.type === 'person').map(i => i.person_id).join(','); if (it.type === 'columns') return JSON.stringify({...rest, w, h}) + colCounts(it).join(','); return ['timeline', 'map', 'frame'].includes(it.type) ? JSON.stringify({...rest, w, h}) : JSON.stringify(rest); };
         function itemInner(it) {
             it = safeItem(it); // couleurs et masque filtrés (voir safeItem)
             const LIST_CSS = {bullet: 'disc', num: 'decimal', roman: 'upper-roman', alpha: 'lower-alpha', ALPHA: 'upper-alpha', dash: '"– "', check: '"☐ "'};
@@ -618,6 +623,10 @@
                         <output data-bd-calcout><b>${esc(r1 || '—')}</b><small>${esc(r2)}</small></output></div>`; }
                 case 'checklist': { const l = it.checks || [];
                     return `<div class="h-bi-check"><header>☐ <span data-i18n-off>${esc(it.title || i18n('Liste à cocher'))}</span><span class="h-bi-ckcount">${l.filter(c => c.done).length}/${l.length}</span></header><ul>${l.map((c, i) => `<li class="${c.done ? 'is-done' : ''}"><input type="checkbox" data-bd-ck="${i}" ${c.done ? 'checked' : ''} aria-label="${esc(i18n('Cocher'))}"><input type="text" data-bd-cktext="${i}" value="${esc(c.t || '')}" placeholder="${esc(i18n('à faire…'))}"><button type="button" data-bd-inl="ckdel" data-i="${i}" title="${esc(i18n('Enlever cette ligne'))}">×</button></li>`).join('')}</ul><button type="button" class="h-bi-ckadd" data-bd-inl="ckadd">${esc(i18n('＋ Ajouter une ligne'))}</button></div>`; }
+                case 'columns': { const c = colsOf(it), cnt = colCounts(it);
+                    return `<div class="h-bi-cols">${c.map((t, i) => `<section><header><input type="text" data-bd-colname="${i}" value="${esc(t)}" maxlength="60" aria-label="${esc(i18n('Nom de la colonne'))}"><span class="h-bi-colcount" data-bd-colcount="${i}">${cnt[i]}</span></header></section>`).join('')}</div>`; }
+                case 'compare': { const src = k => it[k ? 'media_id2' : 'media_id'] ? mediaUrl(media[it[k ? 'media_id2' : 'media_id']]) : okUrl(it[k ? 'url2' : 'url']) || '', z = it.cz || {k: 1, x: 0, y: 0}, tf = `transform:translate(${z.x}px,${z.y}px) scale(${z.k})`;
+                    return `<div class="h-bi-cmp"><header>🔍 <span data-i18n-off>${esc(it.title || i18n('Deux actes côte à côte'))}</span><button type="button" data-bd-inl="cmpreset" title="${esc(i18n('Revenir à la taille normale'))}">1:1</button></header><div class="h-bi-cmpbody">${[0, 1].map(k => `<div class="h-bi-cmpimg" data-bd-cmp><img src="${esc(src(k))}" alt="" draggable="false" style="${tf}"></div>`).join('')}</div></div>`; }
                 case 'widget': return `<div class="h-bi-widget" data-bd-widget="${esc(it.target)}">${window.LCNDA_UI.spinner(i18n('Chargement du widget…'))}</div>`;
                 case 'card': { const u = okUrl(it.url), lab = it.source || (u ? (() => { try { return new URL(u).hostname; } catch (_) { return ''; } })() : '') || i18n('source');
                     return `<div class="h-bi-card h-bi-dcard"><span class="h-bi-big">${esc(it.icon || '📋')}</span><strong data-i18n-off>${esc(it.title || '—')}</strong>${it.sub ? `<small data-i18n-off>${esc(it.sub)}</small>` : ''}${u ? `<a class="h-bi-src" data-bd-src href="${esc(u)}" target="_blank" rel="noopener noreferrer" title="${esc(u)}">↗ <span data-i18n-off>${esc(lab)}</span></a>` : `<button type="button" class="h-bi-src" data-bd-openlink title="${esc(i18n('Revenir là d’où ça vient'))}">↗ <span data-i18n-off>${esc(lab)}</span></button>`}</div>`; }
@@ -748,6 +757,13 @@
             box.innerHTML = rows.length ? rows.join('') : `<p class="h-bi-gapok">${esc(i18n('✓ Rien ne manque pour les fiches posées.'))}</p>`;
         }
         // ── cadres : ce qui est dedans (entièrement) bouge avec eux ──
+        const colCounts = c => { const n = colsOf(c).length, out = Array(n).fill(0); items.forEach(i => { if (!NOCOL.includes(i.type) && !hiddenIds.has(i.id)) { const k = colAt(c, i); if (k >= 0) out[k]++; } }); return out; };
+        function snapCols(list) { // lâché dans une colonne : centré dedans, sous l'en-tête
+            const moved = new Set(list.map(i => i.id)), cols = items.filter(c => c.type === 'columns' && !moved.has(c.id) && !hiddenIds.has(c.id)); let n0 = 0;
+            list.forEach(i => { if (NOCOL.includes(i.type)) return; const c = cols.find(c0 => colAt(c0, i) >= 0); if (!c) return; const k = colAt(c, i), cw = c.w / colsOf(c).length;
+                i.x = Math.round(c.x + k * cw + Math.max(6, (cw - i.w) / 2)); i.y = Math.round(Math.max(i.y, c.y + 46)); n0++; });
+            if (n0) render();
+        }
         const framed = f => items.filter(i => i !== f && i.type !== 'frame' && i.x >= f.x - 1 && i.y >= f.y - 1 && i.x + i.w <= f.x + f.w + 1 && i.y + i.h <= f.y + (f.collapsed ? (f.fh || f.h) : f.h) + 1);
         function hydrate(el, it) {
             if (it.type === 'person') personBrief(it.person_id).then(p => { const c = el.querySelector('.h-bi-person'); if (c) fillPersonCard(c, it, p); });
@@ -848,7 +864,7 @@
                     let cx0 = it.x; cw.forEach((w0, c) => { const ww = it.w * w0 / tot; for (let r = 0; r < rows; r++) { x.strokeRect(cx0, it.y + r * rh, ww, rh); const v = vals[r][c]; if (v !== '') { x.save(); x.beginPath(); x.rect(cx0, it.y + r * rh, ww, rh); x.clip(); x.fillText(String(cells[r][c] ?? '').startsWith('=') ? showVal(v) : String(cells[r][c] ?? ''), cx0 + 4, it.y + r * rh + rh / 2); x.restore(); } } cx0 += ww; });
                     x.restore(); stampDraw(it); continue;
                 }
-                if (it.type === 'shape' || it.type === 'note' || it.type === 'tag' || ['folder', 'recueil', 'person', 'link', 'screen', 'weblink', 'widget', 'timeline', 'map', 'frame', 'card', 'data', 'gaps', 'agecalc', 'checklist'].includes(it.type) || (it.type === 'media' && kindOfMedia(media[it.media_id]) !== 'image')) {
+                if (it.type === 'shape' || it.type === 'note' || it.type === 'tag' || ['folder', 'recueil', 'person', 'link', 'screen', 'weblink', 'widget', 'timeline', 'map', 'frame', 'card', 'data', 'gaps', 'agecalc', 'checklist', 'columns', 'compare'].includes(it.type) || (it.type === 'media' && kindOfMedia(media[it.media_id]) !== 'image')) {
                     x.fillStyle = it.type === 'note' ? (it.fill || NOTE_COLORS[0]) : it.type === 'shape' ? (it.fill || '#bde0fe') : it.type === 'tag' ? (it.fill || '#0066cc') : it.type === 'folder' ? (it.fill || '#f5c542') : it.type === 'frame' ? (it.fill || '#eef4ff') : '#f3f5f8';
                     x.strokeStyle = it.type === 'shape' ? (it.stroke || '#1d3557') : '#c9ced6'; x.lineWidth = it.type === 'shape' ? (it.sw ?? 2) : 1;
                     if (it.type === 'shape' && it.shape === 'ellipse') { x.beginPath(); x.ellipse(it.x + it.w / 2, it.y + it.h / 2, it.w / 2, it.h / 2, 0, 0, Math.PI * 2); x.fill(); x.stroke(); }
@@ -860,7 +876,7 @@
                     }
                     else if (it.radius || (it.type === 'shape' && it.shape === 'round')) { const r0 = Math.min(it.radius ?? Math.min(it.w, it.h) * .18, it.w / 2, it.h / 2); x.beginPath(); x.roundRect(it.x, it.y, it.w, it.h, r0); x.fill(); x.stroke(); }
                     else { x.fillRect(it.x, it.y, it.w, it.h); x.strokeRect(it.x, it.y, it.w, it.h); }
-                    const label = it.type === 'card' || it.type === 'data' ? exportLabel(it) : ['gaps', 'agecalc', 'checklist'].includes(it.type) ? (it.type === 'checklist' ? [it.title, ...(it.checks || []).map(c => (c.done ? '☑ ' : '☐ ') + c.t)].join('\n') : els.get(it.id)?.innerText || it.title) : it.text || it.title || els.get(it.id)?.querySelector('.h-bi-pinfo strong')?.textContent || i18n({folder: 'Dossier', recueil: 'Recueil', person: 'Fiche', link: 'Écran', screen: 'Écran', timeline: 'Frise', map: 'Carte', frame: 'Cadre'}[it.type] || '');
+                    const label = it.type === 'columns' ? colsOf(it).map((t, i) => `${t} (${colCounts(it)[i]})`).join('   |   ') : it.type === 'card' || it.type === 'data' ? exportLabel(it) : ['gaps', 'agecalc', 'checklist'].includes(it.type) ? (it.type === 'checklist' ? [it.title, ...(it.checks || []).map(c => (c.done ? '☑ ' : '☐ ') + c.t)].join('\n') : els.get(it.id)?.innerText || it.title) : it.text || it.title || els.get(it.id)?.querySelector('.h-bi-pinfo strong')?.textContent || i18n({folder: 'Dossier', recueil: 'Recueil', person: 'Fiche', link: 'Écran', screen: 'Écran', timeline: 'Frise', map: 'Carte', frame: 'Cadre'}[it.type] || '');
                     if (label) { x.fillStyle = it.type === 'tag' ? '#fff' : (it.color || '#111'); x.font = `${it.bold ? 'bold ' : ''}${Math.min(it.fs || 18, it.h * .5)}px sans-serif`; x.textBaseline = 'top'; String(label).split('\n').slice(0, 6).forEach((l, n) => x.fillText(l.slice(0, 60), it.x + 8, it.y + 8 + n * (it.fs || 18) * 1.2, it.w - 16)); }
                 } else if (it.type === 'text') {
                     x.fillStyle = it.color || '#111'; x.font = `${it.bold ? 'bold ' : ''}${it.fs || 18}px sans-serif`; x.textBaseline = 'top';
@@ -982,6 +998,13 @@
                 const from = filFrom; filFrom = null; root.classList.remove('is-picking'); filLabel(from, to.id, hit0); return;
             }
             if (e.target.closest('.h-bi-text[contenteditable="true"], audio, video, iframe, input, select, textarea, [data-bd-openlink], [data-bd-src], [data-bd-srcs], [data-bd-inl], [data-bd-gapopen], .h-bi-data a, .h-bi-data button')) return;
+            const cmp = e.target.closest('[data-bd-cmp]'), cmpIt = cmp && byId(cmp.closest('[data-bi]')?.dataset.bi);
+            if (cmpIt?.cz?.k > 1 && e.button === 0 && tool === 'select') {
+                e.preventDefault(); const z = cmpIt.cz, sx = e.clientX, sy = e.clientY, x0 = z.x, y0 = z.y, sc = cmp.getBoundingClientRect().width / cmp.offsetWidth || 1;
+                const mv = ev => { z.x = x0 + (ev.clientX - sx) / sc; z.y = y0 + (ev.clientY - sy) / sc; cmpApply(cmpIt); };
+                const up = () => { document.removeEventListener('pointermove', mv); document.removeEventListener('pointerup', up); cmpKeep(cmpIt); };
+                document.addEventListener('pointermove', mv); document.addEventListener('pointerup', up); return;
+            }
             // un clic sur la toile quitte le champ du panneau où l'on écrivait (sinon les raccourcis du tableau ne marchent plus)
             const ae = document.activeElement; if (ae && ae !== document.body && root.contains(ae) && !stage.contains(ae) && ae.matches('input, select, textarea')) ae.blur();
             const [wx, wy] = toWorld(e.clientX, e.clientY);
@@ -1104,6 +1127,7 @@
             if (d.kind === 'end') { const l = d.line; if (d.fresh && Math.hypot(l.points[1][0] - l.points[0][0], l.points[1][1] - l.points[0][1]) < 6 && !l.to) { items = items.filter(i => i !== l); render(); return; } sel = new Set([l.id]); render(); commit(); if (d.fresh) setTool('select'); return; }
             if (d.kind === 'newshape') { if (!d.it) { place(newShape({w: 160, h: 110}), [d.sx, d.sy]); } else { sel = new Set([d.it.id]); render(); commit(); } setTool('select'); return; }
             if (d.kind === 'move' && !d.moved) { if (d.dupOrig) { const ids = new Set(d.start.map(s0 => s0.id)); items = items.filter(i => !ids.has(i.id)); sel = new Set(d.dupOrig); render(); } return; } // ⌥ + clic sans glisser : pas de copie
+            if (d.kind === 'move') snapCols(d.start.map(s0 => byId(s0.id)).filter(Boolean));
             if (['move', 'resize', 'erase'].includes(d.kind)) commit();
         };
         stage.addEventListener('pointerup', endDrag); stage.addEventListener('pointercancel', endDrag);
@@ -1144,7 +1168,17 @@
         }
         stage.addEventListener('pointermove', e => { if (!drag) moveEraser(e); });
         stage.addEventListener('pointerleave', () => { ecur.hidden = true; });
+        // 🔍 deux actes côte à côte : la molette grossit les deux images au même endroit, on glisse pour les promener ensemble
+        let cmpT = 0;
+        const cmpApply = it => { const z = it.cz || {k: 1, x: 0, y: 0}; els.get(it.id)?.querySelectorAll('[data-bd-cmp] img').forEach(im => { im.style.transform = `translate(${z.x}px,${z.y}px) scale(${z.k})`; }); };
+        const cmpKeep = it => { sigs.set(it.id, contentSig(it)); if (!boardLocked && !kioskOn()) commit(); };
         stage.addEventListener('wheel', e => {
+            const cm = e.target.closest?.('[data-bd-cmp]'), ci = cm && byId(cm.closest('[data-bi]')?.dataset.bi);
+            if (ci?.type === 'compare' && !e.ctrlKey && !e.metaKey) {
+                e.preventDefault(); const z = ci.cz ||= {k: 1, x: 0, y: 0}, r = cm.getBoundingClientRect(), sc = r.width / cm.offsetWidth || 1, px = (e.clientX - r.left) / sc, py = (e.clientY - r.top) / sc, k2 = Math.max(1, Math.min(12, z.k * Math.exp(-e.deltaY * 0.002)));
+                if (k2 === 1) delete ci.cz; else Object.assign(z, {x: px - (px - z.x) * k2 / z.k, y: py - (py - z.y) * k2 / z.k, k: k2});
+                cmpApply(ci); clearTimeout(cmpT); cmpT = setTimeout(() => cmpKeep(ci), 400); return;
+            }
             e.preventDefault();
             if (e.ctrlKey || e.metaKey) { zoomAt(view.k * Math.exp(-e.deltaY * 0.0022), e.clientX, e.clientY); return; }
             view.x -= e.deltaX; view.y -= e.deltaY; applyView(); queueSave(false);
@@ -1194,10 +1228,16 @@
             if (ask) setTimeout(() => inspector.querySelector('[data-bd-str="text"]')?.focus(), 60);
         }
         const filLabel = (from, to, anchor) => window.LCNDA_UI.menuAt(anchor || stage, [...FIL_LABELS.map(l => ({icon: '🧵', label: i18n(l), run: () => makeFil(from, to, i18n(l))})), '-', {icon: '✏️', label: i18n('Autre (à écrire)…'), run: () => makeFil(from, to, '', true)}], {title: i18n('🧵 Fil rouge')});
+        function placeCompare(two) {
+            const [a, b2] = two, s0 = (i, n) => i.type === 'webimage' ? {['url' + n]: i.url} : {['media_id' + n]: i.media_id}, bb = bbox(two);
+            place({type: 'compare', title: i18n('Deux actes côte à côte'), ...s0(a, ''), ...s0(b2, '2'), w: 680, h: 400}, [bb.x + bb.w / 2, bb.y + bb.h + 230]);
+        }
         function setStamp(it, k) { if (ro()) return; (sel.has(it.id) ? selItems() : [it]).forEach(i => { if (k) i.stamp = k; else delete i.stamp; }); render(); commit(); }
         const stampMenu = (it, anchor) => window.LCNDA_UI.menuAt(anchor || stage, [...Object.entries(STAMPS).map(([k, [l]]) => ({icon: it.stamp === k ? '✓' : '🔖', label: i18n(l), run: () => setStamp(it, k)})), ...(it.stamp ? ['-', {icon: '✕', label: i18n('Retirer le tampon'), run: () => setStamp(it, '')}] : [])], {title: i18n('Tampon de solidité')});
         const toolsFor = id => { const it = byId(id); if (!it || boardLocked || kioskOn()) return []; const el = els.get(id);
-            return [...(it.type !== 'line' ? [{icon: '🧵', label: i18n('Relier par un fil rouge à…'), inEditor: true, run: () => startFil(it.id)}] : []), {icon: '🏷', label: i18n('Tampon ›'), inEditor: true, run: () => stampMenu(it, el)}]; };
+            const imgs = selItems().filter(i => i.type === 'webimage' || (i.type === 'media' && kindOfMedia(media[i.media_id]) === 'image'));
+            const cmpTool = imgs.length === 2 ? [{icon: '🔍', label: i18n('Deux actes côte à côte'), inEditor: true, run: () => placeCompare(imgs)}] : [];
+            return [...cmpTool, ...(it.type !== 'line' ? [{icon: '🧵', label: i18n('Relier par un fil rouge à…'), inEditor: true, run: () => startFil(it.id)}] : []), {icon: '🏷', label: i18n('Tampon ›'), inEditor: true, run: () => stampMenu(it, el)}]; };
         const inlItem = t => byId(t.closest('[data-bi]')?.dataset.bi);
         stage.addEventListener('click', e => {
             const b = e.target.closest('[data-bd-inl], [data-bd-gapopen]'); if (!b) return; const it = inlItem(b); if (!it) return;
@@ -1207,6 +1247,7 @@
             if (k === 'agemode') it.calcMode = it.calcMode === 'birth' ? 'age' : 'birth';
             if (k === 'ckdel') it.checks.splice(Number(b.dataset.i), 1);
             if (k === 'ckadd') { (it.checks ||= []).push({t: '', done: false}); it.h = Math.max(it.h, 70 + it.checks.length * 30); }
+            if (k === 'cmpreset') delete it.cz;
             sigs.delete(it.id); render(); commit();
             if (k === 'ckadd') els.get(it.id)?.querySelector(`[data-bd-cktext="${it.checks.length - 1}"]`)?.focus();
         });
@@ -1216,13 +1257,14 @@
             const [r1, r2] = ageCalc(it), out = f.closest('.h-bi-agecalc')?.querySelector('[data-bd-calcout]'); if (out) out.innerHTML = `<b>${esc(r1 || '—')}</b><small>${esc(r2)}</small>`;
         });
         stage.addEventListener('change', e => {
-            const t = e.target, it = t.closest?.('[data-bd-calc], [data-bd-ck], [data-bd-cktext]') && inlItem(t); if (!it) return;
+            const t = e.target, it = t.closest?.('[data-bd-calc], [data-bd-ck], [data-bd-cktext], [data-bd-colname]') && inlItem(t); if (!it) return;
             if (ro() || it.locked) { sigs.delete(it.id); render(); return; }
             if (t.matches('[data-bd-ck]')) { const c = it.checks?.[Number(t.dataset.bdCk)]; if (c) c.done = t.checked; sigs.delete(it.id); render(); commit(); return; }
             if (t.matches('[data-bd-cktext]')) { const c = it.checks?.[Number(t.dataset.bdCktext)]; if (c) c.t = t.value.slice(0, 300); }
+            if (t.matches('[data-bd-colname]')) { it.cols = [...colsOf(it)]; it.cols[Number(t.dataset.bdColname)] = t.value.slice(0, 60); }
             sigs.set(it.id, contentSig(it)); commit(); // le champ garde le curseur (pas redessiné)
         });
-        stage.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.matches('[data-bd-cktext], [data-bd-calc]')) { e.preventDefault(); e.target.blur(); } });
+        stage.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.matches('[data-bd-cktext], [data-bd-calc], [data-bd-colname]')) { e.preventDefault(); e.target.blur(); } });
         stage.addEventListener('click', e => { const sm = e.target.closest('[data-bd-srcs]'); if (sm) { srcMenu(byId(sm.closest('[data-bi]').dataset.bi), sm); return; } const o = e.target.closest('[data-bd-openlink]'); if (o) { const it = byId(o.closest('[data-bi]').dataset.bi); openItem(it); } });
         // ── tableur : écrire dans une cellule (Tab, Entrée pour passer à la suivante ; coller un bout de tableur) ──
         function newTable() { // comme réglé dans Réglages → Tableaux → Tableur
@@ -1968,7 +2010,9 @@
                     <section data-k="gaps"><h4>🔎 Ce qui manque</h4><p class="muted">Pour les fiches posées sur le tableau : les dates et lieux de naissance, mariage et décès qui manquent encore.</p><button type="button" class="button small" data-bd-addgaps>Poser la liste</button></section>
                     <section data-k="agecalc"><h4>🧮 Une calculette d’âge</h4><p class="muted">« 42 ans en 1793 » → né vers 1751 ; ou l’inverse.</p><button type="button" class="button small" data-bd-addagecalc>Poser la calculette</button></section>
                     <section data-k="checklist"><h4>☐ Une liste à cocher</h4><p class="muted">Ce qui reste à faire, coché directement sur le tableau.</p><button type="button" class="button small" data-bd-addchecklist>Poser la liste</button></section>
-                    <section data-k="memo"><h4>🎙 Un mémo vocal</h4><p class="muted">Enregistre ta voix ici : le son est rangé avec le tableau et posé dessus.</p><button type="button" class="button small" data-bd-addmemo>🎙 Enregistrer</button></section>
+                    <section data-k="columns"><h4>📋 Colonnes À chercher / En cours / Trouvé</h4><p class="muted">Lâche une carte dans une colonne : elle s’y range ; le chiffre en haut compte ce qu’il y a. Les noms se changent sur place.</p><button type="button" class="button small" data-bd-addcols>Poser les colonnes</button></section>
+                    <section data-k="compare"><h4>🔍 Deux actes côte à côte</h4><p class="muted">Choisis d’abord deux images du tableau : la molette les grossit ensemble, au même endroit.</p><button type="button" class="button small" data-bd-addcmp>Les mettre côte à côte</button></section>
+                    <section data-k="memo"${typeof MediaRecorder === 'undefined' || !navigator.mediaDevices?.getUserMedia ? ' hidden' : ''}><h4>🎙 Un mémo vocal</h4><p class="muted">Enregistre ta voix ici : le son est rangé avec le tableau et posé dessus.</p><button type="button" class="button small" data-bd-addmemo>🎙 Enregistrer</button></section>
                     <section data-k="import"><h4>⤒ Importer un tableau</h4><p class="muted">Un fichier « .lcnda-tableau.json » (⤓ Exporter → Fichier léger ou complet) : il devient un nouveau tableau.</p><input type="file" accept=".json,application/json" data-bd-import></section>
                 </div>`,
                 onOpen: dlg => {
@@ -2244,7 +2288,7 @@
         // ── cadres : ce qu'ils contiennent bouge avec eux ; repliés, ils le cachent ──
         function moveStart(list) {
             const ids = new Set(list.map(i => i.id));
-            list.filter(i => i.type === 'frame').forEach(f => framed(f).forEach(i => { if (!i.locked && !lockedIds.has(i.id)) ids.add(i.id); }));
+            list.filter(i => i.type === 'frame' || i.type === 'columns').forEach(f => framed(f).forEach(i => { if (!i.locked && !lockedIds.has(i.id)) ids.add(i.id); }));
             return [...ids].map(byId).filter(Boolean).map(i => ({id: i.id, x: i.x, y: i.y, pts: i.type === 'line' ? clone(i.points) : null}));
         }
         function toggleFrame(f) {
@@ -2408,6 +2452,8 @@
                 close();
             });
             dlg.querySelector('[data-bd-addmemo]').addEventListener('click', () => { close(); memoDialog(); });
+            dlg.querySelector('[data-bd-addcols]').addEventListener('click', () => { place({type: 'columns', cols: COLS0.map(t => i18n(t)), w: 780, h: 480, z: items.reduce((m, i) => Math.min(m, i.z || 0), 0) - 1}); close(); });
+            dlg.querySelector('[data-bd-addcmp]').addEventListener('click', () => { const two = selItems().filter(i => i.type === 'webimage' || (i.type === 'media' && kindOfMedia(media[i.media_id]) === 'image')); if (two.length !== 2) { toast(i18n('Choisis d’abord deux images du tableau (⇧ + clic).'), 'error'); return; } close(); placeCompare(two); });
             dlg.querySelector('[data-bd-addfil]').addEventListener('click', () => { const two = selItems().filter(i => i.type !== 'line'); close(); if (two.length === 2) filLabel(two[0].id, two[1].id, els.get(two[1].id)); else startFil(''); });
             dlg.querySelector('[data-bd-addgaps]').addEventListener('click', () => { place({type: 'gaps', title: i18n('Ce qui manque'), w: 340, h: 300}); close(); });
             dlg.querySelector('[data-bd-addagecalc]').addEventListener('click', () => { place({type: 'agecalc', title: i18n('Calculette d’âge'), calcMode: 'age', w: 300, h: 170}); close(); });
@@ -2675,6 +2721,24 @@
             show();
         }
         root.querySelector('[data-bd-present]').addEventListener('click', e => presentMenu(e.currentTarget));
+        // ── ⏱ minuteur de séance : 25 minutes (en pause d'un clic) ; à la fin, ce qui a été ajouté ou changé (d'après l'historique ↶) ──
+        let tm = null; const tmBtn = root.querySelector('[data-bd-timer]');
+        const tmShow = () => { const s0 = tm ? Math.max(0, Math.ceil(tm.left / 1000)) : 1500; tmBtn.textContent = `${tm?.paused ? '⏸' : '⏱'} ${Math.floor(s0 / 60)}:${String(s0 % 60).padStart(2, '0')}`; tmBtn.classList.toggle('is-on', !!tm); };
+        const tmTick = () => { if (!root.isConnected) { clearInterval(tm?.iv); tm = null; return; } if (!tm || tm.paused) return; const now = Date.now(); tm.left -= now - tm.last; tm.last = now; tmShow(); if (tm.left <= 0) tmEnd(); };
+        function tmEnd() {
+            const t0 = tm; clearInterval(t0.iv); tm = null; tmShow();
+            const h0 = JSON.parse(t0.base || '{}'), old = new Map((Array.isArray(h0) ? h0 : h0.items || []).map(i => [i.id, JSON.stringify(i)]));
+            const name = i => String(i.title || i.text || i.label || '').replace(/<[^>]*>/g, '').trim().slice(0, 70) || i18n({note: 'Note', text: 'Texte', shape: 'Forme', line: 'Trait', media: 'Média', person: 'Fiche', frame: 'Cadre', columns: 'Colonnes'}[i.type] || 'Élément');
+            const added = items.filter(i => !old.has(i.id)), changed = items.filter(i => old.has(i.id) && old.get(i.id) !== JSON.stringify(i)), gone = [...old.keys()].filter(k => !byId(k)).length;
+            const rows = (l, ic) => l.slice(0, 40).map(i => `<li><button type="button" class="h-bd-tmrow" data-tmgo="${esc(i.id)}">${ic} <span data-i18n-off>${esc(name(i))}</span></button></li>`).join('');
+            ext.openDialog({eyebrow: 'TABLEAU', title: '⏱ Fin de la séance', submitLabel: 'Fermer', onSubmit: () => true,
+                body: `<div class="h-bd-tmsum"><p><strong>${esc(i18n('{a} ajoutés, {c} changés, {d} enlevés.', {a: String(added.length), c: String(changed.length), d: String(gone)}))}</strong></p>${added.length + changed.length ? `<ul>${rows(added, '＋')}${rows(changed, '✎')}</ul>` : `<p class="muted">${esc(i18n('Rien n’a changé pendant cette séance.'))}</p>`}</div>`,
+                onOpen: d => d.addEventListener('click', e => { const g = e.target.closest('[data-tmgo]'); const it = g && byId(g.dataset.tmgo); if (it) { d.close(); sel = new Set([it.id]); render(); focusOn([it]); } })});
+        }
+        tmBtn?.addEventListener('click', () => {
+            if (!tm) { tm = {left: 25 * 60000, last: Date.now(), paused: false, base: history[hpos], iv: setInterval(tmTick, 1000)}; tmShow(); toast(i18n('⏱ Séance de 25 minutes : c’est parti.')); return; }
+            popMenu(tmBtn, [['pause', i18n(tm.paused ? '▶ Reprendre' : '⏸ Mettre en pause')], ['end', i18n('⏹ Finir la séance maintenant')]], k => { if (!tm) return; if (k === 'pause') { tm.paused = !tm.paused; tm.last = Date.now(); tmShow(); } if (k === 'end') tmEnd(); });
+        });
         setTool('select'); applyView(); render(); history = [snap()]; hpos = 0; showLock();
         if (!b.data?.view && items.length) fitAll();
         root.focus();
