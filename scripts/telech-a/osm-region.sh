@@ -87,7 +87,14 @@ fi
 jq '.settings.maxzoom = 14 | .settings.name = "LCNDA OSM" | .layers |= with_entries(select((.value.source == null) or ((.value.source|tostring)|test("coastline"))))' \
   "$tm/resources/config-openmaptiles.json" > work/config.json
 rm -f "$out/osm-$region.mbtiles"
-tilemaker --input "work/$region.osm.pbf" --output "$out/osm-$region.mbtiles" --config work/config.json --process "$tm/resources/process-openmaptiles.lua"
+# les extraits d'OpenStreetMap France n'ont pas de cadre dans leur en-tête (« Can't read shapefiles unless a bounding box is
+# provided ») : on le calcule sur les données avec osmium et on le donne à tilemaker
+cadre=()
+if ! osmium fileinfo -g header.boxes "work/$region.osm.pbf" 2>/dev/null | grep -q '('; then
+  bb=$(osmium fileinfo -e -g data.bbox "work/$region.osm.pbf" | tr -d '() ')
+  echo "  cadre calculé : $bb"; [ -n "$bb" ] && cadre=(--bbox "$bb")
+fi
+tilemaker --input "work/$region.osm.pbf" --output "$out/osm-$region.mbtiles" --config work/config.json --process "$tm/resources/process-openmaptiles.lua" "${cadre[@]}"
 today=$(date -u +%F)
 sqlite3 "$out/osm-$region.mbtiles" "INSERT OR REPLACE INTO metadata(name,value) VALUES('lcnda_built','$today'),('lcnda_label','$(printf %s "$label" | sed "s/'/''/g")'),('attribution','© les contributeurs d’OpenStreetMap (ODbL) · schéma OpenMapTiles (CC BY 4.0)');"
 sqlite3 "$out/osm-$region.mbtiles" "SELECT name, value FROM metadata WHERE name IN ('format','bounds','minzoom','maxzoom','lcnda_built','lcnda_label')"

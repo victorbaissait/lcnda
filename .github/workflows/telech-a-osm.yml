@@ -50,7 +50,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y build-essential libboost-dev libboost-filesystem-dev libboost-iostreams-dev libboost-program-options-dev \
-            libboost-system-dev luajit libluajit-5.1-dev libshp-dev libsqlite3-dev rapidjson-dev zlib1g-dev sqlite3 jq unzip
+            libboost-system-dev luajit libluajit-5.1-dev libshp-dev libsqlite3-dev rapidjson-dev zlib1g-dev sqlite3 jq unzip osmium-tool
           git clone --depth 1 --branch v3.0.0 https://github.com/systemed/tilemaker.git "$RUNNER_TEMP/tilemaker"
           make -C "$RUNNER_TEMP/tilemaker" -j"$(nproc)" TM_VERSION=v3.0.0
           sudo make -C "$RUNNER_TEMP/tilemaker" install
