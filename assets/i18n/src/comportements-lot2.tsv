@@ -22,3 +22,12 @@ Colonne « {name} » supprimée ¦ Column “{name}” deleted ¦ Columna «{nam
 🧮 Ouvrir dans le tableur ¦ 🧮 Open in the spreadsheet ¦ 🧮 Abrir en la hoja de cálculo ¦ 🧮 In der Tabelle öffnen ¦ 🧮 Apri nel foglio di calcolo ¦ 🧮 Abrir na folha de cálculo ¦ 🧮 Otwórz w arkuszu ¦ 🧮 Openen in het rekenblad
 mêmes colonnes ¦ same columns ¦ mismas columnas ¦ gleiche Spalten ¦ stesse colonne ¦ mesmas colunas ¦ te same kolumny ¦ dezelfde kolommen
 Toute la liste ¦ The whole list ¦ Toda la lista ¦ Die ganze Liste ¦ Tutto l’elenco ¦ A lista inteira ¦ Cała lista ¦ De hele lijst
+photo cochée ¦ photo ticked ¦ foto marcada ¦ Foto angekreuzt ¦ foto spuntata ¦ foto marcada ¦ zaznaczone zdjęcie ¦ foto aangevinkt
+photos cochées ¦ photos ticked ¦ fotos marcadas ¦ Fotos angekreuzt ¦ foto spuntate ¦ fotos marcadas ¦ zaznaczone zdjęcia ¦ foto’s aangevinkt
+Mettre dans un dossier ¦ Put in a folder ¦ Poner en una carpeta ¦ In einen Ordner legen ¦ Metti in una cartella ¦ Pôr numa pasta ¦ Włóż do folderu ¦ In een map zetten
+Ranger les photos cochées dans un dossier de tri ¦ File the ticked photos in a sorting folder ¦ Guardar las fotos marcadas en una carpeta de clasificación ¦ Die angekreuzten Fotos in einen Sortierordner legen ¦ Riponi le foto spuntate in una cartella di smistamento ¦ Arrumar as fotos marcadas numa pasta de triagem ¦ Odłóż zaznaczone zdjęcia do folderu sortowania ¦ De aangevinkte foto’s in een sorteermap opbergen
+À RANGER ¦ TO FILE ¦ POR ORDENAR ¦ ZU ORDNEN ¦ DA SISTEMARE ¦ POR ARRUMAR ¦ DO UPORZĄDKOWANIA ¦ OP TE BERGEN
+Mettre {n} dans un dossier ¦ Put {n} in a folder ¦ Poner {n} en una carpeta ¦ {n} in einen Ordner legen ¦ Metti {n} in una cartella ¦ Pôr {n} numa pasta ¦ Włóż {n} do folderu ¦ {n} in een map zetten
+Mettre sur une page ¦ Put on a page ¦ Poner en una página ¦ Auf eine Seite legen ¦ Metti su una pagina ¦ Pôr numa página ¦ Umieść na stronie ¦ Op een pagina zetten
+Mettre {n} sur une page ¦ Put {n} on a page ¦ Poner {n} en una página ¦ {n} auf eine Seite legen ¦ Metti {n} su una pagina ¦ Pôr {n} numa página ¦ Umieść {n} na stronie ¦ {n} op een pagina zetten
+Une nouvelle page = une page par photo, dans l’ordre ¦ A new page = one page per photo, in order ¦ Una página nueva = una página por foto, en orden ¦ Eine neue Seite = eine Seite pro Foto, der Reihe nach ¦ Una nuova pagina = una pagina per foto, in ordine ¦ Uma página nova = uma página por foto, por ordem ¦ Nowa strona = jedna strona na zdjęcie, po kolei ¦ Een nieuwe pagina = één pagina per foto, op volgorde

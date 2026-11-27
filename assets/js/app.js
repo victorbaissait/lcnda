@@ -379,6 +379,7 @@
         'genealogie-audio-quick-design','genealogie-audio-fx-presets', // 🎧 ⚡ Son rapide : le design choisi, et les réglages du son enregistrés (heritage-audio-quick.js)
         'genealogie-accord', // ✍️ Accord des mots pour les fiches ni homme ni femme (app-accord.js)
         'genealogie-design-custom-presets','genealogie-avatar-shapes','genealogie-person-header','genealogie-topbar-buttons', // ✎ Mes thèmes (qu’un design peut choisir), formes des avatars, en-tête des fiches
+        'genealogie-arbre-dit', // 🌳 Ce que dit l’arbre : les réglages de chaque carte (app-lot-o-arbre.js)
     ];
     const DEFAULT_PERSON_BADGE_COLORS = {
         // K8 (validé) : bleu plein pour le Sosa, vert vivant, noir décès, jaune à vérifier, gris hors généalogie

@@ -264,8 +264,7 @@
     const picked = () => (st().picked ||= new Set());
     function looseItem(i) {
         const ts = trays(), on = picked().has(i.id);
-        return `<div class="h-rc-loose-item ${on ? 'is-picked' : ''}" data-rc-img="${i.id}" draggable="true">
-            <label class="h-rc-pick" title="Choisir plusieurs photos pour les ranger d’un coup"><input type="checkbox" data-rc-check ${on ? 'checked' : ''}></label>
+        return `<div class="h-rc-loose-item ${on ? 'is-sel' : ''}" data-rc-img="${i.id}" draggable="true">
             <button type="button" class="h-rc-thumb small" data-rc-zoom="${i.id}" title="Voir en grand"><img src="${esc(thumbUrl(i))}" alt="" loading="lazy"></button>
             <small>${esc(versionById(i.version_id)?.name || '')}</small>
             <select data-rc-trayset title="Dossier de tri"><option value="">📂 Sans dossier</option>${ts.map(t => `<option value="${esc(t)}" ${t === i.tray ? 'selected' : ''}>📁 ${esc(t)}</option>`).join('')}<option value="__new">＋ Nouveau dossier…</option></select>
@@ -274,15 +273,11 @@
     function looseHtml(ls) {
         const ts = trays(), o = openTrays(), groups = new Map(ts.map(t => [t, []])), none = [];
         ls.forEach(i => (groups.get(i.tray) || none).push(i));
-        const n = [...picked()].filter(id => ls.some(i => i.id === id)).length;
         const tray = (name, list, k) => `<details class="h-rc-tray" data-rc-tray="${esc(name)}" ${o[name] ? 'open' : ''}><summary draggable="true" title="Glisser pour changer l’ordre des dossiers"><span class="h-rc-tray-grip" aria-hidden="true">⠿</span><span class="h-rc-tray-name">📁 ${esc(name)}</span> <small class="muted">${plural(list.length, 'photo', 'photos')}</small>
                 <span class="h-rc-tray-tools">${ts.length > 1 ? `<button type="button" class="icon-button" data-rc-traymove="-1" ${k ? '' : 'disabled'} title="Monter le dossier">↑</button><button type="button" class="icon-button" data-rc-traymove="1" ${k < ts.length - 1 ? '' : 'disabled'} title="Descendre le dossier">↓</button>` : ''}<button type="button" class="icon-button" data-rc-trayren="${esc(name)}" title="Renommer le dossier">✎</button><button type="button" class="icon-button" data-rc-traydel="${esc(name)}" title="Supprimer le dossier (ses photos restent à ranger)">🗑</button></span></summary>
                 <div class="h-rc-loose-list">${list.map(looseItem).join('') || '<p class="muted">Vide : glisse des photos ici, ou choisis ce dossier sous une photo.</p>'}</div></details>`;
         return `<div class="h-rc-loose maintenance-panel"><div class="h-rc-loose-head"><h3>🧺 À ranger <small class="muted">${ts.length ? i18n('{count} sans page · trie-les d’abord dans des dossiers, puis choisis leur page', {count: plural(ls.length, 'photo', 'photos')}) : i18n('{count} sans page : choisis sa page', {count: plural(ls.length, 'photo', 'photos')})}</small></h3>
-                <span class="h-rc-loose-tools"><button type="button" class="button small secondary" data-rc-traynew>＋ Dossier</button>${ls.length ? `<button type="button" class="button small secondary" data-rc-pickall>${n ? 'Tout décocher' : 'Tout cocher'}</button>` : ''}</span></div>
-            ${n ? `<div class="h-rc-bulk"><strong>${plural(n, 'photo choisie', 'photos choisies')}</strong>
-                <label>Mettre dans <select data-rc-bulktray><option value="">—</option><option value="__none">📂 Sans dossier</option>${ts.map(t => `<option value="${esc(t)}">📁 ${esc(t)}</option>`).join('')}<option value="__new">＋ Nouveau dossier…</option></select></label>
-                <label>Mettre sur ${pageSelect('data-rc-bulkpage', 0, true)}</label><small class="muted">Une nouvelle page = une page par photo, dans l’ordre.</small></div>` : ''}
+                <span class="h-rc-loose-tools"><button type="button" class="button small secondary" data-rc-traynew>＋ Dossier</button></span></div>
             ${ts.map((t, k) => tray(t, groups.get(t), k)).join('')}
             ${none.length || !ts.length ? `<div class="h-rc-tray-none">${ts.length ? '<h4>📂 Sans dossier</h4>' : ''}<div class="h-rc-loose-list" data-rc-tray-drop="">${none.map(looseItem).join('') || '<p class="muted">Toutes les photos sont dans un dossier.</p>'}</div></div>` : ''}</div>`;
     }
@@ -320,7 +315,6 @@
         };
         box.querySelectorAll('details[data-rc-tray]').forEach(d => d.addEventListener('toggle', () => { openTrays()[d.dataset.rcTray] = d.open; }));
         box.querySelector('[data-rc-traynew]').addEventListener('click', async () => { if (await addTray()) paint(); });
-        box.querySelector('[data-rc-pickall]')?.addEventListener('click', () => { const ids = loose().map(i => i.id); if (ids.some(id => picked().has(id))) picked().clear(); else ids.forEach(id => picked().add(id)); paint(); });
         box.querySelectorAll('[data-rc-trayren]').forEach(b => b.addEventListener('click', async e => { e.preventDefault(); const from = b.dataset.rcTrayren, to = await askTrayName('Nouveau nom du dossier :', from); if (!to || to === from) return;
             openTrays()[to] = openTrays()[from]; await run('save_recueil_trays', {recueil_id: D.recueil.id, trays: trays().map(t => t === from ? to : t), rename: {from, to}}, 'Dossier renommé.'); }));
         box.querySelectorAll('[data-rc-traydel]').forEach(b => b.addEventListener('click', async e => { e.preventDefault(); const name = b.dataset.rcTraydel; if (!await A().confirmBox(i18n('Supprimer le dossier « {nm} » ?', {nm: name}) + '\n\n' + i18n('Ses photos restent « à ranger », sans dossier.'), {title: 'Supprimer le dossier', okLabel: 'Supprimer le dossier'})) return;
@@ -328,12 +322,25 @@
         const saveOrder = list => run('save_recueil_trays', {recueil_id: D.recueil.id, trays: list});
         box.querySelectorAll('[data-rc-traymove]').forEach(b => b.addEventListener('click', e => { e.preventDefault(); const name = b.closest('[data-rc-tray]').dataset.rcTray, list = [...trays()], i = list.indexOf(name), j = i + Number(b.dataset.rcTraymove);
             if (i < 0 || j < 0 || j >= list.length) return; [list[i], list[j]] = [list[j], list[i]]; saveOrder(list); }));
-        box.querySelectorAll('[data-rc-check]').forEach(c => c.addEventListener('change', () => { const id = imgId(c); if (c.checked) picked().add(id); else picked().delete(id); paint(); }));
         box.querySelectorAll('[data-rc-trayset]').forEach(sel => sel.addEventListener('change', async () => { let t = sel.value; if (t === '__new') { t = await addTray(); if (!t) { paint(); return; } } setTray([imgId(sel)], t); }));
         box.querySelectorAll('[data-rc-assign]').forEach(sel => sel.addEventListener('change', async () => { const t = await pageTarget(sel.value); if (!t) { sel.value = ''; return; } place([imgId(sel)], t); }));
         const chosen = () => loose().filter(i => picked().has(i.id)).map(i => i.id);
-        box.querySelector('[data-rc-bulktray]')?.addEventListener('change', async e => { let t = e.target.value; if (!t) return; if (t === '__new') { t = await addTray(); if (!t) { paint(); return; } } const ids = chosen(); picked().clear(); setTray(ids, t === '__none' ? '' : t); });
-        box.querySelector('[data-rc-bulkpage]')?.addEventListener('change', async e => { const t = await pageTarget(e.target.value); if (!t) { e.target.value = ''; return; } place(chosen(), t); });
+        // ☑ cocher plusieurs photos : la barre commune (Tout cocher, Maj+clic pour une suite, ✕ Décocher) — app-selection.js
+        if (ext.selectionBar) {
+            const keep = [...picked()];
+            const sel = ext.selectionBar({host: box, rowSelector: '.h-rc-loose-item', idOf: el => el.dataset.rcImg, what: [i18n('photo cochée'), i18n('photos cochées')],
+                place: box.querySelector('.h-rc-loose-head')?.nextElementSibling || null,
+                onChange: ids => { const s = picked(); s.clear(); ids.forEach(x => s.add(Number(x))); },
+                actions: [
+                    {id: 'tray', icon: '📁', label: i18n('Mettre dans un dossier'), help: i18n('Ranger les photos cochées dans un dossier de tri'), edit: true, run: ids => dialog({eyebrow: i18n('À RANGER'), title: i18n('Mettre {n} dans un dossier', {n: plural(ids.length, 'photo', 'photos')}), submitLabel: i18n('Ranger'),
+                        body: `<label>${esc(i18n('Dossier'))}<select name="tray"><option value="__none">📂 ${esc(i18n('Sans dossier'))}</option>${trays().map(t => `<option value="${esc(t)}">📁 ${esc(t)}</option>`).join('')}<option value="__new">＋ ${esc(i18n('Nouveau dossier…'))}</option></select></label>`,
+                        onSubmit: form => { const v = form.querySelector('[name=tray]').value; setTimeout(async () => { let t = v; if (t === '__new') { t = await addTray(); if (!t) return; } picked().clear(); setTray(ids.map(Number), t === '__none' ? '' : t); }, 0); }})},
+                    {id: 'page', icon: '📄', label: i18n('Mettre sur une page'), help: i18n('Une nouvelle page = une page par photo, dans l’ordre'), edit: true, run: ids => dialog({eyebrow: i18n('À RANGER'), title: i18n('Mettre {n} sur une page', {n: plural(ids.length, 'photo', 'photos')}), submitLabel: i18n('Ranger'),
+                        body: `<label>${esc(i18n('Page'))}${pageSelect('name="page"', 0, true)}</label><p class="muted">${esc(i18n('Une nouvelle page = une page par photo, dans l’ordre.'))}</p>`,
+                        onSubmit: form => { const v = form.querySelector('[name=page]').value; setTimeout(async () => { const t = await pageTarget(v); if (t) place(ids.map(Number), t); }, 0); }})},
+                ]});
+            sel?.set(keep.filter(id => loose().some(i => i.id === id)));
+        }
         // Glisser une photo (ou la sélection) sur un dossier
         let dragIds = [], dragTray = null;
         box.querySelectorAll('details[data-rc-tray] > summary').forEach(sm => {

@@ -45,7 +45,7 @@ foreach ($life as [$id, $b, $bp, $d, $dp]) {
 $pdo->exec('INSERT INTO families(id,partner1_id,partner2_id) VALUES(1,8,9),(2,4,5),(3,2,3),(4,15,10),(5,11,20),(6,14,5),(7,1,31)');
 $pdo->exec('INSERT INTO family_children(family_id,child_id,position) VALUES(1,4,0),(1,10,1),(2,2,0),(2,13,1),(4,11,0),(5,3,0),(3,12,0),(3,1,1),(7,30,0)');
 $m = $pdo->prepare("INSERT INTO events(scope,family_id,event_type_id,date_text,year,sort_date,place_id) VALUES('family',?,?,?,?,?,1)");
-foreach ([[1, '1788-11-20'], [2, '1850-06-12'], [3, '1876-03-02'], [4, '1789-12-14'], [5, '1850-02-20'], [6, '1858-01-15'], [7, '2015-06-06']] as [$f, $d]) { $m->execute([$f, $t('MARR'), $d, (int) $d, $d]); }
+foreach ([[1, '1788-11-20'], [2, '1850-06-12'], [3, '1876-03-02'], [4, '1789-12-14'], [5, '1850-02-20'], [6, '1858-01-15'], [7, '1905-06-06']] as [$f, $d]) { $m->execute([$f, $t('MARR'), $d, (int) $d, $d]); }
 $ecols = array_column($pdo->query('PRAGMA table_info(events)')->fetchAll(), 'name');
 if (in_array('signed1', $ecols, true)) {
     $s = $pdo->prepare("UPDATE events SET signed1=?, signed2=? WHERE family_id=? AND scope='family'");

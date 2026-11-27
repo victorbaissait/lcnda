@@ -1,0 +1,81 @@
+/* 🌳 Ce que dit l'arbre (lot O) — assets/js/app-lot-o-arbre.js ; maquette validée docs/design/lot-o.html.
+   Reprend .card, .card-head, .segmented, .ui-toggle, .data-table, .ib de l'app ; ici seulement le reste. Clair et sombre. */
+:root { --lo-orange: #d9480f; --lo-orange-soft: #fff1e8; --lo-green: #1a7f37; --lo-c3: #7048e8; --lo-c4: #9aa0a8; }
+:root[data-theme="dark"] { --lo-orange: #ff8a4c; --lo-orange-soft: #2e1e14; --lo-green: #4cc070; --lo-c3: #b197fc; --lo-c4: #6d737b; }
+.lo-page .lo-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 14px; }
+.lo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr)); gap: 20px; align-items: start; }
+.lo-sec { margin: 28px 0 12px; font-size: 18px; }
+.lo-card { min-width: 0; }
+.lo-card .card-head { display: flex; align-items: center; justify-content: space-between; gap: 8px 10px; flex-wrap: wrap; }
+.lo-card .card-head h3 { margin: 0; font-size: 16px; line-height: 1.25; }
+.lo-card .card-head h3 small { color: var(--muted); font-weight: 400; font-size: 12.5px; }
+.lo-card.is-flash { outline: 3px solid var(--blue, #0066cc); outline-offset: 3px; }
+.lo-body { display: grid; gap: 10px; min-width: 0; }
+.lo-lead { margin: 0; font-size: 15px; line-height: 1.45; overflow-wrap: anywhere; }
+.lo-empty { color: var(--muted); font-size: 14px; }
+.lo-tact { margin: 0; font-size: 12.5px; color: var(--muted); }
+.lo-verdict { margin: 0; border-left: 4px solid var(--lo-orange); background: var(--lo-orange-soft); padding: 8px 10px; font-size: 13.5px; }
+.lo-viz { width: 100%; height: auto; display: block; max-height: 260px; }
+.lo-viz text { font-family: inherit; fill: var(--ink); }
+.lo-viz .lo-mut { fill: var(--muted); }
+.lo-viz .lo-orange { fill: var(--lo-orange); }
+.lo-viz .lo-axis { stroke: var(--line-color, #d6d6d6); stroke-width: 1; }
+.lo-viz .lo-bar { fill: var(--blue, #0066cc); }
+.lo-viz .lo-bar.is-clos { fill: var(--lo-orange); }
+.lo-viz .lo-zone { fill: var(--lo-orange-soft); }
+.lo-viz .lo-dot { fill: var(--blue, #0066cc); stroke: var(--card-bg, #fff); stroke-width: 1.5; opacity: .85; }
+.lo-viz .lo-dot.is-f { fill: var(--lo-orange); }
+.lo-viz .lo-path { fill: none; stroke: var(--blue, #0066cc); stroke-width: 2.5; stroke-dasharray: 6 4; }
+.lo-viz .lo-box { fill: var(--card-bg, #fff); stroke: var(--line-color, #d6d6d6); stroke-width: 1.5; }
+.lo-viz .lo-box.is-hl { fill: var(--blue-soft, #eaf2ff); stroke: var(--blue, #0066cc); }
+.lo-viz .lo-link { stroke: var(--muted); stroke-width: 1.5; }
+.lo-viz .lo-c1, .lo-legend .lo-c1 { fill: var(--lo-green); background: var(--lo-green); }
+.lo-viz .lo-c2, .lo-legend .lo-c2 { fill: var(--blue, #0066cc); background: var(--blue, #0066cc); }
+.lo-viz .lo-c3, .lo-legend .lo-c3 { fill: var(--lo-c3); background: var(--lo-c3); }
+.lo-viz .lo-c4, .lo-legend .lo-c4 { fill: var(--lo-c4); background: var(--lo-c4); }
+.lo-legend { display: flex; flex-wrap: wrap; gap: 4px 12px; margin: 0; font-size: 12px; color: var(--muted); align-items: center; }
+.lo-legend i { display: inline-block; width: 12px; height: 12px; border: 1px solid var(--line-color, #d6d6d6); vertical-align: -2px; margin-right: 4px; }
+.lo-legend i.lo-bar { background: var(--blue, #0066cc); }
+.lo-legend i.lo-bar.is-clos { background: var(--lo-orange); }
+.lo-legend i.lo-zone { background: var(--lo-orange-soft); }
+.lo-more > summary, .lo-perso > summary { cursor: pointer; font-size: 13px; font-weight: 700; }
+.lo-more > summary { color: var(--blue, #0066cc); }
+.lo-more[open] > summary { margin-bottom: 6px; }
+.lo-more p, .lo-more li { font-size: 13px; line-height: 1.45; margin: 0 0 6px; }
+.lo-perso { border: 1.5px solid var(--line-color, #d6d6d6); background: var(--card-head-bg, #fafafa); padding: 7px 10px; }
+.lo-perso[open] > summary { margin-bottom: 6px; }
+.lo-pgrp { border-top: 1px solid var(--line-color, #d6d6d6); }
+.lo-pgrp > summary { cursor: pointer; padding: 7px 2px; font-size: 12.5px; font-weight: 800; }
+.lo-row { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; padding: 2px 2px 9px; font-size: 13px; }
+.lo-set { display: inline-flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; }
+.lo-num { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; }
+.lo-num input { width: 6.5em; min-height: 30px; padding: 3px 7px; border: 2px solid var(--ui-ink, #111); background: var(--ui-bg, #fff); color: var(--ui-ink, #111); font: inherit; font-weight: 700; }
+.lo-date input { width: auto; }
+.lo-answer { margin: 0; font-weight: 700; min-height: 1.2em; }
+.lo-acts { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; justify-content: space-between; border-top: 1px dashed var(--line-color, #d6d6d6); padding-top: 9px; }
+.lo-src { font-size: 12px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: center; min-width: 0; }
+.lo-btns { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.lo-ib { display: inline-flex; align-items: center; justify-content: center; min-width: 30px; height: 28px; border: 1.5px solid var(--line-color, #d6d6d6); background: var(--card-bg, #fff); color: var(--ink); cursor: pointer; padding: 0 4px; font-size: 13px; }
+.lo-ib:hover { border-color: var(--blue, #0066cc); background: var(--blue-soft, #eaf2ff); }
+.lo-chips { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.lo-pchip { display: inline-flex; align-items: center; gap: 6px; border: 2px solid var(--ui-ink, #111); background: var(--ui-bg, #fff); padding: 4px 9px; font-weight: 700; font-size: 13px; max-width: 100%; }
+.lo-pchip small { color: var(--muted); font-weight: 600; }
+.lo-table { font-size: 12.5px; }
+.lo-table .is-hl { background: var(--blue-soft, #eaf2ff); }
+.lo-list { margin: 0; padding-left: 1.2rem; }
+.lo-all h4 { margin: 4px 0 6px; font-size: 13.5px; }
+.lo-sigs { display: flex; flex-wrap: wrap; gap: 10px; align-items: stretch; }
+.lo-sigs.is-col { flex-direction: column; }
+.lo-sig { margin: 0; border: 1.5px solid var(--line-color, #d6d6d6); background: var(--card-bg, #fff); padding: 6px 8px; min-width: 120px; flex: 1 1 140px; display: grid; gap: 4px; }
+.lo-sig.is-no { opacity: .75; }
+.lo-sig-img canvas { max-width: 100%; height: 48px; display: block; background: #fff; }
+.lo-sig-none { font-style: italic; color: var(--muted); font-size: 12.5px; min-height: 48px; display: flex; align-items: center; }
+.lo-sig figcaption { font-size: 12.5px; display: flex; flex-wrap: wrap; gap: 2px 6px; align-items: center; }
+.lo-sig figcaption small { color: var(--muted); }
+.lo-who { font-size: inherit; }
+/* sur la fiche : une phrase dans les blocs qui existent */
+.lo-famline { margin: 6px 0 0; font-size: 13.5px; flex-basis: 100%; }
+.lo-heritage { margin: .4rem 0 0; }
+.lo-heritage > summary { cursor: pointer; font-weight: 700; font-size: 13px; }
+@media (max-width: 560px) { .lo-grid { grid-template-columns: 1fr; } .lo-acts { flex-direction: column; align-items: flex-start; } }
+@media print { .lo-perso, .lo-acts .lo-btns, .lo-bar { display: none !important; } .lo-card { break-inside: avoid; } }
