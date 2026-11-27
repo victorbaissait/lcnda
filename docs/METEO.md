@@ -42,9 +42,12 @@ ERA5 est la « réanalyse » européenne : une estimation du temps partout, heur
 
 1. Va sur <https://cds.climate.copernicus.eu> → « Register » (ou « Login ») : crée ton compte avec ton adresse e-mail.
 2. Une fois connecté, ouvre ta page de profil (ton nom en haut à droite) : tu y trouves ta **clé** (« Personal Access Token », une suite de lettres et de chiffres).
-3. Ouvre les deux pages des données et accepte leur licence (bouton « Accept terms » en bas de l'onglet « Download ») :
+3. Ouvre la page des données et accepte leur licence (bouton « Accept terms » en bas de l'onglet « Download ») :
    - <https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels>
-   - <https://cds.climate.copernicus.eu/datasets/derived-era5-single-levels-daily-statistics>
+
+   (Le programme demande les heures d'ERA5 et calcule lui-même le min., le max. et la moyenne de chaque jour : plusieurs mois
+   par demande, plusieurs demandes à la fois, leur numéro gardé dans `telechargements/era5/era5-demandes.json` — une
+   fabrication coupée les retrouve à la suivante au lieu de refaire la queue.)
 4. Dans le Terminal, crée le fichier de la clé (remplace `TA-CLE` par ta clé) :
 
 ```

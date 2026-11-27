@@ -122,8 +122,7 @@ C20_OPENDAP = 'https://psl.noaa.gov/thredds/dodsC/Datasets/20thC_ReanV3/Dailies/
 C20_HTTP = 'https://downloads.psl.noaa.gov/Datasets/20thC_ReanV3/Dailies/'
 C20_FILES = {'TN': ('2mSI/tmin.2m.{year}.nc', 'tmin'), 'TX': ('2mSI/tmax.2m.{year}.nc', 'tmax'),
              'RR': ('sfcSI/prate.{year}.nc', 'prate'), 'NN': ('miscSI/tcdc.eatm.{year}.nc', 'tcdc')}
-# ERA5 (Copernicus CDS) : bibliothèque cdsapi + clé dans ~/.cdsapirc
-ERA5_DAILY_DATASET = 'derived-era5-single-levels-daily-statistics'
+# ERA5 (Copernicus CDS) : bibliothèque cdsapi (et ecmwf-datastores-client) + clé dans ~/.cdsapirc
 ERA5_HOURLY_DATASET = 'reanalysis-era5-single-levels'
 
 # Les boîtes (nord, ouest, sud, est)
@@ -1591,14 +1590,20 @@ def do_20cr(db, years, boxes, test=False, net=None):
 
 
 def cds_client():
+    """le client du Climate Data Store (bibliothèque ecmwf-datastores-client, installée avec cdsapi) : il sait déposer une
+    demande SANS l'attendre, puis la retrouver par son numéro (même d'une fabrication à l'autre)"""
     try:
-        import cdsapi
+        from ecmwf.datastores import Client
     except ImportError:
-        raise Stop('ERA5 a besoin de la bibliothèque cdsapi : tape « pip3 install cdsapi netCDF4 », crée ton compte Copernicus et ta clé (docs/METEO.md), puis relance (ou ajoute --sans-era5).')
-    try:
-        return cdsapi.Client(quiet=True)
-    except Exception as e:  # noqa: BLE001
-        raise Stop(f'ERA5 : la clé Copernicus manque ou est fausse ({e}). Suis l’étape « Le compte Copernicus » de docs/METEO.md (fichier .cdsapirc).')
+        raise Stop('ERA5 a besoin de la bibliothèque cdsapi (avec ecmwf-datastores-client) : tape « pip3 install cdsapi netCDF4 », crée ton compte Copernicus et ta clé (docs/METEO.md), puis relance (ou ajoute --sans-era5).')
+    import meteo_plus as P
+    url, key = P.read_rc()
+    if not key:
+        raise Stop('ERA5 : la clé Copernicus manque. Suis l’étape « Le compte Copernicus » de docs/METEO.md (fichier .cdsapirc).')
+    try:  # quelques essais seulement en cas de panne du serveur : la boucle des demandes réessaie d'elle-même plus tard
+        return Client(url=url, key=key, progress=False, maximum_tries=6, retry_after=30, sleep_max=60)
+    except Exception as e:  # noqa: BLE001 — le message ne contient jamais la clé
+        raise Stop(f'ERA5 : la clé Copernicus manque ou est fausse ({type(e).__name__}). Suis l’étape « Le compte Copernicus » de docs/METEO.md (fichier .cdsapirc).')
 
 
 def nc_var(ds, *names):
@@ -1608,16 +1613,254 @@ def nc_var(ds, *names):
     raise Stop('ERA5 : variable introuvable (' + ', '.join(names) + ') — le format de Copernicus a peut-être changé.')
 
 
-def do_era5(db, years, box, boxes, cache, hours_step=6, test=False):
-    """ERA5 : chaque jour (min, max, pluie, rafales, nuages, neige) et des heures (toutes les hours_step heures), carreaux sur terre seulement"""
+# ERA5 : les heures de « reanalysis-era5-single-levels » (rapide à servir), les statistiques du jour calculées ici
+# (min., max., moyenne des 24 heures 00–23 UTC : exactement ce que fait « derived-era5-single-levels-daily-statistics »,
+# dont chaque demande attendait des heures dans la file de Copernicus).
+ERA5_VARS = {'t2m': ('2m_temperature', ('t2m',)), 'fg': ('10m_wind_gust_since_previous_post_processing', ('fg10', 'i10fg')),
+             'tp': ('total_precipitation', ('tp',)), 'tcc': ('total_cloud_cover', ('tcc',)), 'sf': ('snowfall', ('sf',))}
+ERA5_DAILY = (('TN', 't2m', 'min'), ('TX', 't2m', 'max'), ('FX', 'fg', 'max'), ('RR', 'tp', 'mean'), ('SN', 'sf', 'mean'), ('NN', 'tcc', 'mean'))
+ERA5_HOURLY = (('T', 't2m'), ('RR', 'tp'), ('FX', 'fg'), ('NN', 'tcc'))
+ERA5_STATE = 'era5-demandes.json'
+
+
+class Era5Queue:
+    """les demandes ERA5 déposées chez Copernicus, sans les attendre une à une :
+    - leur numéro est écrit dans <cache>/era5-demandes.json dès le dépôt : une fabrication coupée (6 h de GitHub) les retrouve
+      à la suivante, déjà avancées ou finies dans la file, au lieu de les redéposer en dernière position ;
+    - au plus `in_flight` demandes à la fois ; une demande encore en file après `stale_s` ne garde plus sa place : la suivante
+      part quand même (au plus `in_flight_max` en tout) ;
+    - toutes les `log_s` secondes, une ligne dit où en est chaque demande (en file / en cours, depuis combien de temps) ;
+    - « trop gros » pour Copernicus → les demandes suivantes portent sur moins de mois."""
+
+    def __init__(self, client, cache, months_per=3, in_flight=6, in_flight_max=12, stale_s=90 * 60, poll_s=60, log_s=600,
+                 clock=time.time, sleep=time.sleep):
+        self.c, self.cache = client, cache
+        self.in_flight, self.in_flight_max, self.stale_s, self.poll_s, self.log_s = in_flight, in_flight_max, stale_s, poll_s, log_s
+        self.clock, self.sleep = clock, sleep
+        self.path = os.path.join(cache, ERA5_STATE)
+        st = {}
+        if os.path.exists(self.path):
+            try:
+                with open(self.path, encoding='utf-8') as f:
+                    st = json.load(f)
+            except (OSError, ValueError):
+                st = {}
+        self.months_per = int(st.get('mois') or months_per)
+        self.jobs = st.get('demandes') or {}   # étiquette → {id, depuis, jeu, annee, mois}
+        self.tries = st.get('essais') or {}    # étiquette → combien de fois déposée (oublié une fois le fichier reçu)
+        self.remotes, self.status, self.last_log = {}, {}, 0.0
+
+    def save(self):
+        tmp = self.path + '.part'
+        with open(tmp, 'w', encoding='utf-8') as f:
+            json.dump({'mois': self.months_per, 'demandes': self.jobs, 'essais': self.tries}, f, indent=1)
+        os.replace(tmp, self.path)
+
+    def submit(self, label, dataset, req, extra=None):
+        r = self.c.submit(dataset, req)
+        self.jobs[label] = dict(extra or {}, id=r.request_id, depuis=self.clock(), jeu=dataset)
+        self.tries[label] = self.tries.get(label, 0) + 1
+        self.remotes[label] = r
+        self.status[label] = 'accepted'
+        self.save()
+        say(f'     ERA5 {label} : demande déposée chez Copernicus')
+
+    def remote(self, label):
+        if label not in self.remotes:
+            self.remotes[label] = self.c.get_remote(self.jobs[label]['id'])
+        return self.remotes[label]
+
+    def forget(self, label, done=False):
+        if done:
+            self.tries.pop(label, None)
+        self.jobs.pop(label, None)
+        self.remotes.pop(label, None)
+        self.status.pop(label, None)
+        self.save()
+
+    def active(self):
+        """les demandes qui comptent pour une place : en cours chez Copernicus, ou en file depuis moins de stale_s"""
+        now = self.clock()
+        return [k for k, j in self.jobs.items() if self.status.get(k) == 'running' or now - j['depuis'] < self.stale_s]
+
+    def has_room(self):
+        return len(self.jobs) < self.in_flight_max and len(self.active()) < self.in_flight
+
+    def poll(self, label):
+        """→ 'successful' / 'accepted' / 'running' / 'gone' (à redéposer) / ('failed', message)"""
+        try:
+            r = self.remote(label)
+            s = r.status
+        except Exception as e:  # noqa: BLE001
+            code = getattr(getattr(e, 'response', None), 'status_code', None)
+            if code in (404, 410):
+                return 'gone'
+            say(f'     ERA5 {label} : Copernicus ne répond pas ({type(e).__name__}) — on réessaiera')
+            self.remotes.pop(label, None)
+            return self.status.get(label, 'accepted')
+        self.status[label] = s
+        if s in ('failed', 'rejected'):
+            try:
+                r.results_ready
+                msg = s
+            except Exception as e:  # noqa: BLE001
+                msg = str(e)
+            return ('failed', msg)
+        if s in ('dismissed', 'deleted'):
+            return 'gone'
+        return s
+
+    def download(self, label, target):
+        r = self.remote(label)
+        r.download(target + '.part')
+        os.replace(target + '.part', target)
+        try:  # le résultat est chez nous : Copernicus peut l'effacer
+            r.delete()
+        except Exception:  # noqa: BLE001
+            pass
+
+    def report(self, force=False):
+        now = self.clock()
+        if not self.jobs or (not force and now - self.last_log < self.log_s):
+            return
+        self.last_log = now
+        words = {'accepted': 'en file', 'running': 'en cours', 'successful': 'prête'}
+        parts = [f'{k} {words.get(self.status.get(k, "accepted"), self.status.get(k))} ({int((now - j["depuis"]) // 60)} min)'
+                 for k, j in sorted(self.jobs.items())]
+        say('     ERA5 chez Copernicus : ' + ' · '.join(parts))
+
+    def wait_one(self, label, dataset, req, target):
+        """une petite demande attendue tout de suite (la carte terre/mer), avec la même reprise par numéro"""
+        while not os.path.exists(target):
+            if label not in self.jobs:
+                self.submit(label, dataset, req)
+            s = self.poll(label)
+            if s == 'successful':
+                self.download(label, target)
+                self.forget(label, done=True)
+            elif s == 'gone':
+                self.forget(label)
+            elif isinstance(s, tuple):
+                raise Stop(f'ERA5 : Copernicus refuse la demande {label} : {s[1]}')
+            else:
+                self.report()
+                self.sleep(self.poll_s)
+
+
+def era5_month_groups(months, per):
+    """[1..12], 3 → [[1,2,3],[4,5,6],…] (des mois qui se suivent)"""
+    out, cur = [], []
+    for m in months:
+        if cur and (m != cur[-1] + 1 or len(cur) >= per):
+            out.append(cur)
+            cur = []
+        cur.append(m)
+    if cur:
+        out.append(cur)
+    return out
+
+
+def era5_label(y, ms):
+    return f'{y}-{ms[0]:02d}-{ms[-1]:02d}'
+
+
+def era5_reduce(nc, raw, y, ms, pts, nlat, nlon, hours_step, out):
+    """un fichier reçu (des mois d'une année, toutes les heures) → pour les carreaux gardés : les 6 valeurs de chaque jour et les
+    4 valeurs toutes les hours_step heures, dans <out> (.npz, quelques Mo) ; le gros fichier est ensuite effacé"""
+    import numpy as np
+    import warnings
+    import meteo_plus as P
+    t0 = datetime.datetime(y, ms[0], 1)
+    t1 = datetime.datetime(y + 1, 1, 1) if ms[-1] == 12 else datetime.datetime(y, ms[-1] + 1, 1)
+    nh = int((t1 - t0).total_seconds() // 3600)
+    A, Bx = np.array([p[0] for p in pts], dtype=int), np.array([p[1] for p in pts], dtype=int)
+    got = {k: np.full((nh, len(pts)), np.nan, dtype='f4') for k in ERA5_VARS}
+    seen = set()
+    files = [f for f in P.unpack(raw, raw + '.d') if f.lower().endswith('.nc') or not os.path.splitext(f)[1]]
+    for fp in files:
+        ds = nc.Dataset(fp)
+        try:
+            tv = next((ds.variables[n] for n in ('valid_time', 'time') if n in ds.variables), None)
+            if tv is None:
+                raise Stop('ERA5 : pas d’axe du temps dans le fichier reçu — le format de Copernicus a peut-être changé.')
+            times = nc.num2date(tv[:], tv.units, getattr(tv, 'calendar', 'standard'), only_use_cftime_datetimes=False, only_use_python_datetimes=True)
+            idx = np.array([int(round((datetime.datetime(t.year, t.month, t.day, t.hour) - t0).total_seconds() / 3600)) for t in times], dtype=int)
+            ok = (idx >= 0) & (idx < nh)
+            for k, (_, names) in ERA5_VARS.items():
+                v = next((ds.variables[n] for n in names if n in ds.variables), None)
+                if v is None:
+                    continue
+                if len(ds.variables[next(n for n in ('latitude', 'lat') if n in ds.variables)]) != nlat or \
+                        len(ds.variables[next(n for n in ('longitude', 'lon') if n in ds.variables)]) != nlon:
+                    raise Stop('ERA5 : la grille reçue n’est pas celle de la carte terre/mer — le format de Copernicus a peut-être changé.')
+                a = np.ma.filled(v[:].astype('f4'), np.nan)
+                if a.ndim == 4:  # ancien format : une dimension « expver » (ERA5 / ERA5T) → la valeur présente
+                    b = a[:, 0]
+                    for e in range(1, a.shape[1]):
+                        b = np.where(np.isnan(b), a[:, e], b)
+                    a = b
+                got[k][idx[ok]] = a[ok][:, A, Bx]
+                seen.add(k)
+        finally:
+            ds.close()
+    miss = [ERA5_VARS[k][0] for k in ERA5_VARS if k not in seen]
+    if miss:
+        raise Stop('ERA5 : variable introuvable dans le fichier reçu (' + ', '.join(miss) + ') — le format de Copernicus a peut-être changé.')
+    nd = nh // 24
+    with warnings.catch_warnings():
+        warnings.simplefilter('ignore', RuntimeWarning)  # un jour sans aucune valeur → NaN (écrit « pas de valeur »)
+        f = {'min': np.nanmin, 'max': np.nanmax, 'mean': np.nanmean}
+        daily = np.stack([f[op](got[k].reshape(nd, 24, len(pts)), axis=1) for _, k, op in ERA5_DAILY]).astype('f4')
+    hourly = np.stack([got[k][::hours_step] for _, k in ERA5_HOURLY]).astype('f4')
+    with open(out + '.part', 'wb') as fh:
+        np.savez_compressed(fh, daily=daily, hourly=hourly, months=np.array(ms))
+    os.replace(out + '.part', out)
+    shutil.rmtree(raw + '.d', ignore_errors=True)
+    os.remove(raw)
+
+
+def era5_write_year(db, y, ids, parts, hours_step, test):
+    """les morceaux réduits d'une année (dans l'ordre des mois) → les blocs du jour et des heures de chaque carreau"""
+    import numpy as np
+    daily = np.concatenate([p['daily'] for p in parts], axis=1)
+    hourly = np.concatenate([p['hourly'] for p in parts], axis=1)
+    nd = daily.shape[1]
+    nrows = F.days_in_year(y) if not test else nd
+    hrows = nrows * (24 // hours_step)
+    conv_d = {'TN': lambda v: (v - 273.15) * 10, 'TX': lambda v: (v - 273.15) * 10, 'FX': lambda v: v * 10,
+              'RR': lambda v: v * 24 * 1000 * 10, 'SN': lambda v: v * 24 * 1000 / 10, 'NN': lambda v: v * 100}
+    conv_h = {'T': lambda v: (v - 273.15) * 10, 'RR': lambda v: v * 1000 * 10 * hours_step, 'FX': lambda v: v * 10, 'NN': lambda v: v * 100}
+    D = {c: np.rint(conv_d[c](daily[i].astype('f8'))) for i, (c, _, _) in enumerate(ERA5_DAILY)}
+    H = {c: np.rint(conv_h[c](hourly[i].astype('f8'))) for i, (c, _) in enumerate(ERA5_HOURLY)}
+    order = {'TN': 0, 'TX': 1, 'RR': 2, 'SN': 3, 'FX': 4, 'NN': 5}  # l'ordre des colonnes d'avant
+    col = lambda arr, j, n: ([None if x != x else int(x) for x in arr[:, j].tolist()] + [None] * n)[:n]
+    for j, gid in enumerate(ids):
+        d = [(c, col(D[c], j, nrows)) for c in sorted(D, key=order.get)]
+        db.execute('INSERT OR REPLACE INTO grid_daily(grid_id, annee, blob) VALUES(?,?,?)', (gid, y, F.encode(d)))
+        h = [(c, col(H[c], j, hrows)) for c, _ in ERA5_HOURLY]
+        db.execute('INSERT OR REPLACE INTO grid_hourly(grid_id, annee, blob) VALUES(?,?,?)', (gid, y, F.encode(h, step=hours_step)))
+    db.execute("UPDATE grid SET debut=MIN(COALESCE(debut, ?), ?), fin=MAX(COALESCE(fin, ?), ?), heures_debut=MIN(COALESCE(heures_debut, ?), ?) WHERE source='era5'", (y, y, y, y, y, y))
+    F.set_meta(db, **{f'era5-{y}': 'ok'})
+    db.commit()
+
+
+def do_era5(db, years, box, boxes, cache, hours_step=6, test=False, client=None, queue_opts=None):
+    """ERA5 : chaque jour (min, max, pluie, rafales, nuages, neige) et des heures (toutes les hours_step heures), carreaux sur terre
+    seulement. Les heures de plusieurs mois et des 5 variables viennent d'une seule demande ; plusieurs demandes attendent en même
+    temps chez Copernicus ; chaque année finie est rangée tout de suite et ses fichiers effacés (rien n'est redemandé)."""
+    import glob as _glob
+    import numpy as np
+    import meteo_plus as P
     nc = need_netcdf('ERA5')
-    c = cds_client()
     os.makedirs(cache, exist_ok=True)
+    big = (box[0] - box[2]) * (box[3] - box[1]) > 400 or hours_step == 1  # le pack Europe : un mois par demande
+    q = Era5Queue(client or cds_client(), cache, **dict({'months_per': 1 if big else 3}, **(queue_opts or {})))
     area = [box[0], box[1], box[2], box[3]]
+    for old in _glob.glob(os.path.join(cache, 'era5-*-daily_*.nc')) + _glob.glob(os.path.join(cache, 'era5-*-heures*.nc')):
+        os.remove(old)  # les fichiers de l'ancienne façon (une demande par statistique du jour) : plus lus
     lsm_p = os.path.join(cache, 'era5-lsm.nc')
-    if not os.path.exists(lsm_p):
-        c.retrieve(ERA5_HOURLY_DATASET, {'product_type': ['reanalysis'], 'variable': ['land_sea_mask', 'geopotential'], 'year': ['2000'], 'month': ['01'], 'day': ['01'],
-                                         'time': ['00:00'], 'area': area, 'data_format': 'netcdf', 'download_format': 'unarchived'}, lsm_p)
+    q.wait_one('terre-mer', ERA5_HOURLY_DATASET, {'product_type': ['reanalysis'], 'variable': ['land_sea_mask', 'geopotential'], 'year': ['2000'], 'month': ['01'],
+                                                        'day': ['01'], 'time': ['00:00'], 'area': area, 'data_format': 'netcdf', 'download_format': 'unarchived'}, lsm_p)
     ds = nc.Dataset(lsm_p)
     lats = [float(x) for x in nc_var(ds, 'latitude', 'lat')[:]]
     lons = [float(x) for x in nc_var(ds, 'longitude', 'lon')[:]]
@@ -1626,71 +1869,110 @@ def do_era5(db, years, box, boxes, cache, hours_step=6, test=False):
     keep = [(a, b) for a in range(len(lats)) for b in range(len(lons)) if float(lsm[a, b]) > 0.2 and in_boxes(lats[a], lons[b], boxes)]
     ds.close()
     g = Grid(db, 'era5', 0.25)
-    ids = {(a, b): g.id(lats[a], lons[b], round(float(zz[a, b]) / 9.80665)) for a, b in keep}
+    ids = [g.id(lats[a], lons[b], round(float(zz[a, b]) / 9.80665)) for a, b in keep]
     say(f'   • ERA5 : {len(ids)} carreaux sur terre')
-    for y in range(max(1940, years[0]), min(years[1], datetime.date.today().year - 1) + 1):
-        if db.execute('SELECT 1 FROM meta WHERE key=?', (f'era5-{y}',)).fetchone():
-            continue
-        months = ['01'] if test else [f'{m:02d}' for m in range(1, 13)]
-        # une demande par variable (Copernicus refuse « cost limits exceeded » quand une demande d'un an en porte plusieurs)
-        opened = {}
-        def era5_get(dataset, stat, var, base):
-            old = os.path.join(cache, f'era5-{y}-{stat}.nc')
-            if os.path.exists(old):  # fichier d'avant (plusieurs variables d'un coup), déjà téléchargé
-                return old
-            p = os.path.join(cache, f'era5-{y}-{stat}-{var}.nc')
-            if not os.path.exists(p):
-                say(f'     ERA5 {y} : {stat} · {var}… (la file d’attente de Copernicus peut prendre du temps)')
-                c.retrieve(dataset, dict(base, variable=[var]), p + '.part')
-                os.replace(p + '.part', p)
-            return p
-        def era5_var(paths, *names):
-            for p in paths:
-                if p not in opened:
-                    opened[p] = nc.Dataset(p)
-                for n in names:
-                    if n in opened[p].variables:
-                        return opened[p].variables[n][:]
-            raise Stop('ERA5 : variable introuvable (' + ', '.join(names) + ') — le format de Copernicus a peut-être changé.')
-        days = [f'{d:02d}' for d in range(1, 32)]
-        dbase = lambda stat: {'product_type': 'reanalysis', 'year': str(y), 'month': months, 'day': days, 'daily_statistic': stat,
-                              'time_zone': 'utc+00:00', 'frequency': '1_hourly', 'area': area}
-        files = {}
-        for stat, vars_ in (('daily_minimum', ['2m_temperature']), ('daily_maximum', ['2m_temperature', '10m_wind_gust_since_previous_post_processing']),
-                            ('daily_mean', ['total_precipitation', 'total_cloud_cover', 'snowfall'])):
-            files[stat] = list(dict.fromkeys(era5_get(ERA5_DAILY_DATASET, stat, v, dbase(stat)) for v in vars_))
-        hbase = {'product_type': ['reanalysis'], 'year': [str(y)], 'month': months, 'day': days, 'time': [f'{h:02d}:00' for h in range(0, 24, hours_step)],
-                 'area': area, 'data_format': 'netcdf', 'download_format': 'unarchived'}
-        hold = os.path.join(cache, f'era5-{y}-heures.nc')
-        hfiles = [hold] if os.path.exists(hold) else list(dict.fromkeys(era5_get(ERA5_HOURLY_DATASET, 'heures', v, hbase) for v in
-                                                                          ['2m_temperature', 'total_precipitation', '10m_wind_gust_since_previous_post_processing', 'total_cloud_cover']))
-        tn, tx = era5_var(files['daily_minimum'], 't2m'), era5_var(files['daily_maximum'], 't2m')
-        fx = era5_var(files['daily_maximum'], 'fg10', 'i10fg')
-        tp, tcc, sf = era5_var(files['daily_mean'], 'tp'), era5_var(files['daily_mean'], 'tcc'), era5_var(files['daily_mean'], 'sf')
-        ht, hrr, hfx, hnn = era5_var(hfiles, 't2m'), era5_var(hfiles, 'tp'), era5_var(hfiles, 'fg10', 'i10fg'), era5_var(hfiles, 'tcc')
-        nd = tn.shape[0]
-        nrows = F.days_in_year(y) if not test else nd
-        for (a, b), gid in ids.items():
-            pad = lambda xs: xs + [None] * (nrows - len(xs))
-            daily = [('TN', pad([int(round((float(v) - 273.15) * 10)) for v in tn[:, a, b]])), ('TX', pad([int(round((float(v) - 273.15) * 10)) for v in tx[:, a, b]])),
-                     ('RR', pad([int(round(float(v) * 24 * 1000 * 10)) for v in tp[:, a, b]])), ('SN', pad([int(round(float(v) * 24 * 1000 / 10)) for v in sf[:, a, b]])),
-                     ('FX', pad([int(round(float(v) * 10)) for v in fx[:, a, b]])), ('NN', pad([int(round(float(v) * 100)) for v in tcc[:, a, b]]))]
-            db.execute('INSERT OR REPLACE INTO grid_daily(grid_id, annee, blob) VALUES(?,?,?)', (gid, y, F.encode(daily)))
-            per = 24 // hours_step
-            hrows = nrows * per
-            hp = lambda xs: xs + [None] * (hrows - len(xs))
-            hourly = [('T', hp([int(round((float(v) - 273.15) * 10)) for v in ht[:, a, b]])), ('RR', hp([int(round(float(v) * 1000 * 10 * hours_step)) for v in hrr[:, a, b]])),
-                      ('FX', hp([int(round(float(v) * 10)) for v in hfx[:, a, b]])), ('NN', hp([int(round(float(v) * 100)) for v in hnn[:, a, b]]))]
-            db.execute('INSERT OR REPLACE INTO grid_hourly(grid_id, annee, blob) VALUES(?,?,?)', (gid, y, F.encode(hourly, step=hours_step)))
-        for d in opened.values():
-            d.close()
-        db.execute("UPDATE grid SET debut=MIN(COALESCE(debut, ?), ?), fin=MAX(COALESCE(fin, ?), ?), heures_debut=MIN(COALESCE(heures_debut, ?), ?) WHERE source='era5'", (y, y, y, y, y, y))
-        F.set_meta(db, **{f'era5-{y}': 'ok'})
-        db.commit()
-        say(f'   • ERA5 {y}')
-        if test:
-            break
+    first, last = max(1940, years[0]), min(years[1], datetime.date.today().year - 1)
+    todo = [y for y in range(first, last + 1) if not db.execute('SELECT 1 FROM meta WHERE key=?', (f'era5-{y}',)).fetchone()]
+    if test:
+        todo = todo[:1]
+    say(f'   ERA5 : {plural(len(todo), "année")} à faire ({first}–{last}), {q.months_per} mois par demande, {q.in_flight} demandes à la fois')
+    all_months = [1] if test else list(range(1, 13))
+    days = [f'{d:02d}' for d in range(1, 32)]
+    hours = [f'{h:02d}:00' for h in range(24)]
 
+    def reduced(y):
+        """les morceaux déjà réduits d'une année : {premier mois: (mois, fichier)}"""
+        out = {}
+        for p in _glob.glob(os.path.join(cache, f'era5-{y}-??-??.npz')):
+            m0, m1 = (int(x) for x in os.path.basename(p)[10:15].split('-'))
+            out[m0] = (list(range(m0, m1 + 1)), p)
+        return out
+
+    def plan():
+        """les morceaux qui restent à demander, dans l'ordre des années"""
+        asked = {(j['annee'], m) for j in q.jobs.values() if 'annee' in j for m in j['mois']}
+        out = []
+        for y in todo:
+            have = {m for ms, _ in reduced(y).values() for m in ms}
+            left = [m for m in all_months if m not in have and (y, m) not in asked]
+            out += [(y, ms) for ms in era5_month_groups(left, q.months_per)]
+        return out
+
+    def finish_years():
+        for y in list(todo):
+            parts = reduced(y)
+            if sorted(m for ms, _ in parts.values() for m in ms) != all_months:
+                continue
+            loaded = []
+            for m0 in sorted(parts):
+                with np.load(parts[m0][1]) as z:
+                    loaded.append({'daily': z['daily'], 'hourly': z['hourly']})
+            era5_write_year(db, y, ids, loaded, hours_step, test)
+            for _, p in parts.values():
+                os.remove(p)
+            todo.remove(y)
+            say(f'   • ERA5 {y} ({plural(len(todo), "année")} encore)')
+
+    finish_years()
+    while todo:
+        busy = False
+        for y, ms in plan():
+            if not q.has_room():
+                break
+            req = {'product_type': ['reanalysis'], 'variable': [v for v, _ in ERA5_VARS.values()], 'year': [str(y)], 'month': [f'{m:02d}' for m in ms],
+                   'day': days, 'time': hours, 'area': area, 'data_format': 'netcdf', 'download_format': 'unarchived'}
+            try:
+                q.submit(era5_label(y, ms), ERA5_HOURLY_DATASET, req, {'annee': y, 'mois': ms})
+            except Exception as e:  # noqa: BLE001 — Copernicus peut refuser dès le dépôt (« cost limits exceeded »)
+                msg = f'{e} {getattr(getattr(e, "response", None), "text", "") or ""}'
+                if P.TOO_LARGE.search(msg) and q.months_per > 1:
+                    q.months_per = max(1, q.months_per // 2)
+                    q.save()
+                    say(f'     ERA5 {era5_label(y, ms)} : « trop gros » pour Copernicus → {q.months_per} mois par demande désormais')
+                    busy = True
+                elif P.TOO_LARGE.search(msg):
+                    raise Stop(f'ERA5 : Copernicus refuse même un mois de demande ({era5_label(y, ms)}) : {msg.strip()[:300]}')
+                else:
+                    say(f'     ERA5 {era5_label(y, ms)} : dépôt impossible pour l’instant ({type(e).__name__}) — on réessaiera')
+                break
+            busy = True
+        for label in sorted(q.jobs):
+            j = q.jobs[label]
+            if 'annee' not in j:
+                continue
+            s = q.poll(label)
+            if s == 'successful':
+                raw = os.path.join(cache, f'era5-{label}.nc')
+                say(f'     ERA5 {label} : prête, téléchargement…')
+                try:
+                    q.download(label, raw)
+                except Exception as e:  # noqa: BLE001 — coupure : le résultat reste chez Copernicus, on le reprendra
+                    say(f'     ERA5 {label} : téléchargement interrompu ({type(e).__name__}) — on réessaiera')
+                    q.remotes.pop(label, None)
+                    continue
+                era5_reduce(nc, raw, j['annee'], j['mois'], keep, len(lats), len(lons), hours_step, os.path.join(cache, f'era5-{label}.npz'))
+                q.forget(label, done=True)
+                finish_years()
+                busy = True
+            elif s == 'gone':
+                say(f'     ERA5 {label} : Copernicus ne la connaît plus — redemandée')
+                q.forget(label)
+                busy = True
+            elif isinstance(s, tuple):
+                msg = s[1].strip().splitlines()[0][:300] if s[1].strip() else 'échec'
+                if P.TOO_LARGE.search(s[1]) and q.months_per > 1:
+                    q.months_per = max(1, q.months_per // 2)
+                    say(f'     ERA5 {label} : « trop gros » pour Copernicus → {q.months_per} mois par demande désormais')
+                elif q.tries.get(label, 1) >= 3:
+                    q.save()
+                    raise Stop(f'ERA5 : Copernicus refuse la demande {label} trois fois : {msg}')
+                else:
+                    say(f'     ERA5 {label} : échec chez Copernicus ({msg}) — redemandée plus tard')
+                q.forget(label)
+                busy = True
+        q.report()
+        if not busy:
+            q.sleep(q.poll_s)
 
 # ═══════════════════════ Les altitudes (Copernicus DEM GLO-90 → grille de 30″) ═══════════════════════
 import struct  # noqa: E402

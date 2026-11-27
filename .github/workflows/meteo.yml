@@ -57,8 +57,10 @@ jobs:
         with:
           python-version: '3.12'
 
+      # ecmwf-datastores-client (installé avec cdsapi) : les demandes ERA5 sont déposées sans attendre et retrouvées par leur
+      # numéro d'une fabrication à l'autre (meteo-sortie/telechargements/era5/era5-demandes.json)
       - name: Bibliothèques (20CR, ERA5)
-        run: pip install netCDF4 cdsapi
+        run: pip install netCDF4 'cdsapi>=0.7.4,<0.8' 'ecmwf-datastores-client>=0.4,<0.7'
 
       # ERA5 (Copernicus, 1940 → aujourd'hui) seulement si la clé est dans les secrets du dépôt (Settings → Secrets → Actions →
       # CDSAPI_KEY) ; sans elle : --sans-era5. La clé n'est jamais écrite dans le journal.
@@ -79,7 +81,7 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: meteo-sortie
-          key: meteo-${{ steps.q.outputs.quoi }}-${{ github.run_id }}
+          key: meteo-${{ steps.q.outputs.quoi }}-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: meteo-${{ steps.q.outputs.quoi }}-
 
       - name: Fabriquer (5 h 20 au plus ; la suite à la prochaine fois)
@@ -97,7 +99,7 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: meteo-sortie
-          key: meteo-${{ steps.q.outputs.quoi }}-${{ github.run_id }}
+          key: meteo-${{ steps.q.outputs.quoi }}-${{ github.run_id }}-${{ github.run_attempt }}
 
       - name: Déposer le pack dans la version « meteo-donnees »
         if: steps.build.outputs.fini == 'oui'

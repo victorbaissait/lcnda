@@ -303,5 +303,195 @@ class Build(unittest.TestCase):
             shutil.rmtree(tmp, ignore_errors=True)
 
 
+def read_json(p):
+    with open(p, encoding='utf-8') as f:
+        return json.load(f)
+
+
+class FakeRemote:
+    """une demande chez un faux Copernicus : « accepted » pendant `wait` relectures, puis « successful » (ou « failed »)"""
+
+    def __init__(self, cds, rid, dataset, req, wait):
+        self.cds, self.request_id, self.dataset, self.req, self.wait = cds, rid, dataset, req, wait
+
+    @property
+    def status(self):
+        self.cds.polls += 1
+        if self.wait is None:
+            return 'accepted'  # coincée dans la file
+        if self.wait > 0:
+            self.wait -= 1
+            return 'accepted' if self.wait > 1 else 'running'
+        return 'successful'
+
+    @property
+    def results_ready(self):
+        return self.status == 'successful'
+
+    def download(self, target):
+        self.cds.downloads.append(self.request_id)
+        self.cds.write(self.req, target)
+        return target
+
+    def delete(self):
+        self.cds.deleted.append(self.request_id)
+
+
+class FakeCDS:
+    """un faux client ecmwf.datastores : fabrique des NetCDF au format du nouveau CDS (valid_time, latitude, longitude) ;
+    les variables instantanées et cumulées arrivent dans deux fichiers d'un zip, comme chez Copernicus"""
+    LAT, LON = [51.0, 50.75, 50.5], [2.0, 2.25, 2.5]
+
+    def __init__(self, stuck=(), too_large_over=None, wait=2):
+        self.remotes, self.submitted, self.downloads, self.deleted, self.polls = {}, [], [], [], 0
+        self.stuck, self.too_large_over, self.wait = set(stuck), too_large_over, wait
+
+    def submit(self, dataset, req):
+        if self.too_large_over and len(req['month']) > self.too_large_over:
+            raise RuntimeError('400 Client Error: cost limits exceeded — Your request is too large, please reduce your selection.')
+        rid = f'id-{len(self.submitted)}'
+        key = (req['year'][0], req['month'][0])
+        self.submitted.append((dataset, tuple(req['variable']), req['year'][0], tuple(req['month'])))
+        self.remotes[rid] = FakeRemote(self, rid, dataset, req, None if key in self.stuck else 0 if 'land_sea_mask' in req['variable'] else self.wait)
+        return self.remotes[rid]
+
+    def get_remote(self, rid):
+        return self.remotes[rid]
+
+    def write(self, req, target):
+        import datetime as dt
+        import zipfile
+        import netCDF4
+        import numpy as np
+        y = int(req['year'][0])
+        if 'land_sea_mask' in req['variable']:
+            times = [dt.datetime(2000, 1, 1)]
+        else:
+            ms = [int(m) for m in req['month']]
+            t0 = dt.datetime(y, ms[0], 1)
+            t1 = dt.datetime(y + 1, 1, 1) if ms[-1] == 12 else dt.datetime(y, ms[-1] + 1, 1)
+            times = [t0 + dt.timedelta(hours=h) for h in range(int((t1 - t0).total_seconds() // 3600))]
+        hrs = np.array([t.hour for t in times], dtype='f4')[:, None, None] * np.ones((1, 3, 3), dtype='f4')
+
+        def one(path, names):
+            ds = netCDF4.Dataset(path, 'w')
+            ds.createDimension('valid_time', len(times))
+            ds.createDimension('latitude', 3)
+            ds.createDimension('longitude', 3)
+            tv = ds.createVariable('valid_time', 'i8', ('valid_time',))
+            tv.units = 'seconds since 1970-01-01'
+            tv[:] = netCDF4.date2num(times, tv.units)
+            ds.createVariable('latitude', 'f8', ('latitude',))[:] = self.LAT
+            ds.createVariable('longitude', 'f8', ('longitude',))[:] = self.LON
+            vals = {'lsm': np.array([[[1, 1, 0], [1, 1, 1], [0, 1, 1]]], dtype='f4'), 'z': np.full((1, 3, 3), 980.665, dtype='f4'),
+                    't2m': 273.15 + hrs, 'fg10': np.full(hrs.shape, 10.0, dtype='f4'), 'tcc': np.full(hrs.shape, 0.5, dtype='f4'),
+                    'tp': np.full(hrs.shape, 0.001, dtype='f4'), 'sf': np.zeros(hrs.shape, dtype='f4')}
+            for n in names:
+                ds.createVariable(n, 'f4', ('valid_time', 'latitude', 'longitude'), zlib=True)[:] = vals[n]
+            ds.close()
+        if 'land_sea_mask' in req['variable']:
+            one(target, ['lsm', 'z'])
+            return
+        d = target + '.tmp'
+        os.makedirs(d, exist_ok=True)
+        one(os.path.join(d, 'data_stream-oper_stepType-instant.nc'), ['t2m', 'fg10', 'tcc'])
+        one(os.path.join(d, 'data_stream-oper_stepType-accum.nc'), ['tp', 'sf'])
+        with zipfile.ZipFile(target, 'w') as z:
+            for n in os.listdir(d):
+                z.write(os.path.join(d, n), n)
+        shutil.rmtree(d)
+
+
+class Clock:
+    def __init__(self, stop_after=None):
+        self.t, self.sleeps, self.stop_after = 1e6, 0, stop_after
+
+    def __call__(self):
+        return self.t
+
+    def sleep(self, s):
+        self.t += s
+        self.sleeps += 1
+        if self.stop_after is not None and self.sleeps >= self.stop_after:
+            raise KeyboardInterrupt  # la coupure des 5 h 20 de GitHub
+
+
+@unittest.skipUnless(importlib.util.find_spec('netCDF4') and importlib.util.find_spec('numpy'), 'netCDF4 et numpy manquent')
+class Era5(unittest.TestCase):
+    BOX = (51.0, 2.0, 50.5, 2.5)
+
+    def run_era5(self, tmp, cds, clock, years=(2001, 2001), **opts):
+        db = sqlite3.connect(os.path.join(tmp, 'rea.sqlite'))
+        db.executescript(F.SCHEMA)
+        try:
+            B.do_era5(db, years, self.BOX, [self.BOX], os.path.join(tmp, 'era5'), 6, False, client=cds,
+                      queue_opts=dict({'sleep': clock.sleep, 'clock': clock, 'poll_s': 60, 'log_s': 600}, **opts))
+        finally:
+            db.close()
+
+    def test_hours_to_days_resume_and_queue(self):
+        tmp = tempfile.mkdtemp(prefix='meteo-era5-')
+        try:
+            cache = os.path.join(tmp, 'era5')
+            # 1re fabrication, coupée : les demandes déposées sont gardées (numéro) dans le cache
+            cds = FakeCDS(wait=50)
+            with self.assertRaises(KeyboardInterrupt):
+                self.run_era5(tmp, cds, Clock(stop_after=8))
+            st = read_json(os.path.join(cache, 'era5-demandes.json'))
+            self.assertEqual(sorted(st['demandes']), ['2001-01-03', '2001-04-06', '2001-07-09', '2001-10-12'], 'une année = 4 demandes de 3 mois')
+            self.assertTrue(all(j['id'] for j in st['demandes'].values()))
+            first = len(cds.submitted)
+            # 2e fabrication : les mêmes numéros sont relus, rien n'est redéposé
+            cds.wait = 2
+            for r in cds.remotes.values():
+                r.wait = 1
+            self.run_era5(tmp, cds, Clock())
+            self.assertEqual(len(cds.submitted), first, 'aucune demande redéposée après la coupure')
+            self.assertEqual(cds.submitted[1], ('reanalysis-era5-single-levels', ('2m_temperature', '10m_wind_gust_since_previous_post_processing', 'total_precipitation', 'total_cloud_cover', 'snowfall'), '2001', ('01', '02', '03')))
+            self.assertEqual(sorted(set(cds.downloads)), sorted(set(cds.deleted)), 'chaque résultat reçu est effacé chez Copernicus')
+            db = sqlite3.connect(os.path.join(tmp, 'rea.sqlite'))
+            self.assertEqual(db.execute("SELECT value FROM meta WHERE key='era5-2001'").fetchone()[0], 'ok')
+            self.assertEqual(db.execute("SELECT COUNT(*) FROM grid WHERE source='era5'").fetchone()[0], 7, 'les carreaux sur terre seulement')
+            step, cols = F.decode(db.execute('SELECT blob FROM grid_daily LIMIT 1').fetchone()[0])
+            self.assertEqual(len(cols['TN']), 365)
+            self.assertEqual((cols['TN'][40], cols['TX'][40], cols['RR'][40], cols['SN'][40], cols['FX'][40], cols['NN'][40]), (0, 230, 240, 0, 100, 50))
+            step, h = F.decode(db.execute('SELECT blob FROM grid_hourly LIMIT 1').fetchone()[0])
+            self.assertEqual((step, len(h['T']), h['T'][:5], h['RR'][0]), (6, 365 * 4, [0, 60, 120, 180, 0], 60))
+            db.close()
+            self.assertEqual(sorted(os.listdir(cache)), ['era5-demandes.json', 'era5-lsm.nc'], 'les fichiers d’une année rangée sont effacés')
+            # 3e fois : l'année est faite, rien n'est redemandé
+            n = len(cds.submitted)
+            self.run_era5(tmp, cds, Clock())
+            self.assertEqual(len(cds.submitted), n)
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_stuck_request_does_not_block(self):
+        """une demande coincée dans la file n'empêche pas les autres : après stale_s, la suivante part quand même"""
+        tmp = tempfile.mkdtemp(prefix='meteo-era5-')
+        try:
+            cds = FakeCDS(stuck={('2001', '01')}, wait=1)
+            with self.assertRaises(KeyboardInterrupt):
+                self.run_era5(tmp, cds, Clock(stop_after=300), years=(2001, 2003), in_flight=1, in_flight_max=3, stale_s=3600)
+            db = sqlite3.connect(os.path.join(tmp, 'rea.sqlite'))
+            done = [r[0] for r in db.execute("SELECT key FROM meta WHERE key LIKE 'era5-%' ORDER BY key")]
+            db.close()
+            self.assertEqual(done, ['era5-2002', 'era5-2003'], 'les années suivantes avancent malgré 2001 coincée')
+            st = read_json(os.path.join(tmp, 'era5', 'era5-demandes.json'))
+            self.assertEqual(list(st['demandes']), ['2001-01-03'], 'la demande coincée garde son numéro pour la prochaine fois')
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_too_large_splits(self):
+        tmp = tempfile.mkdtemp(prefix='meteo-era5-')
+        try:
+            cds = FakeCDS(too_large_over=1, wait=0)
+            self.run_era5(tmp, cds, Clock())
+            self.assertEqual(sorted(len(m) for *_, m in cds.submitted[1:]), [1] * 12, '« trop gros » → un mois par demande')
+            self.assertEqual(read_json(os.path.join(tmp, 'era5', 'era5-demandes.json'))['mois'], 1)
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+
 if __name__ == '__main__':
     unittest.main(verbosity=1)

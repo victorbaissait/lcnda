@@ -3390,6 +3390,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         $('#workspace').innerHTML = pageHtml;
         bindPersonPage({...detail,media:orderedMedia});
         paAfterPerson(detail);
+        window.LCNDA_SHEET_LAZY?.veil($('#workspace .person-page'),detail); // ⏱ les blocs loin de l'écran attendent d'y arriver (app-fiche-lazy.js) : avant ext.afterPerson, qui ne remplit que ceux qui sont là
         (window.LCNDA_EXT?.afterPerson||[]).forEach(fn=>{try{fn(detail);}catch(error){console.error(error);}});
     }
 

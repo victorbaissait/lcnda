@@ -261,7 +261,7 @@
             if (tabs) { if (id && wrap.querySelector(`[data-fsec-tab="${CSS.escape(id)}"]`)) showTab(wrap, id); }
             else if (id && id !== '__all') {
                 const sec = wrap.querySelector(`:scope > .fsec[data-fsec="${CSS.escape(id)}"]`);
-                if (sec) { if (sec.classList.contains('is-folded')) fold(sec, false); keepInView(id, pid); }
+                if (sec) { if (sec.classList.contains('is-folded')) fold(sec, false); window.LCNDA_SHEET_LAZY?.show?.(sec); keepInView(id, pid); } // la section demandée : ses blocs tout de suite
             }
             if (!id) A().setSheetRoute?.(pid, ''); // section inconnue : l'onglet par défaut, l'adresse sans section
         }

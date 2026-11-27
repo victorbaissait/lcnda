@@ -265,6 +265,7 @@
     };
     function personPageText() {
         const page = document.querySelector('#workspace .person-page'); if (!page) return '';
+        window.LCNDA_SHEET_LAZY?.showAll?.(); // toute la fiche, même les blocs pas encore lus (app-fiche-lazy.js)
         const hero = page.querySelector('.person-hero'); const parts = [];
         if (hero) { const h2 = hero.querySelector('h2'); if (h2) parts.push(`${h2.textContent.trim()}.`); const rest = clean(hero).replace(h2?.textContent.trim() || '', '').trim(); if (rest) parts.push(rest); }
         page.querySelectorAll('.card').forEach(card => {
