@@ -1127,6 +1127,7 @@ function site_defaults_allowed_keys(): array
     return [
         'genealogie-meteo', // 🌦 Météo d’autrefois
         'genealogie-connexions', // 🧺 Panier et connexions (heritage-connexions.js)
+        'genealogie-tx-glossaire', // 📖 Mon glossaire de l’Atelier (heritage-atelier-aides.js)
         'genealogie-elections', // 🗳 Élections d’autrefois
         'genealogie-gov', // 🏰 Lieux anciens GOV
         'genealogie-menu-names',
