@@ -71,6 +71,12 @@ REG = [
 ]
 
 
+def diag(sid, data, found):
+    """une source qui ne donne aucune ligne : ses colonnes dans le journal, pour corriger la lecture au prochain passage"""
+    print(f'⚠ {sid} : 0 ligne gardée — colonnes trouvées {found} ; {nw.headers(data)}', file=sys.stderr)
+    print(f'⚠ {sid} : 0 ligne gardée — colonnes trouvées {found} ; {nw.headers(data)}')
+
+
 def act_of(s, default='EC'):
     f = nw.fold(s)
     if not f:
@@ -153,6 +159,8 @@ def build_registres(com):
             n += 1
         sources.append({**src(s['label'], s['slug'], LO, s['publisher']), 'dep': s['dep'], 'licence_dg': lic})
         report[s['id']] = n
+        if not n:
+            diag(s['id'], data, {'commune': c_com, 'insee': c_ins, 'acte': c_act, 'debut': c_from, 'fin': c_to, 'dates': c_dates})
     if not rows:
         raise RuntimeError('aucun registre lu')
     rows.sort(key=lambda r: (r[0], r[1] or r[2], r[3], r[4]))
@@ -381,13 +389,19 @@ def build_mpf():
             report[s['id']] = f'injoignable : {e}'
             print('⚠', s['id'], e, file=sys.stderr)
             continue
-        c_nom = nw.col(data, 'nom', 'nom de famille', 'patronyme', 'nom du soldat', avoid=('prenom', 'lieu', 'commune', 'unite', 'monument'))
-        c_pre = nw.col(data, 'prenoms', 'prenom', 'prenom s')
-        c_full = nw.col(data, 'nom et prenoms', 'nom prenom', 'identite', 'soldat')
-        c_bd = nw.col(data, 'date de naissance', 'naissance date', 'date naissance', 'ne le', 'annee de naissance', 'naissance', avoid=('lieu', 'commune', 'departement'))
-        c_bp = nw.col(data, 'lieu de naissance', 'commune de naissance', 'lieu naissance', 'ne a', 'ville de naissance')
-        c_dd = nw.col(data, 'date de deces', 'date deces', 'deces date', 'date du deces', 'mort le', 'annee de deces', 'deces', avoid=('lieu', 'commune', 'departement', 'cause'))
-        c_dp = nw.col(data, 'lieu de deces', 'commune de deces', 'lieu deces', 'lieu du deces', 'mort a')
+        PLACE = ('lieu', 'commune', 'departement', 'ville', 'pays', 'dept', 'localite', 'cause', 'circonstance', 'insee', 'code', 'region')
+        c_nom = nw.col(data, 'nom', 'nom de famille', 'patronyme', 'nom du soldat', 'nom usuel', avoid=('prenom', 'lieu', 'commune', 'unite', 'monument', 'ville', 'regiment'),
+                       loose=('nomdefamille', 'patronyme', 'nomdusoldat', 'nom'))
+        c_pre = nw.col(data, 'prenoms', 'prenom', 'prenom s', loose=('prenom',))
+        c_full = nw.col(data, 'nom et prenoms', 'nom et prenom', 'nom prenom', 'nom prenoms', 'identite', 'nom complet', loose=('nometprenom', 'nomprenom', 'identite'))
+        if c_full:   # « nom et prénoms » dans une seule colonne : ni le nom ni le prénom à part
+            c_nom = None if c_nom == c_full else c_nom
+            c_pre = None if c_pre == c_full else c_pre
+        c_bd = nw.col(data, 'date de naissance', 'naissance date', 'date naissance', 'ne le', 'annee de naissance', 'naissance', avoid=PLACE, loose=('datenaiss', 'naissance', 'naiss', 'nele'))
+        c_bp = nw.col(data, 'lieu de naissance', 'commune de naissance', 'lieu naissance', 'ne a', 'ville de naissance', loose=('lieudenaiss', 'lieunaiss', 'communedenaiss', 'villedenaiss'))
+        c_dd = nw.col(data, 'date de deces', 'date deces', 'deces date', 'date du deces', 'mort le', 'annee de deces', 'deces', 'date de la mort',
+                      avoid=PLACE, loose=('datedeces', 'datedudeces', 'deces', 'datedemort', 'mortle', 'disparu'))
+        c_dp = nw.col(data, 'lieu de deces', 'commune de deces', 'lieu deces', 'lieu du deces', 'mort a', loose=('lieudedeces', 'lieudeces', 'lieududeces', 'communededeces'))
         c_war = nw.col(data, 'conflit', 'guerre', 'periode')
         c_gr = nw.col(data, 'grade')
         c_un = nw.col(data, 'unite', 'regiment', 'corps')
@@ -415,6 +429,8 @@ def build_mpf():
             n += 1
         sources.append({**src(s['label'], s['slug'], s['lic'], s['publisher']), 'war': s['war']})
         report[s['id']] = n
+        if not n:
+            diag(s['id'], data, {'nom': c_nom, 'prenoms': c_pre, 'nom+prenoms': c_full, 'naissance': c_bd, 'deces': c_dd})
     if not rows:
         raise RuntimeError('morts pour la France : aucune ligne lue')
     rows.sort(key=lambda r: (nw.fold(r[1]), nw.fold(r[2]), r[3]))
@@ -429,9 +445,12 @@ MGW_URL = STATIC + 'liste-des-monuments-aux-morts/20160809-205040/mgw_mam.csv'
 def build_monuments(com):
     nw.licence_of('liste-des-monuments-aux-morts', ['cc-by-sa'])
     data = nw.read_csv(nw.get('mgw-mam', MGW_URL))
-    c_dep = nw.col(data, 'departement pays', 'departement', 'dep')
-    c_vil = nw.col(data, 'ville', 'commune')
-    c_url = nw.col(data, 'connexion', 'lien', 'url')
+    keys = nw.keys_of(data)
+    c_dep = nw.col(data, 'departement pays', 'departement', 'dep', loose=('partement', 'pays')) or (keys[0] if keys else None)
+    c_vil = nw.col(data, 'ville', 'commune', loose=('ville', 'commune')) or (keys[1] if len(keys) > 1 else None)
+    c_url = nw.col(data, 'connexion', 'lien', 'url', loose=('connexion', 'lien', 'url'))
+    if not c_url:   # la colonne du lien : celle dont les cases contiennent « idsource= »
+        c_url = next((k for k in keys if any('idsource=' in str(r.get(k, '')) for r in data[:50])), None)
     rows = []
     for r in data:
         m = re.search(r'idsource=(\d+)', r.get(c_url, ''))
@@ -441,6 +460,7 @@ def build_monuments(com):
         name = r.get(c_vil, '')
         rows.append([dep, com.find(dep, name), cut(name, 80), int(m.group(1))])
     if not rows:
+        diag('mgw-mam', data, {'dep': c_dep, 'ville': c_vil, 'lien': c_url})
         raise RuntimeError('monuments : aucune ligne lue')
     rows.sort()
     return pack('monuments', rows, ['dep', 'insee', 'commune', 'id'],
@@ -456,14 +476,26 @@ PLAQUES_URL = 'https://opendata.paris.fr' + ODS.format('plaques_commemoratives_1
 def build_plaques():
     nw.licence_of('plaques-commemoratives-1939-1945', ['odc-odbl'])
     data = nw.read_any(nw.get('paris-plaques', PLAQUES_URL))
-    c_txt = nw.col(data, 'texte', 'texte de la plaque', 'inscription', 'libelle', 'titre', 'intitule')
-    c_adr = nw.col(data, 'adresse', 'lieu', 'adresse complete', 'voie')
+    c_txt = nw.col(data, 'texte', 'texte de la plaque', 'texte plaque', 'inscription', 'libelle', 'legende', 'titre', 'intitule', 'description', 'designation',
+                   avoid=('adresse', 'voie', 'arrondissement'), loose=('texte', 'inscription', 'libelle', 'legende', 'plaque', 'description', 'commemor', 'hommage'))
+    c_txt = c_txt or nw.longest(data, avoid=('adresse', 'voie', 'geo', 'url', 'lien', 'photo', 'image'))
+    c_nom = nw.col(data, 'nom', 'nom de la personne', 'personne', 'personnalite', 'nom prenom', 'nom et prenom', avoid=('voie', 'rue', 'lieu', 'adresse'), loose=('personn', 'nomprenom', 'nom'))
+    c_pre = nw.col(data, 'prenom', 'prenoms', loose=('prenom',))
+    if c_nom and c_nom == c_pre:
+        c_nom = None
+    c_qual = nw.col(data, 'qualite', 'qualification', 'fonction', 'statut', 'motif', 'evenement', loose=('qualit', 'motif', 'evenement'))
+    c_date = nw.col(data, 'date', 'date de deces', 'date deces', 'annee', avoid=('pose', 'maj', 'mise a jour', 'creation', 'modif'), loose=('datedeces', 'datedudeces'))
+    c_adr = nw.col(data, 'adresse', 'lieu', 'adresse complete', 'voie', 'adresse de la plaque', loose=('adresse', 'voie', 'emplacement'))
     c_arr = nw.col(data, 'arrondissement', 'arr', 'code postal', 'ardt')
     c_id = nw.col(data, 'identifiant', 'id', 'objectid', 'recordid')
     c_pt = nw.col(data, 'geo point 2d', 'geo point', 'coordonnees', 'geom')
     rows = []
     for i, r in enumerate(data):
-        t = cut(r.get(c_txt, '') if c_txt else '', 600)
+        t = r.get(c_txt, '') if c_txt else ''
+        who = ' '.join(x for x in [r.get(c_pre, '') if c_pre and c_pre != c_nom else '', r.get(c_nom, '') if c_nom and c_nom != c_txt else ''] if x).strip()
+        if who and nw.fold(who) not in nw.fold(t):   # sans texte (ou un texte qui ne nomme pas) : « Prénom NOM, qualité, date »
+            t = ' — '.join(x for x in [', '.join(x for x in [who, r.get(c_qual, '') if c_qual else '', r.get(c_date, '') if c_date else ''] if x), t] if x)
+        t = cut(t, 600)
         if not t:
             continue
         la, lo = r.get('_lat'), r.get('_lon')
@@ -475,6 +507,7 @@ def build_plaques():
         rows.append([cut(r.get(c_id, '') if c_id else str(i + 1), 30), t, cut(r.get(c_adr, '') if c_adr else '', 120), arr,
                      round(float(la), 5) if la is not None else None, round(float(lo), 5) if lo is not None else None])
     if not rows:
+        diag('paris-plaques', data, {'texte': c_txt, 'nom': c_nom, 'adresse': c_adr})
         raise RuntimeError('plaques : aucune ligne lue')
     return pack('plaques', rows, ['id', 'texte', 'adresse', 'arr', 'lat', 'lon'],
                 [src('Ville de Paris — plaques commémoratives 1939-1945', 'plaques-commemoratives-1939-1945', ODBL, 'Ville de Paris')],

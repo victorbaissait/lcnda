@@ -66,11 +66,43 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
         assert.deepStrictEqual(rows('inv-dep').map(r => [r.dep, r.serie]), [['04', '1 Q'], ['04', '2 E'], ['22', '1 R']]);
         assert.deepStrictEqual(rows('lieux').map(r => [r.insee, r.id]), [['04070', 12345678], ['22093', 22334455]], 'Rome et un lieu inconnu écartés');
         const A = rows('autorites'); assert.deepStrictEqual(A.map(r => [r.t, r.mort]), [['f', null], ['i', null], ['p', 1771]], 'Paul DURAND (sans date) et Marie DURAND (née en 1990) écartés');
-        const M = rows('mpf'); assert.deepStrictEqual(M.map(r => [r.nom, r.prenoms, r.naissance, r.conflit]), [['DURAND', 'Pierre Marie', '1894', '1914-1918'], ['MAZAUD', 'Henri', '1920-05-12', '1939-1945'], ['MAZAUD', 'Jean Baptiste', '1890-04-12', '1914-1918']]);
-        assert.ok(!M.some(r => r.nom === 'LACOMBE'), 'sans aucune date : écarté');
-        assert.deepStrictEqual(rows('monuments').map(r => [r.dep, r.insee, r.id]), [['04', '04070', 8716], ['22', '22093', 1234]], 'la Belgique écartée');
+        const M = rows('mpf'); assert.deepStrictEqual(M.map(r => [r.nom, r.prenoms, r.naissance, r.conflit]), [['DURAND', 'Pierre Marie', '1894', '1914-1918'], ['LACOMBE', 'Pierre Jean', '1889-02-03', '1914-1918'], ['MAZAUD', 'Henri', '1920-05-12', '1939-1945'], ['MAZAUD', 'Jean Baptiste', '1890-04-12', '1914-1918']]);
+        assert.ok(!M.some(r => /Louis/.test(r.prenoms)), 'sans aucune date : écarté (Loire-Atlantique, Orvault)');
+        const O = M.find(r => r.nom === 'LACOMBE'); assert.deepStrictEqual([O.lieu_naissance, O.deces, O.lieu_deces], ['Orvault', '1916-07-01', 'Somme'], 'Orvault : champs omis dans la 1re fiche, prénoms en liste, colonnes abrégées');
+        const rep = raw('mpf').report; assert.strictEqual(rep['mpf-toulouse'], 1, '« nom et prénoms » dans une seule colonne'); assert.strictEqual(rep['mpf-orvault'], 1); assert.strictEqual(rep['mpf-lorient'], 0);
+        assert.match(mk.stdout, /mpf-lorient : 0 ligne gardée — colonnes trouvées .*colonnes : \['champ_a', 'champ_b'\]/, 'une source à 0 ligne : ses colonnes dans le journal');
+        assert.deepStrictEqual(rows('monuments').map(r => [r.dep, r.insee, r.id]), [['04', '04070', 8716], ['04', '04112', 99], ['22', '22093', 1234]], 'la Belgique écartée ; une ligne avec des cases en trop gardée');
         assert.ok(!JSON.stringify(raw('monuments')).match(/MAZAUD|soldat/i), 'aucun nom de soldat copié');
-        assert.deepStrictEqual(rows('plaques').map(r => [r.arr, r.lat]), [[11, 48.8541], [6, 48.8532]]);
+        assert.deepStrictEqual(rows('plaques').map(r => [r.id, r.arr, r.lat, r.adresse]), [['P1', 11, 48.8541, '12 rue de la Roquette'], ['P2', 6, 48.8532, 'Place Saint-Michel']], 'colonnes inattendues, point en liste');
+        assert.strictEqual(rows('plaques')[1].texte, 'Paul LACOMBE, fusillé par l’ennemi, 1944-08-19', 'sans texte : « Prénom NOM, qualité, date »');
+    });
+
+    await t('téléchargement poli : 429 puis 503 (Retry-After respecté), puis la réponse ; 404 : pas de nouvel essai', async () => {
+        const py = spawnSync('python3', ['-I', '-c', `
+import http.server, json, os, sys, threading
+sys.path.insert(0, sys.argv[1]); import nw
+hits = []
+class H(http.server.BaseHTTPRequestHandler):
+    def log_message(self, *a): pass
+    def do_GET(self):
+        hits.append(self.path)
+        if self.path == '/absent': self.send_response(404); self.end_headers(); return
+        n = len([h for h in hits if h == self.path])
+        if n == 1: self.send_response(429); self.send_header('Retry-After', '7'); self.end_headers(); return
+        if n == 2: self.send_response(503); self.end_headers(); return
+        self.send_response(200); self.end_headers(); self.wfile.write(b'ok')
+s = http.server.HTTPServer(('127.0.0.1', 0), H); threading.Thread(target=s.serve_forever, daemon=True).start()
+waits = []
+os.environ.pop('TN_FIXTURES', None)
+u = 'http://127.0.0.1:%d' % s.server_address[1]
+body = nw.get('x', u + '/donnees', sleep=waits.append)
+try: nw.get('y', u + '/absent', sleep=waits.append); gone = 'non'
+except RuntimeError as e: gone = str(e)
+print(json.dumps({'body': body.decode(), 'waits': [w for w in waits if w >= 5], 'hits': hits}))`, path.join(root, 'scripts/telech-n')], {encoding: 'utf8', env: {...process.env, TN_RAW: path.join(tmp, 'cache'), TN_FIXTURES: '', NO_PROXY: '127.0.0.1', no_proxy: '127.0.0.1', HTTP_PROXY: '', http_proxy: ''}});
+        assert.strictEqual(py.status, 0, py.stderr);
+        const r = JSON.parse(py.stdout.trim().split('\n').pop());
+        assert.strictEqual(r.body, 'ok'); assert.deepStrictEqual(r.waits, [60, 120], 'Retry-After (7 s) ou au moins 60 s, puis 120 s');
+        assert.deepStrictEqual(r.hits, ['/donnees', '/donnees', '/donnees', '/absent'], '404 : une seule demande');
     });
 
     /* ═════════ 2. le calcul ═════════ */
@@ -193,7 +225,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
                 const mpf = await L.find(d => d.id === 'tn_mpf').load(); const lay = await E.mapLayerSources.find(s => s.id === 'tn_plaques').run({});
                 return {ids: L.map(d => [d.id, d.theme]), mpf: mpf.map(r => r.name), feats: lay.features.length, block: window.LCNDA_APP.defaultPersonBlocks.some(b => b[0] === 'lot_n'), tab: window.LCNDA_APP.defaultMaintenanceTabs.some(t => t[0] === 'lot_n')}; });
             assert.deepStrictEqual(reg.ids, [['tn_registres', 'personnes'], ['tn_inv_communes', 'personnes'], ['tn_inv_dep', 'personnes'], ['tn_lieux', 'personnes'], ['tn_autorites', 'personnes'], ['tn_mpf', 'guerres'], ['tn_monuments', 'guerres'], ['tn_plaques', 'guerres']]);
-            assert.strictEqual(reg.mpf.length, 3); assert.strictEqual(reg.feats, 2); assert.ok(reg.block && reg.tab);
+            assert.strictEqual(reg.mpf.length, 4); assert.strictEqual(reg.feats, 2); assert.ok(reg.block && reg.tab);
             await p.evaluate(() => window.LCNDA_EXT.lotN.openSettings());
             await p.waitForSelector('[data-tn-settings-page]', {timeout: 20000});
             const page = await p.textContent('[data-tn-settings-page]'); assert.match(page, /Minutier central/); assert.match(page, /non spécifiée/); assert.match(page, /installé/);

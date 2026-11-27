@@ -2,14 +2,27 @@
 # Téléchargements polis (une requête à la fois, pause par site, réponses gardées dans le cache), lecture CSV / JSON / Excel,
 # colonnes trouvées par leur nom (les jeux des collectivités n'ont pas tous les mêmes), communes de France (cc-communes.json.gz).
 # Essais : TN_FIXTURES=<dossier> → chaque source est lue dans <dossier>/<id de la source> au lieu d'Internet.
-import csv, gzip, hashlib, io, json, os, re, time, unicodedata, urllib.parse, urllib.request
+import csv, gzip, hashlib, io, json, os, re, sys, time, unicodedata, urllib.parse, urllib.request
 
 CACHE = os.environ.get('TN_RAW') or os.path.join(os.path.expanduser('~'), '.cache', 'lcnda-tn')
 UA = 'LCNDA-genealogie-build/1.0 (open-source genealogy app; data build script)'
 _last = {}
 
 
-def get(src_id, url, tries=5):
+def retry_wait(e, i):
+    """la pause avant de redemander : Retry-After respecté (429, 503), sinon de plus en plus longue"""
+    code = getattr(e, 'code', 0)
+    ra = 0
+    try:
+        ra = int(float((getattr(e, 'headers', None) or {}).get('Retry-After') or 0))
+    except (TypeError, ValueError):
+        ra = 0
+    if code in (429, 503):
+        return min(600, max(ra, 60 * (i + 1)))
+    return 10 * (i + 1)
+
+
+def get(src_id, url, tries=8, sleep=time.sleep):
     fx = os.environ.get('TN_FIXTURES')
     if fx:
         p = os.path.join(fx, src_id)
@@ -23,9 +36,9 @@ def get(src_id, url, tries=5):
     host = urllib.parse.urlparse(url).hostname or ''
     last = None
     for i in range(tries):
-        wait = 2.0 - (time.time() - _last.get(host, 0))
+        wait = 3.0 - (time.time() - _last.get(host, 0))
         if wait > 0:
-            time.sleep(wait)
+            sleep(wait)
         _last[host] = time.time()
         try:
             with urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': UA}), timeout=300) as r:
@@ -34,9 +47,12 @@ def get(src_id, url, tries=5):
             return body
         except Exception as e:  # noqa
             last = e
-            if getattr(e, 'code', 0) in (400, 401, 403, 404):
+            if getattr(e, 'code', 0) in (400, 401, 403, 404, 410):
                 break
-            time.sleep(10 * (i + 1))
+            if i < tries - 1:
+                w = retry_wait(e, i)
+                print(f'… {host} : {e} — nouvel essai dans {w} s', file=sys.stderr)
+                sleep(w)
     raise RuntimeError(f'{url[:160]} : {last}')
 
 
@@ -65,25 +81,52 @@ def text(b):
     return b.decode('utf-8', 'replace')
 
 
+def cell(v):
+    """une case lue : texte ; une liste (cases en trop d'une ligne CSV, champ à plusieurs valeurs d'Opendatasoft) → jointe"""
+    if v is None:
+        return ''
+    if isinstance(v, (list, tuple)):
+        return ' '.join(cell(x) for x in v if cell(x))
+    if isinstance(v, dict):
+        return ''
+    return str(v).strip()
+
+
 def read_csv(b):
     t = text(b)
     head = t[:5000]
     delim = max([';', ',', '\t', '|'], key=lambda c: head.split('\n', 1)[0].count(c))
-    return [{(k or '').strip(): (v or '').strip() for k, v in r.items()} for r in csv.DictReader(io.StringIO(t), delimiter=delim)]
+    # une ligne avec plus de cases que l'en-tête : le surplus va dans « _extra » (une liste pour csv.DictReader)
+    return [{('_extra' if k is None else k.strip()): cell(v) for k, v in r.items()} for r in csv.DictReader(io.StringIO(t), delimiter=delim)]
 
 
 def read_ods_json(b):
-    """export JSON d'un portail Opendatasoft (liste d'objets) ; geo_point_2d → lat/lon"""
+    """export JSON d'un portail Opendatasoft (liste d'objets ; ou {"results": […]} ; ou des fiches {"fields": {…}}) ;
+    geo_point_2d → _lat/_lon ; champ à plusieurs valeurs (liste) → valeurs jointes ; objet → ses champs « parent.clé »"""
+    d = json.loads(text(b))
+    if isinstance(d, dict):
+        d = d.get('results') or d.get('records') or d.get('features') or []
     out = []
-    for r in json.loads(text(b)):
+    for r in d:
+        if not isinstance(r, dict):
+            continue
+        if isinstance(r.get('fields'), dict):
+            r = {**{k: v for k, v in r.items() if k != 'fields'}, **r['fields']}
+        if isinstance(r.get('properties'), dict):
+            g = (r.get('geometry') or {}).get('coordinates')
+            r = {**r['properties'], **({'geo_point_2d': {'lon': g[0], 'lat': g[1]}} if isinstance(g, list) and len(g) == 2 and all(isinstance(x, (int, float)) for x in g) else {})}
         row = {}
         for k, v in r.items():
             if isinstance(v, dict) and 'lat' in v and 'lon' in v:
                 row['_lat'], row['_lon'] = v['lat'], v['lon']
-            elif isinstance(v, (list, dict)):
-                continue
+            elif isinstance(v, dict):
+                for k2, v2 in v.items():
+                    if not isinstance(v2, (dict, list)) and v2 is not None:
+                        row[f'{k}.{k2}'] = cell(v2)
+            elif isinstance(v, list) and len(v) == 2 and all(isinstance(x, (int, float)) for x in v) and re.search(r'geo|point|coord', k, re.I):
+                row['_lat'], row['_lon'] = v[0], v[1]
             else:
-                row[k] = '' if v is None else str(v).strip()
+                row[k] = cell(v)
         out.append(row)
     return out
 
@@ -125,17 +168,55 @@ def read_any(b):
     return read_csv(b)
 
 
-def col(rows, *words, avoid=()):
-    """la colonne dont le nom (plié) contient un des mots, dans l'ordre des mots ; None si aucune"""
+def keys_of(rows, n=500):
+    """toutes les colonnes vues dans les premières lignes (un export Opendatasoft peut omettre un champ vide)"""
+    ks = []
+    for r in rows[:n]:
+        for k in r:
+            if k not in ks:
+                ks.append(k)
+    return ks
+
+
+def col(rows, *words, avoid=(), loose=()):
+    """la colonne dont le nom (plié) contient un des mots (mot entier), dans l'ordre des mots ; puis, en dernier recours,
+    celle qui contient un des morceaux « loose » (n'importe où) ; None si aucune"""
     if not rows:
         return None
-    keys = list(rows[0].keys())
+    keys = [k for k in keys_of(rows) if not k.startswith('_')]
     for w in words:
         for k in keys:
             fk = fold(k)
             if (fk == w or re.search(r'(^|\s)' + re.escape(w) + r'($|\s)', fk)) and not any(a in fk for a in avoid):
                 return k
+    for w in loose:
+        for k in keys:
+            fk = fold(k).replace(' ', '')
+            if w in fk and not any(a.replace(' ', '') in fk for a in avoid):
+                return k
     return None
+
+
+def longest(rows, avoid=()):
+    """la colonne de texte la plus longue en moyenne (le texte d'une plaque quand son nom de colonne est inattendu)"""
+    best, score = None, 0
+    for k in keys_of(rows):
+        if k.startswith('_') or any(a in fold(k) for a in avoid):
+            continue
+        vals = [str(r.get(k) or '') for r in rows[:500]]
+        if not vals or sum(1 for v in vals if re.search(r'[a-zA-Z]{3}', v)) < len(vals) / 3:
+            continue
+        m = sum(len(v) for v in vals) / len(vals)
+        if m > score:
+            best, score = k, m
+    return best if score >= 15 else None
+
+
+def headers(rows):
+    """pour le journal : les colonnes vues et une ligne d'exemple (quand une source ne donne aucune ligne)"""
+    ks = keys_of(rows)
+    ex = next((r for r in rows[:50] if sum(1 for v in r.values() if v) >= 2), rows[0] if rows else {})
+    return f'{len(rows)} lignes lues ; colonnes : {ks} ; exemple : ' + json.dumps({k: str(v)[:40] for k, v in ex.items()}, ensure_ascii=False)[:900]
 
 
 def year(s):

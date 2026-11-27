@@ -1,0 +1,1 @@
+[{"nom_soldat": "DURAND", "prenom_s": ["Louis"]}, {"nom_soldat": "LACOMBE", "prenom_s": ["Pierre", "Jean"], "date_naiss": "1889-02-03T00:00:00+00:00", "lieu_naiss": "Orvault", "dt_deces_mpf": "1916-07-01", "lieu_deces_mpf": "Somme"}]
