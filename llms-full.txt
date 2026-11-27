@@ -1,6 +1,6 @@
 # LCNDA — Le Carnet numérique des ancêtres : la FAQ complète
 
-> 956 questions et réponses, par thème (version 0.10.0). Page : carnet-numerique-des-ancetres.php#faq
+> 956 questions et réponses, par thème (version 0.11.0). Page : carnet-numerique-des-ancetres.php#faq
 
 ## Fiches
 

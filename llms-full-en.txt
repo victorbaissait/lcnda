@@ -1,6 +1,6 @@
 # LCNDA — The Digital Ancestors' Notebook: the full FAQ
 
-> 956 questions and answers, by topic (version 0.10.0). Page: carnet-numerique-des-ancetres-en.php#faq
+> 956 questions and answers, by topic (version 0.11.0). Page: carnet-numerique-des-ancetres-en.php#faq
 
 ## Records
 
