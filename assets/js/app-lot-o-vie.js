@@ -233,10 +233,9 @@
     }
     function printBulletin(el) {
         const art = el.querySelector('[data-lov-bulletin]'); if (!art) return;
-        const w = window.open('', '_blank', 'width=800,height=900'); if (!w) return toast(T('La fenêtre d’impression a été bloquée.'), 'error');
-        const css = [...document.querySelectorAll('link[rel=stylesheet][href*="lot-o-arbre.css"]')].map(l => `<link rel="stylesheet" href="${esc(l.href)}">`).join('');
-        w.document.write(`<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(T('Le bulletin'))}</title>${css}<style>body{font:15px/1.5 Georgia,serif;margin:24px;color:#111;background:#fff}a{color:inherit}</style></head><body>${art.outerHTML}</body></html>`);
-        w.document.close(); setTimeout(() => { try { w.print(); } catch (_) {} }, 300);
+        const UI = window.LCNDA_UI; // K13 : la fenêtre d'impression commune (aperçu, ⤓ PDF)
+        if (UI?.openPrintDialog) return UI.openPrintDialog({title: T('Le bulletin'), icon: '📰', key: 'bulletin-naissance', html: art.outerHTML, pdf: true});
+        toast(T('L’impression n’est pas disponible ici.'), 'error');
     }
     async function pickPerson(title) { const P = window.LCNDA_PICKER || A(); if (!P.openPicker) return 0; const it = await P.openPicker({kind: 'person', title}); return Number(it?.id) || 0; }
 

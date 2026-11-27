@@ -1741,7 +1741,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-lot10-regles-actes.js?v=4" defer></script>
 <script src="assets/js/app-lot-o-core.js?v=2" defer></script>
 <script src="assets/js/app-lot-o-arbre.js?v=2" defer></script>
-<script src="assets/js/app-lot-o-vie.js?v=1" defer></script>
+<script src="assets/js/app-lot-o-vie.js?v=2" defer></script>
 <script src="assets/js/app-lot-o-poste.js?v=3" defer></script>
 <script src="assets/js/app-lot-o-packs.js?v=2" defer></script>
 <script src="assets/js/heritage-lot10-terre-gens.js?v=6" defer></script>
