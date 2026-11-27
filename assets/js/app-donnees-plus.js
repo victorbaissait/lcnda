@@ -11,7 +11,7 @@
  *     Allumés au départ : 1 2 3 4 5 6 9 13 14 15 19 20 ; les 9 autres se proposent une fois dans ✅ À faire.
  *  B. Ici : ⭐ favoris (1), 🕘 récents (2), 🆕 nouveau depuis ta visite (3), 💾 questions gardées (4), 📊 la pastille des fiches et le récap
  *     filtré sur une personne ou un lieu (5), 👤 « Pour… » dans toutes les listes (6, un critère du moteur : la période porte son texte),
- *     🕳 (9, le bloc), 📝 notes (10, serveur : lib/donnees_plus.php), ➕ lignes ajoutées (11, ici), ⚠️ douteuses (12, ici),
+ *     🕳 (9, le bloc), 📝 notes (10, serveur : lib/donnees_plus.php), ＋ lignes ajoutées (11, ici), ⚠️ douteuses (12, ici),
  *     🔎 marques de confiance (13), 📶 « marche sans Internet » (20). Les outils (7 8 9 14 15 16 17 18 19 21) : app-donnees-plus-outils.js.
  *  Vie privée : rien sur une personne vivante ou confidentielle ne sort (ld_famille ne les donne pas ; en consultation, pas les vivants) ;
  *  en consultation et pour les invités du réseau local : tout se lit, rien ne s'écrit, 📝 ✋ ⚠️ ne se montrent pas, les réglages ne s'ouvrent pas.
