@@ -20,7 +20,8 @@
     // jamais en attente : l'identité et les événements (le cœur de la fiche, que d'autres outils décorent tout de suite : 🌦 météo des événements…)
     const EAGER = new Set(['identity', 'events']);
     const held = new Map(); // section → fragment
-    const rides = new Map(); // bloc visible → les blocs cachés (« montré s'il a quelque chose ») qui arrivent avec lui
+    const rides = new Map();
+    const soon = []; // blocs cachés (« montré s'il a quelque chose ») tout près de l'écran : chargés juste après le premier écran // bloc visible → les blocs cachés (« montré s'il a quelque chose ») qui arrivent avec lui
     let io = null, detail = null, batch = null;
 
     /* ce qui arrive au-dessus de ce qu'on regarde ne doit pas le faire sauter : un bloc rempli (ou qui grandit en se remplissant)
@@ -54,8 +55,22 @@
         const one = f => function (sel) { const el = f.call(this, sel); if (!el || ok(el)) return el; const all = [...(f === Q.dqs ? Q.dqa : Q.eqa).call(this, sel)].filter(ok); return all[0] || null; };
         const many = f => function (sel) { const list = [...f.call(this, sel)].filter(ok); return Object.assign(list, {item: i => list[i] || null}); };
         D.querySelector = one(Q.dqs); D.querySelectorAll = many(Q.dqa); E.querySelector = one(Q.eqs); E.querySelectorAll = many(Q.eqa);
-        try { (window.LCNDA_EXT?.afterPerson || []).forEach(fn => { try { fn(detail); } catch (e) { console.error(e); } }); }
+        try { late.forEach(([fn, args]) => { try { fn(...args); } catch (e) { console.error(e); } }); (window.LCNDA_EXT?.afterPerson || []).forEach(fn => { try { fn(detail); } catch (e) { console.error(e); } }); }
         finally { D.querySelector = Q.dqs; D.querySelectorAll = Q.dqa; E.querySelector = Q.eqs; E.querySelectorAll = Q.eqa; }
+    }
+    /* un bloc qui se branche « juste après son dessin » (setTimeout de 0 dans son rendu : chercher sa case, y poser les clics) ne trouve pas
+     * sa case si elle attend : ces petits rappels sont notés pendant le dessin de la fiche et rejoués, comme ext.afterPerson, à son arrivée */
+    let late = [], origST = null;
+    function capture(on) {
+        // seul un rappel qui a cherché quelque chose sans le trouver (sa case attendait) est gardé pour être rejoué : jamais un simple appel au serveur
+        if (on) { late = []; if (origST) return; origST = window.setTimeout; window.setTimeout = function (fn, ms, ...args) {
+            if (typeof fn !== 'function' || Number(ms) > 50) return origST.call(window, fn, ms, ...args);
+            const run = (...a) => { let miss = false; const w = f => function (sel) { const r = f.call(this, sel); if (!r || (typeof r.length === 'number' && !r.length)) miss = true; return r; };
+                const keep = [D.querySelector, D.querySelectorAll, E.querySelector, E.querySelectorAll];
+                D.querySelector = w(keep[0]); D.querySelectorAll = w(keep[1]); E.querySelector = w(keep[2]); E.querySelectorAll = w(keep[3]);
+                try { return fn(...a); } finally { [D.querySelector, D.querySelectorAll, E.querySelector, E.querySelectorAll] = keep; if (miss && held.size) late.push([fn, a]); } };
+            return origST.call(window, run, ms, ...args); }; }
+        else if (origST) { window.setTimeout = origST; origST = null; }
     }
     function show(el) {
         if (!el) return;
@@ -89,15 +104,20 @@
         all.forEach((sec, i) => {
             if (!held.has(sec) || !sec.hidden) return;
             const nb = [...all.slice(0, i).reverse(), ...all.slice(i + 1)].find(x => !x.hidden && x.parentElement === sec.parentElement) || all.slice(0, i).reverse().find(x => !x.hidden);
-            if (!nb || !held.has(nb)) { restore(sec); return; }
+            if (!nb || !held.has(nb)) { soon.push(sec); return; } // près de l'écran mais invisible tant qu'il est vide : juste après ce qui se voit
             if (!rides.has(nb)) rides.set(nb, []); rides.get(nb).push(sec);
         });
-        batch = null; // (restaurés pendant le dessin : les modules les rempliront avec le reste)
+        batch = null;
+        // les blocs cachés près de l'écran : quand les lectures de ce qui se voit sont finies (0,5 s sans lecture), au plus 4 s après
+        if (soon.length) { const list = soon.splice(0), t0 = performance.now(); let calm = 0;
+            const tick = () => { if (!list.some(x => x.isConnected && held.has(x))) return; const busy = window.LCNDA_READS_BUSY?.() || 0; calm = busy ? 0 : calm || performance.now();
+                if ((calm && performance.now() - calm > 500) || performance.now() - t0 > 4000) list.forEach(restore); else setTimeout(tick, 100); };
+            setTimeout(tick, 100); }
     }
 
     // ce qui a besoin de toute la fiche : imprimer (le navigateur, ou le bouton de l'app) et la recherche dans la page
     window.addEventListener('beforeprint', () => { [...held.keys()].forEach(restore); });
     document.addEventListener('keydown', e => { if ((e.metaKey || e.ctrlKey) && !e.altKey && String(e.key).toLowerCase() === 'f' && held.size) [...held.keys()].forEach(restore); }, true);
 
-    window.LCNDA_SHEET_LAZY = {veil, show, showAll, eager: key => { EAGER.add(String(key)); }, pending: () => held.size, MARGIN};
+    window.LCNDA_SHEET_LAZY = {veil, capture, show, showAll, eager: key => { EAGER.add(String(key)); }, pending: () => held.size, MARGIN};
 })();

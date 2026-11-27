@@ -184,7 +184,7 @@
         const one = (key, index) => {
             try {
                 const block = renderers[key](index);
-                return block ? A().applyBlockWidth(String(block).replace('<section class="card', `<section data-pblock="${esc(key)}" class="card`), m.widths?.[key]) : '';
+                return block ? A().applyBlockWidth(String(block).replace(/<section( hidden)? class="card/, (x, h) => `<section data-pblock="${esc(key)}"${h || ''} class="card`), m.widths?.[key]) : ''; // (aussi un bloc caché tant qu'il est vide)
             } catch (error) {
                 console.error(`Erreur dans le bloc personne "${key}"`, error);
                 const label = defaults.find(row => row[0] === key)?.[1] || key;

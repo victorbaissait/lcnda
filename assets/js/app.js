@@ -1433,6 +1433,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
      * d'un coup à un serveur PHP qui les sert une par une : elles n'encombrent plus le navigateur, et une lecture demandée juste après un
      * clic ou une touche (ce que l'on attend vraiment) passe devant celles de fond. Les écritures ne passent jamais par là. */
     const READ_MAX=6,READ_Q=[];let readActive=0,lastInput=0;
+    window.LCNDA_READS_BUSY=()=>readActive+READ_Q.length; // ⏱ des lectures en cours ou en attente (app-fiche-lazy.js : les blocs cachés viennent après)
     ['pointerdown','keydown'].forEach(ev=>window.addEventListener(ev,()=>{lastInput=performance.now();},{capture:true,passive:true}));
     function readSlot(){return new Promise(ok=>{const go=()=>{readActive++;let done=false;const t=setTimeout(free,4000);function free(){if(done)return;done=true;clearTimeout(t);readActive--;const n=READ_Q.shift();if(n)n();}ok(free);};
         if(readActive<READ_MAX)go();else if(performance.now()-lastInput<800)READ_Q.unshift(go);else READ_Q.push(go);});}
@@ -3168,7 +3169,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
             try{
                 const block=renderers[key](index);
                 if(block)visualIndex++;
-                return applyBlockWidth(block?String(block).replace('<section class="card',`<section data-pblock="${escapeHtml(key)}" class="card`):block,settings.widths?.[key]); // data-pblock : pour ouvrir la fiche sur ce bloc
+                return applyBlockWidth(block?String(block).replace(/<section( hidden)? class="card/,(m,h)=>`<section data-pblock="${escapeHtml(key)}"${h||''} class="card`):block,settings.widths?.[key]); // (aussi un bloc caché tant qu'il est vide : « <section hidden class="card ») // data-pblock : pour ouvrir la fiche sur ce bloc
             }catch(error){
                 console.error(`Erreur dans le bloc personne "${key}"`,error);
                 visualIndex++;
@@ -3384,6 +3385,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         Object.entries(window.LCNDA_EXT?.personBlocks||{}).forEach(([key,render])=>{personBlockRenderers[key]=index=>render(index,detail,{isLocked,editOnly});});
         const sosaNumber=sosaNumbersText(person.id);
         const dabovilleNumber=dabovilleNumberFor(person.id);
+        window.LCNDA_SHEET_LAZY?.capture?.(true); // ⏱ les branchements « juste après » des blocs (setTimeout 0) : rejoués pour un bloc qui arrive plus tard (app-fiche-lazy.js)
         const pageHtml = `<article class="page person-page">
             <div class="person-hero">
                 ${portrait}<div><span class="eyebrow">${person.kind==='animal'?`🐾 FICHE ANIMAL${detail.heritage?.animal?.data?.species?' · '+escapeHtml(window.LCNDA_EXT?.speciesLabel?.(detail.heritage.animal.data.species)||(detail.heritage.animal.species||{})[detail.heritage.animal.data.species]||''):''}${detail.heritage?.animal?.data?.breed?' · '+escapeHtml(detail.heritage.animal.data.breed):''}`:'FICHE INDIVIDUELLE'} · #${person.id}</span><h2>${escapeHtml(personName(person))}</h2><div class="person-meta"><span>${escapeHtml(years(person))}</span><span>${person.kind==='animal'?`Sexe : <strong>${person.gender==='male'?'♂ mâle':person.gender==='female'?'♀ femelle':'?'}</strong>`:`Genre : <strong>${genderText(person.gender)}</strong>`}</span>${person.surname_group ? `<span>Groupe : <strong>${escapeHtml(person.surname_group)}</strong></span>`:''}</div></div>
@@ -3398,6 +3400,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         $('#workspace').innerHTML = pageHtml;
         bindPersonPage({...detail,media:orderedMedia});
         paAfterPerson(detail);
+        window.LCNDA_SHEET_LAZY?.capture?.(false);
         window.LCNDA_SHEET_LAZY?.veil($('#workspace .person-page'),detail); // ⏱ les blocs loin de l'écran attendent d'y arriver (app-fiche-lazy.js) : avant ext.afterPerson, qui ne remplit que ceux qui sont là
         (window.LCNDA_EXT?.afterPerson||[]).forEach(fn=>{try{fn(detail);}catch(error){console.error(error);}});
     }

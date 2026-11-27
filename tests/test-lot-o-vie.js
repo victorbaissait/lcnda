@@ -120,7 +120,7 @@ const P = JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(root, 'assets/dat
             await p.evaluate(() => localStorage.removeItem('genealogie-arbre-dit'));
         });
         await t('fiche : une phrase dans 🌍 (horloge + 🐴 Paris en poste) et une dans 🌒 (durée du jour) ; 🕰 s’ouvre en fenêtre ; rien pour un vivant', async () => {
-            const n0 = await p.evaluate(async () => { const A = window.LCNDA_APP; A.state.currentPersonId = 2; await A.setModule('personnes'); return document.querySelectorAll('#workspace .person-page section.card').length; });
+            const n0 = await p.evaluate(async () => { window.LCNDA_SHEET_LAZY_OFF = true; /* les blocs 🌍 🌒 essayés en entier (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = 2; await A.setModule('personnes'); return document.querySelectorAll('#workspace .person-page section.card').length; });
             await p.waitForSelector('[data-world-host] [data-lov-line="vie"]', {timeout: 30000});
             assert.match(await text('[data-world-host] [data-lov-line="vie"]'), /Si sa vie tenait en un jour, il se serait marié à 8 h 21/);
             const lune = await p.$('[data-lune-host]');
@@ -131,10 +131,10 @@ const P = JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(root, 'assets/dat
             await p.waitForSelector('dialog [data-lov-card="clock"] svg.lo-clock', {timeout: 20000});
             await p.keyboard.press('Escape'); await sleep(300);
             assert.strictEqual(await p.$('[data-lop-line]'), null, 'né en 1852 : plus de poste aux chevaux (le train)');
-            await p.evaluate(async () => { const A = window.LCNDA_APP; A.state.currentPersonId = 4; await A.setModule('personnes'); });
+            await p.evaluate(async () => { window.LCNDA_SHEET_LAZY_OFF = true; /* les blocs 🌍 🌒 essayés en entier (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = 4; await A.setModule('personnes'); });
             await p.waitForSelector('[data-world-host] [data-lop-line="poste"]', {timeout: 30000});
             assert.match(await text('[data-world-host] [data-lop-line="poste"]'), /En 1833, le relais de poste le plus proche de Seilhac était Tulle \(12 km\) ; de là, Paris était à [\d,]+ h de cheval de poste/);
-            await p.evaluate(async () => { const A = window.LCNDA_APP; A.state.currentPersonId = 30; await A.setModule('personnes'); }); await sleep(1500);
+            await p.evaluate(async () => { window.LCNDA_SHEET_LAZY_OFF = true; /* les blocs 🌍 🌒 essayés en entier (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = 30; await A.setModule('personnes'); }); await sleep(1500);
             assert.strictEqual(await p.$('[data-lov-line], [data-lop-line]'), null, 'rien sur la fiche d’une personne vivante');
         });
         await t('🐴 village et cartes : le panneau « La poste aux chevaux », les calques, la liste des relais', async () => {

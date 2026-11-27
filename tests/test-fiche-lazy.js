@@ -60,6 +60,15 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             assert.strictEqual(await p.evaluate(() => window.LCNDA_SHEET_LAZY.pending()), 0);
             await p.keyboard.press('Escape');
         });
+        await t('un bloc qui se branche juste après son dessin (📚 Recueils) répond aussi quand il arrive plus tard', async () => {
+            await p.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = false; const A = window.LCNDA_APP; A.state.currentPersonId = 2; A.setModule('personnes'); });
+            await p.waitForSelector('#workspace [data-pblock="recueils"]', {state: 'attached', timeout: 15000}); await sleep(800);
+            await p.$eval('#workspace [data-pblock="recueils"]', e => e.scrollIntoView({block: 'center'}));
+            await p.waitForSelector('#workspace [data-pblock="recueils"] [data-rc-attach]', {timeout: 10000});
+            await p.click('#workspace [data-pblock="recueils"] [data-rc-attach]');
+            await p.waitForFunction(() => [...document.querySelectorAll('dialog[open]')].some(d => /Aucun recueil/.test(d.textContent)), null, {timeout: 10000});
+            await p.keyboard.press('Escape');
+        });
         await t('une adresse de section ramène ses blocs (#personnes/1/documents)', async () => {
             await p.evaluate(() => { location.hash = '#dashboard'; }); await sleep(800);
             await p.evaluate(() => { location.hash = '#personnes/1/documents'; });

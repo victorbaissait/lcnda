@@ -112,7 +112,7 @@ echo json_encode($ids);`], {cwd: root, encoding: 'utf8', env});
         }
         await p.waitForFunction(() => window.LCNDA_EXT.mondeContexte && window.LCNDA_EXT.prixEurope, null, {timeout: 10000});
         await t('fiche : « Strasbourg → Empire allemand · aujourd’hui : France » et l’Allemagne/la France en chiffres', async () => {
-            await p.evaluate(id => { const A = window.LCNDA_APP; A.state.currentPersonId = id; A.setModule('personnes'); }, ID.pierre);
+            await p.evaluate(id => { window.LCNDA_SHEET_LAZY_OFF = true; /* ses blocs essayés en entier (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = id; A.setModule('personnes'); }, ID.pierre);
             await p.waitForFunction(() => /Empire allemand/.test(document.querySelector('[data-mc-host]')?.textContent || ''), null, {timeout: 30000});
             const txt = (await p.textContent('[data-mc-host]')).replace(/\s+/g, ' ');
             assert.match(txt, /Strasbourg \(Naissance, 1892\) → à cette date, ce lieu était dans : Empire allemand · aujourd’hui : France/);
@@ -123,9 +123,9 @@ echo json_encode($ids);`], {cwd: root, encoding: 'utf8', env});
             if (process.env.MC_SHOTS) await (await p.$('[data-mc-host]')).screenshot({path: path.join(process.env.MC_SHOTS, 'fiche.png')});
         });
         await t('fiche : Nice en 1850 (Sardaigne), Lviv en 1900 (Autriche-Hongrie)', async () => {
-            await p.evaluate(id => { const A = window.LCNDA_APP; A.state.currentPersonId = id; A.setModule('personnes'); }, ID.marie);
+            await p.evaluate(id => { window.LCNDA_SHEET_LAZY_OFF = true; /* ses blocs essayés en entier (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = id; A.setModule('personnes'); }, ID.marie);
             await p.waitForFunction(() => /Sardaigne/.test(document.querySelector('[data-mc-host]')?.textContent || ''), null, {timeout: 30000});
-            await p.evaluate(id => { const A = window.LCNDA_APP; A.state.currentPersonId = id; A.setModule('personnes'); }, ID.jean);
+            await p.evaluate(id => { window.LCNDA_SHEET_LAZY_OFF = true; /* ses blocs essayés en entier (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = id; A.setModule('personnes'); }, ID.jean);
             await p.waitForFunction(() => /Autriche-Hongrie/.test(document.querySelector('[data-mc-host]')?.textContent || ''), null, {timeout: 30000});
             assert.match((await p.textContent('[data-mc-host]')).replace(/\s+/g, ' '), /aujourd’hui : Ukraine/);
         });
