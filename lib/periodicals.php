@@ -249,7 +249,13 @@ function delete_periodical_item(PDO $pdo, array $data): array
         heritage_delete_media_links($pdo, 'periodical_issue', $iid); $pdo->prepare("DELETE FROM label_links WHERE entity_type='periodical_issue' AND entity_id=?")->execute([$iid]);
         $pdo->prepare("DELETE FROM periodical_links WHERE item_type='issue' AND item_id=?")->execute([$iid]); $pdo->prepare('DELETE FROM periodical_issues WHERE id=?')->execute([$iid]);
     };
-    if ($what === 'article') { $dropArticle($id); }
+    if ($what === 'article') { // ↶ Annuler (H7) : l'article, ses liens, ses étiquettes et ses médias sont gardés dans le journal
+        $s = $pdo->prepare('SELECT issue_id FROM periodical_articles WHERE id=?'); $s->execute([$id]);
+        undo_keep($pdo, 'periodical_article', $id, 'Revues : article supprimé', [['periodical_articles', 'id=?', [$id]], ['periodical_links', "item_type='article' AND item_id=?", [$id]],
+            ['label_links', "entity_type='periodical_article' AND entity_id=?", [$id]], ['family_collection_media', "collection_type='periodical_article' AND collection_id=?", [$id]]],
+            ['needs' => [['periodical_issues', (int) $s->fetchColumn(), 'Le numéro de la revue n’existe plus.']]]);
+        $dropArticle($id);
+    }
     elseif ($what === 'issue') { $dropIssue($id); }
     elseif ($what === 'periodical') {
         foreach ($pdo->query('SELECT id FROM periodical_issues WHERE periodical_id=' . $id)->fetchAll(PDO::FETCH_COLUMN) as $iid) { $dropIssue((int) $iid); }

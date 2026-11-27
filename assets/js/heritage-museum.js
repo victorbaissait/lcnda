@@ -400,7 +400,7 @@
         if (!list?.length) return;
         const full = await P.loadMedia(list.map(m => m.id), true), names = {};
         for (const pid of [...new Set(list.map(m => Number((m.people_ids || [])[0]) || 0).filter(Boolean))]) {
-            try { const p = (await api('person', {id: pid})).person || {}; names[pid] = `${p.first_name || ''} ${p.last_name || ''}`.trim(); } catch (_) {}
+            try { const p = (await api('person', {id: pid})).person || {}; names[pid] = p.first_name || p.last_name ? A().personName(p) : ''; } catch (_) {}
         }
         let n = 0;
         for (const m of list) {

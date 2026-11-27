@@ -217,7 +217,7 @@
         ['gray', i18n('Gris'), 'pos', v => ck('gray', i18n('Gris'), v)],
         ['mirror', i18n('Miroir'), 'pos', v => ck('mirror', i18n('Miroir'), v, i18n('Retourner l’image : pour lire un texte vu par transparence (le verso)'))],
         ['keep', `💾 ${i18n('Retenir pour cet acte')}`, 'act', () => `<button type="button" data-tx-cmd="keepview" title="${esc(i18n('Ces réglages de l’image sont enregistrés avec l’acte et reviennent à la prochaine ouverture'))}">💾 ${i18n('Retenir pour cet acte')}</button>`],
-        ['reset', `↺ ${i18n('Remettre l’image comme au départ')}`, 'act', (v, inPanel, layout) => resetBtn(layout === 'B' && !inPanel)],
+        ['reset', `↺ ${i18n('Remettre comme au départ')}`, 'act', (v, inPanel, layout) => resetBtn(layout === 'B' && !inPanel)],
     ];
     /** ↺ : seul dans la barre courte (le nom au survol), en toutes lettres ailleurs (K3 : « ↺ Remettre comme au départ ») */
     function resetBtn(short) { const tip = i18n('Remettre l’image comme au départ (tous les réglages de l’image à zéro)'); return `<button type="button" data-tx-cmd="resetview" title="${esc(tip)}"${short ? ` aria-label="${esc(tip)}"` : ''}>↺${short ? '' : ` ${esc(i18n('Remettre comme au départ'))}`}</button>`; }

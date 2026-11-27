@@ -836,7 +836,7 @@
         return card(index,'Couples sans mariage',items.length,body,spanClass,`<button class="button small secondary" data-dashboard-list="events">Événements</button>`);
     }
     function dashboardConsistencyCard(index,items,spanClass){
-        const body=dashboardListRows(items,'Aucune incohérence de dates détectée.',item=>`<article class="dashboard-row"><div><strong>${escapeHtml([item.first_name,item.last_name].filter(Boolean).join(' ')||'Personne')}</strong><small>Naissance ${escapeHtml(item.birth_year||'?')} · décès ${escapeHtml(item.death_year||'?')}</small></div><button class="button small secondary" data-open-dashboard-person="${item.id}">Ouvrir</button></article>`);
+        const body=dashboardListRows(items,'Aucune incohérence de dates détectée.',item=>`<article class="dashboard-row"><div><strong>${escapeHtml(personName(item))}</strong><small>Naissance ${escapeHtml(item.birth_year||'?')} · décès ${escapeHtml(item.death_year||'?')}</small></div><button class="button small secondary" data-open-dashboard-person="${item.id}">Ouvrir</button></article>`);
         return card(index,'Incohérences et conflits',items.length,body,spanClass,`<button class="button small secondary" data-dashboard-maintenance="issues">Vérifier</button>`);
     }
     function dashboardSosaMissingCard(index,items,spanClass){

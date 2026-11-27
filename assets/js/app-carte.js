@@ -410,7 +410,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         const keyOf=new Map();d.groups.forEach(g=>(g.events||[]).forEach(e=>keyOf.set(e,d.gKey(g))));
         const people=new Set(inside.map(p=>Number(p.person_id)).filter(Boolean));
         const rows=[...inside].sort((a,b)=>(Number(a.year)||99999)-(Number(b.year)||99999)).slice(0,250);
-        const who=p=>p.route_person_name||[p.first_name,p.middle_name,p.last_name].filter(Boolean).join(' ')||(p.cemetery_name||i18n('Personne sans nom'));
+        const who=p=>p.route_person_name||(p.first_name||p.middle_name||p.last_name?personName(p):'')||(p.cemetery_name||i18n('Personne sans nom'));
         box.innerHTML=`<header><b>📋 ${escapeHtml(i18n('Dans cette zone'))}</b><button type="button" class="icon-button" data-zone-close aria-label="${escapeHtml(i18n('Fermer'))}">×</button></header><small class="map-zone-count">${escapeHtml(i18n('{e} · {p}',{e:plural(inside.length,'événement'),p:plural(people.size,'personne')}))}</small>
             <div class="map-zone-list">${rows.map(p=>`<button type="button" data-zone-key="${escapeHtml(keyOf.get(p)||'')}"><span>${escapeHtml(who(p))}</span><small>${escapeHtml([p.type_label||'',p.date_text||p.year||'',placeDisplay(p)].filter(Boolean).join(' · '))}</small></button>`).join('')||`<p class="muted">${escapeHtml(i18n('Rien dans le cadre : déplace la carte ou dézoome.'))}</p>`}${inside.length>rows.length?`<p class="muted">${escapeHtml(i18n('+ {n} autres : zoome pour les voir.',{n:inside.length-rows.length}))}</p>`:''}</div>`;
     }
@@ -519,7 +519,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         const d=state.mapLastDraw,cell=window.LCNDA_APP.csvCell||(v=>`"${String(v??'').replace(/"/g,'""')}"`);
         const rows=(d?.visible||[]).filter(p=>p._x>=0&&p._x<=d.width&&p._y>=0&&p._y<=d.height);
         const head=['Lieu','Latitude','Longitude','Événement','Date','Personne'].map(x=>i18n(x));
-        const csv='﻿'+[head,...rows.map(p=>[placeDisplay(p),p.latitude,p.longitude,p.type_label||'',p.date_text||p.year||'',p.route_person_name||[p.first_name,p.middle_name,p.last_name].filter(Boolean).join(' ')])].map(r=>r.map(v=>cell(v)).join(';')).join('\r\n');
+        const csv='﻿'+[head,...rows.map(p=>[placeDisplay(p),p.latitude,p.longitude,p.type_label||'',p.date_text||p.year||'',p.route_person_name||(p.first_name||p.middle_name||p.last_name?personName(p):'')])].map(r=>r.map(v=>cell(v)).join(';')).join('\r\n');
         const a=document.createElement('a');a.download=filename||`${mapTitle()}.csv`;a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);
     }
     async function mapPrintDoc(){

@@ -201,7 +201,7 @@
             <div class="kc-presets" role="group" aria-label="${esc(T('Palettes'))}">${PRESETS.map(presetBtn).join('')}</div>
             <div class="kc-rows">${KINDS.map(row).join('')}</div>
             <label class="checkbox-line kc-shapes"><input type="checkbox" data-kc-shapes ${c.shapes ? 'checked' : ''}><span><b>${esc(T('Formes différentes par sorte'))}</b><br><small class="muted">${esc(T('Triangle, carré, croix, étoile… : les sortes se distinguent aussi sans la couleur (impression en noir et blanc, daltonisme).'))}</small></span></label>
-            <div class="kc-foot"><button type="button" class="button small secondary" data-kc-reset ${isDefault(c) ? 'disabled' : ''}>↺ ${esc(T('Remettre les couleurs de départ'))}</button></div>`;
+            <div class="kc-foot"><button type="button" class="button small secondary" data-kc-reset title="${esc(T('Remettre les couleurs de départ'))}" ${isDefault(c) ? 'disabled' : ''}>↺ ${esc(T('Remettre comme au départ'))}</button></div>`;
         box.querySelectorAll('[data-kc-color]').forEach(slot => {
             const k = slot.dataset.kcColor;
             if (UI().colorField) {

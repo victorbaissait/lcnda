@@ -75,6 +75,10 @@ function clear_voter_cards(PDO $pdo, array $data): array
     $personId = safe_int($data['person_id'] ?? 0);
     h_person_exists($pdo, $personId);
     if (function_exists('assert_person_unlocked')) { assert_person_unlocked($pdo, $personId); }
+    $flag = $pdo->prepare('SELECT show_voter_block FROM persons WHERE id=?'); $flag->execute([$personId]);
+    undo_keep($pdo, 'voter_cards', $personId, 'Cartes d’électeur effacées', [['voter_cards', 'person_id=?', [$personId]], ['voter_votes', 'person_id=?', [$personId]],
+        ['label_links', "entity_type='voter' AND entity_id=?", [$personId]], ['family_collection_media', "collection_type='voter' AND collection_id=?", [$personId]]],
+        ['needs' => [['persons', $personId, 'La fiche n’existe plus.']], 'set' => [['persons', $personId, ['show_voter_block' => (int) $flag->fetchColumn()]]]]); // ↶ Annuler (H7)
     $pdo->prepare('DELETE FROM voter_cards WHERE person_id=?')->execute([$personId]);
     $pdo->prepare('DELETE FROM voter_votes WHERE person_id=?')->execute([$personId]);
     $pdo->prepare('UPDATE persons SET show_voter_block=0 WHERE id=?')->execute([$personId]);

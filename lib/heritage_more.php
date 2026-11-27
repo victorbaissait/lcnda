@@ -531,10 +531,14 @@ function vault_download(PDO $pdo, int $id): never
 
 function vault_delete(PDO $pdo, array $data): array
 {
-    $s = $pdo->prepare('SELECT filename FROM cousin_vault WHERE id=?'); $s->execute([safe_int($data['id'] ?? 0)]);
-    $f = $s->fetchColumn();
-    if ($f) { @unlink(vault_dir() . '/' . basename((string) $f)); }
-    $pdo->prepare('DELETE FROM cousin_vault WHERE id=?')->execute([safe_int($data['id'] ?? 0)]);
+    $id = safe_int($data['id'] ?? 0);
+    $s = $pdo->prepare('SELECT filename FROM cousin_vault WHERE id=?'); $s->execute([$id]);
+    $f = (string) $s->fetchColumn();
+    // ↶ Annuler (H7) : la copie chiffrée reste un jour sur le disque ; ensuite elle part au ménage (à la suppression suivante)
+    undo_keep($pdo, 'vault_copy', $id, 'Copie du coffre supprimée', [['cousin_vault', 'id=?', [$id]]], ['files' => $f !== '' ? [basename($f)] : []]);
+    $pdo->prepare('DELETE FROM cousin_vault WHERE id=?')->execute([$id]);
+    $used = $pdo->prepare('SELECT 1 FROM cousin_vault WHERE filename=?');
+    foreach (undo_old_files($pdo, 'vault_copy') as $old) { $used->execute([$old]); if (!$used->fetchColumn()) { @unlink(vault_dir() . '/' . basename($old)); } }
     return ['ok' => true];
 }
 
@@ -1019,6 +1023,10 @@ function save_resistance(PDO $pdo, array $data): array
 function clear_resistance(PDO $pdo, array $data): array
 {
     $personId = safe_int($data['person_id'] ?? 0);
+    $flag = $pdo->prepare('SELECT show_resistance_block FROM persons WHERE id=?'); $flag->execute([$personId]);
+    undo_keep($pdo, 'resistance', $personId, 'Parcours de résistant effacé', [['resistance_profiles', 'person_id=?', [$personId]], ['resistance_steps', 'person_id=?', [$personId]],
+        ['label_links', "entity_type='resistance' AND entity_id=?", [$personId]], ['family_collection_media', "collection_type='resistance' AND collection_id=?", [$personId]]],
+        ['needs' => [['persons', $personId, 'La fiche n’existe plus.']], 'set' => [['persons', $personId, ['show_resistance_block' => (int) $flag->fetchColumn()]]]]); // ↶ Annuler (H7)
     $pdo->prepare('DELETE FROM resistance_steps WHERE person_id=?')->execute([$personId]);
     $pdo->prepare('DELETE FROM resistance_profiles WHERE person_id=?')->execute([$personId]);
     heritage_delete_media_links($pdo, 'resistance', $personId); // médias et étiquettes du parcours
@@ -1227,6 +1235,10 @@ function save_custom_block_entry(PDO $pdo, array $data): array
 function delete_custom_block_entry(PDO $pdo, array $data): array
 {
     $id = safe_int($data['id'] ?? 0);
+    $s = $pdo->prepare('SELECT block_id, person_id FROM custom_block_entries WHERE id=?'); $s->execute([$id]); $e = $s->fetch() ?: ['block_id' => 0, 'person_id' => 0];
+    undo_keep($pdo, 'custom_block_entry', $id, 'Ligne d’un bloc supprimée', [['custom_block_entries', 'id=?', [$id]], ['label_links', "entity_type='custom_block_entry' AND entity_id=?", [$id]],
+        ['family_collection_media', "collection_type='custom_block_entry' AND collection_id=?", [$id]]],
+        ['needs' => [['custom_block_defs', (int) $e['block_id'], 'Le bloc n’existe plus.'], ['persons', (int) $e['person_id'], 'La fiche n’existe plus.']]]); // ↶ Annuler (H7)
     heritage_delete_media_links($pdo, 'custom_block_entry', $id);
     $pdo->prepare("DELETE FROM label_links WHERE entity_type='custom_block_entry' AND entity_id=?")->execute([$id]);
     $pdo->prepare('DELETE FROM custom_block_entries WHERE id=?')->execute([$id]);

@@ -1870,7 +1870,7 @@
                 for (const [i, r] of rows.entries()) {
                     state.innerHTML = window.LCNDA_UI?.spinner ? window.LCNDA_UI.spinner(`${i + 1} / ${rows.length} · ${r.name}`) : esc(r.name);
                     try {
-                        const d = await api('person', {id: r.id}), pe = d.person || {}; r.name = `${pe.first_name || ''} ${pe.last_name || ''}`.trim() || r.name;
+                        const d = await api('person', {id: r.id}), pe = d.person || {}; r.name = (pe.first_name || pe.last_name ? A().personName(pe) : '') || r.name;
                         const imgs = (d.media || []).filter(m => (m.media_type || 'image') === 'image' && /\.(jpe?g|png|webp)$/i.test(m.filename || ''));
                         // le portrait d'abord, puis les photos où la personne est identifiée (la boîte de son visage aide quand le modèle manque)
                         const portrait = imgs.find(x => Number(x.id) === Number(pe.portrait_media_id)) || null; let m = null, hint = null;

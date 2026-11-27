@@ -133,7 +133,7 @@
     }
 
     /* ═════════════════════════════ Préparer un questionnaire ═════════════════════════════ */
-    const personItem = p => (p && p.id ? {id: Number(p.id), title: p.name || `${p.first_name || ''} ${p.last_name || ''}`.trim(), kind: 'person', gender: p.gender} : null);
+    const personItem = p => (p && p.id ? {id: Number(p.id), title: p.name || A().personName(p), kind: 'person', gender: p.gender} : null);
     const mediaItem = m => (m && m.id ? {id: Number(m.id), title: m.title || m.filename || 'Photo', filename: m.filename, thumb: m.thumbnail ? `media/${m.thumbnail}` : (m.filename ? `media/${m.filename}` : '')} : null);
     async function blankFrom(e) {
         const ed = {id: 0, title: '', intro: DEFAULT_INTRO, recipient: null, person: null, questions: [], status: 'prepared', email: ''};

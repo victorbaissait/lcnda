@@ -139,14 +139,15 @@ echo json_encode($ids);`], {cwd: root, encoding: 'utf8', env});
             assert.ok(m.length, 'point avec un nombre'); m.forEach(c => assert.strictEqual(c, 'rgb(17, 17, 17)'));
         });
 
-        await t('↺ Remettre les couleurs de départ, puis ↶ Annuler (Réglages → Cartes et fonds de carte)', async () => {
+        await t('↺ Remettre comme au départ (les couleurs), puis ↶ Annuler (Réglages → Cartes et fonds de carte)', async () => {
             await p.evaluate(() => window.LCNDA_CARTE_COULEURS.write({...window.LCNDA_CARTE_COULEURS.read(), colors: {...window.LCNDA_CARTE_COULEURS.read().colors, births: '#123456'}}));
             await p.click('#map-legend [data-kc-settings]');
             await p.waitForFunction(() => { const el = document.querySelector('[data-kc-panel]'); return el && el.offsetParent && el.querySelector('[data-kc-row]'); }, null, {timeout: 20000});
             assert.strictEqual(await p.evaluate(() => window.LCNDA_APP.state.maintenanceTab), 'design_maps');
             const txt = await p.textContent('[data-kc-panel]');
             assert.match(txt, /Couleurs de la carte/); assert.ok(txt.includes(KC.HELP), 'explication losange / rond');
-            for (const n of ['Par défaut', 'Pour daltoniens', 'Pastel', 'Contrasté (impression)', 'Noir et blanc + formes', 'Formes différentes par sorte', 'Remettre les couleurs de départ']) assert.ok(txt.includes(n), n);
+            for (const n of ['Par défaut', 'Pour daltoniens', 'Pastel', 'Contrasté (impression)', 'Noir et blanc + formes', 'Formes différentes par sorte', 'Remettre comme au départ']) assert.ok(txt.includes(n), n);
+            assert.strictEqual(await p.getAttribute('[data-kc-reset]', 'title'), 'Remettre les couleurs de départ', 'K3 : la bulle dit ce qui est remis');
             assert.strictEqual(await p.$$eval('[data-kc-panel] .ui-color', x => x.length), 7, 'une couleur par sorte (sélecteur de l’app)');
             await p.click('[data-kc-reset]'); await sleep(200);
             assert.deepStrictEqual(await p.evaluate(() => window.LCNDA_CARTE_COULEURS.read().colors), BEFORE);

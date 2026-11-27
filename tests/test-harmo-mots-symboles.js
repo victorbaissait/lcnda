@@ -58,6 +58,10 @@ const t = async (name, fn) => { try { await fn(); count++; console.log('✓', na
         none(/↺ \$\{(esc|escapeHtml)\((T|i18n)\('(Comme au départ|Valeurs de départ|Les rayons de départ|Tout remettre comme au départ|Réglages de départ)'|>↺ Réglages de départ</g, 'symbole hors de la traduction + ancien mot');
         none(/Revenir au standard|Tout remettre à zéro|↺ Remettre à zéro|↺ Tout remettre comme|>Tout remettre<|↺ Comme au départ|↺ Réglage de départ|↺ Réglages par défaut|Revenir à l’apparence de départ|Remettre l’ordre de l’app<|>Remettre les réglages de départ<|>Revenir aux réglages de départ<|aria-label="Revenir au départ"/g, 'variantes de « remettre comme au départ »');
         assert.ok(hits(/↺ Remettre comme au départ/g).length >= 60, 'le mot validé est partout');
+        // harmonisation.md (Apparence 7) : les « remettre » précis disent « ↺ Remettre comme au départ », la bulle (title / help) dit ce qui est remis
+        none(/↺ \$\{(esc\()?(T|i18n)\('(Remettre les couleurs de départ|Rétablir l’ordre de départ|Remettre l’image comme au départ|Revenir à l’état calculé)|icon: '↺', label: (T|i18n)\('(Remettre les couleurs de départ|Rétablir l’ordre de départ|Remettre l’image comme au départ|Revenir à l’état calculé)/g, '« ↺ Remettre comme au départ » + la précision dans la bulle');
+        for (const [f, re] of [['app-carte-couleurs.js', /data-kc-reset title="\$\{esc\(T\('Remettre les couleurs de départ'\)\)\}"/], ['app-donnees-onglet.js', /help: T\('Rétablir l’ordre de départ'\)/], ['heritage-recueil-etat.js', /help: T\('Revenir à l’état calculé'\)/], ['heritage-transcribe.js', /help: i18n\('Remettre l’image comme au départ \(tous les réglages de l’image à zéro\)'\)/]])
+            assert.match(all[f], re, f);
     });
     await t('K3 « Relier » : plus de Rattacher, Lier, Associer sur un bouton ou une fenêtre', () => {
         none(/<button\b[^>]*>\s*(\S{1,2}\s)?(Rattacher|Lier|Associer)\b/g, 'bouton');

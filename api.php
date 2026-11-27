@@ -6713,6 +6713,24 @@ function restore_change(PDO $pdo,array $data): array
 function restore_last_delete(PDO $pdo,array $data): array
 {
     $type=(string)($data['entity_type']??'');$id=safe_int($data['entity_id']??0);
+    // gardé par undo_keep() (lib/bootstrap.php) : plusieurs tables d'un coup ; seules les tables prévues pour cette sorte sont remises
+    $kept=[
+        'saved_search'=>['saved_searches'],
+        'help_request'=>['help_requests'],
+        'museum_guestbook'=>['museum_guestbook'],
+        'museum_item'=>['museum_items'],
+        'museum_room'=>['museum_rooms','museum_items'],
+        'employer_record'=>['employer_records'],
+        'periodical_article'=>['periodical_articles','periodical_links','label_links','family_collection_media'],
+        'my_list'=>['custom_lists','custom_list_rows','custom_list_records','label_links','family_collection_media'],
+        'my_list_record'=>['custom_list_records','label_links','family_collection_media'],
+        'archive_digest_person'=>['archive_digest_people'],
+        'custom_block_entry'=>['custom_block_entries','label_links','family_collection_media'],
+        'vault_copy'=>['cousin_vault'],
+        'voter_cards'=>['voter_cards','voter_votes','label_links','family_collection_media','persons'],
+        'resistance'=>['resistance_steps','resistance_profiles','label_links','family_collection_media','persons'],
+    ];
+    if($id&&isset($kept[$type]))return undo_keep_restore($pdo,$type,$id,$kept[$type]);
     // une simple ligne, gardée entière dans le journal au moment de la suppression (rappel, ligne de budget, courrier)
     // (et ses lignes liées gardées dans « _children » : étiquettes posées, membres d'une branche)
     $simple=['standalone_reminder'=>'standalone_reminders','research_budget'=>'research_budget','courrier'=>'courriers',
@@ -6751,6 +6769,40 @@ function restore_last_delete(PDO $pdo,array $data): array
     $restored=$pdo->prepare("SELECT 1 FROM change_log WHERE action='restore' AND entity_type=? AND entity_id=? AND id>? LIMIT 1");$restored->execute([$type,$id,$changeId]);
     if($restored->fetchColumn()||record_exists($pdo,$tables[$type],$id))return ['entity_type'=>$type,'entity_id'=>$id,'already'=>true];
     return restore_change($pdo,['id'=>$changeId]);
+}
+
+/** ↶ Annuler d'une suppression gardée par undo_keep() : remet les lignes (dans l'ordre), puis les cases notées dans « set ». */
+function undo_keep_restore(PDO $pdo,string $type,int $id,array $tables): array
+{
+    $stmt=$pdo->prepare("SELECT * FROM change_log WHERE action='delete' AND entity_type=? AND entity_id=? ORDER BY id DESC LIMIT 1");
+    $stmt->execute([$type,$id]);$change=$stmt->fetch();
+    $before=$change?(json_decode((string)($change['before_json']??''),true)?:[]):[];
+    if(empty($before['_undo']))throw new RuntimeException('Cette suppression n’a pas été trouvée dans le journal.');
+    $done=$pdo->prepare("SELECT 1 FROM change_log WHERE action='restore' AND entity_type=? AND entity_id=? AND id>? LIMIT 1");
+    $done->execute([$type,$id,(int)$change['id']]);
+    if($done->fetchColumn())return ['entity_type'=>$type,'entity_id'=>$id,'already'=>true]; // un deuxième « ↶ Annuler » : déjà remis
+    $ok=static fn($t)=>is_string($t)&&preg_match('/^[a-z_]+$/',$t)&&(in_array($t,$tables,true)||in_array($t,['persons','museums','museum_rooms','custom_lists','archive_digest_entries','custom_block_defs','periodical_issues'],true));
+    foreach(($before['needs']??[]) as $n){
+        [$t,$nid,$why]=array_pad((array)$n,3,'');
+        if(!$ok($t))continue;
+        $s=$pdo->prepare("SELECT 1 FROM {$t} WHERE id=?");$s->execute([(int)$nid]);
+        if(!$s->fetchColumn())throw new RuntimeException($why?:'Ce à quoi c’était rattaché n’existe plus.');
+    }
+    $n=0;
+    foreach(($before['_rows']??[]) as $part){
+        [$t,$rows]=array_pad((array)$part,2,[]);
+        if(!$ok($t)||$t==='persons'||!is_array($rows))continue;
+        foreach($rows as $row)if(is_array($row)&&$row){insert_snapshot_row($pdo,$t,$row,true);$n++;}
+    }
+    foreach(($before['set']??[]) as $set){
+        [$t,$sid,$vals]=array_pad((array)$set,3,[]);
+        if(!in_array($t,$tables,true)||!is_array($vals)||!$vals)continue;
+        $cols=array_values(array_intersect(table_columns($pdo,$t),array_keys($vals)));
+        if(!$cols)continue;
+        $pdo->prepare("UPDATE {$t} SET ".implode(',',array_map(static fn($c)=>"{$c}=?",$cols)).' WHERE id=?')->execute([...array_map(static fn($c)=>$vals[$c],$cols),(int)$sid]);
+    }
+    log_change($pdo,$type,$id,'restore','Suppression annulée',null,['restored_from_change_id'=>(int)$change['id'],'rows'=>$n]);
+    return ['entity_type'=>$type,'entity_id'=>$id,'rows'=>$n];
 }
 
 function record_exists(PDO $pdo,string $table,int $id): bool
@@ -10062,6 +10114,7 @@ function delete_archive_digest_person(PDO $pdo, array $data): array
     $id = safe_int($data['id'] ?? 0);
     $before = archive_digest_person_row($pdo, $id);
     if (!$before) throw new RuntimeException('Personne relevée introuvable');
+    undo_keep($pdo, 'archive_digest_person', $id, 'Personne relevée retirée du dépouillement', [['archive_digest_people', 'id=?', [$id]]], ['needs' => [['archive_digest_entries', (int) $before['archive_digest_id'], 'Le dépouillement n’existe plus.']]]); // ↶ Annuler (H7)
     $pdo->prepare('DELETE FROM archive_digest_people WHERE id=?')->execute([$id]);
     log_change($pdo, 'archive_digest', (int)$before['archive_digest_id'], 'delete-member', 'Personne relevée retirée du dépouillement', $before, null);
     return ['id' => $id];

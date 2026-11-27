@@ -154,9 +154,9 @@
                     const {lines: L, size} = fitLines(lines, fw, fh, T, (g === 0 ? 44 : g < 3 ? 30 : 22) * unit * 1.6, 4.5 * unit);
                     let rot = g === 0 ? 0 : tangential ? mid : mid - 90;
                     const norm = ((rot % 360) + 360) % 360; if (norm > 90 && norm < 270) rot += 180; // jamais la tête en bas
-                    if (L.length) kids.push(textObj(L, px, py, size, rot, p ? ink(fill, T) : T.ink, T, p ? `${p.first_name || ''} ${p.last_name || ''}`.trim() : '?'));
+                    if (L.length) kids.push(textObj(L, px, py, size, rot, p ? ink(fill, T) : T.ink, T, p ? A().personName(p) : '?'));
                 }
-                groups.push({id: uid(), type: 'group', name: p ? `${s}. ${`${p.first_name || ''} ${p.last_name || ''}`.trim() || 'Sans nom'}` : `${s}. (à trouver)`, children: kids});
+                groups.push({id: uid(), type: 'group', name: p ? `${s}. ${A().personName(p)}` : `${s}. (à trouver)`, children: kids});
             }
         }
         // les numéros de génération le long du bord, pour s'y retrouver
@@ -217,7 +217,7 @@
             const lines = p ? linesOf(p, o, s) : ['?'];
             const {lines: L, size} = fitLines(lines, mw * .8, mh * .74, T, (s === 1 ? 40 : 24) * unit * 1.5, 4.5 * unit);
             if (L.length) kids.push(textObj(L, x, ty, size, rotE, p ? ink(fill, T) : T.ink, T)); void th;
-            groups.push({id: uid(), type: 'group', name: p ? `${s}. ${`${p.first_name || ''} ${p.last_name || ''}`.trim() || 'Sans nom'}` : `${s}. (à trouver)`, children: kids});
+            groups.push({id: uid(), type: 'group', name: p ? `${s}. ${A().personName(p)}` : `${s}. (à trouver)`, children: kids});
         }
         return {groups, branches, leaves, labels: [], box: {cx: ccx, cy: ccy, R: crownR}};
     }
@@ -236,7 +236,7 @@
             const turn = vertical && b.w < b.h * .8, lines = p ? linesOf(p, o, s) : ['?'];
             const {lines: L, size} = fitLines(lines, (turn ? b.h : b.w) * .88, (turn ? b.w : b.h) * .8, T, (s === 1 ? 34 : 24) * unit * 1.5, 4 * unit);
             if (L.length) kids.push(textObj(L, b.x + b.w / 2, b.y + b.h / 2, size, turn ? 270 : 0, p ? ink(fill, T) : T.ink, T));
-            groups.push({id: uid(), type: 'group', name: p ? `${s}. ${`${p.first_name || ''} ${p.last_name || ''}`.trim() || 'Sans nom'}` : `${s}. (à trouver)`, children: kids});
+            groups.push({id: uid(), type: 'group', name: p ? `${s}. ${A().personName(p)}` : `${s}. (à trouver)`, children: kids});
             if (s > 1) { const c = box(s >> 1), d = vertical ? (() => { const x1 = c.x + c.w / 2, y1 = c.y, x2 = b.x + b.w / 2, y2 = b.y + b.h, ym = (y1 + y2) / 2; return `M${n2(x1)} ${n2(y1)}V${n2(ym)}H${n2(x2)}V${n2(y2)}`; })()
                 : (() => { const x1 = c.x + c.w, y1 = c.y + c.h / 2, x2 = b.x, y2 = b.y + b.h / 2, xm = (x1 + x2) / 2; return `M${n2(x1)} ${n2(y1)}H${n2(xm)}V${n2(y2)}H${n2(x2)}`; })();
                 links.push({id: uid(), type: 'svgpath', name: `Lien ${s}`, d, fill: 'none', stroke: T.trunk, sw: n2(Math.max(.8, 2 * unit * .85 ** genOf(s))), join: 'round'}); }
@@ -264,7 +264,7 @@
                 kids.push({id: uid(), type: 'group', name: 'Portrait', clip, children: [{id: uid(), type: 'image', name: 'Portrait', src: p.portraitData, x: clip.x, y: clip.y, w: clip.w, h: clip.h}]}); tx = px2 + ph * .8; tw = b.x + b.w - tx; }
             const {lines: L, size} = fitLines(p ? linesOf(p, o, s) : ['?'], tw * .86, b.h * .8, T, (s === 1 ? 34 : 24) * unit * 1.5, 4 * unit);
             if (L.length) kids.push(textObj(L, tx + tw / 2, b.y + b.h / 2, size, 0, p ? ink(fill, T) : T.ink, T));
-            groups.push({id: uid(), type: 'group', name: p ? `${s}. ${`${p.first_name || ''} ${p.last_name || ''}`.trim() || 'Sans nom'}` : `${s}. (à trouver)`, children: kids});
+            groups.push({id: uid(), type: 'group', name: p ? `${s}. ${A().personName(p)}` : `${s}. (à trouver)`, children: kids});
             if (s > 1) { const c = box(s >> 1), right = b.x > cx, x1 = right ? c.x + c.w : c.x, y1 = c.y + c.h / 2, x2 = right ? b.x : b.x + b.w, y2 = b.y + b.h / 2, xm = (x1 + x2) / 2;
                 links.push({id: uid(), type: 'svgpath', name: `Lien ${s}`, d: `M${n2(x1)} ${n2(y1)}H${n2(xm)}V${n2(y2)}H${n2(x2)}`, fill: 'none', stroke: T.trunk, sw: n2(Math.max(.8, 2 * unit * .85 ** genOf(s))), join: 'round'}); }
         }

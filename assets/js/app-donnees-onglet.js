@@ -162,7 +162,7 @@
         const nHid = all.filter(t => hid.has(t.id)).length;
         footer.innerHTML = `<div class="dashboard-footer-actions"><button class="button small secondary" type="button" data-dno-reorder title="${esc(T('L’ordre des thèmes, ceux qui s’affichent'))}">${esc(T('Réordonner'))}</button></div>
             ${nHid ? `<label class="checkbox-line dno-showhid"><input type="checkbox" data-dno-showhid ${show ? 'checked' : ''}> <span>${esc(T('Afficher les thèmes masqués'))} <small class="muted">(${nf(nHid)})</small></span></label>` : ''}
-            ${changed() && !kiosk() ? `<button type="button" class="dno-reset button small secondary" data-dno-reset>↺ ${esc(T('Rétablir l’ordre de départ'))}</button>` : ''}`;
+            ${changed() && !kiosk() ? `<button type="button" class="dno-reset button small secondary" data-dno-reset title="${esc(T('Rétablir l’ordre de départ'))}">↺ ${esc(T('Remettre comme au départ'))}</button>` : ''}`;
         bind(content, footer);
     }
     function bind(content, footer) {
@@ -194,7 +194,7 @@
         const list = allThemes().map(t => t.id), i = list.indexOf(id), hid = isHidden(id);
         const items = [{icon: '↑', label: T('Monter'), disabled: i <= 0, run: () => move(id, i - 1)}, {icon: '↓', label: T('Descendre'), disabled: i >= list.length - 1, run: () => move(id, i + 1)},
             hid ? {icon: '👁', label: T('Afficher ce thème'), run: () => setHidden(id, false)} : {icon: '🙈', label: T('Masquer ce thème'), run: () => setHidden(id, true)},
-            '-', {icon: '⇅', label: T('Réordonner…'), run: openDialog}, changed() ? {icon: '↺', label: T('Rétablir l’ordre de départ'), run: reset} : null].filter(Boolean);
+            '-', {icon: '⇅', label: T('Réordonner…'), run: openDialog}, changed() ? {icon: '↺', label: T('Remettre comme au départ'), help: T('Rétablir l’ordre de départ'), run: reset} : null].filter(Boolean);
         const t = TH()?.themes?.().find(x => x.id === id);
         if (window.LCNDA_UI?.menuAt) window.LCNDA_UI.menuAt(btn, items, {title: t ? `${t.icon} ${T(t.label)}` : ''}); else openDialog();
     }
@@ -207,7 +207,7 @@
         const draw = () => { dlg.querySelector('[data-dno-rows]').innerHTML = order.map((id, i) => { const t = byId.get(id);
             return `<li class="dashboard-reorder-row${hid.has(id) ? ' is-hidden-row' : ''}" data-ii="${i}" data-dno-row="${esc(id)}"><label class="mt-vis" title="${esc(T('Afficher dans la colonne'))}"><input type="checkbox" data-dno-vis="${esc(id)}" ${hid.has(id) ? '' : 'checked'} aria-label="${esc(T('Afficher « {t} »', {t: T(t.label)}))}"></label><span class="order-number">${esc(t.icon)}</span><b style="flex:1">${esc(T(t.label))}</b><span class="order-actions"><button type="button" class="button small secondary" data-move="-1" aria-label="${esc(T('Monter'))}" ${i ? '' : 'disabled'}>↑</button><button type="button" class="button small secondary" data-move="1" aria-label="${esc(T('Descendre'))}" ${i < order.length - 1 ? '' : 'disabled'}>↓</button></span></li>`; }).join(''); };
         dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">📊 ${esc(T('Données'))}</span><h2>${esc(T('Réordonner les thèmes'))}</h2><p>${esc(T('Range avec ↑ ↓ ou en glissant ⠿, coche ce qui s’affiche. Le même ordre pour les cartes de « Toutes les données ». Puis Enregistrer.'))}</p></div><button class="icon-button" type="button" data-close aria-label="${esc(T('Fermer'))}">×</button></div>
-            <div class="dash-reorder-tools"><button type="button" class="button small secondary" data-dno-dreset>↺ ${esc(T('Rétablir l’ordre de départ'))}</button></div>
+            <div class="dash-reorder-tools"><button type="button" class="button small secondary" data-dno-dreset title="${esc(T('Rétablir l’ordre de départ'))}">↺ ${esc(T('Remettre comme au départ'))}</button></div>
             <div class="mt-rbody"><section class="mt-rgroup"><ol class="dashboard-reorder-list" data-dno-rows></ol></section></div>
             <div class="modal-actions"><span class="spacer"></span><button class="button secondary" type="button" data-close>${esc(T('Annuler'))}</button><button class="button" type="button" data-save>${esc(T('Enregistrer'))}</button></div>`;
         document.body.append(dlg); draw();

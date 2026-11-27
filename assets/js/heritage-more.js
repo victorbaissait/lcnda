@@ -1065,7 +1065,7 @@
         try { data = await api('census_households', {}); } catch (error) { toast(error.message, 'error'); return; }
         if (token !== st.workspaceToken || st.module !== 'listes' || st.listType !== 'census_households') return;
         const all = data.records || [];
-        const memberName = m => m.person_id ? personLink(m.person_id, [m.first_name, m.last_name].filter(Boolean).join(' ') || m.display_name) : esc(m.display_name || '—');
+        const memberName = m => m.person_id ? personLink(m.person_id, (m.first_name || m.last_name ? A().personName(m) : '') || m.display_name) : esc(m.display_name || '—');
         const household = (r, withYear) => `<article class="h-census-house"><header><div>${withYear && r.year ? `<strong>${esc(r.year)}</strong> · ` : ''}<strong>${esc(r.place || 'Lieu inconnu')}</strong>${r.address ? ` · ${esc(r.address)}` : ''}${r.date_text ? ` <small class="muted">${esc(r.date_text)}</small>` : ''}</div>
                 <span>${Number(r.is_special) ? '<span class="collection-kind">recensement particulier</span> ' : ''}<span class="collection-kind">${esc(censusStatus[r.status] || r.status || '')}</span>${Number(r.media) ? ` <span class="collection-kind">📎 ${fmt(r.media)}</span>` : ''}</span></header>
             ${r.members.length ? `<div class="data-table-wrap"><table class="data-table"><thead><tr><th>Nom</th><th>Place dans le foyer</th><th>Âge</th><th>Métier</th><th>Lieu de naissance</th></tr></thead><tbody>${r.members.map(m => `<tr><td>${memberName(m)}</td><td>${esc(m.household_position || m.personal_status || '')}</td><td>${esc(m.age_text || '')}</td><td>${esc(m.occupation || '')}</td><td>${esc(m.birth_place || '')}</td></tr>`).join('')}</tbody></table></div>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">👤</span><span class="empty-line-text">Aucun membre relevé.</span></p>'}
@@ -1077,7 +1077,7 @@
         const ws = A().$('#workspace'), box = ws.querySelector('[data-hc-list]'), slot = ws.querySelector('[data-hc-bar]');
         let shown = all;
         const csvRows = () => [['Année', 'Date', 'Commune', 'Adresse', 'Nom', 'Place dans le foyer', 'Âge', 'Métier', 'Lieu de naissance'],
-            ...shown.flatMap(r => (r.members.length ? r.members : [{}]).map(m => [r.year, r.date_text, r.place, r.address, m.person_id ? [m.first_name, m.last_name].filter(Boolean).join(' ') || m.display_name : m.display_name, m.household_position || m.personal_status, m.age_text, m.occupation, m.birth_place].map(v => String(v ?? ''))))];
+            ...shown.flatMap(r => (r.members.length ? r.members : [{}]).map(m => [r.year, r.date_text, r.place, r.address, m.person_id ? (m.first_name || m.last_name ? A().personName(m) : '') || m.display_name : m.display_name, m.household_position || m.personal_status, m.age_text, m.occupation, m.birth_place].map(v => String(v ?? ''))))];
         ws.querySelector('[data-hc-export]')?.addEventListener('click', e => U.menuAt(e.currentTarget, [
             {icon: '📄', label: 'En CSV (Excel, LibreOffice…)', run: () => {
                 const q = v => `"${String(A().csvSafe ? A().csvSafe(v) : (v ?? '')).replace(/"/g, '""')}"`; // formules (= + - @) neutralisées

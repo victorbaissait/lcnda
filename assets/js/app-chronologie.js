@@ -161,7 +161,7 @@
         anomalyCache = {at: Date.now(), map};
         return map;
     }
-    const eventName = event => [event.first_name, event.last_name].filter(Boolean).join(' ');
+    const eventName = event => (event.first_name || event.last_name ? (A().personName ? A().personName(event) : [event.first_name, event.last_name].filter(Boolean).join(' ')) : ''); // le nom : la pièce commune (A().personName)
     function eventAttrs(event) {
         const text = [event.type, eventName(event), event.date_text, event.place, event._age].filter(Boolean).join(' ');
         return `data-event-id="${Number(event.id) || ''}" data-person-id="${Number(event.person_id) || ''}" data-kind="${kindOf(event)}" data-text="${escapeHtml(fold(text))}" data-ctx-menu`;

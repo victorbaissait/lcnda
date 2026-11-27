@@ -1454,6 +1454,36 @@ function log_change(PDO $pdo, string $entityType, ?int $entityId, string $action
     if ($entityType === 'person' && $action === 'create' && $entityId && !empty($_SERVER['HTTP_X_LCNDA_SUCC']) && function_exists('succ_auto_attach')) { succ_auto_attach($pdo, (int) $entityId); }
 }
 
+/**
+ * H7 « ↶ Annuler » au lieu de « Es-tu sûr ? » : juste AVANT de supprimer, garder dans le journal tout ce que la suppression
+ * emporte (une ou plusieurs tables). restore_last_delete($pdo, ['entity_type' => $type, 'entity_id' => $id]) remet tout (api.php).
+ *   undo_keep($pdo, 'voter_cards', $personId, 'Cartes d’électeur effacées', [['voter_cards', 'person_id=?', [$personId]], …],
+ *             ['needs' => [['persons', $personId, 'La fiche n’existe plus.']], 'set' => [['persons', $personId, ['show_voter_block' => 1]]], 'files' => […]]);
+ * « needs » : ce qui doit encore exister pour remettre ; « set » : des cases à remettre comme avant ; « files » : fichiers gardés
+ * le temps de pouvoir annuler (undo_old_files() les rend ensuite au ménage). Renvoie le numéro de la ligne du journal.
+ */
+function undo_keep(PDO $pdo, string $type, int $id, string $summary, array $parts, array $extra = []): int
+{
+    $rows = [];
+    foreach ($parts as [$table, $where, $params]) {
+        if (!preg_match('/^[a-z_]+$/', (string) $table)) { continue; }
+        $s = $pdo->prepare("SELECT * FROM {$table} WHERE {$where}"); $s->execute($params);
+        $rows[] = [$table, $s->fetchAll(PDO::FETCH_ASSOC)];
+    }
+    log_change($pdo, $type, $id, 'delete', $summary, ['_undo' => 1, '_rows' => $rows] + $extra);
+    return (int) $pdo->lastInsertId();
+}
+
+/** Les fichiers gardés pour « ↶ Annuler » par des suppressions de cette sorte, faites il y a plus d'un jour : à rendre au ménage. */
+function undo_old_files(PDO $pdo, string $type): array
+{
+    $s = $pdo->prepare("SELECT before_json FROM change_log WHERE action='delete' AND entity_type=? AND created_at < datetime('now','-1 day') ORDER BY id DESC LIMIT 200");
+    $s->execute([$type]);
+    $files = [];
+    foreach ($s->fetchAll(PDO::FETCH_COLUMN) as $j) { foreach ((json_decode((string) $j, true)['files'] ?? []) as $f) { $files[] = (string) $f; } }
+    return array_values(array_unique(array_filter($files)));
+}
+
 function safe_int(mixed $value, int $fallback = 0): int
 {
     return is_numeric($value) ? (int) $value : $fallback;

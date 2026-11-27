@@ -1491,7 +1491,9 @@ function mark_saved_search_seen(PDO $pdo, array $data): array
 
 function delete_saved_search(PDO $pdo, array $data): array
 {
-    $pdo->prepare('DELETE FROM saved_searches WHERE id=?')->execute([safe_int($data['id'] ?? 0)]);
+    $id = safe_int($data['id'] ?? 0);
+    undo_keep($pdo, 'saved_search', $id, 'Recherche enregistrée supprimée', [['saved_searches', 'id=?', [$id]]]); // ↶ Annuler (H7)
+    $pdo->prepare('DELETE FROM saved_searches WHERE id=?')->execute([$id]);
     return ['ok' => true];
 }
 

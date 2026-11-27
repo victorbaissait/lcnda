@@ -567,7 +567,7 @@
             return `<div class="occ-person-labels labels-field" data-labels-entity-type="person" data-labels-entity-id="${person.id}"><div class="labels-field-chips occ-chips">${chips||'<small class="label-field-empty">Aucune étiquette.</small>'}</div><div class="occ-label-add-row">${addBtn}${inputRow}</div></div>`;
         }
         function personCard(p){
-            const name=escapeHtml([p.first_name,p.last_name].filter(Boolean).join(' ')||'Personne sans nom');
+            const name=escapeHtml(personName(p));
             const birth=p.birth_date||p.birth_year||'?';
             const death=p.death_date||(p.living_status==='living'?'aujourd\u2019hui':p.death_year||'?');
             const dates=p.census_year?(p.age_text?escapeHtml(p.age_text+' · rec. '+p.census_year):'rec. '+p.census_year):escapeHtml(birth+' \u2014 '+death);
@@ -703,7 +703,7 @@
     function tableCell(type,key,row){
         if(key==='name'&&type==='persons')return `<button class="table-link" data-open-person="${row.id}">${escapeHtml(personName(row))}</button>`;
         if(key==='reliability'&&type==='persons'&&window.LCNDA_EXT?.plusFamille?.relCell)return window.LCNDA_EXT.plusFamille.relCell(row);// 🛡 la note de fiabilité (plus-famille.js)
-        if(type==='living_contacts'&&key==='living_contact_name')return `<strong>${escapeHtml([row.first_name,row.last_name].filter(Boolean).join(' ')||'Contact sans nom')}</strong>${row.person_id?`<small class="cell-muted"><button class="table-link" data-open-person="${row.person_id}">${escapeHtml(row.linked_person_name||'Fiche généalogique liée')}</button></small>`:''}`;
+        if(type==='living_contacts'&&key==='living_contact_name')return `<strong>${escapeHtml(row.first_name||row.last_name?personName(row):'Contact sans nom')}</strong>${row.person_id?`<small class="cell-muted"><button class="table-link" data-open-person="${row.person_id}">${escapeHtml(row.linked_person_name||'Fiche généalogique liée')}</button></small>`:''}`;
         if(type==='living_contacts'&&key==='relationship')return escapeHtml(row.relationship||'—');
         if(type==='living_contacts'&&key==='living_contact_details'){const email=row.email?`<a class="table-link" href="mailto:${escapeHtml(row.email)}">${escapeHtml(row.email)}</a>`:'';const mobile=row.phone_mobile||row.phone?`<a class="table-link" href="tel:${escapeHtml(String(row.phone_mobile||row.phone).replace(/\s+/g,''))}">Portable : ${escapeHtml(row.phone_mobile||row.phone)}</a>`:'';const landline=row.phone_landline?`<a class="table-link" href="tel:${escapeHtml(String(row.phone_landline).replace(/\s+/g,''))}">Fixe : ${escapeHtml(row.phone_landline)}</a>`:'';return [email,mobile,landline].filter(Boolean).join('<br>')||'<span class="cell-muted">—</span>';}
         if(type==='living_contacts'&&key==='living_contact_city')return escapeHtml([row.postal_code,row.city,row.country].filter(Boolean).join(' · ')||'—');

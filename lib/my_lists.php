@@ -168,6 +168,11 @@ function save_my_list(PDO $pdo, array $data): array
 function delete_my_list(PDO $pdo, array $data): array
 {
     $id = safe_int($data['id'] ?? 0);
+    // ↶ Annuler (H7) : la liste, ses lignes, ses fiches (avec leurs étiquettes et médias) sont gardées dans le journal
+    $recs = "IN (SELECT id FROM custom_list_records WHERE list_id=" . $id . ")";
+    undo_keep($pdo, 'my_list', $id, 'Liste supprimée', [['custom_lists', 'id=?', [$id]], ['custom_list_rows', 'list_id=?', [$id]], ['custom_list_records', 'list_id=?', [$id]],
+        ['label_links', "(entity_type='custom_list' AND entity_id=?) OR (entity_type='custom_list_record' AND entity_id {$recs})", [$id]],
+        ['family_collection_media', "collection_type='custom_list_record' AND collection_id {$recs}", []]]);
     $pdo->prepare('DELETE FROM custom_list_rows WHERE list_id=?')->execute([$id]);
     foreach ($pdo->query('SELECT id FROM custom_list_records WHERE list_id=' . $id)->fetchAll(PDO::FETCH_COLUMN) as $rid) { my_list_record_unlink($pdo, (int) $rid); }
     $pdo->prepare('DELETE FROM custom_list_records WHERE list_id=?')->execute([$id]);
@@ -962,7 +967,10 @@ function my_list_record_unlink(PDO $pdo, int $id): void
 function delete_my_list_record(PDO $pdo, array $data): array
 {
     $r = my_list_record_owned($pdo, safe_int($data['id'] ?? 0));
-    my_list_record_unlink($pdo, (int) $r['id']);
+    $rid = (int) $r['id'];
+    undo_keep($pdo, 'my_list_record', $rid, 'Fiche de liste supprimée', [['custom_list_records', 'id=?', [$rid]], ['label_links', "entity_type='custom_list_record' AND entity_id=?", [$rid]],
+        ['family_collection_media', "collection_type='custom_list_record' AND collection_id=?", [$rid]]], ['needs' => [['custom_lists', (int) $r['list_id'], 'La liste n’existe plus.']]]); // ↶ Annuler (H7)
+    my_list_record_unlink($pdo, $rid);
     $pdo->prepare('DELETE FROM custom_list_records WHERE id=?')->execute([(int) $r['id']]);
     return ['ok' => true];
 }

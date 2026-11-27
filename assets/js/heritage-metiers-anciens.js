@@ -21,7 +21,7 @@
     const ls = (k, d) => { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (_) { return d; } };
     const lsSet = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} };
     const life = p => p.birth_year || p.death_year ? `${p.birth_year || '?'}–${p.death_year || ''}` : '';
-    const pname = p => [p.first_name, p.last_name].filter(Boolean).join(' ') || 'Sans nom';
+    const pname = p => A().personName(p); // la pièce commune
 
     function avatar(p) {
         if (UI().avatarOn?.() && UI().avatar) return UI().avatar({...p, name: pname(p), photo: p.photo}, 34);

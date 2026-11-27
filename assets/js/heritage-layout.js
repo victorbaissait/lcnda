@@ -1422,7 +1422,7 @@
                 }});
         }
         async function personQrChoices(id) {
-            const r = await api('person', {id}), p = r.person || {}, nm = [p.first_name, p.last_name].filter(Boolean).join(' ') || 'Fiche';
+            const r = await api('person', {id}), p = r.person || {}, nm = p.first_name || p.last_name ? A().personName(p) : 'Fiche';
             const ev = (r.events || []).filter(e => !Number(e.is_private)), find = re => ev.find(e => re.test(String(e.type_label || e.type || e.event_type || ''))), when = e => String(e?.date_text || e?.year || ''); // 🔒 un événement confidentiel ne va pas dans un QR code
             const b = find(/naiss|birth|bapt/i), d = find(/décè|deces|death|inhum|sépult/i);
             const life = [b && `° ${[when(b), b.place_name || b.place].filter(Boolean).join(' ')}`, d && `† ${[when(d), d.place_name || d.place].filter(Boolean).join(' ')}`].filter(Boolean).join(' ');

@@ -334,7 +334,7 @@
             else if (b.type === 'quote') out.push(String(b.text || '').split('\n').map(l => `> ${l}`).join('\n') + (b.source ? `\n>\n> — ${b.source}` : ''));
             else if (b.type === 'dates') out.push((b.rows || []).map(r => `- **${r.date}** — ${r.text}`).join('\n'));
             else if (b.type === 'links') out.push((b.rows || []).map(r => `- ${r.url ? `[${r.label || r.url}](${r.url})` : r.label}${r.note ? ` — ${r.note}` : ''}`).join('\n'));
-            else if (b.type === 'people' || b.type === 'auto') out.push((b.ids || []).map(i => cur.people?.[i]).filter(Boolean).map(p => `- ${`${p.first_name || ''} ${p.last_name || ''}`.trim()}${p.birth_year || p.death_year ? ` (${p.birth_year || '?'}–${p.death_year || '?'})` : ''}`).join('\n'));
+            else if (b.type === 'people' || b.type === 'auto') out.push((b.ids || []).map(i => cur.people?.[i]).filter(Boolean).map(p => `- ${A().personName(p)}${p.birth_year || p.death_year ? ` (${p.birth_year || '?'}–${p.death_year || '?'})` : ''}`).join('\n'));
             else if (b.type === 'data') out.push(dMarkdown(b));
             else if (b.type === 'images') out.push(mediaOf(b).map(m => `![${m.title || ''}](media/${encodeURIComponent(m.filename || '')})`).join('\n') + (b.caption ? `\n\n_${b.caption}_` : ''));
             else out.push(i18n('_(écran de l’app : à voir dans LCNDA)_'));

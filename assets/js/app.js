@@ -3317,7 +3317,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
                 const statusBadge=`<span class="grave-status-badge ${stillExists?'is-existing':'is-gone'}">${stillExists?'Sépulture existante':'⚠ Sépulture disparue'}</span>`;
                 const conditionBadge=`<span class="grave-condition-badge grave-condition-${grave.condition_state||'inconnu'}">${conditionLabels[grave.condition_state]||'État inconnu'}</span>`;
                 const gravePersons=(grave.persons||[]);
-                const personsHtml=gravePersons.length?`<ul class="grave-person-list">${gravePersons.map(p=>{const nm=escapeHtml((p.first_name+' '+p.last_name).trim()||'(Sans nom)');const dates=p.birth_year?(p.death_year?`${p.birth_year} — ${p.death_year}`:`${p.birth_year} — ?`):'';const isCurrent=Number(p.id)===Number(person.id);return `<li class="grave-person-item${isCurrent?' is-current':''}"><button type="button" class="link-button" data-open-person="${p.id}"><strong>${nm}</strong>${dates?` <small>${escapeHtml(dates)}</small>`:''}</button>${editOnly(!isCurrent?actionButton('delete','Retirer de la sépulture',`data-remove-grave-person="${p.id}" data-grave-id="${grave.id}"`):'')}</li>`;}).join('')}</ul>`:empty('Aucune personne rattachée.',{icon:'👥'});
+                const personsHtml=gravePersons.length?`<ul class="grave-person-list">${gravePersons.map(p=>{const nm=escapeHtml(personName(p));const dates=p.birth_year?(p.death_year?`${p.birth_year} — ${p.death_year}`:`${p.birth_year} — ?`):'';const isCurrent=Number(p.id)===Number(person.id);return `<li class="grave-person-item${isCurrent?' is-current':''}"><button type="button" class="link-button" data-open-person="${p.id}"><strong>${nm}</strong>${dates?` <small>${escapeHtml(dates)}</small>`:''}</button>${editOnly(!isCurrent?actionButton('delete','Retirer de la sépulture',`data-remove-grave-person="${p.id}" data-grave-id="${grave.id}"`):'')}</li>`;}).join('')}</ul>`:empty('Aucune personne rattachée.',{icon:'👥'});
                 const photos=(grave.photos||[]);
                 const photosHtml=photos.length?`<div class="grave-photo-gallery">${photos.map((ph,i)=>`<button type="button" class="grave-photo-thumb" data-view-grave-photo="${i}">${normalizedMediaType(ph)==='image'?`<img src="media/${encodeURIComponent(ph.thumbnail||ph.filename)}" alt="">`:`<span class="grave-photo-doc">${mediaTypeShortLabelWithIcon(ph)}</span>`}${ph.date_text?`<small class="grave-photo-date">${escapeHtml(ph.date_text)}</small>`:''}</button>`).join('')}</div>`:empty('Aucune photo datée de la sépulture.',{icon:'📷'});
                 const body=`
@@ -3575,7 +3575,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         const personId=Number(person.id);
         const records=(census&&census.records)||[];
         const fromEvents=(events||[]).filter(event=>(event.first_name||event.last_name)).map(event=>({
-            name:[event.first_name,event.last_name].filter(Boolean).join(' '),
+            name:personName(event),
             origin:[event.type_label,event.date_text||(event.year?String(event.year):'')].filter(Boolean).join(' — ')
         }));
         const fromCensus=records.filter(record=>(record.members||[]).some(member=>Number(member.person_id)===personId&&(member.first_name||member.display_name))).map(record=>{
@@ -5712,7 +5712,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
     const generationLabel=(n,kind)=>kind==='asc'?(['','Parents','Grands-parents','Arrière-grands-parents'][n]||i18n('{n} générations',{n})):(['','Enfants','Petits-enfants','Arrière-petits-enfants'][n]||i18n('{n} générations',{n}));
     function lineagePersonHtml(p,extra=''){
         if(!p)return '<span class="muted">?</span>';
-        const name=[p.first_name,p.last_name].filter(Boolean).join(' ')||'Sans nom';
+        const name=personName(p);
         const yrs=(p.birth_year||p.death_year)?` <small>${p.birth_year||'?'}–${p.death_year||(p.living_status==='living'?'':'?')}</small>`:'';
         const closed=(p.closed||[]).filter(c=>c.direction==='descendance').map(c=>`<span class="branch-closed-badge certainty-${escapeHtml(c.certainty)}" title="${c.direction==='ascendance'?i18n('Ascendance fermée : {x}',{x:escapeHtml(i18n(branchCertainties[c.certainty]||''))}):i18n('Descendance fermée : {x}',{x:escapeHtml(i18n(branchCertainties[c.certainty]||''))})}">${i18n('⊘ lignée éteinte')}${c.certainty==='certain'?'':' · '+escapeHtml(i18n(branchCertainties[c.certainty]||'').toLowerCase())}</span>`).join('');
         return `<button type="button" class="table-link lineage-person gender-${escapeHtml(p.gender||'unknown')}" data-open-person="${p.id}">${escapeHtml(name)}</button>${yrs}${extra}${closed}`;
@@ -5835,7 +5835,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         $$('[data-reset-lineage]',root).forEach(b=>b.addEventListener('click',()=>{localStorage.removeItem(`genealogie-lineage-${b.dataset.resetLineage}`);toast('Exception retirée : la fiche suit le réglage de toutes les fiches.');renderDesignTools();}));
     }
     /** Réglages → Fusionner un arbre : comparer le GEDCOM d'un cousin à la base, puis décider fiche par fiche. */
-    function mergePersonText(p){if(!p)return '';const yrs=(p.birth||p.death)?` (${p.birth||'?'}–${p.death||'?'})`:'';return `${[p.first_name,p.last_name].filter(Boolean).join(' ')||'Sans nom'}${yrs}`;}
+    function mergePersonText(p){if(!p)return '';const yrs=(p.birth||p.death)?` (${p.birth||'?'}–${p.death||'?'})`:'';return `${personName(p)}${yrs}`;}
     function renderMergeTool(token=++state.workspaceToken){
         if(token!==state.workspaceToken||state.module!=='maintenance'||state.maintenanceTab!=='fusion')return;
         const m=state.merge;
@@ -8889,7 +8889,7 @@ ${backupSectionHtml()}
                 box.classList.add(confClass,`tag-type-${tagType(tag)}`);
                 const label=document.createElement('span');
                 label.className='tag-label';
-                label.textContent=(tag.first_name+' '+tag.last_name).trim()+(tag.confidence!=='certain'?' ('+confidenceLabel(tag.confidence)+')':'');
+                label.textContent=personName(tag)+(tag.confidence!=='certain'?' ('+confidenceLabel(tag.confidence)+')':'');
                 box.appendChild(label);canvas.appendChild(box);
             });
             (state.lightboxFaceSuggestions||[]).forEach((pct,index)=>appendFaceSuggestionBox(canvas,rect,pct,index));

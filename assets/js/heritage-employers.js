@@ -11,7 +11,7 @@
     const esc = v => A().escapeHtml(v ?? '');
     const toast = (...a) => A().toast(...a);
     const api = (...a) => A().api(...a);
-    const pname = p => [p.first_name, p.last_name].filter(Boolean).join(' ') || 'Personne sans nom';
+    const pname = p => A().personName(p); // la pièce commune
     const siren = v => String(v || '').replace(/\D/g, '').replace(/^(\d{3})(\d{3})(\d{3})(\d*)$/, (m, a, b, c, d) => `${a} ${b} ${c}${d ? ' ' + d : ''}`);
     const dateFr = v => { const m = String(v || '').match(/^(\d{4})-(\d{2})-(\d{2})$/); return m ? `${Number(m[3])}/${m[2]}/${m[1]}` : String(v || ''); };
     const yearOf = v => { const m = String(v || '').match(/(\d{4})/); return m ? Number(m[1]) : null; };

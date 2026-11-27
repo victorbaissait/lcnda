@@ -101,7 +101,7 @@
             return same / Math.max(a.length, b.length);
         })();
         const parts = [
-            {label: T('Noms'), w: 35, value: names, text: [pl.first_name, pl.last_name].join(' ') + ' / ' + [pr.first_name, pr.last_name].join(' ')},
+            {label: T('Noms'), w: 35, value: names, text: A().personName(pl) + ' / ' + A().personName(pr)},
             {label: T('Dates'), w: 30, value: dates, text: [bl && br ? T('naissance : {a} / {b}', {a: bl.year || '?', b: br.year || '?'}) : '', dl && dr ? T('décès : {a} / {b}', {a: dl.year || '?', b: dr.year || '?'}) : ''].filter(Boolean).join(' · ')},
             {label: T('Lieux'), w: 15, value: places, text: [bl?.place && br?.place ? `${bl.place} / ${br.place}` : '', dl?.place && dr?.place ? `${dl.place} / ${dr.place}` : ''].filter(Boolean).join(' · ')},
             {label: T('Parents en commun'), w: 20, value: parents, text: ''},
