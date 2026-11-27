@@ -40,9 +40,9 @@
         const done = (it.digested || []).map(d => `<span class="h-gap-dig ${d.status === 'done' ? 'ok' : ''}" title="Déjà dans le suivi des dépouillements">${esc(d.year_text || 'sans période')} · ${esc(d.result_label || STATUS[d.status] || d.status)}</span>`).join('');
         const where = (it.where || []).map(w => `<li><b>${esc(w.series)}</b> — ${esc(w.detail)}</li>`).join('');
         const sfUrl = it.kind === 'socface' && window.LCNDA_SOCFACE ? window.LCNDA_SOCFACE.searchUrl({last: it.sf?.last, first: it.sf?.first, place: it.sf?.place, y1: it.from, y2: it.to, gender: it.sf?.gender}) : '';
-        const links = [sfUrl ? `<a href="${esc(sfUrl)}" target="_blank" rel="noopener noreferrer" data-gap-sf-link>🔍 Chercher sur SocFace ↗</a>` : '', it.archive?.france && it.place && it.kind !== 'socface' ? `<a href="${esc(faSearch(`${it.place} ${it.what}`))}" target="_blank" rel="noopener">FranceArchives</a>` : '',
-            it.kind === 'death' && it.gender === 'male' && it.from <= 1921 && it.to >= 1914 ? `<a href="${esc(webSearch(`Mémoire des hommes ${it.name}`))}" target="_blank" rel="noopener">Mémoire des hommes</a>` : '',
-            `<a href="${esc(webSearch(`${it.name} ${it.place || ''} ${it.what} généalogie`))}" target="_blank" rel="noopener">Sur internet</a>`,
+        const links = [sfUrl ? `<a href="${esc(sfUrl)}" target="_blank" rel="noopener noreferrer" data-gap-sf-link>🔍 Chercher sur SocFace ↗</a>` : '', it.archive?.france && it.place && it.kind !== 'socface' ? `${window.LCNDA_UI.extLink(faSearch(`${it.place} ${it.what}`), 'FranceArchives')}` : '',
+            it.kind === 'death' && it.gender === 'male' && it.from <= 1921 && it.to >= 1914 ? `${window.LCNDA_UI.extLink(webSearch(`Mémoire des hommes ${it.name}`), 'Mémoire des hommes')}` : '',
+            `${window.LCNDA_UI.extLink(webSearch(`${it.name} ${it.place || ''} ${it.what} généalogie`), 'Sur internet')}`,
             ext.connexions?.enabled?.() !== false && ext.connexions && !document.body.classList.contains('is-kiosk') ? `<button type="button" class="link-button" data-gap-inv title="${esc(i18n('Choisir l’enquête (ou en créer une) et y mettre cette recherche comme piste'))}">🕵️ ${esc(i18n('En faire une piste…'))}</button>` : ''].filter(Boolean).join(' · ');
         return `<article class="h-gap" data-gap-i="${it._i}" data-gap-kind="${esc(it.kind)}">
             <div class="h-gap-head"><span class="h-gap-kind" title="${esc(label)}">${ico}</span>
@@ -81,7 +81,7 @@
                 const communes = [...new Set(list.map(x => x.place).filter(Boolean))];
                 return `<h3>🏛️ ${esc(it.archive?.label || '')} <small class="muted">${list.length} recherche${list.length > 1 ? 's' : ''}</small>${ext.visitPrepare ? ` <button type="button" class="button small secondary" data-gap-visit="${esc(it.archive?.key || '')}">🗄 ${esc(i18n('Préparer une visite'))}</button>` : ''}</h3>
                     <p class="h-gaps-sub">${communes.length ? `Communes : ${communes.map(c => `<span>${esc(c)}</span>`).join('')}` : ''}
-                    <span class="h-gap-links">${it.archive?.france && a.department ? `<a href="${esc(webSearch(`${it.archive.label} état civil en ligne`))}" target="_blank" rel="noopener">🌐 Trouver le site des archives</a> · <a href="${esc(faSearch(a.department))}" target="_blank" rel="noopener">FranceArchives</a>` : ''}</span></p>`;
+                    <span class="h-gap-links">${it.archive?.france && a.department ? `${window.LCNDA_UI.extLink(webSearch(`${it.archive.label} état civil en ligne`), 'Trouver le site des archives')} · ${window.LCNDA_UI.extLink(faSearch(a.department), 'FranceArchives')}` : ''}</span></p>`;
             };
             const sortIn = list => v.group === 'archives' || v.group === 'commune' ? [...list].sort((a, b) => String(a.place).localeCompare(String(b.place), 'fr') || (a.from ?? 0) - (b.from ?? 0)) : list;
             // 🗂 un cadre par personne : son nom, Sosa · génération, ses dates, le nombre de recherches ; une ligne par recherche

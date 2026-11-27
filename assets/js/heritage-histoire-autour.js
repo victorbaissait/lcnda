@@ -293,7 +293,7 @@
     const cap = s => String(s || '').charAt(0).toUpperCase() + String(s || '').slice(1);
     const ageTxt = n => (n === 0 ? T('moins d’un an') : n === 1 ? T('1 an') : T('{n} ans', {n: String(n)}));
     const he = P => (P?.gender === 'female' ? T('Elle') : P?.gender === 'male' ? T('Il') : (P?.first ? esc(P.first) : T('Cette personne')));
-    const link = (url, label) => (/^https?:\/\/[^\s"'<>]+$/i.test(String(url || '')) ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : esc(label));
+    const link = (url, label) => (/^https?:\/\/[^\s"'<>]+$/i.test(String(url || '')) ? `${window.LCNDA_UI.extLink(url, label)}` : esc(label));
     const wdUrl = q => `https://www.wikidata.org/wiki/${encodeURIComponent(q)}`;
     const wpUrl = t => (t ? `https://fr.wikipedia.org/wiki/${encodeURIComponent(String(t).replace(/ /g, '_'))}` : '');
     const refLinks = r => `<span class="ha-links">${r.frwiki ? link(wpUrl(r.frwiki), '↗ Wikipédia') + ' ' : ''}${r.q ? link(wdUrl(r.q), '↗ Wikidata') : ''}</span>`;

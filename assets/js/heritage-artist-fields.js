@@ -27,10 +27,10 @@
     T.date = {label: 'Date', badge: '📅', tile: '📅 Date', edit: (f, v) => inp(v, `data-ui-date placeholder="${esc(f.ph || '7 mai 1925, vers 1784, mars 1958…')}"`), get: val, read: (f, v) => esc(v), text: (f, v) => String(v)};
     const safeUrl = u => /^https?:\/\//i.test(String(u || '').trim()) ? String(u).trim() : '';
     T.url = {label: 'Lien', badge: '🔗', tile: '🔗 Lien', edit: (f, v) => inp(v, 'placeholder="https://…" inputmode="url"'), get: el => val(el).trim(),
-        read: (f, v) => { const u = safeUrl(v); return u ? `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(u.replace(/^https?:\/\/(www\.)?/, '').slice(0, 60))}</a>` : esc(v); }, text: (f, v) => String(v)};
+        read: (f, v) => { const u = safeUrl(v); return u ? `${window.LCNDA_UI.extLink(u, '')}` : esc(v); }, text: (f, v) => String(v)};
     /** un identifiant (Discogs r4012233, MusicBrainz…) : l'adresse est fabriquée par la définition (f.href) */
     T.ident = {label: 'Identifiant', badge: 'n°', edit: (f, v) => inp(v, f.ph ? `placeholder="${esc(f.ph)}"` : ''), get: el => val(el).trim(),
-        read: (f, v) => { const u = safeUrl(f.href ? f.href(String(v).trim()) : v); return u ? `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer" class="ar-ident">${esc(String(v).length > 14 ? `${String(v).slice(0, 12)}…` : v)}</a>` : esc(v); }, text: (f, v) => String(v)};
+        read: (f, v) => { const u = safeUrl(f.href ? f.href(String(v).trim()) : v); return u ? `${window.LCNDA_UI.extLink(u, String(v).length > 14 ? `${String(v).slice(0, 12)}…` : v, {cls: 'ar-ident'})}` : esc(v); }, text: (f, v) => String(v)};
     T.select = {label: 'Choix fixe', badge: 'choix', edit: (f, v) => `<select class="ar-in" data-v>${ch(f).map(([k, l]) => `<option value="${esc(k)}" ${String(v ?? ch(f)[0]?.[0]) === String(k) ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select>`, get: val,
         read: (f, v) => esc(lab(f, v)), text: (f, v) => String(lab(f, v)), empty: v => v == null || v === ''};
     T.list = {label: 'Liste de choix', badge: 'liste', tile: '☑ Liste de choix', edit: (f, v) => { const sel = Array.isArray(v) ? v.map(String) : v ? [String(v)] : []; return `<div class="ar-checks">${ch(f).map(([k, l]) => `<label class="checkbox-line"><input type="checkbox" value="${esc(k)}" ${sel.includes(String(k)) ? 'checked' : ''}> ${esc(l)}</label>`).join('')}</div>`; },
@@ -168,7 +168,7 @@
 
     /* Les types proposés dans « ＋ Ajouter un champ » (maquettes D et L), dans l'ordre */
     ART.CUSTOM_TYPES = ['text', 'longtext', 'number', 'date', 'period', 'duration', 'dims', 'measure', 'money', 'list', 'tags', 'bool', 'rating', 'url', 'code', 'person', 'place', 'item', 'media', 'document', 'color', 'note'];
-    T.dims.tile = '📐 Dimensions'; T.item.tile = '📎 Fiche liée'; T.person.tile = '👤 Personne';
+    T.dims.tile = '📐 Dimensions'; T.item.tile = '🔗 Fiche liée'; T.person.tile = '👤 Personne';
 
     /* ═════════ Le comportement du formulaire (lignes, photos, étoiles, création depuis le menu de choix) ═════════ */
     const fieldOf = (C, fk) => { const L = ART.layout(C.store, C.S.kind, 'fiche'); return L.groups.flatMap(g => g.fields).find(f => f.key === fk); };

@@ -661,7 +661,7 @@
     function lawCited(text) { const out = new Set(); String(text || '').replace(ART_RE, (m, pre, list) => { (list.match(/\d{2,3}(?:-\d(?!\d))?/g) || []).forEach(x => out.add(x)); return m; }); return [...out].filter(Boolean); }
     /** le texte (déjà échappé) avec chaque numéro d'article en lien vers Légifrance (s'ouvre dans le navigateur) */
     function lawLinks(html) {
-        const a = n => `<a class="succ-law" href="${lawUrl(n)}" target="_blank" rel="noopener noreferrer" title="Légifrance">${n}</a>`;
+        const a = n => `<a class="succ-law" href="${lawUrl(n)}" target="_blank" rel="noopener noreferrer" title="Légifrance">↗ ${n}</a>`;
         return String(html || '').replace(ART_RE, (m, pre, list) => pre + list.replace(/\d{2,3}(?:-\d(?!\d))?/g, n => (LAW[n] ? a(n) : n)));
     }
 
@@ -682,7 +682,7 @@
     const escH = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
     function lawJournalHtml(text) {
         const s = String(text ?? ''), m = s.match(/^([\s\S]*») — (\S+)$/), u = m ? officialLink(m[2]) : '';
-        return u ? `${escH(m[1])} — <a class="succ-law" href="${escH(u)}" target="_blank" rel="noopener noreferrer">${escH(u)}</a>` : escH(s);
+        return u ? `${escH(m[1])} — <a class="succ-law" href="${escH(u)}" target="_blank" rel="noopener noreferrer" title="${escH(u)}">↗ ${({'www.legifrance.gouv.fr': 'Légifrance', 'eur-lex.europa.eu': 'EUR-Lex'})[u.match(LAW_LINK_RE)[1]] || 'Service-public.fr'}</a>` : escH(s);
     }
 
     /* ═════ ❔ Absents et disparus : le bon chemin ═════ */

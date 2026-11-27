@@ -431,7 +431,7 @@ Garde au moins un outil. ¦ Pidä vähintään yksi työkalu. ¦ Legalább egy e
 {shown} sur {n} ¦ {shown} / {n} ¦ {shown} / {n}
 Aucun projet pour « {q} » ¦ Ei projekteja haulle ”{q}” ¦ Nincs projekt erre: „{q}”
 Vérifie l’orthographe, ou cherche un autre mot (nom, photo, détails). ¦ Tarkista oikeinkirjoitus tai hae toisella sanalla (nimi, kuva, tiedot). ¦ Ellenőrizd a helyesírást, vagy keress más szóra (név, fénykép, részletek).
-Effacer la recherche ¦ Tyhjennä haku ¦ Keresés törlése
+Vider la recherche ¦ Tyhjennä haku ¦ Keresés törlése
 Aucun projet de {what} pour l’instant ¦ Ei vielä projekteja ({what}) ¦ Még nincs projekt ({what})
 projet|montage ¦ montaasi ¦ montázs
 projet|son ¦ ääni ¦ hang

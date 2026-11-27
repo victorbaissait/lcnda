@@ -6,7 +6,7 @@
  *  question, la vue (📊 Récap · 🧰 Thèmes) — on retrouve la même chose par l'une ou l'autre porte.
  *   · 📊 Récap : la boîte « Pose une question sur les données… » et ses exemples ; « Pour ta famille » (au plus 4 lignes, une par thème,
  *     calculées ici avec les lieux et les dates de la généalogie : GET ld_famille, jamais une fiche confidentielle, pas les vivants en
- *     consultation ; gardées un jour) ; « À faire » (⤓ à installer, ↻ plus récent → Réglages → 🗂 Données) ; les 20 thèmes en une ligne
+ *     consultation ; gardées un jour) ; « À faire » (📦 à installer, ↻ plus récent → Réglages → 🗂 Données) ; les 20 thèmes en une ligne
  *     chacun (un clic ouvre le thème, sur sa liste réunie). 🧰 Thèmes : l'écran des thèmes en cartes (app-listes-themes.js).
  *   · La question : la lecture de la phrase des paniers (app-paniers-core.js : parseData = parseSmart élargi aux mots des 20 thèmes,
  *     ageSpan), « J'ai compris » en pastilles qu'on touche pour corriger (Quoi · Qui · Quand · Où + rayon − / + ou tapé), puis les lignes
@@ -171,7 +171,7 @@
               ${ro ? '' : `<section class="dr-box dr-todo" aria-labelledby="dr-todo-h"><h3 id="dr-todo-h">${esc(T('À faire'))}</h3><ul class="dr-todo-l" data-dr-todo><li class="muted">${esc(T('On compte…'))}</li></ul>
                 <p class="dr-note">${esc(T('Les liens mènent à Réglages → 🗂 Données. Rien ne part sur Internet sans ton clic.'))}</p></section>`}
             </div>
-            <div class="dr-trs-h"><h3>${esc(T('Les {n} thèmes', {n: nf(tl.length)}))}</h3><small class="muted">${esc(T('installées sur toutes · ⤓ à installer · ↻ plus récent'))}</small></div>
+            <div class="dr-trs-h"><h3>${esc(T('Les {n} thèmes', {n: nf(tl.length)}))}</h3><small class="muted">${esc(T('installées sur toutes · 📦 à installer · ↻ plus récent'))}</small></div>
             <div class="dr-trs" data-dr-trs>${tl.map(t => { const ds = (I?.by.get(t.id) || []).filter(d => !d.link && !d.merged);
                 return `<button type="button" class="dr-tr" data-dr-theme="${esc(t.id)}"><span class="dr-ic" aria-hidden="true">${esc(t.icon)}</span><span class="dr-trt"><b>${esc(T(t.label))}</b><small data-dr-tn="${esc(t.id)}">${esc(T('{n} listes', {n: nf(ds.length)}))}</small></span><span class="dr-st" data-dr-ts="${esc(t.id)}"></span></button>`; }).join('')}</div>
             <button type="button" class="dr-trs-more" data-dr-trs-more aria-expanded="false">⌄ ${esc(T('{n} autres thèmes', {n: nf(Math.max(0, tl.length - 3))}))}</button>
@@ -206,9 +206,9 @@
         if (dirty) writeLS(K_THSEEN, JSON.stringify(seen));
         return tl.filter(t => Number(seen[t.id]) > 0 && now - Number(seen[t.id]) < NEW_DAYS * 864e5).map(t => ({...t, at: Number(seen[t.id])}));
     }
-    /** les comptes par thème : listes installées, lignes (les paquets livrés le disent), ⤓, ↻ — l'état de Réglages → 🗂 Données */
+    /** les comptes par thème : listes installées, lignes (les paquets livrés le disent), 📦, ↻ — l'état de Réglages → 🗂 Données */
     let statsP = null, statsAt = 0;
-    window.addEventListener('lcnda:installs-changed', () => { statsP = null; }); // ⤓ un pack installé : les comptes « ⤓ à installer » sont refaits
+    window.addEventListener('lcnda:installs-changed', () => { statsP = null; }); // 📦 un pack installé : les comptes « 📦 à installer » sont refaits
     function stats() {
         if (statsP && Date.now() - statsAt < 300000) return statsP;
         statsAt = Date.now();
@@ -239,15 +239,15 @@
         Object.entries(S.byTheme).forEach(([id, s]) => {
             const n = page.querySelector(`[data-dr-tn="${CSS.escape(id)}"]`), st = page.querySelector(`[data-dr-ts="${CSS.escape(id)}"]`);
             if (n) n.textContent = `${T('{a} / {b} listes', {a: nf(s.inst), b: nf(s.n)})}${s.rows ? ` · ${s.rows >= 1e6 ? T('{n} millions de lignes', {n: (Math.round(s.rows / 1e5) / 10).toLocaleString('fr-FR')}) : T('{n} lignes', {n: nf(s.rows)})}` : ''}`;
-            if (st) st.innerHTML = `${s.missing ? `<span class="dr-dl" title="${esc(T('{n} listes à installer', {n: nf(s.missing)}))}">⤓ ${nf(s.missing)}</span>` : ''}${s.update ? `<span class="dr-up" title="${esc(T('une version plus récente existe'))}">↻</span>` : ''}`;
+            if (st) st.innerHTML = `${s.missing ? `<span class="dr-dl" title="${esc(T('{n} listes à installer', {n: nf(s.missing)}))}">📦 ${nf(s.missing)}</span>` : ''}${s.update ? `<span class="dr-up" title="${esc(T('une version plus récente existe'))}">↻</span>` : ''}`;
         });
         const foot = page.querySelector('[data-dr-foot]');
-        if (foot) foot.innerHTML = `${esc(T('{a} listes installées sur {b}', {a: nf(S.inst), b: nf(S.total)}))}${S.missing ? ` · ⤓ ${nf(S.missing)}` : ''}${S.update ? ` · ↻ ${nf(S.update)}` : ''}${S.err ? ` · <span class="dr-err" data-dr-err title="${esc(T('Impossible de vérifier si ces données sont installées : {e}', {e: S.errMsg}))}">⚠ ${esc(T('Vérification impossible'))} (${nf(S.err)})</span>` : ''} · <button type="button" class="dr-link" data-dr-view="themes">🧰 ${esc(T('voir en cartes'))}</button>`;
+        if (foot) foot.innerHTML = `${esc(T('{a} listes installées sur {b}', {a: nf(S.inst), b: nf(S.total)}))}${S.missing ? ` · 📦 ${nf(S.missing)}` : ''}${S.update ? ` · ↻ ${nf(S.update)}` : ''}${S.err ? ` · <span class="dr-err" data-dr-err title="${esc(T('Impossible de vérifier si ces données sont installées : {e}', {e: S.errMsg}))}">⚠ ${esc(T('Vérification impossible'))} (${nf(S.err)})</span>` : ''} · <button type="button" class="dr-link" data-dr-view="themes">🧰 ${esc(T('voir en cartes'))}</button>`;
         const todo = page.querySelector('[data-dr-todo]');
         if (todo) {
             const last = Number(readLS('genealogie-donnees-maj-dernier', '0')) || 0;
             const items = [];
-            if (S.missing) items.push(`<li><span>⤓ ${esc(S.missing > 1 ? T('{n} listes pas encore installées', {n: nf(S.missing)}) : T('1 liste pas encore installée'))}</span><button type="button" class="dr-link" data-dr-todo-install>${esc(T('voir'))}</button></li>`);
+            if (S.missing) items.push(`<li><span>📦 ${esc(S.missing > 1 ? T('{n} listes pas encore installées', {n: nf(S.missing)}) : T('1 liste pas encore installée'))}</span><button type="button" class="dr-link" data-dr-todo-install>${esc(T('voir'))}</button></li>`);
             if (S.missing && S.coverKnown && S.useful.length) items.push(`<li class="dr-todo-sub"><small>${esc(T('dont {n} utiles pour tes lieux : {l}', {n: nf(S.useful.length), l: S.useful.slice(0, 3).join(', ') + (S.useful.length > 3 ? '…' : '')}))}</small></li>`);
             if (S.update) items.push(`<li><span>↻ ${esc(S.update > 1 ? T('{n} listes ont une version plus récente', {n: nf(S.update)}) : T('1 liste a une version plus récente'))}</span><button type="button" class="dr-link" data-dr-todo-update>${esc(T('mettre à jour'))}</button></li>`);
             items.push(`<li class="muted"><small>${esc(last ? T('Vérifié le {d}, sur ton clic.', {d: new Date(last).toLocaleDateString('fr-FR', {day: 'numeric', month: 'short'})}) : T('Pas encore vérifié s’il existe plus récent : Réglages → 🗂 Données → ↻ Vérifier.'))}</small></li>`);

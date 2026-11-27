@@ -7,7 +7,7 @@
  *     sommaire, installés en un bouton, puis la météo d'un lieu n'importe où dans le monde : la station (New York, Sydney…),
  *     jusqu'à 150 km quand il n'y a rien de plus près, rien au-delà ; une station d'un pack du monde à moins de 3 km d'une station
  *     d'un autre pack est sautée ;
- *  2. Réglages → 🌦 Météo d'autrefois : « Le reste du monde », chaque continent son « ⤓ Installer (taille) », installé, À propos,
+ *  2. Réglages → 🌦 Météo d'autrefois : « Le reste du monde », chaque continent son « 📦 Installer (taille) », installé, À propos,
  *     🗑 Supprimer et ↶ ; à 390 px sans défilement de côté ; aucune erreur JavaScript.
  *   node tests/test-meteo-monde.js */
 'use strict';
@@ -214,11 +214,11 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.waitForFunction(() => /supprimé/.test([...document.querySelectorAll('.ui-toast')].map(x => x.textContent).join(' ')), null, {timeout: 10000});
             assert.ok(!(await api('meteo_status')).files['monde-asie'], 'retiré');
             await p.waitForSelector('[data-wx-dl="monde-asie"]', {timeout: 10000});
-            assert.match(await p.textContent('[data-wx-dl="monde-asie"]'), /Installer \(\d+ Ko\)/, 'son « ⤓ Installer » avec la taille');
+            assert.match(await p.textContent('[data-wx-dl="monde-asie"]'), /Installer \(\d+ Ko\)/, 'son « 📦 Installer » avec la taille');
             await p.evaluate(() => [...document.querySelectorAll('.ui-toast')].reverse().find(x => /supprimé/.test(x.textContent)).querySelector('button').click()); await sleep(800);
             assert.ok((await api('meteo_status')).files['monde-asie']?.ok, '↶ Annuler : remis');
         });
-        await t('Réglages : « ⤓ Installer » d’un continent en un clic (barre, puis installé)', async () => {
+        await t('Réglages : « 📦 Installer » d’un continent en un clic (barre, puis installé)', async () => {
             await post('meteo_pack_remove', {kind: 'monde-oceanie'});
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'meteo'; A.setModule('maintenance'); });
             await p.waitForSelector('[data-wx-dl="monde-oceanie"]', {timeout: 20000});

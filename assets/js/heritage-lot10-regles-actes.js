@@ -25,7 +25,7 @@
     const T = (s, v0) => { const v = v0 && Object.fromEntries(Object.entries(v0).map(([k, x]) => [k, typeof x === 'number' ? String(x) : x])); return W.LCNDA_I18N ? W.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? String(v[k]) : m)); };
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
     const fold = s => String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[’']/g, ' ').replace(/[^a-z0-9]+/g, ' ').trim();
-    const link = (url, label = T('↗ source'), title = '') => (url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer"${title ? ` title="${esc(title)}"` : ''}>${esc(label)}</a>` : esc(label));
+    const link = (url, label = T('↗ source'), title = '') => (url ? `${window.LCNDA_UI.extLink(url, label, {title: title})}` : esc(label));
     const more = (inner, n) => `<details class="cplus-more l10r-more"><summary>${esc(n ? T('▸ plus ({n})', {n}) : T('▸ plus'))}</summary>${inner}</details>`;
     const srcLine = (label, licence, url, extra = '') => `<p class="cplus-src l10r-src">${esc(T('Source :'))} ${url ? link(url, label) : esc(label)}${licence ? ` — ${esc(licence)}` : ''}${extra}</p>`;
     const quoteBox = (q, url, title) => (q ? `<details class="l10r-quote"><summary><small>${esc(T('La source'))}</small></summary><blockquote>« ${esc(q)} »</blockquote><small class="muted">${esc(title || '')} ${link(url)}</small></details>` : '');

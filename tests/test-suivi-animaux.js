@@ -624,11 +624,11 @@ echo json_encode(['v' => (int) $pdo->query('PRAGMA user_version')->fetchColumn()
                         assert.match(await p.textContent('.sv-census'), /observations/);
                         await p.click('[data-sv-ctab="animals"]'); await p.waitForSelector('.sv-census .ui-card, .sv-census .ui-row');
                         await shot(p, 'recensement.png', true);
-                        await p.click('[data-sv-export]');
-                        const [dl] = await Promise.all([p.waitForEvent('download'), p.click('.ui-menu button:has-text("CSV (observations)"), [role="menu"] button:has-text("CSV (observations)")')]);
+                        await p.click('[data-sv-export]'); await p.waitForSelector('dialog.ui-export[open]'); // ⤓ la fenêtre d'export commune (CSV choisi d'office)
+                        const [dl] = await Promise.all([p.waitForEvent('download'), p.click('dialog.ui-export [data-ui-go]')]);
                         assert.match(dl.suggestedFilename(), /\.csv$/); const csv = fs.readFileSync(await dl.path(), 'utf8'); assert.match(csv, /Date;Heure;Animal/); assert.match(csv, /Gaston/);
-                        await p.click('[data-sv-export]');
-                        const [dl2] = await Promise.all([p.waitForEvent('download'), p.click('.ui-menu button:has-text("GPX"), [role="menu"] button:has-text("GPX")')]);
+                        await p.click('[data-sv-export]'); await p.waitForSelector('dialog.ui-export[open]'); await p.click('dialog.ui-export .ui-export-fmt[data-fmt="gpx"]');
+                        const [dl2] = await Promise.all([p.waitForEvent('download'), p.click('dialog.ui-export [data-ui-go]')]);
                         assert.equal(S.parseGPX(fs.readFileSync(await dl2.path(), 'utf8')).points.length > 100, true);
                     });
                     await t('📤 partager depuis l’app (fichier .lcsuivi = ZIP du moteur commun) puis ⤒ recevoir : déjà là, un conflit, fusion, ↶ Annuler', async () => {

@@ -409,7 +409,7 @@
         const paint = () => { const q = fold(dg.querySelector('[data-hz-q]').value.trim());
             const hits = CITIES.filter(c => !q || fold(c[0] + ' ' + c[2] + ' ' + c[1]).includes(q)).slice(0, 40).map(c => ({name: c[0], tz: c[1], sub: c[2], lat: c[3], lon: c[4]}));
             const zh = q ? zones.filter(z => fold(z).includes(q) && !hits.some(h => h.tz === z)).slice(0, 20).map(z => ({name: z.split('/').pop().replace(/_/g, ' '), tz: z, sub: z})) : [];
-            dg.querySelector('[data-hz-res]').innerHTML = [...hits, ...zh].map((c, i) => `<li><button type="button" class="hz-pick" data-hz-pick='${esc(JSON.stringify(c))}'><b>${esc(c.name)}</b> <small class="muted">${esc(c.sub)} · ${esc(partsAt(c.tz).h)}:${pad(partsAt(c.tz).mi)}</small></button></li>`).join('') || `<li class="muted">${esc(T('Aucune ville ne correspond.'))}</li>`; };
+            dg.querySelector('[data-hz-res]').innerHTML = [...hits, ...zh].map((c, i) => `<li><button type="button" class="hz-pick" data-hz-pick='${esc(JSON.stringify(c))}'><b>${esc(c.name)}</b> <small class="muted">${esc(c.sub)} · ${esc(partsAt(c.tz).h)}:${pad(partsAt(c.tz).mi)}</small></button></li>`).join('') || `<li class="is-empty">${A().empty(T('Aucune ville ne correspond.'), {icon: '🔍'})}</li>`; };
         paint();
         dg.querySelector('[data-hz-q]').addEventListener('input', paint);
         dg.addEventListener('click', e => {

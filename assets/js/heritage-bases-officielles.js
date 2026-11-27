@@ -1,11 +1,11 @@
 /* LCNDA — 🎖️ Morts pour la France 1914–1918 et 🏅 Légion d'honneur (base Léonore)
  * (serveur : lib/bases_officielles.php ; bases : scripts/bases-officielles/build-bases.py, .github/workflows/bases-officielles.yml).
- *  · Réglages → 🎖️ Bases officielles : chaque base, sa taille, « ⤓ Installer » (par tranches, pause, reprise même après avoir
+ *  · Réglages → 🎖️ Bases officielles : chaque base, sa taille, « 📦 Installer » (par tranches, pause, reprise même après avoir
  *    fermé l'app, vérifiée avant d'être rangée ; ↶ Annuler), « 🗑 Supprimer » (↶ Annuler), « 🔍 Chercher dans la base »,
  *    « À propos des données » (sources, licences, ce qui manque).
  *  · fiche : un petit encadré sous la barre de la famille, seulement s'il y a quelque chose à dire :
  *    « 🎖️ Peut-être dans Morts pour la France » / « 🏅 Peut-être dans la Léonore » (la fiche trouvée, ↗ en ligne,
- *    « ＋ Ajouter comme source (à vérifier) », ↶ Annuler), ou une offre discrète « ⤓ Installer la base … » (✕ : plus proposé).
+ *    « ＋ Ajouter comme source (à vérifier) », ↶ Annuler), ou une offre discrète « 📦 Installer la base … » (✕ : plus proposé).
  *  · « 🔍 Chercher dans la base » : une page de recherche par nom (Réglages → 🎖️ Bases officielles → Chercher).
  *  · pour « Où chercher » : LCNDA_EXT.officialBases.suggest(person) → Promise de lignes (voir plus bas).
  * Réglage : localStorage['genealogie-bases-officielles'] = {dismiss: {mpf, leonore}} ; téléchargement en cours :
@@ -56,7 +56,7 @@
     if (!register()) document.addEventListener('DOMContentLoaded', register);
     function openSettings(view = null) { const st = A().state; if (!st) return; PAGE.pending = view; st.maintenanceTab = TAB[0]; A().persistUiState?.(); A().setModule?.('maintenance'); }
 
-    /* ═════════ ⤓ Installer (une course par base) ═════════ */
+    /* ═════════ 📦 Installer (une course par base) ═════════ */
     const DL = {online: undefined, err: '', run: {}, paused: {}};
     const dlSaved = k => String(lsJson(DL_KEY)[k] || '');
     const dlRemember = (k, id) => { const s = lsJson(DL_KEY); s[k] = id; lsSave(DL_KEY, s); };
@@ -110,7 +110,7 @@
         if (DL.online === undefined) return `${window.LCNDA_UI.spinner(i18n('Recherche des données en ligne…'), {inline: true})}`;
         const o = DL.online[kind];
         if (!o) return `<small class="muted" title="${esc(DL.err)}">${esc(DL.err ? i18n('Pas de connexion aux données en ligne.') : i18n('Pas encore en ligne.'))}</small>`;
-        return `<button type="button" class="button small" data-bo-install="${kind}">⤓ ${esc(i18n('Installer ({s})', {s: fmtSize(o.size)}))}</button>`;
+        return `<button type="button" class="button small" data-bo-install="${kind}">📦 ${esc(i18n('Installer ({s})', {s: fmtSize(o.size)}))}</button>`;
     }
 
     /* ═════════ La fiche : « Peut-être dans … » ═════════ */
@@ -155,7 +155,7 @@
             } else if (!b.installed && b.could && (only || !dismiss[k])) {
                 const o = DL.online?.[k], r = DL.run[k];
                 parts.push(`<div class="bo-offer" data-bo-offer="${k}"><span>${NAMES[k][0]} ${esc(k === 'mpf' ? i18n('Mort pendant la Grande Guerre ? La base des Morts pour la France 1914–1918 peut le dire.') : i18n('Décoré(e) de la Légion d’honneur ? La base Léonore peut le dire.'))}</span>
-                    ${r ? progHtml(k, r) : `<button type="button" class="button small secondary" data-bo-install="${k}">⤓ ${esc(i18n('Installer {t}', {t: i18n(NAMES[k][3])}))}${o ? ` (${esc(fmtSize(o.size))})` : ''}</button>`}
+                    ${r ? progHtml(k, r) : `<button type="button" class="button small secondary" data-bo-install="${k}">📦 ${esc(i18n('Installer {t}', {t: i18n(NAMES[k][3])}))}${o ? ` (${esc(fmtSize(o.size))})` : ''}</button>`}
                     <a class="bo-online" href="${HOME[k]}" target="_blank" rel="noopener">↗ ${esc(i18n('ou chercher en ligne'))}</a>
  ${only ? '' : `<button type="button" class="bo-x" data-bo-dismiss="${k}" title="${esc(i18n('Ne plus proposer'))}" aria-label="${esc(i18n('Ne plus proposer'))}">✕</button>`}</div>`);
             }
@@ -225,7 +225,7 @@
         const desc = b.installed ? [`${num(b.records)} ${i18n('fiches')}`, b.years?.a ? `${i18n('nés')} ${b.years.a} → ${b.years.b}` : '', fmtSize(b.size || 0), b.built ? i18n('fabriqué le {d}', {d: b.built}) : '', b.fixture ? i18n('données d’essai') : ''].filter(Boolean).join(' · ')
             : (kind === 'mpf' ? i18n('Soldats morts pour la France en 1914–1918 : naissance, décès, unité, lien vers la fiche numérisée.') : i18n('Dossiers des personnes décorées de la Légion d’honneur (mortes avant 1977) : naissance, cote du dossier.'))
               + (o ? ` ${i18n('Téléchargement : {s} (≈ {t} une fois installée).', {s: fmtSize(o.size), t: fmtSize(o.sqlite_size || o.size)})}` : '');
-        const srcs = b.installed && b.sources?.length ? `<div class="bo-srcs">${b.sources.map(s => `<span>${esc(s.mention)} — <i>${esc(s.licence)}</i>${s.url ? ` · <a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(i18n('la source'))}</a>` : ''}</span>`).join('')}</div>` : '';
+        const srcs = b.installed && b.sources?.length ? `<div class="bo-srcs">${b.sources.map(s => `<span>${esc(s.mention)} — <i>${esc(s.licence)}</i>${s.url ? ` · ${window.LCNDA_UI.extLink(s.url, i18n('la source'))}` : ''}</span>`).join('')}</div>` : '';
         return `<div class="bo-base" data-bo-row="${kind}"><span class="bo-base-ic">${NAMES[kind][0]}</span><span class="bo-base-txt"><b>${esc(i18n(NAMES[kind][1]))}</b><br><small>${esc(desc)}</small>${srcs}</span>
             ${UI().badge ? UI().badge(i18n(b.installed ? 'Installé' : 'Pas installé'), b.installed ? 'green' : 'grey') : ''}<span class="bo-base-acts">${actsHtml(kind, b.installed)}</span></div>`;
     }
@@ -318,7 +318,7 @@
      *   person : {id} (ou le « detail » d'une fiche) ; une ligne par base où la personne pourrait être :
      *   · installée : local=true, count = fiches qui lui ressemblent, why = « 2 fiches qui lui ressemblent » ou « Rien sous
      *     son nom dans la base installée », open() ouvre la recherche dans la base (son nom déjà écrit), url = la 1re fiche en ligne ;
-     *   · pas installée : local=false, url = le site officiel (chercher en ligne), install() lance « ⤓ Installer ». */
+     *   · pas installée : local=false, url = le site officiel (chercher en ligne), install() lance « 📦 Installer ». */
     async function suggest(person) {
         const pid = Number(person?.person?.id ?? person?.id) || 0; if (!pid) return [];
         let d; try { d = await personData(pid); } catch (_) { return []; }
@@ -343,7 +343,7 @@
         suggest({id: pid}).then(list => {
             if (!list.length || !body.isConnected || body.querySelector('.bo-ouc')) return;
             const li = x => `<li class="ouc-tip" data-bo-ouc="${x.kind}"><span class="ouc-ico" aria-hidden="true">${x.icon}</span><div class="ouc-main"><div class="ouc-name"><b>${esc(x.title)}</b> ${x.local ? (UI().badge ? UI().badge(i18n('Dans l’app'), 'green') : '') : ''}</div><div class="ouc-why">${esc(x.why)}</div></div>
-                <div class="ouc-acts">${x.local ? `<button type="button" class="button small secondary" data-bo-ouc-open="${x.kind}">🔎 ${esc(i18n('Voir dans la base'))}</button>` : `<a class="button small secondary" href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">${esc(i18n('↗ Ouvrir'))}</a> <button type="button" class="button small secondary" data-bo-install="${x.kind}">⤓ ${esc(x.size ? i18n('Installer ({s})', {s: fmtSize(x.size)}) : i18n('Installer'))}</button>`}</div></li>`;
+                <div class="ouc-acts">${x.local ? `<button type="button" class="button small secondary" data-bo-ouc-open="${x.kind}">🔎 ${esc(i18n('Voir dans la base'))}</button>` : `<a class="button small secondary" href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">${esc(i18n('↗ Ouvrir'))}</a> <button type="button" class="button small secondary" data-bo-install="${x.kind}">📦 ${esc(x.size ? i18n('Installer ({s})', {s: fmtSize(x.size)}) : i18n('Installer'))}</button>`}</div></li>`;
             const html = `<section class="ouc-plan bo-ouc"><h3>🎖️ ${esc(i18n('Bases officielles'))} <small class="muted">${esc(i18n('soldats morts en 1914–1918, Légion d’honneur'))}</small></h3><ul class="ouc-list">${list.map(li).join('')}</ul></section>`;
             const at = body.querySelector('.ouc-plus') || body.querySelector('.ouc-facts');
             if (at) at.insertAdjacentHTML('afterend', html); else body.insertAdjacentHTML('afterbegin', html);

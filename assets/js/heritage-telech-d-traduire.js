@@ -44,7 +44,7 @@
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
     const api = (...a) => A().api(...a);
     const post = (a, b) => api(a, {}, {method: 'POST', body: b}).then(r => r?.result || r);
-    const link = (url, label) => `<a href="${esc(/^\s*(?:javascript|data|vbscript|file):/i.test(String(url)) ? '#' : url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`; // une adresse venue d’un site (Wikidata, loc.gov…) : jamais « javascript: »
+    const link = (url, label) => `${window.LCNDA_UI.extLink(/^\s*(?:javascript|data|vbscript|file):/i.test(String(url)) ? '#' : url, label)}`; // une adresse venue d’un site (Wikidata, loc.gov…) : jamais « javascript: »
     const langName = k => T(LANGS[k] || k).toLowerCase();
     let st = null, stErr = ''; // stErr : la vérification a échoué (serveur) — ce n'est pas « pas installée »
     const status = async (fresh = false) => { if (!st || fresh) { try { st = await api('td_tr_status'); stErr = ''; } catch (e) { st = null; stErr = e?.message || String(e); } } return st; };
@@ -82,7 +82,7 @@
             if (!ready(s, lang)) {
                 const mb = Math.round((s?.engine?.installed ? (lang === 'en' ? 1 : 2) * 95 : 450 + (lang === 'en' ? 1 : 2) * 95));
                 host.innerHTML = `<p>${esc(T('La traduction {l} → français marche sans Internet une fois installée (≈ {n} Mo, une seule fois). Le texte ne quitte jamais l’ordinateur.', {l: langName(lang), n: String(mb)}))}</p>
-                    <p><button type="button" class="button small" data-tdt-install>${esc(T('⤓ Installer la traduction {l} → français', {l: langName(lang)}))}</button></p><p class="muted" data-tdt-progress></p>
+                    <p><button type="button" class="button small" data-tdt-install>${esc(T('📦 Installer la traduction {l} → français', {l: langName(lang)}))}</button></p><p class="muted" data-tdt-progress></p>
                     <small class="hist-src">${esc(T('Logiciel :'))} ${link('https://github.com/argosopentech/argos-translate', 'Argos Translate')} (${esc(T('MIT ou CC0'))}) · ${esc(T('modèles :'))} ${link('https://github.com/argosopentech/argospm-index', T('index d’Argos'))}</small>`;
                 host.querySelector('[data-tdt-install]').onclick = async e => {
                     e.target.disabled = true; const pr = host.querySelector('[data-tdt-progress]');
@@ -97,7 +97,7 @@
                 if (!r.ok) { host.innerHTML = `<p class="muted">${esc(r.message || '')}</p>`; return; }
                 const models = Object.entries(r.models || {}).map(([k, m]) => `${k}${m.licence ? ` — ${m.licence}` : ''}`).join(' ; ');
                 host.innerHTML = `<textarea class="td-tr-out" rows="8" readonly>${esc(r.text)}</textarea>
-                    <p class="td-tr-actions"><button type="button" class="button small secondary" data-tdt-copy>${esc(T('📋 Copier'))}</button>${keep ? ` <button type="button" class="button small secondary" data-tdt-keep>${esc(T('＋ Garder dans la transcription'))}</button>` : ''}${close ? ` <button type="button" class="button small secondary" data-tdt-close>${esc(T('✕ Fermer'))}</button>` : ''}</p>
+                    <p class="td-tr-actions"><button type="button" class="button small secondary" data-tdt-copy>${esc(T('📋 Copier'))}</button>${keep ? ` <button type="button" class="button small secondary" data-tdt-keep>${esc(T('＋ Garder dans la transcription'))}</button>` : ''}${close ? ` <button type="button" class="button small secondary" data-tdt-close>${esc(T('Fermer'))}</button>` : ''}</p>
                     <small class="hist-src">${esc(T('Traduit sur cet ordinateur par {e} ({r}). Traduction automatique : à relire, surtout les noms, les dates et les métiers.', {e: r.engine || 'Argos Translate', r: (r.route || []).join(' → ')}))}${models ? `<br>${esc(T('Modèles :'))} ${esc(models)}` : ''}</small>`;
                 host.querySelector('[data-tdt-copy]').onclick = () => { navigator.clipboard?.writeText(r.text); A().toast?.(T('Copié.'), 'success'); };
                 if (keep) host.querySelector('[data-tdt-keep]').onclick = () => keep(r.text);
@@ -180,7 +180,7 @@
         if (!s) { host.innerHTML = stErr ? `<p class="error" role="alert">${esc(T('Impossible de vérifier si ces données sont installées : {e}', {e: stErr}))}</p>` : ''; return; }
         const S = s.sources || {};
         const rowL = ([k, l]) => { const L = s.langs?.[k]; return `<tr><td>${esc(T(l))} → ${esc(T('français'))}</td><td>${esc((L?.pairs || []).join(' + '))}</td><td>${L?.installed ? `✓ ${esc(L.built || '')}` : '—'}</td>
-            <td>${L?.installed ? `<button type="button" class="button small secondary" data-tdt-undo="${k}">${esc(T('Retirer'))}</button>` : `<button type="button" class="button small" data-tdt-inst="${k}">${esc(T('⤓ Installer'))}</button>`}</td></tr>`; };
+            <td>${L?.installed ? `<button type="button" class="button small secondary" data-tdt-undo="${k}">${esc(T('Retirer'))}</button>` : `<button type="button" class="button small" data-tdt-inst="${k}">${esc(T('📦 Installer'))}</button>`}</td></tr>`; };
         const models = Object.entries(s.models || {});
         host.innerHTML = `<h3>${esc(T('🌐 Traduction hors ligne'))}</h3>
             <p class="muted">${esc(T('Traduire un acte ou une note en français sans Internet : le texte ne quitte jamais l’ordinateur. Moteur : Argos Translate (≈ 450 Mo une fois), puis ≈ 100 Mo par modèle ; les langues passent par l’anglais.'))}</p>

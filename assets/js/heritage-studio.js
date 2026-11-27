@@ -1,5 +1,5 @@
 /**
- * Atelier : 🎨 mises en page enregistrées (Apparence) · 🖼️ retouche des photos · 📋 Mes listes dans Listes et partagées.
+ * Atelier : 🎨 mises en page enregistrées (Apparence) · 🖼️ retouche des photos · 📑 Mes listes dans Listes et partagées.
  * Chargé après heritage-more.js (window.LCNDA_APP, window.LCNDA_EXT).
  */
 (() => {
@@ -346,7 +346,7 @@
             if (u.phase !== 'applied' || !u.settings || typeof u.settings !== 'object') return;
             const msg = i18n('Ensemble « {name} » appliqué.', {name});
             const undo = () => applyAll(u.settings, {name, undo: true});
-            toast(`💾 ${msg}`, '', {kind: 'undo', duration: 15000, action: {label: i18n('↶ Annuler'), run: undo}}); // (15 s : tout un ensemble, on a le temps de regarder)
+            toast(`💾 ${msg}`, '', {kind: 'undo', action: {label: i18n('↶ Annuler'), run: undo}}); // (H7 : 6 s comme partout ; la souris dessus le garde)
         };
         if (document.readyState === 'complete') setTimeout(show, 600); else window.addEventListener('load', () => setTimeout(show, 600), {once: true});
     })();
@@ -4535,7 +4535,9 @@
             try {
                 if (b.dataset.open) { const p = list.find(x => x.id === Number(b.dataset.open)); if (await onOpen?.(p) === false) return; dlg.close(); return; }
                 if (b.dataset.ren) { const p = list.find(x => x.id === Number(b.dataset.ren)), n = await A().askText({title: 'Renommer le projet', message: 'Nouveau nom :', value: p.name, okLabel: 'Renommer'}); if (!n?.trim()) return; const r = await api('rename_retouch_project', {}, {method: 'POST', body: {id: p.id, name: n}}); p.name = r.result.name; return draw(); }
-                if (b.dataset.del) { const p = list.find(x => x.id === Number(b.dataset.del)); if (!await A().confirmBox('La photo et ses versions restent.', {title: i18n('Supprimer le projet « {name} » ?', {name: p.name}), okLabel: i18n('Supprimer le projet')})) return; await api('delete_retouch_project', {}, {method: 'POST', body: {id: p.id}}); list = list.filter(x => x !== p); return draw(); }
+                if (b.dataset.del) { const p = list.find(x => x.id === Number(b.dataset.del)); if (!p) return; const at = list.indexOf(p); // H7 : supprimé tout de suite, « ↶ Annuler » le remet
+                    if (ext.deleteProjectWithUndo) return await ext.deleteProjectWithUndo({action: 'delete_retouch_project', id: p.id, name: p.name, onGone: () => { list = list.filter(x => x !== p); if (dlg.isConnected) draw(); }, onBack: () => { if (!list.includes(p)) list.splice(at, 0, p); if (dlg.isConnected) draw(); }});
+                    if (!await A().confirmBox('La photo et ses versions restent.', {title: i18n('Supprimer le projet « {name} » ?', {name: p.name}), okLabel: i18n('Supprimer le projet')})) return; await api('delete_retouch_project', {}, {method: 'POST', body: {id: p.id}}); list = list.filter(x => x !== p); return draw(); }
             } catch (err) { toast(err.message, 'error'); }
         });
     }

@@ -373,6 +373,6 @@
         open: (id, again) => ext.openVectorEditor?.({id, onSaved: again, onClose: again}),
         create: again => open(again),
         rename: (id, name) => api('rename_vector_doc', {}, {method: 'POST', body: {id, name}}),
-        remove: id => api('delete_vector_doc', {}, {method: 'POST', body: {id}}), createLabel: '＋ Signature ou sceau',
+        remove: id => (ext.projectDelUndo ? ext.projectDelUndo('delete_vector_doc')(id) : api('delete_vector_doc', {}, {method: 'POST', body: {id}})), undo: true, createLabel: '＋ Signature ou sceau',
         extra: '<button type="button" class="button small secondary" data-et-x="seal">🔏 Monogramme, cachet…</button>', onExtra: (k, again) => open(again, {mode: 'seal'})});
 })();

@@ -93,8 +93,8 @@
     const settings = () => { let s = {}; try { s = JSON.parse(W.localStorage?.getItem(KEY) || '{}') || {}; } catch (_) { s = {}; } return {...Object.fromEntries(PARTS.map(p => [p[0], true])), ...s}; };
     const saveSettings = s => { try { W.localStorage?.setItem(KEY, JSON.stringify(s)); } catch (_) {} };
     const on = k => settings()[k] !== false;
-    const link = (url, label) => (url ? `<a href="${esc(/^\s*(?:javascript|data|vbscript|file):/i.test(String(url)) ? '#' : url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : esc(label)); // une adresse venue d’un site (Wikidata, loc.gov…) : jamais « javascript: »
-    const srcLink = (url, label = T('↗ source')) => (url ? `<a class="ta-src" href="${esc(url)}" target="_blank" rel="noopener noreferrer" title="${esc(T('Ouvrir la source (internet)'))}">${esc(label)}</a>` : '');
+    const link = (url, label) => (url ? `${window.LCNDA_UI.extLink(/^\s*(?:javascript|data|vbscript|file):/i.test(String(url)) ? '#' : url, label)}` : esc(label)); // une adresse venue d’un site (Wikidata, loc.gov…) : jamais « javascript: »
+    const srcLink = (url, label = T('↗ source')) => (url ? `${window.LCNDA_UI.extLink(url, label, {cls: 'ta-src', title: T('Ouvrir la source (internet)')})}` : '');
     const row = (icon, html, src, extra = '', attrs = '') => `<div class="hist-row ta-row"${attrs}><span class="hist-i" aria-hidden="true">${icon}</span><div class="hist-t"><p>${html}</p>${extra}${src ? `<small class="hist-src">${esc(T('Source :'))} ${src}</small>` : ''}</div></div>`;
     const more = (html, attrs = '') => (html ? `<details class="l10v-more ta-more"${attrs}><summary>${esc(T('▸ plus'))}</summary>${html}</details>` : '');
     const hyp = t => `<small class="muted hist-hyp">${esc(t)}</small>`;

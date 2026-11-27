@@ -7,7 +7,7 @@
  *   3. 📊 récap (app-donnees-accueil.js) : « ⚠ Vérification impossible (N) » à côté du compte, pas des « ⤓ » en trop ;
  *   4. 📋 vue d'ensemble des listes (app-listes-donnees.js) : la pastille « ⚠ », pas « à installer » ;
  *   5. Réglages → 🗂 Données (app-listes-maj.js) : une famille dont l'état ne se lit pas → ligne « ⚠ Vérification impossible », pas « ⤓ Télécharger » ;
- *   6. une page de pack (🏰 GOV, heritage-gov.js) : un message d'erreur (toast), pas seulement « ⤓ Installer » ;
+ *   6. une page de pack (🏰 GOV, heritage-gov.js) : un message d'erreur (toast), pas seulement « 📦 Installer » ;
  *   7. les décès INSEE installés ou retirés (app-recherche.js) : les mémoires « installé ? » sont oubliées (lcnda:installs-changed).
  * Base : tests/prendre-depuis-seed.js (rien à télécharger).   node tests/test-installs-erreurs.js */
 'use strict';
@@ -54,13 +54,13 @@ const PANNE = {status: 500, contentType: 'application/json', body: JSON.stringif
             await p.evaluate(() => document.getElementById('essai-picker')?.remove());
         });
 
-        await t('📊 récap : la vérification en panne → « ⚠ Vérification impossible (N) », pas des ⤓ comptés pour rien', async () => {
-            await forget(); const before = await recapFoot(); const n0 = Number((before.match(/⤓\s*([\d\s ]+)/) || [0, '0'])[1].replace(/\D/g, '')); assert.ok(n0 >= 6, before);
+        await t('📊 récap : la vérification en panne → « ⚠ Vérification impossible (N) », pas des 📦 comptés pour rien', async () => {
+            await forget(); const before = await recapFoot(); const n0 = Number((before.match(/📦\s*([\d\s ]+)/) || [0, '0'])[1].replace(/\D/g, '')); assert.ok(n0 >= 6, before);
             await p.route(/action=ld_status/, r => r.fulfill(PANNE)); await forget();
             const foot = await recapFoot();
             assert.match(foot, /Vérification impossible \(\d+\)/, foot);
-            const n1 = Number((foot.match(/⤓\s*([\d\s ]+)/) || [0, '0'])[1].replace(/\D/g, ''));
-            assert.ok(n1 < n0, `les listes des packs ne sont plus comptées « ⤓ » : ${n1} (avant ${n0})`);
+            const n1 = Number((foot.match(/📦\s*([\d\s ]+)/) || [0, '0'])[1].replace(/\D/g, ''));
+            assert.ok(n1 < n0, `les listes des packs ne sont plus comptées « 📦 » : ${n1} (avant ${n0})`);
             await p.unroute(/action=ld_status/); await forget();
             assert.doesNotMatch(await recapFoot(), /Vérification impossible/);
         });

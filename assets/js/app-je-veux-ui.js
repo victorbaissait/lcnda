@@ -376,7 +376,7 @@
         const draw = () => {
             const s = JV().settings(), ro = kiosk(), K = UI().toggleHtml || ((l, o) => `<label class="ui-toggle"><input type="checkbox" ${o.attrs} ${o.checked ? 'checked' : ''}><i></i>${esc(l)}</label>`);
             const row = (key, label, sub, extra = '', dis = false) => `<div class="jv-setrow">${K(T(label), {checked: !!s[key], sub: T(sub), attrs: `data-jv-opt="${key}"`, disabled: ro || dis || (key !== 'on' && !s.on)})}${extra ? `<div class="jv-setx">${extra}</div>` : ''}</div>`;
-            const seg = (key, list) => `<span class="segmented sm" role="group">${list.map(([v, l]) => `<button type="button" data-jv-seg="${key}" data-v="${v}" aria-pressed="${String(s[key]) === String(v)}"${ro || !s.on ? ' disabled' : ''}>${esc(T(l))}</button>`).join('')}</span>`;
+            const seg = (key, list) => `${window.LCNDA_UI.segmented({cls: 'sm', items: list.map(([v, l]) => ({on: String(s[key]) === String(v), attrs: `data-jv-seg="${key}" data-v="${v}"`, disabled: ro || !s.on, html: esc(T(l))}))})}`;
             const all = reg(), things = coverage();
             const aiReady = aiInstalled();
             ws.innerHTML = `<section class="page jv-settings" data-jv-settings>${UI().pageHeader({where: T('Réglages · Navigation'), icon: '🧭', title: T('Je veux…'), help: esc(T('Dire ce qu’on veut faire, et y aller. Rien ne part sur Internet.')), saved: true,
@@ -394,11 +394,11 @@
                   <div class="jv-setrow"><div><b>${esc(T('👣 Montre-moi tout seul'))}</b><small>${esc(T('Après ▶ M’y emmener, montrer aussi les boutons.'))}</small></div><div>${seg('show', [['never', 'Jamais'], ['first', 'La 1re fois'], ['always', 'Toujours']])}</div></div>
                   <div class="jv-setrow"><div><b>${esc(T('Nombre de réponses'))}</b><small>${esc(T('Les autres vont dans « Autres idées ».'))}</small></div><div>${seg('n', [['1', '1'], ['2', '2'], ['3', '3']])}</div></div>
                   ${row('ia', '🤖 Reformuler avec l’IA de l’ordinateur', aiReady ? 'Seulement quand rien ne correspond. L’IA ne choisit pas : elle propose une autre phrase, que tu vois.' : 'Seulement si l’assistant IA est installé (Réglages → 🤖 IA). Ici : pas installé.', '', !aiReady)}
-                  ${row('hist', 'Garder « Récemment demandé »', 'Sur cet ordinateur.', ` <button type="button" class="button small secondary" data-jv-clear${ro ? ' disabled' : ''}>${esc(T('Effacer maintenant'))}</button>`)}
+                  ${row('hist', 'Garder « Récemment demandé »', 'Sur cet ordinateur.', ` <button type="button" class="button small secondary" data-jv-clear${ro ? ' disabled' : ''}>${esc(T('Vider maintenant'))}</button>`)}
                   ${row('often', 'Montrer « Souvent fait ici »', 'Compté sur cet ordinateur seulement.')}</section>
                 <section class="maintenance-panel"><h3>${esc(T('Couverture'))}</h3><p data-jv-cover>${esc(T('{n} choses de l’app, {m} avec une intention.', {n: things.total, m: things.total - things.missing.length}))} ${things.missing.length ? '' : `<span class="ui-badge is-green">${esc(T('complet'))}</span>`}</p>
                   <p class="muted small">${esc(T('{n} intentions en tout, dont {m} écrites à la main.', {n: all.length, m: all.filter(i => i.src === 'main').length}))}</p>
-                  <div class="jv-chips"><button type="button" class="button small secondary" data-jv-tolist>📋 ${esc(T('Voir la liste'))}</button><button type="button" class="button small secondary" data-jv-tobrowse>🗂 ${esc(T('Tout parcourir'))}</button></div></section></div></section>`;
+                  <div class="jv-chips"><button type="button" class="button small secondary" data-jv-tolist>📑 ${esc(T('Voir la liste'))}</button><button type="button" class="button small secondary" data-jv-tobrowse>🗂 ${esc(T('Tout parcourir'))}</button></div></section></div></section>`;
         };
         draw();
         ws.onclick = e => {

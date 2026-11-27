@@ -84,8 +84,10 @@ function save_slideshow(PDO $pdo, array $data): array
 function delete_slideshow(PDO $pdo, array $data): array
 {
     slideshows_ensure($pdo);
-    $pdo->prepare('DELETE FROM slideshows WHERE id=?')->execute([safe_int($data['id'] ?? 0)]);
-    return ['ok' => true];
+    $id = safe_int($data['id'] ?? 0);
+    $undo = project_undo_keep($pdo, 'slideshows', $id); // ↶ Annuler (restore_project)
+    $pdo->prepare('DELETE FROM slideshows WHERE id=?')->execute([$id]);
+    return ['ok' => true, 'undo' => $undo];
 }
 
 function rename_slideshow(PDO $pdo, array $data): array

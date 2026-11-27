@@ -151,8 +151,8 @@
     /** consultation (kiosque) ou invité du réseau local : aucune image chargée d'Internet (le lien reste) */
     const offline = () => !!(root.document?.body?.classList.contains('is-kiosk') || root.LCNDA_GUEST);
     const safe = u => (A().safeUrl ? A().safeUrl(u) : u) || '#';
-    const link = (url, label) => (url ? `<a href="${esc(safe(url))}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : esc(label));
-    const src = (url, label = T('↗ source')) => (url ? `<a class="fe-src" href="${esc(safe(url))}" target="_blank" rel="noopener noreferrer" title="${esc(T('Ouvrir la source (internet)'))}">${esc(label)}</a>` : '');
+    const link = (url, label) => (url ? `${window.LCNDA_UI.extLink(safe(url), label)}` : esc(label));
+    const src = (url, label = T('↗ source')) => (url ? `${window.LCNDA_UI.extLink(safe(url), label, {cls: 'fe-src', title: T('Ouvrir la source (internet)')})}` : '');
     const more = (html, n, label = T('▸ plus')) => (html ? `<details class="fe-more"><summary>${esc(label)}${n ? ` <small class="muted">(${nf(n)})</small>` : ''}</summary>${html}</details>` : '');
     const yrs = (a, b) => (a == null && b == null ? '' : a != null && b != null ? (a === b ? String(a) : `${a} – ${b}`) : a != null ? T('dès {y}', {y: String(a)}) : T('jusqu’en {y}', {y: String(b)}));
     const kindLabel = k => T((KINDS[k] || KINDS.eglise)[1]);

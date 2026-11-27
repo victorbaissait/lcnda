@@ -132,7 +132,7 @@
         if (!d) return null;
         if (d.online || d.needsInternet) return {k: 'net', t: T('🌐 il faut Internet'), cls: 'is-grey'};
         let inst; try { inst = await E().isInstalled?.(d); } catch (_) { return {k: 'err', t: '⚠ ' + T('Vérification impossible'), cls: 'is-yellow'}; } // pas « à installer » : on ne sait pas
-        if (!inst) return {k: 'dl', t: T('⤓ à installer'), cls: 'is-grey'};
+        if (!inst) return {k: 'dl', t: T('📦 à installer'), cls: 'is-grey'};
         if ((d.fields || []).some(f => (f.type === 'url' || f.type === 'image') && PHOTO.test(`${f.key} ${f.label}`))) return {k: 'photo', t: T('📶 sauf photos'), cls: 'is-orange'};
         return {k: 'ok', t: T('📶 sans Internet'), cls: 'is-green'};
     }
@@ -239,7 +239,7 @@
             pickPerson(host, p => {
                 if (!p.b) return toast(T('{p} n’a pas d’année de naissance : impossible de situer sa vie.', {p: p.name}), 'error');
                 const wrap = document.createElement('div'); wrap.className = 'dp-pop'; host.appendChild(wrap);
-                wrap.innerHTML = `<b>👤 ${esc(p.name)} (${p.b}–${p.d || '…'})</b><span class="segmented dp-seg" role="group" aria-label="${esc(T('Moment de sa vie'))}">${MOMENTS.map(([k]) => `<button type="button" data-dp-mom="${k}" aria-pressed="false">${esc(momentText(k))}</button>`).join('')}</span><div class="dp-pop-act"><button type="button" class="button small secondary" data-dp-px>${esc(T('Fermer'))}</button></div>`;
+                wrap.innerHTML = `<b>👤 ${esc(p.name)} (${p.b}–${p.d || '…'})</b>${window.LCNDA_UI.segmented({cls: 'dp-seg', label: T('Moment de sa vie'), items: MOMENTS.map(([k]) => ({attrs: `data-dp-mom="${k}"`, html: esc(momentText(k))}))})}<div class="dp-pop-act"><button type="button" class="button small secondary" data-dp-px>${esc(T('Fermer'))}</button></div>`;
                 wrap.addEventListener('click', e => {
                     if (e.target.closest('[data-dp-px]')) { host.innerHTML = ''; return; }
                     const m = e.target.closest('[data-dp-mom]'); if (!m) return;
@@ -698,7 +698,7 @@
         const save = () => { writeJ(K_LAY, l); rerenderRecap(); };
         const push = () => { undo.push(JSON.stringify(l)); if (undo.length > 50) undo.shift(); };
         const lab = k => T(blkDef(k)[1]).replace(/\s*$/, '');
-        const sizeSeg = k => { const c = (l.size[k] || 'n') === 'c'; return `<span class="segmented dp-seg" role="group" aria-label="${esc(T('Taille de « {b} »', {b: lab(k)}))}"><button type="button" data-dp-sz="${k}" data-v="c" aria-pressed="${c}">${esc(T('Compacte'))}</button><button type="button" data-dp-sz="${k}" data-v="n" aria-pressed="${!c}">${esc(T('Normale'))}</button></span>`; };
+        const sizeSeg = k => { const c = (l.size[k] || 'n') === 'c'; return window.LCNDA_UI.segmented({cls: 'dp-seg', label: T('Taille de « {b} »', {b: lab(k)}), items: [{on: c, attrs: `data-dp-sz="${k}" data-v="c"`, html: esc(T('Compacte'))}, {on: !c, attrs: `data-dp-sz="${k}" data-v="n"`, html: esc(T('Normale'))}]}); };
         const body = () => `<p class="muted vl-help">${esc(T('Glisse ⠿ (ou ↑ ↓, ou Alt + flèches) pour ranger ; l’interrupteur montre ou cache ; la taille met plus ou moins de lignes. Gardé tout de suite, pour toi seul. La question reste toujours en haut ; un bloc vide ne se montre pas.'))}</p>
             <div class="vl-wrap"><table class="data-table vl-table dp-org"><thead><tr><th>${esc(T('Ordre'))}</th><th>${esc(T('Bloc'))}</th><th>${esc(T('Montré'))}</th><th>${esc(T('Taille'))}</th></tr></thead><tbody>${l.order.map((k, i) => {
                 const na = !avail(k), off = l.hidden.includes(k), f = blkDef(k)[2];
@@ -737,7 +737,7 @@
     const SUNDO = [];
     function optHtml(o) {
         const v = opt(o.k), lab = T(o.lab);
-        if (o.type === 'seg') return `<span class="dp-o"><span class="lbl">${esc(lab)}</span><span class="segmented dp-seg" role="group" aria-label="${esc(lab)}">${o.vals.map((x, i) => `<button type="button" data-dp-opt="${o.k}" data-v="${esc(x)}" aria-pressed="${String(v) === String(x)}">${esc(T(o.labels[i]))}</button>`).join('')}</span></span>`;
+        if (o.type === 'seg') return `<span class="dp-o"><span class="lbl">${esc(lab)}</span>${window.LCNDA_UI.segmented({cls: 'dp-seg', label: lab, items: o.vals.map((x, i) => ({on: String(v) === String(x), attrs: `data-dp-opt="${o.k}" data-v="${esc(x)}"`, html: esc(T(o.labels[i]))}))})}</span>`;
         if (o.type === 'tog') return `<label class="ui-toggle dp-o"><input type="checkbox" data-dp-opt="${o.k}" ${v ? 'checked' : ''}><i></i>${esc(lab)}</label>`;
         if (o.type === 'chk') return `<label class="dp-chk"><input type="checkbox" data-dp-opt="${o.k}" ${v ? 'checked' : ''}> ${esc(lab)}</label>`;
         return `<label class="dp-o dp-num"><span class="lbl">${esc(lab)}</span><input type="number" min="${o.min}" max="${o.max}" step="1" inputmode="numeric" data-dp-opt="${o.k}" value="${esc(v)}" aria-label="${esc(lab)}"><span>${esc(T(o.unit))}</span></label>`;
@@ -748,7 +748,7 @@
         if (ro()) { host.innerHTML = `<section class="page dp-set" data-dp-set>${head}<p class="dp-kiosk">🔒 ${esc(T('En borne et pour les invités du réseau local : tout se lit, rien ne s’écrit (pas de note, pas d’ajout, pas de marque, pas de partage), et ces réglages ne s’ouvrent pas.'))}</p></section>`; return; }
         const n = FEATS.filter(f => on(f.n)).length, place = H().place?.() || 'listes';
         host.innerHTML = `<section class="page dp-set" data-dp-set>${head}
-            <section class="maintenance-panel dp-where"><b>${esc(T('Où sont les données'))}</b><span class="segmented dp-seg" role="group" aria-label="${esc(T('Où sont les données'))}">${[['listes', 'Dans Listes'], ['onglet', 'Onglet 📊 Données'], ['deux', 'Les deux']].map(([v, l]) => `<button type="button" data-dp-place="${v}" aria-pressed="${place === v}">${esc(T(l))}</button>`).join('')}</span><small class="muted">${esc(T('L’un des deux reste toujours là.'))}</small></section>
+            <section class="maintenance-panel dp-where"><b>${esc(T('Où sont les données'))}</b>${window.LCNDA_UI.segmented({cls: 'dp-seg', label: T('Où sont les données'), items: [['listes', 'Dans Listes'], ['onglet', 'Onglet 📊 Données'], ['deux', 'Les deux']].map(([v, l]) => ({on: place === v, attrs: `data-dp-place="${v}"`, html: esc(T(l))}))})}<small class="muted">${esc(T('L’un des deux reste toujours là.'))}</small></section>
             <div class="dp-set-top"><span class="dp-count" aria-live="polite"><b data-dp-on>${n}</b> ${esc(T('ajouts allumés sur {t}', {t: FEATS.length}))}</span><span class="dp-row"><button type="button" class="button small secondary" data-dp-sundo ${SUNDO.length ? '' : 'disabled'}>↶ ${esc(T('Annuler'))}</button><button type="button" class="button small secondary" data-dp-sreset>↺ ${esc(T('Remettre comme au départ'))}</button></span></div>
             ${GROUPS.map((g, gi) => { const fs = FEATS.filter(f => f.g === gi), k = fs.filter(f => on(f.n)).length;
                 return `<section class="maintenance-panel dp-grp" aria-labelledby="dp-gh${gi}"><div class="dp-grp-h"><h3 id="dp-gh${gi}">${esc(T(g))} <small class="muted">${esc(T('{a} sur {b}', {a: k, b: fs.length}))}</small></h3><span class="dp-row"><button type="button" class="button small secondary" data-dp-all="${gi}" data-v="1">${esc(T('Tout allumer'))}</button><button type="button" class="button small secondary" data-dp-all="${gi}" data-v="0">${esc(T('Tout éteindre'))}</button></span></div>

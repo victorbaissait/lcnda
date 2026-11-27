@@ -140,6 +140,10 @@
     function listName() { const ws = A().$('#workspace'); return (ws?.querySelector('.page-header h2, .ui-page-head h2, h2')?.textContent || 'Liste').replace(/\s+/g, ' ').trim().slice(0, 120); }
     function exportMenu(btn, table) {
         const UI = window.LCNDA_UI, rows = () => shownRows(table);
+        if (UI.exportRows) { // ⤓ la fenêtre d'export commune ; KML, GeoJSON, vCard… (selon la liste) y sont des formats de plus
+            const extras = (ext.listExportExtras?.(S().listType) || []).map((x, i) => ({id: 'x' + i, label: `${x.icon || '⤓'} ${x.label}`, hint: x.help || '', goLabel: `⤓ ${x.label}`, run: async () => x.run()}));
+            return UI.exportRows({title: listName(), name: listName(), rows, info: `${Math.max(0, rows().length - 1)} lignes affichées`, extra: extras});
+        }
         UI.menuAt(btn, [
             {icon: '🧾', label: 'Ouvrir dans le tableur', help: 'mêmes colonnes, mêmes filtres', run: () => ext.openRowsInSheet({name: listName(), rows: rows()})},
             {icon: '🧾', label: 'En CSV (Excel, LibreOffice…)', run: () => { const SH = window.LCNDA_SHEET, m = rows(); if (!SH || m.length < 2) return A().toast('Rien à exporter : la liste est vide.'); const name = (A().safeExportFilename ? A().safeExportFilename(listName(), 'liste') : 'liste') + '.csv';

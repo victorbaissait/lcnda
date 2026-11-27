@@ -3,7 +3,7 @@
  * Le « serveur » des données (version « gov-donnees » du dépôt) est un dossier local (GENEALOGY_TEST=1 + LCNDA_TEST_GOV_DIR) :
  * le pack d'essai (scripts/gov/make-fixture.py : lieux inventés) coupé en 2 morceaux + gov-manifest.json.
  *  1. fabrication : en-tête LCGOV1, taille, empreinte, tables, noms datés, licence et mention dans meta ;
- *  2. Réglages → 🏰 Lieux anciens (GOV) : « ⤓ Installer » → installé ; rien dans le dossier de l'app ;
+ *  2. Réglages → 🏰 Lieux anciens (GOV) : « 📦 Installer » → installé ; rien dans le dossier de l'app ;
  *  3. serveur : chercher « Lakomice » / « lacombsdorf » ; à quoi appartenait Lacombsdorf en 1870 et aujourd'hui ;
  *  4. fiche de Jean MAZAUD (né à Lacombsdorf en 1870) : « 🏰 en 1870 : Kirchspiel Lacombsdorf, Kreis Durandsberg, Province de Lacombie, Royaume de Durandie » ;
  *  5. page du lieu sans coordonnées (deux Lacombsdorf) : « C'est celui-ci » (↶ Annuler) ;
@@ -95,7 +95,7 @@ echo json_encode(['jean' => $jean, 'marie' => $marie, 'near' => $near, 'vague' =
             assert.strictEqual((await api('gov_status')).installed, false);
             assert.match((await api('gov_search', {q: 'Lakomice'})).error, /pas installés/);
         });
-        await t('Réglages → 🏰 Lieux anciens (GOV) : « ⤓ Installer » → installé', async () => {
+        await t('Réglages → 🏰 Lieux anciens (GOV) : « 📦 Installer » → installé', async () => {
             await p.evaluate(() => { const A = window.LCNDA_APP; window.LCNDA_EXT.gov.register(); A.state.maintenanceTab = 'gov'; A.setModule('maintenance'); });
             await p.waitForSelector('[data-gov-dl]', {timeout: 20000});
             assert.match(await p.textContent('[data-gov-dl]'), /Installer/);

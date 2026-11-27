@@ -1,4 +1,4 @@
-/* LCNDA — 🗂 Archives en ligne : 🎖 Mémoire des hommes · 🏅 Léonore · 📋 registres matricules · 📰 presse ancienne (l'import).
+/* LCNDA — 🗂 Archives en ligne : 🎖 Mémoire des hommes · 🏅 Léonore · 🪖 registres matricules · 📰 presse ancienne (l'import).
  * La recherche n'est plus ici : « 🔍 Chercher dans les archives en ligne », « ⚙️ Adresses des sites » et « 🔗 Coller un lien » sont
  * la fenêtre commune de tous les lots (heritage-archives-en-ligne.js, ext.archives) ; openSearch / openSettings / openPasteLink
  * l'ouvrent déjà sur la rubrique de ce lot. L'app n'interroge jamais ces sites.
@@ -42,7 +42,7 @@
     const openSettings = onChange => ext.archives?.openSettings({lot: 1, onChange});
 
     /* ═════ ⤒ Importer ce qu'on a téléchargé (K13) ═════ */
-    const KIND_LABEL = {mdh: '🎖 Mémoire des hommes', leonore: '🏅 Léonore', matricule: '📋 Registre matricule', presse: '📰 Presse ancienne'};
+    const KIND_LABEL = {mdh: '🎖 Mémoire des hommes', leonore: '🏅 Léonore', matricule: '🪖 Registre matricule', presse: '📰 Presse ancienne'};
     const GRADES = ['chevalier', 'officier', 'commandeur', 'grand officier', 'grand-croix'];
     const PTYPES = [['article', 'Article'], ['faits_divers', 'Faits divers'], ['necrologie', 'Nécrologie'], ['naissance', 'Avis de naissance'], ['mariage', 'Avis de mariage'], ['deces', 'Avis de décès'], ['annonce', 'Petite annonce'], ['palmares', 'Résultats, palmarès'], ['portrait', 'Portrait'], ['citation', 'Citation'], ['autre', 'Autre']];
     const fld = (name, label, value = '', a = '') => `<label>${esc(label)}<input name="${esc(name)}" value="${esc(value ?? '')}" autocomplete="off" ${a}></label>`;
@@ -194,7 +194,7 @@
     /* ═════ Les boutons posés dans les blocs de la fiche ═════ */
     const BTN = {
         mdh: ['🔍 Mémoire des hommes', 'Ouvre Mémoire des hommes dans ton navigateur, avec son nom et son prénom'],
-        matricule: ['📋 Registre matricule', 'Sa classe, son département et le site des archives où chercher son registre matricule'],
+        matricule: ['🪖 Registre matricule', 'Sa classe, son département et le site des archives où chercher son registre matricule'],
         leonore: ['🔍 Léonore', 'Ouvre la base Léonore (Légion d’honneur) dans ton navigateur'],
         presse: ['🔍 Presse ancienne', 'Gallica, RetroNews, Europeana : nom, lieu et années déjà remplis'],
     };

@@ -131,7 +131,7 @@
     const personRow = p => [personName(p), yr(p.birth_date, p.birth_year), yr(p.death_date, p.death_year)];
     /**
      * researchBar.attach(root, people, {title, head, row}) : root contient des cases [data-rp-pick="id"] ;
-     * la barre se pose en haut des résultats : Tout cocher · n cochées · 🏷 Étiqueter · 📋 Ajouter à Mes listes ;
+     * la barre se pose en haut des résultats : Tout cocher · n cochées · 🏷 Étiqueter · 📑 Ajouter à Mes listes ;
      * sans case cochée, les actions portent sur tous les résultats. L'en-tête de la page reçoit Exporter / Imprimer.
      */
     function attachBar(root, people, o = {}) {
@@ -143,7 +143,7 @@
         const targets = () => { const p = picked(); return p.length ? p : people.map(x => Number(x.id)); };
         const bar = document.createElement('div'); bar.className = 'rp-bar'; bar.dataset.rpBar = '';
         bar.innerHTML = `<label class="rp-bar-all"><input type="checkbox" data-rp-all> ${esc(i18n('Tout cocher'))}</label><span class="rp-bar-count" data-rp-count></span>
-            ${kiosk() ? '' : `<button type="button" class="button small secondary" data-rp-label>${esc(i18n('🏷 Étiqueter'))}</button><button type="button" class="button small secondary" data-rp-list>${esc(i18n('📋 Ajouter à Mes listes'))}</button>`}`;
+            ${kiosk() ? '' : `<button type="button" class="button small secondary" data-rp-label>${esc(i18n('🏷 Étiqueter'))}</button><button type="button" class="button small secondary" data-rp-list>${esc(i18n('📑 Ajouter à Mes listes'))}</button>`}`;
         const first = root.querySelector('.data-table-wrap, .date-results, .rp-results, table') || root.firstElementChild;
         if (first) first.before(bar); else root.prepend(bar);
         const count = () => { const n = picked().length; bar.querySelector('[data-rp-count]').textContent = n ? i18n('{n} cochée(s) sur {t}', {n, t: people.length}) : i18n('Rien de coché : les actions portent sur les {t} résultats', {t: people.length}); const all = bar.querySelector('[data-rp-all]'); all.checked = n > 0 && n === people.length; all.indeterminate = n > 0 && n < people.length; };
@@ -160,7 +160,7 @@
             const btn = e.currentTarget;
             let lists = []; try { lists = ((await api('my_lists')).lists || []).filter(l => l.source === 'persons'); } catch (err) { toast(err.message, 'error'); return; }
             if (!lists.length) { toast(i18n('Aucune de « Mes listes » ne contient des personnes : crée-en une dans Réglages → Éditeur de listes.'), 'error'); return; }
-            UI().menuAt(btn, lists.map(l => ({icon: l.icon || '📋', label: l.name, run: async () => { try { const r = await post('ro_people_to_list', {list_id: l.id, ids: targets()}); undoable(i18n('📋 {n} personne(s) ajoutée(s) à « {list} »', {n: r.added, list: r.list}), r.undo_id); } catch (err) { toast(err.message, 'error'); } }})), {title: i18n('Ajouter à une liste')});
+            UI().menuAt(btn, lists.map(l => ({icon: l.icon || '📋', label: l.name, run: async () => { try { const r = await post('ro_people_to_list', {list_id: l.id, ids: targets()}); undoable(i18n('📑 {n} personne(s) ajoutée(s) à « {list} »', {n: r.added, list: r.list}), r.undo_id); } catch (err) { toast(err.message, 'error'); } }})), {title: i18n('Ajouter à une liste')});
         });
         const head = o.head || PEOPLE_HEAD(), row = o.row || personRow;
         bindExportPrint(page, () => { const ids = picked(); const list = ids.length ? ids.map(id => byId.get(id)).filter(Boolean) : people; return {title, head, rows: list.map(row)}; });

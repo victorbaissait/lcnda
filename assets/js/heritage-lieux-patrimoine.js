@@ -3,9 +3,9 @@
  *      📜 Anciens noms (DicoTopo, livré avec l'app : formes anciennes datées, avec leur source, lien vers dicotopo.cths.fr),
  *      🏘️ Lieux-dits de la commune (pack IGN du département : liste à chercher, « 🗺 Sur la carte » sur la carte du village),
  *      ⛪ Patrimoine de la commune (pack Mérimée + Palissy : l'église, ses cloches, ses fonts baptismaux… lien vers POP).
- *    Rien quand il n'y a rien ; un pack pas installé : une petite offre « ⤓ Installer … » (une fois, ✕ la cache pour de bon).
+ *    Rien quand il n'y a rien ; un pack pas installé : une petite offre « 📦 Installer … » (une fois, ✕ la cache pour de bon).
  *  · Atelier de transcription, « Ce que l'app a trouvé » → Lieux : un nom qui n'est pas dans ta base → « 💡 Ce serait peut-être … ».
- *  · Réglages → « 🏘️ Lieux-dits et patrimoine » (à côté de la météo) : chaque partie s'éteint ; les départements ; « ⤓ Installer »,
+ *  · Réglages → « 🏘️ Lieux-dits et patrimoine » (à côté de la météo) : chaque partie s'éteint ; les départements ; « 📦 Installer »,
  *    « 🗑 Supprimer » (↶ Annuler) avec les tailles ; « À propos des données ».
  *  · Pour les autres outils : window.LCNDA_EXT.lieuxPatrimoine.suggest(lieu) → Promise {q, guesses: [{source, name, old, date, year,
  *    ref, insee, commune, dep, dep_name, desc, url, lat, lon}]} ; .placeInto(élément, lieu) ; et le registre LCNDA_EXT.dataSources.
@@ -38,7 +38,7 @@
     const fmtSize = b => (b >= 1e9 ? `${String(Math.round(b / 1e8) / 10).replace('.', ',')} Go` : b >= 1e6 ? `${String(Math.round(b / 1e5) / 10).replace('.', ',')} Mo` : `${Math.max(1, Math.round(b / 1e3))} Ko`);
     const nf = n => Number(n || 0).toLocaleString('fr-FR');
     const plural = (n, w) => (A().plural ? A().plural(n, w) : `${nf(n)} ${w}${n > 1 ? 's' : ''}`);
-    const link = (url, label) => (url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : esc(label));
+    const link = (url, label) => (url ? `${window.LCNDA_UI.extLink(url, label)}` : esc(label));
     const more = (html, n) => (html ? `<details class="lp-more"><summary>${esc(T('▸ plus'))}${n ? ` <small class="muted">(${nf(n)})</small>` : ''}</summary>${html}</details>` : '');
 
     /* ═════════ les données d'une commune (gardées le temps de la session) ═════════ */
@@ -57,7 +57,7 @@
     function offerHtml(kind, dep, depName) {
         if (offerHidden(kind) || kiosk()) return '';
         const [ico, label] = KINDS[kind];
-        return `<p class="lp-offer" data-lp-offer="${kind}"><button type="button" class="link-button" data-lp-install="${esc(kind)}-${esc(dep)}">⤓ ${esc(T('Installer {what} — {dep}', {what: T(label), dep: depName || dep}))}</button> <button type="button" class="icon-button lp-x" data-lp-hide-offer="${kind}" title="${esc(T('Ne plus proposer'))}" aria-label="${esc(T('Ne plus proposer'))}">✕</button></p>`.replace('⤓', `${ico} ⤓`);
+        return `<p class="lp-offer" data-lp-offer="${kind}"><button type="button" class="link-button" data-lp-install="${esc(kind)}-${esc(dep)}">📦 ${esc(T('Installer {what} — {dep}', {what: T(label), dep: depName || dep}))}</button> <button type="button" class="icon-button lp-x" data-lp-hide-offer="${kind}" title="${esc(T('Ne plus proposer'))}" aria-label="${esc(T('Ne plus proposer'))}">✕</button></p>`.replace('⤓', `${ico} ⤓`);
     }
 
     /* ── 📜 anciens noms ── */
@@ -209,7 +209,7 @@
         const i = t.closest?.('[data-lp-install]'); if (i && !t.closest('.lp-set')) { e.preventDefault(); installKeys([i.dataset.lpInstall]); }
     });
 
-    /* ═════════ ⤓ installer, en un bouton, par tranches (lib/lieux_patrimoine.php : même façon que la météo) ═════════ */
+    /* ═════════ 📦 installer, en un bouton, par tranches (lib/lieux_patrimoine.php : même façon que la météo) ═════════ */
     const DL = {online: null, err: '', run: null, queue: [], paused: {}};
     let setRedraw = () => {};
     const dlSaved = () => lsGet(DL_KEY, {}) || {};
@@ -304,7 +304,7 @@
                     <p class="muted">${esc(s.deps ? T('Ta liste de départements.') : T('Au départ : les départements des lieux de ta famille.'))}</p>
                     <div class="lp-scroll"><table class="data-table lp-table"><thead><tr><th>${esc(T('Département'))}</th><th>🏘️ ${esc(T('Lieux-dits'))}</th><th>⛪ ${esc(T('Monuments et objets'))}</th><th>📜 ${esc(T('Anciens noms (livrés)'))}</th></tr></thead><tbody>${rows || `<tr><td colspan="4" class="muted">${esc(T('Aucun département : ajoutes-en un ci-dessous.'))}</td></tr>`}</tbody></table></div>
                     <div class="page-actions"><label>${esc(T('Ajouter un département'))} <select data-lp-dep-add><option value="">—</option>${allDeps.filter(d => !deps.includes(d)).map(d => `<option value="${esc(d)}">${esc(d)} ${esc(names[d])}</option>`).join('')}</select></label>
-                        ${toGet.length && !kiosk() ? `<button type="button" class="button" data-lp-install-all>⤓ ${esc(T('Installer tout ({n} packs, {s})', {n: toGet.length, s: fmtSize(total)}))}</button>` : ''}
+                        ${toGet.length && !kiosk() ? `<button type="button" class="button" data-lp-install-all>📦 ${esc(T('Installer tout ({n} packs, {s})', {n: toGet.length, s: fmtSize(total)}))}</button>` : ''}
                         ${DL.run ? `<span class="lp-dl" data-lp-prog><span class="wx-prog"><i style="width:0%"></i></span><small></small><button type="button" class="button small secondary" data-lp-pause>⏸ ${esc(T('Pause'))}</button></span>` : ''}</div>
                     <p class="muted">${esc(T('Installés : {n} packs, {s} sur le disque.', {n: Object.keys(packs).length, s: fmtSize(packSize)}))} ${esc(T('📜 Anciens noms livrés avec l’app : {n} départements, {s}.', {n: dcount, s: fmtSize(dico.size || 0)}))}</p>
                     ${UI().notice ? UI().notice('info', T('Le téléchargement se fait une fois ; ensuite l’app n’a plus besoin d’Internet. Rien n’est envoyé.')) : ''}</div>

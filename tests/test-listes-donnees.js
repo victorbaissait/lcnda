@@ -4,7 +4,7 @@
  *     vendanges d'une année, population, inondations) ;
  *  2. l'écran : une liste inventée enregistrée APRÈS le chargement (châteaux fictifs) — critères combinés (liste avec nombres,
  *     nombres, texte), 📅 Période, 📍 Autour de… (choix d'un lieu), tri, carte, ★ recherche enregistrée (↶), ⤓ CSV, 📤, 🖨 ;
- *     une liste serveur (gares), l'offre « ⤓ Installer » (pack absent), le sommaire et ses liens, largeur de téléphone (390 px).
+ *     une liste serveur (gares), l'offre « 📦 Installer » (pack absent), le sommaire et ses liens, largeur de téléphone (390 px).
  * Personnes inventées : MAZAUD, LACOMBE, DURAND. Le pack : /tmp/histoire-pack/histoire-locale.sqlite (ou LCNDA_HIST_DB=…) —
  *   fabriqué par python3 scripts/histoire/build-histoire.py --dossier /tmp/histoire-pack ; sans lui, la partie serveur est sautée.
  *   node tests/test-listes-donnees.js */
@@ -230,7 +230,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.click('[data-ld-period]'); await p.fill('.ld-ed-form input[name="from"]', '1860'); await p.click('.ld-ed-form button[type="submit"]');
             const c3 = await waitCount(/\d+ ligne/); assert.ok(Number(c3.replace(/\D/g, '')) < Number(c2.replace(/\D/g, '')), `${c2} → ${c3}`);
         });
-        await t('pack absent (📊 Prénoms) : seulement l’offre « ⤓ Installer » ; sommaire par groupe, avec les liens vers les listes déjà là', async () => {
+        await t('pack absent (📊 Prénoms) : seulement l’offre « 📦 Installer » ; sommaire par groupe, avec les liens vers les listes déjà là', async () => {
             await openList('data_pp_prenoms'); await p.waitForSelector('[data-ld-install-host]');
             assert.ok(await p.$('[data-ld-install]')); assert.ok(!(await p.$('[data-ld-results]')));
             await p.evaluate(() => { const H = window.LCNDA_EXT.dataHome; if (H) H._st.view = 'themes'; }); // 📊 Récap d'abord (app-donnees-accueil.js) : ici, la vue 🧰 Thèmes

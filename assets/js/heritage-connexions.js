@@ -860,7 +860,7 @@
             const r = await post('reminder_add', {title: ctx.title, due: ctx.due, notes: items.map(itemText).join('\n\n'), investigation_id: ctx.investigation_id || 0, investigation_item_id: ctx.item_id || 0});
             return {message: T('⏰ Rappel « {t} » créé', {t: ctx.title}), undo: async () => { await apiPost('delete_standalone_reminder', {id: r.reminder_id}); if (r.link_id) await post('link_remove', {id: r.link_id}); }};
         }});
-    /* 📋 Mes listes (les fiches) */
+    /* 📑 Mes listes (les fiches) */
     DT.push({
         id: 'mylist', icon: '📋', label: 'Une de « Mes listes »…', group: 'Ranger', kinds: ['person'],
         choose: async () => { let lists = []; try { lists = ((await api('my_lists')).lists || []).filter(l => l.source === 'persons'); } catch (_) {}
@@ -868,7 +868,7 @@
             return new Promise(res => UI().menuAt?.(document.activeElement || document.body, lists.map(l => ({icon: l.icon || '📋', label: l.name, run: () => res({list_id: Number(l.id), name: l.name})})), {title: T('Dans quelle liste ?'), onClose: () => setTimeout(() => res(null), 50)})); },
         explain: items => T('{n} ajoutées à la liste', {n: plural(items.length, T('fiche'))}),
         receive: async (items, ctx) => { const SB = body => apiPost('listes_plus_write', body); const r = await SB({op: 'mylist_add', list_id: ctx.list_id, ids: items.map(x => x.ref_id)});
-            return {message: T('📋 {n} ajoutées à « {l} »', {n: plural(items.length, T('fiche')), l: ctx.name}), undo: async () => { await SB({op: 'mylist_restore', list_id: ctx.list_id, before: r.before}); }}; }});
+            return {message: T('📑 {n} ajoutées à « {l} »', {n: plural(items.length, T('fiche')), l: ctx.name}), undo: async () => { await SB({op: 'mylist_restore', list_id: ctx.list_id, before: r.before}); }}; }});
     /* 📖 Livre de famille : à la fin du livre (« Mot de la fin »), avec les sources */
     DT.push({
         id: 'book', icon: '📖', label: 'Le Livre de famille…', group: 'Créer',
@@ -1346,7 +1346,7 @@
         const E = {
             basket: ['🧺', T('Le panier est vide'), T('Le panier garde des choses pour plus tard, d’un écran à l’autre. Coche des lignes n’importe où dans l’app, puis « 🧺 Garder dans le panier ».'), [['person', T('Voir mes fiches')]]],
             recent: ['🕘', T('Rien de pris pour l’instant'), T('Ce que tu prends (ou mets de côté) apparaîtra ici, pour le reprendre d’un clic.'), [['event', T('Voir les événements')]]],
-            search: ['🔍', T('Rien pour « {q} »', {q: st.q}), T('Essaie l’orthographe d’époque, un seul mot ou seulement l’année. Les accents ne comptent pas.'), [['clear', T('Effacer la recherche')]]],
+            search: ['🔍', T('Rien pour « {q} »', {q: st.q}), T('Essaie l’orthographe d’époque, un seul mot ou seulement l’année. Les accents ne comptent pas.'), [['clear', T('Vider la recherche')]]],
             filter: ['🔎', T('Rien avec ces filtres'), T('Les filtres cochés cachent tout ce qui est ici.'), [['nofilter', T('Enlever les filtres')]]],
             none: [tab[1] || '📭', T('Rien dans « {r} » pour l’instant', {r: name}), T('Ajoute-en dans l’app, ou va chercher ailleurs : Listes, Données, De l’extérieur.'), [['lists', T('Voir les listes')], ['outside', T('Importer…')]]],
         }[why];
@@ -1469,7 +1469,7 @@
         const host = res.querySelector('[data-cx-dform]');
         let ok = true; try { ok = typeof cur.installed === 'function' ? (await cur.installed()) !== false : true; } catch (_) { ok = true; }
         if (!ok) {
-            host.innerHTML = `<p class="cx-notinst">${esc(T('Ces données ne sont pas encore installées sur cet ordinateur.'))}</p>${cur.install && !kiosk() ? `<button type="button" class="cx-b is-sec is-sm" data-cx-install>⤓ ${esc(T('Installer'))}</button>` : ''}`;
+            host.innerHTML = `<p class="cx-notinst">${esc(T('Ces données ne sont pas encore installées sur cet ordinateur.'))}</p>${cur.install && !kiosk() ? `<button type="button" class="cx-b is-sec is-sm" data-cx-install>📦 ${esc(T('Installer'))}</button>` : ''}`;
             host.querySelector('[data-cx-install]')?.addEventListener('click', () => { st.dlg.close(); try { cur.install(); } catch (e) { toast(e.message, 'error'); } });
             return;
         }

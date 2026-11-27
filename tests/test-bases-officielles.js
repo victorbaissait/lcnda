@@ -6,7 +6,7 @@
  * Le « serveur » des données (la version « bases-officielles-donnees » du dépôt) est un dossier local (GENEALOGY_TEST=1 + LCNDA_TEST_BO_DIR).
  *  1. fabrication : dates, noms, lieux, liens vers la fiche numérisée refaits à l'identique, clés des noms (Python = PHP) ;
  *  2. serveur : le sommaire, par tranches, reprendre, abandonner, un pack incomplet refusé ;
- *  3. fiche : l'offre discrète (✕ retenu, ↶) → Réglages « ⤓ Installer » (↶ Annuler) → « Peut-être dans … », lien en ligne,
+ *  3. fiche : l'offre discrète (✕ retenu, ↶) → Réglages « 📦 Installer » (↶ Annuler) → « Peut-être dans … », lien en ligne,
  *     « ＋ Ajouter comme source (à vérifier) » (↶ Annuler) ; un autre département écarte la fiche ; une femme dans la Léonore ;
  *  4. la recherche par nom ; LCNDA_EXT.officialBases.suggest() pour « Où chercher » ; 🗑 Supprimer (↶).
  *   node tests/test-bases-officielles.js */
@@ -125,7 +125,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.strictEqual((await api('bo_person', {id: 3})).bases.mpf.could, false, 'une femme : pas dans les Morts pour la France');
             assert.strictEqual((await api('bo_person', {id: 5})).bases.mpf.could, false, 'né en 1950');
         });
-        await t('fiche : l’offre discrète « ⤓ Installer la base … » ; ✕ retenu (genealogie-bases-officielles) et ↶ Annuler', async () => {
+        await t('fiche : l’offre discrète « 📦 Installer la base … » ; ✕ retenu (genealogie-bases-officielles) et ↶ Annuler', async () => {
             await openPerson(1);
             await p.waitForSelector('.bo-person [data-bo-offer="mpf"]', {timeout: 20000});
             assert.ok(await p.$('.bo-person [data-bo-offer="leonore"]'));
@@ -149,7 +149,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             const c = await post('bo_dl_start', {kind: 'leonore'}); await post('bo_dl_cancel', {id: c.id}); assert.strictEqual((await api('bo_dl_resume', {id: c.id})).exists, false);
             assert.match((await post('bo_dl_start', {kind: 'autre'})).error || '', /inconnue/);
         });
-        await t('Réglages : « ⤓ Installer » → installée et vérifiée, ↶ Annuler la retire ; puis les deux bases installées (dans le dossier des données)', async () => {
+        await t('Réglages : « 📦 Installer » → installée et vérifiée, ↶ Annuler la retire ; puis les deux bases installées (dans le dossier des données)', async () => {
             await settings();
             await p.waitForSelector('[data-bo-row="mpf"] [data-bo-install="mpf"]', {timeout: 20000});
             assert.match(await p.textContent('[data-bo-row="mpf"]'), /Installer \(\d/);

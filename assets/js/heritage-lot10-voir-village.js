@@ -142,8 +142,8 @@
     const ageTxt = n => (n <= 0 ? T('moins d’un an') : n === 1 ? T('1 an') : T('{n} ans', {n: String(n)}));
     const mTxt = m => (m >= 1000 ? T('{n} km', {n: String(Math.round(m / 100) / 10).replace('.', ',')}) : T('{n} m', {n: String(Math.round(m / 10) * 10)}));
     const haTxt = h => T('{n} ha', {n: String(Math.round(h * 10) / 10).replace('.', ',')});
-    const link = (url, label) => (url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : esc(label));
-    const srcLink = (url, label = T('↗ source')) => (url ? `<a class="l10v-src" href="${esc(url)}" target="_blank" rel="noopener noreferrer" title="${esc(T('Ouvrir la source (internet)'))}">${esc(label)}</a>` : '');
+    const link = (url, label) => (url ? `${window.LCNDA_UI.extLink(url, label)}` : esc(label));
+    const srcLink = (url, label = T('↗ source')) => (url ? `${window.LCNDA_UI.extLink(url, label, {cls: 'l10v-src', title: T('Ouvrir la source (internet)')})}` : '');
     const row = (icon, html, src, extra = '', attrs = '') => `<div class="hist-row l10v-row"${attrs}><span class="hist-i" aria-hidden="true">${icon}</span><div class="hist-t"><p>${html}</p>${extra}${src ? `<small class="hist-src">${esc(T('Source :'))} ${src}</small>` : ''}</div></div>`;
     const more = (html, n, attrs = '') => (html ? `<details class="l10v-more"${attrs}><summary>${esc(T('▸ plus'))}${n ? ` <small class="muted">(${nf(n)})</small>` : ''}</summary>${html}</details>` : '');
     const emptyLine = (t, icon = 'ℹ️') => (A().empty ? A().empty(t, {icon}) : `<p class="muted">${esc(t)}</p>`);

@@ -278,7 +278,7 @@ echo 'ok';`], {cwd: appRoot, encoding: 'utf8', env: envFor(dir)});
                 await p.waitForFunction(() => window.LCNDA_APP?.state && window.LCNDA_EXT?.sourcesOuvertes && window.LCNDA_SOURCES_OUVERTES, null, {timeout: 20000});
                 if (dark) await p.evaluate(() => { const A = window.LCNDA_APP; localStorage.setItem('genealogie-design', JSON.stringify({...A.readDesignSettings(), preset: 'dark'})); A.applyDesign(); });
                 const noScroll = async () => { const sw = await p.evaluate(() => document.documentElement.scrollWidth - innerWidth); assert.ok(sw <= 0, `défilement horizontal : ${sw}`); };
-                await t(`${name} : la fiche — boutons « 🔍 Mémoire des hommes », « 📋 Registre matricule », Léonore, presse`, async () => {
+                await t(`${name} : la fiche — boutons « 🔍 Mémoire des hommes », « 🪖 Registre matricule », Léonore, presse`, async () => {
                     await p.evaluate(() => window.LCNDA_APP.openPersonById(1));
                     await p.waitForSelector('[data-so-search="mdh"]', {timeout: 20000, state: 'attached'}); // à 390 px, les boutons d'en-tête des blocs passent dans le menu de la carte
                     const kinds = await p.$$eval('[data-so-search]', els => els.map(e => e.dataset.soSearch));

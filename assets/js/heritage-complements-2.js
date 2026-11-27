@@ -1,5 +1,5 @@
 /* LCNDA — 🧩 Compléter quatre outils existants (maquette validée docs/design/complements-existants.html), partie 2 :
- *  C 📋 Tous les doutes — Listes → Recherche et organisation → « 📋 Tous les doutes » (nom réglable), 🗓 Ma semaine → « à vérifier »
+ *  C ❓ Tous les doutes — Listes → Recherche et organisation → « ❓ Tous les doutes » (nom réglable), 🗓 Ma semaine → « à vérifier »
  *    → « Tout voir → », widget « 📋 Doutes » du tableau de bord. Chaque ligne est lue dans l'outil d'origine (✅ Contrôle,
  *    ⚖️ Hypothèses, 🛡 Liens fragiles, ⚔️ Désaccords de preuve, 📚 Sans source, 🧾 SocFace) et « ↗ » y emmène ; rien n'est recopié.
  *    « 👁 Marquer vu » n'est pas « Ce n'est pas une erreur » (↶ Annuler) ; clic droit ou ⋯ sur une ligne ; glisser vers la gauche
@@ -29,12 +29,12 @@
     const fmtDate = iso => (X().fmtDate ? X().fmtDate(iso) : String(iso || ''));
     const today = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
 
-    /* ═════ C 📋 Tous les doutes ═════ */
+    /* ═════ C ❓ Tous les doutes ═════ */
     const LIST = 'doutes';
     const SORT = {controle: ['✅', 'Contrôle de la base', '↗ Contrôle'], hypothese: ['⚖️', 'Hypothèse ouverte', '↗ Comparer'], lien: ['🛡', 'Liens fragiles', '↗ Solidité'], preuve: ['⚔️', 'Désaccord de preuve', '↗ Dossier de preuve'],
         source: ['📚', 'Sans source', '↗ Fiche'], socface: ['🧾', 'Lecture SocFace', '↗ Image'], succ: ['⚖️', 'Successoral', '↗ Ouvrir']};
     const LEVEL = {red: ['🔴', 'impossible', 'red'], orange: ['🟠', 'à vérifier', 'yellow'], yellow: ['🟡', 'curieux', 'grey']};
-    const NAMES = {all: '📋 Tous les doutes', verify: 'À vérifier', review: 'Points à revoir'};
+    const NAMES = {all: '❓ Tous les doutes', verify: 'À vérifier', review: 'Points à revoir'};
     const listName = () => NAMES[cfg().doutes_name] || NAMES.all;
     const isHere = token => token === S().workspaceToken && S().module === 'listes' && S().listType === LIST;
     let DATA = null;

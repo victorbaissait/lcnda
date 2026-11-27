@@ -116,8 +116,15 @@ Bonne nouvelle d’abord : l’essentiel est déjà commun. « ↶ Annuler » (H
 | Idem. | Fiche → Langues parlées : supprimer une langue. | Supprimée tout de suite ; « ↶ Annuler » la remet avec sa certitude, sa note et « transmise à la descendance ». |
 | Idem. | Jeu (oie, serpents, petits chevaux) : supprimer une partie. | Supprimée tout de suite ; « ↶ Annuler » la remet **avec sa progression**. |
 | **Question ET « ↶ Annuler »** pour la même chose (deux fois la même précaution). | Mes listes de données : supprimer une liste (la question disait déjà « ↶ Annuler reste possible »). | Plus de question : la liste est mise de côté, « ↶ Annuler » la remet. |
+| **Une section repliée reste repliée** (et une section ouverte reste ouverte). Seuls les panneaux d’outils s’en souvenaient ; les quelque 340 autres (« ▸ Plus d’options », « Pour aller plus loin », parties des Réglages…) se rouvraient comme au départ. | Partout (toute section repliable faite à la main). | Elles retiennent leur état sur l’ordinateur, avec la même mémoire que les panneaux. Seul un clic sur le titre compte. Pas retenus : les menus (« ⤓ Exporter ▾ », « ⋯ »…), une section répétée dans une liste, et ce qui s’ouvre seulement pour montrer une erreur. |
+| **Chercher « un mot puis un autre »** : 13 listes cherchaient la phrase exacte (« jean tulle » ne trouvait rien). | Liens utiles, Lieux à placer, pages d’un recueil, Suivi des animaux (observations, animaux, sites, groupes), fiche d’un animal suivi, Actes manquants, Métiers et rivières, Lieux-dits, Ambiances (Trésors), Sons et vidéos, catalogue de l’artiste, souvenirs (Trésors), bibliothèque du plan de maison. | La même règle que les autres listes (`UI.listMatch.text`) : chaque mot, dans n’importe quel ordre, sans accents. « jean tulle » trouve « Jean MAZAUD, né à Tulle ». |
+| **Petites cases de recherche dans les fenêtres** : il fallait l’accent exact. | Étiquettes à poser (Réglages des blocs), personnes des horloges, mots-clés de l’Atelier, formes du dessin, personnes et diagrammes de l’animation, champs de l’artiste, projets proposés dans les diagrammes. | Sans accents, chaque mot. La case « ＋ Créer » garde sa vérification exacte (un nom qui existe déjà n’est pas recréé). |
+| **Ouvrir une fiche** : deux façons dans le code ; un nom ajouté plus tard (après « Voir les suivants », un tri, un filtre) pouvait rester sans effet. | Partout (`data-open-person` et `data-h-person`). | Un seul geste, écouté une fois pour toute l’app : clic = la fiche (la fenêtre autour se ferme), ⌘ ou Ctrl + clic = dans l’autre moitié, clic droit = le menu de la personne (Ouvrir, Modifier, signets, ton lien…). |
+| **Le nom d’une personne recollé à la main** (« prénom nom » : double espace, « sans nom » oublié). | 35 endroits dans 17 fichiers : chronologie, comparaison, listes d’étiquettes, tableau de bord, carte, sépultures, étiquettes sur les photos, fusions, dépouillements, employeurs, fiches à thème, mise en page, métiers anciens, recensements, musée, questions, studio, arbre décoratif… | La pièce commune (`A().personName`) partout. |
+| **Listes qui oubliaient leur tri.** | Onglet Diagrammes, Réglages → journal des modifications, saints du jour (personnes). (Le Jeu retenait déjà le sien.) | Le tri est retenu pour chaque liste, comme les listes avec la barre commune. |
+| **Supprimer un projet d’outil** : la question, puis parfois aussi « ↶ Annuler ». | Listes → Outils de modification et les fenêtres « 📂 Projets » : montage, son, retouche, dessin (et arbre décoratif, faire-part, carte, sceau), livre, maison, diaporama, classeur, comparaison de photos, site web, document, cousinade, trésors, animation. | Plus de question : le projet part tout de suite, « ↶ Annuler » le remet (même numéro, gardé un jour), puis « ↷ Rétablir ». La question reste seulement pour les outils qui ne savent pas encore remettre (tableaux, transcriptions, rapports). |
 
-**Gardes** : `tests/test-harmonisation-comportements.js` (nouveau : vérifie le code des 13 recherches, puis dans le navigateur ⌘F, la langue, le champ des animaux et la partie du Jeu, avec Annuler et Rétablir) ; `tests/test-h7-sans-question.js` élargi (les 6 questions retirées ne peuvent pas revenir) ; `tests/test-listes-perso.js` mis à jour (supprimer une liste sans question, puis ↶ Annuler).
+**Gardes** : `tests/test-harmonisation-comportements.js` (nouveau : vérifie le code des 13 recherches, puis dans le navigateur ⌘F, la langue, le champ des animaux et la partie du Jeu, avec Annuler et Rétablir) ; `tests/test-h7-sans-question.js` élargi (les 6 questions retirées ne peuvent pas revenir) ; `tests/test-listes-perso.js` mis à jour (supprimer une liste sans question, puis ↶ Annuler). ; `tests/test-harmonisation-gestes.js` (nouveau : sections qui retiennent leur état, recherche « chaque mot », fiche ouverte par un nom ajouté plus tard et clic droit, noms, tris retenus, projet supprimé puis « ↶ Annuler ») ; `tests/test-site-web-complet.js` mis à jour (supprimer un site sans question, puis ↶ Annuler).
 
 ## 2. Ce qui reste à décider ou à faire (par ordre de ce qui se voit le plus)
 
@@ -134,45 +141,10 @@ Petit = une heure ou deux · moyen = une demi-journée à une journée · gros =
 - **Je te conseille** : une seule façon : le bouton « ☑ Choisir des lignes » dans la barre H10, puis la barre commune en bas (Tout cocher (N), Maj+clic, les actions de la liste, ✕ Décocher). Commencer par les listes où l’on agit souvent sur plusieurs lignes : Médias, Recueils, Revues, Paniers.
 - **Travail** : gros (par lots).
 
-### 3. Une section repliée ne reste pas toujours repliée
-- **Ce qui change** : les sections des panneaux d’outils (`UI.panelSection`, 16 outils) retiennent ouvert / fermé. Les quelque 340 autres sections repliables (« ▸ Plus d’options », « Pour aller plus loin », parties des Réglages…) se rouvrent comme au départ à chaque visite.
-- **Je te conseille** : que toute section repliable retienne son état sur l’ordinateur (une petite marque sur la section, la même pièce que les panneaux). Exception : ce qui doit s’ouvrir seulement pour un message (une erreur).
-- **Travail** : moyen (mécanique, mais beaucoup d’endroits).
-
 ### 4. Exporter : la fenêtre commune pour tout ce qui sort en fichier
 - **Ce qui change** : 31 outils passent par la fenêtre « ⤓ Exporter » commune (formats, nom du fichier, aperçu, « Ranger aussi une copie dans les médias »). Environ 35 autres fabriquent leur fichier CSV eux-mêmes, d’un clic, sans choix du nom ni des colonnes (Revues, Paniers, Registres, Suivi des animaux, Contrôle de la base, Successions, Tableau de bord, Rapports, ADN des cousins…).
 - **Je te conseille** : tout « ⤓ Exporter » ouvre la même fenêtre ; pour une liste : 📄 CSV, 🧮 Ouvrir dans le tableur, 📊 Excel, et « ce qu’on voit / toute la liste » (comme Mes listes).
 - **Travail** : moyen à gros.
-
-### 5. Chercher « un mot puis un autre »
-- **Ce qui change** : sans accents partout maintenant, mais pas avec la même règle pour plusieurs mots. La plupart des listes gardent une ligne qui contient **chaque** mot, dans n’importe quel ordre (« jean tulle » trouve « Jean MAZAUD, né à Tulle »). Une quinzaine cherchent la phrase exacte (« jean tulle » ne trouve rien) : Liens utiles, Lieux à placer, pages d’un recueil, Suivi des animaux, Actes manquants, Métiers et rivières, Lieux-dits…
-- **Je te conseille** : la règle « chaque mot » partout (`UI.listMatch.text`), c’est la plus utile.
-- **Travail** : petit.
-
-### 6. Ouvrir une fiche : deux façons dans le code
-- **Ce qui change** : un nom cliquable ouvre la fiche par deux chemins différents (`data-open-person`, 107 endroits, et `data-h-person`, 56). Le premier ne marche que si l’écran a pensé à « brancher » ses liens : un nom ajouté plus tard (après « Voir les suivants », un tri, un filtre) peut rester sans effet. Les deux ne font pas exactement la même chose (l’un ouvre la fiche, l’autre peut ouvrir un aperçu selon l’écran).
-- **Je te conseille** : un seul geste partout : clic = la fiche, ⌘ ou Ctrl + clic = dans un nouvel onglet de l’app, clic droit = le menu de la personne ; écouté une fois pour toute l’app.
-- **Travail** : moyen.
-
-### 7. Le nom d’une personne écrit à la main
-- **Ce qui change** : le nom est presque partout écrit par la pièce commune (Prénom NOM, nom en capitales, « sans nom » si vide). 25 endroits (14 fichiers) le recollent eux-mêmes « prénom nom » : capitales oubliées, double espace quand le prénom manque.
-- **Je te conseille** : la pièce commune partout.
-- **Travail** : petit.
-
-### 8. Les listes qui ne retiennent pas leur tri
-- **Ce qui change** : les listes avec la barre H10 retiennent recherche, filtres, tri et affichage. Trois écrans ont encore leur propre menu « Trier » qui revient au départ : le Jeu (parties), la colonne de gauche (réglages), l’onglet Diagrammes.
-- **Je te conseille** : la barre commune (ou, au moins, retenir le choix).
-- **Travail** : petit.
-
-### 9. Un projet de montage : question ou « ↶ Annuler » selon l’outil
-- **Ce qui change** : supprimer un projet (Montage, Retouche, Mise en page, Son…) pose toujours la question, puis propose aussi « ↶ Annuler » quand l’outil sait remettre le projet. Selon l’outil, on a donc deux précautions, ou une seule.
-- **Je te conseille** : que chaque outil sache remettre son projet, puis plus de question (H7).
-- **Travail** : moyen.
-
-### 10. Petites cases de recherche dans les fenêtres (sans accents)
-- **Ce qui change** : quelques petites cases pour filtrer une courte liste dans une fenêtre cherchent encore avec l’accent exact : étiquettes à poser (Réglages des blocs), personnes des horloges, mots-clés de l’Atelier, calques du dessin, personnes de l’assistant de diagramme.
-- **Je te conseille** : la même règle sans accents (comme corrigé plus haut). Laissé de côté ici parce que certaines de ces cases servent aussi à savoir si un nom existe déjà (pour proposer « ＋ Créer ») : il faut vérifier chacune.
-- **Travail** : petit.
 
 ## 3. Ce qui est déjà pareil partout (vérifié)
 

@@ -122,13 +122,13 @@
         dlg.dataset.jv = '1'; QK.mode = 'goal'; QK.dlg = dlg;
         const box = dlg.querySelector('.quick-search'), input = dlg.querySelector('input'); if (!box || !input) return;
         const bar = document.createElement('div'); bar.className = 'jv-qk-modes';
-        bar.innerHTML = `<span class="segmented sm" role="group" aria-label="${esc(T('Mode de la recherche rapide'))}"><button type="button" data-jv-mode="goal" aria-pressed="true">🧭 ${esc(T('Je veux…'))}</button><button type="button" data-jv-mode="find" aria-pressed="false">🔍 ${esc(T('Trouver'))}</button></span><small class="muted">${esc(T('Tab pour changer'))}</small>`;
+        bar.innerHTML = `${window.LCNDA_UI.segmented({cls: 'sm', label: T('Mode de la recherche rapide'), items: [{on: true, attrs: 'data-jv-mode="goal"', html: `🧭 ${esc(T('Je veux…'))}`}, {attrs: 'data-jv-mode="find"', html: `🔍 ${esc(T('Trouver'))}`}]})}<small class="muted">${esc(T('Tab pour changer'))}</small>`;
         box.insertBefore(bar, input);
         const und = document.createElement('div'); und.className = 'jv-qk-und'; und.hidden = true; und.setAttribute('aria-live', 'polite');
         input.after(und);
         const foot = box.querySelector(':scope > small');
         const setMode = m => {
-            QK.mode = m; bar.querySelectorAll('[data-jv-mode]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.jvMode === m)));
+            QK.mode = m; bar.querySelectorAll('[data-jv-mode]').forEach(b => window.LCNDA_UI.segMark(b, b.dataset.jvMode === m));
             input.placeholder = m === 'goal' ? T('Ce que tu veux faire : « imprimer un arbre pour mamie », « fusionner deux lieux »…') : T('Une personne, une battue, une enquête, un lieu, un graphique, un écran…');
             if (foot) foot.textContent = m === 'goal' ? T('↑ ↓ pour choisir · Entrée : ▶ m’y emmener · ⇧ + Entrée : 👣 montre-moi · Tab : changer de mode · Échap pour fermer') : T('↑ ↓ pour choisir · Entrée pour ouvrir · ⇧ + Entrée pour ouvrir à côté · Tab : changer de mode · Échap pour fermer');
             if (m !== 'goal') und.hidden = true;

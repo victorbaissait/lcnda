@@ -1495,7 +1495,7 @@ Le téléchargement de Kraken et de ses outils (PyTorch, ≈ 1 Go, depuis pypi.o
 Le fichier reçu n’était pas exactement celui publié par sa source (téléchargement abîmé ou modifié en route) : il a été jeté par sécurité. Réessaie plus tard. ¦ Skráin sem barst var ekki nákvæmlega sú sem uppruninn birti (skemmt niðurhal eða breytt á leiðinni): henni var hent til öryggis. Reyndu aftur síðar.
 Ce modèle n’est pas publié sous une licence libre connue : il n’a pas été installé. ¦ Þetta líkan er ekki birt undir þekktu frjálsu leyfi: það var ekki sett upp.
 Une adresse de téléchargement ne venait pas d’une source prévue : rien n’a été gardé. ¦ Niðurhalsslóð kom ekki frá áætluðum uppruna: engu var haldið.
-Le moteur est là mais ne s’ouvre pas. « ↻ Réessayer » le réinstalle ; sinon, « 🗑 Désinstaller » puis « ⤓ Installer » de nouveau. ¦ Vélin er til staðar en opnast ekki. „↻ Reyna aftur“ setur hana upp aftur; annars „🗑 Fjarlægja“ og síðan „⤓ Setja upp“ aftur.
+Le moteur est là mais ne s’ouvre pas. « ↻ Réessayer » le réinstalle ; sinon, « 🗑 Désinstaller » puis « 📦 Installer » de nouveau. ¦ Vélin er til staðar en opnast ekki. „↻ Reyna aftur“ setur hana upp aftur; annars „🗑 Fjarlægja“ og síðan „📦 Setja upp“ aftur.
 Regarde le journal, en bas, puis « ↻ Réessayer ». ¦ Skoðaðu annálinn, neðst, og síðan „↻ Reyna aftur“.
 tu peux continuer à travailler ailleurs dans l’app, l’installation continue toute seule. ¦ þú getur haldið áfram að vinna annars staðar í appinu, uppsetningin heldur áfram sjálf.
 EN COURS ¦ Í GANGI

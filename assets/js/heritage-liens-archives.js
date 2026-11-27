@@ -26,7 +26,7 @@
     const lsGet = (k, d) => { try { return localStorage.getItem(k) ?? d; } catch (_) { return d; } };
     const lsSet = (k, v) => { try { localStorage.setItem(k, v); } catch (_) {} };
     const K_OPEN = 'genealogie-ouc-ukus';
-    const ext_a = (href, text) => `<a class="link-button" href="${esc(href)}" target="_blank" rel="noopener noreferrer">${esc(text)}</a>`;
+    const ext_a = (href, text) => `${window.LCNDA_UI.extLink(href, text, {cls: 'link-button'})}`;
     const openUrl = u => { const s = L()?.cleanUrl?.(u) || ''; if (s) window.open(s, '_blank', 'noopener,noreferrer'); };
     const siteUrl = (s, p = {}) => L()?.url?.(s.key, p) || s.home;
 

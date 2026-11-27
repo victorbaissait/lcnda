@@ -20,7 +20,7 @@
         close: 'Fermer', cancel: 'Annuler', remove: 'Retirer', del: 'Supprimer', edit: 'Modifier'});
     const SYMBOLS = Object.freeze({import: '⤒', export: '⤓', download: '⤓', save: '💾', print: '🖨', edit: '✎', delete: '🗑', close: '×', remove: '×',
         open: '↗', undo: '↶', redo: '↷', settings: '⚙️', search: '🔍', add: '＋', create: '＋', copy: '📋', paste: '📋', duplicate: '⧉', more: '⋯',
-        favorite: '⭐', file: '📁', link: '🔗', reset: '↺', fullscreen: '⛶', share: '📤'});
+        favorite: '⭐', file: '📁', link: '🔗', reset: '↺', fullscreen: '⛶', share: '📤', insert: '📎', attach: '📎', install: '📦'});
     const VOWEL = /^[aàâeéèêëiîïoôuùûyœæh]/i;
     /** « Nouvelle enquête » → « Créer l’enquête » ; « 📘 Nouveau livret » → « Créer le livret » ; « Nouveau » → « Créer » */
     function createLabel(title) {

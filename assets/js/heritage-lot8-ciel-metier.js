@@ -252,7 +252,7 @@
     const cap = s => String(s || '').charAt(0).toUpperCase() + String(s || '').slice(1);
     const dateTxt = d => { const m = String(d || '').match(/^(\d{3,4})(?:-(\d\d))?(?:-(\d\d))?/); if (!m) return ''; const mo = Number(m[2] || 0), dd = Number(m[3] || 0); return `${dd ? `${dd === 1 ? '1er' : dd} ` : ''}${mo ? `${T(MONTHS[mo - 1])} ` : ''}${m[1]}`; };
     const kmTxt = k => (k < 1 ? T('moins d’1 km') : T('{n} km', {n: String(Math.round(k))}));
-    const link = (url, label) => (url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : esc(label));
+    const link = (url, label) => (url ? `${window.LCNDA_UI.extLink(url, label)}` : esc(label));
     const srcLink = url => (url ? `<a class="l8a-src-link" href="${esc(url)}" target="_blank" rel="noopener noreferrer" title="${esc(T('Ouvrir la source (internet)'))}">${esc(T('↗ source'))}</a>` : '');
     const wdUrl = q => `https://www.wikidata.org/wiki/${encodeURIComponent(q)}`;
     const wpUrl = t => (t ? `https://fr.wikipedia.org/wiki/${encodeURIComponent(String(t).replace(/ /g, '_'))}` : '');

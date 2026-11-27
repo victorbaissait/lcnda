@@ -238,7 +238,7 @@
     const he = P => (P?.gender === 'female' ? T('elle') : P?.gender === 'male' ? T('il') : T('cette personne'));
     const He = P => cap(he(P));
     const kmTxt = k => (k < 1 ? T('moins d’1 km') : T('{n} km', {n: String(Math.round(k))}));
-    const link = (url, label) => (url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : esc(label));
+    const link = (url, label) => (url ? `${window.LCNDA_UI.extLink(url, label)}` : esc(label));
     const srcLink = url => (url ? `<a class="l8c-src" href="${esc(url)}" target="_blank" rel="noopener noreferrer" title="${esc(T('Ouvrir la source (internet)'))}">${esc(T('↗ source'))}</a>` : '');
     const wdUrl = q => (q ? `https://www.wikidata.org/wiki/${encodeURIComponent(q)}` : '');
     const wpUrl = t => (t ? `https://fr.wikipedia.org/wiki/${encodeURIComponent(String(t).replace(/ /g, '_'))}` : '');

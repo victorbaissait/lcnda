@@ -4,7 +4,7 @@
  *    réglage), ⚖️ Successions → ⋯ → « 🏛 Études de notaire » ; la fiche d'une étude gagne ses notaires et clercs, ses dossiers,
  *    ses courriers et le ⏳ délai constaté (jamais un délai légal) ; 📁 Dossier → « 🏛 Étude de notaire » (menu de choix, sorte
  *    archive_service limitée aux études, puis les noms déjà tapés) ; 🧩 regrouper les notaires tapés à la main (proposé, ↶) ;
- *  B ⚠️ homonyme avant de contacter un héritier : un bandeau dans ✉️ Écrire, 📞 Échanges, 📋 Questionnaire, un résumé en
+ *  B ⚠️ homonyme avant de contacter un héritier : un bandeau dans ✉️ Écrire, 📞 Échanges, 📝 Questionnaire, un résumé en
  *    tête des courriers en série ; jamais bloquant ; « ✕ Ce n'est pas la même personne » retenu partout (↶ Annuler).
  * Serveur : lib/complements.php (GET compl, POST compl_write). Rien en mode simple ; en consultation, ni dossier ni écriture.
  */
@@ -201,7 +201,7 @@
             }});
     }
     function courrierDialog(s, cases, after) {
-        ext.openDialog({eyebrow: `🏛 ${s.name}`, title: i18n('Courrier à l’étude'), submitLabel: i18n('📋 Ranger dans le Registre de courriers'),
+        ext.openDialog({eyebrow: `🏛 ${s.name}`, title: i18n('Courrier à l’étude'), submitLabel: i18n('📮 Ranger dans le Registre de courriers'),
             body: `<div class="form-grid"><label class="span-2">${esc(i18n('Objet'))}<input name="objet" maxlength="300" required placeholder="${esc(i18n('état des recherches'))}"></label>
                 <label>${esc(i18n('Envoyé le'))}<input type="date" name="date_envoi" value="${today()}"></label><label>${esc(i18n('Relance dans (jours)'))}<input type="number" name="relance" min="0" max="365" value="30"></label>
                 ${cases.length ? `<label class="span-2">${esc(i18n('Dossier'))}<select name="case_id"><option value="">—</option>${cases.filter(c => !c.closed).map(c => `<option value="${c.id}">${esc(`${c.number} · ${c.title}`)}</option>`).join('')}</select></label>` : ''}</div>`,

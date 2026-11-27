@@ -715,6 +715,9 @@
             if (t.closest('[data-succ-bcsv]')) {
                 const sel = rows.filter(r => BSEL.has(r.key));
                 const cell = v => (S().csvCell ? S().csvCell(v) : `"${String(v ?? '').replace(/"/g, '""')}"`);
+                const line = r => [r.number, r.deceased, stateLabel(r.state), r.notary, r.next_due, heirsTxt(r), r.pieces ? `${r.pieces.have}/${r.pieces.total}` : '', timeTxt(r.minutes), r.progress == null ? '' : r.progress + ' %', r.base.name];
+                const note = () => { const tk = A().state?.csrf || ''; fetch('api.php?action=access_note', {method: 'POST', headers: {'Content-Type': 'application/json', 'X-CSRF-Token': tk}, body: JSON.stringify({what: 'dashboard_csv', n: sel.length, csrf: tk})}).catch(() => {}); }; // 📜 Qui a vu quoi (lib/verrou.php)
+                if (window.LCNDA_UI?.exportRows) { window.LCNDA_UI.exportRows({title: i18n('Dossiers de succession'), name: 'dossiers-de-succession', rows: () => [['Dossier', 'Défunt', 'État', 'Notaire', 'Prochaine échéance', 'Héritiers', 'Pièces', 'Temps', 'Avancement', 'Rangé dans'].map(h => i18n(h)), ...sel.map(line)]}).then(r => { if (r) note(); }); return; } // ⤓ la fenêtre d'export commune
                 const head = ['Dossier', 'Défunt', 'État', 'Notaire', 'Prochaine échéance', 'Héritiers', 'Pièces', 'Temps', 'Avancement', 'Rangé dans'].map(h => cell(i18n(h)));
                 const csv = '﻿' + [head.join(';'), ...sel.map(r => [r.number, r.deceased, stateLabel(r.state), r.notary, r.next_due, heirsTxt(r), r.pieces ? `${r.pieces.have}/${r.pieces.total}` : '', timeTxt(r.minutes), r.progress == null ? '' : r.progress + ' %', r.base.name].map(cell).join(';'))].join('\r\n');
                 const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type: 'text/csv;charset=utf-8'})); a.download = 'dossiers-de-succession.csv'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);

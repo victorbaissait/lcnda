@@ -95,7 +95,7 @@
         if (!rec) return `<div class="ouc-oa-rec">${UI().spinner ? UI().spinner(i18n('Je lis l’acte…')) : '…'}</div>`;
         if (rec.error) return `<div class="ouc-oa-rec">${UI().notice ? UI().notice('error', rec.error) : esc(rec.error)}</div>`;
         return `<div class="ouc-oa-rec"><table class="ouc-reg"><thead><tr><th>${esc(i18n('Personne de l’acte'))}</th><th>${esc(i18n('Rôle'))}</th><th>${esc(i18n('Naissance, âge, métier'))}</th></tr></thead><tbody>${rec.persons.map(p => `<tr class="${String(p.pid).replace(/\D/g, '') === String(x.pid).replace(/\D/g, '') ? 'is-life' : ''}"><td>${esc(p.name)}</td><td>${esc(i18n(p.role))}</td><td class="muted">${esc([p.birth ? i18n('né(e) {d}', {d: p.birth}) + (p.birth_place ? ` (${p.birth_place})` : '') : '', p.age ? i18n('{n} ans', {n: p.age}) : '', p.profession, p.residence ? i18n('domicile : {place}', {place: p.residence}) : ''].filter(Boolean).join(' · '))}</td></tr>`).join('')}</tbody></table>
-            ${rec.source?.reference ? `<p class="muted ouc-oa-ref">📚 ${esc(rec.source.reference)}</p>` : ''}${rec.source?.scan ? `<p><a class="link-button" href="${esc(rec.source.scan)}" target="_blank" rel="noopener noreferrer">${esc(i18n('🖼 Voir l’image de l’acte'))}</a></p>` : ''}</div>`;
+            ${rec.source?.reference ? `<p class="muted ouc-oa-ref">📚 ${esc(rec.source.reference)}</p>` : ''}${rec.source?.scan ? `<p>${window.LCNDA_UI.extLink(rec.source.scan, i18n('🖼 Voir l’image de l’acte'), {cls: 'link-button'})}</p>` : ''}</div>`;
     }
     function oaRowHtml(st, x) {
         const L = O().LEVEL[x.level] || ['', 'grey'];

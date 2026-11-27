@@ -235,7 +235,7 @@
     const he = P => (P?.gender === 'female' ? T('elle') : P?.gender === 'male' ? T('il') : T('cette personne'));
     const He = P => cap(he(P));
     const nameOf = P => (P?.first ? esc(P.first) : He(P));
-    const link = (url, label) => (url ? `<a href="${esc(/^\s*(?:javascript|data|vbscript|file):/i.test(String(url)) ? '#' : url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : esc(label)); // une adresse venue d’un site (Wikidata, loc.gov…) : jamais « javascript: »
+    const link = (url, label) => (url ? `${window.LCNDA_UI.extLink(/^\s*(?:javascript|data|vbscript|file):/i.test(String(url)) ? '#' : url, label)}` : esc(label)); // une adresse venue d’un site (Wikidata, loc.gov…) : jamais « javascript: »
     const srcLink = url => (url ? `<a class="et-src-link" href="${esc(url)}" target="_blank" rel="noopener noreferrer" title="${esc(T('Ouvrir la source (internet)'))}">${esc(T('↗ source'))}</a>` : '');
     const wdUrl = q => `https://www.wikidata.org/wiki/${encodeURIComponent(q)}`;
     const wpUrl = t => (t ? `https://fr.wikipedia.org/wiki/${encodeURIComponent(String(t).replace(/ /g, '_'))}` : '');

@@ -425,7 +425,7 @@ Les pistes sont montrées à partir de ce score (sur 100). Plus haut : moins de 
 Après chaque nouvel import du fichier INSEE : vérifier les dossiers en cours tout seul (jamais de changement sans ton clic). ¦ Po kiekvieno naujo INSEE failo importo: pačiai patikrinti vykdomas bylas (niekada pakeitimo be tavo spustelėjimo). ¦ Pēc katra jauna INSEE faila importa: pašai pārbaudīt lietas procesā (nekad izmaiņas bez tava klikšķa). ¦ Pärast iga INSEE faili uut importi: kontrolli pooleliolevaid toimikuid ise (mitte kunagi muudatust ilma sinu klõpsuta).
 Automatique, dans la cloche ¦ Automatiškai, varpelyje ¦ Automātiski, zvanā ¦ Automaatselt, kellukeses
 Seulement à la main ¦ Tik rankiniu būdu ¦ Tikai manuāli ¦ Ainult käsitsi
-📋 Questionnaire ¦ 📋 Klausimynas ¦ 📋 Anketa ¦ 📋 Küsimustik
+📝 Questionnaire ¦ 📝 Klausimynas ¦ 📝 Anketa ¦ 📝 Küsimustik
 Ce que l’héritier te renvoie après avoir rempli le questionnaire. ¦ Ką įpėdinis tau grąžina užpildęs. ¦ Ko mantinieks tev atsūta pēc aizpildīšanas. ¦ Mida pärija sulle pärast täitmist tagasi saadab.
 Un petit fichier .json ¦ Mažas .json failas ¦ Mazs .json fails ¦ Väike .json-fail
 La page .html remplie ¦ Užpildytas .html puslapis ¦ Aizpildītā .html lapa ¦ Täidetud .html-leht

@@ -24,7 +24,7 @@
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
     const fold = s => String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[’']/g, ' ').replace(/[^a-z0-9]+/g, ' ').trim();
     const nf = (n, d = 0) => Number(n).toLocaleString('fr-FR', {maximumFractionDigits: d, minimumFractionDigits: 0});
-    const link = (url, label = T('↗ source'), title = '') => (url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer"${title ? ` title="${esc(title)}"` : ''}>${esc(label)}</a>` : esc(label));
+    const link = (url, label = T('↗ source'), title = '') => (url ? `${window.LCNDA_UI.extLink(url, label, {title: title})}` : esc(label));
     const more = (inner, n) => `<details class="cplus-more l10-more"><summary>${esc(n ? T('▸ plus ({n})', {n}) : T('▸ plus'))}</summary>${inner}</details>`;
     const srcLine = (label, licence, url, extra = '') => `<p class="cplus-src l10-src">${esc(T('Source :'))} ${url ? link(url, label) : esc(label)}${licence ? ` — ${esc(licence)}` : ''}${url ? ` · ${link(url)}` : ''}${extra}</p>`;
     const km = (a, b, c, d) => { const r = Math.PI / 180, x = Math.sin((c - a) * r / 2) ** 2 + Math.cos(a * r) * Math.cos(c * r) * Math.sin((d - b) * r / 2) ** 2; return 6371 * 2 * Math.atan2(Math.sqrt(x), Math.sqrt(1 - x)); };

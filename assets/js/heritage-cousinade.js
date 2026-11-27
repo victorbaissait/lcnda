@@ -693,7 +693,7 @@
         load: async () => ((await get('list')).items || []).map(r => ({id: r.id, name: r.title, date: r.updated_at, thumb: r.cover ? `<img src="media/${encodeURIComponent(r.cover)}" alt="">` : '<span class="h-et-ico">🎉</span>', info: r.ancestor ? i18n('Descendants de {name} · {n}', {name: r.ancestor, n: plural(r.invited, 'invité')}) : plural(r.invited, 'invité')})),
         open: id => openList(Number(id)), create: () => openProjectDialog(),
         rename: (id, name) => post({op: 'save', id, title: name}),
-        remove: id => post({op: 'delete', id}), createLabel: '＋ Nouvelle cousinade'});
+        remove: async id => { await post({op: 'delete', id}); return {undo: () => post({op: 'restore', id})}; }, undo: true, createLabel: '＋ Nouvelle cousinade'});
 
     /** les cousinades (pour d'autres outils : le publipostage des faire-part) : [{id, title}] */
     const listProjects = async () => ((await get('list')).items || []).map(r => ({id: Number(r.id), title: r.title || ''}));

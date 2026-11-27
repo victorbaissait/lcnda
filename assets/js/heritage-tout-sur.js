@@ -15,7 +15,7 @@
  *     « genealogie-tout-sur ».
  *  3. ⤢ Le rapport complet (fenêtre) : La personne / Ses lieux / Son époque / À chercher, « 27 données regardées, 14 ont trouvé
  *     quelque chose », ↻ Relancer, 🖨 Imprimer, 📤 Envoyer vers…, ＋ Ajouter comme note (↶), « Sur sa fiche, caché » et
- *     « ⤓ Pas encore installé » (seulement ce qui compte pour lui : pays, époque), « ⤓ Installer », « ⤓ Tout installer (N Mo) ».
+ *     « 📦 Pas encore installé » (seulement ce qui compte pour lui : pays, époque), « 📦 Installer », « 📦 Tout installer (N Mo) ».
  *  4. 📍 « Ce qui concerne ce lieu » (bouton sur la fiche d'un village et la monographie) et 📅 « Cette année-là ».
  *  5. 🧰 Listes → Données → « 🔍 Chercher dans toutes les données » : une personne, un lieu, une année (ou plusieurs), chaque
  *     source utilisable, une ou toutes.
@@ -225,7 +225,7 @@
             .sort((a, b) => b.score - a.score);
     }
 
-    /* ═════════════ ⤓ Pas encore installé : seulement ce qui compte pour lui ═════════════ */
+    /* ═════════════ 📦 Pas encore installé : seulement ce qui compte pour lui ═════════════ */
     const overlap = (life, a, b) => !life?.by || (life.by <= b && life.end >= a);
     const has = (life, ...cc) => !!life && life.countries.some(c => cc.includes(c));
     const FR = life => has(life, 'fr');
@@ -276,7 +276,7 @@
     function openPrenoms() {
         if (!ext.prenomsPays?.panel) return toast(T('Installe le pack depuis Statistiques → Prénoms.'));
         const d = document.createElement('dialog'); d.className = 'modal ts-mini-dialog';
-        d.innerHTML = `<div class="modal-head"><div><span class="eyebrow">⤓ ${esc(T('INSTALLER'))}</span><h2>📊 ${esc(T('Prénoms d’ici et d’ailleurs'))}</h2></div><button type="button" class="modal-close" data-ts-x aria-label="${esc(T('Fermer'))}">×</button></div><div class="modal-body" data-ts-pp></div>`;
+        d.innerHTML = `<div class="modal-head"><div><span class="eyebrow">📦 ${esc(T('INSTALLER'))}</span><h2>📊 ${esc(T('Prénoms d’ici et d’ailleurs'))}</h2></div><button type="button" class="modal-close" data-ts-x aria-label="${esc(T('Fermer'))}">×</button></div><div class="modal-body" data-ts-pp></div>`;
         document.body.appendChild(d); d.querySelector('[data-ts-x]').addEventListener('click', () => d.close()); d.addEventListener('close', () => d.remove()); d.showModal();
         try { ext.prenomsPays.panel(d.querySelector('[data-ts-pp]')); } catch (e) { toast(e.message, 'error'); }
     }
@@ -302,19 +302,19 @@
     async function installAll(items, btn) {
         const list = items.filter(x => x.install && !x.off); if (!list.length) return;
         if (btn) btn.disabled = true;
-        for (const [i, x] of list.entries()) { if (btn) btn.textContent = T('⤓ {n}/{t} : {l}…', {n: String(i + 1), t: String(list.length), l: x.label}); try { await x.install(); } catch (e) { toast(e.message, 'error'); } }
+        for (const [i, x] of list.entries()) { if (btn) btn.textContent = T('📦 {n}/{t} : {l}…', {n: String(i + 1), t: String(list.length), l: x.label}); try { await x.install(); } catch (e) { toast(e.message, 'error'); } }
         Object.keys(st).forEach(k => delete st[k]); forget();
         if (btn) { btn.disabled = false; btn.textContent = T('✓ Lancé'); }
-        toast(T('⤓ Installation lancée : suis-la dans Réglages → Données.'));
+        toast(T('📦 Installation lancée : suis-la dans Réglages → Données.'));
     }
     const missingLine = (items, {compact = false} = {}) => {
         if (!items.length || kiosk()) return '';
         const total = items.reduce((s, x) => s + (x.size || 0), 0);
         if (compact) return `<p class="ts-missing-line">⤓ ${esc(T(items.length === 1 ? '1 donnée pourrait en dire plus' : '{n} données pourraient en dire plus', {n: String(items.length)}))} : <button type="button" class="link-button" data-ts-missing>${esc(T('voir et installer'))}</button></p>`;
-        return `<section class="ts-group ts-missing" data-ts-missing-box><h3>⤓ ${esc(T('Pas encore installé'))} <small class="muted">(${items.length})</small></h3>
+        return `<section class="ts-group ts-missing" data-ts-missing-box><h3>📦 ${esc(T('Pas encore installé'))} <small class="muted">(${items.length})</small></h3>
             <ul class="ts-miss-list">${items.map((x, i) => `<li><span class="ts-ico" aria-hidden="true">${esc(x.icon)}</span><div><b>${esc(x.label)}</b>${x.size ? ` <small class="muted">${esc(fmtSize(x.size))}</small>` : ''}${x.why ? `<br><small>${esc(x.why)}</small>` : ''}</div>
-                ${x.off ? `<span class="ts-off">${UI().badge ? UI().badge(T('éteint'), 'grey') : esc(T('éteint'))}</span><button type="button" class="button small secondary" data-ts-install="${i}">${esc(T('Allumer…'))}</button>` : x.install ? `<button type="button" class="button small" data-ts-install="${i}">⤓ ${esc(T('Installer'))}</button>` : ''}</li>`).join('')}</ul>
-            ${items.filter(x => x.install && !x.off).length > 1 ? `<p><button type="button" class="button small" data-ts-install-all>⤓ ${esc(total ? T('Tout installer ({s})', {s: fmtSize(total)}) : T('Tout installer'))}</button></p>` : ''}</section>`;
+                ${x.off ? `<span class="ts-off">${UI().badge ? UI().badge(T('éteint'), 'grey') : esc(T('éteint'))}</span><button type="button" class="button small secondary" data-ts-install="${i}">${esc(T('Allumer…'))}</button>` : x.install ? `<button type="button" class="button small" data-ts-install="${i}">📦 ${esc(T('Installer'))}</button>` : ''}</li>`).join('')}</ul>
+            ${items.filter(x => x.install && !x.off).length > 1 ? `<p><button type="button" class="button small" data-ts-install-all>📦 ${esc(total ? T('Tout installer ({s})', {s: fmtSize(total)}) : T('Tout installer'))}</button></p>` : ''}</section>`;
     };
     function bindMissing(box, items) {
         box.querySelectorAll('[data-ts-install]').forEach(b => b.addEventListener('click', async () => { const x = items[Number(b.dataset.tsInstall)]; if (!x?.install) return; b.disabled = true; try { await x.install(); } catch (e) { toast(e.message, 'error'); } Object.keys(st).forEach(k => delete st[k]); b.disabled = false; }));

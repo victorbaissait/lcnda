@@ -602,7 +602,7 @@
         load: async () => ((await A().api('anim_projects')).projects || []).map(p => ({id: p.id, name: p.title, date: p.updated_at, thumb: '<span class="h-et-ico">🎞</span>', info: [T('{n} scènes', {n: String(p.scenes)}), fmtT(p.seconds), p.format].join(' · ')})),
         open: (id, again) => open({id, onClose: again}), create: again => open({onClose: again}),
         rename: (id, name) => A().api('rename_anim_project', {}, {method: 'POST', body: {id, title: name}}),
-        remove: async id => { const r = await A().api('delete_anim_project', {}, {method: 'POST', body: {id}}), row = (r.result || r).row; return {undo: () => A().api('restore_anim_project', {}, {method: 'POST', body: {row}})}; },
+        remove: async id => { const r = await A().api('delete_anim_project', {}, {method: 'POST', body: {id}}), row = (r.result || r).row; return {undo: () => A().api('restore_anim_project', {}, {method: 'POST', body: {row}})}; }, undo: true,
         createLabel: '＋ Nouveau film',
         get extra() { return ['migrations', 'grandfilm', 'race', 'pyramid', 'line', 'tree', 'borders'].map(k => `<button type="button" class="button secondary" data-an-tpl="${k}">${esc({migrations: '🧭 ' + T('Migrations de la famille'), grandfilm: '🎬 ' + T('Le grand film de la famille'), race: '🏁 ' + T('Course des noms'), pyramid: '👥 ' + T('Pyramide qui vit'), line: '📈 ' + T('Courbe qui se dessine'), tree: '🌳 ' + T('Arbre qui pousse'), borders: '🏛 ' + T('Frontières qui changent')}[k])}</button>`).join(''); }});
     document.addEventListener('click', e => { const b = e.target.closest?.('[data-an-tpl]'); if (b) { e.preventDefault(); open({template: b.dataset.anTpl}); } });

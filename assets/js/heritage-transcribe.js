@@ -1837,7 +1837,7 @@
          *  d'écriture), l'acte enregistré d'abord */
         function notInstalled() {
             return toast(i18n('La lecture d’écriture manuscrite n’est pas encore installée : Réglages → Reconnaissance d’écriture (HTR) (une seule fois, l’assistant explique tout).'), 'error',
-                {action: {label: `⤓ ${i18n('Installer maintenant')}`, run: async () => { if (dirty) { await save(); if (dirty) return; } teardown(); const st = A().state; if (!st) return; st.maintenanceTab = 'htr'; A().persistUiState?.(); A().setModule?.('maintenance'); }}});
+                {action: {label: `📦 ${i18n('Installer maintenant')}`, run: async () => { if (dirty) { await save(); if (dirty) return; } teardown(); const st = A().state; if (!st) return; st.maintenanceTab = 'htr'; A().persistUiState?.(); A().setModule?.('maintenance'); }}});
         }
         /** Les lignes lues, à côté de leur morceau d'image ; les mots peu sûrs surlignés ; on corrige, puis on met dans le texte */
         async function htrReview(lines, box, modelFile, installed, pid = curPid()) {

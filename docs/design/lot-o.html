@@ -1,0 +1,724 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lot O, nouveaux outils</title>
+<style>
+/* Les jetons et les composants de l'app (assets/css/app.css, ui.css, listes-donnees.css, fiche-village-organiser.css), recopiés ici pour que la maquette s'ouvre seule — même base que onglet-diagrammes.html et diagrammes-donnees.html. */
+:root{
+  color-scheme:light;
+  --ink:#080808;--paper:#fff;--card-bg:#fff;--card-head-bg:#fafafa;--card-line:#080808;
+  --blue:#0066cc;--blue-bright:#055dff;--blue-soft:#eaf2ff;--on-blue:#fff;--line-color:#d6d6d6;--muted:#6d6d6d;
+  --shadow:6px 6px 0 rgba(5,93,255,.34);--shadow-small:4px 4px 0 rgba(5,93,255,.28);--shadow-btn:3px 3px 0 rgba(5,93,255,.25);--shadow-modal:10px 10px 0 rgba(5,93,255,.45);
+  --ui-ink:#111;--ui-bg:#fff;--ui-soft:#eaf1ff;--ui-line:#e3e5ea;--ui-muted:#666;--ui-blue:#055dff;
+  --eyebrow:#0066cc;--btn2-bg:#fff;--btn2-line:#080808;--btn2-ink:#080808;
+  --seg-bg:#fff;--seg-ink:#111;--seg-line:#111;--seg-on-bg:#055dff;--seg-on-ink:#fff;
+  --grid:rgba(0,102,204,.035);--topbar:#fff;--topline:#080808;
+  --toggle-off:#b8bec9;--kbd-line:#c9ccd3;--link:#2b6cb0;
+  --green:#1a7f37;--green-soft:#eaf6ee;--orange:#d9480f;--orange-soft:#fff1e8;--red:#c62828;--red-soft:#fdecec;--yel-soft:#fff8d6;--yel-ink:#7a5d00;--fog:#9aa0a8;
+  --toast-bg:#111;--toast-ink:#fff;
+  --font:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;
+  --ink:#e8e8e8;--paper:#1a1a1a;--card-bg:#242424;--card-head-bg:#2e2e2e;--card-line:#3a3a3a;
+  --blue:#4d9fff;--blue-bright:#5599ff;--blue-soft:#1a2a3d;--on-blue:#111;--line-color:#555;--muted:#a3a3a3;
+  --shadow:6px 6px 0 rgba(77,159,255,.25);--shadow-small:4px 4px 0 rgba(77,159,255,.2);--shadow-btn:3px 3px 0 rgba(5,93,255,.25);--shadow-modal:10px 10px 0 rgba(77,159,255,.28);
+  --ui-ink:#e8e8e8;--ui-bg:#1f1f1f;--ui-soft:#1d2f4d;--ui-line:#3a3a3a;--ui-muted:#a8a8a8;--ui-blue:#3d7dff;
+  --eyebrow:#aaa;--btn2-bg:#2a2a2a;--btn2-line:#555;--btn2-ink:#e8e8e8;
+  --seg-bg:#242424;--seg-ink:#bbb;--seg-line:#e8e8e8;--seg-on-bg:#4d9fff;--seg-on-ink:#111;
+  --topbar:#1e1e1e;--topline:#3a3a3a;
+  --toggle-off:#555;--kbd-line:#555;--link:#6aa8ff;
+  --green:#4cc070;--green-soft:#15281c;--orange:#ff8a4c;--orange-soft:#2e1e14;--red:#ff6b6b;--red-soft:#2e1717;--yel-soft:#2c2612;--yel-ink:#f0d276;
+  --toast-bg:#e8e8e8;--toast-ink:#111;
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ink:#e8e8e8;--paper:#1a1a1a;--card-bg:#242424;--card-head-bg:#2e2e2e;--card-line:#3a3a3a;
+  --blue:#4d9fff;--blue-bright:#5599ff;--blue-soft:#1a2a3d;--on-blue:#111;--line-color:#555;--muted:#a3a3a3;
+  --shadow:6px 6px 0 rgba(77,159,255,.25);--shadow-small:4px 4px 0 rgba(77,159,255,.2);--shadow-btn:3px 3px 0 rgba(5,93,255,.25);--shadow-modal:10px 10px 0 rgba(77,159,255,.28);
+  --ui-ink:#e8e8e8;--ui-bg:#1f1f1f;--ui-soft:#1d2f4d;--ui-line:#3a3a3a;--ui-muted:#a8a8a8;--ui-blue:#3d7dff;
+  --eyebrow:#aaa;--btn2-bg:#2a2a2a;--btn2-line:#555;--btn2-ink:#e8e8e8;
+  --seg-bg:#242424;--seg-ink:#bbb;--seg-line:#e8e8e8;--seg-on-bg:#4d9fff;--seg-on-ink:#111;
+  --topbar:#1e1e1e;--topline:#3a3a3a;
+  --toggle-off:#555;--kbd-line:#555;--link:#6aa8ff;
+  --green:#4cc070;--green-soft:#15281c;--orange:#ff8a4c;--orange-soft:#2e1e14;--red:#ff6b6b;--red-soft:#2e1717;--yel-soft:#2c2612;--yel-ink:#f0d276;
+  --toast-bg:#e8e8e8;--toast-ink:#111;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.4 var(--font);padding:24px 24px 56px;overflow-wrap:break-word}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:inherit}
+:is(button,input,select,textarea,a,[tabindex]):focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{max-width:1440px;margin:0 auto}
+
+/* ── la maquette autour ── */
+.mock{display:flex;justify-content:space-between;align-items:flex-start;gap:12px 24px;flex-wrap:wrap;margin:0 0 18px}
+.mock .eyebrow{display:block}
+.mock h1{margin:5px 0 6px;font-size:22px;letter-spacing:-.01em}
+.mock p{margin:0;max-width:860px;color:var(--muted);font-size:14px;line-height:1.45}
+.tag-new{display:inline-block;font:800 10px/1.5 var(--font);letter-spacing:.08em;text-transform:uppercase;background:var(--ui-blue);color:#fff;padding:0 6px;margin-right:6px;vertical-align:1px}
+.path{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center;margin:8px 0 0;font-size:13px;font-weight:600}
+.path span{border:1.5px solid var(--line-color);background:var(--card-bg);padding:2px 8px}
+.path span.on{border-color:var(--ui-blue);background:var(--ui-soft);color:var(--ink)}
+.path i{font-style:normal;color:var(--muted)}
+.toc{display:flex;flex-wrap:wrap;gap:6px 8px;margin:0 0 26px}
+.toc a{text-decoration:none;border:2px solid var(--card-line);background:var(--card-bg);padding:6px 11px;font-size:13px;font-weight:700;box-shadow:var(--shadow-btn)}
+.toc a:hover{background:var(--ui-soft)}
+.toc a small{color:var(--muted);font-weight:600;margin-left:4px}
+.sec{margin:46px 0 0}
+.sec-h{margin:0 0 16px;max-width:900px}
+.sec-h h2{margin:4px 0 4px;font-size:24px;letter-spacing:-.02em}
+.sec-h p{margin:0;color:var(--muted);font-size:14px}
+.callout{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 5px;background:var(--orange);color:#fff;font:800 12px/1 var(--font);border-radius:11px;vertical-align:2px}
+
+/* ── composants de l'app ── */
+.eyebrow{color:var(--eyebrow);font-weight:700;font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.button{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:2px solid var(--ink);background:var(--blue);color:var(--on-blue);padding:11px 15px;min-height:42px;font-weight:700;cursor:pointer;box-shadow:var(--shadow-small);transition:.15s ease;white-space:nowrap;border-radius:0;text-decoration:none}
+:root[data-theme="dark"] .button:not(.secondary){border-color:var(--blue)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .button:not(.secondary){border-color:var(--blue)}}
+.button:hover{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+.button:disabled{opacity:.45;cursor:default;transform:none;box-shadow:none}
+.button.secondary{color:var(--btn2-ink);background:var(--btn2-bg);border-color:var(--btn2-line)}
+.button.small{min-height:32px;padding:6px 10px;font-size:11.5px;box-shadow:var(--shadow-btn)}
+.button.small:hover{box-shadow:1px 1px 0 var(--ink)}
+.button.icon{font-size:18px;line-height:1;padding:9px 13px}
+.link-button{border:0;background:none;padding:0;color:var(--link);text-decoration:underline;text-underline-offset:2px;cursor:pointer;font-size:13px}
+.segmented{display:inline-flex;flex-wrap:wrap;padding:1px 0 0 1px;flex:none;max-width:100%}
+.segmented button{min-height:32px;margin:-1px 0 0 -1px;position:relative;border:2px solid var(--seg-line);background:var(--seg-bg);color:var(--seg-ink);cursor:pointer;font-size:12px;font-weight:700;padding:1px 9px;white-space:nowrap;border-radius:0}
+.segmented button[aria-pressed="true"]{z-index:1;background:var(--seg-on-bg);color:var(--seg-on-ink)}
+.segmented.sm button{min-height:28px;font-size:11.5px;padding:1px 7px}
+.ui-listbar-btn{display:inline-flex;align-items:center;gap:4px;border:2px solid var(--ui-ink);background:var(--ui-bg);color:var(--ui-ink);padding:5px 9px;min-height:34px;font:600 13px/1.2 var(--font);cursor:pointer;white-space:nowrap;border-radius:0}
+.ui-listbar-btn:hover{background:var(--ui-soft)}
+.ui-listbar-btn[aria-pressed="true"]{background:var(--ui-soft);border-color:var(--ui-blue);box-shadow:inset 0 -3px 0 var(--ui-blue)}
+.ui-listbar-chip{display:inline-flex;align-items:center;gap:4px;background:var(--ui-soft);border:1.5px solid var(--ui-blue);color:var(--ui-blue);padding:3px 8px;font:700 12px/1.3 var(--font);cursor:pointer;border-radius:0}
+.ui-listbar-chip.off{background:transparent;border-color:var(--line-color);color:var(--muted);text-decoration:line-through}
+.ui-select{appearance:none;border:2px solid var(--ui-ink);border-radius:0;background:var(--ui-bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0h10L5 6z' fill='%23888'/%3E%3C/svg%3E") no-repeat right 9px center;color:var(--ui-ink);padding:5px 28px 5px 9px;font:600 13px var(--font);min-height:34px;max-width:100%;min-width:0}
+.ui-toggle{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;cursor:pointer;position:relative;user-select:none;min-height:30px}
+.ui-toggle>input{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
+.ui-toggle>i{width:34px;height:20px;border-radius:12px;background:var(--toggle-off);position:relative;flex:none;transition:background .15s}
+.ui-toggle>i::after{content:'';position:absolute;left:3px;top:3px;width:14px;height:14px;background:#fff;border-radius:50%;transition:left .15s}
+.ui-toggle>input:checked+i{background:var(--ui-blue)}
+.ui-toggle>input:checked+i::after{left:17px}
+.ui-toggle>input:disabled+i{opacity:.55}
+.ui-toggle>input:focus-visible+i{outline:3px solid rgba(5,93,255,.5);outline-offset:2px}
+.ui-num{display:inline-flex;align-items:center;border:2px solid var(--ui-ink);background:var(--ui-bg);min-height:30px}
+.ui-num input{width:50px;border:0;background:transparent;padding:3px 7px;text-align:right;font-weight:700;font-variant-numeric:tabular-nums;color:var(--ui-ink);outline:0}
+.ui-num span{padding:0 7px 0 0;font-size:12px;color:var(--muted)}
+.ui-badge{display:inline-block;font:800 10px/1.5 var(--font);letter-spacing:.06em;text-transform:uppercase;padding:0 6px;border:1.5px solid var(--ui-ink);white-space:nowrap;vertical-align:1px}
+.ui-badge.is-blue{background:var(--ui-blue);border-color:var(--ui-blue);color:#fff}
+.ui-badge.is-green{border-color:var(--green);color:var(--green);background:var(--green-soft)}
+.ui-badge.is-grey{border-color:var(--line-color);color:var(--muted)}
+.ui-badge.is-orange{border-color:var(--orange);color:var(--orange);background:var(--orange-soft)}
+.lbl{font-size:12px;font-weight:700;white-space:nowrap}
+.muted{color:var(--muted)}
+.small{font-size:12.5px}
+.card{background:var(--card-bg);border:2px solid var(--card-line);box-shadow:var(--shadow-small);min-width:0}
+.card-head{display:flex;align-items:center;justify-content:space-between;gap:8px 10px;flex-wrap:wrap;padding:12px 15px;border-bottom:2px solid var(--card-line);background:var(--card-head-bg)}
+.card-head h3{margin:0;font-size:16px;line-height:1.2}
+.card-head h3 small{color:var(--muted);font-weight:400;font-size:12.5px}
+.card-body{padding:14px 15px}
+.data-table{width:100%;border-collapse:collapse;font-size:12.5px}
+.data-table th{text-align:left;padding:9px 10px;color:var(--on-blue);background:var(--blue);border-bottom:2px solid var(--ink);white-space:nowrap;font-weight:800}
+.data-table td{padding:9px 10px;border-bottom:1px solid var(--line-color);vertical-align:top}
+.data-table tr:hover td{background:var(--blue-soft)}
+.data-table td small{display:block;color:var(--muted);font-size:11.5px}
+.tw{max-width:100%;overflow-x:auto;position:relative}
+.ib{display:inline-flex;align-items:center;justify-content:center;width:30px;height:28px;border:1.5px solid var(--line-color);background:var(--card-bg);font-size:13px;margin-left:3px;color:var(--ink);cursor:pointer;padding:0;vertical-align:middle}
+.ib:hover{border-color:var(--ui-blue);background:var(--ui-soft)}
+.ib.on{border-color:var(--ui-blue);background:var(--ui-soft)}
+.src a,.srca{font:700 11px var(--font);border:1px solid var(--line-color);padding:1px 6px;color:var(--blue);background:var(--blue-soft);text-decoration:none;white-space:nowrap}
+.toast{position:fixed;left:24px;bottom:24px;z-index:50;display:flex;align-items:center;gap:12px;max-width:min(470px,calc(100vw - 32px));background:var(--toast-bg);color:var(--toast-ink);padding:11px 14px;font:500 14px/1.35 var(--font);box-shadow:5px 5px 0 rgba(5,93,255,.45)}
+.toast button{border:1.5px solid currentColor;background:transparent;color:inherit;font-weight:700;font-size:13px;padding:3px 9px;cursor:pointer;white-space:nowrap}
+
+/* ── la fenêtre de l'app : barre du haut ── */
+.app{border:2px solid var(--topline);background:var(--paper);min-width:0}
+.topbar{display:grid;grid-template-columns:240px minmax(0,1fr);align-items:center;background:var(--topbar);border-bottom:2px solid var(--topline);min-height:72px}
+.brand{height:100%;border-right:2px solid var(--topline);display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;align-items:end;padding:12px 24px 9px;font-size:12px;line-height:1;letter-spacing:.04em;position:relative;overflow:hidden}
+.brand::after{content:"";position:absolute;width:130px;height:130px;right:-62px;top:-85px;background:repeating-radial-gradient(circle,var(--blue) 0 1px,transparent 1px 4px);transform:rotate(-8deg)}
+.brand span{background:var(--topbar);border:1px solid var(--blue);color:var(--blue);justify-self:end;padding:3px 5px;transform:rotate(-5deg);z-index:1;text-transform:uppercase}
+.brand strong{background:var(--blue);color:var(--on-blue);justify-self:start;padding:4px 6px;transform:rotate(-5deg);z-index:1;text-transform:uppercase}
+.brand small{grid-column:1/-1;font-size:10px;letter-spacing:.18em;align-self:end;text-align:center;color:var(--muted)}
+.main-nav{display:flex;align-items:center;overflow-x:auto;overflow-y:hidden;padding:8px 16px;gap:8px;min-width:0}
+.nav-item{border:2px solid transparent;background:transparent;font-weight:700;padding:6px 12px;white-space:nowrap;line-height:1.1;font-size:15px;color:var(--ink);text-align:left}
+.nav-item span{display:block;font-size:9px;line-height:1;color:var(--blue);letter-spacing:.12em;margin-bottom:4px}
+.nav-item.is-active{background:var(--blue);border-color:var(--ink);color:var(--on-blue);box-shadow:var(--shadow-small)}
+.nav-item.is-active span{color:var(--on-blue)}
+.workspace{background-color:var(--paper);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px}
+.page{padding:28px 3.5% 34px}
+.page-header{display:flex;align-items:flex-end;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;margin:0 0 16px}
+.page-header h2{margin:6px 0 0;font-size:clamp(26px,3vw,34px);line-height:1.02;letter-spacing:-.03em}
+.page-header p{margin:6px 0 0;color:var(--muted);font-size:13.5px;max-width:640px}
+.ph-ico{font-size:.86em;margin-right:.19em}
+.page-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.ld-source{margin:-4px 0 12px;color:var(--muted);font-size:13px}
+.ld-bar-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ld-chips{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:10px 0 0}
+.ld-count{font-weight:700;margin-right:4px;font-size:14px}
+.kiosk{font-size:12.5px;color:var(--muted);border-top:1px dashed var(--line-color);margin:14px 0 0;padding:9px 0 0}
+
+/* ── modale (app.css .modal) ── */
+.modal{border:3px solid var(--ink);box-shadow:var(--shadow-modal);background:var(--card-bg);min-width:0}
+:root[data-theme="dark"] .modal{border-color:#555}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .modal{border-color:#555}}
+.modal-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:16px 18px;border-bottom:2px solid var(--card-line);background:var(--card-head-bg)}
+.modal-head h2{margin:4px 0 0;font-size:21px;letter-spacing:-.01em}
+.modal-body{padding:14px 18px}
+.modal-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:12px 18px 16px;border-top:1px solid var(--ui-line)}
+.modal-actions .spacer{flex:1}
+.x{border:0;background:none;font-size:20px;cursor:pointer;color:var(--muted);padding:2px 6px}
+</style>
+<style>
+/* ── propre à cette maquette (lot O) ── */
+.page-tools{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,420px),1fr));gap:20px;align-items:start}
+.tool .card-head h3 .ico{margin-right:4px}
+.tool .card-body{display:grid;gap:10px}
+.lead{margin:0;font-size:15px;line-height:1.45}
+.lead b{font-weight:800}
+.lead small{display:block;color:var(--muted);font-size:12.5px;margin-top:3px}
+.acts{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:space-between;border-top:1px dashed var(--line-color);padding-top:9px}
+.acts .left{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.src-line{font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center}
+.status{font:800 10px/1.5 var(--font);letter-spacing:.06em;text-transform:uppercase;padding:0 6px;border:1.5px solid}
+.status.new{border-color:var(--ui-blue);color:var(--ui-blue);background:var(--ui-soft)}
+.status.half{border-color:var(--orange);color:var(--orange);background:var(--orange-soft)}
+.status.done{border-color:var(--green);color:var(--green);background:var(--green-soft)}
+details.more>summary,details.perso>summary{cursor:pointer;font-size:13px;font-weight:700;color:var(--link);list-style:none}
+details.more>summary::-webkit-details-marker,details.perso>summary::-webkit-details-marker{display:none}
+details.more[open]>summary{margin-bottom:6px}
+details.more p,details.more li{font-size:13px;line-height:1.45;margin:0 0 6px}
+details.perso{border:1.5px solid var(--line-color);background:var(--card-head-bg);padding:7px 10px}
+details.perso>summary{color:var(--ink)}
+details.perso[open]>summary{margin-bottom:8px}
+.pgrp{border-top:1px solid var(--line-color)}
+.pgrp>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:6px;padding:7px 2px;font-size:12.5px;font-weight:800}
+.pgrp>summary::-webkit-details-marker{display:none}
+.pgrp>summary::after{content:'›';margin-left:auto;font-size:15px;transition:transform .15s}
+.pgrp[open]>summary::after{transform:rotate(90deg)}
+.pgrp .row{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;padding:2px 2px 9px;font-size:13px}
+.pgrp .row .undo{margin-left:auto}
+svg.viz{width:100%;height:auto;display:block}
+svg.viz[data-map]{max-height:420px}
+svg.viz[data-clock]{max-height:330px}
+svg.viz text{font-family:var(--font);fill:var(--ink)}
+svg.viz .mut{fill:var(--muted)}
+svg.viz .axis{stroke:var(--line-color);stroke-width:1}
+svg.viz .bar{fill:var(--blue)}
+svg.viz .bar.clos{fill:var(--orange)}
+svg.viz .zone{fill:var(--orange-soft)}
+svg.viz .land{fill:var(--card-head-bg);stroke:var(--ink);stroke-width:1.6}
+svg.viz .ecrit{fill:var(--yel-soft)}
+svg.viz .mixte{fill:var(--orange-soft)}
+svg.viz .line{stroke:var(--ink);stroke-width:2;fill:none}
+svg.viz .dash{stroke:var(--orange);stroke-width:2;stroke-dasharray:6 4;fill:none}
+svg.viz .route{stroke:var(--blue);stroke-width:3;fill:none;opacity:.85}
+svg.viz .route2{stroke:var(--green);stroke-width:3;fill:none;opacity:.85}
+svg.viz .route3{stroke:var(--orange);stroke-width:3;fill:none;opacity:.85}
+svg.viz .dot{fill:var(--blue);stroke:var(--card-bg);stroke-width:2}
+svg.viz .pin{fill:var(--red);stroke:var(--card-bg);stroke-width:2}
+svg.viz .ring{fill:none;stroke:var(--blue);stroke-width:1.5;stroke-dasharray:3 3}
+.legend{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--muted)}
+.legend i{display:inline-block;width:12px;height:12px;border:1px solid var(--line-color);vertical-align:-2px;margin-right:4px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.pchip{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--ui-ink);background:var(--ui-bg);padding:4px 9px;font:700 13px/1.2 var(--font)}
+.pchip small{color:var(--muted);font-weight:600}
+.verdict{border-left:4px solid var(--orange);background:var(--orange-soft);padding:8px 10px;font-size:13.5px}
+.verdict.ok{border-color:var(--green);background:var(--green-soft)}
+.tact{border-left:4px solid var(--fog);background:var(--card-head-bg);padding:8px 10px;font-size:13px;color:var(--muted)}
+.mini{width:100%;border-collapse:collapse;font-size:12.5px}
+.mini td,.mini th{padding:5px 6px;border-bottom:1px solid var(--line-color);text-align:left;vertical-align:top}
+.mini th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.sig{display:flex;gap:0;align-items:stretch;overflow-x:auto;padding-bottom:4px}
+.sig figure{margin:0;min-width:120px;border:1.5px solid var(--line-color);background:var(--card-bg);padding:8px;text-align:center;position:relative}
+.sig figure+figure{margin-left:22px}
+.sig figure+figure::before{content:'→';position:absolute;left:-18px;top:30%;color:var(--muted);font-weight:800}
+.sig svg{width:100%;height:46px}
+.sig svg path{fill:none;stroke:var(--ink);stroke-width:1.6;stroke-linecap:round}
+.sig figcaption{font-size:11.5px;line-height:1.3}
+.sig figcaption small{display:block;color:var(--muted)}
+.sig .none{height:46px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--muted);font-style:italic}
+.gens{display:grid;gap:5px}
+.gen{display:grid;grid-template-columns:88px 1fr;gap:8px;align-items:center;font-size:12px}
+.gen .st{display:flex;height:18px;border:1px solid var(--line-color)}
+.gen .st span{display:block;height:100%}
+.c-terre{background:#7a9a3a}.c-art{background:#c08a3e}.c-ouv{background:var(--blue)}.c-aut{background:var(--fog)}
+.gen.mark .st{outline:2px solid var(--orange);outline-offset:1px}
+.paper{border:2px solid var(--ink);background:var(--card-bg);padding:14px 16px;display:grid;gap:10px;box-shadow:var(--shadow-small)}
+.paper-h{text-align:center;border-bottom:3px double var(--ink);padding-bottom:8px}
+.paper-h b{display:block;font:900 26px/1 Georgia,"Times New Roman",serif;letter-spacing:.02em}
+.paper-h small{display:block;font-size:12px;color:var(--muted);margin-top:4px}
+.paper-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px 16px}
+.paper-cols section{border-top:1px solid var(--line-color);padding-top:6px;font-size:13px;line-height:1.4}
+.paper-cols h4{margin:0 0 3px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.paper-cols p{margin:0}
+.paper-cols .srca{margin-left:4px}
+.ruler{position:relative;display:grid;gap:6px}
+.ev{display:grid;grid-template-columns:58px 1fr auto;gap:10px;align-items:center;font-size:13px;border-bottom:1px solid var(--line-color);padding:4px 0}
+.ev .age{font:800 18px/1 var(--font);color:var(--blue);text-align:right}
+.ev .age small{display:block;font-size:10px;font-weight:700;color:var(--muted)}
+.ev.fam .age{color:var(--green)}
+.two{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:860px){.two{grid-template-columns:1fr}}
+.note{font-size:12.5px;color:var(--muted);margin:10px 0 0;max-width:900px}
+.decis{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));list-style:none;padding:0;margin:0}
+.decis li{padding:12px 14px}
+.decis b{display:block;margin-bottom:4px}
+.decis p{margin:0;font-size:13px;color:var(--muted)}
+.tline{font-size:12.5px;color:var(--muted)}
+.where{display:flex;flex-wrap:wrap;gap:4px;margin:0}
+.where span{font-size:11px;font-weight:700;border:1px solid var(--line-color);padding:1px 6px;background:var(--card-bg)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="mock">
+    <div>
+      <span class="eyebrow"><span class="tag-new">Maquette</span>à valider · lot O (préparation, rien n'est construit)</span>
+      <h1>🌳 Ce que dit l'arbre, ⚖️ la carte des coutumes, 🧳 les migrations saisonnières, 📰 le bulletin de sa naissance</h1>
+      <p>Les nouveaux outils du lot O, tels qu'ils apparaîtraient dans l'app. Le détail des 75 idées (ce qui existe, les sources, les licences) est dans <code>docs/donnees-idees-lot-o.md</code>. Les noms sont inventés (MAZAUD, LACOMBE, DURAND). Chaque outil : <b>une phrase d'abord</b>, le dessin, le détail plié sous « ▸ plus », les options dans « ⚙️ Personnaliser » (une partie ouverte à la fois), les sources ↗ partout, 🧺 pour mettre dans un panier et 📎 pour garder dans les médias quand c'est une image.</p>
+      <div class="path" aria-label="Où c'est dans l'app"><span class="on">Listes → 🌳 Ce que dit l'arbre</span><i>et</i><span class="on">fiche d'une personne</span><span>Diagrammes</span><span>⌘K</span><span>🧭 Je veux…</span></div>
+    </div>
+    <span class="segmented" role="group" aria-label="Thème"><button type="button" data-theme-set="auto" aria-pressed="true">Auto</button><button type="button" data-theme-set="light" aria-pressed="false">Clair</button><button type="button" data-theme-set="dark" aria-pressed="false">Sombre</button></span>
+  </div>
+
+  <nav class="toc" aria-label="Sommaire">
+    <a href="#s1">1 · 🌳 Ce que dit l'arbre <small>10 outils</small></a><a href="#s2">2 · ⚖️ Carte des coutumes</a><a href="#s3">3 · 🧳 Migrations saisonnières</a><a href="#s4">4 · 📰 Bulletin de sa naissance</a><a href="#s5">5 · 🕰 Horloge de sa vie</a><a href="#s6">6 · 🎂 Son âge à chaque événement</a><a href="#s7">7 · ✓ À décider</a>
+  </nav>
+
+  <!-- ═══════════ 1 · Ce que dit l'arbre ═══════════ -->
+  <section class="sec" id="s1" aria-labelledby="s1h" style="margin-top:0">
+    <div class="sec-h"><span class="eyebrow">1 · Calculé avec ton arbre, sur l'ordinateur</span><h2 id="s1h">🌳 Ce que dit l'arbre</h2>
+      <p>Une page de Listes (thème 🌳 Famille) qui réunit dix lectures de l'arbre. Rien n'est téléchargé, rien ne part sur Internet ; une fiche vivante ou confidentielle n'est jamais comptée ni nommée. Les outils qui existaient déjà (🎯, 💔, 🎀, 🤰) ne sont pas refaits : la carte ouvre le diagramme existant. Chaque outil se trouve aussi par ⌘K et « 🧭 Je veux… ».</p></div>
+    <div class="app">
+      <div class="topbar"><div class="brand"><span>Carnet</span><strong>LCNDA</strong><small>numérique des ancêtres</small></div>
+        <nav class="main-nav" aria-label="Onglets"><span class="nav-item"><span>01</span>Tableau de bord</span><span class="nav-item"><span>02</span>Personnes</span><span class="nav-item is-active"><span>05</span>Listes</span><span class="nav-item"><span>06</span>Graphiques</span><span class="nav-item"><span>07</span>Recherche</span></nav></div>
+      <div class="workspace"><div class="page">
+        <div class="page-header"><div><span class="eyebrow">Listes · 🌳 Famille</span><h2><span class="ph-ico">🌳</span>Ce que dit l'arbre</h2><p>Dix façons de lire ta famille. Pour : <b>toute la base</b> (sans les vivants). Change le groupe ou la période dans ⚙️ Personnaliser de chaque carte.</p></div>
+          <div class="page-actions"><span class="segmented sm" role="group" aria-label="Montrer" data-seg><button type="button" aria-pressed="true">Tout</button><button type="button" aria-pressed="false">Nouveaux</button><button type="button" aria-pressed="false">Déjà là</button></span></div></div>
+
+        <div class="page-tools">
+
+          <!-- 1 Carême / Avent -->
+          <article class="card tool" id="t1">
+            <div class="card-head"><h3><span class="ico">💒</span>Les mariages et les temps clos <small>· toute la famille</small></h3><span class="status half">à moitié</span></div>
+            <div class="card-body">
+              <p class="lead"><b>212 mariages</b> datés au jour : <b>4</b> tombent pendant l'Avent ou le Carême. <small>Février et mars sont presque vides, novembre et janvier pleins : on se mariait avant l'Avent et juste après les Rois.</small></p>
+              <svg class="viz" viewBox="0 0 440 170" role="img" aria-label="Mariages par mois, Avent et Carême en orange" data-months></svg>
+              <div class="legend"><span><i style="background:var(--blue)"></i>mariages du mois</span><span><i style="background:var(--orange)"></i>dont en temps clos</span><span><i style="background:var(--orange-soft)"></i>mois souvent en temps clos</span></div>
+              <details class="more"><summary>▸ plus (4 mariages à vérifier)</summary>
+                <table class="mini"><tr><th>Mariage</th><th>Date</th><th>Temps</th></tr>
+                  <tr><td>Jean MAZAUD × Marie DURAND</td><td>2 mars 1779 · Seilhac</td><td>Carême</td></tr>
+                  <tr><td>Pierre LACOMBE × Anne MAZAUD</td><td>14 déc. 1802 · Chamboulive</td><td>Avent</td></tr>
+                  <tr><td>Léonard DURAND × Jeanne LACOMBE</td><td>23 févr. 1813 · Tulle</td><td>Carême</td></tr>
+                  <tr><td>Antoine MAZAUD × Marie LACOMBE</td><td>6 déc. 1849 · Uzerche</td><td>Avent</td></tr></table>
+                <p>Ce n'est pas forcément une erreur : l'évêque pouvait donner une dispense, souvent écrite dans l'acte. Vérifie aussi que c'est bien la date du mariage, et non celle des fiançailles ou des bans.</p></details>
+              <details class="perso"><summary>⚙️ Personnaliser</summary>
+                <details class="pgrp" name="p1" open><summary>👥 Qui est compté</summary><div class="row"><select class="ui-select"><option>Toute la base</option><option>Mes ancêtres</option><option>Branche paternelle</option><option>Une étiquette…</option></select></div></details>
+                <details class="pgrp" name="p1"><summary>📅 Période</summary><div class="row">de <span class="ui-num"><input value="1600"></span> à <span class="ui-num"><input value="1900"></span><button class="link-button undo" type="button">↶ Comme avant</button></div></details>
+                <details class="pgrp" name="p1"><summary>🎨 Dessin</summary><div class="row"><span class="segmented sm" data-seg><button aria-pressed="true" type="button">Barres</button><button aria-pressed="false" type="button">Rose des mois</button></span></div></details>
+              </details>
+              <div class="acts"><div class="src-line">Règle : concile de Trente <a class="srca" href="#">Wikisource ↗</a> · Pâques calculée année par année</div><div class="left"><button class="ib" title="Mettre dans un panier">🧺</button><button class="ib" title="Garder l'image dans les médias">📎</button></div></div>
+            </div>
+          </article>
+
+          <!-- 2 Dispense -->
+          <article class="card tool" id="t2">
+            <div class="card-head"><h3><span class="ico">🔗</span>Fallait-il une dispense ? <small>· deux personnes</small></h3><span class="status half">à moitié</span></div>
+            <div class="card-body">
+              <div class="chips"><span class="pchip">👤 Jean MAZAUD <small>1754–1821</small></span><span class="muted">×</span><span class="pchip">👤 Marie DURAND <small>1758–1830</small></span><button class="link-button" type="button">changer</button></div>
+              <p class="lead">Ils étaient <b>cousins issus de germains</b> : <b>3ᵉ degré</b> pour l'Église en 1779. <small>Il fallait une dispense de l'évêque de Limoges (jusqu'au 4ᵉ degré depuis 1215).</small></p>
+              <svg class="viz" viewBox="0 0 440 150" role="img" aria-label="Chemin de parenté jusqu'à l'ancêtre commun" data-kin></svg>
+              <div class="verdict">⚠️ Dispense nécessaire en 1779. <b>Cherche-la</b> : dans l'acte de mariage (« après dispense du 3ᵉ degré »), et dans les registres de dispenses de l'évêché (série G des Archives départementales).</div>
+              <details class="more"><summary>▸ plus (comment on compte)</summary>
+                <p><b>Pour l'Église (avant 1983)</b>, on compte les générations jusqu'à l'ancêtre commun, du côté le plus long : 3. <b>Pour la loi civile</b>, on additionne les deux côtés : 6ᵉ degré.</p>
+                <p>Coefficient de consanguinité de leurs enfants : F = 1/64 (déjà calculé dans le diagramme 🔁 Boucles d'implexe).</p>
+                <p>Avant 1917 : dispense jusqu'au 4ᵉ degré ; de 1917 à 1983 : jusqu'au 3ᵉ degré. Les alliances (beau-frère, belle-sœur) comptent aussi.</p></details>
+              <details class="perso"><summary>⚙️ Personnaliser</summary>
+                <details class="pgrp" name="p2" open><summary>📏 Façon de compter</summary><div class="row"><span class="segmented sm" data-seg><button aria-pressed="true" type="button">L'Église</button><button aria-pressed="false" type="button">La loi civile</button><button aria-pressed="false" type="button">Les deux</button></span></div></details>
+                <details class="pgrp" name="p2"><summary>🔍 Chercher dans tout l'arbre</summary><div class="row"><label class="ui-toggle"><input type="checkbox"><i></i>Lister tous les couples apparentés</label></div></details>
+              </details>
+              <div class="acts"><div class="src-line">« Empêchement de mariage » <a class="srca" href="#">Wikipédia ↗</a> · canons de Latran IV <a class="srca" href="#">Wikisource ↗</a></div><div class="left"><button class="ib" title="Mettre dans un panier">🧺</button></div></div>
+            </div>
+          </article>
+
+          <!-- 3 Conceptions avec tact -->
+          <article class="card tool" id="t3">
+            <div class="card-head"><h3><span class="ico">🤰</span>Les premiers enfants nés tôt <small>· avec tact</small></h3><span class="status done">déjà là · + option</span></div>
+            <div class="card-body">
+              <p class="lead">Avant 1850, <b>1 couple sur 8</b> a eu son premier enfant moins de 8 mois après le mariage. <small>C'était courant dans les campagnes : on se mariait souvent quand l'enfant s'annonçait.</small></p>
+              <svg class="viz" viewBox="0 0 440 110" role="img" aria-label="Part des premiers enfants nés tôt, par époque" data-concept></svg>
+              <div class="tact">🤍 Par défaut, <b>aucun nom</b> : seulement des parts par époque. Les personnes se montrent dans ⚙️ Personnaliser, et jamais pour une famille encore vivante.</div>
+              <details class="perso"><summary>⚙️ Personnaliser</summary>
+                <details class="pgrp" name="p3" open><summary>👁 Montrer</summary><div class="row"><label class="ui-toggle"><input type="checkbox"><i></i>Montrer les couples (nés il y a plus de 100 ans)</label></div></details>
+                <details class="pgrp" name="p3"><summary>⏱ Seuil</summary><div class="row">moins de <span class="ui-num"><input value="8"><span>mois</span></span><button class="link-button undo" type="button">↶ 8 mois</button></div></details>
+              </details>
+              <div class="acts"><div class="src-line">Ouvre le diagramme existant « 🤰 Conceptions avant mariage »</div><div class="left"><button class="ib" title="Mettre dans un panier">🧺</button><button class="ib" title="Garder l'image dans les médias">📎</button></div></div>
+            </div>
+          </article>
+
+          <!-- 4 Centre de gravité -->
+          <article class="card tool" id="t4">
+            <div class="card-head"><h3><span class="ico">🎯</span>Le centre de la famille, génération après génération</h3><span class="status done">déjà là</span></div>
+            <div class="card-body">
+              <p class="lead">En 7 générations, le centre de ta famille a fait <b>380 km</b>, de la Corrèze vers Paris. <small>Le grand saut : la 3ᵉ génération (vers 1880).</small></p>
+              <svg class="viz" viewBox="0 0 800 740" role="img" aria-label="Carte du centre de gravité par génération" data-map="gravity"></svg>
+              <div class="acts"><div class="src-line">Diagramme existant « 🎯 Centre de gravité » · fond : contours simplifiés</div><div class="left"><button class="ib" title="Mettre dans un panier">🧺</button><button class="ib" title="Garder l'image dans les médias">📎</button></div></div>
+            </div>
+          </article>
+
+          <!-- 5 Rayon des mariages -->
+          <article class="card tool" id="t5">
+            <div class="card-head"><h3><span class="ico">💍</span>Jusqu'où allait-on chercher son conjoint ?</h3><span class="status half">à moitié</span></div>
+            <div class="card-body">
+              <p class="lead">Au XVIIIᵉ siècle, <b>8 mariages sur 10</b> unissaient deux villages à moins de <b>12 km</b>. Au XXᵉ, la moitié dépasse 40 km. <small>Distance entre le village de l'époux et celui de l'épouse (lieu de naissance, sinon de résidence).</small></p>
+              <svg class="viz" viewBox="0 0 440 180" role="img" aria-label="Distance médiane entre époux par siècle" data-radius></svg>
+              <details class="more"><summary>▸ plus (le plus loin)</summary><p>Le mariage le plus lointain : Honoré LACOMBE (Nice) × Marie MAZAUD (Tulle), 1861 — 520 km. Il était soldat en garnison à Tulle.</p></details>
+              <details class="perso"><summary>⚙️ Personnaliser</summary>
+                <details class="pgrp" name="p5" open><summary>📍 Quel lieu</summary><div class="row"><span class="segmented sm" data-seg><button aria-pressed="true" type="button">Naissance</button><button aria-pressed="false" type="button">Résidence au mariage</button></span></div></details>
+                <details class="pgrp" name="p5"><summary>🗺 Sur la carte</summary><div class="row"><label class="ui-toggle"><input type="checkbox" checked><i></i>Cercle du rayon médian autour du village</label></div></details>
+              </details>
+              <div class="acts"><div class="src-line">Calculé sur ta base · distances à vol d'oiseau</div><div class="left"><button class="ib" title="Mettre dans un panier">🧺</button><button class="ib" title="Garder l'image dans les médias">📎</button></div></div>
+            </div>
+          </article>
+
+          <!-- 6 Remariage -->
+          <article class="card tool" id="t6">
+            <div class="card-head"><h3><span class="ico">💔</span>Le temps avant de se remarier</h3><span class="status done">déjà là</span></div>
+            <div class="card-body">
+              <p class="lead">Les veufs se remariaient en <b>11 mois</b> (médiane), les veuves en <b>2 ans ½</b>. <small>Avec de jeunes enfants, le père se remariait souvent dans l'année.</small></p>
+              <svg class="viz" viewBox="0 0 440 90" role="img" aria-label="Délais de remariage, hommes et femmes" data-remar></svg>
+              <div class="acts"><div class="src-line">Diagramme existant « 💔 Veuvage et remariage »</div><div class="left"><button class="ib" title="Mettre dans un panier">🧺</button></div></div>
+            </div>
+          </article>
+
+          <!-- 7 Parrain → prénom -->
+          <article class="card tool" id="t7">
+            <div class="card-head"><h3><span class="ico">🎀</span>Le prénom venait du parrain</h3><span class="status done">déjà là</span></div>
+            <div class="card-body">
+              <p class="lead"><b>64 %</b> des baptisés dont le parrain est connu portent son prénom. <small>Le plus souvent un grand-père ; puis un oncle.</small></p>
+              <table class="mini"><tr><th>Enfant</th><th>Parrain</th><th>Lien</th></tr><tr><td>Léonard MAZAUD, 1781</td><td>Léonard MAZAUD</td><td>grand-père paternel</td></tr><tr><td>Marie DURAND, 1790</td><td>Marie LACOMBE (marraine)</td><td>grand-mère maternelle</td></tr><tr><td>Jean LACOMBE, 1803</td><td>Jean DURAND</td><td>oncle</td></tr></table>
+              <div class="acts"><div class="src-line">Diagramme existant « 🎀 les prénoms transmis »</div><div class="left"><button class="ib" title="Mettre dans un panier">🧺</button></div></div>
+            </div>
+          </article>
+
+          <!-- 8 Posthumes et orphelins -->
+          <article class="card tool" id="t8">
+            <div class="card-head"><h3><span class="ico">🕯</span>Nés après leur père, orphelins jeunes</h3><span class="status half">à moitié</span></div>
+            <div class="card-body">
+              <p class="lead"><b>3 enfants</b> sont nés après la mort de leur père, et <b>27</b> ont perdu un parent avant 10 ans. <small>Le parent qui restait s'est remarié dans 2 cas sur 3.</small></p>
+              <table class="mini"><tr><th>Génération</th><th>Orphelins avant 10 ans</th></tr><tr><td>IV (vers 1780)</td><td>9 sur 31 · 29 %</td></tr><tr><td>III (vers 1820)</td><td>8 sur 34 · 24 %</td></tr><tr><td>II (vers 1860)</td><td>6 sur 38 · 16 %</td></tr><tr><td>I (vers 1900)</td><td>4 sur 29 · 14 % <small>dont 2 de la guerre de 14</small></td></tr></table>
+              <details class="more"><summary>▸ plus (les 3 enfants posthumes)</summary><p>Jean LACOMBE, né le 2 mai 1916, quatre mois après la mort de son père à Verdun. Anne MAZAUD, 1794. Pierre DURAND, 1832 (choléra).</p><p>Cherche leur tutelle : conseil de famille chez le juge de paix du canton.</p></details>
+              <div class="tact">🤍 Les noms ne viennent que dans « ▸ plus », jamais pour une personne vivante.</div>
+              <div class="acts"><div class="src-line">Calculé sur ta base · rejoint le contrôle « Enfant posthume »</div><div class="left"><button class="ib" title="Mettre dans un panier">🧺</button></div></div>
+            </div>
+          </article>
+
+          <!-- 9 Quitter la terre -->
+          <article class="card tool" id="t9">
+            <div class="card-head"><h3><span class="ico">🌾</span>Quand la famille a quitté la terre</h3><span class="status half">à moitié</span></div>
+            <div class="card-body">
+              <p class="lead">Ta lignée MAZAUD a quitté la terre à la <b>3ᵉ génération</b>, vers 1880, avec <b>Jean MAZAUD</b>, devenu cheminot à Tulle. <small>La branche LACOMBE est restée paysanne jusqu'en 1950.</small></p>
+              <div class="gens" aria-label="Métiers par génération">
+                <div class="gen"><b>VI · 1700</b><div class="st"><span class="c-terre" style="width:88%"></span><span class="c-art" style="width:12%"></span></div></div>
+                <div class="gen"><b>V · 1750</b><div class="st"><span class="c-terre" style="width:84%"></span><span class="c-art" style="width:16%"></span></div></div>
+                <div class="gen"><b>IV · 1800</b><div class="st"><span class="c-terre" style="width:80%"></span><span class="c-art" style="width:17%"></span><span class="c-aut" style="width:3%"></span></div></div>
+                <div class="gen mark"><b>III · 1850</b><div class="st"><span class="c-terre" style="width:55%"></span><span class="c-art" style="width:15%"></span><span class="c-ouv" style="width:25%"></span><span class="c-aut" style="width:5%"></span></div></div>
+                <div class="gen"><b>II · 1900</b><div class="st"><span class="c-terre" style="width:30%"></span><span class="c-art" style="width:12%"></span><span class="c-ouv" style="width:38%"></span><span class="c-aut" style="width:20%"></span></div></div>
+                <div class="gen"><b>I · 1930</b><div class="st"><span class="c-terre" style="width:12%"></span><span class="c-art" style="width:8%"></span><span class="c-ouv" style="width:40%"></span><span class="c-aut" style="width:40%"></span></div></div>
+              </div>
+              <div class="legend"><span><i class="c-terre"></i>la terre</span><span><i class="c-art"></i>artisans, commerce</span><span><i class="c-ouv"></i>ouvriers, chemin de fer</span><span><i class="c-aut"></i>autres</span></div>
+              <details class="perso"><summary>⚙️ Personnaliser</summary>
+                <details class="pgrp" name="p9" open><summary>🌳 Par</summary><div class="row"><span class="segmented sm" data-seg><button aria-pressed="true" type="button">Lignée du nom</button><button aria-pressed="false" type="button">Branche</button><button aria-pressed="false" type="button">Tous les ancêtres</button></span></div></details>
+                <details class="pgrp" name="p9"><summary>🧱 Familles de métiers</summary><div class="row"><button class="link-button" type="button">Ranger un métier ailleurs…</button></div></details>
+              </details>
+              <div class="acts"><div class="src-line">Familles de métiers : <a class="srca" href="#">métiers anciens ↗</a></div><div class="left"><button class="ib" title="Mettre dans un panier">🧺</button><button class="ib" title="Garder l'image dans les médias">📎</button></div></div>
+            </div>
+          </article>
+
+          <!-- 10 Signatures -->
+          <article class="card tool" id="t10">
+            <div class="card-head"><h3><span class="ico">✍️</span>La chaîne des signatures</h3><span class="status half">à moitié</span></div>
+            <div class="card-body">
+              <p class="lead">De père en fils, la première signature arrive en <b>1802</b>. <small>Avant, « a déclaré ne savoir signer ».</small></p>
+              <div class="sig">
+                <figure><div class="none">ne savait pas signer</div><figcaption><b>Léonard MAZAUD</b><small>mariage 1751 📎</small></figcaption></figure>
+                <figure><div class="none">ne savait pas signer</div><figcaption><b>Jean MAZAUD</b><small>mariage 1779 📎</small></figcaption></figure>
+                <figure><svg viewBox="0 0 120 46"><path d="M6 32c6-14 10-20 14-8s4 12 9-2 6-8 8 2 5 4 9-6 6 0 10 4c4 3 10-8 14-6s2 10 8 8 10-6 16-4"/></svg><figcaption><b>Pierre MAZAUD</b><small>mariage 1802 📎</small></figcaption></figure>
+                <figure><svg viewBox="0 0 120 46"><path d="M4 30c8-22 14-4 18-10s4-10 10 0 4 10 12 2 8-10 12-2 2 8 10 4 6-12 12-8 10 10 18 6 10-4 16-2"/><path d="M30 38h70"/></svg><figcaption><b>Jean MAZAUD</b><small>mariage 1876 📎</small></figcaption></figure>
+              </div>
+              <details class="perso"><summary>⚙️ Personnaliser</summary>
+                <details class="pgrp" name="p10" open><summary>🌳 La lignée</summary><div class="row"><span class="segmented sm" data-seg><button aria-pressed="true" type="button">De père en fils</button><button aria-pressed="false" type="button">De mère en fille</button><button aria-pressed="false" type="button">Choisir…</button></span></div></details>
+                <details class="pgrp" name="p10"><summary>🖼 Image</summary><div class="row"><span class="segmented sm" data-seg><button aria-pressed="true" type="button">En ligne</button><button aria-pressed="false" type="button">En colonne</button></span></div></details>
+              </details>
+              <div class="acts"><div class="src-line">Les signatures repérées dans tes documents (visionneuse → « Identifier une signature »)</div><div class="left"><button class="ib" title="Mettre dans un panier">🧺</button><button class="ib" title="Garder l'image dans les médias">📎</button></div></div>
+            </div>
+          </article>
+
+        </div>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 2 · Coutumes ═══════════ -->
+  <section class="sec" id="s2" aria-labelledby="s2h">
+    <div class="sec-h"><span class="eyebrow">2 · Existe déjà (lot 10) · présentation proposée</span><h2 id="s2h">⚖️ La coutume de son pays, et ce que ça change pour l'héritage</h2>
+      <p>Les données sont déjà dans l'app (<code>l10-regles</code>). Proposition : sur la fiche, la petite carte avec le village de l'ancêtre, la phrase, puis « ce que ça change » en trois lignes. Le calque « droit écrit / coutume » reste dans les Cartes.</p></div>
+    <div class="two">
+      <article class="card tool">
+        <div class="card-head"><h3><span class="ico">⚖️</span>La coutume de son pays <small>· Jean MAZAUD, 1754–1821</small></h3><span class="status done">déjà là</span></div>
+        <div class="card-body">
+          <p class="lead">Seilhac (Limousin) était en <b>pays de droit écrit</b> : le père pouvait, par testament, avantager un enfant. <small>Jusqu'au Code civil (1804), qui impose l'égalité entre les enfants.</small></p>
+          <svg class="viz" viewBox="0 0 800 740" role="img" aria-label="Carte de la France coutumière : droit écrit au sud, coutume au nord" data-map="coutume"></svg>
+          <div class="legend"><span><i style="background:var(--yel-soft)"></i>droit écrit (droit romain)</span><span><i style="background:var(--card-head-bg)"></i>coutume</span><span><i style="background:var(--orange-soft)"></i>pays mixte (Auvergne…)</span><span><i style="background:var(--red);border-radius:50%"></i>son village</span></div>
+          <div class="acts"><div class="src-line">Carte de Klimrath (1837) <a class="srca" href="#">Commons ↗</a> · « Droit écrit » <a class="srca" href="#">Wikipédia ↗</a></div><div class="left"><button class="ib" title="Mettre dans un panier">🧺</button><button class="ib" title="Garder l'image dans les médias">📎</button></div></div>
+        </div>
+      </article>
+      <article class="card tool">
+        <div class="card-head"><h3><span class="ico">🏠</span>Ce que ça change pour l'héritage</h3></div>
+        <div class="card-body">
+          <table class="mini">
+            <tr><th></th><th>Droit écrit (sud)</th><th>Coutume (nord)</th></tr>
+            <tr><td><b>Testament</b></td><td>Le père choisit, souvent un héritier (l'aîné) ; les autres ont leur « légitime ».</td><td>Peu de liberté : la coutume dit qui hérite.</td></tr>
+            <tr><td><b>Les filles</b></td><td>Une dot au mariage, puis souvent plus rien.</td><td>Selon la coutume : égalité (Paris, Orléans) ou exclusion (Normandie).</td></tr>
+            <tr><td><b>Les biens</b></td><td>Tout se mélange.</td><td>« Paterna paternis » : les biens du père retournent à sa famille.</td></tr>
+            <tr><td><b>Où chercher</b></td><td>Les testaments chez le notaire (insinuations, contrôle des actes).</td><td>Les partages et les inventaires chez le notaire.</td></tr>
+          </table>
+          <details class="more"><summary>▸ plus (la citation et la coutume de son pays)</summary><p>« Le droit écrit est, au sens strict, un terme désignant le régime juridique de certains pays du royaume de France d'avant la Révolution française, qui se trouvaient au sud d'une ligne qui reliait La Rochelle à Genève… » <a class="srca" href="#">Wikipédia ↗</a></p></details>
+          <div class="acts"><div class="src-line">Textes déjà dans l'app (Wikipédia, CC BY-SA 4.0)</div><div class="left"><button class="ib" title="Mettre dans un panier">🧺</button></div></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ═══════════ 3 · Migrations saisonnières ═══════════ -->
+  <section class="sec" id="s3" aria-labelledby="s3h">
+    <div class="sec-h"><span class="eyebrow">3 · Texte rédigé + calcul sur l'arbre</span><h2 id="s3h">🧳 Les migrations saisonnières</h2>
+      <p>Ajoutées aux « 🌍 grands mouvements » qui existent (creusois et savoyards y sont déjà) : scieurs de long, moissonneurs, colporteurs. Le saisonnier se repère dans l'arbre : un maçon dont les enfants naissent tous à l'automne, un métier noté à Paris et un mariage au village.</p></div>
+    <div class="two">
+      <article class="card tool">
+        <div class="card-head"><h3><span class="ico">🧳</span>Partir au printemps, rentrer à l'hiver</h3><span class="status half">à moitié</span></div>
+        <div class="card-body">
+          <p class="lead">Jean MAZAUD, <b>maçon</b>, a sans doute fait partie des <b>maçons de la Creuse et du Limousin</b> : ses 5 enfants sont nés entre octobre et janvier. <small>« Possible » : à confirmer (✓ Oui, c'est ça / ✗ Non).</small></p>
+          <svg class="viz" viewBox="0 0 800 740" role="img" aria-label="Carte des migrations saisonnières" data-map="saison"></svg>
+          <div class="legend"><span><i style="background:var(--blue)"></i>maçons (Creuse, Limousin → Paris, Lyon)</span><span><i style="background:var(--green)"></i>ramoneurs (Savoie → Paris)</span><span><i style="background:var(--orange)"></i>moissonneurs (Massif central → Languedoc)</span><span>— — scieurs de long (Livradois)</span></div>
+          <div class="acts"><div class="src-line">Martin Nadaud, <i>Mémoires de Léonard</i> (1895) <a class="srca" href="#">Wikisource ↗</a> · « Maçons de la Creuse » <a class="srca" href="#">Wikipédia ↗</a></div><div class="left"><button class="ib" title="Mettre dans un panier">🧺</button><button class="ib" title="Garder l'image dans les médias">📎</button></div></div>
+        </div>
+      </article>
+      <article class="card tool">
+        <div class="card-head"><h3><span class="ico">📅</span>L'année d'un maçon limousin</h3></div>
+        <div class="card-body">
+          <svg class="viz" viewBox="0 0 440 96" role="img" aria-label="Mois au village et mois au chantier" data-year></svg>
+          <p class="lead" style="font-size:13.5px">« Nous partîmes au mois de mars… » : les maçons partaient à pied en mars, travaillaient sur les chantiers de Paris ou de Lyon et rentraient pour l'hiver. <small>Les naissances au village se concentrent donc à l'automne et en hiver.</small></p>
+          <details class="perso"><summary>⚙️ Personnaliser</summary>
+            <details class="pgrp" name="p11" open><summary>🧳 Les mouvements montrés</summary><div class="row"><span class="ui-listbar-chip">maçons</span><span class="ui-listbar-chip">ramoneurs</span><span class="ui-listbar-chip">moissonneurs</span><span class="ui-listbar-chip off">scieurs de long</span><span class="ui-listbar-chip off">colporteurs</span></div></details>
+            <details class="pgrp" name="p11"><summary>🔎 Repérer dans l'arbre</summary><div class="row"><label class="ui-toggle"><input type="checkbox" checked><i></i>Proposer quand les naissances suivent les saisons</label></div></details>
+          </details>
+          <div class="acts"><div class="src-line">Rejoint Listes → Histoire → « 🌍 Ta famille dans les grands mouvements »</div><div class="left"><button class="ib" title="Mettre dans un panier">🧺</button></div></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ═══════════ 4 · Bulletin ═══════════ -->
+  <section class="sec" id="s4" aria-labelledby="s4h">
+    <div class="sec-h"><span class="eyebrow">4 · Assemblage de ce qui existe (aucune donnée nouvelle)</span><h2 id="s4h">📰 Le bulletin du jour de sa naissance</h2>
+      <p>Tous les morceaux sont déjà dans l'app : météo du jour, « ce jour-là dans le monde », saint et dicton, lune, lever et coucher du soleil, prix du pain, fêtes chômées (lot O). Une carte les réunit, à imprimer ou à garder 📎. Une ligne sans donnée ne s'affiche pas. Depuis la fiche (⋯ → « 📰 Le bulletin de sa naissance »), ⌘K et 🧭 « Faire le bulletin de sa naissance ».</p></div>
+    <div class="two">
+      <div class="paper" aria-label="Bulletin du jour">
+        <div class="paper-h"><b>Le Petit Bulletin de Seilhac</b><small>Mardi 21 décembre 1802 — 30 frimaire an XI · naissance de Louis MAZAUD</small></div>
+        <div class="paper-cols">
+          <section><h4>☀️ Le jour</h4><p>Le plus court de l'année : <b>8 h 37</b> de jour. Lever 8 h 06, coucher 16 h 43 (heure solaire). <span class="srca">calculé</span></p></section>
+          <section><h4>🌦 Le temps</h4><p>Froid sec à Paris (−4 °C au matin). La station la plus proche est loin : un ordre d'idée. <a class="srca" href="#">source ↗</a></p></section>
+          <section><h4>🌙 La lune</h4><p>Premier croissant, 14 % éclairée.</p></section>
+          <section><h4>✝️ Le saint du jour</h4><p>Saint Thomas, apôtre. <i>« À la Saint-Thomas, les jours sont au plus bas. »</i> <a class="srca" href="#">Wikipédia ↗</a></p></section>
+          <section><h4>🗞 Ce jour-là</h4><p>Le Consulat ; Bonaparte est Premier consul à vie depuis août. <a class="srca" href="#">Wikipédia ↗</a></p></section>
+          <section><h4>🥖 Le prix du pain</h4><p>≈ 0,30 F le kilo : un journalier gagnait de quoi en acheter 4 kg par jour. <a class="srca" href="#">source ↗</a></p></section>
+          <section><h4>⛪ Jour chômé ?</h4><p>Non : jour ouvrable (depuis 1802, seules Noël, l'Ascension, l'Assomption et la Toussaint restent chômées en semaine).</p></section>
+          <section><h4>🎂 Dans la famille</h4><p>Son père, Pierre MAZAUD, avait 23 ans ; son grand-père Jean, 48 ans.</p></section>
+        </div>
+      </div>
+      <article class="card tool">
+        <div class="card-head"><h3><span class="ico">📰</span>Faire le bulletin</h3><span class="status half">à moitié</span></div>
+        <div class="card-body">
+          <div class="chips"><span class="pchip">👤 Louis MAZAUD <small>né le 21 déc. 1802</small></span><span class="segmented sm" data-seg><button aria-pressed="true" type="button">Naissance</button><button aria-pressed="false" type="button">Mariage</button><button aria-pressed="false" type="button">Autre date…</button></span></div>
+          <details class="perso" open><summary>⚙️ Personnaliser</summary>
+            <details class="pgrp" name="p73" open><summary>🧩 Les rubriques</summary><div class="row"><span class="ui-listbar-chip">☀️ jour</span><span class="ui-listbar-chip">🌦 temps</span><span class="ui-listbar-chip">🌙 lune</span><span class="ui-listbar-chip">✝️ saint</span><span class="ui-listbar-chip">🗞 ce jour-là</span><span class="ui-listbar-chip">🥖 pain</span><span class="ui-listbar-chip">⛪ chômé</span><span class="ui-listbar-chip">🎂 famille</span><span class="ui-listbar-chip off">🚲 sport</span></div></details>
+            <details class="pgrp" name="p73"><summary>🎨 Style</summary><div class="row"><span class="segmented sm" data-seg><button aria-pressed="true" type="button">Journal</button><button aria-pressed="false" type="button">Carte</button><button aria-pressed="false" type="button">Sobre</button></span></div></details>
+            <details class="pgrp" name="p73"><summary>📅 Calendrier</summary><div class="row"><label class="ui-toggle"><input type="checkbox" checked><i></i>Date républicaine entre 1793 et 1805</label></div></details>
+          </details>
+          <div class="acts"><div class="left"><button class="button small" type="button">🖨 Imprimer</button><button class="button small secondary" type="button">📎 Garder dans les médias</button></div><div class="left"><button class="ib" title="Mettre dans un panier">🧺</button></div></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ═══════════ 5 · Horloge ═══════════ -->
+  <section class="sec" id="s5" aria-labelledby="s5h">
+    <div class="sec-h"><span class="eyebrow">5 · Calcul</span><h2 id="s5h">🕰 L'horloge de sa vie</h2>
+      <p>Toute la vie ramenée à une journée : né à minuit, mort à minuit. Sur la fiche (bloc 🧺 « Sa vie de tous les jours ») et dans les Trésors (image à garder 📎). Rien pour une personne vivante.</p></div>
+    <div class="two">
+      <article class="card tool">
+        <div class="card-head"><h3><span class="ico">🕰</span>Si la vie de Jean MAZAUD tenait en un jour</h3><span class="status new">nouveau</span></div>
+        <div class="card-body">
+          <p class="lead">Jean MAZAUD (1852–1921, 69 ans) s'est marié à <b>8 h 21</b>, son premier enfant est né à <b>9 h 07</b>, et il est parti pour Tulle à <b>12 h 10</b>. <small>1 heure = 2 ans 10 mois de sa vie.</small></p>
+          <svg class="viz" viewBox="0 0 440 300" role="img" aria-label="Cadran de 24 heures avec les événements de sa vie" data-clock></svg>
+          <details class="perso"><summary>⚙️ Personnaliser</summary>
+            <details class="pgrp" name="p75" open><summary>🕛 Cadran</summary><div class="row"><span class="segmented sm" data-seg><button aria-pressed="true" type="button">24 h</button><button aria-pressed="false" type="button">12 h</button><button aria-pressed="false" type="button">Une année</button></span></div></details>
+            <details class="pgrp" name="p75"><summary>📌 Événements</summary><div class="row"><label class="ui-toggle"><input type="checkbox" checked><i></i>Ceux de sa vie</label><label class="ui-toggle"><input type="checkbox"><i></i>Les grands événements du monde</label></div></details>
+          </details>
+          <div class="acts"><div class="src-line">Calculé sur sa fiche</div><div class="left"><button class="ib" title="Mettre dans un panier">🧺</button><button class="ib" title="Garder l'image dans les médias">📎</button></div></div>
+        </div>
+      </article>
+      <ul class="decis" style="grid-template-columns:1fr">
+        <li class="card"><b>Pourquoi un jour ?</b><p>On comprend tout de suite : « marié à 8 h du matin », c'est jeune ; « mort à 15 h », c'est tôt. Une année (« né le 1ᵉʳ janvier ») est aussi proposée dans ⚙️.</p></li>
+        <li class="card"><b>Avec une seule date</b><p>Sans date de décès, pas d'horloge : la carte dit « il faut la date de sa mort » et propose de la chercher.</p></li>
+        <li class="card"><b>À comparer</b><p>« Comparer avec… » (une autre personne) pose deux aiguilles sur le même cadran — rangé dans ⚙️, pas en bouton.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══════════ 6 · Âge à chaque événement ═══════════ -->
+  <section class="sec" id="s6" aria-labelledby="s6h">
+    <div class="sec-h"><span class="eyebrow">6 · Existe en phrase (« 🌍 Le monde autour ») · vue compacte proposée</span><h2 id="s6h">🎂 Son âge à chaque grand événement</h2>
+      <p>La règle des âges : une ligne par événement, l'âge en grand. Ceux de sa vie (en vert) mêlés à ceux du monde (en bleu). À imprimer pour un livre de famille.</p></div>
+    <article class="card tool" style="max-width:760px">
+      <div class="card-head"><h3><span class="ico">🎂</span>Jean MAZAUD avait…</h3><span class="status half">à moitié</span></div>
+      <div class="card-body">
+        <div class="ruler">
+          <div class="ev"><div class="age">6<small>ans</small></div><div>Napoléon III proclamé empereur</div><small class="muted">1852</small></div>
+          <div class="ev"><div class="age">18<small>ans</small></div><div>La guerre de 1870 commence <small class="muted">— il a l'âge du tirage au sort</small></div><small class="muted">1870</small></div>
+          <div class="ev fam"><div class="age">24<small>ans</small></div><div><b>Son mariage</b> avec Marie DURAND, à Seilhac</div><small class="muted">1876</small></div>
+          <div class="ev"><div class="age">28<small>ans</small></div><div>L'école devient gratuite (lois Ferry)</div><small class="muted">1881</small></div>
+          <div class="ev fam"><div class="age">35<small>ans</small></div><div><b>Il part pour Tulle</b>, cheminot</div><small class="muted">1887</small></div>
+          <div class="ev"><div class="age">62<small>ans</small></div><div>La Grande Guerre ; son fils part au front</div><small class="muted">1914</small></div>
+          <div class="ev fam"><div class="age">69<small>ans</small></div><div><b>Sa mort</b> à Tulle</div><small class="muted">1921</small></div>
+        </div>
+        <details class="perso"><summary>⚙️ Personnaliser</summary>
+          <details class="pgrp" name="p71" open><summary>🌍 Quels événements</summary><div class="row"><span class="ui-listbar-chip">guerres</span><span class="ui-listbar-chip">lois</span><span class="ui-listbar-chip">régimes</span><span class="ui-listbar-chip off">inventions</span><span class="ui-listbar-chip off">épidémies</span><span class="ui-listbar-chip">sa vie</span></div></details>
+          <details class="pgrp" name="p71"><summary>🖨 Pour imprimer</summary><div class="row"><label class="ui-toggle"><input type="checkbox"><i></i>Une colonne par personne (comparer deux vies)</label></div></details>
+        </details>
+        <div class="acts"><div class="src-line">Événements de « 🌍 Le monde autour », chacun avec sa source <a class="srca" href="#">↗</a></div><div class="left"><button class="ib" title="Mettre dans un panier">🧺</button><button class="ib" title="Garder l'image dans les médias">📎</button></div></div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ═══════════ 7 · Décisions ═══════════ -->
+  <section class="sec" id="s7" aria-labelledby="s7h">
+    <div class="sec-h"><span class="eyebrow">7 · À valider</span><h2 id="s7h">✓ Ce qu'il faut décider</h2></div>
+    <ul class="decis">
+      <li class="card"><b>Une page « 🌳 Ce que dit l'arbre »</b><p>Dans Listes (thème 🌳 Famille), plutôt que dix diagrammes de plus. Chaque carte ouvre le diagramme complet quand il existe.</p></li>
+      <li class="card"><b>Sur la fiche : une phrase, pas un bloc</b><p>« Il avait 4 ans quand son père est mort », « cousins au 3ᵉ degré : dispense » : une ligne dans les blocs existants (🌍, ⚖️, 👪), jamais un nouveau bloc par outil.</p></li>
+      <li class="card"><b>Le tact par défaut</b><p>Conceptions, posthumes, orphelins : des chiffres d'abord, les noms seulement dans « ▸ plus » ou ⚙️, jamais pour une famille vivante.</p></li>
+      <li class="card"><b>⚙️ Personnaliser : une partie ouverte à la fois</b><p>Chaque carte a au plus 3 parties. Chaque réglage a son « ↶ Comme avant ».</p></li>
+      <li class="card"><b>Rien ne sort de l'ordinateur</b><p>Les dix outils de l'arbre, l'horloge, la règle des âges et le bulletin sont calculés sur place. Seuls les liens ↗ ouvrent une page, sur un clic.</p></li>
+      <li class="card"><b>Ordre proposé</b><p>O1 les calculs de l'arbre → O2 règles et dates → O3 routes de poste (Zenodo) → O4 bulletin → O5 textes → O6-O8 packs (voir <code>docs/donnees-idees-lot-o.md</code>).</p></li>
+    </ul>
+  </section>
+</div>
+
+<div class="toast" data-toast hidden><span data-toastt></span><button type="button" data-toastx>OK</button></div>
+
+<script>
+const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+$$('[data-theme-set]').forEach(b => b.addEventListener('click', () => {
+  const v = b.dataset.themeSet; if (v === 'auto') document.documentElement.removeAttribute('data-theme'); else document.documentElement.dataset.theme = v;
+  $$('[data-theme-set]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+}));
+$$('[data-seg]').forEach(g => g.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; $$('button', g).forEach(x => x.setAttribute('aria-pressed', String(x === b))); }));
+/* une seule partie ouverte à la fois dans ⚙️ Personnaliser (même sans l'attribut name des navigateurs récents) */
+$$('details.pgrp').forEach(d => d.addEventListener('toggle', () => { if (!d.open) return; $$('details.pgrp', d.parentElement).forEach(o => { if (o !== d) o.open = false; }); }));
+$$('.ui-listbar-chip').forEach(c => c.addEventListener('click', () => c.classList.toggle('off')));
+let toastT = 0;
+const toast = m => { const t = $('[data-toast]'); $('[data-toastt]').textContent = m; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => { t.hidden = true; }, 4200); };
+$('[data-toastx]').addEventListener('click', () => { $('[data-toast]').hidden = true; });
+$$('.ib').forEach(b => b.addEventListener('click', () => toast(b.textContent.includes('🧺') ? 'Mis dans le panier « Ma recherche ». ↶ Annuler' : 'Image gardée dans les médias. ↶ Annuler')));
+$$('a[href="#"]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); toast('Dans l’app, le lien ↗ ouvre la source dans le navigateur.'); }));
+
+const NS = 'http://www.w3.org/2000/svg';
+const el = (tag, at = {}, txt) => { const e = document.createElementNS(NS, tag); for (const [k, v] of Object.entries(at)) e.setAttribute(k, v); if (txt != null) e.textContent = txt; return e; };
+
+/* 💒 mariages par mois */
+(() => { const s = $('[data-months]'); const n = [22, 6, 5, 18, 17, 21, 14, 9, 12, 20, 34, 9], clos = [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2]; const M = 'JFMAMJJASOND';
+  const max = Math.max(...n); s.append(el('rect', {class: 'zone', x: 36 + 2 * 33, y: 8, width: 66, height: 132})); s.append(el('rect', {class: 'zone', x: 36 + 11 * 33, y: 8, width: 33, height: 132}));
+  s.append(el('line', {class: 'axis', x1: 36, y1: 140, x2: 432, y2: 140}));
+  n.forEach((v, i) => { const h = 120 * v / max, x = 40 + i * 33; s.append(el('rect', {class: 'bar', x, y: 140 - h, width: 24, height: h})); if (clos[i]) { const hc = 120 * clos[i] / max; s.append(el('rect', {class: 'bar clos', x, y: 140 - hc, width: 24, height: hc})); }
+    s.append(el('text', {x: x + 12, y: 156, 'text-anchor': 'middle', 'font-size': 12, class: 'mut'}, M[i])); s.append(el('text', {x: x + 12, y: 136 - h, 'text-anchor': 'middle', 'font-size': 10}, v)); });
+  s.append(el('text', {x: 36 + 3 * 33, y: 22, 'text-anchor': 'middle', 'font-size': 11, style: 'fill:var(--orange)'}, 'Carême')); s.append(el('text', {x: 36 + 11.5 * 33, y: 22, 'text-anchor': 'middle', 'font-size': 11}, 'Avent')); })();
+
+/* 🔗 chemin de parenté */
+(() => { const s = $('[data-kin]'); const box = (x, y, t, sub, hl) => { s.append(el('rect', {x: x - 62, y: y - 15, width: 124, height: 30, fill: hl ? 'var(--ui-soft)' : 'var(--card-bg)', stroke: hl ? 'var(--ui-blue)' : 'var(--line-color)', 'stroke-width': 1.5})); s.append(el('text', {x, y: y - 1, 'text-anchor': 'middle', 'font-size': 11, 'font-weight': 700}, t)); s.append(el('text', {x, y: y + 11, 'text-anchor': 'middle', 'font-size': 9.5, class: 'mut'}, sub)); };
+  const ln = (a, b, c, d) => s.append(el('line', {x1: a, y1: b, x2: c, y2: d, stroke: 'var(--muted)', 'stroke-width': 1.5}));
+  ln(220, 30, 110, 62); ln(220, 30, 330, 62); ln(110, 62, 80, 95); ln(330, 62, 360, 95); ln(80, 95, 80, 128); ln(360, 95, 360, 128);
+  box(220, 22, 'Léonard MAZAUD', 'ancêtre commun · 1690', true); box(110, 64, 'Pierre', '1° · fils', false); box(330, 64, 'Jeanne', '1° · fille', false); box(80, 98, 'Antoine', '2°', false); box(360, 98, 'Catherine', '2°', false); box(80, 132, 'Jean MAZAUD', '3°', true); box(360, 132, 'Marie DURAND', '3°', true); })();
+
+/* 🤰 conceptions par époque */
+(() => { const s = $('[data-concept]'); const d = [['avant 1750', 6], ['1750-1800', 11], ['1800-1850', 14], ['1850-1900', 19], ['après 1900', 22]];
+  d.forEach(([l, v], i) => { const y = 8 + i * 20; s.append(el('text', {x: 0, y: y + 11, 'font-size': 11, class: 'mut'}, l)); s.append(el('rect', {class: 'bar', x: 80, y, width: v * 14, height: 13})); s.append(el('text', {x: 86 + v * 14, y: y + 11, 'font-size': 11}, v + ' %')); }); })();
+
+/* 💍 rayon par siècle */
+(() => { const s = $('[data-radius]'); const d = [['XVIIᵉ', 6], ['XVIIIᵉ', 8], ['XIXᵉ', 15], ['XXᵉ', 42]]; const max = 50;
+  s.append(el('line', {class: 'axis', x1: 60, y1: 150, x2: 430, y2: 150}));
+  d.forEach(([l, v], i) => { const h = 125 * v / max, x = 90 + i * 85; s.append(el('rect', {class: 'bar', x, y: 150 - h, width: 46, height: h})); s.append(el('text', {x: x + 23, y: 166, 'text-anchor': 'middle', 'font-size': 12, class: 'mut'}, l)); s.append(el('text', {x: x + 23, y: 145 - h, 'text-anchor': 'middle', 'font-size': 12, 'font-weight': 700}, v + ' km')); });
+  s.append(el('text', {x: 2, y: 20, 'font-size': 11, class: 'mut'}, 'médiane')); })();
+
+/* 💔 délais */
+(() => { const s = $('[data-remar]'); s.append(el('line', {class: 'axis', x1: 70, y1: 75, x2: 430, y2: 75})); [0, 1, 2, 3, 4, 5].forEach(y => s.append(el('text', {x: 70 + y * 70, y: 88, 'font-size': 10, class: 'mut', 'text-anchor': 'middle'}, y + ' an' + (y > 1 ? 's' : ''))));
+  const hom = [0.3, 0.5, 0.7, 0.8, 0.9, 0.9, 1.1, 1.3, 1.6, 2.2, 3.1], fem = [0.8, 1.2, 1.9, 2.3, 2.5, 2.6, 3.0, 3.8, 4.6];
+  s.append(el('text', {x: 0, y: 27, 'font-size': 11, class: 'mut'}, 'hommes')); s.append(el('text', {x: 0, y: 57, 'font-size': 11, class: 'mut'}, 'femmes'));
+  hom.forEach((v, i) => s.append(el('circle', {cx: 70 + v * 70, cy: 23 + (i % 2) * 4, r: 5, fill: 'var(--blue)', opacity: .8}))); fem.forEach((v, i) => s.append(el('circle', {cx: 70 + v * 70, cy: 53 + (i % 2) * 4, r: 5, fill: 'var(--orange)', opacity: .8}))); })();
+
+/* 📅 l'année du maçon */
+(() => { const s = $('[data-year]'); const M = 'JFMAMJJASOND'; for (let i = 0; i < 12; i++) { const away = i >= 2 && i <= 10; s.append(el('rect', {x: 10 + i * 35, y: 14, width: 35, height: 34, fill: away ? 'var(--blue)' : 'var(--yel-soft)'})); s.append(el('text', {x: 26 + i * 35, y: 64, 'text-anchor': 'middle', 'font-size': 12, class: 'mut'}, M[i])); }
+  s.append(el('text', {x: 10 + 2 * 35 + 5, y: 36, 'font-size': 12, style: 'fill:#fff', 'font-weight': 700}, 'au chantier (Paris, Lyon)')); s.append(el('text', {x: 14, y: 84, 'font-size': 11, class: 'mut'}, 'au village : l’hiver — les naissances tombent d’octobre à janvier'));})();
+
+/* 🕰 horloge */
+(() => { const s = $('[data-clock]'); const cx = 150, cy = 150, r = 120; s.append(el('circle', {cx, cy, r, fill: 'var(--card-head-bg)', stroke: 'var(--ink)', 'stroke-width': 2}));
+  for (let h = 0; h < 24; h++) { const a = (h / 24) * 2 * Math.PI - Math.PI / 2, r1 = h % 6 ? r - 6 : r - 12; s.append(el('line', {x1: cx + Math.cos(a) * r1, y1: cy + Math.sin(a) * r1, x2: cx + Math.cos(a) * r, y2: cy + Math.sin(a) * r, stroke: 'var(--ink)', 'stroke-width': h % 6 ? 1 : 2})); if (h % 6 === 0) s.append(el('text', {x: cx + Math.cos(a) * (r - 26), y: cy + Math.sin(a) * (r - 26) + 4, 'text-anchor': 'middle', 'font-size': 12, 'font-weight': 700}, h + ' h')); }
+  const life = 69, ev = [[24, 'mariage', 'var(--green)'], [26.2, '1ᵉʳ enfant', 'var(--green)'], [35, 'part pour Tulle', 'var(--blue)'], [62, 'la Grande Guerre', 'var(--orange)']];
+  s.append(el('path', {d: `M${cx} ${cy - r + 18} A ${r - 18} ${r - 18} 0 1 1 ${cx - 0.1} ${cy - r + 18}`, fill: 'none', stroke: 'var(--blue-soft)', 'stroke-width': 10}));
+  ev.forEach(([age, t, c], i) => { const a = (age / life) * 2 * Math.PI - Math.PI / 2; s.append(el('circle', {cx: cx + Math.cos(a) * (r - 18), cy: cy + Math.sin(a) * (r - 18), r: 6, fill: c, stroke: 'var(--card-bg)', 'stroke-width': 2}));
+    const hh = age / life * 24, lab = `${Math.floor(hh)} h ${String(Math.round((hh % 1) * 60)).padStart(2, '0')} · ${t}`; s.append(el('circle', {cx: 300, cy: 70 + i * 34, r: 6, fill: c})); s.append(el('text', {x: 312, y: 74 + i * 34, 'font-size': 12}, lab)); });
+  s.append(el('line', {x1: cx, y1: cy, x2: cx, y2: cy - r + 30, stroke: 'var(--red)', 'stroke-width': 3, 'stroke-linecap': 'round'})); s.append(el('circle', {cx, cy, r: 5, fill: 'var(--red)'}));
+  s.append(el('text', {x: 300, y: 222, 'font-size': 11, class: 'mut'}, 'minuit : naissance (1852)')); s.append(el('text', {x: 300, y: 238, 'font-size': 11, class: 'mut'}, 'minuit suivant : mort (1921)')); })();
+
+/* 🗺 les cartes (contours simplifiés, faits à la main pour la maquette) */
+const FR = [[2.5, 51.1], [4.2, 50.0], [5.8, 49.5], [8.2, 49.0], [7.6, 47.6], [6.9, 47.4], [6.1, 46.3], [7.0, 45.9], [6.6, 45.1], [7.0, 44.2], [7.5, 43.8], [6.2, 43.1], [4.6, 43.4], [3.1, 43.1], [3.2, 42.4], [1.7, 42.5], [-1.8, 43.4], [-1.2, 44.6], [-1.2, 46.2], [-2.2, 47.1], [-4.4, 47.9], [-4.7, 48.5], [-3.0, 48.8], [-1.6, 48.6], [-1.9, 49.7], [-1.1, 49.4], [0.2, 49.7], [1.5, 50.2]];
+const P = ([lon, lat]) => [(lon + 5.2) * 58 + 10, (51.4 - lat) * 80 + 10];
+const pts = a => a.map(p => P(p).map(v => v.toFixed(1)).join(',')).join(' ');
+const C = {Paris: [2.35, 48.86], Tulle: [1.77, 45.27], Seilhac: [1.71, 45.37], Limoges: [1.26, 45.83], 'Guéret': [1.87, 46.17], Lyon: [4.83, 45.76], 'Chambéry': [5.92, 45.57], 'Béziers': [3.2, 43.34], Ambert: [3.74, 45.55], Nantes: [-1.55, 47.22], Brive: [1.53, 45.16], Clermont: [3.08, 45.78], Bordeaux: [-0.58, 44.84], Aurillac: [2.44, 44.93]};
+const OFF = {Limoges: [-92, 6], 'Guéret': [10, -10], Seilhac: [-78, 22], Aurillac: [-82, 18], Lyon: [12, -10], 'Chambéry': [12, 18], Paris: [12, -10]};
+const town = (s, n, pin) => { const [x, y] = P(C[n]); const [dx, dy] = OFF[n] || [10, -8]; s.append(el('circle', {cx: x, cy: y, r: pin ? 9 : 5, class: pin ? 'pin' : 'dot'})); s.append(el('text', {x: x + dx, y: y + dy, 'font-size': 22, 'font-weight': pin ? 800 : 600}, n)); };
+const curve = (s, a, b, cls, bend = 0.18) => { const [x1, y1] = P(C[a]), [x2, y2] = P(C[b]); const mx = (x1 + x2) / 2 - (y2 - y1) * bend, my = (y1 + y2) / 2 + (x2 - x1) * bend; s.append(el('path', {d: `M${x1} ${y1} Q${mx} ${my} ${x2} ${y2}`, class: cls, 'marker-end': `url(#${s.dataset.arr})`})); };
+$$('[data-map]').forEach(s => {
+  const id = 'clip' + Math.random().toString(36).slice(2); const defs = el('defs'); const cp = el('clipPath', {id}); cp.append(el('polygon', {points: pts(FR)})); defs.append(cp);
+  s.dataset.arr = 'a' + id; const mk = el('marker', {id: s.dataset.arr, viewBox: '0 0 10 10', refX: 8, refY: 5, markerWidth: 5, markerHeight: 5, orient: 'auto-start-reverse'}); mk.append(el('path', {d: 'M0 0L10 5L0 10z', fill: 'var(--ink)'})); defs.append(mk); s.append(defs);
+  s.append(el('polygon', {points: pts(FR), class: 'land'}));
+  const kind = s.dataset.map;
+  if (kind === 'coutume') {
+    const g = el('g', {'clip-path': `url(#${id})`});
+    const south = [[-3, 46.16], [-1.15, 46.16], [0.3, 45.95], [1.4, 46.35], [2.3, 46.4], [3.5, 46.35], [4.8, 46.3], [6.14, 46.2], [9, 46.2], [9, 41], [-3, 41]];
+    g.append(el('polygon', {points: pts(south), class: 'ecrit'}));
+    g.append(el('polygon', {points: pts([[2.3, 46.4], [3.5, 46.35], [3.9, 45.4], [3.2, 44.9], [2.4, 45.2], [2.6, 45.9]]), class: 'mixte'}));
+    s.append(g); s.append(el('polygon', {points: pts(FR), fill: 'none', stroke: 'var(--ink)', 'stroke-width': 1.6}));
+    s.append(el('polyline', {points: pts([[-1.15, 46.16], [0.3, 45.95], [1.4, 46.35], [2.3, 46.4], [3.5, 46.35], [4.8, 46.3], [6.14, 46.2]]), class: 'dash'}));
+    s.append(el('text', {x: 250, y: 300, 'font-size': 30, 'font-weight': 800, class: 'mut'}, 'coutume')); s.append(el('text', {x: 220, y: 620, 'font-size': 30, 'font-weight': 800, class: 'mut'}, 'droit écrit'));
+    s.append(el('text', {x: 20, y: 440, 'font-size': 18, style: 'fill:var(--orange)'}, 'La Rochelle')); s.append(el('text', {x: 660, y: 440, 'font-size': 18, style: 'fill:var(--orange)'}, 'Genève'));
+    town(s, 'Seilhac', true); town(s, 'Paris');
+  } else if (kind === 'gravity') {
+    const g = [[1.6, 45.25], [1.75, 45.6], [1.9, 45.95], [2.0, 46.55], [2.1, 47.3], [2.3, 48.05], [2.35, 48.7]].map(P);
+    s.append(el('polyline', {points: g.map(p => p.join(',')).join(' '), fill: 'none', stroke: 'var(--blue)', 'stroke-width': 3, 'stroke-dasharray': '6 4'}));
+    g.forEach(([x, y], i) => { s.append(el('circle', {cx: x, cy: y, r: 11, fill: `color-mix(in srgb, var(--blue) ${30 + i * 11}%, transparent)`, stroke: 'var(--card-bg)', 'stroke-width': 2})); s.append(el('text', {x: x + 16, y: y + 7, 'font-size': 22, 'font-weight': 700}, ['VII', 'VI', 'V', 'IV', 'III', 'II', 'I'][i])); });
+    s.append(el('text', {x: 40, y: 700, 'font-size': 17, class: 'mut'}, 'VII = génération la plus ancienne · I = la tienne'));
+  } else if (kind === 'saison') {
+    curve(s, 'Guéret', 'Paris', 'route'); curve(s, 'Limoges', 'Lyon', 'route', -0.12); curve(s, 'Chambéry', 'Paris', 'route2', 0.12); curve(s, 'Aurillac', 'Béziers', 'route3', -0.15); curve(s, 'Clermont', 'Béziers', 'route3', 0.15);
+    const [ax, ay] = P(C.Ambert); s.append(el('circle', {cx: ax, cy: ay, r: 60, class: 'ring'})); s.append(el('text', {x: ax + 30, y: ay + 78, 'font-size': 16, class: 'mut'}, 'scieurs de long'));
+    ['Paris', 'Lyon', 'Guéret', 'Limoges', 'Chambéry', 'Béziers', 'Aurillac'].forEach(n => town(s, n)); town(s, 'Seilhac', true);
+  }
+});
+</script>
+</body>
+</html>

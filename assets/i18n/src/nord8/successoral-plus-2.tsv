@@ -425,7 +425,7 @@ Les pistes sont montrées à partir de ce score (sur 100). Plus haut : moins de 
 Après chaque nouvel import du fichier INSEE : vérifier les dossiers en cours tout seul (jamais de changement sans ton clic). ¦ INSEE dosyasının her yeni içe aktarımından sonra: süren dosyaları kendiliğinden kontrol et (senin tıklaman olmadan asla değişiklik yok).
 Automatique, dans la cloche ¦ Otomatik, zilde
 Seulement à la main ¦ Yalnızca elle
-📋 Questionnaire ¦ 📋 Anket
+📝 Questionnaire ¦ 📝 Anket
 Ce que l’héritier te renvoie après avoir rempli le questionnaire. ¦ Mirasçının doldurduktan sonra sana geri gönderdiği.
 Un petit fichier .json ¦ Küçük bir .json dosyası
 La page .html remplie ¦ Doldurulmuş .html sayfası

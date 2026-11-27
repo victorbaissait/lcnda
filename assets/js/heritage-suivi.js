@@ -741,6 +741,13 @@
     }
     function exportMenu(anchor, getScope, D) {
         const name = 'Suivi des animaux';
+        if (UI().exportRows) { // ⤓ la fenêtre d'export commune : les observations (CSV, tableur, Excel), et les trajets (Movebank, GPX, KML)
+            const tracks = async () => { const t = await tracksOf(D, getScope().animals); if (!t.length) throw new Error('Aucun point placé à exporter.'); return t; };
+            return UI().exportRows({title: `${name} — observations`, name: `${name} — observations`, rows: () => obsRows(D, getScope().obs), extra: [
+                {id: 'movebank', label: '📡 Movebank', hint: 'CSV des trajets', run: async () => download(`${name} — movebank.csv`, C().toMovebank(await tracks()), 'text/csv;charset=utf-8')},
+                {id: 'gpx', label: '📍 GPX', hint: 'trajets', run: async () => download(`${name}.gpx`, C().toGPX(await tracks()), 'application/gpx+xml')},
+                {id: 'kml', label: '📍 KML', hint: 'trajets', run: async () => download(`${name}.kml`, C().toKML(await tracks()), 'application/vnd.google-earth.kml+xml')}]});
+        }
         UI().menuAt(anchor, [
             {icon: '📄', label: 'CSV (observations)', run: () => { const s = getScope(); download(`${name} — observations.csv`, C().toCSV(obsRows(D, s.obs)), 'text/csv;charset=utf-8'); }},
             {icon: '📡', label: 'Movebank (CSV)', run: async () => { const s = getScope(), t = await tracksOf(D, s.animals); if (!t.length) return toast('Aucun point placé à exporter.'); download(`${name} — movebank.csv`, C().toMovebank(t), 'text/csv;charset=utf-8'); }},

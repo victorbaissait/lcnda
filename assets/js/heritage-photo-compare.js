@@ -572,5 +572,6 @@
         open: (id, again) => open({id, onClose: again}),
         create: again => open({onClose: again}),
         rename: (id, name) => post('photo_comparison_write', {op: 'rename', id, title: name}),
-        remove: id => post('photo_comparison_write', {op: 'delete', id}), createLabel: '＋ Nouvelle comparaison'});
+        remove: async id => { const r = await post('photo_comparison_write', {op: 'delete', id}), tok = (r?.result || r)?.undo; return tok ? {undo: async () => { const x = await post('restore_project', {undo: tok}); return x?.result || x; }} : null; }, undo: true, // ↶ Annuler (lib/projets_annuler.php)
+        createLabel: '＋ Nouvelle comparaison'});
 })();

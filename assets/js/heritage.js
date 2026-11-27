@@ -48,15 +48,8 @@
 
     /* ─── Petits outils partagés ─────────────────────────────────────── */
 
-    // Liens vers une fiche personne (délégué : marche partout, même dans les widgets et les fenêtres)
-    document.addEventListener('click', event => {
-        const b = event.target.closest?.('[data-h-person]');
-        if (!b) return;
-        event.preventDefault();
-        document.querySelectorAll('dialog.h-modal[open]').forEach(d => d.close());
-        S().currentPersonId = Number(b.dataset.hPerson);
-        A().setModule('personnes');
-    });
+    // Liens vers une fiche personne (data-h-person) : écoutés une seule fois pour toute l'app, comme data-open-person (app.js,
+    // « Ouvrir une fiche : un seul geste partout ») : clic = la fiche, ⌘ / Ctrl + clic = l'autre moitié, clic droit = le menu de la personne
     // Ouvrir une liste (Listes → …)
     function openList(type) { S().listType = type; S().precisePlaceKey = ''; A().setModule('listes'); }
     document.addEventListener('click', event => {
@@ -1359,7 +1352,7 @@
                 ${contact.length ? `<div class="h-stop-x"><span title="Contact">☎</span> ${x.contact_name ? esc(x.contact_name) : ''}${contact.slice(x.contact_name ? 1 : 0).length ? ' · ' + contact.slice(x.contact_name ? 1 : 0).join(' · ') : ''}</div>` : ''}
                 ${x.booking ? `<div class="h-stop-x"><span title="Réservation">📅</span> ${nl(x.booking)} ${x.booking_done ? '<span class="collection-kind">réservé</span>' : '<span class="collection-kind is-warn">à réserver</span>'}</div>` : ''}
                 ${line('💶', 'Coût', x.cost)}${line('🪪', 'Documents à emporter', x.documents)}${line('🧰', 'Matériel', x.equipment)}${line('📸', 'Photographie', x.photo_rules)}${line('🗂️', 'Cotes à consulter', x.references)}
-                ${x.website ? `<div class="h-stop-x"><span>🔗</span> <a href="${esc(x.website)}" target="_blank" rel="noopener noreferrer">${esc(x.website.replace(/^https?:\/\//, '').slice(0, 60))}</a></div>` : ''}
+                ${x.website ? `<div class="h-stop-x"><span>🔗</span> ${window.LCNDA_UI.extLink(x.website, '')}</div>` : ''}
                 ${who.length ? `<div class="h-stop-x"><span title="Personnes recherchées">👤</span> ${who.map(p => personLink(p.id, A().personName(p))).join(', ')}</div>` : ''}
                 ${line('🎯', 'Ce que je cherche', x.goals)}
                 ${(x.checklist || []).length ? `<ul class="h-stop-checklist">${x.checklist.map((c, i) => `<li><label class="checkbox-line"><input type="checkbox" data-h-stop-ck="${s.id}" data-i="${i}" ${c.done ? 'checked' : ''}> ${esc(c.text)}</label></li>`).join('')}</ul>` : ''}
@@ -1750,7 +1743,7 @@
             run(s.criteria, s.id);
         }));
         ws.querySelectorAll('[data-h-saved-seen]').forEach(b => b.addEventListener('click', async () => { await api('mark_saved_search_seen', {}, {method: 'POST', body: {id: b.dataset.hSavedSeen}}); notified = {}; ext.research(++S().workspaceToken); }));
-        ws.querySelectorAll('[data-h-saved-delete]').forEach(b => b.addEventListener('click', async () => { if (!await A().confirmBox('', {title: 'Supprimer cette recherche enregistrée ?', okLabel: 'Supprimer la recherche'})) return; await api('delete_saved_search', {}, {method: 'POST', body: {id: b.dataset.hSavedDelete}}); ext.research(++S().workspaceToken); }));
+        ws.querySelectorAll('[data-h-saved-delete]').forEach(b => b.addEventListener('click', () => A().deleteWithUndo({action: 'delete_saved_search', body: {id: b.dataset.hSavedDelete}, type: 'saved_search', id: b.dataset.hSavedDelete, message: i18n('Recherche enregistrée supprimée'), after: () => ext.research(++S().workspaceToken)}))); // H7 : ↶ Annuler au lieu de demander
         if (st.hSearch.id || Object.values(st.hSearch.criteria || {}).some(Boolean)) run(st.hSearch.criteria, st.hSearch.id);
     };
     // Nouvelles fiches qui répondent à une recherche enregistrée : signalées après un import, une fusion, une nouvelle fiche…
@@ -1815,7 +1808,7 @@
                 ${hasPack ? `<details class="h-prenoms-manual" ${!meta?.pack && manual ? 'open' : ''}><summary>${esc(i18n('Ou importer un fichier de l’INSEE (France entière, sans Internet)'))}</summary>${manualBlock}</details>` : manualBlock}
                 <label class="h-inline">Prénoms donnés à partir de <select id="h-names-min">${[1900, 1920, 1945, 1970].map(y => `<option value="${y}" ${minYear === y ? 'selected' : ''}>${y}</option>`).join('')}</select></label></section>
             ${rows.length ? `<div class="data-table-wrap"><table class="data-table h-names-table"><thead><tr><th>Prénom</th><th>Dans la famille</th><th>${meta?.pack ? esc(`${meta.zone_name} (${from}–${to})`) : i18n('En France ({a}–{b})', {a: String(from), b: String(to)})}</th><th>Comparaison</th></tr></thead><tbody>${rows.map(r => `<tr><td><strong>${esc(r.name)}</strong> <small>${r.sex === 2 ? '♀' : r.sex === 1 ? '♂' : ''}</small></td><td>${r.people.slice(0, 6).map(p => `${personLink(p.id, p.name)} <small>${p.year}</small>`).join('<br>')}${r.people.length > 6 ? `<span data-h-names-more hidden><br>${r.people.slice(6).map(p => `${personLink(p.id, p.name)} <small>${p.year}</small>`).join('<br>')}</span><br><button type="button" class="link-button" data-h-names-toggle data-more="${r.people.length - 6}" aria-expanded="false">+ ${r.people.length - 6} personne${r.people.length - 6 > 1 ? 's' : ''}</button>` : ''}</td><td>${meta && r.peak_year ? sparkline(r.series, r.family_years, from, to, r.peak_year) : '—'}</td><td>${phrase(r)}</td></tr>`).join('')}</tbody></table></div><p class="muted">${meta?.pack ? esc(i18n('Courbe : nombre d’enfants comptés chaque année ({z}) ; trait pointillé : l’année du pic ; points orange : les années où ta famille l’a donné.', {z: meta.zone_name})) : 'Courbe : nombre de naissances en France chaque année ; trait pointillé : l’année du pic ; points orange : les années où ta famille l’a donné.'}</p>` : empty(i18n('Aucune naissance datée depuis {year} dans ta base.', {year: String(minYear)}))}</section>`;
-        // ⤓ Installer / 🗑 Supprimer le pack (assets/js/heritage-prenoms-pays.js) : la page se redessine quand il change
+        // 📦 Installer / 🗑 Supprimer le pack (assets/js/heritage-prenoms-pays.js) : la page se redessine quand il change
         const packHost = A().$('[data-h-prenoms-pack]');
         if (packHost) ext.prenomsPays.panel(packHost, () => { if (token === st.workspaceToken) ext.graphStats.firstnames_france(++st.workspaceToken); });
         // « ＋ 12 personnes » : déplie (ou replie) le reste de la liste

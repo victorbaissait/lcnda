@@ -512,5 +512,5 @@
         open: (id, again) => ext.openVectorEditor?.({id, onSaved: again, onClose: again}),
         create: again => openMaker(again),
         rename: (id, name) => api('rename_vector_doc', {}, {method: 'POST', body: {id, name}}),
-        remove: id => api('delete_vector_doc', {}, {method: 'POST', body: {id}}), createLabel: '＋ Nouvel arbre décoratif'});
+        remove: id => (ext.projectDelUndo ? ext.projectDelUndo('delete_vector_doc')(id) : api('delete_vector_doc', {}, {method: 'POST', body: {id}})), undo: true, createLabel: '＋ Nouvel arbre décoratif'});
 })();

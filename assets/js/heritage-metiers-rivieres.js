@@ -42,7 +42,7 @@
     const num = (n, d = 1) => String(Math.round(n * 10 ** d) / 10 ** d).replace('.', ',');
     const fmtKm = km => (km == null ? '' : km < 1 ? T('{n} m', {n: Math.max(50, Math.round(km * 1000 / 50) * 50)}) : T('{n} km', {n: num(km)}));
     const fmtDate = ts => { try { return new Date(ts * 1000).toLocaleDateString('fr-FR'); } catch (_) { return ''; } };
-    const link = (url, label) => (url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : esc(label));
+    const link = (url, label) => (url ? `${window.LCNDA_UI.extLink(url, label)}` : esc(label));
     const emptyLine = (t, icon = 'ℹ️') => (A().emptyState ? A().emptyState({text: t, icon, size: 'small'}) : `<p class="muted">${esc(t)}</p>`);
     const wait = t => (UI().spinner ? UI().spinner(t) : `<p class="muted">${esc(t)}</p>`);
     const row = (icon, html, src, extra = '') => `<div class="hist-row mr-row"><span class="hist-i" aria-hidden="true">${icon}</span><div class="hist-t"><p>${html}</p>${extra}${src ? `<small class="hist-src">${esc(T('Source :'))} ${src}</small>` : ''}</div></div>`;

@@ -3,8 +3,8 @@
  *  · fiche : une ligne par piste, seulement s'il y a quelque chose à dire :
  *    « 📇 En 1855, un MAZAUD, boulanger, 12 rue de la Roquette (annuaire Didot-Bottin) ↗ source », « ✓ C'est lui » (source +
  *    événement « Lieu de résidence », ↶ Annuler), « ✗ Pas lui » (↶), « ▸ plus » (pourquoi, les années, la page numérisée) ;
- *    ou une offre discrète « ⤓ Installer les annuaires » (✕ : plus proposée) pour qui a vécu à Paris.
- *  · Réglages → 📇 Annuaires et brevets : le pack (⤓ Installer par tranches, pause, reprise, vérifié ; 🗑 Supprimer, ↶),
+ *    ou une offre discrète « 📦 Installer les annuaires » (✕ : plus proposée) pour qui a vécu à Paris.
+ *  · Réglages → 📇 Annuaires et brevets : le pack (📦 Installer par tranches, pause, reprise, vérifié ; 🗑 Supprimer, ↶),
  *    l'interrupteur du bloc de la fiche, « À propos des données ».
  *  · 💡 Brevets (INPI, 1791–1901) : PAS de données dans l'app (le fichier ouvert de l'INPI n'est envoyé que par courriel,
  *    sur demande) : « Où chercher » propose la base en ligne, avec le nom à coller.
@@ -58,7 +58,7 @@
     if (!register()) document.addEventListener('DOMContentLoaded', register);
     function openSettings() { const st = A().state; if (!st) return; st.maintenanceTab = TAB[0]; A().persistUiState?.(); A().setModule?.('maintenance'); }
 
-    /* ═════════ ⤓ Installer le pack ═════════ */
+    /* ═════════ 📦 Installer le pack ═════════ */
     const DL = {online: undefined, err: '', run: null, paused: null};
     const pct = (a, b) => (b ? Math.floor(a / b * 100) : 0);
     const listeners = new Set();
@@ -112,7 +112,7 @@
         if (p) return `<span class="ba-prog"><span class="ba-bar"><i style="width:${pct(p.received, p.size)}%"></i></span> <small>${esc(i18n('En pause : {p} %', {p: String(pct(p.received, p.size))}))}</small></span> <button type="button" class="button small" data-ba-install>▶ ${esc(i18n('Reprendre'))}</button> <button type="button" class="button small secondary" data-ba-cancel>✕ ${esc(i18n('Abandonner'))}</button>`;
         if (DL.online === undefined) return `${window.LCNDA_UI.spinner(i18n('Recherche des données en ligne…'), {inline: true})}`;
         if (!DL.online) return `<small class="muted" title="${esc(DL.err)}">${esc(DL.err ? i18n('Pas de connexion aux données en ligne.') : i18n('Pas encore en ligne.'))}</small>`;
-        return `<button type="button" class="button small" data-ba-install>⤓ ${esc(i18n('Installer ({s})', {s: fmtSize(DL.online.size)}))}</button>`;
+        return `<button type="button" class="button small" data-ba-install>📦 ${esc(i18n('Installer ({s})', {s: fmtSize(DL.online.size)}))}</button>`;
     }
 
     /* ═════════ La fiche : « 📇 En 1855, un MAZAUD, boulanger… » ═════════ */
@@ -130,7 +130,7 @@
         const many = g.count > 2 ? ` ${i18n('({n} annuaires)', {n: String(g.count)})}` : '';
         return `${when}${many}, ${who}${r.act ? `, ${r.act}` : ''}${r.address ? `, ${r.address}` : ''} (${r.book})`;
     }
-    const srcLink = (url, label = '↗ source') => (url ? `<a class="ba-src-link" href="${esc(url)}" target="_blank" rel="noopener" title="${esc(i18n('Voir la page de l’annuaire (numérisée)'))}">${esc(label)}</a>` : '');
+    const srcLink = (url, label = '↗ source') => (url ? `${window.LCNDA_UI.extLink(url, label, {cls: 'ba-src-link', title: i18n('Voir la page de l’annuaire (numérisée)')})}` : '');
     function groupHtml(g, {pid = 0, locked = false} = {}) {
         const r = g.best;
         let acts = '';
@@ -161,7 +161,7 @@
         }
         if (!d.installed && d.could && !settings().dismiss && !opts.noOffer) {
             return `<div class="ba-offer"><span>📇 ${esc(i18n('A vécu à Paris : les annuaires du commerce (1787–1914) peuvent dire où il ou elle habitait, et de quoi il ou elle vivait.'))}</span>
-                ${DL.run ? progHtml(DL.run) : `<button type="button" class="button small secondary" data-ba-install>⤓ ${esc(i18n('Installer les annuaires'))}${DL.online ? ` (${esc(fmtSize(DL.online.size))})` : ''}</button>`}
+                ${DL.run ? progHtml(DL.run) : `<button type="button" class="button small secondary" data-ba-install>📦 ${esc(i18n('Installer les annuaires'))}${DL.online ? ` (${esc(fmtSize(DL.online.size))})` : ''}</button>`}
                 <a href="${NAKALA}" target="_blank" rel="noopener">↗ ${esc(i18n('le jeu de données'))}</a>
                 ${opts.only ? '' : `<button type="button" class="ba-x" data-ba-dismiss title="${esc(i18n('Ne plus proposer'))}" aria-label="${esc(i18n('Ne plus proposer'))}">✕</button>`}</div>`;
         }
@@ -242,13 +242,13 @@
             <section class="card"><h3>${esc(i18n('Montrer'))}</h3>${toggle}</section>
             <section class="card"><h3>${esc(i18n('Les annuaires de Paris'))}</h3>
                 <div class="ba-base"><span class="ba-base-ic">📇</span><span class="ba-base-txt"><b>${esc(i18n('Annuaires du commerce de Paris (1787–1914)'))}</b><br><small>${esc(desc)}</small>
-                    <div class="ba-srcs">${esc(SRC)} · <a href="${NAKALA}" target="_blank" rel="noopener">${esc(i18n('la source'))}</a></div></span>
+                    <div class="ba-srcs">${esc(SRC)} · ${window.LCNDA_UI.extLink(NAKALA, '')}</div></span>
                     ${UI().badge ? UI().badge(i18n(st.installed ? 'Installé' : 'Pas installé'), st.installed ? 'green' : 'grey') : ''}<span class="ba-base-acts">${actsHtml(st.installed)}</span></div>
                 ${UI().notice ? UI().notice('info', i18n('Le téléchargement se fait une fois ; ensuite l’app n’a plus besoin d’Internet pour chercher. Rien n’est envoyé.')) : ''}
                 ${settings().dismiss ? `<p class="ba-dis">${esc(i18n('Plus proposé sur les fiches.'))} <button type="button" class="link-button" data-ba-undismiss>${esc(i18n('Proposer de nouveau'))}</button></p>` : ''}</section>
             <section class="card"><h3>💡 ${esc(i18n('Les brevets d’invention (1791–1901)'))}</h3>
                 <p>${esc(i18n('Pas de données dans l’app : la base de l’INPI se consulte en ligne. Sur la page « Où chercher » d’une personne, l’app propose d’y chercher son nom.'))}</p>
-                <p><a class="button small secondary" href="${INPI}" target="_blank" rel="noopener">↗ ${esc(i18n('Ouvrir la base des brevets du XIXᵉ siècle (INPI)'))}</a> <a href="${INPI_OD}" target="_blank" rel="noopener">${esc(i18n('Les conditions de l’open data de l’INPI'))}</a></p></section>
+                <p><a class="button small secondary" href="${INPI}" target="_blank" rel="noopener">↗ ${esc(i18n('Ouvrir la base des brevets du XIXᵉ siècle (INPI)'))}</a> ${window.LCNDA_UI.extLink(INPI_OD, i18n('Les conditions de l’open data de l’INPI'))}</p></section>
             <section class="card">${ABOUT}</section></section>`;
     }
     let redraw = () => {};
@@ -325,7 +325,7 @@
                 const n = (d.groups || []).filter(g => g.verdict !== 'no').length;
                 items.push(`<li class="ouc-tip"><span class="ouc-ico" aria-hidden="true">📇</span><div class="ouc-main"><div class="ouc-name"><b>${esc(i18n('Annuaires du commerce de Paris (1787–1914)'))}</b> ${d.installed && UI().badge ? UI().badge(i18n('Dans l’app'), 'green') : ''}</div>
                     <div class="ouc-why">${esc(d.installed ? (n ? i18n('{n} piste(s) sur sa fiche (même nom, à Paris de son vivant)', {n: String(n)}) : i18n('Rien qui lui ressemble assez : regarde tous les {n} dans la liste.', {n: String(d.person.last).toUpperCase()})) : i18n('A vécu à Paris : son adresse et son métier y sont peut-être. Installe les annuaires dans l’app.'))}</div></div>
-                    <div class="ouc-acts">${d.installed ? `<button type="button" class="button small secondary" data-ba-list data-ba-nom="${esc(d.person.last)}">🔎 ${esc(i18n('Voir dans les annuaires'))}</button>` : `${DL.online ? `<button type="button" class="button small secondary" data-ba-install>⤓ ${esc(i18n('Installer ({s})', {s: fmtSize(DL.online.size)}))}</button>` : ''} <a class="button small secondary" href="${NAKALA}" target="_blank" rel="noopener noreferrer">${esc(i18n('↗ Ouvrir'))}</a>`}</div></li>`);
+                    <div class="ouc-acts">${d.installed ? `<button type="button" class="button small secondary" data-ba-list data-ba-nom="${esc(d.person.last)}">🔎 ${esc(i18n('Voir dans les annuaires'))}</button>` : `${DL.online ? `<button type="button" class="button small secondary" data-ba-install>📦 ${esc(i18n('Installer ({s})', {s: fmtSize(DL.online.size)}))}</button>` : ''} <a class="button small secondary" href="${NAKALA}" target="_blank" rel="noopener noreferrer">${esc(i18n('↗ Ouvrir'))}</a>`}</div></li>`);
             }
             if (!items.length) return;
             const html = `<section class="ouc-plan ba-ouc"><h3>📇 ${esc(i18n('Annuaires et brevets'))} <small class="muted">${esc(i18n('Paris 1787–1914, inventeurs 1791–1901'))}</small></h3><ul class="ouc-list">${items.join('')}</ul></section>`;

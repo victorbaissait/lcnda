@@ -25,7 +25,7 @@
     SC.PROFILES = {inventor: ['Inventeur', '💡'], scientist: ['Scientifique', '🔬'], explorer: ['Explorateur', '🧭']};
     // le domaine dans « ＋ Toutes les sortes de fiches »
     if (Array.isArray(ART.DOMAINS) && !ART.DOMAINS.some(d => d[0] === 'science')) ART.DOMAINS.splice(Math.max(0, ART.DOMAINS.findIndex(d => d[0] === 'autre')), 0, ['science', '🔬 Sciences, inventions, explorations']);
-    const extLink = (u, label, icon = '🔗') => { const s = safeUrl(u); return s ? `<a class="ar-ochip is-link sc-ext" href="${esc(s)}" target="_blank" rel="noopener noreferrer"><i>${icon}</i>${esc(label)}</a>` : ''; };
+    const extLink = (u, label, icon = '🔗') => { const s = safeUrl(u); return s ? `<a class="ar-ochip is-link sc-ext" href="${esc(s)}" target="_blank" rel="noopener noreferrer" title="${esc(s)}"><i aria-hidden="true">↗</i>${esc(label)}</a>` : ''; };
     SC.extLink = extLink;
 
     /* ═════════ Des valeurs vers d'autres parties de la base : employeur 🏭, revue 📰, source 📚 (menu de choix unique) ═════════ */

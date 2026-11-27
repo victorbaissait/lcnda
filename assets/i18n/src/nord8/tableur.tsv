@@ -531,7 +531,7 @@ Le nom du modèle (les données restent : vide-les avant si tu veux un modèle v
 Le nom de la copie : ¦ Kopyanın adı:
 {name} (copie) ¦ {name} (kopya)
 Les changements faits depuis le dernier enregistrement seront perdus. ¦ Son kayıttan bu yana yapılan değişiklikler kaybolacak.
-📋 Partir d’un modèle ¦ 📋 Bir şablondan başla
+🧩 Partir d’un modèle ¦ 🧩 Bir şablondan başla
 Mes modèles ¦ Şablonlarım
 Pas encore de modèle à toi : dans un classeur, Fichier → « Enregistrer comme modèle… ». ¦ Henüz sana ait bir şablon yok: bir çalışma kitabında Dosya → “Şablon olarak kaydet…”.
 séparateur « {sep} » ¦ ayırıcı “{sep}”
@@ -615,7 +615,7 @@ Sosa, génération, côté, âge ¦ Sosa, kuşak, taraf, yaş
 objets, prix, total en livres ¦ eşyalar, fiyatlar, livres cinsinden toplam
 Registre matricule ¦ Askerlik kayıt defteri
 classe, signalement, campagnes ¦ sınıf, eşkâl, seferler
-📋 Partir d’un modèle… ¦ 📋 Bir şablondan başla…
+🧩 Partir d’un modèle… ¦ 🧩 Bir şablondan başla…
 ⤒ Importer un tableau… ¦ ⤒ Bir tablo içe aktar…
 ⤓ Exporter… ¦ ⤓ Dışa aktar…
 🖨 Imprimer… ¦ 🖨 Yazdır…

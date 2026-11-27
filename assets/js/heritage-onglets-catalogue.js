@@ -416,6 +416,7 @@
         const items = [{icon: '📄', label: T('CSV (.csv)'), run: () => { dl(csv(), `${name}.csv`, 'text/csv;charset=utf-8'); A().toast(T('{n} exportées.', {n: plural(rows.length, 'ligne')}), 'success'); }},
             {icon: '🧾', label: T('Tableur (Excel, LibreOffice)'), run: () => { dl(csv(), `${name}-tableur.csv`, 'application/vnd.ms-excel;charset=utf-8'); A().toast(T('{n} exportées.', {n: plural(rows.length, 'ligne')}), 'success'); }},
             {icon: '🖨', label: T('PDF (par 🖨 Imprimer)'), run: pdf}];
+        if (UI().exportRows) return UI().exportRows({title: T('⤓ Exporter le classement').replace(/^⤓\s*/, ''), name, rows: () => [head, ...rows], info: plural(rows.length, 'ligne'), extra: [{id: 'pdf', hint: T('PDF (par 🖨 Imprimer)'), run: async () => pdf()}]}); // ⤓ la fenêtre d'export commune
         if (UI().menuAt) UI().menuAt(anchor, items, {title: T('⤓ Exporter le classement')}); else items[0].run();
     }
     /* 🖨 la planche contact : les œuvres cochées sur le mur d'images (sinon toutes), avec légendes */

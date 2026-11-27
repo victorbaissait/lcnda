@@ -35,6 +35,15 @@ step('plus de question avant pour ce qui se défait', () => {
         ['assets/js/heritage-links.js', 'Supprimer cette langue ?'],
         ['assets/js/app-jeu.js', 'La partie et sa progression seront supprimées.'],
         ['assets/js/app-listes-perso.js', '↶ Annuler reste possible.'],
+        // 27/11 : les ~20 dernières (le serveur garde tout dans le journal, voir tests/test-h7-remises.js qui vérifie chaque remise)
+        ['assets/js/heritage-links.js', 'Supprimer cette recherche enregistrée ?'],
+        ['assets/js/heritage-links.js', 'Supprimer cette demande ?'],
+        ['assets/js/heritage-museum.js', 'Supprimer ce message du livre d’or ?'],
+        ['assets/js/heritage-employers.js', "{title: 'Supprimer la fiche'"],
+        ['assets/js/heritage-records.js', "{title: 'Supprimer la liste'"],
+        ['assets/js/heritage-recueil-table.js', "{title: 'Supprimer des lignes'"],
+        ['assets/js/heritage-more.js', 'Supprimer cette copie du coffre ?'],
+        ['assets/js/heritage-voters.js', 'Supprimer les cartes d’électeur et les votes de cette fiche ?'],
     ];
     for (const [f, s] of gone) assert.ok(!read(f).includes(s), `${f} contient encore « ${s} »`);
     for (const f of ['heritage-atelier-widgets', 'heritage-depouillements', 'heritage-records', 'heritage-recueils', 'heritage-links']) assert.match(read(`assets/js/${f}.js`), /undoToast\(/, f);

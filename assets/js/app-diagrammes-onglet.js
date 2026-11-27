@@ -120,7 +120,7 @@
 
     /* ═════════════ la page ouverte et son adresse ═════════════ */
     let cur = {view: 'home', nav: 'all', id: 0, door: 'ask', model: -1}, lastHash = '', goPending = false, editor = null, pendingNew = null;
-    const S = {q: '', fpanel: false, F: {type: new Set(), src: new Set(), st: new Set(), use: new Set(), who: ''}, multi: false, sel: new Set(), sort: 'recent'};
+    const S = {q: '', fpanel: false, F: {type: new Set(), src: new Set(), st: new Set(), use: new Set(), who: ''}, multi: false, sel: new Set(), sort: (window.LCNDA_UI?.sortOf ? window.LCNDA_UI.sortOf('diagrammes', 'recent') : 'recent')}; // le tri retenu, comme les listes H10 (« lcnda-sort:diagrammes »)
     const NAVH = {all: '', fav: 'favoris', rec: 'recents', live: 'a-jour', frozen: 'figes', nofold: 'dossier/aucun'};
     function hashFor(c = cur) {
         if (c.view === 'edit' && c.id) return `#${MOD}/${c.id}`;
@@ -309,7 +309,7 @@
             <div class="page-actions">${ro ? '' : `<button type="button" class="button" data-dgo-new>＋ ${esc(T('Nouveau diagramme'))}</button>`}${isF && !ro ? `<button type="button" class="button secondary icon" data-dgo-fmore="${esc(nav)}" aria-label="${esc(T('Le dossier'))}" aria-haspopup="menu">⋯</button>` : ''}<button type="button" class="button secondary icon" data-dgo-settings aria-label="${esc(T('Réglages de l’onglet'))}" title="${esc(T('Réglages de l’onglet'))}">⚙</button></div></header>
             ${kioskLine()}
             <div class="dgo-bar"><span class="ld-count" data-dgo-count>${esc(plural(l.length, 'diagramme', 'diagrammes'))}</span>
-                <span class="segmented sm" role="group" aria-label="${esc(T('Affichage'))}"><button type="button" data-dgo-view="grid" aria-pressed="${p.view === 'grid'}">▦ ${esc(T('Vignettes'))}</button><button type="button" data-dgo-view="list" aria-pressed="${p.view === 'list'}">☰ ${esc(T('Liste'))}</button></span>
+                ${window.LCNDA_UI.segmented({cls: 'sm', label: T('Affichage'), items: [{on: p.view === 'grid', attrs: 'data-dgo-view="grid"', html: `▦ ${esc(T('Vignettes'))}`}, {on: p.view === 'list', attrs: 'data-dgo-view="list"', html: `☰ ${esc(T('Liste'))}`}]})}
                 <span class="dgo-sp"></span>
                 ${nav === 'rec' ? '' : `<label class="sr" for="dgo-sort">${esc(T('Trier'))}</label><select id="dgo-sort" class="ui-select" data-dgo-sort><option value="recent"${S.sort === 'recent' ? ' selected' : ''}>${esc(T('Trier : les plus récents'))}</option><option value="name"${S.sort === 'name' ? ' selected' : ''}>${esc(T('Trier : par nom'))}</option><option value="type"${S.sort === 'type' ? ' selected' : ''}>${esc(T('Trier : par type'))}</option></select>`}
                 <button type="button" class="ui-listbar-btn" data-dgo-fpanel aria-pressed="${S.fpanel || nF() > 0}" aria-expanded="${S.fpanel}">${esc(T('Filtrer'))}${nF() ? ` (${nF()})` : ''} ▾</button>
@@ -400,7 +400,7 @@
             <div class="page-actions">${l.length ? `<button type="button" class="button secondary" data-dgo-empty>${esc(T('Vider la corbeille'))}</button>` : ''}</div></header>
             ${l.length ? `<div class="tw"><table class="data-table dgo-trash"><thead><tr><th>${esc(T('Nom'))}</th><th>${esc(T('Supprimé'))}</th><th>${esc(T('Effacé dans'))}</th><th><span class="sr">${esc(T('Actions'))}</span></th></tr></thead><tbody>
                 ${l.map(d => { const left = Math.max(0, Math.ceil((time(d.deleted_at) + 30 * DAY - now) / DAY)); return `<tr data-dgo-trow="${d.id}"><td>${esc(icon(d))} ${esc(d.name)}</td><td>${esc(when(d.deleted_at))}</td><td>${esc(plural(left, 'jour', 'jours'))}</td><td><button type="button" class="button small secondary" data-dgo-restore="${d.id}">↺ ${esc(T('Remettre'))}</button></td></tr>`; }).join('')}</tbody></table></div>`
-                : `<div class="dgo-empty"><b>${esc(T('La corbeille est vide.'))}</b>${esc(T('Ce que tu supprimes arrive ici.'))}</div>`}</section>`;
+                : A().emptyState({icon: '🗑', text: T('La corbeille est vide.'), hint: T('Ce que tu supprimes arrive ici.')})}</section>`;
     }
     async function trash(ids) {
         ids = [...new Set(ids.map(Number).filter(Boolean))]; if (!ids.length || kiosk()) return;
@@ -591,7 +591,7 @@
     /* ═════════════ ⚙ les réglages de l'onglet ═════════════ */
     function openSettings() {
         const dlg = document.createElement('dialog'); dlg.className = 'modal dgo-settings';
-        const seg = (k, pairs, v) => `<span class="segmented sm" role="group">${pairs.map(([x, l]) => `<button type="button" data-dgo-set="${k}" data-v="${esc(x)}" aria-pressed="${String(v) === String(x)}">${esc(l)}</button>`).join('')}</span>`;
+        const seg = (k, pairs, v) => `${window.LCNDA_UI.segmented({cls: 'sm', items: pairs.map(([x, l]) => ({on: String(v) === String(x), attrs: `data-dgo-set="${k}" data-v="${esc(x)}"`, html: esc(l)}))})}`;
         const tog = (k, label, v) => `<label class="ui-toggle"><input type="checkbox" data-dgo-tog="${k}" ${v ? 'checked' : ''}><i></i>${esc(label)}</label>`;
         const row = (t, h, ctl) => `<div class="dgo-setrow"><div><b>${esc(t)}</b><small class="muted">${esc(h)}</small></div><div>${ctl}</div></div>`;
         const paint = () => { const p = prefs(), data = fdata(), out = []; const walk = (par, dep) => fChildren(data, par).forEach(f => { out.push([f.id, `${'— '.repeat(dep)}📁 ${f.name}`]); walk(f.id, dep + 1); }); walk(null, 0);
@@ -734,7 +734,7 @@
     });
     document.addEventListener('change', e => {
         if (!inPage(e)) return;
-        if (e.target.matches('[data-dgo-sort]')) { S.sort = e.target.value; return rerender(); }
+        if (e.target.matches('[data-dgo-sort]')) { S.sort = e.target.value; window.LCNDA_UI?.setSort?.('diagrammes', S.sort); return rerender(); }
         if (e.target.matches('[data-dgo-ck]')) { const id = Number(e.target.dataset.dgoCk); if (e.target.checked) S.sel.add(id); else S.sel.delete(id); return rerender(); }
     });
     document.addEventListener('dragstart', e => {

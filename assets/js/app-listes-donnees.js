@@ -10,7 +10,7 @@
  *     period: row => [de, à],                      // « 📅 Période » (à = null → une seule année)
  *     geo: row => [lat, lon],                      // « 📍 Autour de… » + 🗺 carte
  *     open: row => …,                              // un clic sur la ligne
- *     installed: () => bool | Promise, install: (hôte) => …,   // packs : sinon une offre « ⤓ Installer »
+ *     installed: () => bool | Promise, install: (hôte) => …,   // packs : sinon une offre « 📦 Installer »
  *     enabled: () => bool,                         // facultatif : false = pas montrée (ex. fonction éteinte dans Réglages)
  *     facet: async (key, query) => [[valeur, n]…], // facultatif (query) : les choix d'un filtre « liste » avec leur nombre
  *     link: () => …                                // facultatif : une liste qui existe déjà ailleurs (on y va, pas de moteur)
@@ -272,7 +272,7 @@
     /** le fil d'Ariane : « Listes · 🧰 Données », ou « 📊 Données » quand la page est ouverte dans l'onglet du haut (app-donnees-onglet.js) */
     const crumb = () => (A().state?.module === 'donnees' ? `📊 ${T('Données')}` : `${T('Listes')} · 🧰 ${T('Données')}`);
     const header = (d, extra = {}) => (UI().pageHeader ? UI().pageHeader({where: `${crumb()} · ${whereOf(d)}`, icon: d.icon || '📋', title: T(d.label), ...extra}) : `<h2>${esc(T(d.label))}</h2>`);
-    const sourceLine = d => (d.source ? `<p class="ld-source muted"><small>${esc(T('Source :'))} ${/^https?:\/\/[^\s"'<>]+$/i.test(String(d.sourceUrl || '')) ? `<a href="${esc(d.sourceUrl)}" target="_blank" rel="noopener">${esc(d.source)}</a>` : esc(d.source)}</small></p>` : '');
+    const sourceLine = d => (d.source ? `<p class="ld-source muted"><small>${esc(T('Source :'))} ${/^https?:\/\/[^\s"'<>]+$/i.test(String(d.sourceUrl || '')) ? `${window.LCNDA_UI.extLink(d.sourceUrl, d.source)}` : esc(d.source)}</small></p>` : '');
     /** les colonnes : celles de la liste moins celles décochées dans « ⚙ Colonnes » (st.hide), + 📍 GPS (st.gps, listes avec positions), + Distance */
     const cols = (d, st) => {
         const base = (d.fields || []).filter(f => f.type !== 'url' && !f.hidden), hide = Array.isArray(st.hide) ? st.hide : [];
@@ -306,7 +306,7 @@
             const why = chk.err ? `<p class="error" role="alert" data-ld-install-err>${esc(T('Impossible de vérifier si ces données sont installées : {e}', {e: chk.err}))} ${esc(T('Réessaie avec « ↻ C’est installé : recharger » ; si ça recommence, ferme puis rouvre l’app.'))}</p>` : '';
             host.innerHTML = `<section class="page collection-page ld-page" data-ld-page="${esc(d.id)}" data-ld-missing>${header(d, {help: esc(T(chk.err ? 'Impossible de vérifier si ces données sont sur cet ordinateur.' : 'Ces données ne sont pas encore sur cet ordinateur.'))})}
                 <div class="ld-install" data-ld-install-host>${why}<p>${esc(T('Installe-les d’abord : ensuite, tu pourras chercher dedans par année, par lieu, autour d’une ville…'))}</p>
-                ${d.install && !kiosk() ? `<button type="button" class="button" data-ld-install>⤓ ${esc(T('Installer'))}</button>` : ''}
+                ${d.install && !kiosk() ? `<button type="button" class="button" data-ld-install>📦 ${esc(T('Installer'))}</button>` : ''}
                 <button type="button" class="button secondary" data-ld-reload>↻ ${esc(T('C’est installé : recharger'))}</button></div>${sourceLine(d)}</section>`;
             // l'installation finie (un POST …_finish, …_apply) : forgetInstalls() puis la page se redessine toute seule (plus bas)
             host.querySelector('[data-ld-install]')?.addEventListener('click', () => { const fail = e => toast(T('L’installation n’a pas marché : {e}', {e: e?.message || String(e)}), 'error'); try { Promise.resolve(d.install(host.querySelector('[data-ld-install-host]'))).catch(fail); } catch (e) { fail(e); } });
@@ -831,7 +831,7 @@
     let ldStatus = null, ldStatusAt = 0;
     // une erreur du serveur n'est pas « pas installé » : elle remonte (installState → le message), et rien n'est gardé
     const ldInstalled = async src => { if (!ldStatus || Date.now() - ldStatusAt > 15000) { ldStatusAt = Date.now(); const p = ldStatus = api('ld_status').catch(e => { if (ldStatus === p) ldStatus = null; throw e; }); } const r = await ldStatus; if (r.errors?.[src]) throw new Error(r.errors[src]); return !!r.installed?.[src]; }; // le pack ne s'ouvre pas : son erreur, pas « pas installé »
-    /** ⤓ une installation finie, retirée ou ↶ : plus rien de gardé en mémoire (ici ; 🗂 thèmes, 📊 récap, 🗂 Données écoutent « lcnda:installs-changed ») */
+    /** 📦 une installation finie, retirée ou ↶ : plus rien de gardé en mémoire (ici ; 🗂 thèmes, 📊 récap, 🗂 Données écoutent « lcnda:installs-changed ») */
     function forgetInstalls() { ldStatus = null; ldStatusAt = 0; try { window.dispatchEvent(new CustomEvent('lcnda:installs-changed')); } catch (_) {} }
     // chaque pack s'installe par un POST …_finish (hist_pack_finish, meteo_pack_finish, bo_dl_finish…), donnees_maj_apply, …_undo / _remove / _restore :
     // la page ouverte de 📊 Données (liste « pas encore installée », thèmes, récap) se redessine toute seule, sans recharger l'app

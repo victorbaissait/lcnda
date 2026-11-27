@@ -257,7 +257,7 @@
         if (k === 'person') return m.person_id ? `<button type="button" class="table-link" data-open-person="${m.person_id}">${esc(m.person_name)}</button>` : '';
         if (k === 'mrca') return esc(m.data?.mrca || '');
         if (k === 'status') return esc(label(STATUSES, m.status) === '—' ? '' : tl(STATUSES, m.status));
-        if (k === 'tree') return m.data?.tree_url && /^https?:\/\//i.test(m.data.tree_url) ? `<a href="${esc(m.data.tree_url)}" target="_blank" rel="noopener noreferrer">🌳${m.data.tree_size ? ' ' + esc(m.data.tree_size) : ''}</a>` : esc(m.data?.tree_size || '');
+        if (k === 'tree') return m.data?.tree_url && /^https?:\/\//i.test(m.data.tree_url) ? `${window.LCNDA_UI.extLink(m.data.tree_url, '', {title: m.data.tree_size ? `🌳 ${m.data.tree_size}` : ''})}` : esc(m.data?.tree_size || '');
         if (k === 'surnames') return `<small>${esc(String(m.data?.surnames || '').slice(0, 120))}</small>`;
         if (k === 'places') return `<small>${esc(String(m.data?.places || '').slice(0, 120))}</small>`;
         if (k === 'stars') return '★'.repeat(Math.max(0, Math.min(5, Math.round(num(m.data?.stars)))));
@@ -502,6 +502,9 @@
         toast(i18n('⤓ {file} : {n} pour DNA Painter.', {file: a.download, n: plural(rows.length, 'segment', 'segments')}));
     }
     function exportCsv(list) {
+        if (window.LCNDA_UI?.exportRows) return window.LCNDA_UI.exportRows({title: i18n('Correspondances ADN'), name: 'correspondances-adn', info: plural(list.length, 'correspondance', 'correspondances'), // ⤓ la fenêtre d'export commune
+            rows: () => [['Nom', 'Test', 'cM', 'Segments', 'Plus long segment', 'Relation (société)', 'Relation probable', 'Côté', 'Groupes', 'Fiche liée', 'Ancêtre commun', 'Suivi', 'Noms en commun', 'Lieux', 'Notes'],
+                ...list.map(m => [m.name, kitName(kitById(m.kit_id)), fmt(m.shared_cm, 1), m.segments, fmt(m.longest_cm, 1), m.relationship, guessShort(m.shared_cm), label(SIDES, m.side), m.groups.map(groupById).filter(Boolean).map(g => g.name).join(', '), m.person_name, m.data?.mrca, label(STATUSES, m.status), m.data?.surnames, m.data?.places, m.data?.notes])]});
         const q = v => { let t = String(v ?? ''); if (/^[=+\-@\t\r]/.test(t)) t = "'" + t; return /[;"\n\r]/.test(t) ? `"${t.replace(/"/g, '""')}"` : t; };
         const lines = [['Nom', 'Test', 'cM', 'Segments', 'Plus long segment', 'Relation (société)', 'Relation probable', 'Côté', 'Groupes', 'Fiche liée', 'Ancêtre commun', 'Suivi', 'Noms en commun', 'Lieux', 'Notes'].join(';'),
             ...list.map(m => [m.name, kitName(kitById(m.kit_id)), fmt(m.shared_cm, 1), m.segments, fmt(m.longest_cm, 1), m.relationship, guessShort(m.shared_cm), label(SIDES, m.side), m.groups.map(groupById).filter(Boolean).map(g => g.name).join(', '), m.person_name, m.data?.mrca, label(STATUSES, m.status), m.data?.surnames, m.data?.places, m.data?.notes].map(q).join(';'))];
@@ -805,8 +808,8 @@
                 ${SIDES.slice(1).map(([k, l]) => `<label>${i18n('Couleur « {name} »', {name: esc(i18n(l))})}<input type="color" data-c="${k}" value="${esc(color(p.colors[k]))}"></label>`).join('')}</div></section>
             <section class="card" data-dna-endo-card><h3>${i18n('📈 Endogamie')}</h3><p class="muted">${i18n('Dans une branche endogame (village fermé, île, communauté), on partage plus d’ADN qu’attendu : les cM de ces correspondances sont corrigés avant d’estimer la relation.')}</p>
                 <label>${i18n('Force de l’endogamie')}<select data-dna-endo-f>${ENDO_LEVELS.map(([v, l]) => `<option value="${v}" ${num(p.endo?.factor) === v ? 'selected' : ''}>${esc(i18n(l))} — × ${fmt(v, 2)}</option>`).join('')}</select></label>
-                <span class="section-label">${i18n('Branches endogames (groupes)')}</span><div class="h-dna-gpick">${data.groups.map(g => `<label class="checkbox-line"><input type="checkbox" data-dna-endo-g="${g.id}" ${(p.endo?.groups || []).map(Number).includes(g.id) ? 'checked' : ''}> <span class="h-dna-gchip" style="--c:${color(g.color)}">${esc(g.name)}</span></label>`).join('') || `<small class="muted">${i18n('Aucun groupe.')}</small>`}</div>
-                <span class="section-label">${i18n('Tests entièrement endogames')}</span><div class="h-dna-gpick">${data.kits.map(k => `<label class="checkbox-line"><input type="checkbox" data-dna-endo-k="${k.id}" ${(p.endo?.kits || []).map(Number).includes(k.id) ? 'checked' : ''}> ${esc(kitName(k))}</label>`).join('') || `<small class="muted">${i18n('Aucun test.')}</small>`}</div>
+                <span class="section-label">${i18n('Branches endogames (groupes)')}</span><div class="h-dna-gpick">${data.groups.map(g => `<label class="checkbox-line"><input type="checkbox" data-dna-endo-g="${g.id}" ${(p.endo?.groups || []).map(Number).includes(g.id) ? 'checked' : ''}> <span class="h-dna-gchip" style="--c:${color(g.color)}">${esc(g.name)}</span></label>`).join('') || A().empty(i18n('Aucun groupe.'), {icon: '🗂️'})}</div>
+                <span class="section-label">${i18n('Tests entièrement endogames')}</span><div class="h-dna-gpick">${data.kits.map(k => `<label class="checkbox-line"><input type="checkbox" data-dna-endo-k="${k.id}" ${(p.endo?.kits || []).map(Number).includes(k.id) ? 'checked' : ''}> ${esc(kitName(k))}</label>`).join('') || A().empty(i18n('Aucun test.'), {icon: '🧬'})}</div>
                 <label>${i18n('🔔 « Relancer dans… » propose')}<input data-unit="${esc(i18n('jours'))}" type="number" min="1" max="365" data-p="followDays" value="${esc(p.followDays || 30)}"></label></section>
             <section class="card"><h3>Sauvegarde de l’onglet</h3><p class="muted">Les tests, correspondances, segments et groupes sont dans la base (et ses sauvegardes). Tu peux aussi les exporter à part.</p><button type="button" class="button secondary" data-dna-json>⤓ Exporter tout l’ADN (JSON)</button></section></div>`;
     }, bind(root) {

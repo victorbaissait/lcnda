@@ -37,7 +37,7 @@
     function save(s) { try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (_) {} }
     const on = k => settings()[k] !== false;
     const kiosk = () => document.body.classList.contains('is-kiosk') || document.body.classList.contains('ms-on');
-    const link = (url, label) => (url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : esc(label));
+    const link = (url, label) => (url ? `${window.LCNDA_UI.extLink(url, label)}` : esc(label));
     const fmtDate = ts => { try { return new Date(ts * 1000).toLocaleDateString('fr-FR'); } catch (_) { return ''; } };
     const emptyLine = (text, icon = 'ℹ️') => (A().emptyState ? A().emptyState({text, icon, size: 'small'}) : `<p class="muted">${esc(text)}</p>`);
     const more = (inner, n) => `<details class="cplus-more tr-more"><summary>${esc(n ? T('▸ plus ({n})', {n}) : T('▸ plus'))}</summary>${inner}</details>`;

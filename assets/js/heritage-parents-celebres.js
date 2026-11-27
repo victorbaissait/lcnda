@@ -22,7 +22,7 @@
     const LIST = 'data_celebres', BLOCK = ['celebres', '⭐ Parents célèbres'];
     const DEF = {block: true, wikitree: false};
     function settings() { let s = {}; try { s = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (_) { s = {}; } return {...DEF, ...s}; }
-    const link = (url, label) => (url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : esc(label));
+    const link = (url, label) => (url ? `${window.LCNDA_UI.extLink(url, label)}` : esc(label));
     const emptyLine = (text, icon = '⭐', hint = '') => (A().emptyState ? A().emptyState({text, icon, hint, size: 'small'}) : `<p class="muted">${esc(text)}</p>`);
     const goList = () => { const st = A().state; if (!st) return; st.listType = LIST; A().setModule?.('listes'); };
     const WARN = () => `<p class="pc-warn">⚠️ ${esc(T('À vérifier : ces arbres sont collaboratifs (Wikidata, WikiTree) ; un lien peut être faux.'))}</p>`;

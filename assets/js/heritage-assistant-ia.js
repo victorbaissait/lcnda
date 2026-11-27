@@ -27,7 +27,7 @@
     function save(s) { try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (_) {} }
     const isOn = () => settings().mode === 'local';
     const model = () => settings().model || (() => { try { return localStorage.getItem('genealogie-tx-deep-model') || ''; } catch (_) { return ''; } })();
-    const link = (url, label) => (url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : esc(label));
+    const link = (url, label) => (url ? `${window.LCNDA_UI.extLink(url, label)}` : esc(label));
     const notice = (kind, html) => `<div class="aia-notice is-${kind}">${html}</div>`;
     const fmtDate = s => { try { return new Date(s).toLocaleString(document.documentElement.lang || 'fr', {day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit'}); } catch (_) { return String(s || ''); } };
 
@@ -236,7 +236,7 @@
         let r; try { r = await get('aia_convs'); } catch (e) { th.innerHTML = notice('error', esc(e.message)); return; }
         const ic = {chat: '🤖', gen: '🕵️', recit: '✍️'};
         th.innerHTML = `<h4 class="aia-h">🤖 ${esc(T('Mes conversations'))} <small class="muted">(${r.total})</small></h4><p class="muted"><small>${esc(T('Gardées sur cet ordinateur : {f}.', {f: r.folder}))}</small></p>
-            ${r.rows.length ? `<ul class="aia-hist">${r.rows.map(c => `<li><button type="button" class="aia-hist-open" data-aia-open="${esc(c.id)}">${ic[c.kind] || '🤖'} ${esc(c.title)} <small class="muted">${esc(fmtDate(c.updated))}</small></button><button type="button" class="aia-ibtn" data-aia-del="${esc(c.id)}" title="${esc(T('Effacer'))}">🗑</button></li>`).join('')}</ul>`
+            ${r.rows.length ? `<ul class="aia-hist">${r.rows.map(c => `<li><button type="button" class="aia-hist-open" data-aia-open="${esc(c.id)}">${ic[c.kind] || '🤖'} ${esc(c.title)} <small class="muted">${esc(fmtDate(c.updated))}</small></button><button type="button" class="aia-ibtn" data-aia-del="${esc(c.id)}" title="${esc(T('Supprimer'))}" aria-label="${esc(T('Supprimer'))}">🗑</button></li>`).join('')}</ul>`
             : `${window.LCNDA_APP.empty(T('Aucune conversation gardée.'))}`}`;
     }
 
@@ -369,7 +369,7 @@
                 <tr><td>${esc(T('Noms, dates, lieux, métiers, notes des décédés'))}</td><td>${esc(T('restent sur l’ordinateur (l’IA tourne ici)'))}</td></tr>
                 <tr><td>${esc(T('Recherche Open Archives du généalogiste'))}</td><td>${esc(T('nom, prénoms, années → openarch.nl ; désactivable'))}</td></tr></tbody></table></div></div>
             <div class="maintenance-panel"><h3>${esc(T('Journal des envois'))}</h3><p class="muted">${esc(T('Ce qui est parti sur Internet, et quand. Avec l’IA sur l’ordinateur, seules les recherches Open Archives y figurent.'))}</p>
-                ${log.rows.length ? `<ul class="aia-log">${log.rows.slice(0, 50).map(r => `<li><small class="muted">${esc(fmtDate(r.at))}</small> ${esc(r.host)} · « ${esc(r.what)} » · ${esc(T('0 vivant'))}</li>`).join('')}</ul><button type="button" class="button small secondary" data-aia-logclear>🗑 ${esc(T('Effacer le journal'))}</button>` : `<p>${esc(T('Rien n’est sorti de l’ordinateur.'))}</p>`}</div>
+                ${log.rows.length ? `<ul class="aia-log">${log.rows.slice(0, 50).map(r => `<li><small class="muted">${esc(fmtDate(r.at))}</small> ${esc(r.host)} · « ${esc(r.what)} » · ${esc(T('0 vivant'))}</li>`).join('')}</ul><button type="button" class="button small secondary" data-aia-logclear>🗑 ${esc(T('Vider le journal'))}</button>` : `<p>${esc(T('Rien n’est sorti de l’ordinateur.'))}</p>`}</div>
             <div class="maintenance-panel"><h3>🤖 ${esc(T('Mes conversations'))}</h3><p>${esc(T('{n} conversation(s) gardée(s) sur cet ordinateur.', {n: convs.total || 0}))}</p>
                 <div class="aia-row"><button type="button" class="button small secondary" data-aia-openpanel>${esc(T('Ouvrir l’assistant'))}</button>${convs.total ? `<button type="button" class="button small secondary" data-aia-clearall>🗑 ${esc(T('Tout effacer'))}</button>` : ''}</div></div>`;
         ext.iaServeur?.mount(host.querySelector('[data-ias-host]'), {onChange: () => { STATUS = null; drawSettings(); }}); // 🖥 Ollama / Unsloth / compatible OpenAI
@@ -381,7 +381,7 @@
             if (b.matches('[data-aia-openpanel]')) return openPanel();
             if (b.matches('[data-aia-logclear]')) { try { const r = await post('aia_log_clear', {}); drawSettings(); A().undoToast?.(T('Journal des envois effacé ({n}).', {n: r.removed}), {undo: async () => { await post('aia_log_restore', {rows: r.restore}); drawSettings(); }}); } catch (err) { toast(err.message, 'error'); } return; }
             if (b.matches('[data-aia-clearall]')) {
-                const ok = A().confirmBox ? await A().confirmBox(T('Effacer toutes les conversations gardées sur cet ordinateur ?'), {title: T('Tout effacer ?'), okLabel: T('Tout effacer'), danger: true}) : root.confirm(T('Effacer toutes les conversations gardées sur cet ordinateur ?'));
+                const ok = A().confirmBox ? await A().confirmBox(T('Supprimer toutes les conversations gardées sur cet ordinateur ?'), {title: T('Tout supprimer ?'), okLabel: T('Tout supprimer'), danger: true}) : root.confirm(T('Supprimer toutes les conversations gardées sur cet ordinateur ?'));
                 if (!ok) return;
                 try { const r = await post('aia_convs_clear', {}); CONV = null; toast(T('{n} conversation(s) effacée(s).', {n: r.removed})); drawSettings(); } catch (err) { toast(err.message, 'error'); }
             }

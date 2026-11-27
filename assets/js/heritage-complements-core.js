@@ -25,8 +25,8 @@
             {key: 'hom_when', label: 'Quand l’afficher', options: [['each', 'À chaque courrier, appel et questionnaire'], ['first', 'Au premier contact d’un héritier seulement'], ['never', 'Jamais']]},
             {key: 'hom_after_ok', label: 'Après « ✓ C’est bien lui »', options: [['again', 'L’alerte revient au prochain contact'], ['case', 'Elle ne revient plus dans ce dossier']]},
             {key: 'hom_scope', label: 'Où chercher l’homonyme', options: [['base', 'Toute la base'], ['cases', 'Seulement les autres dossiers']]}]},
-        {part: 'C', title: '📋 Tous les doutes', items: [
-            {key: 'doutes_name', label: 'Nom de la liste', options: [['all', '📋 Tous les doutes'], ['verify', 'À vérifier'], ['review', 'Points à revoir']]},
+        {part: 'C', title: '❓ Tous les doutes', items: [
+            {key: 'doutes_name', label: 'Nom de la liste', options: [['all', '❓ Tous les doutes'], ['verify', 'À vérifier'], ['review', 'Points à revoir']]},
             {key: 'doutes_nosource', label: '« Sans source »', options: [['sosa', 'Seulement les ancêtres Sosa'], ['all', 'Toute la base'], ['none', 'Pas du tout']]},
             {key: 'doutes_seen_back', label: 'Une ligne marquée vue', options: [['again', 'Revient si la chose change'], ['never', 'Ne revient jamais']]},
             {key: 'doutes_seen_show', label: 'Les lignes vues', options: [['hide', 'Cachées par le filtre de départ « Pas encore vus »'], ['pale', 'Montrées en pâle']]},

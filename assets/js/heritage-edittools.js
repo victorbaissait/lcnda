@@ -11,6 +11,15 @@
     const toast = (...a) => A().toast(...a);
     const api = (...a) => A().api(...a);
     const post = (action, body) => api(action, {}, {method: 'POST', body});
+    // ↶ Annuler au lieu de « Es-tu sûr ? » (H7) : le serveur garde le projet un jour (lib/projets_annuler.php), « restore_project » le remet
+    const delUndo = action => async id => { const r = await post(action, {id}), tok = (r?.result || r)?.undo; return tok ? {undo: async () => { const x = await post('restore_project', {undo: tok}); return x?.result || x; }} : null; };
+    ext.projectDelUndo = delUndo; // pour les outils ajoutés (arbre décoratif, faire-part, maison, diaporama…)
+    /** les fenêtres « 📂 Projets » des outils (montage, son, retouche) : supprimé tout de suite, « ↶ Annuler » / « ↷ Rétablir » (onGone / onBack redessinent) */
+    ext.deleteProjectWithUndo = async ({action, id, name, onGone, onBack}) => {
+        const del = delUndo(action); let res = await del(id); onGone?.();
+        if (res?.undo && A().undoToast) A().undoToast(i18n('Projet « {name} » supprimé', {name}), {undo: async () => { const x = await res.undo(); onBack?.(); return x; }, redo: async () => { res = await del(id); onGone?.(); }});
+        else toast(i18n('Projet supprimé.'));
+    };
     const TAB_KEY = 'genealogie-edittools-tab', VIEW_KEY = 'genealogie-edittools-view', SORT_KEY = 'genealogie-edittools-sort', STEP = 24;
     const UI = () => window.LCNDA_UI;
     const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : s);
@@ -24,13 +33,13 @@
             open: (id, again) => ext.openMontageProject?.(id, again),
             create: again => ext.newMontage?.(again),
             rename: async (id, name) => { const r = await api('montage_project', {id}); await post('save_montage_project', {id, name, project: r.project}); },
-            remove: id => post('delete_montage_project', {id}), createLabel: '＋ Nouveau montage'},
+            remove: delUndo('delete_montage_project'), undo: true, createLabel: '＋ Nouveau montage'},
         {key: 'audio', icon: '🎧', label: 'Son', what: 'son',
             load: async () => ((await api('audio_projects')).projects || []).map(p => ({id: p.id, name: p.name, date: p.updated_at, thumb: '<span class="h-et-ico">🎧</span>', info: [p.summary || '', p.media_title || i18n('son importé'), fmtDur(p.duration), p.exists ? '' : i18n('⚠ fichier de travail introuvable')].filter(Boolean).join(' · '), disabled: !p.exists})),
             open: (id, again) => ext.openAudioProject?.(id, again),
             create: again => ext.newAudioProject?.(again),
             rename: (id, name) => post('rename_audio_project', {id, name}),
-            remove: id => post('delete_audio_project', {id}), createLabel: '＋ Nouveau projet son',
+            remove: delUndo('delete_audio_project'), undo: true, createLabel: '＋ Nouveau projet son',
             get extra() { return `<button type="button" class="button secondary" data-et-x="cassette" title="${esc(i18n('Une vieille cassette ou un dictaphone : souffle, bourdonnement, voix, volume, début et fin, pas à pas'))}">🧭 ${esc(i18n('Sauver une vieille cassette'))}</button><button type="button" class="button secondary" data-et-x="mic" title="${esc(i18n('Une lettre lue, un souvenir raconté : le son entre dans les médias puis s’ouvre dans le Studio son'))}">🎙️ ${esc(i18n('Enregistrer au micro'))}</button><button type="button" class="button secondary" data-et-x="quick" title="${esc(i18n('Un son de la base, nettoyé en deux minutes'))}">⚡ ${esc(i18n('Son rapide…'))}</button>`; },
             onExtra: async (k, again) => { // 🎧 maquette « Studio son » § 10
                 if (k === 'mic') return ext.recordNewSound?.(again);
@@ -44,19 +53,19 @@
             open: id => ext.openRetouchProject?.(id),
             create: () => ext.pickRetouch?.(),
             rename: (id, name) => post('rename_retouch_project', {id, name}),
-            remove: id => post('delete_retouch_project', {id}), createLabel: '＋ Nouvelle retouche', get extra() { return `<button type="button" class="button secondary" data-et-canvas title="${esc(i18n('Une image vide (blanche, transparente ou d’une couleur), à la taille voulue, pour dessiner, écrire ou assembler des calques'))}">⬜ ${esc(i18n('Canevas vide'))}</button><button type="button" class="button secondary" data-et-restore title="${esc(i18n('Une vieille photo abîmée : redresser, couleurs, taches, déchirures, visages, colorisation, pas à pas'))}">🧭 ${esc(i18n('Restaurer une vieille photo'))}</button><button type="button" class="button secondary" data-et-idp title="${esc(i18n('Le portrait de plusieurs fiches recadré au même format (yeux à la même hauteur), puis utilisé comme portrait'))}">🪪 ${esc(i18n('Portraits d’identité'))}</button>`; }},
+            remove: delUndo('delete_retouch_project'), undo: true, createLabel: '＋ Nouvelle retouche', get extra() { return `<button type="button" class="button secondary" data-et-canvas title="${esc(i18n('Une image vide (blanche, transparente ou d’une couleur), à la taille voulue, pour dessiner, écrire ou assembler des calques'))}">⬜ ${esc(i18n('Canevas vide'))}</button><button type="button" class="button secondary" data-et-restore title="${esc(i18n('Une vieille photo abîmée : redresser, couleurs, taches, déchirures, visages, colorisation, pas à pas'))}">🧭 ${esc(i18n('Restaurer une vieille photo'))}</button><button type="button" class="button secondary" data-et-idp title="${esc(i18n('Le portrait de plusieurs fiches recadré au même format (yeux à la même hauteur), puis utilisé comme portrait'))}">🪪 ${esc(i18n('Portraits d’identité'))}</button>`; }},
         {key: 'vector', icon: '✒️', label: 'Dessin vectoriel', what: 'dessin',
             load: async () => ((await api('vector_docs')).docs || []).map(d => ({id: d.id, name: d.name, date: d.updated_at, thumb: d.thumb ? `<img src="${esc(d.thumb)}" alt="">` : '<span class="h-et-ico">✒️</span>', info: A().plural(d.objects, 'objet')})),
             open: (id, again) => ext.openVectorEditor?.({id, onSaved: again, onClose: again}),
             create: again => ext.openVectorEditor?.({onSaved: again, onClose: again}),
             rename: (id, name) => post('rename_vector_doc', {id, name}),
-            remove: id => post('delete_vector_doc', {id}), createLabel: '＋ Nouveau dessin', get extra() { return `<button type="button" class="button secondary" data-et-vxblason>🛡️ ${esc(i18n('Nouveau blason'))}</button>`; }},
+            remove: delUndo('delete_vector_doc'), undo: true, createLabel: '＋ Nouveau dessin', get extra() { return `<button type="button" class="button secondary" data-et-vxblason>🛡️ ${esc(i18n('Nouveau blason'))}</button>`; }},
         {key: 'layout', icon: '📐', label: 'Mise en page (livres)', what: 'livre',
             load: async () => ((await api('layout_docs')).docs || []).map(d => ({id: d.id, name: d.name, date: d.updated_at, thumb: `<span class="h-et-cover">${ext.layoutCoverHtml?.(d.cover, 44) || '📐'}</span>`, info: [d.is_design ? `🎨 ${i18n('Design')}` : `📖 ${i18n('Livre')}`, A().plural(d.pages, 'page')].join(' · ')})),
             open: (id, again) => ext.openLayoutDoc?.(id, again),
             create: again => ext.newLayoutDoc?.('family', again),
             rename: async (id, name) => { const r = await api('layout_doc', {id}); await post('save_layout_doc', {id, name, is_design: r.is_design, doc: r.doc}); },
-            remove: id => post('delete_layout_doc', {id}), createLabel: '＋ Nouveau livre', get extra() { return `<button type="button" class="button secondary" data-et-blank>⬜ ${esc(i18n('Livre vide'))}</button><button type="button" class="button secondary" data-et-studio>↗ ${esc(i18n('Ouvrir l’atelier'))}</button>`; }},
+            remove: delUndo('delete_layout_doc'), undo: true, createLabel: '＋ Nouveau livre', get extra() { return `<button type="button" class="button secondary" data-et-blank>⬜ ${esc(i18n('Livre vide'))}</button><button type="button" class="button secondary" data-et-studio>↗ ${esc(i18n('Ouvrir l’atelier'))}</button>`; }},
     ];
 
     // d'autres fichiers ajoutent leur outil (arbre décoratif, transcription, diaporama, plan de maison…) : ext.editToolsExtra.push({key, icon, label, …})
@@ -117,7 +126,7 @@
             box.innerHTML = list.length ? (view === 'cards'
                 ? `<div class="h-et-cards">${U.cardsHtml(part.map(r => ({thumb: r.thumb, name: r.name, open: `data-et-open="${r.id}"`, disabled: r.disabled, lines: [r.info], when: r.date, whenLabel: i18n('Modifié'), menu: [`<button type="button" data-et-ren="${r.id}">✎ ${esc(i18n('Renommer'))}</button>`, `<button type="button" class="danger" data-et-del="${r.id}">🗑 ${esc(i18n('Supprimer le projet'))}</button>`]})))}</div>`
                 : `<div class="data-table-wrap"><table class="data-table h-et-table"><thead><tr><th></th><th>${i18n('Nom')}</th><th>${i18n('Détails')}</th><th>${i18n('Modifié')}</th><th></th></tr></thead><tbody>${part.map(r => `<tr><td class="h-et-thumb">${r.thumb}</td><td><button type="button" class="table-link" data-et-open="${r.id}" ${r.disabled ? 'disabled' : ''}>${esc(r.name)}</button></td><td class="muted">${esc(r.info)}</td><td>${fmtDate(r.date)}</td><td>${acts(r)}</td></tr>`).join('')}</tbody></table></div>`)
-                : rows.length ? A().emptyState({icon: '🔎', text: i18n('Aucun projet pour « {q} »', {q: q.trim()}), hint: i18n('Vérifie l’orthographe, ou cherche un autre mot (nom, photo, détails).'), action: {label: `× ${i18n('Effacer la recherche')}`, attrs: 'data-et-clear'}})
+                : rows.length ? A().emptyState({icon: '🔎', text: i18n('Aucun projet pour « {q} »', {q: q.trim()}), hint: i18n('Vérifie l’orthographe, ou cherche un autre mot (nom, photo, détails).'), action: {label: `× ${i18n('Vider la recherche')}`, attrs: 'data-et-clear'}})
                     : A().emptyState({icon: t.icon || '🗂️', text: i18n('Aucun projet de {what} pour l’instant', {what: i18n(t.what, {ctx: 'projet'})}), hint: i18n('Commence-en un : il apparaîtra ici, avec les autres, pour le rouvrir plus tard.'), action: {label: i18n(t.createLabel), attrs: 'data-et-new'}});
             if (list.length > shown && U?.moreButton) box.appendChild(U.moreButton({remaining: list.length - shown, step: STEP, onClick: () => { shown += STEP; drawList(); }}));
         };
@@ -163,7 +172,13 @@
                 if (d.etX && t.onExtra) return t.onExtra(d.etX, again); // les boutons en plus d'un outil ajouté
                 if (d.etOpen) return t.open(Number(d.etOpen), again);
                 if (d.etRen) { const r = rows.find(x => x.id === Number(d.etRen)), n = await A().askText({title: i18n('Renommer le projet'), message: i18n('Nouveau nom :'), value: r?.name || '', okLabel: i18n('Renommer')}); if (!n?.trim()) return; await t.rename(r.id, n.trim().slice(0, 160)); toast(i18n('Projet renommé.')); return load(); }
-                if (d.etDel) { const r = rows.find(x => x.id === Number(d.etDel)); if (!await A().confirmBox(i18n('Les photos, vidéos et sons restent dans les Médias.'), {title: i18n('Supprimer le projet « {name} » ?', {name: r?.name}), okLabel: i18n('Supprimer le projet')})) return; const res = await t.remove(r.id); if (res && typeof res.undo === 'function' && A().undoToast) A().undoToast(i18n('Projet supprimé.'), {undo: async () => { await res.undo(); load(); }}); else toast(i18n('Projet supprimé.')); return load(); } // ↶ Annuler quand l'outil sait remettre le projet
+                if (d.etDel) { // H7 : l'outil sait remettre son projet (undo: true) → supprimé tout de suite, « ↶ Annuler » puis « ↷ Rétablir » ; sinon la question
+                    const r = rows.find(x => x.id === Number(d.etDel)); if (!r) return;
+                    if (!t.undo && !await A().confirmBox(i18n('Les photos, vidéos et sons restent dans les Médias.'), {title: i18n('Supprimer le projet « {name} » ?', {name: r.name}), okLabel: i18n('Supprimer le projet')})) return;
+                    let res = await t.remove(r.id);
+                    if (res && typeof res.undo === 'function' && A().undoToast) A().undoToast(i18n('Projet « {name} » supprimé', {name: r.name}), {undo: async () => { const x = await res.undo(); load(); return x; }, redo: async () => { res = await t.remove(res?.restoredId || r.id); load(); }});
+                    else toast(i18n('Projet supprimé.'));
+                    return load(); }
             } catch (err) { toast(err.message, 'error'); }
         };
         ws.oninput = null; ws.onchange = null;

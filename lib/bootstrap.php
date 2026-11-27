@@ -64,6 +64,7 @@ require_once __DIR__ . '/layout_docs.php'; // 📐 Atelier de mise en page
 require_once __DIR__ . '/montage_projects.php'; // 🎬 Projets de montage vidéo
 require_once __DIR__ . '/retouch_projects.php'; // 🎚️ Projets de retouche
 require_once __DIR__ . '/audio_projects.php'; // 🎧 Projets audio
+require_once __DIR__ . '/projets_annuler.php'; // ↶ Annuler la suppression d'un projet d'outil (au lieu de « Es-tu sûr ? »)
 require_once __DIR__ . '/audio_studio.php'; // 🎚️ Studio son : zones, passages reliés, transcription
 require_once __DIR__ . '/family_book.php'; // livre de famille (parties, formats) // fiches d'employeurs
 require_once __DIR__ . '/suggestions.php'; // suggestions de recherche (trous de la lignée Sosa)

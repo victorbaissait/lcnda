@@ -206,12 +206,12 @@
         const gear = {label: '⚙', title: T('Régler ce message'), close: false, run: e => msgMenu(e?.currentTarget || document.body)};
         if (list.length === 1) {
             const m = list[0];
-            toast(T('{thing} répond au besoin de l’enquête « {inv} » ({what}).', {thing, inv: m.investigation_title || '', what: T((WHAT[m.what] || WHAT.other)[1]).toLowerCase()}) + (m.level === 'close' ? ` ${T('(à vérifier)')}` : ''), '', {duration: 15000, actions: [
+            toast(T('{thing} répond au besoin de l’enquête « {inv} » ({what}).', {thing, inv: m.investigation_title || '', what: T((WHAT[m.what] || WHAT.other)[1]).toLowerCase()}) + (m.level === 'close' ? ` ${T('(à vérifier)')}` : ''), '', {actions: [
                 {label: T('🕵️ Ranger dans l’enquête'), run: () => fileAnswer(m, {kind: item.kind, ref_id: item.ref_id, title: item.title, value: item.value, provider: o.kind === 'act' ? 'atelier' : 'media'}, () => refreshInv(m.investigation_id))},
                 {label: T('Voir'), run: () => openInv(m.investigation_id, m.item_id)},
                 {label: T('Pas lui'), run: () => skipAnswer(m, `${o.kind}:${o.ref_id}`, () => refreshInv(m.investigation_id))}, gear]});
         } else {
-            toast(T('{n} attendaient ceci — voir', {n: plural(list.length, T('besoin'), T('besoins'))}), '', {duration: 15000, actions: [{label: T('Voir'), run: () => openMatches(list, item, o)}, gear]});
+            toast(T('{n} attendaient ceci — voir', {n: plural(list.length, T('besoin'), T('besoins'))}), '', {actions: [{label: T('Voir'), run: () => openMatches(list, item, o)}, gear]});
         }
         return list;
     }
@@ -238,11 +238,11 @@
             (r.seen || []).forEach(id => mediaSeen.push(id));
             const list = (r.matches || []).filter(x => !proposed.has(`${x.need.item_id || x.need.id}|media:${x.media.id}`)); if (!list.length) return;
             if (list.length === 1) { const x = list[0]; proposed.add(`${x.need.item_id || x.need.id}|media:${x.media.id}`);
-                return toast(T('{thing} répond au besoin de l’enquête « {inv} » ({what}).', {thing: T('Ce média que tu viens d’ajouter'), inv: x.need.investigation_title || '', what: T((WHAT[x.need.what] || WHAT.other)[1]).toLowerCase()}), '', {duration: 15000, actions: [
+                return toast(T('{thing} répond au besoin de l’enquête « {inv} » ({what}).', {thing: T('Ce média que tu viens d’ajouter'), inv: x.need.investigation_title || '', what: T((WHAT[x.need.what] || WHAT.other)[1]).toLowerCase()}), '', {actions: [
                     {label: T('🕵️ Ranger dans l’enquête'), run: () => fileAnswer(x.need, {kind: 'media', ref_id: x.media.id, title: x.media.title, provider: 'media'}, () => refreshInv(x.need.investigation_id))},
                     {label: T('Voir'), run: () => openInv(x.need.investigation_id, x.need.item_id)}, {label: '⚙', title: T('Régler ce message'), close: false, run: ev => msgMenu(ev?.currentTarget || document.body)}]}); }
             list.forEach(x => proposed.add(`${x.need.item_id || x.need.id}|media:${x.media.id}`));
-            toast(T('{n} répondent à des besoins — voir', {n: plural(list.length, T('nouvelle chose'), T('nouvelles choses'))}), '', {duration: 15000, actions: [{label: T('Voir'), run: () => openSemaine()}]});
+            toast(T('{n} répondent à des besoins — voir', {n: plural(list.length, T('nouvelle chose'), T('nouvelles choses'))}), '', {actions: [{label: T('Voir'), run: () => openSemaine()}]});
         }, 1800);
     });
 

@@ -266,7 +266,7 @@
     function optHtml(o, spec) {
         if (o.when && !o.when(spec)) return '';
         const v = spec.o?.[o.k], at = `data-opt="${esc(o.k)}"`;
-        if (o.type === 'link') { const h = o.href?.(spec) || ''; return h ? `<a class="button small secondary h-dg-optlink" href="${esc(h)}" target="_blank" rel="noopener noreferrer">${esc(o.label)}</a>` : (o.hint ? `<small class="ui-hint">${esc(o.hint)}</small>` : ''); } // un lien vers un site (ouvert dans le navigateur)
+        if (o.type === 'link') { const h = o.href?.(spec) || ''; return h ? `${window.LCNDA_UI.extLink(h, o.label, {cls: 'button small secondary h-dg-optlink'})}` : (o.hint ? `<small class="ui-hint">${esc(o.hint)}</small>` : ''); } // un lien vers un site (ouvert dans le navigateur)
         if (o.type === 'check') return `<label class="ui-toggle"><input type="checkbox" ${at} ${(v ?? o.def) ? 'checked' : ''}><i></i>${esc(o.label)}</label>`;
         // une longue liste (les pays du monde) : rangée en groupes, avec une case pour chercher (filtrée par la sorte : heritage-diagram-cartes.js)
         if (o.type === 'select' && typeof o.groups === 'function') { const opt = ([k, l]) => `<option value="${esc(k)}" ${String(v ?? o.def ?? '') === k ? 'selected' : ''}>${esc(l)}</option>`;
@@ -315,7 +315,7 @@
                 else all.forEach((t, i) => { (groups[t.group] = groups[t.group] || []).push([t, i]); });
                 const sug = (suggest || []).map(k => all.findIndex(t => t.kind === k && !t.o && !t.preset)).filter(i => i >= 0).map(i => [all[i], i]);
                 const nAll = Object.values(groups).reduce((n, g) => n + g.length, 0);
-                const seg = inline && sug.length ? `<div class="segmented h-dg-galseg" role="group" aria-label="${esc(i18n('Quels dessins'))}"><button type="button" data-dg-galall="0" aria-pressed="${!showAll}">✨ ${esc(i18n('Conseillés ({n})', {n: sug.length}))}</button><button type="button" data-dg-galall="1" aria-pressed="${showAll}">${esc(i18n('Tous ({n})', {n: nAll}))}</button></div>` : '';
+                const seg = inline && sug.length ? window.LCNDA_UI.segmented({tag: 'div', cls: 'h-dg-galseg', label: i18n('Quels dessins'), items: [{on: !showAll, attrs: 'data-dg-galall="0"', html: `✨ ${esc(i18n('Conseillés ({n})', {n: sug.length}))}`}, {on: showAll, attrs: 'data-dg-galall="1"', html: esc(i18n('Tous ({n})', {n: nAll}))}]}) : '';
                 dlg.innerHTML = `<div class="h-dg-galhead"><div>${inline ? '' : `<span class="eyebrow">📊 DIAGRAMMES</span><h2>${esc(title)}</h2>`}<p class="muted">Choisis un dessin : il arrive avec un exemple que tu remplaces par tes chiffres (à la main, collés d’un tableur, d’un CSV, ou pris dans l’app).</p>${seg}</div><span>${ext.openDiagramKindsEditor ? '<button type="button" class="button small secondary" data-kinds-cfg title="Ordre, types montrés ou cachés, groupes à toi">⚙️ Ranger les types</button>' : ''}${inline ? '' : '<button type="button" class="icon-button" data-close>×</button>'}</span></div>
                 ${!showAll ? `<h4>✨ ${esc(i18n('Conseillés'))}</h4><div class="h-dg-tiles">${sug.map(tileHtml).join('')}</div>` : Object.entries(groups).map(([g, items]) => `<h4>${esc(g)}</h4><div class="h-dg-tiles">${items.map(tileHtml).join('')}</div>`).join('')}`;
                 if (inline) return; // dans l'onglet : 💬 et 📊 sont deux autres portes, à côté

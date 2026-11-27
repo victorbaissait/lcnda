@@ -94,6 +94,8 @@
     function csvExport(rows) {
         const cell = v => (A().csvCell ? A().csvCell(v, {sep: ';'}) : `"${String(v ?? '').replace(/"/g, '""')}"`);
         const head = ['Date', 'Sorte', 'Titre', 'Résultat', 'État', 'Service d’archives', 'Cote', 'Commune', 'Années', 'Personnes', 'Note'];
+        const line = r => [String(r.date || '').slice(0, 10), KINDS[r.kind]?.[1] || r.kind, r.title, r.result_label, r.status_label, r.service, r.cote, r.commune, r.years, peopleText(r), r.note];
+        if (window.LCNDA_UI?.exportRows) return window.LCNDA_UI.exportRows({title: i18n('Journal des recherches'), name: 'journal-des-recherches', rows: () => [head, ...rows.map(line)]}); // ⤓ la fenêtre d'export commune
         const lines = [head.map(cell).join(';'), ...rows.map(r => [String(r.date || '').slice(0, 10), KINDS[r.kind]?.[1] || r.kind, r.title, r.result_label, r.status_label, r.service, r.cote, r.commune, r.years, peopleText(r), r.note].map(cell).join(';'))];
         const blob = new Blob(['﻿' + lines.join('\r\n')], {type: 'text/csv;charset=utf-8'});
         const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${A().safeExportFilename ? A().safeExportFilename('journal-des-recherches') : 'journal-des-recherches'}.csv`;

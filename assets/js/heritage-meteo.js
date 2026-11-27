@@ -468,7 +468,7 @@
         let d;
         try { d = await api('meteo_person', {id: pid}); } catch (e) { host.innerHTML = A().empty ? A().empty(e.message, {icon: '⛔'}) : ''; return; }
         if (!host.isConnected) return;
-        if (!d.installed) { host.innerHTML = A().empty('Les données météo ne sont pas installées.', {icon: '🌦', action: {label: '⤓ Installer les données météo', attrs: 'data-wx-goset'}}); return; }
+        if (!d.installed) { host.innerHTML = A().empty('Les données météo ne sont pas installées.', {icon: '🌦', action: {label: '📦 Installer les données météo', attrs: 'data-wx-goset'}}); return; }
         const evs = (d.events || []).filter(r => !eventHidden(r.event_id, s) && kindOn(r.tag, s, r.type_id, r.type));
         const ok = evs.filter(r => shown(r, s));
         const card = host.closest('.card'); const small = card?.querySelector('.card-title h3'); if (small && !small.querySelector('small')) small.insertAdjacentHTML('beforeend', ` <small>(${ok.length})</small>`);
@@ -650,7 +650,7 @@
         UI().autoSave?.(ws, {redraw: () => draw()});
     };
 
-    /* ═════════ ⤓ Installer un pack en un bouton (lib/meteo_dl.php) : rien de météo n'est livré avec l'app ═════════ */
+    /* ═════════ 📦 Installer un pack en un bouton (lib/meteo_dl.php) : rien de météo n'est livré avec l'app ═════════ */
     const DL = {online: null, err: '', run: {}, paused: {}}, DL_KEY = 'genealogie-meteo-dl';
     let dlRedraw = () => {}, dlRefresh = async () => {};
     const dlSaved = () => { try { return JSON.parse(localStorage.getItem(DL_KEY) || '{}') || {}; } catch (_) { return {}; } };
@@ -664,7 +664,7 @@
         if (pz) return `<span class="wx-dl"><span class="wx-prog"><i style="width:${pct(pz.received, pz.size)}%"></i></span><small>${esc(i18n('En pause : {p} %', {p: String(pct(pz.received, pz.size))}))}</small><button type="button" class="button small" data-wx-dl="${k}">▶ ${esc(i18n('Reprendre'))}</button><button type="button" class="button small secondary" data-wx-dl-cancel="${k}">✕ ${esc(i18n('Abandonner'))}</button></span>`;
         if (DL.online === null) return `${window.LCNDA_UI.spinner(i18n('Recherche des données en ligne…'), {inline: true})}${imp}`;
         if (!on) return `<small class="muted" title="${esc(DL.err)}">${esc(DL.err ? i18n('Pas de connexion aux données en ligne.') : i18n('Pas encore en ligne.'))}</small>${imp}<button type="button" class="link-button" data-wx-howto="${k}">${esc(i18n('Le fabriquer soi-même'))}</button>`;
-        return `<button type="button" class="button small" data-wx-dl="${k}">⤓ ${esc(i18n('Installer ({s})', {s: fmtSize(on.size)}))}</button>${imp}`;
+        return `<button type="button" class="button small" data-wx-dl="${k}">📦 ${esc(i18n('Installer ({s})', {s: fmtSize(on.size)}))}</button>${imp}`;
     }
     function dlText(run) { const el = (Date.now() - run.t0) / 1000, rate = el > 2 ? (run.received - run.r0) / el : 0, left = rate > 0 ? (run.size - run.received) / rate : 0;
         return `${pct(run.received, run.size)} % · ${fmtSize(run.received)} ${i18n('sur')} ${fmtSize(run.size)}${left > 0 ? ` · ${i18n('reste ≈ {m} min', {m: String(Math.max(1, Math.round(left / 60)))})}` : ''}`; }
@@ -761,7 +761,7 @@
         const today = new Date(), md = `${today.getDate() === 1 ? '1er' : today.getDate()} ${MONTHS[today.getMonth()]}`;
         let body;
         if (d?.off) body = A().empty('La météo est masquée ici (Réglages → 🌦 Météo d’autrefois).', {icon: '🌦'});
-        else if (!d || !d.installed) body = A().empty('Les données météo ne sont pas installées.', {icon: '🌦', action: {label: '⤓ Installer les données météo', attrs: 'data-wx-goset'}});
+        else if (!d || !d.installed) body = A().empty('Les données météo ne sont pas installées.', {icon: '🌦', action: {label: '📦 Installer les données météo', attrs: 'data-wx-goset'}});
         else if (!d.pick) body = A().empty('Aucun anniversaire rond avec une météo connue aujourd’hui.', {icon: '🌦', hint: 'Il en faut un de 10, 25, 50, 100 ans… d’une naissance, d’un mariage ou d’un décès.'});
         else {
             const r = d.pick, s = settings(), lk = look(r, s), k = kindOf(r.tag);

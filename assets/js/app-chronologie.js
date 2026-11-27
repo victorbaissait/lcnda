@@ -116,7 +116,7 @@
         ['occupation', '🔨 Métiers', /^(OCCU|EDUC|GRAD|RETI)$/, /m[ée]tier|profess|emploi|travail|apprenti|retraite|[ée]tudes|dipl[ôo]me/],
         ['home', '🏠 Domiciles et départs', /^(RESI|EMIG|IMMI|NATU)$/, /r[ée]sid|domicil|d[ée]m[ée]nag|[ée]migr|immigr|naturalis|adresse/],
         ['military', '🎖 Militaire', /^(_MIL|_MILT|_MILI|MILI|_MDCL)/, /milit|conscri|r[ée]giment|matricul|mobilis|guerre|bless|d[ée]cor/],
-        ['census', '📋 Recensements', /^CENS$/, /recens/],
+        ['census', '🏠 Recensements', /^CENS$/, /recens/],
         ['other', '📌 Autres', null, null],
     ];
     const fold = t => String(t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
@@ -243,7 +243,7 @@
             </div>
             ${isPlace ? '' : `<div class="section-label">${escapeHtml(T('Comparer'))}</div><div class="timeline-compare-control"></div>`}
             <div class="section-label">💾 ${escapeHtml(T('Vues enregistrées'))}</div>
-            <div class="chrono-saved" id="timeline-saved">${views.length ? views.map(v => `<div class="saved-item chrono-saved-item" data-chrono-view-id="${Number(v.id)}" data-ctx-menu><button type="button" class="chrono-saved-open" data-chrono-open-view="${Number(v.id)}">${escapeHtml(v.name)}</button><button type="button" class="icon-button" data-chrono-view-more="${Number(v.id)}" title="${escapeHtml(T('Plus d’actions'))}" aria-label="${escapeHtml(T('Plus d’actions'))}">⋯</button></div>`).join('') : `<small class="muted">${escapeHtml(T('Aucune vue pour l’instant : règle la frise, puis « 💾 Enregistrer la vue ».'))}</small>`}</div>`;
+            <div class="chrono-saved" id="timeline-saved">${views.length ? views.map(v => `<div class="saved-item chrono-saved-item" data-chrono-view-id="${Number(v.id)}" data-ctx-menu><button type="button" class="chrono-saved-open" data-chrono-open-view="${Number(v.id)}">${escapeHtml(v.name)}</button><button type="button" class="icon-button" data-chrono-view-more="${Number(v.id)}" title="${escapeHtml(T('Plus d’actions'))}" aria-label="${escapeHtml(T('Plus d’actions'))}">⋯</button></div>`).join('') : window.LCNDA_APP.empty(T('Aucune vue pour l’instant : règle la frise, puis « 💾 Enregistrer la vue ».'), {icon: '💾'})}</div>`;
         footer.innerHTML = `${escapeHtml(T('Les événements sans année restent sur les fiches.'))}<button class="button small secondary" type="button" data-world-list style="margin-top:8px;width:100%" title="${escapeHtml(T('Les grands événements livrés avec l’app, et les tiens (histoire locale)'))}">🌍 ${escapeHtml(T('Le monde autour…'))}</button>${kiosk() ? '' : `<button class="button small secondary" type="button" id="edit-historical-timeline" style="margin-top:8px;width:100%">${escapeHtml(T('Modifier la frise historique'))}</button>`}`;
         // la barre commune (H10) : 🔍 chercher dans la frise · Filtrer ▾ les sortes d'événements
         const slot = $('#timeline-listbar', content);

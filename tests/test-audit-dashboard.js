@@ -97,10 +97,10 @@ echo json_encode($ids + ['fam' => $fam, 'label' => $lab, 'md' => $md]);`], {cwd:
             assert.match(await p.textContent('.dashboard-page .page-header h2'), /Vue d’ensemble/);
             await p.click('[data-dash-print]'); await p.waitForSelector('dialog.k-print[open]', {timeout: 10000});
             await p.keyboard.press('Escape'); await sleep(300);
-            await p.click('[data-dash-export]'); await p.waitForSelector('.ui-actmenu');
-            const labels = await p.$$eval('.ui-actmenu .ui-actmenu-i b', l => l.map(x => x.textContent));
-            assert.deepStrictEqual(labels, ['PDF (bilan imprimable)', 'Page web (.html)', 'Tableau des chiffres (.csv)']);
-            const [dl] = await Promise.all([p.waitForEvent('download'), p.click('.ui-actmenu .ui-actmenu-i:has-text("csv")')]);
+            await p.click('[data-dash-export]'); await p.waitForSelector('dialog.ui-export[open]'); // ⤓ la fenêtre d'export commune
+            const labels = await p.$$eval('dialog.ui-export .ui-export-fmt', l => l.map(x => x.dataset.fmt));
+            for (const f of ['csv', 'xlsx', 'pdf', 'html']) assert.ok(labels.includes(f), labels.join(', '));
+            const [dl] = await Promise.all([p.waitForEvent('download'), p.click('dialog.ui-export [data-ui-go]')]);
             assert.match(dl.suggestedFilename(), /\.csv$/);
             const csv = fs.readFileSync(await dl.path(), 'utf8'); assert.match(csv, /Chiffres clés.*Personnes.*4/);
         });

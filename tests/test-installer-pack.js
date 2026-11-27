@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-/* ⤓ Installer un pack depuis 📊 Données : la page se met à jour toute seule (assets/js/app-listes-donnees.js : installState, forgetInstalls ;
+/* 📦 Installer un pack depuis 📊 Données : la page se met à jour toute seule (assets/js/app-listes-donnees.js : installState, forgetInstalls ;
  *   les mémoires de app-listes-themes.js, app-donnees-accueil.js, app-listes-maj.js ; api.php : les actions ld_*).
- *  Le bogue : « Séismes d'Europe (1000 → 1899) » restait « pas encore sur cet ordinateur » après « ⤓ Installer », même après « ↻ C'est installé :
+ *  Le bogue : « Séismes d'Europe (1000 → 1899) » restait « pas encore sur cet ordinateur » après « 📦 Installer », même après « ↻ C'est installé :
  *  recharger » — api.php envoyait TOUTES les actions ld_* aux Lieux en double (ld_status → « Action inconnue », lu comme « rien d'installé »),
  *  et l'état était gardé 15 s en mémoire.
  *  1. le serveur : ld_status, ld_query, ld_famille répondent ; les Lieux en double (ld_groups) aussi ;
@@ -9,8 +9,8 @@
  *  3. une installation ratée (pack abîmé) : un message clair, rien d'installé, la page dit toujours « pas encore » ;
  *  4. la vérification elle-même en panne : un message d'erreur (pas « pas installé ») ; « ↻ recharger » relit vraiment ;
  *  5. installé pendant que la page est ouverte : les lignes arrivent sans recharger ; ↶ (hist_pack_undo) : la page revient à « pas encore » ;
- *  6. « ⤓ Installer » → Réglages → Histoire du lieu → ⤓ → ← : les lignes tout de suite ; le thème et le récap à jour ;
- *  7. d'autres sortes : un pack livré (tf-ballons), un pack GitHub (tb-osm-…), une liste « lien » : jamais de « ⤓ Installer ».
+ *  6. « 📦 Installer » → Réglages → Histoire du lieu → ⤓ → ← : les lignes tout de suite ; le thème et le récap à jour ;
+ *  7. d'autres sortes : un pack livré (tf-ballons), un pack GitHub (tb-osm-…), une liste « lien » : jamais de « 📦 Installer ».
  * Le pack « Histoire du lieu » est FABRIQUÉ ici (quelques lignes, le vrai schéma) : rien à télécharger.
  * Base : tests/prendre-depuis-seed.js.   node tests/test-installer-pack.js */
 'use strict';
@@ -73,7 +73,7 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
         const waitRows = (ms = 8000) => p.waitForFunction(() => !document.querySelector('#workspace .ld-page[data-ld-missing]') && document.querySelectorAll('#workspace .ld-page [data-ld-results] [data-ld-row]').length > 0, null, {timeout: ms});
         const recapMissing = async () => { await p.evaluate(() => { window.LCNDA_EXT.dataHome?.setPlace?.('deux', {undo: false}); window.LCNDA_EXT.donneesOnglet.open('dno_recap'); window.LCNDA_APP.setModule('donnees'); }); await idle();
             await p.waitForFunction(() => /listes installées sur/.test(document.querySelector('#workspace [data-dr-foot]')?.textContent || ''), null, {timeout: 20000});
-            const txt = await p.textContent('#workspace [data-dr-foot]'); const m = txt.match(/⤓\s*([\d\s ]+)/); return m ? Number(m[1].replace(/\D/g, '')) : 0; };
+            const txt = await p.textContent('#workspace [data-dr-foot]'); const m = txt.match(/📦\s*([\d\s ]+)/); return m ? Number(m[1].replace(/\D/g, '')) : 0; };
         const themeTag = async () => { await p.evaluate(() => { window.LCNDA_EXT.donneesOnglet.open('data_theme_seismes'); window.LCNDA_APP.setModule('donnees'); }); await idle();
             const lists = p.locator('.ldt-tabs [data-ldt-tab="lists"]'); if (await lists.count()) { await lists.first().click(); await idle(); }
             await sleep(1500); return p.evaluate(() => document.querySelector('[data-ld-go="data_hist_seismes"]')?.textContent || ''); };
@@ -88,12 +88,12 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
 
         /* ═════════ 2. avant ═════════ */
         let recap0 = 0;
-        await t('avant : la page « pas encore sur cet ordinateur » avec ⤓ Installer et ↻ recharger ; le thème « à télécharger » ; le récap compte les ⤓', async () => {
+        await t('avant : la page « pas encore sur cet ordinateur » avec 📦 Installer et ↻ recharger ; le thème « à télécharger » ; le récap compte les ⤓', async () => {
             await openList('data_hist_seismes');
             assert.ok(await missing(), 'page « pas encore »');
             assert.ok(await p.$('#workspace [data-ld-install]') && await p.$('#workspace [data-ld-reload]'));
             assert.match(await themeTag(), /à télécharger|à installer/);
-            recap0 = await recapMissing(); assert.ok(recap0 >= 6, `récap ⤓ ${recap0}`);
+            recap0 = await recapMissing(); assert.ok(recap0 >= 6, `récap 📦 ${recap0}`);
         });
 
         /* ═════════ 3. une installation ratée ═════════ */
@@ -139,8 +139,8 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             await p.waitForFunction(() => !!document.querySelector('#workspace .ld-page[data-ld-missing]'), null, {timeout: 8000});
         });
 
-        /* ═════════ 6. le vrai chemin : ⤓ Installer → Réglages → ← ═════════ */
-        await t('⤓ Installer → Réglages → Histoire du lieu → ⤓ → ← : les lignes tout de suite ; le thème et le récap à jour', async () => {
+        /* ═════════ 6. le vrai chemin : 📦 Installer → Réglages → ← ═════════ */
+        await t('📦 Installer → Réglages → Histoire du lieu → ⤓ → ← : les lignes tout de suite ; le thème et le récap à jour', async () => {
             await openList('data_hist_seismes');
             await p.click('#workspace [data-ld-install]'); await idle();
             await p.waitForSelector('#workspace [data-hist-dl]', {timeout: 20000}); await p.click('#workspace [data-hist-dl]');
@@ -148,7 +148,7 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             await p.goBack(); await waitRows(); // aussitôt : plus de mémoire de 15 s
             assert.strictEqual(await rowsShown(), 3);
             assert.ok(!/à télécharger|à installer/.test(await themeTag()), 'le thème ne dit plus « à télécharger »');
-            const recap1 = await recapMissing(); assert.ok(recap1 <= recap0 - 6, `récap ⤓ ${recap0} → ${recap1}`);
+            const recap1 = await recapMissing(); assert.ok(recap1 <= recap0 - 6, `récap 📦 ${recap0} → ${recap1}`);
         });
         await t('Réglages → 🗂 Données : « Histoire du lieu » installé', async () => {
             await p.evaluate(() => { const st = window.LCNDA_APP.state; st.maintenanceTab = 'donnees_installees'; window.LCNDA_APP.setModule('maintenance'); }); await idle();
@@ -158,7 +158,7 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
         });
 
         /* ═════════ 7. d'autres sortes de listes ═════════ */
-        await t('pack livré (tf-ballons), pack GitHub (tb-osm, si allumé) : des lignes, jamais « pas encore » ; une liste « lien » : pas de ⤓ Installer', async () => {
+        await t('pack livré (tf-ballons), pack GitHub (tb-osm, si allumé) : des lignes, jamais « pas encore » ; une liste « lien » : pas de 📦 Installer', async () => {
             const E = await p.evaluate(() => window.LCNDA_EXT.dataListsEngine.list().map(d => ({id: d.id, key: window.LCNDA_EXT.dataListsEngine.keyOf(d), link: !!d.link, installed: !!d.installed, install: !!d.install})));
             for (const id of ['tf_ballons', 'tb_berger']) {
                 const d = E.find(x => x.id === id); if (!d) { console.log(`  (${id} pas dans les listes : sauté)`); continue; }

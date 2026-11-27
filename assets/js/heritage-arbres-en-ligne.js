@@ -36,7 +36,7 @@
     const kiosk = () => document.body?.classList.contains('is-kiosk');
     const ls = {get: (k, d = null) => { try { const v = localStorage.getItem(k); return v === null ? d : v; } catch (_) { return d; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch (_) {} }};
     const TAB = ['arbres_en_ligne', '16b', '🌐 Mes arbres en ligne'];
-    const link = (url, label) => `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`;
+    const link = (url, label) => `${window.LCNDA_UI.extLink(url, label)}`;
     const when = d => { if (!d) return esc(T('jamais')); const x = new Date(String(d).replace(' ', 'T') + 'Z'); return esc(Number.isNaN(x.getTime()) ? String(d).slice(0, 16) : x.toLocaleString('fr-FR', {dateStyle: 'medium', timeStyle: 'short'})); };
     const VIEW = {site: ls.get('lcnda-ael-site', 'geneanet'), lines: {}, filter: 'pending'};
 
@@ -195,7 +195,7 @@
         let st; try { st = await get('enligne_status'); } catch (_) { return; }
         const due = Object.values(st.sites).filter(s => s.reminder_due); if (!due.length) return;
         ls.set('lcnda-ael-reminded', today);
-        due.forEach(s => A().toast?.(T('🌐 Ton arbre {s} n’a pas été mis à jour depuis le {d} : {n}.', {s: s.name, d: String(s.last_sent_at).slice(0, 10), n: plural(s.changes, 'changement', 'changements')}), '', {duration: 12000, action: {label: T('Voir'), run: () => open(s.site)}}));
+        due.forEach(s => A().toast?.(T('🌐 Ton arbre {s} n’a pas été mis à jour depuis le {d} : {n}.', {s: s.name, d: String(s.last_sent_at).slice(0, 10), n: plural(s.changes, 'changement', 'changements')}), '', {action: {label: T('Voir'), run: () => open(s.site)}}));
     }
     function register() {
         const app = A(), tabs = app.defaultMaintenanceTabs;

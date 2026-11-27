@@ -7,7 +7,7 @@
  *  2. Navigateur (base tests/prendre-depuis-seed.js : noms inventés MAZAUD, LACOMBE, DURAND ; une liste FABRIQUÉE « Batailles
  *     inventées » enregistrée dans le moteur des listes) : « ＋ Ajouter un bloc » propose 📊 Données ; la liste se choisit avec le choix
  *     commun (LCNDA_EXT.dataListPicker : 🔍 recherche, pastilles des thèmes — ⚔️ Guerres et soldats —, cartes, clavier) puis se replie en
- *     une ligne « 📋 … · thème — Changer » + source et licence ; « Changer » / « ✕ Garder » ; une liste pas installée : « ⤓ Installer » ;
+ *     une ligne « 📋 … · thème — Changer » + source et licence ; « Changer » / « ✕ Garder » ; une liste pas installée : « 📦 Installer » ;
  *     les réglages en 4 sections repliées (📋 Données ouverte, les autres disent leur résumé), grille alignée (le Rayon sous son titre,
  *     l'ordre du tri lisible) ; un bloc enregistré avant s'ouvre tel quel ;
  *     colonnes, période, autour du sujet de la fiche (« Tulle »), au plus N lignes ; chaque ligne a son ↗ source,
@@ -94,7 +94,7 @@ echo json_encode(['o' => array_diff_key($o, ['snap' => 1]), 'n' => count($o['sna
             window.LCNDA_EXT.dataLists.push({id: 'test_batailles', icon: '⚔️', label: 'Batailles inventées', group: 'Le monde', theme: 'guerres', source: 'Jeu d’essai (CC0)', sourceUrl: 'https://example.org/',
                 fields: [{key: 'nom', label: 'Bataille'}, {key: 'annee', label: 'Année', type: 'year'}, {key: 'lieu', label: 'Lieu', type: 'place'}, {key: 'morts', label: 'Morts', type: 'number'}, {key: 'u', label: 'Fiche', type: 'url'}],
                 load: async () => rows, period: r => [r.annee, r.annee], geo: r => [r.lat, r.lon], familyColumn: true});
-            // un pack pas encore installé (pour « ⤓ Installer » sur place)
+            // un pack pas encore installé (pour « 📦 Installer » sur place)
             window.LCNDA_EXT.dataLists.push({id: 'test_pack', icon: '📦', label: 'Pack inventé des moulins', group: 'Le lieu', theme: 'guerres', source: 'Jeu d’essai (CC0)',
                 fields: [{key: 'nom', label: 'Moulin'}], load: async () => rows, installed: async () => window.__packOk === true, install: h => { window.__installed = !!h; }});
         });
@@ -172,7 +172,7 @@ echo json_encode(['o' => array_diff_key($o, ['snap' => 1]), 'n' => count($o['sna
             assert.ok(!(await sheet(id)).blocks.some(x => x.type === 'data'), '↶ Annuler : plus de bloc');
             const s2 = await sheet(id); await post('save_topic_sheet', {...s2, blocks: [...s2.blocks, b]}); // on le remet pour la suite
         });
-        await t('« Changer » rouvre le choix (« ✕ Garder » revient), Entrée choisit au clavier ; une liste pas installée : « ⤓ Installer » sur place ; grille alignée', async () => {
+        await t('« Changer » rouvre le choix (« ✕ Garder » revient), Entrée choisit au clavier ; une liste pas installée : « 📦 Installer » sur place ; grille alignée', async () => {
             await openSheet(id, true);
             const i = await p.evaluate(() => [...document.querySelectorAll('[data-fi-block]')].findIndex(x => x.querySelector('.h-fi-data')));
             await p.click(`[data-fi-block="${i}"] [data-fi-edit]`);
@@ -194,7 +194,7 @@ echo json_encode(['o' => array_diff_key($o, ['snap' => 1]), 'n' => count($o['sna
             await p.waitForSelector('[data-fi-dbox] [data-fi-dchosen-line="test_pack"] .h-fi-dwarn', {timeout: 5000});
             assert.match(await p.textContent('[data-fi-dchosen-line="test_pack"]'), /pas encore sur cet ordinateur/);
             await p.click('[data-fi-dbox] [data-fi-dinstall]');
-            assert.strictEqual(await p.evaluate(() => window.__installed), true, '⤓ Installer : l’installation du pack, sur place');
+            assert.strictEqual(await p.evaluate(() => window.__installed), true, '📦 Installer : l’installation du pack, sur place');
             await p.evaluate(() => { window.__packOk = true; }); await p.click('[data-fi-dbox] [data-fi-drecheck]');
             await p.waitForFunction(() => !document.querySelector('[data-fi-dchosen-line="test_pack"] .h-fi-dwarn'), null, {timeout: 5000});
             assert.match(await sumOf('data'), /Pack inventé des moulins/);

@@ -342,7 +342,7 @@
                     ${seg('data-rt-source', d.source, [['persons', 'personnes'], ['events', 'événements']])}
                     <label class="rt-lab">${esc(T('Partir de'))} <select data-rt-start><option value="">${esc(T('toute la base'))}</option>
                         ${m.searches.length ? `<optgroup label="${esc(T('🔎 Recherches enregistrées'))}">${m.searches.map(s => `<option value="s${s.id}"${startVal === 's' + s.id ? ' selected' : ''}>${esc(s.name)}</option>`).join('')}</optgroup>` : ''}
-                        ${m.lists.length ? `<optgroup label="${esc(T('📋 Mes listes'))}">${m.lists.map(l => `<option value="l${l.id}"${startVal === 'l' + l.id ? ' selected' : ''}>${esc(l.name)}</option>`).join('')}</optgroup>` : ''}</select></label>
+                        ${m.lists.length ? `<optgroup label="${esc(T('📑 Mes listes'))}">${m.lists.map(l => `<option value="l${l.id}"${startVal === 'l' + l.id ? ' selected' : ''}>${esc(l.name)}</option>`).join('')}</optgroup>` : ''}</select></label>
                     <div class="rt-match"><label class="radio-line"><input type="radio" name="rt-match" value="all"${d.match !== 'any' ? ' checked' : ''}> ${esc(T('toutes les conditions (ET)'))}</label><label class="radio-line"><input type="radio" name="rt-match" value="any"${d.match === 'any' ? ' checked' : ''}> ${esc(T('au moins une (OU)'))}</label></div>
                     <div data-rt-rulebox>${rulesHtml(d.rules, d.source, m)}</div></div>
                 <div class="rt-step"><h3><i>2</i> ${esc(T('Colonnes'))}</h3>

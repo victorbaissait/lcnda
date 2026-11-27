@@ -204,7 +204,7 @@
                 <canvas class="gt-cv" data-gt-cv aria-hidden="true"></canvas><canvas class="gt-cv gt-fx" data-gt-fx aria-hidden="true"></canvas>
                 <div class="mm-ctl gt-ctl" role="toolbar" aria-label="${esc(T('Cadrage de la carte'))}">${FRAMES.map(([k, ic, l]) => `<button type="button" data-gt-frame="${k}" aria-pressed="${k === S.frame}" title="${esc(T('Cadrer : {p}', {p: T(l)}))}"><span aria-hidden="true">${ic}</span><span class="gt-lab">${esc(T(l))}</span></button>`).join('')}</div>
                 <div class="gt-box gt-legend" data-gt-legend></div>
-                <div class="gt-attr"><a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener noreferrer"${offline() ? ' tabindex="-1" data-gt-off' : ''}>${esc(T('Made with Natural Earth (domaine public)'))}</a></div>
+                <div class="gt-attr"><a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener noreferrer" title="https://www.naturalearthdata.com/"${offline() ? ' tabindex="-1" data-gt-off' : ''}>↗ ${esc(T('Made with Natural Earth (domaine public)'))}</a></div>
                 <div class="gt-tip" data-gt-tip role="status"></div>
               </div>
               <div class="ld-map-note gt-note"><span><b data-gt-shown></b> · ${esc(T('les batailles restent 5 ans, en pâlissant.'))}</span><small class="muted">${esc(T('Espace : lecture · ← → : une année.'))}</small></div>

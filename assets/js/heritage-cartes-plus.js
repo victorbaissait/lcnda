@@ -313,7 +313,7 @@
                 <div class="cp-set-files">${rows}</div>
                 ${st.installed ? `<p>${A().plural(st.gone || 0, 'commune disparue', 'communes disparues')} · ${A().plural(st.renamed || 0, 'commune renommée', 'communes renommées')} · ${A().plural(st.located || 0, 'placée sur la carte', 'placées sur la carte')}.</p>` : ''}
                 <div class="page-actions">${st.installed ? '<button type="button" class="button secondary" data-cp-dl>⤓ Télécharger de nouveau (mise à jour)</button><button type="button" class="button secondary" data-cp-rm>🗑 Retirer</button>'
-                    : '<button type="button" class="button" data-cp-dl>⤓ Installer les frontières anciennes <span data-cp-size>(taille…)</span></button>'}</div>
+                    : '<button type="button" class="button" data-cp-dl>📦 Installer les frontières anciennes <span data-cp-size>(taille…)</span></button>'}</div>
                 <p class="ui-hint" data-cp-remote></p>
                 <p class="ui-hint">${esc(st.licence || '')}. ${i18n('Rangé dans le {name}, commun à toutes tes généalogies.', {name: esc(i18n(st.dir_label || 'dossier des données'))})}</p></section>
             <section class="maintenance-panel"><h3>🏛 Provinces (≈ 1789) et départements de 1790</h3>

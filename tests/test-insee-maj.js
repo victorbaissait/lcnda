@@ -5,7 +5,7 @@
  * en positions fixes (lignes de 198 caractères + CRLF, comme les vrais), un .zip, un fichier à l'empreinte fausse.
  *  1. serveur : liste, ordre, trimestres en doublon écartés, par petits pas, pause, reprise dans un autre processus (= app fermée),
  *     sans doublon ; mise à jour (le fichier de l'année remplace les mois, retirés) ; fichier abîmé ; hors ligne ; retirer une année ;
- *  2. dans l'app : « ⤓ Tout installer » → barre → pause → rechargée → reprendre ; « Seulement certaines années… » (la place) ;
+ *  2. dans l'app : « 📦 Tout installer » → barre → pause → rechargée → reprendre ; « Seulement certaines années… » (la place) ;
  *     reprise toute seule à l'ouverture ; « 🆕 Nouveau fichier des décès » → « ⤓ Mettre à jour » ; « 🗑 Retirer » → « ↶ Annuler » ;
  *     la recherche dans l'index marche toujours ; mode consultation : rien n'est proposé, rien n'est écrit.
  *   node tests/test-insee-maj.js */
@@ -116,7 +116,7 @@ echo json_encode(array_map(fn($f) => [$f['key'], $f['new'], $f['superseded']], $
         assert.deepStrictEqual(old, [['2026-t03', false, true], ['2026-m07', true, false], ['2026-m06', false, false]]);
     });
     let steps = 0;
-    await t('⤓ Tout installer : dans l’ordre (1970 → aujourd’hui), par petits pas ; pause au milieu d’un fichier, reprise dans un autre processus, sans doublon', async () => {
+    await t('📦 Tout installer : dans l’ordre (1970 → aujourd’hui), par petits pas ; pause au milieu d’un fichier, reprise dans un autre processus, sans doublon', async () => {
         const st = php(tmp, site, `${J}insee_maj_start($pdo, ['years' => 'all'])${JE}`);
         assert.deepStrictEqual(st.job.items.map(i => i.label), ['Décès de 2022', 'Décès de 2023', 'Décès de 2024', 'Décès de janvier 2025', 'Décès de février 2025']);
         assert.strictEqual(st.job.total, 5);
@@ -227,7 +227,7 @@ echo json_encode(['n' => $n, 'b' => $b, 'est' => INSEE_MAJ_ROW_BYTES]);`);
         const post = (a, b = {}) => p.evaluate(async ([x, y]) => { try { return await window.LCNDA_APP.api(x, {}, {method: 'POST', body: y}); } catch (e) { return {error: e.message, status: e.status}; } }, [a, b]);
         const toasts = () => p.evaluate(() => [...document.querySelectorAll('.ui-toast')].map(x => x.textContent).join(' | '));
         const openInsee = async () => { await p.evaluate(() => { const A = window.LCNDA_APP; A.state.researchKind = 'insee'; A.setModule('recherche'); }); await p.waitForSelector('[data-im-box] [data-im-check]', {timeout: 20000}); };
-        await t('l’écran Décès INSEE : « ⤓ Tout installer (1970 → aujourd’hui) » et « Seulement certaines années… » (la place qu’il faut)', async () => {
+        await t('l’écran Décès INSEE : « 📦 Tout installer (1970 → aujourd’hui) » et « Seulement certaines années… » (la place qu’il faut)', async () => {
             await openInsee();
             await p.click('[data-im-box] [data-im-check]'); // pas encore de liste : « Vérifier maintenant »
             await p.waitForSelector('[data-im-box] [data-im-all]', {timeout: 15000});
@@ -245,7 +245,7 @@ echo json_encode(['n' => $n, 'b' => $b, 'est' => INSEE_MAJ_ROW_BYTES]);`);
             const s = await api('insee_maj_status');
             assert.deepStrictEqual(s.installed.years.map(y => y.year), [2022]); assert.strictEqual(s.installed.rows, 700);
         });
-        await t('« ⤓ Tout installer » → la barre (fichiers, Mo) → ⏸ Pause → app fermée et rouverte → ▶ Reprendre → installé', async () => {
+        await t('« 📦 Tout installer » → la barre (fichiers, Mo) → ⏸ Pause → app fermée et rouverte → ▶ Reprendre → installé', async () => {
             await openInsee();
             await p.waitForSelector('[data-im-box] [data-im-all]');
             await p.click('[data-im-box] [data-im-all]');

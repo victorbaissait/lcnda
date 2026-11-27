@@ -1,7 +1,7 @@
 /* LCNDA — 👪 La page de la famille (maquette docs/design/site-familial-comptes.html, partie 2 « Ce que voit un cousin qui
  * propose » ; serveur : famille.php + lib/comptes_famille.php). Une page volontairement simple, pas toute l'app : chercher,
  * la fiche et l'arbre autour, « ✎ Proposer une correction » à côté de chaque ligne, « ✎ Proposer un ajout » (souvenir, photo,
- * enfant, conjoint, parent — avec « existe peut-être déjà »), « 📋 Mes propositions ». Un compte 🌿 écrit directement dans sa
+ * enfant, conjoint, parent — avec « existe peut-être déjà »), « 📝 Mes propositions ». Un compte 🌿 écrit directement dans sa
  * branche (avec ↶ Annuler). Sur téléphone : la même chose en colonne.
  * Sécurité : aucun texte venu du serveur n'est posé autrement que par esc() ; aucun script en ligne (CSP script-src 'self') ;
  * l'invitation (#inv=…) est lue puis retirée de l'adresse : elle ne part jamais dans une adresse demandée au serveur. */
@@ -70,7 +70,7 @@
         return `<header class="fam-top"><a class="fam-brand" href="#" data-fam-home>👪 <b>${esc(S.state?.genealogy || t('La famille'))}</b></a>
             <form class="fam-search" data-fam-search role="search"><input type="search" name="q" placeholder="${esc(t('Chercher un nom…'))}" aria-label="${esc(t('Chercher un nom…'))}" autocomplete="off"><button type="submit">${esc(t('Chercher'))}</button></form>
             ${a ? `<div class="fam-me"><span class="fam-who">${esc(a.name)} · ${esc(t(ROLE[a.role] || a.role))}</span>
-                ${a.can_propose ? `<button type="button" class="fam-link" data-fam-mine>${esc(t('📋 Mes propositions'))}</button>` : ''}
+                ${a.can_propose ? `<button type="button" class="fam-link" data-fam-mine>${esc(t('📝 Mes propositions'))}</button>` : ''}
                 <button type="button" class="fam-link" data-fam-lists>${esc(t('📥 Ce qu’on m’a partagé'))}</button>
                 <button type="button" class="fam-link" data-fam-logout>${esc(t('Se déconnecter'))}</button></div>` : ''}</header>`;
     };
@@ -263,7 +263,7 @@
         try { d = await call('mine'); } catch (e) { if (!e.silent) toast(e.message, {kind: 'error'}); return; }
         const icon = {attente: '⏳', acceptee: '✓', refusee: '✕', retiree: '↩', directe: '🌿', annulee: '↶'};
         const word = {attente: t('en attente'), acceptee: t('acceptée'), refusee: t('refusée'), retiree: t('retirée'), annulee: t('annulée')};
-        page(`<section class="fam-card"><h1>${esc(t('📋 Mes propositions'))}</h1>
+        page(`<section class="fam-card"><h1>${esc(t('📝 Mes propositions'))}</h1>
             <p class="fam-sum">${esc(t('{a} acceptée(s) ✓ · {w} en attente ⏳ · {r} refusée(s) ✕', {a: d.count.acceptee, w: d.count.attente, r: d.count.refusee}))}</p>
             ${d.items.length ? `<ul class="fam-mine">${d.items.map(x => `<li class="is-${esc(x.status)}"><span class="fam-st" aria-hidden="true">${icon[x.status] || '•'}</span>
                 <div><b>${x.person ? `<a href="#p=${Number(x.person)}">${esc(x.label)}</a>` : esc(t('Fiche'))}</b> — ${esc(x.what)} <small>· ${esc(x.direct ? t('modifié directement') : (word[x.status] || x.status))}</small>

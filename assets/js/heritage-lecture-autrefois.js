@@ -64,7 +64,7 @@
     /** l'alphabet d'une langue (grec…) : majuscule, minuscules, nom, lettres latines, valeur de nombre */
     const alphabetHtml = l => (!Array.isArray(l?.alphabet) || !l.alphabet.length ? '' : `<details class="la-alpha" open><summary>🔤 ${i18n('L’alphabet ({n} lettres)', {n: l.alphabet.length})}</summary><table class="af-table la-alpha-table"><thead><tr><th>Lettre</th><th>Nom</th><th>Se lit</th><th>Nombre</th></tr></thead><tbody>${l.alphabet.map(a => `<tr><td${langAttrs(l.code)}><b>${esc(a.big)}</b> ${esc(a.small)}</td><td>${esc(a.name)}</td><td>${esc(a.latin)}</td><td>${a.value != null ? nf(a.value, 0) : ''}</td></tr>`).join('')}</tbody></table></details>`);
     /** sous la liste : d'où viennent les mots de cette langue */
-    const sourcesHtml = l => (!l || l.builtin || !(l.sources || []).length ? '' : `<p class="ui-hint la-sources">${i18n('Sources : {x}.', {x: l.sources.map(x => /^https:\/\//.test(String(x.url || '')) ? `<a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">${esc(x.label)}</a>` : esc(x.label)).join(' · ')})}</p>`);
+    const sourcesHtml = l => (!l || l.builtin || !(l.sources || []).length ? '' : `<p class="ui-hint la-sources">${i18n('Sources : {x}.', {x: l.sources.map(x => /^https:\/\//.test(String(x.url || '')) ? `${window.LCNDA_UI.extLink(x.url, x.label)}` : esc(x.label)).join(' · ')})}</p>`);
     const LEVEL_BADGE = {facile: 'green', moyen: 'yellow', difficile: 'red'};
     function mountReading(host, {tab = '', q = '', lang, year = ''} = {}) {
         const TABS = LA_TABS.concat(laExtra().map(x => [x.id, x.label]));
@@ -254,7 +254,7 @@
             out.innerHTML = `<div class="af-big"><small>${i18n('En euros d’aujourd’hui')}</small><strong>${esc(F().euroText(w.euros))}</strong>${badge(w.source === 'insee' ? 'INSEE' : i18n('Ordre de grandeur'), w.source === 'insee' ? 'green' : 'yellow')}${copyBtn(txt)}</div>
                 <div class="af-cards"><div><small>${i18n('Dans la monnaie de {y}', {y})}</small><b>${esc(w.nativeText)}</b></div><div><small>${i18n('En pain')}</small><b>🥖 ${nf(w.bread, w.bread < 10 ? 1 : 0)} kg</b></div>${w.days != null ? `<div><small>${i18n('En journées de travail')}</small><b>🔨 ${nf(w.days, 1)}</b><small>${i18n('d’un journalier en {y}', {y})}</small></div>` : ''}</div>
                 ${w.warn.map(t => UI().notice ? UI().notice('warn', t.charAt(0).toUpperCase() + t.slice(1) + '.') : '').join('')}
-                <details class="af-steps"><summary>${i18n('Le calcul, pas à pas')}</summary><ol>${w.steps.map(s => `<li>${esc(s)}</li>`).join('')}</ol><p class="ui-hint">${i18n('Source :')} <a href="${esc(F().SOURCE_URL)}" target="_blank" rel="noopener noreferrer">${esc(F().SOURCE)}</a>. Parités exactes : 1 livre = 20 sous = 240 deniers · 81 livres = 80 francs (franc germinal, 1795) · 1 nouveau franc = 100 anciens francs (1960) · 1 € = 6,55957 F (1999).</p></details>
+                <details class="af-steps"><summary>${i18n('Le calcul, pas à pas')}</summary><ol>${w.steps.map(s => `<li>${esc(s)}</li>`).join('')}</ol><p class="ui-hint">${i18n('Source :')} ${window.LCNDA_UI.extLink(F().SOURCE_URL, F().SOURCE)}. Parités exactes : 1 livre = 20 sous = 240 deniers · 81 livres = 80 francs (franc germinal, 1795) · 1 nouveau franc = 100 anciens francs (1960) · 1 € = 6,55957 F (1999).</p></details>
                 ${pricesHtml(y)}`;
         }
         /** 💰 les prix sourcés de l'année (assets/data/prix-reference.json, le même fichier que « Une journée dans la vie de… ») */

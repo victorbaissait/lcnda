@@ -40,7 +40,7 @@
             try { info = await A().api('atelier_idees', {op: 'iiif_preview', url: u}); info.url = u; }
             catch (e) { info = null; $('[data-aii-info]').innerHTML = `<div class="ui-msg is-error aii-err">⛔ ${esc(e.message)}</div>`; return; }
             n = Math.max(1, Math.min(info.count, n));
-            const lic = info.licence ? (info.licence_url ? `<a href="${esc(info.licence_url)}" target="_blank" rel="noopener noreferrer">${esc(info.licence)}</a>` : esc(info.licence)) : '';
+            const lic = info.licence ? (info.licence_url ? `${window.LCNDA_UI.extLink(info.licence_url, info.licence)}` : esc(info.licence)) : '';
             $('[data-aii-info]').innerHTML = `<div class="aii-found"><b data-i18n-off>${esc(info.title)}</b> · ${esc(A().plural ? A().plural(info.count, 'vue') : i18n('{n} vues', {n: info.count}))}
                 <div class="aii-meta">${[info.attribution ? `<span data-i18n-off>${esc(info.attribution)}</span>` : '', info.cote ? `${esc(i18n('cote'))} <b data-i18n-off>${esc(info.cote)}</b>` : '', lic ? `${esc(i18n('Licence :'))} ${lic}` : ''].filter(Boolean).join(' · ')}</div></div>
                 ${info.licence_warn ? `<div class="ui-msg is-warning aii-warn">⚠️ ${esc(i18n('La licence de ce registre ne permet pas de réutiliser les images : la vue reste pour ton usage personnel, sans la publier ni la partager.'))}</div>` : ''}

@@ -56,7 +56,7 @@
     const plural = (n, a, b) => (A().plural ? A().plural(n, a, b) : `${n} ${n > 1 ? (b || a + 's') : a}`);
     let STATUS = null;
     const enabled = (st = STATUS) => { const v = ls.get(KEY); return v === null ? !!st?.insee?.installed : v === '1'; };
-    const link = (url, label) => `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`;
+    const link = (url, label) => `${window.LCNDA_UI.extLink(url, label)}`;
 
     async function refresh({auto = true} = {}) {
         try { STATUS = await get('vd_status'); } catch (_) { return null; }
@@ -71,7 +71,7 @@
         if (!STATUS || !enabled()) return;
         const n = Number(STATUS.pending || 0), told = Number(ls.get(TOLD, '0'));
         if (n > told) {
-            A().toast?.(T('⚰️ Veille des décès : {n} dans ton arbre (fichier INSEE, comparé sur l’ordinateur).', {n: plural(n, 'décès possible', 'décès possibles')}), '', {duration: 12000, action: {label: T('Voir'), run: open}});
+            A().toast?.(T('⚰️ Veille des décès : {n} dans ton arbre (fichier INSEE, comparé sur l’ordinateur).', {n: plural(n, 'décès possible', 'décès possibles')}), '', {action: {label: T('Voir'), run: open}});
         }
         ls.set(TOLD, String(n));
     }
@@ -160,7 +160,7 @@
         const chips = list.items.length ? `<div class="ui-filters vd-filters" role="group" aria-label="${esc(T('Décès possibles'))}">${[['all', T('Tous'), list.items.length], ['todo', T('À trancher'), list.items.length - nDoubt], ['doubt', T('🤔 À revoir'), nDoubt]]
             .map(([k, l, n]) => `<button type="button" class="${f === k ? 'is-active' : ''}" aria-pressed="${f === k}" data-vd-filter="${k}">${esc(l)} <small>(${n})</small></button>`).join('')}</div>` : '';
         const head = UI().pageHeader ? UI().pageHeader({title: T('Veille des décès'), icon: '⚰️', where: T('Réglages · Données'), help: esc(T('Les personnes de ton arbre qu’on croit vivantes, comparées au fichier des décès de l’INSEE installé sur ton ordinateur.'))}) : `<h2>${esc(TAB[2])}</h2>`;
-        const insLine = ins.installed ? T('Fichier des décès de l’INSEE installé : décès de {a} à {b}.', {a: String(ins.from || '?'), b: String(ins.to || '?')}) : T('Le fichier des décès de l’INSEE n’est pas installé : installe-le dans Recherche → Décès INSEE (bouton « ⤓ Tout installer »). Sans lui, la veille ne peut rien comparer.');
+        const insLine = ins.installed ? T('Fichier des décès de l’INSEE installé : décès de {a} à {b}.', {a: String(ins.from || '?'), b: String(ins.to || '?')}) : T('Le fichier des décès de l’INSEE n’est pas installé : installe-le dans Recherche → Décès INSEE (bouton « 📦 Tout installer »). Sans lui, la veille ne peut rien comparer.');
         const lastLine = st.last_run ? T('Dernière comparaison : {d}. Fiches surveillées : {n}.', {d: esc(String(st.last_run).slice(0, 16)), n: String(st.watched)}) : T('Fiches surveillées : {n}.', {n: String(st.watched)});
         ws.innerHTML = `<section class="page vd-page" data-vd-page>${head}
             <div class="maintenance-panel"><label class="checkbox-line cplus-tg"><input type="checkbox" data-vd-toggle ${on ? 'checked' : ''}><span><b>${esc(T('Surveiller les décès des personnes vivantes de mon arbre'))}</b><br><small class="muted">${esc(T('Quand un nouveau fichier des décès arrive (vérifié chaque jour dans Décès INSEE), l’app compare les fiches « vivantes » ou au statut inconnu, nées il y a moins de 110 ans : nom de naissance, prénoms, date et lieu de naissance. Rien n’est envoyé sur Internet : tout est comparé sur l’ordinateur.'))}</small></span></label>

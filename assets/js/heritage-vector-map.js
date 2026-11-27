@@ -226,7 +226,7 @@
         open: (id, again) => ext.openVectorEditor?.({id, onSaved: again, onClose: again}),
         create: again => newMapDoc(again),
         rename: (id, name) => A().api('rename_vector_doc', {}, {method: 'POST', body: {id, name}}),
-        remove: id => A().api('delete_vector_doc', {}, {method: 'POST', body: {id}}), createLabel: '＋ Nouvelle carte',
+        remove: id => (ext.projectDelUndo ? ext.projectDelUndo('delete_vector_doc')(id) : A().api('delete_vector_doc', {}, {method: 'POST', body: {id}})), undo: true, createLabel: '＋ Nouvelle carte',
         // 🎞 une carte enregistrée → une scène du Studio d'animation où le curseur du temps avance tout seul
         get extra() { return ext.openAnimStudio ? `<button type="button" class="button secondary" data-et-x="anim" title="${esc(i18n('Le curseur du temps joue tout seul : les objets apparaissent à leur date'))}">🎞 ${esc(i18n('Animer dans le Studio'))}</button>` : ''; },
         onExtra: async key => { if (key === 'anim') return animPickMap(); }});

@@ -64,7 +64,7 @@
                 {key: 'dossier', label: 'Dossier (base Léonore…)', type: 'url', star: true, onlyFor: {category: ['decoration']}},
                 {key: 'sponsor', label: 'Parrain', type: 'person', star: true, roleWord: 'parrain', onlyFor: {category: ['decoration']}}]},
             {key: 'photo', label: 'Trophée, photo, coupure', icon: '🖼', zone: 'left', fields: [{key: 'photo', label: 'Trophée, photo, coupure', short: 'Fichier', type: 'media', media: ['image', 'document', 'video', 'audio'], star: true}]},
-            {key: 'what', label: 'Récompense quoi', icon: '📎', zone: 'right', fields: [
+            {key: 'what', label: 'Récompense quoi', icon: '🏅', zone: 'right', fields: [
                 {key: 'for_items', label: 'Une œuvre, une invention, une équipe… (fiche)', short: 'Pour', type: 'items', star: true},
                 {key: 'for_animal', label: 'Un animal 🐾 (ou une autre personne)', short: 'Avec', type: 'person', star: true, roleWord: 'récompensé'}]},
             {key: 'source', label: 'Source', icon: '📚', zone: 'right', fields: [

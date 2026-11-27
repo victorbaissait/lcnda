@@ -123,7 +123,7 @@
         lines.push(`<p class="muted">${esc(i18n('L’app ne va pas voir sur le site des archives : elle ouvre la page, c’est toi qui regardes.'))}</p>`);
         const ro = kiosk();
         const acts = [];
-        if (st.site) acts.push(`<a class="button small" href="${esc(st.site)}" target="_blank" rel="noopener noreferrer">${esc(i18n('🏛 Ouvrir les archives ({dept})', {dept: st.dept?.name || ''}))}</a>`);
+        if (st.site) acts.push(`${window.LCNDA_UI.extLink(st.site, i18n('🏛 Ouvrir les archives ({dept})', {dept: st.dept?.name || ''}), {cls: 'button small'})}`);
         if (!ro && ext.openActLetter && st.who && st.status !== 'online') acts.push(`<button type="button" class="button small secondary" data-ad-letter="${st.event_id}">${esc(i18n('📮 Préparer la lettre ({who})', {who: whoLabel(st)}))}</button>`);
         if (!ro && st.key && st.dept && st.range) acts.push(`<button type="button" class="button small secondary" data-ad-yes="${st.event_id}">${esc(i18n('✓ Je l’ai trouvé en ligne'))}</button><button type="button" class="button small secondary" data-ad-no="${st.event_id}">${esc(i18n('✗ Pas en ligne'))}</button>`);
         if (st.status === 'verify' && ext.ouChercher?.openPerson) acts.push(`<button type="button" class="button small secondary" data-ad-ouc="${st.event_id}">${esc(i18n('🌍 Où chercher ?'))}</button>`);
@@ -231,7 +231,7 @@
                 if (!acts.length) { out.push(`<tr><td><b>${esc(r.code)} · ${esc(r.name)}</b></td><td>${esc(i18n('tous'))}</td><td><span class="ui-badge is-yellow">${esc(i18n('à vérifier'))}</span></td><td>—</td><td>—</td><td>—</td><td>${ro ? '' : `<button type="button" class="button small secondary" data-ad-add="${esc(r.code)}" title="${esc(i18n('＋ Noter la limite'))}" aria-label="${esc(i18n('＋ Noter la limite'))}">＋</button>`}</td></tr>`); return; }
                 acts.forEach(([k, l], i) => out.push(`<tr><td>${i ? '' : `<b>${esc(r.code)} · ${esc(r.name)}</b>`}</td><td>${esc(actsName(k))}</td>
                     <td>${l.until != null ? esc(l.until) : '—'}${l.from != null ? ` <small class="muted">(${esc(i18n('depuis {y}', {y: Y(l.from)}))})</small>` : ''}${l.confirmed == null ? ` <span class="ui-badge is-yellow">${esc(l.confidence === 'secondaire' ? i18n('source secondaire') : i18n('à confirmer'))}</span>` : ''}</td>
-                    <td>${l.source ? `<a href="${esc(l.source)}" target="_blank" rel="noopener noreferrer">${esc(l.source.replace(/^https?:\/\//, '').slice(0, 48))}</a>` : '—'}</td><td>${esc(l.checked ? String(l.checked).slice(0, 10) : (l.mine?.length ? String(l.mine[l.mine.length - 1].date) : '—'))}</td>
+                    <td>${l.source ? `${window.LCNDA_UI.extLink(l.source, '')}` : '—'}</td><td>${esc(l.checked ? String(l.checked).slice(0, 10) : (l.mine?.length ? String(l.mine[l.mine.length - 1].date) : '—'))}</td>
                     <td>${l.origin === 'lcnda' ? 'LCNDA' : `${esc(i18n('moi'))}${(l.mine || []).map(m => ` <small class="muted">${esc(m.about || '')}</small>`).join('')}`}</td>
                     <td>${ro ? '' : `${(l.mine || []).map(m => `<button type="button" class="button small secondary" data-ad-undo="${m.id}" title="${esc(i18n('Retirer ma correction'))}">↶</button>`).join('')}${i ? '' : `<button type="button" class="button small secondary" data-ad-add="${esc(r.code)}" title="${esc(i18n('＋ Noter la limite'))}" aria-label="${esc(i18n('＋ Noter la limite'))}">＋</button>`}`}</td></tr>`));
             });
@@ -291,7 +291,7 @@
             const cell = el.querySelector('[data-succ-act-cell]') || el.children[1]; if (!cell) return;
             const state = el.dataset.succState || '';
             let extra = '';
-            if (st.status === 'online' && state !== 'have') extra = `<br><small>${esc(i18n('En ligne aux archives : à télécharger, pas à demander'))}</small>${st.site ? ` <a class="link-button" href="${esc(st.site)}" target="_blank" rel="noopener noreferrer">${esc(i18n('🏛 Ouvrir'))}</a>` : ''}`;
+            if (st.status === 'online' && state !== 'have') extra = `<br><small>${esc(i18n('En ligne aux archives : à télécharger, pas à demander'))}</small>${st.site ? ` ${window.LCNDA_UI.extLink(st.site, i18n('🏛 Ouvrir'), {cls: 'link-button'})}` : ''}`;
             else if ((st.status === 'ask' || st.status === 'restricted') && state === 'missing' && ext.openActLetter) extra = `<br><small>${esc(st.status === 'restricted' ? i18n('Réservé jusqu’en {year} : à demander par l’héritier lui-même, ou extrait sans filiation', {year: Y(st.open_year)}) : i18n('À demander : {who}', {who: whoLabel(st)}))}</small> <button type="button" class="link-button" data-ad-letter-ev="${st.event_id}">${esc(i18n('📮 Lettre'))}</button>`;
             cell.insertAdjacentHTML('beforeend', ` ${badgeHtml(st, {small: false})}${extra}`);
         });
@@ -323,7 +323,7 @@
         if (!items.length) return;
         items.forEach(st => cache.set(st.event_id, st));
         const line = st => `<li>${badgeHtml(st, {small: true})} <b>${esc(i18n(ACT[st.tag] || 'Acte'))}</b> ${esc(st.date || '')} <span class="muted">· ${esc(st.status === 'online' || st.status === 'maybe' ? (st.dept ? st.dept.service : '') : whoLabel(st) || reasonText(st))}</span>
-            ${st.site && (st.status === 'online' || st.status === 'maybe') ? `<a class="link-button" href="${esc(st.site)}" target="_blank" rel="noopener noreferrer">${esc(i18n('🏛 Ouvrir'))}</a>` : ''}${st.status === 'maybe' && st.reason === 'straddle' ? ` <small class="muted">${esc(i18n('Commence par les tables décennales.'))}</small>` : ''}
+            ${st.site && (st.status === 'online' || st.status === 'maybe') ? `${window.LCNDA_UI.extLink(st.site, i18n('🏛 Ouvrir'), {cls: 'link-button'})}` : ''}${st.status === 'maybe' && st.reason === 'straddle' ? ` <small class="muted">${esc(i18n('Commence par les tables décennales.'))}</small>` : ''}
             ${(st.status === 'ask' || st.status === 'restricted') && ext.openActLetter ? `<button type="button" class="link-button" data-ad-letter-ev="${st.event_id}">${esc(i18n('📮 Lettre'))}</button>` : ''}</li>`;
         const box = document.createElement('section');
         box.className = 'ad-ouc'; box.innerHTML = `<h4>${esc(i18n('Ses actes aux archives'))} ${ext.seriesArchives?.link() || ''}</h4><ul>${items.slice(0, 8).map(line).join('')}</ul>`;

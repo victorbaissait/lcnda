@@ -1191,7 +1191,7 @@
         <div class="ms-set-main">
         <section class="maintenance-panel ms-intro"><span class="ms-intro-ico" aria-hidden="true">🧓</span><div><h3>Le mode simple ${UI().badge ? UI().badge('Nouveau', 'blue') : ''}</h3>
             <p>De très gros boutons pour regarder l’arbre, les photos et les fiches, sans rien pouvoir modifier ni supprimer par erreur — pour une personne âgée, un enfant, ou n’importe qui qui veut juste regarder.</p>
-            <div class="ms-intro-acts"><button type="button" class="button" data-ms-open="now">▶ Ouvrir le mode simple</button><button type="button" class="button secondary" data-ms-try>${TRY ? '✕ Fermer l’essai' : '👁 Essayer ici'}</button></div>
+            <div class="ms-intro-acts"><button type="button" class="button" data-ms-open="now">▶ Ouvrir le mode simple</button><button type="button" class="button secondary" data-ms-try>${TRY ? 'Fermer l’essai' : '👁 Essayer ici'}</button></div>
             <div class="ms-topbtn">${tg('data-ms-bool="forAll"', s.forAll, 'Montrer le bouton « 🧓 Mode simple » en haut de l’app', s.forAll ? 'Il est en haut à droite, pour toute personne qui ouvre cette généalogie (sa place : Réglages → Apparence → « Boutons en haut à droite »).' : 'Caché : le mode simple s’ouvre d’ici, ou par le widget du tableau de bord.')}</div>
             <div class="ms-try" data-ms-try-box ${TRY ? '' : 'hidden'}></div></div></section>
 
@@ -1409,7 +1409,7 @@
             if (b.dataset.msLinkOff) { change(st => { st.link[b.dataset.msLinkOff] = false; }, true); return; }
             if (b.dataset.msPvTab) { pvScreen = b.dataset.msPvTab; $$('[data-ms-pv-tab]', box).forEach(x => { x.classList.toggle('is-active', x === b); x.setAttribute('aria-selected', String(x === b)); }); PV?.show(pvScreen); return; }
             if (b.hasAttribute('data-ms-pv-jump')) { $('[data-ms-preview]', box)?.scrollIntoView({behavior: 'smooth', block: 'start'}); return; }
-            if (b.hasAttribute('data-ms-try')) { if (TRY) { TRY.destroy(); TRY = null; renderSettings(box); } else { TRY = true; mountTry(box); b.textContent = '✕ Fermer l’essai'; } return; }
+            if (b.hasAttribute('data-ms-try')) { if (TRY) { TRY.destroy(); TRY = null; renderSettings(box); } else { TRY = true; mountTry(box); b.textContent = 'Fermer l’essai'; } return; }
             if (b.hasAttribute('data-ms-font')) { const s0 = read(); const f = await UIx().openFontPicker?.({value: s0.font || 'Inter', sample: 'Louise CHASTANG, ta mère', title: 'La police du mode simple', top: ['Atkinson Hyperlegible', 'Luciole', 'OpenDyslexic']}); if (f) { UIx().rememberFont?.(f); change(st => { st.font = f === 'Inter' ? '' : f; }, true); } return; }
             if (b.hasAttribute('data-ms-say')) { const s0 = read(), e0 = eff(s0); try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance('Bonjour ! Voici Louise Chastang, ta mère. Elle est née le 3 mai 1897 à Arnac-la-Poste.'); u.lang = 'fr-FR'; u.rate = e0.rate / 100; const v = frVoices().find(x => x.voiceURI === e0.voiceName); if (v) u.voice = v; speechSynthesis.speak(u); } catch (_) {} return; }
             if (b.hasAttribute('data-ms-hush')) { try { speechSynthesis.cancel(); } catch (_) {} return; }

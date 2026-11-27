@@ -555,6 +555,30 @@
         return w;
     };
 
+    /* ═════ Un lien qui sort de l'app : toujours « ↗ Nom du site », l'adresse en bulle ═════
+     * UI.extLink(adresse, nomDuSite, {cls, title, attrs}) → <a target="_blank"> ; sans nom : le nom du site tiré de l'adresse (UI.siteName).
+     * Une adresse javascript:, data:, vbscript: ou file: devient « # » (rien ne s'ouvre) ; un nom qui commence déjà par ↗ ou par un autre signe (« 🏛 Ouvrir ») le perd : un seul signe, ↗. */
+    const SITE_NAMES = {'gallica.bnf.fr': 'Gallica', 'catalogue.bnf.fr': 'BnF', 'data.bnf.fr': 'BnF', 'francearchives.gouv.fr': 'FranceArchives', 'www.francearchives.gouv.fr': 'FranceArchives',
+        'www.geneanet.org': 'Geneanet', 'gw.geneanet.org': 'Geneanet', 'www.wikidata.org': 'Wikidata', 'fr.wikipedia.org': 'Wikipédia', 'en.wikipedia.org': 'Wikipedia', 'commons.wikimedia.org': 'Wikimedia Commons',
+        'www.openstreetmap.org': 'OpenStreetMap', 'www.memoiredeshommes.sga.defense.gouv.fr': 'Mémoire des hommes', 'www.leonore.archives-nationales.culture.gouv.fr': 'Léonore', 'www.familysearch.org': 'FamilySearch',
+        'www.retronews.fr': 'RetroNews', 'www.geoportail.gouv.fr': 'Géoportail', 'remonterletemps.ign.fr': 'Remonter le temps', 'www.insee.fr': 'Insee', 'github.com': 'GitHub', 'archive.org': 'Internet Archive', 'web.archive.org': 'Internet Archive',
+        'www.cadastre.gouv.fr': 'Cadastre', 'www.legifrance.gouv.fr': 'Légifrance', 'pop.culture.gouv.fr': 'POP (Culture)', 'www.persee.fr': 'Persée', 'www.europeana.eu': 'Europeana', 'www.findagrave.com': 'Find a Grave', 'www.geonames.org': 'GeoNames'};
+    const GENERIC_LINK = /^(ouvrir|source|la source|sources?|lien|le lien|ouvrir le lien|voir|site|le site|ouvrir le site|en ligne)$/i;
+    UI.siteName = (url = '') => { let host = ''; try { host = new URL(String(url).trim()).hostname.toLowerCase(); } catch (_) { return ''; } return SITE_NAMES[host] || host.replace(/^www\d?\./, ''); };
+    UI.extLink = (url = '', site = '', {cls = '', title = '', attrs = ''} = {}) => {
+        const u = String(url || '').trim(), bad = !u || /^(javascript|data|vbscript|file):/i.test(u), given = String(site ?? '').trim().replace(/^(?:↗|\p{Extended_Pictographic}\uFE0F?)\s*/u, ''), name = (GENERIC_LINK.test(given) ? '' : given) || UI.siteName(u) || u; // un seul signe : ↗ ; « Ouvrir », « la source » → le nom du site
+        return `<a class="ui-ext-link${cls ? ' ' + cls : ''}" href="${esc(bad ? '#' : u)}" target="_blank" rel="noopener noreferrer" title="${esc(title || u)}"${attrs ? ' ' + attrs : ''}>↗ ${esc(name)}</a>`;
+    };
+
+    /* ═════ C5 — un groupe d'onglets segmentés : les deux marques toujours ensemble ═════
+     * is-active (le choix s'allume en bleu) et aria-pressed (les lecteurs d'écran) : jamais l'une sans l'autre.
+     * UI.segmented({items: [{on, attrs, html, title, disabled}], label, cls, attrs, tag}) → le HTML du groupe ;
+     * UI.segPick(bouton) allume ce bouton et éteint ses voisins ; UI.segMark(bouton, on) change un seul bouton. */
+    UI.segBtn = ({on = false, attrs = '', html = '', title = '', disabled = false} = {}) => `<button type="button"${on ? ' class="is-active"' : ''}${attrs ? ' ' + attrs : ''} aria-pressed="${on ? 'true' : 'false'}"${title ? ` title="${esc(title)}"` : ''}${disabled ? ' disabled' : ''}>${html}</button>`;
+    UI.segmented = ({items = [], label = '', cls = '', attrs = '', tag = 'span'} = {}) => `<${tag} class="segmented${cls ? ' ' + cls : ''}" role="group"${label ? ` aria-label="${esc(label)}"` : ''}${attrs ? ' ' + attrs : ''}>${items.map(UI.segBtn).join('')}</${tag}>`;
+    UI.segMark = (b, on) => { if (!b) return; b.classList.toggle('is-active', !!on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); };
+    UI.segPick = b => { const g = b?.closest?.('.segmented'); if (!g) return; g.querySelectorAll('button').forEach(x => UI.segMark(x, x === b)); };
+
     /* ═════ Liste | Fiches : l'affichage d'une liste, retenu pour chaque liste (H10) ═════
      * « Liste » = lignes compactes ou tableau (vignette, nom, ligne grise, date) ; « Fiches » = cartes avec une grande vignette. */
     const VIEW_PREFIX = 'lcnda-view:';
@@ -568,7 +592,7 @@
         const w = h('span', 'segmented ui-viewtoggle');
         w.setAttribute('role', 'group'); w.setAttribute('aria-label', i18n('Affichage des {what}', {what: i18n(what)}));
         w.innerHTML = `<button type="button" data-view="list" title="En liste : une ligne par élément (vignette, nom, détails, date)">Liste</button><button type="button" data-view="cards" title="En fiches : une carte par élément, avec une grande vignette">Fiches</button>`;
-        const paint = () => w.querySelectorAll('button').forEach(b => { const on = b.dataset.view === cur; b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', String(on)); });
+        const paint = () => w.querySelectorAll('button').forEach(b => UI.segMark(b, b.dataset.view === cur));
         w.set = (v, silent = false) => { const nv = v === 'cards' ? 'cards' : 'list'; if (nv === cur) return; cur = nv; if (key) UI.setView(key, cur); paint(); if (!silent) onChange?.(cur); };
         Object.defineProperty(w, 'value', {get: () => cur});
         w.addEventListener('click', e => { const b = e.target.closest('button[data-view]'); if (b) { e.preventDefault(); e.stopPropagation(); w.set(b.dataset.view); } });
@@ -596,7 +620,7 @@
     const cardThumb = (it, inner) => (it.href ? `<a class="ui-card-thumb" href="${esc(it.href)}" target="_blank" rel="noopener" title="Ouvrir « ${esc(it.name || '')} »" tabindex="-1">${inner}</a>` : itemOpen(it, 'ui-card-thumb', inner));
     const cardOpen = it => (it.noOpen || it.disabled ? '' : it.href ? `<a class="button small ui-card-open" href="${esc(it.href)}" target="_blank" rel="noopener">${esc(it.openLabel || 'Ouvrir')} ↗</a>` : it.open ? `<button type="button" class="button small ui-card-open" ${it.open}>${esc(it.openLabel || 'Ouvrir')}</button>` : '');
     UI.cardsHtml = (items = [], {size = ''} = {}) => `<div class="ui-cards${size === 's' ? ' is-small' : ''}">${items.map(it => { const lines = (it.lines || []).filter(l => l && (typeof l !== 'object' || l.html)).slice(0, 2), badges = (it.badges || []).map(cardBadge).filter(Boolean), more = [].concat(it.menu || []).filter(Boolean).join('') + (it.actions || ''), open = cardOpen(it);
-        return `<article class="ui-card${it.disabled ? ' is-disabled' : ''}${it.cls ? ' ' + it.cls : ''}"${it.attrs ? ' ' + it.attrs : ''}>${cardThumb(it, it.thumb || '<span class="ui-card-ico">•</span>')}<div class="ui-card-body">${it.href && !it.nameHtml ? `<a class="table-link ui-card-name" href="${esc(it.href)}" target="_blank" rel="noopener">${esc(it.name || 'Sans titre')}</a>` : itemName(it, 'ui-card-name')}${lines.map(l => `<small class="muted">${itemLine(l)}</small>`).join('')}${badges.length ? `<span class="ui-card-badges">${badges.join('')}</span>` : ''}${it.when ? `<small class="muted ui-card-date">${UI.when?.(it.when, {label: it.whenLabel || ''}) || ''}</small>` : it.date ? `<small class="muted ui-card-date">${esc(it.date)}</small>` : ''}</div>${open || it.quick || more ? `<div class="ui-card-act">${open}${it.quick || ''}<span class="ui-card-sp"></span>${cardMore(more)}</div>` : ''}</article>`; }).join('')}</div>`;
+        return `<article class="ui-card${it.disabled ? ' is-disabled' : ''}${it.cls ? ' ' + it.cls : ''}"${it.attrs ? ' ' + it.attrs : ''}>${cardThumb(it, it.thumb || '<span class="ui-card-ico">•</span>')}<div class="ui-card-body">${it.href && !it.nameHtml ? `${window.LCNDA_UI.extLink(it.href, it.name || 'Sans titre', {cls: 'table-link ui-card-name'})}` : itemName(it, 'ui-card-name')}${lines.map(l => `<small class="muted">${itemLine(l)}</small>`).join('')}${badges.length ? `<span class="ui-card-badges">${badges.join('')}</span>` : ''}${it.when ? `<small class="muted ui-card-date">${UI.when?.(it.when, {label: it.whenLabel || ''}) || ''}</small>` : it.date ? `<small class="muted ui-card-date">${esc(it.date)}</small>` : ''}</div>${open || it.quick || more ? `<div class="ui-card-act">${open}${it.quick || ''}<span class="ui-card-sp"></span>${cardMore(more)}</div>` : ''}</article>`; }).join('')}</div>`;
     /** rowsHtml(items) → la liste compacte (petite vignette, nom, ligne grise, date, boutons) */
     UI.rowsHtml = (items = []) => `<div class="ui-rows">${items.map(it => `<div class="ui-row${it.disabled ? ' is-disabled' : ''}${it.cls ? ' ' + it.cls : ''}"${it.attrs ? ' ' + it.attrs : ''}>${itemOpen(it, 'ui-row-thumb', it.thumb || '<span class="ui-card-ico">•</span>')}<div class="ui-row-main">${itemName(it, 'ui-row-name')}${(it.lines || []).filter(l => l && (typeof l !== 'object' || l.html)).length ? `<small class="muted">${(it.lines || []).filter(l => l && (typeof l !== 'object' || l.html)).map(itemLine).join(' · ')}</small>` : ''}</div>${it.when ? `<small class="muted ui-row-date">${UI.when?.(it.when, {label: it.whenLabel || ''}) || ''}</small>` : it.date ? `<small class="muted ui-row-date">${esc(it.date)}</small>` : '<span></span>'}${it.actions ? `<div class="ui-row-act">${it.actions}</div>` : '<span></span>'}</div>`).join('')}</div>`;
     /** le tri d'une liste, retenu pour chaque liste (« lcnda-sort:<key> ») */
@@ -703,7 +727,7 @@
             html += shown.slice(0, limit).map(o => row(o, hl(o))).join('');
             const rest = shown.length - limit;
             if (rest > 0) html += `<button type="button" class="ui-choice-more" data-choice-more title="${esc(tr('Montrer les suivants'))}">${esc(tr('+ {n} autres : tape pour chercher', {n: rest}))}</button>`;
-            if (qq && !matched.length) html += `<div class="ui-choice-empty" role="status"><span>${esc(tr('Aucun choix ne contient « {q} »', {q: q.value.trim()}))}</span><button type="button" class="ui-choice-link" data-choice-clear>${esc(tr('Effacer la recherche'))}</button></div>`;
+            if (qq && !matched.length) html += `<div class="ui-choice-empty" role="status"><span>${esc(tr('Aucun choix ne contient « {q} »', {q: q.value.trim()}))}</span><button type="button" class="ui-choice-link" data-choice-clear>${esc(tr('Vider la recherche'))}</button></div>`;
             box.innerHTML = html;
             const filtered = !!qq || (extra && base.length !== list.length);
             cnt.textContent = filtered ? tr('{n} choix sur {total}', {n: matched.length, total: list.length}) : plural(list.length, 'choix', 'choix');
@@ -1073,6 +1097,56 @@
         return `<details class="ui-section"${key ? ` data-ui-section="${esc(key)}"` : ''}${isOpen ? ' open' : ''}><summary>${esc(title)}</summary><div class="ui-section-body">${body}</div></details>`;
     };
     document.addEventListener('toggle', e => { const d = e.target; if (!d?.matches?.('details[data-ui-section]')) return; const all = store.get(SEC_KEY, {}) || {}; all[d.dataset.uiSection] = d.open; store.set(SEC_KEY, all); }, true);
+    /* Toute autre section repliable (<details> faits à la main : « ▸ Plus d'options », « Pour aller plus loin », parties des Réglages…)
+     * retient aussi, sur cet ordinateur, qu'on l'a ouverte ou fermée (docs/harmonisation.md, Comportements, point 3) : la même
+     * mémoire que les panneaux, rangée à part (« genealogie-ui-sections-auto »), la clé tirée de l'endroit (id le plus proche) et du titre.
+     * Rien n'est retenu pour : un menu (titre en bouton, « ▾ », « ⋯ », contenu posé par-dessus, barre de menus), une section répétée
+     * dans une liste (le même titre plusieurs fois au même endroit), un texte qu'on écrit (contenteditable), et data-ui-noremember
+     * (ce qui s'ouvre seulement pour montrer un message, une erreur). Seul un clic (ou Entrée / Espace) sur le titre compte :
+     * une section ouverte par le code n'est jamais retenue. UI.sectionMemoryKey(details) → la clé (pour les essais). */
+    const AUTO_SEC_KEY = 'genealogie-ui-sections-auto', AUTO_SEC_MAX = 600;
+    const MENU_CLS = /(^|[\s_-])(menu|menus|menubar|dd|dropdown|pop|popover|picker|combo)($|[\s_-])/i;
+    const autoSkip = d => {
+        if (!d || d.matches('[data-ui-section], [data-ui-noremember]') || d.closest('[data-ui-noremember], [contenteditable=""], [contenteditable="true"], [data-ui-off]')) return true;
+        if (MENU_CLS.test(d.className || '') || d.closest('nav, [role=menu], [role=menubar], [role=toolbar], [class*=menubar]')) return true;
+        const sum = d.querySelector(':scope > summary'); if (!sum) return true;
+        if (sum.matches('.button, .icon-button, [class*="-tb"], [class*="-nb"], [class*="tog"], [aria-haspopup]')) return true;
+        const t = (sum.textContent || '').trim();
+        return !t || /[▾⌄]\s*$/.test(t) || t === '⋯' || t === '…';
+    };
+    const autoText = v => String(v || '').replace(/\d+/g, '').replace(/[▸▾►▼›»\s]+/g, ' ').trim().toLowerCase().slice(0, 80);
+    const autoKey = d => {
+        let ctx = '', el = d.parentElement;
+        for (; el && el !== document.body; el = el.parentElement) {
+            if (el.id) { ctx = '#' + el.id.replace(/\d+/g, '#'); break; }
+            if (el.matches('dialog')) { ctx = 'dialog.' + (el.classList[0] || ''); break; }
+        }
+        const txt = autoText(d.querySelector(':scope > summary')?.textContent);
+        return txt ? `${ctx}|${autoText(d.className)}|${txt}` : '';
+    };
+    UI.sectionMemoryKey = d => (d && !autoSkip(d) ? (d._uiKey ??= autoKey(d)) : '');
+    const autoTwins = (d, k) => { const root = d.parentElement?.closest('[id], dialog') || document; let n = 0; root.querySelectorAll('details').forEach(x => { if (x.isConnected && !autoSkip(x) && (x._uiKey ??= autoKey(x)) === k) n++; }); return n; };
+    document.addEventListener('click', e => { const sum = e.target.closest?.('summary'); const d = sum?.parentElement; if (d?.matches('details') && sum === d.querySelector(':scope > summary')) d._uiUser = Date.now(); }, true);
+    document.addEventListener('toggle', e => {
+        const d = e.target; if (!d?.matches?.('details') || !d._uiUser || Date.now() - d._uiUser > 1500) return; d._uiUser = 0;
+        if (autoSkip(d)) return;
+        // posé par-dessus le reste (une fenêtre volante) : c'est un menu, pas une section
+        const body = [...d.children].find(c => c.tagName !== 'SUMMARY'); if (body && /^(absolute|fixed)$/.test(getComputedStyle(body).position)) return;
+        const k = UI.sectionMemoryKey(d); if (!k || autoTwins(d, k) > 1) return;
+        const all = store.get(AUTO_SEC_KEY, {}) || {}; delete all[k]; all[k] = d.open;
+        const keys = Object.keys(all); keys.slice(0, Math.max(0, keys.length - AUTO_SEC_MAX)).forEach(x => delete all[x]);
+        store.set(AUTO_SEC_KEY, all);
+    }, true);
+    const autoRestore = list => {
+        const saved = store.get(AUTO_SEC_KEY, null); if (!saved || typeof saved !== 'object') return;
+        const found = [];
+        list.forEach(m => m.addedNodes.forEach(n => { if (n.nodeType !== 1) return; if (n.matches('details')) found.push(n); if (n.firstElementChild) found.push(...n.querySelectorAll('details')); }));
+        if (!found.length) return;
+        const keyed = found.map(d => [d, UI.sectionMemoryKey(d)]).filter(([, k]) => k && k in saved), count = {};
+        keyed.forEach(([, k]) => { count[k] = (count[k] || 0) + 1; });
+        keyed.forEach(([d, k]) => { if (count[k] === 1 && d.open !== !!saved[k]) d.open = !!saved[k]; }); // répétée dans la liste : laissée comme dessinée
+    };
+    new MutationObserver(autoRestore).observe(document.documentElement, {childList: true, subtree: true});
 
     /* ═════ E3 La fenêtre d'export unique ═════ */
     const FORMATS = {pdf: ['📄 PDF', 'imprimer, envoyer', 'pdf'], png: ['🖼 PNG', 'transparent', 'png'], jpg: ['📷 JPG', 'léger', 'jpg'], svg: ['✒ SVG', 'dessin', 'svg'], print: ['🖨 Imprimer', 'tout de suite', ''], file: ['💾 Fichier', 'de l’outil', 'json']};
@@ -1131,6 +1205,25 @@
         $('.ui-export-fmt.is-active')?.focus();
         if (preview) Promise.resolve().then(preview).then(p => { const box = $('[data-ui-prev]'); if (!box) return; box.innerHTML = ''; if (p instanceof HTMLElement) box.appendChild(p); else if (p) box.innerHTML = `<img alt="Aperçu" src="${esc(p)}">`; else box.textContent = 'aperçu'; }).catch(() => { const box = $('[data-ui-prev]'); if (box) box.textContent = 'Pas d’aperçu'; });
     });
+
+    /** ⤓ Exporter une liste (harmonisation des comportements) : la même fenêtre E3, avec 📄 CSV, 🧮 Ouvrir dans le tableur,
+     *  📊 Excel, et « Les lignes : ce qu'on voit / toute la liste » quand all() est donné (comme Mes listes).
+     *  UI.exportRows({title, name, rows: () => [[titres…], [ligne…], …], all: () => …, info, extra: [formats E3 en plus (PDF, KML…)]}) ;
+     *  rows / all peuvent être async. */
+    UI.exportRows = ({title = 'Exporter', name = '', rows, all = null, info = '', sep = ';', extra = []} = {}) => {
+        const X = window.LCNDA_EXT || {}, SH = window.LCNDA_SHEET;
+        const matrix = async o => ((o?.fields?.what === 'all' && all ? await all() : await rows()) || []).map(r => (Array.isArray(r) ? r : [r]).map(v => v ?? ''));
+        const cell = v => (A().csvCell ? A().csvCell(v, {sep}) : `"${String(v ?? '').replace(/"/g, '""')}"`);
+        const save = (blob, filename) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); };
+        const formats = [
+            {id: 'csv', label: '📄 CSV', hint: i18n('tableur'), ext: 'csv', quality: false, run: async o => save(new Blob(['﻿' + (await matrix(o)).map(r => r.map(cell).join(sep)).join('\r\n')], {type: 'text/csv;charset=utf-8'}), o.filename)},
+            ...(X.openRowsInSheet ? [{id: 'sheet', label: i18n('🧮 Ouvrir dans le tableur'), hint: i18n('mêmes colonnes'), ext: '', quality: false, copy: false, goLabel: i18n('🧮 Ouvrir dans le tableur'), run: async o => X.openRowsInSheet({name: name || title, rows: await matrix(o)})}] : []),
+            ...(SH?.toXlsx ? [{id: 'xlsx', label: '📊 Excel', hint: '.xlsx', ext: 'xlsx', quality: false, run: async o => { const wb = SH.newWorkbook(); wb.sheets[0].name = SH.cleanSheetName ? SH.cleanSheetName(name || title, []) : 'Liste'; wb.sheets[0].cells = SH.rowsToCells(await matrix(o)); save(await SH.toXlsx(wb), o.filename); }}] : []),
+            ...extra.map(f => ({quality: false, ext: '', copy: false, ...f})),
+        ];
+        return UI.openExportDialog({title, defaultName: name || title, quality: false, info, formats,
+            fields: all ? [{id: 'what', label: i18n('Les lignes'), options: [['view', i18n('Ce qu’on voit')], ['all', i18n('Toute la liste')]]}] : []});
+    };
 
     /* ═════ E4 Déposer un fichier ═════ */
     const accepts = (f, accept) => {

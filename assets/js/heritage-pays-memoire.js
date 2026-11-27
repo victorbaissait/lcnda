@@ -126,8 +126,8 @@
     const kiosk = () => document.body.classList.contains('is-kiosk') || document.body.classList.contains('ms-on');
     /** consultation (kiosque) ou invité du réseau local : aucune image ni aucun son chargé d'Internet (les liens restent) */
     const offline = () => !!(root.document?.body?.classList.contains('is-kiosk') || root.LCNDA_GUEST);
-    const link = (url, label) => (url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : esc(label));
-    const srcLink = (url, label = T('↗ source')) => (url ? ` <a class="pm-src-link" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : '');
+    const link = (url, label) => (url ? `${window.LCNDA_UI.extLink(url, label)}` : esc(label));
+    const srcLink = (url, label = T('↗ source')) => (url ? ` ${window.LCNDA_UI.extLink(url, label, {cls: 'pm-src-link'})}` : '');
     const srcLine = (txt, url) => `<p class="cplus-src pm-src">${esc(T('Source :'))} ${esc(txt)}${srcLink(url)}</p>`;
     const emptyLine = (t, icon = 'ℹ️') => (A().emptyState ? A().emptyState({text: t, icon, size: 'small'}) : `<p class="muted">${esc(t)}</p>`);
     const wait = t => (UI().spinner ? UI().spinner(t) : `<p class="muted">${esc(t)}</p>`);

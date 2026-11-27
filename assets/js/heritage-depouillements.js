@@ -406,7 +406,12 @@
                     });
                 });
                 tr.querySelector('[data-dp-del]').addEventListener('click', async () => {
-                    if (x.id) { if (!await A().confirmBox(`Supprimer ${x.first_name || x.last_name ? A().personName(x) : 'cette personne'} du relevé ?`, {title: 'Supprimer du relevé', okLabel: 'Supprimer du relevé'})) return; await post('delete_archive_digest_person', {id: x.id}); rows.splice(rows.indexOf(x), 1); r.people = r.people.filter(y => y !== x); }
+                    if (x.id) { // H7 : retirée tout de suite, « ↶ Annuler » la remet à sa place dans le relevé
+                        const at = rows.indexOf(x), who = x.first_name || x.last_name ? A().personName(x) : '';
+                        try { await post('delete_archive_digest_person', {id: x.id}); } catch (err) { A().toast(err.message, 'error'); return; }
+                        rows.splice(at, 1); r.people = r.people.filter(y => y !== x);
+                        A().undoDelete({type: 'archive_digest_person', id: x.id, message: who ? i18n('{name} retiré du relevé', {name: who}) : i18n('Personne retirée du relevé'), after: () => { if (!rows.includes(x)) { rows.splice(Math.min(at, rows.length), 0, x); (r.people ||= []).push(x); } render(); }});
+                    }
                     else { x._gone = true; const k = draft.indexOf(x); if (k >= 0) draft.splice(k, 1); }
                     render();
                 });

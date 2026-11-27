@@ -3,7 +3,7 @@
  *  0. le fabricant hors ligne (tests/test_meteo_plus.py : petits NetCDF / CSV fabriqués, morceaux recoupés, reprise, relu par l'app) ;
  *  1. de petits packs factices (neige ERA5-Land, ressenti UTCI, rivière GloFAS) autour d'Auch, la naissance de Jean MAZAUD le 2 janvier 1990 ;
  *  2. Réglages → 🌦 Météo d'autrefois : la partie « Compléments Copernicus », source + licence + « ↗ source » sur chaque ligne,
- *     « ⤓ Installer » (↶ Annuler), « 🗑 Supprimer » (↶ Annuler), le réglage « Les compléments Copernicus dans le détail » ;
+ *     « 📦 Installer » (↶ Annuler), « 🗑 Supprimer » (↶ Annuler), le réglage « Les compléments Copernicus dans le détail » ;
  *  3. le détail du jour : une phrase par complément (neige, ressenti, rivière en crue, températures fines), les sources repliées.
  *   node tests/test-meteo-plus.js */
 'use strict';
@@ -97,7 +97,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             const st = await api('meteo_status'); assert.ok(st.files['plus-ressenti']?.ok && st.files['plus-rivieres']?.ok && st.files.socle?.ok); assert.ok(!st.files['plus-neige']);
             const ab = await api('meteo_about'); for (const id of ['era5land', 'utci', 'glofas', 'cerra', 'c3s-insitu']) assert.ok(ab.sources.some(s => s.id === id), id);
         });
-        await t('Réglages → 🌦 Météo : les compléments, chacun avec source, licence, « ↗ source » ; ⤓ Installer puis ↶ Annuler', async () => {
+        await t('Réglages → 🌦 Météo : les compléments, chacun avec source, licence, « ↗ source » ; 📦 Installer puis ↶ Annuler', async () => {
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'meteo'; A.setModule('maintenance'); });
             await p.waitForSelector('[data-wx-dl="plus-neige"]', {timeout: 20000});
             assert.match(await p.textContent('.wx-settings'), /Compléments Copernicus \(facultatifs\)/);

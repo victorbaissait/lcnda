@@ -419,7 +419,7 @@
             const ids = FL?.sourcesOf ? FL.sourcesOf([url]) : (/openstreetmap\.(org|fr|de)|openhistoricalmap/.test(url) ? ['osm'] : []);
             const id = ids[0]; if (id !== 'osm' && id !== 'otm') return ''; // les autres fonds : leur attribution est écrite par heritage-fonds-libres.js
             const a = FL?.attributionOf?.(id) || ['© contributeurs OpenStreetMap', 'https://www.openstreetmap.org/copyright'];
-            return `<a href="${esc(a[1])}" target="_blank" rel="noopener noreferrer">${esc(a[0])}</a>`;
+            return `${window.LCNDA_UI.extLink(a[1], a[0])}`;
         }
 
         /* ── ◐ noir et blanc ── */

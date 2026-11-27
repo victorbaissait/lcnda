@@ -19,7 +19,7 @@
     const api = (a, q = {}) => A().api(a, q);
     const post = async (a, body) => { const r = await A().api(a, {}, {method: 'POST', body}); return r?.result || r; };
     const toast = (m, k) => A().toast?.(m, k);
-    const link = (url, label = T('↗ source'), title = '') => (url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer"${title ? ` title="${esc(title)}"` : ''}>${esc(label)}</a>` : '');
+    const link = (url, label = T('↗ source'), title = '') => (url ? `${window.LCNDA_UI.extLink(url, label, {title: title})}` : '');
     const READ = '25/11/2026';
 
     /* ═════════════ réglages (sur l'ordinateur : la fenêtre et 🔎 ; dans la base : le contrôle) ═════════════ */

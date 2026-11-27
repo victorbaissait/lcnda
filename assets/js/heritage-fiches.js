@@ -58,7 +58,7 @@
     /* Mise en forme simple du texte : # titre, ## sous-titre, - liste, 1. liste, **gras**, *italique*, [texte](https://…), > citation */
     function md(src) {
         const inline = s => esc(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/(^|[^*])\*(?!\s)(.+?)\*/g, '$1<em>$2</em>').replace(/__(.+?)__/g, '<u>$1</u>')
-            .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, (m, t, u) => `<a href="${u}" target="_blank" rel="noopener noreferrer">${t}</a>`);
+            .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, (m, t, u) => `<a href="${u}" target="_blank" rel="noopener noreferrer" title="${u}">↗ ${t}</a>`);
         const out = []; let list = null;
         const flush = () => { if (list) { out.push(`<${list.t}>${list.items.map(i => `<li>${i}</li>`).join('')}</${list.t}>`); list = null; } };
         for (const line of String(src || '').split('\n')) {
@@ -220,9 +220,9 @@
             case 'auto': { const ps = (b.ids || []).map(i => cur.people?.[i]).filter(Boolean), crit = [b.occupation && i18n('métier : {x}', {x: b.occupation}), b.place && i18n('lieu : {x}', {x: b.place}), (b.from || b.to) && `${b.from || '…'} – ${b.to || '…'}`].filter(Boolean).join(' · ');
                 if (!crit) return `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🤖</span><span class="empty-line-text">${esc(i18n('Rien de choisi : ✎ pour dire qui montrer (un métier, un lieu, une période).'))}</span></p>`;
                 return `<p class="h-fi-autocrit muted">🤖 ${esc(crit)} · ${esc(A().plural(ps.length, i18n('personne')))}${ps.length >= (Number(b.limit) || 60) ? ` ${esc(i18n('(les premières)'))}` : ''}</p>` + blockBody({...b, type: 'people', ids: b.ids || []}); }
-            case 'people': { const ps = (b.ids || []).map(i => cur.people?.[i]).filter(Boolean); return (ps.length ? `<div class="h-fi-people">${ps.map(p => `<button type="button" class="h-fi-person" data-h-person="${Number(p.id)}"><span class="h-fi-ini ${p.gender === 'female' ? 'is-f' : p.gender === 'male' ? 'is-m' : ''}">${esc(((p.first_name || '')[0] || '') + ((p.last_name || '')[0] || ''))}</span><span><strong>${esc(`${p.first_name || ''} ${p.last_name || ''}`.trim())}</strong><small>${esc([p.birth_year || p.death_year ? `${p.birth_year || '?'} – ${p.death_year || '?'}` : '', p.occupation].filter(Boolean).join(' · '))}</small></span></button>`).join('')}</div>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">👤</span><span class="empty-line-text">Aucune personne : ✎ pour en ajouter.</span></p>') + (b.note ? `<p class="h-fi-caption">${esc(b.note)}</p>` : ''); }
+            case 'people': { const ps = (b.ids || []).map(i => cur.people?.[i]).filter(Boolean); return (ps.length ? `<div class="h-fi-people">${ps.map(p => `<button type="button" class="h-fi-person" data-h-person="${Number(p.id)}"><span class="h-fi-ini ${p.gender === 'female' ? 'is-f' : p.gender === 'male' ? 'is-m' : ''}">${esc(((p.first_name || '')[0] || '') + ((p.last_name || '')[0] || ''))}</span><span><strong>${esc(A().personName(p))}</strong><small>${esc([p.birth_year || p.death_year ? `${p.birth_year || '?'} – ${p.death_year || '?'}` : '', p.occupation].filter(Boolean).join(' · '))}</small></span></button>`).join('')}</div>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">👤</span><span class="empty-line-text">Aucune personne : ✎ pour en ajouter.</span></p>') + (b.note ? `<p class="h-fi-caption">${esc(b.note)}</p>` : ''); }
             case 'dates': return (b.rows || []).length ? `<ol class="h-fi-dates">${b.rows.map(r => `<li><span>${esc(r.date)}</span><p>${esc(r.text)}</p></li>`).join('')}</ol>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📅</span><span class="empty-line-text">Aucune date : ✎ pour en ajouter.</span></p>';
-            case 'links': return (b.rows || []).length ? `<ul class="h-fi-links">${b.rows.map(r => `<li>${r.url ? `<a href="${esc(r.url)}" target="_blank" rel="noopener noreferrer">${esc(r.label || r.url)}</a>` : esc(r.label)}${r.note ? ` <small class="muted">— ${esc(r.note)}</small>` : ''}</li>`).join('')}</ul>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📭</span><span class="empty-line-text">Aucun lien : ✎ pour en ajouter.</span></p>';
+            case 'links': return (b.rows || []).length ? `<ul class="h-fi-links">${b.rows.map(r => `<li>${r.url ? `${window.LCNDA_UI.extLink(r.url, r.label || r.url)}` : esc(r.label)}${r.note ? ` <small class="muted">— ${esc(r.note)}</small>` : ''}</li>`).join('')}</ul>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📭</span><span class="empty-line-text">Aucun lien : ✎ pour en ajouter.</span></p>';
             case 'screen': {
                 const as = ext.appScreen; if (!as) return '<p class="muted">Écran indisponible.</p>';
                 if (as.nested) return as.nestedLink(b.target, b.title || as.label(b.target));
@@ -496,7 +496,7 @@
         else if (view === 'map') { const pts = rows.filter(r => Array.isArray(r.g)).map(r => ({lat: r.g[0], lon: r.g[1], label: r.c[0] || '', color: '#0066cc'})); body = (pts.length && ext.miniMap ? `<div class="h-fi-dmap">${ext.miniMap(pts, [], {height: 300, interactive: !kiosk()})}</div>` : `${window.LCNDA_APP.empty(i18n('Aucune de ces lignes n’a de position sur la carte.'))}`) + listHtml(rows); }
         else body = `<div class="data-table-wrap h-fi-dwrap"><table class="data-table h-fi-dtable"><thead><tr>${cols.map(c => `<th scope="col">${esc(c.l)}</th>`).join('')}<th scope="col">${esc(i18n('Source'))}</th></tr></thead><tbody>${rows.map(r => `<tr>${cols.map((c, j) => `<td>${esc(r.c[j] ?? '')}</td>`).join('')}<td>${src(r)}</td></tr>`).join('')}</tbody></table></div>`;
         const frozen = b.mode === 'frozen', lic = m.licence ? ` · ${esc(i18n('Licence : {l}', {l: m.licence}))}` : '';
-        const who = m.source ? (httpUrl(m.sourceUrl) ? `<a href="${esc(m.sourceUrl)}" target="_blank" rel="noopener noreferrer">${esc(m.source)}</a>` : esc(m.source)) : esc(m.label || '');
+        const who = m.source ? (httpUrl(m.sourceUrl) ? `${window.LCNDA_UI.extLink(m.sourceUrl, m.source)}` : esc(m.source)) : esc(m.label || '');
         const when = frozen ? i18n('📌 Figé le {d}', {d: dDate(m.at)}) : i18n('🔄 À jour, lu le {d}', {d: dDate(m.at)});
         const count = m.total > rows.length ? i18n('{n} lignes sur {t}', {n: rows.length, t: m.total}) : A().plural ? A().plural(rows.length, i18n('ligne')) : String(rows.length);
         const acts = o.actions && !kiosk() ? `<span class="h-fi-dacts">${b.list ? `<button type="button" class="button small secondary" data-fi-dopen="${esc(b.id)}">${esc(i18n('↗ Ouvrir la liste'))}</button>` : ''}${b.list ? `<button type="button" class="button small secondary" data-fi-dfreeze="${esc(b.id)}">${esc(i18n(frozen ? '↻ Refaire la copie' : '📌 Figer maintenant'))}</button>` : ''}</span>` : '';
@@ -515,7 +515,7 @@
             let html;
             try {
                 const res = await dRun(b, sheet);
-                if (res.error) html = `<p class="muted">${esc(res.error)}</p>${res.notInstalled && !kiosk() ? `<p><button type="button" class="button small" data-fi-dopen="${esc(b.id)}">${esc(i18n('⤓ Installer'))}</button></p>` : ''}${b.snap ? dHtml(b.snap, {...b, mode: 'frozen'}) : ''}`; // ⤓ : la liste en grand propose de l'installer
+                if (res.error) html = `<p class="muted">${esc(res.error)}</p>${res.notInstalled && !kiosk() ? `<p><button type="button" class="button small" data-fi-dopen="${esc(b.id)}">${esc(i18n('📦 Installer'))}</button></p>` : ''}${b.snap ? dHtml(b.snap, {...b, mode: 'frozen'}) : ''}`; // ⤓ : la liste en grand propose de l'installer
                 else { const m = await dModel(b, res); dataLast.set(b.id, m); html = dHtml(m, b, {actions: true}); }
             } catch (e) { html = `<p class="muted">${esc(e.message || String(e))}</p>`; }
             if (el.isConnected) { el.innerHTML = html; dMapCards(el, dataLast.get(b.id) || b.snap); }
@@ -596,7 +596,7 @@
     /** la liste choisie, sur une ligne calme : « 📋 ⚔️ Batailles · ⚔️ Guerres et soldats — Changer », la source et la licence */
     function dChosenHtml(d) {
         const th = dThemeOf(d), ic = d.merged ? '🔀' : d.icon || '📋', lic = dLicence(d);
-        const who = d.source ? (httpUrl(d.sourceUrl) ? `<a href="${esc(d.sourceUrl)}" target="_blank" rel="noopener noreferrer">${esc(d.source)}</a>` : esc(d.source)) : '';
+        const who = d.source ? (httpUrl(d.sourceUrl) ? `${window.LCNDA_UI.extLink(d.sourceUrl, d.source)}` : esc(d.source)) : '';
         return `<div class="h-fi-dchosen" data-fi-dchosen-line="${esc(d.id)}">
             <p class="h-fi-dchosen-name"><span aria-hidden="true">${esc(ic === '📋' ? '📋' : `📋 ${ic}`)}</span> <b>${esc(i18n(d.label))}</b>${th ? ` <span class="muted">· ${esc(`${th.icon || ''} ${i18n(th.label)}`.trim())}</span>` : ''} <span class="muted" aria-hidden="true">—</span> <button type="button" class="link-button" data-fi-dchange>${esc(i18n('Changer'))}</button></p>
             ${who || lic ? `<p class="h-fi-dchosen-src muted"><small>${who ? `${esc(i18n('Source :'))} ${who}` : ''}${who && lic ? ' · ' : ''}${lic ? esc(i18n('Licence : {l}', {l: lic})) : ''}</small></p>` : ''}
@@ -656,13 +656,13 @@
         const el = n => box.querySelector(`[name="${n}"]`), chosenBox = box.querySelector('[data-fi-dchosen]'), pk = box.querySelector('[data-fi-dpicker]');
         const sums = () => dSummaries(box, root);
         const repaint = () => { const d = dListOf(el('list').value); box.querySelector('[data-fi-dcols]').innerHTML = dColsHtml(d, {cols: d && d.id === b.list ? b.cols : []}); box.querySelector('[data-fi-dsort]').innerHTML = dSortHtml(d, d && d.id === b.list ? b : {}); sums(); };
-        /* ⚠ une liste pas encore sur cet ordinateur : « ⤓ Installer » sur place (le pack s'installe comme dans Listes), puis ↻ vérifier */
+        /* ⚠ une liste pas encore sur cet ordinateur : « 📦 Installer » sur place (le pack s'installe comme dans Listes), puis ↻ vérifier */
         const checkInst = async d => {
             const slot = chosenBox.querySelector('[data-fi-dinst]'); if (!slot || !DE()?.isInstalled) return;
             let ok, err = ''; try { ok = await DE().isInstalled(d); } catch (e) { err = e?.message || String(e); } if (!slot.isConnected || el('list').value !== d.id) return;
             if (err) { slot.innerHTML = `<p class="h-fi-dwarn">⚠ ${esc(i18n('Impossible de vérifier si ces données sont installées : {e}', {e: err}))}</p><div class="h-fi-dinstrow"><button type="button" class="button small secondary" data-fi-drecheck>${esc(i18n('↻ C’est installé : vérifier'))}</button></div>`; return; } // pas « pas encore » : on ne sait pas
             slot.innerHTML = ok ? '' : `<p class="h-fi-dwarn">⚠ ${esc(i18n('Ces données ne sont pas encore sur cet ordinateur : installe-les pour voir les lignes.'))}</p>
-                <div class="h-fi-dinstrow">${d.install && !kiosk() ? `<button type="button" class="button small" data-fi-dinstall>${esc(i18n('⤓ Installer'))}</button>` : ''}<button type="button" class="button small secondary" data-fi-drecheck>${esc(i18n('↻ C’est installé : vérifier'))}</button></div><div data-fi-dinsthost></div>`;
+                <div class="h-fi-dinstrow">${d.install && !kiosk() ? `<button type="button" class="button small" data-fi-dinstall>${esc(i18n('📦 Installer'))}</button>` : ''}<button type="button" class="button small secondary" data-fi-drecheck>${esc(i18n('↻ C’est installé : vérifier'))}</button></div><div data-fi-dinsthost></div>`;
         };
         const paintChosen = () => {
             const d = dListOf(el('list').value);

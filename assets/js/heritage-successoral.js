@@ -198,6 +198,8 @@
         draw();
         body.querySelector('[data-succ-hcsv]').addEventListener('click', () => {
             const cell = v => (A().csvCell ? A().csvCell(v, {sep: ';'}) : `"${String(v ?? '').replace(/"/g, '""')}"`);
+            const line = r => [r.name, r.number, r.deceased, r.kin, r.share, r.address || i18n('adresse à trouver'), r.email, r.phone, r.stateText + (r.contact.state ? ' · ' + contactWord(r.contact.state) : '')];
+            if (window.LCNDA_UI?.exportRows) return window.LCNDA_UI.exportRows({title: i18n('Héritiers à contacter'), name: 'heritiers-a-contacter', rows: () => [['Héritier', 'Dossier', 'Défunt', 'Lien avec le défunt', 'Part', 'Adresse', 'Courriel', 'Téléphone', 'État du contact'].map(h => i18n(h)), ...shown.map(line)]}); // ⤓ la fenêtre d'export commune
             const head = ['Héritier', 'Dossier', 'Défunt', 'Lien avec le défunt', 'Part', 'Adresse', 'Courriel', 'Téléphone', 'État du contact'].map(h => cell(i18n(h)));
             const csv = '﻿' + [head.join(';'), ...shown.map(r => [r.name, r.number, r.deceased, r.kin, r.share, r.address || i18n('adresse à trouver'), r.email, r.phone, r.stateText + (r.contact.state ? ' · ' + contactWord(r.contact.state) : '')].map(cell).join(';'))].join('\r\n');
             const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type: 'text/csv;charset=utf-8'})); a.download = 'heritiers-a-contacter.csv'; document.body.appendChild(a); a.click(); a.remove();
@@ -671,7 +673,7 @@
         const why = r => r.why === 'introuvable' ? `🔎 ${i18n('introuvable')}${r.since ? ' ' + i18n('depuis le {d}', {d: fmtDate(r.since)}) : ''} · ${i18n('décoché')}` : r.why === 'silence' ? `🔇 ${i18n('ne répond pas')}${r.since ? ' ' + i18n('depuis le {d}', {d: fmtDate(r.since)}) : ''} · ${i18n('décoché')}` : r.why === 'noaddr' ? `${i18n('pas d’adresse dans le Répertoire des vivants')} · ${i18n('décoché')}` : '';
         const sub = r => [r.address, why(r), r.last ? i18n('déjà écrit le {d} ({k})', {d: fmtDate(r.last.date), k: kindLabel(r.last.kind).toLocaleLowerCase()}) : ''].filter(Boolean).join(' · ');
         const chips = k => O_.FIELDS.filter(f => f !== 'notaire' || k === 'contrat').map(f => `<button type="button" class="succ-chip" data-succ-field="${f}">{${esc(f)}}</button>`).join('');
-        return ext.openDialog({eyebrow: i18n('✉️ HÉRITIERS CONTACTÉS'), title: serial || all.length > 1 ? i18n('✉️ Courriers en série · {n}', {n: D.number}) : kind === 'contrat' ? i18n('📝 Contrat de révélation') : kind === 'relance' ? i18n('Relance') : i18n('✉️ Lettre de premier contact'), wide: true, submitLabel: i18n('📋 Ranger dans le Registre de courriers'),
+        return ext.openDialog({eyebrow: i18n('✉️ HÉRITIERS CONTACTÉS'), title: serial || all.length > 1 ? i18n('✉️ Courriers en série · {n}', {n: D.number}) : kind === 'contrat' ? i18n('📝 Contrat de révélation') : kind === 'relance' ? i18n('Relance') : i18n('✉️ Lettre de premier contact'), wide: true, submitLabel: i18n('📮 Ranger dans le Registre de courriers'),
             body: `<div class="succ-letter succ-serial"><div class="succ-letter-side"><p class="succ-serial-count" data-succ-scount></p><span class="pk-lab">${esc(i18n('À qui'))}</span><ul class="succ-letter-who">${all.map(r => `<li class="${r.why ? 'is-off' : ''}">${UI().checkHtml(r.name, {checked: sel.has(r.id), attrs: `data-succ-to="${r.id}"`, sub: sub(r)})}</li>`).join('')}</ul>
                 <p class="ui-hint">${esc(i18n('Les héritiers dont l’existence n’est pas établie ne sont pas dans la liste. Les décochés peuvent être cochés à la main (une lettre sans adresse est alors imprimée sans bloc adresse).'))}</p>
                 <label>${esc(i18n('Modèle'))}<select name="kind">${SERIAL_KINDS.map(([k, l]) => `<option value="${k}"${kind === k ? ' selected' : ''}>${esc(i18n(l))}</option>`).join('')}<optgroup label="${esc(i18n('Mes modèles'))}" data-succ-mine></optgroup></select></label>
@@ -857,6 +859,8 @@
             <p class="ui-hint">${esc(i18n('Les changements des fiches restent dans Réglages → Journal des modifications.'))}</p></section>`;
         body.querySelector('[data-succ-b8]')?.addEventListener('click', () => ext.accessLogDialog?.({caseId: D.id, number: D.number})); // 📜 app-verrou.js
         body.querySelector('[data-succ-jcsv]').addEventListener('click', () => {
+            if (window.LCNDA_UI?.exportRows) return window.LCNDA_UI.exportRows({title: i18n('🕓 Journal du dossier {n}', {n: D.number}), name: `journal-dossier-${D.number}`, // ⤓ la fenêtre d'export commune
+                rows: () => [[i18n('Date'), i18n('Action')], ...[...D.journal].reverse().map(j => [atTxt(j.at), j.text])]}).then(r => { if (r) journal(D, 'export', i18n('Journal exporté (CSV)')); });
             const csv = '﻿' + S().journalCsv([...D.journal].reverse().map(j => ({at: atTxt(j.at), text: j.text})), [i18n('Date'), i18n('Action')]);
             const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type: 'text/csv;charset=utf-8'})); a.download = `journal-dossier-${D.number}.csv`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
             journal(D, 'export', i18n('Journal exporté (CSV)'));
@@ -939,7 +943,7 @@
         const name = nameOf(D, pid), p = D.graph.persons[pid] || {};
         const langs = [['fr', 'Français'], ['en', 'English'], ['es', 'Español'], ['it', 'Italiano'], ['de', 'Deutsch'], ['pt', 'Português']];
         const vars = lang => ({notary: D.notary || '…', person: name, when: p.birth?.year ? (lang === 'fr' ? `né(e) en ${p.birth.year}` : lang === 'en' ? `born in ${p.birth.year}` : lang === 'es' ? `nacido/a en ${p.birth.year}` : lang === 'it' ? `nato/a nel ${p.birth.year}` : lang === 'de' ? `geboren ${p.birth.year}` : `nascido/a em ${p.birth.year}`) : '…', sender: [sender().name, sender().address].filter(Boolean).join('\n'), actKind: 'N'});
-        ext.openDialog({eyebrow: i18n('🌍 HÉRITIER À L’ÉTRANGER'), title: i18n('Chercher {name} hors de France', {name}), wide: true, submitLabel: i18n('📋 Ranger dans le Registre de courriers'),
+        ext.openDialog({eyebrow: i18n('🌍 HÉRITIER À L’ÉTRANGER'), title: i18n('Chercher {name} hors de France', {name}), wide: true, submitLabel: i18n('📮 Ranger dans le Registre de courriers'),
             body: `<div class="succ-letter"><div class="succ-letter-side"><h4>${esc(i18n('Les services à interroger'))}</h4><ul class="succ-abroad">${S().ABROAD.map(a => `<li>${esc(i18n(a.text))}</li>`).join('')}</ul>
                 <p>${ext.openActLetter ? `<button type="button" class="button small secondary" data-scec>${esc(i18n('📮 Demander l’acte au Service central d’état civil'))}</button>` : ''}</p>
                 <label>${esc(i18n('Langue de la lettre'))}<select name="lang">${langs.map(([k, l]) => `<option value="${k}">${esc(l)}</option>`).join('')}</select></label>

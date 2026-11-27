@@ -6,7 +6,7 @@
  *  1. données livrées : index.json (licence, mention), chaque DTxx.json.gz lisible, < 100 Mo en tout ;
  *  2. serveur : sommaire en ligne (un pack mal décrit est écarté), par tranches, reprise, abandon, vérifié puis rangé ; ↶ ; supprimer / remettre ;
  *     la commune d'un lieu (code INSEE) → anciens noms (Aurillac « Aureliacus » 984), lieux-dits, patrimoine ; « Orlhac » → Aurillac ;
- *  3. écran : Réglages → « ⤓ Installer » → installé (↶ Annuler le retire) ; Monographie de commune : 📜, 🏘️, ⛪ ; offre ✕ retenue ;
+ *  3. écran : Réglages → « 📦 Installer » → installé (↶ Annuler le retire) ; Monographie de commune : 📜, 🏘️, ⛪ ; offre ✕ retenue ;
  *     Atelier : « 💡 Ce serait peut-être … » ; LCNDA_EXT.dataSources.
  *   node tests/test-lieux-patrimoine.js */
 'use strict';
@@ -110,7 +110,7 @@ echo json_encode(['aur' => $aur, 'tul' => $tul]);`], {cwd: root, encoding: 'utf8
             assert.ok(g, JSON.stringify(r).slice(0, 400)); assert.strictEqual(g.old, 'Orlhac'); assert.strictEqual(g.year, 1280); assert.strictEqual(g.dep_name, 'Cantal');
             assert.deepStrictEqual((await api('lp_suggest', {q: 'Or'})).guesses, []);
         });
-        await t('Réglages → « ⤓ Installer tout » → les 2 packs installés et vérifiés ; ↶ Annuler les retire ; 🗑 Supprimer ↶ remet', async () => {
+        await t('Réglages → « 📦 Installer tout » → les 2 packs installés et vérifiés ; ↶ Annuler les retire ; 🗑 Supprimer ↶ remet', async () => {
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'lieux_patrimoine'; A.setModule('maintenance'); });
             await p.waitForSelector('[data-lp-install-all]', {timeout: 20000});
             assert.match(await p.textContent('.lp-table'), /15 Cantal/);

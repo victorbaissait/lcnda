@@ -151,7 +151,7 @@
     const kmTxt = k => (k < 1 ? T('sur place') : T('{n} km', {n: String(Math.round(k))}));
     /** « à Thiers » ou « à 12 km de Thiers » */
     const nearTxt = (k, p) => (k < 1 ? T('à {p}', {p}) : T('à {n} km de {p}', {n: String(Math.round(k)), p}));
-    const link = (url, label) => { const u = safeUrl(url); return u ? `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : esc(label); };
+    const link = (url, label) => { const u = safeUrl(url); return u ? `${window.LCNDA_UI.extLink(u, label)}` : esc(label); };
     const srcLink = url => { const u = safeUrl(url); return u ? `<a class="th-src-link" href="${esc(u)}" target="_blank" rel="noopener noreferrer" title="${esc(T('Ouvrir la source (internet)'))}">${esc(T('↗ source'))}</a>` : ''; };
     const row = (icon, html, src, extra = '') => `<div class="hist-row th-row"><span class="hist-i" aria-hidden="true">${icon}</span><div class="hist-t"><p>${html}</p>${extra}${src ? `<small class="hist-src">${esc(T('Source :'))} ${src}</small>` : ''}</div></div>`;
     const more = (html, n) => (html ? `<details class="th-more"><summary>${esc(T('▸ plus'))}${n ? ` <small class="muted">(${nf(n)})</small>` : ''}</summary>${html}</details>` : '');

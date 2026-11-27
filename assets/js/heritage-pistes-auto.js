@@ -24,7 +24,7 @@
     const DEF = {block: true, float: true, src: {oa: true, insee: true, mpf: true, leonore: true, annuaire: true}};
     function settings() { let s = {}; try { s = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (_) { s = {}; } return {...DEF, ...s, src: {...DEF.src, ...(s.src || {})}}; }
     function save(s) { try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (_) {} }
-    const link = (url, label) => (url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : esc(label));
+    const link = (url, label) => (url ? `${window.LCNDA_UI.extLink(url, label)}` : esc(label));
     const emptyLine = (text, icon = '🔎', hint = '') => (A().emptyState ? A().emptyState({text, icon, hint, size: 'small'}) : `<p class="muted">${esc(text)}</p>`);
     const goList = () => { const st = A().state; if (!st) return; st.listType = LIST; A().setModule?.('listes'); };
     const openPerson = id => A().openPersonById?.(Number(id));

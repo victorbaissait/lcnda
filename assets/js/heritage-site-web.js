@@ -1069,8 +1069,8 @@
             const R = ext.siteHtmlRef, C = ext.siteCssJsRef; if (!R) return '';
             const k = C ? this.refKind() : 'html', n = {html: R.ELEMENTS.length, attr: ext.siteHtmlAttrs?.ATTRS.length || 0, css: C?.CSS.length || 0, js: C?.JS.length || 0};
             const ph = {html: 'Chercher : titre, lien, tableau, h2…', attr: 'Chercher : alt, lien, nouvel onglet, obligatoire…', css: 'Chercher : couleur, marge, flex, grid…', js: 'Chercher : clic, cacher, charger, liste…'}[k];
-            const src = k === 'html' || k === 'attr' ? i18n('Source : {link}, © {by}, licence {lic} ; {changes}.', {link: `<a href="${esc(R.SOURCE.url)}" target="_blank" rel="noopener noreferrer">${esc(R.SOURCE.title)}</a>`, by: esc(R.SOURCE.by), lic: `<a href="${esc(R.SOURCE.licenseUrl)}" target="_blank" rel="noopener noreferrer">${esc(R.SOURCE.license)}</a>`, changes: esc(i18n(R.SOURCE.changes))})
-                : k === 'css' ? `${i18n('Syntaxe, valeur de départ, héritage : {link} (relevées dans w3c/webref), © World Wide Web Consortium, {lic} ; seuls quelques champs sont repris, « héritée » et certains « s’applique à » sont traduits. Descriptions en français : écrites pour LCNDA.', {link: `<a href="https://www.w3.org/Style/CSS/" target="_blank" rel="noopener noreferrer">${i18n('normes CSS du W3C')}</a>`, lic: '<a href="https://www.w3.org/copyright/software-license-2023/" target="_blank" rel="noopener noreferrer">W3C Software and Document License</a>'})} <details class="sw-ref-notice"><summary>${i18n('Notice de la licence W3C')}</summary><small>${esc(C.W3C_NOTICE)}</small></details>`
+            const src = k === 'html' || k === 'attr' ? i18n('Source : {link}, © {by}, licence {lic} ; {changes}.', {link: `${window.LCNDA_UI.extLink(R.SOURCE.url, R.SOURCE.title)}`, by: esc(R.SOURCE.by), lic: `${window.LCNDA_UI.extLink(R.SOURCE.licenseUrl, R.SOURCE.license)}`, changes: esc(i18n(R.SOURCE.changes))})
+                : k === 'css' ? `${i18n('Syntaxe, valeur de départ, héritage : {link} (relevées dans w3c/webref), © World Wide Web Consortium, {lic} ; seuls quelques champs sont repris, « héritée » et certains « s’applique à » sont traduits. Descriptions en français : écrites pour LCNDA.', {link: `${window.LCNDA_UI.extLink('https://www.w3.org/Style/CSS/', i18n('normes CSS du W3C'))}`, lic: '<a href="https://www.w3.org/copyright/software-license-2023/" target="_blank" rel="noopener noreferrer" title="https://www.w3.org/copyright/software-license-2023/">↗ W3C Software and Document License</a>'})} <details class="sw-ref-notice"><summary>${i18n('Notice de la licence W3C')}</summary><small>${esc(C.W3C_NOTICE)}</small></details>`
                 : 'Descriptions et exemples : écrits pour LCNDA. Chaque entrée renvoie à sa norme (WHATWG, W3C, ECMAScript) pour aller plus loin.';
             return `<section class="sw-ref" data-sw-ref><h4>📖 Aide-mémoire</h4>
                 ${C ? `<div class="segmented sw-seg sw-ref-kinds" role="tablist">${[['html', 'HTML'], ['attr', 'Attributs'], ['css', 'CSS'], ['js', 'JS']].filter(([v]) => v !== 'attr' || ext.siteHtmlAttrs).map(([v, l]) => `<button type="button" data-sw-refkind="${v}" class="${k === v ? 'is-active' : ''}">${l} <small>${n[v]}</small></button>`).join('')}</div>` : ''}
@@ -1101,7 +1101,7 @@
             const list = C.CSS.filter(p => (q ? p[0] === q || fold(`${p[0]} ${p[1]} ${p[1] ? i18n(p[1]) : ''}`).includes(q) : !!p[1])).sort((a, b) => (b[0] === q) - (a[0] === q));
             if (!list.length) return '<p class="sw-hint">Aucune propriété ne correspond.</p>';
             return (q ? '' : `<p class="sw-hint">${i18n('Les plus utiles ; cherche pour voir les {n}.', {n: C.CSS.length})}</p>`) + list.slice(0, 150).map(p => `<details class="sw-ref-el"${p[0] === q ? ' open' : ''}><summary><code>${esc(p[0])}</code> ${esc(p[1] ? i18n(p[1]) : '')}</summary>
-                <dl class="sw-ref-dl"><dt>Syntaxe</dt><dd><code>${esc(p[2])}</code></dd><dt>Au départ</dt><dd><code>${esc(p[3])}</code></dd><dt>Héritée</dt><dd>${esc(i18n(p[4]))}</dd><dt>S’applique à</dt><dd>${esc(trVal(p[5]))}</dd><dt>Norme</dt><dd><a href="${esc(p[7])}" target="_blank" rel="noopener noreferrer">${esc(p[6])}</a></dd></dl>
+                <dl class="sw-ref-dl"><dt>Syntaxe</dt><dd><code>${esc(p[2])}</code></dd><dt>Au départ</dt><dd><code>${esc(p[3])}</code></dd><dt>Héritée</dt><dd>${esc(i18n(p[4]))}</dd><dt>S’applique à</dt><dd>${esc(trVal(p[5]))}</dd><dt>Norme</dt><dd>${window.LCNDA_UI.extLink(p[7], p[6])}</dd></dl>
                 <div class="sw-row"><button type="button" class="button small secondary" data-sw-refins="${esc(p[0])}" data-sw-refk="css" title="L’écrire dans le CSS, là où est le curseur">&lt;/&gt; Écrire dans le CSS</button><button type="button" class="button small secondary" data-sw-refcopy="${esc(p[0])}" data-sw-refk="css">⧉ Copier</button></div></details>`).join('');
         }
         jsRefList() {
@@ -1109,7 +1109,7 @@
             const list = C.JS.filter(j => !q || fold(`${j[0]} ${j[1]} ${i18n(j[1])} ${j[2]}`).includes(q));
             if (!list.length) return '<p class="sw-hint">Rien ne correspond.</p>';
             return list.map((j, i) => `<details class="sw-ref-el"><summary><code>${esc(j[0])}</code> ${esc(i18n(j[1]))}</summary><pre class="sw-ref-ex"><code>${esc(j[2])}</code></pre>
-                <dl class="sw-ref-dl"><dt>Norme</dt><dd><a href="${esc(j[4])}" target="_blank" rel="noopener noreferrer">${esc(j[3])}</a></dd></dl>
+                <dl class="sw-ref-dl"><dt>Norme</dt><dd>${window.LCNDA_UI.extLink(j[4], j[3])}</dd></dl>
                 <div class="sw-row"><button type="button" class="button small secondary" data-sw-refins="${C.JS.indexOf(j)}" data-sw-refk="js" title="Écrire l’exemple dans le JS du site, là où est le curseur">&lt;/&gt; Écrire dans le JS</button><button type="button" class="button small secondary" data-sw-refcopy="${C.JS.indexOf(j)}" data-sw-refk="js">⧉ Copier l’exemple</button></div></details>`).join('');
         }
         htmlRefDetails(e) {
@@ -1681,7 +1681,7 @@
             const U = UI(), last = ['netlify', 'github', 'ftps'].includes(pref('publish', '')) ? pref('publish', '') : (st.site.last || 'netlify');
             const kept = has => (has ? 'Jeton gardé sur cet ordinateur (laisse vide pour le garder)' : 'Colle ton jeton ici');
             const tabs = [['netlify', 'Netlify'], ['github', 'GitHub Pages'], ...(st.ftps.available ? [['ftps', 'FTP sécurisé']] : [])];
-            const where = st.site.netlify_url || st.site.github_url ? `<p class="sw-hint">${i18n('Déjà en ligne :')} ${[st.site.netlify_url, st.site.github_url].filter(Boolean).map(u => `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(u)}</a>`).join(' · ')}</p>` : '';
+            const where = st.site.netlify_url || st.site.github_url ? `<p class="sw-hint">${i18n('Déjà en ligne :')} ${[st.site.netlify_url, st.site.github_url].filter(Boolean).map(u => `${window.LCNDA_UI.extLink(u, u)}`).join(' · ')}</p>` : '';
             const body = `${U.notice('info', 'Ton site est envoyé tel qu’à l’export (.zip) : sans personne vivante ni fiche confidentielle. Le jeton ou le mot de passe reste sur cet ordinateur : il n’est jamais montré, ni mis dans une sauvegarde ou dans le site.')}${where}
                 <div class="segmented sw-pubtabs" role="tablist">${tabs.map(([k, l]) => `<button type="button" data-pub-tab="${k}">${esc(l)}</button>`).join('')}</div>
                 <div class="form-grid one-column" data-pub-pane="netlify"><p class="sw-hint">Netlify héberge ton site gratuitement, à une adresse en …netlify.app. 1. Crée un compte sur netlify.com. 2. Dans « User settings → Applications → Personal access tokens », crée un jeton (« New access token »). 3. Colle-le ici.</p>
@@ -1909,5 +1909,6 @@
         open: (id, again) => openSite({id, onSaved: again, onClose: again}),
         create: again => chooseTemplate({onSaved: again, onClose: again}),
         rename: (id, name) => post('rename_website', {id, name}),
-        remove: id => post('delete_website', {id}), createLabel: '＋ Nouveau site'});
+        remove: async id => { const r = await post('delete_website', {id}), site = (r?.result || r)?.site; if (!site) return null; const o = {undo: async () => { const x = (await post('restore_website', {site}))?.result; o.restoredId = Number(x?.id) || 0; return x; }}; return o; }, undo: true, // ↶ Annuler : le site revient avec ses versions
+        createLabel: '＋ Nouveau site'});
 })();

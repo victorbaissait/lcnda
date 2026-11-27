@@ -531,7 +531,7 @@ Le nom du modèle (les données restent : vide-les avant si tu veux un modèle v
 Le nom de la copie : ¦ Tên bản sao: ¦ Nama salinan:
 {name} (copie) ¦ {name} (bản sao) ¦ {name} (salinan)
 Les changements faits depuis le dernier enregistrement seront perdus. ¦ Các thay đổi từ lần lưu cuối sẽ bị mất. ¦ Perubahan sejak penyimpanan terakhir akan hilang.
-📋 Partir d’un modèle ¦ 📋 Bắt đầu từ mẫu ¦ 📋 Mulai dari templat
+🧩 Partir d’un modèle ¦ 🧩 Bắt đầu từ mẫu ¦ 🧩 Mulai dari templat
 Mes modèles ¦ Mẫu của tôi ¦ Templatku
 Pas encore de modèle à toi : dans un classeur, Fichier → « Enregistrer comme modèle… ». ¦ Bạn chưa có mẫu riêng: trong một sổ tính, Tệp → “Lưu làm mẫu…”. ¦ Belum ada templat milikmu: di buku kerja, Berkas → “Simpan sebagai templat…”.
 séparateur « {sep} » ¦ ký tự phân cách “{sep}” ¦ pemisah “{sep}”
@@ -615,7 +615,7 @@ Sosa, génération, côté, âge ¦ Sosa, thế hệ, bên, tuổi ¦ Sosa, gene
 objets, prix, total en livres ¦ đồ vật, giá, tổng bằng livre ¦ barang, harga, total dalam livre
 Registre matricule ¦ Sổ quân bạ ¦ Register militer
 classe, signalement, campagnes ¦ khoá, nhận dạng, chiến dịch ¦ angkatan, ciri-ciri, kampanye
-📋 Partir d’un modèle… ¦ 📋 Bắt đầu từ mẫu… ¦ 📋 Mulai dari templat…
+🧩 Partir d’un modèle… ¦ 🧩 Bắt đầu từ mẫu… ¦ 🧩 Mulai dari templat…
 ⤒ Importer un tableau… ¦ ⤒ Nhập một bảng… ¦ ⤒ Impor tabel…
 ⤓ Exporter… ¦ ⤓ Xuất… ¦ ⤓ Ekspor…
 🖨 Imprimer… ¦ 🖨 In… ¦ 🖨 Cetak…

@@ -6,7 +6,7 @@
  * le Cantal et les pays entiers, chiffres et rangs RÉELS des fichiers de l'Insee, de l'OFS et de Retraite Québec), coupé en 2.
  *  1. Node : le sommaire d'essai, les mots (« dans le Cantal », « dans l’Ain »…), le prénom rangé comme l'Insee ;
  *  2. serveur : par tranches, reprendre, abandonner, incomplet refusé ; l'import à la main de l'Insee marche toujours ;
- *  3. la page : « ⤓ Installer » → installé (↶ Annuler) ; « Comparer avec » le Cantal ; 🗑 Supprimer (↶) ;
+ *  3. la page : « 📦 Installer » → installé (↶ Annuler) ; « Comparer avec » le Cantal ; 🗑 Supprimer (↶) ;
  *  4. la fiche : « 📊 En 1912 dans le Cantal, 1 fille sur 4 s’appelait Marie (rang 1) » ; « voir la courbe » ; le pays faute
  *     de département ; Suisse, Québec ; rien pour une personne en vie, confidentielle, ou née hors des années.
  *   node tests/test-prenoms-pays.js */
@@ -113,7 +113,7 @@ echo json_encode(['ok' => 1]);`);
             await openPage();
             assert.match(await p.textContent('#workspace'), /3 lignes importées/);
         });
-        await t('la page : « ⤓ Installer » → installé (↶ Annuler le retire) ; puis installé pour de bon', async () => {
+        await t('la page : « 📦 Installer » → installé (↶ Annuler le retire) ; puis installé pour de bon', async () => {
             await p.waitForSelector('[data-ppx-dl]', {timeout: 20000});
             assert.match(await p.textContent('[data-ppx-dl]'), /Installer/);
             await p.click('[data-ppx-dl]');

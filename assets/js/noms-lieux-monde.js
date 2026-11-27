@@ -260,7 +260,7 @@
     }
     function elsewhereHtml(q) {
         const L = id => (J()?.LINK_ONLY || []).find(x => x[0] === id);
-        const lk = (u, label) => { const s = safeUrl(u); return s ? `<a href="${esc(s)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : esc(label); };
+        const lk = (u, label) => { const s = safeUrl(u); return s ? `<a href="${esc(s)}" target="_blank" rel="noopener noreferrer" title="${esc(s)}">↗ ${esc(label)}</a>` : esc(label); };
         const one = id => { const x = L(id); return x ? lk(x[2], T(x[1])) : ''; };
         const reg = ['bfs', 'ine', 'hisgis', 'logainm', 'domesday', 'slownik', 'gemeinde', 'quebec', 'cgndb', 'gnis'].map(one).filter(Boolean).join(' · ');
         const gov = `https://gov.genealogy.net/search/name?name=${encodeURIComponent(String(q || '').trim())}`;

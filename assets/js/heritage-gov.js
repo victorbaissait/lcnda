@@ -1,5 +1,5 @@
 /* LCNDA — 🏰 Lieux anciens d'Allemagne et d'Europe centrale (GOV, gov.genealogy.net ; serveur : lib/gov.php).
- * Rien n'est livré avec l'app : Réglages → 🏰 Lieux anciens (GOV) → « ⤓ Installer » télécharge le pack (version « gov-donnees »).
+ * Rien n'est livré avec l'app : Réglages → 🏰 Lieux anciens (GOV) → « 📦 Installer » télécharge le pack (version « gov-donnees »).
  * Une fois installé :
  *  - page d'un lieu (Monographie de commune) : « 🏰 Ce lieu dans GOV » — ses anciens noms et à quoi il appartenait (paroisse,
  *    Kreis, province, État) l'année de ses événements ; « C'est celui-ci » quand plusieurs lieux portent ce nom (↶ Annuler) ;
@@ -110,7 +110,7 @@
     /* ═════════ « Trouver un lieu ancien » ═════════ */
     async function openSearch(q = '') {
         const st = await status();
-        if (!st.installed) { toast(i18n('Les lieux anciens (GOV) ne sont pas installés : Réglages → 🏰 Lieux anciens (GOV) → ⤓ Installer.'), 'info'); return openSettings(); }
+        if (!st.installed) { toast(i18n('Les lieux anciens (GOV) ne sont pas installés : Réglages → 🏰 Lieux anciens (GOV) → 📦 Installer.'), 'info'); return openSettings(); }
         const dlg = ext.openDialog?.({eyebrow: '🏰 ' + i18n('LIEUX ANCIENS (GOV)'), title: i18n('Trouver un lieu ancien'), wide: true,
             body: `<p class="gov-muted">${esc(i18n('Un nom d’autrefois en allemand, polonais, tchèque… : le lieu d’aujourd’hui, où il est, et à quoi il appartenait.'))}</p>
                 <div class="gov-search-row"><input type="search" data-gov-q value="${esc(q)}" placeholder="${esc(i18n('Schreiberhau, Breslau, Reichenberg…'))}" aria-label="${esc(i18n('Nom du lieu'))}"><button type="button" class="button" data-gov-go>${esc(i18n('Chercher'))}</button></div>
@@ -246,8 +246,8 @@
         let a = {}; try { a = await api('gov_about'); } catch (_) {}
         ext.openDialog?.({eyebrow: '🏰 ' + i18n('LIEUX ANCIENS (GOV)'), title: i18n('À propos des données'), wide: true,
             body: `<p><b>GOV — Geschichtliches Orts-Verzeichnis</b> (« ${esc(i18n('répertoire historique des lieux'))} »), ${esc(i18n('fait par les bénévoles du Verein für Computergenealogie e. V.'))} : ${esc(i18n('environ 1,2 million de lieux, paroisses et territoires, surtout d’Allemagne et d’Europe centrale, avec leurs noms au fil du temps et ce à quoi ils appartenaient.'))}</p>
-                <ul><li><b>${esc(i18n('Source'))}</b> : <a href="${esc(a.source_url || 'https://gov.genealogy.net')}" target="_blank" rel="noopener">gov.genealogy.net</a>${a.built ? ` · ${esc(i18n('lu le {d}', {d: a.built}))}` : ''}${a.objects ? ` · ${esc(i18n('{n} objets dans le pack', {n: nf(a.objects)}))}` : ''}</li>
-                <li><b>${esc(i18n('Licence'))}</b> : ${esc(a.licence || 'CC BY-SA')} — <a href="${esc(a.licence_url || 'https://wiki.genealogy.net/GOV/Webservice')}" target="_blank" rel="noopener">GenWiki « GOV/Webservice »</a>${a.licence_checked ? ` (${esc(i18n('vérifiée le {d}', {d: a.licence_checked}))})` : ''}</li>
+                <ul><li><b>${esc(i18n('Source'))}</b> : ${window.LCNDA_UI.extLink(a.source_url || 'https://gov.genealogy.net', 'gov.genealogy.net')}${a.built ? ` · ${esc(i18n('lu le {d}', {d: a.built}))}` : ''}${a.objects ? ` · ${esc(i18n('{n} objets dans le pack', {n: nf(a.objects)}))}` : ''}</li>
+                <li><b>${esc(i18n('Licence'))}</b> : ${esc(a.licence || 'CC BY-SA')} — ${window.LCNDA_UI.extLink(a.licence_url || 'https://wiki.genealogy.net/GOV/Webservice', 'GenWiki « GOV/Webservice »')}${a.licence_checked ? ` (${esc(i18n('vérifiée le {d}', {d: a.licence_checked}))})` : ''}</li>
                 <li><b>${esc(i18n('Mention à recopier'))}</b> : ${esc(a.mention || '')}</li></ul>
                 ${a.licence_text ? `<details><summary>${esc(i18n('Le texte de la licence, tel que lu'))}</summary><p class="gov-muted">${esc(a.licence_text)}</p></details>` : ''}
                 ${UI().notice ? UI().notice('info', i18n('Le pack est fabriqué une fois à partir du service public de GOV (scripts/gov/build-gov.py) ; l’app le télécharge, puis n’a plus besoin d’Internet. Rien n’est envoyé à GOV.')) : ''}
@@ -267,7 +267,7 @@
         if (DL.paused) return `<span class="gov-prog"><i style="width:${pct(DL.paused.received, DL.paused.size)}%"></i></span> <small>${esc(i18n('En pause : {p} %', {p: pct(DL.paused.received, DL.paused.size)}))}</small> <button type="button" class="button small" data-gov-dl>▶ ${esc(i18n('Reprendre'))}</button> <button type="button" class="button small secondary" data-gov-cancel>✕ ${esc(i18n('Abandonner'))}</button>`;
         if (DL.online === undefined) return `<small class="gov-muted">${esc(i18n('Recherche des données en ligne…'))}</small>`;
         if (!DL.online) return `<small class="gov-muted" title="${esc(DL.err)}">${esc(DL.err ? i18n('Pas de connexion aux données en ligne.') : i18n('Pas encore en ligne.'))}</small>`;
-        return `<button type="button" class="button small" data-gov-dl>⤓ ${esc(i18n('Installer ({s})', {s: fmtSize(DL.online.size)}))}</button>`;
+        return `<button type="button" class="button small" data-gov-dl>📦 ${esc(i18n('Installer ({s})', {s: fmtSize(DL.online.size)}))}</button>`;
     }
     async function dlRun() {
         if (DL.run) return;

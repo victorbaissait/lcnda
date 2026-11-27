@@ -491,7 +491,7 @@
         setTimeout(async () => {
             try { await loadLocal(); await loadOnline(); } catch (_) { return; }
             const n = rows().filter(r => r.state === 'update').length;
-            if (n) toast(T('🗂 {n} mises à jour de données disponibles.', {n}), '', {duration: 15000, action: {label: T('Voir'), run: () => { C.filter = 'update'; goTab(TAB[0]); }}});
+            if (n) toast(T('🗂 {n} mises à jour de données disponibles.', {n}), '', {action: {label: T('Voir'), run: () => { C.filter = 'update'; goTab(TAB[0]); }}});
         }, 8000);
     }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', monthly); else monthly();

@@ -7,7 +7,7 @@
  *     badge 🔎 dans l'en-tête ; ✓ Garder (note + source, ＋ aussi à sa femme cochée d'office, pas au fils né après) et ↶ ;
  *     ✗ Pas utile et ↶ ; « déjà sur la fiche » ;
  *  2. ⤢ Tout voir : « N données regardées, M ont trouvé quelque chose », groupes, ⤓ Pas encore installé (MPF : né en 1890 en
- *     France ; pas INSEE : mort en 1916), ⤓ Installer appelle l'install de la source, ＋ Ajouter comme note et ↶ ;
+ *     France ; pas INSEE : mort en 1916), 📦 Installer appelle l'install de la source, ＋ Ajouter comme note et ↶ ;
  *  3. un lieu, une année ; 4. Listes → 🔎 Chercher dans toutes les données ; 5. le widget ; 6. mode consultation : rien à installer ni garder.
  *   node tests/test-tout-sur.js */
 'use strict';
@@ -239,7 +239,7 @@ echo json_encode(['ok' => 1, 'even' => $t('EVEN')]);`], {cwd: root, encoding: 'u
         });
 
         /* ═════════ 6. mode consultation ═════════ */
-        await t('🔒 mode consultation : ni ✓ Garder, ni ⤓ Installer', async () => {
+        await t('🔒 mode consultation : ni ✓ Garder, ni 📦 Installer', async () => {
             await p.evaluate(() => document.body.classList.add('is-kiosk'));
             await p.evaluate(() => window.LCNDA_EXT.toutSur.open({person: 1}));
             await p.waitForFunction(() => /ont trouvé quelque chose/.test(document.querySelector('.ts-dialog [data-ts-count]')?.textContent || ''), null, {timeout: 15000});

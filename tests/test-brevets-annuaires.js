@@ -7,7 +7,7 @@
  * Le « serveur » des données (la version « brevets-annuaires-donnees » du dépôt) est un dossier local (GENEALOGY_TEST=1 + LCNDA_TEST_BA_DIR).
  *  1. fabrication : noms, prénoms entre parenthèses, adresses, rues du géocodeur, page Gallica ; clés des noms (Python = PHP) ;
  *  2. serveur : le sommaire, par tranches, reprendre, abandonner, un pack incomplet refusé ;
- *  3. fiche : l'offre discrète (✕ retenu, ↶) → Réglages « ⤓ Installer » (↶) → « 📇 En 1898, un MAZAUD, boulanger… ↗ source »,
+ *  3. fiche : l'offre discrète (✕ retenu, ↶) → Réglages « 📦 Installer » (↶) → « 📇 En 1898, un MAZAUD, boulanger… ↗ source »,
  *     « ✓ C'est lui » (source + lieu de résidence, ↶), « ✗ Pas lui » (↶) ; pas de piste hors de Paris ; un autre prénom écarte ;
  *  4. Listes (ba_list : nom, rue, année, autour de), calque de carte (ba_map), monographie de Paris (ba_place),
  *     « 🔎 Ce qui le concerne » (LCNDA_EXT.dataSources), « Où chercher » (💡 brevets : lien INPI, nom à copier), 🗑 Supprimer (↶).
@@ -123,7 +123,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.strictEqual((await api('ba_person', {id: 5})).could, false, 'un animal');
             assert.strictEqual((await api('ba_person', {id: 5})).inventor, false);
         });
-        await t('fiche : l’offre discrète « ⤓ Installer les annuaires » ; ✕ retenu (genealogie-brevets-annuaires) et ↶ Annuler ; rien pour qui n’a pas vécu à Paris', async () => {
+        await t('fiche : l’offre discrète « 📦 Installer les annuaires » ; ✕ retenu (genealogie-brevets-annuaires) et ↶ Annuler ; rien pour qui n’a pas vécu à Paris', async () => {
             await openPerson(1);
             await p.waitForSelector('.ba-person .ba-offer [data-ba-install]', {timeout: 20000});
             await p.waitForFunction(() => /Installer les annuaires \(\d/.test(document.querySelector('.ba-offer').textContent), null, {timeout: 20000});
@@ -144,7 +144,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.strictEqual((await api('ba_dl_resume', {id: s.id})).exists, false);
             const c = await post('ba_dl_start', {}); await post('ba_dl_cancel', {id: c.id}); assert.strictEqual((await api('ba_dl_resume', {id: c.id})).exists, false);
         });
-        await t('Réglages : « ⤓ Installer » → installé et vérifié, ↶ Annuler le retire ; puis installé (dans le dossier des données)', async () => {
+        await t('Réglages : « 📦 Installer » → installé et vérifié, ↶ Annuler le retire ; puis installé (dans le dossier des données)', async () => {
             await settings();
             await p.waitForSelector('.ba-set [data-ba-install]', {timeout: 20000});
             assert.match(await p.textContent('.ba-set .ba-base'), /Installer \(\d/);

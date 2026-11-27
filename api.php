@@ -10524,6 +10524,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'delete_anim_project' => delete_anim_project($pdo,$data),
             'rename_anim_project' => rename_anim_project($pdo,$data),
             'restore_anim_project' => restore_anim_project($pdo,$data),
+            'restore_project' => restore_project($pdo,$data), // ↶ Annuler la suppression d'un projet d'outil (lib/projets_annuler.php)
             'recueil_pages_restore' => recueil_pages_restore($pdo,$data),
             'recueil_insert_absent' => recueil_insert_absent($pdo,$data),
             'recueil_remove_inserted' => recueil_remove_inserted($pdo,$data),

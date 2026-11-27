@@ -10,6 +10,7 @@
     const api = (...args) => A().api(...args);
     const toast = (...args) => A().toast(...args);
     const S = () => A().state;
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const KINDS = {photo: '🖼️ Photo', document: '📜 Document', artwork: '🎨 Œuvre', object: '🏺 Objet', text: '🔤 Texte au mur', decor: '🪴 Décor', seat: '🪑 Siège'};
     const WALLS = {back: 'Mur du fond', left: 'Mur de gauche', right: 'Mur de droite', front: 'Mur d’entrée', center: 'Au milieu de la salle'};
     const MODELS = {bench: 'Banc', chair: 'Chaise', sofa: 'Canapé', plant: 'Plante', column: 'Colonne', pedestal: 'Socle', rope: 'Cordon', rug: 'Tapis', lamp: 'Lampadaire', vase: 'Vase sur socle', piano: 'Piano', table: 'Table', screen: 'Paravent'};
@@ -121,7 +122,7 @@
             input.addEventListener('change', guard(async () => { if (!input.files[0]) return; const fd = new FormData(); fd.append('file', input.files[0]); toast('Import du musée…'); const r = await postForm('museum_import', fd); toast('Musée importé : il est dans « Musées ».'); dlg.close(); openEditor(r.id, 0); }));
             input.click();
         });
-        dlg.querySelectorAll('[data-me-book-del]').forEach(b => b.addEventListener('click', guard(async () => { if (!await A().confirmBox('Supprimer ce message du livre d’or ?', {title: 'Supprimer le message', okLabel: 'Supprimer le message'})) return; await post('delete_museum_guestbook', {id: b.dataset.meBookDel}); again(); })));
+        dlg.querySelectorAll('[data-me-book-del]').forEach(b => b.addEventListener('click', () => A().deleteWithUndo({action: 'delete_museum_guestbook', body: {id: b.dataset.meBookDel}, type: 'museum_guestbook', id: b.dataset.meBookDel, message: i18n('Message du livre d’or supprimé'), after: () => again()}))); // H7 : ↶ Annuler au lieu de demander
         if (readOnly) return;
         dlg.querySelector('[data-me-museum]')?.addEventListener('submit', guard(async e => {
             e.preventDefault(); const f = e.target;
@@ -134,14 +135,15 @@
         if (!room) return;
         const rf = dlg.querySelector('[data-me-roomform]');
         rf.addEventListener('submit', guard(async e => { e.preventDefault(); await post('save_museum_room', {id: room.id, name: rf.name.value, intro: rf.intro.value, settings: {mx: room.settings.mx, mz: room.settings.mz, size: rf.size.value, floor: rf.floor.value, wall: rf.wall.value, ...(rf.size.value === 'custom' ? {width: rf.width.value, depth: rf.depth.value} : {})}}); toast('Salle enregistrée.'); again(); }));
-        dlg.querySelector('[data-me-room-del]').addEventListener('click', guard(async () => { if (!await A().confirmBox(`Supprimer la salle « ${room.name} » et tout ce qui y est exposé ? (les photos restent dans la base)`, {title: 'Supprimer la salle', okLabel: 'Supprimer la salle'})) return; await post('delete_museum_room', {id: room.id}); again(0); }));
+        const ri0 = data.rooms.indexOf(room);
+        dlg.querySelector('[data-me-room-del]').addEventListener('click', () => A().deleteWithUndo({action: 'delete_museum_room', body: {id: room.id}, type: 'museum_room', id: room.id, message: i18n('Salle « {name} » supprimée', {name: room.name}), after: how => again(how === 'undo' ? ri0 : 0)})); // H7 : la salle et ce qui y est exposé reviennent avec ↶ Annuler
         bindAudio(rf, 'room', room, () => again());
         rf.size.addEventListener('change', () => { // « Sur mesure » part de la taille actuelle
             const box = rf.querySelector('[data-me-size-custom]'); box.hidden = rf.size.value !== 'custom';
             if (rf.size.value === 'custom' && room.settings.size !== 'custom') { const [w, d] = window.LCNDA_MUSEUM_VIEWER.roomSize(room.settings); rf.width.value = w; rf.depth.value = d; }
         });
         dlg.querySelectorAll('[data-me-up],[data-me-down]').forEach(b => b.addEventListener('click', guard(async () => { const k = Number(b.dataset.meUp ?? b.dataset.meDown); await reorder('items', room.items, k, b.dataset.meUp !== undefined ? k - 1 : k + 1); again(); })));
-        dlg.querySelectorAll('[data-me-del]').forEach(b => b.addEventListener('click', guard(async () => { const it = room.items[Number(b.dataset.meDel)]; if (!await A().confirmBox(`Retirer « ${it.title || 'cet élément'} » du musée ?`, {title: 'Retirer du musée', okLabel: 'Retirer du musée'})) return; await post('delete_museum_item', {id: it.id}); again(); })));
+        dlg.querySelectorAll('[data-me-del]').forEach(b => b.addEventListener('click', () => { const it = room.items[Number(b.dataset.meDel)]; A().deleteWithUndo({action: 'delete_museum_item', body: {id: it.id}, type: 'museum_item', id: it.id, message: it.title ? i18n('« {name} » retiré du musée', {name: it.title}) : i18n('Élément retiré du musée'), after: () => again()}); })); // H7
         dlg.querySelectorAll('[data-me-edit]').forEach(b => b.addEventListener('click', () => itemDialog(room, room.items[Number(b.dataset.meEdit)], () => again())));
         dlg.querySelectorAll('[data-me-add]').forEach(b => b.addEventListener('click', () => {
             const what = b.dataset.meAdd;

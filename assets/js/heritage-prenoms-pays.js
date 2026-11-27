@@ -2,7 +2,7 @@
  *  · Sur la fiche (bloc Identité) : « 📊 En 1912 dans le Cantal, 1 fille sur 4 s’appelait Marie (rang 1) · voir la courbe ».
  *    Jamais pour une personne en vie, probablement en vie ou confidentielle (même règle que « 👶 Prénom reçu de… »).
  *  · « voir la courbe » : le prénom année par année, pour mille enfants du même sexe, le département à côté du pays.
- *  · Statistiques → Prénoms : la famille et la France : le bloc « ⤓ Installer / 🗑 Supprimer (↶) / À propos des données »
+ *  · Statistiques → Prénoms : la famille et la France : le bloc « 📦 Installer / 🗑 Supprimer (↶) / À propos des données »
  *    (ext.prenomsPays.panel, appelé par assets/js/heritage.js).
  * Réglages de l'écran : localStorage['genealogie-prenoms-pays'] ({fiche: true|false}) ; téléchargement en cours :
  * localStorage['genealogie-prenoms-pays-dl'] (reprise après fermeture). Rien n'est écrit dans la généalogie.
@@ -115,7 +115,7 @@
         A().toast?.(i18n('À propos des données'));
     }
 
-    /* ═════════ ⤓ Installer en un bouton (même chemin que la météo) ═════════ */
+    /* ═════════ 📦 Installer en un bouton (même chemin que la météo) ═════════ */
     const DL = {online: undefined, err: '', run: null, paused: null};
     const dlSaved = () => { try { return localStorage.getItem(DL_KEY) || ''; } catch (_) { return ''; } };
     const dlRemember = id => { try { localStorage.setItem(DL_KEY, id); } catch (_) {} };
@@ -137,7 +137,7 @@
         if (DL.paused) return `<span class="ppx-dl"><span class="ppx-prog"><i style="width:${pct(DL.paused.received, DL.paused.size)}%"></i></span><small>${esc(i18n('En pause : {p} %', {p: String(pct(DL.paused.received, DL.paused.size))}))}</small><button type="button" class="button small" data-ppx-dl>▶ ${esc(i18n('Reprendre'))}</button><button type="button" class="button small secondary" data-ppx-cancel>✕ ${esc(i18n('Abandonner'))}</button></span>`;
         if (DL.online === undefined) return `${window.LCNDA_UI.spinner(i18n('Recherche des données en ligne…'), {inline: true})}`;
         if (!DL.online) return `<small class="muted" title="${esc(DL.err)}">${esc(DL.err ? i18n('Pas de connexion aux données en ligne.') : i18n('Pas encore en ligne.'))}</small>`;
-        return `<button type="button" class="button small" data-ppx-dl>⤓ ${esc(i18n('Installer ({s})', {s: fmtSize(DL.online.size)}))}</button>`;
+        return `<button type="button" class="button small" data-ppx-dl>📦 ${esc(i18n('Installer ({s})', {s: fmtSize(DL.online.size)}))}</button>`;
     }
     function draw() {
         const countries = st.installed ? [...new Set((st.zones || []).map(z => z.country))] : [];
@@ -179,7 +179,7 @@
         const undo = async () => { await post('prenoms_pays_pack_restore', {}); await refresh(); };
         A().undoToast ? A().undoToast(i18n('🗑 Données des prénoms supprimées.'), {undo}) : A().toast?.(i18n('🗑 Données des prénoms supprimées.'));
     }
-    /** le bloc « ⤓ Installer » dans une page : panel(élément, (status) => …) → le statut */
+    /** le bloc « 📦 Installer » dans une page : panel(élément, (status) => …) → le statut */
     async function panel(el, cb) {
         host = el; onChange = typeof cb === 'function' ? cb : () => {};
         if (!el.__ppxBound) {

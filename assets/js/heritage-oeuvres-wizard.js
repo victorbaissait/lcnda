@@ -14,7 +14,7 @@
     const A = () => window.LCNDA_APP;
     const U = ART.util, esc = U.esc, clone = U.clone;
     const SORTS = ['text', 'longtext', 'number', 'date', 'period', 'duration', 'dims', 'measure', 'money', 'list', 'tags', 'bool', 'rating', 'url', 'code', 'people', 'place', 'item', 'media', 'document', 'rows', 'color', 'note', 'computed'];
-    const TILE = {people: '👤 Personne + rôle', rows: '📋 Tableau (lignes)', computed: '🧮 Calcul', item: '📎 Fiche liée', rating: '⭐ Note', number: '123 Nombre', date: '📅 Date (C4)', url: '🔗 Lien web', bool: '☐ Oui / non'};
+    const TILE = {people: '👤 Personne + rôle', rows: '📋 Tableau (lignes)', computed: '🧮 Calcul', item: '🔗 Fiche liée', rating: '⭐ Note', number: '123 Nombre', date: '📅 Date (C4)', url: '🔗 Lien web', bool: '☐ Oui / non'};
     const tile = t => TILE[t] || ART.ft[t]?.tile || ART.ft[t]?.label || t;
     const short = t => tile(t).replace(/\s*\(.*\)$/, '');
     OE.WIZ_SORTS = SORTS;

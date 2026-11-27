@@ -3,7 +3,7 @@
  * Le « serveur » des données (la version « elections-donnees » du dépôt) est un dossier local (GENEALOGY_TEST=1 + LCNDA_TEST_ELECTIONS_DIR) :
  * le pack d'essai (scripts/elections/make-fixture.py, chiffres inventés) coupé en 3 morceaux + elections-manifest.json.
  *  1. éteint au départ : aucun bloc, rien dans la liste des blocs ; seule la page de Réglages existe ;
- *  2. Réglages → 🗳 Élections d'autrefois : « ⤓ Installer » → vérifié, rangé (↶ Annuler) ; reprise d'un téléchargement ;
+ *  2. Réglages → 🗳 Élections d'autrefois : « 📦 Installer » → vérifié, rangé (↶ Annuler) ; reprise d'un téléchargement ;
  *  3. allumé : le bloc « 🗳 Comment votait sa commune » (À Tulle, 62 % votent républicain) ; une femme avant 1945 ;
  *  4. profil « Homme / femme politique » : l'élection trouvée sous son nom s'ajoute au profil « à vérifier », ↶ Annuler la retire ;
  *  5. éteint de nouveau : plus rien.
@@ -81,7 +81,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.match((await post('elections_dl_finish', {id: s.id})).error || '', /incomplet/, 'un pack incomplet n’est pas installé');
             assert.strictEqual((await api('elections_dl_resume', {id: s.id})).exists, false);
         });
-        await t('Réglages → 🗳 Élections d’autrefois : l’interrupteur est éteint ; « ⤓ Installer » → installé et vérifié ; ↶ Annuler le retire', async () => {
+        await t('Réglages → 🗳 Élections d’autrefois : l’interrupteur est éteint ; « 📦 Installer » → installé et vérifié ; ↶ Annuler le retire', async () => {
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'elections'; A.setModule('maintenance'); });
             await p.waitForSelector('[data-el-dl]', {timeout: 20000});
             assert.strictEqual(await p.$eval('[data-el-on]', x => x.checked), false);

@@ -852,7 +852,7 @@
         open: (id, again) => open({id, onSaved: again, onClose: again}),
         create: again => chooseKind(again),
         rename: (id, name) => post('rename_slideshow', {id, name}),
-        remove: id => post('delete_slideshow', {id}), createLabel: '＋ Nouveau',
+        remove: id => (ext.projectDelUndo ? ext.projectDelUndo('delete_slideshow')(id) : post('delete_slideshow', {id})), undo: true, createLabel: '＋ Nouveau',
         extra: '<button type="button" class="button secondary" data-et-x="story" title="Les photos, les lieux et la vie d’une personne, en diaporama tout fait">✨ Récit d’une vie</button><button type="button" class="button secondary" data-et-x="kimport" title="PowerPoint (.pptx), OpenDocument (.odp), PDF, images, Markdown, texte, JSON">⤒ Importer une présentation</button><button type="button" class="button secondary" data-et-x="ssimport" title="Un fichier de diaporama exporté par LCNDA (⤓ Exporter → 💾 Fichier)">⤒ Importer un diaporama</button>',
         onExtra: (k, again) => { if (k === 'ssimport') return importShowFile(again); if (k === 'story') storyThenOpen({onSaved: again, onClose: again}); if (k === 'kimport') ext.importPresentation ? ext.importPresentation({onSaved: again, onClose: again}) : toast('L’éditeur de présentation n’est pas chargé.', 'error'); }});
 

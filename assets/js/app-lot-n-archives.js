@@ -147,7 +147,7 @@
     const saveSettings = s => { try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (_) {} };
     const nf = n => Number(n || 0).toLocaleString(root.LCNDA_I18N?.lang && root.LCNDA_I18N.lang !== 'fr' ? root.LCNDA_I18N.lang : 'fr-FR');
     const fmtSize = b => { b = Number(b) || 0; return b >= 1e6 ? `${(Math.round(b / 1e5) / 10).toLocaleString('fr-FR')} ${T('Mo')}` : `${Math.max(1, Math.round(b / 1e3))} ${T('Ko')}`; };
-    const link = (url, label) => { const u = safeUrl(url); return u ? `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : esc(label); };
+    const link = (url, label) => { const u = safeUrl(url); return u ? `${window.LCNDA_UI.extLink(u, label)}` : esc(label); };
     const srcLink = url => { const u = safeUrl(url); return u ? `<a class="tn-src-link" href="${esc(u)}" target="_blank" rel="noopener noreferrer" title="${esc(T('Ouvrir la source (internet)'))}">${esc(T('↗ source'))}</a>` : ''; };
     const row = (icon, html, src, extra = '') => `<div class="hist-row tn-row"><span class="hist-i" aria-hidden="true">${icon}</span><div class="hist-t"><p>${html}</p>${extra}${src ? `<small class="hist-src">${esc(T('Source :'))} ${src}</small>` : ''}</div></div>`;
     const more = (html, n) => (html ? `<details class="tn-more"><summary>${esc(T('▸ plus'))}${n ? ` <small class="muted">(${nf(n)})</small>` : ''}</summary>${html}</details>` : '');
@@ -182,7 +182,7 @@
     root.addEventListener?.('lcnda:installs-changed', forget);
     const LIC = meta => (meta?.sources || []).map(s => `${link(s.url, s.label)} (${link(s.licence_url, s.licence)})`).join(' ; ');
 
-    /* ─────────── ⤓ installer un pack (une file d'un pack à la fois ; ↶ Annuler) ─────────── */
+    /* ─────────── 📦 installer un pack (une file d'un pack à la fois ; ↶ Annuler) ─────────── */
     let running = null;
     async function install(keys, {quiet = false} = {}) {
         if (kiosk()) { toast(T('Mode consultation : rien ne se télécharge.'), 'error'); return false; }
@@ -216,13 +216,13 @@
         const undo = async () => { await post('tn_pack_restore', {key: k}); forget(); root.dispatchEvent?.(new Event('lcnda:installs-changed')); redraw(); };
         A().undoToast ? A().undoToast(T('🗑 {name} retiré.', {name: T(PACKS[k][1])}), {undo, redo: () => remove(k), icon: '🗑'}) : toast(T('🗑 {name} retiré.', {name: T(PACKS[k][1])}));
     }
-    /** la ligne discrète « ⤓ Installer … » quand un pack manque (rien en mode consultation) */
+    /** la ligne discrète « 📦 Installer … » quand un pack manque (rien en mode consultation) */
     async function offer(keys, why) {
         if (kiosk()) return '';
         const info = await onlineInfo(); const avail = keys.filter(k => info?.packs?.[k]);
         if (!avail.length) return '';
         const size = avail.reduce((a, k) => a + (info.packs[k].size || 0), 0);
-        return `<p class="muted tn-offer">${esc(why)} <button type="button" class="button small secondary" data-tn-install="${esc(avail.join(','))}">⤓ ${esc(T('Installer ({s})', {s: fmtSize(size)}))}</button> <span data-tn-progress="${esc(avail[0])}"></span></p>`;
+        return `<p class="muted tn-offer">${esc(why)} <button type="button" class="button small secondary" data-tn-install="${esc(avail.join(','))}">📦 ${esc(T('Installer ({s})', {s: fmtSize(size)}))}</button> <span data-tn-progress="${esc(avail[0])}"></span></p>`;
     }
     function redraw() {
         document.querySelectorAll('[data-tn-host]').forEach(h => { const p = h.__tnPlace; if (p) placeInto(h, p); });
@@ -453,13 +453,13 @@
         const s = settings();
         const tg = ([key, label, sub]) => `<label class="checkbox-line cplus-tg" data-tn-tg="${esc(key)}"><input type="checkbox" ${s[key] !== false ? 'checked' : ''}><span><b>${esc(T(label))}</b><br><small class="muted">${esc(T(sub))}</small></span></label>`;
         const packRow = ([k, p]) => { const mineP = st?.packs?.[k], onl = info?.packs?.[k];
-            const state = mineP ? `✓ ${esc(T('installé'))} · ${esc(nf(mineP.rows))} ${esc(T('lignes'))} · ${esc(mineP.built || '')}` : onl ? `<button type="button" class="button small secondary" data-tn-install="${esc(k)}">⤓ ${esc(T('Installer ({s})', {s: fmtSize(onl.size)}))}</button> <span data-tn-progress="${esc(k)}"></span>` : `<span class="muted">${esc(T(info?.offline ? 'Pas de connexion aux données en ligne.' : 'Pas encore en ligne.'))}</span>`;
+            const state = mineP ? `✓ ${esc(T('installé'))} · ${esc(nf(mineP.rows))} ${esc(T('lignes'))} · ${esc(mineP.built || '')}` : onl ? `<button type="button" class="button small secondary" data-tn-install="${esc(k)}">📦 ${esc(T('Installer ({s})', {s: fmtSize(onl.size)}))}</button> <span data-tn-progress="${esc(k)}"></span>` : `<span class="muted">${esc(T(info?.offline ? 'Pas de connexion aux données en ligne.' : 'Pas encore en ligne.'))}</span>`;
             return `<tr><td>${esc(p[0])} ${esc(T(p[1]))}<br><small class="muted">${esc(T(p[3]))}</small></td><td>${state}</td><td>${esc(mineP?.licence || onl?.licence || '')}</td><td>${mineP && !kiosk() ? `<button type="button" class="btn-link" data-tn-remove="${esc(k)}" title="${esc(T('Retirer ce pack'))}">🗑</button>` : ''}</td></tr>`; };
         const missing = Object.keys(PACKS).filter(k => !st?.packs?.[k] && info?.packs?.[k]);
         const head = UI().pageHeader ? UI().pageHeader({title: T('Archives et mémoire'), icon: '🏛', where: T('Réglages · Données'), help: esc(T('Registres en ligne commune par commune, inventaires de FranceArchives, familles et institutions, morts pour la France des collectivités, monuments aux morts, plaques de Paris.'))}) : `<h2>🏛 ${esc(T('Archives et mémoire'))}</h2>`;
         ws.innerHTML = `<section class="page cplus-settings tn-settings" data-tn-settings-page>${head}
             <div class="maintenance-panel"><h3>${esc(T('Les données'))}</h3><p class="muted">${esc(T('Rien n’est livré avec l’app : chaque pack se télécharge une fois, puis il est lu sans Internet. Rien ne part sur Internet, ni nom ni lieu.'))}</p>
-                ${missing.length > 1 && !kiosk() ? `<p><button type="button" class="button small" data-tn-install="${esc(missing.join(','))}">⤓ ${esc(T('Tout installer ({s})', {s: fmtSize(missing.reduce((a, k) => a + (info.packs[k].size || 0), 0))}))}</button></p>` : ''}
+                ${missing.length > 1 && !kiosk() ? `<p><button type="button" class="button small" data-tn-install="${esc(missing.join(','))}">📦 ${esc(T('Tout installer ({s})', {s: fmtSize(missing.reduce((a, k) => a + (info.packs[k].size || 0), 0))}))}</button></p>` : ''}
                 <div class="cplus-scroll"><table class="data-table"><thead><tr><th>${esc(T('Pack'))}</th><th>${esc(T('État'))}</th><th>${esc(T('Licence'))}</th><th></th></tr></thead><tbody>${Object.entries(PACKS).map(packRow).join('')}</tbody></table></div></div>
             <details class="maintenance-panel tn-perso"><summary><b>⚙️ ${esc(T('Personnaliser'))}</b> <small class="muted">${esc(T('ce qui s’affiche sur les fiches'))}</small></summary>
                 <p class="muted">${esc(T('Sur la fiche d’un village (« 🏛 Archives de la commune »), la fiche d’une personne décédée (« 🏛 Archives et mémoire de sa vie »), « Où chercher » et la monographie.'))}</p>${PARTS.map(tg).join('')}</details>

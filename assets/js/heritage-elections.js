@@ -1,7 +1,7 @@
 /* LCNDA — 🗳 Élections d'autrefois (serveur : lib/elections.php ; pack : scripts/elections/build-elections.py).
  * CACHÉ PAR DÉFAUT : rien ne se montre (ni bloc, ni ligne dans la liste des blocs) tant que l'interrupteur de
  * Réglages → 🗳 Élections d'autrefois n'est pas mis. Seule cette page de réglages existe, pour l'allumer.
- *  · Réglages → 🗳 Élections d'autrefois : l'interrupteur, « ⤓ Installer » le pack (par tranches, pause, reprise même
+ *  · Réglages → 🗳 Élections d'autrefois : l'interrupteur, « 📦 Installer » le pack (par tranches, pause, reprise même
  *    après avoir fermé l'app ; vérifié avant d'être rangé ; ↶ Annuler), le supprimer, la source à citer.
  *  · bloc de fiche « 🗳 Comment votait sa commune » : les élections de sa vie d'adulte, dans la commune où elle vivait
  *    (« À Tulle, 62 % votent républicain »), et pour un profil « Homme / femme politique » les élections trouvées sous
@@ -82,7 +82,7 @@
         let d = cache.get(pid);
         if (!d) { try { d = await api('elections_person', {id: pid}); } catch (e) { host.innerHTML = A().empty ? A().empty(e.message, {icon: '⛔'}) : esc(e.message); return; } cache.set(pid, d); }
         if (!host.isConnected) return;
-        if (!d.installed) { host.innerHTML = A().empty(i18n('Les résultats des élections ne sont pas installés.'), {icon: '🗳', action: {label: i18n('⤓ Installer les données électorales'), attrs: 'data-el-goset'}}); return; }
+        if (!d.installed) { host.innerHTML = A().empty(i18n('Les résultats des élections ne sont pas installés.'), {icon: '🗳', action: {label: i18n('📦 Installer les données électorales'), attrs: 'data-el-goset'}}); return; }
         const female = d.gender === 'female';
         let body;
         if (!d.elections.length) body = A().empty(d.no_place ? i18n('Aucun événement daté avec un lieu en France : place sa commune pour voir comment on y votait.') : i18n('Aucune élection connue dans sa commune pendant sa vie d’adulte.'), {icon: '🗳'});
@@ -118,7 +118,7 @@
     });
     function openSettings() { const st = A().state; if (!st) return; st.maintenanceTab = 'elections'; A().persistUiState?.(); A().setModule?.('maintenance'); }
 
-    /* ═════════ Réglages → 🗳 Élections d'autrefois : l'interrupteur et ⤓ Installer ═════════ */
+    /* ═════════ Réglages → 🗳 Élections d'autrefois : l'interrupteur et 📦 Installer ═════════ */
     const DL = {online: undefined, err: '', run: null, paused: null};
     const dlSaved = () => { try { return localStorage.getItem(DL_KEY) || ''; } catch (_) { return ''; } };
     const dlRemember = id => { try { localStorage.setItem(DL_KEY, id); } catch (_) {} };
@@ -131,7 +131,7 @@
         if (DL.paused) return `<span class="el-prog"><i style="width:${pct(DL.paused.received, DL.paused.size)}%"></i></span> <small>${esc(i18n('En pause : {p} %', {p: String(pct(DL.paused.received, DL.paused.size))}))}</small> <button type="button" class="button small" data-el-dl>▶ ${esc(i18n('Reprendre'))}</button> <button type="button" class="button small secondary" data-el-cancel>✕ ${esc(i18n('Abandonner'))}</button>`;
         if (DL.online === undefined) return `${window.LCNDA_UI.spinner(i18n('Recherche des données en ligne…'), {inline: true})}`;
         if (!DL.online) return `<small class="muted" title="${esc(DL.err)}">${esc(DL.err ? i18n('Pas de connexion aux données en ligne.') : i18n('Pas encore en ligne.'))}</small>`;
-        return `<button type="button" class="button small" data-el-dl>⤓ ${esc(i18n('Installer ({s})', {s: fmtSize(DL.online.size)}))}</button>`;
+        return `<button type="button" class="button small" data-el-dl>📦 ${esc(i18n('Installer ({s})', {s: fmtSize(DL.online.size)}))}</button>`;
     }
     function dlPaint() { const box = document.querySelector('[data-el-dl-box]'); if (!DL.run || !box) return; box.querySelector('.el-prog i').style.width = `${pct(DL.run.received, DL.run.size)}%`; box.querySelector('[data-el-dl-txt]').textContent = `${pct(DL.run.received, DL.run.size)} % · ${fmtSize(DL.run.received)} ${i18n('sur')} ${fmtSize(DL.run.size)}`; }
     async function dlRun() {
@@ -174,7 +174,7 @@
                 <section class="card"><h3>${esc(i18n('Les données'))}</h3>
                     <div class="el-data"><span><b>${esc(i18n('Résultats par commune'))}</b><br><small>${esc(desc)}</small></span>${UI().badge ? UI().badge(i18n(st.installed ? 'Installé' : 'Pas installé'), st.installed ? 'green' : 'grey') : ''}<span>${dlActs(st)}</span></div>
                     ${UI().notice ? UI().notice('info', i18n('Le téléchargement se fait une fois ; ensuite l’app n’a plus besoin d’Internet. Rien n’est envoyé.')) : ''}
-                    <p class="el-src"><b>${esc(i18n('Sources à citer'))}</b> : Julia Cagé et Thomas Piketty (2023), <i>Une histoire du conflit politique. Élections et inégalités sociales en France, 1789-2022</i>, Paris, Le Seuil ; ${esc(i18n('données'))} <a href="https://unehistoireduconflitpolitique.fr/telecharger.html" target="_blank" rel="noopener">unehistoireduconflitpolitique.fr</a> (${esc(i18n('téléchargement libre, en citant la source'))}). ${esc(i18n('Députés : Wikidata (CC0), avec le numéro de leur fiche Sycomore de l’Assemblée nationale.'))}</p>
+                    <p class="el-src"><b>${esc(i18n('Sources à citer'))}</b> : Julia Cagé et Thomas Piketty (2023), <i>Une histoire du conflit politique. Élections et inégalités sociales en France, 1789-2022</i>, Paris, Le Seuil ; ${esc(i18n('données'))} <a href="https://unehistoireduconflitpolitique.fr/telecharger.html" target="_blank" rel="noopener" title="https://unehistoireduconflitpolitique.fr/telecharger.html">↗ unehistoireduconflitpolitique.fr</a> (${esc(i18n('téléchargement libre, en citant la source'))}). ${esc(i18n('Députés : Wikidata (CC0), avec le numéro de leur fiche Sycomore de l’Assemblée nationale.'))}</p>
                 </section></section>`;
         };
         draw();

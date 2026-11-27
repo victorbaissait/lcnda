@@ -2,7 +2,7 @@
 /* ☑ La liste de choix commune (assets/js/app-ui.js → UI.choiceList ; styles : assets/css/ui.css « Listes de choix communes »).
  *  1. Listes → une liste de données, « ＋ Ajouter un critère » → « Pays » (app-listes-donnees.js) : 214 pays inventés avec leurs nombres ;
  *     « france » → seulement France ; « fr » → France d'abord, puis ceux qui contiennent fr (Afrique du Sud) ; « suede » → Suède (sans accents) ;
- *     partie trouvée surlignée ; « 3 choix sur 214 » ; « Aucun choix ne contient … » + « Effacer la recherche » ; « Tout cocher les N affichés » ;
+ *     partie trouvée surlignée ; « 3 choix sur 214 » ; « Aucun choix ne contient … » + « Vider la recherche » ; « Tout cocher les N affichés » ;
  *     cochés épinglés en haut sous « Cochés (N) » ; « Tout décocher » ; Entrée (un seul choix : coché et appliqué ; plusieurs : le premier coché) ;
  *     ↓ / Espace / Échap (vide puis ferme) ; « par nombre / A → Z » retenu (genealogie-choix-tri) ; nombres avec séparateur de milliers ;
  *     une liste de 1 500 choix montrée par morceaux (« + 1 350 autres : tape pour chercher ») ; téléphone (390 px) ; mode sombre.
@@ -112,7 +112,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             let i = await type('suede'); assert.deepEqual(i.labels, ['Suède']); assert.deepEqual(i.marks, ['Suède']);
             i = await type('ETATS'); assert.deepEqual(i.labels, ['États-Unis']); assert.deepEqual(i.marks, ['États']);
         });
-        await t('rien trouvé : « Aucun choix ne contient « xyz » » et « Effacer la recherche »', async () => {
+        await t('rien trouvé : « Aucun choix ne contient « xyz » » et « Vider la recherche »', async () => {
             const i = await type('xyz'); assert.deepEqual(i.labels, []); assert.match(i.empty, /Aucun choix ne contient « xyz »/); assert.match(i.count, /^0 choix sur 214$/);
             await p.click('[data-ld-ed-list] [data-choice-clear]'); await sleep(60);
             assert.equal(await p.inputValue(Q), ''); const j = await info(); assert.equal(j.count, '214 choix'); assert.equal(j.active, 'q');

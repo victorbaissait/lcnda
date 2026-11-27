@@ -55,7 +55,7 @@ const t = async (name, fn) => { try { await fn(); console.log('✓', name); } ca
     await t('journal : tout échappé, le lien cliquable (navigateur, sans référent) seulement s’il est officiel', () => {
         const h = S.lawJournalHtml(`Doute sur la loi : « ${XSS} » — https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006430827`);
         assert.ok(!h.includes('<img'), h); assert.match(h, /&lt;img src=x onerror=window.__xss=1&gt;/);
-        assert.match(h, /<a class="succ-law" href="https:\/\/www\.legifrance\.gouv\.fr\/codes\/article_lc\/LEGIARTI000006430827" target="_blank" rel="noopener noreferrer">/);
+        assert.match(h, /<a class="succ-law" href="https:\/\/www\.legifrance\.gouv\.fr\/codes\/article_lc\/LEGIARTI000006430827" target="_blank" rel="noopener noreferrer" title="https:\/\/www\.legifrance\.gouv\.fr\/codes\/article_lc\/LEGIARTI000006430827">↗ Légifrance<\/a>/); // harmonisation.md (Apparence 3) : « ↗ Nom du site », l’adresse en bulle
         for (const bad of ['javascript:alert(1)', 'https://evil.com/x', 'https://www.legifrance.gouv.fr@evil.com/']) {
             const x = S.lawJournalHtml(`Doute sur la loi : « q » — ${bad}`); assert.ok(!x.includes('<a'), x);
         }

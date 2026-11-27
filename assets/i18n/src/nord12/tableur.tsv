@@ -531,7 +531,7 @@ Le nom du modèle (les données restent : vide-les avant si tu veux un modèle v
 Le nom de la copie : ¦ Название копии: ¦ Назва копії:
 {name} (copie) ¦ {name} (копия) ¦ {name} (копія)
 Les changements faits depuis le dernier enregistrement seront perdus. ¦ Изменения после последнего сохранения будут потеряны. ¦ Зміни після останнього збереження буде втрачено.
-📋 Partir d’un modèle ¦ 📋 Начать с шаблона ¦ 📋 Почати з шаблону
+🧩 Partir d’un modèle ¦ 🧩 Начать с шаблона ¦ 🧩 Почати з шаблону
 Mes modèles ¦ Мои шаблоны ¦ Мої шаблони
 Pas encore de modèle à toi : dans un classeur, Fichier → « Enregistrer comme modèle… ». ¦ Своих шаблонов пока нет: в книге выбери Файл → «Сохранить как шаблон…». ¦ Власних шаблонів поки немає: у книзі вибери Файл → «Зберегти як шаблон…».
 séparateur « {sep} » ¦ разделитель «{sep}» ¦ роздільник «{sep}»
@@ -615,7 +615,7 @@ Sosa, génération, côté, âge ¦ Sosa, поколение, сторона, в
 objets, prix, total en livres ¦ предметы, цены, итог в ливрах ¦ предмети, ціни, підсумок у ліврах
 Registre matricule ¦ Послужной список ¦ Послужний список
 classe, signalement, campagnes ¦ призыв, приметы, походы ¦ призов, прикмети, походи
-📋 Partir d’un modèle… ¦ 📋 Начать с шаблона… ¦ 📋 Почати з шаблону…
+🧩 Partir d’un modèle… ¦ 🧩 Начать с шаблона… ¦ 🧩 Почати з шаблону…
 ⤒ Importer un tableau… ¦ ⤒ Импорт таблицы… ¦ ⤒ Імпорт таблиці…
 ⤓ Exporter… ¦ ⤓ Экспорт… ¦ ⤓ Експорт…
 🖨 Imprimer… ¦ 🖨 Печать… ¦ 🖨 Друк…

@@ -98,9 +98,8 @@
         const edit = event.target.closest?.('[data-h-voter-edit]');
         if (edit) { openVoterDialog(Number(edit.dataset.hVoterEdit)); return; }
         const clear = event.target.closest?.('[data-h-voter-clear]');
-        if (clear && await A().confirmBox('Supprimer les cartes d’électeur et les votes de cette fiche ?', {title: 'Supprimer les cartes et votes', okLabel: 'Supprimer'})) {
-            try { await api('clear_voter_cards', {}, {method: 'POST', body: {person_id: clear.dataset.hVoterClear}}); toast('Cartes effacées.'); refresh(); } catch (error) { toast(error.message, 'error'); }
-        }
+        // H7 : effacées tout de suite, « ↶ Annuler » remet les cartes, les votes, leurs photos et étiquettes
+        if (clear) A().deleteWithUndo({action: 'clear_voter_cards', body: {person_id: clear.dataset.hVoterClear}, type: 'voter_cards', id: clear.dataset.hVoterClear, message: i18n('Cartes d’électeur et votes effacés'), after: () => refresh()});
     });
 
     /* ─── Fenêtre de saisie ─── */

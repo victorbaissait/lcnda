@@ -1588,5 +1588,5 @@
     ext.editToolsExtra.push({key: 'house', icon: '🏠', label: 'Maison (plan et 3D)', what: 'maison',
         load: async () => ((await api('houses')).items || []).map(h => ({id: h.id, name: h.name, date: h.updated_at, thumb: h.thumb ? `<img src="${esc(h.thumb)}" alt="">` : '<span class="h-et-ico">🏠</span>', info: [h.place, h.period, nW(h.rooms, '{n} pièce', '{n} pièces')].filter(Boolean).join(' · ')})),
         open: (id, again) => open({id, onSaved: again, onClose: again}), create: again => open({onSaved: again, onClose: again}),
-        rename: (id, name) => post('rename_house', {id, name}), remove: id => post('delete_house', {id}), createLabel: '＋ Nouvelle maison'});
+        rename: (id, name) => post('rename_house', {id, name}), remove: id => (ext.projectDelUndo ? ext.projectDelUndo('delete_house')(id) : post('delete_house', {id})), undo: true, createLabel: '＋ Nouvelle maison'});
 })();

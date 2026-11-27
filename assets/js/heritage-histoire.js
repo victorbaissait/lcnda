@@ -1,8 +1,8 @@
 /* LCNDA — 🏘 Histoire du lieu (serveur : lib/histoire.php ; pack fabriqué par scripts/histoire/build-histoire.py).
  *  - bloc de fiche « 🏘 Le lieu à son époque » : population de la commune (et sa courbe), le train, le temps de trajet, l'été de
  *    l'année d'après les vendanges, séismes et inondations près de ses lieux, la mortalité des enfants comparée au département ;
- *    chaque ligne dit sa source. Sans le pack : un bouton « ⤓ Installer » (un clic) ;
- *  - Réglages → « 🏘 Histoire du lieu » : ⤓ Installer (barre, pause, reprise), 🗑 Supprimer (↶), tables de frdata.org, À propos des données.
+ *    chaque ligne dit sa source. Sans le pack : un bouton « 📦 Installer » (un clic) ;
+ *  - Réglages → « 🏘 Histoire du lieu » : 📦 Installer (barre, pause, reprise), 🗑 Supprimer (↶), tables de frdata.org, À propos des données.
  * Rien n'est écrit dans la généalogie : tout est calculé à l'affichage.
  */
 (() => {
@@ -167,7 +167,7 @@
         try { d = await api('hist_person', {id: pid}); } catch (e) { host.innerHTML = A().empty ? A().empty(e.message, {icon: '⛔'}) : esc(e.message); return; }
         if (!host.isConnected) return;
         if (!d.installed) {
-            host.innerHTML = (A().empty ? A().empty(i18n('L’histoire des lieux n’est pas installée.'), {icon: '🏘', hint: i18n('Population de la commune, arrivée du train, été de l’année, séismes et inondations : un fichier d’environ 18 Mo, téléchargé une fois.'), action: {label: i18n('⤓ Installer l’histoire des lieux'), attrs: 'data-hist-install'}}) : '') + childLines(d);
+            host.innerHTML = (A().empty ? A().empty(i18n('L’histoire des lieux n’est pas installée.'), {icon: '🏘', hint: i18n('Population de la commune, arrivée du train, été de l’année, séismes et inondations : un fichier d’environ 18 Mo, téléchargé une fois.'), action: {label: i18n('📦 Installer l’histoire des lieux'), attrs: 'data-hist-install'}}) : '') + childLines(d);
             return afterFill(host, d);
         }
         const html = [popLines(d), trainLines(d), travelLines(d), climateLines(d), quakeLines(d), floodLines(d), childLines(d)].join('');
@@ -243,7 +243,7 @@
         if (pz) return `<span class="hist-dl"><span class="hist-prog"><i style="width:${pct(pz.received, pz.size)}%"></i></span><small>${esc(i18n('En pause : {p} %', {p: String(pct(pz.received, pz.size))}))}</small><button type="button" class="button small" data-hist-dl>▶ ${esc(i18n('Reprendre'))}</button><button type="button" class="button small secondary" data-hist-dl-cancel>✕ ${esc(i18n('Abandonner'))}</button></span>`;
         if (DL.online === null) return `${window.LCNDA_UI.spinner(i18n('Recherche des données en ligne…'), {inline: true})}`;
         if (!on) return `<small class="muted" title="${esc(DL.err)}">${esc(DL.err ? i18n('Pas de connexion aux données en ligne.') : i18n('Pas encore en ligne.'))}</small>${st.removed ? `<button type="button" class="button small secondary" data-hist-restore>↶ ${esc(i18n('Remettre le pack supprimé'))}</button>` : ''}`;
-        return `<button type="button" class="button small" data-hist-dl>⤓ ${esc(i18n('Installer ({s})', {s: fmtSize(on.size)}))}</button>`;
+        return `<button type="button" class="button small" data-hist-dl>📦 ${esc(i18n('Installer ({s})', {s: fmtSize(on.size)}))}</button>`;
     }
     async function dlRun() {
         if (DL.run) return;

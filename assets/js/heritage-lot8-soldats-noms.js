@@ -332,7 +332,7 @@
     const nf = n => Number(n || 0).toLocaleString('fr-FR');
     const MONTHS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
     const dateTxt = iso => { const [y, m, d] = String(iso || '').split('-').map(Number); return y && m && d ? `${d === 1 ? '1er' : d} ${T(MONTHS[m - 1])} ${y}` : y && m ? `${T(MONTHS[m - 1])} ${y}` : y ? String(y) : ''; };
-    const link = (url, label) => (url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : esc(label));
+    const link = (url, label) => (url ? `${window.LCNDA_UI.extLink(url, label)}` : esc(label));
     const wpUrl = (t, lang = 'fr') => `https://${lang}.wikipedia.org/wiki/${encodeURIComponent(String(t).replace(/ /g, '_'))}`;
     const wdUrl = q => `https://www.wikidata.org/wiki/${encodeURIComponent(q)}`;
     const srcLink = s => (s?.url ? `${esc(s.title || '')} ${link(s.url, '↗ source')}` : esc(s?.title || ''));

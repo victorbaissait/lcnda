@@ -29,7 +29,7 @@
     const genderTxt = g => g === 'f' ? 'femme' : g === 'h' ? 'homme' : '';
     const mention = () => SF()?.MENTION || 'Transcription automatique SocFace (FranceArchives) — peut contenir des erreurs : à vérifier sur l’image';
     const imgLabel = u => SF()?.imageLabel ? SF().imageLabel(u) : '🖼 Voir l’image ↗';
-    const btnLink = (href, label, cls = 'button small secondary') => href ? `<a class="${cls}" href="${esc(href)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : '';
+    const btnLink = (href, label, cls = 'button small secondary') => href ? window.LCNDA_UI.extLink(href, label, {cls}) : '';
 
     /* ═════ 🔍 Chercher : la fenêtre commune des archives en ligne (heritage-archives-en-ligne.js), sur les recensements ═════ */
     /** « 🔍 Chercher dans les recensements » : la fenêtre commune, déjà sur la ligne FranceArchives (base de noms + recensements SocFace) */

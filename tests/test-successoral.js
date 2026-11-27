@@ -362,7 +362,8 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
                         await pg.waitForTimeout(150);
                         const left = await pg.$$eval('[data-succ-hrow]', rs => rs.map(r => r.dataset.succHrow)); assert.ok(left.length >= 3 && !left.some(k => k.endsWith(':22')), 'filtre « Aucun courrier »');
                         await pg.evaluate(() => document.querySelector('.ui-listbar').clear());
-                        const [dl] = await Promise.all([pg.waitForEvent('download'), pg.click('[data-succ-hcsv]')]);
+                        await pg.click('[data-succ-hcsv]'); await pg.waitForSelector('dialog.ui-export[open]'); // ⤓ la fenêtre d'export commune
+                        const [dl] = await Promise.all([pg.waitForEvent('download'), pg.click('dialog.ui-export [data-ui-go]')]);
                         const csv = fs.readFileSync(await dl.path(), 'utf8'); assert.match(csv, /Suzanne MAZAUD/); assert.match(csv, /adresse à trouver/); assert.doesNotMatch(csv, /^\s*[=+@]/m);
                         await pg.click('[data-succ-hrow*=":41"] [data-succ-hwrite]'); await pg.waitForSelector('dialog[open] textarea[name=letter]');
                         assert.match(await pg.inputValue('dialog[open] textarea[name=letter]'), /Madame, Monsieur/); await ux('ecrire'); await pg.keyboard.press('Escape');

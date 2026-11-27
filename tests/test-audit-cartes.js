@@ -263,7 +263,8 @@ echo json_encode($ids);`], {cwd: root, encoding: 'utf8', env});
             await p.click('[data-gp-numbers]'); await p.waitForSelector('.gp-numbers table');
             const cells = await p.$$eval('.gp-numbers tbody tr', r => r.map(x => x.textContent));
             assert.ok(cells.some(c => /MAZAUD/.test(c) && /3/.test(c)), cells.join(' | '));
-            const [dl] = await Promise.all([p.waitForEvent('download'), p.click('[data-gp-csv]')]);
+            await p.click('[data-gp-csv]'); await p.waitForSelector('dialog.ui-export[open]'); // ⤓ la fenêtre d'export commune (CSV choisi d'office)
+            const [dl] = await Promise.all([p.waitForEvent('download'), p.click('dialog.ui-export [data-ui-go]')]);
             assert.match(fs.readFileSync(await dl.path(), 'utf8'), /MAZAUD;3/);
             await p.click('[data-gp-compare]'); await p.waitForSelector('.gp-compare');
             await p.fill('[data-gp-cmp="a1"]', '1800'); await p.fill('[data-gp-cmp="a2"]', '1874'); await p.fill('[data-gp-cmp="b1"]', '1875'); await p.fill('[data-gp-cmp="b2"]', '1950');

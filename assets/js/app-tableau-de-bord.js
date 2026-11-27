@@ -547,14 +547,22 @@
     const fileBase=()=>dashTitle().normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')||'tableau-de-bord';
     /** les chiffres de la page en tableau (CSV) : une ligne par nombre affiché */
     function dashCsv(){
+        const rows=dashRows();
+        const safe=window.LCNDA_APP.csvSafe||(x=>String(x??''));// pas de formule glissée dans un tableur
+        return '﻿'+rows.map(r=>r.map(x=>`"${safe(x).replace(/"/g,'""')}"`).join(';')).join('\r\n');
+    }
+    function dashRows(){
         const rows=[[i18n('Widget'),i18n('Libellé'),i18n('Valeur')]];
         $$('#workspace .dashboard-widget').forEach(c=>{const t=c.querySelector('.card-head h3, h3')?.textContent.trim()||'';
             c.querySelectorAll('.dashboard-metrics > div, .dashboard-mini-metrics > button, .dashboard-coverage > div').forEach(m=>{const v=m.querySelector('strong')?.textContent.trim()||'',l=(m.querySelector('span')?.textContent||'').trim();if(v||l)rows.push([t,l,v]);});
             c.querySelectorAll('.dashboard-row').forEach(r=>{const l=r.querySelector('strong')?.textContent.trim()||'',v=r.querySelector('small')?.textContent.trim()||'';if(l)rows.push([t,l,v]);});});
-        const safe=window.LCNDA_APP.csvSafe||(x=>String(x??''));// pas de formule glissée dans un tableur
-        return '﻿'+rows.map(r=>r.map(x=>`"${safe(x).replace(/"/g,'""')}"`).join(';')).join('\r\n');
+        return rows;
     }
     function dashExportMenu(anchor){
+        // ⤓ la fenêtre d'export commune : les chiffres (CSV, tableur, Excel), le bilan en PDF ou en page web
+        if(UI().exportRows)return UI().exportRows({title:i18n('Tableau de bord'),name:fileBase(),rows:dashRows,extra:[
+            {id:'pdf',hint:i18n('PDF (bilan imprimable)'),run:async()=>dashPrint()},
+            {id:'html',label:'🌐 HTML',hint:i18n('Page web (.html)'),run:async()=>{dashDownload(fileBase()+'.html',dashPrintDoc(),'text/html;charset=utf-8');}}]});
         const items=[{icon:'📄',label:i18n('PDF (bilan imprimable)'),help:i18n('Dans la fenêtre, « ⤓ PDF »'),run:dashPrint},
             {icon:'🌐',label:i18n('Page web (.html)'),help:i18n('À ouvrir ou envoyer tel quel'),run:()=>{dashDownload(fileBase()+'.html',dashPrintDoc(),'text/html;charset=utf-8');toast(i18n('Page enregistrée.'));}},
             {icon:'📊',label:i18n('Tableau des chiffres (.csv)'),help:i18n('Pour un tableur'),run:()=>{dashDownload(fileBase()+'.csv',dashCsv(),'text/csv;charset=utf-8');toast(i18n('Tableau enregistré.'));}}];
@@ -860,7 +868,7 @@
         return card(index,'Liste de travail quotidienne',items.length,body,spanClass,`<button class="button small secondary" data-dashboard-module="recherche">Recherche</button>`);
     }
     function dashboardArchiveFavoritesCard(index,items,spanClass){
-        const body=dashboardListRows(items,'Aucune archive disponible.',item=>`<article class="dashboard-row"><div><strong>${escapeHtml(`${item.code||''} · ${item.name||item.department||'Archives'}`)}</strong><small>${escapeHtml(item.search_url||item.url||'Lien à vérifier')}</small></div>${item.search_url||item.url?`<a class="button small secondary" href="${escapeHtml(window.LCNDA_APP.safeUrl?.(item.search_url||item.url)||'#')}" target="_blank" rel="noopener">Ouvrir</a>`:''}</article>`);
+        const body=dashboardListRows(items,'Aucune archive disponible.',item=>`<article class="dashboard-row"><div><strong>${escapeHtml(`${item.code||''} · ${item.name||item.department||'Archives'}`)}</strong><small>${escapeHtml(item.search_url||item.url||'Lien à vérifier')}</small></div>${item.search_url||item.url?`${window.LCNDA_UI.extLink(window.LCNDA_APP.safeUrl?.(item.search_url||item.url)||'', '', {cls: 'button small secondary'})}`:''}</article>`);
         return card(index,'Archives favorites',items.length,body,spanClass,`<button class="button small secondary" data-dashboard-list="archives">Archives</button>`);
     }
     function dashboardRereadCard(index,items,spanClass){

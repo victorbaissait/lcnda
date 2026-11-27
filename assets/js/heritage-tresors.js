@@ -86,7 +86,7 @@
         personField: (name, value = null) => window.LCNDA_PICKER.pickerField({name, kind: 'person', value}),
         items: (kind, personId = 0) => A().api('tresors', {kind, ...(personId ? {person_id: personId} : {})}).then(r => r.items || []),
         save: item => T.post('tresor_write', {op: 'save', item}),
-        remove: id => T.post('tresor_write', {op: 'delete', id}),
+        remove: async id => { const r = await T.post('tresor_write', {op: 'delete', id}), tok = (r?.result || r)?.undo; return tok ? {undo: () => T.post('tresor_write', {op: 'restore', undo: tok})} : null; }, undo: true,
         /** R7 : supprimer tout de suite, avec « ↶ Annuler » (l'élément revient tel quel, même numéro) ; mem : un souvenir (« m12 ») */
         async removeUndo(id, {mem = false, label = '', msg = '', after = null} = {}) {
             const action = mem ? 'tresor_memory_write' : 'tresor_write', r = await T.post(action, {op: 'delete', id}), undo = r?.undo || r?.result?.undo;

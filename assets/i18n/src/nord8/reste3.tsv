@@ -1495,7 +1495,7 @@ Le téléchargement de Kraken et de ses outils (PyTorch, ≈ 1 Go, depuis pypi.o
 Le fichier reçu n’était pas exactement celui publié par sa source (téléchargement abîmé ou modifié en route) : il a été jeté par sécurité. Réessaie plus tard. ¦ Gelen dosya, kaynağının yayımladığıyla tam olarak aynı değildi (indirme bozuk ya da yolda değiştirilmiş): güvenlik için atıldı. Daha sonra yeniden dene.
 Ce modèle n’est pas publié sous une licence libre connue : il n’a pas été installé. ¦ Bu model bilinen bir özgür lisansla yayımlanmamış: kurulmadı.
 Une adresse de téléchargement ne venait pas d’une source prévue : rien n’a été gardé. ¦ Bir indirme adresi beklenen bir kaynaktan gelmiyordu: hiçbir şey tutulmadı.
-Le moteur est là mais ne s’ouvre pas. « ↻ Réessayer » le réinstalle ; sinon, « 🗑 Désinstaller » puis « ⤓ Installer » de nouveau. ¦ Motor yerinde ama açılmıyor. “↻ Yeniden dene” onu yeniden kurar; olmazsa “🗑 Kaldır”, sonra yeniden “⤓ Kur”.
+Le moteur est là mais ne s’ouvre pas. « ↻ Réessayer » le réinstalle ; sinon, « 🗑 Désinstaller » puis « 📦 Installer » de nouveau. ¦ Motor yerinde ama açılmıyor. “↻ Yeniden dene” onu yeniden kurar; olmazsa “🗑 Kaldır”, sonra yeniden “📦 Kur”.
 Regarde le journal, en bas, puis « ↻ Réessayer ». ¦ Aşağıdaki günlüğe bak, sonra “↻ Yeniden dene”.
 tu peux continuer à travailler ailleurs dans l’app, l’installation continue toute seule. ¦ uygulamanın başka bir yerinde çalışmaya devam edebilirsin, kurulum kendi kendine sürer.
 EN COURS ¦ SÜRÜYOR

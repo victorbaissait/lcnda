@@ -112,7 +112,7 @@
             } catch (error) { out.innerHTML = `<p class="h-offsite-sentence is-warn">${esc(error.message)}</p>`; }
         }));
         box.querySelectorAll('[data-hq-seen]').forEach(b => b.addEventListener('click', async () => { await api('mark_saved_search_seen', {}, {method: 'POST', body: {id: b.dataset.hqSeen}}); renderSavedQuestions(); }));
-        box.querySelectorAll('[data-hq-delete]').forEach(b => b.addEventListener('click', async () => { if (!await A().confirmBox('Supprimer cette recherche enregistrée ?', {title: 'Supprimer la recherche', okLabel: 'Supprimer la recherche'})) return; await api('delete_saved_search', {}, {method: 'POST', body: {id: b.dataset.hqDelete}}); toast('Recherche supprimée.'); renderSavedQuestions(); }));
+        box.querySelectorAll('[data-hq-delete]').forEach(b => b.addEventListener('click', () => A().deleteWithUndo({action: 'delete_saved_search', body: {id: b.dataset.hqDelete}, type: 'saved_search', id: b.dataset.hqDelete, message: i18n('Recherche enregistrée supprimée'), after: () => renderSavedQuestions()}))); // H7 : ↶ Annuler au lieu de demander
     }
     // Recherche → « Poser une question en français » : un écran à part
     ext.question = async token => {
@@ -429,7 +429,7 @@
                     : A().emptyState({icon: '🔍', text: 'Aucune demande ne correspond', hint: 'Change les mots cherchés ou retire un filtre (« Tout effacer » montre aussi les demandes terminées).'});
                 A().bindTableLinks();
                 ws.querySelectorAll('[data-h10-rows] [data-h-help-edit]').forEach(x => x.addEventListener('click', () => ext.lists.help_requests(++S().workspaceToken, {id: Number(x.dataset.hHelpEdit)})));
-                ws.querySelectorAll('[data-h10-rows] [data-h-help-delete]').forEach(x => x.addEventListener('click', async () => { if (!await A().confirmBox('Supprimer cette demande ?', {title: 'Supprimer la demande', okLabel: 'Supprimer la demande'})) return; await api('delete_help_request', {}, {method: 'POST', body: {id: x.dataset.hHelpDelete}}); A().renderList(); }));
+                ws.querySelectorAll('[data-h10-rows] [data-h-help-delete]').forEach(x => x.addEventListener('click', () => A().deleteWithUndo({action: 'delete_help_request', body: {id: x.dataset.hHelpDelete}, type: 'help_request', id: x.dataset.hHelpDelete, message: i18n('Demande d’entraide supprimée'), after: () => A().renderList()}))); // H7
             };
             paint();
         }

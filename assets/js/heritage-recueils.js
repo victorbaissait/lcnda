@@ -533,7 +533,10 @@
             host.innerHTML = '';
             ext.recueilTable(host, t, {
                 onChange: tt => { saved.textContent = '…'; clearTimeout(timer); timer = setTimeout(() => flush(tt), 700); },
-                onPerson: (row, mode) => mode === 'pick' ? pickRowPerson(t, row, p) : row.person?.link ? post('delete_recueil_link', {id: row.person.link}).then(() => { delete row.person; toast('Ligne détachée de la fiche.'); }).catch(e => toast(e.message, 'error')) : Promise.resolve(),
+                // 'drop' : la ligne est supprimée (le lien part sans message, gardé pour ↶ Annuler) ; 'restore' : ↶ Annuler le remet
+                onPerson: (row, mode, per) => mode === 'pick' ? pickRowPerson(t, row, p)
+                    : mode === 'restore' ? (row._restore ? post('save_recueil_link', row._restore).then(res => { row.person = {...per, link: (res.result || res).id}; delete row._restore; }).catch(e => toast(e.message, 'error')) : Promise.resolve())
+                    : row.person?.link ? post('delete_recueil_link', {id: row.person.link}).then(res => { row._restore = (res.result || res).restore || null; delete row.person; if (mode !== 'drop') toast('Ligne détachée de la fiche.'); }).catch(e => toast(e.message, 'error')) : Promise.resolve(),
                 onOpenPerson: per => { clearTimeout(timer); flush(t); S().currentPersonId = per.id; A().setModule('personnes'); },
             });
         };

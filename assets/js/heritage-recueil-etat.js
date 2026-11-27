@@ -292,6 +292,7 @@
         const head = [T('N°'), T('Nom'), T('Langue'), T('Sorte de page'), T('État'), T('État choisi'), T('Fiabilité'), T('Lignes'), T('Lignes relues'), T('Mots peu sûrs'), T('Lisibilité'), T('Photo'), T('Photo à refaire'), T('Absente'), T('Jusqu’en'), T('Note')];
         const rows = D.pages.map(p => [p.num, pageWord(D, p), langOf(D, p), p.page_kind ? T(kindOf(p.page_kind)[1]) : '', p.absent ? '' : T(STATES[p.state][1]), p.state_set ? T('oui') : '', REL[p.reliability] ? T(REL[p.reliability][1]) : '', p.act?.lines ?? '', p.act?.reviewed ?? '', p.doubt || '',
             T(LEGI.find(l => l[0] === p.legibility)?.[1] || ''), p.has_photo ? T('oui') : T('non'), p.redo ? T('oui') : '', p.absent ? T(absentOf(p.absent)[2]) : '', p.absent_until, p.absent_note]);
+        if (window.LCNDA_UI?.exportRows) return window.LCNDA_UI.exportRows({title: `${T('État')} — ${D.recueil.title}`, name: `${T('État')} — ${D.recueil.title}`, rows: () => [head, ...rows]}); // ⤓ la fenêtre d'export commune
         const blob = new Blob(['﻿' + [head, ...rows].map(r => r.map(q).join(';')).join('\r\n')], {type: 'text/csv;charset=utf-8'});
         const a = Object.assign(document.createElement('a'), {href: URL.createObjectURL(blob), download: (A().safeExportFilename ? A().safeExportFilename(`${T('État')} — ${D.recueil.title}`) : 'etat') + '.csv'});
         document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);

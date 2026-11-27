@@ -41,7 +41,7 @@
     const kiosk = () => document.body.classList.contains('is-kiosk') || document.body.classList.contains('ms-on');
     const fmtKm = km => (km < 1 ? T('{n} m', {n: Math.round(km * 1000)}) : T('{n} km', {n: String(km).replace('.', ',')}));
     const fmtDate = ts => { try { return new Date(ts * 1000).toLocaleDateString('fr-FR'); } catch (_) { return ''; } };
-    const ext_link = (url, label) => `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`;
+    const ext_link = (url, label) => `${window.LCNDA_UI.extLink(url, label)}`;
 
     /* ═════════ commun : l'attente, hors ligne, la ligne de source ═════════ */
     const wait = t => (UI().spinner ? UI().spinner(t) : `<p class="muted">${esc(t)}</p>`);

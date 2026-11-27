@@ -443,8 +443,8 @@
     let armedNote = null;
     (ext.diagramPersoExtra = ext.diagramPersoExtra || []).push({
         id: 'dgd-format', title: `🖼 ${T('Format, note, modèle')}`, hint: T('Le format change la forme de l’image (le dessin est centré). La note se pose d’un clic sur une colonne de l’aperçu. Un modèle garde la mise en forme et la recette, jamais les chiffres ni les noms.'),
-        html: s => `<div class="dgd-perso"><span class="h-dgp-row"><span>${esc(T('Format'))}</span><span class="segmented sm" role="group" aria-label="${esc(T('Format'))}">${FORMATS().map(([k, l]) => `<button type="button" data-dgd-format="${k}" aria-pressed="${String((s.o?.format || '') === k)}">${esc(l)}</button>`).join('')}</span></span>
-            ${s.live?.data?.two ? `<span class="h-dgp-row"><span>${esc(T('Deux séries'))}</span><span class="segmented sm" role="group"><button type="button" data-dgd-two="panels" aria-pressed="${String(s.kind !== 'line')}">${esc(T('Deux panneaux'))}</button><button type="button" data-dgd-two="axis" aria-pressed="${String(s.kind === 'line')}">${esc(T('Deuxième axe à droite'))}</button></span></span>` : ''}
+        html: s => `<div class="dgd-perso"><span class="h-dgp-row"><span>${esc(T('Format'))}</span>${window.LCNDA_UI.segmented({cls: 'sm', label: T('Format'), items: FORMATS().map(([k, l]) => ({on: (s.o?.format || '') === k, attrs: `data-dgd-format="${k}"`, html: esc(l)}))})}</span>
+            ${s.live?.data?.two ? `<span class="h-dgp-row"><span>${esc(T('Deux séries'))}</span>${window.LCNDA_UI.segmented({cls: 'sm', items: [{on: s.kind !== 'line', attrs: 'data-dgd-two="panels"', html: esc(T('Deux panneaux'))}, {on: s.kind === 'line', attrs: 'data-dgd-two="axis"', html: esc(T('Deuxième axe à droite'))}]})}</span>` : ''}
             <div class="dgd-perso-act"><button type="button" class="button small secondary" data-dgd-note>＋ ${esc(T('Ajouter une note'))}</button>${kiosk() ? '' : `<button type="button" class="button small secondary" data-dgd-model>⭐ ${esc(T('Enregistrer comme modèle'))}</button>`}</div></div>`,
         bind: (el, api, sig) => el.addEventListener('click', e => {
             const b = e.target.closest?.('button'); if (!b || !el.contains(b)) return;
@@ -492,7 +492,7 @@
         const paint = () => {
             const c = st.cfg, src = c.src || 'tree';
             tree.hidden = src !== 'tree';
-            const sw = `<div class="dgd-head"><span class="dgd-lab">${esc(T('D’où viennent les données ?'))}</span><span class="segmented sm dgd-src" role="group" aria-label="${esc(T('D’où viennent les données ?'))}">${SRC().map(([k, ic, l]) => `<button type="button" data-dgd-src="${k}" aria-pressed="${String(src === k)}"${ro && k !== src ? ' disabled' : ''}>${ic} ${esc(l)}</button>`).join('')}</span></div>`;
+            const sw = `<div class="dgd-head"><span class="dgd-lab">${esc(T('D’où viennent les données ?'))}</span>${window.LCNDA_UI.segmented({cls: 'sm dgd-src', label: T('D’où viennent les données ?'), items: SRC().map(([k, ic, l]) => ({on: src === k, attrs: `data-dgd-src="${k}"`, disabled: ro && k !== src, html: `${ic} ${esc(l)}`}))})}</div>`;
             if (src === 'tree') { box.innerHTML = sw + `<p class="ui-hint dgd-hint">${esc(T('Les réglages de « 🧮 Compter dans ma base » restent : groupe de personnes, période, regroupement, « Tenir à jour ».'))}</p>`; return; }
             if (ro) { box.innerHTML = sw + `<p class="dgd-ro">🖥 ${esc(T('Mode consultation : lecture seule. On regarde, on survole ; pas de modification, pas d’export, pas d’envoi.'))}</p>`; return; }
             const d = c.list ? listById(c.list) : null;
@@ -606,7 +606,7 @@
         const sel = (k, lab, opts) => `<span class="dgd-lab">${esc(lab)}</span><select data-dgd-map="${k}" aria-label="${esc(lab)}">${opts.map(([v, l]) => `<option value="${esc(v)}"${String(c[k] ?? '') === v ? ' selected' : ''}>${esc(l)}</option>`).join('')}</select>${c[k] !== undefined && String(c[k] ?? '') === String(sug[k] ?? '') && sug[k] ? `<span class="dgd-sug">✨ ${esc(T('proposé'))}</span>` : '<span></span>'}`;
         const nums = [['', '—'], ...numFields(d).map(f => [f.key, T(f.label)])], txts = [['', T('Le nom de la ligne')], ...textFields(d).map(f => [f.key, T(f.label)])], grps = [['', '—'], ...catFields(d).map(f => [f.key, T(f.label)])];
         const bin = Number(c.bin) || 0;
-        const bins = c.x === '_time' ? `<span class="segmented sm dgd-bins" role="group" aria-label="${esc(T('Regrouper les dates'))}">${[[0, T('Auto')], [1, T('Année')], [10, T('Décennie')], [20, T('20 ans')], [50, T('50 ans')]].map(([v, l]) => `<button type="button" data-dgd-bin="${v}" aria-pressed="${String(bin === v)}">${esc(l)}</button>`).join('')}</span>` : '';
+        const bins = c.x === '_time' ? `${window.LCNDA_UI.segmented({cls: 'sm dgd-bins', label: T('Regrouper les dates'), items: [[0, T('Auto')], [1, T('Année')], [10, T('Décennie')], [20, T('20 ans')], [50, T('50 ans')]].map(([v, l]) => ({on: bin === v, attrs: `data-dgd-bin="${v}"`, html: esc(l)}))})}` : '';
         const others = (E().list?.() || []).filter(x => eligible(x) && x.period && x.id !== d.id).slice(0, 400);
         const two = c.x === '_time' ? `<label class="dgd-two">${esc(T('＋ Une 2e série (même frise des années)'))}<select data-dgd-two><option value="">—</option><option value="births"${c.two?.src === 'births' ? ' selected' : ''}>🌳 ${esc(T('Naissances dans ma famille'))}</option>${others.map(x => `<option value="${esc(x.id)}"${c.two?.list === x.id ? ' selected' : ''}>${esc(x.icon || '📋')} ${esc(T(x.label))}</option>`).join('')}</select></label>${c.two ? `<p class="ui-hint">${esc(T('Deux panneaux l’un sous l’autre, même frise des années ; le deuxième axe à droite est dans ⚙️ Personnaliser.'))}</p>` : ''}` : '';
         return `<div class="dgd-map">${sel('x', 'X', xs)}${sel('y', 'Y', ys)}${sel('color', T('Couleur'), cs)}</div>${bins}
@@ -616,7 +616,7 @@
         const p = profileOf(d, c), N = suggestN(), sug = suggestKinds(p, N), all = N === 'all' || st.galAll;
         const list = all ? GALLERY : GALLERY.filter(g => sug.includes(g.id)).sort((a, b) => sug.indexOf(a.id) - sug.indexOf(b.id));
         const cur = c.gal || sug[0];
-        const seg = N === 'all' ? '' : `<span class="segmented sm" role="group" aria-label="${esc(T('Dessins'))}"><button type="button" data-dgd-galall="0" aria-pressed="${String(!all)}">✨ ${esc(T('Conseillés'))} (${sug.length})</button><button type="button" data-dgd-galall="1" aria-pressed="${String(all)}">${esc(T('Tous'))} (${GALLERY.length})</button></span>`;
+        const seg = N === 'all' ? '' : window.LCNDA_UI.segmented({cls: 'sm', label: T('Dessins'), items: [{on: !all, attrs: 'data-dgd-galall="0"', html: `✨ ${esc(T('Conseillés'))} (${sug.length})`}, {on: all, attrs: 'data-dgd-galall="1"', html: `${esc(T('Tous'))} (${GALLERY.length})`}]});
         return `<div class="dgd-galbar">${seg}<button type="button" class="link-button" data-dgd-alltypes>${esc(T('Tous les types du catalogue ▾'))}</button></div>
             <div class="dgd-gal" data-dgd-gal>${list.map(g => { const ok = fits(g, p); return `<button type="button" class="dgd-gt${g.id === cur ? ' is-current' : ''}" data-dgd-gal="${g.id}"${ok ? '' : ' disabled'} aria-pressed="${String(g.id === cur)}"><span class="dgd-gi" aria-hidden="true">${g.icon}</span><b>${esc(T(g.label))}</b><small>${esc(T(g.help))}</small>${sug.includes(g.id) ? `<span class="ui-badge is-green">✨ ${esc(T('conseillé'))}</span>` : ''}</button>`; }).join('')}</div>`;
     }

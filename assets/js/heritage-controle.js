@@ -366,6 +366,7 @@
         const rows = [['Gravité', 'Sorte', 'Contrôle', 'Détail', 'Fiches', 'Lieu', 'Écartée', 'Raison']];
         current.forEach(a => rows.push([exc ? '' : levelOf(a.level)[1], SORTS[a.sort]?.[1] || '', a.title, exc ? (a.note || '') : (a.detail || ''),
             a.people.map(id => `${nm(DATA.people[id])} (n° ${id})`).join(', '), a.place?.name || '', exc || a.returned ? 'oui' : 'non', exc ? a.reason : (a.dismissal?.reason || '')]));
+        if (window.LCNDA_UI?.exportRows) return window.LCNDA_UI.exportRows({title: i18n('Contrôle de la base'), name: `controle-de-la-base-${new Date().toISOString().slice(0, 10)}`, rows: () => rows, info: plural(current.length, 'ligne', 'lignes')}); // ⤓ la fenêtre d'export commune
         const csv = '﻿' + rows.map(r => r.map(cell).join(';')).join('\r\n');
         const url = URL.createObjectURL(new Blob([csv], {type: 'text/csv;charset=utf-8'}));
         const link = document.createElement('a'); link.href = url; link.download = `controle-de-la-base-${new Date().toISOString().slice(0, 10)}.csv`;

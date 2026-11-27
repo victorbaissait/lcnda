@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* 🏘 Histoire du lieu (lib/histoire.php, assets/js/heritage-histoire.js, scripts/histoire/build-histoire.py, .github/workflows/histoire.yml).
  *  1. le pack fabriqué (hors git) : en-tête LCHIST1, empreinte, taille, et quelques chiffres relus dans les fichiers sources ;
- *  2. le serveur : « ⤓ Installer » depuis un dossier local à la place de GitHub (GENEALOGY_TEST=1 + LCNDA_TEST_HIST_DIR), reprise,
+ *  2. le serveur : « 📦 Installer » depuis un dossier local à la place de GitHub (GENEALOGY_TEST=1 + LCNDA_TEST_HIST_DIR), reprise,
  *     un pack mal décrit écarté ; les tables de frdata.org (jeu d'essai inventé, pas les vraies : elles ne se redistribuent pas) ;
  *  3. la fiche : Pierre MAZAUD, né à Tulle en 1870, marié à Brive en 1898, mort à Uzerche en 1932 → population, train, voyage,
  *     vendanges, enfants ; Réglages → 🏘 Histoire du lieu : installer en un clic, 🗑 Supprimer et ↶, À propos des données.
@@ -131,7 +131,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.ok(await p.$('[data-hist-life="1"] [data-hist-install]'), 'bouton « Installer »');
             assert.match(await blockText(1), /2 enfant\(s\) sur 4 mort\(s\) avant 5 ans \(1 sans date de décès\)/);
         });
-        await t('un clic sur « ⤓ Installer » dans le bloc : Réglages → 🏘 Histoire du lieu, téléchargé, vérifié, rangé', async () => {
+        await t('un clic sur « 📦 Installer » dans le bloc : Réglages → 🏘 Histoire du lieu, téléchargé, vérifié, rangé', async () => {
             await p.click('[data-hist-life="1"] [data-hist-install]');
             await toastWith(/Histoire du lieu installée/);
             const st = await api('hist_status'); assert.strictEqual(st.installed, true); assert.ok(st.sources.includes('insee'));

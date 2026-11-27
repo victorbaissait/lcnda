@@ -498,7 +498,8 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
                 await pg.check(`[data-succ-bchk=":${A}"]`); await pg.check(`[data-succ-bchk=":${b2}"]`);
                 assert.match(await pg.textContent('[data-succ-bsel]'), /Cochés : 2/);
                 await shot(pg, 'tableau-coches-1440', false);
-                const [dl] = await Promise.all([pg.waitForEvent('download'), pg.click('[data-succ-bcsv]')]);
+                await pg.click('[data-succ-bcsv]'); await pg.waitForSelector('dialog.ui-export[open]'); // ⤓ la fenêtre d'export commune
+                const [dl] = await Promise.all([pg.waitForEvent('download'), pg.click('dialog.ui-export [data-ui-go]')]);
                 const csv = fs.readFileSync(await dl.path(), 'utf8'); assert.match(csv, /2026-014/); assert.match(csv, /Marcel MAZAUD/);
                 await pg.click('[data-succ-bonly]');
                 await pg.waitForFunction(() => window.LCNDA_APP.state.module === 'personnes' && document.querySelector('.succ-fbanner'));

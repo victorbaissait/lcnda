@@ -63,7 +63,7 @@
     function settings() { let s = {}; try { s = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (_) { s = {}; } return {...DEF, ...s}; }
     function save(s) { try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (_) {} }
     const on = k => settings()[k] !== false;
-    const link = (url, label) => (url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : esc(label));
+    const link = (url, label) => (url ? `${window.LCNDA_UI.extLink(url, label)}` : esc(label));
     const src = (label, licence, url, extra = '') => `<p class="cplus-src tm-src">${esc(T('Source :'))} ${link(url, label)}${licence ? ` — ${esc(licence)}` : ''}${url ? ` · ${link(url, T('↗ source'))}` : ''}${extra}</p>`;
     const more = (inner, n) => `<details class="cplus-more tm-more"><summary>${esc(n ? T('▸ plus ({n})', {n}) : T('▸ plus'))}</summary>${inner}</details>`;
     const emptyLine = (text, icon = 'ℹ️') => (A().emptyState ? A().emptyState({text, icon, size: 'small'}) : `<p class="muted">${esc(text)}</p>`);

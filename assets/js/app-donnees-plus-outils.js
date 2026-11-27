@@ -61,7 +61,7 @@
         const inp = box.querySelector('input'), ul = box.querySelector('ul'); let tq = 0, my = 0;
         const run = () => { clearTimeout(tq); tq = setTimeout(async () => { const q = inp.value.trim(), n = ++my; if (q.length < 2) { ul.innerHTML = ''; return; }
             const its = kind === 'person' ? await findPeople(q) : await findPlaces(q); if (n !== my) return;
-            ul.innerHTML = its.length ? its.map((x, i) => `<li><button type="button" class="dp-pick" data-i="${i}">${kind === 'person' ? '👤' : '📍'} ${esc(kind === 'person' ? (x.title || x.name) : x.full)}</button></li>`).join('') : `<li class="muted">${esc(T('Rien trouvé'))}</li>`;
+            ul.innerHTML = its.length ? its.map((x, i) => `<li><button type="button" class="dp-pick" data-i="${i}">${kind === 'person' ? '👤' : '📍'} ${esc(kind === 'person' ? (x.title || x.name) : x.full)}</button></li>`).join('') : `<li class="is-empty">${window.LCNDA_APP.empty(T('Rien trouvé'), {icon: '🔍'})}</li>`;
             ul.__its = its; }, 220); };
         inp.addEventListener('input', run);
         ul.addEventListener('click', e => { const b = e.target.closest('[data-i]'); if (!b) return; const x = ul.__its[Number(b.dataset.i)]; ul.innerHTML = ''; inp.value = kind === 'person' ? String(x.title || x.name).replace(/\s*\(.*$/, '') : x.name; onPick(x); });
@@ -74,7 +74,7 @@
     function compare(kind0 = 'p') {
         let kind = kind0; const sel = [null, null];
         dialog({eyebrow: T('Récap des données'), title: `⚖️ ${T('Comparer, côte à côte, par thème')}`, wide: true, submitLabel: 'Fermer',
-            body: `<div class="dp-row"><span class="segmented dp-seg" role="group" aria-label="${esc(T('Comparer'))}" data-dp-ck><button type="button" data-k="p" aria-pressed="true">${esc(T('Deux personnes'))}</button><button type="button" data-k="l" aria-pressed="false">${esc(T('Deux lieux'))}</button></span></div>
+            body: `<div class="dp-row">${window.LCNDA_UI.segmented({cls: 'dp-seg', label: T('Comparer'), attrs: 'data-dp-ck', items: [{on: true, attrs: 'data-k="p"', html: esc(T('Deux personnes'))}, {attrs: 'data-k="l"', html: esc(T('Deux lieux'))}]})}</div>
                 <div class="dp-cmp-pick"><div data-dp-c="0"></div><div data-dp-c="1"></div></div><div class="dp-cmp-out" data-dp-cmp aria-live="polite"></div>
                 <p class="muted small">${esc(T('Deux personnes : leurs lieux pendant leurs vies. Deux lieux : toutes les années. En bleu : ce qu’ils ont en commun. Chaque case ouvre la liste filtrée.'))}</p>`,
             onOpen: dl => {
@@ -82,7 +82,7 @@
                     try { sel[i] = kind === 'p' ? await P().personInfo(x.id) : {name: x.name, places: [x]}; } catch (e) { toast(e.message, 'error'); return; }
                     if (sel[0] && sel[1]) paint(dl); }); });
                 pick();
-                dl.querySelector('[data-dp-ck]').addEventListener('click', e => { const b = e.target.closest('[data-k]'); if (!b) return; kind = b.dataset.k; dl.querySelectorAll('[data-dp-ck] button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); dl.querySelector('[data-dp-cmp]').innerHTML = ''; pick(); });
+                dl.querySelector('[data-dp-ck]').addEventListener('click', e => { const b = e.target.closest('[data-k]'); if (!b) return; kind = b.dataset.k; window.LCNDA_UI.segPick(b); dl.querySelector('[data-dp-cmp]').innerHTML = ''; pick(); });
                 dl.addEventListener('click', e => { const c = e.target.closest('[data-dp-copen]'); if (!c) return; const [i, th] = c.dataset.dpCopen.split('|'); openTheme(sel[Number(i)], th); dl.close(); });
             }, onSubmit: () => true});
         async function paint(dl) {
@@ -185,11 +185,11 @@
     async function cite(d, r) {
         const c = await citeData(d, r); let style = P().opt?.('citeStyle') || 's';
         dialog({eyebrow: T('Citer une ligne'), title: `📖 ${c.title}`, submitLabel: 'Fermer',
-            body: `<span class="segmented dp-seg" role="group" aria-label="${esc(T('Style'))}" data-dp-cs>${[['s', 'Simple'], ['i', 'ISO 690'], ['c', 'Chicago']].map(([k, l]) => `<button type="button" data-c="${k}" aria-pressed="${k === style}">${esc(T(l))}</button>`).join('')}</span>
+            body: `${window.LCNDA_UI.segmented({cls: 'dp-seg', label: T('Style'), attrs: 'data-dp-cs', items: [['s', 'Simple'], ['i', 'ISO 690'], ['c', 'Chicago']].map(([k, l]) => ({on: k === style, attrs: `data-c="${k}"`, html: esc(T(l))}))})}
                 <div class="dp-cite" data-dp-cite aria-live="polite">${citeText(c, style)}</div><div class="dp-row"><button type="button" class="button small" data-dp-ccopy>📋 ${esc(T('Copier'))}</button></div>
                 <p class="muted small">${esc(T('La source de la liste, sa licence, la date des données installées (date de consultation) et le lien de la ligne.'))}</p>`,
             onOpen: dl => {
-                dl.querySelector('[data-dp-cs]').addEventListener('click', e => { const b = e.target.closest('[data-c]'); if (!b) return; style = b.dataset.c; dl.querySelectorAll('[data-dp-cs] button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); dl.querySelector('[data-dp-cite]').innerHTML = citeText(c, style); });
+                dl.querySelector('[data-dp-cs]').addEventListener('click', e => { const b = e.target.closest('[data-c]'); if (!b) return; style = b.dataset.c; window.LCNDA_UI.segPick(b); dl.querySelector('[data-dp-cite]').innerHTML = citeText(c, style); });
                 dl.querySelector('[data-dp-ccopy]').addEventListener('click', async () => { const ok = await copyText(dl.querySelector('[data-dp-cite]').textContent.trim()); toast(ok ? T('Citation copiée') : T('Copie impossible : sélectionne le texte.'), ok ? '' : 'error'); });
             }, onSubmit: () => true});
     }
@@ -253,10 +253,10 @@
         const on = new Set(CHAPTERS.filter(c => c[4]).map(c => c[0]));
         dialog({eyebrow: T('Livret'), title: `📄 ${T('Le monde de mes ancêtres')}`, wide: true, submitLabel: 'Fermer',
             body: `<div class="dp-book"><div class="dp-bopts">
-                <span class="segmented dp-seg" role="group" aria-label="${esc(T('Pour'))}" data-dp-bk><button type="button" data-k="1" aria-pressed="true">${esc(T('Une personne'))}</button><button type="button" data-k="b" aria-pressed="false">${esc(T('Une branche'))}</button></span>
+                ${window.LCNDA_UI.segmented({cls: 'dp-seg', label: T('Pour'), attrs: 'data-dp-bk', items: [{on: true, attrs: 'data-k="1"', html: esc(T('Une personne'))}, {attrs: 'data-k="b"', html: esc(T('Une branche'))}]})}
                 <div class="dp-pbox" data-dp-bp></div><p class="small" data-dp-bwho></p>
                 <div class="dp-subh">${esc(T('Chapitres'))}</div><div class="dp-chaps">${CHAPTERS.map(c => `<label class="dp-chk"><input type="checkbox" data-dp-ch="${c[0]}" ${on.has(c[0]) ? 'checked' : ''}> ${c[1]} ${esc(T(c[2]))}</label>`).join('')}<label class="dp-chk"><input type="checkbox" checked disabled> 📜 ${esc(T('Sources et licences (toujours)'))}</label></div>
-                <span class="segmented dp-seg" role="group" aria-label="${esc(T('Format'))}" data-dp-bf>${['A4', 'A5'].map(f => `<button type="button" data-f="${f}" aria-pressed="${f === fmt}">${f}</button>`).join('')}</span>
+                ${window.LCNDA_UI.segmented({cls: 'dp-seg', label: T('Format'), attrs: 'data-dp-bf', items: ['A4', 'A5'].map(f => ({on: f === fmt, attrs: `data-f="${f}"`, html: f}))})}
                 <div class="dp-row"><button type="button" class="button small" data-dp-bprint disabled>🖨 ${esc(T('Imprimer'))}</button><button type="button" class="button small secondary" data-dp-bpdf disabled>⤓ ${esc(T('PDF'))}</button></div>
                 <p class="muted small">${esc(T('Pour une branche : les personnes vivantes ou confidentielles ne sont pas dans le livret, même nommées. Un chapitre vide n’est jamais imprimé.'))}</p></div></div>`,
             onOpen: async dl => {
@@ -264,8 +264,8 @@
                 const set = async id => { try { who = await P().personInfo(id); if (who.living) { who = null; toast(T('Pas de livret pour une personne vivante.'), 'error'); } } catch (e) { who = null; toast(e.message, 'error'); } ready(); };
                 picker(dl.querySelector('[data-dp-bp]'), 'person', x => set(x.id));
                 if (pid) set(pid);
-                dl.querySelector('[data-dp-bk]').addEventListener('click', e => { const b = e.target.closest('[data-k]'); if (!b) return; branch = b.dataset.k === 'b'; dl.querySelectorAll('[data-dp-bk] button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); });
-                dl.querySelector('[data-dp-bf]').addEventListener('click', e => { const b = e.target.closest('[data-f]'); if (!b) return; fmt = b.dataset.f; dl.querySelectorAll('[data-dp-bf] button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); });
+                dl.querySelector('[data-dp-bk]').addEventListener('click', e => { const b = e.target.closest('[data-k]'); if (!b) return; branch = b.dataset.k === 'b'; window.LCNDA_UI.segPick(b); });
+                dl.querySelector('[data-dp-bf]').addEventListener('click', e => { const b = e.target.closest('[data-f]'); if (!b) return; fmt = b.dataset.f; window.LCNDA_UI.segPick(b); });
                 dl.addEventListener('change', e => { const c = e.target.closest('[data-dp-ch]'); if (c) { if (c.checked) on.add(c.dataset.dpCh); else on.delete(c.dataset.dpCh); } });
                 const go = async () => { if (!who) return; const doc = await bookHtml(branch ? await branchOf(who) : [who], [...on], fmt); if (!doc) return toast(T('Rien à imprimer : aucune donnée autour de ses lieux.'), 'error'); UI().printDocument ? UI().printDocument(doc) : toast(T('L’impression n’est pas chargée.'), 'error'); };
                 dl.querySelector('[data-dp-bprint]').addEventListener('click', go); dl.querySelector('[data-dp-bpdf]').addEventListener('click', go);
@@ -303,7 +303,7 @@
         dialog({eyebrow: T('Diaporama'), title: `🎞 ${name}`, wide: true, submitLabel: 'Fermer',
             body: `<div class="dp-slide" data-dp-slide aria-live="polite" tabindex="0"></div>
                 <div class="dp-ctl"><button type="button" class="button small" data-dp-sp>▶ ${esc(T('Lecture'))}</button><button type="button" class="button small secondary" data-dp-sv="-1" aria-label="${esc(T('Année précédente'))}">‹</button><button type="button" class="button small secondary" data-dp-sv="1" aria-label="${esc(T('Année suivante'))}">›</button>
-                <span class="segmented dp-seg" role="group" aria-label="${esc(T('Vitesse'))}" data-dp-ss>${[['6000', 'Lent'], ['3500', 'Normal'], ['1800', 'Vite']].map(([v, l]) => `<button type="button" data-s="${v}" aria-pressed="${Number(v) === speed}">${esc(T(l))}</button>`).join('')}</span>
+                ${window.LCNDA_UI.segmented({cls: 'dp-seg', label: T('Vitesse'), attrs: 'data-dp-ss', items: [['6000', 'Lent'], ['3500', 'Normal'], ['1800', 'Vite']].map(([v, l]) => ({on: Number(v) === speed, attrs: `data-s="${v}"`, html: esc(T(l))}))})}
                 <span class="muted small">🔇 ${esc(T('Sans musique'))}</span><button type="button" class="button small secondary" data-dp-sf>⛶ ${esc(T('Plein écran'))}</button>${ro() ? '' : `<button type="button" class="button small secondary" data-dp-skn>✏️ ${esc(T('Ouvrir dans 🎤 Présentation'))}</button>`}</div>
                 <p class="muted small">${esc(T('Les années sans rien sont sautées. Espace : pause · ← → : une année · Échap : sortir.'))}</p>`,
             onOpen: dl => {
@@ -316,7 +316,7 @@
                 dl.addEventListener('click', e => {
                     if (e.target.closest('[data-dp-sp]')) return play();
                     const v = e.target.closest('[data-dp-sv]'); if (v) return step(Number(v.dataset.dpSv));
-                    const s = e.target.closest('[data-s]'); if (s) { speed = Number(s.dataset.s); dl.querySelectorAll('[data-dp-ss] button').forEach(x => x.setAttribute('aria-pressed', String(x === s))); if (timer) { stop(); play(); } return; }
+                    const s = e.target.closest('[data-s]'); if (s) { speed = Number(s.dataset.s); window.LCNDA_UI.segPick(s); if (timer) { stop(); play(); } return; }
                     if (e.target.closest('[data-dp-sf]')) { try { (box.requestFullscreen || box.webkitRequestFullscreen)?.call(box); } catch (_) {} return; }
                     if (e.target.closest('[data-dp-skn]')) { stop(); toKeynote(); }
                 });

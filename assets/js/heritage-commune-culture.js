@@ -38,7 +38,7 @@
     function save(s) { try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (_) {} }
     const on = k => settings()[k] !== false;
     const kiosk = () => document.body.classList.contains('is-kiosk') || document.body.classList.contains('ms-on');
-    const link = (url, label) => `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`;
+    const link = (url, label) => `${window.LCNDA_UI.extLink(url, label)}`;
     const fmtDate = ts => { try { return new Date(ts * 1000).toLocaleDateString('fr-FR'); } catch (_) { return ''; } };
     const wait = t => (UI().spinner ? UI().spinner(t) : `<p class="muted">${esc(t)}</p>`);
     const emptyLine = (text, icon = 'ℹ️') => (A().emptyState ? A().emptyState({text, icon, size: 'small'}) : `<p class="muted">${esc(text)}</p>`);

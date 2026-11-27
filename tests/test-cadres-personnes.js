@@ -2,7 +2,7 @@
 /* 🗂 « Un cadre par personne » (réglage général genealogie-cadres, oui au départ) sur les listes de recherche.   node tests/test-cadres-personnes.js
  *  1. le serveur : pistes_list&per_person=1 (combien de pistes chaque personne de la page a en tout, mêmes filtres),
  *     listes_plus&what=notes (person_name de chaque note), Ma semaine → « manque » (person, sosa) ;
- *  2. chaque écran, réglage mis puis enlevé : 📋 Tous les doutes, ✅ Contrôle de la base (deux personnes → sous la première ;
+ *  2. chaque écran, réglage mis puis enlevé : ❓ Tous les doutes, ✅ Contrôle de la base (deux personnes → sous la première ;
  *     les exceptions aussi), 🔎 Pistes à vérifier (« + N autres pistes pour elle » charge les autres), 🧩 Ce qui manque
  *     (un tbody par personne), ⚰️ Décès possibles (un cadre par fiche, les fiches INSEE dedans, décision par fiche),
  *     💡 Suggestions (cadre léger), 🗓 Ma semaine « Par sorte » (💡 À chercher), 🏛️ Actes manquants (tbody par personne),
@@ -155,7 +155,7 @@ const setFrames = (p, on) => p.evaluate(on => { if (on === null) localStorage.re
             await mock(p, 'investigations', M.inv);
             const full = w === 1440 && !dark;
 
-            await t(`📋 Tous les doutes : un cadre par personne (deux personnes → la première), Sosa, « N doutes » ; réglage enlevé → les lignes d’avant — ${tag}`, async () => {
+            await t(`❓ Tous les doutes : un cadre par personne (deux personnes → la première), Sosa, « N doutes » ; réglage enlevé → les lignes d’avant — ${tag}`, async () => {
                 await setFrames(p, null);
                 const open = async () => { await go.liste('doutes')(p); await p.waitForSelector('#workspace [data-dt-list] [data-dt-key]', {timeout: 30000}); await settle(p); };
                 await open();

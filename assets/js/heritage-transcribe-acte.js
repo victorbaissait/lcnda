@@ -173,7 +173,7 @@
             const fold = ready && !o.setupOnly, cur = (st.models || []).find(m => m.tag === model)?.label || model;
             box.innerHTML = `${head}${fold ? `<div class="h-txa-row h-txa-deepbtns h-txa-readtop">${readBtn}<small class="muted">${esc(i18n('Modèle : {m}', {m: cur}))}</small></div><details class="h-txa-settings"><summary>⚙️ ${esc(i18n('Réglages (modèle et image)'))}</summary>${info()}</details>` : info()}<div class="h-txa-prog" data-txa-prog hidden><div class="h-txa-bar"><i></i></div><div class="h-txa-progrow"><small data-txa-progtxt></small><button type="button" class="button small secondary" data-txa-stop hidden title="${esc(i18n('Arrêter la lecture et garder le texte déjà lu'))}">■ ${esc(i18n('Arrêter'))}</button></div></div><div class="h-txa-out" data-txa-out></div>
                 <div class="h-txa-row h-txa-deepbtns">${!st.installed ? `<a class="button" href="${esc(st.download_url)}" target="_blank" rel="noopener noreferrer">↗ ${esc(i18n('Télécharger Ollama (ollama.com)'))}</a>` : ''}
-                ${st.running && !ready ? `<button type="button" class="button" data-txa-pull>⤓ ${esc(i18n('Installer la lecture approfondie'))}</button>` : ''}
+                ${st.running && !ready ? `<button type="button" class="button" data-txa-pull>📦 ${esc(i18n('Installer la lecture approfondie'))}</button>` : ''}
                 ${fold ? '' : readBtn}
                 <button type="button" class="button secondary" data-txa-recheck>↻ ${esc(i18n('Vérifier à nouveau'))}</button></div>
                 ${ready && o.setupOnly ? notice('info', esc(i18n('Pour lire un acte : ouvre son image dans l’Atelier de transcription (« 📜 Ouvrir dans l’Atelier »), puis « ✨ Lire ▾ ».'))) : ''}

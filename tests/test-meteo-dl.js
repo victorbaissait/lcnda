@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-/* 🌦 Météo d'autrefois : « ⤓ Installer » en un bouton (lib/meteo_dl.php, heritage-meteo.js, .github/workflows/meteo.yml).
+/* 🌦 Météo d'autrefois : « 📦 Installer » en un bouton (lib/meteo_dl.php, heritage-meteo.js, .github/workflows/meteo.yml).
  * Le « serveur » des données (la version « meteo-donnees » du dépôt) est un dossier local (GENEALOGY_TEST=1 + LCNDA_TEST_METEO_DIR) :
  * le pack d'essai (scripts/meteo/make-fixture.py) coupé en 3 morceaux + meteo-manifest.json.
  *  1. serveur : le sommaire lu (un pack mal décrit est écarté) ; télécharger par tranches, reprendre, abandonner ; vérifié puis rangé ;
- *  2. Réglages → 🌦 Météo d'autrefois : « ⤓ Installer » → la barre d'avancée → « installé » (↶ Annuler le retire) ; rien n'est livré avec l'app.
+ *  2. Réglages → 🌦 Météo d'autrefois : « 📦 Installer » → la barre d'avancée → « installé » (↶ Annuler le retire) ; rien n'est livré avec l'app.
  *   node tests/test-meteo-dl.js */
 'use strict';
 const assert = require('assert');
@@ -64,7 +64,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await post('meteo_dl_cancel', {id: s.id}); assert.strictEqual((await api('meteo_dl_resume', {id: s.id})).exists, false);
             assert.match((await post('meteo_dl_start', {kind: 'europe'})).error, /pas encore en ligne/);
         });
-        await t('Réglages → 🌦 Météo : « ⤓ Installer » → la barre → installé et vérifié ; ↶ Annuler le retire', async () => {
+        await t('Réglages → 🌦 Météo : « 📦 Installer » → la barre → installé et vérifié ; ↶ Annuler le retire', async () => {
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'meteo'; A.setModule('maintenance'); });
             await p.waitForSelector('[data-wx-dl="complet"]', {timeout: 20000});
             assert.match(await p.textContent('[data-wx-dl="complet"]'), /Installer/);

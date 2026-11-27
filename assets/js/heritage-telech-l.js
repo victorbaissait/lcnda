@@ -125,7 +125,7 @@
     const nf = (n, d = 0) => Number(n || 0).toLocaleString('fr-FR', {maximumFractionDigits: d});
     const kmTxt = k => (k < 1 ? T('sur place') : T('{n} km', {n: String(Math.round(k))}));
     const kmA = k => T('{n} km', {n: String(Math.max(1, Math.round(k)))});
-    const link = (url, label) => { const u = safeUrl(url); return u ? `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : esc(label); };
+    const link = (url, label) => { const u = safeUrl(url); return u ? `${window.LCNDA_UI.extLink(u, label)}` : esc(label); };
     const srcLink = url => { const u = safeUrl(url); return u ? `<a class="tlx-src-link" href="${esc(u)}" target="_blank" rel="noopener noreferrer" title="${esc(T('Ouvrir la source (internet)'))}">${esc(T('↗ source'))}</a>` : ''; };
     const row = (icon, html, src, extra = '') => `<div class="hist-row tlx-row"><span class="hist-i" aria-hidden="true">${icon}</span><div class="hist-t"><p>${html}</p>${extra}${src ? `<small class="hist-src">${esc(T('Source :'))} ${src}</small>` : ''}</div></div>`;
     const more = (html, n) => (html ? `<details class="tlx-more"><summary>${esc(T('▸ plus'))}${n ? ` <small class="muted">(${nf(n)})</small>` : ''}</summary>${html}</details>` : '');
@@ -374,7 +374,7 @@
         ['📰', 'London Gazette (OGL) : décorations, naturalisations, faillites', 'thegazette.co.uk refusé : la recherche s’ouvre sans aucun nom de l’arbre (tu tapes le nom toi-même).', 'https://www.thegazette.co.uk/all-notices/notice'],
         ['🏛', 'Registres des monuments aux morts d’Australie et de Nouvelle-Zélande', 'Sites refusés : liens ; les monuments de Wikidata sont dans la liste.', 'https://www.nzhistory.govt.nz/culture/the-memorials-register'],
         ['⛪', 'Paroisses d’Angleterre, du pays de Galles, d’Écosse et d’Irlande, et où trouver leurs registres', 'Contours ouverts pas relus (sites refusés) : liens vers FamilySearch Wiki, FreeREG, ScotlandsPeople, NLI.', 'https://www.freereg.org.uk/'],
-        ['📋', 'Recensements transcrits : Norvège 1801, 1865, 1910 ; Islande 1703 ; Danemark ; Canada 1851-1921', 'Fichiers et licences pas relus (sites refusés) : liens. Jamais de nom de l’arbre envoyé : tu cherches toi-même sur le site.', 'https://www.digitalarkivet.no/'],
+        ['🏠', 'Recensements transcrits : Norvège 1801, 1865, 1910 ; Islande 1703 ; Danemark ; Canada 1851-1921', 'Fichiers et licences pas relus (sites refusés) : liens. Jamais de nom de l’arbre envoyé : tu cherches toi-même sur le site.', 'https://www.digitalarkivet.no/'],
         ['📚', 'Registres indexés : Riksarkivet (Suède, CC0), HisKi (Finlande), DDD (Danemark)', 'Sites refusés : liens.', 'https://sok.riksarkivet.se/'],
         ['🚢', 'Émigration : protocoles d’émigrants norvégiens, listes de passagers de Brême', 'Liens.', 'https://www.passagierlisten.de/'],
         ['⛓', 'Bagnards envoyés en Australie (State Library of Queensland, CC BY)', 'data.qld.gov.au refusé : fabriqué sur GitHub (Actions → « Les équivalents d’ailleurs (lot L) », quoi = bagnards) ; comparé sur l’ordinateur, seulement pour des personnes décédées.', 'https://www.slq.qld.gov.au/'],

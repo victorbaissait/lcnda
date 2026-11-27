@@ -242,7 +242,7 @@
     function save(p) { try { localStorage.setItem(KEY, JSON.stringify({...settings(), ...p})); } catch (_) {} }
     const on = k => settings()[k] !== false;
     const safe = u => (A().safeUrl ? A().safeUrl(u) : u) || '#';
-    const link = (url, label = T('↗ source'), title = '') => (url ? `<a class="dp-src-link" href="${esc(safe(url))}" target="_blank" rel="noopener noreferrer"${title ? ` title="${esc(title)}"` : ''}>${esc(label)}</a>` : '');
+    const link = (url, label = T('↗ source'), title = '') => (url ? `${window.LCNDA_UI.extLink(safe(url), label, {cls: 'dp-src-link', title: title})}` : '');
     const wdUrl = q => `https://www.wikidata.org/wiki/${encodeURIComponent(q)}`;
     const spinner = t => (UI().spinner ? UI().spinner(t) : `<p class="muted">${esc(t)}</p>`);
     const fmtD = s => { const m = String(s || '').match(/^(-?\d{1,4})(?:-(\d\d))?(?:-(\d\d))?/); if (!m) return ''; const MO = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre']; const y = String(Number(m[1])); if (!m[2] || (m[2] === '01' && (!m[3] || m[3] === '01'))) return y; return `${m[3] && m[3] !== '01' ? Number(m[3]) + ' ' : m[3] === '01' ? '1er ' : ''}${MO[Number(m[2]) - 1]} ${y}`; };

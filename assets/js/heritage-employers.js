@@ -30,7 +30,7 @@
     function ficheHtml(r) {
         const d = r.data || {}, [statusLabel, statusCls] = STATUS[d.status || ''] || STATUS[''];
         const ini = r.name.split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0]).join('').toUpperCase();
-        const kv = rows => rows.filter(([k]) => d[k]).map(([k, l]) => `<tr><th>${esc(l)}</th><td>${k === 'siren' || k === 'siret' ? `<span class="h-emp-mono">${esc(siren(d[k]))}</span>` : k === 'website' ? `<a href="${esc(d[k])}" target="_blank" rel="noopener noreferrer">${esc(d[k].replace(/^https?:\/\//, ''))}</a>` : k === 'email' ? `<a href="mailto:${esc(d[k])}">${esc(d[k])}</a>` : ['founded', 'closed'].includes(k) ? esc(dateFr(d[k])) : esc(d[k])}</td></tr>`).join('');
+        const kv = rows => rows.filter(([k]) => d[k]).map(([k, l]) => `<tr><th>${esc(l)}</th><td>${k === 'siren' || k === 'siret' ? `<span class="h-emp-mono">${esc(siren(d[k]))}</span>` : k === 'website' ? `${window.LCNDA_UI.extLink(d[k], '')}` : k === 'email' ? `<a href="mailto:${esc(d[k])}">${esc(d[k])}</a>` : ['founded', 'closed'].includes(k) ? esc(dateFr(d[k])) : esc(d[k])}</td></tr>`).join('');
         const ident = kv(IDENT), contact = kv(CONTACT.filter(([k]) => k !== 'logo_url'));
         const list = (key, render) => (d[key] || []).length ? `<section class="h-emp-card"><h3>${LISTS[key].icon} ${LISTS[key].title} <small>${(d[key] || []).length}</small></h3>${render(d[key])}</section>` : '';
         const period = (a, b) => a || b ? `<small class="h-emp-period">${esc(a || '?')} → ${esc(b || '…')}</small>` : '';
@@ -139,9 +139,9 @@
                 if (mv && row) { if (mv.dataset.empMove === '-1' && row.previousElementSibling) row.parentElement.insertBefore(row, row.previousElementSibling); else if (mv.dataset.empMove === '1' && row.nextElementSibling) row.parentElement.insertBefore(row.nextElementSibling, row); return; }
                 if (e.target.closest('[data-emp-cancel]')) { if (r.name) show(); else dlg.close(); return; }
                 if (e.target.closest('[data-emp-delete]')) {
-                    if (!await A().confirmBox(`Supprimer la fiche de « ${r.name} » ? Les recensements et les fiches des personnes ne changent pas.`, {title: 'Supprimer la fiche', okLabel: 'Supprimer la fiche'})) return;
-                    try { await api('delete_employer_record', {}, {method: 'POST', body: {name: r.name}}); } catch (error) { toast(error.message, 'error'); return; }
-                    toast('Fiche supprimée.'); dlg.close(); refreshList(); return;
+                    // H7 : supprimée tout de suite, « ↶ Annuler » la remet (les recensements et les fiches des personnes ne changent pas)
+                    if (await A().deleteWithUndo({action: 'delete_employer_record', body: {name: r.name}, type: 'employer_record', id: r.id, message: (window.LCNDA_I18N ? window.LCNDA_I18N.t('Fiche de « {name} » supprimée', {name: r.name}) : `Fiche de « ${r.name} » supprimée`), after: () => refreshList()})) dlg.close();
+                    return;
                 }
                 const pick = e.target.closest('[data-emp-pick]');
                 if (pick) { fillFrom(form, lookups[Number(pick.dataset.empPick)], r.people || []); return; }

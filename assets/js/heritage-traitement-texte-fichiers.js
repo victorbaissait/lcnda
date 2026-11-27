@@ -245,7 +245,7 @@
     tools.dataOf = dataOf;
     async function chooseTemplate(ctx = {}) {
         let mine = []; try { mine = (await api('textdocs', {kind: 'template'})).items || []; } catch (_) {}
-        ext.openDialog({eyebrow: i18n('TRAITEMENT DE TEXTE'), title: i18n('📋 Partir d’un modèle'), wide: true, submitLabel: i18n('Fermer'),
+        ext.openDialog({eyebrow: i18n('TRAITEMENT DE TEXTE'), title: i18n('🧩 Partir d’un modèle'), wide: true, submitLabel: i18n('Fermer'),
             body: `<div class="wp-tpls">${tools.TEMPLATES.filter(t => !t.when || t.when()).map(t => `<button type="button" class="wp-tpl" data-tpl="${t.key}"><b>${t.icon} ${esc(i18n(t.name))}</b><small>${esc(i18n(t.hint))}</small></button>`).join('')}</div>
                 <h4>${esc(i18n('Mes modèles'))}</h4>${mine.length ? `<div class="wp-tpls">${mine.map(t => `<button type="button" class="wp-tpl" data-mine="${t.id}"><b data-i18n-off>📝 ${esc(t.name)}</b><small>${esc(plural(t.info?.words || 0, 'mot'))} · ${UI()?.whenText ? esc(UI().whenText(t.updated_at, {label: i18n('Modifié')})) : ''}</small></button>`).join('')}</div>` : A().empty(i18n('Pas encore de modèle à toi : dans un document, Fichier → « Enregistrer comme modèle… ».'), {icon: '📋'})}`,
             onOpen: d => d.addEventListener('click', async e => {
@@ -384,8 +384,9 @@
         open: (id, again) => openDoc({id, onSaved: again, onClose: again}),
         create: again => openDoc({onSaved: again, onClose: again}),
         rename: (id, name) => post('rename_textdoc', {id, name}),
-        remove: id => post('delete_textdoc', {id}), createLabel: i18n('＋ Nouveau document'),
-        get extra() { return `<button type="button" class="button secondary" data-et-x="tpl" title="${esc(i18n('Lettre aux archives, demande d’acte, récit d’un ancêtre, compte rendu de visite, rapport de recherche…'))}">${esc(i18n('📋 Partir d’un modèle'))}</button><button type="button" class="button secondary" data-et-x="import" title="Word (.docx), LibreOffice (.odt), RTF, Markdown, texte, HTML">${esc(i18n('⤒ Importer…'))}</button>`; },
+        remove: async id => { const r = await post('delete_textdoc', {id}), doc = (r?.result || r)?.doc; if (!doc) return null; const o = {undo: async () => { const x = (await post('restore_textdoc', {doc}))?.result; o.restoredId = Number(x?.id) || 0; return x; }}; return o; }, undo: true, // ↶ Annuler : le document revient avec ses versions
+        createLabel: i18n('＋ Nouveau document'),
+        get extra() { return `<button type="button" class="button secondary" data-et-x="tpl" title="${esc(i18n('Lettre aux archives, demande d’acte, récit d’un ancêtre, compte rendu de visite, rapport de recherche…'))}">${esc(i18n('🧩 Partir d’un modèle'))}</button><button type="button" class="button secondary" data-et-x="import" title="Word (.docx), LibreOffice (.odt), RTF, Markdown, texte, HTML">${esc(i18n('⤒ Importer…'))}</button>`; },
         onExtra: (k, again) => { if (k === 'tpl') return chooseTemplate({onSaved: again, onClose: again}); if (k === 'import') return importDialog(again); }});
 
     /* ═════════ Les liens depuis le reste de l'app ═════════ */

@@ -63,6 +63,12 @@ const t = async (name, fn) => { try { await fn(); count++; console.log('✓', na
         for (const [f, re] of [['app-carte-couleurs.js', /data-kc-reset title="\$\{esc\(T\('Remettre les couleurs de départ'\)\)\}"/], ['app-donnees-onglet.js', /help: T\('Rétablir l’ordre de départ'\)/], ['heritage-recueil-etat.js', /help: T\('Revenir à l’état calculé'\)/], ['heritage-transcribe.js', /help: i18n\('Remettre l’image comme au départ \(tous les réglages de l’image à zéro\)'\)/]])
             assert.match(all[f], re, f);
     });
+    await t('K3 Supprimer / Retirer / Vider / Effacer : un mot par geste (harmonisation.md, Apparence 4)', () => {
+        // Supprimer = la chose disparaît ; Retirer = elle reste ailleurs ; Vider = un contenant (corbeille, panier, journal, case, liste) ;
+        // Effacer = un dessin, une retouche, le contenu ou la mise en forme dans un éditeur, et « les réponses gardées »
+        none(/(T|i18n)\('(Effacer le journal|Effacer maintenant|Effacer la recherche|Effacer toutes les conversations|Tout effacer \?)|>Effacer les temps<|title="\$\{esc\((T|i18n)\('Effacer'\)\)\}"[^>]*>🗑/g, 'Effacer pour supprimer ou vider');
+        none(/>\s*(🗑\s*)?(Effacer|Vider) (la|le|les|cette|ce) (fiche|personne|source|note|média|photo|acte|lieu|enquête|piste|conversation)s?\b/g, 'une chose qui disparaît : Supprimer');
+    });
     await t('K3 « Relier » : plus de Rattacher, Lier, Associer sur un bouton ou une fenêtre', () => {
         none(/<button\b[^>]*>\s*(\S{1,2}\s)?(Rattacher|Lier|Associer)\b/g, 'bouton');
         none(/(submitLabel|okLabel): ?'(Rattacher|Lier|Associer)/g, 'bouton principal');
@@ -105,6 +111,13 @@ const t = async (name, fn) => { try { await fn(); count++; console.log('✓', na
         none(/🔎 (\$\{(esc|escapeHtml)\((T|i18n)\('(Chercher|Rechercher|Trouver|Filtrer))|>🔎 (Retrouver|Trouver|Filtrer)/g, 'chercher : 🔍 (🔎 reste le signe de l’onglet Recherche et de « Tout ce qui le concerne »)');
         none(/✕ Annuler/g, '« Annuler » sans ✕');
     });
+    await t('K11 un symbole = un sens : 📋 copier / coller, 📎 insérer / joindre, ⤓ sortir un fichier, 📦 installer (harmonisation.md, Apparence 2)', () => {
+        assert.equal(UI.SYMBOLS.install, '📦'); assert.equal(UI.SYMBOLS.insert, '📎');
+        none(/⤓ ?(\$\{(esc|escapeHtml)?\(?[^}`]{0,30}?(T|i18n)\(['"])?(Installer|Tout installer|Installation|INSTALLER|Pas encore installé|à installer)|'⤓ (Installer|Tout installer)/g, 'installer : 📦');
+        none(/📋 ?(\$\{(esc|escapeHtml)\((T|i18n)\(')?(Mes listes|Ajouter à Mes listes|Recensements|Tous les doutes|Registre matricule|registres matricules|Partir d[’']un modèle|Ranger dans le Registre|Dans cette zone|Mes propositions|Voir en tableau|Questionnaire)|(census|mylist): \{sym: '📋'/g, '📋 : seulement copier / coller');
+        none(/📎 ?(Médias|Fichiers des médias|Fiche liée)|title: i18n\('Fichiers des médias'\), icon: '📎'/g, '📎 : seulement insérer / joindre');
+        assert.ok(hits(/📦 ?(\$\{(esc|escapeHtml)?\(?[^}`]{0,30}?(T|i18n)\(['"])?(Installer|Tout installer)/g).length >= 40, '📦 Installer partout');
+    });
 
     /* ── 3. navigateur ── */
     let chromium = null;
@@ -140,8 +153,8 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding: 'utf8', e
     const go = (page, kind, id) => page.evaluate(async ([kind, id]) => { const A = window.LCNDA_APP; document.querySelectorAll('dialog[open]').forEach(d => d.close());
         if (kind === 'list') { A.state.listType = id; await A.setModule('listes'); } else if (kind === 'maint') { A.state.maintenanceTab = id; await A.setModule('maintenance'); } else await A.setModule(id); }, [kind, id]);
     const foot = page => page.evaluate(() => { const d = [...document.querySelectorAll('dialog[open]')].at(-1); return d ? [...d.querySelectorAll('.modal-actions button')].filter(b => b.getBoundingClientRect().width > 0).map(b => b.textContent.trim()) : null; });
-    // les variantes qu'on ne doit plus lire à l'écran
-    const BAD = /^(↺ )?(Tout )?[Rr]éinitialiser|Revenir au standard|Tout remettre|^(\S{1,2} )?(Rattacher|Lier|Associer)\b|Faire le livre|^📥|^📤 ?Export|^[⬇⬆]|^\+ |^(📘|🐾|🏢|🧩) ?[+＋]|^[➕⊕]/;
+    // les variantes qu'on ne doit plus lire à l'écran (harmonisation.md, Apparence 10 : 📥 reste le signe de « Prendre depuis… », « + 3 » un nombre en plus)
+    const BAD = /^(↺ )?(Tout )?[Rr]éinitialiser|Revenir au standard|Tout remettre|^(\S{1,2} )?(Rattacher|Lier|Associer)\b|Faire le livre|^📥(?! ?(Prendre|Tu choisis))|^📤 ?Export|^[⬇⬆]|^\+ (?!\d)|^(📘|🐾|🏢|🧩) ?[+＋]|^[➕⊕]/;
     const screenWords = page => page.evaluate(src => { const re = new RegExp(src); return [...document.querySelectorAll('#workspace button, #workspace summary, dialog[open] button')].filter(b => b.getBoundingClientRect().width > 0).map(b => b.textContent.trim().replace(/\s+/g, ' ')).filter(x => re.test(x)); }, BAD.source);
     try {
         const page = await open(1440);
