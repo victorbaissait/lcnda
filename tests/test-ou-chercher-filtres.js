@@ -180,8 +180,9 @@ echo 'ok';`], {cwd: appRoot, encoding: 'utf8', env: {...env, XSS}});
                 return {n: s.list.length, mil: s.list.filter(x => S.catsOf(x.site).includes('militaire')).map(x => x.site.key), out: Object.fromEntries(s.out.map(o => [o.site.key, o.why])), ad: s.list.find(x => x.site.key === 'ouc_ad_18')?.reasons[0] || '',
                     sh: s.list.find(x => x.site.key === 'so5_sainte_helene')?.reasons || [], gen: s.list.find(x => x.site.key === 'so3_geneteka')?.reasons[0] || ''}; });
             console.log(`   MAZAUD : ${r.n} proposés, 🎖 ${r.mil.length} (${r.mil.join(', ')}) — la maquette disait 40 et 🎖 5 avec seulement les deux premiers points de P4`);
-            assert.deepEqual(r.mil.sort(), ['leonore', 'so2_shd_officiers', 'so5_sainte_helene']);
-            assert.ok(r.n >= 36 && r.n <= 42, String(r.n));
+            // 🎖 + le Bulletin des lois (sources ouvertes, lot 27 : les pensions des soldats y paraissaient) ; le registre a grandi (lots 27, 40, 10, telech) : ~50 proposés
+            assert.deepEqual(r.mil.sort(), ['leonore', 'so27_bulletin_lois', 'so2_shd_officiers', 'so5_sainte_helene']);
+            assert.ok(r.n >= 47 && r.n <= 53, String(r.n));
             for (const k of ['so5_memorial_gendarmes', 'so3_nara', 'so3_bac_lac', 'so3_polytechnique', 'so7_monumentsmorts']) assert.ok(r.out[k], `${k} écarté`);
             assert.equal(r.out.so3_nara, 'pas de lieu aux États-Unis');
             assert.match(r.ad, /son acte de décès à Bourges \(Cher\)/);
@@ -195,8 +196,8 @@ echo 'ok';`], {cwd: appRoot, encoding: 'utf8', env: {...env, XSS}});
             const total = Number((await p.locator('[data-ouc-tab="todo"] .ouc-tab-long').innerText()).match(/\((\d+)\)/)[1]);
             await p.locator('.ouc-sorts [data-ouc-sort="militaire"]').click();
             await p.waitForSelector('.ouc-sorts [data-ouc-sort="militaire"].is-on');
-            assert.match(await p.locator('[data-ouc-tab="todo"] .ouc-tab-long').innerText(), new RegExp(`Proposés \\(3 sur ${total}\\)`));
-            assert.equal(await p.locator('.ouc-page .ouc-list .ouc-row').count(), 3);
+            assert.match(await p.locator('[data-ouc-tab="todo"] .ouc-tab-long').innerText(), new RegExp(`Proposés \\(4 sur ${total}\\)`));
+            assert.equal(await p.locator('.ouc-page .ouc-list .ouc-row').count(), 4);
             assert.match(await p.locator('.ouc-page .ouc-listbar .ui-listbar-active').innerText(), /🎖 Militaire/);
             // retenu pour toutes les personnes (barre H10)
             assert.deepEqual(await p.evaluate(() => JSON.parse(localStorage.getItem('lcnda-listbar:recherche:ou_chercher')).f.cats), ['militaire']);
@@ -206,7 +207,7 @@ echo 'ok';`], {cwd: appRoot, encoding: 'utf8', env: {...env, XSS}});
             assert.ok(await p.locator('.ui-listbar-menu', {hasText: 'En français seulement'}).count());
             await p.locator('.ui-listbar-menu input[data-lb-f="cats"][value="journaux"]').check();
             await p.keyboard.press('Escape');
-            await p.waitForFunction(() => document.querySelectorAll('.ouc-page .ouc-list .ouc-row').length === 5, null, {timeout: 10000}); // 3 🎖 + 2 📰 : l'un ou l'autre
+            await p.waitForFunction(() => document.querySelectorAll('.ouc-page .ouc-list .ouc-row').length === 6, null, {timeout: 10000}); // 4 🎖 + 2 📰 : l'un ou l'autre
             if (SHOTS) await p.screenshot({path: path.join(SHOTS, 'ouf2-page-1440.png')});
         });
         await t('liste vide : ⚓ (tous écartés, avec les raisons) et 📰 + Pologne (aucun dans le registre)', async () => {
@@ -235,11 +236,11 @@ echo 'ok';`], {cwd: appRoot, encoding: 'utf8', env: {...env, XSS}});
             await p.evaluate(() => { localStorage.setItem('lcnda-listbar:recherche:ou_chercher', JSON.stringify({q: '', f: {cats: ['journaux'], country: 'ses', free: true, fr: false}, sort: 'useful'})); window.LCNDA_APP.state.currentPersonId = 1; window.LCNDA_APP.setModule('personnes'); });
             await p.waitForSelector('[data-ouc-block] .ouc-shortcuts [data-ouc-short]', {timeout: 20000});
             const first = p.locator('[data-ouc-block] .ouc-shortcuts [data-ouc-short]').first();
-            assert.match(await first.innerText(), /🎖 Tout le militaire\s*3/); assert.equal(await first.getAttribute('data-ouc-short'), 'militaire');
+            assert.match(await first.innerText(), /🎖 Tout le militaire\s*4/); assert.equal(await first.getAttribute('data-ouc-short'), 'militaire');
             if (SHOTS) { await p.locator('[data-ouc-block]').scrollIntoViewIfNeeded(); await p.screenshot({path: path.join(SHOTS, 'ouf2-fiche-raccourcis-1440.png')}); }
             await first.click();
             await p.waitForSelector('.ouc-page .ouc-from', {timeout: 20000});
-            assert.equal(await p.locator('.ouc-page .ouc-list .ouc-row').count(), 3);
+            assert.equal(await p.locator('.ouc-page .ouc-list .ouc-row').count(), 4);
             assert.deepEqual(await p.evaluate(() => JSON.parse(localStorage.getItem('lcnda-listbar:recherche:ou_chercher')).f.cats), ['journaux'], 'le choix retenu reste « 📰 »');
             await p.locator('.ouc-page [data-ouc-from-off]').click();
             await p.waitForSelector('.ouc-sorts [data-ouc-sort="journaux"].is-on');

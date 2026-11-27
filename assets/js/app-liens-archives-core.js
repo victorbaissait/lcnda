@@ -101,11 +101,11 @@
             build: p => hathi(nameOf(p) || p.last), placeUrl: pl => hathi(town(pl.name)),
             rel: {countries: ['us', 'ca', 'gb', 'ie'], base: 0.4, why: () => T('Des livres anciens numérisés (généalogies de familles, annuaires américains) : une recherche plein texte')}}),
         S({key: 'pages1418', group: 'guerres', country: 'France', icon: '💬', label: 'Forum Pages 14-18 — historiques des régiments, entraide', source: 'Pages 14-18',
-            home: 'https://forum.pages14-18.com/', kind: 'aide', years: [1860, 1900], where: ['fiche', 'militaire'], theme: 'guerres', words: 'pages 14 18 forum regiment historique poilu entraide grande guerre',
-            rel: {countries: ['fr'], born: [1865, 1900], profiles: ['soldier', 'mpf'], base: 0.3, why: () => T('Un soldat de 1914-1918 : l’historique de son régiment et l’entraide du forum Pages 14-18')}}),
+            home: 'https://forum.pages14-18.com/', kind: 'aide', years: [1914, 1918], where: ['fiche', 'militaire'], theme: 'guerres', words: 'pages 14 18 forum regiment historique poilu entraide grande guerre',
+            rel: {countries: ['fr'], born: [1865, 1901], profiles: ['soldier', 'mpf'], base: -0.6, why: () => T('Un soldat de 1914-1918 : l’historique de son régiment et l’entraide du forum Pages 14-18')}}), // un guide (years = années couvertes) : après sa fiche matricule et le JMO
         S({key: 'chtimiste', group: 'guerres', country: 'France', icon: '📖', label: 'Chtimiste — parcours des régiments 1914-1918', source: 'Chtimiste',
-            home: 'https://www.chtimiste.com/', kind: 'aide', years: [1860, 1900], where: ['fiche', 'militaire'], theme: 'guerres', words: 'chtimiste regiment parcours historique poilu grande guerre 14 18',
-            rel: {countries: ['fr'], born: [1865, 1900], profiles: ['soldier', 'mpf'], base: 0.25, why: () => T('Un soldat de 1914-1918 : le parcours de son régiment, jour après jour (Chtimiste)')}}),
+            home: 'https://www.chtimiste.com/', kind: 'aide', years: [1914, 1918], where: ['fiche', 'militaire'], theme: 'guerres', words: 'chtimiste regiment parcours historique poilu grande guerre 14 18',
+            rel: {countries: ['fr'], born: [1865, 1901], profiles: ['soldier', 'mpf'], base: -0.6, why: () => T('Un soldat de 1914-1918 : le parcours de son régiment, jour après jour (Chtimiste)')}}), // un guide (years = années couvertes) : après sa fiche matricule et le JMO
         S({key: 'mercuriales', group: 'france', country: 'France', icon: '🌾', label: 'Prix du blé (mercuriales) et salaires — Annuaire statistique de la France', source: 'Gallica (BnF) · SGF',
             home: 'https://gallica.bnf.fr/', verified: 'partiel', kind: 'livre', where: ['lieu'], byPlace: true, theme: 'prix', words: 'prix du ble mercuriale mercuriales salaire salaires annuaire statistique sgf cout de la vie',
             build: () => gallica(['Annuaire statistique de la France', 'prix du blé']), placeUrl: pl => gallica(['mercuriales', town(pl.name)]),

@@ -329,8 +329,9 @@ echo 'ok';`], {cwd: appRoot, encoding: 'utf8', env: envFor(dir)});
                     const n = php(`return (int) $pdo->query("SELECT count(*) FROM events e JOIN event_types t ON t.id=e.event_type_id AND t.gedcom_tag='DEAT' WHERE e.person_id=1")->fetchColumn();`);
                     assert.equal(n, 1, 'décès ajouté');
                     const undo = p.locator('button', {hasText: '↶ Annuler'}).last(); await undo.click();
-                    await p.waitForTimeout(800);
-                    assert.equal(php(`return (int) $pdo->query("SELECT count(*) FROM events e JOIN event_types t ON t.id=e.event_type_id AND t.gedcom_tag='DEAT' WHERE e.person_id=1")->fetchColumn() + (int) $pdo->query('SELECT count(*) FROM media')->fetchColumn();`), 0, '↶ a tout retiré');
+                    const left = () => php(`return (int) $pdo->query("SELECT count(*) FROM events e JOIN event_types t ON t.id=e.event_type_id AND t.gedcom_tag='DEAT' WHERE e.person_id=1")->fetchColumn() + (int) $pdo->query('SELECT count(*) FROM media')->fetchColumn();`);
+                    for (const end = Date.now() + 15000; left() !== 0 && Date.now() < end;) await p.waitForTimeout(150); // attendre que ↶ ait fini (le serveur), pas un temps fixe
+                    assert.equal(left(), 0, '↶ a tout retiré');
                 });
                 await t(`${name} : sans fiche choisie — le menu de choix et l’erreur sous le champ (K1)`, async () => {
                     await p.evaluate(() => { void window.LCNDA_EXT.sourcesOuvertes.openImport({kind: 'presse', link: 'https://www.retronews.fr/journal/le-temps/3-juin-1910/1/2/4', linkOnly: true, files: [new File(['x'], 'lien-colle.txt', {type: 'text/plain'})]}); });

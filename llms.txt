@@ -8,12 +8,12 @@
 
 - [Présentation et téléchargement](carnet-numerique-des-ancetres.php) : version 0.10.0 du 22/11/2026, macOS, Windows, Linux
 - [Nouveautés de chaque version](carnet-numerique-des-ancetres.php#v0-10-0) : une fiche par version (date, en bref, le détail)
-- [FAQ complète, en texte](llms-full.txt) : 941 questions et réponses, par thème
+- [FAQ complète, en texte](llms-full.txt) : 956 questions et réponses, par thème
 
 ## English
 
 - [Presentation and download](carnet-numerique-des-ancetres-en.php)
-- [Full FAQ, as text](llms-full-en.txt) : 941 questions and answers, by topic
+- [Full FAQ, as text](llms-full-en.txt) : 956 questions and answers, by topic
 
 ## Optionnel
 

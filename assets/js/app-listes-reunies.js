@@ -149,7 +149,7 @@
             const now = ss.filter((s, i) => ready[i]), later = ss.filter((s, i) => !ready[i]);
             if (later.length) Promise.all(later.map(s => rowsOfSource(s).catch(() => []))).then(() => { built.delete(id); E().forget?.(`reunie_${id}`); const pg = E().page?.(); if (pg?.base?.id === `reunie_${id}`) pg.refresh(); });
             await Promise.all(now.map(async s => {
-                let rows = []; try { rows = await rowsOfSource(s); } catch (e) { console.error(e); }
+                let rows = []; try { rows = await rowsOfSource(s); } catch (e) { if (!(e?.name === 'AbortError' || (e instanceof TypeError && /fetch|network|load failed/i.test(String(e.message || ''))))) console.error(e); } // un fichier coupé (réseau) : la source manque, sans bruit (comme les autres blocs)
                 const src = {id: s.id, list: s.list, short: s.short || T(s.d.label), sub: s.sub || '', rank: s.rank || 9, label: T(s.d.label), url: s.d.sourceUrl || '', many: !!s.many};
                 let n = 0;
                 rows.forEach((r, i) => { try { if (s.when && !s.when(r)) return; const rec = s.row(r); if (!rec) return; const key = `${s.list}:${rec.key ?? r.id ?? r.qid ?? `${rec.date ?? rec.year}|${num(rec.lat)?.toFixed(2)}|${num(rec.lon)?.toFixed(2)}|${i}`}`; recs.push({src, key, rec}); n++; } catch (_) {} });
@@ -168,7 +168,7 @@
     function defOf(M) {
         const id = `reunie_${M.id}`;
         return {id, merged: true, mergeId: M.id, theme: M.theme, icon: M.icon || '🔀', label: M.label, group: M.group || 'Le monde', source: M.source || '', sourceUrl: M.sourceUrl || '',
-            keywords: M.keywords || [], cards: true, defaultView: M.defaultView, familyColumn: M.familyColumn, familyKm: M.familyKm, familyBefore: M.familyBefore, defaultSort: M.defaultSort, hideCols: M.hideCols, chips: M.chips, views: M.views,
+            keywords: M.keywords || [], cards: true, heavy: !!M.heavy, defaultView: M.defaultView, familyColumn: M.familyColumn, familyKm: M.familyKm, familyBefore: M.familyBefore, defaultSort: M.defaultSort, hideCols: M.hideCols, chips: M.chips, views: M.views,
             get fields() { return fieldsOf(M).map(f => (f.key === 'sources' ? {type: 'enum', values: sourcesOf(M).map(s => s.short), html: srcLinks, ...f} : f)); },
             period: M.period || (r => [r.year, r.year]), geo: M.geo || (r => [r.lat, r.lon]),
             rowKey: r => r._k, cardTitle: M.title, sourceCount: () => sourcesOf(M).length, mergeLine: () => T('{s}, sans doublons', {s: sourcesOf(M).map(s => s.short).join(' + ')}),

@@ -174,7 +174,10 @@
         // les listes du navigateur (sans serveur) dont le nom ressemble à un mot tapé : on y cherche le mot le plus long
         const longest = [...words].sort((a, b) => b.length - a.length)[0] || '';
         const local = lists.filter(d => !d.query && typeof d.load === 'function' && words.some(w => fold(d.label).split(/[^a-z]+/).some(l => l.length > 3 && (l.startsWith(w.replace(/s$/, '')) || w.startsWith(l.replace(/s$/, '')))))).slice(0, 3);
-        const locRes = Promise.all(local.map(async d => { try { const p = await ext.dataListsEngine.fetchPage(d, {q: words.filter(w => !fold(d.label).includes(w.replace(/s$/, ''))).sort((a, b) => b.length - a.length)[0] || '', crit: [], period: null, near: null, sort: '', dir: 'asc'}, 0, 4); return p.rows.map(r => K().ldRowItem(d, {}, r)); } catch (_) { return []; } }));
+        // (un mot qui ne fait que nommer la liste, « naissance » → « …par commune de naissance » : rien à y chercher, pas ses 4 premières lignes ;
+        //  la liste reste proposée plus bas, « Liste : … → pour l'ouvrir ici »)
+        const locRes = Promise.all(local.map(async d => { const lq = words.filter(w => !fold(d.label).includes(w.replace(/s$/, ''))).sort((a, b) => b.length - a.length)[0] || ''; if (!lq) return [];
+            try { const p = await ext.dataListsEngine.fetchPage(d, {q: lq, crit: [], period: null, near: null, sort: '', dir: 'asc'}, 0, 4); return p.rows.map(r => K().ldRowItem(d, {}, r)); } catch (_) { return []; } }));
         // une demande en français (« les gares autour de Fontainebleau ») : un ensemble
         const ask = words.length >= 3 ? CX().parseAsk?.(q, lists).catch?.(() => null) : null;
         const [r, loc, asked] = await Promise.all([srv, locRes, ask]); if (seq !== pop?.seq) return null;

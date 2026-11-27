@@ -263,7 +263,7 @@ echo 'ok';`], {cwd: appRoot, encoding: 'utf8', env: envFor(dir)});
                     await p.click('dialog.ael-search [data-ael-zone="eu"]'); await p.click('dialog.ael-search [data-ael-country="Allemagne"]');
                     const de = await p.$$eval('dialog.ael-search .ael-site', l => l.map(x => x.dataset.aelSite));
                     assert.ok(de.includes('so7_compgen_ofb') && de.includes('so7_archion'), de.join(','));
-                    assert.ok(de.every(id => /^(so7_compgen_ofb|so7_archion|so7_genwiki|so7_gov|so3_arolsen_fr|so8_[a-z_]+)$/.test(id)), de.join(","));
+                    assert.ok(de.every(id => /^(so7_compgen_ofb|so7_archion|so7_genwiki|so7_gov|so3_arolsen_fr|so8_[a-z_]+|so27_gedbas|so27_hambourg)$/.test(id)), de.join(","));
                     await noScroll(); await shot(p, `so7-chercher-${name}.png`);
                     await p.click('dialog.ael-search [data-ael-free]');
                     await p.click('dialog.ael-search [data-ael-settings]');

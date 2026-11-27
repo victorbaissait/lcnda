@@ -512,17 +512,18 @@
         ...MONO.map(([kind, id, icon, label]) => ({id: `${id}_lieu`, icon, label: T(label), group: 'Le lieu', needs: ['place'], online: false, installed: () => true, run: (ctx, host) => runPlace(kind, ctx, host)})));
 
     /* ─────────── 🌍 Où chercher : des sites en plus (liens seulement) ─────────── */
+    // (born : des combattants en âge de se battre, comme les autres listes de soldats de « Où chercher ? »)
     function registerOuChercher() {
         const M = root.LCNDA_OUC_MONDE; if (!M || !Array.isArray(M.SITES) || M.SITES.some(s => s.key === 'tg_poilus')) return !!M;
         M.SITES.push(
             {key: 'tg_combattants', icon: '⚓', group: 'Monde', label: T('Combattants français de la guerre américaine, 1778-1783 (liste de 1903)'), cats: ['militaire'], period: [1778, 1783], access: 'online',
-                url: () => URLS.combattants, rel: {countries: ['fr'], from: 1778, to: 1783, base: 0.05, why: () => T('Les soldats et marins de Rochambeau, d’Estaing et de Grasse')}},
+                url: () => URLS.combattants, rel: {countries: ['fr'], from: 1778, to: 1783, born: [1715, 1766], base: 0.05, why: () => T('Les soldats et marins de Rochambeau, d’Estaing et de Grasse')}},
             {key: 'tg_bastille', icon: '🗝', group: 'Monde', label: T('Tableau des vainqueurs de la Bastille (1790)'), cats: ['militaire'], period: [1789, 1790], access: 'online',
-                url: () => URLS.bastille, rel: {countries: ['fr'], from: 1789, to: 1790, base: 0.03, why: () => T('Les quelque 950 combattants du 14 juillet 1789')}},
+                url: () => URLS.bastille, rel: {countries: ['fr'], from: 1789, to: 1790, born: [1715, 1775], base: 0.03, why: () => T('Les quelque 950 combattants du 14 juillet 1789')}},
             {key: 'tg_poilus', icon: '📜', group: 'Monde', label: T('Testaments de Poilus (Archives nationales)'), cats: ['militaire'], period: [1914, 1918], access: 'online',
-                url: () => URLS.poilus, rel: {countries: ['fr'], from: 1914, to: 1918, base: 0.04, why: () => T('Des testaments de soldats de la Grande Guerre, transcrits')}},
-            {key: 'tg_lloyd', icon: '🚢', group: 'Monde', label: T('Lloyd’s Register of Shipping (1764-1900, Internet Archive)'), cats: ['maritime'], period: [1764, 1900], access: 'online',
-                url: () => URLS.lloyd, rel: {countries: ['fr', 'gb'], from: 1764, to: 1900, base: 0.03, why: () => T('Les navires de commerce, leur capitaine et leur port, année par année')}});
+                url: () => URLS.poilus, rel: {countries: ['fr'], from: 1914, to: 1918, born: [1865, 1901], base: 0.04, why: () => T('Des testaments de soldats de la Grande Guerre, transcrits')}},
+            {key: 'tg_lloyd', icon: '🚢', group: 'Monde', label: T('Lloyd’s Register of Shipping (1764-1900, Internet Archive)'), cats: ['marins'], period: [1764, 1900], access: 'online',
+                url: () => URLS.lloyd, rel: {countries: ['fr', 'gb'], from: 1764, to: 1900, profiles: ['sailor'], require: ['profile'], base: 0.03, why: () => T('Les navires de commerce, leur capitaine et leur port, année par année')}});
         return true;
     }
 

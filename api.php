@@ -193,6 +193,7 @@ try {
             'terr_list' => ['territories' => []],
             'reseau_settings' => (static function () { require_once __DIR__ . '/lib/relations_reseau.php'; return ['settings' => ['fiche' => true, 'listes' => true, 'diagramme' => true, 'genogramme' => true], 'types' => rs_type_list()]; })(),
             'cx_count' => ['count' => 0, 'total' => 0, 'baskets' => 0],
+            'ulist_index' => ['lists' => []], // 📑 Mes listes (lib/listes_perso.php) : aucune encore
             default => null,
         };
         if ($emptyRead !== null) json_response($emptyRead + ['ready' => false]);
@@ -1142,6 +1143,10 @@ function site_defaults_allowed_keys(): array
         'genealogie-mylists-order',
         'genealogie-keynote-prefs',
         'genealogie-vector-map-palette',
+        'genealogie-lot-n', 'genealogie-lot-n2', // 🏛 Archives et mémoire, 📊 Chiffres d’époque : sujets affichés (app-lot-n-archives.js, app-lot-n2-chiffres.js)
+        'genealogie-ouc-ukus', 'genealogie-sources-ouvertes-27-sites', // 🇬🇧🇺🇸 Où chercher ? ; 🔗 adresses des sites (sources ouvertes)
+        'genealogie-carte-couleurs', 'genealogie-recherche-icones', 'genealogie-recherche-boutons', // 🎨 couleurs des cartes ; 🔎 icônes et boutons de la Recherche
+        'genealogie-arbre-dit', // 🌳 Ce que dit l’arbre (app-lot-o-arbre.js)
         'genealogie-dashboard-blocks',
         'genealogie-animal-blocks', // 🗂 blocs et sections des fiches des animaux
         'genealogie-sheet-sections', // 🗂 sections des fiches (app-sections.js)

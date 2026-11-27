@@ -161,7 +161,9 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             const L = await p.evaluate(async () => { const d = window.LCNDA_EXT.dataLists.find(x => x.id === 'tf_potager'); const r = await d.load(); return [r.length, r[0].src]; });
             assert.ok(L[0] > 300); assert.match(L[1], /^https:\/\/fr\.wikisource\.org\/wiki\/Page:/);
             const C = await p.evaluate(async () => window.LCNDA_EXT.dataLists.find(x => x.id === 'tf_cocher').load());
-            assert.deepStrictEqual(C, [], 'plaques de cocher : pas encore fabriquées (GitHub) → liste vide, sans erreur');
+            // les plaques de cocher sont fabriquées sur GitHub (OpenStreetMap, ODbL) : toutes les lignes du pack, chacune placée et dite « OpenStreetMap »
+            assert.strictEqual(C.length, raw('tf-osm-cocher').rows.length, 'plaques de cocher : toutes les lignes du pack');
+            assert.ok(C.length > 0 && C.every(r => r.base === 'OpenStreetMap' && Number.isFinite(r.lat) && Number.isFinite(r.lon)), JSON.stringify(C.slice(0, 2)));
             const M = await p.evaluate(async () => (await window.LCNDA_EXT.mapLayerSources.find(x => x.id === 'tf_ballons').run({bbox: [0.9, 48.8, 1.4, 49.2]})).features.map(f => f.label));
             assert.ok(M.some(x => /Neptune/.test(x)));
             const Y = await p.evaluate(async () => { const S = window.LCNDA_EXT.dataSources.find(s => s.id === 'tfy_volcans'); const h = document.createElement('div'); await S.run({year: 1816}, h); return h.textContent; });
@@ -173,7 +175,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.evaluate(() => window.LCNDA_EXT.telechF.openSettings());
             await p.waitForSelector('[data-tf-settings-page] [data-tf-tg="ballons"]', {timeout: 20000});
             const st = await p.textContent('[data-tf-settings-page]');
-            assert.match(st, /CC BY-SA 4\.0/); assert.match(st, /CC0/); assert.match(st, /NOAA/); assert.match(st, /À fabriquer sur GitHub/); assert.match(st, /rien ne part sur Internet/);
+            assert.match(st, /CC BY-SA 4\.0/); assert.match(st, /CC0/); assert.match(st, /NOAA/); assert.match(st, /Plaques de cocher \(OpenStreetMap\).*ODbL 1\.0 — © les contributeurs d’OpenStreetMap/); assert.match(st, /rien ne part sur Internet/); // OpenStreetMap fabriqué sur GitHub (avant : « À fabriquer sur GitHub »)
             await p.click('[data-tf-tg="ballons"] input');
             assert.strictEqual(await p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-telech-f')).ballons), false);
             const [, , txt] = await into('personInto', 1); assert.ok(!/Neptune/.test(txt), 'éteint : plus de ballon');

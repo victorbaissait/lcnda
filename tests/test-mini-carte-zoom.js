@@ -267,7 +267,8 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.ok(!(await p.$('.ld-gps')), 'pas de GPS au départ');
             await p.click('[data-ld-cols]'); await p.check('.ld-ed-form [data-ld-col-gps]'); await p.uncheck('.ld-ed-form input[name="c"][value="from"]'); await p.click('.ld-ed-form button[type="submit"]');
             await p.waitForSelector('.ld-gps');
-            const heads = await p.$$eval('.ld-table thead th', a => a.map(x => x.textContent.trim())); assert.deepStrictEqual(heads, ['Nom', '📍 GPS']);
+            const heads = await p.$$eval('.ld-table thead th', a => a.map(x => x.textContent.trim())); assert.deepStrictEqual(heads, ['Nom', '📍 GPS', 'Prendre']); // + la colonne 📎 🧺 au bout de chaque ligne (app-listes-choix.js, maquette du 2026-11-26)
+            assert.strictEqual(await p.$eval('.ld-table thead th:last-child', th => th.className + '|' + th.querySelector('.sr-only')?.textContent), 'ld-acts|Prendre');
             assert.strictEqual(await p.textContent('[data-ld-gps-show="0"]'), '45,3200 N · 1,7700 E');
             assert.strictEqual(await p.textContent('[data-ld-gps-show="3"]'), '43,7000 N · 7,2700 E');
             assert.match(await p.textContent('[data-ld-row="4"]'), /—/);

@@ -70,7 +70,8 @@ const startServer = async dir => {
         const s = read('assets/js/app.js');
         assert.match(s, /addEventListener\('beforeunload',\(\)=>\{if\(timer\|\|Object\.keys\(pending\.set\)\.length\|\|pending\.remove\.size\)flush\(true\);\}\)/);
         assert.match(s, /const UNSENT='genealogie-settings-unsent'/);
-        assert.match(s, /'genealogie-bg-photo',UNSENT\]/, 'la clé reste sur cet ordinateur');
+        // (avec le secret « genealogie-artist-keys », jeton Discogs / clé TMDb, lui aussi gardé sur cet ordinateur : docs/reglages-inventaire.md)
+        assert.match(s, /'genealogie-bg-photo','genealogie-artist-keys',UNSENT\]/, 'la clé reste sur cet ordinateur');
     });
     await t('statique : petits écarts (7)', async () => {
         const idx = read('index.php'), et = read('assets/js/heritage-edittools.js'), app = read('assets/js/app.js'), css = read('assets/css/app.css');

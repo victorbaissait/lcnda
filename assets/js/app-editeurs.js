@@ -171,7 +171,8 @@
         const ws = document.getElementById('workspace'); let old = document.activeElement;
         if (!old || !ws?.contains(old) || old === ws) return;
         const all = () => [...ws.querySelectorAll(FOCUSABLE)];
-        const sig = el => el.tagName + [...el.attributes].filter(a => /^(data-|name$|type$|id$)/.test(a.name)).map(a => `${a.name}=${a.value}`).sort().join('|');
+        // (sans data-ia-done : app-harmony.js le pose sur chaque bouton un peu après le dessin, l'ancienne case l'a, la nouvelle pas encore)
+        const sig = el => el.tagName + [...el.attributes].filter(a => /^(data-|name$|type$|id$)/.test(a.name) && a.name !== 'data-ia-done').map(a => `${a.name}=${a.value}`).sort().join('|');
         const isText = el => 'value' in el && !/^(checkbox|radio)$/.test(el.type || '');
         // l'ancienne page, vue au moment de l'enregistrement : place de chaque case (signature + rang) et ce qu'elle contenait
         const place = new Map(), atSave = new Map(), seen = {};

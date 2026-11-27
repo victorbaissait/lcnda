@@ -1,6 +1,6 @@
 # LCNDA — Le Carnet numérique des ancêtres : la FAQ complète
 
-> 941 questions et réponses, par thème (version 0.10.0). Page : carnet-numerique-des-ancetres.php#faq
+> 956 questions et réponses, par thème (version 0.10.0). Page : carnet-numerique-des-ancetres.php#faq
 
 ## Fiches
 
@@ -46,7 +46,7 @@ Carte → « 🏛 Frontières ▾ » : coche « Provinces d’Ancien Régime »,
 
 ### Où sont les frontières anciennes (communes disparues) ?
 
-Elles sont livrées avec l’app : deux fichiers officiels de l’INSEE (Code officiel géographique 2026, Licence Ouverte 2.0, 5,5 Mo), installés tout seuls et vérifiés par leur empreinte, sans Internet, pour toutes tes généalogies. Réglages → « 🏛 Frontières anciennes » montre leur taille, leur empreinte et leur licence ; « ⤓ Installer les frontières anciennes » les remet si tu les as retirées. Les anciens noms des communes aident aussi le menu de choix des lieux (« anc. « … » »). « 🗑 Retirer » les enlève, avec « ↶ Annuler ».
+Elles sont livrées avec l’app : deux fichiers officiels de l’INSEE (Code officiel géographique 2026, Licence Ouverte 2.0, 5,5 Mo), installés tout seuls et vérifiés par leur empreinte, sans Internet, pour toutes tes généalogies. Réglages → « 🏛 Frontières anciennes » montre leur taille, leur empreinte et leur licence ; « 📦 Installer les frontières anciennes » les remet si tu les as retirées. Les anciens noms des communes aident aussi le menu de choix des lieux (« anc. « … » »). « 🗑 Retirer » les enlève, avec « ↶ Annuler ».
 
 ### Comment voir où se concentre un nom de famille, siècle par siècle ?
 
@@ -98,7 +98,7 @@ Dans la fenêtre de l’événement, case « Heure de l’événement » : écri
 
 ### Comment installer le pack complet ou le pack Europe de la météo ?
 
-Réglages → « 🌦 Météo d’autrefois » : un bouton « ⤓ Installer » pour chaque pack (socle, Europe, complet). L’app télécharge le pack depuis la page des données du projet, par morceaux : une barre montre l’avancée, « ⏸ Pause » l’arrête et il reprend où il s’était arrêté, même après avoir fermé l’app. Puis elle le vérifie (son empreinte) et l’installe, avec « ↶ Annuler ». Rien de météo n’est livré avec l’app : seulement de quoi le télécharger. Sans internet, « Importer un fichier… » prend un fichier .lcmeteo déjà téléchargé ou fabriqué (mode d’emploi : docs/METEO.md). « 🗑 Supprimer le pack » le retire (avec « ↶ Annuler »). « ↗ À propos des données » donne chaque source et sa licence.
+Réglages → « 🌦 Météo d’autrefois » : un bouton « 📦 Installer » pour chaque pack (socle, Europe, complet). L’app télécharge le pack depuis la page des données du projet, par morceaux : une barre montre l’avancée, « ⏸ Pause » l’arrête et il reprend où il s’était arrêté, même après avoir fermé l’app. Puis elle le vérifie (son empreinte) et l’installe, avec « ↶ Annuler ». Rien de météo n’est livré avec l’app : seulement de quoi le télécharger. Sans internet, « Importer un fichier… » prend un fichier .lcmeteo déjà téléchargé ou fabriqué (mode d’emploi : docs/METEO.md). « 🗑 Supprimer le pack » le retire (avec « ↶ Annuler »). « ↗ À propos des données » donne chaque source et sa licence.
 
 ### Où voir la météo ailleurs que sur la fiche ?
 
@@ -392,6 +392,50 @@ Le « ＋ » au bout du menu → « ⠿ Ordre du menu » : glisse ⠿ (ou prends
 
 « ＋ » au bout du menu → coche « 📄 Documents » : il arrive à la fin du menu. Tes photos, actes et lettres y sont rangés de A à Z ; rien n’est à ressaisir.
 
+### Que montre le bloc « 🌾 Son terroir » ?
+
+Les produits AOC, AOP et IGP de sa commune (quand son métier s’y rapporte : vigneron, fromager…), les races d’animaux de son pays, la coiffe et le costume de sa région (utile aussi pour dater une photo de famille), les écoles d’autrefois de la commune, et le sens de son prénom et de son nom (Wiktionnaire). Les données sont livrées avec l’app : seul un prénom ou un nom part sur Internet, jamais pour une fiche confidentielle ou une personne vivante. Chaque partie s’allume ou s’éteint dans Réglages → « 🌾 Son terroir ».
+
+### Que montre le bloc « 🪨 Terre et mots de son pays » ?
+
+Le sol de son village (la roche, l’altitude), le nom du village en langue régionale et celui de ses habitants, les villages disparus, les fruits anciens de sa région, les cadrans solaires, quelques mots du français de son coin, les mesures anciennes, les légendes et grandes peurs de son vivant, les grandes affaires de la région (jamais rattachées à ta famille), les fêtes, son nom donné à un astéroïde ou à une rose, et ses homonymes célèbres (en ligne, jamais fusionnés). Chaque partie se règle dans Réglages → « 🪨 Terre et mots du village ».
+
+### Que montre le bloc « 🎡 Le monde de son village » ?
+
+Les spectacles créés l’année de son mariage (sinon de ses 20 ans), les clubs sportifs de sa ville, le Tour de France chez lui, l’Exposition universelle de son temps, les coïncidences de sa vie (né, marié ou mort le jour d’un grand événement), le seigneur de son village avant 1789, les églises disparues et les foires de son pays. On le retrouve sur la fiche d’un village et dans la monographie ; les listes sont dans Listes. Les parties se choisissent dans Réglages → « 🎡 Le monde du village ».
+
+### Que montre le bloc « 🌟 Autour de sa vie » (Wikidata) ?
+
+Les personnes célèbres nées au même endroit (à 50 ans près) ou le même jour, ses homonymes célèbres (même nom, pas forcément de la famille), les grands événements proches pendant sa vie et la chanson à la mode l’année de sa naissance, chaque ligne avec « ↗ Wikidata ». Les données de Wikidata (CC0) sont livrées avec l’app : tout marche sans Internet, seuls les liens ↗ ouvrent le web. Quand tu tapes un lieu, une petite ligne reconnaît aussi un ancien nom (« Lemberg » → Lviv). Réglages → « 🌟 Wikidata » : l’interrupteur, ce qu’on montre, la distance.
+
+### À quoi sert le bloc « 🔎 Ce qui le concerne » ?
+
+Il réunit ce que les données de l’app peuvent dire d’une personne : les meilleures suggestions d’abord (avec « ↗ source »), le reste sous « ▸ voir les N ». « ✓ Garder » met une suggestion sur sa fiche en un clic (en note avec sa source, en source seule ou en événement « contexte ») ; « ＋ Ajouter aussi à… » la recopie chez son conjoint, ses enfants, ses parents… ; « ✗ Pas utile » la cache. « ⤢ Tout voir » ouvre le rapport complet (La personne, Ses lieux, Son époque, À chercher) et propose d’installer ce qui manque. Sur la fiche d’un village : « Ce qui concerne ce lieu ».
+
+### Comment masquer le lien de parenté affiché en haut de la fiche ?
+
+Menu ⋯ de la fiche → « 🧭 Masquer le lien de parenté » (puis « Afficher le lien de parenté » pour le remettre). Le choix vaut pour toutes les fiches et reste retenu ; « ↶ Annuler » est proposé tout de suite.
+
+### Que montre le bloc « 🔔 Objets et traces » ?
+
+Les cloches de sa commune et leurs inscriptions (parrain, marraine, curé… quand on y lit un nom de ta base), les objets du village dans les musées, les plantes cueillies dans sa commune de son vivant (herbiers), les plaques et stèles, les contes et chansons recueillis près de chez lui, les pèlerinages de sa région, les hospices près du lieu de sa mort et, pour une femme, les couvents proches à ses 20 ans. Seuls le code INSEE, la position ou le nom de la commune partent sur Internet, rien pour une fiche vivante ou confidentielle. Réglages → « 🔔 Objets et traces ».
+
+### Que montre « ⚖️ Les règles de sa vie », et où sont les aides pour lire les actes ?
+
+Sur la fiche : la coutume de son pays avant 1789 (et ce qu’elle disait du partage de l’héritage), l’impôt du sel de son vivant, son mariage et les temps clos (Avent, Carême), les dictons de son jour de naissance, le vent et le « pays » traditionnel de sa commune. Dans 📖 Aide à la lecture : les abréviations latines (Cappelli), les modèles d’écriture de l’époque, le sens des mots anciens (en ligne) et « 📅 Fête → date » (« le jour de la Saint-Martin 1702 » → la date exacte). Réglages → « ⚖️ Règles et actes ».
+
+### Comment voir le village de mon ancêtre comme il le voyait ?
+
+Bloc « 🖼️ Son village comme il le voyait » : les tableaux des musées qui représentent sa commune (ceux peints de son vivant), les photos anciennes (1850–1950) avec la plus proche de ses 20 ans, le village vu d’avion vers 1950 à côté d’aujourd’hui, les bois de 1850 (vivait-il en lisière d’un bois disparu ?) et, à la demande, ce qu’on voyait de chez lui, les traces cachées du relief laser et les maisons de son temps encore debout. Chaque lieu est demandé en ligne une fois, puis gardé ; rien pour une fiche confidentielle ou une personne vivante. Réglages → « 🖼️ Voir son village ».
+
+### Que montre « ⛰️ Sa terre et ses gens » ?
+
+Les dangers de sa terre (avalanches, glissements de terrain, carrières pour un carrier, volcans qui ont gâché les récoltes, épaves au large pour un marin) et les gens et les lieux autour de lui : la carte de son nom (décès INSEE déjà importés), les relais de poste sur sa route, le temps de marche jusqu’à son conjoint (relief compris), la parcelle d’un lieu-dit sur le cadastre d’aujourd’hui, son village d’Algérie, le patrimoine du Québec, le Dictionnaire historique de la Suisse et le recensement américain de 1950. Réglages → « ⛰️ Sa terre et ses gens ».
+
+### Comment faire la fiche d’un château ou d’une église ?
+
+Sur la fiche d’un village ou dans la monographie : « 🏰⛪ Les édifices de la commune » → « ＋ Faire une fiche » (aussi depuis la petite fiche d’un château de Wikidata, ou depuis un acte : « 🔗 Relier à une fiche ? » quand l’adresse parle d’un château ou d’une église). La fiche réunit son histoire, ses seigneurs ou ses curés, les actes de ta famille qui s’y sont passés, ses registres, ses objets protégés et ses sources ; ce qui vient de Wikidata ou de Mérimée n’est recopié que sur ton clic. Toutes tes fiches : Réglages → « 🏰⛪ Fiches des édifices ».
+
 ## Graphiques et statistiques
 
 ### Comment envoyer une carte ou une image retouchée dans le Montage vidéo ou le Studio d’animation ?
@@ -500,7 +544,7 @@ Dans la carte colorée par zones, Réglages → « Niveau de détail » → « C
 
 ### Comment voir sur une carte où sont nés (ou mariés, décédés) mes ancêtres, un point par événement ?
 
-Dans « ＋ Nouveau diagramme », groupe « Cartes » : 📍 la carte en points (un point par événement, coloré selon la sorte ou le siècle ; les points d’un même lieu s’écartent en spirale) ou ⬢ la carte en hexagones (la carte découpée en alvéoles égales, plus foncées là où il y a plus d’événements ; taille des alvéoles dans Réglages). Onglet « Depuis l’app » : naissances, décès, mariages, résidences ou une sorte d’événement, seulement tes ancêtres, entre deux années ; les lieux sans coordonnées sont retrouvés dans les communes de France, et « 🔎 Retrouver les lieux sans position » cherche les autres. Un clic sur un point ou une alvéole ouvre la fiche, ou la liste des personnes.
+Dans « ＋ Nouveau diagramme », groupe « Cartes » : 📍 la carte en points (un point par événement, coloré selon la sorte ou le siècle ; les points d’un même lieu s’écartent en spirale) ou ⬢ la carte en hexagones (la carte découpée en alvéoles égales, plus foncées là où il y a plus d’événements ; taille des alvéoles dans Réglages). Onglet « Depuis l’app » : naissances, décès, mariages, résidences ou une sorte d’événement, seulement tes ancêtres, entre deux années ; les lieux sans coordonnées sont retrouvés dans les communes de France, et « 🔍 Retrouver les lieux sans position » cherche les autres. Un clic sur un point ou une alvéole ouvre la fiche, ou la liste des personnes.
 
 ### Comment faire une carte déformée, où les départements grossissent selon le nombre d’ancêtres ?
 
@@ -1942,7 +1986,7 @@ Non. 👥 Héritiers → « 💶 En euros » : tu tapes l’actif net donné par
 
 ### Comment écrire à tous les héritiers d’un coup ?
 
-✉️ Héritiers contactés → « ✉️ Courrier à plusieurs… » : coche les héritiers (ceux sans adresse, 🔎 introuvables ou 🔇 qui ne répondent pas sont décochés et signalés), choisis un modèle ou un des tiens, clique sur un champ ({civilité}, {nom}, {adresse}…) pour l’insérer, regarde chaque lettre dans « Aperçu » (retouche possible d’une seule). Puis 🖨 imprimer, 📝 traitement de texte, ou « 📋 Ranger dans le Registre de courriers » : tout est rangé d’un coup, avec la relance, et « ↶ Annuler » les enlève d’un coup. Le nom du défunt n’est jamais un champ. « ＋ Enregistrer comme modèle » garde ta lettre pour tous les dossiers de cette généalogie.
+✉️ Héritiers contactés → « ✉️ Courrier à plusieurs… » : coche les héritiers (ceux sans adresse, 🔎 introuvables ou 🔇 qui ne répondent pas sont décochés et signalés), choisis un modèle ou un des tiens, clique sur un champ ({civilité}, {nom}, {adresse}…) pour l’insérer, regarde chaque lettre dans « Aperçu » (retouche possible d’une seule). Puis 🖨 imprimer, 📝 traitement de texte, ou « 📮 Ranger dans le Registre de courriers » : tout est rangé d’un coup, avec la relance, et « ↶ Annuler » les enlève d’un coup. Le nom du défunt n’est jamais un champ. « ＋ Enregistrer comme modèle » garde ta lettre pour tous les dossiers de cette généalogie.
 
 ### Que protège le mot de passe d’une généalogie ?
 
@@ -1974,7 +2018,7 @@ Dossier → 👥 Héritiers → « ⚰️ Vérifier les décès » : les hériti
 
 ### Comment envoyer un questionnaire à un héritier ?
 
-✉️ Héritiers contactés → « 📋 Questionnaire… » : coche les héritiers et ce que tu demandes. Le fichier .html s’ouvre d’un double-clic, sans internet ; l’héritier te renvoie ses réponses. « ⤒ Importer des réponses… » les montre champ par champ : rien n’est écrit sans ta revue, et un fichier modifié est refusé.
+✉️ Héritiers contactés → « 📝 Questionnaire… » : coche les héritiers et ce que tu demandes. Le fichier .html s’ouvre d’un double-clic, sans internet ; l’héritier te renvoie ses réponses. « ⤒ Importer des réponses… » les montre champ par champ : rien n’est écrit sans ta revue, et un fichier modifié est refusé.
 
 ### Où noter mes appels et mes échanges avec les héritiers ?
 
@@ -2066,7 +2110,7 @@ Une autre fiche de ta base porte le même nom, née à quelques années près da
 
 ### Où voir d’un coup tous les points douteux de ma généalogie ?
 
-Listes → Recherche et organisation → 📋 Tous les doutes (ou « Tout voir → » dans Ma semaine) : contrôles, hypothèses ouvertes, liens fragiles, désaccords de preuve, événements sans source. Chaque ligne est lue dans l’outil d’origine, rien n’est copié ; « ↗ » t’y emmène et « 👁 Marquer vu » la met de côté.
+Listes → Recherche et organisation → ❓ Tous les doutes (ou « Tout voir → » dans Ma semaine) : contrôles, hypothèses ouvertes, liens fragiles, désaccords de preuve, événements sans source. Chaque ligne est lue dans l’outil d’origine, rien n’est copié ; « ↗ » t’y emmène et « 👁 Marquer vu » la met de côté.
 
 ### Comment emporter une visite aux archives sur mon téléphone ?
 
@@ -2135,6 +2179,10 @@ La fiche d’un village et la monographie d’une commune ont un bloc « 🖼 Im
 ### Comment noter mes rendez-vous et les anniversaires de la famille ?
 
 Listes → Mon agenda : salons, visites d’archives, rappels, courriers, circuits, au jour, à la semaine, au mois… Listes → Calendrier de la famille : les événements des fiches au jour, au mois ou à l’année, avec un mode « anniversaires » et la date dans d’autres calendriers (julien, républicain…).
+
+### Comment chercher dans les jeux de données de l’app (Listes → Données) ?
+
+Listes → « 🧰 Données » : chaque jeu de données (châteaux, écoles, foires, épaves…) a sa liste, avec la même façon de chercher partout : critères combinés, « 📅 Période » (en l’an, entièrement entre, qui touche), « 📍 Autour de » une commune à N km, recherche libre, tri, Tableau ou 🗺 Carte, ⤓ Exporter (CSV), 🖨 Imprimer et recherches enregistrées (★). Un pack pas encore installé propose « 📦 Installer ». « 🔍 Chercher dans toutes les données » liste, pour une personne, un lieu ou une année, chaque donnée qui peut en parler.
 
 ## Lieux et cartes
 
@@ -2244,7 +2292,7 @@ Sur sa fiche, bloc « 🏆 Concours et récompenses » → « 🔍 Léonore » :
 
 ### Où trouver le registre matricule d’un ancêtre, et quelle est sa classe ?
 
-Sur sa fiche, bloc « Militaire » ou « Poilu 14-18 » → « 📋 Registre matricule » : l’app calcule sa classe (l’année de ses 20 ans : né en 1892 → classe 1912) et le département où il vivait à 20 ans, puis ouvre le site des Archives de ce département (liste des Archives départementales de l’app) ou la base de noms de FranceArchives. Les registres sont rangés par classe puis par bureau de recrutement. Importe ensuite la page (image) : tu recopies à côté le numéro, la classe, le bureau, le signalement (cheveux, yeux, taille, instruction), les campagnes, les blessures et les adresses successives ; seules les cases vides du bloc Militaire sont remplies.
+Sur sa fiche, bloc « Militaire » ou « Poilu 14-18 » → « 🪖 Registre matricule » : l’app calcule sa classe (l’année de ses 20 ans : né en 1892 → classe 1912) et le département où il vivait à 20 ans, puis ouvre le site des Archives de ce département (liste des Archives départementales de l’app) ou la base de noms de FranceArchives. Les registres sont rangés par classe puis par bureau de recrutement. Importe ensuite la page (image) : tu recopies à côté le numéro, la classe, le bureau, le signalement (cheveux, yeux, taille, instruction), les campagnes, les blessures et les adresses successives ; seules les cases vides du bloc Militaire sont remplies.
 
 ### Comment retrouver un décret de naturalisation, un acte de notaire, un marin, un déporté ou la notice d’une église ?
 
@@ -2481,6 +2529,18 @@ Carte → « 📍 Lieux à placer » (ou le tableau de bord → « Communes à c
 ### Comment faire des chandeliers avec les naissances, les décès ou les mariages de ma base ?
 
 Nouveau diagramme → « 🕯 Chandeliers » → onglet « Depuis l’app » → « Graphique » : « Naissances par an », « Décès par an » ou « Mariages par an ». Chaque bougie est une décennie : le nombre de la première année (ouverture), celui de la dernière (clôture), l’année la plus basse et la plus haute. Une mèche très haute dans les décès montre une année de crise. Les guerres et les épidémies connues s’ajoutent en bandes. Tout reste modifiable dans l’onglet Données.
+
+### Comment créer un territoire à partir de communes ?
+
+Carte → case « 🧩 Mes territoires » → « gérer » (ou, dans le dessin vectoriel, menu Plan → « 🧩 Territoire à partir de communes… »). Choisis les communes en cherchant un nom ou un code, en cliquant sur la carte, « toutes les communes de » un département, un arrondissement ou un canton, ou depuis les lieux de ta base : leurs limites communes s’effacent. Donne-lui un nom, une couleur, des hachures, une étiquette ; il se garde et se modifie plus tard. Il se pose sur la Carte, dans les cartes des diagrammes et dans le dessin, et sert de filtre « dans le territoire » dans les Listes.
+
+### Comment poser des données ouvertes sur une carte ?
+
+Sur une carte des diagrammes (Graphiques → Cartes) : « ＋ Données » ; dans le dessin vectoriel : menu Plan → « ＋ Données ouvertes sur le plan (séismes, châteaux, lieux…)… ». Choisis une source (un jeu de données des Listes, tes territoires, les frontières des pays d’une année, les lieux de ta base, les séismes, les stations météo…), des filtres (texte, années, catégorie, autour d’un lieu, dans un territoire) et un style. La couche a sa ligne de légende et la mention de sa source, se garde avec le diagramme et part avec l’export.
+
+### Comment ranger ou masquer les parties de la monographie de commune ?
+
+Graphiques → Monographie de commune → « ⚙︎ Personnaliser » : glisse ⠿ (ou ↑ ↓) pour l’ordre, décoche pour masquer, « ↶ Réinitialiser » pour revenir au départ ; pour toutes les communes ou « seulement pour cette commune ». L’impression et l’export suivent l’ordre choisi ; une partie vide pour cette commune est passée toute seule.
 
 ## Documents
 
@@ -2966,11 +3026,11 @@ Dans le bloc Médias de la fiche (bouton « ＋ »). Pour un dossier entier qui 
 
 ### Quelle taille de photo, de scan, de son ou de vidéo puis-je ajouter ?
 
-Réglages → « 📎 Fichiers des médias » : au plus 100 Mo (conseillé) pour une image ou un document (25, 50, 100, 200 ou 500 Mo), et 250 Mo (conseillé) pour un son ou une vidéo (jusqu’à 2 Go). Un fichier plus gros est refusé, avec un message qui le dit (par exemple « img003.jpg dépasse 100 Mo… »). Ce que ça implique : chaque fichier est copié dans ta généalogie, il prend donc sa place sur le disque ; les sauvegardes complètes (et la copie chez un cousin) deviennent plus lourdes et plus longues ; l’ouvrir demande plus de mémoire. Le téléphone par le wifi garde ses propres limites. Chaque changement se défait avec « ↶ Annuler ».
+Réglages → « 📁 Fichiers des médias » : au plus 100 Mo (conseillé) pour une image ou un document (25, 50, 100, 200 ou 500 Mo), et 250 Mo (conseillé) pour un son ou une vidéo (jusqu’à 2 Go). Un fichier plus gros est refusé, avec un message qui le dit (par exemple « img003.jpg dépasse 100 Mo… »). Ce que ça implique : chaque fichier est copié dans ta généalogie, il prend donc sa place sur le disque ; les sauvegardes complètes (et la copie chez un cousin) deviennent plus lourdes et plus longues ; l’ouvrir demande plus de mémoire. Le téléphone par le wifi garde ses propres limites. Chaque changement se défait avec « ↶ Annuler ».
 
 ### Pourquoi « Mieux voir », la lecture ou la retouche ne traitent-ils pas une très grande image ?
 
-Pour travailler sur une image, l’ordinateur la déplie en entier dans sa mémoire : 120 millions de points (12 000 × 10 000) demandent déjà environ un demi-gigaoctet. Au-delà de la limite (Réglages → « 📎 Fichiers des médias », 120 millions de points conseillés, de 50 à 300), l’image est bien gardée et s’affiche, mais les vignettes du serveur, « 🎚️ Mieux voir », « ✨ Lire ▾ », l’Atelier de transcription et la retouche ne la traitent pas, avec un message clair. Pour la traiter quand même : monte la limite si l’ordinateur a beaucoup de mémoire, ou ajoute une version réduite de l’image.
+Pour travailler sur une image, l’ordinateur la déplie en entier dans sa mémoire : 120 millions de points (12 000 × 10 000) demandent déjà environ un demi-gigaoctet. Au-delà de la limite (Réglages → « 📁 Fichiers des médias », 120 millions de points conseillés, de 50 à 300), l’image est bien gardée et s’affiche, mais les vignettes du serveur, « 🎚️ Mieux voir », « ✨ Lire ▾ », l’Atelier de transcription et la retouche ne la traitent pas, avec un message clair. Pour la traiter quand même : monte la limite si l’ordinateur a beaucoup de mémoire, ou ajoute une version réduite de l’image.
 
 ### Comment éclaircir ou retoucher une vieille photo ?
 
@@ -3482,7 +3542,7 @@ Avant le GEDCOM « Pour partager » et « 🌐 Pour Geneanet », l’app compte 
 
 ### Comment se servir du tableur ?
 
-Listes → 🛠️ Outils de modification → « 🧾 Tableur », puis « ＋ Nouveau classeur » (ou « 📋 Partir d’un modèle »). Clique une case et tape : un nombre, un texte, une date d’acte (« vers 1784 », « an II »), ou une formule qui commence par « = » (=SOMME(D2:D9)). Pendant une formule, clique ou glisse sur des cases pour les y mettre ; la liste des fonctions s’ouvre dès les premières lettres (Tab pour compléter). Les feuilles sont en bas (＋, double-clic pour renommer, clic droit pour dupliquer ou supprimer). Dans la barre du bas : à gauche la feuille et la case (avec la somme, la moyenne et le nombre de la sélection — clic pour choisir ce qu’on y voit), au milieu une aide, à droite le zoom. ↶ ↷ défont et refont tout ; « 💾 Enregistrer » range le classeur dans la liste.
+Listes → 🛠️ Outils de modification → « 🧾 Tableur », puis « ＋ Nouveau classeur » (ou « 🧩 Partir d’un modèle »). Clique une case et tape : un nombre, un texte, une date d’acte (« vers 1784 », « an II »), ou une formule qui commence par « = » (=SOMME(D2:D9)). Pendant une formule, clique ou glisse sur des cases pour les y mettre ; la liste des fonctions s’ouvre dès les premières lettres (Tab pour compléter). Les feuilles sont en bas (＋, double-clic pour renommer, clic droit pour dupliquer ou supprimer). Dans la barre du bas : à gauche la feuille et la case (avec la somme, la moyenne et le nombre de la sélection — clic pour choisir ce qu’on y voit), au milieu une aide, à droite le zoom. ↶ ↷ défont et refont tout ; « 💾 Enregistrer » range le classeur dans la liste.
 
 ### Comment agrandir la grille, changer la police ou régler le tableur ?
 
@@ -3558,7 +3618,7 @@ Au-dessus d’une liste (Listes) : « ⤓ Exporter ▾ » → « 🧾 Ouvrir dan
 
 ### Comment remplir le tableur avec les données de ma généalogie ?
 
-Dans le tableur : Données → « ⤒ Remplir depuis l’app… ». 1. Ce qu’on prend : 👥 Personnes ou 📅 Événements (avec la barre habituelle : 🔍 Chercher, Filtrer ▾ par sexe, Sosa, lieu de naissance, étiquette, années), 🏠 Recensements (une commune, une année), 📜 Relevés de dépouillement, 📈 Statistiques (prénoms, métiers, âges au décès…) ou 📋 Mes listes. 2. Les colonnes : range-les avec ⠿, retire-les avec ✕, « ＋ Une colonne tirée des données » en ajoute (père, mère, conjoint, nationalité…). 3. L’aperçu, puis « Où » (nouvelle feuille ou à partir de la case choisie) et « ⤒ Remplir N lignes ». Les personnes et les lieux arrivent en pastilles reliées à leur fiche ; une case vide de ces colonnes se remplit avec le menu de choix. « 🔒 Sans les vivants ni les fiches confidentielles » les laisse de côté (toujours en mode consultation).
+Dans le tableur : Données → « ⤒ Remplir depuis l’app… ». 1. Ce qu’on prend : 👥 Personnes ou 📅 Événements (avec la barre habituelle : 🔍 Chercher, Filtrer ▾ par sexe, Sosa, lieu de naissance, étiquette, années), 🏠 Recensements (une commune, une année), 📜 Relevés de dépouillement, 📈 Statistiques (prénoms, métiers, âges au décès…) ou 📑 Mes listes. 2. Les colonnes : range-les avec ⠿, retire-les avec ✕, « ＋ Une colonne tirée des données » en ajoute (père, mère, conjoint, nationalité…). 3. L’aperçu, puis « Où » (nouvelle feuille ou à partir de la case choisie) et « ⤒ Remplir N lignes ». Les personnes et les lieux arrivent en pastilles reliées à leur fiche ; une case vide de ces colonnes se remplit avec le menu de choix. « 🔒 Sans les vivants ni les fiches confidentielles » les laisse de côté (toujours en mode consultation).
 
 ### Que veut dire « Tenir à jour » dans le tableur ?
 
@@ -3570,7 +3630,7 @@ Dans le tableur : Données → « 📤 Envoyer vers la base… » (ou le bouton 
 
 ### Comment préparer un relevé de recensement avec les bonnes colonnes ?
 
-Tableur → « 📋 Partir d’un modèle » → « 🏠 Relevé de recensement ». Le bandeau du haut permet de choisir l’année (1836 → 1936) : les colonnes changent avec elle (âge et « Né(e) vers » calculé jusqu’en 1901 ; année et lieu de naissance, nationalité, patron ensuite) ; tes lignes déjà tapées restent sous le même titre. Choisis la commune avec le menu de choix des lieux, tape le relevé, puis « 📤 Envoyer vers la base… ». Depuis Listes → 📜 Dépouillements, « 🧾 Dans le tableur » ouvre les personnes et foyers d’une page (rue, n°, foyer, nom, prénom, âge, métier, lien), tenus à jour ; l’envoi relie chaque personne relevée à sa fiche. Dans l’Atelier de recherche, « Ajouter un élément du logiciel » → « 🧾 Un classeur » range un classeur (budget, planning, tableau des sources) dans un dossier du projet, et Exporter → « 🧾 Tableau de tous les éléments, dans le tableur » l’ouvre tout de suite.
+Tableur → « 🧩 Partir d’un modèle » → « 🏠 Relevé de recensement ». Le bandeau du haut permet de choisir l’année (1836 → 1936) : les colonnes changent avec elle (âge et « Né(e) vers » calculé jusqu’en 1901 ; année et lieu de naissance, nationalité, patron ensuite) ; tes lignes déjà tapées restent sous le même titre. Choisis la commune avec le menu de choix des lieux, tape le relevé, puis « 📤 Envoyer vers la base… ». Depuis Listes → 📜 Dépouillements, « 🧾 Dans le tableur » ouvre les personnes et foyers d’une page (rue, n°, foyer, nom, prénom, âge, métier, lien), tenus à jour ; l’envoi relie chaque personne relevée à sa fiche. Dans l’Atelier de recherche, « Ajouter un élément du logiciel » → « 🧾 Un classeur » range un classeur (budget, planning, tableau des sources) dans un dossier du projet, et Exporter → « 🧾 Tableau de tous les éléments, dans le tableur » l’ouvre tout de suite.
 
 ### Comment faire mon site web de famille (sans savoir coder) ?
 
@@ -3630,7 +3690,7 @@ Dans l’application de bureau LCNDA : Tableau de bord → 🪟 sur un widget (A
 
 ### Comment écrire une lettre, un récit ou un rapport dans l’app (le traitement de texte) ?
 
-Listes → 🛠️ Outils de modification → « 📝 Traitement de texte », puis « ＋ Nouveau document » ou « 📋 Partir d’un modèle » (lettre aux archives, demande d’acte, récit d’un ancêtre, compte rendu de visite, rapport de recherche, lettre à la famille, transcription d’acte…). Le texte s’écrit sur de vraies pages, avec leurs marges : un paragraphe qui ne tient plus passe à la page suivante. 💾 Enregistrer (⌘S) le range dans la liste ; « ⚙️ Réglages… » permet de l’enregistrer tout seul toutes les quelques minutes.
+Listes → 🛠️ Outils de modification → « 📝 Traitement de texte », puis « ＋ Nouveau document » ou « 🧩 Partir d’un modèle » (lettre aux archives, demande d’acte, récit d’un ancêtre, compte rendu de visite, rapport de recherche, lettre à la famille, transcription d’acte…). Le texte s’écrit sur de vraies pages, avec leurs marges : un paragraphe qui ne tient plus passe à la page suivante. 💾 Enregistrer (⌘S) le range dans la liste ; « ⚙️ Réglages… » permet de l’enregistrer tout seul toutes les quelques minutes.
 
 ### Mes documents passent-ils bien dans Word, LibreOffice ou pandoc ?
 

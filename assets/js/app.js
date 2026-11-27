@@ -6785,17 +6785,18 @@ ${backupSectionHtml()}
         if(tileCatList){
             let draggedCat=null;
             let draggedItem=null;
+            const dragEl=event=>event.target?.nodeType===1?event.target:event.target?.parentElement||tileCatList; // un texte sélectionné qu'on glisse : la cible est un nœud texte (pas de closest)
             tileCatList.addEventListener('dragstart',event=>{
-                const catGrip=event.target.closest('.tile-cat-grip');
+                const catGrip=dragEl(event).closest('.tile-cat-grip');
                 if(catGrip){draggedCat=catGrip.closest('.tile-cat-block');if(!draggedCat)return;draggedCat.classList.add('is-dragging');event.dataTransfer.effectAllowed='move';event.stopPropagation();return;}
-                const itemGrip=event.target.closest('.order-grip');
+                const itemGrip=dragEl(event).closest('.order-grip');
                 if(itemGrip&&!draggedCat){const row=itemGrip.closest('.order-row');if(!row)return;draggedItem=row;draggedItem.classList.add('is-dragging');event.dataTransfer.effectAllowed='move';return;}
                 event.preventDefault();
             });
             tileCatList.addEventListener('dragover',event=>{
                 event.preventDefault();
                 if(draggedCat){const after=getDragAfterElement(tileCatList,event.clientY,'.tile-cat-block');if(after==null)tileCatList.append(draggedCat);else tileCatList.insertBefore(draggedCat,after);renumberTileCategories(tileCatList);return;}
-                if(draggedItem){const targetItems=event.target.closest('.tile-cat-items');if(!targetItems)return;const after=getDragAfterElement(targetItems,event.clientY,'.order-row');if(after==null)targetItems.append(draggedItem);else targetItems.insertBefore(draggedItem,after);$$('.tile-cat-items',tileCatList).forEach(list=>renumberOrderList(list));}
+                if(draggedItem){const targetItems=dragEl(event).closest('.tile-cat-items');if(!targetItems)return;const after=getDragAfterElement(targetItems,event.clientY,'.order-row');if(after==null)targetItems.append(draggedItem);else targetItems.insertBefore(draggedItem,after);$$('.tile-cat-items',tileCatList).forEach(list=>renumberOrderList(list));}
             });
             tileCatList.addEventListener('dragend',()=>{
                 draggedCat?.classList.remove('is-dragging');draggedCat=null;

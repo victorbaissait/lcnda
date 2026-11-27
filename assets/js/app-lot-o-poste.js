@@ -103,7 +103,7 @@
             return [...seen].map(([id, ys]) => { const r = P.relays[id]; if (!r) return null; const yy = [...ys].sort((a, b) => a - b); const m = t1810.get(id);
                 return {name: r[2], insee: r[3], years: yy.join(', '), from: yy[0], to: yy[yy.length - 1], paris1810: m != null ? Math.round(m / 6) / 10 : null, lat: r[0], lon: r[1]}; }).filter(Boolean);
         },
-        fields: [{key: 'name', label: 'Relais', type: 'text'}, {key: 'insee', label: 'Code INSEE', type: 'text'}, {key: 'years', label: 'Années', type: 'text'}, {key: 'paris1810', label: 'Paris en 1810 (h)', type: 'number'}],
+        fields: [{key: 'name', label: 'Relais', type: 'text'}, {key: 'insee', label: 'Code INSEE', type: 'text'}, {key: 'years', label: 'Années', type: 'text'}, {key: 'paris1810', label: 'Paris en 1810', unit: 'h', type: 'number'}],
         period: r => [r.from, r.to], geo: r => [r.lat, r.lon], defaultSort: ['name', 'asc']});
 
     ext.lotOPoste = {load, travel, sentence, timesOf};

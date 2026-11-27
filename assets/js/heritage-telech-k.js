@@ -201,11 +201,25 @@
         .then(m => { const ids = Object.keys(m?.packs || {}); return {pat: ids.filter(i => /^tk-patrimoine_[a-z]{2,5}$/.test(i) && i !== FILES.monde).sort(), mus: ids.filter(i => /^tk-musees_[a-z]{2}$/.test(i)).sort(), man: m}; }));
     let heritageMemo = null, museumMemo = null;
     /** tous les biens protégés installés (patrimoine mondial + les pays), un par clé */
-    const heritage = () => (heritageMemo ||= Promise.all([quiet(load('monde')), packs().then(P => Promise.all(P.pat.map(n => quiet(loadFile(n, patRows)))))]).then(([W, list]) => {
+    const mergeHeritage = ([W, ...list]) => {
         const all = [W, ...list].filter(Boolean), seen = new Map(), regs = {};
         for (const D of all) { Object.assign(regs, D.meta.registers || {}); for (const r of D.rows) { const k = r.key || r.q; const cur = seen.get(k); if (!cur || (cur.pack === 'monde' && r.pack !== 'monde')) seen.set(k, cur ? {...r, hq: cur.hq || r.hq, h: cur.pack === 'monde' && r.pack !== 'monde' ? `${r.h} · ${cur.h}` : r.h} : r); } }
         return {rows: [...seen.values()], registers: regs, files: all.map(D => D.meta)};
-    }));
+    };
+    const heritage = () => (heritageMemo ||= Promise.all([quiet(load('monde')), packs().then(P => Promise.all(P.pat.map(n => quiet(loadFile(n, patRows)))))]).then(([W, list]) => mergeHeritage([W, ...list])));
+    /** près de quelques points seulement (la fiche d'une personne, d'un lieu) : le pack du monde + les pays dont le cadre touche ces points
+     *  (500 000 biens pour le seul Royaume-Uni : tout charger pour une fiche de Corrèze remplissait la mémoire de la page) */
+    const PAT_BOX = {ad: [42.4, 42.7, 1.4, 1.8], at: [46.3, 49.1, 9.5, 17.2], be: [49.5, 51.6, 2.5, 6.5], bg: [41.2, 44.3, 22.3, 28.7], ch: [45.8, 47.9, 5.9, 10.6], cz: [48.5, 51.1, 12.1, 18.9],
+        de: [47.2, 55.1, 5.8, 15.1], dk: [54.5, 57.8, 8, 15.2], ee: [57.5, 59.7, 21.7, 28.3], es: [27.6, 43.8, -18.2, 4.4], fi: [59.7, 70.1, 20.5, 31.6], gb: [49.8, 60.9, -8.7, 1.8],
+        gr: [34.8, 41.8, 19.3, 29.7], hr: [42.3, 46.6, 13.4, 19.5], hu: [45.7, 48.6, 16.1, 22.9], ie: [51.4, 55.4, -10.7, -5.9], is: [63.2, 66.6, -24.6, -13.4], it: [35.4, 47.1, 6.6, 18.6],
+        li: [47, 47.3, 9.4, 9.7], lt: [53.9, 56.5, 20.9, 26.9], lu: [49.4, 50.2, 5.7, 6.6], lv: [55.6, 58.1, 20.9, 28.3], mc: [43.7, 43.8, 7.4, 7.5], mt: [35.8, 36.1, 14.1, 14.6],
+        nl: [50.7, 53.6, 3.3, 7.3], no: [57.9, 71.2, 4.5, 31.2], pl: [49, 54.9, 14.1, 24.2], pt: [32.6, 42.2, -31.3, -6.1], ro: [43.6, 48.3, 20.2, 29.8], se: [55.3, 69.1, 10.9, 24.2],
+        si: [45.4, 46.9, 13.3, 16.7], sk: [47.7, 49.7, 16.8, 22.6]};
+    const touches = (id, pts, r) => { const b = PAT_BOX[id.replace(/^tk-patrimoine_/, '')]; if (!b) return true; // un pays sans cadre connu : chargé (comme avant)
+        return pts.some(({lat, lon}) => { const dLat = r / 111, dLon = r / (111 * Math.max(0.2, Math.cos(lat * Math.PI / 180))); return lat >= b[0] - dLat && lat <= b[1] + dLat && lon >= b[2] - dLon && lon <= b[3] + dLon; }); };
+    const heritageAt = (pts, r) => packs().then(P => { const ids = P.pat.filter(id => touches(id, pts, r)); if (ids.length === P.pat.length) return heritage();
+        const key = ids.join(','); return (atMemo[key] ||= Promise.all([quiet(load('monde')), ...ids.map(n => quiet(loadFile(n, patRows)))]).then(mergeHeritage)); });
+    const atMemo = {};
     const museums = () => (museumMemo ||= packs().then(P => Promise.all(P.mus.map(n => quiet(loadFile(n, museumRows))))).then(list => ({rows: list.filter(Boolean).flatMap(D => D.rows), files: list.filter(Boolean).map(D => D.meta)})));
     const lifeMemo = new Map();
     const lifeOf = id => { const H = ext.histoireAutour; if (H?.lifeOf) return H.lifeOf(id); if (!lifeMemo.has(id)) lifeMemo.set(id, A().api('ha_life', {id}).catch(e => { lifeMemo.delete(id); throw e; })); return lifeMemo.get(id); };
@@ -238,7 +252,8 @@
     const isFrance = e => /^(france|fr)?$/i.test(String(e?.country || '').trim());
     const JOBS = {
         patrimoine: async life => {
-            const H = await heritage(); if (!H.rows.length) return '';
+            const pts = placedEvents(life); if (!pts.length) return '';
+            const H = await heritageAt(pts, radius()); if (!H.rows.length) return '';
             const list = heritageNear(H.rows, life, radius()); if (!list.length) return '';
             const x = list[0];
             const lead = T('{n}, à {k} de {p} : {h}.', {n: `<b>${link(regUrl(x.r.reg, H.registers) || wd(x.r.q), x.r.n)}</b>`, k: esc(kmA(x.km)), p: esc(x.place), h: esc(x.r.h)});
@@ -318,7 +333,7 @@
     async function placePart(kind, place) {
         const ll = placeLL(place), name = place?.name || ''; if (!ll) return '';
         if (kind === 'patrimoine') {
-            const H = await heritage(); const hits = near(H.rows, ll.lat, ll.lon, Math.max(radius(), 10), 60); if (!hits.length) return '';
+            const H = await heritageAt([ll], Math.max(radius(), 10)); const hits = near(H.rows, ll.lat, ll.lon, Math.max(radius(), 10), 60); if (!hits.length) return '';
             const w = hits.find(x => /Q9259/.test(x.r.hq)) || hits[0];
             const lead = hits.length > 1 ? T('{n} biens protégés à moins de {r} km, dont {b} ({k}).', {n: String(hits.length), r: String(Math.max(radius(), 10)), b: `<b>${link(regUrl(w.r.reg, H.registers) || wd(w.r.q), w.r.n)}</b>`, k: esc(kmTxt(w.km))}) : T('Un bien protégé à {k} : {b} ({h}).', {k: esc(kmA(w.km)), b: `<b>${link(regUrl(w.r.reg, H.registers) || wd(w.r.q), w.r.n)}</b>`, h: esc(w.r.h)});
             return row('🏛', `${lead} ${srcLink(wd(w.r.q))}`, LIC.wd(), more(`<ul class="hist-ul tkx-ul">${hits.map(x => heritageLi(x, H.registers)).join('')}</ul>`, hits.length));
@@ -387,7 +402,7 @@
     (ext.dataLists = ext.dataLists || []).push(
         L('tk_patrimoine', 'tk-patrimoine_monde', '🏛', 'Patrimoine protégé du monde (Wikidata)', 'monuments', 'Wikidata (CC0) ; liens vers les registres officiels', 'https://www.wikidata.org/wiki/Property:P1435', 'patrimoine', heritageListRows,
             [F('name', 'Bien'), F('kind', 'Protection', 'enum'), F('year', 'Année', 'year'), F('place', 'Commune', 'place'), F('country', 'Pays', 'enum'), F('register', 'Registre', 'enum'), F('official', 'Fiche officielle', 'url'), F('src', 'Source (Wikidata)', 'url')],
-            {period: r => [r.year, null], geo: r => [r.lat, r.lon], familyColumn: true, open: r => { const u = safeUrl(r.official || r.src); if (u) window.open(u, '_blank', 'noopener'); },
+            {period: r => [r.year, null], geo: r => [r.lat, r.lon], familyColumn: true, heavy: true, open: r => { const u = safeUrl(r.official || r.src); if (u) window.open(u, '_blank', 'noopener'); },
                 merge: {into: 'patrimoine_monde', rank: 2, short: 'Wikidata', row: r => ({key: r.key, year: r.year, lat: r.lat, lon: r.lon, name: r.name, kind: r.kind, place: r.place, country: r.country, register: r.register, url: r.official || r.src})}}),
         L('tk_musees', 'tk-collections', '🖼', 'Musées du monde', 'images', 'Wikidata (CC0) ; The Metropolitan Museum of Art, Open Access (CC0)', 'https://www.wikidata.org/wiki/Q33506', 'musees', museumListRows,
             [F('name', 'Musée'), F('kind', 'Sorte', 'enum'), F('place', 'Commune', 'place'), F('country', 'Pays', 'enum'), F('year', 'Depuis', 'year'), F('web', 'Site', 'url'), F('src', 'Source (Wikidata)', 'url')],
@@ -406,7 +421,7 @@
             [F('name', 'Prénom'), F('male', 'D’homme en', 'enum'), F('female', 'De femme en', 'enum'), F('src', 'Source', 'url')], {group: 'La personne'}));
     // 🔀 la liste réunie « Patrimoine du monde » : Mérimée et le Répertoire du Québec (rang 1), Wikidata (rang 2, par merge ci-dessus)
     const MERGE = {id: 'patrimoine_monde', theme: 'monuments', icon: '🏛', label: T('Patrimoine du monde'), noun: ['bien', 'biens'], columns: ['name', 'kind', 'year', 'place', 'country', 'register'],
-        same: {by: 'key'}, keep: ['name'], familyColumn: true, period: r => [r.year, null], geo: r => [r.lat, r.lon],
+        same: {by: 'key'}, keep: ['name'], familyColumn: true, heavy: true, period: r => [r.year, null], geo: r => [r.lat, r.lon], // heavy : les packs par pays font plus d’un million de biens, pas lus à chaque fiche (app-donnees-plus.js)
         sources: [{list: 'lp_merimee', rank: 1, short: 'Mérimée', row: r => ({key: merimeeKey(r.ref) || `merimee:${r.ref || r.name}`, year: num(r.from), lat: r.lat, lon: r.lon, name: r.name, kind: T(/class/i.test(r.protection || '') ? 'monument historique classé' : 'monument historique inscrit'), place: r.commune, country: 'France', register: 'Mérimée', url: safeUrl(r.url)})},
             {list: 'l10t_quebec', rank: 1, short: 'RPCQ', row: r => ({key: rpcqKey(r.rpcq) || r.url, year: r.year, lat: r.lat, lon: r.lon, name: r.name, kind: r.kind, place: '', country: 'Canada', register: T('Répertoire du patrimoine culturel du Québec'), url: safeUrl(r.rpcq)})}]};
     { const M = ext.dataListMerges = ext.dataListMerges || []; if (!M.some(m => m.id === MERGE.id)) M.push(MERGE); }

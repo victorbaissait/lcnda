@@ -99,7 +99,9 @@ $b = $p->prepare('INSERT INTO cx_baskets(name, folder_id) VALUES(?,?)'); for ($i
 $lo = (int) $p->query("SELECT min(id) FROM cx_baskets WHERE name LIKE 'Grand panier %'")->fetchColumn();
 $it = $p->prepare("INSERT INTO cx_basket_items(basket_id, kind, title, value, position) VALUES(?, 'datum', ?, ?, ?)"); for ($i = 1; $i <= 30000; $i++) { $it->execute([$lo + mt_rand(0, 9999), "Grand élément $i", "valeur $i", $i]); }
 $p->commit(); echo 'ok';`);
-            let t0 = Date.now(); const r = await B.api('cx_basket', {}); const tApi = Date.now() - t0; assert.ok(r.baskets.length > 10000); assert.ok(tApi < 8000, `cx_basket : ${tApi} ms`);
+            // le temps vu par la page (réponse reçue et lue) : sans renvoyer les 25 Mo à Node (Playwright mettait ~10 s à les recopier)
+            const r = await p.evaluate(async () => { const t = performance.now(); const d = await window.LCNDA_APP.api('cx_basket', {}); return {ms: Math.round(performance.now() - t), n: d.baskets.length, f: d.folders.length}; });
+            let t0 = Date.now(); const tApi = r.ms; assert.ok(r.n > 10000, String(r.n)); assert.ok(r.f >= 1000, String(r.f)); assert.ok(tApi < 8000, `cx_basket : ${tApi} ms`);
             t0 = Date.now(); await closeAll(); await B.go('paniers'); await p.waitForSelector('[data-pn] [data-pn-tree] .pn-tr', {timeout: 60000}); const tTab = Date.now() - t0;
             assert.ok(tTab < 30000, `onglet Paniers : ${tTab} ms`);
             t0 = Date.now(); await p.evaluate(() => window.LCNDA_EXT.connexions.openTake({tab: 'basket'})); await p.waitForSelector('.cx-take [data-cx-ttree]', {timeout: 60000}); const tTake = Date.now() - t0;

@@ -170,14 +170,16 @@ function cx_folders(PDO $pdo): array
     $by = []; foreach ($rows as $r) { $by[(int) $r['id']] = $r; }
     $kids = []; foreach ($rows as $r) { $pp = (int) $r['parent_id']; if ($pp && isset($by[$pp])) { $kids[$pp][] = (int) $r['id']; } }
     $nb = []; $ni = [];
-    foreach ($pdo->query('SELECT b.folder_id, count(*) AS nb, (SELECT count(*) FROM cx_basket_items i JOIN cx_baskets b2 ON b2.id=i.basket_id WHERE b2.folder_id=b.folder_id) AS ni FROM cx_baskets b GROUP BY b.folder_id')->fetchAll(PDO::FETCH_ASSOC) as $r) { $nb[(int) $r['folder_id']] = (int) $r['nb']; $ni[(int) $r['folder_id']] = (int) $r['ni']; }
-    $order = []; $depth = []; $path = [];
-    $walk = static function (int $id, int $d, array $pa) use (&$walk, &$order, &$depth, &$path, $kids, $by): void { if (isset($depth[$id])) { return; } $order[] = $id; $depth[$id] = $d; $path[$id] = [...$pa, (string) $by[$id]['name']]; foreach ($kids[$id] ?? [] as $k) { $walk($k, $d + 1, $path[$id]); } };
+    // (une seule requête groupée : 1 000 dossiers × 10 000 paniers restent rapides)
+    foreach ($pdo->query('SELECT b.folder_id, count(DISTINCT b.id) AS nb, count(i.id) AS ni FROM cx_baskets b LEFT JOIN cx_basket_items i ON i.basket_id=b.id GROUP BY b.folder_id')->fetchAll(PDO::FETCH_ASSOC) as $r) { $nb[(int) $r['folder_id']] = (int) $r['nb']; $ni[(int) $r['folder_id']] = (int) $r['ni']; }
+    $order = []; $depth = []; $path = []; $up = [];
+    $walk = static function (int $id, int $d, array $pa, int $from = 0) use (&$walk, &$order, &$depth, &$path, &$up, $kids, $by): void { if (isset($depth[$id])) { return; } $order[] = $id; $depth[$id] = $d; $up[$id] = $from; $path[$id] = [...$pa, (string) $by[$id]['name']]; foreach ($kids[$id] ?? [] as $k) { $walk($k, $d + 1, $path[$id], $id); } };
     foreach ($rows as $r) { $pp = (int) $r['parent_id']; if (!$pp || !isset($by[$pp])) { $walk((int) $r['id'], 0, []); } }
     foreach ($rows as $r) { if (!isset($depth[(int) $r['id']])) { $walk((int) $r['id'], 0, []); } } // une boucle d'une vieille base : quand même listée
-    $sum = static function (int $id, array $m, array $seen = []) use (&$sum, $kids): int { if (isset($seen[$id])) { return 0; } $seen[$id] = 1; $n = $m[$id] ?? 0; foreach ($kids[$id] ?? [] as $k) { $n += $sum($k, $m, $seen); } return $n; };
+    // sous-dossiers compris : additionnés une fois, des feuilles vers le haut (chaque dossier n'est compté que dans le dossier qui l'a amené)
+    $tb = []; $ti = []; foreach (array_reverse($order) as $id) { $tb[$id] = ($tb[$id] ?? 0) + ($nb[$id] ?? 0); $ti[$id] = ($ti[$id] ?? 0) + ($ni[$id] ?? 0); if ($up[$id]) { $tb[$up[$id]] = ($tb[$up[$id]] ?? 0) + $tb[$id]; $ti[$up[$id]] = ($ti[$up[$id]] ?? 0) + $ti[$id]; } }
     return array_map(static fn(int $id) => ['id' => $id, 'name' => (string) $by[$id]['name'], 'icon' => (string) $by[$id]['icon'], 'color' => (string) $by[$id]['color'], 'parent_id' => isset($by[(int) $by[$id]['parent_id']]) ? (int) $by[$id]['parent_id'] : 0,
-        'path' => $path[$id], 'depth' => $depth[$id], 'baskets' => $sum($id, $nb), 'total' => $sum($id, $ni), 'updated_at' => (string) $by[$id]['updated_at']], $order);
+        'path' => $path[$id], 'depth' => $depth[$id], 'baskets' => $tb[$id], 'total' => $ti[$id], 'updated_at' => (string) $by[$id]['updated_at']], $order);
 }
 
 /** un dossier et tous ses sous-dossiers */

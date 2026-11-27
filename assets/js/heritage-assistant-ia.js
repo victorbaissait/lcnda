@@ -408,7 +408,7 @@
             const before = bar.querySelector('#report-problem-open') || bar.querySelector('.status-dot');
             bar.insertBefore(b, before || null);
         }
-        b.hidden = !isOn();
+        b.hidden = !isOn(); // (montré ou caché aussi dans Réglages → Apparence → « Boutons en haut à droite », app-apparence.js)
         if (!isOn() && PANEL?.classList.contains('is-open')) closePanel();
     }
     const hiddenPerson = p => !p?.id || p.kind === 'animal' || p.living_status === 'living' || Number(p.is_private) === 1;
@@ -427,5 +427,5 @@
     if (!register()) document.addEventListener('DOMContentLoaded', register, {once: true});
     const ready = () => { if (document.querySelector('.topbar .topbar-meta') && A().state) topbar(); else setTimeout(ready, 400); };
     ready();
-    ext.assistantIA = {open: openPanel, close: closePanel, openGen, openRecit, openSettings, settings, status, answerHtml};
+    ext.assistantIA = {open: openPanel, close: closePanel, openGen, openRecit, openSettings, settings, status, answerHtml, isOn};
 })(typeof window !== 'undefined' ? window : globalThis);

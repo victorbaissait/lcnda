@@ -267,6 +267,8 @@ echo 'ok';`], {cwd: appRoot, encoding: 'utf8', env: envFor(dir)});
             for (const [name, vp, dark] of [['1440', {width: 1440, height: 900}, false], ['390', {width: 390, height: 844}, false], ['sombre', {width: 1440, height: 900}, true]]) {
                 const ctx = await browser.newContext({viewport: vp, colorScheme: dark ? 'dark' : 'light'});
                 await ctx.route(u => HOSTS.test(u.hostname), route => { external.push(route.request().url()); route.abort(); });
+                // le rappel du jour « 🛟 Pense à une copie hors de cet ordinateur » (6 s après l’ouverture) : déjà vu aujourd’hui ; à 390 px il couvre les boutons des fenêtres
+                await ctx.addInitScript(() => { try { localStorage.setItem('lcnda-offsite-warned', new Date().toISOString().slice(0, 10)); } catch (_) {} });
                 const p = await ctx.newPage(); p.setDefaultTimeout(20000);
                 p.on('pageerror', e => { if (!othersErr(e.message)) errors.push(`${name} : ${e.message}`); });
                 p.on('console', m => { if (m.type() === 'error' && !/favicon|Failed to load resource/.test(m.text())) errors.push(`${name} : ${m.text()}`); });
@@ -309,7 +311,8 @@ echo 'ok';`], {cwd: appRoot, encoding: 'utf8', env: envFor(dir)});
                     const g = await p.evaluate(async () => (await window.LCNDA_APP.api('so4_context', {person_id: 1})).grave);
                     assert.equal(g?.cemetery_name, 'Cimetière du Puy');
                     const undo = await p.$('text=↶ Annuler'); assert.ok(undo, 'message H7 avec ↶ Annuler');
-                    await undo.click(); await p.waitForTimeout(800);
+                    await undo.click();
+                    await p.waitForFunction(async () => (await window.LCNDA_APP.api('so4_context', {person_id: 1})).grave === null, null, {timeout: 15000, polling: 200}).catch(() => {}); // ↶ fini (le serveur), pas un temps fixe
                     assert.equal(await p.evaluate(async () => (await window.LCNDA_APP.api('so4_context', {person_id: 1})).grave), null);
                 });
                 await t(`${name} : 🏘 population d’une commune (saisie aidée « ✓ Compris », courbe)`, async () => {

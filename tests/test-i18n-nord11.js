@@ -290,7 +290,8 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding: 'utf8', e
             assert.equal(r.err, undefined, r.err); assert.equal(Number(r.pid), 2, 'la fiche lue par l’API a toujours son id');
             assert.ok(r.nav.includes('Dasbor') && r.nav.includes('Pengaturan'), r.nav);
             // une autre fiche, par l’adresse : l’id de la langue n’entre pas dans l’adresse
-            await page.evaluate(() => { location.hash = '#personnes/3'; }); await page.waitForTimeout(1200);
+            await page.evaluate(() => { location.hash = '#personnes/3'; });
+            await page.waitForFunction(() => /#3\b/.test(document.querySelector('#workspace .person-page .eyebrow')?.textContent || ''), null, {timeout: 15000}); // la fiche 3 dessinée
             const r2 = await page.evaluate(() => ({cur: window.LCNDA_APP.state.currentPersonId, hash: location.hash, page: document.querySelector('#workspace')?.innerText || ''}));
             assert.equal(Number(r2.cur), 3); assert.ok(/^#personnes\/3(\/|$)/.test(r2.hash), r2.hash); assert.ok(/Louis/.test(r2.page), r2.page.slice(0, 200));
             await page.context().close();
@@ -308,7 +309,7 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding: 'utf8', e
         await t('indonésien : le menu de choix d’une personne trouve « Marie DURAND » et rend une fiche avec son id (nombre)', async () => {
             const page = await open('id');
             await page.evaluate(() => { window.__pk = window.LCNDA_PICKER.openPicker({kind: 'person'}); });
-            await page.waitForSelector('.pk-dialog .pk-input'); await page.fill('.pk-dialog .pk-input', 'Mar'); await page.waitForTimeout(1200);
+            await page.waitForSelector('.pk-dialog .pk-input'); await page.fill('.pk-dialog .pk-input', 'Mar'); await page.waitForSelector('.pk-dialog .pk-item', {timeout: 15000}); // la liste trouvée (recherche après 180 ms + serveur)
             const list = await page.locator('.pk-dialog').innerText();
             assert.ok(/Marie/.test(list) && /DURAND/i.test(list) && /Joseph/.test(list), list.slice(0, 400));
             assert.ok(!/fiches trouvées|Aucune fiche/.test(list), `textes du menu de choix traduits : ${list.slice(0, 300)}`);

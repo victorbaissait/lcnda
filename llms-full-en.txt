@@ -1,6 +1,6 @@
 # LCNDA — The Digital Ancestors' Notebook: the full FAQ
 
-> 941 questions and answers, by topic (version 0.10.0). Page: carnet-numerique-des-ancetres-en.php#faq
+> 956 questions and answers, by topic (version 0.10.0). Page: carnet-numerique-des-ancetres-en.php#faq
 
 ## Records
 
@@ -46,7 +46,7 @@ Map → “🏛 Borders ▾”: tick “Provinces of the Ancien Régime”, “D
 
 ### Where are the old borders (vanished communes)?
 
-They come with the app: two official INSEE files (Code officiel géographique 2026, Licence Ouverte 2.0, 5.5 MB), installed by themselves and checked by their fingerprint, without the Internet, for all your genealogies. Settings → “🏛 Old borders” shows their size, their fingerprint and their licence; “⤓ Install the old borders” puts them back if you removed them. The old names of communes also help the place picker (“formerly “…””). “🗑 Remove” takes them away, with “↶ Undo”.
+They come with the app: two official INSEE files (Code officiel géographique 2026, Licence Ouverte 2.0, 5.5 MB), installed by themselves and checked by their fingerprint, without the Internet, for all your genealogies. Settings → “🏛 Old borders” shows their size, their fingerprint and their licence; “📦 Install the old borders” puts them back if you removed them. The old names of communes also help the place picker (“formerly “…””). “🗑 Remove” takes them away, with “↶ Undo”.
 
 ### How do I see where a surname is concentrated, century by century?
 
@@ -98,7 +98,7 @@ In the event window, “Time of the event” box: write it as in the record (“
 
 ### How do I install the full pack or the Europe pack of the weather?
 
-Settings → “🌦 Weather of the past”: an “⤓ Install” button for each pack (base, Europe, full). The app downloads the pack from the project’s data page, in pieces: a bar shows the progress, “⏸ Pause” stops it and it picks up where it left off, even after you close the app. Then it checks it (its fingerprint) and installs it, with “↶ Undo”. No weather comes with the app: only what is needed to download it. Without internet, “Import a file…” takes a .lcmeteo file you have already downloaded or made (how-to: docs/METEO.md). “🗑 Delete the pack” removes it (with “↶ Undo”). “↗ About the data” gives each source and its licence.
+Settings → “🌦 Weather of the past”: an “📦 Install” button for each pack (base, Europe, full). The app downloads the pack from the project’s data page, in pieces: a bar shows the progress, “⏸ Pause” stops it and it picks up where it left off, even after you close the app. Then it checks it (its fingerprint) and installs it, with “↶ Undo”. No weather comes with the app: only what is needed to download it. Without internet, “Import a file…” takes a .lcmeteo file you have already downloaded or made (how-to: docs/METEO.md). “🗑 Delete the pack” removes it (with “↶ Undo”). “↗ About the data” gives each source and its licence.
 
 ### Where can I see the weather other than on the record?
 
@@ -392,6 +392,50 @@ The “＋” at the end of the menu → “⠿ Menu order”: drag ⠿ (or reac
 
 “＋” at the end of the menu → tick “📄 Documents”: it arrives at the end of the menu. Your photos, records and letters are filed there from A to Z; nothing has to be typed again.
 
+### What does the “🌾 Their terroir” block show?
+
+The PDO and PGI products of their municipality (when their trade relates to them: winegrower, cheesemaker…), the animal breeds of their region, the headdress and costume of their region (also useful for dating a family photo), the schools of the past in the municipality, and the meaning of their first name and surname (Wiktionary). The data comes with the app: only a first name or surname goes on the Internet, never for a confidential record or a living person. Each part is turned on or off in Settings → “🌾 Their terroir”.
+
+### What does the “🪨 Land and words of their country” block show?
+
+The soil of their village (the rock, the altitude), the village’s name in the regional language and the name of its inhabitants, vanished villages, old fruit varieties of their region, sundials, a few words of the French of their area, old measures, legends and great fears of their lifetime, the great criminal cases of the region (never linked to your family), festivals, their name given to an asteroid or a rose, and their famous namesakes (online, never merged). Each part is set in Settings → “🪨 Land and words of the village”.
+
+### What does the “🎡 The world of their village” block show?
+
+Shows premiered in the year of their marriage (otherwise at age 20), the sports clubs of their town, the Tour de France at their home, the World’s Fair of their time, the coincidences of their life (born, married or died on the day of a great event), the lord of their village before 1789, vanished churches and the fairs of their region. You also find it on a village’s record and in the monograph; the lists are in Lists. Choose the parts in Settings → “🎡 The village world”.
+
+### What does the “🌟 Around their life” block (Wikidata) show?
+
+Famous people born in the same place (within 50 years) or on the same day, their famous namesakes (same name, not necessarily family), the great events nearby during their life and the hit song in the year of their birth, each line with “↗ Wikidata”. The Wikidata data (CC0) comes with the app: everything works without the Internet, only the ↗ links open the web. When you type a place, a small line also recognises a former name (“Lemberg” → Lviv). Settings → “🌟 Wikidata”: the switch, what is shown, the distance.
+
+### What is the “🔎 What concerns them” block for?
+
+It gathers what the app’s data can say about a person: the best suggestions first (with “↗ source”), the rest under “▸ see the N”. “✓ Keep” puts a suggestion on their record in one click (as a note with its source, as a source alone or as a “context” event); “＋ Also add to…” copies it to their spouse, children, parents…; “✗ Not useful” hides it. “⤢ See all” opens the full report (The person, Their places, Their time, To look for) and offers to install what is missing. On a village’s record: “What concerns this place”.
+
+### How do I hide the relationship shown at the top of the record?
+
+The record’s ⋯ menu → “🧭 Hide the relationship” (then “Show the relationship” to bring it back). The choice applies to all records and is remembered; “↶ Undo” is offered right away.
+
+### What does the “🔔 Objects and traces” block show?
+
+The bells of their municipality and their inscriptions (godfather, godmother, priest… when a name from your database can be read there), the village’s objects in museums, plants picked in their municipality in their lifetime (herbaria), plaques and steles, tales and songs collected near their home, the pilgrimages of their region, the hospices near the place of their death and, for a woman, the convents nearby at age 20. Only the INSEE code, the position or the name of the municipality goes on the Internet, nothing for a living or confidential record. Settings → “🔔 Objects and traces”.
+
+### What does “⚖️ The rules of their life” show, and where are the aids for reading records?
+
+On the record: the custom of their land before 1789 (and what it said about dividing the inheritance), the salt tax in their lifetime, their marriage and the closed times (Advent, Lent), the sayings of their birthday, the wind and the traditional “pays” of their municipality. In 📖 Reading help: Latin abbreviations (Cappelli), handwriting models of the period, the meaning of old words (online) and “📅 Feast → date” (“le jour de la Saint-Martin 1702” → the exact date). Settings → “⚖️ Rules and records”.
+
+### How can I see my ancestor’s village as they saw it?
+
+The “🖼️ Their village as they saw it” block: museum paintings depicting their municipality (those painted in their lifetime), old photos (1850–1950) with the one closest to age 20, the village seen from the air around 1950 next to today, the woods of 1850 (did they live on the edge of a vanished wood?) and, on request, what could be seen from their home, the hidden traces of the laser relief and the houses of their time still standing. Each place is requested online once, then kept; nothing for a confidential record or a living person. Settings → “🖼️ See their village”.
+
+### What does “⛰️ Their land and its people” show?
+
+The dangers of their land (avalanches, landslides, quarries for a quarryman, volcanoes that ruined the harvests, wrecks offshore for a sailor) and the people and places around them: the map of their name (INSEE deaths already imported), the post relays on their route, the walking time to their spouse (relief included), the parcel of a locality on today’s cadastre, their village in Algeria, Quebec heritage, the Historical Dictionary of Switzerland and the 1950 US census. Settings → “⛰️ Their land and its people”.
+
+### How do I make the record of a castle or a church?
+
+On a village’s record or in the monograph: “🏰⛪ The buildings of the municipality” → “＋ Make a record” (also from the small card of a Wikidata castle, or from a record: “🔗 Link to a record card?” when the address mentions a castle or a church). The record gathers its history, its lords or priests, your family’s records that took place there, its registers, its protected objects and its sources; what comes from Wikidata or Mérimée is only copied when you click. All your records: Settings → “🏰⛪ Building records”.
+
 ## Charts and statistics
 
 ### How do I send a map or a retouched image to Video editing or the Animation studio?
@@ -500,7 +544,7 @@ In the map coloured by area, Settings → “Level of detail” → “Communes 
 
 ### How do I see on a map where my ancestors were born (or married, died), one point per event?
 
-In “＋ New diagram”, “Maps” group: 📍 the point map (one point per event, coloured by kind or by century; the points of the same place spread out in a spiral) or ⬢ the hexagon map (the map cut into equal cells, darker where there are more events; cell size in Settings). “From the app” tab: births, deaths, marriages, residences or one kind of event, only your ancestors, between two years; places without coordinates are found among the communes of France, and “🔎 Find places without a position” looks for the others. A click on a point or a cell opens the record, or the list of people.
+In “＋ New diagram”, “Maps” group: 📍 the point map (one point per event, coloured by kind or by century; the points of the same place spread out in a spiral) or ⬢ the hexagon map (the map cut into equal cells, darker where there are more events; cell size in Settings). “From the app” tab: births, deaths, marriages, residences or one kind of event, only your ancestors, between two years; places without coordinates are found among the communes of France, and “🔍 Find places without a position” looks for the others. A click on a point or a cell opens the record, or the list of people.
 
 ### How do I make a distorted map, where departments grow according to the number of ancestors?
 
@@ -1942,7 +1986,7 @@ No. 👥 Heirs → “💶 In euros”: you type the net assets given by the not
 
 ### How do I write to all the heirs at once?
 
-✉️ Contacted heirs → “✉️ Letter to several heirs…”: tick the heirs (those without an address, 🔎 untraceable or 🔇 not answering are unticked and flagged), choose a template or one of yours, click a field ({civilité}, {nom}, {adresse}…) to insert it, look at each letter in “Preview” (one can be edited on its own). Then 🖨 print, 📝 word processor, or “📋 File in the Letter register”: everything is filed at once, with the follow-up, and “↶ Undo” removes them all at once. The deceased’s name is never a field. “＋ Save as a template” keeps your letter for all the files of this genealogy.
+✉️ Contacted heirs → “✉️ Letter to several heirs…”: tick the heirs (those without an address, 🔎 untraceable or 🔇 not answering are unticked and flagged), choose a template or one of yours, click a field ({civilité}, {nom}, {adresse}…) to insert it, look at each letter in “Preview” (one can be edited on its own). Then 🖨 print, 📝 word processor, or “📮 File in the Letter register”: everything is filed at once, with the follow-up, and “↶ Undo” removes them all at once. The deceased’s name is never a field. “＋ Save as a template” keeps your letter for all the files of this genealogy.
 
 ### What does a family tree’s password protect?
 
@@ -1974,7 +2018,7 @@ File → 👥 Heirs → “⚰️ Check deaths”: the “living” heirs are co
 
 ### How do I send a questionnaire to an heir?
 
-✉️ Heirs contacted → “📋 Questionnaire…”: tick the heirs and what you are asking. The .html file opens with a double-click, without internet; the heir sends you back their answers. “⤒ Import answers…” shows them field by field: nothing is written without your review, and a modified file is refused.
+✉️ Heirs contacted → “📝 Questionnaire…”: tick the heirs and what you are asking. The .html file opens with a double-click, without internet; the heir sends you back their answers. “⤒ Import answers…” shows them field by field: nothing is written without your review, and a modified file is refused.
 
 ### Where do I note my calls and exchanges with the heirs?
 
@@ -2066,7 +2110,7 @@ Another record in your database has the same name, born within a few years in th
 
 ### Where can I see all the doubtful points of my family tree at once?
 
-Lists → Research and organisation → 📋 All doubts (or “See all →” in My week): checks, open hypotheses, fragile links, proof disagreements, events without a source. Each line is read from the original tool, nothing is copied; “↗” takes you there and “👁 Mark as seen” sets it aside.
+Lists → Research and organisation → ❓ All doubts (or “See all →” in My week): checks, open hypotheses, fragile links, proof disagreements, events without a source. Each line is read from the original tool, nothing is copied; “↗” takes you there and “👁 Mark as seen” sets it aside.
 
 ### How do I take an archive visit on my phone?
 
@@ -2135,6 +2179,10 @@ A village record and a municipality monograph have an “🖼 Images of the plac
 ### How do I note my appointments and family birthdays?
 
 Lists → My diary: fairs, archive visits, reminders, letters, tours, by day, by week, by month… Lists → Family calendar: the events of the records by day, by month or by year, with an “anniversaries” mode and the date in other calendars (Julian, Republican…).
+
+### How do I search the app’s datasets (Lists → Data)?
+
+Lists → “🧰 Data”: each dataset (castles, schools, fairs, wrecks…) has its list, with the same way of searching everywhere: combined criteria, “📅 Period” (in the year, entirely between, overlapping), “📍 Around” a municipality within N km, free search, sorting, Table or 🗺 Map, ⤓ Export (CSV), 🖨 Print and saved searches (★). A pack not yet installed offers “📦 Install”. “🔍 Search all the data” lists, for a person, a place or a year, every dataset that can say something about it.
 
 ## Places and maps
 
@@ -2244,7 +2292,7 @@ On their record, “🏆 Competitions and awards” block → “🔍 Léonore�
 
 ### Where do I find an ancestor’s military register, and what is his class?
 
-On his record, “Military” or “Poilu 14-18” block → “📋 Military register”: the app calculates his class (the year he turned 20: born in 1892 → class of 1912) and the department where he lived at 20, then opens the website of that department’s Archives (list of departmental Archives in the app) or FranceArchives’ name database. The registers are arranged by class then by recruitment office. Then import the page (image): you copy alongside the number, the class, the office, the description (hair, eyes, height, education), the campaigns, the wounds and the successive addresses; only the empty boxes of the Military block are filled in.
+On his record, “Military” or “Poilu 14-18” block → “🪖 Military register”: the app calculates his class (the year he turned 20: born in 1892 → class of 1912) and the department where he lived at 20, then opens the website of that department’s Archives (list of departmental Archives in the app) or FranceArchives’ name database. The registers are arranged by class then by recruitment office. Then import the page (image): you copy alongside the number, the class, the office, the description (hair, eyes, height, education), the campaigns, the wounds and the successive addresses; only the empty boxes of the Military block are filled in.
 
 ### How do I find a naturalisation decree, a notarial deed, a sailor, a deportee or the description of a church?
 
@@ -2482,6 +2530,18 @@ Map → “📍 Places to locate” (or the dashboard → “Municipalities to c
 
 New diagram → “🕯 Candlesticks” → the “From the app” tab → “Chart”: “Births per year”, “Deaths per year” or “Marriages per year”. Each candle is a decade: the number for the first year (open), the one for the last year (close), the lowest year and the highest. A very tall wick in the deaths shows a crisis year. Known wars and epidemics are added as bands. Everything stays editable in the “Data” tab.
 
+### How do I create a territory from municipalities?
+
+Map → “🧩 My territories” box → “manage” (or, in the vector drawing, Plan menu → “🧩 Territory from towns…”). Choose the municipalities by searching a name or a code, by clicking on the map, “all the municipalities of” a département, an arrondissement or a canton, or from the places in your database: their shared borders disappear. Give it a name, a colour, hatching, a label; it is kept and can be changed later. It can be placed on the Map, in the diagram maps and in the drawing, and serves as an “in the territory” filter in the Lists.
+
+### How do I put open data on a map?
+
+On a diagram map (Charts → Maps): “＋ Data”; in the vector drawing: Plan menu → “＋ Open data on the plan (earthquakes, castles, places…)…”. Choose a source (a dataset from the Lists, your territories, the country borders of a given year, the places in your database, earthquakes, weather stations…), filters (text, years, category, around a place, in a territory) and a style. The layer has its legend line and the credit of its source, is kept with the diagram and goes with the export.
+
+### How do I arrange or hide the parts of the municipality monograph?
+
+Charts → Municipality monograph → “⚙︎ Customize”: drag ⠿ (or ↑ ↓) for the order, untick to hide, “↶ Reset” to go back to the start; for all municipalities or “only for this municipality”. Printing and export follow the chosen order; a part that is empty for this municipality is skipped automatically.
+
 ## Documents
 
 ### What are the sums and measures written in a record worth today?
@@ -2550,15 +2610,15 @@ Open the Game (games table in the archive room), choose “🧩 Jigsaw” in “
 
 ### How do I play patience (solitaire card games)?
 
-Open the Game, choose “🂠 Patience (card games)” in “Game”, then the game among 131 patiences arranged by family (Klondike, FreeCell, Spider, Yukon, Forty Thieves, Castles and gardens, pairing games). Drag a card (or a sequence) onto another pile, or click it then click where to put it; double-click: onto a foundation; click on the stock: draw. In pairing games (Pyramid, Elevens, Thirteens…), click the cards that go together.
+Open the Game, choose “🂠 Patience (card games)” in “Game”, then the game among 233 patiences arranged by family (Klondike, FreeCell, Spider, Yukon, Forty Thieves, Castles and gardens, pairing games). Drag a card (or a sequence) onto another pile, or click it then click where to put it; double-click: onto a foundation; click on the stock: draw. In pairing games (Pyramid, Elevens, Thirteens…), click the cards that go together.
 
 ### Which patiences have been added?
 
 Twenty-three more, with their rules in the game’s “📖 The rules”: Agnes Sorel, White Horse, Four Seasons, Chameleon, Double Canfield, ForeCell, Fan with cells, Mrs Mop, Black Widow, Three Blind Mice, Gypsy, Irmgard, Queenie, Brisbane, Blockade, Good Fortune, Cadet, Martha, Morehead, Montana (the gaps: you arrange each row from 2 to King by sliding cards into the gaps, “🔀 Redeal” twice), Nestor (pairs of the same value), Pairs and All in a row.
 
-### Quelles autres patiences sont arrivées ensuite ?
+### Which other patience games came next?
 
-Cent deux patiences classiques de plus, chacune avec ses règles dans « 📖 Les règles » de la partie. Famille Klondike et Canfield : Agnès Bernauer, Thumb and Pouch, Pas seul, Les impasses, Huit fois huit, Spike, Alternance, La harpe, La grande harpe, Acme, Le crapaud américain, Canfield bigarré, La duchesse, La porte. Avec des cases libres : Le pingouin, Baker’s Game (Roi seul), Seahaven détendu, Repair, Ocean Towers, Sept par quatre, Sept par cinq, FreeCell défi, FreeCell super défi. Araignées et gitanes : Le scarabée, Queue de scorpion, Scorpion double, Motif de divorce, La tarentule, Araignée à découvert, La harpe de Milligan, La harpe de Lexington, Brunswick, Carlton, Miss Milligan, Millie, L’île d’Elbe, Le mont Olympe. Yukon : La patience australienne, Canberra, Raw Prawn, Rushdike, La discipline chinoise, Solitaire russe double. Les quarante voleurs et leurs cousins : Ali Baba, Cassim, Rang et file, Les As affairés, La cour, Le carré de Napoléon, L’exil de Napoléon, Deuces, La lune décroissante, Les cinquante fameux, Quarante-neuf, Sans limite, Les petits quarante, Le zèbre, Le congrès, Le parlement, Pair et impair, Le cotillon royal. Châteaux, éventails et jardins : Le treize porte-bonheur, La patience portugaise, Bonne mesure, La cruelle, La persévérance, L’éventail en vagues, L’éventail en boîte, L’éventail fascinant, La lampe de minuit, Shamrocks, La maison dans les bois, La maison sur la colline, Bisley, Le cadran du grand-père, Le mur de pierre, La fleur sauvage, L’échiquier, La place forte, Le fort, L’art du siège, La toile de Pénélope, La citadelle, Les rois exilés, Le bastion, La boîte à thé (et ses versions américaine et anglaise). Paires, suites et calculs : Les trois sommets stricts, Golf double, As en haut (5 colonnes), La baronne, Sir Tommy, Le chat dans le coin, La stratégie, Gizeh, Toutânkhamon, La lune bleue, La lune rouge, Le voisin, Isabelle et Quatorze en colonnes.
+One hundred and two more classic patience games, each with its rules in “📖 The rules” of the game. Klondike and Canfield family: Agnes Bernauer, Thumb and Pouch, Pas Seul, Blind Alleys, Eight Times Eight, Spike, Alternations, Harp, Big Harp, Acme, American Toad, Variegated Canfield, Duchess, Gate. With free cells: Penguin, Baker’s Game (King only), Relaxed Seahaven Towers, Repair, Ocean Towers, Seven by Four, Seven by Five, Challenge FreeCell, Super Challenge FreeCell. Spiders and gypsies: Scarab, Scorpion Tail, Double Scorpion, Grounds for a Divorce, Tarantula, Open Spider, Milligan Harp, Lexington Harp, Brunswick, Carlton, Miss Milligan, Millie, Elba, Mount Olympus. Yukon: Australian Patience, Canberra, Raw Prawn, Rushdike, Chinese Discipline, Double Russian Solitaire. Forty Thieves and its cousins: Ali Baba, Cassim, Rank and File, Busy Aces, Courtyard, Napoleon’s Square, Napoleon’s Exile, Deuces, Waning Moon, Famous Fifty, Forty Nine, Unlimited, Little Forty, Zebra, Congress, Parliament, Odd and Even, Royal Cotillion. Castles, fans and gardens: Lucky Thirteen, Portuguese Solitaire, Good Measure, Cruel, Perseverance, Wave Fan, Box Fan, Fascination Fan, Midnight Oil, Shamrocks, House in the Wood, House on the Hill, Bisley, Grandfather’s Clock, Stonewall, Wildflower, Chessboard, Stronghold, Fortress, Siegecraft, Penelope’s Web, Citadel, Exiled Kings, Bastion, Tea Caddy (and its American and English versions). Pairs, sequences and sums: Strict Tri Peaks, Double Golf, Aces Up (5 columns), Baroness, Sir Tommy, Puss in the Corner, Strategy, Giza, Tutankhamun, Blue Moon, Red Moon, Neighbour, Isabel and Fourteen Out.
 
 ### How do I play cards against the computer (Belote, Tarot, Hearts…)?
 
@@ -2966,11 +3026,11 @@ In the Media block of the record (“＋” button). For a whole folder that fil
 
 ### What size of photo, scan, sound or video can I add?
 
-Settings → “📎 Media files”: at most 100 MB (recommended) for an image or a document (25, 50, 100, 200 or 500 MB), and 250 MB (recommended) for a sound or a video (up to 2 GB). A bigger file is refused, with a message saying so (for example “img003.jpg is larger than 100 MB…”). What it means: each file is copied into your family tree, so it takes its room on the disk; full backups (and the copy at a cousin’s) get heavier and slower; opening it needs more memory. The phone over Wi-Fi keeps its own limits. Each change can be undone with “↶ Undo”.
+Settings → “📁 Media files”: at most 100 MB (recommended) for an image or a document (25, 50, 100, 200 or 500 MB), and 250 MB (recommended) for a sound or a video (up to 2 GB). A bigger file is refused, with a message saying so (for example “img003.jpg is larger than 100 MB…”). What it means: each file is copied into your family tree, so it takes its room on the disk; full backups (and the copy at a cousin’s) get heavier and slower; opening it needs more memory. The phone over Wi-Fi keeps its own limits. Each change can be undone with “↶ Undo”.
 
 ### Why don’t “See better”, reading or retouching process a very large image?
 
-To work on an image, the computer unfolds it entirely in its memory: 120 million pixels (12,000 × 10,000) already need about half a gigabyte. Beyond the limit (Settings → “📎 Media files”, 120 million pixels recommended, from 50 to 300), the image is kept and shown, but the server thumbnails, “🎚️ See better”, “✨ Read ▾”, the transcription workshop and retouching don’t process it, with a clear message. To process it anyway: raise the limit if the computer has plenty of memory, or add a reduced version of the image.
+To work on an image, the computer unfolds it entirely in its memory: 120 million pixels (12,000 × 10,000) already need about half a gigabyte. Beyond the limit (Settings → “📁 Media files”, 120 million pixels recommended, from 50 to 300), the image is kept and shown, but the server thumbnails, “🎚️ See better”, “✨ Read ▾”, the transcription workshop and retouching don’t process it, with a clear message. To process it anyway: raise the limit if the computer has plenty of memory, or add a reduced version of the image.
 
 ### How do I brighten or retouch an old photo?
 
@@ -3482,7 +3542,7 @@ Before the GEDCOM “For sharing” and “🌐 For Geneanet”, the app counts 
 
 ### How do I use the spreadsheet?
 
-Lists → 🛠️ Editing tools → “🧾 Spreadsheet”, then “＋ New workbook” (or “📋 Start from a template”). Click a cell and type: a number, a text, a record date (“about 1784”, “an II”), or a formula starting with “=” (=SUM(D2:D9)). While typing a formula, click or drag over cells to put them in; the list of functions opens from the first letters (Tab to complete). Sheets are at the bottom (＋, double-click to rename, right-click to duplicate or delete). In the bottom bar: on the left the sheet and the cell (with the sum, average and count of the selection — click to choose what is shown), in the middle some help, on the right the zoom. ↶ ↷ undo and redo everything; “💾 Save” puts the workbook in the list.
+Lists → 🛠️ Editing tools → “🧾 Spreadsheet”, then “＋ New workbook” (or “🧩 Start from a template”). Click a cell and type: a number, a text, a record date (“about 1784”, “an II”), or a formula starting with “=” (=SUM(D2:D9)). While typing a formula, click or drag over cells to put them in; the list of functions opens from the first letters (Tab to complete). Sheets are at the bottom (＋, double-click to rename, right-click to duplicate or delete). In the bottom bar: on the left the sheet and the cell (with the sum, average and count of the selection — click to choose what is shown), in the middle some help, on the right the zoom. ↶ ↷ undo and redo everything; “💾 Save” puts the workbook in the list.
 
 ### How do I enlarge the grid, change the font or set up the spreadsheet?
 
@@ -3558,7 +3618,7 @@ Above a list (Lists): “⤓ Export ▾” → “🧾 Open in the spreadsheet�
 
 ### How do I fill the spreadsheet with data from my genealogy?
 
-In the spreadsheet: Data → “⤒ Fill from the app…”. 1. What to take: 👥 People or 📅 Events (with the usual bar: 🔍 Search, Filter ▾ by sex, Sosa, place of birth, tag, years), 🏠 Censuses (a municipality, a year), 📜 Index transcriptions, 📈 Statistics (first names, occupations, ages at death…) or 📋 My lists. 2. The columns: order them with ⠿, remove them with ✕, “＋ A column taken from the data” adds one (father, mother, spouse, nationality…). 3. The preview, then “Where” (new sheet or from the chosen cell) and “⤒ Fill N rows”. People and places arrive as chips linked to their record; an empty cell in these columns is filled with the picker. “🔒 Without the living or confidential records” leaves them out (always in View-only mode).
+In the spreadsheet: Data → “⤒ Fill from the app…”. 1. What to take: 👥 People or 📅 Events (with the usual bar: 🔍 Search, Filter ▾ by sex, Sosa, place of birth, tag, years), 🏠 Censuses (a municipality, a year), 📜 Index transcriptions, 📈 Statistics (first names, occupations, ages at death…) or 📑 My lists. 2. The columns: order them with ⠿, remove them with ✕, “＋ A column taken from the data” adds one (father, mother, spouse, nationality…). 3. The preview, then “Where” (new sheet or from the chosen cell) and “⤒ Fill N rows”. People and places arrive as chips linked to their record; an empty cell in these columns is filled with the picker. “🔒 Without the living or confidential records” leaves them out (always in View-only mode).
 
 ### What does “Keep up to date” mean in the spreadsheet?
 
@@ -3570,7 +3630,7 @@ In the spreadsheet: Data → “📤 Send to the database…” (or the button i
 
 ### How do I prepare a census transcription with the right columns?
 
-Spreadsheet → “📋 Start from a template” → “🏠 Census transcription”. The banner at the top lets you choose the year (1836 → 1936): the columns change with it (age and calculated “Born about” until 1901; year and place of birth, nationality, employer after that); rows you have already typed stay under the same heading. Choose the municipality with the place picker, type the transcription, then “📤 Send to the database…”. From Lists → 📜 Record indexes, “🧾 In the spreadsheet” opens the people and households of a page (street, no., household, surname, first name, age, occupation, relation), kept up to date; sending links each transcribed person to their record. In the Research workshop, “Add an item from the software” → “🧾 A workbook” puts a workbook (budget, schedule, table of sources) in a folder of the project, and Export → “🧾 Table of all items, in the spreadsheet” opens it right away.
+Spreadsheet → “🧩 Start from a template” → “🏠 Census transcription”. The banner at the top lets you choose the year (1836 → 1936): the columns change with it (age and calculated “Born about” until 1901; year and place of birth, nationality, employer after that); rows you have already typed stay under the same heading. Choose the municipality with the place picker, type the transcription, then “📤 Send to the database…”. From Lists → 📜 Record indexes, “🧾 In the spreadsheet” opens the people and households of a page (street, no., household, surname, first name, age, occupation, relation), kept up to date; sending links each transcribed person to their record. In the Research workshop, “Add an item from the software” → “🧾 A workbook” puts a workbook (budget, schedule, table of sources) in a folder of the project, and Export → “🧾 Table of all items, in the spreadsheet” opens it right away.
 
 ### How do I make my family website (without knowing how to code)?
 
@@ -3630,7 +3690,7 @@ In the LCNDA desktop app: Dashboard → 🪟 on a widget (Today’s anniversarie
 
 ### How do I write a letter, a story or a report in the app (the word processor)?
 
-Lists → 🛠️ Editing tools → “📝 Word processor”, then “＋ New document” or “📋 Start from a template” (letter to the archives, request for a record, an ancestor’s story, visit report, research report, letter to the family, record transcription…). The text is written on real pages, with their margins: a paragraph that no longer fits moves to the next page. 💾 Save (⌘S) puts it in the list; “⚙️ Settings…” lets you save it on its own every few minutes.
+Lists → 🛠️ Editing tools → “📝 Word processor”, then “＋ New document” or “🧩 Start from a template” (letter to the archives, request for a record, an ancestor’s story, visit report, research report, letter to the family, record transcription…). The text is written on real pages, with their margins: a paragraph that no longer fits moves to the next page. 💾 Save (⌘S) puts it in the list; “⚙️ Settings…” lets you save it on its own every few minutes.
 
 ### Do my documents work well in Word, LibreOffice or pandoc?
 

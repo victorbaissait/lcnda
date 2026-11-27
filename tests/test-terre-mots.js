@@ -72,7 +72,9 @@ const TM = require('../assets/js/heritage-terre-mots.js');
     let chromium; try { ({chromium} = require('playwright')); } catch (_) { ({chromium} = require('/opt/node22/lib/node_modules/playwright')); }
     const {findPhp, phpRuntimeArgs, devBundledPhp} = require('../electron/php-server.js');
     const phpPath = findPhp([devBundledPhp()]) || 'php';
-    const env = {...process.env, GENEALOGY_DATA_DIR: tmp, GENEALOGY_MEDIA_DIR: path.join(tmp, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4', GENEALOGY_TEST: '1', LCNDA_TEST_TM_DIR: net0};
+    const env = {...process.env, GENEALOGY_DATA_DIR: tmp, GENEALOGY_MEDIA_DIR: path.join(tmp, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4', GENEALOGY_TEST: '1', LCNDA_TEST_TM_DIR: net0,
+        LCNDA_TEST_L10V_DIR: path.join(tmp, 'hors-ligne'), LCNDA_TEST_TELECHA_DIR: path.join(tmp, 'hors-ligne')}; // les autres lots qui vont en ligne (Voir son village, Téléchargements A) : hors ligne, pas d’attente du vrai Internet
+    fs.mkdirSync(path.join(tmp, 'hors-ligne'), {recursive: true});
     const P = i => [CO[i][0], CO[i][1], CO[i][2], i];
     const [n1, a1, o1] = P(withNoms), [n2, a2, o2] = P(aff.insee), [n3, a3, o3] = P(lyon.code), [n4, a4, o4] = P(fete.insee);
     const seed = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', String.raw`
@@ -187,7 +189,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TM
             assert.ok(head.includes(Object.values(NOMS.c[withNoms].n)[0]), head); assert.match(head, /🏷️ les /); assert.match(head, /⛰️ \d+ m/);
             await p.waitForSelector('[data-tm-host] [data-tm-part="sol"]', {timeout: 20000});
             const sol = await p.textContent('[data-tm-part="sol"]');
-            assert.match(sol, /m d’altitude/); assert.match(sol, /CC BY 4\.0/); assert.match(sol, /↗ source/);
+            assert.match(sol, /m d’altitude/); assert.match(sol, /CC BY 4\.0/); assert.match(sol, /Source : ↗ .+ · ↗ \S/); // le lien vers la source porte le nom du site (UI.extLink, docs/harmonisation.md)
             assert.ok(await p.$$eval('[data-tm-part="sol"] a[target="_blank"][rel*="noopener"]', a => a.length >= 2));
             if (process.env.TM_SHOT) await p.screenshot({path: path.join(process.env.TM_SHOT, 'village.png'), fullPage: true});
         });
@@ -240,9 +242,11 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TM
             await p.click('[data-tm-clear]');
             await p.waitForFunction(() => /Réponses gardées effacées/.test([...document.querySelectorAll('.ui-toast, .toast')].map(x => x.textContent).join(' ')), null, {timeout: 10000});
             assert.strictEqual(fs.readdirSync(path.join(tmp, 'cache/terre-mots')).filter(f => f.endsWith('.json')).length, 0);
-            await p.click('.ui-toast button:has-text("Annuler"), .toast button:has-text("Annuler")');
-            await sleep(800);
-            assert.ok(fs.readdirSync(path.join(tmp, 'cache/terre-mots')).filter(f => f.endsWith('.json')).length >= 1, '↶ remet les réponses');
+            // le ↶ de CE message (celui de « Le sol » éteint peut être encore affiché au-dessus : 6 s pour tous les messages)
+            await p.locator('.ui-toast, .toast').filter({hasText: 'Réponses gardées effacées'}).last().locator('button:has-text("Annuler")').click();
+            const kept = () => fs.readdirSync(path.join(tmp, 'cache/terre-mots')).filter(f => f.endsWith('.json')).length;
+            for (const end = Date.now() + 15000; kept() < 1 && Date.now() < end;) await sleep(150); // attendre que ↶ ait fini (le serveur), pas un temps fixe
+            assert.ok(kept() >= 1, '↶ remet les réponses');
             await p.evaluate(i => { const A = window.LCNDA_APP; A.state.listType = 'villages'; A.state.hVillage = i; A.setModule('listes'); }, withNoms);
             await p.waitForSelector('.h-village [data-tm-host]', {timeout: 20000}); await sleep(800);
             assert.strictEqual(await p.$('[data-tm-part="sol"]'), null);

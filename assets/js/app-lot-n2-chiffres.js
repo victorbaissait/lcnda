@@ -187,7 +187,13 @@
     const shape = {
         maladies: f => table(f).map(r => ({...r, alt: r.alt || []})), formules: f => table(f).map(r => ({...r, alt: r.alt || []})),
         heimatort: f => f.rows || [], mortalite: f => f.quotes || [], rues: f => f.rows || [], expillyIndex: f => f.rows || []};
-    function fetchPack(name) {
+    // les fichiers fabriqués seulement s'ils existent (tn2-lau, tn2-rues…) : demandés seulement si le sommaire des données les connaît (pas de 404)
+    const OPTIONAL = new Set(['tn2-rues', 'tn2-expilly', 'tn2-lau', 'tn2-it-variazioni', 'tn2-ch-communes', 'tn2-qc-toponymes', 'tn2-lu-communes']);
+    let packsMemo = null;
+    const packIds = () => (packsMemo ||= fetch(`assets/data/manifest.json?v=${DATA_V}`, {credentials: 'same-origin'}).then(r => (r.ok ? r.json() : {packs: {}})).catch(() => ({packs: {}})).then(m => new Set(Object.keys(m?.packs || {}))));
+    async function fetchPack(name) {
+        const pk = name.split('/')[0];
+        if (OPTIONAL.has(pk) && !(await packIds()).has(pk)) return null;
         return fetch(`assets/data/${name}.json.gz?v=${DATA_V}`, {credentials: 'same-origin'})
             .then(r => { if (r.status === 404) return null; if (!r.ok) throw new Error(T('Le fichier {f} est introuvable.', {f: name})); return readMaybeGz(r); });
     }

@@ -163,7 +163,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.evaluate(() => window.LCNDA_EXT.telechG.openSettings());
             await p.waitForSelector('[data-tg-settings-page] [data-tg-tg="forts"]', {timeout: 20000});
             const st = await p.textContent('[data-tg-settings-page]');
-            assert.match(st, /CC BY-SA 4\.0/); assert.match(st, /CC0/); assert.match(st, /À fabriquer sur GitHub/); assert.match(st, /rien ne part sur Internet/); assert.match(st, /octroi/);
+            assert.match(st, /CC BY-SA 4\.0/); assert.match(st, /CC0/); assert.match(st, /Forts \(OpenStreetMap\).*ODbL 1\.0 — © les contributeurs d’OpenStreetMap/); assert.match(st, /rien ne part sur Internet/); assert.match(st, /octroi/); // OpenStreetMap fabriqué sur GitHub (avant : « À fabriquer sur GitHub »)
             await p.click('[data-tg-tg="forts"] input');
             assert.strictEqual(await p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-telech-g')).forts), false);
             const [, , txt] = await into('personInto', 1); assert.ok(!/Il était militaire/.test(txt), 'éteint : plus de forts');

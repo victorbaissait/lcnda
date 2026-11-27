@@ -194,7 +194,8 @@ echo json_encode(compact('other', 'vu', 'sent1', 'steal', 'gone', 'sent2', 'back
         const js = read('assets/js/app-paniers.js');
         assert.match(js, /post\('pn_share_sent', \{basket_id: b\.id\}\)/);
         assert.match(js, /T\('lu le \{d\}', \{d: x\.read\}\)/);
-        assert.match(read('index.php'), /app-paniers\.js\?v=6/);
+        // le ?v= de index.php monte à chaque changement du fichier : au moins celui qui a apporté « Déjà envoyé » (6)
+        const v = Number((read('index.php').match(/app-paniers\.js\?v=(\d+)"/) || [])[1]); assert.ok(v >= 6, `app-paniers.js?v=${v}`);
     });
     try { fs.rmSync(tmp, { recursive: true, force: true }); } catch (_) {}
     finish();

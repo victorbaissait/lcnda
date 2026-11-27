@@ -84,7 +84,9 @@ const TULLE = '19272', GRENOBLE = '38185', RENNES = '35238', PARIS = '75056', AV
     fs.mkdirSync(path.join(tmp, 'media'), {recursive: true}); fs.cpSync(FX, net0, {recursive: true});
     const calls = () => { try { return fs.readFileSync(path.join(net0, 'calls.log'), 'utf8').trim().split('\n').filter(Boolean); } catch (_) { return []; } };
     const phpPath = findPhp([devBundledPhp()]) || 'php';
-    const env = {...process.env, GENEALOGY_DATA_DIR: tmp, GENEALOGY_MEDIA_DIR: path.join(tmp, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4', GENEALOGY_TEST: '1', LCNDA_TEST_L9B_DIR: net0};
+    const env = {...process.env, GENEALOGY_DATA_DIR: tmp, GENEALOGY_MEDIA_DIR: path.join(tmp, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4', GENEALOGY_TEST: '1', LCNDA_TEST_L9B_DIR: net0,
+        LCNDA_TEST_L10V_DIR: path.join(tmp, 'hors-ligne'), LCNDA_TEST_TELECHA_DIR: path.join(tmp, 'hors-ligne')}; // les autres lots qui vont en ligne (Voir son village, Téléchargements A) : hors ligne, pas d’attente du vrai Internet
+    fs.mkdirSync(path.join(tmp, 'hors-ligne'), {recursive: true});
     const seed = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', String.raw`
 require 'lib/paths.php';
 $p0 = new PDO('sqlite:'.DATA_DIR.'/genealogy.sqlite'); $p0->exec(file_get_contents(APP_ROOT.'/data/schema.sql')); $p0 = null;

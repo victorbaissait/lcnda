@@ -158,7 +158,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.evaluate(() => window.LCNDA_EXT.telechH.openSettings());
             await p.waitForSelector('[data-th-settings-page] [data-th-tg="bastides"]', {timeout: 20000});
             const st = await p.textContent('[data-th-settings-page]');
-            assert.match(st, /CC BY-SA 4\.0/); assert.match(st, /CC0/); assert.match(st, /À fabriquer sur GitHub/); assert.match(st, /rien ne part sur Internet/); assert.match(st, /Liens seulement/);
+            assert.match(st, /CC BY-SA 4\.0/); assert.match(st, /CC0/); assert.match(st, /Tracés disparus \(OpenStreetMap\).*ODbL 1\.0 — © les contributeurs d’OpenStreetMap/); assert.match(st, /rien ne part sur Internet/); assert.match(st, /Liens seulement/); // OpenStreetMap fabriqué sur GitHub (avant : « À fabriquer sur GitHub »)
             await p.click('[data-th-tg="bastides"] input');
             assert.strictEqual(await p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-telech-h')).bastides), false);
             const [, , txt] = await into('personInto', 3); assert.ok(!/bastide/.test(txt), 'éteint : plus de bastide');

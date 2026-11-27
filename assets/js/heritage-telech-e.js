@@ -623,9 +623,9 @@
     function registerOuChercher() {
         const M = root.LCNDA_OUC_MONDE; if (!M || !Array.isArray(M.SITES) || M.SITES.some(s => s.key === 'te_farcy_1851')) return !!M;
         M.SITES.push(
-            {key: 'te_farcy_1848', icon: '⚖️', group: 'Monde', label: T('Inculpés de l’insurrection de juin 1848 (base de J.-C. Farcy)'), cats: ['justice'], period: [1848, 1849], access: 'online',
+            {key: 'te_farcy_1848', icon: '⚖️', group: 'Monde', label: T('Inculpés de l’insurrection de juin 1848 (base de J.-C. Farcy)'), cats: ['notaires'], period: [1848, 1849], access: 'online',
                 url: () => FARCY[1848].url, rel: {countries: ['fr'], from: 1848, to: 1849, base: 0.05, why: () => T('Les 11 662 personnes jugées après les journées de Juin à Paris')}},
-            {key: 'te_farcy_1851', icon: '⚖️', group: 'Monde', label: T('Poursuivis à la suite du coup d’État de décembre 1851 (base de J.-C. Farcy)'), cats: ['justice'], period: [1851, 1853], access: 'online',
+            {key: 'te_farcy_1851', icon: '⚖️', group: 'Monde', label: T('Poursuivis à la suite du coup d’État de décembre 1851 (base de J.-C. Farcy)'), cats: ['notaires'], period: [1851, 1853], access: 'online',
                 url: () => FARCY[1851].url, rel: {countries: ['fr'], from: 1851, to: 1853, base: 0.08, why: () => T('Les 26 848 personnes poursuivies après le coup d’État, dans toute la France')}},
             {key: 'te_bss', icon: '🕳', group: 'Monde', label: T('Banque du sous-sol (BRGM) — puits et forages anciens'), cats: ['cartes'], period: [1800, 2025], access: 'online',
                 url: () => URLS.bss, rel: {countries: ['fr'], from: 1800, to: 2025, base: 0.03, why: () => T('Les puits et forages de la commune, avec leur profondeur et leur date')}});

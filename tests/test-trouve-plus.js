@@ -202,8 +202,11 @@ echo json_encode($o, JSON_UNESCAPED_UNICODE);`));
                     if (!again) { await p.evaluate(() => window.LCNDA_EXT.openActTranscriber({ mediaId: 1, filename: 'page-prisonniers.png', title: 'Prisonniers' }));
                         await p.waitForFunction(() => document.querySelector('dialog.h-tx-dlg [data-tx-body]'), null, { timeout: 15000 }); await sleep(400); }
                     await p.evaluate(([t, d]) => { const a = document.querySelector('dialog.h-tx-dlg [data-tx-body]'); a.value = t; a.dispatchEvent(new Event('input')); const f = document.querySelector('dialog.h-tx-dlg [data-tx="date_text"]'); f.value = d; f.dispatchEvent(new Event('input', { bubbles: true })); document.querySelector('dialog.h-tx-dlg [data-tx="source"]').value = 'AD Cher, 3 E 1234'; }, [text, date]);
-                    await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-cmd="detect"]').click());
-                    await p.waitForFunction(() => document.querySelector('[data-tf-card]'), null, { timeout: 10000 }); await sleep(800);
+                    // « 🧭 Repérer » est dans l'étape 3 (l'atelier ne montre que l'étape choisie, audit 14) : on y va, comme on le ferait à la souris
+                    await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-step="find"]')?.click());
+                    await p.waitForSelector('dialog.h-tx-dlg [data-tx-cmd="detect"]', { state: 'visible', timeout: 10000 });
+                    await p.click('dialog.h-tx-dlg [data-tx-cmd="detect"]');
+                    await p.waitForFunction(() => [...document.querySelectorAll('[data-tf-card]')].some(c => c.offsetWidth), null, { timeout: 10000 }); await sleep(800);
                 };
                 await openWith(PAGE1, '1808');
                 out.b1 = await p.evaluate(() => ({ cards: [...document.querySelectorAll('[data-tf-card]')].map(c => ({ name: c.querySelector('.h-tf-name b')?.textContent || '', fields: [...c.querySelectorAll('.h-tf-fields li')].map(li => li.querySelector('.k').textContent + '=' + li.querySelector('.v').textContent) })),

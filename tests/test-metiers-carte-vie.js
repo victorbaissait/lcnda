@@ -183,7 +183,8 @@ echo "ok mc $p2\n";`;
                 assert.ok(await p.locator('.lv-step.is-noplace').count() >= 1);
                 await p.waitForSelector('dialog.lv-dlg .c2-tools [data-c2-t="play"]'); assert.equal(await p.locator('dialog.lv-dlg [data-c2-speed] option').count(), 3);
                 await p.selectOption('dialog.lv-dlg [data-c2-speed]', '900');
-                await p.click('dialog.lv-dlg [data-c2-t="play"]'); await p.waitForTimeout(2200);
+                await p.click('dialog.lv-dlg [data-c2-t="play"]');
+                await p.waitForFunction(() => Number(document.querySelector('dialog.lv-dlg [data-c2-story]')?.dataset.c2Cur) >= 1, null, { timeout: 15000 }).catch(() => {}); // une étape toutes les 0,9 s : on attend la première, pas une durée
                 const cur = Number(await p.getAttribute('dialog.lv-dlg [data-c2-story]', 'data-c2-cur')); assert.ok(cur >= 1, 'la lecture avance : ' + cur);
                 assert.equal(await p.locator('.lv-step.is-active').count(), 1);
                 await p.click('dialog.lv-dlg [data-c2-t="play"]');

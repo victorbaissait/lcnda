@@ -152,7 +152,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.evaluate(() => window.LCNDA_EXT.telechL.openSettings());
             await p.waitForSelector('[data-tlx-settings-page] [data-tlx-tg="crues"]', {timeout: 20000});
             const st = await p.textContent('[data-tlx-settings-page]');
-            assert.match(st, /CC BY 4\.0/); assert.match(st, /CC0/); assert.match(st, /En lien seulement/); assert.match(st, /London Gazette/); assert.match(st, /rien ne part sur Internet/); assert.match(st, /Pas encore fabriqué/);
+            assert.match(st, /CC BY 4\.0/); assert.match(st, /CC0/); assert.match(st, /En lien seulement/); assert.match(st, /London Gazette/); assert.match(st, /rien ne part sur Internet/); assert.match(st, /Mines \(USGS\).*Domaine public \(USGS\)/); assert.match(st, /Bagnards \(Queensland\).*CC BY 4\.0/); // fabriqués sur GitHub (avant : « Pas encore fabriqué »)
             await p.click('[data-tlx-tg="crues"] input');
             assert.strictEqual(await p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-telech-l')).crues), false);
             const [, , off] = await into('personInto', 1); assert.ok(!/1966/.test(off), 'éteint');

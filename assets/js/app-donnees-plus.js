@@ -149,7 +149,7 @@
             (ext.listesReunies?.defs?.() || []).forEach(M => { try { (ext.listesReunies.sourcesOf?.(M) || []).forEach(x => src.add(x.list)); } catch (_) {} });
             for (const [tid, ds] of I?.by.entries() || []) {
                 if (tid === 'aranger') continue;
-                const ok = ds.filter(d => !d.link && d.geo && d.period && !d.query && typeof d.load === 'function');
+                const ok = ds.filter(d => !d.link && d.geo && d.period && !d.query && !d.heavy && typeof d.load === 'function'); // heavy : trop grosse pour être lue à chaque fiche (ex. 🏛 1,7 million de biens protégés) : seulement quand on l’ouvre
                 const inst = []; for (const d of ok) { try { if (await E().isInstalled?.(d)) inst.push(d); } catch (_) { candAt = 0; } } // une vérification ratée : cette liste est sautée, et on revérifie la prochaine fois
                 const mg = inst.filter(d => d.merged);
                 const plain = inst.filter(d => !d.merged && !(mg.length && (src.has(d.id) || d.merge))); // une source déjà dans une liste réunie installée ne compte pas deux fois
