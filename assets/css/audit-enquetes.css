@@ -175,7 +175,7 @@ button.enq-neg-att-dir { border: 0; background: none; color: var(--accent, #2f6f
 :root .investigation-folder.has-color { background: color-mix(in srgb, var(--inv-fc) 16%, #fdf7e3); box-shadow: 5px 5px 0 var(--inv-fc); }
 :root[data-theme="dark"] .investigation-folder.has-color { background: color-mix(in srgb, var(--inv-fc) 22%, #2a2a2a); }
 .investigation-folder.has-color .investigation-folder-open svg { stroke: var(--inv-fc); fill: color-mix(in srgb, var(--inv-fc) 25%, transparent); }
-.investigation-folder-emoji { font-size: 28px; line-height: 30px; height: 30px; }
+.investigation-folder-open .investigation-folder-emoji { font-size: 28px; line-height: 30px; height: 30px; font-style: normal; }
 .investigation-folder-actions .enq-more { min-width: 0; }
 :root .investigation-folder-tree-row.has-color { box-shadow: inset 4px 0 0 var(--inv-fc); }
 :root .investigation-folder.has-color.is-drop-target { box-shadow: 5px 5px 0 var(--blue); }
