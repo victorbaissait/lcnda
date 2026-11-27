@@ -171,3 +171,15 @@ button.enq-neg-att-dir { border: 0; background: none; color: var(--accent, #2f6f
 :root[data-theme="dark"] .enq-kcol { background: #1c1f24; }
 :root[data-theme="dark"] .enq-tpl:has(input:checked), :root[data-theme="dark"] .enq-kcards.is-drop-target { background: #14213a; }
 :root[data-theme="dark"] .enq-chrono.is-running { background: #13261a; color: #b9e6c6; }
+/* 🎨 dossiers de pièces : leur couleur (--inv-fc) et leur icône (app-enquetes.js, askFolder) */
+:root .investigation-folder.has-color { background: color-mix(in srgb, var(--inv-fc) 16%, #fdf7e3); box-shadow: 5px 5px 0 var(--inv-fc); }
+:root[data-theme="dark"] .investigation-folder.has-color { background: color-mix(in srgb, var(--inv-fc) 22%, #2a2a2a); }
+.investigation-folder.has-color .investigation-folder-open svg { stroke: var(--inv-fc); fill: color-mix(in srgb, var(--inv-fc) 25%, transparent); }
+.investigation-folder-emoji { font-size: 28px; line-height: 30px; height: 30px; }
+.investigation-folder-actions .enq-more { min-width: 0; }
+:root .investigation-folder-tree-row.has-color { box-shadow: inset 4px 0 0 var(--inv-fc); }
+:root .investigation-folder.has-color.is-drop-target { box-shadow: 5px 5px 0 var(--blue); }
+.inv-fstyle { margin-top: 4px; }
+.inv-fstyle > summary { cursor: pointer; font-weight: 700; color: var(--muted); font-size: .9em; }
+.inv-fstyle-row { display: flex; gap: 18px; align-items: flex-end; flex-wrap: wrap; margin-top: 8px; }
+.inv-fstyle-row label { display: flex; flex-direction: column; gap: 4px; }

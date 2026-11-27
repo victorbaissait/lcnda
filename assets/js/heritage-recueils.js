@@ -868,7 +868,7 @@
 
     /* ─────────── Dans une fiche, un village, une enquête, un projet : les recueils rattachés ─────────── */
     /** Choix « où le montrer » dans une enquête : partout, à la racine, dans un dossier. */
-    const folderOptions = (folders, current) => `<option value="" ${current == null ? 'selected' : ''}>🌐 Partout dans l’enquête</option><option value="0" ${current === 0 ? 'selected' : ''}>Racine de l’enquête</option>${folders.map(f => `<option value="${f.id}" ${current === f.id ? 'selected' : ''}>${'— '.repeat(f.depth || 0)}📁 ${esc(f.name)}</option>`).join('')}`;
+    const folderOptions = (folders, current) => `<option value="" ${current == null ? 'selected' : ''}>🌐 Partout dans l’enquête</option><option value="0" ${current === 0 ? 'selected' : ''}>Racine de l’enquête</option>${folders.map(f => `<option value="${f.id}" ${current === f.id ? 'selected' : ''}>${'— '.repeat(f.depth || 0)}${esc(f.icon || '📁')} ${esc(f.name)}</option>`).join('')}`;
     function forEntityHtml(rows, type, key, place = null) {
         return `<div class="h-rc-for">${rows.map(r => `<div class="h-rc-for-item"><div class="h-rc-for-head"><button type="button" class="table-link" data-open-recueil="${r.recueil_id}"><strong>${esc(r.icon || '📚')} ${esc(r.title)}</strong></button>
                 <small class="muted">${r.from_num ? (r.to_num && r.to_num !== r.from_num ? i18n('pages {from} à {to}', {from: String(r.from_num), to: String(r.to_num)}) : i18n('page {num}', {num: String(r.from_num)})) : i18n('tout le recueil ({n} p.)', {n: r.total_pages})} · ${r.transcribed > 1 ? i18n('{done}/{all} transcrites', {done: r.transcribed, all: r.pages}) : i18n('{done}/{all} transcrite', {done: r.transcribed, all: r.pages})}${r.reference ? ' · ' + esc(r.reference) : ''}</small>
