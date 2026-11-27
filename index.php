@@ -1455,7 +1455,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-board-shapes.js?v=2" defer></script>
 <script src="assets/js/heritage-board-kit.js?v=31" defer></script>
 <script src="assets/js/heritage-board-shapelib.js?v=2" defer></script>
-<script src="assets/js/heritage-boards.js?v=57" defer></script>
+<script src="assets/js/heritage-boards.js?v=58" defer></script>
 <script src="assets/js/heritage-dnd.js?v=18" defer></script>
 <script src="assets/js/heritage-retouch-rotation.js?v=2" defer></script>
 <script src="assets/js/heritage-studio.js?v=123" defer></script>

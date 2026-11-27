@@ -2708,9 +2708,27 @@
         const owner_type = box.dataset.boardOwner, owner_id = Number(box.dataset.boardKey);
         // ses tableaux, et ceux qui lui sont associés depuis un autre rangement
         let rows = []; try { rows = (await api('boards_linked', {kind: owner_type, id: owner_id})).boards || []; } catch (_) {}
-        box.innerHTML = `<section class="h-bd-host"><div class="h-panel-head"><h3>🧩 Tableaux <small class="muted">${rows.length || ''}</small></h3><button type="button" class="button small secondary" data-bd-hostnew>＋ Nouveau tableau ici</button></div>
+        box.innerHTML = `<section class="h-bd-host"><div class="h-panel-head"><h3>🧩 Tableaux <small class="muted">${rows.length || ''}</small></h3><span class="h-bd-hostacts"><button type="button" class="button small secondary" data-bd-hostadd>${esc(i18n('＋ Un tableau existant…'))}</button> <button type="button" class="button small secondary" data-bd-hostnew>＋ Nouveau tableau ici</button></span></div>
             ${rows.length ? `<div class="h-bd-grid is-small">${rows.map(cardHtml).join('')}</div>` : '<p class="muted">Un tableau libre pour cette recherche : notes, flèches, photos, fiches… Tu peux en faire plusieurs (une « partie » chacun).</p>'}</section>`;
         box.querySelector('[data-bd-hostnew]').addEventListener('click', () => newBoard({owner_type, owner_id}));
+        // ＋ un tableau existant : il garde son rangement et apparaît aussi ici (une association, comme « Associer à… » dans le tableau) ; ↶ la retire
+        box.querySelector('[data-bd-hostadd]').addEventListener('click', async e => {
+            const btn = e.currentTarget; let all = []; try { all = (await api('boards', {owner_type: 'all'})).boards || []; } catch (err) { toast(err.message, 'error'); return; }
+            const here = new Set(rows.map(r => Number(r.id))), list = all.filter(b => !here.has(Number(b.id)));
+            if (!list.length) { toast(i18n('Pas d’autre tableau à ajouter.')); return; }
+            const label = (document.querySelector('#workspace .page-header h1, #workspace .page-header h2, #workspace h1')?.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 160);
+            window.LCNDA_UI?.menuAt?.(btn, list.slice(0, 60).map(b => ({icon: b.icon || '🧩', label: b.title || i18n('Tableau'), help: b.part || '', run: async () => {
+                try {
+                    const nb = await api('board', {id: b.id}), links = [...(nb.data?.links || [])];
+                    if (links.some(l => l.kind === owner_type && Number(l.id) === owner_id)) { toast(i18n('Déjà associé.')); return; }
+                    const body = d => ({id: nb.id, title: nb.title, icon: nb.icon, color: nb.color, status: nb.status, owner_type: nb.owner_type || '', owner_id: nb.owner_id || 0, part: nb.part || '', data: d});
+                    await api('save_board', {}, {method: 'POST', body: body({...nb.data, links: [...links, {kind: owner_type, id: owner_id, label, part: ''}]})});
+                    const refill = () => { delete box.dataset.bdFilled; fillHost(box); };
+                    refill();
+                    (A().undoToast || ((m) => toast(m)))(i18n('Tableau « {t} » ajouté ici.', {t: nb.title}), {icon: '🧩', undo: async () => { const cur = await api('board', {id: nb.id}); await api('save_board', {}, {method: 'POST', body: body({...cur.data, links: (cur.data?.links || []).filter(l => !(l.kind === owner_type && Number(l.id) === owner_id))})}); refill(); }});
+                } catch (err) { toast(err.message, 'error'); }
+            }})), {title: i18n('Ajouter un tableau existant')});
+        });
         box.querySelectorAll('[data-bd-go]').forEach(x => x.addEventListener('click', () => go(Number(x.dataset.bdGo))));
     }
     const placeHosts = () => {
