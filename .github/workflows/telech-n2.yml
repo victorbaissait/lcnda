@@ -66,24 +66,31 @@ jobs:
           restore-keys: telech-n2-
       - name: "📚 👥 🗺 Statistique générale de la France (Insee)"
         if: env.QUOI == 'tout' || env.QUOI == 'sgf'
+        continue-on-error: true  # une source en panne (ex. Wikidata 504) n'empêche pas les autres
         run: python3 -I scripts/telech-n2/build_sgf.py assets/data
       - name: "✝️ ⛪ ⚔️ 🍁 Ordres, saints patrons, généraux, paroisses du Québec (Wikidata)"
         if: env.QUOI == 'tout' || env.QUOI == 'wikidata'
+        continue-on-error: true  # une source en panne (ex. Wikidata 504) n'empêche pas les autres
         run: python3 -I scripts/telech-n2/build_wikidata.py assets/data
       - name: "🩺 📜 🇨🇭 ⏳ Maladies, formules des actes, Heimatort, mortalité"
         if: env.QUOI == 'tout' || env.QUOI == 'textes'
+        continue-on-error: true  # une source en panne (ex. Wikidata 504) n'empêche pas les autres
         run: python3 -I scripts/telech-n2/build_textes.py assets/data
       - name: "🗺 Cadastres napoléoniens ouverts (catalogue data.gouv.fr)"
         if: env.QUOI == 'tout' || env.QUOI == 'cadastres'
+        continue-on-error: true  # une source en panne (ex. Wikidata 504) n'empêche pas les autres
         run: python3 -I scripts/telech-n2/build_cadastres.py assets/data cadastres
       - name: "🛣 Anciens noms des rues hors de Paris (data.gouv.fr)"
         if: env.QUOI == 'tout' || env.QUOI == 'rues'
+        continue-on-error: true  # une source en panne (ex. Wikidata 504) n'empêche pas les autres
         run: python3 -I scripts/telech-n2/build_cadastres.py assets/data rues
       - name: "📖 Expilly 1762-1770 (Internet Archive, domaine public)"
         if: env.QUOI == 'tout' || env.QUOI == 'expilly'
+        continue-on-error: true  # une source en panne (ex. Wikidata 504) n'empêche pas les autres
         run: python3 -I scripts/telech-n2/build_expilly.py assets/data
       - name: "🇪🇺 Communes d’Europe et leurs changements (GISCO, ISTAT, OFS, Québec, Luxembourg)"
         if: env.QUOI == 'tout' || env.QUOI == 'europe'
+        continue-on-error: true  # une source en panne (ex. Wikidata 504) n'empêche pas les autres
         run: python3 -I scripts/telech-n2/build_europe.py assets/data $EUROPE
       - name: Garder les réponses pour la prochaine fois
         if: always()
