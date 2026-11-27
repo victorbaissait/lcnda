@@ -129,8 +129,8 @@ const t = async (name, fn) => {
             await openTake(); await openList('ciel_cometes');
             for (let i = 0; i < 2; i++) await check(L(`${D} [data-cx-lrows] .cx-rlist li`).nth(i).locator('input'));
             await C(`${D} [data-cx-lfull]`); await p.waitForSelector('.cx-ltake [data-cx-ltake-sel]', {timeout: 20000});
-            await p.waitForSelector('.ld-table .cx-ldck input:checked');
-            await check(L('.ld-table tbody tr:not(.is-on) .cx-ldck input').first());
+            await p.waitForSelector('.ld-table [data-ld-ck][aria-checked="true"]'); // les cases de la liste (une seule sorte)
+            await check(L('.ld-table tbody tr:not(.is-picked) [data-ld-ck]').first());
             assert.match(await p.textContent('.cx-ltake [data-cx-ltake-sel]'), /Prendre les 3 cochées/);
             const before = (await linksOf()).filter(l => l.entity_type === 'row').length;
             await C('.cx-ltake [data-cx-ltake-sel]');
@@ -339,22 +339,22 @@ const t = async (name, fn) => {
             const v = await p.inputValue('#investigation-item-dialog textarea[name="notes"]'); assert.match(v, /Eymoutiers/); assert.match(v, /baptême/);
             await closeAll(); await p.evaluate(() => { localStorage.removeItem('genealogie-connexions-panier'); return window.LCNDA_EXT.connexions.refresh(); }); // le panier par défaut, pour la suite
         });
-        await t('L1 · page d’une liste : « ☑ Choisir des lignes », 2 sur 5, Maj+clic pour une suite, « Prendre… » propose « les 2 cochées » ou « les 5 trouvées »', async m => {
+        await t('L1 · page d’une liste : les cases de la liste, 2 sur 5, Maj+clic pour une suite, « Prendre… » propose « les 2 cochées » ou « les 5 trouvées »', async m => {
             await clearBasket();
             await p.evaluate(() => window.LCNDA_EXT.dataListsEngine.open('ciel_cometes', {q: 'comète', crit: [], period: {mode: 'overlap', from: 1800, to: 1910}, near: null}));
-            await p.waitForSelector('.ld-page[data-ld-page="ciel_cometes"] [data-ld-choose]', {timeout: 20000}); await p.waitForSelector('.ld-table tbody tr');
-            assert.strictEqual(await L('.ld-table .cx-ldck').count(), 0, 'le tableau reste propre tant qu’on ne choisit pas');
-            await C('[data-ld-choose]'); await p.waitForSelector('.ld-table tbody .cx-ldck input');
+            await p.waitForSelector('.ld-page[data-ld-page="ciel_cometes"] [data-ld-take]', {timeout: 20000}); await p.waitForSelector('.ld-table tbody tr');
+            assert.strictEqual(await L('.ld-table .cx-ldck').count(), 0, 'une seule sorte de cases (celles de la liste)'); assert.strictEqual(await L('[data-ld-choose]').count(), 0);
             const n = await L('.ld-table tbody tr').count(); assert.ok(n >= 4, n + ' lignes');
-            await check(L('.ld-table tbody tr').nth(0).locator('.cx-ldck input')); await check(L('.ld-table tbody tr').nth(2).locator('.cx-ldck input'));
-            assert.match(await p.textContent('.cx-ldsel'), /2 cochées/);
-            await L('.ld-table tbody tr').nth(3).locator('.cx-ldck input').click({modifiers: ['Shift']}); m.clicks++;
-            assert.match(await p.textContent('.cx-ldsel'), /3 cochées/, 'Maj+clic : de la 3e à la 4e');
-            await L('.ld-table tbody tr').nth(3).locator('.cx-ldck input').click(); await L('.ld-table tbody tr').nth(2).locator('.cx-ldck input').click(); m.clicks += 2;
-            assert.match(await p.textContent('.cx-ldsel'), /1 cochée/);
-            await check(L('.ld-table tbody tr').nth(1).locator('.cx-ldck input'));
-            await p.click('.ld-sort >> nth=1'); await p.waitForSelector('.ld-table tbody .cx-ldck input'); m.clicks++;
-            assert.strictEqual(await L('.ld-table tbody .cx-ldck input:checked').count(), 2, 'les cases tiennent après un tri');
+            const bx = i => L('.ld-table tbody tr').nth(i).locator('[data-ld-ck]');
+            await bx(0).click(); await bx(2).click(); m.clicks += 2;
+            assert.match(await p.textContent('.ldc-bar [data-ldc-n]'), /2 lignes cochées/);
+            await bx(3).click({modifiers: ['Shift']}); m.clicks++;
+            assert.match(await p.textContent('.ldc-bar [data-ldc-n]'), /3 lignes cochées/, 'Maj+clic : de la 3e à la 4e');
+            await bx(3).click(); await bx(2).click(); m.clicks += 2;
+            assert.match(await p.textContent('.ldc-bar [data-ldc-n]'), /1 ligne cochée/);
+            await bx(1).click(); m.clicks++;
+            await p.click('.ld-sort >> nth=1'); await p.waitForSelector('.ld-table tbody [data-ld-ck]'); m.clicks++;
+            assert.strictEqual(await L('.ld-table tbody [data-ld-ck][aria-checked="true"]').count(), 2, 'les cases tiennent après un tri');
             await C('[data-ld-take]'); await p.waitForSelector('.ui-actmenu');
             const menu = await p.textContent('.ui-actmenu'); assert.match(menu, /Les 2 cochées au panier/); assert.match(menu, /Tout au panier, comme un ensemble \(\d+ lignes\)/);
             await C('.ui-actmenu button:has-text("Les 2 cochées au panier, comme un ensemble")'); await sleep(800);
@@ -368,7 +368,7 @@ const t = async (name, fn) => {
             await C('.cx-put .cx-how:has-text("Une ligne = un élément")'); await C('.cx-put [data-cx-dest="basket"]');
             assert.match(await p.textContent('.cx-put [data-cx-putsay]'), /2 éléments/);
             await C('.cx-put [data-cx-putgo]'); await sleep(800);
-            await C('.cx-ldsel [data-cx-selnone]'); assert.match(await p.textContent('.cx-ldsel'), /Rien de coché/);
+            await C('[data-ldc-x]'); assert.ok(await p.isHidden('.ldc-bar'), '✕ Décocher : plus rien de coché');
         });
         await t('L3 · une longue liste (24 comètes) : « Les 20 premières » et « De la ligne 10 à 20 », dans l’ordre affiché', async m => {
             await clearBasket();

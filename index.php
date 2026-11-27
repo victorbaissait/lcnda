@@ -52,7 +52,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/artist.css?v=5">
     <link rel="stylesheet" href="assets/css/onglets.css?v=18">
     <link rel="stylesheet" href="assets/css/audit-chrono.css?v=2">
-    <link rel="stylesheet" href="assets/css/audit-listes.css?v=2">
+    <link rel="stylesheet" href="assets/css/audit-listes.css?v=3">
     <link rel="stylesheet" href="assets/css/audit-recherche.css?v=6">
     <link rel="stylesheet" href="assets/css/recherche-carte.css?v=3">
     <link rel="stylesheet" href="assets/css/audit-enquetes.css?v=4">
@@ -101,7 +101,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/lot8-soldats-noms.css?v=1">
     <link rel="stylesheet" href="assets/css/lot9-monde-coutumes.css?v=1">
     <link rel="stylesheet" href="assets/css/lot10-regles-actes.css?v=1">
-    <link rel="stylesheet" href="assets/css/lot-o-arbre.css?v=1">
+    <link rel="stylesheet" href="assets/css/lot-o-arbre.css?v=2">
     <link rel="stylesheet" href="assets/css/lot10-terre-gens.css?v=1">
     <link rel="stylesheet" href="assets/css/commune-reseau.css?v=1">
     <link rel="stylesheet" href="assets/css/lot10-objets-traces.css?v=1">
@@ -1373,7 +1373,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-listes-reunies.js?v=6" defer></script><!-- 🔀 listes réunies (🌋 Séismes réunis) : plusieurs sources, sans doublons -->
 <script src="assets/js/app-listes-famille.js?v=3" defer></script><!-- 👪 « Dans la famille » : calculé ici (GET ld_famille) -->
 <script src="assets/js/app-listes-reunies-plus.js?v=1" defer></script><!-- 🔀 Éruptions, Crues, Batailles, Monuments, Soldats réunis ; 🔎 chercher dans les valeurs ; 👪 cercles de la famille sur la carte -->
-<script src="assets/js/app-listes-choix.js?v=5" defer></script><!-- ☑ plusieurs lignes d’un coup : cases, Tout cocher, barre du bas (📎 · 🧺 · ⤓) -->
+<script src="assets/js/app-listes-choix.js?v=6" defer></script><!-- ☑ plusieurs lignes d’un coup : cases, Tout cocher, barre du bas (📎 · 🧺 · ⤓) -->
 <script src="assets/js/app-listes-maj.js?v=8" defer></script>
 <script src="assets/js/app-donnees-accueil.js?v=11" defer></script><!-- 📊 Récap des données et la question en français : Listes → 🧰 Données et l’onglet 📊 Données (un seul écran) -->
 <script src="assets/js/app-donnees-onglet.js?v=2" defer></script><!-- 📊 l’onglet Données : on y reste (thèmes, listes réunies, listes), sa colonne de gauche, ranger / masquer les thèmes -->
@@ -1384,14 +1384,14 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-listes-perso.js?v=3" defer></script>
 <script src="assets/js/app-maintenance.js?v=72" defer></script>
 <script src="assets/js/app-recherche.js?v=42" defer></script>
-<script src="assets/js/app-recherche-outils.js?v=6" defer></script>
+<script src="assets/js/app-recherche-outils.js?v=7" defer></script>
 <script src="assets/js/app-recherche-kit.js?v=4" defer></script><!-- 🔎 🗺 Carte · 🧺 📎 sur les résultats de recherche -->
 <script src="assets/js/app-graphiques.js?v=31" defer></script>
 <script src="assets/js/app-side-folders.js?v=3" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
 <script src="assets/js/heritage.js?v=53" defer></script>
 <script src="assets/js/heritage-mini-carte.js?v=4" defer></script>
-<script src="assets/js/app-selection.js?v=3" defer></script>
+<script src="assets/js/app-selection.js?v=4" defer></script>
 <script src="assets/js/app-sources-liste.js?v=4" defer></script>
 <script src="assets/js/heritage-tools.js?v=23" defer></script>
 <script src="assets/js/heritage-sauvegarde.js?v=5" defer></script>
@@ -1405,7 +1405,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-controle.js?v=15" defer></script>
 <script src="assets/js/heritage-commune-histoire.js?v=2" defer></script>
 <script src="assets/js/heritage-records.js?v=15" defer></script>
-<script src="assets/js/heritage-research.js?v=47" defer></script>
+<script src="assets/js/heritage-research.js?v=48" defer></script>
 <script src="assets/js/heritage-av.js?v=23" defer></script>
 <script src="assets/js/heritage-recueil-table.js?v=11" defer></script>
 <script src="assets/js/heritage-recueil-sens.js?v=2" defer></script>
@@ -1701,7 +1701,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-anim-export.js?v=2" defer></script>
 <script src="assets/js/heritage-anim-studio.js?v=8" defer></script>
 <script src="assets/js/heritage-envoyer.js?v=2" defer></script>
-<script src="assets/js/heritage-dna.js?v=27" defer></script>
+<script src="assets/js/heritage-dna.js?v=28" defer></script>
 <script src="assets/js/heritage-press-ads.js?v=11" defer></script>
 <script src="assets/js/museum-viewer.js?v=11" defer></script>
 <script src="assets/js/heritage-museum.js?v=20" defer></script>
@@ -1738,8 +1738,10 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-epoque-travail.js?v=3" defer></script>
 <script src="assets/js/heritage-lot9-monde-coutumes.js?v=3" defer></script>
 <script src="assets/js/heritage-lot10-regles-actes.js?v=4" defer></script>
-<script src="assets/js/app-lot-o-core.js?v=1" defer></script>
-<script src="assets/js/app-lot-o-arbre.js?v=1" defer></script>
+<script src="assets/js/app-lot-o-core.js?v=2" defer></script>
+<script src="assets/js/app-lot-o-arbre.js?v=2" defer></script>
+<script src="assets/js/app-lot-o-vie.js?v=1" defer></script>
+<script src="assets/js/app-lot-o-poste.js?v=1" defer></script>
 <script src="assets/js/heritage-lot10-terre-gens.js?v=6" defer></script>
 <script src="assets/js/heritage-lot8-soldats-noms.js?v=2" defer></script>
 <script src="assets/js/heritage-lot9-sons-enfance.js?v=4" defer></script>
@@ -1750,9 +1752,9 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-pistes-auto.js?v=5" defer></script>
 <script src="assets/js/heritage-branches-isolees.js?v=1" defer></script>
 <script src="assets/js/heritage-parents-celebres.js?v=2" defer></script>
-<script src="assets/js/heritage-connexions.js?v=20" defer></script>
+<script src="assets/js/heritage-connexions.js?v=21" defer></script>
 <script src="assets/js/app-paniers-core.js?v=4" defer></script>
-<script src="assets/js/app-paniers.js?v=9" defer></script><!-- 🧺 l’onglet Paniers (caché au départ ; lib/paniers.php) -->
+<script src="assets/js/app-paniers.js?v=10" defer></script><!-- 🧺 l’onglet Paniers (caché au départ ; lib/paniers.php) -->
 <script src="assets/js/app-inserer.js?v=7" defer></script><!-- 📎 Insérer une info à l’endroit du curseur, dans tout texte libre (« / », 📎, ⌥⌘K) -->
 <script src="assets/js/heritage-connexions-besoins.js?v=6" defer></script>
 <script src="assets/js/heritage-connexions-outils.js?v=4" defer></script><!-- 🧺 📎 dans les outils : « Ici : l’outil ouvert » (Mettre dans…, Prendre depuis…), 📎 · 📥 dans leur barre, la source à leur façon --><!-- 🧩 les besoins : pistes qui disent ce qui leur manque, « Cet acte répond à… », Ma semaine → Ce qui manque, carte (lib/connexions_besoins.php) -->
@@ -1799,7 +1801,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-wikidata.js?v=2" defer></script>
 <script src="assets/js/heritage-wikidata-autour.js?v=1" defer></script>
 <script src="assets/js/app-imports-plus-core.js?v=2" defer></script>
-<script src="assets/js/heritage-imports-plus.js?v=2" defer></script>
+<script src="assets/js/heritage-imports-plus.js?v=3" defer></script>
 <script src="assets/js/heritage-photos-import.js?v=2" defer></script>
 <script src="assets/js/app-apparence.js?v=29" defer></script>
 <script src="assets/js/app-designs.js?v=29" defer></script>
@@ -1807,7 +1809,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-premier.js?v=7" defer></script>
 <script src="assets/js/app-visite.js?v=3" defer></script>
 <script src="assets/js/app-je-veux.js?v=5" defer></script><!-- 🧭 Je veux… : ⌘K, Recherche, Listes, Réglages (le moteur et les écrans se chargent à la première ouverture : app-je-veux-moteur.js, app-je-veux-ui.js) -->
-<script src="assets/js/app-a-trier.js?v=3" defer></script>
+<script src="assets/js/app-a-trier.js?v=4" defer></script>
 <script src="assets/js/heritage-comptes-famille.js?v=3" defer></script>
 <script src="assets/js/app-htr-correction.js?v=2" defer></script>
 <script src="assets/js/app-lignes-alignement.js?v=2" defer></script>

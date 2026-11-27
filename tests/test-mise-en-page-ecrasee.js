@@ -295,7 +295,7 @@ function screens(ID, R) {
     for (const k of ['persons', 'events', 'places', 'media', 'occupations', 'sosa', 'act_transcriptions_list', 'depouillements', 'investigations_list', 'topic_sheets_list', 'boards_list', 'fragile_branches']) add(`Listes → ${k}`, mod('listes', {listType: k}));
     const ldList = view => async p => { await clean(p); await registerList(p); await setMod(p, 'listes', {listType: 'data_sq_batailles'}); await wait(p, '[data-ld-page]'); await settle(p);
         const b = await p.$(`#workspace [data-ld-view="${view === 'map' ? 'map' : 'table'}"]`); if (b && await b.getAttribute('aria-pressed') !== 'true') { await b.click().catch(() => {}); await settle(p); }
-        if (view === 'pick') { await p.click('#workspace [data-ld-choose]').catch(() => {}); await settle(p); await pickSome(p, '#workspace .cx-ldck input, #workspace input.cx-ldck'); }
+        if (view === 'pick') { for (const b of (await p.$$('#workspace .ld-table tbody [data-ld-ck]')).slice(0, 3)) await b.click().catch(() => {}); await settle(p); } // les cases de la liste (une seule sorte)
         return '#workspace'; };
     add('Listes de données (tableau)', ldList(''));
     add('Listes de données (carte)', ldList('map'));

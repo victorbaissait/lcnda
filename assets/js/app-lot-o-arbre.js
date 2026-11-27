@@ -358,9 +358,10 @@
             <div class="lo-bar">${seg}</div>
             <div class="lo-grid" data-lo-grid>${CARDS.filter(c => !c.o2).map(shell).join('')}</div>
             <h3 class="lo-sec">⚖️ ${esc(T('Les règles et les dates'))}</h3>
-            <div class="lo-grid">${CARDS.filter(c => c.o2).map(shell).join('')}</div></section>`;
+            <div class="lo-grid">${CARDS.filter(c => c.o2).map(shell).join('')}</div>${ext.lotOVie?.sectionHtml ? ext.lotOVie.sectionHtml() : ''}</section>`;
         applyFilter(ws);
         CARDS.forEach(c => paint(c.id));
+        ext.lotOVie?.mount?.(ws); // 👤 Une vie : 🕰 🎂 📰 (app-lot-o-vie.js)
     }
     function applyFilter(root = document) { root.querySelectorAll('[data-lo-grid] [data-lo-card]').forEach(el => { const st = el.dataset.loStatus; el.hidden = filter === 'new' ? st === 'done' : filter === 'done' ? st !== 'done' : false; }); }
     const LEADS = new Map();
@@ -460,7 +461,7 @@
     function open(card = '') {
         document.querySelectorAll('dialog[open]').forEach(d => { if (!d.classList.contains('is-full')) d.close(); });
         const st = S(); st.listType = LIST;
-        const go = () => { if (!card) return; const el = document.querySelector(`[data-lo-card="${card}"]`); if (el) { el.scrollIntoView({block: 'start', behavior: 'smooth'}); el.classList.add('is-flash'); setTimeout(() => el.classList.remove('is-flash'), 1600); } };
+        const go = () => { if (!card) return; const el = document.querySelector(String(card).startsWith('vie:') ? `[data-lov-card="${card.slice(4)}"]` : `[data-lo-card="${card}"]`); if (el) { el.scrollIntoView({block: 'start', behavior: 'smooth'}); el.classList.add('is-flash'); setTimeout(() => el.classList.remove('is-flash'), 1600); } };
         if (st.module === 'listes') { A().renderSidebar?.(); render(++st.workspaceToken).then(() => setTimeout(go, 50)); } else Promise.resolve(A().setModule?.('listes')).then(() => setTimeout(go, 120));
     }
     const fold = s => String(s ?? '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');

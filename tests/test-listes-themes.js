@@ -208,7 +208,7 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             const i64 = await p.$$eval('.ld-table tbody tr[data-ld-row]', a => a.findIndex(tr => /1964/.test(tr.textContent)));
             await p.click(`.ld-table tbody tr[data-ld-row="${i64}"] [data-ld-open]`); await waitCount(/^2 lignes/);
             assert.match(await p.textContent('[data-ld-parent]'), /Tour 1964.*☑ Toutes ses étapes/s);
-            await p.click('[data-ld-pickall]'); assert.strictEqual(await p.textContent('.ldc-bar [data-ldc-n]'), '2 choisis');
+            await p.click('[data-ld-pickall]'); assert.strictEqual(await p.textContent('.ldc-bar [data-ldc-n]'), '2 lignes cochées');
             await p.click('[data-ldc-x]'); await p.click('[data-ld-parent-back]'); await waitCount(/^4 lignes/); assert.strictEqual(await p.$('[data-ld-parent]'), null);
             await openKey('data_theme_essai'); await p.waitForSelector('[data-ld-page="reunie_essai"] .ldt-tabs', {timeout: 30000});
         });

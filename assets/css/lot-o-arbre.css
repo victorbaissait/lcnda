@@ -84,3 +84,33 @@
 .lo-heritage > summary { cursor: pointer; font-weight: 700; font-size: 13px; }
 @media (max-width: 560px) { .lo-grid { grid-template-columns: 1fr; } .lo-acts { flex-direction: column; align-items: flex-start; } }
 @media print { .lo-perso, .lo-acts .lo-btns, .lo-bar { display: none !important; } .lo-card { break-inside: avoid; } }
+/* 👤 Une vie (app-lot-o-vie.js) : 🕰 horloge, 🎂 règle des âges, 📰 bulletin */
+.lo-viz.lo-clock { max-height: 320px; }
+.lo-viz .lo-face { fill: var(--card-head-bg, #fafafa); stroke: var(--ink); stroke-width: 2; }
+.lo-viz .lo-tick { stroke: var(--ink); stroke-width: 1; }
+.lo-viz .lo-arc { fill: none; stroke: var(--blue-soft, #eaf2ff); stroke-width: 10; }
+.lo-viz .lo-mark { fill: var(--lo-green); stroke: var(--card-bg, #fff); stroke-width: 2; }
+.lo-viz .lo-mark.is-move { fill: var(--blue, #0066cc); }
+.lo-viz .lo-mark.is-world { fill: var(--lo-orange); }
+.lo-viz .lo-hand { stroke: var(--red, #c62828); stroke-width: 3; }
+.lo-viz .lo-hand.is-other { stroke: var(--lo-c3); stroke-dasharray: 5 4; }
+.lo-viz .lo-pin { fill: var(--red, #c62828); }
+.lo-ages { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.lo-ages li { display: grid; grid-template-columns: 5.5em minmax(0, 1fr) auto; gap: 10px; align-items: baseline; padding: 5px 8px; border-left: 4px solid var(--blue, #0066cc); background: var(--card-head-bg, #fafafa); font-size: 13.5px; }
+.lo-ages li.is-own { border-left-color: var(--lo-green); }
+.lo-ages li b { font-size: 17px; white-space: nowrap; }
+.lo-ages li small { color: var(--muted); }
+.lo-ages-cols.is-two { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 14px; }
+.lo-ages-cols h4 { margin: 4px 0; font-size: 14px; }
+.lo-bul { border: 2px solid var(--card-line, #080808); background: var(--card-bg, #fff); padding: 12px 14px; }
+.lo-bul.is-journal { font-family: Georgia, 'Times New Roman', serif; }
+.lo-bul.is-carte { border-radius: 10px; box-shadow: var(--shadow-small); }
+.lo-bul.is-sobre { border-width: 1px; }
+.lo-bul-head { text-align: center; border-bottom: 2px solid var(--card-line, #080808); margin-bottom: 8px; padding-bottom: 6px; }
+.lo-bul-head h4 { margin: 0; font-size: 20px; }
+.lo-bul-head p { margin: 4px 0 0; font-size: 13px; color: var(--muted); }
+.lo-bul-lines { margin: 0; display: grid; gap: 8px; }
+.lo-bul-lines > div { display: grid; grid-template-columns: 9.5em minmax(0, 1fr); gap: 8px; }
+.lo-bul-lines dt { font-weight: 700; font-size: 13px; }
+.lo-bul-lines dd { margin: 0; font-size: 13.5px; overflow-wrap: anywhere; }
+@media (max-width: 560px) { .lo-bul-lines > div { grid-template-columns: 1fr; } .lo-ages li { grid-template-columns: 4.2em minmax(0, 1fr); } .lo-ages li small { grid-column: 2; } }

@@ -46,6 +46,8 @@ $pdo->exec('INSERT INTO families(id,partner1_id,partner2_id) VALUES(1,8,9),(2,4,
 $pdo->exec('INSERT INTO family_children(family_id,child_id,position) VALUES(1,4,0),(1,10,1),(2,2,0),(2,13,1),(4,11,0),(5,3,0),(3,12,0),(3,1,1),(7,30,0)');
 $m = $pdo->prepare("INSERT INTO events(scope,family_id,event_type_id,date_text,year,sort_date,place_id) VALUES('family',?,?,?,?,?,1)");
 foreach ([[1, '1788-11-20'], [2, '1850-06-12'], [3, '1876-03-02'], [4, '1789-12-14'], [5, '1850-02-20'], [6, '1858-01-15'], [7, '1905-06-06']] as [$f, $d]) { $m->execute([$f, $t('MARR'), $d, (int) $d, $d]); }
+// un départ : Jean MAZAUD domicilié à Tulle en 1887 (🕰 « part pour Tulle »)
+$ev->execute([2, $t('RESI'), '1887-03-01', 1887, '1887-03-01', 2]);
 $ecols = array_column($pdo->query('PRAGMA table_info(events)')->fetchAll(), 'name');
 if (in_array('signed1', $ecols, true)) {
     $s = $pdo->prepare("UPDATE events SET signed1=?, signed2=? WHERE family_id=? AND scope='family'");

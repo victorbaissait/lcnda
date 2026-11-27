@@ -10,7 +10,8 @@ declare(strict_types=1);
  *                           avec le groupe de personnes et la période communs des diagrammes (dg_pop, dg_root, dg_from, dg_to…) ;
  *  GET lot_o_dispense&a=&b= 🔗 deux personnes : le degré pour l'Église (comput germanique) et pour la loi civile, l'ancêtre commun,
  *                           l'affinité (le conjoint d'avant), le coefficient F ;
- *  GET lot_o_person&id=     ce que la fiche dit en une phrase : orphelin, posthume, dispense, quitter la terre, canton (justice de paix).
+ *  GET lot_o_person&id=     ce que la fiche dit en une phrase : orphelin, posthume, dispense, quitter la terre, canton (justice de paix) ;
+ *  GET lot_o_life&id=       🕰 horloge, 🎂 règle des âges, 📰 bulletin : naissance, décès, mariages, enfants, départ, âge des parents.
  * Tact (décision du 27/11/2026) : une fiche vivante (ou « vivante probable ») ou confidentielle n'est JAMAIS comptée ni nommée
  * (df_hidden_people, la règle de l'export pour partager) ; les noms des conceptions avant mariage seulement sur demande
  * (names=1) et pour des couples nés il y a plus de 100 ans.
@@ -515,6 +516,60 @@ function lo_person(PDO $pdo, int $id): array
     return $out;
 }
 
+/* ═════════ 🕰 🎂 📰 une vie (lot O1 suite et O4) : les dates d'une fiche, sans rien sur les vivants ═════════ */
+function lo_place(PDO $pdo, int $pid): ?array
+{
+    if (!$pid) { return null; }
+    $s = $pdo->prepare("SELECT id, name, COALESCE(county,'') AS county, COALESCE(country,'') AS country, latitude AS lat, longitude AS lon FROM places WHERE id=?"); $s->execute([$pid]);
+    $r = $s->fetch(); if (!$r) { return null; }
+    return ['id' => (int) $r['id'], 'name' => mb_substr(trim(explode(',', (string) $r['name'])[0]), 0, 80), 'county' => mb_substr((string) $r['county'], 0, 60), 'country' => mb_substr((string) $r['country'], 0, 40),
+        'lat' => $r['lat'] !== null ? (float) $r['lat'] : null, 'lon' => $r['lon'] !== null ? (float) $r['lon'] : null];
+}
+
+/** lot_o_life&id= : naissance, décès, mariages, enfants (pas les vivants), départs, et l'âge des parents et grands-parents à sa naissance */
+function lo_life(PDO $pdo, int $id): array
+{
+    $lives = dmo_lives($pdo); $p = $lives[$id] ?? null;
+    if (!$p || !lo_ok($pdo, $id)) { return ['ok' => false]; } // rien pour une fiche vivante ou confidentielle
+    $L = dgn_links($pdo);
+    $out = ['ok' => true, 'id' => $id, 'name' => $p['name'], 'first' => trim(explode(' ', $p['name'])[0] ?? ''), 'sex' => dfa_sex($p['g']), 'birth' => lo_iso($p['b']), 'death' => lo_iso($p['d']),
+        'bplace' => lo_place($pdo, (int) ($p['bp'] ?? 0)), 'dplace' => lo_place($pdo, (int) ($p['dp'] ?? 0)), 'events' => [], 'family' => []];
+    $ev = [];
+    foreach (lo_spouses($pdo, $id) as [$s, $fid, $d]) {
+        if (!$d) { continue; }
+        $ev[] = ['kind' => 'marriage', 'd' => lo_iso($d), 'who' => lo_ok($pdo, $s) ? ($lives[$s]['name'] ?? '') : ''];
+    }
+    $kids = [];
+    foreach ($L['children'][$id] ?? [] as $c) { $c = (int) $c; if (lo_ok($pdo, $c) && ($lives[$c]['b'] ?? null)) { $kids[] = [$lives[$c]['b'], $c]; } }
+    usort($kids, static fn($a, $b) => [$a[0][0], $a[0][1], $a[0][2]] <=> [$b[0][0], $b[0][1], $b[0][2]]);
+    foreach ($kids as $i => [$d, $c]) { $ev[] = ['kind' => 'child', 'd' => lo_iso($d), 'n' => $i + 1, 'who' => $lives[$c]['name'] ?? '']; }
+    // un départ : le premier événement daté dans une autre commune que celle de sa naissance (domicile, recensement, métier, mariage)
+    $home = $out['bplace']['name'] ?? '';
+    if ($home !== '') {
+        $q = $pdo->prepare("SELECT e.sort_date, e.year, e.place_id FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=? AND e.place_id IS NOT NULL AND t.gedcom_tag IN ('RESI','CENS','OCCU','EMIG','IMMI') ORDER BY COALESCE(NULLIF(e.sort_date,''), printf('%04d', COALESCE(e.year, 9999))) LIMIT 20");
+        $q->execute([$id]);
+        foreach ($q as $r) {
+            $pl = lo_place($pdo, (int) $r['place_id']); $d = dchf_date($r['sort_date'], $r['year']);
+            if ($pl && $d && mb_strtolower($pl['name']) !== mb_strtolower($home)) { $ev[] = ['kind' => 'move', 'd' => lo_iso($d), 'place' => $pl['name']]; break; }
+        }
+    }
+    usort($ev, static fn($a, $b) => strcmp($a['d'], $b['d']));
+    $out['events'] = array_slice($ev, 0, 40);
+    // 🎂 dans la famille, à sa naissance : père, mère, grands-pères, grands-mères (seulement les fiches qu'on peut nommer)
+    if ($p['b']) {
+        foreach ([[0, 'father'], [1, 'mother']] as [$k, $role]) {
+            $x = (int) ($L['parents'][$id][$k] ?? 0); if (!$x || !lo_ok($pdo, $x)) { continue; }
+            $xb = $lives[$x]['b'] ?? null; if ($xb) { $out['family'][] = ['role' => $role, 'name' => $lives[$x]['name'], 'age' => (int) floor(dvi_years($xb, $p['b'])), 'alive' => !($lives[$x]['d'] ?? null) || [$lives[$x]['d'][0], $lives[$x]['d'][1]] >= [$p['b'][0], $p['b'][1]]]; }
+            foreach ([[0, 'gf'], [1, 'gm']] as [$kk, $r2]) {
+                $g = (int) ($L['parents'][$x][$kk] ?? 0); if (!$g || !lo_ok($pdo, $g)) { continue; }
+                $gb = $lives[$g]['b'] ?? null; $gd = $lives[$g]['d'] ?? null;
+                if ($gb && (!$gd || [$gd[0], $gd[1]] >= [$p['b'][0], $p['b'][1]])) { $out['family'][] = ['role' => $r2 . ($k ? '_m' : '_p'), 'name' => $lives[$g]['name'], 'age' => (int) floor(dvi_years($gb, $p['b'])), 'alive' => true]; }
+            }
+        }
+    }
+    return $out;
+}
+
 function lot_o_arbre(PDO $pdo, array $q): array
 {
     $q = array_map(static fn($v) => is_scalar($v) ? (string) $v : '', $q);
@@ -544,6 +599,7 @@ function lot_o_dispatch(PDO $pdo, string $action, bool $isWrite, array $data): n
             'lot_o_arbre' => lot_o_arbre($pdo, $_GET),
             'lot_o_dispense' => lo_dispense_pair($pdo, safe_int($_GET['a'] ?? 0), safe_int($_GET['b'] ?? 0)),
             'lot_o_person' => lo_person($pdo, safe_int($_GET['id'] ?? 0)),
+            'lot_o_life' => lo_life($pdo, safe_int($_GET['id'] ?? 0)),
             default => throw new RuntimeException('Action inconnue'),
         });
     } catch (LcndaBadInput $e) {

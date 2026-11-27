@@ -130,10 +130,10 @@ const t = async (name, fn) => { try { await t.before?.(); await fn(); console.lo
             const ban = await txt('.cx-ltake');
             assert.match(ban, /Tu choisis des lignes pour l’enquête testenquête/); assert.ok(!/[«»]/.test(ban.split('\n')[0]), 'pas de guillemets dans les guillemets : ' + ban);
             assert.ok(await p.locator('.ld-page [data-ld-take]').isHidden(), '« 🧺 Prendre… » caché pendant le bandeau');
-            await p.waitForSelector('.ld-table .cx-ldck input');
-            assert.strictEqual(await p.locator('.ld-table tbody .cx-ldck input:checked').count(), 2, 'les 2 comètes cochées dans la fenêtre le restent');
+            await p.waitForSelector('.ld-table [data-ld-ck][aria-checked="true"]'); // les cases de la liste (une seule sorte)
+            assert.strictEqual(await p.locator('.ld-table tbody [data-ld-ck][aria-checked="true"]').count(), 2, 'les 2 comètes cochées dans la fenêtre le restent');
             assert.match(await txt('.cx-ltake [data-cx-ltake-sel]'), /Prendre les 2 cochées/); assert.match(await txt('.cx-ltake [data-cx-ltake]'), /Tout prendre \(\d+\)/);
-            await p.locator('.ld-table tbody tr:not(.is-on) .cx-ldck input').first().check();
+            await p.locator('.ld-table tbody tr:not(.is-picked) [data-ld-ck]').first().click();
             assert.match(await txt('.cx-ltake [data-cx-ltake-sel]'), /Prendre les 3 cochées/);
             await p.click('.cx-ltake [data-cx-lback]');
             await p.waitForSelector(`${D}[open] [data-cx-lrows] .cx-rlist li`, {timeout: 20000});

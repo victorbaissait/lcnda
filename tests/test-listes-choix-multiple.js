@@ -48,9 +48,9 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             assert.match(await p.textContent('[data-ldc-all]'), /Tout cocher \(250\)/);
         });
         await t('un clic coche, Maj+clic coche toute la suite ; la barre du bas : « N choisis · 📎 · 🧺 · ⤓ · ✕ » ; la case de l’en-tête « à moitié »', async () => {
-            await p.click(ck(1)); assert.deepStrictEqual(await checked(), [1]); assert.strictEqual(await barText(), '1 choisi');
-            await p.click(ck(4), {modifiers: ['Shift']}); assert.deepStrictEqual(await checked(), [1, 2, 3, 4]); assert.strictEqual(await barText(), '4 choisis');
-            assert.match((await p.textContent('.ldc-bar')).replace(/\s+/g, ' '), /4 choisis.*📎 Insérer….*🧺 Mettre dans un panier….*⤓ Exporter.*✕/);
+            await p.click(ck(1)); assert.deepStrictEqual(await checked(), [1]); assert.strictEqual(await barText(), '1 ligne cochée');
+            await p.click(ck(4), {modifiers: ['Shift']}); assert.deepStrictEqual(await checked(), [1, 2, 3, 4]); assert.strictEqual(await barText(), '4 lignes cochées');
+            assert.match((await p.textContent('.ldc-bar')).replace(/\s+/g, ' '), /4 lignes cochées.*📎 Insérer….*🧺 Mettre dans un panier….*⤓ Exporter.*✕ Décocher/);
             assert.strictEqual(await p.getAttribute('[data-ld-ckall]', 'aria-checked'), 'mixed');
             assert.ok(await p.$eval('.ld-table tbody tr[data-ld-row="2"]', tr => tr.classList.contains('is-picked')));
             const box = await p.locator('.ldc-bar').boundingBox(), vw = await p.evaluate(() => innerWidth);
@@ -58,12 +58,12 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             await p.click('[data-ldc-x]'); assert.deepStrictEqual(await checked(), []); assert.ok(await p.isHidden('.ldc-bar'));
         });
         await t('la case de l’en-tête : les 100 lignes affichées, puis plus rien ; les cases tiennent après un tri et « Voir les suivantes »', async () => {
-            await p.click('[data-ld-ckall]'); assert.strictEqual((await checked()).length, 100); assert.strictEqual(await barText(), '100 choisis');
+            await p.click('[data-ld-ckall]'); assert.strictEqual((await checked()).length, 100); assert.strictEqual(await barText(), '100 lignes cochées');
             await p.click('[data-ld-ckall]'); assert.strictEqual((await checked()).length, 0);
             await p.click(ck(0)); await p.click(ck(5));
             await p.click('[data-ld-sort="year"]'); await p.waitForFunction(() => /↑/.test(document.querySelector('[data-ld-sort="year"]')?.textContent || ''));
             await p.click('[data-ld-sort="year"]'); await p.waitForFunction(() => /↓/.test(document.querySelector('[data-ld-sort="year"]')?.textContent || ''));
-            assert.strictEqual(await barText(), '2 choisis'); assert.deepStrictEqual(await checked(), [], 'les deux sont plus bas, après le tri ↓');
+            assert.strictEqual(await barText(), '2 lignes cochées'); assert.deepStrictEqual(await checked(), [], 'les deux sont plus bas, après le tri ↓');
             await p.click('[data-ld-more]'); await p.click('[data-ld-more]'); await p.waitForSelector('.ld-table tbody tr[data-ld-row="249"]');
             assert.deepStrictEqual(await checked(), [244, 249]);
             await p.click('[data-ld-sort="year"]'); await p.waitForFunction(() => /↑/.test(document.querySelector('[data-ld-sort="year"]')?.textContent || ''));
@@ -77,12 +77,12 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             assert.strictEqual(await p.evaluate(() => document.activeElement?.dataset.ldCk), '6', 'le focus reste après Échap');
         });
         await t('☑ Tout cocher (250) : même les lignes pas encore affichées ; une décochée → 249 ; un filtre nouveau l’oublie', async () => {
-            await p.click('[data-ldc-all]'); assert.strictEqual(await barText(), '250 choisis'); assert.strictEqual((await checked()).length, 100);
-            await p.click(ck(3)); assert.strictEqual(await barText(), '249 choisis');
+            await p.click('[data-ldc-all]'); assert.strictEqual(await barText(), '250 lignes cochées'); assert.strictEqual((await checked()).length, 100);
+            await p.click(ck(3)); assert.strictEqual(await barText(), '249 lignes cochées');
             const n = await p.evaluate(async () => (await window.LCNDA_EXT.listesChoix.selectedRows()).length); assert.strictEqual(n, 249);
             await p.fill('[data-ld-q]', 'Tulle'); await p.waitForFunction(() => /84 lignes/.test(document.querySelector('[data-ld-count]')?.textContent || ''));
             assert.ok(await p.isHidden('.ldc-bar'), '« Tout cocher » oublié avec le filtre');
-            await p.click('[data-ldc-all]'); assert.strictEqual(await barText(), '84 choisis');
+            await p.click('[data-ldc-all]'); assert.strictEqual(await barText(), '84 lignes cochées');
             await p.click('[data-ldc-x]'); await p.fill('[data-ld-q]', ''); await p.waitForFunction(() => /250 lignes/.test(document.querySelector('[data-ld-count]')?.textContent || ''));
         });
         await t('🧺 Mettre dans un panier… : les 3 lignes en UNE écriture, un seul ↶ Annuler ; 🧺 au bout d’une ligne : une seule', async () => {
@@ -117,9 +117,8 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
         });
         await t('⤓ Exporter : les lignes cochées en CSV ; une case « =… » reste du texte (pas une formule)', async () => {
             await p.click(ck(6)); await p.click(ck(7));
-            await p.click('[data-ldc-exp]');
-            const item = await p.waitForSelector('.ui-actmenu-i:has-text("CSV")', {timeout: 5000}).catch(() => null);
-            const [dl] = await Promise.all([p.waitForEvent('download'), item ? item.click() : Promise.resolve()]);
+            await p.click('[data-ldc-exp]'); await p.waitForSelector('dialog.ui-export[open]'); // ⤓ la fenêtre d'export commune (CSV choisi d'office)
+            const [dl] = await Promise.all([p.waitForEvent('download'), p.click('dialog.ui-export [data-ui-go]')]);
             const csv = fs.readFileSync(await dl.path(), 'utf8');
             const lines = csv.replace(/^﻿/, '').trim().split(/\r?\n/);
             assert.strictEqual(lines.length, 3, csv); assert.match(lines[0], /Nom;Année;Commune/); assert.match(lines[1], /Marie MAZAUD n° 7/);
@@ -134,11 +133,13 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             assert.ok(!(await p.$eval('[data-ldc-exp]', b => b.disabled)));
             await p.click('[data-ldc-x]'); await p.evaluate(() => document.body.classList.remove('is-kiosk')); await openList();
         });
-        await t('« ☑ Choisir des lignes » (Prendre…) garde ses propres cases : les nôtres se cachent, pas de double case', async () => {
-            if (!(await p.$('[data-ld-choose]'))) return;
-            await p.click('[data-ld-choose]'); await p.waitForSelector('.ld-table tbody .cx-ldck input');
-            assert.strictEqual(await p.$eval(ck(0), b => getComputedStyle(b).display), 'none');
-            await p.click('[data-ld-choose]');
+        await t('une seule sorte de cases par liste : plus de « ☑ Choisir des lignes » à part (🧺 Prendre… prend les lignes cochées ici)', async () => {
+            assert.strictEqual(await p.$('[data-ld-choose]'), null, 'plus de deuxième bouton pour cocher');
+            assert.strictEqual(await p.$('.ld-table .cx-ldck'), null, 'pas de deuxième colonne de cases');
+            if (!(await p.$('[data-ld-take]'))) return;
+            await p.click(ck(0)); await p.click(ck(1)); assert.strictEqual(await barText(), '2 lignes cochées');
+            await p.click('[data-ld-take]'); await p.waitForSelector('.ui-actmenu'); assert.match(await p.textContent('.ui-actmenu'), /Les 2 cochées/);
+            await p.keyboard.press('Escape'); await p.click('[data-ldc-x]');
         });
         await t('390 px, en sombre, au doigt : les cases toujours visibles, la barre tient dans l’écran', async () => {
             const ctx = await B.browser.newContext({viewport: {width: 390, height: 844}, hasTouch: true, isMobile: true});

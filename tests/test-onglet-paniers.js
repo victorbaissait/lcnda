@@ -328,7 +328,7 @@ const FIXTURES = () => {
             assert.match(await p.textContent('[data-pn-foot] .sel-bar'), new RegExp(`Les ${found.length} trouvés`));
             assert.ok(await p.$('[data-pn-foot] .sel-bar [data-pn-a="sel-status"]'), 'les actions sont là, sur les trouvés');
             await p.check(`[data-pn-pick="${found[0]}"]`);
-            assert.match(await p.textContent('[data-pn-foot] .sel-bar'), /1 coché\b/);
+            assert.match(await p.textContent('[data-pn-foot] .sel-bar'), /1 coché(?!s)/);
             assert.doesNotMatch(await p.textContent('[data-pn-foot] .sel-bar'), /trouvés/);
             await menu('[data-pn-a="sel-status"]', 'vérifié'); await sleep(1200);
             const its = await itemsOf(tem);

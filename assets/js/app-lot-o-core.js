@@ -146,5 +146,40 @@
         for (let i = 1; i < g.length; i++) { const k = km(g[i - 1].lat, g[i - 1].lon, g[i].lat, g[i].lon); if (!jump || k > jump.km) jump = {km: k, g: g[i].g, year: g[i].year}; }
         return {km: Math.round(km(g[0].lat, g[0].lon, g[g.length - 1].lat, g[g.length - 1].lon)), from: g[0], to: g[g.length - 1], jump: {...jump, km: Math.round(jump.km)}, gens: g.length};
     }
-    return {jdn, easterJdn, weekday, tempsClos, republican, chome, dispense, kinWords, median, share, oneIn, century, ROMAN, radiusBy, monthsOf, km, gravityPath};
+
+    /* ═════ 🕰 l'horloge d'une vie ═════ */
+    const dayNum = iso => { const [y, m, d] = String(iso || '').split('-').map(Number); return y ? jdn(y, m || 7, d || (m ? 15 : 1)) : null; };
+    /** clockOf('1852-02-10', '1921-04-03', [{d, …}], 24) → {years, perHour: {y, m}, marks: [{…, frac, h, min, text}]} ; null sans les deux dates */
+    function clockOf(birth, death, events = [], hours = 24) {
+        const a = dayNum(birth), b = dayNum(death); if (a == null || b == null || b <= a) return null;
+        const span = b - a, years = span / 365.2425, perH = years / hours;
+        const marks = events.map(e => { const j = dayNum(e.d); if (j == null || j < a || j > b) return null; const frac = (j - a) / span, t = frac * hours * 60, h = Math.floor(t / 60), min = Math.round(t - h * 60) % 60;
+            return {...e, frac, h: min === 0 && t - h * 60 > 59.5 ? h + 1 : h, min, text: `${min === 0 && t - h * 60 > 59.5 ? h + 1 : h} h ${String(min).padStart(2, '0')}`}; }).filter(Boolean);
+        return {years: Math.floor(years), perHour: {y: Math.floor(perH), m: Math.round((perH % 1) * 12) % 12}, marks};
+    }
+    const REP_MONTHS = ['vendémiaire', 'brumaire', 'frimaire', 'nivôse', 'pluviôse', 'ventôse', 'germinal', 'floréal', 'prairial', 'messidor', 'thermidor', 'fructidor', 'jours complémentaires'];
+    /** « 30 frimaire an XI » (1792-1805), sinon '' */
+    function republicanText(y, m, d) { const r = republican(y, m, d); if (!r) return ''; return r.mois === 13 ? `${REP_MONTHS[12]} ${r.jour}, an ${ROMAN[r.an]}` : `${r.jour === 1 ? '1er' : r.jour} ${REP_MONTHS[r.mois - 1]} an ${ROMAN[r.an]}`; }
+
+    /* ═════ 🐴 la poste aux chevaux (pack lo-poste, Zenodo 11196161, ODbL) ═════ */
+    /** l'année du réseau pour une date : la dernière avant (1632 → 1833) ; après 1833 jusqu'en 1850, 1833 ; sinon null */
+    function posteYear(years, y) { const ys = [...years].sort((a, b) => a - b); if (!y || y < ys[0] || y > 1850) return null; return ys.filter(x => x <= y).pop(); }
+    /** Dijkstra : minutes de poste depuis un relais (routes à double sens) → Map(id → minutes) */
+    function posteTimes(flat, from) {
+        const adj = new Map(), add = (a, b, w) => { if (!adj.has(a)) adj.set(a, []); adj.get(a).push([b, w]); };
+        for (let i = 0; i + 2 < flat.length; i += 3) { add(flat[i], flat[i + 1], flat[i + 2]); add(flat[i + 1], flat[i], flat[i + 2]); }
+        const dist = new Map([[from, 0]]), done = new Set(), heap = [[0, from]];
+        const push = x => { heap.push(x); let i = heap.length - 1; while (i) { const p = (i - 1) >> 1; if (heap[p][0] <= heap[i][0]) break; [heap[p], heap[i]] = [heap[i], heap[p]]; i = p; } };
+        const pop = () => { const top = heap[0], last = heap.pop(); if (heap.length) { heap[0] = last; let i = 0; for (;;) { const l = 2 * i + 1, r = l + 1; let m = i; if (l < heap.length && heap[l][0] < heap[m][0]) m = l; if (r < heap.length && heap[r][0] < heap[m][0]) m = r; if (m === i) break; [heap[m], heap[i]] = [heap[i], heap[m]]; i = m; } } return top; };
+        heap.length = 0; push([0, from]);
+        while (heap.length) { const [d, u] = pop(); if (done.has(u)) continue; done.add(u); for (const [v, w] of adj.get(u) || []) { const nd = d + w; if (nd < (dist.get(v) ?? Infinity)) { dist.set(v, nd); push([nd, v]); } } }
+        return dist;
+    }
+    /** le relais le plus proche d'un point parmi ceux qui ont un temps : {id, km} */
+    function nearestRelay(relays, times, lat, lon) {
+        let best = null;
+        for (const [id, t] of times) { const r = relays[id]; if (!r) continue; const k = km(lat, lon, r[0], r[1]); if (!best || k < best.km) best = {id, km: k, minutes: t}; }
+        return best;
+    }
+    return {jdn, easterJdn, weekday, tempsClos, republican, republicanText, REP_MONTHS, chome, dispense, kinWords, median, share, oneIn, century, ROMAN, radiusBy, monthsOf, km, gravityPath, clockOf, posteYear, posteTimes, nearestRelay};
 });
