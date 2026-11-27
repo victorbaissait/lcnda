@@ -35,7 +35,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: meteo-donnees
+  group: meteo-donnees-${{ github.event.inputs.quoi || github.ref_name }}  # un pack à la fois, mais les packs différents en parallèle
   cancel-in-progress: false
 
 jobs:
