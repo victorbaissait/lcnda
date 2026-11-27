@@ -165,7 +165,7 @@
     const rowLi = (d, r, i) => { const sub = rowSub(d, r); return `<li class="${r._fam ? 'is-fam' : ''}"><button type="button" class="link-button" data-atd-row="${i}">${esc(rowTitle(d, r) || '—')}</button>${sub ? ` <small>${esc(sub)}</small>` : ''}${famMark(r)}${srcA(d, r)}</li>`; };
     const dayKey = () => { const t = new Date(); return `${String(t.getMonth() + 1).padStart(2, '0')}-${String(t.getDate()).padStart(2, '0')}`; };
 
-    /** le corps montré : liste, tableau, cartes, nombre, graphique, carte, frise, ce jour-là, défilant (+ regroupement, « + N autres ») */
+    /** le corps montré : liste, tableau, cartes, nombre, graphique, carte, frise, ce jour-là, défilant (+ regroupement, « ＋ N autres ») */
     function view(res, c0) {
         const c = cfgOf(c0), d = res.d;
         if (res.note) return emptyLine('💬', esc(res.note));
@@ -451,7 +451,7 @@
         const id = 'atd' + Math.random().toString(36).slice(2, 9), c = cfgOf(widget?.config);
         setTimeout(() => { const el = document.getElementById(id); if (!el) return; const tabs = tabsOf(widget?.config);
             const paint = k => { const t = cfgOf(tabs[k]); el.innerHTML = `${tabBar(tabs, k)}<div class="atd"></div>`; el.querySelectorAll('[data-atd-tab]').forEach(b => b.addEventListener('click', () => paint(Number(b.dataset.atdTab))));
-                const box = el.lastElementChild; if (!t.src && !t.ask) box.innerHTML = emptyLine('📊', esc(T('Choisis la liste dans ⚙ Réglages du widget.'))); else show(box, t); };
+                const box = el.lastElementChild; if (!t.src && !t.ask) box.innerHTML = emptyLine('📊', esc(T('Choisis la liste dans ⚙️ Réglages du widget.'))); else show(box, t); };
             paint(0); }, 0);
         const html = `<div class="atd-dash" id="${id}"></div>`;
         return A().card ? A().card(index, `📊 ${T('Données téléchargées')}`, '', html, span) : html;

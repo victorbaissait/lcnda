@@ -14,7 +14,7 @@
  * La liste réunie « 🏛 Patrimoine du monde » (thème monuments) : Mérimée (France, rang 1), le Répertoire du Québec (l10t_quebec,
  *   rang 1) et Wikidata (rang 2) ; un même bien = même identifiant de registre (Mérimée P380, RPCQ P633, NHLE P1216…) ou même Q….
  * Rien ne part sur Internet : tout est lu sur l'ordinateur, seulement pour une personne décédée (ou née il y a plus de 110 ans) et non
- *   confidentielle. Seuls les liens « ↗ » ouvrent une page, sur un clic ; « 🔎 Chercher ce lieu dans les collections en ligne » donne des
+ *   confidentielle. Seuls les liens « ↗ » ouvrent une page, sur un clic ; « 🔍 Chercher ce lieu dans les collections en ligne » donne des
  *   liens (le nom du lieu part seulement quand on clique) et n'existe pas en consultation (kiosque) ni pour un invité du réseau local.
  *   Aucune image n'est chargée toute seule.
  * localStorage : « genealogie-telech-k » (sujets, km = rayon du patrimoine, kmm = rayon des musées).
@@ -230,7 +230,7 @@
         ['Te Papa (PD)', 'https://collections.tepapa.govt.nz/search/{q}'],
         ['Europeana', 'https://www.europeana.eu/fr/search?query={q}&reusability=open'],
         ['Racinet, « Le costume historique » 1888 (Wikimedia Commons)', 'https://commons.wikimedia.org/w/index.php?search=Racinet+%22costume+historique%22+{q}&ns6=1&ns14=1']];
-    const collLinks = name => (kiosk() || !name ? '' : `<details class="tkx-more tkx-online"><summary>${esc(T('🔎 Chercher « {p} » dans les collections ouvertes (en ligne)', {p: name}))}</summary><p class="muted">${esc(T('Chaque lien ouvre le site du musée et y envoie le nom du lieu, seulement quand on clique. Aucune image n’est chargée ici.'))}</p><p class="tkx-links">${COLLECTIONS.map(([l, u]) => link(u.replace('{q}', encodeURIComponent(name)), `↗ ${l}`)).join(' · ')}</p></details>`);
+    const collLinks = name => (kiosk() || !name ? '' : `<details class="tkx-more tkx-online"><summary>${esc(T('🔍 Chercher « {p} » dans les collections ouvertes (en ligne)', {p: name}))}</summary><p class="muted">${esc(T('Chaque lien ouvre le site du musée et y envoie le nom du lieu, seulement quand on clique. Aucune image n’est chargée ici.'))}</p><p class="tkx-links">${COLLECTIONS.map(([l, u]) => link(u.replace('{q}', encodeURIComponent(name)), `↗ ${l}`)).join(' · ')}</p></details>`);
 
     /* ─────────── 👤 la fiche d'une personne ─────────── */
     const PERSON_PARTS = ['patrimoine', 'musees', 'collections', 'langues', 'cerisiers', 'prenoms'];
@@ -494,7 +494,7 @@
                 ${P.mus.length ? '' : `<p class="muted">${esc(T('L’annuaire des musées n’est pas encore fabriqué : la liste « 🖼 Musées du monde » montre déjà les œuvres du domaine public.'))}</p>`}
                 <p class="muted">${esc(T('Le ciel la nuit et les étés secs du monde entier prolongent « 🌌 Ciel, climat et mémoire » (lot E) : ils s’y affichent.'))}</p>
                 <h4>${esc(T('En lien seulement'))}</h4><ul class="hist-ul tkx-ul">${LINK_ONLY.map(([i, l, why, u]) => `<li>${esc(i)} <b>${esc(T(l))}</b> — ${esc(T(why))} ${link(u, T('↗ ouvrir'))}</li>`).join('')}</ul>
-                <p class="muted">${esc(T('Tout est lu sur l’ordinateur : rien ne part sur Internet, ni nom ni lieu, pour personne. Les liens « ↗ » et « 🔎 Chercher dans les collections » ouvrent une page seulement quand on clique, jamais en consultation ; aucune image n’est chargée toute seule.'))}</p></div></section>`;
+                <p class="muted">${esc(T('Tout est lu sur l’ordinateur : rien ne part sur Internet, ni nom ni lieu, pour personne. Les liens « ↗ » et « 🔍 Chercher dans les collections » ouvrent une page seulement quand on clique, jamais en consultation ; aucune image n’est chargée toute seule.'))}</p></div></section>`;
     }
     if (root.document) document.addEventListener('change', e => {
         const t = e.target.closest?.('[data-tkx-tg]');

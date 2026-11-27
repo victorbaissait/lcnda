@@ -213,7 +213,7 @@
     function groupHtml(t) {
         return `<span class="cx-tool-btns" data-cx-tool="${esc(t.id)}" role="group" aria-label="${esc(T('Insérer et prendre'))}">`
             + `<button type="button" class="cx-tool-b" data-cx-tool-ins title="${esc(T('📎 Insérer une info (une date, un lieu, une ligne de liste…) — {k}', {k: keyHint('insert_info') || '⌥⌘K'}))}" aria-label="${esc(T('Insérer une info'))}">📎</button>`
-            + (t.noReceive ? '' : `<button type="button" class="cx-tool-b" data-cx-tool-add title="${esc(T('📥 Prendre depuis…, 🧺 le panier, prendre la sélection'))}" aria-label="${esc(T('Ajouter depuis le panier ou ailleurs'))}" aria-haspopup="menu">📥<span aria-hidden="true">▾</span></button>`) + '</span>';
+            + (t.noReceive ? '' : `<button type="button" class="cx-tool-b" data-cx-tool-add title="${esc(T('📥 Prendre depuis…, 🧺 le panier, prendre la sélection'))}" aria-label="${esc(T('Ajouter depuis le panier ou ailleurs'))}" aria-haspopup="menu">＋<span aria-hidden="true">▾</span></button>`) + '</span>';
     }
     function paintGroups() {
         TOOLS.forEach(t => document.querySelectorAll(t.bar).forEach(bar => {

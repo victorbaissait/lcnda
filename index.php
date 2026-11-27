@@ -1367,7 +1367,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-reordonner.js?v=3" defer></script>
 <script src="assets/js/app-listes.js?v=71" defer></script>
 <script src="assets/js/app-listes-donnees.js?v=21" defer></script>
-<script src="assets/js/app-carte-fiche.js?v=2" defer></script><!-- 🗺 la fiche d'un point de carte (bulle, 📌 panneau, feuille en bas), sans quitter la carte -->
+<script src="assets/js/app-carte-fiche.js?v=3" defer></script><!-- 🗺 la fiche d'un point de carte (bulle, 📌 panneau, feuille en bas), sans quitter la carte -->
 <script src="assets/js/app-listes-themes.js?v=10" defer></script><!-- 🗂 Listes → Données par thème (20 thèmes), recherche sur toutes les listes ; Réglages → 🧰 Listes de données -->
 <script src="assets/js/app-listes-reunies.js?v=6" defer></script><!-- 🔀 listes réunies (🌋 Séismes réunis) : plusieurs sources, sans doublons -->
 <script src="assets/js/app-listes-famille.js?v=3" defer></script><!-- 👪 « Dans la famille » : calculé ici (GET ld_famille) -->
@@ -1404,7 +1404,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-controle.js?v=13" defer></script>
 <script src="assets/js/heritage-commune-histoire.js?v=1" defer></script>
 <script src="assets/js/heritage-records.js?v=13" defer></script>
-<script src="assets/js/heritage-research.js?v=45" defer></script>
+<script src="assets/js/heritage-research.js?v=46" defer></script>
 <script src="assets/js/heritage-av.js?v=22" defer></script>
 <script src="assets/js/heritage-recueil-table.js?v=10" defer></script>
 <script src="assets/js/heritage-recueil-sens.js?v=2" defer></script>
@@ -1431,7 +1431,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-assemble.js?v=11" defer></script>
 <script src="assets/js/heritage-columns.js?v=9" defer></script>
 <script src="assets/js/heritage-atelier-widgets.js?v=10" defer></script>
-<script src="assets/js/heritage-atelier-donnees.js?v=4" defer></script><!-- 📊 Données téléchargées : widget du projet, widget du tableau de bord, élément de l’Atelier -->
+<script src="assets/js/heritage-atelier-donnees.js?v=5" defer></script><!-- 📊 Données téléchargées : widget du projet, widget du tableau de bord, élément de l’Atelier -->
 <script src="assets/js/heritage-voters.js?v=11" defer></script>
 <script src="assets/js/heritage-widgets.js?v=56" defer></script>
 <script src="assets/js/heritage-shortcuts.js?v=18" defer></script>
@@ -1744,7 +1744,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-terre-mots.js?v=3" defer></script>
 <script src="assets/js/heritage-veille-deces.js?v=6" defer></script>
 <script src="assets/js/heritage-arbres-en-ligne.js?v=1" defer></script>
-<script src="assets/js/heritage-pistes-auto.js?v=3" defer></script>
+<script src="assets/js/heritage-pistes-auto.js?v=4" defer></script>
 <script src="assets/js/heritage-branches-isolees.js?v=1" defer></script>
 <script src="assets/js/heritage-parents-celebres.js?v=1" defer></script>
 <script src="assets/js/heritage-connexions.js?v=19" defer></script>
@@ -1752,7 +1752,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-paniers.js?v=7" defer></script><!-- 🧺 l’onglet Paniers (caché au départ ; lib/paniers.php) -->
 <script src="assets/js/app-inserer.js?v=7" defer></script><!-- 📎 Insérer une info à l’endroit du curseur, dans tout texte libre (« / », 📎, ⌥⌘K) -->
 <script src="assets/js/heritage-connexions-besoins.js?v=5" defer></script>
-<script src="assets/js/heritage-connexions-outils.js?v=3" defer></script><!-- 🧺 📎 dans les outils : « Ici : l’outil ouvert » (Mettre dans…, Prendre depuis…), 📎 · 📥 dans leur barre, la source à leur façon --><!-- 🧩 les besoins : pistes qui disent ce qui leur manque, « Cet acte répond à… », Ma semaine → Ce qui manque, carte (lib/connexions_besoins.php) -->
+<script src="assets/js/heritage-connexions-outils.js?v=4" defer></script><!-- 🧺 📎 dans les outils : « Ici : l’outil ouvert » (Mettre dans…, Prendre depuis…), 📎 · 📥 dans leur barre, la source à leur façon --><!-- 🧩 les besoins : pistes qui disent ce qui leur manque, « Cet acte répond à… », Ma semaine → Ce qui manque, carte (lib/connexions_besoins.php) -->
 <script src="assets/js/ia-serveur.js?v=2" defer></script><!-- 🖥 serveur d’IA : Ollama, Unsloth ou compatible OpenAI (lib/ia_serveur.php) -->
 <script src="assets/js/heritage-assistant-ia.js?v=4" defer></script>
 <script src="assets/js/heritage-reseau.js?v=1" defer></script>
@@ -1777,7 +1777,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-telech-m.js?v=4" defer></script>
 <script src="assets/js/app-lot-n-archives.js?v=2" defer></script>
 <script src="assets/js/app-lot-n2-chiffres.js?v=1" defer></script>
-<script src="assets/js/heritage-telech-k.js?v=1" defer></script>
+<script src="assets/js/heritage-telech-k.js?v=2" defer></script>
 <script src="assets/js/heritage-telech-l.js?v=1" defer></script><!-- 🌐 Les équivalents d’ailleurs (lot L) -->
 <script src="assets/js/heritage-telech-j.js?v=1" defer></script>
 <script src="assets/js/noms-lieux-monde.js?v=3" defer></script><!-- 🔎 Noms de lieux d’autrefois, tous pays : « un nom → le lieu d’aujourd’hui » (vue de 🗺 Anciens noms de lieux, 📊 Récap, ⌘K) -->
@@ -1803,7 +1803,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-sections.js?v=11" defer></script>
 <script src="assets/js/app-premier.js?v=7" defer></script>
 <script src="assets/js/app-visite.js?v=3" defer></script>
-<script src="assets/js/app-je-veux.js?v=3" defer></script><!-- 🧭 Je veux… : ⌘K, Recherche, Listes, Réglages (le moteur et les écrans se chargent à la première ouverture : app-je-veux-moteur.js, app-je-veux-ui.js) -->
+<script src="assets/js/app-je-veux.js?v=4" defer></script><!-- 🧭 Je veux… : ⌘K, Recherche, Listes, Réglages (le moteur et les écrans se chargent à la première ouverture : app-je-veux-moteur.js, app-je-veux-ui.js) -->
 <script src="assets/js/app-a-trier.js?v=2" defer></script>
 <script src="assets/js/heritage-comptes-famille.js?v=2" defer></script>
 <script src="assets/js/app-htr-correction.js?v=2" defer></script>

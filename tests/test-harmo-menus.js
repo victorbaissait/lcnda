@@ -80,7 +80,10 @@ step('K14 : « ⋯ » ouvre toujours le menu de l’app ; le clic droit aussi', 
     const viaMethod = (f, l) => [...l.slice(l.indexOf("'contextmenu'")).matchAll(/this\.([A-Za-z_$][\w$]*)\(/g)].some(([, name]) => { const at = all[f].search(new RegExp(`\\n\\s*(?:async\\s+)?${name}\\([\\w, ]*\\)\\s*\\{`)); return at >= 0 && /contextMenu\(|menuAt\(/.test(all[f].slice(at, at + 4000)); }); // menuAt : le menu de l'app (contextMenu n'en est qu'un raccourci)
     // … ou par une fonction du même fichier (« e => moreMenu(id, {x, y}) ») : on regarde aussi dans cette fonction
     const viaFunction = (f, n) => { const body = all[f].split('\n').slice(n - 1, n + 6).join('\n'); return [...body.matchAll(/\b([A-Za-z_$][\w$]*)\(/g)].some(([, name]) => { const at = all[f].search(new RegExp(`\\bfunction ${name}\\(`)); return at >= 0 && /contextMenu(\?\.)?\(|menuAt(\?\.)?\(/.test(all[f].slice(at, at + 4000)); }); };
-    for (const [f, n, l] of cm) assert.ok(/contextMenu|e => e\.preventDefault\(\)\);/.test(l) || /contextMenu/.test(all[f].split('\n').slice(n - 1, n + 6).join('\n')) || viaMethod(f, l) || viaFunction(f, n), `${f}:${n}`);
+    // 🧺 clic droit sur un bouton panier : ouvre le menu de l'app « Dans quel panier ? » (bkBtn → take → askBasket → UI.menuAt)
+    const bk = ([f, , l]) => f === 'heritage-connexions.js' && /bkBtn\(e\.target\)/.test(l);
+    if (cm.some(bk)) assert.match(all['heritage-connexions.js'], /UI\(\)\.menuAt\?\.\(ptOf\(anchor\), rows, \{title: n > 1 \? T\('Dans quel panier \? \(\{n\}\)'/);
+    for (const [f, n, l] of cm.filter(x => !bk(x))) assert.ok(/contextMenu|e => e\.preventDefault\(\)\);/.test(l) || /contextMenu/.test(all[f].split('\n').slice(n - 1, n + 6).join('\n')) || viaMethod(f, l) || viaFunction(f, n), `${f}:${n}`);
     assert.doesNotMatch(all['heritage-keynote.js'], /contextmenu', e => \{ e\.preventDefault\(\); prev\(\); \}/);
     assert.match(all['app-ui.js'], /UI\.menuAt = \(anchor, items, \{title = '', onClose = null, at = null\}/);
 });

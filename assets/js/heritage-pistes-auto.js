@@ -184,7 +184,7 @@
             host.querySelector('[data-pst-pills]').innerHTML = [['new', T('À vérifier'), c.new], ['added', T('Rattachées'), c.added], ['no', T('Écartées'), c.no]]
                 .map(([k, l, n]) => `<button type="button" data-pst-status="${k}" class="${f.status === k ? 'is-active' : ''}">${esc(l)} <span class="ctl-n">(${fmt(n)})</span></button>`).join('');
             const L = host.querySelector('[data-pst-list]'), loaded = r.rows.length;
-            // 🗂 un cadre par personne (réglage genealogie-cadres) : ses pistes de la page ensemble ; celles d'autres pages (tri par note) en « + N autres pistes »
+            // 🗂 un cadre par personne (réglage genealogie-cadres) : ses pistes de la page ensemble ; celles d'autres pages (tri par note) en « ＋ N autres pistes »
             if (framesOn && r.rows.length) {
                 for (const pid of [...opened.keys()]) if (!r.rows.some(x => x.person_id === pid)) opened.delete(pid);
                 const extra = await Promise.all([...opened.keys()].map(pid => get('pistes_list', {person_id: pid, status: f.status, src: f.src, min: f.min, q: f.q, sort: f.sort, limit: 500}).then(x => x.rows || []).catch(() => opened.get(pid))));
@@ -199,7 +199,7 @@
             if (r.total > loaded) { const b = document.createElement('button'); b.type = 'button'; b.className = 'button secondary'; b.textContent = T('Voir {n} de plus', {n: Math.min(50, r.total - loaded)}); b.onclick = () => { shown += 50; draw(); }; more.appendChild(b); }
         };
         host.__pstRedraw = draw;
-        const opened = new Map(); // les personnes dont on a chargé toutes les pistes (« + N autres pistes »)
+        const opened = new Map(); // les personnes dont on a chargé toutes les pistes (« ＋ N autres pistes »)
         host.addEventListener('click', async e => {
             const b = e.target.closest('[data-pst-rest]'); if (!b) return;
             const pid = Number(b.dataset.pstRest); b.disabled = true;

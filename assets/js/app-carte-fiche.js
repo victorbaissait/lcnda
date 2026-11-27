@@ -4,7 +4,7 @@
  *  Listes, listes réunies ; la vue 🗺 d'un bloc Données d'une Fiche, heritage-fiches.js) :
  *   - un point : une petite fiche accrochée au point (titre, au plus 6 lignes, 👪 Dans la famille, ↗ la source, 📎 · 🧺 · ☰ Voir la ligne ·
  *     🔍 Zoomer ici · ✕) ; elle suit la carte quand on la déplace ;
- *   - une pastille « 42 », ou des points posés les uns sur les autres : la liste des lignes de cet endroit (10, puis « + N autres ») ;
+ *   - une pastille « 42 », ou des points posés les uns sur les autres : la liste des lignes de cet endroit (10, puis « ＋ N autres ») ;
  *     chacune s'ouvre en fiche ; « 🔍 Zoomer ici » fait ce que faisait la pastille (zoomer pour séparer) ;
  *   - 📌 Garder ouvert : la fiche devient un panneau à droite DANS le cadre de la carte ; on clique point après point, il suit.
  *     Retenu (localStorage « genealogie-carte-fiche » : « popup » au départ, ou « panel ») ;
