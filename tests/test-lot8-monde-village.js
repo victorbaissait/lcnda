@@ -160,7 +160,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         await p.waitForFunction(() => !!window.LCNDA_EXT?.lot8MondeVillage);
 
         await t('fiche : « 🎡 Le monde de son village » de Pierre MAZAUD : Carmen, l’Exposition, le 11 novembre 1918, une foire ; source à un clic', async () => {
-            await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 1; A.setModule('personnes'); });
+            await p.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; /* ce bloc essayé en entier, toute la fiche d'un coup (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = 1; A.setModule('personnes'); });
             await p.waitForSelector('[data-l8c-person="1"] .l8c-row', {timeout: 30000});
             const txt = await p.textContent('[data-l8c-person="1"]');
             if (process.env.L8C_SHOW) console.log(await p.$$eval('[data-l8c-person="1"] .hist-t > p', l => l.map(x => '    ' + x.textContent).join('\n')));
@@ -174,12 +174,12 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         });
 
         await t(`fiche : Marie LACOMBE à ${lord.commune} avant 1789 → son seigneur ; Jean DURAND (rien) : bloc caché`, async () => {
-            await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 2; A.setModule('personnes'); });
+            await p.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; /* ce bloc essayé en entier, toute la fiche d'un coup (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = 2; A.setModule('personnes'); });
             await p.waitForSelector('[data-l8c-person="2"] .l8c-row', {timeout: 30000});
             const txt = await p.textContent('[data-l8c-person="2"]');
             if (process.env.L8C_SHOW) console.log(await p.$$eval('[data-l8c-person="2"] .hist-t > p', l => l.map(x => '    ' + x.textContent).join('\n')));
             assert.ok(txt.includes(lord.commune) && /👑|seigneur|vivait sous/.test(txt), txt.slice(0, 300));
-            await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 3; A.setModule('personnes'); });
+            await p.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; /* ce bloc essayé en entier, toute la fiche d'un coup (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = 3; A.setModule('personnes'); });
             await p.waitForSelector('[data-l8c-person="3"]', {state: 'attached', timeout: 20000}); await sleep(2500);
             assert.strictEqual(await p.evaluate(() => document.querySelector('[data-l8c-person="3"]').closest('section.card').hidden), true);
         });

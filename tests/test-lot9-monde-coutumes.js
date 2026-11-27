@@ -194,7 +194,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
 
         /* ═════════ 2. l'écran ═════════ */
         await t('fiche de Jean MAZAUD : « 🌍 Son monde et ses coutumes » — planète, pape, voyages, compagnons, médaille, uniformes, mariage, deuil, éclairage', async () => {
-            await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 1; A.setModule('personnes'); });
+            await p.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; /* ce bloc essayé en entier, toute la fiche d'un coup (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = 1; A.setModule('personnes'); });
             await p.waitForSelector('[data-l9-person="1"] [data-l9-line="planete"]', {timeout: 20000});
             await p.waitForSelector('[data-l9-person="1"] [data-l9-line="deuil"]', {timeout: 10000});
             const line = async k => (await p.$(`[data-l9-person="1"] [data-l9-line="${k}"]`)) ? p.textContent(`[data-l9-person="1"] [data-l9-line="${k}"]`) : '';
@@ -212,19 +212,19 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             if (process.env.L9B_SHOT) { await p.$eval('[data-pblock="monde_coutumes"]', el => { el.querySelectorAll('details').forEach(d => { d.open = true; }); el.scrollIntoView(); }); await (await p.$('[data-l9-person="1"]')).screenshot({path: process.env.L9B_SHOT}); }
         });
         await t('fiche de Pierre MAZAUD (né à Paris, mort à Avallon à 1 an) : 👶 les nourrices ; Où chercher : les registres des nourrices', async () => {
-            await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 3; A.setModule('personnes'); });
+            await p.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; /* ce bloc essayé en entier, toute la fiche d'un coup (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = 3; A.setModule('personnes'); });
             await p.waitForSelector('[data-l9-person="3"] [data-l9-line="nourrices"]', {timeout: 20000});
             assert.match(await p.textContent('[data-l9-person="3"] [data-l9-line="nourrices"]'), /Né·e à Paris, mort·e à Avallon avant 3 ans/);
             const txt = await p.evaluate(async () => { const body = document.createElement('div'); document.body.appendChild(body); window.LCNDA_EXT.ouChercher.afterRedraw.forEach(fn => fn({pid: 3}, body)); for (let i = 0; i < 40 && !body.querySelector('[data-l9-ouc-nourrice]'); i++) await new Promise(r => setTimeout(r, 100)); const t = body.textContent; body.remove(); return t; });
             assert.match(txt, /Les registres des nourrices/); assert.match(txt, /loi Roussel/);
         });
         await t('fiche de Gilbert PETIT : 🎓 « Thèse d’exercice (Médecine), Paris, 1886 » avec ✓ C’est lui / ✗ Pas lui', async () => {
-            await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 4; A.setModule('personnes'); });
+            await p.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; /* ce bloc essayé en entier, toute la fiche d'un coup (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = 4; A.setModule('personnes'); });
             await p.waitForSelector('[data-l9-person="4"] [data-l9-line="these"] [data-l9-these-add]', {timeout: 20000, state: 'attached'});
             assert.match(await p.textContent('[data-l9-person="4"] [data-l9-line="these"]'), /Thèse d.exercice \(médecine\), Paris, 1886 : « Des rapports/i);
         });
         await t('fiche de Louis DURAND (Tulle, 1750-1810) : 🧂 pays rédimé, avec la phrase de Wikipédia', async () => {
-            await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 6; A.setModule('personnes'); });
+            await p.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; /* ce bloc essayé en entier, toute la fiche d'un coup (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = 6; A.setModule('personnes'); });
             await p.waitForSelector('[data-l9-person="6"] [data-l9-line="gabelle"]', {timeout: 20000});
             const txt = await p.textContent('[data-l9-person="6"] [data-l9-line="gabelle"]');
             assert.match(txt, /Avant 1790, à Tulle : pays rédimé/); assert.match(txt, /Henri II/);
@@ -262,7 +262,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.match(s, /CC BY 3\.0 IGO/); assert.match(s, /Licence Ouverte/); assert.match(s, /CC0 1\.0/);
             await p.uncheck('[data-l9-tg="pape"] input');
             assert.strictEqual(JSON.parse(await p.evaluate(() => localStorage.getItem('genealogie-monde-coutumes'))).pape, false);
-            await p.evaluate(() => { window.LCNDA_EXT.mondeCoutumes && document.querySelectorAll('[data-l9-done]').forEach(x => x.removeAttribute('data-l9-done')); const A = window.LCNDA_APP; A.state.currentPersonId = 1; A.setModule('personnes'); });
+            await p.evaluate(() => { window.LCNDA_EXT.mondeCoutumes && document.querySelectorAll('[data-l9-done]').forEach(x => x.removeAttribute('data-l9-done')); window.LCNDA_SHEET_LAZY_OFF = true; /* ce bloc essayé en entier, toute la fiche d'un coup (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = 1; A.setModule('personnes'); });
             await p.waitForSelector('[data-l9-person="1"] [data-l9-line="planete"]', {timeout: 20000});
             assert.strictEqual(await p.$('[data-l9-person="1"] [data-l9-line="pape"]'), null);
             await p.evaluate(() => localStorage.removeItem('genealogie-monde-coutumes'));

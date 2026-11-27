@@ -71,16 +71,21 @@ function vd_insee(PDO $pdo): array
 }
 
 /** les fiches surveillées : pas décédées, sans décès ni inhumation notés, nées il y a moins de 110 ans (année connue), pas un animal */
-function vd_watched(PDO $pdo): array
+function vd_watched_sql(PDO $pdo): string
 {
     $min = (int) date('Y') - VD_MAX_AGE;
     $hasKind = (bool) $pdo->query("SELECT 1 FROM pragma_table_info('persons') WHERE name='kind'")->fetchColumn();
-    $sql = "SELECT p.id FROM persons p WHERE p.living_status <> 'deceased'" . ($hasKind ? " AND COALESCE(p.kind,'person') <> 'animal'" : '') . "
+    return "SELECT p.id FROM persons p WHERE p.living_status <> 'deceased'" . ($hasKind ? " AND COALESCE(p.kind,'person') <> 'animal'" : '') . "
         AND NOT EXISTS (SELECT 1 FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag IN ('DEAT','BURI','CREM'))
         AND EXISTS (SELECT 1 FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag IN ('BIRT','CHR','BAPM') AND e.year >= $min)";
-    $ids = array_map('intval', $pdo->query($sql)->fetchAll(PDO::FETCH_COLUMN));
+}
+function vd_watched(PDO $pdo): array
+{
+    $ids = array_map('intval', $pdo->query(vd_watched_sql($pdo))->fetchAll(PDO::FETCH_COLUMN));
     return $ids ? succ_persons($pdo, $ids) : [];
 }
+/** seulement leur nombre (l'état de la veille, demandé à chaque fiche) : sans relire chaque fiche */
+function vd_watched_count(PDO $pdo): int { return (int) $pdo->query('SELECT COUNT(*) FROM (' . vd_watched_sql($pdo) . ')')->fetchColumn(); }
 
 /** les lignes INSEE d'un nom (exact, nom composé, ou proche à deux lettres près), nées à un an près */
 function vd_rows(PDO $pdo, string $name, int $by, int $afterImport): array
@@ -158,7 +163,7 @@ function vd_status(PDO $pdo): array
     $ins = vd_insee($pdo);
     return ['insee' => $ins, 'pending' => vd_pending_count($pdo), 'last_run' => vd_get($pdo, 'last_run'), 'last_import' => (int) vd_get($pdo, 'last_import', '0'),
         'new_file' => $ins['installed'] && (int) $ins['max_import'] > (int) vd_get($pdo, 'last_import', '0'),
-        'watched' => count(vd_watched($pdo)), 'source' => ['label' => VD_SOURCE_TITLE, 'url' => VD_SOURCE_URL, 'licence' => VD_LICENCE, 'licence_url' => VD_LICENCE_URL]];
+        'watched' => vd_watched_count($pdo), 'source' => ['label' => VD_SOURCE_TITLE, 'url' => VD_SOURCE_URL, 'licence' => VD_LICENCE, 'licence_url' => VD_LICENCE_URL]];
 }
 
 /** adresse de recherche de la ligne dans matchID (moteur ouvert du même fichier INSEE) */

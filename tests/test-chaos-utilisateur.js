@@ -235,6 +235,8 @@ const finish = () => { console.log(`\n${count} réussi(s), ${failed} échec(s)`)
 
             await t('3g. double-clic sur « ✗ » d’une carte 🌠 (Ce qui le concerne) : une seule carte cachée, une seule fenêtre', async () => {
                 const page = await open(`#personnes/${ids.jacques}`);
+                // « 🔎 Ce qui le concerne » se remplit quand il arrive à l'écran (app-fiche-lazy.js) : on y descend, comme en lisant la fiche
+                await page.waitForSelector('#workspace [data-pblock="tout_sur"]', { timeout: 90000, state: 'attached' }); await page.$eval('#workspace [data-pblock="tout_sur"]', e => e.scrollIntoView({ block: 'center' }));
                 const card = page.locator('[data-ts-block] li.ts-sug').filter({ hasText: /1812/ }).filter({ hasText: /Chantonnay/ }).filter({ has: page.locator('.ts-ico', { hasText: '🌠' }) });
                 const nope = card.locator('[data-ts-nope]').first(); await nope.waitFor({ timeout: 90000 });
                 // le bloc se redessine tant que des données arrivent (hors ligne, puis « en ligne » 2,5 s après) : on attend qu'il ait fini
@@ -253,7 +255,7 @@ const finish = () => { console.log(`\n${count} réussi(s), ${failed} échec(s)`)
             });
 
             await t('3h. double-clic sur « 🔗 Relier un recueil » (aucun recueil) : une seule question « Aucun recueil »', async () => {
-                const page = await open(`#personnes/${ids.henri}`); const b = page.locator('[data-rc-attach]').first(); await b.waitFor({ timeout: 90000 });
+                const page = await open(`#personnes/${ids.henri}`); await page.waitForSelector('#workspace .person-page [data-pblock]', { timeout: 90000, state: 'attached' }); await page.waitForFunction(() => window.LCNDA_SHEET_LAZY?.pending?.() > 0 || !document.querySelector('#workspace .person-page .is-lazy'), null, { timeout: 30000 }).catch(() => {}); await page.evaluate(() => window.LCNDA_SHEET_LAZY?.showAll?.()); /* toute la fiche (app-fiche-lazy.js), comme ⌘F */ const b = page.locator('[data-rc-attach]').first(); await b.waitFor({ timeout: 90000 });
                 await b.scrollIntoViewIfNeeded(); await b.dblclick();
                 await page.waitForFunction(() => [...document.querySelectorAll('dialog[open]')].some(d => /Aucun recueil/.test(d.textContent)), null, { timeout: 60000 });
                 await quiet(page);

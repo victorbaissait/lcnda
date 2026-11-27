@@ -157,7 +157,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         /* ═════════ 2. l'écran ═════════ */
         // ouvrir une fiche comme l'app (openPersonById) puis attendre que le bloc ait FINI (en ligne compris) : data-l10-ready
         const ready = id => p.waitForSelector(`[data-l10-person="${id}"][data-l10-ready]`, {timeout: 60000, state: 'attached'});
-        const open = async id => { await p.evaluate(x => window.LCNDA_APP.openPersonById(x), id); await ready(id); };
+        const open = async id => { await p.evaluate(x => { window.LCNDA_SHEET_LAZY_OFF = true; /* le bloc essayé en entier (le chargement à mesure : test-fiche-lazy.js) */ window.LCNDA_APP.openPersonById(x); }, id); await ready(id); };
         const line = async (id, k) => ((await p.$(`[data-l10-person="${id}"] [data-l10-line="${k}"]`)) ? p.textContent(`[data-l10-person="${id}"] [data-l10-line="${k}"]`) : '');
         await t('fiche de Jean MAZAUD : 🌋 1816, 🪨 Grenoble 1837, 🕳️ carrières de Caen, 👥 son nom, 🚶 Marie à Naves, 🐴 sa route, 🗺️ la parcelle', async () => {
             await open(1);

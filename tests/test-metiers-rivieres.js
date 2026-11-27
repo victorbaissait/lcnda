@@ -147,13 +147,13 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         });
 
         await t('écran : « ⛏️ Son métier, près de chez lui » (Jean) ; caché pour Paul ; 🌊 dans « 🏘 Le lieu à son époque »', async () => {
-            await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 1; A.setModule('personnes'); });
+            await p.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; /* ces blocs essayés en entier (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = 1; A.setModule('personnes'); });
             await p.waitForSelector('[data-mr-metier="1"] .mr-row', {timeout: 20000});
             const txt = await p.$eval('[data-mr-metier="1"]', n => n.closest('section.card').textContent);
             assert.match(txt, /Il était maître tanneur\. À .* de Tulle, une tannerie/); assert.match(txt, /il y a peut-être travaillé/); assert.match(txt, /ne dit pas les années/);
             assert.ok(await p.$eval('[data-mr-metier="1"]', n => !n.closest('section.card').hidden));
             if (process.env.MR_SHOTS) await (await p.$('[data-mr-metier="1"]')).evaluate(n => n.closest('section.card').scrollIntoView()) || await p.screenshot({path: path.join(process.env.MR_SHOTS, 'personne.png')});
-            await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 2; A.setModule('personnes'); });
+            await p.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; /* ces blocs essayés en entier (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = 2; A.setModule('personnes'); });
             // la rivière (en partie en ligne) attend que le bloc soit à l'écran : on y descend, comme en lisant la fiche
             await p.waitForSelector('[data-hist-life="2"]', {state: 'attached', timeout: 20000}); await p.$eval('[data-hist-life="2"]', e => e.scrollIntoView({block: 'center'}));
             await p.waitForSelector('[data-hist-life="2"] [data-mr-hist]', {timeout: 20000});
@@ -162,7 +162,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.match(h, /la Corrèze/); assert.match(h, /octobre 1960 : 5,33 m/); assert.match(h, /la roue de son moulin tournait avec l’eau de la Corrèze/); assert.match(h, /une marque rappelle la crue/);
             await p.waitForSelector('[data-mr-metier="2"] .mr-row', {timeout: 20000});
             assert.match(await p.$eval('[data-mr-metier="2"]', n => n.textContent), /Elle était meunière\..*un moulin.*c’était peut-être le sien/);
-            await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 3; A.setModule('personnes'); });
+            await p.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; /* ces blocs essayés en entier (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = 3; A.setModule('personnes'); });
             // la rivière (en partie en ligne) attend que le bloc soit à l'écran : on y descend, comme en lisant la fiche
             await p.waitForSelector('[data-hist-life="3"]', {state: 'attached', timeout: 20000}); await p.$eval('[data-hist-life="3"]', e => e.scrollIntoView({block: 'center'}));
             await p.waitForSelector('[data-hist-life="3"] [data-mr-hist]', {timeout: 20000});

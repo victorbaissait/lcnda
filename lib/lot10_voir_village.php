@@ -55,11 +55,16 @@ function l10v_cached(string $kind, string $key, callable $make, bool $fresh = fa
     if (is_file($f)) { $j = json_decode((string) @file_get_contents($f), true); if (is_array($j) && isset($j['data'])) { $c = $j; } }
     if ($c && ($only || (!$fresh && (int) $c['at'] > time() - (L10V_TTL[$kind] ?? 30 * 86400)))) { return $c['data'] + ['cached' => true, 'fetched_at' => (int) $c['at']]; }
     if ($only) { return ['ok' => true, 'notcached' => true]; }
+    // pas de connexion il y a peu (10 min) : on ne redemande pas Internet à chaque fiche (les essais, avec leurs réponses enregistrées, jamais)
+    $down = (getenv('GENEALOGY_TEST') === '1' && (string) getenv('LCNDA_TEST_L10V_DIR') !== '') ? '' : l10v_cache_dir() . '/offline.flag';
+    if ($down !== '' && !$fresh && is_file($down) && (int) @filemtime($down) > time() - 600) { return ['ok' => false, 'offline' => true, 'message' => i18n_t('Pas de connexion à Internet : réessaie quand tu seras connecté.')]; }
     try { $data = $make(); }
     catch (Throwable $e) {
+        if ($down !== '' && preg_match('/connexion|connect|timed? ?out|resolve/i', $e->getMessage())) { l10v_cache_dir(true); @touch($down); }
         if ($c) { return $c['data'] + ['cached' => true, 'stale' => true, 'fetched_at' => (int) $c['at']]; }
         return ['ok' => false, 'offline' => true, 'message' => $e->getMessage()];
     }
+    if ($down !== '') { @unlink($down); }
     @file_put_contents(l10v_cache_dir(true) . '/' . sha1($key) . '.json', json_encode(['key' => $key, 'kind' => $kind, 'at' => time(), 'data' => $data], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), LOCK_EX);
     return $data + ['cached' => false, 'fetched_at' => time()];
 }
@@ -87,7 +92,7 @@ function l10v_http(string $step, string $url, ?array $post = null, bool $raw = f
         $wait = 0.3 - (microtime(true) - $last); if ($wait > 0) { usleep((int) ($wait * 1e6)); }
         $body = ''; $too = false; $retry = 0;
         $ch = curl_init($url);
-        $opt = [CURLOPT_RETURNTRANSFER => false, CURLOPT_FOLLOWLOCATION => false, CURLOPT_CONNECTTIMEOUT => 10, CURLOPT_TIMEOUT => 60, CURLOPT_PROTOCOLS => CURLPROTO_HTTPS,
+        $opt = [CURLOPT_RETURNTRANSFER => false, CURLOPT_FOLLOWLOCATION => false, CURLOPT_CONNECTTIMEOUT => 4, CURLOPT_TIMEOUT => 20, CURLOPT_PROTOCOLS => CURLPROTO_HTTPS, // court : la fiche n'attend jamais longtemps Internet
             CURLOPT_USERAGENT => L10V_UA, CURLOPT_HTTPHEADER => array_merge(['Accept: application/json, application/sparql-results+json, image/png, */*'], $post !== null ? ['Content-Type: application/json'] : []),
             CURLOPT_HEADERFUNCTION => static function ($c, $h) use (&$retry) { if (preg_match('/^retry-after:\s*(\d+)/i', $h, $m)) { $retry = (int) $m[1]; } return strlen($h); },
             CURLOPT_WRITEFUNCTION => static function ($c, $chunk) use (&$body, &$too) { $body .= $chunk; if (strlen($body) > 8_000_000) { $too = true; return 0; } return strlen($chunk); }];

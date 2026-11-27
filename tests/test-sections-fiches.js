@@ -390,7 +390,8 @@ echo 'ok';`);
                 await shot(page, 'reglages-fiches-1440');
             });
             await t('fiche animal unique : anciens liens, sections de l’animal, blocs du suivi, plus de page simple', async () => {
-                await page.evaluate(() => window.LCNDA_EXT.openPet(502));
+                // toute la fiche de l'animal d'un coup : on vérifie où chaque bloc est rangé, pas le chargement à mesure (test-fiche-lazy.js)
+                await page.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; window.LCNDA_EXT.openPet(502); });
                 await page.waitForSelector('.person-page .fsec[data-fsec="s_marks"] .sv-pet-panel .card', {timeout: 10000});
                 assert.equal(await page.evaluate(() => window.LCNDA_APP.state.currentPersonId), ids.gaston);
                 assert.equal(await page.locator('.page.h-pet').count(), 0);

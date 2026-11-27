@@ -414,7 +414,7 @@ echo 'ok';`], {cwd: appRoot, encoding: 'utf8', env: envFor(dir)});
                     assert.ok(rec.members.find(m => m.first === 'Baptiste').person_id === 4);
                 });
                 await t(`${name} : la fiche — pastille « À VÉRIFIER », écart en phrase, « Vérifié sur l’image »`, async () => {
-                    await p.evaluate(() => window.LCNDA_APP.openPersonById(4));
+                    await p.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; /* le bloc Recensements essayé en entier (le chargement à mesure : test-fiche-lazy.js) */ window.LCNDA_APP.openPersonById(4); });
                     await p.waitForSelector('.sf-rec', {state: 'attached', timeout: 15000});
                     // petit écran : sections repliées ou en onglets — on montre celle du bloc Recensements
                     await p.evaluate(() => { const el = document.querySelector('.sf-rec'); document.querySelector('[data-fsec-tab="__all"]')?.click(); const sec = el?.closest('.fsec'); if (sec?.classList.contains('is-folded')) sec.querySelector('[data-fsec-fold]')?.click(); });

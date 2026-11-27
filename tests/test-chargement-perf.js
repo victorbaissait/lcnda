@@ -222,12 +222,13 @@ const get = (url, headers = {}, method = 'GET') => new Promise((res, rej) => { c
             await t('fiche personne, fiche village, Listes → Données, Carte, Réglages : chacune s’ouvre', async () => {
                 await page.evaluate(() => { window.LCNDA_EXT.toutSur?.forget?.(); location.hash = '#personnes/1'; });
                 await page.waitForSelector('#workspace .person-hero', { timeout: 30000 });
-                await page.waitForSelector('#workspace [data-ts-block] .ts-head', { timeout: 30000 });
-                // 🔎 les éclipses (calcul lourd) attendent que le bloc soit à l'écran
+                // 🔎 le bloc « Ce qui le concerne » : loin de l'écran, il attend (app-fiche-lazy.js) ; ses éclipses (calcul lourd) aussi
+                await page.waitForSelector('#workspace [data-pblock="tout_sur"]', { timeout: 30000, state: 'attached' });
                 const ecl = () => page.evaluate(() => [...(window.LCNDA_EXT.toutSur?.cache?.keys() || [])].filter(k => /^eclipses-(vues|lieu)\|/.test(k)).length);
-                const off = await page.evaluate(() => { const r = document.querySelector('#workspace [data-ts-block]').getBoundingClientRect(); return r.top > innerHeight + 220 || r.bottom < -220; });
+                const off = await page.evaluate(() => { const r = document.querySelector('#workspace [data-pblock="tout_sur"]').getBoundingClientRect(); return r.top > innerHeight + 220 || r.bottom < -220; });
                 if (off) { await sleep(3000); assert.equal(await ecl(), 0, 'éclipses calculées alors que le bloc n’est pas à l’écran'); }
-                await page.evaluate(() => document.querySelector('#workspace [data-ts-block]').scrollIntoView());
+                await page.evaluate(() => document.querySelector('#workspace [data-pblock="tout_sur"]').scrollIntoView());
+                await page.waitForSelector('#workspace [data-ts-block] .ts-head', { timeout: 30000 });
                 await page.waitForFunction(() => [...(window.LCNDA_EXT.toutSur?.cache?.keys() || [])].some(k => /^eclipses-(vues|lieu)\|/.test(k)), null, { timeout: 30000 }).catch(() => {});
                 const planned = await page.evaluate(async () => { const T = window.LCNDA_EXT.toutSur, d = await window.LCNDA_APP.api('person', { id: 1 }); return T.plan({ person: d }).filter(x => /^eclipses-(vues|lieu)$/.test(x.d.id)).length; });
                 console.log(`    (bloc 🔎 ${off ? 'hors de l’écran au départ' : 'déjà à l’écran'} ; éclipses prévues : ${planned}, demandées : ${await ecl()})`);

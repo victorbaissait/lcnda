@@ -16,11 +16,25 @@
  */
 (function () {
     'use strict';
-    const MARGIN = 600;
-    const EAGER = new Set(['identity']);
+    const MARGIN = 300;
+    // jamais en attente : l'identité et les événements (le cœur de la fiche, que d'autres outils décorent tout de suite : 🌦 météo des événements…)
+    const EAGER = new Set(['identity', 'events']);
     const held = new Map(); // section → fragment
     const rides = new Map(); // bloc visible → les blocs cachés (« montré s'il a quelque chose ») qui arrivent avec lui
     let io = null, detail = null, batch = null;
+
+    /* ce qui arrive au-dessus de ce qu'on regarde ne doit pas le faire sauter : un bloc rempli (ou qui grandit en se remplissant)
+     * au-dessus du haut de l'écran décale d'autant la colonne qui défile (comme l'« ancrage » du navigateur, qui ne suit pas ici) */
+    const heights = new WeakMap();
+    const scroller = el => { for (let e = el.parentElement; e; e = e.parentElement) { if (e.scrollHeight > e.clientHeight + 1 && /(auto|scroll)/.test(getComputedStyle(e).overflowY)) return e; } return document.scrollingElement; };
+    const ro = typeof ResizeObserver === 'function' ? new ResizeObserver(es => es.forEach(e => {
+        const sec = e.target, h = sec.getBoundingClientRect().height, old = heights.get(sec); heights.set(sec, h);
+        if (old === undefined || Math.abs(h - old) < 1 || !sec.isConnected) return;
+        const sc = scroller(sec); if (!sc) return;
+        const top = sc === document.scrollingElement ? 0 : sc.getBoundingClientRect().top;
+        if (sec.getBoundingClientRect().bottom <= top + 1) sc.scrollTop += h - old;
+    })) : null;
+    const watch = sec => { if (!ro) return; heights.set(sec, sec.getBoundingClientRect().height); ro.observe(sec); };
 
     function restore(sec) {
         const frag = held.get(sec); if (!frag) return;
@@ -59,14 +73,16 @@
         if (!page || typeof IntersectionObserver !== 'function' || page.closest('.lcd-frame-doc, [data-fsec-live]') || window.LCNDA_SHEET_LAZY_OFF) return;
         if (!io) io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) restore(e.target); }), {rootMargin: `${MARGIN}px 0px`});
         page.querySelectorAll('[data-pblock]').forEach(sec => {
-            if (held.has(sec) || EAGER.has(sec.dataset.pblock) || near(sec)) return;
+            const key = sec.dataset.pblock;
+            if (held.has(sec) || EAGER.has(key) || near(sec)) return;
             const keep = sec.querySelector(':scope > header.card-head');
             const kids = [...sec.childNodes].filter(n => n !== keep); if (!kids.length) return;
             const h = sec.getBoundingClientRect().height;
             const frag = document.createDocumentFragment(); kids.forEach(n => frag.appendChild(n));
             held.set(sec, frag); sec.classList.add('is-lazy'); sec.setAttribute('aria-busy', 'true');
             sec.style.minHeight = `${Math.max(96, Math.min(h || 0, 640))}px`;
-            if (!sec.hidden) io.observe(sec);
+            io.observe(sec); // (un bloc caché ne croise jamais l'écran : il arrive avec son voisin, plus bas, ou dès qu'on le montre)
+            watch(sec);
         });
         // un bloc caché tant qu'il n'a rien (il se montre une fois rempli) : il arrive avec le bloc visible juste avant lui (ou après)
         const all = [...page.querySelectorAll('[data-pblock]')];

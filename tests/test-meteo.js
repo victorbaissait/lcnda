@@ -293,6 +293,12 @@ async function importPack(S, file = pack) {
                     assert.deepEqual(pills, ['❄️ −6 °C', '☁️ 3 °C', '🌧️ 9 °C', '🌫️ −2 °C', '🌧️ 7 °C']);
                     assert.match(await p.textContent('[data-pblock="events"]'), /à 3 h/);
                     if (name !== '390') {
+                        // les blocs au-dessus se remplissent quand ils arrivent à l'écran (app-fiche-lazy.js) : on amène la pastille à l'écran et on
+                        // attend que la fiche ne bouge plus (sa place stable un moment) avant de la survoler
+                        await p.$eval('[data-pblock="events"] .wx-pill', e => e.scrollIntoView({block: 'center'}));
+                        await p.waitForFunction(() => { const e = document.querySelector('[data-pblock="events"] .wx-pill'); const t = Math.round(e.getBoundingClientRect().top), w = window.__wxPos || (window.__wxPos = {t, n: 0, at: performance.now()});
+                            if (w.t !== t) { w.t = t; w.at = performance.now(); } return performance.now() - w.at > 800; }, null, { timeout: 20000, polling: 100 });
+                        await p.evaluate(() => { delete window.__wxPos; });
                         await p.hover('[data-pblock="events"] .wx-pill');
                         await p.waitForSelector('.wx-pop', { timeout: 3000 });
                         assert.match(await p.textContent('.wx-pop'), /Il faisait très froid/);
@@ -365,6 +371,8 @@ async function importPack(S, file = pack) {
                         assert.equal(await p.$$eval('[data-pblock="events"] .wx-pill', x => x.length), 4, 'sans les naissances');
                         assert.ok(await p.$('.wx-hover-only'), 'au survol');
                         await setMeteo(p, { block: true }); await fiche(p);
+                        // le bloc 🌦 se remplit quand il arrive à l'écran (la fiche se charge à mesure qu'on la lit, app-fiche-lazy.js) : on y descend
+                        await p.$eval('[data-pblock="meteo"]', e => e.scrollIntoView({block: 'center'}));
                         await p.waitForSelector('[data-pblock="meteo"] .wx-row');
                         assert.equal(await p.$$eval('[data-pblock="meteo"] .wx-row', x => x.length), 5);
                         assert.match(await p.textContent('[data-pblock="meteo"] .wx-cur'), /plus froid/);
@@ -418,7 +426,9 @@ async function importPack(S, file = pack) {
                         await p.waitForSelector('dialog.wx-alt-dialog [data-wx-alt-reset]'); await p.click('dialog.wx-alt-dialog [data-wx-alt-reset]');
                         await p.waitForSelector('.toast:has-text("Altitude remise")');
                         assert.equal((await get('meteo_place', { id: 6 })).altitude, null);
-                        await p.keyboard.press('Escape'); await p.keyboard.press('Escape');
+                        // Échap ferme une fenêtre à la fois : jusqu'à ce que la fenêtre de l'altitude et celle du jour soient fermées
+                        for (let i = 0; i < 4 && await p.$('dialog.wx-dialog[open], dialog.wx-alt-dialog[open]'); i++) { await p.keyboard.press('Escape'); await p.waitForTimeout(150); }
+                        assert.equal(await p.$('dialog.wx-dialog[open], dialog.wx-alt-dialog[open]'), null, 'les deux fenêtres fermées');
                         // un lieu italien : la ligne vide K10 (pas de météo) et son altitude ≈ (carte du relief)
                         await p.evaluate(() => window.LCNDA_EXT.meteo.openDay(16));
                         await p.waitForSelector('dialog.wx-dialog .empty-line');

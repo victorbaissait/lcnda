@@ -75,7 +75,10 @@ echo json_encode(['ok' => 1, 'even' => $t('EVEN')]);`], {cwd: root, encoding: 'u
             ];
         });
         const api = (x, q = {}) => p.evaluate(([y, z]) => window.LCNDA_APP.api(y, z).catch(e => ({error: e.message})), [x, q]);
-        const openPerson = async id => { await p.evaluate(i => { const A = window.LCNDA_APP; A.state.currentPersonId = i; A.setModule('personnes'); }, id); await p.waitForSelector(`#workspace [data-ts-block="${id}"]`, {timeout: 20000}); };
+        const openPerson = async id => { await p.evaluate(i => { const A = window.LCNDA_APP; A.state.currentPersonId = i; A.setModule('personnes'); }, id);
+            // la fiche se charge à mesure qu'on la lit (app-fiche-lazy.js) : le bloc essayé ici est amené à l'écran, comme en le lisant
+            await p.waitForSelector('#workspace [data-pblock="tout_sur"]', {timeout: 20000, state: 'attached'}); await p.$eval('#workspace [data-pblock="tout_sur"]', e => e.scrollIntoView({block: 'center'}));
+            await p.waitForSelector(`#workspace [data-ts-block="${id}"]`, {timeout: 20000}); };
         const UNDO = '.ui-toast button:has-text("Annuler"), .toast button:has-text("Annuler")';
         const undo = async () => { await p.waitForSelector(UNDO, {timeout: 8000}); await p.locator(UNDO).last().click(); };
 

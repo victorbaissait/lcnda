@@ -73,13 +73,13 @@ const gz = f => { const p = path.join(root, 'assets/data', f); return fs.existsS
         const text = sel => p.$eval(sel, el => el.textContent.replace(/\s+/g, ' ').trim());
 
         await t('fiche : le colporteur a UNE phrase sourcée dans 🌍 (pas de bloc en plus) ; rien pour une personne vivante', async () => {
-            const n0 = await p.evaluate(async () => { const A = window.LCNDA_APP; A.state.currentPersonId = 15; await A.setModule('personnes'); return document.querySelectorAll('#workspace .person-page section.card').length; });
+            const n0 = await p.evaluate(async () => { window.LCNDA_SHEET_LAZY_OFF = true; /* le bloc 🌍 essayé en entier (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = 15; await A.setModule('personnes'); return document.querySelectorAll('#workspace .person-page section.card').length; });
             await p.waitForSelector('[data-world-host] [data-lopk-line]', {timeout: 30000});
             assert.match(await text('[data-world-host] [data-lopk-line]'), /Les colporteurs — Les colporteurs partaient à pied/);
             assert.ok(await p.$('[data-world-host] [data-lopk-line] a[href="https://fr.wikipedia.org/wiki/Colportage"][target="_blank"]'));
             assert.strictEqual(await p.$$eval('[data-lopk-line]', a => a.length), 1);
             assert.strictEqual(await p.$$eval('#workspace .person-page section.card', a => a.length), n0);
-            await p.evaluate(async () => { const A = window.LCNDA_APP; A.state.currentPersonId = 30; await A.setModule('personnes'); }); await sleep(1500);
+            await p.evaluate(async () => { window.LCNDA_SHEET_LAZY_OFF = true; /* le bloc 🌍 essayé en entier (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = 30; await A.setModule('personnes'); }); await sleep(1500);
             assert.strictEqual(await p.$('[data-lopk-line]'), null);
         });
         await t('textFor : métier d’abord, puis lieu, dans la période de la vie ; jamais une exécution', async () => {

@@ -255,7 +255,7 @@ echo 'ok';`;
                     await pg.waitForFunction(() => window.LCNDA_APP?.state && window.LCNDA_EXT?.plusFamille && window.LCNDA_EXT?.openDialog && window.LCNDA_EXT?.tresors, null, { timeout: 20000 });
                     if (dark) await pg.evaluate(() => { document.documentElement.dataset.theme = 'dark'; });
                     // 🛡 la fiche d'Antoine : la note, ses raisons ; 💬 la remarque en attente sur son décès
-                    await pg.evaluate(() => { window.LCNDA_APP.state.currentPersonId = 4; window.LCNDA_APP.setModule('personnes'); });
+                    await pg.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; /* ses blocs essayés en entier (le chargement à mesure : test-fiche-lazy.js) */ window.LCNDA_APP.state.currentPersonId = 4; window.LCNDA_APP.setModule('personnes'); });
                     await pg.waitForSelector('[data-pf-rel="4"] .pf-rel-big', { timeout: 20000, state: 'attached' });
                     const txt = await pg.locator('[data-pf-rel="4"]').textContent();
                     assert.match(txt, /sur 100/); assert.match(txt, /À revoir avant publication/i); assert.match(txt, /Pour gagner des points/);
