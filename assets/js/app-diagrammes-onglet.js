@@ -263,7 +263,7 @@
                 <button type="button" class="dgo-star${Number(d.favorite) ? ' on' : ''}" data-dgo-star="${d.id}" ${ro ? 'disabled' : ''} aria-pressed="${!!Number(d.favorite)}" aria-label="${esc(Number(d.favorite) ? T('Retirer des favoris') : T('Mettre dans les favoris'))}">${Number(d.favorite) ? '★' : '☆'}</button></div>
             <div class="dgo-b"><button type="button" class="dgo-name" data-dgo-open="${d.id}">${esc(d.name)}</button>
                 <span class="dgo-meta">${esc(icon(d))} ${esc(T(k?.label || d.kind))} · ${esc(T(SRC[srcOf(d)]))}</span>
-                <span class="dgo-meta">${stateBadge(d)} ${esc(when(d.updated_at))}</span>
+                <span class="dgo-meta">${stateBadge(d)} ${when(d.updated_at)}</span>
                 <span class="dgo-used">${usedHtml(d)}</span>
                 <button type="button" class="ib dgo-more" data-dgo-more="${d.id}" aria-haspopup="menu" aria-label="${esc(T('Plus d’actions pour « {n} »', {n: d.name}))}">⋯</button></div></article>`;
     }
@@ -274,7 +274,7 @@
                 : `<tr data-dgo-card="${d.id}" class="${S.sel.has(d.id) ? 'is-sel' : ''}" ${ro ? '' : 'draggable="true"'}>${S.multi ? `<td><input type="checkbox" data-dgo-ck="${d.id}" ${S.sel.has(d.id) ? 'checked' : ''} aria-label="${esc(T('Choisir « {n} »', {n: d.name}))}"></td>` : ''}
                 <td><button type="button" class="dgo-st${Number(d.favorite) ? ' on' : ''}" data-dgo-star="${d.id}" ${ro ? 'disabled' : ''} aria-pressed="${!!Number(d.favorite)}" aria-label="${esc(Number(d.favorite) ? T('Retirer des favoris') : T('Mettre dans les favoris'))}">${Number(d.favorite) ? '★' : '☆'}</button></td>
                 <td>${prefs().thumbs ? `<span class="dgo-mini">${thumbHtml(d, true)}</span>` : ''}<button type="button" class="dgo-nm" data-dgo-open="${d.id}">${esc(d.name)}</button></td>
-                <td>${esc(icon(d))} ${esc(T(kindOf(d)?.label || d.kind))}</td><td>${esc(T(SRC[srcOf(d)]))}</td><td>${stateBadge(d)}</td><td class="dgo-used">${usedHtml(d)}</td><td>${esc(when(d.updated_at))}</td>
+                <td>${esc(icon(d))} ${esc(T(kindOf(d)?.label || d.kind))}</td><td>${esc(T(SRC[srcOf(d)]))}</td><td>${stateBadge(d)}</td><td class="dgo-used">${usedHtml(d)}</td><td>${when(d.updated_at)}</td>
                 <td><button type="button" class="ib" data-dgo-more="${d.id}" aria-haspopup="menu" aria-label="${esc(T('Plus d’actions pour « {n} »', {n: d.name}))}">⋯</button></td></tr>`).join('')}</tbody></table></div>`;
     }
     const chip = (key, v, label) => { const onv = key === 'who' ? S.F.who === v : S.F[key].has(v); return `<button type="button" class="dgo-k" data-dgo-f="${key}" data-v="${esc(v)}" aria-pressed="${onv}">${esc(label)}</button>`; };
@@ -399,7 +399,7 @@
         ws.innerHTML = `<section class="page dgo-page" data-dgo-page="trash"><header class="page-header"><div>${crumbHtml([[T('Corbeille')]])}<h2><span class="ph-ico" aria-hidden="true">🗑</span>${esc(T('Corbeille'))}</h2><p>${esc(T('Gardés 30 jours, puis effacés. Là où ils étaient posés, on voit « Diagramme à la corbeille — Remettre ».'))}</p></div>
             <div class="page-actions">${l.length ? `<button type="button" class="button secondary" data-dgo-empty>${esc(T('Vider la corbeille'))}</button>` : ''}</div></header>
             ${l.length ? `<div class="tw"><table class="data-table dgo-trash"><thead><tr><th>${esc(T('Nom'))}</th><th>${esc(T('Supprimé'))}</th><th>${esc(T('Effacé dans'))}</th><th><span class="sr">${esc(T('Actions'))}</span></th></tr></thead><tbody>
-                ${l.map(d => { const left = Math.max(0, Math.ceil((time(d.deleted_at) + 30 * DAY - now) / DAY)); return `<tr data-dgo-trow="${d.id}"><td>${esc(icon(d))} ${esc(d.name)}</td><td>${esc(when(d.deleted_at))}</td><td>${esc(plural(left, 'jour', 'jours'))}</td><td><button type="button" class="button small secondary" data-dgo-restore="${d.id}">↺ ${esc(T('Remettre'))}</button></td></tr>`; }).join('')}</tbody></table></div>`
+                ${l.map(d => { const left = Math.max(0, Math.ceil((time(d.deleted_at) + 30 * DAY - now) / DAY)); return `<tr data-dgo-trow="${d.id}"><td>${esc(icon(d))} ${esc(d.name)}</td><td>${when(d.deleted_at)}</td><td>${esc(plural(left, 'jour', 'jours'))}</td><td><button type="button" class="button small secondary" data-dgo-restore="${d.id}">↺ ${esc(T('Remettre'))}</button></td></tr>`; }).join('')}</tbody></table></div>`
                 : A().emptyState({icon: '🗑', text: T('La corbeille est vide.'), hint: T('Ce que tu supprimes arrive ici.')})}</section>`;
     }
     async function trash(ids) {
@@ -558,7 +558,7 @@
         if (!ro) {
             if (ext.sendTo) items.push({icon: '📤', label: T('Envoyer vers…'), help: T('Studio, Présentation'), run: run(async () => ext.sendTo('image', {blob: await pngBlob(d)}, {anchor: btn, title: d.name}))});
             items.push({icon: '📄', label: T('Poser dans…'), help: T('fiche, enquête, tableau'), run: () => placeIn(btn, d)});
-            const CX = ext.connexions; if (CX?.take) items.push({icon: '🧺', label: T('Mettre dans le panier'), run: run(async () => CX.take([await basketItem(d)]))});
+            const CX = ext.connexions; if (CX?.take) items.push({icon: '🧺', label: T('Mettre dans le panier'), run: run(async () => CX.take([await basketItem(d)]))}, {icon: '🧺', label: T('Mettre dans un panier précis…'), help: T('choisir le panier, ou en créer un'), run: run(async () => CX.take([await basketItem(d)], {ask: true}))});
             if (CX?.putInto) items.push({icon: '📎', label: T('Joindre à une fiche ou une enquête'), run: run(async () => CX.putInto([await basketItem(d)], {anchor: btn}))});
             items.push({icon: '🗑', label: T('Mettre à la corbeille'), danger: true, run: () => trash([d.id])});
         }

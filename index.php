@@ -189,7 +189,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/versions.css?v=2">
     <link rel="stylesheet" href="assets/css/premier.css?v=2">
     <link rel="stylesheet" href="assets/css/apparence-traits.css?v=44" id="lc-frame-css" media="not all">
-    <link rel="stylesheet" href="assets/css/designs-gen.css?v=88" id="lc-designs-gen" media="not all">
+    <link rel="stylesheet" href="assets/css/designs-gen.css?v=89" id="lc-designs-gen" media="not all">
     <link rel="stylesheet" href="assets/css/designs.css?v=15">
     <link rel="stylesheet" href="assets/css/a-trier.css?v=1">
     <link rel="stylesheet" href="assets/css/colonne-espacement.css?v=2">
@@ -1487,7 +1487,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-periodicals.js?v=21" defer></script>
 <script src="assets/js/heritage-diagrams-render.js?v=12" defer></script>
 <script src="assets/js/heritage-diagrams.js?v=42" defer></script>
-<script src="assets/js/app-diagrammes-onglet.js?v=3" defer></script><!-- 📈 l’onglet Diagrammes : tout s’ouvre dedans (galerie, éditeur, dossiers, ⭐, 🗑 corbeille) -->
+<script src="assets/js/app-diagrammes-onglet.js?v=4" defer></script><!-- 📈 l’onglet Diagrammes : tout s’ouvre dedans (galerie, éditeur, dossiers, ⭐, 🗑 corbeille) -->
 <script src="assets/js/heritage-diagram-options.js?v=6" defer></script>
 <script src="assets/js/heritage-diagram-genea.js?v=9" defer></script>
 <script src="assets/js/heritage-vector.js?v=45" defer></script>
