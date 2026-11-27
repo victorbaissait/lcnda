@@ -1011,9 +1011,18 @@
     }
     /** les lignes du menu (clic droit) — appelées par app-actions.js (UI.ctxExtras) */
     function ctxItems(e) {
-        const it = preciseOf(e.target); if (!it) return [];
+        const out = [];
+        // 📅 tout l'événement (sur la fiche : la ligne d'un événement) : son nom, sa date, son lieu, avec l'origine ↗
+        const row = enabled() && settings().ctx && !kiosk() ? e.target.closest?.('#workspace [data-event-id]') : null;
+        if (row) {
+            const o = screenOrigin(row), name = row.querySelector('.item-title-row strong, strong, h3, h4')?.textContent?.trim() || T('Événement');
+            const txt = (row.innerText || '').replace(/\s+/g, ' ').trim().slice(0, 400);
+            const ev = {kind: 'event', ref_id: Number(row.dataset.eventId) || 0, title: o.person_id ? `${name} — ${o.label.replace(/^[^ ]+ de /, '')}` : name, value: txt, origin: o};
+            out.push({icon: '🧺', label: T('Mettre l’événement « {t} » au panier', {t: name.slice(0, 40)}), run: () => take([ev])}, {icon: '📍', label: T('Mettre l’événement dans…'), run: () => putInto([ev])});
+        }
+        const it = preciseOf(e.target); if (!it) return out;
         const short = it.value.length > 40 ? it.value.slice(0, 38) + '…' : it.value;
-        return [{icon: '🧺', label: T('Prendre « {t} »', {t: short}), run: () => take([it])}, {icon: '📍', label: T('Mettre « {t} » dans…', {t: short}), run: () => putInto([it])}];
+        return [...out, {icon: '🧺', label: T('Prendre « {t} »', {t: short}), run: () => take([it])}, {icon: '📍', label: T('Mettre « {t} » dans…', {t: short}), run: () => putInto([it])}];
     }
     (UI().ctxExtras = UI().ctxExtras || []).push(ctxItems);
 
