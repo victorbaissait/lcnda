@@ -19,6 +19,12 @@ Déjà faits cette semaine : fil rouge, tampons de solidité, « Ce qui manque �
 - Minuteur de séance (25 min + résumé de ce qui a été ajouté).
 - Mode présentation (vérifier d'abord la présentation existante).
 
+## « Mettre dans… » vers les outils de création (validé en principe)
+- Ajouter les outils façon Photoshop / Illustrator / InDesign et la maison comme destinations de « 📍 Mettre dans… » :
+  🎚️ Retouche des photos (images), ✒️ Dessin vectoriel (images, dessins, texte en calque), 📐 Mise en page (livres : images + texte avec sources),
+  🏠 la maison (objets, photos, souvenirs dans une pièce). Les cibles existent déjà dans « 📤 Envoyer vers… » (heritage-envoyer.js) :
+  les brancher dans heritage-connexions.js (viaSend), en ne proposant que ce que l'outil sait recevoir (images pour la retouche, etc.).
+
 ## Grands chantiers en attente
 - Oublis à rattraper (liste donnée, points 1–8 puis 17–20).
 - Europe et monde (météo du monde, GOV, frontières / chiffres / prix historiques, Wikidata, « Où chercher » complet).
