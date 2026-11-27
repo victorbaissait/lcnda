@@ -1208,12 +1208,12 @@
 
     /** ⤓ Exporter une liste (harmonisation des comportements) : la même fenêtre E3, avec 📄 CSV, 🧮 Ouvrir dans le tableur,
      *  📊 Excel, et « Les lignes : ce qu'on voit / toute la liste » quand all() est donné (comme Mes listes).
-     *  UI.exportRows({title, name, rows: () => [[titres…], [ligne…], …], all: () => …, info, extra: [formats E3 en plus (PDF, KML…)]}) ;
+     *  UI.exportRows({title, name, rows: () => [[titres…], [ligne…], …], all: () => …, info, quote: 'auto'|'always', extra: [formats E3 en plus (PDF, KML…)]}) ;
      *  rows / all peuvent être async. */
-    UI.exportRows = ({title = 'Exporter', name = '', rows, all = null, info = '', sep = ';', extra = []} = {}) => {
+    UI.exportRows = ({title = 'Exporter', name = '', rows, all = null, info = '', sep = ';', quote = 'auto', extra = []} = {}) => {
         const X = window.LCNDA_EXT || {}, SH = window.LCNDA_SHEET;
         const matrix = async o => ((o?.fields?.what === 'all' && all ? await all() : await rows()) || []).map(r => (Array.isArray(r) ? r : [r]).map(v => v ?? ''));
-        const cell = v => (A().csvCell ? A().csvCell(v, {sep}) : `"${String(v ?? '').replace(/"/g, '""')}"`);
+        const cell = v => (A().csvCell ? A().csvCell(v, {sep, quote}) : `"${String(v ?? '').replace(/"/g, '""')}"`); // quote : 'always' = des guillemets partout
         const save = (blob, filename) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); };
         const formats = [
             {id: 'csv', label: '📄 CSV', hint: i18n('tableur'), ext: 'csv', quality: false, run: async o => save(new Blob(['﻿' + (await matrix(o)).map(r => r.map(cell).join(sep)).join('\r\n')], {type: 'text/csv;charset=utf-8'}), o.filename)},

@@ -149,7 +149,7 @@
         const q = v => `"${(A().csvSafe || (x => String(x ?? '')))(v).replace(/"/g, '""')}"`; // pas de formule glissée dans un tableur
         const head = [T('Service d’archives'), T('Fonds'), T('Recueil'), ...COLS.map(c => colTitle(c[0]))];
         const lines = rows.map(r => [r.service?.name || '', r.fonds, r.title, ...COLS.map(c => (c[0] === 'reste' ? reste(r) : c[0] === 'comm' ? commText(r) : c[0] === 'online' ? (safeUrl(r.url) || '') : cellText(c[0], r)))]);
-        if (window.LCNDA_UI?.exportRows) return window.LCNDA_UI.exportRows({title: T('État des fonds'), name: T('État des fonds'), rows: () => [head, ...lines]}); // ⤓ la fenêtre d'export commune
+        if (window.LCNDA_UI?.exportRows) return window.LCNDA_UI.exportRows({quote: 'always', title: T('État des fonds'), name: T('État des fonds'), rows: () => [head, ...lines]}); // ⤓ la fenêtre d'export commune
         const blob = new Blob(['﻿' + [head, ...lines].map(l => l.map(q).join(';')).join('\r\n')], {type: 'text/csv;charset=utf-8'});
         const a = Object.assign(document.createElement('a'), {href: URL.createObjectURL(blob), download: (A().safeExportFilename ? A().safeExportFilename(T('État des fonds')) : 'etat-des-fonds') + '.csv'});
         document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);

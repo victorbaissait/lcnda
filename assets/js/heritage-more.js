@@ -1063,7 +1063,7 @@
         let shown = all;
         const csvRows = () => [['Année', 'Date', 'Commune', 'Adresse', 'Nom', 'Place dans le foyer', 'Âge', 'Métier', 'Lieu de naissance'],
             ...shown.flatMap(r => (r.members.length ? r.members : [{}]).map(m => [r.year, r.date_text, r.place, r.address, m.person_id ? (m.first_name || m.last_name ? A().personName(m) : '') || m.display_name : m.display_name, m.household_position || m.personal_status, m.age_text, m.occupation, m.birth_place].map(v => String(v ?? ''))))];
-        ws.querySelector('[data-hc-export]')?.addEventListener('click', e => U.exportRows ? U.exportRows({title: 'Recensements : tous les foyers', name: 'recensements', rows: csvRows, all: () => { const keep = shown; shown = all; try { return csvRows(); } finally { shown = keep; } }, info: plural(shown.length, 'foyer affiché', 'foyers affichés')}) : U.menuAt(e.currentTarget, [ // ⤓ la fenêtre d'export commune : ce qu'on voit ou tous les foyers
+        ws.querySelector('[data-hc-export]')?.addEventListener('click', e => U.exportRows ? U.exportRows({quote: 'always', title: 'Recensements : tous les foyers', name: 'recensements', rows: csvRows, all: () => { const keep = shown; shown = all; try { return csvRows(); } finally { shown = keep; } }, info: plural(shown.length, 'foyer affiché', 'foyers affichés')}) : U.menuAt(e.currentTarget, [ // ⤓ la fenêtre d'export commune : ce qu'on voit ou tous les foyers
             {icon: '📄', label: 'En CSV (Excel, LibreOffice…)', run: () => {
                 const q = v => `"${String(A().csvSafe ? A().csvSafe(v) : (v ?? '')).replace(/"/g, '""')}"`; // formules (= + - @) neutralisées
                 const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['﻿' + csvRows().map(r => r.map(q).join(';')).join('\n')], {type: 'text/csv'})); a.download = 'recensements.csv'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000); }},
@@ -3271,7 +3271,7 @@
         const fileName = ext2 => `${(L.name || 'liste').replace(/[^\p{L}\p{N}]+/gu, '-')}.${ext2}`;
         const download = (blob, name) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500); };
         ws.querySelector('[data-lv-export]').addEventListener('click', e => { const btn = e.currentTarget, SH = window.LCNDA_SHEET;
-            if (UI.exportRows) return UI.exportRows({title: L.name || 'Liste', name: L.name || 'liste', rows: () => matrix(), all: () => matrix(data.rows), info: plural(shown.length, unit[0], unit[1])}); // ⤓ la fenêtre d'export commune : ce qu'on voit ou toute la liste
+            if (UI.exportRows) return UI.exportRows({quote: 'always', title: L.name || 'Liste', name: L.name || 'liste', rows: () => matrix(), all: () => matrix(data.rows), info: plural(shown.length, unit[0], unit[1])}); // ⤓ la fenêtre d'export commune : ce qu'on voit ou toute la liste
             UI.menuAt(btn, [
                 {icon: '📄', label: 'CSV (tableur, Excel)', run: () => { const q2 = v => '"' + String(A().csvSafe ? A().csvSafe(v) : (v ?? '')).replace(/"/g, '""') + '"'; // formules (= + - @) neutralisées
                     download(new Blob(['\ufeff' + matrix().map(r => r.map(q2).join(';')).join('\n')], {type: 'text/csv'}), fileName('csv')); }},

@@ -560,7 +560,7 @@
     }
     function dashExportMenu(anchor){
         // ⤓ la fenêtre d'export commune : les chiffres (CSV, tableur, Excel), le bilan en PDF ou en page web
-        if(UI().exportRows)return UI().exportRows({title:i18n('Tableau de bord'),name:fileBase(),rows:dashRows,extra:[
+        if(UI().exportRows)return UI().exportRows({quote: 'always', title:i18n('Tableau de bord'),name:fileBase(),rows:dashRows,extra:[
             {id:'pdf',hint:i18n('PDF (bilan imprimable)'),run:async()=>dashPrint()},
             {id:'html',label:'🌐 HTML',hint:i18n('Page web (.html)'),run:async()=>{dashDownload(fileBase()+'.html',dashPrintDoc(),'text/html;charset=utf-8');}}]});
         const items=[{icon:'📄',label:i18n('PDF (bilan imprimable)'),help:i18n('Dans la fenêtre, « ⤓ PDF »'),run:dashPrint},

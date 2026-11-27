@@ -283,7 +283,7 @@
             const stepTxt = (x, items) => (items || []).map((it, i) => `${x.item} ${i + 1}${it.done ? ' ✔' : ''} : ` + x.fields.map(sf => textOf(sf, it[sf.key], people)).filter(Boolean).join(', ')).join(' | ');
             const line = rec => [...cols.map(x => x.type === 'steps' ? stepTxt(x, rec.data[x.key]) : x.type === 'date' ? rec.data[x.key] : textOf(x, rec.data[x.key], people)), ...(r.status ? [rec.status === 'done' ? r.done : r.todo] : [])];
             const head = [...cols.map(x => x.label), ...(r.status ? ['Suivi'] : [])];
-            if (window.LCNDA_UI?.exportRows) return window.LCNDA_UI.exportRows({title: L.name || 'Liste', name: L.name || 'liste', rows: () => [head, ...rows.map(line)], all: () => [head, ...data.rows.map(line)]}); // ⤓ la fenêtre d'export commune : ce qu'on voit ou toute la liste
+            if (window.LCNDA_UI?.exportRows) return window.LCNDA_UI.exportRows({quote: 'always', title: L.name || 'Liste', name: L.name || 'liste', rows: () => [head, ...rows.map(line)], all: () => [head, ...data.rows.map(line)]}); // ⤓ la fenêtre d'export commune : ce qu'on voit ou toute la liste
             const lines = [head.map(q).join(';'), ...rows.map(rec => line(rec).map(q).join(';'))];
             const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['﻿' + lines.join('\n')], {type: 'text/csv'})); a.download = (L.name || 'liste').replace(/[^\p{L}\p{N}]+/gu, '-') + '.csv'; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
         });

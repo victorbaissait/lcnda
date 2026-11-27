@@ -497,7 +497,7 @@
         dlg.querySelector('[data-who-q]')?.addEventListener('input', () => { shown = STEP; redraw(); });
         dlg.querySelector('[data-who-csv]')?.addEventListener('click', () => {
             const q = x => `"${(A().csvSafe || (x => String(x ?? '')))(x).replace(/"/g, '""')}"`; // pas de formule glissée dans un tableur
-            if (window.LCNDA_UI?.exportRows) return window.LCNDA_UI.exportRows({title: csvName || 'Personnes', name: csvName || 'personnes', rows: () => [['Nom', 'Prénoms', 'Naissance', 'Décès', 'Métier'], ...people.map(p => [p.last_name, p.first_name, p.birth_date || p.birth_year || '', p.death_date || p.death_year || '', p.occupation])]}); // ⤓ la fenêtre d'export commune
+            if (window.LCNDA_UI?.exportRows) return window.LCNDA_UI.exportRows({quote: 'always', title: csvName || 'Personnes', name: csvName || 'personnes', rows: () => [['Nom', 'Prénoms', 'Naissance', 'Décès', 'Métier'], ...people.map(p => [p.last_name, p.first_name, p.birth_date || p.birth_year || '', p.death_date || p.death_year || '', p.occupation])]}); // ⤓ la fenêtre d'export commune
             const csv = '\ufeff' + [['Nom', 'Prénoms', 'Naissance', 'Décès', 'Métier'].map(q).join(';'), ...people.map(p => [p.last_name, p.first_name, p.birth_date || p.birth_year || '', p.death_date || p.death_year || '', p.occupation].map(q).join(';'))].join('\r\n');
             const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type: 'text/csv;charset=utf-8'})); a.download = (A().safeExportFilename?.(csvName) || 'personnes') + '.csv'; document.body.appendChild(a); a.click(); a.remove();
         });
