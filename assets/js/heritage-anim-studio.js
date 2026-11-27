@@ -220,7 +220,7 @@
                 dg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">🎞 ${esc(T('Studio d’animation'))}</span><h2>${esc(title)}</h2></div><button type="button" class="icon-button" data-x aria-label="${esc(T('Fermer'))}">×</button></div>
                     ${help ? `<p class="muted">${esc(help)}</p>` : ''}<input type="search" data-q placeholder="${esc(search)}" aria-label="${esc(search)}"><div class="an-pick-list" data-l></div></form>`;
                 document.body.appendChild(dg); dg.showModal();
-                const paint = q => { dg.querySelector('[data-l]').innerHTML = list.filter(d => !q || String(d.name).toLowerCase().includes(q.toLowerCase())).map(d => `<button type="button" class="an-pick-it" data-id="${d.id}"><b>${esc(d.name)}</b><small class="muted">${esc(d.sub || '')}</small></button>`).join(''); };
+                const paint = q => { dg.querySelector('[data-l]').innerHTML = list.filter(d => !q || (window.LCNDA_UI?.listMatch?.text || ((q, ...h) => h.join(' ').toLowerCase().includes(String(q).toLowerCase())))(q, d.name, d.sub)).map(d => `<button type="button" class="an-pick-it" data-id="${d.id}"><b>${esc(d.name)}</b><small class="muted">${esc(d.sub || '')}</small></button>`).join(''); };
                 paint('');
                 const done = v => { dg.close(); dg.remove(); res(v); };
                 dg.querySelector('[data-q]').addEventListener('input', e => paint(e.target.value));
@@ -251,7 +251,7 @@
                     <p class="muted">${esc(T('Ceux qui ont des dates (⏱) bougent dans le temps ; les autres restent fixes (la caméra peut quand même bouger).'))}</p>
                     <input type="search" data-q placeholder="${esc(T('Chercher un diagramme…'))}" aria-label="${esc(T('Chercher un diagramme'))}"><div class="an-pick-list" data-l></div></form>`;
                 document.body.appendChild(dg); dg.showModal();
-                const paint = q => { dg.querySelector('[data-l]').innerHTML = list.filter(d => !q || d.name.toLowerCase().includes(q.toLowerCase())).map(d => `<button type="button" class="an-pick-it" data-id="${d.id}"><b>${timed(d) ? '⏱ ' : ''}${esc(d.name)}</b><small class="muted">${esc(d.kind)}</small></button>`).join(''); };
+                const paint = q => { dg.querySelector('[data-l]').innerHTML = list.filter(d => !q || (window.LCNDA_UI?.listMatch?.text || ((q, ...h) => h.join(' ').toLowerCase().includes(String(q).toLowerCase())))(q, d.name, d.kind)).map(d => `<button type="button" class="an-pick-it" data-id="${d.id}"><b>${timed(d) ? '⏱ ' : ''}${esc(d.name)}</b><small class="muted">${esc(d.kind)}</small></button>`).join(''); };
                 paint('');
                 const done = v => { dg.close(); dg.remove(); res(v); };
                 dg.querySelector('[data-q]').addEventListener('input', e => paint(e.target.value));

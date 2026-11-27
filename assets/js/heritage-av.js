@@ -85,7 +85,7 @@
         return items.filter(it => {
             if (p.owner === 'none' && it.owners.length) return false;
             if (group && !it.owners.some(o => group[2].includes(o.type))) return false;
-            if (q && ![nameOf(it), it.description, it.filename, it.date_text, ownerText(it)].join(' ').toLowerCase().includes(q)) return false;
+            if (q && !(window.LCNDA_UI?.listMatch?.text || ((q, ...h) => h.join(' ').toLowerCase().includes(String(q).toLowerCase())))(q, nameOf(it), it.description, it.filename, it.date_text, ownerText(it))) return false;
             return true;
         });
     }

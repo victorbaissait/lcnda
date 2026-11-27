@@ -554,7 +554,7 @@
                 let parts = [], projs = [];
                 await Promise.all([
                     api('periodical_link_search', {q}).then(r => { parts = r.items || []; }).catch(() => {}),
-                    (projCache ? Promise.resolve() : api('atelier_projects').then(r => { projCache = r.projects || []; })).then(() => { projs = (projCache || []).filter(p => String(p.title || '').toLowerCase().includes(ql)).slice(0, 6); }).catch(() => {}),
+                    (projCache ? Promise.resolve() : api('atelier_projects').then(r => { projCache = r.projects || []; })).then(() => { projs = (projCache || []).filter(p => (window.LCNDA_UI?.listMatch?.text || ((q, ...h) => h.join(' ').toLowerCase().includes(String(q).toLowerCase())))(ql, p.title)).slice(0, 6); }).catch(() => {}),
                 ]);
                 const b = (type, id, name) => `<button type="button" data-add-type="${type}" data-add-id="${Number(id)}" data-add-name="${esc(name)}">${LINK_IC[type]} ${esc(name)}</button>`;
                 sugg.innerHTML = [...parts.map(x => b('investigation_item', x.id, x.name)), ...projs.map(p => b('atelier_project', p.id, p.title))].join('') || '<small class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">Rien trouvé.</span></small>';

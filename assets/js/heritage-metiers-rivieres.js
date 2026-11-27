@@ -271,7 +271,7 @@
     document.addEventListener('input', e => {
         const f = e.target.closest?.('[data-mr-filter]'); if (!f) return;
         const q = f.value.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-        (f.closest('details, .mr-panel') || f.parentElement).querySelectorAll('.mr-list > li').forEach(li => { li.hidden = !!q && !li.textContent.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(q); });
+        (f.closest('details, .mr-panel') || f.parentElement).querySelectorAll('.mr-list > li').forEach(li => { li.hidden = !!q && !(window.LCNDA_UI?.listMatch?.text || ((q, ...h) => h.join(' ').toLowerCase().includes(String(q).toLowerCase())))(q, li.textContent); });
     });
     document.addEventListener('change', e => { const t = e.target.closest?.('[data-mr-tg]'); if (t && e.target.matches('input')) { const s = settings(); s[t.dataset.mrTg] = e.target.checked; save(s); memo.clear(); } });
 

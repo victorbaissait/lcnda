@@ -1045,7 +1045,7 @@
             if (t.matches('[data-at-fnotes]')) { try { await post('save_atelier_folder', {id: v.node, notes: t.value}); P.fById.get(v.node).notes = t.value; toast('Notes du dossier enregistrées.'); } catch (error) { toast(error.message, 'error'); } }
         });
         ws.querySelector('[data-at-q]')?.addEventListener('search', e => { v.q = e.target.value.trim(); renderProject(S().workspaceToken, true); });
-        ws.querySelector('[data-at-tagq]')?.addEventListener('input', e => { const q = e.target.value.toLowerCase(); ws.querySelectorAll('[data-at-tag]').forEach(b => { b.hidden = q && !b.dataset.atTag.toLowerCase().includes(q); }); });
+        ws.querySelector('[data-at-tagq]')?.addEventListener('input', e => { const q = e.target.value.toLowerCase(); ws.querySelectorAll('[data-at-tag]').forEach(b => { b.hidden = !!q && !(window.LCNDA_UI?.listMatch?.text || ((q, ...h) => h.join(' ').toLowerCase().includes(String(q).toLowerCase())))(q, b.dataset.atTag); }); });
         ws.querySelector('[data-at-addtag]')?.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); e.target.dispatchEvent(new Event('change', {bubbles: true})); } });
         // Glisser-déposer : éléments → dossier ; dossier → dossier (ou racine)
         let drag = null;

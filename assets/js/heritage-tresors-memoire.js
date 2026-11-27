@@ -113,7 +113,7 @@
             ${cfg.intro ? `<p class="h-tr-muted h-tr-noprint">${i18n(cfg.intro)}</p>` : ''}<div class="h-tr-body" data-c-list></div>`;
         const list = host.querySelector('[data-c-list]');
         const paint = async () => {
-            const vis = all.filter(x => (!filt || x.data?.[cfg.filter.key] === filt) && (!q || `${x.title} ${x.body} ${Object.values(x.data || {}).join(' ')} ${who(T, tr, x.data?.[cfg.personKey || 'from'])}`.toLowerCase().includes(q)));
+            const vis = all.filter(x => (!filt || x.data?.[cfg.filter.key] === filt) && (!q || (window.LCNDA_UI?.listMatch?.text || ((q, ...h) => h.join(' ').toLowerCase().includes(String(q).toLowerCase())))(q, x.title, x.body, Object.values(x.data || {}), who(T, tr, x.data?.[cfg.personKey || 'from']))));
             host.querySelector('[data-c-n]').textContent = i18n('{n} sur {total}', {n: String(vis.length), total: String(all.length)});
             list.innerHTML = vis.length ? (await Promise.all(vis.map(async x => `<article class="h-tr-panel h-tr-print" data-c-id="${x.id}">${cfg.card(T, tr, x)}${await mediaHtml(T, x.data?.media)}<p class="h-tr-noprint" style="margin:8px 0 0"><button type="button" class="h-tr-link" data-c-edit="${x.id}">${i18n('Modifier')}</button> · <button type="button" class="h-tr-link" data-c-del="${x.id}">${i18n('Supprimer')}</button></p></article>`))).join('') : T.empty(i18n(all.length ? 'Rien ne correspond à ta recherche' : cfg.empty), {icon: cfg.icon});
         };

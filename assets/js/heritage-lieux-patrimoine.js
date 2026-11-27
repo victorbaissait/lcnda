@@ -200,7 +200,7 @@
     document.addEventListener('input', e => {
         const f = e.target.closest?.('[data-lp-filter]'); if (!f) return;
         const q = f.value.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-        f.parentElement.querySelectorAll('.lp-ld > li, .lp-places > li').forEach(li => { li.hidden = !!q && !li.textContent.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(q); });
+        f.parentElement.querySelectorAll('.lp-ld > li, .lp-places > li').forEach(li => { li.hidden = !!q && !(window.LCNDA_UI?.listMatch?.text || ((q, ...h) => h.join(' ').toLowerCase().includes(String(q).toLowerCase())))(q, li.textContent); });
     });
     document.addEventListener('click', e => {
         const t = e.target;

@@ -52,7 +52,7 @@
         function filtered() {
             const st = bar.state, q = String(st.q || '').trim().toLowerCase();
             let list = store.of(kind);
-            if (q) { const ctx = ART.ctx(store, {}); const all = ART.fieldsOf(def, store.customFields(kind)); list = list.filter(it => [it.title, it.year, ...all.map(f => { try { return ART.text(ART.ctx(store, it), it, f); } catch (_) { return ''; } })].join(' ').toLowerCase().includes(q)); }
+            if (q) { const ctx = ART.ctx(store, {}); const all = ART.fieldsOf(def, store.customFields(kind)); list = list.filter(it => (window.LCNDA_UI?.listMatch?.text || ((q, ...h) => h.join(' ').toLowerCase().includes(String(q).toLowerCase())))(q, it.title, it.year, all.map(f => { try { return ART.text(ART.ctx(store, it), it, f); } catch (_) { return ''; } }))); }
             filters.forEach(f => { const v = st.filters[f.id]; if (f.test) list = list.filter(it => f.test(it, v, store)); });
             return sortItems(list, st.sort || sorts[0][0]);
         }

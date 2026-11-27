@@ -84,7 +84,7 @@
     const far = (p, s) => p && p.km != null && p.km > s.alert;
     function shown() {
         const q = String(D.q || '').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-        let list = D.items.filter(it => (!D.status || it.status === D.status) && (!q || it.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(q) || (it.props || []).some(p => p.label.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(q))));
+        let list = D.items.filter(it => (!D.status || it.status === D.status) && (!q || (window.LCNDA_UI?.listMatch?.text || ((q, ...h) => h.join(' ').toLowerCase().includes(String(q).toLowerCase())))(q, it.name, (it.props || []).map(p => p.label))));
         const by = {events: (a, b) => b.events - a.events, az: (a, b) => a.name.localeCompare(b.name, 'fr'), far: (a, b) => (b.props?.[0]?.km ?? -1) - (a.props?.[0]?.km ?? -1)}[D.sort] || ((a, b) => b.events - a.events);
         return list.sort(by);
     }

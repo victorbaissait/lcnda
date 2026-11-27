@@ -441,7 +441,7 @@
             <div class="hz-body" data-hz-body>${body}</div></section>`;
         startTick();
         ws.querySelectorAll('.hz-map').forEach(layoutMap);
-        ws.querySelector('[data-hz-who-q]')?.addEventListener('input', e => { const q = e.target.value.trim().toLowerCase(); ws.querySelectorAll('[data-hz-who-off]').forEach(sec => { let any = false; sec.querySelectorAll('[data-hz-who-n]').forEach(x => { const on = !q || x.dataset.hzWhoN.includes(q) || sec.querySelector('h4').textContent.toLowerCase().includes(q); x.hidden = !on; if (on) any = true; }); sec.hidden = !any; }); });
+        ws.querySelector('[data-hz-who-q]')?.addEventListener('input', e => { const q = e.target.value.trim().toLowerCase(); ws.querySelectorAll('[data-hz-who-off]').forEach(sec => { let any = false; sec.querySelectorAll('[data-hz-who-n]').forEach(x => { const on = !q || (window.LCNDA_UI?.listMatch?.text || ((q, ...h) => h.join(' ').toLowerCase().includes(String(q).toLowerCase())))(q, x.dataset.hzWhoN, sec.querySelector('h4').textContent); x.hidden = !on; if (on) any = true; }); sec.hidden = !any; }); });
         const again = () => render(A().state?.workspaceToken);
         ws.querySelector('.hz-page').addEventListener('click', e => {
             const v = e.target.closest('[data-hz-view]'); if (v) { ls.set(VIEW_KEY, v.dataset.hzView); return again(); }

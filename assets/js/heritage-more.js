@@ -62,7 +62,7 @@
         const q = input.value.trim().toLowerCase(), ids = pickerIds(box);
         let all = [];
         try { all = await allLabels(); } catch (error) { out.textContent = error.message; return; }
-        const list = all.filter(l => !ids.includes(Number(l.id)) && (!q || String(l.name).toLowerCase().includes(q))).slice(0, 8);
+        const list = all.filter(l => !ids.includes(Number(l.id)) && (!q || (window.LCNDA_UI?.listMatch?.text || ((q, ...h) => h.join(' ').toLowerCase().includes(String(q).toLowerCase())))(q, l.name))).slice(0, 8);
         const exists = all.some(l => String(l.name).trim().toLowerCase() === q);
         out.innerHTML = list.map(l => `<button type="button" class="labels-suggestion" data-lp-pick="${l.id}">${oneChip(l)}</button>`).join('') + (q && !exists ? `<button type="button" class="labels-suggestion labels-create" data-lp-create="${esc(input.value.trim())}">＋ ${i18n('Créer « {name} »', {name: esc(input.value.trim())})}</button>` : '');
     }

@@ -203,7 +203,7 @@
     function paintPages(body) {
         const s = st(), q = (s.q || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
         const tableText = p => p.table ? p.table.rows.map(r => Object.values(r.c || {}).join(' ')).join(' ') : '';
-        const pages = q ? D.pages.filter(p => (p.label + ' ' + p.transcription + ' ' + p.notes + ' ' + tableText(p)).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(q)) : D.pages;
+        const pages = q ? D.pages.filter(p => (window.LCNDA_UI?.listMatch?.text || ((q, ...h) => h.join(' ').toLowerCase().includes(String(q).toLowerCase())))(q, p.label, p.transcription, p.notes, tableText(p))) : D.pages;
         const ls = loose();
         body.innerHTML = `<div class="collection-toolbar h-rc-toolbar"><input type="search" data-rc-q2 value="${esc(s.q || '')}" placeholder="Chercher dans les transcriptions, les noms de page…">
                 <span class="segmented"><button type="button" class="${s.view !== 'table' ? 'is-active' : ''}" data-rc-view="grid">▦ Mosaïque</button><button type="button" class="${s.view === 'table' ? 'is-active' : ''}" data-rc-view="table">☰ Tableau</button></span>
