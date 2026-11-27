@@ -155,6 +155,7 @@ echo json_encode(['m' => $m, 'a1' => $a1, 'a2' => $a2, 'a3' => $a3, 't1' => $t1,
         out.nextIds = nextId; const a1b = nextId.find(i => i !== seed.a1);
         out.nextSaved = (await api('act_transcription', { id: a1b })).data.reg;
         out.regInfoNext = await api('atelier_idees', { op: 'reg', act_id: a1b });
+        out.regOnly = await api('atelier_idees', { op: 'search', q: 'de', reg_of: seed.a1 }); out.regAll = await api('atelier_idees', { op: 'search', q: 'de' }); out.regIds = [seed.a1, a1b];
         // ◀ : l'acte d'avant
         await p.click(`${D} [data-ais-go="prev"]`); await p.waitForFunction(([d, t]) => document.querySelector(`${d} [data-tx="title"]`)?.value === t, [D, 'Baptême de Jean MAZAUD'], { timeout: 15000 }); await sleep(300);
         out.backTitle = await p.evaluate(d => document.querySelector(`${d} [data-tx="title"]`).value, D);
@@ -355,7 +356,9 @@ echo json_encode(['m' => $m, 'a1' => $a1, 'a2' => $a2, 'a3' => $a3, 't1' => $t1,
         ['⏭ 37 : ➕ Acte suivant : même vue, type et année proposés (jour vide), commune, registre, cote, main repris ; zone à tracer sous la dernière', () => {
             assert.equal(out.next.kind, 'bapteme'); assert.equal(out.next.date, '1787'); assert.equal(out.next.place, 'Treignac'); assert.match(out.next.source, /cote 3 E 271\/4, vue 1 \/ 3/);
             assert.equal(out.next.guideY, ZONES[5].y + ZONES[5].h + 4); assert.equal(out.next.tool, 'zone'); assert.match(out.next.strip, /LACOMBE/);
-            assert.equal(out.nextIds.length, 2); assert.equal(out.nextSaved.hand, 'Curé J. LACOMBE'); assert.equal(out.nextSaved.cote, '3 E 271/4'); assert.equal(out.regInfoNext.index, 2); assert.equal(out.regInfoNext.prev_act, S.a1); }],
+            assert.equal(out.nextIds.length, 2); assert.equal(out.nextSaved.hand, 'Curé J. LACOMBE'); assert.equal(out.nextSaved.cote, '3 E 271/4'); assert.equal(out.regInfoNext.index, 2); assert.equal(out.regInfoNext.prev_act, S.a1);
+            // 🔍 « seulement ce registre » : seulement les actes du même recueil
+            assert.ok(out.regOnly.register_only && out.regOnly.hits.length > 0, 'des lignes du registre'); assert.ok(out.regOnly.hits.every(h => out.regIds.includes(h.act_id)), 'rien hors du registre'); assert.ok(out.regAll.hits.some(h => !out.regIds.includes(h.act_id)), 'sans le choix : tous les actes'); }],
         ['⏭ 37 : ◀ revient à l’acte d’avant ; Vue suivante → : la vue 2 (son image, « vue 2 / 3 » dans la source)', () => { assert.equal(out.backTitle, 'Baptême de Jean MAZAUD'); assert.match(out.view2.strip, /vue 2 \/ 3/); assert.match(out.view2.src, /vue 2 \/ 3/); assert.match(out.view2.img, /reg2\.png/); }],
         ['⏭ 37 : Alt + ⇧ + → : la vue 3 ; la dernière vue : « Vue suivante » éteinte ; la main suit', () => { assert.equal(out.view3.viewOff, true); assert.equal(out.view3.hand, true); }],
         ['⏭ 37 : une photo isolée : pas de bande, pas d’« Acte suivant » dans Fichier', () => { assert.equal(out.isolated.hidden, true); assert.ok(!out.isolatedFichier.some(l => /Acte suivant/.test(l))); assert.ok(out.isolatedFichier.some(l => /Depuis une adresse IIIF/.test(l))); }],
