@@ -320,16 +320,25 @@
     }
 
     /* ═════ les dialogues (dans l'app : un vrai <dialog>, rien de collé) ═════ */
+    /** La fenêtre commune (ext.openDialog : titre à gauche, × à droite, en bas « Annuler » puis le bouton bleu) ; les autres choix
+     *  (« Y laisser un panier vide », « Pas d’échéance »…) se rangent juste avant « Annuler ». Rend {key, form} (key null = annulé). */
     function dlg({title, body = '', buttons = [['', T('Fermer'), 'is-ter']], wide = false, bindIt = null}) {
         return new Promise(res => {
-            const d = document.createElement('dialog'); d.className = 'modal pn-dlg' + (wide ? ' is-wide' : '');
-            d.innerHTML = `<form method="dialog" class="pn-dlgb"><h4>${esc(title)}</h4><div class="pn-dlgc">${body}</div><div class="pn-row">${buttons.map(([k, l, cls]) => `<button type="${k ? 'submit' : 'button'}" class="pn-b ${cls || 'is-sec'}" value="${esc(k)}" data-pn-dk="${esc(k)}">${esc(l)}</button>`).join('')}</div></form>`;
-            document.body.appendChild(d);
             let val = null;
-            d.querySelectorAll('[data-pn-dk]').forEach(btn => btn.addEventListener('click', e => { val = btn.dataset.pnDk || null; if (!val) { e.preventDefault(); d.close(); } }));
-            d.addEventListener('close', () => { const form = d.querySelector('form'); const out = {key: val, form}; setTimeout(() => d.remove(), 0); res(out); });
-            bindIt?.(d);
-            d.showModal();
+            const pri = buttons.find(b => b[0] && b[2] === 'is-pri') || null;
+            const cancel = buttons.find(b => !b[0] || b[0] === 'cancel') || null;
+            const extras = buttons.filter(b => b !== pri && b !== cancel);
+            const d = ext.openDialog({eyebrow: T('PANIERS'), title, body: `<div class="pn-dlgc">${body}</div>`, wide, submitLabel: pri ? pri[1] : null, closeLabel: cancel ? cancel[1] : '',
+                onSubmit: pri ? () => { val = pri[0]; } : undefined,
+                onOpen: dd => {
+                    dd.classList.add('pn-dlg');
+                    const sub = dd.querySelector('.modal-actions [type=submit]'); if (sub && pri) sub.dataset.pnDk = pri[0];
+                    const cl = dd.querySelector('.modal-actions [data-h-close]'); if (cl && cancel) { cl.dataset.pnDk = cancel[0]; }
+                    const before = dd.querySelector('.modal-actions [data-h-close], .modal-actions [type=submit]');
+                    extras.forEach(([k, l]) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'button secondary'; b.dataset.pnDk = k; b.textContent = l; b.addEventListener('click', () => { val = k; dd.close(); }); before ? before.before(b) : dd.querySelector('.modal-actions').append(b); });
+                    bindIt?.(dd);
+                }});
+            d.addEventListener('close', () => res({key: val, form: d.querySelector('form')}));
         });
     }
     const askText = async (title, value = '', label = '') => { const r = await dlg({title, body: `<label class="pn-f">${esc(label || title)}<input name="v" type="text" value="${esc(value)}" maxlength="120" required></label>`, buttons: [['', T('Annuler'), 'is-ter'], ['ok', T('OK'), 'is-pri']]}); return r.key === 'ok' ? r.form.v.value.trim() : null; };

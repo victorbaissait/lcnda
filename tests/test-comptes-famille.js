@@ -562,7 +562,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
                 inviteUrl = (await page.textContent('.cf-url')).trim();
                 assert.match(inviteUrl, new RegExp(`^http://192\\.168\\.1\\.20:${gate.port}/famille\\.php#i=[A-Z0-9]+&inv=[a-f0-9]{48}$`));
                 assert.equal(await page.locator('.cf-qr svg').count(), 1);
-                await page.click('[data-cf-ok]');
+                await page.click('dialog.cf-dialog .modal-actions [data-h-close]'); // la fenêtre commune : « C’est noté » seul, à droite
             });
             const tel = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
             const ph = await tel.newPage();

@@ -592,9 +592,8 @@
     }
     async function medaillesDialog() {
         const CC = await tryLoad('coutumes'); const html = medaillesHtml(CC); if (!html) return;
-        if (UI().dialog) { UI().dialog({title: T('🎖️ Reconnaître une médaille'), body: `<div class="l9-dialog">${html}</div>`, wide: true}); return; }
-        const d = W.document.createElement('dialog'); d.className = 'l9-dlg'; d.innerHTML = `<form method="dialog"><h3>${esc(T('🎖️ Reconnaître une médaille'))}</h3><div class="l9-dialog">${html}</div><p class="page-actions"><button class="button">${esc(T('Fermer'))}</button></p></form>`;
-        W.document.body.appendChild(d); d.addEventListener('close', () => d.remove()); d.showModal?.();
+        // la fenêtre commune : titre, × à droite, « Fermer » seul
+        ext.openDialog?.({eyebrow: T('COUTUMES DU MONDE'), title: T('🎖️ Reconnaître une médaille'), body: `<div class="l9-dialog">${html}</div>`, wide: true});
     }
     if (W.document) {
         W.document.addEventListener('click', e => {

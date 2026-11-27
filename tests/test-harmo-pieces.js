@@ -29,7 +29,7 @@ const hits = (re, skip = []) => files.filter(f => !skip.includes(f)).flatMap(f =
         assert.deepEqual(hits(/<button\b[^>]*(aria-label|title)="[^"]*Fermer[^"]*"[^>]*>✕<\/button>/g), []);
         assert.deepEqual(hits(/<button\b[^>]*data-[\w-]*close\b[^>]*>✕<\/button>/g), []);
         assert.deepEqual(hits(/'✕ Fermer|data-lm-exit[^>]*>✕/g), [], 'harmonisation.md (Apparence 10) : « Fermer l’essai » sans ✕, le × du musée');
-        for (const [f, re] of [['app.js', /id="side-panel-close" aria-label="Fermer le panneau">×</], ['heritage-telech-d.js', /aria-label="\$\{esc\(T\('Fermer'\)\)\}">×<\/button><\/form>/], ['heritage-fiche-edifice.js', /data-fe-close[^>]*>×</]])
+        for (const [f, re] of [['app.js', /id="side-panel-close" aria-label="Fermer le panneau">×</], ['heritage-telech-d.js', /ext\.openDialog\(\{eyebrow: T\('ARTICLE'\)/], ['heritage-fiche-edifice.js', /data-fe-close[^>]*>×</]])
             assert.match(all[f], re, f);
     });
     await t('« 🗑 Effacer les réponses gardées » : un seul nom pour vider ce qui est gardé sur l’ordinateur', () => {
@@ -83,6 +83,21 @@ const hits = (re, skip = []) => files.filter(f => !skip.includes(f)).flatMap(f =
         assert.deepEqual(bad, [], 'lien vers un autre site sans « ↗ » : UI.extLink(adresse, nom du site)');
         const n = files.reduce((k, f) => k + (all[f].match(/LCNDA_UI\.extLink\(/g) || []).length, 0);
         assert.ok(n >= 110, 'liens passés par UI.extLink : ' + n);
+    });
+
+    await t('Les fenêtres : la fenêtre commune (openDialog), les éditeurs gardent leur cadre avec le × à droite', () => {
+        // harmonisation.md (Apparence 1) : titre en haut à gauche, × en haut à droite, en bas « Annuler » puis le bouton bleu
+        for (const f of ['app-paniers.js', 'heritage-comptes-famille.js', 'heritage-lot9-monde-coutumes.js', 'heritage-telech-d.js', 'heritage-telech-d-traduire.js']) {
+            assert.ok(!/createElement\('dialog'\)/.test(all[f]), `${f} : plus de fenêtre faite à la main`);
+            assert.ok(/ext\.openDialog\??\.?\(\{/.test(all[f]), `${f} : ext.openDialog`);
+        }
+        assert.ok((all['heritage-comptes-famille.js'].match(/ext\.openDialog\(\{/g) || []).length >= 4, 'Comptes de la famille : les 4 fenêtres');
+        assert.match(all['app-paniers.js'], /const d = ext\.openDialog\(\{eyebrow: T\('PANIERS'\)/, 'Paniers : toutes les fenêtres passent par dlg() → openDialog');
+        assert.match(all['heritage-lieux-a-placer.js'], /<h2>📍 \$\{esc\(i18n\('Lieux à placer'\)\)\}/, 'Lieux à placer : un vrai titre (h2)');
+        // les éditeurs plein écran : leur cadre, avec le × tout à droite de la barre
+        for (const f of ['heritage-tableur.js', 'heritage-traitement-texte.js', 'heritage-site-web.js', 'heritage-slideshow.js']) assert.match(all[f], /editorTopbar\(\{[\s\S]{0,1500}?close: \{attrs:/, `${f} : × de la barre E1`);
+        assert.match(all['heritage-keynote.js'], /data-kn-cmd="close" aria-label="\$\{esc\(i18n\('Fermer'\)\)\}">×</, 'Keynote : ×');
+        assert.match(all['heritage-vector.js'], /data-vx-close title="Fermer" aria-label="Fermer">×<\/button><\/header>/, 'Dessin : × au bout de la barre');
     });
 
     /* ── 2. navigateur ── */

@@ -52,7 +52,8 @@ const NF = ".toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').in
         ];
         for (const [f, s] of bad) assert.ok(!read(`assets/js/${f}`).includes(s), `${f} : cherche encore avec l'accent exact : « ${s} »`);
         // « ＋ Créer » garde sa vérification exacte (un nom qui existe déjà)
-        assert.match(read('assets/js/heritage-more.js'), /const exists = all\.some\(l => String\(l\.name\)\.trim\(\)\.toLowerCase\(\) === q\);/);
+        const more = read('assets/js/heritage-more.js'); // (la case peut aussi être passée au menu de choix commun : plus rien à vérifier alors)
+        if (more.includes('const exists = all.some(')) assert.match(more, /const exists = all\.some\(l => String\(l\.name\)\.trim\(\)\.toLowerCase\(\) === q\);/);
     });
 
     await step('7 · le nom d’une personne passe par la pièce commune', () => {

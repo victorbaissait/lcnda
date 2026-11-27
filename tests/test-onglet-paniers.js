@@ -344,7 +344,7 @@ const FIXTURES = () => {
             await openBasket('Conscription 1821');
             await menu('[data-pn-a="more"]', 'Supprimer le panier'); await p.waitForSelector(`${dlg} [data-pn-dk="del"]`);
             assert.match(await p.textContent(dlg), /« Service militaire » n’a plus de panier/);
-            assert.deepStrictEqual(await p.$$eval(`${dlg} .pn-row button`, l => l.map(x => x.dataset.pnDk)), ['cancel', 'keep', 'del']);
+            assert.deepStrictEqual(await p.$$eval(`${dlg} .modal-actions button`, l => l.map(x => x.dataset.pnDk)), ['keep', 'cancel', 'del']); // la fenêtre commune : les autres choix, puis « Annuler », puis le bouton bleu
             await p.click(`${dlg} [data-pn-dk="cancel"]`); await sleep(1500);
             assert.ok(await bBy('Conscription 1821') && await fBy('Service militaire'), 'Annuler : rien n’a changé');
             await openBasket('Conscription 1821');

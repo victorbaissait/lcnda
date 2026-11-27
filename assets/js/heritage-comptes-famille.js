@@ -106,11 +106,12 @@
 
     function accountForm(a = null) {
         return new Promise(resolve => {
-            const d = document.createElement('dialog'); d.className = 'cf-dialog';
             const v = a || {name: '', relation: '', role: 'proposer', scope_kind: 'tout', scope_person: 0, scope_name: '', living: 'caches', can_attach: 1, can_notes: 0, login: ''};
-            let person = {id: v.scope_person, name: v.scope_name};
-            d.innerHTML = `<form method="dialog" class="cf-form"><h3>${esc(a ? i18n('Modifier le compte de {n}', {n: a.name}) : i18n('Inviter quelqu’un'))}</h3>
-                <label>${esc(i18n('Son nom (pour toi)'))}<input name="name" required maxlength="80" value="${esc(v.name)}" placeholder="${esc(i18n('ex. Odile (cousine Québec)'))}"></label>
+            let person = {id: v.scope_person, name: v.scope_name}, done = null;
+            // la fenêtre commune (titre, ×, « Annuler » puis le bouton bleu)
+            const d = ext.openDialog({eyebrow: i18n('COMPTES DE LA FAMILLE'), title: a ? i18n('Modifier le compte de {n}', {n: a.name}) : i18n('Inviter quelqu’un'),
+                submitLabel: a ? i18n('Enregistrer') : i18n('Créer l’invitation'),
+                body: `<div class="cf-form"><label>${esc(i18n('Son nom (pour toi)'))}<input name="name" required maxlength="80" value="${esc(v.name)}" placeholder="${esc(i18n('ex. Odile (cousine Québec)'))}"></label>
                 <label>${esc(i18n('Lien de parenté (facultatif)'))}<input name="relation" maxlength="80" value="${esc(v.relation)}" placeholder="${esc(i18n('ex. cousin'))}"></label>
                 ${a ? `<label>${esc(i18n('Identifiant'))}<input name="login" maxlength="60" value="${esc(v.login)}" data-i18n-off></label>` : ''}
                 <fieldset><legend>${esc(i18n('Ce qu’il ou elle peut faire'))}</legend>${ROLES.map(([k, l, h]) => `<label class="checkbox-line"><input type="radio" name="role" value="${k}"${v.role === k ? ' checked' : ''}> <b>${esc(i18n(l))}</b> <small class="muted">${esc(i18n(h))}</small></label>`).join('')}</fieldset>
@@ -121,27 +122,24 @@
                     <p class="ui-hint">${esc(i18n('« visibles » seulement pour 🌿 (dans sa branche) et ⚙ ; sinon « prénom seulement ».'))}</p></fieldset>
                 <label class="checkbox-line"><input type="checkbox" name="can_attach"${Number(v.can_attach) ? ' checked' : ''}> ${esc(i18n('Peut joindre des photos (vérifiées comme les envois du téléphone)'))}</label>
                 <label class="checkbox-line"><input type="checkbox" name="can_notes"${Number(v.can_notes) ? ' checked' : ''}> ${esc(i18n('Peut voir les notes des fiches'))}</label>
-                <p class="cf-err" data-cf-err role="alert"></p>
-                <div class="page-actions"><button type="button" class="button secondary" data-cf-cancel>${esc(i18n('Annuler'))}</button><button type="submit" class="button">${esc(a ? i18n('Enregistrer') : i18n('Créer l’invitation'))}</button></div></form>`;
-            document.body.appendChild(d);
-            const f = d.querySelector('form');
-            d.querySelector('[data-cf-cancel]').addEventListener('click', () => { d.close(); });
-            d.querySelector('[data-cf-pick]').addEventListener('click', async () => {
-                const P = window.LCNDA_PICKER; if (!P?.openPicker) return;
-                const it = await P.openPicker({kind: 'person', title: i18n('Quelle personne ?')});
-                if (it?.id) { person = {id: Number(it.id), name: it.label || it.name || ''}; d.querySelector('[data-cf-pname]').textContent = person.name; }
-            });
-            d.addEventListener('close', () => { d.remove(); resolve(null); });
-            f.addEventListener('submit', async e => {
-                e.preventDefault();
-                const fd = new FormData(f);
-                const body = {name: fd.get('name'), relation: fd.get('relation'), role: fd.get('role'), scope_kind: fd.get('scope_kind'), scope_person: person.id || 0, living: fd.get('living'),
-                    can_attach: f.elements.can_attach.checked ? 1 : 0, can_notes: f.elements.can_notes.checked ? 1 : 0};
-                if (a) { body.id = a.id; body.login = fd.get('login'); }
-                try { const r = await write(a ? 'account_save' : 'account_new', body); d.remove(); resolve(r); }
-                catch (err) { d.querySelector('[data-cf-err]').textContent = err.message; }
-            });
-            d.showModal();
+                <p class="cf-err" data-cf-err role="alert"></p></div>`,
+                onOpen: dd => {
+                    dd.classList.add('cf-dialog');
+                    dd.querySelector('[data-cf-pick]').addEventListener('click', async () => {
+                        const P = window.LCNDA_PICKER; if (!P?.openPicker) return;
+                        const it = await P.openPicker({kind: 'person', title: i18n('Quelle personne ?')});
+                        if (it?.id) { person = {id: Number(it.id), name: it.label || it.name || ''}; dd.querySelector('[data-cf-pname]').textContent = person.name; }
+                    });
+                },
+                onSubmit: async f => {
+                    const fd = new FormData(f);
+                    const body = {name: fd.get('name'), relation: fd.get('relation'), role: fd.get('role'), scope_kind: fd.get('scope_kind'), scope_person: person.id || 0, living: fd.get('living'),
+                        can_attach: f.elements.can_attach.checked ? 1 : 0, can_notes: f.elements.can_notes.checked ? 1 : 0};
+                    if (a) { body.id = a.id; body.login = fd.get('login'); }
+                    try { done = await write(a ? 'account_save' : 'account_new', body); }
+                    catch (err) { f.querySelector('[data-cf-err]').textContent = err.message; return false; }
+                }});
+            d.addEventListener('close', () => resolve(done));
         });
     }
 
@@ -149,21 +147,15 @@
     async function showInvite(name, inv) {
         let url = '';
         try { const st = await NET()?.status?.(); if (st?.on && st.url) url = `${st.url}/famille.php#${st.invite ? `i=${encodeURIComponent(st.invite.code)}&` : ''}inv=${inv.token}`; } catch (_) {}
-        const d = document.createElement('dialog'); d.className = 'cf-dialog';
         const exp = new Date(inv.expires * 1000);
-        d.innerHTML = `<div class="cf-form"><h3>${esc(i18n('Invitation pour « {n} »', {n: name}))}</h3>
-            <p>${esc(i18n('🏠 À la maison : sur son appareil, elle ouvre l’adresse de 🖧 Plusieurs ordinateurs, demande l’accès (tu l’acceptes ici), puis ouvre la page de la famille et tape ce code :'))}</p>
+        ext.openDialog({eyebrow: i18n('COMPTES DE LA FAMILLE'), title: i18n('Invitation pour « {n} »', {n: name}), closeLabel: i18n('C’est noté'),
+            body: `<div class="cf-form"><p>${esc(i18n('🏠 À la maison : sur son appareil, elle ouvre l’adresse de 🖧 Plusieurs ordinateurs, demande l’accès (tu l’acceptes ici), puis ouvre la page de la famille et tape ce code :'))}</p>
             <p class="cf-code" data-i18n-off>${esc(code8(inv.code))}</p>
             ${url ? `<p>${esc(i18n('Ou plus simple : elle scanne ce QR code (le code est dedans).'))}</p><div class="cf-qr" aria-hidden="true">${qr(url)}</div><code class="rl-url cf-url" data-i18n-off>${esc(url)}</code>
                 <div class="page-actions"><button type="button" class="button small secondary" data-cf-copy>${esc(i18n('📋 Copier le lien'))}</button></div>`
                 : `<p class="ui-hint">${esc(i18n('Pour le QR code : ouvre d’abord la porte du wifi (Réglages → 🖧 Plusieurs ordinateurs).'))}</p>`}
-            <p class="ui-hint">${esc(i18n('Valable une seule fois, jusqu’au {d}. L’app n’envoie aucun e-mail : donne ce code toi-même. Il ne sera plus montré ensuite.', {d: exp.toLocaleDateString()}))}</p>
-            <div class="page-actions"><button type="button" class="button" data-cf-ok>${esc(i18n('C’est noté'))}</button></div></div>`;
-        document.body.appendChild(d);
-        d.querySelector('[data-cf-ok]').addEventListener('click', () => d.close());
-        d.querySelector('[data-cf-copy]')?.addEventListener('click', () => { try { navigator.clipboard.writeText(url); toast(i18n('Lien copié.'), 'success'); } catch (_) {} });
-        d.addEventListener('close', () => d.remove());
-        d.showModal();
+            <p class="ui-hint">${esc(i18n('Valable une seule fois, jusqu’au {d}. L’app n’envoie aucun e-mail : donne ce code toi-même. Il ne sera plus montré ensuite.', {d: exp.toLocaleDateString()}))}</p></div>`,
+            onOpen: dd => { dd.classList.add('cf-dialog'); dd.querySelector('[data-cf-copy]')?.addEventListener('click', () => { try { navigator.clipboard.writeText(url); toast(i18n('Lien copié.'), 'success'); } catch (_) {} }); }});
     }
 
     /* ─── 📨 Propositions ─── */
@@ -206,31 +198,22 @@
         }
     }
     function chooseDup(id, dups) {
-        const d = document.createElement('dialog'); d.className = 'cf-dialog';
-        d.innerHTML = `<div class="cf-form"><h3>${esc(i18n('Une fiche existe peut-être déjà'))}</h3>
-            ${dups.map(p => `<button type="button" class="button secondary" data-cf-link="${p.id}">${esc(i18n('🔗 Relier à {n}', {n: `${p.name}${p.years ? ` (${p.years})` : ''}`}))}</button>`).join('')}
-            <button type="button" class="button" data-cf-create>${esc(i18n('＋ Créer une nouvelle fiche'))}</button>
-            <div class="page-actions"><button type="button" class="button secondary" data-cf-x>${esc(i18n('Annuler'))}</button></div></div>`;
-        document.body.appendChild(d);
-        d.addEventListener('click', e => {
-            const l = e.target.closest('[data-cf-link]'); if (l) { d.close(); accept(id, {choice: 'link', link_to: Number(l.dataset.cfLink)}); return; }
-            if (e.target.closest('[data-cf-create]')) { d.close(); accept(id, {choice: 'create'}); return; }
-            if (e.target.closest('[data-cf-x]')) d.close();
-        });
-        d.addEventListener('close', () => d.remove());
-        d.showModal();
+        ext.openDialog({eyebrow: i18n('PROPOSITIONS'), title: i18n('Une fiche existe peut-être déjà'), closeLabel: i18n('Annuler'),
+            body: `<div class="cf-form">${dups.map(p => `<button type="button" class="button secondary" data-cf-link="${p.id}">${esc(i18n('🔗 Relier à {n}', {n: `${p.name}${p.years ? ` (${p.years})` : ''}`}))}</button>`).join('')}
+            <button type="button" class="button" data-cf-create>${esc(i18n('＋ Créer une nouvelle fiche'))}</button></div>`,
+            onOpen: d => { d.classList.add('cf-dialog'); d.addEventListener('click', e => {
+                const l = e.target.closest('[data-cf-link]'); if (l) { d.close(); accept(id, {choice: 'link', link_to: Number(l.dataset.cfLink)}); return; }
+                if (e.target.closest('[data-cf-create]')) { d.close(); accept(id, {choice: 'create'}); }
+            }); }});
     }
     function askText(title, label, value = '', {multi = false, okLabel = 'OK'} = {}) {
         return new Promise(resolve => {
-            const d = document.createElement('dialog'); d.className = 'cf-dialog';
-            d.innerHTML = `<form method="dialog" class="cf-form"><h3>${esc(title)}</h3><label>${esc(label)}${multi ? `<textarea name="v" rows="5">${esc(value)}</textarea>` : `<input name="v" value="${esc(value)}">`}</label>
-                <div class="page-actions"><button type="button" class="button secondary" data-cf-x>${esc(i18n('Annuler'))}</button><button type="submit" class="button">${esc(okLabel)}</button></div></form>`;
-            document.body.appendChild(d);
             let out = null;
-            d.querySelector('[data-cf-x]').addEventListener('click', () => d.close());
-            d.querySelector('form').addEventListener('submit', e => { e.preventDefault(); out = d.querySelector('[name=v]').value; d.close(); });
-            d.addEventListener('close', () => { d.remove(); resolve(out); });
-            d.showModal();
+            const d = ext.openDialog({eyebrow: i18n('COMPTES DE LA FAMILLE'), title, submitLabel: okLabel,
+                body: `<div class="cf-form"><label>${esc(label)}${multi ? `<textarea name="v" rows="5">${esc(value)}</textarea>` : `<input name="v" value="${esc(value)}">`}</label></div>`,
+                onOpen: dd => dd.classList.add('cf-dialog'),
+                onSubmit: f => { out = f.querySelector('[name=v]').value; }});
+            d.addEventListener('close', () => resolve(out));
         });
     }
 

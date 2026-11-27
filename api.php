@@ -503,6 +503,7 @@ try {
     if (is_string($action) && in_array($action, ['ld_groups', 'ld_preview', 'ld_merge', 'ld_merge_safe', 'ld_undo'], true)) { require_once __DIR__ . '/lib/lieux_doublons.php'; ld_dispatch($pdo, $action, $isWrite, is_array($payload) ? $payload : []); } // 📍 Lieux en double probables : trouver, fusionner, ↶ (lib/lieux_doublons.php)
     if (is_string($action) && str_starts_with($action, 'ukus_')) { require_once __DIR__ . '/lib/archives_ukus.php'; ukus_dispatch($pdo, $action, $isWrite, is_array($payload) ? $payload : []); } // 🇬🇧🇺🇸 Où chercher ? → The National Archives, NARA : à la demande, rien pour les vivants ni en consultation (lib/archives_ukus.php)
     if (is_string($action) && str_starts_with($action, 'rt_')) { require_once __DIR__ . '/lib/rapports_traitements.php'; rt_dispatch($pdo, $action, $isWrite, is_array($payload) ? $payload : []); } // 📊 Mes rapports, 🧰 Traitements en lot (lib/rapports_traitements.php)
+    if (is_string($action) && str_starts_with($action, 'lot_o_')) { require_once __DIR__ . '/lib/lot_o.php'; lot_o_dispatch($pdo, $action, $isWrite, is_array($payload) ? $payload : []); } // 🌳 Lot O : « Ce que dit l'arbre » et les phrases de la fiche, calculés avec l'arbre (lib/lot_o.php)
     // Fusion de l'arbre d'un cousin : hors de la transaction générale (copie de sécurité VACUUM INTO d'abord)
     if ($isWrite && $action === 'merge_gedcom_analyse') {
         merge_gedcom_analyse($pdo, $_FILES['file'] ?? null);

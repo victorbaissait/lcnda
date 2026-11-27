@@ -217,9 +217,9 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 2; A.setModule('personnes'); });
             await p.waitForSelector('.note-item .td-note-tr', {timeout: 30000});
             await p.click('.note-item .td-note-tr');
-            await p.waitForSelector('dialog.td-dlg .td-tr-out', {timeout: 15000});
-            assert.match(await p.inputValue('dialog.td-dlg .td-tr-out'), /^\[FR\] Im Jahre 1905/);
-            await p.click('dialog.td-dlg .td-dlg-head button');
+            await p.waitForSelector('dialog.td-tr-dlg .td-tr-out', {timeout: 15000});
+            assert.match(await p.inputValue('dialog.td-tr-dlg .td-tr-out'), /^\[FR\] Im Jahre 1905/);
+            await p.click('dialog.td-tr-dlg .modal-head [data-h-close]'); // la fenêtre commune : × en haut à droite
         });
         await t('Paul DURAND : 🕯 le camp de Gurs (1939-1943) ; Pierre DURAND : 📷 photos libres d’Ellis Island ; Luc (vivant) : rien en ligne', async () => {
             const [, , paul] = await into('personInto', 3); assert.match(paul, /Pendant la guerre, près des lieux de sa vie : camp de Gurs/);

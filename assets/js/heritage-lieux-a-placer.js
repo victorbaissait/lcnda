@@ -59,7 +59,7 @@
         const onMap = A()?.state?.module === 'carte';
         const dlg = document.createElement('dialog'); dlg.className = 'lap-dlg' + (onMap ? ' is-side' : '');
         dlg.setAttribute('aria-label', i18n('Lieux à placer'));
-        dlg.innerHTML = `<header class="lap-head"><div><span class="eyebrow">${esc(i18n('PLACER SUR LA CARTE'))}</span><h3>📍 ${esc(i18n('Lieux à placer'))} <small data-lap-n></small></h3></div>
+        dlg.innerHTML = `<header class="lap-head"><div><span class="eyebrow">${esc(i18n('PLACER SUR LA CARTE'))}</span><h2>📍 ${esc(i18n('Lieux à placer'))} <small data-lap-n></small></h2></div>
             <div class="lap-acts">${kiosk() ? '' : `<button type="button" class="button small" data-lap-review>☑ ${esc(i18n('Revoir et placer en lot…'))}</button>`}<button type="button" class="button small secondary" data-lap-settings>⚙️ ${esc(i18n('Réglages'))}</button><button type="button" class="icon-button" data-lap-close aria-label="${esc(i18n('Fermer'))}">×</button></div></header>
             ${ids.length ? `<p class="lap-only">${esc(i18n('Seulement les lieux de cette carte ({n}).', {n: String(ids.length)}))} <button type="button" class="link-button" data-lap-all>${esc(i18n('Voir tous les lieux à placer'))}</button></p>` : ''}
             <div class="lap-bar"></div><div class="lap-chips" role="group" aria-label="${esc(i18n('Filtrer'))}"></div><p class="lap-sum muted" role="status"></p><div class="lap-list"><div class="loading-block">${esc(i18n('Lecture des lieux…'))}</div></div>`;

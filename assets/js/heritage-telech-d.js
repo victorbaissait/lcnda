@@ -369,11 +369,10 @@
         const res = await api('td_wiki', {insee});
         if (!res?.ok) { A().toast?.(res?.message || T('Article introuvable.'), 'error'); return; }
         memo.delete(`td_wiki|${JSON.stringify({insee, title: ''})}`);
-        const dlg = document.createElement('dialog'); dlg.className = 'td-dlg td-wiki-dlg';
-        dlg.innerHTML = `<form method="dialog" class="td-dlg-head"><h3>📖 ${esc(res.title)}</h3><button class="icon-button" aria-label="${esc(T('Fermer'))}">×</button></form>
+        // la fenêtre commune : titre à gauche, × à droite, « Fermer » seul
+        ext.openDialog({eyebrow: T('ARTICLE'), title: `📖 ${res.title}`, wide: true, onOpen: d => d.classList.add('td-wiki-dlg'), body: `
             <div class="td-wiki-body">${res.sections.map(s => `${s.h ? `<h${s.lvl === 3 ? 5 : 4}>${esc(s.h)}</h${s.lvl === 3 ? 5 : 4}>` : ''}${s.text.split('\n').map(p => `<p>${esc(p)}</p>`).join('')}`).join('')}</div>
-            <p class="muted td-wiki-foot">${esc(T('Texte de Wikipédia, gardé le {d}.', {d: new Date((res.fetched_at || Date.now() / 1000) * 1000).toLocaleDateString('fr-FR')}))} ${SRC.wiki(res)} ${srcLink(res.url)}${res.stale ? ` · ${esc(T('pas de connexion : version gardée'))}` : ''}</p>`;
-        document.body.appendChild(dlg); dlg.addEventListener('close', () => dlg.remove()); dlg.showModal();
+            <p class="muted td-wiki-foot">${esc(T('Texte de Wikipédia, gardé le {d}.', {d: new Date((res.fetched_at || Date.now() / 1000) * 1000).toLocaleDateString('fr-FR')}))} ${SRC.wiki(res)} ${srcLink(res.url)}${res.stale ? ` · ${esc(T('pas de connexion : version gardée'))}` : ''}</p>`});
     }
     document.addEventListener('click', async e => {
         const keep = e.target.closest?.('[data-td-wiki]'), read = e.target.closest?.('[data-td-wiki-read]');
