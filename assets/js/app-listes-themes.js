@@ -136,7 +136,7 @@
             ext.lists[k] = token => { tabOf.delete(t.id); return renderTheme(t.id, token); }; // venu de la colonne, d'un lien : le réglage décide de l'onglet
         }
         if (!G) return;
-        const tools = G[3].filter(k => !String(k).startsWith('data_') && k !== OVERVIEW);
+        const tools = G[3].filter(k => (!String(k).startsWith('data_') || (ext.dataToolKeys || []).includes(k)) && k !== OVERVIEW); // les outils sur toutes les données (🔍 data_tout_sur…) restent en haut
         if (mode() === 'themes') { // chaque thème, puis ses listes (cachées, sauf celle qui est ouverte : elle se montre sous son thème)
             const by = new Map(); ds.forEach(d => { const th = themeOf(d); if (!by.has(th)) by.set(th, []); by.get(th).push(E().keyOf(d)); });
             G[3].splice(0, G[3].length, OVERVIEW, ...tools, ...[...themes(), RANGER].flatMap(t => [tkey(t.id), ...(by.get(t.id) || [])]));

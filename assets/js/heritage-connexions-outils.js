@@ -197,7 +197,19 @@
         let f = fileOf(it); if (!f && it.ref_id) { try { const r = await A().api('picker_search', {kind: 'media', ids: String(it.ref_id)}); const m = r.groups?.[0]?.items?.[0]; f = m?.filename || String(m?.thumb || '').replace(/^media\//, ''); } catch (_) {} }
         return f ? {id: Number(it.ref_id) || 0, filename: f, title: it.title || ''} : null;
     }
-    [['anim-new', '🎞', 'Un nouveau film du Studio d’animation', 'l’image dans un nouveau film'], ['retouch', '🎚️', 'La Retouche des photos', 'la photo ouverte dans la Retouche']].forEach(([key, icon, label, what]) => {
+    /* ✒️ 📐 du texte (une info, un passage, un événement, une note…) vers le Dessin vectoriel ou la Mise en page : un bloc de texte en SVG, avec sa source */
+    const textSvg = items => {
+        const xe = t => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        const lines = []; items.forEach(it => { const head = String(it.title || '').trim(), body = String(it.value || '').trim(); if (head) lines.push({t: head, b: true}); if (body && body !== head) String(body).match(/.{1,70}(\s|$)|\S+/g)?.forEach(l => lines.push({t: l.trim()})); if (it.origin?.label) lines.push({t: '↗ ' + it.origin.label, s: true}); lines.push({t: ''}); });
+        const h = 24 + lines.length * 22;
+        return `<svg xmlns="http://www.w3.org/2000/svg" width="640" height="${h}" viewBox="0 0 640 ${h}"><rect width="640" height="${h}" fill="#fff"/>${lines.map((l, i) => `<text x="16" y="${30 + i * 22}" font-family="Georgia, serif" font-size="${l.s ? 12 : 16}"${l.b ? ' font-weight="700"' : ''}${l.s ? ' fill="#666"' : ''}>${xe(l.t)}</text>`).join('')}</svg>`;
+    };
+    [['vector', '✒️', 'Le Dessin vectoriel (le texte)', 'le texte posé dans un dessin, avec sa source'], ['layout', '📐', 'La Mise en page (le texte)', 'le texte posé dans un livre, avec sa source']].forEach(([key, icon, label, what]) => {
+        if (DT.some(t => t.id === `send_${key}_text`)) return;
+        DT.push({id: `send_${key}_text`, icon, label, group: 'Créer', kinds: ['datum', 'text', 'event', 'person', 'note', 'row', 'place', 'source', 'act'], enabled: () => on() && !!(ext.sendTargets || []).find(x => x.key === key)?.ready?.(), choose: async () => ({}), explain: () => T(what),
+            receive: async items => { refuse(); await ext.sendTo('svg', {svg: textSvg(items), name: items[0]?.title || ''}, {to: key, title: items[0]?.title || ''}); return {message: T('{i} Ouvert dans {l}', {i: icon, l: T(label)})}; }});
+    });
+    [['anim-new', '🎞', 'Un nouveau film du Studio d’animation', 'l’image dans un nouveau film'], ['retouch', '🎚️', 'La Retouche des photos', 'la photo ouverte dans la Retouche'], ['vector', '✒️', 'Le Dessin vectoriel', 'l’image posée dans un dessin'], ['layout', '📐', 'La Mise en page (livres)', 'l’image posée dans un livre']].forEach(([key, icon, label, what]) => {
         if (DT.some(t => t.id === `send_${key}`)) return;
         DT.push({id: `send_${key}`, icon, label, group: 'Créer', kinds: ['media'], enabled: () => on() && !!(ext.sendTargets || []).find(x => x.key === key)?.ready?.(), choose: async () => ({}), explain: () => T(what),
             receive: async items => { refuse(); const m = await mediaOf(items[0]); if (!m?.id) throw new Error(T('Cette image n’est pas dans les médias.')); await ext.sendTo('image', {media: m}, {to: key, title: m.title});
