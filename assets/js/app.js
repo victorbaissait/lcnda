@@ -3416,6 +3416,11 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
     function labelTextColor(color='#0066cc'){const hex=String(color||'#0066cc').replace('#','');const full=hex.length===3?hex.split('').map(char=>char+char).join(''):hex;const r=parseInt(full.slice(0,2),16)||0,g=parseInt(full.slice(2,4),16)||0,b=parseInt(full.slice(4,6),16)||0;return ((r*299+g*587+b*114)/1000)>150?'#000':'#fff';}
     function labelChip(label){const color=label?.color||'#0066cc';return `<span class="label-chip" style="--label-bg:${escapeHtml(color)};--label-fg:${escapeHtml(labelTextColor(color))}">${escapeHtml(label?.name||'Étiquette')}</span>`;}
     function labelsHtml(labels=[]){return labels?.length?`<div class="entity-labels">${labels.map(labelChip).join('')}</div>`:'';}
+    /** 🏷 le menu de choix unique des étiquettes (loupe, liste, pastille de couleur, « ＋ Créer… ») à la place d'une case faite à la main (harmonisation.md, Apparence 8) */
+    function labelPickRow(){return `<div class="labels-input-row" hidden>${pkFieldLocal({name:'label_pick',kind:'label',allowCreate:true})}</div>`;}
+    // « ＋ Créer l’étiquette « … » » dans n'importe quel menu de choix des étiquettes : créée tout de suite, puis choisie
+    document.addEventListener('picker-create',async event=>{const d=event.detail||{};if(event.defaultPrevented||d.kind!=='label')return;event.preventDefault();const name=String(d.text||'').trim();if(!name)return;
+        try{const created=await api('save_label',{}, {method:'POST',body:{name}});const label=created.result;state.currentLabelsCache=null;if(label?.id){d.pick?.({id:Number(label.id),title:label.name||name,color:label.color,kind:'label'});toast(i18n('Étiquette « {nm} » créée.',{nm: name}));}}catch(error){toast(error.message,'error');}});
     function entityLabelsField(entityType,entityId,labels=[],locked=false){
         const chips=(labels||[]).map(l=>{
             const color=l?.color||'#0066cc';
@@ -3423,7 +3428,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
             return `<span class="label-chip removable" style="--label-bg:${escapeHtml(color)};--label-fg:${escapeHtml(labelTextColor(color))}" data-label-chip="${l.id}"><span>${escapeHtml(l.name||'Étiquette')}</span>${remove}</span>`;
         }).join('');
         const addButton=locked?'':`<button type="button" class="icon-action icon-add labels-add-btn" data-labels-add aria-label="Ajouter une étiquette" title="Ajouter une étiquette"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>`;
-        const inputRow=locked?'':`<div class="labels-input-row" hidden><input type="text" class="labels-autocomplete-input" placeholder="Tape pour chercher une étiquette…" autocomplete="off"><div class="labels-suggestions" hidden></div></div>`;
+        const inputRow=locked?'':labelPickRow();
         return `<div class="labels-field" data-labels-entity-type="${escapeHtml(entityType)}" data-labels-entity-id="${entityId}"><div class="labels-field-head"><span class="section-label">Étiquettes</span>${addButton}</div><div class="labels-field-chips">${chips||empty('Aucune étiquette.',{icon:'🏷️'})}</div>${inputRow}</div>`;
     }
     function entityLabelsInline(entityType,entityId,labels=[],locked=false){
@@ -3433,7 +3438,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
             return `<span class="label-chip removable" style="--label-bg:${escapeHtml(color)};--label-fg:${escapeHtml(labelTextColor(color))}" data-label-chip="${l.id}"><span>${escapeHtml(l.name||'Étiquette')}</span>${remove}</span>`;
         }).join('');
         const addButton=locked?'':`<button type="button" class="icon-action icon-add labels-add-btn" data-labels-add aria-label="Ajouter une étiquette" title="Ajouter une étiquette"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>`;
-        const inputRow=locked?'':`<div class="labels-input-row" hidden><input type="text" class="labels-autocomplete-input" placeholder="Tape pour chercher une étiquette…" autocomplete="off"><div class="labels-suggestions" hidden></div></div>`;
+        const inputRow=locked?'':labelPickRow();
         if(locked&&!chips)return '';
         return `<div class="labels-field labels-field-inline" data-labels-entity-type="${escapeHtml(entityType)}" data-labels-entity-id="${entityId}"><div class="labels-field-chips">${chips}</div>${addButton}${inputRow}</div>`;
     }
@@ -3456,26 +3461,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         const detail=state.currentPerson;
         if(detail&&field.dataset.labelsEntityType==='person'&&Number(field.dataset.labelsEntityId)===Number(detail.person?.id)){detail.labels=labels;}
     }
-    function hideLabelSuggestions(field){const box=$('.labels-suggestions',field);if(box){box.hidden=true;box.innerHTML='';}}
-    async function renderLabelSuggestions(field,query){
-        const box=$('.labels-suggestions',field);
-        if(!box)return;
-        let all;
-        try{all=await ensureLabelsCache();}catch(error){box.innerHTML=`<div class="labels-suggestion-empty">${escapeHtml(error.message)}</div>`;box.hidden=false;return;}
-        const currentIds=new Set($$('[data-label-chip]',field).map(chip=>Number(chip.dataset.labelChip)));
-        const q=(query||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-        const matches=all.filter(l=>!currentIds.has(Number(l.id))&&(!q||String(l.name||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(q))).slice(0,8);
-        const optionsHtml=matches.map(l=>`<button type="button" class="labels-suggestion" data-pick-label="${l.id}">${labelChip(l)}</button>`).join('');
-        // Aucune étiquette de ce nom : on peut la créer sur place (au lieu de passer par Listes → Étiquettes)
-        const typed=(query||'').trim();
-        const exists=all.some(l=>String(l.name||'').trim().toLowerCase()===typed.toLowerCase());
-        const createHtml=typed&&!exists?`<button type="button" class="labels-suggestion labels-create" data-create-label="${escapeHtml(typed)}">${i18n('＋ Créer l’étiquette « {name} »',{name:escapeHtml(typed)})}</button>`:'';
-        box.innerHTML=(optionsHtml+createHtml)||'<div class="labels-suggestion-empty">Tape le nom d’une étiquette.</div>';
-        box.hidden=false;
-        $$('[data-pick-label]',box).forEach(btn=>btn.addEventListener('click',()=>addLabelToField(field,Number(btn.dataset.pickLabel))));
-        $('[data-create-label]',box)?.addEventListener('click',async event=>{const name=event.currentTarget.dataset.createLabel;
-            try{const created=await api('save_label',{}, {method:'POST',body:{name}});const label=created.result;state.currentLabelsCache=null;if(label?.id)await addLabelToField(field,Number(label.id));toast(i18n('Étiquette « {nm} » créée.',{nm: name}));}catch(error){toast(error.message,'error');}});
-    }
+    function hideLabelSuggestions(field){const row=$('.labels-input-row',field);if(row)row.hidden=true;}
     async function addLabelToField(field,labelId){
         const entityType=field.dataset.labelsEntityType,entityId=Number(field.dataset.labelsEntityId);
         if(!entityId){toast('Enregistre d’abord cette fiche avant d’ajouter une étiquette.','error');return;}
@@ -3485,8 +3471,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         try{
             const result=await api('set_label_links',{},{method:'POST',body:{entity_type:entityType,entity_id:entityId,label_ids:currentIds}});
             updateLabelsFieldChips(field,result.result.labels||[]);
-            const input=$('.labels-autocomplete-input',field);
-            if(input){input.value='';input.focus();renderLabelSuggestions(field,'');}
+            $('.labels-input-row .pk-input',field)?.focus();
         }catch(error){toast(error.message,'error');}
     }
     async function removeLabelFromField(field,labelId){
@@ -3495,8 +3480,6 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         try{
             const result=await api('set_label_links',{},{method:'POST',body:{entity_type:entityType,entity_id:entityId,label_ids:currentIds}});
             updateLabelsFieldChips(field,result.result.labels||[]);
-            const input=$('.labels-autocomplete-input',field);
-            if(input&&!$('.labels-input-row',field)?.hidden)renderLabelSuggestions(field,input.value);
         }catch(error){toast(error.message,'error');}
     }
     function bindEntityLabelsFields(){
@@ -3509,18 +3492,14 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
                     const opening=inputRow.hidden;
                     inputRow.hidden=!opening;
                     addBtn.classList.toggle('is-active',opening);
-                    const input=$('.labels-autocomplete-input',field);
-                    if(opening&&input){input.value='';input.focus();renderLabelSuggestions(field,'');}
-                    else hideLabelSuggestions(field);
+                    if(opening)setTimeout(()=>$('.pk-input',inputRow)?.focus());
                 });
             }
             $$('[data-remove-label]',field).forEach(button=>button.addEventListener('click',()=>removeLabelFromField(field,Number(button.dataset.removeLabel))));
-            const input=$('.labels-autocomplete-input',field);
-            if(input){
-                input.addEventListener('input',debounce(()=>renderLabelSuggestions(field,input.value),150));
-                input.addEventListener('keydown',event=>{
-                    if(event.key==='Escape'){hideLabelSuggestions(field);if(inputRow)inputRow.hidden=true;addBtn?.classList.remove('is-active');}
-                });
+            if(inputRow){
+                // une étiquette choisie dans le menu de choix : ajoutée tout de suite, le menu se vide pour la suivante
+                inputRow.addEventListener('picker-change',event=>{const id=Number(event.detail?.item?.id||0);if(!id)return;const pk=event.target.closest('.pk');setTimeout(()=>window.LCNDA_PICKER?.pickerSet?.(pk,null));addLabelToField(field,id);});
+                inputRow.addEventListener('keydown',event=>{if(event.key==='Escape'&&!$('.pk-list:not([hidden])',inputRow)){inputRow.hidden=true;addBtn?.classList.remove('is-active');}});
             }
         });
     }
