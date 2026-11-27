@@ -162,3 +162,8 @@ body.is-kiosk #sidebar-content .saved-grip, body.is-kiosk #open-graph-reorder { 
 @media (max-width: 700px) { .kc-row { grid-template-columns: 24px 1fr auto; } .kc-hex { display: none; } .kc-shape-sel { grid-column: 2 / -1; } }
 :root[data-theme="dark"] .kc-preset { background: #2a2a2a; border-color: #555; }
 :root[data-theme="dark"] .kc-preset-sw i { border-color: rgba(255,255,255,.5); }
+/* ▾ / ▸ la légende se replie : seul le titre reste */
+.map-legend .map-legend-head { pointer-events: auto; display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; padding: 0; border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.map-legend .map-legend-head span { font-size: 12px; opacity: .7; }
+.map-legend .map-legend-body { display: flex; flex-direction: column; gap: 3px; }
+.map-legend .map-legend-body[hidden] { display: none; }

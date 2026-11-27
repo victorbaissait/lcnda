@@ -463,7 +463,10 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         const yr=mapPointYearRange(mapDisplayPoints());
         const lin=mapActiveFilters(choicesCache?.v).map(x=>x.t).join(' · ');
         box.hidden=!rows&&!yr;
-        box.innerHTML=`<b>${escapeHtml(mapModeLabel())}</b>${rows}${yr?`<small>${escapeHtml(yr.min===yr.max?String(yr.min):i18n('Période : {a} – {b}',{a:String(yr.min),b:String(yr.max)}))}</small>`:''}${lin?`<small>${escapeHtml(lin)}</small>`:''}${mapOpts().gravity&&state.mapGravity?.data?.note?`<small>${escapeHtml(i18n(state.mapGravity.data.note))}</small>`:''}`;
+        const folded=(()=>{try{return localStorage.getItem('lcnda-map-legend-folded')==='1';}catch(_){return false;}})();box.classList.toggle('is-folded',folded);
+        // ▾ / ▸ : un clic sur le titre plie la légende (seul le titre reste) ; retenu sur cet ordinateur
+        box.innerHTML=`<button type="button" class="map-legend-head" data-map-legend-fold aria-expanded="${folded?'false':'true'}" title="${escapeHtml(i18n(folded?'Déplier la légende':'Replier la légende'))}"><b>${escapeHtml(mapModeLabel())}</b><span aria-hidden="true">${folded?'▸':'▾'}</span></button><div class="map-legend-body"${folded?' hidden':''}>${rows}${yr?`<small>${escapeHtml(yr.min===yr.max?String(yr.min):i18n('Période : {a} – {b}',{a:String(yr.min),b:String(yr.max)}))}</small>`:''}${lin?`<small>${escapeHtml(lin)}</small>`:''}${mapOpts().gravity&&state.mapGravity?.data?.note?`<small>${escapeHtml(i18n(state.mapGravity.data.note))}</small>`:''}</div>`;
+        if(!box.dataset.foldBound){box.dataset.foldBound='1';box.addEventListener('click',e=>{if(!e.target.closest('[data-map-legend-fold]'))return;e.preventDefault();let f=false;try{f=localStorage.getItem('lcnda-map-legend-folded')!=='1';if(f)localStorage.setItem('lcnda-map-legend-folded','1');else localStorage.removeItem('lcnda-map-legend-folded');}catch(_){}box.classList.toggle('is-folded',f);const h=box.querySelector('[data-map-legend-fold]'),b=box.querySelector('.map-legend-body');if(b)b.hidden=f;if(h){h.setAttribute('aria-expanded',f?'false':'true');h.title=i18n(f?'Déplier la légende':'Replier la légende');const a=h.querySelector('span');if(a)a.textContent=f?'▸':'▾';}placeLegend();});}
         placeLegend();
     }
 

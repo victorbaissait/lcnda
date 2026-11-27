@@ -829,7 +829,7 @@
     function paysGroups(s, q = '') {
         const cur = paysOf(s?.o), k = fold(q), hit = c => { if (!k) return true; const e = paysEntry(c); return fold(paysName(c)).includes(k) || c.toLowerCase() === k || !!e?.a?.some(a => a.includes(k)); };
         if (!paysIdx) paysIndex().catch(() => {});
-        const short = PAYS_SHORT.filter(c => c === cur || hit(c)), all = (paysIdx || []).map(x => x.c).filter(c => !PAYS_SHORT.includes(c) && (c === cur || hit(c)));
+        const short = PAYS_SHORT.filter(c => c === cur || hit(c)), all = (paysIdx || []).map(x => x.c).filter(c => c === cur || hit(c)); // « Tous les pays » : vraiment tous, raccourcis compris (on y cherche par ordre alphabétique)
         if (!paysIdx && !PAYS_SHORT.includes(cur)) all.push(cur);
         return [[i18n('Raccourcis'), short.map(c => [c, paysName(c)])], ...(all.length ? [[i18n('Tous les pays'), all.map(c => [c, paysName(c)])]] : [])].filter(g => g[1].length);
     }

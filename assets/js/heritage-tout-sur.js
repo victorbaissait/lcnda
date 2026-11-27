@@ -295,12 +295,12 @@
         // les autres sources enregistrées qui se disent « pas installées »
         const seen = new Set();
         results.filter(r => r?.state === 'missing' && !isCovered(r.task.d.id)).forEach(r => { const d = r.task.d; if (seen.has(d.id)) return; seen.add(d.id);
-            out.push({key: 'ds_' + d.id, icon: d.icon || '📦', label: T(d.label), why: life ? T('pourrait dire quelque chose sur {p}', {p: life.first}) : '', size: 0, install: d.install ? () => d.install() : null}); });
+            out.push({key: 'ds_' + d.id, icon: d.icon || '📦', label: T(d.label), why: life ? T('pourrait dire quelque chose sur {p}', {p: life.first}) : '', size: 0, install: d.install ? () => d.install() : null, opens: true}); }); // ces sources n'ont pas de téléchargement en un clic : « Installer » ouvre leur page de réglages
         const order = cat.map(p => p.key);
         return out.sort((a, b) => (order.indexOf(a.key) + 1 || 99) - (order.indexOf(b.key) + 1 || 99));
     }
     async function installAll(items, btn) {
-        const list = items.filter(x => x.install && !x.off); if (!list.length) return;
+        const list = items.filter(x => x.install && !x.off && !x.opens); if (!list.length) return;
         if (btn) btn.disabled = true;
         for (const [i, x] of list.entries()) { if (btn) btn.textContent = T('📦 {n}/{t} : {l}…', {n: String(i + 1), t: String(list.length), l: x.label}); try { await x.install(); } catch (e) { toast(e.message, 'error'); } }
         Object.keys(st).forEach(k => delete st[k]); forget();
@@ -313,11 +313,15 @@
         if (compact) return `<p class="ts-missing-line">⤓ ${esc(T(items.length === 1 ? '1 donnée pourrait en dire plus' : '{n} données pourraient en dire plus', {n: String(items.length)}))} : <button type="button" class="link-button" data-ts-missing>${esc(T('voir et installer'))}</button></p>`;
         return `<section class="ts-group ts-missing" data-ts-missing-box><h3>📦 ${esc(T('Pas encore installé'))} <small class="muted">(${items.length})</small></h3>
             <ul class="ts-miss-list">${items.map((x, i) => `<li><span class="ts-ico" aria-hidden="true">${esc(x.icon)}</span><div><b>${esc(x.label)}</b>${x.size ? ` <small class="muted">${esc(fmtSize(x.size))}</small>` : ''}${x.why ? `<br><small>${esc(x.why)}</small>` : ''}</div>
-                ${x.off ? `<span class="ts-off">${UI().badge ? UI().badge(T('éteint'), 'grey') : esc(T('éteint'))}</span><button type="button" class="button small secondary" data-ts-install="${i}">${esc(T('Allumer…'))}</button>` : x.install ? `<button type="button" class="button small" data-ts-install="${i}">📦 ${esc(T('Installer'))}</button>` : ''}</li>`).join('')}</ul>
-            ${items.filter(x => x.install && !x.off).length > 1 ? `<p><button type="button" class="button small" data-ts-install-all>📦 ${esc(total ? T('Tout installer ({s})', {s: fmtSize(total)}) : T('Tout installer'))}</button></p>` : ''}</section>`;
+                ${x.off ? `<span class="ts-off">${UI().badge ? UI().badge(T('éteint'), 'grey') : esc(T('éteint'))}</span><button type="button" class="button small secondary" data-ts-install="${i}">${esc(T('Allumer…'))}</button>` : x.install ? `<button type="button" class="button small${x.opens ? ' secondary' : ''}" data-ts-install="${i}">${x.opens ? `⚙️ ${esc(T('Ouvrir ses réglages…'))}` : `📦 ${esc(T('Installer'))}`}</button>` : ''}</li>`).join('')}</ul>
+            ${items.filter(x => x.install && !x.off && !x.opens).length > 1 ? `<p><button type="button" class="button small" data-ts-install-all>📦 ${esc(total ? T('Tout installer ({s})', {s: fmtSize(total)}) : T('Tout installer'))}</button></p>` : ''}</section>`;
     };
     function bindMissing(box, items) {
-        box.querySelectorAll('[data-ts-install]').forEach(b => b.addEventListener('click', async () => { const x = items[Number(b.dataset.tsInstall)]; if (!x?.install) return; b.disabled = true; try { await x.install(); } catch (e) { toast(e.message, 'error'); } Object.keys(st).forEach(k => delete st[k]); b.disabled = false; }));
+        box.querySelectorAll('[data-ts-install]').forEach(b => b.addEventListener('click', async () => { const x = items[Number(b.dataset.tsInstall)]; if (!x?.install) return; b.disabled = true;
+            const where = () => `${location.hash}|${A().state?.module || ''}|${A().state?.maintenanceTab || ''}`, before = where();
+            try { await x.install(); } catch (e) { toast(e.message, 'error'); } Object.keys(st).forEach(k => delete st[k]); b.disabled = false;
+            // l'installation a ouvert une autre page (ses réglages) : on ferme cette fenêtre pour qu'elle se voie, sinon le clic semble ne rien faire
+            if (x.opens || where() !== before) { const dlg = box.closest('dialog'); if (dlg?.open) dlg.close(); } }));
         box.querySelector('[data-ts-install-all]')?.addEventListener('click', e => installAll(items, e.currentTarget));
     }
 
