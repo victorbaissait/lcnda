@@ -9,7 +9,10 @@ declare(strict_types=1);
  *   et l'avertissement « déjà parcouru » avant de refaire le même registre ;
  * - 🧩 pistes en colonnes : changer l'état d'une piste sans toucher au reste ;
  * - ↶ Annuler : un dossier de pièces supprimé, un média retiré d'une piste, une recherche négative supprimée ;
- * - ⧉ dupliquer une enquête (question, personnes, pistes ; pas les pièces).
+ * - ⧉ dupliquer une enquête (question, personnes, pistes ; pas les pièces) ;
+ * - 📎 pièces jointes d'une recherche négative : des images de l'app (table investigation_negative_media : seul le lien,
+ *   le média reste dans l'app quand la recherche est supprimée) et un dossier de l'ordinateur (colonne folder_path : le chemin
+ *   seulement, rien n'est copié ; ouvert par l'app de bureau, electron/preload.js openFolder).
  * GET api.php?action=enquetes_plus&op=…, POST action=enquetes_plus {op, …}. Tables créées à la première utilisation.
  * Essai : tests/test-audit-enquetes.js
  */
@@ -24,6 +27,12 @@ function enqp_ensure(PDO $pdo): void
         cote TEXT NOT NULL DEFAULT '', year_from INTEGER NOT NULL DEFAULT 0, year_to INTEGER NOT NULL DEFAULT 0, searched_on TEXT NOT NULL DEFAULT '', note TEXT NOT NULL DEFAULT '',
         created_at TEXT DEFAULT CURRENT_TIMESTAMP)");
     $pdo->exec("CREATE INDEX IF NOT EXISTS idx_inv_neg ON investigation_negatives(investigation_id)");
+    // 📎 pièces jointes : les images (liens vers la table media) et un dossier de l'ordinateur (le chemin seulement)
+    $pdo->exec("CREATE TABLE IF NOT EXISTS investigation_negative_media (negative_id INTEGER NOT NULL, media_id INTEGER NOT NULL, position INTEGER NOT NULL DEFAULT 0,
+        PRIMARY KEY(negative_id, media_id))");
+    $pdo->exec("CREATE INDEX IF NOT EXISTS idx_inv_neg_media ON investigation_negative_media(media_id)");
+    $cols = array_column($pdo->query('PRAGMA table_info(investigation_negatives)')->fetchAll(PDO::FETCH_ASSOC), 'name');
+    if (!in_array('folder_path', $cols, true)) { $pdo->exec("ALTER TABLE investigation_negatives ADD COLUMN folder_path TEXT NOT NULL DEFAULT ''"); }
     $done = true;
 }
 
@@ -67,7 +76,33 @@ function enqp_negatives(PDO $pdo, int $id): array
     enqp_ensure($pdo);
     $s = $pdo->prepare('SELECT * FROM investigation_negatives WHERE investigation_id=? ORDER BY searched_on DESC, id DESC'); $s->execute([$id]);
     return array_map(static fn($r) => ['id' => (int) $r['id'], 'investigation_id' => (int) $r['investigation_id'], 'repository' => $r['repository'], 'cote' => $r['cote'],
-        'year_from' => (int) $r['year_from'], 'year_to' => (int) $r['year_to'], 'searched_on' => $r['searched_on'], 'note' => $r['note'], 'created_at' => $r['created_at']], $s->fetchAll(PDO::FETCH_ASSOC));
+        'year_from' => (int) $r['year_from'], 'year_to' => (int) $r['year_to'], 'searched_on' => $r['searched_on'], 'note' => $r['note'], 'created_at' => $r['created_at'],
+        'folder_path' => (string) ($r['folder_path'] ?? ''), 'media' => enqp_negative_media($pdo, (int) $r['id'])], $s->fetchAll(PDO::FETCH_ASSOC));
+}
+
+/** 📎 les images jointes à une recherche négative (seulement celles encore dans l'app), dans l'ordre choisi */
+function enqp_negative_media(PDO $pdo, int $nid): array
+{
+    $s = $pdo->prepare('SELECT m.id, m.title, m.filename, m.thumbnail, m.media_type, m.description, m.date_text, m.document_reference FROM investigation_negative_media l
+        JOIN media m ON m.id=l.media_id WHERE l.negative_id=? ORDER BY l.position, l.media_id'); $s->execute([$nid]);
+    return array_map(static fn($m) => ['id' => (int) $m['id']] + $m, $s->fetchAll(PDO::FETCH_ASSOC));
+}
+
+/** 📎 remplace les images jointes (des médias de l'app qui existent ; au plus 200) */
+function enqp_set_negative_media(PDO $pdo, int $nid, array $ids): void
+{
+    $ids = array_slice(array_values(array_unique(array_filter(array_map('intval', $ids), static fn($x) => $x > 0))), 0, 200);
+    $pdo->prepare('DELETE FROM investigation_negative_media WHERE negative_id=?')->execute([$nid]);
+    $ok = $pdo->prepare('SELECT 1 FROM media WHERE id=?');
+    $ins = $pdo->prepare('INSERT OR IGNORE INTO investigation_negative_media(negative_id, media_id, position) VALUES(?,?,?)');
+    foreach ($ids as $i => $mid) { $ok->execute([$mid]); if ($ok->fetchColumn()) { $ins->execute([$nid, $mid, $i]); } }
+}
+
+/** 📁 le chemin d'un dossier de l'ordinateur (texte seulement : l'app de bureau vérifie que c'est bien un dossier avant de l'ouvrir) */
+function enqp_folder_path($v): string
+{
+    $p = trim(str_replace(["\0", "\r", "\n"], '', (string) $v));
+    return mb_substr($p, 0, 1000);
 }
 
 /** ⚠️ déjà parcouru ? même cote (lettres et chiffres) et des années qui se recouvrent, dans n'importe quelle enquête */
@@ -152,8 +187,15 @@ function enqp_post(PDO $pdo, array $d): array
             $from = safe_int($d['year_from'] ?? 0); $to = safe_int($d['year_to'] ?? 0); if ($to && $from > $to) { [$from, $to] = [$to, $from]; }
             $on = safe_text($d['searched_on'] ?? ''); if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $on)) { $on = date('Y-m-d'); }
             $vals = [$repo, $cote, $from, $to, $on, mb_substr(safe_text($d['note'] ?? ''), 0, 4000)];
-            if ($nid) { $vals[] = $nid; $vals[] = $id; $pdo->prepare('UPDATE investigation_negatives SET repository=?, cote=?, year_from=?, year_to=?, searched_on=?, note=? WHERE id=? AND investigation_id=?')->execute($vals); }
+            if ($nid) {
+                $c = $pdo->prepare('SELECT 1 FROM investigation_negatives WHERE id=? AND investigation_id=?'); $c->execute([$nid, $id]);
+                if (!$c->fetchColumn()) { throw new RuntimeException('Recherche introuvable.'); }
+                $vals[] = $nid; $vals[] = $id; $pdo->prepare('UPDATE investigation_negatives SET repository=?, cote=?, year_from=?, year_to=?, searched_on=?, note=? WHERE id=? AND investigation_id=?')->execute($vals);
+            }
             else { $pdo->prepare('INSERT INTO investigation_negatives(repository, cote, year_from, year_to, searched_on, note, investigation_id) VALUES(?,?,?,?,?,?,?)')->execute([...$vals, $id]); $nid = (int) $pdo->lastInsertId(); }
+            // 📎 pièces jointes : seulement si la fenêtre les envoie (une ancienne fenêtre ne les efface pas)
+            if (array_key_exists('media_ids', $d)) { enqp_set_negative_media($pdo, $nid, is_array($d['media_ids']) ? $d['media_ids'] : explode(',', (string) $d['media_ids'])); }
+            if (array_key_exists('folder_path', $d)) { $pdo->prepare('UPDATE investigation_negatives SET folder_path=? WHERE id=?')->execute([enqp_folder_path($d['folder_path']), $nid]); }
             $pdo->prepare('UPDATE investigations SET updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([$id]);
             return ['id' => $nid];
         }
@@ -161,6 +203,9 @@ function enqp_post(PDO $pdo, array $d): array
             $nid = safe_int($d['id'] ?? 0);
             $s = $pdo->prepare('SELECT * FROM investigation_negatives WHERE id=?'); $s->execute([$nid]); $row = $s->fetch(PDO::FETCH_ASSOC);
             if (!$row) { throw new RuntimeException('Recherche introuvable.'); }
+            $m = $pdo->prepare('SELECT media_id FROM investigation_negative_media WHERE negative_id=? ORDER BY position, media_id'); $m->execute([$nid]);
+            $row['media_ids'] = array_map('intval', $m->fetchAll(PDO::FETCH_COLUMN)); // 📎 pour ↶ : les médias restent dans l'app, seul le lien part
+            $pdo->prepare('DELETE FROM investigation_negative_media WHERE negative_id=?')->execute([$nid]);
             $pdo->prepare('DELETE FROM investigation_negatives WHERE id=?')->execute([$nid]);
             return ['row' => $row];
         }
@@ -170,6 +215,9 @@ function enqp_post(PDO $pdo, array $d): array
             if (!$nid || !enqp_inv_exists($pdo, $inv)) { throw new RuntimeException('L’enquête de cette recherche n’existe plus.'); }
             $pdo->prepare('INSERT OR IGNORE INTO investigation_negatives(id, investigation_id, repository, cote, year_from, year_to, searched_on, note, created_at) VALUES(?,?,?,?,?,?,?,?,?)')
                 ->execute([$nid, $inv, safe_text($r['repository'] ?? ''), safe_text($r['cote'] ?? ''), safe_int($r['year_from'] ?? 0), safe_int($r['year_to'] ?? 0), safe_text($r['searched_on'] ?? ''), safe_text($r['note'] ?? ''), safe_text($r['created_at'] ?? '') ?: date('Y-m-d H:i:s')]);
+            // 📎 ses pièces jointes reviennent aussi (le dossier et les images encore dans l'app)
+            $pdo->prepare('UPDATE investigation_negatives SET folder_path=? WHERE id=?')->execute([enqp_folder_path($r['folder_path'] ?? ''), $nid]);
+            if (is_array($r['media_ids'] ?? null) && $r['media_ids']) { enqp_set_negative_media($pdo, $nid, $r['media_ids']); }
             return ['id' => $nid];
         }
         case 'item_status': { // 🧩 une piste glissée dans une autre colonne : seul son état change
