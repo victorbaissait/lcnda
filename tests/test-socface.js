@@ -424,10 +424,10 @@ echo 'ok';`], {cwd: appRoot, encoding: 'utf8', env: envFor(dir)});
                     await p.waitForFunction(() => /SocFace lit « né à Tulle », ta fiche dit Naves — l’IA a pu mal lire/.test(document.querySelector('[data-sf-ecarts]')?.textContent || ''), null, {timeout: 10000});
                     assert.ok(await p.$('[data-sf-search-person="4"]'), '« 🔍 Chercher dans les recensements (SocFace) » sur la fiche');
                     await noScroll(); await shot(p, `socface-fiche-${name}.png`);
-                    // le badge change quand le serveur a répondu : on attend ce changement (pas une durée), puis on remet « À vérifier »
+                    // le badge change quand le serveur a répondu (il sert d’abord les ~200 lectures de la fiche) : on attend ce changement, puis on remet « À vérifier »
                     // (un foyer précis : chaque taille d'écran a importé le sien, la fiche en montre donc plusieurs)
                     const R = `.sf-rec[data-sf-rec="${await p.getAttribute('.sf-rec', 'data-sf-rec')}"]`;
-                    const badge = done => p.waitForFunction(([sel, v]) => { const x = document.querySelector(`${sel} .ui-badge`)?.textContent || ''; return v ? /Vérifié/i.test(x) && !/À vérifier/i.test(x) : /À vérifier/i.test(x); }, [R, done], {timeout: 10000}).catch(() => {});
+                    const badge = done => p.waitForFunction(([sel, v]) => { const x = document.querySelector(`${sel} .ui-badge`)?.textContent || ''; return v ? /Vérifié/i.test(x) && !/À vérifier/i.test(x) : /À vérifier/i.test(x); }, [R, done], {timeout: 45000}).catch(() => {});
                     await p.click(`${R} [data-sf-verified]`);
                     await badge(true);
                     assert.match(await p.textContent(`${R} .ui-badge`), /Vérifié/i); assert.doesNotMatch(await p.textContent(`${R} .ui-badge`), /À vérifier/i);

@@ -236,6 +236,20 @@
         const sec = id === '__all' ? {id} : model(wrap.dataset.fsecKind, pid).sections.find(s => s.id === id);
         if (sec) A().setSheetRoute?.(pid, secSlug(sec));
     }
+    /** on descend à la section demandée, et on y reste pendant que la fiche finit de se dessiner (blocs qui arrivent, fiche redessinée) :
+     *  3 s au plus, et plus du tout dès qu'on fait défiler, clique ou tape soi-même */
+    let KEEP = null; // {id, pid, until, stop} : la fiche redessinée juste après (données arrivées) y retourne aussi
+    function keepInView(id, pid = 0, again = false) {
+        if (!again) { const k = KEEP = {id, pid, until: Date.now() + 10000, stop: false}; ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(e => window.addEventListener(e, () => { k.stop = true; }, {once: true, capture: true, passive: true})); }
+        const k = KEEP; let n = 0;
+        const tick = () => {
+            if (!k || k.stop || KEEP !== k || ++n > 12) return;
+            const cur = document.querySelector(`#workspace .person-page .fsec-wrap > .fsec[data-fsec="${CSS.escape(id)}"]`);
+            if (cur && !cur.classList.contains('is-folded')) { const r = cur.getBoundingClientRect(); if (r.top >= innerHeight || r.bottom <= 0 || (n === 1 && Math.abs(r.top) > 4)) { try { cur.scrollIntoView({block: 'start'}); } catch (_) {} } }
+            setTimeout(tick, 250);
+        };
+        setTimeout(tick, 80);
+    }
     /** l'adresse demande une section (lien copié, rechargement, ← →) : son onglet ; sinon on la déplie et on y descend */
     function applyRoute() {
         const st = A().state || {}, wrap = document.querySelector('#workspace .person-page .fsec-wrap'); if (!wrap) return false;
@@ -247,10 +261,11 @@
             if (tabs) { if (id && wrap.querySelector(`[data-fsec-tab="${CSS.escape(id)}"]`)) showTab(wrap, id); }
             else if (id && id !== '__all') {
                 const sec = wrap.querySelector(`:scope > .fsec[data-fsec="${CSS.escape(id)}"]`);
-                if (sec) { if (sec.classList.contains('is-folded')) fold(sec, false); setTimeout(() => { try { sec.scrollIntoView({block: 'start'}); } catch (_) {} }, 80); }
+                if (sec) { if (sec.classList.contains('is-folded')) fold(sec, false); keepInView(id, pid); }
             }
             if (!id) A().setSheetRoute?.(pid, ''); // section inconnue : l'onglet par défaut, l'adresse sans section
         }
+        else if (!tabs && KEEP && !KEEP.stop && KEEP.pid === pid && Date.now() < KEEP.until) keepInView(KEEP.id, pid, true); // redessinée : on y retourne
         if (tabs) routeTo(wrap);
         return true;
     }

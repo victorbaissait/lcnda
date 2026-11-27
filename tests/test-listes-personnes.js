@@ -97,7 +97,7 @@ echo 'ok';`);
         let openMs = 0, chipsMs = 0, filterMs = 0;
         await t('vitesse : la page de 100 lignes (sur 100 007) puis ses pastilles en moins de 1,5 s', async () => {
             await p.evaluate(() => { window.LCNDA_APP.state.listType = 'donnees'; window.LCNDA_APP.setModule('listes'); }); // l'écran Listes déjà ouvert (son menu de côté n'est pas mesuré)
-            await p.waitForSelector('.ld-overview', {timeout: 30000});
+            await p.waitForSelector('.dr-page[data-dr-door="listes"]', {timeout: 30000}); // « 🧰 Données » s'ouvre sur le « 📊 Récap des données » (app-donnees-accueil.js)
             const t0 = Date.now();
             await p.evaluate(() => window.LCNDA_EXT.dataListsEngine.open('dp_maires'));
             await p.waitForFunction(() => /100\s?007/.test(document.querySelector('[data-ld-count]')?.textContent || '') && document.querySelector('.ld-table tbody tr[data-ld-row="99"]'), null, {timeout: 30000});

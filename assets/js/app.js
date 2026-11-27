@@ -2683,6 +2683,8 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
     let scrollRestoring=null;
     function restoreScrollPosition() {
         const position=state.scrollPositions[state.module];if(!position)return;
+        // l'adresse demande une section de la fiche (#personnes/1/documents) : c'est elle qu'on montre (app-sections.js), pas l'ancienne place
+        if(state.module==='personnes'&&state.sheetHash?.slug&&Number(state.sheetHash.id)===Number(state.currentPersonId))return;
         // une page qui se dessine en plusieurs fois (Réglages, aperçus) : on réessaie jusqu'à 6 s, tant qu'on n'a pas fait défiler soi-même
         const mod=state.module;let touched=false;const stop=()=>{touched=true;scrollRestoring=null;};
         scrollRestoring={mod,until:Date.now()+6000};

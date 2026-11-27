@@ -222,7 +222,7 @@ button.ong-uname:hover, button.ong-uname:focus-visible { border-style: solid; bo
 
 /* ✉️ Lettres et 🏷 Sortes (maquette correspondances.html) : 6 façons de ranger en 3 × 2, ou 4 + « 📚 Ensembles » */
 .ong-modes { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
-.ong-modebar .segmented.ong-mode.is-grid.is-3 { grid-template-columns: 1fr 1fr 1fr; }
+.ong-modebar .segmented.ong-mode.is-grid.is-3 { grid-template-columns: repeat(3, minmax(min-content, 1fr)); } /* chaque colonne à la taille de son plus long mot (« 👤 Personnes ») : rien de coupé dans une colonne étroite */
 .ong-submode { display: flex; }
 .ong-submode button { flex: 1; font-size: .85rem; padding: 2px 4px; white-space: nowrap; }
 .ong-gap { margin: 2px 8px 4px 28px; padding: 3px 8px; border-left: 3px solid #d9a400; background: color-mix(in srgb, #f0c419 14%, transparent); font-size: .82rem; list-style: none; }

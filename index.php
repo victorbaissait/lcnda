@@ -50,7 +50,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/saisies.css?v=4">
     <link rel="stylesheet" href="assets/css/board-shapelib.css?v=1">
     <link rel="stylesheet" href="assets/css/artist.css?v=5">
-    <link rel="stylesheet" href="assets/css/onglets.css?v=18">
+    <link rel="stylesheet" href="assets/css/onglets.css?v=20">
     <link rel="stylesheet" href="assets/css/audit-chrono.css?v=2">
     <link rel="stylesheet" href="assets/css/audit-listes.css?v=3">
     <link rel="stylesheet" href="assets/css/audit-recherche.css?v=6">
@@ -1266,7 +1266,7 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_RFR_DATA = <?= json_encode(json_decode((string) @file_get_contents(__DIR__ . '/assets/data/recherche-fr.json'), true) ?: new stdClass(), JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP) ?>;</script>
 <script src="assets/js/app-recherche-fr.js?v=1" defer></script>
 <script>window.LCNDA_MEDIA_LIMITS = <?= json_encode($ready ? media_limits_for_page() : null) ?>;</script>
-<script src="assets/js/app.js?v=619" defer></script>
+<script src="assets/js/app.js?v=622" defer></script>
 <script src="assets/js/app-media-limits.js?v=2" defer></script>
 <script src="assets/js/app-verrou.js?v=7" defer></script>
 <script src="assets/js/app-reseau-local.js?v=5" defer></script>
@@ -1807,7 +1807,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-photos-import.js?v=2" defer></script>
 <script src="assets/js/app-apparence.js?v=30" defer></script>
 <script src="assets/js/app-designs.js?v=29" defer></script>
-<script src="assets/js/app-sections.js?v=11" defer></script>
+<script src="assets/js/app-sections.js?v=13" defer></script>
 <script src="assets/js/app-premier.js?v=7" defer></script>
 <script src="assets/js/app-visite.js?v=3" defer></script>
 <script src="assets/js/app-je-veux.js?v=5" defer></script><!-- 🧭 Je veux… : ⌘K, Recherche, Listes, Réglages (le moteur et les écrans se chargent à la première ouverture : app-je-veux-moteur.js, app-je-veux-ui.js) -->
