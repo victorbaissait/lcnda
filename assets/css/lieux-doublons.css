@@ -8,7 +8,7 @@
 .pk-dup-btn:hover, .pk-dup-btn:focus-visible { background: #fff3c4; }
 
 /* ── la fenêtre de fusion ── */
-.ld-dialog { width: min(720px, calc(100vw - 24px)); }
+.ld-dialog { width: var(--modal-m); }
 .ld-body { padding: 14px 20px 10px; display: grid; gap: 12px; }
 .ld-sides { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .ld-side { border: 2px solid #111; padding: 10px 12px; display: grid; gap: 4px; min-width: 0; background: #fff; }

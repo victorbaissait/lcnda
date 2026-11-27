@@ -374,7 +374,7 @@
         placeList('romains', 'Ponts et aqueducs romains', '🏛', 'romains'), placeList('hippodromes', 'Hippodromes', '🐎', 'hippodromes'),
         L('ti_maregraphe', 'ti-maregraphe', '🌊', 'Niveau moyen de la mer à Brest et Marseille', 'Le monde', 'PSMSL (Holgate et al. 2013)', 'https://psmsl.org/data/obtaining/', 'maree',
             async () => { const D = await rowsOf('maregraphe'); const st = Object.fromEntries((D.meta.stations || []).map(s => [s.id, s.name])); return D.rows.map(r => ({station: st[r.st] || String(r.st), year: r.y, mm: r.mm, src: 'https://psmsl.org/data/obtaining/'})); },
-            [F('station', 'Station', 'enum'), F('year', 'Année', 'year'), F('mm', 'Niveau moyen (mm)', 'number'), F('src', 'Source', 'url')], {period: r => [r.year, r.year]}),
+            [F('station', 'Station', 'enum'), F('year', 'Année', 'year'), F('mm', 'Niveau moyen', 'number', {unit: 'mm'}), F('src', 'Source', 'url')], {period: r => [r.year, r.year]}),
         L('ti_tour', 'ti-tour', '🧭', 'Le Tour de la France par deux enfants : les villes', 'Le monde', 'G. Bruno 1904 (domaine public) ; Wikisource', 'https://fr.wikisource.org/wiki/Le_Tour_de_la_France_par_deux_enfants', 'tour',
             async () => { const D = await rowsOf('tour'); return D.rows.map(r => ({ch: r.ch, commune: r.commune, title: r.title, quote: r.q, lat: r.lat, lon: r.lon, src: String(D.meta.chapter_url || '').replace('{c}', String(r.ch).padStart(3, '0'))})); },
             [F('ch', 'Chapitre', 'number'), F('commune', 'Ville', 'place'), F('title', 'Titre du chapitre'), F('quote', 'La phrase du livre'), F('src', 'Source', 'url')], {geo: r => [r.lat, r.lon]}),

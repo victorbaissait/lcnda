@@ -29,7 +29,7 @@ header('X-Content-Type-Options: nosniff');
     <script src="assets/js/app-observateurs.js?v=2"></script>
     <link rel="stylesheet" href="assets/css/app.css?v=294">
     <link rel="stylesheet" href="assets/css/picker.css?v=7">
-    <link rel="stylesheet" href="assets/css/lieux-doublons.css?v=1">
+    <link rel="stylesheet" href="assets/css/lieux-doublons.css?v=2">
     <link rel="stylesheet" href="assets/css/heritage.css?v=285">
     <link rel="stylesheet" href="assets/css/recueil-etat.css?v=12">
     <link rel="stylesheet" href="assets/css/transcription-actes.css?v=14">
@@ -1779,7 +1779,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-telech-f.js?v=4" defer></script>
 <script src="assets/js/heritage-telech-h.js?v=2" defer></script>
 <script src="assets/js/heritage-telech-g.js?v=3" defer></script>
-<script src="assets/js/heritage-telech-i.js?v=3" defer></script>
+<script src="assets/js/heritage-telech-i.js?v=4" defer></script>
 <script src="assets/js/heritage-telech-m.js?v=5" defer></script>
 <script src="assets/js/app-lot-n-archives.js?v=3" defer></script>
 <script src="assets/js/app-lot-n2-chiffres.js?v=2" defer></script>
