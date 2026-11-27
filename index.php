@@ -55,7 +55,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/audit-listes.css?v=3">
     <link rel="stylesheet" href="assets/css/audit-recherche.css?v=6">
     <link rel="stylesheet" href="assets/css/recherche-carte.css?v=3">
-    <link rel="stylesheet" href="assets/css/audit-enquetes.css?v=4">
+    <link rel="stylesheet" href="assets/css/audit-enquetes.css?v=5">
     <link rel="stylesheet" href="assets/css/audit-cartes.css?v=5">
     <link rel="stylesheet" href="assets/css/audit-personnes.css?v=6">
     <link rel="stylesheet" href="assets/css/audit-dashboard.css?v=2">
@@ -1267,7 +1267,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-recherche-fr.js?v=1" defer></script>
 <script>window.LCNDA_MEDIA_LIMITS = <?= json_encode($ready ? media_limits_for_page() : null) ?>;</script>
 <script src="assets/js/app-fiche-lazy.js?v=11" defer></script><!-- ⏱ la fiche se charge à mesure qu’on la lit -->
-<script src="assets/js/app.js?v=635" defer></script>
+<script src="assets/js/app.js?v=636" defer></script>
 <script src="assets/js/app-media-limits.js?v=2" defer></script>
 <script src="assets/js/app-verrou.js?v=7" defer></script>
 <script src="assets/js/app-reseau-local.js?v=5" defer></script>
@@ -1305,7 +1305,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-comparaison.js?v=12" defer></script>
 <script src="assets/js/app-carte-couleurs.js?v=2" defer></script><!-- 🎨 couleurs et formes des sortes sur toutes les cartes (Réglages → Cartes et fonds de carte) -->
 <script src="assets/js/app-carte.js?v=21" defer></script>
-<script src="assets/js/app-enquetes.js?v=21" defer></script>
+<script src="assets/js/app-enquetes.js?v=22" defer></script>
 <script src="assets/js/app-tableau-de-bord.js?v=29" defer></script>
 <script src="assets/js/app-chrono-recherche.js?v=1" defer></script>
 <script src="assets/js/app-harmony.js?v=10" defer></script>

@@ -10,6 +10,7 @@
      * ajouts : 🧩 pistes en colonnes, ✅ conclure l'enquête, 🚫 recherches négatives, 🗂 modèles d'enquête, 🖨 rapport d'enquête,
      * ⏱ temps passé, 🔦 avancement des battues sur la carte. Serveur : lib/enquetes_plus.php. Essai : tests/test-audit-enquetes.js */
     const UI=()=>window.LCNDA_UI||{};
+    const A=()=>window.LCNDA_APP||{};
     const kiosk=()=>document.body.classList.contains('is-kiosk'); // R6 : en consultation, rien à modifier
     const postR=(action,body)=>api(action,{},{method:'POST',body}).then(r=>r&&r.result!==undefined?r.result:r);
     const plusPost=(op,body={})=>postR('enquetes_plus',{op,...body});
@@ -180,7 +181,7 @@
         const body=`<h1>🕵️ ${e(inv.title)}</h1><p class="meta">${e(i18n('Enquête sur {name}',{name:inv.person_name||''}))}${persons.length?` · ${e(i18n('aussi : {list}',{list:persons.join(', ')}))}`:''} · ${e(statusWord(inv.status))} · ${e(i18n('ouverte le {d}',{d:frDate(inv.created_at)}))}${ex.elapsed?` · ⏱ ${e(hm(ex.elapsed))}`:''}</p>
             <h2>${e(i18n('Question'))}</h2><p>${e(inv.question||'—')}</p>${inv.known_facts?`<h2>${e(i18n('Ce que je sais'))}</h2><p>${e(inv.known_facts)}</p>`:''}${inv.documents?`<h2>${e(i18n('Documents disponibles'))}</h2><p>${e(inv.documents)}</p>`:''}
             <h2>${e(i18n('Chronologie des pistes'))}</h2>${items.length?`<table><thead><tr><th>${e(i18n('Date'))}</th><th>${e(i18n('Nature'))}</th><th>${e(i18n('Piste'))}</th><th>${e(i18n('État'))}</th></tr></thead><tbody>${items.map(it=>`<tr><td>${e(frDate(it.created_at))}</td><td>${e(i18n(ITEM_KIND[it.kind]||it.kind))}</td><td><b>${e(it.title)}</b>${kept.has(Number(it.id))?' ✓':''}${it.url?`<br><small>${e(it.url)}</small>`:''}${it.notes?`<br><small>${e(it.notes)}</small>`:''}</td><td>${e(i18n(ITEM_STATUS[it.status]||it.status))}</td></tr>`).join('')}</tbody></table>`:`<p>${e(i18n('Aucune piste.'))}</p>`}
-            ${negs.length?`<h2>${e(i18n('Recherches sans résultat'))}</h2><table><thead><tr><th>${e(i18n('Fonds'))}</th><th>${e(i18n('Cote'))}</th><th>${e(i18n('Années'))}</th><th>${e(i18n('Le'))}</th></tr></thead><tbody>${negs.map(n=>`<tr><td>${e(n.repository)}</td><td>${e(n.cote)}</td><td>${n.year_from?e(n.year_to&&n.year_to!==n.year_from?`${n.year_from}–${n.year_to}`:String(n.year_from)):''}</td><td>${e(frDate(n.searched_on))}</td></tr>`).join('')}</tbody></table>`:''}
+            ${negs.length?`<h2>${e(i18n('Recherches sans résultat'))}</h2><table><thead><tr><th>${e(i18n('Fonds'))}</th><th>${e(i18n('Cote'))}</th><th>${e(i18n('Années'))}</th><th>${e(i18n('Le'))}</th><th>📎</th></tr></thead><tbody>${negs.map(n=>`<tr><td>${e(n.repository)}</td><td>${e(n.cote)}</td><td>${n.year_from?e(n.year_to&&n.year_to!==n.year_from?`${n.year_from}–${n.year_to}`:String(n.year_from)):''}</td><td>${e(frDate(n.searched_on))}</td><td>${(n.media||[]).length?`📎 ${(n.media||[]).length}`:''}${n.folder_path?` 📁`:''}</td></tr>`).join('')}</tbody></table>`:''}
             ${(d.media||[]).length?`<h2>${e(i18n('Pièces'))}</h2><div class="thumbs">${d.media.map(m=>`<figure>${normalizedMediaType(m)==='image'?`<img src="media/${encodeURIComponent(m.thumbnail||m.filename)}" alt="">`:`<span class="doc">${e(mediaTypeShortLabelWithIcon(m).replace(/<[^>]+>/g,''))}</span>`}<figcaption>${e(m.title||m.filename)}<br><small>${e(m.verdict==='interesting'?i18n('Intéressant'):i18n('Rejeté'))}</small></figcaption></figure>`).join('')}</div>`:''}
             <h2>${e(i18n('Conclusion'))}</h2>${ex.conclusion?`<p>${e(ex.conclusion)}</p>${ex.proof?`<h3>${e(i18n('Argument de preuve'))}</h3><p>${e(ex.proof)}</p>`:''}${kept.size?`<h3>${e(i18n('Sources retenues'))}</h3><ul>${items.filter(it=>kept.has(Number(it.id))).map(it=>`<li>${e(it.title)}</li>`).join('')}</ul>`:''}`:`<p>${e(i18n('Pas encore de conclusion.'))}</p>`}
             <p class="foot">${e(i18n('Rapport fait le {d}',{d:frDate(new Date().toISOString())}))}</p>`;
@@ -265,9 +266,33 @@
     }
     /* ── 🚫 recherches négatives : « rien trouvé » avec la cote, les années, la date ; avertissement avant de refaire la même ── */
     const yearsText=n=>n.year_from?(n.year_to&&n.year_to!==n.year_from?`${n.year_from}–${n.year_to}`:String(n.year_from)):'';
+    /* 📎 pièces jointes d'une recherche négative : des images de l'app (ouvertes dans la visionneuse) et un dossier de l'ordinateur
+     * (le chemin seulement ; ouvert par l'app de bureau, electron/preload.js : jamais dans le navigateur ni en consultation) */
+    const deskFolders=()=>!!(window.lcnda&&typeof window.lcnda.chooseFolder==='function'&&typeof window.lcnda.openFolder==='function');
+    const folderLabel=p=>String(p||'').replace(/[\\/]+$/,'').split(/[\\/]/).pop()||String(p||'');
+    const negThumbSrc=m=>`media/${encodeURIComponent(m.thumbnail||m.filename||'')}`;
+    function negAttachBadge(n){
+        const media=n.media||[],dir=n.folder_path||'',out=[];
+        if(media.length){const m=media[0];out.push(`<button type="button" class="enq-neg-att-badge" data-enq-neg-view="${n.id}" title="${escapeHtml(i18n('Voir les images jointes'))}"><img src="${escapeHtml(negThumbSrc(m))}" alt="" loading="lazy"><span>📎 ${media.length}</span></button>`);}
+        if(dir){
+            if(kiosk())out.push(`<span class="enq-neg-att-dir" title="${escapeHtml(i18n('Un dossier de l’ordinateur'))}">📁</span>`);
+            else if(deskFolders())out.push(`<button type="button" class="enq-neg-att-dir is-link" data-enq-neg-dir-open="${n.id}" title="${escapeHtml(i18n('Ouvrir le dossier {name}',{name:dir}))}">📁 ${escapeHtml(folderLabel(dir))}</button>`);
+            else out.push(`<span class="enq-neg-att-dir" title="${escapeHtml(dir)}">📁 ${escapeHtml(folderLabel(dir))}</span>`);
+        }
+        return out.join('');
+    }
+    function viewNegativeMedia(n,index=0){const media=(n?.media||[]).map(m=>({...m}));if(!media.length)return;openLightbox(media,Math.max(0,Math.min(index,media.length-1)),kiosk());}
+    async function openNegativeFolder(dir){
+        if(!dir||kiosk()||!deskFolders())return;
+        try{const r=await window.lcnda.openFolder(dir);if(r&&!r.ok)toast(i18n(r.error||'Impossible d’ouvrir ce dossier.'),'error');}catch(error){toast(error.message,'error');}
+    }
+    function bindNegativeAttach(root,negs){
+        root.querySelectorAll('[data-enq-neg-view]').forEach(b=>b.addEventListener('click',()=>viewNegativeMedia(negs.find(x=>Number(x.id)===Number(b.dataset.enqNegView)))));
+        root.querySelectorAll('[data-enq-neg-dir-open]').forEach(b=>b.addEventListener('click',()=>openNegativeFolder(negs.find(x=>Number(x.id)===Number(b.dataset.enqNegDirOpen))?.folder_path)));
+    }
     function negativesHtml(negs){
         return `<section class="enq-negatives" data-enq-negatives><div class="section-title"><div><span class="eyebrow">${escapeHtml(i18n('RIEN TROUVÉ'))}</span><h3>🚫 ${escapeHtml(i18n('Recherches sans résultat'))}${negs.length?` <span class="investigation-media-total">(${negs.length})</span>`:''}</h3></div><div class="page-actions"><button type="button" class="button small secondary" data-enq-neg-add data-enq-edit>${escapeHtml(i18n('＋ Recherche sans résultat'))}</button></div></div>
-            ${negs.length?`<div class="data-table-wrap"><table class="data-table enq-neg-table"><thead><tr><th>${escapeHtml(i18n('Fonds ou archives'))}</th><th>${escapeHtml(i18n('Cote'))}</th><th>${escapeHtml(i18n('Années parcourues'))}</th><th>${escapeHtml(i18n('Le'))}</th><th>${escapeHtml(i18n('Note'))}</th><th></th></tr></thead><tbody>${negs.map(n=>`<tr data-enq-neg="${n.id}"><td>${escapeHtml(n.repository)}</td><td><b>${escapeHtml(n.cote)}</b></td><td>${escapeHtml(yearsText(n))}</td><td>${escapeHtml(frDate(n.searched_on))}</td><td><small>${escapeHtml(n.note)}</small></td><td class="enq-neg-act"><button type="button" class="icon-button small" data-enq-neg-menu="${n.id}" aria-label="${escapeHtml(i18n('Plus d’actions'))}" title="${escapeHtml(i18n('Plus d’actions'))}" data-enq-edit>⋯</button></td></tr>`).join('')}</tbody></table></div>`
+            ${negs.length?`<div class="data-table-wrap"><table class="data-table enq-neg-table"><thead><tr><th>${escapeHtml(i18n('Fonds ou archives'))}</th><th>${escapeHtml(i18n('Cote'))}</th><th>${escapeHtml(i18n('Années parcourues'))}</th><th>${escapeHtml(i18n('Le'))}</th><th>${escapeHtml(i18n('Note'))}</th><th class="enq-neg-att-th"><span aria-label="${escapeHtml(i18n('Pièces jointes'))}" title="${escapeHtml(i18n('Pièces jointes'))}">📎</span></th><th></th></tr></thead><tbody>${negs.map(n=>`<tr data-enq-neg="${n.id}"><td>${escapeHtml(n.repository)}</td><td><b>${escapeHtml(n.cote)}</b></td><td>${escapeHtml(yearsText(n))}</td><td>${escapeHtml(frDate(n.searched_on))}</td><td><small>${escapeHtml(n.note)}</small></td><td class="enq-neg-att-cell">${negAttachBadge(n)}</td><td class="enq-neg-act"><button type="button" class="icon-button small" data-enq-neg-menu="${n.id}" aria-label="${escapeHtml(i18n('Plus d’actions'))}" title="${escapeHtml(i18n('Plus d’actions'))}" data-enq-edit>⋯</button></td></tr>`).join('')}</tbody></table></div>`
             :`<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🚫</span><span class="empty-line-text">${escapeHtml(i18n('Note ici chaque registre parcouru sans rien trouver : l’app te prévient avant de le refaire.'))}</span></p>`}</section>`;
     }
     function openNegativeDialog(id,n,reload){
@@ -280,6 +305,8 @@
             <label>${escapeHtml(i18n('Années parcourues : de'))}<input name="year_from" type="number" min="1000" max="2100" value="${escapeHtml(n.year_from||'')}" data-enq-neg-y></label><label>${escapeHtml(i18n('à'))}<input name="year_to" type="number" min="1000" max="2100" value="${escapeHtml(n.year_to||'')}" data-enq-neg-y></label>
             <label>${escapeHtml(i18n('Parcouru le'))}<input name="searched_on" type="date" value="${escapeHtml(n.searched_on||today)}"></label><span></span>
             <label class="span-2">${escapeHtml(i18n('Note'))}<textarea name="note" rows="2">${escapeHtml(n.note||'')}</textarea></label></div>
+            <div class="enq-neg-att" data-enq-neg-att><div class="enq-neg-att-line"><span class="enq-neg-att-label">📎 ${escapeHtml(i18n('Pièces jointes'))}</span>${kiosk()?'':`<span class="enq-neg-att-acts"><button type="button" class="button small secondary" data-enq-neg-img title="${escapeHtml(i18n('Une ou plusieurs images de l’ordinateur : elles entrent dans les médias de l’app. Tu peux aussi les glisser ici.'))}">${escapeHtml(i18n('＋ Images…'))}</button><button type="button" class="button small secondary" data-enq-neg-pick title="${escapeHtml(i18n('Des images déjà dans l’app'))}">🖼 ${escapeHtml(i18n('Déjà dans l’app…'))}</button>${deskFolders()?`<button type="button" class="button small secondary" data-enq-neg-dir title="${escapeHtml(i18n('Seul le chemin du dossier est gardé : rien n’est copié.'))}">${escapeHtml(i18n('📁 Un dossier…'))}</button>`:''}<input type="file" accept="image/*" multiple hidden data-enq-neg-file></span>`}</div>
+            <div class="enq-neg-thumbs" data-enq-neg-thumbs></div><div class="enq-neg-dirline" data-enq-neg-dirline></div></div>
             <div class="enq-neg-warn" data-enq-neg-warn hidden></div>
             <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-x>${escapeHtml(i18n('Annuler'))}</button><button type="submit" class="button" data-enq-neg-go>${escapeHtml(i18n('Enregistrer'))}</button></div></form>`;
         document.body.appendChild(dlg);
@@ -292,12 +319,55 @@
             return m;
         };
         dlg.querySelectorAll('[data-enq-neg-cote],[data-enq-neg-y]').forEach(i=>i.addEventListener('input',()=>{clearTimeout(f._t);f._t=setTimeout(check,250);}));
+        /* 📎 pièces jointes : la liste vit dans la fenêtre, elle est gardée avec « Enregistrer » */
+        const att={media:(n.media||[]).map(m=>({...m})),folder:n.folder_path||''};
+        const thumbs=dlg.querySelector('[data-enq-neg-thumbs]'),dirLine=dlg.querySelector('[data-enq-neg-dirline]');
+        const paintAtt=()=>{
+            thumbs.innerHTML=att.media.map((m,i)=>`<span class="enq-neg-thumb" data-enq-neg-thumb="${m.id}"><button type="button" class="enq-neg-thumb-img" data-enq-neg-tview="${i}" title="${escapeHtml(m.title||m.filename||'')}"><img src="${escapeHtml(negThumbSrc(m))}" alt="${escapeHtml(m.title||'')}"></button>${kiosk()?'':`<button type="button" class="enq-neg-thumb-x" data-enq-neg-tx="${i}" aria-label="${escapeHtml(i18n('Retirer'))}" title="${escapeHtml(i18n('Retirer'))}">×</button>`}</span>`).join('');
+            dirLine.innerHTML=att.folder?`<span class="enq-neg-dirchip">${deskFolders()&&!kiosk()?`<button type="button" class="table-link" data-enq-neg-dopen title="${escapeHtml(att.folder)}">📁 ${escapeHtml(folderLabel(att.folder))}</button>`:`<span title="${escapeHtml(att.folder)}">📁 ${escapeHtml(folderLabel(att.folder))}</span>`}${kiosk()?'':`<button type="button" class="enq-neg-thumb-x" data-enq-neg-dx aria-label="${escapeHtml(i18n('Retirer'))}" title="${escapeHtml(i18n('Retirer'))}">×</button>`}</span>`:'';
+        };
+        const addMedia=list=>{const have=new Set(att.media.map(m=>Number(m.id)));list.filter(m=>m&&Number(m.id)>0&&!have.has(Number(m.id))).forEach(m=>{have.add(Number(m.id));att.media.push(m);});paintAtt();};
+        const importFiles=async files=>{
+            if(kiosk())return;
+            const imp=A().importMediaFile||window.LCNDA_PICKER?.importMediaFile;if(!imp){toast(i18n('L’import des images n’est pas disponible.'),'error');return;}
+            const imgs=[...files].filter(fl=>/^image\//.test(fl.type||''));if(!imgs.length){toast(i18n('Ici, il faut une image.'),'error');return;}
+            const got=[];thumbs.classList.add('is-busy');
+            for(const fl of imgs){try{got.push(await imp(fl,['image']));}catch(error){toast(error.message,'error');}}
+            thumbs.classList.remove('is-busy');addMedia(got);
+            if(got.length)toast(i18n(got.length>1?'{n} images ajoutées aux médias de l’app.':'Image ajoutée aux médias de l’app.',{n:got.length}));
+        };
+        paintAtt();
+        if(!kiosk()){
+            const fileIn=dlg.querySelector('[data-enq-neg-file]');
+            dlg.querySelector('[data-enq-neg-img]')?.addEventListener('click',()=>fileIn?.click());
+            fileIn?.addEventListener('change',()=>{const fl=[...fileIn.files];fileIn.value='';if(fl.length)importFiles(fl);});
+            UI().bindFileDrop?.(dlg.querySelector('[data-enq-neg-att]'),importFiles,{accept:'image/*'});
+            UI().bindFileDrop?.(f,importFiles,{accept:'image/*',paste:false});
+            dlg.querySelector('[data-enq-neg-pick]')?.addEventListener('click',async()=>{
+                const open=A().openMediaPicker||window.LCNDA_PICKER?.openMediaPicker;if(!open){toast(i18n('Le choix des médias n’est pas disponible.'),'error');return;}
+                const list=await open({multiple:true,types:['image'],value:att.media,eyebrow:i18n('ENQUÊTE'),title:i18n('Images de la recherche sans résultat'),okLabel:i18n('Joindre')});
+                if(Array.isArray(list)){const keep=new Set(list.map(m=>Number(m.id)));att.media=att.media.filter(m=>keep.has(Number(m.id)));addMedia(list);}
+            });
+            dlg.querySelector('[data-enq-neg-dir]')?.addEventListener('click',async()=>{
+                if(!deskFolders())return;
+                try{const r=await window.lcnda.chooseFolder();if(r&&!r.canceled&&r.dir){att.folder=String(r.dir);paintAtt();}}catch(error){toast(error.message,'error');}
+            });
+        }
+        dlg.querySelector('[data-enq-neg-att]').addEventListener('click',e=>{
+            const v=e.target.closest('[data-enq-neg-tview]');if(v){openLightbox(att.media.map(m=>({...m})),Number(v.dataset.enqNegTview),true);return;}
+            if(e.target.closest('[data-enq-neg-dopen]')){openNegativeFolder(att.folder);return;}
+            const x=e.target.closest('[data-enq-neg-tx]');
+            if(x&&!kiosk()){const i=Number(x.dataset.enqNegTx),m=att.media[i];if(!m)return;att.media.splice(i,1);paintAtt();
+                undoToast(i18n('Image retirée de la recherche'),{undo:async()=>{if(!att.media.some(y=>Number(y.id)===Number(m.id)))att.media.splice(Math.min(i,att.media.length),0,m);paintAtt();},redo:async()=>{att.media=att.media.filter(y=>Number(y.id)!==Number(m.id));paintAtt();}});return;}
+            if(e.target.closest('[data-enq-neg-dx]')&&!kiosk()){const old=att.folder;att.folder='';paintAtt();
+                undoToast(i18n('Dossier retiré de la recherche'),{undo:async()=>{att.folder=old;paintAtt();},redo:async()=>{att.folder='';paintAtt();}});}
+        });
         dlg.addEventListener('click',e=>{if(e.target.closest('[data-x]'))dlg.close();});
         dlg.addEventListener('close',()=>dlg.remove());
         f.addEventListener('submit',async e=>{
             e.preventDefault();
             if(!f.cote.value.trim()&&!f.repository.value.trim()){toast(i18n('Donne au moins la cote ou le fonds parcouru.'),'error');return;}
-            try{await plusPost('save_negative',{investigation_id:id,id:n.id||0,repository:f.repository.value,cote:f.cote.value,year_from:f.year_from.value,year_to:f.year_to.value,searched_on:f.searched_on.value,note:f.note.value});dlg.close();toast(i18n('Recherche sans résultat notée.'));await reload();}
+            try{await plusPost('save_negative',{investigation_id:id,id:n.id||0,repository:f.repository.value,cote:f.cote.value,year_from:f.year_from.value,year_to:f.year_to.value,searched_on:f.searched_on.value,note:f.note.value,media_ids:att.media.map(m=>Number(m.id)),folder_path:att.folder});dlg.close();toast(i18n('Recherche sans résultat notée.'));await reload();}
             catch(error){toast(error.message,'error');}
         });
         dlg.showModal();
@@ -918,6 +988,7 @@
             page.querySelector('[data-enq-chrono-reset]')?.addEventListener('click',()=>$('[data-enq-chrono]')?._reset?.().catch(e=>toast(e.message,'error')));
             page.querySelector('[data-enq-conclude]')?.addEventListener('click',()=>openConclusionDialog(id,inv,data.items,ex,reload));
             page.querySelector('[data-enq-neg-add]')?.addEventListener('click',()=>openNegativeDialog(id,null,reload));
+            bindNegativeAttach(page,negs);
             page.querySelectorAll('[data-enq-neg-menu]').forEach(b=>b.addEventListener('click',()=>{const n=negs.find(x=>Number(x.id)===Number(b.dataset.enqNegMenu));if(!n)return;UI().menuAt?.(b,[{icon:'✎',label:i18n('Modifier'),run:()=>openNegativeDialog(id,n,reload)},'-',{icon:'🗑',label:i18n('Supprimer'),danger:true,run:()=>deleteNegative(n.id,reload)}],{title:`« ${(n.cote||n.repository).slice(0,50)} »`});}));
             page.querySelectorAll('[data-enq-pview]').forEach(b=>b.addEventListener('click',()=>{setEnqPref('pistesView',b.dataset.enqPview);renderInvestigationDetail(id);}));
             bindKanban(id,data,reload);

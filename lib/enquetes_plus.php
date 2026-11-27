@@ -83,8 +83,7 @@ function enqp_negatives(PDO $pdo, int $id): array
 /** 📎 les images jointes à une recherche négative (seulement celles encore dans l'app), dans l'ordre choisi */
 function enqp_negative_media(PDO $pdo, int $nid): array
 {
-    $s = $pdo->prepare('SELECT m.id, m.title, m.filename, m.thumbnail, m.media_type, m.description, m.date_text, m.document_reference FROM investigation_negative_media l
-        JOIN media m ON m.id=l.media_id WHERE l.negative_id=? ORDER BY l.position, l.media_id'); $s->execute([$nid]);
+    $s = $pdo->prepare('SELECT m.* FROM investigation_negative_media l JOIN media m ON m.id=l.media_id WHERE l.negative_id=? ORDER BY l.position, l.media_id'); $s->execute([$nid]);
     return array_map(static fn($m) => ['id' => (int) $m['id']] + $m, $s->fetchAll(PDO::FETCH_ASSOC));
 }
 

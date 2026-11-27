@@ -43,6 +43,28 @@
 .enq-neg-act { width: 40px; text-align: right; }
 .enq-neg-warn { margin: 8px 0; padding: 8px 10px; border-radius: 6px; background: #fff1e0; border: 1px solid #e09040; color: #6b3a00; }
 .enq-neg-warn p, .enq-neg-warn ul { margin: 2px 0; }
+/* 📎 pièces jointes d'une recherche sans résultat : une ligne discrète, des vignettes, un dossier */
+.enq-neg-att { margin: 10px 0 4px; padding-top: 8px; border-top: 1px dashed var(--line, #d0d4dc); }
+.enq-neg-att.is-drag-over { outline: 2px dashed var(--accent, #2f6fd6); outline-offset: 4px; border-radius: 6px; }
+.enq-neg-att-line { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.enq-neg-att-label { font-size: .9em; color: var(--muted, #5d6470); margin-right: auto; }
+.enq-neg-att-acts { display: flex; flex-wrap: wrap; gap: 6px; }
+.enq-neg-thumbs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.enq-neg-thumbs:empty { display: none; }
+.enq-neg-thumbs.is-busy { opacity: .6; }
+.enq-neg-thumb { position: relative; display: inline-block; }
+.enq-neg-thumb-img { display: block; padding: 0; border: 1px solid var(--line, #d0d4dc); border-radius: 4px; background: var(--panel, #fff); cursor: zoom-in; overflow: hidden; }
+.enq-neg-thumb-img img { display: block; width: 56px; height: 56px; object-fit: cover; }
+.enq-neg-thumb-x { position: absolute; top: -6px; right: -6px; width: 20px; height: 20px; padding: 0; border-radius: 50%; border: 1px solid var(--line, #d0d4dc); background: var(--panel, #fff); color: inherit; font-size: 13px; line-height: 18px; cursor: pointer; }
+.enq-neg-dirchip .enq-neg-thumb-x { position: static; margin-left: 4px; }
+.enq-neg-dirline:empty { display: none; }
+.enq-neg-dirline { margin-top: 6px; }
+.enq-neg-dirchip { display: inline-flex; align-items: center; gap: 2px; max-width: 100%; overflow-wrap: anywhere; }
+.enq-neg-att-cell { white-space: nowrap; }
+.enq-neg-att-badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 6px 2px 2px; border: 1px solid var(--line, #d0d4dc); border-radius: 6px; background: var(--panel, #fff); color: inherit; font: inherit; font-size: .85em; cursor: zoom-in; }
+.enq-neg-att-badge img { width: 28px; height: 28px; object-fit: cover; border-radius: 4px; }
+.enq-neg-att-dir { display: inline-block; margin-left: 4px; font-size: .85em; max-width: 160px; overflow: hidden; text-overflow: ellipsis; vertical-align: middle; }
+button.enq-neg-att-dir { border: 0; background: none; color: var(--accent, #2f6fd6); font: inherit; font-size: .85em; cursor: pointer; padding: 0; }
 
 /* ── 🗂 modèles ── */
 .enq-tpl-list { display: grid; gap: 6px; margin: 4px 0 12px; }
@@ -129,6 +151,7 @@
     .enq-neg-table, .enq-neg-table tbody, .enq-neg-table tr, .enq-neg-table td { display: block; width: 100%; }
     .enq-neg-table tr { border-bottom: 1px solid var(--line, #d0d4dc); padding: 6px 0; }
     .enq-neg-act { text-align: left; }
+    .enq-neg-att-cell { white-space: normal; }
     .battue-commune header, .battue-commune-controls { flex-direction: column; align-items: stretch; }
     .battue-map-legend { flex-wrap: wrap; }
     .battue-map-distance-scale, .battue-map-hover { position: static; }
