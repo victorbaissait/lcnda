@@ -405,6 +405,7 @@ echo json_encode(['v' => (int) $pdo->query('PRAGMA user_version')->fetchColumn()
         const open = async (vp, dark = false) => {
             const ctx = await browser.newContext({ viewport: vp, colorScheme: dark ? 'dark' : 'light', acceptDownloads: true });
             const p = await ctx.newPage();
+            await p.clock.setFixedTime(new Date('2026-10-25T12:00:00')); // les observations du jeu d’essai datent d’octobre 2026 : la carte « 30 derniers jours » doit les voir, quel que soit le jour où le test tourne
             p.on('pageerror', e => errors.push('pageerror ' + e.message));
             p.on('console', m => { if (m.type() === 'error' && !/net::|Failed to load resource/.test(m.text())) errors.push('console ' + m.text()); });
             await p.route(/^https?:\/\/(?!127\.0\.0\.1)/, r => r.abort());
