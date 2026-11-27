@@ -171,7 +171,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/ou-chercher-monde.css?v=2">
     <link rel="stylesheet" href="assets/css/archives-dispo.css?v=3">
     <link rel="stylesheet" href="assets/css/recherche-fr.css?v=2">
-    <link rel="stylesheet" href="assets/css/preuve.css?v=2">
+    <link rel="stylesheet" href="assets/css/preuve.css?v=3">
     <link rel="stylesheet" href="assets/css/calculette.css?v=1">
     <link rel="stylesheet" href="assets/css/lecture-autrefois.css?v=2">
     <link rel="stylesheet" href="assets/css/prenoms-france.css?v=3">
