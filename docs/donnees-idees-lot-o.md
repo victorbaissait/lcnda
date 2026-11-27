@@ -313,6 +313,14 @@ Aucune donnée à télécharger pour ce groupe : **Calcul** sur l'ordinateur, ja
     lieux d'exécution : **Texte seulement**, pas de carte (c'est un sujet blessant pour des familles) ; jamais rapproché d'une
     personne de l'arbre automatiquement · Listes → ⚖️ · effort **petit**.
 
+76. **Fortifications de Vauban, au complet** (demandé le 27/11) — **à moitié** : `tg-forts` (lot G) n'a que 21 sites Vauban (les
+    sites UNESCO), alors que Vauban a construit, remanié ou inspecté ≈ 300 places. **Pack** Wikidata (CC0) élargi : architecte
+    P84 = Vauban, « conçu par » / « modifié par », partie de « Fortifications de Vauban », et les citadelles/enceintes/forts
+    dont la description cite Vauban ; + remparts encore visibles (OpenStreetMap, ODbL, fabriqué sur GitHub) · par site :
+    construit / remanié / inspecté, et la date quand elle est connue · village (« Ville fortifiée par Vauban (1680-1690) : tes
+    ancêtres ont peut-être travaillé au chantier ou logé des soldats ; la paroisse de la garnison a des actes de soldats »),
+    carte (⭐), Listes → ⚔️, fiche d'un militaire · effort **petit**.
+
 ## 🌍 Ailleurs
 
 62. **Colons d'Algérie (lien ANOM)** — **déjà là** : `l10t-algerie` (« 🏘️ villages de colonisation ») et le lien ANOM.
@@ -375,7 +383,7 @@ Aucune donnée à télécharger pour ce groupe : **Calcul** sur l'ordinateur, ja
 - **Lot O4 — Le bulletin et les assemblages** : 73 bulletin du jour de sa naissance, 68 journée de travail à 20 ans, 74 objets par décennie.
 - **Lot O5 — Les textes rédigés** (un seul fichier TSV sourcé, comme `tn2-formules`) : 11 migrations saisonnières (+ carte),
   17, 18, 24, 31, 32, 33, 37, 44, 46, 49, 52, 57, 59, 61, 64, 65, 66.
-- **Lot O6 — Petits packs Wikidata** : 58 catastrophes minières.
+- **Lot O6 — Petits packs Wikidata** : 58 catastrophes minières, 76 fortifications de Vauban au complet.
 - **Lot O7 — Livres du domaine public (Internet Archive)** : 20 salaires SGF 1911 (après confirmation), 54 et 56 packs de liens par
   département, 50 parabole en patois (le plus long : OCR à relire).
 - **Lot O8 — Ateliers GitHub (OpenStreetMap)** : 43 télégraphe Chappe, 14 bacs et passeurs.
