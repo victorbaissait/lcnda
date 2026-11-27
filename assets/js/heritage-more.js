@@ -47,9 +47,8 @@
     ext.labelsPicker = (type, labels = []) => `<div class="h-labels-picker" data-pending-labels="${esc(type)}" data-ids="${esc((labels || []).map(l => l.id).join(','))}">
         <span class="section-label">🏷️ Étiquettes</span><span class="h-lp-chips">${(labels || []).map(l => oneChip(l, true)).join('') || '<small class="empty-line" data-lp-none><span class="empty-line-ico" aria-hidden="true">🏷️</span><span class="empty-line-text">Aucune étiquette</span></small>'}</span>
         <button type="button" class="icon-action icon-add" data-lp-add title="Ajouter une étiquette" aria-label="Ajouter une étiquette"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
-        <span class="h-lp-box" hidden><input type="text" data-lp-q placeholder="Tape pour chercher ou créer une étiquette…" autocomplete="off"><span class="h-lp-sugg"></span></span></div>`;
+        <span class="h-lp-box" hidden>${window.LCNDA_PICKER?.pickerField?.({name: 'label_pick', hiddenName: false, kind: 'label', allowCreate: true}) || ''}</span></div>`; // 🏷 le menu de choix unique (« ＋ Créer… » : app.js)
     let labelsCache = null;
-    const allLabels = async (fresh = false) => { if (!labelsCache || fresh) labelsCache = (await api('labels')).labels || []; return labelsCache; };
     const pickerIds = box => (box.dataset.ids || '').split(',').map(Number).filter(Boolean);
     function pickerSet(box, ids) {
         box.dataset.ids = ids.join(',');
@@ -57,32 +56,21 @@
         const known = [...box.querySelectorAll('[data-lp-chip]')].reduce((acc, c) => { acc[Number(c.dataset.lpChip)] = {id: c.dataset.lpChip, name: c.textContent.replace('×', '').trim(), color: c.style.getPropertyValue('--label-bg')}; return acc; }, {});
         box.querySelector('.h-lp-chips').innerHTML = ids.map(id => oneChip(byId[id] || known[id] || {id, name: '#' + id}, true)).join('') || '<small class="empty-line" data-lp-none><span class="empty-line-ico" aria-hidden="true">🏷️</span><span class="empty-line-text">Aucune étiquette</span></small>';
     }
-    async function pickerSuggest(box) {
-        const input = box.querySelector('[data-lp-q]'), out = box.querySelector('.h-lp-sugg');
-        const q = input.value.trim().toLowerCase(), ids = pickerIds(box);
-        let all = [];
-        try { all = await allLabels(); } catch (error) { out.textContent = error.message; return; }
-        const list = all.filter(l => !ids.includes(Number(l.id)) && (!q || (window.LCNDA_UI?.listMatch?.text || ((q, ...h) => h.join(' ').toLowerCase().includes(String(q).toLowerCase())))(q, l.name))).slice(0, 8);
-        const exists = all.some(l => String(l.name).trim().toLowerCase() === q);
-        out.innerHTML = list.map(l => `<button type="button" class="labels-suggestion" data-lp-pick="${l.id}">${oneChip(l)}</button>`).join('') + (q && !exists ? `<button type="button" class="labels-suggestion labels-create" data-lp-create="${esc(input.value.trim())}">＋ ${i18n('Créer « {name} »', {name: esc(input.value.trim())})}</button>` : '');
-    }
     document.addEventListener('click', async event => {
         const box = event.target.closest?.('.h-labels-picker');
         document.querySelectorAll('.h-labels-picker .h-lp-box:not([hidden])').forEach(b => { if (!box || !box.contains(b)) b.hidden = true; });
         if (!box) return;
-        if (event.target.closest('[data-lp-add]')) { const b = box.querySelector('.h-lp-box'); b.hidden = !b.hidden; if (!b.hidden) { b.querySelector('input').value = ''; b.querySelector('input').focus(); pickerSuggest(box); } return; }
+        if (event.target.closest('[data-lp-add]')) { const b = box.querySelector('.h-lp-box'); b.hidden = !b.hidden; if (!b.hidden) setTimeout(() => b.querySelector('.pk-input')?.focus()); return; }
         const rm = event.target.closest('[data-lp-remove]');
         if (rm) { pickerSet(box, pickerIds(box).filter(id => id !== Number(rm.dataset.lpRemove))); return; }
-        const pick = event.target.closest('[data-lp-pick]');
-        if (pick) { pickerSet(box, [...pickerIds(box), Number(pick.dataset.lpPick)]); box.querySelector('[data-lp-q]').value = ''; pickerSuggest(box); return; }
-        const create = event.target.closest('[data-lp-create]');
-        if (create) {
-            try { const r = await api('save_label', {}, {method: 'POST', body: {name: create.dataset.lpCreate}}); await allLabels(true); if (r.result?.id) pickerSet(box, [...pickerIds(box), Number(r.result.id)]); box.querySelector('[data-lp-q]').value = ''; pickerSuggest(box); }
-            catch (error) { toast(error.message, 'error'); }
-        }
     });
-    document.addEventListener('input', event => { const input = event.target.closest?.('[data-lp-q]'); if (input) pickerSuggest(input.closest('.h-labels-picker')); });
-    document.addEventListener('keydown', event => { if (event.key === 'Enter' && event.target.closest?.('[data-lp-q]')) { event.preventDefault(); event.target.closest('.h-labels-picker').querySelector('[data-lp-pick],[data-lp-create]')?.click(); } });
+    // une étiquette choisie dans le menu de choix : ajoutée aux pastilles, le menu se vide pour la suivante
+    document.addEventListener('picker-change', event => {
+        const box = event.target.closest?.('.h-labels-picker'), it = event.detail?.item; if (!box || !it?.id) return;
+        const id = Number(it.id); if (!(labelsCache || []).some(l => Number(l.id) === id)) (labelsCache = labelsCache || []).push({id, name: it.title, color: it.color});
+        if (!pickerIds(box).includes(id)) pickerSet(box, [...pickerIds(box), id]);
+        const pk = event.target.closest('.pk'); setTimeout(() => window.LCNDA_PICKER?.pickerSet?.(pk, null));
+    });
 
     // Les formulaires des blocs appellent « save_… » : on y ajoute les étiquettes choisies (pending_labels).
     const LABELED = {save_voyage: 'voyage', save_placement: 'placement', save_coat_of_arms: 'coat_of_arms', save_poilu: 'poilu', save_field_trip: 'field_trip', save_family_paper: 'family_paper', save_old_map: 'old_map',

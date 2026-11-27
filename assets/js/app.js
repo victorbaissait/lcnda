@@ -9137,25 +9137,20 @@ ${backupSectionHtml()}
             const color=label.color||'#0066cc';
             return `<span class="label-chip removable" data-label-picker-chip="${label.id}" style="--label-bg:${escapeHtml(color)};--label-fg:${escapeHtml(labelTextColor(color))}"><span>${escapeHtml(label.name||'Étiquette')}</span><button type="button" class="label-chip-remove" data-label-picker-remove="${label.id}" aria-label="${i18n('Retirer l’étiquette {nm}',{nm:escapeHtml(label.name||'')})}" title="Retirer cette étiquette">&times;</button></span>`;
         }).join('');
-        const search=allLabels?.length?`<div class="label-picker-search"><input type="text" class="labels-autocomplete-input" data-label-picker-search placeholder="Tape pour chercher une étiquette..." autocomplete="off"><div class="labels-suggestions" data-label-picker-suggestions hidden></div></div>`:'<p class="label-picker-empty">Aucune étiquette créée. Crée-la d’abord dans Réglages → Étiquettes.</p>';
+        const search=`<div class="label-picker-search">${pkFieldLocal({name:'label_pick',kind:'label',allowCreate:true})}</div>`; // 🏷 le menu de choix unique (« ＋ Créer… » compris : plus besoin de passer par les Réglages)
         return `<div class="label-picker-wrap"><div class="label-picker-selected">${chips||empty('Aucune étiquette ajoutée.',{icon:'🏷️'})}</div>${search}<input type="hidden" name="label_ids_${escapeHtml(entityType)}" value="${[...currentIds].join(',')}"></div>`;
     }
 
     function selectedLabelIdsFromPicker(container){
-        const input=container.querySelector('input[type=hidden]');
+        const input=container.querySelector('input[type=hidden][name^="label_ids_"]');
         return new Set((input?.value||'').split(',').filter(Boolean).map(Number));
     }
 
     function bindLabelPickerControls(container,containerSelector,entityType,entityId){
-        const input=$('[data-label-picker-search]',container);
-        if(input){
-            const update=debounce(()=>renderLabelPickerSuggestions(container,containerSelector,entityType,entityId,input.value),150);
-            input.addEventListener('input',update);
-            input.addEventListener('focus',()=>renderLabelPickerSuggestions(container,containerSelector,entityType,entityId,input.value));
-            input.addEventListener('keydown',event=>{
-                if(event.key==='Escape')hideLabelPickerSuggestions(container);
-            });
-        }
+        if(!container._lpBound){container._lpBound=true; // le conteneur reste, son contenu est redessiné : un seul écouteur
+            container.addEventListener('picker-change',event=>{const id=Number(event.detail?.item?.id||0);if(!id||!event.target.closest('.label-picker-search'))return;const selected=selectedLabelIdsFromPicker(container);selected.add(id);
+                if(event.detail.item.title&&Array.isArray(state.currentLabelsCache)&&!state.currentLabelsCache.some(l=>Number(l.id)===id))state.currentLabelsCache.push({id,name:event.detail.item.title,color:event.detail.item.color});
+                setTimeout(()=>renderLabelPicker(containerSelector,container.dataset.entityType,Number(container.dataset.entityId)||0,[...selected].map(x=>({id:x}))));});}
         $$('[data-label-picker-remove]',container).forEach(button=>button.addEventListener('click',()=>{
             const selected=selectedLabelIdsFromPicker(container);
             selected.delete(Number(button.dataset.labelPickerRemove));
@@ -9163,31 +9158,10 @@ ${backupSectionHtml()}
         }));
     }
 
-    function hideLabelPickerSuggestions(container){
-        const box=$('[data-label-picker-suggestions]',container);
-        if(box){box.hidden=true;box.innerHTML='';}
-    }
-
-    function renderLabelPickerSuggestions(container,containerSelector,entityType,entityId,query=''){
-        const box=$('[data-label-picker-suggestions]',container);
-        if(!box)return;
-        const q=(query||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-        const selected=selectedLabelIdsFromPicker(container);
-        const matches=(state.currentLabelsCache||[])
-            .filter(label=>!selected.has(Number(label.id))&&(!q||String(label.name||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(q)))
-            .slice(0,8);
-        box.innerHTML=matches.length?matches.map(label=>`<button type="button" class="labels-suggestion" data-label-picker-pick="${label.id}">${labelChip(label)}</button>`).join(''):'<div class="labels-suggestion-empty">Aucune étiquette existante trouvée.</div>';
-        box.hidden=false;
-        $$('[data-label-picker-pick]',box).forEach(button=>button.addEventListener('click',()=>{
-            selected.add(Number(button.dataset.labelPickerPick));
-            renderLabelPicker(containerSelector,entityType,entityId,[...selected].map(id=>({id})));
-        }));
-    }
-
     async function applyLabelPickerAfterSave(containerSelector,entityId,presetIds=null){
         const container=$(containerSelector);if(!container||!entityId)return;
         const entityType=container.dataset.entityType;if(!entityType)return;
-        const input=container.querySelector('input[type=hidden]');if(!input)return;
+        const input=container.querySelector('input[type=hidden][name^="label_ids_"]');if(!input)return;
         const ids=presetIds||(input.value||'').split(',').filter(Boolean).map(Number);
         try{const result=await api('set_label_links',{},{method:'POST',body:{entity_type:entityType,entity_id:entityId,label_ids:ids}});return result.result.labels||[];}catch(e){toast(e.message,'error');return null;}
     }

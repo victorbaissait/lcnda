@@ -563,7 +563,7 @@
                 return `<span class="label-chip removable" style="--label-bg:${escapeHtml(color)};--label-fg:${escapeHtml(labelTextColor(color))}" data-label-chip="${l.id}" data-person-id="${person.id}"><span>${escapeHtml(l.name||'')}</span><button type="button" class="label-chip-remove" data-remove-label="${l.id}" aria-label="Retirer">&times;</button></span>`;
             }).join('');
             const addBtn=`<button type="button" class="icon-action icon-add labels-add-btn" data-labels-add aria-label="Ajouter une étiquette"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>`;
-            const inputRow=`<div class="labels-input-row" hidden><input type="text" class="labels-autocomplete-input" placeholder="Tape pour chercher…" autocomplete="off"><div class="labels-suggestions" hidden></div></div>`;
+            const inputRow=`<div class="labels-input-row" hidden>${pk({name:'label_pick',kind:'label',allowCreate:true})}</div>`; // 🏷 le menu de choix unique (app.js : bindEntityLabelsFields)
             return `<div class="occ-person-labels labels-field" data-labels-entity-type="person" data-labels-entity-id="${person.id}"><div class="labels-field-chips occ-chips">${chips||empty('Aucune étiquette.',{icon:'🏷️'})}</div><div class="occ-label-add-row">${addBtn}${inputRow}</div></div>`;
         }
         function personCard(p){
