@@ -155,6 +155,19 @@
         crisismap: [['Toute ma base', {'[data-cq="pop"]': 'all', '[data-cq="kids"]': ''}], ['Mes ancêtres et leurs familles', {'[data-cq="pop"]': 'anc'}], ['Les enfants à part (moins de 10 ans)', {'[data-cq="kids"]': 'apart'}],
             ['Le XVIIIe siècle', {'[data-cq="period"]': '1700'}], ['Le XIXe siècle', {'[data-cq="period"]': '1800'}]],
         quarters: [['8 quartiers (arrière-grands-parents)', {'[data-dla="gens"]': '3'}], ['16 quartiers', {'[data-dla="gens"]': '4'}], ['32 quartiers', {'[data-dla="gens"]': '5'}]],
+        // les sortes « manquantes » (heritage-diagram-manquants.js) : leurs propres cases (data-dgm), des points de départ tout prêts
+        parsets: [['Né à → métier → mort à', {'[data-dgm="a"]': 'bplace', '[data-dgm="b"]': 'occ', '[data-dgm="c"]': 'dplace'}], ['Siècle → métier → âge au décès', {'[data-dgm="a"]': 'century', '[data-dgm="b"]': 'occ', '[data-dgm="c"]': 'age'}],
+            ['Nom de famille → lieu de naissance → mort au même lieu ?', {'[data-dgm="a"]': 'surname', '[data-dgm="b"]': 'bplace', '[data-dgm="c"]': 'moved'}]],
+        uncertain: [['Seulement les dates approchées', {'[data-dgm="what"]': 'fuzzy'}], ['Toutes les dates (sûres et approchées)', {'[data-dgm="what"]': 'all'}]],
+        lifespans: [['Une couleur par nom de famille', {'[data-dgm="g"]': 'surname'}], ['Une couleur par siècle', {'[data-dgm="g"]': 'century'}], ['Hommes et femmes', {'[data-dgm="g"]': 'sex'}]],
+        density: [['Les âges au décès, par siècle', {'[data-dgm="g"]': 'century'}], ['Hommes et femmes', {'[data-dgm="g"]': 'sex'}], ['Tous ensemble', {'[data-dgm="g"]': ''}]],
+        stemleaf: [['Hommes et femmes, dos à dos', {'[data-dgm="two"]': 'sex'}], ['Tout le monde ensemble', {'[data-dgm="two"]': ''}]],
+        tally: [['Les naissances par décennie', {'[data-dgm="k"]': 'decade'}], ['Les prénoms', {'[data-dgm="k"]': 'first'}], ['Les villages de naissance', {'[data-dgm="k"]': 'bplace'}]],
+        chordlines: [['Les mariages entre noms de famille', {'[data-dgm="by"]': 'surname'}], ['Les mariages entre lieux de naissance', {'[data-dgm="by"]': 'bplace'}]],
+        unitdots: [['Par décennie, hommes et femmes', {'[data-dgm="c"]': 'decade', '[data-dgm="g"]': 'sex'}], ['Par siècle, une couleur par nom', {'[data-dgm="c"]': 'century', '[data-dgm="g"]': 'surname'}], ['Par âge au décès', {'[data-dgm="c"]': 'age', '[data-dgm="g"]': 'sex'}]],
+        proparea: [['Les villages de naissance', {'[data-dgm="k"]': 'bplace'}], ['Les noms de famille', {'[data-dgm="k"]': 'surname'}], ['Les prénoms', {'[data-dgm="k"]': 'first'}], ['Les métiers', {'[data-dgm="k"]': 'occ'}]],
+        radialcol: [['Le mois des naissances', {'[data-dgm="what"]': 'bt'}], ['Le mois des décès', {'[data-dgm="what"]': 'dt'}]],
+        stackarea: [['Une couleur par nom de famille', {'[data-dgm="g"]': 'surname'}], ['Hommes et femmes', {'[data-dgm="g"]': 'sex'}], ['Par lieu de naissance', {'[data-dgm="g"]': 'bplace'}]],
     };
     const GO = '[data-gn-go], [data-n6-go], [data-dm-go], [data-dfa-go], [data-dgm-go], [data-c2-go], [data-dac-go], [data-cp-go], [data-lotc-go], [data-dpl-go], [data-dla-go], [data-cq-go]';
 

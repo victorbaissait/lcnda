@@ -85,7 +85,13 @@ const GIULIA = {ok: true, person: {id: 1, first: 'Giulia', last: 'ROSSI', birth:
     /* ═════════ 2. serveur et écran ═════════ */
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'lcnda-tl-'));
     const phpPath = findPhp([devBundledPhp()]) || 'php';
-    const env = {...process.env, GENEALOGY_DATA_DIR: tmp, GENEALOGY_MEDIA_DIR: path.join(tmp, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4', GENEALOGY_TEST: '1'};
+    // 📦 la version GitHub « telech-l-donnees » remplacée par un dossier : son sommaire et un petit pack des mines (40 vraies lignes USGS)
+    const gpDir = path.join(tmp, 'gp'), MINES = fs.readFileSync(path.join(__dirname, 'fixtures/grands-packs/tl-mines.json.gz'));
+    fs.mkdirSync(gpDir, {recursive: true}); fs.writeFileSync(path.join(gpDir, 'tl-mines.json.gz'), MINES);
+    const MINES_ROWS = JSON.parse(zlib.gunzipSync(MINES).toString('utf8')).rows;
+    fs.writeFileSync(path.join(gpDir, 'telech-l-manifest.json'), JSON.stringify({version: '2026-11-27', packs: {'tl-mines': {name: 'tl-mines.json.gz', size: MINES.length,
+        sha256: require('crypto').createHash('sha256').update(MINES).digest('hex'), built: '2026-11-26', rows: MINES_ROWS.length, licence: 'Domaine public (USGS)', source: 'USGS, Mineral Resources Data System (MRDS)'}}}));
+    const env = {...process.env, GENEALOGY_DATA_DIR: tmp, GENEALOGY_MEDIA_DIR: path.join(tmp, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4', GENEALOGY_TEST: '1', LCNDA_TEST_GP_DIR: gpDir};
     const seed = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', String.raw`
 require 'lib/paths.php';
 $p0 = new PDO('sqlite:'.DATA_DIR.'/genealogy.sqlite'); $p0->exec(file_get_contents(APP_ROOT.'/data/schema.sql')); $p0 = null;
@@ -152,7 +158,9 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.evaluate(() => window.LCNDA_EXT.telechL.openSettings());
             await p.waitForSelector('[data-tlx-settings-page] [data-tlx-tg="crues"]', {timeout: 20000});
             const st = await p.textContent('[data-tlx-settings-page]');
-            assert.match(st, /CC BY 4\.0/); assert.match(st, /CC0/); assert.match(st, /En lien seulement/); assert.match(st, /London Gazette/); assert.match(st, /rien ne part sur Internet/); assert.match(st, /Mines \(USGS\).*Domaine public \(USGS\)/); assert.match(st, /Bagnards \(Queensland\).*CC BY 4\.0/); // fabriqués sur GitHub (avant : « Pas encore fabriqué »)
+            assert.match(st, /CC BY 4\.0/); assert.match(st, /CC0/); assert.match(st, /En lien seulement/); assert.match(st, /London Gazette/); assert.match(st, /rien ne part sur Internet/); assert.match(st, /Bagnards \(Queensland\).*CC BY 4\.0/); // fabriqué sur GitHub, livré
+            // trop gros pour l'app (plus de 3 Mo) : installés à la demande, avec leur poids (rien n'est demandé à Internet avant le clic)
+            assert.match(st, /Mines \(USGS\)\s*📦 Installer \(≈ 3,6 Mo\)/); assert.match(st, /Cimetières\s*📦 Installer \(≈ 4,3 Mo\)/);
             await p.click('[data-tlx-tg="crues"] input');
             assert.strictEqual(await p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-telech-l')).crues), false);
             const [, , off] = await into('personInto', 1); assert.ok(!/1966/.test(off), 'éteint');
@@ -166,6 +174,23 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.waitForSelector('[data-tlx-settings-page]'); await sleep(500);
             assert.ok(!/En lien seulement/.test(await p.textContent('[data-tlx-settings-page]')), 'consultation : pas de liens');
             await p.evaluate(() => document.body.classList.remove('is-kiosk'));
+        });
+        await t('📦 les mines installées à la demande : vérifiées, servies à l’adresse habituelle, la liste « ⛏ Mines » apparaît et lit toutes les lignes ; ↶ Annuler', async () => {
+            const minesList = () => p.evaluate(async () => { const d = window.LCNDA_EXT.dataLists.find(x => x.id === 'tl_mines'); return d.enabled() ? (await d.load()).map(r => [r.name, r.commodity, r.lat, r.lon]) : null; });
+            assert.strictEqual(await minesList(), null, 'pas installé : la liste reste cachée');
+            await p.evaluate(() => window.LCNDA_EXT.telechL.openSettings());
+            const btn = '[data-tlx-pack="tl-mines"] [data-gp-install="tl-mines"]';
+            await p.waitForSelector(btn, {timeout: 20000}); await p.click(btn);
+            await p.waitForSelector('[data-tlx-pack="tl-mines"] [data-gp-remove]', {timeout: 20000}); // installé : la page est redessinée
+            assert.match(await p.textContent('[data-tlx-pack="tl-mines"]'), new RegExp(`installé.*${MINES_ROWS.length}.*Domaine public \\(USGS\\)`));
+            assert.ok(fs.existsSync(path.join(tmp, 'grands-packs/tl-mines.json.gz')) && !fs.existsSync(path.join(root, 'assets/data/tl-mines.json.gz')), 'dans le dossier des données, pas dans l’app');
+            await p.waitForFunction(() => window.LCNDA_EXT.dataLists.find(x => x.id === 'tl_mines').enabled(), null, {timeout: 20000});
+            const L = await minesList();
+            assert.deepStrictEqual(L, MINES_ROWS.map(r => [r[0], r[3], r[1], r[2]]), 'chaque ligne lue telle quelle (nom, minerai, position)');
+            await p.locator('.ui-toast, .toast').filter({hasText: 'installé'}).last().locator('button:has-text("Annuler")').click();
+            await p.waitForSelector(btn, {timeout: 20000}); // ↶ fini : de nouveau à installer
+            assert.ok(!fs.existsSync(path.join(tmp, 'grands-packs/tl-mines.json.gz')), '↶ Annuler : retiré');
+            await p.waitForFunction(() => !window.LCNDA_EXT.dataLists.find(x => x.id === 'tl_mines').enabled(), null, {timeout: 20000});
         });
         await t('🚲 « 🏆 Compétitions sportives » : la pastille « Tour de France » allumée propose Éditions · Étapes · 🗺 Carte (la liste du Tour), éteinte non', async () => {
             await p.evaluate(() => { const E = window.LCNDA_EXT.dataListsEngine; E.open('reunie_competitions'); });

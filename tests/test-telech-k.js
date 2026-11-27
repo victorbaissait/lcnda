@@ -98,7 +98,13 @@ const shipped = () => fs.readdirSync(path.join(root, 'assets/data')).filter(f =>
     /* ═════════ 2. serveur et écran ═════════ */
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'lcnda-tk-'));
     const phpPath = findPhp([devBundledPhp()]) || 'php';
-    const env = {...process.env, GENEALOGY_DATA_DIR: tmp, GENEALOGY_MEDIA_DIR: path.join(tmp, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4', GENEALOGY_TEST: '1'};
+    // 📦 la version GitHub « telech-k-donnees » remplacée par un dossier : son sommaire et un vrai petit pack par pays (Luxembourg)
+    const gpDir = path.join(tmp, 'gp'), LU = fs.readFileSync(path.join(__dirname, 'fixtures/grands-packs/tk-patrimoine_lu.json.gz'));
+    fs.mkdirSync(gpDir, {recursive: true}); fs.writeFileSync(path.join(gpDir, 'tk-patrimoine_lu.json.gz'), LU);
+    const LU_ROWS = JSON.parse(zlib.gunzipSync(LU).toString('utf8')).rows.length;
+    fs.writeFileSync(path.join(gpDir, 'telech-k-manifest.json'), JSON.stringify({version: '2026-11-27', packs: {'tk-patrimoine_lu': {name: 'tk-patrimoine_lu.json.gz', size: LU.length,
+        sha256: require('crypto').createHash('sha256').update(LU).digest('hex'), built: '2026-11-26', rows: LU_ROWS, licence: 'CC0 1.0', source: 'Wikidata'}}}));
+    const env = {...process.env, GENEALOGY_DATA_DIR: tmp, GENEALOGY_MEDIA_DIR: path.join(tmp, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4', GENEALOGY_TEST: '1', LCNDA_TEST_GP_DIR: gpDir};
     const seed = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', String.raw`
 require 'lib/paths.php';
 $p0 = new PDO('sqlite:'.DATA_DIR.'/genealogy.sqlite'); $p0->exec(file_get_contents(APP_ROOT.'/data/schema.sql')); $p0 = null;
@@ -187,7 +193,9 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.evaluate(() => window.LCNDA_EXT.telechK.openSettings());
             await p.waitForSelector('[data-tkx-settings-page] [data-tkx-tg="cerisiers"]', {timeout: 20000});
             const st = await p.textContent('[data-tkx-settings-page]');
-            assert.match(st, /CC0/); assert.match(st, /CC BY 4\.0/); assert.match(st, /En lien seulement/); assert.match(st, /Racinet/); assert.match(st, /rien ne part sur Internet/); assert.match(st, /Pays pas encore fabriqués/);
+            assert.match(st, /CC0/); assert.match(st, /CC BY 4\.0/); assert.match(st, /En lien seulement/); assert.match(st, /Racinet/); assert.match(st, /rien ne part sur Internet/);
+            // les biens protégés par pays ne sont pas livrés : chacun avec son « 📦 Installer (≈ N Mo) » (rien n'est demandé à Internet avant le clic)
+            assert.match(st, /Biens protégés · Royaume-Uni\s*📦 Installer \(≈ 16,2 Mo\)/); assert.match(st, /📦 Tout installer \(≈ /);
             await p.click('[data-tkx-tg="cerisiers"] input');
             assert.strictEqual(await p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-telech-k')).cerisiers), false);
             const [, , txt] = await into('telechK', 'personInto', 1); assert.ok(!/cerisiers de Kyoto/.test(txt), 'éteint : plus les cerisiers');
@@ -199,6 +207,48 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.locator('.toast:has-text("2 km") button:has-text("Annuler")').last().click({timeout: 5000});
             await sleep(300);
             assert.strictEqual(await p.evaluate(() => window.LCNDA_EXT.telechK.radius()), 5, '↶ remet 5 km');
+        });
+        await t('📦 un pack par pays installé à la demande (Luxembourg) : vérifié, servi à l’adresse habituelle, bien lu par la liste ; 🗑 puis ↶ ; rien en consultation', async () => {
+            const api = (a, q = {}) => p.evaluate(([x, y]) => window.LCNDA_APP.api(x, y).catch(e => ({error: e.message, status: e.status})), [a, q]);
+            const post = (a, b) => p.evaluate(async ([x, y]) => { try { const r = await window.LCNDA_APP.api(x, {}, {method: 'POST', body: y}); return r.result || r; } catch (e) { return {error: e.message, status: e.status}; } }, [a, b]);
+            const served = () => p.evaluate(async () => { const r = await fetch('assets/data/tk-patrimoine_lu.json.gz', {cache: 'no-store'}); return r.ok ? [r.status, new Uint8Array(await r.arrayBuffer()).length] : [r.status, 0]; });
+            const KEYS = [...new Set(K.patRows(JSON.parse(zlib.gunzipSync(LU).toString('utf8'))).map(r => r.key).filter(Boolean))];
+            // les biens du pack retrouvés dans la liste « Patrimoine protégé du monde » (par leur clé de réunion)
+            const luRows = () => p.evaluate(async keys => { const ks = new Set(keys); return (await window.LCNDA_EXT.dataLists.find(x => x.id === 'tk_patrimoine').load()).filter(r => ks.has(r.key)).map(r => r.name); }, KEYS);
+            const before = (await luRows()).length; // ceux qui sont aussi au patrimoine mondial (livré)
+            assert.deepStrictEqual(Object.keys((await api('gp_status')).packs), []); assert.strictEqual((await served())[0], 404, 'pas livré, pas installé : rien');
+            assert.ok(!fs.existsSync(path.join(root, 'assets/data/tk-patrimoine_lu.json.gz')), 'le pack n’est pas dans l’app');
+            await p.evaluate(() => window.LCNDA_EXT.telechK.openSettings());
+            const btn = '[data-tkx-pack="tk-patrimoine_lu"] [data-gp-install="tk-patrimoine_lu"]';
+            await p.waitForSelector(btn, {timeout: 20000}); assert.match(await p.textContent(btn), /📦 Installer \(≈ 4 Ko\)/);
+            await p.click(btn);
+            await p.waitForFunction(() => /installé/.test([...document.querySelectorAll('.ui-toast, .toast')].map(x => x.textContent).join(' ')), null, {timeout: 20000});
+            const st = await api('gp_status'); assert.deepStrictEqual([st.packs['tk-patrimoine_lu']?.rows, st.packs['tk-patrimoine_lu']?.licence], [LU_ROWS, 'CC0 1.0']);
+            assert.ok(fs.existsSync(path.join(tmp, 'grands-packs/tk-patrimoine_lu.json.gz')), 'rangé dans le dossier des données, pas dans l’app');
+            assert.deepStrictEqual(await served(), [200, LU.length], 'le routeur le sert à l’adresse habituelle');
+            const names = await luRows(); assert.ok(names.length === KEYS.length && names.includes('Abattoirs de Hollerich'), `bien lu : ${names.length} / ${KEYS.length}`);
+            await p.waitForSelector('[data-tkx-pack="tk-patrimoine_lu"] [data-gp-remove]', {timeout: 20000});
+            assert.match(await p.textContent('[data-tkx-pack="tk-patrimoine_lu"]'), new RegExp(`installé · ${LU_ROWS} lignes`));
+            // un fichier abîmé (empreinte différente) n'est jamais installé
+            fs.writeFileSync(path.join(gpDir, 'tk-patrimoine_lu.json.gz'), Buffer.concat([LU.subarray(0, LU.length - 3), Buffer.from('abc')]));
+            const s1 = await post('gp_dl_start', {id: 'tk-patrimoine_lu'}); await post('gp_dl_step', {id: s1.id}); const bad = await post('gp_dl_finish', {id: s1.id});
+            assert.match(bad.error || '', /abîmé/); assert.deepStrictEqual(await served(), [200, LU.length], 'l’ancien reste');
+            fs.writeFileSync(path.join(gpDir, 'tk-patrimoine_lu.json.gz'), LU);
+            assert.match((await post('gp_dl_start', {id: '../evil'})).error || '', /Pack inconnu/); assert.match((await post('gp_dl_start', {id: 'tk-patrimoine_monde'})).error || '', /déjà livré/);
+            // 🗑 Supprimer, puis ↶ Annuler
+            await p.click('[data-tkx-pack="tk-patrimoine_lu"] [data-gp-remove]');
+            await p.waitForSelector('[data-tkx-pack="tk-patrimoine_lu"] [data-gp-install]', {timeout: 20000}); // retiré : la page est redessinée
+            await p.waitForFunction(() => /retiré/.test([...document.querySelectorAll('.ui-toast, .toast')].map(x => x.textContent).join(' ')), null, {timeout: 20000});
+            assert.strictEqual((await served())[0], 404); assert.strictEqual((await luRows()).length, before, 'retiré : plus lu');
+            await p.locator('.ui-toast, .toast').filter({hasText: 'retiré'}).last().locator('button:has-text("Annuler")').click();
+            await p.waitForSelector('[data-tkx-pack="tk-patrimoine_lu"] [data-gp-remove]', {timeout: 20000}); // ↶ fini : la page est redessinée avec le pack
+            assert.deepStrictEqual(await served(), [200, LU.length]);
+            assert.strictEqual((await luRows()).length, KEYS.length, '↶ Annuler : de nouveau lu');
+            // 🔒 mode consultation : rien ne se télécharge, le sommaire en ligne n'est pas lu
+            assert.ok(!(await post('kiosk_enter', {password: 'essai-1234'})).error);
+            assert.strictEqual((await post('gp_dl_start', {id: 'tk-patrimoine_lu'})).status, 423); assert.strictEqual((await post('gp_pack_remove', {id: 'tk-patrimoine_lu'})).status, 423);
+            assert.deepStrictEqual(Object.keys((await api('gp_dl_info')).packs), []);
+            assert.ok(!(await post('kiosk_exit', {password: 'essai-1234'})).error);
         });
         await t('390 px et thème sombre : les blocs tiennent dans l’écran, rien collé aux bords, lisible', async () => {
             const m = await browser.newContext({viewport: {width: 390, height: 844}, colorScheme: 'dark'});

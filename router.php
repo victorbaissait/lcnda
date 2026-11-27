@@ -212,6 +212,13 @@ if (in_array(strtolower($first), $blocked, true)) {
     return router_deny(404);
 }
 
+// 📦 grands packs installés à la demande (lib/grands_packs.php) : assets/data/tk-…, tl-… que l'app ne livre pas
+if (str_starts_with($path, '/assets/data/t')) {
+    require_once __DIR__ . '/lib/grands_packs_route.php';
+    if (gp_route_serve($path)) {
+        return true;
+    }
+}
 // 🗂 données mises à jour depuis Réglages → Données installées (lib/donnees_maj.php) : la version téléchargée, si elle existe
 if (str_starts_with($path, '/assets/data/')) {
     require_once __DIR__ . '/lib/donnees_maj_route.php';

@@ -238,6 +238,8 @@ const finish = () => { console.log(`\n${count} réussi(s), ${failed} échec(s)`)
                 const card = page.locator('[data-ts-block] li.ts-sug').filter({ hasText: /1812/ }).filter({ hasText: /Chantonnay/ }).filter({ has: page.locator('.ts-ico', { hasText: '🌠' }) });
                 const nope = card.locator('[data-ts-nope]').first(); await nope.waitFor({ timeout: 90000 });
                 // le bloc se redessine tant que des données arrivent (hors ligne, puis « en ligne » 2,5 s après) : on attend qu'il ait fini
+                // (les calculs lourds, les éclipses, attendent que le bloc soit à l'écran — LCNDA_PERF.whenSeen : on l'y amène, comme en le lisant)
+                await page.evaluate(() => document.querySelector('[data-ts-block]')?.scrollIntoView({block: 'center'}));
                 await page.waitForFunction(() => { const b = document.querySelector('[data-ts-block]'); return b && !b.querySelector('.ts-prog, [data-ts-online]'); }, null, { timeout: 120000 });
                 await quiet(page);
                 const before = await page.evaluate(() => document.querySelectorAll('[data-ts-block] li.ts-sug').length), sum = (await card.first().locator('.ts-sum').textContent()).trim();

@@ -195,10 +195,16 @@
     const load = kind => (FILES[kind] ? loadFile(FILES[kind], SHAPE[kind]) : Promise.resolve(null));
     const quiet = p => p.catch(() => null);
     const rowsOf = kind => quiet(load(kind)).then(D => D || {meta: {}, rows: []});
-    /** les packs par pays et par continent : ceux que le sommaire des données connaît (Réglages → 🗂 Données) */
+    /** les packs par pays et par continent : ceux que le sommaire des données connaît (livrés), et ceux installés à la demande
+     *  (📦 grands packs, app-grands-packs.js : servis à la même adresse assets/data/… par le routeur) */
     let packsMemo = null;
-    const packs = () => (packsMemo ||= fetch(`assets/data/manifest.json?v=${DATA_V}`, {credentials: 'same-origin'}).then(r => (r.ok ? r.json() : {packs: {}})).catch(() => ({packs: {}}))
-        .then(m => { const ids = Object.keys(m?.packs || {}); return {pat: ids.filter(i => /^tk-patrimoine_[a-z]{2,5}$/.test(i) && i !== FILES.monde).sort(), mus: ids.filter(i => /^tk-musees_[a-z]{2}$/.test(i)).sort(), man: m}; }));
+    const packs = () => (packsMemo ||= Promise.all([fetch(`assets/data/manifest.json?v=${DATA_V}`, {credentials: 'same-origin'}).then(r => (r.ok ? r.json() : {packs: {}})).catch(() => ({packs: {}})),
+        Promise.resolve(ext.grandsPacks?.installed?.(/^tk-/) || []).catch(() => [])])
+        .then(([m, inst]) => { const shipped = Object.keys(m?.packs || {}), ids = [...new Set([...shipped, ...inst])];
+            return {pat: ids.filter(i => /^tk-patrimoine_[a-z]{2,5}$/.test(i) && i !== FILES.monde).sort(), mus: ids.filter(i => /^tk-musees_[a-z]{2}$/.test(i)).sort(), man: m, installed: inst.filter(i => !shipped.includes(i))}; }));
+    // 📦 un pack installé, retiré ou ↶ : relire la liste des packs et oublier ce qui était gardé
+    root.addEventListener?.('lcnda:installs-changed', () => { packsMemo = null; heritageMemo = null; museumMemo = null; for (const k of Object.keys(atMemo)) delete atMemo[k];
+        for (const k of Object.keys(data)) if (/^tk-(patrimoine_(?!monde$)|musees_)/.test(k)) delete data[k]; });
     let heritageMemo = null, museumMemo = null;
     /** tous les biens protégés installés (patrimoine mondial + les pays), un par clé */
     const mergeHeritage = ([W, ...list]) => {
@@ -486,15 +492,21 @@
         const ws = document.getElementById('workspace'); if (!ws) return;
         const mine = ++drawToken;
         const [P, metas] = await Promise.all([packs(), Promise.all(Object.keys(FILES).map(async k => [k, await quiet(load(k))]))]);
-        const pats = await Promise.all(P.pat.map(async n => [n, await quiet(loadFile(n, patRows))])), muss = await Promise.all(P.mus.map(async n => [n, await quiet(loadFile(n, museumRows))]));
+        const gst = await (ext.grandsPacks?.status?.() || Promise.resolve(null)).catch(() => null);
+        // les packs installés à la demande ne sont pas relus ici (des centaines de milliers de lignes) : leur fiche suffit
+        const pats = await Promise.all(P.pat.filter(n => !P.installed.includes(n)).map(async n => [n, await quiet(loadFile(n, patRows))])), muss = await Promise.all(P.mus.map(async n => [n, await quiet(loadFile(n, museumRows))]));
         if (mine !== drawToken || (token !== undefined && A().state && token !== A().state.workspaceToken)) return;
         const s = settings();
         const tg = ([key, label, sub]) => `<label class="checkbox-line cplus-tg" data-tkx-tg="${esc(key)}"><input type="checkbox" ${s[key] ? 'checked' : ''}><span><b>${esc(T(label))}</b><br><small class="muted">${esc(T(sub))}</small></span></label>`;
         const fileRow = (label, D) => { if (!D) return `<tr><td>${esc(label)}</td><td colspan="4" class="muted">${esc(T('Fichier absent.'))}</td></tr>`;
             const m = D.meta; return `<tr><td>${esc(label)}</td><td>${link(m.url, m.source)}</td><td>${esc(nf(D.rows.length))}</td><td>${link(m.licence_url, m.licence)}</td><td>${esc(m.built || '')}</td></tr>`; };
         const LAB = {monde: '🏛 Patrimoine mondial', collections: '🎨 Œuvres (Met)', langues: '🗣 Langues', cerisiers: '🌸 Cerisiers de Kyoto', prenoms: '👶 Prénoms'};
-        const have = new Set(P.pat.map(n => n.split('_')[1]));
-        const missing = PAT_COUNTRIES.filter(c => !have.has(c));
+        const GP = ext.grandsPacks;
+        const shippedPat = new Set(P.pat.filter(n => !P.installed.includes(n)).map(n => n.split('_')[1]));
+        const countries = PAT_COUNTRIES.filter(c => !shippedPat.has(c));
+        const missing = countries.filter(c => !gst?.packs?.[`tk-patrimoine_${c}`]);
+        const gpRow = c => { const id = `tk-patrimoine_${c}`, m = gst?.packs?.[id];
+            return `<tr data-tkx-pack="${esc(id)}"><td>${esc(GP ? GP.nameOf(id) : id)}</td><td>${m ? `✓ ${esc(T('installé'))} · ${esc(nf(m.rows || 0))} ${esc(T('lignes'))}${m.built ? ` · ${esc(m.built)}` : ''}` : GP ? GP.offerHtml(id) : ''}</td><td>${esc(m?.licence || '')}</td><td>${m && GP ? GP.removeHtml(id) : ''}</td></tr>`; };
         ws.innerHTML = `<section class="page cplus-settings tkx-settings" data-tkx-settings-page>${UI().pageHeader ? UI().pageHeader({title: T('Le monde à côté'), icon: '🌍', where: T('Réglages · Données'), help: esc(T('Le patrimoine protégé du monde, les musées et leurs œuvres du domaine public, les langues, les cerisiers de Kyoto, les prénoms d’ailleurs. Tout est lu sur l’ordinateur.'))}) : `<h2>${esc(T(TAB[2]))}</h2>`}
             <div class="maintenance-panel"><h3>${esc(T('Ce qui s’affiche'))}</h3><p class="muted">${esc(T('Sur la fiche d’une personne décédée (bloc « 🌍 Le monde à côté »), sur la fiche d’un village et dans la monographie. Les listes sont dans Listes → 🏛 Monuments (liste réunie « Patrimoine du monde ») et 🖼 Musées ; les points dans Cartes.'))}</p>${PARTS.map(tg).join('')}
                 <div class="tkx-opts">
@@ -504,8 +516,9 @@
             <div class="maintenance-panel"><h3>${esc(T('À propos des données'))}</h3><div class="cplus-scroll"><table class="data-table"><thead><tr><th>${esc(T('Sujet'))}</th><th>${esc(T('Source'))}</th><th>${esc(T('Lignes'))}</th><th>${esc(T('Licence'))}</th><th>${esc(T('Fabriqué le'))}</th></tr></thead><tbody>
                 ${Object.keys(FILES).map(k => fileRow(T(LAB[k]), metas.find(m => m[0] === k)?.[1])).join('')}
                 ${pats.map(([n, D]) => fileRow(`🏛 ${D?.meta.country_label || n}`, D)).join('')}${muss.map(([n, D]) => fileRow(`🖼 ${D?.meta.title || n}`, D)).join('')}</tbody></table></div>
-                <p class="muted">${esc(T('Les biens protégés de chaque pays et l’annuaire des musées sont des packs à part, fabriqués sur GitHub (Actions → « Le monde à côté (lot K) ») puis installés dans Réglages → 🗂 Données. La France garde la base Mérimée, réunie dans la même liste.'))}</p>
-                ${missing.length ? `<p class="muted">${esc(T('Pays pas encore fabriqués : {p}.', {p: missing.join(', ')}))}</p>` : ''}
+                <p class="muted">${esc(T('Les biens protégés de chaque pays ne sont pas livrés avec l’app (trop gros) : chacun s’installe une fois, ici ou dans Réglages → 🗂 Données, puis il est lu sans Internet. La France garde la base Mérimée, réunie dans la même liste.'))}</p>
+                ${GP && countries.length ? `${missing.length > 1 && !kiosk() ? `<p>${GP.offerHtml(missing.map(c => `tk-patrimoine_${c}`), {label: T('Tout installer (≈ {s})', {s: GP.fmtSize(missing.reduce((n, c) => n + GP.approx(`tk-patrimoine_${c}`), 0))})})}</p>` : ''}
+                <div class="cplus-scroll"><table class="data-table tkx-gp"><thead><tr><th>${esc(T('Pack'))}</th><th>${esc(T('État'))}</th><th>${esc(T('Licence'))}</th><th></th></tr></thead><tbody>${countries.map(gpRow).join('')}</tbody></table></div>` : ''}
                 ${P.mus.length ? '' : `<p class="muted">${esc(T('L’annuaire des musées n’est pas encore fabriqué : la liste « 🖼 Musées du monde » montre déjà les œuvres du domaine public.'))}</p>`}
                 <p class="muted">${esc(T('Le ciel la nuit et les étés secs du monde entier prolongent « 🌌 Ciel, climat et mémoire » (lot E) : ils s’y affichent.'))}</p>
                 <h4>${esc(T('En lien seulement'))}</h4><ul class="hist-ul tkx-ul">${LINK_ONLY.map(([i, l, why, u]) => `<li>${esc(i)} <b>${esc(T(l))}</b> — ${esc(T(why))} ${link(u, T('↗ ouvrir'))}</li>`).join('')}</ul>

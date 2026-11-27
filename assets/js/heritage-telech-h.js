@@ -133,7 +133,7 @@
         ['fours', '🍞 Le four banal', 'Le four à pain du village (lot « Village et nature », réutilisé) sur la fiche d’un boulanger ou de ses voisins.'],
         ['funiculaires', '🚡 Funiculaires et ponts transbordeurs', 'Les funiculaires et les ponts transbordeurs ouverts près de chez eux pendant leur vie.'],
         ['eclusieres', '🛶 Maisons éclusières et gares d’eau', 'La vie des mariniers : maisons éclusières et gares d’eau (plus loin pour un marinier, un éclusier).'],
-        ['tramways', '🚋 Tramways et petits trains disparus', 'Les tramways et petits trains d’autrefois, et les tracés disparus (OpenStreetMap, à fabriquer sur GitHub).'],
+        ['tramways', '🚋 Tramways et petits trains disparus', 'Les tramways et petits trains d’autrefois, et les tracés disparus (OpenStreetMap).'],
         ['trudaine', '🗺 L’Atlas de Trudaine', 'Les planches de l’Atlas des routes de France (1745-1780) qui nomment leur village, et la généralité.'],
         ['bastides', '🏰 Les bastides du Sud-Ouest', 'La bastide de leur commune : année de fondation et fondateur.'],
         ['coutellerie', '🔪 Coutellerie', 'Thiers, Nogent, Laguiole… (plus loin pour un coutelier).'],

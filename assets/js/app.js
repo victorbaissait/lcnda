@@ -1628,7 +1628,23 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         if(!('popover' in HTMLElement.prototype)||!toastRegion)return;
         if(!toastRegion.hasAttribute('popover'))toastRegion.setAttribute('popover','manual');
         try{if(toastRegion.matches(':popover-open'))toastRegion.hidePopover();if(toastRegion.children.length)toastRegion.showPopover();}catch(_){}
+        liftToastRegion();requestAnimationFrame(liftToastRegion);
     }
+    // une fenêtre ouverte dont le bas (Annuler, Enregistrer…) est au bas de l'écran (téléphone, fenêtre haute) : les messages se posent
+    // juste au-dessus de ce bas, sans jamais couvrir ses boutons (survoler un message le garde à l'écran : il ne doit rien cacher)
+    function liftToastRegion(){
+        if(!toastRegion)return;
+        const host=toastRegion.parentNode;let lift=0;
+        if(host&&host.tagName==='DIALOG'&&host.open){
+            const feet=[...host.querySelectorAll('.modal-actions')].filter(f=>f.getClientRects().length&&!f.closest('[hidden]'));
+            const f=feet.at(-1);
+            if(f){const r=f.getBoundingClientRect(),vh=window.innerHeight,base=window.innerWidth<=480?16:24,rh=toastRegion.getBoundingClientRect().height||64;
+                if(r.width&&r.top<vh&&r.bottom>vh-base-rh){const want=Math.round(vh-r.top+8);if(want<vh*0.7)lift=want;}}
+        }
+        toastRegion.classList.toggle('is-lifted',lift>0);
+        if(lift)toastRegion.style.setProperty('--toast-lift',lift+'px');else toastRegion.style.removeProperty('--toast-lift');
+    }
+    window.addEventListener('resize',()=>{if(toastRegion?.children.length)liftToastRegion();});
     const TOAST_MS=6000;
     const TOAST_PREFS='genealogie-messages';
     const TOAST_KINDS=[['info','Information','#111111','#ffffff','Réglages enregistrés.'],['success','Réussite','#14532d','#ffffff','✓ Fiche enregistrée.'],['error','Interdit ou erreur','#7f1020','#ffffff','⛔ Impossible : cette fiche est verrouillée.'],['undo','Suppression (avec « Annuler »)','#111111','#ffffff','🗑 Réglage « test » supprimé']];

@@ -20,13 +20,17 @@ on:
   workflow_dispatch:
     inputs:
       quoi:
-        description: 'tout, patrimoine, musees, collections ou monde (langues, cerisiers, sécheresses, ciel, prénoms)'
+        description: 'tout, patrimoine, musees, collections, monde (langues, cerisiers, sécheresses, ciel, prénoms) ou publier (rien n’est refait : les grands packs vont dans la version)'
         required: false
         default: 'patrimoine'
       pays:
         description: 'pour « patrimoine » : codes des pays (pour « musees » : continents eu am as af oc) séparés par des espaces (gb ie nl be lu de ch at it es pt dk no se fi is ee lv lt pl cz sk hu si hr ro bg gr mt mc ad li ca us), « monde » ou « tout »'
         required: false
         default: 'tout'
+      depuis:
+        description: 'facultatif : un n° d’enregistrement (sha) où les grands packs tk-* étaient encore dans la branche ; avec quoi = publier, ils sont seulement déposés dans la version telech-k-donnees'
+        required: false
+        default: ''
   push:
     branches: ['claude/**']
     paths: ['.github/workflows/telech-k.yml']
@@ -111,13 +115,35 @@ jobs:
         with:
           path: ${{ runner.temp }}/tk-cache
           key: telech-k-${{ github.run_id }}
+      - name: "📦 Les grands packs : dans la version « telech-k-donnees », pas dans la branche (installés à la demande)"
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DEPUIS: ${{ github.event.inputs.depuis || '' }}
+        run: |
+          set -e
+          R=telech-k-donnees
+          mkdir -p gp-sortie
+          # « depuis » (un n° d'enregistrement) : reprendre les fichiers tk-* qui y étaient encore (ex. avant qu'ils quittent la branche)
+          if [ -n "$DEPUIS" ]; then
+            case "$DEPUIS" in *[!0-9a-f]*) echo "depuis refusé : $DEPUIS"; exit 1;; esac
+            git fetch --no-tags --depth=1 origin "$DEPUIS"
+            git ls-tree --name-only FETCH_HEAD assets/data/ | grep -E '^assets/data/tk-[a-z]+(_[a-z]{2,5})?\.json\.gz$' | while read -r f; do [ -f "$f" ] || git show "FETCH_HEAD:$f" > "$f"; done
+          fi
+          gh release download $R --repo "$GITHUB_REPOSITORY" --dir gp-sortie --pattern 'telech-k-manifest.json' 2>/dev/null || echo "pas encore de version"
+          node scripts/grands-packs.js k gp-sortie
+          gh release view $R --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 || \
+            gh release create $R --repo "$GITHUB_REPOSITORY" --title "Le monde à côté (lot K)" --prerelease \
+              --notes "Packs installés à la demande par l'app (Réglages → 🗂 Données, ou Réglages → 🌍 Le monde à côté) : biens protégés par pays (Wikidata, CC0), et tout pack de plus de 3 Mo. Licence et source dans chaque fichier."
+          if ls gp-sortie/*.json.gz >/dev/null 2>&1; then gh release upload $R --repo "$GITHUB_REPOSITORY" --clobber gp-sortie/*.json.gz; fi
+          gh release upload $R --repo "$GITHUB_REPOSITORY" --clobber gp-sortie/telech-k-manifest.json
+          cat gp-sortie/telech-k-manifest.json
       - name: Sommaire des données
         run: node scripts/donnees-manifest.js
       - name: Enregistrer dans la branche
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/data/tk-*.json.gz assets/data/manifest.json
+          git add -A -- 'assets/data/tk-*.json.gz' assets/data/manifest.json # -A : les grands packs partis dans la version quittent aussi la branche
           git diff --cached --quiet && { echo "rien de neuf"; exit 0; }
           git commit -m "Le monde à côté (lot K) : données refaites sur GitHub (Wikidata CC0, Met CC0, Glottolog CC BY 4.0, NOAA/NCEI…)"
           ok=

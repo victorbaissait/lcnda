@@ -17,9 +17,13 @@ on:
   workflow_dispatch:
     inputs:
       quoi:
-        description: 'tout, fichiers (crues, élus, prix), wikidata (monuments aux morts, cimetières, villages, mesures), ou une partie : mines, lieux_gb, bagnards'
+        description: 'tout, fichiers (crues, élus, prix), wikidata (monuments aux morts, cimetières, villages, mesures), une partie : mines, lieux_gb, bagnards ; ou publier (rien n’est refait : les grands packs vont dans la version)'
         required: false
         default: 'tout'
+      depuis:
+        description: 'facultatif : un n° d’enregistrement (sha) où les grands packs tl-* étaient encore dans la branche ; avec quoi = publier, ils sont seulement déposés dans la version telech-l-donnees'
+        required: false
+        default: ''
   push:
     branches: ['claude/**']
     paths: ['.github/workflows/telech-l.yml']
@@ -79,13 +83,34 @@ jobs:
         with:
           path: ${{ runner.temp }}/tl-cache
           key: telech-l-${{ github.run_id }}
-      - name: Sommaire des données
-        run: node scripts/donnees-manifest.js
+      - name: "📦 Les grands packs : dans la version « telech-l-donnees », pas dans la branche (installés à la demande)"
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DEPUIS: ${{ github.event.inputs.depuis || '' }}
+        run: |
+          set -e
+          R=telech-l-donnees
+          mkdir -p gp-sortie
+          # « depuis » (un n° d'enregistrement) : reprendre les fichiers tl-* qui y étaient encore (ex. avant qu'ils quittent la branche)
+          if [ -n "$DEPUIS" ]; then
+            case "$DEPUIS" in *[!0-9a-f]*) echo "depuis refusé : $DEPUIS"; exit 1;; esac
+            git fetch --no-tags --depth=1 origin "$DEPUIS"
+            git ls-tree --name-only FETCH_HEAD assets/data/ | grep -E '^assets/data/tl-[a-z]+(_[a-z]{2,5})?\.json\.gz$' | while read -r f; do [ -f "$f" ] || git show "FETCH_HEAD:$f" > "$f"; done
+          fi
+          gh release download $R --repo "$GITHUB_REPOSITORY" --dir gp-sortie --pattern 'telech-l-manifest.json' 2>/dev/null || echo "pas encore de version"
+          node scripts/grands-packs.js l gp-sortie
+          gh release view $R --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 || \
+            gh release create $R --repo "$GITHUB_REPOSITORY" --title "Les équivalents d'ailleurs (lot L)" --prerelease \
+              --notes "Packs installés à la demande par l'app (Réglages → 🗂 Données, ou Réglages → 🌐 Les équivalents d'ailleurs) : tout pack de plus de 3 Mo (cimetières du monde, Wikidata CC0 ; mines, USGS MRDS, domaine public…). Licence et source dans chaque fichier."
+          if ls gp-sortie/*.json.gz >/dev/null 2>&1; then gh release upload $R --repo "$GITHUB_REPOSITORY" --clobber gp-sortie/*.json.gz; fi
+          gh release upload $R --repo "$GITHUB_REPOSITORY" --clobber gp-sortie/telech-l-manifest.json
+          cat gp-sortie/telech-l-manifest.json
+
       - name: Enregistrer dans la branche
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/data/tl-*.json.gz assets/data/manifest.json
+          git add -A -- 'assets/data/tl-*.json.gz' assets/data/manifest.json # -A : les grands packs partis dans la version quittent aussi la branche
           git diff --cached --quiet && { echo "rien de neuf"; exit 0; }
           git commit -m "Les équivalents d’ailleurs (lot L) : données refaites sur GitHub (HANZE CC BY 4.0, Wikidata CC0, USGS, OS OGL…)"
           ok=

@@ -124,7 +124,7 @@
         ['ponts', '🌉 Les ponts suspendus', 'Les ponts suspendus (ponts Seguin…) construits près de chez eux pendant leur vie.'],
         ['forges', '⚒ Forges et hauts fourneaux', 'Les forges, hauts fourneaux et martinets anciens près de chez eux (plus loin pour un forgeron, un charbonnier, un fondeur).'],
         ['salines', '🧂 Salines et marais salants', 'Les salines et marais salants près de chez eux (plus loin pour un saunier ou un paludier).'],
-        ['cocher', '🪧 Plaques de cocher et bornes Michelin', 'Les vieux panneaux de route autour du village (OpenStreetMap, à fabriquer sur GitHub).'],
+        ['cocher', '🪧 Plaques de cocher et bornes Michelin', 'Les vieux panneaux de route autour du village (OpenStreetMap).'],
         ['potager', '🥕 Le potager de 1883', 'Les légumes que Vilmorin décrit en 1883 et qui portent le nom d’une commune proche.'],
         ['montyon', '🏅 Le prix de vertu', 'Une personne de la commune honorée par le prix de vertu Montyon (Académie française).'],
         ['rosieres', '🌹 Les rosières', 'Les communes qui couronnent une rosière, et depuis quand.'],

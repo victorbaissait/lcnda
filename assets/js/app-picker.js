@@ -9,6 +9,8 @@
     'use strict';
     const i18n = (text, vars) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(text, vars) : String(text ?? '')); // 🌐 app-i18n.js
     const i18nFr = () => !window.LCNDA_I18N || window.LCNDA_I18N.lang === 'fr';
+    // 🌐 hors du français, le mot accordé dans la langue (« =fiche » des .tsv : « Знайдено: 3 картки ») ; en français, rien ne change
+    const tPlural = (n, one, many) => (!i18nFr() && window.LCNDA_I18N?.plural ? window.LCNDA_I18N.plural(n, one, many) : plural(n, one, many));
     const A = () => window.LCNDA_APP || {};
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
     const fold = s => String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
@@ -359,13 +361,13 @@
         const st = S(s), kind = st.kind.includes(',') ? '' : st.kind;
         if (kind === 'place') {
             const g = Object.fromEntries(st.groups.map(x => [x.key, x])), parts = [];
-            if (g.base?.total) parts.push(i18n('{what} de ta base', {what: plural(g.base.total, 'lieu', 'lieux')}));
-            if (g.fr?.total) parts.push(i18n('{what} de France', {what: plural(g.fr.total, 'commune')}));
-            if (g.world?.total) parts.push(g.world.total >= 300 ? i18n('300 villes du monde et plus') : i18n('{what} du monde', {what: plural(g.world.total, 'ville')}));
+            if (g.base?.total) parts.push(i18n('{what} de ta base', {what: tPlural(g.base.total, 'lieu', 'lieux')}));
+            if (g.fr?.total) parts.push(i18n('{what} de France', {what: tPlural(g.fr.total, 'commune')}));
+            if (g.world?.total) parts.push(g.world.total >= 300 ? i18n('300 villes du monde et plus') : i18n('{what} du monde', {what: tPlural(g.world.total, 'ville')}));
             return parts.join(' · ');
         }
         const k = K[kind] || K.person, n = st.groups.reduce((a, g) => a + (g.total || 0), 0);
-        if (!i18nFr()) return i18n('{what} trouvés', {what: plural(n, k.one, k.many), n}); // 🌐 « 3 records found »
+        if (!i18nFr()) return i18n('{what} trouvés', {what: tPlural(n, k.one, k.many), n}); // 🌐 « 3 records found »
         return `${plural(n, k.one, k.many)} ${k.fem ? (n > 1 ? 'trouvées' : 'trouvée') : (n > 1 ? 'trouvés' : 'trouvé')}`;
     }
     function renderList(c, s, keepScroll) {

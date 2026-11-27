@@ -87,7 +87,9 @@ echo 'ok';`], {cwd: root, encoding: 'utf8', env: envFor(tmp)});
         if (dark) await page.evaluate(() => { const A = window.LCNDA_APP; localStorage.setItem('genealogie-design', JSON.stringify({...A.readDesignSettings(), preset: 'dark'})); A.applyDesign(); });
         return page;
     };
-    const go = async (page, id) => { await page.evaluate(id => { const A = window.LCNDA_APP; A.state.listType = id; A.setModule('listes'); }, id); await page.waitForTimeout(900); };
+    // on attend la nouvelle page dessinée (sa barre ou sa grande boîte vide), pas une durée : sur une machine chargée 0,9 s ne suffisait pas
+    const go = async (page, id) => { await page.evaluate(id => { const A = window.LCNDA_APP; document.querySelectorAll('#workspace > *').forEach(e => { e.dataset.essaiAvant = '1'; }); A.state.listType = id; A.setModule('listes'); }, id);
+        await page.waitForFunction(() => [...document.querySelectorAll('#workspace .ui-listbar, #workspace .empty-box')].some(e => !e.closest('[data-essai-avant]')), null, {timeout: 30000}).catch(() => {}); await page.waitForTimeout(300); };
     const info = page => page.evaluate(() => ({bar: !!document.querySelector('#workspace .ui-listbar'), k10: !!document.querySelector('#workspace .empty-box'), count: document.querySelector('#workspace .ui-listbar-count')?.textContent || '',
         chips: [...document.querySelectorAll('#workspace .ui-listbar-chip')].map(c => c.textContent.replace(/\s*×$/, '')), sort: document.querySelector('#workspace .ui-listbar select')?.value || '',
         view: document.querySelector('#workspace .ui-listbar .ui-viewtoggle .is-active')?.dataset.view || '', q: document.querySelector('#workspace .ui-listbar-q input')?.value ?? null}));
@@ -128,7 +130,8 @@ echo 'ok';`], {cwd: root, encoding: 'utf8', env: envFor(tmp)});
                 if (L.view) assert.equal(m.view, L.view, '« Fiches » / « Liste » au départ');
                 if (id === 'help_requests') assert.deepEqual(m.chips, ['Brouillon', 'Publiée', 'Réponse reçue'], '« En cours » au départ, visible en pastilles');
                 if (id === 'fairs') assert.deepEqual(m.chips, ['À venir'], '« À venir » au départ, visible en pastille');
-                await page.fill('#workspace .ui-listbar-q input', Q[id][0]); await page.waitForTimeout(450);
+                await page.fill('#workspace .ui-listbar-q input', Q[id][0]);
+                await page.waitForFunction(() => / sur /.test(document.querySelector('#workspace .ui-listbar-count')?.textContent || ''), null, {timeout: 10000}).catch(() => {}); // la liste filtrée redessinée
                 const n0 = (await info(page)).count; assert.match(n0, / sur /, `la recherche réduit la liste : ${n0}`);
                 await page.click('#workspace .ui-listbar-fbtn'); await page.waitForTimeout(200);
                 const groups = await page.$$eval('.ui-listbar-menu .ui-listbar-group > b', g => g.map(x => x.textContent));

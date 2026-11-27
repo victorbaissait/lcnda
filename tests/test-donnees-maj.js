@@ -74,7 +74,7 @@ const rowsOfGz = b => JSON.parse(zlib.gunzipSync(b).toString('utf8')).rows.lengt
     const env = {...process.env, GENEALOGY_DATA_DIR: tmp, GENEALOGY_MEDIA_DIR: path.join(tmp, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4', GENEALOGY_TEST: '1',
         LCNDA_TEST_DONNEES_BASE: `http://127.0.0.1:${fport}/gh/`, LCNDA_TEST_WIKIDATA_URL: `http://127.0.0.1:${fport}/sparql`,
         LCNDA_TEST_METEO_DIR: site, LCNDA_METEO_DIR: path.join(tmp, 'app-meteo'),
-        LCNDA_TEST_GOV_DIR: empty, LCNDA_TEST_HIST_DIR: empty, LCNDA_TEST_PRENOMS_DIR: empty, LCNDA_TEST_ELECTIONS_DIR: empty, LCNDA_TEST_BO_DIR: empty, LCNDA_TEST_LP_DIR: empty, LCNDA_TEST_BA_DIR: empty, LCNDA_TEST_TN_DIR: empty, LCNDA_TEST_TELECHA_DIR: empty}; // aucune famille ne va sur GitHub (seule la météo d'essai est « en ligne »)
+        LCNDA_TEST_GOV_DIR: empty, LCNDA_TEST_HIST_DIR: empty, LCNDA_TEST_PRENOMS_DIR: empty, LCNDA_TEST_ELECTIONS_DIR: empty, LCNDA_TEST_BO_DIR: empty, LCNDA_TEST_LP_DIR: empty, LCNDA_TEST_BA_DIR: empty, LCNDA_TEST_TN_DIR: empty, LCNDA_TEST_TELECHA_DIR: empty, LCNDA_TEST_GP_DIR: empty}; // aucune famille ne va sur GitHub (seule la météo d'essai est « en ligne »)
     fs.mkdirSync(env.LCNDA_METEO_DIR, {recursive: true});
     const seed = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', String.raw`
 require 'lib/paths.php';

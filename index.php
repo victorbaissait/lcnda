@@ -46,7 +46,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
     <link rel="stylesheet" href="assets/css/tresors.css?v=15">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=30">
-    <link rel="stylesheet" href="assets/css/ui.css?v=30">
+    <link rel="stylesheet" href="assets/css/ui.css?v=31">
     <link rel="stylesheet" href="assets/css/saisies.css?v=4">
     <link rel="stylesheet" href="assets/css/board-shapelib.css?v=1">
     <link rel="stylesheet" href="assets/css/artist.css?v=5">
@@ -1259,19 +1259,19 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_FIRST_HASH=location.hash;</script>
 <script src="assets/js/app-journal.js?v=2"></script>
 <?= i18n_page_script() ?>
-<script src="assets/js/app-i18n.js?v=125"></script>
+<script src="assets/js/app-i18n.js?v=127"></script>
 <script>window.LCNDA_GENEALOGY = <?= json_encode(GENEALOGY_ID === '' ? 'main' : GENEALOGY_ID) ?>;window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_GLOCK = <?= json_encode(['on' => glock_info()['locked'], 'minutes' => glock_info()['minutes']]) ?>;window.LCNDA_GUEST = <?= json_encode(lan_device() ? ['name' => lan_device()['name']] : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
 <script src="assets/js/app-fond.js?v=9" defer></script>
 <script src="assets/js/app-accord.js?v=1" defer></script>
 <script>window.LCNDA_RFR_DATA = <?= json_encode(json_decode((string) @file_get_contents(__DIR__ . '/assets/data/recherche-fr.json'), true) ?: new stdClass(), JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP) ?>;</script>
 <script src="assets/js/app-recherche-fr.js?v=1" defer></script>
 <script>window.LCNDA_MEDIA_LIMITS = <?= json_encode($ready ? media_limits_for_page() : null) ?>;</script>
-<script src="assets/js/app.js?v=618" defer></script>
+<script src="assets/js/app.js?v=619" defer></script>
 <script src="assets/js/app-media-limits.js?v=2" defer></script>
 <script src="assets/js/app-verrou.js?v=7" defer></script>
 <script src="assets/js/app-reseau-local.js?v=5" defer></script>
 <script src="assets/js/app-indicateurs.js?v=2" defer></script>
-<script src="assets/js/app-picker.js?v=32" defer></script>
+<script src="assets/js/app-picker.js?v=33" defer></script>
 <script src="assets/js/app-lieux-doublons.js?v=2" defer></script>
 <script src="assets/js/app-media-picker.js?v=5" defer></script>
 <script src="assets/js/app-piece-archives.js?v=10" defer></script>
@@ -1557,7 +1557,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-prenoms-pays.js?v=5" defer></script>
 <script src="assets/js/heritage-diagram-cartes-plus.js?v=4" defer></script>
 <script src="assets/js/heritage-diagram-cartes-plus2.js?v=6" defer></script><!-- 🗺️ vague 2 : métiers, lignées, aire de vie, parrains, crises -->
-<script src="assets/js/heritage-diagram-graphique.js?v=12" defer></script>
+<script src="assets/js/heritage-diagram-graphique.js?v=13" defer></script>
 <script src="assets/js/heritage-diagram-nouveaux.js?v=6" defer></script>
 <script src="assets/js/heritage-diagram-manquants.js?v=2" defer></script>
 <script src="assets/js/heritage-diagram-assistant.js?v=4" defer></script>
@@ -1776,15 +1776,16 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-telech-c.js?v=4" defer></script>
 <script src="assets/js/heritage-telech-b-village.js?v=3" defer></script>
 <script src="assets/js/heritage-telech-e.js?v=6" defer></script>
-<script src="assets/js/heritage-telech-f.js?v=4" defer></script>
-<script src="assets/js/heritage-telech-h.js?v=2" defer></script>
+<script src="assets/js/heritage-telech-f.js?v=5" defer></script>
+<script src="assets/js/heritage-telech-h.js?v=3" defer></script>
 <script src="assets/js/heritage-telech-g.js?v=4" defer></script>
 <script src="assets/js/heritage-telech-i.js?v=4" defer></script>
 <script src="assets/js/heritage-telech-m.js?v=5" defer></script>
 <script src="assets/js/app-lot-n-archives.js?v=3" defer></script>
 <script src="assets/js/app-lot-n2-chiffres.js?v=3" defer></script>
-<script src="assets/js/heritage-telech-k.js?v=5" defer></script>
-<script src="assets/js/heritage-telech-l.js?v=2" defer></script><!-- 🌐 Les équivalents d’ailleurs (lot L) -->
+<script src="assets/js/app-grands-packs.js?v=1" defer></script><!-- 📦 grands packs des lots K et L, installés à la demande (lib/grands_packs.php) -->
+<script src="assets/js/heritage-telech-k.js?v=6" defer></script>
+<script src="assets/js/heritage-telech-l.js?v=3" defer></script><!-- 🌐 Les équivalents d’ailleurs (lot L) -->
 <script src="assets/js/heritage-telech-j.js?v=2" defer></script>
 <script src="assets/js/noms-lieux-monde.js?v=4" defer></script><!-- 🔎 Noms de lieux d’autrefois, tous pays : « un nom → le lieu d’aujourd’hui » (vue de 🗺 Anciens noms de lieux, 📊 Récap, ⌘K) -->
 <script src="assets/js/heritage-fiche-edifice.js?v=6" defer></script>

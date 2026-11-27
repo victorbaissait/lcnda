@@ -163,8 +163,13 @@
     /** les packs livrés (le sommaire) : ceux fabriqués seulement sur GitHub n'apparaissent que s'ils sont là */
     const have = new Set();
     let packsMemo = null;
-    const packs = () => (packsMemo ||= fetch(`assets/data/manifest.json?v=${DATA_V}`, {credentials: 'same-origin'}).then(r => (r.ok ? r.json() : {packs: {}})).catch(() => ({packs: {}}))
-        .then(m => { Object.keys(m?.packs || {}).filter(okPack).forEach(id => have.add(id)); try { ext.dataListsEngine?.sync?.(); } catch (_) {} return m; }));
+    // 📦 les grands packs (tl-cimetieres, tl-mines… : app-grands-packs.js) ne sont pas livrés : là s'ils sont installés, servis à la même adresse
+    const installedBig = new Set();
+    const packs = () => (packsMemo ||= Promise.all([fetch(`assets/data/manifest.json?v=${DATA_V}`, {credentials: 'same-origin'}).then(r => (r.ok ? r.json() : {packs: {}})).catch(() => ({packs: {}})),
+        Promise.resolve(ext.grandsPacks?.installed?.(/^tl-/) || []).catch(() => [])])
+        .then(([m, inst]) => { have.clear(); installedBig.clear(); Object.keys(m?.packs || {}).filter(okPack).forEach(id => have.add(id)); inst.filter(okPack).forEach(id => { if (!have.has(id)) installedBig.add(id); have.add(id); });
+            try { ext.dataListsEngine?.sync?.(); } catch (_) {} return m; }));
+    root.addEventListener?.('lcnda:installs-changed', () => { packsMemo = null; for (const k of Object.keys(data)) if (!have.has(k) || installedBig.has(k)) delete data[k]; packs(); });
     const lifeMemo = new Map();
     const lifeOf = id => { const H = ext.histoireAutour; if (H?.lifeOf) return H.lifeOf(id); if (!lifeMemo.has(id)) lifeMemo.set(id, A().api('ha_life', {id}).catch(e => { lifeMemo.delete(id); throw e; })); return lifeMemo.get(id); };
 
@@ -392,13 +397,18 @@
         const ws = document.getElementById('workspace'); if (!ws) return;
         const mine = ++drawToken;
         await packs();
-        const metas = await Promise.all(Object.keys(FILES).map(async k => [k, await quiet(load(k))]));
+        const GP = ext.grandsPacks, gst = await (GP?.status?.() || Promise.resolve(null)).catch(() => null);
+        // un grand pack installé n'est pas relu ici (des centaines de milliers de lignes) : sa fiche d'installation suffit
+        const metas = await Promise.all(Object.keys(FILES).map(async k => [k, installedBig.has(FILES[k]) ? null : await quiet(load(k))]));
         if (mine !== drawToken || (token !== undefined && A().state && token !== A().state.workspaceToken)) return;
         const s = settings();
         const tg = ([key, label, sub]) => `<label class="checkbox-line cplus-tg" data-tlx-tg="${esc(key)}"><input type="checkbox" ${s[key] ? 'checked' : ''}><span><b>${esc(T(label))}</b><br><small class="muted">${esc(T(sub))}</small></span></label>`;
         const LAB = {crues: '🌊 Crues d’Europe', elus: '🗳 Congrès des États-Unis', prix: '💵 Prix des États-Unis', mesures: '📏 Mesures du monde', memoriaux: '🎖 Monuments aux morts', cimetieres: '✝️ Cimetières', villages: '🏚 Villages désertés',
             mines: '⛏ Mines (USGS)', lieux_gb: '🗺 Lieux-dits de Grande-Bretagne', bagnards: '⛓ Bagnards (Queensland)'};
-        const fileRow = ([k, D]) => { if (!D) return `<tr><td>${esc(T(LAB[k]))}</td><td colspan="4" class="muted">${esc(T('Pas encore fabriqué : sur GitHub, Actions → « Les équivalents d’ailleurs (lot L) ».'))}</td></tr>`;
+        const fileRow = ([k, D]) => { const id = FILES[k], big = GP?.KNOWN?.includes(id), g = gst?.packs?.[id];
+            if (!D && big && g) return `<tr data-tlx-pack="${esc(id)}"><td>${esc(T(LAB[k]))}</td><td>✓ ${esc(T('installé'))}${g.source ? ` · ${esc(g.source)}` : ''}</td><td>${esc(nf(g.rows || 0))}</td><td>${esc(g.licence || '')}</td><td>${esc(g.built || '')} ${GP.removeHtml(id)}</td></tr>`;
+            if (!D && big) return `<tr data-tlx-pack="${esc(id)}"><td>${esc(T(LAB[k]))}</td><td colspan="4">${kiosk() ? `<span class="muted">${esc(T('Pas installé (trop gros pour être livré avec l’app).'))}</span>` : GP.offerHtml(id)}</td></tr>`;
+            if (!D) return `<tr><td>${esc(T(LAB[k]))}</td><td colspan="4" class="muted">${esc(T('Pas encore fabriqué : sur GitHub, Actions → « Les équivalents d’ailleurs (lot L) ».'))}</td></tr>`;
             const m = D.meta; return `<tr><td>${esc(T(LAB[k]))}</td><td>${link(m.url, m.source)}</td><td>${esc(nf(D.rows.length))}</td><td>${link(m.licence_url, m.licence)}</td><td>${esc(m.built || '')}</td></tr>`; };
         ws.innerHTML = `<section class="page cplus-settings tlx-settings" data-tlx-settings-page>${UI().pageHeader ? UI().pageHeader({title: T('Les équivalents d’ailleurs'), icon: '🌐', where: T('Réglages · Données'), help: esc(T('Pour les ancêtres hors de France : grandes crues d’Europe, monuments aux morts, cimetières, villages désertés, Congrès et prix des États-Unis, mesures du monde. Tout est lu sur l’ordinateur.'))}) : `<h2>${esc(T(TAB[2]))}</h2>`}
             <div class="maintenance-panel"><h3>${esc(T('Ce qui s’affiche'))}</h3><p class="muted">${esc(T('Sur la fiche d’une personne décédée (bloc « 🌐 Les équivalents d’ailleurs »), sur la fiche d’un village, dans les Listes (crues réunies, monuments réunis, thèmes) et dans Cartes.'))}</p>${PARTS.map(tg).join('')}
