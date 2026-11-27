@@ -1,0 +1,101 @@
+# 🌳 Lot O (docs/donnees-idees-lot-o.md) : refaire assets/data/lo-*.json.gz, puis les enregistrer dans la branche lancée.
+#  - ⛏ 🏰 lo-mines, lo-vauban : Wikidata (CC0 — Wikidata:Copyright relue) : catastrophes minières en France ; fortifications de Vauban
+#    au complet (P361 Q833781, P84 / P170 / P287 Vauban, descriptions qui le citent).
+#  - 📡 ⛴ lo-chappe, lo-bacs : OpenStreetMap (ODbL — openstreetmap.org/copyright relue) : télégraphe Chappe, bacs et passeurs.
+#    Seulement ici : Overpass et openstreetmap.org sont refusés par le réseau de l'atelier.
+#  - 📚 lo-livres : Internet Archive, un lien par volume, gardé seulement si SA notice dit domaine public ou NOT_IN_COPYRIGHT.
+#  - 🐴 lo-poste : relais et routes de poste 1632-1833 (Zenodo 11196161, ODbL — licence du dépôt relue).
+#  - 📖 lo-textes : les textes rédigés (scripts/lot-o/textes.tsv), liens vérifiés.
+# Requêtes polies (scripts/telech-l/wm.py) : une à la fois, une minute entre deux requêtes Wikidata, Retry-After respecté.
+# Puis le sommaire assets/data/manifest.json (Réglages → 🗂 Données : « ↻ Vérifier » voit la nouvelle version).
+#
+# Lancer : onglet « Actions » → « Lot O : données » → « Run workflow » (choisir ce qu'on refait).
+
+name: "Lot O : données"
+
+on:
+  workflow_dispatch:
+    inputs:
+      quoi:
+        description: 'tout, ou une partie : wikidata, osm, livres, poste, textes'
+        required: false
+        default: 'tout'
+  push:
+    branches: ['claude/**']
+    paths: ['.github/workflows/telech-o.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: telech-o-donnees
+  cancel-in-progress: false
+
+jobs:
+  donnees:
+    # le « push » sert seulement à faire connaître ce travail à GitHub : il ne fabrique rien
+    if: github.event_name != 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 300
+    env:
+      QUOI: ${{ github.event.inputs.quoi || 'tout' }}
+    steps:
+      - name: Dossier de travail
+        run: echo "TL_RAW=$RUNNER_TEMP/to-cache" >> "$GITHUB_ENV"
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: "Préférer IPv4 (pas d’IPv6 sur la machine GitHub, « Network is unreachable »)"
+        run: echo 'precedence ::ffff:0:0/96 100' | sudo tee -a /etc/gai.conf
+      - name: Reprendre les réponses déjà téléchargées
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ runner.temp }}/to-cache
+          key: telech-o-${{ github.run_id }}
+          restore-keys: telech-o-
+      - name: "⛏ 🏰 Wikidata (catastrophes minières, Vauban)"
+        if: env.QUOI == 'tout' || env.QUOI == 'wikidata'
+        timeout-minutes: 120
+        run: 'python3 -I scripts/lot-o/build_wikidata.py assets/data mines vauban || echo "raté : wikidata"'
+      - name: "📡 ⛴ OpenStreetMap (télégraphe Chappe, bacs)"
+        if: env.QUOI == 'tout' || env.QUOI == 'osm'
+        timeout-minutes: 90
+        run: 'python3 -I scripts/lot-o/build_osm.py assets/data chappe bacs || echo "raté : osm"'
+      - name: "📚 Internet Archive (livres du domaine public)"
+        if: env.QUOI == 'tout' || env.QUOI == 'livres'
+        run: 'python3 -I scripts/lot-o/build_ia.py assets/data || echo "raté : livres"'
+      - name: "🐴 Relais et routes de poste (Zenodo)"
+        if: env.QUOI == 'tout' || env.QUOI == 'poste'
+        run: 'python3 -I scripts/lot-o/build-poste.py || echo "raté : poste"'
+      - name: "📖 Textes rédigés"
+        if: env.QUOI == 'tout' || env.QUOI == 'textes'
+        run: 'python3 -I scripts/lot-o/build_textes.py --liens || echo "raté : textes"'
+      - name: Garder les réponses pour la prochaine fois
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ runner.temp }}/to-cache
+          key: telech-o-${{ github.run_id }}
+      - name: Sommaire des données
+        run: node scripts/donnees-manifest.js
+      - name: Enregistrer dans la branche
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/data/lo-*.json.gz assets/data/manifest.json
+          git diff --cached --quiet && { echo "rien de neuf"; exit 0; }
+          git commit -m "Lot O : données refaites sur GitHub (Wikidata CC0, OpenStreetMap ODbL, Internet Archive domaine public, Zenodo ODbL)"
+          ok=
+          for i in 1 2 3 4 5; do
+            if ! git pull --rebase origin "$GITHUB_REF_NAME"; then
+              # le sommaire a changé entre-temps (un autre atelier) : on garde celui de la branche et on le refait par-dessus
+              git checkout --ours assets/data/manifest.json && node scripts/donnees-manifest.js \
+                && git add assets/data/manifest.json && GIT_EDITOR=true git rebase --continue || { git rebase --abort; sleep 15; continue; }
+            fi
+            git push origin "HEAD:$GITHUB_REF_NAME" && { ok=1; break; }; sleep 15
+          done
+          [ -n "$ok" ] || { echo "::error::pas enregistré dans la branche"; exit 1; }

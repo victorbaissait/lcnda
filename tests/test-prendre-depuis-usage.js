@@ -377,7 +377,7 @@ const t = async (name, fn) => {
             await p.waitForSelector('.ld-page[data-ld-page="ciel_cometes"] [data-ld-take]', {timeout: 30000}); await p.waitForSelector('.ld-table tbody tr', {timeout: 30000});
             await C('[data-ld-take]'); await C('.ui-actmenu button:has-text("Les 20 premières")'); await sleep(1500);
             let s = (await basket()).items.find(x => x.kind === 'set'); assert.ok(s && s.data.rows.length === 20 && /lignes 1 à 20/.test(s.title), s?.title);
-            const first = await p.textContent('.ld-table tbody tr td:nth-child(2)'); assert.strictEqual(String(s.data.rows[0][0]).trim(), first.trim(), 'dans l’ordre affiché');
+            const first = await p.textContent('.ld-table tbody tr td:not(.cx-ldck)'); // la 1re case de la ligne (une seule sorte de cases : plus de colonne à part) assert.strictEqual(String(s.data.rows[0][0]).trim(), first.trim(), 'dans l’ordre affiché');
             await clearBasket();
             await C('[data-ld-take]'); await C('.ui-actmenu button:has-text("De la ligne")');
             await p.waitForSelector('dialog[open] input[name="v"]'); await F('dialog[open] input[name="v"]', '10-20'); await K('Enter'); await sleep(1500);

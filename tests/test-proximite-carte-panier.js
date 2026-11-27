@@ -102,7 +102,7 @@ const t = async (name, fn) => { if (ONLY && !ONLY.test(name)) return; try { awai
         await t('Proximité : ☑ cocher deux personnes → 🧺 seulement elles ; 📎 / 🧺 au bout d’une carte', async () => {
             const boxes = p.locator('#workspace .research-person-card [data-rp-pick]');
             await boxes.nth(0).check(); await boxes.nth(1).check();
-            assert.match(await p.textContent('#workspace [data-rp-count]'), /2/);
+            assert.match(await p.textContent('#workspace [data-rp-bar]'), /2 personnes cochées/); // la barre de sélection commune
             const items = await menu(); assert.ok(items.some(x => /panier.*2 cochés/.test(x)), items.join(' | '));
             const before = await basketN();
             await menuPick(/Mettre dans le panier/); await sleep(1200);

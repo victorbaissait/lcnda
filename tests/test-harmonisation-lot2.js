@@ -38,6 +38,27 @@ const EXPORTS = ['heritage-periodicals', 'app-paniers', 'heritage-records', 'her
         assert.ok(!rc.includes('data-rc-pickall'), 'plus de « Tout cocher » fait à la main');
         assert.ok(!rc.includes('data-rc-check'), 'plus de case faite à la main');
     });
+    await step('cocher plusieurs lignes : la barre commune partout (ADN, Atelier, Imports, À trier, Recherche, Paniers), une seule sorte de cases dans les listes de données', () => {
+        const sb = read('assets/js/app-selection.js');
+        assert.match(sb, /function choiceAction\(/, 'une action « choisir dans une liste » commune (Côté…, Suivi…, groupe…)');
+        assert.match(sb, /o\.fallback\(\)/, 'rien de coché : les actions portent sur « les trouvés », dit dans la barre');
+        // [fichier, la barre commune posée sur ces lignes, ce qui était fait à la main et ne doit pas revenir]
+        const sites = [
+            ['heritage-dna.js', /SB\(\{host: tb, rowSelector: 'tr\[data-dna-row\]'/, ['data-dna-chk', 'data-dna-all', 'h-dna-bulk" hidden']],
+            ['heritage-research.js', /SB\(\{host: tb, rowSelector: 'tr\[data-at-item\]'/, ['class="h-at-bulk"', 'data-at-unsel>', 'data-at-bulkfolder>']],
+            ['heritage-imports-plus.js', /selectionBar\(\{host: tb, rowSelector: 'tr\[data-i\]:not\(\[data-ip-same\]\)'/, ['data-ip-on', 'data-ip-geo="all"']],
+            ['app-a-trier.js', /selectionBar\(\{host: box, rowSelector: '\[data-tw-row\]'/, ['data-tw-check', 'data-tw-bulk-del', 'Cochées : {n}']],
+            ['app-recherche-outils.js', /selectionBar\(\{host: root, rowSelector: '\[data-rp-row\]'/, ['data-rp-all', 'data-rp-rall']],
+            ['app-paniers.js', /selectionBar\(\{host, rowSelector: '\.pn-it\[data-pn-i\]'[\s\S]*Les \{n\} trouvés/, ["data-pn-a=\"pick-all\"", "'{a} cochés parmi les {b} trouvés'", 'Une partie…']],
+        ];
+        for (const [f, re, gone] of sites) { const s = read(`assets/js/${f}`); assert.match(s, re, f); for (const g of gone) assert.ok(!s.includes(g), `${f} : « ${g} » est revenu`); }
+        assert.match(read('assets/js/app-recherche-outils.js'), /tr\[data-rp-rrow\]/, 'Chercher et remplacer : la barre commune aussi');
+        // listes de données : les cases de la liste (app-listes-choix.js) servent aussi à « 🧺 Prendre… » ; plus de 2ᵉ colonne de cases
+        const cx = read('assets/js/heritage-connexions.js'), ch = read('assets/js/app-listes-choix.js');
+        for (const g of ['data-ld-choose', "className = 'cx-ldsel'", 'data-cx-selnone', 'cx-ldck"><input']) assert.ok(!cx.includes(g), `heritage-connexions.js : « ${g} » est revenu`);
+        assert.match(cx, /CHx\(\)\?\.count\?\.\(\)/); assert.match(cx, /CHx\(\)\.selectedRows\(\)/);
+        assert.match(ch, /T\('\{n\} lignes cochées'/); assert.match(ch, /T\('✕ Décocher'\)/); assert.ok(!ch.includes("T('{n} choisis'"), 'les mots de la barre commune');
+    });
     await step('les textes sont traduits (fr en es de it pt pl nl)', () => {
         const tsv = read('assets/i18n/src/comportements-lot2.tsv').split('\n').filter(l => l && !l.startsWith('fr ¦'));
         assert.ok(tsv.length > 20);
@@ -104,6 +125,25 @@ const EXPORTS = ['heritage-periodicals', 'app-paniers', 'heritage-records', 'her
             assert.equal(d.images.filter(i => i.tray === 'Liste A').length, 3, 'les 3 cochées sont rangées dans « Liste A » ' + JSON.stringify(d.images.map(i => [i.id, i.page_id, i.tray])));
             await page.waitForSelector('.h-rc-loose .sel-bar');
             assert.doesNotMatch(await page.textContent('.h-rc-loose .sel-bar'), /cochées/, 'plus rien de coché après rangement');
+        });
+
+        await step('Atelier de recherche : la barre commune (Maj+clic, ⭐ Favoris, 🗑 Corbeille), d’accord avec le choix au clic', async () => {
+            const pid = await page.evaluate(async () => {
+                const api = (a, b) => window.LCNDA_APP.api(a, {}, {method: 'POST', body: b}).then(r => r.result || r);
+                const r = await api('save_atelier_project', {title: 'Les MAZAUD de Tulle', kind: 'these', status: 'active', folders: []});
+                for (const t of ['Lettre de Jean MAZAUD', 'Acte LACOMBE', 'Photo DURAND']) await api('save_atelier_item', {project_id: r.id, type: 'note', title: t, data: {}});
+                return r.id;
+            });
+            await page.evaluate(id => { const s = window.LCNDA_APP.state; s.atelier = {...(s.atelier || {}), project: id, node: 'all', sel: [], q: '', type: ''}; s.enquetesTab = 'atelier'; window.LCNDA_APP.setModule('enquetes'); }, pid);
+            await page.waitForSelector('.h-at-table tr[data-at-item] .sel-box input', {timeout: 20000});
+            await page.locator('.h-at-table tr[data-at-item] .sel-box input').nth(0).click();
+            await page.locator('.h-at-table tr[data-at-item] .sel-box input').nth(2).click({modifiers: ['Shift']});
+            await page.waitForFunction(() => /3 éléments cochés/.test(document.querySelector('.h-at .sel-bar')?.textContent || ''), null, {timeout: 10000});
+            assert.equal(await page.evaluate(() => window.LCNDA_APP.state.atelier.sel.length), 3, 'le choix de l’Atelier suit les cases');
+            await page.locator('.h-at .sel-bar button', {hasText: 'Favoris'}).click();
+            let items = [];
+            for (let k = 0; k < 40; k++) { items = (await page.evaluate(id => window.LCNDA_APP.api('atelier_project', {id}), pid)).items || []; if (items.filter(i => Number(i.starred)).length === 3) break; await sleep(300); }
+            assert.equal(items.filter(i => Number(i.starred)).length, 3, '⭐ sur les 3 cochés');
         });
 
         await step('pas d’erreur JavaScript', () => assert.deepEqual(B.errs, []));

@@ -1740,8 +1740,7 @@
         if (!CHx.subscribed && CHx()?.onChange) { CHx.subscribed = true; CHx().onChange(() => { syncSnap(); paintPageTake(); }); }
         if (back?.target) {
             btn.hidden = true; // un seul bouton pour prendre : celui du bandeau
-            const again = (back.snap.picked || []).filter(([, x]) => x.kind === 'row' && x.data?.list === L.d.id).map(([, x]) => x._raw || x);
-            if (again.length) queueMicrotask(() => CHx()?.pick?.(again)); // après la barre de la liste (dessinée juste après)
+            pt.again = new Set((back.snap.picked || []).filter(([, x]) => x.kind === 'row' && x.data?.list === L.d.id).map(([k]) => k)); // recochées dès que les lignes sont dessinées
             const dn = destName({ctx: back.ctx, target: back.target}).replace(/[«»"]/g, '').replace(/\s+/g, ' ').trim();
             const bar = pt.bar = document.createElement('div'); bar.className = 'cx-ltake'; bar.setAttribute('role', 'region'); bar.setAttribute('aria-label', T('Prendre des lignes'));
             bar.innerHTML = `<div class="cx-ltake-t"><b>📥 ${esc(T('Tu choisis des lignes pour {d}', {d: dn}))}</b><span>${esc(T('Coche les lignes, ou prends tout. Chaque ligne garde la liste comme source.'))}</span></div>
@@ -1809,7 +1808,7 @@
     function syncSnap() {
         const pt = pageTake; if (!pt?.back || !pt.page?.isConnected) return;
         const rows = CHx()?.pickedRows?.(); if (!rows) return; // « Tout cocher (N) » : pris tel quel par « Prendre les N cochées »
-        const s = pt.L.state?.() || {}, others = (pt.back.snap.picked || []).filter(([, x]) => !(x.kind === 'row' && x.data?.list === pt.L.d.id));
+        const s = pt.L.state?.() || {}, others = (pt.back.snap.picked || []).filter(([k, x]) => !(x.kind === 'row' && x.data?.list === pt.L.d.id) || pt.again?.has(k)); // pas encore affichées : gardées
         pt.back.snap.picked = [...others, ...rows.map(r => { const it = r && r.kind === 'row' ? r : {...ldRowItem(pt.L.d, s, r), _raw: r}; return [selKeyOf(pt.L, r), it]; })];
     }
     function paintPageTake() {
@@ -1821,7 +1820,14 @@
         }
     }
     /** la page a dessiné ses lignes (les cases sont celles de la liste) : le bandeau se met à jour */
-    function listRowsPainted() { paintPageTake(); }
+    function listRowsPainted() {
+        const pt = pageTake;
+        if (pt?.again?.size && pt.page?.isConnected) { // ← le bandeau « Tu choisis des lignes pour… » : les lignes déjà cochées dans la fenêtre le restent
+            const rows = (pt.L.rows?.() || []).filter(r => pt.again.has(selKeyOf(pt.L, r)));
+            if (rows.length) { rows.forEach(r => pt.again.delete(selKeyOf(pt.L, r))); CHx()?.pick?.(rows); }
+        }
+        paintPageTake();
+    }
     /** des lignes → un ensemble sourcé, qui garde sa demande (pour la relancer) ; rows : seulement celles-ci (cochées, les 20 premières…) */
     async function listSet(L, only = null, part = '') {
         let rows; if (only) rows = only; else { try { rows = await L.allRows(); } catch (e) { toast(e.message, 'error'); return null; } }

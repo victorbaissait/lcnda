@@ -1,7 +1,7 @@
 {
  "title": "Grands mouvements de population",
  "version": 1,
- "count": 32,
+ "count": 33,
  "licence": "CC BY-SA 4.0",
  "licence_url": "https://creativecommons.org/licenses/by-sa/4.0/deed.fr",
  "credit": "Liste rédigée pour LCNDA : dates et faits historiques (non protégés), un court texte écrit pour l’app ; chaque mouvement renvoie à l’article de Wikipédia en français qui le décrit.",
@@ -773,6 +773,31 @@
    "desc": "Après la révocation de l’édit de Nantes, environ 200 000 protestants quittent la France.",
    "src": "Wikipédia : Huguenot",
    "url": "https://fr.wikipedia.org/w/index.php?search=Huguenot&go=Lire"
+  },
+  {
+   "id": "scieurs-long",
+   "title": "Scieurs de long du Livradois et du Forez",
+   "from": 1700,
+   "to": 1914,
+   "de": {
+    "dep": [
+     "63",
+     "42",
+     "43"
+    ]
+   },
+   "vers": {
+    "dep": [
+     "21",
+     "71",
+     "58",
+     "89"
+    ]
+   },
+   "desc": "Migration saisonnière : quand la terre gelait, les hommes du Livradois et du Forez partaient scier les troncs à la main dans les forêts, notamment en Bourgogne, et rentraient au village pour les travaux des champs.",
+   "saison": true,
+   "src": "Wikipédia : Scieur de long",
+   "url": "https://fr.wikipedia.org/wiki/Scieur_de_long"
   }
  ]
 }

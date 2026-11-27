@@ -275,7 +275,7 @@
         host.innerHTML = `${ext.miniMap ? ext.miniMap(pts, [], {height: 320, emptyText: T('Rien à placer sur la carte (aucun lieu connu).')}) : `<p>${esc(T('La carte n’est pas chargée.'))}</p>`}
             ${none.length ? `<p class="pn-mini pn-apart">${esc(T('Sans lieu ({n}) : {l}', {n: none.length, l: none.map(x => x.title).slice(0, 8).join(' · ')}))}</p>` : ''}`;
     }
-    /** le pied : ce qui est coché (☑ Une partie…) ou trouvé (🔎) → agir dessus */
+    /** le pied : ce qui est coché (☑ Choisir des lignes) ou trouvé (🔎) → agir dessus */
     /** le pied : la barre de sélection commune (app-selection.js) — Tout cocher, Maj+clic, ✕ Décocher ;
      *  rien de coché pendant une recherche : les actions portent sur « Les N trouvés » (dit dans la barre) */
     let pnSel = null;
@@ -299,7 +299,7 @@
     const selIds = () => { const b = bOf(st.sel?.id); if (!b) return []; const vis = C().findIn(itemsOf(b.id), st.find), p = [...st.picked].filter(id => vis.some(x => Number(x.id) === id)); return p.length ? p : st.find ? vis.map(x => Number(x.id)) : []; };
     const selItems = () => { const ids = new Set(selIds()); return itemsOf(st.sel?.id).filter(x => ids.has(Number(x.id))); };
 
-    /* ─── un dossier ouvert : son contenu, « ☑ Une partie… » avec cases à trois états ─── */
+    /* ─── un dossier ouvert : son contenu, « ☑ Choisir des lignes » avec cases à trois états ─── */
     function paintFolder(f) {
         const R = root(), ids = fTree(f.id), bs = st.baskets.filter(b => ids.includes(Number(b.folder_id)) && !b.archived);
         const row = (x, d) => `<li class="pn-fr" style="--d:${d}">${st.pick ? `<input type="checkbox" data-pn-fpick="f${x.id}" aria-label="${esc(T('Cocher'))}">` : ''}<span aria-hidden="true">📁</span><b>${esc(x.name)}</b><span class="pn-mini">${esc(T('{b} paniers · {n} éléments', {b: x.baskets, n: x.total}))}</span></li>`;

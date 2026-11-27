@@ -555,6 +555,12 @@ function lo_life(PDO $pdo, int $id): array
     }
     usort($ev, static fn($a, $b) => strcmp($a['d'], $b['d']));
     $out['events'] = array_slice($ev, 0, 40);
+    // les métiers notés (fiche, événements « Profession ») : pour les textes du lot O5 et les mines
+    $jobs = []; $o = dfa_occupations($pdo)[$id] ?? ''; if ($o !== '') { $jobs[] = $o; }
+    $q = $pdo->prepare("SELECT COALESCE(NULLIF(TRIM(e.title),''), NULLIF(TRIM(e.description),''), '') AS v FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=? AND t.gedcom_tag='OCCU' LIMIT 12");
+    $q->execute([$id]); foreach ($q as $r) { $v = mb_substr(trim((string) $r['v']), 0, 60); if ($v !== '' && !in_array($v, $jobs, true)) { $jobs[] = $v; } }
+    $mil = (int) $pdo->query("SELECT COUNT(*) FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=" . $id . " AND (t.gedcom_tag IN ('_MILT','_MILI','MILI','_MDCL') OR LOWER(t.label) LIKE '%milit%' OR LOWER(t.label) LIKE '%régiment%')")->fetchColumn();
+    $out['jobs'] = $jobs; $out['military'] = $mil > 0 || (bool) array_filter($jobs, static fn($j) => (bool) preg_match('/soldat|militaire|grenadier|fusilier|dragon|cuirassier|artilleur|sapeur|caporal|sergent|lieutenant|capitaine|officier|chasseur à pied/iu', $j));
     // 🎂 dans la famille, à sa naissance : père, mère, grands-pères, grands-mères (seulement les fiches qu'on peut nommer)
     if ($p['b']) {
         foreach ([[0, 'father'], [1, 'mother']] as [$k, $role]) {

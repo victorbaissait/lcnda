@@ -1405,7 +1405,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-controle.js?v=15" defer></script>
 <script src="assets/js/heritage-commune-histoire.js?v=2" defer></script>
 <script src="assets/js/heritage-records.js?v=15" defer></script>
-<script src="assets/js/heritage-research.js?v=48" defer></script>
+<script src="assets/js/heritage-research.js?v=49" defer></script>
 <script src="assets/js/heritage-av.js?v=23" defer></script>
 <script src="assets/js/heritage-recueil-table.js?v=11" defer></script>
 <script src="assets/js/heritage-recueil-sens.js?v=2" defer></script>
@@ -1741,7 +1741,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-lot-o-core.js?v=2" defer></script>
 <script src="assets/js/app-lot-o-arbre.js?v=2" defer></script>
 <script src="assets/js/app-lot-o-vie.js?v=1" defer></script>
-<script src="assets/js/app-lot-o-poste.js?v=1" defer></script>
+<script src="assets/js/app-lot-o-poste.js?v=2" defer></script>
+<script src="assets/js/app-lot-o-packs.js?v=1" defer></script>
 <script src="assets/js/heritage-lot10-terre-gens.js?v=6" defer></script>
 <script src="assets/js/heritage-lot8-soldats-noms.js?v=2" defer></script>
 <script src="assets/js/heritage-lot9-sons-enfance.js?v=4" defer></script>
@@ -1752,7 +1753,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-pistes-auto.js?v=5" defer></script>
 <script src="assets/js/heritage-branches-isolees.js?v=1" defer></script>
 <script src="assets/js/heritage-parents-celebres.js?v=2" defer></script>
-<script src="assets/js/heritage-connexions.js?v=21" defer></script>
+<script src="assets/js/heritage-connexions.js?v=22" defer></script>
 <script src="assets/js/app-paniers-core.js?v=4" defer></script>
 <script src="assets/js/app-paniers.js?v=10" defer></script><!-- 🧺 l’onglet Paniers (caché au départ ; lib/paniers.php) -->
 <script src="assets/js/app-inserer.js?v=7" defer></script><!-- 📎 Insérer une info à l’endroit du curseur, dans tout texte libre (« / », 📎, ⌥⌘K) -->

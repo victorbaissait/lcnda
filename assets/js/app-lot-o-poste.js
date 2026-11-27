@@ -27,7 +27,7 @@
         if (buf[0] !== 0x1f || buf[1] !== 0x8b) return JSON.parse(new TextDecoder().decode(buf));
         return JSON.parse(await new Response(new Blob([buf]).stream().pipeThrough(new DecompressionStream('gzip'))).text());
     }
-    const load = () => (pack ||= readGz('assets/data/lo-poste.json.gz?v=1').catch(e => { pack = null; throw e; }));
+    const load = () => (pack ||= readGz('assets/data/lo-poste.json.gz?v=2').catch(e => { pack = null; throw e; }));
     const TIMES = new Map();
     const timesOf = async y => { const P = await load(); if (!TIMES.has(y)) TIMES.set(y, C().posteTimes(P.roads[String(y)] || [], PARIS)); return TIMES.get(y); };
     /** travel(lat, lon, année) → {year, relay, km, minutes} ou null (avant 1632, après 1850, sans position) */

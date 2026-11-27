@@ -18,7 +18,7 @@ $P = [
     [12, 'Jeanne', 'MAZAUD', 'female', 'deceased', ''],
     [13, 'Paul', 'MAZAUD', 'male', 'deceased', ''],
     [14, 'Antoine', 'LACOMBE', 'male', 'deceased', ''],
-    [15, 'Honoré', 'DURAND', 'male', 'deceased', ''],
+    [15, 'Honoré', 'DURAND', 'male', 'deceased', 'Colporteur'],
     [20, 'Rose', 'LACOMBE', 'female', 'deceased', ''],
     [30, 'Camille', 'MAZAUD', 'female', 'living', ''],
     [31, 'Hugo', 'VIVANT', 'male', 'living', ''],

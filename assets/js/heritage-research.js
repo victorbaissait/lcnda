@@ -975,7 +975,8 @@
             const run = a => async (ids, extra = {}) => { await act(a, ids.map(Number), {folder_id: inFolder ? v.node : 0, ...extra}); await after(a); };
             let ready = false;
             const bar = SB({host: tb, rowSelector: 'tr[data-at-item]', idOf: r => r.dataset.atItem, what: [i18n('élément coché'), i18n('éléments cochés')], place: ws.querySelector('[data-at-sortbar]') || tb.closest('table'),
-                onChange: ids => { if (!ready) return; const n = ids.map(Number); if (n.length === v.sel.length && n.every(x => v.sel.includes(x))) return; v.sel = n; renderProject(S().workspaceToken, true); },
+                // une case : le choix suit, seul le panneau de droite est redessiné (la barre garde Maj+clic pour une suite)
+                onChange: ids => { if (!ready) return; const n = ids.map(Number); if (n.length === v.sel.length && n.every(x => v.sel.includes(x))) return; v.sel = n; const dt = ws.querySelector('.h-at-detail'); if (dt) { dt.innerHTML = detailView(); A().bindTableLinks?.(); } },
                 actions: trash ? [
                     {id: 'restore', icon: '↩', label: i18n('Restaurer'), edit: true, run: ids => run('restore')(ids)},
                     {id: 'delete', icon: '🗑', label: i18n('Supprimer définitivement'), edit: true, danger: true, run: async ids => { if (!await A().confirmBox(i18n('Supprimer définitivement {n} ?', {n: plural(ids.length, 'élément', 'éléments')}), {title: 'Supprimer définitivement', okLabel: 'Supprimer définitivement'})) return; await run('delete')(ids); }},
