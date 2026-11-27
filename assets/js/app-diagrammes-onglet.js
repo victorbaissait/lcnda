@@ -558,7 +558,7 @@
         if (!ro) {
             if (ext.sendTo) items.push({icon: '📤', label: T('Envoyer vers…'), help: T('Studio, Présentation'), run: run(async () => ext.sendTo('image', {blob: await pngBlob(d)}, {anchor: btn, title: d.name}))});
             items.push({icon: '📄', label: T('Poser dans…'), help: T('fiche, enquête, tableau'), run: () => placeIn(btn, d)});
-            const CX = ext.connexions; if (CX?.take) items.push({icon: '🧺', label: T('Mettre dans le panier'), run: run(async () => CX.take([await basketItem(d)]))}, {icon: '🧺', label: T('Mettre dans un panier précis…'), help: T('choisir le panier, ou en créer un'), run: run(async () => CX.take([await basketItem(d)], {ask: true}))});
+            const CX = ext.connexions; if (CX?.take) items.push({icon: '🧺', label: T('Mettre dans le panier'), run: run(async () => CX.take([await basketItem(d)]))});
             if (CX?.putInto) items.push({icon: '📎', label: T('Joindre à une fiche ou une enquête'), run: run(async () => CX.putInto([await basketItem(d)], {anchor: btn}))});
             items.push({icon: '🗑', label: T('Mettre à la corbeille'), danger: true, run: () => trash([d.id])});
         }

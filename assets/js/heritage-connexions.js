@@ -887,6 +887,9 @@
     DT.push({id: 'basket', icon: '🧺', label: 'Le panier', group: 'Ranger', enabled: () => enabled(), explain: () => T('mis de côté, pour plus tard'),
         choose: async (acc, anchor) => { if ((await ensureTree()).length < 2 && settings().ask !== 'always') return {}; const c = await askBasket(anchor, {n: acc?.length || 0}); return c ? {basketId: c.id} : null; }, // plusieurs paniers : lequel ?
         receive: async (items, ctx) => { const r = await take(items, {quiet: true, basketId: ctx?.basketId || null}); return {message: T('🧺 {n} dans « {b} »', {n: plural(r?.ids?.length || 0, T('chose'), T('choses')), b: bName(r?.basket_id)}), undo: async () => { setCountFrom(await post('basket_remove', {ids: r?.ids || []})); }}; }});
+    /* 🧺 « Un panier précis… » : on choisit toujours le panier (ou on en crée un), même s'il n'y en a qu'un */
+    { const b = DT.find(t => t.id === 'basket'); if (b) DT.push({...b, id: 'basket_pick', label: 'Un panier précis…', explain: () => T('choisir le panier, ou en créer un'),
+        choose: async (acc, anchor) => { const c = await askBasket(anchor, {n: acc?.length || 0}); return c ? {basketId: c.id} : null; }}); }
     /* les outils de création d'« 📤 Envoyer vers… » : ce que le panier leur donne (images, texte, tableau) */
     const viaSend = (key, icon, label, explain, kindOf) => DT.push({id: 'send_' + key, icon, label, group: 'Créer',
         enabled: () => !!(ext.sendTargets || []).find(t => t.key === key)?.ready?.(),
@@ -2097,6 +2100,8 @@
             undoToast(T('📮 Réponse rangée dans la piste « {p} »', {p: l.b_label || ''}), {undo: async () => { await post('inv_receive_undo', r); }});
         }}});
     }
-    ext.connexions = {redrawSettings: () => drawSettings(), courrierReplied, leadTarget, pisteDest, folderDest, pisteAttach, linksHtml, enabled, settings, take, putInto, deliver, openTake, openBasket, addMenuItems, emptyHere, chooseInvestigation, listBar, listRowsPainted, itemText, explode, parseAsk, parseDates, screenOrigin, openOrigin, ctxItems,
+    /** le prochain « 🧺 » (dans les 6 s) demande « Dans quel panier ? » — pour « Mettre dans un panier précis… » des menus */
+    const askNext = () => { forceAsk = Date.now() + 4500; forceAt = null; };
+    ext.connexions = {askNext, redrawSettings: () => drawSettings(), courrierReplied, leadTarget, pisteDest, folderDest, pisteAttach, linksHtml, enabled, settings, take, putInto, deliver, openTake, openBasket, addMenuItems, emptyHere, chooseInvestigation, listBar, listRowsPainted, itemText, explode, parseAsk, parseDates, screenOrigin, openOrigin, ctxItems,
         openBasketView, chooseBasket, kit: {basketSelect, pickItem, ldRowItem, ldAll, ldSet, ldCrit, listsAll, itemLine, icon, cleanIt, pickKey, viewOf, srcLink: (u, l) => srcLink(u, l), remember: items => remember(items)}, count: () => count, refresh: () => { basket = null; return api('cx_count', {basket_id: curBasket()}).then(setCountFrom); }, KIND};
 })();

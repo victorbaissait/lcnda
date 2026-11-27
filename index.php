@@ -1309,7 +1309,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-tableau-de-bord.js?v=29" defer></script>
 <script src="assets/js/app-chrono-recherche.js?v=1" defer></script>
 <script src="assets/js/app-harmony.js?v=10" defer></script>
-<script src="assets/js/app-ui.js?v=45" defer></script>
+<script src="assets/js/app-ui.js?v=46" defer></script>
 <script src="assets/js/app-tableur-engine.js?v=11" defer></script>
 <script src="assets/js/app-aide-lecture.js?v=5" defer></script>
 <!-- aide-langues : une langue = un fichier (assets/js/aide-langues/README-format.md) -->
@@ -1487,7 +1487,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-periodicals.js?v=21" defer></script>
 <script src="assets/js/heritage-diagrams-render.js?v=12" defer></script>
 <script src="assets/js/heritage-diagrams.js?v=42" defer></script>
-<script src="assets/js/app-diagrammes-onglet.js?v=4" defer></script><!-- 📈 l’onglet Diagrammes : tout s’ouvre dedans (galerie, éditeur, dossiers, ⭐, 🗑 corbeille) -->
+<script src="assets/js/app-diagrammes-onglet.js?v=5" defer></script><!-- 📈 l’onglet Diagrammes : tout s’ouvre dedans (galerie, éditeur, dossiers, ⭐, 🗑 corbeille) -->
 <script src="assets/js/heritage-diagram-options.js?v=6" defer></script>
 <script src="assets/js/heritage-diagram-genea.js?v=9" defer></script>
 <script src="assets/js/heritage-vector.js?v=45" defer></script>
@@ -1754,7 +1754,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-pistes-auto.js?v=5" defer></script>
 <script src="assets/js/heritage-branches-isolees.js?v=1" defer></script>
 <script src="assets/js/heritage-parents-celebres.js?v=2" defer></script>
-<script src="assets/js/heritage-connexions.js?v=22" defer></script>
+<script src="assets/js/heritage-connexions.js?v=24" defer></script>
 <script src="assets/js/app-paniers-core.js?v=4" defer></script>
 <script src="assets/js/app-paniers.js?v=10" defer></script><!-- 🧺 l’onglet Paniers (caché au départ ; lib/paniers.php) -->
 <script src="assets/js/app-inserer.js?v=8" defer></script><!-- 📎 Insérer une info à l’endroit du curseur, dans tout texte libre (« / », 📎, ⌥⌘K) -->

@@ -253,6 +253,11 @@
         if (anchor && !(anchor instanceof Element)) { at = anchor; anchor = null; }
         if (!at && UI._menuPoint && Date.now() - UI._menuPoint.t < 800) { at = UI._menuPoint; if (UI._menuPoint.extras?.length) items = [...items, '-', ...UI._menuPoint.extras]; } // ⋯ ouvert par un clic droit sur sa ligne (+ 🧺 « Prendre « … » », heritage-connexions.js)
         UI._menuPoint = null;
+        // 🧺 partout : à côté de « Mettre dans le panier », « Mettre dans un panier précis… » (choisir le panier, ou en créer un)
+        try { const CX = window.LCNDA_EXT?.connexions; if (CX?.askNext && Array.isArray(items)) {
+            const isTake = it => it && typeof it === 'object' && typeof it.run === 'function' && !it.disabled && /🧺/.test(`${it.icon || ''}${it.label || ''}`) && /panier/i.test(String(it.label || '')) && /mettre|prendre|ajouter|garder/i.test(String(it.label || '')) && !/précis|vider|ouvrir|retirer|enlever|voir/i.test(String(it.label || ''));
+            if (!items.some(it => it && /précis/i.test(String(it.label || '')))) items = items.flatMap(it => isTake(it) ? [it, {icon: '🧺', label: i18n('Mettre dans un panier précis…'), help: i18n('choisir le panier, ou en créer un'), run: (...a) => { CX.askNext(); return it.run(...a); }}] : [it]);
+        } } catch (_) {}
         if (anchor && !at && openPop && openPop.el._uiFor === anchor) { closePop(); return null; }
         let ghost = null;
         if (at) { ghost = h('span', 'ui-menu-ghost'); ghost.style.cssText = `position:fixed;left:${Math.round(at.x)}px;top:${Math.round(at.y) - 6}px;width:0;height:0;pointer-events:none`;
