@@ -88,13 +88,26 @@ jq '.settings.maxzoom = 14 | .settings.name = "LCNDA OSM" | .layers |= with_entr
   "$tm/resources/config-openmaptiles.json" > work/config.json
 rm -f "$out/osm-$region.mbtiles"
 # les extraits d'OpenStreetMap France n'ont pas de cadre dans leur en-tête (« Can't read shapefiles unless a bounding box is
-# provided ») : on le calcule sur les données avec osmium et on le donne à tilemaker
-cadre=()
+# provided ») et gardent des chemins entiers jusqu'au Maroc ou à la Grèce, avec des points absents (« Could not find node ») :
+# on les recoupe avec osmium au cadre de la région (table ci-dessous, à 0,1° près) ; le fichier recoupé a son cadre.
+declare -A CADRE=([alsace]=6.8,47.4,8.3,49.1 [aquitaine]=-1.8,42.7,1.5,45.8 [auvergne]=1.9,44.6,4.55,46.85
+  [basse-normandie]=-2.0,48.1,1.0,49.8 [bourgogne]=2.8,46.1,5.55,48.45 [bretagne]=-5.2,47.2,-1.0,48.95 [centre]=0.0,46.3,3.2,48.95
+  [champagne-ardenne]=3.35,47.55,5.95,50.2 [corse]=8.5,41.3,9.6,43.05 [franche-comte]=5.2,46.2,7.2,48.05
+  [haute-normandie]=0.05,48.65,1.85,50.1 [ile-de-france]=1.4,48.1,3.6,49.25 [languedoc-roussillon]=1.65,42.3,4.85,45.0
+  [limousin]=0.6,44.9,2.65,46.45 [lorraine]=4.85,47.8,7.7,49.65 [midi-pyrenees]=-0.35,42.55,3.5,45.05
+  [nord-pas-de-calais]=1.5,50.0,4.25,51.1 [pays-de-la-loire]=-2.65,46.25,0.95,48.6 [picardie]=1.35,48.8,4.3,50.4
+  [poitou-charentes]=-1.6,45.05,1.25,47.2 [provence-alpes-cote-d-azur]=4.2,42.95,7.75,45.15 [rhone-alpes]=3.65,44.1,7.2,46.55
+  [guadeloupe]=-61.9,15.8,-60.95,16.55 [guyane]=-54.65,2.1,-51.6,5.8 [martinique]=-61.25,14.35,-60.8,14.9
+  [mayotte]=44.95,-13.05,45.35,-12.6 [reunion]=55.2,-21.4,55.85,-20.85)
+extra=()
 if ! osmium fileinfo -g header.boxes "work/$region.osm.pbf" 2>/dev/null | grep -q '('; then
-  bb=$(osmium fileinfo -e -g data.bbox "work/$region.osm.pbf" | tr -d '() ')
-  echo "  cadre calculé : $bb"; [ -n "$bb" ] && cadre=(--bbox "$bb")
+  [ -n "${CADRE[$region]:-}" ] || { echo "pas de cadre dans l'extrait ni dans la table : $region"; exit 4; }
+  echo "  extrait sans cadre : recoupé à ${CADRE[$region]}"
+  osmium extract --overwrite -b "${CADRE[$region]}" --strategy complete_ways -o "work/$region.cut.osm.pbf" "work/$region.osm.pbf"
+  mv "work/$region.cut.osm.pbf" "work/$region.osm.pbf"
+  extra=(--skip-integrity --bbox "${CADRE[$region]}")   # un point hors du cadre manque encore parfois à une relation : on le saute
 fi
-tilemaker --input "work/$region.osm.pbf" --output "$out/osm-$region.mbtiles" --config work/config.json --process "$tm/resources/process-openmaptiles.lua" "${cadre[@]}"
+tilemaker --input "work/$region.osm.pbf" --output "$out/osm-$region.mbtiles" --config work/config.json --process "$tm/resources/process-openmaptiles.lua" "${extra[@]}"
 today=$(date -u +%F)
 sqlite3 "$out/osm-$region.mbtiles" "INSERT OR REPLACE INTO metadata(name,value) VALUES('lcnda_built','$today'),('lcnda_label','$(printf %s "$label" | sed "s/'/''/g")'),('attribution','© les contributeurs d’OpenStreetMap (ODbL) · schéma OpenMapTiles (CC BY 4.0)');"
 sqlite3 "$out/osm-$region.mbtiles" "SELECT name, value FROM metadata WHERE name IN ('format','bounds','minzoom','maxzoom','lcnda_built','lcnda_label')"
