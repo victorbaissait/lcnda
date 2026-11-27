@@ -174,13 +174,13 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         });
 
         await t('fiche : Pierre MAZAUD → « Le 63ᵉ RI, caserné à Limoges, a combattu… », l’année de sa mort, le CICR ; Marie LACOMBE à Chambéry : Savoie 1860', async () => {
-            await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 1; A.setModule('personnes'); });
+            await p.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; /* ce bloc essayé en entier (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = 1; A.setModule('personnes'); });
             await p.waitForSelector('[data-l8b-person="1"] .l8b-row', {timeout: 30000});
             const txt = await p.textContent('[data-l8b-person="1"]');
             assert.match(txt, /Le 63ᵉ RI, caserné à Limoges/); assert.match(txt, /Wikipédia, CC BY-SA 4\.0/);
             assert.match(txt, /L’année de sa mort \(10 mai 1916\), son régiment, le 63ᵉ RI, combattait là : [^.]*Verdun/);
             assert.match(txt, /CICR/); assert.match(txt, /journal de marche/);
-            await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 2; A.setModule('personnes'); });
+            await p.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; /* ce bloc essayé en entier (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = 2; A.setModule('personnes'); });
             await p.waitForSelector('[data-l8b-person="2"] .l8b-row', {timeout: 30000});
             assert.match(await p.textContent('[data-l8b-person="2"]'), /En 1860, la Savoie et le comté de Nice deviennent français \(Chambéry\)/);
         });
@@ -193,7 +193,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         });
 
         await t('🔤 « ＋ Ajouter aux variantes » écrit la variante, « ↶ Annuler » la retire', async () => {
-            await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 6; A.setModule('personnes'); });
+            await p.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; /* ce bloc essayé en entier (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = 6; A.setModule('personnes'); });
             await p.waitForSelector('[data-l8b-person="6"] [data-l8b-addvar]', {timeout: 30000, state: 'attached'});
             await p.evaluate(() => { document.querySelector('[data-l8b-person="6"] [data-l8b-part="variantes"] details')?.setAttribute('open', ''); document.querySelector('[data-l8b-person="6"] [data-l8b-addvar]').click(); });
             await sleep(1200);

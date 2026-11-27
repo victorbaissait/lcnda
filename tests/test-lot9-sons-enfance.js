@@ -175,7 +175,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         });
 
         await t('fiche de Jean MAZAUD (1890) : 🔊 disque de 1910 (lecteur + ↗ Internet Archive), 🎼, 📚 Le Tour de la France, 🧸, 🍬, 🚗, 🍰', async () => {
-            await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 1; A.setModule('personnes'); });
+            await p.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; /* ce bloc essayé en entier (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = 1; A.setModule('personnes'); });
             await p.waitForSelector('[data-l9a-person="1"] .l9a-row', {timeout: 30000});
             const txt = await p.textContent('[data-l9a-person="1"]');
             assert.match(txt, /au phonographe l’année de ses 20 ans \(1910\)/);
@@ -203,7 +203,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             const txt = await p.evaluate(async () => { const h = document.createElement('div'); document.body.appendChild(h); await window.LCNDA_EXT.sonsEnfance.personInto(h, 2); const x = h.textContent; h.remove(); return x; });
             const M = raw('marques').rows, cars = H.carsAt30(M, life({birth: 1925, death: 2001}));
             if (cars.length) assert.match(txt, /ses 30 ans/); assert.ok(!/14-18/.test(txt), 'une femme : pas de ligne de soldat');
-            await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 3; A.setModule('personnes'); });
+            await p.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; /* ce bloc essayé en entier (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = 3; A.setModule('personnes'); });
             await p.waitForSelector('[data-l9a-person="3"]', {state: 'attached', timeout: 20000}); await sleep(2500);
             assert.strictEqual(await p.evaluate(() => document.querySelector('[data-l9a-person="3"]').closest('section.card').hidden), true);
         });

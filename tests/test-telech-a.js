@@ -178,13 +178,13 @@ echo json_encode(['ok' => 1]);`, env);
             await p.evaluate(() => document.getElementById('ta-test').remove());
         });
         await t('fiche de Jean MAZAUD (1840–1915, Honfleur) : le rideau « carte de 1850 », le paysage ; Paul DURAND (vivant) : rien, rien ne part', async () => {
-            await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 1; A.setModule('personnes'); });
+            await p.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; /* ce bloc essayé en entier (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = 1; A.setModule('personnes'); });
             await p.waitForSelector('[data-ta-person="1"] .ta-row', {timeout: 30000});
             const txt = await p.textContent('[data-ta-person="1"]');
             assert.match(txt, /Honfleur comme il l’a connu : la carte d’État-major/); assert.match(txt, /Autour de Honfleur \(1 km\)/);
             assert.strictEqual(await p.evaluate(() => document.querySelector('[data-ta-person="1"]').closest('section.card').hidden), false);
             const n0 = calls().length, t0 = tiles.length;
-            await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 3; A.setModule('personnes'); });
+            await p.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; /* ce bloc essayé en entier (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = 3; A.setModule('personnes'); });
             await p.waitForSelector('[data-ta-person="3"]', {state: 'attached', timeout: 20000}); await sleep(2000);
             assert.strictEqual(await p.evaluate(() => document.querySelector('[data-ta-person="3"]').closest('section.card').hidden), true);
             assert.strictEqual(calls().length, n0); assert.strictEqual(tiles.length, t0);

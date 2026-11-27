@@ -155,7 +155,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
 
         await t('fiche de Jean MAZAUD (1840–1915, Honfleur) : 🖼️ peint de son vivant, 📷 photo de ses 20 ans, 🌳 bois de 1850 ; pas d’avion (mort en 1915)', async () => {
             const cl = await post('l10v_cache_clear', {}); assert.strictEqual(cl.ok, true); // on repart sans réponse gardée : 🏔 et 🏠 attendent un clic
-            await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 1; A.setModule('personnes'); });
+            await p.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; /* ce bloc essayé en entier (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = 1; A.setModule('personnes'); });
             await p.waitForSelector('[data-l10v-person="1"] .l10v-row', {timeout: 30000});
             const txt = await p.textContent('[data-l10v-person="1"]');
             assert.match(txt, /Chez lui : Honfleur/); assert.match(txt, /Honfleur peint de son vivant : .+ — il avait \d+ ans/);
@@ -181,7 +181,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.strictEqual(await p.getAttribute('[data-l10v-person="1"] [data-l10v-tiles="lidar"]', 'data-z'), '17');
         });
         await t('Marie LACOMBE (1925–2001) : ✈️ vu d’avion vers 1950, les tuiles s’affichent à l’ouverture (1950-1965 | aujourd’hui) ; pas de 🌳', async () => {
-            await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 2; A.setModule('personnes'); });
+            await p.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; /* ce bloc essayé en entier (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = 2; A.setModule('personnes'); });
             await p.waitForSelector('[data-l10v-person="2"] [data-l10v-part="avion"]', {timeout: 30000});
             const txt = await p.textContent('[data-l10v-person="2"]');
             assert.match(txt, /Honfleur vu d’avion vers 1950, comme elle l’a connu/); assert.ok(!/de bois à moins/.test(txt));
@@ -192,7 +192,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         });
         await t('Paul DURAND (vivant) : pas de bloc, rien ne part sur Internet (ni demande, ni tuile)', async () => {
             const n0 = calls().length, t0 = tiles.length;
-            await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 3; A.setModule('personnes'); });
+            await p.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; /* ce bloc essayé en entier (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = 3; A.setModule('personnes'); });
             await p.waitForSelector('[data-l10v-person="3"]', {state: 'attached', timeout: 20000}); await sleep(2500);
             assert.strictEqual(await p.evaluate(() => document.querySelector('[data-l10v-person="3"]').closest('section.card').hidden), true);
             assert.strictEqual(calls().length, n0); assert.strictEqual(tiles.length, t0);

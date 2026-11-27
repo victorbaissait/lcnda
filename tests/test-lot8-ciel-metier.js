@@ -196,7 +196,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         await p.evaluate(() => { const A = window.LCNDA_APP, B = A.defaultPersonBlocks; for (const [id, l] of [['l8a_ciel', '🌅 Ciel et mer de sa vie'], ['l8a_metier', '🛠️ Son métier autrefois']]) if (!B.some(b => b[0] === id)) B.push([id, l]); });
 
         await t('fiche : « 🌅 Ciel et mer » (Laki à 13 ans, marée du jour de sa naissance à Brest) et « 🛠️ Son métier » (Le Play, ↗ source)', async () => {
-            await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 1; A.setModule('personnes'); });
+            await p.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; /* ce bloc essayé en entier (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = 1; A.setModule('personnes'); });
             await p.waitForSelector('[data-l8a-person="1"][data-l8a-kind="ciel"] .l8a-row', {timeout: 30000});
             const sky = await p.textContent('[data-l8a-person="1"][data-l8a-kind="ciel"]');
             assert.match(sky, /Pierre avait 13 ans l’été 1783 : le volcan Laki/);
@@ -210,10 +210,10 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.ok(await p.$('[data-l8a-kind="metier"] a[href*="archive.org/details/"]'));
         });
         await t('fiche sans rien à dire : les blocs restent cachés ; un allumettier : la maladie, sans alarme', async () => {
-            await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 2; A.setModule('personnes'); });
+            await p.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; /* ce bloc essayé en entier (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = 2; A.setModule('personnes'); });
             await p.waitForSelector('[data-l8a-person="2"]', {state: 'attached', timeout: 20000}); await sleep(1500);
             assert.ok(await p.evaluate(() => [...document.querySelectorAll('[data-l8a-person="2"]')].every(h => h.closest('section.card').hidden)));
-            await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 3; A.setModule('personnes'); });
+            await p.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; /* ce bloc essayé en entier (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = 3; A.setModule('personnes'); });
             await p.waitForSelector('[data-l8a-person="3"][data-l8a-kind="metier"] .l8a-row', {timeout: 30000});
             const txt = await p.textContent('[data-l8a-person="3"][data-l8a-kind="metier"]');
             assert.match(txt, /Dans son métier \(allumettier\), les ouvriers respiraient les vapeurs du phosphore blanc/);

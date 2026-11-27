@@ -190,7 +190,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         });
 
         await t('fiche de Jean MAZAUD : 🔔 son nom sur la cloche de 1880, 🪧 la plaque, 🌿 un botaniste de son vivant, 🏥 Tulle ; ↗ source partout', async () => {
-            await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 1; A.setModule('personnes'); });
+            await p.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; /* ce bloc essayé en entier (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = 1; A.setModule('personnes'); });
             await p.waitForSelector('[data-l10o-person="1"] .l10o-row', {timeout: 30000});
             await p.waitForFunction(() => /botaniste/.test(document.querySelector('[data-l10o-person="1"]')?.textContent || ''), null, {timeout: 20000});
             const txt = await p.textContent('[data-l10o-person="1"]');
@@ -208,13 +208,13 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             const [n, , txt] = await into('personInto', 2);
             assert.ok(n >= 3, txt); assert.match(txt, /Un conte recueilli à Plouaret/); assert.match(txt, /quand elle avait 20 ans \(1860\)/); assert.match(txt, /Les pèlerinages de sa région/);
             assert.ok(!/cloche|plaque/.test(txt));
-            await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 3; A.setModule('personnes'); });
+            await p.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; /* ce bloc essayé en entier (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = 3; A.setModule('personnes'); });
             await p.waitForSelector('[data-l10o-person="3"]', {state: 'attached', timeout: 20000}); await sleep(2500);
             assert.strictEqual(await p.evaluate(() => document.querySelector('[data-l10o-person="3"]').closest('section.card').hidden), true);
         });
         await t('Luc MAZAUD (vivant) : rien ne part sur Internet depuis sa fiche', async () => {
             const n0 = calls().length;
-            await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 4; A.setModule('personnes'); });
+            await p.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; /* ce bloc essayé en entier (le chargement à mesure : test-fiche-lazy.js) */ const A = window.LCNDA_APP; A.state.currentPersonId = 4; A.setModule('personnes'); });
             await p.waitForSelector('[data-l10o-person="4"]', {state: 'attached', timeout: 20000}); await sleep(2500);
             assert.strictEqual(await p.getAttribute('[data-l10o-person="4"]', 'data-l10o-priv'), '1');
             assert.strictEqual(calls().length, n0);
