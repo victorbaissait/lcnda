@@ -1402,7 +1402,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-links.js?v=30" defer></script>
 <script src="assets/js/heritage-more.js?v=417" defer></script>
 <script src="assets/js/heritage-organiser-nouveau.js?v=1" defer></script>
-<script src="assets/js/heritage-controle.js?v=14" defer></script>
+<script src="assets/js/heritage-controle.js?v=15" defer></script>
 <script src="assets/js/heritage-commune-histoire.js?v=2" defer></script>
 <script src="assets/js/heritage-records.js?v=15" defer></script>
 <script src="assets/js/heritage-research.js?v=47" defer></script>
@@ -1516,7 +1516,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-sources-ouvertes-8-core.js?v=1" defer></script>
 <script src="assets/js/app-archives-en-ligne-core.js?v=3" defer></script>
 <script src="assets/js/heritage-archives-en-ligne.js?v=3" defer></script>
-<script src="assets/js/heritage-journal.js?v=7" defer></script>
+<script src="assets/js/heritage-journal.js?v=8" defer></script>
 <script src="assets/js/heritage-semaine.js?v=8" defer></script>
 <script src="assets/js/app-ou-chercher-core.js?v=5" defer></script>
 <script src="assets/js/app-ou-chercher-sortes.js?v=1" defer></script>

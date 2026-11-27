@@ -302,7 +302,8 @@ const startServer = async dir => {
                 });
                 if (name === '1440') {
                     await t('⤓ CSV : la liste filtrée, cellules protégées', async () => {
-                        const [dl] = await Promise.all([p.waitForEvent('download'), p.click('[data-ctl-csv]')]);
+                        await p.click('[data-ctl-csv]'); await p.waitForSelector('dialog.ui-export[open]'); // ⤓ la fenêtre d'export commune
+                        const [dl] = await Promise.all([p.waitForEvent('download'), p.click('dialog.ui-export [data-ui-go]')]);
                         const txt = fs.readFileSync(await dl.path(), 'utf8');
                         assert.match(txt, /Gravité;Sorte;Contrôle;Détail;Fiches;Lieu;Écartée;Raison/);
                         assert.match(txt, /Marguerite FAURE \(n° 3\)/);

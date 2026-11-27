@@ -181,7 +181,7 @@
         <div class="card-body lo-body" data-lo-body>${UI().spinner ? UI().spinner(T('On lit l’arbre…')) : esc(T('On lit l’arbre…'))}</div></article>`;
     const acts = (card, {source = '', basket = true, media = true, diag = true} = {}) => `<div class="lo-acts"><span class="lo-src">${source}</span><span class="lo-btns">${diag && card.diag ? `<button type="button" class="button small secondary" data-lo-diag="${card.diag}" title="${esc(T('Ouvrir le diagramme complet, déjà dans l’app'))}">📊 ${esc(T('Le diagramme'))}</button>` : ''}${basket && !kiosk() && ext.connexions?.take ? `<button type="button" class="ib lo-ib" data-lo-bk title="${esc(T('Mettre cette phrase au panier'))}" aria-label="${esc(T('Mettre cette phrase au panier'))}">🧺</button>` : ''}${media && !kiosk() && A().importMediaFile ? `<button type="button" class="ib lo-ib" data-lo-keep title="${esc(T('Garder l’image dans les médias'))}" aria-label="${esc(T('Garder l’image dans les médias'))}">📎</button>` : ''}</span></div>`;
     const more = (label, inner) => `<details class="lo-more"><summary>${esc(label)}</summary>${inner}</details>`;
-    const empty = msg => `<p class="lo-lead lo-empty">${esc(msg)}</p>`;
+    const empty = (msg, icon = '🌳') => (A().empty ? A().empty(msg, {icon}) : `<p class="lo-lead lo-empty">${esc(msg)}</p>`);
     const tactNote = () => `<p class="lo-tact">🤍 ${esc(T('Par défaut, aucun nom : seulement des chiffres. Les personnes se montrent sous « ▸ plus » ou dans ⚙️ Personnaliser, et jamais pour une famille encore vivante.'))}</p>`;
 
     /* chaque carte : ses données → son HTML (phrase, dessin, ▸ plus) */
@@ -235,7 +235,7 @@
         return {lead: r.lead, html: r.html + (OPEN_ALL.has('dispense') ? allCouplesHtml(all) : '')};
     };
     const OPEN_ALL = new Set();
-    const allCouplesHtml = all => `<div class="lo-all"><h4>${esc(T('Tous les couples apparentés'))}</h4>${all.rows?.length ? `<div class="tw"><table class="data-table lo-table" data-cols-off><thead><tr><th>${esc(T('Couple'))}</th><th>${esc(T('Année'))}</th><th>${esc(T('Degré'))}</th></tr></thead><tbody>${all.rows.map(r => `<tr><td><button type="button" class="link-button" data-lo-pair="${r.ida},${r.idb}">${esc(r.a)} × ${esc(r.b)}</button></td><td>${esc(r.year || '')}</td><td>${esc(r.direct ? T('ligne directe') : r.aff ? T('alliance, {n} degré', {n: ord(r.canon)}) : T('{n} degré', {n: ord(r.canon)}))}</td></tr>`).join('')}</tbody></table></div>` : `<p class="muted">${esc(T('Aucun couple apparenté de près dans ta base.'))}</p>`}</div>`;
+    const allCouplesHtml = all => `<div class="lo-all"><h4>${esc(T('Tous les couples apparentés'))}</h4>${all.rows?.length ? `<div class="tw"><table class="data-table lo-table" data-cols-off><thead><tr><th>${esc(T('Couple'))}</th><th>${esc(T('Année'))}</th><th>${esc(T('Degré'))}</th></tr></thead><tbody>${all.rows.map(r => `<tr><td><button type="button" class="link-button" data-lo-pair="${r.ida},${r.idb}">${esc(r.a)} × ${esc(r.b)}</button></td><td>${esc(r.year || '')}</td><td>${esc(r.direct ? T('ligne directe') : r.aff ? T('alliance, {n} degré', {n: ord(r.canon)}) : T('{n} degré', {n: ord(r.canon)}))}</td></tr>`).join('')}</tbody></table></div>` : empty(T('Aucun couple apparenté de près dans ta base.'), '🔗')}</div>`;
     R.prenup = async card => {
         const names = !!get('prenup', 'names'), limit = Number(get('prenup', 'limit')) || 8;
         const d = await ask('lot_o_arbre', {card: 'prenup', limit, names: names ? 1 : 0});

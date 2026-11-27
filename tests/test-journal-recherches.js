@@ -214,11 +214,13 @@ await ctx.addInitScript(() => { try { localStorage.setItem('lcnda-sheet-sections
                         assert.ok(await p.$('.ui-listbar-active:not([hidden])'), 'pastille du filtre actif');
                         await p.click('.h-rj .ui-viewtoggle button[data-view="cards"]'); await p.waitForSelector('.h-rj .ui-cards .ui-card');
                         await shot(p, 'journal-listes-fiches.png');
-                        const [dl] = await Promise.all([p.waitForEvent('download'), p.click('.h-rj [data-rj-csv]')]);
+                        await p.click('.h-rj [data-rj-csv]'); await p.waitForSelector('dialog.ui-export[open]'); // ⤓ la fenêtre d'export commune
+                        const [dl] = await Promise.all([p.waitForEvent('download'), p.click('dialog.ui-export [data-ui-go]')]);
                         const csv = fs.readFileSync(await dl.path(), 'utf8');
                         assert.match(csv, /^\ufeff"?Date"?;/); assert.match(csv, /Rien trouvé/);
                         await p.click('.h-rj .ui-listbar-fbtn'); await p.click('.ui-listbar-menu [data-lb-clear]'); await p.waitForTimeout(300);
-                        const [dl2] = await Promise.all([p.waitForEvent('download'), p.click('.h-rj [data-rj-csv]')]);
+                        await p.click('.h-rj [data-rj-csv]'); await p.waitForSelector('dialog.ui-export[open]');
+                        const [dl2] = await Promise.all([p.waitForEvent('download'), p.click('dialog.ui-export [data-ui-go]')]);
                         const csv2 = fs.readFileSync(await dl2.path(), 'utf8');
                         assert.ok(csv2.includes("'=SOMME(A1)") && !/;"?=SOMME/.test(csv2), 'une cellule qui commence par « = » est protégée');
                         await p.evaluate(() => { try { localStorage.removeItem('lcnda-listbar:listes:research_journal'); } catch (_) {} });

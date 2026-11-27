@@ -194,7 +194,7 @@
         ws.innerHTML = `<section class="page ctl-page">${UI().pageHeader({title: 'Contrôle de la base', icon: '✅', attrs: 'data-ph-title',
             help: 'Ce qui semble impossible ou très rare dans tes fiches : souvent une faute de frappe, un homonyme ou de mauvais parents. Rien n’est changé sans toi.',
             primary: '<button type="button" class="button" data-ctl-one>▶ Une à une</button>',
-            actions: ['<button type="button" class="button secondary" data-ctl-csv>⤓ Exporter en CSV</button>'],
+            actions: ['<button type="button" class="button secondary" data-ctl-csv>⤓ Exporter</button>'],
             more: ['<button type="button" data-ctl-seuils>⚙️ Seuils du contrôle</button>', '<button type="button" data-ctl-print>🖨 Imprimer la liste</button>', '<button type="button" data-ctl-refresh>↻ Relancer le contrôle</button>', '<button type="button" data-ctl-stats>📊 Moyennes de la famille</button>']})}
             <div class="ui-filters ctl-pills" data-ctl-pills></div><div class="ctl-subpills" data-ctl-subs></div>
             <div data-ctl-bar></div><div class="ctl-checked" data-ctl-checked></div><div data-ctl-map></div><div class="ctl-list" data-ctl-list></div><div data-ctl-more></div></section>`;

@@ -358,8 +358,8 @@ const FIXTURES = () => {
 
         await t('⤓ export tableur (CSV) ; 🏛 fiche de sortie aux archives imprimable (cotes par série, cases) ; ✉ lettres de demande ; enquête', async () => {
             await openBasket('Témoins');
-            const dl = p.waitForEvent('download');
-            await menu('[data-pn-a="more"]', 'Tableur'); await p.waitForSelector('.ui-actmenu'); await p.locator('.ui-actmenu button', {hasText: 'CSV'}).click();
+            await menu('[data-pn-a="more"]', 'Tableur'); await p.waitForSelector('dialog.ui-export[open]'); // ⤓ la fenêtre d'export commune (CSV choisi d'office)
+            const dl = p.waitForEvent('download'); await p.click('dialog.ui-export [data-ui-go]');
             const d = await dl; const csv = require('fs').readFileSync(await d.path(), 'utf8');
             assert.match(csv, /"Titre";"Détail";"Statut"/); assert.match(csv, /Publication des bans/);
             await p.evaluate(() => { window.__pr = null; window.LCNDA_UI.openPrintDialog = o => { window.__pr = o; return Promise.resolve(); }; });

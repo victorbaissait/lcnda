@@ -110,7 +110,7 @@
         const header = UI().pageHeader({title: 'Journal des recherches', where: where === 'recherche' ? 'Recherche' : undefined,
             help: 'Tout ce que tu as déjà cherché, du plus récent au plus ancien : pour ne pas chercher deux fois au même endroit.',
             primary: '<button type="button" class="button" data-rj-new-digest>＋ Nouveau dépouillement</button>',
-            actions: ['<button type="button" class="button secondary" data-rj-csv>⤓ Exporter en CSV</button>', '<button type="button" class="button secondary" data-rj-visits>🗄️ Visites d’archives</button>'],
+            actions: ['<button type="button" class="button secondary" data-rj-csv>⤓ Exporter</button>', '<button type="button" class="button secondary" data-rj-visits>🗄️ Visites d’archives</button>'],
             more: [ext.textDocTools ? '<button type="button" data-rj-report title="Un compte rendu des recherches montrées (avec les filtres), dans le traitement de texte">📝 Compte rendu</button>' : '']});
         ws.innerHTML = `<section class="page h-rj">${header}<div data-rj-bar></div><div data-rj-list>${UI().spinner('Chargement du journal…')}</div></section>`;
         let data;

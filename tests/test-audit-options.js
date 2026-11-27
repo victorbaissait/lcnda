@@ -314,8 +314,9 @@ const ID = JSON.parse(seed.stdout.trim().split('\n').pop());
             assert.ok(cl.rows.length >= 3 && cl.head.length === 7);
             await p.click('#workspace [data-ong-exportlist]'); await sleep(300);
             if (process.env.DBG) console.log('DBG menus', await p.evaluate(() => [...document.querySelectorAll('[role="menu"]')].map(m => [m.className, m.isConnected, getComputedStyle(m).display, m.getBoundingClientRect().width, m.textContent.slice(0, 80)])));
-            await p.waitForSelector('[role="menu"] >> text=CSV (.csv)');
-            const [dl] = await Promise.all([p.waitForEvent('download'), p.click('[role="menu"] >> text=CSV (.csv)')]);
+            await p.waitForSelector('dialog.ui-export[open]'); // ⤓ la fenêtre d'export commune (CSV choisi d'office ; PDF en plus)
+            assert.ok(await p.$('dialog.ui-export .ui-export-fmt[data-fmt="pdf"]'), 'PDF (par 🖨 Imprimer) reste proposé');
+            const [dl] = await Promise.all([p.waitForEvent('download'), p.click('dialog.ui-export [data-ui-go]')]);
             assert.match(fs.readFileSync(await dl.path(), 'utf8'), /Le Pont de Tulle/);
             await p.click('#workspace [data-ong-planche]'); await p.waitForSelector('dialog.k-print[open]', {timeout: 8000});
             await p.keyboard.press('Escape'); await sleep(300);
