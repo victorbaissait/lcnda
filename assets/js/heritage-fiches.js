@@ -37,8 +37,21 @@
         ['widget', '📊', 'Widget ou graphique à soi', 'Ceux de l’Éditeur de widgets / de graphiques'],
         ['photomap', '📸', 'Carte de photos', 'Une de tes cartes de photos (ou toutes), avec sa période'], // heritage-photomaps.js
         ['auto', '🤖', 'Les personnes de la base qui…', 'Tenu à jour tout seul : un métier, un lieu, une période'], // lib/topic_sheets.php (topic_auto_people)
+        ['basket', '🧺', 'Panier', 'Ce qu’il y a dans un de tes paniers, tenu à jour (chaque chose avec sa source)'], // heritage-connexions.js (cx_basket)
         ['data', '📊', 'Données', 'Une liste de données : séismes, batailles, Tour de France… avec filtres, ou une question'], // 📊 plus bas : listes de données (app-listes-donnees.js), à jour ou figées
     ];
+
+    /** 🧺 le bloc « Panier » : ce qu'il y a dans le panier choisi, relu à chaque affichage (chaque chose garde son origine ↗) */
+    async function fillBaskets(root) {
+        for (const el of root.querySelectorAll('[data-fi-basket]:not([data-fi-basket-done])')) {
+            el.dataset.fiBasketDone = '1';
+            let r = null; try { r = await api('cx_basket', {basket_id: Number(el.dataset.fiBasket) || 0}); } catch (_) {}
+            const items = (r?.items || []).slice(0, Number(el.dataset.fiBasketLimit) || 50), b = (r?.baskets || []).find(x => Number(x.id) === Number(el.dataset.fiBasket));
+            if (!items.length) { el.innerHTML = A().empty ? A().empty(i18n('Ce panier est vide pour l’instant.')) : `<p class="muted">${esc(i18n('Ce panier est vide pour l’instant.'))}</p>`; continue; }
+            el.innerHTML = `${b?.name ? `<p class="muted">🧺 ${esc(b.name)}</p>` : ''}<ul class="h-fi-basket-list">${items.map((it, i) => `<li><b>${esc(it.title || '')}</b>${it.value && it.value !== it.title ? ` — ${esc(String(it.value).slice(0, 240))}` : ''}${it.origin?.label ? ` <button type="button" class="link-button" data-fi-bk-open="${i}" title="${esc(i18n('Revenir à l’origine'))}">↗ ${esc(it.origin.label)}</button>` : ''}</li>`).join('')}</ul>`;
+            el.querySelectorAll('[data-fi-bk-open]').forEach(btn => btn.addEventListener('click', () => ext.connexions?.openOrigin?.(items[Number(btn.dataset.fiBkOpen)])));
+        }
+    }
     const kindOf = t => KINDS.find(k => k[0] === t) || KINDS[0];
     const WIDTHS = [['12', 'toute la largeur'], ['6', '½'], ['4', '⅓'], ['3', '¼'], ['8', '⅔'], ['9', '¾']];
     const TEMPLATES = [
@@ -230,6 +243,7 @@
             }
             case 'diagram': return Number(b.diagram) && ext.diagramEmbedHtml ? ext.diagramEmbedHtml(b.diagram) : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📭</span><span class="empty-line-text">Aucun diagramme choisi : ✎ pour en choisir un.</span></p>';
             case 'photomap': return `<div class="pm-widget" data-fi-photomap="${esc(JSON.stringify(b.config || {}))}">${window.LCNDA_UI.spinner('Chargement de la carte…')}</div>`;
+            case 'basket': return `<div class="h-fi-basket" data-fi-basket="${Number(b.basket) || 0}" data-fi-basket-limit="${Number(b.limit) || 50}">${window.LCNDA_UI.spinner(i18n('Chargement du panier…'))}</div>`;
             case 'data': return dBody(b);
             case 'widget': return b.widget ? `<div class="h-fi-widget" data-fi-widget="${esc(b.widget)}">${window.LCNDA_UI.spinner('Calcul…')}</div>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🧩</span><span class="empty-line-text">Aucun widget choisi : ✎ pour en choisir un.</span></p>';
             default: return '';
@@ -262,6 +276,7 @@
             ${c.template ? '' : `<section class="card h-fi-cited" data-fi-cited><h3>↩ ${esc(i18n('Cité dans'))} <small class="muted">${cited.length}</small></h3>${cited.length ? `<ul class="h-fi-citedlist">${cited.map(x => `<li><button type="button" class="table-link" data-fi-cite-go="${esc(x.kind)}:${Number(x.id)}">${esc(x.label)}</button>${x.via ? ` <small class="muted">${esc(i18n('({x})', {x: i18n(x.via)}))}</small>` : ''}</li>`).join('')}</ul>` : `<p class="muted">${esc(i18n('Rien ne renvoie encore à cette fiche : écris son titre (« {t} ») dans une note de personne ou de lieu, une enquête, ou une autre fiche.', {t: c.title}))}</p>`}</section>`}
         </section>`;
         const ws = A().$('#workspace');
+        fillBaskets(ws);
         ws.querySelectorAll('[data-fi-photomap]').forEach(el => { let c = {}; try { c = JSON.parse(el.dataset.fiPhotomap || '{}'); } catch (_) {} if (ext.photomapEmbed) ext.photomapEmbed(el, c); else el.innerHTML = '<p class="muted">Carte de photos indisponible.</p>'; });
         ws.querySelectorAll('[data-fi-widget]').forEach(el => { if (ext.renderCustomWidgetInto) ext.renderCustomWidgetInto(el, el.dataset.fiWidget).catch?.(() => { el.innerHTML = '<p class="muted">Ce widget n’existe plus.</p>'; }); else el.innerHTML = '<p class="muted">Widget indisponible.</p>'; });
         dMount(ws, c); // 📊 les blocs « Données » à jour : la liste relue à chaque ouverture
@@ -347,7 +362,7 @@
             if (b.type === 'divider') return `<h2>${esc(b.title || '')}</h2>`;
             let inner = '';
             if (b.type === 'images') inner = mediaOf(b).filter(m => /\.(jpe?g|png|gif|webp)$/i.test(m.filename || '')).map(m => `<img src="${esc(abs('media/' + encodeURIComponent(m.filename)))}" alt="${esc(m.title || '')}">`).join('') + (b.caption ? `<p><i>${esc(b.caption)}</i></p>` : '');
-            else if (['screen', 'widget', 'diagram', 'photomap'].includes(b.type)) inner = `<p><i>${esc(i18n('(écran de l’app : à voir dans LCNDA)'))}</i></p>`;
+            else if (['screen', 'widget', 'diagram', 'photomap', 'basket'].includes(b.type)) inner = `<p><i>${esc(i18n('(écran de l’app : à voir dans LCNDA)'))}</i></p>`;
             else if (b.type === 'data') inner = dStatic(b);
             else inner = blockBody(b).replace(/<button[^>]*>/g, '<div class="p">').replace(/<\/button>/g, '</div>');
             return `<section><h3>${esc(titleOf(b))}</h3>${inner}</section>`;
@@ -375,6 +390,7 @@
         el.innerHTML = `<div class="h-fi h-fi-embed" data-fi-embed="${Number(id)}"><p class="h-fi-embedhead"><b>${esc(d.icon || '📒')} ${esc(d.title)}</b>${d.subtitle ? ` <small class="muted">${esc(d.subtitle)}</small>` : ''} <button type="button" class="button small secondary" data-fi-embedopen="${Number(id)}">${esc(i18n('↗ Ouvrir la fiche'))}</button></p><div class="card-grid h-fi-grid">${html || A().empty(i18n('Fiche vide.'))}</div></div>`;
         el.querySelector('[data-fi-embedopen]')?.addEventListener('click', () => { S().ficheId = Number(id); editing = false; A().setModule('fiches'); });
         el.querySelectorAll('[data-fi-widget]').forEach(w => { if (ext.renderCustomWidgetInto) ext.renderCustomWidgetInto(w, w.dataset.fiWidget).catch?.(() => {}); });
+        fillBaskets(el);
         el.querySelectorAll('[data-fi-photomap]').forEach(w => { let c = {}; try { c = JSON.parse(w.dataset.fiPhotomap || '{}'); } catch (_) {} ext.photomapEmbed?.(w, c); });
         dMount(el, d);
         return d;
@@ -794,6 +810,12 @@
             <label>${esc(i18n('De l’année'))}<input name="from" type="number" min="0" max="2999" value="${b.from || ''}" placeholder="1800"></label><label>${esc(i18n('À l’année'))}<input name="to" type="number" min="0" max="2999" value="${b.to || ''}" placeholder="1900"></label>
             <label>${esc(i18n('Combien au plus'))}<input name="limit" type="number" min="5" max="300" value="${Number(b.limit) || 60}"></label><label>${esc(i18n('Note'))} <small>(${esc(i18n('facultatif'))})</small><input name="note" value="${esc(b.note || '')}" maxlength="2000"></label></div>`;
         if (b.type === 'data') body = dEditorHtml(b, common); // 🎨 titre, largeur, couleur : dans sa section « Apparence »
+        if (b.type === 'basket') {
+            // la liste des paniers arrive juste après l'ouverture de la fenêtre (editBlock reste synchrone)
+            body = `<label>${esc(i18n('Quel panier'))}<select name="basket" data-fi-bksel data-cur="${Number(b.basket) || 0}"><option value="0">${esc(i18n('Chargement…'))}</option></select></label><label>${esc(i18n('Combien au plus'))}<input name="limit" type="number" min="5" max="300" value="${Number(b.limit) || 50}"></label><p class="muted">${esc(i18n('Le bloc suit le panier : ce que tu y ajoutes apparaît ici aussi.'))}</p>`;
+            setTimeout(async () => { const sel = document.querySelector('[data-fi-bksel]'); if (!sel) return; let bs = []; try { bs = (await api('cx_basket', {basket_id: 0})).baskets || []; } catch (_) {}
+                sel.innerHTML = bs.length ? bs.map(x => `<option value="${Number(x.id)}" ${Number(sel.dataset.cur) === Number(x.id) ? 'selected' : ''}>🧺 ${esc(x.name || i18n('Mon panier'))}</option>`).join('') : `<option value="0">${esc(i18n('Aucun panier pour l’instant : mets quelque chose au 🧺 d’abord.'))}</option>`; }, 0);
+        }
         if (b.type === 'photomap') body = ext.photomapConfigHtml ? ext.photomapConfigHtml(b.config || {}) : '<p class="muted">Cartes de photos indisponibles.</p>';
         if (b.type === 'widget') {
             // 📈 le menu de choix commun (sorte « graph », tous mes widgets) ; le champ caché garde l'identifiant cw_…
@@ -826,6 +848,7 @@
                 if (b.type === 'auto') { Object.assign(b, {occupation: String(f.occupation || '').trim(), place: String(f.place || '').trim(), from: Number(f.from) || 0, to: Number(f.to) || 0, limit: Number(f.limit) || 60, note: f.note || ''}); if (!b.occupation && !b.place && !b.from && !b.to) { toast(i18n('Choisis au moins un métier, un lieu ou une période.'), 'error'); return false; } }
                 if (b.type === 'screen') { let target = f.target || 'module:carte'; const pid = Number(form.elements.fi_person?.value) || 0; if (target.startsWith('person:')) target = pid ? 'person:' + pid : 'module:personnes'; b.target = target; b.personName = (form.querySelector('.h-dialog-body') || form).dataset.fiPersonName ?? (pid ? b.personName || '' : ''); b.height = Number(f.height) || 560; b.sidebar = !!form.elements.sidebar?.checked; }
                 if (b.type === 'widget') b.widget = f.widget || '';
+                if (b.type === 'basket') { b.basket = Number(f.basket) || 0; b.limit = Math.max(5, Math.min(300, Number(f.limit) || 50)); }
                 if (b.type === 'photomap') b.config = ext.photomapConfigRead ? ext.photomapConfigRead(form) : {};
                 if (b.type === 'diagram') b.diagram = Number(f.diagram) || 0;
                 if (b.type === 'data' && await dRead(form, b) === false) return false;
