@@ -373,6 +373,22 @@
         const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], {type})); a.download = name;
         document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000);
     }
+    /** 🧾 la fiche en LaTeX (à partir de son Markdown) : titres, gras, italique, listes, liens ; les caractères spéciaux échappés */
+    function sheetLatex(c) {
+        const ex = t => String(t).replace(/\\/g, '\\textbackslash{}').replace(/([#$%&_{}])/g, '\\$1').replace(/~/g, '\\textasciitilde{}').replace(/\^/g, '\\textasciicircum{}');
+        const inl = t => ex(t).replace(/\*\*(.+?)\*\*/g, '\\textbf{$1}').replace(/\*(.+?)\*/g, '\\emph{$1}').replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, a, u) => `\\href{${u.replace(/\\([#$%&_{}])/g, '$1')}}{${a}}`);
+        const out = []; let inList = false;
+        for (const line of String(sheetMarkdown(c)).split('\n')) {
+            const m = /^(#{1,4})\s+(.*)$/.exec(line), li = /^\s*[-*]\s+(.*)$/.exec(line);
+            if (!li && inList) { out.push('\\end{itemize}'); inList = false; }
+            if (m) { const lv = m[1].length; out.push(lv === 1 ? `\\title{${inl(m[2])}}\n\\maketitle` : `\\${['section', 'subsection', 'subsubsection'][Math.min(2, lv - 2)]}*{${inl(m[2])}}`); }
+            else if (li) { if (!inList) { out.push('\\begin{itemize}'); inList = true; } out.push(`  \\item ${inl(li[1])}`); }
+            else if (/^>\s?/.test(line)) out.push(`\\begin{quote}${inl(line.replace(/^>\s?/, ''))}\\end{quote}`);
+            else out.push(line.trim() ? inl(line) : '');
+        }
+        if (inList) out.push('\\end{itemize}');
+        return `\\documentclass[11pt]{article}\n\\usepackage[utf8]{inputenc}\n\\usepackage[T1]{fontenc}\n\\usepackage[french]{babel}\n\\usepackage{hyperref}\n\\date{}\n\\begin{document}\n${out.join('\n')}\n\\end{document}\n`;
+    }
     function exportMenu(anchor) {
         const c = cur, base = A().safeExportFilename ? A().safeExportFilename(c.title, 'fiche') : 'fiche';
         const items = [{icon: '📝', label: i18n('Markdown (.md)'), run: () => { download(sheetMarkdown(c), `${base}.md`, 'text/markdown;charset=utf-8'); toast(i18n('Fiche exportée en Markdown.'), 'success'); }},
@@ -382,6 +398,8 @@
                 const save = async (fn, ext, type) => { try { const out = await fn(doc()); const blob = out instanceof Blob ? out : new Blob([out], {type}); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${base}.${ext}`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); toast(i18n('Fiche exportée ({f}).', {f: '.' + ext}), 'success'); } catch (e) { toast(e.message || String(e), 'error'); } };
                 return [TX.toDocx && {icon: '📄', label: i18n('Word (.docx)'), run: () => save(TX.toDocx, 'docx')}, TX.toOdt && {icon: '📄', label: i18n('LibreOffice (.odt)'), run: () => save(TX.toOdt, 'odt')}, TX.toRtf && {icon: '📄', label: i18n('RTF (.rtf)'), run: () => save(TX.toRtf, 'rtf', 'application/rtf')}, TX.toText && {icon: '🗒', label: i18n('Texte simple (.txt)'), run: () => save(TX.toText, 'txt', 'text/plain;charset=utf-8')}].filter(Boolean);
             })() : []),
+            {icon: '🧾', label: i18n('LaTeX (.tex)'), run: () => { download(sheetLatex(c), `${base}.tex`, 'application/x-tex;charset=utf-8'); toast(i18n('Fiche exportée ({f}).', {f: '.tex'}), 'success'); }},
+            {icon: '🧩', label: i18n('Données (.json)'), help: i18n('la fiche telle quelle, pour la garder ou la réutiliser'), run: () => { download(JSON.stringify({format: 'lcnda-fiche', version: 1, exported: new Date().toISOString(), fiche: c}, null, 2), `${base}.json`, 'application/json;charset=utf-8'); toast(i18n('Fiche exportée ({f}).', {f: '.json'}), 'success'); }},
             '-', {icon: '🖨', label: i18n('PDF (par 🖨 Imprimer)'), run: () => printSheet()}];
         if (UIx().menuAt) UIx().menuAt(anchor, items, {title: i18n('⤓ Exporter la fiche')}); else items[0].run();
     }

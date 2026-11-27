@@ -94,7 +94,7 @@
         const isW = c => /[\p{L}\p{M}?….ᵉʳˢᵗᵐᵇᵈⁿᵒᵃ°]/u.test(c || '');
         let s = pos, e = pos; while (s > 0 && isW(text[s - 1])) s--; while (e < text.length && isW(text[e])) e++;
         let w = text.slice(s, e); const lead = w.match(/^\.+/)?.[0].length || 0; s += lead; w = w.slice(lead);
-        if (!/\.\.\.|…/.test(w)) { const t = w.match(/\.+$/)?.[0].length || 0; if (t) { e -= t; w = w.slice(0, -t); } }
+        const t = w.match(/\.+$/)?.[0].length || 0; if (t && t !== 3) { e -= t; w = w.slice(0, -t); }
         return {s, e, w};
     }
     /** un motif de mot illisible ? « Ma…d », « Ma...d », « Ma?aud » (au moins deux lettres sûres, et une lettre après un « ? ») */
