@@ -29,7 +29,10 @@
         return JSON.parse(await new Response(new Blob([buf]).stream().pipeThrough(new DecompressionStream('gzip'))).text());
     }
     const table = d => (d?.rows || []).map(r => Object.fromEntries((d.fields || []).map((k, i) => [k, r[i] ?? null])));
-    const pack = name => (P[name] ||= readGz(`assets/data/lo-${name}.json.gz?v=1`).then(d => (d ? {...d, list: table(d)} : null)).catch(() => null));
+    // seulement les packs que le sommaire des données connaît (assets/data/manifest.json) : un pack pas encore fabriqué n'est jamais demandé (pas de 404)
+    let shipped = null;
+    const packIds = () => (shipped ||= fetch('assets/data/manifest.json?v=1', {credentials: 'same-origin'}).then(r => (r.ok ? r.json() : {packs: {}})).catch(() => ({packs: {}})).then(m => new Set(Object.keys(m?.packs || {}))));
+    const pack = name => (P[name] ||= packIds().then(ids => (ids.has(`lo-${name}`) ? readGz(`assets/data/lo-${name}.json.gz?v=1`) : null)).then(d => (d ? {...d, list: table(d)} : null)).catch(() => null));
     const near = (list, lat, lon, km) => (list || []).map(r => ({...r, km: C().km(lat, lon, r.lat, r.lon)})).filter(r => Number.isFinite(r.km) && r.km <= km).sort((a, b) => a.km - b.km);
 
     /* ═════ 📖 le texte qui touche une vie ═════ */
