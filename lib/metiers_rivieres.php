@@ -89,16 +89,26 @@ function mr_cache_dir(bool $create = false): string
     if ($create && !is_dir($d)) { @mkdir($d, 0775, true); }
     return $d;
 }
+/** après un échec de connexion, on attend 10 minutes avant de redemander Internet (les données gardées servent en attendant) */
+const MR_OFFLINE_RETRY = 600;
+
 function mr_cached(string $kind, string $key, callable $make): array
 {
     $f = mr_cache_dir() . '/' . sha1($kind . ':' . $key) . '.json';
     $c = is_file($f) ? json_decode((string) @file_get_contents($f), true) : null;
     if (is_array($c) && isset($c['data']) && (int) $c['at'] > time() - (MR_TTL[$kind] ?? 30 * 86400)) { return $c['data'] + ['cached' => true, 'fetched_at' => (int) $c['at']]; }
+    // pas de connexion il y a peu : on ne réessaie pas tout de suite (la fiche ne reste pas à attendre Internet à chaque affichage)
+    $down = (getenv('GENEALOGY_TEST') === '1' && (string) getenv('LCNDA_TEST_MR_DIR') !== '') ? '' : mr_cache_dir() . '/offline.flag'; // (essais : leurs réponses enregistrées, jamais de pause)
+    if ($down !== '' && !(is_array($c) && isset($c['data'])) && is_file($down) && (int) @filemtime($down) > time() - MR_OFFLINE_RETRY) {
+        return ['ok' => false, 'offline' => true, 'message' => i18n_t('Pas de connexion à Internet : réessaie quand tu seras connecté.')];
+    }
     try { $data = $make(); }
     catch (Throwable $e) {
+        if ($down !== '' && preg_match('/connexion|connect|timed? ?out|resolve/i', $e->getMessage())) { mr_cache_dir(true); @touch($down); }
         if (is_array($c) && isset($c['data'])) { return $c['data'] + ['cached' => true, 'stale' => true, 'fetched_at' => (int) $c['at']]; }
         return ['ok' => false, 'offline' => true, 'message' => $e->getMessage()];
     }
+    if ($down !== '') { @unlink($down); }
     mr_cache_dir(true);
     @file_put_contents($f, json_encode(['key' => $kind . ':' . $key, 'at' => time(), 'data' => $data], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), LOCK_EX);
     return $data + ['cached' => false, 'fetched_at' => time()];
@@ -116,7 +126,7 @@ function mr_http(string $step, string $url, int $max = 8_000_000, string $accept
     if (!in_array(strtolower((string) parse_url($url, PHP_URL_HOST)), MR_HOSTS, true) || parse_url($url, PHP_URL_SCHEME) !== 'https') { throw new RuntimeException('Adresse refusée.'); }
     $body = ''; $too = false;
     $ch = curl_init($url);
-    curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER => false, CURLOPT_FOLLOWLOCATION => false, CURLOPT_CONNECTTIMEOUT => 10, CURLOPT_TIMEOUT => 45, CURLOPT_PROTOCOLS => CURLPROTO_HTTPS,
+    curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER => false, CURLOPT_FOLLOWLOCATION => false, CURLOPT_CONNECTTIMEOUT => 4, CURLOPT_TIMEOUT => 15, // court : une recherche en ligne ne bloque jamais longtemps CURLOPT_PROTOCOLS => CURLPROTO_HTTPS,
         CURLOPT_USERAGENT => MR_UA, CURLOPT_HTTPHEADER => ['Accept: ' . $accept],
         CURLOPT_WRITEFUNCTION => function ($c, $chunk) use (&$body, &$too, $max) { $body .= $chunk; if (strlen($body) > $max) { $too = true; return 0; } return strlen($chunk); }] + (function_exists('lcnda_curl_tls') ? lcnda_curl_tls() : []));
     curl_exec($ch);

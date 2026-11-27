@@ -154,6 +154,8 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.ok(await p.$eval('[data-mr-metier="1"]', n => !n.closest('section.card').hidden));
             if (process.env.MR_SHOTS) await (await p.$('[data-mr-metier="1"]')).evaluate(n => n.closest('section.card').scrollIntoView()) || await p.screenshot({path: path.join(process.env.MR_SHOTS, 'personne.png')});
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 2; A.setModule('personnes'); });
+            // la rivière (en partie en ligne) attend que le bloc soit à l'écran : on y descend, comme en lisant la fiche
+            await p.waitForSelector('[data-hist-life="2"]', {state: 'attached', timeout: 20000}); await p.$eval('[data-hist-life="2"]', e => e.scrollIntoView({block: 'center'}));
             await p.waitForSelector('[data-hist-life="2"] [data-mr-hist]', {timeout: 20000});
             const h = await p.$eval('[data-hist-life="2"] [data-mr-hist]', n => n.textContent);
             if (process.env.MR_SHOTS) { await p.$eval('[data-hist-life="2"]', n => n.scrollIntoView()); await sleep(300); await p.screenshot({path: path.join(process.env.MR_SHOTS, 'histoire.png')}); }
@@ -161,6 +163,8 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.waitForSelector('[data-mr-metier="2"] .mr-row', {timeout: 20000});
             assert.match(await p.$eval('[data-mr-metier="2"]', n => n.textContent), /Elle était meunière\..*un moulin.*c’était peut-être le sien/);
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 3; A.setModule('personnes'); });
+            // la rivière (en partie en ligne) attend que le bloc soit à l'écran : on y descend, comme en lisant la fiche
+            await p.waitForSelector('[data-hist-life="3"]', {state: 'attached', timeout: 20000}); await p.$eval('[data-hist-life="3"]', e => e.scrollIntoView({block: 'center'}));
             await p.waitForSelector('[data-hist-life="3"] [data-mr-hist]', {timeout: 20000});
             await sleep(600);
             assert.ok(await p.$eval('[data-mr-metier="3"]', n => n.closest('section.card').hidden), 'pas de bloc vide');

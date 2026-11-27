@@ -120,6 +120,9 @@
         if (!on('rivers') || !host?.isConnected) return;
         const pid = Number(host.dataset.histLife); if (!pid) return;
         host.querySelector('[data-mr-hist]')?.remove();
+        // la rivière vient en partie d'Internet (Sandre) : seulement quand le bloc arrive à l'écran, jamais pendant l'ouverture de la fiche
+        const W = window.LCNDA_PERF?.whenSeen; if (W) await new Promise(ok => W(host, ok));
+        if (!host.isConnected) return;
         const r = await ask('mr_rivers', {id: pid});
         if (!host.isConnected || !r?.ok) return;
         const html = riversHtml(r, {person: r.person});

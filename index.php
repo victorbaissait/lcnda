@@ -1259,14 +1259,14 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_FIRST_HASH=location.hash;</script>
 <script src="assets/js/app-journal.js?v=2"></script>
 <?= i18n_page_script() ?>
-<script src="assets/js/app-i18n.js?v=127"></script>
+<script src="assets/js/app-i18n.js?v=128"></script>
 <script>window.LCNDA_GENEALOGY = <?= json_encode(GENEALOGY_ID === '' ? 'main' : GENEALOGY_ID) ?>;window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_GLOCK = <?= json_encode(['on' => glock_info()['locked'], 'minutes' => glock_info()['minutes']]) ?>;window.LCNDA_GUEST = <?= json_encode(lan_device() ? ['name' => lan_device()['name']] : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
 <script src="assets/js/app-fond.js?v=9" defer></script>
 <script src="assets/js/app-accord.js?v=1" defer></script>
 <script>window.LCNDA_RFR_DATA = <?= json_encode(json_decode((string) @file_get_contents(__DIR__ . '/assets/data/recherche-fr.json'), true) ?: new stdClass(), JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP) ?>;</script>
 <script src="assets/js/app-recherche-fr.js?v=1" defer></script>
 <script>window.LCNDA_MEDIA_LIMITS = <?= json_encode($ready ? media_limits_for_page() : null) ?>;</script>
-<script src="assets/js/app.js?v=622" defer></script>
+<script src="assets/js/app.js?v=623" defer></script>
 <script src="assets/js/app-media-limits.js?v=2" defer></script>
 <script src="assets/js/app-verrou.js?v=7" defer></script>
 <script src="assets/js/app-reseau-local.js?v=5" defer></script>
@@ -1557,9 +1557,9 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-prenoms-pays.js?v=5" defer></script>
 <script src="assets/js/heritage-diagram-cartes-plus.js?v=4" defer></script>
 <script src="assets/js/heritage-diagram-cartes-plus2.js?v=6" defer></script><!-- 🗺️ vague 2 : métiers, lignées, aire de vie, parrains, crises -->
-<script src="assets/js/heritage-diagram-graphique.js?v=13" defer></script>
+<script src="assets/js/heritage-diagram-graphique.js?v=14" defer></script>
 <script src="assets/js/heritage-diagram-nouveaux.js?v=6" defer></script>
-<script src="assets/js/heritage-diagram-manquants.js?v=2" defer></script>
+<script src="assets/js/heritage-diagram-manquants.js?v=3" defer></script>
 <script src="assets/js/heritage-diagram-assistant.js?v=4" defer></script>
 <script src="assets/js/heritage-diagram-lot-c.js?v=2" defer></script>
 <script src="assets/js/app-diagram-plus-core.js?v=2" defer></script>
@@ -1726,7 +1726,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-terre-quotidien.js?v=3" defer></script>
 <script src="assets/js/heritage-commune-plus.js?v=2" defer></script>
 <script src="assets/js/heritage-lieux-patrimoine.js?v=6" defer></script>
-<script src="assets/js/heritage-metiers-rivieres.js?v=5" defer></script>
+<script src="assets/js/heritage-metiers-rivieres.js?v=6" defer></script>
 <script src="assets/js/heritage-histoire-autour.js?v=9" defer></script>
 <script src="assets/js/heritage-guerres-temps.js?v=2" defer></script><!-- ▶ Dans le temps : les batailles sur la carte, année après année, autour de nos lieux -->
 <script src="assets/js/heritage-commune-culture.js?v=3" defer></script>
@@ -1785,7 +1785,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-lot-n2-chiffres.js?v=3" defer></script>
 <script src="assets/js/app-grands-packs.js?v=1" defer></script><!-- 📦 grands packs des lots K et L, installés à la demande (lib/grands_packs.php) -->
 <script src="assets/js/heritage-telech-k.js?v=6" defer></script>
-<script src="assets/js/heritage-telech-l.js?v=3" defer></script><!-- 🌐 Les équivalents d’ailleurs (lot L) -->
+<script src="assets/js/heritage-telech-l.js?v=4" defer></script><!-- 🌐 Les équivalents d’ailleurs (lot L) -->
 <script src="assets/js/heritage-telech-j.js?v=2" defer></script>
 <script src="assets/js/noms-lieux-monde.js?v=4" defer></script><!-- 🔎 Noms de lieux d’autrefois, tous pays : « un nom → le lieu d’aujourd’hui » (vue de 🗺 Anciens noms de lieux, 📊 Récap, ⌘K) -->
 <script src="assets/js/heritage-fiche-edifice.js?v=6" defer></script>

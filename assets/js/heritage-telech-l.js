@@ -152,7 +152,8 @@
     const okPack = n => /^tl-[a-z]+(_[a-z]{2,5})?$/.test(n);
     function load(kind) {
         const name = FILES[kind]; if (!name || !okPack(name)) return Promise.resolve(null);
-        if (!data[name]) data[name] = fetch(`assets/data/${name}.json.gz?v=${DATA_V}`, {credentials: 'same-origin'})
+        // seulement un pack livré (le sommaire) ou installé (📦 grands packs) : jamais de demande pour un fichier absent (pas de 404)
+        if (!data[name]) data[name] = packs().then(() => (have.has(name) ? fetch(`assets/data/${name}.json.gz?v=${DATA_V}`, {credentials: 'same-origin'}) : {status: 404}))
             .then(r => { if (r.status === 404) return null; if (!r.ok) throw new Error(T('Le fichier {f} est introuvable.', {f: name})); return readMaybeGz(r); })
             .then(f => (f ? {meta: f, rows: (SHAPE[kind] || table)(f)} : null))
             .catch(e => { delete data[name]; throw e; });

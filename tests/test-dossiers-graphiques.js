@@ -90,7 +90,13 @@ const freePort = () => new Promise(res => { const s = net.createServer(); s.list
     const hideToasts = async p => { await p.evaluate(() => document.querySelectorAll('.ui-toast').forEach(x => x.close ? x.close() : x.remove())); await p.waitForTimeout(220); };
     const drag = async (p, from, to, where = 'center') => {
         await hideToasts(p); // les messages (en bas à gauche) passent par-dessus le bas de la colonne
-        await p.$eval(to, el => el.scrollIntoView({ block: 'center' })); await p.$eval(from, el => el.scrollIntoView({ block: 'nearest' }));
+        // les deux réellement visibles (pas sous l'en-tête collé de la colonne, pas hors de l'écran) : sinon la souris part ou lâche dans le vide
+        const seen = sel => p.$eval(sel, el => { const r = el.getBoundingClientRect(), h = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2); return !!h && (el === h || el.contains(h)); }).catch(() => false);
+        await p.$eval(to, el => el.scrollIntoView({ block: 'center', behavior: 'instant' })); await p.$eval(from, el => el.scrollIntoView({ block: 'nearest', behavior: 'instant' }));
+        if (!(await seen(to)) || !(await seen(from))) { await p.$eval(from, el => el.scrollIntoView({ block: 'center', behavior: 'instant' })); await p.$eval(to, el => el.scrollIntoView({ block: 'nearest', behavior: 'instant' })); }
+        if (!(await seen(to))) await p.$eval(to, el => el.scrollIntoView({ block: 'center', behavior: 'instant' }));
+        // la colonne défile en douceur (scroll-behavior: smooth) : on attend qu'elle soit arrêtée avant de mesurer où poser la souris
+        await p.evaluate(([f, t]) => new Promise(res => { let last = '', same = 0, n = 0; const tick = () => { const k = [f, t].map(s => document.querySelector(s)?.getBoundingClientRect().top.toFixed(1)).join(); same = k === last ? same + 1 : 0; last = k; if (same >= 3 || ++n > 120) res(); else requestAnimationFrame(tick); }; tick(); }), [from, to]);
         const a = await center(p, from), b = await center(p, to, where);
         await p.mouse.move(a.x, a.y); await p.mouse.down();
         await p.mouse.move(a.x + 8, a.y + 8, { steps: 2 });

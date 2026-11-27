@@ -168,6 +168,10 @@
         proparea: [['Les villages de naissance', {'[data-dgm="k"]': 'bplace'}], ['Les noms de famille', {'[data-dgm="k"]': 'surname'}], ['Les prénoms', {'[data-dgm="k"]': 'first'}], ['Les métiers', {'[data-dgm="k"]': 'occ'}]],
         radialcol: [['Le mois des naissances', {'[data-dgm="what"]': 'bt'}], ['Le mois des décès', {'[data-dgm="what"]': 'dt'}]],
         stackarea: [['Une couleur par nom de famille', {'[data-dgm="g"]': 'surname'}], ['Hommes et femmes', {'[data-dgm="g"]': 'sex'}], ['Par lieu de naissance', {'[data-dgm="g"]': 'bplace'}]],
+        // les trois sortes qu'on écrit soi-même : un modèle vide (dit tel quel, rien d'inventé) ou les vrais faits de la fiche ouverte
+        flowtext: [['Modèle vide à remplir', {'[data-dgm="tpl"]': 'blank'}], ['Les actes de la personne ouverte (trouvés, à chercher)', {'[data-dgm="tpl"]': 'acts'}]],
+        timetable: [['Modèle vide à remplir', {'[data-dgm="tpl"]': 'blank'}], ['Les événements avec une heure, de la personne ouverte', {'[data-dgm="tpl"]': 'hours'}]],
+        annotated: [['Modèle vide à remplir', {'[data-dgm="tpl"]': 'blank'}], ['Le portrait de la personne ouverte et ses événements', {'[data-dgm="tpl"]': 'person'}]],
     };
     const GO = '[data-gn-go], [data-n6-go], [data-dm-go], [data-dfa-go], [data-dgm-go], [data-c2-go], [data-dac-go], [data-cp-go], [data-lotc-go], [data-dpl-go], [data-dla-go], [data-cq-go]';
 

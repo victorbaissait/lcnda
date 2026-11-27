@@ -2689,8 +2689,12 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         const mod=state.module;let touched=false;const stop=()=>{touched=true;scrollRestoring=null;};
         scrollRestoring={mod,until:Date.now()+6000};
         ['wheel','touchstart','keydown','pointerdown'].forEach(ev=>window.addEventListener(ev,stop,{once:true,passive:true,capture:true}));
-        const put=()=>{if(touched||state.module!==mod)return;const ws=$('#workspace'),sb=$('#sidebar-content');
-            if(ws&&Math.abs(ws.scrollTop-(position.workspace||0))>2)ws.scrollTop=position.workspace||0;if(sb&&Math.abs(sb.scrollTop-(position.sidebar||0))>2)sb.scrollTop=position.sidebar||0;};
+        // une colonne qu'autre chose a fait défiler depuis (la barre de défilement, un « aller à l'élément », un essai) : on la laisse où elle est
+        const moved=new Set(),fix=(el,want,key)=>{if(!el||moved.has(key))return;const max=el.scrollHeight-el.clientHeight,cur=el.scrollTop;
+            if(el._lcPut!==undefined&&Math.abs(cur-el._lcPut)>2&&max>=el._lcPut-2&&!(cur<el._lcPut&&cur>=max-2)){moved.add(key);return;} // pas une page encore trop courte : quelqu'un a défilé
+            if(Math.abs(cur-want)>2){el.scrollTop=want;}el._lcPut=el.scrollTop;};
+        [$('#workspace'),$('#sidebar-content')].forEach(e=>{if(e)e._lcPut=undefined;});
+        const put=()=>{if(touched||state.module!==mod)return;fix($('#workspace'),position.workspace||0,'ws');fix($('#sidebar-content'),position.sidebar||0,'sb');};
         // les aperçus (petites pages) peuvent mettre quelques secondes à arriver : la page n'a sa vraie hauteur qu'après
         [80,250,500,900,1400,2000,2800,3800,5000,6000].forEach(t=>setTimeout(put,t));
         setTimeout(()=>{['wheel','touchstart','keydown','pointerdown'].forEach(ev=>window.removeEventListener(ev,stop,{capture:true}));if(scrollRestoring&&scrollRestoring.mod===mod)scrollRestoring=null;},6100);

@@ -386,10 +386,62 @@
         return {h: Math.max(n0(o.height), side ? Math.max(ih, y) : y), svg, legend: [], desc: i18n('Image annotée : {n} repères.', {n: String(list.length)})};
     }
     const sampleAnnot = () => ({o: {title: i18n('La maison des MAZAUD à Aurillac (photo de 1910)'), img: '', ratio: .66}, rows: [[30, 40, 'La porte d’entrée', 'refaite en 1902'], [62, 30, 'La chambre de Jean', ''], [80, 70, 'Le four à pain', 'encore là en 1950']].map(([x, y, label, note]) => ({x, y, label: i18n(label), note: i18n(note)}))});
+    /* ═════ « Depuis l'app » des trois sortes à écrire : un modèle vide à remplir (dit tel quel), ou les vrais faits d'une fiche ═════ */
+    const startPid = () => Number(A()?.state?.currentPersonId) || Number(A()?.state?.bootstrap?.startPersonId) || 0;
+    const personOf = async () => { const id = startPid(); if (!id) throw new Error(i18n('Ouvre d’abord la fiche d’une personne (ou choisis la personne de départ).')); const d = await A().api('person', {id}); if (!d?.person) throw new Error(i18n('Fiche introuvable.')); return d; };
+    const whoOf = P => [P.first_name, P.last_name].filter(Boolean).join(' ') || i18n('Personne sans nom');
+    const evLabel = e => String(e.type_label || e.custom_type || e.gedcom_tag || i18n('Événement'));
+    const TPL = '(' + i18n('à écrire') + ')';
+    const tplBox = (title, intro, choices, extra = '') => `<div class="h-dg-app dmo-app"><h4>${esc(i18n(title))}</h4><p class="muted">${esc(i18n(intro))}</p><label>${esc(i18n('Point de départ'))}${sel('tpl', choices, choices[0][0])}</label>${extra}<button type="button" class="button small" data-dgm-go>${esc(i18n('Prendre'))}</button><p class="muted" data-dgm-msg aria-live="polite"></p></div>`;
+    const bindAsync = run => (pane, io) => {
+        const btn = pane.querySelector('[data-dgm-go]'), msg = pane.querySelector('[data-dgm-msg]'); if (!btn) return;
+        btn.addEventListener('click', async () => { btn.disabled = true; if (msg) msg.textContent = i18n('Lecture de ta généalogie…');
+            try { const s = io.spec(); const t = await run(pane, s); io.apply(s); A().toast?.(t || i18n('Données prises dans ta base.')); if (msg?.isConnected) msg.textContent = ''; } catch (e) { if (msg) msg.textContent = '⚠️ ' + (e.message || e); } finally { btn.disabled = false; } });
+    };
+    const flowApp = {
+        html: () => tplBox('🧭 Pour commencer', 'Un modèle vide (les cases à écrire), ou les actes à chercher pour la personne ouverte : ce qui est déjà connu, ce qui manque.',
+            [['blank', 'Modèle vide à remplir (début, étape, question oui / non, fin)'], ['acts', 'Les actes de la personne ouverte : trouvés ou à chercher']]),
+        bind: bindAsync(async (pane, s) => {
+            if (val(pane, 'tpl') !== 'acts') { s.rows = [{id: '1', text: `${i18n('Début')} ${TPL}`, kind: 'start', yes: '2', no: ''}, {id: '2', text: `${i18n('Étape')} ${TPL}`, kind: 'step', yes: '3', no: ''}, {id: '3', text: `${i18n('Question oui / non')} ${TPL}`, kind: 'question', yes: '4', no: '2'}, {id: '4', text: `${i18n('Fin')} ${TPL}`, kind: 'end', yes: '', no: ''}]; s.o = {...(s.o || {}), title: i18n('Modèle à remplir')}; return i18n('Modèle vide : écris tes cases dans le tableau.'); }
+            const d = await personOf(), P = d.person, ev = d.events || [];
+            const want = [['BIRT', 'naissance'], ['MARR', 'mariage'], ['DEAT', 'décès']], rows = [{id: '1', text: whoOf(P), kind: 'start', yes: '2', no: ''}]; let n = 2;
+            for (const [tag, word] of want) {
+                const e = ev.find(x => String(x.gedcom_tag || '').toUpperCase() === tag || (tag === 'MARR' && /mariage/i.test(evLabel(x))) || (tag === 'BIRT' && /naissance|baptême/i.test(evLabel(x))) || (tag === 'DEAT' && /décès|inhumation/i.test(evLabel(x))));
+                const known = e && (e.date_text || e.place_name);
+                rows.push({id: String(n), text: known ? i18n('Acte de {w} : {d}', {w: i18n(word), d: [e.date_text, e.place_name].filter(Boolean).join(', ')}) : i18n('Acte de {w} : à chercher (date ou lieu inconnus)', {w: i18n(word)}), kind: known ? 'step' : 'question', yes: String(n + 1), no: known ? '' : String(n + 1)});
+                n++;
+            }
+            rows.push({id: String(n), text: i18n('Fiche relue'), kind: 'end', yes: '', no: ''});
+            s.rows = rows; s.o = {...(s.o || {}), title: i18n('Les actes de {p}', {p: whoOf(P)})};
+            return i18n('Les actes de {p}, d’après sa fiche.', {p: whoOf(P)});
+        }),
+    };
+    const ttApp = {
+        html: () => tplBox('🗓 Pour commencer', 'Un modèle vide (deux jours, des moments à écrire), ou les événements de la personne ouverte qui ont une heure.',
+            [['blank', 'Modèle vide à remplir (deux jours, matin et après-midi)'], ['hours', 'Les événements avec une heure, de la personne ouverte']]),
+        bind: bindAsync(async (pane, s) => {
+            if (val(pane, 'tpl') !== 'hours') { s.rows = [[`${i18n('Jour')} 1`, '8:00', '12:00'], [`${i18n('Jour')} 1`, '14:00', '18:00'], [`${i18n('Jour')} 2`, '8:00', '12:00'], [`${i18n('Jour')} 2`, '14:00', '18:00']].map(([day, start, end]) => ({day, start, end, label: TPL, group: ''})); s.o = {...(s.o || {}), title: i18n('Modèle à remplir')}; return i18n('Modèle vide : écris les moments dans le tableau.'); }
+            const d = await personOf(), P = d.person;
+            const rows = (d.events || []).filter(e => /^\d{1,2}:\d{2}$/.test(String(e.event_time || ''))).map(e => { const [h, m] = String(e.event_time).split(':').map(Number), end = Math.min(24, h + 1); return {day: String(e.date_text || i18n('Sans date')), start: e.event_time, end: `${end}:${String(m).padStart(2, '0')}`, label: evLabel(e), group: evLabel(e)}; });
+            if (!rows.length) throw new Error(i18n('Aucun événement de {p} n’a d’heure (« Heure de l’événement » dans sa fenêtre) : prends le modèle vide.', {p: whoOf(P)}));
+            s.rows = rows; s.o = {...(s.o || {}), title: i18n('Les heures de {p}', {p: whoOf(P)})};
+            return i18n('{n} moment(s) de {p}, d’après sa fiche.', {n: String(rows.length), p: whoOf(P)});
+        }),
+    };
+    const annotStart = bindAsync(async (pane, s) => {
+        const rows = list => list.map((label, i) => ({x: 8, y: Math.round(10 + i * (80 / Math.max(1, list.length - 1))), label, note: ''})); // à placer : rangés à gauche, de haut en bas
+        if (val(pane, 'tpl') !== 'person') { s.rows = rows([`${i18n('Repère')} 1 ${TPL}`, `${i18n('Repère')} 2 ${TPL}`, `${i18n('Repère')} 3 ${TPL}`]); s.o = {...(s.o || {}), title: i18n('Modèle à remplir')}; return i18n('Modèle vide : choisis l’image, puis écris et place les repères.'); }
+        const d = await personOf(), P = d.person, img = P.portrait || (d.media || []).find(m => /image/.test(String(m.media_type || '')) && m.filename)?.filename || '';
+        if (!img) throw new Error(i18n('{p} n’a ni portrait ni image : choisis l’image toi-même, ou prends le modèle vide.', {p: whoOf(P)}));
+        const evs = (d.events || []).filter(e => e.date_text || e.place_name).slice(0, 8).map(e => `${evLabel(e)}${e.date_text ? ' · ' + e.date_text : ''}${e.place_name ? ' · ' + e.place_name : ''}`);
+        s.o = {...(s.o || {}), img, ratio: s.o?.ratio || .66, title: whoOf(P)}; s.rows = rows(evs.length ? evs : [whoOf(P)]);
+        return i18n('L’image de {p} et ses événements : place les repères (clique sur l’image dans l’aperçu pour lire la place).', {p: whoOf(P)});
+    });
     const annotApp = {
         html: spec => `<div class="h-dg-app dmo-app"><h4>🖼 ${esc(i18n('L’image à annoter'))}</h4><p class="muted">${esc(spec.o?.img ? i18n('Image : {f}', {f: spec.o.img}) : i18n('Aucune image pour l’instant.'))}</p><button type="button" class="button small" data-dgm-img>🖼 ${esc(i18n('Choisir l’image…'))}</button>
-            <p class="muted">${esc(i18n('Un repère : sa place en % (x = depuis la gauche, y = depuis le haut). Astuce : clique sur l’image dans l’aperçu pour lire la place.'))}</p></div>`,
-        bind: (pane, io) => { pane.querySelector('[data-dgm-img]')?.addEventListener('click', async () => {
+            <p class="muted">${esc(i18n('Un repère : sa place en % (x = depuis la gauche, y = depuis le haut). Astuce : clique sur l’image dans l’aperçu pour lire la place.'))}</p>
+            <label>${esc(i18n('Point de départ'))}${sel('tpl', [['blank', 'Modèle vide à remplir (trois repères à écrire)'], ['person', 'Le portrait de la personne ouverte, ses événements en repères (à placer)']], 'blank')}</label><button type="button" class="button small" data-dgm-go>${esc(i18n('Prendre'))}</button><p class="muted" data-dgm-msg aria-live="polite"></p></div>`,
+        bind: (pane, io) => { annotStart(pane, io); pane.querySelector('[data-dgm-img]')?.addEventListener('click', async () => {
             const P = window.LCNDA_MEDIA_PICKER || window.LCNDA_PICKER; const it = await P?.openMediaPicker?.({types: ['image']}); if (!it?.filename) return;
             const s = io.spec(); s.o = {...(s.o || {}), img: it.filename}; const im = new Image(); im.onload = () => { s.o.ratio = Math.round(im.naturalHeight / im.naturalWidth * 1000) / 1000; io.apply(s); }; im.onerror = () => io.apply(s); im.src = `media/${encodeURIComponent(it.filename)}`; }); },
     };
@@ -486,7 +538,7 @@
             bind: bind((D, pane, s) => { const g = val(pane, 'g') || 'surname', keep = new Set(topKeys(people(D).map(p => DIMS[g][1](D, p)), Math.min(topN(pane, 6), 12)).map(x => x[0])), m = new Map();
                 people(D).forEach(p => { if (!Number.isFinite(p.by)) return; const k = DIMS[g][1](D, p); const se = othersOf(keep, k) || i18n('Inconnu'), x = Math.floor(p.by / 10) * 10; m.set(x + '\u0001' + se, (m.get(x + '\u0001' + se) || 0) + 1); });
                 if (!m.size) throw new Error(i18n('Aucune naissance datée.')); s.rows = [...m.entries()].map(([k, value]) => { const [x, series] = k.split('\u0001'); return {x: Number(x), series, value}; }).sort((a, b) => a.x - b.x); return i18n('{n} naissances prises dans ta base.', {n: String([...m.values()].reduce((a, b) => a + b, 0))}); })},
-        annotated: annotApp,
+        annotated: annotApp, flowtext: flowApp, timetable: ttApp,
     };
 
     /* ═════════ Les sortes : tableaux, réglages ═════════ */
