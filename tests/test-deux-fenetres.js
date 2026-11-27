@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 /**
- * 🔁 Deux fenêtres de l'app ouvertes ensemble ne se renvoient jamais la balle (app.js : « Plusieurs fenêtres », applyCrossWindowChange).
+ * 🔁 Deux fenêtres de l'app (ou trois, ou quatre) ouvertes ensemble ne se renvoient jamais la balle (app.js : « Plusieurs fenêtres », applyCrossWindowChange).
  *   node tests/test-deux-fenetres.js            (GROSSE_BASE=3861 par défaut : comme la vraie base qui se figeait)
  *
  * Les fenêtres partagent le stockage local : un réglage changé dans l'une redessine l'autre (événement « storage »). Si ce redessin
@@ -13,7 +13,8 @@
  *     plus aucun événement « storage » ni écriture pendant 8 s, aucune tâche de plus de 500 ms, pas de plantage, mémoire stable ;
  *  2. le pire cas : chaque redessin, dans chaque fenêtre, écrit une valeur nouvelle (ce que fait une clé « remise en ordre » qui ne
  *     tombe jamais pareil) → au plus quelques redessins de chaque côté en 25 s (avant : un toutes les secondes, sans fin) ;
- *  3. un vrai changement fait juste après (pendant l'« écho ») est quand même repris, une fois le calme revenu.
+ *  3. un vrai changement fait juste après est quand même repris partout ;
+ *  le tout avec 2, 3 et 4 fenêtres (Réglages + deux fiches différentes + une liste) : plusieurs fenêtres annoncent leur écho en même temps.
  */
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -47,80 +48,88 @@ const t = async (name, fn) => { try { await fn(); console.log('✓', name); } ca
     for (let i = 0; i < 200; i++) { try { await fetch(base + 'api.php?action=kiosk_state'); break; } catch (_) { await new Promise(r => setTimeout(r, 100)); } }
     const browser = await chromium.launch();
     try {
-        const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } }); // un seul contexte : le même stockage local, comme deux fenêtres de l'app
-        await ctx.route(u => !u.href.startsWith(base), r => r.abort());
-        await ctx.addInitScript(() => {
-            const C = window.__2f = { w: 0, s: 0, keys: {}, sheets: 0, settings: 0, long: 0 };
-            const set = Storage.prototype.setItem, rem = Storage.prototype.removeItem;
-            Storage.prototype.setItem = function (k, v) { if (this === window.localStorage && this.getItem(k) !== String(v)) { C.w++; C.keys[k] = (C.keys[k] || 0) + 1; } return set.call(this, k, v); };
-            Storage.prototype.removeItem = function (k) { if (this === window.localStorage && this.getItem(k) !== null) { C.w++; C.keys[k] = (C.keys[k] || 0) + 1; } return rem.call(this, k); };
-            addEventListener('storage', () => { C.s++; });
-            const seen = new WeakSet(), one = (n, sel, k) => { const el = n.matches(sel) ? n : n.querySelector(sel); if (el && !seen.has(el)) { seen.add(el); C[k]++; } }; // chaque nouvelle fiche, chaque nouvelle page des réglages : une fois
-            new MutationObserver(ms => ms.forEach(m => m.addedNodes.forEach(n => { if (n.nodeType !== 1) return; one(n, '.person-page', 'sheets'); one(n, '#fsec-blocks', 'settings'); }))).observe(document, { childList: true, subtree: true });
-            try { new PerformanceObserver(l => l.getEntries().forEach(e => { if (e.duration > 500) C.long++; })).observe({ type: 'longtask' }); } catch (_) {}
-        });
-        const errs = [];
-        const open = async hash => { const p = await ctx.newPage(); p.on('pageerror', e => errs.push(e.message)); p.on('crash', () => errs.push('la fenêtre a planté')); await p.goto(base + hash); await p.waitForFunction(() => window.LCNDA_APP?.state?.csrf); return p; };
-        const pid = (await (await fetch(base + 'api.php?action=people')).json()).people.find(p => p.kind !== 'animal').id;
-        const sheet = await open(`#personnes/${pid}`);
-        await sheet.waitForSelector('#workspace .person-page', { timeout: 30000 }); await sheet.waitForTimeout(3000);
-        const reg = await open('#maintenance/design_sheets');
-        await reg.waitForFunction(() => [...document.querySelectorAll('[role=tab]')].some(x => /Sections et blocs/.test(x.textContent)), null, { timeout: 30000 });
-        await reg.evaluate(() => [...document.querySelectorAll('[role=tab]')].find(x => /Sections et blocs/.test(x.textContent)).click());
-        await reg.waitForSelector('#fsec-blocks [data-fsed-bshow]', { timeout: 30000 }); await reg.waitForTimeout(3000);
-        const C = p => p.evaluate(() => ({ ...window.__2f, heap: performance.memory ? performance.memory.usedJSHeapSize : 0 }));
-        const gc = async p => { const c = await p.context().newCDPSession(p); await c.send('HeapProfiler.collectGarbage'); await c.detach(); return (await C(p)).heap; };
-        const heap0 = [await gc(reg), await gc(sheet)];
-        for (const p of [reg, sheet]) await p.evaluate(() => { window.__2f.long = 0; }); // le démarrage ne compte pas
+        const people = (await (await fetch(base + 'api.php?action=people')).json()).people.filter(p => p.kind !== 'animal');
+        // N fenêtres : Réglages (Sections et blocs) + des fiches différentes + une liste
+        const OTHERS = [`#personnes/${people[0].id}`, `#personnes/${people[Math.floor(people.length / 2)].id}`, '#listes'];
+        for (const N of [2, 3, 4]) await windows(N, OTHERS.slice(0, N - 1));
 
-        await t('un réglage changé dans une fenêtre est repris par l’autre, puis tout se calme (défilement de « Ordre et visibilité des blocs »)', async () => {
-            const s0 = await C(sheet);
-            for (const i of [3, 5]) { await reg.evaluate(i => document.querySelectorAll('#fsec-blocks [data-fsed-bshow]')[i].click(), i); await reg.waitForTimeout(600); }
-            await reg.evaluate(() => document.getElementById('fsec-blocks').scrollIntoView());
-            for (let i = 0; i < 30; i++) { await reg.evaluate(() => { document.getElementById('workspace').scrollTop += 300; }); await reg.waitForTimeout(100); }
-            await sheet.waitForFunction(n => window.__2f.sheets > n, s0.sheets, { timeout: 15000 }); // la fiche de l'autre fenêtre a repris le réglage
-            await reg.waitForTimeout(6000); // ce qui suit le dessin (aperçus, blocs) a fini
-            const a = [await C(reg), await C(sheet)];
-            await reg.waitForTimeout(8000);
-            const b = [await C(reg), await C(sheet)];
-            const d = [0, 1].map(i => ({ w: b[i].w - a[i].w, s: b[i].s - a[i].s, sheets: b[i].sheets - a[i].sheets, settings: b[i].settings - a[i].settings, keys: Object.fromEntries(Object.entries(b[i].keys).filter(([k, v]) => v !== a[i].keys[k]).map(([k, v]) => [k, v - (a[i].keys[k] || 0)])) }));
-            console.log(`   8 s de calme : réglages ${JSON.stringify(d[0])} · fiche ${JSON.stringify(d[1])}`);
-            assert.deepEqual(d.map(x => [x.s, x.sheets, x.settings]), [[0, 0, 0], [0, 0, 0]], 'plus rien ne passe d’une fenêtre à l’autre');
-            assert.deepEqual(d.map(x => x.w), [0, 0], 'plus aucune écriture dans le stockage local');
-        });
+        async function windows(N, hashes) {
+            const tag = `${N} fenêtres`;
+            const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } }); // un seul contexte : le même stockage local, comme les fenêtres de l'app
+            await ctx.route(u => !u.href.startsWith(base), r => r.abort());
+            await ctx.addInitScript(() => {
+                const C = window.__2f = { w: 0, s: 0, keys: {}, ws: 0, long: 0 };
+                const set = Storage.prototype.setItem, rem = Storage.prototype.removeItem;
+                Storage.prototype.setItem = function (k, v) { if (this === window.localStorage && this.getItem(k) !== String(v)) { C.w++; C.keys[k] = (C.keys[k] || 0) + 1; } return set.call(this, k, v); };
+                Storage.prototype.removeItem = function (k) { if (this === window.localStorage && this.getItem(k) !== null) { C.w++; C.keys[k] = (C.keys[k] || 0) + 1; } return rem.call(this, k); };
+                addEventListener('storage', () => { C.s++; });
+                // un redessin de l'écran = le contenu de #workspace remplacé (compté une fois par dessin)
+                let last = 0;
+                new MutationObserver(ms => { if (ms.some(m => m.target.id === 'workspace' && m.addedNodes.length) && performance.now() - last > 250) { last = performance.now(); C.ws++; window.dispatchEvent(new Event('lc-essai-redessin')); } }).observe(document, { childList: true, subtree: true });
+                C.longs = []; try { new PerformanceObserver(l => l.getEntries().forEach(e => { if (e.duration > 500) { C.long++; C.longs.push(`${Math.round(e.duration)} ms à ${(e.startTime / 1000).toFixed(1)} s`); } })).observe({ type: 'longtask' }); } catch (_) {}
+            });
+            const errs = [];
+            const open = async hash => { const p = await ctx.newPage(); p.on('pageerror', e => errs.push(e.message)); p.on('crash', () => errs.push('une fenêtre a planté')); await p.goto(base + hash); await p.waitForFunction(() => window.LCNDA_APP?.state?.csrf); return p; };
+            const others = [];
+            for (const h of hashes) { const p = await open(h); await p.waitForSelector(h.startsWith('#personnes') ? '#workspace .person-page' : '#workspace > *', { timeout: 30000 }); await p.waitForTimeout(2000); others.push(p); }
+            const reg = await open('#maintenance/design_sheets');
+            await reg.waitForFunction(() => [...document.querySelectorAll('[role=tab]')].some(x => /Sections et blocs/.test(x.textContent)), null, { timeout: 30000 });
+            await reg.evaluate(() => [...document.querySelectorAll('[role=tab]')].find(x => /Sections et blocs/.test(x.textContent)).click());
+            await reg.waitForSelector('#fsec-blocks [data-fsed-bshow]', { timeout: 30000 }); await reg.waitForTimeout(3000);
+            const all = [reg, ...others], name = i => i ? hashes[i - 1] : 'réglages';
+            const C = p => p.evaluate(() => ({ ...window.__2f, heap: performance.memory ? performance.memory.usedJSHeapSize : 0 }));
+            const Cs = () => Promise.all(all.map(C));
+            const gc = async p => { const c = await p.context().newCDPSession(p); await c.send('HeapProfiler.collectGarbage'); await c.detach(); return (await C(p)).heap; };
+            const heap0 = []; for (const p of all) heap0.push(await gc(p));
+            for (const p of all) await p.evaluate(() => { window.__2f.long = 0; window.__2f.longs = []; window.__2f.t0 = performance.now(); }); // le démarrage ne compte pas
+            const click = i => reg.evaluate(i => document.querySelectorAll('#fsec-blocks [data-fsed-bshow]')[i].click(), i);
+            const repris = async (s0, ms = 15000) => { for (let i = 1; i < all.length; i++) await all[i].waitForFunction(n => window.__2f.ws > n, s0[i].ws, { timeout: ms }); };
 
-        await t('le pire cas : chaque redessin écrit une valeur nouvelle → au plus quelques redessins de chaque côté (pas de ping-pong)', async () => {
-            // chaque redessin de la fiche (fenêtre 2) et de la page des réglages (fenêtre 1) écrit une valeur qui ne tombe jamais pareil
-            await sheet.evaluate(() => { let n = 0; new MutationObserver(ms => { if (ms.some(m => [...m.addedNodes].some(x => x.nodeType === 1 && (x.matches('.person-page') || x.querySelector('.person-page'))))) localStorage.setItem('genealogie-essai-ordre-fiche', 'f' + (++n)); }).observe(document.getElementById('workspace'), { childList: true, subtree: true }); });
-            await reg.evaluate(() => { let n = 0; new MutationObserver(ms => { if (ms.some(m => [...m.addedNodes].some(x => x.nodeType === 1 && (x.matches('#fsec-blocks') || x.querySelector('#fsec-blocks'))))) localStorage.setItem('genealogie-essai-ordre-reglages', 'r' + (++n)); }).observe(document.getElementById('workspace'), { childList: true, subtree: true }); });
-            const a = [await C(reg), await C(sheet)];
-            await reg.evaluate(() => document.querySelectorAll('#fsec-blocks [data-fsed-bshow]')[3].click());
-            await reg.waitForTimeout(25000);
-            const b = [await C(reg), await C(sheet)];
-            const n = [b[0].settings - a[0].settings, b[1].sheets - a[1].sheets];
-            console.log(`   en 25 s : page des réglages redessinée ${n[0]} fois, fiche ${n[1]} fois ; événements « storage » ${b[0].s - a[0].s} / ${b[1].s - a[1].s}`);
-            assert.ok(n[1] >= 1, 'la fiche a repris le réglage');
-            assert.ok(n[0] <= 3 && n[1] <= 3, `ping-pong : ${n}`);
-            const late = [await C(reg), await C(sheet)]; await reg.waitForTimeout(10000); const end = [await C(reg), await C(sheet)];
-            assert.ok(end[0].settings - late[0].settings <= 1 && end[1].sheets - late[1].sheets <= 1, 'ça ralentit encore : au plus un redessin en 10 s');
-        });
+            await t(`${tag} : un réglage changé dans Réglages est repris par toutes les autres, puis tout se calme (défilement de « Ordre et visibilité des blocs »)`, async () => {
+                const s0 = await Cs();
+                for (const i of [3, 5]) { await click(i); await reg.waitForTimeout(600); }
+                await reg.evaluate(() => document.getElementById('fsec-blocks').scrollIntoView());
+                for (let i = 0; i < 30; i++) { await reg.evaluate(() => { document.getElementById('workspace').scrollTop += 300; }); await reg.waitForTimeout(100); }
+                await repris(s0);
+                await reg.waitForTimeout(6000); // ce qui suit le dessin (aperçus, blocs) a fini
+                const a = await Cs(); await reg.waitForTimeout(8000); const b = await Cs();
+                const d = all.map((_, i) => ({ w: b[i].w - a[i].w, s: b[i].s - a[i].s, ws: b[i].ws - a[i].ws, keys: Object.fromEntries(Object.entries(b[i].keys).filter(([k, v]) => v !== a[i].keys[k]).map(([k, v]) => [k, v - (a[i].keys[k] || 0)])) }));
+                console.log(`   8 s de calme : ${d.map((x, i) => `${name(i)} ${JSON.stringify(x)}`).join(' · ')}`);
+                assert.deepEqual(d.map(x => [x.s, x.ws, x.w]), all.map(() => [0, 0, 0]), 'plus rien ne passe d’une fenêtre à l’autre, plus aucune écriture');
+            });
 
-        await t('un vrai changement juste après (pendant l’écho) est repris une fois le calme revenu', async () => {
-            await sheet.waitForTimeout(12000);
-            const before = await sheet.evaluate(() => localStorage.getItem('genealogie-person-blocks'));
-            const s0 = (await C(sheet)).sheets;
-            await reg.evaluate(() => document.querySelectorAll('#fsec-blocks [data-fsed-bshow]')[6].click());
-            await sheet.waitForFunction(n => window.__2f.sheets > n, s0, { timeout: 30000 });
-            assert.notEqual(await sheet.evaluate(() => localStorage.getItem('genealogie-person-blocks')), before);
-        });
+            await t(`${tag} : le pire cas (chaque redessin, dans chaque fenêtre, écrit une valeur nouvelle) → au plus quelques redessins de chaque côté`, async () => {
+                for (const [i, p] of all.entries()) await p.evaluate(i => { let n = 0; addEventListener('lc-essai-redessin', () => localStorage.setItem('genealogie-essai-ordre-' + i, String(++n))); }, i);
+                const a = await Cs();
+                await click(3);
+                await reg.waitForTimeout(25000);
+                const b = await Cs();
+                const n = all.map((_, i) => b[i].ws - a[i].ws);
+                console.log(`   en 25 s : redessins ${n.map((x, i) => `${name(i)} ${x}`).join(', ')} ; événements « storage » ${all.map((_, i) => b[i].s - a[i].s).join(' / ')}`);
+                assert.ok(n.slice(1).every(x => x >= 1), 'toutes les autres fenêtres ont repris le réglage');
+                assert.ok(n.every(x => x <= 3), `ping-pong : ${n}`);
+                await reg.waitForTimeout(4000); const late = await Cs(); await reg.waitForTimeout(10000); const end = await Cs();
+                assert.ok(end.every((x, i) => x.ws - late[i].ws === 0), 'plus aucun redessin ensuite');
+            });
 
-        await t('aucune tâche de plus de 500 ms, pas de plantage ni d’erreur, mémoire stable', async () => {
-            const h1 = [await gc(reg), await gc(sheet)];
-            console.log(`   mémoire : réglages ${heap0[0] >> 20} → ${h1[0] >> 20} Mo · fiche ${heap0[1] >> 20} → ${h1[1] >> 20} Mo`);
-            assert.deepEqual([(await C(reg)).long, (await C(sheet)).long], [0, 0], 'tâches de plus de 500 ms');
-            assert.deepEqual(errs, []);
-            assert.ok(h1[0] < heap0[0] * 1.5 + (30 << 20) && h1[1] < heap0[1] * 1.5 + (30 << 20), 'la mémoire monte');
-        });
+            await t(`${tag} : un vrai changement juste après est repris par toutes les autres`, async () => {
+                await reg.waitForTimeout(4000);
+                const s0 = await Cs();
+                await click(6);
+                await repris(s0, 30000);
+                const v = await Promise.all(all.map(p => p.evaluate(() => localStorage.getItem('genealogie-person-blocks'))));
+                assert.ok(v.every(x => x === v[0]));
+            });
+
+            await t(`${tag} : aucune tâche de plus de 500 ms, pas de plantage ni d’erreur, mémoire stable`, async () => {
+                const h1 = []; for (const p of all) h1.push(await gc(p));
+                console.log(`   mémoire (Mo) : ${all.map((_, i) => `${name(i)} ${heap0[i] >> 20} → ${h1[i] >> 20}`).join(' · ')}`);
+                const cs = await Cs(); assert.deepEqual(cs.map(x => x.long), all.map(() => 0), `tâches de plus de 500 ms : ${cs.map((x, i) => `${name(i)} [${x.longs.join(', ')}]`).join(' · ')}`);
+                assert.deepEqual(errs, []);
+                assert.ok(h1.every((h, i) => h < heap0[i] * 1.5 + (30 << 20)), 'la mémoire monte');
+            });
+            await ctx.close();
+        }
     } finally { await browser.close(); proc.kill(); fs.rmSync(tmp, { recursive: true, force: true }); }
     console.log(failed ? `\n${failed} échec(s)` : '\nTout est bon.');
     process.exit(failed ? 1 : 0);

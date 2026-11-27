@@ -88,8 +88,13 @@ body.is-kiosk #pa-quick-family, body.is-kiosk [data-pa-quick-family], body.is-ki
 /* ── ⚡ Saisie rapide d'une famille ── */
 .pa-quick-family { width: min(860px, 96vw); }
 .pa-qf-grid { grid-template-columns: 1fr 1fr; }
-.pa-qf-children { display: grid; gap: 8px; margin-top: 10px; }
-.pa-qf-child { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, .8fr) minmax(0, 1fr) minmax(0, 1fr); gap: 8px; align-items: end; padding: 8px; border: 1px dashed var(--line, #dde); border-radius: 8px; }
+.pa-qf-children { display: grid; gap: 12px; margin: 0; padding: 0 20px; } /* même marge que la grille du haut (.form-grid : 20px) */
+.pa-qf-child, .pa-qf-child.form-grid { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 10px 15px; align-items: end; padding: 12px; border: 1px dashed var(--line, #dde); border-radius: 8px; } /* ligne 1 : nom + sexe ; ligne 2 : naissance + lieu */
+.pa-qf-child > label, .pa-qf-child > .pk-host { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.pa-qf-child input, .pa-qf-child select { width: 100%; min-width: 0; box-sizing: border-box; }
+.pa-qf-child > label > :not(input):not(select) { max-width: 100%; }
+.pa-quick-family [data-pa-qf-more] { margin: 0; }
+.pa-quick-family form > p:has([data-pa-qf-more]) { padding: 0 20px; margin: 14px 0 18px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
 
 /* ── 🕘 Comparaison de versions ── */
 .pa-history-actions { display: grid; gap: 6px; align-content: start; }

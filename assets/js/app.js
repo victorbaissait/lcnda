@@ -4605,12 +4605,12 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
      * remise en ordre, un état d'écran, une mémoire) est son écho, annoncé juste avant (lcnda-cross-echo, LS_WRITES.mark plus haut) ;
      * l'autre fenêtre ne se redessine pas pour un écho (sinon A redessine → écrit → B redessine → écrit → A… sans fin : la page se fige,
      * la mémoire monte, la fenêtre se recharge). Et, quoi qu'il arrive, au plus quelques fois de suite : au-delà, on attend de plus en plus. */
-    let crossWindowTimer=null,crossWindowPending=false,crossRuns=[],crossEchoKey=null;
+    let crossWindowTimer=null,crossWindowPending=false,crossRuns=[];const crossEchoKeys=new Map(); // clé annoncée → jusqu'à quand (plusieurs fenêtres peuvent annoncer en même temps : une liste, pas une seule clé)
     ['pointerdown','keydown'].forEach(ev=>window.addEventListener(ev,()=>{LS_WRITES.input=Date.now();},{capture:true,passive:true}));
     window.addEventListener('storage',event=>{
         if(event.storageArea&&event.storageArea!==localStorage)return;
-        if(event.key==='lcnda-cross-echo'){try{crossEchoKey=JSON.parse(event.newValue||'null')?.k||null;}catch(_){crossEchoKey=null;}return;}
-        const echo=event.key&&event.key===crossEchoKey;crossEchoKey=null;if(echo)return;
+        if(event.key==='lcnda-cross-echo'){try{const k=JSON.parse(event.newValue||'null')?.k;if(k){const e=crossEchoKeys.get(k);crossEchoKeys.set(k,{n:(e&&e.until>Date.now()?e.n:0)+1,until:Date.now()+3000});}}catch(_){}return;}
+        const echo=event.key&&crossEchoKeys.get(event.key);if(echo&&echo.until>Date.now()){if(--echo.n<=0)crossEchoKeys.delete(event.key);return;}if(echo)crossEchoKeys.delete(event.key);
         if(event.key&&(!/^(genealogie-|lcnda-)/.test(event.key)||CROSS_WINDOW_IGNORED.test(event.key)))return;
         if(event.key&&event.newValue===event.oldValue)return;
         crossWindowPending=true;clearTimeout(crossWindowTimer);crossWindowTimer=setTimeout(applyCrossWindowChange,500);
@@ -9395,7 +9395,7 @@ ${backupSectionHtml()}
         const P=window.LCNDA_PICKER,cur=state.module==='personnes'?state.currentPerson?.person:null;
         const field=(name,value=null,ph='')=>P?.pickerField?P.pickerField({name,kind:'person',allowFree:true,allowCreate:false,value,placeholder:ph}):`<input name="${name}" placeholder="${escapeHtml(ph)}">`;
         const me=cur&&cur.kind!=='animal'?{id:Number(cur.id),title:personName(cur)}:null;
-        const childRow=i=>`<div class="pa-qf-child" data-pa-qf-child="${i}"><div class="pk-host"><span>${escapeHtml(i18n('Enfant {n}',{n:i+1}))}</span>${field(`qf_child_${i}`,null,i18n('Prénom NOM, ou choisis une fiche'))}</div><label>${escapeHtml(i18n('Sexe'))}<select name="qf_child_${i}_gender"><option value="unknown">?</option><option value="male">${escapeHtml(i18n('Garçon'))}</option><option value="female">${escapeHtml(i18n('Fille'))}</option></select></label><label>${escapeHtml(i18n('Naissance'))}<input name="qf_child_${i}_date" placeholder="${escapeHtml(i18n('7 mai 1925'))}" data-ui-date="nocal"></label><label>${escapeHtml(i18n('Lieu'))}<input name="qf_child_${i}_place" placeholder="${escapeHtml(i18n('Commune'))}"></label></div>`;
+        const childRow=i=>`<div class="pa-qf-child form-grid" data-pa-qf-child="${i}"><div class="pk-host"><span>${escapeHtml(i18n('Enfant {n}',{n:i+1}))}</span>${field(`qf_child_${i}`,null,i18n('Prénom NOM, ou choisis une fiche'))}</div><label>${escapeHtml(i18n('Sexe'))}<select name="qf_child_${i}_gender"><option value="unknown">?</option><option value="male">${escapeHtml(i18n('Garçon'))}</option><option value="female">${escapeHtml(i18n('Fille'))}</option></select></label><label>${escapeHtml(i18n('Naissance'))}<input name="qf_child_${i}_date" placeholder="${escapeHtml(i18n('7 mai 1925'))}" data-ui-date="nocal"></label><label>${escapeHtml(i18n('Lieu'))}<input name="qf_child_${i}_place" placeholder="${escapeHtml(i18n('Commune'))}"></label></div>`;
         const dlg=document.createElement('dialog');dlg.className='modal pa-quick-family';dlg.id='pa-quick-family-dialog';
         dlg.innerHTML=`<form method="dialog"><div class="modal-head"><div><span class="eyebrow">${escapeHtml(i18n('SAISIE RAPIDE'))}</span><h2>${escapeHtml(i18n('⚡ ＋ Famille'))}</h2><p>${escapeHtml(i18n('Père, mère, mariage et enfants en une seule saisie. Pour chaque nom : choisis une fiche existante, ou tape « Prénom NOM » pour en créer une.'))}</p></div><button class="icon-button" type="button" data-pa-x aria-label="${escapeHtml(i18n('Fermer'))}">×</button></div>
             <div class="form-grid pa-qf-grid"><div class="pk-host"><span>${escapeHtml(i18n('Père'))}</span>${field('qf_father',cur?.gender==='male'?me:null,i18n('Prénom NOM, ou choisis une fiche'))}</div><div class="pk-host"><span>${escapeHtml(i18n('Mère'))}</span>${field('qf_mother',cur?.gender==='female'?me:null,i18n('Prénom NOM, ou choisis une fiche'))}</div>

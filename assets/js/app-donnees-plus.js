@@ -142,7 +142,7 @@
     /** les listes qui comptent : placées, datées, lues d'un coup ; par thème, ses listes réunies installées d'abord (sinon deux listes du thème) */
     let candP = null, candAt = 0;
     /** les listes que le serveur sert entières à chaque lecture (pas un fichier lu une fois dans le navigateur) : 🪨 terre et mots, 🌾 terroir,
-     *  🎭 culture de la commune, ➕ commune, 🏘 voir le village, 🏰 mes fiches d'édifices, 🤝 réseau — la pastille ne les relit pas à chaque
+     *  🎭 culture de la commune, ＋ commune, 🏘 voir le village, 🏰 mes fiches d'édifices, 🤝 réseau — la pastille ne les relit pas à chaque
      *  fiche (elles restent dans « ⤢ Tout voir » et dans Listes) ; un module peut aussi le dire lui-même (d.server) */
     const SERVER = d => !!d.server || /^(tm|tr|cc|cplus|l10v)_/.test(String(d.id)) || ['reseau', 'fiches_edifices'].includes(String(d.id));
     function candLists() {

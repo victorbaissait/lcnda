@@ -57,7 +57,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/recherche-carte.css?v=3">
     <link rel="stylesheet" href="assets/css/audit-enquetes.css?v=4">
     <link rel="stylesheet" href="assets/css/audit-cartes.css?v=4">
-    <link rel="stylesheet" href="assets/css/audit-personnes.css?v=5">
+    <link rel="stylesheet" href="assets/css/audit-personnes.css?v=6">
     <link rel="stylesheet" href="assets/css/audit-dashboard.css?v=2">
     <link rel="stylesheet" href="assets/css/audit-options.css?v=3">
     <link rel="stylesheet" href="assets/css/anim-studio.css?v=3">
@@ -1267,7 +1267,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-recherche-fr.js?v=1" defer></script>
 <script>window.LCNDA_MEDIA_LIMITS = <?= json_encode($ready ? media_limits_for_page() : null) ?>;</script>
 <script src="assets/js/app-fiche-lazy.js?v=11" defer></script><!-- ⏱ la fiche se charge à mesure qu’on la lit -->
-<script src="assets/js/app.js?v=633" defer></script>
+<script src="assets/js/app.js?v=635" defer></script>
 <script src="assets/js/app-media-limits.js?v=2" defer></script>
 <script src="assets/js/app-verrou.js?v=7" defer></script>
 <script src="assets/js/app-reseau-local.js?v=5" defer></script>
@@ -1378,7 +1378,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-listes-maj.js?v=8" defer></script>
 <script src="assets/js/app-donnees-accueil.js?v=11" defer></script><!-- 📊 Récap des données et la question en français : Listes → 🧰 Données et l’onglet 📊 Données (un seul écran) -->
 <script src="assets/js/app-donnees-onglet.js?v=2" defer></script><!-- 📊 l’onglet Données : on y reste (thèmes, listes réunies, listes), sa colonne de gauche, ranger / masquer les thèmes -->
-<script src="assets/js/app-donnees-plus.js?v=13" defer></script><!-- 📊 Données, en plus : ⚙ Organiser le récap, Réglages → 📊 Données, ⭐ 🕘 🆕 💾 📊 👤 🕳 📝 ➕ ⚠️ 🔎 📶 -->
+<script src="assets/js/app-donnees-plus.js?v=14" defer></script><!-- 📊 Données, en plus : ⚙ Organiser le récap, Réglages → 📊 Données, ⭐ 🕘 🆕 💾 📊 👤 🕳 📝 ➕ ⚠️ 🔎 📶 -->
 <script src="assets/js/app-donnees-plus-outils.js?v=6" defer></script><!-- ⚖️ 🗺 🕳 📖 📜 📄 🎞 🔗 💽 🕰 -->
 <script src="assets/js/app-listes-personnes.js?v=3" defer></script>
 <script src="assets/js/app-listes-perso-core.js?v=1" defer></script>
