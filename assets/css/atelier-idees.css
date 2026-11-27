@@ -134,3 +134,44 @@
 :root[data-theme="dark"] .air-th{background:#d9c9a3}
 :root[data-theme="dark"] .aic-row.is-rev .aic-mcell input{background:#2c2612;border-color:#e0b93a}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .air-txt mark{background:#7a5d00;color:#fff}:root:not([data-theme="light"]) .ais-f.is-reg input{background:#15281c;border-color:#4cc070}}
+
+/* ─── 🧰 les aides à la lecture (heritage-atelier-aides.js) ─── */
+.txh-panel{position:absolute;top:52px;right:12px;z-index:4;width:min(340px,calc(100% - 24px));max-height:calc(100% - 76px);overflow:auto;padding:8px 10px 10px;border:1px solid var(--line2,#c9ced8);border-radius:10px;background:var(--paper,#fff);color:var(--ink,#16181d);box-shadow:0 6px 24px rgba(0,0,0,.18);font-size:13px}
+.txh-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px}
+.txh-x{border:0;background:transparent;color:inherit;font-size:16px;line-height:1;padding:2px 6px;cursor:pointer;border-radius:50%}
+.txh-x:hover,.txh-x:focus-visible{background:var(--hover,rgba(0,0,0,.07))}
+.txh-sec{border-top:1px solid var(--line,#eceef2);padding:4px 0}
+.txh-sec>summary{cursor:pointer;font-weight:600;padding:4px 0}
+.txh-body{padding:4px 0 2px}
+.txh-model{margin:0 0 6px;line-height:1.55;font-family:Georgia,"Times New Roman",serif}
+.txh-blank{background:#fff3c4;color:inherit;border-radius:3px;padding:0 2px}
+.txh-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:4px 0}
+.txh-row input,.txh-row select{min-width:0;flex:1 1 90px;font:inherit}
+.txh-more>summary{cursor:pointer;color:var(--muted,#555);font-size:12.5px}
+.txh-glo,.txh-signs,.txh-signlist{list-style:none;margin:6px 0 0;padding:0}
+.txh-glo li,.txh-signs li{display:flex;align-items:center;gap:6px;padding:2px 0}
+.txh-glo li .txh-x{margin-left:auto;font-size:14px}
+.txh-glo li.is-here b{background:#e3f1ff;border-radius:3px;padding:0 3px}
+.txh-signs li span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.txh-prog{border-collapse:collapse;width:100%;margin:6px 0}
+.txh-prog th,.txh-prog td{text-align:left;padding:2px 4px;border-bottom:1px solid var(--line,#eceef2);font-size:12.5px}
+.txh-bar{display:inline-block;height:8px;border-radius:4px;background:#055dff;vertical-align:middle}
+.txh-hint{display:flex;flex-wrap:wrap;gap:6px;padding:6px 8px;margin:4px 0;border:1px solid var(--line,#eceef2);border-radius:8px;background:var(--paper,#fff);font-size:13px}
+.txh-hint[hidden]{display:none}
+.txh-chip{display:inline-flex;flex-wrap:wrap;align-items:center;gap:6px}
+.txh-chip.is-warn{color:#9a5b00}
+.txh-sug{border:1px solid var(--line2,#c9ced8);background:var(--paper,#fff);color:inherit;font:inherit;font-size:12.5px;padding:2px 8px;border-radius:999px;cursor:pointer}
+.txh-sug:hover,.txh-sug:focus-visible{border-color:#055dff}
+.txh-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px}
+.txh-sig{margin:0;padding:8px;border:1px solid var(--line2,#c9ced8);border-radius:8px;min-height:80px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+.txh-sig img{max-width:100%;max-height:140px;background:#fff}
+.txh-sig figcaption{font-size:12.5px;color:var(--muted,#555);text-align:center}
+.txh-signpick{display:flex;align-items:center;gap:8px;width:100%;text-align:left;border:1px solid transparent;background:transparent;color:inherit;font:inherit;padding:4px;border-radius:6px;cursor:pointer}
+.txh-signpick:hover,.txh-signpick:focus-visible{border-color:var(--line2,#c9ced8)}
+.txh-signpick img{height:36px;max-width:160px;background:#fff}
+:root[data-theme="dark"] .txh-blank{background:#5a4a12}
+:root[data-theme="dark"] .txh-glo li.is-here b{background:#173a5e}
+:root[data-theme="dark"] .txh-chip.is-warn{color:#ffc15c}
+:root[data-theme="dark"] .txh-panel{box-shadow:0 6px 24px rgba(0,0,0,.5)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .txh-blank{background:#5a4a12}:root:not([data-theme="light"]) .txh-glo li.is-here b{background:#173a5e}:root:not([data-theme="light"]) .txh-chip.is-warn{color:#ffc15c}:root:not([data-theme="light"]) .txh-panel{box-shadow:0 6px 24px rgba(0,0,0,.5)}}
+@media (max-width:700px){.txh-pair{grid-template-columns:1fr}}

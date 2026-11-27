@@ -377,6 +377,11 @@
         const c = cur, base = A().safeExportFilename ? A().safeExportFilename(c.title, 'fiche') : 'fiche';
         const items = [{icon: '📝', label: i18n('Markdown (.md)'), run: () => { download(sheetMarkdown(c), `${base}.md`, 'text/markdown;charset=utf-8'); toast(i18n('Fiche exportée en Markdown.'), 'success'); }},
             {icon: '🌐', label: i18n('Page web (.html)'), run: () => { download(sheetHtml(c), `${base}.html`, 'text/html;charset=utf-8'); toast(i18n('Fiche exportée en page web.'), 'success'); }},
+            ...(window.LCNDA_TEXT?.fromMarkdown ? (() => { // les formats du traitement de texte (app-texte-formats.js), à partir du Markdown de la fiche
+                const TX = window.LCNDA_TEXT, doc = () => { const r = TX.fromMarkdown(sheetMarkdown(c)); return r?.doc || r; };
+                const save = async (fn, ext, type) => { try { const out = await fn(doc()); const blob = out instanceof Blob ? out : new Blob([out], {type}); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${base}.${ext}`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); toast(i18n('Fiche exportée ({f}).', {f: '.' + ext}), 'success'); } catch (e) { toast(e.message || String(e), 'error'); } };
+                return [TX.toDocx && {icon: '📄', label: i18n('Word (.docx)'), run: () => save(TX.toDocx, 'docx')}, TX.toOdt && {icon: '📄', label: i18n('LibreOffice (.odt)'), run: () => save(TX.toOdt, 'odt')}, TX.toRtf && {icon: '📄', label: i18n('RTF (.rtf)'), run: () => save(TX.toRtf, 'rtf', 'application/rtf')}, TX.toText && {icon: '🗒', label: i18n('Texte simple (.txt)'), run: () => save(TX.toText, 'txt', 'text/plain;charset=utf-8')}].filter(Boolean);
+            })() : []),
             '-', {icon: '🖨', label: i18n('PDF (par 🖨 Imprimer)'), run: () => printSheet()}];
         if (UIx().menuAt) UIx().menuAt(anchor, items, {title: i18n('⤓ Exporter la fiche')}); else items[0].run();
     }

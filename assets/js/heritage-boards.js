@@ -1538,9 +1538,14 @@
         }
         const setOnSel = (k, v, keep = false) => { if (ro()) return; selItems().forEach(i => { if (k === 'fill' && !['shape', 'note', 'tag', 'folder', 'frame'].includes(i.type)) return; if (k === 'stroke' && !['shape', 'media', 'webimage', 'frame'].includes(i.type)) return; if (k === 'shape' && i.type !== 'shape') return; i[k] = v; sigs.delete(i.id); }); render(keep); };
         inspector.addEventListener('click', e => {
-            const s = e.target.closest('[data-bd-set]'); if (s) { setOnSel(s.dataset.bdSet, s.dataset.v); commit(); return; }
+            const s = e.target.closest('[data-bd-set]'); if (s) {
+                // une pastille : seules les pastilles de ce réglage changent, le panneau n'est pas refait (sinon le carré « autre couleur » se redessine et tout bouge)
+                const k = s.dataset.bdSet, v = s.dataset.v, quiet = s.classList.contains('h-sw') && k !== 'headColor';
+                setOnSel(k, v, quiet); commit();
+                if (quiet) { inspector.querySelectorAll(`.h-sw[data-bd-set="${CSS.escape(k)}"]`).forEach(x => x.classList.toggle('is-on', x.dataset.v === v)); if (/^#[0-9a-f]{6}$/i.test(v || '')) inspector.querySelectorAll(`[data-bd-setc="${CSS.escape(k)}"]`).forEach(x => { x.value = v; }); }
+                return; }
             const tg = e.target.closest('[data-bd-toggle]'); if (tg) { const k = tg.dataset.bdToggle, v = !selItems()[0]?.[k]; if (k === 'bold') selItems().forEach(i => { delete i.weight; }); setOnSel(k, v); commit(); return; }
-            const bs = e.target.closest('[data-bd-bgset]'); if (bs) { setBg(bs.dataset.bdBgset); return; }
+            const bs = e.target.closest('[data-bd-bgset]'); if (bs) { setBg(bs.dataset.bdBgset, true); const c2 = inspector.querySelector('[data-bd-bgset2]'); if (c2) c2.value = bgColor; return; } // le panneau n'est pas refait : rien ne bouge
             if (e.target.closest('[data-bd-headsame]')) { if (ro()) return; selItems().forEach(i => { delete i.headColor; sigs.delete(i.id); }); render(); commit(); return; }
             const ss = e.target.closest('[data-bd-setshape]'); if (ss) { applyShape(ss.dataset.bdSetshape); return; }
             if (e.target.closest('[data-bd-shapelib]')) { shapeLibrary(e.target.closest('[data-bd-shapelib]'), k => applyShape(k)); return; }
