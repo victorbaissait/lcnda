@@ -174,9 +174,13 @@ echo json_encode(['ok' => 1, 'even' => $t('EVEN')]);`], {cwd: root, encoding: 'u
             const i = await p.evaluate(() => [...document.querySelectorAll('.ts-dialog [data-ts-missing-box] li')].findIndex(li => /Faux pack/.test(li.textContent)));
             await p.click(`.ts-dialog [data-ts-missing-box] li:nth-child(${i + 1}) [data-ts-install]`);
             await p.waitForFunction(() => window.__calls.install === 1);
+            // « ⚙️ Ouvrir ses réglages… » (une source enregistrée) : la fenêtre se ferme pour qu'on voie la page des réglages
+            await p.waitForFunction(() => !document.querySelector('dialog.ts-dialog[open]'), null, {timeout: 5000});
         });
         await t('⤢ ＋ Ajouter comme note (avec les sources) et ↶ ; Imprimer ouvre la fenêtre d’impression', async () => {
-            await p.click('.ts-dialog [data-ts-note]');
+            await p.evaluate(() => window.LCNDA_EXT.toutSur.open({person: 1}));
+            await p.waitForFunction(() => /données regardées, \d+ ont trouvé quelque chose/.test(document.querySelector('dialog.ts-dialog[open] [data-ts-count]')?.textContent || ''), null, {timeout: 20000});
+            await p.click('dialog.ts-dialog[open] [data-ts-note]');
             await until(async () => (await api('person', {id: 1})).notes.length === 1);
             const n = (await api('person', {id: 1})).notes[0]; assert.match(n.body, /Fausse trouvaille/); assert.match(n.body, /https:\/\/example\.org\/fiche\/1/);
             await undo();
