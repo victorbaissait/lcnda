@@ -221,6 +221,7 @@
         const items = [{icon: '↗', label: 'Ouvrir', run: () => select(id)}];
         if (!kiosk()) items.push({icon: '✎', label: 'Modifier', run: async () => { await select(id); document.querySelector('#workspace [data-ong-edit]')?.click(); }});
         if (!kiosk() && SF()?.openRange) items.push({icon: '📁', label: T('Ranger'), run: () => SF().openRange('document', String(id), d.title)});
+        if (ext.enquetePhoto && (!kiosk() || ext.enquetePhoto.loadCounts)) items.push({icon: '🔎', label: T('Enquêter sur cette photo…'), run: () => ext.enquetePhoto.forMedia([id], {title: d.title})});
         const la = !kiosk() && ext.selectionBar?.labelAction ? ext.selectionBar.labelAction('media', {after: reloadAll}) : null;
         if (la) items.push({icon: '🏷', label: T('Étiquette'), run: () => la.run([String(id)])});
         if (d.filename) items.push({icon: '⤓', label: 'Télécharger', run: () => { const a = Object.assign(document.createElement('a'), {href: `media/${encodeURIComponent(d.filename)}`, download: d.filename}); document.body.appendChild(a); a.click(); a.remove(); }});
@@ -413,6 +414,7 @@
         return [
             {id: 'range', icon: '📁', label: T('Ranger'), help: T('Ranger les documents cochés dans un dossier de la colonne'), edit: true, run: ids => rangeMany(ids)},
             SB.labelAction ? {...SB.labelAction('media', {after: reloadAll}), label: T('Étiqueter')} : null,
+            ext.enquetePhoto ? {id: 'enquete', icon: '🔎', label: T('Enquêter sur ces images'), help: T('Une enquête photo avec les documents cochés : un indice trouvé sur l’un profite aux autres'), edit: true, run: ids => ext.enquetePhoto.create(ids.map(Number))} : null,
             {id: 'link', icon: '👤', label: T('Relier à une personne'), help: T('Relier les documents cochés à une fiche'), edit: true, run: ids => linkMany(ids)},
             {id: 'zip', icon: '⤓', label: T('Exporter en ZIP'), help: T('Les fichiers des documents cochés, avec une liste (CSV), dans un fichier .zip'), run: ids => zipMany(ids)},
             {id: 'delete', icon: '🗑', label: T('Supprimer'), help: T('Supprime les documents cochés ; « ↶ Annuler » les remet'), edit: true, danger: true, run: (ids, s2) => deleteMany(ids, s2)},
@@ -786,6 +788,7 @@
         const ro = kiosk(), chip = ([n, r, id]) => (ro ? `<span class="ong-uname">${esc(n)}${r ? ` <small>${esc(r)}</small>` : ''}</span>` : `<button type="button" class="ong-uname is-unlinked" data-ong-txlink="${id}" title="${esc(T('Pas encore relié : le relier dans l’Atelier'))}">🔗 ${esc(n)}${r ? ` <small>${esc(r)}</small>` : ''}</button>`);
         return names.length ? `<p class="ong-unlinked"><span class="muted">${esc(T('Relevés dans le texte, pas encore reliés :'))}</span> ${names.slice(0, 30).map(chip).join(' ')}</p>` : '';
     }
+    const epBtn = d => `<button type="button" class="button secondary" data-ep-media="${Number(d.id)}" data-ep-title="${esc(d.title || '')}" title="${esc(T('🔎 Enquête photo : relever les indices (lieu, date, uniformes, texte…)'))}">${esc(T('🔎 Enquêter'))}</button>`;
     async function showDoc(id, token) {
         const ws = document.getElementById('workspace'); if (!ws) return;
         const t0 = A().state?.workspaceToken;
@@ -812,7 +815,8 @@
         ws.innerHTML = `<section class="page ong-page ong-docpage" data-ong-page="document" data-ong-id="${id}">
             ${UI().pageHeader({where: ['Documents', ...path].join(' › '), icon, title: d.title, help: esc(help || 'Document de ta base.'), detail: true,
                 primary: ro ? '' : '<button type="button" class="button" data-ong-edit>✎ Modifier</button>',
-                actions: ro ? [] : [isImg && ext.openActTranscriber ? `<button type="button" class="button secondary" data-ong-tx title="${esc(T('Ouvrir l’outil de transcription complet sur cette image'))}">${esc(T('📜 Atelier de transcription'))}</button>` : '', SF()?.rangeButtonHtml ? SF().rangeButtonHtml('document', id, d.title) : ''].filter(Boolean), more})}
+                // 🔎 Enquête photo (heritage-enquete-photo.js) : à côté de l'Atelier ; devient « 🔎 Enquête · 5 indices · lieu probable » ; en consultation, seulement s'il y en a une
+                actions: ro ? [ext.enquetePhoto ? epBtn(d) : ''].filter(Boolean) : [isImg && ext.openActTranscriber ? `<button type="button" class="button secondary" data-ong-tx title="${esc(T('Ouvrir l’outil de transcription complet sur cette image'))}">${esc(T('📜 Atelier de transcription'))}</button>` : '', ext.enquetePhoto ? epBtn(d) : '', SF()?.rangeButtonHtml ? SF().rangeButtonHtml('document', id, d.title) : ''].filter(Boolean), more})}
             <button type="button" class="button small secondary ong-back" data-ong-back>← Liste</button>
             <div class="ong-dup" data-ong-dup hidden></div>
             <div class="ong-doc">
@@ -852,6 +856,7 @@
         const img = ws.querySelector('[data-ong-img]');
         if (img) { const put = () => { const cap = ws.querySelector('[data-ong-size]'); if (cap && img.naturalWidth) cap.textContent = `${img.naturalWidth} × ${img.naturalHeight} px · ${printFit(img.naturalWidth, img.naturalHeight)}`; }; if (img.complete) put(); else img.addEventListener('load', put, {once: true}); }
         const sb = ws.querySelector('[data-ong-sbs]'); if (sb) bindSbs(sb);
+        ext.enquetePhoto?.decorate?.(ws); // 🔎 « Enquête · N indices · lieu probable » si l'image en a une
         if (isImg) findDuplicates(d, ws.querySelector('[data-ong-dup]'));
     }
     /* 🔍 l'image zoomable (molette, + / −, glisser) et le texte transcrit à côté ; le texte qui défile fait défiler l'image */

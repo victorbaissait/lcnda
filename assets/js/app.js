@@ -359,6 +359,7 @@
         'genealogie-design','genealogie-design-presets','genealogie-menu-order','genealogie-menu-hidden','genealogie-menu-names','genealogie-menu-icons','genealogie-lightbox-sections','genealogie-calendar-choices','genealogie-diagram-kinds','genealogie-house-snap','genealogie-house-lib','genealogie-decor-tree','genealogie-decor-tree-formats','genealogie-decor-tree-styles','genealogie-edit-tools-order','genealogie-maintenance-groups','genealogie-list-groups','genealogie-mylists-order','genealogie-keynote-prefs','genealogie-vector-map-palette',
         'genealogie-connexions', // 🧺 Panier et connexions (heritage-connexions.js)
         'genealogie-tx-glossaire', // 📖 Mon glossaire de l’Atelier de transcription (heritage-atelier-aides.js)
+        'genealogie-enquete-photo', // 🔎 Enquête photo : l’IA (éteinte au départ), marge de l’ombre, vue, questions guidées (heritage-enquete-photo.js)
         'genealogie-lot-n', // 🏛 Archives et mémoire : sujets affichés (app-lot-n-archives.js)
         'genealogie-lot-n2', // 📊 Chiffres d’époque et mots des actes : sujets affichés (app-lot-n2-chiffres.js)
         'genealogie-ouc-ukus','genealogie-sources-ouvertes-27-sites', // 🇬🇧🇺🇸 Où chercher ? : la partie « Archives britanniques et américaines » ouverte ou fermée ; 🔗 adresses du lot 27 (heritage-liens-archives.js)

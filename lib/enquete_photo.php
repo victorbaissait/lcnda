@@ -34,7 +34,7 @@ declare(strict_types=1);
 
 const EP_CERT = ['proven', 'probable', 'supposed', 'refuted'];
 const EP_KINDS = ['lieu', 'date', 'gens', 'objet', 'texte', 'support', 'dos', 'ciel', 'autre'];
-const EP_SOURCES = ['moi', 'ia', 'ombre', 'exif', 'en_ligne', 'donnees', 'repere', 'famille', 'compare'];
+const EP_SOURCES = ['moi', 'ia', 'ombre', 'exif', 'en_ligne', 'donnees', 'repere', 'famille', 'compare', 'police'];
 const EP_LINK_KINDS = ['person', 'place', 'event', 'investigation', 'source', 'board'];
 const EP_MAX_LAYERS = 400000; // octets de calques par image
 const EP_MAX_TEXT = 4000;
@@ -211,6 +211,15 @@ function ep_get(PDO $pdo, int $id): array
         $images[] = ['id' => (int) $i['id'], 'media_id' => (int) $i['media_id'], 'position' => (int) $i['position'], 'side' => (string) $i['side'], 'label' => (string) $i['label'],
             'layers' => ep_dec($i['layers_json']), 'media' => $m];
     }
+    // 🛡 les visages identifiés sur ces images (media_tags, en % de l'image) : ceux des vivants et des fiches confidentielles sont floutés
+    //    dans « Partager sans risque » et dans un morceau envoyé en ligne ; aucun nom n'est rendu
+    try {
+        $mids = array_column($images, 'media_id');
+        if ($mids) { $in = implode(',', array_map('intval', $mids)); $tags = $pdo->query("SELECT media_id, person_id, x, y, w, h FROM media_tags WHERE media_id IN ($in) AND COALESCE(tag_type,'person')='person' AND w>0 AND h>0")->fetchAll(PDO::FETCH_ASSOC);
+            $pp = ep_persons($pdo, array_column($tags, 'person_id'));
+            foreach ($images as &$im) { $im['faces'] = array_values(array_map(static fn($t) => ['x' => (float) $t['x'] / 100, 'y' => (float) $t['y'] / 100, 'w' => (float) $t['w'] / 100, 'h' => (float) $t['h'] / 100, 'private' => !empty($pp[(int) $t['person_id']]['private'])], array_filter($tags, static fn($t) => (int) $t['media_id'] === $im['media_id']))); }
+            unset($im); }
+    } catch (Throwable $_) {}
     $cl = $pdo->prepare('SELECT * FROM photo_inquiry_clues WHERE inquiry_id=? ORDER BY num, id'); $cl->execute([$id]);
     $clues = array_map('ep_clue_out', $cl->fetchAll(PDO::FETCH_ASSOC));
     $placeNames = [];
@@ -228,7 +237,6 @@ function ep_get(PDO $pdo, int $id): array
     $jr = $pdo->prepare('SELECT id, what, result, created_at FROM photo_inquiry_journal WHERE inquiry_id=? ORDER BY id DESC LIMIT 200'); $jr->execute([$id]);
     $conclusion = ep_dec($q['conclusion_json']);
     if (!empty($conclusion['place']['place_id'])) { $s = $pdo->prepare('SELECT name, latitude, longitude FROM places WHERE id=?'); $s->execute([(int) $conclusion['place']['place_id']]); if ($p = $s->fetch(PDO::FETCH_ASSOC)) { $conclusion['place']['name'] = $conclusion['place']['name'] ?: (string) $p['name']; $conclusion['place']['lat'] = $p['latitude'] !== null ? (float) $p['latitude'] : null; $conclusion['place']['lon'] = $p['longitude'] !== null ? (float) $p['longitude'] : null; } }
-    if (function_exists('access_log_add') && !ep_kiosk()) { /* une enquête ouverte n'est pas une fiche ouverte : rien de noté */ }
     return ['inquiry' => ['id' => (int) $q['id'], 'title' => (string) $q['title'], 'status' => (string) $q['status'], 'notes' => (string) $q['notes'], 'settings' => ep_dec($q['settings_json']),
         'conclusion' => $conclusion, 'is_private' => (int) $q['is_private'], 'created_at' => (string) $q['created_at'], 'updated_at' => (string) $q['updated_at'],
         'images' => $images, 'clues' => $clues, 'hypotheses' => $hyps, 'links' => ep_links($pdo, $id), 'journal' => $jr->fetchAll(PDO::FETCH_ASSOC)],
@@ -261,7 +269,7 @@ function ep_links(PDO $pdo, int $id): array
                 case 'board': $q = $pdo->prepare('SELECT name FROM boards WHERE id=?'); $q->execute([$rid]); $label = (string) $q->fetchColumn(); break;
             }
         } catch (Throwable $_) {}
-        $out[] = ['id' => (int) $r['id'], 'kind' => (string) $r['kind'], 'ref_id' => $rid, 'label' => $label !== '' ? $label : '#' . $r['ref_id']];
+        $out[] = ['id' => (int) $r['id'], 'kind' => (string) $r['kind'], 'ref_id' => $rid, 'label' => $label !== '' ? $label : '#' . $r['ref_id'], 'private' => $r['kind'] === 'person' && !empty($persons[(int) $r['ref_id']]['private'])];
     }
     return $out;
 }
@@ -592,6 +600,14 @@ function ep_clue_save(PDO $pdo, array $d): array
     // l'IA ne monte jamais seule au-dessus de « Supposé » ; une ombre, une métadonnée : au mieux « Probable » (l'horloge peut être fausse)
     if ($src === 'ia' && !in_array($cert, ['supposed', 'refuted'], true) && empty($d['confirmed'])) { $cert = 'supposed'; }
     if (in_array($src, ['ombre', 'exif'], true) && $cert === 'proven') { $cert = 'probable'; }
+    // 🔤 un texte deviné avec une police : « Supposé » au plus tout seul ; « Probable » seulement confirmé par un autre indice (le même nom
+    // trouvé dans les données, sur une autre image…), jamais « Prouvé »
+    if ($src === 'police' && $cert !== 'refuted') {
+        $data = array_key_exists('data', $d) && is_array($d['data']) ? $d['data'] : ep_dec((string) ($old['data_json'] ?? '{}'));
+        $by = safe_int($data['confirmed_by'] ?? 0); $ok = false;
+        if ($by && $by !== $cid) { $q = $pdo->prepare("SELECT 1 FROM photo_inquiry_clues WHERE id=? AND inquiry_id=? AND source<>'police' AND certainty<>'refuted'"); $q->execute([$by, $id]); $ok = (bool) $q->fetchColumn(); }
+        $cert = $ok && in_array($cert, ['proven', 'probable'], true) ? 'probable' : 'supposed';
+    }
     $v = [
         'kind' => in_array($d['kind'] ?? ($old['kind'] ?? 'autre'), EP_KINDS, true) ? (string) ($d['kind'] ?? $old['kind']) : 'autre',
         'text' => ep_text($d['text'] ?? ($old['text'] ?? ''), 600),
