@@ -1,10 +1,10 @@
 /* LCNDA — 📜 Atelier de transcription, outils en plus (2) (heritage-atelier-plus2.js) : discret, rangé dans ce qui existe.
- * survol (is-old, is-lat, is-glo) · 🧰 sections (ap2-list, ap2-letters) · rangée au-dessus du texte (ap2-row : 🎯, 🧾, 🔊) · ✂️ découpe (ap2-crop) */
+ * survol (h-tx-ab2 : is-old, is-lat, is-glo ; à part des abréviations h-tx-ab) · 🧰 sections (ap2-list, ap2-letters) · rangée au-dessus du texte (ap2-row : 🎯, 🧾, 🔊) · ✂️ découpe (ap2-crop) */
 
 /* ─── 📖 🏛 au survol : soulignés comme les abréviations, d'une autre couleur ─── */
-.h-tx-mirror .h-tx-ab.is-old{border-bottom:2px dotted #a06400}
-.h-tx-mirror .h-tx-ab.is-lat{border-bottom:2px dotted #6d3fb5}
-.h-tx-mirror .h-tx-ab.is-glo{border-bottom:2px solid #1a7f37}
+.h-tx-mirror .h-tx-ab2.is-old{border-bottom:2px dotted #a06400}
+.h-tx-mirror .h-tx-ab2.is-lat{border-bottom:2px dotted #6d3fb5}
+.h-tx-mirror .h-tx-ab2.is-glo{border-bottom:2px solid #1a7f37}
 
 /* ─── 🧰 les sections en plus ─── */
 .ap2-q{width:100%;min-width:0;margin:2px 0 6px}
@@ -73,14 +73,14 @@
 :root[data-theme="dark"] .ap2-f input.is-ai{background:#2b2140}
 :root[data-theme="dark"] .ap2-say-warn{color:#ffc15c}
 :root[data-theme="dark"] .ap2-letter img,:root[data-theme="dark"] .ap2-letter canvas{background:#3a3424}
-:root[data-theme="dark"] .h-tx-mirror .h-tx-ab.is-old{border-bottom-color:#e0b04a}
-:root[data-theme="dark"] .h-tx-mirror .h-tx-ab.is-lat{border-bottom-color:#b99af0}
-:root[data-theme="dark"] .h-tx-mirror .h-tx-ab.is-glo{border-bottom-color:#5cc98a}
+:root[data-theme="dark"] .h-tx-mirror .h-tx-ab2.is-old{border-bottom-color:#e0b04a}
+:root[data-theme="dark"] .h-tx-mirror .h-tx-ab2.is-lat{border-bottom-color:#b99af0}
+:root[data-theme="dark"] .h-tx-mirror .h-tx-ab2.is-glo{border-bottom-color:#5cc98a}
 @media (prefers-color-scheme:dark){
     :root:not([data-theme="light"]) .ap2-f input.is-ai{background:#2b2140}
     :root:not([data-theme="light"]) .ap2-say-warn{color:#ffc15c}
     :root:not([data-theme="light"]) .ap2-letter img,:root:not([data-theme="light"]) .ap2-letter canvas{background:#3a3424}
-    :root:not([data-theme="light"]) .h-tx-mirror .h-tx-ab.is-old{border-bottom-color:#e0b04a}
-    :root:not([data-theme="light"]) .h-tx-mirror .h-tx-ab.is-lat{border-bottom-color:#b99af0}
-    :root:not([data-theme="light"]) .h-tx-mirror .h-tx-ab.is-glo{border-bottom-color:#5cc98a}
+    :root:not([data-theme="light"]) .h-tx-mirror .h-tx-ab2.is-old{border-bottom-color:#e0b04a}
+    :root:not([data-theme="light"]) .h-tx-mirror .h-tx-ab2.is-lat{border-bottom-color:#b99af0}
+    :root:not([data-theme="light"]) .h-tx-mirror .h-tx-ab2.is-glo{border-bottom-color:#5cc98a}
 }

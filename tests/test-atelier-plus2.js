@@ -190,19 +190,19 @@ echo json_encode(['m' => $m, 'a1' => $a1, 'a2' => $a2, 'a3' => $a3, 'a4' => $a4,
         const save = async () => { await p.evaluate(d => document.querySelector(`${d} [data-tx-cmd="save"]`).click(), D); await sleep(900); };
         const top = () => p.evaluate(() => [...document.querySelectorAll('dialog[open]')].at(-1)?.className || '');
         const shot = async n => { if (process.env.SHOTS) { fs.mkdirSync(process.env.SHOTS, { recursive: true }); await p.screenshot({ path: path.join(process.env.SHOTS, n) }); } };
-        const hoverTip = needle => p.evaluate(([d, n]) => { const sp = [...document.querySelectorAll(`${d} .h-tx-mirror .h-tx-ab`)].find(s => s.textContent === n); if (!sp) return null; const r = sp.getClientRects()[0]; const a = document.querySelector(`${d} [data-tx-body]`);
+        const hoverTip = needle => p.evaluate(([d, n]) => { const sp = [...document.querySelectorAll(`${d} .h-tx-mirror :is(.h-tx-ab, .h-tx-ab2)`)].find(s => s.textContent === n); if (!sp) return null; const r = sp.getClientRects()[0]; const a = document.querySelector(`${d} [data-tx-body]`);
             a.dispatchEvent(new MouseEvent('mousemove', { clientX: r.left + 2, clientY: r.top + r.height / 2, bubbles: true })); return { cls: sp.className }; }, [D, needle]);
         const tipNow = async () => { await sleep(150); return p.evaluate(d => { const t = document.querySelector(`${d} [data-tx-abtip]`); return t && !t.hidden ? { html: t.innerHTML, text: t.textContent.replace(/\s+/g, ' ') } : null; }, D); };
 
         /* ═════ 16 📖 17 💰 au survol ; menus ; Personnaliser ═════ */
         await openAct(seed.a1);
-        out.spans = await p.evaluate(d => [...document.querySelectorAll(`${d} .h-tx-mirror .h-tx-ab`)].map(s => [s.textContent, s.className.replace('h-tx-ab', '').trim()]), D);
+        out.spans = await p.evaluate(d => [...document.querySelectorAll(`${d} .h-tx-mirror :is(.h-tx-ab, .h-tx-ab2)`)].map(s => [s.textContent, s.className.replace(/h-tx-ab2?/, '').trim()]), D);
         out.hovLab = await hoverTip('laboureur'); out.tipLab = await tipNow();
         out.hovFeu = await hoverTip('feu'); out.tipFeu = await tipNow();
         out.hovArp = await hoverTip('un arpent'); out.tipArp = await tipNow();
         // 📖 mon glossaire passe avant : « labr » (une abréviation connue) et « laboureur » (un mot d'autrefois)
         await p.evaluate(() => { localStorage.setItem('genealogie-tx-glossaire', JSON.stringify([{ w: 'labr', m: 'laboureur (mon mot)' }, { w: 'laboureur', m: 'paysan à charrue (ma note)' }])); window.dispatchEvent(new CustomEvent('lcnda-txbar-change')); }); await sleep(300);
-        out.spansGlo = await p.evaluate(d => [...document.querySelectorAll(`${d} .h-tx-mirror .h-tx-ab`)].filter(s => /labr|laboureur/.test(s.textContent)).map(s => [s.textContent, s.className.replace('h-tx-ab', '').trim()]), D);
+        out.spansGlo = await p.evaluate(d => [...document.querySelectorAll(`${d} .h-tx-mirror :is(.h-tx-ab, .h-tx-ab2)`)].filter(s => /labr|laboureur/.test(s.textContent)).map(s => [s.textContent, s.className.replace(/h-tx-ab2?/, '').trim()]), D);
         await hoverTip('labr'); out.tipGlo = await tipNow();
         await p.evaluate(() => { localStorage.removeItem('genealogie-tx-glossaire'); window.dispatchEvent(new CustomEvent('lcnda-txbar-change')); }); await sleep(200);
         out.fichier = await menuLabels('Fichier'); out.edition = await menuLabels('Édition'); out.outils = await menuLabels('Outils');
@@ -210,7 +210,7 @@ echo json_encode(['m' => $m, 'a1' => $a1, 'a2' => $a2, 'a3' => $a3, 'a4' => $a4,
         await p.evaluate(d => document.querySelector(`${d} [data-tx-cmd="barcfg"]`)?.click(), D); await sleep(300);
         out.prefs = await p.evaluate(() => [...document.querySelectorAll('dialog.h-txb-dlg [data-ap2-pref]')].map(i => `${i.dataset.ap2Pref}:${i.type === 'checkbox' ? i.checked : i.value}`));
         await p.evaluate(() => { const i = document.querySelector('dialog.h-txb-dlg [data-ap2-pref="mots"]'); i.checked = false; i.dispatchEvent(new Event('change', { bubbles: true })); }); await sleep(300);
-        out.motsOff = await p.evaluate(d => ({ ls: localStorage.getItem('genealogie-tx-mots'), old: document.querySelectorAll(`${d} .h-tx-mirror .h-tx-ab.is-old`).length }), D);
+        out.motsOff = await p.evaluate(d => ({ ls: localStorage.getItem('genealogie-tx-mots'), old: document.querySelectorAll(`${d} .h-tx-mirror .h-tx-ab2.is-old`).length }), D);
         await p.evaluate(() => { const i = document.querySelector('dialog.h-txb-dlg [data-ap2-pref="mots"]'); i.checked = true; i.dispatchEvent(new Event('change', { bubbles: true })); document.querySelector('dialog.h-txb-dlg [data-x]')?.click(); }); await sleep(300);
         /* ═════ 17 💰 🧰 Montants et mesures ; 16 📖 la liste ═════ */
         await p.evaluate(d => document.querySelector(`${d} [data-txh-toggle]`).click(), D); await sleep(200);
@@ -312,7 +312,7 @@ echo json_encode(['m' => $m, 'a1' => $a1, 'a2' => $a2, 'a3' => $a3, 'a4' => $a4,
         await closeAct();
         /* ═════ 18 🏛 un acte en latin ═════ */
         await openAct(seed.a3);
-        out.latSpans = await p.evaluate(d => [...document.querySelectorAll(`${d} .h-tx-mirror .h-tx-ab.is-lat`)].map(s => s.textContent), D);
+        out.latSpans = await p.evaluate(d => [...document.querySelectorAll(`${d} .h-tx-mirror .h-tx-ab2.is-lat`)].map(s => s.textContent), D);
         await hoverTip('baptizatus est'); out.tipLat = await tipNow();
         await p.evaluate(d => { if (document.querySelector(`${d} .txh-panel`).hidden) document.querySelector(`${d} [data-txh-toggle]`).click(); }, D); await sleep(200);
         await p.evaluate(d => { document.querySelector(`${d} [data-txh-sec="latin"]`).open = true; }, D); await sleep(300);

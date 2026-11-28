@@ -894,7 +894,7 @@
         let findHits = [], findCur = -1, abbrevs = [], hintW = [];
         const decos = () => [...hintW.map((f, i) => ({s: f.s, e: f.e, o: `<span class="h-tx-hintw" data-hw="${i}">`, c: '</span>', w: 3})),...findHits.map((f, i) => ({s: f.s, e: f.e, o: `<span class="h-tx-hit${i === findCur ? ' is-cur' : ''}">`, c: '</span>', w: 0})),
             ...txFix.map(f => ({s: f.s, e: f.e, o: `<u class="h-tx-fix${f.sure ? ' is-sure' : ''}">`, c: '</u>', w: 1})),
-            ...abbrevs.map((f, i) => ({s: f.s, e: f.e, o: `<span class="h-tx-ab${f.amount ? ' is-amount' : ''}${f.cls ? ` ${f.cls}` : ''}" data-ab="${i}">`, c: '</span>', w: 2}))].sort((x, y) => x.s - y.s || x.w - y.w);
+            ...abbrevs.map((f, i) => ({s: f.s, e: f.e, o: `<span class="${f.cls ? `h-tx-ab2 ${f.cls}` : `h-tx-ab${f.amount ? ' is-amount' : ''}`}" data-ab="${i}">`, c: '</span>', w: 2}))].sort((x, y) => x.s - y.s || x.w - y.w);
         let curDecos = [];
         const fixSeg = (text, a, b) => { let h = '', q = a; curDecos.filter(f => f.e > a && f.s < b).forEach(f => { const s0 = Math.max(a, f.s), e0 = Math.min(b, f.e); if (s0 < q) return; h += esc(text.slice(q, s0)) + f.o + esc(text.slice(s0, e0)) + f.c; q = e0; }); return h + esc(text.slice(q, b)); };
         async function runFix({quiet = false} = {}) {
@@ -1559,10 +1559,10 @@
             let region = dm && cm?.regionOfDept ? cm.regionOfDept(dm[1]) : ''; if (!region) { try { region = JSON.parse(localStorage.getItem('lcnda-autrefois-region') || '"paris"'); } catch (_) { region = 'paris'; } }
             return MT.explain(h, {year: ym ? Number(ym[1]) : 0, region, wageSols: A().journalierWageSols, calendarMore: cm, prices: ext.prixReference});
         }
-        const abAt = (x, y) => { let hit = -1; mirror.querySelectorAll('.h-tx-ab').forEach(sp => { if (hit >= 0) return; for (const r of sp.getClientRects()) if (x >= r.left && x <= r.right && y >= r.top - 2 && y <= r.bottom + 2) { hit = Number(sp.dataset.ab); return; } }); return hit; };
+        const abAt = (x, y) => { let hit = -1; mirror.querySelectorAll('.h-tx-ab, .h-tx-ab2').forEach(sp => { if (hit >= 0) return; for (const r of sp.getClientRects()) if (x >= r.left && x <= r.right && y >= r.top - 2 && y <= r.bottom + 2) { hit = Number(sp.dataset.ab); return; } }); return hit; };
         function showAb(i) {
             const a = abbrevs[i]; if (!a) return hideAb(); clearTimeout(abHide); if (abShown === i && !abTip.hidden) return; abShown = i;
-            const sp = mirror.querySelector(`.h-tx-ab[data-ab="${i}"]`); if (!sp) return;
+            const sp = mirror.querySelector(`.h-tx-ab[data-ab="${i}"], .h-tx-ab2[data-ab="${i}"]`); if (!sp) return;
             if (a.amount) { const x = amountInfo(a.amount); if (!x) return hideAb();
                 abTip.innerHTML = `<b>${a.amount.type === 'money' ? '💰' : '📏'} ${esc(x.title)}</b>${x.lines.map(l => `<span class="h-tx-amline">${esc(l)}</span>`).join('')}${x.source ? `<small>${esc(i18n('Source'))} : ${x.url ? `<a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">${esc(x.source)} ↗</a>` : esc(x.source)}</small>` : ''}<button type="button" class="link-button" data-tx-abopen>${esc(i18n('Voir le calcul dans 🪙 le Convertisseur d’autrefois'))}</button>`; }
             else if (a.tip) abTip.innerHTML = a.tip; // 📖 🏛 (heritage-atelier-plus2.js) : sa bulle toute faite
