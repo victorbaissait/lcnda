@@ -388,6 +388,34 @@ echo json_encode(['m' => $m]);`.replace('getenv(\'EXIF_JPG\')', `'${jpegWithExif
         out.restored = (await api('list')).inquiries.some(q => q.id === free.r.id);
         await p.evaluate(() => document.querySelector('dialog.ep-dlg')?.close()); await sleep(300);
 
+        /* ═════ 📄 Documents → « Façon de ranger » → 🔎 Enquêtes photo : les cartes, ouvrir, 🗑 supprimer (↶ Annuler), vide ═════ */
+        await p.evaluate(() => { try { localStorage.setItem('genealogie-menu-documents', '1'); localStorage.setItem('genealogie-menu-hidden', '[]'); } catch (_) {} location.hash = '#documents'; });
+        await p.waitForSelector('#sidebar-content [data-ong-mode="inquiries"]', { timeout: 15000 }).catch(() => null);
+        out.docs = await p.evaluate(() => { const bs = [...document.querySelectorAll('#sidebar-content .ong-mode [data-ong-mode]')]; return { n: bs.length, has: !!document.querySelector('#sidebar-content [data-ong-mode="inquiries"]'), ml: bs[1] ? getComputedStyle(bs[1]).marginLeft : '', mt: bs[3] ? getComputedStyle(bs[3]).marginTop : '' }; });
+        if (out.docs.has) {
+            await p.click('#sidebar-content [data-ong-mode="inquiries"]');
+            await p.waitForSelector('#workspace [data-ong-cards] [data-ong-ep]', { timeout: 10000 }).catch(() => null); await sleep(300);
+            const listNow = (await api('list')).inquiries;
+            out.docs.cards = await p.evaluate(() => [...document.querySelectorAll('#workspace [data-ong-cards] [data-ong-ep]')].map(c => ({ id: Number(c.dataset.ongEp), name: c.querySelector('.ui-card-name')?.textContent.trim(), line: c.querySelector('.ui-card-body small')?.textContent.trim() || '' })));
+            out.docs.count = listNow.length;
+            out.docs.lineOk = out.docs.cards.every(c => /\d+ images? · \d+ indices?/.test(c.line));
+            out.docs.title = out.docs.cards.some(c => c.name === 'Photo numérique');
+            await p.click(`#workspace [data-ong-epopen="${free.r.id}"]`); await p.waitForSelector(`${D} .ep-chip`, { timeout: 8000 }).catch(() => null);
+            out.docs.opened = await p.evaluate(() => window.LCNDA_EXT.enquetePhoto.current?.inq?.id || 0); out.docs.freeId = free.r.id;
+            await p.evaluate(() => document.querySelector('dialog.ep-dlg')?.close()); await sleep(600);
+            await p.evaluate(() => document.querySelectorAll('.toast, [class*="toast"]').forEach(t => { if (t.querySelector('button')) t.remove(); }));
+            await p.evaluate(id => document.querySelector(`#workspace [data-ong-epdel="${id}"]`)?.click(), free.r.id); await sleep(900);
+            out.docs.deleted = !(await api('list')).inquiries.some(q => q.id === free.r.id);
+            out.docs.cardGone = await p.evaluate(id => !document.querySelector(`#workspace [data-ong-ep="${id}"]`), free.r.id);
+            out.docs.undo = await undoClick(); await sleep(900);
+            out.docs.restored = (await api('list')).inquiries.some(q => q.id === free.r.id);
+            out.docs.cardBack = await p.evaluate(id => !!document.querySelector(`#workspace [data-ong-ep="${id}"]`), free.r.id);
+            out.docs.empty = await p.evaluate(async () => { const EP = window.LCNDA_EXT.enquetePhoto, g = EP._get; EP._get = (op, q) => (op === 'list' ? Promise.resolve({ inquiries: [] }) : g(op, q));
+                try { document.querySelector('#sidebar-content [data-ong-mode="az"]')?.click(); await new Promise(r => setTimeout(r, 500)); document.querySelector('#sidebar-content [data-ong-mode="inquiries"]')?.click(); await new Promise(r => setTimeout(r, 900));
+                    return (document.querySelector('#workspace [data-ong-cards]')?.textContent || '').replace(/\s+/g, ' '); } finally { EP._get = g; } });
+            await p.evaluate(() => document.querySelector('#sidebar-content [data-ong-mode="az"]')?.click()); await sleep(400);
+        }
+
         /* ═════ mode consultation : lecture seule ═════ */
         const kin = await p.evaluate(() => window.LCNDA_APP.api('kiosk_enter', {}, { method: 'POST', body: { password: 'secret-1234' } }).then(() => true, e => e.message));
         await p.goto(base); await p.waitForFunction(() => window.LCNDA_EXT?.enquetePhoto && document.body.classList.contains('is-kiosk'), null, { timeout: 30000 });
@@ -477,6 +505,9 @@ echo json_encode(['m' => $m]);`.replace('getenv(\'EXIF_JPG\')', `'${jpegWithExif
             ['les 26 aides de plus s’ouvrent sans erreur ; 📋 le rapport d’expert a ses questions précises et la photo', () => { assert.deepEqual(out.plusErr, []); assert.ok(out.report.q && out.report.todo && out.report.img, JSON.stringify(out.report)); }],
             ['👤 Qui est-ce ? (étape « Les gens ») : l’outil local Visages propose Paul DURAND, d’après le visage identifié à la main ; l’indice reste « Supposé »', () => { assert.ok(out.facesStep); assert.ok(out.faces.some(t => /Paul DURAND/.test(t)), JSON.stringify(out.faces)); assert.ok(out.faceClue && out.faceClue.cert === 'supposed' && out.faceClue.person === 3 && /DURAND/.test(out.faceClue.text), JSON.stringify(out.faceClue)); }],
             ['👤 un indice de visage : jamais « Prouvé » ; « Probable » seulement confirmé par un indice qui n’est pas un visage ; absent du partage et du rapport', () => { assert.deepEqual(out.faceCap, { proven: 'supposed', confirmed: 'probable', byFace: 'supposed', self: 'supposed' }); assert.equal(out.faceSafe, false); }],
+            ['📄 Documents → « Façon de ranger » : 9ᵉ choix « 🔎 Enquêtes photo », cases jointives (−2 px, pas de double bordure de 4 px)', () => { assert.ok(out.docs.has, JSON.stringify(out.docs)); assert.equal(out.docs.n, 9); assert.equal(out.docs.ml, '-2px'); assert.equal(out.docs.mt, '-2px'); }],
+            ['📄 Documents → 🔎 Enquêtes photo : une carte par enquête (titre, « N images · N indices »), « Ouvrir l’enquête » ouvre l’éditeur', () => { assert.equal(out.docs.cards.length, out.docs.count, JSON.stringify(out.docs.cards)); assert.ok(out.docs.lineOk && out.docs.title, JSON.stringify(out.docs.cards)); assert.equal(out.docs.opened, out.docs.freeId); }],
+            ['📄 Documents → 🔎 Enquêtes photo : ⋯ « 🗑 Supprimer l’enquête » la retire, ↶ Annuler la remet ; vide : un message', () => { assert.ok(out.docs.deleted && out.docs.cardGone, JSON.stringify(out.docs)); assert.ok(out.docs.undo); assert.ok(out.docs.restored && out.docs.cardBack, JSON.stringify(out.docs)); assert.match(out.docs.empty, /Aucune enquête photo/); }],
             ['× sur chaque image : sort l’image de l’enquête (le média reste) ; ↶ Annuler la remet', () => { assert.match(out.chipX.title, /Retirer cette image de l’enquête/); assert.equal(out.chipX.after, 0); assert.equal(out.chipX.media, true); assert.ok(out.chipX.undo); assert.equal(out.chipX.back, 1); }],
             ['🗑 Supprimer l’enquête : visible au pied du panneau, à gauche de « Terminer pour l’instant » ; tout de suite, ↶ Annuler la remet', () => { assert.ok(out.delBtn && /Supprimer l’enquête/.test(out.delBtn.text) && out.delBtn.before, JSON.stringify(out.delBtn)); assert.equal(out.delBtn.gone, true); assert.ok(out.delBtn.undo); assert.equal(out.delBtn.restored, true); }],
             ['390 px : une fenêtre d’aide et le panneau « Mieux voir » ne débordent pas', () => { assert.ok(out.overflowPlus <= 1, String(out.overflowPlus)); assert.ok(out.overflowBetter && out.overflowBetter.left >= -1 && out.overflowBetter.right <= out.overflowBetter.vw + 1, JSON.stringify(out.overflowBetter)); }],
