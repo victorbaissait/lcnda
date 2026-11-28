@@ -295,3 +295,41 @@
 .ep2-reopen ul { margin: 4px 0 6px; padding-left: 18px; }
 .ep2-tree { margin-top: 10px; }
 @media (max-width: 600px) { .ep2-bar { font-size: 11.5px; padding: 3px 5px; } .ep2-legend { max-height: 40vh; } }
+/* la suite, 2ᵉ partie (heritage-enquete-photo-classement.js) : 📒 classement d'un album, 🏘 même lieu, 📝 cette photo m'apprend, 🎓 groupe, 🔄 dos, 🕳 années */
+.ep3-order { list-style: none; margin: 0 0 10px; padding: 0; display: grid; gap: 6px; }
+.ep3-oi { display: grid; grid-template-columns: auto auto 56px minmax(0, 1fr) auto; gap: 8px; align-items: center; padding: 6px 8px; border: 1.5px solid var(--line-color, #ccc); background: var(--card-bg, #fff); }
+.ep3-oi[draggable="true"] { cursor: grab; }
+.ep3-oi.is-bad { border-color: #c0392b; background: color-mix(in srgb, #c0392b 8%, var(--card-bg, #fff)); }
+.ep3-oi.is-dragging { opacity: .45; } .ep3-oi.is-over { box-shadow: 0 -3px 0 var(--blue, #2457ff); }
+.ep3-oi img { width: 56px; height: 42px; object-fit: cover; }
+.ep3-grip { color: var(--muted, #666); } .ep3-k { font-weight: 800; min-width: 1.4em; text-align: right; }
+.ep3-ot { min-width: 0; display: flex; flex-direction: column; } .ep3-ot b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ep3-ob { display: flex; gap: 2px; }
+.ep3-issues ul { margin: 4px 0 0; padding-left: 18px; } .ep3-ok { color: #1f7a3a; }
+:root[data-theme="dark"] .ep3-ok { color: #a9e5ba; }
+.ep3-tl { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.ep3-ty { display: grid; grid-template-columns: 4.5em minmax(0, 1fr); gap: 10px; align-items: start; border-left: 3px solid var(--ink, #111); padding-left: 8px; }
+.ep3-yr { font-weight: 800; font-size: 1.1rem; }
+.ep3-tph { display: flex; flex-wrap: wrap; gap: 10px; }
+.ep3-fig { margin: 0; width: 180px; max-width: 100%; display: flex; flex-direction: column; gap: 4px; }
+.ep3-fig img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border: 1.5px solid var(--line-color, #ccc); }
+.ep3-fig.is-mine img { border-color: var(--blue, #2457ff); border-width: 3px; }
+.ep3-fig figcaption { display: flex; flex-direction: column; gap: 2px; font-size: 13px; overflow-wrap: anywhere; }
+.ep3-facts, .ep3-group, .ep3-gaps { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.ep3-fact { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; padding: 6px 8px; border: 1.5px solid var(--line-color, #ccc); }
+.ep3-fact > span { min-width: 0; overflow-wrap: anywhere; }
+.ep3-backs { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(var(--ep3-w, 220px), 100%), 1fr)); gap: 12px; }
+.ep3-back { margin: 0; border: 1.5px solid var(--line-color, #ccc); padding: 6px; background: var(--card-bg, #fff); }
+.ep3-back.is-mine { border-color: var(--blue, #2457ff); }
+.ep3-back img { width: 100%; height: auto; display: block; }
+.ep3-back figcaption { font-size: 13px; display: flex; flex-direction: column; gap: 2px; overflow-wrap: anywhere; }
+.ep3-back ul { margin: 2px 0 0; padding-left: 16px; }
+.ep3-strip { display: flex; flex-wrap: wrap; gap: 1px; margin: 8px 0 12px; padding-top: 14px; }
+.ep3-cell { position: relative; width: 9px; height: 18px; background: var(--line-color, #ddd); }
+.ep3-cell.is-on { background: var(--blue, #2457ff); }
+.ep3-cell.is-dec { box-shadow: -1px 0 0 var(--ink, #111); }
+.ep3-cell i { position: absolute; top: -14px; left: 0; font: 700 10px/1 var(--font-family, sans-serif); font-style: normal; color: var(--muted, #666); }
+@media (max-width: 600px) {
+    .ep3-oi { grid-template-columns: auto 44px minmax(0, 1fr) auto; } .ep3-grip { display: none; } .ep3-oi img { width: 44px; height: 33px; }
+    .ep3-ty { grid-template-columns: 1fr; } .ep3-fig { width: calc(50% - 5px); }
+}

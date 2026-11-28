@@ -22,6 +22,9 @@
  *  - ☑ « Cocher » dans la colonne : la barre commune (LCNDA_EXT.selectionBar) → 📁 Ranger, 🏷 Étiqueter, 👤 Relier, ⤓ ZIP, 🗑 Supprimer ;
  *  - 📋 Copier la citation (style au choix, retenu) ; 👯 « peut-être un doublon de… » (empreintes d'images) ; 🗑 Supprimer + ↶ Annuler ;
  *  - ✉️ « Noter une pièce manquante » dans le fil d'une correspondance (table doc_missing_pieces, ↶ Annuler).
+ *  📒 Albums photo (heritage-albums.js, lib/albums.php) : pas une 10ᵉ case (la grille 3 × 3 reste entière) ; la case « 📚 Recueils »
+ *  devient le couple « 📚 Recueils | 📒 Albums photo » (petit choix dessous, le dernier retenu : lastBook) ; « ☑ Choisir plusieurs »
+ *  → « 📒 Mettre dans un album… », ☑ Cocher → la barre commune, clic droit, « ⋯ » d'un document.
  */
 (() => {
     'use strict';
@@ -198,16 +201,23 @@
     let selMode = false, sel = null;
     const selOn = () => selMode && !kiosk() && modeOf() !== 'folders';
     const layout = () => (readPref().layout === 'B' ? 'B' : 'A');
-    const modeOf = () => (MODES.some(m => m[0] === readPref().mode) ? readPref().mode : 'az');
-    const isSet = m => SETS.some(x => x[0] === m);
+    const modeOf = () => (MODES.some(m => m[0] === readPref().mode) || (readPref().mode === 'albums' && ext.albums) ? readPref().mode : 'az');
+    const isSet = m => SETS.some(x => x[0] === m) || m === 'albums';
+    /* 📒 les albums photo vont avec les recueils (pas de 10ᵉ case) : « 📚 Recueils | 📒 Albums photo » */
+    const BOOKS = [['recueils', '📚 Recueils'], ['albums', '📒 Albums photo']];
+    const isBook = m => m === 'recueils' || m === 'albums';
+    const bookOf = mode => (isBook(mode) ? mode : (readPref().lastBook === 'albums' && ext.albums ? 'albums' : 'recueils'));
+    const bookBtn = (k, l, mode) => (k === 'recueils' ? [bookOf(mode), bookOf(mode) === 'albums' ? '📒 Albums' : l] : [k, l]);
+    const bookToggle = mode => (isBook(mode) && ext.albums ? `<div class="segmented ong-submode ong-booktoggle" role="tablist" aria-label="${esc(T('Recueils ou albums'))}">${BOOKS.map(([k, l]) => `<button type="button" class="${mode === k ? 'is-active' : ''}" data-ong-mode="${k}" aria-pressed="${mode === k}">${esc(T(l))}</button>`).join('')}</div>` : '');
     const CO = () => window.LCNDA_CORRESP;
     const gapMonths = () => { const n = Number(readPref().gapMonths); return n >= 1 && n <= 24 ? n : 2; };
     function modeBarHtml(mode) {
-        if (layout() === 'A') return `<div class="segmented ong-mode is-grid is-3" role="tablist" aria-label="${esc(T('Façon de ranger'))}">${MODES.map(([k, l]) => `<button type="button" class="${mode === k ? 'is-active' : ''}" data-ong-mode="${k}" aria-pressed="${mode === k}">${esc(T(l))}</button>`).join('')}</div>`;
+        const cell = ([k0, l0]) => { const [k, l] = bookBtn(k0, l0, mode), on = mode === k0 || (k0 === 'recueils' && isBook(mode)); return `<button type="button" class="${on ? 'is-active' : ''}" data-ong-mode="${k}" aria-pressed="${on}">${esc(T(l))}</button>`; };
+        if (layout() === 'A') return `<div class="segmented ong-mode is-grid is-3" role="tablist" aria-label="${esc(T('Façon de ranger'))}">${MODES.map(cell).join('')}</div>${bookToggle(mode)}`;
         const four = [['az', 'A → Z'], ['people', '👤 Par personne'], ['sets', '📚 Ensembles'], ['folders', '📁 Dossiers']];
         const on = k => (k === 'sets' ? isSet(mode) : mode === k);
         return `<div class="segmented ong-mode is-grid" role="tablist" aria-label="${esc(T('Façon de ranger'))}">${four.map(([k, l]) => `<button type="button" class="${on(k) ? 'is-active' : ''}" data-ong-mode="${k === 'sets' ? (isSet(mode) ? mode : (readPref().lastSet || 'recueils')) : k}" data-ong-sets="${k === 'sets' ? 1 : ''}" aria-pressed="${on(k)}">${esc(T(l))}</button>`).join('')}</div>`
-            + (isSet(mode) ? `<div class="segmented ong-submode" role="tablist" aria-label="${esc(T('Ensembles'))}">${SETS.map(([k, l]) => `<button type="button" class="${mode === k ? 'is-active' : ''}" data-ong-mode="${k}" aria-pressed="${mode === k}">${esc(T(l))}</button>`).join('')}</div>` : '');
+            + (isSet(mode) ? `<div class="segmented ong-submode" role="tablist" aria-label="${esc(T('Ensembles'))}">${SETS.map(cell).join('')}</div>${bookToggle(mode)}` : '');
     }
     /* 📚 Recueils : les groupes repliés (0 = « Dans aucun recueil ») ; tout ouvert au départ */
     const foldedRecs = () => (Array.isArray(readPref().recFold) ? readPref().recFold.map(Number) : []);
@@ -236,6 +246,7 @@
         if (ext.enquetePhoto && (!kiosk() || ext.enquetePhoto.loadCounts)) items.push({icon: '🔎', label: T('Enquêter sur cette photo…'), run: () => ext.enquetePhoto.forMedia([id], {title: d.title})});
         const la = !kiosk() && ext.selectionBar?.labelAction ? ext.selectionBar.labelAction('media', {after: reloadAll}) : null;
         if (la) items.push({icon: '🏷', label: T('Étiquette'), run: () => la.run([String(id)])});
+        if (!kiosk() && ext.albums && d.sort === 'photo') items.push({icon: '📒', label: T('Mettre dans un album…'), run: () => ext.albums.chooseAndAdd([id], {anchor: {x: e.clientX, y: e.clientY}, onDone: afterAlbum})});
         if (d.filename) items.push({icon: '⤓', label: 'Télécharger', run: () => { const a = Object.assign(document.createElement('a'), {href: `media/${encodeURIComponent(d.filename)}`, download: d.filename}); document.body.appendChild(a); a.click(); a.remove(); }});
         items.push({icon: '📋', label: T('Copier la citation'), run: () => copyCitation(d)});
         if (!kiosk()) items.push('-', {icon: '🗑', label: T('Supprimer'), danger: true, run: () => deleteMany([id])});
@@ -249,7 +260,7 @@
             <div class="ong-modebar"><div class="ong-modes">${modeBarHtml(mode)}</div>
             <button type="button" class="icon-button small ong-opts" data-ong-under aria-label="Sous le titre" title="Sous le titre">⋯</button></div>
             <div class="ong-bar" data-ong-bar></div>
-            <div class="ong-letters" data-ong-letters ${['folders', 'places', 'years'].includes(mode) ? 'hidden' : ''}></div><div class="ong-list" data-ong-list>${UI().skeleton ? UI().skeleton(6) : '<div class="loading-block">Chargement…</div>'}</div></div>`;
+            <div class="ong-letters" data-ong-letters ${['folders', 'places', 'years', 'albums'].includes(mode) ? 'hidden' : ''}></div><div class="ong-list" data-ong-list>${UI().skeleton ? UI().skeleton(6) : '<div class="loading-block">Chargement…</div>'}</div></div>`;
         // 📚 dans le pied de la colonne (fixe, il ne cache aucun document), sous le nombre : la liste des recueils à droite
         footer.innerHTML = `<span data-ong-count></span>${kiosk() ? '' : `<button type="button" class="icon-button small ong-selbtn${selMode ? ' is-active' : ''}" data-ong-selmode aria-pressed="${selMode}" aria-label="${esc(T('☑ Cocher plusieurs documents'))}" title="${esc(T('☑ Cocher plusieurs documents'))}">☑</button>`}<button type="button" class="button secondary ong-allrec" data-ong-allrec title="${esc(T('Les recueils en vignettes, à droite, sans quitter Documents'))}">📚 ${esc(T('Voir la liste des recueils'))}<small class="ong-allrec-n" data-ong-allrec-n>${docs ? esc(plural(recs.length, 'recueil')) : ''}</small></button>`;
         // d'une autre façon de ranger : la colonne passe en « 📚 Recueils », la liste des recueils s'ouvre à droite
@@ -261,7 +272,8 @@
         const sig = A().state?.module, signal = A().sidebarSignal?.();
         SF()?.bind(content, {signal});
         content.addEventListener('click', e => {
-            const m = e.target.closest('[data-ong-mode]'); if (m) { const k = m.dataset.ongMode; writePref({mode: k, ...(isSet(k) ? {lastSet: k} : {})}); shown = STEP; A().renderSidebar(); paintWorkspaceList(); return; }
+            const m = e.target.closest('[data-ong-mode]'); if (m) { const k = m.dataset.ongMode; writePref({mode: k, ...(isSet(k) ? {lastSet: k} : {}), ...(isBook(k) ? {lastBook: k} : {})}); shown = STEP; A().renderSidebar(); paintWorkspaceList(); return; }
+            const al = e.target.closest('[data-ong-album]'); if (al) { showAlbum(al.dataset.ongAlbum); return; } // 📒 l'album à droite
             const xh = e.target.closest('[data-ong-ex]'); if (xh) { showEx(xh.dataset.ongEx); return; } // ✉️ le fil de cette correspondance à droite
             const sh = e.target.closest('[data-ong-sorth]'); if (sh) { showSort(sh.dataset.ongSorth); return; } // 🏷 les documents de cette sorte à droite
             const o = e.target.closest('[data-ong-under]'); if (o) { underMenu(o); return; }
@@ -339,6 +351,10 @@
             if (none.length) { const shut = folded.includes(0); out.push({rh: null, n: none.length, shut}); if (!shut) none.forEach(d => out.push({d, letter: '#'})); }
             return out;
         }
+        if (mode === 'albums' && ext.albums) { // 📒 chaque album, ses photos dans l'ordre ; « Dans aucun album » (les photos) à la fin
+            const narrowed = !!(bar?.state?.q || Object.values(bar?.state?.filters || {}).some(v => (Array.isArray(v) ? v.length : !!v)));
+            return ext.albums.columnEntries(list, {folded: foldedKeys('albFold'), narrowed, isPhoto: d => d.sort === 'photo'}) || [];
+        }
         if (mode === 'people') {
             let last = null;
             groupsByPerson(list).forEach(g => {
@@ -372,7 +388,7 @@
         const rn = document.querySelector('#sidebar-footer [data-ong-allrec-n]'); if (rn) rn.textContent = plural(recs.length, 'recueil'); // « 0 recueil » s'il n'y en a pas
         if (count) { const fd = SF()?.read('document')?.folders?.length || 0; count.textContent = `${plural(docs.length, 'document')}${mode === 'folders' ? ` · ${plural(fd, 'dossier')}` : active ? ` · ${plural(active, 'filtre')}` : ''}`; }
         const letters = document.querySelector('#sidebar-content [data-ong-letters]');
-        if (letters && (mode === 'places' || mode === 'years')) letters.hidden = true;
+        if (letters && (mode === 'places' || mode === 'years' || mode === 'albums')) letters.hidden = true;
         if (!docs.length) { box.innerHTML = A().empty ? A().empty('Aucun document pour l’instant : les photos, actes et lettres ajoutés aux fiches arrivent ici.', {icon: '📄'}) : ''; if (letters) letters.innerHTML = ''; return; }
         if (mode === 'folders') {
             const keep = new Set(list.map(d => String(d.id)));
@@ -381,8 +397,9 @@
             return;
         }
         if (mode === 'inquiries' && !list.length) { box.innerHTML = A().empty ? A().empty(epIds ? T('Aucune image n’a encore d’enquête photo.') : T('On cherche les images qui ont une enquête…'), {icon: '🔎'}) : ''; if (letters) letters.innerHTML = ''; return; }
+        if (mode === 'albums' && ext.albums && !ext.albums.cached()) { box.innerHTML = UI().skeleton ? UI().skeleton(6) : ''; ext.albums.index().then(() => { if (modeOf() === 'albums') paintList(); }); return; }
         const all = entries(list, mode, st);
-        if (letters && mode !== 'places' && mode !== 'years') {
+        if (letters && mode !== 'places' && mode !== 'years' && mode !== 'albums') {
             const have = new Set(all.filter(e => e.lh).map(e => e.lh));
             letters.hidden = !have.size;
             letters.innerHTML = LETTERS.map(L => `<button type="button" data-ong-letter="${L}" ${have.has(L) ? '' : 'disabled'} aria-label="${esc(T('Aller à la lettre {x}', {x: L}))}">${L}</button>`).join('');
@@ -398,13 +415,16 @@
                     : `<div class="ong-ph ong-rhrow">${fold}<button type="button" class="ong-rh" data-ong-fold="0"><span>${esc(T('Dans aucun recueil'))}</span><small>${e.n}</small></button></div>`; }
             else if (e.xh) { const x = e.xh, fold = `<button type="button" class="ong-fold" data-ong-exfold="${esc(x.key)}" aria-expanded="${!e.shut}" aria-label="${esc(e.shut ? T('Montrer') : T('Masquer'))}">${e.shut ? '▸' : '▾'}</button>`;
                 html += `<div class="ong-ph ong-rhrow ong-exrow">${fold}<button type="button" class="ong-rh" data-ong-ex="${esc(x.key)}" title="${esc(T('Voir le fil à droite'))}"><span>✉️ ${esc(x.title || T('Correspondant inconnu'))}</span><small>${x.from ? esc(x.from === x.to ? String(x.from) : `${x.from}–${x.to}`) + ' · ' : ''}${x.pieces.length}</small></button></div>`; }
+            else if (e.ah !== undefined) { const k = e.ah ? String(e.ah.id) : '0', fold = `<button type="button" class="ong-fold" data-ong-gfold="${k}" data-ong-gkey="albFold" aria-expanded="${!e.shut}" title="${esc(e.shut ? T('Montrer') : T('Masquer'))}" aria-label="${esc(e.shut ? T('Montrer') : T('Masquer'))}">${e.shut ? '▸' : '▾'}</button>`;
+                html += e.ah ? `<div class="ong-ph ong-rhrow">${fold}<button type="button" class="ong-rh" data-ong-album="${e.ah.id}" title="${esc(T('Voir l’album à droite'))}"><span>📒 ${esc(e.ah.title)}</span><small>${e.ah.range ? esc(e.ah.range) + ' · ' : ''}${e.n}</small></button></div>`
+                    : `<div class="ong-ph ong-rhrow">${fold}<button type="button" class="ong-rh" data-ong-gfold="0" data-ong-gkey="albFold"><span>${esc(T('Dans aucun album'))}</span><small>${e.n}</small></button></div>`; }
             else if (e.gap) html += `<div class="ong-gap" role="note">⚠ ${esc(T('rien entre {a} et {b} ({n} mois)', {a: e.gap.from, b: e.gap.to, n: String(e.gap.months)}))}</div>`;
             else if (e.sh) { const [k, ic, l] = CO().sortMeta(e.sh), fold = `<button type="button" class="ong-fold" data-ong-sortfold="${esc(k)}" aria-expanded="${!e.shut}" aria-label="${esc(e.shut ? T('Montrer') : T('Masquer'))}">${e.shut ? '▸' : '▾'}</button>`;
                 html += `<div class="ong-ph ong-rhrow">${fold}<button type="button" class="ong-rh" data-ong-sorth="${esc(k)}" title="${esc(T('Voir ces documents à droite'))}"><span>${ic} ${esc(T(l))}</span><small>${e.n}</small></button></div>`; }
             else if (e.gh) { const g = e.gh, fold = `<button type="button" class="ong-fold" data-ong-gfold="${esc(g.key)}" data-ong-gkey="${g.fk}" aria-expanded="${!e.shut}" aria-label="${esc(e.shut ? T('Montrer') : T('Masquer'))}">${e.shut ? '▸' : '▾'}</button>`;
                 html += `<div class="ong-ph ong-rhrow ong-grow">${fold}<button type="button" class="ong-rh" data-ong-gfold="${esc(g.key)}" data-ong-gkey="${g.fk}"><span>${esc(g.label)}</span><small>${g.n}</small></button></div>`; }
             else if (e.ph) html += `<div class="ong-ph" data-ong-ph="${e.ph.p ? e.ph.p.id : 0}"><span>${e.ph.p ? `👤 ${esc(e.ph.p.name)}` : esc(T('Sans personne'))}</span><small>${e.ph.docs.length}</small></div>`;
-            else { html += e.num ? rowHtml(e.d, e.letter).replace('<strong>', `<strong><span class="ong-pnum">${esc(T('p. {n}', {n: String(e.num)}))}</span> `) : rowHtml(e.d, e.letter); rows++; }
+            else { html += e.num ? rowHtml(e.d, e.letter).replace('<strong>', `<strong><span class="ong-pnum">${esc(mode === 'albums' ? T('n° {n}', {n: String(e.num)}) : T('p. {n}', {n: String(e.num)}))}</span> `) : rowHtml(e.d, e.letter); rows++; }
         }
         queueMicrotask(() => pick.on && paintPick());
         box.innerHTML = `<div class="side-menu ong-menu${selOn() ? ' is-selecting' : ''}">${html}</div>${total > shown ? `<button type="button" class="ui-more" data-ong-more>Voir les ${Math.min(STEP, total - shown)} suivants ↓</button>` : ''}`;
@@ -427,6 +447,7 @@
         return [
             {id: 'range', icon: '📁', label: T('Ranger'), help: T('Ranger les documents cochés dans un dossier de la colonne'), edit: true, run: ids => rangeMany(ids)},
             SB.labelAction ? {...SB.labelAction('media', {after: reloadAll}), label: T('Étiqueter')} : null,
+            ext.albums ? {id: 'album', icon: '📒', label: T('Mettre dans un album…'), help: T('Les documents cochés dans un album photo, dans l’ordre de la liste'), edit: true, run: (ids, s2) => ext.albums.chooseAndAdd(ids.map(Number), {anchor: s2?.el, onDone: afterAlbum})} : null,
             ext.enquetePhoto ? {id: 'enquete', icon: '🔎', label: T('Enquêter sur ces images'), help: T('Une enquête photo avec les documents cochés : un indice trouvé sur l’un profite aux autres'), edit: true, run: ids => ext.enquetePhoto.create(ids.map(Number))} : null,
             {id: 'link', icon: '👤', label: T('Relier à une personne'), help: T('Relier les documents cochés à une fiche'), edit: true, run: ids => linkMany(ids)},
             {id: 'zip', icon: '⤓', label: T('Exporter en ZIP'), help: T('Les fichiers des documents cochés, avec une liste (CSV), dans un fichier .zip'), run: ids => zipMany(ids)},
@@ -536,6 +557,7 @@
         barEl.innerHTML = `<span class="ong-pickcount">${n ? esc(n > 1 ? T('{x}, dans l’ordre des clics', {x: what}) : what) : esc(T('Clique sur les documents à prendre, dans l’ordre des pages.'))}</span><span class="spacer"></span>
             <button type="button" class="button small" data-ong-pick-make ${n ? '' : 'disabled'}>${esc(n > 1 ? T('📚 Faire un recueil avec {x}', {x: plural(n, 'document', 'documents')}) : T('📚 Faire un recueil'))}</button>
             <button type="button" class="button small secondary" data-ong-pick-add ${n ? '' : 'disabled'}>${esc(T('📚 Ajouter à un recueil…'))}</button>
+            ${ext.albums ? `<button type="button" class="button small secondary" data-ong-pick-album ${n ? '' : 'disabled'}>${esc(T('📒 Mettre dans un album…'))}</button>` : ''}
             <button type="button" class="button small secondary" data-ong-pick-all>${esc(T('Tout choisir (ceux montrés)'))}</button>
             ${n ? `<button type="button" class="button small secondary" data-ong-pick-none>${esc(T('Tout enlever'))}</button>` : ''}
             <button type="button" class="icon-button small" data-ong-pick-close aria-label="${esc(T('Fermer'))}" title="${esc(T('Fermer'))}">×</button>`;
@@ -561,6 +583,14 @@
         if (cur) { cur = 0; writePref({cur: 0}); history.pushState(null, '', '#documents'); document.querySelectorAll('#sidebar-content [data-ong-doc].is-active').forEach(x => x.classList.remove('is-active')); render(); }
         else { paintWorkspaceList(); document.querySelector('#workspace [data-ong-page]')?.scrollIntoView({block: 'start'}); }
     }
+    /** 📒 l'album à droite (v = son n°, '' = tous les albums) */
+    function showAlbum(v) {
+        writePref({wsAlbum: String(v || '')});
+        if (cur) { cur = 0; writePref({cur: 0}); history.pushState(null, '', '#documents'); document.querySelectorAll('#sidebar-content [data-ong-doc].is-active').forEach(x => x.classList.remove('is-active')); render(); }
+        else { paintWorkspaceList(); document.querySelector('#workspace [data-ong-page]')?.scrollIntoView({block: 'start'}); }
+    }
+    async function afterAlbum() { ext.albums?.invalidate?.(); if (A().state?.module !== 'documents') return; if (modeOf() === 'albums') await ext.albums.index(true); paintList(); paintWorkspaceList(); }
+    document.addEventListener('lcnda:albums-changed', () => { if (A()?.state?.module === 'documents' && modeOf() === 'albums') ext.albums.index().then(() => paintList()); });
     function recCardsHtml(list) {
         if (!recFull) { loadRecFull(); return UI().skeleton ? UI().skeleton(4) : `<div class="loading-block">${esc(T('Chargement…'))}</div>`; }
         const st = bar?.state || {}, narrowed = !!(st.q || Object.values(st.filters || {}).some(v => (Array.isArray(v) ? v.length : !!v)));
@@ -749,12 +779,17 @@
     }
     function paintWorkspaceList() {
         const box = document.querySelector('#workspace [data-ong-cards]'); if (!box || cur) return;
+        delete box.dataset.albHost; // 📒 (heritage-albums.js le remet quand il dessine)
         const all = filtered();
         if (modeOf() === 'inquiries' && !pick.on) { paintInquiries(box); return; }
         if ((docs || []).length && CO() && modeOf() === 'letters' && !pick.on) { const k = wsEx(); if (k == null) box.innerHTML = exCardsHtml(all); else paintExWs(box, all, k); return; }
         if ((docs || []).length && CO() && modeOf() === 'sorts' && !pick.on && !wsSort()) { box.innerHTML = sortCardsHtml(all); return; }
         if (!(docs || []).length) { box.innerHTML = A().emptyState({icon: '📄', text: 'Aucun document pour l’instant', hint: 'Les photos, actes, lettres et papiers ajoutés aux fiches (ou importés) arrivent ici, sans rien ressaisir.', action: kiosk() ? null : {label: '⤒ Importer des documents', attrs: 'data-empty-click="[data-ong-import]"'}}); return; }
         if (modeOf() === 'recueils' && !wsRec() && !pick.on) { box.innerHTML = recCardsHtml(all); return; }
+        if (modeOf() === 'albums' && ext.albums && !pick.on) { // 📒 les albums en vignettes, ou l'album choisi (ses photos dans l'ordre, ses pages)
+            const st = bar?.state || {}, narrowed = !!(st.q || Object.values(st.filters || {}).some(v => (Array.isArray(v) ? v.length : !!v)));
+            ext.albums.paintWorkspace(box, {docs: all, narrowed, album: String(readPref().wsAlbum || ''), setAlbum: showAlbum, openDoc: id => select(Number(id))}); return;
+        }
         if (wsSort() === 'postcard' && CO() && !pick.on) { const pl = all.filter(d => CO().sortOf(d) === 'postcard');
             box.innerHTML = `<div class="ong-recbar"><button type="button" class="button small secondary" data-ong-wssort="">← ${esc(T('Toutes les sortes'))}</button><strong>🏞 ${esc(T('Cartes postales'))}</strong><small class="muted">${esc(plural(pl.length, 'document', 'documents'))}</small></div>` + postcardsHtml(pl); return; }
         const w = wsRec(), rec = w && w !== 'none' ? (recOf(w) || {id: Number(w), title: '', icon: '📚'}) : null, ws0 = wsSort(), list = ws0 && CO() ? all.filter(d => CO().sortOf(d) === ws0) : wsDocs(all);
@@ -851,7 +886,7 @@
         const help = [kindWord({...d, sort}), d.date_text, d.places?.[0]?.name, d.pages && `${d.pages} p.`].filter(Boolean).join(' · ');
         // R11 : le même ordre que le clic droit d'une ligne (Ouvrir · Modifier · Ranger · Étiquette · Exporter · — · Supprimer)
         const more = [`<button type="button" data-ong-view>↗ ${esc(T('Ouvrir le média'))}</button>`, ...(!ro && d.filename ? [`<button type="button" data-ong-edit-viewer>🖼 ${esc(T('Ouvrir dans la visionneuse'))}</button>`] : []),
-            ...(!ro && isImg && ext.recueilDocs ? [`<button type="button" data-ong-recadd>${esc(T('📚 Ajouter à un recueil…'))}</button>`] : []), `<button type="button" data-ong-cite>📋 ${esc(T('Copier la citation'))}</button>`,
+            ...(!ro && isImg && ext.recueilDocs ? [`<button type="button" data-ong-recadd>${esc(T('📚 Ajouter à un recueil…'))}</button>`] : []), ...(!ro && isImg && ext.albums ? [`<button type="button" data-ong-albadd>${esc(T('📒 Mettre dans un album…'))}</button>`] : []), `<button type="button" data-ong-cite>📋 ${esc(T('Copier la citation'))}</button>`,
             '<button type="button" data-ong-dl>⤓ Télécharger</button>', '<button type="button" data-ong-print>🖨 Imprimer</button>', ...(!ro ? [`<button type="button" class="danger" data-ong-del>🗑 ${esc(T('Supprimer'))}</button>`] : [])];
         const field = (k, v, raw = false) => v ? `<dt>${esc(k)}</dt><dd>${raw ? v : esc(v)}</dd>` : '';
         const ppl = d.people || [];
@@ -1021,10 +1056,15 @@
         const page = e.target.closest?.('#workspace [data-ong-page]'); if (!page || A().state?.module !== 'documents') return;
         const b = e.target.closest('button, a'); if (!b) return;
         if (b.matches('[data-ong-missadd], [data-ong-missdel], [data-ong-zoom], [data-ong-dupopen], [data-ong-inline-cancel], [data-ong-inline-save]') || b.closest('.pk, .sel-bar')) return; // leurs propres écouteurs
-        if (b.matches('[data-ong-pick]')) { pick.on = !pick.on; if (!pick.on) pick.ids = []; if (modeOf() === 'recueils' && !wsRec()) paintWorkspaceList(); paintPick(); return; }
-        if (b.matches('[data-ong-pick-close]')) { pick.on = false; pick.ids = []; if (modeOf() === 'recueils' && !wsRec()) paintWorkspaceList(); paintPick(); return; }
+        if (b.matches('[data-ong-pick]')) { pick.on = !pick.on; if (!pick.on) pick.ids = []; if ((modeOf() === 'recueils' && !wsRec()) || modeOf() === 'albums') paintWorkspaceList(); paintPick(); return; }
+        if (b.matches('[data-ong-pick-close]')) { pick.on = false; pick.ids = []; if ((modeOf() === 'recueils' && !wsRec()) || modeOf() === 'albums') paintWorkspaceList(); paintPick(); return; }
         if (b.matches('[data-ong-pick-none]')) { pick.ids = []; paintPick(); return; }
         if (b.matches('[data-ong-pick-all]')) { wsDocs().slice(0, wsShown).forEach(x => { if (!pick.ids.includes(x.id)) pick.ids.push(x.id); }); paintPick(); return; }
+        if (b.matches('[data-ong-pick-album]')) { // 📒 dans l'ordre des clics
+            const ids = [...pick.ids]; if (!ids.length || !ext.albums) return;
+            ext.albums.chooseAndAdd(ids, {anchor: b, onDone: async () => { pick.on = false; pick.ids = []; await afterAlbum(); paintPick(); }});
+            return;
+        }
         if (b.matches('[data-ong-pick-make], [data-ong-pick-add]')) {
             if (!ext.recueilDocs) return A().toast(T('Les recueils ne sont pas encore chargés : réessaie dans un instant.'), 'error');
             const chosen = pick.ids.map(byId).filter(Boolean);
@@ -1089,6 +1129,7 @@
             finally { b.disabled = false; }
             return;
         }
+        if (b.matches('[data-ong-albadd]')) { b.closest('details')?.removeAttribute('open'); ext.albums?.chooseAndAdd([d.id || cur], {anchor: b, onDone: afterAlbum}); return; }
         if (b.matches('[data-ong-recadd]')) { ext.recueilDocs?.addTo([{...d, id: d.id || cur}], {onDone: afterRecueil}); return; }
         if (b.matches('[data-ong-dl]')) { if (!d.filename) return; const a = Object.assign(document.createElement('a'), {href: `media/${encodeURIComponent(d.filename)}`, download: d.filename}); document.body.appendChild(a); a.click(); a.remove(); return; }
         if (b.matches('[data-ong-print]')) { UI().printPage ? UI().printPage(d.title) : A().toast('L’impression n’est pas disponible.', 'error'); return; }

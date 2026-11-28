@@ -42,6 +42,9 @@ declare(strict_types=1);
  * get (🔔 du nouveau pour une enquête terminée, calculé à la demande) ; les changements de conclusion et de certitude vont au journal
  * (lignes « ⚖ ») ; settings_json garde la ▦ grille de lecture (grids) et les 🔢 personnes numérotées (people : jamais nommées en
  * consultation si vivantes ou confidentielles). Pas de table de plus.
+ * La suite, 2ᵉ partie (heritage-enquete-photo-classement.js) : GET ep&op= place_timeline (🏘 le même lieu à travers le temps) ·
+ * group_expected (🎓 qui devrait être sur une photo de classe, de conscrits ou de noce) · versos (🔄 les dos côte à côte) ·
+ * person_years (🕳 les années sans photo d'une personne) ; settings_json garde l'ordre supposé d'un album (albumOrder). Pas de table de plus.
  */
 
 const EP_CERT = ['proven', 'probable', 'supposed', 'refuted'];
@@ -1334,6 +1337,10 @@ function ep_dispatch(PDO $pdo, string $action, bool $isWrite, array $payload): n
                 'occupations' => ep_occupations($pdo, $_GET),
                 'occasions' => ep_occasions($pdo, safe_int($_GET['id'] ?? 0), $_GET),
                 'photographer_route' => ep_photographer_route($pdo, $_GET),
+                'place_timeline' => ep_place_timeline($pdo, $_GET),
+                'group_expected' => ep_group_expected($pdo, safe_int($_GET['id'] ?? 0), $_GET),
+                'versos' => ep_versos($pdo, safe_int($_GET['id'] ?? 0), $_GET),
+                'person_years' => ep_person_years($pdo, $_GET),
                 default => throw new LcndaBadInput('Opération inconnue.'),
             });
         }
@@ -1410,4 +1417,168 @@ function ep_summaries(PDO $pdo, array $ids): array
     if (!$ids) { return []; }
     $all = ep_list($pdo)['inquiries'];
     return array_values(array_filter($all, static fn($q) => in_array($q['id'], $ids, true) && !(ep_kiosk() && $q['is_private'])));
+}
+
+/* ═════════ la suite, 2ᵉ partie (heritage-enquete-photo-classement.js) : 🏘 le même lieu à travers le temps · 🎓 qui devrait être
+ *  sur une photo de groupe · 🔄 les dos côte à côte · 🕳 les années sans photo d'une personne. Lecture seule, pas de table de plus. ═════════ */
+
+/** media_id => true quand la photo montre (ou est reliée à) une personne vivante ou une fiche confidentielle */
+function ep_media_private(PDO $pdo, array $mediaIds): array
+{
+    $mediaIds = array_values(array_unique(array_filter(array_map('intval', $mediaIds)))); if (!$mediaIds) { return []; }
+    $by = [];
+    foreach (array_chunk($mediaIds, 400) as $chunk) {
+        $in = implode(',', $chunk);
+        try { foreach ($pdo->query("SELECT media_id, person_id FROM media_tags WHERE media_id IN ($in) AND COALESCE(tag_type,'person')='person'") as $r) { $by[(int) $r['media_id']][] = (int) $r['person_id']; } } catch (Throwable $_) {}
+        try { foreach ($pdo->query("SELECT media_id, entity_id FROM media_links WHERE media_id IN ($in) AND entity_type='person'") as $r) { $by[(int) $r['media_id']][] = (int) $r['entity_id']; } } catch (Throwable $_) {}
+    }
+    $pp = ep_persons($pdo, $by ? array_merge(...array_values($by)) : []); $out = [];
+    foreach ($by as $mid => $pids) { foreach ($pids as $p) { if (!empty($pp[$p]['private'])) { $out[$mid] = true; break; } } }
+    return $out;
+}
+/** l'année (et la fin de la fourchette) d'une conclusion de date : {from, to} ; sinon d'après le texte */
+function ep_conc_years(array $date): array
+{
+    $f = ep_year($date['from'] ?? null); $t = ep_year($date['to'] ?? null);
+    if (!$f && !$t && preg_match_all('/\b(1[5-9]\d\d|20\d\d)\b/', (string) ($date['text'] ?? ''), $m)) { $ys = array_map('intval', $m[1]); $f = min($ys); $t = max($ys); }
+    return ['from' => $f ?? $t, 'to' => $t ?? $f];
+}
+
+/** 🏘 toutes les photos d'un lieu, de la plus ancienne à la plus récente : les enquêtes qui ont conclu à ce lieu (ou y sont reliées)
+ *  et les médias posés à ce lieu. Consultation et appareil invité : ni enquête confidentielle, ni photo d'un vivant. */
+function ep_place_timeline(PDO $pdo, array $g): array
+{
+    $plid = safe_int($g['place_id'] ?? 0); if ($plid <= 0) { throw new LcndaBadInput(i18n_t('Choisis d’abord un lieu.')); }
+    $s = $pdo->prepare('SELECT id, name FROM places WHERE id=?'); $s->execute([$plid]); $pl = $s->fetch(PDO::FETCH_ASSOC);
+    if (!$pl) { throw new RuntimeException(i18n_t('Lieu introuvable.')); }
+    $hide = ep_kiosk() || ep_guest(); $rows = [];
+    $linked = array_map('intval', (static function () use ($pdo, $plid) { $s = $pdo->prepare("SELECT inquiry_id FROM photo_inquiry_links WHERE kind='place' AND ref_id=?"); $s->execute([$plid]); return $s->fetchAll(PDO::FETCH_COLUMN); })());
+    $img = $pdo->prepare("SELECT i.media_id, m.title, m.filename, m.thumbnail, m.media_type, m.date_text FROM photo_inquiry_images i JOIN media m ON m.id=i.media_id WHERE i.inquiry_id=? AND COALESCE(i.side,'')<>'verso' ORDER BY i.position, i.id");
+    foreach ($pdo->query('SELECT id, title, conclusion_json, is_private FROM photo_inquiries')->fetchAll(PDO::FETCH_ASSOC) as $q) {
+        $c = ep_dec($q['conclusion_json']); $here = (int) ($c['place']['place_id'] ?? 0) === $plid;
+        if (!$here && !in_array((int) $q['id'], $linked, true)) { continue; }
+        if ($hide && (int) $q['is_private'] === 1) { continue; }
+        $y = ep_conc_years(is_array($c['date'] ?? null) ? $c['date'] : []);
+        $img->execute([(int) $q['id']]);
+        foreach ($img->fetchAll(PDO::FETCH_ASSOC) as $m) {
+            $mid = (int) $m['media_id']; $my = ep_year(preg_match('/\b(1[5-9]\d\d|20\d\d)\b/', (string) $m['date_text'], $mm) ? $mm[1] : null);
+            $rows[$mid] = ['media_id' => $mid, 'title' => (string) $m['title'], 'thumb' => (string) ($m['thumbnail'] ?: $m['filename']), 'filename' => (string) $m['filename'], 'media_type' => (string) $m['media_type'],
+                'year' => $y['from'] ?? $my, 'year_to' => $y['to'] ?? $my, 'date_text' => (string) (($c['date']['text'] ?? '') ?: $m['date_text']), 'certainty' => $here ? (string) ($c['place']['certainty'] ?? 'supposed') : 'supposed',
+                'inquiry' => ['id' => (int) $q['id'], 'title' => (string) $q['title']], 'from' => $here ? 'conclusion' : 'link'];
+        }
+    }
+    if ((bool) $pdo->query("SELECT 1 FROM pragma_table_info('media') WHERE name='place_id'")->fetchColumn()) {
+        $s = $pdo->prepare("SELECT id, title, filename, thumbnail, media_type, date_text FROM media WHERE place_id=? AND media_type='image' LIMIT 2000"); $s->execute([$plid]);
+        foreach ($s->fetchAll(PDO::FETCH_ASSOC) as $m) {
+            $mid = (int) $m['id']; if (isset($rows[$mid])) { continue; }
+            $my = ep_year(preg_match('/\b(1[5-9]\d\d|20\d\d)\b/', (string) $m['date_text'], $mm) ? $mm[1] : null);
+            $rows[$mid] = ['media_id' => $mid, 'title' => (string) $m['title'], 'thumb' => (string) ($m['thumbnail'] ?: $m['filename']), 'filename' => (string) $m['filename'], 'media_type' => (string) $m['media_type'],
+                'year' => $my, 'year_to' => $my, 'date_text' => (string) $m['date_text'], 'certainty' => '', 'inquiry' => null, 'from' => 'media'];
+        }
+    }
+    if ($hide) { $priv = ep_media_private($pdo, array_keys($rows)); $rows = array_diff_key($rows, $priv); }
+    $list = array_values($rows);
+    usort($list, static fn($a, $b) => [$a['year'] === null, $a['year'] ?? 0, $a['title']] <=> [$b['year'] === null, $b['year'] ?? 0, $b['title']]);
+    return ['place' => ['id' => (int) $pl['id'], 'name' => (string) $pl['name']], 'photos' => array_slice($list, 0, 500), 'undated' => count(array_filter($list, static fn($x) => $x['year'] === null))];
+}
+
+/** 🎓 une photo de groupe connue : qui devrait y être d'après l'arbre.
+ *  school (classe d'école) : nés pour avoir de age_from à age_to ans cette année-là, avec un événement à ce lieu ;
+ *  conscrits : les garçons de la classe (20 ans cette année-là), avec un événement à ce lieu ;
+ *  wedding (noce) : les mariés et leur famille vivante ce jour-là (parents, frères et sœurs, grands-parents, oncles et tantes, enfants). */
+function ep_group_expected(PDO $pdo, int $id, array $g): array
+{
+    $q = ep_inquiry_row($pdo, $id); $c = ep_dec($q['conclusion_json']);
+    $kind = in_array($g['kind'] ?? '', ['school', 'conscrits', 'wedding'], true) ? (string) $g['kind'] : 'school';
+    $year = ep_year($g['year'] ?? null) ?? ep_conc_years(is_array($c['date'] ?? null) ? $c['date'] : [])['from'];
+    $plid = safe_int($g['place_id'] ?? 0) ?: (int) ($c['place']['place_id'] ?? 0);
+    $alive = static fn(array $p) => (($p['birth'] ?? null) === null || $p['birth'] <= $year) && (($p['death'] ?? null) === null || $p['death'] >= $year);
+    $roles = [];
+    if ($kind === 'wedding') {
+        $couple = array_values(array_filter(array_map('intval', is_array($g['person_ids'] ?? null) ? $g['person_ids'] : explode(',', (string) ($g['person_ids'] ?? ''))))); $evYear = null;
+        $ev = safe_int($g['event_id'] ?? 0);
+        if ($ev) { $s = $pdo->prepare('SELECT e.person_id, e.year, f.partner1_id, f.partner2_id FROM events e LEFT JOIN families f ON f.id=e.family_id WHERE e.id=?'); $s->execute([$ev]);
+            if ($r = $s->fetch(PDO::FETCH_ASSOC)) { $couple = array_values(array_filter([(int) $r['partner1_id'], (int) $r['partner2_id'], (int) $r['person_id']])); $evYear = $r['year'] !== null ? (int) $r['year'] : null; } }
+        $year = $year ?? $evYear;
+        if (!$couple) { throw new LcndaBadInput(i18n_t('Choisis d’abord les mariés (un mariage de l’arbre, ou une personne).')); }
+        if (count($couple) === 1) { $s = $pdo->prepare('SELECT partner1_id, partner2_id FROM families WHERE partner1_id=? OR partner2_id=? LIMIT 1'); $s->execute([$couple[0], $couple[0]]); if ($f = $s->fetch(PDO::FETCH_NUM)) { $couple = array_values(array_unique(array_filter(array_map('intval', [$couple[0], ...$f])))); } }
+        foreach ($couple as $p) { $roles[$p] = 'married'; }
+        $near = ep_family_of($pdo, $couple);
+        $parents = array_keys(array_filter($near, static fn($r) => $r === 'parent'));
+        foreach ($near as $p => $r) { $roles[$p] ??= ['parent' => 'parent', 'sibling' => 'sibling', 'child' => 'child', 'spouse' => 'married'][$r] ?? 'family'; }
+        if ($parents) { foreach (ep_family_of($pdo, $parents) as $p => $r) { if (isset($roles[$p])) { continue; } if ($r === 'parent') { $roles[$p] = 'grandparent'; } elseif ($r === 'sibling') { $roles[$p] = 'uncle'; } } }
+    } else {
+        if (!$year) { throw new LcndaBadInput(i18n_t('Il faut d’abord l’année de la photo (la conclusion ou la frise).')); }
+        if (!$plid) { throw new LcndaBadInput(i18n_t('Il faut d’abord le lieu de la photo (la conclusion).')); }
+        [$a, $b] = $kind === 'conscrits' ? [$year - 21, $year - 20] : [$year - max(3, min(20, safe_int($g['age_to'] ?? 13) ?: 13)), $year - max(2, min(18, safe_int($g['age_from'] ?? 6) ?: 6))];
+        $s = $pdo->prepare("SELECT DISTINCT p.id FROM persons p JOIN events b ON b.person_id=p.id JOIN event_types bt ON bt.id=b.event_type_id AND bt.gedcom_tag IN ('BIRT','BAPM','CHR')
+            WHERE b.year BETWEEN ? AND ? AND EXISTS (SELECT 1 FROM events x WHERE x.person_id=p.id AND x.place_id=?)" . ($kind === 'conscrits' ? " AND p.gender='male'" : '') . ' LIMIT 400');
+        $s->execute([$a, $b, $plid]);
+        foreach ($s->fetchAll(PDO::FETCH_COLUMN) as $p) { $roles[(int) $p] = $kind === 'conscrits' ? 'conscrit' : 'pupil'; }
+    }
+    $pp = ep_persons($pdo, array_keys($roles)); $order = ['married' => 0, 'parent' => 1, 'sibling' => 2, 'grandparent' => 3, 'uncle' => 4, 'child' => 5, 'family' => 6, 'pupil' => 0, 'conscrit' => 0];
+    $out = [];
+    foreach ($roles as $pid => $role) {
+        $p = $pp[$pid] ?? null; if (!$p || ($year && !$alive($p))) { continue; }
+        $o = ep_person_out($p);
+        $out[] = ['id' => $o['id'], 'name' => $o['name'], 'private' => $p['private'], 'birth' => $o['birth'], 'death' => $o['death'], 'age' => $year && $p['birth'] ? $year - $p['birth'] : null, 'role' => $role];
+    }
+    usort($out, static fn($x, $y) => [$order[$x['role']] ?? 9, -($x['age'] ?? 0), $x['name']] <=> [$order[$y['role']] ?? 9, -($y['age'] ?? 0), $y['name']]);
+    return ['kind' => $kind, 'year' => $year, 'place_id' => $plid ?: null, 'people' => array_slice($out, 0, 80)];
+}
+
+/** 🔄 les dos (versos) : ceux de cette enquête, et (all=1) ceux de toutes les enquêtes, avec leurs indices « dos » */
+function ep_versos(PDO $pdo, int $id, array $g): array
+{
+    ep_inquiry_row($pdo, $id); $all = !empty($g['all']); $hide = ep_kiosk() || ep_guest();
+    $sql = "SELECT i.id AS image_id, i.inquiry_id, i.media_id, i.label, q.title AS inquiry, q.is_private, m.title, m.filename, m.thumbnail, m.media_type FROM photo_inquiry_images i JOIN photo_inquiries q ON q.id=i.inquiry_id JOIN media m ON m.id=i.media_id
+        WHERE i.side='verso'" . ($all ? '' : ' AND i.inquiry_id=' . $id) . ' ORDER BY (i.inquiry_id<>' . $id . '), q.updated_at DESC, i.position, i.id LIMIT 120';
+    $rows = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+    if ($hide) { $rows = array_values(array_filter($rows, static fn($r) => (int) $r['is_private'] !== 1)); $priv = ep_media_private($pdo, array_column($rows, 'media_id')); $rows = array_values(array_filter($rows, static fn($r) => empty($priv[(int) $r['media_id']]))); }
+    $cl = $pdo->prepare("SELECT num, text, certainty, images_json FROM photo_inquiry_clues WHERE inquiry_id=? AND kind IN ('dos','support','texte') AND certainty<>'refuted' ORDER BY num");
+    $clues = [];
+    $out = array_map(static function ($r) use ($cl, &$clues) {
+        $iq = (int) $r['inquiry_id'];
+        if (!isset($clues[$iq])) { $cl->execute([$iq]); $clues[$iq] = $cl->fetchAll(PDO::FETCH_ASSOC); }
+        $mine = array_values(array_map(static fn($c) => ['num' => (int) $c['num'], 'text' => (string) $c['text'], 'certainty' => (string) $c['certainty']], array_filter($clues[$iq], static function ($c) use ($r) { $im = ep_dec($c['images_json']); return !$im || ($im[(string) $r['image_id']] ?? '') === 'yes'; })));
+        return ['image_id' => (int) $r['image_id'], 'inquiry_id' => $iq, 'inquiry' => (string) $r['inquiry'], 'media_id' => (int) $r['media_id'], 'label' => (string) $r['label'], 'title' => (string) $r['title'],
+            'filename' => (string) $r['filename'], 'thumb' => (string) ($r['thumbnail'] ?: $r['filename']), 'media_type' => (string) $r['media_type'], 'clues' => array_slice($mine, 0, 8)];
+    }, $rows);
+    return ['versos' => $out];
+}
+
+/** 🕳 les années avec et sans photo d'une personne (de sa naissance à sa mort, ou à aujourd'hui) : ses photos (visage identifié,
+ *  média relié, personne numérotée ou reliée dans une enquête) et leur année (celle du média, sinon la conclusion de l'enquête) */
+function ep_person_years(PDO $pdo, array $g): array
+{
+    $pid = safe_int($g['person_id'] ?? 0); $pp = ep_persons($pdo, [$pid]); $p = $pp[$pid] ?? null;
+    if (!$p) { throw new RuntimeException(i18n_t('Personne introuvable.')); }
+    if ((ep_kiosk() || ep_guest()) && $p['private']) { throw new LcndaBadInput(i18n_t('Personne confidentielle : ses photos ne sont pas montrées ici.')); }
+    $media = [];
+    try { $s = $pdo->prepare("SELECT media_id FROM media_tags WHERE person_id=? AND COALESCE(tag_type,'person')='person'"); $s->execute([$pid]); foreach ($s->fetchAll(PDO::FETCH_COLUMN) as $m) { $media[(int) $m] = 1; } } catch (Throwable $_) {}
+    try { $s = $pdo->prepare("SELECT media_id FROM media_links WHERE entity_type='person' AND entity_id=?"); $s->execute([$pid]); foreach ($s->fetchAll(PDO::FETCH_COLUMN) as $m) { $media[(int) $m] = 1; } } catch (Throwable $_) {}
+    $inqYears = [];
+    foreach ($pdo->query('SELECT id, settings_json, conclusion_json, is_private FROM photo_inquiries')->fetchAll(PDO::FETCH_ASSOC) as $q) {
+        if ((ep_kiosk() || ep_guest()) && (int) $q['is_private'] === 1) { continue; }
+        $st = ep_dec($q['settings_json']); $y = ep_conc_years(is_array(ep_dec($q['conclusion_json'])['date'] ?? null) ? ep_dec($q['conclusion_json'])['date'] : []);
+        $imgs = $pdo->query('SELECT id, media_id FROM photo_inquiry_images WHERE inquiry_id=' . (int) $q['id'] . " AND COALESCE(side,'')<>'verso'")->fetchAll(PDO::FETCH_ASSOC);
+        $byImg = array_column($imgs, 'media_id', 'id');
+        $s = $pdo->prepare("SELECT 1 FROM photo_inquiry_links WHERE inquiry_id=? AND kind='person' AND ref_id=?"); $s->execute([(int) $q['id'], $pid]); $linked = (bool) $s->fetchColumn();
+        foreach ($byImg as $iid => $mid) {
+            $num = array_filter((array) ($st['people'][$iid] ?? []), static fn($m) => is_array($m) && (int) ($m['person_id'] ?? 0) === $pid);
+            if ($num || ($linked && count($byImg) === 1) || isset($media[(int) $mid])) { $media[(int) $mid] = 1; if ($y['from']) { $inqYears[(int) $mid] = $y; } }
+        }
+    }
+    $photos = []; $ids = array_keys($media);
+    if ($ids) {
+        $in = implode(',', array_map('intval', $ids));
+        foreach ($pdo->query("SELECT id, title, filename, thumbnail, media_type, date_text FROM media WHERE id IN ($in)")->fetchAll(PDO::FETCH_ASSOC) as $m) {
+            $my = preg_match('/\b(1[5-9]\d\d|20\d\d)\b/', (string) $m['date_text'], $mm) ? (int) $mm[1] : null; $iy = $inqYears[(int) $m['id']] ?? null;
+            $photos[] = ['media_id' => (int) $m['id'], 'title' => (string) $m['title'], 'thumb' => (string) ($m['thumbnail'] ?: $m['filename']), 'media_type' => (string) $m['media_type'],
+                'year' => $my ?? ($iy ? (int) round(($iy['from'] + $iy['to']) / 2) : null), 'date_text' => (string) $m['date_text'], 'from_inquiry' => $my === null && $iy !== null];
+        }
+    }
+    usort($photos, static fn($a, $b) => [$a['year'] === null, $a['year'] ?? 0] <=> [$b['year'] === null, $b['year'] ?? 0]);
+    $o = ep_person_out($p);
+    return ['person' => ['id' => $o['id'], 'name' => $o['name'], 'birth' => $p['birth'], 'death' => $p['death']], 'photos' => $photos, 'now' => (int) date('Y')];
 }

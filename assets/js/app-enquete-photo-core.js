@@ -498,9 +498,62 @@
     /** 📜 « Ce qui a changé ma conclusion » : les lignes « ⚖ … » du journal, de la plus ancienne à la plus récente */
     function conclusionHistory(journal) { return (journal || []).filter(j => /^⚖/.test(String(j.what || ''))).slice().sort((a, b) => String(a.created_at).localeCompare(String(b.created_at)) || a.id - b.id); }
 
+
+    /* ═════════ la suite, 2ᵉ partie (heritage-enquete-photo-classement.js) ═════════ */
+    /** 📒 classement d'un album : l'ordre supposé (ids d'images) contre les âges notés (👶 croissance : rows [{who, ages: {id: âge}}]) et les
+     *  fenêtres de dates de chaque image ({id: {from, to}}). Une contradiction : une image placée avant une autre où le même enfant paraît plus
+     *  jeune (au-delà de tol ans), ou une image qui ne peut pas être avant une autre (pas avant 1910, l'autre pas après 1905).
+     *  → {issues: [{kind: 'age'|'date', a, b, who, ageA, ageB, from, to}], bad: Set d'ids, checked: nombre de paires regardées} */
+    function albumCheck(order, {ages = [], windows = {}, tol = 1} = {}) {
+        const ids = (order || []).map(String), issues = [], bad = new Set(); let checked = 0;
+        const num = v => (v === '' || v == null || !Number.isFinite(Number(v)) ? null : Number(v));
+        for (let i = 0; i < ids.length; i++) for (let j = i + 1; j < ids.length; j++) {
+            const a = ids[i], b = ids[j];
+            (ages || []).forEach(r => { const x = num(r?.ages?.[a]), y = num(r?.ages?.[b]); if (x == null || y == null) return; checked++;
+                if (x > y + tol) { issues.push({kind: 'age', a, b, who: String(r.who || ''), ageA: x, ageB: y}); bad.add(a); bad.add(b); } });
+            const wa = windows[a] || {}, wb = windows[b] || {};
+            if (wa.from != null || wb.to != null) checked++;
+            if (wa.from != null && wb.to != null && Number(wa.from) > Number(wb.to)) { issues.push({kind: 'date', a, b, from: Number(wa.from), to: Number(wb.to)}); bad.add(a); bad.add(b); }
+        }
+        return {issues, bad, checked};
+    }
+    /** la fenêtre de dates de chaque image : les indices qui la concernent (images[id] === 'yes', ou sans image précise : toutes) */
+    function imageWindows(clues, imageIds) {
+        const out = {};
+        (imageIds || []).map(String).forEach(id => { const w = dateWindow((clues || []).filter(c => { const im = c?.images || {}; return !Object.keys(im).length || im[id] === 'yes'; })); out[id] = {from: w.from, to: w.to}; });
+        return out;
+    }
+    /** 🕳 les années sans photo : years (années des photos), de from à to → {have: [années], gaps: [[a, b]…] (au moins min ans de suite), cover (part des années avec photo)} */
+    function yearGaps(years, from, to, min = 3) {
+        const have = [...new Set((years || []).map(Number).filter(y => Number.isFinite(y) && y >= from && y <= to))].sort((x, y) => x - y), gaps = [];
+        if (!(from <= to)) return {have, gaps, cover: 0};
+        let start = null;
+        for (let y = from; y <= to + 1; y++) {
+            const hole = y <= to && !have.includes(y);
+            if (hole && start == null) start = y;
+            if (!hole && start != null) { if (y - start >= min) gaps.push([start, y - 1]); start = null; }
+        }
+        return {have, gaps: gaps.sort((a, b) => (b[1] - b[0]) - (a[1] - a[0]) || a[0] - b[0]), cover: Math.round(have.length / (to - from + 1) * 100)};
+    }
+    /** 📝 « Cette photo m'apprend » : les faits à reporter dans l'arbre, d'après la conclusion (lieu, date), les indices de métier et les
+     *  personnes reliées ou numérotées. people : [{id, name}] ; jobs : [{word, clue}] (déjà reconnus). Rien de réfuté, rien sans personne. */
+    function learnFacts({conclusion = {}, people = [], jobs = [], t = x => x} = {}) {
+        const pl = conclusion.place || {}, dt = conclusion.date || {}, out = [];
+        const placeOk = pl.place_id && pl.certainty !== 'refuted', dateOk = (dt.text || dt.from) && dt.certainty !== 'refuted';
+        const year = Number(dt.from) || yearOf(dt.text), when = String(dt.text || (year ? String(year) : '')).trim();
+        const exact = !!dayOf(dt.text), about = year ? t('vers {y}').replace('{y}', String(year)) : when;
+        const weakest = (...cs) => cs.filter(Boolean).sort((a, b) => (WEIGHT[a] ?? 1) - (WEIGHT[b] ?? 1))[0] || 'supposed';
+        (people || []).filter(p => p && p.id).forEach(p => {
+            if (placeOk) out.push({kind: 'residence', person_id: p.id, name: p.name, place_id: pl.place_id, place: pl.name || '', date_text: dateOk ? (exact ? about : when) : '', certainty: weakest(pl.certainty, dateOk ? dt.certainty : '')});
+            if (placeOk && dateOk && exact) out.push({kind: 'presence', person_id: p.id, name: p.name, place_id: pl.place_id, place: pl.name || '', date_text: when, certainty: weakest(pl.certainty, dt.certainty)});
+            (jobs || []).forEach(j => out.push({kind: 'occupation', person_id: p.id, name: p.name, job: j.word, date_text: dateOk ? (exact ? about : when) : '', certainty: weakest(j.certainty, 'supposed'), clue: j.clue}));
+        });
+        return out;
+    }
     return {declination, sunAlt, sunAz, elevationFrom, noonAlt, windows, shadowMonths, shadowOnDate, facing, compass, hhmm, agree, doy,
         readExif, dateWindow, bump, capAi, hypScore, QUESTIONS, questionDone, missing, tenMinutes, km, yearOf, dayOf, matrix, CERT_ORDER, WEIGHT,
         channel, emboss, measure, SIZES, bearing, destPoint, cone, inCone, buildingDates, matchBuildings, whoFits, capFace, growthOrder,
         CHECKLIST, checklistProgress, LEVELS, levelOf, fmtDur, devilTargets, CERT_COLOR, normLine, lineGap,
-        lensRect, linkedPoint, GRID_SIZES, gridProgress, gridCell, legendLines, nextNumber, polyBox, ghostOn, byYear, HEDGE, sentence, conclusionHistory};
+        lensRect, linkedPoint, GRID_SIZES, gridProgress, gridCell, legendLines, nextNumber, polyBox, ghostOn, byYear, HEDGE, sentence, conclusionHistory,
+        albumCheck, imageWindows, yearGaps, learnFacts};
 });

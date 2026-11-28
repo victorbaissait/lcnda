@@ -6,11 +6,15 @@ declare(strict_types=1);
  *
  * GET api.php?action=autour_lieu&lat=&lon=&km=&place_id=&exact=0|1
  *   → {items: [{k, key, t, s, y, y2, lat, lon, km, pl, p?, e?, m?, f?, mt?, inv?, ep?}], kiosk, more}
- *   k (la sorte) : births · marriages · deaths · residences · events · documents · photos · postcards · investigations · photo_inquiries
+ *   k (la sorte) : births · marriages · deaths · residences · events · godparents · witnesses · documents · photos · postcards · investigations · photo_inquiries
+ *   lv=1 : la ligne montre un vivant, une fiche ou un événement confidentiel (propriétaire seulement : en consultation, elle n'est pas renvoyée) ;
+ *   la fiche imprimable la retire par défaut.
  *   - les événements de la famille dont le lieu (ou la position précise) est dans le rayon ; « Ce lieu seulement » (exact=1) : le même
  *     lieu de la base (place_id), ou un lieu à moins d'1 km ;
  *   - les médias rangés sur un lieu (media.place_id), placés par leur position GPS (photo_media_geo) ou reliés à un événement du rayon :
  *     les cartes postales à part (postcards : lieu montré, ou point de vue), les documents, les photos ;
+ *   - 🕊 parrains et marraines, ✍️ témoins (event_witnesses, le rôle écrit dans la note) des événements du rayon : la ligne est celle
+ *     du témoin (p = le témoin, e = l'événement) ; en consultation, jamais un témoin vivant ou confidentiel ;
  *   - les enquêtes 🕵️ : une pièce reliée à un événement du rayon, ou la personne de l'enquête née, mariée, morte… dans le rayon ;
  *   - les enquêtes photo 🔎 (lib/enquete_photo.php, seulement si elle est là) : la conclusion (lieu retenu) ou un lieu relié.
  * La période se choisit à l'écran (tout est renvoyé, daté ou non).
@@ -84,7 +88,7 @@ function al_data(PDO $pdo, array $q): array
     $placeId = (int) ($q['place_id'] ?? 0);
     $kiosk = al_kiosk();
     if ($lat === null || $lon === null || abs($lat) > 90 || abs($lon) > 180) { return ['items' => [], 'kiosk' => $kiosk, 'more' => false]; }
-    $hidden = $kiosk ? al_hidden_people($pdo) : [];
+    $hidden = al_hidden_people($pdo); // en consultation : retirés ; sinon : marqués lv (la fiche imprimable les retire)
     $dLat = $km / 111.0; $dLon = $km / max(0.5, 111.0 * cos(deg2rad($lat)));
     $box = [$lat - $dLat, $lat + $dLat, $lon - $dLon, $lon + $dLon];
     $within = static function ($la, $lo, ?int $pid = null) use ($lat, $lon, $km, $exact, $placeId): ?float {
@@ -128,7 +132,8 @@ function al_data(PDO $pdo, array $q): array
     }
     foreach ($rows as $r) {
         $people = array_values(array_filter([(int) $r['person_id'], (int) $r['partner1_id'], (int) $r['partner2_id']]));
-        if ($kiosk && ((int) $r['ep'] === 1 || array_filter($people, static fn($p) => isset($hidden[$p])))) { continue; }
+        $lv = (int) $r['ep'] === 1 || array_filter($people, static fn($p) => isset($hidden[$p]));
+        if ($kiosk && $lv) { continue; }
         $pl = $places[(int) $r['place_id']] ?? null;
         $la = $precise && $r['precise_lat'] !== null ? (float) $r['precise_lat'] : ($pl['lat'] ?? null);
         $lo = $precise && $r['precise_lon'] !== null ? (float) $r['precise_lon'] : ($pl['lon'] ?? null);
@@ -137,16 +142,34 @@ function al_data(PDO $pdo, array $q): array
         $who = $r['person_id'] ? al_name($r) : implode(' et ', array_filter([al_name($r, 'a_'), al_name($r, 'b_')]));
         $y = $r['year'] !== null && $r['year'] !== '' ? (int) $r['year'] : al_year((string) $r['date_text']);
         $place = $pl['name'] ?? '';
-        $evAt[(int) $r['id']] = [$la, $lo, $d, $place, $y];
+        $evAt[(int) $r['id']] = [$la, $lo, $d, $place, $y, $who, (string) $r['tl'], (string) $r['date_text'], (bool) $lv, $people];
         $pid = (int) ($r['person_id'] ?: $r['partner1_id'] ?: $r['partner2_id']);
         foreach ($people as $p) { if (!isset($byPerson[$p]) || $d < $byPerson[$p][2]) { $byPerson[$p] = [$la, $lo, $d, $place, $y, (string) $r['tl']]; } }
         $push(['k' => al_kind_of((string) $r['tag']), 'key' => 'e' . $r['id'], 't' => $who ?: al_t('Sans nom'), 's' => trim(al_t((string) $r['tl']) . ($r['date_text'] ? ' · ' . $r['date_text'] : '')),
-            'y' => $y, 'lat' => $la, 'lon' => $lo, 'km' => $d, 'pl' => $place, 'p' => $pid ?: null, 'e' => (int) $r['id'], 'tl' => (string) $r['tl']]);
+            'y' => $y, 'lat' => $la, 'lon' => $lo, 'km' => $d, 'pl' => $place, 'p' => $pid ?: null, 'e' => (int) $r['id'], 'tl' => (string) $r['tl']] + ($lv ? ['lv' => 1] : []));
+    }
+
+    /* ── 🕊 ✍️ parrains, marraines et témoins des événements du rayon ── */
+    if ($evAt && al_has_table($pdo, 'event_witnesses')) {
+        foreach (array_chunk(array_keys($evAt), 500) as $ch) {
+            $q2 = 'SELECT w.id, w.event_id, w.person_id, TRIM(COALESCE(w.note,\'\')) AS note, p.first_name, p.last_name FROM event_witnesses w JOIN persons p ON p.id=w.person_id WHERE w.event_id IN (' . implode(',', $ch) . ') ORDER BY w.event_id, w.position, w.id';
+            foreach ($pdo->query($q2) as $w) {
+                $wid = (int) $w['person_id']; $a = $evAt[(int) $w['event_id']];
+                $lv = $a[8] || isset($hidden[$wid]);
+                if ($kiosk && $lv) { continue; }
+                $low = mb_strtolower((string) $w['note']);
+                $god = str_contains($low, 'parrain') || str_contains($low, 'marraine');
+                $role = str_contains($low, 'marraine') ? al_t('Marraine') : (str_contains($low, 'parrain') ? al_t('Parrain') : ($w['note'] !== '' ? mb_substr((string) $w['note'], 0, 40) : al_t('Témoin')));
+                $push(['k' => $god ? 'godparents' : 'witnesses', 'key' => 'w' . $w['id'], 't' => al_name($w) ?: al_t('Sans nom'),
+                    's' => trim(implode(' · ', array_filter([$role, trim(al_t($a[6]) . ($a[5] !== '' ? ' — ' . $a[5] : '')), $a[7]]))),
+                    'y' => $a[4], 'lat' => $a[0], 'lon' => $a[1], 'km' => $a[2], 'pl' => $a[3], 'p' => $wid, 'e' => (int) $w['event_id'], 'tl' => $god ? 'Parrains et marraines' : 'Témoins'] + ($lv ? ['lv' => 1] : []));
+            }
+        }
     }
 
     /* ── 📄 📷 🏞 les médias ── */
     $hideM = [];
-    if ($kiosk && al_has_table($pdo, 'media_links')) {
+    if (al_has_table($pdo, 'media_links')) {
         foreach ($pdo->query("SELECT media_id, entity_type, entity_id FROM media_links WHERE entity_type IN ('person','event')") as $r) {
             if ($r['entity_type'] === 'person' && isset($hidden[(int) $r['entity_id']])) { $hideM[(int) $r['media_id']] = true; }
         }
@@ -159,13 +182,14 @@ function al_data(PDO $pdo, array $q): array
         }
         foreach ($cards as $mid => $c) {
             if ($mid !== (int) $c['media_id']) { continue; }
-            if ($kiosk && (isset($hideM[$mid]) || isset($hidden[(int) $c['writer_person_id']]) || isset($hidden[(int) $c['recipient_person_id']]))) { continue; }
+            $lv = isset($hideM[$mid]) || isset($hidden[(int) $c['writer_person_id']]) || isset($hidden[(int) $c['recipient_person_id']]);
+            if ($kiosk && $lv) { continue; }
             $pl = $places[(int) $c['place_id']] ?? null;
             $d = $pl ? $pl['km'] : $within($c['view_lat'], $c['view_lon']);
             if ($d === null) { continue; }
             $push(['k' => 'postcards', 'key' => 'c' . $c['id'], 't' => (string) ($c['title'] ?: $c['mtitle'] ?: al_t('Carte postale')), 's' => trim(implode(' · ', array_filter([(string) $c['publisher'], (string) ($c['sent_date'] ?: $c['date_text'])]))),
                 'y' => al_year((string) ($c['sent_date'] ?: $c['date_text'])), 'lat' => $pl['lat'] ?? (float) $c['view_lat'], 'lon' => $pl['lon'] ?? (float) $c['view_lon'], 'km' => $d, 'pl' => $pl['name'] ?? '',
-                'm' => $mid, 'f' => (string) ($c['filename'] ?? ''), 'th' => (string) ($c['thumbnail'] ?? ''), 'mt' => 'image']);
+                'm' => $mid, 'f' => (string) ($c['filename'] ?? ''), 'th' => (string) ($c['thumbnail'] ?? ''), 'mt' => 'image'] + ($lv ? ['lv' => 1] : []));
         }
     }
     $media = []; // media_id => [lat, lon, km, place, year?]
@@ -190,11 +214,12 @@ function al_data(PDO $pdo, array $q): array
         foreach (array_chunk(array_keys($media), 500) as $ch) {
             foreach ($pdo->query('SELECT id, title, media_type, filename, thumbnail, date_text, document_reference FROM media WHERE id IN (' . implode(',', $ch) . ')') as $m) {
                 $mid = (int) $m['id']; if (isset($cards[$mid]) || ($kiosk && isset($hideM[$mid]))) { continue; }
+                $lv = isset($hideM[$mid]);
                 [$la, $lo, $d, $place, $ey] = $media[$mid];
                 $type = strtolower((string) $m['media_type']);
                 $push(['k' => in_array($type, ['image', 'photo', 'portrait'], true) ? 'photos' : 'documents', 'key' => 'm' . $mid, 't' => (string) ($m['title'] ?: $m['filename'] ?: al_t('Média')),
                     's' => trim(implode(' · ', array_filter([(string) $m['date_text'], (string) $m['document_reference']]))), 'y' => al_year((string) $m['date_text']) ?? $ey,
-                    'lat' => $la, 'lon' => $lo, 'km' => $d, 'pl' => $place, 'm' => $mid, 'f' => (string) $m['filename'], 'th' => (string) $m['thumbnail'], 'mt' => (string) $m['media_type']]);
+                    'lat' => $la, 'lon' => $lo, 'km' => $d, 'pl' => $place, 'm' => $mid, 'f' => (string) $m['filename'], 'th' => (string) $m['thumbnail'], 'mt' => (string) $m['media_type']] + ($lv ? ['lv' => 1] : []));
             }
         }
     }
@@ -217,7 +242,7 @@ function al_data(PDO $pdo, array $q): array
             if (!$a && isset($byPerson[$pid])) { $a = $byPerson[$pid]; $why = al_t((string) $a[5]); }
             if (!$a) { continue; }
             $push(['k' => 'investigations', 'key' => 'i' . $iid, 't' => (string) ($r['title'] ?: al_t('Enquête')), 's' => trim(implode(' · ', array_filter([al_name($r), $why]))),
-                'y' => $a[4], 'lat' => $a[0], 'lon' => $a[1], 'km' => $a[2], 'pl' => $a[3], 'inv' => $iid, 'p' => $pid ?: null]);
+                'y' => $a[4], 'lat' => $a[0], 'lon' => $a[1], 'km' => $a[2], 'pl' => $a[3], 'inv' => $iid, 'p' => $pid ?: null] + (isset($hidden[$pid]) ? ['lv' => 1] : []));
         }
     }
 
@@ -238,7 +263,7 @@ function al_data(PDO $pdo, array $q): array
                     $dt = $qq['date'] ?? null;
                     $y = is_array($dt) ? (isset($dt['from']) && is_numeric($dt['from']) ? (int) $dt['from'] : al_year((string) ($dt['text'] ?? ''))) : al_year((string) $dt);
                     $push(['k' => 'photo_inquiries', 'key' => 'q' . $qq['id'], 't' => (string) ($qq['title'] ?: al_t('Enquête photo')), 's' => is_array($dt) ? (string) ($dt['text'] ?? '') : (string) ($dt ?? ''),
-                        'y' => $y, 'lat' => $best['lat'], 'lon' => $best['lon'], 'km' => $best['km'], 'pl' => $best['name'], 'ep' => (int) $qq['id'], 'th' => (string) ($qq['thumb'] ?? '')]);
+                        'y' => $y, 'lat' => $best['lat'], 'lon' => $best['lon'], 'km' => $best['km'], 'pl' => $best['name'], 'ep' => (int) $qq['id'], 'th' => (string) ($qq['thumb'] ?? '')] + (!empty($qq['is_private']) ? ['lv' => 1] : []));
                 }
             }
         } catch (Throwable $_) { /* l'enquête photo n'est pas encore prête : rien de plus */ }

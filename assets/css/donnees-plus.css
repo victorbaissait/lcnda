@@ -233,8 +233,40 @@ tr.dp-mine > td { background: color-mix(in srgb, var(--dp-green) 7%, transparent
 .al-tool .al-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; margin-right: 6px; vertical-align: middle; }
 .al-tool .al-more { margin: 8px 0; text-align: center; }
 .al-tool .dp-chip.off { opacity: .5; text-decoration: line-through; }
+/* ☰ Voir la ligne (depuis la fiche d'un point de la carte) */
+.al-tool .al-tbl tr.is-al-hi > td { background: var(--blue-soft, #eaf2ff); transition: background .3s; }
+/* ⏳ dans le temps */
+.al-tool .al-time-head { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin: 0 0 8px; }
+.al-tool .al-time-sum { margin: 0; font-size: 13px; }
+.al-tool .al-dec { border: 1px solid var(--line-color, #e3e5ea); border-radius: 6px; margin: 0 0 6px; background: var(--card-bg, #fff); }
+.al-tool .al-dec > summary { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; padding: 6px 10px; cursor: pointer; }
+.al-tool .al-dec > summary:focus-visible { outline: 3px solid var(--blue-bright, #055dff); outline-offset: 1px; }
+.al-tool .al-dec-y { min-width: 7.5em; font-variant-numeric: tabular-nums; }
+.al-tool .al-dec-n { min-width: 3em; font-weight: 700; font-variant-numeric: tabular-nums; }
+.al-tool .al-dec-bar { display: inline-flex; height: 9px; flex: 0 1 auto; max-width: 240px; min-width: 4px; border-radius: 3px; overflow: hidden; }
+.al-tool .al-dec-bar i { display: block; height: 100%; }
+.al-tool .al-dec-body { padding: 0 10px 8px; }
+.al-tool .al-years { list-style: none; margin: 0; padding: 0; }
+.al-tool .al-years > li { display: grid; grid-template-columns: 3.6em minmax(0, 1fr); gap: 2px 8px; padding: 4px 0; border-top: 1px solid var(--line-color, #e3e5ea); }
+.al-tool .al-years ul { list-style: none; margin: 0; padding: 0; }
+.al-tool .al-years ul li { margin: 1px 0; overflow-wrap: anywhere; }
+.al-tool .al-y { font-variant-numeric: tabular-nums; }
+/* ⚖️ comparer deux lieux */
+.al-tool .al-cmp-top { align-items: center; gap: 6px 10px; }
+.al-tool .al-cmp { grid-template-columns: minmax(120px, 1.3fr) minmax(0, 1fr) minmax(0, 1fr) minmax(52px, .5fr); }
+.al-tool .al-cmp .al-c b { font-size: 14px; font-variant-numeric: tabular-nums; }
+.al-tool .al-cmp .al-c.is-only { background: var(--blue-soft, #eaf2ff); }
+.al-tool .al-cmp .al-c.is-more b { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.al-tool .al-cmp .al-d { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
+.al-tool .al-cmp .al-d.is-eq { color: var(--muted, #6d6d6d); font-weight: 400; }
+.al-tool .al-cmp .al-tot { font-weight: 800; border-top: 2px solid var(--card-line, #080808); }
+:root[data-theme="dark"] .al-tool .al-dec { background: #1d1d1d; border-color: #3a3a3a; }
+:root[data-theme="dark"] .al-tool .al-cmp .al-c.is-only, :root[data-theme="dark"] .al-tool .al-tbl tr.is-al-hi > td { background: var(--blue-soft, #1a2a3d); }
 @media (max-width: 640px) {
     .al-tool .al-acts { margin-left: 0; }
     .al-tool .al-tbl th:nth-child(5), .al-tool .al-tbl td:nth-child(5) { display: none; }
     .al-tool .data-table-wrap { overflow-x: auto; }
+    .al-tool .al-cmp { grid-template-columns: minmax(84px, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(40px, .45fr); font-size: 12px; }
+    .al-tool .al-cmp > div { padding: 6px 5px; overflow-wrap: anywhere; }
+    .al-tool .al-dec-bar { display: none; }
 }

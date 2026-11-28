@@ -82,7 +82,8 @@
                     if (sel[0] && sel[1]) paint(dl); }); });
                 pick();
                 dl.querySelector('[data-dp-ck]').addEventListener('click', e => { const b = e.target.closest('[data-k]'); if (!b) return; kind = b.dataset.k; window.LCNDA_UI.segPick(b); dl.querySelector('[data-dp-cmp]').innerHTML = ''; pick(); });
-                dl.addEventListener('click', e => { const c = e.target.closest('[data-dp-copen]'); if (!c) return; const [i, th] = c.dataset.dpCopen.split('|'); openTheme(sel[Number(i)], th); dl.close(); });
+                dl.addEventListener('click', e => { if (e.target.closest('[data-dp-cmp-al]') && sel[0] && sel[1]) { const a = sel[0].places[0], b = sel[1].places[0]; dl.close(); ext.autourLieu?.open?.(a, {from: 'donnees', view: 'cmp', other: b}); return; } // les deux lieux, avec ta famille, une période, un rayon
+                    const c = e.target.closest('[data-dp-copen]'); if (!c) return; const [i, th] = c.dataset.dpCopen.split('|'); openTheme(sel[Number(i)], th); dl.close(); });
             }, onSubmit: () => true});
         async function paint(dl) {
             const out = dl.querySelector('[data-dp-cmp]'); out.innerHTML = UI().spinner ? UI().spinner(T('On compte…')) : '…';
@@ -94,6 +95,7 @@
             const h = i => `<div class="dp-h">${esc(sel[i].name)}<small>${esc(kind === 'p' ? `${sel[i].b || '?'}–${sel[i].d || '…'}${sel[i].places[0] ? ` · ${sel[i].places[0].name}` : ''}` : T('toutes les années'))}</small></div>`;
             out.innerHTML = ths.length ? `<div class="dp-cmp"><div class="dp-h dp-t">${esc(T('Thème'))}</div>${h(0)}${h(1)}${ths.map(th => { const t = themeOf(th); return `<div class="dp-t">${esc(t?.icon || '')} ${esc(T(t?.label || th))}</div>${cell(0, th)}${cell(1, th)}`; }).join('')}</div>`
                 : `<p class="muted">${esc(T('Rien dans les listes installées autour de leurs lieux.'))}</p>`;
+            if (kind === 'l' && ext.autourLieu?.open) out.insertAdjacentHTML('beforeend', `<p class="dp-cmp-al"><button type="button" class="button small secondary" data-dp-cmp-al>⚖️ ${esc(T('Comparer aussi la famille, sur une période : Tout autour d’un lieu'))}</button></p>`);
         }
     }
     async function openTheme(s, theme) {

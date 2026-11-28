@@ -347,6 +347,10 @@ try {
         require_once __DIR__ . '/lib/tresors.php';
         tresors_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
+    if ($action === 'albums' || $action === 'albums_write') { // 📒 Albums photo : photos dans l'ordre, légendes, mise en page (lib/albums.php)
+        require_once __DIR__ . '/lib/albums.php';
+        albums_dispatch($pdo, (string) $action, $isWrite, is_array($payload) ? $payload : []);
+    }
     if ($action === 'ep' || $action === 'ep_write') { // 🔎 Enquête photo : enquêtes, images et calques, indices, conclusion, aides (lib/enquete_photo.php)
         require_once __DIR__ . '/lib/enquete_photo.php';
         ep_dispatch($pdo, (string) $action, $isWrite, is_array($payload) ? $payload : []);
@@ -354,6 +358,10 @@ try {
     if ($action === 'atelier_plus2' || $action === 'atelier_plus2_write') { // 📜 Atelier, outils en plus (2) : lettres du scribe, résumé, relevé, pile (lib/atelier_plus2.php)
         require_once __DIR__ . '/lib/atelier_plus2.php';
         txp2_dispatch($pdo, (string) $action, $isWrite, is_array($payload) ? $payload : []);
+    }
+    if ($action === 'atelier_plus3' || $action === 'atelier_plus3_write') { // 📜 Atelier, outils en plus (3) : mots douteux, actes jumeaux, vie privée (lib/atelier_plus3.php)
+        require_once __DIR__ . '/lib/atelier_plus3.php';
+        txp3_dispatch($pdo, (string) $action, $isWrite, is_array($payload) ? $payload : []);
     }
     if ($action === 'atelier_idees' || $action === 'atelier_idees_write') { // 📜 Atelier, idées 35 à 40 : registre, IIIF, recherche, deux couches, entraîner (lib/atelier_idees.php)
         require_once __DIR__ . '/lib/atelier_idees.php';
@@ -6753,6 +6761,8 @@ function restore_last_delete(PDO $pdo,array $data): array
         'photo_inquiry'=>['photo_inquiries','photo_inquiry_images','photo_inquiry_clues','photo_inquiry_hypotheses','photo_inquiry_links','photo_inquiry_journal'],
         'photo_inquiry_clue'=>['photo_inquiry_clues'],
         'photo_inquiry_image'=>['photo_inquiry_images','photo_inquiry_clues'],
+        // 📒 Albums photo (lib/albums.php) : un album entier, avec ses photos (les médias, eux, ne sont jamais touchés)
+        'photo_album'=>['photo_albums','photo_album_items'],
     ];
     if($id&&isset($kept[$type]))return undo_keep_restore($pdo,$type,$id,$kept[$type]);
     // une simple ligne, gardée entière dans le journal au moment de la suppression (rappel, ligne de budget, courrier)

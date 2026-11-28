@@ -23,7 +23,7 @@ declare(strict_types=1);
  * autre fichier appelée ici doit faire « $own = !$pdo->inTransaction() » avant d'ouvrir la sienne.
  */
 
-const SCHEMA_VERSION = 114;
+const SCHEMA_VERSION = 115;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -143,6 +143,7 @@ function migration_steps(): array
         112 => 'schema_v112',
         113 => 'schema_v113',
         114 => 'schema_v114',
+        115 => 'schema_v115',
     ];
 }
 
@@ -2868,6 +2869,13 @@ function schema_v113(PDO $pdo): void
 }
 
 /** 114 : 🔎 Enquête photo — 📮 les décors de studio d'un photographe (photo_photographers.backdrops, lib/enquete_photo.php) */
+/** 115 : 📒 albums photo (lib/albums.php) : un album = des photos dans l'ordre, un titre, une couverture, des dates, des légendes, une mise en page */
+function schema_v115(PDO $pdo): void
+{
+    if (!function_exists('albums_install')) { require_once __DIR__ . '/albums.php'; }
+    albums_install($pdo);
+}
+
 function schema_v114(PDO $pdo): void
 {
     if (!function_exists('ep_install_114')) { require_once __DIR__ . '/enquete_photo.php'; }

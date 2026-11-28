@@ -1,0 +1,112 @@
+/* LCNDA — 📜 Atelier de transcription, outils en plus (3) (heritage-atelier-plus3.js) : discret, rangé dans ce qui existe.
+ * ✏️ marques dans le texte (h-tx-ab2 : is-del, is-add, is-margin) · 🗂 plan (ap3-plan) · 👥 🕸 personnes et croquis (ap3-ptab, ap3-sk)
+ * ❓ mots douteux (ap3-d-*) · 🆚 relevé (ap3-r-*) · 🔗 jumeaux (ap3-tw, ap3-side) · 🎤 dictée (ap3-dict) */
+:root{--ap3-del:#c92a2a;--ap3-add:#1a7f37;--ap3-mar:#8a5a00;--ap3-node:#f6f8fb;--ap3-node-line:#9aa3b2;--ap3-m:#e7f0ff;--ap3-f:#fdeef4}
+:root[data-theme="dark"]{--ap3-del:#ff8787;--ap3-add:#69db7c;--ap3-mar:#ffc861;--ap3-node:#1f2430;--ap3-node-line:#5c667a;--ap3-m:#1c2b45;--ap3-f:#3a2030}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ap3-del:#ff8787;--ap3-add:#69db7c;--ap3-mar:#ffc861;--ap3-node:#1f2430;--ap3-node-line:#5c667a;--ap3-m:#1c2b45;--ap3-f:#3a2030}}
+
+/* ─── ✏️ dans le texte : le trait du mot rayé (derrière le texte), l'ajout au-dessus de la ligne, la note en marge encadrée ─── */
+.h-tx-mirror .h-tx-ab2.is-del{background:linear-gradient(transparent 46%,var(--ap3-del) 46%,var(--ap3-del) 58%,transparent 58%)}
+.h-tx-mirror .h-tx-ab2.is-add{box-shadow:inset 0 2px 0 var(--ap3-add);border-bottom:2px solid var(--ap3-add)}
+.h-tx-mirror .h-tx-ab2.is-margin{outline:1.5px dashed var(--ap3-mar);outline-offset:1px;border-radius:3px}
+
+/* ─── la rangée au-dessus du texte : 🔗 actes liés, 🎤 dictée ─── */
+.ap3-row{display:grid;gap:4px;min-width:0}
+.ap3-row:not(:has(> :not([hidden]))){display:none}
+.ap3-twins,.ap3-dict{display:flex;flex-wrap:wrap;align-items:center;gap:6px;min-width:0;font-size:12.5px}
+.ap3-twins[hidden],.ap3-dict[hidden]{display:none}
+.ap3-dict{padding:4px 8px;border:1px solid var(--ap3-del);border-radius:8px}
+.ap3-dict-dot{width:9px;height:9px;border-radius:50%;background:var(--ap3-del);animation:ap3-pulse 1.2s infinite}
+@keyframes ap3-pulse{50%{opacity:.25}}
+@media (prefers-reduced-motion:reduce){.ap3-dict-dot{animation:none}}
+.ap3-dict-t{min-width:0;overflow-wrap:anywhere;color:var(--soft,#666)}
+.ap3-chip{display:inline-flex;align-items:center;gap:3px;max-width:100%;padding:1px 8px;border:1px solid var(--line2,#c9ced8);border-radius:999px;background:var(--paper,#fff);color:inherit;font:inherit;font-size:12.5px;overflow-wrap:anywhere}
+button.ap3-chip{cursor:pointer}
+.ap3-chip.is-priv{border-style:dashed}
+.ap3-chip.is-twin{border-color:var(--ap3-add)}
+.ap3-x{width:20px;height:20px;border-radius:50%;border:1px solid var(--line2,#c9ced8);background:var(--paper,#fff);color:inherit;font-size:12px;line-height:1;padding:0;cursor:pointer;flex:none}
+
+/* ─── 🗂 le plan ─── */
+.ap3-plan{list-style:none;margin:0 0 6px;padding:0;display:grid;gap:4px;max-height:300px;overflow:auto}
+.ap3-plan li{display:flex;align-items:center;gap:6px;min-width:0}
+.ap3-plan li.is-lost{opacity:.6}
+.ap3-plan-go{flex:none;min-width:44px;padding:1px 6px;border:1px solid var(--line2,#c9ced8);border-radius:6px;background:var(--paper,#fff);color:inherit;font-size:12px;cursor:pointer}
+.ap3-plan-h{flex:1;min-width:0;font-size:13px}
+.ap3-plan li.is-auto .ap3-plan-h{font-style:italic}
+
+/* ─── 👥 le tableau des personnes (et 🆚 le relevé) ─── */
+.ap3-ptab-w{overflow-x:auto;max-width:100%}
+.ap3-ptab{width:100%;border-collapse:collapse;font-size:13px}
+.ap3-ptab th,.ap3-ptab td{padding:5px 6px;border-bottom:1px solid var(--line,#eceef2);text-align:left;vertical-align:top}
+.ap3-ptab th{font-size:12px;color:var(--soft,#666);font-weight:600}
+.ap3-pbtns{display:flex;flex-wrap:wrap;gap:4px}
+.ap3-rtab tr.is-diff td{background:color-mix(in srgb,var(--ap3-del) 9%,transparent)}
+.ap3-rtab tr.is-same td:first-child{color:var(--ap3-add)}
+.ap3-intext{color:var(--ap3-add)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:640px){
+  .ap3-ptab:not(.ap3-rtab) thead{display:none}
+  .ap3-ptab:not(.ap3-rtab),.ap3-ptab:not(.ap3-rtab) tbody,.ap3-ptab:not(.ap3-rtab) tr,.ap3-ptab:not(.ap3-rtab) td{display:block;width:100%}
+  .ap3-ptab:not(.ap3-rtab) tr{border:1px solid var(--line,#eceef2);border-radius:8px;margin:0 0 8px;padding:4px}
+  .ap3-ptab:not(.ap3-rtab) td{border:0;padding:2px 4px}
+  .ap3-ptab:not(.ap3-rtab) td::before{content:attr(data-label) " : ";color:var(--soft,#666);font-size:12px}
+}
+
+/* ─── 🕸 le croquis ─── */
+.ap3-sk-w{overflow:auto;max-width:100%;max-height:60vh;border:1px solid var(--line,#eceef2);border-radius:10px;padding:6px;background:var(--paper,#fff)}
+.ap3-sk{display:block;max-width:100%;height:auto;margin:auto}
+.ap3-sk-n rect{fill:var(--ap3-node);stroke:var(--ap3-node-line);stroke-width:1.2}
+.ap3-sk-n.is-m rect{fill:var(--ap3-m)}
+.ap3-sk-n.is-f rect{fill:var(--ap3-f)}
+.ap3-sk-n.is-dead rect{stroke-dasharray:4 3}
+.ap3-sk-n{cursor:pointer}
+.ap3-sk-n:focus-visible rect,.ap3-sk-n:hover rect{stroke:var(--blue,#1473e6);stroke-width:2}
+.ap3-sk-r{font-size:11px;fill:var(--soft,#666)}
+.ap3-sk-t{font-size:13px;font-weight:600;fill:var(--ink,#111)}
+:root[data-theme="dark"] .ap3-sk-t{fill:#eef1f6}
+.ap3-sk-e{stroke:var(--ap3-node-line);stroke-width:1.6}
+.ap3-sk-e.is-spouse{stroke:var(--ap3-add);stroke-width:2.2}
+.ap3-sk-e.is-sponsor,.ap3-sk-e.is-witness{stroke-dasharray:5 4}
+.ap3-sk-a{fill:var(--ap3-node-line)}
+
+/* ─── ❓ les mots douteux ─── */
+.ap3-d-sum{margin:0 0 6px;font-weight:600}
+.ap3-d-list{display:grid;gap:10px;max-height:62vh;overflow:auto}
+.ap3-d-act h4{display:flex;flex-wrap:wrap;gap:6px;align-items:baseline;margin:0 0 4px;font-size:13.5px}
+.ap3-d-act h4 small{color:var(--soft,#666);font-weight:400}
+.ap3-here{font-size:12px;color:var(--ap3-add)}
+.ap3-d-row{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(90px,170px) auto;gap:6px;align-items:center;padding:4px;border:1px solid var(--line,#eceef2);border-radius:8px;margin:0 0 4px}
+.ap3-d-row.is-ok{border-color:var(--ap3-add)}
+.ap3-d-img{display:block;height:40px;max-width:200px;width:auto;border-radius:4px;background:#efe6cc}
+.ap3-d-noimg{display:inline-block;min-width:40px;text-align:center;color:var(--soft,#666)}
+.ap3-d-ctx{min-width:0;overflow-wrap:anywhere;font-size:13px}
+.ap3-d-ctx mark{background:#ffe27a;border-radius:2px}
+:root[data-theme="dark"] .ap3-d-ctx mark{background:#6b5400;color:#fff}
+.ap3-d-in{min-width:0;width:100%}
+.ap3-d-ok{color:var(--ap3-add);font-size:12.5px}
+@media (max-width:640px){.ap3-d-row{grid-template-columns:auto minmax(0,1fr)}.ap3-d-in{grid-column:1 / -1}}
+
+/* ─── 🆚 le relevé ─── */
+.ap3-r-in{width:100%;min-width:0;font-family:ui-monospace,monospace;font-size:12.5px}
+.ap3-r-map{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.ap3-r-cell{display:grid;gap:2px;font-size:12px;max-width:100%}
+.ap3-r-cell span{overflow-wrap:anywhere}
+.ap3-r-sum{margin:6px 0 4px;font-weight:600}
+
+/* ─── 🔗 les actes jumeaux ─── */
+.ap3-tws{display:grid;gap:8px}
+.ap3-tw{display:grid;gap:3px;padding:8px;border:1px solid var(--line2,#c9ced8);border-radius:10px;min-width:0;overflow-wrap:anywhere}
+.ap3-tw.is-linked{border-color:var(--ap3-add)}
+.ap3-tw small{color:var(--soft,#666)}
+.ap3-side{margin-top:10px}
+.ap3-side[hidden]{display:none}
+.ap3-side-g{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ap3-side-g section{min-width:0;border:1px solid var(--line,#eceef2);border-radius:10px;padding:6px}
+.ap3-side-g h4{margin:0 0 4px;font-size:13px}
+.ap3-side-g img{display:block;max-width:100%;max-height:220px;margin:0 auto 6px;border-radius:6px}
+.ap3-side-g pre{white-space:pre-wrap;overflow-wrap:anywhere;font:13px/1.45 Georgia,serif;margin:0;max-height:40vh;overflow:auto}
+.ap3-side-g mark{background:#ffe27a}
+:root[data-theme="dark"] .ap3-side-g mark{background:#6b5400;color:#fff}
+@media (max-width:640px){.ap3-side-g{grid-template-columns:1fr}}
+
+.ap3-prefs{display:grid;gap:6px}

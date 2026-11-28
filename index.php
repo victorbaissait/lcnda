@@ -82,7 +82,9 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/transcribe.css?v=29">
     <link rel="stylesheet" href="assets/css/atelier-idees.css?v=4">
     <link rel="stylesheet" href="assets/css/atelier-plus2.css?v=2">
-    <link rel="stylesheet" href="assets/css/enquete-photo.css?v=5">
+    <link rel="stylesheet" href="assets/css/atelier-plus3.css?v=1">
+    <link rel="stylesheet" href="assets/css/enquete-photo.css?v=6">
+    <link rel="stylesheet" href="assets/css/albums.css?v=1">
     <link rel="stylesheet" href="assets/css/photomaps.css?v=9">
     <link rel="stylesheet" href="assets/css/shortcuts.css?v=4">
     <link rel="stylesheet" href="assets/css/meteo.css?v=5">
@@ -138,7 +140,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/donnees-recap.css?v=1"><!-- 📊 Récap des données -->
     <link rel="stylesheet" href="assets/css/donnees-onglet.css?v=1"><!-- 📊 l’onglet Données : sa colonne de gauche -->
     <link rel="stylesheet" href="assets/css/diagrammes-onglet.css?v=1"><!-- 📈 l’onglet Diagrammes : la colonne, les vignettes, l’éditeur dans la page -->
-    <link rel="stylesheet" href="assets/css/donnees-plus.css?v=4"><!-- 📊 Données, en plus -->
+    <link rel="stylesheet" href="assets/css/donnees-plus.css?v=5"><!-- 📊 Données, en plus -->
     <link rel="stylesheet" href="assets/css/guerres-temps.css?v=2"><!-- ▶ Dans le temps -->
     <link rel="stylesheet" href="assets/css/listes-personnes.css?v=1">
     <link rel="stylesheet" href="assets/css/metiers-rivieres.css?v=1">
@@ -1381,8 +1383,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-donnees-accueil.js?v=11" defer></script><!-- 📊 Récap des données et la question en français : Listes → 🧰 Données et l’onglet 📊 Données (un seul écran) -->
 <script src="assets/js/app-donnees-onglet.js?v=2" defer></script><!-- 📊 l’onglet Données : on y reste (thèmes, listes réunies, listes), sa colonne de gauche, ranger / masquer les thèmes -->
 <script src="assets/js/app-donnees-plus.js?v=15" defer></script><!-- 📊 Données, en plus : ⚙ Organiser le récap, Réglages → 📊 Données, ⭐ 🕘 🆕 💾 📊 👤 🕳 📝 ➕ ⚠️ 🔎 📶 -->
-<script src="assets/js/app-donnees-plus-outils.js?v=7" defer></script><!-- ⚖️ 🗺 🕳 📖 📜 📄 🎞 🔗 💽 🕰 -->
-<script src="assets/js/app-autour-lieu.js?v=1" defer></script><!-- 🗺 Tout autour d’un lieu : données, ma famille ou les deux ; carte | tableau (📊 Données et 🔍 Recherche) -->
+<script src="assets/js/app-donnees-plus-outils.js?v=8" defer></script><!-- ⚖️ 🗺 🕳 📖 📜 📄 🎞 🔗 💽 🕰 -->
+<script src="assets/js/app-autour-lieu.js?v=2" defer></script><!-- 🗺 Tout autour d’un lieu : données, ma famille ou les deux ; carte | tableau | dans le temps | comparer, 🖨 fiche (📊 Données et 🔍 Recherche) -->
 <script src="assets/js/app-listes-personnes.js?v=3" defer></script>
 <script src="assets/js/app-listes-perso-core.js?v=1" defer></script>
 <script src="assets/js/app-listes-perso.js?v=3" defer></script>
@@ -1622,7 +1624,9 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-blocs-school.js?v=3" defer></script>
 <script src="assets/js/heritage-creations.js?v=5" defer></script>
 <script src="assets/js/app-correspondances-core.js?v=2" defer></script>
-<script src="assets/js/heritage-onglets-documents.js?v=34" defer></script>
+<script src="assets/js/heritage-onglets-documents.js?v=35" defer></script>
+<script src="assets/js/app-albums-core.js?v=1" defer></script>
+<script src="assets/js/heritage-albums.js?v=1" defer></script>
 <script src="assets/js/heritage-onglets-catalogue.js?v=6" defer></script>
 <script src="assets/js/heritage-transcribe-view.js?v=15" defer></script>
 <script src="assets/js/heritage-transcribe-acte-core.js?v=5" defer></script>
@@ -1639,7 +1643,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-transcribe-compare.js?v=5" defer></script>
 <script src="assets/js/heritage-transcribe-xml.js?v=1" defer></script>
 <script src="assets/js/heritage-transcribe-contexte.js?v=7" defer></script>
-<script src="assets/js/heritage-transcribe.js?v=99" defer></script>
+<script src="assets/js/heritage-transcribe.js?v=100" defer></script>
 <script src="assets/js/heritage-photomaps-time.js?v=2" defer></script>
 <script src="assets/js/heritage-photomaps.js?v=15" defer></script>
 <script src="assets/js/heritage-transcribe-list.js?v=9" defer></script>
@@ -1652,6 +1656,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-atelier-aides.js?v=3" defer></script>
 <script src="assets/js/heritage-atelier-plus2-data.js?v=1" defer></script>
 <script src="assets/js/heritage-atelier-plus2.js?v=1" defer></script><!-- 📜 Atelier, outils en plus (2) : mots d’autrefois, latin, lettres du scribe, voix, résumé, seconde lecture, relevé, objectif (lib/atelier_plus2.php) -->
+<script src="assets/js/heritage-atelier-plus3-data.js?v=1" defer></script>
+<script src="assets/js/heritage-atelier-plus3.js?v=1" defer></script><!-- 📜 Atelier, outils en plus (3) : plan, personnes et croquis, rayé / ajout / marge, mots douteux, dictée, relevé comparé, actes jumeaux (lib/atelier_plus3.php) -->
 <script src="assets/js/heritage-slideshow.js?v=27" defer></script>
 <script src="assets/js/heritage-keynote.js?v=30" defer></script>
 <script src="assets/js/heritage-tableur.js?v=16" defer></script>
@@ -1822,11 +1828,12 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-comptes-famille.js?v=3" defer></script>
 <script src="assets/js/app-htr-correction.js?v=2" defer></script>
 <script src="assets/js/app-lignes-alignement.js?v=2" defer></script>
-<script src="assets/js/app-enquete-photo-core.js?v=3" defer></script>
+<script src="assets/js/app-enquete-photo-core.js?v=4" defer></script>
 <script src="assets/js/heritage-enquete-photo.js?v=3" defer></script>
 <script src="assets/js/heritage-enquete-photo-aides.js?v=3" defer></script>
 <script src="assets/js/heritage-enquete-photo-plus.js?v=1" defer></script>
 <script src="assets/js/heritage-enquete-photo-suite.js?v=2" defer></script>
+<script src="assets/js/heritage-enquete-photo-classement.js?v=1" defer></script>
 <script>
 (function () {
     var toggle = document.getElementById('lightbox-tag-toggle');

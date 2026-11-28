@@ -2260,7 +2260,7 @@
             let at = 0; const body = pages.map(q => {
                 const start = multiPages() ? area.value.indexOf(q.text, at) : 0; if (start >= 0) at = start + q.text.length;
                 let pos = Math.max(0, start); const ls = q.text.split('\n').map((l, k) => { const s0 = pos; pos += l.length + 1; const z = zonesOf(q).find(zz => zz.e > zz.s && zz.s < s0 + l.length && s0 < zz.e);
-                    return `        <lb n="${k + 1}"${z ? ` facs="#${zid(z)}"` : ''}/>${x(l)}`; });
+                    return `        <lb n="${k + 1}"${z ? ` facs="#${zid(z)}"` : ''}/>${ext.txTeiLine ? ext.txTeiLine(l, x) : x(l)}`; }); // ✏️ mots rayés, ajouts, notes en marge → <del>, <add>, <note> (heritage-atelier-plus3.js)
                 return `        <pb n="${x(q.name || '1')}" facs="#${pageId(q)}"/>\n${ls.join('\n')}`; }).join('\n');
             const ppl = (t.data.people || []).filter(p => p.name).map((p, k) => `          <person xml:id="pers${k + 1}"${p.role ? ` role="${x(p.role)}"` : ''}${p.person_id ? ` corresp="lcnda:person/${Number(p.person_id)}"` : ''}><persName>${x(p.name)}</persName></person>`).join('\n');
             const gb = gabRows();
