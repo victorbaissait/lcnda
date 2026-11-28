@@ -236,8 +236,8 @@
                     <h3>macOS</h3>
                     <p class="presentation-os-req">macOS 13 Ventura ou plus récent</p>
                     <div class="presentation-os-group">
-                        <a class="button" href="download/LCNDA-0.11.0-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 596 Mo</small></span><span aria-hidden="true">↓</span></a>
-                        <a class="button secondary" href="download/LCNDA-0.11.0-mac-x64.dmg"><span>Mac Intel<small>Modèles 2017 et après · 602 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button" href="download/LCNDA-0.11.0-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 703 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button secondary" href="download/LCNDA-0.11.0-mac-x64.dmg"><span>Mac Intel<small>Modèles 2017 et après · 710 Mo</small></span><span aria-hidden="true">↓</span></a>
                     </div>
                     <p class="presentation-os-help">Votre Mac : menu Pomme → À propos de ce Mac → « Puce » (Apple Silicon) ou « Processeur » (Intel). Ouvrez le fichier .dmg et glissez LCNDA dans Applications.</p>
                 </article>
@@ -246,7 +246,7 @@
                     <h3>Windows</h3>
                     <p class="presentation-os-req">Windows 10 / 11 (64 bits) — PC Intel ou AMD, et Windows 11 sur processeur ARM</p>
                     <div class="presentation-os-group">
-                        <a class="button" href="download/LCNDA-0.11.0-windows-x64.exe"><span>Windows 10 / 11<small>64 bits · 601 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button" href="download/LCNDA-0.11.0-windows-x64.exe"><span>Windows 10 / 11<small>64 bits · 705 Mo</small></span><span aria-hidden="true">↓</span></a>
                     </div>
                     <p class="presentation-os-help">Lancez le fichier et suivez l'installation. Le composant Microsoft Visual C++ nécessaire est installé automatiquement s'il manque.</p>
                 </article>
@@ -257,13 +257,13 @@
                     <div class="presentation-os-groups">
                         <div class="presentation-os-group">
                             <strong>PC Intel ou AMD</strong>
-                            <a class="button" href="download/LCNDA-0.11.0-linux-x86_64.AppImage"><span>AppImage<small>Toutes distributions · 592 Mo</small></span><span aria-hidden="true">↓</span></a>
-                            <a class="button secondary" href="download/LCNDA-0.11.0-linux-amd64.deb"><span>Paquet .deb<small>Ubuntu, Debian, Mint · 551 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button" href="download/LCNDA-0.11.0-linux-x86_64.AppImage"><span>AppImage<small>Toutes distributions · 699 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button secondary" href="download/LCNDA-0.11.0-linux-amd64.deb"><span>Paquet .deb<small>Ubuntu, Debian, Mint · 658 Mo</small></span><span aria-hidden="true">↓</span></a>
                         </div>
                         <div class="presentation-os-group">
                             <strong>Processeur ARM (Raspberry Pi…)</strong>
-                            <a class="button" href="download/LCNDA-0.11.0-linux-arm64.AppImage"><span>AppImage ARM<small>Toutes distributions · 594 Mo</small></span><span aria-hidden="true">↓</span></a>
-                            <a class="button secondary" href="download/LCNDA-0.11.0-linux-arm64.deb"><span>Paquet .deb ARM<small>Raspberry Pi OS, Ubuntu, Debian · 547 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button" href="download/LCNDA-0.11.0-linux-arm64.AppImage"><span>AppImage ARM<small>Toutes distributions · 701 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button secondary" href="download/LCNDA-0.11.0-linux-arm64.deb"><span>Paquet .deb ARM<small>Raspberry Pi OS, Ubuntu, Debian · 654 Mo</small></span><span aria-hidden="true">↓</span></a>
                         </div>
                     </div>
                     <p class="presentation-os-help">Le .deb sous Ubuntu ou Debian (<code>sudo apt install ./LCNDA-0.11.0-linux-amd64.deb</code>), sinon l'AppImage : rendez-la exécutable (clic droit → Propriétés → Autoriser l'exécution) puis double-cliquez.</p>
@@ -285,7 +285,7 @@
             <details class="presentation-changes" id="v0-11-0">
                 <summary><span>Nouveautés de la version 0.11.0<small>Sortie le 28 novembre 2026 · Le panier partout, l'onglet Données et « 🧭 Je veux… », archives de la commune, Vauban et relais de poste, « Ce que dit l'arbre », aides à la transcription, exports des fiches, une app plus harmonieuse et plus rapide</small></span></summary>
                 <div class="presentation-changes-body">
-<dl class="presentation-facts"><div><dt>Sortie</dt><dd><time datetime="2026-11-28">28 novembre 2026</time></dd></div><div><dt>Systèmes</dt><dd>macOS 11+ (Apple Silicon, Intel), Windows 10/11, Linux (x64, ARM)</dd></div><div><dt>Taille</dt><dd>550 à 600 Mo</dd></div><div><dt>Langues</dt><dd>32</dd></div><div><dt>Mise à jour de la base</dt><dd>Toute seule, copie de sécurité avant</dd></div><div><dt>Vérifier</dt><dd><a href="download/SHA256SUMS.txt">SHA256SUMS.txt</a> · <a href="https://github.com/victorbaissait/lcnda/blob/HEAD/release-notes/v0.11.0.md">notes complètes</a> · <a href="https://github.com/victorbaissait/lcnda/releases/tag/v0.11.0">la version sur GitHub</a></dd></div></dl>
+<dl class="presentation-facts"><div><dt>Sortie</dt><dd><time datetime="2026-11-28">28 novembre 2026</time></dd></div><div><dt>Systèmes</dt><dd>macOS 11+ (Apple Silicon, Intel), Windows 10/11, Linux (x64, ARM)</dd></div><div><dt>Taille</dt><dd>650 à 710 Mo</dd></div><div><dt>Langues</dt><dd>32</dd></div><div><dt>Mise à jour de la base</dt><dd>Toute seule, copie de sécurité avant</dd></div><div><dt>Vérifier</dt><dd><a href="download/SHA256SUMS.txt">SHA256SUMS.txt</a> · <a href="https://github.com/victorbaissait/lcnda/blob/HEAD/release-notes/v0.11.0.md">notes complètes</a> · <a href="https://github.com/victorbaissait/lcnda/releases/tag/v0.11.0">la version sur GitHub</a></dd></div></dl>
 <h4>En bref</h4><ul class="presentation-brief"><li>🧺 Le panier partout, et toujours le bon.</li><li>📊 Un onglet Données, « 🧭 Je veux… » et beaucoup de nouveaux paquets (tous sourcés).</li><li>🌳 « Ce que dit l’arbre » : 10 calculs sur votre famille.</li><li>📜 Des aides pour transcrire les actes.</li><li>⚡ Une app plus harmonieuse et plus rapide.</li></ul>
 <h4>Pour qui ?</h4><p>Tous ; surtout ceux qui aiment replacer leurs ancêtres dans leur époque.</p>
 <h4>À savoir avant de mettre à jour</h4><p>Faites une sauvegarde (Réglages → Sauvegarde) : une base ouverte par la 0.11.0 ne se rouvre pas dans une version plus ancienne. Les plus gros paquets de données s’installent à la demande (« 📦 Installer »).</p>
