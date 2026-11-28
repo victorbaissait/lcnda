@@ -53,7 +53,11 @@
 .ep-pill { position: absolute; top: 4px; right: 4px; z-index: 2; font: 700 11px system-ui, sans-serif; background: var(--blue-bright, #055dff); color: #fff; padding: 1px 6px; border-radius: 9px; pointer-events: none; }
 .ep-pill-host { position: relative; }
 .ep-tabs { position: sticky; top: -10px; z-index: 2; background: var(--card-bg, #fff); margin-bottom: 8px; }
-.ep-panel { display: grid; gap: 10px; }
+.ep-panel { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; }
+.ep-panel > *, .ep-fontform > * { min-width: 0; }
+.ep-side { overflow-x: hidden; }
+.ep-fontform select, .ep-fontform input:not([type=range]):not([type=checkbox]):not([type=color]) { max-width: 100%; box-sizing: border-box; }
+.ep-fontform .segmented { flex-wrap: wrap; }
 .ep-qs { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
 .ep-q { border: 1px solid var(--line-color, #d6d6d6); border-radius: 8px; background: var(--card-bg, #fff); }
 .ep-q.is-open { border-color: var(--blue-bright, #055dff); }
