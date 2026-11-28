@@ -23,7 +23,7 @@ declare(strict_types=1);
  * autre fichier appelée ici doit faire « $own = !$pdo->inTransaction() » avant d'ouvrir la sienne.
  */
 
-const SCHEMA_VERSION = 112;
+const SCHEMA_VERSION = 113;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -141,6 +141,7 @@ function migration_steps(): array
         110 => 'schema_v110',
         111 => 'schema_v111',
         112 => 'schema_v112',
+        113 => 'schema_v113',
     ];
 }
 
@@ -2856,6 +2857,13 @@ function schema_v112(PDO $pdo): void
     $cols = array_column($pdo->query('PRAGMA table_info(investigation_media_folders)')->fetchAll(PDO::FETCH_ASSOC), 'name');
     if (!in_array('color', $cols, true)) { $pdo->exec("ALTER TABLE investigation_media_folders ADD COLUMN color TEXT NOT NULL DEFAULT ''"); }
     if (!in_array('icon', $cols, true)) { $pdo->exec("ALTER TABLE investigation_media_folders ADD COLUMN icon TEXT NOT NULL DEFAULT ''"); }
+}
+
+/** 113 : 🔎 Enquête photo — enquêtes, leurs images (calques), indices, hypothèses, liens, journal ; 📒 repères ; 📮 photographes (lib/enquete_photo.php) */
+function schema_v113(PDO $pdo): void
+{
+    if (!function_exists('ep_install')) { require_once __DIR__ . '/enquete_photo.php'; }
+    ep_install($pdo);
 }
 
 /** 109 : ➕ recueils — l'avancement dans le temps (recueil_progress), « confiée à » d'une page, l'objectif d'un recueil */
