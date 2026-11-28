@@ -1,0 +1,591 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Enquête photo</title>
+<style>
+/* Les jetons et les composants de l'app (assets/css/app.css, ui.css, listes-donnees.css, fiche-village-organiser.css), recopiés ici pour que la maquette s'ouvre seule — même base que onglet-diagrammes.html et diagrammes-donnees.html. */
+:root{
+  color-scheme:light;
+  --ink:#080808;--paper:#fff;--card-bg:#fff;--card-head-bg:#fafafa;--card-line:#080808;
+  --blue:#0066cc;--blue-bright:#055dff;--blue-soft:#eaf2ff;--on-blue:#fff;--line-color:#d6d6d6;--muted:#6d6d6d;
+  --shadow:6px 6px 0 rgba(5,93,255,.34);--shadow-small:4px 4px 0 rgba(5,93,255,.28);--shadow-btn:3px 3px 0 rgba(5,93,255,.25);--shadow-modal:10px 10px 0 rgba(5,93,255,.45);
+  --ui-ink:#111;--ui-bg:#fff;--ui-soft:#eaf1ff;--ui-line:#e3e5ea;--ui-muted:#666;--ui-blue:#055dff;
+  --eyebrow:#0066cc;--btn2-bg:#fff;--btn2-line:#080808;--btn2-ink:#080808;
+  --seg-bg:#fff;--seg-ink:#111;--seg-line:#111;--seg-on-bg:#055dff;--seg-on-ink:#fff;
+  --grid:rgba(0,102,204,.035);--topbar:#fff;--topline:#080808;
+  --toggle-off:#b8bec9;--kbd-line:#c9ccd3;--link:#2b6cb0;
+  --green:#1a7f37;--green-soft:#eaf6ee;--orange:#d9480f;--orange-soft:#fff1e8;--red:#c62828;--red-soft:#fdecec;--yel-soft:#fff8d6;--yel-ink:#7a5d00;--fog:#9aa0a8;
+  --toast-bg:#111;--toast-ink:#fff;
+  --font:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;
+  --ink:#e8e8e8;--paper:#1a1a1a;--card-bg:#242424;--card-head-bg:#2e2e2e;--card-line:#3a3a3a;
+  --blue:#4d9fff;--blue-bright:#5599ff;--blue-soft:#1a2a3d;--on-blue:#111;--line-color:#555;--muted:#a3a3a3;
+  --shadow:6px 6px 0 rgba(77,159,255,.25);--shadow-small:4px 4px 0 rgba(77,159,255,.2);--shadow-btn:3px 3px 0 rgba(5,93,255,.25);--shadow-modal:10px 10px 0 rgba(77,159,255,.28);
+  --ui-ink:#e8e8e8;--ui-bg:#1f1f1f;--ui-soft:#1d2f4d;--ui-line:#3a3a3a;--ui-muted:#a8a8a8;--ui-blue:#3d7dff;
+  --eyebrow:#aaa;--btn2-bg:#2a2a2a;--btn2-line:#555;--btn2-ink:#e8e8e8;
+  --seg-bg:#242424;--seg-ink:#bbb;--seg-line:#e8e8e8;--seg-on-bg:#4d9fff;--seg-on-ink:#111;
+  --topbar:#1e1e1e;--topline:#3a3a3a;
+  --toggle-off:#555;--kbd-line:#555;--link:#6aa8ff;
+  --green:#4cc070;--green-soft:#15281c;--orange:#ff8a4c;--orange-soft:#2e1e14;--red:#ff6b6b;--red-soft:#2e1717;--yel-soft:#2c2612;--yel-ink:#f0d276;
+  --toast-bg:#e8e8e8;--toast-ink:#111;
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ink:#e8e8e8;--paper:#1a1a1a;--card-bg:#242424;--card-head-bg:#2e2e2e;--card-line:#3a3a3a;
+  --blue:#4d9fff;--blue-bright:#5599ff;--blue-soft:#1a2a3d;--on-blue:#111;--line-color:#555;--muted:#a3a3a3;
+  --shadow:6px 6px 0 rgba(77,159,255,.25);--shadow-small:4px 4px 0 rgba(77,159,255,.2);--shadow-btn:3px 3px 0 rgba(5,93,255,.25);--shadow-modal:10px 10px 0 rgba(77,159,255,.28);
+  --ui-ink:#e8e8e8;--ui-bg:#1f1f1f;--ui-soft:#1d2f4d;--ui-line:#3a3a3a;--ui-muted:#a8a8a8;--ui-blue:#3d7dff;
+  --eyebrow:#aaa;--btn2-bg:#2a2a2a;--btn2-line:#555;--btn2-ink:#e8e8e8;
+  --seg-bg:#242424;--seg-ink:#bbb;--seg-line:#e8e8e8;--seg-on-bg:#4d9fff;--seg-on-ink:#111;
+  --topbar:#1e1e1e;--topline:#3a3a3a;
+  --toggle-off:#555;--kbd-line:#555;--link:#6aa8ff;
+  --green:#4cc070;--green-soft:#15281c;--orange:#ff8a4c;--orange-soft:#2e1e14;--red:#ff6b6b;--red-soft:#2e1717;--yel-soft:#2c2612;--yel-ink:#f0d276;
+  --toast-bg:#e8e8e8;--toast-ink:#111;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.4 var(--font);padding:24px 24px 56px;overflow-wrap:break-word}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:inherit}
+:is(button,input,select,textarea,a,[tabindex]):focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{max-width:1440px;margin:0 auto}
+
+/* ── la maquette autour ── */
+.mock{display:flex;justify-content:space-between;align-items:flex-start;gap:12px 24px;flex-wrap:wrap;margin:0 0 18px}
+.mock .eyebrow{display:block}
+.mock h1{margin:5px 0 6px;font-size:22px;letter-spacing:-.01em}
+.mock p{margin:0;max-width:860px;color:var(--muted);font-size:14px;line-height:1.45}
+.tag-new{display:inline-block;font:800 10px/1.5 var(--font);letter-spacing:.08em;text-transform:uppercase;background:var(--ui-blue);color:#fff;padding:0 6px;margin-right:6px;vertical-align:1px}
+.path{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center;margin:8px 0 0;font-size:13px;font-weight:600}
+.path span{border:1.5px solid var(--line-color);background:var(--card-bg);padding:2px 8px}
+.path span.on{border-color:var(--ui-blue);background:var(--ui-soft);color:var(--ink)}
+.path i{font-style:normal;color:var(--muted)}
+.toc{display:flex;flex-wrap:wrap;gap:6px 8px;margin:0 0 26px}
+.toc a{text-decoration:none;border:2px solid var(--card-line);background:var(--card-bg);padding:6px 11px;font-size:13px;font-weight:700;box-shadow:var(--shadow-btn)}
+.toc a:hover{background:var(--ui-soft)}
+.toc a small{color:var(--muted);font-weight:600;margin-left:4px}
+.sec{margin:46px 0 0}
+.sec-h{margin:0 0 16px;max-width:900px}
+.sec-h h2{margin:4px 0 4px;font-size:24px;letter-spacing:-.02em}
+.sec-h p{margin:0;color:var(--muted);font-size:14px}
+.callout{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 5px;background:var(--orange);color:#fff;font:800 12px/1 var(--font);border-radius:11px;vertical-align:2px}
+
+/* ── composants de l'app ── */
+.eyebrow{color:var(--eyebrow);font-weight:700;font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.button{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:2px solid var(--ink);background:var(--blue);color:var(--on-blue);padding:11px 15px;min-height:42px;font-weight:700;cursor:pointer;box-shadow:var(--shadow-small);transition:.15s ease;white-space:nowrap;border-radius:0;text-decoration:none}
+:root[data-theme="dark"] .button:not(.secondary){border-color:var(--blue)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .button:not(.secondary){border-color:var(--blue)}}
+.button:hover{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+.button:disabled{opacity:.45;cursor:default;transform:none;box-shadow:none}
+.button.secondary{color:var(--btn2-ink);background:var(--btn2-bg);border-color:var(--btn2-line)}
+.button.small{min-height:32px;padding:6px 10px;font-size:11.5px;box-shadow:var(--shadow-btn)}
+.button.small:hover{box-shadow:1px 1px 0 var(--ink)}
+.button.icon{font-size:18px;line-height:1;padding:9px 13px}
+.link-button{border:0;background:none;padding:0;color:var(--link);text-decoration:underline;text-underline-offset:2px;cursor:pointer;font-size:13px}
+.segmented{display:inline-flex;flex-wrap:wrap;padding:1px 0 0 1px;flex:none;max-width:100%}
+.segmented button{min-height:32px;margin:-1px 0 0 -1px;position:relative;border:2px solid var(--seg-line);background:var(--seg-bg);color:var(--seg-ink);cursor:pointer;font-size:12px;font-weight:700;padding:1px 9px;white-space:nowrap;border-radius:0}
+.segmented button[aria-pressed="true"]{z-index:1;background:var(--seg-on-bg);color:var(--seg-on-ink)}
+.segmented.sm button{min-height:28px;font-size:11.5px;padding:1px 7px}
+.ui-listbar-btn{display:inline-flex;align-items:center;gap:4px;border:2px solid var(--ui-ink);background:var(--ui-bg);color:var(--ui-ink);padding:5px 9px;min-height:34px;font:600 13px/1.2 var(--font);cursor:pointer;white-space:nowrap;border-radius:0}
+.ui-listbar-btn:hover{background:var(--ui-soft)}
+.ui-listbar-btn[aria-pressed="true"]{background:var(--ui-soft);border-color:var(--ui-blue);box-shadow:inset 0 -3px 0 var(--ui-blue)}
+.ui-listbar-chip{display:inline-flex;align-items:center;gap:4px;background:var(--ui-soft);border:1.5px solid var(--ui-blue);color:var(--ui-blue);padding:3px 8px;font:700 12px/1.3 var(--font);cursor:pointer;border-radius:0}
+.ui-listbar-chip.off{background:transparent;border-color:var(--line-color);color:var(--muted);text-decoration:line-through}
+.ui-select{appearance:none;border:2px solid var(--ui-ink);border-radius:0;background:var(--ui-bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0h10L5 6z' fill='%23888'/%3E%3C/svg%3E") no-repeat right 9px center;color:var(--ui-ink);padding:5px 28px 5px 9px;font:600 13px var(--font);min-height:34px;max-width:100%;min-width:0}
+.ui-toggle{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;cursor:pointer;position:relative;user-select:none;min-height:30px}
+.ui-toggle>input{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
+.ui-toggle>i{width:34px;height:20px;border-radius:12px;background:var(--toggle-off);position:relative;flex:none;transition:background .15s}
+.ui-toggle>i::after{content:'';position:absolute;left:3px;top:3px;width:14px;height:14px;background:#fff;border-radius:50%;transition:left .15s}
+.ui-toggle>input:checked+i{background:var(--ui-blue)}
+.ui-toggle>input:checked+i::after{left:17px}
+.ui-toggle>input:disabled+i{opacity:.55}
+.ui-toggle>input:focus-visible+i{outline:3px solid rgba(5,93,255,.5);outline-offset:2px}
+.ui-num{display:inline-flex;align-items:center;border:2px solid var(--ui-ink);background:var(--ui-bg);min-height:30px}
+.ui-num input{width:50px;border:0;background:transparent;padding:3px 7px;text-align:right;font-weight:700;font-variant-numeric:tabular-nums;color:var(--ui-ink);outline:0}
+.ui-num span{padding:0 7px 0 0;font-size:12px;color:var(--muted)}
+.ui-badge{display:inline-block;font:800 10px/1.5 var(--font);letter-spacing:.06em;text-transform:uppercase;padding:0 6px;border:1.5px solid var(--ui-ink);white-space:nowrap;vertical-align:1px}
+.ui-badge.is-blue{background:var(--ui-blue);border-color:var(--ui-blue);color:#fff}
+.ui-badge.is-green{border-color:var(--green);color:var(--green);background:var(--green-soft)}
+.ui-badge.is-grey{border-color:var(--line-color);color:var(--muted)}
+.ui-badge.is-orange{border-color:var(--orange);color:var(--orange);background:var(--orange-soft)}
+.lbl{font-size:12px;font-weight:700;white-space:nowrap}
+.muted{color:var(--muted)}
+.small{font-size:12.5px}
+.card{background:var(--card-bg);border:2px solid var(--card-line);box-shadow:var(--shadow-small);min-width:0}
+.card-head{display:flex;align-items:center;justify-content:space-between;gap:8px 10px;flex-wrap:wrap;padding:12px 15px;border-bottom:2px solid var(--card-line);background:var(--card-head-bg)}
+.card-head h3{margin:0;font-size:16px;line-height:1.2}
+.card-head h3 small{color:var(--muted);font-weight:400;font-size:12.5px}
+.card-body{padding:14px 15px}
+.data-table{width:100%;border-collapse:collapse;font-size:12.5px}
+.data-table th{text-align:left;padding:9px 10px;color:var(--on-blue);background:var(--blue);border-bottom:2px solid var(--ink);white-space:nowrap;font-weight:800}
+.data-table td{padding:9px 10px;border-bottom:1px solid var(--line-color);vertical-align:top}
+.data-table tr:hover td{background:var(--blue-soft)}
+.data-table td small{display:block;color:var(--muted);font-size:11.5px}
+.tw{max-width:100%;overflow-x:auto;position:relative}
+.ib{display:inline-flex;align-items:center;justify-content:center;width:30px;height:28px;border:1.5px solid var(--line-color);background:var(--card-bg);font-size:13px;margin-left:3px;color:var(--ink);cursor:pointer;padding:0;vertical-align:middle}
+.ib:hover{border-color:var(--ui-blue);background:var(--ui-soft)}
+.ib.on{border-color:var(--ui-blue);background:var(--ui-soft)}
+.src a,.srca{font:700 11px var(--font);border:1px solid var(--line-color);padding:1px 6px;color:var(--blue);background:var(--blue-soft);text-decoration:none;white-space:nowrap}
+.toast{position:fixed;left:24px;bottom:24px;z-index:50;display:flex;align-items:center;gap:12px;max-width:min(470px,calc(100vw - 32px));background:var(--toast-bg);color:var(--toast-ink);padding:11px 14px;font:500 14px/1.35 var(--font);box-shadow:5px 5px 0 rgba(5,93,255,.45)}
+.toast button{border:1.5px solid currentColor;background:transparent;color:inherit;font-weight:700;font-size:13px;padding:3px 9px;cursor:pointer;white-space:nowrap}
+
+/* ── la fenêtre de l'app : barre du haut ── */
+.app{border:2px solid var(--topline);background:var(--paper);min-width:0}
+.topbar{display:grid;grid-template-columns:240px minmax(0,1fr);align-items:center;background:var(--topbar);border-bottom:2px solid var(--topline);min-height:72px}
+.brand{height:100%;border-right:2px solid var(--topline);display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;align-items:end;padding:12px 24px 9px;font-size:12px;line-height:1;letter-spacing:.04em;position:relative;overflow:hidden}
+.brand::after{content:"";position:absolute;width:130px;height:130px;right:-62px;top:-85px;background:repeating-radial-gradient(circle,var(--blue) 0 1px,transparent 1px 4px);transform:rotate(-8deg)}
+.brand span{background:var(--topbar);border:1px solid var(--blue);color:var(--blue);justify-self:end;padding:3px 5px;transform:rotate(-5deg);z-index:1;text-transform:uppercase}
+.brand strong{background:var(--blue);color:var(--on-blue);justify-self:start;padding:4px 6px;transform:rotate(-5deg);z-index:1;text-transform:uppercase}
+.brand small{grid-column:1/-1;font-size:10px;letter-spacing:.18em;align-self:end;text-align:center;color:var(--muted)}
+.main-nav{display:flex;align-items:center;overflow-x:auto;overflow-y:hidden;padding:8px 16px;gap:8px;min-width:0}
+.nav-item{border:2px solid transparent;background:transparent;font-weight:700;padding:6px 12px;white-space:nowrap;line-height:1.1;font-size:15px;color:var(--ink);text-align:left}
+.nav-item span{display:block;font-size:9px;line-height:1;color:var(--blue);letter-spacing:.12em;margin-bottom:4px}
+.nav-item.is-active{background:var(--blue);border-color:var(--ink);color:var(--on-blue);box-shadow:var(--shadow-small)}
+.nav-item.is-active span{color:var(--on-blue)}
+.workspace{background-color:var(--paper);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px}
+.page{padding:28px 3.5% 34px}
+.page-header{display:flex;align-items:flex-end;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;margin:0 0 16px}
+.page-header h2{margin:6px 0 0;font-size:clamp(26px,3vw,34px);line-height:1.02;letter-spacing:-.03em}
+.page-header p{margin:6px 0 0;color:var(--muted);font-size:13.5px;max-width:640px}
+.ph-ico{font-size:.86em;margin-right:.19em}
+.page-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.ld-source{margin:-4px 0 12px;color:var(--muted);font-size:13px}
+.ld-bar-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ld-chips{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:10px 0 0}
+.ld-count{font-weight:700;margin-right:4px;font-size:14px}
+.kiosk{font-size:12.5px;color:var(--muted);border-top:1px dashed var(--line-color);margin:14px 0 0;padding:9px 0 0}
+
+/* ── modale (app.css .modal) ── */
+.modal{border:3px solid var(--ink);box-shadow:var(--shadow-modal);background:var(--card-bg);min-width:0}
+:root[data-theme="dark"] .modal{border-color:#555}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .modal{border-color:#555}}
+.modal-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:16px 18px;border-bottom:2px solid var(--card-line);background:var(--card-head-bg)}
+.modal-head h2{margin:4px 0 0;font-size:21px;letter-spacing:-.01em}
+.modal-body{padding:14px 18px}
+.modal-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:12px 18px 16px;border-top:1px solid var(--ui-line)}
+.modal-actions .spacer{flex:1}
+.x{border:0;background:none;font-size:20px;cursor:pointer;color:var(--muted);padding:2px 6px}
+</style>
+<style>
+/* ── propre à cette maquette (🔎 Enquête photo) ── */
+.dec{border-left:4px solid var(--orange);background:var(--orange-soft);padding:8px 12px;font-size:13px;margin:12px 0 0;max-width:900px}
+.where{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:10px;margin:14px 0 0}
+.where div{border:1.5px solid var(--line-color);background:var(--card-bg);padding:8px 10px;font-size:13px}
+.where b{display:block;font-size:13.5px}
+.photo{position:relative;background:#d9d2c3;border:2px solid var(--card-line);aspect-ratio:3/2;overflow:hidden}
+.photo svg{display:block;width:100%;height:100%}
+.ov{position:absolute;border:3px solid;border-radius:50%;pointer-events:none}
+.ov.r{border-color:#e03131}.ov.b{border-color:#1c7ed6;border-radius:4px}.ov.g{border-color:#2f9e44;border-radius:4px}.ov.y{border-color:#f59f00;border-style:dashed}
+.ov i{position:absolute;top:-12px;left:-12px;width:22px;height:22px;border-radius:50%;background:inherit;font:800 12px/22px var(--font);color:#fff;text-align:center;font-style:normal}
+.ov.r i{background:#e03131}.ov.b i{background:#1c7ed6}.ov.g i{background:#2f9e44}.ov.y i{background:#f59f00}
+.note-on{position:absolute;background:#fff8c4;color:#111;font:600 12px/1.25 var(--font);padding:3px 6px;border:1.5px solid #111;max-width:150px;transform:rotate(-2deg)}
+.blur{position:absolute;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);background:rgba(255,255,255,.15);border:1.5px dashed #555;font:700 10px var(--font);color:#111;display:flex;align-items:flex-end;justify-content:center}
+.inv{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:900px){.inv{grid-template-columns:1fr}}
+.tools{display:flex;flex-wrap:wrap;gap:4px;align-items:center;margin:0 0 8px}
+.tools .sep{width:1px;height:24px;background:var(--line-color);margin:0 4px}
+.layers{margin:10px 0 0;font-size:13px}
+.layers li{display:flex;align-items:center;gap:8px;padding:5px 6px;border-bottom:1px solid var(--line-color);list-style:none}
+.layers ul{margin:0;padding:0}
+.layers .sw{width:12px;height:12px;border-radius:50%;flex:none}
+.layers .grow{flex:1;min-width:0}
+.steps{display:grid;gap:6px;counter-reset:s}
+.step{border:1.5px solid var(--line-color);background:var(--card-bg)}
+.step>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:8px 10px;font-weight:700;font-size:14px}
+.step>summary::-webkit-details-marker{display:none}
+.step>summary .n{width:22px;height:22px;border-radius:50%;border:2px solid var(--ink);font:800 11px/18px var(--font);text-align:center;flex:none}
+.step.done>summary .n{background:var(--green);border-color:var(--green);color:#fff}
+.step.cur{border-color:var(--ui-blue);box-shadow:var(--shadow-btn)}
+.step.cur>summary .n{background:var(--ui-blue);border-color:var(--ui-blue);color:#fff}
+.step>summary .st{margin-left:auto;font-size:11.5px;font-weight:600;color:var(--muted)}
+.step .in{padding:2px 12px 12px;display:grid;gap:8px;font-size:13.5px}
+.q{margin:0;font-weight:600}
+.choices{display:flex;flex-wrap:wrap;gap:5px}
+.choices button{border:1.5px solid var(--line-color);background:var(--card-bg);padding:4px 9px;font-size:12.5px;cursor:pointer}
+.choices button.on{border-color:var(--ui-blue);background:var(--ui-soft);font-weight:700}
+.fld{width:100%;border:2px solid var(--ui-ink);background:var(--ui-bg);padding:6px 8px;font-size:13.5px}
+.cert{display:inline-flex;flex-wrap:wrap}
+.cert button{border:1.5px solid var(--line-color);background:var(--card-bg);padding:3px 8px;font-size:12px;font-weight:700;margin:-1px 0 0 -1px;cursor:pointer}
+.cert button.p{border-color:var(--green);background:var(--green);color:#fff}
+.cert button.pr{border-color:#1c7ed6;background:#1c7ed6;color:#fff}
+.cert button.s{border-color:#f59f00;background:#f59f00;color:#111}
+.cert button.rf{border-color:var(--red);background:var(--red);color:#fff}
+.lvl{display:inline-block;font:800 10px/1.5 var(--font);letter-spacing:.05em;text-transform:uppercase;padding:0 6px;border:1.5px solid;white-space:nowrap}
+.lvl.p{color:var(--green);border-color:var(--green);background:var(--green-soft)}
+.lvl.pr{color:#1c7ed6;border-color:#1c7ed6;background:var(--ui-soft)}
+.lvl.s{color:var(--yel-ink);border-color:#f59f00;background:var(--yel-soft)}
+.lvl.rf{color:var(--red);border-color:var(--red);background:var(--red-soft);text-decoration:line-through}
+.clue{display:grid;grid-template-columns:26px minmax(0,1fr) auto;gap:4px 10px;align-items:start;padding:9px 0;border-bottom:1px solid var(--line-color);font-size:13.5px}
+.clue .dot{width:22px;height:22px;border-radius:50%;color:#fff;font:800 11px/22px var(--font);text-align:center}
+.clue small{display:block;color:var(--muted);font-size:12px}
+.concl{border:2px solid var(--green);background:var(--green-soft);padding:12px 14px}
+.concl h4{margin:0 0 6px;font-size:15px}
+.meter{display:flex;height:10px;border:1.5px solid var(--ink);margin:6px 0}
+.meter span{display:block}
+.ai{border:2px dashed var(--ui-blue);background:var(--ui-soft);padding:10px 12px;font-size:13.5px}
+.ai .seen{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 10px;margin:6px 0}
+.ai .no{color:var(--muted);font-style:italic}
+.rules{margin:0;padding-left:18px;font-size:13.5px;line-height:1.5}
+.sugg{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:12px}
+.sugg .card-body{display:grid;gap:7px;font-size:13.5px}
+.why{font-size:12px;color:var(--muted);border-left:3px solid var(--line-color);padding-left:8px}
+.warn{border:2px solid var(--orange);background:var(--orange-soft);padding:9px 11px;font-size:13px}
+.lockd{border:2px solid var(--red);background:var(--red-soft);padding:9px 11px;font-size:13px}
+.link-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,190px),1fr));gap:8px}
+.link-grid button{text-align:left;border:1.5px solid var(--line-color);background:var(--card-bg);padding:8px 10px;cursor:pointer;font-size:13px}
+.link-grid button b{display:block}
+.link-grid button.on{border-color:var(--ui-blue);background:var(--ui-soft)}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cmp .photo{aspect-ratio:4/3}
+.chip-ok{display:inline-flex;gap:4px;align-items:center;font-size:12px;border:1.5px solid var(--green);color:var(--green);background:var(--green-soft);padding:1px 7px;font-weight:700}
+.decide li{margin:0 0 10px;font-size:14px;line-height:1.45}
+.decide .rec{color:var(--green);font-weight:700}
+.ctx{display:inline-block;border:2px solid var(--card-line);background:var(--card-bg);box-shadow:var(--shadow-small);font-size:13.5px;min-width:250px}
+.ctx div{padding:7px 12px}
+.ctx div.on{background:var(--ui-soft);font-weight:700}
+.ctx hr{border:0;border-top:1px solid var(--line-color);margin:2px 0}
+.mini{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start}
+.thumb{width:150px;border:2px solid var(--card-line);background:var(--card-bg);position:relative}
+.thumb .photo{border:0}
+.thumb .badge-inv{position:absolute;top:6px;right:6px;background:var(--ui-blue);color:#fff;font:800 10px/1.6 var(--font);padding:0 6px}
+.thumb p{margin:0;padding:5px 7px;font-size:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mock">
+  <div>
+    <span class="eyebrow">Maquette · à valider</span>
+    <h1>🔎 Enquête photo</h1>
+    <p>Retrouver le lieu, l'époque et les détails d'une photo en relevant des indices, pas en devinant. On répond à des questions simples, on entoure ce qu'on voit sur des calques, et chaque indice reçoit un degré de certitude : Prouvé, Probable, Supposé ou Réfuté. Une IA sur l'ordinateur peut aider si on le souhaite : elle montre ce qu'elle voit et a le droit de dire « je ne sais pas ». Rien ne part sur Internet sans qu'on le demande. Famille d'exemple : MAZAUD (fictive).</p>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Sommaire">
+  <a href="#s1">1 · Le bouton, partout <small>où il y a une image</small></a>
+  <a href="#s2">2 · L'écran d'enquête <small>image, calques, questions</small></a>
+  <a href="#s3">3 · Indices et certitude <small>pour, contre, conclusion</small></a>
+  <a href="#s4">4 · L'IA, en option <small>sans inventer</small></a>
+  <a href="#s5">5 · Recherches proposées <small>selon la photo</small></a>
+  <a href="#s5b">5 bis · ☀️ Calcul d'ombre <small>heure, saison, orientation</small></a>
+  <a href="#s6">6 · Comparer en ligne <small>seulement si on veut</small></a>
+  <a href="#s7">7 · Rattacher <small>à ce qu'on veut</small></a>
+  <a href="#s8">8 · À décider</a>
+</nav>
+
+<!-- ══════════ 1 ══════════ -->
+<section class="sec" id="s1">
+  <div class="sec-h"><span class="eyebrow">1</span><h2>Le bouton, partout où il y a une image</h2>
+    <p>Le même bouton « 🔎 Enquêter » sur la page d'une image, à côté de « Atelier de transcription » et « Ranger ». Ailleurs, il est dans le menu ⋯ et dans le clic droit sur une image. Une image qui a déjà une enquête porte une petite pastille.</p></div>
+
+  <div class="app"><div class="workspace"><div class="page">
+    <div class="page-header">
+      <div><span class="eyebrow">Documents</span><h2><span class="ph-ico">📷</span>img004</h2><p>Photo</p></div>
+      <div class="page-actions">
+        <button class="button">✎ Modifier</button>
+        <button class="button secondary">📜 Atelier de transcription</button>
+        <button class="button secondary" style="outline:3px solid var(--orange);outline-offset:3px">🔎 Enquêter</button>
+        <button class="button secondary">📁 Ranger</button>
+        <button class="button secondary icon" aria-label="Plus">⋯</button>
+      </div>
+    </div>
+    <p class="muted small" style="margin:0"><span class="callout">1</span> Déjà une enquête ? Le bouton devient « 🔎 Enquête · 5 indices · lieu probable » et rouvre où on en était.</p>
+  </div></div></div>
+
+  <div class="mini" style="margin-top:18px">
+    <div class="ctx" role="menu" aria-label="Clic droit sur une image">
+      <div>👁 Ouvrir</div><div>📜 Atelier de transcription</div>
+      <div class="on">🔎 Enquêter sur cette photo…</div>
+      <hr><div>🧺 Mettre dans le panier</div><div>📍 Mettre dans…</div>
+    </div>
+    <div class="thumb"><div class="photo" style="aspect-ratio:4/3"><svg viewBox="0 0 120 90" aria-hidden="true"><rect width="120" height="90" fill="#cfc6b3"/><path d="M0 60 L120 55 L120 90 L0 90Z" fill="#a99f88"/><rect x="50" y="20" width="16" height="40" fill="#8b8270"/><path d="M50 20 L58 4 L66 20Z" fill="#6f6758"/></svg></div><span class="badge-inv">🔎 5</span><p>Carte postale, vers 1910</p></div>
+    <div class="where" style="flex:1;margin:0">
+      <div><b>📄 Documents</b>page de l'image, liste, visionneuse</div>
+      <div><b>👤 Fiche d'une personne</b>ses photos, portrait</div>
+      <div><b>✉️ Cartes postales, 💎 Trésors</b>chaque image</div>
+      <div><b>📚 Recueils, 📜 Atelier</b>la vue ouverte</div>
+      <div><b>🧩 Tableaux, 🕵️ Enquêtes</b>une image posée</div>
+      <div><b>🎚️ Retouche</b>menu ⋯ (l'image d'origine, pas la retouchée)</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 2 ══════════ -->
+<section class="sec" id="s2">
+  <div class="sec-h"><span class="eyebrow">2</span><h2>L'écran d'enquête : l'image avec ses calques, et les questions à côté</h2>
+    <p>À gauche, la photo. On dessine sur des calques (entourer, flèche, texte, flouter un visage) sans jamais toucher à l'image d'origine. À droite, les questions, une à la fois. Chaque chose entourée devient un indice numéroté.</p></div>
+
+  <div class="modal">
+    <div class="modal-head"><div><span class="eyebrow">🔎 Enquête photo</span><h2>img004 — carte postale</h2><div class="small muted" style="margin-top:4px">Enregistrée toute seule · ↶ Annuler / ↷ Refaire</div></div><button class="x" aria-label="Fermer">×</button></div>
+    <div class="modal-body">
+      <div class="inv">
+        <div>
+          <div class="tools" role="toolbar" aria-label="Outils de dessin">
+            <button class="ib on" title="Déplacer, zoomer">✋</button>
+            <button class="ib" title="Entourer (cercle)">◯</button>
+            <button class="ib" title="Cadre">▭</button>
+            <button class="ib" title="Flèche">➚</button>
+            <button class="ib" title="Texte">T</button>
+            <button class="ib" title="Main levée">✎</button>
+            <button class="ib" title="Flouter (visages)">▦</button>
+            <span class="sep"></span>
+            <button class="ib" title="Couleur" style="background:#e03131"></button>
+            <button class="ib" title="Loupe">🔍</button>
+            <button class="ib" title="Mieux voir (contraste)">🎚️</button>
+            <span class="sep"></span>
+            <div class="segmented sm" role="group" aria-label="Face"><button aria-pressed="true">Recto</button><button aria-pressed="false">Verso</button></div>
+          </div>
+          <div class="photo">
+            <svg viewBox="0 0 600 400" aria-label="Carte postale d'exemple : une place de village avec une église à clocher à bulbe, un hôtel et deux soldats">
+              <rect width="600" height="400" fill="#d8cfbc"/>
+              <path d="M0 120 Q150 90 300 110 T600 100 V400 H0Z" fill="#bfb49c"/>
+              <path d="M0 140 L120 70 L220 130 L330 60 L470 125 L600 80 V180 H0Z" fill="#a89e87" opacity=".7"/>
+              <rect x="70" y="160" width="190" height="150" fill="#cbbfa4" stroke="#7a705d"/>
+              <rect x="70" y="140" width="190" height="24" fill="#958a73"/>
+              <text x="165" y="157" font-size="13" text-anchor="middle" fill="#2a261f" font-family="serif" letter-spacing="2">HÔTEL DE LA POSTE</text>
+              <rect x="95" y="190" width="26" height="36" fill="#7a705d"/><rect x="150" y="190" width="26" height="36" fill="#7a705d"/><rect x="205" y="190" width="26" height="36" fill="#7a705d"/>
+              <rect x="400" y="150" width="70" height="160" fill="#b8ad95" stroke="#7a705d"/>
+              <rect x="415" y="95" width="40" height="60" fill="#a99f88"/>
+              <ellipse cx="435" cy="88" rx="22" ry="20" fill="#7d745f"/>
+              <path d="M435 50 L435 68" stroke="#4a443a" stroke-width="3"/>
+              <path d="M0 310 H600 V400 H0Z" fill="#a59a82"/>
+              <g fill="#3f3a31"><rect x="300" y="250" width="14" height="50"/><circle cx="307" cy="243" r="8"/><rect x="330" y="250" width="14" height="50"/><circle cx="337" cy="243" r="8"/></g>
+              <path d="M300 236 h14 v-6 h-14z M330 236 h14 v-6 h-14z" fill="#22201b"/>
+              <text x="20" y="390" font-size="12" fill="#3a352c" font-family="serif" font-style="italic">12 — La Place et l'Église</text>
+            </svg>
+            <span class="ov r" style="left:64%;top:9%;width:15%;height:22%"><i>1</i></span>
+            <span class="ov b" style="left:11%;top:33%;width:33%;height:9%"><i>2</i></span>
+            <span class="ov g" style="left:49%;top:55%;width:10%;height:22%"><i>3</i></span>
+            <span class="ov y" style="left:2%;top:92%;width:36%;height:6%"><i>4</i></span>
+            <span class="note-on" style="left:80%;top:12%">clocher à bulbe ?</span>
+            <span class="note-on" style="left:60%;top:79%">képi + capote</span>
+          </div>
+          <details class="layers" open><summary class="lbl">Calques (5)</summary>
+            <ul>
+              <li><span class="sw" style="background:#e03131"></span><span class="grow">1 · Clocher</span><button class="ib" title="Masquer">👁</button><button class="ib" title="Verrouiller">🔒</button></li>
+              <li><span class="sw" style="background:#1c7ed6"></span><span class="grow">2 · Enseigne « HÔTEL DE LA POSTE »</span><button class="ib">👁</button><button class="ib">🔒</button></li>
+              <li><span class="sw" style="background:#2f9e44"></span><span class="grow">3 · Deux soldats</span><button class="ib">👁</button><button class="ib">🔒</button></li>
+              <li><span class="sw" style="background:#f59f00"></span><span class="grow">4 · Légende imprimée</span><button class="ib">👁</button><button class="ib">🔒</button></li>
+              <li><span class="sw" style="background:#fff8c4;border:1px solid #111"></span><span class="grow">Mes notes</span><button class="ib">👁</button><button class="ib">🔒</button></li>
+            </ul>
+            <p class="small muted" style="margin:6px 0 0">⤓ Exporter l'image avec ou sans calques · l'image d'origine n'est jamais modifiée.</p>
+          </details>
+        </div>
+
+        <div>
+          <div class="segmented" role="group" aria-label="Vue" style="margin-bottom:10px"><button aria-pressed="true">Questions</button><button aria-pressed="false">Indices (5)</button><button aria-pressed="false">Recherches (6)</button></div>
+          <div class="steps">
+            <details class="step done"><summary><span class="n">✓</span>Le support<span class="st">Carte postale · dos divisé</span></summary></details>
+            <details class="step done"><summary><span class="n">✓</span>Le dos<span class="st">Texte au crayon, tampon</span></summary></details>
+            <details class="step cur" open><summary><span class="n">3</span>Y a-t-il du texte sur l'image ?<span class="st">en cours</span></summary>
+              <div class="in">
+                <p class="q">Entoure chaque texte, puis recopie ce que tu lis. Un mot illisible : mets « ? ».</p>
+                <input class="fld" value="HÔTEL DE LA POSTE" aria-label="Texte lu">
+                <div><span class="lbl">Langue :</span> <span class="ui-listbar-chip">français · probable (mots « hôtel », « poste »)</span></div>
+                <div><span class="lbl">Sûr de la lecture ?</span><div class="cert"><button class="p">Prouvé</button><button>Probable</button><button>Supposé</button></div></div>
+                <div class="choices"><button>＋ Un autre texte</button><button>📜 Lire avec l'atelier</button><button>🤖 Demander à l'IA</button><button>Pas de texte</button></div>
+              </div>
+            </details>
+            <details class="step"><summary><span class="n">4</span>Le lieu : un bâtiment, un paysage remarquable ?<span class="st"></span></summary>
+              <div class="in"><p class="q">Décris-le même sans savoir ce que c'est.</p><div class="choices"><button class="on">Clocher</button><button>Château</button><button>Pont</button><button>Montagne</button><button>Mer</button><button>Usine</button><button>Gare</button><button>Monument aux morts</button></div><div class="choices"><button class="on">à bulbe</button><button>pointu</button><button>carré</button><button>toit d'ardoise</button><button>toit de tuiles</button></div></div></details>
+            <details class="step"><summary><span class="n">5</span>Les gens : habits, uniforme, décorations ?<span class="st"></span></summary>
+              <div class="in"><div class="choices"><button>Coiffe</button><button>Chapeau</button><button class="on">Uniforme</button><button>Décoration</button><button>Habit de travail</button></div><p class="small muted" style="margin:0">→ guide illustré : képi, casque Adrian, capote bleu horizon… et « 📅 Dater par la mode ».</p></div></details>
+            <details class="step"><summary><span class="n">6</span>Les objets : voiture, outil, affiche ?<span class="st"></span></summary></details>
+            <details class="step"><summary><span class="n">7</span>La date : quand a-t-elle été prise ?<span class="st"></span></summary><div class="in"><div class="choices"><button>Tampon de la poste</button><button>Date écrite</button><button>📅 Par la mode</button><button>☀️ Par les ombres</button><button>Saison (feuilles, neige)</button></div></div></details>
+            <details class="step"><summary><span class="n">8</span>Ma conclusion<span class="st"></span></summary></details>
+          </div>
+          <p class="small muted" style="margin:10px 0 0">On peut sauter une question, revenir, ou tout répondre dans le désordre. Les questions s'adaptent : une photo de groupe n'a pas d'étape « dos » si on n'a que l'image.</p>
+        </div>
+      </div>
+    </div>
+    <div class="modal-actions"><button class="button secondary small">🤖 L'IA regarde aussi</button><span class="spacer"></span><button class="button secondary">⤓ Exporter le dossier</button><button class="button">Terminer pour l'instant</button></div>
+  </div>
+</section>
+
+<!-- ══════════ 3 ══════════ -->
+<section class="sec" id="s3">
+  <div class="sec-h"><span class="eyebrow">3</span><h2>Indices et certitude</h2>
+    <p>Les mêmes mots que pour les liens de parenté. Chaque indice dit pourquoi on y croit. L'app ne propose jamais « Prouvé » toute seule : il faut une trace solide (texte lu, légende au dos, tampon). Un indice contraire reste visible, barré.</p></div>
+  <div class="inv">
+    <div class="card"><div class="card-head"><h3>Indices <small>5</small></h3><div class="segmented sm"><button aria-pressed="true">Tous</button><button aria-pressed="false">Lieu</button><button aria-pressed="false">Date</button><button aria-pressed="false">Gens</button></div></div>
+      <div class="card-body" style="padding-top:2px">
+        <div class="clue"><span class="dot" style="background:#1c7ed6">2</span><div>Enseigne « HÔTEL DE LA POSTE »<small>Texte lu sur l'image · français</small></div><span class="lvl p">Prouvé</span></div>
+        <div class="clue"><span class="dot" style="background:#f59f00">4</span><div>Légende « 12 — La Place et l'Église », éditeur au dos : « Phot. J. Lacombe, Brive »<small>Le nom de l'éditeur ne prouve pas le lieu, il le rend probable</small></div><span class="lvl pr">Probable</span></div>
+        <div class="clue"><span class="dot" style="background:#e03131">1</span><div>Clocher à bulbe<small>Rare en Limousin, fréquent en Savoie et en Alsace</small></div><span class="lvl s">Supposé</span></div>
+        <div class="clue"><span class="dot" style="background:#2f9e44">3</span><div>Soldats en képi et capote<small>Avant le casque Adrian (1915) · 📅 pas après 1915</small></div><span class="lvl pr">Probable</span></div>
+        <div class="clue"><span class="dot" style="background:#888">✎</span><div>« C'est Collonges »<small>souvenir de la tante — contredit par le clocher (Collonges : clocher roman)</small></div><span class="lvl rf">Réfuté</span></div>
+      </div></div>
+    <div>
+      <div class="concl">
+        <h4>🗺 Lieu : Brive-la-Gaillarde (Corrèze) <span class="lvl pr">Probable</span></h4>
+        <div class="meter" aria-label="2 indices pour, 1 contre"><span style="width:62%;background:var(--green)"></span><span style="width:20%;background:#f59f00"></span><span style="width:18%;background:var(--red)"></span></div>
+        <p class="small" style="margin:0">Pour : 2 · À vérifier : 1 · Contre : 1. <b>Pour passer à « Prouvé »</b> : trouver une autre carte postale du même lieu, ou un plan ancien avec l'Hôtel de la Poste.</p>
+        <h4 style="margin-top:12px">📅 Date : 1905 – 1915 <span class="lvl pr">Probable</span></h4>
+        <p class="small" style="margin:0">Dos divisé (après 1904) · képi sans casque (avant 1915).</p>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px"><button class="button small">📍 Mettre ce lieu sur la photo</button><button class="button secondary small">✎ Changer</button></div>
+      </div>
+      <p class="small muted">« Mettre ce lieu sur la photo » remplit le lieu et la date de l'image, avec la certitude et un lien vers l'enquête comme source. ↶ Annuler.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 4 ══════════ -->
+<section class="sec" id="s4">
+  <div class="sec-h"><span class="eyebrow">4</span><h2>L'IA, en option, sans inventer</h2>
+    <p>Éteinte au départ. Elle tourne sur l'ordinateur (Ollama, comme la lecture des actes) : la photo ne part pas sur Internet. On lui pose les mêmes questions guidées, une par une.</p></div>
+  <div class="inv">
+    <div class="ai">
+      <b>🤖 Question 4 · « Vois-tu un bâtiment remarquable ? »</b>
+      <div class="seen">
+        <span class="dot" style="display:inline-block;width:20px;height:20px;border-radius:50%;background:#e03131"></span><span><b>Un clocher avec un toit arrondi (bulbe)</b>, en haut à droite. <span class="lvl pr">vu nettement</span></span>
+        <span class="dot" style="display:inline-block;width:20px;height:20px;border-radius:50%;background:#1c7ed6"></span><span><b>Un grand bâtiment à trois fenêtres</b> avec une enseigne. <span class="lvl pr">vu nettement</span></span>
+        <span></span><span class="no">Je ne peux pas dire dans quelle ville c'est : aucun nom de lieu n'est lisible.</span>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap"><button class="button small">✓ Oui, c'est ça</button><button class="button secondary small">✗ Non</button><button class="button secondary small">Garder comme piste</button></div>
+      <p class="small muted" style="margin:8px 0 0">Ce que l'IA dit arrive en <b>piste à vérifier</b> (Supposé au plus). C'est toi qui décides.</p>
+    </div>
+    <div class="card"><div class="card-head"><h3>Les règles de l'IA</h3></div><div class="card-body">
+      <ul class="rules">
+        <li>Elle doit <b>montrer sur l'image</b> ce qu'elle a vu (un cadre). Sans cadre, la réponse n'est pas gardée.</li>
+        <li>Elle décrit, elle ne nomme pas : « clocher à bulbe », jamais « c'est Annecy », sauf si un nom est <b>lisible</b> sur l'image.</li>
+        <li>Elle a le droit de répondre <b>« je ne sais pas »</b>, et c'est la réponse attendue quand rien n'est sûr.</li>
+        <li>Elle lit le texte, et on compare avec ce que l'atelier a lu ; si les deux diffèrent, on le signale.</li>
+        <li>Jamais de reconnaissance de visage, jamais de nom de personne.</li>
+        <li>Une réponse de l'IA ne monte jamais seule au-dessus de « Supposé ».</li>
+      </ul></div></div>
+  </div>
+</section>
+
+<!-- ══════════ 5 ══════════ -->
+<section class="sec" id="s5">
+  <div class="sec-h"><span class="eyebrow">5</span><h2>Recherches proposées selon la photo</h2>
+    <p>À partir des indices, l'app propose des recherches, d'abord dans ce qu'elle a déjà (sans Internet), puis des sites à ouvrir. Chaque proposition dit pourquoi elle est là.</p></div>
+  <div class="sugg">
+    <div class="card"><div class="card-head"><h3>🏨 « Hôtel de la Poste »</h3><span class="ui-badge is-green">dans l'app</span></div><div class="card-body">
+      <span class="why">parce que l'indice 2 est un texte lu</span>
+      <div>Chercher ce texte dans tes cartes postales, tes documents transcrits et les annuaires anciens.</div>
+      <button class="button secondary small">🔍 Chercher (3 résultats)</button></div></div>
+    <div class="card"><div class="card-head"><h3>⛪ Clochers à bulbe</h3><span class="ui-badge is-green">dans l'app</span></div><div class="card-body">
+      <span class="why">parce que l'indice 1 décrit un clocher</span>
+      <div>Églises à clocher à bulbe (Mérimée), sur la carte, près des lieux de ta famille d'abord.</div>
+      <button class="button secondary small">🗺 Voir sur la carte (42)</button></div></div>
+    <div class="card"><div class="card-head"><h3>🎖 Uniforme</h3><span class="ui-badge is-green">dans l'app</span></div><div class="card-body">
+      <span class="why">parce que l'indice 3 montre des soldats</span>
+      <div>Guide illustré des uniformes et insignes (képi, numéro au col, galons), puis les régiments de ta famille.</div>
+      <button class="button secondary small">🎖 Ouvrir le guide</button></div></div>
+    <div class="card"><div class="card-head"><h3>📮 L'éditeur « J. Lacombe, Brive »</h3><span class="ui-badge is-grey">en ligne ↗</span></div><div class="card-body">
+      <span class="why">parce que le dos porte un nom d'éditeur</span>
+      <div>Archives départementales : fonds de cartes postales par éditeur ; Delcampe et Geneanet par mots-clés.</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap"><button class="button secondary small">Archives de la Corrèze ↗</button><button class="button secondary small">Delcampe ↗</button></div></div></div>
+    <div class="card"><div class="card-head"><h3>📅 Dater par la mode</h3><span class="ui-badge is-green">dans l'app</span></div><div class="card-body">
+      <span class="why">parce qu'il y a des gens habillés</span>
+      <div>Comparer coiffes, chapeaux et robes avec les repères d'époque.</div>
+      <button class="button secondary small">📅 Ouvrir</button></div></div>
+    <div class="card"><div class="card-head"><h3>🗺 Vieux plans</h3><span class="ui-badge is-green">dans l'app</span></div><div class="card-body">
+      <span class="why">parce que le lieu est « probable »</span>
+      <div>Plans anciens et cadastre de Brive : y a-t-il une place avec un hôtel de la Poste face à l'église ?</div>
+      <button class="button secondary small">🗺 Ouvrir les plans</button></div></div>
+  </div>
+</section>
+
+<!-- ══════════ 5 bis ══════════ -->
+<section class="sec" id="s5b">
+  <div class="sec-h"><span class="eyebrow">5 bis</span><h2>☀️ Calcul d'ombre</h2>
+    <p>Une ombre dit où était le soleil. On trace sur la photo un objet bien droit (poteau, mur, personne debout) et le bout de son ombre. Avec le lieu, l'app dit à quelles heures et à quelles saisons le soleil avait cette hauteur. Avec la date, elle dit vers où regarde la photo. Tout est calculé sur l'ordinateur, sans Internet.</p></div>
+  <div class="inv">
+    <div>
+      <div class="photo">
+        <svg viewBox="0 0 600 400" aria-label="Exemple : un poteau et son ombre tracés sur la photo">
+          <rect width="600" height="400" fill="#d8cfbc"/><path d="M0 250 H600 V400 H0Z" fill="#b5aa92"/>
+          <rect x="300" y="110" width="8" height="160" fill="#3f3a31"/>
+          <path d="M304 270 L470 300" stroke="#3f3a31" stroke-width="10" opacity=".45"/>
+          <path d="M304 110 V270" stroke="#e03131" stroke-width="4"/><circle cx="304" cy="110" r="7" fill="#e03131"/><circle cx="304" cy="270" r="7" fill="#e03131"/>
+          <path d="M304 270 L470 300" stroke="#1c7ed6" stroke-width="4" stroke-dasharray="8 5"/><circle cx="470" cy="300" r="7" fill="#1c7ed6"/>
+          <path d="M470 300 L304 110" stroke="#f59f00" stroke-width="2" stroke-dasharray="4 4"/>
+          <text x="315" y="190" font-size="15" font-weight="700" fill="#e03131" font-family="sans-serif">objet droit</text>
+          <text x="380" y="330" font-size="15" font-weight="700" fill="#1c7ed6" font-family="sans-serif">son ombre</text>
+        </svg>
+      </div>
+      <div class="tools" style="margin-top:8px"><button class="button secondary small">📏 Tracer un objet droit</button><button class="button secondary small">🌑 Tracer son ombre</button><button class="button secondary small">＋ Un 2ᵉ objet (plus sûr)</button></div>
+      <p class="small muted">Deux objets ou plus : l'app vérifie qu'ils donnent le même soleil. Une photo penchée ou prise de très haut : elle le dit et baisse la certitude.</p>
+    </div>
+    <div class="card"><div class="card-head"><h3>Ce que dit l'ombre</h3><span class="lvl s">Supposé</span></div><div class="card-body" style="display:grid;gap:10px;font-size:13.5px">
+      <div><span class="lbl">Hauteur du soleil :</span> environ <b>44°</b> <span class="muted">(± 6°, l'ombre est longue comme l'objet)</span></div>
+      <div><span class="lbl">Lieu supposé :</span> Brive (indice « Probable ») <button class="link-button">changer</button></div>
+      <div><span class="lbl">Ce qui est possible :</span>
+        <ul class="rules" style="margin-top:4px">
+          <li>d'avril à août, <b>entre 8 h 30 et 10 h</b> ou <b>entre 14 h et 15 h 30</b> (heure du soleil) ;</li>
+          <li>en mars ou septembre, <b>vers midi</b> ;</li>
+          <li><b>pas en hiver</b> : le soleil ne monte pas si haut à Brive de novembre à janvier.</li>
+        </ul></div>
+      <div><span class="lbl">Avec une date connue</span> (le tampon de la poste : 14 juillet 1911) : il était vers <b>8 h 45</b> (heure du soleil), le soleil à l'est-sud-est. L'ombre part vers la droite : la photo regarde donc à peu près vers le <b>sud</b>.</div>
+      <div><span class="lbl">Saison sur l'image ?</span> <div class="choices" style="margin-top:4px"><button class="on">Feuilles aux arbres</button><button>Arbres nus</button><button>Neige</button><button>Gens en manteau</button></div></div>
+      <div class="why">Calcul de la position du soleil (formules astronomiques usuelles), sur l'ordinateur. Une ombre ne prouve jamais un lieu ou une date à elle seule : au mieux « Probable » avec d'autres indices, et elle sait surtout <b>réfuter</b> (« pas en hiver »).</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap"><button class="button small">＋ Garder comme indice</button><button class="button secondary small">🗺 Voir le soleil sur la carte</button></div>
+    </div></div>
+  </div>
+</section>
+
+<!-- ══════════ 6 ══════════ -->
+<section class="sec" id="s6">
+  <div class="sec-h"><span class="eyebrow">6</span><h2>Comparer à des photos en ligne, seulement si on veut</h2>
+    <p>Pas d'envoi automatique : l'app découpe un morceau (le bâtiment, sans les visages), le prépare, et c'est toi qui le déposes sur le site choisi. Le site s'ouvre dans le navigateur.</p></div>
+  <div class="inv">
+    <div>
+      <div class="warn">🌐 <b>Cette partie de la photo va être envoyée au site que tu choisis.</b> Les visages sont floutés d'office. Le site garde peut-être l'image.</div>
+      <div class="cmp" style="margin-top:10px">
+        <div><div class="photo"><svg viewBox="0 0 160 120" aria-label="Morceau découpé : le clocher"><rect width="160" height="120" fill="#d8cfbc"/><rect x="60" y="60" width="40" height="60" fill="#b8ad95"/><rect x="68" y="30" width="24" height="34" fill="#a99f88"/><ellipse cx="80" cy="26" rx="14" ry="13" fill="#7d745f"/></svg></div><p class="small muted" style="margin:4px 0 0">Morceau découpé : indice 1</p></div>
+        <div><div class="photo" style="display:flex;align-items:center;justify-content:center;font-size:13px;color:#333;text-align:center;padding:10px">Une photo trouvée en ligne,<br>collée ici pour comparer</div><p class="small muted" style="margin:4px 0 0">« Ressemble : Oui / Non / Peut-être » → devient un indice</p></div>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px"><button class="button secondary small">⤓ Enregistrer le morceau</button><button class="button secondary small">Google Lens ↗</button><button class="button secondary small">Bing ↗</button><button class="button secondary small">TinEye ↗</button><button class="button secondary small">Yandex ↗</button><button class="button secondary small">Wikimedia Commons ↗</button></div>
+    </div>
+    <div>
+      <div class="lockd">🔒 <b>Bloqué</b> quand la photo montre une personne vivante, quand elle est confidentielle, en mode consultation et pour les invités du wifi. On peut toujours comparer avec les photos <b>de l'app</b>.</div>
+      <p class="small muted">Une page trouvée en ligne se garde comme indice avec son lien ↗ et la date de consultation. Rien n'est récupéré automatiquement sur les sites.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 7 ══════════ -->
+<section class="sec" id="s7">
+  <div class="sec-h"><span class="eyebrow">7</span><h2>Rattacher l'enquête à ce qu'on veut</h2>
+    <p>Une enquête photo peut être liée à plusieurs choses. Elle apparaît alors là-bas, dans « Ce qui le concerne ».</p></div>
+  <div class="card" style="max-width:900px"><div class="card-head"><h3>Rattacher à…</h3><span class="small muted">plusieurs choix possibles</span></div><div class="card-body">
+    <div class="link-grid">
+      <button class="on"><b>👤 Une personne</b>Jean MAZAUD (1888-1962)</button>
+      <button class="on"><b>📍 Un lieu</b>Brive-la-Gaillarde</button>
+      <button><b>📅 Un événement</b>Mobilisation, 1914</button>
+      <button class="on"><b>🕵️ Une enquête</b>« Le régiment de Jean »</button>
+      <button><b>📚 Une source</b>carte postale comme source</button>
+      <button><b>🧩 Un tableau</b>posée avec ses calques</button>
+      <button><b>🧺 Un panier</b>Mettre dans un panier précis…</button>
+      <button><b>📍 Mettre dans…</b>retouche, mise en page, présentation</button>
+    </div>
+    <p class="small muted" style="margin:10px 0 0">Sur la fiche de Jean : « 🔎 1 enquête photo · lieu probable : Brive ». Dans une enquête 🕵️ : la photo et sa conclusion deviennent une piste.</p>
+  </div></div>
+</section>
+
+<!-- ══════════ 8 ══════════ -->
+<section class="sec" id="s8">
+  <div class="sec-h"><span class="eyebrow">8</span><h2>À décider</h2><p>Ma recommandation en vert ; un « OK » suffit pour tout prendre.</p></div>
+  <ol class="decide">
+    <li><b>Nom de l'outil</b> : « 🔎 Enquête photo » <span class="rec">(recommandé)</span>, ou « Enquêter sur la photo », ou « Que dit cette photo ? ».</li>
+    <li><b>Le bouton sur la page d'une image</b> : visible à côté de « Atelier de transcription » <span class="rec">(recommandé)</span>, ou seulement dans le menu ⋯.</li>
+    <li><b>L'IA</b> : éteinte au départ, à allumer dans « ⚙️ Personnaliser » <span class="rec">(recommandé)</span>.</li>
+    <li><b>Comparer en ligne</b> : visages floutés d'office et un avertissement à chaque envoi <span class="rec">(recommandé)</span>.</li>
+    <li><b>Guides illustrés</b> (uniformes, décorations, clochers, supports photo) : faits avec des images libres de droits et leur source ↗ ; d'abord la France 1850-1950, le reste ensuite <span class="rec">(recommandé)</span>.</li>
+    <li><b>☀️ Calcul d'ombre</b> : dans l'étape « La date » et dans les outils de dessin (📏 objet droit + 🌑 ombre) <span class="rec">(recommandé)</span>.</li>
+    <li><b>Les calques</b> : ceux de la Retouche des photos (mêmes outils, même ↶) <span class="rec">(recommandé)</span>, plutôt qu'un dessin à part.</li>
+  </ol>
+</section>
+
+</div>
+</body>
+</html>
