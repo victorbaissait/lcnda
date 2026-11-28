@@ -177,8 +177,8 @@
     const rowHtml = (d, letter = letterOf(d.title)) => (selOn() ? `<div class="ong-selrow" data-ong-sel="${d.id}">${rowBtn(d, letter)}</div>` : rowBtn(d, letter));
     /* les façons de ranger (maquette correspondances.html, partie 2) : A = 6 cases en 3 × 2 (conseillé) ; B = 4 cases, « 📚 Ensembles »
        et dessous un petit choix Recueils / Lettres / Sortes. Le choix A ou B : ⋯ → « Façons de ranger » (retenu). */
-    const MODES = [['az', 'A → Z'], ['people', '👤 Personnes'], ['recueils', '📚 Recueils'], ['folders', '📁 Dossiers'], ['letters', '✉️ Lettres'], ['sorts', '🏷 Sortes'], ['places', '📍 Lieux'], ['years', '🕰 Années']];
-    const SETS = [['recueils', '📚 Recueils'], ['letters', '✉️ Lettres'], ['sorts', '🏷 Sortes'], ['places', '📍 Lieux'], ['years', '🕰 Années']];
+    const MODES = [['az', 'A → Z'], ['people', '👤 Personnes'], ['recueils', '📚 Recueils'], ['folders', '📁 Dossiers'], ['letters', '✉️ Lettres'], ['sorts', '🏷 Sortes'], ['places', '📍 Lieux'], ['years', '🕰 Années'], ['inquiries', '🔎 Enquêtes photo']];
+    const SETS = [['recueils', '📚 Recueils'], ['letters', '✉️ Lettres'], ['sorts', '🏷 Sortes'], ['places', '📍 Lieux'], ['years', '🕰 Années'], ['inquiries', '🔎 Enquêtes photo']];
     /* 📍 Par lieu (la commune de l'acte) et 🕰 Par année (la décennie) : des groupes repliables, comme les sortes */
     const placeOf = d => String(d.place || (d.geo || [])[0]?.name || '').split(',')[0].trim();
     const decadeOf = d => (d.year ? Math.floor(d.year / 10) * 10 : null);
@@ -705,9 +705,37 @@
         return UI().cardsHtml(keys.map(k => { const [, ic, l] = CO().sortMeta(k), ds = by.get(k), img = ds.find(d => fold(d.media_type) === 'image');
             return {thumb: img ? thumbOf(img) : `<span class="ui-card-ico">${ic}</span>`, name: `${ic} ${T(l)}`, open: `data-ong-wssort="${k}"`, openLabel: T('Voir ces documents'), attrs: `data-ong-sortcard="${k}"`, lines: [plural(ds.length, 'document', 'documents')]}; }));
     }
+    /* 🔎 à droite, en mode « 🔎 Enquêtes photo » : toutes les enquêtes photo (vignette, images, indices, lieu et date trouvés) ; ouvrir, supprimer (↶ Annuler) */
+    async function paintInquiries(box) {
+        const EP = ext.enquetePhoto;
+        if (!EP?._get) { box.innerHTML = A().emptyState({icon: '🔎', text: T('L’enquête photo n’est pas chargée.')}); return; }
+        let L = [];
+        try { L = (await EP._get('list')).inquiries || []; } catch (e) { box.innerHTML = A().emptyState({icon: '🔎', text: e.message}); return; }
+        if (!box.isConnected || modeOf() !== 'inquiries') return;
+        if (!L.length) { box.innerHTML = A().emptyState({icon: '🔎', text: T('Aucune enquête photo pour l’instant'), hint: T('Sur la page d’une image : « 🔎 Enquêter », ou clic droit sur une image.')}); return; }
+        const ro = kiosk();
+        box.innerHTML = `<div class="ong-epcards">${UI().cardsHtml(L.map(q => ({
+            thumb: q.thumb ? `<img src="media/${encodeURIComponent(q.thumb)}" alt="" loading="lazy">` : '<span class="ui-card-ico">🔎</span>',
+            name: q.title || T('Enquête photo'), open: `data-ong-epopen="${q.id}"`, openLabel: T('Ouvrir l’enquête'), attrs: `data-ong-ep="${q.id}"`,
+            lines: [[plural(q.n_images, 'image'), plural(q.n_clues, 'indice')].join(' · '), [q.place?.name ? `🗺 ${q.place.name}` : '', q.date?.text ? `📅 ${q.date.text}` : '', q.status === 'done' ? T('terminée pour l’instant') : ''].filter(Boolean).join(' · ')],
+            date: q.updated_at,
+            menu: ro ? [] : [`<button type="button" role="menuitem" data-ong-epdel="${q.id}">🗑 ${esc(T('Supprimer l’enquête'))}</button>`]
+        })))}</div>`;
+        box.onclick = async e => {
+            const o = e.target.closest('[data-ong-epopen]'); if (o) { e.preventDefault(); EP.open(Number(o.dataset.ongEpopen), {onClose: () => paintWorkspaceList()}); return; }
+            const d = e.target.closest('[data-ong-epdel]'); if (!d || ro) return;
+            e.preventDefault(); const id = Number(d.dataset.ongEpdel), q = L.find(x => x.id === id);
+            try { await EP._post('delete', {id}); } catch (err) { A().toast(err.message, 'error'); return; }
+            await EP.loadCounts?.(true); paintWorkspaceList();
+            const msg = T('Enquête photo « {name} » supprimée', {name: q?.title || ''});
+            if (A().undoDelete) A().undoDelete({type: 'photo_inquiry', id, message: msg, redo: () => EP._post('delete', {id}), after: async () => { await EP.loadCounts?.(true); paintWorkspaceList(); }});
+            else A().undoToast ? A().undoToast(msg, {undo: async () => { await A().api('restore_last_delete', {}, {method: 'POST', body: {entity_type: 'photo_inquiry', entity_id: id}}); await EP.loadCounts?.(true); paintWorkspaceList(); }}) : A().toast(msg);
+        };
+    }
     function paintWorkspaceList() {
         const box = document.querySelector('#workspace [data-ong-cards]'); if (!box || cur) return;
         const all = filtered();
+        if (modeOf() === 'inquiries' && !pick.on) { paintInquiries(box); return; }
         if ((docs || []).length && CO() && modeOf() === 'letters' && !pick.on) { const k = wsEx(); if (k == null) box.innerHTML = exCardsHtml(all); else paintExWs(box, all, k); return; }
         if ((docs || []).length && CO() && modeOf() === 'sorts' && !pick.on && !wsSort()) { box.innerHTML = sortCardsHtml(all); return; }
         if (!(docs || []).length) { box.innerHTML = A().emptyState({icon: '📄', text: 'Aucun document pour l’instant', hint: 'Les photos, actes, lettres et papiers ajoutés aux fiches (ou importés) arrivent ici, sans rien ressaisir.', action: kiosk() ? null : {label: '⤒ Importer des documents', attrs: 'data-empty-click="[data-ong-import]"'}}); return; }

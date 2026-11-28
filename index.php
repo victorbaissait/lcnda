@@ -50,7 +50,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/saisies.css?v=4">
     <link rel="stylesheet" href="assets/css/board-shapelib.css?v=1">
     <link rel="stylesheet" href="assets/css/artist.css?v=5">
-    <link rel="stylesheet" href="assets/css/onglets.css?v=20">
+    <link rel="stylesheet" href="assets/css/onglets.css?v=21">
     <link rel="stylesheet" href="assets/css/audit-chrono.css?v=2">
     <link rel="stylesheet" href="assets/css/audit-listes.css?v=3">
     <link rel="stylesheet" href="assets/css/audit-recherche.css?v=6">
@@ -81,7 +81,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/sections.css?v=5">
     <link rel="stylesheet" href="assets/css/transcribe.css?v=29">
     <link rel="stylesheet" href="assets/css/atelier-idees.css?v=4">
-    <link rel="stylesheet" href="assets/css/enquete-photo.css?v=3">
+    <link rel="stylesheet" href="assets/css/enquete-photo.css?v=4">
     <link rel="stylesheet" href="assets/css/photomaps.css?v=9">
     <link rel="stylesheet" href="assets/css/shortcuts.css?v=4">
     <link rel="stylesheet" href="assets/css/meteo.css?v=5">
@@ -1621,7 +1621,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-blocs-school.js?v=3" defer></script>
 <script src="assets/js/heritage-creations.js?v=5" defer></script>
 <script src="assets/js/app-correspondances-core.js?v=2" defer></script>
-<script src="assets/js/heritage-onglets-documents.js?v=31" defer></script>
+<script src="assets/js/heritage-onglets-documents.js?v=32" defer></script>
 <script src="assets/js/heritage-onglets-catalogue.js?v=6" defer></script>
 <script src="assets/js/heritage-transcribe-view.js?v=14" defer></script>
 <script src="assets/js/heritage-transcribe-acte-core.js?v=5" defer></script>
@@ -1819,9 +1819,10 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-comptes-famille.js?v=3" defer></script>
 <script src="assets/js/app-htr-correction.js?v=2" defer></script>
 <script src="assets/js/app-lignes-alignement.js?v=2" defer></script>
-<script src="assets/js/app-enquete-photo-core.js?v=1" defer></script>
-<script src="assets/js/heritage-enquete-photo.js?v=1" defer></script>
-<script src="assets/js/heritage-enquete-photo-aides.js?v=1" defer></script>
+<script src="assets/js/app-enquete-photo-core.js?v=2" defer></script>
+<script src="assets/js/heritage-enquete-photo.js?v=2" defer></script>
+<script src="assets/js/heritage-enquete-photo-aides.js?v=2" defer></script>
+<script src="assets/js/heritage-enquete-photo-plus.js?v=1" defer></script>
 <script>
 (function () {
     var toggle = document.getElementById('lightbox-tag-toggle');

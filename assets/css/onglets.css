@@ -246,3 +246,8 @@ button.ong-uname:hover, button.ong-uname:focus-visible { border-style: solid; bo
 .ong-pc-flip img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity .25s; }
 .ong-pc-flip img.v { opacity: 0; }
 .ong-pc:hover .ong-pc-flip img.v, .ong-pc:focus-visible .ong-pc-flip img.v { opacity: 1; }
+/* traits de même épaisseur partout dans la grille des façons de ranger : les bordures se recouvrent entièrement (2 px), jamais 4 px entre deux cases */
+.ong-modebar .segmented.ong-mode.is-grid { padding: 2px 0 0 2px; }
+.ong-modebar .segmented.ong-mode.is-grid button { margin: -2px 0 0 -2px; }
+/* 🔎 Enquêtes photo : les fiches des enquêtes à droite */
+.ong-epcards .ui-card-body small { display: block; }
