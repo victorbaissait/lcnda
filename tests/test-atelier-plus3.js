@@ -144,7 +144,7 @@ $a3 = $ins(['title' => 'Mariage de Pierre MAZAUD et Marie LACOMBE', 'kind' => 'm
 $a4 = $ins(['title' => 'Publication des bans de Pierre MAZAUD et Marie LACOMBE', 'kind' => 'autre', 'date' => '6 janv. 1788', 'place' => 'Treignac', 'body' => "Premier ban de mariage entre Pierre MAZAUD et Marie LACOMBE", 'data' => ['zones' => []]]);
 $a5 = $ins(['title' => 'Contrat de mariage MAZAUD-DURAND', 'kind' => 'notarial', 'date' => '2 mars 1788', 'place' => 'Treignac', 'body' => getenv('TX_LONG'), 'data' => ['zones' => []]]);
 $a6 = $ins(['title' => 'Naissance de Paul DURAND', 'kind' => 'naissance', 'date' => '4 mai 1990', 'place' => 'Tulle', 'body' => 'Paul DURAND né le 4 mai 1990 fils de Jea?n DURAND', 'data' => ['zones' => [], 'people' => [['name' => 'Paul DURAND', 'role' => 'sujet', 's' => 0, 'e' => 11, 'person_id' => $liv]]]]);
-$a7 = $ins(['title' => 'Mariage d’autres gens', 'kind' => 'mariage', 'date' => '20 janv. 1788', 'place' => 'Tulle', 'body' => 'Jacques LEROUX et Louise PETIT', 'data' => ['zones' => []]]);
+$a7 = $ins(['title' => 'Mariage d’autres gens', 'kind' => 'mariage', 'date' => '20 janv. 1788', 'place' => 'Tulle', 'body' => 'Jacques DURAND et Louise LACOMBE', 'data' => ['zones' => []]]);
 require_once 'lib/atelier_plus3.php';
 $clean = txp3_clean_extra(['outline' => [['s' => 'x', 'h' => "  Comparution\n ", 'at' => "furent\u{0000} présents", 'auto' => 1], ['s' => 40, 'h' => ''], ['s' => 5, 'h' => str_repeat('a', 300)]], 'twins' => [['id' => 3, 'rel' => 'bans'], ['id' => 3], ['id' => -1], ['id' => 9, 'rel' => '<x>']], 'evil' => 1]);
 echo json_encode(['m' => $m, 'pierre' => $pierre, 'liv' => $liv, 'a1' => $a1, 'a2' => $a2, 'a3' => $a3, 'a4' => $a4, 'a5' => $a5, 'a6' => $a6, 'a7' => $a7, 'clean' => $clean,

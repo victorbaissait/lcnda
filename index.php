@@ -1656,8 +1656,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-atelier-aides.js?v=3" defer></script>
 <script src="assets/js/heritage-atelier-plus2-data.js?v=1" defer></script>
 <script src="assets/js/heritage-atelier-plus2.js?v=1" defer></script><!-- 📜 Atelier, outils en plus (2) : mots d’autrefois, latin, lettres du scribe, voix, résumé, seconde lecture, relevé, objectif (lib/atelier_plus2.php) -->
-<script src="assets/js/heritage-atelier-plus3-data.js?v=1" defer></script>
-<script src="assets/js/heritage-atelier-plus3.js?v=1" defer></script><!-- 📜 Atelier, outils en plus (3) : plan, personnes et croquis, rayé / ajout / marge, mots douteux, dictée, relevé comparé, actes jumeaux (lib/atelier_plus3.php) -->
+<script src="assets/js/heritage-atelier-plus3-data.js?v=2" defer></script>
+<script src="assets/js/heritage-atelier-plus3.js?v=2" defer></script><!-- 📜 Atelier, outils en plus (3) : plan, personnes et croquis, rayé / ajout / marge, mots douteux, dictée, relevé comparé, actes jumeaux (lib/atelier_plus3.php) -->
 <script src="assets/js/heritage-slideshow.js?v=27" defer></script>
 <script src="assets/js/heritage-keynote.js?v=30" defer></script>
 <script src="assets/js/heritage-tableur.js?v=16" defer></script>

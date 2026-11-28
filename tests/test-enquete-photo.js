@@ -538,6 +538,82 @@ echo json_encode(['m' => $m]);`.replace('getenv(\'EXIF_JPG\')', `'${jpegWithExif
             await p.evaluate(() => document.querySelector('#sidebar-content [data-ong-mode="az"]')?.click()); await sleep(400);
         }
 
+        /* ═════ la suite, 2ᵉ partie : 📒 classement, 🏘 même lieu, 📝 m'apprend, 🎓 groupe, 🔄 dos, 🕳 années (heritage-enquete-photo-classement.js) ═════ */
+        const q3 = out.c3 = {};
+        { const g = (await api('get', { id: inqId })).inquiry, A = g.images.find(i => i.media_id === m['img004.png']), Bi = g.images.find(i => i.media_id === m['img011.png']);
+            q3.ids = [A.id, Bi.id];
+            php(`require 'lib/bootstrap.php'; $p = db(); $p->exec("UPDATE media SET place_id=1, date_text='1890' WHERE id=${m['img020.png']}");
+                $p->exec("INSERT INTO families(id, partner1_id, partner2_id) VALUES(61, 1, 2), (62, 4, 6)"); $p->exec("INSERT INTO family_children(family_id, child_id) VALUES(61, 4)");
+                $p->exec("INSERT INTO media_tags(media_id, person_id, x, y, w, h) VALUES(${m['img004.png']}, 4, 60, 20, 10, 15)");`);
+            await post('update', { id: inqId, settings: { ...g.settings, growth: [{ who: 'le petit', ages: { [A.id]: 8, [Bi.id]: 3 } }], albumOrder: [A.id, Bi.id] } });
+            const job = await post('clue_save', { inquiry_id: inqId, kind: 'gens', text: 'Tablier de cuir du forgeron', certainty: 'supposed' }); q3.jobClue = job.r?.clue?.id;
+        }
+        await p.evaluate(id => window.LCNDA_EXT.enquetePhoto.open(id), inqId); await p.waitForSelector(`${D} .ep-chip`); await sleep(500);
+        q3.aides = await p.evaluate(d => { const t = window.LCNDA_EXT.enquetePhoto.current; t.st.panel = 'aides'; t.renderSide(); return ['classement', 'memelieu', 'apprend', 'groupe', 'dos2', 'trous'].filter(k => document.querySelector(`${d} [data-ep-aidek="${k}"]`)); }, D);
+        // 📒 classement : B après A alors que « le petit » y paraît plus jeune → signalé ; ↓ → plus rien ; l'ordre gardé
+        await PL('classement'); await p.waitForSelector('dialog.h-modal[open] [data-c3-list]', { timeout: 5000 });
+        q3.cls = await p.evaluate(() => ({ rows: document.querySelectorAll('dialog.h-modal[open] [data-c3-id]').length, issues: [...document.querySelectorAll('dialog.h-modal[open] .ep3-issues li')].map(l => l.textContent), bad: document.querySelectorAll('dialog.h-modal[open] .ep3-oi.is-bad').length }));
+        q3.dlgs = await p.evaluate(() => [...document.querySelectorAll('dialog[open]')].map(d => d.className));
+        await p.evaluate(id => document.querySelector(`dialog.h-modal[open] [data-c3-down="${id}"]`)?.click(), q3.ids[0]); await sleep(300);
+        q3.cls2 = await p.evaluate(() => ({ ok: document.querySelector('dialog.h-modal[open] .ep3-ok')?.textContent || '', first: document.querySelector('dialog.h-modal[open] [data-c3-id]')?.dataset.c3Id }));
+        await p.evaluate(() => document.querySelector('dialog.h-modal[open] [data-c3-keep]')?.click()); await sleep(900);
+        await closeSub(); await sleep(700);
+        { const g = (await api('get', { id: inqId })).inquiry; q3.saved = g.settings.albumOrder; q3.keep = g.clues.find(c => c.data?.albumOrder) || null; }
+        // 🏘 le même lieu à travers le temps (Brive) : la photo posée à Brive (1890) d'abord, puis celles de l'enquête (1905)
+        q3.tl = await api('place_timeline', { place_id: 1 });
+        await PL('memelieu'); await p.waitForSelector('dialog.h-modal[open] .ep3-ty', { timeout: 8000 }).catch(() => null);
+        q3.tlUi = await p.evaluate(() => [...document.querySelectorAll('dialog.h-modal[open] .ep3-yr')].map(y => y.textContent));
+        await closeSub();
+        // 📝 cette photo m'apprend : Jean MAZAUD (relié) habite Brive ; forgeron ; « ＋ Ajouter à la fiche » : un événement et sa source, puis ↶ Annuler
+        await p.evaluate(() => window.LCNDA_EXT.enquetePhoto.current.reload()); await sleep(400);
+        await PL('apprend'); await p.waitForSelector('dialog.h-modal[open] .ep3-fact', { timeout: 8000 }).catch(() => null);
+        q3.facts = await p.evaluate(() => [...document.querySelectorAll('dialog.h-modal[open] .ep3-fact')].map(f => f.textContent.replace(/\s+/g, ' ').trim()));
+        const evCount = () => JSON.parse(php(`require 'lib/bootstrap.php'; $p = db(); echo json_encode(['ev' => (int) $p->query("SELECT count(*) FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=1 AND t.gedcom_tag='RESI' AND e.place_id=1")->fetchColumn(), 'src' => (int) $p->query("SELECT count(*) FROM sources WHERE title LIKE 'Enquête photo%'")->fetchColumn(), 'link' => (int) $p->query("SELECT count(*) FROM source_links sl JOIN events e ON sl.entity_type='event' AND e.id=sl.entity_id WHERE e.person_id=1")->fetchColumn()]);`));
+        q3.before = evCount();
+        await p.evaluate(() => document.querySelectorAll('.toast, [class*="toast"]').forEach(t => { if (t.querySelector('button')) t.remove(); }));
+        await p.evaluate(() => [...document.querySelectorAll('dialog.h-modal[open] .ep3-fact')].find(f => /Jean MAZAUD/.test(f.textContent) && /résidence/.test(f.textContent))?.querySelector('[data-c3-fact]')?.click()); await sleep(1500);
+        q3.added = evCount(); q3.btn = await p.evaluate(() => [...document.querySelectorAll('dialog.h-modal[open] [data-c3-fact]')].map(b => b.textContent.trim()));
+        q3.undo = await undoClick(); await sleep(800); q3.undone = evCount();
+        await closeSub();
+        // 🎓 photo de groupe : classe de 1912 à Brive (Pierre MAZAUD, 8 ans) ; conscrits de 1924 ; noce de Pierre (1930) : Lucie, Jean, Marie
+        q3.school = (await api('group_expected', { id: inqId, kind: 'school', year: 1912, place_id: 1 })).people.map(x => [x.name, x.age, x.role]);
+        q3.conscrits = (await api('group_expected', { id: inqId, kind: 'conscrits', year: 1924, place_id: 1 })).people.map(x => x.name);
+        q3.wedding = (await api('group_expected', { id: inqId, kind: 'wedding', year: 1930, person_ids: '4' })).people.map(x => [x.name, x.role]);
+        await PL('groupe'); await p.waitForSelector('dialog.h-modal[open] [data-c3-kind]', { timeout: 5000 });
+        await p.evaluate(() => { const d = document.querySelector('dialog.h-modal[open]'); d.querySelector('[data-c3-kind="school"]').click(); const y = d.querySelector('[data-c3-year]'); y.value = '1912'; y.dispatchEvent(new Event('change', { bubbles: true })); }); await p.waitForSelector('dialog.h-modal[open] [data-c3-p]', { timeout: 6000 }).catch(() => null);
+        q3.groupUi = await p.evaluate(() => [...document.querySelectorAll('dialog.h-modal[open] .ep3-group li')].map(l => l.textContent.replace(/\s+/g, ' ').trim()));
+        const pinsBefore = (await api('get', { id: inqId })).inquiry.settings.people || {};
+        await p.evaluate(() => document.querySelector('dialog.h-modal[open] [data-c3-p="0"]')?.click()); await sleep(150);
+        await p.evaluate(() => document.querySelector('dialog.h-modal[open] [data-c3-place]')?.click()); await sleep(1200);
+        { const pp = (await api('get', { id: inqId })).inquiry.settings.people || {}; q3.placed = Object.values(pp).flat().filter(x => x && x.person_id === 4 && x.certainty === 'supposed').length; q3.pinsUi = await p.evaluate(d => document.querySelectorAll(`${d} .ep2-pin`).length, D); }
+        q3.placeUndo = await undoClick(); await sleep(800);
+        q3.unplaced = Object.values((await api('get', { id: inqId })).inquiry.settings.people || {}).flat().filter(x => x && x.person_id === 4).length; q3.pinsBack = JSON.stringify(pinsBefore) === JSON.stringify((await api('get', { id: inqId })).inquiry.settings.people || {});
+        await p.evaluate(() => { window.LCNDA_EXT.enquetePhotoSuite?.togglePeople?.(window.LCNDA_EXT.enquetePhoto.current.api(), false); });
+        // 🔄 les dos : l'image B marquée « verso » ; ses dos ; aussi ceux des autres enquêtes ; « même lot » gardé comme indice
+        await post('image_save', { image_id: q3.ids[1], side: 'verso' });
+        q3.versos = (await api('versos', { id: inqId })).versos.map(v => [v.image_id, v.inquiry_id]);
+        q3.versosAll = (await api('versos', { id: inqId, all: 1 })).versos.length;
+        await p.evaluate(() => window.LCNDA_EXT.enquetePhoto.current.reload()); await sleep(400);
+        await PL('dos2'); await p.waitForSelector('dialog.h-modal[open] .ep3-back', { timeout: 6000 }).catch(() => null);
+        q3.backsUi = await p.evaluate(() => document.querySelectorAll('dialog.h-modal[open] .ep3-back').length);
+        await closeSub(); await post('image_save', { image_id: q3.ids[1], side: '' });
+        // 🕳 les années sans photo de Pierre MAZAUD (1904–1980) : une photo vers 1910 (date de l'enquête) ; les trous
+        q3.years = await api('person_years', { person_id: 4 });
+        await p.evaluate(() => window.LCNDA_EXT.enquetePhotoClassement.gaps(window.LCNDA_EXT.enquetePhoto.current.api(), 4)); await p.waitForSelector('dialog.h-modal[open] .ep3-strip', { timeout: 6000 }).catch(() => null);
+        q3.gapsUi = await p.evaluate(() => ({ cells: document.querySelectorAll('dialog.h-modal[open] .ep3-cell').length, on: document.querySelectorAll('dialog.h-modal[open] .ep3-cell.is-on').length, gaps: [...document.querySelectorAll('dialog.h-modal[open] .ep3-gaps li')].map(l => l.textContent.replace(/\s+/g, ' ').trim()) }));
+        await closeSub();
+        // ⚙️ Personnaliser : les réglages de la 2ᵉ partie ; 390 px : la fenêtre du classement ne déborde pas
+        await p.evaluate(() => window.LCNDA_EXT.enquetePhoto.current.openPrefs()); await sleep(300);
+        q3.prefs = await p.evaluate(() => ['ageTol', 'schoolFrom', 'schoolTo', 'gapMin'].filter(k => document.querySelector(`dialog.h-modal[open] [data-pf="${k}"]`)));
+        await closeSub();
+        await p.setViewportSize({ width: 390, height: 844 }); await sleep(300);
+        await PL('classement'); await p.waitForSelector('dialog.h-modal[open] [data-c3-list]', { timeout: 5000 });
+        q3.narrow = await p.evaluate(() => { const d = document.querySelector('dialog.h-modal[open]'), r = d.getBoundingClientRect(); return { left: r.left, right: r.right, vw: innerWidth, rows: [...d.querySelectorAll('.ep3-oi')].every(x => x.getBoundingClientRect().right <= innerWidth + 1) }; });
+        await closeSub(); await p.setViewportSize({ width: 1440, height: 900 });
+        if (q3.jobClue) await post('clue_delete', { id: q3.jobClue });
+        php(`require 'lib/bootstrap.php'; db()->exec("DELETE FROM media_tags WHERE person_id=4");`);
+        await p.evaluate(() => document.querySelector('dialog.ep-dlg')?.close()); await sleep(500);
+
         /* ═════ mode consultation : lecture seule ═════ */
         const kin = await p.evaluate(() => window.LCNDA_APP.api('kiosk_enter', {}, { method: 'POST', body: { password: 'secret-1234' } }).then(() => true, e => e.message));
         await p.goto(base); await p.waitForFunction(() => window.LCNDA_EXT?.enquetePhoto && document.body.classList.contains('is-kiosk'), null, { timeout: 30000 });
@@ -548,6 +624,9 @@ echo json_encode(['m' => $m]);`.replace('getenv(\'EXIF_JPG\')', `'${jpegWithExif
         { const g = (await api('get', { id: inqId })).inquiry, e = Object.entries(g.settings.people || {}).find(([, L]) => L.some(x => x.id === 'pm3'));
             out.suite.kiosk = { m3: e ? e[1].find(x => x.id === 'pm3') : null, privNames: g.private_names };
             if (e) { out.suite.kiosk.legend = await p.evaluate(([d, iid]) => { const t = window.LCNDA_EXT.enquetePhoto.current; t.st.cur = t.images.findIndex(x => x.id === Number(iid)); t.renderStage(); return new Promise(r => setTimeout(() => r(document.querySelector(`${d} [data-ep2-legend]`)?.textContent.replace(/\s+/g, ' ') || ''), 900)); }, [D, e[0]]); } }
+        // la 2ᵉ partie en consultation : la photo de Marie (vivante) n'est pas dans « le même lieu » ; ses années sans photo non plus
+        out.c3.kTl = (await api('place_timeline', { place_id: 1 })).photos.map(x => x.media_id);
+        out.c3.kYears = await p.evaluate(() => window.LCNDA_APP.api('ep', { op: 'person_years', person_id: 2 }).then(() => 'ok', e => e.message));
         await p.evaluate(() => document.querySelector('dialog.ep-dlg')?.close());
         await p.evaluate(() => window.LCNDA_APP.api('kiosk_exit', {}, { method: 'POST', body: { password: 'secret-1234' } }).catch(() => null));
         out.errs = errs;
@@ -611,6 +690,24 @@ echo json_encode(['m' => $m]);`.replace('getenv(\'EXIF_JPG\')', `'${jpegWithExif
             const g = C.ghostOn([[0.4, 0.2], [0.6, 0.2], [0.5, 0.6]], { k: 1.5, ratio: 0.5, dx: 0.1 }); assert.ok(Math.abs(g.h - 0.3) < 1e-9, String(g.h)); assert.ok(Math.abs(g.box.x - 0.45) < 1e-9); assert.equal(C.ghostOn([[0, 0], [1, 1]]), null); }],
         ['🗺 tournée : les photos par année, les années inconnues à la fin', () => assert.deepEqual(C.byYear([{ year: 1912 }, { year: null }, { year: 1905 }, { year: 1912 }]).map(g => [g.year, g.photos.length]), [[1905, 1], [1912, 2], [null, 1]])],
         ['📜 ce qui a changé : seulement les lignes « ⚖ » du journal, dans l’ordre', () => assert.deepEqual(C.conclusionHistory([{ id: 3, what: '⚖ Conclusion : le lieu', created_at: '2026-02-01' }, { id: 2, what: 'Indice 1 ajouté', created_at: '2026-01-01' }, { id: 1, what: '⚖ Certitude de l’indice 1', created_at: '2026-01-15' }]).map(j => j.id), [1, 3])],
+        // la suite, 2ᵉ partie (heritage-enquete-photo-classement.js), sans navigateur
+        ['📒 classement d’un album : B placée avant A alors que l’enfant y paraît plus jeune → contradiction ; « pas avant 1910 » avant « pas après 1905 » → contradiction ; le bon ordre : rien', () => {
+            const ages = [{ who: 'le petit', ages: { 1: 8, 2: 3 } }];
+            const bad = C.albumCheck(['1', '2'], { ages }), good = C.albumCheck(['2', '1'], { ages });
+            assert.equal(bad.issues.length, 1); assert.deepEqual([bad.issues[0].kind, bad.issues[0].a, bad.issues[0].b, bad.issues[0].ageA, bad.issues[0].ageB], ['age', '1', '2', 8, 3]); assert.deepEqual(good.issues, []); assert.ok(good.checked >= 1);
+            assert.equal(C.albumCheck(['1', '2'], { ages: [{ ages: { 1: 4, 2: 3.5 } }], tol: 1 }).issues.length, 0, 'un écart d’âge toléré');
+            const d = C.albumCheck(['a', 'b'], { windows: { a: { from: 1910 }, b: { to: 1905 } } }); assert.deepEqual(d.issues.map(x => [x.kind, x.from, x.to]), [['date', 1910, 1905]]); assert.ok(d.bad.has('a') && d.bad.has('b'));
+            const w = C.imageWindows([{ id: 1, date_from: 1904, certainty: 'probable', images: { 7: 'yes' } }, { id: 2, date_to: 1915, certainty: 'probable', images: {} }, { id: 3, date_to: 1900, certainty: 'refuted' }], [7, 8]);
+            assert.deepEqual(w, { 7: { from: 1904, to: 1915 }, 8: { from: null, to: 1915 } }); }],
+        ['🕳 années sans photo : 1900–1930, photos en 1905, 1906, 1920 → les trous de 3 ans et plus, le plus long d’abord ; 10 % des années', () => {
+            const g = C.yearGaps([1905, 1906, 1920, 1850], 1900, 1930, 3); assert.deepEqual(g.have, [1905, 1906, 1920]); assert.deepEqual(g.gaps, [[1907, 1919], [1921, 1930], [1900, 1904]]); assert.equal(g.cover, 10);
+            assert.deepEqual(C.yearGaps([1901], 1900, 1902, 3).gaps, []); }],
+        ['📝 cette photo m’apprend : lieu Probable + date exacte → résidence (« vers 1911 ») et présence datée ; un métier ; rien sans personne, rien de réfuté', () => {
+            const f = C.learnFacts({ conclusion: { place: { place_id: 1, name: 'Brive', certainty: 'probable' }, date: { text: '14 juillet 1911', from: 1911, to: 1911, certainty: 'proven' } }, people: [{ id: 3, name: 'Paul DURAND' }], jobs: [{ word: 'forgeron', certainty: 'supposed' }] });
+            assert.deepEqual(f.map(x => [x.kind, x.date_text, x.certainty]), [['residence', 'vers 1911', 'probable'], ['presence', '14 juillet 1911', 'probable'], ['occupation', 'vers 1911', 'supposed']]);
+            assert.deepEqual(C.learnFacts({ conclusion: { place: { place_id: 1, certainty: 'proven' } }, people: [] }), []);
+            assert.deepEqual(C.learnFacts({ conclusion: { place: { place_id: 1, certainty: 'refuted' }, date: { text: 'entre 1905 et 1915', from: 1905, certainty: 'probable' } }, people: [{ id: 1, name: 'x' }] }), []);
+            assert.deepEqual(C.learnFacts({ conclusion: { place: { place_id: 1, name: 'Brive', certainty: 'probable' }, date: { text: 'entre 1905 et 1915', from: 1905, certainty: 'probable' } }, people: [{ id: 1, name: 'x' }] }).map(x => [x.kind, x.date_text]), [['residence', 'entre 1905 et 1915']]); }],
     ];
     if (chromium) {
         try { await browserPart(out); } catch (e) { console.error(e); out.fatal = e.message; }
@@ -675,6 +772,21 @@ echo json_encode(['m' => $m]);`.replace('getenv(\'EXIF_JPG\')', `'${jpegWithExif
                 assert.match(out.suite.reopenNotice, /Du nouveau qui pourrait aider/); assert.ok(out.docs.reopenBadge, JSON.stringify(out.docs)); assert.equal(out.docs.otherBadge, 0); }],
             ['la suite : les 11 aides dans la grille des aides ; ⚙️ Personnaliser (grille, loupe) ; 390 px sombre : la loupe et la barre de la grille ne débordent pas', () => { assert.equal(out.suite.aides.length, 11, JSON.stringify(out.suite.aides)); assert.ok(out.suite.prefs.grid && out.suite.prefs.loupe);
                 assert.ok(out.overflowSuite.loupe <= 1, JSON.stringify(out.overflowSuite)); assert.ok(out.overflowSuite.bar && out.overflowSuite.bar.left >= -1 && out.overflowSuite.bar.right <= out.overflowSuite.bar.vw + 1, JSON.stringify(out.overflowSuite)); }],
+            ['2ᵉ partie : les 6 aides dans la grille (📒 🏘 📝 🎓 🔄 🕳) ; ⚙️ Personnaliser (écart d’âge, classe d’école, trou)', () => { assert.deepEqual(out.c3.aides, ['classement', 'memelieu', 'apprend', 'groupe', 'dos2', 'trous']); assert.deepEqual(out.c3.prefs, ['ageTol', 'schoolFrom', 'schoolTo', 'gapMin']); }],
+            ['📒 classement d’un album : A avant B alors que « le petit » paraît plus âgé sur A → signalé ; ↓ → « rien ne se contredit » ; l’ordre gardé (settings) et comme indice « Supposé »', () => { const c = out.c3; assert.ok(c.cls.rows >= 2); assert.ok(c.cls.issues.some(t => /« le petit » y paraît plus âgé \(8 ans contre 3\)/.test(t)), JSON.stringify(c.cls)); assert.equal(c.cls.bad, 2);
+                assert.match(c.cls2.ok, /Rien ne se contredit/); assert.equal(Number(c.cls2.first), c.ids[1]); assert.deepEqual(c.saved.slice(0, 2), [c.ids[1], c.ids[0]]); assert.ok(c.keep && c.keep.certainty === 'supposed' && c.keep.kind === 'date' && /^Ordre supposé de l’album/.test(c.keep.text), JSON.stringify(c.keep)); }],
+            ['🏘 le même lieu à travers le temps : Brive, la photo posée à Brive (1890) puis celles de l’enquête (1905) ; en consultation, la photo d’une vivante n’y est pas', () => { const T0 = out.c3.tl; assert.equal(T0.place.name, 'Brive-la-Gaillarde'); assert.equal(T0.photos[0].media_id, out.seed.m['img020.png']); assert.equal(T0.photos[0].year, 1890);
+                assert.ok(T0.photos.some(x => x.media_id === out.seed.m['img004.png'] && x.year === 1905 && x.inquiry), JSON.stringify(T0.photos)); assert.equal(out.c3.tlUi[0], '1890'); assert.ok(out.c3.tlUi.includes('1905'));
+                assert.ok(!out.c3.kTl.includes(out.seed.m['img020.png']) && out.c3.kTl.includes(out.seed.m['img004.png']), JSON.stringify(out.c3.kTl)); }],
+            ['📝 cette photo m’apprend : Jean MAZAUD, résidence à Brive et métier « forgeron » ; « ＋ Ajouter à la fiche » : l’événement et l’enquête comme source ; ↶ Annuler les retire', () => { const c = out.c3; assert.ok(c.facts.some(f => /Jean MAZAUD : lieu de résidence — Brive-la-Gaillarde, entre 1905 et 1915/.test(f)), JSON.stringify(c.facts)); assert.ok(c.facts.some(f => /Jean MAZAUD : profession « forgeron »/.test(f)), JSON.stringify(c.facts));
+                assert.deepEqual([c.added.ev - c.before.ev, c.added.src - c.before.src, c.added.link - c.before.link], [1, 1, 1]); assert.ok(c.btn.some(t => /✓ Ajouté/.test(t))); assert.ok(c.undo); assert.deepEqual(c.undone, c.before); }],
+            ['🎓 photo de groupe : classe de 1912 à Brive → Pierre MAZAUD (8 ans), pas Paul (Tulle) ; conscrits de 1924 → Pierre ; noce de Pierre en 1930 → Lucie, ses parents Jean et Marie ; posé sur la photo (🔢 « Supposé »), ↶ Annuler', () => { const c = out.c3;
+                assert.deepEqual(c.school, [['Pierre MAZAUD', 8, 'pupil']]); assert.deepEqual(c.conscrits, ['Pierre MAZAUD']); assert.ok(['Pierre MAZAUD', 'Lucie DURAND'].every(n => c.wedding.some(([x, r]) => x === n && r === 'married')) && c.wedding.some(([x, r]) => x === 'Jean MAZAUD' && r === 'parent') && c.wedding.some(([x, r]) => x === 'Marie LACOMBE' && r === 'parent'), JSON.stringify(c.wedding));
+                assert.ok(c.groupUi.some(t => /Pierre MAZAUD/.test(t) && /8 ans/.test(t)), JSON.stringify(c.groupUi)); assert.equal(c.placed, 1); assert.ok(c.pinsUi >= 1); assert.ok(c.placeUndo); assert.equal(c.unplaced, 0); assert.ok(c.pinsBack); }],
+            ['🔄 les dos côte à côte : l’image marquée « verso » ; aussi ceux des autres enquêtes ; montrés côte à côte', () => { const c = out.c3; assert.deepEqual(c.versos, [[c.ids[1], out.c3.versos[0]?.[1]]]); assert.ok(c.versosAll >= c.versos.length); assert.ok(c.backsUi >= 1, String(c.backsUi)); }],
+            ['🕳 les années sans photo : Pierre MAZAUD (1904–1980), une photo vers 1910 (date de l’enquête) ; le trou 1911–1980 en tête ; en consultation, une vivante n’est pas montrée', () => { const Y = out.c3.years; assert.equal(Y.person.name, 'Pierre MAZAUD'); assert.deepEqual(Y.photos.map(x => [x.media_id, x.year, x.from_inquiry]), [[out.seed.m['img004.png'], 1910, true]]);
+                const U = out.c3.gapsUi; assert.equal(U.cells, 77); assert.equal(U.on, 1); assert.match(U.gaps[0], /^1911–1980 · 70 ans sans photo/); assert.ok(U.gaps.some(g => /^1904–1909/.test(g)), JSON.stringify(U.gaps)); assert.match(out.c3.kYears, /Personne confidentielle/); }],
+            ['2ᵉ partie, 390 px : la fenêtre du classement ne déborde pas', () => { const n = out.c3.narrow; assert.ok(n.left >= -1 && n.right <= n.vw + 1 && n.rows, JSON.stringify(n)); }],
             ['aucune erreur JS', () => assert.deepEqual(out.errs, [], JSON.stringify(out.errs))],
         );
     } else console.log('  (Playwright absent : la partie navigateur n’est pas vérifiée)');
