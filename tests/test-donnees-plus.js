@@ -2,7 +2,7 @@
 /* 📊 Les données, en plus (maquette validée docs/design/donnees-plus.html, décisions du 2026-11-26).
  *   assets/js/app-donnees-plus.js, app-donnees-plus-outils.js, assets/css/donnees-plus.css, lib/donnees_plus.php
  *   (+ les crochets d'app-donnees-accueil.js, app-listes-donnees.js ; famille.php : la liste partagée).
- *  1. Réglages → 📊 Données : 21 ajouts en 5 groupes, 12 allumés au départ, 📜 toujours là, options seulement allumé, Tout éteindre, ↶ ;
+ *  1. Réglages → 📊 Données : 21 ajouts en 5 groupes, 13 allumés au départ (🗺 8 compris), 📜 toujours là, options seulement allumé, Tout éteindre, ↶ ;
  *  2. ⚙ Organiser le récap : 9 blocs, montrer, Alt + flèches, Compacte, ↺, ↶ ; tout éteint = le récap validé (rien de plus) ;
  *  3. une liste : ⭐ favori (→ récap), 🕘 récents, 📶, 👤 Pour… (critère du moteur), 🔎 marques + légende, 📝 note (serveur, ↶),
  *     ⚠️ douteuse, ➕ ma ligne, 📖 Citer (vraie source, licence, Q…), 📜 Crédits ;
@@ -57,20 +57,23 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
         await sleep(400);
 
         /* ═════════ 1. Réglages → 📊 Données ═════════ */
-        await t('Réglages → 📊 Données : 21 ajouts en 5 groupes, 12 allumés au départ, 📜 toujours là ; options seulement allumé ; Tout éteindre ; ↶', async () => {
+        await t('Réglages → 📊 Données : 21 ajouts en 5 groupes, 13 allumés au départ (🗺 8 compris), 📜 toujours là ; options seulement allumé ; Tout éteindre ; ↶', async () => {
             await settings();
             assert.strictEqual(await p.$$eval('[data-dp-f]', a => a.length), 21);
             assert.strictEqual(await p.$$eval('.dp-grp', a => a.length), 5);
-            assert.strictEqual(await p.textContent('[data-dp-on]'), '12');
+            assert.strictEqual(await p.textContent('[data-dp-on]'), '13');
             const onIds = await p.$$eval('.dp-feat:not(.is-off)', a => a.map(x => Number(x.dataset.dpF)));
-            assert.deepStrictEqual(onIds, [1, 2, 3, 4, 5, 6, 9, 13, 14, 15, 19, 20]);
+            assert.deepStrictEqual(onIds, [1, 2, 3, 4, 5, 6, 8, 9, 13, 14, 15, 19, 20]);
             assert.strictEqual(await p.$('[data-dp-ft="15"]'), null, '📜 sans interrupteur'); assert.match(await p.textContent('[data-dp-f="15"]'), /toujours là/);
             assert.strictEqual(await p.$('[data-dp-f="7"] .dp-opts'), null, 'éteint : pas d’options'); assert.ok(await p.$('[data-dp-f="5"] [data-dp-opt="pMin"]'));
-            await p.click('[data-dp-f="8"] .ui-toggle'); await p.waitForSelector('[data-dp-f="8"]:not(.is-off) [data-dp-opt="radius"]'); assert.strictEqual(await p.textContent('[data-dp-on]'), '13');
-            await clickUndo(); await p.waitForSelector('[data-dp-f="8"].is-off'); assert.strictEqual(await p.textContent('[data-dp-on]'), '12');
+            await p.click('[data-dp-f="7"] .ui-toggle'); await p.waitForSelector('[data-dp-f="7"]:not(.is-off)'); assert.strictEqual(await p.textContent('[data-dp-on]'), '14');
+            await clickUndo(); await p.waitForSelector('[data-dp-f="7"].is-off'); assert.strictEqual(await p.textContent('[data-dp-on]'), '13');
+            assert.ok(await p.$('[data-dp-f="8"]:not(.is-off) [data-dp-opt="radius"]'), '🗺 allumé : son option « rayon »');
+            await p.click('[data-dp-f="8"] .ui-toggle'); await p.waitForSelector('[data-dp-f="8"].is-off'); assert.strictEqual(await p.textContent('[data-dp-on]'), '12');
+            await clickUndo(); await p.waitForSelector('[data-dp-f="8"]:not(.is-off) [data-dp-opt="radius"]'); assert.strictEqual(await p.textContent('[data-dp-on]'), '13');
             await p.click('[data-dp-all="3"][data-v="0"]'); await sleep(300);
             assert.ok(await p.$eval('[data-dp-f="14"]', x => x.classList.contains('is-off'))); assert.ok(!(await p.$eval('[data-dp-f="15"]', x => x.classList.contains('is-off'))), '📜 reste');
-            await p.click('[data-dp-sundo]'); await sleep(300); assert.strictEqual(await p.textContent('[data-dp-on]'), '12');
+            await p.click('[data-dp-sundo]'); await sleep(300); assert.strictEqual(await p.textContent('[data-dp-on]'), '13');
             await p.fill('[data-dp-opt="pMin"]', '1'); await p.press('[data-dp-opt="pMin"]', 'Tab'); await sleep(300);
             assert.strictEqual(await p.evaluate(() => window.LCNDA_EXT.donneesPlus.opt('pMin')), 1);
         });

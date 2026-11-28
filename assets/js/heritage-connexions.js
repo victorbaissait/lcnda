@@ -968,7 +968,7 @@
         return null;
     }
 
-    /* ═════════════ ☑ la barre de sélection : « 🧺 Au panier » et « 📍 Mettre dans… » ═════════════ */
+    /* ═════════════ ☑ la barre de sélection : « 🧺 Au panier » et « 📍 Mettre dans… » (o.itemsOf(ids) : l'écran donne ses éléments, de sortes mêlées) ═════════════ */
     function selItems(kind, ids, sel) {
         const rows = sel?.rows?.() || [];
         return ids.map(id => { const row = rows.find(r => String(r.dataset.selId || r.dataset.ongSel || '') === String(id));
@@ -981,8 +981,8 @@
         SB.__cx = true;
         SB.extraActions = SB.extraActions || [];
         SB.extraActions.push(o => (enabled() ? [
-            {id: 'cx_take', icon: '🧺', label: T('Au panier'), help: T('Mettre les lignes cochées de côté (elles te suivent d’écran en écran)'), edit: true, run: (ids, sel) => take(selItems(o.kind || 'row', ids, sel), {ask: 'multi'})},
-            {id: 'cx_put', icon: '📍', label: T('Mettre dans…'), help: T('Ranger les lignes cochées dans une enquête, une note, l’Atelier, une liste…'), edit: true, run: (ids, sel) => putInto(selItems(o.kind || 'row', ids, sel), {anchor: sel.el})},
+            {id: 'cx_take', icon: '🧺', label: T('Au panier'), help: T('Mettre les lignes cochées de côté (elles te suivent d’écran en écran)'), edit: true, run: (ids, sel) => take(o.itemsOf ? o.itemsOf(ids) : selItems(o.kind || 'row', ids, sel), {ask: 'multi'})},
+            {id: 'cx_put', icon: '📍', label: T('Mettre dans…'), help: T('Ranger les lignes cochées dans une enquête, une note, l’Atelier, une liste…'), edit: true, run: (ids, sel) => putInto(o.itemsOf ? o.itemsOf(ids) : selItems(o.kind || 'row', ids, sel), {anchor: sel.el})},
         ] : []));
         return true;
     }

@@ -360,6 +360,7 @@
         'genealogie-connexions', // 🧺 Panier et connexions (heritage-connexions.js)
         'genealogie-tx-glossaire', // 📖 Mon glossaire de l’Atelier de transcription (heritage-atelier-aides.js)
         'genealogie-enquete-photo', // 🔎 Enquête photo : l’IA (éteinte au départ), marge de l’ombre, vue, questions guidées (heritage-enquete-photo.js)
+        'genealogie-autour-lieu', // 🗺 Tout autour d’un lieu : rayon, quoi, vue, réglages (app-autour-lieu.js)
         'genealogie-lot-n', // 🏛 Archives et mémoire : sujets affichés (app-lot-n-archives.js)
         'genealogie-lot-n2', // 📊 Chiffres d’époque et mots des actes : sujets affichés (app-lot-n2-chiffres.js)
         'genealogie-ouc-ukus','genealogie-sources-ouvertes-27-sites', // 🇬🇧🇺🇸 Où chercher ? : la partie « Archives britanniques et américaines » ouverte ou fermée ; 🔗 adresses du lot 27 (heritage-liens-archives.js)

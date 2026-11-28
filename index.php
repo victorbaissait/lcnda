@@ -137,7 +137,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/donnees-recap.css?v=1"><!-- 📊 Récap des données -->
     <link rel="stylesheet" href="assets/css/donnees-onglet.css?v=1"><!-- 📊 l’onglet Données : sa colonne de gauche -->
     <link rel="stylesheet" href="assets/css/diagrammes-onglet.css?v=1"><!-- 📈 l’onglet Diagrammes : la colonne, les vignettes, l’éditeur dans la page -->
-    <link rel="stylesheet" href="assets/css/donnees-plus.css?v=3"><!-- 📊 Données, en plus -->
+    <link rel="stylesheet" href="assets/css/donnees-plus.css?v=4"><!-- 📊 Données, en plus -->
     <link rel="stylesheet" href="assets/css/guerres-temps.css?v=2"><!-- ▶ Dans le temps -->
     <link rel="stylesheet" href="assets/css/listes-personnes.css?v=1">
     <link rel="stylesheet" href="assets/css/metiers-rivieres.css?v=1">
@@ -1268,7 +1268,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-recherche-fr.js?v=1" defer></script>
 <script>window.LCNDA_MEDIA_LIMITS = <?= json_encode($ready ? media_limits_for_page() : null) ?>;</script>
 <script src="assets/js/app-fiche-lazy.js?v=11" defer></script><!-- ⏱ la fiche se charge à mesure qu’on la lit -->
-<script src="assets/js/app.js?v=639" defer></script>
+<script src="assets/js/app.js?v=640" defer></script>
 <script src="assets/js/app-media-limits.js?v=2" defer></script>
 <script src="assets/js/app-verrou.js?v=7" defer></script>
 <script src="assets/js/app-reseau-local.js?v=5" defer></script>
@@ -1379,13 +1379,14 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-listes-maj.js?v=8" defer></script>
 <script src="assets/js/app-donnees-accueil.js?v=11" defer></script><!-- 📊 Récap des données et la question en français : Listes → 🧰 Données et l’onglet 📊 Données (un seul écran) -->
 <script src="assets/js/app-donnees-onglet.js?v=2" defer></script><!-- 📊 l’onglet Données : on y reste (thèmes, listes réunies, listes), sa colonne de gauche, ranger / masquer les thèmes -->
-<script src="assets/js/app-donnees-plus.js?v=14" defer></script><!-- 📊 Données, en plus : ⚙ Organiser le récap, Réglages → 📊 Données, ⭐ 🕘 🆕 💾 📊 👤 🕳 📝 ➕ ⚠️ 🔎 📶 -->
-<script src="assets/js/app-donnees-plus-outils.js?v=6" defer></script><!-- ⚖️ 🗺 🕳 📖 📜 📄 🎞 🔗 💽 🕰 -->
+<script src="assets/js/app-donnees-plus.js?v=15" defer></script><!-- 📊 Données, en plus : ⚙ Organiser le récap, Réglages → 📊 Données, ⭐ 🕘 🆕 💾 📊 👤 🕳 📝 ➕ ⚠️ 🔎 📶 -->
+<script src="assets/js/app-donnees-plus-outils.js?v=7" defer></script><!-- ⚖️ 🗺 🕳 📖 📜 📄 🎞 🔗 💽 🕰 -->
+<script src="assets/js/app-autour-lieu.js?v=1" defer></script><!-- 🗺 Tout autour d’un lieu : données, ma famille ou les deux ; carte | tableau (📊 Données et 🔍 Recherche) -->
 <script src="assets/js/app-listes-personnes.js?v=3" defer></script>
 <script src="assets/js/app-listes-perso-core.js?v=1" defer></script>
 <script src="assets/js/app-listes-perso.js?v=3" defer></script>
 <script src="assets/js/app-maintenance.js?v=72" defer></script>
-<script src="assets/js/app-recherche.js?v=42" defer></script>
+<script src="assets/js/app-recherche.js?v=43" defer></script>
 <script src="assets/js/app-recherche-outils.js?v=7" defer></script>
 <script src="assets/js/app-recherche-kit.js?v=4" defer></script><!-- 🔎 🗺 Carte · 🧺 📎 sur les résultats de recherche -->
 <script src="assets/js/app-graphiques.js?v=31" defer></script>
@@ -1756,7 +1757,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-pistes-auto.js?v=5" defer></script>
 <script src="assets/js/heritage-branches-isolees.js?v=1" defer></script>
 <script src="assets/js/heritage-parents-celebres.js?v=2" defer></script>
-<script src="assets/js/heritage-connexions.js?v=25" defer></script>
+<script src="assets/js/heritage-connexions.js?v=26" defer></script>
 <script src="assets/js/app-paniers-core.js?v=4" defer></script>
 <script src="assets/js/app-paniers.js?v=10" defer></script><!-- 🧺 l’onglet Paniers (caché au départ ; lib/paniers.php) -->
 <script src="assets/js/app-inserer.js?v=8" defer></script><!-- 📎 Insérer une info à l’endroit du curseur, dans tout texte libre (« / », 📎, ⌥⌘K) -->

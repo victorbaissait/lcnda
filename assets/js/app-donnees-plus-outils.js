@@ -2,8 +2,8 @@
  *
  *  ⚖️ Comparer (7) deux personnes (leurs lieux pendant leurs vies) ou deux lieux (toutes les années), thème par thème ; en bleu ce qu'ils
  *     ont en commun ; chaque case ouvre la liste filtrée.
- *  🗺 Tout autour d'un lieu (8) : une seule carte (la petite carte de l'app : même fond, même repli sans Internet), une couche par thème
- *     (pastilles qui l'allument ou l'éteignent, légende, nombres).
+ *  🗺 Tout autour d'un lieu (8) : app-autour-lieu.js (aussi dans 🔍 Recherche) — les données, ma famille ou les deux ; « Ce lieu seulement »
+ *     ou un rayon ; période ; Carte (une couche par thème ou par sorte, légende, nombres) | Tableau (tri, ⤓ Exporter, 🧺).
  *  🕳 Ce qui manque (9) : les lieux de l'arbre sans coordonnées, rangés par ce qu'ils débloquent ; « 📍 Placer » (un lieu connu, ou
  *     « lat, lon ») avec ce qui apparaîtrait, ↶ Annuler (lib/donnees_plus.php : dplus_missing, dplus_place).
  *  📖 Citer (14) : Simple · ISO 690 · Chicago — la vraie source de la liste, sa licence, la date du pack installé (date de consultation),
@@ -50,7 +50,6 @@
     const kiosk = () => P().kiosk?.() || document.body.classList.contains('is-kiosk');
     const ro = () => P().ro?.() || kiosk();
     const themeOf = id => P().themeById?.(id) || null;
-    const COLORS = ['#0066cc', '#c62828', '#0f9bb4', '#6929c4', '#d4a800', '#1a7f37', '#d9480f', '#555555', '#b0007a', '#00806b', '#8a5a00', '#3355aa'];
     async function copyText(t) { try { await navigator.clipboard.writeText(t); return true; } catch (_) {} try { const a = document.createElement('textarea'); a.value = t; a.style.cssText = 'position:fixed;left:-9999px'; document.body.appendChild(a); a.select(); const ok = document.execCommand('copy'); a.remove(); return ok; } catch (_) { return false; } }
     /** chercher un lieu connu (base et référentiels) : [{name, lat, lon}] */
     async function findPlaces(q, n = 6) { try { const r = await api('picker_search', {kind: 'place', q, limit: n}); return (r.groups || []).flatMap(g => g.items || []).filter(x => x.lat != null && x.lon != null).map(x => ({name: String(x.title || x.name || q).replace(/\s*\(.*$/, ''), full: String(x.title || x.name || q), lat: Number(x.lat), lon: Number(x.lon), id: x.id})).slice(0, n); } catch (_) { return []; } }
@@ -104,31 +103,12 @@
         E().open?.(c.d.id, preset);
     }
 
-    /* ═════════════ 🗺 tout autour d'un lieu (8) ═════════════ */
-    function around(p0) {
-        let place = p0 && Number.isFinite(Number(p0.lat)) ? p0 : null, km = Number(P().opt?.('radius')) || 30, rows = [], off = new Set();
-        dialog({eyebrow: T('Une seule carte de tout'), title: `🗺 ${T('Tout autour d’un lieu')}`, wide: true, submitLabel: 'Fermer',
-            body: `<div class="dp-row dp-around-top"><div class="dp-pbox" data-dp-ap></div><label class="dp-o dp-num"><span class="lbl">${esc(T('Rayon'))}</span><input type="number" min="1" max="500" step="1" data-dp-akm value="${km}" aria-label="${esc(T('Rayon en km'))}"><span>km</span></label></div>
-                <div class="dp-lyr" data-dp-lyr role="group" aria-label="${esc(T('Couches'))}"></div><div class="dp-stage" data-dp-map></div><div class="dp-mlegend" data-dp-leg></div>`,
-            onOpen: dl => {
-                picker(dl.querySelector('[data-dp-ap]'), 'place', x => { place = x; load(dl); }, place?.name || '');
-                dl.querySelector('[data-dp-akm]').addEventListener('change', e => { const n = Math.round(Number(e.target.value)); if (!(n >= 1 && n <= 500)) { e.target.value = km; return; } km = n; if (place) load(dl); });
-                dl.querySelector('[data-dp-lyr]').addEventListener('click', e => { const b = e.target.closest('[data-ly]'); if (!b) return; const k = b.dataset.ly; if (off.has(k)) off.delete(k); else off.add(k); paint(dl); dl.querySelector(`[data-ly="${CSS.escape(k)}"]`)?.focus(); });
-                if (place) load(dl); else dl.querySelector('[data-dp-map]').innerHTML = `<p class="muted">${esc(T('Choisis un lieu : toutes les listes installées autour de lui, sur une carte.'))}</p>`;
-            }, onSubmit: () => true});
-        async function load(dl) {
-            dl.querySelector('[data-dp-map]').innerHTML = UI().spinner ? UI().spinner(T('On cherche…')) : '…';
-            rows = await P().collect({places: [place], km: () => km}); paint(dl);
-        }
-        function paint(dl) {
-            const ths = [...new Set(rows.map(r => r.theme))], col = th => COLORS[ths.indexOf(th) % COLORS.length], n = th => rows.filter(r => r.theme === th).length;
-            dl.querySelector('[data-dp-lyr]').innerHTML = ths.map(th => { const t = themeOf(th), o = !off.has(th); return `<button type="button" class="ui-listbar-chip dp-chip${o ? '' : ' off'}" data-ly="${esc(th)}" aria-pressed="${o}"><i style="background:${col(th)}"></i>${esc(t?.icon || '')} ${esc(T(t?.label || th))} · ${nf(n(th))}</button>`; }).join('');
-            const shown = rows.filter(r => !off.has(r.theme)).slice(0, 1500);
-            const pts = shown.map(r => ({lat: r.g[0], lon: r.g[1], label: `${r.title} (${r.y})`, color: col(r.theme)}));
-            pts.push({lat: place.lat, lon: place.lon, label: place.name, color: '#2b8a3e', n: '◆'});
-            dl.querySelector('[data-dp-map]').innerHTML = rows.length ? (ext.miniMap ? ext.miniMap(pts, [], {height: 420, circles: [{lat: place.lat, lon: place.lon, km}]}) : '') : `<p class="muted">${esc(T('Rien dans les listes installées à moins de {n} km.', {n: km}))}</p>`;
-            dl.querySelector('[data-dp-leg]').innerHTML = rows.length ? `<b>${esc(T('Autour de {p} · {n} km', {p: place.name, n: km}))}</b>${ths.filter(th => !off.has(th)).map(th => `<span><i style="background:${col(th)}"></i>${esc(T(themeOf(th)?.label || th))} · ${nf(n(th))}</span>`).join('')}<span><i class="dp-fam-ic"></i>${esc(T('le lieu choisi'))}</span>${shown.length < rows.filter(r => !off.has(r.theme)).length ? `<span>${esc(T('les {n} premiers points', {n: nf(shown.length)}))}</span>` : ''}` : '';
-        }
+    /* ═════════════ 🗺 tout autour d'un lieu (8) ═════════════
+     * L'outil complet (Quoi : données / ma famille / les deux, « Ce lieu seulement », période, Carte | Tableau, ⤓ Exporter, 🧺) est dans
+     * app-autour-lieu.js, partagé avec 🔍 Recherche ; ici, ouvert depuis les Données : « Les données » au départ. */
+    function around(p0, o = {}) {
+        if (ext.autourLieu?.open) return ext.autourLieu.open(p0 && Number.isFinite(Number(p0.lat)) ? p0 : null, {from: o.from || 'donnees'});
+        toast(T('Cet outil n’est pas chargé.'), 'error');
     }
 
     /* ═════════════ 🕳 ce qui manque : placer un lieu (9) ═════════════ */

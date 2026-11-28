@@ -85,7 +85,7 @@
         {n: 19, g: 4, ic: '💽', name: 'Place prise', why: 'La place de chaque pack, et ceux jamais ouverts qu’on peut retirer.', opts: [num('warnGo', 'Prévenir sous', 'Go libres', 0, 500)]},
         {n: 20, g: 4, ic: '📶', name: 'Badge « sans Internet »', why: 'Sur chaque liste : marche sans Internet, sauf les photos, ou pas.'},
         {n: 21, g: 4, ic: '🕰', name: 'Versions des packs', why: 'Revenir à la version gardée d’un pack, voir ce qui a changé.'}];
-    const DEF_ON = new Set([1, 2, 3, 4, 5, 6, 9, 13, 14, 15, 19, 20]);
+    const DEF_ON = new Set([1, 2, 3, 4, 5, 6, 8, 9, 13, 14, 15, 19, 20]); // 🗺 8 allumé au départ (2026-11-28 : on ne le trouvait pas) ; un choix « éteint » déjà fait reste
     const ODEF = {recentN: '5', famOnly: true, reask: 'maj', pPerson: true, pPlace: true, pMin: 5, childTo: 12, youngTo: 25, radius: 30, births: true, propose: true, doubtMode: 'barree',
         mLieu: true, mDate: true, mOcr: true, mDiff: true, mMine: true, citeStyle: 's', bookFormat: 'A4', speed: '3500', shareAud: 'membres', shareNotes: false, warnGo: 2};
     const cfg = () => { const v = readJ(K_FEAT, {}); return {on: v && typeof v.on === 'object' ? v.on : {}, opt: v && typeof v.opt === 'object' ? v.opt : {}}; };
@@ -430,6 +430,14 @@
         if (head && !head.querySelector('[data-dp-org]')) {
             head.insertAdjacentHTML('beforeend', `<button type="button" class="button small secondary" data-dp-org>⚙️ ${esc(T('Organiser le récap'))}</button>`);
             head.addEventListener('click', e => { if (e.target.closest('[data-dp-org]')) openOrganiser(); });
+        }
+        // 🗺 Tout autour d'un lieu (8) : un vrai bouton, à côté de la question (l'en-tête a déjà ses deux boutons) ; le lien du bas reste
+        const ask = page.querySelector('[data-dr-form]');
+        page.querySelector('[data-dp-around-cta]')?.closest('.dp-around-cta')?.remove();
+        if (ask && on(8)) {
+            const w = document.createElement('div'); w.className = 'dp-around-cta';
+            w.innerHTML = `<button type="button" class="button small secondary" data-dp-around-cta title="${esc(T('Toutes les listes installées et ta famille, autour d’un lieu : carte ou tableau'))}">🗺 ${esc(T('Tout autour d’un lieu'))}</button>`;
+            ask.after(w); w.addEventListener('click', e => { if (e.target.closest('[data-dp-around-cta]')) ext.donneesPlusOutils?.around?.(null); });
         }
         const fam = body.querySelector('.dr-fam'), todo = body.querySelector('.dr-todo'), rc = body.querySelector('.dr-rc');
         const th = [body.querySelector('.dr-trs-h'), body.querySelector('.dr-trs'), body.querySelector('.dr-trs-more'), body.querySelector('.dr-foot')].filter(Boolean);

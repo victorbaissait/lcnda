@@ -944,6 +944,7 @@ try {
         'place_name_facets' => place_name_facets_data($pdo),
         'date_search' => date_search_data($pdo),
         'proximity_search' => proximity_search_data($pdo),
+        'autour_lieu' => (static function () use ($pdo) { require_once __DIR__ . '/lib/autour_lieu.php'; json_response(al_data($pdo, $_GET)); })(), // 🗺 Tout autour d'un lieu : « Ma famille » (lecture seule ; consultation : ni vivants ni confidentiels)
         'investigations' => investigations_data($pdo),
         'investigation' => investigation_detail($pdo, safe_int($_GET['id'] ?? 0)),
         'hypotheses' => hypotheses_data($pdo),
@@ -1133,6 +1134,7 @@ function site_defaults_allowed_keys(): array
         'genealogie-connexions', // 🧺 Panier et connexions (heritage-connexions.js)
         'genealogie-tx-glossaire', // 📖 Mon glossaire de l’Atelier (heritage-atelier-aides.js)
         'genealogie-enquete-photo', // 🔎 Enquête photo (heritage-enquete-photo.js)
+        'genealogie-autour-lieu', // 🗺 Tout autour d'un lieu : rayon, quoi, vue, réglages (app-autour-lieu.js)
         'genealogie-elections', // 🗳 Élections d’autrefois
         'genealogie-gov', // 🏰 Lieux anciens GOV
         'genealogie-menu-names',
