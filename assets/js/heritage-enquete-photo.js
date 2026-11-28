@@ -39,7 +39,7 @@
     const certBadge = c => (UI().badge ? UI().badge(T(CERT[c]?.[0] || 'Supposé'), CERT[c]?.[1] || 'yellow') : `<b>${esc(T(CERT[c]?.[0] || 'Supposé'))}</b>`);
     const KINDS = [['lieu', '🗺', 'Lieu'], ['date', '📅', 'Date'], ['gens', '👔', 'Gens'], ['objet', '🚲', 'Objet'], ['texte', '🔤', 'Texte'], ['support', '🖼', 'Support'], ['dos', '✉️', 'Dos'], ['ciel', '🌦', 'Ciel'], ['autre', '•', 'Autre']];
     const kindOf = k => KINDS.find(x => x[0] === k) || KINDS[KINDS.length - 1];
-    const SOURCES = {moi: 'Moi', ia: '🤖 IA (à vérifier)', ombre: '☀️ Calcul d’ombre', exif: '🏷 Métadonnées', en_ligne: '🌐 Trouvé en ligne', donnees: '🧰 Données de l’app', repere: '📒 Repère', famille: '👪 La famille', compare: '🔍 Comparaison'};
+    const SOURCES = {moi: 'Moi', ia: '🤖 IA (à vérifier)', ombre: '☀️ Calcul d’ombre', exif: '🏷 Métadonnées', en_ligne: '🌐 Trouvé en ligne', donnees: '🧰 Données de l’app', repere: '📒 Repère', famille: '👪 La famille', compare: '🔍 Comparaison', visage: '👤 Visages (sur l’ordinateur)', atelier: '📜 Atelier de transcription', police: '🔤 Essai de police'};
     const LETTER = i => String.fromCharCode(65 + (i % 26)) + (i >= 26 ? String(Math.floor(i / 26)) : '');
     const certSeg = (name, value, list = ['proven', 'probable', 'supposed']) => UI().segmented ? UI().segmented({label: T('Certitude'), cls: 'ep-cert', items: list.map(c => ({on: value === c, attrs: `data-ep-cert="${c}" data-name="${name}"`, html: esc(T(CERT[c][0]))}))})
         : `<select name="${name}">${list.map(c => `<option value="${c}"${value === c ? ' selected' : ''}>${esc(T(CERT[c][0]))}</option>`).join('')}</select>`;
@@ -93,7 +93,7 @@
         document.body.appendChild(dlg); ext.fullInit?.(dlg, 'enquete-photo', true); dlg.showModal();
         tool = new Tool(dlg, data, opts);
         dlg.addEventListener('cancel', e => { e.preventDefault(); if (tool?.drawing) { tool.cancelDraw(); return; } dlg.close(); });
-        dlg.addEventListener('close', () => { tool?.flush(); tool = null; dlg.remove(); loadCounts(true).then(decorateAll); opts.onClose?.(); });
+        dlg.addEventListener('close', () => { if (tool) { try { ext.enquetePhotoPlus?.onClose?.(tool.api()); } catch (_) {} try { tool.enh?.stop(); } catch (_) {} } tool?.flush(); tool = null; dlg.remove(); loadCounts(true).then(decorateAll); opts.onClose?.(); });
         return tool;
     }
 
@@ -102,7 +102,7 @@
             this.dlg = dlg; this.opts = opts; this.inq = data.inquiry; this.privacy = data.privacy || {}; this.ro = kiosk() || !!data.kiosk;
             const p = prefs();
             this.st = {cur: 0, view: this.inq.images.length > 1 ? p.view : 'one', tool: 'hand', zoom: {k: 1, x: 0, y: 0}, panel: opts.panel || 'questions', sel: null, filter: '', openQ: opts.question || ''};
-            this.hist = []; this.fut = []; this.dirty = new Set(); this.saveT = 0;
+            this.hist = []; this.fut = []; this.dirty = new Set(); this.saveT = 0; this.t0 = Date.now();
             this.render();
             if (this.ro) this.status('ro');
         }
@@ -121,7 +121,7 @@
         /* ─── la charpente ─── */
         render() {
             const U = UI(), n = this.images.length;
-            const extra = `<span class="ep-count">${esc(plural(n, 'image'))} · ${esc(plural(this.clues.length, 'indice'))}</span>`;
+            const extra = `<span class="ep-count">${esc(plural(n, 'image'))} · ${esc(plural(this.clues.length, 'indice'))}</span>${ext.enquetePhotoPlus?.badge ? ext.enquetePhotoPlus.badge(this.inq) : ''}`;
             const top = U.editorTopbar ? U.editorTopbar({icon: '🔎', name: this.inq.title, nameAttrs: `data-ep-name ${this.ro ? 'readonly' : ''} placeholder="${esc(T('Nom de l’enquête'))}"`, menus: [{html: '<nav data-ep-menus></nav>'}], undo: !this.ro, status: this.ro ? '' : 'saved', extra,
                 buttons: {customize: {attrs: 'data-ep-cmd="prefs"', html: `⚙️ ${esc(T('Personnaliser'))}`}, export: {attrs: 'data-ep-cmd="export"', label: `⤓ ${T('Exporter')} ▾`}, full: {attrs: 'data-full-toggle="enquete-photo"'}, close: {attrs: 'data-ep-cmd="close"'}}})
                 : `<header class="ui-topbar"><span>🔎</span><input class="ui-topbar-name" data-ep-name value="${esc(this.inq.title)}"><span class="ui-topbar-spacer"></span><span data-ui-status></span><button type="button" class="icon-button" data-ep-cmd="close" aria-label="${esc(T('Fermer'))}">×</button></header>`;
@@ -152,6 +152,7 @@
                 else if (k === 'undo') this.undo(); else if (k === 'redo') this.redo();
                 else if (k === 'prefs') this.openPrefs();
                 else if (k === 'export') this.exportMenu(c);
+                else if (k === 'level') ext.enquetePhotoPlus?.open('niveau', this.api());
             });
             d.addEventListener('keydown', e => {
                 if (e.target.closest('input, textarea, select, [contenteditable]')) return;
@@ -192,12 +193,13 @@
         renderStrip() {
             const box = this.dlg.querySelector('[data-ep-strip]'); if (!box) return;
             const many = this.images.length > 1, pair = this.pairOf(this.img);
-            const chips = this.images.map((im, i) => `<button type="button" class="ep-chip${i === this.st.cur ? ' is-active' : ''}" data-ep-img="${i}" title="${esc(im.media?.title || '')}"><b>${LETTER(i)}</b>${im.media?.media_type === 'image' && im.media.filename ? `<img src="${esc(mediaSrc({filename: im.media.thumbnail || im.media.filename}))}" alt="" loading="lazy">` : '<span aria-hidden="true">📄</span>'}<span class="ep-chip-t">${esc(im.label || im.media?.title || '')}${im.side ? ` · ${esc(T(im.side === 'recto' ? 'recto' : 'verso'))}` : ''}</span></button>`).join('');
+            const chips = this.images.map((im, i) => `<button type="button" class="ep-chip${i === this.st.cur ? ' is-active' : ''}" data-ep-img="${i}" title="${esc(im.media?.title || '')}"><b>${LETTER(i)}</b>${im.media?.media_type === 'image' && im.media.filename ? `<img src="${esc(mediaSrc({filename: im.media.thumbnail || im.media.filename}))}" alt="" loading="lazy">` : '<span aria-hidden="true">📄</span>'}<span class="ep-chip-t">${esc(im.label || im.media?.title || '')}${im.side ? ` · ${esc(T(im.side === 'recto' ? 'recto' : 'verso'))}` : ''}</span></button>${this.ro ? '' : `<button type="button" class="ep-chip-x" data-ep-imgx="${im.id}" title="${esc(T('Retirer cette image de l’enquête'))}" aria-label="${esc(T('Retirer cette image de l’enquête'))}">×</button>`}`).map(h => `<span class="ep-chipw" role="listitem">${h}</span>`).join('');
             const views = many && UI().segmented ? UI().segmented({label: T('Façon de voir les images'), cls: 'ep-views', items: [['one', T('Une image à la fois')], ['side', T('Côte à côte (loupe liée)')], ['mosaic', T('Toutes en mosaïque')]].map(([k, l]) => ({on: this.st.view === k, attrs: `data-ep-view="${k}"`, html: esc(l)}))}) : '';
             const rv = pair && UI().segmented ? UI().segmented({label: T('Recto ou verso'), cls: 'ep-rv', items: [['recto', T('Recto')], ['verso', T('Verso')]].map(([k, l]) => ({on: (this.img?.side || 'recto') === k, attrs: `data-ep-side="${k}"`, html: esc(l)}))}) : '';
             box.innerHTML = `<div class="ep-chips" role="list">${chips}${this.ro ? '' : `<button type="button" class="ep-chip ep-add" data-ep-add title="${esc(T('Une série d’un même album, la carte et la lettre qui en parle, le recto et le verso, deux vues du même lieu'))}">＋ ${esc(T('Ajouter une photo ou un document…'))}</button>`}</div>${rv}${views}`;
             box.onclick = e => {
-                const c = e.target.closest('[data-ep-img]'); if (c) { this.st.cur = Number(c.dataset.epImg); this.st.sel = null; this.renderStrip(); this.renderStage(); this.renderLayers(); this.renderSide(); return; }
+                const x = e.target.closest('[data-ep-imgx]'); if (x) { const im = this.imgById(x.dataset.epImgx); if (im && !this.ro) this.separate(im); return; } // × : sortie de l'enquête (↶ Annuler), le média reste
+                const c = e.target.closest('[data-ep-img]'); if (c) { this.st.cur = Number(c.dataset.epImg); this.st.sel = null; this.renderStrip(); this.renderStage(); this.renderLayers(); this.renderSide(); this.syncBetter(); return; }
                 if (e.target.closest('[data-ep-add]')) return this.addImages();
                 const v = e.target.closest('[data-ep-view]'); if (v) return this.setView(v.dataset.epView);
                 const s = e.target.closest('[data-ep-side]'); if (s) { const other = this.pairOf(this.img); if (other && (this.img.side || 'recto') !== s.dataset.epSide) { this.st.cur = this.images.indexOf(other); this.renderStrip(); this.renderStage(); this.renderLayers(); } }
@@ -240,23 +242,103 @@
             const TOOLS = [['hand', '✋', 'Déplacer, choisir (V)'], ['circle', '◯', 'Entourer (O)'], ['rect', '▭', 'Encadrer (R)'], ['arrow', '➚', 'Flèche (A)'], ['text', 'T', 'Texte (T)'], ['free', '✎', 'Main levée (F)'], ['blur', '▦', 'Flouter un visage (B)'], '|',
                 ['vline', '📏', 'Tracer un objet droit (poteau, mur, personne debout)'], ['shadow', '🌑', 'Tracer son ombre'], ['line', '📐', 'Une ligne de perspective'], ['crop', '✂', 'Découper un morceau (comparer, reflets)']];
             box.innerHTML = `<div class="ep-toolset" role="toolbar" aria-label="${esc(T('Outils de dessin'))}">${TOOLS.map(t => (t === '|' ? '<span class="ep-sep" aria-hidden="true"></span>' : `<button type="button" class="ep-tool${this.st.tool === t[0] ? ' is-active' : ''}" data-ep-tool="${t[0]}" title="${esc(T(t[2]))}" aria-label="${esc(T(t[2]))}" aria-pressed="${this.st.tool === t[0]}" ${this.ro && t[0] !== 'hand' ? 'disabled' : ''}>${esc(t[1])}</button>`)).join('')}</div>
-                <span class="ep-sp"></span><button type="button" class="icon-button small" data-ep-z="out" aria-label="${esc(T('Dézoomer'))}" title="${esc(T('Dézoomer'))}">−</button><button type="button" class="icon-button small" data-ep-z="in" aria-label="${esc(T('Zoomer'))}" title="${esc(T('Zoomer'))}">＋</button><button type="button" class="button small secondary" data-ep-z="fit" title="${esc(T('Voir toute l’image'))}">⤢</button><button type="button" class="button small secondary" data-ep-z="see" title="${esc(T('Zoom et « Mieux voir » seulement : aucune IA qui recrée des détails'))}">🎚️ ${esc(T('Mieux voir'))}</button>`;
+                <span class="ep-sp"></span><button type="button" class="icon-button small" data-ep-z="out" aria-label="${esc(T('Dézoomer'))}" title="${esc(T('Dézoomer'))}">−</button><button type="button" class="icon-button small" data-ep-z="in" aria-label="${esc(T('Zoomer'))}" title="${esc(T('Zoomer'))}">＋</button><button type="button" class="button small secondary" data-ep-z="fit" title="${esc(T('Voir toute l’image'))}">⤢</button><span class="ep-better" data-ep-better>${this.betterHtml()}</span>`;
             box.onclick = e => {
+                if (this.betterClick(e)) return;
                 const t = e.target.closest('[data-ep-tool]'); if (t && !t.disabled) return this.setTool(t.dataset.epTool);
                 const z = e.target.closest('[data-ep-z]'); if (!z) return;
-                if (z.dataset.epZ === 'in') this.zoomBy(1.25); else if (z.dataset.epZ === 'out') this.zoomBy(0.8); else if (z.dataset.epZ === 'fit') this.fit(); else this.betterSee();
+                if (z.dataset.epZ === 'in') this.zoomBy(1.25); else if (z.dataset.epZ === 'out') this.zoomBy(0.8); else if (z.dataset.epZ === 'fit') this.fit();
             };
+            box.oninput = e => this.betterInput(e, true); box.onchange = e => this.betterInput(e, false);
         }
         setTool(t) { this.st.tool = t; this.dlg.querySelectorAll('[data-ep-tool]').forEach(b => { const on = b.dataset.epTool === t; b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', String(on)); }); this.dlg.querySelector('[data-ep-stage]')?.setAttribute('data-tool', t); }
-        betterSee() {
-            const f = this.st.filter || {c: 100, b: 100, g: 0};
-            ext.openDialog?.({eyebrow: T('MIEUX VOIR'), title: T('🎚️ Mieux voir'), submitLabel: T('Fermer'), body: `<p class="ui-hint">${esc(T('Seulement l’affichage : l’image d’origine n’est jamais modifiée, et rien n’est inventé.'))}</p>
-                <label>${esc(T('Contraste'))} <input type="range" min="50" max="250" value="${f.c}" data-f="c"></label><label>${esc(T('Lumière'))} <input type="range" min="40" max="220" value="${f.b}" data-f="b"></label>
-                <label class="ui-toggle"><input type="checkbox" data-f="g" ${f.g ? 'checked' : ''}><i></i>${esc(T('Noir et blanc'))}</label><label class="ui-toggle"><input type="checkbox" data-f="i" ${f.i ? 'checked' : ''}><i></i>${esc(T('Négatif'))}</label>`,
-                onOpen: dg => dg.addEventListener('input', () => { const v = k => dg.querySelector(`[data-f="${k}"]`); this.st.filter = {c: +v('c').value, b: +v('b').value, g: v('g').checked ? 1 : 0, i: v('i').checked ? 1 : 0}; this.applyFilter(); }),
-                onSubmit: () => true});
+        /* ─── 🎚️ Mieux voir : le même panneau que l'atelier de transcription (ext.txView, heritage-transcribe-view.js), sur l'image
+         *     AFFICHÉE seulement (l'image d'origine n'est jamais modifiée) ; « 💾 Retenir pour cette photo » le garde avec l'enquête
+         *     (settings.views) ; en plus : 🔦 lumière rasante (relief, calculé sur l'ordinateur) et « ＋ Garder ce que je lis ». ─── */
+        viewFor(im) { const TV = ext.txView; if (!im || !TV) return null; this.views = this.views || {...(this.inq.settings?.views || {})}; return TV.viewOf({rake: 0, rakeAz: 315, ...(this.views[im.id] || {})}); }
+        setViewOf(im, v) { this.views = this.views || {}; this.views[im.id] = {...v}; }
+        betterHtml() {
+            const TV = ext.txView; if (!TV) return '';
+            const v = this.viewFor(this.img) || TV.viewOf();
+            const cfg = {v: 2, layout: 'B', order: TV.ITEMS.map(i => i[0]), hidden: ['image', 'rot'], panel: TV.ITEMS.map(i => i[0])};
+            let h = TV.toolbarHtml(v, cfg).replace(/<span class="h-tx-ctl h-tx-cfg">[\s\S]*?<\/button><\/span>/, '');
+            const keepA = T('Retenir pour cet acte'), keepB = T('Retenir pour cette photo');
+            h = h.split(keepA).join(keepB).replace(/data-tx-cmd="keepview" title="[^"]*"/, `data-tx-cmd="keepview" title="${esc(T('Ces réglages de l’image sont gardés avec l’enquête et reviennent à la prochaine ouverture (l’image d’origine ne change pas)'))}"`);
+            const rake = `<section class="h-tx-rub ep-rake"><h4>${esc(T('Lumière rasante'))}</h4><span class="h-tx-ctl"><label class="ui-toggle h-tx-ck" title="${esc(T('Comme une lampe posée à plat : un texte gaufré, un timbre sec, un crayon effacé ressortent en relief'))}"><input type="checkbox" data-ep-view="rake" ${v.rake ? 'checked' : ''}><i></i>🔦 ${esc(T('Lumière rasante (relief)'))}</label></span>
+                <span class="h-tx-ctl"><label class="h-tx-rg"><span class="h-tx-rgl">${esc(T('D’où vient la lumière'))}</span><input type="range" data-ep-view="rakeAz" min="0" max="359" step="5" value="${v.rakeAz}" aria-label="${esc(T('D’où vient la lumière'))}"></label></span>
+                ${this.ro ? '' : `<span class="h-tx-ctl"><button type="button" class="button small secondary" data-ep-readkeep>＋ ${esc(T('Garder ce que je lis'))}</button></span>`}</section>`;
+            h = h.replace('<section class="h-tx-rub h-tx-rub-act">', `${rake}<section class="h-tx-rub h-tx-rub-act">`);
+            return `<span class="ep-hint-see" hidden>${esc(T('Zoom et « Mieux voir » seulement : aucune IA qui recrée des détails'))}</span>${h}`;
         }
-        applyFilter() { const f = this.st.filter; this.dlg.querySelectorAll('.ep-view img.ep-photo').forEach(im => { im.style.filter = f ? `contrast(${f.c}%) brightness(${f.b}%)${f.g ? ' grayscale(1)' : ''}${f.i ? ' invert(1)' : ''}` : ''; }); }
+        /** ouvrir le panneau (par une aide : 🎨 canaux de couleur, 🔦 lumière rasante, 🔎 agrandir sans inventer) */
+        betterSee({rake = false} = {}) {
+            const p = this.dlg.querySelector('[data-ep-better] [data-tx-panel]'); if (!p) return;
+            if (rake && !this.ro) { const v = this.viewFor(this.img); if (v && !v.rake) { v.rake = 1; this.setViewOf(this.img, v); this.syncBetter(); this.applyView(); } }
+            this.togglePanel(true);
+        }
+        togglePanel(force) {
+            const p = this.dlg.querySelector('[data-ep-better] [data-tx-panel]'), b = this.dlg.querySelector('[data-ep-better] [data-tx-cmd="better"]'); if (!p) return;
+            const open = force ?? p.hidden; p.hidden = !open; b?.setAttribute('aria-expanded', String(open));
+            if (open && !this.outside) { this.outside = e => { if (!e.target.closest?.('[data-ep-better]') && !e.target.closest?.('.toast, [class*="toast"], dialog.h-modal')) this.togglePanel(false); }; this.dlg.addEventListener('pointerdown', this.outside); }
+            if (!open && this.outside) { this.dlg.removeEventListener('pointerdown', this.outside); this.outside = null; }
+        }
+        syncBetter() {
+            const TV = ext.txView, v = this.viewFor(this.img), box = this.dlg.querySelector('[data-ep-better]'); if (!TV || !v || !box) return;
+            box.querySelectorAll('[data-tx-view]').forEach(i => { if (i.type === 'checkbox') i.checked = !!v[i.dataset.txView]; else i.value = String(v[i.dataset.txView]); });
+            box.querySelectorAll('[data-ep-view]').forEach(i => { if (i.type === 'checkbox') i.checked = !!v[i.dataset.epView]; else i.value = String(v[i.dataset.epView]); });
+            box.querySelectorAll('[data-tx-chan]').forEach(b => { const on = b.dataset.txChan === v.channel; b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', String(on)); });
+            box.querySelectorAll('[data-tx-recipe]').forEach(b => { const on = TV.recipeOn(v, b.dataset.txRecipe); b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', String(on)); });
+            const badge = box.querySelector('[data-tx-badge]'); if (badge) { const n = TV.changedCount(v, Object.keys(TV.CHANGED)) + (v.rake ? 1 : 0); badge.hidden = !n; badge.textContent = String(n); }
+        }
+        betterInput(e, preview) {
+            const k = e.target.dataset?.txView || e.target.dataset?.epView; if (!k || !e.target.closest('[data-ep-better]')) return;
+            const v = this.viewFor(this.img); if (!v) return;
+            v[k] = e.target.type === 'checkbox' ? (k === 'rake' ? (e.target.checked ? 1 : 0) : e.target.checked) : Number(e.target.value);
+            this.setViewOf(this.img, v); this.syncBetter(); this.applyView(this.img, {preview});
+        }
+        betterClick(e) {
+            const box = e.target.closest('[data-ep-better]'); if (!box) return false;
+            const TV = ext.txView, im = this.img, c = e.target.closest('[data-tx-cmd]');
+            if (c?.dataset.txCmd === 'better') { this.togglePanel(); return true; }
+            if (!im || !TV) return true;
+            const chan = e.target.closest('[data-tx-chan]'); if (chan) { const v = this.viewFor(im); v.channel = chan.dataset.txChan; this.setViewOf(im, v); this.syncBetter(); this.applyView(); return true; }
+            const rcp = e.target.closest('[data-tx-recipe]'); if (rcp) { const before = this.viewFor(im), id = rcp.dataset.txRecipe, r = TV.RECIPES.find(x => x[0] === id); if (!r) return true;
+                const put = v => { this.setViewOf(im, v); this.syncBetter(); this.applyView(im); }; put({...TV.recipeView(before, id), rake: 0, rakeAz: before.rakeAz});
+                undoToast(T('Recette « {name} » posée sur l’image', {name: r[2]}), {undo: () => put(before)}); return true; }
+            if (e.target.closest('[data-ep-readkeep]')) { const v = this.viewFor(im), how = [v.rake ? T('lumière rasante') : '', v.channel ? T({r: 'Rouge seul', g: 'Vert seul', b: 'Bleu seul'}[v.channel]) : '', v.invert ? T('Négatif') : '', TV.RECIPES.find(x => TV.recipeOn(v, x[0]))?.[2] || ''].filter(Boolean).join(', ') || T('Mieux voir');
+                ext.enquetePhotoPlus?.keepRead?.(this.api(), im, how, v); return true; }
+            if (!c) return true;
+            if (c.dataset.txCmd === 'keepview') { if (this.ro) return true; const s = {...(this.inq.settings || {}), views: {...(this.inq.settings?.views || {}), [im.id]: this.viewFor(im)}}; this.inq.settings = s;
+                post('update', {id: this.inq.id, settings: s}).then(() => toast(T('Réglages de l’image retenus pour cette photo : ils reviennent à la prochaine ouverture.'))).catch(err => toast(err.message, 'error')); return true; }
+            if (c.dataset.txCmd === 'resetview') { const before = this.viewFor(im), origin = () => { this.setViewOf(im, TV.viewOf({rake: 0, rakeAz: 315})); this.syncBetter(); this.applyView(im); };
+                if (!Object.entries(TV.DEFAULT_VIEW).some(([kk, d]) => String(before[kk]) !== String(d)) && !before.rake) { toast(T('L’image est déjà comme au départ')); return true; }
+                origin(); undoToast(T('Image remise comme au départ'), {undo: () => { this.setViewOf(im, before); this.syncBetter(); this.applyView(im); }, redo: origin}); return true; }
+            return true;
+        }
+        /** le réglage posé sur l'image affichée : filtre CSS, ou image calculée sur l'ordinateur (worker de l'atelier) ; l'image d'origine ne change pas */
+        async applyView(im = this.img, {preview = false} = {}) {
+            const TV = ext.txView, view = this.viewOf(im), img = view?.querySelector('img.ep-photo'), svg = view?.querySelector('svg.ep-svg'); if (!TV || !img) return;
+            const v = this.viewFor(im), orig = mediaSrc(im.media); img.dataset.epOrig = orig;
+            const geo = `${v.mirror ? 'scaleX(-1) ' : ''}${(v.rot || 0) + (v.tilt || 0) ? `rotate(${(v.rot || 0) + (v.tilt || 0)}deg)` : ''}`.trim();
+            img.style.transform = geo; if (svg) svg.style.transform = geo;
+            const seq = (this.viewSeq = (this.viewSeq || 0) + 1);
+            if (v.rake) { // 🔦 lumière rasante : le relief calculé ici (app-enquete-photo-core.js), sur l'image d'origine réduite
+                try { const el = new Image(); el.src = orig; await el.decode(); const k = Math.min(1, 1600 / Math.max(el.naturalWidth, el.naturalHeight)), cv = document.createElement('canvas'); cv.width = Math.round(el.naturalWidth * k); cv.height = Math.round(el.naturalHeight * k);
+                    const g = cv.getContext('2d'); g.drawImage(el, 0, 0, cv.width, cv.height); const d = g.getImageData(0, 0, cv.width, cv.height); g.putImageData(new ImageData(C().emboss(d.data, cv.width, cv.height, v.rakeAz, 3), cv.width, cv.height), 0, 0);
+                    const blob = await new Promise(r => cv.toBlob(r, 'image/jpeg', 0.9)); if (seq !== this.viewSeq) return; const old = img.src; img.src = URL.createObjectURL(blob); if (old.startsWith('blob:')) setTimeout(() => URL.revokeObjectURL(old), 3000); img.style.filter = TV.cssFilter(v); } catch (_) {}
+                return;
+            }
+            if (TV.needsPixels(v)) {
+                this.enh = this.enh || TV.enhancer(u => { const cur = this.viewOf(this.enhFor)?.querySelector('img.ep-photo'); if (!cur || !TV.needsPixels(this.viewFor(this.enhFor) || {})) return; cur.style.filter = ''; cur.src = u; });
+                if (this.enh.ok) {
+                    if (this.enhFor !== im || !this.enh.hasSource()) { this.enhFor = im; const el = new Image(); el.src = orig; await el.decode().catch(() => {}); if (!(await this.enh.source(el, el.naturalWidth, el.naturalHeight))) { this.enhFor = null; } }
+                    if (this.enhFor === im && seq === this.viewSeq) { this.enh.render(v, {preview}); return; }
+                }
+            }
+            if (img.getAttribute('src') !== orig) img.src = orig;
+            img.style.filter = TV.cssFilter(v);
+        }
+        applyFilter() { this.shownImages().forEach(im => this.applyView(im)); }
 
         /* ─── la scène : une, deux côte à côte ou toutes ─── */
         shownImages() {
@@ -379,6 +461,7 @@
             const tiny = s.pts ? (s.t === 'free' ? s.pts.length < 3 : Math.hypot(s.pts[1][0] - s.pts[0][0], s.pts[1][1] - s.pts[0][1]) < 0.01) : (s.t !== 'arrow' && (s.w < 0.005 || s.h < 0.005));
             if (s.t === 'arrow') { s.w = s.w || 0; s.h = s.h || 0; if (Math.hypot(s.w, s.h) < 0.01) return this.paintShapes(im); }
             else if (tiny) return this.paintShapes(im);
+            if (ext.enquetePhotoPlus?.onDraw?.(this.api(), im, s)) return; // 📏 mesure, 🏙 profil des toits : sur leur propre calque
             if (s.t === 'vline' || s.t === 'shadow') { // ☀️ objet droit + son ombre : rangés par paire (le 1ᵉʳ objet, sa 1ʳᵉ ombre…)
                 const ls = this.layersOf(im); let l = ls.find(x => x.id === 'sun'); if (!l) { l = {id: 'sun', name: T('☀️ Ombres'), visible: true, locked: false, shapes: []}; }
                 const n = l.shapes.filter(x => x.t === s.t).length + 1; s.n = n;
@@ -531,7 +614,7 @@
                     return `<li class="ep-q${on ? ' is-open' : ''}${d ? ' is-done' : ''}" data-ep-q="${q.k}"><button type="button" class="ep-qh" data-ep-qopen="${q.k}" aria-expanded="${on}"><span class="ep-qn">${d ? '✓' : i + 1}</span><span class="ep-qt">${esc(titles[q.k])}</span>${!on && sum ? `<small class="ep-qs-sum">${esc(sum)}</small>` : ''}${on && !d ? `<small class="ep-qs-sum">${esc(T('en cours'))}</small>` : ''}</button>
                         ${on ? `<div class="ep-qb">${this.qBody(q.k)}</div>` : ''}</li>`; }).join('')}</ol>
                 <p class="ui-hint">${esc(T('On peut sauter une question, revenir, ou tout répondre dans le désordre.'))}</p>
-                <div class="ep-qfoot">${prefs().ai && !this.ro ? `<button type="button" class="button small secondary" data-ep-ai>🤖 ${esc(T('L’IA regarde aussi'))}</button>` : ''}<button type="button" class="button small secondary" data-ep-ten>${esc(p.tenMinutes ? T('Toutes les questions') : T('⏱ Mode « 10 minutes »'))}</button>${this.ro ? '' : `<button type="button" class="button small" data-ep-pause>${esc(T('Terminer pour l’instant'))}</button>`}</div>`;
+                <div class="ep-qfoot">${prefs().ai && !this.ro ? `<button type="button" class="button small secondary" data-ep-ai>🤖 ${esc(T('L’IA regarde aussi'))}</button>` : ''}<button type="button" class="button small secondary" data-ep-ten>${esc(p.tenMinutes ? T('Toutes les questions') : T('⏱ Mode « 10 minutes »'))}</button>${this.ro ? '' : `<button type="button" class="button small secondary is-danger ep-qdel" data-ep-delinq>🗑 ${esc(T('Supprimer l’enquête'))}</button><button type="button" class="button small" data-ep-pause>${esc(T('Terminer pour l’instant'))}</button>`}</div>`;
             pane.onclick = e => this.qClick(e, pane);
             bindCert(pane);
             if (cur === 'conclusion') this.bindConclusion(pane);
@@ -544,38 +627,40 @@
         }
         chips(group, list) { return `<div class="ep-chipset" data-ep-chips="${group}">${list.map(c => `<button type="button" class="ep-tag" data-ep-chip="${esc(c)}" ${this.ro ? 'disabled' : ''}>${esc(T(c))}</button>`).join('')}</div>`; }
         qBody(k) {
-            const X = ext.enquetePhotoAides, mk = (attrs, label, cls = 'button small secondary') => `<button type="button" class="${cls}" ${attrs} ${this.ro && !/data-ep-guide|data-ep-aide="(frise|missing|journal|nearby|sisters)"/.test(attrs) ? 'disabled' : ''}>${esc(label)}</button>`;
+            const X = ext.enquetePhotoAides, XP = ext.enquetePhotoPlus, roOk = ['frise', 'missing', 'journal', 'nearby', 'sisters', ...(XP?.READONLY || [])];
+            const mk = (attrs, label, cls = 'button small secondary') => `<button type="button" class="${cls}" ${attrs} ${this.ro && !(/data-ep-guide/.test(attrs) || roOk.some(k => attrs.includes(`data-ep-aide="${k}"`))) ? 'disabled' : ''}>${esc(label)}</button>`;
+            const plus = XP?.stepButtons ? XP.stepButtons(k, mk) : '';
             const skip = this.ro ? '' : `<button type="button" class="link-button" data-ep-skip="${k}">${esc(T('Passer cette question'))}</button>`;
             const clueList = this.clues.filter(c => c.kind === this.qKind(k)).map(c => this.clueRow(c, true)).join('');
             const head = clueList ? `<ul class="ep-clues is-mini">${clueList}</ul>` : '';
             if (k === 'support') return `<p class="ui-hint">${esc(T('Photo papier, carte postale, carte de visite… : le support donne souvent une fourchette de dates.'))}</p>${head}
                 ${this.chips('support', ['Photo papier', 'Carte postale', 'Carte de visite', 'Carte cabinet', 'Daguerréotype', 'Ferrotype', 'Plaque de verre', 'Diapositive', 'Photo numérique', 'Lettre ou document'])}
-                <div class="ep-row">${mk('data-ep-guide="tirages"', T('🖼 Type de tirage (guide)'))}${mk('data-ep-aide="exif"', T('🏷 Métadonnées cachées (EXIF)'))}${mk('data-ep-aide="photographe"', T('📮 Le photographe'))}${mk('data-ep-aide="recadrage"', T('✂ Recadrage d’origine'))}</div>${skip}`;
+                <div class="ep-row">${mk('data-ep-guide="tirages"', T('🖼 Type de tirage (guide)'))}${mk('data-ep-aide="exif"', T('🏷 Métadonnées cachées (EXIF)'))}${mk('data-ep-aide="photographe"', T('📮 Le photographe'))}${mk('data-ep-aide="recadrage"', T('✂ Recadrage d’origine'))}</div>${plus}${skip}`;
             if (k === 'dos') return `<p class="ui-hint">${esc(T('Retourne la photo : texte, tampon, cachet, timbre.'))}</p>${head}
                 ${this.chips('dos', ['Dos divisé', 'Dos non divisé', 'Tampon du photographe', 'Texte au crayon', 'Texte à l’encre', 'Cachet de la poste', 'Timbre', 'Rien au dos'])}
-                <div class="ep-row">${mk('data-ep-guide="cartepostale"', T('✉️ Le papier de la carte postale'))}${mk('data-ep-aide="timbre"', T('📮 Timbre et oblitération'))}${mk('data-ep-aide="ecriture"', T('✍ L’écriture au dos'))}</div>${skip}`;
+                <div class="ep-row">${mk('data-ep-guide="cartepostale"', T('✉️ Le papier de la carte postale'))}${mk('data-ep-aide="timbre"', T('📮 Timbre et oblitération'))}${mk('data-ep-aide="ecriture"', T('✍ L’écriture au dos'))}</div>${plus}${skip}`;
             if (k === 'texte') return `<p class="ui-hint">${esc(T('Entoure chaque texte, puis recopie ce que tu lis. Un mot illisible : mets « ? ».'))}</p>${head}
                 <div class="ep-row">${mk('data-ep-newtext', T('＋ Un autre texte'))}${mk('data-ep-atelier', T('📜 Lire avec l’atelier'))}${prefs().ai ? mk('data-ep-ai="texte"', T('🤖 Demander à l’IA')) : ''}${mk('data-ep-notext', T('Pas de texte'))}</div>
                 <div class="ep-row">${mk('data-ep-aide="police"', T('🔤 Essayer une police'))}<small class="ui-hint">${esc(T('Une enseigne à moitié cachée : écris ce que tu crois lire, et pose-le sur la photo dans une police qui ressemble.'))}</small></div>
-                <div class="ep-row">${mk('data-ep-aide="affiches"', T('🪧 Affiches et enseignes'))}${mk('data-ep-guide="panneaux"', T('🪧 Panneaux et langue'))}${mk('data-ep-guide="plaques"', T('🔢 Plaques et numéros'))}</div>${skip}`;
+                <div class="ep-row">${mk('data-ep-aide="affiches"', T('🪧 Affiches et enseignes'))}${mk('data-ep-guide="panneaux"', T('🪧 Panneaux et langue'))}${mk('data-ep-guide="plaques"', T('🔢 Plaques et numéros'))}</div>${plus}${skip}`;
             if (k === 'lieu') return `<p class="ui-hint">${esc(T('Décris-le même sans savoir ce que c’est.'))}</p>${head}
                 ${this.chips('lieu', ['Clocher', 'Château', 'Pont', 'Montagne', 'Mer', 'Usine', 'Gare', 'Monument aux morts', 'Place', 'Rue', 'Ferme', 'Studio de photographe'])}
                 ${this.chips('lieu2', ['à bulbe', 'pointu', 'carré', 'toit d’ardoise', 'toit de tuiles'])}
                 <div class="ep-row" data-ep-landmarks></div>
-                <div class="ep-row">${mk('data-ep-aide="nearby"', T('📍 Mes photos proches'))}${mk('data-ep-aide="avantapres"', T('↔ Avant / après'))}${mk('data-ep-aide="horizon"', T('⛰ Ligne d’horizon'))}${mk('data-ep-aide="monument"', T('🗿 Monument aux morts'))}${mk('data-ep-aide="arbres"', T('🌳 Les arbres'))}${mk('data-ep-aide="cadastre"', T('🗺 Cadastre et vieux plans'))}${mk('data-ep-aide="hypmap"', T('🗺 Carte des hypothèses'))}</div>${skip}`;
-            if (k === 'gens') return `<p class="ui-hint">${esc(T('Habits, uniforme, décorations. Jamais d’analyse des visages : tu notes ce que tu vois.'))}</p>${head}
+                <div class="ep-row">${mk('data-ep-aide="nearby"', T('📍 Mes photos proches'))}${mk('data-ep-aide="avantapres"', T('↔ Avant / après'))}${mk('data-ep-aide="horizon"', T('⛰ Ligne d’horizon'))}${mk('data-ep-aide="monument"', T('🗿 Monument aux morts'))}${mk('data-ep-aide="arbres"', T('🌳 Les arbres'))}${mk('data-ep-aide="cadastre"', T('🗺 Cadastre et vieux plans'))}${mk('data-ep-aide="hypmap"', T('🗺 Carte des hypothèses'))}</div>${plus}${skip}`;
+            if (k === 'gens') return `<p class="ui-hint">${esc(T('Habits, uniforme, décorations : tu notes ce que tu vois. L’IA ne regarde jamais les visages ; « 👤 Qui est-ce ? » compare seulement, sur l’ordinateur, aux visages que tu as identifiés toi-même.'))}</p>${head}
                 ${this.chips('gens', ['Coiffe', 'Chapeau', 'Uniforme', 'Décoration', 'Habit de travail', 'Brassard de deuil', 'Robe noire', 'Communion', 'Mariage', 'Conscrits', 'Photo de classe'])}
                 <div class="ep-row">${mk('data-ep-guide="uniformes"', T('🎖 Uniformes (guide)'))}${mk('data-ep-guide="insignes"', T('🎖 Insignes et décorations'))}${mk('data-ep-guide="civils"', T('📯 Uniformes civils'))}${mk('data-ep-aide="mode"', T('📅 Dater par la mode'))}</div>
-                <div class="ep-row">${mk('data-ep-aide="age"', T('🧒 Âge apparent'))}${mk('data-ep-aide="missing"', T('👥 Qui manque ?'))}${mk('data-ep-aide="fete"', T('🎉 La fête du jour'))}${mk('data-ep-aide="deuil"', T('🖤 Deuil'))}${mk('data-ep-aide="classe"', T('🏫 Photo de classe'))}</div>${skip}`;
+                <div class="ep-row">${mk('data-ep-aide="age"', T('🧒 Âge apparent'))}${mk('data-ep-aide="missing"', T('👥 Qui manque ?'))}${mk('data-ep-aide="fete"', T('🎉 La fête du jour'))}${mk('data-ep-aide="deuil"', T('🖤 Deuil'))}${mk('data-ep-aide="classe"', T('🏫 Photo de classe'))}</div>${plus}${skip}`;
             if (k === 'objets') return `<p class="ui-hint">${esc(T('Une voiture, un vélo, une affiche donnent souvent un « pas avant telle année ».'))}</p>${head}
                 ${this.chips('objet', ['Voiture', 'Vélo', 'Tramway', 'Train', 'Outil', 'Affiche', 'Drapeau', 'Plaque de rue'])}
-                <div class="ep-row">${mk('data-ep-guide="vehicules"', T('🚲 Véhicules (guide)'))}${mk('data-ep-guide="drapeaux"', T('🚩 Drapeaux'))}${mk('data-ep-guide="retouches"', T('🖌 Retouches anciennes'))}</div>${skip}`;
+                <div class="ep-row">${mk('data-ep-guide="vehicules"', T('🚲 Véhicules (guide)'))}${mk('data-ep-guide="drapeaux"', T('🚩 Drapeaux'))}${mk('data-ep-guide="retouches"', T('🖌 Retouches anciennes'))}</div>${plus}${skip}`;
             if (k === 'date') { const w = C().dateWindow(this.clues);
                 return `<p class="ui-hint">${esc(T('Chaque indice réduit la fenêtre de dates : « pas avant 1904 », « pas après 1915 ».'))}</p>${head}
                 <div class="ep-frise-mini" data-ep-frise>${X ? X.friseHtml(this.api()) : esc(w.from || w.to ? `${w.from || '…'} – ${w.to || '…'}` : '')}</div>
                 ${this.chips('date', ['Tampon de la poste', 'Date écrite', 'Saison : feuilles aux arbres', 'Saison : arbres nus', 'Neige', 'Gens en manteau'])}
-                <div class="ep-row">${mk('data-ep-newdate', T('＋ Pas avant / pas après…'))}${mk('data-ep-aide="mode"', T('📅 Par la mode'))}${mk('data-ep-aide="shadow"', T('☀️ Par les ombres'))}${mk('data-ep-aide="lune"', T('🌙 La lune'))}${mk('data-ep-aide="meteo"', T('🌧 Météo du jour'))}${mk('data-ep-aide="exif"', T('🏷 EXIF'))}</div>${skip}`; }
-            if (k === 'conclusion') return this.conclusionHtml();
+                <div class="ep-row">${mk('data-ep-newdate', T('＋ Pas avant / pas après…'))}${mk('data-ep-aide="mode"', T('📅 Par la mode'))}${mk('data-ep-aide="shadow"', T('☀️ Par les ombres'))}${mk('data-ep-aide="lune"', T('🌙 La lune'))}${mk('data-ep-aide="meteo"', T('🌧 Météo du jour'))}${mk('data-ep-aide="exif"', T('🏷 EXIF'))}</div>${plus}${skip}`; }
+            if (k === 'conclusion') return this.conclusionHtml() + plus;
             return '';
         }
         async qClick(e, pane) {
@@ -584,6 +669,7 @@
             if (t.closest('[data-ep-ten]')) { setPrefs({tenMinutes: !prefs().tenMinutes}); this.st.openQ = ''; return this.renderQuestions(pane); }
             if (t.closest('[data-ep-ten-next]')) return ext.enquetePhotoAides?.nextUnnamed(this.api());
             if (t.closest('[data-ep-pause]')) return this.setStatus('done');
+            if (t.closest('[data-ep-delinq]')) return this.remove(); // 🗑 tout de suite, ↶ Annuler la remet
             const sk = t.closest('[data-ep-skip]'); if (sk) { await this.mark(sk.dataset.epSkip); const Q = C().QUESTIONS; const i = Q.findIndex(q => q.k === sk.dataset.epSkip); this.st.openQ = Q[i + 1]?.k || 'conclusion'; return this.renderQuestions(pane); }
             const ch = t.closest('[data-ep-chip]'); if (ch && !this.ro) { const grp = ch.closest('[data-ep-chips]').dataset.epChips; return this.chipClue(grp, ch.dataset.epChip); }
             const g = t.closest('[data-ep-guide]'); if (g) return ext.enquetePhotoAides?.guide(g.dataset.epGuide, this.api());
@@ -690,12 +776,12 @@
             const c = {kind: 'autre', text: '', certainty: 'supposed', why: '', source: 'moi', images: {}, ...c0}, isNew = !c.id;
             const P = window.LCNDA_PICKER;
             const imgs = this.images.length > 1 ? `<fieldset class="ep-fs"><legend>${esc(T('Sur quelles images ?'))}</legend>${this.images.map((im, i) => `<label class="ep-ck"><input type="checkbox" name="img_${im.id}" ${c.images?.[im.id] ? 'checked' : ''}> ${LETTER(i)} · ${esc(im.label || im.media?.title || '')}</label>`).join('')}</fieldset>` : '';
-            const certs = c.source === 'ia' && !c.confirmed ? ['supposed', 'refuted'] : ['proven', 'probable', 'supposed', 'refuted'];
+            const certs = c.source === 'ia' && !c.confirmed ? ['supposed', 'refuted'] : c.source === 'visage' ? ['probable', 'supposed', 'refuted'] : ['proven', 'probable', 'supposed', 'refuted'];
             ext.openDialog?.({eyebrow: T('🔎 INDICE'), title: title || (isNew ? T('Nouvel indice') : T('Indice {n}', {n: c.num})), submitLabel: isNew ? T('Ajouter l’indice') : T('Enregistrer'), wide: false,
                 body: `<div class="form-grid one-column ep-cform">
                     <label>${esc(T('Ce que tu vois'))}<input name="text" value="${esc(c.text)}" maxlength="600" required placeholder="${esc(T('Enseigne « HÔTEL DE LA POSTE », clocher à bulbe, képi…'))}" data-error="${esc(T('Écris l’indice (ce que tu vois).'))}"></label>
                     <label>${esc(T('Sorte'))}<select name="kind">${KINDS.map(k => `<option value="${k[0]}"${c.kind === k[0] ? ' selected' : ''}>${k[1]} ${esc(T(k[2]))}</option>`).join('')}</select></label>
-                    <div><span class="pk-lab">${esc(T('Sûr ?'))}</span>${certSeg('certainty', c.certainty, certs)}<p class="ui-hint">${esc(c.source === 'ia' ? T('Une réponse de l’IA ne monte jamais seule au-dessus de « Supposé ».') : T('« Prouvé » seulement avec une trace solide : texte lu, légende au dos, tampon.'))}</p></div>
+                    <div><span class="pk-lab">${esc(T('Sûr ?'))}</span>${certSeg('certainty', c.certainty, certs)}<p class="ui-hint">${esc(c.source === 'ia' ? T('Une réponse de l’IA ne monte jamais seule au-dessus de « Supposé ».') : c.source === 'visage' ? T('Une ressemblance de visage : « Supposé » seule, « Probable » seulement confirmée par un autre indice, jamais « Prouvé ».') : T('« Prouvé » seulement avec une trace solide : texte lu, légende au dos, tampon.'))}</p></div>
                     <label>${esc(T('Pourquoi j’y crois (ou pas)'))}<textarea name="why" rows="2" placeholder="${esc(T('Le nom de l’éditeur ne prouve pas le lieu, il le rend probable'))}">${esc(c.why)}</textarea></label>
                     <div class="ep-2"><label>${esc(T('Pas avant (année)'))}<input name="date_from" inputmode="numeric" value="${esc(c.date_from || '')}" placeholder="1904"></label><label>${esc(T('Pas après (année)'))}<input name="date_to" inputmode="numeric" value="${esc(c.date_to || '')}" placeholder="1915"></label></div>
                     ${c.kind === 'texte' || isNew ? `<label>${esc(T('Langue du texte'))}<input name="lang" value="${esc(c.lang || '')}" placeholder="${esc(T('français'))}" data-ep-lang></label><p class="ui-hint" data-ep-langhint></p>` : ''}
@@ -801,7 +887,7 @@
             const self = this;
             return {get inq() { return self.inq; }, get img() { return self.img; }, get images() { return self.images; }, get clues() { return self.clues; }, get ro() { return self.ro; }, get privacy() { return self.privacy; }, dlg: self.dlg,
                 letterOf: im => self.letterOf(im), layersOf: im => self.layersOf(im), composite: (im, o) => self.composite(im, o), addClue: o => self.addClue(o), editClue: (c, o) => self.editClue(c, o), reload: () => self.reload(), render: () => self.renderSide(),
-                setTool: t => self.setTool(t), setPanel: k => { self.st.panel = k; self.renderSide(); }, paint: (im = self.img) => self.paintShapes(im), viewOf: im => self.viewOf(im), change: (im, fn) => self.change(im, fn), get: (op, q) => get(op, {id: self.inq.id, ...q}), post: (op, b) => post(op, b), mediaSrc, prefs, certBadge, CERT, KINDS, SOURCES, open: (id, o) => open(id, o), create, mark: k => self.mark(k)};
+                setTool: t => self.setTool(t), setPanel: k => { self.st.panel = k; self.renderSide(); }, paint: (im = self.img) => self.paintShapes(im), viewOf: im => self.viewOf(im), change: (im, fn) => self.change(im, fn), get: (op, q) => get(op, {id: self.inq.id, ...q}), post: (op, b) => post(op, b), mediaSrc, prefs, certBadge, CERT, KINDS, SOURCES, open: (id, o) => open(id, o), create, mark: k => self.mark(k), get t0() { return self.t0; }, betterSee: o => self.betterSee(o)};
         }
     }
 

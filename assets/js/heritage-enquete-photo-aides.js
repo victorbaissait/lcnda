@@ -109,8 +109,8 @@
             <ul class="ep-guide">${g.items.map((it, i) => `<li>${it.svg ? `<span class="ep-gsvg">${SVGS[it.svg]}</span>` : ''}<div><b>${esc(T(it.n))}</b>${it.from || it.to ? ` <span class="ui-badge is-date">${esc([it.from ? T('pas avant {y}', {y: it.from}) : '', it.to ? T('pas après {y}', {y: it.to}) : ''].filter(Boolean).join(', '))}</span>` : ''}
                 ${it.t ? `<br><small>${esc(T(it.t))}</small>` : ''}<br>${ext_(it.url, T('Source'))}</div>${can ? `<button type="button" class="button small secondary" data-g="${i}">＋ ${esc(T('Indice'))}</button>` : ''}</li>`).join('')}</ul>
             <p class="ui-hint">${esc(T('Seulement des faits sûrs, chacun avec sa source. D’abord la France 1850-1950.'))}</p>`,
-            onOpen: dg => dg.addEventListener('click', e => { const b = e.target.closest('[data-g]'); if (!b) return; const it = g.items[Number(b.dataset.g)]; dg.close();
-                api.editClue({kind: {tirages: 'support', cartepostale: 'dos', vehicules: 'objet', drapeaux: 'objet', panneaux: 'texte', plaques: 'lieu'}[key] || 'gens', text: T(it.n), certainty: it.cert || 'probable', date_from: it.from || null, date_to: it.to || null, why: [T(it.t || ''), T('Guide : {g}', {g: T(g.title)})].filter(Boolean).join(' · '), url: it.url, images: {[api.img?.id]: 'yes'}}); }),
+            onOpen: dg => { g.after?.(dg, api); dg.addEventListener('click', e => { const b = e.target.closest('[data-g]'); if (!b) return; const it = g.items[Number(b.dataset.g)]; dg.close();
+                api.editClue({kind: g.kind || {tirages: 'support', cartepostale: 'dos', vehicules: 'objet', drapeaux: 'objet', panneaux: 'texte', plaques: 'lieu'}[key] || 'gens', text: T(it.n), certainty: it.cert || 'probable', date_from: it.from || null, date_to: it.to || null, why: [T(it.t || ''), T('Guide : {g}', {g: T(g.title)})].filter(Boolean).join(' · '), url: it.url, images: {[api.img?.id]: 'yes'}}); }); },
             onSubmit: () => true});
     }
     /** une pastille de réponse : ce qu'en dit un guide (pour pré-remplir l'indice) */
@@ -445,10 +445,10 @@
         let list = []; try { list = (await EP()._get('photographers')).photographers || []; } catch (_) {}
         const ro = kiosk();
         const dg = dlgOpen({eyebrow: T('📮 PHOTOGRAPHES'), title: T('Photographes et éditeurs'), submitLabel: T('Fermer'), wide: true, body: `<p class="ui-hint">${esc(T('Ta liste, que tu complètes toi-même : nom, ville, adresse, années d’activité. Un tampon au dos donne alors une fourchette de dates et une ville probable.'))}</p>
-            <div data-ph>${list.length ? `<table class="ep-stable"><tbody>${list.map(p => `<tr><td><b>${esc(p.name)}</b><br><small>${esc([p.city, p.address].filter(Boolean).join(' · '))}</small></td><td>${esc([p.year_from, p.year_to].filter(Boolean).join(' – '))}</td><td>${p.url ? ext_(p.url, '') : ''}</td><td>${api && !api.ro ? `<button type="button" class="button small secondary" data-ph-clue="${p.id}">＋ ${esc(T('Indice'))}</button>` : ''}${ro ? '' : `<button type="button" class="icon-button small" data-ph-del="${p.id}" aria-label="${esc(T('Supprimer'))}" title="${esc(T('Supprimer'))}">🗑</button>`}</td></tr>`).join('')}</tbody></table>` : empty(T('Aucun photographe pour l’instant.'), '📮')}</div>
+            <div data-ph>${list.length ? `<table class="ep-stable"><tbody>${list.map(p => `<tr><td><b>${esc(p.name)}</b><br><small>${esc([p.city, p.address].filter(Boolean).join(' · '))}</small></td><td>${esc([p.year_from, p.year_to].filter(Boolean).join(' – '))}${p.backdrops ? `<br><small class="muted">🎭 ${esc(p.backdrops)}</small>` : ''}</td><td>${p.url ? ext_(p.url, '') : ''}</td><td>${api && !api.ro ? `<button type="button" class="button small secondary" data-ph-clue="${p.id}">＋ ${esc(T('Indice'))}</button>` : ''}${ro ? '' : `<button type="button" class="icon-button small" data-ph-del="${p.id}" aria-label="${esc(T('Supprimer'))}" title="${esc(T('Supprimer'))}">🗑</button>`}</td></tr>`).join('')}</tbody></table>` : empty(T('Aucun photographe pour l’instant.'), '📮')}</div>
             ${ro ? '' : `<button type="button" class="button small" data-ph-new>＋ ${esc(T('Un photographe ou un éditeur'))}</button>`}`, onSubmit: () => true});
         dg?.addEventListener('click', async e => {
-            if (e.target.closest('[data-ph-new]')) { dg.close(); return dlgOpen({eyebrow: T('📮 PHOTOGRAPHE'), title: T('Nouveau photographe'), submitLabel: T('Ajouter'), body: `<div class="form-grid one-column"><label>${esc(T('Nom (tel qu’écrit sur le tampon)'))}<input name="name" required placeholder="Phot. J. LACOMBE"></label><label>${esc(T('Ville'))}<input name="city"></label><label>${esc(T('Adresse'))}<input name="address"></label><div class="ep-2"><label>${esc(T('Actif de'))}<input name="year_from" inputmode="numeric"></label><label>${esc(T('à'))}<input name="year_to" inputmode="numeric"></label></div><label>${esc(T('Source (lien)'))}<input name="url" inputmode="url"></label></div>`,
+            if (e.target.closest('[data-ph-new]')) { dg.close(); return dlgOpen({eyebrow: T('📮 PHOTOGRAPHE'), title: T('Nouveau photographe'), submitLabel: T('Ajouter'), body: `<div class="form-grid one-column"><label>${esc(T('Nom (tel qu’écrit sur le tampon)'))}<input name="name" required placeholder="Phot. J. LACOMBE"></label><label>${esc(T('Ville'))}<input name="city"></label><label>${esc(T('Adresse'))}<input name="address"></label><div class="ep-2"><label>${esc(T('Actif de'))}<input name="year_from" inputmode="numeric"></label><label>${esc(T('à'))}<input name="year_to" inputmode="numeric"></label></div><label>${esc(T('Source (lien)'))}<input name="url" inputmode="url"></label><label>${esc(T('🎭 Ses décors de studio (séparés par des virgules)'))}<input name="backdrops" placeholder="${esc(T('colonne, balustrade, toile peinte'))}"></label></div>`,
                 onSubmit: async f => { await EP()._post('photographer_save', Object.fromEntries(new FormData(f))); photographers(api); }}); }
             const d = e.target.closest('[data-ph-del]'); if (d) { const r = await EP()._post('photographer_delete', {id: Number(d.dataset.phDel)}); dg.close(); photographers(api); undoToast(T('Photographe supprimé'), {undo: async () => { await EP()._post('photographer_restore', {row: r.row}); photographers(api); }}); }
             const c = e.target.closest('[data-ph-clue]'); if (c && api) { const p = list.find(x => x.id === Number(c.dataset.phClue)); dg.close(); api.editClue({kind: 'support', text: T('Photographe : {n}', {n: p.name}), certainty: 'probable', date_from: p.year_from || null, date_to: p.year_to || null, why: [p.city, p.address].filter(Boolean).join(' · '), url: p.url || '', data: {photographer: p.name}, images: {[api.img?.id]: 'yes'}}); }
@@ -516,7 +516,7 @@
     async function storyHtml(api, {safe = false} = {}) {
         const inq = api.inq, c = inq.conclusion || {}, privNames = (inq.links || []).filter(l => l.private).map(l => l.label.replace(/\s*\(.*\)$/, '')).filter(Boolean);
         const hide = t => (safe && privNames.some(n => n && String(t).includes(n)));
-        const clues = api.clues.filter(x => !hide(x.text) && !hide(x.why));
+        const clues = api.clues.filter(x => !hide(x.text) && !hide(x.why) && !(safe && (x.source === 'visage' || x.data?.who))); // 👤 en partage : jamais une proposition de visage
         const css = 'body{font:15px/1.5 Georgia,serif;color:#222;max-width:820px;margin:24px auto;padding:0 16px}h1{font-size:26px}figure{margin:12px 0}img{max-width:100%}li.r{text-decoration:line-through;color:#888}.b{font:11px system-ui;border:1px solid;padding:0 4px;text-transform:uppercase}';
         const certW = k => T(api.CERT[k]?.[0] || '');
         return `<!doctype html><html lang="fr"><meta charset="utf-8"><title>${esc(inq.title)}</title><style>${css}</style><body>
@@ -686,7 +686,7 @@
         ['👔 Les gens, et relier', [['deuil', '🖤', 'Deuil'], ['fete', '🎉', 'La fête du jour'], ['missing', '👥', 'Qui manque ?'], ['sisters', '🧩', 'Photos sœurs'], ['story', '📖', 'Raconter l’enquête'], ['safe', '🛡', 'Partager sans risque']]],
         ['✨ Et encore', [['g:cartepostale', '✉️', 'Le papier de la carte postale'], ['timbre', '📮', 'Timbre et oblitération'], ['ombres', '☀️', 'Ombres de plusieurs photos'], ['g:panneaux', '🪧', 'Panneaux et langue'], ['g:drapeaux', '🚩', 'Drapeaux'], ['g:civils', '📯', 'Uniformes civils'], ['classe', '🏫', 'Photo de classe'], ['nearby', '📍', 'Mes photos proches'], ['frise', '📏', 'Frise de la photo'], ['reperes', '📒', 'Carnet de repères'], ['ten', '⏱', 'Mode « 10 minutes »'], ['online', '🌐', 'Comparer en ligne'], ['ai', '🤖', 'Demander à l’IA']]]];
     function renderAides(api, pane) {
-        pane.innerHTML = `<p class="ui-hint">${esc(T('Chacune arrive au bon moment dans les questions, et chacune peut devenir un indice avec sa certitude.'))}</p>${AIDES.map(([g, list]) => `<h4 class="ep-ah">${esc(T(g))}</h4><div class="ep-agrid">${list.map(([k, i, l]) => `<button type="button" class="ep-aide" data-ep-aidek="${k}">${esc(i)} ${esc(T(l))}</button>`).join('')}</div>`).join('')}`;
+        pane.innerHTML = `<p class="ui-hint">${esc(T('Chacune arrive au bon moment dans les questions, et chacune peut devenir un indice avec sa certitude.'))}</p>${[...AIDES, ...(ext.enquetePhotoPlus?.AIDES || [])].map(([g, list]) => `<h4 class="ep-ah">${esc(T(g))}</h4><div class="ep-agrid">${list.map(([k, i, l]) => `<button type="button" class="ep-aide" data-ep-aidek="${k}">${esc(i)} ${esc(T(l))}</button>`).join('')}</div>`).join('')}`;
         pane.onclick = e => { const b = e.target.closest('[data-ep-aidek]'); if (b) open(b.dataset.epAidek, api); };
     }
     function simpleClue(api, title, hint, kind, chips) {
@@ -695,6 +695,7 @@
             onOpen: dg => dg.addEventListener('click', e => { const b = e.target.closest('[data-c]'); if (!b) return; const c = chips[Number(b.dataset.c)]; dg.close(); api.editClue({kind, text: T(c.t), certainty: c.cert || 'supposed', date_from: c.from || null, date_to: c.to || null, why: c.why ? T(c.why) : '', url: c.url || '', images: {[api.img?.id]: 'yes'}}); }), onSubmit: () => true});
     }
     function open(k, api) {
+        if (ext.enquetePhotoPlus?.has?.(k)) return ext.enquetePhotoPlus.open(k, api); // 26 aides de plus (heritage-enquete-photo-plus.js)
         if (k.startsWith('g:')) return guide(k.slice(2), api);
         const f = {
             exif: () => exif(api), photographe: () => photographers(api), perspective: () => perspective(api), reflets: () => { api.setTool('crop'); toast(T('Découpe le reflet (✂) : vitrine, flaque, miroir.')); },
@@ -763,5 +764,5 @@
     }
 
     ext.enquetePhotoAides = {suggestions, renderSearches, renderAides, open, guide, chipHint, guessLang, friseHtml, missingText, hypothesesHtml, hypClick, searchData, keepLandmark, shadow, perspective, compareOnline, mirror, saveCrop, ai, story: api => story(api), safeShare: api => story(api, {safe: true}), cousin, nextUnnamed, openGlobal,
-        fontGuess, paintFonts, renderFont, GUIDES, FONTS, _matrix3d: matrix3d, _storyHtml: storyHtml};
+        fontGuess, paintFonts, renderFont, GUIDES, FONTS, _matrix3d: matrix3d, _storyHtml: storyHtml, _imagesHtml: imagesHtml, placeOf, yearWin, guessLangs: LANGS};
 })();

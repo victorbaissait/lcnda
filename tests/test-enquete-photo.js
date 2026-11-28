@@ -71,6 +71,18 @@ file_put_contents(MEDIA_DIR . '/exif.jpg', base64_decode(getenv('EXIF_JPG')));
 $ins = $pdo->prepare("INSERT INTO media(title, media_type, filename, thumbnail) VALUES(?, 'image', ?, ?)");
 $m = []; foreach (['img004.png' => 'Carte postale, vers 1910', 'img011.png' => 'Même clocher, autre angle', 'img020.png' => 'Marie à la plage', 'exif.jpg' => 'Photo numérique'] as $f => $t) { $ins->execute([$t, $f, $f]); $m[$f] = (int) $pdo->lastInsertId(); }
 $pdo->prepare("INSERT INTO media_tags(media_id, person_id, x, y, w, h) VALUES(?, 2, 40, 20, 15, 20)")->execute([$m['img020.png']]);
+// 👤 deux tirages identiques (même empreinte pour le faux moteur de visages) ; sur le premier, Paul DURAND identifié à la main
+$pic('face-a.png', [120, 140, 160]); copy(MEDIA_DIR . '/face-a.png', MEDIA_DIR . '/face-b.png');
+foreach (['face-a.png' => 'Paul, photo identifiée', 'face-b.png' => 'Un inconnu au chapeau'] as $f => $t) { $ins->execute([$t, $f, $f]); $m[$f] = (int) $pdo->lastInsertId(); }
+$pdo->prepare("INSERT INTO media_tags(media_id, person_id, x, y, w, h) VALUES(?, 3, 10, 20, 18, 24)")->execute([$m['face-a.png']]);
+// 👪 « qui pourrait-ce être ? » : Pierre MAZAUD né à Brive en 1904 ; Louise DURAND morte en 1900 ; Paul DURAND (1902-1970)
+$pdo->exec("INSERT INTO persons(id,first_name,last_name,gender,living_status) VALUES(4,'Pierre','MAZAUD','male','deceased'),(5,'Louise','DURAND','female','deceased')");
+$tag = function ($t) use ($pdo) { $s = $pdo->prepare('SELECT id FROM event_types WHERE gedcom_tag=? ORDER BY id LIMIT 1'); $s->execute([$t]); return (int) $s->fetchColumn(); };
+$ev = $pdo->prepare("INSERT INTO events(scope, person_id, event_type_id, year, date_text, place_id) VALUES('person',?,?,?,?,?)");
+foreach ([[4, 'BIRT', 1904, 1], [4, 'DEAT', 1980, 2], [5, 'BIRT', 1850, 2], [5, 'DEAT', 1900, 2], [3, 'BIRT', 1902, 2], [3, 'DEAT', 1970, 2]] as [$pid, $t, $y, $pl]) { $ev->execute([$pid, $tag($t), $y, (string) $y, $pl]); }
+// 🏗 🧭 une fiche d'édifice datée, un peu à l'est de Brive (≈ 0,8 km)
+require_once 'lib/edifices.php'; ed_tables($pdo);
+$pdo->exec("INSERT INTO sites(kind, name, place_id, lat, lon, built_from) VALUES('eglise', 'Gare de Brive', 1, 45.16, 1.54, 1860)");
 echo json_encode(['m' => $m]);`.replace('getenv(\'EXIF_JPG\')', `'${jpegWithExif().toString('base64')}'`)));
     out.seed = seed;
     /* un faux Ollama : une observation avec cadre, une sans cadre, une qui nomme quelqu'un */
@@ -94,9 +106,9 @@ echo json_encode(['m' => $m]);`.replace('getenv(\'EXIF_JPG\')', `'${jpegWithExif
         p.on('pageerror', e => errs.push(e.message));
         p.on('response', r => { if (r.status() >= 400 && process.env.DEBUG) console.log('HTTP', r.status(), r.url().slice(0, 160)); });
         p.on('console', m => { if (m.type() === 'error' && process.env.DEBUG) console.log('console:', m.text()); });
-        await p.addInitScript(() => { window.LCNDA_SHEET_LAZY_OFF = true; });
+        await p.addInitScript(() => { window.LCNDA_SHEET_LAZY_OFF = true; window.LCNDA_FACES_TEST = { engine: 'mock', ms: 30 }; });
         await p.goto(base);
-        await p.waitForFunction(() => window.LCNDA_EXT?.enquetePhoto && window.LCNDA_EXT?.enquetePhotoAides && window.LCNDA_EP_CORE && window.LCNDA_APP?.state?.csrf && window.LCNDA_EXT?.onglets?.documents, null, { timeout: 30000 });
+        await p.waitForFunction(() => window.LCNDA_EXT?.enquetePhoto && window.LCNDA_EXT?.enquetePhotoAides && window.LCNDA_EXT?.enquetePhotoPlus && window.LCNDA_EP_CORE && window.LCNDA_APP?.state?.csrf && window.LCNDA_EXT?.onglets?.documents, null, { timeout: 30000 });
         const api = (op, q = {}) => p.evaluate(([o, x]) => window.LCNDA_APP.api('ep', { op: o, ...x }), [op, q]);
         const post = (op, b = {}) => p.evaluate(([o, x]) => window.LCNDA_APP.api('ep_write', {}, { method: 'POST', body: { op: o, ...x } }).then(r => ({ ok: true, r }), e => ({ ok: false, error: e.message })), [op, b]);
         const shot = async n => { if (process.env.SHOTS) { fs.mkdirSync(process.env.SHOTS, { recursive: true }); await p.screenshot({ path: path.join(process.env.SHOTS, n) }); } };
@@ -217,6 +229,116 @@ echo json_encode(['m' => $m]);`.replace('getenv(\'EXIF_JPG\')', `'${jpegWithExif
         out.dataSearch = await p.evaluate(() => ({ q: document.querySelector('dialog.h-modal[open] [name="q"]')?.value, place: document.querySelector('dialog.h-modal[open] [name="place"]')?.value, rows: document.querySelectorAll('dialog.h-modal[open] .ep-stable tbody tr').length }));
         await p.evaluate(() => { [...document.querySelectorAll('dialog[open]')].filter(x => !x.classList.contains('ep-dlg')).forEach(x => x.close()); }); await sleep(200);
 
+        /* ═════ 🎚️ Mieux voir : le panneau de l'atelier (recettes, canal), sur l'image affichée seulement ═════ */
+        const curImg = () => p.evaluate(d => { const i = document.querySelector(`${d} .ep-view.is-cur img.ep-photo`); return i ? { src: i.getAttribute('src'), filter: i.style.filter, orig: i.dataset.epOrig || '' } : null; }, D);
+        const fileLen = f => p.evaluate(u => fetch(u, { cache: 'no-store' }).then(r => r.arrayBuffer()).then(b => b.byteLength), 'media/' + f);
+        const len0 = await fileLen('img004.png');
+        await p.evaluate(() => { const t = window.LCNDA_EXT.enquetePhoto.current; t.st.cur = t.images.findIndex(i => i.media.filename === 'img004.png'); t.renderStrip(); t.renderStage(); t.renderLayers(); t.renderSide(); t.syncBetter(); }); await sleep(500);
+        await p.click(`${D} [data-ep-better] [data-tx-cmd="better"]`); await sleep(200);
+        out.better = await p.evaluate(d => ({ open: !document.querySelector(`${d} [data-ep-better] [data-tx-panel]`).hidden, recipes: [...document.querySelectorAll(`${d} [data-ep-better] [data-tx-recipe]`)].map(b => b.dataset.txRecipe), chans: [...document.querySelectorAll(`${d} [data-ep-better] [data-tx-chan]`)].map(b => b.dataset.txChan), rake: !!document.querySelector(`${d} [data-ep-better] [data-ep-view="rake"]`), keep: document.querySelector(`${d} [data-ep-better] [data-tx-cmd="keepview"]`)?.textContent.trim(), reset: !!document.querySelector(`${d} [data-ep-better] [data-tx-cmd="resetview"]`) }), D);
+        out.betterBefore = await curImg();
+        await p.click(`${D} [data-ep-better] [data-tx-recipe="pale"]`);
+        for (let i = 0; i < 40; i++) { await sleep(200); const c = await curImg(); if (c && c.src !== out.betterBefore.src) break; }
+        out.betterPale = await curImg();
+        await p.click(`${D} [data-ep-better] [data-tx-cmd="keepview"]`); await sleep(700);
+        const imPale = (await api('get', { id: inqId })).inquiry;
+        out.betterKept = Object.values(imPale.settings.views || {})[0] || null;
+        out.betterFile = { before: len0, after: await fileLen('img004.png'), filename: imPale.images.find(i => i.media.filename === 'img004.png')?.media.filename };
+        await p.click(`${D} [data-ep-better] [data-tx-chan="b"]`); await sleep(300);
+        await p.click(`${D} [data-ep-better] [data-tx-cmd="resetview"]`); await sleep(600);
+        out.betterReset = await curImg();
+        await p.evaluate(() => window.LCNDA_EXT.enquetePhoto.current.togglePanel(false));
+
+        /* ═════ les 26 aides de plus : ☑ liste, 🌡 niveau, 😈 avocat du diable, 👪 qui pourrait-ce être, 🏗 construction, 🧭 boussole, 🗺 calque ═════ */
+        const PL = (k, ...a) => p.evaluate(([k2, a2]) => { try { return window.LCNDA_EXT.enquetePhotoPlus.open(k2, window.LCNDA_EXT.enquetePhoto.current.api(), ...a2); } catch (e) { window.__epErr = (window.__epErr || []).concat(k2 + ': ' + e.message); } }, [k, a]);
+        const closeSub = () => p.evaluate(() => { [...document.querySelectorAll('dialog[open]')].filter(x => !x.classList.contains('ep-dlg')).forEach(x => x.close()); });
+        await PL('checklist'); await p.waitForSelector('dialog.h-modal[open] [data-xk="coins"]');
+        await p.click('dialog.h-modal[open] [data-xk="coins"]'); await p.click('dialog.h-modal[open] [data-xk="reflets"]'); await sleep(700);
+        out.checklistUi = await p.$eval('dialog.h-modal[open] [data-xp]', e => e.textContent.trim());
+        await closeSub(); await sleep(150);
+        await PL('niveau'); await p.waitForSelector('dialog.h-modal[open] [data-xl="avancee"]');
+        await p.click('dialog.h-modal[open] [data-xl="avancee"]'); await sleep(700); await closeSub();
+        out.levelBadge = await p.evaluate(d => document.querySelector(`${d} [data-ep-cmd="level"]`)?.textContent || '', D);
+        await PL('diable'); await p.waitForSelector('dialog.h-modal[open] .ep-devil li');
+        out.devilTargets = await p.evaluate(() => [...document.querySelectorAll('dialog.h-modal[open] .ep-devil li b')].map(b => b.textContent));
+        await p.fill('dialog.h-modal[open] [data-xq="0"]', 'Une carte de Tulle avec la même enseigne'); await p.click('dialog.h-modal[open] [data-xadd="0"]'); await sleep(800); await closeSub();
+        await PL('qui'); await p.waitForSelector('dialog.h-modal[open] [name="age"]');
+        await p.fill('dialog.h-modal[open] [name="age"]', '6'); await p.fill('dialog.h-modal[open] [name="from"]', '1909'); await p.fill('dialog.h-modal[open] [name="to"]', '1912');
+        await p.click('dialog.h-modal[open] [data-xgo]'); await p.waitForSelector('dialog.h-modal[open] .ep-who li', { timeout: 8000 }).catch(() => null); await sleep(300);
+        out.who = await p.evaluate(() => [...document.querySelectorAll('dialog.h-modal[open] .ep-who li')].map(li => ({ t: li.querySelector('b').textContent.trim(), fit: li.classList.contains('is-fit'), yes: li.querySelector('.ep-yes')?.textContent || '', no: li.querySelector('.ep-no')?.textContent || '' })));
+        const fitBtn = await p.evaluateHandle(() => [...document.querySelectorAll('dialog.h-modal[open] .ep-who li.is-fit')].find(li => /Pierre MAZAUD/.test(li.textContent))?.querySelector('[data-xyes]') || null); if (fitBtn.asElement()) { await fitBtn.asElement().click(); await sleep(900); }
+        await closeSub();
+        out.whoApi = await api('candidates', { id: inqId, age: 6, spread: 2, from: 1909, to: 1912, place_id: 1 });
+        await post('clue_save', { inquiry_id: inqId, kind: 'lieu', text: 'Une gare avec une horloge', certainty: 'supposed' });
+        await p.evaluate(() => window.LCNDA_EXT.enquetePhoto.current.reload()); await sleep(500);
+        await PL('construction'); await p.waitForSelector('dialog.h-modal[open] [data-xb] h4', { timeout: 8000 });
+        out.buildSug = await p.evaluate(() => [...document.querySelectorAll('dialog.h-modal[open] [data-xs]')].map(b => b.closest('li').textContent.replace(/\s+/g, ' ')));
+        if (out.buildSug.length) { await p.click('dialog.h-modal[open] [data-xs="0"]'); await sleep(900); }
+        await closeSub();
+        await PL('boussole'); await p.waitForSelector('dialog.h-modal[open] [name="az"]');
+        await p.fill('dialog.h-modal[open] [name="az"]', '90'); await sleep(900);
+        out.compassEast = await p.evaluate(() => ({ n: document.querySelectorAll('dialog.h-modal[open] .ep-blds li').length, cone: !!document.querySelector('dialog.h-modal[open] [data-xmap] polyline') }));
+        await p.fill('dialog.h-modal[open] [name="az"]', '270'); await sleep(900);
+        out.compassWest = await p.evaluate(() => document.querySelectorAll('dialog.h-modal[open] .ep-blds li').length);
+        await closeSub(); await sleep(150);
+        out.mapLayer = await p.evaluate(async () => {
+            const X = window.LCNDA_EXT.enquetePhotoPlus, off = X.mapOn(), st = document.createElement('div'); st.id = 'map-stage'; st.style.cssText = 'position:relative;width:800px;height:500px'; document.body.appendChild(st);
+            (window.LCNDA_EXT.mapDraw || []).forEach(f => { try { f({stage: st, left: window.LCNDA_APP.lngToX(1.53, 9) - 400, top: window.LCNDA_APP.latToY(45.16, 9) - 250, z: 9, width: 800, height: 500}); } catch (_) {} });
+            await new Promise(r => setTimeout(r, 300)); const before = st.querySelectorAll('#ep-map-layer .ep-mapq').length;
+            const n = await X.setMapLayer(true); const on = st.querySelectorAll('#ep-map-layer .ep-mapq').length; await X.setMapLayer(false); const after = !!st.querySelector('#ep-map-layer'); st.remove();
+            return { off, before, n, on, after };
+        });
+        // chaque aide de plus s'ouvre sans erreur
+        for (const k of ['deuxtirages', 'g:grain', 'g:interieur', 'g:toits', 'decor', 'animaux', 'distances', 'histoire', 'habit', 'provenance', 'mains', 'atelier', 'croissance', 'rapport', 'carte', 'tableau', 'mesurer', 'profil', 'canaux', 'relief']) { await PL(k); await sleep(450); await closeSub(); await sleep(100); }
+        await p.evaluate(() => { window.LCNDA_EXT.enquetePhoto.current.togglePanel(false); window.LCNDA_EXT.enquetePhoto.current.setTool('hand'); });
+        out.plusErr = await p.evaluate(() => window.__epErr || []);
+        out.report = await p.evaluate(() => window.LCNDA_EXT.enquetePhotoPlus.reportHtml(window.LCNDA_EXT.enquetePhoto.current.api()).then(h => ({ q: /Nos questions précises/.test(h), todo: /À chercher/.test(h), img: /<img src="data:image/.test(h) })));
+        const g5 = (await api('get', { id: inqId })).inquiry;
+        out.plusSaved = { checklist: Object.keys(g5.settings.checklist || {}).sort(), level: g5.settings.level, todo: g5.clues.filter(c => c.data?.todo).map(c => [c.text, c.certainty, c.data.against]), who: g5.clues.filter(c => c.data?.who).map(c => [c.text, c.certainty, c.source]), built: g5.clues.filter(c => c.data?.building).map(c => [c.date_from, c.certainty]) };
+        await p.evaluate(() => document.querySelectorAll('.toast, [class*="toast"]').forEach(t => { if (t.querySelector('button')) t.remove(); }));
+
+        /* ═════ 👤 Qui est-ce ? : l'outil local Visages (faux moteur), sur une enquête à part ═════ */
+        const fq = await post('create', { media_ids: [m['face-b.png']], title: 'Un inconnu au chapeau' });
+        await p.evaluate(() => document.querySelector('dialog.ep-dlg')?.close()); await sleep(300);
+        await p.evaluate(id => window.LCNDA_EXT.enquetePhoto.open(id), fq.r.id); await p.waitForSelector(`${D} .ep-chip`); await sleep(400);
+        out.facesStep = await p.evaluate(d => { const t = window.LCNDA_EXT.enquetePhoto.current; t.st.openQ = 'gens'; t.renderSide(); return !!document.querySelector(`${d} [data-ep-aide="visages"]`); }, D);
+        await p.click(`${D} [data-ep-aide="visages"]`); await p.waitForSelector('dialog.h-modal[open] [data-xscan]', { timeout: 10000 });
+        await p.click('dialog.h-modal[open] [data-xscan]');
+        await p.waitForSelector('dialog.h-modal[open] .ep-faces li', { timeout: 30000 }).catch(() => null);
+        out.faces = await p.evaluate(() => [...document.querySelectorAll('dialog.h-modal[open] .ep-faces li b')].map(b => b.textContent));
+        if (out.faces.length) { await p.click('dialog.h-modal[open] [data-xkeep="0"]'); await sleep(900); }
+        await closeSub();
+        const gf = (await api('get', { id: fq.r.id })).inquiry, fc = gf.clues.find(c => c.source === 'visage');
+        out.faceClue = fc ? { cert: fc.certainty, text: fc.text, person: fc.data.person_id } : null;
+        if (fc) {
+            const other = await post('clue_save', { inquiry_id: fq.r.id, kind: 'date', text: 'Né en 1902 : l’âge colle', certainty: 'probable' });
+            const otherFace = await post('clue_save', { inquiry_id: fq.r.id, kind: 'gens', source: 'visage', text: 'Autre visage', certainty: 'supposed' });
+            out.faceCap = {
+                proven: (await post('clue_save', { id: fc.id, certainty: 'proven' })).r.clue.certainty,
+                confirmed: (await post('clue_save', { id: fc.id, certainty: 'proven', data: { ...fc.data, confirmed_by: other.r.clue.id } })).r.clue.certainty,
+                byFace: (await post('clue_save', { id: fc.id, certainty: 'probable', data: { ...fc.data, confirmed_by: otherFace.r.clue.id } })).r.clue.certainty,
+                self: (await post('clue_save', { id: fc.id, certainty: 'probable', data: { ...fc.data, confirmed_by: fc.id } })).r.clue.certainty };
+            await p.evaluate(() => window.LCNDA_EXT.enquetePhoto.current.reload()); await sleep(400);
+            out.faceSafe = await p.evaluate(() => Promise.all([window.LCNDA_EXT.enquetePhotoPlus.reportHtml(window.LCNDA_EXT.enquetePhoto.current.api()), window.LCNDA_EXT.enquetePhotoAides._storyHtml(window.LCNDA_EXT.enquetePhoto.current.api(), { safe: true })]).then(([a, b]) => /DURAND/.test(a) || /DURAND/.test(b)));
+        }
+        /* ═════ × sur l'image (sortie de l'enquête, ↶ Annuler, le média reste) ; 🗑 Supprimer l'enquête visible au pied du panneau (↶ Annuler) ═════ */
+        await p.evaluate(() => document.querySelectorAll('.toast, [class*="toast"]').forEach(t => { if (t.querySelector('button')) t.remove(); }));
+        out.chipX = { title: await p.$eval(`${D} [data-ep-imgx]`, b => b.title).catch(() => '') };
+        await p.click(`${D} [data-ep-imgx]`); await sleep(900);
+        out.chipX.after = (await api('get', { id: fq.r.id })).inquiry.images.length;
+        out.chipX.media = await p.evaluate(id => window.LCNDA_APP.api('onglets', { op: 'document', id }).then(r => !!r.document, () => false), m['face-b.png']);
+        out.chipX.undo = await undoClick(); await sleep(500);
+        out.chipX.back = (await api('get', { id: fq.r.id })).inquiry.images.length;
+        await p.evaluate(() => { const t = window.LCNDA_EXT.enquetePhoto.current; if (t) { t.st.panel = 'questions'; t.st.openQ = ''; t.renderSide(); } }); await sleep(300);
+        out.delBtn = await p.evaluate(d => { const b = document.querySelector(`${d} .ep-qfoot [data-ep-delinq]`), q = document.querySelector(`${d} .ep-qfoot [data-ep-pause]`); return b ? { text: b.textContent.trim(), before: !!(q && (b.compareDocumentPosition(q) & Node.DOCUMENT_POSITION_FOLLOWING)) } : null; }, D);
+        await p.evaluate(() => document.querySelectorAll('.toast, [class*="toast"]').forEach(t => { if (t.querySelector('button')) t.remove(); }));
+        await p.click(`${D} .ep-qfoot [data-ep-delinq]`); await sleep(900);
+        out.delBtn.gone = !(await api('list')).inquiries.some(q => q.id === fq.r.id);
+        out.delBtn.undo = await undoClick(); await sleep(800);
+        out.delBtn.restored = (await api('list')).inquiries.some(q => q.id === fq.r.id);
+        await p.evaluate(() => document.querySelector('dialog.ep-dlg')?.close()); await sleep(300);
+        await p.evaluate(id => window.LCNDA_EXT.enquetePhoto.open(id), inqId); await p.waitForSelector(`${D} .ep-chip`); await sleep(400);
+
         /* ═════ ✂ Séparer + ↶ Annuler ═════ */
         const im1 = g3.inquiry.images.find(i => i.media_id === m['img011.png']);
         await post('clue_save', { inquiry_id: inqId, kind: 'lieu', text: 'Le même clocher, de côté', certainty: 'supposed', images: { [im1.id]: 'yes' } });
@@ -249,6 +371,11 @@ echo json_encode(['m' => $m]);`.replace('getenv(\'EXIF_JPG\')', `'${jpegWithExif
         await p.setViewportSize({ width: 390, height: 844 }); await p.emulateMedia({ colorScheme: 'dark' });
         await p.evaluate(id => window.LCNDA_EXT.enquetePhoto.open(id), inqId); await p.waitForSelector(`${D} .ep-chip`); await sleep(600);
         out.overflow = await p.evaluate(d => { const dl = document.querySelector(d); return { dlg: dl.scrollWidth - dl.clientWidth, side: (document.querySelector(`${d} .ep-side`)?.scrollWidth || 0) - (document.querySelector(`${d} .ep-side`)?.clientWidth || 0) }; }, D);
+        await p.evaluate(() => window.LCNDA_EXT.enquetePhotoPlus.open('qui', window.LCNDA_EXT.enquetePhoto.current.api())); await p.waitForSelector('dialog.h-modal[open] .ep-xrow'); await sleep(800);
+        out.overflowPlus = await p.evaluate(() => { const dl = document.querySelector('dialog.h-modal[open]'); return dl.scrollWidth - dl.clientWidth; });
+        await p.evaluate(() => { [...document.querySelectorAll('dialog[open]')].filter(x => !x.classList.contains('ep-dlg')).forEach(x => x.close()); }); await sleep(150);
+        await p.evaluate(() => window.LCNDA_EXT.enquetePhoto.current.betterSee()); await sleep(300);
+        out.overflowBetter = await p.evaluate(d => { const pn = document.querySelector(`${d} [data-ep-better] [data-tx-panel]`), r = pn?.getBoundingClientRect(); return r ? { left: Math.round(r.left), right: Math.round(r.right), vw: innerWidth } : null; }, D);
         await shot('ep-390.png');
         await p.evaluate(() => document.querySelector('dialog.ep-dlg')?.close()); await sleep(300);
         await p.setViewportSize({ width: 1440, height: 900 }); await p.emulateMedia({ colorScheme: 'light' });
@@ -265,7 +392,7 @@ echo json_encode(['m' => $m]);`.replace('getenv(\'EXIF_JPG\')', `'${jpegWithExif
         const kin = await p.evaluate(() => window.LCNDA_APP.api('kiosk_enter', {}, { method: 'POST', body: { password: 'secret-1234' } }).then(() => true, e => e.message));
         await p.goto(base); await p.waitForFunction(() => window.LCNDA_EXT?.enquetePhoto && document.body.classList.contains('is-kiosk'), null, { timeout: 30000 });
         await p.evaluate(id => window.LCNDA_EXT.enquetePhoto.open(id), inqId); await p.waitForSelector(`${D} .ep-chip`); await sleep(500);
-        out.kiosk = { entered: kin, circleDisabled: await p.$eval(`${D} [data-ep-tool="circle"]`, b => b.disabled), status: await p.$eval(`${D} [data-ui-status]`, e => e.textContent), add: await p.evaluate(d => !!document.querySelector(`${d} [data-ep-add]`), D) };
+        out.kiosk = { entered: kin, circleDisabled: await p.$eval(`${D} [data-ep-tool="circle"]`, b => b.disabled), status: await p.$eval(`${D} [data-ui-status]`, e => e.textContent), add: await p.evaluate(d => !!document.querySelector(`${d} [data-ep-add]`), D), x: await p.evaluate(d => !!document.querySelector(`${d} [data-ep-imgx], ${d} [data-ep-delinq]`), D) };
         out.kioskWrite = await post('clue_save', { inquiry_id: inqId, text: 'test', certainty: 'supposed' });
         await p.evaluate(() => document.querySelector('dialog.ep-dlg')?.close());
         await p.evaluate(() => window.LCNDA_APP.api('kiosk_exit', {}, { method: 'POST', body: { password: 'secret-1234' } }).catch(() => null));
@@ -293,6 +420,24 @@ echo json_encode(['m' => $m]);`.replace('getenv(\'EXIF_JPG\')', `'${jpegWithExif
         ['🏷 EXIF lu sur l’ordinateur : date, appareil, GPS', () => { assert.ok(ex, 'EXIF'); assert.equal(ex.date, '1987-07-14 10:12'); assert.equal(ex.make, 'FICTIF'); assert.ok(Math.abs(ex.lat - 45.16) < 0.001 && Math.abs(ex.lon - 1.53) < 0.001, `${ex.lat},${ex.lon}`); }],
         ['📏 frise : « pas avant 1904 » et « pas après 1915 » → 1904-1915 ; un indice réfuté ne compte pas', () => { const w = C.dateWindow([{ id: 1, date_from: 1904, certainty: 'probable' }, { id: 2, date_to: 1915, certainty: 'probable' }, { id: 3, date_from: 1950, certainty: 'refuted' }]); assert.deepEqual([w.from, w.to, w.conflict], [1904, 1915, false]); }],
         ['🤖 l’IA : « Supposé » au plus ; ↑ un cran ne mène jamais seul à « Prouvé »', () => { assert.equal(C.capAi('proven'), 'supposed'); assert.equal(C.bump('probable'), 'probable'); assert.equal(C.bump('supposed'), 'probable'); }],
+        ['🎨 canal de couleur : le bleu seul, le négatif (pixels calculés sur l’ordinateur)', () => { const px = new Uint8ClampedArray([200, 100, 50, 255, 10, 20, 30, 128]); C.channel(px, 'b'); assert.deepEqual([...px], [50, 50, 50, 255, 30, 30, 30, 128]); const n = new Uint8ClampedArray([200, 100, 50, 255]); C.channel(n, 'neg'); assert.deepEqual([...n], [55, 155, 205, 255]); const e = C.emboss(new Uint8ClampedArray(16).fill(90), 2, 2); assert.equal(e[0], 128); }],
+        ['📏 mesurer : porte de 2 m (± 10 %) → un segment 0,85 fois plus long fait 1,70 m, avec sa marge', () => { const r = C.measure([{ len: 200 }, { len: 170 }], 0, 2, 0.1); assert.equal(Math.round(r[1].value * 100), 170); assert.ok(r[1].lo < 1.6 && r[1].hi > 1.8 && r[1].rel > 0.1, JSON.stringify(r[1])); assert.deepEqual(C.measure([{ len: 0 }], 0, 2), []); }],
+        ['👪 qui pourrait-ce être : Pierre MAZAUD (né en 1904, à 5 km) colle pour « 6 ans vers 1910 » ; Louise DURAND (morte en 1900) non, avec pourquoi', () => {
+            const a = C.whoFits({ birth: 1904, death: 1980, km: 5, gender: 'male' }, { age: 6, spread: 2, from: 1909, to: 1912, hasPlace: true }), b = C.whoFits({ birth: 1850, death: 1900 }, { age: 6, from: 1909, to: 1912 });
+            assert.equal(a.fit, true); assert.deepEqual(a.yes.map(x => x.k), ['age', 'place']); assert.equal(b.fit, false); assert.ok(b.no.some(x => x.k === 'dead' && x.y === 1900) && b.no.some(x => x.k === 'age'), JSON.stringify(b));
+            assert.equal(C.whoFits({ birth: 1904, gender: 'female' }, { age: 6, from: 1910, gender: 'male' }).fit, false); }],
+        ['🧭 boussole : un point à 0,5 km à l’est est dans un cône vers l’est (60°), pas dans un cône vers l’ouest ; le cône se dessine', () => { const c = { lat: 45.16, lon: 1.53, az: 90, fov: 60, km: 1 }, q = C.destPoint(45.16, 1.53, 95, 0.5);
+            assert.equal(C.inCone(c, q).inside, true); assert.equal(C.inCone({ ...c, az: 270 }, q).inside, false); assert.equal(C.inCone({ ...c, km: 0.3 }, q).inside, false); assert.ok(Math.abs(C.bearing(c, q) - 95) < 0.5); assert.equal(C.cone(c, 6).length, 9); }],
+        ['☑ « Ai-je tout regardé ? » et 🌡 niveau proposé (débutée → avancée → résolue), temps passé', () => { assert.deepEqual(C.checklistProgress({ checklist: { coins: 1, dos: 1 } }), { done: 2, total: 10, all: false });
+            assert.equal(C.levelOf({ clues: [] }).level, 'debutee'); assert.equal(C.levelOf({ clues: [{}, {}, {}] }).level, 'avancee'); assert.equal(C.levelOf({ conclusion: { place: { certainty: 'probable' }, date: { certainty: 'proven' } } }).level, 'resolue');
+            assert.deepEqual(C.levelOf({ settings: { level: 'impossible' } }), { level: 'impossible', chosen: true }); assert.equal(C.fmtDur(3900), '1 h 05'); assert.equal(C.fmtDur(30), ''); }],
+        ['👤 une proposition de visage : « Supposé » seule, « Probable » confirmée, jamais « Prouvé »', () => { assert.equal(C.capFace('proven', false), 'supposed'); assert.equal(C.capFace('proven', true), 'probable'); assert.equal(C.capFace('probable', false), 'supposed'); assert.equal(C.capFace('refuted', true), 'refuted'); }],
+        ['😈 avocat du diable : le lieu, la date et les indices sûrs à mettre à l’épreuve ; une fois « à chercher », marqué fait', () => { const t = C.devilTargets({ conclusion: { place: { name: 'Brive', certainty: 'probable' }, date: { text: 'vers 1910', certainty: 'probable' } }, clues: [{ id: 7, num: 2, text: 'HÔTEL', certainty: 'proven' }, { id: 8, text: 'À chercher : x', certainty: 'supposed', data: { todo: 1, against: 'place' } }] });
+            assert.deepEqual(t.map(x => x.k), ['place', 'date', 'c7']); assert.equal(t[0].done, true); assert.equal(t[1].done, false); }],
+        ['🏗 construction : « Gare de Brive » (1860) reconnue dans l’indice « une gare » → pas avant 1860 ; démolie en 1950 → pas après', () => { const r = C.matchBuildings([{ id: 1, text: 'Une gare avec une horloge', certainty: 'supposed' }, { id: 2, text: 'Clocher', certainty: 'refuted' }], [{ name: 'Gare de Brive', built: 1860, km: 0.8 }, { name: 'Église Saint-Martin', dates: '12e siècle ; 1880' }]);
+            assert.equal(r.length, 1); assert.equal(r[0].from, 1860); assert.deepEqual(C.buildingDates({ built: 1890, gone: 1950 }), { from: 1890, to: 1950 }); assert.equal(C.buildingDates({ dates: 'vers 1880' }).from, 1880); }],
+        ['👶 croissance : deux enfants, trois images → l’ordre B, A, C et les écarts en années', () => { const g = C.growthOrder([{ ages: { 1: 8, 2: 3, 3: 12 } }, { ages: { 1: 5, 2: 0, 3: 9 } }], [1, 2, 3]); assert.deepEqual(g.order, ['2', '1', '3']); assert.deepEqual(g.t, { 1: 5, 2: 0, 3: 9 }); assert.equal(g.spread, 0); }],
+        ['🏙 profil des toits : la même ligne à une autre échelle → écart 0', () => { assert.equal(C.lineGap(C.normLine([[0, 0.5], [0.5, 0.2], [1, 0.6]]), C.normLine([[0, 0.25], [1, 0.1], [2, 0.3]])), 0); assert.ok(C.lineGap(C.normLine([[0, 0], [1, 1]]), C.normLine([[0, 1], [1, 0]])) > 0.4); }],
     ];
     if (chromium) {
         try { await browserPart(out); } catch (e) { console.error(e); out.fatal = e.message; }
@@ -313,11 +458,28 @@ echo json_encode(['m' => $m]);`.replace('getenv(\'EXIF_JPG\')', `'${jpegWithExif
             ['§ 1 : le bouton devient « 🔎 Enquête · N indices · lieu probable »', () => assert.match(out.buttonAfter || '', /Enquête · \d+ indices · lieu probable/)],
             ['§ 6 : comparer en ligne bloqué pour une personne vivante (aucun lien vers les sites) ; une photo sans personne : permis', () => { assert.equal(out.privacy.blocked, true); assert.ok(out.privacy.reasons.includes('living')); assert.match(out.blocked, /vivante/); assert.equal(out.blockedLinks, 0); assert.equal(out.privacyFree.blocked, false); }],
             ['supprimer une enquête : ↶ Annuler la remet', () => { assert.equal(out.deleted, false); assert.ok(out.undoDel); assert.equal(out.restored, true); }],
-            ['mode consultation : lecture seule (outils grisés, rien ne s’écrit)', () => { assert.equal(out.kiosk.entered, true); assert.equal(out.kiosk.circleDisabled, true); assert.match(out.kiosk.status, /lecture seule/); assert.equal(out.kiosk.add, false); assert.equal(out.kioskWrite.ok, false); }],
+            ['mode consultation : lecture seule (outils grisés, rien ne s’écrit)', () => { assert.equal(out.kiosk.entered, true); assert.equal(out.kiosk.circleDisabled, true); assert.match(out.kiosk.status, /lecture seule/); assert.equal(out.kiosk.add, false); assert.equal(out.kiosk.x, false); assert.equal(out.kioskWrite.ok, false); }],
             ['390 px en sombre : rien ne déborde de côté', () => { assert.ok(out.overflow.dlg <= 1 && out.overflow.side <= 1, JSON.stringify(out.overflow)); }],
             ['§ 5 : recherches proposées, chacune avec son « parce que… »', () => { assert.ok(out.searches.length >= 2 && out.searches.every(t => /^parce /.test(t)), JSON.stringify(out.searches)); }],
             ['§ 7 bis : la grille des aides (46 de la maquette + 🔤 police, ☀️ ombre, 🌐, 🤖) ; chacune s’ouvre sans erreur', () => { assert.ok(out.aidesCount >= 47, String(out.aidesCount)); assert.deepEqual(out.aideErr, []); const shut = Object.entries(out.aides).filter(([k, n]) => n < 1 && !['nearby', 'perspective', 'ombres'].includes(k)).map(([k]) => k); assert.deepEqual(shut, [], JSON.stringify(out.aides)); }],
             ['§ 7 ter : 🧰 Chercher dans les données, déjà rempli (le texte lu, le lieu supposé)', () => { assert.match(out.dataSearch.q || '', /HÔTEL DE LA POSTE/); assert.equal(out.dataSearch.place, 'Brive-la-Gaillarde'); assert.ok(out.dataSearch.rows >= 1); }],
+            ['🎚️ Mieux voir : le panneau de l’atelier (3 recettes, canal Tout / Rouge / Vert / Bleu, 🔦 lumière rasante, Retenir, Remettre)', () => { assert.ok(out.better.open, JSON.stringify(out.better)); assert.deepEqual(out.better.recipes, ['pale', 'paper', 'verso']); assert.deepEqual(out.better.chans, ['', 'r', 'g', 'b']); assert.ok(out.better.rake && out.better.reset); assert.match(out.better.keep || '', /Retenir pour cette photo/); }],
+            ['🎚️ « Encre pâle » change l’image affichée ; l’original ne change pas ; « Retenir » la garde avec l’enquête ; « Remettre comme au départ » remet tout', () => { assert.notEqual(out.betterPale.src, out.betterBefore.src, JSON.stringify([out.betterBefore, out.betterPale])); assert.equal(out.betterBefore.src, out.betterPale.orig);
+                assert.equal(out.betterFile.before, out.betterFile.after); assert.equal(out.betterFile.filename, 'img004.png'); assert.ok(out.betterKept && Number(out.betterKept.clahe) === 60 && Number(out.betterKept.sharp) === 150, JSON.stringify(out.betterKept));
+                assert.equal(out.betterReset.src, out.betterBefore.src); assert.equal(out.betterReset.filter, 'contrast(100%) brightness(100%)'); }],
+            ['☑ ai-je tout regardé, 🌡 niveau : cochés, choisis, gardés avec l’enquête et montrés en haut', () => { assert.deepEqual(out.plusSaved.checklist, ['coins', 'reflets']); assert.match(out.checklistUi, /2/); assert.equal(out.plusSaved.level, 'avancee'); assert.match(out.levelBadge, /Avancée/); assert.match(out.levelBadge, /☑ 2\/10/); }],
+            ['😈 avocat du diable : la conclusion (lieu, date) à l’épreuve → un indice « à chercher » (Supposé)', () => { assert.ok(out.devilTargets.some(t => /Brive/.test(t)) && out.devilTargets.some(t => /1905/.test(t)), JSON.stringify(out.devilTargets)); assert.ok(out.plusSaved.todo.some(([t, c, a]) => /^À chercher : Une carte de Tulle/.test(t) && c === 'supposed' && a === 'place'), JSON.stringify(out.plusSaved.todo)); }],
+            ['👪 qui pourrait-ce être : Pierre MAZAUD colle (âge, lieu), Louise DURAND non ; ✓ Peut-être → un indice Supposé', () => { const pm = out.who.find(w => /MAZAUD/.test(w.t) && /Pierre/.test(w.t)); assert.ok(pm && pm.fit && /6 ans|ans à cette date/.test(pm.yes) && /km/.test(pm.yes), JSON.stringify(out.who)); assert.ok(!out.who.some(w => /Louise/.test(w.t) && w.fit));
+                assert.ok(out.whoApi.people.some(x => x.name === 'Pierre MAZAUD' && x.km === 0)); assert.ok(out.plusSaved.who.some(([t, c, s]) => /Pierre MAZAUD/.test(t) && c === 'supposed' && s === 'famille'), JSON.stringify(out.plusSaved.who)); }],
+            ['🏗 construction : l’indice « une gare » reconnu comme « Gare de Brive » (fiche d’édifice, 1860) → « pas avant 1860 » proposé', () => { assert.ok(out.buildSug.some(t => /Gare de Brive/.test(t) && /1860/.test(t)), JSON.stringify(out.buildSug)); assert.ok(out.plusSaved.built.some(([y, c]) => y === 1860 && c === 'supposed'), JSON.stringify(out.plusSaved.built)); }],
+            ['🧭 boussole : le cône vers l’est montre la gare (0,8 km), vers l’ouest non ; le cône est sur la mini-carte', () => { assert.ok(out.compassEast.n >= 1 && out.compassEast.cone, JSON.stringify(out.compassEast)); assert.equal(out.compassWest, 0); }],
+            ['🗺 carte des enquêtes : calque éteint au départ ; allumé, l’enquête placée à Brive apparaît ; éteint, il disparaît', () => { assert.equal(out.mapLayer.off, false); assert.equal(out.mapLayer.before, 0); assert.ok(out.mapLayer.on >= 1, JSON.stringify(out.mapLayer)); assert.equal(out.mapLayer.after, false); }],
+            ['les 26 aides de plus s’ouvrent sans erreur ; 📋 le rapport d’expert a ses questions précises et la photo', () => { assert.deepEqual(out.plusErr, []); assert.ok(out.report.q && out.report.todo && out.report.img, JSON.stringify(out.report)); }],
+            ['👤 Qui est-ce ? (étape « Les gens ») : l’outil local Visages propose Paul DURAND, d’après le visage identifié à la main ; l’indice reste « Supposé »', () => { assert.ok(out.facesStep); assert.ok(out.faces.some(t => /Paul DURAND/.test(t)), JSON.stringify(out.faces)); assert.ok(out.faceClue && out.faceClue.cert === 'supposed' && out.faceClue.person === 3 && /DURAND/.test(out.faceClue.text), JSON.stringify(out.faceClue)); }],
+            ['👤 un indice de visage : jamais « Prouvé » ; « Probable » seulement confirmé par un indice qui n’est pas un visage ; absent du partage et du rapport', () => { assert.deepEqual(out.faceCap, { proven: 'supposed', confirmed: 'probable', byFace: 'supposed', self: 'supposed' }); assert.equal(out.faceSafe, false); }],
+            ['× sur chaque image : sort l’image de l’enquête (le média reste) ; ↶ Annuler la remet', () => { assert.match(out.chipX.title, /Retirer cette image de l’enquête/); assert.equal(out.chipX.after, 0); assert.equal(out.chipX.media, true); assert.ok(out.chipX.undo); assert.equal(out.chipX.back, 1); }],
+            ['🗑 Supprimer l’enquête : visible au pied du panneau, à gauche de « Terminer pour l’instant » ; tout de suite, ↶ Annuler la remet', () => { assert.ok(out.delBtn && /Supprimer l’enquête/.test(out.delBtn.text) && out.delBtn.before, JSON.stringify(out.delBtn)); assert.equal(out.delBtn.gone, true); assert.ok(out.delBtn.undo); assert.equal(out.delBtn.restored, true); }],
+            ['390 px : une fenêtre d’aide et le panneau « Mieux voir » ne débordent pas', () => { assert.ok(out.overflowPlus <= 1, String(out.overflowPlus)); assert.ok(out.overflowBetter && out.overflowBetter.left >= -1 && out.overflowBetter.right <= out.overflowBetter.vw + 1, JSON.stringify(out.overflowBetter)); }],
             ['aucune erreur JS', () => assert.deepEqual(out.errs, [], JSON.stringify(out.errs))],
         );
     } else console.log('  (Playwright absent : la partie navigateur n’est pas vérifiée)');
