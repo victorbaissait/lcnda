@@ -55,7 +55,7 @@
     const mqSimulated = q => /prefers-color-scheme|print|orientation|hover|pointer|prefers-reduced-motion|prefers-contrast/.test(normMq(q));
     const TAG_CHOICES = ['div', 'header', 'nav', 'main', 'section', 'article', 'aside', 'footer', 'figure', 'p', 'h1', 'h2', 'h3', 'h4', 'blockquote', 'ul', 'ol', 'li', 'span', 'a'];
     const ROLES = [['header', 'En-tête', 'site-entete'], ['nav', 'Menu', 'site-menu'], ['main', 'Contenu principal', 'contenu'], ['section', 'Section', 'section'], ['footer', 'Pied de page', 'site-pied'], ['div', 'Carte', 'carte']];
-    const NAMES = ['En-tête', 'Menu', 'Bandeau', 'Contenu principal', 'Section', 'Texte', 'Carte', 'Galerie', 'Image', 'Colonne', 'Citation', 'Contact', 'Pied de page'];
+    const NAMES = ['En-tête', 'Menu', 'Bandeau', 'Contenu principal', 'Section', 'Texte', 'Carte', 'Galerie', 'Image', 'Colonne', 'Citation', 'Contact', 'Pied de page', 'Vidéo', 'Son', 'Transcription', 'Dessin', 'Document', 'Diaporama'];
     const HELP = {select: 'Clic : choisir un élément (« Ceci est… ») · double-clic sur un texte : l’écrire · glisse un bloc depuis ＋ Blocs', text: 'Clic dans un texte pour l’écrire · Échap : fini · le code suit tout seul', play: '▶ Ton site comme un visiteur : tes scripts tournent, les liens entre pages marchent'};
     const KIND_LABEL = {menu: 'Menu (tenu à jour)', person: 'Fiche', tree: 'Arbre', timeline: 'Frise', map: 'Carte', chart: 'Chiffres', photos: 'Photos d’une personne', place: 'Gens d’un lieu', diagram: 'Diagramme'};
     /* 🎨 Styles → Espacements : [sélecteur, propriété, nom, valeur de départ (px), maximum] */
@@ -245,6 +245,7 @@
             this.imitate = ext.siteCompat?.BROWSERS.some(b => b.id === pref('imitate', '')) ? pref('imitate', '') : ''; if (this.imitate) this.setImitate(this.imitate);
             this.reload();
             api('website_render', {blocks: '[]'}).then(r => { if (r?.live && typeof r.live === 'object' && !Array.isArray(r.live)) { this._live = r.live; this.pushHtml(); } if (r?.css && !this.blocksCss) { this.blocksCss = r.css; this.pushCss(); } }).catch(() => {}); // styles des blocs, fonds des cartes interactives
+            fetch('assets/js/heritage-site-web-diaporama.js?v=1').then(r => (r.ok ? r.text() : '')).then(t => { if (t) this.diapoJs = t; }).catch(() => {}); // 🎞️ les boutons ‹ › du diaporama, en mode ▶ Tester (pas pendant qu'on modifie : ils seraient enregistrés dans la page)
             fetch(document.querySelector('script[src*="site-carte-vive"]')?.src || 'assets/js/site-carte-vive.js?v=2').then(r => (r.ok ? r.text() : '')).then(t => { if (t && !this.carteJs) { this.carteJs = t; if (this.frame) this.reload(); } }).catch(() => {}); // la carte interactive bouge aussi ici // les styles des blocs (menu…), même sans bloc de la généalogie
             this.hist.reset();
             if (this.dirty) U.savedStatus?.(dlg, 'dirty');
@@ -263,7 +264,10 @@
                 Édition: () => [{icon: '↶', label: 'Annuler', shortcut: '⌘Z', disabled: !this.hist.canUndo(), run: () => this.undo()}, {icon: '↷', label: 'Rétablir', shortcut: '⇧⌘Z', disabled: !this.hist.canRedo(), run: () => this.redo()}, '-',
                     {icon: '↑', label: 'Monter l’élément', disabled: !this.sel, run: () => this.move(-1)}, {icon: '↓', label: 'Descendre l’élément', disabled: !this.sel, run: () => this.move(1)}, {icon: '⧉', label: 'Dupliquer l’élément', disabled: !this.sel, run: () => this.duplicate()},
                     {icon: '</>', label: 'Voir l’élément dans le code', disabled: !this.sel, run: () => this.revealInCode(true)}, '-', {icon: '🗑', label: 'Supprimer l’élément', danger: true, disabled: !this.sel, run: () => this.remove()}],
-                Insertion: () => [...k.GROUPS.flatMap(([g, gl], gi) => [...(gi ? ['-'] : []), ...k.BLOCKS.filter(b => b.group === g).map(b => ({icon: b.icon, label: b.label, run: () => this.insertBlock(b.key)}))]), '-', {icon: '📄', label: 'Nouvelle page…', run: () => this.addPage()}],
+                // les blocs de la page tout de suite ; les autres familles (images, vidéo et son, généalogie) dans un second petit menu : le menu tient dans l'écran
+                Insertion: () => { const of = g => k.BLOCKS.filter(b => b.group === g).map(b => ({icon: b.icon, label: b.label, run: () => this.insertBlock(b.key)}));
+                    const sub = ([g, gl]) => ({icon: {img: '🖼', media: '🎬', genea: '🌳'}[g] || '＋', label: `${i18n(gl)}…`, run: () => setTimeout(() => UI().menuAt(this.$('[data-ui-menu="Insertion"]') || this.dlg, of(g), {title: i18n(gl)}), 0)});
+                    return [...of('page'), '-', ...k.GROUPS.filter(([g]) => g !== 'page').map(sub), '-', {icon: '📄', label: 'Nouvelle page…', run: () => this.addPage()}]; },
                 Affichage: () => [...[['visual', '✨ Visuel'], ['split', '◫ Visuel et code'], ['code', '</> Code']].map(([v, l]) => ({label: l, checked: this.view === v, run: () => this.setView(v)})), '-',
                     {icon: '⇄', label: 'Inverser l’aperçu et le code', run: () => this.setLayout({swap: !this.swap})}, {icon: '⬓', label: this.orientNow() === 'row' ? 'L’un au-dessus de l’autre' : 'Côte à côte', run: () => this.setLayout({orient: this.orientNow() === 'row' ? 'col' : 'row'})}, '-',
                     ...this.bps().map(b => ({icon: b.icon, label: `${i18n(b.name)} (${b.width} px)`, checked: this.device === b.id && !this.freeW, run: () => this.setDevice(b.id)})), {icon: '⚙', label: 'Gérer les écrans (@media)…', run: () => this.bpDialog()}, '-',
@@ -463,12 +467,12 @@
         themeFull() { return `${themeCss(this.site.theme)}\n${this.blocksCss}`; }
         srcdoc() {
             const k = K(), origin = location.origin, play = this.mode === 'play';
-            const csp = `default-src 'none'; img-src data: blob: https: ${origin}; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src data: https://fonts.gstatic.com; script-src 'unsafe-inline'; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'; object-src 'none'`;
+            const csp = `default-src 'none'; img-src data: blob: https: ${origin}; media-src data: blob: https: ${origin}; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src data: https://fonts.gstatic.com; script-src 'unsafe-inline'; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'; object-src 'none'`;
             const safe = s => String(s).replace(/<\/(style|script)/gi, '<\\/$1');
             return `<!doctype html><html lang="${esc(this.site.settings.lang || 'fr')}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="${esc(csp)}">`
                 + (this.imitate && ext.siteCompat ? `<script data-lcb>try{Object.defineProperty(navigator,'userAgent',{get:function(){return ${JSON.stringify(ext.siteCompat.ua(this.imitate)).replace(/</g, '\\u003c')};}});}catch(e){}<\/script>` : '')
                 + `<style id="lcb-theme">${safe(this.themeFull())}</style><style id="lcb-user">${safe(this.cssFor())}</style><style id="lcb-bridge">${k.BRIDGE_CSS}</style></head><body>${this.fillBlocks(this.pageSrc())}`
-                + `<script data-lcb>${k.BRIDGE}<\/script>${this.carteJs ? `<script data-lcb>${safe(this.carteJs)}<\/script>` : ''}${play ? [this.site.js, ...this.filesFor('js').map(f => f.content)].filter(x => x.trim()).map(x => `<script data-lcb>${safe(x)}<\/script>`).join('') : ''}</body></html>`;
+                + `<script data-lcb>${k.BRIDGE}<\/script>${this.carteJs ? `<script data-lcb>${safe(this.carteJs)}<\/script>` : ''}${play && this.diapoJs ? `<script data-lcb>${safe(this.diapoJs)}<\/script>` : ''}${play ? [this.site.js, ...this.filesFor('js').map(f => f.content)].filter(x => x.trim()).map(x => `<script data-lcb>${safe(x)}<\/script>`).join('') : ''}</body></html>`;
         }
         /** recharge l'aperçu ; pendant un chargement, les demandes se regroupent (une seule recharge, à la fin) ;
          *  toujours un texte nouveau (<!--n-->) : sinon le navigateur ne recharge pas un srcdoc identique et « prêt » n'arrive jamais */
@@ -654,7 +658,7 @@
                     <small class="sw-hint"><code>@media ${esc(b.query || '…')}</code> · ${n ? i18n('{what} dans le CSS', {what: plural(n, 'bloc')}) : i18n('pas encore de CSS')}${b.was && normMq(b.was) !== normMq(b.query) && n ? ' · ' + i18n('ces blocs suivront la nouvelle requête') : ''}${mqSimulated(b.query) ? ' · ' + i18n('l’aperçu le montre même si ton appareil ne l’est pas') : ''}</small>`}</div>`;
             };
             const orphans = () => { const known = new Set(list.map(b => normMq(b.was)).concat(list.map(b => normMq(b.query)))); return [...new Set(scan().map(m => m.query))].filter(q => q && !known.has(q)); };
-            ext.openDialog({eyebrow: 'MON SITE WEB', title: '⚙ Les écrans du site (@media)', wide: true, submitLabel: 'Appliquer',
+            ext.openDialog({eyebrow: 'MON SITE WEB', title: '⚙️ Les écrans du site (@media)', wide: true, submitLabel: 'Appliquer',
                 body: `<p class="sw-hint" style="margin-top:0">${i18n('Chaque écran est un bouton au-dessus de l’aperçu, et un choix « Écran » quand tu règles un élément : ses styles vont dans son bloc {code} du CSS du site.', {code: '<code>@media</code>'})}</p>
                     <div class="sw-row"><span>Partir de :</span>${PRESETS.map(([l], j) => `<button type="button" class="button small secondary" data-bp-preset="${j}">${esc(l)}</button>`).join('')}</div>
                     <div data-bp-list class="sw-bps"></div>
@@ -853,16 +857,18 @@
             }
         }
         uniqueSlug(s, self) { let out = s === 'index' ? 'page' : s, k = 2; while (this.site.pages.some((p, j) => j !== self && p.slug === out)) out = `${s}-${k++}`; return out; }
-        async addPage({ext = 'html', quick = false} = {}) {
-            const n = quick ? `Page ${this.site.pages.length + 1}` : await A().askText({title: '📄 Nouvelle page', message: 'Le nom de la page (il apparaît dans le menu) :', value: '', okLabel: 'Créer la page'}); if (!n?.trim()) return;
+        async addPage({ext = 'html', quick = false, name: given = '', bare = false} = {}) {
+            const n = given ? String(given) : quick ? `Page ${this.site.pages.length + 1}` : await A().askText({title: '📄 Nouvelle page', message: 'Le nom de la page (il apparaît dans le menu) :', value: '', okLabel: 'Créer la page'}); if (!n?.trim()) return;
             const [nm, ex] = splitExt(n); if (ex) ext = ex;
             const name = nm.slice(0, 80), k = K(), doc = k.parse(this.page().html);
             const head = doc.body.querySelector(':scope > header')?.outerHTML || k.BLOCKS.find(b => b.key === 'header').html({title: this.site.settings.title});
             const foot = [...doc.body.querySelectorAll(':scope > footer')].pop()?.outerHTML || k.BLOCKS.find(b => b.key === 'footer').html({title: this.site.settings.title});
             const text = k.BLOCKS.find(b => b.key === 'text').html({}).replace('Un titre', esc(name));
-            const np = {id: newId(), name, slug: this.uniqueSlug(slugOf(name), -1), title: '', desc: '', html: ext === 'php' ? `<?php include 'includes/entete.php'; ?>\n\n${text}\n\n${foot}\n` : `${head}\n\n${text}\n\n${foot}\n`, ext};
+            const mid = bare ? '' : `${text}\n\n`; // bare : sans le texte d'exemple (une page faite pour ce qu'un autre outil envoie)
+            const np = {id: newId(), name, slug: this.uniqueSlug(slugOf(name), -1), title: '', desc: '', html: ext === 'php' ? `<?php include 'includes/entete.php'; ?>\n\n${mid}${foot}\n` : `${head}\n\n${mid}${foot}\n`, ext};
             if (ext === 'php' && !this.site.files.some(f => f.path === 'includes/entete.php')) this.site.files.push({id: `f${newId().slice(1)}`, path: 'includes/entete.php', kind: 'php', content: `${head}\n`, pages: []});
             this.site.pages.push(np); this.changed(true); this.goPage(this.site.pages.length - 1);
+            if (given) return np;
             if (quick) { this.openTab(`p:${np.id}`); setTimeout(() => this.renameTab(`p:${np.id}`), 40); return; }
             toast(i18n('Page « {name} » créée : elle est dans le menu de toutes les pages.', {name}));
         }
@@ -1063,8 +1069,8 @@
             const R = ext.siteHtmlRef, C = ext.siteCssJsRef; if (!R) return '';
             const k = C ? this.refKind() : 'html', n = {html: R.ELEMENTS.length, attr: ext.siteHtmlAttrs?.ATTRS.length || 0, css: C?.CSS.length || 0, js: C?.JS.length || 0};
             const ph = {html: 'Chercher : titre, lien, tableau, h2…', attr: 'Chercher : alt, lien, nouvel onglet, obligatoire…', css: 'Chercher : couleur, marge, flex, grid…', js: 'Chercher : clic, cacher, charger, liste…'}[k];
-            const src = k === 'html' || k === 'attr' ? i18n('Source : {link}, © {by}, licence {lic} ; {changes}.', {link: `<a href="${esc(R.SOURCE.url)}" target="_blank" rel="noopener noreferrer">${esc(R.SOURCE.title)}</a>`, by: esc(R.SOURCE.by), lic: `<a href="${esc(R.SOURCE.licenseUrl)}" target="_blank" rel="noopener noreferrer">${esc(R.SOURCE.license)}</a>`, changes: esc(i18n(R.SOURCE.changes))})
-                : k === 'css' ? `${i18n('Syntaxe, valeur de départ, héritage : {link} (relevées dans w3c/webref), © World Wide Web Consortium, {lic} ; seuls quelques champs sont repris, « héritée » et certains « s’applique à » sont traduits. Descriptions en français : écrites pour LCNDA.', {link: `<a href="https://www.w3.org/Style/CSS/" target="_blank" rel="noopener noreferrer">${i18n('normes CSS du W3C')}</a>`, lic: '<a href="https://www.w3.org/copyright/software-license-2023/" target="_blank" rel="noopener noreferrer">W3C Software and Document License</a>'})} <details class="sw-ref-notice"><summary>${i18n('Notice de la licence W3C')}</summary><small>${esc(C.W3C_NOTICE)}</small></details>`
+            const src = k === 'html' || k === 'attr' ? i18n('Source : {link}, © {by}, licence {lic} ; {changes}.', {link: `${window.LCNDA_UI.extLink(R.SOURCE.url, R.SOURCE.title)}`, by: esc(R.SOURCE.by), lic: `${window.LCNDA_UI.extLink(R.SOURCE.licenseUrl, R.SOURCE.license)}`, changes: esc(i18n(R.SOURCE.changes))})
+                : k === 'css' ? `${i18n('Syntaxe, valeur de départ, héritage : {link} (relevées dans w3c/webref), © World Wide Web Consortium, {lic} ; seuls quelques champs sont repris, « héritée » et certains « s’applique à » sont traduits. Descriptions en français : écrites pour LCNDA.', {link: `${window.LCNDA_UI.extLink('https://www.w3.org/Style/CSS/', i18n('normes CSS du W3C'))}`, lic: '<a href="https://www.w3.org/copyright/software-license-2023/" target="_blank" rel="noopener noreferrer" title="https://www.w3.org/copyright/software-license-2023/">↗ W3C Software and Document License</a>'})} <details class="sw-ref-notice"><summary>${i18n('Notice de la licence W3C')}</summary><small>${esc(C.W3C_NOTICE)}</small></details>`
                 : 'Descriptions et exemples : écrits pour LCNDA. Chaque entrée renvoie à sa norme (WHATWG, W3C, ECMAScript) pour aller plus loin.';
             return `<section class="sw-ref" data-sw-ref><h4>📖 Aide-mémoire</h4>
                 ${C ? `<div class="segmented sw-seg sw-ref-kinds" role="tablist">${[['html', 'HTML'], ['attr', 'Attributs'], ['css', 'CSS'], ['js', 'JS']].filter(([v]) => v !== 'attr' || ext.siteHtmlAttrs).map(([v, l]) => `<button type="button" data-sw-refkind="${v}" class="${k === v ? 'is-active' : ''}">${l} <small>${n[v]}</small></button>`).join('')}</div>` : ''}
@@ -1095,7 +1101,7 @@
             const list = C.CSS.filter(p => (q ? p[0] === q || fold(`${p[0]} ${p[1]} ${p[1] ? i18n(p[1]) : ''}`).includes(q) : !!p[1])).sort((a, b) => (b[0] === q) - (a[0] === q));
             if (!list.length) return '<p class="sw-hint">Aucune propriété ne correspond.</p>';
             return (q ? '' : `<p class="sw-hint">${i18n('Les plus utiles ; cherche pour voir les {n}.', {n: C.CSS.length})}</p>`) + list.slice(0, 150).map(p => `<details class="sw-ref-el"${p[0] === q ? ' open' : ''}><summary><code>${esc(p[0])}</code> ${esc(p[1] ? i18n(p[1]) : '')}</summary>
-                <dl class="sw-ref-dl"><dt>Syntaxe</dt><dd><code>${esc(p[2])}</code></dd><dt>Au départ</dt><dd><code>${esc(p[3])}</code></dd><dt>Héritée</dt><dd>${esc(i18n(p[4]))}</dd><dt>S’applique à</dt><dd>${esc(trVal(p[5]))}</dd><dt>Norme</dt><dd><a href="${esc(p[7])}" target="_blank" rel="noopener noreferrer">${esc(p[6])}</a></dd></dl>
+                <dl class="sw-ref-dl"><dt>Syntaxe</dt><dd><code>${esc(p[2])}</code></dd><dt>Au départ</dt><dd><code>${esc(p[3])}</code></dd><dt>Héritée</dt><dd>${esc(i18n(p[4]))}</dd><dt>S’applique à</dt><dd>${esc(trVal(p[5]))}</dd><dt>Norme</dt><dd>${window.LCNDA_UI.extLink(p[7], p[6])}</dd></dl>
                 <div class="sw-row"><button type="button" class="button small secondary" data-sw-refins="${esc(p[0])}" data-sw-refk="css" title="L’écrire dans le CSS, là où est le curseur">&lt;/&gt; Écrire dans le CSS</button><button type="button" class="button small secondary" data-sw-refcopy="${esc(p[0])}" data-sw-refk="css">⧉ Copier</button></div></details>`).join('');
         }
         jsRefList() {
@@ -1103,7 +1109,7 @@
             const list = C.JS.filter(j => !q || fold(`${j[0]} ${j[1]} ${i18n(j[1])} ${j[2]}`).includes(q));
             if (!list.length) return '<p class="sw-hint">Rien ne correspond.</p>';
             return list.map((j, i) => `<details class="sw-ref-el"><summary><code>${esc(j[0])}</code> ${esc(i18n(j[1]))}</summary><pre class="sw-ref-ex"><code>${esc(j[2])}</code></pre>
-                <dl class="sw-ref-dl"><dt>Norme</dt><dd><a href="${esc(j[4])}" target="_blank" rel="noopener noreferrer">${esc(j[3])}</a></dd></dl>
+                <dl class="sw-ref-dl"><dt>Norme</dt><dd>${window.LCNDA_UI.extLink(j[4], j[3])}</dd></dl>
                 <div class="sw-row"><button type="button" class="button small secondary" data-sw-refins="${C.JS.indexOf(j)}" data-sw-refk="js" title="Écrire l’exemple dans le JS du site, là où est le curseur">&lt;/&gt; Écrire dans le JS</button><button type="button" class="button small secondary" data-sw-refcopy="${C.JS.indexOf(j)}" data-sw-refk="js">⧉ Copier l’exemple</button></div></details>`).join('');
         }
         htmlRefDetails(e) {
@@ -1164,7 +1170,9 @@
                 if (s.block === 'place') opts.push(`<label>Lieu<span class="sw-pick" data-i18n-off>${esc(a.place ? (s.name || '').replace(/^Gens de /, '') || `n° ${a.place}` : '—')} <button type="button" class="button small secondary" data-sw-act="block-place">Changer…</button></span></label>`);
                 return U.panelSection({title: i18n('🌳 Bloc de la généalogie : {what}', {what: i18n(KIND_LABEL[s.block] || s.block)}), key: 'sw-block', open: true, body: `<div class="form-grid one-column sw-form">${opts.join('')}</div><p class="sw-hint">Rempli avec ta base, figé à l’export, sans personne vivante ni fiche confidentielle.</p>`});
             };
-            const content = s.tag === 'img' ? U.panelSection({title: 'Image', key: 'sw-img', open: true, body: `<div class="form-grid one-column sw-form"><button type="button" class="button small secondary" data-sw-act="image">🖼 Changer l’image…</button><label>${i18n('Texte de remplacement (pour qui ne voit pas l’image)')}<input type="text" data-sw-at="alt" value="${esc(s.alt)}" maxlength="200"></label></div>`})
+            const av = s.tag === 'video' ? ['video', i18n('Vidéo'), i18n('🎬 Changer la vidéo…')] : s.tag === 'audio' ? ['audio', i18n('Son'), i18n('🎧 Changer le son…')] : null;
+            const content = av ? U.panelSection({title: av[1], key: 'sw-av', open: true, body: `<div class="form-grid one-column sw-form"><button type="button" class="button small secondary" data-sw-act="av-change" data-v="${av[0]}">${esc(av[2])}</button><p class="sw-hint">${esc(i18n('Le fichier part avec le site (dossier medias/) à l’export et à la publication.'))}</p></div>`})
+                : s.tag === 'img' ? U.panelSection({title: 'Image', key: 'sw-img', open: true, body: `<div class="form-grid one-column sw-form"><button type="button" class="button small secondary" data-sw-act="image">🖼 Changer l’image…</button><label>${i18n('Texte de remplacement (pour qui ne voit pas l’image)')}<input type="text" data-sw-at="alt" value="${esc(s.alt)}" maxlength="200"></label></div>`})
                 : s.tag === 'a' ? U.panelSection({title: 'Lien', key: 'sw-link', open: true, body: `<div class="form-grid one-column sw-form"><label>${i18n('Adresse')}<input type="text" data-sw-at="href" value="${esc(s.href)}" placeholder="page.html, https://…, mailto:…" maxlength="300"></label><div class="sw-chips">${this.site.pages.map(p => `<button type="button" class="sw-chip" data-sw-act="link" data-v="${esc(pageFile(p))}">📄 ${esc(p.name)}</button>`).join('')}</div></div>`}) : '';
             pane.innerHTML = `<div class="sw-this"><button type="button" class="sw-pane-x sw-pane-x-r" data-sw-toggle="panel" title="Cacher ce panneau (la languette sur le bord, ou ◨, le remet)" aria-label="Cacher le panneau Ceci est">⇥</button><small>${i18n('Ceci est')}</small><b data-i18n-off>${esc(s.name || (s.block ? i18n(KIND_LABEL[s.block]) : '') || s.tag)}</b><code>${esc(this.label(s))}</code>${s.text ? `<span class="sw-this-txt" data-i18n-off>« ${esc(s.text.slice(0, 70))}${s.text.length > 70 ? '…' : ''} »</span>` : ''}${this.htmlRefLine(s.tag)}</div>
                 <div class="sw-acts"><button type="button" class="icon-button small" data-sw-act="up" title="Monter" aria-label="Monter">↑</button><button type="button" class="icon-button small" data-sw-act="down" title="Descendre" aria-label="Descendre">↓</button><button type="button" class="icon-button small" data-sw-act="dup" title="Dupliquer" aria-label="Dupliquer">⧉</button><button type="button" class="icon-button small" data-sw-act="code" title="Voir dans le code" aria-label="Voir dans le code">&lt;/&gt;</button><button type="button" class="icon-button small" data-sw-act="quickcss" title="🎨 Son CSS : les règles de ses classes et de son id, modifiables (⌘E)" aria-label="Son CSS">🎨</button><button type="button" class="icon-button small" data-sw-act="parent" title="Choisir l’élément qui le contient" aria-label="Choisir le parent">⤴</button><span class="spacer"></span><button type="button" class="icon-button small danger" data-sw-act="del" title="Supprimer l’élément" aria-label="Supprimer l’élément">🗑</button></div>
@@ -1216,6 +1224,9 @@
             if (act === 'align') { this.applyDecl('text-align', b.dataset.v); return this.paintPanel(); }
             if (act === 'link') return this.setAttr('href', b.dataset.v);
             if (act === 'font') { const f = await UI()?.openFontPicker?.({value: (s.cs?.font || '').split(',')[0].replace(/["']/g, ''), sample: s.text?.slice(0, 30) || 'Mon site'}); if (!f) return; this.applyDecl('font-family', `'${String(f).replace(/[^\p{L}\p{N} \-.]/gu, '')}', sans-serif`); return this.post({type: 'info'}); }
+            if (act === 'av-change') { const m = await K().pickMedia(b.dataset.v === 'audio' ? 'audio' : 'video', b.dataset.v === 'audio' ? i18n('Un autre son') : i18n('Une autre vidéo')); if (!m) return; const src = K().mediaSrc(m);
+                this.mutate((doc, el) => { if (!el) return false; el.setAttribute('src', src); el.querySelectorAll('a[href], source[src]').forEach(x => x.setAttribute(x.tagName === 'A' ? 'href' : 'src', src)); if (m.title) el.setAttribute('title', m.title); const cap = el.parentElement?.querySelector(':scope > figcaption'); if (cap && m.title) cap.textContent = m.title; });
+                this.post({type: 'info'}); return this.hist.commit(); }
             if (act === 'image') { const l = await K().pickImages(false, 'Une autre image'); if (!l?.[0]) return; this.setAttr('src', K().mediaSrc(l[0])); if (!s.alt) this.setAttr('alt', l[0].title || ''); return; }
             if (act === 'block-person') { const p = await K().pickPerson('Quelle personne ?'); if (!p) return; this.setBlockAttr('person', String(p.id)); const w = {tree: 'Arbre', person: 'Fiche', timeline: 'Frise', map: 'Carte', photos: 'Photos'}[s.block]; if (w && p.name) this.setAttr('data-lc-name', `${w} de ${p.name}`); return; }
             if (act === 'dg-pick' || act === 'dg-new') {
@@ -1657,6 +1668,8 @@
             if (s.names) bits.push(`⚠️ ${i18n('{what} par « [nom retiré] »', {what: plural(s.names, 'nom de personne vivante remplacé', 'noms de personnes vivantes remplacés')})}`);
             if (s.broken) bits.push(`⚠️ ${i18n('{what} vers une page qui n’existe plus', {what: plural(s.broken, 'lien')})}`);
             if (s.missing) bits.push(i18n('{what} dans tes médias', {what: plural(s.missing, 'image introuvable', 'images introuvables')}));
+            if (s.av) bits.push(i18n('{what} (dossier medias/)', {what: plural(s.av, 'vidéo ou son', 'vidéos ou sons')}));
+            if (s.av_big) bits.push(`⚠️ ${i18n('{what} : trop lourd pour un site (90 Mo au plus par fichier, 300 Mo en tout)', {what: plural(s.av_big, 'vidéo ou son pas mis', 'vidéos ou sons pas mis')})}`);
             await UI().openExportDialog({title: 'Exporter le site', defaultName: `${this.name}-${new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10)}`, quality: false, info: bits.join(' · ') + '. ' + i18n('Le site a sa politique de sécurité (CSP) : ses scripts viennent seulement de ses fichiers.'),
                 formats: [{id: 'zip', label: '📦 Tout le site en .zip', hint: 'à ouvrir partout : double-clic, MAMP, WAMP, hébergeur', ext: 'zip', run: o => this.download('zip', o?.filename), goLabel: '⤓ Exporter tout le site (.zip)'},
                     {id: 'html', label: '🌐 Cette page seule', hint: 'un seul fichier .html', ext: 'html', run: o => this.download('html', o?.filename), goLabel: '⤓ Exporter la page (.html)'}]});
@@ -1668,7 +1681,7 @@
             const U = UI(), last = ['netlify', 'github', 'ftps'].includes(pref('publish', '')) ? pref('publish', '') : (st.site.last || 'netlify');
             const kept = has => (has ? 'Jeton gardé sur cet ordinateur (laisse vide pour le garder)' : 'Colle ton jeton ici');
             const tabs = [['netlify', 'Netlify'], ['github', 'GitHub Pages'], ...(st.ftps.available ? [['ftps', 'FTP sécurisé']] : [])];
-            const where = st.site.netlify_url || st.site.github_url ? `<p class="sw-hint">${i18n('Déjà en ligne :')} ${[st.site.netlify_url, st.site.github_url].filter(Boolean).map(u => `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(u)}</a>`).join(' · ')}</p>` : '';
+            const where = st.site.netlify_url || st.site.github_url ? `<p class="sw-hint">${i18n('Déjà en ligne :')} ${[st.site.netlify_url, st.site.github_url].filter(Boolean).map(u => `${window.LCNDA_UI.extLink(u, u)}`).join(' · ')}</p>` : '';
             const body = `${U.notice('info', 'Ton site est envoyé tel qu’à l’export (.zip) : sans personne vivante ni fiche confidentielle. Le jeton ou le mot de passe reste sur cet ordinateur : il n’est jamais montré, ni mis dans une sauvegarde ou dans le site.')}${where}
                 <div class="segmented sw-pubtabs" role="tablist">${tabs.map(([k, l]) => `<button type="button" data-pub-tab="${k}">${esc(l)}</button>`).join('')}</div>
                 <div class="form-grid one-column" data-pub-pane="netlify"><p class="sw-hint">Netlify héberge ton site gratuitement, à une adresse en …netlify.app. 1. Crée un compte sur netlify.com. 2. Dans « User settings → Applications → Personal access tokens », crée un jeton (« New access token »). 3. Colle-le ici.</p>
@@ -1808,6 +1821,83 @@
                 try { const t = k.TEMPLATES.find(x => x.key === b.dataset.tpl); const data = await t.make(); if (!data) return; return openSite({...ctx, data, name: data.settings?.title || t.name}); } catch (err) { toast(err.message, 'error'); }
             }), onSubmit: () => {}});
     }
+    /* ═════ 📤 Recevoir ce qu'un autre outil envoie (heritage-envoyer.js → « 🌐 Sur une page de mon site… ») ═════ */
+    const RECEIVE_BLOCK = {image: 'image', video: 'video', audio: 'audio', text: 'document', svg: 'drawing'};
+    const RECEIVE_WHAT = {image: 'L’image', video: 'La vidéo', audio: 'Le son', text: 'Le texte', svg: 'Le dessin'};
+    /** un petit menu qui rend la valeur choisie (rien si on le ferme) */
+    const menuPick = (anchor, title, items) => new Promise(res => { const U = UI(); if (!U?.menuAt) { res(items.find(x => x !== '-')?.value); return; } U.menuAt(anchor || document.body, items.map(it => (it === '-' ? it : {...it, run: () => res(it.value)})), {title}); });
+    /**
+     * ext.siteReceive({type: 'image'|'video'|'audio'|'text'|'svg', media, html, svg, name}, {anchor}) : demande quel site (ou un
+     * nouveau) puis quelle page (ou une nouvelle), pose le bon bloc à la fin de la page (avant le pied de page), enregistre, ouvre
+     * le site sur cette page ; « ↶ Annuler » remet la page (et retire la page ou le site créés pour l'occasion).
+     */
+    async function siteReceive(payload = {}, {anchor = null} = {}) {
+        const k = K(); if (!k || !CODE()) { toast(i18n('Mon site web n’est pas chargé : recharge la page.'), 'error'); return null; }
+        const type = String(payload?.type || ''), key = RECEIVE_BLOCK[type];
+        if (!key) { toast(i18n('Mon site web ne sait pas recevoir ça.'), 'error'); return null; }
+        const name = String(payload.name || '').trim().slice(0, 120);
+        // ce que le bloc reçoit (vérifié et nettoyé avant toute question)
+        let o;
+        if (type === 'image' || type === 'video' || type === 'audio') {
+            const m = payload.media; if (!m?.filename) { toast(i18n('Rien à envoyer.'), 'error'); return null; }
+            o = {m: {id: Number(m.id) || 0, filename: String(m.filename), title: String(m.title || name || '')}};
+            if (type === 'audio' && payload.html) o.trHtml = k.cleanDocHtml(payload.html);
+        } else if (type === 'text') {
+            const html = k.cleanDocHtml(payload.html); if (!html) { toast(i18n('Ce texte est vide.'), 'error'); return null; }
+            o = {html, name};
+        } else {
+            const svg = k.cleanSvg(payload.svg, {name}); if (!svg) { toast(i18n('Ce n’est pas un dessin SVG lisible.'), 'error'); return null; }
+            o = {svg, name};
+        }
+        // 1. quel site ?
+        let sites = []; try { sites = (await api('websites')).items || []; } catch (e) { toast(e.message, 'error'); return null; }
+        const cur = ext.siteWeb.current && !ext.siteWeb.current.closed ? ext.siteWeb.current : null, last = Number(pref('receiveSite', 0)) || 0;
+        const rank = x => (cur && Number(x.id) === cur.id ? 0 : Number(x.id) === last ? 1 : 2);
+        const list = sites.slice().sort((a, b) => rank(a) - rank(b)).slice(0, 30);
+        const siteItems = list.map(x => ({icon: '🌐', label: x.name || i18n('Mon site'), help: [x.info?.pages ? plural(x.info.pages, 'page') : '', cur && Number(x.id) === cur.id ? i18n('ouvert') : Number(x.id) === last ? i18n('la dernière fois') : ''].filter(Boolean).join(' · '), value: Number(x.id)}));
+        if (cur && !cur.id) siteItems.unshift({icon: '🌐', label: cur.name, help: i18n('ouvert, pas encore enregistré'), value: 'current'});
+        const sid = await menuPick(anchor, i18n('{what} : sur quel site ?', {what: i18n(RECEIVE_WHAT[type])}), [...siteItems, ...(siteItems.length ? ['-'] : []), {icon: '＋', label: i18n('Un nouveau site'), value: 'new'}]);
+        if (sid == null) return null;
+        // 2. le site ouvert dans l'éditeur (on ferme celui qui était ouvert, s'il en faut un autre)
+        let ed = null, newSite = false;
+        if (sid === 'current' || (cur && sid === cur.id)) ed = cur;
+        else {
+            if (cur) { await cur.close(); if (!cur.closed) return null; }
+            if (sid === 'new') { newSite = true; ed = await openSite({data: blankSite(), name: name || i18n('Mon site')}); }
+            else ed = await openSite({id: sid});
+        }
+        if (!ed || ed.closed) return null;
+        if (typeof sid === 'number') setPref('receiveSite', sid);
+        // 3. quelle page ?
+        const pages = ed.site.pages;
+        const pi = await menuPick(ed.$('select[data-sw-page]') || ed.$('.sw-bar'), i18n('Sur quelle page ?'), [...pages.map((p, i) => ({icon: '📄', label: p.name, checked: i === ed.pageIdx, value: i})), '-', {icon: '＋', label: i18n('Une nouvelle page…'), value: 'new'}]);
+        if (pi == null) return null;
+        const before = JSON.parse(JSON.stringify(ed.site.pages)), beforeIdx = ed.pageIdx;
+        if (pi === 'new') {
+            const n = await A().askText({title: i18n('📄 Nouvelle page'), message: i18n('Le nom de la page (il apparaît dans le menu) :'), value: name || '', okLabel: i18n('Créer la page')}); if (!n?.trim()) return null;
+            if (!await ed.addPage({name: n.trim(), bare: true})) return null;
+        } else if (pi !== ed.pageIdx) ed.goPage(pi);
+        // 4. le bloc, à la fin de la page
+        const b = k.BLOCKS.find(x => x.key === key), r = k.insertHtml(ed.page().html, b.html({title: ed.site.settings.title}, o), {});
+        ed.page().html = r.html; ed.changed(true);
+        if (ed.codeTab === 'html') ed.code.value = ed.page().html;
+        ed.sel = r.path ? {path: r.path, tag: '', cls: '', id: '', name: b.label} : null;
+        ed.pushHtml(); ed.hist.commit();
+        if (r.path) setTimeout(() => ed.post({type: 'select', path: r.path, report: true}), 160);
+        const id = await ed.save({quiet: true}), pageName = ed.page().name, pageIdx = ed.pageIdx;
+        if (!id) return null;
+        A().undoToast?.(i18n('{what} est sur la page « {page} » de « {site} »', {what: i18n(RECEIVE_WHAT[type]), page: pageName, site: ed.name}), {undo: async () => {
+            try {
+                if (newSite) { if (!ed.closed) { ed.dirty = false; await ed.close(); } await post('delete_website', {id}); return toast(i18n('Site retiré.')); }
+                if (!ed.closed) { ed.site.pages = JSON.parse(JSON.stringify(before)); ed.pageIdx = clamp(beforeIdx, 0, ed.site.pages.length - 1); ed.sel = null; ed.afterRestore(); ed.hist.commit(); await ed.save({quiet: true}); return; }
+                const cur2 = await api('website', {id}); const data = {...cur2.data, pages: before};
+                await post('save_website', {id, name: cur2.name, data, rev: cur2.rev});
+            } catch (e) { toast(e.message, 'error'); }
+        }});
+        return {id, page: pageIdx, editor: ed};
+    }
+    ext.siteReceive = siteReceive;
+
     ext.siteWeb = {Editor, open: openSite, chooseTemplate, importFolder, normalizeSite, blankSite, themeCss, current: null};
     ext.openWebsite = openSite;
 
@@ -1819,5 +1909,6 @@
         open: (id, again) => openSite({id, onSaved: again, onClose: again}),
         create: again => chooseTemplate({onSaved: again, onClose: again}),
         rename: (id, name) => post('rename_website', {id, name}),
-        remove: id => post('delete_website', {id}), createLabel: '＋ Nouveau site'});
+        remove: async id => { const r = await post('delete_website', {id}), site = (r?.result || r)?.site; if (!site) return null; const o = {undo: async () => { const x = (await post('restore_website', {site}))?.result; o.restoredId = Number(x?.id) || 0; return x; }}; return o; }, undo: true, // ↶ Annuler : le site revient avec ses versions
+        createLabel: '＋ Nouveau site'});
 })();

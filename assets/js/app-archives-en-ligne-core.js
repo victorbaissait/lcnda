@@ -36,8 +36,9 @@
         6: {global: 'LCNDA_SOURCES_OUVERTES_6', ui: 'sourcesOuvertes6', store: 'genealogie-sources-ouvertes-6-sites', import: '📚 Bibliothèque, auteur, HisKi, Old Bailey, notaire de Paris'},
         7: {global: 'LCNDA_SOURCES_OUVERTES_7', ui: 'sourcesOuvertes7', store: 'genealogie-sources-ouvertes-7-sites', format: 'so7', import: '🇪🇺 Archives d’Europe, Juste, enfant assisté, monument, cadastre'},
         8: {global: 'LCNDA_SOURCES_OUVERTES_8', ui: 'sourcesOuvertes8', store: 'genealogie-sources-ouvertes-8-sites', import: ''}, // sites gratuits : pas d'import propre (« Coller un lien »)
+        27: {global: 'LCNDA_SO27', ui: 'liensArchives', store: 'genealogie-sources-ouvertes-27-sites', import: ''}, // 🔗 archives à consulter en lien (app-liens-archives-core.js)
     };
-    const LOT_IDS = [1, 2, 3, 4, 5, 6, 7, 8];
+    const LOT_IDS = [1, 2, 3, 4, 5, 6, 7, 8, 27];
     const STORE_KEYS = LOT_IDS.map(n => LOTS[n].store);
     const prefix = n => (Number(n) === 1 ? 'so_' : `so${n}_`);
 
@@ -97,9 +98,12 @@
         '8:allemagne': ['Allemagne', 'registres'], '8:autriche': ['Europe', 'registres'], '8:suisse': ['Suisse', 'registres'], '8:royaume_uni': ['Royaume-Uni', 'registres'],
         '8:irlande': ['Irlande', 'registres'], '8:danemark': ['Danemark', 'migrations'], '8:norvege': ['Norvège', 'migrations'], '8:pologne': ['Pologne', 'registres'],
         '8:estonie': ['Estonie', 'registres'], '8:lettonie': ['Lettonie', 'registres'], '8:lituanie': ['Lituanie', 'registres'], '8:tchequie': ['Tchéquie', 'registres'],
+        '27:france': ['France', 'registres'], '27:guerres': ['France', 'soldats'], '27:emigration': ['Monde', 'migrations'], '27:allemagne': ['Allemagne', 'arbres'],
+        '27:quebec': ['Canada', 'registres'], '27:livres': ['Monde', 'livres'],
         '8:etats_unis': ['États-Unis', 'registres'], '8:canada': ['Canada', 'registres'], '8:argentine': ['Argentine', 'migrations'],
     };
     const SITE_META = {
+        '27:bulletin_lois': [null, 'presse'], '27:cie_indes': [null, 'mer'], '27:emigres': [null, 'migrations'], '27:mercuriales': [null, 'livres'], '27:plaques_antibes': [null, 'lieux'], '27:medaille_resistance': [null, 'decorations'],
         '1:europeana': ['Europe', 'presse'], '1:retronews': [null, null, {paid: 'partiel'}],
         '2:an_naturalisation': [null, 'migrations'], '2:shd_marins': [null, 'mer'],
         '2:be_arch': ['Belgique'], '2:ch_canton': ['Suisse'], '2:ellis': ['États-Unis', 'migrations'],

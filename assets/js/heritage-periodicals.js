@@ -101,7 +101,7 @@
     function keep(r, f, isArticle) {
         const iss = isArticle ? issueOf(r) : r, per = pOf(r);
         if (f.fam && famOf(iss) !== f.fam) return false;
-        if (f.q && !f.q.toLowerCase().split(/\s+/).filter(Boolean).every(w => (isArticle ? textOfArticle(r) : textOfIssue(r)).includes(w))) return false;
+        if (f.q && !(window.LCNDA_UI?.listMatch?.text || ((q, ...h) => h.join(' ').toLowerCase().includes(String(q).toLowerCase())))(f.q, isArticle ? textOfArticle(r) : textOfIssue(r))) return false; // C1 : sans accents ni majuscules, chaque mot (UI.listMatch)
         if (f.periodical && String(per?.id) !== f.periodical) return false;
         if (f.kind && per?.kind !== f.kind) return false;
         if (f.cat && (iss?.data?.category || '') !== (f.cat === '__none' ? '' : f.cat)) return false;
@@ -157,7 +157,7 @@
         const newBtns = (f.fam ? [f.fam] : allFams()).map((k, n) => `<button type="button" class="button ${n ? 'secondary' : ''}" data-pr-new="issue" data-fam="${esc(k)}">＋ ${esc(Wf(k).item)}</button>`).join('');
         ws.innerHTML = `<section class="page h-pr">
             <header class="page-header"><div><span class="eyebrow">LISTES</span><h2>📚 Revues, livres et documentaires</h2><p>Ce que tu as lu, vu, ce que tu veux acheter ; chaque article, chapitre ou moment, et qui ou quoi y est cité.</p></div>
-                <div class="page-actions">${newBtns}<button type="button" class="button secondary" data-pr-new="periodical">＋ ${esc(f.fam ? Wf(f.fam).cont : 'Revue, collection, série')}</button><button type="button" class="button secondary" data-pr-atelier title="Mettre ce qui est affiché dans un projet de l’Atelier">📚 Vers l’Atelier</button><button type="button" class="button secondary" data-pr-csv>⤓ Exporter en CSV</button><button type="button" class="button secondary" data-pr-types title="Les types (revue, livre, documentaire, podcast, les tiens), leurs champs, leur affichage">⚙️ Réglages</button></div></header>
+                <div class="page-actions">${newBtns}<button type="button" class="button secondary" data-pr-new="periodical">＋ ${esc(f.fam ? Wf(f.fam).cont : 'Revue, collection, série')}</button><button type="button" class="button secondary" data-pr-atelier title="Mettre ce qui est affiché dans un projet de l’Atelier">📚 Vers l’Atelier</button><button type="button" class="button secondary" data-pr-csv>⤓ Exporter</button><button type="button" class="button secondary" data-pr-types title="Les types (revue, livre, documentaire, podcast, les tiens), leurs champs, leur affichage">⚙️ Réglages</button></div></header>
             <div class="h-pr-views h-pr-fams">${fams.map(([k, l]) => `<button type="button" class="${f.fam === k ? 'is-on' : ''}" data-pr-fam="${esc(k)}">${esc(l)}</button>`).join('')}</div>
             <div class="h-pr-views">${views.map(([k, l]) => `<button type="button" class="${f.view === k ? 'is-on' : ''}" data-pr-view="${esc(k)}">${esc(l)}</button>`).join('')}</div>
             ${['issues', 'wanted'].includes(f.view) ? `<div class="h-pr-views h-pr-disp"><label class="ui-toggle"><input type="checkbox" data-pr-group ${groupOf(f) === 'category' ? 'checked' : ''}><i></i>Grouper par catégorie</label></div>` : ''}
@@ -261,6 +261,7 @@
             body = rows.articles.map(a => { const i = issueOf(a); return [D.families?.[famOf(a)] || Wf(famOf(a)).items, a.title, a.authors, i ? issueName(i) : '', i?.number, i?.date_text, a.pages, a.rubric, D.article_kinds[a.kind], a.data?.what_seen, a.data?.summary, a.data?.transcript || a.data?.quote, a.data?.places, a.data?.period, a.data?.surnames, (a.links || []).map(l => l.name).join(', '), (a.labels || []).map(l => l.name).join(', ')]; }); }
         else { const list = view === 'wanted' ? rows.wanted : rows.issues; head = ['Famille', 'Revue, collection, série', 'Titre', 'Auteur, réalisation', 'Éditeur, chaîne', 'N°', 'Hors-série', 'Date', 'Durée', 'ISBN', 'Où j’en suis', 'Priorité', 'Prix', 'Prix payé', 'Rangé où', 'Contenu', 'Rattaché à', 'Étiquettes', 'Notes'];
             body = list.map(i => [D.families?.[famOf(i)] || Wf(famOf(i)).items, pOf(i)?.title, i.title, i.data?.creators, i.data?.publisher || i.data?.channel, i.number, i.data?.special ? 'oui' : '', i.date_text, i.data?.duration, i.data?.isbn, D.statuses[i.status || ''], i.data?.priority, i.data?.cover_price, i.data?.price_paid, i.data?.storage, partsOf(i).map(a => (timed(famOf(i)) && a.pages ? a.pages + ' ' : '') + a.title).join(' | '), (i.links || []).map(l => l.name).join(', '), (i.labels || []).map(l => l.name).join(', '), i.data?.notes]); }
+        if (window.LCNDA_UI?.exportRows) return window.LCNDA_UI.exportRows({quote: 'always', title: i18n('Bibliothèque'), name: `bibliotheque-${view}`, rows: () => [head, ...body], info: i18n('{n} lignes', {n: body.length})}); // ⤓ la fenêtre d'export commune
         const text = '﻿' + [head, ...body].map(r => r.map(q).join(';')).join('\r\n');
         if (ext.downloadText) ext.downloadText(`bibliotheque-${view}.csv`, text, 'text/csv;charset=utf-8'); else { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], {type: 'text/csv'})); a.download = `bibliotheque-${view}.csv`; a.click(); }
     }
@@ -590,7 +591,7 @@
                 toast('Enregistré.'); await reload();
                 const open = [...document.querySelectorAll('dialog[open] .h-pr-arts')].pop(); if (open) { open.closest('dialog').close(); setTimeout(() => issueDialog(D.issues.find(x => x.id === issue.id)), 50); }
             },
-            onDelete: a ? async () => { if (!await A().confirmBox(`Supprimer « ${a.title} » ?`, {title: 'Supprimer l’article', okLabel: 'Supprimer l’article'})) return false; await post('delete_periodical_item', {what: 'article', id: a.id}); await reload(); } : null});
+            onDelete: a ? async () => { if (!await A().deleteWithUndo({action: 'delete_periodical_item', body: {what: 'article', id: a.id}, type: 'periodical_article', id: a.id, message: i18n('Article « {name} » supprimé', {name: a.title}), after: () => reload()})) return false; } : null}); // H7 : ↶ Annuler au lieu de demander
     }
 
     /* ─── 📚 Vers un projet de l'Atelier ─── */
@@ -626,13 +627,15 @@
         const rows = [...D.issues.map(i => ({key: 'issue:' + i.id, fam: famOf(i), label: issueName(i), sub: [i.data?.creators, i.date_text].filter(Boolean).join(' · ')})),
             ...D.articles.map(a => { const i = issueOf(a); return {key: 'article:' + a.id, fam: famOf(a), label: (timed(famOf(a)) && a.pages ? `⏱ ${a.pages} — ` : '') + a.title, sub: `dans ${i ? issueName(i) : '?'}${a.authors ? ' · ' + a.authors : ''}`, child: true}; })];
         ext.openDialog({eyebrow: 'ATELIER', title: '＋ Ajouter des revues, livres, documentaires', wide: true, submitLabel: 'Ajouter au projet',
-            body: `<div class="h-pr-pickbar"><input type="search" data-pk-q placeholder="Chercher…"><select data-pk-fam><option value="">Tout</option>${allFams().map(k => `<option value="${esc(k)}">${Wf(k).ic} ${esc(Wf(k).items)}</option>`).join('')}</select><button type="button" class="link-button" data-pk-all>tout cocher (affichés)</button></div>
-                <div class="h-pr-pick">${rows.map(r => `<label class="checkbox-line ${r.child ? 'is-child' : ''}" data-fam="${r.fam}"><input type="checkbox" value="${r.key}"> ${Wf(r.fam).ic} <span><b>${esc(r.label)}</b> <small class="muted">${esc(r.sub)}</small></span></label>`).join('')}</div>`,
+            body: `<div class="h-pr-pickbar"><input type="search" data-pk-q placeholder="Chercher…"><select data-pk-fam><option value="">Tout</option>${allFams().map(k => `<option value="${esc(k)}">${Wf(k).ic} ${esc(Wf(k).items)}</option>`).join('')}</select></div>
+                <div class="h-pr-pick" data-pk-list></div>`,
             onOpen: dl => {
-                const q = dl.querySelector('[data-pk-q]'), fam = dl.querySelector('[data-pk-fam]');
-                const filt = () => dl.querySelectorAll('.h-pr-pick label').forEach(l => { l.hidden = (fam.value && l.dataset.fam !== fam.value) || !l.textContent.toLowerCase().includes(q.value.trim().toLowerCase()); });
-                q.addEventListener('input', filt); fam.addEventListener('change', filt);
-                dl.querySelector('[data-pk-all]').addEventListener('click', () => dl.querySelectorAll('.h-pr-pick label:not([hidden]) input').forEach(c => { c.checked = true; }));
+                // la liste de choix commune (app-ui.js) : 🔍 sans accents, cochés en haut, « Tout cocher les N affichés », + le tri par famille à côté
+                const fam = dl.querySelector('[data-pk-fam]');
+                const cl = window.LCNDA_UI.choiceList({items: rows.map(r => ({value: r.key, icon: Wf(r.fam).ic, label: r.label, sub: r.sub, fam: r.fam, cls: r.child ? 'is-child' : '', attrs: `data-fam="${esc(r.fam)}"`})),
+                    multiple: true, label: 'Revues, livres, documentaires', search: dl.querySelector('[data-pk-q]'), tickAll: true});
+                dl.querySelector('[data-pk-list]').appendChild(cl);
+                fam.addEventListener('change', () => cl.setFilter(fam.value ? it => it.fam === fam.value : null));
             },
             onSubmit: async form => {
                 const items = [...form.querySelectorAll('.h-pr-pick input:checked')].map(c => { const [type, id] = c.value.split(':'); return {type, id: Number(id)}; });

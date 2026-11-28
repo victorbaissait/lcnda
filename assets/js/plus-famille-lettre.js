@@ -5,7 +5,7 @@
  *    unique des images) et l'ancêtre (menu de choix) ; tout le texte se retouche sur place ; 🖨 Imprimer / ⤓ PDF (L1),
  *    ✉️ Courriel prêt (mailto), 📁 Ranger une copie dans les médias, 📝 Retoucher (traitement de texte), 💾 Garder.
  *  - Listes → ✨ Trésors de famille → « 💌 Lettres de famille » (à côté de « 📰 Gazettes ») : les lettres gardées (H10).
- *  - Traitement de texte → 📋 Partir d'un modèle → « 💌 Lettre à la famille » : le même moteur remplit le modèle.
+ *  - Traitement de texte → 🧩 Partir d'un modèle → « 💌 Lettre à la famille » : le même moteur remplit le modèle.
  * Vivants : seulement le prénom et l'âge ; fiches confidentielles : jamais (règle de l'export « Pour partager », serveur).
  */
 (() => {
@@ -171,7 +171,7 @@
     ext.tresorRelated = ext.tresorRelated || {};
     ext.tresorRelated['lettre-famille'] = [[i18n('📋 Voir dans Listes › Lettres de famille'), () => { A().state.listType = 'family_letters'; A().setModule('listes'); }]];
 
-    /* ═════════ Traitement de texte → 📋 Partir d'un modèle → « 💌 Lettre à la famille » : rempli par le même moteur ═════════ */
+    /* ═════════ Traitement de texte → 🧩 Partir d'un modèle → « 💌 Lettre à la famille » : rempli par le même moteur ═════════ */
     const patchTemplate = () => {
         const L = ext.textDocTools?.TEMPLATES; if (!L) return false;
         const t = L.find(x => x.key === 'famille'); if (!t || t._pf) return !!t;

@@ -1,0 +1,710 @@
+fr ¦ lt ¦ lv ¦ et
+# 🏠 Plan de maison : les objets en plus, les styles, le choix « 🎨 Style » (heritage-house-objets.js, heritage-house-lib.js)
+Meubles de style ¦ Stilizuoti baldai ¦ Stila mēbeles ¦ Stiilimööbel
+🎨 Tous les styles ¦ 🎨 Visi stiliai ¦ 🎨 Visi stili ¦ 🎨 Kõik stiilid
+Sans les meubles de style ¦ Be stilizuotų baldų ¦ Bez stila mēbelēm ¦ Ilma stiilimööblita
+D’ailleurs ¦ Iš kitur ¦ Ārzemju ¦ Mujalt
+Modernes ¦ Modernūs ¦ Mūsdienu ¦ Moodsad
+Rien dans le style « {s} » ici : choisis « 🎨 Tous les styles ». ¦ Čia nėra nieko „{s}“ stiliumi: pasirink „🎨 Visi stiliai“. ¦ Šeit nav nekā „{s}“ stilā: izvēlies „🎨 Visi stili“. ¦ Siin pole midagi stiilis „{s}“: vali „🎨 Kõik stiilid“.
+Louis XIII ¦ Liudviko XIII ¦ Luija XIII ¦ Louis XIII
+Louis XIV ¦ Liudviko XIV ¦ Luija XIV ¦ Louis XIV
+Régence ¦ Regentystės ¦ Reģentstes ¦ Régence
+Louis XV ¦ Liudviko XV ¦ Luija XV ¦ Louis XV
+Louis XVI ¦ Liudviko XVI ¦ Luija XVI ¦ Louis XVI
+Directoire ¦ Direktorijos ¦ Direktorijas ¦ Directoire
+Empire ¦ Ampyras ¦ Ampīrs ¦ Ampiir
+Restauration ¦ Restauracijos ¦ Restaurācijas ¦ Restauratsioon
+Charles X ¦ Karolio X ¦ Kārļa X ¦ Charles X
+Louis-Philippe ¦ Liudviko Pilypo ¦ Luija Filipa ¦ Louis-Philippe
+Napoléon III ¦ Napoleono III ¦ Napoleona III ¦ Napoleon III
+Art nouveau ¦ Modernas ¦ Jūgendstils ¦ Juugend
+Art déco ¦ Art deco ¦ Art deco ¦ Art deco
+Henri II ¦ Henriko II ¦ Anrī II ¦ Henri II
+Renaissance ¦ Renesansas ¦ Renesanse ¦ Renessanss
+Biedermeier ¦ Bydermejeris ¦ Bīdermeijers ¦ Biidermeier
+victorien ¦ viktorijietiškas ¦ Viktorijas laika ¦ viktoriaanlik
+Chippendale ¦ Chippendale ¦ Čipendeila ¦ Chippendale
+Queen Anne ¦ Karalienės Onos ¦ Karalienes Annas ¦ Queen Anne
+gustavien ¦ gustaviškas ¦ gustaviāņu ¦ gustaviaanlik
+shaker ¦ šeikerių ¦ šeikeru ¦ shaker
+colonial ¦ kolonijinis ¦ koloniālais ¦ koloniaalne
+marocain ¦ marokietiškas ¦ marokāņu ¦ maroko
+japonais ¦ japoniškas ¦ japāņu ¦ jaapani
+chinois laqué ¦ kiniškas lakuotas ¦ ķīniešu lakots ¦ hiina lakitud
+Thonet ¦ Thonet ¦ Thonet ¦ Thonet
+vénitien ¦ venecijietiškas ¦ venēciešu ¦ veneetsia
+normand ¦ Normandijos ¦ Normandijas ¦ Normandia
+breton ¦ Bretanės ¦ Bretaņas ¦ Bretagne
+basque ¦ baskų ¦ basku ¦ baski
+alsacien ¦ Elzaso ¦ Elzasas ¦ Alsace’i
+savoyard ¦ Savojos ¦ Savojas ¦ Savoia
+auvergnat ¦ Overnės ¦ Overņas ¦ Auvergne’i
+bressan ¦ Breso ¦ Bresas ¦ Bresse’i
+lorrain ¦ Lotaringijos ¦ Lotringas ¦ Lorraine’i
+landais ¦ Landų ¦ Landu ¦ Landes’i
+vendéen ¦ Vandėjos ¦ Vandejas ¦ Vendée
+limousin ¦ Limuzeno ¦ Limuzēnas ¦ Limousini
+bourguignon ¦ Burgundijos ¦ Burgundijas ¦ Burgundia
+catalan ¦ katalonų ¦ katalāņu ¦ katalaani
+corse ¦ Korsikos ¦ Korsikas ¦ Korsika
+champenois ¦ Šampanės ¦ Šampaņas ¦ Champagne’i
+flamand ¦ flamandų ¦ flāmu ¦ flaami
+franc-comtois ¦ Franš Kontė ¦ Franškontē ¦ Franche-Comté
+béarnais ¦ Bearno ¦ Bearnas ¦ Béarni
+dauphinois ¦ Dofinė ¦ Dofinē ¦ Dauphiné
+picard ¦ Pikardijos ¦ Pikardijas ¦ Picardie
+gascon ¦ Gaskonės ¦ Gaskoņas ¦ Gascogne’i
+années 1930 ¦ 1930-ųjų ¦ 1930. gadu ¦ 1930. aastate
+années 1950 ¦ 1950-ųjų ¦ 1950. gadu ¦ 1950. aastate
+années 1960 ¦ 1960-ųjų ¦ 1960. gadu ¦ 1960. aastate
+années 1970 ¦ 1970-ųjų ¦ 1970. gadu ¦ 1970. aastate
+années 1980 ¦ 1980-ųjų ¦ 1980. gadu ¦ 1980. aastate
+scandinave ¦ skandinaviškas ¦ skandināvu ¦ skandinaavia
+industriel ¦ industrinis ¦ industriālais ¦ industriaalne
+contemporain ¦ šiuolaikinis ¦ mūsdienīgs ¦ kaasaegne
+laqué blanc ¦ baltai lakuotas ¦ balti lakots ¦ valgeks lakitud
+en pin ¦ pušinis ¦ priedes ¦ männipuust
+en chêne clair ¦ šviesaus ąžuolo ¦ gaiša ozola ¦ heledast tammest
+en merisier ¦ vyšnios medienos ¦ ķirškoka ¦ kirsipuust
+en noyer ¦ riešutmedžio ¦ riekstkoka ¦ pähklipuust
+en acajou ¦ raudonmedžio ¦ sarkankoka ¦ mahagonist
+en rotin ¦ ratano ¦ rotangpalmas ¦ rotangist
+en bambou ¦ bambukinis ¦ bambusa ¦ bambusest
+en métal ¦ metalinis ¦ metāla ¦ metallist
+patiné (shabby chic) ¦ patinuotas (shabby chic) ¦ patinēts (shabby chic) ¦ patineeritud (shabby chic)
+bohème ¦ bohemiškas ¦ bohēmisks ¦ boheemlaslik
+en teck ¦ tikmedžio ¦ tīkkoka ¦ tiikpuust
+Chiffonnier ¦ Aukšta komoda ¦ Augsta kumode ¦ Kõrge sahtlikapp
+Table de salle à manger ¦ Valgomojo stalas ¦ Ēdamgalds ¦ Söögilaud
+Pendule ¦ Židinio laikrodis ¦ Kamīnpulkstenis ¦ Kaminakell
+Bonnetière ¦ Siaura spinta ¦ Šaurs skapis ¦ Kitsas kapp
+Desserte ¦ Serviravimo staliukas ¦ Servējamais galdiņš ¦ Serveerimislaud
+Buffet de cuisine ¦ Virtuvės bufetas ¦ Virtuves bufete ¦ Köögipuhvet
+Table de toilette ¦ Tualetinis staliukas ¦ Tualetes galdiņš ¦ Tualettlaud
+Horloge de parquet ¦ Pastatomas laikrodis su švytuokle ¦ Stāvpulkstenis ¦ Põrandakell
+Pommier ¦ Obelis ¦ Ābele ¦ Õunapuu
+Poirier ¦ Kriaušė ¦ Bumbiere ¦ Pirnipuu
+Cerisier ¦ Vyšnia ¦ Ķirsis ¦ Kirsipuu
+Prunier ¦ Slyva ¦ Plūme ¦ Ploomipuu
+Pêcher ¦ Persikas ¦ Persiks ¦ Virsikupuu
+Abricotier ¦ Abrikosas ¦ Aprikoze ¦ Aprikoosipuu
+Cognassier ¦ Svarainis ¦ Cidonija ¦ Küdooniapuu
+Châtaignier ¦ Kaštonas ¦ Ēdamais kastaņs ¦ Kastanipuu
+Figuier ¦ Figmedis ¦ Vīģe ¦ Viigipuu
+Olivier ¦ Alyvmedis ¦ Olīvkoks ¦ Oliivipuu
+Citronnier en bac ¦ Citrinmedis vazone ¦ Citronkoks podā ¦ Sidrunipuu potis
+Oranger en bac ¦ Apelsinmedis vazone ¦ Apelsīnkoks podā ¦ Apelsinipuu potis
+Noisetier ¦ Lazdynas ¦ Lazda ¦ Sarapuu
+Mûrier ¦ Šilkmedis ¦ Zīdkoks ¦ Mooruspuu
+Tilleul ¦ Liepa ¦ Liepa ¦ Pärn
+Platane ¦ Platanas ¦ Platāna ¦ Plaatan
+Marronnier ¦ Kaštainis ¦ Zirgkastaņa ¦ Hobukastan
+Hêtre ¦ Bukas ¦ Dižskābardis ¦ Pöök
+Frêne ¦ Uosis ¦ Osis ¦ Saar
+Saule pleureur ¦ Svyruoklis gluosnis ¦ Raudošais vītols ¦ Leinapaju
+Peuplier ¦ Tuopa ¦ Papele ¦ Pappel
+Érable ¦ Klevas ¦ Kļava ¦ Vaher
+Magnolia ¦ Magnolija ¦ Magnolija ¦ Magnoolia
+Lilas ¦ Alyva ¦ Ceriņi ¦ Sirel
+Cerisier du Japon ¦ Japoninė sakura ¦ Japāņu ķirsis ¦ Jaapani kirsipuu
+Orme ¦ Guoba ¦ Goba ¦ Jalakas
+Acacia ¦ Akacija ¦ Akācija ¦ Akaatsia
+Charme ¦ Skroblas ¦ Skābardis ¦ Valgepöök
+Sureau ¦ Šeivamedis ¦ Plūškoks ¦ Leeder
+Tilleul de la Liberté ¦ Laisvės liepa ¦ Brīvības liepa ¦ Vabaduse pärn
+Sapin ¦ Eglė ¦ Baltegle ¦ Nulg
+Épicéa ¦ Paprastoji eglė ¦ Egle ¦ Kuusk
+Pin parasol ¦ Pušis pinija ¦ Pīnija ¦ Piinia
+Pin sylvestre ¦ Paprastoji pušis ¦ Parastā priede ¦ Harilik mänd
+Cyprès ¦ Kiparisas ¦ Ciprese ¦ Küpress
+If ¦ Kukmedis ¦ Īve ¦ Jugapuu
+Cèdre ¦ Kedras ¦ Ciedrs ¦ Seeder
+Thuya ¦ Tuja ¦ Tūja ¦ Elupuu
+Rosier ¦ Rožė ¦ Roze ¦ Roos
+Rosier grimpant ¦ Vijoklinė rožė ¦ Vīteņroze ¦ Ronitroos
+Hortensia ¦ Hortenzija ¦ Hortenzija ¦ Hortensia
+Lavande ¦ Levanda ¦ Lavanda ¦ Lavendel
+Romarin ¦ Rozmarinas ¦ Rozmarīns ¦ Rosmariin
+Thym ¦ Čiobrelis ¦ Timiāns ¦ Tüümian
+Buis taillé en boule ¦ Rutulio formos buksmedis ¦ Bumbas formas buksis ¦ Kerakujuliseks pöetud pukspuu
+Forsythia ¦ Forsitija ¦ Forsītija ¦ Forsüütia
+Laurier-sauce ¦ Lauras ¦ Lauru koks ¦ Loorberipuu
+Laurier-rose ¦ Oleandras ¦ Oleandrs ¦ Oleander
+Buddleia ¦ Budlėja ¦ Budleja ¦ Budleia
+Camélia ¦ Kamelija ¦ Kamēlija ¦ Kameelia
+Rhododendron ¦ Rododendras ¦ Rododendrs ¦ Rododendron
+Azalée ¦ Azalija ¦ Azālija ¦ Asalea
+Houx ¦ Bugienis ¦ Akaba ¦ Astelpõõsas
+Cassissier ¦ Juodasis serbentas ¦ Upene ¦ Must sõstar
+Groseillier ¦ Raudonasis serbentas ¦ Sarkanā jāņoga ¦ Punane sõstar
+Framboisier ¦ Avietė ¦ Avenājs ¦ Vaarikas
+Pied de vigne ¦ Vynmedis ¦ Vīnogulājs ¦ Viinapuu
+Bambou ¦ Bambukas ¦ Bambuss ¦ Bambus
+Bananier ¦ Bananmedis ¦ Banānaugs ¦ Banaanipuu
+Palmier ¦ Palmė ¦ Palma ¦ Palm
+Herbes de la pampa ¦ Pampų žolė ¦ Pampasu zāle ¦ Pampahein
+Graminées ¦ Dekoratyvinės žolės ¦ Dekoratīvās zāles ¦ Kõrrelised
+Fuchsia ¦ Fuksija ¦ Fuksija ¦ Fuksia
+Glycine ¦ Visterija ¦ Glīcīnija ¦ Visteeria
+Lierre ¦ Gebenė ¦ Efeja ¦ Luuderohi
+Fougère ¦ Papartis ¦ Paparde ¦ Sõnajalg
+Massif de géraniums ¦ Pelargonijų gėlynas ¦ Pelargoniju dobe ¦ Pelargoonipeenar
+Massif de tournesols ¦ Saulėgrąžų gėlynas ¦ Saulgriežu dobe ¦ Päevalillepeenar
+Massif de tulipes ¦ Tulpių gėlynas ¦ Tulpju dobe ¦ Tulbipeenar
+Massif de jonquilles ¦ Narcizų gėlynas ¦ Narcišu dobe ¦ Nartsissipeenar
+Massif d’iris ¦ Vilkdalgių gėlynas ¦ Īrisu dobe ¦ Iirisepeenar
+Massif de dahlias ¦ Jurginų gėlynas ¦ Dāliju dobe ¦ Daaliapeenar
+Massif de soucis ¦ Medetkų gėlynas ¦ Kliņģerīšu dobe ¦ Saialillepeenar
+Massif de pivoines ¦ Bijūnų gėlynas ¦ Peoniju dobe ¦ Pojengipeenar
+Massif de marguerites ¦ Ramunių gėlynas ¦ Margrietiņu dobe ¦ Karikakrapeenar
+Carré de fraisiers ¦ Braškių lysvė ¦ Zemeņu dobe ¦ Maasikapeenar
+Rang de pommes de terre ¦ Bulvių vaga ¦ Kartupeļu vaga ¦ Kartulirida
+Rang de salades ¦ Salotų vaga ¦ Salātu vaga ¦ Salatirida
+Rang de tomates ¦ Pomidorų vaga ¦ Tomātu vaga ¦ Tomatirida
+Rang de carottes ¦ Morkų vaga ¦ Burkānu vaga ¦ Porgandirida
+Rang de poireaux ¦ Porų vaga ¦ Puravu vaga ¦ Porrurida
+Rang de haricots à rames ¦ Vijoklinių pupelių vaga ¦ Kāršu pupiņu vaga ¦ Aedoarida
+Rang de choux ¦ Kopūstų vaga ¦ Kāpostu vaga ¦ Kapsarida
+Planche de courges ¦ Moliūgų lysvė ¦ Ķirbju dobe ¦ Kõrvitsapeenar
+Planche d’oignons ¦ Svogūnų lysvė ¦ Sīpolu dobe ¦ Sibulapeenar
+Carré d’aromatiques ¦ Prieskoninių žolelių lysvė ¦ Garšaugu dobe ¦ Maitsetaimepeenar
+Pelouse ¦ Veja ¦ Zāliens ¦ Muru
+Prairie fleurie ¦ Žydinti pieva ¦ Ziedoša pļava ¦ Lilleaas
+Pot de géraniums ¦ Pelargonijų vazonas ¦ Pelargoniju pods ¦ Pelargoonipott
+Jardinière de fleurs ¦ Gėlių dėžė ¦ Puķu kaste ¦ Lillekast
+Agapanthe en pot ¦ Agapantas vazone ¦ Agapants podā ¦ Aafrika liilia potis
+Buis en pot ¦ Buksmedis vazone ¦ Buksis podā ¦ Pukspuu potis
+Pot de basilic ¦ Bazilikų vazonėlis ¦ Baziliku podiņš ¦ Basiilikupott
+Bac à fleurs en zinc ¦ Cinkuota gėlių dėžė ¦ Cinkota puķu kaste ¦ Tsingitud lillekast
+Pot en terre d’Anduze ¦ Andiuzo molinis vazonas ¦ Andīzas māla pods ¦ Anduze savipott
+Grande jarre provençale ¦ Didelis Provanso ąsotis ¦ Liels Provansas trauks ¦ Suur Provence’i savinõu
+Yucca ¦ Juka ¦ Juka ¦ Jukka
+Plante grasse (aloe) ¦ Sukulentas (alavijas) ¦ Sukulents (alveja) ¦ Sukulent (aaloe)
+Cactus colonne ¦ Kolonos kaktusas ¦ Kolonnveida kaktuss ¦ Sammaskaktus
+Kentia ¦ Kentija ¦ Kentija ¦ Kentia
+Sansevieria ¦ Sanseviera ¦ Sansevjēra ¦ Sansevjeera
+Pothos suspendu ¦ Kabantis epipremnas ¦ Nokarenais potoss ¦ Rippuv potos
+Oiseau de paradis (strelitzia) ¦ Rojaus paukštis (strelicija) ¦ Paradīzes putns (strelīcija) ¦ Paradiisilind (strelitsia)
+Bonsaï sur sellette ¦ Bonsai ant stovo ¦ Bonsai uz statīva ¦ Bonsai alusel
+Poinsettia ¦ Puansetija ¦ Puansetija ¦ Jõulutäht
+Plante aromatique sur rebord ¦ Prieskoninis augalas ant palangės ¦ Garšaugs uz palodzes ¦ Maitsetaim aknalaual
+Palmier d’intérieur ¦ Kambarinė palmė ¦ Istabas palma ¦ Toapalm
+Banc de jardin en bois et fonte ¦ Sodo suolas iš medžio ir ketaus ¦ Dārza sols no koka un čuguna ¦ Puidust ja malmist aiapink
+Banc de jardin en bois ¦ Medinis sodo suolas ¦ Koka dārza sols ¦ Puidust aiapink
+Banc en pierre sculpté ¦ Raižytas akmeninis suolas ¦ Kokgriezts akmens sols ¦ Nikerdatud kivipink
+Table de bistrot en fer ¦ Geležinis bistro staliukas ¦ Dzelzs bistro galdiņš ¦ Raudne bistroolaud
+Table de jardin ronde en résine ¦ Apvalus sodo stalas iš dervos ¦ Apaļš sveķu dārza galds ¦ Ümar vaigust aialaud
+Table de jardin en teck ¦ Tikmedžio sodo stalas ¦ Tīkkoka dārza galds ¦ Tiikpuust aialaud
+Table de pique-nique ¦ Iškylų stalas ¦ Piknika galds ¦ Piknikulaud
+Chaise longue ¦ Gultas ¦ Atpūtas krēsls ¦ Lamamistool
+Transat de plage rayé ¦ Dryžuotas paplūdimio gultas ¦ Svītrains pludmales krēsls ¦ Triibuline rannatool
+Bain de soleil en résine ¦ Dervinis gultas saulei ¦ Sveķu sauļošanās zviļņa ¦ Vaigust päevitustool
+Portique de jeux ¦ Vaikų žaidimų kompleksas ¦ Bērnu rotaļu komplekss ¦ Laste mänguväljak
+Grand toboggan ¦ Didelė čiuožykla ¦ Liels slidkalniņš ¦ Suur liumägi
+Bac à sable couvert ¦ Uždengta smėlio dėžė ¦ Apsegta smilšu kaste ¦ Kaetud liivakast
+Petit trampoline ¦ Mažas batutas ¦ Mazs batuts ¦ Väike batuut
+Hamac sur pied ¦ Hamakas su stovu ¦ Šūpuļtīkls ar statīvu ¦ Raamiga võrkkiik
+Tonnelle de jardin ¦ Sodo pavėsinė ¦ Dārza lapene ¦ Aiavõlv
+Pergola en bois ¦ Medinė pergolė ¦ Koka pergola ¦ Puidust pergola
+Pergola bioclimatique ¦ Bioklimatinė pergolė ¦ Bioklimatiskā pergola ¦ Bioklimaatiline pergola
+Parasol déporté ¦ Gembinis skėtis ¦ Konsoles saulessargs ¦ Konsoolvarjuk
+Parasol rouge de terrasse ¦ Raudonas terasos skėtis ¦ Sarkans terases saulessargs ¦ Punane terrassivarjuk
+Fontaine en pierre ¦ Akmeninis fontanas ¦ Akmens strūklaka ¦ Kivist purskkaev
+Fontaine murale ¦ Sieninis fontanas ¦ Sienas strūklaka ¦ Seinapurskkaev
+Bassin rond ¦ Apvalus tvenkinys ¦ Apaļš dīķis ¦ Ümar tiik
+Bassin aux nénuphars ¦ Tvenkinys su vandens lelijomis ¦ Dīķis ar ūdensrozēm ¦ Vesiroositiik
+Piscine rectangulaire ¦ Stačiakampis baseinas ¦ Taisnstūra baseins ¦ Ristkülikukujuline bassein
+Petite piscine ¦ Mažas baseinas ¦ Mazs baseins ¦ Väike bassein
+Piscine hors-sol ronde ¦ Apvalus antžeminis baseinas ¦ Apaļš virszemes baseins ¦ Ümar maapealne bassein
+Spa d’extérieur ¦ Lauko SPA vonia ¦ Āra SPA vanna ¦ Välimullivann
+Barbecue au charbon ¦ Anglinė kepsninė ¦ Ogļu grils ¦ Söegrill
+Plancha sur chariot ¦ Plancha ant vežimėlio ¦ Plancha uz ratiņiem ¦ Plancha kärul
+Four à pizza ¦ Picų krosnis ¦ Picas krāsns ¦ Pitsaahi
+Brasero en acier ¦ Plieninė laužavietė ¦ Tērauda ugunskura bļoda ¦ Terasest tuleasi
+Composteur en bois ¦ Medinė komposto dėžė ¦ Koka komposta kaste ¦ Puidust kompostikast
+Potager surélevé ¦ Pakelta lysvė ¦ Paaugstināta dobe ¦ Kõrgpeenar
+Serre de jardin ¦ Sodo šiltnamis ¦ Dārza siltumnīca ¦ Aiakasvuhoone
+Petite serre adossée ¦ Mažas prisieninis šiltnamis ¦ Maza piesienas siltumnīca ¦ Väike seinakasvuhoone
+Mangeoire à oiseaux ¦ Paukščių lesyklėlė ¦ Putnu barotava ¦ Linnusöötja
+Cadran solaire sur colonne ¦ Saulės laikrodis ant kolonos ¦ Saules pulkstenis uz kolonnas ¦ Päikesekell sambal
+Enrouleur de tuyau ¦ Žarnos ritė ¦ Šļūtenes spole ¦ Voolikurull
+Lanterne de jardin ¦ Sodo žibintas ¦ Dārza laterna ¦ Aialatern
+Mât de drapeau ¦ Vėliavos stiebas ¦ Karoga masts ¦ Lipumast
+Clôture en bois ¦ Medinė tvora ¦ Koka žogs ¦ Puitaed
+Grillage rigide ¦ Standžioji tinklinė tvora ¦ Stingrs sieta žogs ¦ Jäik võrkaed
+Barrière blanche ¦ Balta tvorelė ¦ Balts žodziņš ¦ Valge aed
+Haie de lauriers ¦ Laurų gyvatvorė ¦ Lauru dzīvžogs ¦ Loorberihekk
+Haie de charmille ¦ Skroblų gyvatvorė ¦ Skābaržu dzīvžogs ¦ Valgepöögihekk
+Muret en pierres sèches ¦ Sausojo mūro sienelė ¦ Sausā mūra sieniņa ¦ Kuivmüür
+Portail en fer forgé ¦ Kaltiniai vartai ¦ Kalti dzelzs vārti ¦ Sepistatud värav
+Portail en bois ¦ Mediniai vartai ¦ Koka vārti ¦ Puidust värav
+Portillon ¦ Varteliai ¦ Vārtiņi ¦ Jalgvärav
+Abri à bûches ¦ Malkinė ¦ Malkas nojume ¦ Puukuur
+Éolienne de pompage ¦ Vandens siurblio vėjo malūnas ¦ Ūdens sūkņa vējdzirnavas ¦ Veepumba tuulik
+Puits couvert ¦ Uždengtas šulinys ¦ Apjumta aka ¦ Kaetud kaev
+Abreuvoir en pierre ¦ Akmeninė girdykla ¦ Akmens dzirdinātava ¦ Kivist joogiküna
+Abri de jardin en bois ¦ Medinis sodo namelis ¦ Koka dārza mājiņa ¦ Puidust aiamaja
+Abri de jardin en métal ¦ Metalinis sodo namelis ¦ Metāla dārza mājiņa ¦ Metallist aiamaja
+Cabane dans les arbres ¦ Namelis medyje ¦ Māja kokā ¦ Puumaja
+Carport ¦ Automobilio stoginė ¦ Automašīnas nojume ¦ Autovarjualune
+Kiosque de jardin ¦ Sodo paviljonas ¦ Dārza paviljons ¦ Aiapaviljon
+Cabane de jardin pour enfants ¦ Vaikų sodo namelis ¦ Bērnu dārza mājiņa ¦ Laste aiamaja
+Allée en gravier ¦ Žvyro takas ¦ Grants celiņš ¦ Kruusatee
+Terrasse dallée ¦ Plytelėmis grįsta terasa ¦ Bruģēta terase ¦ Kiviplaatidest terrass
+Terrasse en bois ¦ Medinė terasa ¦ Koka terase ¦ Puitterrass
+Bac à compost ouvert ¦ Atvira komposto dėžė ¦ Atvērta komposta kaste ¦ Avatud kompostikast
+Jardin japonais ¦ Japoniškas sodas ¦ Japāņu dārzs ¦ Jaapani aed
+Rocaille ¦ Alpinariumas ¦ Akmensdārzs ¦ Kivikülv
+Vasque de jardin ¦ Sodo dubuo ¦ Dārza vāze ¦ Aiavaas
+Statue de jardin ¦ Sodo skulptūra ¦ Dārza skulptūra ¦ Aiakuju
+Lion en pierre ¦ Akmeninis liūtas ¦ Akmens lauva ¦ Kivilõvi
+Boule décorative ¦ Dekoratyvinis rutulys ¦ Dekoratīva lode ¦ Dekoratiivkera
+Nichoir à mésanges ¦ Inkilas zylėms ¦ Zīlīšu būrītis ¦ Tihasepesakast
+Hôtel à insectes ¦ Vabzdžių viešbutis ¦ Kukaiņu viesnīca ¦ Putukahotell
+Boîte à livres ¦ Knygų mainų dėžutė ¦ Grāmatu apmaiņas skapītis ¦ Raamatukapp
+Ruche kenyane ¦ Kenijietiškas avilys ¦ Kenijas strops ¦ Keenia taru
+Pompe d’arrosage ¦ Laistymo pompa ¦ Laistīšanas sūknis ¦ Kastmispump
+Arroseur oscillant ¦ Svyruojantis purkštuvas ¦ Svārstīgais smidzinātājs ¦ Võnkuv vihmuti
+Arrosoir en zinc ¦ Cinkuota laistytuvė ¦ Cinkota lejkanna ¦ Tsingitud kastekann
+Tondeuse hélicoïdale ¦ Rankinė vejapjovė ¦ Rokas zāles pļāvējs ¦ Käsimuruniiduk
+Motoculteur ¦ Motoblokas ¦ Motokultivators ¦ Mullafrees
+Débroussailleuse ¦ Krūmapjovė ¦ Krūmgriezis ¦ Võsalõikur
+Souffleur à feuilles ¦ Lapų pūstuvas ¦ Lapu pūtējs ¦ Lehepuhur
+Réverbère ancien ¦ Senovinis gatvės žibintas ¦ Sena ielas laterna ¦ Vana tänavalatern
+Enseigne de commerce ¦ Parduotuvės iškaba ¦ Veikala izkārtne ¦ Poesilt
+Vache normande ¦ Normandijos karvė ¦ Normandijas govs ¦ Normandia lehm
+Vache limousine ¦ Limuzino karvė ¦ Limuzēnas govs ¦ Limousini lehm
+Vache charolaise ¦ Šarolė karvė ¦ Šarolē govs ¦ Charolais’ lehm
+Vache bretonne pie noir ¦ Juodmargė Bretanės karvė ¦ Melnraiba Bretaņas govs ¦ Mustakirju Bretagne’i lehm
+Vache montbéliarde ¦ Monbeljaro karvė ¦ Monbeljāras govs ¦ Montbéliarde’i lehm
+Veau ¦ Veršelis ¦ Teļš ¦ Vasikas
+Bœuf de trait ¦ Darbinis jautis ¦ Darba vērsis ¦ Veohärg
+Cheval de trait (percheron) ¦ Sunkiasvoris arklys (peršeronas) ¦ Smagais zirgs (peršerons) ¦ Raskeveohobune (perššeron)
+Cheval de trait breton ¦ Bretanės sunkiasvoris arklys ¦ Bretaņas smagais zirgs ¦ Bretagne’i raskeveohobune
+Cheval de selle ¦ Jojamasis arklys ¦ Jājamzirgs ¦ Ratsahobune
+Poney ¦ Ponis ¦ Ponijs ¦ Poni
+Mulet ¦ Mulas ¦ Mūlis ¦ Muul
+Poulain ¦ Kumeliukas ¦ Kumeļš ¦ Varss
+Brebis ¦ Avis ¦ Aita ¦ Lammas
+Agneau ¦ Ėriukas ¦ Jērs ¦ Tall
+Bélier ¦ Avinas ¦ Auns ¦ Jäär
+Chevreau ¦ Ožiukas ¦ Kazlēns ¦ Kitsetall
+Truie ¦ Kiaulė ¦ Sivēnmāte ¦ Emis
+Porcelet ¦ Paršelis ¦ Sivēns ¦ Põrsas
+Coq ¦ Gaidys ¦ Gailis ¦ Kukk
+Poule blanche ¦ Balta višta ¦ Balta vista ¦ Valge kana
+Poussin ¦ Viščiukas ¦ Cālis ¦ Tibu
+Canard ¦ Antis ¦ Pīle ¦ Part
+Dindon ¦ Kalakutas ¦ Tītars ¦ Kalkun
+Pintade ¦ Patarška ¦ Pērļu vistiņa ¦ Pärlkana
+Pigeon ¦ Balandis ¦ Balodis ¦ Tuvi
+Lapin ¦ Triušis ¦ Trusis ¦ Küülik
+Chien de berger ¦ Aviganis ¦ Aitu suns ¦ Lambakoer
+Grand chien ¦ Didelis šuo ¦ Liels suns ¦ Suur koer
+Petit chien ¦ Mažas šuo ¦ Mazs suns ¦ Väike koer
+Chat roux ¦ Rudas katinas ¦ Rudais kaķis ¦ Punane kass
+Chat noir ¦ Juodas katinas ¦ Melns kaķis ¦ Must kass
+Chat tigré ¦ Dryžuotas katinas ¦ Svītrains kaķis ¦ Triibuline kass
+Chat endormi en boule ¦ Kamuoliu susirietęs miegantis katinas ¦ Kamolā saritinājies guļošs kaķis ¦ Kerra tõmbunud magav kass
+Lama ¦ Lama ¦ Lama ¦ Laama
+Cerf ¦ Elnias ¦ Briedis ¦ Hirv
+Sanglier ¦ Šernas ¦ Mežacūka ¦ Metssiga
+Renard ¦ Lapė ¦ Lapsa ¦ Rebane
+Tortue ¦ Vėžlys ¦ Bruņurupucis ¦ Kilpkonn
+Héron ¦ Garnys ¦ Gārnis ¦ Haigur
+Cygne ¦ Gulbė ¦ Gulbis ¦ Luik
+Cage à oiseaux en osier ¦ Pinta paukščių narvelis ¦ Pīts putnu būris ¦ Punutud linnupuur
+Cage à canaris ¦ Kanarėlių narvelis ¦ Kanārijputnu būris ¦ Kanaarilinnu puur
+Poulailler en bois ¦ Medinė vištidė ¦ Koka vistu kūts ¦ Puidust kanala
+Niche en bois ¦ Medinė šuns būda ¦ Koka suņu būda ¦ Puidust koerakuut
+Abri pour moutons ¦ Avių pastogė ¦ Aitu nojume ¦ Lambavarjualune
+Box à cheval ¦ Arklio gardas ¦ Zirga boks ¦ Hobuseboks
+Ruche Dadant ¦ Dadano avilys ¦ Dadāna strops ¦ Dadant’i taru
+Ruche Langstroth ¦ Langstroto avilys ¦ Langstrota strops ¦ Langstrothi taru
+Ruche en paille tressée ¦ Pintas šiaudinis avilys ¦ Pīts salmu strops ¦ Punutud õlgtaru
+Stalle de vache ¦ Karvės gardas ¦ Govs stāvvieta ¦ Lehmaaseme
+Box de veau ¦ Veršelio gardas ¦ Teļa boks ¦ Vasikaboks
+Mangeoire à foin ¦ Šieno ėdžios ¦ Siena rede ¦ Heinasõim
+Tonneaux de cidre ¦ Sidro statinės ¦ Sidra mucas ¦ Siidrivaadid
+Cuve à lait ¦ Pieno talpa ¦ Piena tvertne ¦ Piimanõu
+Barrique de vin ¦ Vyno statinė ¦ Vīna muca ¦ Veinivaat
+Brabant ¦ Brabanto plūgas ¦ Brabantes arkls ¦ Pöördader
+Herse en bois ¦ Medinės akėčios ¦ Koka ecēšas ¦ Puidust äke
+Charrette à foin ¦ Šieno vežimas ¦ Siena vezums ¦ Heinavanker
+Char à bancs ¦ Vežimas su suolais ¦ Rati ar soliem ¦ Pinkidega vanker
+Chariot à ridelles ¦ Vežimas su šonų grotelėmis ¦ Restoti rati ¦ Redelvanker
+Tracteur rouge des années 1950 ¦ Raudonas 1950-ųjų traktorius ¦ Sarkans 1950. gadu traktors ¦ Punane 1950. aastate traktor
+Tracteur vert ¦ Žalias traktorius ¦ Zaļš traktors ¦ Roheline traktor
+Petit tracteur gris (Ferguson) ¦ Mažas pilkas traktorius (Ferguson) ¦ Mazs pelēks traktors (Ferguson) ¦ Väike hall traktor (Ferguson)
+Faneuse ¦ Šieno vartytuvas ¦ Siena ārdītājs ¦ Heinakaaruti
+Moissonneuse-lieuse ¦ Javapjovė-rišamoji ¦ Pļaujmašīna-kūlīšu sējēja ¦ Viljalõikur-siduja
+Batteuse ¦ Kuliamoji ¦ Kuļmašīna ¦ Rehepeksumasin
+Andaineur ¦ Šieno grėbtuvas ¦ Siena grābeklis ¦ Vaalutaja
+Alambic de bouilleur de cru ¦ Naminis degtinės varymo aparatas ¦ Mājas brandavīna dzinējaparāts ¦ Kodune piiritusepõletusaparaat
+Seau à traire ¦ Melžimo kibiras ¦ Slaukšanas spainis ¦ Lüpsiämber
+Chèvre angora ¦ Angoros ožka ¦ Angoras kaza ¦ Angoora kits
+Cochon noir gascon ¦ Juodoji Gaskonės kiaulė ¦ Melnā Gaskoņas cūka ¦ Must Gascogne’i siga
+Vache salers ¦ Salerso karvė ¦ Salēras govs ¦ Salersi lehm
+Vache aubrac ¦ Obrako karvė ¦ Obrakas govs ¦ Aubraci lehm
+Vache jersiaise ¦ Džersio karvė ¦ Džersijas govs ¦ Džörsi lehm
+Mouton noir ¦ Juoda avis ¦ Melna aita ¦ Must lammas
+Mouton mérinos ¦ Merinosų avis ¦ Merino aita ¦ Merinolammas
+Poule noire ¦ Juoda višta ¦ Melna vista ¦ Must kana
+Poule rousse ¦ Ruda višta ¦ Ruda vista ¦ Pruun kana
+Poule naine ¦ Nykštukinė višta ¦ Pundurvistiņa ¦ Kääbuskana
+Paon blanc ¦ Baltas povas ¦ Balts pāvs ¦ Valge paabulind
+Paon ¦ Povas ¦ Pāvs ¦ Paabulind
+Lapin blanc ¦ Baltas triušis ¦ Balts trusis ¦ Valge küülik
+Cochon d’Inde ¦ Jūrų kiaulytė ¦ Jūrascūciņa ¦ Merisiga
+Hamster ¦ Žiurkėnas ¦ Kāmis ¦ Hamster
+Perroquet ¦ Papūga ¦ Papagailis ¦ Papagoi
+Canari ¦ Kanarėlė ¦ Kanārijputniņš ¦ Kanaarilind
+Cheval blanc ¦ Baltas arklys ¦ Balts zirgs ¦ Valge hobune
+Cheval noir ¦ Juodas arklys ¦ Melns zirgs ¦ Must hobune
+Chien terre-neuve ¦ Niufaundlendas ¦ Ņūfaundlendas suns ¦ Newfoundlandi koer
+Chien labrador ¦ Labradoras ¦ Labradors ¦ Labradori koer
+Chien beauceron ¦ Bosronas ¦ Bosronas suns ¦ Beauceroni koer
+Chien teckel ¦ Taksas ¦ Taksis ¦ Taks
+Volière ¦ Voljeras ¦ Voljērs ¦ Linnumaja
+Cage à lapin d’intérieur ¦ Triušio narvas namams ¦ Istabas trušu būris ¦ Küüliku tubane puur
+Panier pour chien ¦ Šuns guolis ¦ Suņu grozs ¦ Koerakorv
+Corbeille pour chat ¦ Katės krepšelis ¦ Kaķu grozs ¦ Kassikorv
+Arbre à chat ¦ Draskyklė katėms ¦ Kaķu māja ar nagu asināmo ¦ Kassipuu
+Gamelles ¦ Dubenėliai ¦ Bļodiņas ¦ Toidukausid
+Abreuvoir automatique ¦ Automatinė girdykla ¦ Automātiskā dzirdne ¦ Automaatjootur
+Tonneau de pluie en chêne ¦ Ąžuolinė lietaus vandens statinė ¦ Ozolkoka lietusūdens muca ¦ Tammepuust vihmaveetünn
+Cuve à vendange ¦ Vynuogių talpa ¦ Vīnogu tvertne ¦ Viinamarjatünn
+Pot à lait en fer-blanc ¦ Skardinis pieno bidonas ¦ Skārda piena kanna ¦ Plekist piimakann
+Charrette à bras ¦ Rankinis vežimėlis ¦ Rokas ratiņi ¦ Käsikäru
+Diligence ¦ Diližanas ¦ Pasta kariete ¦ Postitõld
+Roulotte ¦ Kilnojamasis namelis ¦ Ceļojošā ratu māja ¦ Rändvanker
+Râteau-faneur à cheval ¦ Arklinis grėblys ¦ Zirga siena grābeklis ¦ Hobuse heinareha
+Botteleuse ¦ Presas šiaudų ryšuliams ¦ Ķīpu prese ¦ Pallipress
+Semoir ¦ Sėjamoji ¦ Sējmašīna ¦ Külvik
+Pulvérisateur ¦ Purkštuvas ¦ Smidzinātājs ¦ Pritsmasin
+Bouilloire électrique ¦ Elektrinis virdulys ¦ Elektriskā tējkanna ¦ Elektriline veekeedukann
+Machine à expresso ¦ Espreso aparatas ¦ Espreso automāts ¦ Espressomasin
+Machine à café à levier ¦ Svirtinis kavos aparatas ¦ Sviras kafijas automāts ¦ Hoovaga kohvimasin
+Cafetière à dosettes ¦ Kapsulinis kavos aparatas ¦ Kafijas kapsulu automāts ¦ Kapselkohvimasin
+Presse-agrumes ¦ Citrusų sulčiaspaudė ¦ Citrusu sulu spiede ¦ Tsitruspress
+Four à micro-ondes encastrable ¦ Įmontuojama mikrobangų krosnelė ¦ Iebūvējama mikroviļņu krāsns ¦ Integreeritav mikrolaineahi
+Corbeille de fruits ¦ Vaisių krepšelis ¦ Augļu grozs ¦ Puuviljakorv
+Corbeille à pain sur pied ¦ Duonos krepšelis ant kojelės ¦ Maizes grozs uz kājiņas ¦ Jalaga leivakorv
+Étagère à épices ¦ Prieskonių lentyna ¦ Garšvielu plaukts ¦ Vürtsiriiul
+Desserte de cuisine en bois ¦ Medinis virtuvės vežimėlis ¦ Koka virtuves ratiņi ¦ Puidust köögikäru
+Bar de cuisine ¦ Virtuvės baras ¦ Virtuves bārs ¦ Köögibaar
+Plaque vitrocéramique ¦ Stiklo keramikos kaitlentė ¦ Stikla keramikas plīts virsma ¦ Klaaskeraamiline pliidiplaat
+Grande plaque à induction ¦ Didelė indukcinė kaitlentė ¦ Liela indukcijas plīts virsma ¦ Suur induktsioonplaat
+Table de cuisson au gaz (5 feux) ¦ Dujinė kaitlentė (5 degikliai) ¦ Gāzes plīts virsma (5 degļi) ¦ Gaasipliidiplaat (5 põletit)
+Hotte en inox ¦ Nerūdijančio plieno gartraukis ¦ Nerūsējošā tērauda tvaika nosūcējs ¦ Roostevabast terasest õhupuhasti
+Lave-vaisselle compact ¦ Kompaktiška indaplovė ¦ Kompakta trauku mazgājamā mašīna ¦ Kompaktne nõudepesumasin
+Réfrigérateur rétro vert d’eau ¦ Retro šaldytuvas vandens žalumo spalvos ¦ Ūdenszaļš retro ledusskapis ¦ Vesirohelise värvi retrokülmik
+Réfrigérateur rétro orange ¦ Oranžinis retro šaldytuvas ¦ Oranžs retro ledusskapis ¦ Oranž retrokülmik
+Évier à deux bacs en céramique ¦ Keraminė dviguba plautuvė ¦ Keramikas izlietne ar divām bļodām ¦ Kahe kraanikausiga keraamiline valamu
+Évier timbre d’office ¦ Gili keraminė plautuvė ¦ Dziļa keramikas izlietne ¦ Sügav keraamiline valamu
+Évier en pierre à potager ¦ Akmeninė plautuvė ¦ Akmens virtuves izlietne ¦ Kivist köögivalamu
+Cuisinière à charbon ¦ Anglimis kūrenama viryklė ¦ Ogļu plīts ¦ Söepliit
+Buffet de cuisine en formica ¦ Virtuvės bufetas iš formikos ¦ Formikas virtuves bufete ¦ Formikast köögipuhvet
+Buffet de cuisine bleu ciel ¦ Žydras virtuvės bufetas ¦ Gaiši zila virtuves bufete ¦ Taevassinine köögipuhvet
+Table en formica ¦ Formikos stalas ¦ Formikas galds ¦ Formikast laud
+Chaise en formica ¦ Formikos kėdė ¦ Formikas krēsls ¦ Formikast tool
+Tabouret de cuisine ¦ Virtuvės taburetė ¦ Virtuves taburete ¦ Köögitaburet
+Cruche en grès ¦ Akmens masės ąsotis ¦ Keramikas krūka ¦ Kivikeraamiline kann
+Fontaine à eau en grès ¦ Akmens masės vandens indas ¦ Keramikas ūdens trauks ¦ Kivikeraamiline veenõu
+Balance de cuisine Roberval ¦ Roberval virtuvės svarstyklės ¦ Roberval virtuves svari ¦ Robervali köögikaal
+Batterie de casseroles en cuivre ¦ Varinių puodų rinkinys ¦ Vara katlu komplekts ¦ Vaskpottide komplekt
+Égouttoir à vaisselle ¦ Indų džiovyklė ¦ Trauku žāvētājs ¦ Nõudenõrutusrest
+Poubelles de tri ¦ Rūšiavimo šiukšliadėžės ¦ Atkritumu šķirošanas tvertnes ¦ Prügisorteerimiskastid
+Planche à découper ¦ Pjaustymo lentelė ¦ Griešanas dēlis ¦ Lõikelaud
+Bassine à confiture en cuivre ¦ Varinis uogienės dubuo ¦ Vara ievārījuma bļoda ¦ Vaskne moosipada
+Pot-au-feu en fonte ¦ Ketaus troškintuvas ¦ Čuguna sautējumu katls ¦ Malmist pada
+Service à vaisselle ¦ Indų servizas ¦ Trauku serviss ¦ Nõudekomplekt
+Soupière en faïence ¦ Fajanso sriubinė ¦ Fajansa zupas bļoda ¦ Fajansist supikauss
+Panier de légumes ¦ Daržovių krepšys ¦ Dārzeņu grozs ¦ Juurviljakorv
+Bocaux de conserves ¦ Konservų stiklainiai ¦ Konservu burkas ¦ Hoidisepurgid
+Stérilisateur à bocaux ¦ Stiklainių sterilizatorius ¦ Burku sterilizators ¦ Purgisterilisaator
+Moulin à légumes ¦ Daržovių trintuvė ¦ Dārzeņu biezeņa dzirnaviņas ¦ Juurviljapasseerija
+Crêpière ¦ Blynų keptuvė ¦ Pankūku cepējs ¦ Pannkoogiküpsetaja
+Appareil à fondue ¦ Fondiu rinkinys ¦ Fondī komplekts ¦ Fondüükomplekt
+Extracteur de jus ¦ Sulčiaspaudė ¦ Sulu spiede ¦ Mahlapress
+Cafetière italienne ¦ Itališkas kavinukas ¦ Itāļu kafijas kanniņa ¦ Moka kohvikann
+Samovar ¦ Samovaras ¦ Samovārs ¦ Samovar
+Étagère à confitures ¦ Uogienių lentyna ¦ Ievārījumu plaukts ¦ Moosiriiul
+Chariot de cuisine à roulettes ¦ Virtuvės vežimėlis su ratukais ¦ Virtuves ratiņi uz ritenīšiem ¦ Ratastel köögikäru
+Garde-manger grillagé ¦ Spintelė maistui su tinkleliu ¦ Pārtikas skapis ar sietu ¦ Võrguga toiduainekapp
+Coffre à bois de cuisine ¦ Virtuvės malkų dėžė ¦ Virtuves malkas kaste ¦ Köögi puukast
+Baignoire en fonte sur pieds de lion ¦ Ketaus vonia ant liūto kojų ¦ Čuguna vanna uz lauvas ķepām ¦ Malmvann lõvikäppadel
+Baignoire îlot moderne ¦ Moderni laisvai stovinti vonia ¦ Moderna brīvi stāvoša vanna ¦ Moodne vabaltseisev vann
+Meuble double vasque ¦ Spintelė su dviem praustuvais ¦ Skapītis ar divām izlietnēm ¦ Kahe valamuga kapp
+Vasque à poser sur plan bois ¦ Pastatomas praustuvas ant medinio stalviršio ¦ Uzliekama izlietne uz koka virsmas ¦ Pealtpaigaldatav valamu puittasapinnal
+Meuble vasque suspendu ¦ Pakabinama spintelė su praustuvu ¦ Piekarams skapītis ar izlietni ¦ Seinale kinnitatav valamukapp
+WC à chasse haute ¦ Klozetas su aukštu bakeliu ¦ Tualetes pods ar augstu skalojamo kasti ¦ Kõrge loputuskastiga WC
+WC rehaussé ¦ Paaukštintas klozetas ¦ Paaugstināts tualetes pods ¦ Kõrgendatud WC
+Miroir lumineux ¦ Šviečiantis veidrodis ¦ Spogulis ar apgaismojumu ¦ Valgustatud peegel
+Panier à linge en osier ¦ Pintas skalbinių krepšys ¦ Pīts veļas grozs ¦ Punutud pesukorv
+Broc et cuvette en faïence ¦ Fajanso ąsotis ir dubuo ¦ Fajansa krūka un bļoda ¦ Fajansist kann ja pesukauss
+Tub en zinc ¦ Cinkuota vonelė ¦ Cinkota vanniņa ¦ Tsinkvann
+Échelle porte-serviettes ¦ Rankšluosčių kopėtėlės ¦ Dvieļu kāpnes ¦ Rätikuredel
+Tapis de bain ¦ Vonios kilimėlis ¦ Vannas istabas paklājiņš ¦ Vannitoavaip
+Panier à linge en tissu ¦ Medžiaginis skalbinių krepšys ¦ Auduma veļas grozs ¦ Riidest pesukorv
+Colonne de salle de bain ¦ Vonios kolona ¦ Vannas istabas skapis-kolonna ¦ Vannitoa kõrgkapp
+Étagère de douche ¦ Dušo lentynėlė ¦ Dušas plaukts ¦ Duširiiul
+Vasque en pierre ¦ Akmeninis praustuvas ¦ Akmens izlietne ¦ Kivist valamu
+Baignoire noire ¦ Juoda vonia ¦ Melna vanna ¦ Must vann
+Paroi de douche en verre ¦ Stiklinė dušo sienelė ¦ Stikla dušas siena ¦ Klaasist dušisein
+WC avec abattant bois ¦ Klozetas su mediniu dangčiu ¦ Tualetes pods ar koka vāku ¦ Puitistmega WC
+Meuble vasque en bois ¦ Medinė spintelė su praustuvu ¦ Koka skapītis ar izlietni ¦ Puidust valamukapp
+Lave-mains ¦ Mažas praustuvas ¦ Maza roku izlietne ¦ Väike kätepesuvalamu
+Lave-linge hublot ¦ Skalbimo mašina su priekiniu įkrovimu ¦ Veļas mašīna ar priekšējo ielādi ¦ Eestlaetav pesumasin
+Bac à laver ¦ Skalbimo lovys ¦ Veļas mazgāšanas sile ¦ Pesuküna
+Table à repasser ¦ Lyginimo lenta ¦ Gludināmais dēlis ¦ Triikimislaud
+Fil à linge ¦ Skalbinių virvė ¦ Veļas aukla ¦ Pesunöör
+Essoreuse à rouleaux ¦ Volinė gręžtuvė ¦ Veļas rullis ¦ Rullvääner
+Machine à laver à manivelle ¦ Rankinė skalbimo mašina ¦ Veļas mašīna ar kloķi ¦ Vändaga pesumasin
+Balai et pelle ¦ Šluota ir semtuvėlis ¦ Slota un liekšķere ¦ Luud ja kühvel
+Nettoyeur vapeur ¦ Garų valytuvas ¦ Tvaika tīrītājs ¦ Aurupuhasti
+Vestiaire d’entrée ¦ Prieškambario rūbinė ¦ Priekšnama drēbju pakaramais ¦ Esiku riidenagi
+Patère murale ¦ Sieninė kabykla ¦ Sienas āķis ¦ Seinanagi
+Boîte à clés ¦ Raktų dėžutė ¦ Atslēgu kastīte ¦ Võtmekarp
+Console avec miroir ¦ Konsolė su veidrodžiu ¦ Konsole ar spoguli ¦ Peegliga konsoollaud
+Valet de nuit ¦ Drabužių stovas ¦ Drēbju statīvs ¦ Tumm teener
+Fauteuil ergonomique ¦ Ergonominė kėdė ¦ Ergonomisks krēsls ¦ Ergonoomiline tool
+Bureau d’angle ¦ Kampinis rašomasis stalas ¦ Stūra rakstāmgalds ¦ Nurgakirjutuslaud
+Petit bureau d’écolier ¦ Mažas mokyklinis stalas ¦ Mazs skolas galds ¦ Väike koolilaud
+Ordinateur de bureau et écran ¦ Stalinis kompiuteris ir monitorius ¦ Galda dators un monitors ¦ Lauaarvuti ja monitor
+Deux écrans ¦ Du monitoriai ¦ Divi monitori ¦ Kaks monitori
+Imprimante multifonction ¦ Daugiafunkcis spausdintuvas ¦ Daudzfunkciju printeris ¦ Multifunktsionaalne printer
+Destructeur de papier ¦ Popieriaus smulkintuvas ¦ Papīra smalcinātājs ¦ Paberipurustaja
+Armoire à classeurs ¦ Segtuvų spinta ¦ Mapju skapis ¦ Kaustakapp
+Caisson à roulettes ¦ Spintelė su ratukais ¦ Atvilktņu bloks uz ritenīšiem ¦ Ratastel sahtlikapp
+Tableau en liège ¦ Kamštinė lenta ¦ Korķa tāfele ¦ Korkplaat
+Téléphone de bureau ¦ Stalinis telefonas ¦ Galda telefons ¦ Lauatelefon
+Globe terrestre de bureau ¦ Stalinis gaublys ¦ Galda globuss ¦ Lauagloobus
+Globe terrestre sur pied ¦ Gaublys ant stovo ¦ Globuss uz statīva ¦ Gloobus alusel
+Pupitre de lecture ¦ Skaitymo pultas ¦ Lasāmpults ¦ Lugemispult
+Lampe de banquier ¦ Bankininko lempa ¦ Baņķiera lampa ¦ Pankurilamp
+Albums de famille ¦ Šeimos albumai ¦ Ģimenes albumi ¦ Perealbumid
+Console de jeux ¦ Žaidimų konsolė ¦ Spēļu konsole ¦ Mängukonsool
+Scanner de documents ¦ Dokumentų skeneris ¦ Dokumentu skeneris ¦ Dokumendiskanner
+Carte de France ancienne ¦ Senas Prancūzijos žemėlapis ¦ Sena Francijas karte ¦ Vana Prantsusmaa kaart
+Carte de Cassini encadrée ¦ Įrėmintas Kasini žemėlapis ¦ Ierāmēta Kasīni karte ¦ Raamitud Cassini kaart
+Lutrin d’archives ¦ Archyvinių knygų pultas ¦ Arhīva grāmatu pults ¦ Arhiiviraamatute pult
+Loupe sur pied ¦ Didinamasis stiklas ant stovo ¦ Lupa uz statīva ¦ Luup alusel
+Lecteur de microfilms ¦ Mikrofilmų skaitytuvas ¦ Mikrofilmu lasītājs ¦ Mikrofilmilugeja
+Couffin en osier ¦ Pintas kūdikio lopšys ¦ Pīts zīdaiņa šūpulis ¦ Punutud beebikorv
+Berceau en fer ¦ Geležinis lopšys ¦ Dzelzs šūpulis ¦ Raudne häll
+Lit mezzanine ¦ Antresolės lova ¦ Augstā gulta ¦ Kõrgvoodi
+Poussette ¦ Vaikiškas vežimėlis ¦ Bērnu ratiņi ¦ Lapsevanker
+Parc pour bébé ¦ Kūdikio maniežas ¦ Zīdaiņa sētiņa ¦ Beebiaedik
+Cuisine pour enfant ¦ Vaikiška virtuvėlė ¦ Bērnu virtuvīte ¦ Laste köök
+Ours en peluche géant ¦ Milžiniškas pliušinis meškiukas ¦ Milzu plīša lācis ¦ Hiiglaslik mängukaru
+Poupée en porcelaine ¦ Porcelianinė lėlė ¦ Porcelāna lelle ¦ Portselannukk
+Cubes de construction ¦ Statybinės kaladėlės ¦ Būvklucīši ¦ Ehitusklotsid
+Théâtre de marionnettes ¦ Lėlių teatras ¦ Leļļu teātris ¦ Nukuteater
+Luge ¦ Rogutės ¦ Ragavas ¦ Kelk
+Table de jeux de société ¦ Stalo žaidimų stalas ¦ Galda spēļu galds ¦ Lauamängude laud
+Petite table d’enfant ¦ Mažas vaikiškas staliukas ¦ Mazs bērnu galdiņš ¦ Väike lastelaud
+Chevalet de peinture ¦ Tapybos molbertas ¦ Gleznošanas molberts ¦ Maalimolbert
+Pupitre d’écolier double ¦ Dvivietis mokyklinis suolas ¦ Divvietīgs skolas sols ¦ Kahekohaline koolipink
+Tableau noir d’école ¦ Mokyklinė lenta ¦ Skolas tāfele ¦ Kooli tahvel
+Coiffeuse d’enfant ¦ Vaikiškas tualetinis staliukas ¦ Bērnu tualetes galdiņš ¦ Laste tualettlaud
+Marchande ¦ Vaikiška parduotuvėlė ¦ Bērnu veikaliņš ¦ Laste mängupood
+Circuit de voitures ¦ Lenktynių trasa ¦ Mašīnu trase ¦ Autorada
+Arche de Noé en bois ¦ Medinė Nojaus arka ¦ Koka Noasa šķirsts ¦ Puidust Noa laev
+Toupie ¦ Vilkelis ¦ Vilciņš ¦ Vurr
+Tapis d’éveil ¦ Lavinamasis kilimėlis ¦ Attīstošais paklājiņš ¦ Tegevusmatt
+Piscine à balles ¦ Kamuoliukų baseinas ¦ Bumbiņu baseins ¦ Pallimeri
+Tipi d’enfant ¦ Vaikiška palapinė tipi ¦ Bērnu tipi telts ¦ Laste tiipii
+Draisienne ¦ Balansinis dviratis ¦ Līdzsvara velosipēds ¦ Jooksuratas
+Voiture à pédales ¦ Minamas automobilis ¦ Pedāļu mašīna ¦ Pedaalidega auto
+Cheval sur roulettes ¦ Arkliukas ant ratukų ¦ Zirdziņš uz ritenīšiem ¦ Ratastel hobune
+Bureau d’écolier réglable ¦ Reguliuojamas mokyklinis stalas ¦ Regulējams skolas galds ¦ Reguleeritav koolilaud
+Tabouret d’enfant ¦ Vaikiška taburetė ¦ Bērnu taburete ¦ Laste taburet
+Suspension trois globes ¦ Šviestuvas su trimis gaubtais ¦ Piekaramā lampa ar trim kupoliem ¦ Kolme kupliga rippvalgusti
+Lampe Tiffany ¦ Tiffany lempa ¦ Tifānija lampa ¦ Tiffany lamp
+Lampe en opaline ¦ Opalinio stiklo lempa ¦ Opālstikla lampa ¦ Opaalklaasist lamp
+Lampe à poser en céramique ¦ Keraminė stalinė lempa ¦ Keramikas galda lampa ¦ Keraamiline laualamp
+Lampadaire trépied en bois ¦ Medinis toršeras ant trikojo ¦ Koka stāvlampa uz trijkāja ¦ Puidust kolmjalgne põrandalamp
+Lampadaire arc en marbre ¦ Lankinis toršeras su marmuru ¦ Loka stāvlampa ar marmoru ¦ Marmoralusega kaarlamp
+Liseuse sur pied ¦ Skaitymo toršeras ¦ Lasīšanas stāvlampa ¦ Lugemispõrandalamp
+Réglette néon ¦ Neoninis šviestuvas ¦ Neona gaismeklis ¦ Neoonvalgusti
+Lanterne à bougie ¦ Žvakių žibintas ¦ Sveču laterna ¦ Küünlalatern
+Lampe à pétrole en cuivre ¦ Varinė žibalinė lempa ¦ Vara petrolejas lampa ¦ Vaskne petrooleumilamp
+Lampe à huile romaine ¦ Romėniškas aliejinis žibintas ¦ Romiešu eļļas lampa ¦ Rooma õlilamp
+Bougies sur plateau ¦ Žvakės ant padėklo ¦ Sveces uz paplātes ¦ Küünlad kandikul
+Chandelier à trois branches ¦ Trišakė žvakidė ¦ Trīszaru svečturis ¦ Kolmeharuline küünlajalg
+Borne lumineuse ¦ Šviečiantis stulpelis ¦ Gaismas stabiņš ¦ Valgustatud post
+Mur de cadres photos ¦ Nuotraukų rėmelių siena ¦ Fotorāmīšu siena ¦ Fotoraamide sein
+Portrait d’ancêtre ¦ Protėvio portretas ¦ Senča portrets ¦ Esivanema portree
+Tableau de paysage ¦ Peizažas ¦ Ainavas glezna ¦ Maastikumaal
+Marine ¦ Marina ¦ Jūras ainava ¦ Merevaade
+Cadre photo sur pied ¦ Pastatomas nuotraukos rėmelis ¦ Galda fotorāmītis ¦ Lauapildiraam
+Trophée de chasse ¦ Medžioklės trofėjus ¦ Medību trofeja ¦ Jahitrofee
+Maquette de bateau ¦ Laivo modelis ¦ Kuģa modelis ¦ Laevamudel
+Sculpture sur socle ¦ Skulptūra ant postamento ¦ Skulptūra uz postamenta ¦ Skulptuur postamendil
+Buste en plâtre ¦ Gipsinis biustas ¦ Ģipša krūšutēls ¦ Kipsbüst
+Statuette en bronze ¦ Bronzinė statulėlė ¦ Bronzas statuete ¦ Pronkskuju
+Grand vase en terre ¦ Didelė molinė vaza ¦ Liela māla vāze ¦ Suur savivaas
+Bouquet de fleurs ¦ Gėlių puokštė ¦ Ziedu pušķis ¦ Lillekimp
+Horloge de gare ¦ Stoties laikrodis ¦ Stacijas pulkstenis ¦ Jaamakell
+Coucou de la Forêt-Noire ¦ Švarcvaldo gegutinis laikrodis ¦ Švarcvaldes dzeguzes pulkstenis ¦ Schwarzwaldi kägukell
+Rideaux ¦ Užuolaidos ¦ Aizkari ¦ Kardinad
+Grand tapis persan ¦ Didelis persiškas kilimas ¦ Liels persiešu paklājs ¦ Suur Pärsia vaip
+Tapis berbère à losanges ¦ Berberų kilimas su rombais ¦ Berberu paklājs ar rombiem ¦ Rombidega berberi vaip
+Kilim ¦ Kilimas (kilim) ¦ Kilims ¦ Kilim
+Tapis rond en jute ¦ Apvalus džiuto kilimas ¦ Apaļš džutas paklājs ¦ Ümar džuudivaip
+Paravent japonais ¦ Japoniška širma ¦ Japāņu aizslietnis ¦ Jaapani sirm
+Panier à journaux ¦ Laikraščių krepšys ¦ Avīžu grozs ¦ Ajalehekorv
+Grand panier en osier ¦ Didelis pintas krepšys ¦ Liels pīts grozs ¦ Suur punutud korv
+Garde-feu en laiton ¦ Žalvarinis židinio ekranas ¦ Misiņa kamīna aizsegs ¦ Messingist kaminavõre
+Terrarium ¦ Terariumas ¦ Terārijs ¦ Terraarium
+Diplôme encadré ¦ Įrėmintas diplomas ¦ Ierāmēts diploms ¦ Raamitud diplom
+Photo de classe encadrée ¦ Įrėminta klasės nuotrauka ¦ Ierāmēta klases fotogrāfija ¦ Raamitud klassipilt
+Livret de famille sous verre ¦ Šeimos knygelė po stiklu ¦ Ģimenes grāmatiņa zem stikla ¦ Perekonnaraamat klaasi all
+Canevas brodé ¦ Siuvinėtas gobelenas ¦ Izšuvums uz kanvas ¦ Tikitud gobelään
+Tapisserie murale ¦ Sieninis gobelenas ¦ Sienas gobelēns ¦ Seinavaip
+Médaillon de famille ¦ Šeimos medalionas ¦ Ģimenes medaljons ¦ Perekonna medaljon
+Trophée sportif ¦ Sporto trofėjus ¦ Sporta trofeja ¦ Spordikarikas
+Buste de Marianne ¦ Marianos biustas ¦ Mariannas krūšutēls ¦ Marianne’i büst
+Vase de Gien ¦ Žieno vaza ¦ Žjēnas vāze ¦ Gieni vaas
+Vase de Sèvres ¦ Sevro vaza ¦ Sevras vāze ¦ Sèvres’i vaas
+Potiche chinoise ¦ Kiniška vaza su dangčiu ¦ Ķīniešu vāze ar vāku ¦ Hiina kaanega vaas
+Vase en étain ¦ Alavo vaza ¦ Alvas vāze ¦ Tinavaas
+Bouquet de fleurs séchées ¦ Džiovintų gėlių puokštė ¦ Sausziedu pušķis ¦ Kuivlillekimp
+Sapin de Noël décoré ¦ Papuošta Kalėdų eglutė ¦ Izrotāta Ziemassvētku egle ¦ Ehitud jõulukuusk
+Couronne de porte ¦ Durų vainikas ¦ Durvju vainags ¦ Uksepärg
+Photophores ¦ Žvakidės stiklinės ¦ Stikla svečturi ¦ Küünlaklaasid
+Bateau en bouteille ¦ Laivas butelyje ¦ Kuģis pudelē ¦ Laev pudelis
+Maquette de locomotive ¦ Lokomotyvo modelis ¦ Lokomotīves modelis ¦ Vedurimudel
+Collection de dés à coudre ¦ Antpirščių kolekcija ¦ Uzpirkstīšu kolekcija ¦ Sõrmkübarate kollektsioon
+Vitrine de minéraux ¦ Mineralų vitrina ¦ Minerālu vitrīna ¦ Mineraalide vitriin
+Collection de papillons ¦ Drugelių kolekcija ¦ Tauriņu kolekcija ¦ Liblikakollektsioon
+Boîte à musique ¦ Muzikinė dėžutė ¦ Mūzikas lādīte ¦ Muusikakarp
+Baromètre ¦ Barometras ¦ Barometrs ¦ Baromeeter
+Thermomètre ancien ¦ Senovinis termometras ¦ Sens termometrs ¦ Vana termomeeter
+Voilages ¦ Permatomos užuolaidos ¦ Caurspīdīgie aizkari ¦ Looritekardinad
+Rideaux de velours ¦ Aksominės užuolaidos ¦ Samta aizkari ¦ Sametkardinad
+Store bateau ¦ Romanetė ¦ Romiešu žalūzija ¦ Rooma ruloo
+Tapis moderne ¦ Modernus kilimas ¦ Moderns paklājs ¦ Moodne vaip
+Tapis en peau de mouton ¦ Avikailio kilimas ¦ Aitādas paklājs ¦ Lambanahast vaip
+Poêle à granulés rouge ¦ Raudona granulinė krosnelė ¦ Sarkana granulu krāsns ¦ Punane pelletiahi
+Poêle Godin ¦ Godin krosnelė ¦ Godin krāsns ¦ Godini ahi
+Radiateur vertical design ¦ Dizaino vertikalus radiatorius ¦ Dizaina vertikālais radiators ¦ Disainne vertikaalradiaator
+Chauffe-eau ¦ Vandens šildytuvas ¦ Ūdens sildītājs ¦ Boiler
+Téléviseur sur meuble ¦ Televizorius ant spintelės ¦ Televizors uz skapīša ¦ Teler kapil
+Téléviseur au mur ¦ Sieninis televizorius ¦ Sienas televizors ¦ Seinateler
+Téléviseur à tube ¦ Kineskopinis televizorius ¦ Kineskopa televizors ¦ Kineskoopteler
+Chaîne hi-fi ¦ Hi-fi sistema ¦ Hi-fi sistēma ¦ Hi-fi süsteem
+Enceintes colonnes ¦ Kolonėlės ¦ Grīdas skaļruņi ¦ Põrandakõlarid
+Radiocassette ¦ Radijo magnetola ¦ Radiomagnetola ¦ Raadiomakk
+Magnétoscope ¦ Vaizdo magnetofonas ¦ Videomagnetofons ¦ Videomakk
+Ventilateur de plafond ¦ Lubinis ventiliatorius ¦ Griestu ventilators ¦ Laeventilaator
+Ventilateur de table ¦ Stalinis ventiliatorius ¦ Galda ventilators ¦ Lauaventilaator
+Radiateur soufflant ¦ Ventiliatorinis šildytuvas ¦ Ventilatora sildītājs ¦ Puhurkütteseade
+Convecteur électrique ¦ Elektrinis konvektorius ¦ Elektriskais konvektors ¦ Elektriline konvektor
+Poêle à bois moderne ¦ Moderni malkinė krosnelė ¦ Moderna malkas krāsns ¦ Moodne puuahi
+Cuisinière à bois moderne ¦ Moderni malkinė viryklė ¦ Moderna malkas plīts ¦ Moodne puupliit
+Pompe à chaleur ¦ Šilumos siurblys ¦ Siltumsūknis ¦ Soojuspump
+Chaudière au fioul ¦ Skystojo kuro katilas ¦ Šķidrā kurināmā katls ¦ Õliküttekatel
+Chaudière à gaz murale ¦ Sieninis dujinis katilas ¦ Sienas gāzes katls ¦ Seinale paigaldatav gaasikatel
+Cuve à fioul ¦ Skystojo kuro talpa ¦ Šķidrā kurināmā tvertne ¦ Kütteõlimahuti
+Robot tondeuse ¦ Robotas vejapjovė ¦ Robotizēts zāles pļāvējs ¦ Robotniiduk
+Téléviseur portatif années 70 ¦ Nešiojamas 70-ųjų televizorius ¦ Pārnēsājams 70. gadu televizors ¦ 1970. aastate kaasaskantav teler
+Lecteur CD ¦ CD grotuvas ¦ CD atskaņotājs ¦ CD-mängija
+Magnétophone à bandes ¦ Juostinis magnetofonas ¦ Lentes magnetofons ¦ Lindimagnetofon
+Enceinte connectée ¦ Išmanioji kolonėlė ¦ Viedais skaļrunis ¦ Nutikõlar
+Piano droit noir ¦ Juodas pianinas ¦ Melns pianīns ¦ Must pianiino
+Piano droit en acajou ¦ Raudonmedžio pianinas ¦ Sarkankoka pianīns ¦ Mahagonist pianiino
+Piano demi-queue ¦ Kabinetinis rojalis ¦ Kabineta flīģelis ¦ Kabinetitiibklaver
+Piano à queue de concert ¦ Koncertinis rojalis ¦ Koncertflīģelis ¦ Kontserttiibklaver
+Épinette ¦ Spinetas ¦ Spinets ¦ Spinett
+Orgue de salon ¦ Namų vargonai ¦ Salona ērģeles ¦ Salongiorel
+Clavier électronique ¦ Elektroninis sintezatorius ¦ Elektroniskās klavieres ¦ Elektronklaver
+Guitare classique ¦ Klasikinė gitara ¦ Klasiskā ģitāra ¦ Klassikaline kitarr
+Banjo ¦ Bandža ¦ Bandžo ¦ Bandžo
+Mandoline ¦ Mandolina ¦ Mandolīna ¦ Mandoliin
+Violon sur pupitre ¦ Smuikas ant stovo ¦ Vijole uz statīva ¦ Viiul noodipuldil
+Bandonéon ¦ Bandonija ¦ Bandoneons ¦ Bandoneon
+Trompette sur pied ¦ Trimitas ant stovo ¦ Trompete uz statīva ¦ Trompet alusel
+Saxophone sur pied ¦ Saksofonas ant stovo ¦ Saksofons uz statīva ¦ Saksofon alusel
+Cor de chasse ¦ Medžioklės ragas ¦ Medību rags ¦ Jahisarv
+Clarinette sur pied ¦ Klarnetas ant stovo ¦ Klarnete uz statīva ¦ Klarnet alusel
+Pupitre de musique ¦ Natų pultas ¦ Nošu pults ¦ Noodipult
+Gramophone à pavillon ¦ Gramofonas su ragu ¦ Gramofons ar tauri ¦ Toruga grammofon
+Cornemuse (biniou) ¦ Dūdmaišis (biniou) ¦ Dūdas (biniou) ¦ Torupill (biniou)
+Timbales ¦ Litaurai ¦ Timpāni ¦ Timpanid
+Xylophone ¦ Ksilofonas ¦ Ksilofons ¦ Ksülofon
+Marimba ¦ Marimba ¦ Marimba ¦ Marimba
+Cithare ¦ Citra ¦ Cītara ¦ Kannel
+Ukulélé ¦ Ukulelė ¦ Ukulele ¦ Ukulele
+Luth ¦ Liutnia ¦ Lauta ¦ Lauto
+Flûte traversière sur support ¦ Skersinė fleita ant stovo ¦ Šķērsflauta uz statīva ¦ Põikflööt alusel
+Flûte à bec ¦ Išilginė fleita ¦ Blokflauta ¦ Plokkflööt
+Trombone sur pied ¦ Trombonas ant stovo ¦ Trombons uz statīva ¦ Tromboon alusel
+Hautbois sur support ¦ Obojus ant stovo ¦ Oboja uz statīva ¦ Oboe alusel
+Harmonica et pupitre ¦ Lūpinė armonikėlė ir pultas ¦ Lūpu harmonika un pults ¦ Suupill ja pult
+Meuble à partitions ¦ Natų spintelė ¦ Nošu skapis ¦ Noodikapp
+Table de mixage ¦ Garso pultas ¦ Mikšerpults ¦ Mikserpult
+Rayonnage de cave ¦ Rūsio lentynos ¦ Pagraba plaukti ¦ Keldririiulid
+Cartons de déménagement ¦ Kraustymosi dėžės ¦ Pārvākšanās kastes ¦ Kolimiskastid
+Étagère d’archives familiales ¦ Šeimos archyvo lentyna ¦ Ģimenes arhīva plaukts ¦ Perearhiivi riiul
+Coffret à bijoux ¦ Papuošalų dėžutė ¦ Rotaslietu lādīte ¦ Ehtekarp
+Portant à vêtements ¦ Drabužių kabykla ¦ Drēbju pakaramais statīvs ¦ Riiderest
+Dressing d’angle ¦ Kampinė drabužinė ¦ Stūra garderobe ¦ Nurgariietusruum
+Meuble à cases (cubes) ¦ Spintelė su skyreliais (kubai) ¦ Plaukts ar nodalījumiem (kubi) ¦ Kastiriiul (kuubid)
+Étagère de cellier ¦ Sandėliuko lentyna ¦ Pieliekamā plaukts ¦ Sahvririiul
+Boîtes de rangement en plastique ¦ Plastikinės daiktų dėžės ¦ Plastmasas uzglabāšanas kastes ¦ Plastist hoiukastid
+Caisses en bois ¦ Medinės dėžės ¦ Koka kastes ¦ Puidust kastid
+Panier à pique-nique ¦ Iškylų krepšys ¦ Piknika grozs ¦ Piknikukorv
+Boîte à couture ¦ Siuvimo dėžutė ¦ Šūšanas kastīte ¦ Õmbluskarp
+Housse à vêtements ¦ Drabužių užvalkalas ¦ Apģērbu pārvalks ¦ Riidekott
+Crucifix mural ¦ Sieninis krucifiksas ¦ Sienas krucifikss ¦ Seinakrutsifiks
+Crèche provençale et santons ¦ Provanso prakartėlė su figūrėlėmis ¦ Provansas Ziemassvētku silīte ar figūriņām ¦ Provence’i sõim ja santon-kujukesed
+Chapelet ¦ Rožinis ¦ Rožukronis ¦ Roosipärg
+Coin du souvenir (photos et bougie) ¦ Atminimo kampelis (nuotraukos ir žvakė) ¦ Piemiņas stūrītis (fotogrāfijas un svece) ¦ Mälestusnurk (fotod ja küünal)
+Boîte à lettres d’amour ¦ Meilės laiškų dėžutė ¦ Mīlestības vēstuļu kastīte ¦ Armastuskirjade karp
+Vitrine de médailles ¦ Medalių vitrina ¦ Medaļu vitrīna ¦ Medalivitriin
+Bouquet de mariée sous globe ¦ Nuotakos puokštė po stikliniu gaubtu ¦ Līgavas pušķis zem stikla kupola ¦ Pruudikimp klaaskupli all
+Bénitier mural ¦ Sieninis švęsto vandens indelis ¦ Sienas svētītā ūdens trauciņš ¦ Seina pühaveenõu
+Icône orthodoxe ¦ Stačiatikių ikona ¦ Pareizticīgo ikona ¦ Õigeusu ikoon
+Rameau de buis bénit ¦ Pašventinta buksmedžio šakelė ¦ Svētīts buksa zariņš ¦ Õnnistatud pukspuuoks
+Statue de saint ¦ Šventojo statula ¦ Svētā statuja ¦ Pühaku kuju
+Plaque de communion encadrée ¦ Įrėmintas Pirmosios Komunijos paveikslėlis ¦ Ierāmēta Pirmās Komūnijas piemiņas bilde ¦ Raamitud esimese armulaua mälestuspilt
+Livre de prières ancien ¦ Sena maldaknygė ¦ Sena lūgšanu grāmata ¦ Vana palveraamat
+Scie circulaire sur table ¦ Stalinis diskinis pjūklas ¦ Galda ripzāģis ¦ Laudketassaag
+Scie à onglets ¦ Įstrižo pjovimo staklės ¦ Leņķzāģis ¦ Nurgasaag
+Forge et soufflet ¦ Kalvė su dumplėmis ¦ Kalve ar plēšām ¦ Sepikoda lõõtsaga
+Établi de mécanicien ¦ Mechaniko darbastalis ¦ Mehāniķa darbgalds ¦ Mehaaniku töölaud
+Établi d’horloger ¦ Laikrodininko darbastalis ¦ Pulksteņmeistara darbgalds ¦ Kellassepa töölaud
+Table de cordonnier ¦ Batsiuvio stalas ¦ Kurpnieka galds ¦ Kingsepa laud
+Table de coupe de tailleur ¦ Siuvėjo sukirpimo stalas ¦ Drēbnieka piegriešanas galds ¦ Rätsepa juurdelõikelaud
+Paillasse de laboratoire ¦ Laboratorinis stalas ¦ Laboratorijas galds ¦ Laborilaud
+Scie à ruban ¦ Juostinis pjūklas ¦ Lentzāģis ¦ Lintsaag
+Tour à métaux ¦ Metalo tekinimo staklės ¦ Metālapstrādes virpa ¦ Metallitreipink
+Surjeteuse ¦ Overlokas ¦ Overloks ¦ Overlokk
+Métier à broder ¦ Siuvinėjimo staklelės ¦ Izšūšanas rāmis ¦ Tikkimisraam
+Petite citadine ¦ Mažas miesto automobilis ¦ Maza pilsētas mašīna ¦ Väike linnaauto
+Voiture familiale ¦ Šeimos automobilis ¦ Ģimenes automašīna ¦ Pereauto
+Voiture ancienne (années 30) ¦ Senovinis automobilis (1930-ųjų) ¦ Senā automašīna (1930. gadi) ¦ Vanaaegne auto (1930. aastad)
+Deux-chevaux ¦ Citroën 2CV ¦ Citroën 2CV ¦ Citroën 2CV
+Coccinelle ¦ VW Vabalas ¦ VW Vabole ¦ VW põrnikas
+Fourgonnette ¦ Furgonas ¦ Furgons ¦ Kaubik
+Mobylette ¦ Mopedas ¦ Mopēds ¦ Mopeed
+Vélo de course ¦ Plento dviratis ¦ Šosejas velosipēds ¦ Maanteeratas
+Vélo hollandais ¦ Olandiškas dviratis ¦ Holandiešu velosipēds ¦ Hollandi jalgratas
+Vélo cargo ¦ Krovininis dviratis ¦ Kravas velosipēds ¦ Kaubaratas
+Pneus empilés ¦ Sukrautos padangos ¦ Sakrautas riepas ¦ Virnastatud rehvid
+Échelle double ¦ Dvipusės kopėčios ¦ Divpusējās kāpnes ¦ Redel-trepp
+Second congélateur ¦ Papildomas šaldiklis ¦ Papildu saldētava ¦ Teine sügavkülmik
+Voiture tout-terrain ¦ Visureigis ¦ Apvidus automašīna ¦ Maastur
+Voiture de sport ¦ Sportinis automobilis ¦ Sporta automašīna ¦ Sportauto
+Voiture électrique ¦ Elektromobilis ¦ Elektromobilis ¦ Elektriauto
+Camping-car ¦ Kemperis ¦ Kemperis ¦ Matkaauto
+Moto ancienne avec side-car ¦ Senovinis motociklas su priekaba ¦ Sens motocikls ar blakusvāģi ¦ Vana külgkorviga mootorratas
+Vélo ancien ¦ Senovinis dviratis ¦ Sens velosipēds ¦ Vana jalgratas
+VTT ¦ Kalnų dviratis ¦ Kalnu velosipēds ¦ Maastikuratas
+Borne de recharge ¦ Įkrovimo stotelė ¦ Uzlādes stacija ¦ Laadimisjaam
+Armoire à outils ¦ Įrankių spinta ¦ Instrumentu skapis ¦ Tööriistakapp
+Chariot de pneus ¦ Padangų vežimėlis ¦ Riepu ratiņi ¦ Rehvikäru
+Caisse à outils ¦ Įrankių dėžė ¦ Instrumentu kaste ¦ Tööriistakast
+Chargeur de batterie ¦ Akumuliatorių įkroviklis ¦ Akumulatora lādētājs ¦ Akulaadija

@@ -73,10 +73,13 @@ function rename_audio_project(PDO $pdo, array $data): array
 function delete_audio_project(PDO $pdo, array $data): array
 {
     $p = audio_project_get($pdo, safe_int($data['id'] ?? 0));
+    // ↶ Annuler : la ligne est gardée un jour, et son fichier de travail aussi (parti avec elle ensuite)
+    project_undo_purge_audio($pdo, static fn(string $f) => retouch_file_used($pdo, $f));
+    $undo = project_undo_keep($pdo, 'audio_projects', (int) $p['id']);
     $pdo->prepare('DELETE FROM audio_projects WHERE id=?')->execute([$p['id']]);
-    if ($p['work_file'] !== '' && !retouch_file_used($pdo, (string) $p['work_file'])) { @unlink(MEDIA_DIR . '/' . basename((string) $p['work_file'])); }
+    if ($undo === '' && $p['work_file'] !== '' && !retouch_file_used($pdo, (string) $p['work_file'])) { @unlink(MEDIA_DIR . '/' . basename((string) $p['work_file'])); }
     log_change($pdo, 'meta', 0, 'delete', 'Projet audio supprimé : ' . $p['name']);
-    return ['ok' => true];
+    return ['ok' => true, 'undo' => $undo];
 }
 
 function audio_project_has_data(PDO $pdo): bool

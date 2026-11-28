@@ -139,6 +139,8 @@ box.innerHTML = UI.itemsHtml(view, list.map(r => ({thumb: '<img …>', name: r.t
     lines: ['ligne grise', '…'], date: 'Modifié le …', actions: '<button …>'})));   // ou UI.cardsHtml / UI.rowsHtml
 ```
 
+- `UI.segmented({items: [{on, attrs, html, title, disabled}], label, cls, attrs, tag})` : un groupe d’onglets segmentés qui met **toujours les deux marques** (`.is-active` pour l’œil, `aria-pressed` pour les lecteurs d’écran) ; au clic, `UI.segPick(bouton)` (ou `UI.segMark(bouton, on)`). Ne plus écrire un groupe `aria-pressed` à la main (garde : `tests/test-harmo-pieces.js`).
+- `UI.extLink(adresse, nomDuSite, {cls, title, attrs})` : un lien qui sort de l’app, toujours « ↗ Nom du site », l’adresse en bulle, `target="_blank" rel="noopener noreferrer"` ; sans nom (ou « Ouvrir », « la source ») : le nom du site tiré de l’adresse (`UI.siteName`, « ↗ Gallica ») ; un signe devant le nom est retiré (un seul signe : ↗) ; `javascript:`, `data:`… → « # ».
 - `UI.viewToggle({key, value, onChange, what, dflt})` seul (classe `.segmented.ui-viewtoggle`, `.value`, `.set(v)`) ; sans `key`, l'appelant retient le choix lui-même. `UI.putViewToggle(bar, toggle)` le pose dans une barre C6 déjà faite. Aussi `A().viewToggle`.
 - « Liste » = tableau existant ou `UI.rowsHtml` (petite vignette, nom, ligne grise, date) ; « Fiches » = `UI.cardsHtml` (grande vignette 150 px) ou les cartes propres à la liste. Styles dans `ui.css` (clair, sombre, téléphone).
 
@@ -173,6 +175,22 @@ bar.adoptSort(table._sortBar);           // reprend « Trier » (et « Liste | F
 - `UI.listMatch` pour garder les lignes d’après `bar.state` : `text(q, …textes)` (chaque mot, sans accents), `pick(v, ids, noms)` (un choix du menu de choix : par numéro, sinon par nom), `period(de, à, …années)`, `year(texte)`. Un filtre vide garde tout.
 - Liste tout à fait vide : pas de barre, la grande boîte K10 seule (avec son bouton) ; recherche ou filtres sans résultat : la barre reste, avec « 🔍 Aucun … ne correspond ».
 
+### Liste de choix commune : `UI.choiceList` (cases à cocher ou ronds, avec 🔍)
+
+Partout où l’on coche dans une liste qu’on peut chercher (Listes → données « + Ajouter un critère » d’un champ à choix, « Filtrer ▾ » au-delà de 8 choix, « 📚 Ajouter à un recueil… », « ＋ Ajouter des revues, livres… »). Styles : `ui.css` (« Listes de choix communes »). Test : `tests/test-choix-liste.js`.
+
+```js
+const cl = UI.choiceList({items: [['France', 1234, 'France'], {value: 'SE', n: 12, label: 'Suède', sub: '…', icon: '🇸🇪', text: 'mots en plus'}],
+    checked: ['France'], multiple: true, name: '', key: 'ld:pays:country',  // key : « par nombre / A → Z » retenu (localStorage genealogie-choix-tri)
+    search: true /* ou false, ou une case <input type="search"> déjà posée */, inputAttrs: 'data-lb-f="pays"', onChange: (valeurs, {value, checked}) => {}, onApply: () => {}});
+cl.values; cl.setFilter(it => it.fam === 'livre'); cl.setItems(items, cochés); cl.setChecked(['France']);
+```
+
+- Recherche sans accents ni majuscules, début du texte puis début d’un mot puis ailleurs, partie trouvée en `<mark>` ; « 3 choix sur 214 » (aria-live) ; « Aucun choix ne contient « xyz » » + « Effacer la recherche ».
+- Les cochés en haut sous « Cochés (N) », puis « Les autres » ; « Tout cocher les N affichés » (en cherchant, ou toujours avec `tickAll`) et « Tout décocher » (un seul `change` pour tout).
+- Clavier : ↓ entre dans la liste, ↑ ↓ s’y déplacent, Espace coche, Entrée coche le premier trouvé (s’il est seul : coché et appliqué — `onApply`, sinon le formulaire autour est envoyé), Échap vide la case puis ferme.
+- Longue liste montrée par morceaux de 150 : « + 1 200 autres : tape pour chercher » (un clic ou descendre en montre plus). Toute case cochée reste dans la page (`input:checked` marche toujours).
+
 ## C7 — Chargement et messages
 
 Ces trois-là rendent du **HTML** (texte échappé) :
@@ -192,7 +210,7 @@ Jamais de « Chargement… » écrit seul (`<p class="muted">Chargement…</p>`)
 
 ### H7 — Messages après une action : `toast()` et « ↶ Annuler » au lieu de « Es-tu sûr ? »
 
-Un seul composant, toujours en bas à gauche, 6 s (× le réglage d’accessibilité), barre bleue du temps qui reste, en pause sous la souris ou le clavier ; 4 messages au plus.
+Un seul composant, toujours en bas à gauche, 6 s (× le réglage d’accessibilité), barre bleue du temps qui reste, en pause sous la souris ou le clavier ; 4 messages au plus. Pas de durée à part (`{duration: 15000}`) : le réglage de l’utilisateur s’applique partout ; seules exceptions, un message très long à lire (image trop grande) et « la généalogie a changé, ↻ Recharger » (garde : `tests/test-harmo-pieces.js`).
 
 ```js
 const A = window.LCNDA_APP;
@@ -526,7 +544,10 @@ UI.contextMenu(event, items);   // le même menu à l’endroit de la souris (cl
 | une chose qui existe | « Enregistrer » |
 | mettre une chose dans une autre (une photo dans un recueil, un témoin dans un événement) | « Ajouter » (« ＋ Ajouter… » sur la page) |
 | attacher deux fiches | « Relier » (« 🔗 Relier un recueil ») ; l’inverse : « Retirer » — jamais Rattacher, Lier, Associer |
-| revenir au départ | « ↺ Remettre comme au départ » — jamais Réinitialiser, Revenir au standard, Tout remettre à zéro… (un départ précis peut se dire : « ↺ Remettre le Sosa 1 de la base ») |
+| faire disparaître une chose | « Supprimer » (🗑) ; si elle reste ailleurs (une photo retirée d’un recueil) : « Retirer » |
+| ôter tout ce qu’il y a dans un contenant (corbeille, panier, journal, case, liste) | « Vider » : « Vider la corbeille », « 🗑 Vider le journal », « Vider la recherche » |
+| un dessin, une retouche, le contenu ou la mise en forme dans un éditeur | « Effacer » : la gomme, « Effacer les petites taches », « Effacer la mise en forme » ; et « 🗑 Effacer les réponses gardées » |
+| revenir au départ | « ↺ Remettre comme au départ » — jamais Réinitialiser, Revenir au standard, Tout remettre à zéro… ; ce qui est remis va dans la bulle (`title`, ou `help` dans un menu : « Rétablir l’ordre de départ ») ; « ↺ Remettre le Sosa 1 de la base » reste (ce n’est pas le départ de l’écran, c’est la valeur de la base) |
 | une fenêtre qui ne fait que montrer | « Fermer » seul, à droite (jamais « Annuler » + « Fermer ») |
 | un réglage | « Enregistrer » (« Appliquer » reste pour une opération : un filtre sur une image, une transformation) |
 
@@ -551,10 +572,14 @@ Filet de sécurité : à l’ouverture d’une fenêtre (`showModal`) dont le ti
 | Plus d’actions | ⋯ | | Favori, raccourci | ⭐ |
 | Fichier, dossier, choisir un fichier | 📁 | | Relier | 🔗 |
 | Remettre comme au départ | ↺ | | Plein écran | ⛶ |
-| Envoyer, confier à quelqu’un | 📤 | | | |
+| Envoyer, confier à quelqu’un | 📤 | | Installer un paquet de données | 📦 |
+| Insérer une info, joindre | 📎 | | | |
 
+- 📋 seulement pour copier / coller ; 📎 seulement pour insérer / joindre ; ⤓ pour un fichier qui sort de l’app (exporter, télécharger), 📦 pour installer des données. Une liste ou un registre prend son propre signe : 📑 Mes listes, 🏠 Recensements, 🪖 Registre matricule, ❓ Tous les doutes, 🧩 Partir d’un modèle, 📮 Ranger dans le Registre de courriers, 📁 Fichiers des médias.
 - Un seul signe devant le mot : « ＋ Nouveau livret » (jamais « 📘 + Nouveau livret », « 🐾 + Nouvel animal ») ; toujours « ＋ » (pas « + », ➕, ⊕).
-- 📥 n’est plus une action (ni importer, ni exporter) ; il ne reste que pour une boîte d’arrivée (« Non classés », dossier surveillé).
+- 📥 n’est plus une action (ni importer, ni exporter) ; il ne reste que pour une boîte d’arrivée (« Non classés », dossier surveillé) et pour **« Prendre depuis… »** (faire entrer une chose dans l’outil ouvert : c’est son vrai sens), même en bouton d’icône seule (avec son `aria-label`).
+- « + 3 » devant un nombre veut dire « 3 de plus » (pas « Ajouter ») : il reste « + ».
+- Un bouton écrit « Fermer … » n’a pas de ✕ (« Fermer l’essai ») ; un bouton d’icône seule pour fermer : ×.
 - Le nom du format va dans le menu : « ⤓ Exporter ▾ → CSV, PDF… » ; un bouton à un seul format : « ⤓ Exporter en CSV ».
 - Les menus d’un éditeur gardent l’icône de l’objet (« 🎚 Nouveau calque de réglage ») ; les choix de format d’une fenêtre d’export E3 (📄 PDF, 🖼 PNG…) aussi.
 - Le test `tests/test-harmo-mots-symboles.js` cherche les variantes interdites dans le code.

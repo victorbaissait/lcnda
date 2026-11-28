@@ -1,0 +1,13 @@
+/* LCNDA — 🌉 Le pays au XIXe siècle (assets/js/heritage-telech-f.js) : le reste vient de histoire.css (hist-row…) */
+.tf-life { display: grid; gap: 12px; }
+.tf-ul li { margin-bottom: 6px; overflow-wrap: anywhere; }
+.tf-quote { display: block; margin: 4px 0; padding-left: 8px; border-left: 3px solid var(--border, rgba(127, 127, 127, .35)); color: var(--muted); font-size: 12.5px; quotes: "« " " »"; }
+.tf-src-link { font-size: 12px; white-space: nowrap; }
+.tf-more > summary { cursor: pointer; color: var(--accent, inherit); font-size: 12.5px; margin-top: 2px; }
+.tf-more[open] > summary { margin-bottom: 6px; }
+.tf-noise { margin: 8px 0 0; font-size: 12.5px; }
+.tf-spark { display: block; width: 100%; max-width: 420px; height: 46px; color: var(--accent, currentColor); margin: 6px 0 0; }
+.tf-spark-legend { display: block; margin-bottom: 6px; font-size: 11.5px; }
+.tf-panel { margin-top: 12px; }
+@media (max-width: 600px) { .tf-ul { padding-left: 18px; } }
+@media print { .tf-more:not([open]) { display: none; } }

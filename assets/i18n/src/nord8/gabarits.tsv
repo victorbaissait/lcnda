@@ -1,0 +1,51 @@
+fr ¦ tr
+# 🧩 Atelier de transcription, vague 3 (3b) : les gabarits d’actes (heritage-transcribe-gabarit.js)
+Choisis la sorte d’acte (en haut) : chaque sorte a ses cases. ¦ Belge türünü seç (üstte): her türün kendi kutuları var.
+On dirait : {x}. Utiliser ce gabarit ? ¦ Görünüşe göre: {x}. Bu şablon kullanılsın mı?
+Cases remplies : {a}/{b} · vérifiées : {c} ¦ Doldurulan kutular: {a}/{b} · doğrulanan: {c}
+Gabarit ¦ Şablon
+Vert : rempli par « 🧭 Repérer », à vérifier · Entrée : ✓ vérifié · un clic sur « l. 3 » montre le passage. ¦ Yeşil: “🧭 Bul” tarafından dolduruldu, kontrol edilecek · Enter: ✓ doğrulandı · “3. satır”a tıklamak ilgili yeri gösterir.
+Date du baptême ¦ Vaftiz tarihi
+Père, métier ¦ Baba, meslek
+Officier de l’état civil ¦ Nüfus memuru
+Parents de l’époux ¦ Damadın anne babası
+Parents de l’épouse ¦ Gelinin anne babası
+Contrat de mariage ¦ Evlilik sözleşmesi
+Publications ¦ İlanlar
+Décédé le ¦ Ölüm tarihi
+Déclarants ¦ Bildirenler
+Date d’inhumation ¦ Defin tarihi
+Parties ¦ Taraflar
+Juge ou notaire ¦ Hâkim veya noter
+Personne concernée ¦ İlgili kişi
+Ce qui est attesté ¦ Tasdik edilen
+Rue ou maison ¦ Sokak veya ev
+Ménage ¦ Hane
+Matricule ¦ Sicil numarası
+Classe ¦ Doğum yılı sınıfı
+Régiment ¦ Alay
+Campagnes ¦ Seferler
+Blessures ¦ Yaralar
+page {n}, l. {line} ¦ sayfa {n}, {line}. satır
+l. {n} ¦ {n}. satır
+🧩 Gabarit à cases (conseillé) ¦ 🧩 Kutulu şablon (önerilen)
+Texte à trous (comme avant) ¦ Boşluklu metin (eskisi gibi)
+Remplir à nouveau ¦ Yeniden doldur
+Coller le texte à trous ¦ Boşluklu metni yapıştır
+Repris du gabarit (cases vérifiées ou écrites par toi) : ¦ Şablondan alındı (doğruladığın veya yazdığın kutular):
+Retirer cette case ¦ Bu kutuyu kaldır
+Ajouter une case ¦ Kutu ekle
+Nom de la case (ex. Profession du parrain) ¦ Kutunun adı (ör. Vaftiz babasının mesleği)
+Nom de la case ¦ Kutunun adı
+Case retirée ¦ Kutu kaldırıldı
+Mes gabarits… ¦ Şablonlarım…
+Mes gabarits ¦ Şablonlarım
+Tableur de tous les actes « {x} » ¦ Tüm “{x}” belgelerinin tablosu
+Les cases cochées se montrent dans le gabarit de chaque acte de cette sorte. Gardé sur cet ordinateur. ¦ İşaretli kutular bu türdeki her belgenin şablonunda görünür. Bu bilgisayarda saklanır.
+Aucun acte de cette sorte pour l’instant. ¦ Henüz bu türde belge yok.
+gabarits ¦ şablonlar
+Tableur : {x} ¦ Tablo: {x}
+Pas encore relié : le relier dans l’Atelier ¦ Henüz bağlanmadı: atölyede bağla
+Numéros de ligne ¦ Satır numaraları
+Transcription faite avec LCNDA (Le Carnet numérique des ancêtres). ¦ LCNDA ile yapılan transkripsiyon (Le Carnet numérique des ancêtres).
+XML des chercheurs et des archives (lignes, zones, personnes) ¦ Araştırmacı ve arşiv XML’i (satırlar, bölgeler, kişiler)

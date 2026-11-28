@@ -1,0 +1,36 @@
+fr ¦ sk ¦ nb
+# 🔤 La langue de chaque page, 📇 tables et index (heritage-recueil-etat.js, heritage-recueil-index.js)
+dont {l} : p. {x} ¦ z toho {l}: s. {x} ¦ herav {l}: s. {x}
+Sorte de page ¦ Druh strany ¦ Sidetype
+Langue : ¦ Jazyk: ¦ Språk:
+Langue de ces pages… ¦ Jazyk týchto strán… ¦ Språk for disse sidene…
+Sorte : {x} ¦ Druh: {x} ¦ Type: {x}
+Langue de {n} pages ¦ Jazyk {n} strán ¦ Språk for {n} sider
+Langue de la page ¦ Jazyk strany ¦ Sidens språk
+Langue (vide : comme le recueil) ¦ Jazyk (prázdne: ako zborník) ¦ Språk (tomt: som samlingen)
+ex. Latin ¦ napr. Latinčina ¦ f.eks. Latin
+Langue : {l} ¦ Jazyk: {l} ¦ Språk: {l}
+Langue : comme le recueil ¦ Jazyk: ako zborník ¦ Språk: som samlingen
+comme le recueil : {l} ¦ ako zborník: {l} ¦ som samlingen: {l}
+pas dite ¦ neuvedené ¦ ikke oppgitt
+Le texte de cette page semble en latin. ¦ Text tejto strany vyzerá po latinsky. ¦ Teksten på denne siden ser ut til å være latin.
+Noter « Latin » ¦ Zapísať „Latinčina“ ¦ Angi «Latin»
+Tables et index ¦ Registre a indexy ¦ Registre og indekser
+Une table décennale, un index en fin de registre ? Marque la page « 📇 Table ou index » (onglet 🗂 État ou sur la page), puis fais son « 📊 Tableau de la page » : une ligne par entrée, une colonne pour le renvoi (f° 12, p. 3). Elles arrivent ici, avec un lien vers chaque page annoncée. ¦ Desaťročný register, index na konci matriky? Označ stranu ako „📇 Register alebo index“ (karta 🗂 Stav alebo na strane) a potom vytvor jej „📊 Tabuľka strany“: jeden riadok na položku, jeden stĺpec pre odkaz (f° 12, s. 3). Položky sa objavia tu, s odkazom na každú uvedenú stranu. ¦ Et tiårsregister, et indeks bakerst i protokollen? Merk siden som «📇 Register eller indeks» (fanen 🗂 Status eller på siden), og lag så dens «📊 Sidens tabell»: én rad per oppføring, én kolonne for henvisningen (f° 12, s. 3). Oppføringene havner her, med en lenke til hver angitte side.
+{r} : page absente ¦ {r}: chýbajúca strana ¦ {r}: manglende side
+pas de page « {r} » ¦ žiadna strana „{r}“ ¦ ingen side «{r}»
+sans renvoi ¦ bez odkazu ¦ uten henvisning
+{a} renvois trouvés · {b} vers des pages absentes · {c} introuvables ¦ Nájdené odkazy: {a} · na chýbajúce strany: {b} · nenájdené: {c} ¦ {a} henvisninger funnet · {b} til manglende sider · {c} finnes ikke
+« {p} » est une table, mais son tableau est vide : ouvre la page → « 📊 Tableau de la page » (une ligne par entrée, une colonne pour le renvoi). ¦ „{p}“ je register, ale jeho tabuľka je prázdna: otvor stranu → „📊 Tabuľka strany“ (jeden riadok na položku, jeden stĺpec pre odkaz). ¦ «{p}» er et register, men tabellen er tom: åpne siden → «📊 Sidens tabell» (én rad per oppføring, én kolonne for henvisningen).
+Ouvrir la page ¦ Otvoriť stranu ¦ Åpne siden
+Chercher dans les tables… ¦ Hľadať v registroch… ¦ Søk i registrene…
+Chercher dans les tables ¦ Hľadať v registroch ¦ Søk i registrene
+Toutes les entrées ¦ Všetky položky ¦ Alle oppføringer
+Renvois trouvés ¦ Nájdené odkazy ¦ Henvisninger funnet
+Vers des pages absentes ¦ Na chýbajúce strany ¦ Til manglende sider
+Introuvables ¦ Nenájdené ¦ Finnes ikke
+dans {p} ¦ v {p} ¦ i {p}
+… et {n} autres : affine la recherche. ¦ … a ďalších {n}: spresni hľadanie. ¦ … og {n} til: snevre inn søket.
+Page ordinaire ¦ Bežná strana ¦ Vanlig side
+📇 Table ou index ¦ 📇 Register alebo index ¦ 📇 Register eller indeks
+Page de garde ¦ Predsádka ¦ Forsatsblad

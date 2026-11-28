@@ -33,7 +33,7 @@
 
     const FIELD = {age: 'Âge', birth: 'Naissance estimée', job: 'Métier', origin: 'Origine', birthplace: 'Lieu de naissance', residence: 'Domicile', link: 'Lien', role: 'Rôle', status: 'État'};
     const ROLE = {epoux: 'Époux', epouse: 'Épouse', pere: 'Père', mere: 'Mère', sujet: 'Enfant', defunt: 'Défunt', conjoint: 'Conjoint', temoin: 'Témoin', parrain: 'Parrain', marraine: 'Marraine', declarant: 'Déclarant', parent: 'Parent', autre: 'Autre personne'};
-    const KIND_LABEL = {mariage: 'Mariage', bapteme: 'Baptême', naissance: 'Naissance', deces: 'Décès', sepulture: 'Sépulture', notarial: 'Acte notarié', militaire: 'Registre militaire', recensement: 'Recensement', lettre: 'Lettre', autre: 'Autre'};
+    const KIND_LABEL = {mariage: 'Mariage', bapteme: 'Baptême', naissance: 'Naissance', deces: 'Décès', sepulture: 'Sépulture', notarial: 'Acte notarié', notoriete: 'Acte de notoriété', militaire: 'Registre militaire', recensement: 'Recensement', lettre: 'Lettre', autre: 'Autre'};
     const PLACE_KIND = {pays: 'pays', region: 'région', ville: 'ville', lieu: 'lieu'};
     const EVENT_ICON = {bataille: '⚔️', prisonniers: '⛓', delivrance: '🕊', service: '🎖', unite: '🎖', conscrit: '🎖', malheur: '⚠️', retour: '🏠'};
 
@@ -100,7 +100,7 @@
             const out = [];
             if (P.show.people) {
                 const ppl = rf.people;
-                out.push(`<section class="h-tf-sec" data-tf-sec="people">${head('people', ppl.length)}${ppl.map(card).join('') || `<p class="muted">${esc(i18n('Aucune personne repérée.'))}</p>`}
+                out.push(`<section class="h-tf-sec" data-tf-sec="people">${head('people', ppl.length)}${ppl.map(card).join('') || `${window.LCNDA_APP.empty(i18n('Aucune personne repérée.'))}`}
                     ${rf.rejected.length ? `<details class="h-tf-rej"${st.open.has('rej') ? ' open' : ''} data-tf-rej><summary>${esc(i18n('Écartés : pas des noms ({n})', {n: rf.rejected.length}))}</summary><ul>${rf.rejected.map(r => `<li><button type="button" class="link-button"${gotoAttr(r.s, r.e)}>${raw(r.label)}</button> <small class="muted">${esc(i18n({particle: 'finit par une particule seule', letters: 'lettres mal lues', common: 'mot courant', job: 'c’est un métier', place: 'c’est un lieu'}[r.why] || 'pas un nom'))}</small></li>`).join('')}</ul></details>` : ''}</section>`);
             }
             if (P.show.places) out.push(`<section class="h-tf-sec" data-tf-sec="places">${head('places', rf.places.length)}<div class="h-tf-list">${rf.places.map(p => { const m = st.match?.places?.[p.name] || [];

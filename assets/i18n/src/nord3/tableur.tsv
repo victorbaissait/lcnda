@@ -531,7 +531,7 @@ Le nom du modèle (les données restent : vide-les avant si tu veux un modèle v
 Le nom de la copie : ¦ Numele copiei:
 {name} (copie) ¦ {name} (copie)
 Les changements faits depuis le dernier enregistrement seront perdus. ¦ Schimbările făcute de la ultima salvare se vor pierde.
-📋 Partir d’un modèle ¦ 📋 Pornește de la un model
+🧩 Partir d’un modèle ¦ 🧩 Pornește de la un model
 Mes modèles ¦ Modelele mele
 Pas encore de modèle à toi : dans un classeur, Fichier → « Enregistrer comme modèle… ». ¦ Încă niciun model al tău: într-un registru, Fișier → „Salvează ca model…”.
 séparateur « {sep} » ¦ separator „{sep}”
@@ -615,7 +615,7 @@ Sosa, génération, côté, âge ¦ număr Sosa, generație, parte, vârstă
 objets, prix, total en livres ¦ obiecte, prețuri, total în livres
 Registre matricule ¦ Registru matricol
 classe, signalement, campagnes ¦ clasă, semnalmente, campanii
-📋 Partir d’un modèle… ¦ 📋 Pornește de la un model…
+🧩 Partir d’un modèle… ¦ 🧩 Pornește de la un model…
 ⤒ Importer un tableau… ¦ ⤒ Importă un tabel…
 ⤓ Exporter… ¦ ⤓ Exportă…
 🖨 Imprimer… ¦ 🖨 Tipărește…

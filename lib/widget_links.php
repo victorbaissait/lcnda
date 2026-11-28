@@ -117,13 +117,20 @@ function picker_wl_acts(PDO $pdo, string $q, int $offset, int $limit): array
 {
     if (!picker_table_exists($pdo, 'act_transcriptions')) { return ['total' => 0, 'items' => []]; }
     $params = [];
-    $where = picker_text_where(['t.title', 't.place', 't.date_text', 't.source'], $q, $params);
-    [$total, $rows] = picker_page($pdo, 'SELECT t.id, t.title, t.date_text, t.place, m.filename, m.thumbnail', "FROM act_transcriptions t LEFT JOIN media m ON m.id=t.media_id WHERE {$where}", 't.updated_at DESC, t.id DESC', $params, $offset, $limit);
+    $where = function_exists('picker_words_where') ? picker_words_where(['t.title', 't.place', 't.date_text', 't.source'], $q, $params) : picker_text_where(['t.title', 't.place', 't.date_text', 't.source'], $q, $params);
+    $json = static fn(string $path): string => "CASE WHEN json_valid(t.data_json) THEN json_extract(t.data_json, '{$path}') END";
+    [$total, $rows] = picker_page($pdo, 'SELECT t.id, t.title, t.kind, t.date_text, t.place, t.source, t.media_id, t.created_at, length(trim(t.body)) AS body_len, ' . $json('$.status') . ' AS status, '
+        . 'json_array_length(' . "CASE WHEN json_valid(t.data_json) AND json_type(t.data_json, '$.people')='array' THEN json_extract(t.data_json, '$.people') ELSE '[]' END" . ') AS n_people, m.filename, m.thumbnail',
+        "FROM act_transcriptions t LEFT JOIN media m ON m.id=t.media_id WHERE {$where}", 't.updated_at DESC, t.id DESC', $params, $offset, $limit);
     return ['total' => $total, 'items' => array_map(static function ($r) {
         $img = trim((string) $r['thumbnail']) ?: trim((string) $r['filename']);
         return ['kind' => 'act', 'id' => (int) $r['id'], 'title' => wl_line($r['title']) ?: 'Transcription #' . $r['id'],
             'meta' => implode(' · ', array_filter(['Transcription d’acte', wl_line($r['date_text'], 40), wl_line($r['place'], 80)])), 'badge' => '', 'badge_style' => '', 'group' => 'act', 'icon' => '📜',
-            'thumb' => $img !== '' ? 'media/' . rawurlencode($img) : '', 'short' => wl_line($r['date_text'], 40)];
+            'thumb' => $img !== '' ? 'media/' . rawurlencode($img) : '', 'short' => wl_line($r['date_text'], 40),
+            // 📥 « Prendre depuis… » : sorte, date, lieu, cote, état, personnes ; sans titre ni date ni lieu ni sorte = « À décrire »
+            'raw_title' => wl_line($r['title']), 'act_kind' => (string) $r['kind'], 'date_text' => wl_line($r['date_text'], 60), 'place' => wl_line($r['place'], 120), 'cote' => wl_line($r['source'], 160),
+            'status' => (string) ($r['status'] ?? ''), 'has_text' => (int) $r['body_len'] > 0, 'people_count' => (int) $r['n_people'], 'media_id' => (int) ($r['media_id'] ?? 0), 'created_at' => (string) $r['created_at'],
+            'undescribed' => wl_line($r['date_text']) === '' && wl_line($r['place']) === '' && in_array((string) $r['kind'], ['', 'apreciser'], true)];
     }, $rows)];
 }
 

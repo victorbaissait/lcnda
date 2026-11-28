@@ -21,7 +21,7 @@
 .ong-letters { display: grid; grid-template-columns: repeat(13, minmax(0, 1fr)); gap: 2px; }
 .ong-letters[hidden] { display: none; }
 .ong-letters button { min-width: 0; padding: 3px 0; border: 1.5px solid transparent; background: transparent; color: var(--ink); font: 800 11px/1.2 var(--font-family); cursor: pointer; border-radius: 0; text-align: center; }
-.ong-letters button:hover:not(:disabled), .ong-letters button:focus-visible { border-color: var(--ink); background: var(--blue); color: #fff; }
+.ong-letters button:hover:not(:disabled), .ong-letters button:focus-visible { border-color: var(--ink); background: var(--blue); color: var(--on-blue, #fff); }
 .ong-letters button:disabled { opacity: .35; cursor: default; color: var(--muted); }
 .ong-list { display: grid; gap: 8px; min-width: 0; }
 .ong-menu, .ong-gbody { display: grid; gap: 6px; }
@@ -68,7 +68,7 @@ span.ong-cov.is-empty, .ong-ico { font-size: 20px; }
 .ong-gtitle { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 8px; align-items: center; text-align: left; width: 100%; padding: 5px 8px; border: 1px solid var(--line-color); background: var(--card-bg); color: var(--ink); cursor: pointer; border-radius: 3px; font: inherit; }
 .ong-gtitle:not(:has(.ong-cov)) { grid-template-columns: minmax(0, 1fr) auto; }
 .ong-gtitle:hover { border-color: var(--blue); }
-.ong-gtitle.is-active { background: var(--blue); color: var(--white); border-color: var(--blue); }
+.ong-gtitle.is-active { background: var(--blue); color: var(--on-blue, #fff); border-color: var(--blue); }
 .ong-gbody { margin-left: 14px; padding-left: 10px; border-left: 3px solid var(--blue-soft); }
 .ong-side-h { margin: 4px 0 0; font-size: 10px; }
 .ong-track, .ong-app { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; gap: 6px; align-items: center; text-align: left; width: 100%; padding: 5px 8px; font-weight: 400; font-size: 12.5px; }
@@ -140,3 +140,109 @@ span.ong-cov.is-empty, .ong-ico { font-size: 20px; }
 }
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 /* ═════ fin du mode sombre automatique ═════ */
+button.ong-uname { background: none; color: inherit; font: inherit; cursor: pointer; }
+button.ong-uname:hover, button.ong-uname:focus-visible { border-style: solid; border-color: var(--accent, #2b5ff0); }
+/* 🔗 documents liés (heritage-liens.js) : page du document, visionneuse, enquête */
+.dl-h { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.dl-h h3 { margin: 0; font-size: 1rem; }
+.dl-h .spacer, .dl-head .spacer { flex: 1; }
+.dl-list { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 8px; }
+.dl-item { border-top: 1px dashed var(--line-color, #ddd); padding-top: 8px; }
+.dl-head { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+.dl-why { color: var(--muted); }
+.dl-common { margin: 4px 0 0 24px; display: flex; flex-wrap: wrap; gap: 4px; align-items: center; font-size: .9em; }
+.dl-chip { display: inline-block; border: 1px solid var(--line-color, #ccc); border-radius: 999px; padding: 1px 8px; background: var(--soft-bg, rgba(0,0,0,.03)); }
+.dl-chip.is-special { border-color: var(--accent, #2b5ff0); }
+.dl-learn { margin: 6px 0 0 24px; font-size: .9em; }
+.dl-learn summary { cursor: pointer; }
+.dl-learn ul { margin: 6px 0 0; padding-left: 18px; display: grid; gap: 4px; }
+.dl-quote { color: var(--muted); font-style: italic; }
+.dl-empty { margin: 6px 0 0; font-size: .92em; }
+.lb-links { margin-top: 10px; }
+.dl-inv { margin-top: 14px; }
+
+/* 📚 Documents : 4 façons de ranger (A → Z, Par personne, Recueils, Dossiers) en grille 2 × 2, pour ne pas serrer la colonne */
+.ong-modebar .segmented.ong-mode.is-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+.ong-modebar .segmented.ong-mode.is-grid button { flex: none; width: auto; margin: 0; padding-left: 4px; padding-right: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; overflow-wrap: normal; letter-spacing: -.01em; }
+.ong-rh { width: 100%; text-align: left; cursor: pointer; border: 0; background: none; font: inherit; color: inherit; }
+.ong-rh:hover, .ong-rh:focus-visible { background: var(--surface-2, rgba(0,0,0,.05)); }
+.ong-pnum { font-weight: 600; color: var(--muted, #667); margin-right: 2px; }
+/* ☑ Choisir plusieurs : le numéro dans l'ordre des clics */
+.ong-pickbar { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; position: sticky; top: 0; z-index: 3; margin: 0 0 10px; padding: 8px 10px; border: 2px solid var(--ink, #111); background: var(--surface, #fff); }
+.ong-pickbar .spacer { flex: 1; }
+.ong-pickcount { font-weight: 600; }
+[data-ong-card].is-picking, .ong-docrow.is-picking { position: relative; }
+[data-ong-card].is-picked { outline: 3px solid var(--accent, #2457ff); outline-offset: 1px; }
+.ong-docrow.is-picked { background: var(--accent-soft, #e6ecff); }
+.ong-pickn { position: absolute; top: 6px; left: 6px; z-index: 2; min-width: 24px; height: 24px; padding: 0 6px; border-radius: 12px; background: var(--accent, #2457ff); color: #fff; font-weight: 700; font-size: 13px; display: inline-flex; align-items: center; justify-content: center; }
+/* 📚 Dans le recueil */
+.rd-place + .rd-place { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line, #ddd); }
+.rd-place p { margin: 0 0 6px; }
+.rd-nav { display: flex; flex-wrap: wrap; gap: 6px; }
+/* la fenêtre « Nouveau recueil » */
+.rd-list { list-style: none; margin: 0; padding: 0; max-height: 46vh; overflow: auto; border: 1px solid var(--line, #ddd); }
+.rd-item { display: flex; align-items: center; gap: 8px; padding: 4px 8px; border-bottom: 1px solid var(--line, #eee); background: var(--surface, #fff); }
+.rd-n { min-width: 22px; text-align: right; font-weight: 600; }
+.rd-th img { width: 36px; height: 36px; object-fit: cover; display: block; }
+.rd-th > span { display: inline-block; width: 36px; text-align: center; }
+.rd-t { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rd-h { margin: 14px 0 6px; font-size: 1rem; }
+.rd-picks { display: block; min-width: 0; } /* la liste de choix commune (UI.choiceList) a sa hauteur et sa case 🔍 */
+.rd-pick .ui-choice-l { font-weight: 700; }
+/* 📚 Recueils : chaque groupe se replie (▸ / ▾) */
+.ong-rhrow { display: flex; align-items: center; gap: 4px; padding-left: 0; }
+.ong-rhrow .ong-rh { flex: 1; min-width: 0; display: flex; justify-content: space-between; align-items: baseline; gap: 6px; padding: 2px 4px; }
+.ong-rhrow .ong-rh span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ong-fold { flex: none; width: 24px; height: 24px; border: 1.5px solid var(--line, #ccd); background: var(--surface, #fff); color: inherit; font: inherit; line-height: 1; cursor: pointer; padding: 0; }
+.ong-fold:hover, .ong-fold:focus-visible { border-color: var(--ink, #111); }
+/* 📚 à droite, un recueil choisi : « ← Tous les recueils · 📚 titre · N documents · ↗ Ouvrir le recueil » */
+.ong-recbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 12px; padding: 8px 10px; border: 2px solid var(--ink, #111); background: var(--surface, #fff); }
+.ong-recbar strong { font-size: 1.05rem; overflow-wrap: anywhere; }
+.ong-recbar .spacer { flex: 1; }
+
+/* 🗺 Carte et 📅 Frise des documents (heritage-onglets-documents.js) */
+.ong-wsview { margin: 0 0 12px; }
+.ong-map { position: relative; width: 100%; overflow: hidden; border: 2px solid var(--ink, #111); background: var(--surface-2, #eef0f3); }
+.ong-map-tiles { position: absolute; left: 0; top: 0; }
+.ong-map-tiles .map-tile { position: absolute; width: 256px; height: 256px; }
+.ong-pin { position: absolute; transform: translate(-50%, -50%); border-radius: 50%; border: 2px solid #fff; background: var(--accent, #055dff); color: #fff; font-weight: 700; font-size: 12px; display: grid; place-items: center; box-shadow: 0 1px 4px rgba(0, 0, 0, .45); cursor: pointer; padding: 0; min-width: 22px; }
+.ong-pin.is-on { background: #c62828; }
+.ong-mapside { margin-top: 10px; }
+.ong-time { display: grid; gap: 14px; }
+.ong-tdec h3 { display: flex; align-items: center; gap: 10px; margin: 0 0 6px; font-size: 1rem; }
+.ong-tdec h3 span { min-width: 92px; }
+.ong-tdec h3 i { display: block; height: 8px; background: var(--accent, #055dff); max-width: 40%; }
+.ong-tline { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
+.ong-tdoc { display: grid; gap: 2px; justify-items: center; width: 110px; flex: none; border: 2px solid var(--line, #c9ced8); background: var(--surface, #fff); padding: 6px; cursor: pointer; text-align: center; }
+.ong-tdoc img, .ong-tdoc .ong-ico { width: 90px; height: 90px; object-fit: cover; display: grid; place-items: center; font-size: 30px; }
+.ong-tdoc small { font-size: 11.5px; line-height: 1.2; max-height: 2.4em; overflow: hidden; overflow-wrap: anywhere; }
+/* 📚 pied de la colonne (mode Recueils) : la liste des recueils à droite */
+#sidebar-footer .ong-allrec { display: flex; width: 100%; justify-content: center; align-items: baseline; gap: 8px; margin: 8px 0 0; font-size: 14px; }
+#sidebar-footer .ong-allrec-n { font-size: 12px; font-weight: 400; opacity: .75; }
+
+/* ✉️ Lettres et 🏷 Sortes (maquette correspondances.html) : 6 façons de ranger en 3 × 2, ou 4 + « 📚 Ensembles » */
+.ong-modes { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.ong-modebar .segmented.ong-mode.is-grid.is-3 { grid-template-columns: repeat(3, minmax(min-content, 1fr)); } /* chaque colonne à la taille de son plus long mot (« 👤 Personnes ») : rien de coupé dans une colonne étroite */
+.ong-submode { display: flex; }
+.ong-submode button { flex: 1; font-size: .85rem; padding: 2px 4px; white-space: nowrap; }
+.ong-gap { margin: 2px 8px 4px 28px; padding: 3px 8px; border-left: 3px solid #d9a400; background: color-mix(in srgb, #f0c419 14%, transparent); font-size: .82rem; list-style: none; }
+.ong-exstats { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px; margin: 8px 0 12px; }
+.ong-exstats > div { border: 1px solid var(--border, #ddd); border-radius: 8px; padding: 6px 10px; }
+.ong-exstats small { display: block; color: var(--muted, #667); }
+.ong-fil { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.ong-piece-main { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; background: var(--panel, #fff); border: 1px solid var(--border, #ddd); border-radius: 8px; padding: 6px 10px; cursor: pointer; color: inherit; }
+.ong-piece-main .ong-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.ong-piece-main small { color: var(--muted, #667); }
+.ong-reply { color: var(--accent, #2a5fa8) !important; }
+.ong-modebar .segmented.ong-mode.is-grid.is-3 button { font-size: .8rem; padding-left: 2px; padding-right: 2px; letter-spacing: -.02em; }
+.ong-modebar .segmented.ong-mode.is-grid.is-3 button { white-space: normal; line-height: 1.15; overflow: visible; text-overflow: clip; }
+/* 🏞 la collection de cartes postales : recto, le verso au survol */
+.ong-pcgroup h3 { margin: 14px 0 6px; font-size: 1rem; }
+.ong-pcmiss { margin: 0 0 6px; padding: 3px 8px; border-left: 3px solid #d9a400; background: color-mix(in srgb, #f0c419 14%, transparent); font-size: .85rem; }
+.ong-pcgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.ong-pc { display: flex; flex-direction: column; gap: 3px; text-align: left; background: var(--panel, #fff); border: 1px solid var(--border, #ddd); border-radius: 8px; padding: 6px; cursor: pointer; color: inherit; }
+.ong-pc small { color: var(--muted, #667); }
+.ong-pc-flip { position: relative; display: block; aspect-ratio: 3 / 2; background: var(--grey-bg, #f1f2f4); border-radius: 4px; overflow: hidden; }
+.ong-pc-flip img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity .25s; }
+.ong-pc-flip img.v { opacity: 0; }
+.ong-pc:hover .ong-pc-flip img.v, .ong-pc:focus-visible .ong-pc-flip img.v { opacity: 1; }

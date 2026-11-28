@@ -40,7 +40,7 @@
                 const r = await T.save({kind: 'hunt', title: f.elements.title.value.trim() || i18n('Chasse au trésor'), data: {spots, treasure: f.elements.treasure.value.trim(), seed}}); T.toast(i18n('Chasse prête : imprime les cartes.'), 'success'); await draw(); printHunt(T, tr, {title: f.elements.title.value, data: {spots, treasure: f.elements.treasure.value.trim(), seed}}); void r; });
         };
         host.addEventListener('click', async ev => { const p = ev.target.closest('[data-hu-print]'); if (p) { const h = (await T.items('hunt')).find(x => x.id === Number(p.dataset.huPrint)); if (h) printHunt(T, tr, h); }
-            const d = ev.target.closest('[data-hu-del]'); if (d && await A().confirmBox(i18n('La chasse sera effacée.'), {title: i18n('Supprimer ?'), okLabel: i18n('Supprimer'), danger: true})) { await T.remove(Number(d.dataset.huDel)); draw(); } });
+            const d = ev.target.closest('[data-hu-del]'); if (d) await T.removeUndo(Number(d.dataset.huDel), {msg: i18n('Chasse supprimée.'), after: draw}); }); // R7 : tout de suite, avec ↶ Annuler
         T.actions(host, {primary: {label: i18n('🗝️ Préparer la chasse'), attrs: 'data-hu-go', run: () => host.querySelector('[data-hu-form]')?.requestSubmit()}});
         await draw();
     }

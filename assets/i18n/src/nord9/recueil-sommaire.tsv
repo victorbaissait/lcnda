@@ -1,0 +1,88 @@
+fr ¦ lb
+# 📑 Sommaire d’un recueil, messages du serveur (heritage-recueil-sommaire.js, lib/recueil_toc.php, lib/recueil_etat.php, lib/recueils.php)
+haut de ¦ uewen op
+milieu de ¦ an der Mëtt vun
+bas de ¦ ënnen op
+p. ¦ S.
+pages pas dites ¦ Säiten net uginn
+{d} sur {n} pages finies ou relues ¦ {d} vun {n} Säite fäerdeg oder nogekuckt
+Chargement du sommaire… ¦ Inhaltsverzeechnes gëtt gelueden…
+Le sommaire ne s’ouvre pas ¦ D’Inhaltsverzeechnes geet net op
+« {a} » et « {b} » se chevauchent ({p} {x}–{y}). ¦ „{a}“ an „{b}“ iwwerschneide sech ({p} {x}–{y}).
+{p} {n} : un acte « {k} » dans « {t} ». ¦ {p} {n}: en Akt „{k}“ an „{t}“.
+{p} {n} : un acte de {y} dans « {t} ». ¦ {p} {n}: en Akt vun {y} an „{t}“.
+Tout ouvrir ¦ Alles opmaachen
+Tout fermer ¦ Alles zoumaachen
+Niveaux montrés ¦ Ugewisen Niveauen
+Niveau 1 ¦ Niveau 1
++ passages ¦ + Passagen
+Chercher dans le sommaire… ¦ Am Inhaltsverzeechnes sichen…
+Chercher dans le sommaire ¦ Am Inhaltsverzeechnes sichen
+Chapitre… ¦ Kapitel…
+Passage… ¦ Passage…
+Proposer le découpage ¦ Opdeelung proposéieren
+Ranger par… ¦ Zortéieren no…
+Mode lecture ¦ Lies-Modus
+Pas encore de sommaire ¦ Nach keen Inhaltsverzeechnes
+« ＋ Chapitre… » : un titre, de telle page à telle page (ex. « Mariages 1870 », pages 15 à 19). Ou « ✨ Proposer le découpage » d’après les actes déjà transcrits. ¦ „＋ Kapitel…“: en Titel, vun där Säit bis déi Säit (z. B. „Bestietnesser 1870“, Säiten 15 bis 19). Oder „✨ Opdeelung proposéieren“ no den Akten, déi schonn transkribéiert sinn.
+Un clic sur un titre : sa première page. Un passage décrit (« du milieu de la page 5 au milieu de la page 7 : mariage… ») ne crée pas de fiche. ¦ E Klick op en Titel: seng éischt Säit. Eng beschriwwe Passage („vun der Mëtt vun der Säit 5 bis an d’Mëtt vun der Säit 7: Bestietnes…“) mécht keng Fiche.
+Modifier… ¦ Änneren…
+Sous-chapitre… ¦ Ënnerkapitel…
+Passage dans ce chapitre… ¦ Passage an dësem Kapitel…
+Proposer le découpage de ce chapitre ¦ Opdeelung vun dësem Kapitel proposéieren
+Supprimer (avec ce qu’il contient) ¦ Läschen (mat deem, wat dran ass)
+« {t} » retiré du sommaire ¦ „{t}“ aus dem Inhaltsverzeechnes erausgeholl
+toute la page ¦ déi ganz Säit
+Nouveau passage ¦ Nei Passage
+Modifier le passage ¦ Passage änneren
+Modifier le chapitre ¦ Kapitel änneren
+📑 SOMMAIRE ¦ 📑 INHALTSVERZEECHNES
+Ce que c’est (sans créer de fiche) ¦ Wat et ass (ouni eng Fiche ze maachen)
+ex. Mariage de Louis LACOMBE et Anne MAZAUD ¦ z. B. Bestietnes vum Louis LACOMBE an der Anne MAZAUD
+ex. Mariages 1870 ¦ z. B. Bestietnesser 1870
+— au premier niveau — ¦ — um éischten Niveau —
+— pas dit — ¦ — net uginn —
+Endroit ¦ Plaz
+À la page ¦ Op der Säit
+— la même — ¦ — déiselwecht —
+Sorte d’acte (facultatif) ¦ Aart vun Akt (fräiwëlleg)
+— toutes — ¦ — all —
+Années (facultatif) ¦ Joren (fräiwëlleg)
+Description, résumé, ce qu’on y apprend ¦ Beschreiwung, Resumé, wat een do gewuer gëtt
+Note (facultatif) ¦ Notiz (fräiwëlleg)
+Un passage décrit sert à retrouver ce qu’il y a dans le recueil ; « 👤 » sur les fiches reste possible depuis l’Atelier. ¦ Eng beschriwwe Passage hëlleft dir ze fannen, wat an der Sammlung ass; „👤“ op d’Fichen ass weider vum Atelier aus méiglech.
+Un chapitre peut contenir des sous-chapitres et des passages. La sorte et les années servent à repérer ce qui n’est pas à sa place. ¦ E Kapitel kann Ënnerkapitelen a Passagen enthalen. D’Aart an d’Joren hëllefen ze erkennen, wat net op senger Plaz ass.
+« {t} » ajouté au sommaire ¦ „{t}“ an d’Inhaltsverzeechnes derbäigesat
+« {t} » modifié ¦ „{t}“ geännert
+Rien à proposer : aucun acte repéré sur ces pages. ¦ Näischt ze proposéieren: keen Akt op dëse Säite fonnt.
+Découper « {t} » ¦ „{t}“ opdeelen
+✨ Proposer le découpage ¦ ✨ Opdeelung proposéieren
+Ajouter au sommaire ¦ An d’Inhaltsverzeechnes derbäisetzen
+D’après les actes déjà transcrits dans l’Atelier (leur sorte et leur année), page par page. Décoche ce qui ne va pas, corrige les titres : rien n’est ajouté avant que tu acceptes. ¦ No den Akten, déi schonn am Atelier transkribéiert sinn (hir Aart an hiert Joer), Säit fir Säit. Huel den Haken ewech bei deem, wat net passt, verbesser d’Titelen: näischt gëtt derbäigesat, ier s du akzeptéiers.
+Déjà dans cet ordre. ¦ Schonn an dëser Reiefolleg.
+Pièces rangées ({x}) ¦ Stécker zortéiert ({x})
+par sorte ¦ no Aart
+par cote ¦ no Cote
+Par date (de l’acte, sinon du document) ¦ No Datum (vum Akt, soss vum Dokument)
+Par sorte d’acte ¦ No Aart vun Akt
+Ranger les pièces ¦ D’Stécker zortéieren
+Tout le sommaire ¦ D’ganzt Inhaltsverzeechnes
+Pas encore de sommaire. ¦ Nach keen Inhaltsverzeechnes.
+Faire le sommaire ¦ Inhaltsverzeechnes maachen
+=chapitre ajouté au sommaire ¦ Kapitel an d’Inhaltsverzeechnes derbäigesat|Kapitelen an d’Inhaltsverzeechnes derbäigesat
+Document militaire ¦ Militärdokument
+Choisis au moins une page. ¦ Wiel mindestens eng Säit.
+Trop de pages d’un coup. ¦ Ze vill Säiten op eemol.
+Une de ces pages n’est pas dans ce recueil. ¦ Eng vun dëse Säiten ass net an dëser Sammlung.
+Donne le nom des pages à poser (400 au plus). ¦ Gëff den Numm vun de Säiten un, déi ze setze sinn (maximal 400).
+Une de ces pages a déjà une photo : retire-la à la main. ¦ Eng vun dëse Säiten huet schonn eng Foto: huel se mat der Hand ewech.
+Ligne du sommaire introuvable. ¦ Zeil vum Inhaltsverzeechnes net fonnt.
+La première page n’est pas dans ce recueil. ¦ Déi éischt Säit ass net an dëser Sammlung.
+La dernière page n’est pas dans ce recueil. ¦ Déi lescht Säit ass net an dëser Sammlung.
+Dis sur quelle page commence ce passage. ¦ So, op wéi enger Säit dës Passage ufänkt.
+Le chapitre parent n’est pas dans ce recueil. ¦ D’iwwergeuerdent Kapitel ass net an dëser Sammlung.
+Un passage décrit ne peut pas contenir de chapitre : choisis un chapitre. ¦ Eng beschriwwe Passage kann kee Kapitel enthalen: wiel e Kapitel.
+Un chapitre ne peut pas être dans lui-même. ¦ E Kapitel ka net an sech selwer sinn.
+Le sommaire suit l’ordre des pages : change plutôt les pages de ce chapitre. ¦ D’Inhaltsverzeechnes follegt der Reiefolleg vun de Säiten: änner léiwer d’Säite vun dësem Kapitel.
+Trop de documents d’un coup (2000 au plus). ¦ Ze vill Dokumenter op eemol (maximal 2000).
+Un recueil se fait avec des images (photos de pages) : aucun de ces documents n’en est une. ¦ Eng Sammlung gëtt mat Biller gemaach (Fotoe vu Säiten): keent vun dësen Dokumenter ass e Bild.

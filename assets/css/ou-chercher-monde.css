@@ -1,0 +1,48 @@
+/* 🌍 Où chercher ? — en plus (assets/js/heritage-ou-chercher-plus.js) : 🧭 plan de recherche, 📖 registres de ses pays,
+ * 🇳🇱🇧🇪 Open Archives ; et la période / l'accès d'un site (heritage-ou-chercher.js). Variables de l'app seulement ; règles
+ * sombres en bas. Rien ne dépasse à 390 px : les tableaux défilent dans leur cadre. */
+.ouc-plus { display: grid; gap: 10px; margin: 0 0 12px; min-width: 0; }
+.ouc-plan h3 { margin: 0 0 4px; font-size: 15px; display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: baseline; }
+.ouc-plan h3 small { font-weight: 400; font-size: 12.5px; }
+.ouc-tip { display: grid; grid-template-columns: 26px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 7px 4px; border-bottom: 1px solid var(--line, #e3e6ea); min-width: 0; }
+.ouc-tip:last-child { border-bottom: 0; }
+.ouc-period { font-size: 12px; color: var(--muted, #666); white-space: nowrap; }
+.ouc-acc { font-size: 11.5px; padding: 0 6px; border-radius: 4px; background: var(--blue-soft, #eef3ff); color: var(--ink, #222); white-space: nowrap; }
+.ouc-acc.is-onsite { background: var(--grey-soft, #f1f2f4); }
+.ouc-acc.is-both { background: var(--yellow-soft, #fff6db); }
+.ouc-meta { display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: center; margin-top: 2px; }
+.ouc-toptip { margin: 0 0 8px; font-size: 13px; line-height: 1.45; overflow-wrap: anywhere; }
+.ouc-guides summary, .ouc-oa summary { cursor: pointer; font-size: 14.5px; padding: 6px 0; }
+.ouc-guides summary small, .ouc-oa summary small { font-weight: 400; }
+.ouc-guide h4 { margin: 10px 0 4px; font-size: 14px; display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; }
+.ouc-reg { display: block; overflow-x: auto; max-width: 100%; border-collapse: collapse; font-size: 13px; }
+.ouc-reg th, .ouc-reg td { text-align: left; padding: 4px 8px 4px 0; border-bottom: 1px solid var(--line, #e3e6ea); vertical-align: top; }
+.ouc-reg th { font-size: 12px; color: var(--muted, #666); font-weight: 600; }
+.ouc-reg tr.is-life td:first-child { font-weight: 600; }
+.ouc-nowrap { white-space: nowrap; }
+.ouc-oa { border: 1px solid var(--line, #e3e6ea); border-radius: 10px; padding: 4px 12px 10px; min-width: 0; }
+.ouc-oa-form { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px 12px; align-items: end; margin: 6px 0 10px; }
+.ouc-oa-form label { display: grid; gap: 3px; font-size: 12.5px; color: var(--muted, #555); min-width: 0; }
+.ouc-oa-form input, .ouc-oa-form select { font: inherit; font-size: 13.5px; min-width: 0; width: 100%; box-sizing: border-box; }
+.ouc-oa-yy { display: flex; gap: 4px; align-items: center; }
+.ouc-oa-yy input { width: 0; flex: 1 1 0; }
+.ouc-oa-go { display: flex; align-items: end; }
+.ouc-oa-count { margin: 4px 0; font-size: 13.5px; }
+.ouc-oa-hist { font-size: 12.5px; margin: 0 0 6px; overflow-wrap: anywhere; }
+.ouc-oa-rec { margin: 6px 0 2px; min-width: 0; }
+.ouc-oa-ref { font-size: 12.5px; margin: 4px 0; overflow-wrap: anywhere; }
+.ouc-oa-credit { margin-top: 8px; }
+.ouc-oa-row .ouc-acts { flex-wrap: wrap; justify-content: flex-end; }
+.ouc-oa-no summary { cursor: pointer; font-size: 13px; color: var(--muted, #666); margin-top: 8px; }
+:root[data-theme="dark"] .ouc-acc { background: #24324d; color: #dfe6f3; }
+:root[data-theme="dark"] .ouc-acc.is-onsite { background: #2a2e35; }
+:root[data-theme="dark"] .ouc-acc.is-both { background: #3b3522; }
+@media (max-width: 760px) {
+    .ouc-tip, .ouc-oa-row { grid-template-columns: 22px minmax(0, 1fr); }
+    .ouc-tip .ouc-acts, .ouc-oa-row .ouc-acts { grid-column: 2; justify-content: flex-start; }
+    .ouc-oa-form { grid-template-columns: 1fr 1fr; }
+}
+/* 🇬🇧🇺🇸 Archives britanniques et américaines (heritage-liens-archives.js) : les boutons sur toute la largeur, et les liens d'une commune */
+.ouc-ukus .ouc-oa-go { grid-column: 1 / -1; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+.ouc-ukus-set { margin-top: 8px; }
+.so27-place { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; }

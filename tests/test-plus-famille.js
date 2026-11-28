@@ -255,7 +255,7 @@ echo 'ok';`;
                     await pg.waitForFunction(() => window.LCNDA_APP?.state && window.LCNDA_EXT?.plusFamille && window.LCNDA_EXT?.openDialog && window.LCNDA_EXT?.tresors, null, { timeout: 20000 });
                     if (dark) await pg.evaluate(() => { document.documentElement.dataset.theme = 'dark'; });
                     // 🛡 la fiche d'Antoine : la note, ses raisons ; 💬 la remarque en attente sur son décès
-                    await pg.evaluate(() => { window.LCNDA_APP.state.currentPersonId = 4; window.LCNDA_APP.setModule('personnes'); });
+                    await pg.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; /* ses blocs essayés en entier (le chargement à mesure : test-fiche-lazy.js) */ window.LCNDA_APP.state.currentPersonId = 4; window.LCNDA_APP.setModule('personnes'); });
                     await pg.waitForSelector('[data-pf-rel="4"] .pf-rel-big', { timeout: 20000, state: 'attached' });
                     const txt = await pg.locator('[data-pf-rel="4"]').textContent();
                     assert.match(txt, /sur 100/); assert.match(txt, /À revoir avant publication/i); assert.match(txt, /Pour gagner des points/);
@@ -323,7 +323,10 @@ echo 'ok';`;
                     await pg.waitForTimeout(400); if (await pg.locator('dialog.mpk-dialog[open]').count()) { await pg.keyboard.press('Escape'); await pg.waitForTimeout(200); } // la fenêtre des images s'ouvre d'abord
                     await pg.locator('dialog.h-tx-dlg [data-tx-body]').fill('Anno Domini millesimo septingentesimo quinquagesimo secundo, die decima quarta mensis martii, baptizatus est Joannes, filius legitimus Petri MAZAUD et Mariae LACOMBE conjugum hujus parochiae de Malvialle, natus hesterna die. Patrinus fuit Joannes LACOMBE, matrina Antonia BESSE, qui signare nescierunt.');
                     if (process.env.DBG) console.log('DBG', await pg.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg'); const b = d?.querySelector('[data-pf-translate]'); return JSON.stringify([document.querySelectorAll('dialog.h-tx-dlg').length, [...document.querySelectorAll('dialog.h-tx-dlg [data-tx-body]')].map(x => x.value.length), d?.querySelector('[data-tx-lang]')?.value, !!d, d?.dataset.pfTr, !!d?.querySelector('[data-tx-cmd="aide"]'), !!b, b?.hidden, b?.getBoundingClientRect(), typeof window.LCNDA_LATIN, window.LCNDA_LATIN?.looksLatin(d?.querySelector('[data-tx-body]')?.value)]); }));
+                    // « Aide à la lecture » est dans l'étape « Corriger » (l'atelier ne montre que les boutons de l'étape choisie, audit 14) : on y va
+                    await pg.locator('dialog.h-tx-dlg [data-tx-step="fix"]').click();
                     await pg.waitForSelector('dialog.h-tx-dlg [data-pf-translate]:not([hidden]):visible', { timeout: 5000 });
+                    assert.ok(await pg.evaluate(() => { const b = [...document.querySelectorAll('dialog.h-tx-dlg [data-pf-translate]')].find(x => x.offsetWidth); return !!b && b.previousElementSibling?.matches('[data-tx-cmd="aide"]'); }), '« 🌐 Traduire » juste après « Aide à la lecture »');
                     await pg.locator('dialog.h-tx-dlg [data-pf-translate]:visible').first().click();
                     await pg.waitForSelector('dialog.h-tx-dlg .pf-tr-row', { timeout: 5000 });
                     const l1 = await pg.locator('dialog.h-tx-dlg .pf-tr-l1').innerText();

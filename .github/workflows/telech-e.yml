@@ -1,0 +1,115 @@
+# 🌌 Ciel, climat et mémoire (lot E) : refaire assets/data/te-*.json.gz, puis les enregistrer dans la branche lancée.
+#  - 🦴 te-fossiles : The Paleobiology Database (CC BY 4.0 ; le script relit la licence dans la réponse de l'API) — paleobiodb.org
+#    n'est pas joignable depuis l'atelier de développement : la fabrication se fait ici.
+#  - 🌳 te-libertes : Wikidata (CC0) + OpenStreetMap (ODbL). La partie OpenStreetMap se fait d'abord par .github/workflows/osm-france.yml
+#    (extrait Geofabrik + osmium) ; ici « libertes » garde les arbres OSM déjà fabriqués, « libertes-overpass » (secours) questionne Overpass.
+#  - 🌌 te-ciel (Hotham 2026, Zenodo, CC BY 4.0), 🌾 te-secheresses (OWDA, NOAA/NCEI), ❄️ te-hivers (Luterbacher, NOAA/NCEI),
+#    🏛 te-inscriptions (EDH, Zenodo, CC BY-SA 4.0), ⚔️ te-religion (Wikidata CC0) : déjà fabriqués dans l'atelier, refaits ici
+#    à la demande (les scripts relisent chaque licence et s'arrêtent si elle a changé).
+# Puis le sommaire assets/data/manifest.json (Réglages → 🗂 Données : « ↻ Vérifier » voit la nouvelle version).
+#
+# Lancer : onglet « Actions » → « Ciel, climat et mémoire (lot E) » → « Run workflow » (choisir ce qu'on refait).
+
+name: Ciel, climat et mémoire (lot E)
+
+on:
+  workflow_dispatch:
+    inputs:
+      quoi:
+        description: 'tout, fossiles, libertes, libertes-overpass, ciel, secheresses, hivers, inscriptions ou religion'
+        required: false
+        default: 'tout'
+  push:
+    branches: ['claude/**']
+    paths: ['.github/workflows/telech-e.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: telech-e-donnees
+  cancel-in-progress: false
+
+jobs:
+  donnees:
+    # le « push » sert seulement à faire connaître ce travail à GitHub : il ne fabrique rien
+    if: github.event_name != 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    env:
+      QUOI: ${{ github.event.inputs.quoi || 'tout' }}
+    steps:
+      - name: Dossier de travail
+        run: echo "TE_RAW=$RUNNER_TEMP/te-cache" >> "$GITHUB_ENV"
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: "Préférer IPv4 (pas d’IPv6 sur la machine GitHub, « Network is unreachable »)"
+        run: echo 'precedence ::ffff:0:0/96 100' | sudo tee -a /etc/gai.conf
+      - name: Reprendre les réponses déjà téléchargées
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ runner.temp }}/te-cache
+          key: telech-e-${{ github.run_id }}
+          restore-keys: telech-e-
+      - name: "🦴 Fossiles (Paleobiology Database)"
+        if: env.QUOI == 'tout' || env.QUOI == 'fossiles'
+        continue-on-error: true  # si la licence n'est pas relue, les autres fichiers se fabriquent quand même
+        run: python3 -I scripts/telech-e/build_fossiles.py assets/data
+      - name: "🌳 Arbres de la Liberté (Wikidata ; les arbres OpenStreetMap déjà fabriqués sont gardés)"
+        if: env.QUOI == 'tout' || env.QUOI == 'libertes'
+        run: python3 -I scripts/telech-e/build_libertes.py assets/data
+      - name: "🌳 Arbres de la Liberté (Wikidata + OpenStreetMap par Overpass : secours, d'abord osm-france.yml)"
+        if: env.QUOI == 'libertes-overpass'
+        run: |
+          # deux serveurs Overpass à tour de rôle (l'un est parfois injoignable ou surchargé)
+          for i in 1 2 3 4; do
+            srv=https://overpass-api.de/api/interpreter; [ $((i % 2)) -eq 0 ] && srv=https://overpass.kumi.systems/api/interpreter
+            TE_OVERPASS="$srv" python3 -I scripts/telech-e/build_libertes.py assets/data --osm && exit 0
+            echo "essai $i raté ($srv), nouvel essai dans 60 s"; sleep 60
+          done
+          exit 1
+      - name: "🌌 Le ciel la nuit"
+        if: env.QUOI == 'tout' || env.QUOI == 'ciel'
+        run: python3 -I scripts/telech-e/build_ciel.py assets/data
+      - name: "🌾 Sécheresses (Old World Drought Atlas)"
+        if: env.QUOI == 'tout' || env.QUOI == 'secheresses'
+        run: python3 -I scripts/telech-e/build_secheresses.py assets/data
+      - name: "❄️ Hivers et étés (Luterbacher)"
+        if: env.QUOI == 'tout' || env.QUOI == 'hivers'
+        run: python3 -I scripts/telech-e/build_hivers.py assets/data
+      - name: "🏛 Inscriptions romaines (EDH)"
+        if: env.QUOI == 'tout' || env.QUOI == 'inscriptions'
+        run: python3 -I scripts/telech-e/build_inscriptions.py assets/data
+      - name: "⚔️ Guerres de Religion, Camisards"
+        if: env.QUOI == 'tout' || env.QUOI == 'religion'
+        run: python3 -I scripts/telech-e/build_religion.py assets/data
+      - name: Garder les réponses pour la prochaine fois
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ runner.temp }}/te-cache
+          key: telech-e-${{ github.run_id }}
+      - name: Sommaire des données
+        run: node scripts/donnees-manifest.js
+      - name: Enregistrer dans la branche
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/data/te-*.json.gz assets/data/manifest.json
+          git diff --cached --quiet && { echo "rien de neuf"; exit 0; }
+          git commit -m "Ciel, climat et mémoire (lot E) : données refaites sur GitHub (PBDB CC BY 4.0, Wikidata CC0, OSM ODbL…)"
+          ok=
+          for i in 1 2 3 4 5; do
+            if ! git pull --rebase origin "$GITHUB_REF_NAME"; then
+              # le sommaire a changé entre-temps (un autre atelier) : on garde celui de la branche et on le refait par-dessus
+              git checkout --ours assets/data/manifest.json && node scripts/donnees-manifest.js \
+                && git add assets/data/manifest.json && GIT_EDITOR=true git rebase --continue || { git rebase --abort; sleep 15; continue; }
+            fi
+            git push origin "HEAD:$GITHUB_REF_NAME" && { ok=1; break; }; sleep 15
+          done
+          [ -n "$ok" ] || { echo "::error::pas enregistré dans la branche"; exit 1; }

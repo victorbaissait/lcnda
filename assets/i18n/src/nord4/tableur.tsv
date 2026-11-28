@@ -531,7 +531,7 @@ Le nom du modèle (les données restent : vide-les avant si tu veux un modèle v
 Le nom de la copie : ¦ Kopion nimi: ¦ A másolat neve:
 {name} (copie) ¦ {name} (kopio) ¦ {name} (másolat)
 Les changements faits depuis le dernier enregistrement seront perdus. ¦ Viimeisen tallennuksen jälkeen tehdyt muutokset menetetään. ¦ Az utolsó mentés óta végzett változtatások elvesznek.
-📋 Partir d’un modèle ¦ 📋 Aloita mallipohjasta ¦ 📋 Kezdés sablonból
+🧩 Partir d’un modèle ¦ 🧩 Aloita mallipohjasta ¦ 🧩 Kezdés sablonból
 Mes modèles ¦ Omat mallipohjat ¦ Saját sablonok
 Pas encore de modèle à toi : dans un classeur, Fichier → « Enregistrer comme modèle… ». ¦ Sinulla ei ole vielä omaa mallipohjaa: valitse työkirjassa Tiedosto → ”Tallenna mallipohjaksi…”. ¦ Még nincs saját sablonod: egy munkafüzetben Fájl → „Mentés sablonként…”.
 séparateur « {sep} » ¦ erotin ”{sep}” ¦ elválasztó: „{sep}”
@@ -615,7 +615,7 @@ Sosa, génération, côté, âge ¦ Sosa-numero, sukupolvi, puoli, ikä ¦ Sosa-
 objets, prix, total en livres ¦ esineet, hinnat, yhteensä livreinä ¦ tárgyak, árak, összesen livres-ben
 Registre matricule ¦ Sotilasrekisteri ¦ Katonai törzskönyv
 classe, signalement, campagnes ¦ ikäluokka, tuntomerkit, sotaretket ¦ korosztály, személyleírás, hadjáratok
-📋 Partir d’un modèle… ¦ 📋 Aloita mallipohjasta… ¦ 📋 Kezdés sablonból…
+🧩 Partir d’un modèle… ¦ 🧩 Aloita mallipohjasta… ¦ 🧩 Kezdés sablonból…
 ⤒ Importer un tableau… ¦ ⤒ Tuo taulukko… ¦ ⤒ Táblázat importálása…
 ⤓ Exporter… ¦ ⤓ Vie… ¦ ⤓ Exportálás…
 🖨 Imprimer… ¦ 🖨 Tulosta… ¦ 🖨 Nyomtatás…

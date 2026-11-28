@@ -1,0 +1,835 @@
+fr ¦ el ¦ bg
+Le texte est vide : écris ou lis d’abord l’acte. ¦ Το κείμενο είναι κενό: γράψε ή διάβασε πρώτα την πράξη. ¦ Текстът е празен: първо напиши или прочети акта.
+Aucune personne repérée dans le texte pour l’instant. ¦ Δεν βρέθηκε ακόμα κανένα άτομο στο κείμενο. ¦ Засега в текста не е открит нито един човек.
+Personnes — {t} ¦ Άτομα — {t} ¦ Хора — {t}
+L’envoi vers les autres outils n’est pas chargé. ¦ Η αποστολή σε άλλα εργαλεία δεν έχει φορτωθεί. ¦ Изпращането към другите инструменти не е заредено.
+L’image de l’acte ¦ Η εικόνα της πράξης ¦ Изображението на акта
+Le texte de la transcription ¦ Το κείμενο της μεταγραφής ¦ Текстът на преписа
+Les personnes repérées (tableau) ¦ Τα άτομα που βρέθηκαν (πίνακας) ¦ Откритите хора (таблица)
+Envoyer vers… ¦ Αποστολή σε… ¦ Изпрати към…
+Transcription — {t} ¦ Μεταγραφή — {t} ¦ Препис — {t}
+Signature — {t} ¦ Υπογραφή — {t} ¦ Подпис — {t}
+L’export Word n’est pas chargé. ¦ Η εξαγωγή σε Word δεν έχει φορτωθεί. ¦ Експортът към Word не е зареден.
+Éclaircir / restaurer l’image ¦ Φωτεινότερη / αποκατάσταση εικόνας ¦ Изсветли / възстанови изображението
+le texte mis en page, à ouvrir dans Word ou LibreOffice (.docx) ¦ το σελιδοποιημένο κείμενο, για άνοιγμα σε Word ή LibreOffice (.docx) ¦ оформеният текст, за отваряне в Word или LibreOffice (.docx)
+Ouvrir cette signature dans « Signatures et sceaux » : le papier s’efface, l’encre devient un tracé net ¦ Άνοιξε αυτή την υπογραφή στο « Υπογραφές και σφραγίδες »: το χαρτί σβήνεται, το μελάνι γίνεται καθαρή γραμμή ¦ Отвори този подпис в « Подписи и печати »: хартията изчезва, мастилото става ясна линия
+Détourer la signature ¦ Απομόνωση της υπογραφής ¦ Изрежи подписа
++ {n} autres : zoome pour les voir. ¦ + {n} ακόμα: μεγέθυνε για να τα δεις. ¦ + още {n}: приближи, за да ги видиш.
+1 case repérée ¦ 1 επισημασμένο κουτί ¦ 1 отбелязано поле
+1 lieu pas sur la carte ¦ 1 τόπος όχι στον χάρτη ¦ 1 място не е на картата
+Affiche d’abord un arbre. ¦ Εμφάνισε πρώτα ένα δέντρο. ¦ Първо покажи дърво.
+Ajouter la mère ¦ Προσθήκη μητέρας ¦ Добави майка
+Ajouter le père ¦ Προσθήκη πατέρα ¦ Добави баща
+Ajouter l’autre parent ¦ Προσθήκη του άλλου γονέα ¦ Добави другия родител
+Aller à un lieu… ¦ Μετάβαση σε τόπο… ¦ Отиди до място…
+Ancêtres (Sosa) ¦ Πρόγονοι (Sosa) ¦ Предци (Соса)
+Ancêtres (Sosa) sur {n} générations ¦ Πρόγονοι (Sosa) σε {n} γενιές ¦ Предци (Соса) в {n} поколения
+Ascendants de {nm} ¦ Πρόγονοι του/της {nm} ¦ Предци на {nm}
+Au zoom faible, les points proches deviennent une pastille avec leur nombre ¦ Σε μικρή μεγέθυνση, τα κοντινά σημεία γίνονται ένας κύκλος με τον αριθμό τους ¦ При малко приближение близките точки стават кръгче с броя си
+Aucune carte à exporter. ¦ Κανένας χάρτης για εξαγωγή. ¦ Няма карта за експорт.
+Aucune donnée. ¦ Κανένα δεδομένο. ¦ Няма данни.
+Aucune naissance d’ancêtre n’a de lieu placé sur la carte. ¦ Καμία γέννηση προγόνου δεν έχει τόπο στον χάρτη. ¦ Нито едно раждане на предец няма място на картата.
+Branche : {x} ¦ Κλάδος: {x} ¦ Клон: {x}
+CARTE · {x} ¦ ΧΑΡΤΗΣ · {x} ¦ КАРТА · {x}
+Centre de gravité (G1 = la personne de départ) ¦ Κέντρο βάρους (G1 = το αρχικό άτομο) ¦ Център на тежестта (G1 = началният човек)
+Centrer la carte sur un lieu et ouvrir sa bulle ¦ Κεντράρισμα του χάρτη σε τόπο και άνοιγμα του μπαλονιού του ¦ Центрирай картата на място и отвори балончето му
+Chargement du graphique… ¦ Φόρτωση γραφήματος… ¦ Зареждане на графиката…
+Choisis d’abord la personne de départ (Sosa 1). ¦ Διάλεξε πρώτα το αρχικό άτομο (Sosa 1). ¦ Първо избери началния човек (Соса 1).
+Colorer les cases : une étiquette, une branche, ou les fiches sans source ¦ Χρωμάτισε τα κουτιά: μια ετικέτα, έναν κλάδο ή τις καρτέλες χωρίς πηγή ¦ Оцвети полетата: етикет, клон или картоните без източник
+Dans cette zone ¦ Σε αυτή την περιοχή ¦ В тази област
+Dans la fenêtre d’impression, choisis « Enregistrer en PDF ». ¦ Στο παράθυρο εκτύπωσης, διάλεξε « Αποθήκευση ως PDF ». ¦ В прозореца за печат избери « Запази като PDF ».
+De {a} à {b} ¦ Από {a} έως {b} ¦ От {a} до {b}
+Depuis {a} ¦ Από {a} ¦ От {a}
+Famille de {nm} ¦ Οικογένεια του/της {nm} ¦ Семейство на {nm}
+Feuilles en largeur ¦ Φύλλα σε πλάτος ¦ Листа по ширина
+GRAPHIQUES ¦ ΓΡΑΦΗΜΑΤΑ ¦ ГРАФИКИ
+Grand arbre à assembler ¦ Μεγάλο δέντρο για συναρμολόγηση ¦ Голямо дърво за сглобяване
+Génération {g} : {n}{y} ¦ Γενιά {g}: {n}{y} ¦ Поколение {g}: {n}{y}
+Image impossible avec ce fond de carte : choisis PDF. ¦ Δεν γίνεται εικόνα με αυτό το υπόβαθρο χάρτη: διάλεξε PDF. ¦ С този фон на картата не става изображение: избери PDF.
+Imprime à 100 % (sans « ajuster à la page »). ¦ Εκτύπωσε στο 100 % (χωρίς « προσαρμογή στη σελίδα »). ¦ Печатай на 100 % (без « побиране в страницата »).
+Imprimer ce graphique (⌘P) ¦ Εκτύπωση αυτού του γραφήματος (⌘P) ¦ Отпечатай тази графика (⌘P)
+Imprimer la carte affichée (⌘P) ¦ Εκτύπωση του χάρτη που εμφανίζεται (⌘P) ¦ Отпечатай показаната карта (⌘P)
+Imprimer l’arbre en grand, sur plusieurs feuilles A4 ou A3 à assembler ¦ Εκτύπωση του δέντρου σε μεγάλο μέγεθος, σε πολλά φύλλα A4 ή A3 για συναρμολόγηση ¦ Отпечатай дървото в голям формат, на няколко листа A4 или A3 за сглобяване
+Inhumations ¦ Ταφές ¦ Погребения
+Jusqu’à {b} ¦ Έως {b} ¦ До {b}
+La liste des événements visibles, qui suit la carte ¦ Η λίστα των ορατών γεγονότων, που ακολουθεί τον χάρτη ¦ Списъкът на видимите събития, който следва картата
+La photo de la fiche dans chaque case ¦ Η φωτογραφία της καρτέλας σε κάθε κουτί ¦ Снимката на картона във всяко поле
+Latitude ¦ Γεωγραφικό πλάτος ¦ Географска ширина
+Les chiffres : {t} ¦ Τα νούμερα: {t} ¦ Числата: {t}
+Les couleurs des sortes d’événements et la période ¦ Τα χρώματα των ειδών γεγονότων και η περίοδος ¦ Цветовете на видовете събития и периодът
+Les {n} premiers. ¦ Τα {n} πρώτα. ¦ Първите {n}.
+Longitude ¦ Γεωγραφικό μήκος ¦ Географска дължина
+L’arbre est découpé en feuilles qui se recouvrent un peu : coupe, pose sur la voisine en faisant coïncider les croix, colle. ¦ Το δέντρο χωρίζεται σε φύλλα που επικαλύπτονται λίγο: κόψε, βάλε πάνω στο διπλανό ταιριάζοντας τους σταυρούς, κόλλησε. ¦ Дървото е разделено на листа, които леко се застъпват: изрежи, постави върху съседния, като съвпаднат кръстчетата, и залепи.
+L’impression en feuilles n’est pas disponible ici. ¦ Η εκτύπωση σε φύλλα δεν είναι διαθέσιμη εδώ. ¦ Печатът на листа не е наличен тук.
+Masquer cette branche ¦ Απόκρυψη αυτού του κλάδου ¦ Скрий този клон
+Montrer cette branche ¦ Εμφάνιση αυτού του κλάδου ¦ Покажи този клон
+Même échelle des deux côtés (le plus grand = {m}). ¦ Ίδια κλίμακα και στις δύο πλευρές (το μεγαλύτερο = {m}). ¦ Еднакъв мащаб от двете страни (най-голямото = {m}).
+Nom : {x} ¦ Όνομα: {x} ¦ Име: {x}
+PNG, JPG, PDF ou CSV de la carte affichée ¦ PNG, JPG, PDF ή CSV του χάρτη που εμφανίζεται ¦ PNG, JPG, PDF или CSV на показаната карта
+Plan d’assemblage ¦ Σχέδιο συναρμολόγησης ¦ План за сглобяване
+Plan d’assemblage en première page ¦ Σχέδιο συναρμολόγησης στην πρώτη σελίδα ¦ План за сглобяване на първата страница
+Pose les feuilles dans l’ordre du plan : A1 en haut à gauche. ¦ Βάλε τα φύλλα με τη σειρά του σχεδίου: A1 πάνω αριστερά. ¦ Подреди листата по реда на плана: A1 горе вляво.
+Pose-la sur sa voisine jusqu’au pointillé, en faisant coïncider les croix ⊕, puis colle. ¦ Βάλ’ το πάνω στο διπλανό ως τη διακεκομμένη, ταιριάζοντας τους σταυρούς ⊕, μετά κόλλησε. ¦ Постави го върху съседния до пунктира, като съвпаднат кръстчетата ⊕, после залепи.
+Période : {a} – {b} ¦ Περίοδος: {a} – {b} ¦ Период: {a} – {b}
+Recentrer l’arbre ici ¦ Επανακεντράρισμα του δέντρου εδώ ¦ Центрирай дървото тук
+Recouvrement ¦ Επικάλυψη ¦ Застъпване
+Repères de collage (✂, pointillés, croix) ¦ Σημάδια συγκόλλησης (✂, διακεκομμένες, σταυροί) ¦ Знаци за залепване (✂, пунктир, кръстчета)
+Rien dans le cadre : déplace la carte ou dézoome. ¦ Τίποτα στο πλαίσιο: μετακίνησε τον χάρτη ή σμίκρυνε. ¦ Нищо в рамката: премести картата или отдалечи.
+Rien à imprimer. ¦ Τίποτα για εκτύπωση. ¦ Няма нищо за печат.
+Sans source (en rouge) ¦ Χωρίς πηγή (με κόκκινο) ¦ Без източник (в червено)
+Sosa et côtés : depuis la personne de départ. ¦ Sosa και πλευρές: από το αρχικό άτομο. ¦ Соса и страни: от началния човек.
+Sur chaque feuille qui n’est pas dans la première colonne ou la première rangée, coupe la marge blanche le long du trait ✂. ¦ Σε κάθε φύλλο που δεν είναι στην πρώτη στήλη ή στην πρώτη σειρά, κόψε το λευκό περιθώριο κατά μήκος της γραμμής ✂. ¦ На всеки лист, който не е в първата колона или първия ред, изрежи бялото поле по линията ✂.
+Un point par génération d’ancêtres (la moyenne des lieux de naissance), reliés par une flèche ¦ Ένα σημείο ανά γενιά προγόνων (ο μέσος όρος των τόπων γέννησης), ενωμένα με βέλος ¦ По една точка на поколение предци (средното на местата на раждане), свързани със стрелка
+Une personne… ¦ Ένα άτομο… ¦ Човек…
+Voir tous les points (⌘0) ¦ Εμφάνιση όλων των σημείων (⌘0) ¦ Покажи всички точки (⌘0)
+Vue d’ensemble : glisse le cadre pour te déplacer ¦ Επισκόπηση: σύρε το πλαίσιο για να μετακινηθείς ¦ Общ изглед: плъзни рамката, за да се местиш
+au-dessus : {x} ¦ από πάνω: {x} ¦ отгоре: {x}
+deux périodes ¦ δύο περίοδοι ¦ два периода
+elle seule ¦ μόνο αυτή ¦ само тя
+les hommes et les femmes ¦ οι άνδρες και οι γυναίκες ¦ мъжете и жените
+les événements visibles ¦ τα ορατά γεγονότα ¦ видимите събития
+rangée {r}, colonne {c} ¦ σειρά {r}, στήλη {c} ¦ ред {r}, колона {c}
+ses ascendants ¦ οι πρόγονοί της ¦ нейните предци
+{e} sans position : clique pour placer leurs lieux ¦ {e} χωρίς θέση: κάνε κλικ για να τοποθετήσεις τους τόπους τους ¦ {e} без позиция: щракни, за да поставиш местата им
+{e} · {p} ¦ {e} · {p} ¦ {e} · {p}
+{n} cases repérées ¦ {n} επισημασμένα κουτιά ¦ {n} отбелязани полета
+{n} feuilles : {c} en largeur, {r} en hauteur. Affiche finie : {w} × {h} cm. ¦ {n} φύλλα: {c} σε πλάτος, {r} σε ύψος. Τελική αφίσα: {w} × {h} cm. ¦ {n} листа: {c} по ширина, {r} по височина. Готов плакат: {w} × {h} см.
+{n} lieux pas sur la carte ¦ {n} τόποι όχι στον χάρτη ¦ {n} места не са на картата
+{n} événements ¦ {n} γεγονότα ¦ {n} събития
+{n} événements dans {p} lieux : clique pour zoomer ¦ {n} γεγονότα σε {p} τόπους: κάνε κλικ για μεγέθυνση ¦ {n} събития на {p} места: щракни, за да приближиш
+{what} de {nm} (créer la fiche ou relier une fiche) ¦ {what} του/της {nm} (δημιουργία καρτέλας ή σύνδεση καρτέλας) ¦ {what} на {nm} (създай картон или свържи картон)
+{x} se pose ici ¦ {x} μπαίνει εδώ ¦ {x} се поставя тук
+© contributeurs OpenStreetMap ¦ © συντελεστές του OpenStreetMap ¦ © сътрудници на OpenStreetMap
+« {x} » n’a pas encore de position sur la carte. ¦ Το « {x} » δεν έχει ακόμα θέση στον χάρτη. ¦ « {x} » още няма позиция на картата.
+Âge {a} – {b} ¦ Ηλικία {a} – {b} ¦ Възраст {a} – {b}
+Étiquette : {x} ¦ Ετικέτα: {x} ¦ Етикет: {x}
+à gauche : {x} ¦ αριστερά: {x} ¦ вляво: {x}
+↔ Comparer ¦ ↔ Σύγκριση ¦ ↔ Сравни
+↔ Comparer deux statistiques ¦ ↔ Σύγκριση δύο στατιστικών ¦ ↔ Сравни две статистики
+⤓ CSV ¦ ⤓ CSV ¦ ⤓ CSV
+⧉ Copier ¦ ⧉ Αντιγραφή ¦ ⧉ Копирай
+👁 Montrer les branches masquées ({n}) ¦ 👁 Εμφάνιση κρυμμένων κλάδων ({n}) ¦ 👁 Покажи скритите клонове ({n})
+📊 CSV ¦ 📊 CSV ¦ 📊 CSV
+🖼 Portraits ¦ 🖼 Πορτρέτα ¦ 🖼 Портрети
+🧩 Grand format à assembler ¦ 🧩 Μεγάλο μέγεθος για συναρμολόγηση ¦ 🧩 Голям формат за сглобяване
+🧮 Voir les chiffres ¦ 🧮 Δες τα νούμερα ¦ 🧮 Виж числата
+🧷 Repères ¦ 🧷 Σημάδια ¦ 🧷 Знаци
+moins d’un an ¦ κάτω από ένα έτος ¦ под една година
+Âge à cet événement ¦ Ηλικία σε αυτό το γεγονός ¦ Възраст при това събитие
+Ajoute des dates aux événements des fiches, ou montre d’autres sortes d’événements. ¦ Πρόσθεσε ημερομηνίες στα γεγονότα των καρτελών ή εμφάνισε άλλα είδη γεγονότων. ¦ Добави дати към събитията в картоните или покажи други видове събития.
+Voir plus d’années ¦ Δες περισσότερα χρόνια ¦ Виж повече години
+Agrandir une période ¦ Μεγέθυνση μιας περιόδου ¦ Увеличи период
+⌘ ou Ctrl + molette : agrandir là où est la souris. ¦ ⌘ ή Ctrl + ροδέλα: μεγέθυνση εκεί που είναι το ποντίκι. ¦ ⌘ или Ctrl + колелце: увеличи там, където е мишката.
+1 génération ¦ 1 γενιά ¦ 1 поколение
+Partir de ¦ Ξεκίνα από ¦ Започни от
+Barres de vie ¦ Μπάρες ζωής ¦ Ленти на живота
+Âge à chaque événement ¦ Ηλικία σε κάθε γεγονός ¦ Възраст при всяко събитие
+Anomalies en rouge ¦ Ανωμαλίες με κόκκινο ¦ Аномалии в червено
+Aucune vue pour l’instant : règle la frise, puis « 💾 Enregistrer la vue ». ¦ Καμία προβολή ακόμα: ρύθμισε την ταινία χρόνου, μετά « 💾 Αποθήκευση προβολής ». ¦ Засега няма изгледи: настрой времевата лента, после « 💾 Запази изгледа ».
+Le monde autour… ¦ Ο κόσμος γύρω… ¦ Светът наоколо…
+Chercher dans la frise… (nom, lieu, année) ¦ Αναζήτηση στην ταινία χρόνου… (όνομα, τόπος, έτος) ¦ Търси във времевата лента… (име, място, година)
+Chronologie de {x} ¦ Χρονολόγιο του/της {x} ¦ Хронология на {x}
+Vue « {name} » affichée. ¦ Η προβολή « {name} » εμφανίζεται. ¦ Изгледът « {name} » е показан.
+Vue « {name} » supprimée ¦ Η προβολή « {name} » διαγράφηκε ¦ Изгледът « {name} » е изтрит
+Partir de cette personne ¦ Ξεκίνα από αυτό το άτομο ¦ Започни от този човек
+Comparer avec la personne de départ ¦ Σύγκριση με το αρχικό άτομο ¦ Сравни с началния човек
+Copier la ligne ¦ Αντιγραφή γραμμής ¦ Копирай реда
+Supprimer l’événement ¦ Διαγραφή γεγονότος ¦ Изтрий събитието
+Événement supprimé ¦ Το γεγονός διαγράφηκε ¦ Събитието е изтрито
+La frise n’a pas pu se charger. ¦ Η ταινία χρόνου δεν μπόρεσε να φορτωθεί. ¦ Времевата лента не можа да се зареди.
+Choisis un lieu dans la colonne de gauche. ¦ Διάλεξε έναν τόπο στην αριστερή στήλη. ¦ Избери място в лявата колона.
+Tout ce qui s’y est passé : naissances, mariages, décès, domiciles… familles comprises. ¦ Ό,τι συνέβη εκεί: γεννήσεις, γάμοι, θάνατοι, κατοικίες… μαζί με τις οικογένειες. ¦ Всичко, което се е случило там: раждания, бракове, смърти, местожителства… включително семействата.
+PERSONNE {l} ¦ ΑΤΟΜΟ {l} ¦ ЧОВЕК {l}
+{n} frises parallèles ¦ {n} παράλληλες ταινίες χρόνου ¦ {n} успоредни времеви ленти
+{a} événements sur {b} ¦ {a} γεγονότα από {b} ¦ {a} събития от {b}
+Tout ce qui s’est passé à {x}, familles comprises. ¦ Ό,τι συνέβη στο {x}, μαζί με τις οικογένειες. ¦ Всичко, което се е случило в {x}, включително семействата.
+Événements connus autour de {x}, classés sans modifier la formulation originale des dates. ¦ Γνωστά γεγονότα γύρω από {x}, ταξινομημένα χωρίς αλλαγή της αρχικής γραφής των ημερομηνιών. ¦ Известни събития около {x}, подредени без промяна на оригиналния запис на датите.
+Exporter la frise (⌘E) ¦ Εξαγωγή ταινίας χρόνου (⌘E) ¦ Експортирай времевата лента (⌘E)
+Imprimer la frise (⌘P) ¦ Εκτύπωση ταινίας χρόνου (⌘P) ¦ Отпечатай времевата лента (⌘P)
+Enregistrer la vue ¦ Αποθήκευση προβολής ¦ Запази изгледа
+Rien à exporter. ¦ Τίποτα για εξαγωγή. ¦ Няма нищо за експорт.
+Ce navigateur ne sait pas faire une image de la frise : choisis PDF. ¦ Αυτό το πρόγραμμα περιήγησης δεν μπορεί να φτιάξει εικόνα της ταινίας χρόνου: διάλεξε PDF. ¦ Този браузър не може да направи изображение на времевата лента: избери PDF.
+Image impossible : la frise est trop grande. ¦ Αδύνατη η εικόνα: η ταινία χρόνου είναι πολύ μεγάλη. ¦ Изображението е невъзможно: времевата лента е твърде голяма.
+tableur ¦ υπολογιστικό φύλλο ¦ електронна таблица
+👶 Naissances et baptêmes ¦ 👶 Γεννήσεις και βαπτίσεις ¦ 👶 Раждания и кръщенета
+💍 Mariages et unions ¦ 💍 Γάμοι και ενώσεις ¦ 💍 Бракове и съюзи
+✝️ Décès et sépultures ¦ ✝️ Θάνατοι και ταφές ¦ ✝️ Смърти и погребения
+🔨 Métiers ¦ 🔨 Επαγγέλματα ¦ 🔨 Занаяти
+🏠 Domiciles et départs ¦ 🏠 Κατοικίες και αναχωρήσεις ¦ 🏠 Местожителства и заминавания
+🎖 Militaire ¦ 🎖 Στρατιωτικά ¦ 🎖 Военна служба
+🏠 Recensements ¦ 🏠 Απογραφές ¦ 🏠 Преброявания
+📌 Autres ¦ 📌 Άλλα ¦ 📌 Други
+Aucune vue pour l’instant : choisis les fiches, puis « 💾 Enregistrer la vue ». ¦ Καμία προβολή ακόμα: διάλεξε τις καρτέλες, μετά « 💾 Αποθήκευση προβολής ». ¦ Засега няма изгледи: избери картоните, после « 💾 Запази изгледа ».
+Choisir {x} ¦ Επιλογή {x} ¦ Избери {x}
+Inverser A et B ¦ Αντιστροφή A και B ¦ Размени A и B
+L’acte transcrit ¦ Η μεταγραμμένη πράξη ¦ Преписаният акт
+Choisir un acte… ¦ Επιλογή πράξης… ¦ Избери акт…
+Aucun acte transcrit pour l’instant. ¦ Καμία μεταγραμμένη πράξη ακόμα. ¦ Засега няма преписани актове.
+Personne {l} ¦ Άτομο {l} ¦ Човек {l}
+Retirer cette fiche de la comparaison ¦ Αφαίρεση αυτής της καρτέλας από τη σύγκριση ¦ Махни този картон от сравнението
+Ajouter une fiche ({l}) ¦ Προσθήκη καρτέλας ({l}) ¦ Добави картон ({l})
+Les actes viennent de Listes → Transcriptions d’actes. ¦ Οι πράξεις προέρχονται από Λίστες → Μεταγραφές πράξεων. ¦ Актовете идват от Списъци → Преписи на актове.
+naissance : {a} / {b} ¦ γέννηση: {a} / {b} ¦ раждане: {a} / {b}
+décès : {a} / {b} ¦ θάνατος: {a} / {b} ¦ смърт: {a} / {b}
+Parents en commun ¦ Κοινοί γονείς ¦ Общи родители
+Chargement de la comparaison… ¦ Φόρτωση σύγκρισης… ¦ Зареждане на сравнението…
+Exporter la comparaison (⌘E) ¦ Εξαγωγή σύγκρισης (⌘E) ¦ Експортирай сравнението (⌘E)
+Imprimer la comparaison (⌘P) ¦ Εκτύπωση σύγκρισης (⌘P) ¦ Отпечатай сравнението (⌘P)
+Garder une seule fiche : choisis la valeur de A ou de B ligne à ligne ¦ Κράτα μία μόνο καρτέλα: διάλεξε την τιμή του A ή του B γραμμή προς γραμμή ¦ Запази само един картон: избирай стойността на A или B ред по ред
+Fusionner… ¦ Συγχώνευση… ¦ Обедини…
+Comparer des fiches ¦ Σύγκριση καρτελών ¦ Сравни картони
+Pour décider si deux fiches sont des doublons, des homonymes ou deux branches distinctes. ¦ Για να αποφασίσεις αν δύο καρτέλες είναι διπλότυπα, συνονόματοι ή δύο ξεχωριστοί κλάδοι. ¦ За да решиш дали два картона са дубликати, съименници или два отделни клона.
+Sans doute la même personne ¦ Μάλλον το ίδιο άτομο ¦ Вероятно същият човек
+Peut-être la même personne ¦ Ίσως το ίδιο άτομο ¦ Може би същият човек
+Sans doute deux personnes différentes ¦ Μάλλον δύο διαφορετικά άτομα ¦ Вероятно двама различни души
+rien à comparer ¦ τίποτα για σύγκριση ¦ няма какво да се сравни
+Sexes différents ¦ Διαφορετικό φύλο ¦ Различен пол
+Une aide pour décider, pas une preuve : regarde aussi les sources. ¦ Βοήθεια για να αποφασίσεις, όχι απόδειξη: κοίτα και τις πηγές. ¦ Помощ за решението, не доказателство: виж и източниците.
+Choisis cette personne dans la colonne de gauche. ¦ Διάλεξε αυτό το άτομο στην αριστερή στήλη. ¦ Избери този човек в лявата колона.
+Ressemblance avec A : {n} % ¦ Ομοιότητα με A: {n} % ¦ Прилика с A: {n} %
+Naissance en face de naissance, décès en face de décès ; les lignes différentes sont marquées. ¦ Γέννηση απέναντι σε γέννηση, θάνατος απέναντι σε θάνατο· οι διαφορετικές γραμμές σημειώνονται. ¦ Раждане срещу раждане, смърт срещу смърт; различните редове са отбелязани.
+Parents : {x} ¦ Γονείς: {x} ¦ Родители: {x}
+Conjoints : {x} ¦ Σύζυγοι: {x} ¦ Съпрузи: {x}
+Enfants : {x} ¦ Παιδιά: {x} ¦ Деца: {x}
+Fusionner ces deux fiches ¦ Συγχώνευση αυτών των δύο καρτελών ¦ Обедини тези два картона
+Pour chaque ligne, choisis la valeur à garder. Les sources, médias, notes, liens de famille des deux fiches sont tous gardés. ¦ Για κάθε γραμμή, διάλεξε την τιμή που θα κρατήσεις. Οι πηγές, τα πολυμέσα, οι σημειώσεις και οι οικογενειακοί δεσμοί και των δύο καρτελών κρατιούνται όλα. ¦ За всеки ред избери стойността, която да остане. Източниците, медиите, бележките и семейните връзки на двата картона се запазват.
+Fiche gardée : ¦ Καρτέλα που κρατιέται: ¦ Запазен картон:
+Rien à choisir : les deux fiches ne se contredisent pas. ¦ Τίποτα για επιλογή: οι δύο καρτέλες δεν αντιφάσκουν. ¦ Няма какво да избираш: двата картона не си противоречат.
+{n} événement(s) présent(s) sur une seule fiche : gardé(s) tel(s) quel(s). ¦ {n} γεγονότα μόνο σε μία καρτέλα: κρατήθηκαν όπως είναι. ¦ {n} събития само в един картон: запазени както са.
+Fusionner les deux fiches ? ¦ Συγχώνευση των δύο καρτελών; ¦ Да се обединят ли двата картона?
+« {b} » sera fusionnée dans « {a} » : tout ce qui la concerne passe sur « {a} », puis elle disparaît. Une fusion ne peut pas être annulée. ¦ Η « {b} » θα συγχωνευθεί στην « {a} »: ό,τι την αφορά περνά στην « {a} », μετά εξαφανίζεται. Η συγχώνευση δεν αναιρείται. ¦ « {b} » ще бъде обединен в « {a} »: всичко, което го засяга, минава към « {a} », после той изчезва. Обединяването не може да се отмени.
+🔀 Fusionner ¦ 🔀 Συγχώνευση ¦ 🔀 Обедини
+Fusion faite, mais une valeur n’a pas pu être reprise : {err} ¦ Η συγχώνευση έγινε, αλλά μια τιμή δεν μπόρεσε να μεταφερθεί: {err} ¦ Обединяването е направено, но една стойност не можа да се пренесе: {err}
+Fiches fusionnées : {n} événement(s) en double retiré(s) ¦ Οι καρτέλες συγχωνεύθηκαν: αφαιρέθηκαν {n} διπλά γεγονότα ¦ Картоните са обединени: премахнати {n} повтарящи се събития
+événements en double remis ¦ τα διπλά γεγονότα επανήλθαν ¦ повтарящите се събития са върнати
+Fiches fusionnées. ¦ Οι καρτέλες συγχωνεύθηκαν. ¦ Картоните са обединени.
+Comparer avec un acte ¦ Σύγκριση με πράξη ¦ Сравни с акт
+Cet acte parle-t-il de cette personne ? Les noms, années et lieux de la fiche sont cherchés dans le texte. ¦ Μιλά αυτή η πράξη για αυτό το άτομο; Τα ονόματα, τα έτη και οι τόποι της καρτέλας αναζητούνται στο κείμενο. ¦ Говори ли този акт за този човек? Имената, годините и местата от картона се търсят в текста.
+Concordance {n} % ¦ Αντιστοιχία {n} % ¦ Съвпадение {n} %
+Cet acte parle sans doute de cette personne ¦ Αυτή η πράξη μάλλον μιλά για αυτό το άτομο ¦ Този акт вероятно говори за този човек
+Cet acte parle peut-être de cette personne ¦ Αυτή η πράξη ίσως μιλά για αυτό το άτομο ¦ Този акт може би говори за този човек
+Peu d’indices dans cet acte ¦ Λίγα στοιχεία σε αυτή την πράξη ¦ Малко улики в този акт
+Texte vide. ¦ Κενό κείμενο. ¦ Празен текст.
+Choisis un acte transcrit dans la colonne de gauche. ¦ Διάλεξε μια μεταγραμμένη πράξη στην αριστερή στήλη. ¦ Избери преписан акт в лявата колона.
+Année de l’acte dans sa vie ¦ Το έτος της πράξης στη ζωή του/της ¦ Годината на акта в живота му
+acte de {y}, fiche {a}–{b} ¦ πράξη του {y}, καρτέλα {a}–{b} ¦ акт от {y}, картон {a}–{b}
+acte sans année ¦ πράξη χωρίς έτος ¦ акт без година
+Même année qu’un événement ¦ Ίδιο έτος με ένα γεγονός ¦ Същата година като събитие
+Choisis un média à gauche pour {x}. ¦ Διάλεξε ένα πολυμέσο αριστερά για το {x}. ¦ Избери медия вляво за {x}.
+Place du rideau ¦ Θέση της κουρτίνας ¦ Позиция на завесата
+Image retirée de la comparaison ¦ Η εικόνα αφαιρέθηκε από τη σύγκριση ¦ Изображението е махнато от сравнението
+Image A ¦ Εικόνα A ¦ Изображение A
+Image B ¦ Εικόνα B ¦ Изображение B
+{a} et un acte ¦ {a} και μια πράξη ¦ {a} и акт
+Comparaison de deux images ¦ Σύγκριση δύο εικόνων ¦ Сравнение на две изображения
+Comparaison avec un acte ¦ Σύγκριση με πράξη ¦ Сравнение с акт
+Comparaison : {x} ¦ Σύγκριση: {x} ¦ Сравнение: {x}
+Ressemblance A–B ¦ Ομοιότητα A–B ¦ Прилика A–B
+, une carte ¦ , μια κάρτα ¦ , картичка
+12/05/1882, vers 1880… ¦ 12/05/1882, περίπου 1880… ¦ 12/05/1882, около 1880…
+7 derniers jours ¦ Τελευταίες 7 ημέρες ¦ Последните 7 дни
+Ajoute la date de mariage de {a} et {b}. ¦ Πρόσθεσε την ημερομηνία γάμου του/της {a} και του/της {b}. ¦ Добави датата на брака на {a} и {b}.
+Ajoute la naissance de {a}. ¦ Πρόσθεσε τη γέννηση του/της {a}. ¦ Добави раждането на {a}.
+Aucun objectif pour l’instant ¦ Κανένας στόχος ακόμα ¦ Засега няма цели
+Aucun trésor ne correspond ¦ Κανένας θησαυρός δεν ταιριάζει ¦ Няма подходящо съкровище
+Bilan du {date} ¦ Απολογισμός της {date} ¦ Равносметка към {date}
+Cacher ce trésor ¦ Απόκρυψη αυτού του θησαυρού ¦ Скрий това съкровище
+Ce jour-là, le {day} ¦ Εκείνη τη μέρα, στις {day} ¦ В този ден, {day}
+Ce qui est arrivé à la famille ce jour du calendrier : naissances, mariages, décès… en une carte à partager. ¦ Τι συνέβη στην οικογένεια αυτή τη μέρα του ημερολογίου: γεννήσεις, γάμοι, θάνατοι… σε μια κάρτα για να τη μοιραστείς. ¦ Какво се е случило със семейството на този ден от календара: раждания, бракове, смърти… в една картичка за споделяне.
+Cette page montre seulement : <b>{what}</b> ¦ Αυτή η σελίδα δείχνει μόνο: <b>{what}</b> ¦ Тази страница показва само: <b>{what}</b>
+Chasse supprimée. ¦ Το κυνήγι διαγράφηκε. ¦ Ловът е изтрит.
+Chercher un trésor ¦ Αναζήτηση θησαυρού ¦ Търси съкровище
+Chercher un trésor… ¦ Αναζήτηση θησαυρού… ¦ Търси съкровище…
+Choisis au moins une question. ¦ Διάλεξε τουλάχιστον μία ερώτηση. ¦ Избери поне един въпрос.
+Choisis d’abord quoi montrer. ¦ Διάλεξε πρώτα τι θα εμφανιστεί. ¦ Първо избери какво да се покаже.
+Choisis un widget dans la colonne de gauche (+). ¦ Διάλεξε ένα widget στην αριστερή στήλη (+). ¦ Избери уиджет в лявата колона (+).
+Combien ¦ Πόσα ¦ Колко
+Copier vers… ¦ Αντιγραφή σε… ¦ Копирай в…
+Croissance ¦ Ανάπτυξη ¦ Растеж
+Croissance de la base mois par mois ¦ Ανάπτυξη της βάσης μήνα με μήνα ¦ Растеж на базата месец по месец
+Croissance indisponible. ¦ Η ανάπτυξη δεν είναι διαθέσιμη. ¦ Растежът не е наличен.
+Dans la fenêtre, « ⤓ PDF » ¦ Στο παράθυρο, « ⤓ PDF » ¦ В прозореца « ⤓ PDF »
+Date butoir ¦ Προθεσμία ¦ Краен срок
+De cujus (ses ancêtres et descendants) ¦ De cujus (οι πρόγονοι και οι απόγονοί του) ¦ De cujus (предците и потомците му)
+Des objectifs au long cours (« 8 générations complètes d’ici décembre », « 100 actes transcrits ») avec une barre de progression calculée sur la base et une date butoir. ¦ Μακροπρόθεσμοι στόχοι (« 8 πλήρεις γενιές ως τον Δεκέμβριο », « 100 μεταγραμμένες πράξεις ») με μπάρα προόδου υπολογισμένη στη βάση και προθεσμία. ¦ Дългосрочни цели (« 8 пълни поколения до декември », « 100 преписани акта ») с лента за напредък, изчислена по базата, и краен срок.
+Des questions sur un ancêtre envoyées en un fichier à un proche ; ses réponses reviennent dans les fiches. ¦ Ερωτήσεις για έναν πρόγονο σε ένα αρχείο προς έναν συγγενή· οι απαντήσεις του επιστρέφουν στις καρτέλες. ¦ Въпроси за предец, изпратени с един файл на близък; отговорите се връщат в картоните.
+Dossier (enquête) ¦ Φάκελος (έρευνα) ¦ Досие (разследване)
+Démarre le chronomètre quand tu te mets à chercher : le temps passé est rangé par jour et par sujet. ¦ Ξεκίνα το χρονόμετρο όταν αρχίζεις να ψάχνεις: ο χρόνος καταγράφεται ανά ημέρα και ανά θέμα. ¦ Пусни хронометъра, когато започнеш да търсиш: времето се подрежда по дни и по теми.
+En plein écran : le portrait, chaque étape avec sa date et son lieu, les photos, la carte. Espace = pause, flèches = avant / après, Échap = fin. ¦ Σε πλήρη οθόνη: το πορτρέτο, κάθε στάδιο με την ημερομηνία και τον τόπο του, οι φωτογραφίες, ο χάρτης. Διάστημα = παύση, βέλη = πίσω / μπροστά, Esc = τέλος. ¦ На цял екран: портретът, всеки етап с датата и мястото си, снимките, картата. Интервал = пауза, стрелки = назад / напред, Esc = край.
+Entretien supprimé (le son reste dans les médias). ¦ Η συνέντευξη διαγράφηκε (ο ήχος μένει στα πολυμέσα). ¦ Интервюто е изтрито (звукът остава в медиите).
+Essaie le lendemain, ou complète les dates exactes des actes. ¦ Δοκίμασε την επόμενη μέρα ή συμπλήρωσε τις ακριβείς ημερομηνίες των πράξεων. ¦ Опитай следващия ден или допълни точните дати на актовете.
+Essaie un autre mot : « lettre », « carte », « jeu »… ¦ Δοκίμασε άλλη λέξη: « γράμμα », « κάρτα », « παιχνίδι »… ¦ Опитай друга дума: « писмо », « картичка », « игра »…
+Et toi, que sais-tu encore de {name} ? ¦ Κι εσύ, τι άλλο ξέρεις για {name}; ¦ А ти какво още знаеш за {name}?
+Ex. : 8 générations complètes d’ici décembre, 100 actes transcrits. ¦ Π.χ.: 8 πλήρεις γενιές ως τον Δεκέμβριο, 100 μεταγραμμένες πράξεις. ¦ Напр.: 8 пълни поколения до декември, 100 преписани акта.
+Exporter ce widget (PDF) ¦ Εξαγωγή αυτού του widget (PDF) ¦ Експортирай този уиджет (PDF)
+Favori ¦ Αγαπημένο ¦ Любимо
+Filtre retiré : toute la base. ¦ Το φίλτρο αφαιρέθηκε: όλη η βάση. ¦ Филтърът е махнат: цялата база.
+Général ¦ Γενικά ¦ Общи
+Ils ont {n}, mais pas encore de mariage noté. ¦ Έχουν {n}, αλλά δεν έχει καταγραφεί ακόμα γάμος. ¦ Имат {n}, но още няма записан брак.
+Image de la carte (PNG) ¦ Εικόνα του χάρτη (PNG) ¦ Изображение на картата (PNG)
+La courbe mois par mois des fiches, événements, sources et médias ajoutés, d’après le journal des modifications. ¦ Η καμπύλη μήνα με μήνα των καρτελών, γεγονότων, πηγών και πολυμέσων που προστέθηκαν, βάσει του ημερολογίου αλλαγών. ¦ Кривата месец по месец на добавените картони, събития, източници и медии според дневника на промените.
+La vie de ¦ Η ζωή του/της ¦ Животът на
+Le jour ¦ Η μέρα ¦ Денят
+Lendemain › ¦ Επόμενη μέρα › ¦ Следващ ден ›
+Les questionnaires n’ont pas pu être lus. ¦ Τα ερωτηματολόγια δεν μπόρεσαν να διαβαστούν. ¦ Въпросниците не можаха да се прочетат.
+Lettre supprimée. ¦ Το γράμμα διαγράφηκε. ¦ Писмото е изтрито.
+L’import des réponses n’est pas encore prêt. ¦ Η εισαγωγή απαντήσεων δεν είναι ακόμα έτοιμη. ¦ Вносът на отговорите още не е готов.
+L’impression n’est pas encore prête : réessaie dans un instant. ¦ Η εκτύπωση δεν είναι ακόμα έτοιμη: ξαναδοκίμασε σε λίγο. ¦ Печатът още не е готов: опитай пак след малко.
+Mes questionnaires ¦ Τα ερωτηματολόγιά μου ¦ Моите въпросници
+Mettre dans une autre page du tableau de bord… ¦ Μεταφορά σε άλλη σελίδα του πίνακα ελέγχου… ¦ Премести на друга страница на таблото…
+Mettre en favori ¦ Προσθήκη στα αγαπημένα ¦ Добави в любими
+Ni naissance ni baptême sur sa fiche. ¦ Ούτε γέννηση ούτε βάπτιση στην καρτέλα του/της. ¦ Няма нито раждане, нито кръщене в картона.
+Objectif ¦ Στόχος ¦ Цел
+Objectif ajouté. ¦ Ο στόχος προστέθηκε. ¦ Целта е добавена.
+Objectif en pause. ¦ Ο στόχος σε παύση. ¦ Целта е на пауза.
+Objectif repris. ¦ Ο στόχος συνεχίζεται. ¦ Целта е подновена.
+Objectif supprimé. ¦ Ο στόχος διαγράφηκε. ¦ Целта е изтрита.
+PDF (bilan imprimable) ¦ PDF (απολογισμός για εκτύπωση) ¦ PDF (равносметка за печат)
+Page enregistrée. ¦ Η σελίδα αποθηκεύτηκε. ¦ Страницата е запазена.
+Page filtrée : {what}. ¦ Φιλτραρισμένη σελίδα: {what}. ¦ Филтрирана страница: {what}.
+Page web (.html) ¦ Ιστοσελίδα (.html) ¦ Уеб страница (.html)
+Page « {name} » supprimée, avec {widgets}. ¦ Η σελίδα « {name} » διαγράφηκε, μαζί με {widgets}. ¦ Страницата « {name} » е изтрита заедно с {widgets}.
+Page « {name} » supprimée. ¦ Η σελίδα « {name} » διαγράφηκε. ¦ Страницата « {name} » е изтрита.
+Pas assez d’éléments pour un diaporama. ¦ Δεν υπάρχουν αρκετά στοιχεία για προβολή διαφανειών. ¦ Няма достатъчно елементи за слайдшоу.
+Pas encore de mariage noté pour ce couple. ¦ Δεν έχει καταγραφεί ακόμα γάμος για αυτό το ζευγάρι. ¦ За тази двойка още няма записан брак.
+Passeport supprimé. ¦ Το διαβατήριο διαγράφηκε. ¦ Паспортът е изтрит.
+Passer › ¦ Παράλειψη › ¦ Пропусни ›
+Pour qui (le proche qui répond) ¦ Για ποιον (ο συγγενής που απαντά) ¦ За кого (близкият, който отговаря)
+Prépare-en un ci-dessus : il part en un seul fichier, les réponses reviennent dans les fiches. ¦ Ετοίμασε ένα παραπάνω: φεύγει σε ένα μόνο αρχείο, οι απαντήσεις επιστρέφουν στις καρτέλες. ¦ Подготви един по-горе: тръгва като един файл, отговорите се връщат в картоните.
+Quelle page ? ¦ Ποια σελίδα; ¦ Коя страница?
+Questionnaire aux anciens ¦ Ερωτηματολόγιο για τους μεγαλύτερους ¦ Въпросник за възрастните
+Questionnaire noté comme envoyé. ¦ Το ερωτηματολόγιο σημειώθηκε ως σταλμένο. ¦ Въпросникът е отбелязан като изпратен.
+Retirer des favoris ¦ Αφαίρεση από τα αγαπημένα ¦ Махни от любими
+Rien de noté ce jour-là dans la famille ¦ Τίποτα καταγεγραμμένο εκείνη τη μέρα στην οικογένεια ¦ Нищо не е записано в семейството на този ден
+Rien d’urgent : tout ce que je sais vérifier est rempli. ¦ Τίποτα επείγον: ό,τι ξέρω να ελέγξω είναι συμπληρωμένο. ¦ Нищо спешно: всичко, което мога да проверя, е попълнено.
+Secondes par image ¦ Δευτερόλεπτα ανά εικόνα ¦ Секунди на изображение
+Succession ¦ Κληρονομιά ¦ Наследство
+Sur combien de mois ? ¦ Σε πόσους μήνες; ¦ За колко месеца?
+Sur quel ancêtre ? ¦ Για ποιον πρόγονο; ¦ За кой предец?
+Sur quoi ? ¦ Για τι; ¦ За какво?
+Tableau des chiffres (.csv) ¦ Πίνακας αριθμών (.csv) ¦ Таблица с числа (.csv)
+Tableau enregistré. ¦ Ο πίνακας αποθηκεύτηκε. ¦ Таблицата е запазена.
+Tante Lucie ¦ Θεία Λουσί ¦ Леля Люси
+Te souviens-tu de sa maison ? ¦ Θυμάσαι το σπίτι του/της; ¦ Помниш ли къщата му?
+Tes souvenirs de famille ¦ Οι οικογενειακές σου αναμνήσεις ¦ Твоите семейни спомени
+Tous les widgets de la page ne montrent que les fiches choisies (les chiffres clés aussi). ¦ Όλα τα widget της σελίδας δείχνουν μόνο τις επιλεγμένες καρτέλες (και τα βασικά νούμερα). ¦ Всички уиджети на страницата показват само избраните картони (и ключовите числа).
+Tulle ¦ Tulle ¦ Тюл
+Un bilan imprimable de la page (A4, ⤓ PDF) ¦ Απολογισμός της σελίδας για εκτύπωση (A4, ⤓ PDF) ¦ Равносметка на страницата за печат (A4, ⤓ PDF)
+Un chronomètre de séance : démarre-le quand tu cherches, le temps est rangé par jour et par sujet (une branche, une enquête). Montre aussi le temps des Successions et de l’Atelier. ¦ Χρονόμετρο συνεδρίας: ξεκίνα το όταν ψάχνεις, ο χρόνος καταγράφεται ανά ημέρα και θέμα (ένας κλάδος, μια έρευνα). Δείχνει και τον χρόνο των Κληρονομιών και του Εργαστηρίου. ¦ Хронометър за сесия: пусни го, когато търсиш, времето се подрежда по дни и теми (клон, разследване). Показва и времето на Наследства и Работилница.
+Un nombre plus grand que zéro. ¦ Ένας αριθμός μεγαλύτερος από το μηδέν. ¦ Число, по-голямо от нула.
+Un seul fichier à envoyer par e-mail ; il le remplit chez lui et te renvoie ses réponses. ¦ Ένα μόνο αρχείο για αποστολή με e-mail· το συμπληρώνει στο σπίτι του και σου στέλνει πίσω τις απαντήσεις. ¦ Само един файл за изпращане по имейл; той го попълва вкъщи и ти връща отговорите си.
+Une personne, et le diaporama est prêt : son portrait, chaque étape avec sa date et son lieu, ses photos, la carte de sa vie, une musique douce. ¦ Ένα άτομο, και η προβολή είναι έτοιμη: το πορτρέτο, κάθε στάδιο με ημερομηνία και τόπο, οι φωτογραφίες, ο χάρτης της ζωής, μια απαλή μουσική. ¦ Един човек и слайдшоуто е готово: портретът, всеки етап с дата и място, снимките, картата на живота, тиха музика.
+Une seule chose concrète à faire, remplie dans le widget : la date de mariage d’un couple, la naissance d’un ancêtre… puis ✓. ¦ Ένα μόνο συγκεκριμένο πράγμα να κάνεις, συμπληρωμένο στο widget: η ημερομηνία γάμου ενός ζευγαριού, η γέννηση ενός προγόνου… μετά ✓. ¦ Едно конкретно нещо за правене, попълва се в уиджета: датата на брака на двойка, раждането на предец… после ✓.
+Une vie en diaporama ¦ Μια ζωή σε προβολή διαφανειών ¦ Един живот в слайдшоу
+Widget ¦ Widget ¦ Уиджет
+Widget copié vers « {name} ». ¦ Το widget αντιγράφηκε στο « {name} ». ¦ Уиджетът е копиран в « {name} ».
+Widget dupliqué. ¦ Το widget αντιγράφηκε. ¦ Уиджетът е дублиран.
+Widget « {name} » supprimé. ¦ Το widget « {name} » διαγράφηκε. ¦ Уиджетът « {name} » е изтрит.
+actes transcrits ¦ μεταγραμμένες πράξεις ¦ преписани акта
+ajoutés sur {n} mois ¦ προστέθηκαν σε {n} μήνες ¦ добавени за {n} месеца
+ancêtres Sosa ¦ πρόγονοι Sosa ¦ предци Соса
+ce mois-ci : +{p} fiches, +{e} événements ¦ αυτόν τον μήνα: +{p} καρτέλες, +{e} γεγονότα ¦ този месец: +{p} картона, +{e} събития
+ce qui est ajouté chaque mois ¦ ό,τι προστίθεται κάθε μήνα ¦ какво се добавя всеки месец
+date dépassée ¦ η ημερομηνία πέρασε ¦ срокът е изтекъл
+d’ici le {date} ¦ ως τις {date} ¦ до {date}
+générations complètes ¦ πλήρεις γενιές ¦ пълни поколения
+le total, mois après mois ¦ το σύνολο, μήνα με μήνα ¦ общо, месец след месец
+sources ¦ πηγές ¦ източници
+trésor ¦ θησαυρός ¦ съкровище
+{n} images : {e} étapes, {ph} photos{map}. ¦ {n} εικόνες: {e} στάδια, {ph} φωτογραφίες{map}. ¦ {n} изображения: {e} етапа, {ph} снимки{map}.
+{n} questions ¦ {n} ερωτήσεις ¦ {n} въпроса
+{n} réponses ¦ {n} απαντήσεις ¦ {n} отговора
+{t} aujourd’hui ¦ {t} σήμερα ¦ {t} днес
+{v} sur {t} {what} ¦ {v} από {t} {what} ¦ {v} от {t} {what}
+{what} : {who} ¦ {what}: {who} ¦ {what}: {who}
+{who} a été baptisé ¦ Ο/Η {who} βαπτίστηκε ¦ {who} е кръстен
+{who} a été baptisée ¦ Η {who} βαπτίστηκε ¦ {who} е кръстена
+{who} a été inhumé ¦ Ο {who} ενταφιάστηκε ¦ {who} е погребан
+{who} a été inhumée ¦ Η {who} ενταφιάστηκε ¦ {who} е погребана
+{who} est mort ¦ Ο {who} πέθανε ¦ {who} почина
+{who} est morte ¦ Η {who} πέθανε ¦ {who} почина
+{who} est né ¦ Ο {who} γεννήθηκε ¦ {who} е роден
+{who} est née ¦ Η {who} γεννήθηκε ¦ {who} е родена
+{who} se sont mariés ¦ Οι {who} παντρεύτηκαν ¦ {who} сключиха брак
+« {title} » caché (⚙️ Réglages pour le remontrer). ¦ Το « {title} » κρύφτηκε (⚙️ Ρυθμίσεις για να ξαναφανεί). ¦ « {title} » е скрит (⚙️ Настройки, за да се покаже пак).
+« {title} » retiré des favoris. ¦ Το « {title} » αφαιρέθηκε από τα αγαπημένα. ¦ « {title} » е махнат от любими.
+« {title} » supprimé. ¦ Το « {title} » διαγράφηκε. ¦ « {title} » е изтрит.
+À ouvrir ou envoyer tel quel ¦ Για άνοιγμα ή αποστολή ως έχει ¦ За отваряне или изпращане както е
+Écris la date (même approximative). ¦ Γράψε την ημερομηνία (έστω κατά προσέγγιση). ¦ Напиши датата (дори приблизителна).
+Écris le nom du proche. ¦ Γράψε το όνομα του συγγενή. ¦ Напиши името на близкия.
+à {n} ans ¦ σε ηλικία {n} ετών ¦ на {n} години
+‹ Veille ¦ ‹ Προηγούμενη μέρα ¦ ‹ Предния ден
+↕ Réordonner les widgets ¦ ↕ Αναδιάταξη των widget ¦ ↕ Пренареди уиджетите
+⏱ C’est parti : « {s} ». ¦ ⏱ Ξεκινάμε: « {s} ». ¦ ⏱ Тръгваме: « {s} ».
+⏱ Temps de recherche ¦ ⏱ Χρόνος αναζήτησης ¦ ⏱ Време за търсене
+⏱ {t} rangées dans « {s} ». ¦ ⏱ {t} καταγράφηκαν στο « {s} ». ¦ ⏱ {t} записани в « {s} ».
+▶ Démarrer ¦ ▶ Έναρξη ¦ ▶ Старт
+✉ Envoyé ¦ ✉ Στάλθηκε ¦ ✉ Изпратено
+✓ Mariage ajouté. ¦ ✓ Ο γάμος προστέθηκε. ¦ ✓ Бракът е добавен.
+✓ Naissance ajoutée. ¦ ✓ Η γέννηση προστέθηκε. ¦ ✓ Раждането е добавено.
+✕ Tout montrer ¦ ✕ Εμφάνιση όλων ¦ ✕ Покажи всичко
+⭐ Favoris ¦ ⭐ Αγαπημένα ¦ ⭐ Любими
+⭐ « {title} » dans les favoris. ¦ ⭐ Το « {title} » στα αγαπημένα. ¦ ⭐ « {title} » е в любими.
+＋ Ajouter un widget ¦ ＋ Προσθήκη widget ¦ ＋ Добави уиджет
+＋ Objectif ¦ ＋ Στόχος ¦ ＋ Цел
+🎞 Lancer le diaporama ¦ 🎞 Έναρξη προβολής διαφανειών ¦ 🎞 Пусни слайдшоуто
+🎯 Mes objectifs ¦ 🎯 Οι στόχοι μου ¦ 🎯 Моите цели
+📈 Croissance de la base ¦ 📈 Ανάπτυξη της βάσης ¦ 📈 Растеж на базата
+📌 « {block} » de {name} mis dans le tableau de bord, page « {page} ». ¦ 📌 Το « {block} » του/της {name} μπήκε στον πίνακα ελέγχου, σελίδα « {page} ». ¦ 📌 « {block} » на {name} е сложен в таблото, страница « {page} ».
+📚 Atelier ¦ 📚 Εργαστήριο ¦ 📚 Работилница
+📮 Préparer et télécharger ¦ 📮 Προετοιμασία και λήψη ¦ 📮 Подготви и изтегли
+🔎 Filtrer cette page ¦ 🔎 Φιλτράρισμα αυτής της σελίδας ¦ 🔎 Филтрирай тази страница
+🔎 Filtrer cette page… ¦ 🔎 Φιλτράρισμα αυτής της σελίδας… ¦ 🔎 Филтрирай тази страница…
+🕘 Récents ¦ 🕘 Πρόσφατα ¦ 🕘 Скорошни
+🧭 Prochaine action ¦ 🧭 Επόμενη ενέργεια ¦ 🧭 Следващо действие
+(inconnus : {list}) ¦ (άγνωστοι: {list}) ¦ (неизвестни: {list})
+AVANCEMENT ¦ ΠΡΟΟΔΟΣ ¦ НАПРЕДЪК
+Acte de naissance ou de baptême ¦ Πράξη γέννησης ή βάπτισης ¦ Акт за раждане или кръщене
+Affichage des pistes ¦ Εμφάνιση στοιχείων έρευνας ¦ Показване на следите
+Ajouter en note sur la fiche ¦ Προσθήκη ως σημείωση στην καρτέλα ¦ Добави като бележка в картона
+Années parcourues ¦ Έτη που εξετάστηκαν ¦ Прегледани години
+Années parcourues : de ¦ Έτη που εξετάστηκαν: από ¦ Прегледани години: от
+Argument de preuve ¦ Επιχείρημα απόδειξης ¦ Доказателствен аргумент
+Arrêter le chronomètre ¦ Διακοπή χρονομέτρου ¦ Спри хронометъра
+Aucun groupe. ¦ Καμία ομάδα. ¦ Няма групи.
+Aucun test. ¦ Κανένα τεστ. ¦ Няма тестове.
+Aucune piste dans cette enquête. ¦ Κανένα στοιχείο έρευνας σε αυτή την έρευνα. ¦ Няма следи в това разследване.
+Aucune piste. ¦ Κανένα στοιχείο έρευνας. ¦ Няма следи.
+Battue « {title} » supprimée ¦ Το χτένισμα « {title} » διαγράφηκε ¦ Претърсването « {title} » е изтрито
+CONCLUSION ¦ ΣΥΜΠΕΡΑΣΜΑ ¦ ЗАКЛЮЧЕНИЕ
+Ce que l’enquête a établi ¦ Τι απέδειξε η έρευνα ¦ Какво установи разследването
+Ce qui est reconstitué ¦ Τι ανασυνθέθηκε ¦ Какво е възстановено
+Chargement de la battue… ¦ Φόρτωση του χτενίσματος… ¦ Зареждане на претърсването…
+Chargement de l’enquête… ¦ Φόρτωση της έρευνας… ¦ Зареждане на разследването…
+Chargement des battues… ¦ Φόρτωση των χτενισμάτων… ¦ Зареждане на претърсванията…
+Chargement des enquêtes… ¦ Φόρτωση των ερευνών… ¦ Зареждане на разследванията…
+Chercher dans cette page… ¦ Αναζήτηση σε αυτή τη σελίδα… ¦ Търси в тази страница…
+Chercher une rubrique… ¦ Αναζήτηση ενότητας… ¦ Търси раздел…
+Choisis la personne cherchée. ¦ Διάλεξε το άτομο που αναζητείται. ¦ Избери търсения човек.
+Chronologie des pistes ¦ Χρονολόγιο των στοιχείων έρευνας ¦ Хронология на следите
+Clic sur un morceau : changer son grand-parent ou le retirer. ¦ Κλικ σε ένα κομμάτι: άλλαξε τον παππού/γιαγιά του ή αφαίρεσέ το. ¦ Щракни върху парче: смени дядото/бабата му или го махни.
+Coller des correspondances partagées ¦ Επικόλληση κοινών αντιστοιχιών ¦ Постави споделени съвпадения
+Commune de départ ¦ Κοινότητα αφετηρίας ¦ Начална община
+Communes terminées ¦ Κοινότητες που ολοκληρώθηκαν ¦ Завършени общини
+Comprendre et régler ¦ Κατανόηση και ρύθμιση ¦ Разбери и настрой
+Conclue le {d} ¦ Ολοκληρώθηκε στις {d} ¦ Приключено на {d}
+Conclure l’enquête ¦ Ολοκλήρωση της έρευνας ¦ Приключи разследването
+Conclusion : {title} ¦ Συμπέρασμα: {title} ¦ Заключение: {title}
+Conclusion ajoutée sur la fiche de {name} ¦ Το συμπέρασμα προστέθηκε στην καρτέλα του/της {name} ¦ Заключението е добавено в картона на {name}
+Conclusion enregistrée ¦ Το συμπέρασμα αποθηκεύτηκε ¦ Заключението е запазено
+Contrat de mariage chez le notaire ¦ Προγαμιαίο συμβόλαιο στον συμβολαιογράφο ¦ Брачен договор при нотариус
+Correspondance supprimée ¦ Η αντιστοιχία διαγράφηκε ¦ Съвпадението е изтрито
+Correspondance « {name} » supprimée ¦ Η αντιστοιχία « {name} » διαγράφηκε ¦ Съвпадението « {name} » е изтрито
+Correspondances ADN ¦ Αντιστοιχίες DNA ¦ ДНК съвпадения
+Correspondances introuvables. ¦ Οι αντιστοιχίες δεν βρέθηκαν. ¦ Съвпаденията не са намерени.
+Correspondances montrées ¦ Αντιστοιχίες που εμφανίζονται ¦ Показани съвпадения
+Correspondances partagées ¦ Κοινές αντιστοιχίες ¦ Общи съвпадения
+Corrigé pour l’endogamie ¦ Διορθωμένο για ενδογαμία ¦ Коригирано за ендогамия
+Couleurs de la carte ¦ Χρώματα του χάρτη ¦ Цветове на картата
+Crée un phasage, puis ajoute les frères et sœurs testés. ¦ Δημιούργησε μια φασικοποίηση, μετά πρόσθεσε τα αδέλφια που έχουν κάνει τεστ. ¦ Създай фазиране, после добави тестваните братя и сестри.
+Créer l’enquête ¦ Δημιουργία έρευνας ¦ Създай разследване
+Créée le ¦ Δημιουργήθηκε στις ¦ Създадено на
+Dans quelle unité {name} a-t-il servi, où, et que lui est-il arrivé ? ¦ Σε ποια μονάδα υπηρέτησε ο {name}, πού, και τι του συνέβη; ¦ В коя част е служил {name}, къде и какво му се е случило?
+Date de relance invalide. ¦ Μη έγκυρη ημερομηνία υπενθύμισης. ¦ Невалидна дата за напомняне.
+Depuis un modèle… ¦ Από πρότυπο… ¦ От шаблон…
+Donne au moins la cote ou le fonds parcouru. ¦ Δώσε τουλάχιστον την ταξινομική ένδειξη ή το αρχείο που εξέτασες. ¦ Дай поне сигнатурата или прегледания фонд.
+Donner à : {gp} ¦ Απόδοση σε: {gp} ¦ Дай на: {gp}
+Dossier de recherche sur ¦ Φάκελος έρευνας για ¦ Изследователско досие за
+Dossier « {name} » supprimé ¦ Ο φάκελος « {name} » διαγράφηκε ¦ Досието « {name} » е изтрито
+Dupliquer l’enquête ¦ Αντιγραφή της έρευνας ¦ Дублирай разследването
+Déjà parcouru : ¦ Ήδη εξετάστηκαν: ¦ Вече прегледано:
+D’après l’enquête « {title} ». ¦ Σύμφωνα με την έρευνα « {title} ». ¦ Според разследването « {title} ».
+ENQUÊTE ¦ ΕΡΕΥΝΑ ¦ РАЗСЛЕДВАНЕ
+En cours : a répondu ¦ Σε εξέλιξη: απάντησε ¦ В ход: отговори
+En cours : arbre échangé ¦ Σε εξέλιξη: έγινε ανταλλαγή δέντρων ¦ В ход: разменени дървета
+En cours : contacté ¦ Σε εξέλιξη: έγινε επαφή ¦ В ход: потърсен
+En pause : pas de réponse ¦ Σε παύση: καμία απάντηση ¦ На пауза: няма отговор
+Enquête dupliquée ¦ Η έρευνα αντιγράφηκε ¦ Разследването е дублирано
+Enquête supprimée ¦ Η έρευνα διαγράφηκε ¦ Разследването е изтрито
+Enquête sur {name} ¦ Έρευνα για τον/την {name} ¦ Разследване за {name}
+Enquête vide ¦ Κενή έρευνα ¦ Празно разследване
+Enquête « {title} » créée ¦ Η έρευνα « {title} » δημιουργήθηκε ¦ Разследването « {title} » е създадено
+Enquête « {title} » supprimée ¦ Η έρευνα « {title} » διαγράφηκε ¦ Разследването « {title} » е изтрито
+Enregistrer la conclusion ¦ Αποθήκευση συμπεράσματος ¦ Запази заключението
+Ex. AD de la Corrèze, registres paroissiaux de Naves ¦ Π.χ. Αρχεία του νομού Corrèze, ενοριακά μητρώα του Naves ¦ Напр. архив на департамент Корез, енорийски регистри на Нав
+Ex. Jean DURAND est le fils de Pierre DURAND et de Marie LACOMBE. ¦ Π.χ. Ο Jean DURAND είναι γιος του Pierre DURAND και της Marie LACOMBE. ¦ Напр. Жан ДЮРАН е син на Пиер ДЮРАН и Мари ЛАКОМБ.
+Exploré avec doute ¦ Εξετάστηκε με αμφιβολία ¦ Проучено със съмнение
+Exporter le rapport… ¦ Εξαγωγή αναφοράς… ¦ Експортирай доклада…
+Exporter ses segments pour DNA Painter ¦ Εξαγωγή των τμημάτων του για το DNA Painter ¦ Експортирай сегментите му за DNA Painter
+Fonds ou archives ¦ Αρχείο ή αρχειακή συλλογή ¦ Фонд или архив
+Force de l’endogamie ¦ Ένταση της ενδογαμίας ¦ Сила на ендогамията
+Frères et sœurs testés ¦ Αδέλφια που έκαναν τεστ ¦ Тествани братя и сестри
+Glisse une piste ici ¦ Σύρε ένα στοιχείο έρευνας εδώ ¦ Плъзни следа тук
+Groupe « {name} » supprimé ¦ Η ομάδα « {name} » διαγράφηκε ¦ Групата « {name} » е изтрита
+Il en faut au moins trois pour un phasage fiable. ¦ Χρειάζονται τουλάχιστον τρία για αξιόπιστη φασικοποίηση. ¦ Трябват поне трима за надеждно фазиране.
+Impasse ¦ Αδιέξοδο ¦ Задънена улица
+Imprimer le rapport ¦ Εκτύπωση αναφοράς ¦ Отпечатай доклада
+La fin doit être après le début. ¦ Το τέλος πρέπει να είναι μετά την αρχή. ¦ Краят трябва да е след началото.
+Lancer le chronomètre : le temps passé sur cette enquête ¦ Έναρξη χρονομέτρου: ο χρόνος σε αυτή την έρευνα ¦ Пусни хронометъра: времето, отделено за това разследване
+Le départ de {name} ¦ Η αναχώρηση του/της {name} ¦ Заминаването на {name}
+Le parcours militaire de {name} ¦ Η στρατιωτική πορεία του/της {name} ¦ Военният път на {name}
+Les parents de {name} ¦ Οι γονείς του/της {name} ¦ Родителите на {name}
+Lignées et origines ¦ Γενεαλογικές γραμμές και καταγωγή ¦ Родови линии и произход
+Livret militaire, lettres, photos de famille ¦ Στρατιωτικό βιβλιάριο, γράμματα, οικογενειακές φωτογραφίες ¦ Военна книжка, писма, семейни снимки
+L’enquête de ce dossier n’existe plus. ¦ Η έρευνα αυτού του φακέλου δεν υπάρχει πια. ¦ Разследването на това досие вече не съществува.
+L’enquête de cette recherche n’existe plus. ¦ Η έρευνα αυτής της αναζήτησης δεν υπάρχει πια. ¦ Разследването на това търсене вече не съществува.
+L’enquête est terminée. Mettre la conclusion sur la fiche de {name} ? ¦ Η έρευνα ολοκληρώθηκε. Να μπει το συμπέρασμα στην καρτέλα του/της {name}; ¦ Разследването приключи. Да се сложи ли заключението в картона на {name}?
+Mes données ¦ Τα δεδομένα μου ¦ Моите данни
+Mettre dans « {col} » ¦ Τοποθέτηση στο « {col} » ¦ Сложи в « {col} »
+Mettre l’enquête dans « Terminées » ¦ Τοποθέτηση της έρευνας στις « Ολοκληρωμένες » ¦ Сложи разследването в « Приключени »
+Modifier la recherche sans résultat ¦ Επεξεργασία αναζήτησης χωρίς αποτέλεσμα ¦ Промени търсенето без резултат
+Morceau attribué ¦ Το κομμάτι αποδόθηκε ¦ Парчето е присвоено
+Morceau changé ¦ Το κομμάτι άλλαξε ¦ Парчето е сменено
+Morceau retiré ¦ Το κομμάτι αφαιρέθηκε ¦ Парчето е махнато
+Média retiré de la piste ¦ Το πολυμέσο αφαιρέθηκε από το στοιχείο έρευνας ¦ Медията е махната от следата
+Média retiré de l’enquête ¦ Το πολυμέσο αφαιρέθηκε από την έρευνα ¦ Медията е махната от разследването
+Mémoire des hommes : morts pour la France, journaux des unités ¦ Mémoire des hommes: πεσόντες για τη Γαλλία, ημερολόγια μονάδων ¦ Mémoire des hommes: загинали за Франция, дневници на частите
+MémorialGenWeb : monuments aux morts ¦ MémorialGenWeb: μνημεία πεσόντων ¦ MémorialGenWeb: паметници на загиналите
+Naturalisation dans le pays d’arrivée ¦ Πολιτογράφηση στη χώρα άφιξης ¦ Натурализация в страната на пристигане
+Note ici chaque registre parcouru sans rien trouver : l’app te prévient avant de le refaire. ¦ Σημείωσε εδώ κάθε μητρώο που εξέτασες χωρίς να βρεις τίποτα: η εφαρμογή σε ειδοποιεί πριν το ξανακάνεις. ¦ Записвай тук всеки регистър, прегледан без резултат: приложението ще те предупреди, преди да го повториш.
+Nouveau phasage ¦ Νέα φασικοποίηση ¦ Ново фазиране
+Nouvelle enquête depuis un modèle ¦ Νέα έρευνα από πρότυπο ¦ Ново разследване от шаблон
+Nouvelle enquête depuis un modèle… ¦ Νέα έρευνα από πρότυπο… ¦ Ново разследване от шаблон…
+Parcouru le ¦ Εξετάστηκε στις ¦ Прегледано на
+Partagé entre frères et sœurs ¦ Κοινό μεταξύ αδελφών ¦ Общо между братя и сестри
+Partagées ¦ Κοινές ¦ Общи
+Pas de relance ¦ Χωρίς υπενθύμιση ¦ Без напомняне
+Pas encore de conclusion : quand tu as la réponse, écris-la avec l’argument qui la prouve et les sources retenues. ¦ Κανένα συμπέρασμα ακόμα: όταν έχεις την απάντηση, γράψ’ την με το επιχείρημα που την αποδεικνύει και τις πηγές που κράτησες. ¦ Още няма заключение: когато имаш отговора, напиши го с аргумента, който го доказва, и избраните източници.
+Pas encore de conclusion. ¦ Κανένα συμπέρασμα ακόμα. ¦ Още няма заключение.
+Personne cherchée ¦ Άτομο που αναζητείται ¦ Търсен човек
+Phasage ¦ Φασικοποίηση ¦ Фазиране
+Phasage introuvable. ¦ Η φασικοποίηση δεν βρέθηκε. ¦ Фазирането не е намерено.
+Phasage visuel ¦ Οπτική φασικοποίηση ¦ Визуално фазиране
+Phasage « {name} » supprimé ¦ Η φασικοποίηση « {name} » διαγράφηκε ¦ Фазирането « {name} » е изтрито
+Piste « {title} » : {col} ¦ Στοιχείο έρευνας « {title} »: {col} ¦ Следа « {title} »: {col}
+Plus de relance pour « {name} » ¦ Τέλος οι υπενθυμίσεις για « {name} » ¦ Без повече напомняния за « {name} »
+Point de recombinaison ajouté ¦ Το σημείο ανασυνδυασμού προστέθηκε ¦ Точката на рекомбинация е добавена
+Presse locale et courriers de la famille restée au pays ¦ Τοπικός τύπος και γράμματα της οικογένειας που έμεινε στον τόπο ¦ Местна преса и писма от семейството, останало в родината
+Quand et par où {name} est-il parti, et où s’est-il installé ? ¦ Πότε και από πού έφυγε ο {name}, και πού εγκαταστάθηκε; ¦ Кога и откъде е заминал {name} и къде се е установил?
+Question, chronologie des pistes, pièces, conclusion : à envoyer à un cousin ou à une association. ¦ Ερώτηση, χρονολόγιο των στοιχείων, τεκμήρια, συμπέρασμα: για αποστολή σε έναν ξάδελφο ή σε έναν σύλλογο. ¦ Въпрос, хронология на следите, документи, заключение: за изпращане на братовчед или на сдружение.
+Qui sont le père et la mère de {name} ? Où et quand se sont-ils mariés ? ¦ Ποιοι είναι ο πατέρας και η μητέρα του/της {name}; Πού και πότε παντρεύτηκαν; ¦ Кои са бащата и майката на {name}? Къде и кога са сключили брак?
+RIEN TROUVÉ ¦ ΤΙΠΟΤΑ ΔΕΝ ΒΡΕΘΗΚΕ ¦ НИЩО НЕ Е НАМЕРЕНО
+Rapport : {t} ¦ Αναφορά: {t} ¦ Доклад: {t}
+Rapport fait le {d} ¦ Αναφορά της {d} ¦ Доклад от {d}
+Recensements : le foyer et ses voisins ¦ Απογραφές: το νοικοκυριό και οι γείτονές του ¦ Преброявания: домакинството и съседите му
+Recensements du pays d’arrivée ¦ Απογραφές της χώρας άφιξης ¦ Преброявания в страната на пристигане
+Recherche commune par commune : les registres parcourus, ville par ville. ¦ Αναζήτηση κοινότητα προς κοινότητα: τα μητρώα που εξετάστηκαν, πόλη προς πόλη. ¦ Търсене община по община: прегледаните регистри, град по град.
+Recherche introuvable. ¦ Η αναζήτηση δεν βρέθηκε. ¦ Търсенето не е намерено.
+Recherche sans résultat ¦ Αναζήτηση χωρίς αποτέλεσμα ¦ Търсене без резултат
+Recherche sans résultat notée. ¦ Η αναζήτηση χωρίς αποτέλεσμα καταγράφηκε. ¦ Търсенето без резултат е записано.
+Recherche sans résultat supprimée ¦ Η αναζήτηση χωρίς αποτέλεσμα διαγράφηκε ¦ Търсенето без резултат е изтрито
+Recherches sans résultat ¦ Αναζητήσεις χωρίς αποτέλεσμα ¦ Търсения без резултат
+Registres des consulats ¦ Μητρώα προξενείων ¦ Регистри на консулствата
+Registres parcourus ¦ Μητρώα που εξετάστηκαν ¦ Прегледани регистри
+Regrouper et placer ¦ Ομαδοποίηση και τοποθέτηση ¦ Групирай и постави
+Relance de « {name} » le {d} ¦ Υπενθύμιση για « {name} » στις {d} ¦ Напомняне за « {name} » на {d}
+Relancer dans {n} jours ¦ Υπενθύμιση σε {n} ημέρες ¦ Напомни след {n} дни
+Relancer {name} (ADN) ¦ Υπενθύμιση στον/στην {name} (DNA) ¦ Напомни на {name} (ДНК)
+Remettre le temps à zéro ¦ Μηδενισμός χρόνου ¦ Нулирай времето
+Retirer ce morceau ¦ Αφαίρεση αυτού του κομματιού ¦ Махни това парче
+Retrouver un soldat ¦ Εντοπισμός ενός στρατιώτη ¦ Намери войник
+Rien de prérempli ¦ Τίποτα προσυμπληρωμένο ¦ Нищо предварително попълнено
+Rien à relancer : sur une correspondance « Contactée », « 🔔 Relancer dans 30 jours ». ¦ Τίποτα για υπενθύμιση: σε μια αντιστοιχία « Έγινε επαφή », « 🔔 Υπενθύμιση σε 30 ημέρες ». ¦ Няма какво да се напомня: при съвпадение « Потърсен » — « 🔔 Напомни след 30 дни ».
+Rubriques de l’ADN ¦ Ενότητες DNA ¦ Раздели за ДНК
+Segment supprimé ¦ Το τμήμα διαγράφηκε ¦ Сегментът е изтрит
+Sources retenues ¦ Πηγές που κρατήθηκαν ¦ Избрани източници
+Sépultures de guerre et nécropoles ¦ Πολεμικοί τάφοι και νεκροταφεία ¦ Военни гробове и некрополи
+Tables décennales autour de la naissance ¦ Δεκαετείς πίνακες γύρω από τη γέννηση ¦ Десетгодишни таблици около раждането
+Temps remis à zéro ¦ Ο χρόνος μηδενίστηκε ¦ Времето е нулирано
+Terminé : placé dans l’arbre ✓ ¦ Ολοκληρώθηκε: τοποθετήθηκε στο δέντρο ✓ ¦ Готово: поставен в дървото ✓
+Test « {name} » supprimé ¦ Το τεστ « {name} » διαγράφηκε ¦ Тестът « {name} » е изтрит
+Tests entièrement endogames ¦ Πλήρως ενδογαμικά τεστ ¦ Изцяло ендогамни тестове
+Trouver les parents de… ¦ Εύρεση των γονέων του/της… ¦ Намери родителите на…
+Un point de recombinaison à la position « De » ¦ Ένα σημείο ανασυνδυασμού στη θέση « Από » ¦ Точка на рекомбинация в позиция « От »
+Une question à résoudre : ses pistes, ses pièces, sa conclusion. ¦ Μια ερώτηση προς επίλυση: τα στοιχεία της, τα τεκμήριά της, το συμπέρασμά της. ¦ Въпрос за решаване: следите, документите, заключението му.
+Voir ses correspondances ¦ Δες τις αντιστοιχίες του ¦ Виж съвпаденията му
+années non notées ¦ έτη που δεν σημειώθηκαν ¦ незаписани години
+aussi : {list} ¦ επίσης: {list} ¦ също: {list}
+la page affichée ¦ η σελίδα που εμφανίζεται ¦ показаната страница
+ouverte le {d} ¦ άνοιξε στις {d} ¦ отворено на {d}
+paire notée ¦ καταγεγραμμένο ζεύγος ¦ записана двойка
+paires notées ¦ καταγεγραμμένα ζεύγη ¦ записани двойки
+partagé : {a}–{b} Mb, {cm} cM ¦ κοινό: {a}–{b} Mb, {cm} cM ¦ общо: {a}–{b} Mb, {cm} cM
+un fichier .html à envoyer ¦ ένα αρχείο .html για αποστολή ¦ файл .html за изпращане
+{cote} ({years}) le {d}, enquête « {title} » ¦ {cote} ({years}) στις {d}, έρευνα « {title} » ¦ {cote} ({years}) на {d}, разследване « {title} »
+{m} min ¦ {m} λεπτά ¦ {m} мин
+{n} ajoutées ¦ {n} προστέθηκαν ¦ {n} добавени
+{n} commencées ¦ {n} ξεκίνησαν ¦ {n} започнати
+{n} correspondances supprimées ¦ {n} αντιστοιχίες διαγράφηκαν ¦ {n} съвпадения са изтрити
+{n} entre {lo} et {hi} cM ; {pairs} ¦ {n} μεταξύ {lo} και {hi} cM· {pairs} ¦ {n} между {lo} и {hi} cM; {pairs}
+{n} pistes préparées ¦ {n} στοιχεία έρευνας προετοιμάστηκαν ¦ {n} подготвени следи
+{n} sur {all} ¦ {n} από {all} ¦ {n} от {all}
+{n}/{all} ({pct} %) ¦ {n}/{all} ({pct} %) ¦ {n}/{all} ({pct} %)
+{n}/{all} registres parcourus ¦ {n}/{all} μητρώα εξετάστηκαν ¦ {n}/{all} прегледани регистъра
+{raw} cM comptés comme {cm} cM ¦ {raw} cM μετρήθηκαν ως {cm} cM ¦ {raw} cM се броят като {cm} cM
+« Enregistrer en PDF » dans la fenêtre d’impression ¦ « Αποθήκευση ως PDF » στο παράθυρο εκτύπωσης ¦ « Запази като PDF » в прозореца за печат
+« Trouver les parents de… », « Retrouver un soldat », « Émigré » : questions et pistes préparées ¦ « Εύρεση των γονέων του/της… », « Εντοπισμός ενός στρατιώτη », « Μετανάστης »: έτοιμες ερωτήσεις και στοιχεία έρευνας ¦ « Намери родителите на… », « Намери войник », « Емигрант »: подготвени въпроси и следи
+« {a} » et « {b} » ne se correspondent plus ¦ Οι « {a} » και « {b} » δεν αντιστοιχούν πια ¦ « {a} » и « {b} » вече не съвпадат
+« {a} » et « {b} » se correspondent ¦ Οι « {a} » και « {b} » αντιστοιχούν ¦ « {a} » и « {b} » съвпадат
+« {name} » a répondu ¦ Ο/Η « {name} » απάντησε ¦ « {name} » отговори
+À explorer → En cours → Explorée → Impasse : glisse les pistes d’une colonne à l’autre ¦ Προς εξέταση → Σε εξέλιξη → Εξετάστηκε → Αδιέξοδο: σύρε τα στοιχεία από στήλη σε στήλη ¦ За проучване → В ход → Проучена → Задънена улица: плъзгай следите от колона в колона
+À faire : contacter ¦ Προς ενέργεια: επαφή ¦ За правене: свържи се
+Écris la conclusion. ¦ Γράψε το συμπέρασμα. ¦ Напиши заключението.
+Émigré : retrouver le départ et l’arrivée ¦ Μετανάστης: εντοπισμός αναχώρησης και άφιξης ¦ Емигрант: намери заминаването и пристигането
+État de la commune ¦ Κατάσταση της κοινότητας ¦ Състояние на общината
+Événement retiré de la piste ¦ Το γεγονός αφαιρέθηκε από το στοιχείο έρευνας ¦ Събитието е махнато от следата
+à relancer depuis le {d} ¦ για υπενθύμιση από τις {d} ¦ за напомняне от {d}
+⏱ Chronomètre lancé. ¦ ⏱ Το χρονόμετρο ξεκίνησε. ¦ ⏱ Хронометърът е пуснат.
+⏱ Temps gardé : {t}. ¦ ⏱ Ο χρόνος κρατήθηκε: {t}. ¦ ⏱ Времето е запазено: {t}.
+✂ Point de recombinaison ¦ ✂ Σημείο ανασυνδυασμού ¦ ✂ Точка на рекомбинация
+✅ Conclue ¦ ✅ Ολοκληρώθηκε ¦ ✅ Приключено
+✅ Conclure l’enquête ¦ ✅ Ολοκλήρωση της έρευνας ¦ ✅ Приключи разследването
+✎ Modifier la conclusion ¦ ✎ Επεξεργασία συμπεράσματος ¦ ✎ Промени заключението
+✓ A répondu ¦ ✓ Απάντησε ¦ ✓ Отговори
+⤒ Coller une liste ¦ ⤒ Επικόλληση λίστας ¦ ⤒ Постави списък
+＋ Attribuer ¦ ＋ Απόδοση ¦ ＋ Присвои
+＋ Frère ou sœur ¦ ＋ Αδελφός ή αδελφή ¦ ＋ Брат или сестра
+＋ Nouveau phasage ¦ ＋ Νέα φασικοποίηση ¦ ＋ Ново фазиране
+＋ Recherche sans résultat ¦ ＋ Αναζήτηση χωρίς αποτέλεσμα ¦ ＋ Търсене без резултат
+🌐 Page web ¦ 🌐 Ιστοσελίδα ¦ 🌐 Уеб страница
+💾 Fichier ¦ 💾 Αρχείο ¦ 💾 Файл
+📈 Branche endogame (cM × {f}) ¦ 📈 Ενδογαμικός κλάδος (cM × {f}) ¦ 📈 Ендогамен клон (cM × {f})
+📈 Branche endogame : {raw} cM comptés comme {cm} cM. ¦ 📈 Ενδογαμικός κλάδος: {raw} cM μετρήθηκαν ως {cm} cM. ¦ 📈 Ендогамен клон: {raw} cM се броят като {cm} cM.
+📈 Endogamie ¦ 📈 Ενδογαμία ¦ 📈 Ендогамия
+📊 Tableur ¦ 📊 Υπολογιστικό φύλλο ¦ 📊 Електронна таблица
+🔔 Relancer le ¦ 🔔 Υπενθύμιση στις ¦ 🔔 Напомни на
+🔔 « Relancer dans… » propose ¦ 🔔 Το « Υπενθύμιση σε… » προτείνει ¦ 🔔 « Напомни след… » предлага
+🔔 À relancer ¦ 🔔 Για υπενθύμιση ¦ 🔔 За напомняне
+🗂 Ranger en groupes… ¦ 🗂 Τακτοποίηση σε ομάδες… ¦ 🗂 Подреди в групи…
+🗑 Supprimer ce phasage ¦ 🗑 Διαγραφή αυτής της φασικοποίησης ¦ 🗑 Изтрий това фазиране
+(pourquoi c’est sûr : les sources qui s’accordent, les contradictions levées) ¦ (γιατί είναι σίγουρο: οι πηγές που συμφωνούν, οι αντιφάσεις που λύθηκαν) ¦ (защо е сигурно: съгласуващите се източници, премахнатите противоречия)
+A répondu (plus de relance) ¦ Απάντησε (τέλος οι υπενθυμίσεις) ¦ Отговори (без повече напомняния)
+Acte de décès (âge, parents, témoins) ¦ Πράξη θανάτου (ηλικία, γονείς, μάρτυρες) ¦ Акт за смърт (възраст, родители, свидетели)
+Acte de mariage (il nomme les parents) ¦ Πράξη γάμου (αναφέρει τους γονείς) ¦ Акт за брак (посочва родителите)
+Aucune correspondance dans cette fourchette : importe tes correspondances (👥 Correspondances). ¦ Καμία αντιστοιχία σε αυτό το εύρος: εισήγαγε τις αντιστοιχίες σου (👥 Αντιστοιχίες). ¦ Няма съвпадения в този диапазон: внеси съвпаденията си (👥 Съвпадения).
+Avec trois frères et sœurs testés (ou plus) : attribue chaque morceau de chromosome à l’un des quatre grands-parents, chromosome par chromosome. Les comparaisons entre frères et sœurs (segments partagés) aident à placer les points de recombinaison. ¦ Με τρία αδέλφια που έκαναν τεστ (ή περισσότερα): απόδωσε κάθε κομμάτι χρωμοσώματος σε έναν από τους τέσσερις παππούδες και γιαγιάδες, χρωμόσωμα προς χρωμόσωμα. Οι συγκρίσεις μεταξύ αδελφών (κοινά τμήματα) βοηθούν να τοποθετηθούν τα σημεία ανασυνδυασμού. ¦ С трима тествани братя и сестри (или повече): присвои всяко парче хромозома на един от четиримата баби и дядовци, хромозома по хромозома. Сравненията между братя и сестри (общи сегменти) помагат да се поставят точките на рекомбинация.
+Branches endogames (groupes) ¦ Ενδογαμικοί κλάδοι (ομάδες) ¦ Ендогамни клонове (групи)
+CSV (Excel, Numbers, LibreOffice) ¦ CSV (Excel, Numbers, LibreOffice) ¦ CSV (Excel, Numbers, LibreOffice)
+Chercher une battue… (nom, commune, cible) ¦ Αναζήτηση χτενίσματος… (όνομα, κοινότητα, στόχος) ¦ Търси претърсване… (име, община, цел)
+Chercher une enquête… (personne, acte, lieu) ¦ Αναζήτηση έρευνας… (άτομο, πράξη, τόπος) ¦ Търси разследване… (човек, акт, място)
+Dans une branche endogame (village fermé, île, communauté), on partage plus d’ADN qu’attendu : les cM de ces correspondances sont corrigés avant d’estimer la relation. ¦ Σε έναν ενδογαμικό κλάδο (κλειστό χωριό, νησί, κοινότητα), μοιράζεται κανείς περισσότερο DNA από το αναμενόμενο: τα cM αυτών των αντιστοιχιών διορθώνονται πριν εκτιμηθεί η συγγένεια. ¦ В ендогамен клон (затворено село, остров, общност) се споделя повече ДНК от очакваното: cM на тези съвпадения се коригират, преди да се оцени родството.
+Donne la position (De). ¦ Δώσε τη θέση (Από). ¦ Дай позицията (От).
+Ex. 3 E 145/2 ¦ Π.χ. 3 E 145/2 ¦ Напр. 3 E 145/2
+Exporter (CSV) ¦ Εξαγωγή (CSV) ¦ Експорт (CSV)
+Exporter les annotations (CSV) ¦ Εξαγωγή σχολίων (CSV) ¦ Експортирай бележките (CSV)
+Fiche matricule (registres matricules des archives départementales) ¦ Μητρώο στρατολογίας (μητρώα των αρχείων του νομού) ¦ Матрикулен лист (матрикулни регистри в архивите на департаментите)
+Forte (île, communauté très fermée) ¦ Ισχυρή (νησί, πολύ κλειστή κοινότητα) ¦ Силна (остров, много затворена общност)
+Journal des marches et opérations (JMO) de son régiment ¦ Ημερολόγιο πορειών και επιχειρήσεων (JMO) του συντάγματός του ¦ Дневник на походите и операциите (JMO) на полка му
+Listes de passagers (port de départ, port d’arrivée) ¦ Κατάλογοι επιβατών (λιμάνι αναχώρησης, λιμάνι άφιξης) ¦ Списъци на пътници (пристанище на заминаване, пристанище на пристигане)
+Légère (quelques mariages entre cousins) ¦ Ελαφριά (μερικοί γάμοι μεταξύ ξαδέλφων) ¦ Слаба (няколко брака между братовчеди)
+Moyenne (village ou vallée assez fermés) ¦ Μέτρια (αρκετά κλειστό χωριό ή κοιλάδα) ¦ Средна (доста затворено село или долина)
+Nom du phasage (ex. « Fratrie DURAND ») ¦ Όνομα φασικοποίησης (π.χ. « Αδέλφια DURAND ») ¦ Име на фазирането (напр. « Братя и сестри ДЮРАН »)
+Passeports et registres de départ (archives départementales, série M) ¦ Διαβατήρια και μητρώα αναχωρήσεων (αρχεία του νομού, σειρά M) ¦ Паспорти и регистри за заминаване (архиви на департаментите, серия M)
+Phasage visuel (frères et sœurs) ¦ Οπτική φασικοποίηση (αδέλφια) ¦ Визуално фазиране (братя и сестри)
+Reconstitué (tous) ¦ Ανασυντέθηκαν (όλα) ¦ Възстановени (всички)
+cM corrigés (endogamie) ¦ Διορθωμένα cM (ενδογαμία) ¦ Коригирани cM (ендогамия)
+la page affichée (« Enregistrer en PDF ») ¦ η σελίδα που εμφανίζεται (« Αποθήκευση ως PDF ») ¦ показаната страница (« Запази като PDF »)
+pat. ¦ πατρ. ¦ бащ.
+mat. ¦ μητρ. ¦ майч.
+à (Mb) ¦ έως (Mb) ¦ до (Mb)
+jours ¦ ημέρες ¦ дни
+Toutes les battues ¦ Όλα τα χτενίσματα ¦ Всички претърсвания
+prioritaire ¦ προτεραιότητα ¦ приоритетно
+Code ¦ Κωδικός ¦ Код
+Fiche de {name} ¦ Καρτέλα του/της {name} ¦ Картон на {name}
+tout l’ADN (JSON) ¦ όλο το DNA (JSON) ¦ цялата ДНК (JSON)
+Aucune paire « Nom A ; Nom B ». ¦ Κανένα ζεύγος « Όνομα A ; Όνομα B ». ¦ Няма двойка « Име A ; Име B ».
+Une paire par ligne : « Nom A ; Nom B » (ou une tabulation, une virgule). Les noms tels que sur le site du test. ¦ Ένα ζεύγος ανά γραμμή: « Όνομα A ; Όνομα B » (ή ένα tab, ένα κόμμα). Τα ονόματα όπως στον ιστότοπο του τεστ. ¦ По една двойка на ред: « Име A ; Име B » (или табулация, запетая). Имената както на сайта на теста.
+Qui correspond avec qui : la base des regroupements (Leeds, grappes). Une case pleine, A et B se correspondent. Clique une case pour l’ajouter ou la retirer ; ou colle la liste « en commun » donnée par la société. ¦ Ποιος αντιστοιχεί με ποιον: η βάση των ομαδοποιήσεων (Leeds, συστάδες). Γεμάτο κουτί σημαίνει ότι A και B αντιστοιχούν. Κάνε κλικ σε ένα κουτί για να το προσθέσεις ή να το αφαιρέσεις· ή επικόλλησε τη λίστα « κοινών » που δίνει η εταιρεία. ¦ Кой с кого съвпада: основата на групиранията (Leeds, клъстери). Пълно поле означава, че A и B съвпадат. Щракни поле, за да го добавиш или махнеш; или постави списъка « общи » от компанията.
+rubriques ¦ ενότητες ¦ раздели
+＋ Correspondances ¦ ＋ Αντιστοιχίες ¦ ＋ Съвпадения
+ligne cochée ¦ επιλεγμένη γραμμή ¦ отметнат ред
+lignes cochées ¦ επιλεγμένες γραμμές ¦ отметнати реда
+✕ Décocher ¦ ✕ Αποεπιλογή ¦ ✕ Махни отметките
+Cocher cette ligne ¦ Επιλογή αυτής της γραμμής ¦ Отметни този ред
+Étiqueter ¦ Ετικετοποίηση ¦ Етикетирай
+Poser une étiquette sur toutes les lignes cochées ¦ Βάλε μια ετικέτα σε όλες τις επιλεγμένες γραμμές ¦ Сложи етикет на всички отметнати редове
+ÉTIQUETER ¦ ΕΤΙΚΕΤΟΠΟΙΗΣΗ ¦ ЕТИКЕТИРАЙ
+Une étiquette pour {n} ¦ Μια ετικέτα για {n} ¦ Етикет за {n}
+Étiquette existante ¦ Υπάρχουσα ετικέτα ¦ Съществуващ етикет
+— Une nouvelle — ¦ — Μια νέα — ¦ — Нов —
+Ou une nouvelle étiquette ¦ Ή μια νέα ετικέτα ¦ Или нов етикет
+ex. À vérifier aux archives ¦ π.χ. Προς έλεγχο στα αρχεία ¦ напр. За проверка в архива
+Étiquette posée sur {n} ¦ Η ετικέτα μπήκε σε {n} ¦ Етикетът е сложен на {n}
+({n} verrouillées laissées de côté) ¦ ({n} κλειδωμένες παραλείφθηκαν) ¦ ({n} заключени са пропуснати)
+Ajouter à Mes listes ¦ Προσθήκη στις Λίστες μου ¦ Добави в Моите списъци
+Ajouter les fiches cochées à une de « Mes listes » ¦ Προσθήκη των επιλεγμένων καρτελών σε μία από τις « Λίστες μου » ¦ Добави отметнатите картони в един от « Моите списъци »
+Aucune de « Mes listes » ne contient des personnes : crée-en une dans Listes → Mes listes. ¦ Καμία από τις « Λίστες μου » δεν περιέχει άτομα: φτιάξε μία στο Λίστες → Οι λίστες μου. ¦ Нито един от « Моите списъци » не съдържа хора: създай такъв в Списъци → Моите списъци.
+MES LISTES ¦ ΟΙ ΛΙΣΤΕΣ ΜΟΥ ¦ МОИТЕ СПИСЪЦИ
+Ajouter {n} à une liste ¦ Προσθήκη {n} σε λίστα ¦ Добави {n} в списък
+{n} ajoutées à « {list} » ¦ {n} προστέθηκαν στο « {list} » ¦ {n} добавени в « {list} »
+Plus rien ne pourra changer sur ces fiches tant qu’elles sont verrouillées ¦ Τίποτα δεν θα μπορεί να αλλάξει σε αυτές τις καρτέλες όσο είναι κλειδωμένες ¦ Нищо няма да може да се променя в тези картони, докато са заключени
+Ces fiches pourront de nouveau être modifiées ¦ Αυτές οι καρτέλες θα μπορούν ξανά να αλλάξουν ¦ Тези картони отново ще могат да се променят
+{n} verrouillées ¦ {n} κλειδώθηκαν ¦ {n} заключени
+{n} déverrouillées ¦ {n} ξεκλειδώθηκαν ¦ {n} отключени
+Les lignes cochées dans un fichier CSV (tableur) ¦ Οι επιλεγμένες γραμμές σε αρχείο CSV (υπολογιστικό φύλλο) ¦ Отметнатите редове във файл CSV (електронна таблица)
+{n} exportées. ¦ {n} εξήχθησαν. ¦ {n} експортирани.
+Supprime les fiches cochées ; « ↶ Annuler » les remet ¦ Διαγράφει τις επιλεγμένες καρτέλες· το « ↶ Αναίρεση » τις επαναφέρει ¦ Изтрива отметнатите картони; « ↶ Отмени » ги връща
+Supprime les lignes cochées ; « ↶ Annuler » les remet ¦ Διαγράφει τις επιλεγμένες γραμμές· το « ↶ Αναίρεση » τις επαναφέρει ¦ Изтрива отметнатите редове; « ↶ Отмени » ги връща
+{n} laissées de côté : {why} ¦ {n} παραλείφθηκαν: {why} ¦ {n} пропуснати: {why}
+{n} supprimées ¦ {n} διαγράφηκαν ¦ {n} изтрити
+{n} supprimés ¦ {n} διαγράφηκαν ¦ {n} изтрити
+Plus d’actions pour « {name} » ¦ Περισσότερες ενέργειες για « {name} » ¦ Още действия за « {name} »
+Copie impossible : choisis le texte et copie-le à la main. ¦ Αδύνατη η αντιγραφή: επίλεξε το κείμενο και αντέγραψέ το με το χέρι. ¦ Копирането е невъзможно: избери текста и го копирай ръчно.
+Toutes les sources de ta généalogie : où elles sont gardées, combien de fois elles sont citées, sur quelles fiches. Ouvre une source pour son modèle de citation, ses doublons et « Où est-elle citée ? ». ¦ Όλες οι πηγές της γενεαλογίας σου: πού φυλάσσονται, πόσες φορές αναφέρονται, σε ποιες καρτέλες. Άνοιξε μια πηγή για το πρότυπο παραπομπής της, τα διπλότυπά της και το « Πού αναφέρεται; ». ¦ Всички източници на родословието ти: къде се пазят, колко пъти са цитирани, в кои картони. Отвори източник за модела му на цитиране, дубликатите му и « Къде е цитиран? ».
+＋ Nouvelle source ¦ ＋ Νέα πηγή ¦ ＋ Нов източник
+Chercher une source… (titre, auteur, dépôt, cote) ¦ Αναζήτηση πηγής… (τίτλος, συγγραφέας, αποθετήριο, ταξινομική ένδειξη) ¦ Търси източник… (заглавие, автор, хранилище, сигнатура)
+Doublons possibles ({n}) ¦ Πιθανά διπλότυπα ({n}) ¦ Възможни дубликати ({n})
+Doublons possibles ¦ Πιθανά διπλότυπα ¦ Възможни дубликати
+Jamais citées ({n}) ¦ Δεν αναφέρθηκαν ποτέ ({n}) ¦ Никога не са цитирани ({n})
+Jamais citées ¦ Δεν αναφέρθηκαν ποτέ ¦ Никога не са цитирани
+Sans modèle de citation ¦ Χωρίς πρότυπο παραπομπής ¦ Без модел на цитиране
+Sans modèle ¦ Χωρίς πρότυπο ¦ Без модел
+Tous les dépôts ¦ Όλα τα αποθετήρια ¦ Всички хранилища
+Z → A ¦ Ω → Α ¦ Я → А
+Les moins citées ¦ Οι λιγότερο αναφερόμενες ¦ Най-малко цитирани
+{n} sur {t} ¦ {n} από {t} ¦ {n} от {t}
+Les sources s’ajoutent depuis une fiche (bloc Sources) ou ici avec « ＋ Nouvelle source ». ¦ Οι πηγές προστίθενται από μια καρτέλα (ενότητα Πηγές) ή εδώ με το « ＋ Νέα πηγή ». ¦ Източниците се добавят от картон (блок Източници) или тук с « ＋ Нов източник ».
+Aucune source ne correspond ¦ Καμία πηγή δεν ταιριάζει ¦ Няма подходящ източник
+Citations ¦ Παραπομπές ¦ Цитирания
+Même titre ou même lien qu’une autre source ¦ Ίδιος τίτλος ή ίδιος σύνδεσμος με άλλη πηγή ¦ Същото заглавие или същата връзка като друг източник
+doublon ? ¦ διπλότυπο; ¦ дубликат?
+source cochée ¦ επιλεγμένη πηγή ¦ отметнат източник
+sources cochées ¦ επιλεγμένες πηγές ¦ отметнати източника
+Garder une seule des sources cochées : les citations des autres passent dans celle-là ¦ Κράτα μόνο μία από τις επιλεγμένες πηγές: οι παραπομπές των άλλων περνούν σε αυτήν ¦ Запази само един от отметнатите източници: цитиранията на другите минават в него
+Supprime les sources cochées et leurs citations ; « ↶ Annuler » les remet ¦ Διαγράφει τις επιλεγμένες πηγές και τις παραπομπές τους· το « ↶ Αναίρεση » τις επαναφέρει ¦ Изтрива отметнатите източници и цитиранията им; « ↶ Отмени » ги връща
+FUSIONNER DES SOURCES ¦ ΣΥΓΧΩΝΕΥΣΗ ΠΗΓΩΝ ¦ ОБЕДИНИ ИЗТОЧНИЦИ
+Garder une seule source ¦ Κράτα μία μόνο πηγή ¦ Запази само един източник
+⇄ Fusionner ¦ ⇄ Συγχώνευση ¦ ⇄ Обедини
+Les citations, étiquettes, médias et notes des autres passent dans la source gardée ; ses cases vides sont complétées. « ↶ Annuler » remet tout comme avant. ¦ Οι παραπομπές, οι ετικέτες, τα πολυμέσα και οι σημειώσεις των άλλων περνούν στην πηγή που κρατήθηκε· τα κενά πεδία της συμπληρώνονται. Το « ↶ Αναίρεση » τα επαναφέρει όλα όπως πριν. ¦ Цитиранията, етикетите, медиите и бележките на другите минават в запазения източник; празните му полета се допълват. « ↶ Отмени » връща всичко както преди.
+{n} fusionnées dans une seule ¦ {n} συγχωνεύθηκαν σε μία ¦ {n} обединени в един
+Fusionner avec ses doublons ¦ Συγχώνευση με τα διπλότυπά της ¦ Обедини с дубликатите му
+{n} sources se ressemblent ¦ {n} πηγές μοιάζουν ¦ {n} източника си приличат
+Copier la citation ¦ Αντιγραφή παραπομπής ¦ Копирай цитата
+Le style classique, à la française ¦ Το κλασικό ύφος, γαλλικού τύπου ¦ Класическият стил, по френски
+Exporter (RIS, BibTeX) ¦ Εξαγωγή (RIS, BibTeX) ¦ Експорт (RIS, BibTeX)
+« ↶ Annuler » la remet ¦ Το « ↶ Αναίρεση » την επαναφέρει ¦ « ↶ Отмени » го връща
+Entrée de la liste des sources ¦ Καταχώριση στη λίστα πηγών ¦ Запис в списъка с източници
+Première note ¦ Πρώτη υποσημείωση ¦ Първа бележка
+Note suivante ¦ Επόμενη υποσημείωση ¦ Следваща бележка
+Choisis un modèle : la citation s’écrit toute seule, à la manière d’Evidence Explained. ¦ Διάλεξε ένα πρότυπο: η παραπομπή γράφεται μόνη της, με τον τρόπο του Evidence Explained. ¦ Избери модел: цитатът се пише сам, по начина на Evidence Explained.
+Toutes les sources ¦ Όλες οι πηγές ¦ Всички източници
+{c} · {p} ¦ {c} · {p} ¦ {c} · {p}
+Dépôt (service d’archives) ¦ Αποθετήριο (αρχειακή υπηρεσία) ¦ Хранилище (архивна служба)
+— Aucun — ¦ — Κανένα — ¦ — Няма —
+Dépôt écrit à la main ¦ Αποθετήριο γραμμένο με το χέρι ¦ Хранилище, въведено ръчно
+Publication ¦ Δημοσίευση ¦ Публикация
+Modèle de citation ¦ Πρότυπο παραπομπής ¦ Модел на цитиране
+— Pas de modèle — ¦ — Χωρίς πρότυπο — ¦ — Без модел —
+La citation, prête à coller ¦ Η παραπομπή, έτοιμη για επικόλληση ¦ Цитатът, готов за поставяне
+Autres styles (classique, Chicago, forum…) ¦ Άλλα ύφη (κλασικό, Chicago, φόρουμ…) ¦ Други стилове (класически, Chicago, форум…)
+Où est-elle citée ? ¦ Πού αναφέρεται; ¦ Къде е цитиран?
+Citée nulle part pour l’instant. ¦ Δεν αναφέρεται πουθενά ακόμα. ¦ Засега не е цитиран никъде.
+Médias rattachés ¦ Συνδεδεμένα πολυμέσα ¦ Прикачени медии
+Fusionner dans celle-ci ¦ Συγχώνευση σε αυτήν ¦ Обедини в този
+💍 Familles et couples ¦ 💍 Οικογένειες και ζευγάρια ¦ 💍 Семейства и двойки
+Chaque couple : le mariage (date, lieu), les enfants, une séparation, les sources. ¦ Κάθε ζευγάρι: ο γάμος (ημερομηνία, τόπος), τα παιδιά, ένας χωρισμός, οι πηγές. ¦ Всяка двойка: бракът (дата, място), децата, раздяла, източниците.
+Chercher un couple… (nom, lieu, année) ¦ Αναζήτηση ζευγαριού… (όνομα, τόπος, έτος) ¦ Търси двойка… (име, място, година)
+Sans date de mariage ¦ Χωρίς ημερομηνία γάμου ¦ Без дата на брака
+Avec des enfants ¦ Με παιδιά ¦ С деца
+Sans enfant connu ¦ Χωρίς γνωστό παιδί ¦ Без известни деца
+Séparés, divorcés ¦ Χωρισμένοι, διαζευγμένοι ¦ Разделени, разведени
+Mariage : les plus anciens ¦ Γάμος: οι παλαιότεροι ¦ Брак: най-старите
+Mariage : les plus récents ¦ Γάμος: οι πιο πρόσφατοι ¦ Брак: най-новите
+Le plus d’enfants ¦ Τα περισσότερα παιδιά ¦ Най-много деца
+Aucun couple ne correspond ¦ Κανένα ζευγάρι δεν ταιριάζει ¦ Няма подходяща двойка
+Aucun couple pour l’instant ¦ Κανένα ζευγάρι ακόμα ¦ Засега няма двойки
+Un couple se crée sur une fiche, en ajoutant un conjoint. ¦ Ένα ζευγάρι δημιουργείται σε μια καρτέλα, προσθέτοντας σύζυγο. ¦ Двойка се създава в картон, като се добави съпруг.
+Ouvrir la fiche de {name} ¦ Άνοιγμα της καρτέλας του/της {name} ¦ Отвори картона на {name}
+🔤 Noms de famille ¦ 🔤 Επώνυμα ¦ 🔤 Фамилни имена
+Chaque nom de famille : combien de personnes le portent, à quelle époque, où, ses autres orthographes. Un clic : les personnes de ce nom. ¦ Κάθε επώνυμο: πόσα άτομα το φέρουν, σε ποια εποχή, πού, οι άλλες γραφές του. Ένα κλικ: τα άτομα με αυτό το όνομα. ¦ Всяко фамилно име: колко души го носят, в коя епоха, къде, другите му изписвания. Едно щракване: хората с това име.
+Chercher un nom… (ex. Mazaud, Tulle) ¦ Αναζήτηση ονόματος… (π.χ. Mazaud, Tulle) ¦ Търси име… (напр. Mazaud, Tulle)
+Portés par au moins 2 personnes ¦ Τα φέρουν τουλάχιστον 2 άτομα ¦ Носени от поне 2 души
+Avec des variantes ¦ Με παραλλαγές ¦ С варианти
+Les plus portés ¦ Τα πιο συχνά ¦ Най-разпространени
+Aucun nom de famille pour l’instant ¦ Κανένα επώνυμο ακόμα ¦ Засега няма фамилни имена
+Porteurs ¦ Φέροντες ¦ Носители
+Variantes ¦ Παραλλαγές ¦ Варианти
+Tous les noms ¦ Όλα τα ονόματα ¦ Всички имена
+Personne ne porte ce nom ¦ Κανείς δεν φέρει αυτό το όνομα ¦ Никой не носи това име
+fiche cochée ¦ επιλεγμένη καρτέλα ¦ отметнат картон
+fiches cochées ¦ επιλεγμένες καρτέλες ¦ отметнати картона
+Toutes les notes écrites sur les fiches, les événements, les couples et les sources. La recherche lit tout le texte. ¦ Όλες οι σημειώσεις που γράφτηκαν στις καρτέλες, στα γεγονότα, στα ζευγάρια και στις πηγές. Η αναζήτηση διαβάζει όλο το κείμενο. ¦ Всички бележки, писани в картоните, събитията, двойките и източниците. Търсенето чете целия текст.
+Chercher dans les notes… (ex. moulin, Tulle, 1870) ¦ Αναζήτηση στις σημειώσεις… (π.χ. μύλος, Tulle, 1870) ¦ Търси в бележките… (напр. мелница, Tulle, 1870)
+Rattachées à ¦ Συνδεδεμένες με ¦ Свързани с
+Aucune note ne contient ces mots ¦ Καμία σημείωση δεν περιέχει αυτές τις λέξεις ¦ Никоя бележка не съдържа тези думи
+Essaie un autre mot, ou une partie du mot. ¦ Δοκίμασε άλλη λέξη ή ένα μέρος της λέξης. ¦ Опитай друга дума или част от думата.
+Les notes s’écrivent sur les fiches, les événements et les sources. ¦ Οι σημειώσεις γράφονται στις καρτέλες, στα γεγονότα και στις πηγές. ¦ Бележките се пишат в картоните, събитията и източниците.
+Voir plus ¦ Δες περισσότερα ¦ Виж още
+note cochée ¦ επιλεγμένη σημείωση ¦ отметната бележка
+notes cochées ¦ επιλεγμένες σημειώσεις ¦ отметнати бележки
+notes ¦ σημειώσεις ¦ бележки
+« ↶ Annuler » les remet ¦ Το « ↶ Αναίρεση » τις επαναφέρει ¦ « ↶ Отмени » ги връща
+NOTE ¦ ΣΗΜΕΙΩΣΗ ¦ БЕЛЕЖКА
+SOURCES ¦ ΠΗΓΕΣ ¦ ИЗТОЧНИЦИ
+Nouvelle source ¦ Νέα πηγή ¦ Нов източник
+ex. État civil de Tulle, naissances 1823 ¦ π.χ. Ληξιαρχείο του Tulle, γεννήσεις 1823 ¦ напр. Гражданско състояние на Тюл, раждания 1823
+ex. Archives de la Corrèze ¦ π.χ. Αρχεία της Corrèze ¦ напр. Архив на Корез
+Source ajoutée ¦ Η πηγή προστέθηκε ¦ Източникът е добавен
+Enregistrer ces filtres sous un nom, ou rappeler des filtres enregistrés ¦ Αποθήκευση αυτών των φίλτρων με ένα όνομα ή ανάκληση αποθηκευμένων φίλτρων ¦ Запази тези филтри под име или извикай запазени филтри
+{n} filtre(s) ¦ {n} φίλτρα ¦ {n} филтъра
+La recherche, les filtres et le tri de maintenant, sous un nom ¦ Η τρέχουσα αναζήτηση, τα φίλτρα και η ταξινόμηση, με ένα όνομα ¦ Текущото търсене, филтрите и подреждането под едно име
+Choisis d’abord une recherche ou un filtre ¦ Διάλεξε πρώτα μια αναζήτηση ή ένα φίλτρο ¦ Първо избери търсене или филтър
+Un nom pour retrouver cette liste filtrée d’un clic. ¦ Ένα όνομα για να βρίσκεις αυτή τη φιλτραρισμένη λίστα με ένα κλικ. ¦ Име, за да намираш този филтриран списък с едно щракване.
+ex. Les Mazaud nés à Tulle ¦ π.χ. Οι Mazaud που γεννήθηκαν στο Tulle ¦ напр. Мазо, родени в Тюл
+Filtres gardés sous « {name} ». ¦ Τα φίλτρα κρατήθηκαν ως « {name} ». ¦ Филтрите са запазени като « {name} ».
+Oublier « {name} » ¦ Διαγραφή του « {name} » ¦ Забрави « {name} »
+Filtres « {name} » oubliés ¦ Τα φίλτρα « {name} » διαγράφηκαν ¦ Филтрите « {name} » са забравени
+Filtres enregistrés ¦ Αποθηκευμένα φίλτρα ¦ Запазени филтри
+événement coché ¦ επιλεγμένο γεγονός ¦ отметнато събитие
+événements cochés ¦ επιλεγμένα γεγονότα ¦ отметнати събития
+Double-clic pour corriger ¦ Διπλό κλικ για διόρθωση ¦ Двойно щракване за поправка
+Corriger la date ¦ Διόρθωση ημερομηνίας ¦ Поправи датата
+Ou double-clic sur la case ¦ Ή διπλό κλικ στο κελί ¦ Или двойно щракване върху клетката
+Nouvelle valeur ¦ Νέα τιμή ¦ Нова стойност
+Corrigé : « {v} » ¦ Διορθώθηκε: « {v} » ¦ Поправено: « {v} »
+✓ Terminée le {date} ¦ ✓ Ολοκληρώθηκε στις {date} ¦ ✓ Завършено на {date}
+À faire (date passée) ¦ Προς ενέργεια (η ημερομηνία πέρασε) ¦ За правене (срокът е изтекъл)
+À faire ({n}) ¦ Προς ενέργεια ({n}) ¦ За правене ({n})
+✓ Terminées ({n}) ¦ ✓ Ολοκληρωμένες ({n}) ¦ ✓ Завършени ({n})
+✓ Terminées ¦ ✓ Ολοκληρωμένες ¦ ✓ Завършени
+Date passée, pas faites ({n}) ¦ Η ημερομηνία πέρασε, δεν έγιναν ({n}) ¦ Срокът е изтекъл, не са направени ({n})
+Date passée ¦ Η ημερομηνία πέρασε ¦ Срокът е изтекъл
+Cote retirée de la visite. ¦ Η ταξινομική ένδειξη αφαιρέθηκε από την επίσκεψη. ¦ Сигнатурата е махната от посещението.
+Donne un titre à la source. ¦ Δώσε τίτλο στην πηγή. ¦ Дай заглавие на източника.
+Adresse internet invalide (elle doit commencer par https://). ¦ Μη έγκυρη διεύθυνση internet (πρέπει να αρχίζει με https://). ¦ Невалиден интернет адрес (трябва да започва с https://).
+Source à garder introuvable. ¦ Η πηγή που θα κρατηθεί δεν βρέθηκε. ¦ Източникът за запазване не е намерен.
+Choisis au moins une autre source à fusionner. ¦ Διάλεξε τουλάχιστον μία άλλη πηγή για συγχώνευση. ¦ Избери поне още един източник за обединяване.
+Choisis une étiquette ou écris son nom. ¦ Διάλεξε μια ετικέτα ή γράψε το όνομά της. ¦ Избери етикет или напиши името му.
+Cette liste ne contient pas des personnes. ¦ Αυτή η λίστα δεν περιέχει άτομα. ¦ Този списък не съдържа хора.
+Cette case ne se modifie pas ici. ¦ Αυτό το κελί δεν αλλάζει εδώ. ¦ Тази клетка не се променя тук.
+La feuille de mission n’existe plus. ¦ Το φύλλο αποστολής δεν υπάρχει πια. ¦ Листът със задачи вече не съществува.
+Acte d’état civil ¦ Ληξιαρχική πράξη ¦ Акт за гражданско състояние
+Registre (ex. Naissances) ¦ Μητρώο (π.χ. Γεννήσεις) ¦ Регистър (напр. Раждания)
+Année(s) ¦ Έτος(-η) ¦ Година(и)
+N° de l’acte ¦ Αρ. πράξης ¦ № на акта
+Qui (personne de l’acte) ¦ Ποιος (άτομο της πράξης) ¦ Кой (човек от акта)
+Lien de la vue ¦ Σύνδεσμος της εικόνας ¦ Връзка към изображението
+Paroisse ¦ Ενορία ¦ Енория
+Registre (ex. Baptêmes, mariages, sépultures) ¦ Μητρώο (π.χ. Βαπτίσεις, γάμοι, ταφές) ¦ Регистър (напр. Кръщенета, бракове, погребения)
+Quartier, rue ¦ Συνοικία, οδός ¦ Квартал, улица
+Page ou folio ¦ Σελίδα ή φύλλο ¦ Страница или лист
+Foyer de ¦ Νοικοκυριό του/της ¦ Домакинство на
+Résidence du notaire ¦ Έδρα του συμβολαιογράφου ¦ Седалище на нотариуса
+Nature de l’acte ¦ Είδος πράξης ¦ Вид на акта
+Bureau de recrutement ¦ Γραφείο στρατολογίας ¦ Наборно бюро
+N° matricule ¦ Αρ. μητρώου ¦ Матрикулен №
+Soldat ¦ Στρατιώτης ¦ Войник
+Livre, revue ¦ Βιβλίο, περιοδικό ¦ Книга, списание
+Page(s) ¦ Σελίδα(-ες) ¦ Страница(и)
+Page internet, base en ligne ¦ Ιστοσελίδα, διαδικτυακή βάση ¦ Интернет страница, онлайн база
+Auteur ou organisme ¦ Συγγραφέας ή φορέας ¦ Автор или организация
+Titre de la page ¦ Τίτλος της σελίδας ¦ Заглавие на страницата
+Site n° {n} ¦ Τοποθεσία αρ. {n} ¦ Място № {n}
+Sans site ¦ Χωρίς τοποθεσία ¦ Без място
+revus l’année suivante ({b} sur {n}) ¦ ξαναθεάθηκαν την επόμενη χρονιά ({b} από {n}) ¦ видени отново следващата година ({b} от {n})
+Cohorte ¦ Κοόρτη ¦ Кохорта
+Site ¦ Τοποθεσία ¦ Място
+Revus l’année suivante ¦ Ξαναθεάθηκαν την επόμενη χρονιά ¦ Видени отново следващата година
+Pas encore assez d’années d’observations pour calculer les retours. ¦ Δεν υπάρχουν ακόμα αρκετά χρόνια παρατηρήσεων για τον υπολογισμό των επιστροφών. ¦ Още няма достатъчно години наблюдения за изчисляване на завръщанията.
+cohorte ¦ κοόρτη ¦ кохорта
+délai : {n} ¦ προθεσμία: {n} ¦ срок: {n}
+jamais vu ¦ δεν θεάθηκε ποτέ ¦ никога не е виждан
+Délais par espèce ¦ Προθεσμίες ανά είδος ¦ Срокове по видове
+Tous ont été revus à temps. ¦ Όλα ξαναθεάθηκαν εγκαίρως. ¦ Всички са видени отново навреме.
+🔔 Délais par espèce ¦ 🔔 Προθεσμίες ανά είδος ¦ 🔔 Срокове по видове

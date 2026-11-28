@@ -10,7 +10,8 @@ declare(strict_types=1);
  */
 
 // Propres à cet ordinateur : jamais rangés dans la base (verrou d'une sauvegarde en cours, état de navigation).
-const APP_SETTINGS_LOCAL_ONLY = ['genealogie-auto-backup-lock', 'genealogie-baissait-ui-v2', 'genealogie-last-route'];
+// genealogie-artist-keys : jetons personnels (Discogs, TMDb) de cet ordinateur, jamais dans la base (ni dans une sauvegarde).
+const APP_SETTINGS_LOCAL_ONLY = ['genealogie-auto-backup-lock', 'genealogie-baissait-ui-v2', 'genealogie-last-route', 'genealogie-artist-keys'];
 
 /** Réglages de l'interface : seulement des clés « genealogie-… », valeur texte (JSON) de 2 Mo au plus. */
 function app_setting_key_allowed(string $key): bool

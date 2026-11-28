@@ -390,7 +390,8 @@ echo 'ok';`);
                 await shot(page, 'reglages-fiches-1440');
             });
             await t('fiche animal unique : anciens liens, sections de l’animal, blocs du suivi, plus de page simple', async () => {
-                await page.evaluate(() => window.LCNDA_EXT.openPet(502));
+                // toute la fiche de l'animal d'un coup : on vérifie où chaque bloc est rangé, pas le chargement à mesure (test-fiche-lazy.js)
+                await page.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; window.LCNDA_EXT.openPet(502); });
                 await page.waitForSelector('.person-page .fsec[data-fsec="s_marks"] .sv-pet-panel .card', {timeout: 10000});
                 assert.equal(await page.evaluate(() => window.LCNDA_APP.state.currentPersonId), ids.gaston);
                 assert.equal(await page.locator('.page.h-pet').count(), 0);
@@ -565,7 +566,11 @@ echo 'ok';`);
                 await page.click('#fsec-cfg [data-fsec-opt="style"][data-v="line"]');
                 await page.waitForFunction(() => document.querySelector('[data-fsec-live] iframe.lcd-frame:not(.is-loading)')?.contentDocument?.querySelector('.fsec-wrap.is-line'));
                 const ed = '#fsec-blocks [data-fsec-editor="0"]', first = order0[0];
-                await page.focus(`${ed} [data-fsed-block="${first}"] [data-fsed-grip]`); await page.keyboard.press('Alt+ArrowDown');
+                // descendre le premier bloc sous le suivant MONTRÉ dans l'aperçu (un bloc vide pour cette fiche, ex. 🕯 veille des décès, n'y est pas)
+                const edo = () => page.evaluate(e => [...document.querySelectorAll(`${e} [data-fsed-block]`)].map(x => x.dataset.fsedBlock), ed);
+                for (let i = 0; i < 6; i++) { const o = await edo(); if (o.indexOf(first) > o.indexOf(order0[1])) break;
+                    await page.focus(`${ed} [data-fsed-block="${first}"] [data-fsed-grip]`); await page.keyboard.press('Alt+ArrowDown');
+                    await page.waitForFunction(([e, f, n]) => [...document.querySelectorAll(`${e} [data-fsed-block]`)].map(x => x.dataset.fsedBlock).indexOf(f) > n, [ed, first, o.indexOf(first)], {timeout: 5000}).catch(() => {}); }
                 await page.waitForFunction(f => { const d = document.querySelector('[data-fsec-live] iframe.lcd-frame:not(.is-loading)')?.contentDocument; const l = d ? [...d.querySelectorAll('.fsec-wrap [data-pblock]')].map(x => x.dataset.pblock) : []; return l.length && l[0] !== f; }, first);
                 await page.click(`${ed} [data-fsed-block="notes"] [data-fsed-width="6"]`);
                 await page.waitForFunction(() => document.querySelector('[data-fsec-live] iframe.lcd-frame:not(.is-loading)')?.contentDocument?.querySelector('[data-pblock="notes"].span-6'));

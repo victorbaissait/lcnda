@@ -1,0 +1,128 @@
+fr ¦ fi ¦ hu
+# 🗂 État d’un recueil (heritage-recueil-etat.js, lib/recueil_etat.php)
+{n} lignes, {r} relues ¦ {n} riviä, {r} tarkistettu ¦ {n} sor, {r} átnézve
+Photo à refaire ¦ Kuva otettava uudelleen ¦ Újra kell fotózni
+🟢 finies ou 🔵 relues ¦ 🟢 valmiit tai 🔵 tarkistetut ¦ 🟢 kész vagy 🔵 átnézett
+🟡 en cours ¦ 🟡 käynnissä ¦ 🟡 folyamatban
+⚪ pas encore transcrites ¦ ⚪ ei vielä litteroitu ¦ ⚪ még nincs átírva
+⛔ absentes ¦ ⛔ puuttuvat ¦ ⛔ hiányzó
+{a} finies, {b} relues, {c} en cours, {d} à faire, {e} absentes ¦ {a} valmista, {b} tarkistettua, {c} käynnissä, {d} tehtävää, {e} puuttuvaa ¦ {a} kész, {b} átnézett, {c} folyamatban, {d} teendő, {e} hiányzó
+Fiabilité : ¦ Luotettavuus: ¦ Megbízhatóság:
+Pas en ligne ¦ Ei verkossa ¦ Nincs online
+Blanche ¦ Tyhjä ¦ Üres
+p. {x} ¦ s. {x} ¦ {x}. o.
+Ajouter aux demandes ¦ Lisää pyyntöihin ¦ Hozzáadás a kérésekhez
+Non communicables ¦ Ei vielä julkisia ¦ Nem kutathatók
+Ouvrir la première ¦ Avaa ensimmäinen ¦ Az első megnyitása
+Relire la première ¦ Tarkista ensimmäinen ¦ Az első átnézése
+À transcrire ¦ Litteroitava ¦ Átírandó
+Commencer p. {n} ¦ Aloita s. {n} ¦ Kezdés: {n}. o.
+Rien ne reste à faire sur ce recueil. ¦ Tässä kokoelmassa ei ole enää mitään tehtävää. ¦ Ebben a gyűjteményben már nincs teendő.
+Demande ajoutée ({t}) : Recherche › Suivi des registres › Demandes. ¦ Pyyntö lisätty ({t}): Tutkimus › Indeksoitujen kirkonkirjojen seuranta › Pyynnöt. ¦ Kérés hozzáadva ({t}): Kutatás › Feldolgozott anyakönyvek nyilvántartása › Kérések.
+Après « {a} » vient « {b} » : il manque peut-être {x}. ¦ Sivun ”{a}” jälkeen tulee ”{b}”: ehkä {x} puuttuu. ¦ „{a}” után „{b}” jön: talán hiányzik {x}.
+Poser ces pages comme absentes… ¦ Lisää nämä sivut puuttuviksi… ¦ Oldalak felvétele hiányzóként…
+C’est normal ¦ Se on normaalia ¦ Ez rendben van
+« {a} » deux fois (pages {x} et {y}) : une photo en double, ou « bis » ? ¦ ”{a}” kahdesti (sivut {x} ja {y}): kaksoiskuva vai ”bis”? ¦ „{a}” kétszer (oldalak: {x} és {y}): duplikált fotó, vagy „bis”?
+Renommer en « {a} bis » ¦ Nimeä uudelleen: ”{a} bis” ¦ Átnevezés erre: „{a} bis”
+Laisser ¦ Jätä ¦ Hagyd így
+Le recueil devrait avoir {e} pages, il en a {n} ici (absentes comprises) : {x} ¦ Kokoelmassa pitäisi olla {e} sivua, tässä on {n} (puuttuvat mukaan lukien): {x} ¦ A gyűjteménynek {e} oldalból kellene állnia, itt {n} van (a hiányzókkal együtt): {x}
+il en manque {d}. ¦ {d} puuttuu. ¦ {d} hiányzik.
+{d} de trop (une photo en double ?). ¦ {d} liikaa (kaksoiskuva?). ¦ {d} túl sok (duplikált fotó?).
+Poser {n} pages absentes ¦ Lisää {n} puuttuvaa sivua ¦ {n} hiányzó oldal felvétele
+Marquer {n} pages absentes ¦ Merkitse {n} sivua puuttuviksi ¦ {n} oldal megjelölése hiányzóként
+Marquer « {p} » absente ¦ Merkitse ”{p}” puuttuvaksi ¦ „{p}” megjelölése hiányzóként
+🗂 ÉTAT DU RECUEIL ¦ 🗂 KOKOELMAN TILA ¦ 🗂 A GYŰJTEMÉNY ÁLLAPOTA
+Poser les pages ¦ Lisää sivut ¦ Oldalak felvétele
+Marquer absentes ¦ Merkitse puuttuviksi ¦ Megjelölés hiányzóként
+Pourquoi ces pages ne sont pas là ? ¦ Miksi nämä sivut eivät ole täällä? ¦ Miért nincsenek itt ezek az oldalak?
+ex. arrachées, mentionné en marge du f° 16 ¦ esim. revitty irti, mainittu f° 16:n marginaalissa ¦ pl. kitépve, a f° 16 margóján említve
+Ajouter aussi aux Lacunes d’archives (conseillé) ¦ Lisää myös Arkistojen aukkoihin (suositus) ¦ Felvétel a Levéltári hiányok közé is (ajánlott)
+Les pages ¦ Sivut ¦ Az oldalak
+Lisibilité ¦ Luettavuus ¦ Olvashatóság
+(choisi) ¦ (valittu) ¦ (kiválasztva)
+État du recueil ¦ Kokoelman tila ¦ A gyűjtemény állapota
+Numérotation pas dite ¦ Numerointia ei kerrottu ¦ Számozás nincs megadva
+{n} pages attendues ¦ {n} sivua odotettu ¦ {n} várt oldal
+Numérotation, pages attendues ¦ Numerointi, odotetut sivut ¦ Számozás, várt oldalak
+Cases ¦ Ruudut ¦ Négyzetek
+Choisir des pages ¦ Valitse sivuja ¦ Oldalak kiválasztása
+Exporter l’état (tableur) ¦ Vie tila (taulukko) ¦ Állapot exportálása (táblázat)
+Clique sur les pages (Maj + clic : de… à…) ¦ Napsauta sivuja (Vaihto + napsautus: mistä… mihin…) ¦ Kattints az oldalakra (Shift + kattintás: ettől… eddig…)
+Changer l’état… ¦ Muuta tilaa… ¦ Állapot módosítása…
+Marquer absentes… ¦ Merkitse puuttuviksi… ¦ Megjelölés hiányzóként…
+Tout choisir ¦ Valitse kaikki ¦ Összes kiválasztása
+Pas encore de page ¦ Ei vielä sivuja ¦ Még nincs oldal
+Ajoute des photos : chaque photo devient une page. ¦ Lisää kuvia: jokaisesta kuvasta tulee sivu. ¦ Adj hozzá fotókat: minden fotóból egy oldal lesz.
+Ce qui reste, dans l’ordre conseillé ¦ Mitä on jäljellä, suositellussa järjestyksessä ¦ Ami hátravan, ajánlott sorrendben
+Les demandes vont dans Recherche › Suivi des registres › Demandes, les lacunes dans les Lacunes d’archives : les listes qui existent. ¦ Pyynnöt menevät kohtaan Tutkimus › Indeksoitujen kirkonkirjojen seuranta › Pyynnöt, aukot Arkistojen aukkoihin: luetteloihin, jotka ovat jo olemassa. ¦ A kérések ide kerülnek: Kutatás › Feldolgozott anyakönyvek nyilvántartása › Kérések, a hiányok a Levéltári hiányok közé: a már meglévő listákba.
+Revenir à l’état calculé ¦ Palaa laskettuun tilaan ¦ Vissza a számított állapotra
+État du texte ¦ Tekstin tila ¦ A szöveg állapota
+Photo bonne (plus à refaire) ¦ Kuva on hyvä (ei tarvitse ottaa uudelleen) ¦ Jó fotó (nem kell újra fotózni)
+Lisibilité : {x} ¦ Luettavuus: {x} ¦ Olvashatóság: {x}
+Plus absentes ¦ Eivät enää puutu ¦ Már nem hiányoznak
+Renommée en « {a} » ¦ Nimetty uudelleen: ”{a}” ¦ Átnevezve: „{a}”
+État choisi ¦ Tila valittu ¦ Állapot kiválasztva
+Lignes relues ¦ Tarkistetut rivit ¦ Átnézett sorok
+Mots peu sûrs ¦ Epävarmat sanat ¦ Bizonytalan szavak
+Numérotation enregistrée ¦ Numerointi tallennettu ¦ Számozás mentve
+Comment ce recueil est numéroté ? ¦ Miten tämä kokoelma on numeroitu? ¦ Hogyan van számozva ez a gyűjtemény?
+Pas dit ¦ Ei kerrottu ¦ Nincs megadva
+Pages attendues (pour repérer ce qui manque) ¦ Odotetut sivut (puuttuvien löytämiseksi) ¦ Várt oldalak (hogy lásd, mi hiányzik)
+ex. 40 ¦ esim. 40 ¦ pl. 40
+dans les Lacunes d’archives ¦ Arkistojen aukoissa ¦ a Levéltári hiányok között
+Plus absente ¦ Ei enää puutu ¦ Már nem hiányzik
+Revenir à l’état calculé ({s}) ¦ Palaa laskettuun tilaan ({s}) ¦ Vissza a számított állapotra ({s})
+Calculé par l’Atelier (acte n° {n}) ¦ Työpajan laskema (merkintä nro {n}) ¦ A Műhely számította ({n}. bejegyzés)
+Calculé : texte écrit = en cours ¦ Laskettu: kirjoitettu teksti = käynnissä ¦ Számított: megírt szöveg = folyamatban
+Fiabilité de la lecture ¦ Lukemisen luotettavuus ¦ Az olvasat megbízhatósága
+rien d’écrit ¦ ei mitään kirjoitettu ¦ semmi sincs leírva
+{r} lignes relues sur {n} ¦ {r}/{n} riviä tarkistettu ¦ {r}/{n} sor átnézve
+Cette page est absente… ¦ Tämä sivu puuttuu… ¦ Ez az oldal hiányzik…
+État calculé ¦ Laskettu tila ¦ Számított állapot
+Lisibilité notée ¦ Luettavuus merkitty ¦ Olvashatóság rögzítve
+Photo bonne ¦ Kuva on hyvä ¦ Jó fotó
+Manquante ¦ Puuttuu ¦ Hiányzik
+on ne sait pas encore ¦ ei vielä tiedossa ¦ még nem tudni
+Perdue ou détruite ¦ Kadonnut tai tuhoutunut ¦ Elveszett vagy megsemmisült
+n’existe plus ¦ ei ole enää olemassa ¦ már nem létezik
+Pas encore photographiée ¦ Ei vielä kuvattu ¦ Még nincs lefotózva
+par moi ¦ minun toimestani ¦ általam
+Pas numérisée ¦ Ei digitoitu ¦ Nincs digitalizálva
+par le service d’archives ¦ arkiston toimesta ¦ a levéltár által
+Numérisée, pas en ligne ¦ Digitoitu, ei verkossa ¦ Digitalizálva, nincs online
+Non communicable ¦ Ei vielä julkinen ¦ Nem kutatható
+jusqu’à une date ¦ tiettyyn päivään asti ¦ egy bizonyos dátumig
+En restauration ¦ Konservoitavana ¦ Restaurálás alatt
+pas consultable ¦ ei käytettävissä ¦ nem tekinthető meg
+dans un autre registre, un autre fonds ¦ toisessa kirjassa, toisessa arkistossa ¦ másik anyakönyvben, másik fondban
+pas absente : vide ¦ ei puutu: tyhjä ¦ nem hiányzik: üres
+Paginé ¦ Sivunumeroitu ¦ Oldalszámozott
+p. 1, 2, 3… ¦ s. 1, 2, 3… ¦ 1, 2, 3… o.
+Folioté ¦ Lehtinumeroitu ¦ Lapszámozott
+f° 1 r°, f° 1 v°… — conseillé pour les registres anciens ¦ f° 1 r°, f° 1 v°… — suositus vanhoille kirjoille ¦ f° 1 r°, f° 1 v°… — régi anyakönyvekhez ajánlott
+Sans ordre (liasse, carton) ¦ Ei järjestystä (nippu, laatikko) ¦ Sorrend nélkül (köteg, doboz)
+des pièces, rangées par toi ¦ asiakirjoja, sinun järjestämiäsi ¦ darabok, általad rendezve
+Numérotation des archives ¦ Arkiston numerointi ¦ A levéltár számozása
+pièce 1, 2… donnée par le service ¦ asiakirja 1, 2… arkiston antama ¦ 1., 2.… darab, a levéltár adta
+Bonne ¦ Hyvä ¦ Jó
+Illisible en partie ¦ Osin lukukelvoton ¦ Részben olvashatatlan
+Illisible ¦ Lukukelvoton ¦ Olvashatatlan
+Sûre ¦ Varma ¦ Biztos
+=mot peu sûr ¦ epävarma sana|epävarmaa sanaa ¦ bizonytalan szó|bizonytalan szó
+=blanche ¦ tyhjä|tyhjää ¦ üres|üres
+=page à relire ¦ tarkistettava sivu|tarkistettavaa sivua ¦ átnézendő oldal|átnézendő oldal
+=page avec des mots peu sûrs ¦ sivu, jossa epävarmoja sanoja|sivua, joissa epävarmoja sanoja ¦ oldal bizonytalan szavakkal|oldal bizonytalan szavakkal
+=page absente posée ¦ puuttuva sivu lisätty|puuttuvaa sivua lisätty ¦ hiányzó oldal felvéve|hiányzó oldal felvéve
+=page marquée absente ¦ sivu merkitty puuttuvaksi|sivua merkitty puuttuviksi ¦ hiányzóként megjelölt oldal|hiányzóként megjelölt oldal
+=page changée ¦ muutettu sivu|muutettua sivua ¦ módosított oldal|módosított oldal
+=page choisie ¦ valittu sivu|valittua sivua ¦ kiválasztott oldal|kiválasztott oldal
+État des pages ¦ Sivujen tila ¦ Az oldalak állapota
+Une case par page, une couleur par état ¦ Yksi ruutu sivua kohden, yksi väri tilaa kohden ¦ Oldalanként egy négyzet, állapotonként egy szín
+Reste à faire ¦ Jäljellä ¦ Hátralévő teendők
+Autre demande ¦ Muu pyyntö ¦ Más kérés
+À consulter en salle ¦ Tutkittava lukusalissa ¦ Kutatóteremben megtekintendő
+À photographier / numériser ¦ Kuvattava / digitoitava ¦ Fotózandó / digitalizálandó
+pages photographiées sur les {n} attendues ¦ sivua kuvattu, odotettu {n} ¦ lefotózott oldal (várt: {n})
+pages photographiées ¦ sivua kuvattu ¦ lefotózott oldal
+pièces photographiées sur les {n} attendues ¦ asiakirjaa kuvattu, odotettu {n} ¦ lefotózott darab (várt: {n})
+pièces photographiées ¦ asiakirjaa kuvattu ¦ lefotózott darab

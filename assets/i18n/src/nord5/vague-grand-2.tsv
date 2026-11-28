@@ -1,0 +1,835 @@
+fr ¦ hr ¦ sl
+Au bout de combien de jours sans nouvelles un animal est-il « en retard » ? Rouge au double du délai. ¦ Nakon koliko dana bez vijesti životinja „kasni”? Crveno kod dvostrukog roka. ¦ Po koliko dneh brez novic žival »zamuja«? Rdeče pri dvojnem roku.
+Espèce inconnue ¦ Nepoznata vrsta ¦ Neznana vrsta
+Délais par espèce changés ¦ Rokovi po vrstama promijenjeni ¦ Roki po vrstah spremenjeni
+Animal (nom, bague…) ¦ Životinja (ime, prsten…) ¦ Žival (ime, obroček…)
+ou bague lue ¦ ili očitani prsten ¦ ali odčitan obroček
+Bague lue ¦ Očitani prsten ¦ Odčitan obroček
+nb ¦ br. ¦ št.
+Nombre vus ¦ Broj viđenih ¦ Število videnih
+Le menu de choix n’est pas encore chargé. ¦ Izbornik još nije učitan. ¦ Izbirni meni še ni naložen.
+⚡ Saisie d’une séance ¦ ⚡ Unos promatranja ¦ ⚡ Vnos opazovanja
+Tout enregistrer ¦ Spremi sve ¦ Shrani vse
+Le lieu, la date et l’observateur une seule fois ; puis une ligne par animal vu (ou par bague lue, si tu ne sais pas encore qui c’est). ¦ Mjesto, datum i promatrač samo jednom; zatim jedan redak po viđenoj životinji (ili po očitanom prstenu ako još ne znaš tko je to). ¦ Kraj, datum in opazovalec samo enkrat; nato ena vrstica za vsako videno žival (ali za odčitan obroček, če še ne veš, kdo je).
+Site de suivi ¦ Mjesto praćenja ¦ Mesto spremljanja
+Observateur ¦ Promatrač ¦ Opazovalec
+Nb ¦ Br. ¦ Št.
+Dis quand a eu lieu la séance. ¦ Reci kada je bilo promatranje. ¦ Povej, kdaj je bilo opazovanje.
+Choisis un site ou un lieu pour la séance. ¦ Odaberi mjesto praćenja ili mjesto za promatranje. ¦ Izberi mesto spremljanja ali kraj za opazovanje.
+Ajoute au moins un animal vu. ¦ Dodaj barem jednu viđenu životinju. ¦ Dodaj vsaj eno videno žival.
+Séance enregistrée : {n} ¦ Promatranje spremljeno: {n} ¦ Opazovanje shranjeno: {n}
+🖨 Fiche de terrain ¦ 🖨 Terenski obrazac ¦ 🖨 Terenski obrazec
+Aperçu et impression ¦ Pregled i ispis ¦ Predogled in tiskanje
+Les animaux attendus sur un site (ceux qu’on y a déjà vus), avec leurs bagues et marques, et des cases à cocher : pour une sortie sans ordinateur. ¦ Životinje koje se očekuju na mjestu (one već tamo viđene), s prstenovima i oznakama te kvadratićima za označavanje: za izlazak bez računala. ¦ Živali, ki jih pričakuješ na mestu (tiste, ki so jih tam že videli), z obročki in oznakami ter potrditvenimi polji: za teren brez računalnika.
+Tous les animaux suivis ¦ Sve praćene životinje ¦ Vse spremljane živali
+Tous les sites ¦ Sva mjesta ¦ Vsa mesta
+Aucun animal déjà vu sur ce site. ¦ Na ovom mjestu još nije viđena nijedna životinja. ¦ Na tem mestu še ni bila videna nobena žival.
+Fiche de terrain — {s} ¦ Terenski obrazac — {s} ¦ Terenski obrazec — {s}
+Fiche de terrain ¦ Terenski obrazac ¦ Terenski obrazec
+Date de la dernière observation ¦ Datum posljednjeg opažanja ¦ Datum zadnjega opažanja
+Une colonne pour les notes ¦ Stupac za bilješke ¦ Stolpec za opombe
+Date : ____________  Observateur : ____________________  Météo : ____________ ¦ Datum: ____________  Promatrač: ____________________  Vrijeme: ____________ ¦ Datum: ____________  Opazovalec: ____________________  Vreme: ____________
+SUCCESSIONS ¦ OSTAVINE ¦ ZAPUŠČINE
+Qui s’en charge ? ¦ Tko se time bavi? ¦ Kdo skrbi za to?
+ex. Claire LACOMBE (vide : personne) ¦ npr. Claire LACOMBE (prazno: nitko) ¦ npr. Claire LACOMBE (prazno: nihče)
+C’est moi (pour le filtre « Mes dossiers ») ¦ To sam ja (za filtar „Moji predmeti”) ¦ To sem jaz (za filter »Moje zadeve«)
+Sur cet ordinateur, « moi » = {name}. ¦ Na ovom računalu „ja” = {name}. ¦ Na tem računalniku »jaz« = {name}.
+Confié à {who} ¦ Povjereno: {who} ¦ Zaupano: {who}
+Plus personne n’en est chargé ¦ Time se više nitko ne bavi ¦ Za to ne skrbi nihče več
+Chargé du dossier : ¦ Zadužen za predmet: ¦ Zadolžen za zadevo:
+👥 Confier le dossier… ¦ 👥 Povjeri predmet… ¦ 👥 Zaupaj zadevo…
+👥 Chargé du dossier n° {n} ¦ 👥 Zadužen za predmet br. {n} ¦ 👥 Zadolžen za zadevo št. {n}
+à confier ¦ za povjeriti ¦ za zaupati
+👥 Qui s’occupe de cette échéance ? ¦ 👥 Tko se bavi ovim rokom? ¦ 👥 Kdo skrbi za ta rok?
+🛡 Conflit d’intérêts possible : {n} déjà dans un autre dossier ouvert. Vérifie avant de signer un contrat. ¦ 🛡 Mogući sukob interesa: {n} već je u drugom otvorenom predmetu. Provjeri prije potpisivanja ugovora. ¦ 🛡 Možno navzkrižje interesov: {n} je že v drugi odprti zadevi. Preveri, preden podpišeš pogodbo.
+dossier n° {n} ¦ predmet br. {n} ¦ zadeva št. {n}
+Pas d’image de cette pièce dans la base : relie l’acte scanné à l’événement, puis recommence. ¦ U bazi nema slike ovog dokumenta: poveži skenirani zapis s događajem pa pokušaj ponovno. ¦ V bazi ni slike tega dokumenta: poveži skeniran zapis z dogodkom in poskusi znova.
+La lecture automatique n’a pas marché : {err} ¦ Automatsko čitanje nije uspjelo: {err} ¦ Samodejno branje ni uspelo: {err}
+Aucun texte lu sur cette image (écriture manuscrite ? essaie l’Atelier de transcription). ¦ Na ovoj slici nije pročitan tekst (rukopis? probaj Radionicu prijepisa). ¦ Na tej sliki ni bilo prebranega besedila (rokopis? poskusi Delavnico prepisa).
+rien de trouvé ¦ ništa nije pronađeno ¦ nič ni najdeno
+PIÈCE ¦ DOKUMENT ¦ DOKUMENT
+🔎 Lecture automatique — à vérifier ¦ 🔎 Automatsko čitanje — treba provjeriti ¦ 🔎 Samodejno branje — preveri
+✍️ Noter au journal ¦ ✍️ Zabilježi u dnevnik ¦ ✍️ Zapiši v dnevnik
+Ce que la machine a cru lire sur « {t} ». Décoche ce qui est faux : rien n’est changé dans les fiches. ¦ Što je stroj mislio da čita u „{t}”. Odznači ono što je pogrešno: u zapisima se ništa ne mijenja. ¦ Kar je stroj mislil, da bere v »{t}«. Odznači, kar je napačno: v zapisih se nič ne spremeni.
+Lecture automatique de la pièce « {p} » (à vérifier) — {line} ¦ Automatsko čitanje dokumenta „{p}” (treba provjeriti) — {line} ¦ Samodejno branje dokumenta »{p}« (preveri) — {line}
+Noté au journal du dossier. ¦ Zabilježeno u dnevnik predmeta. ¦ Zapisano v dnevnik zadeve.
+Lire le texte de l’acte scanné et proposer noms, dates et lieux ¦ Pročitaj tekst skeniranog zapisa i predloži imena, datume i mjesta ¦ Preberi besedilo skeniranega zapisa in predlagaj imena, datume in kraje
+🔎 Lire la pièce ¦ 🔎 Pročitaj dokument ¦ 🔎 Preberi dokument
+demandée ¦ zatraženo ¦ zahtevano
+à obtenir ¦ treba pribaviti ¦ treba pridobiti
+Tableau généalogique de dévolution ¦ Genealoška tablica nasljeđivanja ¦ Rodoslovna tabela dedovanja
+PROJET — à vérifier et compléter par le notaire. Calcul indicatif établi d’après les fiches de la base. ¦ NACRT — javni bilježnik treba provjeriti i dopuniti. Okvirni izračun prema zapisima iz baze. ¦ OSNUTEK — notar mora preveriti in dopolniti. Okvirni izračun na podlagi zapisov iz baze.
+Pièces (renvois) ¦ Dokumenti (uputnice) ¦ Dokumenti (sklici)
+conjoint survivant ¦ nadživjeli bračni drug ¦ preživeli zakonec
+Aucun héritier calculé pour l’instant. ¦ Zasad nije izračunat nijedan nasljednik. ¦ Zaenkrat ni izračunan noben dedič.
+Les pièces ¦ Dokumenti ¦ Dokumenti
+Établi le {d}. Document de travail : il ne remplace ni l’acte de notoriété ni le certificat d’hérédité. ¦ Sastavljeno {d}. Radni dokument: ne zamjenjuje ni javnobilježnički akt o nasljednicima ni potvrdu o nasljeđivanju. ¦ Sestavljeno {d}. Delovni dokument: ne nadomešča ne notarske listine o dedičih ne potrdila o dedovanju.
+Projet de tableau de dévolution ¦ Nacrt tablice nasljeđivanja ¦ Osnutek tabele dedovanja
+🖨 Imprimer le tableau ¦ 🖨 Ispiši tablicu ¦ 🖨 Natisni tabelo
+À joindre à l’acte de notoriété : chaque héritier, son lien, sa part, et les pièces qui le prouvent (P1, P2…). ¦ Priložiti aktu o nasljednicima: svaki nasljednik, njegova veza, njegov udio i dokumenti koji to dokazuju (P1, P2…). ¦ Priložiti listini o dedičih: vsak dedič, njegova vez, njegov delež in dokumenti, ki to dokazujejo (P1, P2…).
+Tableau de dévolution — {n} ¦ Tablica nasljeđivanja — {n} ¦ Tabela dedovanja — {n}
+Tableau de dévolution ¦ Tablica nasljeđivanja ¦ Tabela dedovanja
+Tableau de dévolution {n} ¦ Tablica nasljeđivanja {n} ¦ Tabela dedovanja {n}
+12 juin 1890 ¦ 12. lipnja 1890. ¦ 12. junij 1890
+2000 et après ¦ 2000. i kasnije ¦ 2000 in pozneje
+7 mai 1925 ¦ 7. svibnja 1925. ¦ 7. maj 1925
+Aucun chemin de parenté connu avec la personne de départ. ¦ Nije poznat put srodstva s polaznom osobom. ¦ Ni znane poti sorodstva z izhodiščno osebo.
+Aucun lien de parenté connu. ¦ Nije poznata nikakva rodbinska veza. ¦ Ni znane sorodstvene vezi.
+Aucun lien de parenté trouvé avec {nm} (personne de départ). ¦ Nije pronađena rodbinska veza s osobom {nm} (polazna osoba). ¦ Ni najdene sorodstvene vezi z osebo {nm} (izhodiščna oseba).
+Aucune différence : la fiche est comme avant cette modification. ¦ Nema razlike: zapis je kao prije ove izmjene. ¦ Ni razlik: zapis je tak kot pred to spremembo.
+Aucune union enregistrée pour cette fiche. ¦ Za ovaj zapis nije upisana nijedna zajednica. ¦ Za ta zapis ni vpisane nobene zveze.
+Avant cette modification ¦ Prije ove izmjene ¦ Pred to spremembo
+Caché en mode consultation, dans les exports, les partages et le site. ¦ Skriveno u načinu pregleda, u izvozima, dijeljenjima i na stranici. ¦ Skrito v načinu ogleda, v izvozih, deljenjih in na spletnem mestu.
+Cet élément n’existe plus : utilise « Restaurer » s’il a été supprimé. ¦ Ova stavka više ne postoji: upotrijebi „Vrati” ako je izbrisana. ¦ Ta element ne obstaja več: uporabi »Obnovi«, če je bil izbrisan.
+Cette fiche a {n} {what} : garde la bonne, l’autre devient une « autre version » de ce fait. ¦ Ovaj zapis ima {n} {what}: zadrži ispravan, drugi postaje „druga verzija” te činjenice. ¦ Ta zapis ima {n} {what}: obdrži pravilnega, drugi postane »druga različica« tega dejstva.
+Chargement de la fiche familiale… ¦ Učitavanje obiteljskog zapisa… ¦ Nalaganje družinskega zapisa…
+Chargement des pesées… ¦ Učitavanje vaganja… ¦ Nalaganje tehtanj…
+Choisis « ⤓ PDF » pour enregistrer le fichier. ¦ Odaberi „⤓ PDF” za spremanje datoteke. ¦ Izberi »⤓ PDF«, da shraniš datoteko.
+Confidentialité et recherche ¦ Privatnost i istraživanje ¦ Zasebnost in raziskovanje
+Courbe de poids ¦ Krivulja težine ¦ Krivulja teže
+Créer la famille ¦ Stvori obitelj ¦ Ustvari družino
+C’est la personne de départ (de cujus). ¦ Ovo je polazna osoba (ostavitelj). ¦ To je izhodiščna oseba (zapustnik).
+C’est la personne de départ. ¦ Ovo je polazna osoba. ¦ To je izhodiščna oseba.
+Date du média moins date de naissance ¦ Datum medija minus datum rođenja ¦ Datum medija minus datum rojstva
+Dernière modification ¦ Posljednja izmjena ¦ Zadnja sprememba
+Dernières fiches créées ¦ Posljednji stvoreni zapisi ¦ Zadnji ustvarjeni zapisi
+En vie et décédés ¦ Živi i preminuli ¦ Živi in umrli
+Exporter la fiche ¦ Izvezi zapis ¦ Izvozi zapis
+Exporter la fiche (JSON) ¦ Izvezi zapis (JSON) ¦ Izvozi zapis (JSON)
+Exports rapides de cette fiche : 🖨 Imprimer ouvre l’aperçu de l’app (format, sens, PDF), avec l’ordre, la taille et la visibilité des blocs de cette fiche. Les événements 🔒 confidentiels ne sont jamais exportés. ¦ Brzi izvozi ovog zapisa: 🖨 Ispiši otvara pregled aplikacije (format, orijentacija, PDF) s redoslijedom, veličinom i vidljivošću blokova ovog zapisa. 🔒 Povjerljivi događaji nikad se ne izvoze. ¦ Hitri izvozi tega zapisa: 🖨 Natisni odpre predogled aplikacije (format, usmerjenost, PDF) z vrstnim redom, velikostjo in vidnostjo blokov tega zapisa. 🔒 Zaupni dogodki se nikoli ne izvozijo.
+FICHE FAMILIALE ¦ OBITELJSKI ZAPIS ¦ DRUŽINSKI ZAPIS
+Famille enregistrée : {n} fiche(s) créée(s). ¦ Obitelj spremljena: stvoreno zapisa: {n}. ¦ Družina shranjena: ustvarjenih zapisov: {n}.
+Famille enregistrée. ¦ Obitelj spremljena. ¦ Družina shranjena.
+Fiche en JSON ¦ Zapis u JSON-u ¦ Zapis v JSON
+Fiche familiale ¦ Obiteljski zapis ¦ Družinski zapis
+Fiche familiale de {nm} ¦ Obiteljski zapis: {nm} ¦ Družinski zapis: {nm}
+Fiche familiale… ¦ Obiteljski zapis… ¦ Družinski zapis…
+Gardé : l’autre version est notée dans « Date alternative ». ¦ Zadržano: druga verzija zabilježena je u „Alternativni datum”. ¦ Obdržano: druga različica je zapisana v »Alternativni datum«.
+Genre inconnu ¦ Nepoznat spol ¦ Neznan spol
+Hors Sosa ¦ Izvan Sose ¦ Zunaj Sose
+Imprimer la fiche ¦ Ispiši zapis ¦ Natisni zapis
+Indique au moins le père ou la mère. ¦ Upiši barem oca ili majku. ¦ Vpiši vsaj očeta ali mater.
+Inhumation ¦ Pokop ¦ Pokop
+Les deux branches ¦ Obje grane ¦ Obe veji
+Lien retiré : {nm} ¦ Veza uklonjena: {nm} ¦ Povezava odstranjena: {nm}
+Naissance (les plus anciens d’abord) ¦ Rođenje (najstariji prvo) ¦ Rojstvo (najstarejši najprej)
+Naissance (les plus récents d’abord) ¦ Rođenje (najmlađi prvo) ¦ Rojstvo (najmlajši najprej)
+Naissance inconnue ¦ Nepoznato rođenje ¦ Neznano rojstvo
+Note de recherche ¦ Istraživačka bilješka ¦ Raziskovalna opomba
+Ouvre d’abord une fiche. ¦ Najprije otvori zapis. ¦ Najprej odpri zapis.
+PDF (aperçu d’impression) ¦ PDF (pregled ispisa) ¦ PDF (predogled tiskanja)
+Pas de fiche d’animal liée. ¦ Nema povezanog zapisa životinje. ¦ Ni povezanega zapisa živali.
+Pas de mariage enregistré. ¦ Nema upisanog braka. ¦ Ni vpisane poroke.
+Pas encore de pesée : ajoute un poids dans 🩺 Santé. ¦ Još nema vaganja: dodaj težinu u 🩺 Zdravlje. ¦ Še ni tehtanj: dodaj težo v 🩺 Zdravje.
+Personnaliser l’export… ¦ Prilagodi izvoz… ¦ Prilagodi izvoz…
+Prénom NOM, ou choisis une fiche ¦ Ime PREZIME ili odaberi zapis ¦ Ime PRIIMEK ali izberi zapis
+Père, mère, mariage et enfants en une seule saisie ¦ Otac, majka, brak i djeca u jednom unosu ¦ Oče, mati, poroka in otroci v enem vnosu
+Père, mère, mariage et enfants en une seule saisie. Pour chaque nom : choisis une fiche existante, ou tape « Prénom NOM » pour en créer une. ¦ Otac, majka, brak i djeca u jednom unosu. Za svako ime: odaberi postojeći zapis ili upiši „Ime PREZIME” da stvoriš novi. ¦ Oče, mati, poroka in otroci v enem vnosu. Za vsako ime: izberi obstoječi zapis ali vpiši »Ime PRIIMEK«, da ustvariš novega.
+Recherche du chemin… ¦ Traženje puta… ¦ Iskanje poti…
+Remis : {f} ¦ Vraćeno: {f} ¦ Obnovljeno: {f}
+Rien à exporter dans cet écran. ¦ Na ovom zaslonu nema ničega za izvoz. ¦ Na tem zaslonu ni ničesar za izvoz.
+SAISIE RAPIDE ¦ BRZI UNOS ¦ HITRI VNOS
+Sans aucune source ¦ Bez ijednog izvora ¦ Brez vsakega vira
+Sans parents ¦ Bez roditelja ¦ Brez staršev
+Sans parents connus ¦ Bez poznatih roditelja ¦ Brez znanih staršev
+Sous chaque nom : son lien de parenté avec la personne de départ. ¦ Ispod svakog imena: njegova rodbinska veza s polaznom osobom. ¦ Pod vsakim imenom: sorodstvena vez z izhodiščno osebo.
+TON LIEN ¦ TVOJA VEZA ¦ TVOJA VEZ
+Tableau (CSV) ¦ Tablica (CSV) ¦ Tabela (CSV)
+Ton lien avec cette personne ¦ Tvoja veza s ovom osobom ¦ Tvoja vez s to osebo
+Ton lien avec cette personne (depuis {nm}) — clique pour voir le chemin. ¦ Tvoja veza s ovom osobom (od {nm}) — klikni da vidiš put. ¦ Tvoja vez s to osebo (od {nm}) — klikni za ogled poti.
+Tous les genres ¦ Svi spolovi ¦ Vsi spoli
+Un enfant sans nom de famille prend celui du père. ¦ Dijete bez prezimena dobiva očevo. ¦ Otrok brez priimka dobi očetovega.
+Voir la note de recherche ¦ Prikaži istraživačku bilješku ¦ Prikaži raziskovalno opombo
+conjoint de ¦ bračni drug od ¦ zakonec od
+enfant de ¦ dijete od ¦ otrok od
+ex. à vérifier : cote 3 E 125, piste : registre de la paroisse voisine ¦ npr. provjeriti: signatura 3 E 125, trag: matična knjiga susjedne župe ¦ npr. preveri: signatura 3 E 125, sled: matična knjiga sosednje župnije
+inconnu(e) ¦ nepoznat(a) ¦ neznan(a)
+par {nm} ¦ od {nm} ¦ od {nm}
+parent de ¦ roditelj od ¦ starš od
+{a}–{b} ¦ {a}–{b} ¦ {a}–{b}
+{nm} avait environ {age} ¦ {nm} imao/imala je oko {age} ¦ {nm} je imel(a) približno {age}
+{nm} avait moins d’un an ¦ {nm} imao/imala je manje od godine dana ¦ {nm} je imel(a) manj kot eno leto
+{nm} avait {age} ¦ {nm} imao/imala je {age} ¦ {nm} je imel(a) {age}
+{n} pesée(s) · dernière : {w} le {d} ¦ Vaganja: {n} · posljednje: {w} dana {d} ¦ Tehtanja: {n} · zadnje: {w} dne {d}
+{n} {what} ¦ {n} {what} ¦ {n} {what}
+{n} étape(s) depuis la personne de départ. ¦ Koraka od polazne osobe: {n}. ¦ Korakov od izhodiščne osebe: {n}.
+{s} depuis la première ¦ {s} od prvog ¦ {s} od prvega
+Événement confidentiel : caché en consultation, dans les exports, les partages et le site. ¦ Povjerljiv događaj: skriven u pregledu, izvozima, dijeljenjima i na stranici. ¦ Zaupen dogodek: skrit v ogledu, izvozih, deljenjih in na spletnem mestu.
+à {x} ¦ u {x} ¦ v {x}
+↩ Remettre ¦ ↩ Vrati ¦ ↩ Obnovi
+⇆ Comparer avec maintenant ¦ ⇆ Usporedi sa sadašnjim ¦ ⇆ Primerjaj s trenutnim
+⚡ ＋ Famille ¦ ⚡ ＋ Obitelj ¦ ⚡ ＋ Družina
+✓ Garder celle-ci ¦ ✓ Zadrži ovo ¦ ✓ Obdrži to
+✓ Remis ¦ ✓ Vraćeno ¦ ✓ Obnovljeno
+＋ Un enfant de plus ¦ ＋ Još jedno dijete ¦ ＋ Še en otrok
+👪 Fiche familiale ¦ 👪 Obiteljski zapis ¦ 👪 Družinski zapis
+📈 Animal : poids et croissance ¦ 📈 Životinja: težina i rast ¦ 📈 Žival: teža in rast
+📝 Avec une note de recherche ¦ 📝 S istraživačkom bilješkom ¦ 📝 Z raziskovalno opombo
+📝 Note de recherche (à vérifier, cote, piste) ¦ 📝 Istraživačka bilješka (provjeriti, signatura, trag) ¦ 📝 Raziskovalna opomba (preveri, signatura, sled)
+📝 Note de recherche : {x} ¦ 📝 Istraživačka bilješka: {x} ¦ 📝 Raziskovalna opomba: {x}
+🔒 confidentiel ¦ 🔒 povjerljivo ¦ 🔒 zaupno
+🔒 Événement confidentiel ¦ 🔒 Povjerljiv događaj ¦ 🔒 Zaupen dogodek
+🧭 Aucun lien connu ¦ 🧭 Nema poznate veze ¦ 🧭 Ni znane vezi
+🧭 Personne de départ ¦ 🧭 Polazna osoba ¦ 🧭 Izhodiščna oseba
+🧭 Ton lien ¦ 🧭 Tvoja veza ¦ 🧭 Tvoja vez
+🧭 Ton lien avec cette personne ¦ 🧭 Tvoja veza s ovom osobom ¦ 🧭 Tvoja vez s to osebo
+🧭 personne de départ ¦ 🧭 polazna osoba ¦ 🧭 izhodiščna oseba
+Nouveau… dans l’onglet ouvert (une personne dans Personnes) ¦ Novo… u otvorenoj kartici (osoba u Osobama) ¦ Novo… v odprtem zavihku (oseba v Osebah)
+Annuler la dernière modification d’une fiche (hors d’une case de texte, tout de suite, avec « ↷ Rétablir ») ¦ Poništi posljednju izmjenu zapisa (izvan tekstnog polja, odmah, s „↷ Ponovi”) ¦ Razveljavi zadnjo spremembo zapisa (zunaj besedilnega polja, takoj, z »↷ Uveljavi«)
+Exporter ce que montre l’onglet ouvert (⤓ Exporter) ¦ Izvezi ono što prikazuje otvorena kartica (⤓ Izvezi) ¦ Izvozi, kar kaže odprti zavihek (⤓ Izvozi)
+Chercher dans la colonne de gauche ¦ Traži u lijevom stupcu ¦ Išči v levem stolpcu
+Aucune personne ne correspond à ces filtres. ¦ Nijedna osoba ne odgovara ovim filtrima. ¦ Nobena oseba ne ustreza tem filtrom.
+Retire un filtre (Filtrer ▾) ou change le tri. ¦ Ukloni filtar (Filtriraj ▾) ili promijeni redoslijed. ¦ Odstrani filter (Filtriraj ▾) ali spremeni razvrščanje.
+Peau ¦ Koža ¦ Koža
+Origine / mention ¦ Podrijetlo / napomena ¦ Izvor / omemba
+Mention conjoint ¦ Napomena o bračnom drugu ¦ Omemba zakonca
+Mention enfants ¦ Napomena o djeci ¦ Omemba otrok
+Date alternative ¦ Alternativni datum ¦ Alternativni datum
+Lieu (n°) ¦ Mjesto (br.) ¦ Kraj (št.)
+Type (n°) ¦ Vrsta (br.) ¦ Vrsta (št.)
+Confidentiel ¦ Povjerljivo ¦ Zaupno
+A : « {a} » ({na}) · B : « {b} » ({nb}) → {n} personne(s) {op}. ¦ A: „{a}” ({na}) · B: „{b}” ({nb}) → osoba: {n} {op}. ¦ A: »{a}« ({na}) · B: »{b}« ({nb}) → oseb: {n} {op}.
+Acte à commander supprimé ¦ Zapis za naručiti izbrisan ¦ Zapis za naročilo izbrisan
+Ajouter à une liste ¦ Dodaj na popis ¦ Dodaj na seznam
+Apparence (thème, couleurs, police) ¦ Izgled (tema, boje, font) ¦ Videz (tema, barve, pisava)
+Aucune citation ne contient ce texte. ¦ Nijedan citat ne sadrži ovaj tekst. ¦ Noben citat ne vsebuje tega besedila.
+Aucune de « Mes listes » ne contient des personnes : crée-en une dans Réglages → Éditeur de listes. ¦ Nijedan od „Mojih popisa” ne sadrži osobe: stvori jedan u Postavke → Uređivač popisa. ¦ Noben od »Mojih seznamov« ne vsebuje oseb: ustvari ga v Nastavitve → Urejevalnik seznamov.
+Aucune ligne ne contient « {find} ». ¦ Nijedan redak ne sadrži „{find}”. ¦ Nobena vrstica ne vsebuje »{find}«.
+Aucune source ne contient ce texte. ¦ Nijedan izvor ne sadrži ovaj tekst. ¦ Noben vir ne vsebuje tega besedila.
+Ce qui est dans une recherche enregistrée et pas dans l’autre (ex. les Sosa nés en Corrèze sans acte de baptême) : pour trouver les trous. ¦ Ono što je u jednoj spremljenoj pretrazi, a nije u drugoj (npr. Sose rođeni u Corrèzeu bez krsnog zapisa): za pronalaženje praznina. ¦ Kar je v enem shranjenem iskanju in ne v drugem (npr. Sose, rojeni v Corrèzu brez krstnega zapisa): za iskanje vrzeli.
+Changer cette ligne ¦ Promijeni ovaj redak ¦ Spremeni to vrstico
+Chercher et remplacer : où chercher, majuscules, mot entier ¦ Traži i zamijeni: gdje tražiti, velika slova, cijela riječ ¦ Najdi in zamenjaj: kje iskati, velike črke, cela beseda
+Chercher un mot dans le titre, l’auteur et le texte des sources, et dans la page et la note de chaque citation. ¦ Traži riječ u naslovu, autoru i tekstu izvora te u stranici i bilješci svakog citata. ¦ Išči besedo v naslovu, avtorju in besedilu virov ter v strani in opombi vsakega citata.
+Choisis deux lieux différents. ¦ Odaberi dva različita mjesta. ¦ Izberi dva različna kraja.
+Choisis deux recherches enregistrées. ¦ Odaberi dvije spremljene pretrage. ¦ Izberi dve shranjeni iskanji.
+Choisis les deux lieux. ¦ Odaberi oba mjesta. ¦ Izberi oba kraja.
+Choisis ou écris une étiquette. ¦ Odaberi ili upiši oznaku. ¦ Izberi ali vpiši oznako.
+Choisis où chercher. ¦ Odaberi gdje tražiti. ¦ Izberi, kje iskati.
+Citée ¦ Citirano ¦ Citirano
+Cocher {name} ¦ Označi {name} ¦ Označi {name}
+Comparer deux recherches ¦ Usporedi dvije pretrage ¦ Primerjaj dve iskanji
+Corrige une faute partout d’un coup (« cultivatr » → « cultivateur »). Tu vois d’abord chaque ligne qui changerait ; décoche celles à garder. « ↶ Annuler » remet tout comme avant. ¦ Ispravi pogrešku svugdje odjednom („cultivatr” → „cultivateur”). Najprije vidiš svaki redak koji bi se promijenio; odznači one koje želiš zadržati. „↶ Poništi” vraća sve kako je bilo. ¦ Popravi napako povsod naenkrat (»cultivatr« → »cultivateur«). Najprej vidiš vsako vrstico, ki bi se spremenila; odznači tiste, ki jih želiš obdržati. »↶ Razveljavi« vrne vse, kot je bilo.
+Dernières recherches vidées ¦ Posljednje pretrage očišćene ¦ Zadnja iskanja izpraznjena
+Descriptions des événements ¦ Opisi događaja ¦ Opisi dogodkov
+Définition supprimée ¦ Definicija izbrisana ¦ Definicija izbrisana
+Dépouillement supprimé ¦ Indeksiranje izbrisano ¦ Popis izbrisan
+Essaie un autre lien ou moins de critères. ¦ Probaj drugu vezu ili manje kriterija. ¦ Poskusi drugo vez ali manj meril.
+Ex : Poilu, À vérifier… ¦ Npr. Poilu, Provjeriti… ¦ Npr. Poilu, Preveri…
+Ex : cultivateur (vide = effacer) ¦ Npr. cultivateur (prazno = obriši) ¦ Npr. cultivateur (prazno = izbriši)
+Ex : cultivatr ¦ Npr. cultivatr ¦ Npr. cultivatr
+Ex : registre paroissial, folio 12, Tulle… ¦ Npr. župna matica, folio 12, Tulle… ¦ Npr. župnijska matična knjiga, folij 12, Tulle…
+Extrait ¦ Izvadak ¦ Izvleček
+Fais-les dans « Recherche multicritère », puis « Enregistrer ». ¦ Napravi ih u „Pretrazi po više kriterija”, zatim „Spremi”. ¦ Naredi jih v »Iskanju po več merilih«, nato »Shrani«.
+Graphiques et tableau de bord ¦ Grafikoni i nadzorna ploča ¦ Grafikoni in nadzorna plošča
+Il faut au moins deux recherches enregistrées. ¦ Potrebne su barem dvije spremljene pretrage. ¦ Potrebni sta vsaj dve shranjeni iskanji.
+Lacune supprimée ¦ Praznina izbrisana ¦ Vrzel izbrisana
+Les recherches enregistrées ne sont pas disponibles. ¦ Spremljene pretrage nisu dostupne. ¦ Shranjena iskanja niso na voljo.
+Lien de parenté inconnu. ¦ Nepoznata rodbinska veza. ¦ Neznana sorodstvena vez.
+Ligne de transcription supprimée ¦ Redak prijepisa izbrisan ¦ Vrstica prepisa izbrisana
+Mot entier seulement ¦ Samo cijela riječ ¦ Samo cela beseda
+Neveux et nièces ¦ Nećaci i nećakinje ¦ Nečaki in nečakinje
+Nom de table invalide. ¦ Neispravan naziv tablice. ¦ Neveljavno ime tabele.
+Noms de lieux ¦ Nazivi mjesta ¦ Imena krajev
+Nouvelle étiquette… ¦ Nova oznaka… ¦ Nova oznaka…
+Nés en ou après ¦ Rođeni te godine ili poslije ¦ Rojeni tega leta ali pozneje
+Nés en ou avant ¦ Rođeni te godine ili prije ¦ Rojeni tega leta ali prej
+Oncles et tantes ¦ Ujaci, stričevi i tete ¦ Strici in tete
+Onglets ajoutés au menu ¦ Kartice dodane u izbornik ¦ Zavihki, dodani v meni
+Onglets cachés du menu ¦ Kartice skrivene iz izbornika ¦ Zavihki, skriti iz menija
+Ordre des types de recherche ¦ Redoslijed vrsta pretrage ¦ Vrstni red vrst iskanja
+Ordre du menu ¦ Redoslijed izbornika ¦ Vrstni red menija
+Ouvrir la recherche multicritère ¦ Otvori pretragu po više kriterija ¦ Odpri iskanje po več merilih
+Où chercher ¦ Gdje tražiti ¦ Kje iskati
+Personne relevée retirée ¦ Indeksirana osoba uklonjena ¦ Popisana oseba odstranjena
+Puis le lien de parenté cherché. ¦ Zatim tražena rodbinska veza. ¦ Nato iskana sorodstvena vez.
+Rangement des pages des Réglages ¦ Raspored stranica Postavki ¦ Razporeditev strani Nastavitev
+Recherche A ¦ Pretraga A ¦ Iskanje A
+Recherche B ¦ Pretraga B ¦ Iskanje B
+Recherche dans les sources… ¦ Pretraživanje izvora… ¦ Iskanje po virih…
+Recherche dans l’arbre… ¦ Pretraživanje stabla… ¦ Iskanje po drevesu…
+Recherche des lignes à changer… ¦ Traženje redaka za promjenu… ¦ Iskanje vrstic za spremembo…
+Recherche par lien de parenté ¦ Pretraga po rodbinskoj vezi ¦ Iskanje po sorodstveni vezi
+Respecter les majuscules ¦ Pazi na velika slova ¦ Upoštevaj velike črke
+Rien de coché : les actions portent sur les {t} résultats ¦ Ništa nije označeno: radnje se odnose na svih {t} rezultata ¦ Nič ni označeno: dejanja veljajo za vseh {t} rezultatov
+Règle introuvable. ¦ Pravilo nije pronađeno. ¦ Pravila ni mogoče najti.
+Règle supprimée ¦ Pravilo izbrisano ¦ Pravilo izbrisano
+Résultats de la recherche ¦ Rezultati pretrage ¦ Rezultati iskanja
+Sections ouvertes ou fermées ¦ Otvoreni ili zatvoreni odjeljci ¦ Odprti ali zaprti razdelki
+Seulement les décédés ¦ Samo preminuli ¦ Samo umrli
+Seulement les vivants ¦ Samo živi ¦ Samo živi
+Seules les {n} premières lignes sont montrées ; « Remplacer » change les lignes cochées. ¦ Prikazano je samo prvih {n} redaka; „Zamijeni” mijenja označene retke. ¦ Prikazanih je le prvih {n} vrstic; »Zamenjaj« spremeni označene vrstice.
+Sources et citations ¦ Izvori i citati ¦ Viri in citati
+Suppression impossible ici. ¦ Brisanje ovdje nije moguće. ¦ Brisanje tukaj ni mogoče.
+Tape au moins deux lettres. ¦ Upiši barem dva slova. ¦ Vpiši vsaj dve črki.
+Tape le texte à chercher. ¦ Upiši tekst za pretragu. ¦ Vpiši besedilo za iskanje.
+Texte à chercher ¦ Tekst za pretragu ¦ Besedilo za iskanje
+Texte à chercher trop long. ¦ Tekst za pretragu je predug. ¦ Besedilo za iskanje je predolgo.
+Tous les ancêtres ¦ Svi preci ¦ Vsi predniki
+Tous les descendants ¦ Svi potomci ¦ Vsi potomci
+Trouvé dans ¦ Pronađeno u ¦ Najdeno v
+Type d’événement supprimé ¦ Vrsta događaja izbrisana ¦ Vrsta dogodka izbrisana
+Types de recherche cachés ¦ Skrivene vrste pretrage ¦ Skrite vrste iskanja
+Vider la liste ¦ Isprazni popis ¦ Izprazni seznam
+Vivant(e) ¦ Živ(a) ¦ Živ(a)
+Vivants et décédés ¦ Živi i preminuli ¦ Živi in umrli
+dans A et dans B ¦ u A i u B ¦ v A in v B
+dans A mais pas dans B ¦ u A, ali ne u B ¦ v A, ne pa v B
+dans A ou dans B ¦ u A ili u B ¦ v A ali v B
+dans une seule des deux ¦ samo u jednoj od njih ¦ samo v enem od obeh
+{n} cochée(s) sur {t} ¦ Označeno: {n} od {t} ¦ Označeno: {n} od {t}
+{n} ligne(s) cochée(s) sur {t} ¦ Označeno redaka: {n} od {t} ¦ Označenih vrstic: {n} od {t}
+{rel} de {name} : {n} personne(s). ¦ {rel} od {name}: osoba: {n}. ¦ {rel} od {name}: oseb: {n}.
+« Tous les cousins germains de… », « les descendants vivants de… nés après 1900 » : choisis une personne et un lien. ¦ „Svi prvi rođaci od…”, „živi potomci od… rođeni nakon 1900.”: odaberi osobu i vezu. ¦ »Vsi prvi bratranci in sestrične od…«, »živi potomci od… rojeni po 1900«: izberi osebo in vez.
+Étiqueter {n} personne(s) ¦ Označi osobe: {n} ¦ Označi osebe: {n}
+⟳ Recharger la page ¦ ⟳ Ponovno učitaj stranicu ¦ ⟳ Znova naloži stran
+🏷 « {label} » posée sur {n} personne(s) ¦ 🏷 „{label}” dodano osobama: {n} ¦ 🏷 »{label}« dodano osebam: {n}
+🏷 Étiqueter ¦ 🏷 Označi ¦ 🏷 Označi
+📊 Comparer deux recherches ¦ 📊 Usporedi dvije pretrage ¦ 📊 Primerjaj dve iskanji
+📑 Ajouter à Mes listes ¦ 📑 Dodaj u Moje popise ¦ 📑 Dodaj v Moje sezname
+📑 {n} personne(s) ajoutée(s) à « {list} » ¦ 📑 Osobe dodane u „{list}”: {n} ¦ 📑 Osebe, dodane v »{list}«: {n}
+📚 Sources ({n}) ¦ 📚 Izvori ({n}) ¦ 📚 Viri ({n})
+🔁 Chercher et remplacer ¦ 🔁 Traži i zamijeni ¦ 🔁 Najdi in zamenjaj
+🔁 Remplacer ¦ 🔁 Zamijeni ¦ 🔁 Zamenjaj
+🔁 Remplacer ({n}) ¦ 🔁 Zamijeni ({n}) ¦ 🔁 Zamenjaj ({n})
+🔁 {n} remplacement(s) faits ¦ 🔁 Izvršeno zamjena: {n} ¦ 🔁 Izvedenih zamenjav: {n}
+🔎 Ce que j’ai changé ¦ 🔎 Što sam promijenio ¦ 🔎 Kaj sem spremenil
+🔒 {n} ligne(s) d’une fiche verrouillée : elles ne changeront pas. ¦ 🔒 Redaka iz zaključanog zapisa: {n} — neće se promijeniti. ¦ 🔒 Vrstic iz zaklenjenega zapisa: {n} — ne bodo se spremenile.
+🔖 Citations ({n}) ¦ 🔖 Citati ({n}) ¦ 🔖 Citati ({n})
+🕘 Dernières recherches ¦ 🕘 Posljednje pretrage ¦ 🕘 Zadnja iskanja
+🗄 Santé de la base ¦ 🗄 Stanje baze ¦ 🗄 Stanje baze
+🧬 Lien de parenté ¦ 🧬 Rodbinska veza ¦ 🧬 Sorodstvena vez
+🧾 Sources et citations ¦ 🧾 Izvori i citati ¦ 🧾 Viri in citati
+Lieux « {q} » ¦ Mjesta „{q}” ¦ Kraji »{q}«
+Transcriptions « {q} » ¦ Prijepisi „{q}” ¦ Prepisi »{q}«
+Export impossible : les événements confidentiels n’ont pas pu être retirés. Réessaie dans un instant. ¦ Izvoz nije moguć: povjerljivi događaji nisu mogli biti uklonjeni. Pokušaj ponovno za trenutak. ¦ Izvoz ni mogoč: zaupnih dogodkov ni bilo mogoče odstraniti. Poskusi znova čez trenutek.
+Les événements confidentiels n’ont pas pu être cachés : réessaie dans un instant. ¦ Povjerljivi događaji nisu mogli biti skriveni: pokušaj ponovno za trenutak. ¦ Zaupnih dogodkov ni bilo mogoče skriti: poskusi znova čez trenutek.
+, ni les fiches et événements confidentiels. ¦ , ni povjerljive zapise i događaje. ¦ , ne zaupnih zapisov in dogodkov.
+🔒  ¦ 🔒  ¦ 🔒 
+📤 Envoyer vers… ¦ 📤 Pošalji u… ¦ 📤 Pošlji v…
+Dans une nouvelle présentation ¦ U novu prezentaciju ¦ V novo predstavitev
+Dans un nouveau diaporama ¦ U novu dijaprojekciju ¦ V novo diaprojekcijo
+Dans un livre de la Mise en page… ¦ U knjigu iz Rasporeda… ¦ V knjigo iz Razporeditve…
+Dans un nouveau document (Traitement de texte) ¦ U novi dokument (Obrada teksta) ¦ V nov dokument (Urejanje besedil)
+Dans le Tableur ¦ U Proračunsku tablicu ¦ V Preglednico
+Sur une page de mon site… ¦ Na stranicu mog weba… ¦ Na stran mojega spletnega mesta…
+Dans la Retouche des photos ¦ U Retuširanje fotografija ¦ V Retuširanje fotografij
+Comparer avec une autre photo ¦ Usporedi s drugom fotografijom ¦ Primerjaj z drugo fotografijo
+Dans l’Atelier de transcription ¦ U Radionicu prijepisa ¦ V Delavnico prepisa
+Dans le Dessin vectoriel ¦ U Vektorsko crtanje ¦ V Vektorsko risanje
+Dans les Traitements par lot ¦ U Skupnu obradu ¦ V Paketno obdelavo
+Envoyer les images vers… ¦ Pošalji slike u… ¦ Pošlji slike v…
+Envoyer le texte vers… ¦ Pošalji tekst u… ¦ Pošlji besedilo v…
+Envoyer le tableau vers… ¦ Pošalji tablicu u… ¦ Pošlji tabelo v…
+Envoyer le son vers… ¦ Pošalji zvuk u… ¦ Pošlji zvok v…
+Envoyer la vidéo vers… ¦ Pošalji video u… ¦ Pošlji video v…
+Envoyer le dessin vers… ¦ Pošalji crtež u… ¦ Pošlji risbo v…
+Rangement du son dans les médias… ¦ Spremanje zvuka u medije… ¦ Shranjevanje zvoka med medije…
+Rangement de la vidéo dans les médias… ¦ Spremanje videa u medije… ¦ Shranjevanje videa med medije…
+Rien à envoyer. ¦ Nema ničega za slanje. ¦ Ni ničesar za pošiljanje.
+Aucun outil ne peut recevoir ça pour l’instant. ¦ Nijedan alat to zasad ne može primiti. ¦ Nobeno orodje tega zaenkrat ne more sprejeti.
+En image (montage, studio, présentation, document…) ¦ Kao slika (montaža, studio, prezentacija, dokument…) ¦ Kot slika (montaža, studio, predstavitev, dokument…)
+En dessin, net à toutes les tailles (livre, site…) ¦ Kao crtež, oštar u svim veličinama (knjiga, web…) ¦ Kot risba, ostra v vseh velikostih (knjiga, splet…)
+＋ Nouvelle crise ¦ ＋ Nova kriza ¦ ＋ Nova kriza
+Modifier cette crise ¦ Uredi ovu krizu ¦ Uredi to krizo
+Supprimer cette crise ¦ Izbriši ovu krizu ¦ Izbriši to krizo
+Nouvelle crise ¦ Nova kriza ¦ Nova kriza
+Modifier la crise ¦ Uredi krizu ¦ Uredi krizo
+ÉPIDÉMIES, GUERRES, HIVERS TERRIBLES ¦ EPIDEMIJE, RATOVI, STRAŠNE ZIME ¦ EPIDEMIJE, VOJNE, STRAŠNE ZIME
+Les grandes crises de l’histoire de France à côté des décès de ta famille : pour comprendre une vague de morts (choléra de 1832, Grand Hiver de 1709, grippe espagnole…). Ajoute les tiennes : une épidémie au village, un incendie, une inondation… ¦ Velike krize francuske povijesti uz smrti u tvojoj obitelji: da shvatiš val smrti (kolera 1832., Velika zima 1709., španjolska gripa…). Dodaj svoje: epidemiju u selu, požar, poplavu… ¦ Velike krize francoske zgodovine ob smrtih v tvoji družini: da razumeš val smrti (kolera 1832, velika zima 1709, španska gripa…). Dodaj svoje: epidemijo v vasi, požar, poplavo…
+▦ Vignettes ¦ ▦ Sličice ¦ ▦ Sličice
+🏷 Par éditeur ¦ 🏷 Po izdavaču ¦ 🏷 Po založniku
+📍 Par lieu ¦ 📍 Po mjestu ¦ 📍 Po kraju
+✉️ Écrites / vierges ¦ ✉️ Ispisane / prazne ¦ ✉️ Popisane / prazne
+Survole pour voir le verso ¦ Prijeđi mišem da vidiš poleđinu ¦ Premakni miško nad sliko za ogled hrbtne strani
+Aucune fiche de carte postale pour l’instant ¦ Još nema zapisa razglednica ¦ Še ni zapisov razglednic
+Listes → 🏞 Cartes postales : donne à chaque carte son éditeur, son numéro, son lieu, son recto et son verso. ¦ Popisi → 🏞 Razglednice: svakoj razglednici daj izdavača, broj, mjesto, lice i poleđinu. ¦ Seznami → 🏞 Razglednice: vsaki razglednici določi založnika, številko, kraj, sprednjo in hrbtno stran.
+Éditeur inconnu ¦ Nepoznat izdavač ¦ Neznan založnik
+Écrites ou envoyées ¦ Ispisane ili poslane ¦ Popisane ali poslane
+Vierges (jamais envoyées) ¦ Prazne (nikad poslane) ¦ Prazne (nikoli poslane)
+Il manque les n° {n} ¦ Nedostaju br. {n} ¦ Manjkajo št. {n}
+Il manque le n° {n} ¦ Nedostaje br. {n} ¦ Manjka št. {n}
+cartes ¦ razglednica ¦ razglednic
+Marge de « vers » ¦ Odstupanje za „oko” ¦ Odstopanje za »okoli«
+Portée de « avant » / « après » ¦ Raspon za „prije” / „poslije” ¦ Obseg za »pred« / »po«
+Longueur d’une vie sans fin connue ¦ Trajanje života bez poznatog kraja ¦ Dolžina življenja brez znanega konca
+Ouvrir dans le Tableur… ¦ Otvori u Proračunskoj tablici… ¦ Odpri v Preglednici…
+🧾 Ouvrir les invités dans le Tableur ¦ 🧾 Otvori goste u Proračunskoj tablici ¦ 🧾 Odpri goste v Preglednici
+📤 Envoyer le tableau des invités ¦ 📤 Pošalji tablicu gostiju ¦ 📤 Pošlji tabelo gostov
+🧾 Ouvrir dans le Tableur ¦ 🧾 Otvori u Proračunskoj tablici ¦ 🧾 Odpri v Preglednici
+Le tableau des invités, avec leur branche, leur lien de parenté et leur réponse. ¦ Tablica gostiju s granom, rodbinskom vezom i odgovorom. ¦ Tabela gostov z vejo, sorodstveno vezjo in odgovorom.
+Toutes les photos de l’album : un diaporama, un film, un traitement par lot… ¦ Sve fotografije iz albuma: dijaprojekcija, film, skupna obrada… ¦ Vse fotografije albuma: diaprojekcija, film, paketna obdelava…
+Album — {nm} ¦ Album — {nm} ¦ Album — {nm}
+Descendance (de haut en bas, une couleur par branche) ¦ Potomstvo (odozgo prema dolje, jedna boja po grani) ¦ Potomstvo (od zgoraj navzdol, ena barva na vejo)
+La descendance a besoin de l’outil Cousinades, qui n’est pas chargé. ¦ Za potomstvo treba alat Obiteljska okupljanja, koji nije učitan. ¦ Za potomstvo je potrebno orodje Družinska srečanja, ki ni naloženo.
+Aucune descendance pour cette personne. ¦ Ova osoba nema potomstva. ¦ Ta oseba nima potomcev.
+Aucun enfant connu pour cette personne : pas de descendance à dessiner. ¦ Ova osoba nema poznate djece: nema potomstva za crtanje. ¦ Ta oseba nima znanih otrok: ni potomcev za risanje.
+La descendance de {nm} ¦ Potomstvo osobe {nm} ¦ Potomci osebe {nm}
+la famille ¦ obitelj ¦ družina
+L’arbre (en fond) ¦ Stablo (u pozadini) ¦ Drevo (v ozadju)
+📰 En faire un faire-part ¦ 📰 Napravi od toga obavijest ¦ 📰 Naredi iz tega obvestilo
+Créer le faire-part ¦ Stvori obavijest ¦ Ustvari obvestilo
+L’arbre se pose en fond, derrière les textes du faire-part. Tout s’ouvre ensuite dans le dessin vectoriel pour le retoucher. ¦ Stablo ide u pozadinu, iza tekstova obavijesti. Sve se zatim otvara u vektorskom crtanju za doradu. ¦ Drevo gre v ozadje, za besedila obvestila. Vse se nato odpre v vektorskem risanju za popravke.
+L’arbre derrière le texte ¦ Stablo iza teksta ¦ Drevo za besedilom
+Très pâle ¦ Vrlo blijedo ¦ Zelo bledo
+Pâle ¦ Blijedo ¦ Bledo
+Bien visible ¦ Dobro vidljivo ¦ Dobro vidno
+Fabrication du faire-part… ¦ Izrada obavijesti… ¦ Izdelava obvestila…
+Personne à dessiner dans l’arbre. ¦ Nema nikoga za crtanje u stablu. ¦ V drevesu ni nikogar za risanje.
+L’arbre en fond d’un faire-part de cousinade ou de noces ¦ Stablo u pozadini obavijesti o obiteljskom okupljanju ili vjenčanju ¦ Drevo v ozadju obvestila o družinskem srečanju ali poroki
+En faire un faire-part ¦ Napravi od toga obavijest ¦ Naredi iz tega obvestilo
+Les mêmes réglages, un faire-part pour chaque personne (une liste, une étiquette) ou chaque foyer d’une cousinade, tous dans un seul PDF ¦ Iste postavke, obavijest za svaku osobu (popis, oznaka) ili svako kućanstvo obiteljskog okupljanja, sve u jednom PDF-u ¦ Iste nastavitve, obvestilo za vsako osebo (seznam, oznaka) ali vsako gospodinjstvo družinskega srečanja, vse v enem PDF
+Un faire-part par personne / par foyer… ¦ Obavijest po osobi / kućanstvu… ¦ Obvestilo na osebo / gospodinjstvo…
+📬 Un faire-part par personne / par foyer ¦ 📬 Obavijest po osobi / kućanstvu ¦ 📬 Obvestilo na osebo / gospodinjstvo
+📄 Fabriquer le PDF ¦ 📄 Izradi PDF ¦ 📄 Izdelaj PDF
+Le faire-part tel que tu l’as réglé, une fois pour chaque personne ou chaque foyer. Tous les faire-part sont rangés dans un seul PDF, prêt à imprimer. ¦ Obavijest kako si je podesio, jednom za svaku osobu ili kućanstvo. Sve obavijesti su u jednom PDF-u, spremne za ispis. ¦ Obvestilo, kot si ga nastavil, enkrat za vsako osebo ali gospodinjstvo. Vsa obvestila so v enem PDF, pripravljena za tiskanje.
+Une liste de personnes ¦ Popis osoba ¦ Seznam oseb
+Les personnes d’une étiquette ¦ Osobe s oznakom ¦ Osebe z oznako
+Les foyers d’une cousinade ¦ Kućanstva obiteljskog okupljanja ¦ Gospodinjstva družinskega srečanja
+La cousinade (les foyers invités) ¦ Obiteljsko okupljanje (pozvana kućanstva) ¦ Družinsko srečanje (povabljena gospodinjstva)
+Dans les champs du faire-part, ces mots se remplacent pour chacun : ¦ U poljima obavijesti ove se riječi zamjenjuju za svakoga: ¦ V poljih obvestila se te besede zamenjajo za vsakogar:
+(cousinade : aussi {titre}, {date}, {lieu}, {ancetre}…) ¦ (obiteljsko okupljanje: i {titre}, {date}, {lieu}, {ancetre}…) ¦ (družinsko srečanje: tudi {titre}, {date}, {lieu}, {ancetre}…)
+Le nom de la personne (ou du foyer) en haut de chaque faire-part ¦ Ime osobe (ili kućanstva) na vrhu svake obavijesti ¦ Ime osebe (ali gospodinjstva) na vrhu vsakega obvestila
+Remplir aussi depuis la fiche de chacun (noms, dates, lieux) ¦ Popuni i iz zapisa svakoga (imena, datumi, mjesta) ¦ Izpolni tudi iz zapisa vsakogar (imena, datumi, kraji)
+L’enveloppe de chacun porte son adresse. ¦ Na omotnici svakoga je njegova adresa. ¦ Na ovojnici vsakogar je njegov naslov.
+Aucun foyer invité dans cette cousinade : coche des invités d’abord. ¦ U ovom obiteljskom okupljanju nema pozvanih kućanstava: najprije označi goste. ¦ V tem družinskem srečanju ni povabljenih gospodinjstev: najprej označi goste.
+Fabrication de {n} faire-part… ¦ Izrada obavijesti: {n}… ¦ Izdelava obvestil: {n}…
+{i} sur {n}… ¦ {i} od {n}… ¦ {i} od {n}…
+{n} faire-part dans un seul PDF ({p} pages). ¦ Obavijesti u jednom PDF-u: {n} ({p} str.). ¦ Obvestila v enem PDF: {n} ({p} str.).
+Le dessin vectoriel n’est pas chargé : le PDF ne peut pas être fabriqué. ¦ Vektorsko crtanje nije učitano: PDF se ne može izraditi. ¦ Vektorsko risanje ni naloženo: PDF ni mogoče izdelati.
+Une action de la Retouche ¦ Radnja iz Retuširanja ¦ Dejanje iz Retuširanja
+Une action enregistrée dans la Retouche des photos (Fichier → Actions), sur chaque image. ¦ Radnja spremljena u Retuširanju fotografija (Datoteka → Radnje), na svakoj slici. ¦ Dejanje, shranjeno v Retuširanju fotografij (Datoteka → Dejanja), na vsaki sliki.
+aucune action choisie ¦ nije odabrana radnja ¦ ni izbranega dejanja
+La Retouche des photos n’est pas chargée : l’action « {name} » ne peut pas se faire. ¦ Retuširanje fotografija nije učitano: radnja „{name}” ne može se izvršiti. ¦ Retuširanje fotografij ni naloženo: dejanja »{name}« ni mogoče izvesti.
+L’action « {name} » de la Retouche n’a rien rendu. ¦ Radnja „{name}” iz Retuširanja nije ništa vratila. ¦ Dejanje »{name}« iz Retuširanja ni vrnilo ničesar.
+La Retouche des photos n’est pas chargée : cette étape ne pourra pas se faire. ¦ Retuširanje fotografija nije učitano: ovaj korak se neće moći izvršiti. ¦ Retuširanje fotografij ni naloženo: tega koraka ne bo mogoče izvesti.
+Aucune action enregistrée dans la Retouche. Ouvre une photo dans la Retouche, puis Fichier → Actions pour en enregistrer une. ¦ U Retuširanju nema spremljenih radnji. Otvori fotografiju u Retuširanju, zatim Datoteka → Radnje da spremiš jednu. ¦ V Retuširanju ni shranjenih dejanj. Odpri fotografijo v Retuširanju, nato Datoteka → Dejanja, da ga shraniš.
+L’action ¦ Radnja ¦ Dejanje
+Choisir une action… ¦ Odaberi radnju… ¦ Izberi dejanje…
+Une action enregistrée dans la Retouche des photos, faite sur chaque image du lot. ¦ Radnja spremljena u Retuširanju fotografija, izvršena na svakoj slici skupa. ¦ Dejanje, shranjeno v Retuširanju fotografij, izvedeno na vsaki sliki paketa.
+Les images rangées dans les médias par ce lot : un diaporama, un montage… ¦ Slike koje je ovaj skup spremio u medije: dijaprojekcija, montaža… ¦ Slike, ki jih je ta paket shranil med medije: diaprojekcija, montaža…
+Traitement par lot ¦ Skupna obrada ¦ Paketna obdelava
+{x} introuvable dans les médias. ¦ {x} nije pronađen u medijima. ¦ {x} ni mogoče najti med mediji.
+Ouvrir cette image dans la Retouche des photos ¦ Otvori ovu sliku u Retuširanju fotografija ¦ Odpri to sliko v Retuširanju fotografij
+Retoucher ¦ Retuširaj ¦ Retuširaj
+Envoyer cette image vers un autre outil ¦ Pošalji ovu sliku u drugi alat ¦ Pošlji to sliko v drugo orodje
+📤 Envoyer le tableau en image vers… ¦ 📤 Pošalji tablicu kao sliku u… ¦ 📤 Pošlji tabelo kot sliko v…
+Le dessin va dans un autre outil : un livre de la Mise en page, une page de mon site, le Dessin vectoriel… ¦ Crtež ide u drugi alat: knjigu iz Rasporeda, stranicu mog weba, Vektorsko crtanje… ¦ Risba gre v drugo orodje: knjigo iz Razporeditve, stran mojega spletnega mesta, Vektorsko risanje…
+Créer et envoyer vers… ¦ Stvori i pošalji u… ¦ Ustvari in pošlji v…
+✒️ Placer un dessin vectoriel (arbre, carte, blason…)… ¦ ✒️ Postavi vektorski crtež (stablo, karta, grb…)… ¦ ✒️ Postavi vektorsko risbo (drevo, zemljevid, grb…)…
+Dessin vectoriel placé ¦ Vektorski crtež postavljen ¦ Vektorska risba postavljena
+✒️ « {name} » placé : modifié dans le Dessin vectoriel, il se met à jour ici (« ↻ Mettre à jour »). ¦ ✒️ „{name}” postavljen: kad se izmijeni u Vektorskom crtanju, ovdje se ažurira („↻ Ažuriraj”). ¦ ✒️ »{name}« postavljena: ko jo spremeniš v Vektorskem risanju, se tukaj posodobi (»↻ Posodobi«).
+✒️ Dessin vectoriel <b>lié</b>{state} : modifié dans le Dessin vectoriel, il se redessine ici (« Mettre à jour »). ¦ ✒️ Vektorski crtež <b>povezan</b>{state}: kad se izmijeni u Vektorskom crtanju, ovdje se ponovno iscrtava („Ažuriraj”). ¦ ✒️ Vektorska risba <b>povezana</b>{state}: ko jo spremeniš v Vektorskem risanju, se tukaj znova nariše (»Posodobi«).
+✎ Modifier le dessin ¦ ✎ Uredi crtež ¦ ✎ Uredi risbo
+Le dessin reste tel quel et ne suit plus le Dessin vectoriel ¦ Crtež ostaje kakav jest i više ne prati Vektorsko crtanje ¦ Risba ostane, kot je, in ne sledi več Vektorskemu risanju
+Dessin détaché ¦ Crtež odvojen ¦ Risba ločena
+Le Dessin vectoriel n’est pas chargé. ¦ Vektorsko crtanje nije učitano. ¦ Vektorsko risanje ni naloženo.
+Aucun dessin vectoriel : fais-en un dans Listes → Outils de modification (Dessin vectoriel, Arbre décoratif, Carte…). ¦ Nema vektorskih crteža: napravi jedan u Popisi → Alati za uređivanje (Vektorsko crtanje, Ukrasno stablo, Karta…). ¦ Ni vektorskih risb: naredi jo v Seznami → Orodja za urejanje (Vektorsko risanje, Okrasno drevo, Zemljevid…).
+PLACER ¦ POSTAVI ¦ POSTAVI
+✒️ Un dessin vectoriel (arbre, carte, blason…) ¦ ✒️ Vektorski crtež (stablo, karta, grb…) ¦ ✒️ Vektorska risba (drevo, zemljevid, grb…)
+Placer ce dessin ¦ Postavi ovaj crtež ¦ Postavi to risbo
+Le dessin reste lié : modifié dans le Dessin vectoriel, il se met à jour dans le livre (« ↻ Mettre à jour »). Il reste net à toutes les tailles. ¦ Crtež ostaje povezan: kad se izmijeni u Vektorskom crtanju, ažurira se u knjizi („↻ Ažuriraj”). Ostaje oštar u svim veličinama. ¦ Risba ostane povezana: ko jo spremeniš v Vektorskem risanju, se posodobi v knjigi (»↻ Posodobi«). Ostane ostra v vseh velikostih.
+Choisis un dessin. ¦ Odaberi crtež. ¦ Izberi risbo.
+Le dessin n’a pas pu être lu. ¦ Crtež nije moguće pročitati. ¦ Risbe ni bilo mogoče prebrati.
+📐 Mettre dans un livre ¦ 📐 Stavi u knjigu ¦ 📐 Daj v knjigo
+Mettre dans le livre ¦ Stavi u knjigu ¦ Daj v knjigo
+Le dessin est rangé dans les Médias (en image), puis posé sur une page à lui, dans les marges. ¦ Crtež se sprema u Medije (kao slika), zatim postavlja na vlastitu stranicu, unutar margina. ¦ Risba se shrani med Medije (kot slika) in nato postavi na svojo stran, znotraj robov.
+L’image est posée sur une page à elle, dans les marges. Elle reste liée à la photo des Médias. ¦ Slika se postavlja na vlastitu stranicu, unutar margina. Ostaje povezana s fotografijom u Medijima. ¦ Slika se postavi na svojo stran, znotraj robov. Ostane povezana s fotografijo v Medijih.
+Rangement du dessin dans les médias… ¦ Spremanje crteža u medije… ¦ Shranjevanje risbe med medije…
+Mon livre ¦ Moja knjiga ¦ Moja knjiga
+Image ajoutée sur une nouvelle page à la fin du livre : vérifie, puis enregistre. ¦ Slika dodana na novu stranicu na kraju knjige: provjeri pa spremi. ¦ Slika dodana na novo stran na koncu knjige: preveri in shrani.
+Nouveau livre avec l’image : vérifie, puis enregistre le livre. ¦ Nova knjiga sa slikom: provjeri pa spremi knjigu. ¦ Nova knjiga s sliko: preveri in shrani knjigo.
+📱 Livre numérique (.epub) ¦ 📱 E-knjiga (.epub) ¦ 📱 E-knjiga (.epub)
+liseuses : Kobo, Livres, Calibre… ¦ e-čitači: Kobo, Knjige, Calibre… ¦ e-bralniki: Kobo, Knjige, Calibre…
+La mise en page n’est pas chargée : l’ePub ne peut pas être fait. ¦ Raspored nije učitan: ePub se ne može izraditi. ¦ Razporeditev ni naložena: ePub ni mogoče izdelati.
+« Envoyer vers… » n’est pas chargé. ¦ „Pošalji u…” nije učitano. ¦ »Pošlji v…« ni naloženo.
+Retoucher cette image ¦ Retuširaj ovu sliku ¦ Retuširaj to sliko
+Cette image n’est pas dans les Médias : elle ne peut pas être retouchée. ¦ Ova slika nije u Medijima: ne može se retuširati. ¦ Ta slika ni med Mediji: ni je mogoče retuširati.
+Image retouchée mise à jour dans le texte. ¦ Retuširana slika ažurirana u tekstu. ¦ Retuširana slika posodobljena v besedilu.
+Un document (Traitement de texte) ¦ Dokument (Obrada teksta) ¦ Dokument (Urejanje besedil)
+le tableau dans un texte ¦ tablica u tekstu ¦ tabela v besedilu
+📝 Créer le document ¦ 📝 Stvori dokument ¦ 📝 Ustvari dokument
+Image du graphique (PNG) : {kind} ¦ Slika grafikona (PNG): {kind} ¦ Slika grafikona (PNG): {kind}
+Le graphique n’a pas pu être dessiné. ¦ Grafikon nije bilo moguće nacrtati. ¦ Grafikona ni bilo mogoče narisati.
+Image du graphique enregistrée : {name} ¦ Slika grafikona spremljena: {name} ¦ Slika grafikona shranjena: {name}
+La feuille est vide : rien à envoyer. ¦ List je prazan: nema ničega za slanje. ¦ List je prazen: ni ničesar za pošiljanje.
+⤓ Image du graphique (PNG) ¦ ⤓ Slika grafikona (PNG) ¦ ⤓ Slika grafikona (PNG)
+{what} au montage, l’une après l’autre. ¦ {what} u montažu, jedno za drugim. ¦ {what} v montažo, eno za drugim.
+image ajoutée ¦ slika dodana ¦ slika dodana
+images ajoutées ¦ slike dodane ¦ slike dodane
+sous-titre ajouté ¦ titl dodan ¦ podnapis dodan
+sous-titres ajoutés ¦ titlovi dodani ¦ podnapisi dodani
+Le fabricant de GIF n’est pas chargé. ¦ Izrađivač GIF-ova nije učitan. ¦ Izdelovalec GIF-ov ni naložen.
+🎞 GIF animé ¦ 🎞 Animirani GIF ¦ 🎞 Animiran GIF
+sans son, petit, tourne en boucle ¦ bez zvuka, mali, vrti se u petlji ¦ brez zvoka, majhen, se vrti v zanki
+GIF… {n} % ¦ GIF… {n} % ¦ GIF… {n} %
+La vidéo est d’abord fabriquée (le film est rejoué en entier, laisse la fenêtre ouverte), puis rangée dans les médias. ¦ Video se najprije izrađuje (film se reproducira u cijelosti, ostavi prozor otvoren), zatim sprema u medije. ¦ Video se najprej izdela (film se predvaja v celoti, pusti okno odprto) in nato shrani med medije.
+Fabriquer la vidéo pour l’envoyer ? ¦ Izraditi video za slanje? ¦ Izdelam video za pošiljanje?
+Fabriquer et envoyer ¦ Izradi i pošalji ¦ Izdelaj in pošlji
+ENVOYER ¦ POŠALJI ¦ POŠLJI
+Fabrication de la vidéo… ¦ Izrada videa… ¦ Izdelava videa…
+La vidéo n’a pas pu être rangée dans les médias. ¦ Video nije bilo moguće spremiti u medije. ¦ Videa ni bilo mogoče shraniti med medije.
+Le son fini est rangé dans les médias (une copie), puis envoyé. ¦ Gotov zvuk sprema se u medije (kopija), zatim šalje. ¦ Končan zvok se shrani med medije (kopija) in nato pošlje.
+Envoyer le son ? ¦ Poslati zvuk? ¦ Pošljem zvok?
+Ranger et envoyer ¦ Spremi i pošalji ¦ Shrani in pošlji
+Pas encore de transcription : « ⏱ Insérer l’heure » (⌘T), puis tape ce qui est dit. ¦ Još nema prijepisa: „⏱ Umetni vrijeme” (⌘T), zatim upiši što se govori. ¦ Še ni prepisa: »⏱ Vstavi čas« (⌘T), nato vpiši, kaj je rečeno.
+Transcription — {name} ¦ Prijepis — {name} ¦ Prepis — {name}
+ (avec la transcription en sous-titres) ¦  (s prijepisom kao titlovima) ¦  (s prepisom kot podnapisi)
+La transcription (texte) ¦ Prijepis (tekst) ¦ Prepis (besedilo)
+Pas encore de transcription. ¦ Još nema prijepisa. ¦ Še ni prepisa.
+Agnès Bernauer ¦ Agnès Bernauer ¦ Agnès Bernauer
+7 colonnes en escalier et une réserve de 7 tas. La première carte posée sur une fondation donne la valeur de départ des quatre ; on descend en alternant rouge et noir, le Roi passe sur l’As. La pioche pose une carte sur chaque tas de la réserve ; une colonne vide prend la carte juste sous la valeur de départ. ¦ 7 stupaca u stubama i pričuva od 7 hrpa. Prva karta stavljena na temeljnu hrpu određuje početnu vrijednost sve četiri; slaže se silazno izmjenjujući crveno i crno, s Kralja se prelazi na Asa. Kup za vučenje stavlja kartu na svaku hrpu pričuve; prazan stupac prima kartu odmah ispod početne vrijednosti. ¦ 7 stolpcev v obliki stopnic in rezerva s 7 kupi. Prva karta na osnovnem kupu določi začetno vrednost vseh štirih; sestavljaš navzdol izmenično rdeče in črne, s Kralja greš na Asa. Kup za vlečenje položi karto na vsak kup rezerve; prazen stolpec sprejme karto tik pod začetno vrednostjo.
+Thumb and Pouch ¦ Thumb and Pouch ¦ Thumb and Pouch
+Klondike où l’on descend sur n’importe quelle couleur de carte sauf la sienne ; une colonne vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Klondike u kojem se slaže silazno na bilo koji znak osim vlastitog; prazan stupac prima bilo koju kartu. Kup za vučenje prolazi samo jednom. ¦ Klondike, kjer sestavljaš navzdol na katero koli barvo kart razen svoje; prazen stolpec sprejme katero koli karto. Kup za vlečenje greš skozi samo enkrat.
+Pas seul ¦ Nije sam ¦ Ne sam
+6 colonnes d’une seule carte ; on descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte. La pioche se retourne une carte à la fois et ne passe qu’une fois. ¦ 6 stupaca s po jednom kartom; slaže se silazno izmjenjujući crveno i crno, prazan stupac prima bilo koju kartu. Kup za vučenje okreće se karta po karta i prolazi samo jednom. ¦ 6 stolpcev s po eno karto; sestavljaš navzdol izmenično rdeče in črne, prazen stolpec sprejme katero koli karto. Kup za vlečenje se obrača po eno karto in greš skozi samo enkrat.
+Les impasses ¦ Slijepe ulice ¦ Slepe ulice
+Les As sont posés d’avance ; 6 colonnes de 3 cartes (deux cachées). On descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte ; la pioche repasse une fois. ¦ Asovi su postavljeni unaprijed; 6 stupaca od 3 karte (dvije skrivene). Slaže se silazno izmjenjujući crveno i crno, prazan stupac prima bilo koju kartu; kup za vučenje prolazi još jednom. ¦ Asi so vnaprej postavljeni; 6 stolpcev s 3 kartami (dve skriti). Sestavljaš navzdol izmenično rdeče in črne, prazen stolpec sprejme katero koli karto; kup za vlečenje greš skozi še enkrat.
+Huit fois huit ¦ Osam puta osam ¦ Osemkrat osem
+Deux jeux, 8 colonnes de 8 cartes visibles ; on descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte. La pioche repasse deux fois. ¦ Dva špila, 8 stupaca od 8 vidljivih karata; slaže se silazno izmjenjujući crveno i crno, prazan stupac prima bilo koju kartu. Kup za vučenje prolazi još dvaput. ¦ Dva kompleta, 8 stolpcev z 8 vidnimi kartami; sestavljaš navzdol izmenično rdeče in črne, prazen stolpec sprejme katero koli karto. Kup za vlečenje greš skozi še dvakrat.
+Spike ¦ Spike ¦ Spike
+7 colonnes en escalier comme Klondike ; on descend en alternant rouge et noir et on déplace des suites entières. La pioche pose une carte sur chaque colonne. ¦ 7 stupaca u stubama kao u Klondikeu; slaže se silazno izmjenjujući crveno i crno i premještaju se cijeli nizovi. Kup za vučenje stavlja kartu na svaki stupac. ¦ 7 stolpcev v obliki stopnic kot pri Klondiku; sestavljaš navzdol izmenično rdeče in črne in premikaš cela zaporedja. Kup za vlečenje položi karto na vsak stolpec.
+Alternance ¦ Izmjena ¦ Izmenjava
+Deux jeux, 7 colonnes de 7 cartes, une cachée sur deux. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Dva špila, 7 stupaca od 7 karata, svaka druga skrivena. Slaže se silazno izmjenjujući crveno i crno i premještaju se cijeli nizovi; prazan stupac prima bilo koju kartu. Kup za vučenje prolazi samo jednom. ¦ Dva kompleta, 7 stolpcev s 7 kartami, vsaka druga skrita. Sestavljaš navzdol izmenično rdeče in črne in premikaš cela zaporedja; prazen stolpec sprejme katero koli karto. Kup za vlečenje greš skozi samo enkrat.
+La harpe ¦ Harfa ¦ Harfa
+Deux jeux, 9 colonnes en escalier ; on descend en alternant rouge et noir. La pioche se retourne une carte à la fois et repasse trois fois. ¦ Dva špila, 9 stupaca u stubama; slaže se silazno izmjenjujući crveno i crno. Kup za vučenje okreće se karta po karta i prolazi još triput. ¦ Dva kompleta, 9 stolpcev v obliki stopnic; sestavljaš navzdol izmenično rdeče in črne. Kup za vlečenje se obrača po eno karto in greš skozi še trikrat.
+La grande harpe ¦ Velika harfa ¦ Velika harfa
+Deux jeux, 10 colonnes en escalier ; on descend en alternant rouge et noir. La pioche se retourne une carte à la fois et ne passe qu’une fois. ¦ Dva špila, 10 stupaca u stubama; slaže se silazno izmjenjujući crveno i crno. Kup za vučenje okreće se karta po karta i prolazi samo jednom. ¦ Dva kompleta, 10 stolpcev v obliki stopnic; sestavljaš navzdol izmenično rdeče in črne. Kup za vlečenje se obrača po eno karto in greš skozi samo enkrat.
+Acme ¦ Acme ¦ Acme
+Une réserve de 13 cartes et 4 colonnes ; les fondations partent de l’As. On descend dans la même couleur de carte, une carte à la fois ; une colonne vide se remplit avec la réserve. La pioche repasse une fois. ¦ Pričuva od 13 karata i 4 stupca; temeljne hrpe počinju od Asa. Slaže se silazno u istom znaku, karta po karta; prazan stupac popunjava se iz pričuve. Kup za vučenje prolazi još jednom. ¦ Rezerva 13 kart in 4 stolpci; osnovni kupi se začnejo z Asom. Sestavljaš navzdol v isti barvi kart, po eno karto; prazen stolpec se zapolni iz rezerve. Kup za vlečenje greš skozi še enkrat.
+Le crapaud américain ¦ Američka krastača ¦ Ameriška krastača
+Deux jeux, une réserve de 20 cartes et 8 colonnes. La première carte posée sur une fondation donne la valeur de départ des huit ; on descend dans la même couleur de carte, le Roi passe sur l’As. Une colonne vide se remplit avec la réserve ; la pioche repasse une fois. ¦ Dva špila, pričuva od 20 karata i 8 stupaca. Prva karta stavljena na temeljnu hrpu određuje početnu vrijednost svih osam; slaže se silazno u istom znaku, s Kralja se prelazi na Asa. Prazan stupac popunjava se iz pričuve; kup za vučenje prolazi još jednom. ¦ Dva kompleta, rezerva 20 kart in 8 stolpcev. Prva karta na osnovnem kupu določi začetno vrednost vseh osmih; sestavljaš navzdol v isti barvi kart, s Kralja greš na Asa. Prazen stolpec se zapolni iz rezerve; kup za vlečenje greš skozi še enkrat.
+Canfield bigarré ¦ Šareni Canfield ¦ Pisani Canfield
+Deux jeux : les As sont posés d’avance, une réserve de 14 cartes et 5 colonnes. On descend en alternant rouge et noir ; une colonne vide se remplit avec la réserve. La pioche se retourne trois cartes à la fois et repasse deux fois. ¦ Dva špila: asovi su postavljeni unaprijed, pričuva od 14 karata i 5 stupaca. Slaže se silazno izmjenjujući crveno i crno; prazan stupac popunjava se iz pričuve. Kup za vučenje okreće se po tri karte i prolazi još dvaput. ¦ Dva kompleta: asi so vnaprej postavljeni, rezerva 14 kart in 5 stolpcev. Sestavljaš navzdol izmenično rdeče in črne; prazen stolpec se zapolni iz rezerve. Kup za vlečenje se obrača po tri karte in greš skozi še dvakrat.
+La duchesse ¦ Vojvotkinja ¦ Vojvodinja
+Quatre tas de réserve de 3 cartes et 4 colonnes d’une carte. La première carte posée sur une fondation donne la valeur de départ des quatre ; on descend en alternant rouge et noir, le Roi passe sur l’As. Une colonne vide prend n’importe quelle carte ; la pioche repasse une fois. ¦ Četiri hrpe pričuve od 3 karte i 4 stupca s po jednom kartom. Prva karta stavljena na temeljnu hrpu određuje početnu vrijednost sve četiri; slaže se silazno izmjenjujući crveno i crno, s Kralja se prelazi na Asa. Prazan stupac prima bilo koju kartu; kup za vučenje prolazi još jednom. ¦ Štirje kupi rezerve s 3 kartami in 4 stolpci s po eno karto. Prva karta na osnovnem kupu določi začetno vrednost vseh štirih; sestavljaš navzdol izmenično rdeče in črne, s Kralja greš na Asa. Prazen stolpec sprejme katero koli karto; kup za vlečenje greš skozi še enkrat.
+La porte ¦ Vrata ¦ Vrata
+Deux tas de réserve de 5 cartes (les battants de la porte) et 8 colonnes d’une carte. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Dvije hrpe pričuve od 5 karata (krila vrata) i 8 stupaca s po jednom kartom. Slaže se silazno izmjenjujući crveno i crno i premještaju se cijeli nizovi; prazan stupac prima bilo koju kartu. Kup za vučenje prolazi samo jednom. ¦ Dva kupa rezerve s 5 kartami (krili vrat) in 8 stolpcev s po eno karto. Sestavljaš navzdol izmenično rdeče in črne in premikaš cela zaporedja; prazen stolpec sprejme katero koli karto. Kup za vlečenje greš skozi samo enkrat.
+Le pingouin ¦ Pingvin ¦ Pingvin
+La première carte donne la valeur de départ des fondations, et les trois autres de même valeur y montent tout de suite. 7 colonnes de 7, 7 cases libres ; on descend dans la même couleur de carte, le Roi passe sur l’As. Une colonne vide prend la carte juste sous la valeur de départ. ¦ Prva karta određuje početnu vrijednost temeljnih hrpa, a ostale tri iste vrijednosti odmah idu na njih. 7 stupaca od 7, 7 slobodnih polja; slaže se silazno u istom znaku, s Kralja se prelazi na Asa. Prazan stupac prima kartu odmah ispod početne vrijednosti. ¦ Prva karta določi začetno vrednost osnovnih kupov, druge tri iste vrednosti pa gredo takoj nanje. 7 stolpcev po 7, 7 prostih polj; sestavljaš navzdol v isti barvi kart, s Kralja greš na Asa. Prazen stolpec sprejme karto tik pod začetno vrednostjo.
+Baker’s Game (Roi seul) ¦ Baker’s Game (samo Kralj) ¦ Baker’s Game (samo Kralj)
+Baker’s Game (descendre dans la même couleur de carte, 4 cases libres), mais une colonne vide ne prend qu’un Roi. ¦ Baker’s Game (slaže se silazno u istom znaku, 4 slobodna polja), ali prazan stupac prima samo Kralja. ¦ Baker’s Game (sestavljaš navzdol v isti barvi kart, 4 prosta polja), a prazen stolpec sprejme samo Kralja.
+Seahaven détendu ¦ Opušteni Seahaven ¦ Sproščeni Seahaven
+Seahaven, mais une suite bien rangée dans la même couleur de carte se déplace d’un coup, quelle que soit sa longueur. ¦ Seahaven, ali uredno složen niz u istom znaku premješta se odjednom, bez obzira na duljinu. ¦ Seahaven, a lepo urejeno zaporedje v isti barvi kart se premakne naenkrat, ne glede na dolžino.
+Repair ¦ Repair ¦ Repair
+Deux jeux, 10 colonnes de 10 cartes visibles et 4 cases libres déjà occupées ; on descend en alternant rouge et noir, une carte à la fois (ou une suite si les cases libres le permettent). ¦ Dva špila, 10 stupaca od 10 vidljivih karata i 4 već zauzeta slobodna polja; slaže se silazno izmjenjujući crveno i crno, karta po karta (ili niz ako slobodna polja dopuštaju). ¦ Dva kompleta, 10 stolpcev z 10 vidnimi kartami in 4 že zasedena prosta polja; sestavljaš navzdol izmenično rdeče in črne, po eno karto (ali zaporedje, če prosta polja to dopuščajo).
+Ocean Towers ¦ Ocean Towers ¦ Ocean Towers
+Deux jeux, 14 colonnes de 7 cartes et 8 cases libres dont 6 déjà occupées ; on descend dans la même couleur de carte, une colonne vide ne prend qu’un Roi. ¦ Dva špila, 14 stupaca od 7 karata i 8 slobodnih polja, od kojih je 6 već zauzeto; slaže se silazno u istom znaku, prazan stupac prima samo Kralja. ¦ Dva kompleta, 14 stolpcev s 7 kartami in 8 prostih polj, od katerih je 6 že zasedenih; sestavljaš navzdol v isti barvi kart, prazen stolpec sprejme samo Kralja.
+Sept par quatre ¦ Sedam puta četiri ¦ Sedemkrat štiri
+FreeCell à 7 colonnes et 4 cases libres : les colonnes sont plus hautes. ¦ FreeCell sa 7 stupaca i 4 slobodna polja: stupci su viši. ¦ FreeCell s 7 stolpci in 4 prostimi polji: stolpci so višji.
+Sept par cinq ¦ Sedam puta pet ¦ Sedemkrat pet
+FreeCell à 7 colonnes et 5 cases libres. ¦ FreeCell sa 7 stupaca i 5 slobodnih polja. ¦ FreeCell s 7 stolpci in 5 prostimi polji.
+FreeCell défi ¦ FreeCell izazov ¦ FreeCell izziv
+FreeCell, mais les As et les 2 sont tout au fond des colonnes, sous toutes les autres cartes. ¦ FreeCell, ali asovi i dvojke su na samom dnu stupaca, ispod svih ostalih karata. ¦ FreeCell, a asi in dvojke so čisto na dnu stolpcev, pod vsemi drugimi kartami.
+FreeCell super défi ¦ FreeCell superizazov ¦ FreeCell superizziv
+FreeCell défi (les As et les 2 au fond des colonnes), et une colonne vide ne prend qu’un Roi. ¦ FreeCell izazov (asovi i dvojke na dnu stupaca), a prazan stupac prima samo Kralja. ¦ FreeCell izziv (asi in dvojke na dnu stolpcev), prazen stolpec pa sprejme samo Kralja.
+Le scarabée ¦ Skarabej ¦ Skarabej
+Scorpion sans pioche : les 52 cartes sont visibles en 7 colonnes. On descend dans la même couleur de carte et on déplace n’importe quel groupe ; une colonne vide ne prend qu’un Roi. Une suite complète du Roi à l’As s’en va. ¦ Scorpion bez kupa za vučenje: sve 52 karte vidljive su u 7 stupaca. Slaže se silazno u istom znaku i premješta se bilo koja skupina; prazan stupac prima samo Kralja. Potpun niz od Kralja do Asa odlazi. ¦ Scorpion brez kupa za vlečenje: vseh 52 kart je vidnih v 7 stolpcih. Sestavljaš navzdol v isti barvi kart in premikaš katero koli skupino; prazen stolpec sprejme samo Kralja. Celotno zaporedje od Kralja do Asa odide.
+Queue de scorpion ¦ Škorpionov rep ¦ Škorpijonov rep
+Comme Scorpion (7 colonnes de 7, n’importe quel groupe se déplace), mais on descend en alternant rouge et noir et les cartes montent sur les fondations de l’As au Roi. ¦ Kao Scorpion (7 stupaca od 7, premješta se bilo koja skupina), ali se slaže silazno izmjenjujući crveno i crno, a karte rastu na temeljnim hrpama od Asa do Kralja. ¦ Kot Scorpion (7 stolpcev po 7, premakne se katera koli skupina), a sestavljaš navzdol izmenično rdeče in črne, karte pa na osnovnih kupih naraščajo od Asa do Kralja.
+Scorpion double ¦ Dvostruki Scorpion ¦ Dvojni Scorpion
+Deux jeux, 10 colonnes, tout est distribué (les cinq premières colonnes cachent 4 cartes). On descend dans la même couleur de carte et on déplace n’importe quel groupe ; une suite complète du Roi à l’As s’en va. ¦ Dva špila, 10 stupaca, sve je podijeljeno (prvih pet stupaca skriva 4 karte). Slaže se silazno u istom znaku i premješta se bilo koja skupina; potpun niz od Kralja do Asa odlazi. ¦ Dva kompleta, 10 stolpcev, vse je razdeljeno (prvih pet stolpcev skriva 4 karte). Sestavljaš navzdol v isti barvi kart in premikaš katero koli skupino; celotno zaporedje od Kralja do Asa odide.
+Motif de divorce ¦ Razlog za razvod ¦ Razlog za ločitev
+Deux jeux, 10 colonnes de 5 cartes visibles. On descend sans s’occuper des couleurs ; seules les suites d’une même couleur de carte se déplacent ensemble ; une suite complète du Roi à l’As s’en va. La pioche pose une carte sur chaque colonne qui n’est pas vide. ¦ Dva špila, 10 stupaca od 5 vidljivih karata. Slaže se silazno bez obzira na boje; zajedno se premještaju samo nizovi istog znaka; potpun niz od Kralja do Asa odlazi. Kup za vučenje stavlja kartu na svaki stupac koji nije prazan. ¦ Dva kompleta, 10 stolpcev s 5 vidnimi kartami. Sestavljaš navzdol ne glede na barve; skupaj se premikajo le zaporedja iste barve kart; celotno zaporedje od Kralja do Asa odide. Kup za vlečenje položi karto na vsak stolpec, ki ni prazen.
+La tarentule ¦ Tarantula ¦ Tarantela
+L’araignée à quatre couleurs, mais une suite qui descend dans la même teinte (rouge ou noire) se déplace d’un coup. Une suite complète du Roi à l’As dans une même couleur de carte s’en va. ¦ Pauk s četiri znaka, ali niz koji se spušta u istoj boji (crvenoj ili crnoj) premješta se odjednom. Potpun niz od Kralja do Asa u istom znaku odlazi. ¦ Pajek s štirimi barvami, a zaporedje, ki se spušča v istem odtenku (rdeče ali črne), se premakne naenkrat. Celotno zaporedje od Kralja do Asa v isti barvi kart odide.
+Araignée à découvert ¦ Otkriveni pauk ¦ Odkriti pajek
+L’araignée à quatre couleurs, mais toutes les cartes sont visibles dès le départ. ¦ Pauk s četiri znaka, ali sve su karte vidljive od početka. ¦ Pajek s štirimi barvami, a vse karte so vidne od začetka.
+La harpe de Milligan ¦ Milliganova harfa ¦ Milliganova harfa
+Deux jeux, 8 colonnes en escalier ; on descend en alternant rouge et noir et on déplace des suites entières. Une colonne vide ne prend qu’un Roi ; la pioche pose une carte sur chaque colonne. Les fondations montent de l’As au Roi. ¦ Dva špila, 8 stupaca u stubama; slaže se silazno izmjenjujući crveno i crno i premještaju se cijeli nizovi. Prazan stupac prima samo Kralja; kup za vučenje stavlja kartu na svaki stupac. Temeljne hrpe rastu od Asa do Kralja. ¦ Dva kompleta, 8 stolpcev v obliki stopnic; sestavljaš navzdol izmenično rdeče in črne in premikaš cela zaporedja. Prazen stolpec sprejme samo Kralja; kup za vlečenje položi karto na vsak stolpec. Osnovni kupi naraščajo od Asa do Kralja.
+La harpe de Lexington ¦ Lexingtonska harfa ¦ Lexingtonska harfa
+La harpe de Milligan (deux jeux, 8 colonnes en escalier, la pioche pose une carte sur chaque colonne), mais on déplace n’importe quel groupe de cartes visibles. ¦ Milliganova harfa (dva špila, 8 stupaca u stubama, kup za vučenje stavlja kartu na svaki stupac), ali se premješta bilo koja skupina vidljivih karata. ¦ Milliganova harfa (dva kompleta, 8 stolpcev v obliki stopnic, kup za vlečenje položi karto na vsak stolpec), a premikaš katero koli skupino vidnih kart.
+Brunswick ¦ Brunswick ¦ Brunswick
+La harpe de Lexington avec toutes les cartes visibles : n’importe quel groupe se déplace, la pioche pose une carte sur chaque colonne. ¦ Lexingtonska harfa sa svim kartama vidljivima: premješta se bilo koja skupina, kup za vučenje stavlja kartu na svaki stupac. ¦ Lexingtonska harfa z vsemi kartami vidnimi: premakne se katera koli skupina, kup za vlečenje položi karto na vsak stolpec.
+Carlton ¦ Carlton ¦ Carlton
+La harpe de Milligan avec toutes les cartes visibles, et une colonne vide prend n’importe quelle carte. ¦ Milliganova harfa sa svim kartama vidljivima, a prazan stupac prima bilo koju kartu. ¦ Milliganova harfa z vsemi kartami vidnimi, prazen stolpec pa sprejme katero koli karto.
+Miss Milligan ¦ Miss Milligan ¦ Miss Milligan
+Deux jeux, 8 colonnes d’une carte ; la pioche pose une carte sur chaque colonne. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide ne prend qu’un Roi. Quand la pioche est vide, une case libre s’ouvre pour mettre une carte de côté. ¦ Dva špila, 8 stupaca s po jednom kartom; kup za vučenje stavlja kartu na svaki stupac. Slaže se silazno izmjenjujući crveno i crno i premještaju se cijeli nizovi; prazan stupac prima samo Kralja. Kad je kup za vučenje prazan, otvara se slobodno polje za odlaganje karte. ¦ Dva kompleta, 8 stolpcev s po eno karto; kup za vlečenje položi karto na vsak stolpec. Sestavljaš navzdol izmenično rdeče in črne in premikaš cela zaporedja; prazen stolpec sprejme samo Kralja. Ko je kup za vlečenje prazen, se odpre prosto polje za odlaganje karte.
+Millie ¦ Millie ¦ Millie
+Deux jeux, 8 colonnes d’une carte ; la pioche pose une carte sur chaque colonne. On descend en alternant rouge et noir et une colonne vide prend n’importe quelle carte. ¦ Dva špila, 8 stupaca s po jednom kartom; kup za vučenje stavlja kartu na svaki stupac. Slaže se silazno izmjenjujući crveno i crno, a prazan stupac prima bilo koju kartu. ¦ Dva kompleta, 8 stolpcev s po eno karto; kup za vlečenje položi karto na vsak stolpec. Sestavljaš navzdol izmenično rdeče in črne, prazen stolpec pa sprejme katero koli karto.
+L’île d’Elbe ¦ Otok Elba ¦ Otok Elba
+Deux jeux, 10 colonnes de 5 cartes (quatre cachées) ; on descend en alternant rouge et noir et on déplace des suites entières. Une colonne vide ne prend qu’un Roi ; la pioche pose une carte sur chaque colonne. ¦ Dva špila, 10 stupaca od 5 karata (četiri skrivene); slaže se silazno izmjenjujući crveno i crno i premještaju se cijeli nizovi. Prazan stupac prima samo Kralja; kup za vučenje stavlja kartu na svaki stupac. ¦ Dva kompleta, 10 stolpcev s 5 kartami (štiri skrite); sestavljaš navzdol izmenično rdeče in črne in premikaš cela zaporedja. Prazen stolpec sprejme samo Kralja; kup za vlečenje položi karto na vsak stolpec.
+Le mont Olympe ¦ Olimp ¦ Olimp
+Deux jeux : les As et les 2 sont posés d’avance, et les fondations montent de deux en deux dans la même couleur de carte (As, 3, 5… ou 2, 4, 6…). 9 colonnes ; on descend de deux en deux dans la même couleur de carte. La pioche pose une carte sur chaque colonne. ¦ Dva špila: asovi i dvojke postavljeni su unaprijed, a temeljne hrpe rastu po dva u istom znaku (As, 3, 5… ili 2, 4, 6…). 9 stupaca; slaže se silazno po dva u istom znaku. Kup za vučenje stavlja kartu na svaki stupac. ¦ Dva kompleta: asi in dvojke so vnaprej postavljeni, osnovni kupi pa naraščajo po dva v isti barvi kart (As, 3, 5… ali 2, 4, 6…). 9 stolpcev; sestavljaš navzdol po dva v isti barvi kart. Kup za vlečenje položi karto na vsak stolpec.
+La patience australienne ¦ Australski pasijans ¦ Avstralski pasjans
+7 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte et on déplace n’importe quel groupe de cartes visibles. Une colonne vide ne prend qu’un Roi ; la pioche ne passe qu’une fois. ¦ 7 stupaca od 4 vidljive karte; slaže se silazno u istom znaku i premješta se bilo koja skupina vidljivih karata. Prazan stupac prima samo Kralja; kup za vučenje prolazi samo jednom. ¦ 7 stolpcev s 4 vidnimi kartami; sestavljaš navzdol v isti barvi kart in premikaš katero koli skupino vidnih kart. Prazen stolpec sprejme samo Kralja; kup za vlečenje greš skozi samo enkrat.
+Canberra ¦ Canberra ¦ Canberra
+La patience australienne, mais la pioche repasse une fois. ¦ Australski pasijans, ali kup za vučenje prolazi još jednom. ¦ Avstralski pasjans, a kup za vlečenje greš skozi še enkrat.
+Raw Prawn ¦ Raw Prawn ¦ Raw Prawn
+La patience australienne, mais une colonne vide prend n’importe quelle carte. ¦ Australski pasijans, ali prazan stupac prima bilo koju kartu. ¦ Avstralski pasjans, a prazen stolpec sprejme katero koli karto.
+Rushdike ¦ Rushdike ¦ Rushdike
+7 colonnes en escalier ; on descend dans la même couleur de carte et on déplace n’importe quel groupe de cartes visibles. La pioche pose une carte sur chaque colonne. ¦ 7 stupaca u stubama; slaže se silazno u istom znaku i premješta se bilo koja skupina vidljivih karata. Kup za vučenje stavlja kartu na svaki stupac. ¦ 7 stolpcev v obliki stopnic; sestavljaš navzdol v isti barvi kart in premikaš katero koli skupino vidnih kart. Kup za vlečenje položi karto na vsak stolpec.
+La discipline chinoise ¦ Kineska disciplina ¦ Kitajska disciplina
+7 colonnes de 7 cartes (trois cachées, sauf dans la première) ; on descend en alternant rouge et noir et on déplace n’importe quel groupe de cartes visibles. Les 3 dernières cartes vont sur les trois premières colonnes. ¦ 7 stupaca od 7 karata (tri skrivene, osim u prvom); slaže se silazno izmjenjujući crveno i crno i premješta se bilo koja skupina vidljivih karata. Posljednje 3 karte idu na prva tri stupca. ¦ 7 stolpcev s 7 kartami (tri skrite, razen v prvem); sestavljaš navzdol izmenično rdeče in črne in premikaš katero koli skupino vidnih kart. Zadnje 3 karte gredo na prve tri stolpce.
+Solitaire russe double ¦ Dvostruki ruski pasijans ¦ Dvojni ruski pasjans
+Deux jeux, 10 colonnes, 8 fondations ; on descend dans la même couleur de carte et on déplace n’importe quel groupe de cartes visibles. ¦ Dva špila, 10 stupaca, 8 temeljnih hrpa; slaže se silazno u istom znaku i premješta se bilo koja skupina vidljivih karata. ¦ Dva kompleta, 10 stolpcev, 8 osnovnih kupov; sestavljaš navzdol v isti barvi kart in premikaš katero koli skupino vidnih kart.
+Ali Baba ¦ Ali Baba ¦ Ali Baba
+Un seul jeu : les As sont posés d’avance, 10 colonnes de 4 cartes visibles. On descend dans la même couleur de carte et on déplace des suites entières ; la pioche ne passe qu’une fois. ¦ Jedan špil: asovi su postavljeni unaprijed, 10 stupaca od 4 vidljive karte. Slaže se silazno u istom znaku i premještaju se cijeli nizovi; kup za vučenje prolazi samo jednom. ¦ En komplet: asi so vnaprej postavljeni, 10 stolpcev s 4 vidnimi kartami. Sestavljaš navzdol v isti barvi kart in premikaš cela zaporedja; kup za vlečenje greš skozi samo enkrat.
+Cassim ¦ Cassim ¦ Cassim
+Un seul jeu : les As sont posés d’avance, 7 colonnes de 3 cartes visibles. On descend dans la même couleur de carte et on déplace des suites entières ; la pioche repasse autant que tu veux. ¦ Jedan špil: asovi su postavljeni unaprijed, 7 stupaca od 3 vidljive karte. Slaže se silazno u istom znaku i premještaju se cijeli nizovi; kup za vučenje prolazi koliko god puta želiš. ¦ En komplet: asi so vnaprej postavljeni, 7 stolpcev s 3 vidnimi kartami. Sestavljaš navzdol v isti barvi kart in premikaš cela zaporedja; kup za vlečenje greš skozi, kolikokrat želiš.
+Rang et file ¦ Red i vrsta ¦ Vrsta in red
+L’empereur (deux jeux, 10 colonnes de 4 cartes dont 3 cachées, en alternant rouge et noir), mais on déplace des suites entières. ¦ Car (dva špila, 10 stupaca od 4 karte, od kojih su 3 skrivene, izmjenjujući crveno i crno), ali se premještaju cijeli nizovi. ¦ Cesar (dva kompleta, 10 stolpcev s 4 kartami, od katerih so 3 skrite, izmenično rdeče in črne), a premikaš cela zaporedja.
+Les As affairés ¦ Zaposleni asovi ¦ Zaposleni asi
+Deux jeux, 12 colonnes d’une carte ; on descend dans la même couleur de carte, une carte à la fois. La pioche ne passe qu’une fois. ¦ Dva špila, 12 stupaca s po jednom kartom; slaže se silazno u istom znaku, karta po karta. Kup za vučenje prolazi samo jednom. ¦ Dva kompleta, 12 stolpcev s po eno karto; sestavljaš navzdol v isti barvi kart, po eno karto. Kup za vlečenje greš skozi samo enkrat.
+La cour ¦ Dvor ¦ Dvor
+Deux jeux, 12 colonnes d’une carte ; on descend dans la même couleur de carte et on déplace des suites entières. La pioche ne passe qu’une fois. ¦ Dva špila, 12 stupaca s po jednom kartom; slaže se silazno u istom znaku i premještaju se cijeli nizovi. Kup za vučenje prolazi samo jednom. ¦ Dva kompleta, 12 stolpcev s po eno karto; sestavljaš navzdol v isti barvi kart in premikaš cela zaporedja. Kup za vlečenje greš skozi samo enkrat.
+Le carré de Napoléon ¦ Napoleonov kvadrat ¦ Napoleonov kvadrat
+Deux jeux, 12 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte et on déplace des suites entières. La pioche ne passe qu’une fois. ¦ Dva špila, 12 stupaca od 4 vidljive karte; slaže se silazno u istom znaku i premještaju se cijeli nizovi. Kup za vučenje prolazi samo jednom. ¦ Dva kompleta, 12 stolpcev s 4 vidnimi kartami; sestavljaš navzdol v isti barvi kart in premikaš cela zaporedja. Kup za vlečenje greš skozi samo enkrat.
+L’exil de Napoléon ¦ Napoleonovo izgnanstvo ¦ Napoleonovo izgnanstvo
+Les quarante voleurs où l’on descend sans s’occuper des couleurs, une carte à la fois. La pioche ne passe qu’une fois. ¦ Četrdeset razbojnika u kojem se slaže silazno bez obzira na boje, karta po karta. Kup za vučenje prolazi samo jednom. ¦ Štirideset razbojnikov, kjer sestavljaš navzdol ne glede na barve, po eno karto. Kup za vlečenje greš skozi samo enkrat.
+Deuces ¦ Deuces ¦ Deuces
+Deux jeux : les huit 2 sont posés d’avance, et les fondations montent dans la même couleur de carte jusqu’à l’As. 10 colonnes d’une carte ; on descend dans la même couleur de carte (l’As va sur le 2, le Roi sur l’As), une carte à la fois. La pioche ne passe qu’une fois. ¦ Dva špila: osam dvojki postavljeno je unaprijed, a temeljne hrpe rastu u istom znaku do Asa. 10 stupaca s po jednom kartom; slaže se silazno u istom znaku (As ide na 2, Kralj na Asa), karta po karta. Kup za vučenje prolazi samo jednom. ¦ Dva kompleta: osem dvojk je vnaprej postavljenih, osnovni kupi pa naraščajo v isti barvi kart do Asa. 10 stolpcev s po eno karto; sestavljaš navzdol v isti barvi kart (As gre na 2, Kralj na Asa), po eno karto. Kup za vlečenje greš skozi samo enkrat.
+La lune décroissante ¦ Mjesec na zalasku ¦ Pojemajoča luna
+Deux jeux, 13 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte et on déplace des suites entières. La pioche ne passe qu’une fois. ¦ Dva špila, 13 stupaca od 4 vidljive karte; slaže se silazno u istom znaku i premještaju se cijeli nizovi. Kup za vučenje prolazi samo jednom. ¦ Dva kompleta, 13 stolpcev s 4 vidnimi kartami; sestavljaš navzdol v isti barvi kart in premikaš cela zaporedja. Kup za vlečenje greš skozi samo enkrat.
+Les cinquante fameux ¦ Slavnih pedeset ¦ Slavnih petdeset
+Les quarante voleurs avec 5 cartes par colonne : deux jeux, 10 colonnes de 5, même couleur de carte, une carte à la fois. La pioche ne passe qu’une fois. ¦ Četrdeset razbojnika s 5 karata po stupcu: dva špila, 10 stupaca od 5, isti znak, karta po karta. Kup za vučenje prolazi samo jednom. ¦ Štirideset razbojnikov s 5 kartami na stolpec: dva kompleta, 10 stolpcev po 5, ista barva kart, po ena karta. Kup za vlečenje greš skozi samo enkrat.
+Quarante-neuf ¦ Četrdeset i devet ¦ Devetinštirideset
+Deux jeux, 7 colonnes de 7 cartes visibles ; on descend en alternant rouge et noir, une carte à la fois. La pioche ne passe qu’une fois. ¦ Dva špila, 7 stupaca od 7 vidljivih karata; slaže se silazno izmjenjujući crveno i crno, karta po karta. Kup za vučenje prolazi samo jednom. ¦ Dva kompleta, 7 stolpcev s 7 vidnimi kartami; sestavljaš navzdol izmenično rdeče in črne, po eno karto. Kup za vlečenje greš skozi samo enkrat.
+Sans limite ¦ Bez ograničenja ¦ Brez omejitev
+Les quarante voleurs, mais la pioche repasse autant que tu veux. ¦ Četrdeset razbojnika, ali kup za vučenje prolazi koliko god puta želiš. ¦ Štirideset razbojnikov, a kup za vlečenje greš skozi, kolikokrat želiš.
+Les petits quarante ¦ Mala četrdesetica ¦ Mala štiridesetica
+Les quarante voleurs où l’on descend sans s’occuper des couleurs et on déplace des suites entières ; la pioche se retourne trois cartes à la fois et repasse trois fois. ¦ Četrdeset razbojnika u kojem se slaže silazno bez obzira na boje i premještaju se cijeli nizovi; kup za vučenje okreće se po tri karte i prolazi još triput. ¦ Štirideset razbojnikov, kjer sestavljaš navzdol ne glede na barve in premikaš cela zaporedja; kup za vlečenje se obrača po tri karte in greš skozi še trikrat.
+Le zèbre ¦ Zebra ¦ Zebra
+Deux jeux, les As posés d’avance, 8 colonnes d’une carte ; on descend en alternant rouge et noir, une carte à la fois. La pioche repasse une fois. ¦ Dva špila, asovi postavljeni unaprijed, 8 stupaca s po jednom kartom; slaže se silazno izmjenjujući crveno i crno, karta po karta. Kup za vučenje prolazi još jednom. ¦ Dva kompleta, asi vnaprej postavljeni, 8 stolpcev s po eno karto; sestavljaš navzdol izmenično rdeče in črne, po eno karto. Kup za vlečenje greš skozi še enkrat.
+Le congrès ¦ Kongres ¦ Kongres
+Deux jeux, 8 colonnes d’une carte ; on descend sans s’occuper des couleurs, une carte à la fois. La pioche ne passe qu’une fois. ¦ Dva špila, 8 stupaca s po jednom kartom; slaže se silazno bez obzira na boje, karta po karta. Kup za vučenje prolazi samo jednom. ¦ Dva kompleta, 8 stolpcev s po eno karto; sestavljaš navzdol ne glede na barve, po eno karto. Kup za vlečenje greš skozi samo enkrat.
+Le parlement ¦ Parlament ¦ Parlament
+Le congrès (deux jeux, 8 colonnes d’une carte, on descend sans s’occuper des couleurs), avec les As posés d’avance. ¦ Kongres (dva špila, 8 stupaca s po jednom kartom, slaže se silazno bez obzira na boje), s asovima postavljenima unaprijed. ¦ Kongres (dva kompleta, 8 stolpcev s po eno karto, sestavljaš navzdol ne glede na barve), z asi vnaprej postavljenimi.
+Pair et impair ¦ Par i nepar ¦ Sodo in liho
+Deux jeux : un As et un 2 de chaque couleur de carte sont posés d’avance, et les fondations montent de deux en deux dans leur couleur (As, 3, 5… Roi, 2, 4… ou 2, 4… Dame, As, 3…). 9 places d’une carte, sur lesquelles on ne construit pas ; une place vide prend n’importe quelle carte. La pioche repasse une fois. ¦ Dva špila: po jedan As i jedna dvojka svakog znaka postavljeni su unaprijed, a temeljne hrpe rastu po dva u svom znaku (As, 3, 5… Kralj, 2, 4… ili 2, 4… Dama, As, 3…). 9 mjesta s po jednom kartom na koja se ne slaže; prazno mjesto prima bilo koju kartu. Kup za vučenje prolazi još jednom. ¦ Dva kompleta: po en As in ena dvojka vsake barve kart sta vnaprej postavljena, osnovni kupi pa naraščajo po dva v svoji barvi (As, 3, 5… Kralj, 2, 4… ali 2, 4… Dama, As, 3…). 9 mest s po eno karto, na katera ne sestavljaš; prazno mesto sprejme katero koli karto. Kup za vlečenje greš skozi še enkrat.
+Le cotillon royal ¦ Kraljevski kotiljon ¦ Kraljevi kotiljon
+Deux jeux : un As et un 2 de chaque couleur de carte sont posés d’avance, et les fondations montent de deux en deux dans leur couleur. Quatre tas de réserve de 3 cartes (seule celle du dessus se joue) et 16 places d’une carte, sur lesquelles on ne construit pas ; une place vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Dva špila: po jedan As i jedna dvojka svakog znaka postavljeni su unaprijed, a temeljne hrpe rastu po dva u svom znaku. Četiri hrpe pričuve od 3 karte (igra se samo gornja) i 16 mjesta s po jednom kartom na koja se ne slaže; prazno mjesto prima bilo koju kartu. Kup za vučenje prolazi samo jednom. ¦ Dva kompleta: po en As in ena dvojka vsake barve kart sta vnaprej postavljena, osnovni kupi pa naraščajo po dva v svoji barvi. Štirje kupi rezerve s 3 kartami (igra se samo zgornja) in 16 mest s po eno karto, na katera ne sestavljaš; prazno mesto sprejme katero koli karto. Kup za vlečenje greš skozi samo enkrat.
+Le treize porte-bonheur ¦ Sretnih trinaest ¦ Srečnih trinajst
+13 colonnes de 4 cartes visibles ; on descend sans s’occuper des couleurs, une carte à la fois ; une colonne vide reste vide. ¦ 13 stupaca od 4 vidljive karte; slaže se silazno bez obzira na boje, karta po karta; prazan stupac ostaje prazan. ¦ 13 stolpcev s 4 vidnimi kartami; sestavljaš navzdol ne glede na barve, po eno karto; prazen stolpec ostane prazen.
+La patience portugaise ¦ Portugalski pasijans ¦ Portugalski pasjans
+13 colonnes de 4 cartes visibles ; on descend sans s’occuper des couleurs, une carte à la fois ; seul un Roi va dans une colonne vide. ¦ 13 stupaca od 4 vidljive karte; slaže se silazno bez obzira na boje, karta po karta; u prazan stupac ide samo Kralj. ¦ 13 stolpcev s 4 vidnimi kartami; sestavljaš navzdol ne glede na barve, po eno karto; v prazen stolpec gre samo Kralj.
+Bonne mesure ¦ Dobra mjera ¦ Dobra mera
+Deux As sont posés d’avance ; 10 colonnes de 5 cartes visibles. On descend sans s’occuper des couleurs, une carte à la fois ; une colonne vide prend n’importe quelle carte. ¦ Dva asa postavljena su unaprijed; 10 stupaca od 5 vidljivih karata. Slaže se silazno bez obzira na boje, karta po karta; prazan stupac prima bilo koju kartu. ¦ Dva asa sta vnaprej postavljena; 10 stolpcev s 5 vidnimi kartami. Sestavljaš navzdol ne glede na barve, po eno karto; prazen stolpec sprejme katero koli karto.
+La cruelle ¦ Okrutnica ¦ Kruta
+Les As sont posés d’avance ; 12 tas de 4 cartes. On descend dans la même couleur de carte, une carte à la fois ; une place vide reste vide. Autant de fois que tu veux, on ramasse les tas dans l’ordre, sans mélanger, et on redistribue par 4. ¦ Asovi su postavljeni unaprijed; 12 hrpa od 4 karte. Slaže se silazno u istom znaku, karta po karta; prazno mjesto ostaje prazno. Koliko god puta želiš, hrpe se skupljaju po redu, bez miješanja, i ponovno dijele po 4. ¦ Asi so vnaprej postavljeni; 12 kupov s 4 kartami. Sestavljaš navzdol v isti barvi kart, po eno karto; prazno mesto ostane prazno. Kolikokrat želiš, kupe pobereš po vrsti, brez mešanja, in jih znova deliš po 4.
+La persévérance ¦ Ustrajnost ¦ Vztrajnost
+Comme la cruelle (les As posés d’avance, 12 tas de 4, même couleur de carte), mais on déplace des suites entières et on ne ramasse que deux fois. ¦ Kao Okrutnica (asovi postavljeni unaprijed, 12 hrpa od 4, isti znak), ali se premještaju cijeli nizovi i skuplja se samo dvaput. ¦ Kot Kruta (asi vnaprej postavljeni, 12 kupov po 4, ista barva kart), a premikaš cela zaporedja in pobereš samo dvakrat.
+L’éventail en vagues ¦ Lepeza u valovima ¦ Valovita pahljača
+13 tas de 4 cartes, les As restent mélangés aux autres ; on descend dans la même couleur de carte, une carte à la fois ; une place vide reste vide. Autant de fois que tu veux, on ramasse les tas dans l’ordre, sans mélanger, et on redistribue par 4. ¦ 13 hrpa od 4 karte, asovi ostaju pomiješani s ostalima; slaže se silazno u istom znaku, karta po karta; prazno mjesto ostaje prazno. Koliko god puta želiš, hrpe se skupljaju po redu, bez miješanja, i ponovno dijele po 4. ¦ 13 kupov s 4 kartami, asi ostanejo pomešani z drugimi; sestavljaš navzdol v isti barvi kart, po eno karto; prazno mesto ostane prazno. Kolikokrat želiš, kupe pobereš po vrsti, brez mešanja, in jih znova deliš po 4.
+L’éventail en boîte ¦ Lepeza u kutiji ¦ Pahljača v škatli
+Les As sont posés d’avance ; 16 éventails de 3 cartes. On descend en alternant rouge et noir, une carte à la fois ; seul un Roi va dans une place vide. ¦ Asovi su postavljeni unaprijed; 16 lepeza od 3 karte. Slaže se silazno izmjenjujući crveno i crno, karta po karta; na prazno mjesto ide samo Kralj. ¦ Asi so vnaprej postavljeni; 16 pahljač s 3 kartami. Sestavljaš navzdol izmenično rdeče in črne, po eno karto; na prazno mesto gre samo Kralj.
+L’éventail fascinant ¦ Očaravajuća lepeza ¦ Očarljiva pahljača
+La Belle Lucie (17 éventails de 3 cartes) où l’on descend en alternant rouge et noir, avec six redistributions. ¦ Lijepa Lucie (17 lepeza od 3 karte) u kojoj se slaže silazno izmjenjujući crveno i crno, sa šest ponovnih dijeljenja. ¦ Lepa Lucie (17 pahljač s 3 kartami), kjer sestavljaš navzdol izmenično rdeče in črne, s šestimi ponovnimi delitvami.
+La lampe de minuit ¦ Ponoćna svjetiljka ¦ Polnočna svetilka
+La Belle Lucie (17 éventails de 3 cartes) où l’on descend en alternant rouge et noir, avec deux redistributions. ¦ Lijepa Lucie (17 lepeza od 3 karte) u kojoj se slaže silazno izmjenjujući crveno i crno, s dva ponovna dijeljenja. ¦ Lepa Lucie (17 pahljač s 3 kartami), kjer sestavljaš navzdol izmenično rdeče in črne, z dvema ponovnima delitvama.
+Shamrocks ¦ Shamrocks ¦ Shamrocks
+17 éventails de 3 cartes ; on monte ou on descend d’un rang sans s’occuper des couleurs, une carte à la fois, et un éventail ne garde jamais plus de 3 cartes. Pas de redistribution. ¦ 17 lepeza od 3 karte; slaže se za jednu vrijednost gore ili dolje bez obzira na boje, karta po karta, a lepeza nikad nema više od 3 karte. Nema ponovnog dijeljenja. ¦ 17 pahljač s 3 kartami; sestavljaš za eno vrednost navzgor ali navzdol ne glede na barve, po eno karto, pahljača pa nikoli nima več kot 3 kart. Brez ponovne delitve.
+La maison dans les bois ¦ Kuća u šumi ¦ Hiša v gozdu
+Deux jeux, 35 éventails de 3 cartes ; on monte ou on descend d’un rang dans la même couleur de carte, une carte à la fois. Une place vide reste vide. ¦ Dva špila, 35 lepeza od 3 karte; slaže se za jednu vrijednost gore ili dolje u istom znaku, karta po karta. Prazno mjesto ostaje prazno. ¦ Dva kompleta, 35 pahljač s 3 kartami; sestavljaš za eno vrednost navzgor ali navzdol v isti barvi kart, po eno karto. Prazno mesto ostane prazno.
+La maison sur la colline ¦ Kuća na brežuljku ¦ Hiša na griču
+La maison dans les bois (deux jeux, 35 éventails), mais quatre fondations montent de l’As au Roi et quatre autres descendent du Roi à l’As. ¦ Kuća u šumi (dva špila, 35 lepeza), ali četiri temeljne hrpe rastu od Asa do Kralja, a četiri druge padaju od Kralja do Asa. ¦ Hiša v gozdu (dva kompleta, 35 pahljač), a štirje osnovni kupi naraščajo od Asa do Kralja, štirje drugi pa padajo od Kralja do Asa.
+Bisley ¦ Bisley ¦ Bisley
+Les As sont posés d’avance ; 13 colonnes (4 de 3 cartes, 9 de 4). Les fondations des As montent, celles des Rois descendent, dans la même couleur de carte. Sur le tableau, on monte ou on descend dans la même couleur de carte, une carte à la fois ; une colonne vide reste vide. ¦ Asovi su postavljeni unaprijed; 13 stupaca (4 od 3 karte, 9 od 4). Temeljne hrpe asova rastu, a kraljeva padaju, u istom znaku. Na stolu se slaže gore ili dolje u istom znaku, karta po karta; prazan stupac ostaje prazan. ¦ Asi so vnaprej postavljeni; 13 stolpcev (4 s 3 kartami, 9 s 4). Osnovni kupi asov naraščajo, kraljev pa padajo, v isti barvi kart. Na mizi sestavljaš navzgor ali navzdol v isti barvi kart, po eno karto; prazen stolpec ostane prazen.
+Le cadran du grand-père ¦ Djedov brojčanik ¦ Dedkova številčnica
+12 fondations comme les heures d’une horloge, qui commencent par 2♥, 3♠, 4♦, 5♣… jusqu’au Roi ♣ et montent dans la même couleur de carte (le Roi passe à l’As). 8 colonnes de 5 cartes ; on descend sans s’occuper des couleurs, une carte à la fois ; une colonne vide prend n’importe quelle carte. ¦ 12 temeljnih hrpa kao sati na satu, koje počinju s 2♥, 3♠, 4♦, 5♣… do Kralja ♣ i rastu u istom znaku (nakon Kralja dolazi As). 8 stupaca od 5 karata; slaže se silazno bez obzira na boje, karta po karta; prazan stupac prima bilo koju kartu. ¦ 12 osnovnih kupov kot ure na uri, ki se začnejo z 2♥, 3♠, 4♦, 5♣… do Kralja ♣ in naraščajo v isti barvi kart (za Kraljem pride As). 8 stolpcev s 5 kartami; sestavljaš navzdol ne glede na barve, po eno karto; prazen stolpec sprejme katero koli karto.
+Le mur de pierre ¦ Kameni zid ¦ Kamniti zid
+6 colonnes de 6 cartes, une cachée sur deux, et un bouquet de 16 cartes où l’on peut prendre n’importe laquelle. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. ¦ 6 stupaca od 6 karata, svaka druga skrivena, i buket od 16 karata iz kojeg se može uzeti bilo koja. Slaže se silazno izmjenjujući crveno i crno i premještaju se cijeli nizovi; prazan stupac prima bilo koju kartu. ¦ 6 stolpcev s 6 kartami, vsaka druga skrita, in šopek 16 kart, iz katerega lahko vzameš katero koli. Sestavljaš navzdol izmenično rdeče in črne in premikaš cela zaporedja; prazen stolpec sprejme katero koli karto.
+La fleur sauvage ¦ Divlji cvijet ¦ Divja cvetlica
+Le jardin fleuri (6 colonnes de 6 et un bouquet de 16 cartes), mais on déplace des suites entières. ¦ Cvjetni vrt (6 stupaca od 6 i buket od 16 karata), ali se premještaju cijeli nizovi. ¦ Cvetlični vrt (6 stolpcev po 6 in šopek 16 kart), a premikaš cela zaporedja.
+10 colonnes toutes visibles. La première carte posée sur une fondation donne la valeur de départ des quatre (le Roi passe à l’As). On monte ou on descend dans la même couleur de carte, une carte à la fois, et le Roi touche l’As. ¦ 10 stupaca, sve vidljivo. Prva karta stavljena na temeljnu hrpu određuje početnu vrijednost sve četiri (nakon Kralja dolazi As). Slaže se gore ili dolje u istom znaku, karta po karta, a Kralj i As se dodiruju. ¦ 10 stolpcev, vse vidno. Prva karta na osnovnem kupu določi začetno vrednost vseh štirih (za Kraljem pride As). Sestavljaš navzgor ali navzdol v isti barvi kart, po eno karto, Kralj in As pa se stikata.
+La place forte ¦ Utvrda ¦ Utrdba
+Rues et ruelles (8 colonnes, on descend sans s’occuper des couleurs), avec une case libre. ¦ Ulice i uličice (8 stupaca, slaže se silazno bez obzira na boje), s jednim slobodnim poljem. ¦ Ulice in uličice (8 stolpcev, sestavljaš navzdol ne glede na barve), z enim prostim poljem.
+Le fort ¦ Tvrđava ¦ Trdnjava
+Rues et ruelles (8 colonnes, on descend sans s’occuper des couleurs), avec deux cases libres. ¦ Ulice i uličice (8 stupaca, slaže se silazno bez obzira na boje), s dva slobodna polja. ¦ Ulice in uličice (8 stolpcev, sestavljaš navzdol ne glede na barve), z dvema prostima poljema.
+L’art du siège ¦ Umijeće opsade ¦ Umetnost obleganja
+Le château assiégé (les As posés d’avance, 8 colonnes de 6), avec une case libre. ¦ Opsjednuti dvorac (asovi postavljeni unaprijed, 8 stupaca od 6), s jednim slobodnim poljem. ¦ Oblegani grad (asi vnaprej postavljeni, 8 stolpcev po 6), z enim prostim poljem.
+La toile de Pénélope ¦ Penelopino platno ¦ Penelopino tkanje
+Le château assiégé (les As posés d’avance, 8 colonnes de 6), mais seul un Roi va dans une colonne vide. ¦ Opsjednuti dvorac (asovi postavljeni unaprijed, 8 stupaca od 6), ali u prazan stupac ide samo Kralj. ¦ Oblegani grad (asi vnaprej postavljeni, 8 stolpcev po 6), a v prazen stolpec gre samo Kralj.
+La citadelle ¦ Citadela ¦ Citadela
+Le château assiégé, mais pendant la distribution, toute carte qui peut monter sur une fondation y va tout de suite. ¦ Opsjednuti dvorac, ali tijekom dijeljenja svaka karta koja može na temeljnu hrpu odmah ide tamo. ¦ Oblegani grad, a med deljenjem gre vsaka karta, ki lahko gre na osnovni kup, takoj tja.
+Les rois exilés ¦ Prognani kraljevi ¦ Izgnani kralji
+La citadelle (les cartes qui peuvent monter y vont pendant la distribution), mais seul un Roi va dans une colonne vide. ¦ Citadela (karte koje mogu gore idu tamo tijekom dijeljenja), ali u prazan stupac ide samo Kralj. ¦ Citadela (karte, ki lahko gredo gor, gredo tja med deljenjem), a v prazen stolpec gre samo Kralj.
+Le bastion ¦ Bastion ¦ Bastijon
+10 colonnes de 5 cartes et 2 cases libres déjà occupées ; on monte ou on descend dans la même couleur de carte, une carte à la fois ; une colonne vide prend n’importe quelle carte. ¦ 10 stupaca od 5 karata i 2 već zauzeta slobodna polja; slaže se gore ili dolje u istom znaku, karta po karta; prazan stupac prima bilo koju kartu. ¦ 10 stolpcev s 5 kartami in 2 že zasedeni prosti polji; sestavljaš navzgor ali navzdol v isti barvi kart, po eno karto; prazen stolpec sprejme katero koli karto.
+La boîte à thé ¦ Kutija za čaj ¦ Škatla za čaj
+8 colonnes de 6 ou 7 cartes, tout est visible ; on descend sans s’occuper des couleurs et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. ¦ 8 stupaca od 6 ili 7 karata, sve je vidljivo; slaže se silazno bez obzira na boje i premještaju se cijeli nizovi; prazan stupac prima bilo koju kartu. ¦ 8 stolpcev s 6 ali 7 kartami, vse je vidno; sestavljaš navzdol ne glede na barve in premikaš cela zaporedja; prazen stolpec sprejme katero koli karto.
+La boîte à thé américaine ¦ Američka kutija za čaj ¦ Ameriška škatla za čaj
+8 colonnes de 6 ou 7 cartes, tout est visible ; on descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. ¦ 8 stupaca od 6 ili 7 karata, sve je vidljivo; slaže se silazno izmjenjujući crveno i crno i premještaju se cijeli nizovi; prazan stupac prima bilo koju kartu. ¦ 8 stolpcev s 6 ali 7 kartami, vse je vidno; sestavljaš navzdol izmenično rdeče in črne in premikaš cela zaporedja; prazen stolpec sprejme katero koli karto.
+La boîte à thé anglaise ¦ Engleska kutija za čaj ¦ Angleška škatla za čaj
+8 colonnes de 6 ou 7 cartes, tout est visible ; on descend en alternant rouge et noir, une carte à la fois ; seul un Roi va dans une colonne vide. ¦ 8 stupaca od 6 ili 7 karata, sve je vidljivo; slaže se silazno izmjenjujući crveno i crno, karta po karta; u prazan stupac ide samo Kralj. ¦ 8 stolpcev s 6 ali 7 kartami, vse je vidno; sestavljaš navzdol izmenično rdeče in črne, po eno karto; v prazen stolpec gre samo Kralj.
+Les trois sommets stricts ¦ Strogi tri vrha ¦ Strogi trije vrhovi
+Les trois sommets, mais le Roi et l’As ne se suivent pas : la partie est plus difficile. ¦ Tri vrha, ali Kralj i As ne slijede jedan drugoga: igra je teža. ¦ Trije vrhovi, a Kralj in As si ne sledita: igra je težja.
+Golf double ¦ Dvostruki Golf ¦ Dvojni Golf
+Golf avec deux jeux : 9 colonnes de 7 cartes. Envoie sur la défausse une carte juste au-dessus ou au-dessous ; rien ne va sur un Roi. ¦ Golf s dva špila: 9 stupaca od 7 karata. Pošalji na odbačene kartu točno iznad ili ispod; na Kralja ne ide ništa. ¦ Golf z dvema kompletoma: 9 stolpcev s 7 kartami. Na odložene pošlji karto tik nad ali pod; na Kralja ne gre nič.
+As en haut (5 colonnes) ¦ Asovi gore (5 stupaca) ¦ Asi gor (5 stolpcev)
+As en haut avec 5 colonnes : enlève une carte quand une autre colonne montre une carte plus forte de la même couleur de carte (l’As est le plus fort). Gagné s’il ne reste que les 4 As. ¦ Asovi gore s 5 stupaca: ukloni kartu kad drugi stupac pokazuje jaču kartu istog znaka (As je najjači). Pobjeda ako ostanu samo 4 asa. ¦ Asi gor s 5 stolpci: odstrani karto, ko drug stolpec kaže močnejšo karto iste barve (As je najmočnejši). Zmaga, če ostanejo samo 4 asi.
+La baronne ¦ Barunica ¦ Baronica
+5 tas : enlève un Roi seul, ou deux cartes du dessus qui font 13 (Valet 11, Dame 12). La pioche pose une carte sur chaque tas. ¦ 5 hrpa: ukloni samog Kralja ili dvije gornje karte koje daju 13 (Dečko 11, Dama 12). Kup za vučenje stavlja kartu na svaku hrpu. ¦ 5 kupov: odstrani samega Kralja ali dve zgornji karti, ki dasta 13 (Fant 11, Dama 12). Kup za vlečenje položi karto na vsak kup.
+Sir Tommy ¦ Sir Tommy ¦ Sir Tommy
+Chaque carte piochée va sur une fondation ou sur l’un des 4 tas d’attente. Les fondations commencent par un As et montent de 1 en 1, sans s’occuper des couleurs. ¦ Svaka izvučena karta ide na temeljnu hrpu ili na jednu od 4 hrpe za čekanje. Temeljne hrpe počinju Asom i rastu za jedan, bez obzira na boje. ¦ Vsaka izvlečena karta gre na osnovni kup ali na enega od 4 čakalnih kupov. Osnovni kupi se začnejo z Asom in naraščajo po ena, ne glede na barve.
+Le chat dans le coin ¦ Mačka u kutu ¦ Mačka v kotu
+Les As sont posés d’avance et montent de 1 en 1 dans leur teinte (rouge sur rouge, noir sur noir). Chaque carte piochée va sur une fondation ou sur l’un des 4 tas d’attente ; une fois, on ramasse les tas pour repiocher. ¦ Asovi su postavljeni unaprijed i rastu za jedan u svojoj boji (crveno na crveno, crno na crno). Svaka izvučena karta ide na temeljnu hrpu ili na jednu od 4 hrpe za čekanje; jednom se hrpe skupljaju za ponovno vučenje. ¦ Asi so vnaprej postavljeni in naraščajo po ena v svojem odtenku (rdeče na rdeče, črne na črne). Vsaka izvlečena karta gre na osnovni kup ali na enega od 4 čakalnih kupov; enkrat kupe pobereš za ponovno vlečenje.
+La stratégie ¦ Strategija ¦ Strategija
+Chaque carte piochée va sur l’un des 8 tas d’attente ; seuls les As montent tout de suite. Quand la pioche est vide, on monte les cartes du dessus des tas, de 1 en 1 dans la même couleur de carte. ¦ Svaka izvučena karta ide na jednu od 8 hrpa za čekanje; samo asovi odmah idu gore. Kad je kup za vučenje prazan, gornje karte hrpa slažu se gore za jedan u istom znaku. ¦ Vsaka izvlečena karta gre na enega od 8 čakalnih kupov; takoj gredo gor le asi. Ko je kup za vlečenje prazen, zgornje karte kupov polagaš gor po ena v isti barvi kart.
+Gizeh ¦ Giza ¦ Giza
+La pyramide sans pioche : les 24 autres cartes sont visibles en 3 rangées et se prennent toutes. Enlève les paires qui font 13 (Valet 11, Dame 12 ; un Roi s’en va seul). ¦ Piramida bez kupa za vučenje: ostale 24 karte vidljive su u 3 reda i sve se mogu uzeti. Ukloni parove koji daju 13 (Dečko 11, Dama 12; Kralj odlazi sam). ¦ Piramida brez kupa za vlečenje: drugih 24 kart je vidnih v 3 vrstah in vse se lahko vzamejo. Odstrani pare, ki dajo 13 (Fant 11, Dama 12; Kralj odide sam).
+Toutânkhamon ¦ Tutankamon ¦ Tutankamon
+La pyramide, mais la pioche se retourne trois cartes à la fois (seule la dernière se joue) et repasse autant que tu veux. ¦ Piramida, ali kup za vučenje okreće se po tri karte (igra se samo posljednja) i prolazi koliko god puta želiš. ¦ Piramida, a kup za vlečenje se obrača po tri karte (igra se samo zadnja) in greš skozi, kolikokrat želiš.
+La lune bleue ¦ Plavi mjesec ¦ Modra luna
+Montana, mais les As vont au début des rangées : il faut ranger chaque rangée de l’As au Roi dans une même couleur. Un trou prend la carte de même couleur juste au-dessus de sa voisine de gauche. Deux fois, on peut ramasser ce qui n’est pas rangé et redistribuer. ¦ Montana, ali asovi idu na početak redova: svaki red treba složiti od Asa do Kralja u istom znaku. Rupa prima kartu istog znaka odmah iznad svoje lijeve susjede. Dvaput možeš skupiti ono što nije složeno i ponovno podijeliti. ¦ Montana, a asi gredo na začetek vrst: vsako vrsto je treba urediti od Asa do Kralja v isti barvi. Luknja sprejme karto iste barve tik nad levo sosedo. Dvakrat lahko pobereš, kar ni urejeno, in znova razdeliš.
+La lune rouge ¦ Crveni mjesec ¦ Rdeča luna
+La lune bleue, mais les As sont posés d’avance au début des rangées et les trous sont au bout des rangées dès le départ. ¦ Plavi mjesec, ali asovi su unaprijed postavljeni na početak redova, a rupe su na kraju redova od početka. ¦ Modra luna, a asi so vnaprej postavljeni na začetek vrst, luknje pa so od začetka na koncu vrst.
+Le voisin ¦ Susjed ¦ Sosed
+Une grille de 5 × 5 : enlève deux cartes qui se touchent (même en diagonale) et font 13 (Valet 11, Dame 12) ; un Roi s’en va seul. Puis tasse la grille. ¦ Mreža 5 × 5: ukloni dvije karte koje se dodiruju (i dijagonalno) i daju 13 (Dečko 11, Dama 12); Kralj odlazi sam. Zatim zbij mrežu. ¦ Mreža 5 × 5: odstrani dve karti, ki se dotikata (tudi diagonalno) in dasta 13 (Fant 11, Dama 12); Kralj odide sam. Nato strni mrežo.
+Isabelle ¦ Isabelle ¦ Isabelle
+13 colonnes de 4 cartes (seule la dernière est visible) : enlève deux cartes de même valeur prises en bas des colonnes. Un jeu de pure chance, pour se détendre. ¦ 13 stupaca od 4 karte (vidljiva je samo posljednja): ukloni dvije karte iste vrijednosti s dna stupaca. Igra čiste sreće, za opuštanje. ¦ 13 stolpcev s 4 kartami (vidna je samo zadnja): odstrani dve karti iste vrednosti z dna stolpcev. Igra čiste sreče, za sprostitev.
+Quatorze en colonnes ¦ Četrnaest u stupcima ¦ Štirinajst v stolpcih
+12 colonnes avec toutes les cartes visibles : enlève deux cartes prises en bas des colonnes qui font 14 (Valet 11, Dame 12, Roi 13). ¦ 12 stupaca sa svim kartama vidljivima: ukloni dvije karte s dna stupaca koje daju 14 (Dečko 11, Dama 12, Kralj 13). ¦ 12 stolpcev z vsemi kartami vidnimi: odstrani dve karti z dna stolpcev, ki dasta 14 (Fant 11, Dama 12, Kralj 13).
+Ramassé et redistribué, sans mélanger. ¦ Skupljeno i ponovno podijeljeno, bez miješanja. ¦ Pobrano in znova razdeljeno, brez mešanja.
+Les tas d’attente sont ramassés dans la pioche. ¦ Hrpe za čekanje skupljaju se u kup za vučenje. ¦ Čakalni kupi se poberejo v kup za vlečenje.
+Ouvre le Jeu, choisis « 🂠 Patiences (jeux de cartes) » dans « Jeu », puis le jeu parmi 233 patiences rangées par famille (Klondike, FreeCell, Araignée, Yukon, Les quarante voleurs, Châteaux et jardins, jeux de paires). Glisse une carte (ou une suite) sur une autre pile, ou clique-la puis clique où la poser ; double-clic : sur une fondation ; clic sur la pioche : piocher. Dans les jeux de paires (Pyramide, Onze, Treize…), clique les cartes qui vont ensemble. ¦ Otvori Igru, odaberi „🂠 Pasijansi (kartaške igre)” u „Igra”, zatim igru među 233 pasijansa razvrstana po obiteljima (Klondike, FreeCell, Pauk, Yukon, Četrdeset razbojnika, Dvorci i vrtovi, igre parova). Povuci kartu (ili niz) na drugu hrpu ili klikni na nju pa klikni gdje je staviti; dvostruki klik: na temeljnu hrpu; klik na kup za vučenje: vuci. U igrama parova (Piramida, Jedanaest, Trinaest…) klikni karte koje idu zajedno. ¦ Odpri Igro, izberi »🂠 Pasjanse (igre s kartami)« v »Igra«, nato igro med 233 pasjansami, razvrščenimi po družinah (Klondike, FreeCell, Pajek, Yukon, Štirideset razbojnikov, Gradovi in vrtovi, igre parov). Povleci karto (ali zaporedje) na drug kup ali jo klikni in nato klikni, kam jo položiti; dvoklik: na osnovni kup; klik na kup za vlečenje: vleci. V igrah parov (Piramida, Enajst, Trinajst…) klikni karte, ki gredo skupaj.
+Quelles autres patiences sont arrivées ensuite ? ¦ Koji su drugi pasijansi stigli poslije? ¦ Katere druge pasjanse so prišle pozneje?
+Cent deux patiences classiques de plus, chacune avec ses règles dans « 📖 Les règles » de la partie. Famille Klondike et Canfield : Agnès Bernauer, Thumb and Pouch, Pas seul, Les impasses, Huit fois huit, Spike, Alternance, La harpe, La grande harpe, Acme, Le crapaud américain, Canfield bigarré, La duchesse, La porte. Avec des cases libres : Le pingouin, Baker’s Game (Roi seul), Seahaven détendu, Repair, Ocean Towers, Sept par quatre, Sept par cinq, FreeCell défi, FreeCell super défi. Araignées et gitanes : Le scarabée, Queue de scorpion, Scorpion double, Motif de divorce, La tarentule, Araignée à découvert, La harpe de Milligan, La harpe de Lexington, Brunswick, Carlton, Miss Milligan, Millie, L’île d’Elbe, Le mont Olympe. Yukon : La patience australienne, Canberra, Raw Prawn, Rushdike, La discipline chinoise, Solitaire russe double. Les quarante voleurs et leurs cousins : Ali Baba, Cassim, Rang et file, Les As affairés, La cour, Le carré de Napoléon, L’exil de Napoléon, Deuces, La lune décroissante, Les cinquante fameux, Quarante-neuf, Sans limite, Les petits quarante, Le zèbre, Le congrès, Le parlement, Pair et impair, Le cotillon royal. Châteaux, éventails et jardins : Le treize porte-bonheur, La patience portugaise, Bonne mesure, La cruelle, La persévérance, L’éventail en vagues, L’éventail en boîte, L’éventail fascinant, La lampe de minuit, Shamrocks, La maison dans les bois, La maison sur la colline, Bisley, Le cadran du grand-père, Le mur de pierre, La fleur sauvage, L’échiquier, La place forte, Le fort, L’art du siège, La toile de Pénélope, La citadelle, Les rois exilés, Le bastion, La boîte à thé (et ses versions américaine et anglaise). Paires, suites et calculs : Les trois sommets stricts, Golf double, As en haut (5 colonnes), La baronne, Sir Tommy, Le chat dans le coin, La stratégie, Gizeh, Toutânkhamon, La lune bleue, La lune rouge, Le voisin, Isabelle et Quatorze en colonnes. ¦ Još sto dva klasična pasijansa, svaki sa svojim pravilima u „📖 Pravila” partije. Obitelj Klondike i Canfield: Agnès Bernauer, Thumb and Pouch, Nije sam, Slijepe ulice, Osam puta osam, Spike, Izmjena, Harfa, Velika harfa, Acme, Američka krastača, Šareni Canfield, Vojvotkinja, Vrata. Sa slobodnim poljima: Pingvin, Baker’s Game (samo Kralj), Opušteni Seahaven, Repair, Ocean Towers, Sedam puta četiri, Sedam puta pet, FreeCell izazov, FreeCell superizazov. Pauci i igre Gypsy: Skarabej, Škorpionov rep, Dvostruki Scorpion, Razlog za razvod, Tarantula, Otkriveni pauk, Milliganova harfa, Lexingtonska harfa, Brunswick, Carlton, Miss Milligan, Millie, Otok Elba, Olimp. Yukon: Australski pasijans, Canberra, Raw Prawn, Rushdike, Kineska disciplina, Dvostruki ruski pasijans. Četrdeset razbojnika i srodne igre: Ali Baba, Cassim, Red i vrsta, Zaposleni asovi, Dvor, Napoleonov kvadrat, Napoleonovo izgnanstvo, Deuces, Mjesec na zalasku, Slavnih pedeset, Četrdeset i devet, Bez ograničenja, Mala četrdesetica, Zebra, Kongres, Parlament, Par i nepar, Kraljevski kotiljon. Dvorci, lepeze i vrtovi: Sretnih trinaest, Portugalski pasijans, Dobra mjera, Okrutnica, Ustrajnost, Lepeza u valovima, Lepeza u kutiji, Očaravajuća lepeza, Ponoćna svjetiljka, Shamrocks, Kuća u šumi, Kuća na brežuljku, Bisley, Djedov brojčanik, Kameni zid, Divlji cvijet, Šahovska ploča, Utvrda, Tvrđava, Umijeće opsade, Penelopino platno, Citadela, Prognani kraljevi, Bastion, Kutija za čaj (i njezine američka i engleska inačica). Parovi, nizovi i računanje: Strogi tri vrha, Dvostruki Golf, Asovi gore (5 stupaca), Barunica, Sir Tommy, Mačka u kutu, Strategija, Giza, Tutankamon, Plavi mjesec, Crveni mjesec, Susjed, Isabelle i Četrnaest u stupcima. ¦ Še sto dve klasični pasjansi, vsaka s svojimi pravili v »📖 Pravila« igre. Družina Klondike in Canfield: Agnès Bernauer, Thumb and Pouch, Ne sam, Slepe ulice, Osemkrat osem, Spike, Izmenjava, Harfa, Velika harfa, Acme, Ameriška krastača, Pisani Canfield, Vojvodinja, Vrata. S prostimi polji: Pingvin, Baker’s Game (samo Kralj), Sproščeni Seahaven, Repair, Ocean Towers, Sedemkrat štiri, Sedemkrat pet, FreeCell izziv, FreeCell superizziv. Pajki in igre Gypsy: Skarabej, Škorpijonov rep, Dvojni Scorpion, Razlog za ločitev, Tarantela, Odkriti pajek, Milliganova harfa, Lexingtonska harfa, Brunswick, Carlton, Miss Milligan, Millie, Otok Elba, Olimp. Yukon: Avstralski pasjans, Canberra, Raw Prawn, Rushdike, Kitajska disciplina, Dvojni ruski pasjans. Štirideset razbojnikov in sorodne igre: Ali Baba, Cassim, Vrsta in red, Zaposleni asi, Dvor, Napoleonov kvadrat, Napoleonovo izgnanstvo, Deuces, Pojemajoča luna, Slavnih petdeset, Devetinštirideset, Brez omejitev, Mala štiridesetica, Zebra, Kongres, Parlament, Sodo in liho, Kraljevi kotiljon. Gradovi, pahljače in vrtovi: Srečnih trinajst, Portugalski pasjans, Dobra mera, Kruta, Vztrajnost, Valovita pahljača, Pahljača v škatli, Očarljiva pahljača, Polnočna svetilka, Shamrocks, Hiša v gozdu, Hiša na griču, Bisley, Dedkova številčnica, Kamniti zid, Divja cvetlica, Šahovnica, Utrdba, Trdnjava, Umetnost obleganja, Penelopino tkanje, Citadela, Izgnani kralji, Bastijon, Škatla za čaj (in njeni ameriška in angleška različica). Pari, zaporedja in računanje: Strogi trije vrhovi, Dvojni Golf, Asi gor (5 stolpcev), Baronica, Sir Tommy, Mačka v kotu, Strategija, Giza, Tutankamon, Modra luna, Rdeča luna, Sosed, Isabelle in Štirinajst v stolpcih.
+(suite) ¦ (nastavak) ¦ (nadaljevanje)
+.pptx : textes, images, formes, tableaux ¦ .pptx: tekstovi, slike, oblici, tablice ¦ .pptx: besedila, slike, oblike, tabele
+Ce texte est vide : rien à mettre en diapositives. ¦ Ovaj tekst je prazan: nema ničega za slajdove. ¦ To besedilo je prazno: ni ničesar za diapozitive.
+Cette image n’est pas dans les médias. ¦ Ova slika nije u medijima. ¦ Ta slika ni med mediji.
+Envoyer vers… : la présentation en vidéo, dans le Montage vidéo ou sur ton site ¦ Pošalji u…: prezentacija kao video, u Montažu videa ili na tvoj web ¦ Pošlji v…: predstavitev kot video, v Montažo videa ali na tvoje spletno mesto
+Fichier PowerPoint téléchargé. ¦ PowerPoint datoteka preuzeta. ¦ Datoteka PowerPoint prenesena.
+La présentation devient une vidéo ({time}), rangée dans les Médias, puis tu choisis où elle va : le Montage vidéo ou ton site. Laisse la fenêtre ouverte pendant l’enregistrement. ¦ Prezentacija postaje video ({time}), spremljen u Medije, a zatim biraš kamo ide: u Montažu videa ili na tvoj web. Ostavi prozor otvoren tijekom snimanja. ¦ Predstavitev postane video ({time}), shranjen med Medije, nato izbereš, kam gre: v Montažo videa ali na tvoje spletno mesto. Med snemanjem pusti okno odprto.
+Le diaporama devient une vidéo ({time}), rangée dans les Médias, puis tu choisis où elle va : le Montage vidéo ou ton site. Laisse la fenêtre ouverte pendant l’enregistrement. ¦ Dijaprojekcija postaje video ({time}), spremljen u Medije, a zatim biraš kamo ide: u Montažu videa ili na tvoj web. Ostavi prozor otvoren tijekom snimanja. ¦ Diaprojekcija postane video ({time}), shranjen med Medije, nato izbereš, kam gre: v Montažo videa ali na tvoje spletno mesto. Med snemanjem pusti okno odprto.
+Le diaporama en vidéo, rangé dans les médias, puis dans le Montage vidéo ou sur ton site ¦ Dijaprojekcija kao video, spremljena u medije, zatim u Montažu videa ili na tvoj web ¦ Diaprojekcija kot video, shranjena med medije, nato v Montažo videa ali na tvoje spletno mesto
+PowerPoint : assemblage du fichier… ¦ PowerPoint: sastavljanje datoteke… ¦ PowerPoint: sestavljanje datoteke…
+PowerPoint : diapositive {n} / {total} ¦ PowerPoint: slajd {n} / {total} ¦ PowerPoint: diapozitiv {n} / {total}
+PowerPoint impossible : {error} ¦ PowerPoint nije moguć: {error} ¦ PowerPoint ni mogoč: {error}
+📊 PowerPoint ¦ 📊 PowerPoint ¦ 📊 PowerPoint
+📊 PowerPoint (.pptx) ¦ 📊 PowerPoint (.pptx) ¦ 📊 PowerPoint (.pptx)
+📤 Envoyer la présentation ¦ 📤 Pošalji prezentaciju ¦ 📤 Pošlji predstavitev
+📤 Envoyer le diaporama ¦ 📤 Pošalji dijaprojekciju ¦ 📤 Pošlji diaprojekcijo
+📤 Envoyer vers… (la vidéo) ¦ 📤 Pošalji u… (video) ¦ 📤 Pošlji v… (video)
+📤 Envoyer vers… (le Montage vidéo, ton site) ¦ 📤 Pošalji u… (Montaža videa, tvoj web) ¦ 📤 Pošlji v… (Montaža videa, tvoje spletno mesto)
+⤓ Exporter l’image (PNG, JPG, WebP, TIFF, imprimer)… ¦ ⤓ Izvezi sliku (PNG, JPG, WebP, TIFF, ispis)… ¦ ⤓ Izvozi sliko (PNG, JPG, WebP, TIFF, tiskanje)…
+Exporter : l’image retouchée (PNG, JPG, WebP, TIFF, imprimer) ou l’avant / après ¦ Izvoz: retuširana slika (PNG, JPG, WebP, TIFF, ispis) ili prije / poslije ¦ Izvoz: retuširana slika (PNG, JPG, WebP, TIFF, tiskanje) ali pred / po
+🖼 L’image retouchée (PNG, JPG, WebP, TIFF, imprimer)… ¦ 🖼 Retuširana slika (PNG, JPG, WebP, TIFF, ispis)… ¦ 🖼 Retuširana slika (PNG, JPG, WebP, TIFF, tiskanje)…
+🌐 WebP ¦ 🌐 WebP ¦ 🌐 WebP
+léger, pour le web ¦ lagan, za web ¦ lahek, za splet
+🗂 TIFF ¦ 🗂 TIFF ¦ 🗂 TIFF
+sans perte, pour archiver ¦ bez gubitaka, za arhiviranje ¦ brez izgub, za arhiviranje
+Ce navigateur ne sait pas faire du WebP : choisis PNG ou JPG. ¦ Ovaj preglednik ne zna izraditi WebP: odaberi PNG ili JPG. ¦ Ta brskalnik ne zna izdelati WebP: izberi PNG ali JPG.
+Cette action de retouche n’existe plus. ¦ Ova radnja retuširanja više ne postoji. ¦ To dejanje retuširanja ne obstaja več.
+Choisis une photo à retoucher. ¦ Odaberi fotografiju za retuširanje. ¦ Izberi fotografijo za retuširanje.
+Envoyer l’image affichée ou le compte rendu vers un autre outil ¦ Pošalji prikazanu sliku ili izvještaj u drugi alat ¦ Pošlji prikazano sliko ali poročilo v drugo orodje
+Ouvrir la photo A ou B dans la Retouche des photos ¦ Otvori fotografiju A ili B u Retuširanju fotografija ¦ Odpri fotografijo A ali B v Retuširanju fotografij
+Exporter l’image affichée, ou imprimer les deux photos avec la ressemblance et les notes ¦ Izvezi prikazanu sliku ili ispiši obje fotografije sa sličnošću i bilješkama ¦ Izvozi prikazano sliko ali natisni obe fotografiji s podobnostjo in opombami
+Exporter l’image (ce qui est affiché)… ¦ Izvezi sliku (ono što je prikazano)… ¦ Izvozi sliko (kar je prikazano)…
+Imprimer (les deux photos, la ressemblance, les notes)… ¦ Ispiši (obje fotografije, sličnost, bilješke)… ¦ Natisni (obe fotografiji, podobnost, opombe)…
+L’image affichée ¦ Prikazana slika ¦ Prikazana slika
+Le compte rendu (photos, ressemblance, notes) ¦ Izvještaj (fotografije, sličnost, bilješke) ¦ Poročilo (fotografije, podobnost, opombe)
+La Retouche des photos n’est pas chargée. ¦ Retuširanje fotografija nije učitano. ¦ Retuširanje fotografij ni naloženo.
+Photo {side} — {name} ¦ Fotografija {side} — {name} ¦ Fotografija {side} — {name}
+Retoucher quelle photo ? ¦ Koju fotografiju retuširati? ¦ Katero fotografijo retuširam?
+Utiliser ¦ Upotrijebi ¦ Uporabi
+✒️ Quel dessin ? ¦ ✒️ Koji crtež? ¦ ✒️ Katera risba?
+Aucun dessin enregistré dans le Dessin vectoriel. ¦ U Vektorskom crtanju nema spremljenih crteža. ¦ V Vektorskem risanju ni shranjenih risb.
+Ce dessin n’a pas pu être lu : ouvre le Dessin vectoriel une fois, puis recommence. ¦ Ovaj crtež nije moguće pročitati: otvori jednom Vektorsko crtanje pa pokušaj ponovno. ¦ Te risbe ni bilo mogoče prebrati: enkrat odpri Vektorsko risanje in poskusi znova.
+📝 Quel document ? ¦ 📝 Koji dokument? ¦ 📝 Kateri dokument?
+Aucun document dans le Traitement de texte. ¦ U Obradi teksta nema dokumenata. ¦ V Urejanju besedil ni dokumentov.
+Des images qui défilent (‹ ›) ; sans script, elles glissent au doigt ¦ Slike koje se izmjenjuju (‹ ›); bez skripte klize prstom ¦ Drseče slike (‹ ›); brez skripte jih poganjaš s prstom
+Les images du diaporama ¦ Slike dijaprojekcije ¦ Slike diaprojekcije
+Une vidéo de tes médias (ou d’un fichier : 📁 Importer…), avec ses boutons lecture et plein écran ¦ Video iz tvojih medija (ili iz datoteke: 📁 Uvezi…), s gumbima za reprodukciju i cijeli zaslon ¦ Video iz tvojih medijev (ali iz datoteke: 📁 Uvozi…), z gumboma za predvajanje in celozaslonski način
+La vidéo du site ¦ Video na webu ¦ Video na spletnem mestu
+Télécharger la vidéo ¦ Preuzmi video ¦ Prenesi video
+Un son de tes médias (témoignage, chanson…), et ce qu’on y entend écrit dessous si tu veux ¦ Zvuk iz tvojih medija (svjedočanstvo, pjesma…) i, ako želiš, ispod napisano ono što se čuje ¦ Zvok iz tvojih medijev (pričevanje, pesem…) in, če želiš, pod njim zapisano, kar se sliši
+Le son du site ¦ Zvuk na webu ¦ Zvok na spletnem mestu
+🎧 Ce qu’on entend (facultatif) ¦ 🎧 Što se čuje (neobavezno) ¦ 🎧 Kaj se sliši (neobvezno)
+Écris ou colle la transcription : elle sera sous le son, pour ceux qui ne peuvent pas l’écouter. Laisse vide si tu n’en veux pas. ¦ Napiši ili zalijepi prijepis: bit će ispod zvuka, za one koji ga ne mogu slušati. Ostavi prazno ako ga ne želiš. ¦ Napiši ali prilepi prepis: bo pod zvokom, za tiste, ki ga ne morejo poslušati. Pusti prazno, če ga ne želiš.
+Ajouter le son ¦ Dodaj zvuk ¦ Dodaj zvok
+Télécharger le son ¦ Preuzmi zvuk ¦ Prenesi zvok
+Ce qu’on entend ¦ Što se čuje ¦ Kaj se sliši
+Un de tes dessins vectoriels, ou un SVG collé (sans script ni lien vers l’extérieur) ¦ Jedan od tvojih vektorskih crteža ili zalijepljeni SVG (bez skripte i vanjskih poveznica) ¦ Ena od tvojih vektorskih risb ali prilepljen SVG (brez skripte in zunanjih povezav)
+Un de mes dessins ¦ Jedan od mojih crteža ¦ Ena od mojih risb
+Dessin vectoriel → mes dessins enregistrés ¦ Vektorsko crtanje → moji spremljeni crteži ¦ Vektorsko risanje → moje shranjene risbe
+Coller un SVG ¦ Zalijepi SVG ¦ Prilepi SVG
+Le code <svg>…</svg> d’un dessin ¦ Kôd crteža <svg>…</svg> ¦ Koda risbe <svg>…</svg>
+📋 Coller un SVG ¦ 📋 Zalijepi SVG ¦ 📋 Prilepi SVG
+Colle ici le code du dessin, de <svg> à </svg>. Les scripts et les liens vers l’extérieur sont retirés. ¦ Zalijepi ovdje kôd crteža, od <svg> do </svg>. Skripte i vanjske poveznice uklanjaju se. ¦ Sem prilepi kodo risbe, od <svg> do </svg>. Skripte in zunanje povezave se odstranijo.
+Ajouter le dessin ¦ Dodaj crtež ¦ Dodaj risbo
+Un texte du Traitement de texte (une lettre, un récit), mis au propre pour la page ¦ Tekst iz Obrade teksta (pismo, priča), uređen za stranicu ¦ Besedilo iz Urejanja besedil (pismo, zgodba), urejeno za stran
+Ce document est vide. ¦ Ovaj dokument je prazan. ¦ Ta dokument je prazen.
+Vidéo, son, dessin et texte ¦ Video, zvuk, crtež i tekst ¦ Video, zvok, risba in besedilo
+🎬 Changer la vidéo… ¦ 🎬 Promijeni video… ¦ 🎬 Zamenjaj video…
+🎧 Changer le son… ¦ 🎧 Promijeni zvuk… ¦ 🎧 Zamenjaj zvok…
+Le fichier part avec le site (dossier medias/) à l’export et à la publication. ¦ Datoteka ide s webom (mapa medias/) pri izvozu i objavi. ¦ Datoteka gre s spletnim mestom (mapa medias/) ob izvozu in objavi.
+Un autre son ¦ Drugi zvuk ¦ Drug zvok
+Une autre vidéo ¦ Drugi video ¦ Drug video
+{what} (dossier medias/) ¦ {what} (mapa medias/) ¦ {what} (mapa medias/)
+vidéo ou son ¦ video ili zvuk ¦ video ali zvok
+vidéos ou sons ¦ videozapisi ili zvukovi ¦ videi ali zvoki
+{what} : trop lourd pour un site (90 Mo au plus par fichier, 300 Mo en tout) ¦ {what}: preteško za web (najviše 90 MB po datoteci, ukupno 300 MB) ¦ {what}: pretežko za spletno mesto (največ 90 MB na datoteko, skupaj 300 MB)
+vidéo ou son pas mis ¦ video ili zvuk nije stavljen ¦ video ali zvok ni dodan
+vidéos ou sons pas mis ¦ videozapisi ili zvukovi nisu stavljeni ¦ videi ali zvoki niso dodani
+Mon site web n’est pas chargé : recharge la page. ¦ Moja web-stranica nije učitana: ponovno učitaj stranicu. ¦ Moja spletna stran ni naložena: znova naloži stran.
+Mon site web ne sait pas recevoir ça. ¦ Moja web-stranica ne zna primiti ovo. ¦ Moja spletna stran tega ne zna sprejeti.
+Ce texte est vide. ¦ Ovaj tekst je prazan. ¦ To besedilo je prazno.
+Mon site ¦ Moj web ¦ Moje spletno mesto
+ouvert ¦ otvoreno ¦ odprto
+la dernière fois ¦ posljednji put ¦ zadnjič
+ouvert, pas encore enregistré ¦ otvoreno, još nije spremljeno ¦ odprto, še ni shranjeno
+{what} : sur quel site ? ¦ {what}: na koji web? ¦ {what}: na katero spletno mesto?
+Un nouveau site ¦ Novi web ¦ Novo spletno mesto
+Sur quelle page ? ¦ Na koju stranicu? ¦ Na katero stran?
+Une nouvelle page… ¦ Nova stranica… ¦ Nova stran…
+📄 Nouvelle page ¦ 📄 Nova stranica ¦ 📄 Nova stran
+Le nom de la page (il apparaît dans le menu) : ¦ Naziv stranice (pojavljuje se u izborniku): ¦ Ime strani (prikaže se v meniju):
+La vidéo ¦ Video ¦ Video
+{what} est sur la page « {page} » de « {site} » ¦ {what} je na stranici „{page}” weba „{site}” ¦ {what} je na strani »{page}« spletnega mesta »{site}«
+vidéos WebM ¦ WebM videozapisi ¦ Videi WebM
+Les iPhone d’avant 2024 ne la lisent pas : préfère le MP4 (H.264), que tout le monde lit. ¦ iPhonei prije 2024. ne reproduciraju ga: radije odaberi MP4 (H.264), koji svi čitaju. ¦ iPhoni pred letom 2024 ga ne predvajajo: raje izberi MP4 (H.264), ki ga predvaja vsak.
+vidéos .mov (QuickTime) ¦ .mov videozapisi (QuickTime) ¦ Videi .mov (QuickTime)
+Souvent illisible hors d’Apple : refais-la en MP4 (🎬 Montage vidéo → Exporter). ¦ Izvan Applea često nečitljivo: ponovno ga napravi u MP4 (🎬 Montaža videa → Izvezi). ¦ Zunaj Appla pogosto ni predvajano: znova ga naredi v MP4 (🎬 Montaža videa → Izvozi).
+vidéos Ogg (.ogv) ¦ Ogg videozapisi (.ogv) ¦ Videi Ogg (.ogv)
+Jamais sur Safari ni sur iPhone : préfère le MP4. ¦ Nikad u Safariju ni na iPhoneu: radije odaberi MP4. ¦ Nikoli v Safariju ali na iPhonu: raje izberi MP4.
+sons Ogg (Vorbis, Opus) ¦ Ogg zvukovi (Vorbis, Opus) ¦ Zvoki Ogg (Vorbis, Opus)
+Safari ne les lit que depuis 2025 : préfère le MP3 (🎧 Son → Exporter). ¦ Safari ih čita tek od 2025.: radije odaberi MP3 (🎧 Zvuk → Izvezi). ¦ Safari jih predvaja šele od leta 2025: raje izberi MP3 (🎧 Zvok → Izvozi).
+sons FLAC ¦ FLAC zvukovi ¦ Zvoki FLAC
+Marche partout, mais c’est lourd pour un site : le MP3 se charge bien plus vite. ¦ Radi svugdje, ali je teško za web: MP3 se učitava mnogo brže. ¦ Deluje povsod, a je težko za spletno mesto: MP3 se naloži veliko hitreje.
+scroll-snap (le diaporama s’arrête sur chaque image) ¦ scroll-snap (dijaprojekcija staje na svakoj slici) ¦ scroll-snap (diaprojekcija se ustavi na vsaki sliki)
+Marche partout depuis 2019 ; ailleurs, les images défilent sans s’arrêter. ¦ Radi svugdje od 2019.; inače se slike pomiču bez zaustavljanja. ¦ Deluje povsod od leta 2019; drugje slike drsijo brez ustavljanja.
+Maison par époques ¦ Kuća po razdobljima ¦ Hiša po obdobjih
+Ma carte animée ¦ Moja animirana karta ¦ Moj animirani zemljevid
+La maison au fil du temps ¦ Kuća kroz vrijeme ¦ Hiša skozi čas
+Le dessin vectoriel n’est pas chargé. ¦ Vektorsko crtanje nije učitano. ¦ Vektorsko risanje ni naloženo.
+Lecture de la carte… ¦ Čitanje karte… ¦ Branje zemljevida…
+Carte introuvable ¦ Karta nije pronađena ¦ Zemljevida ni mogoče najti
+La maison n’est pas chargée. ¦ Kuća nije učitana. ¦ Hiša ni naložena.
+Lecture de la maison… ¦ Čitanje kuće… ¦ Branje hiše…
+Maison introuvable ¦ Kuća nije pronađena ¦ Hiše ni mogoče najti
+Le plan de cette maison est vide. ¦ Tlocrt ove kuće je prazan. ¦ Tloris te hiše je prazen.
+Choisir une carte ¦ Odaberi kartu ¦ Izberi zemljevid
+Chercher une carte… ¦ Traži kartu… ¦ Išči zemljevid…
+{n} objets ¦ Objekata: {n} ¦ Predmetov: {n}
+Les objets qui ont des années (onglet Propriétés de la carte) apparaissent à leur date. ¦ Objekti koji imaju godine (kartica Svojstva karte) pojavljuju se na svoj datum. ¦ Predmeti z letnicami (zavihek Lastnosti zemljevida) se prikažejo ob svojem datumu.
+Aucune carte enregistrée : fais-en une dans Outils de modification → 🗺️ Carte. ¦ Nema spremljenih karata: napravi jednu u Alati za uređivanje → 🗺️ Karta. ¦ Ni shranjenih zemljevidov: naredi ga v Orodja za urejanje → 🗺️ Zemljevid.
+Choisir une maison ¦ Odaberi kuću ¦ Izberi hišo
+Chercher une maison… ¦ Traži kuću… ¦ Išči hišo…
+Chaque époque de la maison (🕰) devient un plan, l’un après l’autre, en fondu. ¦ Svako razdoblje kuće (🕰) postaje kadar, jedan za drugim, s pretapanjem. ¦ Vsako obdobje hiše (🕰) postane kader, eden za drugim, s pretapljanjem.
+Aucune maison enregistrée : dessine-en une dans Outils de modification → 🏠 Maison. ¦ Nema spremljenih kuća: nacrtaj jednu u Alati za uređivanje → 🏠 Kuća. ¦ Ni shranjenih hiš: nariši jo v Orodja za urejanje → 🏠 Hiša.
+Apparition des objets ¦ Pojavljivanje objekata ¦ Pojavljanje predmetov
+D’un coup ¦ Odjednom ¦ Naenkrat
+Avance doucement ¦ Polako napreduje ¦ Počasi napreduje
+Fondu d’une époque à l’autre (0 à 0,9) ¦ Pretapanje iz razdoblja u razdoblje (0 do 0,9) ¦ Pretapljanje iz obdobja v obdobje (0 do 0,9)
+L’année et le nom de l’époque en légende ¦ Godina i naziv razdoblja kao legenda ¦ Leto in ime obdobja kot legenda
+(une copie de la carte) ¦ (kopija karte) ¦ (kopija zemljevida)
+En faire la musique ¦ Neka bude glazba ¦ Naj bo glasba
+Ce son passe en musique de fond, pour tout le film ¦ Ovaj zvuk postaje pozadinska glazba za cijeli film ¦ Ta zvok postane glasba v ozadju za ves film
+Voix retirée. ¦ Glas uklonjen. ¦ Glas odstranjen.
+Le son est maintenant la musique du film. ¦ Zvuk je sada glazba filma. ¦ Zvok je zdaj glasba filma.
+Le son est la voix du film (onglet Film). « 🎵 En faire la musique » pour le mettre en fond. ¦ Zvuk je glas filma (kartica Film). „🎵 Neka bude glazba” stavlja ga u pozadinu. ¦ Zvok je glas filma (zavihek Film). »🎵 Naj bo glasba« ga postavi v ozadje.
+Animer dans le Studio ¦ Animiraj u Studiju ¦ Animiraj v Studiu
+Le curseur du temps joue tout seul : les objets apparaissent à leur date ¦ Klizač vremena ide sam: objekti se pojavljuju na svoj datum ¦ Drsnik časa teče sam: predmeti se prikažejo ob svojem datumu
+Le Studio d’animation n’est pas chargé. ¦ Studio za animaciju nije učitan. ¦ Animacijski studio ni naložen.
+Aucune carte enregistrée : commence par « ＋ Nouvelle carte ». ¦ Nema spremljenih karata: počni s „＋ Nova karta”. ¦ Ni shranjenih zemljevidov: začni z »＋ Nov zemljevid«.
+Quelle carte animer ? ¦ Koju kartu animirati? ¦ Kateri zemljevid animiram?
+Les objets qui ont des années (onglet Propriétés) apparaissent à leur date, de la première année à la dernière. ¦ Objekti koji imaju godine (kartica Svojstva) pojavljuju se na svoj datum, od prve do posljednje godine. ¦ Predmeti z letnicami (zavihek Lastnosti) se prikažejo ob svojem datumu, od prvega do zadnjega leta.
+Un film où le curseur du temps avance tout seul, de la première année à la dernière ¦ Film u kojem klizač vremena ide sam, od prve do posljednje godine ¦ Film, v katerem drsnik časa teče sam, od prvega do zadnjega leta
+Cette carte est trop lourde pour être copiée dans un film : enregistre-la, puis Outils de modification → 🗺️ Carte → « 🎞 Animer dans le Studio ». ¦ Ova karta je preteška za kopiranje u film: spremi je, zatim Alati za uređivanje → 🗺️ Karta → „🎞 Animiraj u Studiju”. ¦ Ta zemljevid je pretežek za kopiranje v film: shrani ga, nato Orodja za urejanje → 🗺️ Zemljevid → »🎞 Animiraj v Studiu«.
+Le plan ou la vue 3D dans un autre outil : montage, présentation, mise en page, dessin… ¦ Tlocrt ili 3D prikaz u drugom alatu: montaža, prezentacija, raspored, crtež… ¦ Tloris ali 3D-pogled v drugem orodju: montaža, predstavitev, razporeditev, risba…
+🎞 Animer les époques dans le Studio ¦ 🎞 Animiraj razdoblja u Studiju ¦ 🎞 Animiraj obdobja v Studiu
+Animer les époques dans le Studio ¦ Animiraj razdoblja u Studiju ¦ Animiraj obdobja v Studiu
+Le plan (image) ¦ Tlocrt (slika) ¦ Tloris (slika)
+La vue 3D (image) ¦ 3D prikaz (slika) ¦ 3D-pogled (slika)
+Le plan en dessin (vectoriel, mise en page…) ¦ Tlocrt kao crtež (vektorski, raspored…) ¦ Tloris kot risba (vektorska, razporeditev…)

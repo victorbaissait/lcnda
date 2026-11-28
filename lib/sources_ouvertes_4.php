@@ -340,7 +340,7 @@ function so4_place_import(PDO $pdo, array $data): array
         foreach ($names as $r) {
             $nm = so4_text(is_array($r) ? ($r['name'] ?? '') : $r, 120); $y = is_array($r) ? safe_int($r['year'] ?? 0) : 0;
             if ($nm === '' || isset($haveNames[so4_fold($nm)]) || so4_fold($nm) === so4_fold((string) $name)) { continue; }
-            $insN->execute([$placeId, $nm, $y >= 1700 && $y <= 2100 ? $y : 0, $site, $batch]); $ids['names'][] = (int) $pdo->lastInsertId(); $haveNames[so4_fold($nm)] = true;
+            $insN->execute([$placeId, $nm, $y >= 1700 && $y <= 2100 ? $y : 0, is_array($r) && so4_text($r['origin'] ?? '', 300) !== '' ? so4_text($r['origin'], 300) : $site, $batch]); /* origin : « Wikidata · 1350 – 1945 · https://… » (🔎 Un nom → le lieu, noms-lieux-monde.js) */ $ids['names'][] = (int) $pdo->lastInsertId(); $haveNames[so4_fold($nm)] = true;
         }
         if (!$added && !$ids['names']) { $pdo->rollBack(); return ['batch' => '', 'added' => 0, 'names' => 0, 'kept' => $kept, 'summary' => 'Rien de nouveau : tout était déjà là.']; }
         $summary = ($site === 'cassini' ? 'Cassini (EHESS)' : 'Saisie') . ' — ' . $name . ' : ' . $added . ' année' . ($added > 1 ? 's' : '') . ' de population' . ($ids['names'] ? ', ' . count($ids['names']) . ' ancien' . (count($ids['names']) > 1 ? 's' : '') . ' nom' . (count($ids['names']) > 1 ? 's' : '') : '');

@@ -106,6 +106,13 @@
         const place = String(opt.place || '').trim() || commune || (places[0]?.label || '');
         // les noms : ceux de « 🧭 Repérer », sans les lieux ni les mots du maire
         const mentions = found.filter(f => f.type === 'person' && !places.some(p => f.s < p.e && p.s < f.e)).filter(f => f.label.split(/\s+/).length >= 2 || /^[A-ZÀ-Ý]{2,}/.test(f.label.split(/\s+/).pop()));
+        // baptême : « a été baptisé Jean, né d'hier, fils de Pierre MAZAUD » — le prénom seul de l'enfant n'est pas un nom repéré ;
+        // sans lui, le père passait pour l'enfant. On l'ajoute à sa place dans le texte (il devient l'enfant, Pierre son père).
+        if (kind === 'bapteme' || kind === 'naissance') {
+            const bm = /\bbaptis[ée]e?s?\s+(?:sous (?:le|les) (?:nom|prénom)s? de\s+)?([A-ZÀ-Ý][a-zà-ÿ]+(?:[- ][A-ZÀ-Ý][a-zà-ÿ]+)*)/u.exec(src);
+            if (bm) { const s0 = bm.index + bm[0].length - bm[1].length, e0 = s0 + bm[1].length;
+                if (!mentions.some(m => m.s < e0 && s0 < m.e) && !places.some(p => p.s < e0 && s0 < p.e)) { mentions.push({type: 'person', label: bm[1], s: s0, e: e0}); mentions.sort((x, y) => x.s - y.s); } }
+        }
         // naissance : « auquel il a donné le prénom de Jean » (le prénom seul)
         const people = [], byName = new Map(); let seq = 0;
         const add = p => { p.key = `p${++seq}`; people.push(p); if (!byName.has(norm(p.name))) byName.set(norm(p.name), p); return p; };
@@ -171,6 +178,13 @@
             const po = p.relations.find(r => r.type === 'parent_of'); if (!po) return; const c = keyOf(po.of); if (!c) return;
             const pm = p.sex === 'f' ? 'mere' : 'pere';
             p.role = c.role === 'epoux' ? `${pm}_epoux` : c.role === 'epouse' ? `${pm}_epouse` : c.role === 'defunt' ? `${pm}_defunt` : c.role === 'sujet' ? pm : p.role;
+        });
+        // 🔴 3 (audit) : « baptisé Jean, fils de Pierre MAZAUD » : l'enfant sans nom de famille prend celui de son père (puis la mère),
+        // pour être rapproché de « Jean MAZAUD » s'il est déjà dans la base
+        if (kind === 'bapteme' || kind === 'naissance') people.filter(c => c.role === 'sujet' && !c.surname).forEach(c => {
+            const ps = people.filter(p => p.relations.some(r => r.type === 'parent_of' && r.of === c.key)), f = ps.find(p => p.sex !== 'f' && p.surname) || ps.find(p => p.surname);
+            if (!f || f.sex === 'f' && ps.some(p => p.sex !== 'f')) return;
+            c.surname = f.surname; c.name = `${c.given} ${f.surname}`.trim();
         });
         people.forEach(p => { p.birthYear = p.age != null && year ? year - p.age : null; });
         // le lien du couple, des parents

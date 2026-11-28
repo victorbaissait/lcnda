@@ -1,0 +1,128 @@
+fr ¦ vi ¦ id
+# 🗂 État d’un recueil (heritage-recueil-etat.js, lib/recueil_etat.php)
+{n} lignes, {r} relues ¦ {n} dòng, {r} đã đọc lại ¦ {n} baris, {r} sudah diperiksa
+Photo à refaire ¦ Cần chụp lại ảnh ¦ Foto perlu diulang
+🟢 finies ou 🔵 relues ¦ 🟢 đã xong hoặc 🔵 đã đọc lại ¦ 🟢 selesai atau 🔵 sudah diperiksa
+🟡 en cours ¦ 🟡 đang làm ¦ 🟡 sedang berjalan
+⚪ pas encore transcrites ¦ ⚪ chưa chép ¦ ⚪ belum ditranskripsi
+⛔ absentes ¦ ⛔ vắng mặt ¦ ⛔ tidak ada
+{a} finies, {b} relues, {c} en cours, {d} à faire, {e} absentes ¦ {a} đã xong, {b} đã đọc lại, {c} đang làm, {d} cần làm, {e} vắng mặt ¦ {a} selesai, {b} sudah diperiksa, {c} sedang berjalan, {d} perlu dikerjakan, {e} tidak ada
+Fiabilité : ¦ Độ tin cậy: ¦ Keandalan:
+Pas en ligne ¦ Không trực tuyến ¦ Tidak daring
+Blanche ¦ Trắng ¦ Kosong
+p. {x} ¦ tr. {x} ¦ hlm. {x}
+Ajouter aux demandes ¦ Thêm vào yêu cầu ¦ Tambahkan ke permintaan
+Non communicables ¦ Chưa được tiếp cận ¦ Belum boleh diakses
+Ouvrir la première ¦ Mở trang đầu tiên ¦ Buka yang pertama
+Relire la première ¦ Đọc lại trang đầu tiên ¦ Periksa yang pertama
+À transcrire ¦ Cần chép ¦ Perlu ditranskripsi
+Commencer p. {n} ¦ Bắt đầu tr. {n} ¦ Mulai hlm. {n}
+Rien ne reste à faire sur ce recueil. ¦ Tuyển tập này không còn gì phải làm. ¦ Tidak ada lagi yang perlu dikerjakan di kumpulan ini.
+Demande ajoutée ({t}) : Recherche › Suivi des registres › Demandes. ¦ Đã thêm yêu cầu ({t}): Nghiên cứu › Theo dõi các sổ › Yêu cầu. ¦ Permintaan ditambahkan ({t}): Riset › Pemantauan register › Permintaan.
+Après « {a} » vient « {b} » : il manque peut-être {x}. ¦ Sau “{a}” là “{b}”: có thể thiếu {x}. ¦ Setelah “{a}” datang “{b}”: mungkin {x} hilang.
+Poser ces pages comme absentes… ¦ Đánh dấu các trang này là vắng mặt… ¦ Catat halaman ini sebagai tidak ada…
+C’est normal ¦ Bình thường thôi ¦ Itu wajar
+« {a} » deux fois (pages {x} et {y}) : une photo en double, ou « bis » ? ¦ “{a}” hai lần (trang {x} và {y}): ảnh trùng, hay “bis”? ¦ “{a}” dua kali (halaman {x} dan {y}): foto ganda, atau “bis”?
+Renommer en « {a} bis » ¦ Đổi tên thành “{a} bis” ¦ Ganti nama menjadi “{a} bis”
+Laisser ¦ Để nguyên ¦ Biarkan
+Le recueil devrait avoir {e} pages, il en a {n} ici (absentes comprises) : {x} ¦ Tuyển tập lẽ ra có {e} trang, ở đây có {n} (tính cả trang vắng mặt): {x} ¦ Kumpulan ini seharusnya punya {e} halaman, di sini ada {n} (termasuk yang tidak ada): {x}
+il en manque {d}. ¦ thiếu {d}. ¦ kurang {d}.
+{d} de trop (une photo en double ?). ¦ thừa {d} (ảnh trùng?). ¦ {d} kelebihan (foto ganda?).
+Poser {n} pages absentes ¦ Thêm {n} trang vắng mặt ¦ Catat {n} halaman yang tidak ada
+Marquer {n} pages absentes ¦ Đánh dấu {n} trang vắng mặt ¦ Tandai {n} halaman tidak ada
+Marquer « {p} » absente ¦ Đánh dấu “{p}” vắng mặt ¦ Tandai “{p}” tidak ada
+🗂 ÉTAT DU RECUEIL ¦ 🗂 TÌNH TRẠNG TUYỂN TẬP ¦ 🗂 STATUS KUMPULAN
+Poser les pages ¦ Thêm các trang ¦ Catat halaman
+Marquer absentes ¦ Đánh dấu vắng mặt ¦ Tandai tidak ada
+Pourquoi ces pages ne sont pas là ? ¦ Vì sao các trang này không có? ¦ Kenapa halaman ini tidak ada?
+ex. arrachées, mentionné en marge du f° 16 ¦ vd. bị xé, có ghi ở lề f° 16 ¦ mis. disobek, disebut di pinggir f° 16
+Ajouter aussi aux Lacunes d’archives (conseillé) ¦ Thêm cả vào Chỗ thiếu trong lưu trữ (nên làm) ¦ Tambahkan juga ke Celah arsip (disarankan)
+Les pages ¦ Các trang ¦ Halaman
+Lisibilité ¦ Độ dễ đọc ¦ Keterbacaan
+(choisi) ¦ (đã chọn) ¦ (dipilih)
+État du recueil ¦ Tình trạng tuyển tập ¦ Status kumpulan
+Numérotation pas dite ¦ Chưa nói cách đánh số ¦ Penomoran belum disebut
+{n} pages attendues ¦ {n} trang dự kiến ¦ {n} halaman diharapkan
+Numérotation, pages attendues ¦ Cách đánh số, số trang dự kiến ¦ Penomoran, halaman yang diharapkan
+Cases ¦ Ô ¦ Kotak
+Choisir des pages ¦ Chọn trang ¦ Pilih halaman
+Exporter l’état (tableur) ¦ Xuất tình trạng (bảng tính) ¦ Ekspor status (spreadsheet)
+Clique sur les pages (Maj + clic : de… à…) ¦ Bấm vào các trang (Shift + bấm: từ… đến…) ¦ Klik halaman (Shift + klik: dari… sampai…)
+Changer l’état… ¦ Đổi tình trạng… ¦ Ubah status…
+Marquer absentes… ¦ Đánh dấu vắng mặt… ¦ Tandai tidak ada…
+Tout choisir ¦ Chọn tất cả ¦ Pilih semua
+Pas encore de page ¦ Chưa có trang nào ¦ Belum ada halaman
+Ajoute des photos : chaque photo devient une page. ¦ Thêm ảnh: mỗi ảnh thành một trang. ¦ Tambahkan foto: setiap foto menjadi satu halaman.
+Ce qui reste, dans l’ordre conseillé ¦ Những gì còn lại, theo thứ tự nên làm ¦ Yang tersisa, dalam urutan yang disarankan
+Les demandes vont dans Recherche › Suivi des registres › Demandes, les lacunes dans les Lacunes d’archives : les listes qui existent. ¦ Yêu cầu vào Nghiên cứu › Theo dõi các sổ › Yêu cầu, chỗ thiếu vào Chỗ thiếu trong lưu trữ: những danh sách đã có sẵn. ¦ Permintaan masuk ke Riset › Pemantauan register › Permintaan, celah masuk ke Celah arsip: daftar yang sudah ada.
+Revenir à l’état calculé ¦ Trở về tình trạng tự tính ¦ Kembali ke status hasil hitungan
+État du texte ¦ Tình trạng văn bản ¦ Status teks
+Photo bonne (plus à refaire) ¦ Ảnh tốt (không cần chụp lại nữa) ¦ Foto bagus (tidak perlu diulang lagi)
+Lisibilité : {x} ¦ Độ dễ đọc: {x} ¦ Keterbacaan: {x}
+Plus absentes ¦ Không còn vắng mặt ¦ Tidak lagi tidak ada
+Renommée en « {a} » ¦ Đã đổi tên thành “{a}” ¦ Nama diganti menjadi “{a}”
+État choisi ¦ Tình trạng đã chọn ¦ Status yang dipilih
+Lignes relues ¦ Dòng đã đọc lại ¦ Baris yang sudah diperiksa
+Mots peu sûrs ¦ Từ chưa chắc ¦ Kata yang kurang pasti
+Numérotation enregistrée ¦ Đã lưu cách đánh số ¦ Penomoran disimpan
+Comment ce recueil est numéroté ? ¦ Tuyển tập này được đánh số thế nào? ¦ Bagaimana kumpulan ini dinomori?
+Pas dit ¦ Chưa nói ¦ Belum disebut
+Pages attendues (pour repérer ce qui manque) ¦ Số trang dự kiến (để tìm chỗ thiếu) ¦ Halaman yang diharapkan (untuk menemukan yang hilang)
+ex. 40 ¦ vd. 40 ¦ mis. 40
+dans les Lacunes d’archives ¦ trong Chỗ thiếu trong lưu trữ ¦ di Celah arsip
+Plus absente ¦ Không còn vắng mặt ¦ Tidak lagi tidak ada
+Revenir à l’état calculé ({s}) ¦ Trở về tình trạng tự tính ({s}) ¦ Kembali ke status hasil hitungan ({s})
+Calculé par l’Atelier (acte n° {n}) ¦ Do Xưởng tính (văn bản số {n}) ¦ Dihitung oleh Bengkel (akta no. {n})
+Calculé : texte écrit = en cours ¦ Tự tính: đã có chữ = đang làm ¦ Dihitung: teks ditulis = sedang berjalan
+Fiabilité de la lecture ¦ Độ tin cậy của bản đọc ¦ Keandalan bacaan
+rien d’écrit ¦ chưa viết gì ¦ belum ada tulisan
+{r} lignes relues sur {n} ¦ {r} trên {n} dòng đã đọc lại ¦ {r} dari {n} baris sudah diperiksa
+Cette page est absente… ¦ Trang này vắng mặt… ¦ Halaman ini tidak ada…
+État calculé ¦ Tình trạng tự tính ¦ Status hasil hitungan
+Lisibilité notée ¦ Đã ghi độ dễ đọc ¦ Keterbacaan dicatat
+Photo bonne ¦ Ảnh tốt ¦ Foto bagus
+Manquante ¦ Bị thiếu ¦ Hilang
+on ne sait pas encore ¦ chưa rõ ¦ belum diketahui
+Perdue ou détruite ¦ Bị mất hoặc bị hủy ¦ Hilang atau musnah
+n’existe plus ¦ không còn tồn tại ¦ sudah tidak ada
+Pas encore photographiée ¦ Chưa chụp ảnh ¦ Belum difoto
+par moi ¦ do tôi ¦ oleh saya
+Pas numérisée ¦ Chưa số hóa ¦ Belum didigitalkan
+par le service d’archives ¦ do cơ quan lưu trữ ¦ oleh lembaga arsip
+Numérisée, pas en ligne ¦ Đã số hóa, chưa trực tuyến ¦ Sudah didigitalkan, belum daring
+Non communicable ¦ Chưa được tiếp cận ¦ Belum boleh diakses
+jusqu’à une date ¦ đến một ngày nhất định ¦ sampai tanggal tertentu
+En restauration ¦ Đang tu bổ ¦ Sedang direstorasi
+pas consultable ¦ không xem được ¦ tidak bisa dilihat
+dans un autre registre, un autre fonds ¦ trong một sổ khác, một phông khác ¦ di register lain, di fonds lain
+pas absente : vide ¦ không vắng mặt: trống ¦ bukan tidak ada: kosong
+Paginé ¦ Đánh số trang ¦ Bernomor halaman
+p. 1, 2, 3… ¦ tr. 1, 2, 3… ¦ hlm. 1, 2, 3…
+Folioté ¦ Đánh số tờ ¦ Bernomor lembar
+f° 1 r°, f° 1 v°… — conseillé pour les registres anciens ¦ f° 1 r°, f° 1 v°… — nên dùng cho sổ cũ ¦ f° 1 r°, f° 1 v°… — disarankan untuk register lama
+Sans ordre (liasse, carton) ¦ Không theo thứ tự (bó, hộp) ¦ Tanpa urutan (bundel, kardus)
+des pièces, rangées par toi ¦ các mảnh, do bạn sắp xếp ¦ lembaran, diurutkan olehmu
+Numérotation des archives ¦ Số của cơ quan lưu trữ ¦ Penomoran arsip
+pièce 1, 2… donnée par le service ¦ mảnh 1, 2… do cơ quan đặt ¦ lembaran 1, 2… diberikan oleh lembaga
+Bonne ¦ Tốt ¦ Baik
+Illisible en partie ¦ Khó đọc một phần ¦ Sebagian tak terbaca
+Illisible ¦ Không đọc được ¦ Tak terbaca
+Sûre ¦ Chắc chắn ¦ Pasti
+=mot peu sûr ¦ từ chưa chắc ¦ kata yang kurang pasti
+=blanche ¦ trắng ¦ kosong
+=page à relire ¦ trang cần đọc lại ¦ halaman perlu dibaca ulang
+=page avec des mots peu sûrs ¦ trang có từ chưa chắc ¦ halaman dengan kata yang kurang pasti
+=page absente posée ¦ trang vắng mặt đã thêm ¦ halaman tidak ada dicatat
+=page marquée absente ¦ trang đã đánh dấu vắng mặt ¦ halaman ditandai tidak ada
+=page changée ¦ trang đã thay đổi ¦ halaman diubah
+=page choisie ¦ trang đã chọn ¦ halaman dipilih
+État des pages ¦ Tình trạng các trang ¦ Status halaman
+Une case par page, une couleur par état ¦ Mỗi trang một ô, mỗi tình trạng một màu ¦ Satu kotak per halaman, satu warna per status
+Reste à faire ¦ Còn phải làm ¦ Masih perlu dikerjakan
+Autre demande ¦ Yêu cầu khác ¦ Permintaan lain
+À consulter en salle ¦ Cần xem tại phòng đọc ¦ Perlu dilihat di ruang baca
+À photographier / numériser ¦ Cần chụp ảnh / số hóa ¦ Perlu difoto / didigitalkan
+pages photographiées sur les {n} attendues ¦ trang đã chụp trên {n} trang dự kiến ¦ halaman difoto dari {n} yang diharapkan
+pages photographiées ¦ trang đã chụp ¦ halaman difoto
+pièces photographiées sur les {n} attendues ¦ mảnh đã chụp trên {n} mảnh dự kiến ¦ lembaran difoto dari {n} yang diharapkan
+pièces photographiées ¦ mảnh đã chụp ¦ lembaran difoto

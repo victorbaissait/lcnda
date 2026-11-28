@@ -1,0 +1,33 @@
+fr ¦ lt ¦ lv ¦ et
+# 🔗 Documents liés (heritage-liens.js, lib/doc_links.php)
+même régiment ¦ tas pats pulkas ¦ tas pats pulks ¦ sama polk
+même famille ¦ ta pati šeima ¦ tā pati ģimene ¦ sama perekond
+même affaire ¦ tas pats reikalas ¦ tā pati lieta ¦ sama asi
+même lieu ¦ ta pati vieta ¦ tā pati vieta ¦ sama koht
+même notaire ¦ tas pats notaras ¦ tas pats notārs ¦ sama notar
+autre raison ¦ kita priežastis ¦ cits iemesls ¦ muu põhjus
+En commun : ¦ Bendra: ¦ Kopīgs: ¦ Ühine:
+Rien de commun repéré dans les deux textes. ¦ Abiejuose tekstuose nieko bendro nerasta. ¦ Abos tekstos nekas kopīgs netika atrasts. ¦ Kahes tekstis ei leitud midagi ühist.
+Pas encore de texte à comparer : transcris les deux documents. ¦ Dar nėra teksto palyginti: perrašyk abu dokumentus. ¦ Vēl nav teksta, ko salīdzināt: pārraksti abus dokumentus. ¦ Võrdlemiseks pole veel teksti: transkribeeri mõlemad dokumendid.
+Ce que ce document t’apprend ({n}) ¦ Ką tau sako šis dokumentas ({n}) ¦ Ko tev stāsta šis dokuments ({n}) ¦ Mida see dokument sulle ütleb ({n})
+Documents liés ¦ Susieti dokumentai ¦ Saistītie dokumenti ¦ Seotud dokumendid
+Lier un document… ¦ Susieti dokumentą… ¦ Saistīt dokumentu… ¦ Seo dokument…
+Un autre document qui va avec celui-ci (même régiment, même famille, même affaire…) : « ＋ Lier un document… ». Ce n’est pas une page de ce document (📑), ni un recueil (📚). ¦ Kitas dokumentas, susijęs su šiuo (tas pats pulkas, ta pati šeima, tas pats reikalas…): „＋ Susieti dokumentą…“. Tai nėra šio dokumento puslapis (📑) ir ne rinkinys (📚). ¦ Cits dokuments, kas pieder pie šī (tas pats pulks, tā pati ģimene, tā pati lieta…): “＋ Saistīt dokumentu…”. Tā nav šī dokumenta lappuse (📑) un nav krājums (📚). ¦ Teine dokument, mis käib selle juurde (sama polk, sama perekond, sama asi…): „＋ Seo dokument…“. See pole selle dokumendi lehekülg (📑) ega kogumik (📚).
+Pourquoi ces documents vont ensemble ? ¦ Kodėl šie dokumentai susiję? ¦ Kāpēc šie dokumenti ir saistīti? ¦ Miks need dokumendid kokku käivad?
+Autre raison ¦ Kita priežastis ¦ Cits iemesls ¦ Muu põhjus
+La raison, en quelques mots (ex. même procès, même voyage) ¦ Priežastis keliais žodžiais (pvz. tas pats teismas, ta pati kelionė) ¦ Iemesls dažos vārdos (piem. tā pati tiesa, tas pats ceļojums) ¦ Põhjus mõne sõnaga (nt sama kohtuasi, sama reis)
+Ex. même procès ¦ Pvz. tas pats teismas ¦ Piem. tā pati tiesa ¦ Nt sama kohtuasi
+Lier ¦ Susieti ¦ Saistīt ¦ Seo
+DOCUMENTS LIÉS ¦ SUSIETI DOKUMENTAI ¦ SAISTĪTIE DOKUMENTI ¦ SEOTUD DOKUMENDID
+Lier ce document ¦ Susieti šį dokumentą ¦ Saistīt šo dokumentu ¦ Seo see dokument
+Un document ne se lie pas à lui-même. ¦ Dokumento negalima susieti su juo pačiu. ¦ Dokumentu nevar saistīt pašu ar sevi. ¦ Dokumenti ei saa siduda iseendaga.
+Ouvrir ce document ¦ Atidaryti šį dokumentą ¦ Atvērt šo dokumentu ¦ Ava see dokument
+Changer la raison… ¦ Keisti priežastį… ¦ Mainīt iemeslu… ¦ Muuda põhjust…
+Choisis les deux documents à lier. ¦ Pasirink du susietinus dokumentus. ¦ Izvēlies abus saistāmos dokumentus. ¦ Vali kaks seotavat dokumenti.
+Ce lien n’existe plus. ¦ Šios sąsajos nebėra. ¦ Šīs saites vairs nav. ¦ Seda seost pole enam.
+pas dans le dossier ¦ nėra byloje ¦ nav lietā ¦ pole toimikus
+Ajouter au dossier ¦ Įtraukti į bylą ¦ Pievienot lietai ¦ Lisa toimikusse
+Ce que les documents liés apprennent ({n}) ¦ Ką sako susieti dokumentai ({n}) ¦ Ko stāsta saistītie dokumenti ({n}) ¦ Mida seotud dokumendid ütlevad ({n})
+Ajouté au dossier de l’enquête. ¦ Įtraukta į tyrimo bylą. ¦ Pievienots izmeklēšanas lietai. ¦ Lisatud uurimise toimikusse.
+D’après « {doc} », l. {n} ¦ Pagal „{doc}“, {n} eil. ¦ Pēc “{doc}”, {n}. r. ¦ „{doc}“ järgi, r. {n}
+Piste ajoutée à l’enquête. ¦ Pėdsakas įtrauktas į tyrimą. ¦ Pavediens pievienots izmeklēšanai. ¦ Jälg lisatud uurimisse.

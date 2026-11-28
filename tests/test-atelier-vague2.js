@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /* 📜 Atelier de transcription, vague 2 « Guider » (docs/design/atelier-transcription-idees.html, décisions du 22/11/2026) :
- *  - la frise « Lire → Corriger → Repérer → Ajouter » : l'étape en cours, ce qui reste à faire, « ✓ Ajouter à la généalogie… » toujours en bas ;
+ *  - la frise « Lire → Corriger → Repérer → Ajouter » : l'étape en cours, ce qui reste à faire, « ✓ Ajouter à la généalogie… » dans l'étape Ajouter (maquette atelier-etapes.html : une étape à la fois) ;
  *  - téléphone (390 px) : trois onglets Image / Texte / Personnes, rien ne dépasse ;
  *  - 👁 relecture ligne à ligne en plein écran (réglage, conseillé : oui) : le morceau d'image au-dessus de la ligne, Entrée / ⇧ Entrée,
  *    corriger sur place, ↶ Annuler ;
@@ -76,7 +76,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TX
         const flow = () => p.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg'), vis = el => !!el && el.getBoundingClientRect().width > 0 && !el.closest('[hidden]');
             return {cur: d.dataset.txFlow, view: d.dataset.txFlowView, steps: [...d.querySelectorAll('[data-tx-step]')].map(b => ({k: b.dataset.txStep, name: b.querySelector('b').textContent, rest: b.querySelector('[data-tx-steprest]').textContent, done: b.classList.contains('is-done'), cur: b.classList.contains('is-cur'), sel: b.getAttribute('aria-selected'), mark: b.querySelector('i').textContent})),
                 panes: [...d.querySelectorAll('[data-tx-pane]')].filter(vis).map(x => x.dataset.txPane), shown: [...d.querySelectorAll('[data-tx-pane].is-shown')].filter(vis).map(x => x.dataset.txPane), add: d.querySelector('[data-tx-addinfo]').textContent,
-                addBtn: (() => { const b = d.querySelector('[data-tx-addbar] [data-tx-cmd="found"]'), r = b.getBoundingClientRect(); return {vis: vis(b), text: b.textContent.trim(), bottom: Math.round(r.bottom), h: innerHeight}; })()}; });
+                addBtn: (() => { const all = [...d.querySelectorAll('[data-tx-cmd="found"]')], b = d.querySelector('[data-tx-pane="add"] [data-tx-cmd="found"]'), r = b.getBoundingClientRect(); return {vis: vis(b), n: all.filter(vis).length, text: b.textContent.trim(), bottom: Math.round(r.bottom), h: innerHeight}; })()}; });
         const expectFixes = () => p.evaluate(async () => { const d = document.querySelector('dialog.h-tx-dlg'), text = d.querySelector('[data-tx-body]').value;
             const lex = await window.LCNDA_EXT.htrFix.lexicon(d.querySelector('[data-tx-lang]').value, d.querySelector('[data-tx="place"]').value);
             return window.LCNDA_HTRFIX.propose(text, lex, {level: window.LCNDA_EXT.htrFix.fixLevel()}).length + (text.match(/\[\?\]|\[illisible\]/g) || []).length; });
@@ -86,17 +86,22 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TX
             assert.deepEqual(f.steps.map(s => s.name), ['Lire', 'Corriger', 'Repérer', 'Ajouter']);
             assert.ok(f.steps[0].done && f.steps[0].mark === '✓', JSON.stringify(f.steps[0])); assert.match(f.steps[0].rest, /^7 lignes$/);
             assert.ok(f.steps[1].cur && !f.steps[1].done && f.steps[1].sel === 'true', JSON.stringify(f.steps[1]));
-            assert.deepEqual(f.shown, ['fix'], 'les boutons de l’étape montrée en avant'); assert.deepEqual(f.panes, ['read', 'fix', 'find', 'add'], 'sur grand écran, tous les outils restent à portée');
+            assert.deepEqual(f.shown, ['fix'], 'les boutons de l’étape montrée en avant'); assert.deepEqual(f.panes, ['fix'], 'atelier-etapes (point 14) : seulement les boutons de l’étape choisie, sur ordinateur aussi');
         });
-        await t('frise : ce qui reste à chaque étape (« N mots à revoir » = corrections proposées + [?]), Repérer à faire', async () => {
-            const n = await expectFixes(), f = await flow();
-            assert.ok(n >= 1, String(n)); assert.equal(f.steps[1].rest, `${n} mot${n > 1 ? 's' : ''} à revoir`);
+        // atelier-etapes (point 13) : « Corriger » dit « N / M relues » ; les mots à revoir (corrections proposées + [?]) sont dans l'étape Corriger
+        const doubtChip = () => p.evaluate(() => { const b = document.querySelector('dialog.h-tx-dlg [data-tx-pane="fix"] [data-tx-pgo="doubt"]'); return {text: b.textContent, title: b.title}; });
+        await t('frise : ce qui reste à chaque étape (« N / M relues » ; les mots douteux = corrections proposées + [?]), Repérer à faire', async () => {
+            const n = await expectFixes(); await p.waitForFunction(k => JSON.parse(document.querySelector('dialog.h-tx-dlg').dataset.txProg || '{}').doubt === k, n, {timeout: 6000}); const f = await flow();
+            assert.ok(n >= 1, String(n)); assert.equal(f.steps[1].rest, '0 / 7 relues');
             assert.equal(f.steps[2].rest, 'À faire'); assert.equal(f.steps[3].rest, '');
-            const info = await p.textContent(`${D} [data-tx-fixinfo]`); assert.match(info, /1 × \[\?\] ou \[illisible\]/);
+            const c = await doubtChip(); assert.match(c.text, new RegExp(`${n} mots? douteux`)); assert.match(c.title, /1 × \[\?\] ou \[illisible\]/);
         });
-        await t('« ✓ Ajouter à la généalogie… » toujours visible en bas du panneau, avec ce qui reste à relier', async () => {
-            const f = await flow(); assert.ok(f.addBtn.vis && f.addBtn.bottom <= f.addBtn.h, JSON.stringify(f.addBtn)); assert.match(f.addBtn.text, /^✓ Ajouter à la généalogie…$/);
-            assert.match(f.add, /Personne dans l’acte pour l’instant/);
+        // atelier-etapes (point 14) : « ✓ Ajouter à la généalogie… » n'existe qu'une fois, dans l'étape Ajouter (plus de barre du bas toujours là)
+        await t('« ✓ Ajouter à la généalogie… » une seule fois, dans l’étape Ajouter, avec ce qui reste à relier', async () => {
+            let f = await flow(); assert.ok(!f.addBtn.vis && f.addBtn.n === 0, JSON.stringify(f.addBtn));
+            await p.click(`${D} [data-tx-step="add"]`); f = await flow();
+            assert.ok(f.addBtn.vis && f.addBtn.n === 1 && f.addBtn.bottom <= f.addBtn.h, JSON.stringify(f.addBtn)); assert.match(f.addBtn.text, /^✓ Ajouter à la généalogie…$/);
+            assert.match(f.add, /Personne dans l’acte pour l’instant/); await p.click(`${D} [data-tx-step="fix"]`);
             await shot('v2-frise-1440.png');
         });
         await t('cliquer une étape montre ses boutons ; « Étape suivante › » ; flèches du clavier entre les étapes', async () => {
@@ -109,8 +114,8 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TX
         await t('corriger fait baisser le compteur ; Repérer puis garder les noms : l’étape se coche toute seule, Ajouter compte les personnes à relier', async () => {
             const before = await expectFixes();
             await setBody((await body()).replace(' [?]', ''));
-            await p.waitForFunction(n => { const r = document.querySelector('dialog.h-tx-dlg [data-tx-step="fix"] [data-tx-steprest]').textContent; return r && !r.startsWith(String(n) + ' '); }, before, {timeout: 6000});
-            assert.equal((await flow()).steps[1].rest.split(' ')[0], String(before - 1) === '0' ? 'rien' : String(before - 1));
+            await p.waitForFunction(n => JSON.parse(document.querySelector('dialog.h-tx-dlg').dataset.txProg || '{}').doubt === n - 1, before, {timeout: 6000});
+            assert.match((await doubtChip()).text, before - 1 ? new RegExp(`${before - 1} mots? douteux`) : /aucun mot douteux/);
             await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-cmd="detect"]').click());
             await p.waitForFunction(() => document.querySelector('dialog.h-tx-dlg [data-tf-all="people"], dialog.h-tx-dlg [data-tx-keepall]'), null, {timeout: 8000});
             await p.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg'); (d.querySelector('[data-tf-all="people"]') || d.querySelector('[data-tx-keepall]')).click(); }); await sleep(400);
@@ -123,7 +128,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TX
         await t('frise en sombre : lisible (étape en cours en bleu, faite en vert), rien ne dépasse', async () => {
             await theme('dark'); await sleep(200);
             const c = await p.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg'), bg = s => getComputedStyle(d.querySelector(s)).backgroundColor;
-                return {done: bg('[data-tx-step="read"] i'), flow: bg('[data-tx-flow]'), add: bg('[data-tx-addbar]'), sw: document.documentElement.scrollWidth}; });
+                return {done: bg('[data-tx-step="read"] i'), flow: bg('[data-tx-flow]'), add: bg('[data-tx-foundtoggle]'), sw: document.documentElement.scrollWidth}; });
             const rgb = s => s.match(/\d+/g).map(Number), lum = s => { const [r, g, b] = rgb(s); return (r + g + b) / 3; };
             assert.ok(lum(c.flow) < 80 && lum(c.add) < 80, JSON.stringify(c)); const [r, g, b] = rgb(c.done); assert.ok(g > r + 40 && g > b, 'vert : ' + c.done); assert.ok(c.sw <= 1441);
             await shot('v2-frise-sombre.png'); await theme(''); await sleep(100);
@@ -133,15 +138,18 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TX
         const phoneState = () => p.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg'), vis = el => { if (!el) return false; const r = el.getBoundingClientRect(); return r.width > 0 && r.height > 0 && getComputedStyle(el).visibility !== 'hidden'; };
             const out = [...d.querySelectorAll('*')].filter(el => !el.closest('svg, .h-tx-stage, [data-tx-readpanel], [data-tx-panel]') && vis(el)).filter(el => { const r = el.getBoundingClientRect(); return r.right > innerWidth + 1 || r.left < -1; }).map(el => (el.className && el.className.baseVal === undefined ? el.className : el.tagName) + ':' + Math.round(el.getBoundingClientRect().right));
             return {tabs: [...d.querySelectorAll('[data-tx-ptab]')].filter(vis).map(b => b.dataset.txPtab + (b.classList.contains('is-active') ? '*' : '')), stage: vis(d.querySelector('[data-tx-stage]')) ? Math.round(d.querySelector('[data-tx-stage]').getBoundingClientRect().width) : 0,
-                editor: vis(d.querySelector('[data-tx-editor]')), found: vis(d.querySelector('[data-tx-found]')), add: vis(d.querySelector('[data-tx-addbar] [data-tx-cmd="found"]')), kind: vis(d.querySelector('[data-tx="kind"]')), flow: vis(d.querySelector('[data-tx-flow]')),
+                editor: vis(d.querySelector('[data-tx-editor]')), found: vis(d.querySelector('[data-tx-found]')), add: vis(d.querySelector('[data-tx-pane="add"] [data-tx-cmd="found"]')), kind: vis(d.querySelector('[data-tx="kind"]')), flow: vis(d.querySelector('[data-tx-flow]')),
                 editorTop: Math.round(d.querySelector('[data-tx-editor]').getBoundingClientRect().top), sw: document.documentElement.scrollWidth, out}; });
-        await t('1440 px : pas d’onglets, l’image et le texte côte à côte', async () => { const s = await phoneState(); assert.deepEqual(s.tabs, []); assert.ok(s.stage > 500 && s.editor && s.found); });
+        await t('1440 px : pas d’onglets, l’image et le texte côte à côte', async () => { const s = await phoneState(); assert.deepEqual(s.tabs, []); assert.ok(s.stage > 500 && s.editor && !s.found, 'atelier-etapes (point 15) : « Ce que l’app a trouvé » replié à l’étape Corriger'); });
         await t('390 px : trois onglets Image / Texte / Personnes ; Texte au départ, en grand, avec la frise et « ✓ Ajouter » en bas', async () => {
             await p.setViewportSize({width: 390, height: 844}); await sleep(500);
             const s = await phoneState();
-            assert.deepEqual(s.tabs, ['image', 'text*', 'people']); assert.equal(s.stage, 0, 'image cachée'); assert.ok(s.editor && s.flow && s.add && !s.found, JSON.stringify(s));
+            // 17 (audit) : l'onglet Texte montre aussi l'image (40 % de la hauteur, au-dessus du texte) pour relier une ligne sans changer d'onglet
+            assert.deepEqual(s.tabs, ['image', 'text*', 'people']); assert.ok(s.stage > 300, 'image au-dessus du texte : ' + s.stage); assert.ok(s.editor && s.flow && !s.add && !s.found, JSON.stringify(s)); // « ✓ Ajouter » : dans l'étape Ajouter (atelier-etapes)
+            const split = await p.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg'), st = d.querySelector('[data-tx-stage]').getBoundingClientRect(), ed = d.querySelector('[data-tx-editor]').getBoundingClientRect(); return {stageH: st.height, stageBottom: st.bottom, edTop: ed.top, edH: ed.height}; });
+            assert.ok(split.stageH >= 100 && split.stageBottom <= split.edTop && split.edH >= 100, 'image puis texte : ' + JSON.stringify(split));
             assert.equal(await p.evaluate(() => [...document.querySelectorAll('dialog.h-tx-dlg [data-tx-pane]')].filter(x => x.getBoundingClientRect().width > 0).length), 1, 'sur téléphone, seulement les boutons de l’étape montrée');
-            await shot("v2-390-texte.png"); assert.ok(s.editorTop < 330, "le texte commence haut : " + s.editorTop); assert.ok(s.sw <= 391, 'largeur ' + s.sw); assert.deepEqual(s.out, []);
+            await shot("v2-390-texte.png"); assert.ok(s.editorTop < 600, "le texte commence sous l’image : " + s.editorTop); assert.ok(s.sw <= 391, 'largeur ' + s.sw); assert.deepEqual(s.out, []);
             const lab = await p.textContent(`${D} [data-tx-ptab="people"]`); assert.match(lab, /Personnes\s*\d+/);
             await shot('v2-390-texte.png');
         });
@@ -153,7 +161,8 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TX
                 assert.equal(await p.evaluate(() => document.querySelectorAll('dialog.h-tx-dlg [data-tx-zones] rect').length), 7);
                 await shot(`v2-390-image${th ? '-sombre' : ''}.png`);
                 await p.keyboard.press('ArrowRight'); await p.keyboard.press('ArrowRight'); await sleep(200);
-                s = await phoneState(); assert.deepEqual(s.tabs, ['image', 'text', 'people*']); assert.ok(s.found && s.kind && s.add && !s.editor, JSON.stringify(s)); assert.deepEqual(s.out, []);
+                s = await phoneState(); assert.deepEqual(s.tabs, ['image', 'text', 'people*']); assert.ok(s.found && s.kind && s.flow && !s.editor, JSON.stringify(s)); assert.deepEqual(s.out, []);
+                await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-step="add"]').click()); await sleep(150); s = await phoneState(); assert.ok(s.add, 'Personnes : la frise reste, « ✓ Ajouter » dans l’étape Ajouter'); assert.deepEqual(s.out, []); await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-step="fix"]').click());
                 await shot(`v2-390-personnes${th ? '-sombre' : ''}.png`);
                 await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-found] [data-tx-goto]')?.click()); await sleep(200);
                 s = await phoneState(); assert.deepEqual(s.tabs, ['image', 'text*', 'people'], '« voir dans le texte » passe à l’onglet Texte'); assert.deepEqual(s.out, []);
@@ -292,38 +301,41 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TX
         });
 
         /* ─── 5. avancement et abréviations au survol ─── */
-        const prog = () => p.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg'), b = d.querySelector('[data-tx-prog]'); return {...JSON.parse(d.dataset.txProg || '{}'), vis: b.getBoundingClientRect().height > 0, text: b.textContent.replace(/\s+/g, ' ').trim(),
-            chips: [...b.querySelectorAll('[data-tx-pgo]')].map(x => x.dataset.txPgo + (x.classList.contains('is-warn') ? '!' : '')), propose: [...b.querySelectorAll('[data-tx-pset]')].map(x => x.dataset.txPset)}; });
+        // atelier-etapes : l'état de l'acte sous la frise (un seul réglage, 4 boutons) ; les compteurs dans l'étape qu'ils concernent
+        const prog = () => p.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg'), b = d.querySelector('[data-tx-prog]'), f = d.querySelector('[data-tx-flow]'); return {...JSON.parse(d.dataset.txProg || '{}'), vis: b.getBoundingClientRect().height > 0, text: f.textContent.replace(/\s+/g, ' ').trim(),
+            chips: [...f.querySelectorAll('[data-tx-pgo]')].map(x => x.dataset.txPgo + (x.classList.contains('is-warn') ? '!' : '')), on: b.querySelector('[data-tx-setstate].is-on')?.dataset.txSetstate}; });
         const waitProg = fn => p.waitForFunction(src => { const d = document.querySelector('dialog.h-tx-dlg'); const s = JSON.parse(d?.dataset.txProg || '{}'); return new Function('s', 'return ' + src)(s); }, fn, {timeout: 6000});
         await t('avancement : l’état de l’acte, les mots douteux, les lignes relues et reliées, visibles sous la frise', async () => {
             await setBody(LINES.join('\n')); await waitProg('s.total === 7 && s.doubt >= 1');
             const g = await prog(), exp = await p.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg'), x = d.txApi.get(); return window.LCNDA_EXT.txReview.reviewedCount(x.body, x.data.reviewed).done; });
             assert.ok(g.vis); assert.equal(g.state, 'doing'); assert.equal(g.reviewed, exp); assert.equal(g.linked, 7);
             assert.match(g.text, /En cours/); assert.match(g.text, new RegExp(`${g.doubt} mots? douteux`)); assert.match(g.text, new RegExp(`${exp} / 7 lignes relues`)); assert.match(g.text, /7 \/ 7 lignes reliées/);
-            assert.deepEqual(g.chips, ['doubt!', 'review!', 'zone', 'link!']);
+            assert.deepEqual(g.chips, ['zone', 'review!', 'doubt!', 'link!']); assert.equal(g.on, 'doing');
             await shot('v2-avancement.png');
         });
         await t('avancement : un clic sur un compteur va au premier endroit concerné ([?], ligne sans zone, ligne pas relue)', async () => {
-            await p.click(`${D} [data-tx-pgo="doubt"]`); await sleep(150); assert.equal((await findState()).sel, '[?]');
+            await p.click(`${D} [data-tx-step="fix"]`); await p.click(`${D} [data-tx-pgo="doubt"]`); await sleep(150); assert.equal((await findState()).sel, '[?]');
             await setBody(LINES.join('\n').replace('\n', '\nSigné : Delpeiroux\n')); await waitProg('s.total === 8 && s.linked === 7');
-            await p.click(`${D} [data-tx-pgo="zone"]`); await sleep(150); assert.equal((await findState()).sel, 'Signé : Delpeiroux');
-            await p.click(`${D} [data-tx-pgo="review"]`); await p.waitForSelector('dialog.h-txr-dlg[open]');
+            await p.click(`${D} [data-tx-step="read"]`); await p.click(`${D} [data-tx-pgo="zone"]`); await sleep(150); assert.equal((await findState()).sel, 'Signé : Delpeiroux');
+            await p.click(`${D} [data-tx-step="fix"]`); await p.click(`${D} [data-tx-pgo="review"]`); await p.waitForSelector('dialog.h-txr-dlg[open]');
             const first = await p.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg'), x = d.txApi.get(), R = window.LCNDA_EXT.txReview, k = new Set(x.data.reviewed || []); return R.linesOf(x.body).find(l => !k.has(R.lineKey(l.text))).n; });
             assert.equal((await rv()).pos, `Ligne ${first} sur 8`); await p.keyboard.press('Escape'); await sleep(200);
         });
-        await t('avancement : l’état se choisit dans un menu de choix unique (↶ Annuler) ; tout relu et plus de mot douteux → « ✓ Marquer comme relue » (jamais tout seul), gardé à l’enregistrement', async () => {
-            await p.click(`${D} [data-tx-pstate]`); await p.waitForSelector('.ui-actmenu');
-            const items = await p.evaluate(() => [...document.querySelectorAll('.ui-actmenu .ui-actmenu-i')].map(b => b.textContent.replace(/\s+/g, ' ').trim()));
-            assert.deepEqual(items.map(x => x.replace(/\s+/g, '')), ['○Àfaire', '●Encours', '○Relue', '○Finie']);
-            await p.evaluate(() => [...document.querySelectorAll('.ui-actmenu .ui-actmenu-i')].find(b => /Finie/.test(b.textContent)).click()); await sleep(150);
-            assert.equal((await prog()).state, 'done'); assert.equal(await p.inputValue(`${D} [data-tx-state]`), 'done');
+        // atelier-etapes (points 13, 14) : l'état se règle à un seul endroit (4 boutons, ← →) ; « Relue » se met toute seule quand « Corriger » est fait
+        await t('avancement : l’état se choisit à un seul endroit (4 boutons, ↶ Annuler) ; tout relu → « Relue » toute seule (et un message), gardé à l’enregistrement', async () => {
+            const items = await p.evaluate(() => [...document.querySelectorAll('dialog.h-tx-dlg [data-tx-setstate]')].map(b => b.textContent.trim()));
+            assert.deepEqual(items, ['À faire', 'En cours', 'Relue', 'Finie']); assert.equal(await p.evaluate(() => document.querySelectorAll('dialog.h-tx-dlg [data-tx-state], dialog.h-tx-dlg [data-tx-pstate]').length), 0, 'plus de 2e réglage');
+            await p.click(`${D} [data-tx-setstate="done"]`); await sleep(150);
+            assert.equal((await prog()).state, 'done'); assert.equal((await prog()).on, 'done');
             assert.ok(await lastToastUndo(/État/)); await sleep(150); assert.equal((await prog()).state, 'doing');
+            await p.focus(`${D} [data-tx-setstate="doing"]`); await p.keyboard.press('ArrowRight'); await sleep(100); assert.equal((await prog()).state, 'checked', '← → d’un état à l’autre');
+            await p.keyboard.press('ArrowLeft'); await sleep(100); assert.equal((await prog()).state, 'doing');
             await setBody(LINES.join('\n').replace(' [?]', '')); await waitProg('s.total === 7 && s.doubt === 0');
-            assert.deepEqual((await prog()).propose, [], 'pas tout relu : rien de proposé');
+            assert.equal((await prog()).state, 'doing', 'pas tout relu : rien ne change');
             await p.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg'), x = d.txApi.get(), R = window.LCNDA_EXT.txReview; x.data.reviewed = R.linesOf(x.body).map(l => R.lineKey(l.text)); d.txApi.touch(); });
-            await setBody((await body()) + ''); await sleep(500);
-            let g = await prog(); assert.equal(g.reviewed, 7); assert.deepEqual(g.propose, ['checked']); assert.equal(g.state, 'doing', 'jamais tout seul');
-            await p.click(`${D} [data-tx-pset="checked"]`); await sleep(150); g = await prog(); assert.equal(g.state, 'checked'); assert.match(g.text, /Relue/);
+            await setBody((await body()) + ''); await waitProg('s.state === "checked"');
+            let g = await prog(); assert.equal(g.reviewed, 7); assert.equal(g.state, 'checked', 'Corriger fait : « Relue » toute seule'); assert.ok(g.fixDone);
+            assert.ok(await p.evaluate(() => [...document.querySelectorAll('.ui-toast, .toast')].some(x => /Corriger : fait/.test(x.textContent))), 'un message le dit');
             await shot('v2-avancement-relue.png');
             await saveAct(); assert.equal(await p.evaluate(async () => (await window.LCNDA_APP.api('act_transcription', {id: 1})).data.status), 'checked');
             const list = await p.evaluate(async () => (await window.LCNDA_APP.api('act_transcriptions_page', {status: 'checked'})).items.length); assert.equal(list, 1, 'la liste « Transcriptions d’actes » filtre « Relues »');

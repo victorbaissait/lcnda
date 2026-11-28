@@ -150,9 +150,10 @@ function delete_workbook(PDO $pdo, array $data): array
     workbook_ready($pdo);
     $id = safe_int($data['id'] ?? 0);
     $old = workbook_get($pdo, $id);
+    $undo = project_undo_keep($pdo, 'workbooks', $id); // ↶ Annuler (restore_project)
     $pdo->prepare('DELETE FROM workbooks WHERE id=?')->execute([$id]);
     log_change($pdo, 'meta', 0, 'delete', 'Classeur supprimé : ' . $old['name']);
-    return ['id' => $id, 'workbook' => $old];
+    return ['id' => $id, 'workbook' => $old, 'undo' => $undo];
 }
 
 function duplicate_workbook(PDO $pdo, array $data): array

@@ -1495,7 +1495,7 @@ Le téléchargement de Kraken et de ses outils (PyTorch, ≈ 1 Go, depuis pypi.o
 Le fichier reçu n’était pas exactement celui publié par sa source (téléchargement abîmé ou modifié en route) : il a été jeté par sécurité. Réessaie plus tard. ¦ Fișierul primit nu era exact cel publicat de sursa lui (descărcare deteriorată sau modificată pe drum): a fost aruncat din motive de siguranță. Încearcă din nou mai târziu.
 Ce modèle n’est pas publié sous une licence libre connue : il n’a pas été installé. ¦ Acest model nu este publicat sub o licență liberă cunoscută: nu a fost instalat.
 Une adresse de téléchargement ne venait pas d’une source prévue : rien n’a été gardé. ¦ O adresă de descărcare nu venea dintr-o sursă prevăzută: nu s-a păstrat nimic.
-Le moteur est là mais ne s’ouvre pas. « ↻ Réessayer » le réinstalle ; sinon, « 🗑 Désinstaller » puis « ⤓ Installer » de nouveau. ¦ Motorul există, dar nu se deschide. „↻ Încearcă din nou” îl reinstalează; altfel, „🗑 Dezinstalează”, apoi „⤓ Instalează” din nou.
+Le moteur est là mais ne s’ouvre pas. « ↻ Réessayer » le réinstalle ; sinon, « 🗑 Désinstaller » puis « 📦 Installer » de nouveau. ¦ Motorul există, dar nu se deschide. „↻ Încearcă din nou” îl reinstalează; altfel, „🗑 Dezinstalează”, apoi „📦 Instalează” din nou.
 Regarde le journal, en bas, puis « ↻ Réessayer ». ¦ Uită-te în jurnal, jos, apoi „↻ Încearcă din nou”.
 tu peux continuer à travailler ailleurs dans l’app, l’installation continue toute seule. ¦ poți lucra în continuare în altă parte a aplicației, instalarea continuă singură.
 EN COURS ¦ ÎN CURS

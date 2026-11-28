@@ -42,9 +42,12 @@ ERA5 est la « réanalyse » européenne : une estimation du temps partout, heur
 
 1. Va sur <https://cds.climate.copernicus.eu> → « Register » (ou « Login ») : crée ton compte avec ton adresse e-mail.
 2. Une fois connecté, ouvre ta page de profil (ton nom en haut à droite) : tu y trouves ta **clé** (« Personal Access Token », une suite de lettres et de chiffres).
-3. Ouvre les deux pages des données et accepte leur licence (bouton « Accept terms » en bas de l'onglet « Download ») :
+3. Ouvre la page des données et accepte leur licence (bouton « Accept terms » en bas de l'onglet « Download ») :
    - <https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels>
-   - <https://cds.climate.copernicus.eu/datasets/derived-era5-single-levels-daily-statistics>
+
+   (Le programme demande les heures d'ERA5 et calcule lui-même le min., le max. et la moyenne de chaque jour : plusieurs mois
+   par demande, plusieurs demandes à la fois, leur numéro gardé dans `telechargements/era5/era5-demandes.json` — une
+   fabrication coupée les retrouve à la suivante au lieu de refaire la queue.)
 4. Dans le Terminal, crée le fichier de la clé (remplace `TA-CLE` par ta clé) :
 
 ```
@@ -147,3 +150,26 @@ Temps et poids : compte **une à trois nuits** (surtout ERA5 et 20CR) et **≈ 1
 
 À vérifier avant de livrer (de mémoire, sans Internet ici) : les adresses de KNMI, DMI, ČHMÚ et IMGW, le nom exact des colonnes de chaque fichier, et les licences (toutes sont écrites en haut de `build-meteo.py` et dans le tableau ci-dessus).
 
+
+## Les compléments Copernicus (facultatifs)
+
+Cinq petits packs à part, qui s'ajoutent au **détail d'un jour** (une phrase chacun, la source repliée dessous avec « ↗ source ») sans rien changer au socle ni aux autres packs. Chacun s'installe seul : Réglages → 🌦 Météo d'autrefois → « Compléments Copernicus ». Ils couvrent la France, la Belgique, la Suisse et le Luxembourg (les relevés anciens : toute l'Europe). Fabrication : `scripts/meteo/meteo_plus.py`, appelé par `build-meteo.py`.
+
+| Commande | Jeu du CDS | Ce que voit la personne | Années | Poids (estimé) |
+|---|---|---|---|---|
+| `build-meteo.py plus-neige` | ERA5-Land (`reanalysis-era5-land` + `derived-era5-land-daily-statistics`) | « ❄️ Neige au sol : 35 cm ; il en est tombé ≈ 12 cm ce jour-là », et « 🌡 Au plus près (ERA5-Land, carreau ≈ 9 km) : min., max. » | 1950 → | 150 à 300 Mo |
+| `build-meteo.py plus-cerra` | CERRA (`reanalysis-cerra-single-levels`) | « 🌡 Au plus près (CERRA, carreau ≈ 5,5 km) : min., max. » (passe devant ERA5-Land) | 1985 → 2021 | 300 à 600 Mo |
+| `build-meteo.py plus-ressenti` | UTCI / ERA5-HEAT (`derived-utci-historical`) | « 🥵 Ressenti au plus chaud : 36 °C (forte chaleur) » ou « 🥶 Ressenti au plus froid : −15 °C (froid fort) » | 1940 → | ≈ 100 Mo |
+| `build-meteo.py plus-rivieres` | GloFAS (`cems-glofas-historical`, serveur EWDS) | « 🌊 La grande rivière la plus proche (à 2 km) : 850 m³/s, 3 fois son débit moyen — en crue » | 1979 → | 100 à 200 Mo |
+| `build-meteo.py plus-anciennes` | Relevés in situ (`insitu-observations-surface-land`, données « open ») | les stations d'avant 1836 deviennent des stations comme les autres (« Mesuré » près de Paris en 1780) | ≈ 1720 → 1835 | quelques Mo |
+
+Avant de lancer : le compte et la clé Copernicus (étape 3), puis **accepter les conditions de chaque jeu** sur sa page (onglet « Download », en bas) :
+<https://cds.climate.copernicus.eu/datasets/reanalysis-era5-land>, <https://cds.climate.copernicus.eu/datasets/derived-era5-land-daily-statistics>, <https://cds.climate.copernicus.eu/datasets/reanalysis-cerra-single-levels>, <https://cds.climate.copernicus.eu/datasets/derived-utci-historical>, <https://cds.climate.copernicus.eu/datasets/insitu-observations-surface-land> et, pour GloFAS, sur le serveur des alertes (même compte, même clé) : <https://ewds.climate.copernicus.eu/datasets/cems-glofas-historical>.
+
+Les demandes sont faites **par morceaux** (un mois par demande ; une année pour les relevés anciens). Si Copernicus répond « Request too large », le morceau est recoupé en deux, puis encore en deux. Chaque morceau reçu est réduit aussitôt (quelques valeurs par carreau et par jour) puis effacé : on peut couper et relancer, la fabrication reprend au morceau suivant. Le programme relit aussi le formulaire officiel de chaque jeu et corrige tout seul un champ renommé (il l'écrit dans le journal).
+
+Licences et mentions : ERA5-Land, CERRA, UTCI et les relevés in situ « open » sont sous **CC BY 4.0** (licence Copernicus) — mention « Generated using Copernicus Climate Change Service information [année] » ; GloFAS est sous la **licence CEMS-FLOODS** (libre, redistribution permise avec mention « Copernicus Emergency Management Service information [année] »). Les relevés in situ ne sont demandés qu'avec la restriction d'usage « open ».
+
+**Pas fabriqué : E-OBS** (`insitu-gridded-observations-europe`). Sa licence (« E-OBS product licence ») le réserve à la recherche et à l'enseignement non commerciaux : il ne peut pas être redistribué dans un pack public.
+
+Pour vérifier sans Internet : `python3 tests/test_meteo_plus.py` (petits NetCDF/CSV fabriqués à la main) et `node tests/test-meteo-plus.js` (l'écran).

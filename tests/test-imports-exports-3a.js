@@ -32,7 +32,7 @@ const SHOTS = process.env.SHOTS_DIR || '';
 const phpPath = findPhp([devBundledPhp()]);
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'lcnda-imp3a-'));
 const dir = path.join(tmp, 'data');
-const envFor = d => ({ ...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1' });
+const envFor = d => ({ ...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4' });
 fs.mkdirSync(path.join(dir, 'media'), { recursive: true });
 let passed = 0, failed = 0;
 async function step(name, fn) { try { await fn(); passed++; console.log('  ✓ ' + name); } catch (e) { failed++; console.log('  ✗ ' + name + '\n      ' + (e && e.stack ? e.stack.split('\n').slice(0, 4).join('\n      ') : e)); } }

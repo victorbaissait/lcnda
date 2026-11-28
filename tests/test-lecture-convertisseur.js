@@ -237,7 +237,7 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], { cwd: appRoot, encoding: 'utf8
         if (txOpen) {
             await page.waitForTimeout(400); await page.evaluate(() => document.querySelectorAll('dialog.mpk-dialog[open]').forEach(d => d.close())); // le choix de l'image s'ouvre tout seul
             await page.evaluate(() => { const a = document.querySelector('[data-tx-body]'); a.value = 'Marie Roux Vve de Pierre'; a.setSelectionRange(11, 14); });
-            await page.click('[data-tx-cmd="aide"]'); await page.waitForSelector('.la-dialog .la-row');
+            await page.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-step="fix"]')?.click()); await page.click('[data-tx-cmd="aide"]'); await page.waitForSelector('.la-dialog .la-row');
             ok(/veuve/.test(await page.textContent('.la-dialog .la-dict')), 'transcription : le mot choisi est cherché');
             await page.click('.la-dialog .modal-actions [type=submit]');
         } else ok(/data-tx-cmd="aide"/.test(fs.readFileSync(path.join(appRoot, 'assets/js/heritage-transcribe.js'), 'utf8')), 'transcription : le bouton existe');

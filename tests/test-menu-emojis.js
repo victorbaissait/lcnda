@@ -26,7 +26,7 @@ try { ({ chromium } = require('playwright')); } catch (_) { try { ({ chromium } 
 const phpPath = findPhp([devBundledPhp()]);
 if (!chromium || !phpPath) { console.log('— Playwright ou PHP absent : test sauté'); process.exit(0); }
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'carnet-menu-emojis-'));
-const envFor = d => ({ ...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1' });
+const envFor = d => ({ ...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4' });
 const freePort = () => new Promise(res => { const s = net.createServer(); s.listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => res(p)); }); });
 let failed = 0;
 

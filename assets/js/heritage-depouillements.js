@@ -406,7 +406,12 @@
                     });
                 });
                 tr.querySelector('[data-dp-del]').addEventListener('click', async () => {
-                    if (x.id) { if (!await A().confirmBox(`Supprimer ${[x.first_name, x.last_name].filter(Boolean).join(' ') || 'cette personne'} du relevé ?`, {title: 'Supprimer du relevé', okLabel: 'Supprimer du relevé'})) return; await post('delete_archive_digest_person', {id: x.id}); rows.splice(rows.indexOf(x), 1); r.people = r.people.filter(y => y !== x); }
+                    if (x.id) { // H7 : retirée tout de suite, « ↶ Annuler » la remet à sa place dans le relevé
+                        const at = rows.indexOf(x), who = x.first_name || x.last_name ? A().personName(x) : '';
+                        try { await post('delete_archive_digest_person', {id: x.id}); } catch (err) { A().toast(err.message, 'error'); return; }
+                        rows.splice(at, 1); r.people = r.people.filter(y => y !== x);
+                        A().undoDelete({type: 'archive_digest_person', id: x.id, message: who ? i18n('{name} retiré du relevé', {name: who}) : i18n('Personne retirée du relevé'), after: () => { if (!rows.includes(x)) { rows.splice(Math.min(at, rows.length), 0, x); (r.people ||= []).push(x); } render(); }});
+                    }
                     else { x._gone = true; const k = draft.indexOf(x); if (k >= 0) draft.splice(k, 1); }
                     render();
                 });
@@ -494,7 +499,7 @@
             <div class="h-dp-hhs">${keys.map(k => { const list = byHh.get(k), pages = [...new Set(list.map(x => x.page_number).filter(Boolean))].sort(natural), addr = list.find(x => x.address)?.address;
                 const num = (list[0].household_key || '').trim();
                 return `<article class="h-dp-hh maintenance-panel"><h4>🏠 ${num ? 'Foyer ' + esc(num) : 'Foyer sans n°'}${addr ? ` <small class="muted">${esc(addr)}</small>` : ''}</h4>
-                    <ul>${list.map(x => `<li>${x.person_id ? `<button type="button" class="table-link" data-open-person="${x.person_id}">${esc(x.person_name || [x.first_name, x.last_name].join(' '))}</button>` : `<b>${esc([x.first_name, x.last_name].filter(Boolean).join(' ') || 'Sans nom')}</b>`} <small class="muted">${esc([x.household_position, x.age_text && x.age_text + ' ans', x.occupation].filter(Boolean).join(' · '))}</small></li>`).join('')}</ul>
+                    <ul>${list.map(x => `<li>${x.person_id ? `<button type="button" class="table-link" data-open-person="${x.person_id}">${esc(x.person_name || A().personName(x))}</button>` : `<b>${esc(A().personName(x))}</b>`} <small class="muted">${esc([x.household_position, x.age_text && x.age_text + ' ans', x.occupation].filter(Boolean).join(' · '))}</small></li>`).join('')}</ul>
                     ${pages.length ? `<small>${pages.map(n => `<button type="button" class="link-button" data-dp-gopage="${esc(n)}">page ${esc(n)}</button>`).join(', ')}</small>` : ''}</article>`; }).join('')}</div>`
             : A().empty('Personne relevée pour l’instant : ouvre une page et utilise « ＋ Personne ».');
         body.querySelectorAll('[data-dp-gopage]').forEach(b => b.addEventListener('click', () => { Object.assign(st(), {tab: 'pages', page: b.dataset.dpGopage, image: 0}); paint(); }));

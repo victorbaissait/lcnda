@@ -531,7 +531,7 @@ Le nom du modèle (les données restent : vide-les avant si tu veux un modèle v
 Le nom de la copie : ¦ Heiti afritsins:
 {name} (copie) ¦ {name} (afrit)
 Les changements faits depuis le dernier enregistrement seront perdus. ¦ Breytingar sem gerðar voru frá síðustu vistun tapast.
-📋 Partir d’un modèle ¦ 📋 Byrja á sniðmáti
+🧩 Partir d’un modèle ¦ 🧩 Byrja á sniðmáti
 Mes modèles ¦ Sniðmátin mín
 Pas encore de modèle à toi : dans un classeur, Fichier → « Enregistrer comme modèle… ». ¦ Ekkert eigið sniðmát enn: í vinnubók, Skrá → „Vista sem sniðmát…“.
 séparateur « {sep} » ¦ skiltákn „{sep}“
@@ -615,7 +615,7 @@ Sosa, génération, côté, âge ¦ Sosa, kynslóð, hlið, aldur
 objets, prix, total en livres ¦ munir, verð, samtals í livres
 Registre matricule ¦ Herskráning
 classe, signalement, campagnes ¦ árgangur, persónulýsing, herferðir
-📋 Partir d’un modèle… ¦ 📋 Byrja á sniðmáti…
+🧩 Partir d’un modèle… ¦ 🧩 Byrja á sniðmáti…
 ⤒ Importer un tableau… ¦ ⤒ Flytja inn töflu…
 ⤓ Exporter… ¦ ⤓ Flytja út…
 🖨 Imprimer… ¦ 🖨 Prenta…

@@ -398,6 +398,8 @@
         const out = [], W = root?.LCNDA_EXT?.tresorWords?.WORDS || [], AB = root?.LCNDA_LECTURE?.ABBREV || {};
         W.forEach(([t, d]) => out.push({t, d, k: 'vieux', a: 'general', ex: '', src: i18n('Trésors'), lang: 'fr'}));
         Object.entries(AB).forEach(([t, d]) => { if (t.length > 1) out.push({t: `${t}.`, d, k: 'abrev', a: 'recensement', ex: '', src: 'lecture automatique', lang: 'fr'}); });
+        // mots en plus d'autres modules (ex. vocabulaire latin du Wiktionnaire : heritage-telech-d.js) ; ceux des fichiers de langue passent avant
+        (root?.LCNDA_EXT?.aideExtraEntries || []).forEach(e => { if (e && e.t && e.d && e.lang) out.push({ex: '', alt: [], tr: [], ...e, a: ACTE_OF(e.a)}); });
         return out;
     }
     const KIND_OK = new Set(Object.keys(KINDS));

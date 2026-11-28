@@ -191,14 +191,23 @@ function museum_drop_file(PDO $pdo, string $table, int $id): void
 function museum_delete_room(PDO $pdo, array $data): array
 {
     $id = safe_int($data['id'] ?? 0);
-    museum_writable($pdo, museum_of_room($pdo, $id));
+    $museumId = museum_of_room($pdo, $id);
+    museum_writable($pdo, $museumId);
     $files = $pdo->prepare("SELECT audio_file FROM museum_rooms WHERE id=? UNION ALL SELECT audio_file FROM museum_items WHERE room_id=? UNION ALL SELECT file FROM museum_items WHERE room_id=?");
     $files->execute([$id, $id, $id]);
     $list = $files->fetchAll(PDO::FETCH_COLUMN);
+    $undo = empty($GLOBALS['museum_importing']); // un musée reçu supprimé en entier : rien à remettre salle par salle
+    if ($undo) { undo_keep($pdo, 'museum_room', $id, 'Salle du musée supprimée', [['museum_rooms', 'id=?', [$id]], ['museum_items', 'room_id=?', [$id]]], ['needs' => [['museums', $museumId, 'Le musée n’existe plus.']], 'files' => array_values(array_filter($list))]); }
     $pdo->prepare('DELETE FROM museum_items WHERE room_id=?')->execute([$id]);
     $pdo->prepare('DELETE FROM museum_rooms WHERE id=?')->execute([$id]);
-    museum_gc($pdo, $list);
+    museum_gc($pdo, $undo ? museum_undo_files($pdo) : $list); // ↶ Annuler (H7) : les fichiers restent un jour
     return ['ok' => true];
+}
+
+/** Les sons et images des salles et œuvres supprimées il y a plus d'un jour (gardés pour « ↶ Annuler ») : au ménage. */
+function museum_undo_files(PDO $pdo): array
+{
+    return array_merge(undo_old_files($pdo, 'museum_room'), undo_old_files($pdo, 'museum_item'));
 }
 
 /** Change l'ordre des salles d'un musée, ou des œuvres d'une salle (liste des numéros dans le nouvel ordre). */
@@ -246,10 +255,11 @@ function museum_delete_item(PDO $pdo, array $data): array
 {
     $id = safe_int($data['id'] ?? 0);
     museum_writable($pdo, museum_of_item($pdo, $id));
-    $s = $pdo->prepare('SELECT audio_file, file FROM museum_items WHERE id=?'); $s->execute([$id]);
-    $list = array_values((array) $s->fetch(PDO::FETCH_NUM));
+    $s = $pdo->prepare('SELECT audio_file, file, room_id FROM museum_items WHERE id=?'); $s->execute([$id]);
+    [$audio, $file, $roomId] = array_pad(array_values((array) $s->fetch(PDO::FETCH_NUM)), 3, '');
+    undo_keep($pdo, 'museum_item', $id, 'Œuvre retirée du musée', [['museum_items', 'id=?', [$id]]], ['needs' => [['museum_rooms', (int) $roomId, 'La salle n’existe plus.']], 'files' => array_values(array_filter([(string) $audio, (string) $file]))]); // ↶ Annuler (H7)
     $pdo->prepare('DELETE FROM museum_items WHERE id=?')->execute([$id]);
-    museum_gc($pdo, $list);
+    museum_gc($pdo, museum_undo_files($pdo)); // les fichiers de cette œuvre restent un jour
     return ['ok' => true];
 }
 
@@ -302,7 +312,10 @@ function museum_sign(PDO $pdo, array $data): array
 
 function museum_delete_guestbook(PDO $pdo, array $data): array
 {
-    $pdo->prepare('DELETE FROM museum_guestbook WHERE id=?')->execute([safe_int($data['id'] ?? 0)]);
+    $id = safe_int($data['id'] ?? 0);
+    $s = $pdo->prepare('SELECT museum_id FROM museum_guestbook WHERE id=?'); $s->execute([$id]);
+    undo_keep($pdo, 'museum_guestbook', $id, 'Message du livre d’or supprimé', [['museum_guestbook', 'id=?', [$id]]], ['needs' => [['museums', (int) $s->fetchColumn(), 'Le musée n’existe plus.']]]); // ↶ Annuler (H7)
+    $pdo->prepare('DELETE FROM museum_guestbook WHERE id=?')->execute([$id]);
     return ['ok' => true];
 }
 
@@ -361,7 +374,7 @@ function museum_shrunk_image(string $path, int $max): array
         }
     }
     $mime = $info ? (string) $info['mime'] : 'image/jpeg';
-    return [(string) file_get_contents($path), $mime, MUSEUM_IMAGES[$mime] ?? 'jpg'];
+    return [image_strip_metadata((string) file_get_contents($path)), $mime, MUSEUM_IMAGES[$mime] ?? 'jpg']; // 🔒 sans EXIF (GPS, appareil, date), sans réencoder
 }
 
 /** Données du musée pour l'export : images et sons repris dans le paquet. */

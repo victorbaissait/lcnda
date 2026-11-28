@@ -22,6 +22,7 @@ require_once __DIR__ . '/lib/premier.php'; // 🧭 premier lancement : usages, b
 require_once __DIR__ . '/lib/sync_dossier.php'; // 🔄 deux ordinateurs (dossier partagé, paquets, conflits) et 🔒 verrou d'ouverture de la base
 require_once __DIR__ . '/lib/sauvegarde_auto.php'; // 🗓 sauvegarde automatique (jour, semaine, fermeture ; dossier choisi ; intégrité ; revenir à une copie)
 require_once __DIR__ . '/lib/diagram_genea.php'; // 📊 diagrammes Généalogie et Frises : éventail, soleil, réseau, arcs, Venn, calendrier, rose, spirale
+require_once __DIR__ . '/lib/enquetes_plus.php'; // 🕵️ enquêtes : conclusion, temps passé, recherches négatives, pistes en colonnes, ↶ Annuler (assets/js/app-enquetes.js)
 
 // SITE_DEFAULTS_PATH est défini dans lib/paths.php
 const EVENT_FACT_CONFIDENCE_LEVELS = ['unknown','certain','deduced','estimated','doubt'];
@@ -86,6 +87,12 @@ try {
         kiosk_exit($payload);
     }
     kiosk_guard((string) $action, $isWrite);
+    if (is_string($action) && str_starts_with($action, 'donnees_maj_')) { // 🗂 Données installées : date, vérifier, mettre à jour, ↶ (lib/donnees_maj.php)
+        require_once __DIR__ . '/lib/donnees_maj.php';
+        donnees_maj_api($action, $isWrite, is_array($payload) ? $payload : []);
+    }
+    if (is_string($action) && str_starts_with($action, 'gp_')) { require_once __DIR__ . '/lib/grands_packs.php'; gp_dispatch($action, $isWrite, is_array($payload) ? $payload : []); } // 📦 grands packs des lots K et L, installés à la demande (lib/grands_packs.php)
+    if (is_string($action) && str_starts_with($action, 'tn_')) { require_once __DIR__ . '/lib/sources_n1.php'; tn_dispatch($action, $isWrite, is_array($payload) ? $payload : []); } // 🏛 Lot N, archives et mémoire : installer / lire les packs (lib/sources_n1.php)
     if (!$isWrite && $action === 'website_live_rev') { // 🌐 aperçu en direct : sa révision, demandée chaque seconde (sans ouvrir la base ; lib/website_php.php)
         require_once __DIR__ . '/lib/website_php.php';
         website_live_rev((string) ($_GET['token'] ?? ''));
@@ -180,6 +187,14 @@ try {
             'scan_inbox_status' => ['dir' => '', 'enabled' => false, 'move_imported' => true, 'reachable' => false, 'pending' => 0, 'recent' => [], 'can_convert' => false, 'total' => 0],
             'parish_map' => ['by_place' => [], 'by_insee' => []],
             'compl' => ($_GET['op'] ?? '') === 'settings' ? ['settings' => []] : null, // 🧩 réglages des compléments : ceux de départ
+            // modules qui lisent au démarrage (sans attendre la base) : la même réponse qu'une base neuve
+            'gov_status' => (static function () { require_once __DIR__ . '/lib/gov.php'; return gov_status_data(); })(), // 🏰 Lieux anciens : ne dépend pas de la base
+            'cc_about' => (static function () { require_once __DIR__ . '/lib/commune_culture.php'; return cc_about(); })(),
+            'carto_packs' => (static function () { require_once __DIR__ . '/lib/territoires.php'; return ['packs' => array_keys(carto_packs())]; })(),
+            'terr_list' => ['territories' => []],
+            'reseau_settings' => (static function () { require_once __DIR__ . '/lib/relations_reseau.php'; return ['settings' => ['fiche' => true, 'listes' => true, 'diagramme' => true, 'genogramme' => true], 'types' => rs_type_list()]; })(),
+            'cx_count' => ['count' => 0, 'total' => 0, 'baskets' => 0],
+            'ulist_index' => ['lists' => []], // 📑 Mes listes (lib/listes_perso.php) : aucune encore
             default => null,
         };
         if ($emptyRead !== null) json_response($emptyRead + ['ready' => false]);
@@ -207,6 +222,11 @@ try {
     }
     if ($action === 'bootstrap') { access_log_purge($pdo); } // 📜 les lignes plus vieilles que la durée réglée (une fois par jour)
     if (str_starts_with((string) $action, 'sd_')) { json_response(sd_dispatch($pdo, (string) $action, is_array($payload) ? $payload : [], $isWrite)); } // 🔄 deux ordinateurs
+    if (str_starts_with((string) $action, 'dplus_')) { require_once __DIR__ . '/lib/donnees_plus.php'; donnees_plus_api($pdo, (string) $action, $isWrite, is_array($payload) ? $payload : []); } // 📊 Données, en plus : notes, lieux à placer, versions, partages (lib/donnees_plus.php)
+    // 🔒 événements confidentiels (lib/heritage_tools.php) : jamais dans un export, le partage ou le site ; cachés en consultation
+    if (is_string($action) && private_events_hidden_for($action, $isWrite) && !private_events_shadow($pdo)) { // jamais montré faute d'avoir pu le cacher
+        json_response(['error' => in_array($action, PRIVATE_EVENT_EXPORT_ACTIONS, true) ? 'Export impossible : les événements confidentiels n’ont pas pu être retirés. Réessaie dans un instant.' : 'Les événements confidentiels n’ont pas pu être cachés : réessaie dans un instant.'], 503);
+    }
 
     // La structure de la base (tables, colonnes, types d’événements de base) est mise à jour une seule fois
     // par numéro de version dans lib/migrations.php, à l’ouverture de la base (db()).
@@ -256,6 +276,9 @@ try {
     if ($isWrite && $action === 'insee_remote_import') { // décès INSEE : téléchargé sur data.gouv.fr puis importé
         insee_remote_import($pdo, $payload);
     }
+    if ($isWrite && str_starts_with((string) $action, 'insee_maj_')) { // ⤓ décès INSEE : tout installer, par petits pas, et mises à jour (lib/insee_remote.php)
+        try { json_response(insee_maj_post($pdo, (string) $action, is_array($payload) ? $payload : [])); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); }
+    }
     if ($isWrite && $action === 'museum_upload') {
         museum_upload($pdo, $_FILES['file'] ?? null, $_POST);
     }
@@ -291,6 +314,10 @@ try {
         require_once __DIR__ . '/lib/telephone_wifi.php';
         tw_inbox_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
+    if (in_array($action, ['fc_state', 'fc_props', 'fc_journal', 'fc_count', 'fc_prop_file', 'fc_publish_preview', 'fc_publish_export', 'fc_write'], true)) { // 👪 site familial : comptes, 📨 propositions, 📜 journal, 🌐 publier / relever (lib/comptes_famille.php)
+        require_once __DIR__ . '/lib/comptes_famille.php';
+        fc_owner_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
     if (in_array($action, ['qp_list', 'qp_get', 'qp_templates', 'qp_write'], true)) { // 💬 questions aux proches (lib/questions_proches.php)
         require_once __DIR__ . '/lib/questions_proches.php';
         qp_dispatch($pdo, (string) $action, $isWrite, $payload);
@@ -319,6 +346,10 @@ try {
     if (in_array($action, ['tresors', 'tresor_write', 'tresor_tree', 'tresor_media', 'tresor_signatures', 'tresor_faces', 'tresor_photos', 'tresor_memories', 'tresor_memory_write'], true)) { // ✨ trésors de famille (lib/tresors.php)
         require_once __DIR__ . '/lib/tresors.php';
         tresors_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
+    if ($action === 'atelier_idees' || $action === 'atelier_idees_write') { // 📜 Atelier, idées 35 à 40 : registre, IIIF, recherche, deux couches, entraîner (lib/atelier_idees.php)
+        require_once __DIR__ . '/lib/atelier_idees.php';
+        txi_idees_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
     if (in_array($action, ['postcards', 'postcard_write'], true)) { // 🏞 cartes postales anciennes (lib/postcards.php)
         require_once __DIR__ . '/lib/postcards.php';
@@ -412,6 +443,10 @@ try {
     if (in_array($action, SO7_ACTIONS, true)) { // 🌍 Archives en ligne, 7e lot (lib/sources_ouvertes_7.php) : Europe, Justes, enfants assistés, monuments, cadastres — aucune requête vers les sites
         so7_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
+    if (in_array($action, ['adn_ancien', 'adn_livres', 'adn_livres_write'], true)) { // 🦴 ADN ancien (AADR) et 📚 auteurs de la BnF (lib/adn_livres.php)
+        require_once __DIR__ . '/lib/adn_livres.php';
+        adn_livres_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
     if ($action === 'media_limits' || ($isWrite && $action === 'save_media_limits')) { // 📎 taille des fichiers ajoutés (lib/media_limits.php)
         try { json_response($isWrite ? ['ok' => true, 'result' => media_limits_save($pdo ?? db(), $payload)] : media_limits_for_page($pdo ?? db())); } catch (RuntimeException $e) { json_response(['error' => readable_error_message($e)], 422); }
     }
@@ -435,6 +470,14 @@ try {
     if (in_array($action, TX_DEEP_ACTIONS, true)) { // 🔍 lecture approfondie (lib/transcription_actes.php) : rien n'est écrit dans la base
         tx_deep_dispatch((string) $action, $isWrite, $payload);
     }
+    if (in_array($action, IA_SRV_ACTIONS, true)) { // 🖥 Réglages → 🤖 IA : Ollama, Unsloth ou serveur compatible OpenAI, sur cet ordinateur (lib/ia_serveur.php)
+        ia_srv_dispatch((string) $action, $isWrite, $payload);
+    }
+    if (is_string($action) && str_starts_with($action, 'aia_')) { // 🤖 Assistant IA (lib/assistant_ia.php) : IA locale (Ollama), pas à pas, hors de la transaction commune ; n'ajoute qu'après un clic
+        require_once __DIR__ . '/lib/assistant_ia.php';
+        try { json_response($isWrite ? aia_api_post($pdo, $action, is_array($payload) ? $payload : []) : aia_api_get($pdo, $action, $_GET)); }
+        catch (Throwable $e) { json_response(['error' => readable_error_message($e)], $e instanceof LcndaBadInput ? 422 : 502); }
+    }
     if (!$isWrite && $action === 'htr_read_job') {
         try { json_response(htr_read_job(safe_text($_GET['id'] ?? ''))); } catch (Throwable $e) { json_response(['error' => readable_error_message($e)], 422); }
     }
@@ -453,6 +496,17 @@ try {
     if ($isWrite && $action === 'delete_empty_families') {
         delete_empty_families($pdo);
     }
+    // 🔎 🛠 chercher et remplacer, lien de parenté, sources, actions sur les résultats, santé de la base, règles d'étiquettes (lib/recherche_outils.php)
+    if (is_string($action) && str_starts_with($action, 'ro_')) {
+        require_once __DIR__ . '/lib/recherche_outils.php';
+        ro_dispatch($pdo, $action, $isWrite, is_array($payload) ? $payload : []);
+    }
+    // seulement SES actions : ld_status, ld_query, ld_facet (🧰 Données, lib/listes_donnees.php) et ld_famille (lib/listes_famille.php) ont le même début
+    if (is_string($action) && in_array($action, ['ld_groups', 'ld_preview', 'ld_merge', 'ld_merge_safe', 'ld_undo'], true)) { require_once __DIR__ . '/lib/lieux_doublons.php'; ld_dispatch($pdo, $action, $isWrite, is_array($payload) ? $payload : []); } // 📍 Lieux en double probables : trouver, fusionner, ↶ (lib/lieux_doublons.php)
+    if (is_string($action) && str_starts_with($action, 'ukus_')) { require_once __DIR__ . '/lib/archives_ukus.php'; ukus_dispatch($pdo, $action, $isWrite, is_array($payload) ? $payload : []); } // 🇬🇧🇺🇸 Où chercher ? → The National Archives, NARA : à la demande, rien pour les vivants ni en consultation (lib/archives_ukus.php)
+    if (is_string($action) && str_starts_with($action, 'txaid_')) { require_once __DIR__ . '/lib/transcription_aides.php'; txaid_dispatch($pdo, $action, $isWrite, is_array($payload) ? $payload : []); } // 📜 Atelier : mot illisible, signatures, progression (lib/transcription_aides.php)
+    if (is_string($action) && str_starts_with($action, 'rt_')) { require_once __DIR__ . '/lib/rapports_traitements.php'; rt_dispatch($pdo, $action, $isWrite, is_array($payload) ? $payload : []); } // 📊 Mes rapports, 🧰 Traitements en lot (lib/rapports_traitements.php)
+    if (is_string($action) && str_starts_with($action, 'lot_o_')) { require_once __DIR__ . '/lib/lot_o.php'; lot_o_dispatch($pdo, $action, $isWrite, is_array($payload) ? $payload : []); } // 🌳 Lot O : « Ce que dit l'arbre » et les phrases de la fiche, calculés avec l'arbre (lib/lot_o.php)
     // Fusion de l'arbre d'un cousin : hors de la transaction générale (copie de sécurité VACUUM INTO d'abord)
     if ($isWrite && $action === 'merge_gedcom_analyse') {
         merge_gedcom_analyse($pdo, $_FILES['file'] ?? null);
@@ -466,6 +520,9 @@ try {
         glock_backup_password(is_string($payload['password'] ?? null) ? $payload['password'] : ''); // 🔐 généalogie protégée : le même mot de passe, obligatoire
         export_full_backup($pdo, (string) ($payload['password'] ?? ''));
     }
+    // 🏛 commune de l'époque (lib/commune_histoire.php) et 🤝 Son réseau (lib/relations_reseau.php)
+    if ($isWrite && in_array($action, ['commune_hist_fix', 'commune_hist_place', 'commune_hist_setting'], true)) { require_once __DIR__ . '/lib/commune_histoire.php'; try { json_response(ch_api_post($pdo, (string) $action, is_array($payload) ? $payload : [])); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } }
+    if ($isWrite && in_array($action, ['reseau_save', 'reseau_delete', 'reseau_restore', 'reseau_settings_save'], true)) { require_once __DIR__ . '/lib/relations_reseau.php'; try { json_response(rs_api_post($pdo, (string) $action, is_array($payload) ? $payload : [])); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } }
     // 🏛 Frontières anciennes : télécharger une fois l'historique des communes de l'INSEE, le retirer, le remettre (lib/cartes_plus.php)
     if ($isWrite && in_array($action, ['frontieres_download', 'frontieres_remove', 'frontieres_restore', 'frontieres_apply'], true)) {
         require_once __DIR__ . '/lib/cartes_plus.php';
@@ -473,11 +530,45 @@ try {
         catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); }
     }
     // 🌦 Météo d'autrefois : importer / retirer un pack (fichiers à part, rien n'est écrit dans la généalogie : lib/meteo.php)
-    if ($isWrite && str_starts_with((string) $action, 'meteo_pack_')) {
+    if ($isWrite && (str_starts_with((string) $action, 'meteo_pack_') || str_starts_with((string) $action, 'meteo_dl_'))) {
         require_once __DIR__ . '/lib/meteo.php';
         try { json_response(meteo_api_post((string) $action, $payload, $_GET)); }
         catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); }
     }
+    if ($isWrite && preg_match('/^prenoms_pays_(dl|pack)_/', (string) $action)) { require_once __DIR__ . '/lib/prenoms_pays.php'; try { json_response(pp_api_post((string) $action, $payload)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } } // 📊 Prénoms d'ici et d'ailleurs : installer / retirer le pack (lib/prenoms_pays.php)
+    if ($isWrite && preg_match('/^gov_(dl|pack)_/', (string) $action)) { require_once __DIR__ . '/lib/gov.php'; try { json_response(gov_api_post((string) $action, $payload)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } } // 🏰 Lieux anciens (GOV) : installer / retirer le pack (fichiers à part : lib/gov.php)
+    if ($isWrite && (str_starts_with((string) $action, 'elections_dl_') || str_starts_with((string) $action, 'elections_pack_'))) { require_once __DIR__ . '/lib/elections.php'; try { json_response(elections_api_post((string) $action, $payload)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } } // 🗳 Élections d'autrefois : installer / retirer le pack (lib/elections.php)
+    // 🏘 Histoire du lieu : installer / retirer le pack, tables de frdata.org (fichiers à part : lib/histoire.php)
+    if ($isWrite && preg_match('/^hist_(dl|pack|fhmd)_/', (string) $action)) { require_once __DIR__ . '/lib/histoire.php'; try { json_response(hist_api_post((string) $action, $payload)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } }
+    if ($isWrite && preg_match('/^ba_(dl|pack)_/', (string) $action)) { require_once __DIR__ . '/lib/brevets_annuaires.php'; try { json_response(ba_api_post((string) $action, $payload)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } } // 📇 Annuaires de Paris : installer / retirer le pack (lib/brevets_annuaires.php)
+    if ($isWrite && preg_match('/^bo_(dl|pack)_/', (string) $action)) { require_once __DIR__ . '/lib/bases_officielles.php'; try { json_response(bo_api_post((string) $action, $payload)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } } // 🎖️🏅 Bases officielles : installer / retirer une base (fichiers à part : lib/bases_officielles.php)
+    if ($isWrite && in_array($action, ['vd_run', 'vd_auto', 'vd_confirm', 'vd_not_same', 'vd_undo', 'vd_doubt'], true)) { require_once __DIR__ . '/lib/veille_deces.php'; try { json_response(vd_api_post($pdo, (string) $action, is_array($payload) ? $payload : [])); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], $e instanceof LcndaBadInput ? 422 : 500); } } // ⚰️ Veille des décès (lib/veille_deces.php)
+    if ($isWrite && in_array($action, ['enligne_receive', 'enligne_sent', 'enligne_sent_undo', 'enligne_apply', 'enligne_dismiss', 'enligne_undo', 'enligne_settings'], true)) { require_once __DIR__ . '/lib/arbres_en_ligne.php'; try { json_response(ael_api_post($pdo, (string) $action, is_array($payload) ? $payload : [])); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], $e instanceof LcndaBadInput ? 422 : 500); } } // 🌐 Mes arbres en ligne : Ancestry, Geneanet (lib/arbres_en_ligne.php)
+    if ($isWrite && $action === 'ulist_write') { require_once __DIR__ . '/lib/listes_perso.php'; try { json_response(ulist_api_post($pdo, is_array($payload) ? $payload : [])); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], $e instanceof LcndaBadInput ? 422 : 500); } } // ＋ Mes listes : créer sa liste avec des données importées (lib/listes_perso.php)
+    if ($isWrite && $action === 'lp_write') { require_once __DIR__ . '/lib/listes_personnes.php'; try { json_response(lpers_api_post($pdo, is_array($payload) ? $payload : [])); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } } // 👤 Listes → Données : relier un nom à une fiche (lib/listes_personnes.php)
+    if ($isWrite && $action === 'cx_write') { require_once __DIR__ . '/lib/connexions.php'; try { json_response(cx_api_post($pdo, is_array($payload) ? $payload : [])); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], $e instanceof LcndaBadInput ? 422 : 502); } } // 🧺 Panier et connexions (lib/connexions.php)
+    if ($isWrite && in_array($action, ['tm_cache_clear', 'tm_cache_restore'], true)) { require_once __DIR__ . '/lib/terre_mots.php'; try { json_response(tm_api_post($pdo, (string) $action, $payload)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], $e instanceof LcndaBadInput ? 422 : 502); } } // 🪨🗣️💬 Terre et mots du village (lib/terre_mots.php)
+    if ($isWrite && in_array($action, ['cc_cache_clear', 'cc_cache_restore'], true)) { require_once __DIR__ . '/lib/commune_culture.php'; try { json_response(cc_api_post($pdo, (string) $action, $payload)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], $e instanceof LcndaBadInput ? 422 : 502); } } // 🎬📜🛡️🏷️🍲 Le village dans la culture (lib/commune_culture.php)
+    if ($isWrite && in_array($action, ['l9b_these_add', 'l9b_these_undo', 'l9b_these_mark', 'l9b_cache_clear', 'l9b_cache_restore'], true)) { require_once __DIR__ . '/lib/lot9_monde_coutumes.php'; try { json_response(l9b_api_post($pdo, (string) $action, is_array($payload) ? $payload : [])); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], $e instanceof LcndaBadInput ? 422 : 502); } } // 🌍 Monde et coutumes (lot 9) : ✓ C'est lui / ✗ Pas lui (thèse), réponses gardées
+    if ($isWrite && in_array($action, ['tr_cache_clear', 'tr_cache_restore'], true)) { require_once __DIR__ . '/lib/terroir.php'; try { json_response(tr_api_post($pdo, (string) $action, $payload)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], $e instanceof LcndaBadInput ? 422 : 502); } } // 🌾 Son terroir (lib/terroir.php)
+    if ($isWrite && in_array($action, ['br_cache_clear', 'br_cache_restore'], true)) { require_once __DIR__ . '/lib/boussole_rues.php'; try { json_response(br_api_post($pdo, (string) $action, $payload)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], $e instanceof LcndaBadInput ? 422 : 502); } } // 🧭🗞️📍 Boussole, jours et rues (lib/boussole_rues.php)
+    if ($isWrite && in_array($action, ['l9a_keep', 'l9a_keep_undo', 'l9a_cache_clear', 'l9a_cache_restore'], true)) { require_once __DIR__ . '/lib/lot9_sons_enfance.php'; try { json_response(l9a_api_post($pdo, (string) $action, $payload)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], $e instanceof LcndaBadInput ? 422 : 502); } } // 🔊🎼💌📷🐦 Sons et enfance (lib/lot9_sons_enfance.php)
+    if ($isWrite && in_array($action, ['l10o_cache_clear', 'l10o_cache_restore'], true)) { require_once __DIR__ . '/lib/lot10_objets_traces.php'; try { json_response(l10o_api_post($pdo, (string) $action, $payload)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], $e instanceof LcndaBadInput ? 422 : 502); } } // 🔔🧺🌿🪧 Objets et traces (lib/lot10_objets_traces.php)
+    if ($isWrite && preg_match('/^td_(cache_clear|cache_restore|tr_[a-z_]+)$/', (string) $action)) { require_once __DIR__ . '/lib/telech_d.php'; try { json_response(td_api_post($pdo, (string) $action, is_array($payload) ? $payload : [])); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], $e instanceof LcndaBadInput ? 422 : 502); } } // 🌐📷📖📚 Lot D (téléchargements) : traduction hors ligne (Argos), réponses gardées
+    if ($isWrite && in_array($action, ['l10v_cache_clear', 'l10v_cache_restore'], true)) { require_once __DIR__ . '/lib/lot10_voir_village.php'; try { json_response(l10v_api_post($pdo, (string) $action, is_array($payload) ? $payload : [])); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], $e instanceof LcndaBadInput ? 422 : 502); } } // 🖼️ Voir son village (lot 10) : réponses gardées
+    if ($isWrite && preg_match('/^(pistes|isoles|celeb)_[a-z_]+$/', (string) $action)) { // 🔎 Pistes pour tout l'arbre, 🧩 Branches isolées, ⭐ Parents célèbres (lib/pistes_auto.php, lib/branches_isolees.php, lib/parents_celebres.php) : hors de la transaction commune (pas à pas, réseau lent)
+        $lot = str_starts_with((string) $action, 'pistes_') ? ['pistes_auto', 'pst_api_post'] : (str_starts_with((string) $action, 'isoles_') ? ['branches_isolees', 'bis_api_post'] : ['parents_celebres', 'pcel_api_post']);
+        require_once __DIR__ . '/lib/' . $lot[0] . '.php';
+        try { json_response(['ok' => true, 'result' => $lot[1]($pdo, (string) $action, is_array($payload) ? $payload : [])]); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], $e instanceof LcndaBadInput ? 422 : 502); }
+    }
+    if ($isWrite && in_array($action, ['l10t_cache_clear', 'l10t_cache_restore'], true)) { require_once __DIR__ . '/lib/lot10_terre_gens.php'; try { json_response(l10t_api_post($pdo, (string) $action, is_array($payload) ? $payload : [])); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], $e instanceof LcndaBadInput ? 422 : 502); } } // ⛰️👥 Sa terre et ses gens (lot 10) : réponses gardées
+    if ($isWrite && str_starts_with((string) $action, 'telech_a_')) { require_once __DIR__ . '/lib/telech_a.php'; try { json_response(telech_a_api_post((string) $action, is_array($payload) ? $payload : [])); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], $e instanceof LcndaBadInput ? 422 : 502); } } // 🗺 Le village tel qu'il était (lot A) : cartes OSM hors ligne, réponses gardées (lib/telech_a.php)
+    if ($isWrite && in_array($action, ['cplus_keep', 'cplus_keep_undo', 'cplus_cache_clear', 'cplus_cache_restore'], true)) { require_once __DIR__ . '/lib/commune_plus.php'; try { json_response(cplus_api_post($pdo, (string) $action, $payload)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], $e instanceof LcndaBadInput ? 422 : 502); } } // 🪦🖼️⛪📰 Autour du village (lib/commune_plus.php)
+    if ($isWrite && in_array($action, ['ed_save', 'ed_delete', 'ed_restore', 'ed_people_save', 'ed_people_delete', 'ed_reg_save', 'ed_reg_delete', 'ed_link'], true)) { require_once __DIR__ . '/lib/edifices.php'; try { json_response(ed_api_post($pdo, (string) $action, is_array($payload) ? $payload : [])); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } } // 🏰⛪ Fiches des édifices (lib/edifices.php)
+    if ($isWrite && in_array($action, ['terr_save', 'terr_delete', 'terr_restore'], true)) { require_once __DIR__ . '/lib/territoires.php'; try { json_response(terr_api_post($pdo, (string) $action, $payload)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } } // 🧩 Mes territoires (lib/territoires.php)
+    if ($isWrite && in_array($action, ['mr_pop_keep', 'mr_pop_keep_undo', 'mr_cache_clear', 'mr_cache_restore'], true)) { require_once __DIR__ . '/lib/metiers_rivieres.php'; try { json_response(mr_api_post($pdo, (string) $action, $payload)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], $e instanceof LcndaBadInput ? 422 : 502); } } // ⛏️🌊🖼️ Métiers et rivières (lib/metiers_rivieres.php)
+    if ($isWrite && in_array($action, ['pm_cache_clear', 'pm_cache_restore'], true)) { require_once __DIR__ . '/lib/pays_memoire.php'; try { json_response(pm_api_post($pdo, (string) $action, $payload)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], $e instanceof LcndaBadInput ? 422 : 502); } } // 🏡 Pays et mémoire (lib/pays_memoire.php) : réponses gardées
+    if ($isWrite && preg_match('/^lp_(dl|pack)_/', (string) $action)) { require_once __DIR__ . '/lib/lieux_patrimoine.php'; try { json_response(lp_api_post((string) $action, $payload)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } } // 🏘️⛪ Lieux-dits et patrimoine : installer / retirer un pack (lib/lieux_patrimoine.php)
     if ($isWrite && str_starts_with((string) $action, 'lieux_')) { require_once __DIR__ . '/lib/lieux_a_placer.php'; } // 📍 Lieux à placer (écritures dans handle_write)
     if ($isWrite && !in_array($action, $uploadActions, true)) {
         handle_write($pdo, $action, $payload);
@@ -506,6 +597,7 @@ try {
         'image_pick' => json_response(['media' => heritage_image_pick($pdo, mb_substr(safe_text($_GET['q'] ?? ''), 0, 100), (string) ($_GET['filter'] ?? ''))]),
         'act_transcriptions_media' => json_response(['items' => act_transcriptions_for_media($pdo, safe_int($_GET['media_id'] ?? 0)), 'text' => (static function () use ($pdo) { $s = $pdo->prepare('SELECT COALESCE(transcription,\'\') FROM media m WHERE m.id=?' . (function_exists('sealed_media_sql') ? sealed_media_sql($pdo) : '')); $s->execute([safe_int($_GET['media_id'] ?? 0)]); return (string) $s->fetchColumn(); })()]), // 📄 le texte du document (un seul)
         'media_pages' => json_response(media_pages_of($pdo, safe_int($_GET['media_id'] ?? 0))),
+        'doc_links' => json_response(doc_links_of($pdo, safe_int($_GET['media_id'] ?? 0))), // 🔗 documents liés
         'act_page_owner' => json_response(['id' => act_page_owner($pdo, safe_int($_GET['media_id'] ?? 0))]), // 📑 l'acte « un seul texte » dont l'image est une page // 📑 les pages d'un document (lib/media_pages.php)
         'heritage_media_search' => json_response(['media' => heritage_media_search($pdo, safe_text($_GET['q'] ?? ''))]),
         'voyages' => json_response(['voyages' => voyages_data($pdo, safe_int($_GET['person_id'] ?? 0))]),
@@ -518,7 +610,7 @@ try {
         'old_maps' => json_response(['maps' => old_maps_data($pdo)]),
         'saved_searches' => json_response(saved_searches_data($pdo)),
         'saved_search_results' => json_response(saved_search_results($pdo, json_decode((string) ($_GET['criteria'] ?? '{}'), true) ?: [], safe_int($_GET['id'] ?? 0))),
-        'firstnames_france' => json_response(firstnames_france_data($pdo, max(1800, min(2100, safe_int($_GET['min_year'] ?? 1900, 1900))))),
+        'firstnames_france' => json_response(firstnames_france_data($pdo, max(1800, min(2100, safe_int($_GET['min_year'] ?? 1900, 1900))), safe_int($_GET['zone'] ?? 0))),
         'probate_inventories' => json_response(['inventories' => probate_inventories_data($pdo, safe_int($_GET['person_id'] ?? 0)), 'categories' => PROBATE_CATEGORIES]),
         'offsite_status' => json_response(offsite_status($pdo)),
         'scan_inbox_status' => json_response(scan_inbox_status($pdo)),
@@ -531,7 +623,7 @@ try {
         'impossible_journeys' => json_response(['alerts' => impossible_journeys($pdo, safe_int($_GET['person_id'] ?? 0))]),
         'sync_status' => json_response(sync_status($pdo)),
         'sync_export' => sync_export($pdo),
-        'ask_question' => json_response(ask_question($pdo, safe_text($_GET['q'] ?? ''), safe_int($_GET['person_id'] ?? 0), preg_replace('/[^0-9,]/', '', (string) ($_GET['place'] ?? '')))),
+        'ask_question' => json_response(research_with_places($pdo, ask_question($pdo, safe_text($_GET['q'] ?? ''), safe_int($_GET['person_id'] ?? 0), preg_replace('/[^0-9,]/', '', (string) ($_GET['place'] ?? ''))))), // 🗺 + les lieux placés des fiches (app-recherche-kit.js)
         'languages_overview' => json_response(languages_overview($pdo)),
         'record_languages' => json_response(['languages' => record_languages_for($pdo, ($_GET['type'] ?? '') === 'media' ? 'media' : 'event', [safe_int($_GET['id'] ?? 0)])[safe_int($_GET['id'] ?? 0)] ?? [], 'catalog' => LANGUAGES, 'certainties' => LANGUAGE_CERTAINTY]),
         'villages' => json_response(['villages' => villages_list($pdo, safe_text($_GET['q'] ?? ''))]),
@@ -552,7 +644,21 @@ try {
         'recueils_for' => json_response(['recueils' => recueils_for_entity($pdo, safe_text($_GET['type'] ?? ''), safe_text($_GET['key'] ?? ''))]),
         'addr_map' => json_response(addr_map_data($pdo, $_GET)),
         'recueil_media_targets' => json_response(recueil_media_targets($pdo, safe_text($_GET['type'] ?? ''), safe_text($_GET['key'] ?? ''))),
+        'recueil_progress' => json_response(recueil_progress_list($pdo, safe_int($_GET['id'] ?? 0))),
+        'recueils_ead' => json_response(recueils_ead($pdo, safe_int($_GET['service'] ?? 0))),
+        'anim_projects' => json_response(anim_projects_list($pdo)),
+        'anim_project' => json_response(anim_project_get($pdo, safe_int($_GET['id'] ?? 0))),
+        'anim_people' => json_response(anim_people($pdo)),
+        'recueil_sens' => json_response(recueil_sens_data($pdo, $_GET)),
+        'recueils_fonds' => json_response(recueils_fonds_data($pdo)),
+        'archive_service_recueils' => json_response(archive_service_recueils($pdo, safe_int($_GET['id'] ?? 0))),
+        'recueil_toc' => json_response(recueil_toc_list($pdo, safe_int($_GET['id'] ?? 0))),
+        'recueil_toc_propose' => json_response(recueil_toc_propose($pdo, safe_int($_GET['id'] ?? 0))),
+        'recueil_etat_todo' => json_response(recueil_etat_todo($pdo, safe_int($_GET['id'] ?? 0))),
+        'recueil_doc_index' => json_response(recueil_doc_index($pdo)),
+        'recueil_places' => json_response(recueil_places_of($pdo, safe_int($_GET['media_id'] ?? 0))),
         'recueil_media_owners' => json_response(recueil_media_owners($pdo, safe_int($_GET['media_id'] ?? 0))),
+        'recueil_iiif_preview' => json_response(recueil_iiif_preview((string) ($_GET['url'] ?? ''))),
         'recueil_search' => json_response(recueil_search_entities($pdo, safe_text($_GET['type'] ?? ''), safe_text($_GET['q'] ?? ''))),
         'atelier_project' => json_response(atelier_project($pdo, safe_int($_GET['id'] ?? 0))),
         'widget_rows' => json_response(widget_rows($pdo, is_array($wq = json_decode((string) ($_GET['q'] ?? '{}'), true)) ? $wq : [])),
@@ -566,7 +672,7 @@ try {
         'recent_acts' => json_response(isset($_GET['succ_cases']) || !function_exists('ad_config_path') ? recent_acts_page($pdo, $_GET) : calc_cached($pdo, 'recent_acts_' . substr(md5(json_encode([$_GET['all'] ?? null, $_GET['kind'] ?? null, $_GET['limit'] ?? null])), 0, 12), ['courriers', 'events', 'event_types', 'places', 'families', 'persons', 'media', 'media_links', 'source_links', 'archives_dispo_corr', 'surname_groups'], [date('Y-m-d'), $_GET['all'] ?? null, $_GET['kind'] ?? null, $_GET['limit'] ?? null, is_file(ad_config_path()) ? filemtime(ad_config_path()) . ':' . filesize(ad_config_path()) : '-'], static fn() => recent_acts_page($pdo, $_GET))),
         'act_request_letter' => json_response(act_request_letter($pdo, safe_int($_GET['event_id'] ?? 0), safe_text($_GET['requester'] ?? ''), safe_text($_GET['relation'] ?? ''))),
         // 🐘 épidémies, guerres, hivers : toute la base (3,5 s et 29 Mo à 200 000 fiches), gardé déjà encodé tant que la base ne change pas
-        'historical_context' => json_response_encoded(calc_cached($pdo, 'historical_context', ['persons', 'events', 'event_types', 'places', 'surname_groups', 'families', 'media'], [], static function () use ($pdo): string { memory_for_persons($pdo, 3, 1024); return json_encode(historical_context($pdo), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR); })),
+        'historical_context' => json_response_encoded(calc_cached($pdo, 'historical_context', ['persons', 'events', 'event_types', 'places', 'surname_groups', 'families', 'media', 'history_events', 'act_transcriptions'], [], static function () use ($pdo): string { memory_for_persons($pdo, 3, 1024); return json_encode(historical_context($pdo), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR); })),
         'vault_status' => json_response(vault_status($pdo)),
         'vault_download' => vault_download($pdo, safe_int($_GET['id'] ?? 0)),
         'age_checks' => json_response(age_checks($pdo)),
@@ -595,6 +701,8 @@ try {
         'periodicals' => json_response(periodicals_all($pdo)),
         'diagrams' => json_response(diagrams_all($pdo, $_GET)),
         'vector_docs' => json_response(['docs' => vector_docs_list($pdo)]),
+        'enquetes_plus' => json_response(enqp_get($pdo, $_GET)), // 🕵️ lib/enquetes_plus.php
+        'dna_plus' => json_response(dna_plus_get($pdo, $_GET)), // 🧬 phasage, rappels (lib/dna.php)
         'dna' => json_response(dna_all($pdo, $_GET)),
         'dna_lines' => json_response(dna_lines($pdo, safe_int($_GET['person_id'] ?? 0), safe_int($_GET['depth'] ?? 10))),
         'dna_tree' => json_response(dna_tree_data($pdo, safe_int($_GET['kit'] ?? 0), safe_int($_GET['gen'] ?? 8))),
@@ -632,6 +740,7 @@ try {
         'slideshows' => json_response(['items' => slideshows_list($pdo)]),
         'slideshow' => json_response(slideshow_get($pdo, safe_int($_GET['id'] ?? 0))),
         'act_transcriptions' => json_response(['items' => act_transcriptions_list($pdo)]),
+        'act_gabarits' => json_response(['items' => act_gabarits($pdo, (string) ($_GET['kind'] ?? ''))]), // 🧩 « ⤓ Tableur » des gabarits d'une sorte
         'act_transcriptions_page' => json_response(act_transcriptions_page($pdo, $_GET)), // Listes → Transcriptions d'actes (lecture seule, page par page)
         'act_transcription_versions' => json_response(['items' => act_transcription_versions($pdo, safe_int($_GET['act_id'] ?? 0))]), // 🕘 Versions du texte d'un acte
         'act_transcription_version' => json_response(act_transcription_version($pdo, safe_int($_GET['id'] ?? 0))),
@@ -643,6 +752,7 @@ try {
         'diagram_numbers' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_chiffres.php'; json_response(diagram_numbers($pdo, $_GET)); })(), // 📊 diagrammes « Chiffres » (lib/diagram_chiffres.php)
         'diagram_more' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_more.php'; json_response(diagram_more_data($pdo, $_GET)); })(), // 📊 arbre en frise, crises, fratrie, pyramide, accordéon, cousinages, matrice, patronymes, accord (lib/diagram_more.php)
         'diagram_cartes2' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_cartes2.php'; json_response(diagram_cartes2_data($pdo, $_GET)); })(), // 🗺️ carte en points, hexagones, carte qui raconte, prénoms transmis, causes de décès (lib/diagram_cartes2.php)
+        'ld_famille' => (static function () use ($pdo) { require_once __DIR__ . '/lib/listes_famille.php'; json_response(ld_famille($pdo, !empty($_GET['share']))); })(), // 👪 « Dans la famille » des Listes → Données : lieux placés et qui y a vécu quand (lib/listes_famille.php)
         'diagram_geo' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_cartes.php'; json_response(diagram_geo_data($pdo, $_GET)); })(), // 🗺️ diagrammes « Cartes » : lieux de l'arbre et leurs coordonnées (lib/diagram_cartes.php)
         'diagram_lot_c' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_lot_c.php'; json_response(diagram_lot_c_data($pdo, $_GET)); })(), // 📊 grille des recensements, schéma de preuve, arbre de mots, paroisses, carte en étoile (lib/diagram_lot_c.php)
         'prenoms_transmis' => (static function () use ($pdo) { require_once __DIR__ . '/lib/prenoms_france.php'; json_response(prenoms_transmis($pdo, $_GET)); })(), // 👶 Transmission des prénoms (lib/prenoms_france.php)
@@ -661,10 +771,16 @@ try {
         'press_ads' => json_response(press_ads_all($pdo)),
         'topic_sheet_templates' => json_response(['templates' => topic_sheet_templates($pdo)]),
         'biography' => json_response(bio_get($pdo, safe_int($_GET['id'] ?? 0), $_GET)), // 📖 lib/biographie.php
+        'bio_living_mentions' => json_response(bio_living_mentions($pdo)), // 🔒 récits écrits à la main qui nomment un vivant (avertissement du livre)
         'biography_day' => json_response(bio_day($pdo, safe_int($_GET['id'] ?? 0), $_GET)), // ⏳ Une journée dans la vie de… (lib/biographie_journee.php)
         'biography_day_events' => json_response(['events' => bio_day_events($pdo, safe_int($_GET['id'] ?? 0))]), // ⏳ les dates proposées
         'world_around' => json_response(world_around($pdo, safe_int($_GET['id'] ?? 0), $_GET)), // 🌍 lib/monde_autour.php
+        'ciel_heure_ctx' => (static function () use ($pdo) { require_once __DIR__ . '/lib/ciel_heure.php'; json_response(ciel_heure_ctx($pdo, $_GET)); })(), // 🕰️ la vraie heure de l'acte, 🌌 ciel de naissance : date lue et lieu (lib/ciel_heure.php)
         'world_events' => json_response(world_events_list($pdo, $_GET)),
+        'grands_mouvements' => json_response(mouvements_list($pdo, $_GET)), // 🌍 lib/mouvements.php
+        'listes_plus' => (static function () use ($pdo) { require_once __DIR__ . '/lib/listes_plus.php'; json_response(lp_get($pdo, $_GET)); })(), // 📋 Listes en plus : 📚 Sources, 💍 Familles, 🔤 Noms de famille, 📝 Notes (lib/listes_plus.php, lib/sources_gestion.php)
+        'person_movements' => json_response(['moves' => mouvements_person($pdo, safe_int($_GET['id'] ?? 0))]),
+        'lune_family' => (static function () use ($pdo) { require_once __DIR__ . '/lib/lune.php'; json_response(lune_family($pdo)); })(), // 🌒 La Lune et les éclipses : les lieux datés de la famille (lib/lune.php)
         'old_trade' => json_response(trade_sheet($pdo, $_GET)), // 🛠️ lib/metiers_anciens.php
         'old_trades' => json_response(trades_list($pdo, $_GET)),
         'metiers_arbre' => (static function () use ($pdo) { require_once __DIR__ . '/lib/metiers_carte.php'; json_response(metiers_arbre_data($pdo, $_GET)); })(), // 🧬 Arbre des métiers (lib/metiers_carte.php)
@@ -713,6 +829,8 @@ try {
         'ou_chercher_person' => json_response(ouc_person_context($pdo, safe_int($_GET['id'] ?? 0))), // 🌍 Où chercher ? (lib/ou_chercher.php) : ce que la fiche dit pour choisir les sites
         'murs_de_brique' => json_response(ouc_walls_data($pdo, $_GET)), // 🧩 Murs de brique (lib/ou_chercher.php) : ancêtres où l'on bloque
         'mur_de_brique' => json_response(ouc_wall_detail($pdo, safe_int($_GET['id'] ?? 0))), // 🧩 un mur : déjà cherché, indices dans la base
+        'ou_chercher_openarch' => json_response(ouc_oa_search($pdo, $_GET)), // 🇳🇱🇧🇪 Où chercher ? → Open Archives, à la demande (lib/ou_chercher_openarch.php)
+        'ou_chercher_openarch_record' => json_response(ouc_oa_record($pdo, $_GET)), // 🇳🇱🇧🇪 un acte d'Open Archives : ses personnes
         'preuve' => json_response(preuve_api_get($pdo, $_GET)), // ⚖️ dossiers de preuve et 🛡 solidité des liens (lib/preuve.php)
         'research_journal' => json_response(research_journal_data($pdo, $_GET)), // 🗓 Journal des recherches (lib/research_journal.php) ; &person_id= : bloc « 🔍 Déjà cherché »
         'research_already' => json_response(research_already_data($pdo, $_GET)), // ⚠️ « Déjà dans ton suivi » pendant la saisie
@@ -741,11 +859,51 @@ try {
         'suivi' => json_response(suivi_get($pdo, $_GET)), // 🐾 Suivi des animaux (lib/suivi.php)
         'report_info' => (static function () use ($pdo) { require_once __DIR__ . '/lib/signaler.php'; json_response(report_info($pdo)); })(), // 🐞 Signaler un problème : version, système, nombres seulement (lib/signaler.php)
         'mode_simple_data' => (static function () use ($pdo) { require_once __DIR__ . '/lib/mode_simple.php'; json_response(mode_simple_data($pdo)); })(), // 🧓 Mode simple : personnes, unions, photos (lecture seule, lib/mode_simple.php)
-        'meteo_status', 'meteo_about', 'meteo_events', 'meteo_event', 'meteo_person', 'meteo_point', 'meteo_time', 'meteo_today', 'meteo_place', 'meteo_altitude' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/meteo.php'; json_response(meteo_api_get($pdo, (string) $action, $_GET)); })(), // 🌦 Météo d'autrefois (lib/meteo.php) : fichiers à part, lecture seule
+        'gov_status', 'gov_about', 'gov_search', 'gov_object', 'gov_place', 'gov_events', 'gov_dl_info', 'gov_dl_resume' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/gov.php'; json_response(gov_api_get($pdo, (string) $action, $_GET)); })(), // 🏰 Lieux anciens (GOV) (lib/gov.php)
+        'meteo_status', 'meteo_about', 'meteo_events', 'meteo_event', 'meteo_person', 'meteo_point', 'meteo_time', 'meteo_today', 'meteo_place', 'meteo_altitude', 'meteo_dl_info', 'meteo_dl_resume' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/meteo.php'; json_response(meteo_api_get($pdo, (string) $action, $_GET)); })(), // 🌦 Météo d'autrefois (lib/meteo.php) : fichiers à part, lecture seule
+        'elections_status', 'elections_person', 'elections_place', 'elections_dl_info', 'elections_dl_resume' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/elections.php'; try { json_response(elections_api_get($pdo, (string) $action, $_GET)); } catch (RuntimeException $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🗳 Élections d'autrefois (lib/elections.php)
+        'prenoms_pays_status', 'prenoms_pays_about', 'prenoms_pays_person', 'prenoms_pays_curve', 'prenoms_pays_dl_info', 'prenoms_pays_dl_resume' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/prenoms_pays.php'; try { json_response(pp_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 📊 Prénoms d'ici et d'ailleurs (lib/prenoms_pays.php) : pack à part, lecture seule
+        'lp_index', 'lp_links', 'lp_person' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/listes_personnes.php'; try { json_response(lpers_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 👤 Listes → Données : les noms reconnus dans la base (lib/listes_personnes.php), lecture seule
+        'ulist_index', 'ulist_rows' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/listes_perso.php'; try { json_response(ulist_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // ＋ Mes listes (lib/listes_perso.php), lecture
+        'ld_query', 'ld_facet', 'ld_status' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/listes_donnees.php'; try { json_response(ld_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🧰 Listes → Données : recherche dans les packs installés (lib/listes_donnees.php), lecture seule
+        'hist_status', 'hist_about', 'hist_person', 'hist_place', 'hist_fhmd_status', 'hist_dl_info', 'hist_dl_resume' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/histoire.php'; try { json_response(hist_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🏘 Histoire du lieu (lib/histoire.php) : pack à part, lecture seule
+        'ba_status', 'ba_person', 'ba_list', 'ba_map', 'ba_place', 'ba_dl_info', 'ba_dl_resume' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/brevets_annuaires.php'; try { json_response(ba_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 📇💡 Annuaires de Paris, brevets (lib/brevets_annuaires.php) : pack à part, lecture seule
+        'bo_status', 'bo_person', 'bo_search', 'bo_dl_info', 'bo_dl_resume' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/bases_officielles.php'; try { json_response(bo_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🎖️🏅 Morts pour la France, Léonore (lib/bases_officielles.php) : bases à part, lecture seule
+        'dp_places' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/droit_pouvoir.php'; try { json_response(dp_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // ⚖️🎩🏛️ Droit et pouvoir : code INSEE des lieux (lib/droit_pouvoir.php)
+        'vd_status', 'vd_list', 'vd_dismissed' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/veille_deces.php'; try { json_response(vd_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // ⚰️ Veille des décès
+        'enligne_status', 'enligne_changes', 'enligne_lines' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/arbres_en_ligne.php'; try { json_response(ael_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🌐 Mes arbres en ligne
+        'cx_count', 'cx_basket', 'cx_person_investigations', 'cx_links', 'cx_item_links', 'cx_notes', 'cx_used', 'cx_search', 'cx_needs', 'cx_needs_all', 'cx_hints', 'cx_map' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/connexions.php'; try { json_response(cx_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🧺 Panier et connexions (lib/connexions.php)
+        'tm_place', 'tm_person', 'tm_homonymes', 'tm_asteroid', 'tm_list', 'tm_about' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/terre_mots.php'; try { json_response(tm_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🪨🗣️💬 Terre et mots du village (lib/terre_mots.php) : données livrées + homonymes en ligne, gardé
+        'cc_place', 'cc_wiki', 'cc_person', 'cc_rues', 'cc_credit', 'cc_list', 'cc_about' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/commune_culture.php'; try { json_response(cc_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🎬📜🛡️🏷️🍲 Le village dans la culture (lib/commune_culture.php) : données livrées + en ligne à la demande, gardé
+        'l9b_person', 'l9b_place', 'l9b_these', 'l9b_langues', 'l9b_about' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/lot9_monde_coutumes.php'; try { json_response(l9b_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🌍 Monde et coutumes (lot 9) : contexte d'une fiche, 🎓 thèse (Sudoc, theses.fr) et 🌐 noms en toutes langues (Wikidata), en ligne et gardés
+        'l10_mariages' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/lot10_regles_actes.php'; try { json_response(l10_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // ⚖️ Les règles de sa vie (lot 10) : 💒 dates des mariages d'une commune (temps clos)
+        'tr_place', 'tr_person', 'tr_nom', 'tr_base_names', 'tr_list', 'tr_credit', 'tr_about' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/terroir.php'; try { json_response(tr_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🌾 Son terroir (lib/terroir.php) : AOC, races, coiffes, écoles livrées ; sens des prénoms (Wiktionnaire) livré + en ligne, gardé
+        'br_person', 'br_places', 'br_day', 'br_about' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/boussole_rues.php'; try { json_response(br_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🧭🗞️📍 Boussole, jours et rues (lib/boussole_rues.php) : sans réseau, sauf br_day (Wikipédia, gardé)
+        'l8b_person', 'l8b_tree' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/lot8_soldats_noms.php'; try { json_response(l8b_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🎖️ Soldats et noms (lib/lot8_soldats_noms.php) : lecture seule
+        'l8a_homonyms', 'l8a_homonyms_base', 'l8a_maps' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/lot8_ciel_metier.php'; try { json_response(l8a_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🌍🗺️ Lot 8 : villes du monde au même nom (GeoNames local), vieux plans (Commons, gardés en cache)
+        'l9a_eu', 'l9a_gbif', 'l9a_xc', 'l9a_about' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/lot9_sons_enfance.php'; try { json_response(l9a_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🔊💌📷🐦🌼 Sons et enfance : Europeana, GBIF, xeno-canto en ligne, gardés
+        'l10o_cloches', 'l10o_musee', 'l10o_herbier', 'l10o_plaques', 'l10o_about' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/lot10_objets_traces.php'; try { json_response(l10o_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🔔🧺🌿🪧 Objets et traces : cloches (Palissy/POP), objets de musée (Joconde), herbiers (GBIF), plaques (OSM), gardés
+        'td_loc', 'td_wiki', 'td_wikisource', 'td_about', 'td_tr_status', 'td_tr_dl_info', 'td_tr_dl_resume' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/telech_d.php'; try { json_response(td_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 📷📖📚🌐 Lot D (téléchargements) : loc.gov, Wikipédia, Wikisource à la demande, gardés ; état de la traduction hors ligne
+        'l10v_pop', 'l10v_vue', 'l10v_forets', 'l10v_maisons', 'l10v_list', 'l10v_about' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/lot10_voir_village.php'; try { json_response(l10v_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🖼️📷🏔🌳🏠 Voir son village (lot 10) : POP, Wikidata, IGN en ligne à la demande, gardé
+        'pistes_list', 'pistes_count', 'pistes_job', 'pistes_about' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/pistes_auto.php'; try { json_response(pst_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🔎 Pistes pour tout l'arbre (lib/pistes_auto.php)
+        'isoles_list', 'isoles_group' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/branches_isolees.php'; try { json_response(bis_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🧩 Branches isolées (lib/branches_isolees.php)
+        'celeb_list', 'celeb_person', 'celeb_proposals', 'celeb_about' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/parents_celebres.php'; try { json_response(pcel_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // ⭐ Parents célèbres (lib/parents_celebres.php)
+        'l10t_person', 'l10t_place', 'l10t_risques', 'l10t_risques_near', 'l10t_nom', 'l10t_marche', 'l10t_parcelle', 'l10t_about' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/lot10_terre_gens.php'; try { json_response(l10t_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // ⛰️👥 Sa terre et ses gens (lot 10) : contexte d'une fiche, Géorisques et IGN en ligne (gardé), carte du nom (décès INSEE de l'app)
+        'telech_a_clc', 'telech_a_list', 'telech_a_about', 'telech_a_osm_status', 'telech_a_osm_dl_info', 'telech_a_osm_dl_resume' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/telech_a.php'; try { json_response(telech_a_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🗺🌾 Le village tel qu'il était (lot A) : CORINE 1990→2018 autour d'un lieu (gardé), packs OSM hors ligne
+        'telech_a_osm_tile' => (static function () use ($pdo) { require_once __DIR__ . '/lib/telech_a.php'; telech_a_osm_tile_response($pdo); })(), // 🗺 tuile OpenStreetMap hors ligne (SVG dessiné ici)
+        'cplus_cemeteries', 'cplus_images', 'cplus_church', 'cplus_newspapers', 'cplus_about', 'cplus_list' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/commune_plus.php'; try { json_response(cplus_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🪦🖼️⛪📰 Autour du village (lib/commune_plus.php) : en ligne à la demande, gardé sur l'ordinateur
+        'commune_hist_event', 'commune_hist_check', 'commune_hist_about' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/commune_histoire.php'; try { json_response(ch_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🏛 commune qui n'existait pas encore ou plus à la date d'un événement (lib/commune_histoire.php)
+        'reseau_person', 'reseau_list', 'reseau_among', 'reseau_settings' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/relations_reseau.php'; try { json_response(rs_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🤝 Son réseau : relations hors famille (lib/relations_reseau.php)
         'frontieres_status' => (static function () use ($pdo) { require_once __DIR__ . '/lib/cartes_plus.php'; json_response(cp_front_status($pdo)); })(), // 🏛 Frontières anciennes : installé ? tailles, empreintes
         'frontieres_remote' => (static function () { require_once __DIR__ . '/lib/cartes_plus.php'; try { json_response(cp_front_remote()); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🏛 adresses et tailles annoncées
         'frontieres_communes' => (static function () { require_once __DIR__ . '/lib/cartes_plus.php'; json_response(cp_front_communes($_GET)); })(), // 🏛 communes disparues d'un cadre de la carte
         'cartes_plus' => (static function () use ($pdo) { require_once __DIR__ . '/lib/cartes_plus.php'; try { json_response(cp_data($pdo, $_GET)); } catch (RuntimeException $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🗺️ cartes des patronymes, ADN, recherches, chaleur (lib/cartes_plus.php)
+        'ed_list', 'ed_get', 'ed_person' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/edifices.php'; try { json_response(ed_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🏰⛪ Fiches des édifices (lib/edifices.php)
+        'terr_list', 'terr_get', 'terr_places', 'carto_packs', 'carto_pack_rows' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/territoires.php'; try { json_response(terr_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🧩 Mes territoires, 🗺 packs sur une carte (lib/territoires.php)
+        'mr_person', 'mr_place', 'mr_rivers', 'mr_pop', 'mr_about', 'mr_list', 'mr_list_pop' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/metiers_rivieres.php'; try { json_response(mr_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // ⛏️🏭⚙️🌊🖼️ Métiers et rivières (lib/metiers_rivieres.php) : données livrées + en ligne gardé
+        'pm_films', 'pm_list_films', 'pm_about' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/pays_memoire.php'; try { json_response(pm_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🏡🎞️ Pays et mémoire (lib/pays_memoire.php) : films d'archives en ligne, gardés
+        'lp_status', 'lp_about', 'lp_place', 'lp_suggest', 'lp_list', 'lp_dl_info', 'lp_dl_resume' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/lieux_patrimoine.php'; try { json_response(lp_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 📜🏘️⛪ Anciens noms, lieux-dits, patrimoine (lib/lieux_patrimoine.php) : lecture seule
+        'ha_life' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/histoire_autour.php'; try { json_response(ha_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🧭 Histoire autour (lib/histoire_autour.php) : la vie d'une personne, lecture seule
         'lieux_a_placer' => (static function () use ($pdo) { require_once __DIR__ . '/lib/lieux_a_placer.php'; json_response(lap_list($pdo, $_GET)); })(), // 📍 Lieux à placer : ce que l'app propose (rien n'est placé)
         'cartes_plus2' => (static function () use ($pdo) { require_once __DIR__ . '/lib/cartes_plus2.php'; try { json_response(cp2_data($pdo, $_GET)); } catch (RuntimeException $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🗺️ vague 2 : métiers, lignées en miroir, aire de vie, parrains et témoins, crises (lib/cartes_plus2.php)
         'quick_search' => json_response(quick_search_data($pdo, safe_text($_GET['q'] ?? ''))),
@@ -756,6 +914,11 @@ try {
         'census_member_memberships' => census_member_memberships_data($pdo, safe_int($_GET['person_id'] ?? 0)),
         'tree' => tree_data($pdo, safe_int($_GET['id'] ?? 0)),
         'kinship' => kinship_data($pdo, safe_int($_GET['from'] ?? 0), safe_int($_GET['to'] ?? 0)),
+        // 👤 Personnes (lib/people_audit.php) : 🧭 ton lien avec une fiche / plusieurs fiches, 👪 fiche familiale, choix des filtres de la colonne
+        'person_link' => (static function () use ($pdo) { require_once __DIR__ . '/lib/people_audit.php'; json_response(pa_person_link($pdo, safe_int($_GET['id'] ?? 0), safe_int($_GET['root'] ?? 0))); })(),
+        'people_links' => (static function () use ($pdo) { require_once __DIR__ . '/lib/people_audit.php'; json_response(pa_people_links($pdo, explode(',', (string) ($_GET['ids'] ?? '')), safe_int($_GET['root'] ?? 0))); })(),
+        'family_sheet' => (static function () use ($pdo) { require_once __DIR__ . '/lib/people_audit.php'; json_response(pa_family_sheet($pdo, safe_int($_GET['id'] ?? 0))); })(),
+        'people_filter_choices' => (static function () use ($pdo) { require_once __DIR__ . '/lib/people_audit.php'; json_response(pa_filter_choices($pdo)); })(),
         // 🐘 la carte de toute la base (2 s à 200 000 fiches) : gardée tant que la base ne change pas, pour les réglages
         // sans filtre de personne (sorte, limite, lieu précis) ; jamais avec le filtre des dossiers de succession
         'map' => !isset($_GET['succ_cases']) && !array_diff(array_keys($_GET), ['action', 'tag', 'limit', 'location_mode', 'surname_mode']) ? calc_cached_response($pdo, 'map_' . substr(md5(json_encode([$_GET['tag'] ?? '', $_GET['limit'] ?? '', $_GET['location_mode'] ?? '', $_GET['surname_mode'] ?? ''])), 0, 12), ['persons', 'events', 'event_types', 'families', 'places', 'surname_groups', 'census_records', 'census_members'], [$_GET['tag'] ?? '', $_GET['limit'] ?? '', $_GET['location_mode'] ?? '', $_GET['surname_mode'] ?? ''], static fn() => map_data($pdo)) : map_data($pdo),
@@ -832,6 +995,7 @@ try {
         'insee_import' => insee_deces_import($pdo),
         'insee_imports_list' => insee_deces_imports_list($pdo),
         'insee_remote_files' => json_response(insee_remote_files($pdo)),
+        'insee_maj_status' => json_response(insee_maj_status($pdo, $_GET)), // ⤓ décès INSEE : installé, en cours, en ligne (lib/insee_remote.php)
         default => json_response(['error' => 'Action inconnue'], 404),
     };
 } catch (Throwable $e) {
@@ -962,6 +1126,10 @@ function site_defaults_allowed_keys(): array
     // même liste que SITE_DEFAULT_KEYS (assets/js/app.js) : une clé absente d'ici est jetée sans rien dire
     return [
         'genealogie-meteo', // 🌦 Météo d’autrefois
+        'genealogie-connexions', // 🧺 Panier et connexions (heritage-connexions.js)
+        'genealogie-tx-glossaire', // 📖 Mon glossaire de l’Atelier (heritage-atelier-aides.js)
+        'genealogie-elections', // 🗳 Élections d’autrefois
+        'genealogie-gov', // 🏰 Lieux anciens GOV
         'genealogie-menu-names',
         'genealogie-menu-icons',
         'genealogie-lightbox-sections',
@@ -969,7 +1137,7 @@ function site_defaults_allowed_keys(): array
         'genealogie-diagram-kinds',
         'genealogie-house-snap',
         'genealogie-house-lib',
-        'lcnda-decor-tree',
+        'lcnda-decor-tree', 'genealogie-decor-tree', // R8 : le nouveau nom (assets/js/app.js SETTING_RENAMES) ; l’ancien reste accepté (défauts déjà enregistrés)
         'genealogie-decor-tree-formats',
         'genealogie-decor-tree-styles',
         'genealogie-edit-tools-order',
@@ -978,6 +1146,10 @@ function site_defaults_allowed_keys(): array
         'genealogie-mylists-order',
         'genealogie-keynote-prefs',
         'genealogie-vector-map-palette',
+        'genealogie-lot-n', 'genealogie-lot-n2', // 🏛 Archives et mémoire, 📊 Chiffres d’époque : sujets affichés (app-lot-n-archives.js, app-lot-n2-chiffres.js)
+        'genealogie-ouc-ukus', 'genealogie-sources-ouvertes-27-sites', // 🇬🇧🇺🇸 Où chercher ? ; 🔗 adresses des sites (sources ouvertes)
+        'genealogie-carte-couleurs', 'genealogie-recherche-icones', 'genealogie-recherche-boutons', // 🎨 couleurs des cartes ; 🔎 icônes et boutons de la Recherche
+        'genealogie-arbre-dit', // 🌳 Ce que dit l’arbre (app-lot-o-arbre.js)
         'genealogie-dashboard-blocks',
         'genealogie-animal-blocks', // 🗂 blocs et sections des fiches des animaux
         'genealogie-sheet-sections', // 🗂 sections des fiches (app-sections.js)
@@ -988,7 +1160,7 @@ function site_defaults_allowed_keys(): array
         'genealogie-menu-hidden',
         'genealogie-list-order',
         'genealogie-list-hidden',
-        'lcnda-tresors-order',
+        'lcnda-tresors-order', 'genealogie-tresors-order',
         'genealogie-map-order',
         'genealogie-map-hidden',
         'genealogie-maintenance-order',
@@ -1003,6 +1175,7 @@ function site_defaults_allowed_keys(): array
         'genealogie-tile-hidden-cats',
         'genealogie-tile-hidden',
         'genealogie-tile-custom-cats',
+        'genealogie-tile-user', // 🗺 mes fonds de carte à moi (heritage-fonds-carte.js)
         'genealogie-person-blocks',
         'genealogie-dashboard-widget-catalog-order',
         'genealogie-dashboard-widget-catalog-hidden',
@@ -1012,6 +1185,7 @@ function site_defaults_allowed_keys(): array
         'genealogie-gender-colors',
         'genealogie-tree-card-fields',
         'genealogie-identity-name-variants-display',
+        'genealogie-sources-defaut', // 📚 cadres des sources ouverts / fermés par défaut sur la fiche (assets/js/app.js)
         'genealogie-battue-level-colors',
         'genealogie-battue-level-color-presets',
         'genealogie-person-badge-colors',
@@ -1075,7 +1249,7 @@ function save_site_defaults(PDO $pdo,array $data): array
         $value=site_default_value_clean($key,(string)$value);
         if($value===null)continue;
         // les réglages des tableaux peuvent contenir des formes faites d'une image : plus de place pour eux
-        if(strlen($value)>((str_starts_with($key,'genealogie-board-prefs')||in_array($key,['genealogie-house-lib','lcnda-decor-tree','genealogie-keynote-prefs'],true))?4000000:200000))throw new RuntimeException('Un réglage est trop volumineux.');
+        if(strlen($value)>((str_starts_with($key,'genealogie-board-prefs')||in_array($key,['genealogie-house-lib','lcnda-decor-tree','genealogie-decor-tree','genealogie-keynote-prefs'],true))?4000000:200000))throw new RuntimeException('Un réglage est trop volumineux.');
         $settings[$key]=$value;
     }
     if(!is_dir(dirname(SITE_DEFAULTS_PATH))&&!mkdir(dirname(SITE_DEFAULTS_PATH),0775,true)&&!is_dir(dirname(SITE_DEFAULTS_PATH)))throw new RuntimeException('Impossible de créer le dossier de configuration.');
@@ -2115,11 +2289,14 @@ function people_list(PDO $pdo): never
     $offset = max(0, safe_int($_GET['offset'] ?? 0));
     $limit = min(250, max(20, safe_int($_GET['limit'] ?? 120)));
     $kind = (string) ($_GET['kind'] ?? '');
+    require_once __DIR__ . '/lib/people_audit.php'; // 🔍 Filtrer ▾ et Trier de la colonne (genre, vivant, Sosa, branche, étiquette, siècle…)
+    [$paWhere, $paParams] = pa_people_filters($pdo, $_GET);
+    $paSort = (string) ($_GET['sort'] ?? '');
     if ($search !== '') {
         // 🔎 recherche « à la française » (lib/recherche_fr.php) : nom de la fiche, autres noms, particules, prénoms latins et
         // abrégés, phonétique en repli (ou toujours, interrupteur « Toujours phonétique »), dates tapées en français
         $res = rfr_person_ids($pdo, $search, ['offset' => $offset, 'limit' => $limit, 'phonetic' => $phonetic, 'kind' => in_array($kind, ['animal', 'human'], true) ? $kind : '',
-            'where' => $group ? 'p.surname_group_id=:rgroup' : '', 'params' => $group ? [':rgroup' => $group] : []]);
+            'where' => implode(' AND ', array_merge($group ? ['p.surname_group_id=:rgroup'] : [], $paWhere)), 'params' => ($group ? [':rgroup' => $group] : []) + $paParams]);
         $rows = [];
         if ($res['ids']) {
             $why = rfr_why_of($pdo, $res);
@@ -2127,6 +2304,7 @@ function people_list(PDO $pdo): never
             foreach ($pdo->query(person_select() . ' WHERE p.id IN (' . implode(',', $res['ids']) . ')')->fetchAll() as $r) { $byId[(int) $r['id']] = $r; }
             foreach ($res['ids'] as $id) { if (isset($byId[$id])) { $rows[] = $byId[$id] + ['why' => $why[$id] ?? [], 'tier' => $res['tiers'][$id] ?? 0]; } }
         }
+        $rows = pa_sort_rows($rows, $paSort);
         json_response(['people' => $rows, 'offset' => $offset, 'limit' => $limit, 'phonetic' => $res['phonetic'], 'fallback' => $res['fallback'], 'total' => $res['total']]);
     }
     $where = [];
@@ -2136,7 +2314,9 @@ function people_list(PDO $pdo): never
         $params[':group'] = $group;
     }
     if ($kind === 'animal') { $where[] = "p.kind='animal'"; } elseif ($kind === 'human') { $where[] = "p.kind<>'animal'"; }
-    $sql = person_select() . ($where ? ' WHERE ' . implode(' AND ', $where) : '') . " ORDER BY CASE WHEN trim(COALESCE(p.last_name,''))='' THEN 1 WHEN p.last_name GLOB '[?X]*' OR lower(p.last_name)='inconnu' THEN 2 ELSE 0 END,".fold_sort_sql('p.last_name').",".fold_sort_sql('p.first_name').",p.id LIMIT :limit OFFSET :offset";
+    $where = array_merge($where, $paWhere); $params += $paParams;
+    $paOrder = pa_people_order($paSort);
+    $sql = person_select() . ($where ? ' WHERE ' . implode(' AND ', $where) : '') . ($paOrder !== null ? " ORDER BY {$paOrder} LIMIT :limit OFFSET :offset" : '') . ($paOrder !== null ? '' : " ORDER BY CASE WHEN trim(COALESCE(p.last_name,''))='' THEN 1 WHEN p.last_name GLOB '[?X]*' OR lower(p.last_name)='inconnu' THEN 2 ELSE 0 END,".fold_sort_sql('p.last_name').",".fold_sort_sql('p.first_name').",p.id LIMIT :limit OFFSET :offset");
     $stmt = $pdo->prepare($sql);
     foreach ($params as $key => $value) $stmt->bindValue($key, $value);
     $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
@@ -2515,6 +2695,7 @@ function person_detail(PDO $pdo, int $id): never
         WHERE mt.person_id=? AND COALESCE(mt.tag_type,'person')='signature'
         ORDER BY COALESCE(m.date_text,''),m.id,mt.id");
     $signatures->execute([$id]);
+    $signatureRows = $signatures->fetchAll();
 
     // Familles (unions) de cette personne, pour permettre l'ajout d'un événement de portée
     // "Famille" (ex: Mariage) rattaché à la bonne union plutôt qu'à la personne seule.
@@ -2525,6 +2706,10 @@ function person_detail(PDO $pdo, int $id): never
         FROM families f WHERE f.partner1_id=? OR f.partner2_id=?
         ORDER BY marriage_year IS NULL, marriage_year, f.id");
     $families->execute([$id, $id, $id, $id]);
+    $familyRows = $families->fetchAll();
+    // 🔒 lectures toutes terminées ici : les fonctions appelées plus bas (heritage_person_data…) peuvent créer une table ; avec une
+    // lecture encore ouverte, SQLite refusait aussitôt cette écriture (« base occupée ») dès qu'un autre PHP du relais avait écrit entre-temps
+    $variantRows = $variants->fetchAll(); $hypothesisRows = $hypotheses->fetchAll(); $journalRows = $journal->fetchAll();
 
     $onlineSheets = $pdo->prepare('SELECT s.*, m.filename AS screenshot_filename, m.thumbnail AS screenshot_thumbnail, m.title AS screenshot_title FROM person_online_sheets s LEFT JOIN media m ON m.id=s.screenshot_media_id WHERE s.person_id=? ORDER BY s.updated_at DESC,s.id DESC');
     $onlineSheets->execute([$id]);
@@ -2545,24 +2730,24 @@ function person_detail(PDO $pdo, int $id): never
         'family_memories' => family_memories_data($pdo, $id),
         'heritage' => heritage_person_data($pdo, $id),
         'onlineSheets' => $onlineSheetRows,
-        'events' => $completion['_events'],
+        'events' => kiosk_state()['on'] ? array_values(array_filter($completion['_events'], static fn($e) => empty($e['is_private']))) : $completion['_events'], // 🔒 événement confidentiel : caché en consultation
         'witnessEvents' => $witnessEventRows,
         'parents' => $completion['_parents'],
         'partners' => $completion['_partners'],
-        'families' => $families->fetchAll(),
+        'families' => $familyRows,
         'children' => $completion['_children'],
         'siblings' => $siblingRows,
-        'variants' => $variants->fetchAll(),
+        'variants' => $variantRows,
         'labels' => labels_for_entity($pdo,'person',$id),
         'notes' => $notesRows,
         'media' => $mediaRows,
-        'signatures' => $signatures->fetchAll(),
+        'signatures' => $signatureRows,
         'sources' => $sourceRows,
         'investigations' => $investigationRows,
         'battues' => $battueRows,
-        'hypotheses' => $hypotheses->fetchAll(),
+        'hypotheses' => $hypothesisRows,
         'evidence' => $evidenceRows,
-        'researchJournal' => $journal->fetchAll(),
+        'researchJournal' => $journalRows,
         'census' => $census,
         'completion' => ['score'=>$completion['score'],'items'=>$completion['items']],
         'biography' => automatic_biography($person,$completion['_events'],$completion['_parents'],$completion['_partners'],$completion['_children']),
@@ -2851,7 +3036,7 @@ function map_data(PDO $pdo): never
         // Mode précis : uniquement les événements avec coordonnées manuelles
         // La commune n'a pas besoin d'être géocodée : on utilise precise_lat/lon directement
         $where.=' AND e.precise_lat IS NOT NULL AND e.precise_lon IS NOT NULL';
-        $sql = "SELECT e.id,e.year,e.date_text,e.address,t.label AS type_label,t.gedcom_tag,COALESCE(p.id,p1.id,p2.id) AS person_id,
+        $sql = "SELECT e.id,COALESCE(e.is_private,0) AS is_private,e.year,e.date_text,e.address,t.label AS type_label,t.gedcom_tag,COALESCE(p.id,p1.id,p2.id) AS person_id,
             COALESCE(NULLIF(trim(p.first_name),''),trim(COALESCE(p1.first_name,'')||CASE WHEN p2.id IS NOT NULL THEN ' & '||COALESCE(p2.first_name,'') ELSE '' END)) AS first_name,
             COALESCE(NULLIF(trim(p.last_name),''),trim(COALESCE(p1.last_name,'')||CASE WHEN p2.id IS NOT NULL AND COALESCE(p2.last_name,'')<>COALESCE(p1.last_name,'') THEN ' / '||COALESCE(p2.last_name,'') ELSE '' END)) AS last_name,
             pl.id AS place_id,pl.name,pl.subdivision,pl.county,pl.state,pl.country,
@@ -2869,7 +3054,7 @@ function map_data(PDO $pdo): never
             {$where} ORDER BY e.year LIMIT :limit";
     } else {
         // Mode ville ou combiné : on requiert les coords de la commune
-        $sql = "SELECT e.id,e.year,e.date_text,e.address,t.label AS type_label,t.gedcom_tag,COALESCE(p.id,p1.id,p2.id) AS person_id,
+        $sql = "SELECT e.id,COALESCE(e.is_private,0) AS is_private,e.year,e.date_text,e.address,t.label AS type_label,t.gedcom_tag,COALESCE(p.id,p1.id,p2.id) AS person_id,
             COALESCE(NULLIF(trim(p.first_name),''),trim(COALESCE(p1.first_name,'')||CASE WHEN p2.id IS NOT NULL THEN ' & '||COALESCE(p2.first_name,'') ELSE '' END)) AS first_name,
             COALESCE(NULLIF(trim(p.last_name),''),trim(COALESCE(p1.last_name,'')||CASE WHEN p2.id IS NOT NULL AND COALESCE(p2.last_name,'')<>COALESCE(p1.last_name,'') THEN ' / '||COALESCE(p2.last_name,'') ELSE '' END)) AS last_name,
             pl.id AS place_id,pl.name,pl.subdivision,pl.county,pl.state,pl.country,pl.latitude,pl.longitude,
@@ -4277,7 +4462,7 @@ function place_monograph_data(PDO $pdo): never
     if ($yearTo) { $eventWhere[] = 'e.year<=?'; $eventParams[] = $yearTo; }
     if ($eventTypeId) { $eventWhere[] = 'e.event_type_id=?'; $eventParams[] = $eventTypeId; }
     // Événement de couple (mariage…) : les deux conjoints, chacun avec son bouton « Ouvrir »
-    $eventSql = "SELECT e.id,e.person_id,e.date_text,e.year,e.title,e.description,t.label AS type_label,
+    $eventSql = "SELECT e.id,e.person_id,e.date_text,e.year,COALESCE(e.is_private,0) AS is_private,e.title,e.description,t.label AS type_label,
         trim(COALESCE(p.first_name,'')||' '||COALESCE(p.last_name,'')) AS person_name,
         f.partner1_id, trim(COALESCE(p1.first_name,'')||' '||COALESCE(p1.last_name,'')) AS partner1_name,
         f.partner2_id, trim(COALESCE(p2.first_name,'')||' '||COALESCE(p2.last_name,'')) AS partner2_name
@@ -4405,6 +4590,16 @@ function graph_network_data(PDO $pdo, string $kind, int $personId): never
             $key = 'p'.$personId.'|'.$target.'|'.$role;
             $links[$key] = ($links[$key] ?? 0) + 1;
         }
+        // 🤝 Son réseau : amis, voisins, associés… enregistrés pour eux-mêmes (lib/relations_reseau.php)
+        try {
+            require_once __DIR__ . '/lib/relations_reseau.php';
+            foreach (rs_for_network($pdo, $personId) as $rl) {
+                $o = $rl['other']; $nm = explode(' ', (string) $o['name'], 2);
+                $target = $addPerson(['id'=>$o['id'],'first_name'=>$nm[0],'last_name'=>$nm[1] ?? ''], $rl['label']);
+                $key = 'p'.$personId.'|'.$target.'|'.$rl['icon'].' '.$rl['label'];
+                $links[$key] = ($links[$key] ?? 0) + 1;
+            }
+        } catch (Throwable $_) {}
         $stmt = $pdo->prepare("SELECT DISTINCT p.id,p.first_name,p.last_name,cm.household_position,cr.year,cr.address
             FROM census_members mine JOIN census_records cr ON cr.id=mine.census_id
             JOIN census_members cm ON cm.census_id=cr.id AND cm.person_id IS NOT NULL AND cm.person_id<>mine.person_id
@@ -5293,7 +5488,7 @@ function date_search_data(PDO $pdo): never
     if($occupationFilter!==''){$occLike='%'.$occupationFilter.'%';$dateWhere.=" AND (EXISTS(SELECT 1 FROM persons pp WHERE pp.id IN (e.person_id,f.partner1_id,f.partner2_id) AND pp.occupation LIKE ? COLLATE NOCASE) OR EXISTS(SELECT 1 FROM events eo JOIN event_types to2 ON to2.id=eo.event_type_id WHERE eo.person_id IN (e.person_id,f.partner1_id,f.partner2_id) AND to2.gedcom_tag='OCCU' AND (eo.title LIKE ? COLLATE NOCASE OR eo.description LIKE ? COLLATE NOCASE)) OR EXISTS(SELECT 1 FROM census_members cm WHERE cm.person_id IN (e.person_id,f.partner1_id,f.partner2_id) AND cm.occupation LIKE ? COLLATE NOCASE))";$params=array_merge($params,[$occLike,$occLike,$occLike,$occLike]);}
     if($query!=='')
 {$like='%'.$query.'%';$dateWhere.=' AND (t.label LIKE ? COLLATE NOCASE OR pl.name LIKE ? COLLATE NOCASE OR pl.subdivision LIKE ? COLLATE NOCASE OR pl.country LIKE ? COLLATE NOCASE OR p.first_name LIKE ? COLLATE NOCASE OR p.last_name LIKE ? COLLATE NOCASE OR p1.first_name LIKE ? COLLATE NOCASE OR p1.last_name LIKE ? COLLATE NOCASE OR p2.first_name LIKE ? COLLATE NOCASE OR p2.last_name LIKE ? COLLATE NOCASE)';$params=array_merge($params,array_fill(0,10,$like));}
-    $sql="SELECT e.id,e.date_text,e.date_calendar,e.date_converted,e.year,e.person_id,e.family_id,t.label AS type,t.gedcom_tag,t.icon,t.color,pl.name AS place,pl.subdivision,pl.country,
+    $sql="SELECT e.id,e.date_text,e.date_calendar,e.date_converted,e.year,e.person_id,e.family_id,t.label AS type,t.gedcom_tag,t.icon,t.color,pl.name AS place,pl.subdivision,pl.country,e.place_id,pl.latitude AS lat,pl.longitude AS lon,
         p.first_name,p.last_name,f.partner1_id,f.partner2_id,p1.first_name AS p1_first,p1.last_name AS p1_last,p2.first_name AS p2_first,p2.last_name AS p2_last
         FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id LEFT JOIN persons p ON p.id=e.person_id
         LEFT JOIN families f ON f.id=e.family_id LEFT JOIN persons p1 ON p1.id=f.partner1_id LEFT JOIN persons p2 ON p2.id=f.partner2_id
@@ -5370,7 +5565,7 @@ function proximity_search_data(PDO $pdo): never
                 $dist=haversine_km($lat1,$lon1,(float)$cand['latitude'],(float)$cand['longitude']);
                 if($dist<=$radiusKm){
                     $placeIds[]=(int)$cand['id'];
-                    $nearbyPlaces[]=['id'=>(int)$cand['id'],'name'=>trim($cand['name'].($cand['subdivision']?', '.$cand['subdivision']:'')),'distance_km'=>round($dist,1)];
+                    $nearbyPlaces[]=['id'=>(int)$cand['id'],'name'=>trim($cand['name'].($cand['subdivision']?', '.$cand['subdivision']:'')),'distance_km'=>round($dist,1),'lat'=>(float)$cand['latitude'],'lon'=>(float)$cand['longitude']];
                 }
             }
             usort($nearbyPlaces,static fn($a,$b)=>$a['distance_km']<=>$b['distance_km']);
@@ -5378,7 +5573,7 @@ function proximity_search_data(PDO $pdo): never
     }
     $placeMarks=implode(',',array_fill(0,count($placeIds),'?'));
     $sql="SELECT e.id,e.date_text,e.date_calendar,e.date_converted,e.year,e.person_id,e.family_id,t.label AS type,t.gedcom_tag,t.icon,t.color,
-        pl.name AS place_name,pl.subdivision AS place_subdivision,
+        pl.name AS place_name,pl.subdivision AS place_subdivision,e.place_id,pl.latitude AS place_lat,pl.longitude AS place_lon,
         p.first_name,p.last_name,f.partner1_id,f.partner2_id,p1.first_name AS p1_first,p1.last_name AS p1_last,p2.first_name AS p2_first,p2.last_name AS p2_last
         FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN persons p ON p.id=e.person_id
         LEFT JOIN places pl ON pl.id=e.place_id
@@ -5394,7 +5589,7 @@ function proximity_search_data(PDO $pdo): never
     $addOccurrence=static function(int $personId,string $name,array $event,string $role) use (&$peopleMap){
         if(!$personId)return;
         if(!isset($peopleMap[$personId]))$peopleMap[$personId]=['id'=>$personId,'name'=>trim($name),'events'=>[]];
-        $peopleMap[$personId]['events'][]=['id'=>(int)$event['id'],'date_text'=>$event['date_text'],'year'=>$event['year']!==null?(int)$event['year']:null,'type'=>$event['type'],'icon'=>$event['icon'],'color'=>$event['color'],'role'=>$role,'place'=>trim(($event['place_name']??'').($event['place_subdivision']?', '.$event['place_subdivision']:''))];
+        $peopleMap[$personId]['events'][]=['id'=>(int)$event['id'],'date_text'=>$event['date_text'],'year'=>$event['year']!==null?(int)$event['year']:null,'type'=>$event['type'],'gedcom_tag'=>$event['gedcom_tag'],'place_id'=>$event['place_id']!==null?(int)$event['place_id']:null,'lat'=>$event['place_lat']!==null?(float)$event['place_lat']:null,'lon'=>$event['place_lon']!==null?(float)$event['place_lon']:null,'icon'=>$event['icon'],'color'=>$event['color'],'role'=>$role,'place'=>trim(($event['place_name']??'').($event['place_subdivision']?', '.$event['place_subdivision']:''))];
     };
     foreach($events as $event){
         if($event['person_id'])$addOccurrence((int)$event['person_id'],($event['first_name']??'').' '.($event['last_name']??''),$event,'principal');
@@ -5406,7 +5601,7 @@ function proximity_search_data(PDO $pdo): never
     foreach($people as &$person){$person['count']=count($person['events']);}
     unset($person);
     usort($people,static fn($a,$b)=>($b['count']<=>$a['count'])?:strcmp($a['name'],$b['name']));
-    json_response(['placeId'=>$placeId,'placeName'=>$placeName,'dateMode'=>$dateMode,'yearFrom'=>$yearFrom,'yearTo'=>$yearTo,'dateLabel'=>$dateLabel,'excludePersonId'=>$excludePersonId,'radiusKm'=>$radiusKm,'geocoded'=>$geocoded,'nearbyPlaces'=>$nearbyPlaces,'people'=>$people]);
+    json_response(['placeId'=>$placeId,'placeName'=>$placeName,'dateMode'=>$dateMode,'yearFrom'=>$yearFrom,'yearTo'=>$yearTo,'dateLabel'=>$dateLabel,'excludePersonId'=>$excludePersonId,'radiusKm'=>$radiusKm,'geocoded'=>$geocoded,'placeLat'=>$place&&$place['latitude']!==null?(float)$place['latitude']:null,'placeLon'=>$place&&$place['longitude']!==null?(float)$place['longitude']:null,'nearbyPlaces'=>$nearbyPlaces,'people'=>$people]);
 }
 
 // ─── Fichier des personnes décédées de l'INSEE : import CSV + recherche dédiée ───
@@ -5687,16 +5882,12 @@ function insee_deces_import(PDO $pdo): never
             if (preg_match('/\.(csv|txt)$/i', $name)) { $entryName = $name; break; }
         }
         if ($entryName === '') { $zip->close(); json_response(['error' => 'Aucun fichier .csv ou .txt trouvé dans le ZIP'], 422); }
-        $stream = $zip->getStream($entryName);
-        if (!$stream) { $zip->close(); json_response(['error' => 'Lecture du fichier INSEE dans le ZIP impossible'], 422); }
         $cleanupPath = tempnam(sys_get_temp_dir(), 'insee-deces-') ?: '';
-        if ($cleanupPath === '') { fclose($stream); $zip->close(); json_response(['error' => 'Création du fichier temporaire impossible'], 500); }
-        $out = fopen($cleanupPath, 'wb');
-        if (!$out) { fclose($stream); $zip->close(); @unlink($cleanupPath); json_response(['error' => 'Écriture du fichier temporaire impossible'], 500); }
-        stream_copy_to_stream($stream, $out);
-        fclose($out);
-        fclose($stream);
+        if ($cleanupPath === '') { $zip->close(); json_response(['error' => 'Création du fichier temporaire impossible'], 500); }
+        // borné : une « bombe zip » n'est jamais ouverte en entier (un fichier annuel de l'INSEE fait moins de 300 Mo)
+        $why = zip_entry_copy_bounded($zip, $entryName, $cleanupPath, 4096 * 1048576);
         $zip->close();
+        if ($why !== '') { @unlink($cleanupPath); json_response(['error' => 'Fichier INSEE : ' . $why], 422); }
         // fichier en positions fixes (.txt de data.gouv.fr) : converti en CSV comme un .txt téléchargé
         if (preg_match('/\.txt$/i', $entryName)) {
             try { $csvPath = insee_fixed_width_to_csv($cleanupPath); } catch (Throwable $e) { @unlink($cleanupPath); json_response(['error' => 'Lecture du fichier INSEE impossible : ' . $e->getMessage()], 422); }
@@ -5726,6 +5917,8 @@ function insee_deces_import(PDO $pdo): never
         }
     }
 
+    // « Texte Unicode » d'Excel ou du Bloc-notes (UTF-16) : relu en UTF-8, sinon chaque lettre serait suivie d'un octet nul
+    if (($utf8Path = text_file_utf16_to_utf8($tmpPath)) !== '') { if ($cleanupPath !== '') @unlink($cleanupPath); $cleanupPath = $utf8Path; $tmpPath = $utf8Path; }
     $handle = fopen($tmpPath, 'r');
     if (!$handle) { if ($cleanupPath !== '') @unlink($cleanupPath); json_response(['error' => 'Lecture du fichier impossible'], 500); }
 
@@ -5793,9 +5986,12 @@ function insee_deces_import(PDO $pdo): never
         // ligne lue ci-dessus est en réalité déjà une ligne de données. On retente en supposant l'ordre
         // standard des colonnes du fichier des personnes décédées, et on relit le fichier depuis le début
         // pour ne pas perdre cette première ligne.
-        if (count($headers) >= 8) {
-            $looksLikeCompactOldFile = count($headers) >= 10
-                && (str_contains((string)($headers[0] ?? ''), '*') || in_array(trim((string)($headers[1] ?? '')), ['1', '2', 'M', 'F'], true));
+        $looksLikeCompactOldFile = count($headers) >= 10
+            && (str_contains((string)($headers[0] ?? ''), '*') || in_array(trim((string)($headers[1] ?? '')), ['1', '2', 'M', 'F'], true));
+        // sans en-tête, la première ligne doit ressembler à une ligne de l'INSEE (une date de décès AAAAMMJJ à sa place) :
+        // sinon n'importe quel tableau (10 000 colonnes, autre fichier) serait pris pour une liste de décès
+        $deathAt = $looksLikeCompactOldFile ? 6 : 7;
+        if (count($headers) >= 8 && count($headers) <= 40 && preg_match('/^\d{4}(\d{2}){0,2}$/', trim((string)($headers[$deathAt] ?? ''), " \"\r\n"))) {
             $columnIndex = $looksLikeCompactOldFile ? [
                 'nomprenom' => 0,
                 'sexe' => 1,
@@ -5843,7 +6039,9 @@ function insee_deces_import(PDO $pdo): never
 
     $get = static function (array $row, ?int $index): string {
         if ($index === null || !isset($row[$index])) return '';
-        return trim((string)$row[$index]);
+        $v = trim((string)$row[$index]);
+        // fichier enregistré en Windows-1252 (Excel) : les accents relus, sinon la recherche ne pourrait plus renvoyer ces lignes
+        return mb_check_encoding($v, 'UTF-8') ? $v : mb_convert_encoding($v, 'UTF-8', 'Windows-1252');
     };
     $extractYear = static function (string $date): ?int {
         $digits = preg_replace('/\D/', '', $date) ?? '';
@@ -5917,6 +6115,8 @@ function insee_deces_import(PDO $pdo): never
             $inserted++;
             if ($inserted % 2000 === 0) { $pdo->commit(); $pdo->beginTransaction(); }
         }
+        // pas une seule date de décès lisible : ce n'est pas le fichier des décès (texte quelconque, mauvais tableau)
+        if ($inserted > 0 && $maxAnneeDeces === null) { throw new LcndaBadInput("Aucune date de décès lisible dans ce fichier : il ne ressemble pas au fichier des personnes décédées de l'INSEE. Rien n'a été importé."); }
         $pdo->prepare("UPDATE insee_deces_imports SET row_count=?, inserted_count=?, max_annee_deces=?, min_annee_deces=?, file_hash=? WHERE id=?")
             ->execute([$rowCount, $inserted, $maxAnneeDeces, $minAnneeDeces, $fileHash, $importId]);
         $pdo->commit();
@@ -5928,7 +6128,7 @@ function insee_deces_import(PDO $pdo): never
         $inseeDone = true;
         fclose($handle);
         if ($cleanupPath !== '') @unlink($cleanupPath);
-        json_response(['error' => 'Import interrompu : ' . $e->getMessage()], 500);
+        json_response(['error' => $e instanceof LcndaBadInput ? $e->getMessage() : 'Import interrompu : ' . $e->getMessage()], $e instanceof LcndaBadInput ? 422 : 500);
     }
     fclose($handle);
     if ($cleanupPath !== '') @unlink($cleanupPath);
@@ -5974,7 +6174,7 @@ function timeline_data(PDO $pdo, int $id): never
     $marks=implode(',',array_fill(0,count($ids),'?'));
     // les événements de couple (mariage, divorce…) comptent aussi, une seule fois même si les deux conjoints sont là
     $couple="trim(COALESCE(p1.first_name,'')||' '||COALESCE(p1.last_name,''))||CASE WHEN p2.id IS NOT NULL THEN ' & '||trim(COALESCE(p2.first_name,'')||' '||COALESCE(p2.last_name,'')) ELSE '' END";
-    $sql="SELECT e.id,e.date_text,e.year,t.label AS type,t.color,COALESCE(p.id,CASE WHEN f.partner1_id IN ($marks) THEN f.partner1_id ELSE f.partner2_id END) AS person_id,CASE WHEN p.id IS NULL THEN $couple ELSE p.first_name END AS first_name,CASE WHEN p.id IS NULL THEN '' ELSE p.last_name END AS last_name,pl.name AS place
+    $sql="SELECT e.id,e.date_text,e.year,COALESCE(e.is_private,0) AS is_private,t.label AS type,t.color,COALESCE(p.id,CASE WHEN f.partner1_id IN ($marks) THEN f.partner1_id ELSE f.partner2_id END) AS person_id,CASE WHEN p.id IS NULL THEN $couple ELSE p.first_name END AS first_name,CASE WHEN p.id IS NULL THEN '' ELSE p.last_name END AS last_name,pl.name AS place
         FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN persons p ON p.id=e.person_id LEFT JOIN families f ON f.id=e.family_id LEFT JOIN persons p1 ON p1.id=f.partner1_id LEFT JOIN persons p2 ON p2.id=f.partner2_id LEFT JOIN places pl ON pl.id=e.place_id
         WHERE (e.person_id IN ($marks) OR f.partner1_id IN ($marks) OR f.partner2_id IN ($marks)) AND e.year IS NOT NULL ORDER BY e.year,e.id";
     $stmt=$pdo->prepare($sql);$stmt->execute([...$ids,...$ids,...$ids,...$ids]);
@@ -6522,6 +6722,24 @@ function restore_change(PDO $pdo,array $data): array
 function restore_last_delete(PDO $pdo,array $data): array
 {
     $type=(string)($data['entity_type']??'');$id=safe_int($data['entity_id']??0);
+    // gardé par undo_keep() (lib/bootstrap.php) : plusieurs tables d'un coup ; seules les tables prévues pour cette sorte sont remises
+    $kept=[
+        'saved_search'=>['saved_searches'],
+        'help_request'=>['help_requests'],
+        'museum_guestbook'=>['museum_guestbook'],
+        'museum_item'=>['museum_items'],
+        'museum_room'=>['museum_rooms','museum_items'],
+        'employer_record'=>['employer_records'],
+        'periodical_article'=>['periodical_articles','periodical_links','label_links','family_collection_media'],
+        'my_list'=>['custom_lists','custom_list_rows','custom_list_records','label_links','family_collection_media'],
+        'my_list_record'=>['custom_list_records','label_links','family_collection_media'],
+        'archive_digest_person'=>['archive_digest_people'],
+        'custom_block_entry'=>['custom_block_entries','label_links','family_collection_media'],
+        'vault_copy'=>['cousin_vault'],
+        'voter_cards'=>['voter_cards','voter_votes','label_links','family_collection_media','persons'],
+        'resistance'=>['resistance_steps','resistance_profiles','label_links','family_collection_media','persons'],
+    ];
+    if($id&&isset($kept[$type]))return undo_keep_restore($pdo,$type,$id,$kept[$type]);
     // une simple ligne, gardée entière dans le journal au moment de la suppression (rappel, ligne de budget, courrier)
     // (et ses lignes liées gardées dans « _children » : étiquettes posées, membres d'une branche)
     $simple=['standalone_reminder'=>'standalone_reminders','research_budget'=>'research_budget','courrier'=>'courriers',
@@ -6560,6 +6778,40 @@ function restore_last_delete(PDO $pdo,array $data): array
     $restored=$pdo->prepare("SELECT 1 FROM change_log WHERE action='restore' AND entity_type=? AND entity_id=? AND id>? LIMIT 1");$restored->execute([$type,$id,$changeId]);
     if($restored->fetchColumn()||record_exists($pdo,$tables[$type],$id))return ['entity_type'=>$type,'entity_id'=>$id,'already'=>true];
     return restore_change($pdo,['id'=>$changeId]);
+}
+
+/** ↶ Annuler d'une suppression gardée par undo_keep() : remet les lignes (dans l'ordre), puis les cases notées dans « set ». */
+function undo_keep_restore(PDO $pdo,string $type,int $id,array $tables): array
+{
+    $stmt=$pdo->prepare("SELECT * FROM change_log WHERE action='delete' AND entity_type=? AND entity_id=? ORDER BY id DESC LIMIT 1");
+    $stmt->execute([$type,$id]);$change=$stmt->fetch();
+    $before=$change?(json_decode((string)($change['before_json']??''),true)?:[]):[];
+    if(empty($before['_undo']))throw new RuntimeException('Cette suppression n’a pas été trouvée dans le journal.');
+    $done=$pdo->prepare("SELECT 1 FROM change_log WHERE action='restore' AND entity_type=? AND entity_id=? AND id>? LIMIT 1");
+    $done->execute([$type,$id,(int)$change['id']]);
+    if($done->fetchColumn())return ['entity_type'=>$type,'entity_id'=>$id,'already'=>true]; // un deuxième « ↶ Annuler » : déjà remis
+    $ok=static fn($t)=>is_string($t)&&preg_match('/^[a-z_]+$/',$t)&&(in_array($t,$tables,true)||in_array($t,['persons','museums','museum_rooms','custom_lists','archive_digest_entries','custom_block_defs','periodical_issues'],true));
+    foreach(($before['needs']??[]) as $n){
+        [$t,$nid,$why]=array_pad((array)$n,3,'');
+        if(!$ok($t))continue;
+        $s=$pdo->prepare("SELECT 1 FROM {$t} WHERE id=?");$s->execute([(int)$nid]);
+        if(!$s->fetchColumn())throw new RuntimeException($why?:'Ce à quoi c’était rattaché n’existe plus.');
+    }
+    $n=0;
+    foreach(($before['_rows']??[]) as $part){
+        [$t,$rows]=array_pad((array)$part,2,[]);
+        if(!$ok($t)||$t==='persons'||!is_array($rows))continue;
+        foreach($rows as $row)if(is_array($row)&&$row){insert_snapshot_row($pdo,$t,$row,true);$n++;}
+    }
+    foreach(($before['set']??[]) as $set){
+        [$t,$sid,$vals]=array_pad((array)$set,3,[]);
+        if(!in_array($t,$tables,true)||!is_array($vals)||!$vals)continue;
+        $cols=array_values(array_intersect(table_columns($pdo,$t),array_keys($vals)));
+        if(!$cols)continue;
+        $pdo->prepare("UPDATE {$t} SET ".implode(',',array_map(static fn($c)=>"{$c}=?",$cols)).' WHERE id=?')->execute([...array_map(static fn($c)=>$vals[$c],$cols),(int)$sid]);
+    }
+    log_change($pdo,$type,$id,'restore','Suppression annulée',null,['restored_from_change_id'=>(int)$change['id'],'rows'=>$n]);
+    return ['entity_type'=>$type,'entity_id'=>$id,'rows'=>$n];
 }
 
 function record_exists(PDO $pdo,string $table,int $id): bool
@@ -7557,7 +7809,7 @@ function import_analyse(PDO $pdo): never
                 'fusion_needed'=>$existingPersons>0,
             ]);
         }catch(Throwable $e){
-            json_response(['error'=>'Impossible d\'ouvrir la base SQLite : '.$e->getMessage()],422);
+            json_response(['error'=>'Ce fichier n’est pas une base SQLite lisible : il est abîmé, ou c’est un autre format renommé en .'.$ext.'.'],422); // jamais le message brut de SQLite
         }
     }
 
@@ -7600,8 +7852,19 @@ function import_package(PDO $pdo, ?array $file): never
     // un GEDCOM est lu en entier : 🐘 environ 16 fois sa taille en mémoire (200 000 fiches, 128 Mo : 2 Go) ; au moins 4 Go, 8 Go au plus
     memory_at_least((int) min(8192, max(4096, ceil((float) @filesize((string) $file['tmp_name']) / 1048576 * 20))));
 
-    $receipt = import_receipt_begin($pdo); // ce que l'import ajoute : pour « ↶ Annuler » (lib/imports.php)
-    $pdo->beginTransaction();
+    // verrou d'écriture pris tout de suite : deux imports lancés ensemble (double clic, deux onglets) passent l'un après l'autre,
+    // et ce que l'import ajoute (pour « ↶ Annuler », lib/imports.php) est compté sous ce verrou : jamais les fiches de l'autre
+    begin_write_transaction($pdo);
+    // le fichier en attente est pris (renommé) sous ce verrou : un second « Importer » du même fichier est refusé
+    $pendingPath = '';
+    if (!empty($file['pending'])) {
+        $pendingPath = (string) $file['tmp_name'];
+        $claimed = (string) preg_replace('/(\.[A-Za-z0-9]+)$/', '.en-cours$1', $pendingPath);
+        if (!@rename($pendingPath, $claimed)) { $pdo->rollBack(); json_response(['error' => 'Ce fichier vient déjà d’être importé (double clic ?) : regarde la liste des personnes avant de recommencer.'], 409); }
+        $file['tmp_name'] = $claimed;
+    }
+    $receipt = import_receipt_begin($pdo);
+    $ranges = null;
     try {
         calc_gen_suspend($pdo); // 🐘 pas de déclencheur par ligne pendant l'import (lib/calc_cache.php) ; remis avant la fin
         if ($ext === 'gramps' || $ext === 'gpkg') {
@@ -7611,7 +7874,7 @@ function import_package(PDO $pdo, ?array $file): never
             // Fichier lu sur place : les médias cités par un chemin relatif sont cherchés à côté du .ged.
             $stats = import_gedcom_into_db($pdo, $file['tmp_name'], !empty($file['local']) ? dirname($file['tmp_name']) : null, !empty($file['local']));
         } elseif (in_array($ext, ['hmw', 'heredis'], true)) {
-            $stats = heredis_import_into_db($pdo, $file['tmp_name']);
+            $stats = heredis_import_into_db($pdo, $file['tmp_name'], !empty($file['local'])); // envoyé : rien n'est cherché ailleurs sur l'ordinateur
         } elseif ($ext === 'mftpkg') {
             $stats = import_mftpkg_into_db($pdo, $file['tmp_name']);
         } elseif (in_array($ext, ['zip', 'gdz'], true)) {
@@ -7620,9 +7883,11 @@ function import_package(PDO $pdo, ?array $file): never
             throw new RuntimeException("Format non supporté pour l'import direct : .{$ext}");
         }
         calc_gen_resume($pdo);
+        $ranges = import_receipt_ranges($pdo, $receipt);
         $pdo->commit();
     } catch (Throwable $e) {
         if ($pdo->inTransaction()) { $pdo->rollBack(); }
+        if ($pendingPath !== '') { @rename((string) $file['tmp_name'], $pendingPath); } // import raté : le fichier reste en attente
         throw $e;
     }
     $pdo->exec('ANALYZE');
@@ -7630,8 +7895,8 @@ function import_package(PDO $pdo, ?array $file): never
     // première recherche qui suit (200 000 fiches importées : 10 s d'attente dans la liste des personnes)
     if (function_exists('rfr_refresh')) { try { rfr_refresh($pdo, true); } catch (Throwable) {} }
     $undo = '';
-    try { $undo = import_receipt_save($pdo, 'tree', $receipt, ['label' => (string) $file['name']]); } catch (Throwable) {}
-    if (!empty($file['pending'])) { @unlink($file['tmp_name']); @unlink($file['tmp_name'] . '.json'); }
+    try { $undo = import_receipt_save($pdo, 'tree', $receipt, ['label' => (string) $file['name']], $ranges); } catch (Throwable) {}
+    if ($pendingPath !== '') { @unlink($file['tmp_name']); @unlink($pendingPath . '.json'); }
     try { log_change($pdo, 'meta', 0, 'create', 'Import de « ' . mb_substr((string) $file['name'], 0, 120) . ' » : ' . (int) ($stats['persons'] ?? $stats['personnes'] ?? 0) . ' personne(s)'); } catch (Throwable) {}
 
     json_response([
@@ -7660,18 +7925,35 @@ class GedNode extends stdClass
     public $children;
 }
 
-function gedimport_parse(string $text): array
+/**
+ * $info (facultatif) dit ce qui a été réparé ou laissé de côté : « joined » (ligne sans niveau, comme un retour à la ligne
+ * tapé dans une note : ajoutée au texte d'avant), « relevelled » (niveau qui saute, 1 → 3 : rattachée au niveau du
+ * dessus), « skipped » (ligne illisible).
+ */
+function gedimport_parse(string $text, ?array &$info = null): array
 {
     $root = [];
     $stack = [];
+    $info = ['joined' => 0, 'relevelled' => 0, 'skipped' => 0];
+    $last = null;
+    $textTags = ['NOTE' => 1, 'SNOTE' => 1, 'TEXT' => 1, 'CONT' => 1, 'CONC' => 1, 'PAGE' => 1, 'TITL' => 1, 'AUTH' => 1, 'PUBL' => 1];
     $tags = []; $vals = []; // une seule copie de chaque balise (NAME, DATE, PLAC…) et de chaque valeur courte
     // les lignes une à une (plus de tableau de toutes les lignes) : strtok rend les suites de caractères entre deux fins de
     // ligne (\r, \n), c'est-à-dire exactement les lignes non vides du découpage d'avant (les lignes vides étaient sautées)
     for ($raw = strtok($text, "\r\n"); $raw !== false; $raw = strtok("\r\n")) {
         // jamais les espaces de fin : une ligne CONC coupée juste avant une espace la garderait collée
         if (trim($raw) === '') { continue; }
-        if (!preg_match('/^(\d+)\s(@[^@]+@\s)?([A-Za-z0-9_]+)\s?(.*)$/', $raw, $m)) { continue; }
+        // espaces avant le niveau, et plusieurs espaces entre niveau, identifiant et balise : tolérés (GEDCOM 5.5)
+        if (!preg_match('/^\s*(\d{1,3})\s+(@[^@\s][^@]*@\s+)?([A-Za-z0-9_]+)(?:\s(.*))?$/s', $raw, $m)) {
+            if ($last !== null && isset($textTags[$last->tag])) { $last->value .= "\n" . rtrim($raw); $info['joined']++; } else { $info['skipped']++; }
+            continue;
+        }
+        $m[4] ??= '';
         $level = (int) $m[1];
+        if ($level > 0 && !isset($stack[$level - 1])) {
+            if (!$stack) { $info['skipped']++; continue; } // avant tout enregistrement « 0 »
+            $level = count($stack); $info['relevelled']++;
+        }
         $node = new GedNode();
         $node->level = $level;
         $node->xref = $m[2] !== '' ? trim($m[2], "@ ") : null;
@@ -7689,6 +7971,7 @@ function gedimport_parse(string $text): array
         }
         $stack[$level] = $node;
         $stack = array_slice($stack, 0, $level + 1);
+        $last = $node;
     }
     return $root;
 }
@@ -7934,7 +8217,7 @@ function import_zip_package_into_db(PDO $pdo, string $zipPath): array
             foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($tmpDir, FilesystemIterator::SKIP_DOTS)) as $f) {
                 if ($f->isFile() && preg_match('/\.heredis$/i', $f->getFilename())) { $found = $f->getPath(); break; }
             }
-            return heredis_import_into_db($pdo, (string) $found);
+            return heredis_import_into_db($pdo, (string) $found, false); // archive reçue : médias pris dans l'archive seulement
         } finally {
             mft_delete_directory($tmpDir);
         }
@@ -8231,6 +8514,10 @@ function import_mftpkg_into_db(PDO $dst, string $zipPath): array
                 foreach ([[$original, $originalName], [$thumb, $thumbName]] as [$relative, $name]) {
                     if ($relative === '' || $name === '') { continue; }
                     $from = $resourcesDir ? rtrim($resourcesDir, '/') . '/' . ltrim($relative, '/') : '';
+                    // jamais un fichier pris hors du dossier « resources » du paquet (« ../../ », lien) : rien de l'ordinateur ne sort ainsi
+                    $real = $from !== '' ? realpath($from) : false; $root = $resourcesDir ? realpath($resourcesDir) : false;
+                    if ($real === false || $root === false || !str_starts_with($real, rtrim($root, '/\\') . DIRECTORY_SEPARATOR)) { $from = ''; }
+                    if (!media_import_name_ok($name) || str_starts_with($name, '.')) { $from = ''; } // 🔒 une photo, un son, un document : jamais « .php », « .svg », « .js » dans les médias
                     $to = $mediaDir . '/' . $name;
                     if ($from !== '' && is_file($from) && !is_file($to)) { copy($from, $to); }
                     if ($relative === $original && !is_file($to)) { $mediaMissing++; }
@@ -8456,11 +8743,12 @@ function import_mftpkg_into_db(PDO $dst, string $zipPath): array
             'source_version' => 'MacFamilyTree (paquet uploadé)',
         ] as $key => $value) { $meta->execute([$key, $value]); }
 
-        $dst->exec("INSERT INTO saved_views(module,name,config_json,sort_order) VALUES
-            ('graph','Ascendants — 4 générations','{\"mode\":\"ancestors\",\"depth\":4}',10),
-            ('graph','Descendants — 3 générations','{\"mode\":\"descendants\",\"depth\":3}',20),
-            ('map','Naissances','{\"event\":\"BIRT\",\"display\":\"markers\"}',10),
-            ('map','Carte thermique','{\"event\":\"all\",\"display\":\"heat\"}',20)");
+        // vues de départ : une seule fois (un second paquet importé ne les ajoute pas de nouveau)
+        $addView = $dst->prepare('INSERT INTO saved_views(module,name,config_json,sort_order) SELECT ?,?,?,? WHERE NOT EXISTS (SELECT 1 FROM saved_views WHERE module=? AND name=?)');
+        foreach ([['graph', 'Ascendants — 4 générations', '{"mode":"ancestors","depth":4}', 10], ['graph', 'Descendants — 3 générations', '{"mode":"descendants","depth":3}', 20],
+                  ['map', 'Naissances', '{"event":"BIRT","display":"markers"}', 10], ['map', 'Carte thermique', '{"event":"all","display":"heat"}', 20]] as [$vm, $vn, $vc, $vo]) {
+            $addView->execute([$vm, $vn, $vc, $vo, $vm, $vn]);
+        }
 
         $dst->exec('PRAGMA foreign_keys = ON');
 
@@ -8477,6 +8765,12 @@ function import_mftpkg_into_db(PDO $dst, string $zipPath): array
             'media' => count($mediaMap),
             'media_missing' => $mediaMissing,
         ];
+    } catch (PDOException $e) {
+        // base du paquet abîmée ou d'un autre modèle (table ou colonne absente) : une phrase claire au lieu d'une « erreur de la base »
+        if (preg_match('/no such (table|column)|not a database|malformed|file is encrypted/i', $e->getMessage())) {
+            throw new RuntimeException('Ce paquet MacFamilyTree ne se lit pas (base abîmée, ou version de MacFamilyTree que l’app ne connaît pas). Dans MacFamilyTree, exporte-le en GEDCOM, puis importe le fichier .ged.');
+        }
+        throw $e;
     } finally {
         $src = null;
         if ($tmpDir !== null) { mft_delete_directory($tmpDir); }
@@ -8668,6 +8962,7 @@ function investigation_detail(PDO $pdo,int $id): never
         }
     }
     unset($itemRow);
+    require_once __DIR__.'/lib/connexions.php';$cxLinks=cx_investigation_links($pdo,$id);foreach($itemRows as &$itemRow){$itemRow['links']=$cxLinks[(int)$itemRow['id']]??[];}unset($itemRow); // 🧺 plusieurs pièces par piste (lib/connexions.php)
     $media=$pdo->prepare("SELECT im.id AS link_id,im.verdict,im.reason,im.folder_id,m.*,
         (SELECT group_concat(imi.investigation_item_id) FROM investigation_media_items imi WHERE imi.investigation_media_id=im.id) AS item_ids,
         (SELECT group_concat(ii.title,'|') FROM investigation_media_items imi JOIN investigation_items ii ON ii.id=imi.investigation_item_id WHERE imi.investigation_media_id=im.id) AS item_titles
@@ -9276,7 +9571,7 @@ function archive_digest_search_data(PDO $pdo): never
     if ($status !== '' && isset(archive_digest_statuses()[$status])) { $where[] = 'a.status = ?'; $params[] = $status; }
     $sqlWhere = $where ? 'WHERE ' . implode(' AND ', $where) : '';
     $stmt = $pdo->prepare("
-        SELECT a.*, p.name AS place_name, p.subdivision, p.county, p.state, p.country
+        SELECT a.*, p.name AS place_name, p.subdivision, p.county, p.state, p.country, p.latitude AS place_lat, p.longitude AS place_lon
         FROM archive_digest_entries a
         LEFT JOIN places p ON p.id = a.place_id
         $sqlWhere
@@ -9828,6 +10123,7 @@ function delete_archive_digest_person(PDO $pdo, array $data): array
     $id = safe_int($data['id'] ?? 0);
     $before = archive_digest_person_row($pdo, $id);
     if (!$before) throw new RuntimeException('Personne relevée introuvable');
+    undo_keep($pdo, 'archive_digest_person', $id, 'Personne relevée retirée du dépouillement', [['archive_digest_people', 'id=?', [$id]]], ['needs' => [['archive_digest_entries', (int) $before['archive_digest_id'], 'Le dépouillement n’existe plus.']]]); // ↶ Annuler (H7)
     $pdo->prepare('DELETE FROM archive_digest_people WHERE id=?')->execute([$id]);
     log_change($pdo, 'archive_digest', (int)$before['archive_digest_id'], 'delete-member', 'Personne relevée retirée du dépouillement', $before, null);
     return ['id' => $id];
@@ -9871,6 +10167,12 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'add_event_type' => add_event_type($pdo,$data),
             'add_event' => add_event($pdo,$data),
             'save_event' => save_event($pdo,$data),
+            // 👤 Personnes (lib/people_audit.php) : ⚡ saisie rapide d'une famille, 🧮 garder un fait (l'autre devient une version), 🕘 remettre un champ
+            'quick_family' => (static function () use ($pdo,$data) { require_once __DIR__ . '/lib/people_audit.php'; return pa_quick_family($pdo,$data); })(),
+            'quick_family_undo' => (static function () use ($pdo,$data) { require_once __DIR__ . '/lib/people_audit.php'; return pa_quick_family_undo($pdo,$data); })(),
+            'event_keep_version' => (static function () use ($pdo,$data) { require_once __DIR__ . '/lib/people_audit.php'; return pa_event_keep($pdo,$data); })(),
+            'event_keep_version_undo' => (static function () use ($pdo,$data) { require_once __DIR__ . '/lib/people_audit.php'; return pa_event_keep_undo($pdo,$data); })(),
+            'restore_field' => (static function () use ($pdo,$data) { require_once __DIR__ . '/lib/people_audit.php'; return pa_restore_field($pdo,$data); })(),
             'delete_event' => delete_event($pdo,$data),
             'picker_place_adopt' => picker_place_adopt($pdo,$data),
             'restore_change' => restore_change($pdo,$data),
@@ -9954,6 +10256,11 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'ou_chercher_piste' => ouc_make_lead($pdo,$data), // 🌍 Où chercher ? : « ＋ En faire une piste » (lib/ou_chercher.php)
             'mur_save' => ouc_wall_save($pdo,$data), // 🧩 Murs de brique : 🧱 Je bloque ici, statut, note
             'mur_restore' => ouc_wall_restore($pdo,$data), // 🧩 Murs de brique : ↶ Annuler
+            'ou_chercher_openarch_add' => ouc_oa_add($pdo,$data), // 🇳🇱🇧🇪 Open Archives : ＋ source / événement à vérifier
+            'ou_chercher_openarch_undo' => ouc_oa_undo($pdo,$data), // 🇳🇱🇧🇪 Open Archives : ↶ Annuler l'ajout
+            'ou_chercher_openarch_mark' => ouc_oa_mark($pdo,$data), // 🇳🇱🇧🇪 Open Archives : ✗ Pas lui (et ↶)
+            'ba_add', 'ba_undo', 'ba_mark' => (static function () use ($pdo, $data, $action) { require_once __DIR__ . '/lib/brevets_annuaires.php'; return ba_api_write($pdo, $action, $data); })(), // 📇 ✓ C'est lui (source + lieu de résidence), ↶, ✗ Pas lui (lib/brevets_annuaires.php)
+            'bo_add', 'bo_undo' => (static function () use ($pdo, $data, $action) { require_once __DIR__ . '/lib/bases_officielles.php'; return bo_api_write($pdo, $action, $data); })(), // 🎖️🏅 ＋ Ajouter comme source (à vérifier), ↶ Annuler (lib/bases_officielles.php)
             'preuve_write' => preuve_api_post($pdo,$data), // ⚖️ dossiers de preuve, 🛡 niveau choisi à la main, ↶ Annuler (lib/preuve.php)
             'name_origin_set' => (static function () use ($pdo, $data) { require_once __DIR__ . '/lib/prenoms_france.php'; return name_origin_set($pdo, $data); })(), // 👶 « Ce n'est pas ça » / « Choisir la personne » (lib/prenoms_france.php)
             'controle_dismiss' => controle_dismiss($pdo,$data), // ✅ « Ce n'est pas une erreur » (lib/controle.php)
@@ -9965,6 +10272,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'socface_undo' => socface_undo($pdo,$data), // 🧾 SocFace : ↶ Annuler un import
             'socface_verify' => socface_verify($pdo,$data), // 🧾 SocFace : « Vérifié sur l'image »
             'socface_fix' => socface_fix($pdo,$data), // 🧾 SocFace : correction d'une lecture choisie dans « 🔍 Vérifier cette ligne » // ✅ ⚙️ Seuils du contrôle
+            'gov_place_link', 'gov_place_add', 'gov_place_add_undo' => (static function () use ($pdo, $data, $action) { require_once __DIR__ . '/lib/gov.php'; return gov_api_write($pdo, (string) $action, $data); })(), // 🏰 lieu relié à GOV, « Ajouter ce lieu à ma base » et ↶ Annuler
             'meteo_place_altitude' => (static function () use ($pdo, $data) { require_once __DIR__ . '/lib/meteo.php'; return meteo_place_altitude_save($pdo, $data); })(), // 🌦 ⛰ altitude d’un lieu (saisie ou « ↺ » carte du relief)
             'bulk_group' => bulk_group($pdo,$data),
             'save_branch' => save_branch($pdo,$data),
@@ -10050,6 +10358,12 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_biography' => bio_save($pdo,$data),
             'save_history_event' => world_save_event($pdo,$data),
             'delete_history_event' => world_delete_event($pdo,$data),
+            'movement_mark' => mouvements_mark($pdo,$data),
+            'onglets_write' => (static function () use ($pdo,$data) { require_once __DIR__ . '/lib/onglets.php'; return onglets_api_post($pdo,$data); })(), // 📄 Documents : modifier sur place, relier, pièces manquantes
+            'listes_plus_write' => (static function () use ($pdo, $data) { require_once __DIR__ . '/lib/listes_plus.php'; return lp_post($pdo, $data); })(), // 📋 ☑ actions groupées, ✎ dans la cellule, 📚 sources (fusion, modèles), ↶ Annuler (lib/listes_plus.php)
+            'set_death_cause' => set_death_cause($pdo,$data), // 🦠 lib/heritage_more.php
+            'save_own_movement' => mouvements_save_own($pdo,$data),
+            'delete_own_movement' => mouvements_delete_own($pdo,$data),
             'save_old_trade' => trade_save($pdo,$data),
             'save_periodical' => save_periodical($pdo,$data),
             'save_diagram' => save_diagram($pdo,$data),
@@ -10085,6 +10399,8 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_succession' => save_succession($pdo,$data), // 🏠 Héritages et successions (lib/successions.php)
             'delete_succession' => delete_succession($pdo,$data),
             'restore_succession' => restore_succession($pdo,$data),
+            'enquetes_plus' => enqp_post($pdo,$data), // 🕵️ lib/enquetes_plus.php
+            'dna_plus' => dna_plus_post($pdo,$data), // 🧬 ↶ Annuler, phasage, rappels (lib/dna.php)
             'save_dna_kit' => save_dna_kit($pdo,$data),
             'delete_dna_kit' => delete_dna_kit($pdo,$data),
             'save_dna_match' => save_dna_match($pdo,$data),
@@ -10124,10 +10440,16 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_act_transcription_version' => save_act_transcription_version($pdo,$data), // 🕘 Versions du texte d'un acte
             'delete_act_transcription_version' => delete_act_transcription_version($pdo,$data),
             'restore_act_transcription_version' => restore_act_transcription_version($pdo,$data),
+            'delete_act_transcription_versions' => delete_act_transcription_versions($pdo,$data), // 🗑 plusieurs d'un coup (une seule ↶ Annuler)
+            'restore_act_transcription_versions' => restore_act_transcription_versions($pdo,$data),
+            'save_act_transcription_version_zones' => save_act_transcription_version_zones($pdo,$data), // ✎ chaque version garde ses zones reliées
             'rename_act_transcription_version' => rename_act_transcription_version($pdo,$data),
+            'doc_link_save' => doc_link_save($pdo,$data), // 🔗 lier deux documents (ou changer la raison)
+            'doc_link_delete' => doc_link_delete($pdo,$data), // 🔗 retirer un lien (↶ Annuler : doc_link_save avec ce qui est renvoyé)
             'media_pages_save' => media_pages_save($pdo,$data), // 📑 relier, nommer, ranger, retirer des pages d'un document (et ↶ Annuler)
             'act_link_person' => act_link_person($pdo,$data), // 👤 « Relier » un nom relevé dans l'Atelier (fiche → 📜 Actes et transcriptions)
             'act_match_people' => act_transcription_match_people($pdo, is_array($data['names'] ?? null) ? $data['names'] : []),
+            'act_ai_hints' => act_ai_hints($pdo,$data), // 🧠 « Aider l'IA » : les indices de la base (lib/transcription_actes.php), rien n'est écrit
             'act_import_check' => act_import_check($pdo,$data), // 📜 Ce que l'app a trouvé : fiches ressemblantes (lib/transcription_actes.php)
             'act_import_apply' => act_import_apply($pdo,$data), // 📜 ✓ Ajouter à la généalogie, d'un coup
             'act_import_undo' => act_import_undo($pdo,$data), // 📜 ↶ Annuler cet ajout
@@ -10137,6 +10459,10 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'delete_diagram' => delete_diagram($pdo,$data),
             'link_diagram' => link_diagram($pdo,$data),
             'reorder_diagrams' => reorder_diagrams($pdo,$data),
+            'trash_diagrams' => trash_diagrams($pdo,$data), // 🗑 📈 l'onglet Diagrammes : corbeille 30 jours (lib/diagrams.php)
+            'restore_diagrams' => restore_diagrams($pdo,$data),
+            'empty_diagram_trash' => empty_diagram_trash($pdo,$data),
+            'diagram_meta' => diagram_meta($pdo,$data), // ⭐ favori, 🕘 ouvert récemment
             'periodicals_to_atelier' => periodicals_to_atelier($pdo,$data),
             'save_periodical_issue' => save_periodical_issue($pdo,$data),
             'save_periodical_article' => save_periodical_article($pdo,$data),
@@ -10187,12 +10513,31 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'delete_recueil_page' => delete_recueil_page($pdo,$data),
             'update_recueil_image' => update_recueil_image($pdo,$data),
             'remove_recueil_image' => remove_recueil_image($pdo,$data),
+            'recueil_iiif_import' => recueil_iiif_import($pdo,$data),
             'restore_recueil_image' => restore_recueil_image($pdo,$data),
             'save_recueil_link' => save_recueil_link($pdo,$data),
             'delete_recueil_link' => delete_recueil_link($pdo,$data),
             'move_recueil_link' => move_recueil_link($pdo,$data),
             'save_recueil_trays' => save_recueil_trays($pdo,$data),
             'recueil_link_media' => recueil_link_media($pdo,$data),
+            'recueil_from_documents' => recueil_from_documents($pdo,$data),
+            'recueil_pages_set' => recueil_pages_set($pdo,$data),
+            'save_recueil_toc' => save_recueil_toc($pdo,$data),
+            'delete_recueil_toc' => delete_recueil_toc($pdo,$data),
+            'restore_recueil_toc' => restore_recueil_toc($pdo,$data),
+            'move_recueil_toc' => move_recueil_toc($pdo,$data),
+            'recueil_toc_accept' => recueil_toc_accept($pdo,$data),
+            'recueil_toc_remove' => recueil_toc_remove($pdo,$data),
+            'recueil_reorder' => recueil_reorder($pdo,$data),
+            'save_anim_project' => save_anim_project($pdo,$data),
+            'delete_anim_project' => delete_anim_project($pdo,$data),
+            'rename_anim_project' => rename_anim_project($pdo,$data),
+            'restore_anim_project' => restore_anim_project($pdo,$data),
+            'restore_project' => restore_project($pdo,$data), // ↶ Annuler la suppression d'un projet d'outil (lib/projets_annuler.php)
+            'recueil_pages_restore' => recueil_pages_restore($pdo,$data),
+            'recueil_insert_absent' => recueil_insert_absent($pdo,$data),
+            'recueil_remove_inserted' => recueil_remove_inserted($pdo,$data),
+            'recueil_undo_documents' => recueil_undo_documents($pdo,$data),
             'delete_atelier_project' => delete_atelier_project($pdo,$data),
             'save_atelier_folder' => save_atelier_folder($pdo,$data),
             'delete_atelier_folder' => delete_atelier_folder($pdo,$data),
@@ -10337,7 +10682,11 @@ function readable_error_message(Throwable $e): string
         if(preg_match('/scope/i',$raw))return 'Portée invalide : l’événement doit concerner une personne ou un couple.';
         return 'Une valeur saisie n’est pas acceptée (choix hors de la liste). Vérifie le formulaire et réessaie.';
     }
-    if(stripos($raw,'UNIQUE constraint')!==false)return 'Cet élément existe déjà (doublon refusé).';
+    if(stripos($raw,'UNIQUE constraint')!==false){
+        // 📍 un lieu (ou une de ses lignes : population d'une année, n° GeoNames…) en double : on dit quoi faire (lib/lieux_doublons.php)
+        if(preg_match('/UNIQUE constraint failed: (places|place_[a-z_]+)\./i',$raw))return 'Ce lieu existe déjà : veux-tu les fusionner ? Réglages → Modifications groupées → « Lieux en double probables » (ou le bouton « Fusionner… » du menu de choix des lieux). Rien n’a été modifié.';
+        return 'Cet élément existe déjà (doublon refusé). Rien n’a été modifié : cherche l’élément existant et modifie-le, ou fusionne les deux.';
+    }
     if(stripos($raw,'NOT NULL constraint')!==false)return 'Un champ obligatoire est vide. Vérifie le formulaire et réessaie.';
     if(stripos($raw,'database is locked')!==false||stripos($raw,'busy')!==false)return 'La base est occupée par une autre opération. Réessaie dans un instant.';
     if(str_starts_with($raw,'SQLSTATE'))return 'L’enregistrement a échoué (erreur de la base). Réessaie ; si ça recommence, fais une sauvegarde et signale-le.';
@@ -11338,48 +11687,14 @@ function delete_research_note(PDO $pdo,array $data): array
 
 function merge_duplicate_places(PDO $pdo,array $data): array
 {
-    // Regroupe les lieux en double (ex : "Pernay" créé une 2e fois sans coordonnées ni
-    // subdivision parce que le pays saisi ne correspondait pas exactement à l'entrée existante).
-    // On conserve la fiche la plus complète (coordonnées, subdivision/county/state renseignés,
-    // population la plus élevée) et on reporte les références (events.place_id, census_records.place_id)
-    // avant de supprimer les doublons vides. Confirmation requise pour éviter une fusion accidentelle.
+    // Lieux en double (« Pernay » et « Pernay, Indre-et-Loire, Centre-Val de Loire, France » d'un import) : la détection et la
+    // fusion complète (toutes les tables, données les plus riches gardées, ↶) sont dans lib/lieux_doublons.php. Ici, seulement
+    // les fusions sûres : deux communes homonymes de départements différents ne sont jamais réunies. Confirmation requise.
     $confirm=($data['confirm']??'')==='yes';
     if(!$confirm)throw new RuntimeException('Confirmation requise');
-    $normalize=function(string $s): string {
-        // ascii_fold() plutôt que l'extension intl (facultative) : même regroupement quel que soit le PHP.
-        $s=ascii_fold(mb_strtolower(trim($s)));
-        return preg_replace('/\s+/', ' ', $s);
-    };
-    $places=$pdo->query('SELECT id,name,subdivision,county,state,country,latitude,longitude,population,source_id FROM places')->fetchAll();
-    $groups=[];
-    foreach($places as $place){
-        $key=$normalize($place['name']);
-        $groups[$key][]=$place;
-    }
-    $merges=[];
-    foreach($groups as $key=>$rows){
-        if(count($rows)<2)continue;
-        // Score : coordonnées + subdivision/county/state renseignés + population, puis id le plus ancien
-        $score=function($row){
-            return ($row['latitude']!==null && $row['longitude']!==null ? 100 : 0)
-                + (trim((string)($row['subdivision']??''))!=='' ? 10 : 0)
-                + (trim((string)($row['county']??''))!=='' ? 5 : 0)
-                + (trim((string)($row['state']??''))!=='' ? 5 : 0)
-                + (int)($row['population']??0)/1000000;
-        };
-        usort($rows, fn($a,$b)=>$score($b)<=>$score($a) ?: (int)$a['id']<=>(int)$b['id']);
-        $survivor=$rows[0];
-        $duplicates=array_slice($rows,1);
-        $dupIds=array_map(fn($r)=>(int)$r['id'],$duplicates);
-        if(!$dupIds)continue;
-        $marks=implode(',',array_fill(0,count($dupIds),'?'));
-        $pdo->prepare("UPDATE events SET place_id=? WHERE place_id IN ($marks)")->execute(array_merge([(int)$survivor['id']],$dupIds));
-        $pdo->prepare("UPDATE census_records SET place_id=? WHERE place_id IN ($marks)")->execute(array_merge([(int)$survivor['id']],$dupIds));
-        $pdo->prepare("DELETE FROM places WHERE id IN ($marks)")->execute($dupIds);
-        $merges[]=['survivor_id'=>(int)$survivor['id'],'survivor_name'=>$survivor['name'],'removed_ids'=>$dupIds];
-    }
-    if($merges)log_change($pdo,'place',null,'merge-duplicates','Fusion de '.count($merges).' groupe(s) de lieux en double',null,['merges'=>$merges]);
-    return ['merged_groups'=>count($merges),'details'=>$merges];
+    require_once __DIR__.'/lib/lieux_doublons.php';
+    $r=ld_merge_safe($pdo,$data);
+    return ['merged_groups'=>$r['merged'],'details'=>$r['details']??[],'undo_id'=>$r['undo_id']];
 }
 
 /** « human » ou « animal » : une personne et un animal ne sont jamais doublons, ni parents ou conjoints l'un de l'autre */
@@ -12401,6 +12716,7 @@ function link_event_to_investigation_item(PDO $pdo,array $data): array
     }
     if($eventPersonLabel==='')$eventPersonLabel=$personLabel;
     if($eventPersonLabel!=='')$label=$eventPersonLabel.' — '.$label;
+    if((int)($old['linked_event_id']??0)>0&&(int)$old['linked_event_id']!==$eventId&&empty($data['replace'])){require_once __DIR__.'/lib/connexions.php';$lid=cx_add_event_to_item($pdo,$itemId,$eventId);$pdo->prepare('UPDATE investigations SET updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([$old['investigation_id']]);log_change($pdo,'investigation_item',$itemId,'update','Événement ajouté à la piste « '.($old['title']??'#'.$itemId).' » : '.$label,null,['id'=>$itemId,'link_id'=>$lid,'event_id'=>$eventId]);return ['id'=>$itemId,'linked_event_id'=>(int)$old['linked_event_id'],'added_link_id'=>$lid,'linked_event_label'=>$label];} // 🧺 une piste tient plusieurs événements : le 2e s'ajoute (lib/connexions.php)
     $pdo->prepare('UPDATE investigation_items SET linked_event_id=?,linked_event_label=? WHERE id=?')->execute([$eventId,$label,$itemId]);
     $pdo->prepare('UPDATE investigations SET updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([$old['investigation_id']]);
     log_change($pdo,'investigation_item',$itemId,'update','Événement lié à la piste « '.($old['title']??'#'.$itemId).' » : '.$label,$old,['id'=>$itemId,'linked_event_id'=>$eventId,'linked_event_label'=>$label]);
@@ -12428,6 +12744,8 @@ function save_investigation_media_folder(PDO $pdo,array $data): array
         $investigationId=(int)$stmt->fetchColumn();
         if(!$investigationId)throw new RuntimeException('Dossier introuvable');
         $pdo->prepare('UPDATE investigation_media_folders SET name=? WHERE id=?')->execute([$name,$id]);
+        // 🎨 couleur et icône : seulement celles qu'on envoie (un simple renommage n'y touche pas)
+        foreach(investigation_folder_style($data) as $col=>$val)$pdo->prepare("UPDATE investigation_media_folders SET $col=? WHERE id=?")->execute([$val,$id]);
         return ['id'=>$id,'investigation_id'=>$investigationId];
     }
     if(!$investigationId)throw new RuntimeException('Enquête manquante');
@@ -12438,8 +12756,18 @@ function save_investigation_media_folder(PDO $pdo,array $data): array
         $stmt->execute([$parentId,$investigationId]);
         if(!$stmt->fetchColumn())throw new RuntimeException('Dossier parent invalide');
     }
-    $pdo->prepare('INSERT INTO investigation_media_folders(investigation_id,parent_id,name) VALUES(?,?,?)')->execute([$investigationId,$parentId,$name]);
+    $style=investigation_folder_style($data);
+    $pdo->prepare('INSERT INTO investigation_media_folders(investigation_id,parent_id,name,color,icon) VALUES(?,?,?,?,?)')->execute([$investigationId,$parentId,$name,$style['color']??'',$style['icon']??'']);
     return ['id'=>(int)$pdo->lastInsertId(),'investigation_id'=>$investigationId];
+}
+
+/** 🎨 la couleur (« #rrggbb », vide = aucune) et l'icône (un emoji, vide = 📁) d'un dossier de pièces, parmi celles envoyées */
+function investigation_folder_style(array $data): array
+{
+    $out=[];
+    if(array_key_exists('color',$data)){$c=strtolower(trim((string)$data['color']));$out['color']=preg_match('/^#[0-9a-f]{6}$/',$c)?$c:'';}
+    if(array_key_exists('icon',$data)){$i=trim(safe_text($data['icon']));$i=mb_substr($i,0,8);$out['icon']=$i==='📁'?'':$i;}
+    return $out;
 }
 
 function delete_investigation_media_folder(PDO $pdo,array $data): array
@@ -12616,7 +12944,7 @@ function save_person(PDO $pdo,array $data): array
         if(array_key_exists('mort_pour_la_france',$data)){$pdo->prepare('UPDATE persons SET mort_pour_la_france=? WHERE id=?')->execute([safe_text($data['mort_pour_la_france'])?:'unknown',$id]);}$created=$pdo->query('SELECT * FROM persons WHERE id='.$id)->fetch();log_change($pdo,'person',$id,'create','Création de '.full_name($created),null,$created);rebuild_search($pdo,$id);return $created;
     }
     $stmt=$pdo->prepare('SELECT * FROM persons WHERE id=?');$stmt->execute([$id]);$before=$stmt->fetch();
-    if(!$before)throw new RuntimeException('Personne introuvable');
+    if(!$before)throw new RuntimeException('Personne introuvable : la fiche a peut-être été supprimée.'); // supprimée dans un autre onglet pendant que la fenêtre était ouverte
     assert_person_unlocked($pdo,$id);
     // deux onglets : la fiche a-t-elle changé ailleurs depuis l'ouverture de la fenêtre ? (seulement les cases que
     // l'autre fenêtre a changées ET que celle-ci remplacerait ; _force = « Enregistrer quand même »)
@@ -12945,6 +13273,8 @@ function add_event(PDO $pdo,array $data): array
     foreach(['signed1','signed2'] as $sk)if(array_key_exists($sk,$data)){$sv=is_scalar($data[$sk])?(string)$data[$sk]:'';$pdo->prepare("UPDATE events SET $sk=? WHERE id=?")->execute([$sv==='1'?1:($sv==='0'?0:null),$id]);} // ✍️ qui a signé l'acte (D35 « Savoir signer »)
     if(array_key_exists('date_uncertain',$data))$pdo->prepare('UPDATE events SET date_uncertain=? WHERE id=?')->execute([!empty($data['date_uncertain'])&&$data['date_uncertain']!=='0'?1:0,$id]);
     if(array_key_exists('event_time',$data))$pdo->prepare('UPDATE events SET event_time=? WHERE id=?')->execute([event_time_value($data['event_time']),$id]); // 🌦 l'heure écrite dans l'acte (« 14:30 »)
+    if(array_key_exists('is_private',$data))$pdo->prepare('UPDATE events SET is_private=? WHERE id=?')->execute([!empty($data['is_private'])&&$data['is_private']!=='0'?1:0,$id]); // 🔒 événement confidentiel (migration 111)
+    if(array_key_exists('research_note',$data))$pdo->prepare('UPDATE events SET research_note=? WHERE id=?')->execute([mb_substr(safe_text($data['research_note']),0,2000),$id]); // 📝 note de recherche du fait
     link_event_confidence_media($pdo,$id,$confidenceMediaId);
     log_change($pdo,'event',$id,'create',$scope==='family'?'Ajout d’un événement à la famille #'.$familyId:'Ajout d’un événement à la fiche #'.$personId);
     return ['id'=>$id];
@@ -13013,6 +13343,8 @@ function save_event(PDO $pdo,array $data): array
     foreach(['signed1','signed2'] as $sk)if(array_key_exists($sk,$data)){$sv=is_scalar($data[$sk])?(string)$data[$sk]:'';$pdo->prepare("UPDATE events SET $sk=? WHERE id=?")->execute([$sv==='1'?1:($sv==='0'?0:null),$id]);} // ✍️ qui a signé l'acte (D35 « Savoir signer »)
     if(array_key_exists('date_uncertain',$data))$pdo->prepare('UPDATE events SET date_uncertain=? WHERE id=?')->execute([!empty($data['date_uncertain'])&&$data['date_uncertain']!=='0'?1:0,$id]); // « date incertaine » cochée
     if(array_key_exists('event_time',$data))$pdo->prepare('UPDATE events SET event_time=? WHERE id=?')->execute([event_time_value($data['event_time']),$id]); // 🌦 l'heure écrite dans l'acte (« 14:30 »)
+    if(array_key_exists('is_private',$data))$pdo->prepare('UPDATE events SET is_private=? WHERE id=?')->execute([!empty($data['is_private'])&&$data['is_private']!=='0'?1:0,$id]); // 🔒 événement confidentiel (migration 111)
+    if(array_key_exists('research_note',$data))$pdo->prepare('UPDATE events SET research_note=? WHERE id=?')->execute([mb_substr(safe_text($data['research_note']),0,2000),$id]); // 📝 note de recherche du fait
     link_event_confidence_media($pdo,$id,$confidenceMediaId);
     $stmt->execute([$id]);$after=$stmt->fetch();
     log_change($pdo,'event',$id,'update','Modification de l’événement #'.$id,$before,$after);
@@ -13302,6 +13634,7 @@ function delete_media(PDO $pdo,array $data): array
     $pdo->prepare('UPDATE persons SET portrait_media_id=NULL,updated_at=CURRENT_TIMESTAMP WHERE portrait_media_id=?')->execute([$mediaId]);
     $pdo->prepare('DELETE FROM media_tags WHERE media_id=?')->execute([$mediaId]); // zones identifiées : gardées dans la copie ci-dessus
     $pdo->prepare('DELETE FROM media_links WHERE media_id=?')->execute([$mediaId]);
+    doc_links_forget($pdo, $mediaId); // 🔗 ses liens avec d'autres documents
     $pdo->prepare("DELETE FROM label_links WHERE entity_type='media' AND entity_id=?")->execute([$mediaId]);
     $pdo->prepare('DELETE FROM media WHERE id=?')->execute([$mediaId]);
     log_change($pdo,'media',$mediaId,'delete','Suppression du média « '.($before['title']?:$before['filename']?:'#'.$mediaId).' » de la base locale',$snapshot,null);

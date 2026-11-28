@@ -425,7 +425,7 @@ Les pistes sont montrées à partir de ce score (sur 100). Plus haut : moins de 
 Après chaque nouvel import du fichier INSEE : vérifier les dossiers en cours tout seul (jamais de changement sans ton clic). ¦ После каждого нового импорта файла INSEE: проверять дела в работе самостоятельно (никогда изменений без твоего щелчка). ¦ Після кожного нового імпорту файлу INSEE: перевіряти справи в роботі самостійно (ніколи змін без твого клацання).
 Automatique, dans la cloche ¦ Автоматически, в колокольчике ¦ Автоматично, у дзвіночку
 Seulement à la main ¦ Только вручную ¦ Лише вручну
-📋 Questionnaire ¦ 📋 Анкета ¦ 📋 Анкета
+📝 Questionnaire ¦ 📝 Анкета ¦ 📝 Анкета
 Ce que l’héritier te renvoie après avoir rempli le questionnaire. ¦ Что наследник присылает тебе после заполнения. ¦ Що спадкоємець надсилає тобі після заповнення.
 Un petit fichier .json ¦ Небольшой файл .json ¦ Невеликий файл .json
 La page .html remplie ¦ Заполненная страница .html ¦ Заповнена сторінка .html

@@ -15,6 +15,19 @@ const BACKUP_MARKER = 'lcnda-sauvegarde.json';
 const BACKUP_MEDIA_EXTENSIONS = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'avif', 'heic', 'heif', 'tif', 'tiff', 'bmp',
     'pdf', 'mp3', 'm4a', 'aac', 'wav', 'aif', 'aiff', 'aifc', 'ogg', 'flac', 'mov', 'mp4', 'm4v', 'webm', 'avi', 'mkv'];
 
+/**
+ * 🔒 Un nom de fichier venu d'un fichier reçu (paquet MacFamilyTree, archive d'un dossier de succession, dossier partagé à deux
+ * ordinateurs) avant de l'écrire dans les médias : seulement une photo, un son, une vidéo, un PDF ou un document (comme « Lots » et
+ * le traitement de texte en rangent). Jamais « .php », « .phtml », « .svg », « .js »… : sous Apache (MAMP, XAMPP), le dossier media/
+ * est servi par Apache, un script ou un dessin piégé déposé là s'exécuterait ou s'ouvrirait avec les droits de l'app.
+ */
+function media_import_name_ok(string $name): bool
+{
+    $ext = strtolower(pathinfo(str_replace('\\', '/', $name), PATHINFO_EXTENSION));
+    // les documents rangés par « Lots » (lib/lots.php) et le traitement de texte ; un .html n'y est jamais servi comme une page (router.php, .htaccess)
+    return in_array($ext, BACKUP_MEDIA_EXTENSIONS, true) || in_array($ext, ['docx', 'odt', 'rtf', 'md', 'txt', 'html', 'xlsx', 'ods', 'csv'], true);
+}
+
 /** Fichiers de médias à sauvegarder (chemin relatif à MEDIA_DIR ⇒ chemin absolu), sans fichiers cachés. */
 function backup_media_files(): array
 {
@@ -237,6 +250,24 @@ function backup_bounded_copy($in, $out, int $declared)
         if ($chunk === '') { break; }
     }
     return $copied;
+}
+
+/**
+ * Copie un fichier d'une archive reçue (.zip) vers $dest, borné : refusé s'il est démesuré une fois ouvert (plus de $max
+ * octets) ou anormalement compressé (bombe zip : plus de 50 Mo et 100 fois sa taille dans l'archive), et arrêté s'il
+ * dépasse la taille annoncée. Renvoie '' si tout va bien, sinon la phrase à montrer.
+ */
+function zip_entry_copy_bounded(ZipArchive $zip, string $entry, string $dest, int $max): string
+{
+    $st = $zip->statName($entry);
+    if (!$st) { return 'Lecture impossible dans l’archive.'; }
+    $size = (int) ($st['size'] ?? 0); $packed = max(1, (int) ($st['comp_size'] ?? 0));
+    if ($size > $max) { return 'Le fichier « ' . basename($entry) . ' » est trop gros une fois ouvert (plus de ' . intdiv($max, 1048576) . ' Mo) : il n’est pas ouvert.'; }
+    if ($size > 50 * 1048576 && $size / $packed > 100) { return 'Cette archive contient un fichier anormal (« ' . basename($entry) . ' ») : elle n’est pas ouverte.'; }
+    $in = $zip->getStream($entry); $out = @fopen($dest, 'wb');
+    $copied = ($in && $out) ? backup_bounded_copy($in, $out, $size) : false;
+    if ($in) { fclose($in); } if ($out) { fclose($out); }
+    return $copied === false ? 'Lecture impossible dans l’archive (fichier abîmé ou plus gros qu’annoncé).' : '';
 }
 
 function restore_package_upload(array $file): never

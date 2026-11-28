@@ -1,0 +1,27 @@
+{
+  "attr": "Wikipédia en français — articles « Arpent », « Ouvrée », « Perche (unité) », « Razière », « Setier », « Bonnier (unité) », « Verge (unité) » (phrases recopiées telles quelles, sans les notes)",
+  "licence": "CC BY-SA 4.0",
+  "licence_url": "https://creativecommons.org/licenses/by-sa/4.0/deed.fr",
+  "checked": "2026-11-25",
+  "note": "Peu de valeurs régionales sourcées existent dans les sources libres : ce tableau ne garde que celles que Wikipédia donne avec un lieu et une valeur en mesures d’aujourd’hui. Les valeurs changeaient souvent d’un village à l’autre.",
+  "keys": ["unit", "kind", "place", "deps", "value", "max", "metric", "sentence", "page"],
+  "rows": [
+    ["ouvrée", "surface", "Bourgogne", ["21", "58", "71", "89"], 4.28, null, "a", "En Bourgogne, une ouvrée correspond à 4,28 ares, généralement plantés de vignes.", "Ouvrée"],
+    ["arpent de Paris", "surface", "Paris et alentours", ["75", "77", "78", "91", "92", "93", "94", "95"], 34.19, null, "a", "Mais coexistent un arpent de Paris, construit sur une perche de 18 pieds, soit 34,19 ares, et un arpent commun construit sur une perche de 20 pieds, soit 42,21 ares.", "Arpent"],
+    ["arpent commun", "surface", "la plupart des régions", [], 42.21, null, "a", "Mais coexistent un arpent de Paris, construit sur une perche de 18 pieds, soit 34,19 ares, et un arpent commun construit sur une perche de 20 pieds, soit 42,21 ares.", "Arpent"],
+    ["arpent des eaux et forêts", "surface", "tout le royaume", [], 51, null, "a", "Ainsi, au XVIIe siècle la perche dite « des eaux et forêts » vaut 22 pieds du Roi, soit 7,146 mètres, d'où un arpent des eaux et forêts, ou arpent royal, ou arpent « légal » d'environ 51 ares, à peu près un demi-hectare.", "Arpent"],
+    ["acre", "surface", "Normandie et nord-ouest", ["14", "27", "50", "61", "76"], 30, 100, "a", "En Normandie, ou un peu plus largement dans le nord-ouest, l'acre (terme de racine germanique, utilisé également en Angleterre) prend la place de l'arpent. Souvent autour de cinquante ares, l'acre peut varier de trente à cent ares.", "Arpent"],
+    ["bonnier", "surface", "Nord de la France", ["59", "62"], 140, null, "a", "Il vaut autour de 140 ares dans le Nord de la France (entre 81 et 126 ares au Brabant).", "Arpent"],
+    ["jour", "surface", "pays rémois", ["51"], 50.724, null, "a", "En pays rémois 1 jour = 4 perches = 16 hommées = 160 verges = 3200 pieds = 50,724 ares", "Perche (unité)"],
+    ["rasière (de terre)", "surface", "Nord", ["59"], 20.83, 53.2, "a", "Dans le Nord, la rasière est aussi une mesure agraire, qui correspond à la surface qu'on peut ensemencer avec une rasière de grains, variant de 20,83 ares à 53,20 ares.", "Razière"],
+    ["rasière de Cambrai", "grain", "Cambrai", ["59"], 83.13, null, "l", "À Cambrai, la rasière vaut 83,13 litres tandis qu'à Lille, elle correspond à 72,2 litres pour le blé et 81,2 litres pour l'avoine.", "Razière"],
+    ["rasière de Lille (blé)", "grain", "Lille", ["59"], 72.2, null, "l", "À Cambrai, la rasière vaut 83,13 litres tandis qu'à Lille, elle correspond à 72,2 litres pour le blé et 81,2 litres pour l'avoine.", "Razière"],
+    ["rasière de Lille (avoine)", "grain", "Lille", ["59"], 81.2, null, "l", "À Cambrai, la rasière vaut 83,13 litres tandis qu'à Lille, elle correspond à 72,2 litres pour le blé et 81,2 litres pour l'avoine.", "Razière"],
+    ["razière de Beaumesnil", "grain", "Beaumesnil (Calvados)", ["14"], 44.6, null, "l", "Vers 1780, à Beaumesnil, la razière de grains vaut 44,6 litres.", "Razière"],
+    ["setier de Paris", "grain", "Paris", ["75", "77", "78", "91", "92", "93", "94", "95"], 152, null, "l", "le setier de Paris valait 12 boisseaux de 640 pouces de setiers cubes, soit 152 litres ;", "Setier"],
+    ["setier de Châlus", "grain", "Châlus (Haute-Vienne)", ["87"], 85.34, null, "l", "le setier de Châlus (Haute-Vienne) valait 8.534 décalitres ;", "Setier"],
+    ["setier de Liège", "grain", "Principauté de Liège (Belgique)", ["BE"], 30.712, null, "l", "le setier de la Principauté de Liège et de celle de Stavelot-Malmedy valait 30,712 litres", "Setier"],
+    ["bonnier de Moustier-sur-Sambre", "surface", "Moustier-sur-Sambre (Belgique)", ["BE"], 94.62, null, "a", "Valeur de 94,62 ares à Moustier-sur-Sambre.", "Bonnier (unité)"],
+    ["verge belge", "surface", "Wallonie (Belgique)", ["BE"], 4.36, null, "a", "La verge belge est une ancienne unité de surface qui correspondait, dans la partie francophone du pays, à 436 m2 (soit approximativement 23 verges par hectare).", "Verge (unité)"]
+  ]
+}

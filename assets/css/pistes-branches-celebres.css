@@ -1,0 +1,42 @@
+/* 🔎 Pistes à vérifier, 🧩 Branches isolées, ⭐ Parents célèbres (assets/js/heritage-pistes-auto.js, heritage-branches-isolees.js,
+ * heritage-parents-celebres.js) — reprend l'allure du Contrôle de la base (.ctl-row, .ctl-checks, .ctl-check) et des blocs de la fiche
+ * (.cplus-lead, .cplus-src, .cplus-more) ; clair et sombre : currentColor. */
+.pst-launch-row{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+.pst-launch-row select{max-width:22rem}
+.pst-srcs{display:flex;flex-wrap:wrap;gap:.2rem 1.2rem;margin:.5rem 0}
+.pst-srcbox{margin:0}
+.pst-filters{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0}
+.pst-filters input[type=search]{flex:1 1 14rem;min-width:0}
+.pst-job{margin-top:.6rem;padding:.6rem .8rem;border:1px solid color-mix(in srgb,currentColor 16%,transparent);border-radius:10px}
+.pst-job-top{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center}
+.pst-job-acts{margin-left:auto;display:flex;gap:.3rem}
+.pst-bar{height:8px;margin:.45rem 0 .3rem;border-radius:99px;background:color-mix(in srgb,currentColor 12%,transparent);overflow:hidden}
+.pst-bar > span{display:block;height:100%;background:#2f8f5b;border-radius:inherit;transition:width .3s}
+.pst-job.is-paused .pst-bar > span{background:#b58a00}
+.pst-msg{margin:.3rem 0 0;font-size:.9em;color:#b5523b}
+.pst-score{display:inline-block;padding:0 .45em;border-radius:99px;font-size:.78em;font-weight:600;vertical-align:middle;border:1px solid currentColor}
+.pst-score.is-high{color:#2f8f5b}.pst-score.is-mid{color:#b58a00}.pst-score.is-low{opacity:.75}
+.pst-src{font-size:1.05em}
+.pst-who{background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer;text-decoration:underline dotted}
+.pst-who small{opacity:.75}
+.pst-source{margin:.35rem 0 0;font-size:.82em;opacity:.8;overflow-wrap:anywhere}
+.pst-row .ctl-row-acts{flex-wrap:wrap}
+.pst-widget .ctl-widget-big{width:100%}
+.pst-float{position:fixed;right:16px;bottom:16px;z-index:60;display:flex;gap:2px;border-radius:99px;overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,.25)}
+.pst-float button{border:0;padding:.5rem .8rem;background:#1f3a2f;color:#fff;font:inherit;font-size:.88em;cursor:pointer}
+.pst-float button:hover{background:#2f8f5b}
+.bis-box[hidden]{display:none}
+.bis-panel > summary{cursor:pointer}
+.bis-names{font-weight:400;opacity:.85}
+.bis-field{display:flex;flex-direction:column;gap:.2rem;margin:.4rem 0}
+.bis-dialog .data-table{width:100%}
+.pc-path{margin:.3rem 0 .4rem;padding-left:1.3rem;display:grid;gap:.2rem}
+.pc-rel{opacity:.75;font-style:italic}
+.pc-src{opacity:.75}
+.pc-bridge{list-style:none;margin-left:-1.3rem;font-size:.88em;opacity:.8}
+.pc-warn{margin:.5rem 0 0;font-size:.85em;opacity:.85}
+.pc-row + .pc-row{border-top:1px solid color-mix(in srgb,currentColor 12%,transparent);padding-top:.4rem}
+.pc-linked{margin:.4rem 0;padding-left:1.2rem;display:grid;gap:.2rem}
+.pc-wtform{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center}
+@media (max-width:640px){.pst-float{left:16px;right:16px}.pst-float button:first-child{flex:1}}
+@media print{.pst-float,.pst-launch,[data-pst-ok],[data-pst-no],[data-pst-ev]{display:none}}

@@ -295,6 +295,19 @@
             return ext.keynoteWithObject({t: 'table', head: true, rows}, ctx.name);
         },
     };
+    /* 📝 Un document du Traitement de texte : le tableau (titres en gras), sous un titre */
+    T.textdoc = {
+        icon: '📝', label: 'Un document (Traitement de texte)', hint: 'le tableau dans un texte', createLabel: '📝 Créer le document', keepRaw: true,
+        columns: () => [],
+        fromRange: (ed, g) => X().matrix(ed.wb, ed.calc, ed.si, g, {display: true}).slice(0, 2000).map(r => r.slice(0, 40).map(v => String(v ?? ''))),
+        preview: rows => miniTable(rows),
+        create(rows, ctx) {
+            if (!ext.openTextDoc || !ext.textDocTools?.dataOf) return toast(i18n('Le traitement de texte n’est pas chargé.'), 'error');
+            return ext.openTextDoc({data: ext.textDocTools.dataOf(textdocHtml(rows, ctx.name)), name: ctx.name || i18n('Tableau')});
+        },
+    };
+    /** un tableau en HTML pour le Traitement de texte (la 1re ligne en en-tête) */
+    const textdocHtml = (rows, name) => { const [head = [], ...body] = rows || []; return `${name ? `<h1 data-st="h1">${esc(name)}</h1>` : ''}<table class="wp-table"><thead><tr>${head.map(v => `<th>${esc(str(v)) || '<br>'}</th>`).join('')}</tr></thead><tbody>${body.map(r => `<tr>${head.map((_, i) => `<td>${esc(str(r?.[i])) || '<br>'}</td>`).join('')}</tr>`).join('')}</tbody></table><p data-st="normal"><br></p>`; };
     const miniTable = rows => `<div class="xl-prev"><table><tbody>${(rows || []).slice(0, 8).map((r, i) => `<tr>${(r || []).slice(0, 8).map(v => `<${i ? 'td' : 'th'}>${esc(str(v))}</${i ? 'td' : 'th'}>`).join('')}</tr>`).join('')}</tbody></table>${(rows || []).length > 8 ? `<small class="muted">${esc(i18n('… et {n}', {n: plural(rows.length - 8, 'autre ligne', 'autres lignes')}))}</small>` : ''}</div>`;
 
     /* ═════════ « 🧾 Modifier les données » : ouvrir le tableur déjà préparé, puis revenir ═════════ */
@@ -442,11 +455,42 @@
             const linked = await linkSpec(ed, spec, g, table.head); if (!linked) return;
             ext.openDiagramEditor(null, {spec: linked, name: `${ed.S().name === 'Feuille 1' ? ed.name : ed.S().name} (${S.rangeStr(g)})`});
         };
-        const items = suggest(shape).map(x => ({icon: x.icon, label: x.label, run: () => open(x.kind)}));
+        const sug = suggest(shape), items = sug.map(x => ({icon: x.icon, label: x.label, run: () => open(x.kind)}));
+        if (sug.length) items.push('-', {icon: '⤓', label: i18n('Image du graphique (PNG) : {kind}', {kind: sug[0].label}), run: () => chartPng(ed, sug[0].kind)});
         items.push('-', {icon: '🎯', label: i18n('Tous les types de diagrammes…'), run: () => prepare(ed, 'diagram')});
         const anchor = btn && btn.isConnected && btn.offsetParent ? btn : ed.$('[data-xl-cmd="chart"]');
         UI().menuAt(anchor || {x: innerWidth / 2, y: 120}, items, {title: i18n('Conseillés pour {range}', {range: S.rangeStr(g)})});
     };
+
+    /** ⤓ Image du graphique : le graphique de la sélection en PNG (2 fois plus fin que l'écran) */
+    async function chartPng(ed, kind = '') {
+        const r = ext.sheetChartLive?.(ed, kind); if (!r) return toast(i18n('Choisis une plage avec des nombres (par exemple : Décennie, Hommes, Femmes).'));
+        if (!R()?.svg) return toast(i18n('L’éditeur de diagrammes n’est pas chargé.'), 'error');
+        const title = ed.S().name === 'Feuille 1' ? ed.name : ed.S().name, svg = R().svg({...r.spec, o: {...(r.spec.o || {}), title: r.spec.o?.title || title}}, 1200);
+        const url = URL.createObjectURL(new Blob([svg], {type: 'image/svg+xml'}));
+        try {
+            const im = await new Promise((ok, ko) => { const x = new Image(); x.onload = () => ok(x); x.onerror = () => ko(new Error(i18n('Le graphique n’a pas pu être dessiné.'))); x.src = url; });
+            const c = document.createElement('canvas'), k = 2, w = im.naturalWidth || 1200, h = im.naturalHeight || 800; c.width = w * k; c.height = h * k;
+            const g = c.getContext('2d'); g.fillStyle = '#ffffff'; g.fillRect(0, 0, c.width, c.height); g.drawImage(im, 0, 0, c.width, c.height);
+            const blob = await new Promise((ok, ko) => c.toBlob(b => (b ? ok(b) : ko(new Error(i18n('Image trop grande pour le navigateur.')))), 'image/png'));
+            const base = A().safeExportFilename ? A().safeExportFilename(`${title} (${r.range})`, 'graphique') : 'graphique', a = document.createElement('a');
+            a.href = URL.createObjectURL(blob); a.download = `${base}.png`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+            toast(i18n('Image du graphique enregistrée : {name}', {name: `${base}.png`}));
+            return blob;
+        } catch (err) { toast(err.message, 'error'); return null; } finally { URL.revokeObjectURL(url); }
+    }
+    ext.sheetChartPng = chartPng;
+
+    /** 📤 Envoyer vers… : la sélection (plusieurs cases) ou toute la feuille, en lignes (heritage-envoyer.js) */
+    function sendRows(ed, btn) {
+        if (!ext.sendTo) return toast(i18n('« Envoyer vers… » n’est pas chargé.'), 'error');
+        const S = X(), sh = ed.S(), used = S.usedRange(sh); if (!used) return toast(i18n('La feuille est vide : rien à envoyer.'));
+        let g = rangeOf(ed); if (!g || (g.r0 === g.r1 && g.c0 === g.c1)) g = used;
+        const rows = S.matrix(ed.wb, ed.calc, ed.si, g, {display: true}).map(r => r.map(v => String(v ?? '')));
+        const name = sh.name === 'Feuille 1' ? ed.name : `${ed.name} — ${sh.name}`;
+        const anchor = btn && btn.isConnected && btn.offsetParent ? btn : ed.$('[data-xl-menu="Fichier"] summary') || ed.dlg || null;
+        return ext.sendTo('rows', {rows, name}, {anchor, title: name, exclude: ['sheet']});
+    }
 
     /* ═════════ Plage liée : relue à l'affichage (diagrammes) ═════════ */
     const books = new Map(); // id → {t, p}
@@ -507,6 +551,8 @@
     ext.sheetMenuExtra.push({menu: 'Données', cmd: 'prepare', label: '🎯 Préparer pour… (diagramme, graphique, présentation…)'});
     ext.sheetCommands = ext.sheetCommands || {};
     ext.sheetCommands.prepare = (ed, arg) => prepare(ed, arg || '');
+    ext.sheetCommands.sendto = (ed, arg, btn) => sendRows(ed, btn);
+    ext.sheetCommands.chartpng = (ed, arg) => chartPng(ed, arg || '');
 
-    ext.tableurCiblesInternals = {mapColumns, numOf, guessHead, tableOf, bookOf, shapeOf, suggest, prepare, linkSpec}; // pour les essais
+    ext.tableurCiblesInternals = {mapColumns, numOf, guessHead, tableOf, bookOf, shapeOf, suggest, prepare, linkSpec, chartPng, sendRows, textdocHtml}; // pour les essais
 })();

@@ -150,7 +150,7 @@
         m.innerHTML = `<button type="button" class="succ-fm-all${ids.length ? '' : ' is-on'}" data-sf-all>👁 ${esc(i18n('Tout montrer'))}</button>
             ${here.length ? `<b class="succ-fm-h">${esc(i18n('Un dossier'))}</b>${here.map(c => `<label class="succ-fm-row"><input type="radio" name="succ-fm-one" value="${c.id}" data-sf-one${one === c.id ? ' checked' : ''}> <span>${esc(caseShort(c))}</span> ${badge(stateLabel(c.state), stateKind(c.state))}</label>`).join('')}
             <b class="succ-fm-h">${esc(i18n('Plusieurs'))}</b>${here.map(c => `<label class="succ-fm-row"><input type="checkbox" value="${c.id}" data-sf-many${ids.includes(c.id) && ids.length > 1 ? ' checked' : ''}> <span>${esc(caseShort(c))}</span></label>`).join('')}
-            <button type="button" class="button small" data-sf-apply>${esc(i18n('⚖️ Ne montrer que ceux-ci'))}</button>` : `<p class="muted">${esc(i18n('Aucun dossier dans cette généalogie.'))}</p>`}
+            <button type="button" class="button small" data-sf-apply>${esc(i18n('⚖️ Ne montrer que ceux-ci'))}</button>` : `${window.LCNDA_APP.empty(i18n('Aucun dossier dans cette généalogie.'))}`}
             ${away.length ? `<b class="succ-fm-h">${esc(i18n('Dans une autre généalogie'))}</b>${away.map(c => `<button type="button" class="succ-fm-away" data-sf-away="${esc(c.base.id)}:${c.id}">↗ ${esc(caseShort(c))} <small class="muted">${esc(c.base.name)}</small></button>`).join('')}` : ''}
             <button type="button" class="succ-fm-board" data-sf-board>⚖️ ${esc(i18n('Tous les dossiers…'))} <small class="muted">${esc(i18n('tableau de bord'))}</small></button>`;
         document.body.appendChild(m); menuEl = m;
@@ -168,13 +168,11 @@
             else if (t.matches('[data-sf-away]')) { const [g, id] = t.dataset.sfAway.split(':'); closeMenu(); const c = away.find(x => x.base.id === g && x.id === Number(id)); openElsewhere(g, c, 'filter'); }
         });
     }
-    function openBoard() { const st = A().state; store.set('lcnda-succ-view', 'cases'); if (ext.successoral?.openCase) { ext.successoral.openCase(0); } else { st.listType = 'successoral'; A().setModule('listes'); } }
+    function openBoard() { const st = A().state; store.set('genealogie-succ-view', 'cases'); if (ext.successoral?.openCase) { ext.successoral.openCase(0); } else { st.listType = 'successoral'; A().setModule('listes'); } }
     async function paintBanner() {
         const ws = document.getElementById('workspace'); if (!ws) return;
-        let bn = ws.querySelector(':scope > .succ-fbanner');
         const ids = filterIds(), m = A()?.state?.module;
-        if (!ids.length || NOFILTER.includes(m) || !active()) { bn?.remove(); return; }
-        if (!bn) { bn = document.createElement('div'); bn.className = 'succ-fbanner'; bn.setAttribute('role', 'status'); ws.prepend(bn); }
+        if (!ids.length || NOFILTER.includes(m) || !active()) { ws.querySelector(':scope > .succ-fbanner')?.remove(); return; }
         await index().catch(() => null);
         const cs = ids.map(id => localCases().find(c => c.id === id)).filter(Boolean);
         const set = await filterPeople();
@@ -182,6 +180,10 @@
         const what = cs.length === 1 ? i18n('Seulement le dossier {n}', {n: caseShort(cs[0])}) : i18n('Seulement {what} : {list}', {what: nDossiers(cs.length), list: cs.map(c => c.number).join(', ')});
         const html = `<span aria-hidden="true">⚖️</span> <span class="succ-fb-t"><b>${esc(what)}</b> : ${esc(i18n('{n} sur {total}', {n: plural(set ? set.size : 0, 'fiche'), total: num(total)}))}.</span>
             <button type="button" class="link-button" data-sf-change>${esc(i18n('Changer…'))}</button><button type="button" class="icon-button small succ-fb-x" data-sf-clear title="${esc(i18n('Tout montrer'))}" aria-label="${esc(i18n('Tout montrer'))}">✕</button>`;
+        // posé seulement une fois écrit (pas de bandeau vide le temps des lectures), et si le filtre n'a pas changé entre-temps
+        if (filterIds().join(',') !== ids.join(',') || NOFILTER.includes(A()?.state?.module) || !active()) return;
+        let bn = ws.querySelector(':scope > .succ-fbanner');
+        if (!bn) { bn = document.createElement('div'); bn.className = 'succ-fbanner'; bn.setAttribute('role', 'status'); ws.prepend(bn); }
         if (bn.innerHTML !== html) bn.innerHTML = html;
     }
     // le bandeau revient après chaque écran redessiné ; l'arbre grise ou cache les fiches hors du dossier
@@ -303,7 +305,7 @@
             <h4>⚖️ ${esc(i18n('Où ranger les dossiers'))}</h4><p class="muted">${esc(i18n('Les nouveaux dossiers vont…'))}</p>
             <div class="segmented succ-store-seg" role="radiogroup">${[['here', 'Dans cette généalogie'], ['apart', st.apart_id ? i18n('Dans « {name} »', {name: gname(st.apart_id)}) : 'Dans une généalogie à part'], ['each', 'Un par dossier']].map(([k, l]) => `<button type="button" data-succ-store="${k}" class="${st.store === k ? 'is-active' : ''}" aria-pressed="${st.store === k}">${esc(i18n(l))}</button>`).join('')}</div>
             <h4>${esc(i18n('Les dossiers et où ils sont'))}</h4>
-            ${cases.length ? `<div class="succ-scroll"><table class="succ-table succ-where"><thead><tr><th>${esc(i18n('Dossier'))}</th><th>${esc(i18n('Rangé dans'))}</th><th></th></tr></thead><tbody>${cases.map(c => `<tr><td>${esc(caseShort(c))}</td><td>${c.base.main ? '🌳' : '⚖️'} ${esc(c.base.name)}</td><td><button type="button" class="button small secondary" data-succ-move="${esc(c.base.id)}:${c.id}">${esc(i18n('⇄ Déplacer…'))}</button></td></tr>`).join('')}</tbody></table></div>` : `<p class="muted">${esc(i18n('Aucun dossier pour l’instant.'))}</p>`}
+            ${cases.length ? `<div class="succ-scroll"><table class="succ-table succ-where"><thead><tr><th>${esc(i18n('Dossier'))}</th><th>${esc(i18n('Rangé dans'))}</th><th></th></tr></thead><tbody>${cases.map(c => `<tr><td>${esc(caseShort(c))}</td><td>${c.base.main ? '🌳' : '⚖️'} ${esc(c.base.name)}</td><td><button type="button" class="button small secondary" data-succ-move="${esc(c.base.id)}:${c.id}">${esc(i18n('⇄ Déplacer…'))}</button></td></tr>`).join('')}</tbody></table></div>` : `${window.LCNDA_APP.empty(i18n('Aucun dossier pour l’instant.'))}`}
             <h4>⚙️ ${esc(i18n('Réglages des dossiers'))}</h4>
             <div class="succ-set-grid">
             <div><b>${esc(i18n('Arbre et graphiques filtrés par ⚖️ : les fiches hors dossier'))}</b>${opt('outside', 'grey', 'grisées, sans nom')}${opt('outside', 'hide', 'cachées')}</div>
@@ -445,7 +447,7 @@
     /* ── fiche ⋯ → « ⚖️ Dossiers… » ── */
     ext.personMoreItems.push(detail => {
         const p = detail?.person; if (!p?.id || p.kind === 'animal' || !active()) return null;
-        return {icon: '⚖️', label: i18n('Dossiers…'), run: () => personCasesDialog(Number(p.id), [p.first_name, String(p.last_name || '').toLocaleUpperCase('fr')].filter(Boolean).join(' '))};
+        return {key: 'succ-dossiers', icon: '⚖️', label: i18n('Dossiers…'), run: () => personCasesDialog(Number(p.id), [p.first_name, String(p.last_name || '').toLocaleUpperCase('fr')].filter(Boolean).join(' '))};
     });
     async function personCasesDialog(pid, name) {
         let r; try { r = await get('person_cases', {person_id: pid}); } catch (e) { return toast(e.message, 'error'); }
@@ -645,10 +647,14 @@
         const notaries = [...new Set(rows.map(r => r.notary).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'fr'));
         const offices = [...new Map(rows.filter(r => r.here && r.office).map(r => [r.office.id, r.office])).values()].sort((a, b) => a.name.localeCompare(b.name, 'fr')); // 🏛 l'étude de chaque dossier
         const bases = (d.bases || []).filter(b => b.cases.length);
+        // 👥 qui est chargé de chaque dossier (heritage-successoral-audit.js) : filtre « Mes dossiers » et nom sur la ligne
+        let asg = {items: [], names: [], me: ''}; try { asg = (await ext.succAudit?.assignments?.()) || asg; } catch (_) {}
+        const whoOf = r => (r.here ? (asg.items.find(x => x.case_id === Number(r.id) && x.task === '')?.who || '') : '');
         const bar = UI().listBar({key: 'succ:board', search: {placeholder: i18n('Chercher… (n°, défunt, notaire)')}, view: {dflt: 'list', what: 'dossiers'},
             filters: [{id: 'state', label: i18n('État'), type: 'check', options: [['late', i18n('Échéance passée')], ...['recherche', 'trouves', 'remis', 'clos', 'ouvert', 'archive'].map(k => [k, stateLabel(k)])]},
                 {id: 'base', label: i18n('Rangé dans'), type: 'select', options: [['', i18n('Toutes les généalogies')], ...bases.map(b => [b.id || '_main', b.name])]},
                 {id: 'notary', label: i18n('Notaire'), type: 'select', options: [['', i18n('Tous les notaires')], ...notaries.map(n => [n, n])]},
+                ...(asg.names.length || asg.me ? [{id: 'who', label: i18n('Chargé du dossier'), type: 'select', options: [['', i18n('Tout le monde')], ...(asg.me ? [['__me', i18n('👤 Mes dossiers ({name})', {name: asg.me})]] : []), ...asg.names.map(n => [n, n]), ['__none', i18n('Personne de chargé')]]}] : []),
                 ...(offices.length ? [{id: 'office', label: i18n('Étude de notaire'), type: 'select', options: [['', i18n('Toutes les études')], ...offices.map(o => [String(o.id), o.name])]}] : [])], // 🏛 heritage-complements.js
             sort: {options: [['due', i18n('Prochaine échéance (retards d’abord)')], ['low', i18n('Avancement le plus bas')], ['recent', i18n('Les plus récents')], ['num', i18n('N° de dossier')]], value: 'due'}, onChange: st => draw(st)});
         body.innerHTML = `${lockNote}${bad.length ? UI().notice('warn', i18n('⚠️ illisible : {names}', {names: bad.map(b => b.name).join(', ')})) : ''}<div data-succ-bitems></div><div class="succ-bsel" data-succ-bsel hidden></div>`;
@@ -663,7 +669,8 @@
         function draw(st = bar.state) {
             let list = rows.filter(r => M.text(st.q, r.number, r.title, r.deceased, r.notary, r.base.name)
                 && (!st.filters.state?.length || st.filters.state.some(s => (s === 'late' ? r.late > 0 : r.state === s)))
-                && (!st.filters.base || (r.base.id || '_main') === st.filters.base) && (!st.filters.notary || r.notary === st.filters.notary) && (!st.filters.office || String(r.office?.id || '') === st.filters.office));
+                && (!st.filters.base || (r.base.id || '_main') === st.filters.base) && (!st.filters.notary || r.notary === st.filters.notary) && (!st.filters.office || String(r.office?.id || '') === st.filters.office)
+                && (!st.filters.who || (st.filters.who === '__none' ? !whoOf(r) : whoOf(r) === (st.filters.who === '__me' ? asg.me : st.filters.who))));
             const due = r => (r.late ? '0' : '1') + String(r.next_due || '9999');
             list = st.sort === 'low' ? [...list].sort((a, b) => (a.progress ?? -1) - (b.progress ?? -1)) : st.sort === 'recent' ? UI().sortItems(list, 'recent') : st.sort === 'num' ? [...list].sort((a, b) => String(a.number).localeCompare(String(b.number), 'fr', {numeric: true})) : [...list].sort((a, b) => due(a).localeCompare(due(b)) || String(a.number).localeCompare(String(b.number), 'fr', {numeric: true}));
             shown = list;
@@ -674,12 +681,12 @@
             const open = r => (r.here ? `data-succ-open="${r.id}"` : `data-succ-away="${esc(r.key)}"`);
             if (st.view === 'cards') {
                 box.innerHTML = UI().cardsHtml(list.map(r => ({thumb: '<span class="ui-card-ico" aria-hidden="true">⚖️</span>', name: `${r.number} ${r.deceased || r.title}`, open: open(r), attrs: `data-succ-brow="${esc(r.key)}"`,
-                    lines: [{html: bar100(r.progress)}, [r.notary, dueTxt(r) !== '—' ? i18n('Échéance : {d}', {d: dueTxt(r)}) : ''].filter(Boolean).join(' · ')],
+                    lines: [{html: bar100(r.progress)}, [r.notary, dueTxt(r) !== '—' ? i18n('Échéance : {d}', {d: dueTxt(r)}) : '', whoOf(r) ? `👤 ${whoOf(r)}` : ''].filter(Boolean).join(' · ')],
                     badges: [{text: stateLabel(r.state), kind: stateKind(r.state)}, r.late ? {text: i18n('Échéance passée'), kind: 'red'} : null, {text: (r.base.main ? '🌳 ' : '⚖️ ') + r.base.name, kind: 'grey'}].filter(Boolean),
                     quick: chk(r)})));
             } else {
                 box.innerHTML = `<div class="succ-scroll"><table class="succ-table succ-board"><thead><tr><th></th><th>${esc(i18n('Dossier'))}</th><th>${esc(i18n('État'))}</th><th>${esc(i18n('Notaire'))}</th><th>${esc(i18n('Prochaine échéance'))}</th><th>${esc(i18n('Héritiers'))}</th><th>${esc(i18n('Pièces'))}</th><th>${esc(i18n('Temps'))}</th><th>${esc(i18n('Avancement'))}</th><th>${esc(i18n('Rangé dans'))}</th></tr></thead>
-                    <tbody>${list.map(r => `<tr data-succ-brow="${esc(r.key)}" class="${r.late ? 'is-late' : ''}"><td>${chk(r)}</td><td><button type="button" class="table-link" ${open(r)}><b>${esc(r.number)}</b> ${esc(r.deceased || r.title)}</button></td>
+                    <tbody>${list.map(r => `<tr data-succ-brow="${esc(r.key)}" class="${r.late ? 'is-late' : ''}"><td>${chk(r)}</td><td><button type="button" class="table-link" ${open(r)}><b>${esc(r.number)}</b> ${esc(r.deceased || r.title)}</button>${whoOf(r) ? ` <small class="succ-who" data-succ-who="${r.id}">👤 ${esc(whoOf(r))}</small>` : ''}</td>
                         <td>${badge(stateLabel(r.state), stateKind(r.state))}</td><td>${r.here && r.office ? `<button type="button" class="table-link" data-compl-etude="${Number(r.office.id)}" title="${esc(i18n('↗ Ouvrir'))}">${esc(r.office.name)}${r.office.notary ? ` · ${esc(r.office.notary)}` : ''}</button>` : `${esc(r.notary || '—')}${r.notary_typed ? ` ${badge(i18n('texte'), 'grey')}` : ''}`}</td><td class="${r.late ? 'succ-late' : ''}">${esc(dueTxt(r))}</td><td>${esc(heirsTxt(r))}</td>
                         <td>${r.pieces ? esc(`${r.pieces.have} / ${r.pieces.total}`) : '—'}</td><td>${esc(timeTxt(r.minutes))}</td><td class="succ-bpct">${bar100(r.progress)}</td><td>${where(r)}</td></tr>`).join('')}</tbody></table></div>
                     <p class="ui-hint succ-swipe">${esc(i18n('↔ Faire glisser le tableau.'))}</p>`;
@@ -708,6 +715,9 @@
             if (t.closest('[data-succ-bcsv]')) {
                 const sel = rows.filter(r => BSEL.has(r.key));
                 const cell = v => (S().csvCell ? S().csvCell(v) : `"${String(v ?? '').replace(/"/g, '""')}"`);
+                const line = r => [r.number, r.deceased, stateLabel(r.state), r.notary, r.next_due, heirsTxt(r), r.pieces ? `${r.pieces.have}/${r.pieces.total}` : '', timeTxt(r.minutes), r.progress == null ? '' : r.progress + ' %', r.base.name];
+                const note = () => { const tk = A().state?.csrf || ''; fetch('api.php?action=access_note', {method: 'POST', headers: {'Content-Type': 'application/json', 'X-CSRF-Token': tk}, body: JSON.stringify({what: 'dashboard_csv', n: sel.length, csrf: tk})}).catch(() => {}); }; // 📜 Qui a vu quoi (lib/verrou.php)
+                if (window.LCNDA_UI?.exportRows) { window.LCNDA_UI.exportRows({title: i18n('Dossiers de succession'), name: 'dossiers-de-succession', rows: () => [['Dossier', 'Défunt', 'État', 'Notaire', 'Prochaine échéance', 'Héritiers', 'Pièces', 'Temps', 'Avancement', 'Rangé dans'].map(h => i18n(h)), ...sel.map(line)]}).then(r => { if (r) note(); }); return; } // ⤓ la fenêtre d'export commune
                 const head = ['Dossier', 'Défunt', 'État', 'Notaire', 'Prochaine échéance', 'Héritiers', 'Pièces', 'Temps', 'Avancement', 'Rangé dans'].map(h => cell(i18n(h)));
                 const csv = '﻿' + [head.join(';'), ...sel.map(r => [r.number, r.deceased, stateLabel(r.state), r.notary, r.next_due, heirsTxt(r), r.pieces ? `${r.pieces.have}/${r.pieces.total}` : '', timeTxt(r.minutes), r.progress == null ? '' : r.progress + ' %', r.base.name].map(cell).join(';'))].join('\r\n');
                 const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type: 'text/csv;charset=utf-8'})); a.download = 'dossiers-de-succession.csv'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
@@ -923,7 +933,7 @@
             const html = cases.map(c => folder(String(c.id), `⚖️ ${c.number}${c.deceased ? ' ' + lastName(c.deceased) : ''}`, c.people.length, c.people.map(p => person(p, c)).join(''), {grip: true})).join('');
             const noFolder = !fids.length && st.nodossier !== 'hide' ? folder('none', i18n('Sans dossier'), d.without, `<div data-succ-pvnone></div>`, {isCase: false}) : '';
             list.innerHTML = `<div class="succ-pv-order"><span>${esc(i18n('Ranger les dossiers :'))}</span><span class="segmented"><button type="button" data-succ-pvo="az" class="${v.order === 'az' ? 'is-active' : ''}">${esc(i18n('A → Z'))}</button><button type="button" data-succ-pvo="hand" class="${v.order === 'hand' ? 'is-active' : ''}">${esc(i18n('À la main'))}</button></span></div>
-                <div class="succ-pv-list" data-succ-pvlist>${html || `<p class="muted">${esc(i18n('Aucun dossier.'))}</p>`}${noFolder}</div>`;
+                <div class="succ-pv-list" data-succ-pvlist>${html || `${window.LCNDA_APP.empty(i18n('Aucun dossier.'))}`}${noFolder}</div>`;
             if (noFolder && !closed.includes('none')) loadWithout(list);
             bindPv(list);
             return true;

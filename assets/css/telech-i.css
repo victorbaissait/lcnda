@@ -1,0 +1,11 @@
+/* LCNDA — ⚓ Le pays au travail et à l'école (assets/js/heritage-telech-i.js) : le reste vient de histoire.css (hist-row…) */
+.ti-life { display: grid; gap: 12px; }
+.ti-ul li { margin-bottom: 6px; overflow-wrap: anywhere; }
+.ti-quote { display: block; margin: 4px 0; padding-left: 8px; border-left: 3px solid var(--border, rgba(127, 127, 127, .35)); color: var(--muted); font-size: 12.5px; quotes: "« " " »"; overflow-wrap: anywhere; }
+.ti-src-link { font-size: 12px; white-space: nowrap; }
+.ti-more > summary { cursor: pointer; color: var(--accent, inherit); font-size: 12.5px; margin-top: 2px; }
+.ti-more[open] > summary { margin-bottom: 6px; }
+.ti-ctx, .ti-links { margin: 8px 0 0; font-size: 12.5px; overflow-wrap: anywhere; }
+.ti-panel { margin-top: 12px; }
+@media (max-width: 600px) { .ti-ul { padding-left: 18px; } }
+@media print { .ti-more:not([open]) { display: none; } }

@@ -99,7 +99,7 @@
     /* ═════════ fiche → ⋯ → « 🖊 Faire relire cette branche… » ═════════ */
     ext.personMoreItems = ext.personMoreItems || [];
     ext.personMoreItems.push(detail => { const p = detail?.person; if (!p?.id || p.kind === 'animal' || kiosk()) return null;
-        return {icon: '🖊', label: i18n('Faire relire cette branche…'), run: () => ext.openFamilyShare?.({review: true, branch: {mode: 'descendants', person: Number(p.id), personName: [p.first_name, p.last_name].filter(Boolean).join(' ')}})}; });
+        return {key: 'relecture', icon: '🖊', label: i18n('Faire relire cette branche…'), run: () => ext.openFamilyShare?.({review: true, branch: {mode: 'descendants', person: Number(p.id), personName: [p.first_name, p.last_name].filter(Boolean).join(' ')}})}; });
 
     /* ═════════ la pastille 💬 sur un fait de la fiche : ✎ Corriger, 📝 Noter, ✕ Refuser ═════════ */
     async function decorate(detail) {

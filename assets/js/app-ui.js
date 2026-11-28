@@ -54,7 +54,7 @@
         // la fenêtre change de taille (contenu ajouté, onglet changé) : elle se replace pour rester dans l'écran
         const ro = typeof ResizeObserver === 'function' ? new ResizeObserver(() => place()) : null; ro?.observe(el);
         const outside = e => { if (!el.contains(e.target) && !anchor.contains(e.target)) close(); };
-        const key = e => { if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); close(); anchor.focus?.(); } };
+        const key = e => { if (e.key === 'Escape') { if (el.contains(e.target) && e.target.matches?.('.ui-choice-q') && e.target.value) return; /* Échap dans « Chercher un choix » : vide d'abord la case (choiceList), puis ferme */ e.preventDefault(); e.stopPropagation(); close(); anchor.focus?.(); } };
         const close = () => {
             if (openPop?.el !== el) return; openPop = null;
             document.removeEventListener('pointerdown', outside, true); document.removeEventListener('keydown', key, true); removeEventListener('resize', place); ro?.disconnect();
@@ -251,8 +251,13 @@
         /* K14 — le même menu partout : sous un bouton « ⋯ », ou à l'endroit de la souris (clic droit : at = {x, y}, ou anchor = {x, y}).
            items : [{icon, label, help, shortcut, danger, disabled, run}] ; '-' ou null = un trait ; Supprimer (danger) toujours en bas, en rouge. */
         if (anchor && !(anchor instanceof Element)) { at = anchor; anchor = null; }
-        if (!at && UI._menuPoint && Date.now() - UI._menuPoint.t < 800) at = UI._menuPoint; // ⋯ ouvert par un clic droit sur sa ligne
+        if (!at && UI._menuPoint && Date.now() - UI._menuPoint.t < 800) { at = UI._menuPoint; if (UI._menuPoint.extras?.length) items = [...items, '-', ...UI._menuPoint.extras]; } // ⋯ ouvert par un clic droit sur sa ligne (+ 🧺 « Prendre « … » », heritage-connexions.js)
         UI._menuPoint = null;
+        // 🧺 partout : à côté de « Mettre dans le panier », « Mettre dans un panier précis… » (choisir le panier, ou en créer un)
+        try { const CX = window.LCNDA_EXT?.connexions; if (CX?.askNext && Array.isArray(items)) {
+            const isTake = it => it && typeof it === 'object' && typeof it.run === 'function' && !it.disabled && /🧺/.test(`${it.icon || ''}${it.label || ''}`) && /panier/i.test(String(it.label || '')) && /mettre|prendre|ajouter|garder/i.test(String(it.label || '')) && !/précis|vider|ouvrir|retirer|enlever|voir/i.test(String(it.label || ''));
+            if (!items.some(it => it && /précis/i.test(String(it.label || '')))) items = items.flatMap(it => isTake(it) ? [it, {icon: '🧺', label: i18n('Mettre dans un panier précis…'), help: i18n('choisir le panier, ou en créer un'), run: (...a) => { CX.askNext(); return it.run(...a); }}] : [it]);
+        } } catch (_) {}
         if (anchor && !at && openPop && openPop.el._uiFor === anchor) { closePop(); return null; }
         let ghost = null;
         if (at) { ghost = h('span', 'ui-menu-ghost'); ghost.style.cssText = `position:fixed;left:${Math.round(at.x)}px;top:${Math.round(at.y) - 6}px;width:0;height:0;pointer-events:none`;
@@ -555,6 +560,30 @@
         return w;
     };
 
+    /* ═════ Un lien qui sort de l'app : toujours « ↗ Nom du site », l'adresse en bulle ═════
+     * UI.extLink(adresse, nomDuSite, {cls, title, attrs}) → <a target="_blank"> ; sans nom : le nom du site tiré de l'adresse (UI.siteName).
+     * Une adresse javascript:, data:, vbscript: ou file: devient « # » (rien ne s'ouvre) ; un nom qui commence déjà par ↗ ou par un autre signe (« 🏛 Ouvrir ») le perd : un seul signe, ↗. */
+    const SITE_NAMES = {'gallica.bnf.fr': 'Gallica', 'catalogue.bnf.fr': 'BnF', 'data.bnf.fr': 'BnF', 'francearchives.gouv.fr': 'FranceArchives', 'www.francearchives.gouv.fr': 'FranceArchives',
+        'www.geneanet.org': 'Geneanet', 'gw.geneanet.org': 'Geneanet', 'www.wikidata.org': 'Wikidata', 'fr.wikipedia.org': 'Wikipédia', 'en.wikipedia.org': 'Wikipedia', 'commons.wikimedia.org': 'Wikimedia Commons',
+        'www.openstreetmap.org': 'OpenStreetMap', 'www.memoiredeshommes.sga.defense.gouv.fr': 'Mémoire des hommes', 'www.leonore.archives-nationales.culture.gouv.fr': 'Léonore', 'www.familysearch.org': 'FamilySearch',
+        'www.retronews.fr': 'RetroNews', 'www.geoportail.gouv.fr': 'Géoportail', 'remonterletemps.ign.fr': 'Remonter le temps', 'www.insee.fr': 'Insee', 'github.com': 'GitHub', 'archive.org': 'Internet Archive', 'web.archive.org': 'Internet Archive',
+        'www.cadastre.gouv.fr': 'Cadastre', 'www.legifrance.gouv.fr': 'Légifrance', 'pop.culture.gouv.fr': 'POP (Culture)', 'www.persee.fr': 'Persée', 'www.europeana.eu': 'Europeana', 'www.findagrave.com': 'Find a Grave', 'www.geonames.org': 'GeoNames'};
+    const GENERIC_LINK = /^(ouvrir|source|la source|sources?|lien|le lien|ouvrir le lien|voir|site|le site|ouvrir le site|en ligne)$/i;
+    UI.siteName = (url = '') => { let host = ''; try { host = new URL(String(url).trim()).hostname.toLowerCase(); } catch (_) { return ''; } return SITE_NAMES[host] || host.replace(/^www\d?\./, ''); };
+    UI.extLink = (url = '', site = '', {cls = '', title = '', attrs = ''} = {}) => {
+        const u = String(url || '').trim(), bad = !u || /^(javascript|data|vbscript|file):/i.test(u), given = String(site ?? '').trim().replace(/^(?:↗|\p{Extended_Pictographic}\uFE0F?)\s*/u, ''), name = (GENERIC_LINK.test(given) ? '' : given) || UI.siteName(u) || u; // un seul signe : ↗ ; « Ouvrir », « la source » → le nom du site
+        return `<a class="ui-ext-link${cls ? ' ' + cls : ''}" href="${esc(bad ? '#' : u)}" target="_blank" rel="noopener noreferrer" title="${esc(title || u)}"${attrs ? ' ' + attrs : ''}>↗ ${esc(name)}</a>`;
+    };
+
+    /* ═════ C5 — un groupe d'onglets segmentés : les deux marques toujours ensemble ═════
+     * is-active (le choix s'allume en bleu) et aria-pressed (les lecteurs d'écran) : jamais l'une sans l'autre.
+     * UI.segmented({items: [{on, attrs, html, title, disabled}], label, cls, attrs, tag}) → le HTML du groupe ;
+     * UI.segPick(bouton) allume ce bouton et éteint ses voisins ; UI.segMark(bouton, on) change un seul bouton. */
+    UI.segBtn = ({on = false, attrs = '', html = '', title = '', disabled = false} = {}) => `<button type="button"${on ? ' class="is-active"' : ''}${attrs ? ' ' + attrs : ''} aria-pressed="${on ? 'true' : 'false'}"${title ? ` title="${esc(title)}"` : ''}${disabled ? ' disabled' : ''}>${html}</button>`;
+    UI.segmented = ({items = [], label = '', cls = '', attrs = '', tag = 'span'} = {}) => `<${tag} class="segmented${cls ? ' ' + cls : ''}" role="group"${label ? ` aria-label="${esc(label)}"` : ''}${attrs ? ' ' + attrs : ''}>${items.map(UI.segBtn).join('')}</${tag}>`;
+    UI.segMark = (b, on) => { if (!b) return; b.classList.toggle('is-active', !!on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); };
+    UI.segPick = b => { const g = b?.closest?.('.segmented'); if (!g) return; g.querySelectorAll('button').forEach(x => UI.segMark(x, x === b)); };
+
     /* ═════ Liste | Fiches : l'affichage d'une liste, retenu pour chaque liste (H10) ═════
      * « Liste » = lignes compactes ou tableau (vignette, nom, ligne grise, date) ; « Fiches » = cartes avec une grande vignette. */
     const VIEW_PREFIX = 'lcnda-view:';
@@ -568,7 +597,7 @@
         const w = h('span', 'segmented ui-viewtoggle');
         w.setAttribute('role', 'group'); w.setAttribute('aria-label', i18n('Affichage des {what}', {what: i18n(what)}));
         w.innerHTML = `<button type="button" data-view="list" title="En liste : une ligne par élément (vignette, nom, détails, date)">Liste</button><button type="button" data-view="cards" title="En fiches : une carte par élément, avec une grande vignette">Fiches</button>`;
-        const paint = () => w.querySelectorAll('button').forEach(b => { const on = b.dataset.view === cur; b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', String(on)); });
+        const paint = () => w.querySelectorAll('button').forEach(b => UI.segMark(b, b.dataset.view === cur));
         w.set = (v, silent = false) => { const nv = v === 'cards' ? 'cards' : 'list'; if (nv === cur) return; cur = nv; if (key) UI.setView(key, cur); paint(); if (!silent) onChange?.(cur); };
         Object.defineProperty(w, 'value', {get: () => cur});
         w.addEventListener('click', e => { const b = e.target.closest('button[data-view]'); if (b) { e.preventDefault(); e.stopPropagation(); w.set(b.dataset.view); } });
@@ -596,7 +625,7 @@
     const cardThumb = (it, inner) => (it.href ? `<a class="ui-card-thumb" href="${esc(it.href)}" target="_blank" rel="noopener" title="Ouvrir « ${esc(it.name || '')} »" tabindex="-1">${inner}</a>` : itemOpen(it, 'ui-card-thumb', inner));
     const cardOpen = it => (it.noOpen || it.disabled ? '' : it.href ? `<a class="button small ui-card-open" href="${esc(it.href)}" target="_blank" rel="noopener">${esc(it.openLabel || 'Ouvrir')} ↗</a>` : it.open ? `<button type="button" class="button small ui-card-open" ${it.open}>${esc(it.openLabel || 'Ouvrir')}</button>` : '');
     UI.cardsHtml = (items = [], {size = ''} = {}) => `<div class="ui-cards${size === 's' ? ' is-small' : ''}">${items.map(it => { const lines = (it.lines || []).filter(l => l && (typeof l !== 'object' || l.html)).slice(0, 2), badges = (it.badges || []).map(cardBadge).filter(Boolean), more = [].concat(it.menu || []).filter(Boolean).join('') + (it.actions || ''), open = cardOpen(it);
-        return `<article class="ui-card${it.disabled ? ' is-disabled' : ''}${it.cls ? ' ' + it.cls : ''}"${it.attrs ? ' ' + it.attrs : ''}>${cardThumb(it, it.thumb || '<span class="ui-card-ico">•</span>')}<div class="ui-card-body">${it.href && !it.nameHtml ? `<a class="table-link ui-card-name" href="${esc(it.href)}" target="_blank" rel="noopener">${esc(it.name || 'Sans titre')}</a>` : itemName(it, 'ui-card-name')}${lines.map(l => `<small class="muted">${itemLine(l)}</small>`).join('')}${badges.length ? `<span class="ui-card-badges">${badges.join('')}</span>` : ''}${it.when ? `<small class="muted ui-card-date">${UI.when?.(it.when, {label: it.whenLabel || ''}) || ''}</small>` : it.date ? `<small class="muted ui-card-date">${esc(it.date)}</small>` : ''}</div>${open || it.quick || more ? `<div class="ui-card-act">${open}${it.quick || ''}<span class="ui-card-sp"></span>${cardMore(more)}</div>` : ''}</article>`; }).join('')}</div>`;
+        return `<article class="ui-card${it.disabled ? ' is-disabled' : ''}${it.cls ? ' ' + it.cls : ''}"${it.attrs ? ' ' + it.attrs : ''}>${cardThumb(it, it.thumb || '<span class="ui-card-ico">•</span>')}<div class="ui-card-body">${it.href && !it.nameHtml && UI.extLink ? UI.extLink(it.href, it.name || 'Sans titre', {cls: 'table-link ui-card-name'}) : itemName(it, 'ui-card-name')}${lines.map(l => `<small class="muted">${itemLine(l)}</small>`).join('')}${badges.length ? `<span class="ui-card-badges">${badges.join('')}</span>` : ''}${it.when ? `<small class="muted ui-card-date">${UI.when?.(it.when, {label: it.whenLabel || ''}) || ''}</small>` : it.date ? `<small class="muted ui-card-date">${esc(it.date)}</small>` : ''}</div>${open || it.quick || more ? `<div class="ui-card-act">${open}${it.quick || ''}<span class="ui-card-sp"></span>${cardMore(more)}</div>` : ''}</article>`; }).join('')}</div>`;
     /** rowsHtml(items) → la liste compacte (petite vignette, nom, ligne grise, date, boutons) */
     UI.rowsHtml = (items = []) => `<div class="ui-rows">${items.map(it => `<div class="ui-row${it.disabled ? ' is-disabled' : ''}${it.cls ? ' ' + it.cls : ''}"${it.attrs ? ' ' + it.attrs : ''}>${itemOpen(it, 'ui-row-thumb', it.thumb || '<span class="ui-card-ico">•</span>')}<div class="ui-row-main">${itemName(it, 'ui-row-name')}${(it.lines || []).filter(l => l && (typeof l !== 'object' || l.html)).length ? `<small class="muted">${(it.lines || []).filter(l => l && (typeof l !== 'object' || l.html)).map(itemLine).join(' · ')}</small>` : ''}</div>${it.when ? `<small class="muted ui-row-date">${UI.when?.(it.when, {label: it.whenLabel || ''}) || ''}</small>` : it.date ? `<small class="muted ui-row-date">${esc(it.date)}</small>` : '<span></span>'}${it.actions ? `<div class="ui-row-act">${it.actions}</div>` : '<span></span>'}</div>`).join('')}</div>`;
     /** le tri d'une liste, retenu pour chaque liste (« lcnda-sort:<key> ») */
@@ -619,6 +648,152 @@
         return b;
     };
 
+    /* ═════ Listes de choix (cases à cocher ou ronds) : 🔍 chercher · cochés en haut · nombres à droite ═════
+     * choiceList({items, checked, multiple, name, key, search, onChange, onApply, …}) → l'élément .ui-choice (mode d'emploi : docs/UI.md)
+     *   items : [[valeur, nombre, libellé]] ou [{value, n, label, icon, sub, text, cls, attrs, disabled}] (nombre null : pas de nombre ; text : des mots en plus pour la recherche)
+     *   checked : les valeurs cochées ; multiple : cases (true) ou ronds (false : name pour le formulaire)
+     *   key : retient « par nombre / A → Z » pour ce champ (localStorage « genealogie-choix-tri ») ; search : true (sa case), false, ou une case <input type="search"> déjà posée
+     *   inputAttrs : des attributs (texte, ou fonction(choix)) sur chaque case ; optClass : une classe en plus sur chaque ligne ; label : le nom de la liste (lecteur d'écran)
+     *   onChange(valeurs, {value, checked}) ; onApply(valeurs) : Entrée quand il ne reste qu'un choix (sans onApply : le formulaire autour est envoyé)
+     *   filter(choix) : un tri de plus (ex. une liste déroulante à côté) ; tickAll : « Tout cocher » même sans recherche
+     * Recherche sans accents ni majuscules, début de mot d'abord, partie trouvée surlignée ; cochés épinglés sous « Cochés (N) » ; « 3 choix sur 214 » ;
+     * « Tout cocher les N affichés » / « Tout décocher » ; ↓ entre dans la liste, ↑ ↓ s'y déplacent, Espace coche, Entrée coche le premier trouvé
+     * (ou applique s'il est seul), Échap vide la case puis ferme ; une longue liste se montre par morceaux (« + 1 200 autres : tape pour chercher »).
+     * L'élément : .values, .search (la case), .refresh(), .setItems(items, cochés), .setChecked(valeurs), .setFilter(fn). Toute case cochée reste dans la page. */
+    const CHOICE_SORT = 'genealogie-choix-tri';
+    const tr = (s, v) => (window.LCNDA_I18N ? i18n(s, v) : String(s).replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? (typeof v[k] === 'number' ? v[k].toLocaleString('fr-FR') : v[k]) : m)));
+    const nfmt = n => (window.LCNDA_I18N?.fmtNumber ? window.LCNDA_I18N.fmtNumber(n) : Number(n).toLocaleString('fr-FR'));
+    const fold2 = s => fold(s).replace(/œ/g, 'oe').replace(/æ/g, 'ae').replace(/ß/g, 'ss').replace(/[’‘ʼ]/g, "'");
+    const qFold = s => fold2(s).replace(/\s+/g, ' ').trim();
+    /** le texte plié (sans accents, minuscules) + où chaque lettre pliée commence et finit dans le texte d'origine (pour surligner) */
+    const foldIdx = s => {
+        let f = ''; const st = [], en = []; let i = 0;
+        for (const ch of String(s ?? '')) { const x = fold2(ch); if (!x.length && en.length) en[en.length - 1] = i + ch.length; for (let k = 0; k < x.length; k++) { f += x[k]; st.push(i); en.push(i + ch.length); } i += ch.length; }
+        return {f, st, en};
+    };
+    const WORDCH = /[\p{L}\p{N}]/u;
+    /** où q est trouvé : début du texte (0), début d'un mot (1), ailleurs (2) */
+    const choiceHit = (fi, q) => {
+        let p = fi.f.indexOf(q); if (p < 0) return null; const first = p;
+        while (p >= 0) { if (!p || !WORDCH.test(fi.f[p - 1])) return {at: p, rank: p ? 1 : 0}; p = fi.f.indexOf(q, p + 1); }
+        return {at: first, rank: 2};
+    };
+    UI.choiceList = ({items = [], checked = [], multiple = true, name = '', key = '', search = true, placeholder = '', label = '', inputAttrs = '', optClass = '', onChange = null, onApply = null, filter = null, page = 150, maxHeight = '', sort = 'n', tickAll = false} = {}) => {
+        const root = h('div', 'ui-choice' + (multiple ? '' : ' is-single'));
+        const uid = 'uic-' + Math.random().toString(36).slice(2, 9);
+        let list = [], on = new Set(), limit = page, extra = filter, matched = [], shown = [], quiet = false;
+        const norm = (it, i) => { const o = Array.isArray(it) ? {value: it[0], n: it[1], label: it[2]} : {...it}; o.value = String(o.value ?? ''); o.label = String(o.label ?? o.value); o.i = i; o.fl = foldIdx(o.label); o.fx = fold2(`${o.sub || ''} ${o.text || ''}`); return o; };
+        const setItems = (its, ch) => { list = (its || []).map(norm); const known = new Set(list.map(o => o.value)); on = new Set([...(ch || [])].map(String).filter(v => known.has(v))); if (!multiple && on.size > 1) on = new Set([...on].slice(0, 1)); };
+        setItems(items, checked);
+        let mode = (key && (store.get(CHOICE_SORT, {}) || {})[key]) || sort;
+        let q = null;
+        if (search && search.nodeType) q = search;
+        else if (search) { q = h('input'); q.type = 'search'; q.autocomplete = 'off'; q.spellcheck = false; q.placeholder = placeholder || tr('Chercher un choix…'); }
+        root.innerHTML = `<div class="ui-choice-top"></div><div class="ui-choice-bar"><span class="ui-choice-count" id="${uid}-n" aria-live="polite"></span><span class="ui-choice-sort" role="group" aria-label="${esc(tr('Trier :'))}" hidden><span>${esc(tr('Trier :'))}</span><button type="button" data-choice-sort="n">${esc(tr('par nombre'))}</button><button type="button" data-choice-sort="az">${esc(tr('A → Z'))}</button></span></div><div class="ui-choice-tools" hidden><button type="button" class="ui-choice-link" data-choice-all></button><button type="button" class="ui-choice-link" data-choice-none>${esc(tr('Tout décocher'))}</button></div><div class="ui-choice-list" id="${uid}" role="${multiple ? 'group' : 'radiogroup'}" aria-label="${esc(label || tr('Choix'))}" aria-describedby="${uid}-n"></div>`;
+        const $ = s => root.querySelector(s), box = $('.ui-choice-list'), cnt = $('.ui-choice-count'), tools = $('.ui-choice-tools'), allBtn = $('[data-choice-all]'), noneBtn = $('[data-choice-none]'), sortEl = $('.ui-choice-sort');
+        if (maxHeight) box.style.maxHeight = maxHeight;
+        if (q && !search.nodeType) $('.ui-choice-top').appendChild(q); else $('.ui-choice-top').remove();
+        if (q) { q.classList.add('ui-choice-q'); if (!q.getAttribute('aria-label')) q.setAttribute('aria-label', q.placeholder || tr('Chercher un choix…')); q.setAttribute('aria-controls', uid); q.setAttribute('aria-describedby', `${uid}-n`); if (!q.title) q.title = tr('Entrée : cocher le premier choix trouvé · ↓ : aller dans la liste · Échap : vider'); }
+        const hasN = () => list.some(o => typeof o.n === 'number');
+        const byN = (a, b) => (Number(b.n) || 0) - (Number(a.n) || 0) || a.i - b.i;
+        const byAz = (a, b) => a.label.localeCompare(b.label, 'fr', {sensitivity: 'base', numeric: true}) || a.i - b.i;
+        const mark = (o, at, len) => { const s = o.fl.st[at], e = o.fl.en[at + len - 1]; return s == null || e == null ? esc(o.label) : `${esc(o.label.slice(0, s))}<mark>${esc(o.label.slice(s, e))}</mark>${esc(o.label.slice(e))}`; };
+        const row = (o, hl) => {
+            const at = typeof inputAttrs === 'function' ? inputAttrs(o) : inputAttrs;
+            const n = o.n == null || o.n === '' ? '' : `<small class="ui-choice-n">${esc(typeof o.n === 'number' ? nfmt(o.n) : o.n)}</small>`;
+            return `<label class="ui-choice-opt checkbox-line${optClass ? ' ' + optClass : ''}${o.cls ? ' ' + o.cls : ''}"${o.attrs ? ' ' + o.attrs : ''}><input type="${multiple ? 'checkbox' : 'radio'}"${name ? ` name="${esc(name)}"` : ''} value="${esc(o.value)}"${on.has(o.value) ? ' checked' : ''}${o.disabled ? ' disabled' : ''}${at ? ' ' + at : ''}><span class="ui-choice-txt">${o.icon ? `<span class="ui-choice-ico" aria-hidden="true">${esc(o.icon)}</span> ` : ''}<span class="ui-choice-l">${hl || esc(o.label)}</span>${o.sub ? ` <small class="ui-choice-sub">${esc(o.sub)}</small>` : ''}</span>${n}</label>`;
+        };
+        const query = () => qFold(q?.value || '');
+        const inputs = () => [...box.querySelectorAll('input:not([disabled])')];
+        const tools2 = () => {
+            const left = shown.filter(o => !on.has(o.value) && !o.disabled).length, qq = query();
+            allBtn.hidden = !multiple || !left || !(qq || (extra && matched.length !== list.length) || tickAll);
+            allBtn.textContent = tr('Tout cocher les {n} affichés', {n: left});
+            noneBtn.hidden = !multiple || !on.size;
+            tools.hidden = allBtn.hidden && noneBtn.hidden;
+            const pin = box.querySelector('[data-choice-pinned]'); if (pin) pin.textContent = tr('Cochés ({n})', {n: on.size});
+        };
+        function paint() {
+            const act = document.activeElement, keep = act && box.contains(act) && act.matches('input') ? act.value : null;
+            const qq = query(), sortable = hasN();
+            const base = list.filter(o => !extra || extra(o));
+            if (sortable) base.sort(mode === 'az' ? byAz : byN);
+            const hits = new Map();
+            if (qq) {
+                matched = [];
+                base.forEach(o => { const m = choiceHit(o.fl, qq); if (m) { hits.set(o, m); matched.push(o); } else if (o.fx.includes(qq)) { hits.set(o, {rank: 3}); matched.push(o); } });
+                matched = matched.map((o, k) => [o, k]).sort((a, b) => hits.get(a[0]).rank - hits.get(b[0]).rank || a[1] - b[1]).map(x => x[0]);
+            } else matched = base;
+            const hl = o => { const m = hits.get(o); return m && m.at != null ? mark(o, m.at, qq.length) : ''; };
+            const pin = (sortable ? [...list].sort(mode === 'az' ? byAz : byN) : list).filter(o => on.has(o.value));
+            shown = matched.filter(o => !on.has(o.value));
+            let html = '';
+            if (pin.length) html += `<div class="ui-choice-h" data-choice-pinned></div>${pin.map(o => row(o, hl(o))).join('')}${shown.length ? `<div class="ui-choice-h">${esc(tr('Les autres'))}</div>` : ''}`;
+            html += shown.slice(0, limit).map(o => row(o, hl(o))).join('');
+            const rest = shown.length - limit;
+            if (rest > 0) html += `<button type="button" class="ui-choice-more" data-choice-more title="${esc(tr('Montrer les suivants'))}">${esc(tr('+ {n} autres : tape pour chercher', {n: rest}))}</button>`;
+            if (qq && !matched.length) html += `<div class="ui-choice-empty" role="status"><span>${esc(tr('Aucun choix ne contient « {q} »', {q: q.value.trim()}))}</span><button type="button" class="ui-choice-link" data-choice-clear>${esc(tr('Vider la recherche'))}</button></div>`;
+            box.innerHTML = html;
+            const filtered = !!qq || (extra && base.length !== list.length);
+            cnt.textContent = filtered ? tr('{n} choix sur {total}', {n: matched.length, total: list.length}) : plural(list.length, 'choix', 'choix');
+            sortEl.hidden = !sortable;
+            sortEl.querySelectorAll('[data-choice-sort]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.choiceSort === mode)));
+            tools2();
+            if (keep != null) box.querySelector(`input[value="${CSS.escape(keep)}"]`)?.focus();
+        }
+        const apply = () => { if (onApply) { onApply(root.values); return; } const f = root.closest('form') || q?.closest('form'); if (f) { if (f.requestSubmit) f.requestSubmit(); else f.submit(); } };
+        /** cocher / décocher plusieurs choix d'un coup : un seul « change » pour ceux qui écoutent autour */
+        const setMany = (vals, state) => {
+            vals.forEach(v => { if (state) on.add(v); else on.delete(v); });
+            paint();
+            const t = box.querySelector('input') || root;
+            quiet = true; try { fire(t, 'change'); } finally { quiet = false; }
+            onChange?.(root.values, {value: null, checked: state});
+        };
+        box.addEventListener('change', e => {
+            const i = e.target; if (quiet || !i.matches?.('input')) return;
+            if (multiple) { if (i.checked) on.add(i.value); else on.delete(i.value); } else if (i.checked) on = new Set([i.value]);
+            tools2(); onChange?.(root.values, {value: i.value, checked: i.checked});
+        });
+        root.addEventListener('click', e => {
+            const t = e.target.closest('button'); if (!t || !root.contains(t)) return;
+            if (t.dataset.choiceSort) { mode = t.dataset.choiceSort; if (key) store.set(CHOICE_SORT, {...(store.get(CHOICE_SORT, {}) || {}), [key]: mode}); paint(); t.focus(); }
+            else if (t.matches('[data-choice-all]')) { setMany(shown.filter(o => !o.disabled).map(o => o.value), true); q?.focus(); }
+            else if (t.matches('[data-choice-none]')) { setMany([...on], false); (q || box.querySelector('input'))?.focus(); }
+            else if (t.matches('[data-choice-clear]')) { if (q) { q.value = ''; fire(q, 'input'); q.focus(); } }
+            else if (t.matches('[data-choice-more]')) { const k = Math.min(shown.length, limit); limit += Math.max(page, 300); paint(); box.querySelectorAll(on.size ? 'label.ui-choice-opt:not(:has(:checked)) input' : 'input')[k]?.focus(); }
+        });
+        // descendre au bas de la liste montre la suite toute seule
+        box.addEventListener('scroll', () => { if (box.querySelector('[data-choice-more]') && box.scrollTop + box.clientHeight > box.scrollHeight - 48) { limit += Math.max(page, 300); paint(); } }, {passive: true});
+        box.addEventListener('keydown', e => {
+            const i = e.target; if (!i.matches?.('input')) return;
+            if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+                e.preventDefault(); const all = inputs(), k = all.indexOf(i), nx = all[k + (e.key === 'ArrowDown' ? 1 : -1)];
+                if (nx) nx.focus(); else if (e.key === 'ArrowUp') q?.focus(); else box.querySelector('[data-choice-more]')?.focus();
+            } else if (e.key === 'Enter') { e.preventDefault(); apply(); }
+        });
+        q?.addEventListener('input', () => { limit = page; paint(); });
+        q?.addEventListener('keydown', e => {
+            if (e.key === 'ArrowDown') { const f = inputs()[0]; if (f) { e.preventDefault(); f.focus(); } }
+            else if (e.key === 'Enter') {
+                e.preventDefault(); if (e.isComposing) return;
+                if (!query()) { apply(); return; }
+                if (!matched.length) return;
+                const tick = o => { const i = box.querySelector(`input[value="${CSS.escape(o.value)}"]`); if (i && !i.disabled && !i.checked) { i.checked = true; fire(i, 'change'); } };
+                if (matched.length === 1) { tick(matched[0]); apply(); return; }
+                const o = matched.find(x => !on.has(x.value) && !x.disabled); if (o) tick(o); q.select();
+            } else if (e.key === 'Escape' && q.value) { e.preventDefault(); e.stopPropagation(); q.value = ''; fire(q, 'input'); }
+        });
+        Object.defineProperty(root, 'values', {get: () => list.filter(o => on.has(o.value)).map(o => o.value)});
+        root.search = q;
+        root.refresh = () => paint();
+        root.setItems = (its, ch) => { setItems(its, ch ?? [...on]); limit = page; paint(); };
+        root.setChecked = vals => { const known = new Set(list.map(o => o.value)); on = new Set([...(vals || [])].map(String).filter(v => known.has(v))); paint(); };
+        root.setFilter = fn => { extra = fn; limit = page; paint(); };
+        paint();
+        return root;
+    };
+
     /* ═════ H10 La barre commune des listes : 🔍 Chercher · Filtrer ▾ · Liste | Fiches · Trier : … ▾ ═════
      * Maquette : docs/design/messages-et-listes.html. Sous la barre : les filtres actifs en pastilles bleues « Femmes × » + « Tout effacer ».
      * Tout est retenu pour chaque liste (localStorage « lcnda-listbar:<key> »). Mode d'emploi : docs/UI.md. */
@@ -627,6 +802,7 @@
     const lbEmpty = v => v == null || v === '' || v === false || (Array.isArray(v) && !v.length);
     const optList = f => (f.options || []).map(o => (Array.isArray(o) ? {value: String(o[0]), label: o[1], chip: o[2], n: o[3]} : {value: String(o.value), label: o.label, chip: o.chip, n: o.n})); // n : le nombre trouvé, écrit à droite du choix
     const optN = o => (o.n != null && o.n !== '' ? ` <small class="ui-listbar-on">${esc(typeof o.n === 'number' ? o.n.toLocaleString('fr-FR') : o.n)}</small>` : '');
+    const LB_CHOICE_MIN = 8; // au-delà de 8 choix, « Filtrer ▾ » montre la liste de choix commune (choiceList)
     const placeTitle = v => (v && typeof v === 'object' ? (v.title || v.name || '') : String(v || '').replace(/^txt:/, ''));
     /** listBar({key, search, filters, view, sort, count, onChange}) → l'élément (.state, .setCount(n), .adoptSort(barreC6), .setFilter(id, v), .clear(), .input) */
     UI.listBar = ({key = '', search = {}, filters = [], view = null, sort = null, count = null, onChange = null, remember = true} = {}) => {
@@ -674,6 +850,7 @@
         const changed = (f, what = 'filter') => { paintActive(); emit(what); };
         function menuRow(f) {
             const v = st.filters[f.id], nm = `lb-${key || 'x'}-${f.id}`.replace(/[^\w-]/g, '_');
+            if ((f.type === 'check' && f.options || f.type === 'radio') && f.search !== false && optList(f).length > LB_CHOICE_MIN) return `<div class="ui-listbar-choice" data-lb-choice="${esc(f.id)}"></div>`; // une longue liste : la liste de choix commune (🔍, cochés en haut)
             if (f.type === 'check' && f.options) return optList(f).map(o => `<label class="checkbox-line ui-listbar-opt"><input type="checkbox" data-lb-f="${esc(f.id)}" value="${esc(o.value)}"${(v || []).map(String).includes(o.value) ? ' checked' : ''}> ${esc(o.label)}${optN(o)}</label>`).join('');
             if (f.type === 'check') return `<label class="checkbox-line ui-listbar-opt"><input type="checkbox" data-lb-f="${esc(f.id)}"${v ? ' checked' : ''}${f.disabled?.(st.filters) ? ' disabled' : ''}> ${esc(f.text || f.label)}</label>`;
             if (f.type === 'radio') return optList(f).map(o => `<label class="checkbox-line ui-listbar-opt"><input type="radio" name="${nm}" data-lb-f="${esc(f.id)}" value="${esc(o.value)}"${String(v) === o.value ? ' checked' : ''}> ${esc(o.label)}${optN(o)}</label>`).join('');
@@ -693,6 +870,13 @@
             const groups = []; filters.forEach(f => { const g = f.group || f.label; let gr = groups.find(x => x.g === g); if (!gr) groups.push(gr = {g, fs: []}); gr.fs.push(f); });
             box.innerHTML = groups.map(gr => `<div class="ui-listbar-group"><b>${esc(gr.g)}</b>${gr.fs.map(f => `<div class="ui-listbar-f" data-lb-row="${esc(f.id)}">${f.group && f.group !== f.label && f.type !== 'check' ? `<small>${esc(f.label)}</small>` : ''}${menuRow(f)}</div>`).join('')}</div>`).join('') + `<div class="ui-listbar-menu-foot"><button type="button" class="ui-listbar-clear" data-lb-clear>Tout effacer</button><button type="button" class="button small" data-lb-done>Fermer</button></div>`;
             const find = id => filters.find(f => f.id === id);
+            box.querySelectorAll('[data-lb-choice]').forEach(slot => {
+                const f = find(slot.dataset.lbChoice); if (!f) return;
+                const multi = f.type === 'check', v = st.filters[f.id];
+                slot.appendChild(UI.choiceList({items: optList(f).map(o => ({value: o.value, label: o.label, n: o.n ?? null})), checked: multi ? (v || []).map(String) : [String(v ?? '')], multiple: multi,
+                    name: `lb-${key || 'x'}-${f.id}`.replace(/[^\w-]/g, '_'), key: `lb:${key || 'x'}:${f.id}`, label: f.label, inputAttrs: `data-lb-f="${esc(f.id)}"`, optClass: 'ui-listbar-opt', maxHeight: '260px',
+                    onApply: () => { closePop(); fbtn.focus(); }}));
+            });
             const refreshDisabled = () => filters.forEach(f => { if (!f.disabled) return; const i = box.querySelector(`[data-lb-f="${CSS.escape(f.id)}"]`); if (i) { i.disabled = !!f.disabled(st.filters); if (i.disabled && st.filters[f.id]) { st.filters[f.id] = false; i.checked = false; } } });
             box.addEventListener('change', e => {
                 const t = e.target, f = find(t.dataset?.lbF); if (!f) return;
@@ -846,6 +1030,7 @@
         const text = btn.dataset.text || '', faq = btn.dataset.faq || '';
         const bub = h('div', 'ui-bubble', `<p>${esc(text)}</p>${faq ? '<a href="#" class="ui-bubble-more" data-ui-faq>En savoir plus (FAQ) →</a>' : ''}`); bub._uiFor = btn; bub.setAttribute('role', 'tooltip');
         const pop = popup(btn, bub);
+        try { window.LCNDA_EXT?.helpBubbleMore?.(bub, btn); } catch (_) {} // 🧭 « Ce qu'on fait souvent ici » (app-je-veux.js, réglage éteint au départ)
         bub.querySelector('[data-ui-faq]')?.addEventListener('click', e => {
             e.preventDefault();
             if (btn.closest('dialog')) { // dans une fenêtre : la réponse s'affiche ici, sans perdre le travail en cours
@@ -917,6 +1102,56 @@
         return `<details class="ui-section"${key ? ` data-ui-section="${esc(key)}"` : ''}${isOpen ? ' open' : ''}><summary>${esc(title)}</summary><div class="ui-section-body">${body}</div></details>`;
     };
     document.addEventListener('toggle', e => { const d = e.target; if (!d?.matches?.('details[data-ui-section]')) return; const all = store.get(SEC_KEY, {}) || {}; all[d.dataset.uiSection] = d.open; store.set(SEC_KEY, all); }, true);
+    /* Toute autre section repliable (<details> faits à la main : « ▸ Plus d'options », « Pour aller plus loin », parties des Réglages…)
+     * retient aussi, sur cet ordinateur, qu'on l'a ouverte ou fermée (docs/harmonisation.md, Comportements, point 3) : la même
+     * mémoire que les panneaux, rangée à part (« genealogie-ui-sections-auto »), la clé tirée de l'endroit (id le plus proche) et du titre.
+     * Rien n'est retenu pour : un menu (titre en bouton, « ▾ », « ⋯ », contenu posé par-dessus, barre de menus), une section répétée
+     * dans une liste (le même titre plusieurs fois au même endroit), un texte qu'on écrit (contenteditable), et data-ui-noremember
+     * (ce qui s'ouvre seulement pour montrer un message, une erreur). Seul un clic (ou Entrée / Espace) sur le titre compte :
+     * une section ouverte par le code n'est jamais retenue. UI.sectionMemoryKey(details) → la clé (pour les essais). */
+    const AUTO_SEC_KEY = 'genealogie-ui-sections-auto', AUTO_SEC_MAX = 600;
+    const MENU_CLS = /(^|[\s_-])(menu|menus|menubar|dd|dropdown|pop|popover|picker|combo)($|[\s_-])/i;
+    const autoSkip = d => {
+        if (!d || d.matches('[data-ui-section], [data-ui-noremember]') || d.closest('[data-ui-noremember], [contenteditable=""], [contenteditable="true"], [data-ui-off]')) return true;
+        if (MENU_CLS.test(d.className || '') || d.closest('nav, [role=menu], [role=menubar], [role=toolbar], [class*=menubar]')) return true;
+        const sum = d.querySelector(':scope > summary'); if (!sum) return true;
+        if (sum.matches('.button, .icon-button, [class*="-tb"], [class*="-nb"], [class*="tog"], [aria-haspopup]')) return true;
+        const t = (sum.textContent || '').trim();
+        return !t || /[▾⌄]\s*$/.test(t) || t === '⋯' || t === '…';
+    };
+    const autoText = v => String(v || '').replace(/\d+/g, '').replace(/[▸▾►▼›»\s]+/g, ' ').trim().toLowerCase().slice(0, 80);
+    const autoKey = d => {
+        let ctx = '', el = d.parentElement;
+        for (; el && el !== document.body; el = el.parentElement) {
+            if (el.id) { ctx = '#' + el.id.replace(/\d+/g, '#'); break; }
+            if (el.matches('dialog')) { ctx = 'dialog.' + (el.classList[0] || ''); break; }
+        }
+        const txt = autoText(d.querySelector(':scope > summary')?.textContent);
+        return txt ? `${ctx}|${autoText(d.className)}|${txt}` : '';
+    };
+    UI.sectionMemoryKey = d => (d && !autoSkip(d) ? (d._uiKey ??= autoKey(d)) : '');
+    const autoTwins = (d, k) => { const root = d.parentElement?.closest('[id], dialog') || document; let n = 0; root.querySelectorAll('details').forEach(x => { if (x.isConnected && !autoSkip(x) && (x._uiKey ??= autoKey(x)) === k) n++; }); return n; };
+    document.addEventListener('click', e => { const sum = e.target.closest?.('summary'); const d = sum?.parentElement; if (d?.matches('details') && sum === d.querySelector(':scope > summary')) d._uiUser = Date.now(); }, true);
+    document.addEventListener('toggle', e => {
+        const d = e.target; if (!d?.matches?.('details') || !d._uiUser || Date.now() - d._uiUser > 1500) return; d._uiUser = 0;
+        if (autoSkip(d)) return;
+        // posé par-dessus le reste (une fenêtre volante) : c'est un menu, pas une section
+        const body = [...d.children].find(c => c.tagName !== 'SUMMARY'); if (body && /^(absolute|fixed)$/.test(getComputedStyle(body).position)) return;
+        const k = UI.sectionMemoryKey(d); if (!k || autoTwins(d, k) > 1) return;
+        const all = store.get(AUTO_SEC_KEY, {}) || {}; delete all[k]; all[k] = d.open;
+        const keys = Object.keys(all); keys.slice(0, Math.max(0, keys.length - AUTO_SEC_MAX)).forEach(x => delete all[x]);
+        store.set(AUTO_SEC_KEY, all);
+    }, true);
+    const autoRestore = list => {
+        const saved = store.get(AUTO_SEC_KEY, null); if (!saved || typeof saved !== 'object') return;
+        const found = [];
+        list.forEach(m => m.addedNodes.forEach(n => { if (n.nodeType !== 1) return; if (n.matches('details')) found.push(n); if (n.firstElementChild) found.push(...n.querySelectorAll('details')); }));
+        if (!found.length) return;
+        const keyed = found.map(d => [d, UI.sectionMemoryKey(d)]).filter(([, k]) => k && k in saved), count = {};
+        keyed.forEach(([, k]) => { count[k] = (count[k] || 0) + 1; });
+        keyed.forEach(([d, k]) => { if (count[k] === 1 && d.open !== !!saved[k]) d.open = !!saved[k]; }); // répétée dans la liste : laissée comme dessinée
+    };
+    new MutationObserver(autoRestore).observe(document.documentElement, {childList: true, subtree: true});
 
     /* ═════ E3 La fenêtre d'export unique ═════ */
     const FORMATS = {pdf: ['📄 PDF', 'imprimer, envoyer', 'pdf'], png: ['🖼 PNG', 'transparent', 'png'], jpg: ['📷 JPG', 'léger', 'jpg'], svg: ['✒ SVG', 'dessin', 'svg'], print: ['🖨 Imprimer', 'tout de suite', ''], file: ['💾 Fichier', 'de l’outil', 'json']};
@@ -975,6 +1210,25 @@
         $('.ui-export-fmt.is-active')?.focus();
         if (preview) Promise.resolve().then(preview).then(p => { const box = $('[data-ui-prev]'); if (!box) return; box.innerHTML = ''; if (p instanceof HTMLElement) box.appendChild(p); else if (p) box.innerHTML = `<img alt="Aperçu" src="${esc(p)}">`; else box.textContent = 'aperçu'; }).catch(() => { const box = $('[data-ui-prev]'); if (box) box.textContent = 'Pas d’aperçu'; });
     });
+
+    /** ⤓ Exporter une liste (harmonisation des comportements) : la même fenêtre E3, avec 📄 CSV, 🧮 Ouvrir dans le tableur,
+     *  📊 Excel, et « Les lignes : ce qu'on voit / toute la liste » quand all() est donné (comme Mes listes).
+     *  UI.exportRows({title, name, rows: () => [[titres…], [ligne…], …], all: () => …, info, quote: 'auto'|'always', extra: [formats E3 en plus (PDF, KML…)]}) ;
+     *  rows / all peuvent être async. */
+    UI.exportRows = ({title = 'Exporter', name = '', rows, all = null, info = '', sep = ';', quote = 'auto', extra = []} = {}) => {
+        const X = window.LCNDA_EXT || {}, SH = window.LCNDA_SHEET;
+        const matrix = async o => ((o?.fields?.what === 'all' && all ? await all() : await rows()) || []).map(r => (Array.isArray(r) ? r : [r]).map(v => v ?? ''));
+        const cell = v => (A().csvCell ? A().csvCell(v, {sep, quote}) : `"${String(v ?? '').replace(/"/g, '""')}"`); // quote : 'always' = des guillemets partout
+        const save = (blob, filename) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); };
+        const formats = [
+            {id: 'csv', label: '📄 CSV', hint: i18n('tableur'), ext: 'csv', quality: false, run: async o => save(new Blob(['﻿' + (await matrix(o)).map(r => r.map(cell).join(sep)).join('\r\n')], {type: 'text/csv;charset=utf-8'}), o.filename)},
+            ...(X.openRowsInSheet ? [{id: 'sheet', label: i18n('🧮 Ouvrir dans le tableur'), hint: i18n('mêmes colonnes'), ext: '', quality: false, copy: false, goLabel: i18n('🧮 Ouvrir dans le tableur'), run: async o => X.openRowsInSheet({name: name || title, rows: await matrix(o)})}] : []),
+            ...(SH?.toXlsx ? [{id: 'xlsx', label: '📊 Excel', hint: '.xlsx', ext: 'xlsx', quality: false, run: async o => { const wb = SH.newWorkbook(); wb.sheets[0].name = SH.cleanSheetName ? SH.cleanSheetName(name || title, []) : 'Liste'; wb.sheets[0].cells = SH.rowsToCells(await matrix(o)); save(await SH.toXlsx(wb), o.filename); }}] : []),
+            ...extra.map(f => ({quality: false, ext: '', copy: false, ...f})),
+        ];
+        return UI.openExportDialog({title, defaultName: name || title, quality: false, info, formats,
+            fields: all ? [{id: 'what', label: i18n('Les lignes'), options: [['view', i18n('Ce qu’on voit')], ['all', i18n('Toute la liste')]]}] : []});
+    };
 
     /* ═════ E4 Déposer un fichier ═════ */
     const accepts = (f, accept) => {
@@ -1153,13 +1407,197 @@
     }
     UI.scan = (root = document) => scan(root);
     UI.enhance = el => enhanceOne(el);
-    let queued = new Set(), timer = 0;
+    let queued = new Set(), timer = 0, since = 0;
+    // une page qui bouge sans arrêt (horloge, widgets du tableau de bord) ne doit pas retarder les cases : au plus 300 ms d'attente
     new MutationObserver(list => {
         list.forEach(m => m.addedNodes.forEach(n => { if (n.nodeType === 1 && !n.classList?.contains('ui-pop')) queued.add(n); }));
         if (!queued.size) return;
+        const now = Date.now(); if (!timer) since = now;
         clearTimeout(timer);
-        timer = setTimeout(() => { const nodes = [...queued]; queued = new Set(); nodes.forEach(n => { if (n.isConnected) scan(n); }); }, 30);
+        timer = setTimeout(() => { timer = 0; const nodes = [...queued]; queued = new Set(); nodes.forEach(n => { if (n.isConnected) scan(n); }); }, now - since > 300 ? 0 : 30);
     }).observe(document.documentElement, {childList: true, subtree: true});
+    /* ═════ 🕘 Historique unifié « ↶ » ═════
+     * Chaque message « ↶ Annuler » de l'app s'inscrit dans l'historique de la séance (libellé, heure, fait / annulé) :
+     *  - A().undoToast(…) est enveloppé ici (même API, même valeur rendue) : ses undo / redo sont gardés ;
+     *  - les messages faits à l'intérieur d'app.js (undoDelete, deleteWithUndo, undoLocalChange…) sont repérés à leur arrivée
+     *    (.toast.undo) : leur bouton « ↶ Annuler », puis le « ↷ Rétablir » qui suit, servent de poignées.
+     * UI.openUndoHistory() ouvre la fenêtre « 🕘 Historique » (raccourci ⌘⌥Z / Ctrl+Alt+Z ; « 🕘 » dans chaque message ↶ ;
+     * « historique » dans la recherche rapide ⌘K). Annuler une ligne annule d'abord les plus récentes, dans l'ordre ;
+     * Rétablir une ligne rétablit d'abord les plus anciennes encore annulées juste avant elle.
+     * UI.undoHistory() → copie de la liste (pour les essais) ; l'événement « lcnda:undo-history » part à chaque changement. */
+    const HIST_MAX = 80;
+    const hist = [];
+    let histSeq = 0, histDlg = null, rearm = null, expectRedo = null;
+    const histText = el => (el?.querySelector?.('.ui-toast-text')?.textContent || '').trim();
+    const histLabel = t => String(t || '').replace(/^\s*[^\p{L}\p{N}\s«"'(]+\s*/u, '').trim() || String(t || '').trim();
+    function histChanged() { if (histDlg?.open) paintHist(); try { document.dispatchEvent(new CustomEvent('lcnda:undo-history', {detail: {count: hist.length}})); } catch (_) {} }
+    function histAdd(label, extra = {}) {
+        const e = {id: ++histSeq, label: histLabel(label), at: new Date(), state: 'done', undo: null, redo: null, undoBtn: null, redoBtn: null, kind: 'fn', ...extra};
+        hist.push(e); while (hist.length > HIST_MAX) hist.shift();
+        histChanged(); return e;
+    }
+    const recent = (r, ms = 5000) => r && Date.now() - r.t < ms;
+    function wrapUndoToast() {
+        const app = window.LCNDA_APP; if (!app || typeof app.undoToast !== 'function' || app.undoToast._hist) return;
+        const orig = app.undoToast;
+        const wrapped = function (message, o = {}) {
+            if (!o || typeof o.undo !== 'function') return orig.call(this, message, o);
+            const e = histAdd(String(message ?? ''), {icon: o.icon || ''});
+            e.undo = async () => { const r = await o.undo(); e.state = 'undone'; histChanged(); return r; };
+            e.redo = typeof o.redo === 'function' ? async () => { rearm = {e, t: Date.now()}; const r = await o.redo(); e.state = 'done'; histChanged(); return r; } : null;
+            const item = orig.call(this, message, {...o, undo: e.undo, redo: e.redo});
+            if (item && item.dataset) { item.dataset.histId = String(e.id); decorateToast(item); }
+            return item;
+        };
+        wrapped._hist = true; wrapped._orig = orig;
+        app.undoToast = wrapped;
+    }
+    /* le petit « 🕘 » d'un message ↶ (icône en CSS : le texte du message ne change pas) */
+    function decorateToast(item) {
+        if (!item || item.querySelector('.ui-toast-hist')) return;
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'ui-toast-hist';
+        b.title = i18n('🕘 Historique des actions'); b.setAttribute('aria-label', i18n('🕘 Historique des actions'));
+        b.addEventListener('click', ev => { ev.stopPropagation(); UI.openUndoHistory(); });
+        (item.querySelector('.ui-toast-acts') || item).appendChild(b);
+    }
+    function watchToast(el) {
+        if (!el?.classList?.contains('toast') || el.dataset.histSeen) return;
+        el.dataset.histSeen = '1';
+        const btn = el.querySelector('.ui-toast-btn'), text = histText(el);
+        if (el.classList.contains('undo')) {
+            decorateToast(el);
+            if (el.dataset.histId) return; // déjà inscrit (A().undoToast)
+            if (recent(rearm) && text.includes(rearm.e.label.slice(0, 40))) { // le même message revenu après « ↷ Rétablir »
+                const e = rearm.e; rearm = null; el.dataset.histId = String(e.id);
+                if (e.kind === 'dom') { e.undoBtn = btn; hookUndoBtn(e, btn); }
+                e.state = 'done'; histChanged(); return;
+            }
+            if (!btn) return;
+            const e = histAdd(text, {kind: 'dom'}); el.dataset.histId = String(e.id);
+            e.undoBtn = btn; hookUndoBtn(e, btn);
+            return;
+        }
+        // « ↶ Annulé : … » avec « ↷ Rétablir » : la poignée pour rétablir une ligne repérée
+        if (btn && recent(expectRedo) && /↷/.test(btn.textContent || '')) {
+            const e = expectRedo.e; expectRedo = null; e.redoBtn = btn;
+            btn.addEventListener('click', () => { rearm = {e, t: Date.now()}; e.state = 'done'; e.redoBtn = null; histChanged(); }, {capture: true});
+        }
+    }
+    function hookUndoBtn(e, btn) {
+        if (!btn || btn._histHooked) return; btn._histHooked = true;
+        btn.addEventListener('click', () => { if (btn.disabled) return; expectRedo = {e, t: Date.now()}; e.state = 'undone'; e.undoBtn = null; histChanged(); }, {capture: true});
+    }
+    new MutationObserver(list => list.forEach(m => m.addedNodes.forEach(n => { if (n.nodeType === 1 && n.classList?.contains('toast')) watchToast(n); })))
+        .observe(document.documentElement, {childList: true, subtree: true});
+    const canUndo = e => e.state === 'done' && (e.kind === 'fn' ? !!e.undo : !!(e.undoBtn && !e.undoBtn.disabled));
+    const canRedo = e => e.state === 'undone' && (e.kind === 'fn' ? !!e.redo : !!(e.redoBtn && !e.redoBtn.disabled));
+    const closeToastOf = e => document.querySelectorAll(`.toast[data-hist-id="${e.id}"]`).forEach(t => t.close?.());
+    async function undoOne(e) {
+        if (!canUndo(e)) throw new Error(i18n('« {what} » ne peut plus être annulé d’ici.', {what: e.label}));
+        e.busy = true; paintHist();
+        try {
+            closeToastOf(e);
+            if (e.kind === 'fn') await e.undo();
+            else { expectRedo = {e, t: Date.now()}; const b = e.undoBtn; e.state = 'undone'; e.undoBtn = null; b.click(); await new Promise(r => setTimeout(r, 350)); }
+        } finally { e.busy = false; histChanged(); }
+    }
+    async function redoOne(e) {
+        if (!canRedo(e)) throw new Error(i18n('« {what} » ne peut pas être rétabli d’ici.', {what: e.label}));
+        e.busy = true; paintHist();
+        try {
+            if (e.kind === 'fn') { await e.redo(); setTimeout(() => closeToastOf(e), 0); }
+            else { rearm = {e, t: Date.now()}; const b = e.redoBtn; e.redoBtn = null; e.state = 'done'; b.click(); await new Promise(r => setTimeout(r, 350)); }
+        } finally { e.busy = false; histChanged(); }
+    }
+    /** ↶ jusqu'à cette ligne : les plus récentes encore faites d'abord, puis elle */
+    async function undoUpTo(id) {
+        const i = hist.findIndex(x => x.id === id); if (i < 0) return;
+        const todo = hist.slice(i).filter(x => x.state === 'done').reverse();
+        let n = 0;
+        for (const e of todo) { try { await undoOne(e); n++; } catch (err) { toast(i18n('Impossible d’annuler : {err}', {err: err.message || err}), 'error'); break; } }
+        if (n) toast(n > 1 ? i18n('↶ {n} actions annulées', {n}) : i18n('↶ Annulé : « {what} »', {what: hist[i].label}));
+    }
+    /** ↷ jusqu'à cette ligne : les annulées juste avant elle d'abord (de la plus ancienne à elle) */
+    async function redoUpTo(id) {
+        const i = hist.findIndex(x => x.id === id); if (i < 0) return;
+        let k = i; while (k > 0 && hist[k - 1].state === 'undone') k--;
+        const todo = hist.slice(k, i + 1).filter(x => x.state === 'undone');
+        let n = 0;
+        for (const e of todo) { try { await redoOne(e); n++; } catch (err) { toast(i18n('Impossible de rétablir : {err}', {err: err.message || err}), 'error'); break; } }
+        if (n) toast(n > 1 ? i18n('↷ {n} actions rétablies', {n}) : i18n('↷ Rétabli : « {what} »', {what: hist[i].label}));
+    }
+    const hhmm = d => `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+    function paintHist() {
+        const box = histDlg?.querySelector('[data-hist-list]'); if (!box) return;
+        if (!hist.length) { box.innerHTML = `<p class="muted ui-hist-empty">${esc(i18n('Rien à annuler pour l’instant : les actions qui proposent « ↶ Annuler » arrivent ici, la plus récente en haut.'))}</p>`; return; }
+        box.innerHTML = `<ol class="ui-hist-list">${hist.slice().reverse().map(e => {
+            const newer = hist.filter(x => x.id > e.id && x.state === 'done').length;
+            const btn = e.busy ? `<span class="ui-hist-busy">${esc(i18n('…'))}</span>`
+                : e.state === 'done' ? `<button type="button" class="button small secondary" data-hist-undo="${e.id}"${canUndo(e) ? '' : ' disabled'} title="${esc(newer ? i18n('Annule aussi les {n} actions plus récentes, dans l’ordre', {n: newer}) : i18n('Annuler cette action'))}">${esc(newer ? i18n('↶ Annuler jusqu’ici') : i18n('↶ Annuler'))}</button>`
+                : `<button type="button" class="button small secondary" data-hist-redo="${e.id}"${canRedo(e) ? '' : ' disabled'}>${esc(i18n('↷ Rétablir'))}</button>`;
+            return `<li class="ui-hist-row${e.state === 'undone' ? ' is-undone' : ''}" data-hist-row="${e.id}"><time class="ui-hist-time" datetime="${esc(e.at.toISOString())}">${esc(hhmm(e.at))}</time>`
+                + `<span class="ui-hist-label">${esc(e.label)}</span><span class="ui-hist-state ui-badge is-${e.state === 'done' ? 'green' : 'grey'}">${esc(e.state === 'done' ? i18n('Fait') : i18n('Annulé'))}</span>${btn}</li>`;
+        }).join('')}</ol>`;
+    }
+    UI.undoHistory = () => hist.map(e => ({id: e.id, label: e.label, at: e.at, state: e.state, canUndo: canUndo(e), canRedo: canRedo(e)}));
+    UI.undoHistoryUndo = undoUpTo; UI.undoHistoryRedo = redoUpTo;
+    UI.openUndoHistory = () => {
+        if (histDlg?.open) { paintHist(); return histDlg; }
+        histDlg?.remove();
+        const dlg = histDlg = document.createElement('dialog'); dlg.className = 'modal ui-hist'; dlg.dataset.undoHistory = '';
+        dlg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">${esc(i18n('Cette séance'))}</span><h2>🕘 ${esc(i18n('Historique des actions'))}</h2></div><button type="button" class="icon-button" data-hist-x aria-label="${esc(i18n('Fermer'))}">×</button></div>
+            <p class="muted ui-hist-help">${esc(i18n('Les dernières actions qui peuvent s’annuler, dans toute l’app. Annuler une ligne annule d’abord celles qui sont venues après.'))} <kbd>${/Mac|iPhone|iPad/.test(navigator.platform || '') ? '⌘⌥Z' : 'Ctrl+Alt+Z'}</kbd></p>
+            <div class="ui-hist-body" data-hist-list></div>
+            <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-hist-x>${esc(i18n('Fermer'))}</button></div></form>`;
+        document.body.appendChild(dlg);
+        dlg.addEventListener('click', async ev => {
+            if (ev.target === dlg || ev.target.closest('[data-hist-x]')) { dlg.close(); return; }
+            const u = ev.target.closest('[data-hist-undo]'), r = ev.target.closest('[data-hist-redo]');
+            if (u && !u.disabled) { ev.preventDefault(); await undoUpTo(Number(u.dataset.histUndo)); }
+            else if (r && !r.disabled) { ev.preventDefault(); await redoUpTo(Number(r.dataset.histRedo)); }
+        });
+        dlg.addEventListener('close', () => { dlg.remove(); if (histDlg === dlg) histDlg = null; });
+        paintHist();
+        try { dlg.showModal(); } catch (_) { dlg.setAttribute('open', ''); }
+        return dlg;
+    };
+    document.addEventListener('keydown', ev => {
+        if (!(ev.metaKey || ev.ctrlKey) || !ev.altKey || ev.shiftKey || ev.code !== 'KeyZ') return;
+        ev.preventDefault(); if (histDlg?.open) histDlg.close(); else UI.openUndoHistory();
+    }, true);
+    (() => { // ⌘K : « historique », « annuler »
+        const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
+        const provider = q => (/^(histo|annul|defai|undo)/.test(fold(q).trim()) ? [{label: i18n('🕘 Historique des actions'), hint: i18n('Les dernières actions à annuler ou rétablir'), go: () => UI.openUndoHistory()}] : []);
+        ext.quickSearchProviders = ext.quickSearchProviders || [];
+        ext.quickSearchProviders.push(provider);
+    })();
+    /* 🗂 « Un cadre par personne » (Réglages → 🔎 Recherche ; clé générale genealogie-cadres, oui au départ ; même objet que heritage-research-gaps.js).
+     * UI.framesOn() : le réglage ; UI.framesPref(clé) : la case « Ranger par personne » d'un écran (non au départ : Journal, Notes, Enquêtes) ;
+     * UI.groupByPerson(liste, it => id) : les groupes dans l'ordre de leur première ligne (O(n)) ; UI.personCardHtml / UI.personTbodyHtml : le cadre. */
+    window.LCNDA_CADRES = window.LCNDA_CADRES || {on: () => { try { return localStorage.getItem('genealogie-cadres') !== '0'; } catch (_) { return true; } },
+        set: on => { try { localStorage.setItem('genealogie-cadres', on ? '1' : '0'); } catch (_) {} window.dispatchEvent(new CustomEvent('lcnda:cadres-changed', {detail: {on: !!on}})); }};
+    UI.framesOn = () => window.LCNDA_CADRES.on();
+    UI.framesPref = key => { try { return localStorage.getItem('genealogie-cadres:' + key) === '1'; } catch (_) { return false; } };
+    UI.setFramesPref = (key, on) => { try { localStorage.setItem('genealogie-cadres:' + key, on ? '1' : '0'); } catch (_) {} };
+    UI.groupByPerson = (list, keyOf) => {
+        const m = new Map(), none = [];
+        for (const it of list || []) { const k = keyOf(it); if (k == null || k === '' || k === 0 || k === '0') { none.push(it); continue; } let g = m.get(String(k)); if (!g) m.set(String(k), g = {key: String(k), items: []}); g.items.push(it); }
+        const out = [...m.values()]; if (none.length) out.push({key: '', items: none}); return out;
+    };
+    const cardHead = ({id, name = '', sub = '', life = '', count = '', extra = '', actions = ''}) => `<div class="ui-person-card-who">${id ? `<button type="button" class="table-link ui-person-card-name" data-h-person="${Number(id)}" title="${esc(i18n('Ouvrir la fiche de {name}', {name}))}">${esc(name)}</button>` : `<strong class="ui-person-card-name">${esc(name || i18n('Sans personne'))}</strong>`}${sub ? ` <small class="muted ui-person-card-sub">${esc(sub)}</small>` : ''}${life ? ` <small class="muted ui-person-card-life">${esc(life)}</small>` : ''}${extra}</div>${count || actions ? `<span class="ui-person-card-side">${actions}${count ? `<span class="ui-person-card-count">${esc(count)}</span>` : ''}</span>` : ''}`;
+    UI.personCardHtml = (o = {}) => `<section class="ui-person-card${o.cls ? ' ' + o.cls : ''}" data-person-card="${esc(o.id || '')}"${o.attrs ? ' ' + o.attrs : ''}><header class="ui-person-card-head">${cardHead(o)}</header><div class="ui-person-card-body">${o.body || ''}</div></section>`;
+    UI.personCardsHtml = html => `<div class="ui-person-cards">${html}</div>`;
+    /** la case « Ranger par personne » d'un écran où l'ordre des dates compte (non au départ) ; rien si le réglage général est éteint */
+    UI.framesOption = (key, onChange) => {
+        const l = h('label', 'checkbox-line ui-frames-opt'); if (!UI.framesOn()) { l.hidden = true; return l; }
+        l.innerHTML = `<input type="checkbox" data-frames-opt="${esc(key)}"${UI.framesPref(key) ? ' checked' : ''}> <span>🗂 ${esc(i18n('Ranger par personne'))}</span>`;
+        l.firstElementChild.addEventListener('change', e => { UI.setFramesPref(key, e.target.checked); onChange?.(e.target.checked); });
+        return l;
+    };
+    UI.personTbodyHtml = (o = {}) => `<tbody class="ui-person-tb" data-person-card="${esc(o.id || '')}"><tr class="ui-person-tb-head"><th colspan="${Number(o.cols) || 1}" scope="rowgroup"><div class="ui-person-card-head">${cardHead(o)}</div></th></tr>${o.rows || ''}</tbody>`;
+    wrapUndoToast();
+    document.addEventListener('DOMContentLoaded', wrapUndoToast);
+    addEventListener('load', wrapUndoToast);
     const attach = () => { const app = window.LCNDA_APP; if (app && app.ui !== UI) app.ui = UI; if (app && !app.viewToggle) app.viewToggle = UI.viewToggle; if (app && !app.listBar) app.listBar = UI.listBar; };
     attach();
     document.addEventListener('DOMContentLoaded', () => { attach(); scan(document); });

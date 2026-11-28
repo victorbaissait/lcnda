@@ -1,0 +1,55 @@
+fr ¦ sk ¦ nb
+# 📚 Recueils depuis Documents, chercher par recueil, sorte d’acte, lieu et rayon (heritage-recueil-docs.js, heritage-onglets-documents.js)
+{n} déjà dans ce recueil ¦ {n} už v tomto zborníku ¦ {n} allerede i denne samlingen
+pas des images, laissés de côté : {n} ¦ nie sú to obrázky, vynechané: {n} ¦ ikke bilder, utelatt: {n}
+Choisis au moins un document. ¦ Vyber aspoň jeden dokument. ¦ Velg minst ett dokument.
+📚 RECUEIL ¦ 📚 ZBORNÍK ¦ 📚 SAMLING
+📚 Faire le recueil ¦ 📚 Vytvoriť zborník ¦ 📚 Lag samlingen
+Les documents restent à leur place dans Documents : le recueil les regroupe, il ne les déplace pas. Un document en plusieurs pages y entre avec toutes ses pages. ¦ Dokumenty zostávajú na svojom mieste v Dokumentoch: zborník ich zoskupuje, nepresúva ich. Dokument s viacerými stranami doň vstúpi so všetkými stranami. ¦ Dokumentene blir på sin plass i Dokumenter: samlingen samler dem, den flytter dem ikke. Et dokument med flere sider kommer med alle sine sider.
+Nom du recueil ¦ Názov zborníka ¦ Samlingens navn
+ex. Registre de Sancoins, 1870-1872 ¦ napr. Matrika zo Sancoins, 1870-1872 ¦ f.eks. Register fra Sancoins, 1870-1872
+ex. 3 E 1234 ¦ napr. 3 E 1234 ¦ f.eks. 3 E 1234
+ex. Sancoins ¦ napr. Sancoins ¦ f.eks. Sancoins
+ex. 1870-1872 ¦ napr. 1870-1872 ¦ f.eks. 1870-1872
+L’ordre des pages ¦ Poradie strán ¦ Sidenes rekkefølge
+glisse ⠿ ou utilise ↑ ↓ ¦ potiahni ⠿ alebo použi ↑ ↓ ¦ dra ⠿ eller bruk ↑ ↓
+Recueil « {t} » fait : {x} ¦ Zborník „{t}“ vytvorený: {x} ¦ Samlingen «{t}» laget: {x}
+Recueil « {t} » ¦ Zborník „{t}“ ¦ Samlingen «{t}»
+Ajouter {x} à un recueil ¦ Pridať {x} do zborníka ¦ Legg {x} til i en samling
+Ajouter « {t} » à un recueil ¦ Pridať „{t}“ do zborníka ¦ Legg «{t}» til i en samling
+Les pages vont à la fin du recueil, dans l’ordre ; un document déjà dans ce recueil n’est pas remis. ¦ Strany idú na koniec zborníka, v poradí; dokument, ktorý už v tomto zborníku je, sa znova nepridá. ¦ Sidene havner sist i samlingen, i rekkefølge; et dokument som allerede er i denne samlingen, legges ikke inn igjen.
+Chercher un recueil… ¦ Hľadať zborník… ¦ Søk etter en samling…
+Nouveau recueil avec ces documents… ¦ Nový zborník s týmito dokumentmi… ¦ Ny samling med disse dokumentene…
+Choisis un recueil. ¦ Vyber zborník. ¦ Velg en samling.
+Rien à ajouter : {x} ¦ Nie je čo pridať: {x} ¦ Ingenting å legge til: {x}
+Ajouté à « {t} » : {x} ¦ Pridané do „{t}“: {x} ¦ Lagt til i «{t}»: {x}
+page {n} ¦ strana {n} ¦ side {n}
+Dans les recueils ¦ V zborníkoch ¦ I samlingene
+Dans le recueil ¦ V zborníku ¦ I samlingen
+page {n} sur {t} ¦ strana {n} z {t} ¦ side {n} av {t}
+(une autre page de ce document) ¦ (iná strana tohto dokumentu) ¦ (en annen side av dette dokumentet)
+📚 Ouvrir le recueil ¦ 📚 Otvoriť zborník ¦ 📚 Åpne samlingen
+à {n} km autour ¦ do {n} km okolo ¦ innenfor {n} km
+« {x} » n’a pas encore de coordonnées : seuls les documents de ce lieu sont montrés (ajoute-les dans Lieux pour chercher autour). ¦ „{x}“ zatiaľ nemá súradnice: zobrazujú sa len dokumenty z tohto miesta (doplň ich v Miestach a hľadaj aj v okolí). ¦ «{x}» har ingen koordinater ennå: bare dokumenter fra dette stedet vises (legg dem inn under Steder for å søke rundt).
+Dans aucun recueil ¦ V žiadnom zborníku ¦ I ingen samling
+p. {n} ¦ s. {n} ¦ s. {n}
+choisi n° {n} ¦ vybrané č. {n} ¦ valgt nr. {n}
+{x}, dans l’ordre des clics ¦ {x}, v poradí kliknutí ¦ {x}, i klikkrekkefølge
+Clique sur les documents à prendre, dans l’ordre des pages. ¦ Klikaj na dokumenty, ktoré chceš vziať, v poradí strán. ¦ Klikk på dokumentene du vil ta, i sidenes rekkefølge.
+📚 Faire un recueil avec {x} ¦ 📚 Vytvoriť zborník z {x} ¦ 📚 Lag en samling med {x}
+📚 Faire un recueil ¦ 📚 Vytvoriť zborník ¦ 📚 Lag en samling
+📚 Ajouter à un recueil… ¦ 📚 Pridať do zborníka… ¦ 📚 Legg til i en samling…
+Tout choisir (ceux montrés) ¦ Vybrať všetko (zobrazené) ¦ Velg alle (de som vises)
+☑ Choisir plusieurs ¦ ☑ Vybrať viac ¦ ☑ Velg flere
+Les recueils ne sont pas encore chargés : réessaie dans un instant. ¦ Zborníky ešte nie sú načítané: skús to o chvíľu znova. ¦ Samlingene er ikke lastet inn ennå: prøv igjen om et øyeblikk.
+Ville ou lieu ¦ Mesto alebo miesto ¦ By eller sted
+Dans un rayon de (km) ¦ V okruhu (km) ¦ Innenfor en radius på (km)
+ex. 20 (vide : le lieu seul) ¦ napr. 20 (prázdne: len to miesto) ¦ f.eks. 20 (tomt: bare stedet)
+ex. Registre de Sancoins ¦ napr. Matrika zo Sancoins ¦ f.eks. Register fra Sancoins
+Actes de notoriété ¦ Akty notoriety ¦ Notorietetsakter
+Documents militaires ¦ Vojenské dokumenty ¦ Militære dokumenter
+📚 Dans un recueil ¦ 📚 V zborníku ¦ 📚 I en samling
+📚 Recueils ¦ 📚 Zborníky ¦ 📚 Samlinger
+Les médias et pièces d’archives de ta base, comme les personnes : la liste à gauche (A → Z, 👤 par personne, 📚 par recueil ou en 📁 dossiers), la fiche à droite. ¦ Médiá a archiválie tvojho rodokmeňa, usporiadané ako osoby: vľavo zoznam (A → Z, 👤 podľa osoby, 📚 podľa zborníka alebo v 📁 priečinkoch), vpravo karta. ¦ Mediene og arkivstykkene i slektstreet ditt, ordnet som personene: listen til venstre (A → Å, 👤 etter person, 📚 etter samling eller i 📁 mapper), oppføringen til høyre.
+=document choisi ¦ vybraný dokument|vybrané dokumenty|vybraných dokumentov ¦ valgt dokument|valgte dokumenter
+Montrer « Dans aucun recueil » ¦ Zobraziť „V žiadnom zborníku“ ¦ Vis «I ingen samling»

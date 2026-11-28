@@ -33,7 +33,7 @@
         const s = Math.floor(Math.max(0, Number(ms) || 0) / 1000), h = Math.floor(s / 3600), m = Math.floor(s / 60) % 60, x = s % 60; return h ? `${h}:${p2(m)}:${p2(x)}` : `${p2(m)}:${p2(x)}`; };
 
     const TITLE = 'Jeu de l’oie / Serpents et échelles / Petits chevaux / Puzzle / Labyrinthe';
-    const PREFS_KEY = 'lcnda_puzzle-prefs-v1';
+    const PREFS_KEY = 'lcnda-puzzle-prefs', OLD_PREFS_KEY = 'lcnda_puzzle-prefs-v1'; // « lcnda-… » : gardé par « Réglages enregistrés : toute l’app » (l'ancien nom est encore lu)
     const MAX_GAMES = 30, MIN_PIECES = 4, MAX_PIECES = 1000;
     const COUNTS = [12, 24, 48, 100, 150, 300, 500, 1000];
     const SAVE_QUIET_MS = 2500, SAVE_EVERY_MS = 10000; // enregistrement : 2,5 s après le dernier coup, au plus toutes les 10 s
@@ -45,7 +45,7 @@
         del(k) { try { localStorage.removeItem(k); } catch (_) {} },
     };
     const recordKey = meta => `${meta.image?.key || meta.image?.url || ''}|${meta.cols * meta.rows}`;
-    const prefs = () => ({count: 48, shape: 'jigsaw', rotate: false, model: true, ...(store.get(PREFS_KEY, {}) || {})});
+    const prefs = () => ({count: 48, shape: 'jigsaw', rotate: false, model: true, ...(store.get(PREFS_KEY, null) || store.get(OLD_PREFS_KEY, {}) || {})});
     const owns = id => /^puz-/.test(String(id || ''));
     const newId = () => `puz-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
 
@@ -985,7 +985,7 @@
     function sidebarHtml(active) {
         if (!C.loaded && !C.loading) loadAll(); // la liste vient de la base : la colonne se redessine quand elle arrive
         const list = C.games, hist = C.history, rec = C.records;
-        const inProgress = list.map(g => `<button class="side-button pz-side ${g.id === active ? 'is-active' : ''}" type="button" data-pz-open="${esc(g.id)}" title="${esc(i18n('Reprendre ce puzzle'))}"><strong>🧩 ${esc(g.name)}</strong><small>${esc(i18n('Puzzle'))} · ${esc(i18n('{n} pièces', {n: num(g.cols * g.rows)}))}</small><small>⏱ ${fmtTime(g.elapsed)} · ${Math.floor((g.placed || 0) * 100 / Math.max(1, g.cols * g.rows))} %</small></button>`).join('');
+        const inProgress = list.map(g => `<button class="side-button pz-side ${g.id === active ? 'is-active' : ''}" type="button" data-pz-open="${esc(g.id)}" data-jeu-type="puzzle" data-jeu-when="${Number(g.updatedAt || g.createdAt) || 0}" title="${esc(i18n('Reprendre ce puzzle'))}"><strong>🧩 ${esc(g.name)}</strong><small>${esc(i18n('Puzzle'))} · ${esc(i18n('{n} pièces', {n: num(g.cols * g.rows)}))}</small><small>⏱ ${fmtTime(g.elapsed)} · ${Math.floor((g.placed || 0) * 100 / Math.max(1, g.cols * g.rows))} %</small></button>`).join('');
         const done = hist.length ? `<div class="pz-side-title">🏆 ${esc(i18n('Puzzles terminés'))}</div>${hist.map(h => { const best = Number(rec[recordKey(h)]) || 0; return `<button class="side-button pz-side pz-side-done ${h.id === active ? 'is-active' : ''}" type="button" data-pz-open="${esc(h.id)}" title="${esc(i18n('Revoir ce puzzle terminé'))}"><strong>${esc(h.name)}</strong><small>${esc(i18n('{n} pièces', {n: num(h.cols * h.rows)}))} · ⏱ ${fmtTime(h.time)}${best && best === Number(h.time) ? ' · 🏆' : ''}</small><small>${window.LCNDA_UI?.when?.(new Date(h.finishedAt || Date.now()).toISOString()) || new Date(h.finishedAt || Date.now()).toLocaleDateString(window.LCNDA_I18N?.locale?.() || 'fr-FR')}${best ? ` · ${esc(i18n('record {time}', {time: fmtTime(best)}))}` : ''}</small></button>`; }).join('')}` : '';
         return inProgress + done;
     }

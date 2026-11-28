@@ -1,0 +1,106 @@
+# 🏰 Grands noms et remparts (lot G) : refaire assets/data/tg-*.json.gz, puis les enregistrer dans la branche lancée.
+#  - 🗺 tg-osm-forts, tg-osm-poudres, tg-osm-semaphores, tg-osm-lazarets, tg-osm-wallace : OpenStreetMap (ODbL 1.0) par Overpass —
+#    injoignable depuis l'atelier de développement, d'où ce travail ici (quoi = osm).
+#    ⚠ D'abord .github/workflows/osm-france.yml (extrait Geofabrik + osmium, sans Overpass) ; ici, quoi = osm (Overpass) reste un
+#    secours, et « tout » ne questionne plus Overpass.
+#  - 👰 tg-filles, ⚔️ tg-carignan, 🏛 tg-deputes, ✠ tg-compagnons : Wikidata (CC0) + tableaux de Wikipédia (CC BY-SA 4.0) ;
+#    ✈️ tg-aviateurs : Wikipédia en anglais (CC BY-SA 4.0) ; ⚓ tg-lloyd : index d'Internet Archive (aucune page copiée) ;
+#    🏰 tg-forts, 💥 tg-poudres, 📡 tg-semaphores, ⚕️ tg-lazarets, ⛲ tg-wallace : Wikidata (CC0).
+# Puis le sommaire assets/data/manifest.json (Réglages → 🗂 Données : « ↻ Vérifier » voit la nouvelle version).
+#
+# Lancer : onglet « Actions » → « Grands noms et remparts (lot G) » → « Run workflow » (choisir ce qu'on refait).
+
+name: Grands noms et remparts (lot G)
+
+on:
+  workflow_dispatch:
+    inputs:
+      quoi:
+        description: 'tout (sans OpenStreetMap), osm (Overpass, secours : voir osm-france.yml), noms, aviateurs, lloyd ou lieux'
+        required: false
+        default: 'tout'
+  push:
+    branches: ['claude/**']
+    paths: ['.github/workflows/telech-g.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: telech-g-donnees
+  cancel-in-progress: false
+
+jobs:
+  donnees:
+    # le « push » sert seulement à faire connaître ce travail à GitHub : il ne fabrique rien
+    if: github.event_name != 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    env:
+      QUOI: ${{ github.event.inputs.quoi || 'tout' }}
+    steps:
+      - name: Dossier de travail
+        run: echo "TG_RAW=$RUNNER_TEMP/tg-cache" >> "$GITHUB_ENV"
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: "Préférer IPv4 (pas d’IPv6 sur la machine GitHub, « Network is unreachable »)"
+        run: echo 'precedence ::ffff:0:0/96 100' | sudo tee -a /etc/gai.conf
+      - name: Reprendre les réponses déjà téléchargées
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ runner.temp }}/tg-cache
+          key: telech-g-${{ github.run_id }}
+          restore-keys: telech-g-
+      - name: "🗺 OpenStreetMap : forts, poudres, sémaphores, lazarets, fontaines Wallace"
+        if: env.QUOI == 'osm'   # secours seulement : d'abord osm-france.yml (extrait Geofabrik)
+        timeout-minutes: 150
+        run: |
+          # deux serveurs Overpass à tour de rôle (l'un est parfois injoignable ou surchargé)
+          for i in 1 2 3 4; do
+            srv=https://overpass-api.de/api/interpreter; [ $((i % 2)) -eq 0 ] && srv=https://overpass.kumi.systems/api/interpreter
+            TG_OVERPASS="$srv" python3 -I scripts/telech-g/build_osm.py assets/data && exit 0
+            echo "essai $i raté ($srv), nouvel essai dans 60 s"; sleep 60
+          done
+          exit 1
+      - name: "👥 Filles du Roy, Carignan-Salières, députés, Compagnons (Wikidata)"
+        if: env.QUOI == 'tout' || env.QUOI == 'noms'
+        run: python3 -I scripts/telech-g/build_noms.py assets/data
+      - name: "✈️ Brevets de pilote 1909-1911 (Wikipédia)"
+        if: env.QUOI == 'tout' || env.QUOI == 'aviateurs'
+        run: python3 -I scripts/telech-g/build_aviateurs.py assets/data
+      - name: "⚓ Lloyd’s Register (index des volumes)"
+        if: env.QUOI == 'tout' || env.QUOI == 'lloyd'
+        run: python3 -I scripts/telech-g/build_lloyd.py assets/data
+      - name: "🏰 Forts, poudres, sémaphores, lazarets, fontaines (Wikidata)"
+        if: env.QUOI == 'tout' || env.QUOI == 'lieux'
+        run: python3 -I scripts/telech-g/build_lieux.py assets/data
+      - name: Garder les réponses pour la prochaine fois
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ runner.temp }}/tg-cache
+          key: telech-g-${{ github.run_id }}
+      - name: Sommaire des données
+        run: node scripts/donnees-manifest.js
+      - name: Enregistrer dans la branche
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/data/tg-*.json.gz assets/data/manifest.json
+          git diff --cached --quiet && { echo "rien de neuf"; exit 0; }
+          git commit -m "Grands noms et remparts (lot G) : données refaites sur GitHub (OpenStreetMap ODbL, Wikidata CC0, Wikipédia CC BY-SA 4.0…)"
+          ok=
+          for i in 1 2 3 4 5; do
+            if ! git pull --rebase origin "$GITHUB_REF_NAME"; then
+              # le sommaire a changé entre-temps (un autre atelier) : on garde celui de la branche et on le refait par-dessus
+              git checkout --ours assets/data/manifest.json && node scripts/donnees-manifest.js \
+                && git add assets/data/manifest.json && GIT_EDITOR=true git rebase --continue || { git rebase --abort; sleep 15; continue; }
+            fi
+            git push origin "HEAD:$GITHUB_REF_NAME" && { ok=1; break; }; sleep 15
+          done
+          [ -n "$ok" ] || { echo "::error::pas enregistré dans la branche"; exit 1; }

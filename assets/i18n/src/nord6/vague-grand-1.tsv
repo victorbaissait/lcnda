@@ -1,0 +1,835 @@
+fr ¦ lt ¦ lv ¦ et
+Le texte est vide : écris ou lis d’abord l’acte. ¦ Tekstas tuščias: pirmiausia parašyk arba nuskaityk aktą. ¦ Teksts ir tukšs: vispirms uzraksti vai nolasi aktu. ¦ Tekst on tühi: kirjuta või loe kõigepealt akt.
+Aucune personne repérée dans le texte pour l’instant. ¦ Tekste kol kas nerasta nė vieno asmens. ¦ Tekstā pagaidām nav atrasta neviena persona. ¦ Tekstist pole veel ühtegi isikut leitud.
+Personnes — {t} ¦ Asmenys — {t} ¦ Personas — {t} ¦ Isikud — {t}
+L’envoi vers les autres outils n’est pas chargé. ¦ Siuntimas į kitus įrankius neįkeltas. ¦ Sūtīšana uz citiem rīkiem nav ielādēta. ¦ Saatmine teistesse tööriistadesse pole laaditud.
+L’image de l’acte ¦ Akto vaizdas ¦ Akta attēls ¦ Akti pilt
+Le texte de la transcription ¦ Transkripcijos tekstas ¦ Pārraksta teksts ¦ Ümberkirjutuse tekst
+Les personnes repérées (tableau) ¦ Rasti asmenys (lentelė) ¦ Atrastās personas (tabula) ¦ Leitud isikud (tabel)
+Envoyer vers… ¦ Siųsti į… ¦ Sūtīt uz… ¦ Saada…
+Transcription — {t} ¦ Transkripcija — {t} ¦ Pārraksts — {t} ¦ Ümberkirjutus — {t}
+Signature — {t} ¦ Parašas — {t} ¦ Paraksts — {t} ¦ Allkiri — {t}
+L’export Word n’est pas chargé. ¦ Eksportas į Word neįkeltas. ¦ Eksports uz Word nav ielādēts. ¦ Wordi eksport pole laaditud.
+Éclaircir / restaurer l’image ¦ Pašviesinti / atkurti vaizdą ¦ Padarīt gaišāku / atjaunot attēlu ¦ Tee pilt heledamaks / taasta see
+le texte mis en page, à ouvrir dans Word ou LibreOffice (.docx) ¦ sumaketuotas tekstas, atidaromas Word arba LibreOffice (.docx) ¦ noformēts teksts, ko atvērt Word vai LibreOffice (.docx) ¦ kujundatud tekst, avamiseks Wordis või LibreOffice’is (.docx)
+Ouvrir cette signature dans « Signatures et sceaux » : le papier s’efface, l’encre devient un tracé net ¦ Atidaryti šį parašą įrankyje „Parašai ir antspaudai“: popierius išnyksta, rašalas tampa aiškia linija ¦ Atvērt šo parakstu rīkā “Paraksti un zīmogi”: papīrs pazūd, tinte kļūst par skaidru līniju ¦ Ava see allkiri tööriistas „Allkirjad ja pitserid“: paber kaob, tint muutub selgeks jooneks
+Détourer la signature ¦ Iškirpti parašą ¦ Izgriezt parakstu ¦ Lõika allkiri välja
++ {n} autres : zoome pour les voir. ¦ + dar {n}: priartink, kad pamatytum. ¦ + vēl {n}: pietuvini, lai tos redzētu. ¦ + veel {n}: suumi, et neid näha.
+1 case repérée ¦ 1 pažymėtas langelis ¦ 1 atzīmēts lodziņš ¦ 1 märgitud lahter
+1 lieu pas sur la carte ¦ 1 vieta ne žemėlapyje ¦ 1 vieta nav kartē ¦ 1 koht pole kaardil
+Affiche d’abord un arbre. ¦ Pirmiausia parodyk medį. ¦ Vispirms parādi koku. ¦ Kuva kõigepealt puu.
+Ajouter la mère ¦ Pridėti motiną ¦ Pievienot māti ¦ Lisa ema
+Ajouter le père ¦ Pridėti tėvą ¦ Pievienot tēvu ¦ Lisa isa
+Ajouter l’autre parent ¦ Pridėti kitą tėvą ar motiną ¦ Pievienot otru vecāku ¦ Lisa teine vanem
+Aller à un lieu… ¦ Eiti į vietą… ¦ Doties uz vietu… ¦ Mine kohta…
+Ancêtres (Sosa) ¦ Protėviai (Sosa) ¦ Senči (Sosa) ¦ Esivanemad (Sosa)
+Ancêtres (Sosa) sur {n} générations ¦ Protėviai (Sosa) per {n} kartas ¦ Senči (Sosa) {n} paaudzēs ¦ Esivanemad (Sosa) {n} põlvkonna ulatuses
+Ascendants de {nm} ¦ {nm} protėviai ¦ {nm} senči ¦ {nm} esivanemad
+Au zoom faible, les points proches deviennent une pastille avec leur nombre ¦ Mažai priartinus artimi taškai virsta ženkleliu su jų skaičiumi ¦ Pie maza tālummaiņas tuvie punkti kļūst par apli ar to skaitu ¦ Väikesel suumil muutuvad lähedased punktid märgiks, millel on nende arv
+Aucune carte à exporter. ¦ Nėra žemėlapio eksportuoti. ¦ Nav kartes, ko eksportēt. ¦ Pole kaarti, mida eksportida.
+Aucune donnée. ¦ Duomenų nėra. ¦ Nav datu. ¦ Andmed puuduvad.
+Aucune naissance d’ancêtre n’a de lieu placé sur la carte. ¦ Nė vieno protėvio gimimo vieta nepažymėta žemėlapyje. ¦ Nevienai senča dzimšanai nav vietas kartē. ¦ Ühegi esivanema sünnil pole kohta kaardil.
+Branche : {x} ¦ Šaka: {x} ¦ Atzars: {x} ¦ Haru: {x}
+CARTE · {x} ¦ ŽEMĖLAPIS · {x} ¦ KARTE · {x} ¦ KAART · {x}
+Centre de gravité (G1 = la personne de départ) ¦ Svorio centras (G1 = pradinis asmuo) ¦ Smaguma centrs (G1 = sākuma persona) ¦ Raskuskese (G1 = lähteisik)
+Centrer la carte sur un lieu et ouvrir sa bulle ¦ Centruoti žemėlapį ties vieta ir atidaryti jos debesėlį ¦ Centrēt karti uz vietu un atvērt tās burbuli ¦ Keskenda kaart kohale ja ava selle mull
+Chargement du graphique… ¦ Įkeliama diagrama… ¦ Ielādē diagrammu… ¦ Graafiku laadimine…
+Choisis d’abord la personne de départ (Sosa 1). ¦ Pirmiausia pasirink pradinį asmenį (Sosa 1). ¦ Vispirms izvēlies sākuma personu (Sosa 1). ¦ Vali kõigepealt lähteisik (Sosa 1).
+Colorer les cases : une étiquette, une branche, ou les fiches sans source ¦ Spalvinti langelius: žyma, šaka arba kortelės be šaltinio ¦ Iekrāsot lodziņus: birka, atzars vai kartītes bez avota ¦ Värvi lahtrid: silt, haru või allikata kaardid
+Dans cette zone ¦ Šioje zonoje ¦ Šajā zonā ¦ Selles piirkonnas
+Dans la fenêtre d’impression, choisis « Enregistrer en PDF ». ¦ Spausdinimo lange pasirink „Įrašyti kaip PDF“. ¦ Drukāšanas logā izvēlies “Saglabāt kā PDF”. ¦ Vali printimisaknas „Salvesta PDF-ina“.
+De {a} à {b} ¦ Nuo {a} iki {b} ¦ No {a} līdz {b} ¦ {a}–{b}
+Depuis {a} ¦ Nuo {a} ¦ Kopš {a} ¦ Alates {a}
+Famille de {nm} ¦ {nm} šeima ¦ {nm} ģimene ¦ {nm} perekond
+Feuilles en largeur ¦ Lapų pločiu ¦ Lapas platumā ¦ Lehti laiuses
+GRAPHIQUES ¦ DIAGRAMOS ¦ DIAGRAMMAS ¦ GRAAFIKUD
+Grand arbre à assembler ¦ Didelis medis sudėlioti ¦ Liels koks salikšanai ¦ Kokkupandav suur puu
+Génération {g} : {n}{y} ¦ Karta {g}: {n}{y} ¦ Paaudze {g}: {n}{y} ¦ Põlvkond {g}: {n}{y}
+Image impossible avec ce fond de carte : choisis PDF. ¦ Su šiuo žemėlapio fonu vaizdas negalimas: pasirink PDF. ¦ Ar šo kartes fonu attēls nav iespējams: izvēlies PDF. ¦ Selle aluskaardiga pilt ei õnnestu: vali PDF.
+Imprime à 100 % (sans « ajuster à la page »). ¦ Spausdink 100 % mastu (be „pritaikyti puslapiui“). ¦ Drukā 100 % mērogā (bez “pielāgot lapai”). ¦ Prindi 100 % suuruses (ilma „sobita lehele“).
+Imprimer ce graphique (⌘P) ¦ Spausdinti šią diagramą (⌘P) ¦ Drukāt šo diagrammu (⌘P) ¦ Prindi see graafik (⌘P)
+Imprimer la carte affichée (⌘P) ¦ Spausdinti rodomą žemėlapį (⌘P) ¦ Drukāt redzamo karti (⌘P) ¦ Prindi kuvatud kaart (⌘P)
+Imprimer l’arbre en grand, sur plusieurs feuilles A4 ou A3 à assembler ¦ Spausdinti didelį medį ant kelių A4 ar A3 lapų, kuriuos sudėsi ¦ Drukāt koku lielā formātā uz vairākām A4 vai A3 lapām salikšanai ¦ Prindi puu suurelt mitmele kokkupandavale A4- või A3-lehele
+Inhumations ¦ Palaidojimai ¦ Apbedījumi ¦ Matmised
+Jusqu’à {b} ¦ Iki {b} ¦ Līdz {b} ¦ Kuni {b}
+La liste des événements visibles, qui suit la carte ¦ Matomų įvykių sąrašas, sekantis žemėlapį ¦ Redzamo notikumu saraksts, kas seko kartei ¦ Nähtavate sündmuste loend, mis järgib kaarti
+La photo de la fiche dans chaque case ¦ Kortelės nuotrauka kiekviename langelyje ¦ Kartītes foto katrā lodziņā ¦ Kaardi foto igas lahtris
+Latitude ¦ Platuma ¦ Platums ¦ Laiuskraad
+Les chiffres : {t} ¦ Skaičiai: {t} ¦ Skaitļi: {t} ¦ Arvud: {t}
+Les couleurs des sortes d’événements et la période ¦ Įvykių rūšių spalvos ir laikotarpis ¦ Notikumu veidu krāsas un periods ¦ Sündmuste liikide värvid ja ajavahemik
+Les {n} premiers. ¦ Pirmieji {n}. ¦ Pirmie {n}. ¦ Esimesed {n}.
+Longitude ¦ Ilguma ¦ Garums ¦ Pikkuskraad
+L’arbre est découpé en feuilles qui se recouvrent un peu : coupe, pose sur la voisine en faisant coïncider les croix, colle. ¦ Medis padalytas į šiek tiek persidengiančius lapus: iškirpk, uždėk ant gretimo taip, kad sutaptų kryželiai, priklijuok. ¦ Koks ir sadalīts lapās, kas nedaudz pārklājas: izgriez, uzliec uz kaimiņlapas, saskaņojot krustiņus, salīmē. ¦ Puu on jagatud veidi kattuvateks lehtedeks: lõika, aseta naaberlehele nii, et ristid kattuksid, ja liimi.
+L’impression en feuilles n’est pas disponible ici. ¦ Spausdinimas lapais čia negalimas. ¦ Drukāšana pa lapām šeit nav pieejama. ¦ Lehtedeks printimine pole siin saadaval.
+Masquer cette branche ¦ Slėpti šią šaką ¦ Paslēpt šo atzaru ¦ Peida see haru
+Montrer cette branche ¦ Rodyti šią šaką ¦ Rādīt šo atzaru ¦ Näita seda haru
+Même échelle des deux côtés (le plus grand = {m}). ¦ Ta pati skalė abiejose pusėse (didžiausia = {m}). ¦ Vienāds mērogs abās pusēs (lielākais = {m}). ¦ Sama skaala mõlemal poolel (suurim = {m}).
+Nom : {x} ¦ Vardas: {x} ¦ Vārds: {x} ¦ Nimi: {x}
+PNG, JPG, PDF ou CSV de la carte affichée ¦ Rodomo žemėlapio PNG, JPG, PDF arba CSV ¦ Redzamās kartes PNG, JPG, PDF vai CSV ¦ Kuvatud kaardi PNG, JPG, PDF või CSV
+Plan d’assemblage ¦ Sudėliojimo planas ¦ Salikšanas plāns ¦ Kokkupaneku plaan
+Plan d’assemblage en première page ¦ Sudėliojimo planas pirmame puslapyje ¦ Salikšanas plāns pirmajā lapā ¦ Kokkupaneku plaan esimesel lehel
+Pose les feuilles dans l’ordre du plan : A1 en haut à gauche. ¦ Sudėk lapus plano tvarka: A1 viršuje kairėje. ¦ Saliec lapas plāna secībā: A1 augšā pa kreisi. ¦ Pane lehed plaani järjekorras: A1 üles vasakule.
+Pose-la sur sa voisine jusqu’au pointillé, en faisant coïncider les croix ⊕, puis colle. ¦ Uždėk jį ant gretimo iki punktyro, kad sutaptų kryželiai ⊕, tada priklijuok. ¦ Uzliec to uz kaimiņlapas līdz punktētajai līnijai, saskaņojot krustiņus ⊕, tad salīmē. ¦ Pane see naaberlehele kuni punktiirini nii, et ristid ⊕ kattuksid, siis liimi.
+Période : {a} – {b} ¦ Laikotarpis: {a} – {b} ¦ Periods: {a} – {b} ¦ Ajavahemik: {a} – {b}
+Recentrer l’arbre ici ¦ Centruoti medį čia ¦ Centrēt koku šeit ¦ Keskenda puu siia
+Recouvrement ¦ Persidengimas ¦ Pārklāšanās ¦ Ülekate
+Repères de collage (✂, pointillés, croix) ¦ Klijavimo žymės (✂, punktyrai, kryželiai) ¦ Līmēšanas atzīmes (✂, punktētas līnijas, krustiņi) ¦ Liimimismärgid (✂, punktiirid, ristid)
+Rien dans le cadre : déplace la carte ou dézoome. ¦ Rėmelyje nieko nėra: pastumk žemėlapį arba nutolink. ¦ Rāmī nekā nav: pārvieto karti vai attālini. ¦ Raamis pole midagi: liiguta kaarti või suumi välja.
+Rien à imprimer. ¦ Nėra ką spausdinti. ¦ Nav ko drukāt. ¦ Pole midagi printida.
+Sans source (en rouge) ¦ Be šaltinio (raudonai) ¦ Bez avota (sarkanā krāsā) ¦ Allikata (punasega)
+Sosa et côtés : depuis la personne de départ. ¦ Sosa ir pusės: nuo pradinio asmens. ¦ Sosa un puses: no sākuma personas. ¦ Sosa ja pooled: lähteisikust lähtudes.
+Sur chaque feuille qui n’est pas dans la première colonne ou la première rangée, coupe la marge blanche le long du trait ✂. ¦ Kiekviename lape, kuris nėra pirmame stulpelyje ar pirmoje eilėje, nukirpk baltą paraštę palei liniją ✂. ¦ Katrai lapai, kas nav pirmajā kolonnā vai pirmajā rindā, nogriez balto malu gar līniju ✂. ¦ Igalt lehelt, mis pole esimeses veerus ega reas, lõika valge veeris joont ✂ mööda ära.
+Un point par génération d’ancêtres (la moyenne des lieux de naissance), reliés par une flèche ¦ Vienas taškas kiekvienai protėvių kartai (gimimo vietų vidurkis), sujungti rodykle ¦ Viens punkts katrai senču paaudzei (dzimšanas vietu vidējais), savienoti ar bultu ¦ Üks punkt esivanemate põlvkonna kohta (sünnikohtade keskmine), noolega ühendatud
+Une personne… ¦ Asmuo… ¦ Persona… ¦ Isik…
+Voir tous les points (⌘0) ¦ Rodyti visus taškus (⌘0) ¦ Rādīt visus punktus (⌘0) ¦ Näita kõiki punkte (⌘0)
+Vue d’ensemble : glisse le cadre pour te déplacer ¦ Apžvalga: tempk rėmelį, kad judėtum ¦ Pārskats: velc rāmi, lai pārvietotos ¦ Ülevaade: lohista raami liikumiseks
+au-dessus : {x} ¦ viršuje: {x} ¦ augšā: {x} ¦ üleval: {x}
+deux périodes ¦ du laikotarpiai ¦ divi periodi ¦ kaks ajavahemikku
+elle seule ¦ tik ji ¦ tikai viņa ¦ ainult tema
+les hommes et les femmes ¦ vyrai ir moterys ¦ vīrieši un sievietes ¦ mehed ja naised
+les événements visibles ¦ matomi įvykiai ¦ redzamie notikumi ¦ nähtavad sündmused
+rangée {r}, colonne {c} ¦ eilė {r}, stulpelis {c} ¦ rinda {r}, kolonna {c} ¦ rida {r}, veerg {c}
+ses ascendants ¦ jo protėviai ¦ viņa senči ¦ tema esivanemad
+{e} sans position : clique pour placer leurs lieux ¦ {e} be padėties: spustelėk, kad pažymėtum jų vietas ¦ {e} bez atrašanās vietas: noklikšķini, lai izvietotu to vietas ¦ {e} ilma asukohata: klõpsa, et nende kohad paigutada
+{e} · {p} ¦ {e} · {p} ¦ {e} · {p} ¦ {e} · {p}
+{n} cases repérées ¦ {n} pažymėti langeliai ¦ {n} atzīmēti lodziņi ¦ {n} märgitud lahtrit
+{n} feuilles : {c} en largeur, {r} en hauteur. Affiche finie : {w} × {h} cm. ¦ {n} lapų: {c} pločiu, {r} aukščiu. Galutinis plakatas: {w} × {h} cm. ¦ {n} lapas: {c} platumā, {r} augstumā. Gatavais plakāts: {w} × {h} cm. ¦ {n} lehte: {c} laiuses, {r} kõrguses. Valmis plakat: {w} × {h} cm.
+{n} lieux pas sur la carte ¦ {n} vietų ne žemėlapyje ¦ {n} vietas nav kartē ¦ {n} kohta pole kaardil
+{n} événements ¦ {n} įvykiai ¦ {n} notikumi ¦ {n} sündmust
+{n} événements dans {p} lieux : clique pour zoomer ¦ {n} įvykiai {p} vietose: spustelėk, kad priartintum ¦ {n} notikumi {p} vietās: noklikšķini, lai pietuvinātu ¦ {n} sündmust {p} kohas: klõpsa suumimiseks
+{what} de {nm} (créer la fiche ou relier une fiche) ¦ {nm}: {what} (sukurti kortelę arba susieti kortelę) ¦ {nm}: {what} (izveidot kartīti vai sasaistīt kartīti) ¦ {nm}: {what} (loo kaart või seo kaart)
+{x} se pose ici ¦ {x} atsidurs čia ¦ {x} novietosies šeit ¦ {x} paigutub siia
+© contributeurs OpenStreetMap ¦ © OpenStreetMap bendradarbiai ¦ © OpenStreetMap līdzautori ¦ © OpenStreetMapi kaastöölised
+« {x} » n’a pas encore de position sur la carte. ¦ „{x}“ dar neturi padėties žemėlapyje. ¦ “{x}” vēl nav atrašanās vietas kartē. ¦ „{x}“ pole veel kaardil asukohta.
+Âge {a} – {b} ¦ Amžius {a} – {b} ¦ Vecums {a} – {b} ¦ Vanus {a} – {b}
+Étiquette : {x} ¦ Žyma: {x} ¦ Birka: {x} ¦ Silt: {x}
+à gauche : {x} ¦ kairėje: {x} ¦ pa kreisi: {x} ¦ vasakul: {x}
+↔ Comparer ¦ ↔ Palyginti ¦ ↔ Salīdzināt ¦ ↔ Võrdle
+↔ Comparer deux statistiques ¦ ↔ Palyginti dvi statistikas ¦ ↔ Salīdzināt divas statistikas ¦ ↔ Võrdle kaht statistikat
+⤓ CSV ¦ ⤓ CSV ¦ ⤓ CSV ¦ ⤓ CSV
+⧉ Copier ¦ ⧉ Kopijuoti ¦ ⧉ Kopēt ¦ ⧉ Kopeeri
+👁 Montrer les branches masquées ({n}) ¦ 👁 Rodyti paslėptas šakas ({n}) ¦ 👁 Rādīt paslēptos atzarus ({n}) ¦ 👁 Näita peidetud harusid ({n})
+📊 CSV ¦ 📊 CSV ¦ 📊 CSV ¦ 📊 CSV
+🖼 Portraits ¦ 🖼 Portretai ¦ 🖼 Portreti ¦ 🖼 Portreed
+🧩 Grand format à assembler ¦ 🧩 Didelis formatas sudėlioti ¦ 🧩 Liels formāts salikšanai ¦ 🧩 Kokkupandav suurformaat
+🧮 Voir les chiffres ¦ 🧮 Rodyti skaičius ¦ 🧮 Rādīt skaitļus ¦ 🧮 Näita arve
+🧷 Repères ¦ 🧷 Žymės ¦ 🧷 Atzīmes ¦ 🧷 Märgid
+moins d’un an ¦ mažiau nei metai ¦ mazāk par gadu ¦ alla aasta
+Âge à cet événement ¦ Amžius per šį įvykį ¦ Vecums šajā notikumā ¦ Vanus selle sündmuse ajal
+Ajoute des dates aux événements des fiches, ou montre d’autres sortes d’événements. ¦ Pridėk datas kortelių įvykiams arba parodyk kitų rūšių įvykius. ¦ Pievieno datumus kartīšu notikumiem vai parādi citus notikumu veidus. ¦ Lisa kaartide sündmustele kuupäevi või näita muid sündmuste liike.
+Voir plus d’années ¦ Rodyti daugiau metų ¦ Rādīt vairāk gadu ¦ Näita rohkem aastaid
+Agrandir une période ¦ Padidinti laikotarpį ¦ Palielināt periodu ¦ Suurenda ajavahemikku
+⌘ ou Ctrl + molette : agrandir là où est la souris. ¦ ⌘ arba Ctrl + ratukas: didinti ten, kur yra pelė. ¦ ⌘ vai Ctrl + ritenītis: palielināt tur, kur ir pele. ¦ ⌘ või Ctrl + ratas: suurenda seal, kus on hiir.
+1 génération ¦ 1 karta ¦ 1 paaudze ¦ 1 põlvkond
+Partir de ¦ Pradėti nuo ¦ Sākt no ¦ Lähtu
+Barres de vie ¦ Gyvenimo juostos ¦ Dzīves joslas ¦ Eluribad
+Âge à chaque événement ¦ Amžius per kiekvieną įvykį ¦ Vecums katrā notikumā ¦ Vanus iga sündmuse ajal
+Anomalies en rouge ¦ Anomalijos raudonai ¦ Anomālijas sarkanā krāsā ¦ Kõrvalekalded punasega
+Aucune vue pour l’instant : règle la frise, puis « 💾 Enregistrer la vue ». ¦ Kol kas nėra rodinių: sureguliuok laiko juostą, tada „💾 Išsaugoti rodinį“. ¦ Pagaidām nav skatu: iestati laika joslu, tad “💾 Saglabāt skatu”. ¦ Vaateid veel pole: sea ajatelg, siis „💾 Salvesta vaade“.
+Le monde autour… ¦ Pasaulis aplink… ¦ Pasaule apkārt… ¦ Maailm ümberringi…
+Chercher dans la frise… (nom, lieu, année) ¦ Ieškoti laiko juostoje… (vardas, vieta, metai) ¦ Meklēt laika joslā… (vārds, vieta, gads) ¦ Otsi ajateljelt… (nimi, koht, aasta)
+Chronologie de {x} ¦ Chronologija: {x} ¦ Hronoloģija: {x} ¦ Ajajoon: {x}
+Vue « {name} » affichée. ¦ Rodinys „{name}“ parodytas. ¦ Skats “{name}” parādīts. ¦ Vaade „{name}“ kuvatud.
+Vue « {name} » supprimée ¦ Rodinys „{name}“ ištrintas ¦ Skats “{name}” izdzēsts ¦ Vaade „{name}“ kustutatud
+Partir de cette personne ¦ Pradėti nuo šio asmens ¦ Sākt no šīs personas ¦ Alusta sellest isikust
+Comparer avec la personne de départ ¦ Palyginti su pradiniu asmeniu ¦ Salīdzināt ar sākuma personu ¦ Võrdle lähteisikuga
+Copier la ligne ¦ Kopijuoti eilutę ¦ Kopēt rindu ¦ Kopeeri rida
+Supprimer l’événement ¦ Ištrinti įvykį ¦ Dzēst notikumu ¦ Kustuta sündmus
+Événement supprimé ¦ Įvykis ištrintas ¦ Notikums izdzēsts ¦ Sündmus kustutatud
+La frise n’a pas pu se charger. ¦ Laiko juostos nepavyko įkelti. ¦ Laika joslu neizdevās ielādēt. ¦ Ajatelge ei õnnestunud laadida.
+Choisis un lieu dans la colonne de gauche. ¦ Pasirink vietą kairiajame stulpelyje. ¦ Izvēlies vietu kreisajā kolonnā. ¦ Vali koht vasakust veerust.
+Tout ce qui s’y est passé : naissances, mariages, décès, domiciles… familles comprises. ¦ Viskas, kas ten įvyko: gimimai, santuokos, mirtys, gyvenamosios vietos… įskaitant šeimas. ¦ Viss, kas tur notika: dzimšanas, laulības, nāves, dzīvesvietas… ieskaitot ģimenes. ¦ Kõik, mis seal juhtus: sünnid, abielud, surmad, elukohad… koos perekondadega.
+PERSONNE {l} ¦ ASMUO {l} ¦ PERSONA {l} ¦ ISIK {l}
+{n} frises parallèles ¦ {n} lygiagrečios laiko juostos ¦ {n} paralēlas laika joslas ¦ {n} paralleelset ajatelge
+{a} événements sur {b} ¦ {a} iš {b} įvykių ¦ {a} no {b} notikumiem ¦ {a} sündmust {b}-st
+Tout ce qui s’est passé à {x}, familles comprises. ¦ Viskas, kas įvyko vietoje {x}, įskaitant šeimas. ¦ Viss, kas notika vietā {x}, ieskaitot ģimenes. ¦ Kõik, mis juhtus kohas {x}, koos perekondadega.
+Événements connus autour de {x}, classés sans modifier la formulation originale des dates. ¦ Žinomi įvykiai apie {x}, surikiuoti nekeičiant originalios datų formuluotės. ¦ Zināmie notikumi ap {x}, sakārtoti, nemainot datumu sākotnējo formulējumu. ¦ Teadaolevad sündmused {x} ümber, järjestatud kuupäevade algset sõnastust muutmata.
+Exporter la frise (⌘E) ¦ Eksportuoti laiko juostą (⌘E) ¦ Eksportēt laika joslu (⌘E) ¦ Ekspordi ajatelg (⌘E)
+Imprimer la frise (⌘P) ¦ Spausdinti laiko juostą (⌘P) ¦ Drukāt laika joslu (⌘P) ¦ Prindi ajatelg (⌘P)
+Enregistrer la vue ¦ Išsaugoti rodinį ¦ Saglabāt skatu ¦ Salvesta vaade
+Rien à exporter. ¦ Nėra ką eksportuoti. ¦ Nav ko eksportēt. ¦ Pole midagi eksportida.
+Ce navigateur ne sait pas faire une image de la frise : choisis PDF. ¦ Ši naršyklė negali padaryti laiko juostos vaizdo: pasirink PDF. ¦ Šī pārlūkprogramma nevar izveidot laika joslas attēlu: izvēlies PDF. ¦ See brauser ei oska ajateljest pilti teha: vali PDF.
+Image impossible : la frise est trop grande. ¦ Vaizdas negalimas: laiko juosta per didelė. ¦ Attēls nav iespējams: laika josla ir par lielu. ¦ Pilt ei õnnestu: ajatelg on liiga suur.
+tableur ¦ skaičiuoklė ¦ izklājlapa ¦ tabelarvutus
+👶 Naissances et baptêmes ¦ 👶 Gimimai ir krikštai ¦ 👶 Dzimšanas un kristības ¦ 👶 Sünnid ja ristimised
+💍 Mariages et unions ¦ 💍 Santuokos ir sąjungos ¦ 💍 Laulības un savienības ¦ 💍 Abielud ja kooselud
+✝️ Décès et sépultures ¦ ✝️ Mirtys ir palaidojimai ¦ ✝️ Nāves un apbedījumi ¦ ✝️ Surmad ja matmised
+🔨 Métiers ¦ 🔨 Profesijos ¦ 🔨 Profesijas ¦ 🔨 Ametid
+🏠 Domiciles et départs ¦ 🏠 Gyvenamosios vietos ir išvykimai ¦ 🏠 Dzīvesvietas un aizbraukšanas ¦ 🏠 Elukohad ja lahkumised
+🎖 Militaire ¦ 🎖 Karinė tarnyba ¦ 🎖 Militārais dienests ¦ 🎖 Sõjaväeteenistus
+🏠 Recensements ¦ 🏠 Surašymai ¦ 🏠 Tautas skaitīšanas ¦ 🏠 Rahvaloendused
+📌 Autres ¦ 📌 Kita ¦ 📌 Citi ¦ 📌 Muud
+Aucune vue pour l’instant : choisis les fiches, puis « 💾 Enregistrer la vue ». ¦ Kol kas nėra rodinių: pasirink korteles, tada „💾 Išsaugoti rodinį“. ¦ Pagaidām nav skatu: izvēlies kartītes, tad “💾 Saglabāt skatu”. ¦ Vaateid veel pole: vali kaardid, siis „💾 Salvesta vaade“.
+Choisir {x} ¦ Pasirinkti {x} ¦ Izvēlēties {x} ¦ Vali {x}
+Inverser A et B ¦ Sukeisti A ir B ¦ Samainīt A un B ¦ Vaheta A ja B
+L’acte transcrit ¦ Transkribuotas aktas ¦ Pārrakstītais akts ¦ Ümberkirjutatud akt
+Choisir un acte… ¦ Pasirinkti aktą… ¦ Izvēlēties aktu… ¦ Vali akt…
+Aucun acte transcrit pour l’instant. ¦ Kol kas nėra transkribuotų aktų. ¦ Pagaidām nav pārrakstītu aktu. ¦ Ümberkirjutatud akte veel pole.
+Personne {l} ¦ Asmuo {l} ¦ Persona {l} ¦ Isik {l}
+Retirer cette fiche de la comparaison ¦ Pašalinti šią kortelę iš palyginimo ¦ Izņemt šo kartīti no salīdzinājuma ¦ Eemalda see kaart võrdlusest
+Ajouter une fiche ({l}) ¦ Pridėti kortelę ({l}) ¦ Pievienot kartīti ({l}) ¦ Lisa kaart ({l})
+Les actes viennent de Listes → Transcriptions d’actes. ¦ Aktai ateina iš Sąrašai → Dokumentų nuorašai. ¦ Akti nāk no Saraksti → Dokumentu atšifrējumi. ¦ Aktid tulevad kohast Loendid → Dokumentide ümberkirjutused.
+naissance : {a} / {b} ¦ gimimas: {a} / {b} ¦ dzimšana: {a} / {b} ¦ sünd: {a} / {b}
+décès : {a} / {b} ¦ mirtis: {a} / {b} ¦ nāve: {a} / {b} ¦ surm: {a} / {b}
+Parents en commun ¦ Bendri tėvai ¦ Kopīgi vecāki ¦ Ühised vanemad
+Chargement de la comparaison… ¦ Įkeliamas palyginimas… ¦ Ielādē salīdzinājumu… ¦ Võrdluse laadimine…
+Exporter la comparaison (⌘E) ¦ Eksportuoti palyginimą (⌘E) ¦ Eksportēt salīdzinājumu (⌘E) ¦ Ekspordi võrdlus (⌘E)
+Imprimer la comparaison (⌘P) ¦ Spausdinti palyginimą (⌘P) ¦ Drukāt salīdzinājumu (⌘P) ¦ Prindi võrdlus (⌘P)
+Garder une seule fiche : choisis la valeur de A ou de B ligne à ligne ¦ Palikti tik vieną kortelę: pasirink A arba B reikšmę eilutė po eilutės ¦ Paturēt tikai vienu kartīti: izvēlies A vai B vērtību rindu pa rindai ¦ Jäta alles ainult üks kaart: vali A või B väärtus rida-realt
+Fusionner… ¦ Sujungti… ¦ Apvienot… ¦ Ühenda…
+Comparer des fiches ¦ Palyginti korteles ¦ Salīdzināt kartītes ¦ Võrdle kaarte
+Pour décider si deux fiches sont des doublons, des homonymes ou deux branches distinctes. ¦ Kad nuspręstum, ar dvi kortelės yra dublikatai, bendrapavardžiai ar dvi skirtingos šakos. ¦ Lai izlemtu, vai divas kartītes ir dublikāti, vārdabrāļi vai divi atsevišķi atzari. ¦ Et otsustada, kas kaks kaarti on duplikaadid, nimekaimud või kaks eri haru.
+Sans doute la même personne ¦ Tikriausiai tas pats asmuo ¦ Droši vien tā pati persona ¦ Tõenäoliselt sama isik
+Peut-être la même personne ¦ Galbūt tas pats asmuo ¦ Varbūt tā pati persona ¦ Võib-olla sama isik
+Sans doute deux personnes différentes ¦ Tikriausiai du skirtingi asmenys ¦ Droši vien divas dažādas personas ¦ Tõenäoliselt kaks eri isikut
+rien à comparer ¦ nėra ką palyginti ¦ nav ko salīdzināt ¦ pole midagi võrrelda
+Sexes différents ¦ Skirtingos lytys ¦ Atšķirīgs dzimums ¦ Erinev sugu
+Une aide pour décider, pas une preuve : regarde aussi les sources. ¦ Pagalba sprendžiant, ne įrodymas: pažiūrėk ir į šaltinius. ¦ Palīdzība lēmumam, nevis pierādījums: apskati arī avotus. ¦ Abi otsustamisel, mitte tõend: vaata ka allikaid.
+Choisis cette personne dans la colonne de gauche. ¦ Pasirink šį asmenį kairiajame stulpelyje. ¦ Izvēlies šo personu kreisajā kolonnā. ¦ Vali see isik vasakust veerust.
+Ressemblance avec A : {n} % ¦ Panašumas į A: {n} % ¦ Līdzība ar A: {n} % ¦ Sarnasus A-ga: {n} %
+Naissance en face de naissance, décès en face de décès ; les lignes différentes sont marquées. ¦ Gimimas prieš gimimą, mirtis prieš mirtį; skirtingos eilutės pažymėtos. ¦ Dzimšana pretī dzimšanai, nāve pretī nāvei; atšķirīgās rindas ir atzīmētas. ¦ Sünd sünni vastas, surm surma vastas; erinevad read on märgitud.
+Parents : {x} ¦ Tėvai: {x} ¦ Vecāki: {x} ¦ Vanemad: {x}
+Conjoints : {x} ¦ Sutuoktiniai: {x} ¦ Laulātie: {x} ¦ Abikaasad: {x}
+Enfants : {x} ¦ Vaikai: {x} ¦ Bērni: {x} ¦ Lapsed: {x}
+Fusionner ces deux fiches ¦ Sujungti šias dvi korteles ¦ Apvienot šīs divas kartītes ¦ Ühenda need kaks kaarti
+Pour chaque ligne, choisis la valeur à garder. Les sources, médias, notes, liens de famille des deux fiches sont tous gardés. ¦ Kiekvienai eilutei pasirink, kurią reikšmę palikti. Abiejų kortelių šaltiniai, medija, pastabos ir šeimos ryšiai išsaugomi visi. ¦ Katrai rindai izvēlies, kuru vērtību paturēt. Abu kartīšu avoti, mediji, piezīmes un ģimenes saites tiek saglabātas visas. ¦ Vali iga rea jaoks väärtus, mis jääb alles. Mõlema kaardi allikad, meedia, märkmed ja perekonnasidemed jäävad kõik alles.
+Fiche gardée : ¦ Paliekama kortelė: ¦ Paturētā kartīte: ¦ Allesjäetav kaart:
+Rien à choisir : les deux fiches ne se contredisent pas. ¦ Nėra ką rinktis: kortelės viena kitai neprieštarauja. ¦ Nav ko izvēlēties: kartītes viena otrai nav pretrunā. ¦ Pole midagi valida: kaardid ei ole vastuolus.
+{n} événement(s) présent(s) sur une seule fiche : gardé(s) tel(s) quel(s). ¦ {n} įvyk.(-iai) tik vienoje kortelėje: paliekama kaip yra. ¦ {n} notikums(-i) tikai vienā kartītē: saglabāts(-i) kā ir. ¦ {n} sündmus(t) ainult ühel kaardil: jäetakse alles nagu on.
+Fusionner les deux fiches ? ¦ Sujungti abi korteles? ¦ Apvienot abas kartītes? ¦ Kas ühendada kaks kaarti?
+« {b} » sera fusionnée dans « {a} » : tout ce qui la concerne passe sur « {a} », puis elle disparaît. Une fusion ne peut pas être annulée. ¦ „{b}“ bus sujungta į „{a}“: viskas, kas su ja susiję, pereina į „{a}“, tada ji išnyksta. Sujungimo atšaukti negalima. ¦ “{b}” tiks apvienota ar “{a}”: viss, kas uz to attiecas, pāriet uz “{a}”, tad tā pazūd. Apvienošanu nevar atsaukt. ¦ „{b}“ ühendatakse kaardiga „{a}“: kõik, mis seda puudutab, läheb üle kaardile „{a}“, siis see kaob. Ühendamist ei saa tagasi võtta.
+🔀 Fusionner ¦ 🔀 Sujungti ¦ 🔀 Apvienot ¦ 🔀 Ühenda
+Fusion faite, mais une valeur n’a pas pu être reprise : {err} ¦ Sujungta, bet vienos reikšmės nepavyko perkelti: {err} ¦ Apvienots, bet vienu vērtību neizdevās pārņemt: {err} ¦ Ühendatud, kuid ühte väärtust ei õnnestunud üle võtta: {err}
+Fiches fusionnées : {n} événement(s) en double retiré(s) ¦ Kortelės sujungtos: pašalinta pasikartojančių įvykių: {n} ¦ Kartītes apvienotas: noņemti {n} dubulti notikumi ¦ Kaardid ühendatud: eemaldatud {n} topeltsündmust
+événements en double remis ¦ pasikartojantys įvykiai grąžinti ¦ dubultie notikumi atjaunoti ¦ topeltsündmused taastatud
+Fiches fusionnées. ¦ Kortelės sujungtos. ¦ Kartītes apvienotas. ¦ Kaardid ühendatud.
+Comparer avec un acte ¦ Palyginti su aktu ¦ Salīdzināt ar aktu ¦ Võrdle aktiga
+Cet acte parle-t-il de cette personne ? Les noms, années et lieux de la fiche sont cherchés dans le texte. ¦ Ar šis aktas kalba apie šį asmenį? Kortelės vardų, metų ir vietų ieškoma tekste. ¦ Vai šis akts runā par šo personu? Kartītes vārdi, gadi un vietas tiek meklēti tekstā. ¦ Kas see akt räägib sellest isikust? Kaardi nimesid, aastaid ja kohti otsitakse tekstist.
+Concordance {n} % ¦ Atitikimas {n} % ¦ Atbilstība {n} % ¦ Vastavus {n} %
+Cet acte parle sans doute de cette personne ¦ Šis aktas tikriausiai kalba apie šį asmenį ¦ Šis akts droši vien runā par šo personu ¦ See akt räägib tõenäoliselt sellest isikust
+Cet acte parle peut-être de cette personne ¦ Šis aktas galbūt kalba apie šį asmenį ¦ Šis akts varbūt runā par šo personu ¦ See akt räägib võib-olla sellest isikust
+Peu d’indices dans cet acte ¦ Mažai užuominų šiame akte ¦ Maz norāžu šajā aktā ¦ Selles aktis on vähe vihjeid
+Texte vide. ¦ Tuščias tekstas. ¦ Tukšs teksts. ¦ Tühi tekst.
+Choisis un acte transcrit dans la colonne de gauche. ¦ Pasirink transkribuotą aktą kairiajame stulpelyje. ¦ Izvēlies pārrakstītu aktu kreisajā kolonnā. ¦ Vali ümberkirjutatud akt vasakust veerust.
+Année de l’acte dans sa vie ¦ Akto metai jo gyvenime ¦ Akta gads viņa dzīvē ¦ Akti aasta tema elus
+acte de {y}, fiche {a}–{b} ¦ {y} m. aktas, kortelė {a}–{b} ¦ {y}. gada akts, kartīte {a}–{b} ¦ akt aastast {y}, kaart {a}–{b}
+acte sans année ¦ aktas be metų ¦ akts bez gada ¦ akt ilma aastata
+Même année qu’un événement ¦ Tie patys metai kaip įvykio ¦ Tas pats gads kā notikumam ¦ Sama aasta mis mõnel sündmusel
+Choisis un média à gauche pour {x}. ¦ Pasirink mediją kairėje: {x}. ¦ Izvēlies medijus pa kreisi priekš {x}. ¦ Vali vasakult meedia jaoks {x}.
+Place du rideau ¦ Užuolaidos vieta ¦ Aizkara vieta ¦ Eesriide asukoht
+Image retirée de la comparaison ¦ Vaizdas pašalintas iš palyginimo ¦ Attēls izņemts no salīdzinājuma ¦ Pilt eemaldatud võrdlusest
+Image A ¦ Vaizdas A ¦ Attēls A ¦ Pilt A
+Image B ¦ Vaizdas B ¦ Attēls B ¦ Pilt B
+{a} et un acte ¦ {a} ir aktas ¦ {a} un akts ¦ {a} ja akt
+Comparaison de deux images ¦ Dviejų vaizdų palyginimas ¦ Divu attēlu salīdzinājums ¦ Kahe pildi võrdlus
+Comparaison avec un acte ¦ Palyginimas su aktu ¦ Salīdzinājums ar aktu ¦ Võrdlus aktiga
+Comparaison : {x} ¦ Palyginimas: {x} ¦ Salīdzinājums: {x} ¦ Võrdlus: {x}
+Ressemblance A–B ¦ Panašumas A–B ¦ Līdzība A–B ¦ Sarnasus A–B
+, une carte ¦ , žemėlapis ¦ , karte ¦ , kaart
+12/05/1882, vers 1880… ¦ 12/05/1882, apie 1880… ¦ 12/05/1882, ap 1880… ¦ 12/05/1882, umbes 1880…
+7 derniers jours ¦ Paskutinės 7 dienos ¦ Pēdējās 7 dienas ¦ Viimased 7 päeva
+Ajoute la date de mariage de {a} et {b}. ¦ Pridėk {a} ir {b} santuokos datą. ¦ Pievieno {a} un {b} laulības datumu. ¦ Lisa {a} ja {b} abiellumise kuupäev.
+Ajoute la naissance de {a}. ¦ Pridėk {a} gimimą. ¦ Pievieno {a} dzimšanu. ¦ Lisa {a} sünd.
+Aucun objectif pour l’instant ¦ Kol kas nėra tikslų ¦ Pagaidām nav mērķu ¦ Eesmärke veel pole
+Aucun trésor ne correspond ¦ Neatitinka nė vienas lobis ¦ Neviens dārgums neatbilst ¦ Ükski aare ei vasta
+Bilan du {date} ¦ Suvestinė, {date} ¦ Pārskats {date} ¦ Kokkuvõte {date}
+Cacher ce trésor ¦ Slėpti šį lobį ¦ Paslēpt šo dārgumu ¦ Peida see aare
+Ce jour-là, le {day} ¦ Tą dieną, {day} ¦ Tajā dienā, {day} ¦ Sel päeval, {day}
+Ce qui est arrivé à la famille ce jour du calendrier : naissances, mariages, décès… en une carte à partager. ¦ Kas šeimai nutiko šią kalendoriaus dieną: gimimai, santuokos, mirtys… vienoje kortelėje, kuria gali pasidalyti. ¦ Kas ģimenē notika šajā kalendāra dienā: dzimšanas, laulības, nāves… vienā kartītē, ko kopīgot. ¦ Mis perega sel kalendripäeval juhtus: sünnid, abielud, surmad… ühel jagataval kaardil.
+Cette page montre seulement : <b>{what}</b> ¦ Šis puslapis rodo tik: <b>{what}</b> ¦ Šī lapa rāda tikai: <b>{what}</b> ¦ See leht näitab ainult: <b>{what}</b>
+Chasse supprimée. ¦ Paieška ištrinta. ¦ Meklēšana izdzēsta. ¦ Aardejaht kustutatud.
+Chercher un trésor ¦ Ieškoti lobio ¦ Meklēt dārgumu ¦ Otsi aaret
+Chercher un trésor… ¦ Ieškoti lobio… ¦ Meklēt dārgumu… ¦ Otsi aaret…
+Choisis au moins une question. ¦ Pasirink bent vieną klausimą. ¦ Izvēlies vismaz vienu jautājumu. ¦ Vali vähemalt üks küsimus.
+Choisis d’abord quoi montrer. ¦ Pirmiausia pasirink, ką rodyti. ¦ Vispirms izvēlies, ko rādīt. ¦ Vali kõigepealt, mida näidata.
+Choisis un widget dans la colonne de gauche (+). ¦ Pasirink valdiklį kairiajame stulpelyje (+). ¦ Izvēlies logrīku kreisajā kolonnā (+). ¦ Vali vidin vasakust veerust (+).
+Combien ¦ Kiek ¦ Cik ¦ Kui palju
+Copier vers… ¦ Kopijuoti į… ¦ Kopēt uz… ¦ Kopeeri…
+Croissance ¦ Augimas ¦ Pieaugums ¦ Kasv
+Croissance de la base mois par mois ¦ Bazės augimas kas mėnesį ¦ Datubāzes pieaugums pa mēnešiem ¦ Andmebaasi kasv kuude kaupa
+Croissance indisponible. ¦ Augimas nepasiekiamas. ¦ Pieaugums nav pieejams. ¦ Kasv pole saadaval.
+Dans la fenêtre, « ⤓ PDF » ¦ Lange „⤓ PDF“ ¦ Logā “⤓ PDF” ¦ Aknas „⤓ PDF“
+Date butoir ¦ Terminas ¦ Termiņš ¦ Tähtaeg
+De cujus (ses ancêtres et descendants) ¦ De cujus (jo protėviai ir palikuonys) ¦ De cujus (viņa senči un pēcnācēji) ¦ De cujus (tema esivanemad ja järeltulijad)
+Des objectifs au long cours (« 8 générations complètes d’ici décembre », « 100 actes transcrits ») avec une barre de progression calculée sur la base et une date butoir. ¦ Ilgalaikiai tikslai („8 pilnos kartos iki gruodžio“, „100 transkribuotų aktų“) su iš bazės apskaičiuota pažangos juosta ir terminu. ¦ Ilgtermiņa mērķi (“8 pilnas paaudzes līdz decembrim”, “100 pārrakstīti akti”) ar progresa joslu, kas aprēķināta no datubāzes, un termiņu. ¦ Pikaajalised eesmärgid („8 täielikku põlvkonda detsembriks“, „100 ümberkirjutatud akti“) andmebaasist arvutatud edenemisriba ja tähtajaga.
+Des questions sur un ancêtre envoyées en un fichier à un proche ; ses réponses reviennent dans les fiches. ¦ Klausimai apie protėvį, išsiųsti vienu failu giminaičiui; jo atsakymai grįžta į korteles. ¦ Jautājumi par senci, nosūtīti vienā failā radiniekam; viņa atbildes atgriežas kartītēs. ¦ Küsimused esivanema kohta ühe failina sugulasele; tema vastused jõuavad tagasi kaartidele.
+Dossier (enquête) ¦ Aplankas (tyrimas) ¦ Mape (izpēte) ¦ Kaust (uurimus)
+Démarre le chronomètre quand tu te mets à chercher : le temps passé est rangé par jour et par sujet. ¦ Paleisk chronometrą, kai pradedi ieškoti: sugaištas laikas sudedamas pagal dieną ir temą. ¦ Palaid hronometru, kad sāc meklēt: pavadītais laiks tiek sakārtots pa dienām un tēmām. ¦ Käivita stopper, kui hakkad otsima: kulunud aeg salvestatakse päeva ja teema järgi.
+En plein écran : le portrait, chaque étape avec sa date et son lieu, les photos, la carte. Espace = pause, flèches = avant / après, Échap = fin. ¦ Visame ekrane: portretas, kiekvienas etapas su data ir vieta, nuotraukos, žemėlapis. Tarpas = pauzė, rodyklės = pirmyn / atgal, Esc = pabaiga. ¦ Pilnekrānā: portrets, katrs posms ar datumu un vietu, fotoattēli, karte. Atstarpe = pauze, bultiņas = uz priekšu / atpakaļ, Esc = beigas. ¦ Täisekraanil: portree, iga etapp kuupäeva ja kohaga, fotod, kaart. Tühik = paus, nooled = edasi / tagasi, Esc = lõpp.
+Entretien supprimé (le son reste dans les médias). ¦ Pokalbis ištrintas (garsas lieka medijoje). ¦ Intervija izdzēsta (skaņa paliek medijos). ¦ Intervjuu kustutatud (heli jääb meediasse).
+Essaie le lendemain, ou complète les dates exactes des actes. ¦ Pabandyk kitą dieną arba papildyk tikslias aktų datas. ¦ Mēģini nākamo dienu vai papildini precīzus aktu datumus. ¦ Proovi järgmist päeva või täienda aktide täpseid kuupäevi.
+Essaie un autre mot : « lettre », « carte », « jeu »… ¦ Pabandyk kitą žodį: „laiškas“, „žemėlapis“, „žaidimas“… ¦ Mēģini citu vārdu: “vēstule”, “karte”, “spēle”… ¦ Proovi muud sõna: „kiri“, „kaart“, „mäng“…
+Et toi, que sais-tu encore de {name} ? ¦ O ką tu dar žinai apie {name}? ¦ Un ko tu vēl zini par {name}? ¦ Ja sina, mida sa veel tead isikust {name}?
+Ex. : 8 générations complètes d’ici décembre, 100 actes transcrits. ¦ Pvz.: 8 pilnos kartos iki gruodžio, 100 transkribuotų aktų. ¦ Piem.: 8 pilnas paaudzes līdz decembrim, 100 pārrakstīti akti. ¦ Nt: 8 täielikku põlvkonda detsembriks, 100 ümberkirjutatud akti.
+Exporter ce widget (PDF) ¦ Eksportuoti šį valdiklį (PDF) ¦ Eksportēt šo logrīku (PDF) ¦ Ekspordi see vidin (PDF)
+Favori ¦ Mėgstamas ¦ Izlase ¦ Lemmik
+Filtre retiré : toute la base. ¦ Filtras pašalintas: visa bazė. ¦ Filtrs noņemts: visa datubāze. ¦ Filter eemaldatud: kogu andmebaas.
+Général ¦ Bendra ¦ Vispārīgi ¦ Üldine
+Ils ont {n}, mais pas encore de mariage noté. ¦ Jie turi {n}, bet santuoka dar neužrašyta. ¦ Viņiem ir {n}, bet laulība vēl nav atzīmēta. ¦ Neil on {n}, kuid abielu pole veel märgitud.
+Image de la carte (PNG) ¦ Kortelės vaizdas (PNG) ¦ Kartītes attēls (PNG) ¦ Kaardi pilt (PNG)
+La courbe mois par mois des fiches, événements, sources et médias ajoutés, d’après le journal des modifications. ¦ Pridėtų kortelių, įvykių, šaltinių ir medijos kreivė kas mėnesį pagal pakeitimų žurnalą. ¦ Pievienoto kartīšu, notikumu, avotu un mediju līkne pa mēnešiem pēc izmaiņu žurnāla. ¦ Lisatud kaartide, sündmuste, allikate ja meedia kõver kuude kaupa muudatuste logi põhjal.
+La vie de ¦ Gyvenimas: ¦ Dzīve: ¦ Elu:
+Le jour ¦ Diena ¦ Diena ¦ Päev
+Lendemain › ¦ Kita diena › ¦ Nākamā diena › ¦ Järgmine päev ›
+Les questionnaires n’ont pas pu être lus. ¦ Klausimynų nepavyko nuskaityti. ¦ Anketas neizdevās nolasīt. ¦ Küsimustikke ei õnnestunud lugeda.
+Lettre supprimée. ¦ Laiškas ištrintas. ¦ Vēstule izdzēsta. ¦ Kiri kustutatud.
+L’import des réponses n’est pas encore prêt. ¦ Atsakymų importas dar neparuoštas. ¦ Atbilžu imports vēl nav gatavs. ¦ Vastuste import pole veel valmis.
+L’impression n’est pas encore prête : réessaie dans un instant. ¦ Spausdinimas dar neparuoštas: pabandyk po akimirkos. ¦ Drukāšana vēl nav gatava: mēģini vēlreiz pēc brīža. ¦ Printimine pole veel valmis: proovi hetke pärast uuesti.
+Mes questionnaires ¦ Mano klausimynai ¦ Manas anketas ¦ Minu küsimustikud
+Mettre dans une autre page du tableau de bord… ¦ Perkelti į kitą prietaisų skydelio puslapį… ¦ Pārvietot uz citu informācijas paneļa lapu… ¦ Pane töölaua teisele lehele…
+Mettre en favori ¦ Pridėti prie mėgstamų ¦ Pievienot izlasei ¦ Lisa lemmikutesse
+Ni naissance ni baptême sur sa fiche. ¦ Kortelėje nėra nei gimimo, nei krikšto. ¦ Kartītē nav ne dzimšanas, ne kristību. ¦ Kaardil pole sündi ega ristimist.
+Objectif ¦ Tikslas ¦ Mērķis ¦ Eesmärk
+Objectif ajouté. ¦ Tikslas pridėtas. ¦ Mērķis pievienots. ¦ Eesmärk lisatud.
+Objectif en pause. ¦ Tikslas pristabdytas. ¦ Mērķis pauzēts. ¦ Eesmärk peatatud.
+Objectif repris. ¦ Tikslas tęsiamas. ¦ Mērķis atsākts. ¦ Eesmärk jätkub.
+Objectif supprimé. ¦ Tikslas ištrintas. ¦ Mērķis izdzēsts. ¦ Eesmärk kustutatud.
+PDF (bilan imprimable) ¦ PDF (spausdinama suvestinė) ¦ PDF (drukājams pārskats) ¦ PDF (prinditav kokkuvõte)
+Page enregistrée. ¦ Puslapis išsaugotas. ¦ Lapa saglabāta. ¦ Leht salvestatud.
+Page filtrée : {what}. ¦ Puslapis filtruotas: {what}. ¦ Lapa filtrēta: {what}. ¦ Leht filtreeritud: {what}.
+Page web (.html) ¦ Tinklalapis (.html) ¦ Tīmekļa lapa (.html) ¦ Veebileht (.html)
+Page « {name} » supprimée, avec {widgets}. ¦ Puslapis „{name}“ ištrintas kartu su {widgets}. ¦ Lapa “{name}” izdzēsta kopā ar {widgets}. ¦ Leht „{name}“ kustutatud koos: {widgets}.
+Page « {name} » supprimée. ¦ Puslapis „{name}“ ištrintas. ¦ Lapa “{name}” izdzēsta. ¦ Leht „{name}“ kustutatud.
+Pas assez d’éléments pour un diaporama. ¦ Per mažai elementų skaidrių rodymui. ¦ Nepietiek elementu slaidrādei. ¦ Slaidiseansiks pole piisavalt elemente.
+Pas encore de mariage noté pour ce couple. ¦ Šiai porai santuoka dar neužrašyta. ¦ Šim pārim laulība vēl nav atzīmēta. ¦ Sellel paaril pole veel abielu märgitud.
+Passeport supprimé. ¦ Pasas ištrintas. ¦ Pase izdzēsta. ¦ Pass kustutatud.
+Passer › ¦ Praleisti › ¦ Izlaist › ¦ Jäta vahele ›
+Pour qui (le proche qui répond) ¦ Kam (atsakantis giminaitis) ¦ Kam (radinieks, kas atbild) ¦ Kellele (vastav sugulane)
+Prépare-en un ci-dessus : il part en un seul fichier, les réponses reviennent dans les fiches. ¦ Paruošk jį aukščiau: jis išsiunčiamas vienu failu, atsakymai grįžta į korteles. ¦ Sagatavo to augstāk: tā aiziet vienā failā, atbildes atgriežas kartītēs. ¦ Valmista üks ülal ette: see läheb ühe failina, vastused jõuavad tagasi kaartidele.
+Quelle page ? ¦ Kuris puslapis? ¦ Kura lapa? ¦ Milline leht?
+Questionnaire aux anciens ¦ Klausimynas vyresniesiems ¦ Anketa vecākajai paaudzei ¦ Küsimustik vanematele inimestele
+Questionnaire noté comme envoyé. ¦ Klausimynas pažymėtas kaip išsiųstas. ¦ Anketa atzīmēta kā nosūtīta. ¦ Küsimustik märgitud saadetuks.
+Retirer des favoris ¦ Pašalinti iš mėgstamų ¦ Izņemt no izlases ¦ Eemalda lemmikutest
+Rien de noté ce jour-là dans la famille ¦ Tą dieną šeimoje nieko neužrašyta ¦ Tajā dienā ģimenē nekas nav atzīmēts ¦ Sel päeval pole perekonnas midagi märgitud
+Rien d’urgent : tout ce que je sais vérifier est rempli. ¦ Nieko skubaus: viskas, ką moku patikrinti, užpildyta. ¦ Nekā steidzama: viss, ko protu pārbaudīt, ir aizpildīts. ¦ Midagi kiiret pole: kõik, mida oskan kontrollida, on täidetud.
+Secondes par image ¦ Sekundės vienam vaizdui ¦ Sekundes uz attēlu ¦ Sekundit pildi kohta
+Succession ¦ Paveldėjimas ¦ Mantojums ¦ Pärand
+Sur combien de mois ? ¦ Kiek mėnesių? ¦ Cik mēnešiem? ¦ Mitme kuu kohta?
+Sur quel ancêtre ? ¦ Apie kurį protėvį? ¦ Par kuru senci? ¦ Millisest esivanemast?
+Sur quoi ? ¦ Apie ką? ¦ Par ko? ¦ Millest?
+Tableau des chiffres (.csv) ¦ Skaičių lentelė (.csv) ¦ Skaitļu tabula (.csv) ¦ Arvude tabel (.csv)
+Tableau enregistré. ¦ Lentelė išsaugota. ¦ Tabula saglabāta. ¦ Tabel salvestatud.
+Tante Lucie ¦ Teta Lucie ¦ Tante Lucie ¦ Lucie tädi
+Te souviens-tu de sa maison ? ¦ Ar prisimeni jo namus? ¦ Vai atceries viņa māju? ¦ Kas sa mäletad tema maja?
+Tes souvenirs de famille ¦ Tavo šeimos prisiminimai ¦ Tavas ģimenes atmiņas ¦ Sinu perekonnamälestused
+Tous les widgets de la page ne montrent que les fiches choisies (les chiffres clés aussi). ¦ Visi puslapio valdikliai rodo tik pasirinktas korteles (ir pagrindinius skaičius). ¦ Visi lapas logrīki rāda tikai izvēlētās kartītes (arī galvenos skaitļus). ¦ Kõik lehe vidinad näitavad ainult valitud kaarte (ka põhiarvud).
+Tulle ¦ Tulle ¦ Tulle ¦ Tulle
+Un bilan imprimable de la page (A4, ⤓ PDF) ¦ Spausdinama puslapio suvestinė (A4, ⤓ PDF) ¦ Drukājams lapas pārskats (A4, ⤓ PDF) ¦ Lehe prinditav kokkuvõte (A4, ⤓ PDF)
+Un chronomètre de séance : démarre-le quand tu cherches, le temps est rangé par jour et par sujet (une branche, une enquête). Montre aussi le temps des Successions et de l’Atelier. ¦ Seanso chronometras: paleisk jį, kai ieškai; laikas sudedamas pagal dieną ir temą (šaka, tyrimas). Rodo ir Paveldėjimams bei Dirbtuvėms skirtą laiką. ¦ Sesijas hronometrs: palaid to, kad meklē; laiks tiek sakārtots pa dienām un tēmām (atzars, izpēte). Rāda arī Mantojumiem un Darbnīcai veltīto laiku. ¦ Seansi stopper: käivita see, kui otsid; aeg salvestatakse päeva ja teema järgi (haru, uurimus). Näitab ka Pärandite ja Töökoja aega.
+Un nombre plus grand que zéro. ¦ Skaičius, didesnis už nulį. ¦ Skaitlis, kas lielāks par nulli. ¦ Nullist suurem arv.
+Un seul fichier à envoyer par e-mail ; il le remplit chez lui et te renvoie ses réponses. ¦ Vienas failas siųsti el. paštu; jis užpildo jį namie ir atsiunčia tau atsakymus. ¦ Viens fails, ko sūtīt pa e-pastu; viņš to aizpilda mājās un atsūta tev atbildes. ¦ Üksainus fail e-postiga saatmiseks; ta täidab selle kodus ja saadab sulle vastused tagasi.
+Une personne, et le diaporama est prêt : son portrait, chaque étape avec sa date et son lieu, ses photos, la carte de sa vie, une musique douce. ¦ Vienas asmuo, ir skaidrių rodymas paruoštas: portretas, kiekvienas etapas su data ir vieta, nuotraukos, gyvenimo žemėlapis, švelni muzika. ¦ Viena persona, un slaidrāde ir gatava: portrets, katrs posms ar datumu un vietu, fotoattēli, dzīves karte, maiga mūzika. ¦ Üks isik ja slaidiseanss on valmis: portree, iga etapp kuupäeva ja kohaga, fotod, eluteekaart, mahe muusika.
+Une seule chose concrète à faire, remplie dans le widget : la date de mariage d’un couple, la naissance d’un ancêtre… puis ✓. ¦ Vienas konkretus darbas, pildomas valdiklyje: poros santuokos data, protėvio gimimas… tada ✓. ¦ Viens konkrēts darbs, aizpildāms logrīkā: pāra laulības datums, senča dzimšana… tad ✓. ¦ Üksainus konkreetne asi, mis täidetakse vidinas: paari abiellumise kuupäev, esivanema sünd… siis ✓.
+Une vie en diaporama ¦ Gyvenimas skaidrėse ¦ Dzīve slaidrādē ¦ Elu slaidiseansina
+Widget ¦ Valdiklis ¦ Logrīks ¦ Vidin
+Widget copié vers « {name} ». ¦ Valdiklis nukopijuotas į „{name}“. ¦ Logrīks nokopēts uz “{name}”. ¦ Vidin kopeeritud lehele „{name}“.
+Widget dupliqué. ¦ Valdiklis padvigubintas. ¦ Logrīks dublēts. ¦ Vidin dubleeritud.
+Widget « {name} » supprimé. ¦ Valdiklis „{name}“ ištrintas. ¦ Logrīks “{name}” izdzēsts. ¦ Vidin „{name}“ kustutatud.
+actes transcrits ¦ transkribuoti aktai ¦ pārrakstīti akti ¦ ümberkirjutatud akti
+ajoutés sur {n} mois ¦ pridėta per {n} mėn. ¦ pievienoti {n} mēnešos ¦ lisatud {n} kuu jooksul
+ancêtres Sosa ¦ Sosa protėviai ¦ Sosa senči ¦ Sosa esivanemat
+ce mois-ci : +{p} fiches, +{e} événements ¦ šį mėnesį: +{p} kortelių, +{e} įvykių ¦ šomēnes: +{p} kartītes, +{e} notikumi ¦ sel kuul: +{p} kaarti, +{e} sündmust
+ce qui est ajouté chaque mois ¦ kas pridedama kas mėnesį ¦ kas tiek pievienots katru mēnesi ¦ mida lisatakse igal kuul
+date dépassée ¦ terminas praėjo ¦ termiņš pagājis ¦ tähtaeg möödas
+d’ici le {date} ¦ iki {date} ¦ līdz {date} ¦ {date} jooksul
+générations complètes ¦ pilnos kartos ¦ pilnas paaudzes ¦ täielikku põlvkonda
+le total, mois après mois ¦ iš viso, mėnuo po mėnesio ¦ kopā, mēnesi pa mēnesim ¦ kokku, kuu kuu järel
+sources ¦ šaltiniai ¦ avoti ¦ allikat
+trésor ¦ lobis ¦ dārgums ¦ aare
+{n} images : {e} étapes, {ph} photos{map}. ¦ {n} vaizdai: {e} etapai, {ph} nuotraukos{map}. ¦ {n} attēli: {e} posmi, {ph} fotoattēli{map}. ¦ {n} pilti: {e} etappi, {ph} fotot{map}.
+{n} questions ¦ {n} klausimai ¦ {n} jautājumi ¦ {n} küsimust
+{n} réponses ¦ {n} atsakymai ¦ {n} atbildes ¦ {n} vastust
+{t} aujourd’hui ¦ {t} šiandien ¦ {t} šodien ¦ {t} täna
+{v} sur {t} {what} ¦ {v} iš {t} {what} ¦ {v} no {t} {what} ¦ {v}/{t} {what}
+{what} : {who} ¦ {what}: {who} ¦ {what}: {who} ¦ {what}: {who}
+{who} a été baptisé ¦ {who} buvo pakrikštytas ¦ {who} tika kristīts ¦ {who} ristiti
+{who} a été baptisée ¦ {who} buvo pakrikštyta ¦ {who} tika kristīta ¦ {who} ristiti
+{who} a été inhumé ¦ {who} buvo palaidotas ¦ {who} tika apbedīts ¦ {who} maeti maha
+{who} a été inhumée ¦ {who} buvo palaidota ¦ {who} tika apbedīta ¦ {who} maeti maha
+{who} est mort ¦ {who} mirė ¦ {who} nomira ¦ {who} suri
+{who} est morte ¦ {who} mirė ¦ {who} nomira ¦ {who} suri
+{who} est né ¦ {who} gimė ¦ {who} piedzima ¦ {who} sündis
+{who} est née ¦ {who} gimė ¦ {who} piedzima ¦ {who} sündis
+{who} se sont mariés ¦ {who} susituokė ¦ {who} apprecējās ¦ {who} abiellusid
+« {title} » caché (⚙️ Réglages pour le remontrer). ¦ „{title}“ paslėpta (⚙️ Nustatymai, kad vėl parodytum). ¦ “{title}” paslēpts (⚙️ Iestatījumi, lai to atkal parādītu). ¦ „{title}“ peidetud (⚙️ Seaded, et see uuesti näidata).
+« {title} » retiré des favoris. ¦ „{title}“ pašalinta iš mėgstamų. ¦ “{title}” izņemts no izlases. ¦ „{title}“ eemaldatud lemmikutest.
+« {title} » supprimé. ¦ „{title}“ ištrinta. ¦ “{title}” izdzēsts. ¦ „{title}“ kustutatud.
+À ouvrir ou envoyer tel quel ¦ Atidaryti arba siųsti tokį, koks yra ¦ Atvērt vai sūtīt tādu, kāds tas ir ¦ Avamiseks või saatmiseks sellisena
+Écris la date (même approximative). ¦ Įrašyk datą (net apytikslę). ¦ Ieraksti datumu (pat aptuvenu). ¦ Kirjuta kuupäev (ka ligikaudne).
+Écris le nom du proche. ¦ Įrašyk giminaičio vardą. ¦ Ieraksti radinieka vārdu. ¦ Kirjuta sugulase nimi.
+à {n} ans ¦ {n} m. amžiaus ¦ {n} gadu vecumā ¦ {n}-aastaselt
+‹ Veille ¦ ‹ Ankstesnė diena ¦ ‹ Iepriekšējā diena ¦ ‹ Eelmine päev
+↕ Réordonner les widgets ¦ ↕ Pertvarkyti valdiklius ¦ ↕ Pārkārtot logrīkus ¦ ↕ Järjesta vidinad ümber
+⏱ C’est parti : « {s} ». ¦ ⏱ Pradėta: „{s}“. ¦ ⏱ Sākts: “{s}”. ¦ ⏱ Alustatud: „{s}“.
+⏱ Temps de recherche ¦ ⏱ Paieškos laikas ¦ ⏱ Pētniecības laiks ¦ ⏱ Uurimise aeg
+⏱ {t} rangées dans « {s} ». ¦ ⏱ {t} įrašyta į „{s}“. ¦ ⏱ {t} saglabāts “{s}”. ¦ ⏱ {t} salvestatud kohta „{s}“.
+▶ Démarrer ¦ ▶ Pradėti ¦ ▶ Sākt ¦ ▶ Alusta
+✉ Envoyé ¦ ✉ Išsiųsta ¦ ✉ Nosūtīts ¦ ✉ Saadetud
+✓ Mariage ajouté. ¦ ✓ Santuoka pridėta. ¦ ✓ Laulība pievienota. ¦ ✓ Abielu lisatud.
+✓ Naissance ajoutée. ¦ ✓ Gimimas pridėtas. ¦ ✓ Dzimšana pievienota. ¦ ✓ Sünd lisatud.
+✕ Tout montrer ¦ ✕ Rodyti viską ¦ ✕ Rādīt visu ¦ ✕ Näita kõiki
+⭐ Favoris ¦ ⭐ Mėgstami ¦ ⭐ Izlase ¦ ⭐ Lemmikud
+⭐ « {title} » dans les favoris. ¦ ⭐ „{title}“ mėgstamuose. ¦ ⭐ “{title}” izlasē. ¦ ⭐ „{title}“ lemmikutes.
+＋ Ajouter un widget ¦ ＋ Pridėti valdiklį ¦ ＋ Pievienot logrīku ¦ ＋ Lisa vidin
+＋ Objectif ¦ ＋ Tikslas ¦ ＋ Mērķis ¦ ＋ Eesmärk
+🎞 Lancer le diaporama ¦ 🎞 Paleisti skaidrių rodymą ¦ 🎞 Sākt slaidrādi ¦ 🎞 Käivita slaidiseanss
+🎯 Mes objectifs ¦ 🎯 Mano tikslai ¦ 🎯 Mani mērķi ¦ 🎯 Minu eesmärgid
+📈 Croissance de la base ¦ 📈 Bazės augimas ¦ 📈 Datubāzes pieaugums ¦ 📈 Andmebaasi kasv
+📌 « {block} » de {name} mis dans le tableau de bord, page « {page} ». ¦ 📌 {name} „{block}“ įdėta į prietaisų skydelį, puslapis „{page}“. ¦ 📌 {name} “{block}” ievietots informācijas panelī, lapa “{page}”. ¦ 📌 {name} „{block}“ pandud töölauale, leht „{page}“.
+📚 Atelier ¦ 📚 Dirbtuvės ¦ 📚 Darbnīca ¦ 📚 Töökoda
+📮 Préparer et télécharger ¦ 📮 Paruošti ir atsisiųsti ¦ 📮 Sagatavot un lejupielādēt ¦ 📮 Valmista ette ja laadi alla
+🔎 Filtrer cette page ¦ 🔎 Filtruoti šį puslapį ¦ 🔎 Filtrēt šo lapu ¦ 🔎 Filtreeri seda lehte
+🔎 Filtrer cette page… ¦ 🔎 Filtruoti šį puslapį… ¦ 🔎 Filtrēt šo lapu… ¦ 🔎 Filtreeri seda lehte…
+🕘 Récents ¦ 🕘 Naujausi ¦ 🕘 Nesenie ¦ 🕘 Hiljutised
+🧭 Prochaine action ¦ 🧭 Kitas veiksmas ¦ 🧭 Nākamā darbība ¦ 🧭 Järgmine samm
+(inconnus : {list}) ¦ (nežinomi: {list}) ¦ (nezināmie: {list}) ¦ (tundmatud: {list})
+AVANCEMENT ¦ EIGA ¦ PROGRESS ¦ EDENEMINE
+Acte de naissance ou de baptême ¦ Gimimo ar krikšto aktas ¦ Dzimšanas vai kristību akts ¦ Sünni- või ristimisakt
+Affichage des pistes ¦ Užuominų rodymas ¦ Pavedienu attēlojums ¦ Vihjete kuvamine
+Ajouter en note sur la fiche ¦ Pridėti kaip pastabą kortelėje ¦ Pievienot kā piezīmi kartītē ¦ Lisa märkmena kaardile
+Années parcourues ¦ Peržiūrėti metai ¦ Pārskatītie gadi ¦ Läbivaadatud aastad
+Années parcourues : de ¦ Peržiūrėti metai: nuo ¦ Pārskatītie gadi: no ¦ Läbivaadatud aastad: alates
+Argument de preuve ¦ Įrodymo argumentas ¦ Pierādījuma arguments ¦ Tõendav põhjendus
+Arrêter le chronomètre ¦ Sustabdyti chronometrą ¦ Apturēt hronometru ¦ Peata stopper
+Aucun groupe. ¦ Grupių nėra. ¦ Nav grupu. ¦ Gruppe pole.
+Aucun test. ¦ Testų nėra. ¦ Nav testu. ¦ Teste pole.
+Aucune piste dans cette enquête. ¦ Šiame tyrime užuominų nėra. ¦ Šajā izpētē nav pavedienu. ¦ Selles uurimuses pole vihjeid.
+Aucune piste. ¦ Užuominų nėra. ¦ Nav pavedienu. ¦ Vihjeid pole.
+Battue « {title} » supprimée ¦ Šukavimas „{title}“ ištrintas ¦ Ķemmēšana “{title}” izdzēsta ¦ Läbikamm „{title}“ kustutatud
+CONCLUSION ¦ IŠVADA ¦ SECINĀJUMS ¦ JÄRELDUS
+Ce que l’enquête a établi ¦ Ką nustatė tyrimas ¦ Ko izpēte noskaidroja ¦ Mida uurimus tuvastas
+Ce qui est reconstitué ¦ Kas atkurta ¦ Kas ir rekonstruēts ¦ Mis on taastatud
+Chargement de la battue… ¦ Įkeliamas šukavimas… ¦ Ielādē ķemmēšanu… ¦ Läbikammi laadimine…
+Chargement de l’enquête… ¦ Įkeliamas tyrimas… ¦ Ielādē izpēti… ¦ Uurimuse laadimine…
+Chargement des battues… ¦ Įkeliami šukavimai… ¦ Ielādē ķemmēšanas… ¦ Läbikammide laadimine…
+Chargement des enquêtes… ¦ Įkeliami tyrimai… ¦ Ielādē izpētes… ¦ Uurimuste laadimine…
+Chercher dans cette page… ¦ Ieškoti šiame puslapyje… ¦ Meklēt šajā lapā… ¦ Otsi sellelt lehelt…
+Chercher une rubrique… ¦ Ieškoti skilties… ¦ Meklēt sadaļu… ¦ Otsi rubriiki…
+Choisis la personne cherchée. ¦ Pasirink ieškomą asmenį. ¦ Izvēlies meklēto personu. ¦ Vali otsitav isik.
+Chronologie des pistes ¦ Užuominų chronologija ¦ Pavedienu hronoloģija ¦ Vihjete ajajoon
+Clic sur un morceau : changer son grand-parent ou le retirer. ¦ Spustelk ant gabalo: pakeisk jo senelį ar pašalink jį. ¦ Klikšķis uz gabala: mainīt tā vecvecāku vai to noņemt. ¦ Klõpsa tükil: muuda selle vanavanemat või eemalda see.
+Coller des correspondances partagées ¦ Įklijuoti bendrus atitikmenis ¦ Ielīmēt kopīgās sakritības ¦ Kleebi ühised vasted
+Commune de départ ¦ Pradinė gyvenvietė ¦ Sākuma pagasts ¦ Lähtevald
+Communes terminées ¦ Baigtos gyvenvietės ¦ Pabeigtie pagasti ¦ Lõpetatud vallad
+Comprendre et régler ¦ Suprasti ir nustatyti ¦ Saprast un iestatīt ¦ Mõista ja seadista
+Conclue le {d} ¦ Užbaigta {d} ¦ Pabeigta {d} ¦ Lõpetatud {d}
+Conclure l’enquête ¦ Užbaigti tyrimą ¦ Pabeigt izpēti ¦ Lõpeta uurimus
+Conclusion : {title} ¦ Išvada: {title} ¦ Secinājums: {title} ¦ Järeldus: {title}
+Conclusion ajoutée sur la fiche de {name} ¦ Išvada pridėta į {name} kortelę ¦ Secinājums pievienots {name} kartītei ¦ Järeldus lisatud isiku {name} kaardile
+Conclusion enregistrée ¦ Išvada išsaugota ¦ Secinājums saglabāts ¦ Järeldus salvestatud
+Contrat de mariage chez le notaire ¦ Vedybų sutartis pas notarą ¦ Laulības līgums pie notāra ¦ Abieluleping notari juures
+Correspondance supprimée ¦ Atitikmuo ištrintas ¦ Sakritība izdzēsta ¦ Vaste kustutatud
+Correspondance « {name} » supprimée ¦ Atitikmuo „{name}“ ištrintas ¦ Sakritība “{name}” izdzēsta ¦ Vaste „{name}“ kustutatud
+Correspondances ADN ¦ DNR atitikmenys ¦ DNS sakritības ¦ DNA vasted
+Correspondances introuvables. ¦ Atitikmenų nerasta. ¦ Sakritības nav atrastas. ¦ Vasteid ei leitud.
+Correspondances montrées ¦ Rodomi atitikmenys ¦ Parādītās sakritības ¦ Näidatud vasted
+Correspondances partagées ¦ Bendri atitikmenys ¦ Kopīgās sakritības ¦ Ühised vasted
+Corrigé pour l’endogamie ¦ Pataisyta dėl endogamijos ¦ Labots endogāmijai ¦ Korrigeeritud endogaamia järgi
+Couleurs de la carte ¦ Žemėlapio spalvos ¦ Kartes krāsas ¦ Kaardi värvid
+Crée un phasage, puis ajoute les frères et sœurs testés. ¦ Sukurk fazavimą, tada pridėk ištirtus brolius ir seseris. ¦ Izveido fāzēšanu, tad pievieno testētos brāļus un māsas. ¦ Loo faasimine, siis lisa testitud õed-vennad.
+Créer l’enquête ¦ Sukurti tyrimą ¦ Izveidot izpēti ¦ Loo uurimus
+Créée le ¦ Sukurta ¦ Izveidota ¦ Loodud
+Dans quelle unité {name} a-t-il servi, où, et que lui est-il arrivé ? ¦ Kokiame dalinyje tarnavo {name}, kur ir kas jam nutiko? ¦ Kurā vienībā {name} dienēja, kur un kas ar viņu notika? ¦ Millises väeosas {name} teenis, kus ja mis temaga juhtus?
+Date de relance invalide. ¦ Netinkama priminimo data. ¦ Nederīgs atgādinājuma datums. ¦ Vigane meeldetuletuse kuupäev.
+Depuis un modèle… ¦ Iš šablono… ¦ No veidnes… ¦ Mallist…
+Donne au moins la cote ou le fonds parcouru. ¦ Nurodyk bent šifrą arba peržiūrėtą fondą. ¦ Norādi vismaz šifru vai pārskatīto fondu. ¦ Sisesta vähemalt säilikutähis või läbivaadatud fond.
+Donner à : {gp} ¦ Priskirti: {gp} ¦ Piešķirt: {gp} ¦ Määra: {gp}
+Dossier de recherche sur ¦ Tyrimo aplankas apie ¦ Pētījuma mape par ¦ Uurimiskaust teemal
+Dossier « {name} » supprimé ¦ Aplankas „{name}“ ištrintas ¦ Mape “{name}” izdzēsta ¦ Kaust „{name}“ kustutatud
+Dupliquer l’enquête ¦ Padvigubinti tyrimą ¦ Dublēt izpēti ¦ Dubleeri uurimus
+Déjà parcouru : ¦ Jau peržiūrėta: ¦ Jau pārskatīts: ¦ Juba läbi vaadatud:
+D’après l’enquête « {title} ». ¦ Pagal tyrimą „{title}“. ¦ Saskaņā ar izpēti “{title}”. ¦ Uurimuse „{title}“ põhjal.
+ENQUÊTE ¦ TYRIMAS ¦ IZPĒTE ¦ UURIMUS
+En cours : a répondu ¦ Vyksta: atsakė ¦ Procesā: atbildēja ¦ Käimas: vastas
+En cours : arbre échangé ¦ Vyksta: medžiais pasikeista ¦ Procesā: koki apmainīti ¦ Käimas: puud vahetatud
+En cours : contacté ¦ Vyksta: susisiekta ¦ Procesā: sazinājies ¦ Käimas: ühendust võetud
+En pause : pas de réponse ¦ Pristabdyta: nėra atsakymo ¦ Pauzēts: nav atbildes ¦ Pausil: vastust pole
+Enquête dupliquée ¦ Tyrimas padvigubintas ¦ Izpēte dublēta ¦ Uurimus dubleeritud
+Enquête supprimée ¦ Tyrimas ištrintas ¦ Izpēte izdzēsta ¦ Uurimus kustutatud
+Enquête sur {name} ¦ Tyrimas apie {name} ¦ Izpēte par {name} ¦ Uurimus: {name}
+Enquête vide ¦ Tuščias tyrimas ¦ Tukša izpēte ¦ Tühi uurimus
+Enquête « {title} » créée ¦ Tyrimas „{title}“ sukurtas ¦ Izpēte “{title}” izveidota ¦ Uurimus „{title}“ loodud
+Enquête « {title} » supprimée ¦ Tyrimas „{title}“ ištrintas ¦ Izpēte “{title}” izdzēsta ¦ Uurimus „{title}“ kustutatud
+Enregistrer la conclusion ¦ Išsaugoti išvadą ¦ Saglabāt secinājumu ¦ Salvesta järeldus
+Ex. AD de la Corrèze, registres paroissiaux de Naves ¦ Pvz. AD de la Corrèze, Naves parapijos metrikų knygos ¦ Piem. AD de la Corrèze, Navas draudzes metriku grāmatas ¦ Nt AD de la Corrèze, Navesi kihelkonna meetrikaraamatud
+Ex. Jean DURAND est le fils de Pierre DURAND et de Marie LACOMBE. ¦ Pvz. Jean DURAND yra Pierre DURAND ir Marie LACOMBE sūnus. ¦ Piem. Jean DURAND ir Pierre DURAND un Marie LACOMBE dēls. ¦ Nt Jean DURAND on Pierre DURAND’i ja Marie LACOMBE poeg.
+Exploré avec doute ¦ Ištirta su abejonėmis ¦ Izpētīts ar šaubām ¦ Uuritud kahtlusega
+Exporter le rapport… ¦ Eksportuoti ataskaitą… ¦ Eksportēt atskaiti… ¦ Ekspordi aruanne…
+Exporter ses segments pour DNA Painter ¦ Eksportuoti jo segmentus į DNA Painter ¦ Eksportēt viņa segmentus uz DNA Painter ¦ Ekspordi tema segmendid DNA Painterisse
+Fonds ou archives ¦ Fondas ar archyvas ¦ Fonds vai arhīvs ¦ Fond või arhiiv
+Force de l’endogamie ¦ Endogamijos stiprumas ¦ Endogāmijas stiprums ¦ Endogaamia tugevus
+Frères et sœurs testés ¦ Ištirti broliai ir seserys ¦ Testētie brāļi un māsas ¦ Testitud õed-vennad
+Glisse une piste ici ¦ Tempk užuominą čia ¦ Ievelc pavedienu šeit ¦ Lohista vihje siia
+Groupe « {name} » supprimé ¦ Grupė „{name}“ ištrinta ¦ Grupa “{name}” izdzēsta ¦ Grupp „{name}“ kustutatud
+Il en faut au moins trois pour un phasage fiable. ¦ Patikimam fazavimui reikia bent trijų. ¦ Uzticamai fāzēšanai vajag vismaz trīs. ¦ Usaldusväärseks faasimiseks on vaja vähemalt kolme.
+Impasse ¦ Aklavietė ¦ Strupceļš ¦ Ummik
+Imprimer le rapport ¦ Spausdinti ataskaitą ¦ Drukāt atskaiti ¦ Prindi aruanne
+La fin doit être après le début. ¦ Pabaiga turi būti po pradžios. ¦ Beigām jābūt pēc sākuma. ¦ Lõpp peab olema pärast algust.
+Lancer le chronomètre : le temps passé sur cette enquête ¦ Paleisti chronometrą: šiam tyrimui skirtas laikas ¦ Palaist hronometru: šai izpētei veltītais laiks ¦ Käivita stopper: sellele uurimusele kulunud aeg
+Le départ de {name} ¦ {name} išvykimas ¦ {name} aizbraukšana ¦ {name} lahkumine
+Le parcours militaire de {name} ¦ {name} karinė tarnyba ¦ {name} militārais ceļš ¦ {name} sõjaväeteenistus
+Les parents de {name} ¦ {name} tėvai ¦ {name} vecāki ¦ {name} vanemad
+Lignées et origines ¦ Giminės linijos ir kilmė ¦ Dzimtas līnijas un izcelsme ¦ Liinid ja päritolu
+Livret militaire, lettres, photos de famille ¦ Karinė knygelė, laiškai, šeimos nuotraukos ¦ Kara dienesta grāmatiņa, vēstules, ģimenes fotoattēli ¦ Sõjaväeraamat, kirjad, perefotod
+L’enquête de ce dossier n’existe plus. ¦ Šio aplanko tyrimo nebėra. ¦ Šīs mapes izpēte vairs nepastāv. ¦ Selle kausta uurimust enam pole.
+L’enquête de cette recherche n’existe plus. ¦ Šios paieškos tyrimo nebėra. ¦ Šīs meklēšanas izpēte vairs nepastāv. ¦ Selle otsingu uurimust enam pole.
+L’enquête est terminée. Mettre la conclusion sur la fiche de {name} ? ¦ Tyrimas baigtas. Įrašyti išvadą į {name} kortelę? ¦ Izpēte ir pabeigta. Ievietot secinājumu {name} kartītē? ¦ Uurimus on lõpetatud. Kas lisada järeldus isiku {name} kaardile?
+Mes données ¦ Mano duomenys ¦ Mani dati ¦ Minu andmed
+Mettre dans « {col} » ¦ Perkelti į „{col}“ ¦ Ievietot “{col}” ¦ Pane veergu „{col}“
+Mettre l’enquête dans « Terminées » ¦ Perkelti tyrimą į „Baigti“ ¦ Ievietot izpēti sadaļā “Pabeigtās” ¦ Pane uurimus veergu „Lõpetatud“
+Modifier la recherche sans résultat ¦ Redaguoti paiešką be rezultato ¦ Rediģēt meklēšanu bez rezultāta ¦ Muuda tulemuseta otsingut
+Morceau attribué ¦ Gabalas priskirtas ¦ Gabals piešķirts ¦ Tükk määratud
+Morceau changé ¦ Gabalas pakeistas ¦ Gabals mainīts ¦ Tükk muudetud
+Morceau retiré ¦ Gabalas pašalintas ¦ Gabals noņemts ¦ Tükk eemaldatud
+Média retiré de la piste ¦ Medija pašalinta iš užuominos ¦ Medijs noņemts no pavediena ¦ Meedia eemaldatud vihjest
+Média retiré de l’enquête ¦ Medija pašalinta iš tyrimo ¦ Medijs noņemts no izpētes ¦ Meedia eemaldatud uurimusest
+Mémoire des hommes : morts pour la France, journaux des unités ¦ Mémoire des hommes: žuvusieji už Prancūziją, dalinių žurnalai ¦ Mémoire des hommes: kritušie par Franciju, vienību žurnāli ¦ Mémoire des hommes: Prantsusmaa eest langenud, väeosade päevikud
+MémorialGenWeb : monuments aux morts ¦ MémorialGenWeb: paminklai žuvusiesiems ¦ MémorialGenWeb: pieminekļi kritušajiem ¦ MémorialGenWeb: langenute mälestusmärgid
+Naturalisation dans le pays d’arrivée ¦ Natūralizacija atvykimo šalyje ¦ Naturalizācija ierašanās valstī ¦ Naturalisatsioon saabumisriigis
+Note ici chaque registre parcouru sans rien trouver : l’app te prévient avant de le refaire. ¦ Užrašyk čia kiekvieną peržiūrėtą registrą, kuriame nieko neradai: programa įspės prieš kartojant. ¦ Pieraksti šeit katru pārskatīto reģistru, kurā neko neatradi: lietotne tevi brīdinās, pirms to dari atkārtoti. ¦ Märgi siia iga läbivaadatud register, kust midagi ei leidnud: rakendus hoiatab sind enne, kui seda uuesti teed.
+Nouveau phasage ¦ Naujas fazavimas ¦ Jauna fāzēšana ¦ Uus faasimine
+Nouvelle enquête depuis un modèle ¦ Naujas tyrimas iš šablono ¦ Jauna izpēte no veidnes ¦ Uus uurimus mallist
+Nouvelle enquête depuis un modèle… ¦ Naujas tyrimas iš šablono… ¦ Jauna izpēte no veidnes… ¦ Uus uurimus mallist…
+Parcouru le ¦ Peržiūrėta ¦ Pārskatīts ¦ Läbi vaadatud
+Partagé entre frères et sœurs ¦ Bendra broliams ir seserims ¦ Kopīgs brāļiem un māsām ¦ Õdede-vendade vahel jagatud
+Partagées ¦ Bendri ¦ Kopīgās ¦ Ühised
+Pas de relance ¦ Be priminimo ¦ Bez atgādinājuma ¦ Meeldetuletust pole
+Pas encore de conclusion : quand tu as la réponse, écris-la avec l’argument qui la prouve et les sources retenues. ¦ Išvados dar nėra: kai turėsi atsakymą, užrašyk jį su įrodančiu argumentu ir pasirinktais šaltiniais. ¦ Secinājuma vēl nav: kad tev ir atbilde, uzraksti to ar pierādījuma argumentu un izvēlētajiem avotiem. ¦ Järeldust veel pole: kui vastus on käes, kirjuta see koos tõendava põhjenduse ja valitud allikatega.
+Pas encore de conclusion. ¦ Išvados dar nėra. ¦ Secinājuma vēl nav. ¦ Järeldust veel pole.
+Personne cherchée ¦ Ieškomas asmuo ¦ Meklētā persona ¦ Otsitav isik
+Phasage ¦ Fazavimas ¦ Fāzēšana ¦ Faasimine
+Phasage introuvable. ¦ Fazavimas nerastas. ¦ Fāzēšana nav atrasta. ¦ Faasimist ei leitud.
+Phasage visuel ¦ Vizualus fazavimas ¦ Vizuālā fāzēšana ¦ Visuaalne faasimine
+Phasage « {name} » supprimé ¦ Fazavimas „{name}“ ištrintas ¦ Fāzēšana “{name}” izdzēsta ¦ Faasimine „{name}“ kustutatud
+Piste « {title} » : {col} ¦ Užuomina „{title}“: {col} ¦ Pavediens “{title}”: {col} ¦ Vihje „{title}“: {col}
+Plus de relance pour « {name} » ¦ Nebėra priminimų: „{name}“ ¦ Vairs nav atgādinājumu: “{name}” ¦ Enam meeldetuletusi pole: „{name}“
+Point de recombinaison ajouté ¦ Rekombinacijos taškas pridėtas ¦ Rekombinācijas punkts pievienots ¦ Rekombinatsioonipunkt lisatud
+Presse locale et courriers de la famille restée au pays ¦ Vietinė spauda ir tėvynėje likusios šeimos laiškai ¦ Vietējā prese un dzimtenē palikušās ģimenes vēstules ¦ Kohalik ajakirjandus ja kodumaale jäänud pere kirjad
+Quand et par où {name} est-il parti, et où s’est-il installé ? ¦ Kada ir kokiu keliu {name} išvyko, ir kur įsikūrė? ¦ Kad un pa kuru ceļu {name} aizbrauca, un kur apmetās? ¦ Millal ja mille kaudu {name} lahkus ning kuhu ta elama asus?
+Question, chronologie des pistes, pièces, conclusion : à envoyer à un cousin ou à une association. ¦ Klausimas, užuominų chronologija, dokumentai, išvada: siųsti pusbroliui ar draugijai. ¦ Jautājums, pavedienu hronoloģija, dokumenti, secinājums: ko nosūtīt brālēnam vai biedrībai. ¦ Küsimus, vihjete ajajoon, dokumendid, järeldus: saatmiseks nõbule või seltsile.
+Qui sont le père et la mère de {name} ? Où et quand se sont-ils mariés ? ¦ Kas yra {name} tėvas ir motina? Kur ir kada jie susituokė? ¦ Kas ir {name} tēvs un māte? Kur un kad viņi apprecējās? ¦ Kes on isiku {name} isa ja ema? Kus ja millal nad abiellusid?
+RIEN TROUVÉ ¦ NIEKO NERASTA ¦ NEKAS NAV ATRASTS ¦ MIDAGI EI LEITUD
+Rapport : {t} ¦ Ataskaita: {t} ¦ Atskaite: {t} ¦ Aruanne: {t}
+Rapport fait le {d} ¦ Ataskaita parengta {d} ¦ Atskaite sagatavota {d} ¦ Aruanne koostatud {d}
+Recensements : le foyer et ses voisins ¦ Surašymai: namų ūkis ir jo kaimynai ¦ Tautas skaitīšanas: mājsaimniecība un tās kaimiņi ¦ Rahvaloendused: leibkond ja selle naabrid
+Recensements du pays d’arrivée ¦ Atvykimo šalies surašymai ¦ Ierašanās valsts tautas skaitīšanas ¦ Saabumisriigi rahvaloendused
+Recherche commune par commune : les registres parcourus, ville par ville. ¦ Paieška gyvenvietė po gyvenvietės: peržiūrėti registrai, miestas po miesto. ¦ Meklēšana pagastu pēc pagasta: pārskatītie reģistri, pilsētu pēc pilsētas. ¦ Otsing vald valla haaval: läbivaadatud registrid, linn linna haaval.
+Recherche introuvable. ¦ Paieška nerasta. ¦ Meklēšana nav atrasta. ¦ Otsingut ei leitud.
+Recherche sans résultat ¦ Paieška be rezultato ¦ Meklēšana bez rezultāta ¦ Tulemuseta otsing
+Recherche sans résultat notée. ¦ Paieška be rezultato užrašyta. ¦ Meklēšana bez rezultāta atzīmēta. ¦ Tulemuseta otsing märgitud.
+Recherche sans résultat supprimée ¦ Paieška be rezultato ištrinta ¦ Meklēšana bez rezultāta izdzēsta ¦ Tulemuseta otsing kustutatud
+Recherches sans résultat ¦ Paieškos be rezultato ¦ Meklēšanas bez rezultāta ¦ Tulemuseta otsingud
+Registres des consulats ¦ Konsulatų registrai ¦ Konsulātu reģistri ¦ Konsulaatide registrid
+Registres parcourus ¦ Peržiūrėti registrai ¦ Pārskatītie reģistri ¦ Läbivaadatud registrid
+Regrouper et placer ¦ Grupuoti ir išdėstyti ¦ Grupēt un izvietot ¦ Rühmita ja paiguta
+Relance de « {name} » le {d} ¦ Priminimas „{name}“ {d} ¦ Atgādinājums “{name}” {d} ¦ Meeldetuletus „{name}“ {d}
+Relancer dans {n} jours ¦ Priminti po {n} d. ¦ Atgādināt pēc {n} dienām ¦ Tuleta meelde {n} päeva pärast
+Relancer {name} (ADN) ¦ Priminti: {name} (DNR) ¦ Atgādināt: {name} (DNS) ¦ Tuleta meelde: {name} (DNA)
+Remettre le temps à zéro ¦ Nunulinti laiką ¦ Atiestatīt laiku ¦ Nulli aeg
+Retirer ce morceau ¦ Pašalinti šį gabalą ¦ Noņemt šo gabalu ¦ Eemalda see tükk
+Retrouver un soldat ¦ Surasti karį ¦ Atrast karavīru ¦ Leia sõdur
+Rien de prérempli ¦ Nieko iš anksto užpildyta ¦ Nekas nav iepriekš aizpildīts ¦ Midagi pole eeltäidetud
+Rien à relancer : sur une correspondance « Contactée », « 🔔 Relancer dans 30 jours ». ¦ Nėra ką priminti: atitikmenyje „Susisiekta“ – „🔔 Priminti po 30 d.“. ¦ Nav ko atgādināt: sakritībai “Sazinājies” – “🔔 Atgādināt pēc 30 dienām”. ¦ Pole midagi meelde tuletada: vastel „Ühendust võetud“ – „🔔 Tuleta meelde 30 päeva pärast“.
+Rubriques de l’ADN ¦ DNR skiltys ¦ DNS sadaļas ¦ DNA rubriigid
+Segment supprimé ¦ Segmentas ištrintas ¦ Segments izdzēsts ¦ Segment kustutatud
+Sources retenues ¦ Pasirinkti šaltiniai ¦ Izvēlētie avoti ¦ Valitud allikad
+Sépultures de guerre et nécropoles ¦ Karo kapai ir kapinės ¦ Kara apbedījumi un kapsētas ¦ Sõjahauad ja kalmistud
+Tables décennales autour de la naissance ¦ Dešimtmečio rodyklės apie gimimą ¦ Desmitgades rādītāji ap dzimšanu ¦ Kümnendi registrid sünni ümbert
+Temps remis à zéro ¦ Laikas nunulintas ¦ Laiks atiestatīts ¦ Aeg nullitud
+Terminé : placé dans l’arbre ✓ ¦ Baigta: įdėta į medį ✓ ¦ Pabeigts: ievietots kokā ✓ ¦ Valmis: paigutatud puusse ✓
+Test « {name} » supprimé ¦ Testas „{name}“ ištrintas ¦ Tests “{name}” izdzēsts ¦ Test „{name}“ kustutatud
+Tests entièrement endogames ¦ Visiškai endogamiški testai ¦ Pilnībā endogāmi testi ¦ Täielikult endogaamsed testid
+Trouver les parents de… ¦ Surasti tėvus… ¦ Atrast vecākus… ¦ Leia vanemad…
+Un point de recombinaison à la position « De » ¦ Rekombinacijos taškas padėtyje „Nuo“ ¦ Rekombinācijas punkts pozīcijā “No” ¦ Rekombinatsioonipunkt asukohas „Alates“
+Une question à résoudre : ses pistes, ses pièces, sa conclusion. ¦ Spręstinas klausimas: užuominos, dokumentai, išvada. ¦ Risināms jautājums: pavedieni, dokumenti, secinājums. ¦ Lahendamist vajav küsimus: vihjed, dokumendid, järeldus.
+Voir ses correspondances ¦ Rodyti jo atitikmenis ¦ Rādīt viņa sakritības ¦ Näita tema vasteid
+années non notées ¦ neužrašyti metai ¦ neatzīmēti gadi ¦ märkimata aastad
+aussi : {list} ¦ taip pat: {list} ¦ arī: {list} ¦ ka: {list}
+la page affichée ¦ rodomas puslapis ¦ parādītā lapa ¦ kuvatud leht
+ouverte le {d} ¦ atidaryta {d} ¦ atvērta {d} ¦ avatud {d}
+paire notée ¦ užrašyta pora ¦ atzīmēts pāris ¦ märgitud paar
+paires notées ¦ užrašytos poros ¦ atzīmēti pāri ¦ märgitud paari
+partagé : {a}–{b} Mb, {cm} cM ¦ bendra: {a}–{b} Mb, {cm} cM ¦ kopīgs: {a}–{b} Mb, {cm} cM ¦ jagatud: {a}–{b} Mb, {cm} cM
+un fichier .html à envoyer ¦ siunčiamas .html failas ¦ .html fails nosūtīšanai ¦ saadetav .html-fail
+{cote} ({years}) le {d}, enquête « {title} » ¦ {cote} ({years}) {d}, tyrimas „{title}“ ¦ {cote} ({years}) {d}, izpēte “{title}” ¦ {cote} ({years}) {d}, uurimus „{title}“
+{m} min ¦ {m} min. ¦ {m} min ¦ {m} min
+{n} ajoutées ¦ {n} pridėta ¦ {n} pievienoti ¦ {n} lisatud
+{n} commencées ¦ {n} pradėta ¦ {n} sākti ¦ {n} alustatud
+{n} correspondances supprimées ¦ {n} atitikmenys ištrinti ¦ {n} sakritības izdzēstas ¦ {n} vastet kustutatud
+{n} entre {lo} et {hi} cM ; {pairs} ¦ {n} tarp {lo} ir {hi} cM; {pairs} ¦ {n} starp {lo} un {hi} cM; {pairs} ¦ {n} vahemikus {lo}–{hi} cM; {pairs}
+{n} pistes préparées ¦ {n} paruoštos užuominos ¦ {n} sagatavoti pavedieni ¦ {n} ettevalmistatud vihjet
+{n} sur {all} ¦ {n} iš {all} ¦ {n} no {all} ¦ {n}/{all}
+{n}/{all} ({pct} %) ¦ {n} iš {all} ({pct} %) ¦ {n} no {all} ({pct} %) ¦ {n}/{all} ({pct} %)
+{n}/{all} registres parcourus ¦ peržiūrėta {n} iš {all} registrų ¦ pārskatīti {n} no {all} reģistriem ¦ {n}/{all} registrit läbi vaadatud
+{raw} cM comptés comme {cm} cM ¦ {raw} cM skaičiuojama kaip {cm} cM ¦ {raw} cM skaitīti kā {cm} cM ¦ {raw} cM arvestatud kui {cm} cM
+« Enregistrer en PDF » dans la fenêtre d’impression ¦ „Įrašyti kaip PDF“ spausdinimo lange ¦ “Saglabāt kā PDF” drukāšanas logā ¦ „Salvesta PDF-ina“ printimisaknas
+« Trouver les parents de… », « Retrouver un soldat », « Émigré » : questions et pistes préparées ¦ „Surasti tėvus…“, „Surasti karį“, „Emigrantas“: paruošti klausimai ir užuominos ¦ “Atrast vecākus…”, “Atrast karavīru”, “Emigrants”: sagatavoti jautājumi un pavedieni ¦ „Leia vanemad…“, „Leia sõdur“, „Väljarändaja“: ettevalmistatud küsimused ja vihjed
+« {a} » et « {b} » ne se correspondent plus ¦ „{a}“ ir „{b}“ nebeatitinka ¦ “{a}” un “{b}” vairs nesakrīt ¦ „{a}“ ja „{b}“ ei ole enam vasted
+« {a} » et « {b} » se correspondent ¦ „{a}“ ir „{b}“ atitinka ¦ “{a}” un “{b}” sakrīt ¦ „{a}“ ja „{b}“ on vasted
+« {name} » a répondu ¦ „{name}“ atsakė ¦ “{name}” atbildēja ¦ „{name}“ vastas
+À explorer → En cours → Explorée → Impasse : glisse les pistes d’une colonne à l’autre ¦ Ištirti → Vyksta → Ištirta → Aklavietė: tempk užuominas iš vieno stulpelio į kitą ¦ Jāizpēta → Procesā → Izpētīts → Strupceļš: velc pavedienus no vienas kolonnas uz otru ¦ Uurida → Käimas → Uuritud → Ummik: lohista vihjeid ühest veerust teise
+À faire : contacter ¦ Padaryti: susisiekti ¦ Jādara: sazināties ¦ Teha: võtta ühendust
+Écris la conclusion. ¦ Parašyk išvadą. ¦ Uzraksti secinājumu. ¦ Kirjuta järeldus.
+Émigré : retrouver le départ et l’arrivée ¦ Emigrantas: surasti išvykimą ir atvykimą ¦ Emigrants: atrast aizbraukšanu un ierašanos ¦ Väljarändaja: leia lahkumine ja saabumine
+État de la commune ¦ Gyvenvietės būsena ¦ Pagasta stāvoklis ¦ Valla seis
+Événement retiré de la piste ¦ Įvykis pašalintas iš užuominos ¦ Notikums noņemts no pavediena ¦ Sündmus eemaldatud vihjest
+à relancer depuis le {d} ¦ priminti nuo {d} ¦ jāatgādina kopš {d} ¦ meelde tuletada alates {d}
+⏱ Chronomètre lancé. ¦ ⏱ Chronometras paleistas. ¦ ⏱ Hronometrs palaists. ¦ ⏱ Stopper käivitatud.
+⏱ Temps gardé : {t}. ¦ ⏱ Laikas išsaugotas: {t}. ¦ ⏱ Laiks saglabāts: {t}. ¦ ⏱ Aeg salvestatud: {t}.
+✂ Point de recombinaison ¦ ✂ Rekombinacijos taškas ¦ ✂ Rekombinācijas punkts ¦ ✂ Rekombinatsioonipunkt
+✅ Conclue ¦ ✅ Užbaigta ¦ ✅ Pabeigta ¦ ✅ Lõpetatud
+✅ Conclure l’enquête ¦ ✅ Užbaigti tyrimą ¦ ✅ Pabeigt izpēti ¦ ✅ Lõpeta uurimus
+✎ Modifier la conclusion ¦ ✎ Redaguoti išvadą ¦ ✎ Rediģēt secinājumu ¦ ✎ Muuda järeldust
+✓ A répondu ¦ ✓ Atsakė ¦ ✓ Atbildēja ¦ ✓ Vastas
+⤒ Coller une liste ¦ ⤒ Įklijuoti sąrašą ¦ ⤒ Ielīmēt sarakstu ¦ ⤒ Kleebi loend
+＋ Attribuer ¦ ＋ Priskirti ¦ ＋ Piešķirt ¦ ＋ Määra
+＋ Frère ou sœur ¦ ＋ Brolis ar sesuo ¦ ＋ Brālis vai māsa ¦ ＋ Vend või õde
+＋ Nouveau phasage ¦ ＋ Naujas fazavimas ¦ ＋ Jauna fāzēšana ¦ ＋ Uus faasimine
+＋ Recherche sans résultat ¦ ＋ Paieška be rezultato ¦ ＋ Meklēšana bez rezultāta ¦ ＋ Tulemuseta otsing
+🌐 Page web ¦ 🌐 Tinklalapis ¦ 🌐 Tīmekļa lapa ¦ 🌐 Veebileht
+💾 Fichier ¦ 💾 Failas ¦ 💾 Fails ¦ 💾 Fail
+📈 Branche endogame (cM × {f}) ¦ 📈 Endogamiška šaka (cM × {f}) ¦ 📈 Endogāms atzars (cM × {f}) ¦ 📈 Endogaamne haru (cM × {f})
+📈 Branche endogame : {raw} cM comptés comme {cm} cM. ¦ 📈 Endogamiška šaka: {raw} cM skaičiuojama kaip {cm} cM. ¦ 📈 Endogāms atzars: {raw} cM skaitīti kā {cm} cM. ¦ 📈 Endogaamne haru: {raw} cM arvestatud kui {cm} cM.
+📈 Endogamie ¦ 📈 Endogamija ¦ 📈 Endogāmija ¦ 📈 Endogaamia
+📊 Tableur ¦ 📊 Skaičiuoklė ¦ 📊 Izklājlapa ¦ 📊 Tabelarvutus
+🔔 Relancer le ¦ 🔔 Priminti ¦ 🔔 Atgādināt ¦ 🔔 Tuleta meelde
+🔔 « Relancer dans… » propose ¦ 🔔 „Priminti po…“ siūlo ¦ 🔔 “Atgādināt pēc…” piedāvā ¦ 🔔 „Tuleta meelde…“ pakub
+🔔 À relancer ¦ 🔔 Priminti ¦ 🔔 Jāatgādina ¦ 🔔 Meelde tuletada
+🗂 Ranger en groupes… ¦ 🗂 Sudėti į grupes… ¦ 🗂 Sakārtot grupās… ¦ 🗂 Jaga rühmadesse…
+🗑 Supprimer ce phasage ¦ 🗑 Ištrinti šį fazavimą ¦ 🗑 Dzēst šo fāzēšanu ¦ 🗑 Kustuta see faasimine
+(pourquoi c’est sûr : les sources qui s’accordent, les contradictions levées) ¦ (kodėl tai tikra: sutampantys šaltiniai, pašalinti prieštaravimai) ¦ (kāpēc tas ir droši: saskanīgi avoti, novērstas pretrunas) ¦ (miks see on kindel: kokkulangevad allikad, lahendatud vastuolud)
+A répondu (plus de relance) ¦ Atsakė (nebėra priminimų) ¦ Atbildēja (vairs nav atgādinājumu) ¦ Vastas (enam meeldetuletusi pole)
+Acte de décès (âge, parents, témoins) ¦ Mirties aktas (amžius, tėvai, liudytojai) ¦ Miršanas akts (vecums, vecāki, liecinieki) ¦ Surmaakt (vanus, vanemad, tunnistajad)
+Acte de mariage (il nomme les parents) ¦ Santuokos aktas (jame nurodyti tėvai) ¦ Laulības akts (tajā nosaukti vecāki) ¦ Abielu akt (selles on nimetatud vanemad)
+Aucune correspondance dans cette fourchette : importe tes correspondances (👥 Correspondances). ¦ Šiame intervale atitikmenų nėra: importuok savo atitikmenis (👥 Atitikmenys). ¦ Šajā diapazonā nav sakritību: importē savas sakritības (👥 Sakritības). ¦ Selles vahemikus vasteid pole: impordi oma vasted (👥 Vasted).
+Avec trois frères et sœurs testés (ou plus) : attribue chaque morceau de chromosome à l’un des quatre grands-parents, chromosome par chromosome. Les comparaisons entre frères et sœurs (segments partagés) aident à placer les points de recombinaison. ¦ Turint tris (ar daugiau) ištirtus brolius ir seseris: priskirk kiekvieną chromosomos gabalą vienam iš keturių senelių, chromosomą po chromosomos. Brolių ir seserų palyginimai (bendri segmentai) padeda nustatyti rekombinacijos taškus. ¦ Ar trim (vai vairāk) testētiem brāļiem un māsām: piešķir katru hromosomas gabalu vienam no četriem vecvecākiem, hromosomu pēc hromosomas. Salīdzinājumi starp brāļiem un māsām (kopīgi segmenti) palīdz izvietot rekombinācijas punktus. ¦ Kolme (või enama) testitud õe-vennaga: määra iga kromosoomitükk ühele neljast vanavanemast, kromosoom kromosoomi haaval. Õdede-vendade võrdlused (ühised segmendid) aitavad paigutada rekombinatsioonipunkte.
+Branches endogames (groupes) ¦ Endogamiškos šakos (grupės) ¦ Endogāmi atzari (grupas) ¦ Endogaamsed harud (rühmad)
+CSV (Excel, Numbers, LibreOffice) ¦ CSV (Excel, Numbers, LibreOffice) ¦ CSV (Excel, Numbers, LibreOffice) ¦ CSV (Excel, Numbers, LibreOffice)
+Chercher une battue… (nom, commune, cible) ¦ Ieškoti šukavimo… (pavadinimas, gyvenvietė, tikslas) ¦ Meklēt ķemmēšanu… (nosaukums, pagasts, mērķis) ¦ Otsi läbikammi… (nimi, vald, siht)
+Chercher une enquête… (personne, acte, lieu) ¦ Ieškoti tyrimo… (asmuo, aktas, vieta) ¦ Meklēt izpēti… (persona, akts, vieta) ¦ Otsi uurimust… (isik, akt, koht)
+Dans une branche endogame (village fermé, île, communauté), on partage plus d’ADN qu’attendu : les cM de ces correspondances sont corrigés avant d’estimer la relation. ¦ Endogamiškoje šakoje (uždaras kaimas, sala, bendruomenė) bendros DNR yra daugiau nei tikėtasi: šių atitikmenų cM pataisomi prieš įvertinant giminystę. ¦ Endogāmā atzarā (slēgts ciems, sala, kopiena) kopīgās DNS ir vairāk, nekā gaidīts: šo sakritību cM tiek laboti pirms radniecības novērtēšanas. ¦ Endogaamses harus (suletud küla, saar, kogukond) on ühist DNA-d oodatust rohkem: nende vastete cM-e korrigeeritakse enne suguluse hindamist.
+Donne la position (De). ¦ Nurodyk padėtį (Nuo). ¦ Norādi pozīciju (No). ¦ Sisesta asukoht (Alates).
+Ex. 3 E 145/2 ¦ Pvz. 3 E 145/2 ¦ Piem. 3 E 145/2 ¦ Nt 3 E 145/2
+Exporter (CSV) ¦ Eksportuoti (CSV) ¦ Eksportēt (CSV) ¦ Ekspordi (CSV)
+Exporter les annotations (CSV) ¦ Eksportuoti pastabas (CSV) ¦ Eksportēt anotācijas (CSV) ¦ Ekspordi märkused (CSV)
+Fiche matricule (registres matricules des archives départementales) ¦ Kario registro kortelė (departamentų archyvų kariuomenės registrai) ¦ Karaklausības lapa (departamentu arhīvu karaklausības reģistri) ¦ Väeteenistuse kaart (departemangu arhiivide väeteenistuse registrid)
+Forte (île, communauté très fermée) ¦ Stipri (sala, labai uždara bendruomenė) ¦ Stipra (sala, ļoti slēgta kopiena) ¦ Tugev (saar, väga suletud kogukond)
+Journal des marches et opérations (JMO) de son régiment ¦ Jo pulko karo veiksmų žurnalas (JMO) ¦ Viņa pulka kara darbības žurnāls (JMO) ¦ Tema rügemendi sõjapäevik (JMO)
+Listes de passagers (port de départ, port d’arrivée) ¦ Keleivių sąrašai (išvykimo uostas, atvykimo uostas) ¦ Pasažieru saraksti (izbraukšanas osta, ierašanās osta) ¦ Reisijate nimekirjad (lähtesadam, saabumissadam)
+Légère (quelques mariages entre cousins) ¦ Silpna (kelios pusbrolių ir pusseserių santuokos) ¦ Viegla (dažas laulības starp brālēniem un māsīcām) ¦ Kerge (mõned abielud nõbude vahel)
+Moyenne (village ou vallée assez fermés) ¦ Vidutinė (gana uždaras kaimas ar slėnis) ¦ Vidēja (diezgan slēgts ciems vai ieleja) ¦ Keskmine (üsna suletud küla või org)
+Nom du phasage (ex. « Fratrie DURAND ») ¦ Fazavimo pavadinimas (pvz. „DURAND broliai ir seserys“) ¦ Fāzēšanas nosaukums (piem. “DURAND brāļi un māsas”) ¦ Faasimise nimi (nt „DURAND’i õed-vennad“)
+Passeports et registres de départ (archives départementales, série M) ¦ Pasai ir išvykimo registrai (departamentų archyvai, M serija) ¦ Pases un izbraukšanas reģistri (departamentu arhīvi, M sērija) ¦ Passid ja lahkumisregistrid (departemangu arhiivid, sari M)
+Phasage visuel (frères et sœurs) ¦ Vizualus fazavimas (broliai ir seserys) ¦ Vizuālā fāzēšana (brāļi un māsas) ¦ Visuaalne faasimine (õed-vennad)
+Reconstitué (tous) ¦ Atkurta (visi) ¦ Rekonstruēts (visi) ¦ Taastatud (kõik)
+cM corrigés (endogamie) ¦ Pataisyti cM (endogamija) ¦ Laboti cM (endogāmija) ¦ Korrigeeritud cM (endogaamia)
+la page affichée (« Enregistrer en PDF ») ¦ rodomas puslapis („Įrašyti kaip PDF“) ¦ parādītā lapa (“Saglabāt kā PDF”) ¦ kuvatud leht („Salvesta PDF-ina“)
+pat. ¦ tėvo ¦ tēva ¦ isa
+mat. ¦ motinos ¦ mātes ¦ ema
+à (Mb) ¦ iki (Mb) ¦ līdz (Mb) ¦ kuni (Mb)
+jours ¦ dienų ¦ dienas ¦ päeva
+Toutes les battues ¦ Visi šukavimai ¦ Visas ķemmēšanas ¦ Kõik läbikammid
+prioritaire ¦ prioritetinis ¦ prioritārs ¦ esmatähtis
+Code ¦ Kodas ¦ Kods ¦ Kood
+Fiche de {name} ¦ {name} kortelė ¦ {name} kartīte ¦ Isiku {name} kaart
+tout l’ADN (JSON) ¦ visa DNR (JSON) ¦ visa DNS (JSON) ¦ kogu DNA (JSON)
+Aucune paire « Nom A ; Nom B ». ¦ Nėra poros „Vardas A ; Vardas B“. ¦ Nav pāra “Vārds A ; Vārds B”. ¦ Paari „Nimi A ; Nimi B“ pole.
+Une paire par ligne : « Nom A ; Nom B » (ou une tabulation, une virgule). Les noms tels que sur le site du test. ¦ Viena pora eilutėje: „Vardas A ; Vardas B“ (arba tabuliacija, kablelis). Vardai kaip testo svetainėje. ¦ Viens pāris rindā: “Vārds A ; Vārds B” (vai tabulācija, komats). Vārdi tā, kā testa vietnē. ¦ Üks paar rea kohta: „Nimi A ; Nimi B“ (või tabulaator, koma). Nimed nagu testi saidil.
+Qui correspond avec qui : la base des regroupements (Leeds, grappes). Une case pleine, A et B se correspondent. Clique une case pour l’ajouter ou la retirer ; ou colle la liste « en commun » donnée par la société. ¦ Kas su kuo atitinka: grupavimo pagrindas (Leeds, klasteriai). Pilnas langelis – A ir B atitinka. Spustelėk langelį, kad pridėtum ar pašalintum; arba įklijuok bendrovės pateiktą „bendrų“ sąrašą. ¦ Kas ar ko sakrīt: grupēšanas pamats (Leeds, klasteri). Pilns lodziņš – A un B sakrīt. Noklikšķini lodziņu, lai to pievienotu vai noņemtu; vai ielīmē uzņēmuma doto “kopīgo” sarakstu. ¦ Kes kellega vastab: rühmitamise alus (Leeds, klastrid). Täis lahter: A ja B on vasted. Klõpsa lahtrit selle lisamiseks või eemaldamiseks; või kleebi ettevõtte antud „ühiste“ loend.
+rubriques ¦ skiltys ¦ sadaļas ¦ rubriigid
+＋ Correspondances ¦ ＋ Atitikmenys ¦ ＋ Sakritības ¦ ＋ Vasted
+ligne cochée ¦ pažymėta eilutė ¦ atzīmēta rinda ¦ märgitud rida
+lignes cochées ¦ pažymėtos eilutės ¦ atzīmētas rindas ¦ märgitud rida
+✕ Décocher ¦ ✕ Atžymėti ¦ ✕ Noņemt atzīmes ¦ ✕ Tühista märgistus
+Cocher cette ligne ¦ Pažymėti šią eilutę ¦ Atzīmēt šo rindu ¦ Märgi see rida
+Étiqueter ¦ Žymėti ¦ Pievienot birku ¦ Lisa silt
+Poser une étiquette sur toutes les lignes cochées ¦ Pridėti žymą visoms pažymėtoms eilutėms ¦ Pievienot birku visām atzīmētajām rindām ¦ Lisa silt kõigile märgitud ridadele
+ÉTIQUETER ¦ ŽYMĖJIMAS ¦ BIRKU PIEVIENOŠANA ¦ SILDISTAMINE
+Une étiquette pour {n} ¦ Žyma {n} ¦ Birka {n} ¦ Silt {n} jaoks
+Étiquette existante ¦ Esama žyma ¦ Esoša birka ¦ Olemasolev silt
+— Une nouvelle — ¦ — Nauja — ¦ — Jauna — ¦ — Uus —
+Ou une nouvelle étiquette ¦ Arba nauja žyma ¦ Vai jauna birka ¦ Või uus silt
+ex. À vérifier aux archives ¦ pvz. Patikrinti archyve ¦ piem. Jāpārbauda arhīvā ¦ nt Kontrollida arhiivis
+Étiquette posée sur {n} ¦ Žyma pridėta: {n} ¦ Birka pievienota: {n} ¦ Silt lisatud: {n}
+({n} verrouillées laissées de côté) ¦ ({n} užrakintos praleistos) ¦ ({n} bloķētās izlaistas) ¦ ({n} lukustatut jäeti kõrvale)
+Ajouter à Mes listes ¦ Pridėti į Mano sąrašai ¦ Pievienot Mani saraksti ¦ Lisa loendisse Minu loendid
+Ajouter les fiches cochées à une de « Mes listes » ¦ Pridėti pažymėtas korteles į vieną iš „Mano sąrašų“ ¦ Pievienot atzīmētās kartītes kādam no “Maniem sarakstiem” ¦ Lisa märgitud kaardid ühte „Minu loenditest“
+Aucune de « Mes listes » ne contient des personnes : crée-en une dans Listes → Mes listes. ¦ Nė viename iš „Mano sąrašų“ nėra asmenų: sukurk sąrašą skiltyje Sąrašai → Mano sąrašai. ¦ Neviens no “Maniem sarakstiem” nesatur personas: izveido to sadaļā Saraksti → Mani saraksti. ¦ Ükski „Minu loenditest“ ei sisalda isikuid: loo üks kohas Loendid → Minu loendid.
+MES LISTES ¦ MANO SĄRAŠAI ¦ MANI SARAKSTI ¦ MINU LOENDID
+Ajouter {n} à une liste ¦ Pridėti {n} į sąrašą ¦ Pievienot {n} sarakstam ¦ Lisa {n} loendisse
+{n} ajoutées à « {list} » ¦ {n} pridėta į „{list}“ ¦ {n} pievienoti “{list}” ¦ {n} lisatud loendisse „{list}“
+Plus rien ne pourra changer sur ces fiches tant qu’elles sont verrouillées ¦ Šiose kortelėse nieko nebus galima keisti, kol jos užrakintos ¦ Šajās kartītēs neko nevarēs mainīt, kamēr tās ir bloķētas ¦ Neid kaarte ei saa muuta, kuni need on lukustatud
+Ces fiches pourront de nouveau être modifiées ¦ Šias korteles vėl bus galima redaguoti ¦ Šīs kartītes atkal varēs rediģēt ¦ Neid kaarte saab jälle muuta
+{n} verrouillées ¦ {n} užrakinta ¦ {n} bloķētas ¦ {n} lukustatud
+{n} déverrouillées ¦ {n} atrakinta ¦ {n} atbloķētas ¦ {n} lukust lahti tehtud
+Les lignes cochées dans un fichier CSV (tableur) ¦ Pažymėtos eilutės CSV faile (skaičiuoklė) ¦ Atzīmētās rindas CSV failā (izklājlapa) ¦ Märgitud read CSV-failina (tabelarvutus)
+{n} exportées. ¦ {n} eksportuota. ¦ {n} eksportētas. ¦ {n} eksporditud.
+Supprime les fiches cochées ; « ↶ Annuler » les remet ¦ Ištrina pažymėtas korteles; „↶ Anuliuoti“ jas grąžina ¦ Dzēš atzīmētās kartītes; “↶ Atsaukt” tās atjauno ¦ Kustutab märgitud kaardid; „↶ Võta tagasi“ taastab need
+Supprime les lignes cochées ; « ↶ Annuler » les remet ¦ Ištrina pažymėtas eilutes; „↶ Anuliuoti“ jas grąžina ¦ Dzēš atzīmētās rindas; “↶ Atsaukt” tās atjauno ¦ Kustutab märgitud read; „↶ Võta tagasi“ taastab need
+{n} laissées de côté : {why} ¦ {n} praleista: {why} ¦ {n} izlaistas: {why} ¦ {n} jäeti kõrvale: {why}
+{n} supprimées ¦ {n} ištrinta ¦ {n} izdzēstas ¦ {n} kustutatud
+{n} supprimés ¦ {n} ištrinta ¦ {n} izdzēsti ¦ {n} kustutatud
+Plus d’actions pour « {name} » ¦ Daugiau veiksmų: „{name}“ ¦ Vairāk darbību: “{name}” ¦ Rohkem toiminguid: „{name}“
+Copie impossible : choisis le texte et copie-le à la main. ¦ Kopijuoti nepavyko: pažymėk tekstą ir nukopijuok jį ranka. ¦ Kopēšana nav iespējama: atlasi tekstu un nokopē to manuāli. ¦ Kopeerimine ei õnnestu: vali tekst ja kopeeri see käsitsi.
+Toutes les sources de ta généalogie : où elles sont gardées, combien de fois elles sont citées, sur quelles fiches. Ouvre une source pour son modèle de citation, ses doublons et « Où est-elle citée ? ». ¦ Visi tavo genealogijos šaltiniai: kur jie saugomi, kiek kartų cituojami, kuriose kortelėse. Atidaryk šaltinį, kad pamatytum jo citavimo šabloną, dublikatus ir „Kur jis cituojamas?“. ¦ Visi tavas ģenealoģijas avoti: kur tie glabājas, cik reizes tie citēti, kurās kartītēs. Atver avotu, lai redzētu tā citēšanas veidni, dublikātus un “Kur tas citēts?”. ¦ Kõik sinu sugupuu allikad: kus neid hoitakse, mitu korda neile viidatakse, millistel kaartidel. Ava allikas, et näha selle viitemalli, duplikaate ja „Kus sellele viidatakse?“.
+＋ Nouvelle source ¦ ＋ Naujas šaltinis ¦ ＋ Jauns avots ¦ ＋ Uus allikas
+Chercher une source… (titre, auteur, dépôt, cote) ¦ Ieškoti šaltinio… (pavadinimas, autorius, saugykla, šifras) ¦ Meklēt avotu… (nosaukums, autors, glabātava, šifrs) ¦ Otsi allikat… (pealkiri, autor, hoiukoht, säilikutähis)
+Doublons possibles ({n}) ¦ Galimi dublikatai ({n}) ¦ Iespējamie dublikāti ({n}) ¦ Võimalikud duplikaadid ({n})
+Doublons possibles ¦ Galimi dublikatai ¦ Iespējamie dublikāti ¦ Võimalikud duplikaadid
+Jamais citées ({n}) ¦ Niekada necituoti ({n}) ¦ Nekad nav citēti ({n}) ¦ Kunagi viitamata ({n})
+Jamais citées ¦ Niekada necituoti ¦ Nekad nav citēti ¦ Kunagi viitamata
+Sans modèle de citation ¦ Be citavimo šablono ¦ Bez citēšanas veidnes ¦ Viitemallita
+Sans modèle ¦ Be šablono ¦ Bez veidnes ¦ Mallita
+Tous les dépôts ¦ Visos saugyklos ¦ Visas glabātavas ¦ Kõik hoiukohad
+Z → A ¦ Ž → A ¦ Ž → A ¦ Ü → A
+Les moins citées ¦ Mažiausiai cituojami ¦ Vismazāk citētie ¦ Kõige vähem viidatud
+{n} sur {t} ¦ {n} iš {t} ¦ {n} no {t} ¦ {n}/{t}
+Les sources s’ajoutent depuis une fiche (bloc Sources) ou ici avec « ＋ Nouvelle source ». ¦ Šaltiniai pridedami iš kortelės (blokas Šaltiniai) arba čia su „＋ Naujas šaltinis“. ¦ Avotus pievieno no kartītes (bloks Avoti) vai šeit ar “＋ Jauns avots”. ¦ Allikaid lisatakse kaardilt (plokk Allikad) või siin nupuga „＋ Uus allikas“.
+Aucune source ne correspond ¦ Neatitinka nė vienas šaltinis ¦ Neviens avots neatbilst ¦ Ükski allikas ei vasta
+Citations ¦ Citatos ¦ Citāti ¦ Viited
+Même titre ou même lien qu’une autre source ¦ Toks pat pavadinimas ar nuoroda kaip kito šaltinio ¦ Tāds pats nosaukums vai saite kā citam avotam ¦ Sama pealkiri või link mis teisel allikal
+doublon ? ¦ dublikatas? ¦ dublikāts? ¦ duplikaat?
+source cochée ¦ pažymėtas šaltinis ¦ atzīmēts avots ¦ märgitud allikas
+sources cochées ¦ pažymėti šaltiniai ¦ atzīmēti avoti ¦ märgitud allikat
+Garder une seule des sources cochées : les citations des autres passent dans celle-là ¦ Palikti tik vieną iš pažymėtų šaltinių: kitų citatos pereina į jį ¦ Paturēt tikai vienu no atzīmētajiem avotiem: pārējo citāti pāriet uz to ¦ Jäta alles ainult üks märgitud allikatest: teiste viited lähevad sellele üle
+Supprime les sources cochées et leurs citations ; « ↶ Annuler » les remet ¦ Ištrina pažymėtus šaltinius ir jų citatas; „↶ Anuliuoti“ juos grąžina ¦ Dzēš atzīmētos avotus un to citātus; “↶ Atsaukt” tos atjauno ¦ Kustutab märgitud allikad ja nende viited; „↶ Võta tagasi“ taastab need
+FUSIONNER DES SOURCES ¦ ŠALTINIŲ SUJUNGIMAS ¦ AVOTU APVIENOŠANA ¦ ALLIKATE ÜHENDAMINE
+Garder une seule source ¦ Palikti tik vieną šaltinį ¦ Paturēt tikai vienu avotu ¦ Jäta alles ainult üks allikas
+⇄ Fusionner ¦ ⇄ Sujungti ¦ ⇄ Apvienot ¦ ⇄ Ühenda
+Les citations, étiquettes, médias et notes des autres passent dans la source gardée ; ses cases vides sont complétées. « ↶ Annuler » remet tout comme avant. ¦ Kitų citatos, žymos, medija ir pastabos pereina į paliekamą šaltinį; jo tušti laukai užpildomi. „↶ Anuliuoti“ grąžina viską, kaip buvo. ¦ Pārējo citāti, birkas, mediji un piezīmes pāriet uz paturēto avotu; tā tukšie lauki tiek aizpildīti. “↶ Atsaukt” atjauno visu, kā bija. ¦ Teiste viited, sildid, meedia ja märkmed lähevad alles jäetud allikale; selle tühjad väljad täidetakse. „↶ Võta tagasi“ taastab kõik endiseks.
+{n} fusionnées dans une seule ¦ {n} sujungta į vieną ¦ {n} apvienoti vienā ¦ {n} ühendatud üheks
+Fusionner avec ses doublons ¦ Sujungti su jo dublikatais ¦ Apvienot ar tā dublikātiem ¦ Ühenda oma duplikaatidega
+{n} sources se ressemblent ¦ {n} šaltiniai panašūs ¦ {n} avoti ir līdzīgi ¦ {n} allikat sarnanevad
+Copier la citation ¦ Kopijuoti citatą ¦ Kopēt citātu ¦ Kopeeri viide
+Le style classique, à la française ¦ Klasikinis stilius, prancūziškai ¦ Klasiskais stils, franču gaumē ¦ Klassikaline stiil, prantsuse moodi
+Exporter (RIS, BibTeX) ¦ Eksportuoti (RIS, BibTeX) ¦ Eksportēt (RIS, BibTeX) ¦ Ekspordi (RIS, BibTeX)
+« ↶ Annuler » la remet ¦ „↶ Anuliuoti“ jį grąžina ¦ “↶ Atsaukt” to atjauno ¦ „↶ Võta tagasi“ taastab selle
+Entrée de la liste des sources ¦ Šaltinių sąrašo įrašas ¦ Avotu saraksta ieraksts ¦ Allikaloendi kirje
+Première note ¦ Pirma išnaša ¦ Pirmā piezīme ¦ Esimene märkus
+Note suivante ¦ Kita išnaša ¦ Nākamā piezīme ¦ Järgmine märkus
+Choisis un modèle : la citation s’écrit toute seule, à la manière d’Evidence Explained. ¦ Pasirink šabloną: citata parašoma savaime, Evidence Explained stiliumi. ¦ Izvēlies veidni: citāts uzrakstās pats, Evidence Explained stilā. ¦ Vali mall: viide kirjutatakse ise, Evidence Explained’i moodi.
+Toutes les sources ¦ Visi šaltiniai ¦ Visi avoti ¦ Kõik allikad
+{c} · {p} ¦ {c} · {p} ¦ {c} · {p} ¦ {c} · {p}
+Dépôt (service d’archives) ¦ Saugykla (archyvas) ¦ Glabātava (arhīvs) ¦ Hoiukoht (arhiiv)
+— Aucun — ¦ — Jokio — ¦ — Neviens — ¦ — Puudub —
+Dépôt écrit à la main ¦ Ranka įrašyta saugykla ¦ Ar roku ierakstīta glabātava ¦ Käsitsi kirjutatud hoiukoht
+Publication ¦ Leidinys ¦ Publikācija ¦ Väljaanne
+Modèle de citation ¦ Citavimo šablonas ¦ Citēšanas veidne ¦ Viitemall
+— Pas de modèle — ¦ — Be šablono — ¦ — Bez veidnes — ¦ — Mallita —
+La citation, prête à coller ¦ Citata, paruošta įklijuoti ¦ Citāts, gatavs ielīmēšanai ¦ Viide, kleepimiseks valmis
+Autres styles (classique, Chicago, forum…) ¦ Kiti stiliai (klasikinis, Chicago, forumas…) ¦ Citi stili (klasiskais, Chicago, forums…) ¦ Muud stiilid (klassikaline, Chicago, foorum…)
+Où est-elle citée ? ¦ Kur jis cituojamas? ¦ Kur tas citēts? ¦ Kus sellele viidatakse?
+Citée nulle part pour l’instant. ¦ Kol kas niekur necituojamas. ¦ Pagaidām nekur nav citēts. ¦ Sellele pole veel kuskil viidatud.
+Médias rattachés ¦ Susieta medija ¦ Piesaistītie mediji ¦ Seotud meedia
+Fusionner dans celle-ci ¦ Sujungti į šį ¦ Apvienot šajā ¦ Ühenda sellesse
+💍 Familles et couples ¦ 💍 Šeimos ir poros ¦ 💍 Ģimenes un pāri ¦ 💍 Perekonnad ja paarid
+Chaque couple : le mariage (date, lieu), les enfants, une séparation, les sources. ¦ Kiekviena pora: santuoka (data, vieta), vaikai, skyrybos, šaltiniai. ¦ Katrs pāris: laulība (datums, vieta), bērni, šķiršanās, avoti. ¦ Iga paar: abielu (kuupäev, koht), lapsed, lahkuminek, allikad.
+Chercher un couple… (nom, lieu, année) ¦ Ieškoti poros… (vardas, vieta, metai) ¦ Meklēt pāri… (vārds, vieta, gads) ¦ Otsi paari… (nimi, koht, aasta)
+Sans date de mariage ¦ Be santuokos datos ¦ Bez laulības datuma ¦ Abiellumise kuupäevata
+Avec des enfants ¦ Su vaikais ¦ Ar bērniem ¦ Lastega
+Sans enfant connu ¦ Be žinomų vaikų ¦ Bez zināmiem bērniem ¦ Teadaolevate lasteta
+Séparés, divorcés ¦ Gyvenantys skyrium, išsiskyrę ¦ Šķirti, izšķīrušies ¦ Lahus elavad, lahutatud
+Mariage : les plus anciens ¦ Santuoka: seniausios ¦ Laulība: vecākās ¦ Abielu: vanimad
+Mariage : les plus récents ¦ Santuoka: naujausios ¦ Laulība: jaunākās ¦ Abielu: uusimad
+Le plus d’enfants ¦ Daugiausia vaikų ¦ Visvairāk bērnu ¦ Kõige rohkem lapsi
+Aucun couple ne correspond ¦ Neatitinka nė viena pora ¦ Neviens pāris neatbilst ¦ Ükski paar ei vasta
+Aucun couple pour l’instant ¦ Kol kas porų nėra ¦ Pagaidām nav pāru ¦ Paare veel pole
+Un couple se crée sur une fiche, en ajoutant un conjoint. ¦ Pora sukuriama kortelėje, pridedant sutuoktinį. ¦ Pāris tiek izveidots kartītē, pievienojot laulāto. ¦ Paar luuakse kaardil abikaasa lisamisega.
+Ouvrir la fiche de {name} ¦ Atidaryti {name} kortelę ¦ Atvērt {name} kartīti ¦ Ava isiku {name} kaart
+🔤 Noms de famille ¦ 🔤 Pavardės ¦ 🔤 Uzvārdi ¦ 🔤 Perekonnanimed
+Chaque nom de famille : combien de personnes le portent, à quelle époque, où, ses autres orthographes. Un clic : les personnes de ce nom. ¦ Kiekviena pavardė: kiek asmenų ją turi, kokiu laikotarpiu, kur, kitos jos rašybos. Vienas spustelėjimas – šios pavardės asmenys. ¦ Katrs uzvārds: cik personām tas ir, kurā laikā, kur, citas tā rakstības. Viens klikšķis – personas ar šo uzvārdu. ¦ Iga perekonnanimi: mitmel isikul see on, mis ajal, kus, muud kirjapildid. Üks klõps: selle nimega isikud.
+Chercher un nom… (ex. Mazaud, Tulle) ¦ Ieškoti pavardės… (pvz. Mazaud, Tulle) ¦ Meklēt uzvārdu… (piem. Mazaud, Tulle) ¦ Otsi nime… (nt Mazaud, Tulle)
+Portés par au moins 2 personnes ¦ Turi bent 2 asmenys ¦ Ir vismaz 2 personām ¦ Vähemalt 2 isikul
+Avec des variantes ¦ Su variantais ¦ Ar variantiem ¦ Variantidega
+Les plus portés ¦ Dažniausios ¦ Visbiežākie ¦ Kõige levinumad
+Aucun nom de famille pour l’instant ¦ Kol kas pavardžių nėra ¦ Pagaidām nav uzvārdu ¦ Perekonnanimesid veel pole
+Porteurs ¦ Turintys ¦ Nesēji ¦ Kandjad
+Variantes ¦ Variantai ¦ Varianti ¦ Variandid
+Tous les noms ¦ Visos pavardės ¦ Visi uzvārdi ¦ Kõik nimed
+Personne ne porte ce nom ¦ Niekas neturi šios pavardės ¦ Nevienam nav šī uzvārda ¦ Kellelgi pole seda nime
+fiche cochée ¦ pažymėta kortelė ¦ atzīmēta kartīte ¦ märgitud kaart
+fiches cochées ¦ pažymėtos kortelės ¦ atzīmētas kartītes ¦ märgitud kaarti
+Toutes les notes écrites sur les fiches, les événements, les couples et les sources. La recherche lit tout le texte. ¦ Visos pastabos, parašytos kortelėse, įvykiuose, porose ir šaltiniuose. Paieška skaito visą tekstą. ¦ Visas piezīmes, kas rakstītas kartītēs, notikumos, pāros un avotos. Meklēšana lasa visu tekstu. ¦ Kõik kaartidele, sündmustele, paaridele ja allikatele kirjutatud märkmed. Otsing loeb kogu teksti.
+Chercher dans les notes… (ex. moulin, Tulle, 1870) ¦ Ieškoti pastabose… (pvz. malūnas, Tulle, 1870) ¦ Meklēt piezīmēs… (piem. dzirnavas, Tulle, 1870) ¦ Otsi märkmetest… (nt veski, Tulle, 1870)
+Rattachées à ¦ Susieta su ¦ Piesaistītas ¦ Seotud
+Aucune note ne contient ces mots ¦ Nė vienoje pastaboje nėra šių žodžių ¦ Nevienā piezīmē nav šo vārdu ¦ Ükski märge ei sisalda neid sõnu
+Essaie un autre mot, ou une partie du mot. ¦ Pabandyk kitą žodį arba žodžio dalį. ¦ Mēģini citu vārdu vai vārda daļu. ¦ Proovi muud sõna või sõna osa.
+Les notes s’écrivent sur les fiches, les événements et les sources. ¦ Pastabos rašomos kortelėse, įvykiuose ir šaltiniuose. ¦ Piezīmes raksta kartītēs, notikumos un avotos. ¦ Märkmeid kirjutatakse kaartidele, sündmustele ja allikatele.
+Voir plus ¦ Rodyti daugiau ¦ Rādīt vairāk ¦ Näita rohkem
+note cochée ¦ pažymėta pastaba ¦ atzīmēta piezīme ¦ märgitud märge
+notes cochées ¦ pažymėtos pastabos ¦ atzīmētas piezīmes ¦ märgitud märget
+notes ¦ pastabos ¦ piezīmes ¦ märkmed
+« ↶ Annuler » les remet ¦ „↶ Anuliuoti“ juos grąžina ¦ “↶ Atsaukt” tos atjauno ¦ „↶ Võta tagasi“ taastab need
+NOTE ¦ PASTABA ¦ PIEZĪME ¦ MÄRGE
+SOURCES ¦ ŠALTINIAI ¦ AVOTI ¦ ALLIKAD
+Nouvelle source ¦ Naujas šaltinis ¦ Jauns avots ¦ Uus allikas
+ex. État civil de Tulle, naissances 1823 ¦ pvz. Tulle civilinė metrikacija, gimimai 1823 ¦ piem. Tulles civilstāvokļa akti, dzimšanas 1823 ¦ nt Tulle perekonnaseis, sünnid 1823
+ex. Archives de la Corrèze ¦ pvz. Corrèze archyvas ¦ piem. Korēzas arhīvs ¦ nt Corrèze’i arhiiv
+Source ajoutée ¦ Šaltinis pridėtas ¦ Avots pievienots ¦ Allikas lisatud
+Enregistrer ces filtres sous un nom, ou rappeler des filtres enregistrés ¦ Išsaugoti šiuos filtrus pavadinimu arba atkurti išsaugotus filtrus ¦ Saglabāt šos filtrus ar nosaukumu vai atsaukt saglabātos filtrus ¦ Salvesta need filtrid nimega või too tagasi salvestatud filtrid
+{n} filtre(s) ¦ {n} filtr. ¦ {n} filtrs(-i) ¦ {n} filter/filtrit
+La recherche, les filtres et le tri de maintenant, sous un nom ¦ Dabartinė paieška, filtrai ir rikiavimas pavadinimu ¦ Pašreizējā meklēšana, filtri un kārtošana ar nosaukumu ¦ Praegune otsing, filtrid ja sortimine nimega
+Choisis d’abord une recherche ou un filtre ¦ Pirmiausia pasirink paiešką arba filtrą ¦ Vispirms izvēlies meklēšanu vai filtru ¦ Vali kõigepealt otsing või filter
+Un nom pour retrouver cette liste filtrée d’un clic. ¦ Pavadinimas, kad šį filtruotą sąrašą rastum vienu spustelėjimu. ¦ Nosaukums, lai šo filtrēto sarakstu atrastu ar vienu klikšķi. ¦ Nimi, et see filtreeritud loend ühe klõpsuga leida.
+ex. Les Mazaud nés à Tulle ¦ pvz. Tulle gimę Mazaud ¦ piem. Tullē dzimušie Mazaud ¦ nt Tulles sündinud Mazaud’d
+Filtres gardés sous « {name} ». ¦ Filtrai išsaugoti pavadinimu „{name}“. ¦ Filtri saglabāti ar nosaukumu “{name}”. ¦ Filtrid salvestatud nimega „{name}“.
+Oublier « {name} » ¦ Pamiršti „{name}“ ¦ Aizmirst “{name}” ¦ Unusta „{name}“
+Filtres « {name} » oubliés ¦ Filtrai „{name}“ pamiršti ¦ Filtri “{name}” aizmirsti ¦ Filtrid „{name}“ unustatud
+Filtres enregistrés ¦ Išsaugoti filtrai ¦ Saglabātie filtri ¦ Salvestatud filtrid
+événement coché ¦ pažymėtas įvykis ¦ atzīmēts notikums ¦ märgitud sündmus
+événements cochés ¦ pažymėti įvykiai ¦ atzīmēti notikumi ¦ märgitud sündmust
+Double-clic pour corriger ¦ Dukart spustelėk, kad pataisytum ¦ Dubultklikšķis, lai labotu ¦ Topeltklõps parandamiseks
+Corriger la date ¦ Pataisyti datą ¦ Labot datumu ¦ Paranda kuupäev
+Ou double-clic sur la case ¦ Arba dukart spustelėk langelį ¦ Vai dubultklikšķis uz lodziņa ¦ Või topeltklõps lahtril
+Nouvelle valeur ¦ Nauja reikšmė ¦ Jauna vērtība ¦ Uus väärtus
+Corrigé : « {v} » ¦ Pataisyta: „{v}“ ¦ Labots: “{v}” ¦ Parandatud: „{v}“
+✓ Terminée le {date} ¦ ✓ Baigta {date} ¦ ✓ Pabeigts {date} ¦ ✓ Lõpetatud {date}
+À faire (date passée) ¦ Padaryti (data praėjo) ¦ Jādara (datums pagājis) ¦ Teha (kuupäev möödas)
+À faire ({n}) ¦ Padaryti ({n}) ¦ Jādara ({n}) ¦ Teha ({n})
+✓ Terminées ({n}) ¦ ✓ Baigtos ({n}) ¦ ✓ Pabeigtās ({n}) ¦ ✓ Lõpetatud ({n})
+✓ Terminées ¦ ✓ Baigtos ¦ ✓ Pabeigtās ¦ ✓ Lõpetatud
+Date passée, pas faites ({n}) ¦ Data praėjo, nepadaryta ({n}) ¦ Datums pagājis, nav izdarīts ({n}) ¦ Kuupäev möödas, tegemata ({n})
+Date passée ¦ Data praėjo ¦ Datums pagājis ¦ Kuupäev möödas
+Cote retirée de la visite. ¦ Šifras pašalintas iš apsilankymo. ¦ Šifrs noņemts no apmeklējuma. ¦ Säilikutähis eemaldatud külastusest.
+Donne un titre à la source. ¦ Suteik šaltiniui pavadinimą. ¦ Piešķir avotam nosaukumu. ¦ Anna allikale pealkiri.
+Adresse internet invalide (elle doit commencer par https://). ¦ Netinkamas interneto adresas (turi prasidėti https://). ¦ Nederīga interneta adrese (tai jāsākas ar https://). ¦ Vigane veebiaadress (peab algama https://).
+Source à garder introuvable. ¦ Paliekamas šaltinis nerastas. ¦ Paturamais avots nav atrasts. ¦ Allesjäetavat allikat ei leitud.
+Choisis au moins une autre source à fusionner. ¦ Pasirink bent dar vieną šaltinį sujungti. ¦ Izvēlies vismaz vēl vienu avotu apvienošanai. ¦ Vali ühendamiseks vähemalt üks teine allikas.
+Choisis une étiquette ou écris son nom. ¦ Pasirink žymą arba įrašyk jos pavadinimą. ¦ Izvēlies birku vai ieraksti tās nosaukumu. ¦ Vali silt või kirjuta selle nimi.
+Cette liste ne contient pas des personnes. ¦ Šiame sąraše nėra asmenų. ¦ Šis saraksts nesatur personas. ¦ See loend ei sisalda isikuid.
+Cette case ne se modifie pas ici. ¦ Šio langelio čia keisti negalima. ¦ Šo lodziņu šeit nevar mainīt. ¦ Seda lahtrit siin ei muudeta.
+La feuille de mission n’existe plus. ¦ Užduoties lapo nebėra. ¦ Uzdevuma lapa vairs nepastāv. ¦ Ülesandeleht pole enam olemas.
+Acte d’état civil ¦ Civilinės metrikacijos aktas ¦ Civilstāvokļa akts ¦ Perekonnaseisuakt
+Registre (ex. Naissances) ¦ Registras (pvz. Gimimai) ¦ Reģistrs (piem. Dzimšanas) ¦ Register (nt Sünnid)
+Année(s) ¦ Metai ¦ Gads(-i) ¦ Aasta(d)
+N° de l’acte ¦ Akto Nr. ¦ Akta Nr. ¦ Akti nr
+Qui (personne de l’acte) ¦ Kas (akto asmuo) ¦ Kas (akta persona) ¦ Kes (akti isik)
+Lien de la vue ¦ Vaizdo nuoroda ¦ Attēla saite ¦ Kujutise link
+Paroisse ¦ Parapija ¦ Draudze ¦ Kihelkond
+Registre (ex. Baptêmes, mariages, sépultures) ¦ Registras (pvz. Krikštai, santuokos, laidojimai) ¦ Reģistrs (piem. Kristības, laulības, apbedīšanas) ¦ Register (nt Ristimised, laulatused, matused)
+Quartier, rue ¦ Rajonas, gatvė ¦ Rajons, iela ¦ Linnaosa, tänav
+Page ou folio ¦ Puslapis arba lapas ¦ Lapa vai folija ¦ Lehekülg või foolio
+Foyer de ¦ Namų ūkis: ¦ Mājsaimniecība: ¦ Leibkond:
+Résidence du notaire ¦ Notaro buveinė ¦ Notāra atrašanās vieta ¦ Notari asukoht
+Nature de l’acte ¦ Akto pobūdis ¦ Akta veids ¦ Akti liik
+Bureau de recrutement ¦ Šaukimo biuras ¦ Iesaukšanas birojs ¦ Värbamisbüroo
+N° matricule ¦ Registro Nr. ¦ Matrikulas Nr. ¦ Matrikli nr
+Soldat ¦ Karys ¦ Karavīrs ¦ Sõdur
+Livre, revue ¦ Knyga, žurnalas ¦ Grāmata, žurnāls ¦ Raamat, ajakiri
+Page(s) ¦ Puslapis(-iai) ¦ Lapa(-s) ¦ Lehekülg/-küljed
+Page internet, base en ligne ¦ Tinklalapis, internetinė duomenų bazė ¦ Tīmekļa lapa, tiešsaistes datubāze ¦ Veebileht, veebiandmebaas
+Auteur ou organisme ¦ Autorius arba organizacija ¦ Autors vai organizācija ¦ Autor või organisatsioon
+Titre de la page ¦ Puslapio pavadinimas ¦ Lapas nosaukums ¦ Lehe pealkiri
+Site n° {n} ¦ Vieta Nr. {n} ¦ Vieta Nr. {n} ¦ Paik nr {n}
+Sans site ¦ Be vietos ¦ Bez vietas ¦ Paigata
+revus l’année suivante ({b} sur {n}) ¦ vėl pastebėti kitais metais ({b} iš {n}) ¦ atkal novēroti nākamajā gadā ({b} no {n}) ¦ järgmisel aastal uuesti nähtud ({b}/{n})
+Cohorte ¦ Kohorta ¦ Kohorta ¦ Kohort
+Site ¦ Vieta ¦ Vieta ¦ Paik
+Revus l’année suivante ¦ Vėl pastebėti kitais metais ¦ Atkal novēroti nākamajā gadā ¦ Järgmisel aastal uuesti nähtud
+Pas encore assez d’années d’observations pour calculer les retours. ¦ Dar nepakanka stebėjimo metų sugrįžimams apskaičiuoti. ¦ Vēl nav pietiekami daudz novērojumu gadu, lai aprēķinātu atgriešanos. ¦ Vaatlusaastaid pole veel piisavalt, et tagasitulekuid arvutada.
+cohorte ¦ kohorta ¦ kohorta ¦ kohort
+délai : {n} ¦ terminas: {n} ¦ termiņš: {n} ¦ viivitus: {n}
+jamais vu ¦ niekada nematytas ¦ nekad nav redzēts ¦ pole kunagi nähtud
+Délais par espèce ¦ Terminai pagal rūšį ¦ Termiņi pa sugām ¦ Viivitused liigi kaupa
+Tous ont été revus à temps. ¦ Visi buvo vėl pastebėti laiku. ¦ Visi tika atkal novēroti laikā. ¦ Kõik nähti õigel ajal uuesti.
+🔔 Délais par espèce ¦ 🔔 Terminai pagal rūšį ¦ 🔔 Termiņi pa sugām ¦ 🔔 Viivitused liigi kaupa

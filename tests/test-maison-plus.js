@@ -75,7 +75,7 @@ const PNG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJA
     const {findPhp, devBundledPhp, phpRuntimeArgs} = require('../electron/php-server');
     const phpPath = findPhp([devBundledPhp()]);
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'carnet-maisonplus-')), dir = path.join(tmp, 'data'); fs.mkdirSync(path.join(dir, 'media'), {recursive: true});
-    const env = {...process.env, GENEALOGY_DATA_DIR: dir, GENEALOGY_MEDIA_DIR: path.join(dir, 'media'), GENEALOGY_SKIP_REFERENCE: '1'};
+    const env = {...process.env, GENEALOGY_DATA_DIR: dir, GENEALOGY_MEDIA_DIR: path.join(dir, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4'};
     const r0 = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', String.raw`require 'lib/paths.php'; $p = new PDO('sqlite:'.DATA_DIR.'/genealogy.sqlite'); $p->exec(file_get_contents(APP_ROOT.'/data/schema.sql')); $p->exec("INSERT INTO persons(first_name,last_name,gender) VALUES('Marie','Durand','female')");`], {cwd: appRoot, env, encoding: 'utf8'});
     if (r0.status !== 0) throw new Error(r0.stderr || r0.stdout);
     const port = await new Promise(res => { const s = net.createServer(); s.listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => res(p)); }); });

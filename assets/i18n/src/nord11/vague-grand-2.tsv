@@ -1,0 +1,835 @@
+fr ¦ vi ¦ id
+Au bout de combien de jours sans nouvelles un animal est-il « en retard » ? Rouge au double du délai. ¦ Sau bao nhiêu ngày không có tin thì một con vật bị coi là « trễ »? Màu đỏ khi gấp đôi thời hạn. ¦ Setelah berapa hari tanpa kabar seekor hewan dianggap « terlambat »? Merah saat dua kali batas waktu.
+Espèce inconnue ¦ Loài không rõ ¦ Spesies tidak diketahui
+Délais par espèce changés ¦ Đã đổi thời hạn theo loài ¦ Batas waktu per spesies diubah
+Animal (nom, bague…) ¦ Con vật (tên, vòng…) ¦ Hewan (nama, cincin…)
+ou bague lue ¦ hoặc vòng đã đọc ¦ atau cincin yang terbaca
+Bague lue ¦ Vòng đã đọc ¦ Cincin terbaca
+nb ¦ sl ¦ jml
+Nombre vus ¦ Số lượng thấy ¦ Jumlah terlihat
+Le menu de choix n’est pas encore chargé. ¦ Menu lựa chọn chưa được tải. ¦ Menu pilihan belum dimuat.
+⚡ Saisie d’une séance ¦ ⚡ Nhập một buổi quan sát ¦ ⚡ Catat satu sesi
+Tout enregistrer ¦ Lưu tất cả ¦ Simpan semua
+Le lieu, la date et l’observateur une seule fois ; puis une ligne par animal vu (ou par bague lue, si tu ne sais pas encore qui c’est). ¦ Địa điểm, ngày và người quan sát chỉ nhập một lần; sau đó mỗi dòng là một con vật đã thấy (hoặc một vòng đã đọc, nếu bạn chưa biết đó là con nào). ¦ Tempat, tanggal, dan pengamat cukup sekali; lalu satu baris per hewan yang terlihat (atau per cincin yang terbaca, kalau kamu belum tahu itu siapa).
+Site de suivi ¦ Điểm theo dõi ¦ Lokasi pemantauan
+Observateur ¦ Người quan sát ¦ Pengamat
+Nb ¦ SL ¦ Jml
+Dis quand a eu lieu la séance. ¦ Hãy cho biết buổi quan sát diễn ra khi nào. ¦ Sebutkan kapan sesi itu berlangsung.
+Choisis un site ou un lieu pour la séance. ¦ Hãy chọn một điểm hoặc một địa điểm cho buổi quan sát. ¦ Pilih lokasi atau tempat untuk sesi ini.
+Ajoute au moins un animal vu. ¦ Hãy thêm ít nhất một con vật đã thấy. ¦ Tambahkan setidaknya satu hewan yang terlihat.
+Séance enregistrée : {n} ¦ Đã lưu buổi quan sát: {n} ¦ Sesi tersimpan: {n}
+🖨 Fiche de terrain ¦ 🖨 Phiếu thực địa ¦ 🖨 Lembar lapangan
+Aperçu et impression ¦ Xem trước và in ¦ Pratinjau dan cetak
+Les animaux attendus sur un site (ceux qu’on y a déjà vus), avec leurs bagues et marques, et des cases à cocher : pour une sortie sans ordinateur. ¦ Những con vật dự kiến ở một điểm (những con đã từng thấy ở đó), cùng vòng và dấu hiệu của chúng, và ô để đánh dấu: cho một chuyến đi không cần máy tính. ¦ Hewan yang diharapkan di suatu lokasi (yang pernah terlihat di sana), dengan cincin dan tandanya, serta kotak centang: untuk keluar tanpa komputer.
+Tous les animaux suivis ¦ Tất cả con vật được theo dõi ¦ Semua hewan yang dipantau
+Tous les sites ¦ Tất cả các điểm ¦ Semua lokasi
+Aucun animal déjà vu sur ce site. ¦ Chưa có con vật nào được thấy ở điểm này. ¦ Belum ada hewan yang terlihat di lokasi ini.
+Fiche de terrain — {s} ¦ Phiếu thực địa — {s} ¦ Lembar lapangan — {s}
+Fiche de terrain ¦ Phiếu thực địa ¦ Lembar lapangan
+Date de la dernière observation ¦ Ngày quan sát gần nhất ¦ Tanggal pengamatan terakhir
+Une colonne pour les notes ¦ Một cột để ghi chú ¦ Satu kolom untuk catatan
+Date : ____________  Observateur : ____________________  Météo : ____________ ¦ Ngày: ____________  Người quan sát: ____________________  Thời tiết: ____________ ¦ Tanggal: ____________  Pengamat: ____________________  Cuaca: ____________
+SUCCESSIONS ¦ THỪA KẾ ¦ PEWARISAN
+Qui s’en charge ? ¦ Ai phụ trách? ¦ Siapa yang menangani?
+ex. Claire LACOMBE (vide : personne) ¦ vd. Claire LACOMBE (để trống: không ai) ¦ mis. Claire LACOMBE (kosong: tidak ada)
+C’est moi (pour le filtre « Mes dossiers ») ¦ Là tôi (cho bộ lọc « Hồ sơ của tôi ») ¦ Ini aku (untuk filter « Berkasku »)
+Sur cet ordinateur, « moi » = {name}. ¦ Trên máy tính này, « tôi » = {name}. ¦ Di komputer ini, « aku » = {name}.
+Confié à {who} ¦ Giao cho {who} ¦ Diserahkan ke {who}
+Plus personne n’en est chargé ¦ Không còn ai phụ trách ¦ Tidak ada lagi yang menangani
+Chargé du dossier : ¦ Người phụ trách hồ sơ: ¦ Penanggung jawab berkas:
+👥 Confier le dossier… ¦ 👥 Giao hồ sơ… ¦ 👥 Serahkan berkas…
+👥 Chargé du dossier n° {n} ¦ 👥 Phụ trách hồ sơ số {n} ¦ 👥 Penanggung jawab berkas no. {n}
+à confier ¦ cần giao ¦ perlu diserahkan
+👥 Qui s’occupe de cette échéance ? ¦ 👥 Ai lo hạn chót này? ¦ 👥 Siapa yang mengurus tenggat ini?
+🛡 Conflit d’intérêts possible : {n} déjà dans un autre dossier ouvert. Vérifie avant de signer un contrat. ¦ 🛡 Có thể xung đột lợi ích: {n} đã có trong một hồ sơ khác đang mở. Hãy kiểm tra trước khi ký hợp đồng. ¦ 🛡 Kemungkinan konflik kepentingan: {n} sudah ada di berkas lain yang terbuka. Periksa sebelum menandatangani kontrak.
+dossier n° {n} ¦ hồ sơ số {n} ¦ berkas no. {n}
+Pas d’image de cette pièce dans la base : relie l’acte scanné à l’événement, puis recommence. ¦ Không có ảnh của giấy tờ này trong cơ sở dữ liệu: hãy liên kết văn bản đã quét với sự kiện, rồi thử lại. ¦ Tidak ada gambar dokumen ini di basis data: tautkan akta hasil pindaian ke peristiwanya, lalu ulangi.
+La lecture automatique n’a pas marché : {err} ¦ Đọc tự động không thành công: {err} ¦ Pembacaan otomatis gagal: {err}
+Aucun texte lu sur cette image (écriture manuscrite ? essaie l’Atelier de transcription). ¦ Không đọc được chữ nào trên ảnh này (chữ viết tay? hãy thử Xưởng chép văn bản). ¦ Tidak ada teks terbaca di gambar ini (tulisan tangan? coba Bengkel transkripsi).
+rien de trouvé ¦ không tìm thấy gì ¦ tidak ada yang ditemukan
+PIÈCE ¦ GIẤY TỜ ¦ DOKUMEN
+🔎 Lecture automatique — à vérifier ¦ 🔎 Đọc tự động — cần kiểm tra ¦ 🔎 Pembacaan otomatis — perlu diperiksa
+✍️ Noter au journal ¦ ✍️ Ghi vào nhật ký ¦ ✍️ Catat di jurnal
+Ce que la machine a cru lire sur « {t} ». Décoche ce qui est faux : rien n’est changé dans les fiches. ¦ Những gì máy nghĩ là đã đọc được trên « {t} ». Bỏ chọn những gì sai: không có gì thay đổi trong các hồ sơ. ¦ Apa yang dikira mesin terbaca pada « {t} ». Hapus centang yang salah: tidak ada yang diubah di profil.
+Lecture automatique de la pièce « {p} » (à vérifier) — {line} ¦ Đọc tự động giấy tờ « {p} » (cần kiểm tra) — {line} ¦ Pembacaan otomatis dokumen « {p} » (perlu diperiksa) — {line}
+Noté au journal du dossier. ¦ Đã ghi vào nhật ký hồ sơ. ¦ Dicatat di jurnal berkas.
+Lire le texte de l’acte scanné et proposer noms, dates et lieux ¦ Đọc chữ của văn bản đã quét và gợi ý tên, ngày và nơi ¦ Baca teks akta hasil pindaian dan usulkan nama, tanggal, dan tempat
+🔎 Lire la pièce ¦ 🔎 Đọc giấy tờ ¦ 🔎 Baca dokumen
+demandée ¦ đã yêu cầu ¦ sudah diminta
+à obtenir ¦ cần lấy ¦ perlu didapat
+Tableau généalogique de dévolution ¦ Bảng phân chia thừa kế theo gia phả ¦ Tabel silsilah pewarisan
+PROJET — à vérifier et compléter par le notaire. Calcul indicatif établi d’après les fiches de la base. ¦ DỰ THẢO — công chứng viên cần kiểm tra và bổ sung. Tính toán chỉ mang tính tham khảo, dựa trên các hồ sơ trong cơ sở dữ liệu. ¦ DRAF — perlu diperiksa dan dilengkapi oleh notaris. Perhitungan indikatif berdasarkan profil di basis data.
+Pièces (renvois) ¦ Giấy tờ (tham chiếu) ¦ Dokumen (rujukan)
+conjoint survivant ¦ vợ/chồng còn sống ¦ pasangan yang masih hidup
+Aucun héritier calculé pour l’instant. ¦ Chưa tính được người thừa kế nào. ¦ Belum ada ahli waris yang dihitung.
+Les pièces ¦ Các giấy tờ ¦ Dokumen-dokumen
+Établi le {d}. Document de travail : il ne remplace ni l’acte de notoriété ni le certificat d’hérédité. ¦ Lập ngày {d}. Tài liệu làm việc: không thay thế văn bản công chứng xác nhận người thừa kế hay giấy chứng nhận thừa kế. ¦ Dibuat pada {d}. Dokumen kerja: tidak menggantikan akta keterangan ahli waris maupun surat keterangan waris.
+Projet de tableau de dévolution ¦ Dự thảo bảng phân chia thừa kế ¦ Draf tabel pewarisan
+🖨 Imprimer le tableau ¦ 🖨 In bảng ¦ 🖨 Cetak tabel
+À joindre à l’acte de notoriété : chaque héritier, son lien, sa part, et les pièces qui le prouvent (P1, P2…). ¦ Đính kèm vào văn bản công chứng xác nhận người thừa kế: mỗi người thừa kế, quan hệ, phần được hưởng, và các giấy tờ chứng minh (P1, P2…). ¦ Lampirkan ke akta keterangan ahli waris: setiap ahli waris, hubungannya, bagiannya, dan dokumen buktinya (P1, P2…).
+Tableau de dévolution — {n} ¦ Bảng phân chia thừa kế — {n} ¦ Tabel pewarisan — {n}
+Tableau de dévolution ¦ Bảng phân chia thừa kế ¦ Tabel pewarisan
+Tableau de dévolution {n} ¦ Bảng phân chia thừa kế {n} ¦ Tabel pewarisan {n}
+12 juin 1890 ¦ 12 tháng 6 năm 1890 ¦ 12 Juni 1890
+2000 et après ¦ 2000 trở về sau ¦ 2000 dan sesudahnya
+7 mai 1925 ¦ 7 tháng 5 năm 1925 ¦ 7 Mei 1925
+Aucun chemin de parenté connu avec la personne de départ. ¦ Không biết đường quan hệ họ hàng nào với người gốc. ¦ Tidak ada jalur kekerabatan yang diketahui dengan orang awal.
+Aucun lien de parenté connu. ¦ Không biết quan hệ họ hàng nào. ¦ Tidak ada hubungan kekerabatan yang diketahui.
+Aucun lien de parenté trouvé avec {nm} (personne de départ). ¦ Không tìm thấy quan hệ họ hàng nào với {nm} (người gốc). ¦ Tidak ditemukan hubungan kekerabatan dengan {nm} (orang awal).
+Aucune différence : la fiche est comme avant cette modification. ¦ Không có khác biệt: hồ sơ vẫn như trước lần sửa này. ¦ Tidak ada perbedaan: profil sama seperti sebelum perubahan ini.
+Aucune union enregistrée pour cette fiche. ¦ Hồ sơ này chưa ghi cuộc hôn phối nào. ¦ Belum ada pernikahan tercatat untuk profil ini.
+Avant cette modification ¦ Trước lần sửa này ¦ Sebelum perubahan ini
+Caché en mode consultation, dans les exports, les partages et le site. ¦ Ẩn trong chế độ xem, trong bản xuất, khi chia sẻ và trên trang web. ¦ Disembunyikan dalam mode lihat, ekspor, berbagi, dan situs.
+Cet élément n’existe plus : utilise « Restaurer » s’il a été supprimé. ¦ Mục này không còn nữa: hãy dùng « Khôi phục » nếu nó đã bị xóa. ¦ Item ini sudah tidak ada: gunakan « Pulihkan » jika sudah dihapus.
+Cette fiche a {n} {what} : garde la bonne, l’autre devient une « autre version » de ce fait. ¦ Hồ sơ này có {n} {what}: giữ cái đúng, cái kia thành « phiên bản khác » của sự kiện này. ¦ Profil ini punya {n} {what}: simpan yang benar, yang lain menjadi « versi lain » dari fakta ini.
+Chargement de la fiche familiale… ¦ Đang tải hồ sơ gia đình… ¦ Memuat lembar keluarga…
+Chargement des pesées… ¦ Đang tải các lần cân… ¦ Memuat penimbangan…
+Choisis « ⤓ PDF » pour enregistrer le fichier. ¦ Chọn « ⤓ PDF » để lưu tệp. ¦ Pilih « ⤓ PDF » untuk menyimpan berkas.
+Confidentialité et recherche ¦ Riêng tư và tìm kiếm ¦ Privasi dan penelusuran
+Courbe de poids ¦ Đường cân nặng ¦ Kurva berat
+Créer la famille ¦ Tạo gia đình ¦ Buat keluarga
+C’est la personne de départ (de cujus). ¦ Đây là người gốc (de cujus). ¦ Ini orang awal (de cujus).
+C’est la personne de départ. ¦ Đây là người gốc. ¦ Ini orang awal.
+Date du média moins date de naissance ¦ Ngày của tư liệu trừ ngày sinh ¦ Tanggal media dikurangi tanggal lahir
+Dernière modification ¦ Lần sửa gần nhất ¦ Perubahan terakhir
+Dernières fiches créées ¦ Hồ sơ tạo gần đây ¦ Profil terbaru yang dibuat
+En vie et décédés ¦ Còn sống và đã mất ¦ Masih hidup dan sudah meninggal
+Exporter la fiche ¦ Xuất hồ sơ ¦ Ekspor profil
+Exporter la fiche (JSON) ¦ Xuất hồ sơ (JSON) ¦ Ekspor profil (JSON)
+Exports rapides de cette fiche : 🖨 Imprimer ouvre l’aperçu de l’app (format, sens, PDF), avec l’ordre, la taille et la visibilité des blocs de cette fiche. Les événements 🔒 confidentiels ne sont jamais exportés. ¦ Xuất nhanh hồ sơ này: 🖨 In mở bản xem trước của ứng dụng (khổ giấy, hướng, PDF), với thứ tự, kích thước và việc hiện các khối của hồ sơ này. Các sự kiện 🔒 riêng tư không bao giờ được xuất. ¦ Ekspor cepat profil ini: 🖨 Cetak membuka pratinjau aplikasi (format, arah, PDF), dengan urutan, ukuran, dan tampilan blok profil ini. Peristiwa 🔒 rahasia tidak pernah diekspor.
+FICHE FAMILIALE ¦ HỒ SƠ GIA ĐÌNH ¦ LEMBAR KELUARGA
+Famille enregistrée : {n} fiche(s) créée(s). ¦ Đã lưu gia đình: đã tạo {n} hồ sơ. ¦ Keluarga tersimpan: {n} profil dibuat.
+Famille enregistrée. ¦ Đã lưu gia đình. ¦ Keluarga tersimpan.
+Fiche en JSON ¦ Hồ sơ dạng JSON ¦ Profil dalam JSON
+Fiche familiale ¦ Hồ sơ gia đình ¦ Lembar keluarga
+Fiche familiale de {nm} ¦ Hồ sơ gia đình của {nm} ¦ Lembar keluarga {nm}
+Fiche familiale… ¦ Hồ sơ gia đình… ¦ Lembar keluarga…
+Gardé : l’autre version est notée dans « Date alternative ». ¦ Đã giữ: phiên bản kia được ghi ở « Ngày thay thế ». ¦ Disimpan: versi lainnya dicatat di « Tanggal alternatif ».
+Genre inconnu ¦ Giới tính không rõ ¦ Jenis kelamin tidak diketahui
+Hors Sosa ¦ Ngoài Sosa ¦ Di luar Sosa
+Imprimer la fiche ¦ In hồ sơ ¦ Cetak profil
+Indique au moins le père ou la mère. ¦ Hãy cho biết ít nhất cha hoặc mẹ. ¦ Isi setidaknya ayah atau ibu.
+Inhumation ¦ An táng ¦ Pemakaman
+Les deux branches ¦ Cả hai nhánh ¦ Kedua cabang
+Lien retiré : {nm} ¦ Đã gỡ liên kết: {nm} ¦ Tautan dihapus: {nm}
+Naissance (les plus anciens d’abord) ¦ Ngày sinh (cũ nhất trước) ¦ Kelahiran (terlama dulu)
+Naissance (les plus récents d’abord) ¦ Ngày sinh (mới nhất trước) ¦ Kelahiran (terbaru dulu)
+Naissance inconnue ¦ Ngày sinh không rõ ¦ Kelahiran tidak diketahui
+Note de recherche ¦ Ghi chú tìm kiếm ¦ Catatan penelusuran
+Ouvre d’abord une fiche. ¦ Hãy mở một hồ sơ trước. ¦ Buka profil dulu.
+PDF (aperçu d’impression) ¦ PDF (xem trước khi in) ¦ PDF (pratinjau cetak)
+Pas de fiche d’animal liée. ¦ Không có hồ sơ con vật liên kết. ¦ Tidak ada profil hewan yang tertaut.
+Pas de mariage enregistré. ¦ Chưa ghi cuộc hôn nhân nào. ¦ Belum ada pernikahan tercatat.
+Pas encore de pesée : ajoute un poids dans 🩺 Santé. ¦ Chưa có lần cân nào: hãy thêm cân nặng trong 🩺 Sức khỏe. ¦ Belum ada penimbangan: tambahkan berat di 🩺 Kesehatan.
+Personnaliser l’export… ¦ Tùy chỉnh bản xuất… ¦ Sesuaikan ekspor…
+Prénom NOM, ou choisis une fiche ¦ Tên HỌ, hoặc chọn một hồ sơ ¦ Nama MARGA, atau pilih profil
+Père, mère, mariage et enfants en une seule saisie ¦ Cha, mẹ, hôn nhân và con cái trong một lần nhập ¦ Ayah, ibu, pernikahan, dan anak dalam satu kali isi
+Père, mère, mariage et enfants en une seule saisie. Pour chaque nom : choisis une fiche existante, ou tape « Prénom NOM » pour en créer une. ¦ Cha, mẹ, hôn nhân và con cái trong một lần nhập. Với mỗi tên: chọn một hồ sơ có sẵn, hoặc gõ « Tên HỌ » để tạo mới. ¦ Ayah, ibu, pernikahan, dan anak dalam satu kali isi. Untuk setiap nama: pilih profil yang ada, atau ketik « Nama MARGA » untuk membuat baru.
+Recherche du chemin… ¦ Đang tìm đường… ¦ Mencari jalur…
+Remis : {f} ¦ Đã khôi phục: {f} ¦ Dikembalikan: {f}
+Rien à exporter dans cet écran. ¦ Không có gì để xuất trong màn hình này. ¦ Tidak ada yang bisa diekspor di layar ini.
+SAISIE RAPIDE ¦ NHẬP NHANH ¦ ISI CEPAT
+Sans aucune source ¦ Không có nguồn nào ¦ Tanpa sumber apa pun
+Sans parents ¦ Không có cha mẹ ¦ Tanpa orang tua
+Sans parents connus ¦ Không biết cha mẹ ¦ Orang tua tidak diketahui
+Sous chaque nom : son lien de parenté avec la personne de départ. ¦ Dưới mỗi tên: quan hệ họ hàng với người gốc. ¦ Di bawah setiap nama: hubungan kekerabatannya dengan orang awal.
+TON LIEN ¦ QUAN HỆ CỦA BẠN ¦ HUBUNGANMU
+Tableau (CSV) ¦ Bảng (CSV) ¦ Tabel (CSV)
+Ton lien avec cette personne ¦ Quan hệ của bạn với người này ¦ Hubunganmu dengan orang ini
+Ton lien avec cette personne (depuis {nm}) — clique pour voir le chemin. ¦ Quan hệ của bạn với người này (từ {nm}) — bấm để xem đường. ¦ Hubunganmu dengan orang ini (dari {nm}) — klik untuk melihat jalurnya.
+Tous les genres ¦ Mọi giới tính ¦ Semua jenis kelamin
+Un enfant sans nom de famille prend celui du père. ¦ Con không có họ thì lấy họ của cha. ¦ Anak tanpa nama marga memakai marga ayahnya.
+Voir la note de recherche ¦ Xem ghi chú tìm kiếm ¦ Lihat catatan penelusuran
+conjoint de ¦ vợ/chồng của ¦ pasangan dari
+enfant de ¦ con của ¦ anak dari
+ex. à vérifier : cote 3 E 125, piste : registre de la paroisse voisine ¦ vd. cần kiểm tra: ký hiệu 3 E 125, hướng: sổ của giáo xứ bên cạnh ¦ mis. perlu diperiksa: kode 3 E 125, petunjuk: register paroki tetangga
+inconnu(e) ¦ không rõ ¦ tidak diketahui
+par {nm} ¦ bởi {nm} ¦ oleh {nm}
+parent de ¦ cha/mẹ của ¦ orang tua dari
+{a}–{b} ¦ {a}–{b} ¦ {a}–{b}
+{nm} avait environ {age} ¦ {nm} khoảng {age} ¦ {nm} kira-kira berusia {age}
+{nm} avait moins d’un an ¦ {nm} chưa đầy một tuổi ¦ {nm} berusia kurang dari setahun
+{nm} avait {age} ¦ {nm} {age} ¦ {nm} berusia {age}
+{n} pesée(s) · dernière : {w} le {d} ¦ {n} lần cân · gần nhất: {w} ngày {d} ¦ {n} penimbangan · terakhir: {w} pada {d}
+{n} {what} ¦ {n} {what} ¦ {n} {what}
+{n} étape(s) depuis la personne de départ. ¦ {n} bước từ người gốc. ¦ {n} langkah dari orang awal.
+{s} depuis la première ¦ {s} kể từ lần đầu ¦ {s} sejak yang pertama
+Événement confidentiel : caché en consultation, dans les exports, les partages et le site. ¦ Sự kiện riêng tư: ẩn khi xem, trong bản xuất, khi chia sẻ và trên trang web. ¦ Peristiwa rahasia: disembunyikan saat dilihat, di ekspor, berbagi, dan situs.
+à {x} ¦ lúc {x} ¦ pada {x}
+↩ Remettre ¦ ↩ Khôi phục ¦ ↩ Kembalikan
+⇆ Comparer avec maintenant ¦ ⇆ So sánh với hiện tại ¦ ⇆ Bandingkan dengan sekarang
+⚡ ＋ Famille ¦ ⚡ ＋ Gia đình ¦ ⚡ ＋ Keluarga
+✓ Garder celle-ci ¦ ✓ Giữ cái này ¦ ✓ Simpan yang ini
+✓ Remis ¦ ✓ Đã khôi phục ¦ ✓ Dikembalikan
+＋ Un enfant de plus ¦ ＋ Thêm một người con ¦ ＋ Tambah satu anak
+👪 Fiche familiale ¦ 👪 Hồ sơ gia đình ¦ 👪 Lembar keluarga
+📈 Animal : poids et croissance ¦ 📈 Con vật: cân nặng và tăng trưởng ¦ 📈 Hewan: berat dan pertumbuhan
+📝 Avec une note de recherche ¦ 📝 Có ghi chú tìm kiếm ¦ 📝 Dengan catatan penelusuran
+📝 Note de recherche (à vérifier, cote, piste) ¦ 📝 Ghi chú tìm kiếm (cần kiểm tra, ký hiệu, hướng) ¦ 📝 Catatan penelusuran (perlu diperiksa, kode, petunjuk)
+📝 Note de recherche : {x} ¦ 📝 Ghi chú tìm kiếm: {x} ¦ 📝 Catatan penelusuran: {x}
+🔒 confidentiel ¦ 🔒 riêng tư ¦ 🔒 rahasia
+🔒 Événement confidentiel ¦ 🔒 Sự kiện riêng tư ¦ 🔒 Peristiwa rahasia
+🧭 Aucun lien connu ¦ 🧭 Không biết quan hệ nào ¦ 🧭 Tidak ada hubungan yang diketahui
+🧭 Personne de départ ¦ 🧭 Người gốc ¦ 🧭 Orang awal
+🧭 Ton lien ¦ 🧭 Quan hệ của bạn ¦ 🧭 Hubunganmu
+🧭 Ton lien avec cette personne ¦ 🧭 Quan hệ của bạn với người này ¦ 🧭 Hubunganmu dengan orang ini
+🧭 personne de départ ¦ 🧭 người gốc ¦ 🧭 orang awal
+Nouveau… dans l’onglet ouvert (une personne dans Personnes) ¦ Mới… trong thẻ đang mở (một người trong Người) ¦ Baru… di tab yang terbuka (satu orang di Orang)
+Annuler la dernière modification d’une fiche (hors d’une case de texte, tout de suite, avec « ↷ Rétablir ») ¦ Hoàn tác lần sửa gần nhất của một hồ sơ (ngoài ô văn bản, ngay lập tức, với « ↷ Làm lại ») ¦ Urungkan perubahan terakhir pada profil (di luar kotak teks, langsung, dengan « ↷ Ulangi »)
+Exporter ce que montre l’onglet ouvert (⤓ Exporter) ¦ Xuất những gì thẻ đang mở hiển thị (⤓ Xuất) ¦ Ekspor apa yang ditampilkan tab terbuka (⤓ Ekspor)
+Chercher dans la colonne de gauche ¦ Tìm trong cột bên trái ¦ Cari di kolom kiri
+Aucune personne ne correspond à ces filtres. ¦ Không có người nào khớp với các bộ lọc này. ¦ Tidak ada orang yang cocok dengan filter ini.
+Retire un filtre (Filtrer ▾) ou change le tri. ¦ Bỏ một bộ lọc (Lọc ▾) hoặc đổi cách sắp xếp. ¦ Hapus satu filter (Saring ▾) atau ubah urutan.
+Peau ¦ Da ¦ Kulit
+Origine / mention ¦ Nguồn gốc / ghi chú ¦ Asal / keterangan
+Mention conjoint ¦ Ghi chú vợ/chồng ¦ Keterangan pasangan
+Mention enfants ¦ Ghi chú con cái ¦ Keterangan anak
+Date alternative ¦ Ngày thay thế ¦ Tanggal alternatif
+Lieu (n°) ¦ Nơi (số) ¦ Tempat (no.)
+Type (n°) ¦ Loại (số) ¦ Jenis (no.)
+Confidentiel ¦ Riêng tư ¦ Rahasia
+A : « {a} » ({na}) · B : « {b} » ({nb}) → {n} personne(s) {op}. ¦ A: « {a} » ({na}) · B: « {b} » ({nb}) → {n} người {op}. ¦ A: « {a} » ({na}) · B: « {b} » ({nb}) → {n} orang {op}.
+Acte à commander supprimé ¦ Đã xóa giấy tờ cần đặt ¦ Akta untuk dipesan dihapus
+Ajouter à une liste ¦ Thêm vào danh sách ¦ Tambahkan ke daftar
+Apparence (thème, couleurs, police) ¦ Giao diện (chủ đề, màu, phông chữ) ¦ Tampilan (tema, warna, huruf)
+Aucune citation ne contient ce texte. ¦ Không có trích dẫn nào chứa đoạn chữ này. ¦ Tidak ada kutipan yang berisi teks ini.
+Aucune de « Mes listes » ne contient des personnes : crée-en une dans Réglages → Éditeur de listes. ¦ Không có « Danh sách của tôi » nào chứa người: hãy tạo một danh sách trong Cài đặt → Trình chỉnh sửa danh sách. ¦ Tidak ada « Daftar saya » yang berisi orang: buat satu di Pengaturan → Editor daftar.
+Aucune ligne ne contient « {find} ». ¦ Không có dòng nào chứa « {find} ». ¦ Tidak ada baris yang berisi « {find} ».
+Aucune source ne contient ce texte. ¦ Không có nguồn nào chứa đoạn chữ này. ¦ Tidak ada sumber yang berisi teks ini.
+Ce qui est dans une recherche enregistrée et pas dans l’autre (ex. les Sosa nés en Corrèze sans acte de baptême) : pour trouver les trous. ¦ Những gì có trong một tìm kiếm đã lưu mà không có trong cái kia (vd. các Sosa sinh ở Corrèze mà không có giấy rửa tội): để tìm chỗ thiếu. ¦ Apa yang ada di satu pencarian tersimpan tapi tidak di yang lain (mis. Sosa yang lahir di Corrèze tanpa akta baptis): untuk menemukan celah.
+Changer cette ligne ¦ Đổi dòng này ¦ Ubah baris ini
+Chercher et remplacer : où chercher, majuscules, mot entier ¦ Tìm và thay thế: tìm ở đâu, chữ hoa, cả từ ¦ Cari dan ganti: di mana mencari, huruf besar, kata utuh
+Chercher un mot dans le titre, l’auteur et le texte des sources, et dans la page et la note de chaque citation. ¦ Tìm một từ trong tiêu đề, tác giả và nội dung của nguồn, và trong trang và ghi chú của mỗi trích dẫn. ¦ Cari kata di judul, penulis, dan teks sumber, serta di halaman dan catatan setiap kutipan.
+Choisis deux lieux différents. ¦ Hãy chọn hai nơi khác nhau. ¦ Pilih dua tempat yang berbeda.
+Choisis deux recherches enregistrées. ¦ Hãy chọn hai tìm kiếm đã lưu. ¦ Pilih dua pencarian tersimpan.
+Choisis les deux lieux. ¦ Hãy chọn cả hai nơi. ¦ Pilih kedua tempat.
+Choisis ou écris une étiquette. ¦ Hãy chọn hoặc viết một nhãn. ¦ Pilih atau tulis label.
+Choisis où chercher. ¦ Hãy chọn nơi cần tìm. ¦ Pilih di mana mencari.
+Citée ¦ Được trích dẫn ¦ Dikutip
+Cocher {name} ¦ Chọn {name} ¦ Centang {name}
+Comparer deux recherches ¦ So sánh hai tìm kiếm ¦ Bandingkan dua pencarian
+Corrige une faute partout d’un coup (« cultivatr » → « cultivateur »). Tu vois d’abord chaque ligne qui changerait ; décoche celles à garder. « ↶ Annuler » remet tout comme avant. ¦ Sửa một lỗi ở mọi nơi trong một lần (« cultivatr » → « cultivateur »). Bạn sẽ thấy trước mỗi dòng sẽ thay đổi; bỏ chọn những dòng muốn giữ. « ↶ Hoàn tác » trả mọi thứ về như cũ. ¦ Perbaiki salah ketik di mana saja sekaligus (« cultivatr » → « cultivateur »). Kamu lihat dulu setiap baris yang akan berubah; hapus centang yang mau dipertahankan. « ↶ Urungkan » mengembalikan semuanya seperti semula.
+Dernières recherches vidées ¦ Đã xóa các tìm kiếm gần đây ¦ Pencarian terakhir dikosongkan
+Descriptions des événements ¦ Mô tả sự kiện ¦ Deskripsi peristiwa
+Définition supprimée ¦ Đã xóa định nghĩa ¦ Definisi dihapus
+Dépouillement supprimé ¦ Đã xóa bảng trích lục ¦ Indeks catatan dihapus
+Essaie un autre lien ou moins de critères. ¦ Hãy thử một quan hệ khác hoặc ít tiêu chí hơn. ¦ Coba hubungan lain atau lebih sedikit kriteria.
+Ex : Poilu, À vérifier… ¦ Vd: Poilu, Cần kiểm tra… ¦ Mis.: Poilu, Perlu diperiksa…
+Ex : cultivateur (vide = effacer) ¦ Vd: cultivateur (để trống = xóa) ¦ Mis.: cultivateur (kosong = hapus)
+Ex : cultivatr ¦ Vd: cultivatr ¦ Mis.: cultivatr
+Ex : registre paroissial, folio 12, Tulle… ¦ Vd: sổ giáo xứ, tờ 12, Tulle… ¦ Mis.: register paroki, folio 12, Tulle…
+Extrait ¦ Trích đoạn ¦ Kutipan
+Fais-les dans « Recherche multicritère », puis « Enregistrer ». ¦ Hãy tạo chúng trong « Tìm kiếm nhiều tiêu chí », rồi « Lưu ». ¦ Buat di « Pencarian multikriteria », lalu « Simpan ».
+Graphiques et tableau de bord ¦ Biểu đồ và bảng điều khiển ¦ Grafik dan dasbor
+Il faut au moins deux recherches enregistrées. ¦ Cần ít nhất hai tìm kiếm đã lưu. ¦ Perlu setidaknya dua pencarian tersimpan.
+Lacune supprimée ¦ Đã xóa chỗ thiếu ¦ Celah dihapus
+Les recherches enregistrées ne sont pas disponibles. ¦ Các tìm kiếm đã lưu không dùng được. ¦ Pencarian tersimpan tidak tersedia.
+Lien de parenté inconnu. ¦ Không rõ quan hệ họ hàng. ¦ Hubungan kekerabatan tidak diketahui.
+Ligne de transcription supprimée ¦ Đã xóa dòng chép văn bản ¦ Baris transkripsi dihapus
+Mot entier seulement ¦ Chỉ cả từ ¦ Hanya kata utuh
+Neveux et nièces ¦ Cháu (con của anh chị em) ¦ Keponakan
+Nom de table invalide. ¦ Tên bảng không hợp lệ. ¦ Nama tabel tidak valid.
+Noms de lieux ¦ Tên địa danh ¦ Nama tempat
+Nouvelle étiquette… ¦ Nhãn mới… ¦ Label baru…
+Nés en ou après ¦ Sinh trong hoặc sau năm ¦ Lahir pada atau setelah
+Nés en ou avant ¦ Sinh trong hoặc trước năm ¦ Lahir pada atau sebelum
+Oncles et tantes ¦ Cô dì chú bác ¦ Paman dan bibi
+Onglets ajoutés au menu ¦ Các thẻ đã thêm vào menu ¦ Tab yang ditambahkan ke menu
+Onglets cachés du menu ¦ Các thẻ đã ẩn khỏi menu ¦ Tab yang disembunyikan dari menu
+Ordre des types de recherche ¦ Thứ tự các kiểu tìm kiếm ¦ Urutan jenis pencarian
+Ordre du menu ¦ Thứ tự menu ¦ Urutan menu
+Ouvrir la recherche multicritère ¦ Mở tìm kiếm nhiều tiêu chí ¦ Buka pencarian multikriteria
+Où chercher ¦ Tìm ở đâu ¦ Di mana mencari
+Personne relevée retirée ¦ Đã gỡ người được ghi lại ¦ Orang yang dicatat dihapus
+Puis le lien de parenté cherché. ¦ Rồi đến quan hệ họ hàng cần tìm. ¦ Lalu hubungan kekerabatan yang dicari.
+Rangement des pages des Réglages ¦ Sắp xếp các trang Cài đặt ¦ Penataan halaman Pengaturan
+Recherche A ¦ Tìm kiếm A ¦ Pencarian A
+Recherche B ¦ Tìm kiếm B ¦ Pencarian B
+Recherche dans les sources… ¦ Đang tìm trong các nguồn… ¦ Mencari di sumber…
+Recherche dans l’arbre… ¦ Đang tìm trong cây… ¦ Mencari di pohon…
+Recherche des lignes à changer… ¦ Đang tìm các dòng cần đổi… ¦ Mencari baris yang akan diubah…
+Recherche par lien de parenté ¦ Tìm theo quan hệ họ hàng ¦ Cari berdasarkan hubungan kekerabatan
+Respecter les majuscules ¦ Phân biệt chữ hoa ¦ Perhatikan huruf besar
+Rien de coché : les actions portent sur les {t} résultats ¦ Không chọn gì: thao tác áp dụng cho {t} kết quả ¦ Tidak ada yang dicentang: tindakan berlaku untuk {t} hasil
+Règle introuvable. ¦ Không tìm thấy quy tắc. ¦ Aturan tidak ditemukan.
+Règle supprimée ¦ Đã xóa quy tắc ¦ Aturan dihapus
+Résultats de la recherche ¦ Kết quả tìm kiếm ¦ Hasil pencarian
+Sections ouvertes ou fermées ¦ Các mục mở hoặc đóng ¦ Bagian terbuka atau tertutup
+Seulement les décédés ¦ Chỉ người đã mất ¦ Hanya yang sudah meninggal
+Seulement les vivants ¦ Chỉ người còn sống ¦ Hanya yang masih hidup
+Seules les {n} premières lignes sont montrées ; « Remplacer » change les lignes cochées. ¦ Chỉ hiện {n} dòng đầu; « Thay thế » đổi các dòng đã chọn. ¦ Hanya {n} baris pertama yang ditampilkan; « Ganti » mengubah baris yang dicentang.
+Sources et citations ¦ Nguồn và trích dẫn ¦ Sumber dan kutipan
+Suppression impossible ici. ¦ Không thể xóa ở đây. ¦ Tidak bisa dihapus di sini.
+Tape au moins deux lettres. ¦ Hãy gõ ít nhất hai chữ cái. ¦ Ketik setidaknya dua huruf.
+Tape le texte à chercher. ¦ Hãy gõ chữ cần tìm. ¦ Ketik teks yang dicari.
+Texte à chercher ¦ Chữ cần tìm ¦ Teks yang dicari
+Texte à chercher trop long. ¦ Chữ cần tìm quá dài. ¦ Teks yang dicari terlalu panjang.
+Tous les ancêtres ¦ Tất cả tổ tiên ¦ Semua leluhur
+Tous les descendants ¦ Tất cả hậu duệ ¦ Semua keturunan
+Trouvé dans ¦ Tìm thấy trong ¦ Ditemukan di
+Type d’événement supprimé ¦ Đã xóa loại sự kiện ¦ Jenis peristiwa dihapus
+Types de recherche cachés ¦ Các kiểu tìm kiếm đã ẩn ¦ Jenis pencarian tersembunyi
+Vider la liste ¦ Xóa sạch danh sách ¦ Kosongkan daftar
+Vivant(e) ¦ Còn sống ¦ Masih hidup
+Vivants et décédés ¦ Còn sống và đã mất ¦ Hidup dan meninggal
+dans A et dans B ¦ trong A và trong B ¦ di A dan di B
+dans A mais pas dans B ¦ trong A nhưng không trong B ¦ di A tapi tidak di B
+dans A ou dans B ¦ trong A hoặc trong B ¦ di A atau di B
+dans une seule des deux ¦ chỉ trong một trong hai ¦ hanya di salah satu
+{n} cochée(s) sur {t} ¦ Đã chọn {n} trên {t} ¦ {n} dicentang dari {t}
+{n} ligne(s) cochée(s) sur {t} ¦ Đã chọn {n} dòng trên {t} ¦ {n} baris dicentang dari {t}
+{rel} de {name} : {n} personne(s). ¦ {rel} của {name}: {n} người. ¦ {rel} dari {name}: {n} orang.
+« Tous les cousins germains de… », « les descendants vivants de… nés après 1900 » : choisis une personne et un lien. ¦ « Tất cả anh chị em họ của… », « hậu duệ còn sống của… sinh sau 1900 »: hãy chọn một người và một quan hệ. ¦ « Semua sepupu dari… », « keturunan yang masih hidup dari… lahir setelah 1900 »: pilih satu orang dan satu hubungan.
+Étiqueter {n} personne(s) ¦ Gắn nhãn cho {n} người ¦ Beri label {n} orang
+⟳ Recharger la page ¦ ⟳ Tải lại trang ¦ ⟳ Muat ulang halaman
+🏷 « {label} » posée sur {n} personne(s) ¦ 🏷 Đã gắn « {label} » cho {n} người ¦ 🏷 « {label} » dipasang pada {n} orang
+🏷 Étiqueter ¦ 🏷 Gắn nhãn ¦ 🏷 Beri label
+📊 Comparer deux recherches ¦ 📊 So sánh hai tìm kiếm ¦ 📊 Bandingkan dua pencarian
+📑 Ajouter à Mes listes ¦ 📑 Thêm vào Danh sách của tôi ¦ 📑 Tambahkan ke Daftar saya
+📑 {n} personne(s) ajoutée(s) à « {list} » ¦ 📑 Đã thêm {n} người vào « {list} » ¦ 📑 {n} orang ditambahkan ke « {list} »
+📚 Sources ({n}) ¦ 📚 Nguồn ({n}) ¦ 📚 Sumber ({n})
+🔁 Chercher et remplacer ¦ 🔁 Tìm và thay thế ¦ 🔁 Cari dan ganti
+🔁 Remplacer ¦ 🔁 Thay thế ¦ 🔁 Ganti
+🔁 Remplacer ({n}) ¦ 🔁 Thay thế ({n}) ¦ 🔁 Ganti ({n})
+🔁 {n} remplacement(s) faits ¦ 🔁 Đã thay thế {n} chỗ ¦ 🔁 {n} penggantian selesai
+🔎 Ce que j’ai changé ¦ 🔎 Những gì tôi đã thay đổi ¦ 🔎 Yang sudah aku ubah
+🔒 {n} ligne(s) d’une fiche verrouillée : elles ne changeront pas. ¦ 🔒 {n} dòng của một hồ sơ bị khóa: chúng sẽ không thay đổi. ¦ 🔒 {n} baris dari profil terkunci: tidak akan berubah.
+🔖 Citations ({n}) ¦ 🔖 Trích dẫn ({n}) ¦ 🔖 Kutipan ({n})
+🕘 Dernières recherches ¦ 🕘 Tìm kiếm gần đây ¦ 🕘 Pencarian terakhir
+🗄 Santé de la base ¦ 🗄 Tình trạng cơ sở dữ liệu ¦ 🗄 Kesehatan basis data
+🧬 Lien de parenté ¦ 🧬 Quan hệ họ hàng ¦ 🧬 Hubungan kekerabatan
+🧾 Sources et citations ¦ 🧾 Nguồn và trích dẫn ¦ 🧾 Sumber dan kutipan
+Lieux « {q} » ¦ Nơi « {q} » ¦ Tempat « {q} »
+Transcriptions « {q} » ¦ Bản chép « {q} » ¦ Transkripsi « {q} »
+Export impossible : les événements confidentiels n’ont pas pu être retirés. Réessaie dans un instant. ¦ Không thể xuất: không gỡ được các sự kiện riêng tư. Hãy thử lại sau giây lát. ¦ Ekspor gagal: peristiwa rahasia tidak bisa dihapus. Coba lagi sebentar lagi.
+Les événements confidentiels n’ont pas pu être cachés : réessaie dans un instant. ¦ Không ẩn được các sự kiện riêng tư: hãy thử lại sau giây lát. ¦ Peristiwa rahasia tidak bisa disembunyikan: coba lagi sebentar lagi.
+, ni les fiches et événements confidentiels. ¦ , cũng không có các hồ sơ và sự kiện riêng tư. ¦ , juga tanpa profil dan peristiwa rahasia.
+🔒  ¦ 🔒 ¦ 🔒
+📤 Envoyer vers… ¦ 📤 Gửi đến… ¦ 📤 Kirim ke…
+Dans une nouvelle présentation ¦ Vào một bài thuyết trình mới ¦ Ke presentasi baru
+Dans un nouveau diaporama ¦ Vào một trình chiếu ảnh mới ¦ Ke tayangan slide baru
+Dans un livre de la Mise en page… ¦ Vào một cuốn sách của Dàn trang… ¦ Ke buku di Tata letak…
+Dans un nouveau document (Traitement de texte) ¦ Vào một tài liệu mới (Soạn thảo văn bản) ¦ Ke dokumen baru (Pengolah kata)
+Dans le Tableur ¦ Vào Bảng tính ¦ Ke Spreadsheet
+Sur une page de mon site… ¦ Lên một trang của trang web của tôi… ¦ Ke halaman situsku…
+Dans la Retouche des photos ¦ Vào Chỉnh sửa ảnh ¦ Ke Retus foto
+Comparer avec une autre photo ¦ So sánh với một ảnh khác ¦ Bandingkan dengan foto lain
+Dans l’Atelier de transcription ¦ Vào Xưởng chép văn bản ¦ Ke Bengkel transkripsi
+Dans le Dessin vectoriel ¦ Vào Vẽ vector ¦ Ke Gambar vektor
+Dans les Traitements par lot ¦ Vào Xử lý hàng loạt ¦ Ke Pemrosesan massal
+Envoyer les images vers… ¦ Gửi ảnh đến… ¦ Kirim gambar ke…
+Envoyer le texte vers… ¦ Gửi văn bản đến… ¦ Kirim teks ke…
+Envoyer le tableau vers… ¦ Gửi bảng đến… ¦ Kirim tabel ke…
+Envoyer le son vers… ¦ Gửi âm thanh đến… ¦ Kirim suara ke…
+Envoyer la vidéo vers… ¦ Gửi video đến… ¦ Kirim video ke…
+Envoyer le dessin vers… ¦ Gửi hình vẽ đến… ¦ Kirim gambar vektor ke…
+Rangement du son dans les médias… ¦ Đang lưu âm thanh vào tư liệu… ¦ Menyimpan suara ke media…
+Rangement de la vidéo dans les médias… ¦ Đang lưu video vào tư liệu… ¦ Menyimpan video ke media…
+Rien à envoyer. ¦ Không có gì để gửi. ¦ Tidak ada yang bisa dikirim.
+Aucun outil ne peut recevoir ça pour l’instant. ¦ Hiện chưa có công cụ nào nhận được thứ này. ¦ Belum ada alat yang bisa menerima ini.
+En image (montage, studio, présentation, document…) ¦ Dạng ảnh (dựng, studio, thuyết trình, tài liệu…) ¦ Sebagai gambar (penyuntingan, studio, presentasi, dokumen…)
+En dessin, net à toutes les tailles (livre, site…) ¦ Dạng hình vẽ, nét ở mọi kích thước (sách, trang web…) ¦ Sebagai gambar vektor, tajam di semua ukuran (buku, situs…)
+＋ Nouvelle crise ¦ ＋ Khủng hoảng mới ¦ ＋ Krisis baru
+Modifier cette crise ¦ Sửa khủng hoảng này ¦ Ubah krisis ini
+Supprimer cette crise ¦ Xóa khủng hoảng này ¦ Hapus krisis ini
+Nouvelle crise ¦ Khủng hoảng mới ¦ Krisis baru
+Modifier la crise ¦ Sửa khủng hoảng ¦ Ubah krisis
+ÉPIDÉMIES, GUERRES, HIVERS TERRIBLES ¦ DỊCH BỆNH, CHIẾN TRANH, MÙA ĐÔNG KHẮC NGHIỆT ¦ WABAH, PERANG, MUSIM DINGIN PARAH
+Les grandes crises de l’histoire de France à côté des décès de ta famille : pour comprendre une vague de morts (choléra de 1832, Grand Hiver de 1709, grippe espagnole…). Ajoute les tiennes : une épidémie au village, un incendie, une inondation… ¦ Những cuộc khủng hoảng lớn trong lịch sử nước Pháp bên cạnh những cái chết trong gia đình bạn: để hiểu một làn sóng tử vong (dịch tả 1832, Mùa đông lớn 1709, cúm Tây Ban Nha…). Thêm của riêng bạn: một trận dịch ở làng, một vụ cháy, một trận lụt… ¦ Krisis besar dalam sejarah Prancis di samping kematian di keluargamu: untuk memahami gelombang kematian (kolera 1832, Musim Dingin Besar 1709, flu Spanyol…). Tambahkan milikmu: wabah di desa, kebakaran, banjir…
+▦ Vignettes ¦ ▦ Hình thu nhỏ ¦ ▦ Gambar mini
+🏷 Par éditeur ¦ 🏷 Theo nhà xuất bản ¦ 🏷 Per penerbit
+📍 Par lieu ¦ 📍 Theo nơi ¦ 📍 Per tempat
+✉️ Écrites / vierges ¦ ✉️ Đã viết / còn trắng ¦ ✉️ Bertulisan / kosong
+Survole pour voir le verso ¦ Di chuột qua để xem mặt sau ¦ Arahkan kursor untuk melihat sisi belakang
+Aucune fiche de carte postale pour l’instant ¦ Chưa có hồ sơ bưu thiếp nào ¦ Belum ada profil kartu pos
+Listes → 🏞 Cartes postales : donne à chaque carte son éditeur, son numéro, son lieu, son recto et son verso. ¦ Danh sách → 🏞 Bưu thiếp: ghi cho mỗi tấm nhà xuất bản, số, nơi, mặt trước và mặt sau. ¦ Daftar → 🏞 Kartu pos: beri setiap kartu penerbit, nomor, tempat, sisi depan, dan sisi belakangnya.
+Éditeur inconnu ¦ Nhà xuất bản không rõ ¦ Penerbit tidak diketahui
+Écrites ou envoyées ¦ Đã viết hoặc đã gửi ¦ Bertulisan atau terkirim
+Vierges (jamais envoyées) ¦ Còn trắng (chưa từng gửi) ¦ Kosong (tidak pernah dikirim)
+Il manque les n° {n} ¦ Thiếu các số {n} ¦ Nomor {n} belum ada
+Il manque le n° {n} ¦ Thiếu số {n} ¦ Nomor {n} belum ada
+cartes ¦ tấm thiệp ¦ kartu
+Marge de « vers » ¦ Biên độ của « khoảng » ¦ Batas « sekitar »
+Portée de « avant » / « après » ¦ Phạm vi của « trước » / « sau » ¦ Jangkauan « sebelum » / « sesudah »
+Longueur d’une vie sans fin connue ¦ Độ dài một đời người khi không biết ngày mất ¦ Panjang hidup tanpa akhir yang diketahui
+Ouvrir dans le Tableur… ¦ Mở trong Bảng tính… ¦ Buka di Spreadsheet…
+🧾 Ouvrir les invités dans le Tableur ¦ 🧾 Mở danh sách khách mời trong Bảng tính ¦ 🧾 Buka tamu di Spreadsheet
+📤 Envoyer le tableau des invités ¦ 📤 Gửi bảng khách mời ¦ 📤 Kirim tabel tamu
+🧾 Ouvrir dans le Tableur ¦ 🧾 Mở trong Bảng tính ¦ 🧾 Buka di Spreadsheet
+Le tableau des invités, avec leur branche, leur lien de parenté et leur réponse. ¦ Bảng khách mời, với nhánh, quan hệ họ hàng và câu trả lời của họ. ¦ Tabel tamu, dengan cabang, hubungan kekerabatan, dan jawaban mereka.
+Toutes les photos de l’album : un diaporama, un film, un traitement par lot… ¦ Tất cả ảnh của album: một trình chiếu ảnh, một bộ phim, một lần xử lý hàng loạt… ¦ Semua foto album: tayangan slide, film, pemrosesan massal…
+Album — {nm} ¦ Album — {nm} ¦ Album — {nm}
+Descendance (de haut en bas, une couleur par branche) ¦ Hậu duệ (từ trên xuống dưới, mỗi nhánh một màu) ¦ Keturunan (dari atas ke bawah, satu warna per cabang)
+La descendance a besoin de l’outil Cousinades, qui n’est pas chargé. ¦ Hậu duệ cần công cụ Họp mặt họ hàng, công cụ này chưa được tải. ¦ Keturunan memerlukan alat Reuni keluarga, yang belum dimuat.
+Aucune descendance pour cette personne. ¦ Người này không có hậu duệ. ¦ Tidak ada keturunan untuk orang ini.
+Aucun enfant connu pour cette personne : pas de descendance à dessiner. ¦ Người này không có con nào được biết: không có hậu duệ để vẽ. ¦ Tidak ada anak yang diketahui untuk orang ini: tidak ada keturunan untuk digambar.
+La descendance de {nm} ¦ Hậu duệ của {nm} ¦ Keturunan {nm}
+la famille ¦ gia đình ¦ keluarga
+L’arbre (en fond) ¦ Cây (làm nền) ¦ Pohon (sebagai latar)
+📰 En faire un faire-part ¦ 📰 Làm thành thiệp báo tin ¦ 📰 Jadikan kartu pengumuman
+Créer le faire-part ¦ Tạo thiệp báo tin ¦ Buat kartu pengumuman
+L’arbre se pose en fond, derrière les textes du faire-part. Tout s’ouvre ensuite dans le dessin vectoriel pour le retoucher. ¦ Cây được đặt làm nền, phía sau chữ của thiệp báo tin. Sau đó mọi thứ mở trong Vẽ vector để chỉnh sửa. ¦ Pohon dipasang sebagai latar, di belakang teks kartu pengumuman. Lalu semuanya dibuka di Gambar vektor untuk dirapikan.
+L’arbre derrière le texte ¦ Cây phía sau chữ ¦ Pohon di belakang teks
+Très pâle ¦ Rất nhạt ¦ Sangat pucat
+Pâle ¦ Nhạt ¦ Pucat
+Bien visible ¦ Thấy rõ ¦ Terlihat jelas
+Fabrication du faire-part… ¦ Đang làm thiệp báo tin… ¦ Membuat kartu pengumuman…
+Personne à dessiner dans l’arbre. ¦ Không có ai để vẽ trong cây. ¦ Tidak ada orang untuk digambar di pohon.
+L’arbre en fond d’un faire-part de cousinade ou de noces ¦ Cây làm nền cho thiệp báo tin họp mặt họ hàng hoặc đám cưới ¦ Pohon sebagai latar kartu pengumuman reuni keluarga atau pernikahan
+En faire un faire-part ¦ Làm thành thiệp báo tin ¦ Jadikan kartu pengumuman
+Les mêmes réglages, un faire-part pour chaque personne (une liste, une étiquette) ou chaque foyer d’une cousinade, tous dans un seul PDF ¦ Cùng các cài đặt, một thiệp báo tin cho mỗi người (một danh sách, một nhãn) hoặc mỗi hộ của một cuộc họp mặt, tất cả trong một PDF ¦ Pengaturan yang sama, satu kartu pengumuman per orang (daftar, label) atau per rumah tangga dalam reuni keluarga, semua dalam satu PDF
+Un faire-part par personne / par foyer… ¦ Một thiệp báo tin cho mỗi người / mỗi hộ… ¦ Satu kartu pengumuman per orang / per rumah tangga…
+📬 Un faire-part par personne / par foyer ¦ 📬 Một thiệp báo tin cho mỗi người / mỗi hộ ¦ 📬 Satu kartu pengumuman per orang / per rumah tangga
+📄 Fabriquer le PDF ¦ 📄 Tạo PDF ¦ 📄 Buat PDF
+Le faire-part tel que tu l’as réglé, une fois pour chaque personne ou chaque foyer. Tous les faire-part sont rangés dans un seul PDF, prêt à imprimer. ¦ Thiệp báo tin như bạn đã chỉnh, một lần cho mỗi người hoặc mỗi hộ. Tất cả thiệp được gộp trong một PDF, sẵn sàng để in. ¦ Kartu pengumuman seperti yang kamu atur, satu untuk setiap orang atau rumah tangga. Semua kartu ada dalam satu PDF, siap dicetak.
+Une liste de personnes ¦ Một danh sách người ¦ Daftar orang
+Les personnes d’une étiquette ¦ Những người có một nhãn ¦ Orang dengan satu label
+Les foyers d’une cousinade ¦ Các hộ của một cuộc họp mặt ¦ Rumah tangga dalam reuni keluarga
+La cousinade (les foyers invités) ¦ Cuộc họp mặt (các hộ được mời) ¦ Reuni keluarga (rumah tangga yang diundang)
+Dans les champs du faire-part, ces mots se remplacent pour chacun : ¦ Trong các trường của thiệp báo tin, những từ này được thay cho từng người: ¦ Di kolom kartu pengumuman, kata-kata ini diganti untuk setiap orang:
+(cousinade : aussi {titre}, {date}, {lieu}, {ancetre}…) ¦ (họp mặt: cũng có {titre}, {date}, {lieu}, {ancetre}…) ¦ (reuni keluarga: juga {titre}, {date}, {lieu}, {ancetre}…)
+Le nom de la personne (ou du foyer) en haut de chaque faire-part ¦ Tên của người (hoặc hộ) ở đầu mỗi thiệp ¦ Nama orang (atau rumah tangga) di atas setiap kartu
+Remplir aussi depuis la fiche de chacun (noms, dates, lieux) ¦ Cũng điền từ hồ sơ của mỗi người (tên, ngày, nơi) ¦ Isi juga dari profil masing-masing (nama, tanggal, tempat)
+L’enveloppe de chacun porte son adresse. ¦ Phong bì của mỗi người mang địa chỉ của họ. ¦ Amplop setiap orang memuat alamatnya.
+Aucun foyer invité dans cette cousinade : coche des invités d’abord. ¦ Cuộc họp mặt này chưa có hộ nào được mời: hãy chọn khách mời trước. ¦ Tidak ada rumah tangga yang diundang di reuni ini: centang tamu dulu.
+Fabrication de {n} faire-part… ¦ Đang làm {n} thiệp báo tin… ¦ Membuat {n} kartu pengumuman…
+{i} sur {n}… ¦ {i} trên {n}… ¦ {i} dari {n}…
+{n} faire-part dans un seul PDF ({p} pages). ¦ {n} thiệp báo tin trong một PDF ({p} trang). ¦ {n} kartu pengumuman dalam satu PDF ({p} halaman).
+Le dessin vectoriel n’est pas chargé : le PDF ne peut pas être fabriqué. ¦ Vẽ vector chưa được tải: không thể tạo PDF. ¦ Gambar vektor belum dimuat: PDF tidak bisa dibuat.
+Une action de la Retouche ¦ Một thao tác của Chỉnh sửa ảnh ¦ Satu tindakan Retus foto
+Une action enregistrée dans la Retouche des photos (Fichier → Actions), sur chaque image. ¦ Một thao tác đã lưu trong Chỉnh sửa ảnh (Tệp → Thao tác), áp dụng cho từng ảnh. ¦ Tindakan yang disimpan di Retus foto (Berkas → Tindakan), pada setiap gambar.
+aucune action choisie ¦ chưa chọn thao tác nào ¦ belum ada tindakan dipilih
+La Retouche des photos n’est pas chargée : l’action « {name} » ne peut pas se faire. ¦ Chỉnh sửa ảnh chưa được tải: không thể làm thao tác « {name} ». ¦ Retus foto belum dimuat: tindakan « {name} » tidak bisa dijalankan.
+L’action « {name} » de la Retouche n’a rien rendu. ¦ Thao tác « {name} » của Chỉnh sửa ảnh không cho ra gì. ¦ Tindakan « {name} » dari Retus foto tidak menghasilkan apa-apa.
+La Retouche des photos n’est pas chargée : cette étape ne pourra pas se faire. ¦ Chỉnh sửa ảnh chưa được tải: bước này sẽ không làm được. ¦ Retus foto belum dimuat: langkah ini tidak bisa dijalankan.
+Aucune action enregistrée dans la Retouche. Ouvre une photo dans la Retouche, puis Fichier → Actions pour en enregistrer une. ¦ Chưa có thao tác nào được lưu trong Chỉnh sửa ảnh. Hãy mở một ảnh trong Chỉnh sửa ảnh, rồi Tệp → Thao tác để lưu một thao tác. ¦ Belum ada tindakan tersimpan di Retus foto. Buka foto di Retus foto, lalu Berkas → Tindakan untuk menyimpannya.
+L’action ¦ Thao tác ¦ Tindakan
+Choisir une action… ¦ Chọn một thao tác… ¦ Pilih tindakan…
+Une action enregistrée dans la Retouche des photos, faite sur chaque image du lot. ¦ Một thao tác đã lưu trong Chỉnh sửa ảnh, áp dụng cho từng ảnh của lô. ¦ Tindakan yang disimpan di Retus foto, dijalankan pada setiap gambar dalam kumpulan.
+Les images rangées dans les médias par ce lot : un diaporama, un montage… ¦ Các ảnh mà lô này đã lưu vào tư liệu: một trình chiếu ảnh, một bản dựng… ¦ Gambar yang disimpan ke media oleh kumpulan ini: tayangan slide, penyuntingan…
+Traitement par lot ¦ Xử lý hàng loạt ¦ Pemrosesan massal
+{x} introuvable dans les médias. ¦ Không tìm thấy {x} trong tư liệu. ¦ {x} tidak ditemukan di media.
+Ouvrir cette image dans la Retouche des photos ¦ Mở ảnh này trong Chỉnh sửa ảnh ¦ Buka gambar ini di Retus foto
+Retoucher ¦ Chỉnh sửa ¦ Retus
+Envoyer cette image vers un autre outil ¦ Gửi ảnh này đến một công cụ khác ¦ Kirim gambar ini ke alat lain
+📤 Envoyer le tableau en image vers… ¦ 📤 Gửi bảng dạng ảnh đến… ¦ 📤 Kirim tabel sebagai gambar ke…
+Le dessin va dans un autre outil : un livre de la Mise en page, une page de mon site, le Dessin vectoriel… ¦ Hình vẽ được chuyển sang công cụ khác: một cuốn sách của Dàn trang, một trang của trang web của tôi, Vẽ vector… ¦ Gambar dikirim ke alat lain: buku di Tata letak, halaman situsku, Gambar vektor…
+Créer et envoyer vers… ¦ Tạo và gửi đến… ¦ Buat dan kirim ke…
+✒️ Placer un dessin vectoriel (arbre, carte, blason…)… ¦ ✒️ Đặt một hình vẽ vector (cây, bản đồ, huy hiệu…)… ¦ ✒️ Tempatkan gambar vektor (pohon, peta, lambang…)…
+Dessin vectoriel placé ¦ Đã đặt hình vẽ vector ¦ Gambar vektor ditempatkan
+✒️ « {name} » placé : modifié dans le Dessin vectoriel, il se met à jour ici (« ↻ Mettre à jour »). ¦ ✒️ Đã đặt « {name} »: khi sửa trong Vẽ vector, nó sẽ cập nhật ở đây (« ↻ Cập nhật »). ¦ ✒️ « {name} » ditempatkan: jika diubah di Gambar vektor, ia diperbarui di sini (« ↻ Perbarui »).
+✒️ Dessin vectoriel <b>lié</b>{state} : modifié dans le Dessin vectoriel, il se redessine ici (« Mettre à jour »). ¦ ✒️ Hình vẽ vector <b>được liên kết</b>{state}: khi sửa trong Vẽ vector, nó sẽ được vẽ lại ở đây (« Cập nhật »). ¦ ✒️ Gambar vektor <b>tertaut</b>{state}: jika diubah di Gambar vektor, ia digambar ulang di sini (« Perbarui »).
+✎ Modifier le dessin ¦ ✎ Sửa hình vẽ ¦ ✎ Ubah gambar
+Le dessin reste tel quel et ne suit plus le Dessin vectoriel ¦ Hình vẽ giữ nguyên và không theo Vẽ vector nữa ¦ Gambar tetap apa adanya dan tidak lagi mengikuti Gambar vektor
+Dessin détaché ¦ Đã tách hình vẽ ¦ Gambar dilepas
+Le Dessin vectoriel n’est pas chargé. ¦ Vẽ vector chưa được tải. ¦ Gambar vektor belum dimuat.
+Aucun dessin vectoriel : fais-en un dans Listes → Outils de modification (Dessin vectoriel, Arbre décoratif, Carte…). ¦ Chưa có hình vẽ vector nào: hãy tạo một cái trong Danh sách → Công cụ chỉnh sửa (Vẽ vector, Cây trang trí, Bản đồ…). ¦ Belum ada gambar vektor: buat satu di Daftar → Alat pengeditan (Gambar vektor, Pohon hias, Peta…).
+PLACER ¦ ĐẶT ¦ TEMPATKAN
+✒️ Un dessin vectoriel (arbre, carte, blason…) ¦ ✒️ Một hình vẽ vector (cây, bản đồ, huy hiệu…) ¦ ✒️ Gambar vektor (pohon, peta, lambang…)
+Placer ce dessin ¦ Đặt hình vẽ này ¦ Tempatkan gambar ini
+Le dessin reste lié : modifié dans le Dessin vectoriel, il se met à jour dans le livre (« ↻ Mettre à jour »). Il reste net à toutes les tailles. ¦ Hình vẽ vẫn được liên kết: khi sửa trong Vẽ vector, nó sẽ cập nhật trong sách (« ↻ Cập nhật »). Nó luôn nét ở mọi kích thước. ¦ Gambar tetap tertaut: jika diubah di Gambar vektor, ia diperbarui di buku (« ↻ Perbarui »). Tetap tajam di semua ukuran.
+Choisis un dessin. ¦ Hãy chọn một hình vẽ. ¦ Pilih gambar.
+Le dessin n’a pas pu être lu. ¦ Không đọc được hình vẽ. ¦ Gambar tidak bisa dibaca.
+📐 Mettre dans un livre ¦ 📐 Đưa vào một cuốn sách ¦ 📐 Masukkan ke buku
+Mettre dans le livre ¦ Đưa vào sách ¦ Masukkan ke buku
+Le dessin est rangé dans les Médias (en image), puis posé sur une page à lui, dans les marges. ¦ Hình vẽ được lưu vào Tư liệu (dạng ảnh), rồi đặt trên một trang riêng, trong lề. ¦ Gambar disimpan di Media (sebagai gambar), lalu ditempatkan di halaman sendiri, dalam margin.
+L’image est posée sur une page à elle, dans les marges. Elle reste liée à la photo des Médias. ¦ Ảnh được đặt trên một trang riêng, trong lề. Nó vẫn liên kết với ảnh trong Tư liệu. ¦ Gambar ditempatkan di halaman sendiri, dalam margin. Tetap tertaut ke foto di Media.
+Rangement du dessin dans les médias… ¦ Đang lưu hình vẽ vào tư liệu… ¦ Menyimpan gambar ke media…
+Mon livre ¦ Sách của tôi ¦ Bukuku
+Image ajoutée sur une nouvelle page à la fin du livre : vérifie, puis enregistre. ¦ Đã thêm ảnh vào một trang mới ở cuối sách: hãy kiểm tra, rồi lưu. ¦ Gambar ditambahkan di halaman baru di akhir buku: periksa, lalu simpan.
+Nouveau livre avec l’image : vérifie, puis enregistre le livre. ¦ Sách mới có ảnh: hãy kiểm tra, rồi lưu sách. ¦ Buku baru dengan gambar: periksa, lalu simpan bukunya.
+📱 Livre numérique (.epub) ¦ 📱 Sách điện tử (.epub) ¦ 📱 Buku digital (.epub)
+liseuses : Kobo, Livres, Calibre… ¦ máy đọc sách: Kobo, Sách, Calibre… ¦ e-reader: Kobo, Buku, Calibre…
+La mise en page n’est pas chargée : l’ePub ne peut pas être fait. ¦ Dàn trang chưa được tải: không thể tạo ePub. ¦ Tata letak belum dimuat: ePub tidak bisa dibuat.
+« Envoyer vers… » n’est pas chargé. ¦ « Gửi đến… » chưa được tải. ¦ « Kirim ke… » belum dimuat.
+Retoucher cette image ¦ Chỉnh sửa ảnh này ¦ Retus gambar ini
+Cette image n’est pas dans les Médias : elle ne peut pas être retouchée. ¦ Ảnh này không có trong Tư liệu: không thể chỉnh sửa. ¦ Gambar ini tidak ada di Media: tidak bisa diretus.
+Image retouchée mise à jour dans le texte. ¦ Ảnh đã chỉnh sửa được cập nhật trong văn bản. ¦ Gambar yang diretus diperbarui di teks.
+Un document (Traitement de texte) ¦ Một tài liệu (Soạn thảo văn bản) ¦ Dokumen (Pengolah kata)
+le tableau dans un texte ¦ bảng trong một văn bản ¦ tabel dalam teks
+📝 Créer le document ¦ 📝 Tạo tài liệu ¦ 📝 Buat dokumen
+Image du graphique (PNG) : {kind} ¦ Ảnh của biểu đồ (PNG): {kind} ¦ Gambar grafik (PNG): {kind}
+Le graphique n’a pas pu être dessiné. ¦ Không vẽ được biểu đồ. ¦ Grafik tidak bisa digambar.
+Image du graphique enregistrée : {name} ¦ Đã lưu ảnh biểu đồ: {name} ¦ Gambar grafik tersimpan: {name}
+La feuille est vide : rien à envoyer. ¦ Trang tính trống: không có gì để gửi. ¦ Lembar kosong: tidak ada yang bisa dikirim.
+⤓ Image du graphique (PNG) ¦ ⤓ Ảnh biểu đồ (PNG) ¦ ⤓ Gambar grafik (PNG)
+{what} au montage, l’une après l’autre. ¦ {what} vào bản dựng, lần lượt từng cái. ¦ {what} ke penyuntingan, satu per satu.
+image ajoutée ¦ đã thêm ảnh ¦ gambar ditambahkan
+images ajoutées ¦ đã thêm các ảnh ¦ gambar-gambar ditambahkan
+sous-titre ajouté ¦ đã thêm phụ đề ¦ subtitel ditambahkan
+sous-titres ajoutés ¦ đã thêm các phụ đề ¦ subtitel-subtitel ditambahkan
+Le fabricant de GIF n’est pas chargé. ¦ Công cụ tạo GIF chưa được tải. ¦ Pembuat GIF belum dimuat.
+🎞 GIF animé ¦ 🎞 GIF động ¦ 🎞 GIF animasi
+sans son, petit, tourne en boucle ¦ không tiếng, nhỏ, lặp lại liên tục ¦ tanpa suara, kecil, berulang terus
+GIF… {n} % ¦ GIF… {n} % ¦ GIF… {n} %
+La vidéo est d’abord fabriquée (le film est rejoué en entier, laisse la fenêtre ouverte), puis rangée dans les médias. ¦ Video được tạo trước (phim được phát lại toàn bộ, hãy để cửa sổ mở), rồi lưu vào tư liệu. ¦ Video dibuat dulu (film diputar ulang sepenuhnya, biarkan jendela terbuka), lalu disimpan di media.
+Fabriquer la vidéo pour l’envoyer ? ¦ Tạo video để gửi? ¦ Buat video untuk dikirim?
+Fabriquer et envoyer ¦ Tạo và gửi ¦ Buat dan kirim
+ENVOYER ¦ GỬI ¦ KIRIM
+Fabrication de la vidéo… ¦ Đang tạo video… ¦ Membuat video…
+La vidéo n’a pas pu être rangée dans les médias. ¦ Không lưu được video vào tư liệu. ¦ Video tidak bisa disimpan di media.
+Le son fini est rangé dans les médias (une copie), puis envoyé. ¦ Âm thanh hoàn chỉnh được lưu vào tư liệu (một bản sao), rồi được gửi. ¦ Suara jadi disimpan di media (satu salinan), lalu dikirim.
+Envoyer le son ? ¦ Gửi âm thanh? ¦ Kirim suara?
+Ranger et envoyer ¦ Lưu và gửi ¦ Simpan dan kirim
+Pas encore de transcription : « ⏱ Insérer l’heure » (⌘T), puis tape ce qui est dit. ¦ Chưa có bản chép: « ⏱ Chèn giờ » (⌘T), rồi gõ những gì được nói. ¦ Belum ada transkripsi: « ⏱ Sisipkan waktu » (⌘T), lalu ketik apa yang diucapkan.
+Transcription — {name} ¦ Bản chép — {name} ¦ Transkripsi — {name}
+ (avec la transcription en sous-titres) ¦ (kèm bản chép làm phụ đề) ¦ (dengan transkripsi sebagai subtitel)
+La transcription (texte) ¦ Bản chép (văn bản) ¦ Transkripsi (teks)
+Pas encore de transcription. ¦ Chưa có bản chép. ¦ Belum ada transkripsi.
+Agnès Bernauer ¦ Agnès Bernauer ¦ Agnès Bernauer
+7 colonnes en escalier et une réserve de 7 tas. La première carte posée sur une fondation donne la valeur de départ des quatre ; on descend en alternant rouge et noir, le Roi passe sur l’As. La pioche pose une carte sur chaque tas de la réserve ; une colonne vide prend la carte juste sous la valeur de départ. ¦ 7 cột bậc thang và một phần dự trữ gồm 7 chồng. Lá đầu tiên đặt lên ô nền quyết định giá trị bắt đầu của cả bốn ô; xếp giảm dần xen kẽ đỏ đen, Già đặt lên Át. Chồng bài rút chia một lá lên mỗi chồng dự trữ; cột trống nhận lá ngay dưới giá trị bắt đầu. ¦ 7 kolom bertingkat dan cadangan berisi 7 tumpukan. Kartu pertama di fondasi menentukan nilai awal keempatnya; susun menurun berselang merah-hitam, King boleh di atas As. Tumpukan kartu menaruh satu kartu di setiap tumpukan cadangan; kolom kosong menerima kartu tepat di bawah nilai awal.
+Thumb and Pouch ¦ Thumb and Pouch ¦ Thumb and Pouch
+Klondike où l’on descend sur n’importe quelle couleur de carte sauf la sienne ; une colonne vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Klondike nhưng xếp giảm dần lên bất kỳ chất nào trừ chất của chính nó; cột trống nhận bất kỳ lá nào. Chồng bài rút chỉ đi qua một lần. ¦ Klondike di mana kamu menyusun menurun di atas jenis apa pun kecuali jenisnya sendiri; kolom kosong menerima kartu apa pun. Tumpukan kartu hanya dilewati sekali.
+Pas seul ¦ Pas seul ¦ Pas seul
+6 colonnes d’une seule carte ; on descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte. La pioche se retourne une carte à la fois et ne passe qu’une fois. ¦ 6 cột mỗi cột một lá; xếp giảm dần xen kẽ đỏ đen, cột trống nhận bất kỳ lá nào. Chồng bài rút lật từng lá một và chỉ đi qua một lần. ¦ 6 kolom berisi satu kartu; susun menurun berselang merah-hitam, kolom kosong menerima kartu apa pun. Tumpukan kartu dibuka satu per satu dan hanya dilewati sekali.
+Les impasses ¦ Ngõ cụt ¦ Jalan buntu
+Les As sont posés d’avance ; 6 colonnes de 3 cartes (deux cachées). On descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte ; la pioche repasse une fois. ¦ Các lá Át được đặt sẵn; 6 cột mỗi cột 3 lá (hai lá úp). Xếp giảm dần xen kẽ đỏ đen, cột trống nhận bất kỳ lá nào; chồng bài rút được lật lại một lần. ¦ As sudah dipasang di awal; 6 kolom berisi 3 kartu (dua tertutup). Susun menurun berselang merah-hitam, kolom kosong menerima kartu apa pun; tumpukan kartu bisa diulang sekali.
+Huit fois huit ¦ Tám lần tám ¦ Delapan kali delapan
+Deux jeux, 8 colonnes de 8 cartes visibles ; on descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte. La pioche repasse deux fois. ¦ Hai bộ bài, 8 cột mỗi cột 8 lá ngửa; xếp giảm dần xen kẽ đỏ đen, cột trống nhận bất kỳ lá nào. Chồng bài rút được lật lại hai lần. ¦ Dua set, 8 kolom berisi 8 kartu terbuka; susun menurun berselang merah-hitam, kolom kosong menerima kartu apa pun. Tumpukan kartu bisa diulang dua kali.
+Spike ¦ Spike ¦ Spike
+7 colonnes en escalier comme Klondike ; on descend en alternant rouge et noir et on déplace des suites entières. La pioche pose une carte sur chaque colonne. ¦ 7 cột bậc thang như Klondike; xếp giảm dần xen kẽ đỏ đen và di chuyển cả dây. Chồng bài rút chia một lá lên mỗi cột. ¦ 7 kolom bertingkat seperti Klondike; susun menurun berselang merah-hitam dan pindahkan deret utuh. Tumpukan kartu menaruh satu kartu di setiap kolom.
+Alternance ¦ Xen kẽ ¦ Selang-seling
+Deux jeux, 7 colonnes de 7 cartes, une cachée sur deux. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Hai bộ bài, 7 cột mỗi cột 7 lá, cứ hai lá thì một lá úp. Xếp giảm dần xen kẽ đỏ đen và di chuyển cả dây; cột trống nhận bất kỳ lá nào. Chồng bài rút chỉ đi qua một lần. ¦ Dua set, 7 kolom berisi 7 kartu, selang-seling tertutup. Susun menurun berselang merah-hitam dan pindahkan deret utuh; kolom kosong menerima kartu apa pun. Tumpukan kartu hanya dilewati sekali.
+La harpe ¦ Đàn hạc ¦ Harpa
+Deux jeux, 9 colonnes en escalier ; on descend en alternant rouge et noir. La pioche se retourne une carte à la fois et repasse trois fois. ¦ Hai bộ bài, 9 cột bậc thang; xếp giảm dần xen kẽ đỏ đen. Chồng bài rút lật từng lá một và được lật lại ba lần. ¦ Dua set, 9 kolom bertingkat; susun menurun berselang merah-hitam. Tumpukan kartu dibuka satu per satu dan bisa diulang tiga kali.
+La grande harpe ¦ Đàn hạc lớn ¦ Harpa besar
+Deux jeux, 10 colonnes en escalier ; on descend en alternant rouge et noir. La pioche se retourne une carte à la fois et ne passe qu’une fois. ¦ Hai bộ bài, 10 cột bậc thang; xếp giảm dần xen kẽ đỏ đen. Chồng bài rút lật từng lá một và chỉ đi qua một lần. ¦ Dua set, 10 kolom bertingkat; susun menurun berselang merah-hitam. Tumpukan kartu dibuka satu per satu dan hanya dilewati sekali.
+Acme ¦ Acme ¦ Acme
+Une réserve de 13 cartes et 4 colonnes ; les fondations partent de l’As. On descend dans la même couleur de carte, une carte à la fois ; une colonne vide se remplit avec la réserve. La pioche repasse une fois. ¦ Một phần dự trữ 13 lá và 4 cột; ô nền bắt đầu từ Át. Xếp giảm dần cùng chất, mỗi lần một lá; cột trống được lấp bằng phần dự trữ. Chồng bài rút được lật lại một lần. ¦ Cadangan 13 kartu dan 4 kolom; fondasi dimulai dari As. Susun menurun dengan jenis sama, satu per satu; kolom kosong diisi dari cadangan. Tumpukan kartu bisa diulang sekali.
+Le crapaud américain ¦ Cóc Mỹ ¦ Katak Amerika
+Deux jeux, une réserve de 20 cartes et 8 colonnes. La première carte posée sur une fondation donne la valeur de départ des huit ; on descend dans la même couleur de carte, le Roi passe sur l’As. Une colonne vide se remplit avec la réserve ; la pioche repasse une fois. ¦ Hai bộ bài, một phần dự trữ 20 lá và 8 cột. Lá đầu tiên đặt lên ô nền quyết định giá trị bắt đầu của cả tám ô; xếp giảm dần cùng chất, Già đặt lên Át. Cột trống được lấp bằng phần dự trữ; chồng bài rút được lật lại một lần. ¦ Dua set, cadangan 20 kartu dan 8 kolom. Kartu pertama di fondasi menentukan nilai awal kedelapannya; susun menurun dengan jenis sama, King boleh di atas As. Kolom kosong diisi dari cadangan; tumpukan kartu bisa diulang sekali.
+Canfield bigarré ¦ Canfield nhiều màu ¦ Canfield beraneka
+Deux jeux : les As sont posés d’avance, une réserve de 14 cartes et 5 colonnes. On descend en alternant rouge et noir ; une colonne vide se remplit avec la réserve. La pioche se retourne trois cartes à la fois et repasse deux fois. ¦ Hai bộ bài: các lá Át được đặt sẵn, một phần dự trữ 14 lá và 5 cột. Xếp giảm dần xen kẽ đỏ đen; cột trống được lấp bằng phần dự trữ. Chồng bài rút lật ba lá một lần và được lật lại hai lần. ¦ Dua set: As sudah dipasang di awal, cadangan 14 kartu dan 5 kolom. Susun menurun berselang merah-hitam; kolom kosong diisi dari cadangan. Tumpukan kartu dibuka tiga sekaligus dan bisa diulang dua kali.
+La duchesse ¦ Nữ công tước ¦ Duchess
+Quatre tas de réserve de 3 cartes et 4 colonnes d’une carte. La première carte posée sur une fondation donne la valeur de départ des quatre ; on descend en alternant rouge et noir, le Roi passe sur l’As. Une colonne vide prend n’importe quelle carte ; la pioche repasse une fois. ¦ Bốn chồng dự trữ mỗi chồng 3 lá và 4 cột mỗi cột một lá. Lá đầu tiên đặt lên ô nền quyết định giá trị bắt đầu của cả bốn ô; xếp giảm dần xen kẽ đỏ đen, Già đặt lên Át. Cột trống nhận bất kỳ lá nào; chồng bài rút được lật lại một lần. ¦ Empat tumpukan cadangan berisi 3 kartu dan 4 kolom berisi satu kartu. Kartu pertama di fondasi menentukan nilai awal keempatnya; susun menurun berselang merah-hitam, King boleh di atas As. Kolom kosong menerima kartu apa pun; tumpukan kartu bisa diulang sekali.
+La porte ¦ Cánh cổng ¦ Gerbang
+Deux tas de réserve de 5 cartes (les battants de la porte) et 8 colonnes d’une carte. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Hai chồng dự trữ mỗi chồng 5 lá (hai cánh cổng) và 8 cột mỗi cột một lá. Xếp giảm dần xen kẽ đỏ đen và di chuyển cả dây; cột trống nhận bất kỳ lá nào. Chồng bài rút chỉ đi qua một lần. ¦ Dua tumpukan cadangan berisi 5 kartu (daun gerbang) dan 8 kolom berisi satu kartu. Susun menurun berselang merah-hitam dan pindahkan deret utuh; kolom kosong menerima kartu apa pun. Tumpukan kartu hanya dilewati sekali.
+Le pingouin ¦ Chim cánh cụt ¦ Penguin
+La première carte donne la valeur de départ des fondations, et les trois autres de même valeur y montent tout de suite. 7 colonnes de 7, 7 cases libres ; on descend dans la même couleur de carte, le Roi passe sur l’As. Une colonne vide prend la carte juste sous la valeur de départ. ¦ Lá đầu tiên quyết định giá trị bắt đầu của các ô nền, và ba lá cùng giá trị kia lên đó ngay. 7 cột mỗi cột 7 lá, 7 ô trống; xếp giảm dần cùng chất, Già đặt lên Át. Cột trống nhận lá ngay dưới giá trị bắt đầu. ¦ Kartu pertama menentukan nilai awal fondasi, dan tiga kartu lain bernilai sama langsung naik ke sana. 7 kolom berisi 7, 7 sel bebas; susun menurun dengan jenis sama, King boleh di atas As. Kolom kosong menerima kartu tepat di bawah nilai awal.
+Baker’s Game (Roi seul) ¦ Baker’s Game (chỉ Già) ¦ Baker’s Game (hanya King)
+Baker’s Game (descendre dans la même couleur de carte, 4 cases libres), mais une colonne vide ne prend qu’un Roi. ¦ Baker’s Game (xếp giảm dần cùng chất, 4 ô trống), nhưng cột trống chỉ nhận lá Già. ¦ Baker’s Game (susun menurun dengan jenis sama, 4 sel bebas), tetapi kolom kosong hanya menerima King.
+Seahaven détendu ¦ Seahaven dễ hơn ¦ Seahaven santai
+Seahaven, mais une suite bien rangée dans la même couleur de carte se déplace d’un coup, quelle que soit sa longueur. ¦ Seahaven, nhưng một dây xếp đúng cùng chất được di chuyển một lần, dù dài bao nhiêu. ¦ Seahaven, tetapi deret yang tersusun rapi dengan jenis sama bisa dipindah sekaligus, berapa pun panjangnya.
+Repair ¦ Repair ¦ Repair
+Deux jeux, 10 colonnes de 10 cartes visibles et 4 cases libres déjà occupées ; on descend en alternant rouge et noir, une carte à la fois (ou une suite si les cases libres le permettent). ¦ Hai bộ bài, 10 cột mỗi cột 10 lá ngửa và 4 ô trống đã có lá; xếp giảm dần xen kẽ đỏ đen, mỗi lần một lá (hoặc một dây nếu ô trống cho phép). ¦ Dua set, 10 kolom berisi 10 kartu terbuka dan 4 sel bebas yang sudah terisi; susun menurun berselang merah-hitam, satu per satu (atau satu deret kalau sel bebas memungkinkan).
+Ocean Towers ¦ Ocean Towers ¦ Ocean Towers
+Deux jeux, 14 colonnes de 7 cartes et 8 cases libres dont 6 déjà occupées ; on descend dans la même couleur de carte, une colonne vide ne prend qu’un Roi. ¦ Hai bộ bài, 14 cột mỗi cột 7 lá và 8 ô trống trong đó 6 ô đã có lá; xếp giảm dần cùng chất, cột trống chỉ nhận lá Già. ¦ Dua set, 14 kolom berisi 7 kartu dan 8 sel bebas, 6 di antaranya sudah terisi; susun menurun dengan jenis sama, kolom kosong hanya menerima King.
+Sept par quatre ¦ Bảy nhân bốn ¦ Tujuh kali empat
+FreeCell à 7 colonnes et 4 cases libres : les colonnes sont plus hautes. ¦ FreeCell với 7 cột và 4 ô trống: các cột cao hơn. ¦ FreeCell dengan 7 kolom dan 4 sel bebas: kolomnya lebih tinggi.
+Sept par cinq ¦ Bảy nhân năm ¦ Tujuh kali lima
+FreeCell à 7 colonnes et 5 cases libres. ¦ FreeCell với 7 cột và 5 ô trống. ¦ FreeCell dengan 7 kolom dan 5 sel bebas.
+FreeCell défi ¦ FreeCell thử thách ¦ FreeCell tantangan
+FreeCell, mais les As et les 2 sont tout au fond des colonnes, sous toutes les autres cartes. ¦ FreeCell, nhưng các lá Át và lá 2 nằm tận đáy các cột, dưới tất cả các lá khác. ¦ FreeCell, tetapi As dan 2 berada paling bawah kolom, di bawah semua kartu lain.
+FreeCell super défi ¦ FreeCell siêu thử thách ¦ FreeCell super tantangan
+FreeCell défi (les As et les 2 au fond des colonnes), et une colonne vide ne prend qu’un Roi. ¦ FreeCell thử thách (Át và 2 ở đáy các cột), và cột trống chỉ nhận lá Già. ¦ FreeCell tantangan (As dan 2 di dasar kolom), dan kolom kosong hanya menerima King.
+Le scarabée ¦ Bọ hung ¦ Kumbang
+Scorpion sans pioche : les 52 cartes sont visibles en 7 colonnes. On descend dans la même couleur de carte et on déplace n’importe quel groupe ; une colonne vide ne prend qu’un Roi. Une suite complète du Roi à l’As s’en va. ¦ Bọ cạp không có chồng bài rút: cả 52 lá đều ngửa trong 7 cột. Xếp giảm dần cùng chất và di chuyển bất kỳ nhóm nào; cột trống chỉ nhận lá Già. Dây đủ từ Già đến Át sẽ biến mất. ¦ Kalajengking tanpa tumpukan kartu: ke-52 kartu terbuka dalam 7 kolom. Susun menurun dengan jenis sama dan pindahkan kelompok apa pun; kolom kosong hanya menerima King. Deret lengkap dari King ke As pergi.
+Queue de scorpion ¦ Đuôi bọ cạp ¦ Ekor kalajengking
+Comme Scorpion (7 colonnes de 7, n’importe quel groupe se déplace), mais on descend en alternant rouge et noir et les cartes montent sur les fondations de l’As au Roi. ¦ Như Bọ cạp (7 cột mỗi cột 7 lá, nhóm nào cũng di chuyển được), nhưng xếp giảm dần xen kẽ đỏ đen và các lá lên ô nền từ Át đến Già. ¦ Seperti Kalajengking (7 kolom berisi 7, kelompok apa pun bisa dipindah), tetapi susun menurun berselang merah-hitam dan kartu naik ke fondasi dari As ke King.
+Scorpion double ¦ Bọ cạp đôi ¦ Kalajengking ganda
+Deux jeux, 10 colonnes, tout est distribué (les cinq premières colonnes cachent 4 cartes). On descend dans la même couleur de carte et on déplace n’importe quel groupe ; une suite complète du Roi à l’As s’en va. ¦ Hai bộ bài, 10 cột, chia hết bài (năm cột đầu giấu 4 lá). Xếp giảm dần cùng chất và di chuyển bất kỳ nhóm nào; dây đủ từ Già đến Át sẽ biến mất. ¦ Dua set, 10 kolom, semua dibagikan (lima kolom pertama menyembunyikan 4 kartu). Susun menurun dengan jenis sama dan pindahkan kelompok apa pun; deret lengkap dari King ke As pergi.
+Motif de divorce ¦ Lý do ly hôn ¦ Alasan cerai
+Deux jeux, 10 colonnes de 5 cartes visibles. On descend sans s’occuper des couleurs ; seules les suites d’une même couleur de carte se déplacent ensemble ; une suite complète du Roi à l’As s’en va. La pioche pose une carte sur chaque colonne qui n’est pas vide. ¦ Hai bộ bài, 10 cột mỗi cột 5 lá ngửa. Xếp giảm dần không cần quan tâm chất; chỉ dây cùng chất mới di chuyển cùng nhau; dây đủ từ Già đến Át sẽ biến mất. Chồng bài rút chia một lá lên mỗi cột không trống. ¦ Dua set, 10 kolom berisi 5 kartu terbuka. Susun menurun tanpa peduli jenis; hanya deret berjenis sama yang bisa dipindah bersama; deret lengkap dari King ke As pergi. Tumpukan kartu menaruh satu kartu di setiap kolom yang tidak kosong.
+La tarentule ¦ Nhện tarantula ¦ Tarantula
+L’araignée à quatre couleurs, mais une suite qui descend dans la même teinte (rouge ou noire) se déplace d’un coup. Une suite complète du Roi à l’As dans une même couleur de carte s’en va. ¦ Nhện bốn chất, nhưng một dây giảm dần cùng màu (đỏ hoặc đen) được di chuyển một lần. Dây đủ từ Già đến Át cùng một chất sẽ biến mất. ¦ Laba-laba empat jenis, tetapi deret menurun dengan warna sama (merah atau hitam) bisa dipindah sekaligus. Deret lengkap dari King ke As dengan jenis sama pergi.
+Araignée à découvert ¦ Nhện lộ bài ¦ Laba-laba terbuka
+L’araignée à quatre couleurs, mais toutes les cartes sont visibles dès le départ. ¦ Nhện bốn chất, nhưng tất cả các lá đều ngửa ngay từ đầu. ¦ Laba-laba empat jenis, tetapi semua kartu terbuka sejak awal.
+La harpe de Milligan ¦ Đàn hạc Milligan ¦ Harpa Milligan
+Deux jeux, 8 colonnes en escalier ; on descend en alternant rouge et noir et on déplace des suites entières. Une colonne vide ne prend qu’un Roi ; la pioche pose une carte sur chaque colonne. Les fondations montent de l’As au Roi. ¦ Hai bộ bài, 8 cột bậc thang; xếp giảm dần xen kẽ đỏ đen và di chuyển cả dây. Cột trống chỉ nhận lá Già; chồng bài rút chia một lá lên mỗi cột. Các ô nền đi lên từ Át đến Già. ¦ Dua set, 8 kolom bertingkat; susun menurun berselang merah-hitam dan pindahkan deret utuh. Kolom kosong hanya menerima King; tumpukan kartu menaruh satu kartu di setiap kolom. Fondasi naik dari As ke King.
+La harpe de Lexington ¦ Đàn hạc Lexington ¦ Harpa Lexington
+La harpe de Milligan (deux jeux, 8 colonnes en escalier, la pioche pose une carte sur chaque colonne), mais on déplace n’importe quel groupe de cartes visibles. ¦ Đàn hạc Milligan (hai bộ bài, 8 cột bậc thang, chồng bài rút chia một lá lên mỗi cột), nhưng di chuyển bất kỳ nhóm lá ngửa nào. ¦ Harpa Milligan (dua set, 8 kolom bertingkat, tumpukan kartu menaruh satu kartu di setiap kolom), tetapi pindahkan kelompok kartu terbuka apa pun.
+Brunswick ¦ Brunswick ¦ Brunswick
+La harpe de Lexington avec toutes les cartes visibles : n’importe quel groupe se déplace, la pioche pose une carte sur chaque colonne. ¦ Đàn hạc Lexington với tất cả các lá đều ngửa: nhóm nào cũng di chuyển được, chồng bài rút chia một lá lên mỗi cột. ¦ Harpa Lexington dengan semua kartu terbuka: kelompok apa pun bisa dipindah, tumpukan kartu menaruh satu kartu di setiap kolom.
+Carlton ¦ Carlton ¦ Carlton
+La harpe de Milligan avec toutes les cartes visibles, et une colonne vide prend n’importe quelle carte. ¦ Đàn hạc Milligan với tất cả các lá đều ngửa, và cột trống nhận bất kỳ lá nào. ¦ Harpa Milligan dengan semua kartu terbuka, dan kolom kosong menerima kartu apa pun.
+Miss Milligan ¦ Miss Milligan ¦ Miss Milligan
+Deux jeux, 8 colonnes d’une carte ; la pioche pose une carte sur chaque colonne. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide ne prend qu’un Roi. Quand la pioche est vide, une case libre s’ouvre pour mettre une carte de côté. ¦ Hai bộ bài, 8 cột mỗi cột một lá; chồng bài rút chia một lá lên mỗi cột. Xếp giảm dần xen kẽ đỏ đen và di chuyển cả dây; cột trống chỉ nhận lá Già. Khi chồng bài rút hết, một ô trống mở ra để để riêng một lá. ¦ Dua set, 8 kolom berisi satu kartu; tumpukan kartu menaruh satu kartu di setiap kolom. Susun menurun berselang merah-hitam dan pindahkan deret utuh; kolom kosong hanya menerima King. Saat tumpukan kartu habis, satu sel bebas terbuka untuk menyisihkan satu kartu.
+Millie ¦ Millie ¦ Millie
+Deux jeux, 8 colonnes d’une carte ; la pioche pose une carte sur chaque colonne. On descend en alternant rouge et noir et une colonne vide prend n’importe quelle carte. ¦ Hai bộ bài, 8 cột mỗi cột một lá; chồng bài rút chia một lá lên mỗi cột. Xếp giảm dần xen kẽ đỏ đen và cột trống nhận bất kỳ lá nào. ¦ Dua set, 8 kolom berisi satu kartu; tumpukan kartu menaruh satu kartu di setiap kolom. Susun menurun berselang merah-hitam dan kolom kosong menerima kartu apa pun.
+L’île d’Elbe ¦ Đảo Elba ¦ Pulau Elba
+Deux jeux, 10 colonnes de 5 cartes (quatre cachées) ; on descend en alternant rouge et noir et on déplace des suites entières. Une colonne vide ne prend qu’un Roi ; la pioche pose une carte sur chaque colonne. ¦ Hai bộ bài, 10 cột mỗi cột 5 lá (bốn lá úp); xếp giảm dần xen kẽ đỏ đen và di chuyển cả dây. Cột trống chỉ nhận lá Già; chồng bài rút chia một lá lên mỗi cột. ¦ Dua set, 10 kolom berisi 5 kartu (empat tertutup); susun menurun berselang merah-hitam dan pindahkan deret utuh. Kolom kosong hanya menerima King; tumpukan kartu menaruh satu kartu di setiap kolom.
+Le mont Olympe ¦ Núi Olympus ¦ Gunung Olympus
+Deux jeux : les As et les 2 sont posés d’avance, et les fondations montent de deux en deux dans la même couleur de carte (As, 3, 5… ou 2, 4, 6…). 9 colonnes ; on descend de deux en deux dans la même couleur de carte. La pioche pose une carte sur chaque colonne. ¦ Hai bộ bài: các lá Át và lá 2 được đặt sẵn, và các ô nền đi lên cách hai cùng chất (Át, 3, 5… hoặc 2, 4, 6…). 9 cột; xếp giảm dần cách hai cùng chất. Chồng bài rút chia một lá lên mỗi cột. ¦ Dua set: As dan 2 sudah dipasang di awal, dan fondasi naik loncat dua dengan jenis sama (As, 3, 5… atau 2, 4, 6…). 9 kolom; susun menurun loncat dua dengan jenis sama. Tumpukan kartu menaruh satu kartu di setiap kolom.
+La patience australienne ¦ Patience kiểu Úc ¦ Patience Australia
+7 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte et on déplace n’importe quel groupe de cartes visibles. Une colonne vide ne prend qu’un Roi ; la pioche ne passe qu’une fois. ¦ 7 cột mỗi cột 4 lá ngửa; xếp giảm dần cùng chất và di chuyển bất kỳ nhóm lá ngửa nào. Cột trống chỉ nhận lá Già; chồng bài rút chỉ đi qua một lần. ¦ 7 kolom berisi 4 kartu terbuka; susun menurun dengan jenis sama dan pindahkan kelompok kartu terbuka apa pun. Kolom kosong hanya menerima King; tumpukan kartu hanya dilewati sekali.
+Canberra ¦ Canberra ¦ Canberra
+La patience australienne, mais la pioche repasse une fois. ¦ Patience kiểu Úc, nhưng chồng bài rút được lật lại một lần. ¦ Patience Australia, tetapi tumpukan kartu bisa diulang sekali.
+Raw Prawn ¦ Raw Prawn ¦ Raw Prawn
+La patience australienne, mais une colonne vide prend n’importe quelle carte. ¦ Patience kiểu Úc, nhưng cột trống nhận bất kỳ lá nào. ¦ Patience Australia, tetapi kolom kosong menerima kartu apa pun.
+Rushdike ¦ Rushdike ¦ Rushdike
+7 colonnes en escalier ; on descend dans la même couleur de carte et on déplace n’importe quel groupe de cartes visibles. La pioche pose une carte sur chaque colonne. ¦ 7 cột bậc thang; xếp giảm dần cùng chất và di chuyển bất kỳ nhóm lá ngửa nào. Chồng bài rút chia một lá lên mỗi cột. ¦ 7 kolom bertingkat; susun menurun dengan jenis sama dan pindahkan kelompok kartu terbuka apa pun. Tumpukan kartu menaruh satu kartu di setiap kolom.
+La discipline chinoise ¦ Kỷ luật Trung Hoa ¦ Disiplin Tiongkok
+7 colonnes de 7 cartes (trois cachées, sauf dans la première) ; on descend en alternant rouge et noir et on déplace n’importe quel groupe de cartes visibles. Les 3 dernières cartes vont sur les trois premières colonnes. ¦ 7 cột mỗi cột 7 lá (ba lá úp, trừ cột đầu tiên); xếp giảm dần xen kẽ đỏ đen và di chuyển bất kỳ nhóm lá ngửa nào. 3 lá cuối cùng đặt vào ba cột đầu. ¦ 7 kolom berisi 7 kartu (tiga tertutup, kecuali di kolom pertama); susun menurun berselang merah-hitam dan pindahkan kelompok kartu terbuka apa pun. 3 kartu terakhir masuk ke tiga kolom pertama.
+Solitaire russe double ¦ Solitaire Nga đôi ¦ Solitaire Rusia ganda
+Deux jeux, 10 colonnes, 8 fondations ; on descend dans la même couleur de carte et on déplace n’importe quel groupe de cartes visibles. ¦ Hai bộ bài, 10 cột, 8 ô nền; xếp giảm dần cùng chất và di chuyển bất kỳ nhóm lá ngửa nào. ¦ Dua set, 10 kolom, 8 fondasi; susun menurun dengan jenis sama dan pindahkan kelompok kartu terbuka apa pun.
+Ali Baba ¦ Ali Baba ¦ Ali Baba
+Un seul jeu : les As sont posés d’avance, 10 colonnes de 4 cartes visibles. On descend dans la même couleur de carte et on déplace des suites entières ; la pioche ne passe qu’une fois. ¦ Một bộ bài: các lá Át được đặt sẵn, 10 cột mỗi cột 4 lá ngửa. Xếp giảm dần cùng chất và di chuyển cả dây; chồng bài rút chỉ đi qua một lần. ¦ Satu set: As sudah dipasang di awal, 10 kolom berisi 4 kartu terbuka. Susun menurun dengan jenis sama dan pindahkan deret utuh; tumpukan kartu hanya dilewati sekali.
+Cassim ¦ Cassim ¦ Cassim
+Un seul jeu : les As sont posés d’avance, 7 colonnes de 3 cartes visibles. On descend dans la même couleur de carte et on déplace des suites entières ; la pioche repasse autant que tu veux. ¦ Một bộ bài: các lá Át được đặt sẵn, 7 cột mỗi cột 3 lá ngửa. Xếp giảm dần cùng chất và di chuyển cả dây; chồng bài rút được lật lại bao nhiêu lần tùy bạn. ¦ Satu set: As sudah dipasang di awal, 7 kolom berisi 3 kartu terbuka. Susun menurun dengan jenis sama dan pindahkan deret utuh; tumpukan kartu bisa diulang sesukamu.
+Rang et file ¦ Hàng ngũ ¦ Barisan
+L’empereur (deux jeux, 10 colonnes de 4 cartes dont 3 cachées, en alternant rouge et noir), mais on déplace des suites entières. ¦ Hoàng đế (hai bộ bài, 10 cột mỗi cột 4 lá trong đó 3 lá úp, xen kẽ đỏ đen), nhưng di chuyển cả dây. ¦ Kaisar (dua set, 10 kolom berisi 4 kartu dengan 3 tertutup, berselang merah-hitam), tetapi pindahkan deret utuh.
+Les As affairés ¦ Những lá Át bận rộn ¦ As yang sibuk
+Deux jeux, 12 colonnes d’une carte ; on descend dans la même couleur de carte, une carte à la fois. La pioche ne passe qu’une fois. ¦ Hai bộ bài, 12 cột mỗi cột một lá; xếp giảm dần cùng chất, mỗi lần một lá. Chồng bài rút chỉ đi qua một lần. ¦ Dua set, 12 kolom berisi satu kartu; susun menurun dengan jenis sama, satu per satu. Tumpukan kartu hanya dilewati sekali.
+La cour ¦ Sân trong ¦ Halaman
+Deux jeux, 12 colonnes d’une carte ; on descend dans la même couleur de carte et on déplace des suites entières. La pioche ne passe qu’une fois. ¦ Hai bộ bài, 12 cột mỗi cột một lá; xếp giảm dần cùng chất và di chuyển cả dây. Chồng bài rút chỉ đi qua một lần. ¦ Dua set, 12 kolom berisi satu kartu; susun menurun dengan jenis sama dan pindahkan deret utuh. Tumpukan kartu hanya dilewati sekali.
+Le carré de Napoléon ¦ Hình vuông của Napoléon ¦ Alun-alun Napoleon
+Deux jeux, 12 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte et on déplace des suites entières. La pioche ne passe qu’une fois. ¦ Hai bộ bài, 12 cột mỗi cột 4 lá ngửa; xếp giảm dần cùng chất và di chuyển cả dây. Chồng bài rút chỉ đi qua một lần. ¦ Dua set, 12 kolom berisi 4 kartu terbuka; susun menurun dengan jenis sama dan pindahkan deret utuh. Tumpukan kartu hanya dilewati sekali.
+L’exil de Napoléon ¦ Napoléon lưu đày ¦ Pengasingan Napoleon
+Les quarante voleurs où l’on descend sans s’occuper des couleurs, une carte à la fois. La pioche ne passe qu’une fois. ¦ Bốn mươi tên trộm nhưng xếp giảm dần không cần quan tâm chất, mỗi lần một lá. Chồng bài rút chỉ đi qua một lần. ¦ Empat puluh pencuri tetapi susun menurun tanpa peduli jenis, satu per satu. Tumpukan kartu hanya dilewati sekali.
+Deuces ¦ Deuces ¦ Deuces
+Deux jeux : les huit 2 sont posés d’avance, et les fondations montent dans la même couleur de carte jusqu’à l’As. 10 colonnes d’une carte ; on descend dans la même couleur de carte (l’As va sur le 2, le Roi sur l’As), une carte à la fois. La pioche ne passe qu’une fois. ¦ Hai bộ bài: tám lá 2 được đặt sẵn, và các ô nền đi lên cùng chất đến lá Át. 10 cột mỗi cột một lá; xếp giảm dần cùng chất (Át đặt lên 2, Già đặt lên Át), mỗi lần một lá. Chồng bài rút chỉ đi qua một lần. ¦ Dua set: delapan kartu 2 sudah dipasang di awal, dan fondasi naik dengan jenis sama sampai As. 10 kolom berisi satu kartu; susun menurun dengan jenis sama (As di atas 2, King di atas As), satu per satu. Tumpukan kartu hanya dilewati sekali.
+La lune décroissante ¦ Trăng khuyết ¦ Bulan susut
+Deux jeux, 13 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte et on déplace des suites entières. La pioche ne passe qu’une fois. ¦ Hai bộ bài, 13 cột mỗi cột 4 lá ngửa; xếp giảm dần cùng chất và di chuyển cả dây. Chồng bài rút chỉ đi qua một lần. ¦ Dua set, 13 kolom berisi 4 kartu terbuka; susun menurun dengan jenis sama dan pindahkan deret utuh. Tumpukan kartu hanya dilewati sekali.
+Les cinquante fameux ¦ Năm mươi nổi tiếng ¦ Lima puluh terkenal
+Les quarante voleurs avec 5 cartes par colonne : deux jeux, 10 colonnes de 5, même couleur de carte, une carte à la fois. La pioche ne passe qu’une fois. ¦ Bốn mươi tên trộm với 5 lá mỗi cột: hai bộ bài, 10 cột mỗi cột 5 lá, cùng chất, mỗi lần một lá. Chồng bài rút chỉ đi qua một lần. ¦ Empat puluh pencuri dengan 5 kartu per kolom: dua set, 10 kolom berisi 5, jenis sama, satu per satu. Tumpukan kartu hanya dilewati sekali.
+Quarante-neuf ¦ Bốn mươi chín ¦ Empat puluh sembilan
+Deux jeux, 7 colonnes de 7 cartes visibles ; on descend en alternant rouge et noir, une carte à la fois. La pioche ne passe qu’une fois. ¦ Hai bộ bài, 7 cột mỗi cột 7 lá ngửa; xếp giảm dần xen kẽ đỏ đen, mỗi lần một lá. Chồng bài rút chỉ đi qua một lần. ¦ Dua set, 7 kolom berisi 7 kartu terbuka; susun menurun berselang merah-hitam, satu per satu. Tumpukan kartu hanya dilewati sekali.
+Sans limite ¦ Không giới hạn ¦ Tanpa batas
+Les quarante voleurs, mais la pioche repasse autant que tu veux. ¦ Bốn mươi tên trộm, nhưng chồng bài rút được lật lại bao nhiêu lần tùy bạn. ¦ Empat puluh pencuri, tetapi tumpukan kartu bisa diulang sesukamu.
+Les petits quarante ¦ Bốn mươi nhỏ ¦ Empat puluh kecil
+Les quarante voleurs où l’on descend sans s’occuper des couleurs et on déplace des suites entières ; la pioche se retourne trois cartes à la fois et repasse trois fois. ¦ Bốn mươi tên trộm nhưng xếp giảm dần không cần quan tâm chất và di chuyển cả dây; chồng bài rút lật ba lá một lần và được lật lại ba lần. ¦ Empat puluh pencuri tetapi susun menurun tanpa peduli jenis dan pindahkan deret utuh; tumpukan kartu dibuka tiga sekaligus dan bisa diulang tiga kali.
+Le zèbre ¦ Ngựa vằn ¦ Zebra
+Deux jeux, les As posés d’avance, 8 colonnes d’une carte ; on descend en alternant rouge et noir, une carte à la fois. La pioche repasse une fois. ¦ Hai bộ bài, các lá Át được đặt sẵn, 8 cột mỗi cột một lá; xếp giảm dần xen kẽ đỏ đen, mỗi lần một lá. Chồng bài rút được lật lại một lần. ¦ Dua set, As sudah dipasang di awal, 8 kolom berisi satu kartu; susun menurun berselang merah-hitam, satu per satu. Tumpukan kartu bisa diulang sekali.
+Le congrès ¦ Quốc hội ¦ Kongres
+Deux jeux, 8 colonnes d’une carte ; on descend sans s’occuper des couleurs, une carte à la fois. La pioche ne passe qu’une fois. ¦ Hai bộ bài, 8 cột mỗi cột một lá; xếp giảm dần không cần quan tâm chất, mỗi lần một lá. Chồng bài rút chỉ đi qua một lần. ¦ Dua set, 8 kolom berisi satu kartu; susun menurun tanpa peduli jenis, satu per satu. Tumpukan kartu hanya dilewati sekali.
+Le parlement ¦ Nghị viện ¦ Parlemen
+Le congrès (deux jeux, 8 colonnes d’une carte, on descend sans s’occuper des couleurs), avec les As posés d’avance. ¦ Quốc hội (hai bộ bài, 8 cột mỗi cột một lá, xếp giảm dần không cần quan tâm chất), với các lá Át được đặt sẵn. ¦ Kongres (dua set, 8 kolom berisi satu kartu, susun menurun tanpa peduli jenis), dengan As sudah dipasang di awal.
+Pair et impair ¦ Chẵn và lẻ ¦ Genap dan ganjil
+Deux jeux : un As et un 2 de chaque couleur de carte sont posés d’avance, et les fondations montent de deux en deux dans leur couleur (As, 3, 5… Roi, 2, 4… ou 2, 4… Dame, As, 3…). 9 places d’une carte, sur lesquelles on ne construit pas ; une place vide prend n’importe quelle carte. La pioche repasse une fois. ¦ Hai bộ bài: một lá Át và một lá 2 của mỗi chất được đặt sẵn, và các ô nền đi lên cách hai theo chất của chúng (Át, 3, 5… Già, 2, 4… hoặc 2, 4… Đầm, Át, 3…). 9 chỗ mỗi chỗ một lá, không xếp chồng lên được; chỗ trống nhận bất kỳ lá nào. Chồng bài rút được lật lại một lần. ¦ Dua set: satu As dan satu 2 dari tiap jenis sudah dipasang di awal, dan fondasi naik loncat dua sesuai jenisnya (As, 3, 5… King, 2, 4… atau 2, 4… Queen, As, 3…). 9 tempat berisi satu kartu, tidak bisa disusun di atasnya; tempat kosong menerima kartu apa pun. Tumpukan kartu bisa diulang sekali.
+Le cotillon royal ¦ Điệu cotillon hoàng gia ¦ Kotilyon kerajaan
+Deux jeux : un As et un 2 de chaque couleur de carte sont posés d’avance, et les fondations montent de deux en deux dans leur couleur. Quatre tas de réserve de 3 cartes (seule celle du dessus se joue) et 16 places d’une carte, sur lesquelles on ne construit pas ; une place vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Hai bộ bài: một lá Át và một lá 2 của mỗi chất được đặt sẵn, và các ô nền đi lên cách hai theo chất của chúng. Bốn chồng dự trữ mỗi chồng 3 lá (chỉ lá trên cùng được chơi) và 16 chỗ mỗi chỗ một lá, không xếp chồng lên được; chỗ trống nhận bất kỳ lá nào. Chồng bài rút chỉ đi qua một lần. ¦ Dua set: satu As dan satu 2 dari tiap jenis sudah dipasang di awal, dan fondasi naik loncat dua sesuai jenisnya. Empat tumpukan cadangan berisi 3 kartu (hanya yang teratas bisa dimainkan) dan 16 tempat berisi satu kartu, tidak bisa disusun di atasnya; tempat kosong menerima kartu apa pun. Tumpukan kartu hanya dilewati sekali.
+Le treize porte-bonheur ¦ Mười ba may mắn ¦ Tiga belas pembawa untung
+13 colonnes de 4 cartes visibles ; on descend sans s’occuper des couleurs, une carte à la fois ; une colonne vide reste vide. ¦ 13 cột mỗi cột 4 lá ngửa; xếp giảm dần không cần quan tâm chất, mỗi lần một lá; cột trống vẫn để trống. ¦ 13 kolom berisi 4 kartu terbuka; susun menurun tanpa peduli jenis, satu per satu; kolom kosong tetap kosong.
+La patience portugaise ¦ Patience kiểu Bồ Đào Nha ¦ Patience Portugis
+13 colonnes de 4 cartes visibles ; on descend sans s’occuper des couleurs, une carte à la fois ; seul un Roi va dans une colonne vide. ¦ 13 cột mỗi cột 4 lá ngửa; xếp giảm dần không cần quan tâm chất, mỗi lần một lá; chỉ lá Già được vào cột trống. ¦ 13 kolom berisi 4 kartu terbuka; susun menurun tanpa peduli jenis, satu per satu; hanya King yang boleh masuk kolom kosong.
+Bonne mesure ¦ Đong đầy ¦ Takaran pas
+Deux As sont posés d’avance ; 10 colonnes de 5 cartes visibles. On descend sans s’occuper des couleurs, une carte à la fois ; une colonne vide prend n’importe quelle carte. ¦ Hai lá Át được đặt sẵn; 10 cột mỗi cột 5 lá ngửa. Xếp giảm dần không cần quan tâm chất, mỗi lần một lá; cột trống nhận bất kỳ lá nào. ¦ Dua As sudah dipasang di awal; 10 kolom berisi 5 kartu terbuka. Susun menurun tanpa peduli jenis, satu per satu; kolom kosong menerima kartu apa pun.
+La cruelle ¦ Nghiệt ngã ¦ Si kejam
+Les As sont posés d’avance ; 12 tas de 4 cartes. On descend dans la même couleur de carte, une carte à la fois ; une place vide reste vide. Autant de fois que tu veux, on ramasse les tas dans l’ordre, sans mélanger, et on redistribue par 4. ¦ Các lá Át được đặt sẵn; 12 chồng mỗi chồng 4 lá. Xếp giảm dần cùng chất, mỗi lần một lá; chỗ trống vẫn để trống. Bao nhiêu lần tùy bạn, gom các chồng theo thứ tự, không xáo, rồi chia lại mỗi chồng 4 lá. ¦ As sudah dipasang di awal; 12 tumpukan berisi 4 kartu. Susun menurun dengan jenis sama, satu per satu; tempat kosong tetap kosong. Sesukamu, kumpulkan tumpukan secara berurutan, tanpa dikocok, lalu bagikan lagi per 4.
+La persévérance ¦ Kiên trì ¦ Ketekunan
+Comme la cruelle (les As posés d’avance, 12 tas de 4, même couleur de carte), mais on déplace des suites entières et on ne ramasse que deux fois. ¦ Như Nghiệt ngã (Át đặt sẵn, 12 chồng mỗi chồng 4 lá, cùng chất), nhưng di chuyển cả dây và chỉ gom lại hai lần. ¦ Seperti Si kejam (As dipasang di awal, 12 tumpukan berisi 4, jenis sama), tetapi pindahkan deret utuh dan hanya dikumpulkan dua kali.
+L’éventail en vagues ¦ Quạt sóng ¦ Kipas ombak
+13 tas de 4 cartes, les As restent mélangés aux autres ; on descend dans la même couleur de carte, une carte à la fois ; une place vide reste vide. Autant de fois que tu veux, on ramasse les tas dans l’ordre, sans mélanger, et on redistribue par 4. ¦ 13 chồng mỗi chồng 4 lá, các lá Át vẫn lẫn trong các lá khác; xếp giảm dần cùng chất, mỗi lần một lá; chỗ trống vẫn để trống. Bao nhiêu lần tùy bạn, gom các chồng theo thứ tự, không xáo, rồi chia lại mỗi chồng 4 lá. ¦ 13 tumpukan berisi 4 kartu, As tetap bercampur dengan yang lain; susun menurun dengan jenis sama, satu per satu; tempat kosong tetap kosong. Sesukamu, kumpulkan tumpukan secara berurutan, tanpa dikocok, lalu bagikan lagi per 4.
+L’éventail en boîte ¦ Quạt trong hộp ¦ Kipas dalam kotak
+Les As sont posés d’avance ; 16 éventails de 3 cartes. On descend en alternant rouge et noir, une carte à la fois ; seul un Roi va dans une place vide. ¦ Các lá Át được đặt sẵn; 16 quạt mỗi quạt 3 lá. Xếp giảm dần xen kẽ đỏ đen, mỗi lần một lá; chỉ lá Già được vào chỗ trống. ¦ As sudah dipasang di awal; 16 kipas berisi 3 kartu. Susun menurun berselang merah-hitam, satu per satu; hanya King yang boleh masuk tempat kosong.
+L’éventail fascinant ¦ Quạt mê hoặc ¦ Kipas memesona
+La Belle Lucie (17 éventails de 3 cartes) où l’on descend en alternant rouge et noir, avec six redistributions. ¦ La Belle Lucie (17 quạt mỗi quạt 3 lá) nhưng xếp giảm dần xen kẽ đỏ đen, với sáu lần chia lại. ¦ La Belle Lucie (17 kipas berisi 3 kartu) tetapi susun menurun berselang merah-hitam, dengan enam kali pembagian ulang.
+La lampe de minuit ¦ Đèn nửa đêm ¦ Lampu tengah malam
+La Belle Lucie (17 éventails de 3 cartes) où l’on descend en alternant rouge et noir, avec deux redistributions. ¦ La Belle Lucie (17 quạt mỗi quạt 3 lá) nhưng xếp giảm dần xen kẽ đỏ đen, với hai lần chia lại. ¦ La Belle Lucie (17 kipas berisi 3 kartu) tetapi susun menurun berselang merah-hitam, dengan dua kali pembagian ulang.
+Shamrocks ¦ Shamrocks ¦ Shamrocks
+17 éventails de 3 cartes ; on monte ou on descend d’un rang sans s’occuper des couleurs, une carte à la fois, et un éventail ne garde jamais plus de 3 cartes. Pas de redistribution. ¦ 17 quạt mỗi quạt 3 lá; xếp tăng hoặc giảm một bậc không cần quan tâm chất, mỗi lần một lá, và một quạt không bao giờ giữ quá 3 lá. Không chia lại. ¦ 17 kipas berisi 3 kartu; naik atau turun satu tingkat tanpa peduli jenis, satu per satu, dan satu kipas tidak pernah lebih dari 3 kartu. Tanpa pembagian ulang.
+La maison dans les bois ¦ Ngôi nhà trong rừng ¦ Rumah di hutan
+Deux jeux, 35 éventails de 3 cartes ; on monte ou on descend d’un rang dans la même couleur de carte, une carte à la fois. Une place vide reste vide. ¦ Hai bộ bài, 35 quạt mỗi quạt 3 lá; xếp tăng hoặc giảm một bậc cùng chất, mỗi lần một lá. Chỗ trống vẫn để trống. ¦ Dua set, 35 kipas berisi 3 kartu; naik atau turun satu tingkat dengan jenis sama, satu per satu. Tempat kosong tetap kosong.
+La maison sur la colline ¦ Ngôi nhà trên đồi ¦ Rumah di bukit
+La maison dans les bois (deux jeux, 35 éventails), mais quatre fondations montent de l’As au Roi et quatre autres descendent du Roi à l’As. ¦ Ngôi nhà trong rừng (hai bộ bài, 35 quạt), nhưng bốn ô nền đi lên từ Át đến Già và bốn ô khác đi xuống từ Già đến Át. ¦ Rumah di hutan (dua set, 35 kipas), tetapi empat fondasi naik dari As ke King dan empat lainnya turun dari King ke As.
+Bisley ¦ Bisley ¦ Bisley
+Les As sont posés d’avance ; 13 colonnes (4 de 3 cartes, 9 de 4). Les fondations des As montent, celles des Rois descendent, dans la même couleur de carte. Sur le tableau, on monte ou on descend dans la même couleur de carte, une carte à la fois ; une colonne vide reste vide. ¦ Các lá Át được đặt sẵn; 13 cột (4 cột 3 lá, 9 cột 4 lá). Ô nền của Át đi lên, ô nền của Già đi xuống, cùng chất. Trên bàn, xếp tăng hoặc giảm cùng chất, mỗi lần một lá; cột trống vẫn để trống. ¦ As sudah dipasang di awal; 13 kolom (4 berisi 3 kartu, 9 berisi 4). Fondasi As naik, fondasi King turun, dengan jenis sama. Di meja, susun naik atau turun dengan jenis sama, satu per satu; kolom kosong tetap kosong.
+Le cadran du grand-père ¦ Mặt đồng hồ của ông ¦ Jam kakek
+12 fondations comme les heures d’une horloge, qui commencent par 2♥, 3♠, 4♦, 5♣… jusqu’au Roi ♣ et montent dans la même couleur de carte (le Roi passe à l’As). 8 colonnes de 5 cartes ; on descend sans s’occuper des couleurs, une carte à la fois ; une colonne vide prend n’importe quelle carte. ¦ 12 ô nền như giờ trên mặt đồng hồ, bắt đầu bằng 2♥, 3♠, 4♦, 5♣… đến Già ♣ và đi lên cùng chất (Già chuyển sang Át). 8 cột mỗi cột 5 lá; xếp giảm dần không cần quan tâm chất, mỗi lần một lá; cột trống nhận bất kỳ lá nào. ¦ 12 fondasi seperti jam di jam dinding, dimulai dengan 2♥, 3♠, 4♦, 5♣… sampai King ♣ dan naik dengan jenis sama (King lanjut ke As). 8 kolom berisi 5 kartu; susun menurun tanpa peduli jenis, satu per satu; kolom kosong menerima kartu apa pun.
+Le mur de pierre ¦ Bức tường đá ¦ Tembok batu
+6 colonnes de 6 cartes, une cachée sur deux, et un bouquet de 16 cartes où l’on peut prendre n’importe laquelle. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. ¦ 6 cột mỗi cột 6 lá, cứ hai lá thì một lá úp, và một bó hoa 16 lá có thể lấy bất kỳ lá nào. Xếp giảm dần xen kẽ đỏ đen và di chuyển cả dây; cột trống nhận bất kỳ lá nào. ¦ 6 kolom berisi 6 kartu, selang-seling tertutup, dan buket 16 kartu yang bisa diambil kartu mana pun. Susun menurun berselang merah-hitam dan pindahkan deret utuh; kolom kosong menerima kartu apa pun.
+La fleur sauvage ¦ Hoa dại ¦ Bunga liar
+Le jardin fleuri (6 colonnes de 6 et un bouquet de 16 cartes), mais on déplace des suites entières. ¦ Vườn hoa (6 cột mỗi cột 6 lá và một bó hoa 16 lá), nhưng di chuyển cả dây. ¦ Taman bunga (6 kolom berisi 6 dan buket 16 kartu), tetapi pindahkan deret utuh.
+10 colonnes toutes visibles. La première carte posée sur une fondation donne la valeur de départ des quatre (le Roi passe à l’As). On monte ou on descend dans la même couleur de carte, une carte à la fois, et le Roi touche l’As. ¦ 10 cột, tất cả đều ngửa. Lá đầu tiên đặt lên ô nền quyết định giá trị bắt đầu của cả bốn ô (Già chuyển sang Át). Xếp tăng hoặc giảm cùng chất, mỗi lần một lá, và Già nối với Át. ¦ 10 kolom, semuanya terbuka. Kartu pertama di fondasi menentukan nilai awal keempatnya (King lanjut ke As). Susun naik atau turun dengan jenis sama, satu per satu, dan King bersambung dengan As.
+La place forte ¦ Thành trì ¦ Benteng kota
+Rues et ruelles (8 colonnes, on descend sans s’occuper des couleurs), avec une case libre. ¦ Phố lớn ngõ nhỏ (8 cột, xếp giảm dần không cần quan tâm chất), với một ô trống. ¦ Jalan dan gang (8 kolom, susun menurun tanpa peduli jenis), dengan satu sel bebas.
+Le fort ¦ Pháo đài ¦ Benteng
+Rues et ruelles (8 colonnes, on descend sans s’occuper des couleurs), avec deux cases libres. ¦ Phố lớn ngõ nhỏ (8 cột, xếp giảm dần không cần quan tâm chất), với hai ô trống. ¦ Jalan dan gang (8 kolom, susun menurun tanpa peduli jenis), dengan dua sel bebas.
+L’art du siège ¦ Nghệ thuật vây hãm ¦ Seni pengepungan
+Le château assiégé (les As posés d’avance, 8 colonnes de 6), avec une case libre. ¦ Lâu đài bị vây (Át đặt sẵn, 8 cột mỗi cột 6 lá), với một ô trống. ¦ Kastel terkepung (As dipasang di awal, 8 kolom berisi 6), dengan satu sel bebas.
+La toile de Pénélope ¦ Tấm vải của Penelope ¦ Tenunan Penelope
+Le château assiégé (les As posés d’avance, 8 colonnes de 6), mais seul un Roi va dans une colonne vide. ¦ Lâu đài bị vây (Át đặt sẵn, 8 cột mỗi cột 6 lá), nhưng chỉ lá Già được vào cột trống. ¦ Kastel terkepung (As dipasang di awal, 8 kolom berisi 6), tetapi hanya King yang boleh masuk kolom kosong.
+La citadelle ¦ Thành lũy ¦ Benteng utama
+Le château assiégé, mais pendant la distribution, toute carte qui peut monter sur une fondation y va tout de suite. ¦ Lâu đài bị vây, nhưng trong lúc chia bài, lá nào lên được ô nền thì lên ngay. ¦ Kastel terkepung, tetapi saat pembagian, kartu yang bisa naik ke fondasi langsung ke sana.
+Les rois exilés ¦ Những vị vua lưu vong ¦ Raja-raja buangan
+La citadelle (les cartes qui peuvent monter y vont pendant la distribution), mais seul un Roi va dans une colonne vide. ¦ Thành lũy (các lá lên được thì lên trong lúc chia bài), nhưng chỉ lá Già được vào cột trống. ¦ Benteng utama (kartu yang bisa naik langsung naik saat pembagian), tetapi hanya King yang boleh masuk kolom kosong.
+Le bastion ¦ Pháo đài góc ¦ Bastion
+10 colonnes de 5 cartes et 2 cases libres déjà occupées ; on monte ou on descend dans la même couleur de carte, une carte à la fois ; une colonne vide prend n’importe quelle carte. ¦ 10 cột mỗi cột 5 lá và 2 ô trống đã có lá; xếp tăng hoặc giảm cùng chất, mỗi lần một lá; cột trống nhận bất kỳ lá nào. ¦ 10 kolom berisi 5 kartu dan 2 sel bebas yang sudah terisi; susun naik atau turun dengan jenis sama, satu per satu; kolom kosong menerima kartu apa pun.
+La boîte à thé ¦ Hộp trà ¦ Kotak teh
+8 colonnes de 6 ou 7 cartes, tout est visible ; on descend sans s’occuper des couleurs et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. ¦ 8 cột mỗi cột 6 hoặc 7 lá, tất cả đều ngửa; xếp giảm dần không cần quan tâm chất và di chuyển cả dây; cột trống nhận bất kỳ lá nào. ¦ 8 kolom berisi 6 atau 7 kartu, semua terbuka; susun menurun tanpa peduli jenis dan pindahkan deret utuh; kolom kosong menerima kartu apa pun.
+La boîte à thé américaine ¦ Hộp trà kiểu Mỹ ¦ Kotak teh Amerika
+8 colonnes de 6 ou 7 cartes, tout est visible ; on descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. ¦ 8 cột mỗi cột 6 hoặc 7 lá, tất cả đều ngửa; xếp giảm dần xen kẽ đỏ đen và di chuyển cả dây; cột trống nhận bất kỳ lá nào. ¦ 8 kolom berisi 6 atau 7 kartu, semua terbuka; susun menurun berselang merah-hitam dan pindahkan deret utuh; kolom kosong menerima kartu apa pun.
+La boîte à thé anglaise ¦ Hộp trà kiểu Anh ¦ Kotak teh Inggris
+8 colonnes de 6 ou 7 cartes, tout est visible ; on descend en alternant rouge et noir, une carte à la fois ; seul un Roi va dans une colonne vide. ¦ 8 cột mỗi cột 6 hoặc 7 lá, tất cả đều ngửa; xếp giảm dần xen kẽ đỏ đen, mỗi lần một lá; chỉ lá Già được vào cột trống. ¦ 8 kolom berisi 6 atau 7 kartu, semua terbuka; susun menurun berselang merah-hitam, satu per satu; hanya King yang boleh masuk kolom kosong.
+Les trois sommets stricts ¦ Ba đỉnh núi nghiêm ngặt ¦ Tiga puncak ketat
+Les trois sommets, mais le Roi et l’As ne se suivent pas : la partie est plus difficile. ¦ Ba đỉnh núi, nhưng Già và Át không nối tiếp nhau: ván chơi khó hơn. ¦ Tiga puncak, tetapi King dan As tidak bersambung: permainan lebih sulit.
+Golf double ¦ Golf đôi ¦ Golf ganda
+Golf avec deux jeux : 9 colonnes de 7 cartes. Envoie sur la défausse une carte juste au-dessus ou au-dessous ; rien ne va sur un Roi. ¦ Golf với hai bộ bài: 9 cột mỗi cột 7 lá. Đưa vào chồng bỏ một lá cao hơn hoặc thấp hơn đúng một bậc; không gì đặt được lên lá Già. ¦ Golf dengan dua set: 9 kolom berisi 7 kartu. Kirim ke tumpukan buang kartu yang tepat satu di atas atau di bawah; tidak ada yang boleh di atas King.
+As en haut (5 colonnes) ¦ Át lên đầu (5 cột) ¦ As di atas (5 kolom)
+As en haut avec 5 colonnes : enlève une carte quand une autre colonne montre une carte plus forte de la même couleur de carte (l’As est le plus fort). Gagné s’il ne reste que les 4 As. ¦ Át lên đầu với 5 cột: bỏ một lá khi một cột khác lộ ra lá cao hơn cùng chất (Át là lá cao nhất). Thắng nếu chỉ còn lại 4 lá Át. ¦ As di atas dengan 5 kolom: buang satu kartu saat kolom lain menunjukkan kartu lebih tinggi dengan jenis sama (As paling tinggi). Menang jika hanya tersisa 4 As.
+La baronne ¦ Nữ nam tước ¦ Baroness
+5 tas : enlève un Roi seul, ou deux cartes du dessus qui font 13 (Valet 11, Dame 12). La pioche pose une carte sur chaque tas. ¦ 5 chồng: bỏ một lá Già riêng lẻ, hoặc hai lá trên cùng có tổng 13 (Bồi 11, Đầm 12). Chồng bài rút chia một lá lên mỗi chồng. ¦ 5 tumpukan: buang King sendirian, atau dua kartu teratas yang jumlahnya 13 (Jack 11, Queen 12). Tumpukan kartu menaruh satu kartu di setiap tumpukan.
+Sir Tommy ¦ Sir Tommy ¦ Sir Tommy
+Chaque carte piochée va sur une fondation ou sur l’un des 4 tas d’attente. Les fondations commencent par un As et montent de 1 en 1, sans s’occuper des couleurs. ¦ Mỗi lá rút ra được đặt lên một ô nền hoặc lên một trong 4 chồng chờ. Các ô nền bắt đầu bằng lá Át và đi lên từng bậc, không cần quan tâm chất. ¦ Setiap kartu yang diambil masuk ke fondasi atau ke salah satu dari 4 tumpukan tunggu. Fondasi dimulai dengan As dan naik satu-satu, tanpa peduli jenis.
+Le chat dans le coin ¦ Con mèo trong góc ¦ Kucing di pojok
+Les As sont posés d’avance et montent de 1 en 1 dans leur teinte (rouge sur rouge, noir sur noir). Chaque carte piochée va sur une fondation ou sur l’un des 4 tas d’attente ; une fois, on ramasse les tas pour repiocher. ¦ Các lá Át được đặt sẵn và đi lên từng bậc theo màu (đỏ trên đỏ, đen trên đen). Mỗi lá rút ra được đặt lên một ô nền hoặc lên một trong 4 chồng chờ; một lần, gom các chồng lại để rút tiếp. ¦ As sudah dipasang di awal dan naik satu-satu sesuai warnanya (merah di atas merah, hitam di atas hitam). Setiap kartu yang diambil masuk ke fondasi atau ke salah satu dari 4 tumpukan tunggu; sekali, tumpukan dikumpulkan untuk diambil lagi.
+La stratégie ¦ Chiến lược ¦ Strategi
+Chaque carte piochée va sur l’un des 8 tas d’attente ; seuls les As montent tout de suite. Quand la pioche est vide, on monte les cartes du dessus des tas, de 1 en 1 dans la même couleur de carte. ¦ Mỗi lá rút ra được đặt lên một trong 8 chồng chờ; chỉ các lá Át được lên ngay. Khi chồng bài rút hết, đưa các lá trên cùng của các chồng lên, từng bậc cùng chất. ¦ Setiap kartu yang diambil masuk ke salah satu dari 8 tumpukan tunggu; hanya As yang langsung naik. Saat tumpukan kartu habis, naikkan kartu teratas tumpukan, satu-satu dengan jenis sama.
+Gizeh ¦ Giza ¦ Giza
+La pyramide sans pioche : les 24 autres cartes sont visibles en 3 rangées et se prennent toutes. Enlève les paires qui font 13 (Valet 11, Dame 12 ; un Roi s’en va seul). ¦ Kim tự tháp không có chồng bài rút: 24 lá còn lại ngửa thành 3 hàng và đều lấy được. Bỏ các cặp có tổng 13 (Bồi 11, Đầm 12; lá Già tự đi một mình). ¦ Piramida tanpa tumpukan kartu: 24 kartu lainnya terbuka dalam 3 baris dan semuanya bisa diambil. Buang pasangan yang jumlahnya 13 (Jack 11, Queen 12; King pergi sendiri).
+Toutânkhamon ¦ Tutankhamun ¦ Tutankhamun
+La pyramide, mais la pioche se retourne trois cartes à la fois (seule la dernière se joue) et repasse autant que tu veux. ¦ Kim tự tháp, nhưng chồng bài rút lật ba lá một lần (chỉ lá cuối được chơi) và được lật lại bao nhiêu lần tùy bạn. ¦ Piramida, tetapi tumpukan kartu dibuka tiga sekaligus (hanya yang terakhir bisa dimainkan) dan bisa diulang sesukamu.
+La lune bleue ¦ Trăng xanh ¦ Bulan biru
+Montana, mais les As vont au début des rangées : il faut ranger chaque rangée de l’As au Roi dans une même couleur. Un trou prend la carte de même couleur juste au-dessus de sa voisine de gauche. Deux fois, on peut ramasser ce qui n’est pas rangé et redistribuer. ¦ Montana, nhưng các lá Át đi về đầu hàng: phải xếp mỗi hàng từ Át đến Già cùng một chất. Một lỗ trống nhận lá cùng chất cao hơn đúng một bậc so với lá bên trái của nó. Hai lần, có thể gom những gì chưa xếp xong và chia lại. ¦ Montana, tetapi As pergi ke awal baris: setiap baris harus disusun dari As ke King dengan jenis sama. Lubang menerima kartu berjenis sama yang tepat satu di atas tetangga kirinya. Dua kali, kamu bisa mengumpulkan yang belum tersusun dan membagikan ulang.
+La lune rouge ¦ Trăng đỏ ¦ Bulan merah
+La lune bleue, mais les As sont posés d’avance au début des rangées et les trous sont au bout des rangées dès le départ. ¦ Trăng xanh, nhưng các lá Át được đặt sẵn ở đầu hàng và các lỗ trống nằm ở cuối hàng ngay từ đầu. ¦ Bulan biru, tetapi As sudah dipasang di awal baris dan lubang ada di ujung baris sejak awal.
+Le voisin ¦ Hàng xóm ¦ Tetangga
+Une grille de 5 × 5 : enlève deux cartes qui se touchent (même en diagonale) et font 13 (Valet 11, Dame 12) ; un Roi s’en va seul. Puis tasse la grille. ¦ Một lưới 5 × 5: bỏ hai lá kề nhau (kể cả chéo) có tổng 13 (Bồi 11, Đầm 12); lá Già tự đi một mình. Rồi dồn lưới lại. ¦ Kisi 5 × 5: buang dua kartu yang bersentuhan (termasuk diagonal) dan jumlahnya 13 (Jack 11, Queen 12); King pergi sendiri. Lalu rapatkan kisi.
+Isabelle ¦ Isabelle ¦ Isabelle
+13 colonnes de 4 cartes (seule la dernière est visible) : enlève deux cartes de même valeur prises en bas des colonnes. Un jeu de pure chance, pour se détendre. ¦ 13 cột mỗi cột 4 lá (chỉ lá cuối ngửa): bỏ hai lá cùng giá trị lấy ở đáy các cột. Một trò hoàn toàn may rủi, để thư giãn. ¦ 13 kolom berisi 4 kartu (hanya yang terakhir terbuka): buang dua kartu bernilai sama dari bawah kolom. Permainan murni untung-untungan, untuk bersantai.
+Quatorze en colonnes ¦ Mười bốn theo cột ¦ Empat belas dalam kolom
+12 colonnes avec toutes les cartes visibles : enlève deux cartes prises en bas des colonnes qui font 14 (Valet 11, Dame 12, Roi 13). ¦ 12 cột với tất cả các lá đều ngửa: bỏ hai lá lấy ở đáy các cột có tổng 14 (Bồi 11, Đầm 12, Già 13). ¦ 12 kolom dengan semua kartu terbuka: buang dua kartu dari bawah kolom yang jumlahnya 14 (Jack 11, Queen 12, King 13).
+Ramassé et redistribué, sans mélanger. ¦ Đã gom và chia lại, không xáo. ¦ Dikumpulkan dan dibagikan ulang, tanpa dikocok.
+Les tas d’attente sont ramassés dans la pioche. ¦ Các chồng chờ được gom vào chồng bài rút. ¦ Tumpukan tunggu dikumpulkan ke tumpukan kartu.
+Ouvre le Jeu, choisis « 🂠 Patiences (jeux de cartes) » dans « Jeu », puis le jeu parmi 233 patiences rangées par famille (Klondike, FreeCell, Araignée, Yukon, Les quarante voleurs, Châteaux et jardins, jeux de paires). Glisse une carte (ou une suite) sur une autre pile, ou clique-la puis clique où la poser ; double-clic : sur une fondation ; clic sur la pioche : piocher. Dans les jeux de paires (Pyramide, Onze, Treize…), clique les cartes qui vont ensemble. ¦ Mở Trò chơi, chọn « 🂠 Bài xếp (trò chơi bài) » trong « Trò chơi », rồi chọn trò trong 233 kiểu bài xếp được xếp theo họ (Klondike, FreeCell, Nhện, Yukon, Bốn mươi tên trộm, Lâu đài và vườn, trò ghép cặp). Kéo một lá (hoặc một dây) sang chồng khác, hoặc bấm vào nó rồi bấm chỗ muốn đặt; bấm đúp: lên ô nền; bấm vào chồng bài rút: rút bài. Trong các trò ghép cặp (Kim tự tháp, Mười một, Mười ba…), bấm vào các lá đi cùng nhau. ¦ Buka Permainan, pilih « 🂠 Solitaire (permainan kartu) » di « Permainan », lalu pilih permainan di antara 233 solitaire yang dikelompokkan per keluarga (Klondike, FreeCell, Laba-laba, Yukon, Empat puluh pencuri, Kastel dan taman, permainan pasangan). Seret kartu (atau deret) ke tumpukan lain, atau klik lalu klik tempat menaruhnya; klik dua kali: ke fondasi; klik tumpukan kartu: ambil kartu. Dalam permainan pasangan (Piramida, Sebelas, Tiga belas…), klik kartu yang berpasangan.
+Quelles autres patiences sont arrivées ensuite ? ¦ Những kiểu bài xếp nào khác đã được thêm sau đó? ¦ Solitaire apa lagi yang datang kemudian?
+Cent deux patiences classiques de plus, chacune avec ses règles dans « 📖 Les règles » de la partie. Famille Klondike et Canfield : Agnès Bernauer, Thumb and Pouch, Pas seul, Les impasses, Huit fois huit, Spike, Alternance, La harpe, La grande harpe, Acme, Le crapaud américain, Canfield bigarré, La duchesse, La porte. Avec des cases libres : Le pingouin, Baker’s Game (Roi seul), Seahaven détendu, Repair, Ocean Towers, Sept par quatre, Sept par cinq, FreeCell défi, FreeCell super défi. Araignées et gitanes : Le scarabée, Queue de scorpion, Scorpion double, Motif de divorce, La tarentule, Araignée à découvert, La harpe de Milligan, La harpe de Lexington, Brunswick, Carlton, Miss Milligan, Millie, L’île d’Elbe, Le mont Olympe. Yukon : La patience australienne, Canberra, Raw Prawn, Rushdike, La discipline chinoise, Solitaire russe double. Les quarante voleurs et leurs cousins : Ali Baba, Cassim, Rang et file, Les As affairés, La cour, Le carré de Napoléon, L’exil de Napoléon, Deuces, La lune décroissante, Les cinquante fameux, Quarante-neuf, Sans limite, Les petits quarante, Le zèbre, Le congrès, Le parlement, Pair et impair, Le cotillon royal. Châteaux, éventails et jardins : Le treize porte-bonheur, La patience portugaise, Bonne mesure, La cruelle, La persévérance, L’éventail en vagues, L’éventail en boîte, L’éventail fascinant, La lampe de minuit, Shamrocks, La maison dans les bois, La maison sur la colline, Bisley, Le cadran du grand-père, Le mur de pierre, La fleur sauvage, L’échiquier, La place forte, Le fort, L’art du siège, La toile de Pénélope, La citadelle, Les rois exilés, Le bastion, La boîte à thé (et ses versions américaine et anglaise). Paires, suites et calculs : Les trois sommets stricts, Golf double, As en haut (5 colonnes), La baronne, Sir Tommy, Le chat dans le coin, La stratégie, Gizeh, Toutânkhamon, La lune bleue, La lune rouge, Le voisin, Isabelle et Quatorze en colonnes. ¦ Thêm một trăm lẻ hai kiểu bài xếp cổ điển, mỗi kiểu có luật riêng trong « 📖 Luật chơi » của ván. Họ Klondike và Canfield: Agnès Bernauer, Thumb and Pouch, Pas seul, Ngõ cụt, Tám lần tám, Spike, Xen kẽ, Đàn hạc, Đàn hạc lớn, Acme, Cóc Mỹ, Canfield nhiều màu, Nữ công tước, Cánh cổng. Có ô trống: Chim cánh cụt, Baker’s Game (chỉ Già), Seahaven dễ hơn, Repair, Ocean Towers, Bảy nhân bốn, Bảy nhân năm, FreeCell thử thách, FreeCell siêu thử thách. Nhện và gypsy: Bọ hung, Đuôi bọ cạp, Bọ cạp đôi, Lý do ly hôn, Nhện tarantula, Nhện lộ bài, Đàn hạc Milligan, Đàn hạc Lexington, Brunswick, Carlton, Miss Milligan, Millie, Đảo Elba, Núi Olympus. Yukon: Patience kiểu Úc, Canberra, Raw Prawn, Rushdike, Kỷ luật Trung Hoa, Solitaire Nga đôi. Bốn mươi tên trộm và họ hàng: Ali Baba, Cassim, Hàng ngũ, Những lá Át bận rộn, Sân trong, Hình vuông của Napoléon, Napoléon lưu đày, Deuces, Trăng khuyết, Năm mươi nổi tiếng, Bốn mươi chín, Không giới hạn, Bốn mươi nhỏ, Ngựa vằn, Quốc hội, Nghị viện, Chẵn và lẻ, Điệu cotillon hoàng gia. Lâu đài, quạt và vườn: Mười ba may mắn, Patience kiểu Bồ Đào Nha, Đong đầy, Nghiệt ngã, Kiên trì, Quạt sóng, Quạt trong hộp, Quạt mê hoặc, Đèn nửa đêm, Shamrocks, Ngôi nhà trong rừng, Ngôi nhà trên đồi, Bisley, Mặt đồng hồ của ông, Bức tường đá, Hoa dại, Bàn cờ, Thành trì, Pháo đài, Nghệ thuật vây hãm, Tấm vải của Penelope, Thành lũy, Những vị vua lưu vong, Pháo đài góc, Hộp trà (và các phiên bản Mỹ và Anh). Cặp, dây và tính toán: Ba đỉnh núi nghiêm ngặt, Golf đôi, Át lên đầu (5 cột), Nữ nam tước, Sir Tommy, Con mèo trong góc, Chiến lược, Giza, Tutankhamun, Trăng xanh, Trăng đỏ, Hàng xóm, Isabelle và Mười bốn theo cột. ¦ Seratus dua solitaire klasik lagi, masing-masing dengan aturannya di « 📖 Aturan » permainan. Keluarga Klondike dan Canfield: Agnès Bernauer, Thumb and Pouch, Pas seul, Jalan buntu, Delapan kali delapan, Spike, Selang-seling, Harpa, Harpa besar, Acme, Katak Amerika, Canfield beraneka, Duchess, Gerbang. Dengan sel bebas: Penguin, Baker’s Game (hanya King), Seahaven santai, Repair, Ocean Towers, Tujuh kali empat, Tujuh kali lima, FreeCell tantangan, FreeCell super tantangan. Laba-laba dan gipsi: Kumbang, Ekor kalajengking, Kalajengking ganda, Alasan cerai, Tarantula, Laba-laba terbuka, Harpa Milligan, Harpa Lexington, Brunswick, Carlton, Miss Milligan, Millie, Pulau Elba, Gunung Olympus. Yukon: Patience Australia, Canberra, Raw Prawn, Rushdike, Disiplin Tiongkok, Solitaire Rusia ganda. Empat puluh pencuri dan kerabatnya: Ali Baba, Cassim, Barisan, As yang sibuk, Halaman, Alun-alun Napoleon, Pengasingan Napoleon, Deuces, Bulan susut, Lima puluh terkenal, Empat puluh sembilan, Tanpa batas, Empat puluh kecil, Zebra, Kongres, Parlemen, Genap dan ganjil, Kotilyon kerajaan. Kastel, kipas, dan taman: Tiga belas pembawa untung, Patience Portugis, Takaran pas, Si kejam, Ketekunan, Kipas ombak, Kipas dalam kotak, Kipas memesona, Lampu tengah malam, Shamrocks, Rumah di hutan, Rumah di bukit, Bisley, Jam kakek, Tembok batu, Bunga liar, Papan catur, Benteng kota, Benteng, Seni pengepungan, Tenunan Penelope, Benteng utama, Raja-raja buangan, Bastion, Kotak teh (serta versi Amerika dan Inggrisnya). Pasangan, deret, dan hitungan: Tiga puncak ketat, Golf ganda, As di atas (5 kolom), Baroness, Sir Tommy, Kucing di pojok, Strategi, Giza, Tutankhamun, Bulan biru, Bulan merah, Tetangga, Isabelle, dan Empat belas dalam kolom.
+(suite) ¦ (tiếp) ¦ (lanjutan)
+.pptx : textes, images, formes, tableaux ¦ .pptx: chữ, ảnh, hình, bảng ¦ .pptx: teks, gambar, bentuk, tabel
+Ce texte est vide : rien à mettre en diapositives. ¦ Văn bản này trống: không có gì để đưa vào trang chiếu. ¦ Teks ini kosong: tidak ada yang bisa dijadikan slide.
+Cette image n’est pas dans les médias. ¦ Ảnh này không có trong tư liệu. ¦ Gambar ini tidak ada di media.
+Envoyer vers… : la présentation en vidéo, dans le Montage vidéo ou sur ton site ¦ Gửi đến…: bài thuyết trình dạng video, vào Dựng video hoặc lên trang web của bạn ¦ Kirim ke…: presentasi sebagai video, ke Penyuntingan video atau ke situsmu
+Fichier PowerPoint téléchargé. ¦ Đã tải xuống tệp PowerPoint. ¦ Berkas PowerPoint diunduh.
+La présentation devient une vidéo ({time}), rangée dans les Médias, puis tu choisis où elle va : le Montage vidéo ou ton site. Laisse la fenêtre ouverte pendant l’enregistrement. ¦ Bài thuyết trình trở thành video ({time}), được lưu vào Tư liệu, rồi bạn chọn nơi nó đến: Dựng video hoặc trang web của bạn. Hãy để cửa sổ mở trong lúc ghi. ¦ Presentasi menjadi video ({time}), disimpan di Media, lalu kamu pilih ke mana: Penyuntingan video atau situsmu. Biarkan jendela terbuka selama perekaman.
+Le diaporama devient une vidéo ({time}), rangée dans les Médias, puis tu choisis où elle va : le Montage vidéo ou ton site. Laisse la fenêtre ouverte pendant l’enregistrement. ¦ Trình chiếu ảnh trở thành video ({time}), được lưu vào Tư liệu, rồi bạn chọn nơi nó đến: Dựng video hoặc trang web của bạn. Hãy để cửa sổ mở trong lúc ghi. ¦ Tayangan slide menjadi video ({time}), disimpan di Media, lalu kamu pilih ke mana: Penyuntingan video atau situsmu. Biarkan jendela terbuka selama perekaman.
+Le diaporama en vidéo, rangé dans les médias, puis dans le Montage vidéo ou sur ton site ¦ Trình chiếu ảnh dạng video, lưu vào tư liệu, rồi vào Dựng video hoặc lên trang web của bạn ¦ Tayangan slide sebagai video, disimpan di media, lalu ke Penyuntingan video atau ke situsmu
+PowerPoint : assemblage du fichier… ¦ PowerPoint: đang ghép tệp… ¦ PowerPoint: menyusun berkas…
+PowerPoint : diapositive {n} / {total} ¦ PowerPoint: trang chiếu {n} / {total} ¦ PowerPoint: slide {n} / {total}
+PowerPoint impossible : {error} ¦ Không thể tạo PowerPoint: {error} ¦ PowerPoint gagal: {error}
+📊 PowerPoint ¦ 📊 PowerPoint ¦ 📊 PowerPoint
+📊 PowerPoint (.pptx) ¦ 📊 PowerPoint (.pptx) ¦ 📊 PowerPoint (.pptx)
+📤 Envoyer la présentation ¦ 📤 Gửi bài thuyết trình ¦ 📤 Kirim presentasi
+📤 Envoyer le diaporama ¦ 📤 Gửi trình chiếu ảnh ¦ 📤 Kirim tayangan slide
+📤 Envoyer vers… (la vidéo) ¦ 📤 Gửi đến… (video) ¦ 📤 Kirim ke… (video)
+📤 Envoyer vers… (le Montage vidéo, ton site) ¦ 📤 Gửi đến… (Dựng video, trang web của bạn) ¦ 📤 Kirim ke… (Penyuntingan video, situsmu)
+⤓ Exporter l’image (PNG, JPG, WebP, TIFF, imprimer)… ¦ ⤓ Xuất ảnh (PNG, JPG, WebP, TIFF, in)… ¦ ⤓ Ekspor gambar (PNG, JPG, WebP, TIFF, cetak)…
+Exporter : l’image retouchée (PNG, JPG, WebP, TIFF, imprimer) ou l’avant / après ¦ Xuất: ảnh đã chỉnh sửa (PNG, JPG, WebP, TIFF, in) hoặc trước / sau ¦ Ekspor: gambar yang diretus (PNG, JPG, WebP, TIFF, cetak) atau sebelum / sesudah
+🖼 L’image retouchée (PNG, JPG, WebP, TIFF, imprimer)… ¦ 🖼 Ảnh đã chỉnh sửa (PNG, JPG, WebP, TIFF, in)… ¦ 🖼 Gambar yang diretus (PNG, JPG, WebP, TIFF, cetak)…
+🌐 WebP ¦ 🌐 WebP ¦ 🌐 WebP
+léger, pour le web ¦ nhẹ, cho web ¦ ringan, untuk web
+🗂 TIFF ¦ 🗂 TIFF ¦ 🗂 TIFF
+sans perte, pour archiver ¦ không mất chất lượng, để lưu trữ ¦ tanpa kehilangan kualitas, untuk arsip
+Ce navigateur ne sait pas faire du WebP : choisis PNG ou JPG. ¦ Trình duyệt này không làm được WebP: hãy chọn PNG hoặc JPG. ¦ Peramban ini tidak bisa membuat WebP: pilih PNG atau JPG.
+Cette action de retouche n’existe plus. ¦ Thao tác chỉnh sửa này không còn nữa. ¦ Tindakan retus ini sudah tidak ada.
+Choisis une photo à retoucher. ¦ Hãy chọn một ảnh để chỉnh sửa. ¦ Pilih foto untuk diretus.
+Envoyer l’image affichée ou le compte rendu vers un autre outil ¦ Gửi ảnh đang hiển thị hoặc bản báo cáo đến một công cụ khác ¦ Kirim gambar yang ditampilkan atau laporannya ke alat lain
+Ouvrir la photo A ou B dans la Retouche des photos ¦ Mở ảnh A hoặc B trong Chỉnh sửa ảnh ¦ Buka foto A atau B di Retus foto
+Exporter l’image affichée, ou imprimer les deux photos avec la ressemblance et les notes ¦ Xuất ảnh đang hiển thị, hoặc in cả hai ảnh cùng độ giống nhau và ghi chú ¦ Ekspor gambar yang ditampilkan, atau cetak kedua foto dengan kemiripan dan catatannya
+Exporter l’image (ce qui est affiché)… ¦ Xuất ảnh (những gì đang hiển thị)… ¦ Ekspor gambar (yang ditampilkan)…
+Imprimer (les deux photos, la ressemblance, les notes)… ¦ In (cả hai ảnh, độ giống nhau, ghi chú)… ¦ Cetak (kedua foto, kemiripan, catatan)…
+L’image affichée ¦ Ảnh đang hiển thị ¦ Gambar yang ditampilkan
+Le compte rendu (photos, ressemblance, notes) ¦ Bản báo cáo (ảnh, độ giống nhau, ghi chú) ¦ Laporan (foto, kemiripan, catatan)
+La Retouche des photos n’est pas chargée. ¦ Chỉnh sửa ảnh chưa được tải. ¦ Retus foto belum dimuat.
+Photo {side} — {name} ¦ Ảnh {side} — {name} ¦ Foto {side} — {name}
+Retoucher quelle photo ? ¦ Chỉnh sửa ảnh nào? ¦ Retus foto yang mana?
+Utiliser ¦ Dùng ¦ Gunakan
+✒️ Quel dessin ? ¦ ✒️ Hình vẽ nào? ¦ ✒️ Gambar yang mana?
+Aucun dessin enregistré dans le Dessin vectoriel. ¦ Chưa có hình vẽ nào được lưu trong Vẽ vector. ¦ Belum ada gambar tersimpan di Gambar vektor.
+Ce dessin n’a pas pu être lu : ouvre le Dessin vectoriel une fois, puis recommence. ¦ Không đọc được hình vẽ này: hãy mở Vẽ vector một lần, rồi thử lại. ¦ Gambar ini tidak bisa dibaca: buka Gambar vektor sekali, lalu ulangi.
+📝 Quel document ? ¦ 📝 Tài liệu nào? ¦ 📝 Dokumen yang mana?
+Aucun document dans le Traitement de texte. ¦ Chưa có tài liệu nào trong Soạn thảo văn bản. ¦ Belum ada dokumen di Pengolah kata.
+Des images qui défilent (‹ ›) ; sans script, elles glissent au doigt ¦ Các ảnh chạy qua (‹ ›); không cần script, chúng trượt theo ngón tay ¦ Gambar yang bergulir (‹ ›); tanpa skrip, bisa digeser dengan jari
+Les images du diaporama ¦ Ảnh của trình chiếu ¦ Gambar tayangan slide
+Une vidéo de tes médias (ou d’un fichier : 📁 Importer…), avec ses boutons lecture et plein écran ¦ Một video trong tư liệu của bạn (hoặc từ một tệp: 📁 Nhập…), với nút phát và toàn màn hình ¦ Video dari media-mu (atau dari berkas: 📁 Impor…), dengan tombol putar dan layar penuh
+La vidéo du site ¦ Video của trang web ¦ Video situs
+Télécharger la vidéo ¦ Tải video xuống ¦ Unduh video
+Un son de tes médias (témoignage, chanson…), et ce qu’on y entend écrit dessous si tu veux ¦ Một âm thanh trong tư liệu của bạn (lời kể, bài hát…), và những gì nghe được viết bên dưới nếu bạn muốn ¦ Suara dari media-mu (kesaksian, lagu…), dan yang terdengar ditulis di bawahnya kalau kamu mau
+Le son du site ¦ Âm thanh của trang web ¦ Suara situs
+🎧 Ce qu’on entend (facultatif) ¦ 🎧 Những gì nghe được (không bắt buộc) ¦ 🎧 Yang terdengar (opsional)
+Écris ou colle la transcription : elle sera sous le son, pour ceux qui ne peuvent pas l’écouter. Laisse vide si tu n’en veux pas. ¦ Viết hoặc dán bản chép: nó sẽ nằm dưới âm thanh, cho những ai không nghe được. Để trống nếu bạn không muốn. ¦ Tulis atau tempel transkripsi: akan ada di bawah suara, untuk yang tidak bisa mendengarnya. Biarkan kosong kalau tidak mau.
+Ajouter le son ¦ Thêm âm thanh ¦ Tambahkan suara
+Télécharger le son ¦ Tải âm thanh xuống ¦ Unduh suara
+Ce qu’on entend ¦ Những gì nghe được ¦ Yang terdengar
+Un de tes dessins vectoriels, ou un SVG collé (sans script ni lien vers l’extérieur) ¦ Một trong các hình vẽ vector của bạn, hoặc một SVG được dán (không có script hay liên kết ra ngoài) ¦ Salah satu gambar vektormu, atau SVG yang ditempel (tanpa skrip atau tautan ke luar)
+Un de mes dessins ¦ Một trong các hình vẽ của tôi ¦ Salah satu gambarku
+Dessin vectoriel → mes dessins enregistrés ¦ Vẽ vector → các hình vẽ đã lưu của tôi ¦ Gambar vektor → gambar tersimpanku
+Coller un SVG ¦ Dán một SVG ¦ Tempel SVG
+Le code <svg>…</svg> d’un dessin ¦ Mã <svg>…</svg> của một hình vẽ ¦ Kode <svg>…</svg> sebuah gambar
+📋 Coller un SVG ¦ 📋 Dán một SVG ¦ 📋 Tempel SVG
+Colle ici le code du dessin, de <svg> à </svg>. Les scripts et les liens vers l’extérieur sont retirés. ¦ Dán mã của hình vẽ vào đây, từ <svg> đến </svg>. Các script và liên kết ra ngoài sẽ bị gỡ bỏ. ¦ Tempel kode gambarnya di sini, dari <svg> sampai </svg>. Skrip dan tautan ke luar dihapus.
+Ajouter le dessin ¦ Thêm hình vẽ ¦ Tambahkan gambar
+Un texte du Traitement de texte (une lettre, un récit), mis au propre pour la page ¦ Một văn bản từ Soạn thảo văn bản (một lá thư, một câu chuyện), được trình bày gọn gàng cho trang ¦ Teks dari Pengolah kata (surat, kisah), dirapikan untuk halaman
+Ce document est vide. ¦ Tài liệu này trống. ¦ Dokumen ini kosong.
+Vidéo, son, dessin et texte ¦ Video, âm thanh, hình vẽ và văn bản ¦ Video, suara, gambar, dan teks
+🎬 Changer la vidéo… ¦ 🎬 Đổi video… ¦ 🎬 Ganti video…
+🎧 Changer le son… ¦ 🎧 Đổi âm thanh… ¦ 🎧 Ganti suara…
+Le fichier part avec le site (dossier medias/) à l’export et à la publication. ¦ Tệp đi cùng trang web (thư mục medias/) khi xuất và khi đăng. ¦ Berkas ikut bersama situs (folder medias/) saat ekspor dan publikasi.
+Un autre son ¦ Một âm thanh khác ¦ Suara lain
+Une autre vidéo ¦ Một video khác ¦ Video lain
+{what} (dossier medias/) ¦ {what} (thư mục medias/) ¦ {what} (folder medias/)
+vidéo ou son ¦ video hoặc âm thanh ¦ video atau suara
+vidéos ou sons ¦ các video hoặc âm thanh ¦ video atau suara
+{what} : trop lourd pour un site (90 Mo au plus par fichier, 300 Mo en tout) ¦ {what}: quá nặng cho một trang web (tối đa 90 MB mỗi tệp, tổng cộng 300 MB) ¦ {what}: terlalu besar untuk situs (maksimal 90 MB per berkas, 300 MB total)
+vidéo ou son pas mis ¦ video hoặc âm thanh chưa được đưa vào ¦ video atau suara tidak dimasukkan
+vidéos ou sons pas mis ¦ các video hoặc âm thanh chưa được đưa vào ¦ video atau suara yang tidak dimasukkan
+Mon site web n’est pas chargé : recharge la page. ¦ Trang web của tôi chưa được tải: hãy tải lại trang. ¦ Situs web saya belum dimuat: muat ulang halaman.
+Mon site web ne sait pas recevoir ça. ¦ Trang web của tôi không nhận được thứ này. ¦ Situs web saya tidak bisa menerima ini.
+Ce texte est vide. ¦ Văn bản này trống. ¦ Teks ini kosong.
+Mon site ¦ Trang web của tôi ¦ Situsku
+ouvert ¦ đang mở ¦ terbuka
+la dernière fois ¦ lần trước ¦ terakhir kali
+ouvert, pas encore enregistré ¦ đang mở, chưa lưu ¦ terbuka, belum disimpan
+{what} : sur quel site ? ¦ {what}: lên trang web nào? ¦ {what}: ke situs yang mana?
+Un nouveau site ¦ Một trang web mới ¦ Situs baru
+Sur quelle page ? ¦ Lên trang nào? ¦ Ke halaman yang mana?
+Une nouvelle page… ¦ Một trang mới… ¦ Halaman baru…
+📄 Nouvelle page ¦ 📄 Trang mới ¦ 📄 Halaman baru
+Le nom de la page (il apparaît dans le menu) : ¦ Tên của trang (hiện trong menu): ¦ Nama halaman (muncul di menu):
+La vidéo ¦ Video ¦ Videonya
+{what} est sur la page « {page} » de « {site} » ¦ {what} nằm trên trang « {page} » của « {site} » ¦ {what} ada di halaman « {page} » dari « {site} »
+vidéos WebM ¦ video WebM ¦ video WebM
+Les iPhone d’avant 2024 ne la lisent pas : préfère le MP4 (H.264), que tout le monde lit. ¦ iPhone trước 2024 không phát được: nên dùng MP4 (H.264), loại ai cũng phát được. ¦ iPhone sebelum 2024 tidak bisa memutarnya: pilih MP4 (H.264), yang bisa diputar semua orang.
+vidéos .mov (QuickTime) ¦ video .mov (QuickTime) ¦ video .mov (QuickTime)
+Souvent illisible hors d’Apple : refais-la en MP4 (🎬 Montage vidéo → Exporter). ¦ Thường không phát được ngoài Apple: hãy làm lại thành MP4 (🎬 Dựng video → Xuất). ¦ Sering tidak bisa diputar di luar Apple: buat ulang jadi MP4 (🎬 Penyuntingan video → Ekspor).
+vidéos Ogg (.ogv) ¦ video Ogg (.ogv) ¦ video Ogg (.ogv)
+Jamais sur Safari ni sur iPhone : préfère le MP4. ¦ Không bao giờ phát trên Safari hay iPhone: nên dùng MP4. ¦ Tidak pernah bisa di Safari maupun iPhone: pilih MP4.
+sons Ogg (Vorbis, Opus) ¦ âm thanh Ogg (Vorbis, Opus) ¦ suara Ogg (Vorbis, Opus)
+Safari ne les lit que depuis 2025 : préfère le MP3 (🎧 Son → Exporter). ¦ Safari chỉ phát được từ 2025: nên dùng MP3 (🎧 Âm thanh → Xuất). ¦ Safari baru bisa memutarnya sejak 2025: pilih MP3 (🎧 Suara → Ekspor).
+sons FLAC ¦ âm thanh FLAC ¦ suara FLAC
+Marche partout, mais c’est lourd pour un site : le MP3 se charge bien plus vite. ¦ Chạy ở mọi nơi, nhưng nặng cho một trang web: MP3 tải nhanh hơn nhiều. ¦ Bisa di mana saja, tapi berat untuk situs: MP3 jauh lebih cepat dimuat.
+scroll-snap (le diaporama s’arrête sur chaque image) ¦ scroll-snap (trình chiếu dừng ở mỗi ảnh) ¦ scroll-snap (tayangan slide berhenti di setiap gambar)
+Marche partout depuis 2019 ; ailleurs, les images défilent sans s’arrêter. ¦ Chạy ở mọi nơi từ 2019; ở chỗ khác, ảnh chạy qua mà không dừng. ¦ Bisa di mana saja sejak 2019; di tempat lain, gambar bergulir tanpa berhenti.
+Maison par époques ¦ Ngôi nhà qua các thời kỳ ¦ Rumah per zaman
+Ma carte animée ¦ Bản đồ động của tôi ¦ Peta animasiku
+La maison au fil du temps ¦ Ngôi nhà theo dòng thời gian ¦ Rumah dari masa ke masa
+Le dessin vectoriel n’est pas chargé. ¦ Vẽ vector chưa được tải. ¦ Gambar vektor belum dimuat.
+Lecture de la carte… ¦ Đang đọc bản đồ… ¦ Membaca peta…
+Carte introuvable ¦ Không tìm thấy bản đồ ¦ Peta tidak ditemukan
+La maison n’est pas chargée. ¦ Ngôi nhà chưa được tải. ¦ Rumah belum dimuat.
+Lecture de la maison… ¦ Đang đọc ngôi nhà… ¦ Membaca rumah…
+Maison introuvable ¦ Không tìm thấy ngôi nhà ¦ Rumah tidak ditemukan
+Le plan de cette maison est vide. ¦ Sơ đồ của ngôi nhà này trống. ¦ Denah rumah ini kosong.
+Choisir une carte ¦ Chọn một bản đồ ¦ Pilih peta
+Chercher une carte… ¦ Tìm một bản đồ… ¦ Cari peta…
+{n} objets ¦ {n} đối tượng ¦ {n} objek
+Les objets qui ont des années (onglet Propriétés de la carte) apparaissent à leur date. ¦ Các đối tượng có năm (thẻ Thuộc tính của bản đồ) xuất hiện vào đúng thời điểm của chúng. ¦ Objek yang punya tahun (tab Properti peta) muncul pada tanggalnya.
+Aucune carte enregistrée : fais-en une dans Outils de modification → 🗺️ Carte. ¦ Chưa có bản đồ nào được lưu: hãy tạo một cái trong Công cụ chỉnh sửa → 🗺️ Bản đồ. ¦ Belum ada peta tersimpan: buat satu di Alat pengeditan → 🗺️ Peta.
+Choisir une maison ¦ Chọn một ngôi nhà ¦ Pilih rumah
+Chercher une maison… ¦ Tìm một ngôi nhà… ¦ Cari rumah…
+Chaque époque de la maison (🕰) devient un plan, l’un après l’autre, en fondu. ¦ Mỗi thời kỳ của ngôi nhà (🕰) trở thành một cảnh, lần lượt, chuyển mờ dần. ¦ Setiap zaman rumah (🕰) menjadi satu adegan, satu per satu, dengan transisi memudar.
+Aucune maison enregistrée : dessine-en une dans Outils de modification → 🏠 Maison. ¦ Chưa có ngôi nhà nào được lưu: hãy vẽ một cái trong Công cụ chỉnh sửa → 🏠 Ngôi nhà. ¦ Belum ada rumah tersimpan: gambar satu di Alat pengeditan → 🏠 Rumah.
+Apparition des objets ¦ Sự xuất hiện của các đối tượng ¦ Kemunculan objek
+D’un coup ¦ Một lần ¦ Sekaligus
+Avance doucement ¦ Tiến từ từ ¦ Maju perlahan
+Fondu d’une époque à l’autre (0 à 0,9) ¦ Chuyển mờ dần giữa các thời kỳ (0 đến 0,9) ¦ Transisi memudar antarzaman (0 sampai 0,9)
+L’année et le nom de l’époque en légende ¦ Năm và tên thời kỳ làm chú thích ¦ Tahun dan nama zaman sebagai keterangan
+(une copie de la carte) ¦ (một bản sao của bản đồ) ¦ (salinan peta)
+En faire la musique ¦ Dùng làm nhạc nền ¦ Jadikan musik
+Ce son passe en musique de fond, pour tout le film ¦ Âm thanh này thành nhạc nền cho cả phim ¦ Suara ini menjadi musik latar untuk seluruh film
+Voix retirée. ¦ Đã gỡ giọng nói. ¦ Suara narasi dihapus.
+Le son est maintenant la musique du film. ¦ Âm thanh giờ là nhạc của phim. ¦ Suara ini sekarang musik film.
+Le son est la voix du film (onglet Film). « 🎵 En faire la musique » pour le mettre en fond. ¦ Âm thanh là giọng nói của phim (thẻ Phim). « 🎵 Dùng làm nhạc nền » để đặt nó làm nền. ¦ Suara ini adalah narasi film (tab Film). « 🎵 Jadikan musik » untuk menjadikannya latar.
+Animer dans le Studio ¦ Làm động trong Studio ¦ Animasikan di Studio
+Le curseur du temps joue tout seul : les objets apparaissent à leur date ¦ Con trỏ thời gian tự chạy: các đối tượng xuất hiện vào đúng thời điểm ¦ Penggeser waktu berjalan sendiri: objek muncul pada tanggalnya
+Le Studio d’animation n’est pas chargé. ¦ Xưởng hoạt hình chưa được tải. ¦ Studio animasi belum dimuat.
+Aucune carte enregistrée : commence par « ＋ Nouvelle carte ». ¦ Chưa có bản đồ nào được lưu: hãy bắt đầu bằng « ＋ Bản đồ mới ». ¦ Belum ada peta tersimpan: mulai dengan « ＋ Peta baru ».
+Quelle carte animer ? ¦ Làm động bản đồ nào? ¦ Peta mana yang dianimasikan?
+Les objets qui ont des années (onglet Propriétés) apparaissent à leur date, de la première année à la dernière. ¦ Các đối tượng có năm (thẻ Thuộc tính) xuất hiện vào đúng thời điểm, từ năm đầu tiên đến năm cuối cùng. ¦ Objek yang punya tahun (tab Properti) muncul pada tanggalnya, dari tahun pertama sampai terakhir.
+Un film où le curseur du temps avance tout seul, de la première année à la dernière ¦ Một bộ phim mà con trỏ thời gian tự tiến, từ năm đầu tiên đến năm cuối cùng ¦ Film di mana penggeser waktu maju sendiri, dari tahun pertama sampai terakhir
+Cette carte est trop lourde pour être copiée dans un film : enregistre-la, puis Outils de modification → 🗺️ Carte → « 🎞 Animer dans le Studio ». ¦ Bản đồ này quá nặng để sao chép vào phim: hãy lưu nó, rồi Công cụ chỉnh sửa → 🗺️ Bản đồ → « 🎞 Làm động trong Studio ». ¦ Peta ini terlalu berat untuk disalin ke film: simpan dulu, lalu Alat pengeditan → 🗺️ Peta → « 🎞 Animasikan di Studio ».
+Le plan ou la vue 3D dans un autre outil : montage, présentation, mise en page, dessin… ¦ Sơ đồ hoặc góc nhìn 3D trong một công cụ khác: dựng phim, thuyết trình, dàn trang, hình vẽ… ¦ Denah atau tampilan 3D di alat lain: penyuntingan, presentasi, tata letak, gambar…
+🎞 Animer les époques dans le Studio ¦ 🎞 Làm động các thời kỳ trong Studio ¦ 🎞 Animasikan zaman-zaman di Studio
+Animer les époques dans le Studio ¦ Làm động các thời kỳ trong Studio ¦ Animasikan zaman-zaman di Studio
+Le plan (image) ¦ Sơ đồ (ảnh) ¦ Denah (gambar)
+La vue 3D (image) ¦ Góc nhìn 3D (ảnh) ¦ Tampilan 3D (gambar)
+Le plan en dessin (vectoriel, mise en page…) ¦ Sơ đồ dạng hình vẽ (vector, dàn trang…) ¦ Denah sebagai gambar (vektor, tata letak…)

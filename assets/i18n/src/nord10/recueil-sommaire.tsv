@@ -1,0 +1,88 @@
+fr ¦ sq ¦ mt
+# 📑 Sommaire d’un recueil, messages du serveur (heritage-recueil-sommaire.js, lib/recueil_toc.php, lib/recueil_etat.php, lib/recueils.php)
+haut de ¦ në krye të ¦ fin-naħa ta’ fuq ta’
+milieu de ¦ në mes të ¦ f’nofs
+bas de ¦ në fund të ¦ fin-naħa t’isfel ta’
+p. ¦ f. ¦ p.
+pages pas dites ¦ faqe të papërcaktuara ¦ paġni mhux speċifikati
+{d} sur {n} pages finies ou relues ¦ {d} nga {n} faqe të përfunduara ose të rishikuara ¦ {d} minn {n} paġni lesti jew iċċekkjati
+Chargement du sommaire… ¦ Po ngarkohet përmbajtja… ¦ Qed jitgħabba l-werrej…
+Le sommaire ne s’ouvre pas ¦ Përmbajtja nuk hapet ¦ Il-werrej ma jiftaħx
+« {a} » et « {b} » se chevauchent ({p} {x}–{y}). ¦ «{a}» dhe «{b}» mbivendosen ({p} {x}–{y}). ¦ “{a}” u “{b}” jirkbu fuq xulxin ({p} {x}–{y}).
+{p} {n} : un acte « {k} » dans « {t} ». ¦ {p} {n}: një akt «{k}» te «{t}». ¦ {p} {n}: att “{k}” f’“{t}”.
+{p} {n} : un acte de {y} dans « {t} ». ¦ {p} {n}: një akt i vitit {y} te «{t}». ¦ {p} {n}: att tal-{y} f’“{t}”.
+Tout ouvrir ¦ Hapi të gjitha ¦ Iftaħ kollox
+Tout fermer ¦ Mbylli të gjitha ¦ Agħlaq kollox
+Niveaux montrés ¦ Nivelet e shfaqura ¦ Livelli murija
+Niveau 1 ¦ Niveli 1 ¦ Livell 1
++ passages ¦ + pasazhe ¦ + siltiet
+Chercher dans le sommaire… ¦ Kërko në përmbajtje… ¦ Fittex fil-werrej…
+Chercher dans le sommaire ¦ Kërko në përmbajtje ¦ Fittex fil-werrej
+Chapitre… ¦ Kapitull… ¦ Kapitlu…
+Passage… ¦ Pasazh… ¦ Silta…
+Proposer le découpage ¦ Propozo ndarjen ¦ Ipproponi d-diviżjoni
+Ranger par… ¦ Rendit sipas… ¦ Irranġa skont…
+Mode lecture ¦ Modaliteti i leximit ¦ Modalità ta’ qari
+Pas encore de sommaire ¦ Ende pa përmbajtje ¦ Għad m’hemmx werrej
+« ＋ Chapitre… » : un titre, de telle page à telle page (ex. « Mariages 1870 », pages 15 à 19). Ou « ✨ Proposer le découpage » d’après les actes déjà transcrits. ¦ «＋ Kapitull…»: një titull, nga një faqe deri te një tjetër (p.sh. «Martesat 1870», faqet 15 deri 19). Ose «✨ Propozo ndarjen» sipas akteve të transkriptuara tashmë. ¦ “＋ Kapitlu…”: titlu, minn paġna għal oħra (eż. “Żwiġijiet 1870”, paġni 15 sa 19). Jew “✨ Ipproponi d-diviżjoni” skont l-atti diġà traskritti.
+Un clic sur un titre : sa première page. Un passage décrit (« du milieu de la page 5 au milieu de la page 7 : mariage… ») ne crée pas de fiche. ¦ Një klik mbi një titull: faqja e tij e parë. Një pasazh i përshkruar («nga mesi i faqes 5 deri në mesin e faqes 7: martesë…») nuk krijon kartelë. ¦ Klikk fuq titlu: l-ewwel paġna tiegħu. Silta deskritta (“min-nofs tal-paġna 5 sa nofs il-paġna 7: żwieġ…”) ma toħloqx skeda.
+Modifier… ¦ Ndrysho… ¦ Editja…
+Sous-chapitre… ¦ Nënkapitull… ¦ Sottokapitlu…
+Passage dans ce chapitre… ¦ Pasazh në këtë kapitull… ¦ Silta f’dan il-kapitlu…
+Proposer le découpage de ce chapitre ¦ Propozo ndarjen e këtij kapitulli ¦ Ipproponi d-diviżjoni ta’ dan il-kapitlu
+Supprimer (avec ce qu’il contient) ¦ Fshi (bashkë me atë që përmban) ¦ Ħassar (flimkien ma’ dak li fih)
+« {t} » retiré du sommaire ¦ «{t}» u hoq nga përmbajtja ¦ “{t}” tneħħa mill-werrej
+toute la page ¦ e gjithë faqja ¦ il-paġna kollha
+Nouveau passage ¦ Pasazh i ri ¦ Silta ġdida
+Modifier le passage ¦ Ndrysho pasazhin ¦ Editja s-silta
+Modifier le chapitre ¦ Ndrysho kapitullin ¦ Editja l-kapitlu
+📑 SOMMAIRE ¦ 📑 PËRMBAJTJA ¦ 📑 WERREJ
+Ce que c’est (sans créer de fiche) ¦ Çfarë është (pa krijuar kartelë) ¦ X’inhu (mingħajr ma toħloq skeda)
+ex. Mariage de Louis LACOMBE et Anne MAZAUD ¦ p.sh. Martesa e Louis LACOMBE dhe Anne MAZAUD ¦ eż. Żwieġ ta’ Louis LACOMBE u Anne MAZAUD
+ex. Mariages 1870 ¦ p.sh. Martesat 1870 ¦ eż. Żwiġijiet 1870
+— au premier niveau — ¦ — në nivelin e parë — ¦ — fl-ewwel livell —
+— pas dit — ¦ — e papërcaktuar — ¦ — mhux speċifikat —
+Endroit ¦ Vendi ¦ Post
+À la page ¦ Te faqja ¦ Fil-paġna
+— la même — ¦ — e njëjta — ¦ — l-istess —
+Sorte d’acte (facultatif) ¦ Lloji i aktit (opsional) ¦ Tip ta’ att (mhux obbligatorju)
+— toutes — ¦ — të gjitha — ¦ — kollha —
+Années (facultatif) ¦ Vitet (opsional) ¦ Snin (mhux obbligatorju)
+Description, résumé, ce qu’on y apprend ¦ Përshkrimi, rezymeja, çfarë mëson aty ¦ Deskrizzjoni, sommarju, x’titgħallem minnu
+Note (facultatif) ¦ Shënim (opsional) ¦ Nota (mhux obbligatorja)
+Un passage décrit sert à retrouver ce qu’il y a dans le recueil ; « 👤 » sur les fiches reste possible depuis l’Atelier. ¦ Një pasazh i përshkruar të ndihmon të gjesh çfarë ka në përmbledhje; «👤» te kartelat mbetet i mundur nga Punishtja. ¦ Silta deskritta sservi biex issib x’hemm fil-ġabra; “👤” fuq l-iskedi jibqa’ possibbli mil-Laboratorju.
+Un chapitre peut contenir des sous-chapitres et des passages. La sorte et les années servent à repérer ce qui n’est pas à sa place. ¦ Një kapitull mund të përmbajë nënkapituj dhe pasazhe. Lloji dhe vitet ndihmojnë të dallosh çfarë nuk është në vendin e vet. ¦ Kapitlu jista’ jkun fih sottokapitli u siltiet. It-tip u s-snin jgħinu biex tinduna b’dak li mhux f’postu.
+« {t} » ajouté au sommaire ¦ «{t}» u shtua te përmbajtja ¦ “{t}” miżjud mal-werrej
+« {t} » modifié ¦ «{t}» u ndryshua ¦ “{t}” mibdul
+Rien à proposer : aucun acte repéré sur ces pages. ¦ Asgjë për të propozuar: asnjë akt i gjetur në këto faqe. ¦ Xejn x’nipproponi: l-ebda att ma nstab f’dawn il-paġni.
+Découper « {t} » ¦ Ndaj «{t}» ¦ Aqsam “{t}”
+✨ Proposer le découpage ¦ ✨ Propozo ndarjen ¦ ✨ Ipproponi d-diviżjoni
+Ajouter au sommaire ¦ Shto te përmbajtja ¦ Żid mal-werrej
+D’après les actes déjà transcrits dans l’Atelier (leur sorte et leur année), page par page. Décoche ce qui ne va pas, corrige les titres : rien n’est ajouté avant que tu acceptes. ¦ Sipas akteve të transkriptuara tashmë te Punishtja (lloji dhe viti i tyre), faqe pas faqeje. Hiq shenjën nga ajo që nuk shkon, korrigjo titujt: asgjë nuk shtohet para se të pranosh. ¦ Skont l-atti diġà traskritti fil-Laboratorju (it-tip u s-sena tagħhom), paġna b’paġna. Neħħi l-marka minn dak li mhux tajjeb, ikkoreġi t-titli: xejn ma jiżdied qabel ma taċċetta.
+Déjà dans cet ordre. ¦ Tashmë në këtë rend. ¦ Diġà f’din l-ordni.
+Pièces rangées ({x}) ¦ Njësitë u renditën ({x}) ¦ Biċċiet irranġati ({x})
+par sorte ¦ sipas llojit ¦ skont it-tip
+par cote ¦ sipas shenjës arkivore ¦ skont ir-referenza
+Par date (de l’acte, sinon du document) ¦ Sipas datës (të aktit, përndryshe të dokumentit) ¦ Skont id-data (tal-att, inkella tad-dokument)
+Par sorte d’acte ¦ Sipas llojit të aktit ¦ Skont it-tip ta’ att
+Ranger les pièces ¦ Rendit njësitë ¦ Irranġa l-biċċiet
+Tout le sommaire ¦ E gjithë përmbajtja ¦ Il-werrej kollu
+Pas encore de sommaire. ¦ Ende pa përmbajtje. ¦ Għad m’hemmx werrej.
+Faire le sommaire ¦ Bëj përmbajtjen ¦ Agħmel il-werrej
+=chapitre ajouté au sommaire ¦ kapitull u shtua te përmbajtja|kapituj u shtuan te përmbajtja ¦ kapitlu miżjud mal-werrej|kapitli miżjuda mal-werrej|kapitli miżjuda mal-werrej|kapitlu miżjud mal-werrej|kapitlu miżjud mal-werrej
+Document militaire ¦ Dokument ushtarak ¦ Dokument militari
+Choisis au moins une page. ¦ Zgjidh të paktën një faqe. ¦ Agħżel mill-inqas paġna waħda.
+Trop de pages d’un coup. ¦ Shumë faqe njëherësh. ¦ Wisq paġni f’daqqa.
+Une de ces pages n’est pas dans ce recueil. ¦ Një nga këto faqe nuk është në këtë përmbledhje. ¦ Waħda minn dawn il-paġni mhix f’din il-ġabra.
+Donne le nom des pages à poser (400 au plus). ¦ Jep emrin e faqeve që do të vendosen (400 më së shumti). ¦ Agħti l-isem tal-paġni li għandhom jiddaħħlu (400 l-aktar).
+Une de ces pages a déjà une photo : retire-la à la main. ¦ Një nga këto faqe ka tashmë një foto: hiqe me dorë. ¦ Waħda minn dawn il-paġni diġà għandha ritratt: neħħiha bl-idejn.
+Ligne du sommaire introuvable. ¦ Rreshti i përmbajtjes nuk u gjet. ¦ Linja tal-werrej ma nstabitx.
+La première page n’est pas dans ce recueil. ¦ Faqja e parë nuk është në këtë përmbledhje. ¦ L-ewwel paġna mhix f’din il-ġabra.
+La dernière page n’est pas dans ce recueil. ¦ Faqja e fundit nuk është në këtë përmbledhje. ¦ L-aħħar paġna mhix f’din il-ġabra.
+Dis sur quelle page commence ce passage. ¦ Thuaj në cilën faqe fillon ky pasazh. ¦ Għid f’liema paġna tibda din is-silta.
+Le chapitre parent n’est pas dans ce recueil. ¦ Kapitulli prind nuk është në këtë përmbledhje. ¦ Il-kapitlu ġenitur mhux f’din il-ġabra.
+Un passage décrit ne peut pas contenir de chapitre : choisis un chapitre. ¦ Një pasazh i përshkruar nuk mund të përmbajë kapitull: zgjidh një kapitull. ¦ Silta deskritta ma jistax ikun fiha kapitlu: agħżel kapitlu.
+Un chapitre ne peut pas être dans lui-même. ¦ Një kapitull nuk mund të jetë brenda vetes. ¦ Kapitlu ma jistax ikun ġo fih innifsu.
+Le sommaire suit l’ordre des pages : change plutôt les pages de ce chapitre. ¦ Përmbajtja ndjek rendin e faqeve: më mirë ndrysho faqet e këtij kapitulli. ¦ Il-werrej isegwi l-ordni tal-paġni: aħjar ibdel il-paġni ta’ dan il-kapitlu.
+Trop de documents d’un coup (2000 au plus). ¦ Shumë dokumente njëherësh (2000 më së shumti). ¦ Wisq dokumenti f’daqqa (2000 l-aktar).
+Un recueil se fait avec des images (photos de pages) : aucun de ces documents n’en est une. ¦ Një përmbledhje bëhet me figura (foto faqesh): asnjë nga këto dokumente nuk është figurë. ¦ Ġabra ssir bl-immaġini (ritratti tal-paġni): l-ebda wieħed minn dawn id-dokumenti mhu immaġni.

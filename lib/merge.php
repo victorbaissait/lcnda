@@ -81,13 +81,12 @@ function merge_score(array $a, array $b, array $aAll, array $bAll): array
     return ['score' => max(0, min(100, $score)), 'why' => $why, 'against' => $against];
 }
 
-/** Étape 1 : importer le fichier dans une base temporaire et proposer une décision pour chaque personne. */
-function merge_gedcom_analyse(PDO $main, ?array $file): never
+/**
+ * Importe un fichier GEDCOM (ou Gramps) dans une base TEMPORAIRE à part : [jeton, base, statistiques].
+ * Aussi pour 🌐 « Mes arbres en ligne » (lib/arbres_en_ligne.php). Fichier illisible : RuntimeException.
+ */
+function merge_temp_import(string $gedFile, string $ext): array
 {
-    @set_time_limit(0);
-    if (!$file || ($file['error'] ?? 1) !== UPLOAD_ERR_OK) { json_response(['error' => 'Fichier non reçu.'], 422); }
-    $ext = strtolower(pathinfo((string) ($file['name'] ?? ''), PATHINFO_EXTENSION));
-    if (!in_array($ext, ['ged', 'gedcom', 'gramps', 'gpkg'], true)) { json_response(['error' => 'Choisis un fichier GEDCOM (.ged) ou Gramps (.gramps, .gpkg).'], 422); }
     $token = bin2hex(random_bytes(12));
     $path = merge_dir() . '/' . $token . '.sqlite';
     $tmp = new PDO('sqlite:' . $path, null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
@@ -96,7 +95,7 @@ function merge_gedcom_analyse(PDO $main, ?array $file): never
     $tmp->exec(is_file($schemaPath) ? (string) file_get_contents($schemaPath) : default_schema_sql());
     $tmp->exec('PRAGMA foreign_keys = ON');
     migrate_database($tmp, $path);
-    $gedFile = (string) $file['tmp_name']; $gedTmp = null;
+    $gedTmp = null;
     try {
         if ($ext === 'gramps' || $ext === 'gpkg') { // Gramps : traduit en GEDCOM d'abord (lib/imports.php), sans les médias
             [$gedText] = gramps_file_to_gedcom($gedFile, $ext === 'gpkg');
@@ -104,10 +103,14 @@ function merge_gedcom_analyse(PDO $main, ?array $file): never
         }
         $stats = import_gedcom_into_db($tmp, $gedFile, null);
     }
-    catch (Throwable $e) { $tmp = null; @unlink($path); if ($gedTmp) { @unlink($gedTmp); } json_response(['error' => 'Fichier illisible : ' . $e->getMessage()], 422); }
+    catch (Throwable $e) { $tmp = null; @unlink($path); if ($gedTmp) { @unlink($gedTmp); } throw new RuntimeException('Fichier illisible : ' . $e->getMessage(), 0, $e); }
     if ($gedTmp) { @unlink($gedTmp); }
-    $incoming = merge_person_profiles($tmp);
-    $mine = merge_person_profiles($main);
+    return [$token, $tmp, $stats];
+}
+
+/** Pour chaque personne reçue : jusqu'à 3 fiches ressemblantes de la base, la proposition (same / check / new) et ce qui manque. */
+function merge_candidates(array $incoming, array $mine): array
+{
     $byName = [];
     foreach ($mine as $id => $p) { $byName[substr($p['ln'], 0, 3)][] = $id; }
     $rows = [];
@@ -131,6 +134,19 @@ function merge_gedcom_analyse(PDO $main, ?array $file): never
         }
         $rows[] = ['id' => $id, 'person' => merge_public_profile($p), 'proposal' => $proposal, 'candidates' => array_map(static fn($c) => $c + ['person' => merge_public_profile($mine[$c['id']])], $cands), 'missing' => $missing];
     }
+    return $rows;
+}
+
+/** Étape 1 : importer le fichier dans une base temporaire et proposer une décision pour chaque personne. */
+function merge_gedcom_analyse(PDO $main, ?array $file): never
+{
+    @set_time_limit(0);
+    if (!$file || ($file['error'] ?? 1) !== UPLOAD_ERR_OK) { json_response(['error' => 'Fichier non reçu.'], 422); }
+    $ext = strtolower(pathinfo((string) ($file['name'] ?? ''), PATHINFO_EXTENSION));
+    if (!in_array($ext, ['ged', 'gedcom', 'gramps', 'gpkg'], true)) { json_response(['error' => 'Choisis un fichier GEDCOM (.ged) ou Gramps (.gramps, .gpkg).'], 422); }
+    try { [$token, $tmp, $stats] = merge_temp_import((string) $file['tmp_name'], $ext); }
+    catch (RuntimeException $e) { json_response(['error' => $e->getMessage()], 422); }
+    $rows = merge_candidates(merge_person_profiles($tmp), merge_person_profiles($main));
     usort($rows, static fn($a, $b) => [['check' => 0, 'same' => 1, 'new' => 2][$a['proposal']], $a['person']['last_name'], $a['person']['first_name']] <=> [['check' => 0, 'same' => 1, 'new' => 2][$b['proposal']], $b['person']['last_name'], $b['person']['first_name']]);
     $counts = array_count_values(array_column($rows, 'proposal'));
     json_response(['token' => $token, 'file' => (string) $file['name'], 'stats' => $stats, 'rows' => $rows,

@@ -11,13 +11,32 @@ declare(strict_types=1);
  */
 
 /* ═════════ 1. Lecture approfondie (Ollama, sur cet ordinateur seulement) ═════════ */
+require_once __DIR__ . '/ia_serveur.php'; // 🖥 le serveur d'IA choisi (Ollama, Unsloth ou compatible OpenAI) : lib/ia_serveur.php
 
 const TX_DEEP_DEFAULT_URL = 'http://127.0.0.1:11434';
 /** Les modèles proposés : licence vraiment ouverte (Apache 2.0), tag Ollama exact, poids approximatif du téléchargement. */
 // les versions « instruct » : elles écrivent la transcription tout de suite (les autres « réfléchissent » d'abord et la réponse restait vide)
+// tried : essayé sur des actes par l'app (les autres sont « à l'essai » : à comparer sur tes actes avant de t'y fier) ;
+// pros / cons : ses avantages et inconvénients, montrés à côté du choix ; ram_gb : la mémoire conseillée.
 const TX_DEEP_MODELS = [
-    ['tag' => 'qwen3-vl:8b-instruct', 'label' => 'Qwen3-VL 8B', 'size_gb' => 6.1, 'ram_gb' => 16, 'license' => 'Apache 2.0', 'recommended' => true],
-    ['tag' => 'qwen3-vl:4b-instruct', 'label' => 'Qwen3-VL 4B', 'size_gb' => 3.3, 'ram_gb' => 8, 'license' => 'Apache 2.0', 'recommended' => false],
+    ['tag' => 'qwen3-vl:8b-instruct', 'label' => 'Qwen3-VL 8B', 'size_gb' => 6.1, 'ram_gb' => 16, 'license' => 'Apache 2.0', 'recommended' => true, 'tried' => true,
+        'pros' => 'le meilleur essayé sur les actes anciens, bon en français et en latin', 'cons' => '16 Go de mémoire conseillés'],
+    ['tag' => 'qwen3-vl:4b-instruct', 'label' => 'Qwen3-VL 4B', 'size_gb' => 3.3, 'ram_gb' => 8, 'license' => 'Apache 2.0', 'recommended' => false, 'tried' => true,
+        'pros' => 'léger et rapide, pour un ordinateur modeste', 'cons' => 'se trompe plus souvent sur les noms et les écritures difficiles'],
+    ['tag' => 'qwen3-vl:32b-instruct', 'label' => 'Qwen3-VL 32B', 'size_gb' => 21, 'ram_gb' => 64, 'license' => 'Apache 2.0', 'recommended' => false, 'tried' => false,
+        'pros' => 'pour les ordinateurs puissants (64 Go) : la même famille que le conseillé, plus précise sur les écritures difficiles', 'cons' => 'lent, gros téléchargement'],
+    ['tag' => 'qwen2.5vl:72b', 'label' => 'Qwen2.5-VL 72B', 'size_gb' => 49, 'ram_gb' => 64, 'license' => 'Qwen (libre d’usage)', 'recommended' => false, 'tried' => false,
+        'pros' => 'le plus gros qui tienne dans 64 Go', 'cons' => 'très lent, très gros téléchargement, licence moins ouverte'],
+    ['tag' => 'mistral-small3.2:24b', 'label' => 'Mistral Small 3.2 (24B)', 'size_gb' => 15, 'ram_gb' => 32, 'license' => 'Apache 2.0', 'recommended' => false, 'tried' => false,
+        'pros' => 'fort en français, bon pour comprendre l’acte', 'cons' => '32 Go de mémoire conseillés, plus lent'],
+    ['tag' => 'gemma3:12b', 'label' => 'Gemma 3 12B (Google)', 'size_gb' => 8.1, 'ram_gb' => 16, 'license' => 'Gemma (Google)', 'recommended' => false, 'tried' => false,
+        'pros' => 'bon dans les langues européennes', 'cons' => 'licence de Google moins ouverte, moins précis sur l’écriture à la main'],
+    ['tag' => 'gemma3:4b', 'label' => 'Gemma 3 4B (Google)', 'size_gb' => 3.3, 'ram_gb' => 8, 'license' => 'Gemma (Google)', 'recommended' => false, 'tried' => false,
+        'pros' => 'léger, plusieurs langues', 'cons' => 'licence de Google, se trompe souvent sur les noms'],
+    ['tag' => 'minicpm-v:8b', 'label' => 'MiniCPM-V 8B', 'size_gb' => 5.5, 'ram_gb' => 16, 'license' => 'MiniCPM (libre d’usage)', 'recommended' => false, 'tried' => false,
+        'pros' => 'annoncé bon en écriture manuscrite', 'cons' => 'moins connu, résultats à comparer'],
+    ['tag' => 'granite3.2-vision:2b', 'label' => 'Granite 3.2 Vision 2B (IBM)', 'size_gb' => 2.4, 'ram_gb' => 8, 'license' => 'Apache 2.0', 'recommended' => false, 'tried' => false,
+        'pros' => 'très léger, fait pour les documents, ordinateurs modestes', 'cons' => 'faible sur l’écriture à la main ancienne'],
 ];
 const TX_DEEP_LANGS = ['fra' => 'français', 'lat' => 'latin', 'fra+lat' => 'français et latin', 'eng' => 'anglais', 'deu' => 'allemand', 'ita' => 'italien', 'spa' => 'espagnol', 'pol' => 'polonais', 'nld' => 'néerlandais', 'grc' => 'grec ancien', 'ell' => 'grec moderne'];
 
@@ -37,7 +56,7 @@ function tx_deep_url_ok(string $url): bool
 /** L'adresse d'Ollama (variable LCNDA_OLLAMA_URL pour un autre port), toujours ramenée à une adresse IP de l'ordinateur. */
 function tx_deep_base(?string $url = null): string
 {
-    $url = $url ?? ((string) getenv('LCNDA_OLLAMA_URL') ?: TX_DEEP_DEFAULT_URL);
+    $url = $url ?? ia_srv_url(); // sans réglage : LCNDA_OLLAMA_URL ou TX_DEEP_DEFAULT_URL, comme avant
     if (!tx_deep_url_ok($url)) { throw new LcndaBadInput('La lecture approfondie ne parle qu’à Ollama sur cet ordinateur (127.0.0.1) : adresse refusée.'); }
     $p = parse_url($url);
     $host = strtolower((string) $p['host']);
@@ -57,6 +76,7 @@ function tx_deep_model(string $tag): array
  */
 function tx_deep_http(string $method, string $path, ?array $body = null, int $timeout = 5, ?callable $onLine = null, ?string $base = null): array
 {
+    if (ia_srv_is_openai()) { return ia_srv_http($method, $path, $body, $timeout, $onLine, $base); } // Unsloth, LM Studio… : traduit vers /v1 (lib/ia_serveur.php)
     if (!function_exists('curl_init')) { throw new RuntimeException('La lecture approfondie a besoin de l’extension cURL de PHP.'); }
     $url = tx_deep_base($base) . $path;
     $ch = curl_init($url);
@@ -87,6 +107,20 @@ function tx_deep_http(string $method, string $path, ?array $body = null, int $ti
 }
 
 /** Ollama est-il là ? (programme trouvé, service qui répond, modèles déjà téléchargés) */
+/** La mémoire de l'ordinateur en Go (0 si on ne sait pas) : pour conseiller le modèle qui lui convient. */
+function tx_deep_ram_gb(): int
+{
+    $b = 0;
+    if (@is_readable('/proc/meminfo') && preg_match('/MemTotal:\s+(\d+)\s*kB/', (string) @file_get_contents('/proc/meminfo'), $m)) { $b = (int) $m[1] * 1024; }
+    elseif (PHP_OS_FAMILY === 'Darwin' && function_exists('shell_exec')) { $b = (int) trim((string) @shell_exec('/usr/sbin/sysctl -n hw.memsize 2>/dev/null')); }
+    elseif (PHP_OS_FAMILY === 'Windows' && function_exists('shell_exec')) { $o = (string) @shell_exec('powershell -NoProfile -Command "(Get-CimInstance Win32_ComputerSystem).TotalPhysicalMemory" 2>NUL'); $b = (int) preg_replace('/\D/', '', $o); }
+    $env = (int) getenv('LCNDA_RAM_GB'); if ($env > 0) { return $env; } // pour les essais
+    return $b > 0 ? (int) round($b / 1073741824) : 0;
+}
+
+/** Un nom de modèle d'Ollama sûr (lettres, chiffres, « . : / - _ ») */
+function tx_deep_tag_ok(string $tag): bool { return (bool) preg_match('/^[a-z0-9][a-z0-9._\/:-]{0,79}$/i', $tag); }
+
 function tx_deep_status(): array
 {
     $bin = '';
@@ -101,9 +135,25 @@ function tx_deep_status(): array
             $have = [];
             foreach ((array) ($tags['json']['models'] ?? []) as $m) { if (is_array($m)) { $have[(string) ($m['name'] ?? $m['model'] ?? '')] = true; } }
             foreach (TX_DEEP_MODELS as $m) { $out['models'][] = $m + ['present' => isset($have[$m['tag']]) || isset($have[$m['tag'] . ':latest'])]; }
+            // « Autre modèle (Ollama) » (avancé) : les modèles déjà installés hors de la liste, et s'ils savent lire une image
+            $known = array_column(TX_DEEP_MODELS, 'tag'); $n = 0;
+            foreach (array_keys($have) as $name) {
+                if ($name === '' || in_array($name, $known, true) || in_array(preg_replace('/:latest$/', '', $name), $known, true) || !tx_deep_tag_ok($name) || ++$n > 20) { continue; }
+                $sh = tx_deep_http('POST', '/api/show', ['model' => $name], 4);
+                $caps = $sh['ok'] ? array_map('strval', (array) ($sh['json']['capabilities'] ?? [])) : [];
+                $out['others'][] = ['tag' => $name, 'label' => $name, 'vision' => in_array('vision', $caps, true), 'present' => true];
+            }
         }
     }
     if (!$out['models']) { foreach (TX_DEEP_MODELS as $m) { $out['models'][] = $m + ['present' => false]; } }
+    // le modèle conseillé pour CET ordinateur : le plus grand des modèles essayés qui tient dans sa mémoire
+    $ram = tx_deep_ram_gb(); $out['ram_gb'] = $ram; $out['others'] = $out['others'] ?? [];
+    $out['server'] = IA_SRV_KINDS[ia_srv_config()['kind']]['label'] ?? 'Ollama'; // « ⚙️ Avancé : autre modèle (…) » : le serveur choisi
+    if ($ram > 0) {
+        $best = ''; foreach ($out['models'] as $m) { if ($m['tried'] && $m['ram_gb'] <= $ram && ($best === '' || $m['ram_gb'] > (tx_deep_model($best)['ram_gb']))) { $best = $m['tag']; } }
+        if ($best === '') { $best = 'qwen3-vl:4b-instruct'; }
+        foreach ($out['models'] as &$m) { $m['recommended'] = $m['tag'] === $best; $m['fits'] = $m['ram_gb'] <= $ram; } unset($m);
+    } else { foreach ($out['models'] as &$m) { $m['fits'] = true; } unset($m); }
     return $out;
 }
 
@@ -123,14 +173,160 @@ function tx_deep_job_dir(string $id): string
 }
 
 /** La consigne donnée au modèle : une transcription diplomatique, ligne par ligne, sans rien inventer. */
-function tx_deep_prompt(string $lang): string
+function tx_deep_prompt(string $lang, array $ctx = []): string
 {
     $l = TX_DEEP_LANGS[$lang] ?? 'français';
+    return tx_deep_base_prompt($l) . tx_deep_context_text($ctx);
+}
+
+/**
+ * 🧠 « Aider l'IA » (maquette docs/design/transcription-versions-contexte.html, 3) : ce que l'on sait déjà du document, ajouté à la consigne.
+ * ctx = {doc, about, hints: [« mariage connu : … »]} — du texte court, nettoyé ; jamais une consigne de plus : la règle finale dit de ne rien
+ * inventer, et un mot lu grâce à un indice reste marqué douteux [?]. Le navigateur montre ce texte tel quel (« Voir ce qui est envoyé »).
+ */
+function tx_deep_context_clean($ctx): array
+{
+    $ctx = is_array($ctx) ? $ctx : [];
+    $line = static fn($v, int $n) => mb_substr(trim(preg_replace('/\s+/u', ' ', str_replace("\0", '', is_scalar($v) ? (string) $v : '')) ?? ''), 0, $n);
+    $hints = [];
+    foreach (array_slice(is_array($ctx['hints'] ?? null) ? array_values($ctx['hints']) : [], 0, 20) as $h) { $h = $line($h, 240); if ($h !== '') { $hints[] = $h; } }
+    return ['doc' => $line($ctx['doc'] ?? '', 240), 'about' => $line($ctx['about'] ?? '', 600), 'hints' => $hints];
+}
+
+function tx_deep_context_text($ctx): string
+{
+    $c = tx_deep_context_clean($ctx);
+    if ($c['doc'] === '' && $c['about'] === '' && !$c['hints']) { return ''; }
+    $t = "\n\nCe que l'on sait déjà de ce document (pour t'aider à lire un mot peu lisible, jamais pour compléter) :";
+    if ($c['doc'] !== '') { $t .= "\nDocument : " . rtrim($c['doc'], '.') . '.'; }
+    if ($c['about'] !== '') { $t .= "\nDe quoi il parle : " . rtrim($c['about'], '.') . '.'; }
+    if ($c['hints']) { $t .= "\nIndices (à n'utiliser que pour lire un mot peu lisible) :\n- " . implode("\n- ", $c['hints']); }
+    return $t . "\nRègle : recopie seulement ce qui est écrit sur l'image. N'ajoute jamais un nom, une date, un lieu ou une phrase qui n'y est pas. "
+        . "Si un mot n'est pas sûr, marque-le [?] même s'il ressemble à un indice : un mot lu grâce à un indice reste douteux.";
+}
+
+function tx_deep_base_prompt(string $l): string
+{
     return "Tu es paléographe. Transcris fidèlement, en transcription diplomatique, le texte manuscrit de cette image d'un registre ancien (langue : $l).\n"
         . "- Recopie ligne par ligne : une ligne de l'image = une ligne de ta réponse, dans le même ordre.\n"
         . "- Garde l'orthographe, les abréviations, les majuscules et la ponctuation d'origine ; ne modernise pas, ne traduis pas.\n"
         . "- N'invente rien et ne complète rien. Écris [illisible] pour un mot que tu ne peux pas lire, et [?] juste après un mot douteux.\n"
         . "- Ne commente pas : réponds seulement par la transcription.";
+}
+
+/* ─── 🔁 Une lecture bornée : un modèle « vision » tombe parfois dans une boucle (« [illisible] » ou la même ligne sans fin, jusqu'au
+ * plafond de jetons, de longues minutes) : on borne ce qu'il peut écrire, on le pénalise quand il se répète, on surveille le flux
+ * (tx_deep_loop) et on arrête au temps maximum (tx_deep_time_limit). Le texte déjà lu est toujours gardé. Essai : tests/test-lecture-approfondie-boucle.js ─── */
+const TX_DEEP_TOKENS_PER_LINE = 40;    // une ligne d'acte ≈ 20 à 35 jetons ; ×1,5 de marge en plus
+const TX_DEEP_MAX_TOKENS = 4096;       // jamais plus (une page dense de 70 lignes y tient)
+const TX_DEEP_REPEAT = 3;              // la même ligne (ou un bloc de lignes, ou une ligne « [illisible] » seule) 3 fois de suite : boucle
+
+/** les lignes attendues (les zones / lignes connues de la page, sinon d'après la hauteur de l'image) et le plafond de jetons */
+function tx_deep_budget(int $h, int $lines = 0): array
+{
+    $est = $lines > 0 ? max(3, min(200, $lines)) : (int) max(12, min(90, (int) ceil($h / 35))); // ≥ 35 px par ligne : une borne haute
+    $tokens = (int) min(TX_DEEP_MAX_TOKENS, max(384, (int) ceil($est * TX_DEEP_TOKENS_PER_LINE * 1.5) + 256));
+    return ['lines' => $est, 'num_predict' => $tokens];
+}
+
+/** ⏱ le temps maximum d'une page (secondes) : choisi (10 s – 1 h), sinon LCNDA_TX_DEEP_LIMIT, sinon selon la taille du modèle (6 min pour un gros) */
+function tx_deep_time_limit(string $tag, $want = null): int
+{
+    $w = is_numeric($want) ? (int) $want : 0;
+    if ($w <= 0) { $w = (int) getenv('LCNDA_TX_DEEP_LIMIT'); }
+    if ($w > 0) { return max(10, min(3600, $w)); }
+    $b = 0.0;
+    foreach (TX_DEEP_MODELS as $m) { if ($m['tag'] === $tag && preg_match('/(\d+(?:\.\d+)?)\s*B\b/i', $m['label'], $x)) { $b = (float) $x[1]; } }
+    if ($b <= 0 && preg_match('/(?:^|[:\-_])(\d+(?:\.\d+)?)b(?:\b|[-_])/i', $tag, $x)) { $b = (float) $x[1]; }
+    return $b > 40 ? 600 : ($b > 12 ? 360 : ($b > 4 ? 300 : ($b > 0 ? 180 : 360)));
+}
+
+/** des secondes en minutes lisibles (« 6 », « 1,5 ») */
+function tx_deep_minutes(int $sec): string { $m = round($sec / 60, 1); return str_replace('.', ',', (string) ($m == (int) $m ? (int) $m : $m)); }
+
+/** une ligne ramenée à l'essentiel (casse, ponctuation, espaces) pour la comparer à ses voisines */
+function tx_deep_norm_line(string $l): string
+{
+    return trim((string) preg_replace('/[\s.,;:!?«»"\'’()\-–—_*]+/u', ' ', mb_strtolower($l)));
+}
+
+/** une ligne sans rien de lu : « [illisible] », « [?] », « … », ponctuation */
+function tx_deep_junk_line(string $l): bool
+{
+    $t = trim($l);
+    if ($t === '' || stripos($t, 'illisible') === false && stripos($t, 'illegible') === false && !str_contains($t, '[?]') && !str_contains($t, '…') && !str_contains($t, '...')) { return false; }
+    return trim((string) preg_replace('/\[\s*(?:illisible|illegible|\?)\s*\]|illisible|illegible|\.\.\.|…|[\s.,;:!?«»"\'’()\-–—_*\[\]]+/iu', '', $t)) === '';
+}
+
+/** les lignes de la fin qui ne disent rien (vides, « [illisible] » seul, la même que la précédente) retirées */
+function tx_deep_trim_tail(array $lines): array
+{
+    while ($lines) {
+        $n = count($lines); $l = $lines[$n - 1];
+        if (trim($l) === '' || tx_deep_junk_line($l) || ($n > 1 && tx_deep_norm_line($l) === tx_deep_norm_line($lines[$n - 2]))) { array_pop($lines); continue; }
+        // la fin d'une ligne : « [illisible] [illisible] … » retirés
+        $c = rtrim((string) preg_replace('/(?:\s*(?:\[\s*(?:illisible|illegible)\s*\]|\.\.\.|…))+\s*$/iu', '', $l));
+        if ($c !== rtrim($l)) { $lines[$n - 1] = $c; continue; }
+        break;
+    }
+    return $lines;
+}
+
+/**
+ * 🔁 Le modèle s'est-il mis à se répéter ? $text : ce qui est écrit jusqu'ici ; $expected : les lignes attendues (0 : inconnu) ;
+ * $final : le texte est complet (sinon la dernière ligne, pas finie, n'est regardée que pour une répétition dans la ligne).
+ * Rend null, ou ['text' => le texte gardé (avant la boucle, fin nettoyée), 'line' => la ligne où la lecture s'arrête, 'why' => loop | overflow].
+ */
+function tx_deep_loop(string $text, int $expected = 0, bool $final = false): ?array
+{
+    $all = explode("\n", str_replace("\r", '', $text));
+    $partial = $final ? null : array_pop($all);
+    $ix = []; $norm = []; $junk = [];
+    foreach ($all as $i => $l) { if (trim($l) === '') { continue; } $ix[] = $i; $norm[] = tx_deep_norm_line($l); $junk[] = tx_deep_junk_line($l); }
+    $cut = static function (int $keep) use ($all): array { // les lignes 0..$keep-1 gardées, la fin nettoyée
+        $k = tx_deep_trim_tail(array_slice($all, 0, $keep));
+        $line = count(array_filter($k, static fn($x) => trim($x) !== '')) + 1;
+        return ['text' => rtrim(implode("\n", $k)), 'line' => $line];
+    };
+    $n = count($norm);
+    for ($i = 0; $i < $n; $i++) {
+        // un bloc de 1 à 4 lignes répété TX_DEEP_REPEAT fois de suite (la même ligne, ou « A B A B A B »)
+        for ($p = 1; $p <= 4 && $i + $p * TX_DEEP_REPEAT <= $n; $p++) {
+            $ok = true;
+            for ($r = 1; $r < TX_DEEP_REPEAT && $ok; $r++) { for ($q = 0; $q < $p; $q++) { if ($norm[$i + $q] === '' || $norm[$i + $q] !== $norm[$i + $r * $p + $q]) { $ok = false; break; } } }
+            if ($ok) { $blockJunk = !in_array(false, array_slice($junk, $i, $p), true);
+                return $cut($blockJunk ? $ix[$i] : $ix[$i + $p - 1] + 1) + ['why' => 'loop']; } // une seule fois le bloc lu, jamais « [illisible] »
+        }
+        // des lignes « [illisible] » seules, même un peu différentes, TX_DEEP_REPEAT + 1 fois de suite
+        if ($junk[$i] && $i + TX_DEEP_REPEAT < $n && !in_array(false, array_slice($junk, $i, TX_DEEP_REPEAT + 1), true)) {
+            return $cut($ix[$i]) + ['why' => 'loop'];
+        }
+    }
+    // dans une ligne : le même morceau (2 à 60 caractères) six fois de suite, ou « [illisible] » huit fois
+    $lines = $all; if ($partial !== null) { $lines[] = $partial; }
+    foreach ($lines as $i => $l) {
+        if (mb_strlen($l) < 60) { continue; }
+        $tail = mb_substr($l, -900);
+        $at = -1;
+        if (preg_match('/(?:\[\s*(?:illisible|illegible)\s*\][\s.,;]*){8,}/iu', $tail, $m, PREG_OFFSET_CAPTURE)) { $at = $m[0][1]; }
+        elseif (preg_match('/(\S.{1,59}?)(?:\s*\1){5,}/us', $tail, $m, PREG_OFFSET_CAPTURE) && preg_match('/\pL/u', $m[1][0])) { $at = $m[0][1] + strlen($m[1][0]); } // des lettres (pas « ------ »)
+        if ($at < 0) { continue; }
+        $head = substr($tail, 0, $at); $pre = mb_strlen($l) > 900 ? mb_substr($l, 0, mb_strlen($l) - 900) : '';
+        $all2 = array_slice($lines, 0, $i); $keep = rtrim($pre . $head);
+        if ($keep !== '') { $all2[] = $keep; }
+        $k = tx_deep_trim_tail($all2);
+        return ['text' => rtrim(implode("\n", $k)), 'line' => count(array_filter($k, static fn($x) => trim($x) !== '')) + ($keep !== '' && $k && end($k) === $keep ? 0 : 1), 'why' => 'loop'];
+    }
+    // bien plus de lignes que la page n'en a : on s'arrête là
+    if ($expected > 0 && $n > (int) ceil($expected * 1.5) + 10) { return $cut(count($all)) + ['why' => 'overflow']; }
+    return null;
+}
+
+/** le texte gardé quand la lecture est arrêtée (bouton ■ Arrêter, temps maximum) : sans la ligne pas finie si elle ne dit rien, fin nettoyée */
+function tx_deep_keep_partial(string $text): array
+{
+    $k = tx_deep_trim_tail(explode("\n", str_replace("\r", '', trim((string) preg_replace('/^```[a-z]*\s*/', '', trim($text))))));
+    return ['text' => rtrim(implode("\n", $k)), 'line' => count(array_filter($k, static fn($x) => trim($x) !== '')) + 1];
 }
 
 function tx_deep_new_job(array $job): array
@@ -164,7 +360,7 @@ function tx_deep_pull_start(array $data): array
 /** 🔍 Lire une image (la zone recadrée, envoyée par le navigateur) avec le modèle vision, en arrière-plan. */
 function tx_deep_read_start(array $data): array
 {
-    $m = tx_deep_model(safe_text($data['model'] ?? ''));
+    $want = safe_text($data['model'] ?? '');
     $lang = (string) ($data['language'] ?? 'fra'); if (!isset(TX_DEEP_LANGS[$lang])) { $lang = 'fra'; }
     $b64 = $data['image_b64'] ?? '';
     if (!is_string($b64) || $b64 === '') { throw new LcndaBadInput('Image manquante.'); }
@@ -175,11 +371,21 @@ function tx_deep_read_start(array $data): array
     if ((int) $info[0] < 8 || (int) $info[1] < 8 || (int) $info[0] > 8000 || (int) $info[1] > 8000) { throw new LcndaBadInput('Image trop grande.'); }
     $st = tx_deep_status();
     if (!$st['running']) { throw new LcndaBadInput('Ollama ne répond pas sur cet ordinateur : installe-le (ollama.com), lance-le, puis réessaie.'); }
-    $present = array_filter($st['models'], static fn($x) => $x['tag'] === $m['tag'] && $x['present']);
-    if (!$present) { throw new LcndaBadInput('Ce modèle n’est pas encore téléchargé : « ⤓ Installer la lecture approfondie ».'); }
+    $other = array_values(array_filter($st['others'] ?? [], static fn($x) => $x['tag'] === $want));
+    if ($other) {
+        if (!$other[0]['vision']) { throw new LcndaBadInput('Ce modèle ne sait pas lire une image : choisis un modèle « vision ».'); }
+        $m = ['tag' => $other[0]['tag']];
+    } else {
+        $m = tx_deep_model($want);
+        $present = array_filter($st['models'], static fn($x) => $x['tag'] === $m['tag'] && $x['present']);
+        if (!$present) { throw new LcndaBadInput('Ce modèle n’est pas encore téléchargé : « ⤓ Installer la lecture approfondie ».'); }
+    }
     [$id, $dir] = tx_deep_new_job([]);
     file_put_contents($dir . '/image.b64', base64_encode($bin)); unset($bin);
-    file_put_contents($dir . '/job.json', json_encode(['kind' => 'read', 'model' => $m['tag'], 'base' => tx_deep_base(), 'prompt' => tx_deep_prompt($lang), 'created' => time()], JSON_UNESCAPED_UNICODE));
+    // 🔁 bornée : les lignes attendues (zones de la page envoyées par l'Atelier, sinon d'après la hauteur), les jetons, le temps maximum
+    $budget = tx_deep_budget((int) $info[1], is_numeric($data['lines'] ?? null) ? (int) $data['lines'] : 0);
+    file_put_contents($dir . '/job.json', json_encode(['kind' => 'read', 'model' => $m['tag'], 'base' => tx_deep_base(), 'prompt' => tx_deep_prompt($lang, is_array($data['context'] ?? null) ? $data['context'] : []), 'created' => time(),
+        'lines' => $budget['lines'], 'num_predict' => $budget['num_predict'], 'limit' => tx_deep_time_limit($m['tag'], $data['time_limit'] ?? null)], JSON_UNESCAPED_UNICODE));
     file_put_contents($dir . '/result.json', json_encode(['state' => 'running', 'updated' => time(), 'text' => '']));
     htr_spawn_php([APP_ROOT . '/scripts/tx_deep_job.php', $dir, APP_ROOT], $dir . '/run.log');
     return ['id' => $id, 'model' => $m['tag']];
@@ -195,7 +401,7 @@ function tx_deep_run(string $dir): void
     try {
         $base = (string) ($job['base'] ?? '');
         if (!tx_deep_url_ok($base)) { throw new RuntimeException('Adresse refusée.'); }
-        $tag = tx_deep_model((string) ($job['model'] ?? ''))['tag'];
+        $tag = (string) ($job['model'] ?? ''); if (($job['kind'] ?? '') === 'pull') { $tag = tx_deep_model($tag)['tag']; } elseif (!tx_deep_tag_ok($tag)) { throw new RuntimeException('Modèle refusé.'); } // lire : vérifié au départ (liste ou modèle installé)
         if (($job['kind'] ?? '') === 'pull') {
             $state = ['state' => 'running', 'completed' => 0, 'total' => 0, 'status' => '']; $last = 0; $err = '';
             $r = tx_deep_http('POST', '/api/pull', ['model' => $tag, 'stream' => true], 6 * 3600, static function (array $j) use (&$state, &$last, &$err, $put, $cancelled) {
@@ -214,18 +420,31 @@ function tx_deep_run(string $dir): void
         // Qwen3-VL « réfléchit » d'abord (message.thinking) : sans « think: false », toute la place peut y passer et la réponse
         // reste vide. On le demande ; un Ollama trop ancien qui ne connaît pas « think » est relancé sans.
         $text = ''; $thinking = ''; $last = 0; $err = ''; $r = ['ok' => false]; $info = '';
+        $isRead = ($job['kind'] ?? '') !== 'find';
+        // 🔁 lecture bornée : jetons au plus (selon les lignes attendues), pénalité de répétition, surveillance du flux, temps maximum
+        $expected = (int) ($job['lines'] ?? 0); $limit = $isRead ? max(10, (int) ($job['limit'] ?? 0) ?: tx_deep_time_limit($tag)) : 1800;
+        $t0 = microtime(true); $loop = null; $timedOut = false; $seen = 0;
         foreach ([true, false] as $noThink) {
-            $text = ''; $thinking = ''; $err = '';
-            $body = ['model' => $tag, 'stream' => true, 'keep_alive' => '5m', 'options' => ['temperature' => 0, 'num_ctx' => 16384, 'num_predict' => 4096],
+            $text = ''; $thinking = ''; $err = ''; $seen = 0;
+            $opt = ['temperature' => 0, 'num_ctx' => 16384, 'num_predict' => $isRead ? (int) ($job['num_predict'] ?? 0 ?: TX_DEEP_MAX_TOKENS) : 4096];
+            if ($isRead) { $opt += ['repeat_penalty' => 1.12, 'repeat_last_n' => 128]; } // pas pour le JSON de « Repérer » (ses clés se répètent)
+            $body = ['model' => $tag, 'stream' => true, 'keep_alive' => '5m', 'options' => $opt,
                 'messages' => [['role' => 'user', 'content' => (string) ($job['prompt'] ?? '')] + ($img !== '' ? ['images' => [$img]] : [])]];
             if ($noThink) { $body['think'] = false; }
             if (($job['kind'] ?? '') === 'find') { $body['format'] = 'json'; $body['options']['num_predict'] = 3072; } // 🔍 Repérer avec l'IA : du texte seulement, réponse en JSON
-            $r = tx_deep_http('POST', '/api/chat', $body, 1800, static function (array $j) use (&$text, &$thinking, &$last, &$err, &$info, $put, $cancelled) {
+            $left = max(5, (int) ceil($limit - (microtime(true) - $t0)));
+            $r = tx_deep_http('POST', '/api/chat', $body, $isRead ? $left + 5 : 1800, static function (array $j) use (&$text, &$thinking, &$last, &$err, &$info, &$loop, &$timedOut, &$seen, $put, $cancelled, $isRead, $expected, $limit, $t0) {
                 if (!empty($j['error'])) { $err = mb_substr((string) $j['error'], 0, 300); return false; }
                 if (!empty($j['done'])) { $info = trim(implode(' · ', array_filter([isset($j['done_reason']) ? 'fin : ' . mb_substr((string) $j['done_reason'], 0, 20) : '', isset($j['prompt_eval_count']) ? 'image et consigne : ' . (int) $j['prompt_eval_count'] : '', isset($j['eval_count']) ? 'écrit : ' . (int) $j['eval_count'] : '']))); }
-                $text .= (string) ($j['message']['content'] ?? '');
+                $piece = (string) ($j['message']['content'] ?? '');
+                $text .= $piece;
                 $thinking .= (string) ($j['message']['thinking'] ?? '');
                 if (mb_strlen($text) > 60000 || mb_strlen($thinking) > 60000) { return false; }
+                if ($isRead) {
+                    // une ligne de plus (ou une longue ligne qui ne finit pas) : le modèle se répète-t-il ?
+                    if ($piece !== '' && (str_contains($piece, "\n") || strlen($text) - $seen > 300)) { $seen = strlen($text); if (($loop = tx_deep_loop($text, $expected)) !== null) { return false; } }
+                    if (microtime(true) - $t0 > $limit) { $timedOut = true; return false; }
+                }
                 if (microtime(true) - $last > .7) { $last = microtime(true); $put(['state' => 'running', 'text' => $text]); }
                 return !$cancelled();
             }, $base);
@@ -233,7 +452,18 @@ function tx_deep_run(string $dir): void
             break;
         }
         @unlink($dir . '/image.b64');
-        if ($cancelled()) { $put(['state' => 'cancelled']); return; }
+        if ($isRead && $loop === null && !$cancelled() && $err === '') { $loop = tx_deep_loop($text, $expected, true); } // la fin aussi (un flux sans « \n » final)
+        if ($isRead && !$timedOut && $loop === null && !$cancelled() && microtime(true) - $t0 >= $limit) { $timedOut = true; } // rien reçu à temps : cURL a coupé
+        if ($cancelled()) { $k = $isRead ? tx_deep_keep_partial($text) : ['text' => '', 'line' => 1]; $put(['state' => 'cancelled', 'text' => $k['text'], 'line' => $k['line'], 'warn' => $k['text'] !== '' ? 'stopped' : '']); return; } // ■ Arrêter : le texte déjà lu est gardé
+        if ($loop !== null) { // 🔁 la boucle coupée : le texte d'avant, et le mot qui le dit
+            if (trim($loop['text']) === '') { $put(['state' => 'error', 'error' => 'L’IA s’est mise à répéter sans rien lire. Recadre une zone plus petite (quelques lignes) ou essaie un autre modèle, puis relance.', 'detail' => $info, 'warn' => $loop['why'], 'line' => 1]); return; }
+            $put(['state' => 'done', 'text' => $loop['text'], 'warn' => $loop['why'], 'line' => $loop['line']]); return;
+        }
+        if ($timedOut) { // ⏱ le temps maximum : le texte déjà lu est gardé
+            $k = tx_deep_keep_partial($text);
+            if ($k['text'] === '') { $put(['state' => 'error', 'error' => 'Temps maximum atteint ({m} min) sans rien lire. Recadre une zone plus petite, essaie un modèle plus léger, ou allonge le temps maximum.', 'error_vars' => ['m' => tx_deep_minutes($limit)], 'warn' => 'timeout', 'line' => 1, 'limit' => $limit]); return; }
+            $put(['state' => 'done', 'text' => $k['text'], 'warn' => 'timeout', 'line' => $k['line'], 'limit' => $limit]); return;
+        }
         if ($err !== '' || (!$r['ok'] && trim($text) === '')) { $put(['state' => 'error', 'error' => $err !== '' ? $err : 'La lecture approfondie n’a pas abouti.', 'detail' => trim($info . ($r['ok'] ? '' : ' · HTTP ' . (int) ($r['code'] ?? 0)), ' ·')]); return; }
         if (trim($text) === '') { // jamais un texte vide présenté comme une lecture
             $put(['state' => 'error', 'error' => trim($thinking) !== ''
@@ -262,8 +492,15 @@ function tx_deep_job(string $id): array
         $log = trim((string) @file_get_contents($dir . '/run.log'));
         $state = 'error'; $r['error'] = 'Le programme de lecture n’a pas démarré.'; $r['detail'] = mb_substr(preg_replace('/\s+/', ' ', $log) ?? '', -300);
     }
+    // ⏱ filet : le programme de lecture n'a pas fini longtemps après son temps maximum (il a été tué…) : on le dit, au lieu d'une barre sans fin
+    $lim = (int) ($job['limit'] ?? 0);
+    if ($state === 'running' && $lim > 0 && ($job['kind'] ?? '') === 'read' && time() - (int) ($job['created'] ?? time()) > $lim + 90) {
+        @file_put_contents($dir . '/cancel', '1');
+        $state = 'error'; $r['error'] = 'Temps maximum atteint ({m} min) : la lecture est arrêtée.'; $r['error_vars'] = ['m' => tx_deep_minutes($lim)]; $r['warn'] = 'timeout';
+    }
     return ['id' => $id, 'kind' => (string) ($job['kind'] ?? ''), 'model' => (string) ($job['model'] ?? ''), 'state' => $state, 'elapsed' => max(0, time() - (int) ($job['created'] ?? time())),
-        'completed' => (int) ($r['completed'] ?? 0), 'total' => (int) ($r['total'] ?? 0), 'status' => (string) ($r['status'] ?? ''), 'text' => (string) ($r['text'] ?? ''), 'error' => (string) ($r['error'] ?? ''), 'detail' => (string) ($r['detail'] ?? '')]
+        'completed' => (int) ($r['completed'] ?? 0), 'total' => (int) ($r['total'] ?? 0), 'status' => (string) ($r['status'] ?? ''), 'text' => (string) ($r['text'] ?? ''), 'error' => is_array($r['error_vars'] ?? null) ? i18n_tx((string) ($r['error'] ?? ''), $r['error_vars']) : (string) ($r['error'] ?? ''), 'detail' => (string) ($r['detail'] ?? ''),
+        'limit' => $lim, 'warn' => (string) ($r['warn'] ?? ''), 'line' => (int) ($r['line'] ?? 0), 'error_vars' => is_array($r['error_vars'] ?? null) ? $r['error_vars'] : new stdClass()]
         + (($job['kind'] ?? '') === 'find' && is_array($r['found'] ?? null) ? ['found' => $r['found']] : []);
 }
 
@@ -282,11 +519,12 @@ function tx_deep_dispatch(string $action, bool $isWrite, array $payload): never
         if ($isWrite && $action === 'tx_deep_pull') { json_response(['ok' => true, 'result' => tx_deep_pull_start($payload)]); }
         if ($isWrite && $action === 'tx_deep_read') { json_response(['ok' => true, 'result' => tx_deep_read_start($payload)]); }
         if ($isWrite && $action === 'tx_find_start') { json_response(['ok' => true, 'result' => tx_find_start($payload)]); }
+        if ($isWrite && $action === 'tx_deep_prompt') { $lang = (string) ($payload['language'] ?? 'fra'); json_response(['ok' => true, 'result' => ['prompt' => tx_deep_prompt(isset(TX_DEEP_LANGS[$lang]) ? $lang : 'fra', is_array($payload['context'] ?? null) ? $payload['context'] : [])]]); } // 🧠 « Voir ce qui est envoyé »
         if ($isWrite && $action === 'tx_deep_cancel') { json_response(['ok' => true, 'result' => tx_deep_cancel(safe_text($payload['id'] ?? ''))]); }
     } catch (Throwable $e) { json_response(['error' => readable_error_message($e)], 422); }
     json_response(['error' => 'Action inconnue'], 404);
 }
-const TX_DEEP_ACTIONS = ['tx_deep_status', 'tx_deep_job', 'tx_deep_pull', 'tx_deep_read', 'tx_deep_cancel', 'tx_find_start'];
+const TX_DEEP_ACTIONS = ['tx_deep_status', 'tx_deep_job', 'tx_deep_pull', 'tx_deep_read', 'tx_deep_cancel', 'tx_find_start', 'tx_deep_prompt'];
 
 /* ═════════ 1 bis. 🔍 Repérer avec l'IA : le texte seul (jamais l'image) envoyé au même modèle local, réponse en JSON vérifiée ═════════ */
 
@@ -727,4 +965,59 @@ function act_item_add(PDO $pdo, array $d): array
     $undo = import_receipt_save($pdo, 'tree', $before, ['label' => $label, 'act' => ['occupations' => $occBefore, 'transcription_id' => safe_int($d['transcription_id'] ?? 0)]]);
     log_change($pdo, 'meta', 0, 'create', 'Élément d’un acte ajouté à une fiche : ' . $label);
     return $count + ['event_id' => $eventId, 'note_id' => $noteId, 'source_id' => $source['_id'], 'date' => $date, 'place' => $place, 'undo' => $undo];
+}
+
+/* ═════════ 🧠 « Aider l'IA » : ce que la base sait déjà des personnes reliées à l'acte (maquette docs/design/transcription-versions-contexte.html, 3) ═════════
+ * Des indices courts, jamais imposés : cochés au départ pour l'événement principal (mariage connu), les façons d'écrire les noms et les lieux ;
+ * décochés pour le reste (parents, métiers). Rien n'est écrit dans la base. */
+function act_ai_hints(PDO $pdo, array $d): array
+{
+    $ids = array_values(array_unique(array_filter(array_map('safe_int', array_slice(is_array($d['person_ids'] ?? null) ? $d['person_ids'] : [], 0, 30)), static fn($v) => $v > 0)));
+    $place = mb_substr(trim(safe_text(is_scalar($d['place'] ?? '') ? (string) ($d['place'] ?? '') : '')), 0, 160);
+    $hints = [];
+    $add = static function (string $key, string $icon, string $label, array $parts, bool $on) use (&$hints): void {
+        $parts = array_values(array_unique(array_filter(array_map(static fn($x) => trim((string) $x), $parts), static fn($x) => $x !== '')));
+        if ($parts) { $hints[] = ['key' => $key, 'icon' => $icon, 'label' => $label, 'text' => mb_substr(implode(' · ', $parts), 0, 230), 'on' => $on]; }
+    };
+    $nameOf = static function (int $pid) use ($pdo): string { static $c = []; if (!isset($c[$pid])) { $s = $pdo->prepare('SELECT first_name, last_name FROM persons WHERE id=?'); $s->execute([$pid]); $r = $s->fetch(PDO::FETCH_ASSOC); $c[$pid] = $r ? trim($r['first_name'] . ' ' . mb_strtoupper((string) $r['last_name'])) : ''; } return $c[$pid]; };
+    $placeName = static function ($id) use ($pdo): string { if (!$id) { return ''; } $s = $pdo->prepare('SELECT name FROM places WHERE id=?'); $s->execute([(int) $id]); return (string) $s->fetchColumn(); };
+    $places = $place !== '' ? [$place] : [];
+    if ($ids) {
+        $in = implode(',', $ids);
+        // 💍 les mariages connus (le couple, l'année, le lieu)
+        $mar = [];
+        foreach ($pdo->query("SELECT id, partner1_id, partner2_id FROM families WHERE partner1_id IN ($in) OR partner2_id IN ($in) LIMIT 12")->fetchAll(PDO::FETCH_ASSOC) as $f) {
+            if (!$f['partner1_id'] || !$f['partner2_id']) { continue; }
+            $e = $pdo->prepare("SELECT e.year, e.date_text, e.place_id FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.family_id=? AND t.gedcom_tag='MARR' ORDER BY e.id LIMIT 1"); $e->execute([(int) $f['id']]); $ev = $e->fetch(PDO::FETCH_ASSOC) ?: [];
+            $pl = $placeName($ev['place_id'] ?? 0); if ($pl !== '') { $places[] = $pl; }
+            $mar[] = implode(', ', array_filter([$nameOf((int) $f['partner1_id']) . ' × ' . $nameOf((int) $f['partner2_id']), (string) ($ev['year'] ?? '') ?: (string) ($ev['date_text'] ?? ''), $pl]));
+        }
+        $add('marriage', '💍', 'mariage connu', $mar, true);
+        // ✍ les façons d'écrire les noms : le nom de la fiche (MAZAUD, Mazaud) et ses variantes (Mazaut)
+        $forms = [];
+        foreach ($pdo->query("SELECT DISTINCT last_name FROM persons WHERE id IN ($in) AND trim(last_name)<>''")->fetchAll(PDO::FETCH_COLUMN) as $ln) {
+            $ln = trim((string) $ln); $f = [mb_strtoupper($ln), mb_convert_case(mb_strtolower($ln), MB_CASE_TITLE)];
+            $v = $pdo->prepare("SELECT DISTINCT trim(nv.last_name) FROM name_variants nv JOIN persons p ON p.id=nv.person_id WHERE p.id IN ($in) AND p.last_name=? AND trim(nv.last_name)<>'' LIMIT 8"); $v->execute([$ln]);
+            foreach ($v->fetchAll(PDO::FETCH_COLUMN) as $x) { $f[] = (string) $x; }
+            $forms[] = implode(', ', array_values(array_unique($f)));
+        }
+        $add('names', '✍', 'façons d’écrire', $forms, true);
+        // 📍 les lieux de leurs événements
+        foreach ($pdo->query("SELECT DISTINCT p.name FROM events e JOIN places p ON p.id=e.place_id WHERE (e.person_id IN ($in) OR e.family_id IN (SELECT id FROM families WHERE partner1_id IN ($in) OR partner2_id IN ($in))) AND trim(p.name)<>'' LIMIT 10")->fetchAll(PDO::FETCH_COLUMN) as $pl) { $places[] = (string) $pl; }
+        // 👪 les parents ; 🧑‍🌾 les métiers (décochés au départ)
+        $par = [];
+        foreach ($ids as $pid) {
+            $s = $pdo->prepare('SELECT f.partner1_id, f.partner2_id FROM family_children fc JOIN families f ON f.id=fc.family_id WHERE fc.child_id=? LIMIT 1'); $s->execute([$pid]); $f = $s->fetch(PDO::FETCH_ASSOC);
+            if ($f) { $pp = array_filter([$f['partner1_id'] ? $nameOf((int) $f['partner1_id']) : '', $f['partner2_id'] ? $nameOf((int) $f['partner2_id']) : '']); if ($pp) { $par[] = 'de ' . $nameOf($pid) . ' : ' . implode(' et ', $pp); } }
+        }
+        $add('parents', '👪', 'parents', $par, false);
+        $jobs = [];
+        foreach ($pdo->query("SELECT e.person_id, e.description FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id IN ($in) AND t.gedcom_tag='OCCU' AND trim(e.description)<>'' LIMIT 10")->fetchAll(PDO::FETCH_ASSOC) as $j) { $jobs[] = $nameOf((int) $j['person_id']) . ', ' . mb_substr((string) $j['description'], 0, 60); }
+        $add('jobs', '🧑‍🌾', 'métiers', $jobs, false);
+    }
+    $add('places', '📍', 'lieux', array_slice(array_values(array_unique($places)), 0, 8), true);
+    // l'ordre de la maquette : mariage, noms, lieux, puis le reste
+    $rank = ['marriage' => 0, 'names' => 1, 'places' => 2, 'parents' => 3, 'jobs' => 4];
+    usort($hints, static fn($a, $b) => $rank[$a['key']] <=> $rank[$b['key']]);
+    return ['hints' => $hints];
 }

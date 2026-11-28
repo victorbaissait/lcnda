@@ -1,0 +1,849 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Diagrammes depuis les données</title>
+<style>
+/* Les jetons et les composants de l'app (assets/css/app.css, ui.css, listes-donnees.css, fiche-village-organiser.css), recopiés ici pour que la maquette s'ouvre seule — même base que carte-guerres-temps.html et donnees-plus.html. */
+:root{
+  color-scheme:light;
+  --ink:#080808;--paper:#fff;--card-bg:#fff;--card-head-bg:#fafafa;--card-line:#080808;
+  --blue:#0066cc;--blue-bright:#055dff;--blue-soft:#eaf2ff;--on-blue:#fff;--line-color:#d6d6d6;--muted:#6d6d6d;
+  --shadow:6px 6px 0 rgba(5,93,255,.34);--shadow-small:4px 4px 0 rgba(5,93,255,.28);--shadow-btn:3px 3px 0 rgba(5,93,255,.25);--shadow-modal:10px 10px 0 rgba(5,93,255,.45);
+  --ui-ink:#111;--ui-bg:#fff;--ui-soft:#eaf1ff;--ui-line:#e3e5ea;--ui-muted:#666;--ui-blue:#055dff;
+  --eyebrow:#0066cc;--btn2-bg:#fff;--btn2-line:#080808;--btn2-ink:#080808;
+  --seg-bg:#fff;--seg-ink:#111;--seg-line:#111;--seg-on-bg:#055dff;--seg-on-ink:#fff;
+  --grid:rgba(0,102,204,.035);--topbar:#fff;--topline:#080808;
+  --toggle-off:#b8bec9;--kbd-line:#c9ccd3;--link:#2b6cb0;
+  --green:#1a7f37;--green-soft:#eaf6ee;--orange:#d9480f;--orange-soft:#fff1e8;--red:#c62828;--red-soft:#fdecec;--yel-soft:#fff8d6;--yel-ink:#7a5d00;--fog:#9aa0a8;
+  --toast-bg:#111;--toast-ink:#fff;
+  --font:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;
+  --ink:#e8e8e8;--paper:#1a1a1a;--card-bg:#242424;--card-head-bg:#2e2e2e;--card-line:#3a3a3a;
+  --blue:#4d9fff;--blue-bright:#5599ff;--blue-soft:#1a2a3d;--on-blue:#111;--line-color:#555;--muted:#a3a3a3;
+  --shadow:6px 6px 0 rgba(77,159,255,.25);--shadow-small:4px 4px 0 rgba(77,159,255,.2);--shadow-btn:3px 3px 0 rgba(5,93,255,.25);--shadow-modal:10px 10px 0 rgba(77,159,255,.28);
+  --ui-ink:#e8e8e8;--ui-bg:#1f1f1f;--ui-soft:#1d2f4d;--ui-line:#3a3a3a;--ui-muted:#a8a8a8;--ui-blue:#3d7dff;
+  --eyebrow:#aaa;--btn2-bg:#2a2a2a;--btn2-line:#555;--btn2-ink:#e8e8e8;
+  --seg-bg:#242424;--seg-ink:#bbb;--seg-line:#e8e8e8;--seg-on-bg:#4d9fff;--seg-on-ink:#111;
+  --topbar:#1e1e1e;--topline:#3a3a3a;
+  --toggle-off:#555;--kbd-line:#555;--link:#6aa8ff;
+  --green:#4cc070;--green-soft:#15281c;--orange:#ff8a4c;--orange-soft:#2e1e14;--red:#ff6b6b;--red-soft:#2e1717;--yel-soft:#2c2612;--yel-ink:#f0d276;
+  --toast-bg:#e8e8e8;--toast-ink:#111;
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ink:#e8e8e8;--paper:#1a1a1a;--card-bg:#242424;--card-head-bg:#2e2e2e;--card-line:#3a3a3a;
+  --blue:#4d9fff;--blue-bright:#5599ff;--blue-soft:#1a2a3d;--on-blue:#111;--line-color:#555;--muted:#a3a3a3;
+  --shadow:6px 6px 0 rgba(77,159,255,.25);--shadow-small:4px 4px 0 rgba(77,159,255,.2);--shadow-btn:3px 3px 0 rgba(5,93,255,.25);--shadow-modal:10px 10px 0 rgba(77,159,255,.28);
+  --ui-ink:#e8e8e8;--ui-bg:#1f1f1f;--ui-soft:#1d2f4d;--ui-line:#3a3a3a;--ui-muted:#a8a8a8;--ui-blue:#3d7dff;
+  --eyebrow:#aaa;--btn2-bg:#2a2a2a;--btn2-line:#555;--btn2-ink:#e8e8e8;
+  --seg-bg:#242424;--seg-ink:#bbb;--seg-line:#e8e8e8;--seg-on-bg:#4d9fff;--seg-on-ink:#111;
+  --topbar:#1e1e1e;--topline:#3a3a3a;
+  --toggle-off:#555;--kbd-line:#555;--link:#6aa8ff;
+  --green:#4cc070;--green-soft:#15281c;--orange:#ff8a4c;--orange-soft:#2e1e14;--red:#ff6b6b;--red-soft:#2e1717;--yel-soft:#2c2612;--yel-ink:#f0d276;
+  --toast-bg:#e8e8e8;--toast-ink:#111;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.4 var(--font);padding:24px 24px 56px;overflow-wrap:break-word}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:inherit}
+:is(button,input,select,textarea,a,[tabindex]):focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{max-width:1440px;margin:0 auto}
+
+/* ── la maquette autour ── */
+.mock{display:flex;justify-content:space-between;align-items:flex-start;gap:12px 24px;flex-wrap:wrap;margin:0 0 18px}
+.mock .eyebrow{display:block}
+.mock h1{margin:5px 0 6px;font-size:22px;letter-spacing:-.01em}
+.mock p{margin:0;max-width:860px;color:var(--muted);font-size:14px;line-height:1.45}
+.tag-new{display:inline-block;font:800 10px/1.5 var(--font);letter-spacing:.08em;text-transform:uppercase;background:var(--ui-blue);color:#fff;padding:0 6px;margin-right:6px;vertical-align:1px}
+.path{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center;margin:8px 0 0;font-size:13px;font-weight:600}
+.path span{border:1.5px solid var(--line-color);background:var(--card-bg);padding:2px 8px}
+.path span.on{border-color:var(--ui-blue);background:var(--ui-soft);color:var(--ink)}
+.path i{font-style:normal;color:var(--muted)}
+.toc{display:flex;flex-wrap:wrap;gap:6px 8px;margin:0 0 26px}
+.toc a{text-decoration:none;border:2px solid var(--card-line);background:var(--card-bg);padding:6px 11px;font-size:13px;font-weight:700;box-shadow:var(--shadow-btn)}
+.toc a:hover{background:var(--ui-soft)}
+.toc a small{color:var(--muted);font-weight:600;margin-left:4px}
+.sec{margin:46px 0 0}
+.sec-h{margin:0 0 16px;max-width:900px}
+.sec-h h2{margin:4px 0 4px;font-size:24px;letter-spacing:-.02em}
+.sec-h p{margin:0;color:var(--muted);font-size:14px}
+.callout{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 5px;background:var(--orange);color:#fff;font:800 12px/1 var(--font);border-radius:11px;vertical-align:2px}
+
+/* ── composants de l'app ── */
+.eyebrow{color:var(--eyebrow);font-weight:700;font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.button{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:2px solid var(--ink);background:var(--blue);color:var(--on-blue);padding:11px 15px;min-height:42px;font-weight:700;cursor:pointer;box-shadow:var(--shadow-small);transition:.15s ease;white-space:nowrap;border-radius:0;text-decoration:none}
+:root[data-theme="dark"] .button:not(.secondary){border-color:var(--blue)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .button:not(.secondary){border-color:var(--blue)}}
+.button:hover{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+.button:disabled{opacity:.45;cursor:default;transform:none;box-shadow:none}
+.button.secondary{color:var(--btn2-ink);background:var(--btn2-bg);border-color:var(--btn2-line)}
+.button.small{min-height:32px;padding:6px 10px;font-size:11.5px;box-shadow:var(--shadow-btn)}
+.button.small:hover{box-shadow:1px 1px 0 var(--ink)}
+.button.icon{font-size:18px;line-height:1;padding:9px 13px}
+.link-button{border:0;background:none;padding:0;color:var(--link);text-decoration:underline;text-underline-offset:2px;cursor:pointer;font-size:13px}
+.segmented{display:inline-flex;flex-wrap:wrap;padding:1px 0 0 1px;flex:none;max-width:100%}
+.segmented button{min-height:32px;margin:-1px 0 0 -1px;position:relative;border:2px solid var(--seg-line);background:var(--seg-bg);color:var(--seg-ink);cursor:pointer;font-size:12px;font-weight:700;padding:1px 9px;white-space:nowrap;border-radius:0}
+.segmented button[aria-pressed="true"]{z-index:1;background:var(--seg-on-bg);color:var(--seg-on-ink)}
+.segmented.sm button{min-height:28px;font-size:11.5px;padding:1px 7px}
+.ui-listbar-btn{display:inline-flex;align-items:center;gap:4px;border:2px solid var(--ui-ink);background:var(--ui-bg);color:var(--ui-ink);padding:5px 9px;min-height:34px;font:600 13px/1.2 var(--font);cursor:pointer;white-space:nowrap;border-radius:0}
+.ui-listbar-btn:hover{background:var(--ui-soft)}
+.ui-listbar-btn[aria-pressed="true"]{background:var(--ui-soft);border-color:var(--ui-blue);box-shadow:inset 0 -3px 0 var(--ui-blue)}
+.ui-listbar-chip{display:inline-flex;align-items:center;gap:4px;background:var(--ui-soft);border:1.5px solid var(--ui-blue);color:var(--ui-blue);padding:3px 8px;font:700 12px/1.3 var(--font);cursor:pointer;border-radius:0}
+.ui-listbar-chip.off{background:transparent;border-color:var(--line-color);color:var(--muted);text-decoration:line-through}
+.ui-select{appearance:none;border:2px solid var(--ui-ink);border-radius:0;background:var(--ui-bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0h10L5 6z' fill='%23888'/%3E%3C/svg%3E") no-repeat right 9px center;color:var(--ui-ink);padding:5px 28px 5px 9px;font:600 13px var(--font);min-height:34px;max-width:100%;min-width:0}
+.ui-toggle{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;cursor:pointer;position:relative;user-select:none;min-height:30px}
+.ui-toggle>input{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
+.ui-toggle>i{width:34px;height:20px;border-radius:12px;background:var(--toggle-off);position:relative;flex:none;transition:background .15s}
+.ui-toggle>i::after{content:'';position:absolute;left:3px;top:3px;width:14px;height:14px;background:#fff;border-radius:50%;transition:left .15s}
+.ui-toggle>input:checked+i{background:var(--ui-blue)}
+.ui-toggle>input:checked+i::after{left:17px}
+.ui-toggle>input:disabled+i{opacity:.55}
+.ui-toggle>input:focus-visible+i{outline:3px solid rgba(5,93,255,.5);outline-offset:2px}
+.ui-num{display:inline-flex;align-items:center;border:2px solid var(--ui-ink);background:var(--ui-bg);min-height:30px}
+.ui-num input{width:50px;border:0;background:transparent;padding:3px 7px;text-align:right;font-weight:700;font-variant-numeric:tabular-nums;color:var(--ui-ink);outline:0}
+.ui-num span{padding:0 7px 0 0;font-size:12px;color:var(--muted)}
+.ui-badge{display:inline-block;font:800 10px/1.5 var(--font);letter-spacing:.06em;text-transform:uppercase;padding:0 6px;border:1.5px solid var(--ui-ink);white-space:nowrap;vertical-align:1px}
+.ui-badge.is-blue{background:var(--ui-blue);border-color:var(--ui-blue);color:#fff}
+.ui-badge.is-green{border-color:var(--green);color:var(--green);background:var(--green-soft)}
+.ui-badge.is-grey{border-color:var(--line-color);color:var(--muted)}
+.ui-badge.is-orange{border-color:var(--orange);color:var(--orange);background:var(--orange-soft)}
+.lbl{font-size:12px;font-weight:700;white-space:nowrap}
+.muted{color:var(--muted)}
+.small{font-size:12.5px}
+.card{background:var(--card-bg);border:2px solid var(--card-line);box-shadow:var(--shadow-small);min-width:0}
+.card-head{display:flex;align-items:center;justify-content:space-between;gap:8px 10px;flex-wrap:wrap;padding:12px 15px;border-bottom:2px solid var(--card-line);background:var(--card-head-bg)}
+.card-head h3{margin:0;font-size:16px;line-height:1.2}
+.card-head h3 small{color:var(--muted);font-weight:400;font-size:12.5px}
+.card-body{padding:14px 15px}
+.data-table{width:100%;border-collapse:collapse;font-size:12.5px}
+.data-table th{text-align:left;padding:9px 10px;color:var(--on-blue);background:var(--blue);border-bottom:2px solid var(--ink);white-space:nowrap;font-weight:800}
+.data-table td{padding:9px 10px;border-bottom:1px solid var(--line-color);vertical-align:top}
+.data-table tr:hover td{background:var(--blue-soft)}
+.data-table td small{display:block;color:var(--muted);font-size:11.5px}
+.tw{max-width:100%;overflow-x:auto;position:relative}
+.ib{display:inline-flex;align-items:center;justify-content:center;width:30px;height:28px;border:1.5px solid var(--line-color);background:var(--card-bg);font-size:13px;margin-left:3px;color:var(--ink);cursor:pointer;padding:0;vertical-align:middle}
+.ib:hover{border-color:var(--ui-blue);background:var(--ui-soft)}
+.ib.on{border-color:var(--ui-blue);background:var(--ui-soft)}
+.src a,.srca{font:700 11px var(--font);border:1px solid var(--line-color);padding:1px 6px;color:var(--blue);background:var(--blue-soft);text-decoration:none;white-space:nowrap}
+.toast{position:fixed;left:24px;bottom:24px;z-index:50;display:flex;align-items:center;gap:12px;max-width:min(470px,calc(100vw - 32px));background:var(--toast-bg);color:var(--toast-ink);padding:11px 14px;font:500 14px/1.35 var(--font);box-shadow:5px 5px 0 rgba(5,93,255,.45)}
+.toast button{border:1.5px solid currentColor;background:transparent;color:inherit;font-weight:700;font-size:13px;padding:3px 9px;cursor:pointer;white-space:nowrap}
+
+/* ── la fenêtre de l'app : barre du haut ── */
+.app{border:2px solid var(--topline);background:var(--paper);min-width:0}
+.topbar{display:grid;grid-template-columns:240px minmax(0,1fr);align-items:center;background:var(--topbar);border-bottom:2px solid var(--topline);min-height:72px}
+.brand{height:100%;border-right:2px solid var(--topline);display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;align-items:end;padding:12px 24px 9px;font-size:12px;line-height:1;letter-spacing:.04em;position:relative;overflow:hidden}
+.brand::after{content:"";position:absolute;width:130px;height:130px;right:-62px;top:-85px;background:repeating-radial-gradient(circle,var(--blue) 0 1px,transparent 1px 4px);transform:rotate(-8deg)}
+.brand span{background:var(--topbar);border:1px solid var(--blue);color:var(--blue);justify-self:end;padding:3px 5px;transform:rotate(-5deg);z-index:1;text-transform:uppercase}
+.brand strong{background:var(--blue);color:var(--on-blue);justify-self:start;padding:4px 6px;transform:rotate(-5deg);z-index:1;text-transform:uppercase}
+.brand small{grid-column:1/-1;font-size:10px;letter-spacing:.18em;align-self:end;text-align:center;color:var(--muted)}
+.main-nav{display:flex;align-items:center;overflow-x:auto;overflow-y:hidden;padding:8px 16px;gap:8px;min-width:0}
+.nav-item{border:2px solid transparent;background:transparent;font-weight:700;padding:6px 12px;white-space:nowrap;line-height:1.1;font-size:15px;color:var(--ink);text-align:left}
+.nav-item span{display:block;font-size:9px;line-height:1;color:var(--blue);letter-spacing:.12em;margin-bottom:4px}
+.nav-item.is-active{background:var(--blue);border-color:var(--ink);color:var(--on-blue);box-shadow:var(--shadow-small)}
+.nav-item.is-active span{color:var(--on-blue)}
+.workspace{background-color:var(--paper);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px}
+.page{padding:28px 3.5% 34px}
+.page-header{display:flex;align-items:flex-end;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;margin:0 0 16px}
+.page-header h2{margin:6px 0 0;font-size:clamp(26px,3vw,34px);line-height:1.02;letter-spacing:-.03em}
+.page-header p{margin:6px 0 0;color:var(--muted);font-size:13.5px;max-width:640px}
+.ph-ico{font-size:.86em;margin-right:.19em}
+.page-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.ld-source{margin:-4px 0 12px;color:var(--muted);font-size:13px}
+.ld-bar-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ld-chips{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:10px 0 0}
+.ld-count{font-weight:700;margin-right:4px;font-size:14px}
+.kiosk{font-size:12.5px;color:var(--muted);border-top:1px dashed var(--line-color);margin:14px 0 0;padding:9px 0 0}
+
+/* ── modale (app.css .modal) ── */
+.modal{border:3px solid var(--ink);box-shadow:var(--shadow-modal);background:var(--card-bg);min-width:0}
+:root[data-theme="dark"] .modal{border-color:#555}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .modal{border-color:#555}}
+.modal-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:16px 18px;border-bottom:2px solid var(--card-line);background:var(--card-head-bg)}
+.modal-head h2{margin:4px 0 0;font-size:21px;letter-spacing:-.01em}
+.modal-body{padding:14px 18px}
+.modal-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:12px 18px 16px;border-top:1px solid var(--ui-line)}
+.modal-actions .spacer{flex:1}
+.x{border:0;background:none;font-size:20px;cursor:pointer;color:var(--muted);padding:2px 6px}
+</style>
+<style>
+/* ── les couleurs des séries (palette validée : bleu, orange, vert d'eau, jaune, rose ; pas sur deux axes) ── */
+:root{--s1:#257de0;--s2:#f47230;--s3:#00b894;--s4:#f2a600;--s5:#ee7fac;--vz-grid:#e6e8ec;--vz-bg:var(--card-bg)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--s1:#338ced;--s2:#e76624;--s3:#00a888;--s4:#d28e05;--s5:#e24d8b;--vz-grid:#363636}}
+:root[data-theme="dark"]{--s1:#338ced;--s2:#e76624;--s3:#00a888;--s4:#d28e05;--s5:#e24d8b;--vz-grid:#363636}
+/* palettes au choix (⚙️ Personnaliser → Couleurs) */
+.pal-cvd{--s1:#0072b2;--s2:#e69f00;--s3:#009e73;--s4:#cc79a7;--s5:#56b4e9}
+.pal-arch{--s1:#7a5230;--s2:#b0803a;--s3:#4f6d5a;--s4:#a2574a;--s5:#6b6b8a}
+.pal-nb{--s1:#222;--s2:#777;--s3:#aaa;--s4:#555;--s5:#999}
+/* thème du diagramme, indépendant de l'app (pour un export clair dans une app sombre) */
+.vz-light{--ink:#080808;--muted:#6d6d6d;--vz-bg:#fff;--vz-grid:#e6e8ec;--line-color:#d6d6d6;color:#080808}
+.vz-dark{--ink:#e8e8e8;--muted:#a3a3a3;--vz-bg:#1f1f1f;--vz-grid:#363636;--line-color:#555;color:#e8e8e8}
+.vz-dark.pal-nb{--s1:#eee;--s2:#aaa;--s3:#777;--s4:#ccc;--s5:#888}
+
+.vz{background:var(--vz-bg);color:var(--ink);min-width:0;position:relative}
+.vz svg{display:block;width:100%;height:auto;overflow:visible;font-family:inherit}
+.vz-title{font-size:15px;font-weight:800;margin:0;line-height:1.25}
+.vz-sub{font-size:12.5px;color:var(--muted);margin:2px 0 0}
+.vz-leg{display:flex;flex-wrap:wrap;gap:4px 14px;margin:8px 0 4px;font-size:12px;color:var(--ink)}
+.vz-leg i{display:inline-block;width:11px;height:11px;margin-right:5px;vertical-align:-1px;border-radius:2px}
+.vz-src{display:flex;flex-wrap:wrap;gap:5px 8px;align-items:center;font-size:11.5px;color:var(--muted);border-top:1px dashed var(--line-color);margin:10px 0 0;padding:8px 0 0}
+.vz-src .srca{font-size:10.5px}
+.vz-src .ui-badge{font-size:9.5px}
+.tip{position:fixed;z-index:60;pointer-events:none;background:var(--card-bg);color:var(--ink);border:2px solid var(--card-line);box-shadow:var(--shadow-small);padding:6px 9px;font-size:12px;line-height:1.35;max-width:260px}
+.tip b{display:block;font-size:12.5px}
+[data-tip]{cursor:default}
+.hit:hover{opacity:.82}
+
+/* ── l'éditeur (heritage-diagrams.js : .h-dg-shell) ── */
+.ed{border:2px solid var(--card-line);background:var(--card-bg);box-shadow:var(--shadow-small);min-width:0}
+.ed-top{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;padding:10px 14px;border-bottom:2px solid var(--card-line);background:var(--card-head-bg)}
+.ed-top .nm{flex:1 1 220px;min-width:0;border:2px solid var(--ui-line);background:var(--ui-bg);padding:5px 9px;font-weight:700;font-size:14px}
+.ed-top .st{font-size:12px;color:var(--green);font-weight:700}
+.ed-body{display:grid;grid-template-columns:400px minmax(0,1fr);min-width:0}
+.ed-side{border-right:2px solid var(--card-line);padding:14px 16px 18px;min-width:0}
+.ed-prev{padding:16px 18px 18px;min-width:0}
+.tabs{margin:0 0 14px}
+.step{border-top:1px solid var(--ui-line);padding:13px 0 4px}
+.step:first-of-type{border-top:0;padding-top:2px}
+.step h4{margin:0 0 9px;font-size:13.5px;display:flex;align-items:center;gap:8px}
+.step h4 .n{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;background:var(--ui-blue);color:#fff;font-size:11.5px;border-radius:50%;flex:none}
+.step p.hint{margin:7px 0 0;font-size:12px;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.chip-x{font-size:11px;opacity:.75;margin-left:2px}
+.ask{display:flex;gap:8px;align-items:center;border:2px solid var(--ui-ink);background:var(--ui-bg);padding:4px 4px 4px 10px;min-width:0}
+.ask input{flex:1;min-width:0;border:0;background:transparent;font-size:13.5px;outline:0;padding:5px 0}
+.ask .button{box-shadow:none}
+.understood{display:flex;flex-wrap:wrap;gap:5px 6px;align-items:center;margin:8px 0 0;font-size:12px}
+.understood .lbl{color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-size:10px}
+.map{display:grid;grid-template-columns:86px minmax(0,1fr);gap:7px 10px;align-items:center}
+.map .lbl{color:var(--ink)}
+.map .ui-select{width:100%}
+.map .sug{grid-column:2;margin:-4px 0 2px;font-size:11px;color:var(--green)}
+details.more{margin:8px 0 0}
+details.more>summary{cursor:pointer;font-size:12.5px;font-weight:700;color:var(--link);list-style:none}
+details.more>summary::-webkit-details-marker{display:none}
+details.more[open]>summary{margin-bottom:8px}
+.reco-line{margin:10px 0 0;padding:8px 10px;background:var(--green-soft);border-left:4px solid var(--green);font-size:12.5px}
+.sum{margin:0 0 10px;font-size:13px;color:var(--muted)}
+.sum b{color:var(--ink)}
+
+/* ── galerie ── */
+.gal-bar{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between;margin:0 0 14px}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:14px}
+.gt{display:flex;flex-direction:column;gap:6px;text-align:left;border:2px solid var(--card-line);background:var(--card-bg);padding:10px 12px 12px;box-shadow:var(--shadow-btn);cursor:pointer;min-width:0;color:var(--ink)}
+.gt:hover{background:var(--ui-soft)}
+.gt.dim{opacity:.38}
+.gt svg{width:100%;height:auto;display:block;background:var(--vz-bg);border:1px solid var(--ui-line)}
+.gt b{font-size:13.5px;line-height:1.25}
+.gt small{font-size:12px;color:var(--muted);line-height:1.35}
+.gt .bdg{display:flex;gap:5px;flex-wrap:wrap}
+
+/* ── exemples ── */
+.ex-head{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;margin:8px 0 0}
+.how{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:12px 0 14px}
+.how div{border:1.5px solid var(--ui-line);padding:7px 9px;font-size:12px;min-width:0}
+.how div b{display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--eyebrow);margin-bottom:2px}
+.sm-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 18px}
+.sm-cell{border:1px solid var(--ui-line);padding:8px 10px 4px;min-width:0}
+.sm-cell h5{margin:0;font-size:13px}
+.sm-cell h5 small{font-weight:400;color:var(--muted)}
+.mf{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:16px 22px;align-items:start}
+
+/* ── personnaliser ── */
+.pz{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:22px;align-items:start}
+.pz-prev{padding:16px 18px}
+.pz-frame{margin:0 auto;border:1px dashed var(--line-color);padding:14px 16px 10px;transition:max-width .2s}
+.pz-panel .card-body{padding:4px 0 0}
+.acc{border-bottom:1px solid var(--ui-line)}
+.acc>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:9px;padding:11px 15px;font-weight:700;font-size:13.5px}
+.acc>summary::-webkit-details-marker{display:none}
+.acc>summary::after{content:'▸';margin-left:auto;color:var(--muted);font-size:12px}
+.acc[open]>summary::after{content:'▾'}
+.acc>summary small{font-weight:400;color:var(--muted);font-size:12px}
+.acc .in{padding:0 15px 13px;display:flex;flex-direction:column;gap:9px}
+.acc .row{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
+.acc input[type=text]{border:2px solid var(--ui-line);background:var(--ui-bg);padding:5px 8px;font-size:13px;width:100%;min-width:0}
+.pals{display:flex;flex-wrap:wrap;gap:6px}
+.pal{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--ui-line);background:var(--ui-bg);padding:4px 8px;font-size:12px;font-weight:700;cursor:pointer}
+.pal[aria-pressed="true"]{border-color:var(--ui-blue);box-shadow:inset 0 -3px 0 var(--ui-blue)}
+.pal i{display:inline-flex}
+.pal i span{width:9px;height:14px;display:block}
+.notes{list-style:none;margin:0;padding:0;font-size:12.5px}
+.notes li{display:flex;gap:8px;align-items:center;justify-content:space-between;padding:4px 0;border-bottom:1px dotted var(--ui-line)}
+.pz-foot{display:flex;flex-wrap:wrap;gap:8px;padding:12px 15px;border-top:2px solid var(--card-line)}
+.addmode{outline:3px dashed var(--orange);outline-offset:4px}
+
+/* ── utiliser ── */
+.use{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);gap:22px;align-items:start}
+.fiche .card-head{gap:4px 10px}
+.fblock{border:1.5px solid var(--ui-line);margin:12px 0 0;padding:10px 12px}
+.fblock-h{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap;font-size:12px;color:var(--muted);margin:0 0 6px}
+.feat{display:grid;grid-template-columns:28px minmax(0,1fr);gap:2px 10px;padding:11px 15px;border-bottom:1px solid var(--ui-line);align-items:start}
+.feat:last-child{border-bottom:0}
+.feat .ic{font-size:18px;line-height:1.25}
+.feat b{font-size:14px}
+.feat .why{display:block;color:var(--muted);font-size:12.5px;margin-top:1px}
+.feat .opts{grid-column:2;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;margin:7px 0 1px;font-size:12.5px}
+.livebox{padding:9px 11px;font-size:12.5px;background:var(--blue-soft);border-left:4px solid var(--ui-blue);margin:8px 0 0}
+.kiosk-on .no-kiosk{display:none!important}
+.kiosk-note{display:none;font-size:12.5px;color:var(--muted);border-top:1px dashed var(--line-color);margin:10px 0 0;padding:8px 0 0}
+.kiosk-on .kiosk-note{display:block}
+
+/* ── vie privée ── */
+.priv{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.priv ul{margin:0;padding:0;list-style:none}
+.priv li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:8px;padding:9px 0;border-bottom:1px solid var(--ui-line);font-size:13.5px}
+.priv li:last-child{border-bottom:0}
+.priv li small{display:block;color:var(--muted);font-size:12px}
+.exp-line{display:flex;gap:8px;align-items:flex-start;padding:9px 11px;background:var(--yel-soft);color:var(--yel-ink);border-left:4px solid var(--yel-ink);font-size:12.5px;margin:0 0 10px}
+
+/* ── questions ── */
+.qs{counter-reset:q;list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 22px}
+.qs li{counter-increment:q;padding:14px 16px}
+.qs li>b{display:block;font-size:15px;margin:0 0 6px}
+.qs li>b::before{content:counter(q) ". ";color:var(--blue)}
+.qs .opt{font-size:13px;color:var(--muted);margin:0}
+.qs .reco{font-size:13px;margin:9px 0 0;border-left:4px solid var(--green);background:var(--green-soft);padding:7px 11px}
+
+@media (max-width:1180px){
+  .ed-body{grid-template-columns:340px minmax(0,1fr)}
+  .pz{grid-template-columns:minmax(0,1fr) 320px}
+  .use{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:980px){
+  .ed-body{grid-template-columns:minmax(0,1fr)}
+  .ed-side{border-right:0;border-bottom:2px solid var(--card-line)}
+  .pz{grid-template-columns:minmax(0,1fr)}
+  .qs,.priv{grid-template-columns:minmax(0,1fr)}
+  .how{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:760px){
+  body{padding:16px 16px 40px}
+  .topbar{grid-template-columns:minmax(0,1fr);min-height:0}
+  .brand{border-right:0;border-bottom:2px solid var(--topline);height:50px;padding:10px 100px 8px}
+  .brand small{display:none}
+  .main-nav{padding:8px 10px}
+  .nav-item{font-size:13px;padding:5px 8px}
+  .page{padding:18px 12px 22px}
+  .page-header h2{font-size:25px}
+  .sec{margin-top:36px}
+  .sec-h h2{font-size:21px}
+  .ed-side{padding:12px 12px 14px}
+  .ed-prev{padding:12px}
+  .ed-top{padding:9px 12px}
+  .sm-grid,.mf{grid-template-columns:minmax(0,1fr)}
+  .how{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .gal{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .gt{padding:8px 9px 10px}
+  .gt small{display:none}
+  .pz-prev{padding:12px}
+  .pz-frame{padding:10px 10px 8px}
+  .map{grid-template-columns:72px minmax(0,1fr)}
+  .card-body{padding:12px}
+  .toast{left:16px;right:16px;bottom:16px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="mock">
+    <div>
+      <span class="eyebrow"><span class="tag-new">Maquette</span>à valider · tel que dans l’app</span>
+      <h1>📊 Des diagrammes faits avec les données de l’app</h1>
+      <p>Dans <b>Mes diagrammes</b>, on part de ce que l’app sait déjà — ton arbre, n’importe quelle liste de données (les 20 thèmes, les listes réunies 🔀) ou une question en français — puis on choisit le dessin et on le règle autant qu’on veut. Les bons réglages sont proposés tout seuls. Familles inventées MAZAUD (Tulle), LACOMBE (Nice), DURAND (Salon-de-Provence) ; les événements sont vrais, les nombres marqués « exemple » sont à recompter dans l’app.</p>
+      <div class="path" aria-label="Où c’est dans l’app"><span>03 Graphiques</span><i>→</i><span>🏛️ Mes diagrammes</span><i>→</i><span>＋ Nouveau</span><i>→</i><span class="on">📊 Partir des données</span></div>
+    </div>
+    <span class="segmented" role="group" aria-label="Thème"><button type="button" data-theme-set="auto" aria-pressed="true">Auto</button><button type="button" data-theme-set="light" aria-pressed="false">Clair</button><button type="button" data-theme-set="dark" aria-pressed="false">Sombre</button></span>
+  </div>
+
+  <nav class="toc" aria-label="Sommaire">
+    <a href="#s1">1 · Partir des données</a><a href="#s2">2 · Les dessins <small>14</small></a><a href="#s3">3 · Exemples <small>5</small></a><a href="#s4">4 · Personnaliser</a><a href="#s5">5 · S’en servir</a><a href="#s6">6 · Vie privée</a><a href="#qs">? Questions</a><a href="#dec">✓ Décisions</a>
+  </nav>
+
+  <!-- ═══════════ 1 ═══════════ -->
+  <section class="sec" id="s1" aria-labelledby="s1h" style="margin-top:0">
+    <div class="sec-h"><span class="eyebrow">1 · D’où viennent les chiffres</span><h2 id="s1h">📊 Partir des données</h2><p>L’onglet « Depuis l’app » de l’éditeur devient <b>« 📊 Partir des données »</b> : trois étapes, toujours dans le même ordre. Essaie les trois sources : les filtres, les champs et l’aperçu changent tout de suite. Ce qui existe déjà (« 🧮 Compter dans ma base », la période, le groupe de personnes, « Tenir à jour ») est gardé tel quel dans la source 🌳 Mon arbre.</p></div>
+    <div class="app">
+      <header class="topbar">
+        <div class="brand" aria-hidden="true"><span>Ma</span><strong>Famille</strong><small>GÉNÉALOGIE</small></div>
+        <nav class="main-nav" aria-label="Onglets de l’app"><span class="nav-item"><span>01</span>Tableau de bord</span><span class="nav-item"><span>02</span>Personnes</span><span class="nav-item is-active" aria-current="page"><span>03</span>Graphiques</span><span class="nav-item"><span>04</span>Carte</span><span class="nav-item"><span>05</span>Listes</span><span class="nav-item"><span>06</span>Chronologie</span></nav>
+      </header>
+      <main class="workspace">
+        <section class="page" aria-label="Nouveau diagramme">
+          <header class="page-header">
+            <div><span class="eyebrow">Graphiques · 🏛️ Mes diagrammes</span><h2><span class="ph-ico" aria-hidden="true">📊</span>Nouveau diagramme</h2><p>Choisis d’où viennent les chiffres ; l’app propose le dessin et les réglages. Tout reste modifiable.</p></div>
+            <div class="page-actions"><button type="button" class="button small secondary" data-say="La galerie s’ouvre sur ⭐ Mes modèles (exemple : « Séismes par décennie »).">⭐ Mes modèles</button></div>
+          </header>
+          <div class="ed">
+            <div class="ed-top">
+              <input class="nm" id="ed-name" value="Séismes autour des lieux de la famille" aria-label="Nom du diagramme">
+              <button type="button" class="button small secondary" id="ed-type">🧱 Colonnes empilées ▾</button>
+              <span class="st">✓ Enregistré</span>
+              <button type="button" class="button small" data-say="Diagramme enregistré dans Mes diagrammes (D14).">💾 Enregistrer</button>
+            </div>
+            <div class="ed-body">
+              <aside class="ed-side">
+                <span class="segmented sm tabs" role="group" aria-label="Onglets de l’éditeur" data-own="1"><button type="button" aria-pressed="false" data-say="Onglet Données : le tableau, modifiable à la main.">Données</button><button type="button" aria-pressed="false" data-say="Onglet Réglages : ceux du type choisi.">Réglages</button><button type="button" aria-pressed="false" data-go="#s4">⚙️ Personnaliser</button><button type="button" aria-pressed="true">📊 Partir des données</button></span>
+
+                <div class="step">
+                  <h4><span class="n">1</span>D’où viennent les données ?</h4>
+                  <span class="segmented" role="group" aria-label="Source" id="src-seg" data-own="1"><button type="button" aria-pressed="false" data-src="arbre">🌳 Mon arbre</button><button type="button" aria-pressed="true" data-src="liste">🧰 Une liste</button><button type="button" aria-pressed="false" data-src="question">💬 Une question</button></span>
+                  <div id="src-pane" style="margin-top:10px"></div>
+                </div>
+                <div class="step">
+                  <h4><span class="n">2</span>Ne garder que…</h4>
+                  <div class="chips" id="flt"></div>
+                  <p class="hint">Un clic sur une pastille la retire ; le chiffre se règle avec − / +.</p>
+                </div>
+                <div class="step">
+                  <h4><span class="n">3</span>Qui va où</h4>
+                  <div class="map" id="fmap"></div>
+                  <details class="more"><summary>＋ Taille, étiquette, groupe, temps</summary><div class="map" id="fmap2"></div></details>
+                </div>
+              </aside>
+              <div class="ed-prev">
+                <p class="sum" id="ed-sum"></p>
+                <div class="vz" id="ed-vz"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </section>
+
+  <!-- ═══════════ 2 ═══════════ -->
+  <section class="sec" id="s2" aria-labelledby="s2h">
+    <div class="sec-h"><span class="eyebrow">2 · Les dessins</span><h2 id="s2h">Le bon dessin pour ces données</h2><p>Les plus de 100 types de « Mes diagrammes » restent (même catalogue, même ⚙️ pour les ranger). Ici, les 14 qui servent le plus avec des données. <b>Déjà là</b> : ils savent maintenant lire une liste. <b>Élargi</b> : ils existaient pour l’arbre seulement. <b>Nouveau</b> : à faire.</p></div>
+    <div class="card"><div class="card-body">
+      <div class="gal-bar"><span class="segmented sm" role="group" aria-label="Montrer" id="gal-seg" data-own="1"><button type="button" aria-pressed="true" data-g="all">Tous (14)</button><button type="button" aria-pressed="false" data-g="fit">✨ Conseillés pour 🌋 Séismes réunis</button></span><span class="small muted">Un clic : le diagramme change de dessin, les champs suivent.</span></div>
+      <div class="gal" id="gal"></div>
+    </div></div>
+  </section>
+
+  <!-- ═══════════ 3 ═══════════ -->
+  <section class="sec" id="s3" aria-labelledby="s3h">
+    <div class="sec-h"><span class="eyebrow">3 · Exemples</span><h2 id="s3h">Cinq diagrammes faits en trois clics</h2><p>Chacun dit d’où il vient (source, filtres, champs, dessin). Survole les marques pour les chiffres.</p></div>
+    <span class="segmented" role="group" aria-label="Exemple" id="ex-seg" data-own="1"><button type="button" aria-pressed="true" data-ex="0">🌋 Séismes</button><button type="button" aria-pressed="false" data-ex="1">⚔️ Batailles</button><button type="button" aria-pressed="false" data-ex="2">🔀 Métiers → communes</button><button type="button" aria-pressed="false" data-ex="3">🚲 Tour de France</button><button type="button" aria-pressed="false" data-ex="4">🥖 Pain et naissances</button></span>
+    <div class="card" style="margin-top:14px">
+      <div class="card-head"><h3 id="ex-title"></h3><button type="button" class="button small secondary" data-go="#s1">✎ Ouvrir dans l’éditeur</button></div>
+      <div class="card-body">
+        <div class="how" id="ex-how"></div>
+        <div class="vz" id="ex-vz"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 4 ═══════════ -->
+  <section class="sec" id="s4" aria-labelledby="s4h">
+    <div class="sec-h"><span class="eyebrow">4 · ⚙️ Personnaliser</span><h2 id="s4h">Tout se règle, rien n’est obligatoire</h2><p>Des sections repliées, une seule ouverte à la fois. Les défauts sont déjà bons : on ne touche que ce qu’on veut. Essaie les couleurs, le regroupement, le format, le thème ; « ＋ Ajouter une note » puis clique sur une colonne.</p></div>
+    <div class="pz">
+      <div class="card pz-prev"><div class="pz-frame vz" id="pz-frame"><div id="pz-vz"></div></div></div>
+      <div class="card pz-panel">
+        <div class="card-head"><h3>⚙️ Personnaliser</h3><span class="small muted">« à ce diagramme »</span></div>
+        <div class="card-body" id="pz-acc">
+          <details class="acc" open><summary>✏️ Titre <small>et sous-titre</small></summary><div class="in">
+            <input type="text" id="pz-t" value="Séismes ressentis autour des lieux de la famille" aria-label="Titre">
+            <input type="text" id="pz-st" value="À moins de 150 km de Tulle, Nice ou Salon · par décennie · exemple" aria-label="Sous-titre">
+          </div></details>
+          <details class="acc"><summary>🎨 Couleurs</summary><div class="in">
+            <div class="pals" id="pz-pal"></div>
+            <p class="small muted" style="margin:0">« Daltonien » se lit aussi avec une vue des couleurs différente. La couleur suit le lieu, jamais le rang.</p>
+          </div></details>
+          <details class="acc"><summary>📐 Axes et échelles</summary><div class="in">
+            <div class="row"><span class="lbl">Regrouper les dates</span><span class="segmented sm" role="group" aria-label="Regrouper" data-pz="grp" data-own="1"><button type="button" aria-pressed="false" data-v="1">Année</button><button type="button" aria-pressed="true" data-v="10">Décennie</button><button type="button" aria-pressed="false" data-v="20">20 ans</button><button type="button" aria-pressed="false" data-v="50">50 ans</button></span></div>
+            <div class="row"><span class="lbl">Échelle</span><span class="segmented sm" role="group" aria-label="Échelle" data-own="1"><button type="button" aria-pressed="true">Linéaire</button><button type="button" aria-pressed="false" disabled title="Pas pour des colonnes empilées : leur hauteur doit partir de zéro">Logarithmique</button></span></div>
+            <p class="small muted" style="margin:0">Le logarithme est proposé pour les courbes et les nuages (magnitudes, prix), pas pour des colonnes.</p>
+          </div></details>
+          <details class="acc"><summary>🏷 Légende et étiquettes</summary><div class="in">
+            <div class="row"><span class="lbl">Légende</span><span class="segmented sm" role="group" aria-label="Légende" data-pz="leg" data-own="1"><button type="button" aria-pressed="true" data-v="top">En haut</button><button type="button" aria-pressed="false" data-v="bottom">En bas</button><button type="button" aria-pressed="false" data-v="none">Cachée</button></span></div>
+            <div class="row"><span class="lbl">Chiffres</span><span class="segmented sm" role="group" aria-label="Chiffres" data-pz="lab" data-own="1"><button type="button" aria-pressed="false" data-v="none">Aucun</button><button type="button" aria-pressed="true" data-v="max">Le plus haut</button><button type="button" aria-pressed="false" data-v="all">Tous les totaux</button></span></div>
+          </div></details>
+          <details class="acc"><summary>📝 Annotations <small id="pz-nn"></small></summary><div class="in">
+            <ul class="notes" id="pz-notes"></ul>
+            <input type="text" id="pz-ntext" value="Ma note" aria-label="Texte de la note">
+            <div class="row"><button type="button" class="button small secondary" id="pz-add">＋ Ajouter une note</button><span class="small muted" id="pz-addhint"></span></div>
+          </div></details>
+          <details class="acc"><summary>↕ Tri et regroupement</summary><div class="in">
+            <div class="row"><span class="lbl">Empiler</span><span class="segmented sm" role="group" aria-label="Ordre" data-pz="ord" data-own="1"><button type="button" aria-pressed="true" data-v="tot">Le plus fréquent en bas</button><button type="button" aria-pressed="false" data-v="abc">Par nom</button></span></div>
+            <div class="row"><span class="lbl">Couleur =</span><select class="ui-select" aria-label="Regrouper par"><option>Lieu de la famille le plus proche</option><option>Intensité (I ≤ 4 · 5 · 6 et plus)</option><option>Source (SisFrance · EPICA)</option></select></div>
+          </div></details>
+          <details class="acc"><summary>🖼 Format, thème, police</summary><div class="in">
+            <div class="row"><span class="lbl">Format</span><span class="segmented sm" role="group" aria-label="Format" data-pz="fmt" data-own="1"><button type="button" aria-pressed="true" data-v="screen">Écran 16:9</button><button type="button" aria-pressed="false" data-v="a4">A4</button><button type="button" aria-pressed="false" data-v="sq">Carré (réseaux)</button></span></div>
+            <div class="row"><span class="lbl">Thème</span><span class="segmented sm" role="group" aria-label="Thème du diagramme" data-pz="thm" data-own="1"><button type="button" aria-pressed="true" data-v="app">Comme l’app</button><button type="button" aria-pressed="false" data-v="light">Clair</button><button type="button" aria-pressed="false" data-v="dark">Sombre</button></span></div>
+            <div class="row"><span class="lbl">Police</span><select class="ui-select" id="pz-font" aria-label="Police"><option value="">Celle de l’app</option><option value="Georgia,'Times New Roman',serif">Archive (avec empattements)</option><option value="Verdana,Tahoma,sans-serif">Très lisible</option></select></div>
+          </div></details>
+        </div>
+        <div class="pz-foot"><button type="button" class="button small" id="pz-tpl">⭐ Enregistrer comme modèle</button><button type="button" class="button small secondary" id="pz-undo">↶ Annuler</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 5 ═══════════ -->
+  <section class="sec" id="s5" aria-labelledby="s5h">
+    <div class="sec-h"><span class="eyebrow">5 · S’en servir</span><h2 id="s5h">Le poser, l’exporter, l’envoyer</h2><p>Un diagramme se pose partout où il y a déjà un bloc « 🏛️ Diagramme » : fiche, récap des données, Studio, présentation. Les sources et leurs licences sont <b>toujours</b> écrites dessous, avec ↗ vers la liste d’origine.</p></div>
+    <div class="use" id="use">
+      <div class="card fiche">
+        <div class="card-head"><div><span class="eyebrow">Personnes · Fiche</span><h3>Jean MAZAUD <small>1772 Tulle – 1841 Tulle · cultivateur</small></h3></div><span class="segmented sm" role="group" aria-label="Mode" id="kiosk-seg" data-own="1"><button type="button" aria-pressed="true" data-k="0">Normal</button><button type="button" aria-pressed="false" data-k="1">🖥 Borne</button></span></div>
+        <div class="card-body">
+          <div class="fblock">
+            <div class="fblock-h"><span>🏛️ Bloc Diagramme · <span id="live-badge"><span class="ui-badge is-green">🔄 à jour</span></span></span><span class="no-kiosk"><button type="button" class="link-button" data-go="#s4">✎ Modifier</button></span></div>
+            <div class="vz" id="use-vz"></div>
+          </div>
+          <p class="kiosk-note">🖥 Mode borne : lecture seule. On regarde, on survole ; pas de modification, pas d’export, pas d’envoi.</p>
+        </div>
+      </div>
+      <div class="card no-kiosk">
+        <div class="card-head"><h3>Utiliser ce diagramme</h3></div>
+        <div>
+          <div class="feat"><span class="ic">🔄</span><div><b>Tenu à jour ou figé</b><span class="why">À jour : il se recalcule à chaque affichage (nouvelle liste, nouvel ancêtre). Figé : il garde ses chiffres d’aujourd’hui.</span></div>
+            <div class="opts"><span class="segmented sm" role="group" aria-label="Mise à jour" id="live-seg" data-own="1"><button type="button" aria-pressed="true" data-l="1">🔄 À jour</button><button type="button" aria-pressed="false" data-l="0">📌 Figé</button></span></div></div>
+          <div class="feat"><span class="ic">📄</span><div><b>Poser dans…</b><span class="why">Une fiche (bloc Diagramme), le récap des données, le tableau de bord.</span></div>
+            <div class="opts"><select class="ui-select" aria-label="Poser dans"><option>Fiche de Jean MAZAUD</option><option>Fiche du lieu Tulle</option><option>📊 Récap des données</option><option>Tableau de bord</option></select><button type="button" class="button small" data-say="Posé dans la fiche de Jean MAZAUD (bloc 🏛️ Diagramme)." data-undo="1">Poser</button></div></div>
+          <div class="feat"><span class="ic">⤓</span><div><b>Exporter</b><span class="why">Avec le titre, les sources et les licences dessous.</span></div>
+            <div class="opts"><span class="segmented sm" role="group" aria-label="Format d’export" data-own="1" id="exp-seg"><button type="button" aria-pressed="true">PNG</button><button type="button" aria-pressed="false">SVG</button><button type="button" aria-pressed="false">PDF</button></span><button type="button" class="button small secondary" data-say="Exporté. 2 personnes vivantes et 1 fiche confidentielle ne sont pas dans l’image.">⤓ Exporter</button></div></div>
+          <div class="feat"><span class="ic">📤</span><div><b>Envoyer vers…</b><span class="why">Comme un objet du Studio ou une diapo : il garde son lien avec les données.</span></div>
+            <div class="opts"><button type="button" class="button small secondary" data-say="Envoyé vers le Studio (nouvelle page « Jean MAZAUD et son temps »)." data-undo="1">🎬 Studio</button><button type="button" class="button small secondary" data-say="Ajouté comme diapo à la présentation « Les MAZAUD de Tulle »." data-undo="1">🖥 Présentation</button></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 6 ═══════════ -->
+  <section class="sec" id="s6" aria-labelledby="s6h">
+    <div class="sec-h"><span class="eyebrow">6 · Vie privée</span><h2 id="s6h">Ce qui ne sort jamais</h2><p>Les mêmes règles que les listes « Dans la famille » (ld_famille) : non réglables.</p></div>
+    <div class="priv">
+      <div class="card"><div class="card-head"><h3>🔒 Les règles</h3></div><div class="card-body"><ul>
+        <li><span>👤</span><span>Les personnes vivantes ne sont jamais dans un export ni un envoi<small>Ni leur nom, ni un point, ni un chiffre qui ne compterait qu’elles.</small></span></li>
+        <li><span>🔒</span><span>Une fiche ou un événement confidentiel n’entre jamais dans le calcul<small>Même pas dans un total : il est retiré avant de compter.</small></span></li>
+        <li><span>🖥</span><span>En mode borne ou en consultation : lecture seule<small>On voit le diagramme figé à sa dernière version, sans les vivants.</small></span></li>
+        <li><span>💻</span><span>Tout se calcule ici, dans le navigateur<small>Les listes et la question ne partent pas sur Internet avec tes lieux.</small></span></li>
+      </ul></div></div>
+      <div class="card"><div class="card-head"><h3>Ce que tu vois à l’export</h3></div><div class="card-body">
+        <div class="exp-line"><span>🔒</span><span><b>2 personnes vivantes et 1 fiche confidentielle</b> ne sont pas dans l’image. Le diagramme exporté compte 58 séismes au lieu de 60 (exemple) : deux lieux de vivants retirés du « près de la famille ».</span></div>
+        <p class="small muted" style="margin:0">Pas de case à cocher pour les remettre : c’est voulu. Pour un usage privé, l’aperçu dans l’app les montre toujours.</p>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- ═══════════ ? ═══════════ -->
+  <section class="sec" id="qs" aria-labelledby="qsh">
+    <div class="sec-h"><span class="eyebrow">À valider</span><h2 id="qsh">? 6 questions pour toi</h2></div>
+    <ol class="qs">
+      <li class="card"><b>Où mettre « 📊 Partir des données » ?</b><p class="opt">A. L’onglet « Depuis l’app » de l’éditeur, renommé. — B. Un bouton de plus dans la galerie. — C. Les deux.</p><p class="reco"><b>Ma reco : C, sans doublon.</b> Un seul écran (l’onglet renommé) ; la galerie « ＋ Nouveau » l’ouvre directement par une tuile. Et sur une liste de données, « 📊 Faire un diagramme » arrive au même endroit, la liste déjà choisie.</p></li>
+      <li class="card"><b>« Prix du pain et naissances » : deux axes ?</b><p class="opt">A. Deux panneaux l’un sous l’autre, même frise des années. — B. Un seul dessin avec un axe à gauche et un à droite.</p><p class="reco"><b>Ma reco : A par défaut.</b> Deux axes font croire à des liens qui n’existent pas (on peut faire coïncider n’importe quelles courbes). Le « deuxième axe à droite » reste dans ⚙️ Personnaliser pour qui le veut.</p></li>
+      <li class="card"><b>Tenu à jour ou figé, au départ ?</b><p class="opt">A. 🔄 À jour. — B. 📌 Figé. — C. À jour dans l’app, figé quand on l’exporte ou l’envoie.</p><p class="reco"><b>Ma reco : C.</b> Dans l’app il suit tes nouvelles données ; ce qui part (PNG, Studio, présentation) garde ses chiffres et sa date, pour ne pas changer sous les yeux de quelqu’un.</p></li>
+      <li class="card"><b>Les 14 dessins : tous visibles au départ ?</b><p class="opt">A. Les 14. — B. Seulement les « ✨ conseillés » pour la source choisie, les autres derrière « Tous ».</p><p class="reco"><b>Ma reco : B.</b> 4 à 6 dessins conseillés selon la source (des dates → colonnes, frise, calendrier ; des lieux → carte) ; « Tous » est à un clic. Moins de boutons, même liberté.</p></li>
+      <li class="card"><b>« Près des lieux de la famille » : quel rayon par défaut ?</b><p class="opt">A. 15 km, comme les listes. — B. Selon la sorte : 15 km (Tour de France, monuments), 150 km (séismes, batailles).</p><p class="reco"><b>Ma reco : B.</b> Chaque liste dit déjà son rayon (familyKm) ; un séisme se ressent loin, une étape non. Le − / + reste sur la pastille.</p></li>
+      <li class="card"><b>Que faire des « ⭐ Modèles » ?</b><p class="opt">A. Seulement pour moi. — B. Aussi partageables (fichier, site familial), sans aucune donnée dedans.</p><p class="reco"><b>Ma reco : B.</b> Un modèle = la source, les filtres, les champs et les réglages, jamais les chiffres ni les noms : un cousin l’ouvre et il se remplit avec <i>son</i> arbre.</p></li>
+    </ol>
+  </section>
+
+  <!-- ═══════════ ✓ Décisions ═══════════ -->
+  <section class="sec" id="dec" aria-labelledby="dech">
+    <div class="sec-h"><span class="eyebrow">Validé</span><h2 id="dech">✓ Décisions</h2><p>Les six recommandations sont acceptées, plus un réglage. Fait dans <code>assets/js/heritage-diagram-donnees.js</code> (et quelques lignes dans l’éditeur commun) ; essai : <code>tests/test-diagrammes-donnees.js</code>.</p></div>
+    <ol class="qs">
+      <li class="card"><b>Un seul écran, trois portes</b><p class="reco">L’onglet « Depuis l’app » de l’éditeur s’appelle <b>« 📊 Partir des données »</b> (🌳 Mon arbre · 🧰 Une liste · 💬 Une question). La galerie « ＋ Nouveau » a une tuile « 📊 Partir des données », et chaque liste de données (Listes → 🧰 Données) un bouton « 📊 Faire un diagramme » qui ouvre ce même écran, la liste et ses filtres déjà choisis. 🌳 Mon arbre garde exactement ce qu’il faisait.</p></li>
+      <li class="card"><b>Deux séries différentes : deux panneaux</b><p class="reco">« ＋ Une 2e série » donne deux panneaux l’un sous l’autre, même frise des années, chacun son échelle (petites courbes en grille). Le deuxième axe à droite reste dans ⚙️ Personnaliser (« Deux séries : Deux panneaux | Deuxième axe à droite »).</p></li>
+      <li class="card"><b>À jour dans l’app, figé quand il sort</b><p class="reco">Une seule case, le nom de toujours : <b>« Tenir à jour »</b> (cochée au départ). PNG, SVG, PDF, impression, fichier du diagramme, Studio et Présentation sont calculés au moment de sortir, datés (« chiffres du … ») et ne changent plus. Pas de 🔄 / 📌 en plus.</p></li>
+      <li class="card"><b>Les dessins conseillés d’abord</b><p class="reco">Seulement les dessins qui vont avec la source (des dates → colonnes, courbe, frise, calendrier ; des lieux → carte), puis « Tous » à un clic et « Tous les types du catalogue ▾ ». <b>Le nombre est un réglage</b> : Réglages → Graphiques — Diagrammes → « Diagrammes : nombre de types conseillés » (clé <code>genealogie-diagrammes-conseilles</code>, 5 au départ, de 3 à 12, ou « Tous » : pas d’étape « conseillés »). Les 14 dessins existaient déjà dans le catalogue (soleil = soleil des lignées, réseau, vie d’un ancêtre = frise des membres) : ils savent maintenant lire une liste, aucun type en double.</p></li>
+      <li class="card"><b>Le rayon, liste par liste</b><p class="reco">« 📍 Près de la famille » prend le rayon de la liste (<code>familyKm</code> : 150 km pour les séismes réunis), sinon celui de sa sorte (séismes, batailles 150 km ; Tour de France, monuments 15 km), sinon le réglage des listes (15 km). Le − / + de la pastille le change, et il est retenu pour cette liste.</p></li>
+      <li class="card"><b>⭐ Modèles partageables, sans données</b><p class="reco">« ⭐ Enregistrer comme modèle » (⚙️ Personnaliser) garde la mise en forme et la recette (liste, période, rayon, champs, dessin) : jamais un chiffre, un lieu, un nom ni la phrase d’une question. « ⤓ Partager (fichier) » et « ⤒ Ouvrir un modèle » : un cousin l’ouvre, il se remplit avec son arbre.</p></li>
+      <li class="card"><b>Vie privée</b><p class="reco">Ce qui sort est calculé sans les personnes vivantes ni leurs lieux (<code>ld_famille?share=1</code>) ; une fiche ou un événement confidentiel n’entre jamais dans le calcul. Mode consultation : lecture seule, rien n’est exporté ni envoyé, rien n’est téléchargé (seulement les listes présentes sur l’ordinateur).</p></li>
+      <li class="card"><b>Rapide</b><p class="reco">Rien n’est lu avant qu’on choisisse une liste ; au-delà de 50 000 lignes, le calcul avance par morceaux de 10 000 (la page ne gèle pas). Les sources et leurs licences sont écrites sous le dessin (et dans les exports), avec ↗ vers la liste d’origine.</p></li>
+    </ol>
+  </section>
+</div>
+<div class="tip" id="tip" hidden></div>
+<div class="toast" id="toast" role="status" hidden><span id="toast-t"></span><button type="button" id="toast-u">↶ Annuler</button></div>
+<style>
+.ui-listbar-chip{white-space:nowrap;max-width:100%}
+.vz-src .nw{white-space:nowrap}
+.ui-listbar-chip .mini{border:0;background:none;color:inherit;font:inherit;cursor:pointer;padding:0 3px;min-width:18px}
+.ui-listbar-chip.off{cursor:pointer}
+.ui-listbar-chip.off .mini{display:none}
+</style>
+<script>
+(function(){
+'use strict';
+var $=function(s,r){return (r||document).querySelector(s);}, $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));};
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+var root=document.documentElement;
+
+/* ── thème de l'app ── */
+$$('[data-theme-set]').forEach(function(b){b.addEventListener('click',function(){var t=b.dataset.themeSet;if(t==='auto')root.removeAttribute('data-theme');else root.setAttribute('data-theme',t);$$('[data-theme-set]').forEach(function(x){x.setAttribute('aria-pressed',String(x===b));});});});
+
+/* ── message en bas, avec ↶ Annuler ── */
+var toast=$('#toast'),tt=$('#toast-t'),tu=$('#toast-u'),tTimer=null,tUndo=null;
+function say(msg,undo){tt.textContent=msg;tUndo=undo||null;tu.hidden=!undo;toast.hidden=false;clearTimeout(tTimer);tTimer=setTimeout(function(){toast.hidden=true;},6000);}
+tu.addEventListener('click',function(){if(tUndo)tUndo();toast.hidden=true;});
+
+/* ── info-bulle des marques ── */
+var tip=$('#tip');
+document.addEventListener('mouseover',function(e){var t=e.target.closest&&e.target.closest('[data-tip]');if(!t){tip.hidden=true;return;}tip.innerHTML=t.getAttribute('data-tip');tip.hidden=false;});
+document.addEventListener('mousemove',function(e){if(tip.hidden)return;var w=tip.offsetWidth,h=tip.offsetHeight,x=e.clientX+14,y=e.clientY+14;if(x+w>innerWidth-8)x=e.clientX-w-14;if(y+h>innerHeight-8)y=e.clientY-h-14;tip.style.left=Math.max(8,x)+'px';tip.style.top=Math.max(8,y)+'px';});
+window.addEventListener('scroll',function(){tip.hidden=true;},{passive:true});
+
+/* ── clics communs : segmentés, liens « aller à », messages ── */
+document.addEventListener('click',function(e){
+  var b=e.target.closest('.segmented button');
+  if(b&&!b.disabled&&!b.dataset.themeSet&&!b.parentNode.classList.contains('tabs')){$$('button',b.parentNode).forEach(function(x){x.setAttribute('aria-pressed',String(x===b));});}
+  var g=e.target.closest('[data-go]');if(g){var t=$(g.dataset.go);if(t)t.scrollIntoView({behavior:'smooth',block:'start'});}
+  var s=e.target.closest('[data-say]');if(s)say(s.dataset.say,s.dataset.undo?function(){say('Annulé.');}:null);
+});
+
+/* ═════════ petits outils de dessin ═════════ */
+var fmt=function(v){return (Math.round(v*10)/10).toString().replace('.',',');};
+function T(x,y,txt,o){o=o||{};return '<text x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" font-size="'+(o.fs||11)+'" text-anchor="'+(o.a||'start')+'" style="fill:var('+(o.c||'--muted')+')'+(o.w?';font-weight:'+o.w:'')+(o.halo?';stroke:var(--vz-bg);stroke-width:3px;paint-order:stroke;stroke-linejoin:round':'')+'">'+esc(txt)+'</text>';}
+function topRound(x,y,w,h,r){r=Math.min(r,h,w/2);return 'M'+x+','+(y+h)+'V'+(y+r)+'Q'+x+','+y+' '+(x+r)+','+y+'H'+(x+w-r)+'Q'+(x+w)+','+y+' '+(x+w)+','+(y+r)+'V'+(y+h)+'Z';}
+function niceMax(v){var p=Math.pow(10,Math.floor(Math.log10(v||1))),n=v/p;return (n<=1?1:n<=2?2:n<=2.5?2.5:n<=5?5:10)*p;}
+function svg(W,H,inner,label){return '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+esc(label||'Diagramme')+'">'+inner+'</svg>';}
+function legend(series){return '<div class="vz-leg">'+series.map(function(s){return '<span><i style="background:var(--'+s.c+')"></i>'+esc(s.name)+'</span>';}).join('')+'</div>';}
+function sources(items){return '<div class="vz-src"><span>Sources :</span>'+items.map(function(s){return '<span>'+esc(s[0])+' <span class="nw">'+(s[1]?'<span class="ui-badge is-grey">'+esc(s[1])+'</span> ':'')+'<a class="srca" href="#s5" title="Ouvrir la liste d’origine">↗</a></span></span>';}).join('<span aria-hidden="true">·</span>')+'</div>';}
+function head(t,st){return '<p class="vz-title">'+esc(t)+'</p>'+(st?'<p class="vz-sub">'+esc(st)+'</p>':'');}
+var tipA=function(h){return ' data-tip="'+esc(h)+'"';};
+function wOf(el){return Math.max(250,Math.floor(el.clientWidth||300));}
+
+/* colonnes empilées : {W,H,cats,series:[{name,c,vals}],notes:[{i,t}],lab,unit} */
+function stacked(o){
+  var W=o.W,H=o.H,ml=30,mr=8,mt=(o.notes&&o.notes.length)?40:12,mb=24,pw=W-ml-mr,ph=H-mt-mb,n=o.cats.length;
+  var tot=o.cats.map(function(_,i){return o.series.reduce(function(a,s){return a+(s.vals[i]||0);},0);});
+  var mx=Math.max.apply(null,tot),max=niceMax(mx*1.1),band=pw/n,bw=Math.max(1.5,Math.min(44,band*0.66));
+  var g='';
+  for(var k=0;k<=4;k++){var v=max*k/4,y=mt+ph-ph*v/max;g+='<line x1="'+ml+'" x2="'+(W-mr)+'" y1="'+y+'" y2="'+y+'" style="stroke:var(--vz-grid)"/>'+T(ml-5,y+3.5,fmt(v),{a:'end',fs:10});}
+  var every=Math.max(1,Math.ceil(34/band)),maxI=tot.indexOf(mx);
+  o.cats.forEach(function(c,i){
+    var x=ml+band*i+(band-bw)/2,y=mt+ph,topJ=-1;
+    o.series.forEach(function(s,j){if(s.vals[i])topJ=j;});
+    o.series.forEach(function(s,j){var v=s.vals[i];if(!v)return;var h=ph*v/max;y-=h;
+      var d=j===topJ?topRound(x,y,bw,h,Math.min(3,bw/3)):'M'+x+','+y+'h'+bw+'v'+h+'h'+(-bw)+'Z';
+      g+='<path class="hit" data-i="'+i+'" d="'+d+'" style="fill:var(--'+s.c+');stroke:var(--vz-bg)" stroke-width="'+(bw>6?1.5:0.5)+'"'+tipA('<b>'+c+'</b>'+s.name+' : '+v+(o.unit?' '+o.unit:''))+'/>';});
+    if(i%every===0)g+=T(x+bw/2,H-mb+15,c,{a:'middle',fs:10});
+    if(tot[i]&&(o.lab==='all'&&band>=18||o.lab==='max'&&i===maxI))g+=T(x+bw/2,y-4,fmt(tot[i]),{a:'middle',fs:10.5,c:'--ink',w:700});
+  });
+  g+='<line x1="'+ml+'" x2="'+(W-mr)+'" y1="'+(mt+ph)+'" y2="'+(mt+ph)+'" style="stroke:var(--muted)"/>';
+  (o.notes||[]).forEach(function(nt,k){if(nt.i<0||nt.i>=n)return;var cx=ml+band*nt.i+band/2,ty=mt+ph-ph*tot[nt.i]/max,ly=8+k%2*14;
+    var right=cx>W*0.55;g+='<line x1="'+cx+'" x2="'+cx+'" y1="'+(ty-6)+'" y2="'+(ly+3)+'" style="stroke:var(--ink)" stroke-dasharray="2 2"/>'+T(cx+(right?-4:4),ly+4,nt.t,{a:right?'end':'start',fs:10.5,c:'--ink',w:600,halo:1});});
+  return svg(W,H,g,o.label);
+}
+
+/* ═════════ les données (exemple) ═════════ */
+var PLACES=[{name:'Autour de Tulle',c:'s1'},{name:'Autour de Nice',c:'s2'},{name:'Autour de Salon',c:'s3'}];
+var DEC=[];for(var d=1800;d<=1910;d+=10)DEC.push(d);
+var SEIS=[[1,0,2,1,0,1,1,0,2,1,0,1],[2,3,1,2,4,2,3,1,9,3,2,1],[0,1,1,0,1,2,1,1,2,1,5,2]];
+/* séismes « année par année », pour regrouper autrement */
+var SEISY=SEIS.map(function(row,p){var out=[];row.forEach(function(n,di){for(var k=0;k<n;k++){var y=DEC[di]+((k*7+p*3+di)%10);if(p===1&&di===8&&k<6)y=1887;if(p===2&&di===10&&k<4)y=1909;out.push(y);}});return out;});
+function groupSeis(step,from,to){var cats=[],idx={};for(var y=from;y<=to;y+=step){idx[y]=cats.length;cats.push(step===1?String(y):step===10?y+'':y+'–'+String(y+step-1).slice(2));}
+  var ser=PLACES.map(function(p,j){var v=cats.map(function(){return 0;});SEISY[j].forEach(function(y){var b=from+Math.floor((y-from)/step)*step;if(idx[b]!=null)v[idx[b]]++;});return {name:p.name,c:p.c,vals:v};});
+  return {cats:cats,series:ser,binOf:function(y){return idx[from+Math.floor((y-from)/step)*step];}};}
+var BIRTH={cats:['1760','1770','1780','1790','1800','1810','1820','1830','1840','1850','1860','1870','1880','1890','1900'],series:[{name:'Tulle',c:'s1',vals:[2,3,4,3,5,6,4,5,3,4,2,2,1,1,0]},{name:'Nice',c:'s2',vals:[0,0,1,1,2,2,3,4,5,4,6,5,3,2,2]},{name:'Salon-de-Provence',c:'s3',vals:[0,1,0,1,1,2,2,1,3,3,2,4,4,3,2]}]};
+var QDEC=[],QT=[[1,0,1,0,1,0,0,1,0,1,0,0,1,0,1,0,0,1,0,1],[0,1,0,0,0,1,0,0,1,0,0,0,0,1,0,0,1,0,0,0],[0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0]];
+for(var q=1700;q<=1890;q+=10)QDEC.push(String(q));
+
+/* ═════════ 1 · Partir des données ═════════ */
+var SRC={
+  arbre:{type:'🧱 Colonnes empilées',name:'Naissances de la famille par décennie',
+    pane:'<span class="segmented sm" role="group" aria-label="Quoi dans l’arbre"><button type="button" aria-pressed="false">👤 Personnes</button><button type="button" aria-pressed="true">📅 Événements</button><button type="button" aria-pressed="false">📍 Lieux</button><button type="button" aria-pressed="false">🛠 Métiers</button><button type="button" aria-pressed="false">📜 Sources</button></span><p class="hint">Les réglages de « 🧮 Compter dans ma base » restent : groupe de personnes, période, regroupement, « Tenir à jour ».</p>',
+    flt:[['📅 Naissances'],['📅 1760–1909'],['👪 Ancêtres directs'],['🔒 Sans les vivants']],
+    map:[['X','Année → décennie',1],['Y','Nombre de naissances',1],['Couleur','Commune de naissance',1]],
+    map2:[['Taille','—'],['Étiquette','Total de la colonne'],['Groupe','—'],['Temps','—']],
+    sum:'<b>129 naissances</b> de tes ancêtres directs, 1760–1909, par décennie et par commune (exemple).',
+    draw:function(W){return legend(BIRTH.series)+stacked({W:W,H:Math.round(Math.min(330,Math.max(220,W*0.5))),cats:BIRTH.cats,series:BIRTH.series,lab:'max',unit:'naissances',label:'Naissances par décennie'})+sources([['Ta généalogie','privée']]);}},
+  liste:{type:'🧱 Colonnes empilées',name:'Séismes autour des lieux de la famille',
+    pane:'<select class="ui-select" id="src-list" aria-label="Liste de données" style="width:100%"><optgroup label="🌋 Séismes, volcans et terrains"><option value="seis" selected>🔀 Séismes réunis (SisFrance + EPICA)</option><option>Éruptions volcaniques</option></optgroup><optgroup label="🌍 Grands événements et dates"><option value="bat">🔀 Batailles et sièges réunis</option><option>Épidémies</option></optgroup><optgroup label="🌊 Eaux, crues et mers"><option>🔀 Crues réunies</option><option>Repères de crues — Corrèze</option></optgroup><optgroup label="💶 Prix, monnaies et chiffres"><option value="pain">Mercuriales — prix du pain</option></optgroup><optgroup label="🏆 Sport"><option value="tdf">Tour de France</option></optgroup><optgroup label="⛅ Climat, ciel et saisons"><option>Météo d’autrefois — Nice</option></optgroup><optgroup label="… et les 14 autres thèmes"><option>Tout voir (🧰 Données)</option></optgroup></select><p class="hint">Rangées par les 20 thèmes ; 🔀 = liste réunie (plusieurs sources, sans doublons). Une liste ouverte a aussi « 📊 Faire un diagramme ».</p>',
+    flt:[['📅 1800–1919'],['📍 Près de la famille',150,'km'],['👪 Seulement quand la famille y vivait'],['🌋 Intensité ≥ IV']],
+    map:[['X','Date → décennie',1],['Y','Nombre de séismes',1],['Couleur','Lieu de la famille le plus proche',1]],
+    map2:[['Taille','—'],['Étiquette','Nom du séisme (au survol)'],['Groupe','—'],['Temps','Date (pour ▶ lire dans le temps)']],
+    sum:'<b>60 séismes</b> ressentis à moins de 150 km de Tulle, Nice ou Salon, 1800–1919 (exemple).',
+    draw:function(W){var g=groupSeis(10,1800,1910);return legend(g.series)+stacked({W:W,H:Math.round(Math.min(330,Math.max(220,W*0.5))),cats:g.cats,series:g.series,lab:'max',unit:'séismes',notes:[{i:g.binOf(1887),t:'1887 · Ligurie'},{i:g.binOf(1909),t:'1909 · Lambesc'}],label:'Séismes par décennie'})+sources([['SisFrance (BRGM · EDF · IRSN)','conditions d’usage'],['EPICA (INGV)','CC BY 4.0'],['Ta généalogie','privée']]);}},
+  question:{type:'🧱 Colonnes empilées',name:'Les séismes près de Tulle 1700–1900',
+    pane:'<form class="ask" onsubmit="return false"><span aria-hidden="true">💬</span><input type="search" value="les séismes près de Tulle 1700–1900" aria-label="Ta question"><button type="submit" class="button small">Comprendre</button></form><div class="understood"><span class="lbl">J’ai compris</span><span class="ui-listbar-chip">Quoi : 🌋 séismes</span><span class="ui-listbar-chip">Où : 📍 Tulle, 150 km</span><span class="ui-listbar-chip">Quand : 📅 1700–1899</span></div><p class="hint">La même lecture que « Pose une question sur les données » du récap. Touche une pastille pour corriger.</p>',
+    flt:[['📅 1700–1899'],['📍 Autour de Tulle',150,'km']],
+    map:[['X','Date → décennie',1],['Y','Nombre de séismes',1],['Couleur','Intensité ressentie',1]],
+    map2:[['Taille','—'],['Étiquette','Nom du séisme (au survol)'],['Groupe','—'],['Temps','Date']],
+    sum:'<b>23 séismes</b> ressentis à moins de 150 km de Tulle entre 1700 et 1899 (exemple).',
+    draw:function(W){var ser=[{name:'Intensité IV et moins',c:'s1',vals:QT[0]},{name:'Intensité V',c:'s2',vals:QT[1]},{name:'Intensité VI et plus',c:'s3',vals:QT[2]}];return legend(ser)+stacked({W:W,H:Math.round(Math.min(330,Math.max(220,W*0.5))),cats:QDEC,series:ser,lab:'none',unit:'séismes',label:'Séismes près de Tulle'})+sources([['SisFrance (BRGM · EDF · IRSN)','conditions d’usage'],['EPICA (INGV)','CC BY 4.0']]);}}
+};
+var cur='liste',fltState=[];
+function chipHtml(f,i){var off=f.off?' off':'';var num=f[1]!=null?' · <button type="button" class="mini" data-fm="'+i+'" aria-label="Moins">−</button>'+f.v+' '+f[2]+'<button type="button" class="mini" data-fp="'+i+'" aria-label="Plus">+</button>':'';
+  return '<span class="ui-listbar-chip'+off+'" data-fi="'+i+'">'+esc(f[0])+num+(f.off?'':' <button type="button" class="mini chip-x" data-fx="'+i+'" aria-label="Retirer">×</button>')+'</span>';}
+function paintFlt(){$('#flt').innerHTML=fltState.map(chipHtml).join('')+'<button type="button" class="link-button" data-say="＋ Filtre : période, lieu, rayon, famille, ou une colonne de la liste (magnitude, pays…).">＋ Filtre</button>';}
+function mapHtml(rows){return rows.map(function(r){return '<span class="lbl">'+r[0]+'</span><select class="ui-select" aria-label="'+esc(r[0])+'"><option>'+esc(r[1])+'</option><option>—</option><option>Autre colonne…</option></select>'+(r[2]?'<span class="sug">✨ proposé</span>':'');}).join('');}
+function setSrc(k){cur=k;var s=SRC[k];$('#src-pane').innerHTML=s.pane;fltState=s.flt.map(function(f){var c=f.slice();c.v=f[1];return c;});paintFlt();
+  $('#fmap').innerHTML=mapHtml(s.map);$('#fmap2').innerHTML=mapHtml(s.map2);$('#ed-name').value=s.name;$('#ed-type').textContent=s.type+' ▾';$('#ed-sum').innerHTML=s.sum;drawEd();
+  var sl=$('#src-list');if(sl)sl.addEventListener('change',function(){var v=sl.value,ex={bat:1,tdf:3,pain:4}[v];if(ex!=null){say('Champs proposés pour cette liste : voir l’exemple plus bas.');showEx(ex);$('#s3').scrollIntoView({behavior:'smooth'});}else if(v!=='seis')say('Les champs se proposent selon les colonnes de la liste (dates, lieu, nombre…).');});}
+function drawEd(){var el=$('#ed-vz');el.innerHTML=SRC[cur].draw(wOf(el));}
+$('#src-seg').addEventListener('click',function(e){var b=e.target.closest('[data-src]');if(b)setSrc(b.dataset.src);});
+$('#flt').addEventListener('click',function(e){var t=e.target,i;
+  if((i=t.dataset.fx)!=null){fltState[i].off=true;paintFlt();say('Filtre retiré : '+fltState[i][0]+'.',function(){fltState[i].off=false;paintFlt();});return;}
+  if((i=t.dataset.fm)!=null){fltState[i].v=Math.max(5,fltState[i].v-(fltState[i].v>50?25:5));paintFlt();return;}
+  if((i=t.dataset.fp)!=null){fltState[i].v=Math.min(500,fltState[i].v+(fltState[i].v>=50?25:5));paintFlt();return;}
+  var c=t.closest('.ui-listbar-chip.off');if(c){fltState[c.dataset.fi].off=false;paintFlt();}});
+
+/* ═════════ 2 · la galerie ═════════ */
+var S=function(c){return 'style="fill:var(--'+c+')"';},L=function(c){return 'style="fill:none;stroke:var(--'+c+');stroke-width:2"';},G='style="stroke:var(--vz-grid)"';
+var TH={
+ bars:'<line x1="8" x2="112" y1="56" y2="56" '+G+'/>'+[[14,30,'s1'],[30,18,'s1'],[46,36,'s1'],[62,24,'s1'],[78,40,'s1'],[94,14,'s1']].map(function(b){return '<rect x="'+b[0]+'" y="'+(56-b[1])+'" width="11" height="'+b[1]+'" rx="2" '+S(b[2])+'/><rect x="'+b[0]+'" y="'+(56-b[1]*0.45)+'" width="11" height="'+(b[1]*0.45)+'" '+S('s2')+'/>';}).join(''),
+ lines:'<line x1="8" x2="112" y1="56" y2="56" '+G+'/><path d="M8 50 L28 42 L48 46 L68 30 L88 34 L112 18 L112 56 L8 56Z" style="fill:var(--s1);opacity:.2"/><path d="M8 50 L28 42 L48 46 L68 30 L88 34 L112 18" '+L('s1')+'/><path d="M8 40 L28 44 L48 36 L68 40 L88 26 L112 30" '+L('s2')+'/>',
+ scatter:[[18,44,4],[30,36,7],[44,40,3],[52,24,9],[66,30,5],[78,18,6],[92,22,4],[100,12,8]].map(function(p,i){return '<circle cx="'+p[0]+'" cy="'+p[1]+'" r="'+p[2]+'" '+S(i%2?'s2':'s1')+' opacity=".75"/>';}).join(''),
+ map:'<path d="M40 6 L70 4 L96 16 L104 34 L92 56 L58 60 L30 54 L16 36 L24 18Z" style="fill:var(--vz-grid);stroke:var(--muted)"/>'+[[50,26],[56,30],[80,46],[72,48],[46,40]].map(function(p,i){return '<circle cx="'+p[0]+'" cy="'+p[1]+'" r="'+(3+i)+'" '+S('s1')+' opacity=".7"/>';}).join('')+'<path d="M50 26 Q70 20 80 46" '+L('s2')+'/>',
+ frise:[[10,70,12,'s1'],[30,100,26,'s2'],[50,94,40,'s3']].map(function(b){return '<rect x="'+b[0]+'" y="'+b[2]+'" width="'+(b[1]-b[0])+'" height="8" rx="2" '+S(b[3])+' opacity=".45"/>';}).join('')+[24,46,62,78,90].map(function(x){return '<path d="M'+x+' 52 l4 4 l-4 4 l-4 -4Z" '+S('s2')+'/>';}).join(''),
+ cal:(function(){var s='';for(var r=0;r<4;r++)for(var c=0;c<12;c++){var v=((r*7+c*5)%9)/9;s+='<rect x="'+(8+c*8.7)+'" y="'+(8+r*12)+'" width="7.5" height="10.5" style="fill:var(--s1);opacity:'+(0.15+v*0.85).toFixed(2)+'"/>';}return s;})(),
+ tree:'<rect x="8" y="6" width="58" height="52" '+S('s1')+'/><rect x="68" y="6" width="44" height="30" '+S('s2')+'/><rect x="68" y="38" width="22" height="20" '+S('s3')+'/><rect x="92" y="38" width="20" height="20" '+S('s4')+'/><rect x="8" y="40" width="28" height="18" style="fill:var(--s1);opacity:.6"/>',
+ sun:'<circle cx="60" cy="32" r="10" '+S('s1')+'/><path d="M60 14 A18 18 0 0 1 78 32 L70 32 A10 10 0 0 0 60 22Z" '+S('s2')+'/><path d="M78 32 A18 18 0 0 1 48 46 L54 39 A10 10 0 0 0 70 32Z" '+S('s3')+'/><path d="M48 46 A18 18 0 0 1 60 14 L60 22 A10 10 0 0 0 54 39Z" '+S('s4')+'/><circle cx="60" cy="32" r="28" style="fill:none;stroke:var(--s1);stroke-width:6;opacity:.35"/>',
+ sankey:'<rect x="8" y="6" width="6" height="26" '+S('s1')+'/><rect x="8" y="36" width="6" height="22" '+S('s2')+'/><rect x="106" y="6" width="6" height="18" '+S('s3')+'/><rect x="106" y="28" width="6" height="30" '+S('s4')+'/><path d="M14 14 C60 14 60 14 106 14" style="fill:none;stroke:var(--s1);stroke-width:12;opacity:.4"/><path d="M14 27 C60 27 60 40 106 40" style="fill:none;stroke:var(--s1);stroke-width:8;opacity:.4"/><path d="M14 47 C60 47 60 50 106 50" style="fill:none;stroke:var(--s2);stroke-width:18;opacity:.4"/>',
+ net:'<path d="M30 20 L60 34 L90 16 M60 34 L84 50 M60 34 L28 50 M30 20 L28 50" style="fill:none;stroke:var(--muted)"/>'+[[30,20,'s1',6],[60,34,'s2',8],[90,16,'s3',5],[84,50,'s1',5],[28,50,'s3',5]].map(function(p){return '<circle cx="'+p[0]+'" cy="'+p[1]+'" r="'+p[3]+'" '+S(p[2])+'/>';}).join(''),
+ radar:'<path d="M60 6 L86 22 L80 54 L40 54 L34 22Z" style="fill:none;stroke:var(--vz-grid)"/><path d="M60 14 L78 25 L72 48 L46 46 L44 26Z" style="fill:var(--s1);opacity:.3;stroke:var(--s1);stroke-width:2"/>',
+ pyr:[0,1,2,3,4,5].map(function(i){var a=[14,22,30,34,38,40][i],b=[12,20,28,36,38,42][i];return '<rect x="'+(60-a)+'" y="'+(6+i*9)+'" width="'+a+'" height="7.5" '+S('s1')+'/><rect x="61" y="'+(6+i*9)+'" width="'+b+'" height="7.5" '+S('s2')+'/>';}).join(''),
+ multi:[0,1,2,3].map(function(i){var x=8+(i%2)*56,y=6+Math.floor(i/2)*28;return '<rect x="'+x+'" y="'+y+'" width="48" height="24" style="fill:none;stroke:var(--vz-grid)"/><rect x="'+(x+6+i*3)+'" y="'+(y+10)+'" width="'+(26-i*2)+'" height="5" '+S('s1')+' opacity=".5"/><path d="M'+(x+16+i*2)+' '+(y+8)+' l3 4.5 l-3 4.5 l-3 -4.5Z" '+S('s2')+'/>';}).join(''),
+ life:'<rect x="10" y="22" width="100" height="9" rx="2" '+S('s1')+' opacity=".35"/>'+[[24,'s2'],[42,'s2'],[60,'s3'],[78,'s2'],[96,'s3']].map(function(p){return '<path d="M'+p[0]+' 40 l4 5 l-4 5 l-4 -5Z" '+S(p[1])+'/>';}).join('')+'<path d="M10 14 L110 14" style="stroke:var(--muted)"/><circle cx="34" cy="14" r="3" '+S('s1')+'/><circle cx="86" cy="14" r="3" '+S('s1')+'/>'
+};
+var TYPES=[
+ ['bars','Barres et colonnes','Empilées, groupées, à 100 % ; couchées pour les noms longs.','déjà là',1],
+ ['lines','Lignes et aires','Une évolution : prix, températures, nombre par année.','déjà là',1],
+ ['scatter','Nuage de points, bulles','Deux chiffres à la fois : magnitude × distance, âge × année.','déjà là',1],
+ ['map','Carte','Points, chaleur, zones (département, commune), flèches des migrations.','élargi',1],
+ ['frise','Frise chronologique','Les bandes de vie et, par-dessus, les événements d’une liste.','élargi',1],
+ ['cal','Calendrier (année × mois)','Les mois qui reviennent : crues, mariages, épidémies.','déjà là',1],
+ ['tree','Rectangles (treemap)','Des parts emboîtées : thème → liste → lieu.','déjà là',0],
+ ['sun','Soleil (anneaux)','Comme le soleil des lignées, mais pour n’importe quelles données.','nouveau',0],
+ ['sankey','Flux (Sankey)','D’où vers où : métiers → communes, naissance → décès.','déjà là',0],
+ ['net','Réseau','Personnes, lieux et événements reliés : qui était où, quand.','nouveau',0],
+ ['radar','Radar','Plusieurs notes par lieu ou par ancêtre.','déjà là',0],
+ ['pyr','Histogramme, pyramide des âges','Des valeurs rangées par tranches ; hommes / femmes.','déjà là',0],
+ ['multi','Petits multiples','Un petit dessin par ancêtre, par lieu ou par thème, même échelle.','élargi',1],
+ ['life','Vie d’un ancêtre','Sa vie, ses lieux, et ce qui se passait autour (guerres, séismes, prix).','nouveau',0]
+];
+function paintGal(fit){$('#gal').innerHTML=TYPES.map(function(t){var b=t[3]==='nouveau'?'is-blue':t[3]==='élargi'?'is-orange':'is-grey';
+  return '<button type="button" class="gt'+(fit&&!t[4]?' dim':'')+'" data-t="'+t[0]+'"><svg viewBox="0 0 120 64" aria-hidden="true">'+TH[t[0]]+'</svg><span class="bdg"><span class="ui-badge '+b+'">'+t[3]+'</span>'+(fit&&t[4]?'<span class="ui-badge is-green">✨ conseillé</span>':'')+'</span><b>'+esc(t[1])+'</b><small>'+esc(t[2])+'</small></button>';}).join('');}
+$('#gal-seg').addEventListener('click',function(e){var b=e.target.closest('[data-g]');if(b)paintGal(b.dataset.g==='fit');});
+$('#gal').addEventListener('click',function(e){var b=e.target.closest('.gt');if(!b)return;var t=TYPES.filter(function(x){return x[0]===b.dataset.t;})[0];say('Dessin : '+t[1]+'. Les champs proposés suivent (X, Y, couleur…).',function(){say('Revenu aux colonnes empilées.');});});
+
+/* ═════════ 3 · les exemples ═════════ */
+var ANC=[{n:'Jean MAZAUD',b:1772,d:1841,w:'cultivateur, Tulle',k:['Austerlitz','Waterloo']},{n:'Pierre LACOMBE',b:1831,d:1902,w:'pêcheur, Nice',k:['Solférino','Sedan']},{n:'Marie LACOMBE',b:1856,d:1931,w:'couturière, Nice',k:['Sedan','Verdun']},{n:'Louis DURAND',b:1889,d:1918,w:'cheminot, Salon',k:['Marne','Verdun']}];
+var BAT=[[1792,'Valmy'],[1794,'Fleurus'],[1797,'Rivoli'],[1800,'Marengo'],[1805,'Austerlitz'],[1806,'Iéna'],[1807,'Eylau'],[1809,'Wagram'],[1812,'La Moskova'],[1813,'Leipzig'],[1815,'Waterloo'],[1830,'Prise d’Alger'],[1855,'Sébastopol'],[1859,'Magenta'],[1859.5,'Solférino'],[1863,'Puebla'],[1870,'Gravelotte'],[1870.6,'Sedan'],[1914,'Marne'],[1916,'Verdun'],[1916.5,'Somme'],[1917,'Chemin des Dames'],[1918,'Marne (2e)']];
+function lifePanel(a,W,H,rg){var ml=6,mr=6,x0=rg?rg[0]:1770,x1=rg?rg[1]:1935,X=function(y){return ml+(y-x0)/(x1-x0)*(W-ml-mr);};
+  var g='<line x1="'+ml+'" x2="'+(W-mr)+'" y1="'+(H-16)+'" y2="'+(H-16)+'" style="stroke:var(--line-color)"/>';
+  (rg?[1780,1800,1820,1840]:[1800,1850,1900]).forEach(function(y){g+='<line x1="'+X(y)+'" x2="'+X(y)+'" y1="'+(H-19)+'" y2="'+(H-13)+'" style="stroke:var(--muted)"/>'+T(X(y),H-2,String(y),{a:'middle',fs:10});});
+  g+='<rect x="'+X(a.b)+'" y="'+(H-38)+'" width="'+(X(a.d)-X(a.b))+'" height="12" rx="3" style="fill:var(--s1);fill-opacity:.25;stroke:var(--s1)"/>';
+  var inLife=BAT.filter(function(b){return b[0]>=a.b&&b[0]<=a.d+0.9;});
+  BAT.forEach(function(b){if(inLife.indexOf(b)<0)g+='<line x1="'+X(b[0])+'" x2="'+X(b[0])+'" y1="'+(H-20)+'" y2="'+(H-16)+'" style="stroke:var(--line-color)"/>';});
+  var lastLab=-99;
+  inLife.forEach(function(b){var x=X(b[0]),age=Math.floor(b[0])-a.b,y=H-32;g+='<path class="hit" d="M'+x+' '+(y-7)+' l6 7 l-6 7 l-6 -7Z" style="fill:var(--s2);stroke:var(--vz-bg)" stroke-width="1.5"'+tipA('<b>'+b[1]+' · '+Math.floor(b[0])+'</b>'+a.n+' avait '+age+' ans')+'/>';
+    if(a.k.indexOf(b[1])>=0&&x-lastLab>70){g+=T(Math.min(Math.max(x,40),W-40),H-44,b[1]+' · '+age+' ans',{a:'middle',fs:10.5,c:'--ink',w:600,halo:1});lastLab=x;}});
+  return {svg:svg(W,H,g,'Batailles pendant la vie de '+a.n),n:inLife.length};}
+function sankey(W){var H=W<480?360:320,mt=6,mb=6,nw=10,gap=12;
+  var Ls=[['Cultivateur','s1'],['Tisserand','s2'],['Cordonnier','s3'],['Pêcheur','s4'],['Cheminot','s5']],Rs=['Tulle','Brive','Nice','Salon-de-Provence'];
+  var F=[[0,0,9],[0,3,6],[1,0,4],[1,1,1],[2,2,3],[2,0,2],[3,2,5],[4,1,3],[4,3,2],[4,0,1]];
+  var lt=Ls.map(function(_,i){return F.filter(function(f){return f[0]===i;}).reduce(function(a,f){return a+f[2];},0);}),rt=Rs.map(function(_,i){return F.filter(function(f){return f[1]===i;}).reduce(function(a,f){return a+f[2];},0);});
+  var tot=36,k=Math.min((H-mt-mb-gap*(Ls.length-1))/tot,(H-mt-mb-gap*(Rs.length-1))/tot);
+  var ly=[],y=mt;lt.forEach(function(v){ly.push(y);y+=v*k+gap;});var ry=[];y=mt+((H-mt-mb)-(tot*k+gap*(Rs.length-1)))/2;rt.forEach(function(v){ry.push(y);y+=v*k+gap;});
+  var xL=8,xR=W-8-nw,g='',lo=ly.slice(),ro=ry.slice();
+  F.slice().sort(function(a,b){return a[0]-b[0]||a[1]-b[1];}).forEach(function(f){var h=f[2]*k,y0=lo[f[0]]+h/2,y1=ro[f[1]]+h/2;lo[f[0]]+=h;ro[f[1]]+=h;var xm=(xL+nw+xR)/2;
+    g+='<path class="hit" d="M'+(xL+nw)+' '+y0.toFixed(1)+' C'+xm+' '+y0.toFixed(1)+' '+xm+' '+y1.toFixed(1)+' '+xR+' '+y1.toFixed(1)+'" style="fill:none;stroke:var(--'+Ls[f[0]][1]+');stroke-opacity:.42" stroke-width="'+Math.max(1,h-1).toFixed(1)+'"'+tipA('<b>'+Ls[f[0]][0]+' → '+Rs[f[1]]+'</b>'+f[2]+' personnes (exemple)')+'/>';});
+  Ls.forEach(function(l,i){g+='<rect x="'+xL+'" y="'+ly[i]+'" width="'+nw+'" height="'+(lt[i]*k)+'" style="fill:var(--'+l[1]+')"/>'+T(xL+nw+6,ly[i]+lt[i]*k/2+4,l[0]+' · '+lt[i],{fs:11.5,c:'--ink',w:700,halo:1});});
+  Rs.forEach(function(r,i){g+='<rect x="'+xR+'" y="'+ry[i]+'" width="'+nw+'" height="'+(rt[i]*k)+'" style="fill:var(--muted)"/>'+T(xR-6,ry[i]+rt[i]*k/2+4,r+' · '+rt[i],{a:'end',fs:11.5,c:'--ink',w:700,halo:1});});
+  return svg(W,H,g,'Métiers vers communes');}
+var FR=[[2.55,51.09],[1.6,50.9],[1.58,50.2],[0.1,49.7],[-1.25,49.65],[-1.95,49.7],[-1.6,48.65],[-3,48.8],[-4.75,48.4],[-4.3,47.8],[-2.5,47.3],[-2.1,46.8],[-1.2,46.2],[-1.25,45.6],[-1.15,44.6],[-1.5,43.4],[-1.75,43.35],[0,42.75],[1.45,42.6],[3.15,42.45],[3.05,43.1],[4,43.5],[5,43.35],[6.15,43.05],[7,43.55],[7.5,43.8],[7.65,44.2],[6.9,44.4],[7,45],[6.8,45.85],[6.1,46.15],[6,46.45],[6.95,47.45],[7.6,47.6],[8.2,48.95],[6.4,49.45],[4.8,50],[4.15,49.95],[2.55,51.09]];
+var TDF=[{p:'Tulle',c:'s1',lon:1.77,lat:45.27,y:[[1951,'passage à 8 km'],[1964,'ville étape'],[1983,'passage à 12 km'],[1996,'passage à 15 km'],[2009,'passage à 6 km'],[2017,'passage à 18 km']]},
+ {p:'Nice',c:'s2',lon:7.27,lat:43.7,y:[[1906,'ville étape'],[1911,'ville étape'],[1931,'ville étape'],[1947,'ville étape'],[1981,'passage à 10 km'],[2020,'Grand Départ à Nice (vrai)'],[2024,'arrivée finale Monaco → Nice (vrai)']]},
+ {p:'Salon-de-Provence',c:'s3',lon:5.1,lat:43.64,y:[[1951,'passage à 9 km'],[1971,'passage à 14 km'],[1989,'passage à 5 km'],[2009,'passage à 11 km'],[2022,'passage à 16 km']]}];
+function tdfMap(W){var k=W/10.6,H=Math.round(9.3*k),P=function(lon,lat){return [((lon+5.1)*0.688*k),((51.3-lat)*k)];};
+  var g='<path d="'+FR.map(function(c,i){var p=P(c[0],c[1]);return (i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1);}).join('')+'Z" style="fill:var(--vz-grid);stroke:var(--muted)" stroke-width="1"/>';
+  TDF.forEach(function(t){var p=P(t.lon,t.lat),r=20/111*k;g+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="'+r.toFixed(1)+'" style="fill:var(--'+t.c+');fill-opacity:.12;stroke:var(--'+t.c+')" stroke-dasharray="3 2"/>';
+    t.y.forEach(function(y,i){var a=i*2.1,d=r*(0.25+0.6*((i*37)%10)/10);g+='<circle class="hit" cx="'+(p[0]+Math.cos(a)*d).toFixed(1)+'" cy="'+(p[1]+Math.sin(a)*d).toFixed(1)+'" r="3.2" style="fill:var(--'+t.c+');stroke:var(--vz-bg)"'+tipA('<b>'+y[0]+' · '+t.p+'</b>'+y[1]+(/vrai/.test(y[1])?'':' (exemple)'))+'/>';});
+    var lbl=t.p==='Salon-de-Provence'?'Salon':t.p,sal=t.p==='Salon-de-Provence',ni=t.p==='Nice';g+=T(ni||sal?p[0]:p[0]+r+4,ni?p[1]-r-5:sal?p[1]+r+12:p[1]-r-2,lbl,{a:ni||sal?'end':'start',fs:11,c:'--ink',w:700,halo:1});});
+  return svg(W,H,g,'Carte des passages du Tour');}
+function tdfFrise(W){var ml=8,mr=8,x0=1900,x1=2026,rowH=34,mt=6,H=mt+TDF.length*rowH+22,X=function(y){return ml+(y-x0)/(x1-x0)*(W-ml-mr);};var g='';
+  [1900,1925,1950,1975,2000,2025].forEach(function(y){g+='<line x1="'+X(y)+'" x2="'+X(y)+'" y1="'+mt+'" y2="'+(H-20)+'" style="stroke:var(--vz-grid)"/>'+T(X(y),H-6,String(y),{a:y===1900?'start':y===2025?'end':'middle',fs:10});});
+  TDF.forEach(function(t,i){var y=mt+i*rowH+rowH/2+4;g+=T(ml,y-9,t.p,{fs:10.5,c:'--ink',w:700});g+='<line x1="'+ml+'" x2="'+(W-mr)+'" y1="'+y+'" y2="'+y+'" style="stroke:var(--line-color)"/>';
+    t.y.forEach(function(e){g+='<circle class="hit" cx="'+X(e[0]).toFixed(1)+'" cy="'+y+'" r="5" style="fill:var(--'+t.c+');stroke:var(--vz-bg)" stroke-width="1.5"'+tipA('<b>'+e[0]+' · '+t.p+'</b>'+e[1]+(/vrai/.test(e[1])?'':' (exemple)'))+'/>';});});
+  g+='<rect x="'+X(1915)+'" y="'+mt+'" width="'+(X(1919)-X(1915))+'" height="'+(H-20-mt)+'" style="fill:var(--muted);opacity:.12"/><rect x="'+X(1940)+'" y="'+mt+'" width="'+(X(1947)-X(1940))+'" height="'+(H-20-mt)+'" style="fill:var(--muted);opacity:.12"/>';
+  return svg(W,H,g,'Frise des passages du Tour');}
+/* prix du pain (exemple) et naissances */
+var PEAK={1789:1.6,1790:0.5,1795:3,1796:1.8,1812:1.4,1817:2,1829:0.6,1847:1.8,1854:0.8,1856:0.9};
+var PRICE=[];for(var yy=1780;yy<=1870;yy++)PRICE.push([yy,2.3+0.005*(yy-1780)+0.18*Math.sin(yy*1.7)+(PEAK[yy]||0)]);
+var BIRTH5=[[1780,3],[1785,4],[1790,2],[1795,1],[1800,4],[1805,5],[1810,4],[1815,2],[1820,5],[1825,6],[1830,5],[1835,6],[1840,5],[1845,3],[1850,5],[1855,4],[1860,6],[1865,5]];
+function panels(W){var ml=30,mr=10,mt=34,h1=130,gp=34,h2=100,mb=22,H=mt+h1+gp+h2+mb,x0=1780,x1=1870,X=function(y){return ml+(y-x0)/(x1-x0)*(W-ml-mr);};
+  var pmax=6,bmax=8,Y1=function(v){return mt+h1-v/pmax*h1;},b2=mt+h1+gp,Y2=function(v){return b2+h2-v/bmax*h2;},g='';
+  g+=T(ml,14,'Prix du pain à Tulle, en sous la livre (exemple)',{fs:11,c:'--ink',w:700});
+  [0,2,4,6].forEach(function(v){g+='<line x1="'+ml+'" x2="'+(W-mr)+'" y1="'+Y1(v)+'" y2="'+Y1(v)+'" style="stroke:var(--vz-grid)"/>'+T(ml-5,Y1(v)+3.5,String(v),{a:'end',fs:10});});
+  g+='<path d="'+PRICE.map(function(p,i){return (i?'L':'M')+X(p[0]).toFixed(1)+' '+Y1(p[1]).toFixed(1);}).join('')+'" style="fill:none;stroke:var(--s1);stroke-width:2;stroke-linejoin:round"/>';
+  var NOTES=[[1789,'1789'],[1795,'an III : disette'],[1817,'après 1816, « année sans été »'],[1847,'crise de 1846–47']];
+  NOTES.forEach(function(n,i){var p=PRICE[n[0]-x0],x=X(n[0]),right=x>W*0.62;g+='<circle cx="'+x+'" cy="'+Y1(p[1])+'" r="3.5" style="fill:var(--s1);stroke:var(--vz-bg)" stroke-width="1.5"/>';if(W<520&&(i===0||i===2))return;g+=T(x+(right?-6:6),Y1(p[1])+(i%2?10:-2),n[1],{a:right?'end':'start',fs:10,c:'--ink',w:600,halo:1});});
+  g+=T(ml,b2-10,'Naissances dans la famille, par 5 ans (exemple)',{fs:11,c:'--ink',w:700});
+  [0,4,8].forEach(function(v){g+='<line x1="'+ml+'" x2="'+(W-mr)+'" y1="'+Y2(v)+'" y2="'+Y2(v)+'" style="stroke:var(--vz-grid)"/>'+T(ml-5,Y2(v)+3.5,String(v),{a:'end',fs:10});});
+  var bw=Math.max(3,(X(1785)-X(1780))*0.62);
+  BIRTH5.forEach(function(b){var x=X(b[0])+(X(b[0]+5)-X(b[0])-bw)/2;g+='<path d="'+topRound(x,Y2(b[1]),bw,b2+h2-Y2(b[1]),3)+'" style="fill:var(--s3)"/>';});
+  [1780,1800,1820,1840,1860].forEach(function(y){g+=T(X(y),H-6,String(y),{a:'middle',fs:10});});
+  g+='<line id="xh" x1="0" x2="0" y1="'+(mt-6)+'" y2="'+(b2+h2)+'" style="stroke:var(--ink);opacity:0" stroke-dasharray="3 3"/><rect id="xhit" x="'+ml+'" y="'+mt+'" width="'+(W-ml-mr)+'" height="'+(H-mt-mb)+'" fill="transparent"/>';
+  return {html:svg(W,H,g,'Prix du pain et naissances'),bind:function(el){var s=$('svg',el),ln=$('#xh',el),r=$('#xhit',el);
+    r.addEventListener('mousemove',function(e){var bb=s.getBoundingClientRect(),sx=(e.clientX-bb.left)*W/bb.width,yr=Math.round(x0+(sx-ml)/(W-ml-mr)*(x1-x0));yr=Math.max(x0,Math.min(x1,yr));var x=X(yr);ln.setAttribute('x1',x);ln.setAttribute('x2',x);ln.style.opacity=.6;
+      var b=BIRTH5.filter(function(q){return yr>=q[0]&&yr<q[0]+5;})[0];tip.innerHTML='<b>'+yr+'</b>Pain : '+fmt(PRICE[yr-x0][1])+' sous la livre<br>Naissances '+(b?b[0]+'–'+(b[0]+4)+' : '+b[1]:'—')+' <span class="muted">(exemple)</span>';tip.hidden=false;});
+    r.addEventListener('mouseleave',function(){ln.style.opacity=0;tip.hidden=true;});}};}
+
+var EX=[
+ {t:'🌋 Séismes autour des lieux de la famille, par décennie',how:[['Source','🔀 Séismes réunis (SisFrance + EPICA)'],['Filtres','1800–1919 · à moins de 150 km des lieux de la famille'],['Champs','X décennie · Y nombre · couleur = lieu le plus proche'],['Dessin','🧱 Colonnes empilées + 2 notes']],
+  draw:function(el){var W=wOf(el),g=groupSeis(10,1800,1910);el.innerHTML=head('Séismes ressentis autour des lieux de la famille','À moins de 150 km de Tulle, Nice ou Salon · exemple')+legend(g.series)+stacked({W:W,H:Math.round(Math.min(340,Math.max(240,W*0.42))),cats:g.cats,series:g.series,lab:'max',unit:'séismes',notes:[{i:g.binOf(1887),t:'23 fév. 1887 · séisme de Ligurie'},{i:g.binOf(1909),t:'11 juin 1909 · Lambesc'}]})+sources([['SisFrance (BRGM · EDF · IRSN)','conditions d’usage'],['EPICA (INGV)','CC BY 4.0'],['Ta généalogie','privée']]);}},
+ {t:'⚔️ Les batailles pendant la vie de chaque ancêtre',how:[['Source','🔀 Batailles et sièges (Wikidata) + 🌳 4 ancêtres'],['Filtres','pendant la vie de chacun · armées françaises'],['Champs','une case par ancêtre · temps = date · même échelle'],['Dessin','▦ Petits multiples « vie d’un ancêtre »']],
+  draw:function(el){var W=wOf(el),cw=W<700?W:Math.floor((W-18)/2)-2;el.innerHTML=head('Les batailles pendant la vie de chaque ancêtre','◆ une bataille de son vivant · bande = sa vie · même frise 1770–1935')+'<div class="sm-grid">'+ANC.map(function(a){var p=lifePanel(a,cw-22,76);return '<div class="sm-cell"><h5>'+esc(a.n)+' <small>'+a.b+'–'+a.d+' · '+esc(a.w)+' · '+p.n+' batailles</small></h5>'+p.svg+'</div>';}).join('')+'</div>'+sources([['Batailles et sièges (Wikidata)','CC0'],['Ta généalogie','privée']]);}},
+ {t:'🔀 Les métiers de la famille → les communes',how:[['Source','🌳 Mon arbre : métiers et lieux des actes'],['Filtres','ancêtres directs · 1750–1900'],['Champs','de = métier · vers = commune · épaisseur = personnes'],['Dessin','🔀 Flux (Sankey)']],
+  draw:function(el){var W=wOf(el);el.innerHTML=head('Métiers de la famille et communes où ils les exerçaient','36 ancêtres directs, 1750–1900 · exemple')+sankey(W)+sources([['Ta généalogie (métiers des actes)','privée']]);}},
+ {t:'🚲 Le Tour de France passé près de chez nous',how:[['Source','🏆 Sport → Tour de France (étapes)'],['Filtres','à moins de 20 km des lieux de la famille · 1903–2025'],['Champs','lieu = ville étape · temps = année · couleur = lieu de la famille'],['Dessin','🗺 Carte + 📅 frise liées']],
+  draw:function(el){var W=wOf(el),mw=W<700?W:340,fw=W<700?W:W-mw-22;el.innerHTML=head('Le Tour de France passé près de chez nous','Passages à moins de 20 km (cercles) · bandes grises : pas de Tour (guerres)')+legend(TDF.map(function(t){return {name:t.p,c:t.c};}))+'<div class="mf"><div>'+tdfMap(mw)+'</div><div>'+tdfFrise(fw)+'</div></div>'+sources([['Tour de France (Wikidata)','CC0'],['Fond de carte simplifié',''],['Ta généalogie','privée']]);}},
+ {t:'🥖 Le prix du pain et les naissances',how:[['Source','💶 Mercuriales (prix du pain) + 🌳 naissances'],['Filtres','Tulle · 1780–1870'],['Champs','X = année (commune) · haut = prix · bas = naissances'],['Dessin','📈 Deux panneaux alignés (pas deux axes)']],
+  draw:function(el){var W=wOf(el),p=panels(W);el.innerHTML=head('Le prix du pain et les naissances dans la famille','Même frise des années pour les deux ; survole pour lire une année')+p.html+sources([['Mercuriales de Tulle (liste de données, exemple)','licence de la liste'],['Ta généalogie','privée']]);p.bind(el);}}
+];
+var exCur=0;
+function showEx(i){exCur=i;var e=EX[i];$('#ex-title').textContent=e.t;$('#ex-how').innerHTML=e.how.map(function(h){return '<div><b>'+h[0]+'</b>'+esc(h[1])+'</div>';}).join('');e.draw($('#ex-vz'));$$('#ex-seg button').forEach(function(b){b.setAttribute('aria-pressed',String(+b.dataset.ex===i));});}
+$('#ex-seg').addEventListener('click',function(e){var b=e.target.closest('[data-ex]');if(b)showEx(+b.dataset.ex);});
+
+/* ═════════ 4 · Personnaliser ═════════ */
+var P={t:$('#pz-t').value,st:$('#pz-st').value,pal:'',grp:10,leg:'top',lab:'max',ord:'tot',fmt:'screen',thm:'app',font:'',notes:[{y:1887,t:'23 fév. 1887 · Ligurie'},{y:1909,t:'11 juin 1909 · Lambesc'}],add:false};
+var hist=[];function push(){hist.push(JSON.stringify(P));if(hist.length>40)hist.shift();}
+var PALS=[['','Par défaut',['#257de0','#f47230','#00b894']],['pal-cvd','Daltonien',['#0072b2','#e69f00','#009e73']],['pal-arch','Archive',['#7a5230','#b0803a','#4f6d5a']],['pal-nb','Noir et blanc',['#222','#777','#aaa']]];
+function paintPals(){$('#pz-pal').innerHTML=PALS.map(function(p){return '<button type="button" class="pal" data-pal="'+p[0]+'" aria-pressed="'+(P.pal===p[0])+'"><i>'+p[2].map(function(c){return '<span style="background:'+c+'"></span>';}).join('')+'</i>'+p[1]+'</button>';}).join('');}
+function pzG(){return P.grp===1?groupSeis(1,1800,1919):groupSeis(P.grp,1800,P.grp===10?1910:1900);}
+function drawPz(){var fr=$('#pz-frame');fr.className='pz-frame vz '+(P.pal||'')+(P.thm==='light'?' vz-light':P.thm==='dark'?' vz-dark':'')+(P.add?' addmode':'');fr.style.maxWidth=P.fmt==='sq'?'520px':P.fmt==='a4'?'760px':'';fr.style.fontFamily=P.font||'';
+  var W=wOf($('#pz-vz')),g=pzG();
+  var ser=g.series.slice();if(P.ord==='abc')ser.sort(function(a,b){return a.name.localeCompare(b.name);});else ser.sort(function(a,b){var s=function(x){return x.vals.reduce(function(p,c){return p+c;},0);};return s(b)-s(a);});
+  var ratio=P.fmt==='sq'?0.92:P.fmt==='a4'?0.62:0.48,H=Math.round(Math.max(220,W*ratio));
+  var notes=P.notes.map(function(n){return {i:g.binOf(n.y),t:n.t};});
+  var leg=legend(PLACES);
+  $('#pz-vz').innerHTML=head(P.t,P.st)+(P.leg==='top'?leg:'')+stacked({W:W,H:H,cats:g.cats,series:ser,lab:P.lab,unit:'séismes',notes:notes,label:P.t})+(P.leg==='bottom'?leg:'')+sources([['SisFrance','conditions d’usage'],['EPICA','CC BY 4.0']]);
+  $('#pz-nn').textContent='('+P.notes.length+')';
+  $('#pz-notes').innerHTML=P.notes.map(function(n,i){return '<li><span>📍 '+esc(n.t)+'</span><button type="button" class="ib" data-nx="'+i+'" aria-label="Retirer la note">×</button></li>';}).join('')||'<li class="muted">Aucune note.</li>';
+  $('#pz-addhint').textContent=P.add?'Clique sur une colonne…':'';
+  $('#pz-add').textContent=P.add?'✕ Arrêter':'＋ Ajouter une note';}
+function syncPz(){paintPals();$$('[data-pz]').forEach(function(s){$$('button',s).forEach(function(b){b.setAttribute('aria-pressed',String(String(P[s.dataset.pz])===b.dataset.v));});});$('#pz-t').value=P.t;$('#pz-st').value=P.st;$('#pz-font').value=P.font;drawPz();}
+$('#pz-pal').addEventListener('click',function(e){var b=e.target.closest('[data-pal]');if(!b)return;push();P.pal=b.dataset.pal;syncPz();});
+$$('[data-pz]').forEach(function(s){s.addEventListener('click',function(e){var b=e.target.closest('button');if(!b||b.disabled)return;push();var v=b.dataset.v;P[s.dataset.pz]=s.dataset.pz==='grp'?+v:v;syncPz();});});
+['pz-t','pz-st'].forEach(function(id){var el=$('#'+id),k=id==='pz-t'?'t':'st';el.addEventListener('focus',push);el.addEventListener('input',function(){P[k]=el.value;drawPz();});});
+$('#pz-font').addEventListener('change',function(){push();P.font=this.value;drawPz();});
+$('#pz-add').addEventListener('click',function(){P.add=!P.add;drawPz();});
+$('#pz-notes').addEventListener('click',function(e){var b=e.target.closest('[data-nx]');if(!b)return;push();var n=P.notes.splice(+b.dataset.nx,1)[0];drawPz();say('Note retirée : '+n.t+'.',undo);});
+$('#pz-vz').addEventListener('click',function(e){if(!P.add)return;var p=e.target.closest('[data-i]');if(!p)return;push();var g=pzG(),i=+p.dataset.i,y=parseInt(g.cats[i],10)||1800;P.notes.push({y:y,t:($('#pz-ntext').value||'Note')+' ('+g.cats[i]+')'});P.add=false;drawPz();say('Note ajoutée sur '+g.cats[i]+'.',undo);});
+function undo(){if(!hist.length){say('Rien à annuler.');return;}P=JSON.parse(hist.pop());syncPz();}
+$('#pz-undo').addEventListener('click',undo);
+$('#pz-tpl').addEventListener('click',function(){say('Modèle « '+P.t+' » enregistré : ⭐ Mes modèles, dans la galerie. Il garde la source, les filtres et les réglages, jamais les chiffres.');});
+$('#pz-acc').addEventListener('toggle',function(e){if(e.target.open)$$('#pz-acc details').forEach(function(d){if(d!==e.target)d.open=false;});},true);
+
+/* ═════════ 5 · s'en servir ═════════ */
+function drawUse(){var el=$('#use-vz'),W=wOf(el),p=lifePanel(ANC[0],W,84,[1765,1848]);el.innerHTML=head('Les batailles de son vivant',p.n+' batailles entre 1772 et 1841 · survole les ◆')+p.svg+sources([['Batailles et sièges (Wikidata)','CC0'],['Ta généalogie','privée']]);}
+$('#live-seg').addEventListener('click',function(e){var b=e.target.closest('[data-l]');if(!b)return;$('#live-badge').innerHTML=b.dataset.l==='1'?'<span class="ui-badge is-green">🔄 à jour</span>':'<span class="ui-badge is-grey">📌 figé le 26 nov. 2026</span>';say(b.dataset.l==='1'?'Tenu à jour : recalculé à chaque affichage.':'Figé : il garde ses chiffres d’aujourd’hui.');});
+$('#kiosk-seg').addEventListener('click',function(e){var b=e.target.closest('[data-k]');if(b)$('#use').classList.toggle('kiosk-on',b.dataset.k==='1');});
+
+/* ── départ, et redessin quand la largeur change ── */
+function drawAll(){drawEd();showEx(exCur);drawPz();drawUse();}
+setSrc('liste');paintGal(false);syncPz();showEx(0);drawUse();
+var lastW=innerWidth,rt=0;window.addEventListener('resize',function(){if(innerWidth===lastW)return;lastW=innerWidth;clearTimeout(rt);rt=setTimeout(drawAll,120);});
+})();
+</script>
+</body>
+</html>

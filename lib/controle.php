@@ -16,11 +16,12 @@ declare(strict_types=1);
  *   tant que rien n'a changé (signature : nombres et dernières modifications des fiches, événements, familles, lieux).
  * - Lecture seule, sauf les corrections (controle_fix_date) et les exceptions.
  *
- * Le contrôle « commune qui n'existait pas encore à cette date » n'est pas fait : geo-fr.sqlite n'a que les communes
- * d'aujourd'hui, sans dates de création ni de fusion (il faudrait l'historique INSEE / Cassini comme nouveau référentiel).
+ * 🏛 « Commune qui n'existait pas encore ou plus à cette date » (sous-sorte anachro des 📍 Lieux) : lib/commune_histoire.php,
+ * d'après l'historique officiel des communes de l'INSEE depuis 1943 (livré avec l'app, « 🏛 Frontières anciennes »). Rien avant
+ * 1790 (paroisses), rien d'avant 1943 que le fichier ne connaît pas, marge de 10 ans pour une date approximative.
  */
 
-const CONTROLE_VERSION = 5; // à monter quand un contrôle change : le cache est refait
+const CONTROLE_VERSION = 7; // à monter quand un contrôle change : le cache est refait
 const CONTROLE_SORTS = ['dates', 'ages', 'parents', 'doublons', 'lieux'];
 const CONTROLE_LEVELS = ['red', 'orange', 'yellow'];
 
@@ -125,7 +126,9 @@ function controle_signature(PDO $pdo, array $th): string
     // 🐘 les comptes de toute la base (0,2 s à 200 000 fiches) relus tant que ces tables ne changent pas (lib/calc_cache.php)
     $row = function_exists('calc_cached') ? calc_cached($pdo, 'controle_sig', ['persons', 'events', 'families', 'family_children', 'places'], [], static fn() => controle_signature_row($pdo)) : controle_signature_row($pdo);
     unset($th['banner']);
-    return md5(json_encode([$row, $th, CONTROLE_VERSION]));
+    $ch = ''; // 🏛 le contrôle des communes de l'époque, allumé ou éteint (Réglages)
+    try { $ch = (string) ($pdo->query("SELECT value FROM app_settings WHERE key='genealogie-commune-histoire'")->fetchColumn() ?: ''); } catch (Throwable $_) {}
+    return md5(json_encode([$row, $th, CONTROLE_VERSION, $ch]));
 }
 function controle_signature_row(PDO $pdo): array
 {
@@ -150,10 +153,29 @@ function controle_run(PDO $pdo, bool $fresh = false): array
     $th = controle_seuils($pdo);
     $sig = controle_signature($pdo, $th);
     $file = controle_cache_file();
-    if (!$fresh && is_file($file)) {
+    $cached = static function () use ($file, $sig): ?array {
+        if (!is_file($file)) { return null; }
         $c = json_decode((string) @file_get_contents($file), true);
-        if (is_array($c) && ($c['sig'] ?? '') === $sig) { return $memo = $c; }
+        return is_array($c) && ($c['sig'] ?? '') === $sig ? $c : null;
+    };
+    if (!$fresh && ($c = $cached())) { return $memo = $c; }
+    // ⏱ Au lancement, trois widgets (controle_summary, semaine, doutes_summary) demandent ce contrôle en même temps : sans
+    // ce verrou, chacun le recalculait (3 × ≈ 0,7 s de processeur sur la base d'exemple) et occupait un PHP pendant ce temps,
+    // les autres appels du tableau de bord attendaient derrière. Un seul calcule ; les autres attendent (sans calculer) et
+    // lisent son résultat. Verrou de fichier : relâché par le système si le PHP s'arrête en route.
+    $dir = dirname($file);
+    $lock = (is_dir($dir) || @mkdir($dir, 0775, true)) ? @fopen($file . '.lock', 'c') : false;
+    if ($lock && @flock($lock, LOCK_EX)) {
+        // calculé par un autre PHP pendant l'attente : rien à refaire (« Revérifier » recalcule toujours)
+        if (!$fresh && ($c = $cached())) { flock($lock, LOCK_UN); fclose($lock); return $memo = $c; }
     }
+    try { return $memo = controle_run_compute($pdo, $th, $sig, $file); }
+    finally { if ($lock) { @flock($lock, LOCK_UN); @fclose($lock); } }
+}
+
+/** Calcule le contrôle et le garde (controle_run, sous son verrou). */
+function controle_run_compute(PDO $pdo, array $th, string $sig, string $file): array
+{
     $t0 = microtime(true);
     // une très grosse base (100 000 fiches) demande ≈ 750 Mo : on laisse de la marge au-delà du réglage habituel (1 Go)
     if (function_exists('memory_for_persons')) { memory_for_persons($pdo, 8); } elseif (function_exists('memory_at_least')) { memory_at_least(2048); } // 200 000 fiches : 1,45 Go
@@ -167,7 +189,7 @@ function controle_run(PDO $pdo, bool $fresh = false): array
         $tmp = $file . '.' . bin2hex(random_bytes(4)) . '.tmp';
         if (@file_put_contents($tmp, json_encode($res, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)) !== false) { @rename($tmp, $file); } else { @unlink($tmp); }
     }
-    return $memo = $res;
+    return $res;
 }
 
 /** Tous les contrôles, une seule lecture de la base. */
@@ -724,6 +746,22 @@ function controle_compute(PDO $pdo, array $th): array
         }
     }
 
+    // 🏛 commune qui n'existait pas encore (créée après) ou plus (réunie avant) à la date de l'événement (lib/commune_histoire.php)
+    try {
+        if (!function_exists('ch_controle_alerts')) { require_once __DIR__ . '/commune_histoire.php'; }
+        $chPeople = static function (array $r) use ($P, $families): array {
+            $pid = (int) $r['person_id'];
+            if ($pid) { return isset($P[$pid]) ? [$pid] : []; }
+            return array_values(array_filter($families[(int) $r['family_id']] ?? [], static fn($x) => $x && isset($P[$x])));
+        };
+        foreach (ch_controle_alerts($pdo, $chPeople) as $a) { $add($a); }
+    } catch (Throwable $_) {}
+    // 📍 lieu en double probable (« Pernay » et « Pernay, Indre-et-Loire, Centre-Val de Loire, France » d'un import) : lib/lieux_doublons.php
+    try {
+        if (!function_exists('ld_controle_alerts')) { require_once __DIR__ . '/lieux_doublons.php'; }
+        foreach (ld_controle_alerts($pdo) as $a) { $add($a); }
+    } catch (Throwable $_) {}
+
     // ═══ 🧾 RECENSEMENT SOCFACE ═══ ce que lit l'IA comparé aux fiches reliées (🟡 / 🟠, jamais 🔴 : la machine peut se tromper)
     if (function_exists('socface_controle_alerts')) { foreach (socface_controle_alerts($pdo, $th) as $a) { $add($a); } }
 
@@ -818,7 +856,7 @@ function controle_sort_of_key(string $key): string
     return match (true) {
         in_array($k, ['dup'], true) => 'doublons',
         $k === 'socface' => 'socface',
-        in_array($k, ['place', 'journey', 'baptism-far', 'conflicting-naissance-place', 'conflicting-décès-place'], true) => 'lieux',
+        in_array($k, ['place', 'place-dup', 'journey', 'baptism-far', 'commune-anachro', 'conflicting-naissance-place', 'conflicting-décès-place'], true) => 'lieux',
         in_array($k, ['old-parent', 'young-marriage', 'old-marriage', 'sosa-gap'], true) => 'ages',
         in_array($k, ['spouse-ancestor', 'animal-link', 'child-after-parent-death', 'close-births', 'same-year-siblings', 'before-marriage', 'sibling-span', 'multiple-parent-families', 'ghost-family', 'sosa-sex', 'young-parent'], true) => 'parents',
         default => 'dates',

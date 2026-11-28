@@ -496,6 +496,23 @@ function setAutostart(on) {
   } catch { return false; }
 }
 /** 🌐 Mon site web : les navigateurs installés ; ouvrir une page DE L'APPLICATION (aperçu en direct) dans l'un d'eux. */
+/** 📁 Enquêtes, recherche sans résultat : un dossier de l'ordinateur relié (le chemin seulement, rien n'est copié). */
+ipcMain.handle('lcnda:choose-folder', async (event) => {
+  if (!fromApp(event)) return { canceled: true };
+  const result = await dialog.showOpenDialog(win, { title: 'Choisir un dossier', buttonLabel: 'Choisir', properties: ['openDirectory'] });
+  if (result.canceled || !result.filePaths[0]) return { canceled: true };
+  return { dir: result.filePaths[0], name: path.basename(result.filePaths[0]) };
+});
+ipcMain.handle('lcnda:open-folder', async (event, dir) => {
+  if (!fromApp(event)) return { ok: false, error: 'Refusé' };
+  const d = String(dir || '');
+  if (!d || !path.isAbsolute(d)) return { ok: false, error: 'Ce dossier n’existe plus.' };
+  let st = null; try { st = fs.statSync(d); } catch { /* absent */ }
+  if (!st) return { ok: false, error: 'Ce dossier n’existe plus.' };
+  if (!st.isDirectory()) return { ok: false, error: 'Ce n’est pas un dossier.' }; // jamais un fichier ni un programme
+  const err = await shell.openPath(d);
+  return err ? { ok: false, error: err } : { ok: true };
+});
 ipcMain.handle('lcnda:browsers', (event) => (fromApp(event) ? browsers.listBrowsers() : []));
 ipcMain.handle('lcnda:open-in-browser', (event, id, url) => {
   if (!fromApp(event)) return { ok: false, error: 'Refusé' };

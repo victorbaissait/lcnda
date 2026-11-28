@@ -1,0 +1,79 @@
+# 📊 Fabrication du pack « Prénoms d'ici et d'ailleurs », déposé dans la version « prenoms-donnees » du dépôt.
+#
+# L'app n'embarque aucune de ces données : Statistiques → Prénoms : la famille et la France → « ⤓ Installer » télécharge
+# le pack depuis cette version (lib/prenoms_pays.php), le vérifie (empreinte sha256), le décompresse puis le range.
+#
+# Lancer : onglet « Actions » → « Données des prénoms » → « Run workflow ». Une dizaine de minutes.
+# Sources (scripts/prenoms/build-prenoms.py) : Insee (Fichier des prénoms, France et départements, Licence Ouverte 2.0),
+# OFS (STATPOP, prénoms selon l'année de naissance, OPEN-BY), Retraite Québec (Banque de prénoms, CC BY 4.0) ;
+# lot L : États-Unis (SSA, names.zip, domaine public — la page de la SSA est relue ; la SSA refuse les machines de GitHub (403) :
+# alors la copie des mêmes données dans le paquet R « babynames » 1.0.1, CC0, 1880-2017 ; sinon le pack se fait sans).
+# Le pack est coupé en morceaux de 1 900 Mo au plus (limite d'un fichier d'une version GitHub : 2 Go) ;
+# prenoms-manifest.json dit les morceaux, la taille et l'empreinte.
+
+name: Données des prénoms
+
+on:
+  workflow_dispatch:
+    inputs:
+      essai:
+        description: 'Petit pack d’essai seulement (quelques prénoms)'
+        type: boolean
+        default: false
+  # un envoi qui touche ce fichier fait seulement connaître l'atelier à GitHub (rien n'est fabriqué)
+  push:
+    branches: ['claude/**']
+    paths: ['.github/workflows/prenoms.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: prenoms-donnees
+  cancel-in-progress: false
+
+jobs:
+  pack:
+    if: github.event_name != 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Bibliothèque (lecture des fichiers Excel de l'OFS)
+        run: pip install openpyxl pyreadr pandas   # pyreadr : la copie « babynames » (CC0) des prénoms des États-Unis
+
+      - name: Fabriquer
+        run: python3 scripts/prenoms/build-prenoms.py --dossier prenoms-sortie --cache prenoms-cache ${{ inputs.essai && '--essai' || '' }}
+
+      - name: Déposer le pack dans la version « prenoms-donnees »
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          f=prenoms-sortie/prenoms-pays.sqlite.gz
+          test -s "$f"
+          raw=$(stat -c %s prenoms-sortie/prenoms-pays.sqlite)
+          mkdir -p envoi && cd envoi
+          split -b 1900M -d -a 3 "../$f" "$(basename "$f")."
+          size=$(stat -c %s "../$f"); sum=$(sha256sum "../$f" | cut -d' ' -f1)
+          gh release view prenoms-donnees --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 || \
+            gh release create prenoms-donnees --repo "$GITHUB_REPOSITORY" --title "Données des prénoms" --prerelease \
+              --notes "Le pack « Prénoms d'ici et d'ailleurs » téléchargé par l'app. Sources et licences : Insee (Licence Ouverte 2.0), OFS (OPEN-BY, source obligatoire), Retraite Québec (CC BY 4.0) ; voir « À propos des données » dans l'app."
+          # les anciens morceaux sont retirés
+          for a in $(gh release view prenoms-donnees --repo "$GITHUB_REPOSITORY" --json assets --jq ".assets[].name" | grep -E '^prenoms-pays\.sqlite\.gz\.[0-9]{3}$' || true); do
+            gh release delete-asset prenoms-donnees "$a" --repo "$GITHUB_REPOSITORY" --yes
+          done
+          python3 - "$size" "$sum" "$raw" <<'PY'
+          import json, os, sys, datetime
+          size, sha, raw = int(sys.argv[1]), sys.argv[2], int(sys.argv[3])
+          parts = sorted(p for p in os.listdir('.') if p.split('.')[-1].isdigit())
+          m = {'version': datetime.date.today().strftime('%Y-%m'), 'packs': {'pays': {'size': size, 'sha256': sha, 'raw_size': raw, 'built': datetime.date.today().isoformat(), 'parts': [{'name': p, 'size': os.path.getsize(p)} for p in parts]}}}
+          json.dump(m, open('prenoms-manifest.json', 'w'), indent=1)
+          PY
+          gh release upload prenoms-donnees --repo "$GITHUB_REPOSITORY" --clobber $(ls | grep -E '\.[0-9]{3}$') prenoms-manifest.json
+          cat prenoms-manifest.json

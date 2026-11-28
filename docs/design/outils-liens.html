@@ -1,0 +1,202 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Outils : liens et ajouts</title>
+<style>
+:root{--bg:#f4f5f7;--paper:#fff;--ink:#111;--muted:#555;--soft:#777;--line:#eceef2;--line2:#c9ced8;--blue:#055dff;--blue-bg:#eef4ff;--blue-ink:#1a3d8f;--green:#1a7f37;--green-bg:#eaf6ee;--yel:#d4a800;--yel-bg:#fff8d6;--yel-ink:#7a5d00;--red:#c62828;--red-bg:#fdecec;--vio:#6929c4;--vio-bg:#f3ecff;--grey-bg:#f1f2f4;--shadow:rgba(5,93,255,.25);--bar:#141414;--bar-ink:#fff;--sheet:#fffdf8;--parch:#e8d6ae;--parch-ink:#4a3218;--stage:#3a3d44}
+@media (prefers-color-scheme:dark){:root{--bg:#121417;--paper:#1c1f24;--ink:#eceef2;--muted:#b4b9c3;--soft:#9aa0aa;--line:#2c3038;--line2:#454b55;--blue:#5b93ff;--blue-bg:#18233a;--blue-ink:#a9c4ff;--green:#4cc070;--green-bg:#15281c;--yel:#e0b93a;--yel-bg:#2c2612;--yel-ink:#f0d276;--red:#ff6b6b;--red-bg:#331a1a;--vio:#b48cff;--vio-bg:#261d38;--grey-bg:#262a31;--shadow:rgba(91,147,255,.22);--bar:#000;--bar-ink:#eceef2;--sheet:#23262b;--parch:#c9b48a;--parch-ink:#2e1f0e;--stage:#0d0f12}}
+*{box-sizing:border-box}
+body{background:var(--bg);padding:28px;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);margin:0;line-height:1.45}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:19px;margin:40px 0 6px}
+.part{font:800 12px system-ui;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin:46px 0 0;border-top:3px solid var(--ink);padding-top:10px}
+.sub{color:var(--muted);margin:0 0 18px;font-size:14px;max-width:1000px}
+.wrap{max-width:1240px;margin:0 auto}
+.simple{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:12px 16px;font-size:14px;max-width:1000px}
+.simple p{margin:0 0 8px}.simple p:last-child{margin:0}
+.toc{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+.toc a{background:var(--paper);border:2px solid var(--ink);padding:8px 14px;box-shadow:4px 4px 0 var(--shadow);color:var(--ink);text-decoration:none;font-size:13px}
+.toc a b{display:block;font-size:16px}
+.badge{font:700 10.5px/1.2 system-ui;border:1.5px solid var(--ink);padding:3px 6px;letter-spacing:.03em;display:inline-block;text-transform:uppercase;white-space:nowrap;vertical-align:middle}
+.badge.new{border-color:var(--blue);color:#fff;background:var(--blue)}
+.badge.have{border-color:#8a8f99;color:var(--muted);background:var(--grey-bg)}
+.badge.ok{border-color:var(--green);color:var(--green);background:var(--green-bg)}.badge.warn{border-color:var(--yel);color:var(--yel-ink);background:var(--yel-bg)}.badge.red{border-color:var(--red);color:var(--red);background:var(--red-bg)}.badge.blue{border-color:var(--blue);color:var(--blue)}.badge.vio{border-color:var(--vio);color:var(--vio);background:var(--vio-bg)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{font:700 11px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);text-align:left;padding:8px;border-bottom:2px solid var(--ink)}
+td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+code{font:11.5px ui-monospace,Menlo,Consolas,monospace;color:var(--muted);word-break:break-word}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 26px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.wide{grid-column:1 / -1}
+.grid>*,.grid3>*{min-width:0}
+.case{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:16px 18px 18px;min-width:0}
+.case .head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.case .tag{font:700 11px/1 system-ui;letter-spacing:.1em;color:var(--blue);text-transform:uppercase}
+.num-b{display:inline-block;background:var(--blue);color:#fff;font:800 12px system-ui;padding:3px 7px;margin-right:6px;letter-spacing:0}
+.case h3{margin:8px 0 10px;font-size:17px}
+.note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+.msg{border-left:4px solid var(--blue);background:var(--blue-bg);padding:9px 12px;font-size:13px;margin:12px 0}
+.msg.warn{border-color:var(--yel);background:var(--yel-bg)}.msg.ok{border-color:var(--green);background:var(--green-bg)}.msg.red{border-color:var(--red);background:var(--red-bg)}
+.meta{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 0;font-size:12px}
+.meta span{border:1.5px solid var(--line2);padding:2px 7px;background:var(--grey-bg)}
+.meta .p1{border-color:var(--red);color:var(--red);background:var(--red-bg);font-weight:800}
+.meta .p2{border-color:var(--yel);color:var(--yel-ink);background:var(--yel-bg);font-weight:800}
+.meta .p3{border-color:#8a8f99;color:var(--muted);font-weight:800}
+.why{font-size:13px;margin:0 0 10px}
+.btn{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--ink);background:var(--paper);font:700 13px system-ui;padding:7px 11px;box-shadow:3px 3px 0 var(--shadow);color:var(--ink);white-space:nowrap}
+.btn.blue{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.small{font-size:12px;padding:4px 8px;box-shadow:none}
+.btn.ghost{border-color:var(--line2);box-shadow:none;color:var(--muted)}
+.row{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.mini{font-size:12px;color:var(--muted)}
+.input{border:1.5px solid var(--line2);padding:4px 8px;font-size:12.5px;background:var(--paper);min-height:28px;display:inline-flex;align-items:center;color:var(--ink)}
+.pill{display:inline-block;font:700 11px/1.2 system-ui;padding:2px 6px;border:1.5px solid var(--line2);background:var(--grey-bg);color:var(--muted);white-space:nowrap}
+.pill.ok{border-color:var(--green);background:var(--green-bg);color:var(--green)}
+.pill.q{border-color:var(--yel);background:var(--yel-bg);color:var(--yel-ink)}
+.pill.blue{border-color:var(--blue);background:var(--blue-bg);color:var(--blue-ink)}
+.seg{display:inline-flex;border:2px solid var(--ink);flex-wrap:wrap;max-width:100%}.seg span{padding:4px 9px;font:700 12px system-ui;border-right:1.5px solid var(--ink);background:var(--paper)}.seg span:last-child{border-right:0}.seg span.on{background:var(--blue);color:#fff}
+.tg{display:inline-flex;align-items:center;gap:7px;font-size:12.5px}.tg i{width:30px;height:17px;border-radius:9px;background:var(--blue);position:relative;flex:none}.tg i:after{content:"";position:absolute;right:2px;top:2px;width:13px;height:13px;border-radius:50%;background:#fff}
+.tg.off i{background:var(--line2)}.tg.off i:after{right:auto;left:2px}
+.scrollx{overflow-x:auto;max-width:100%}
+.cb{width:14px;height:14px;border:2px solid var(--ink);display:inline-block;flex:none;vertical-align:-2px}.cb.on{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--paper)}
+.scrollx>table{min-width:720px}
+/* gabarit */
+.fld{display:grid;grid-template-columns:120px minmax(0,1fr) auto;gap:6px 8px;font-size:12.5px;align-items:center}
+.fld .k{color:var(--muted)}
+.fld .v{border:1.5px solid var(--line2);padding:3px 7px;background:var(--paper);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fld .v.empty{color:var(--soft);font-style:italic;border-style:dashed}
+.fld .v.got{border-color:var(--green);background:var(--green-bg)}
+/* documents liés */
+.doc{border:2px solid var(--ink);background:var(--paper);box-shadow:6px 6px 0 var(--shadow);padding:12px 14px;min-width:0}
+.doc h3{margin:0 0 6px;font-size:16px}
+.blk{border-top:1.5px solid var(--line2);padding-top:8px;margin-top:10px}
+.blk h4{margin:0 0 6px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.lk{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 10px;align-items:center;padding:6px 0;border-bottom:1px dashed var(--line2);font-size:13px}
+.common{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.learn{font-size:13px;margin:4px 0;padding:6px 8px;background:var(--blue-bg);border-left:3px solid var(--blue)}
+.toc{list-style:none;margin:0;padding:0;font-size:13px}
+.toc li{display:flex;gap:8px;align-items:center;padding:4px 0;border-bottom:1px dashed var(--line2)}
+.toc li.sub{padding-left:22px}
+.toc .rng{color:var(--muted);font-variant-numeric:tabular-nums;min-width:86px}
+.strip{display:flex;gap:4px;flex-wrap:wrap;margin:6px 0}
+.strip span{width:26px;height:34px;border:1.5px solid var(--line2);background:var(--grey-bg);font:700 10px system-ui;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px}
+.strip span.c1{background:var(--blue-bg);border-color:var(--blue)}.strip span.c2{background:var(--green-bg);border-color:var(--green)}.strip span.c3{background:var(--yel-bg);border-color:var(--yel)}
+.dq{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:14px 16px;margin:14px 0;max-width:1000px}
+.dq h3{margin:0 0 8px;font-size:16px}
+.opt{border-left:4px solid var(--line2);padding:6px 10px;margin:6px 0;font-size:13px}
+.opt.rec{border-left-color:var(--blue);background:var(--blue-bg)}
+.opt b{display:block}
+@media (max-width:820px){.grid{grid-template-columns:1fr}body{padding:16px}}
+
+/* registres : état des pages */
+.pmap{display:grid;grid-template-columns:repeat(auto-fill,minmax(30px,1fr));gap:3px;margin:8px 0}
+.pmap span{height:38px;border:1.5px solid var(--line2);font:700 10px system-ui;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px;background:var(--grey-bg);color:var(--muted);position:relative}
+.pmap .s-fin{background:var(--green-bg);border-color:var(--green);color:var(--green)}
+.pmap .s-relue{background:#e3eeff;border-color:var(--blue);color:var(--blue-ink)}
+.pmap .s-cours{background:var(--yel-bg);border-color:var(--yel);color:var(--yel-ink)}
+.pmap .s-todo{background:var(--paper)}
+.pmap .s-abs{background:repeating-linear-gradient(135deg,var(--red-bg) 0 4px,var(--paper) 4px 8px);border-color:var(--red);border-style:dashed;color:var(--red)}
+.pmap .s-pasligne{background:repeating-linear-gradient(135deg,var(--vio-bg) 0 4px,var(--paper) 4px 8px);border-color:var(--vio);border-style:dashed;color:var(--vio)}
+.pmap .s-blank{background:var(--paper);border-style:dotted;color:var(--soft)}
+.pmap .s-cur{outline:3px solid var(--ink);outline-offset:1px}
+.leg{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;margin:6px 0}
+.leg i{display:inline-block;width:14px;height:14px;border:1.5px solid var(--line2);vertical-align:-3px;margin-right:4px}
+.stack{display:flex;height:16px;border:2px solid var(--ink);margin:6px 0;overflow:hidden}
+.stack b{display:block;height:100%}
+.stack .a{background:var(--green)}.stack .b{background:var(--blue)}.stack .c{background:var(--yel)}.stack .d{background:var(--line2)}.stack .e{background:repeating-linear-gradient(135deg,var(--red) 0 3px,var(--red-bg) 3px 6px)}
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:8px 0}
+.kpi div{border:2px solid var(--ink);background:var(--paper);padding:8px 10px}
+.kpi b{display:block;font-size:22px;line-height:1.1}.kpi small{color:var(--muted);font-size:12px}
+.todo{list-style:none;margin:0;padding:0;font-size:13px}
+.todo li{display:flex;gap:8px;align-items:baseline;padding:5px 0;border-bottom:1px dashed var(--line2)}
+.todo li b{min-width:28px;text-align:right}
+.tree{list-style:none;margin:0;padding:0;font-size:13px}
+.tree li{padding:0}
+.tree .ln{display:grid;grid-template-columns:20px minmax(0,1fr) auto;gap:6px;align-items:center;padding:5px 0;border-bottom:1px dashed var(--line2)}
+.tree ul{list-style:none;margin:0;padding:0 0 0 22px}
+.tree .tw{font:700 12px system-ui;color:var(--muted);text-align:center;border:1.5px solid var(--line2);height:20px;line-height:17px}
+.tree .rng{color:var(--muted);font-variant-numeric:tabular-nums;font-size:12px;margin-right:6px}
+.tree .el{color:var(--muted);font-style:italic}
+.minibar{display:inline-flex;width:70px;height:8px;border:1.5px solid var(--ink);vertical-align:middle;overflow:hidden}.minibar b{display:block;height:100%}
+.ft td:has(.minibar){white-space:nowrap}.ft td.num{font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.ft tr.grp td{background:var(--grey-bg);font-weight:800;border-bottom:2px solid var(--ink)}
+.ft tr.fonds td{font-weight:700}
+.idf{display:grid;grid-template-columns:170px minmax(0,1fr);gap:6px 10px;font-size:13px}
+.idf .k{color:var(--muted)}
+.hist{display:flex;align-items:flex-end;gap:2px;height:70px;border-bottom:2px solid var(--ink);margin:6px 0 2px}
+.hist i{flex:1;background:var(--blue);min-height:2px}.hist i.gap{background:repeating-linear-gradient(135deg,var(--red) 0 3px,transparent 3px 6px);height:100%!important;opacity:.6}
+.hx{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}
+.chk{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 16px;font-size:12.5px}
+@media (max-width:820px){.grid,.grid3{grid-template-columns:minmax(0,1fr)}.idf{grid-template-columns:minmax(0,1fr)}.chk{grid-template-columns:minmax(0,1fr)}body{padding:14px}}
+
+.idea{border:2px solid var(--ink);background:var(--paper);padding:10px 12px;box-shadow:4px 4px 0 var(--shadow);margin:0 0 10px}
+.idea h4{margin:0 0 4px;font-size:15px}.idea p{margin:4px 0;font-size:13.5px}
+.ideas{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px}
+.pr{font:700 10.5px system-ui;padding:2px 6px;border:1.5px solid;margin-left:6px;vertical-align:2px;white-space:nowrap}
+.pr.a{color:var(--green);background:var(--green-bg)}.pr.b{color:var(--blue-ink);background:var(--blue-bg)}.pr.c{color:var(--muted);background:var(--grey-bg)}
+table.t{border-collapse:collapse;width:100%;font-size:13px;background:var(--paper)}table.t td,table.t th{border:1px solid var(--line2);padding:5px 7px;text-align:left;vertical-align:top}table.t th{background:var(--grey-bg)}
+.ask{border:2px solid var(--ink);background:var(--paper);padding:12px;box-shadow:6px 6px 0 var(--shadow);max-width:900px}
+.ask .in{border:2px solid var(--blue);padding:9px 12px;font-size:15px;margin-bottom:10px}
+.sugg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.sugg>div{border:2px solid var(--line2);padding:8px}.sugg>div.on{border-color:var(--blue)}
+.sugg .pv{height:70px;display:flex;align-items:flex-end;gap:3px;margin-bottom:6px;background:var(--grey-bg);padding:6px}.sugg .pv b{flex:1;background:var(--blue)}
+.boxes{display:flex;flex-wrap:wrap;gap:12px}.bx{width:150px;font-size:12px;text-align:center}
+.bx .c{height:74px;display:flex;flex-direction:column;justify-content:center;align-items:center;margin-bottom:4px;padding:4px;color:#111}
+@media (max-width:700px){.sugg{grid-template-columns:1fr}}
+
+.tool{background:var(--paper);border:2px solid var(--ink);box-shadow:5px 5px 0 var(--shadow);padding:12px 14px;min-width:0}
+.tool h3{margin:0 0 6px;font-size:16px}.tool h4{font:700 11px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin:10px 0 4px}
+.tool ul{margin:0;padding-left:18px;font-size:13px}.tool li{margin:2px 0}
+.lk{font-size:13px;margin:3px 0;display:flex;gap:6px;align-items:baseline;flex-wrap:wrap}
+.menu{background:var(--paper);border:2px solid var(--ink);box-shadow:5px 5px 0 var(--shadow);width:min(360px,100%);font-size:13px}
+.menu div{padding:6px 12px;border-bottom:1px solid var(--line)}.menu .t{background:var(--bar);color:var(--bar-ink);font-weight:800}
+.menu .g{font:700 10.5px system-ui;color:var(--soft);letter-spacing:.08em;text-transform:uppercase;background:var(--grey-bg)}
+@media (max-width:820px){.grid,.grid3{grid-template-columns:minmax(0,1fr)}body{padding:16px}}
+</style></head><body><div class="wrap">
+<h1>🛠 Outils de modification : ce qu'ils font, ce qui manque, les liens entre eux</h1>
+<p class="sub">J'ai regardé dans le code chacun des 20 outils (Listes → Outils de modification) : ce qu'il sait faire, ce qui manque par rapport à un outil du même genre, et les liens utiles vers les autres outils. Rien n'est codé : coche ce que tu veux, je fais ensuite.</p>
+<div class="simple"><p><b>En bref.</b> Aujourd'hui, un seul vrai « pont » relie les outils : <b>📤 Envoyer vers…</b> (Retouche et Dessin vectoriel → Montage ou Studio d'animation). Les autres liens existent par endroits (Son ↔ Montage, Tableur → Présentation, Traitement de texte → Mise en page, Cousinades → Faire-part…).</p>
+<p>Je propose <b>22 liens prêts</b> (l'outil d'arrivée sait déjà recevoir : c'est un bouton à ajouter), <b>9 à étendre</b> (l'outil d'arrivée doit apprendre à recevoir une chose en plus) et <b>23 à créer</b>, plus une dizaine de fonctions qui manquent.</p></div>
+<div class="toc"><a href="#p1"><b>1</b>Un seul « 📤 Envoyer vers… »</a><a href="#p2"><b>2</b>Les 20 outils</a><a href="#p3"><b>3</b>Ce qui manque</a><a href="#p4"><b>4</b>Par où commencer</a><a href="#p5"><b>5</b>Ce que tu décides</a></div>
+
+<div class="part" id="p1">Partie 1</div><h2>Un seul menu « 📤 Envoyer vers… », le même dans chaque outil</h2>
+<p class="sub">Plutôt que des boutons différents partout : dans le menu Fichier de chaque outil, le même « 📤 Envoyer vers… ». Il ne propose que les outils qui savent recevoir ce qu'on envoie (une image, un texte, un tableau, un son, une vidéo). Ce qui est envoyé est d'abord rangé dans les Médias (rien ne se perd), avec « ↶ Annuler ».</p>
+<div class="grid"><div><div class="menu"><div class="t">📤 Envoyer vers… (depuis la Retouche)</div><div class="g">Une image</div><div>🎬 Un nouveau montage · un montage existant…</div><div>🎞 Le Studio d'animation (nouveau film · film existant…)</div><div>🎞️ Une présentation (nouvelle diapositive) <span class="badge new">nouveau</span></div><div>📐 Un livre de la Mise en page <span class="badge new">nouveau</span></div><div>📝 Un document du Traitement de texte <span class="badge new">nouveau</span></div><div>🔍 Comparer avec une autre photo <span class="badge new">nouveau</span></div><div>📜 L'Atelier de transcription <span class="badge new">nouveau</span></div><div>🌐 Une page de mon site <span class="badge new">nouveau</span></div></div></div>
+<div><table><tr><th>On envoie</th><th>Depuis</th><th>Vers</th></tr>
+<tr><td>🖼 une image</td><td>Retouche, Vectoriel, Carte, Arbre, Faire-part, Sceaux, Comparer, Maison, Tableaux</td><td>Montage, Studio, Présentation, Mise en page, Traitement de texte, Site, Retouche, Comparer, Atelier</td></tr>
+<tr><td>📝 un texte</td><td>Atelier, Son (transcription), Comparer (rapport)</td><td>Traitement de texte, Présentation, Site</td></tr>
+<tr><td>🧾 des lignes</td><td>Atelier (personnes repérées), Cousinades (invités)</td><td>Tableur</td></tr>
+<tr><td>🎧 un son</td><td>Son</td><td>Montage (avec sous-titres), Studio, Site</td></tr>
+<tr><td>🎬 une vidéo</td><td>Diaporama, Présentation, Studio</td><td>Montage, Site</td></tr></table>
+<p class="note">Le menu existe déjà pour les images (heritage-envoyer.js) : il s'agrandit, et les autres outils l'appellent.</p></div></div>
+
+<div class="part" id="p2">Partie 2</div><h2>Les 20 outils, un par un</h2>
+<p class="sub"><span class="badge ok">prêt</span> l'outil d'arrivée sait déjà recevoir : un bouton suffit. <span class="badge warn">à étendre</span> il doit apprendre à recevoir une chose en plus. <span class="badge new">à créer</span> c'est à fabriquer. <span class="badge have">existe déjà</span> le lien est déjà là.</p>
+<div class="grid"><div class="tool"><h3>🎬 Montage vidéo</h3><h4>Ce qu’il fait déjà</h4><p class="mini" style="margin:0">MP4, WebM, son seul (MP3, WAV), sous-titres .srt, chapitres YouTube ; plusieurs caméras ; titres, voix off ; couleurs, fond vert, suivi d'objet ; modèles « La vie de… »</p><h4>Ce qui manque</h4><ul><li>Export GIF et images seules (le Studio d'animation en fait)</li><li>Recevoir plusieurs images d'un coup (un album)</li></ul><h4>Liens avec les autres outils</h4><div class="lk"><span class="badge have">existe déjà</span> <span>← Studio d'animation (carte ou graphique animé)</span></div><div class="lk"><span class="badge have">existe déjà</span> <span>↔ Son (nettoyer le son d'un rush)</span></div><div class="lk"><span class="badge ok">prêt</span> <span>← Diaporama et Présentation : la vidéo continue dans le montage</span></div><div class="lk"><span class="badge new">à créer</span> <span>→ Mon site web : bloc vidéo</span></div></div><div class="tool"><h3>🎧 Son</h3><h4>Ce qu’il fait déjà</h4><p class="mini" style="margin:0">Enregistrer au micro, sauver une cassette, couper, effets, spectre (réparer au pinceau), multipiste ; transcription à la main horodatée ; MP3, WAV, FLAC, Opus, AIFF ; .txt .srt .vtt .cue</p><h4>Ce qui manque</h4><ul><li>« Transcrire tout seul » (marqué « bientôt »)</li></ul><h4>Liens avec les autres outils</h4><div class="lk"><span class="badge have">existe déjà</span> <span>→ Montage</span></div><div class="lk"><span class="badge ok">prêt</span> <span>→ Traitement de texte : la transcription mise au propre</span></div><div class="lk"><span class="badge warn">à étendre</span> <span>→ Montage avec la transcription en sous-titres</span></div><div class="lk"><span class="badge new">à créer</span> <span>→ Studio d'animation : voix ou musique du film</span></div><div class="lk"><span class="badge new">à créer</span> <span>→ Mon site web : bloc son</span></div></div><div class="tool"><h3>🎚️ Retouche des photos</h3><h4>Ce qu’il fait déjà</h4><p class="mini" style="margin:0">Réglages, courbes, recadrer, perspective ; restaurer (plis, rayures, colorisation) ; détourage, ciel, agrandir ×4, panorama ; calques, PSD ; « ⚡ Actions » ; PNG, JPG, impression</p><h4>Ce qui manque</h4><ul><li>Export WebP et TIFF (le Lot sait déjà en faire)</li><li>Les « Actions » utilisables dans Traitements par lot</li></ul><h4>Liens avec les autres outils</h4><div class="lk"><span class="badge have">existe déjà</span> <span>→ Montage / Studio (📤 Envoyer)</span></div><div class="lk"><span class="badge ok">prêt</span> <span>→ Comparer deux photos (avant / après, ou une autre photo)</span></div><div class="lk"><span class="badge ok">prêt</span> <span>→ Atelier de transcription (lire l'acte qu'on vient d'éclaircir)</span></div><div class="lk"><span class="badge warn">à étendre</span> <span>→ Présentation, Mise en page (nouvelles cibles de 📤 Envoyer)</span></div></div><div class="tool"><h3>✒️ Dessin vectoriel</h3><h4>Ce qu’il fait déjà</h4><p class="mini" style="margin:0">Formes, Pathfinder, texte sur courbe, blasons, vectoriser une image, mode plan ; SVG, PNG, JPG, WEBP, PDF, recto-verso A4</p><h4>Ce qui manque</h4><ul><li>Export DXF (la Maison en fait)</li><li>Insérer un diagramme ou un petit arbre de la base</li></ul><h4>Liens avec les autres outils</h4><div class="lk"><span class="badge have">existe déjà</span> <span>→ Montage / Studio</span></div><div class="lk"><span class="badge have">existe déjà</span> <span>↔ Tableaux (« Mes formes »)</span></div><div class="lk"><span class="badge warn">à étendre</span> <span>→ Mise en page, Traitement de texte, Présentation (📤 Envoyer)</span></div><div class="lk"><span class="badge new">à créer</span> <span>→ Mon site web : bloc dessin (SVG)</span></div></div><div class="tool"><h3>📐 Mise en page (livres)</h3><h4>Ce qu’il fait déjà</h4><p class="mini" style="margin:0">Livres, PDF, ePub, PDF/A, fond perdu ; sommaire, index, sources ; arbres, fiches, diagrammes vivants ; publipostage ; relecture par un cousin</p><h4>Ce qui manque</h4><ul><li>Poser un dessin vectoriel enregistré (arbre décoratif, carte, blason) en vrai dessin, pas en image</li><li>Importer un DOCX directement</li></ul><h4>Liens avec les autres outils</h4><div class="lk"><span class="badge have">existe déjà</span> <span>← Traitement de texte</span></div><div class="lk"><span class="badge have">existe déjà</span> <span>→ Retouche (image posée)</span></div><div class="lk"><span class="badge new">à créer</span> <span>← Arbre décoratif, Carte, Sceaux : « Dessin vectoriel » dans « Placer »</span></div><div class="lk"><span class="badge new">à créer</span> <span>→ Mon site web (l'export HTML existe)</span></div></div><div class="tool"><h3>🧩 Tableaux</h3><h4>Ce qu’il fait déjà</h4><p class="mini" style="margin:0">Toile libre : formes, notes, flèches, images, sons, vidéos, PDF, fiches, écrans de l'app, sous-tableaux, tableaux de cellules ; PDF, PNG, JPG</p><h4>Ce qui manque</h4><ul><li>Envoyer un tableau dans une présentation ou un livre</li></ul><h4>Liens avec les autres outils</h4><div class="lk"><span class="badge have">existe déjà</span> <span>↔ Tableur (cellules)</span></div><div class="lk"><span class="badge have">existe déjà</span> <span>↔ Dessin vectoriel (formes)</span></div><div class="lk"><span class="badge warn">à étendre</span> <span>→ Présentation (une image du tableau sur une diapositive)</span></div><div class="lk"><span class="badge ok">prêt</span> <span>→ Retouche (une image posée)</span></div></div><div class="tool"><h3>🗺️ Carte</h3><h4>Ce qu’il fait déjà</h4><p class="mini" style="margin:0">Cartes d'époque (état-major, Cassini, cadastre…), objets qui savent ce qu'ils sont, échelle, rose des vents, légende ; lieux de la base ; curseur du temps</p><h4>Ce qui manque</h4><ul><li>Le curseur du temps en film</li></ul><h4>Liens avec les autres outils</h4><div class="lk"><span class="badge have">existe déjà</span> <span>→ Studio d'animation (image fixe)</span></div><div class="lk"><span class="badge new">à créer</span> <span>→ Studio d'animation : une scène « carte » qui défile dans le temps</span></div><div class="lk"><span class="badge new">à créer</span> <span>→ Mise en page, Mon site web (dessin)</span></div></div><div class="tool"><h3>🌳 Arbre décoratif</h3><h4>Ce qu’il fait déjà</h4><p class="mini" style="margin:0">8 formes (éventails, roue, arbre dessiné…), jusqu'à 12 générations, couleurs par branche ; tous les exports du vectoriel</p><h4>Ce qui manque</h4><ul><li>L'arbre de descendance (il n'existe que dans Cousinades)</li><li>Des photos dans les médaillons</li></ul><h4>Liens avec les autres outils</h4><div class="lk"><span class="badge ok">prêt</span> <span>→ Faire-part : l'arbre en fond d'un faire-part (moteurs déjà combinés dans Cousinades)</span></div><div class="lk"><span class="badge new">à créer</span> <span>→ Mise en page (pleine page), Présentation</span></div><div class="lk"><span class="badge new">à créer</span> <span>→ Mon site web</span></div></div><div class="tool"><h3>📰 Faire-part et affiches</h3><h4>Ce qu’il fait déjà</h4><p class="mini" style="margin:0">Naissance, mariage, décès, cousinade, noces, avis, invitation, menu ; 6 styles ; textes remplis depuis une fiche ; recto-verso</p><h4>Ce qui manque</h4><ul><li>Publipostage : un faire-part par personne ou par foyer (le Traitement de texte et la Mise en page en ont un)</li></ul><h4>Liens avec les autres outils</h4><div class="lk"><span class="badge have">existe déjà</span> <span>→ Montage (carton de titre)</span></div><div class="lk"><span class="badge new">à créer</span> <span>→ Traitements par lot : imprimer en série</span></div><div class="lk"><span class="badge new">à créer</span> <span>→ Mon site web : une page d'annonce</span></div></div><div class="tool"><h3>🔤 Signatures et sceaux</h3><h4>Ce qu’il fait déjà</h4><p class="mini" style="margin:0">Détourer la signature d'un acte (le papier s'efface, l'encre devient un tracé) ; monogrammes, cachets, ex-libris</p><h4>Liens avec les autres outils</h4><div class="lk"><span class="badge ok">prêt</span> <span>← Atelier de transcription : une zone « signature » s'ouvre ici</span></div><div class="lk"><span class="badge new">à créer</span> <span>→ Faire-part, Mise en page (signature en bas de page)</span></div></div><div class="tool"><h3>🔍 Comparer deux photos</h3><h4>Ce qu’il fait déjà</h4><p class="mini" style="margin:0">Côte à côte, fondu, rideau ; zoom lié ; yeux alignés tout seuls ; score prudent ; « Hier et aujourd'hui » pour les lieux</p><h4>Ce qui manque</h4><ul><li>Aucun export : ni l'image côte à côte, ni le fondu, ni le rideau</li><li>Imprimer le verdict</li></ul><h4>Liens avec les autres outils</h4><div class="lk"><span class="badge ok">prêt</span> <span>→ Retouche (l'une des deux photos)</span></div><div class="lk"><span class="badge ok">prêt</span> <span>→ Traitement de texte : un rapport avec le verdict et les notes</span></div><div class="lk"><span class="badge warn">à étendre</span> <span>→ Montage / Studio : le fondu « deux âges » (après l'export)</span></div></div><div class="tool"><h3>🎉 Cousinades</h3><h4>Ce qu’il fait déjà</h4><p class="mini" style="margin:0">Descendants vivants par branche, invités, réponses, import CSV/XLSX ; invitations par foyer ; badges ; grand arbre ; jour J : plan de table, album</p><h4>Ce qui manque</h4><ul><li>L'album ne débouche sur rien</li></ul><h4>Liens avec les autres outils</h4><div class="lk"><span class="badge have">existe déjà</span> <span>→ Traitement de texte, Faire-part, Arbre décoratif</span></div><div class="lk"><span class="badge ok">prêt</span> <span>→ Tableur : la liste des invités (au lieu du CSV)</span></div><div class="lk"><span class="badge ok">prêt</span> <span>→ Diaporama : l'album de la journée</span></div><div class="lk"><span class="badge warn">à étendre</span> <span>→ Montage : le film de la journée</span></div><div class="lk"><span class="badge new">à créer</span> <span>→ Mon site web : page d'information</span></div></div><div class="tool"><h3>📜 Atelier de transcription</h3><h4>Ce qu’il fait déjà</h4><p class="mini" style="margin:0">Zones, lecture automatique (manuscrit, imprimé), noms, dates, lieux, métiers repérés ; sommes et mesures ; TXT, PDF, TEI, ALTO, PAGE</p><h4>Ce qui manque</h4><ul><li>« 📝 Dans le traitement de texte » dans l'Atelier lui-même (il n'existe que dans Documents)</li><li>Export DOCX</li></ul><h4>Liens avec les autres outils</h4><div class="lk"><span class="badge ok">prêt</span> <span>→ Traitement de texte</span></div><div class="lk"><span class="badge ok">prêt</span> <span>→ Signatures et sceaux (zone signature)</span></div><div class="lk"><span class="badge ok">prêt</span> <span>→ Retouche / Restaurer : éclaircir l'acte avant de le lire</span></div><div class="lk"><span class="badge ok">prêt</span> <span>→ Tableur : les personnes, rôles et dates repérés</span></div></div><div class="tool"><h3>🎞️ Présentation et diaporama</h3><h4>Ce qu’il fait déjà</h4><p class="mini" style="margin:0">Diaporama avec mouvements, voix, musique, « Récit d'une vie » ; présentation façon Keynote, import PPTX/ODP/PDF ; WebM, PDF, PNG</p><h4>Ce qui manque</h4><ul><li>Export PPTX (l'import existe)</li><li>Faire des diapositives depuis un texte (un titre = une diapositive)</li></ul><h4>Liens avec les autres outils</h4><div class="lk"><span class="badge have">existe déjà</span> <span>← Tableur (graphiques, tableaux)</span></div><div class="lk"><span class="badge ok">prêt</span> <span>→ Montage : la vidéo continue dans le montage</span></div><div class="lk"><span class="badge warn">à étendre</span> <span>← Traitement de texte</span></div><div class="lk"><span class="badge new">à créer</span> <span>→ Mon site web</span></div></div><div class="tool"><h3>🧾 Tableur</h3><h4>Ce qu’il fait déjà</h4><p class="mini" style="margin:0">Formules, tri, filtres, tableau croisé, graphiques liés, CSV, XLSX, ODS ; « Remplir depuis l'app » ; « 🎯 Préparer pour… » diagramme, tableau, présentation, recueil</p><h4>Ce qui manque</h4><ul><li>Un graphique en image</li></ul><h4>Liens avec les autres outils</h4><div class="lk"><span class="badge have">existe déjà</span> <span>→ Présentation, Diagrammes, Tableaux</span></div><div class="lk"><span class="badge ok">prêt</span> <span>→ Traitement de texte : nouvelle case dans « 🎯 Préparer pour… »</span></div><div class="lk"><span class="badge new">à créer</span> <span>→ Mise en page</span></div></div><div class="tool"><h3>📝 Traitement de texte</h3><h4>Ce qu’il fait déjà</h4><p class="mini" style="margin:0">DOCX, ODT, RTF, MD, PDF ; notes, sources, sommaire, index ; personnes, lieux, arbres, diagrammes ; suivi des modifications ; publipostage ; vérifier avec les fiches</p><h4>Ce qui manque</h4><ul><li>Export ePub (la Mise en page en a un)</li></ul><h4>Liens avec les autres outils</h4><div class="lk"><span class="badge have">existe déjà</span> <span>→ Mise en page, ↔ Tableur</span></div><div class="lk"><span class="badge ok">prêt</span> <span>→ Retouche (une image du texte)</span></div><div class="lk"><span class="badge warn">à étendre</span> <span>→ Présentation (un titre = une diapositive)</span></div><div class="lk"><span class="badge new">à créer</span> <span>→ Mon site web (une page)</span></div><div class="lk"><span class="badge ok">prêt</span> <span>→ Son : enregistrer la lecture d'une lettre</span></div></div><div class="tool"><h3>🌐 Mon site web</h3><h4>Ce qu’il fait déjà</h4><p class="mini" style="margin:0">Visuel et code ; modèles (famille, ancêtre, village…) ; arbre, fiche, frise, carte, diagramme ; publier en ligne</p><h4>Ce qui manque</h4><ul><li>Aucun bloc vidéo ni son</li><li>Pas de bloc dessin, document, diaporama ou transcription</li></ul><h4>Liens avec les autres outils</h4><div class="lk"><span class="badge new">à créer</span> <span>← Montage, Son, Diaporama (blocs vidéo et son)</span></div><div class="lk"><span class="badge new">à créer</span> <span>← Traitement de texte, Arbre décoratif, Carte, Faire-part, Cousinades</span></div></div><div class="tool"><h3>⚙️ Traitements par lot</h3><h4>Ce qu’il fait déjà</h4><p class="mini" style="margin:0">Renommer, redimensionner, filigrane, formats (images, documents, classeurs, sons), poids, effacer les métadonnées, un PDF ; recettes</p><h4>Ce qui manque</h4><ul><li>Le lancer sur des médias choisis dans Médias</li><li>Les « Actions » de la Retouche, la restauration</li><li>Lire (OCR) toutes les pages d'un coup ; son au même volume</li></ul><h4>Liens avec les autres outils</h4><div class="lk"><span class="badge warn">à étendre</span> <span>← Médias : « ⚙️ Traiter la sélection »</span></div><div class="lk"><span class="badge new">à créer</span> <span>↔ Retouche (« Actions »)</span></div><div class="lk"><span class="badge ok">prêt</span> <span>→ Diaporama / Montage avec le résultat</span></div></div><div class="tool"><h3>🎞 Studio d'animation</h3><h4>Ce qu’il fait déjà</h4><p class="mini" style="margin:0">Scènes (titre, migrations, course, pyramide, courbe, arbre, frontières, diagramme, image), caméra, légendes ; WebM, MP4, GIF, PNG</p><h4>Ce qui manque</h4><ul><li>Scène « carte vectorielle » et « plan de maison par époques »</li></ul><h4>Liens avec les autres outils</h4><div class="lk"><span class="badge have">existe déjà</span> <span>↔ Montage</span></div><div class="lk"><span class="badge have">existe déjà</span> <span>← Retouche, Dessin vectoriel</span></div><div class="lk"><span class="badge new">à créer</span> <span>← Son (voix du film)</span></div><div class="lk"><span class="badge new">à créer</span> <span>← Carte, Maison (scènes animées)</span></div></div><div class="tool"><h3>🏠 Maison (plan et 3D)</h3><h4>Ce qu’il fait déjà</h4><p class="mini" style="margin:0">Plan, étages, 450 meubles et plus, textures ; plan scanné, DXF ; 3D, visite ; époques ▶ ; souvenirs ; PNG, PDF, SVG, DXF</p><h4>Ce qui manque</h4><ul><li>Film de la visite 3D ou des époques</li></ul><h4>Liens avec les autres outils</h4><div class="lk"><span class="badge have">existe déjà</span> <span>→ Tableur (surfaces)</span></div><div class="lk"><span class="badge ok">prêt</span> <span>→ Montage / Studio : une capture 3D ou le plan</span></div><div class="lk"><span class="badge ok">prêt</span> <span>→ Dessin vectoriel : retoucher le plan</span></div><div class="lk"><span class="badge new">à créer</span> <span>→ Studio : le plan qui change d'époque</span></div></div></div>
+
+<div class="part" id="p3">Partie 3</div><h2>Les fonctions qui manquent (sans parler des liens)</h2>
+<table><tr><th>Outil</th><th>Ce qui manque</th><th>Utile pour</th></tr>
+<tr><td>🔍 Comparer deux photos</td><td>Exporter l'image (côte à côte, fondu, rideau) et imprimer le verdict</td><td>la garder, l'envoyer, la mettre dans un livre</td></tr>
+<tr><td>🌐 Mon site web</td><td>Blocs vidéo, son, dessin, document, diaporama, transcription</td><td>montrer les films, les témoignages, les lettres</td></tr>
+<tr><td>🎞️ Présentation</td><td>Export PPTX (PowerPoint)</td><td>la donner à quelqu'un qui n'a pas l'app</td></tr>
+<tr><td>📰 Faire-part</td><td>Publipostage (un par personne ou par foyer)</td><td>les invitations d'une fête</td></tr>
+<tr><td>🎬 Montage</td><td>Export GIF</td><td>les messageries, les réseaux</td></tr>
+<tr><td>🎚️ Retouche</td><td>Export WebP et TIFF</td><td>les archives (TIFF), le web (WebP)</td></tr>
+<tr><td>⚙️ Lot</td><td>Les « Actions » de la Retouche, la lecture (OCR) de toutes les pages, son au même volume</td><td>traiter un registre entier</td></tr>
+<tr><td>🎧 Son</td><td>« Transcrire tout seul »</td><td>les témoignages enregistrés</td></tr>
+<tr><td>🌳 Arbre décoratif</td><td>Arbre de descendance, photos dans les médaillons</td><td>un cadeau de famille</td></tr>
+<tr><td>📝 Traitement de texte</td><td>Export ePub</td><td>un petit livre à lire sur liseuse</td></tr>
+<tr><td>📜 Atelier</td><td>Export DOCX</td><td>envoyer une transcription à un cousin</td></tr>
+<tr><td>🏠 Maison, 🗺️ Carte</td><td>Le film des époques, la carte qui défile dans le temps</td><td>le Studio d'animation</td></tr></table>
+
+<div class="part" id="p4">Partie 4</div><h2>Par où commencer (conseillé)</h2>
+<div class="grid3">
+<div class="case"><div class="head"><span class="tag">Vague 1</span><span class="badge ok">rapide</span></div><h3>Les 22 liens prêts</h3><p class="why">Des boutons qui appellent un outil qui sait déjà recevoir : Atelier → Traitement de texte, Sceaux, Retouche, Tableur ; Son → Traitement de texte ; Diaporama → Montage ; Retouche ↔ Comparer, → Atelier ; Cousinades → Tableur, Diaporama ; Maison → Montage, Vectoriel ; Tableur → Traitement de texte…</p></div>
+<div class="case"><div class="head"><span class="tag">Vague 2</span><span class="badge warn">moyen</span></div><h3>« 📤 Envoyer vers… » partout</h3><p class="why">Le menu commun (partie 1), avec les nouvelles cibles (Présentation, Mise en page, Traitement de texte, Site) ; le Montage qui reçoit plusieurs images et des sous-titres ; le Lot sur une sélection de Médias ; l'export de Comparer.</p></div>
+<div class="case"><div class="head"><span class="tag">Vague 3</span><span class="badge new">gros</span></div><h3>Les nouveautés</h3><p class="why">Blocs vidéo, son et dessin du site ; scène « carte » et « maison par époques » du Studio ; export PPTX ; publipostage des faire-part ; « Actions » dans le Lot ; arbre de descendance.</p></div></div>
+
+<div class="part" id="p5">Partie 5</div><h2>Ce que tu décides</h2>
+<table><tr><th></th><th>Choix</th><th>Conseil</th></tr>
+<tr><td>☐</td><td>Un seul « 📤 Envoyer vers… » commun à tous les outils (partie 1)</td><td><span class="badge ok">conseillé</span></td></tr>
+<tr><td>☐</td><td>Vague 1 : les liens prêts</td><td><span class="badge ok">conseillé</span></td></tr>
+<tr><td>☐</td><td>Vague 2 : les liens à étendre</td><td><span class="badge ok">conseillé</span></td></tr>
+<tr><td>☐</td><td>Vague 3 : toutes les nouveautés, ou seulement certaines (dis lesquelles)</td><td><span class="badge warn">à toi de voir</span></td></tr>
+<tr><td>☐</td><td>Les fonctions qui manquent (partie 3) : toutes, ou une liste</td><td><span class="badge warn">à toi de voir</span></td></tr></table>
+<p class="note">Comme toujours : chaque envoi range une copie dans les Médias et peut s'annuler (↶) ; tout est traduit dans les 31 langues ; une question de FAQ par lien.</p>
+</div></body></html>

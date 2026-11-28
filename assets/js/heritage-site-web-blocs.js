@@ -1,6 +1,7 @@
 /**
  * 🌐 Mon site web — les blocs (en-tête, menu, texte, image, galerie, citation, contact, pied de page ; et ceux de la
  * généalogie : arbre, fiche, frise, carte, chiffres, photos d'une personne, gens d'un lieu), les modèles de sites
+ * (et ceux des autres outils : vidéo, son, dessin, document du traitement de texte, diaporama)
  * (« Ma famille », « Mon ancêtre », « Mon village », « Portfolio d'artiste », « Page vide »), la feuille de styles de départ
  * et le petit script « pont » posé dans l'aperçu isolé (il montre ce qu'on survole, dit à l'éditeur ce qu'on a cliqué,
  * rend le texte modifiable, reçoit les blocs glissés).
@@ -16,6 +17,7 @@
     const PK = () => window.LCNDA_PICKER || A();
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
     const year = new Date().getFullYear();
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s).replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 docs/I18N.md
     const pickPerson = async (title = 'Quelle personne ?') => { const it = await PK().openPicker?.({kind: 'person', title}); return it ? {id: Number(it.id), name: String(it.title || it.label || it.name || '').trim()} : null; };
     const pickPlace = async (title = 'Quel lieu ?') => { const it = await PK().openPicker?.({kind: 'place', title}); return it && Number(it.id) > 0 ? {id: Number(it.id), name: String(it.title || it.label || it.name || '').trim()} : null; };
     /** le fond de carte de l'app (Réglages → Cartes et fonds de carte), sinon Voyager */
@@ -37,6 +39,117 @@
     });
     const mediaSrc = m => `media/${encodeURIComponent(m.filename || m.file || '')}`;
     const pickImages = async (multiple, title) => { const r = await PK().openMediaPicker?.({types: ['image'], multiple, title, okLabel: multiple ? 'Utiliser ces images' : 'Utiliser cette image'}); if (!r) return null; return (Array.isArray(r) ? r : [r]).filter(m => m && (m.filename || m.file)); };
+    /** une vidéo ou un son de tes médias (le choix permet aussi d'importer un fichier de l'ordinateur : 📁 Importer…) */
+    const pickMedia = async (type, title) => { const r = await PK().openMediaPicker?.({types: [type], multiple: false, title}); const m = Array.isArray(r) ? r[0] : r; return m && (m.filename || m.file) ? m : null; };
+    /** un texte simple → des paragraphes HTML (échappés) */
+    const parasOf = text => String(text || '').split(/\r?\n/).map(t => t.trim()).filter(Boolean).map(t => `<p>${esc(t)}</p>`).join('\n');
+    /** une petite fenêtre avec une grande case de texte → le texte, ou null (Annuler) */
+    const askLong = ({title, message = '', value = '', placeholder = '', okLabel = i18n('Valider'), rows = 8, mono = false}) => new Promise(resolve => {
+        let done = false; const end = v => { if (!done) { done = true; resolve(v); } };
+        ext.openDialog({eyebrow: i18n('MON SITE WEB'), title, submitLabel: okLabel, wide: true,
+            body: `${message ? `<p class="sw-hint">${esc(message)}</p>` : ''}<textarea name="lc-long" rows="${rows}" style="width:100%;${mono ? 'font-family:ui-monospace,monospace;font-size:12px' : ''}" placeholder="${esc(placeholder)}" spellcheck="${mono ? 'false' : 'true'}">${esc(value)}</textarea>`,
+            onOpen: d => { d.addEventListener('close', () => setTimeout(() => end(null), 0)); setTimeout(() => d.querySelector('textarea')?.focus(), 30); },
+            onSubmit: f => end(String(f.querySelector('textarea').value || ''))});
+    });
+    /** choisir dans une liste (dessins, documents…) → l'id choisi, ou null */
+    const listPick = ({title, items, empty, okLabel = i18n('Utiliser')}) => new Promise(resolve => {
+        if (!items.length) { A()?.toast?.(empty, 'error'); resolve(null); return; }
+        let done = false; const end = v => { if (!done) { done = true; resolve(v); } };
+        ext.openDialog({eyebrow: i18n('MON SITE WEB'), title, submitLabel: okLabel,
+            body: `<div class="sw-picklist" style="max-height:52vh;overflow:auto;display:grid;gap:4px">${items.map((it, i) => `<label class="sw-pickrow" style="display:flex;gap:8px;align-items:center;padding:6px 8px;border-radius:6px;cursor:pointer"><input type="radio" name="lc-pick" value="${esc(it.id)}"${i ? '' : ' checked'}><span><b>${esc(it.name)}</b>${it.info ? `<br><small>${esc(it.info)}</small>` : ''}</span></label>`).join('')}</div>`,
+            onOpen: d => d.addEventListener('close', () => setTimeout(() => end(null), 0)),
+            onSubmit: f => end(f.querySelector('[name="lc-pick"]:checked')?.value ?? null)});
+    });
+    /** deux façons de faire (comme « Quel diagramme ? ») → la clé choisie, ou null */
+    const chooseWay = (title, ways) => new Promise(resolve => {
+        let done = false; const end = v => { if (!done) { done = true; resolve(v); } };
+        ext.openDialog({eyebrow: i18n('MON SITE WEB'), title, submitLabel: 'Fermer',
+            body: `<div class="sw-tpls">${ways.map(w => `<button type="button" class="sw-tpl" data-lc-way="${esc(w.key)}"><span class="sw-tpl-ico" aria-hidden="true">${w.icon}</span><b>${esc(w.label)}</b><small>${esc(w.hint || '')}</small></button>`).join('')}</div>`,
+            onOpen: d => { d.addEventListener('close', () => setTimeout(() => end(null), 0)); d.addEventListener('click', e => { const b = e.target.closest('[data-lc-way]'); if (!b) return; end(b.dataset.lcWay); d.close(); }); },
+            onSubmit: () => {}});
+    });
+
+    /* ═════ ✒️ Un dessin SVG sans danger : ni script, ni évènement (on…), ni adresse vers l'extérieur ═════ */
+    const SVG_DROP = /^(script|foreignobject|iframe|object|embed|style|animate|animatemotion|animatetransform|set|discard|handler|listener|metadata|title|link|meta|audio|video|image|feimage)$/i;
+    const extUrl = v => /url\(\s*['"]?\s*(?!#)[^)\s]/i.test(v) || /@import|javascript:|expression\(/i.test(v);
+    /** un texte SVG (collé, ou dessiné par le Dessin vectoriel) → le SVG propre, prêt pour une page ; '' s'il n'y a pas de dessin */
+    function cleanSvg(text, {name = '', prefix = ''} = {}) {
+        const src = String(text || '').replace(/^\uFEFF/, '').trim(); if (!src || src.length > 1800000) return '';
+        const m = /<svg\b[\s\S]*<\/svg\s*>/i.exec(src); if (!m) return '';
+        const txt = /^<svg\b[^>]*\sxmlns\s*=/i.test(m[0]) ? m[0] : m[0].replace(/^<svg\b/i, '<svg xmlns="http://www.w3.org/2000/svg"'); // un SVG collé sans xmlns : ses formes sont bien du SVG
+        let doc = new DOMParser().parseFromString(txt, 'image/svg+xml');
+        if (doc.getElementsByTagName('parsererror').length) { const h = new DOMParser().parseFromString(`<!doctype html><body>${txt}`, 'text/html').querySelector('svg'); if (!h) return ''; doc = new DOMParser().parseFromString(new XMLSerializer().serializeToString(h), 'image/svg+xml'); if (doc.getElementsByTagName('parsererror').length) return ''; }
+        const svg = doc.documentElement; if (!svg || svg.localName.toLowerCase() !== 'svg') return '';
+        const pre = prefix || `d${Math.random().toString(36).slice(2, 7)}`, ids = new Map();
+        [...svg.querySelectorAll('*')].reverse().forEach(el => {
+            const tag = el.localName || '';
+            if (SVG_DROP.test(tag) || el.namespaceURI !== 'http://www.w3.org/2000/svg') { el.remove(); return; }
+            if (tag.toLowerCase() === 'a') { el.replaceWith(...el.childNodes); }
+        });
+        [svg, ...svg.querySelectorAll('*')].forEach(el => {
+            [...el.attributes].forEach(a => {
+                const n = a.name.toLowerCase(), v = a.value;
+                if (/^on/.test(n) || /^(formaction|srcdoc|src|ping)$/.test(n)) { el.removeAttribute(a.name); return; }
+                if (n === 'href' || n === 'xlink:href') { el.removeAttribute(a.name); if (/^#[\w.:-]+$/.test(v.trim())) el.setAttribute('href', v.trim()); return; }
+                if (extUrl(v) || /(java|vb|live)script\s*:/i.test(v)) { el.removeAttribute(a.name); return; }
+            });
+            if (el.id) { const nid = `${pre}-${el.id}`.replace(/[^\w.:-]/g, '_'); ids.set(el.id, nid); el.id = nid; }
+        });
+        if (ids.size) [svg, ...svg.querySelectorAll('*')].forEach(el => [...el.attributes].forEach(a => {
+            let v = a.value; if (!v.includes('#')) return;
+            v = v.replace(/url\(\s*(['"]?)#([^)'"\s]+)\1\s*\)/g, (x, q, id) => (ids.has(id) ? `url(#${ids.get(id)})` : x));
+            if (a.name === 'href' && /^#/.test(v) && ids.has(v.slice(1))) v = `#${ids.get(v.slice(1))}`;
+            if (v !== a.value) el.setAttribute(a.name, v);
+        }));
+        const W = parseFloat(svg.getAttribute('width')), H = parseFloat(svg.getAttribute('height'));
+        if (!svg.getAttribute('viewBox') && W > 0 && H > 0) svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+        if (svg.getAttribute('viewBox')) { svg.removeAttribute('width'); svg.removeAttribute('height'); }
+        svg.setAttribute('role', 'img'); if (name) svg.setAttribute('aria-label', String(name).slice(0, 200));
+        const out = new XMLSerializer().serializeToString(svg).replace(/<\?[\s\S]*?\?>/g, '').replace(/<!--[\s\S]*?-->/g, '');
+        return /<svg\b/i.test(out) && out.length < 1500000 ? out : '';
+    }
+    /** ✒️ un dessin du Dessin vectoriel (les miens) → {svg, name} */
+    async function pickVectorSvg() {
+        let docs = []; try { docs = (await A().api('vector_docs')).docs || []; } catch (_) {}
+        const id = await listPick({title: i18n('✒️ Quel dessin ?'), items: docs.slice(0, 200).map(d => ({id: d.id, name: d.name || i18n('Sans nom'), info: d.updated_at ? String(d.updated_at).slice(0, 10).split('-').reverse().join('/') : ''})), empty: i18n('Aucun dessin enregistré dans le Dessin vectoriel.')});
+        if (!id) return null;
+        const r = await A().api('vector_doc', {id: Number(id)}); let raw = '';
+        try { raw = ext.vectorInternals?.docSvg?.(r.doc) || ''; } catch (_) { raw = ''; }
+        if (!raw && /^<svg|^data:image\/svg/i.test(String(r.thumb || ''))) raw = /^data:/i.test(r.thumb) ? decodeURIComponent(String(r.thumb).replace(/^data:image\/svg\+xml(;charset=[\w-]+)?,/i, '')) : r.thumb;
+        if (!raw) throw new Error(i18n('Ce dessin n’a pas pu être lu : ouvre le Dessin vectoriel une fois, puis recommence.'));
+        return {svg: raw, name: r.name || ''};
+    }
+
+    /* ═════ 📝 Un texte du Traitement de texte, mis au propre pour une page ═════ */
+    const DOC_DROP = 'script, style, iframe, object, embed, form, input, button, select, textarea, link, meta, template, noscript, del, svg, canvas, video, audio, [data-tc="del"], .wp-comment, .wp-cmt';
+    const DOC_KEEP = {a: ['href', 'title'], img: ['src', 'alt', 'title', 'width', 'height'], td: ['colspan', 'rowspan'], th: ['colspan', 'rowspan'], ol: ['start'], abbr: ['title']};
+    function cleanDocHtml(html) {
+        let c = String(html || '');
+        try { if (ext.textDocKit?.cleanHtml) c = ext.textDocKit.cleanHtml(c).html || c; } catch (_) {}
+        const doc = parse(c);
+        doc.body.querySelectorAll(DOC_DROP).forEach(e => e.remove());
+        doc.body.querySelectorAll('ins, font, o\\:p').forEach(e => e.replaceWith(...e.childNodes));
+        doc.body.querySelectorAll('*').forEach(el => {
+            const tag = el.tagName.toLowerCase(), keep = DOC_KEEP[tag] || [], align = /text-align\s*:\s*(center|right|justify)/i.exec(el.getAttribute('style') || '');
+            [...el.attributes].forEach(a => { if (!keep.includes(a.name.toLowerCase())) el.removeAttribute(a.name); });
+            if (align && /^(p|h[1-6]|div|li|td|th)$/.test(tag)) el.setAttribute('style', `text-align: ${align[1].toLowerCase()}`);
+            if (tag === 'a') { const h = (el.getAttribute('href') || '').trim(); if (!/^(https?:|mailto:|#|[a-z0-9-]+\.(html|php)\b)/i.test(h)) el.removeAttribute('href'); else if (/^https?:/i.test(h)) el.setAttribute('rel', 'noopener'); }
+            if (tag === 'img') { const s = (el.getAttribute('src') || '').trim(); if (!/^(media\/|data:image\/(png|jpeg|gif|webp);base64,)/i.test(s)) { el.remove(); return; } el.setAttribute('loading', 'lazy'); if (!el.hasAttribute('alt')) el.setAttribute('alt', ''); }
+        });
+        doc.body.querySelectorAll('h1').forEach(h => { const n = doc.createElement('h2'); n.append(...h.childNodes); h.replaceWith(n); }); // le titre de la page reste le seul h1
+        doc.body.querySelectorAll('p, span, div').forEach(e => { if (!e.textContent.trim() && !e.querySelector('img, br, table')) e.remove(); });
+        return doc.body.innerHTML.replace(/\n{3,}/g, '\n\n').trim();
+    }
+    /** 📝 un de mes documents → {html, name} */
+    async function pickTextDoc() {
+        let docs = []; try { docs = (await A().api('textdocs')).items || []; } catch (_) {}
+        const id = await listPick({title: i18n('📝 Quel document ?'), items: docs.slice(0, 200).map(d => ({id: d.id, name: d.name || i18n('Sans nom'), info: [d.info?.words ? i18n('{n} mots', {n: d.info.words}) : '', d.updated_at ? String(d.updated_at).slice(0, 10).split('-').reverse().join('/') : ''].filter(Boolean).join(' · ')})), empty: i18n('Aucun document dans le Traitement de texte.')});
+        if (!id) return null;
+        const r = await A().api('textdoc', {id: Number(id)}), d = r.data || {};
+        const secs = Array.isArray(d.parts) && d.parts.length ? d.parts.flatMap(p => p?.sections || []) : (d.sections || []);
+        return {html: secs.map(x => String(x?.html || '')).join('\n'), name: r.name || ''};
+    }
+
     const section = (name, inner, cls = 'section') => `<section class="${cls}" data-lc-name="${esc(name)}">\n  <div class="conteneur">\n${inner}\n  </div>\n</section>`;
     const geneaBlock = (kind, attrs, name, title) => section(name, `    <h2>${esc(title)}</h2>\n    <div class="lc-bloc" data-lc-block="${kind}"${Object.entries(attrs).map(([k, v]) => ` data-${k}="${esc(v)}"`).join('')} data-lc-name="${esc(name)}"></div>`);
 
@@ -93,6 +206,28 @@ a { color: var(--lc-principale); }
             html: (ctx, o) => section('Image', `    <figure class="image" data-lc-name="Image">\n      <img src="${esc(mediaSrc(o.m))}" alt="${esc(o.m.title || '')}">\n      <figcaption>${esc(o.m.title || '')}</figcaption>\n    </figure>`)},
         {key: 'gallery', group: 'img', icon: '🗂', label: 'Galerie', hint: 'Plusieurs images en vignettes', ask: async () => { const l = await pickImages(true, 'Les images de la galerie'); return l?.length ? {list: l} : null; },
             html: (ctx, o) => section('Galerie', `    <h2>Photos</h2>\n    <div class="galerie" data-lc-name="Galerie">\n${o.list.map(m => `      <figure>\n        <img src="${esc(mediaSrc(m))}" alt="${esc(m.title || '')}" loading="lazy">\n        <figcaption>${esc(m.title || '')}</figcaption>\n      </figure>`).join('\n')}\n    </div>`)},
+        {key: 'slides', group: 'img', icon: '🎞️', label: 'Diaporama', hint: 'Des images qui défilent (‹ ›) ; sans script, elles glissent au doigt', ask: async () => { const l = await pickImages(true, 'Les images du diaporama'); return l?.length ? {list: l} : null; },
+            html: (ctx, o) => section('Diaporama', `    <div class="lc-diaporama" data-lc-name="Diaporama" data-precedent="${esc(i18n('Image précédente'))}" data-suivant="${esc(i18n('Image suivante'))}">\n      <div class="lc-diapo-piste">\n${o.list.map(m => `        <figure class="lc-diapo">\n          <img src="${esc(mediaSrc(m))}" alt="${esc(m.title || '')}" loading="lazy">\n          <figcaption>${esc(m.title || '')}</figcaption>\n        </figure>`).join('\n')}\n      </div>\n    </div>`)},
+        {key: 'video', group: 'media', icon: '🎬', label: 'Vidéo', hint: 'Une vidéo de tes médias (ou d’un fichier : 📁 Importer…), avec ses boutons lecture et plein écran', ask: async () => { const m = await pickMedia('video', 'La vidéo du site'); return m ? {m} : null; },
+            html: (ctx, o) => section('Vidéo', `    <figure class="lc-video" data-lc-name="Vidéo">\n      <video controls preload="metadata" playsinline src="${esc(mediaSrc(o.m))}" title="${esc(o.m.title || '')}">\n        <a href="${esc(mediaSrc(o.m))}">${esc(i18n('Télécharger la vidéo'))}</a>\n      </video>\n      <figcaption>${esc(o.m.title || '')}</figcaption>\n    </figure>`)},
+        {key: 'audio', group: 'media', icon: '🎧', label: 'Son', hint: 'Un son de tes médias (témoignage, chanson…), et ce qu’on y entend écrit dessous si tu veux', ask: async () => {
+                const m = await pickMedia('audio', 'Le son du site'); if (!m) return null;
+                const tr = await askLong({title: i18n('🎧 Ce qu’on entend (facultatif)'), message: i18n('Écris ou colle la transcription : elle sera sous le son, pour ceux qui ne peuvent pas l’écouter. Laisse vide si tu n’en veux pas.'), value: String(m.transcription || ''), okLabel: i18n('Ajouter le son')});
+                return tr === null ? null : {m, tr}; },
+            html: (ctx, o) => { const tr = o.trHtml || parasOf(o.tr); return section('Son', `    <figure class="lc-son" data-lc-name="Son">\n      <audio controls preload="metadata" src="${esc(mediaSrc(o.m))}" title="${esc(o.m.title || '')}">\n        <a href="${esc(mediaSrc(o.m))}">${esc(i18n('Télécharger le son'))}</a>\n      </audio>\n      <figcaption>${esc(o.m.title || '')}</figcaption>\n    </figure>${tr ? `\n    <details class="lc-transcription" data-lc-name="Transcription" open>\n      <summary>${esc(i18n('Ce qu’on entend'))}</summary>\n      ${tr}\n    </details>` : ''}`); }},
+        {key: 'drawing', group: 'media', icon: '✒️', label: 'Dessin', hint: 'Un de tes dessins vectoriels, ou un SVG collé (sans script ni lien vers l’extérieur)', ask: async () => {
+                const way = await chooseWay(i18n('✒️ Quel dessin ?'), [{key: 'mine', icon: '✒️', label: i18n('Un de mes dessins'), hint: i18n('Dessin vectoriel → mes dessins enregistrés')}, {key: 'paste', icon: '📋', label: i18n('Coller un SVG'), hint: i18n('Le code <svg>…</svg> d’un dessin')}]);
+                if (!way) return null;
+                const got = way === 'mine' ? await pickVectorSvg() : {svg: await askLong({title: i18n('📋 Coller un SVG'), message: i18n('Colle ici le code du dessin, de <svg> à </svg>. Les scripts et les liens vers l’extérieur sont retirés.'), placeholder: '<svg viewBox="0 0 100 100">…</svg>', okLabel: i18n('Ajouter le dessin'), rows: 12, mono: true}), name: ''};
+                if (!got?.svg) return null;
+                const svg = cleanSvg(got.svg, {name: got.name}); if (!svg) throw new Error(i18n('Ce n’est pas un dessin SVG lisible.'));
+                return {svg, name: got.name}; },
+            html: (ctx, o) => section('Dessin', `    <figure class="lc-dessin" data-lc-name="Dessin">\n      ${o.svg}\n      ${o.name ? `<figcaption>${esc(o.name)}</figcaption>` : '<figcaption></figcaption>'}\n    </figure>`)},
+        {key: 'document', group: 'media', icon: '📝', label: 'Document', hint: 'Un texte du Traitement de texte (une lettre, un récit), mis au propre pour la page', ask: async () => {
+                const d = await pickTextDoc(); if (!d) return null;
+                const html = cleanDocHtml(d.html); if (!html) throw new Error(i18n('Ce document est vide.'));
+                return {html, name: d.name}; },
+            html: (ctx, o) => section(o.name ? `Document ${o.name}` : 'Document', `    <article class="lc-document" data-lc-name="Document">\n${o.name ? `      <h2>${esc(o.name)}</h2>\n` : ''}      ${o.html}\n    </article>`)},
         {key: 'tree', group: 'genea', icon: '🌳', label: 'Arbre', hint: 'Les ancêtres d’une personne (2 à 5 générations)', ask: async () => { const p = await pickPerson('L’arbre de qui ?'); return p && {p}; },
             html: (ctx, o) => geneaBlock('tree', {person: o.p.id, gens: 4}, `Arbre de ${o.p.name}`, `L’arbre de ${o.p.name}`)},
         {key: 'person', group: 'genea', icon: '👤', label: 'Fiche', hint: 'Naissance, décès, parents, événements', ask: async () => { const p = await pickPerson('La fiche de qui ?'); return p && {p}; },
@@ -113,7 +248,7 @@ a { color: var(--lc-principale); }
         {key: 'place', group: 'genea', icon: '📍', label: 'Gens d’un lieu', hint: 'Qui est né, s’est marié ou est mort là', ask: async () => { const p = await pickPlace('Quel village, quelle ville ?'); return p && {p}; },
             html: (ctx, o) => geneaBlock('place', {place: o.p.id}, `Gens de ${o.p.name}`, `Les nôtres à ${o.p.name}`)},
     ];
-    const GROUPS = [['page', 'La page'], ['img', 'Images'], ['genea', 'Ma généalogie (rempli tout seul)']];
+    const GROUPS = [['page', 'La page'], ['img', 'Images'], ['media', 'Vidéo, son, dessin et texte'], ['genea', 'Ma généalogie (rempli tout seul)']];
 
     /* ═════ Les modèles de sites ═════ */
     const theme = (o = {}) => ({primary: '#7a2a2a', accent: '#c8a45c', bg: '#fbf8f3', text: '#2b2420', font: 'Georgia', headFont: 'Georgia', width: 1100, radius: 8, size: 17, ...o});
@@ -266,5 +401,5 @@ html.lcb-text [contenteditable]{outline:2px solid #12a150!important;outline-offs
 html:not(.lcb-play) a,html:not(.lcb-play) button{cursor:default}
 html.lcb-text body :is(p,h1,h2,h3,h4,h5,h6,li,a,span,blockquote,figcaption,td,th,cite):not([data-lc-block] *){cursor:text}`;
 
-    ext.siteKit = {BLOCKS, GROUPS, TEMPLATES, BASE_CSS, BRIDGE, BRIDGE_CSS, parse, elByPath, pathOf, blockAttrs, blockKey, insertHtml, pickPerson, pickPlace, pickImages, pickDiagram, defaultFond, mediaSrc, esc};
+    ext.siteKit = {BLOCKS, GROUPS, TEMPLATES, BASE_CSS, BRIDGE, BRIDGE_CSS, parse, elByPath, pathOf, blockAttrs, blockKey, insertHtml, pickPerson, pickPlace, pickImages, pickDiagram, defaultFond, mediaSrc, esc, cleanSvg, cleanDocHtml, parasOf, pickMedia};
 })();

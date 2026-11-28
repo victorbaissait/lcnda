@@ -1,0 +1,51 @@
+/* 📋 Listes — ajouts de l'audit des onglets : ☑ barre de sélection commune (app-selection.js), listes en plus
+   (📚 Sources, 💍 Familles, 🔤 Noms de famille, 📝 Notes : app-sources-liste.js), « ⋯ » des lignes, ✎ dans la cellule, téléphone (R12). */
+
+/* ☑ la barre de sélection */
+.sel-bar { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .6rem; margin: .4rem 0; padding: .35rem .6rem; border-radius: 10px; border: 1px solid var(--line, #d8dde6); background: var(--panel, #fff); font-size: .9rem; }
+.sel-bar.has-sel { position: sticky; top: 0; z-index: 5; border-color: var(--accent, #0066cc); background: color-mix(in srgb, var(--accent, #0066cc) 8%, var(--panel, #fff)); box-shadow: 0 2px 8px rgba(0, 0, 0, .08); }
+.sel-bar .sel-all { margin: 0; font-weight: 600; white-space: nowrap; }
+.sel-bar .sel-fallback { font-weight: 600; white-space: nowrap; color: var(--muted, #555); }
+.sel-bar .sel-acts { display: flex; flex-wrap: wrap; gap: .3rem; align-items: center; }
+.sel-box { display: inline-flex; align-items: center; margin-right: .4rem; vertical-align: middle; cursor: pointer; }
+.sel-box input { width: 1rem; height: 1rem; margin: 0; cursor: pointer; }
+tr.is-sel > td, .is-sel.ui-card { background: color-mix(in srgb, var(--accent, #0066cc) 9%, transparent); }
+
+/* « ⋯ » d'une ligne : le signe vient du CSS (la colonne reste vide à l'export ⤓) */
+.lp-more::before { content: '⋯'; font-weight: 700; }
+.lp-more { min-width: 2rem; }
+th.lp-more-col, td.lp-more-col { width: 2.4rem; text-align: right; }
+
+/* ✎ corriger dans la cellule */
+td[data-cell-edit] { cursor: text; }
+td[data-cell-edit]:hover { outline: 1px dashed var(--line, #c8ced8); outline-offset: -3px; }
+.lp-cell-input { width: 100%; min-width: 8rem; padding: .2rem .35rem; font: inherit; }
+
+/* listes en plus */
+.lp-page .lp-dupe { margin-left: .3rem; font-size: .75rem; }
+.lp-page .lp-ee { list-style: none; padding: 0; margin: .4rem 0; display: grid; gap: .5rem; }
+.lp-page .lp-ee li { display: grid; grid-template-columns: 13rem 1fr auto; gap: .6rem; align-items: start; padding: .4rem .5rem; border-radius: 8px; background: var(--soft, #f4f6f9); }
+.lp-page .lp-ee li span { user-select: text; }
+.lp-page .lp-model-pick { display: block; max-width: 24rem; margin-bottom: .5rem; }
+.lp-page .lp-model-fields { margin-top: .4rem; }
+.lp-page .lp-styles summary { cursor: pointer; margin-top: .4rem; }
+.lp-page .lp-dupes ul { list-style: none; padding: 0; display: grid; gap: .35rem; }
+.lp-page .lp-notes .lp-excerpt { color: var(--muted, #555); white-space: pre-line; }
+.lp-page .lp-notes mark { background: #ffe58a; color: inherit; border-radius: 2px; }
+.lp-merge-pick { display: grid; gap: .4rem; margin-top: .5rem; }
+
+/* R12 : téléphone (390 px) — rien ne dépasse : barre qui passe à la ligne, tableaux en fiches */
+@media (max-width: 700px) {
+    .sel-bar { font-size: .85rem; }
+    .sel-bar .sel-acts .button { padding: .25rem .5rem; }
+    .lp-page .lp-ee li { grid-template-columns: 1fr; }
+    .lp-page .data-table-wrap, #workspace [data-col-list="persons"], #workspace [data-col-list="events"] { max-width: 100%; }
+    .lp-page .lp-table thead { display: none; }
+    .lp-page .lp-table, .lp-page .lp-table tbody, .lp-page .lp-table tr, .lp-page .lp-table td { display: block; width: 100%; box-sizing: border-box; }
+    .lp-page .lp-table tr { border: 1px solid var(--line, #d8dde6); border-radius: 10px; margin-bottom: .5rem; padding: .3rem .5rem; position: relative; }
+    .lp-page .lp-table td { border: 0; padding: .15rem 0; overflow-wrap: anywhere; }
+    .lp-page .lp-table td:empty { display: none; }
+    .lp-page .lp-table td.lp-more-col, .lp-page .lp-table td:last-child:has(.lp-more) { position: absolute; top: .2rem; right: .3rem; width: auto; }
+    #workspace .ui-listbar-row [data-saved-filters] { white-space: nowrap; }
+    .lp-page .form-grid { grid-template-columns: 1fr; }
+}

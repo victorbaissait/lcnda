@@ -21,7 +21,7 @@
     const ls = (k, d) => { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (_) { return d; } };
     const lsSet = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} };
     const life = p => p.birth_year || p.death_year ? `${p.birth_year || '?'}–${p.death_year || ''}` : '';
-    const pname = p => [p.first_name, p.last_name].filter(Boolean).join(' ') || 'Sans nom';
+    const pname = p => A().personName(p); // la pièce commune
 
     function avatar(p) {
         if (UI().avatarOn?.() && UI().avatar) return UI().avatar({...p, name: pname(p), photo: p.photo}, 34);
@@ -63,7 +63,7 @@
                 ${n.sheet_id ? `<button type="button" class="button small secondary" data-tr-sheet="${n.sheet_id}">↗ Fiche « ${esc(n.sheet_title || 'Un métier')} »</button>` : '<button type="button" class="button small secondary" data-tr-mksheet>📒 En faire une Fiche</button>'}
                 <a class="button small secondary" href="https://commons.wikimedia.org/w/index.php?search=${encodeURIComponent(d.name)}" target="_blank" rel="noopener noreferrer" title="Photos et gravures libres de droits sur Wikimedia Commons">🔍 Images libres ↗</a></div>
             ${d.related?.length ? `<p class="h-tr-rel"><small>Du même domaine : ${d.related.map(r => `<button type="button" class="table-link" data-tr-key="${esc(r.key)}">${esc(r.name)}</button>`).join(' · ')}</small></p>` : ''}
-            <p class="muted h-tr-src"><small>${esc(d.source.credit)} Licence <a href="${esc(d.source.licence_url)}" target="_blank" rel="noopener noreferrer">${esc(d.source.licence)}</a>. Sources : ${(d.source.sources || []).map(([l, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(l)}</a>`).join(' ; ')}.</small></p></div>`;
+            <p class="muted h-tr-src"><small>${esc(d.source.credit)} Licence ${window.LCNDA_UI.extLink(d.source.licence_url, d.source.licence)}. Sources : ${(d.source.sources || []).map(([l, u]) => `${window.LCNDA_UI.extLink(u, l)}`).join(' ; ')}.</small></p></div>`;
         const dlg = ext.openDialog({eyebrow: 'MÉTIER ANCIEN', title: `🛠️ ${d.name}`, wide: true, body});
         const save = async change => { await post('save_old_trade', {key: d.key, notes: n.notes || '', sheet_id: n.sheet_id || 0, media_ids: n.media_ids || [], ...change}); };
         const reopen = () => { dlg.close(); open('', {key: d.key}); };

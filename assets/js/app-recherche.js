@@ -14,8 +14,10 @@
     /* ═════ Recherche → « Type de recherche » : l'ordre et les types cachés (K2 : gardés tout de suite, « ↶ Annuler », « ↺ Remettre comme au départ »)
      * Réglé avec « Réordonner » en bas de la colonne Recherche, ou dans Réglages → Apparence (« 🔎 Types de recherche »). */
     const RK_ORDER='genealogie-research-kind-order',RK_HIDDEN='genealogie-research-kind-hidden';
-    const RESEARCH_KINDS=[['question','Poser une question en français'],['gaps','🔍 Que manque-t-il ?'],['ou_chercher','🌍 Où chercher ?'],['murs','🧩 Murs de brique'],['text','Texte, personne ou lieu'],['place_name','Nom de lieu avec joker'],['dates','Période ou date précise'],['proximity','Proximité géographique et temporelle'],['transcriptions','Plein texte dans les transcriptions'],['archive_digest','Dépouillement d’archive'],['journal','🗓 Journal des recherches'],['insee','Décès (fichier INSEE)'],['web','Chercher sur internet'],['socface','🧾 Recensements SocFace (FranceArchives)'],['saved','Recherche multicritère / recherches enregistrées']];
-    const rkAll=()=>RESEARCH_KINDS.filter(([k])=>(k!=='journal'||window.LCNDA_EXT?.researchJournal)&&(!['ou_chercher','murs'].includes(k)||window.LCNDA_EXT?.ouChercher)); // 🌍 🧩 heritage-ou-chercher.js
+    const RESEARCH_KINDS=[['je_veux','🧭 Je veux faire…'],['question','Poser une question en français'],['gaps','🔍 Que manque-t-il ?'],['ou_chercher','🌍 Où chercher ?'],['murs','🧩 Murs de brique'],['text','Texte, personne ou lieu'],['place_name','Nom de lieu avec joker'],['dates','Période ou date précise'],['proximity','Proximité géographique et temporelle'],['transcriptions','Plein texte dans les transcriptions'],['archive_digest','Dépouillement d’archive'],['journal','🗓 Journal des recherches'],['insee','Décès (fichier INSEE)'],['web','Chercher sur internet'],['socface','🧾 Recensements SocFace (FranceArchives)'],['saved','Recherche multicritère / recherches enregistrées'],
+        ['kinship','🧬 Lien de parenté'],['compare','📊 Comparer deux recherches'],['sources','🧾 Sources et citations'],['replace','🔁 Chercher et remplacer']]; // 🧬 📊 🧾 🔁 app-recherche-outils.js
+    const PLUS_KINDS=['kinship','compare','sources','replace'];
+    const rkAll=()=>RESEARCH_KINDS.filter(([k])=>(k!=='je_veux'||window.LCNDA_EXT?.jeVeux?.inResearch?.())&&(k!=='journal'||window.LCNDA_EXT?.researchJournal)&&(!['ou_chercher','murs'].includes(k)||window.LCNDA_EXT?.ouChercher)&&(!PLUS_KINDS.includes(k)||window.LCNDA_EXT?.researchPlus?.[k])); // 🌍 🧩 heritage-ou-chercher.js
     const rkRead=k=>{try{const v=JSON.parse(localStorage.getItem(k)||'[]');return Array.isArray(v)?v.filter(x=>typeof x==='string'):[];}catch(_){return[];}};
     /** [{key, label, hidden}] dans l'ordre choisi ; un type ajouté plus tard se range après son voisin de départ */
     function researchKindRows(){
@@ -83,7 +85,7 @@
         const usedTypes=state.bootstrap.eventTypes.filter(type=>Number(type.usage_count)>0).sort((a,b)=>a.label.localeCompare(b.label,'fr',{sensitivity:'base'}));
         const options=usedTypes.map(type=>`<option value="${type.id}" ${Number(type.id)===Number(state.dateSearch.eventTypeId)?'selected':''}>${escapeHtml(type.label)} (${Number(type.usage_count).toLocaleString('fr-FR')})</option>`).join('');
         const dateWindowMode=state.dateSearch.dateWindowMode||'exact';
-        content.innerHTML=`<form id="research-form" class="sidebar-form"><label>Type de recherche<select name="search_kind"><option value="question" ${state.researchKind==='question'?'selected':''}>Poser une question en français</option><option value="gaps" ${state.researchKind==='gaps'?'selected':''}>🔍 Que manque-t-il ? (actes à chercher, où et dans quelle série)</option><option value="text" ${state.researchKind==='text'?'selected':''}>Texte, personne ou lieu</option><option value="place_name" ${state.researchKind==='place_name'?'selected':''}>Nom de lieu avec joker</option><option value="dates" ${state.researchKind==='dates'?'selected':''}>Période ou date précise</option><option value="proximity" ${state.researchKind==='proximity'?'selected':''}>Proximité géographique et temporelle</option><option value="transcriptions" ${state.researchKind==='transcriptions'?'selected':''}>Plein texte dans les transcriptions</option><option value="insee" ${state.researchKind==='insee'?'selected':''}>Décès (fichier INSEE)</option><option value="web" ${state.researchKind==='web'?'selected':''}>Chercher sur internet</option><option value="socface" ${state.researchKind==='socface'?'selected':''}>🧾 Recensements SocFace (FranceArchives)</option><option value="saved" ${state.researchKind==='saved'?'selected':''}>Recherche multicritère / recherches enregistrées</option></select></label>${researchProximityFieldsHtml()}<div id="research-text-fields"><label>Rechercher<input name="text_q" value="${escapeHtml(state.research.q)}" placeholder="Nom, ville, année…" autocomplete="off"></label><label>Dans<select name="category"><option value="all">Tout</option><option value="name" ${state.research.category==='name'?'selected':''}>Noms et personnes</option><option value="place" ${state.research.category==='place'?'selected':''}>Villes, lieux et pays</option><option value="year" ${state.research.category==='year'?'selected':''}>Années</option><option value="occupation" ${state.research.category==='occupation'?'selected':''}>Métier / activité</option><option value="employer" ${state.research.category==='employer'?'selected':''}>Employeur</option></select></label></div><div id="research-place-name-fields"><label>Nom du lieu<input name="place_name_q" value="${escapeHtml(state.placeNameSearch?.q||'')}" placeholder="Ex : *aris, Sa* Denis, **mont" autocomplete="off"></label><label>Pays<input name="place_name_country" value="${escapeHtml(state.placeNameSearch?.country||'')}" placeholder="France, Belgique…" list="place-name-country-options" autocomplete="off"><datalist id="place-name-country-options"></datalist></label><label>Division / subdivision<input name="place_name_division" value="${escapeHtml(state.placeNameSearch?.division||'')}" placeholder="Seine-Saint-Denis, Réunion, Québec…" list="place-name-division-options" autocomplete="off"><datalist id="place-name-division-options"></datalist></label></div><div id="research-transcription-fields"><label>Texte à chercher<input name="transcription_q" value="${escapeHtml(state.transcriptionSearch.q||'')}" placeholder="Mot ou expression dans OCR, HTR ou saisie manuelle…" autocomplete="off"></label></div><div id="research-insee-fields"><label>Prénom<input name="insee_prenom" value="${escapeHtml(state.inseeSearch?.prenom||'')}" placeholder="Prénom" autocomplete="off"></label><label>Nom<input name="insee_nom" value="${escapeHtml(state.inseeSearch?.nom||'')}" placeholder="Nom" autocomplete="off"></label><label>Sexe<select name="insee_sexe"><option value="">Indifférent</option><option value="M" ${state.inseeSearch?.sexe==='M'?'selected':''}>Homme</option><option value="F" ${state.inseeSearch?.sexe==='F'?'selected':''}>Femme</option></select></label><label>Date de naissance<input name="insee_date_naissance" value="${escapeHtml(state.inseeSearch?.dateNaissance||'')}" placeholder="JJ/MM/AAAA ou AAAA"></label><div class="year-range-fields"><label>Naissance entre<input name="insee_birth_year_from" type="number" min="1700" max="2200" value="${escapeHtml(state.inseeSearch?.birthYearFrom||'')}" placeholder="1900"></label><label>et<input name="insee_birth_year_to" type="number" min="1700" max="2200" value="${escapeHtml(state.inseeSearch?.birthYearTo||'')}" placeholder="1950"></label></div><label>Commune de naissance<input name="insee_commune_naissance" value="${escapeHtml(state.inseeSearch?.communeNaissance||'')}" placeholder="Ville de naissance" autocomplete="off"></label><label>Date de décès<input name="insee_date_deces" value="${escapeHtml(state.inseeSearch?.dateDeces||'')}" placeholder="JJ/MM/AAAA ou AAAA"></label><div class="year-range-fields"><label>Décès entre<input name="insee_death_year_from" type="number" min="1700" max="2200" value="${escapeHtml(state.inseeSearch?.deathYearFrom||'')}" placeholder="2000"></label><label>et<input name="insee_death_year_to" type="number" min="1700" max="2200" value="${escapeHtml(state.inseeSearch?.deathYearTo||'')}" placeholder="2024"></label></div><label>Commune de décès<input name="insee_commune_deces" value="${escapeHtml(state.inseeSearch?.communeDeces||'')}" placeholder="Ville de décès" autocomplete="off"></label><label>Département (naissance ou décès)<input name="insee_departement" value="${escapeHtml(state.inseeSearch?.departement||'')}" placeholder="Ex : 75, 2A, 971…" autocomplete="off"></label><label>Région (naissance ou décès)<input name="insee_region" value="${escapeHtml(state.inseeSearch?.region||'')}" placeholder="Ex : Bretagne, Occitanie…" autocomplete="off"></label></div><div id="research-date-fields"><label>Précision<select name="date_mode"><option value="range">Période par années</option><option value="exact" ${state.dateSearch.mode==='exact'?'selected':''}>Date(s) précise(s)</option><option value="between" ${state.dateSearch.mode==='between'?'selected':''}>Entre deux dates précises</option></select></label><div class="year-range-fields" id="research-year-range"><label>De<input name="year_from" type="number" min="1" max="9999" value="${escapeHtml(state.dateSearch.yearFrom)}" placeholder="1300"></label><label>À<input name="year_to" type="number" min="1" max="9999" value="${escapeHtml(state.dateSearch.yearTo)}" placeholder="1650"></label></div><div id="research-exact-date-fields"><div class="year-range-fields"><label><span id="research-exact-date-label">Date(s) précise(s)</span><input name="exact_dates" value="${escapeHtml(state.dateSearch.values)}" placeholder="08/03/1922, 07/05/1925"></label><label id="research-exact-date-to">Au<input name="exact_date_to" value="${escapeHtml(state.dateSearch.valueTo||'')}" placeholder="31/12/1925"></label></div><label id="research-date-window">Élargir<select name="date_window_mode"><option value="exact">Non, date exacte</option><option value="before" ${dateWindowMode==='before'?'selected':''}>Avant</option><option value="after" ${dateWindowMode==='after'?'selected':''}>Après</option><option value="both" ${dateWindowMode==='both'?'selected':''}>Avant et après</option></select></label><label id="research-date-window-days">Nombre de jours<input name="date_window_days" type="number" min="0" max="365" step="1" value="${escapeHtml(state.dateSearch.dateWindowDays||'')}" placeholder="30"></label></div><label>Événements<select name="event_type_id"><option value="0">Tous les événements</option>${options}</select></label><label>Métier<select name="occupation_id"><option value="">Tous les métiers</option>${(state.bootstrap.occupations||[]).map(occ=>`<option value="${escapeHtml(occ.name)}" ${state.dateSearch.occupationId===occ.name?'selected':''} >${escapeHtml(occ.name)} (${Number(occ.person_count).toLocaleString('fr-FR')})</option>`).join('')}</select></label><div class="research-place-picker" id="research-place-picker"><span class="research-place-label">Ville</span><div class="research-place-input-wrap" id="research-place-input">${pkPlace('date_place_id',state.dateSearch.placeId,state.dateSearch.placeName)}</div></div><label>Mot facultatif<input name="date_q" value="${state.researchKind==='dates'?escapeHtml(state.research.q):''}" placeholder="Personne, type…"></label></div><button class="button" type="submit">Afficher les correspondances</button><div class="segmented result-display"><button type="button" data-research-display="list" class="${state.researchDisplay==='list'?'is-active':''}">Liste</button><button type="button" data-research-display="cards" class="${state.researchDisplay==='cards'?'is-active':''}">Fiches</button></div></form>`;
+        content.innerHTML=`<form id="research-form" class="sidebar-form"><div class="side-menu rk-menu" data-rk-menu role="group" aria-label="${escapeHtml(i18n('Type de recherche'))}"></div><div data-rp-history-host></div><label class="rk-select-label" hidden>Type de recherche<select name="search_kind"><option value="question" ${state.researchKind==='question'?'selected':''}>Poser une question en français</option><option value="gaps" ${state.researchKind==='gaps'?'selected':''}>🔍 Que manque-t-il ? (actes à chercher, où et dans quelle série)</option><option value="text" ${state.researchKind==='text'?'selected':''}>Texte, personne ou lieu</option><option value="place_name" ${state.researchKind==='place_name'?'selected':''}>Nom de lieu avec joker</option><option value="dates" ${state.researchKind==='dates'?'selected':''}>Période ou date précise</option><option value="proximity" ${state.researchKind==='proximity'?'selected':''}>Proximité géographique et temporelle</option><option value="transcriptions" ${state.researchKind==='transcriptions'?'selected':''}>Plein texte dans les transcriptions</option><option value="insee" ${state.researchKind==='insee'?'selected':''}>Décès (fichier INSEE)</option><option value="web" ${state.researchKind==='web'?'selected':''}>Chercher sur internet</option><option value="socface" ${state.researchKind==='socface'?'selected':''}>🧾 Recensements SocFace (FranceArchives)</option><option value="saved" ${state.researchKind==='saved'?'selected':''}>Recherche multicritère / recherches enregistrées</option></select></label>${researchProximityFieldsHtml()}<div id="research-text-fields"><label>Rechercher<input name="text_q" value="${escapeHtml(state.research.q)}" placeholder="Nom, ville, année…" autocomplete="off"></label><label>Dans<select name="category"><option value="all">Tout</option><option value="name" ${state.research.category==='name'?'selected':''}>Noms et personnes</option><option value="place" ${state.research.category==='place'?'selected':''}>Villes, lieux et pays</option><option value="year" ${state.research.category==='year'?'selected':''}>Années</option><option value="occupation" ${state.research.category==='occupation'?'selected':''}>Métier / activité</option><option value="employer" ${state.research.category==='employer'?'selected':''}>Employeur</option></select></label></div><div id="research-place-name-fields"><label>Nom du lieu<input name="place_name_q" value="${escapeHtml(state.placeNameSearch?.q||'')}" placeholder="Ex : *aris, Sa* Denis, **mont" autocomplete="off"></label><label>Pays<input name="place_name_country" value="${escapeHtml(state.placeNameSearch?.country||'')}" placeholder="France, Belgique…" list="place-name-country-options" autocomplete="off"><datalist id="place-name-country-options"></datalist></label><label>Division / subdivision<input name="place_name_division" value="${escapeHtml(state.placeNameSearch?.division||'')}" placeholder="Seine-Saint-Denis, Réunion, Québec…" list="place-name-division-options" autocomplete="off"><datalist id="place-name-division-options"></datalist></label></div><div id="research-transcription-fields"><label>Texte à chercher<input name="transcription_q" value="${escapeHtml(state.transcriptionSearch.q||'')}" placeholder="Mot ou expression dans OCR, HTR ou saisie manuelle…" autocomplete="off"></label></div><div id="research-insee-fields"><label>Prénom<input name="insee_prenom" value="${escapeHtml(state.inseeSearch?.prenom||'')}" placeholder="Prénom" autocomplete="off"></label><label>Nom<input name="insee_nom" value="${escapeHtml(state.inseeSearch?.nom||'')}" placeholder="Nom" autocomplete="off"></label><label>Sexe<select name="insee_sexe"><option value="">Indifférent</option><option value="M" ${state.inseeSearch?.sexe==='M'?'selected':''}>Homme</option><option value="F" ${state.inseeSearch?.sexe==='F'?'selected':''}>Femme</option></select></label><label>Date de naissance<input name="insee_date_naissance" value="${escapeHtml(state.inseeSearch?.dateNaissance||'')}" placeholder="JJ/MM/AAAA ou AAAA"></label><div class="year-range-fields"><label>Naissance entre<input name="insee_birth_year_from" type="number" min="1700" max="2200" value="${escapeHtml(state.inseeSearch?.birthYearFrom||'')}" placeholder="1900"></label><label>et<input name="insee_birth_year_to" type="number" min="1700" max="2200" value="${escapeHtml(state.inseeSearch?.birthYearTo||'')}" placeholder="1950"></label></div><label>Commune de naissance<input name="insee_commune_naissance" value="${escapeHtml(state.inseeSearch?.communeNaissance||'')}" placeholder="Ville de naissance" autocomplete="off"></label><label>Date de décès<input name="insee_date_deces" value="${escapeHtml(state.inseeSearch?.dateDeces||'')}" placeholder="JJ/MM/AAAA ou AAAA"></label><div class="year-range-fields"><label>Décès entre<input name="insee_death_year_from" type="number" min="1700" max="2200" value="${escapeHtml(state.inseeSearch?.deathYearFrom||'')}" placeholder="2000"></label><label>et<input name="insee_death_year_to" type="number" min="1700" max="2200" value="${escapeHtml(state.inseeSearch?.deathYearTo||'')}" placeholder="2024"></label></div><label>Commune de décès<input name="insee_commune_deces" value="${escapeHtml(state.inseeSearch?.communeDeces||'')}" placeholder="Ville de décès" autocomplete="off"></label><label>Département (naissance ou décès)<input name="insee_departement" value="${escapeHtml(state.inseeSearch?.departement||'')}" placeholder="Ex : 75, 2A, 971…" autocomplete="off"></label><label>Région (naissance ou décès)<input name="insee_region" value="${escapeHtml(state.inseeSearch?.region||'')}" placeholder="Ex : Bretagne, Occitanie…" autocomplete="off"></label></div><div id="research-date-fields"><label>Précision<select name="date_mode"><option value="range">Période par années</option><option value="exact" ${state.dateSearch.mode==='exact'?'selected':''}>Date(s) précise(s)</option><option value="between" ${state.dateSearch.mode==='between'?'selected':''}>Entre deux dates précises</option></select></label><div class="year-range-fields" id="research-year-range"><label>De<input name="year_from" type="number" min="1" max="9999" value="${escapeHtml(state.dateSearch.yearFrom)}" placeholder="1300"></label><label>À<input name="year_to" type="number" min="1" max="9999" value="${escapeHtml(state.dateSearch.yearTo)}" placeholder="1650"></label></div><div id="research-exact-date-fields"><div class="year-range-fields"><label><span id="research-exact-date-label">Date(s) précise(s)</span><input name="exact_dates" value="${escapeHtml(state.dateSearch.values)}" placeholder="08/03/1922, 07/05/1925"></label><label id="research-exact-date-to">Au<input name="exact_date_to" value="${escapeHtml(state.dateSearch.valueTo||'')}" placeholder="31/12/1925"></label></div><label id="research-date-window">Élargir<select name="date_window_mode"><option value="exact">Non, date exacte</option><option value="before" ${dateWindowMode==='before'?'selected':''}>Avant</option><option value="after" ${dateWindowMode==='after'?'selected':''}>Après</option><option value="both" ${dateWindowMode==='both'?'selected':''}>Avant et après</option></select></label><label id="research-date-window-days">Nombre de jours<input name="date_window_days" type="number" min="0" max="365" step="1" value="${escapeHtml(state.dateSearch.dateWindowDays||'')}" placeholder="30"></label></div><label>Événements<select name="event_type_id"><option value="0">Tous les événements</option>${options}</select></label><label>Métier<select name="occupation_id"><option value="">Tous les métiers</option>${(state.bootstrap.occupations||[]).map(occ=>`<option value="${escapeHtml(occ.name)}" ${state.dateSearch.occupationId===occ.name?'selected':''} >${escapeHtml(occ.name)} (${Number(occ.person_count).toLocaleString('fr-FR')})</option>`).join('')}</select></label><div class="research-place-picker" id="research-place-picker"><span class="research-place-label">Ville</span><div class="research-place-input-wrap" id="research-place-input">${pkPlace('date_place_id',state.dateSearch.placeId,state.dateSearch.placeName)}</div></div><label>Mot facultatif<input name="date_q" value="${state.researchKind==='dates'?escapeHtml(state.research.q):''}" placeholder="Personne, type…"></label></div><button class="button" type="submit">Afficher les correspondances</button><div class="segmented result-display"><button type="button" data-research-display="list" class="${state.researchDisplay==='list'?'is-active':''}">Liste</button><button type="button" data-research-display="cards" class="${state.researchDisplay==='cards'?'is-active':''}">Fiches</button></div></form>`;
         footer.innerHTML='<div class="dashboard-footer-actions"><button class="button small secondary" type="button" id="research-reorder" title="L’ordre des types de recherche, et ceux qui s’affichent">Réordonner</button></div><small class="muted">Un clic sur une ville d’un graphique ouvre aussi cet écran.</small>';
         $('#research-reorder')?.addEventListener('click',openResearchKindDialog);
         const searchKindSelect=$('#research-form').elements.search_kind;
@@ -102,11 +104,18 @@
             const at=searchKindSelect.querySelector('option[value="gaps"]');
             [['murs','🧩 Murs de brique (ancêtres où tu bloques)'],['ou_chercher','🌍 Où chercher ? (les sites à consulter pour une personne)']].forEach(([v,l])=>{const option=document.createElement('option');option.value=v;option.textContent=l;option.selected=state.researchKind===v;if(at)at.after(option);else searchKindSelect.append(option);});
         }
+        if(searchKindSelect&&window.LCNDA_EXT?.jeVeux?.inResearch?.()&&!searchKindSelect.querySelector('option[value="je_veux"]')){ // 🧭 Je veux faire… (app-je-veux.js) : le premier de la colonne
+            const option=document.createElement('option');option.value='je_veux';option.textContent=i18n('🧭 Je veux faire…');option.selected=state.researchKind==='je_veux';searchKindSelect.prepend(option);
+        }
+        if(searchKindSelect&&window.LCNDA_EXT?.researchPlus)(window.LCNDA_EXT.researchPlusKinds||[]).forEach(([v,l])=>{ // 🧬 📊 🧾 🔁 app-recherche-outils.js
+            if(searchKindSelect.querySelector(`option[value="${v}"]`))return;const option=document.createElement('option');option.value=v;option.textContent=i18n(l);option.selected=state.researchKind===v;searchKindSelect.append(option);});
         applyResearchKindOrder(searchKindSelect);
+        drawResearchKindMenu(content,searchKindSelect);
+        window.LCNDA_EXT?.researchHistory?.mount($('[data-rp-history-host]',content)); // 🕘 les 20 dernières recherches
         const ads=state.archiveDigestSearch||{};
         const archiveRadius=Number(ads.radiusKm)||0;
         const archiveRadiusLabel=archiveRadius>0?`Rayon : ${archiveRadius} km`:'Commune exacte uniquement';
-        $('#research-insee-fields')?.insertAdjacentHTML('beforebegin',`<div id="research-archive-digest-fields"><label>Recherche<input name="archive_digest_q" value="${escapeHtml(ads.q||'')}" placeholder="Cote, nom, archive, annotation…" autocomplete="off"></label><div class="research-place-picker archive-digest-place-picker" id="archive-digest-place-picker"><span class="research-place-label">Ville ou commune</span><div class="research-place-input-wrap" id="archive-digest-place-input">${pkPlace('archive_digest_place_pick',ads.placeId,ads.placeName||ads.city,{allowFree:true,local:true,free:ads.city})}<input type="hidden" name="archive_digest_city" value="${escapeHtml(ads.city||ads.placeName||'')}"><input type="hidden" name="archive_digest_place_id" value="${escapeHtml(String(ads.placeId||0))}"></div><div class="proximity-radius-field archive-digest-radius-field"><span class="research-place-label">Zone autour de la commune</span><input id="archive-digest-radius" name="archive_digest_radius_km" type="range" min="0" max="50" step="1" value="${archiveRadius}"><output id="archive-digest-radius-value" class="proximity-radius-value">${escapeHtml(archiveRadiusLabel)}</output></div></div><label>Département<input name="archive_digest_dept" value="${escapeHtml(ads.dept||'')}" placeholder="18, Cher…" autocomplete="off"></label><label>Région<input name="archive_digest_region" value="${escapeHtml(ads.region||'')}" placeholder="Centre-Val de Loire…" autocomplete="off"></label><label>Type d’acte<select name="archive_digest_record_type"><option value="">Tous</option><option value="table_decennale">Table décennale</option><option value="mariage">Mariage</option><option value="naissance">Naissance</option><option value="deces">Décès</option><option value="bapteme">Baptême</option><option value="succession">Succession</option><option value="recensement">Recensement</option><option value="prison">Prison</option><option value="fiche_militaire">Fiche militaire</option><option value="liste_prisonnier">Liste prisonnier</option><option value="autre">Autre</option></select></label><label>État<select name="archive_digest_status"><option value="">Tous</option><option value="todo">À faire</option><option value="done">Terminé</option><option value="review">À revoir</option><option value="doubt">Doute</option><option value="priority">Priorité</option><option value="later">Plus tard</option></select></label></div>`);
+        $('#research-insee-fields')?.insertAdjacentHTML('beforebegin',`<div id="research-archive-digest-fields"><label>Recherche<input name="archive_digest_q" value="${escapeHtml(ads.q||'')}" placeholder="Cote, nom, archive, annotation…" autocomplete="off"></label><div class="research-place-picker archive-digest-place-picker" id="archive-digest-place-picker"><span class="research-place-label">Ville ou commune</span><div class="research-place-input-wrap" id="archive-digest-place-input">${pkPlace('archive_digest_place_pick',ads.placeId,ads.placeName||ads.city,{allowFree:true,local:true,free:ads.city})}<input type="hidden" name="archive_digest_city" value="${escapeHtml(ads.city||ads.placeName||'')}"><input type="hidden" name="archive_digest_place_id" value="${escapeHtml(String(ads.placeId||0))}"></div><div class="proximity-radius-field archive-digest-radius-field"><span class="research-place-label">Zone autour de la commune</span><input id="archive-digest-radius" name="archive_digest_radius_km" type="range" min="0" max="50" step="1" value="${archiveRadius}"><output id="archive-digest-radius-value" class="proximity-radius-value">${escapeHtml(archiveRadiusLabel)}</output></div></div><label>Département<input name="archive_digest_dept" value="${escapeHtml(ads.dept||'')}" placeholder="18, Cher…" autocomplete="off"></label><label>Région<input name="archive_digest_region" value="${escapeHtml(ads.region||'')}" placeholder="Centre-Val de Loire…" autocomplete="off"></label><label>Type d’acte<select name="archive_digest_record_type"><option value="">Tous</option><option value="table_decennale">Table décennale</option><option value="mariage">Mariage</option><option value="naissance">Naissance</option><option value="deces">Décès</option><option value="bapteme">Baptême</option><option value="succession">Succession</option><option value="recensement">Recensement</option><option value="prison">Prison</option><option value="fiche_militaire">Fiche militaire</option><option value="liste_prisonnier">Liste prisonnier</option><option value="autre">Autre</option></select></label><label>État<select name="archive_digest_status"><option value="">Tous</option><option value="todo">À faire</option><option value="done">Terminé</option><option value="review">À revoir</option><option value="doubt">Doute</option><option value="priority">Priorité</option><option value="later">En pause</option></select></label></div>`);
         if($('#research-form').elements.archive_digest_record_type)$('#research-form').elements.archive_digest_record_type.value=state.archiveDigestSearch?.recordType||'';
         if($('#research-form').elements.archive_digest_status)$('#research-form').elements.archive_digest_status.value=state.archiveDigestSearch?.status||'';
         const archiveDigestAddButton=document.createElement('button');
@@ -115,13 +124,27 @@
         archiveDigestAddButton.id='archive-digest-add';
         archiveDigestAddButton.textContent='＋ Ajouter un dépouillement';
         $('#research-form button[type="submit"]')?.insertAdjacentElement('afterend',archiveDigestAddButton);
-        const updateFields=()=>{const form=$('#research-form'),kind=form.elements.search_kind.value;const dates=kind==='dates';const proximity=kind==='proximity';const transcriptions=kind==='transcriptions';const placeName=kind==='place_name';const insee=kind==='insee';const archiveDigest=kind==='archive_digest';const web=kind==='web'||kind==='question'||kind==='gaps'||kind==='journal'||kind==='socface'||kind==='ou_chercher'||kind==='murs';$('#research-text-fields').hidden=dates||proximity||transcriptions||placeName||insee||archiveDigest||web;$('#research-archive-digest-fields').hidden=!archiveDigest;$('#research-place-name-fields').hidden=!placeName;$('#research-transcription-fields').hidden=!transcriptions;$('#research-insee-fields').hidden=!insee;$('#research-date-fields').hidden=!dates;$('#research-proximity-fields').hidden=!proximity;archiveDigestAddButton.hidden=!archiveDigest;if(dates){const dm=form.elements.date_mode.value,exact=dm==='exact',between=dm==='between';$('#research-year-range').hidden=exact||between;$('#research-exact-date-fields').hidden=!(exact||between);$('#research-exact-date-label').textContent=between?'Du':'Date(s) précise(s)';form.elements.exact_dates.placeholder=between?'08/03/1922':'08/03/1922, 07/05/1925';$('#research-exact-date-to').hidden=!between;$('#research-date-window').hidden=!exact;$('#research-date-window-days').hidden=!exact||form.elements.date_window_mode.value==='exact';}if(proximity){const mode=form.elements.proximity_date_mode?.value||'range',exact=mode==='exact',between=mode==='between';$('#proximity-year-range').hidden=exact||between;$('#proximity-exact-date-fields').hidden=!(exact||between);$('#proximity-exact-date-label').textContent=between?'Du':'Date précise';$('#proximity-exact-date-to').hidden=!between;$('#proximity-date-window').hidden=!exact;$('#proximity-date-window-days').hidden=!exact||form.elements.proximity_date_window_mode.value==='exact';}};updateFields();setupResearchPlacePicker();setupProximityPlacePicker();setupArchiveDigestPlacePicker();setupPlaceNameFacets();
+        const updateFields=()=>{const form=$('#research-form'),kind=form.elements.search_kind.value;const dates=kind==='dates';const proximity=kind==='proximity';const transcriptions=kind==='transcriptions';const placeName=kind==='place_name';const insee=kind==='insee';const archiveDigest=kind==='archive_digest';const web=kind==='web'||kind==='je_veux'||kind==='question'||kind==='gaps'||kind==='journal'||kind==='socface'||kind==='ou_chercher'||kind==='murs'||PLUS_KINDS.includes(kind);$('#research-text-fields').hidden=dates||proximity||transcriptions||placeName||insee||archiveDigest||web;$('#research-archive-digest-fields').hidden=!archiveDigest;$('#research-place-name-fields').hidden=!placeName;$('#research-transcription-fields').hidden=!transcriptions;$('#research-insee-fields').hidden=!insee;$('#research-date-fields').hidden=!dates;$('#research-proximity-fields').hidden=!proximity;archiveDigestAddButton.hidden=!archiveDigest||document.body.classList.contains('is-kiosk');const submitButton=$('#research-form button[type="submit"]');if(submitButton)submitButton.hidden=PLUS_KINDS.includes(kind)||kind==='je_veux';if(dates){const dm=form.elements.date_mode.value,exact=dm==='exact',between=dm==='between';$('#research-year-range').hidden=exact||between;$('#research-exact-date-fields').hidden=!(exact||between);$('#research-exact-date-label').textContent=between?'Du':'Date(s) précise(s)';form.elements.exact_dates.placeholder=between?'08/03/1922':'08/03/1922, 07/05/1925';$('#research-exact-date-to').hidden=!between;$('#research-date-window').hidden=!exact;$('#research-date-window-days').hidden=!exact||form.elements.date_window_mode.value==='exact';}if(proximity){const mode=form.elements.proximity_date_mode?.value||'range',exact=mode==='exact',between=mode==='between';$('#proximity-year-range').hidden=exact||between;$('#proximity-exact-date-fields').hidden=!(exact||between);$('#proximity-exact-date-label').textContent=between?'Du':'Date précise';$('#proximity-exact-date-to').hidden=!between;$('#proximity-date-window').hidden=!exact;$('#proximity-date-window-days').hidden=!exact||form.elements.proximity_date_window_mode.value==='exact';}};updateFields();setupResearchPlacePicker();setupProximityPlacePicker();setupArchiveDigestPlacePicker();setupPlaceNameFacets();
         $('#proximity-radius')?.addEventListener('input',event=>{const km=Number(event.target.value)||0;$('#proximity-radius-value').textContent=km>0?i18n('± {km} km autour de la commune',{km}):'Commune exacte uniquement';});
         $('#archive-digest-radius')?.addEventListener('input',event=>{const km=Number(event.target.value)||0;$('#archive-digest-radius-value').textContent=km>0?`Rayon : ${km} km`:'Commune exacte uniquement';});
-        $('#research-form').elements.search_kind.addEventListener('change',event=>{updateFields();if(event.currentTarget.value==='insee'&&state.researchKind!=='insee'){state.researchKind='insee';persistUiState();renderResearch();}if(event.currentTarget.value==='web'&&state.researchKind!=='web'){state.researchKind='web';persistUiState();renderResearch();}if(event.currentTarget.value==='saved'&&state.researchKind!=='saved'){state.researchKind='saved';persistUiState();renderResearch();}if(event.currentTarget.value==='question'&&state.researchKind!=='question'){state.researchKind='question';persistUiState();renderResearch();}if(event.currentTarget.value==='gaps'&&state.researchKind!=='gaps'){state.researchKind='gaps';persistUiState();renderResearch();}if(event.currentTarget.value==='journal'&&state.researchKind!=='journal'){state.researchKind='journal';persistUiState();renderResearch();}if((event.currentTarget.value==='ou_chercher'||event.currentTarget.value==='murs')&&state.researchKind!==event.currentTarget.value){state.researchKind=event.currentTarget.value;persistUiState();renderResearch();}if(event.currentTarget.value==='socface'&&state.researchKind!=='socface'){state.researchKind='socface';persistUiState();renderResearch();}});$('#research-form').elements.date_mode.addEventListener('change',updateFields);$('#research-form').elements.date_window_mode.addEventListener('change',updateFields);$('#research-form').elements.proximity_date_mode.addEventListener('change',updateFields);$('#research-form').elements.proximity_date_window_mode.addEventListener('change',updateFields);
+        $('#research-form').elements.search_kind.addEventListener('change',event=>{updateFields();if(event.currentTarget.value==='insee'&&state.researchKind!=='insee'){state.researchKind='insee';persistUiState();renderResearch();}if(event.currentTarget.value==='web'&&state.researchKind!=='web'){state.researchKind='web';persistUiState();renderResearch();}if(event.currentTarget.value==='saved'&&state.researchKind!=='saved'){state.researchKind='saved';persistUiState();renderResearch();}if(event.currentTarget.value==='question'&&state.researchKind!=='question'){state.researchKind='question';persistUiState();renderResearch();}if(event.currentTarget.value==='gaps'&&state.researchKind!=='gaps'){state.researchKind='gaps';persistUiState();renderResearch();}if(event.currentTarget.value==='journal'&&state.researchKind!=='journal'){state.researchKind='journal';persistUiState();renderResearch();}if((event.currentTarget.value==='ou_chercher'||event.currentTarget.value==='murs')&&state.researchKind!==event.currentTarget.value){state.researchKind=event.currentTarget.value;persistUiState();renderResearch();}if(event.currentTarget.value==='socface'&&state.researchKind!=='socface'){state.researchKind='socface';persistUiState();renderResearch();}if(PLUS_KINDS.includes(event.currentTarget.value)&&state.researchKind!==event.currentTarget.value){state.researchKind=event.currentTarget.value;persistUiState();renderResearch();}
+            // toutes les autres sortes (texte, période, proximité, nom de lieu, transcriptions, dépouillement…) : la page de droite suit aussi le choix
+            // (avant, elle restait sur « Que manque-t-il ? » ou « Où chercher ? » : on croyait la recherche devenue inaccessible) ; le formulaire est montré
+            if(state.researchKind!==event.currentTarget.value){state.researchKind=event.currentTarget.value;if(state.researchKind!=='archive_digest')state.archiveDigestAdding=false;persistUiState();renderResearch();}
+            requestAnimationFrame(()=>{const f=$('#research-form');const first=[...(f?.querySelectorAll('input:not([type=hidden]),select:not([name=search_kind]),textarea')||[])].find(el=>el.offsetParent&&!el.closest('[data-rk-menu]'));if(first){first.scrollIntoView({block:'nearest',behavior:'smooth'});}});});$('#research-form').elements.date_mode.addEventListener('change',updateFields);$('#research-form').elements.date_window_mode.addEventListener('change',updateFields);$('#research-form').elements.proximity_date_mode.addEventListener('change',updateFields);$('#research-form').elements.proximity_date_window_mode.addEventListener('change',updateFields);
         $$('[data-research-display]',content).forEach(button=>button.addEventListener('click',()=>{state.researchDisplay=button.dataset.researchDisplay;persistUiState();renderSidebar();renderResearch();}));
         archiveDigestAddButton.addEventListener('click',()=>{state.archiveDigestAdding=true;state.archiveDigestEditId=0;renderResearch();});
-        $('#research-form').addEventListener('submit',event=>{event.preventDefault();const values=formObject(event.currentTarget);state.researchKind=values.search_kind;if(state.researchKind!=='archive_digest')state.archiveDigestAdding=false;const query=values.search_kind==='dates'?values.date_q:(values.search_kind==='transcriptions'?values.transcription_q:(values.search_kind==='place_name'?values.place_name_q:(values.search_kind==='archive_digest'?values.archive_digest_q:values.text_q)));state.research={q:(query||'').trim(),category:values.category||'all'};state.placeNameSearch={q:(values.place_name_q||'').trim(),country:(values.place_name_country||'').trim(),division:(values.place_name_division||'').trim()};state.archiveDigestSearch={q:(values.archive_digest_q||'').trim(),city:(values.archive_digest_city||'').trim(),placeId:Number(values.archive_digest_place_id)||0,placeName:state.archiveDigestSearch.placeName||'',radiusKm:Number(values.archive_digest_radius_km)||0,dept:(values.archive_digest_dept||'').trim(),region:(values.archive_digest_region||'').trim(),recordType:values.archive_digest_record_type||'',status:values.archive_digest_status||''};state.transcriptionSearch={q:(values.transcription_q||'').trim(),scope:'all'};state.dateSearch={mode:values.date_mode,yearFrom:values.year_from,yearTo:values.year_to,values:(values.exact_dates||'').trim(),valueTo:(values.exact_date_to||'').trim(),dateWindowMode:values.date_window_mode||'exact',dateWindowDays:values.date_window_days||'',eventTypeId:Number(values.event_type_id)||0,occupationId:values.occupation_id||'',sortDir:state.dateSearch.sortDir||'asc',placeId:Number(values.date_place_id)||0,placeName:state.dateSearch.placeName||''};state.proximitySearch={placeId:Number(values.proximity_place_id)||0,placeName:state.proximitySearch.placeName||'',dateMode:values.proximity_date_mode||'range',yearFrom:values.proximity_year_from,yearTo:values.proximity_year_to,exactDate:(values.proximity_exact_date||'').trim(),exactDateTo:(values.proximity_exact_date_to||'').trim(),dateWindowMode:values.proximity_date_window_mode||'exact',dateWindowDays:values.proximity_date_window_days||'',radiusKm:Number(values.proximity_radius_km)||0};state.inseeSearch={nom:(values.insee_nom||'').trim(),prenom:(values.insee_prenom||'').trim(),sexe:values.insee_sexe||'',dateNaissance:(values.insee_date_naissance||'').trim(),dateDeces:(values.insee_date_deces||'').trim(),birthYearFrom:values.insee_birth_year_from||'',birthYearTo:values.insee_birth_year_to||'',deathYearFrom:values.insee_death_year_from||'',deathYearTo:values.insee_death_year_to||'',communeNaissance:(values.insee_commune_naissance||'').trim(),communeDeces:(values.insee_commune_deces||'').trim(),departement:(values.insee_departement||'').trim(),region:(values.insee_region||'').trim()};persistUiState();renderResearch();});
+        $('#research-form').addEventListener('submit',event=>{event.preventDefault();const values=formObject(event.currentTarget);state.researchKind=values.search_kind;if(state.researchKind!=='archive_digest')state.archiveDigestAdding=false;const query=values.search_kind==='dates'?values.date_q:(values.search_kind==='transcriptions'?values.transcription_q:(values.search_kind==='place_name'?values.place_name_q:(values.search_kind==='archive_digest'?values.archive_digest_q:values.text_q)));state.research={q:(query||'').trim(),category:values.category||'all'};state.placeNameSearch={q:(values.place_name_q||'').trim(),country:(values.place_name_country||'').trim(),division:(values.place_name_division||'').trim()};state.archiveDigestSearch={q:(values.archive_digest_q||'').trim(),city:(values.archive_digest_city||'').trim(),placeId:Number(values.archive_digest_place_id)||0,placeName:state.archiveDigestSearch.placeName||'',radiusKm:Number(values.archive_digest_radius_km)||0,dept:(values.archive_digest_dept||'').trim(),region:(values.archive_digest_region||'').trim(),recordType:values.archive_digest_record_type||'',status:values.archive_digest_status||''};state.transcriptionSearch={q:(values.transcription_q||'').trim(),scope:'all'};state.dateSearch={mode:values.date_mode,yearFrom:values.year_from,yearTo:values.year_to,values:(values.exact_dates||'').trim(),valueTo:(values.exact_date_to||'').trim(),dateWindowMode:values.date_window_mode||'exact',dateWindowDays:values.date_window_days||'',eventTypeId:Number(values.event_type_id)||0,occupationId:values.occupation_id||'',sortDir:state.dateSearch.sortDir||'asc',placeId:Number(values.date_place_id)||0,placeName:state.dateSearch.placeName||''};state.proximitySearch={placeId:Number(values.proximity_place_id)||0,placeName:state.proximitySearch.placeName||'',dateMode:values.proximity_date_mode||'range',yearFrom:values.proximity_year_from,yearTo:values.proximity_year_to,exactDate:(values.proximity_exact_date||'').trim(),exactDateTo:(values.proximity_exact_date_to||'').trim(),dateWindowMode:values.proximity_date_window_mode||'exact',dateWindowDays:values.proximity_date_window_days||'',radiusKm:Number(values.proximity_radius_km)||0};state.inseeSearch={nom:(values.insee_nom||'').trim(),prenom:(values.insee_prenom||'').trim(),sexe:values.insee_sexe||'',dateNaissance:(values.insee_date_naissance||'').trim(),dateDeces:(values.insee_date_deces||'').trim(),birthYearFrom:values.insee_birth_year_from||'',birthYearTo:values.insee_birth_year_to||'',deathYearFrom:values.insee_death_year_from||'',deathYearTo:values.insee_death_year_to||'',communeNaissance:(values.insee_commune_naissance||'').trim(),communeDeces:(values.insee_commune_deces||'').trim(),departement:(values.insee_departement||'').trim(),region:(values.insee_region||'').trim()};persistUiState();window.LCNDA_EXT?.researchHistory?.add(state.researchKind);renderResearch();});
+    }
+
+    /** R2 — la sorte de recherche se choisit dans la colonne de boutons numérotés (comme Graphiques, Listes, Réglages) ;
+     *  le menu caché « search_kind » reste la valeur du formulaire (rangé et filtré par « Réordonner »). */
+    function drawResearchKindMenu(content,select){
+        const menu=$('[data-rk-menu]',content);if(!menu||!select)return;
+        menu.innerHTML=[...select.options].map((o,i)=>`<button type="button" class="side-menu-item ${o.value===select.value?'is-active':''}" data-rk-pick="${escapeHtml(o.value)}" aria-pressed="${o.value===select.value}"><span class="side-number">${String(i+1).padStart(2,'0')}</span>${escapeHtml(o.textContent)}</button>`).join('');
+        menu.addEventListener('click',event=>{const b=event.target.closest('[data-rk-pick]');if(!b)return;
+            select.value=b.dataset.rkPick;$$('[data-rk-pick]',menu).forEach(x=>{const on=x===b;x.classList.toggle('is-active',on);x.setAttribute('aria-pressed',String(on));});
+            select.dispatchEvent(new Event('change',{bubbles:true}));});
     }
 
     // --- Place-picker pour la recherche par dates ---
@@ -188,7 +211,7 @@
         const visible=settings.order.filter(key=>!settings.hidden.includes(key)).map(key=>sites.find(site=>site[0]===key)).filter(Boolean);
         const groups=webSearchGroups.map(group=>[group,visible.filter(site=>site[2]===group)]).filter(([,list])=>list.length);
         const v=key=>escapeHtml(f[key]??'');
-        $('#workspace').innerHTML=`<section class="page web-search-tool"><header class="page-header"><div><span class="eyebrow">RECHERCHE</span><h2>Chercher sur internet</h2><p>Pour une personne qui n’est pas encore dans la base, ou pour partir d’une fiche et changer un détail. Les sites s’ouvrent dans ton navigateur ; leur choix et leur ordre se règlent dans Réglages → Apparence.</p>${window.LCNDA_EXT?.sourcesOuvertes?'<p class="so-ws"><button class="button small" type="button" data-so-search="" data-pid="0">🗂 Archives en ligne : Mémoire des hommes, Léonore, matricules, presse…</button><button class="button small secondary" type="button" data-so-paste data-pid="0">🔗 Coller un lien</button></p>':''}</div></header>
+        $('#workspace').innerHTML=`<section class="page web-search-tool">${window.LCNDA_UI.pageHeader({where:i18n('Recherche'),title:i18n('Chercher sur internet'),help:i18n('Pour une personne qui n’est pas encore dans la base, ou pour partir d’une fiche et changer un détail. Les sites s’ouvrent dans ton navigateur ; leur choix et leur ordre se règlent dans Réglages → Apparence.')+(window.LCNDA_EXT?.sourcesOuvertes?'</p><p class="so-ws"><button class="button small" type="button" data-so-search="" data-pid="0">🗂 Archives en ligne : Mémoire des hommes, Léonore, matricules, presse…</button><button class="button small secondary" type="button" data-so-paste data-pid="0">🔗 Coller un lien</button>':'')})}
             <section class="maintenance-panel"><div class="web-search-tool-from"><div class="pk-host" style="flex:1;min-width:240px"><span>Partir d’une fiche</span><div id="wst-person">${window.LCNDA_PICKER?.pickerField({name: 'wst_person', kind: 'person', allowCreate: false}) || ''}</div></div><button class="button small secondary" type="button" id="wst-clear">Vider</button></div>
             <form id="wst-form" class="form-grid web-search-tool-form" style="padding:0">
                 <label>Prénom<input name="first" value="${v('first')}" placeholder="Jean"></label>
@@ -223,6 +246,7 @@
         $('[data-ws-open-picked]',panel)?.addEventListener('click',()=>{$$('[data-ws-pick]:checked',panel).forEach(input=>{const link=$(`[data-ws-site="${CSS.escape(input.dataset.wsPick)}"]`,panel);if(link?.href&&!link.href.endsWith('#'))window.open(link.href,'_blank','noopener');});});
         panel.addEventListener('click',event=>{const link=event.target.closest('[data-ws-site]');if(link&&link.getAttribute('href')==='#'){event.preventDefault();toast('Tape au moins un prénom ou un nom.');}});
         $('#wst-clear').addEventListener('click',()=>{state.webSearchForm=null;renderWebSearchTool();});
+        window.LCNDA_EXT?.researchKit?.webLinks($('#workspace .page'),{criteria:()=>`${i18n('Chercher sur internet')} : ${[f.first,f.middle,f.last,f.place,f.y1&&f.y2?`${f.y1}–${f.y2}`:(f.y1||f.y2||'')].filter(Boolean).join(' ')}`}); // 🧺 les liens au panier · 📎 (app-recherche-kit.js)
         // Remplir depuis une fiche de la base
         // la fiche de départ : menu de choix unique
         $('#wst-person').addEventListener('picker-change',async event=>{const it=event.detail.item;if(!it||it.free||!it.id)return;
@@ -244,9 +268,11 @@
         if(state.researchKind==='web')return renderWebSearchTool(token);
         if(state.researchKind==='socface'&&window.LCNDA_EXT?.socface)return window.LCNDA_EXT.socface.page(token); // 🧾 heritage-socface.js
         if(state.researchKind==='saved'&&window.LCNDA_EXT?.research)return window.LCNDA_EXT.research(token);
+        if(state.researchKind==='je_veux'&&window.LCNDA_EXT?.researchJeVeux&&window.LCNDA_EXT?.jeVeux?.inResearch?.())return window.LCNDA_EXT.researchJeVeux(token); // 🧭 Je veux faire… (app-je-veux.js)
         if(state.researchKind==='question'&&window.LCNDA_EXT?.question)return window.LCNDA_EXT.question(token);
         if(state.researchKind==='gaps'&&window.LCNDA_EXT?.researchGaps)return window.LCNDA_EXT.researchGaps(token);
         if(state.researchKind==='journal'&&window.LCNDA_EXT?.researchJournal)return window.LCNDA_EXT.researchJournal(token); // 🗓 heritage-journal.js
+        if(PLUS_KINDS.includes(state.researchKind)&&window.LCNDA_EXT?.researchPlus?.[state.researchKind])return window.LCNDA_EXT.researchPlus[state.researchKind](token); // 🧬 📊 🧾 🔁 app-recherche-outils.js
         if((state.researchKind==='ou_chercher'||state.researchKind==='murs')&&window.LCNDA_EXT?.ouChercher)return window.LCNDA_EXT.ouChercher.page(token,state.researchKind); // 🌍 Où chercher ? · 🧩 Murs de brique (heritage-ou-chercher.js)
         const q=state.research.q.trim();
         if(!q){$('#workspace').innerHTML=`<section class="page">${window.LCNDA_UI.pageHeader({title:'Recherche',help:'Chercher dans toute la base : un nom, une ville, un pays ou une année.'})}${emptyState({icon:'🔍',text:'Tape ce que tu cherches dans la colonne de gauche',hint:'Un nom, une ville, un pays ou une année.'})}</section>`;return;}
@@ -255,22 +281,28 @@
         if(token!==state.workspaceToken||state.module!=='recherche')return;
         const categoryLabel={all:'toute la base',name:'les noms et personnes',place:'les lieux',year:'les années',occupation:'les métiers',employer:'les employeurs'}[state.research.category];
         const results=state.researchDisplay==='list'?researchTableHtml(data.people):`<div class="date-results">${data.people.length?data.people.map(researchPersonCard).join(''):emptyState({text: 'Aucune personne ne correspond à cette recherche.', icon:'🔎',hint:'Essaie une autre orthographe ou moins de critères.'})}</div>`;
-        $('#workspace').innerHTML=`<section class="page"><header class="page-header"><div><span class="eyebrow">RECHERCHE · ${escapeHtml(categoryLabel)}</span><h2>« ${escapeHtml(q)} »</h2><p>${plural(data.people.length,'personne trouvée','personnes trouvées')}. ${i18n('Chaque résultat indique pourquoi il correspond.')}</p></div></header>${results}</section>`;bindTableLinks();
+        const bar=window.LCNDA_EXT?.researchBar; // ☑ agir sur les résultats, ⤓ Exporter, 🖨 Imprimer (app-recherche-outils.js)
+        $('#workspace').innerHTML=`<section class="page">${window.LCNDA_UI.pageHeader({where:`${i18n('Recherche')} · ${i18n(categoryLabel)}`,titleHtml:`« ${escapeHtml(q)} »`,help:`${plural(data.people.length,'personne trouvée','personnes trouvées')}. ${i18n('Chaque résultat indique pourquoi il correspond.')}`,actions:bar?bar.headActions():[]})}${results}</section>`;bindTableLinks();
+        if(bar&&data.people.length)bar.attach($('#workspace .page'),data.people,{title:i18n('Recherche « {q} »',{q})});
     }
 
-    function researchPersonCard(person){const matches=(person.matches||[]).map(match=>`<span class="research-match ${match.kind}"><strong>${escapeHtml(match.label)}</strong>${match.date?`<small>${escapeHtml(match.date)}</small>`:''}${match.place?`<small>${escapeHtml(match.place)}</small>`:''}</span>`).join('');return `<article class="date-result research-person-card">${window.LCNDA_UI?.avatarOn?.()?window.LCNDA_UI.avatar({...person,name:personName(person),photo:person.portrait?`media/${encodeURIComponent(person.portrait)}`:''},48):`<div class="person-card-initial">${escapeHtml((person.first_name?.[0]||'')+(person.last_name?.[0]||''))}</div>`}<div><button class="table-link person-card-name" data-open-person="${person.id}">${escapeHtml(personName(person))}</button><p>${escapeHtml(relationYears(person))}</p><div class="research-matches">${matches}</div></div></article>`;}
+    function researchPersonCard(person){const matches=(person.matches||[]).map(match=>`<span class="research-match ${match.kind}"><strong>${escapeHtml(match.label)}</strong>${match.date?`<small>${escapeHtml(match.date)}</small>`:''}${match.place?`<small>${escapeHtml(match.place)}</small>`:''}</span>`).join('');return `<article class="date-result research-person-card">${pickBox(person)}${window.LCNDA_UI?.avatarOn?.()?window.LCNDA_UI.avatar({...person,name:personName(person),photo:person.portrait?`media/${encodeURIComponent(person.portrait)}`:''},48):`<div class="person-card-initial">${escapeHtml((person.first_name?.[0]||'')+(person.last_name?.[0]||''))}</div>`}<div><button class="table-link person-card-name" data-open-person="${person.id}">${escapeHtml(personName(person))}</button><p>${escapeHtml(relationYears(person))}</p><div class="research-matches">${matches}</div></div></article>`;}
 
+    /** ☑ la case de chaque résultat (la barre d'actions d'app-recherche-outils.js s'en sert) */
+    function pickBox(person){return window.LCNDA_EXT?.researchBar?`<input type="checkbox" class="rp-pick" data-rp-pick="${Number(person.id)}" aria-label="${escapeHtml(i18n('Cocher {name}',{name:person.name||personName(person)}))}">`:'';}
     function researchTableHtml(people){
         if(!people.length)return emptyState({text: 'Aucune personne ne correspond à cette recherche.', icon:'🔎',hint:'Essaie une autre orthographe ou moins de critères.'});
-        return `<div class="data-table-wrap"><table class="data-table research-table sortable-table" data-sortbar="personne" data-sortbar-fem="1"><thead><tr><th><button data-sort-column="0">Personne</button></th><th><button data-sort-column="1">Élément correspondant</button></th><th><button data-sort-column="2">Naissance</button></th><th><button data-sort-column="3">Décès</button></th></tr></thead><tbody>${people.map(person=>`<tr><td data-sort-value="${escapeHtml(personName(person).toLowerCase())}"><button class="table-link" data-open-person="${person.id}">${escapeHtml(personName(person))}</button>${person.surname_group?`<small class="cell-muted">Famille ${escapeHtml(person.surname_group)}</small>`:''}</td><td data-sort-value="${escapeHtml((person.matches?.[0]?.label||'').toLowerCase())}"><div class="research-matches">${(person.matches||[]).map(match=>`<span class="research-match ${match.kind}"><strong>${escapeHtml(match.label)}</strong>${match.date?`<small>${escapeHtml(match.date)}</small>`:''}${match.place?`<small>${escapeHtml(match.place)}</small>`:''}</span>`).join('')||'<span class="cell-muted">Correspondance générale</span>'}</div></td><td data-sort-value="${person.birth_year||9999}">${escapeHtml(person.birth_date||person.birth_year||'—')}</td><td data-sort-value="${person.death_year||9999}">${escapeHtml(person.death_date||person.death_year||(person.living_status==='living'?'Vivante':'—'))}</td></tr>`).join('')}</tbody></table></div>`;
+        return `<div class="data-table-wrap"><table class="data-table research-table sortable-table" data-sortbar="personne" data-sortbar-fem="1"><thead><tr><th><button data-sort-column="0">Personne</button></th><th><button data-sort-column="1">Élément correspondant</button></th><th><button data-sort-column="2">Naissance</button></th><th><button data-sort-column="3">Décès</button></th></tr></thead><tbody>${people.map(person=>`<tr><td data-sort-value="${escapeHtml(personName(person).toLowerCase())}">${pickBox(person)}<button class="table-link" data-open-person="${person.id}">${escapeHtml(personName(person))}</button>${person.surname_group?`<small class="cell-muted">Famille ${escapeHtml(person.surname_group)}</small>`:''}</td><td data-sort-value="${escapeHtml((person.matches?.[0]?.label||'').toLowerCase())}"><div class="research-matches">${(person.matches||[]).map(match=>`<span class="research-match ${match.kind}"><strong>${escapeHtml(match.label)}</strong>${match.date?`<small>${escapeHtml(match.date)}</small>`:''}${match.place?`<small>${escapeHtml(match.place)}</small>`:''}</span>`).join('')||'<span class="cell-muted">Correspondance générale</span>'}</div></td><td data-sort-value="${person.birth_year||9999}">${escapeHtml(person.birth_date||person.birth_year||'—')}</td><td data-sort-value="${person.death_year||9999}">${escapeHtml(person.death_date||person.death_year||(person.living_status==='living'?'Vivante':'—'))}</td></tr>`).join('')}</tbody></table></div>`;
     }
 
     function archiveDigestTypeOptions(selected=''){
         const labels={table_decennale:'Table décennale',mariage:'Mariage',naissance:'Naissance',deces:'Décès',bapteme:'Baptême',succession:'Succession',recensement:'Recensement',prison:'Prison',fiche_militaire:'Fiche militaire',liste_prisonnier:'Liste prisonnier',autre:'Autre'};
         return Object.entries(labels).map(([value,label])=>`<option value="${value}" ${value===selected?'selected':''}>${label}</option>`).join('');
     }
+    /** R9 — mêmes mots d'état partout : « À faire · En cours · En pause · Terminé » (« plus tard » se dit « En pause ») */
+    const digestStatuses=statuses=>({...(statuses||{}),later:i18n('En pause')});
     function archiveDigestStatusOptions(selected='todo'){
-        const labels={todo:'À faire',done:'Terminé',review:'À revoir',doubt:'Doute',priority:'À faire en priorité',later:'À faire plus tard'};
+        const labels={todo:'À faire',done:'Terminé',review:'À revoir',doubt:'Doute',priority:'À faire en priorité',later:'En pause'};
         return Object.entries(labels).map(([value,label])=>`<option value="${value}" ${value===selected?'selected':''}>${label}</option>`).join('');
     }
     const ARCHIVE_DIGEST_PAGE_STATUSES={checked:'Dépouillée',empty:'Sans information',review:'À revoir',todo:'Pas terminé · à faire',found:'Pas terminé · informations trouvées',incomplete:'Page incomplète'};
@@ -372,7 +404,7 @@
         const progress=[row.page_total&&`${plural(row.page_total,'page / vue','pages / vues')}`,(row.pages||[]).length&&plural(row.pages.length,'page détaillée','pages détaillées')].filter(Boolean);
         const peopleBlock=archiveDigestPeopleHtml(row);
         const pagesBlock=archiveDigestPagesHtml(row);
-        return `<article class="archive-digest-row" data-archive-digest-id="${row.id}"><div><strong>${row.year_text?escapeHtml(row.year_text):'Sans période'}</strong><p>${row.archive_url?`<a href="${escapeHtml(safeUrl(row.archive_url))}" target="_blank" rel="noopener">${escapeHtml([row.archive_service,row.archive_reference].filter(Boolean).join(' · ')||'Ouvrir l’archive')}</a>`:escapeHtml([row.archive_service,row.archive_reference].filter(Boolean).join(' · ')||'Sans cote')}</p><small>${escapeHtml([row.city_alias,row.department,row.region].filter(Boolean).join(' · '))}</small></div><span class="status-badge">${escapeHtml(archiveDigestLabel(statuses,row.status))}</span><div class="archive-digest-notes">${archiveDigestJournalViewHtml(row)}${progress.length?`<p class="archive-digest-progress">${escapeHtml(progress.join(' · '))}</p>`:''}${Number(row.is_exhaustive)?'<span class="status-badge archive-digest-complete-badge">Dépouillement complet</span>':''}${row.exhaustive_note?`<p>${escapeHtml(row.exhaustive_note)}</p>`:''}${row.searched?`<p><b>Cherché</b> ${escapeHtml(row.searched)}</p>`:''}${row.found?`<p><b>Trouvé</b> ${escapeHtml(row.found)}</p>`:''}${row.notes?`<p>${escapeHtml(row.notes)}</p>`:''}${attachments}</div><div class="row-actions"><button class="button small secondary" type="button" data-archive-digest-person="${row.id}">＋ Personne</button><button class="button small secondary" type="button" data-archive-digest-page="${row.id}">＋ Page / vue</button><button class="button small secondary" type="button" data-archive-digest-media="${row.id}">＋ Média</button><button class="button small secondary" type="button" data-archive-digest-transcription="${row.id}">Transcrire</button>${window.LCNDA_EXT?.openDepouillement?`<button class="button small secondary" type="button" data-open-depouillement="${row.id}" title="Le même dépouillement page par page (photos, personnes par foyer, transcription) : Listes › Dépouillements">📜 Pages</button>`:''}<button class="icon-button" type="button" data-archive-digest-edit="${row.id}" title="Modifier">✎</button><button class="icon-button danger" type="button" data-archive-digest-delete="${row.id}" title="Supprimer">🗑</button></div>${peopleBlock}${pagesBlock}</article>`;
+        return `<article class="archive-digest-row" data-archive-digest-id="${row.id}"><div><strong>${row.year_text?escapeHtml(row.year_text):'Sans période'}</strong><p>${row.archive_url?`${window.LCNDA_UI.extLink(safeUrl(row.archive_url), [row.archive_service,row.archive_reference].filter(Boolean).join(' · ')||'Ouvrir l’archive')}`:escapeHtml([row.archive_service,row.archive_reference].filter(Boolean).join(' · ')||'Sans cote')}</p><small>${escapeHtml([row.city_alias,row.department,row.region].filter(Boolean).join(' · '))}</small></div><span class="status-badge">${escapeHtml(archiveDigestLabel(statuses,row.status))}</span><div class="archive-digest-notes">${archiveDigestJournalViewHtml(row)}${progress.length?`<p class="archive-digest-progress">${escapeHtml(progress.join(' · '))}</p>`:''}${Number(row.is_exhaustive)?'<span class="status-badge archive-digest-complete-badge">Dépouillement complet</span>':''}${row.exhaustive_note?`<p>${escapeHtml(row.exhaustive_note)}</p>`:''}${row.searched?`<p><b>Cherché</b> ${escapeHtml(row.searched)}</p>`:''}${row.found?`<p><b>Trouvé</b> ${escapeHtml(row.found)}</p>`:''}${row.notes?`<p>${escapeHtml(row.notes)}</p>`:''}${attachments}</div><div class="row-actions"><button class="button small secondary" type="button" data-archive-digest-person="${row.id}">＋ Personne</button><button class="button small secondary" type="button" data-archive-digest-page="${row.id}">＋ Page / vue</button><button class="button small secondary" type="button" data-archive-digest-media="${row.id}">＋ Média</button><button class="button small secondary" type="button" data-archive-digest-transcription="${row.id}">Transcrire</button>${window.LCNDA_EXT?.openDepouillement?`<button class="button small secondary" type="button" data-open-depouillement="${row.id}" title="Le même dépouillement page par page (photos, personnes par foyer, transcription) : Listes › Dépouillements">📜 Pages</button>`:''}<button class="icon-button" type="button" data-archive-digest-edit="${row.id}" title="Modifier">✎</button><button class="icon-button danger" type="button" data-archive-digest-delete="${row.id}" title="Supprimer">🗑</button></div>${peopleBlock}${pagesBlock}</article>`;
     }
     function archiveDigestCategoryOrder(keys){
         let saved=[];
@@ -394,9 +426,17 @@
         const editing=(data.rows||[]).find(row=>Number(row.id)===Number(state.archiveDigestEditId))||null;
         const adding=state.archiveDigestAdding===true||Boolean(editing);
         const radiusNote=Number(data.radius_km||0)>0?` · ${i18n(data.radius_unavailable?'rayon de {km} km autour de la commune (coordonnées absentes, commune exacte seulement)':'rayon de {km} km autour de la commune',{km:Number(data.radius_km)})}`:'';
-        $('#workspace').innerHTML=`<section class="page"><header class="page-header"><div><span class="eyebrow">RECHERCHE · DÉPOUILLEMENT D’ARCHIVE</span><h2>Suivi des registres dépouillés</h2><p>${plural(Number(data.rows?.length||0),'entrée affichée','entrées affichées')}${escapeHtml(radiusNote)}. ${i18n('Regroupe ce que tu as déjà vérifié, ce qui est à revoir et les pistes annexes.')}</p></div><div class="page-actions"><button class="button secondary" type="button" id="archive-digest-csv">⤒ Importer un tableau CSV</button><button class="button secondary" type="button" data-import-plus="releves" title="Nimègue (v2, v3), CSV d’un cercle : chaque acte avec ses personnes et leur rôle">⤒ Importer des relevés (Nimègue…)</button>${window.LCNDA_EXT?.openDecennale?'<button class="button secondary" type="button" data-archive-digest-decennale title="La photo d’une table décennale : l’app lit les noms, les dates et les sortes d’actes, tu relis, puis le dépouillement est créé">📑 Lire une table décennale</button>':''}${window.LCNDA_EXT?.openDepouillement?`<button class="button secondary" type="button" data-h-open-list="depouillements" title="Les mêmes dépouillements, page par page (Listes › Dépouillements)">📜 En pages (Listes)</button>`:''}<button class="button secondary" type="button" id="archive-digest-index">Index des cotes</button><button class="button secondary" type="button" id="archive-digest-requests">Actes à commander</button><button class="button secondary" type="button" id="archive-digest-gaps">Lacunes d’archives</button><button class="button secondary" type="button" id="archive-digest-category-order">Ordre des catégories</button></div></header>${adding?archiveDigestFormHtml(editing||(state.archiveDigestPrefill?.archive_service?{archive_service:String(state.archiveDigestPrefill.archive_service)}:{})):''}${archiveDigestRowsHtml(data.rows||[],data.types||{},data.statuses||{})}</section>`;
+        $('#workspace').innerHTML=`<section class="page">${window.LCNDA_UI.pageHeader({where:`${i18n('Recherche')} · ${i18n('Dépouillement d’archive')}`,title:i18n('Suivi des registres dépouillés'),help:`${plural(Number(data.rows?.length||0),'entrée affichée','entrées affichées')}${escapeHtml(radiusNote)}. ${i18n('Regroupe ce que tu as déjà vérifié, ce qui est à revoir et les pistes annexes.')}`,primary:document.body.classList.contains('is-kiosk')?'':`<button class="button" type="button" data-archive-digest-new>${escapeHtml(i18n('＋ Nouveau dépouillement'))}</button>`,actions:[`<button class="button secondary" type="button" id="archive-digest-index">${escapeHtml(i18n('Index des cotes'))}</button>`],more:[`<button class="button secondary" type="button" id="archive-digest-csv">⤒ Importer un tableau CSV</button><button class="button secondary" type="button" data-import-plus="releves" title="Nimègue (v2, v3), CSV d’un cercle : chaque acte avec ses personnes et leur rôle">⤒ Importer des relevés (Nimègue…)</button>${window.LCNDA_EXT?.openDecennale?'<button class="button secondary" type="button" data-archive-digest-decennale title="La photo d’une table décennale : l’app lit les noms, les dates et les sortes d’actes, tu relis, puis le dépouillement est créé">📑 Lire une table décennale</button>':''}${window.LCNDA_EXT?.openDepouillement?`<button class="button secondary" type="button" data-h-open-list="depouillements" title="Les mêmes dépouillements, page par page (Listes › Dépouillements)">📜 En pages (Listes)</button>`:''}<button class="button secondary" type="button" id="archive-digest-requests">Actes à commander</button><button class="button secondary" type="button" id="archive-digest-gaps">Lacunes d’archives</button><button class="button secondary" type="button" id="archive-digest-category-order">Ordre des catégories</button>`,...(window.LCNDA_EXT?.researchBar?[`<button class="button secondary" type="button" data-rp-export>${escapeHtml(i18n('⤓ Exporter ▾'))}</button>`,`<button class="button secondary" type="button" data-rp-print>${escapeHtml(i18n('🖨 Imprimer'))}</button>`]:[])]})}${adding?archiveDigestFormHtml(editing||(state.archiveDigestPrefill?.archive_service?{archive_service:String(state.archiveDigestPrefill.archive_service)}:{})):''}${archiveDigestRowsHtml(data.rows||[],data.types||{},digestStatuses(data.statuses))}</section>`;
         if(state.researchDisplay==='cards')$('.archive-digest-groups')?.classList.add('is-cards');
         $('#archive-digest-category-order')?.addEventListener('click',()=>openArchiveDigestCategoryOrderDialog(data.types||{}));
+        $('[data-archive-digest-new]')?.addEventListener('click',()=>{state.archiveDigestAdding=true;state.archiveDigestEditId=0;renderResearch();});
+        window.LCNDA_EXT?.researchBar?.bindExportPrint($('#workspace .page'),()=>({title:i18n('Dépouillements d’archive'),head:[i18n('Ville'),i18n('Période'),i18n('Type d’acte'),i18n('Archives / cote'),i18n('État'),i18n('Personnes relevées')],rows:(data.rows||[]).map(row=>[row.place_name||row.city_name||row.city_alias||'',row.year_text||'',archiveDigestLabel(data.types,row.record_type),[row.archive_service,row.archive_reference].filter(Boolean).join(' · '),archiveDigestLabel(digestStatuses(data.statuses),row.status),String((row.people||[]).length)])}));
+        // 🗺 Carte par commune · 🧺 📎 les dépouillements montrés (app-recherche-kit.js)
+        {const digestCells=row=>[row.place_name||row.city_name||row.city_alias||'',row.year_text||'',archiveDigestLabel(data.types,row.record_type),[row.archive_service,row.archive_reference].filter(Boolean).join(' · '),archiveDigestLabel(digestStatuses(data.statuses),row.status),String((row.people||[]).length)];
+        if((data.rows||[]).length&&!adding)window.LCNDA_EXT?.researchKit?.table($('#workspace .page'),{key:'archive_digest',title:i18n('Dépouillements d’archive'),criteria:`${i18n('Dépouillement d’archive')}${[filters.q,filters.city,filters.dept,filters.region].filter(Boolean).length?' : '+[filters.q,filters.city,filters.dept,filters.region].filter(Boolean).join(' · '):''}`,
+            columns:[i18n('Ville'),i18n('Période'),i18n('Type d’acte'),i18n('Archives / cote'),i18n('État'),i18n('Personnes relevées')],list:data.rows,cells:digestCells,
+            itemOf:row=>{const c=digestCells(row);return {kind:'row',ref_id:Number(row.id)||0,title:`${c[2]} · ${c[0]}${c[1]?` · ${c[1]}`:''}`,value:[c[3],c[4]].filter(Boolean).join(' · '),data:{columns:[i18n('Ville'),i18n('Période'),i18n('Type d’acte'),i18n('Archives / cote'),i18n('État')],row:c.slice(0,5)},origin:{kind:'archive_digest',id:Number(row.id)||0,label:`${i18n('Dépouillement d’archive')} · ${c[0]}`,url:/^https?:/i.test(row.archive_url||'')?row.archive_url:''}};},
+            geoOf:row=>(row.place_lat!=null&&row.place_lat!==''?{lat:row.place_lat,lon:row.place_lon,place:row.place_name||row.city_name||''}:null),color:'#7048e8',legend:i18n('Commune dépouillée')});}
         $('#archive-digest-csv')?.addEventListener('click',()=>openArchiveDigestCsvDialog());
         $('[data-archive-digest-decennale]')?.addEventListener('click',()=>window.LCNDA_EXT?.openDecennale?.({onClose:id=>{if(id&&state.module==='recherche')renderResearch();}}));
         $('#archive-digest-index')?.addEventListener('click',()=>openArchiveDigestIndexDialog(data.rows||[]));
@@ -404,6 +444,30 @@
         $('#archive-digest-gaps')?.addEventListener('click',()=>openArchiveDigestAuxiliaryDialog('gaps',data.rows||[]));
         bindArchiveDigestUi(data.rows||[]);
         if(state.archiveDigestOpenRequests){state.archiveDigestOpenRequests=false;openArchiveDigestAuxiliaryDialog('requests',data.rows||[]);}
+    }
+    /** R7 — suppression tout de suite + « ↶ Annuler » (lib/recherche_outils.php garde de quoi tout remettre) */
+    async function deleteArchiveDigest(id){
+        try{const r=await api('ro_digest_trash',{}, {method:'POST',body:{id}});const res=r?.result||r;
+            const redraw=async()=>{if(state.module==='recherche'&&state.researchKind==='archive_digest')await renderResearch();};
+            await redraw();(window.LCNDA_EXT?.roUndoable||((m)=>toast(m)))(i18n('Dépouillement supprimé'),res.undo_id,redraw);
+        }catch(error){toast(error.message||'Suppression impossible.','error');}
+    }
+    async function trashDigestRow(table,id,message,after){
+        try{const r=await api('ro_row_trash',{}, {method:'POST',body:{table,id}});const res=r?.result||r;await after?.();
+            (window.LCNDA_EXT?.roUndoable||((m)=>toast(m)))(i18n(message),res.undo_id,after);
+        }catch(error){toast(error.message||'Suppression impossible.','error');}
+    }
+    /** R11 — « ⋯ » et clic droit d'un dépouillement : mêmes entrées, même ordre */
+    function archiveDigestMenuItems(row){
+        const click=sel=>()=>$(`[data-archive-digest-id="${row.id}"] ${sel}`)?.click();
+        const ro=document.body.classList.contains('is-kiosk');
+        return [window.LCNDA_EXT?.openDepouillement?{icon:'📜',label:i18n('Ouvrir page par page'),run:click('[data-open-depouillement]')}:null,
+            ro?null:{icon:'✎',label:i18n('Modifier'),run:click('[data-archive-digest-edit]')},
+            ro?null:{icon:'＋',label:i18n('Ajouter une personne'),run:click('[data-archive-digest-person]')},
+            ro?null:{icon:'＋',label:i18n('Ajouter une page / vue'),run:click('[data-archive-digest-page]')},
+            ro?null:{icon:'＋',label:i18n('Ajouter un média'),run:click('[data-archive-digest-media]')},
+            {icon:'✍️',label:i18n('Transcrire'),run:click('[data-archive-digest-transcription]')},
+            ro?null:{icon:'🗑',label:i18n('Supprimer'),danger:true,run:()=>deleteArchiveDigest(Number(row.id))}].filter(Boolean);
     }
     function bindArchiveDigestUi(rows){
         const form=$('#archive-digest-form');
@@ -432,10 +496,7 @@
             renderResearch();
         }));
         $$('[data-archive-digest-cancel]').forEach(button=>button.addEventListener('click',()=>{state.archiveDigestAdding=false;state.archiveDigestEditId=0;state.archiveDigestPrefill=null;renderResearch();}));
-        $$('[data-archive-digest-delete]').forEach(button=>button.addEventListener('click',async()=>{
-            if(!await confirmBox('Le dépouillement, ses personnes relevées et ses pages seront supprimés.',{title:'Supprimer ce dépouillement ?',okLabel:'Supprimer le dépouillement'}))return;
-            try{await api('delete_archive_digest',{}, {method:'POST',body:{id:Number(button.dataset.archiveDigestDelete)}});toast('Dépouillement supprimé.');await renderResearch();}catch(error){toast(error.message||'Suppression impossible.','error');}
-        }));
+        $$('[data-archive-digest-delete]').forEach(button=>button.addEventListener('click',()=>deleteArchiveDigest(Number(button.dataset.archiveDigestDelete))));
         $$('[data-archive-digest-media]').forEach(button=>button.addEventListener('click',()=>{
             const row=rows.find(item=>Number(item.id)===Number(button.dataset.archiveDigestMedia));
             if(row)openArchiveDigestMediaDialog(row);
@@ -453,10 +514,7 @@
             const member=row?.people?.find(item=>Number(item.id)===Number(button.dataset.archiveDigestPersonEdit));
             if(row&&member)openArchiveDigestPersonDialog(row,member);
         }));
-        $$('[data-archive-digest-person-delete]').forEach(button=>button.addEventListener('click',async()=>{
-            if(!await confirmBox('Elle ne sera plus dans ce dépouillement. La fiche de la généalogie n’est pas supprimée.',{title:'Retirer cette personne relevée ?',okLabel:'Retirer'}))return;
-            try{await api('delete_archive_digest_person',{}, {method:'POST',body:{id:Number(button.dataset.archiveDigestPersonDelete)}});toast('Personne relevée retirée.');await renderResearch();}catch(error){toast(error.message||'Retrait impossible.','error');}
-        }));
+        $$('[data-archive-digest-person-delete]').forEach(button=>button.addEventListener('click',()=>trashDigestRow('archive_digest_people',Number(button.dataset.archiveDigestPersonDelete),'Personne relevée retirée (la fiche reste)',()=>renderResearch())));
         $$('[data-archive-digest-page]').forEach(button=>button.addEventListener('click',()=>{
             const row=rows.find(item=>Number(item.id)===Number(button.dataset.archiveDigestPage));
             if(row)openArchiveDigestPageDialog(row);
@@ -478,8 +536,11 @@
         $$('[data-archive-digest-page-delete]').forEach(button=>button.addEventListener('click',async()=>{
             const row=rows.find(item=>Number(item.id)===Number(button.dataset.archiveDigestId));
             const index=Number(button.dataset.archiveDigestPageDelete);
-            if(!row||!Number.isInteger(index)||!await confirmBox('',{title:'Retirer cette page / vue ?',okLabel:'Retirer la page'}))return;
-            try{await saveArchiveDigestPages(row,(row.pages||[]).filter((_,itemIndex)=>itemIndex!==index));toast('Page retirée.');await renderResearch();}catch(error){toast(error.message||'Retrait impossible.','error');}
+            if(!row||!Number.isInteger(index))return;
+            const before=(row.pages||[]).map(page=>({...page})),after=before.filter((_,itemIndex)=>itemIndex!==index);
+            try{await saveArchiveDigestPages(row,after);await renderResearch();}catch(error){toast(error.message||'Retrait impossible.','error');return;}
+            const redraw=async()=>{if(state.module==='recherche'&&state.researchKind==='archive_digest')await renderResearch();};
+            window.LCNDA_APP.undoToast(i18n('Page retirée'),{undo:async()=>{await saveArchiveDigestPages(row,before);await redraw();},redo:async()=>{await saveArchiveDigestPages(row,after);await redraw();}});
         }));
         $$('[data-archive-digest-id]').forEach(article=>{
             const row=rows.find(item=>Number(item.id)===Number(article.dataset.archiveDigestId));
@@ -488,6 +549,14 @@
             actions.insertAdjacentHTML('beforeend',`<button class="button small secondary" type="button" data-archive-digest-group-pages="${row.id}">${state.archiveDigestGroupByPage?'Liste simple':'Regrouper par page et foyer'}</button>`);
         });
         $$('[data-archive-digest-group-pages]').forEach(button=>button.addEventListener('click',()=>{state.archiveDigestGroupByPage=!state.archiveDigestGroupByPage;renderResearch();}));
+        const UIx=window.LCNDA_UI;
+        $$('article.archive-digest-row[data-archive-digest-id]').forEach(article=>{
+            const row=rows.find(item=>Number(item.id)===Number(article.dataset.archiveDigestId));if(!row||!UIx?.menuAt)return;
+            const actions=$('.row-actions',article);
+            if(actions&&!actions.querySelector('[data-archive-digest-more]'))actions.insertAdjacentHTML('beforeend',`<button class="icon-button" type="button" data-archive-digest-more title="${escapeHtml(i18n('Plus d’actions'))}" aria-label="${escapeHtml(i18n('Plus d’actions'))}">⋯</button>`);
+            actions?.querySelector('[data-archive-digest-more]')?.addEventListener('click',event=>UIx.menuAt(event.currentTarget,archiveDigestMenuItems(row)));
+            article.addEventListener('contextmenu',event=>{if(event.target.closest('a,input,textarea,select,.archive-digest-people,.archive-digest-pages-summary'))return;UIx.contextMenu?.(event,archiveDigestMenuItems(row));});
+        });
         $$('[data-unlink-archive-digest-media]').forEach(button=>button.addEventListener('click',async()=>{
             try{await api('unlink_archive_digest_media',{}, {method:'POST',body:{archive_digest_id:Number(button.dataset.archiveDigestId),media_id:Number(button.dataset.unlinkArchiveDigestMedia)}});toast('Média retiré du dépouillement.');await renderResearch();}catch(error){toast(error.message||'Retrait impossible.','error');}
         }));
@@ -611,19 +680,19 @@
         const auxiliary=await api('archive_digest_auxiliary');
         const isGap=mode==='gaps',items=isGap?(auxiliary.gaps||[]):(auxiliary.requests||[]),types=isGap?(auxiliary.gap_types||{}):(auxiliary.request_types||{}),statuses=isGap?{open:'Ouverte',closed:'Résolue'}:(auxiliary.request_statuses||{});
         const id=`archive-digest-${isGap?'gaps':'requests'}-dialog`; $(`#${id}`)?.remove();
-        const itemHtml=item=>isGap?`<article class="archive-digest-aux-row"><div><strong>${escapeHtml(item.title)}</strong><p>${escapeHtml([types[item.gap_type],item.period_text,archiveDigestReferenceText(item)].filter(Boolean).join(' · '))}</p>${item.notes?`<small>${escapeHtml(item.notes)}</small>`:''}</div><span class="status-badge">${escapeHtml(statuses[item.status]||item.status)}</span><div>${item.url?`<a class="button small secondary" href="${escapeHtml(safeUrl(item.url))}" target="_blank" rel="noopener">Ouvrir</a>`:''}<button class="icon-button danger" type="button" data-archive-aux-delete="${item.id}">×</button></div></article>`:`<article class="archive-digest-aux-row"><div><strong>${escapeHtml(item.title)}</strong><p>${escapeHtml([types[item.request_type],archiveDigestReferenceText(item),item.due_at&&i18n('pour le {date}',{date:item.due_at})].filter(Boolean).join(' · '))}</p>${item.notes?`<small>${escapeHtml(item.notes)}</small>`:''}</div><span class="status-badge">${escapeHtml(statuses[item.status]||item.status)}</span><div>${item.url?`<a class="button small secondary" href="${escapeHtml(safeUrl(item.url))}" target="_blank" rel="noopener">Ouvrir</a>`:''}<button class="icon-button danger" type="button" data-archive-aux-delete="${item.id}">×</button></div></article>`;
+        const itemHtml=item=>isGap?`<article class="archive-digest-aux-row"><div><strong>${escapeHtml(item.title)}</strong><p>${escapeHtml([types[item.gap_type],item.period_text,archiveDigestReferenceText(item)].filter(Boolean).join(' · '))}</p>${item.notes?`<small>${escapeHtml(item.notes)}</small>`:''}</div><span class="status-badge">${escapeHtml(statuses[item.status]||item.status)}</span><div>${item.url?`${window.LCNDA_UI.extLink(safeUrl(item.url), '', {cls: 'button small secondary'})}`:''}<button class="icon-button danger" type="button" data-archive-aux-delete="${item.id}">×</button></div></article>`:`<article class="archive-digest-aux-row"><div><strong>${escapeHtml(item.title)}</strong><p>${escapeHtml([types[item.request_type],archiveDigestReferenceText(item),item.due_at&&i18n('pour le {date}',{date:item.due_at})].filter(Boolean).join(' · '))}</p>${item.notes?`<small>${escapeHtml(item.notes)}</small>`:''}</div><span class="status-badge">${escapeHtml(statuses[item.status]||item.status)}</span><div>${item.url?`${window.LCNDA_UI.extLink(safeUrl(item.url), '', {cls: 'button small secondary'})}`:''}<button class="icon-button danger" type="button" data-archive-aux-delete="${item.id}">×</button></div></article>`;
         document.body.insertAdjacentHTML('beforeend',`<dialog class="modal archive-digest-aux-dialog" id="${id}"><form id="${id}-form"><div class="modal-head"><div><span class="eyebrow">DÉPOUILLEMENT D’ARCHIVE</span><h2>${isGap?'Lacunes d’archives':'Actes à commander ou consulter'}</h2><p>${isGap?'Registres détruits, périodes absentes ou documents non numérisés.':'Liste de travail indépendante pour les actes à commander, consulter en salle ou faire reproduire.'}</p></div><button class="icon-button" type="button" data-close-archive-aux>×</button></div><section class="archive-digest-aux-form"><div class="form-grid"><label>Type<select name="${isGap?'gap_type':'request_type'}">${Object.entries(types).map(([value,label])=>`<option value="${value}">${label}</option>`).join('')}</select></label><label>État<select name="status">${Object.entries(statuses).map(([value,label])=>`<option value="${value}">${label}</option>`).join('')}</select></label><label class="span-2">Suivi de registre lié<select name="archive_digest_id">${archiveDigestEntryOptions(rows)}</select></label><label class="span-2">Intitulé<input name="title" required placeholder="${isGap?'Ex : Registre de naissances détruit':'Ex : Commander la copie de l’acte n°18'}"></label>${isGap?`<label>Période concernée<input name="period_text" placeholder="Ex : 1871-1872"></label>`:`<label>Date souhaitée<input name="due_at" type="date"></label><label>Archives / service<input name="archive_service" placeholder="AD, mairie…"></label><label>Cote / référence<input name="archive_reference" placeholder="3 E 123, vue 42…"></label>`}<label class="span-2">Lien direct<input name="url" type="url" placeholder="https://archives…"></label><label class="span-2">Note<textarea name="notes" rows="3" placeholder="Détail, réponse des archives, raison de la lacune…"></textarea></label></div><div class="modal-actions"><span class="spacer"></span><button class="button" type="submit">Ajouter</button></div></section></form><section class="archive-digest-aux-list"><h3>${items.length} élément${items.length>1?'s':''}</h3>${items.length?items.map(itemHtml).join(''):empty(isGap?'Aucune lacune signalée.':'Aucun acte à commander ou consulter.')}</section></dialog>`);
         const dialog=$(`#${id}`),form=$(`#${id}-form`,dialog);$$('[data-close-archive-aux]',dialog).forEach(button=>button.addEventListener('click',()=>dialog.close()));
         if(!isGap)window.LCNDA_EXT?.journal?.bindAlready(form,()=>({reference:form.elements.archive_reference?.value||'',service:form.elements.archive_service?.value||'',exclude_kind:'request',linked_digest:form.elements.archive_digest_id?.value||0}),{after:$('.form-grid',form)});
         form.addEventListener('submit',async event=>{event.preventDefault();try{await api(isGap?'save_archive_digest_gap':'save_archive_digest_request',{}, {method:'POST',body:formObject(form)});toast(isGap?'Lacune ajoutée.':'Acte ajouté à la liste.');dialog.close();openArchiveDigestAuxiliaryDialog(mode,rows);}catch(error){toast(error.message||'Enregistrement impossible.','error');}});
-        $$('[data-archive-aux-delete]',dialog).forEach(button=>button.addEventListener('click',async()=>{if(!await confirmBox('',{title:'Supprimer cet élément ?',okLabel:'Supprimer'}))return;try{await api(isGap?'delete_archive_digest_gap':'delete_archive_digest_request',{}, {method:'POST',body:{id:Number(button.dataset.archiveAuxDelete)}});toast('Élément supprimé.');dialog.close();openArchiveDigestAuxiliaryDialog(mode,rows);}catch(error){toast(error.message||'Suppression impossible.','error');}}));
+        $$('[data-archive-aux-delete]',dialog).forEach(button=>button.addEventListener('click',()=>trashDigestRow(isGap?'archive_digest_gaps':'archive_digest_requests',Number(button.dataset.archiveAuxDelete),isGap?'Lacune supprimée':'Acte à commander supprimé',async()=>{if(dialog.open){dialog.close();}await openArchiveDigestAuxiliaryDialog(mode,rows);})));
         dialog.addEventListener('close',()=>dialog.remove());dialog.showModal();
     }
     function archiveDigestReferenceText(item){return [item.place_name||item.city_name||item.city_alias,item.year_text,item.archive_reference||item.linked_archive_reference].filter(Boolean).join(' · ');}
     function openArchiveDigestIndexDialog(rows){
         $('#archive-digest-index-dialog')?.remove();
         const ordered=[...rows].sort((a,b)=>[a.archive_service,a.archive_reference,a.city_name,a.year_text].join(' ').localeCompare([b.archive_service,b.archive_reference,b.city_name,b.year_text].join(' '),'fr'));
-        document.body.insertAdjacentHTML('beforeend',`<dialog class="modal archive-digest-aux-dialog" id="archive-digest-index-dialog"><div class="modal-head"><div><span class="eyebrow">DÉPOUILLEMENT D’ARCHIVE</span><h2>Index des cotes consultées</h2><p>${plural(ordered.length,'cote ou registre déjà suivis dans cette sélection.','cotes ou registres déjà suivis dans cette sélection.')}</p></div><button class="icon-button" type="button" data-close-archive-digest-index>×</button></div><div class="archive-digest-aux-list">${ordered.length?ordered.map(row=>`<article class="archive-digest-aux-row"><div><strong>${escapeHtml(row.archive_reference||'Sans cote')}</strong><p>${escapeHtml([row.archive_service,row.year_text,row.city_alias||row.city_name||row.place_name,archiveDigestLabel({table_decennale:'Table décennale',mariage:'Mariage',naissance:'Naissance',deces:'Décès',bapteme:'Baptême',succession:'Succession',recensement:'Recensement',prison:'Prison',fiche_militaire:'Fiche militaire',liste_prisonnier:'Liste prisonnier',autre:'Autre'},row.record_type)].filter(Boolean).join(' · '))}</p></div><span class="status-badge">${escapeHtml(archiveDigestLabel({todo:'À faire',done:'Terminé',review:'À revoir',doubt:'Doute',priority:'Priorité',later:'Plus tard'},row.status))}</span><div>${row.archive_url?`<a class="button small secondary" href="${escapeHtml(safeUrl(row.archive_url))}" target="_blank" rel="noopener">Ouvrir</a>`:''}<button class="button small secondary" type="button" data-index-open-digest="${row.id}">Voir</button></div></article>`).join(''):empty('Aucune cote dans cette sélection.',{icon:'🗄️'})}</div><div class="modal-actions"><span class="spacer"></span><button class="button secondary" type="button" data-close-archive-digest-index>Fermer</button></div></dialog>`);
+        document.body.insertAdjacentHTML('beforeend',`<dialog class="modal archive-digest-aux-dialog" id="archive-digest-index-dialog"><div class="modal-head"><div><span class="eyebrow">DÉPOUILLEMENT D’ARCHIVE</span><h2>Index des cotes consultées</h2><p>${plural(ordered.length,'cote ou registre déjà suivis dans cette sélection.','cotes ou registres déjà suivis dans cette sélection.')}</p></div><button class="icon-button" type="button" data-close-archive-digest-index>×</button></div><div class="archive-digest-aux-list">${ordered.length?ordered.map(row=>`<article class="archive-digest-aux-row"><div><strong>${escapeHtml(row.archive_reference||'Sans cote')}</strong><p>${escapeHtml([row.archive_service,row.year_text,row.city_alias||row.city_name||row.place_name,archiveDigestLabel({table_decennale:'Table décennale',mariage:'Mariage',naissance:'Naissance',deces:'Décès',bapteme:'Baptême',succession:'Succession',recensement:'Recensement',prison:'Prison',fiche_militaire:'Fiche militaire',liste_prisonnier:'Liste prisonnier',autre:'Autre'},row.record_type)].filter(Boolean).join(' · '))}</p></div><span class="status-badge">${escapeHtml(archiveDigestLabel({todo:'À faire',done:'Terminé',review:'À revoir',doubt:'Doute',priority:'Priorité',later:'Plus tard'},row.status))}</span><div>${row.archive_url?`${window.LCNDA_UI.extLink(safeUrl(row.archive_url), '', {cls: 'button small secondary'})}`:''}<button class="button small secondary" type="button" data-index-open-digest="${row.id}">Voir</button></div></article>`).join(''):empty('Aucune cote dans cette sélection.',{icon:'🗄️'})}</div><div class="modal-actions"><span class="spacer"></span><button class="button secondary" type="button" data-close-archive-digest-index>Fermer</button></div></dialog>`);
         const dialog=$('#archive-digest-index-dialog');$$('[data-close-archive-digest-index]',dialog).forEach(button=>button.addEventListener('click',()=>dialog.close()));$$('[data-index-open-digest]',dialog).forEach(button=>button.addEventListener('click',()=>{dialog.close();state.archiveDigestEditId=Number(button.dataset.indexOpenDigest);state.archiveDigestAdding=true;renderResearch();}));dialog.addEventListener('close',()=>dialog.remove());dialog.showModal();
     }
 
@@ -645,7 +714,7 @@
         const draw=zone=>renderArchiveDigestZone(zoneBox,images.find(media=>Number(media.id)===Number(mediaSelect.value)),zone,form.elements.zone_json);
         mediaSelect.addEventListener('change',()=>draw(null)); draw(null);
         form.addEventListener('submit',async event=>{event.preventDefault();try{await api('save_archive_digest_transcription_line',{}, {method:'POST',body:formObject(form)});toast('Ligne ajoutée.');await refresh();}catch(error){toast(error.message||'Enregistrement impossible.','error');}});
-        $$('[data-archive-transcription-line-delete]',root).forEach(button=>button.addEventListener('click',async()=>{if(!await confirmBox('',{title:'Supprimer cette ligne ?',okLabel:'Supprimer la ligne'}))return;try{await api('delete_archive_digest_transcription_line',{}, {method:'POST',body:{id:Number(button.dataset.archiveTranscriptionLineDelete)}});await refresh();}catch(error){toast(error.message||'Suppression impossible.','error');}}));
+        $$('[data-archive-transcription-line-delete]',root).forEach(button=>button.addEventListener('click',()=>trashDigestRow('archive_digest_transcription_lines',Number(button.dataset.archiveTranscriptionLineDelete),'Ligne de transcription supprimée',async()=>{if(dialog.isConnected)await refresh();})));
         $$('[data-archive-transcription-focus]',root).forEach(button=>button.addEventListener('click',()=>{mediaSelect.value=button.dataset.archiveTranscriptionFocus||'';draw(archiveDigestLineZone({zone_json:button.dataset.zone||''}));zoneBox.scrollIntoView({behavior:'smooth',block:'center'});}));
         $('[data-archive-transcription-snapshot]',root)?.addEventListener('click',async()=>{const title=await askText({title:'Enregistrer une version',message:'Nom de cette version (facultatif) :',okLabel:'Enregistrer'});if(title===null)return;try{await api('save_archive_digest_transcription_version',{}, {method:'POST',body:{archive_digest_id:data.entry.id,title}});toast('Version enregistrée.');await refresh();}catch(error){toast(error.message||'Version impossible.','error');}});
         $('[data-archive-transcription-compare]',root)?.addEventListener('click',()=>{const a=versions.find(version=>Number(version.id)===Number($('[data-archive-transcription-version-a]',root)?.value)),b=versions.find(version=>Number(version.id)===Number($('[data-archive-transcription-version-b]',root)?.value));const target=$('[data-archive-transcription-comparison]',root);if(target&&a&&b)target.innerHTML=archiveDigestTranscriptionDiff(a,b);});
@@ -739,7 +808,9 @@
         if(token!==state.workspaceToken||state.module!=='recherche')return;
         const rows=data.places||[];
         const table=`<div class="data-table-wrap"><table class="data-table sortable-table" data-sortbar="lieu"><thead><tr><th><button data-sort-column="0">Lieu</button></th><th><button data-sort-column="1">Subdivision</button></th><th><button data-sort-column="2">Pays</button></th><th><button data-sort-column="3">Coordonnées</button></th><th><button data-sort-column="4">Présence dans la base</button></th></tr></thead><tbody>${rows.map(place=>`<tr><td data-sort-value="${escapeHtml((place.name||'').toLowerCase())}"><strong>${escapeHtml(place.name||'Lieu sans nom')}</strong><small class="cell-muted">${escapeHtml(place.label||'')}</small></td><td data-sort-value="${escapeHtml([place.subdivision,place.county,place.state].filter(Boolean).join(' ').toLowerCase())}">${escapeHtml([place.subdivision,place.county,place.state].filter(Boolean).join(' · ')||'—')}</td><td data-sort-value="${escapeHtml(place.country||'')}">${escapeHtml(place.country||'—')}</td><td data-sort-value="${place.latitude||''}">${place.latitude&&place.longitude?`${Number(place.latitude).toFixed(5)}, ${Number(place.longitude).toFixed(5)}`:'—'}</td><td data-sort-value="${Number(place.event_count||0)+Number(place.census_count||0)}">${i18n('{ev} évt · {rec} rec.',{ev:Number(place.event_count||0),rec:Number(place.census_count||0)})}</td></tr>`).join('')}</tbody></table></div>`;
-        $('#workspace').innerHTML=`<section class="page"><header class="page-header"><div><span class="eyebrow">LIEUX · JOKER</span><h2>${escapeHtml(q)}</h2><p>${plural(rows.length,'lieu trouvé','lieux trouvés')}${state.placeNameSearch?.country?` · ${i18n('pays : {country}',{country:escapeHtml(state.placeNameSearch.country)})}`:''}${state.placeNameSearch?.division?` · ${i18n('division : {division}',{division:escapeHtml(state.placeNameSearch.division)})}`:''}.</p></div></header>${rows.length?table:empty('Aucun lieu ne correspond à cette recherche.',{icon:'📍'})}</section>`;
+        $('#workspace').innerHTML=`<section class="page">${window.LCNDA_UI.pageHeader({where:`${i18n('Recherche')} · ${i18n('Lieux · joker')}`,title:q,help:`${plural(rows.length,'lieu trouvé','lieux trouvés')}${state.placeNameSearch?.country?` · ${i18n('pays : {country}',{country:escapeHtml(state.placeNameSearch.country)})}`:''}${state.placeNameSearch?.division?` · ${i18n('division : {division}',{division:escapeHtml(state.placeNameSearch.division)})}`:''}.`,actions:window.LCNDA_EXT?.researchBar?window.LCNDA_EXT.researchBar.headActions():[]})}${rows.length?table:empty('Aucun lieu ne correspond à cette recherche.',{icon:'📍'})}</section>`;
+        window.LCNDA_EXT?.researchBar?.bindDomExport($('#workspace .page'),i18n('Lieux « {q} »',{q}));
+        if(rows.length)window.LCNDA_EXT?.researchKit?.places($('#workspace .page'),{rows,title:i18n('Lieux « {q} »',{q}),criteria:`${i18n('Lieux · joker')} : ${q}`}); // 🗺 Carte · 🧺 📎 (app-recherche-kit.js)
         bindTableLinks();
     }
 
@@ -751,16 +822,21 @@
         if(token!==state.workspaceToken||state.module!=='recherche')return;
         const is=state.inseeSearch||{};
         const hasCriteria=!!(is.nom||is.prenom||is.sexe||is.dateNaissance||is.dateDeces||is.birthYearFrom||is.birthYearTo||is.deathYearFrom||is.deathYearTo||is.communeNaissance||is.communeDeces||is.departement||is.region);
-        let resultsHtml='';
+        let resultsHtml='',inseeRows=[];
         if(hasCriteria){
             const data=await api('insee_search',{nom:is.nom||'',prenom:is.prenom||'',sexe:is.sexe||'',date_naissance:is.dateNaissance||'',date_deces:is.dateDeces||'',birth_year_from:is.birthYearFrom||'',birth_year_to:is.birthYearTo||'',death_year_from:is.deathYearFrom||'',death_year_to:is.deathYearTo||'',commune_naissance:is.communeNaissance||'',commune_deces:is.communeDeces||'',departement:is.departement||'',region:is.region||'',limit:100,offset:0});
             if(token!==state.workspaceToken||state.module!=='recherche')return;
-            resultsHtml=`<section class="page"><header class="page-header"><div><span class="eyebrow">RECHERCHE · DÉCÈS INSEE</span><h2>Décès INSEE</h2><p><b class="ui-ph-count">${plural(Number(data.total||0),'résultat')}</b> · ${plural(data.rows.length,'affiché')}${data.has_more?' · '+i18n('affine ta recherche pour réduire la liste'):''}.</p></div></header>${inseeResultsTableHtml(data.rows)}</section>`;
+            inseeRows=data.rows||[];
+            resultsHtml=`<section class="page">${window.LCNDA_UI.pageHeader({where:`${i18n('Recherche')} · ${i18n('Décès INSEE')}`,title:i18n('Décès INSEE'),help:`<b class="ui-ph-count">${plural(Number(data.total||0),'résultat')}</b> · ${plural(data.rows.length,'affiché')}${data.has_more?' · '+i18n('affine ta recherche pour réduire la liste'):''}.`,actions:window.LCNDA_EXT?.researchBar?window.LCNDA_EXT.researchBar.headActions():[]})}${inseeResultsTableHtml(data.rows)}</section>`;
         }else{
             resultsHtml=`<section class="search-empty">${emptyState({icon:'🔍',text:'Renseigne au moins un critère',hint:'Combine prénom, nom, sexe, dates, communes, département ou région pour lancer la recherche dans le fichier des personnes décédées.'})}</section>`;
         }
         $('#workspace').innerHTML=`${inseeStatsBarHtml(stats)}${resultsHtml}`;
         bindTableLinks();
+        if(hasCriteria)window.LCNDA_EXT?.researchBar?.bindDomExport($$('#workspace .page').pop(),i18n('Décès INSEE'));
+        if(hasCriteria&&inseeRows.length){const crit=[is.prenom,is.nom,is.communeNaissance,is.communeDeces,is.departement,is.region,is.deathYearFrom&&is.deathYearTo?`${is.deathYearFrom}–${is.deathYearTo}`:''].filter(Boolean).join(' · ');
+            window.LCNDA_EXT?.researchKit?.table($$('#workspace .page').pop(),{key:'insee',title:i18n('Décès INSEE'),criteria:`${i18n('Décès INSEE')} : ${crit} (${i18n('fichier des personnes décédées, INSEE')})`,columns:[i18n('Nom'),i18n('Prénom(s)'),i18n('Naissance'),i18n('Décès')],list:inseeRows,
+                cells:r=>[r.nom||'',r.prenoms||r.prenom||'',[String(r.date_naissance||''),r.commune_naissance].filter(Boolean).join(' · '),[String(r.date_deces||''),r.commune_deces].filter(Boolean).join(' · ')]});} // 🧺 📎 (app-recherche-kit.js) ; pas de carte : le fichier ne donne que des codes de commune
         bindInseeStatsBar();
     }
 
@@ -795,8 +871,8 @@
             }
         }
         const viewImportsButton=(stats.imports_count>0)?`<button type="button" class="button small secondary" id="insee-view-imports">Voir les imports</button>`:'';
-        const importButton=`<button type="button" class="button small" id="insee-open-remote">Fichiers de l’INSEE${state.inseeRemote?.new_count?` <span class="h-new-badge">${state.inseeRemote.new_count} nouveau${state.inseeRemote.new_count>1?'x':''}</span>`:''}</button><button type="button" class="button small secondary" id="insee-open-import">Importer un fichier</button>`;
-        return `<section class="page" style="padding-bottom:.5rem"><header class="page-header"><div><span class="eyebrow">RECHERCHE · DÉCÈS INSEE</span><h2>Base locale des décès</h2><p><b class="ui-ph-count">${i18n('{who} dans la base',{who:plural(count,'personne')})}</b> · ${upToDate}</p></div><div class="page-actions">${importButton}${viewImportsButton}</div></header></section>`;
+        const importButton=`<button type="button" class="button small" id="insee-open-remote">${i18n('📦 Installer et mettre à jour')}${IM.status?.online?.updates?.length?` <span class="h-new-badge">${i18n('nouveau')}</span>`:''}</button><button type="button" class="button small secondary" id="insee-open-import">Importer un fichier</button>`;
+        return `<section class="page" style="padding-bottom:.5rem">${window.LCNDA_UI.pageHeader({where:`${i18n('Recherche')} · ${i18n('Décès INSEE')}`,title:i18n('Base locale des décès'),help:`<b class="ui-ph-count">${i18n('{who} dans la base',{who:plural(count,'personne')})}</b> · ${upToDate}`,actions:document.body.classList.contains('is-kiosk')?[]:[importButton,viewImportsButton]})}<div class="im-box" data-im-box style="margin-top:.4rem"></div></section>`;
     }
 
     function inseeImportPanelHtml(){
@@ -876,40 +952,371 @@
         $('#insee-view-imports')?.addEventListener('click',()=>openInseeImportsDialog());
         $('#insee-open-import')?.addEventListener('click',()=>openInseeImportDialog());
         $('#insee-open-remote')?.addEventListener('click',()=>openInseeRemoteDialog());
+        imPaint();
+        if(!IM.status||!IM.running)imLoad().catch(()=>{}); // ce qui est installé : lu dans la base, même hors ligne
     }
-    async function openInseeRemoteDialog(){
-        let dialog=$('#insee-remote-dialog');
-        if(!dialog){
-            document.body.insertAdjacentHTML('beforeend',`<dialog class="modal insee-imports-modal" id="insee-remote-dialog"><div class="modal-head"><div><span class="eyebrow">DÉCÈS INSEE · DATA.GOUV.FR</span><h2>Fichiers publiés par l’INSEE</h2></div><button class="modal-close" type="button" data-close-insee-remote aria-label="Fermer">×</button></div><div class="modal-body" id="insee-remote-body"></div><div class="modal-actions"><span class="spacer"></span><button class="button secondary" data-close-insee-remote>Fermer</button></div></dialog>`);
-            dialog=$('#insee-remote-dialog');
-            $$('[data-close-insee-remote]',dialog).forEach(button=>button.addEventListener('click',()=>dialog.close()));
-            dialog.addEventListener('close',()=>{if(state.module==='recherche'&&state.researchKind==='insee')renderInseeSearch();});
+
+    /* ═════ ⤓ Décès INSEE : tout installer en UN bouton, en arrière-plan, et les mises à jour (lib/insee_remote.php, insee_maj_*)
+     * Le serveur avance par petits pas (insee_maj_step, ~8 s chacun) : télécharger un morceau, ranger quelques milliers de lignes,
+     * retirer les mois remplacés par le fichier de l'année. Ici : la boucle qui le rappelle (pause, reprise même après avoir
+     * fermé l'app), la barre d'avancée (fichiers, Mo, temps restant), l'avis « 🆕 Nouveau fichier des décès » et les réglages
+     * (genealogie-insee-auto-maj : vérifier chaque jour, oui par défaut ; genealogie-insee-auto : mettre à jour tout seul, non par défaut).
+     * En mode consultation : on montre, on n'écrit rien. */
+    const IM_AUTO_CHECK='genealogie-insee-auto-maj',IM_AUTO_DL='genealogie-insee-auto',IM_CHECKED='lcnda-insee-checked',IM_TOLD='lcnda-insee-told';
+    const IM={status:null,running:false,stop:false,samples:[],waitUntil:0,offline:false};
+    const imKiosk=()=>document.body.classList.contains('is-kiosk');
+    const imGet=(k,d)=>{try{const v=localStorage.getItem(k);return v===null?d:v;}catch(_){return d;}};
+    const imSet=(k,v)=>{try{localStorage.setItem(k,v);}catch(_){}};
+    const imAutoCheck=()=>imGet(IM_AUTO_CHECK,'1')!=='0';
+    const imAutoDl=()=>imGet(IM_AUTO_DL,'0')==='1';
+    const imSleep=ms=>new Promise(ok=>setTimeout(ok,ms));
+    const imSize=n=>{n=Number(n)||0;return n>=1073741824?i18n('{n} Go',{n:(n/1073741824).toLocaleString('fr-FR',{maximumFractionDigits:1})}):i18n('{n} Mo',{n:Math.max(1,Math.round(n/1048576)).toLocaleString('fr-FR')});};
+    const imDuration=s=>s<100?i18n('moins de 2 minutes'):s<3600?i18n('{n} minutes',{n:Math.round(s/60)}):i18n('{h} h {m} min',{h:Math.floor(s/3600),m:String(Math.round(s%3600/60)).padStart(2,'0')});
+    const IM_MONTHS=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+    // « Décès de juin 2026 » → « juin 2026 » ; « Décès de 2025 » → « l’année 2025 complète »
+    const imShort=label=>{const m=String(label||'').match(/^Décès (?:de |du )?(.*)$/);const x=m?m[1]:String(label||'');return /^\d{4}$/.test(x)?i18n('l’année {y} complète',{y:x}):x;};
+    async function imLoad(check=false){
+        const s=await api('insee_maj_status',check?{check:1}:{});
+        if(IM.running&&IM.status?.job&&s.job)s.job=IM.status.job.work_done>s.job.work_done?IM.status.job:s.job;
+        IM.status=s;
+        if(check&&s.online&&!s.online_error)imSet(IM_CHECKED,new Date().toISOString().slice(0,10));
+        imPaint();
+        if($('#insee-maj-detail'))imDetailPaint();
+        return s;
+    }
+    // le temps qui reste : d'après l'avancée des 2 dernières minutes
+    function imSample(job){
+        const now=Date.now();IM.samples.push([now,Number(job.work_done)||0]);
+        IM.samples=IM.samples.filter(([t])=>now-t<120000);
+    }
+    function imLeft(job){
+        const a=IM.samples[0],b=IM.samples[IM.samples.length-1];
+        if(!a||!b||b[0]-a[0]<8000||b[1]<=a[1])return '';
+        const rate=(b[1]-a[1])/((b[0]-a[0])/1000);
+        return imDuration(Math.max(0,(Number(job.work_total)-Number(job.work_done))/rate));
+    }
+    /** la boucle : rappelle le serveur tant qu'il reste du travail (une seule à la fois) */
+    async function imRun(){
+        if(IM.running||imKiosk())return;
+        IM.running=true;IM.stop=false;IM.samples=[];imPaint();
+        let finished=null;
+        try{
+            while(!IM.stop){
+                if(navigator.onLine===false){IM.offline=true;imPaint();await new Promise(ok=>{const go=()=>{window.removeEventListener('online',go);ok();};window.addEventListener('online',go);setTimeout(go,60000);});IM.offline=false;continue;}
+                let r;
+                try{r=await api('insee_maj_step',{},{method:'POST',body:{}});}
+                catch(error){if(error.status===423)break;IM.lastError=error.message;imPaint();await imSleep(5000);continue;} // l'app redémarre, réseau local coupé… on réessaie
+                IM.lastError='';
+                if(IM.status)IM.status.job=r.job;
+                if(r.finished){finished=r.finished;break;}
+                if(!r.job||r.job.status!=='running')break;
+                imSample(r.job);imPaint();
+                if(r.busy){await imSleep(3000);continue;} // une autre fenêtre de l'app s'en occupe
+                if(r.wait){IM.waitUntil=Date.now()+r.wait*1000;imPaint();const until=IM.waitUntil;while(!IM.stop&&Date.now()<until)await imSleep(500);IM.waitUntil=0;}
+            }
+        }finally{
+            IM.running=false;IM.waitUntil=0;IM.offline=false;
+            await imLoad().catch(()=>{});
         }
-        const body=$('#insee-remote-body');
-        if(!dialog.open)dialog.showModal();
-        body.innerHTML='<div class="loading-block">Lecture de la liste sur data.gouv.fr…</div>';
-        let data;
-        try{data=state.inseeRemote=await api('insee_remote_files');try{localStorage.setItem('lcnda-insee-checked',new Date().toISOString().slice(0,10));}catch(_){}}
-        catch(error){body.innerHTML=`<p class="h-offsite-sentence is-warn">${escapeHtml(error.message)}</p>`;return;}
-        const files=data.files||[],todo=files.filter(f=>f.new);
-        const status=f=>f.imported?`<span class="collection-kind">${f.imported_at?(window.LCNDA_UI?.when?.(f.imported_at,{label:'importé'})||'importé'):'importé'}</span>`:f.superseded?'<span class="muted">compris dans le fichier de l’année</span>':f.new?'<span class="h-new-badge">nouveau</span>':'<span class="muted">pas importé</span>';
-        body.innerHTML=`<p>L’INSEE publie un fichier par année (depuis 1970), puis un par mois pour l’année en cours. Quand le fichier de l’année sort, il remplace ceux des mois : l’app retire alors les mois déjà importés pour éviter les doublons. Les fichiers sont gros (60 à 150 Mo par année) : l’import peut prendre quelques minutes.</p>
-            <div class="page-actions">${todo.length?`<button type="button" class="button" data-insee-remote-new>${i18n('Importer les nouveaux ({n})',{n:todo.length})}</button>`:'<span class="muted">Pas de nouveau fichier depuis ton dernier import.</span>'}</div>
-            <label class="ui-toggle"><input type="checkbox" data-insee-auto ${inseeAuto()?'checked':''}><i></i>Vérifier chaque jour à l’ouverture de l’app et importer tout seul les nouveaux fichiers</label>
-            <p id="insee-remote-progress" class="muted" aria-live="polite"></p>
-            <div class="data-table-wrap"><table class="data-table"><thead><tr><th>Période</th><th>Fichier</th><th>Publié le</th><th>État</th><th></th></tr></thead><tbody>${files.map((f,i)=>`<tr class="${f.new?'is-new':''}"><td><strong>${escapeHtml(f.label)}</strong></td><td><small>${escapeHtml(f.name)}${f.size?` · ${inseeSize(f.size)}`:''}</small></td><td>${escapeHtml(f.published?new Date(f.published).toLocaleDateString('fr-FR'):'')}</td><td>${status(f)}</td><td>${f.imported||f.superseded?'':`<button type="button" class="button small secondary" data-insee-remote-one="${i}">Télécharger et importer</button>`}</td></tr>`).join('')}</tbody></table></div>
-            <p class="muted">Source : <a href="${escapeHtml(safeUrl(data.source))}" target="_blank" rel="noopener noreferrer">Fichier des personnes décédées, INSEE, sur data.gouv.fr ↗</a></p>`;
-        const progress=$('#insee-remote-progress',body);
-        const run=async list=>{
-            $$('button',body).forEach(b=>{if(b.dataset.inseeRemoteOne!==undefined||b.dataset.inseeRemoteNew!==undefined)b.disabled=true;});
-            const n=await inseeImportRemote(list,text=>{progress.textContent=text;});
-            toast(plural(n,'décès importé','décès importés')+'.');
-            if(dialog.open)openInseeRemoteDialog();
-        };
-        $('[data-insee-remote-new]',body)?.addEventListener('click',()=>run(todo));
-        $$('[data-insee-remote-one]',body).forEach(b=>b.addEventListener('click',()=>run([files[Number(b.dataset.inseeRemoteOne)]])));
-        $('[data-insee-auto]',body).addEventListener('change',e=>{try{localStorage.setItem('genealogie-insee-auto',e.target.checked?'1':'0');}catch(_){}toast(e.target.checked?'Les nouveaux fichiers seront importés tout seuls.':'Import automatique arrêté : l’app te préviendra seulement.');});
+        if(finished)imFinished(finished);
     }
+    // ⤓ les décès INSEE installés ou retirés : les mémoires « installé ? » de 📊 Données (thèmes, récap, listes) sont oubliées
+    function imInstallsChanged(){try{const f=window.LCNDA_EXT?.dataListsEngine?.forgetInstalls;if(f)f();else window.dispatchEvent(new CustomEvent('lcnda:installs-changed'));}catch(_){}}
+    function imFinished(f){
+        imInstallsChanged();
+        const labels=(f.labels||[]).map(imShort);
+        const what=f.kind==='updates'&&labels.length?i18n('Décès INSEE à jour : {list} ({who}).',{list:labels.slice(0,3).join(', ')+(labels.length>3?'…':''),who:plural(Number(f.rows||0),'personne ajoutée','personnes ajoutées')})
+            :i18n('Décès INSEE installés : {files}, {who}.',{files:plural(Number(f.files||0),'fichier'),who:plural(Number(f.rows||0),'personne ajoutée','personnes ajoutées')});
+        toast(what,'success');
+        if(state.module==='recherche'&&state.researchKind==='insee'&&!$('#insee-maj-dialog')?.open)renderInseeSearch();
+    }
+    async function imStart(years,{keys=null,quiet=false}={}){
+        if(imKiosk())return;
+        try{
+            const r=await api('insee_maj_start',{},{method:'POST',body:{years,...(keys?{keys}:{})}});
+            if(r.nothing){if(!quiet)toast(i18n('Rien à installer : tout est déjà là.'),'success');await imLoad().catch(()=>{});return;}
+            if(IM.status)IM.status.job=r.job;
+            if(!quiet)toast(i18n('Installation des décès INSEE lancée : {files}. Tu peux continuer à travailler, ça se fait en arrière-plan.',{files:plural(Number(r.job?.total||0),'fichier')}));
+            imRun();
+        }catch(error){toast(error.message,'error');}
+    }
+    async function imPause(){IM.stop=true;try{const r=await api('insee_maj_pause',{},{method:'POST',body:{}});if(IM.status)IM.status.job=r.job;}catch(error){toast(error.message,'error');}imPaint();}
+    async function imResume(){try{const r=await api('insee_maj_resume',{},{method:'POST',body:{}});if(IM.status)IM.status.job=r.job;imRun();}catch(error){toast(error.message,'error');}}
+    async function imCancel(){
+        if(!await confirmBox(i18n('Le fichier en cours de téléchargement est jeté. Les années déjà installées restent.'),{title:i18n('Abandonner l’installation ?'),okLabel:i18n('Abandonner'),cancelLabel:i18n('Continuer')}))return;
+        IM.stop=true;
+        try{let done=false,guard=0;while(!done&&guard++<500){const r=await api('insee_maj_cancel',{},{method:'POST',body:{}});done=!!r.completed;if(!done)await imSleep(r.busy?1500:50);}toast(i18n('Installation abandonnée.'));}
+        catch(error){toast(error.message,'error');}
+        await imLoad().catch(()=>{});
+    }
+    async function imCheckNow(){
+        const btns=$$('[data-im-check]');btns.forEach(b=>{b.disabled=true;b.textContent=i18n('Vérification…');});
+        try{const s=await imLoad(true);if(s.online_error)toast(s.online_error,'error');else toast(s.online?.updates?.length?i18n('🆕 {n} sur data.gouv.fr.',{n:plural(s.online.updates.length,'nouveau fichier','nouveaux fichiers')}):i18n('Pas de nouveau fichier des décès pour l’instant.'));}
+        catch(error){toast(error.message,'error');}
+        finally{imPaint();}
+    }
+    function imUpdatesText(ups){
+        const l=ups.map(u=>imShort(u.label));
+        return ups.length===1?i18n('🆕 Nouveau fichier des décès : {what}',{what:l[0]}):i18n('🆕 Nouveaux fichiers des décès : {what}',{what:l.slice(0,3).join(', ')+(l.length>3?'…':'')});
+    }
+    // années installées → « 1970 – 1999, 2003, 2024 – juin 2026 »
+    function imRanges(years){
+        const full=years.filter(y=>y.year>0);if(!full.length)return '';
+        const out=[];let a=null,b=null;
+        const label=y=>y.full||!y.months.length?String(y.year):`${IM_MONTHS[Math.max(...y.months)-1]} ${y.year}`;
+        full.forEach(y=>{if(a&&y.year===b.year+1&&b.full){b=y;}else{if(a)out.push(a===b?label(a):`${a.year} – ${label(b)}`);a=b=y;}});
+        out.push(a===b?label(a):`${a.year} – ${label(b)}`);
+        return out.join(', ');
+    }
+    function imJobParts(job){
+        const ro=imKiosk();
+        const pct=job.work_total?Math.min(100,Math.floor(job.work_done/job.work_total*100)):0;
+        const cur=job.current;
+        const phase=!cur?'':cur.phase==='download'?i18n('téléchargement'):cur.phase==='import'?i18n('rangement dans la base'):i18n('retrait des mois remplacés par l’année');
+        const left=imLeft(job);
+        const lines=`${i18n('Fichier {i} sur {n}',{i:Math.min(job.total,job.done+1),n:job.total})}${cur?` · <b>${escapeHtml(cur.label)}</b> (${escapeHtml(phase)})`:''}<br>${i18n('{a} sur {b} téléchargés',{a:imSize(job.bytes_done),b:imSize(job.bytes_total)})}${left&&IM.running?` · ${i18n('encore environ {t}',{t:left})}`:''}`;
+        let st='';
+        if(job.status==='paused')st=`<p class="muted">⏸ ${i18n('En pause. Tu peux reprendre quand tu veux, même après avoir fermé l’app.')}</p>`;
+        else if(job.status==='error')st=`<p class="h-offsite-sentence is-warn">⚠️ ${escapeHtml(job.error||i18n('L’installation s’est arrêtée.'))}</p>`;
+        else if(IM.offline)st=`<p class="muted">📴 ${i18n('Pas de connexion à Internet : ça reprendra tout seul dès qu’elle revient.')}</p>`;
+        else if(IM.waitUntil)st=`<p class="muted">📴 ${escapeHtml(job.error||i18n('Connexion coupée'))} ${i18n('(dans {n} s)',{n:Math.max(1,Math.round((IM.waitUntil-Date.now())/1000))})}</p>`;
+        else if(job.status==='running'&&!IM.running)st=`<p class="muted">${i18n('En attente : rouvre cette page ou clique sur « Reprendre ».')}</p>`;
+        const btns=ro?'':job.status==='running'&&IM.running?`<button type="button" class="button small secondary" data-im-pause>⏸ ${i18n('Pause')}</button>`
+            :`<button type="button" class="button small" data-im-resume>▶ ${job.status==='error'?i18n('Réessayer'):i18n('Reprendre')}</button><button type="button" class="button small secondary" data-im-cancel>✕ ${i18n('Abandonner')}</button>`;
+        return {pct,lines,st,btns};
+    }
+    function imJobHtml(job){
+        const x=imJobParts(job);
+        return `<div class="im-job" data-im-job><p style="margin:.2rem 0"><b>📦 ${i18n('Installation des décès INSEE')}</b> — <span data-im-pct>${x.pct}</span> %</p><progress max="100" value="${x.pct}" style="width:100%;height:14px" aria-label="${escapeHtml(i18n('Avancée de l’installation'))}"></progress><p class="muted" style="margin:.3rem 0" data-im-lines>${x.lines}</p><div data-im-st>${x.st}</div><div class="page-actions" data-im-btns>${x.btns}</div></div>`;
+    }
+    // la barre change à chaque pas : on ne remplace que ce qui a changé (un bouton qu'on est en train de cliquer reste en place)
+    function imPatch(host,html,job,partsFn){
+        if(host._imHtml===html)return;
+        const el=host.querySelector('[data-im-job]');
+        const x=job&&partsFn?partsFn(job):null;
+        if(el&&x&&host._imShape===imShape(html)){
+            el.querySelector('progress').value=x.pct;
+            const set=(sel,v,prop='innerHTML')=>{const n=el.querySelector(sel);if(n&&n[prop]!==String(v))n[prop]=v;};
+            set('[data-im-pct]',x.pct,'textContent');set('[data-im-lines]',x.lines);set('[data-im-st]',x.st);
+            const bt=el.querySelector('[data-im-btns]');if(bt&&bt._h!==x.btns){bt.innerHTML=x.btns;bt._h=x.btns;}
+        }else{host.innerHTML=html;const bt=host.querySelector('[data-im-btns]');if(bt)bt._h=x?.btns;}
+        host._imHtml=html;host._imShape=imShape(html);
+    }
+    // la forme du cadre sans ce qui bouge à chaque pas (le texte de la barre)
+    const imShape=html=>html.replace(/<div class="im-job"[\s\S]*?<div class="page-actions" data-im-btns>/,'[job]');
+    /** le cadre « Décès INSEE » : en cours / nouveau / tout installer / ce qui est là */
+    function imBoxHtml(){
+        const s=IM.status;
+        if(!s)return `${window.LCNDA_UI.spinner(i18n('Lecture de ce qui est installé…'))}`;
+        const ro=imKiosk(),inst=s.installed||{years:[],rows:0},on=s.online,job=s.job&&['running','paused','error'].includes(s.job.status)?s.job:null;
+        const parts=[];
+        if(job)parts.push(imJobHtml(job));
+        const ups=on?.updates||[];
+        if(!job&&ups.length)parts.push(`<p class="im-new" data-im-new style="margin:.3rem 0"><b>${escapeHtml(imUpdatesText(ups))}</b>${ro?'':` <button type="button" class="button small" data-im-update>⤓ ${i18n('Mettre à jour')}</button>`} <small class="muted">${imSize(ups.reduce((n,u)=>n+Number(u.size||0),0))}</small></p>`);
+        if(!job&&!ro){
+            const missing=on?Number(on.missing||0):null,size=on?Number(on.missing_size||0):0;
+            if(missing===null||missing>0){
+                const need=on?size/Number(s.line_bytes||200)*Number(s.row_bytes||330):0;
+                const hint=on?i18n('{dl} à télécharger, environ {disk} sur le disque',{dl:imSize(size),disk:imSize(need)}):i18n('environ 6 Go à télécharger');
+                const shouldShowAll=!ups.length||inst.rows===0;
+                if(shouldShowAll)parts.push(`<div class="page-actions" style="align-items:center"><button type="button" class="button" data-im-all>📦 ${i18n('Tout installer (1970 → aujourd’hui)')}</button><button type="button" class="button secondary" data-im-years>${i18n('Seulement certaines années…')}</button><small class="muted">${escapeHtml(hint)}${inst.rows&&on?` · ${escapeHtml(plural(missing,'fichier manque','fichiers manquent'))}`:''}</small></div>`);
+            }else if(inst.rows>0&&!ups.length){
+                parts.push(`<p class="muted" style="margin:.3rem 0">✓ ${i18n('Tout est installé et à jour.')}</p>`);
+            }
+        }
+        if(inst.rows>0){
+            const ranges=imRanges(inst.years);
+            const when=inst.last_update?(window.LCNDA_UI?.when?.(inst.last_update,{label:'mis à jour'})||escapeHtml(inst.last_update)):'';
+            parts.push(`<p class="muted" style="margin:.3rem 0">${i18n('Installé : {who}',{who:`<b>${escapeHtml(plural(inst.rows,'personne'))}</b>`})}${ranges?` · ${escapeHtml(ranges)}`:''} · ${i18n('environ {s} sur le disque',{s:imSize(inst.bytes)})}${when?` · ${when}`:''}</p>`);
+        }
+        const checked=on?.checked_at?(window.LCNDA_UI?.when?.(on.checked_at,{label:'vérifié'})||escapeHtml(on.checked_at)):i18n('jamais vérifié');
+        parts.push(`<p class="muted" style="margin:.3rem 0;display:flex;gap:.6rem;flex-wrap:wrap;align-items:center"><span>data.gouv.fr : ${checked}${s.online_error?` · <span style="color:var(--red)">${escapeHtml(s.online_error)}</span>`:''}</span><button type="button" class="button small secondary" data-im-check>↻ ${i18n('Vérifier maintenant')}</button>${$('#workspace #insee-maj-detail')?'':`<button type="button" class="button small secondary" data-im-detail>${i18n('Détail par année et réglages…')}</button>`}</p>`);
+        return parts.join('');
+    }
+    // la petite pastille en bas de l'écran, quand on n'est pas sur la page des décès
+    function imChipParts(job){
+        const pct=job.work_total?Math.min(100,Math.floor(job.work_done/job.work_total*100)):0;
+        const txt=job.status==='paused'?i18n('Décès INSEE : en pause ({p} %)',{p:pct}):job.status==='error'?i18n('Décès INSEE : arrêté'):i18n('Décès INSEE : {p} % ({i}/{n})',{p:pct,i:job.done,n:job.total});
+        const btns=job.status==='running'&&IM.running?`<button type="button" class="button small secondary" data-im-pause title="${escapeHtml(i18n('Pause'))}">⏸</button>`:`<button type="button" class="button small" data-im-resume title="${escapeHtml(i18n('Reprendre'))}">▶</button>`;
+        return {pct,lines:escapeHtml(txt),st:'',btns};
+    }
+    function imChipHtml(job){
+        const x=imChipParts(job);
+        return `<div data-im-job style="display:flex;gap:.5rem;align-items:center"><button type="button" data-im-chip-open style="all:unset;cursor:pointer;display:flex;gap:.5rem;align-items:center">⤓ <span data-im-lines>${x.lines}</span><progress max="100" value="${x.pct}" style="width:90px;height:8px"></progress></button><span data-im-btns>${x.btns}</span></div>`;
+    }
+    function imPaint(){
+        const boxes=$$('[data-im-box]');
+        boxes.forEach(b=>imPatch(b,imBoxHtml(),IM.status?.job,imJobParts));
+        const job=IM.status?.job&&['running','paused','error'].includes(IM.status.job.status)?IM.status.job:null;
+        let chip=$('#im-chip');
+        const visible=boxes.some(b=>b.offsetParent!==null);
+        if(job&&!visible&&!imKiosk()){
+            if(!chip){document.body.insertAdjacentHTML('beforeend','<div id="im-chip" role="status" style="position:fixed;left:12px;bottom:12px;z-index:60;background:var(--panel,#fff);border:1px solid var(--line,#ccc);border-radius:10px;padding:.35rem .6rem;box-shadow:0 2px 10px rgba(0,0,0,.15);display:flex;gap:.5rem;align-items:center;font-size:.85rem"></div>');chip=$('#im-chip');}
+            const x=imChipParts(job),el=chip.querySelector('[data-im-job]');
+            if(el){el.querySelector('progress').value=x.pct;el.querySelector('[data-im-lines]').innerHTML=x.lines;const bt=el.querySelector('[data-im-btns]');if(bt._h!==x.btns){bt.innerHTML=x.btns;bt._h=x.btns;}}
+            else chip.innerHTML=imChipHtml(job);
+        }else chip?.remove();
+    }
+    // un seul écouteur pour tous les boutons (cadre de la page, fenêtre de détail, pastille)
+    document.addEventListener('click',e=>{
+        const t=e.target.closest('[data-im-all],[data-im-years],[data-im-update],[data-im-pause],[data-im-resume],[data-im-cancel],[data-im-check],[data-im-detail],[data-im-chip-open],[data-im-remove],[data-im-one]');
+        if(!t)return;
+        if(t.matches('[data-im-all]'))return imStartAll(t);
+        if(t.matches('[data-im-years]'))return openInseeYearsDialog();
+        if(t.matches('[data-im-update]'))return imStart('updates');
+        if(t.matches('[data-im-pause]'))return imPause();
+        if(t.matches('[data-im-resume]'))return imResume();
+        if(t.matches('[data-im-cancel]'))return imCancel();
+        if(t.matches('[data-im-check]'))return imCheckNow();
+        if(t.matches('[data-im-detail]'))return openInseeRemoteDialog();
+        if(t.matches('[data-im-remove]'))return imRemoveYear(Number(t.dataset.imRemove));
+        if(t.matches('[data-im-one]'))return imStart([Number(t.dataset.imYear)],{keys:[t.dataset.imOne]});
+        if(t.matches('[data-im-chip-open]')){state.researchKind='insee';persistUiState();window.LCNDA_APP.setModule?.('recherche');}
+    });
+    async function imStartAll(btn){
+        let s=IM.status;
+        if(!s?.online){btn.disabled=true;try{s=await imLoad(true);}catch(error){toast(error.message,'error');return;}finally{btn.disabled=false;}}
+        if(!s.online){toast(s.online_error||i18n('Pas de connexion à data.gouv.fr : réessaie plus tard.'),'error');return;}
+        const size=Number(s.online.missing_size||0),need=size/Number(s.line_bytes||200)*Number(s.row_bytes||330);
+        if(s.free_bytes!=null&&need>s.free_bytes){toast(i18n('Pas assez de place sur le disque : il faut environ {need}, il reste {free}. Choisis « Seulement certaines années… ».',{need:imSize(need),free:imSize(s.free_bytes)}),'error');return;}
+        if(!await confirmBox(i18n('{n} à télécharger ({dl}), environ {disk} sur le disque. Ça prend du temps (souvent plus d’une heure) mais ça se fait en arrière-plan : tu peux continuer à travailler, mettre en pause, et même fermer l’app — ça reprendra où ça s’était arrêté.',{n:plural(Number(s.online.missing||0),'fichier'),dl:imSize(size),disk:imSize(need)}),{title:i18n('Installer tous les décès depuis 1970 ?'),okLabel:i18n('📦 Tout installer'),danger:false}))return;
+        imStart('all');
+    }
+    // « Seulement certaines années… » : une case par année, la place qu'il faut
+    async function openInseeYearsDialog(){
+        let s=IM.status;
+        if(!s?.online){try{s=await imLoad(true);}catch(error){toast(error.message,'error');return;}}
+        if(!s.online){toast(s.online_error||i18n('Pas de connexion à data.gouv.fr : réessaie plus tard.'),'error');return;}
+        let dialog=$('#insee-years-dialog');
+        if(!dialog){
+            document.body.insertAdjacentHTML('beforeend',`<dialog class="modal insee-imports-modal" id="insee-years-dialog"><div class="modal-head"><div><span class="eyebrow">${i18n('DÉCÈS INSEE')}</span><h2>${i18n('Choisir les années à installer')}</h2></div><button class="modal-close" type="button" data-close-iy aria-label="${escapeHtml(i18n('Fermer'))}">×</button></div><div class="modal-body" id="insee-years-body"></div><div class="modal-actions"><span class="spacer"></span><button class="button secondary" type="button" data-close-iy>${i18n('Annuler')}</button><button class="button" type="button" data-iy-go>📦 ${i18n('Installer ces années')}</button></div></dialog>`);
+            dialog=$('#insee-years-dialog');
+            $$('[data-close-iy]',dialog).forEach(b=>b.addEventListener('click',()=>dialog.close()));
+        }
+        const inst=new Map((s.installed.years||[]).map(y=>[y.year,y]));
+        const years=s.online.years||[];
+        const body=$('#insee-years-body');
+        body.innerHTML=`<p>${i18n('Coche les années dont tu as besoin. Chaque année pèse environ 100 à 140 Mo à télécharger et un peu plus sur le disque.')}</p>
+            <div class="page-actions"><button type="button" class="button small secondary" data-iy-pick="all">${i18n('Tout cocher')}</button><button type="button" class="button small secondary" data-iy-pick="none">${i18n('Tout décocher')}</button><button type="button" class="button small secondary" data-iy-pick="10">${i18n('Les 10 dernières années')}</button></div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.3rem .8rem;margin:.6rem 0">${years.map(y=>{const i=inst.get(y.year);const done=i&&(i.full||(!y.complete&&!y.todo));return `<label style="display:flex;gap:.4rem;align-items:center"><input type="checkbox" data-iy-year="${y.year}" data-size="${y.todo_size}" ${done?'checked disabled':''}><b>${y.year}</b> <small class="muted">${done?'✓ '+i18n('installée'):imSize(y.todo_size)+(y.complete?'':' · '+i18n('{n} mois',{n:y.months.length}))}</small></label>`;}).join('')}</div>
+            <p data-iy-sum aria-live="polite"></p>`;
+        const sum=()=>{
+            const picked=$$('[data-iy-year]:checked:not(:disabled)',body);
+            const size=picked.reduce((n,c)=>n+Number(c.dataset.size||0),0),need=size/Number(s.line_bytes||200)*Number(s.row_bytes||330);
+            const over=s.free_bytes!=null&&need>s.free_bytes;
+            $('[data-iy-sum]',body).innerHTML=`${i18n('{n} : {dl} à télécharger, environ {disk} sur le disque.',{n:plural(picked.length,'année'),dl:imSize(size),disk:imSize(need)})}${s.free_bytes!=null?` <span style="${over?'color:var(--red);font-weight:600':''}">${i18n('Il reste {free} sur le disque.',{free:imSize(s.free_bytes)})}</span>`:''}`;
+            $('[data-iy-go]',dialog).disabled=!picked.length||over;
+        };
+        body.onchange=sum;
+        body.onclick=e=>{const p=e.target.closest('[data-iy-pick]');if(!p)return;const boxes=$$('[data-iy-year]:not(:disabled)',body);const last=Math.max(...years.map(y=>y.year));boxes.forEach(c=>{c.checked=p.dataset.iyPick==='all'||(p.dataset.iyPick==='10'&&Number(c.dataset.iyYear)>last-10);});sum();};
+        $('[data-iy-go]',dialog).onclick=()=>{const ys=$$('[data-iy-year]:checked:not(:disabled)',body).map(c=>Number(c.dataset.iyYear));if(!ys.length)return;dialog.close();imStart(ys);};
+        sum();
+        if(!dialog.open)dialog.showModal();
+    }
+    // 🗑 Retirer une année : beaucoup de lignes, rien à garder de côté → on demande avant ; « ↶ Annuler » la retélécharge
+    async function imRemoveYear(year){
+        const y=(IM.status?.installed?.years||[]).find(x=>x.year===year);if(!y)return;
+        if(IM.status?.job?.status==='running'){toast(i18n('Une installation est en cours : mets-la en pause avant de retirer une année.'),'error');return;}
+        const title=year?i18n('Retirer les décès de {y} ?',{y:String(year)}):i18n('Retirer les fichiers importés à la main ?');
+        if(!await confirmBox(i18n('{who} seront retirées de l’index des décès (environ {s} libérés). Ta généalogie n’est pas touchée. Pour les remettre, il faudra les retélécharger.',{who:plural(y.rows,'fiche'),s:imSize(y.bytes)}),{title,okLabel:i18n('🗑 Retirer')}))return;
+        let removed=0;
+        try{
+            let done=false,guard=0;
+            while(!done&&guard++<5000){const r=await api('insee_maj_remove_year',{},{method:'POST',body:{year}});removed+=Number(r.deleted_rows||0);done=!!r.completed;const b=$(`[data-im-remove="${year}"]`);if(b){b.disabled=true;b.textContent=i18n('Retrait… {n}',{n:removed.toLocaleString('fr-FR')});}}
+        }catch(error){toast(error.message,'error');imInstallsChanged();await imLoad().catch(()=>{});return;}
+        imInstallsChanged();
+        await imLoad().catch(()=>{});
+        toast(year?i18n('Décès de {y} retirés ({who}).',{y:String(year),who:plural(removed,'fiche')}):i18n('Fichiers importés à la main retirés ({who}).',{who:plural(removed,'fiche')}),'',year?{action:{label:i18n('↶ Annuler (retélécharger)'),run:()=>imStart([year])}}:{});
+    }
+    /** Fenêtre « Décès INSEE : installer et mettre à jour » : le cadre, le détail par année, les réglages, fichier par fichier */
+    async function openInseeRemoteDialog(){
+        let dialog=$('#insee-maj-dialog');
+        if(!dialog){
+            document.body.insertAdjacentHTML('beforeend',`<dialog class="modal insee-imports-modal" id="insee-maj-dialog"><div class="modal-head"><div><span class="eyebrow">${i18n('DÉCÈS INSEE · DATA.GOUV.FR')}</span><h2>${i18n('Installer et mettre à jour les décès')}</h2></div><button class="modal-close" type="button" data-close-insee-maj aria-label="${escapeHtml(i18n('Fermer'))}">×</button></div><div class="modal-body" id="insee-maj-body"></div><div class="modal-actions"><span class="spacer"></span><button class="button secondary" data-close-insee-maj>${i18n('Fermer')}</button></div></dialog>`);
+            dialog=$('#insee-maj-dialog');
+            $$('[data-close-insee-maj]',dialog).forEach(button=>button.addEventListener('click',()=>dialog.close()));
+            dialog.addEventListener('close',()=>{imPaint();if(state.module==='recherche'&&state.researchKind==='insee')renderInseeSearch();});
+            dialog.addEventListener('change',e=>{
+                const t=e.target;
+                if(t.matches('[data-im-set-check]')){imSet(IM_AUTO_CHECK,t.checked?'1':'0');toast(t.checked?i18n('L’app regardera une fois par jour s’il y a un nouveau fichier.'):i18n('L’app ne regardera plus toute seule : utilise « Vérifier maintenant ».'));}
+                if(t.matches('[data-im-set-auto]')){imSet(IM_AUTO_DL,t.checked?'1':'0');toast(t.checked?i18n('Les nouveaux fichiers seront installés tout seuls, en arrière-plan.'):i18n('Mise à jour automatique arrêtée : l’app te préviendra seulement.'));}
+            });
+        }
+        if(!dialog.open)dialog.showModal();
+        $('#insee-maj-body').innerHTML='<div data-im-box></div><div id="insee-maj-detail"></div>';
+        imPaint();
+        if(!IM.running)await imLoad().catch(error=>{$('#insee-maj-detail').innerHTML=`<p class="h-offsite-sentence is-warn">${escapeHtml(error.message)}</p>`;});
+        imDetailPaint();
+    }
+    function imDetailPaint(){
+        const host=$('#insee-maj-detail');const s=IM.status;if(!host||!s)return;
+        const ro=imKiosk(),years=[...(s.installed.years||[])].sort((a,b)=>b.year-a.year);
+        const content=y=>y.year===0?i18n('fichiers importés à la main'):y.full?i18n('année complète'):y.months.length?(y.months.length===1?IM_MONTHS[y.months[0]-1]:`${IM_MONTHS[Math.min(...y.months)-1]} → ${IM_MONTHS[Math.max(...y.months)-1]}`)+` (${plural(y.months.length,'mois','mois')})`+(y.quarters.length?` + ${plural(y.quarters.length,'trimestre')}`:''):y.quarters.length?plural(y.quarters.length,'trimestre'):'—';
+        const table=years.length?`<div class="data-table-wrap"><table class="data-table"><thead><tr><th>${i18n('Année')}</th><th>${i18n('Contenu')}</th><th>${i18n('Personnes')}</th><th>${i18n('Sur le disque')}</th><th>${i18n('Installé le')}</th><th></th></tr></thead><tbody>${years.map(y=>`<tr><td><strong>${y.year||'—'}</strong></td><td>${escapeHtml(content(y))}</td><td>${Number(y.rows).toLocaleString('fr-FR')}</td><td>${imSize(y.bytes)}</td><td>${y.imported_at?(window.LCNDA_UI?.when?.(y.imported_at)||escapeHtml(y.imported_at)):''}</td><td>${ro?'':`<button type="button" class="button small danger-soft" data-im-remove="${y.year}">🗑 ${i18n('Retirer')}</button>`}</td></tr>`).join('')}</tbody></table></div>`:`<p class="muted">${i18n('Rien d’installé pour l’instant.')}</p>`;
+        const settings=ro?'':`<h3 style="margin-top:1rem">${i18n('Mises à jour')}</h3><p class="muted">${i18n('L’INSEE publie un fichier chaque mois (pour l’année en cours), puis le fichier de l’année entière en janvier ou février. Quand il sort, il remplace les mois : l’app retire les mois tout seule, sans doublons.')}</p>
+            <label class="ui-toggle"><input type="checkbox" data-im-set-check ${imAutoCheck()?'checked':''}><i></i>${i18n('Regarder une fois par jour, à l’ouverture de l’app, s’il y a un nouveau fichier (si Internet est là)')}</label>
+            <label class="ui-toggle"><input type="checkbox" data-im-set-auto ${imAutoDl()?'checked':''}><i></i>${i18n('Mettre à jour tout seul (télécharger et installer les nouveaux fichiers en arrière-plan)')}</label>`;
+        const files=s.online?.files||[];
+        const instY=new Map((s.installed.years||[]).map(y=>[y.year,y]));
+        const isIn=f=>{const y=instY.get(f.year);return !!y&&(y.full||(f.month&&y.months.includes(f.month))||(f.quarter&&y.quarters.includes(f.quarter))||(!f.month&&!f.quarter&&false));};
+        const fileRows=[...files].sort((a,b)=>b.order-a.order).map(f=>`<tr><td>${escapeHtml(f.label)}</td><td><small>${escapeHtml(f.name)} · ${imSize(f.size)}</small></td><td>${escapeHtml(f.published?new Date(f.published).toLocaleDateString('fr-FR'):'')}</td><td>${isIn(f)?`<span class="collection-kind">${i18n('installé')}</span>`:ro?'':`<button type="button" class="button small secondary" data-im-one="${escapeHtml(f.key)}" data-im-year="${f.year}">📦 ${i18n('Installer celui-ci')}</button>`}</td></tr>`).join('');
+        const wasOpen=!!$('details[open]',host);
+        host.innerHTML=`<h3 style="margin-top:1rem">${i18n('Ce qui est installé')}</h3>${table}${settings}
+            ${files.length?`<details style="margin-top:1rem" ${wasOpen?'open':''}><summary>${i18n('Fichier par fichier (pour les curieux)')}</summary><p class="muted">${i18n('Un fichier de mois ou de trimestre déjà compris dans le fichier de l’année n’est pas proposé par « Tout installer ».')}</p><div class="data-table-wrap"><table class="data-table"><thead><tr><th>${i18n('Période')}</th><th>${i18n('Fichier')}</th><th>${i18n('Publié le')}</th><th></th></tr></thead><tbody>${fileRows}</tbody></table></div></details>`:''}
+            <p class="muted">${i18n('Source :')} <a href="${escapeHtml(safeUrl(s.source))}" target="_blank" rel="noopener noreferrer">${i18n('Fichier des personnes décédées, INSEE, sur data.gouv.fr ↗')}</a></p>`;
+    }
+    /** À l'ouverture de l'app (app.js, 8 s après le démarrage) : reprendre une installation coupée ; une fois par jour, regarder data.gouv.fr */
+    async function inseeStartup(){
+        if(imKiosk())return; // consultation : rien n'est écrit, rien n'est lancé
+        let s;
+        try{s=await imLoad();}catch(_){return;}
+        if(s.job?.status==='running'){toast(i18n('Décès INSEE : l’installation reprend où elle s’était arrêtée.'));imRun();return;}
+        if(s.job)return; // en pause ou arrêtée : la pastille le montre, rien ne part tout seul
+        if(!imAutoCheck()||navigator.onLine===false||!Number(s.installed?.rows))return;
+        const today=new Date().toISOString().slice(0,10);
+        if(imGet(IM_CHECKED,'')===today)return;
+        try{s=await imLoad(true);}catch(_){return;}
+        const ups=s.online?.updates||[];
+        if(!ups.length)return;
+        if(imAutoDl()){toast(i18n('Décès INSEE : mise à jour en arrière-plan ({what}).',{what:ups.map(u=>imShort(u.label)).slice(0,3).join(', ')}));imStart('updates',{quiet:true});return;}
+        let told=[];try{told=JSON.parse(imGet(IM_TOLD,'[]'))||[];}catch(_){}
+        if(ups.every(u=>told.includes(u.key)))return;
+        imSet(IM_TOLD,JSON.stringify([...told,...ups.map(u=>u.key)].slice(-60)));
+        toast(imUpdatesText(ups),'',{action:{label:i18n('⤓ Mettre à jour'),run:()=>imStart('updates')}});
+    }
+
+    /* ═════ Intégration : la page « ⚰️ Décès INSEE » des Réglages (groupe Données, à côté de la météo et des élections : même cadre
+     * que l'écran Recherche → Décès INSEE) et la source de données commune LCNDA_EXT.dataSources (« chercher cette personne dans
+     * les décès INSEE », pour n'importe quelle fiche, quand on veut). */
+    const IM_TAB=['insee_deces','25k2','⚰️ Décès INSEE (1970 → aujourd’hui)'];
+    {const app=window.LCNDA_APP;if(Array.isArray(app.defaultMaintenanceTabs)&&!app.defaultMaintenanceTabs.some(t=>t[0]===IM_TAB[0]))app.defaultMaintenanceTabs.push(IM_TAB);}
+    const imExt=window.LCNDA_EXT=window.LCNDA_EXT||{};
+    imExt.maintenance=imExt.maintenance||{};
+    imExt.maintenance[IM_TAB[0]]=async token=>{
+        const ws=$('#workspace');if(!ws)return;
+        ws.innerHTML=`<section class="page">${window.LCNDA_UI.pageHeader({where:`${i18n('Réglages')} · ${i18n('Données')}`,title:i18n('Décès INSEE (1970 → aujourd’hui)'),icon:'⚰️',help:i18n('Le fichier des personnes décédées de l’INSEE, installé dans l’app : pour chercher un décès même sans Internet (Recherche → Décès INSEE).')})}<section class="card"><div data-im-box></div><div id="insee-maj-detail"></div></section></section>`;
+        imPaint();
+        if(!IM.running)await imLoad().catch(()=>{});
+        if(token!==undefined&&token!==state.workspaceToken)return;
+        imDetailPaint();
+    };
+    // ctx.person : {first_name, last_name, birth_year?, death_year?} ou une fiche complète (personName, years)
+    async function inseeRunForPerson(ctx,host){
+        const p=ctx?.person||{};
+        const nom=String(p.last_name||p.nom||'').trim(),prenom=String(p.first_name||p.prenom||'').trim().split(/\s+/)[0]||'';
+        if(!nom){host.innerHTML='';return;}
+        let s=IM.status;try{s=s||await imLoad();}catch(_){}
+        if(!Number(s?.installed?.rows)){host.innerHTML=imKiosk()?'':`<p class="muted">⚰️ ${i18n('Les décès INSEE ne sont pas installés.')} <button type="button" class="button small" data-im-all>📦 ${i18n('Tout installer (1970 → aujourd’hui)')}</button> <button type="button" class="button small secondary" data-im-years>${i18n('Seulement certaines années…')}</button></p>`;return;}
+        const by=Number(p.birth_year||String(p.birth_date||'').match(/\d{4}/)?.[0]||0);
+        const q={nom,prenom,limit:20,offset:0};if(by){q.birth_year_from=by-1;q.birth_year_to=by+1;}
+        host.innerHTML=`${window.LCNDA_UI.spinner(i18n('Recherche dans les décès INSEE…'))}`;
+        try{const r=await api('insee_search',q);host.innerHTML=r.rows?.length?`<p>${i18n('⚰️ {n} dans le fichier des décès de l’INSEE.',{n:plural(Number(r.total||0),'correspondance')})}</p>${inseeResultsTableHtml(r.rows)}`:'';}
+        catch(error){host.innerHTML=`<p class="muted">${escapeHtml(error.message)}</p>`;}
+    }
+    (imExt.dataSources=imExt.dataSources||[]).push({id:'insee_deces',icon:'⚰️',label:i18n('Décès INSEE (1970 → aujourd’hui)'),group:'La personne',needs:['person'],
+        installed:async()=>{try{return Number((IM.status||await imLoad()).installed?.rows)>0;}catch(_){return false;}},
+        install:()=>{const b=document.createElement('button');imStartAll(b);},
+        run:inseeRunForPerson});
 
     // Fenêtre listant précisément chaque fichier déjà importé (nom, date, lignes lues/insérées,
     // plage d'années couverte), pour que l'utilisateur sache exactement ce qui a été chargé.
@@ -991,7 +1398,10 @@
         const rows=data.media||[];
         state.currentListRows=rows;
         const results=state.researchDisplay==='list'?transcriptionSearchTableHtml(rows):`<div class="date-results">${rows.length?rows.map(transcriptionSearchCardHtml).join(''):empty('Aucune transcription ne contient ce texte.',{icon:'📝'})}</div>`;
-        $('#workspace').innerHTML=`<section class="page"><header class="page-header"><div><span class="eyebrow">TRANSCRIPTIONS · OCR, HTR ET SAISIE MANUELLE</span><h2>« ${escapeHtml(q)} »</h2><p>${plural(rows.length,'média trouvé','médias trouvés')}. ${i18n('Un clic ouvre le média et sa transcription.')}</p></div></header>${results}</section>`;
+        $('#workspace').innerHTML=`<section class="page">${window.LCNDA_UI.pageHeader({where:`${i18n('Recherche')} · ${i18n('Transcriptions · OCR, HTR et saisie manuelle')}`,titleHtml:`« ${escapeHtml(q)} »`,help:`${plural(rows.length,'média trouvé','médias trouvés')}. ${i18n('Un clic ouvre le média et sa transcription.')}`,actions:window.LCNDA_EXT?.researchBar?window.LCNDA_EXT.researchBar.headActions():[]})}${results}</section>`;
+        window.LCNDA_EXT?.researchBar?.bindDomExport($('#workspace .page'),i18n('Transcriptions « {q} »',{q}));
+        if(rows.length)window.LCNDA_EXT?.researchKit?.table($('#workspace .page'),{key:'transcriptions',title:i18n('Transcriptions « {q} »',{q}),criteria:`${i18n('Transcriptions')} : « ${q} »`,columns:[i18n('Média'),i18n('Date'),i18n('Extrait')],list:rows,
+            cells:m=>[transcriptionSearchTitle(m),m.date_text||'',m.excerpt||''],itemOf:m=>({kind:'media',ref_id:Number(m.id),title:transcriptionSearchTitle(m),value:m.excerpt||'',origin:{kind:'research',label:`${i18n('Transcriptions')} : « ${q} »`,url:''}})}); // 🧺 📎 (app-recherche-kit.js) ; pas de carte : un média n'a pas de lieu
         bindTableLinks();
     }
 
@@ -1022,8 +1432,10 @@
         const title=state.dateSearch.mode==='range'?`${data.yearFrom} — ${data.yearTo}`:(data.windowLabel||state.dateSearch.values.replace(/\n+/g,' · '));
         const invalidNote=(data.invalidDates||[]).length?`<p class="muted">${i18n(data.invalidDates.length>1?'Dates non comprises : « {list} ». Écris-la au jour près : 24/08/1770, 1770-08-24 ou 24 août 1770.':'Date non comprise : « {list} ». Écris-la au jour près : 24/08/1770, 1770-08-24 ou 24 août 1770.',{list:escapeHtml(data.invalidDates.join(' », « '))})}</p>`:'';
         const results=invalidNote+(state.researchDisplay==='list'?dateTableHtml(events):`<div class="date-results">${events.length?events.map(dateEventHtml).join(''):empty('Aucun événement ne correspond à cette sélection.',{icon:'📅'})}</div>`);
-        $('#workspace').innerHTML=`<section class="page"><header class="page-header"><div><span class="eyebrow">DATES · ${escapeHtml(selectedType||'Tous les événements')}</span><h2>${escapeHtml(title)}</h2><p style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap">${events.length.toLocaleString('fr-FR')} événement${events.length>1?'s':''} correspondant${events.length>1?'s':''}.<button type="button" class="icon-button" id="date-sort-toggle" title="${sortDir==='asc'?'Chronologique (du plus ancien au plus récent)':'Anti-chronologique (du plus récent au plus ancien)'}" aria-label="${sortDir==='asc'?'Trier par ordre anti-chronologique':'Trier par ordre chronologique'}" style="font-size:15px">${sortDir==='asc'?'↑':'↓'}</button></p></div></header>${results}</section>`;bindTableLinks();
+        $('#workspace').innerHTML=`<section class="page">${window.LCNDA_UI.pageHeader({where:`${i18n('Recherche')} · ${i18n('Dates')} · ${selectedType||i18n('Tous les événements')}`,title,help:`<span style="display:inline-flex;align-items:center;gap:.6rem;flex-wrap:wrap">${events.length.toLocaleString('fr-FR')} événement${events.length>1?'s':''} correspondant${events.length>1?'s':''}.<button type="button" class="icon-button" id="date-sort-toggle" title="${sortDir==='asc'?'Chronologique (du plus ancien au plus récent)':'Anti-chronologique (du plus récent au plus ancien)'}" aria-label="${sortDir==='asc'?'Trier par ordre anti-chronologique':'Trier par ordre chronologique'}" style="font-size:15px">${sortDir==='asc'?'↑':'↓'}</button></span>`,actions:window.LCNDA_EXT?.researchBar?window.LCNDA_EXT.researchBar.headActions():[]})}${results}</section>`;bindTableLinks();
         $('#date-sort-toggle').addEventListener('click',()=>{state.dateSearch.sortDir=sortDir==='asc'?'desc':'asc';persistUiState();renderDateSearch();});
+        window.LCNDA_EXT?.researchBar?.bindExportPrint($('#workspace .page'),()=>({title:`${i18n('Dates')} · ${title}`,head:[i18n('Personne'),i18n('Événement'),i18n('Date'),i18n('Lieu')],rows:events.map(event=>[(event.participants||[]).map(person=>person.name).join(' + '),event.type,event.date_text||event.year||'',placeDisplay(event)||''])}));
+        if(events.length)window.LCNDA_EXT?.researchKit?.dates($('#workspace .page'),{events,title:`${i18n('Dates')} · ${title}`,criteria:`${i18n('Dates')} · ${selectedType||i18n('Tous les événements')} · ${title}`,placeOf:placeDisplay}); // 🗺 Carte · 🧺 📎 (app-recherche-kit.js)
     }
 
     function dateTableHtml(events){if(!events.length)return empty('Aucun événement ne correspond à cette sélection.',{icon:'📅'});return `<div class="data-table-wrap"><table class="data-table sortable-table" data-sortbar="événement"><thead><tr><th><button data-sort-column="0">Personne</button></th><th><button data-sort-column="1">Événement</button></th><th><button data-sort-column="2">Date</button></th><th><button data-sort-column="3">Lieu</button></th></tr></thead><tbody>${events.map(event=>{const people=(event.participants||[]).map(person=>`<button class="table-link" data-open-person="${person.id}">${escapeHtml(person.name)}</button>`).join(' + ')||'—',place=placeDisplay(event);return `<tr><td data-sort-value="${escapeHtml((event.participants?.[0]?.name||'').toLowerCase())}">${people}</td><td data-sort-value="${escapeHtml(event.type.toLowerCase())}">${escapeHtml(event.type)}</td><td data-sort-value="${event.year||9999}">${escapeHtml(event.date_text||event.year||'—')}</td><td data-sort-value="${escapeHtml(place.toLowerCase())}">${escapeHtml(place||'—')}</td></tr>`;}).join('')}</tbody></table></div>`;}
@@ -1031,7 +1443,7 @@
     function dateEventHtml(event){
         const people=(event.participants||[]).map(person=>`<button class="table-link" data-open-person="${person.id}">${escapeHtml(person.name||'Personne sans nom')}</button>`).join('<span class="date-person-separator"> + </span>')||'<span>Personne non rattachée</span>';
         const place=placeDisplay(event);
-        return `<article class="date-result"><span class="event-icon" style="--event-color:${escapeHtml(event.color||'#0066cc')}">${typeGlyph(event.icon,event.gedcom_tag)}</span><div><span class="eyebrow">${escapeHtml(event.date_text||event.year||'Date inconnue')}</span><h3>${escapeHtml(event.type)}</h3><div class="date-people">${people}</div>${place?`<p>${escapeHtml(place)}</p>`:''}</div></article>`;
+        return `<article class="date-result" data-rk-row="${Number(event.id)}"><span class="event-icon" style="--event-color:${escapeHtml(event.color||'#0066cc')}">${typeGlyph(event.icon,event.gedcom_tag)}</span><div><span class="eyebrow">${escapeHtml(event.date_text||event.year||'Date inconnue')}</span><h3>${escapeHtml(event.type)}</h3><div class="date-people">${people}</div>${place?`<p>${escapeHtml(place)}</p>`:''}</div></article>`;
     }
 
     // --- Recherche par proximité géographique et temporelle : « qui d'autre était dans cette commune à cette date ? » ---
@@ -1050,17 +1462,22 @@
         const title=`${escapeHtml(data.placeName||ps.placeName)} · ${escapeHtml(dateLabel)}${escapeHtml(radiusNote)}`;
         const people=data.people||[];
         const results=people.length?`<div class="date-results">${people.map(p=>proximityPersonCard(p,radiusKm>0)).join('')}</div>`:empty(i18n(exactMode?'Aucune autre personne trouvée dans cette commune à ces dates (seuls les actes datés au jour près comptent).':'Aucune autre personne trouvée dans cette commune sur cette période.'),{icon:'🏘️'});
-        $('#workspace').innerHTML=`<section class="page"><header class="page-header"><div><span class="eyebrow">PROXIMITÉ · qui d’autre était là ?</span><h2>${title}</h2><p>${plural(people.length,'personne repérée, classée par nombre d’occurrences.','personnes repérées, classées par nombre d’occurrences.')}</p></div></header>${results}</section>`;bindTableLinks();
+        $('#workspace').innerHTML=`<section class="page">${window.LCNDA_UI.pageHeader({where:`${i18n('Recherche')} · ${i18n('Proximité · qui d’autre était là ?')}`,titleHtml:title,help:plural(people.length,'personne repérée, classée par nombre d’occurrences.','personnes repérées, classées par nombre d’occurrences.'),actions:window.LCNDA_EXT?.researchBar?window.LCNDA_EXT.researchBar.headActions():[]})}${results}</section>`;bindTableLinks();
+        const proxTitle=`${i18n('Proximité')} · ${data.placeName||ps.placeName||''} · ${dateLabel}`,proxRow=person=>[person.name||'',(person.events||[]).map(ev=>[ev.type,ev.date_text||ev.year,ev.place].filter(Boolean).join(' ')).join(' ; ')];
+        const rbar=window.LCNDA_EXT?.researchBar,page=$('#workspace .page');
+        if(rbar&&people.length)rbar.attach(page,people,{title:proxTitle,head:[i18n('Personne'),i18n('Événements')],row:proxRow,kit:false}); // ☑ cocher, 🏷, 📋 (app-recherche-outils.js)
+        else rbar?.bindExportPrint(page,()=>({title:proxTitle,head:[i18n('Personne'),i18n('Événements')],rows:people.map(proxRow)}));
+        if(people.length)window.LCNDA_EXT?.researchKit?.proximity(page,{data,people,title:proxTitle,criteria:`${i18n('Proximité · qui d’autre était là ?')} : ${data.placeName||ps.placeName||''} · ${dateLabel}${radiusNote}`}); // 🗺 Carte · 🧺 📎 (app-recherche-kit.js)
     }
 
     function proximityPersonCard(person,includesNearby=false){
         const roleLabel={principal:'Événement',famille:'Conjoint / famille',temoin:'Témoin'};
         const events=(person.events||[]).slice(0,8).map(ev=>`<span class="research-match ${ev.role==='temoin'?'event':'identity'}"><strong>${escapeHtml(roleLabel[ev.role]||'Événement')} — ${escapeHtml(ev.type||'')}</strong><small>${escapeHtml([ev.date_text||ev.year,ev.place].filter(Boolean).join(' — '))}</small></span>`).join('');
         const more=(person.events||[]).length>8?`<small class="cell-muted">+ ${plural(person.events.length-8,'autre')}</small>`:'';
-        return `<article class="date-result research-person-card">${window.LCNDA_UI?.avatarOn?.()?window.LCNDA_UI.avatar({...person,photo:person.portrait?`media/${encodeURIComponent(person.portrait)}`:''},48):`<div class="person-card-initial">${escapeHtml((person.name||'').trim().split(/\s+/).map(part=>part[0]||'').join('').slice(0,2).toUpperCase())}</div>`}<div><button class="table-link person-card-name" data-open-person="${person.id}">${escapeHtml(person.name||'Personne sans nom')}</button><p>${i18n(includesNearby?'{what} dans cette zone sur cette période':'{what} dans cette commune sur cette période',{what:plural(person.count,'occurrence')})}</p><div class="research-matches">${events}${more}</div></div></article>`;
+        return `<article class="date-result research-person-card">${pickBox(person)}${window.LCNDA_UI?.avatarOn?.()?window.LCNDA_UI.avatar({...person,photo:person.portrait?`media/${encodeURIComponent(person.portrait)}`:''},48):`<div class="person-card-initial">${escapeHtml((person.name||'').trim().split(/\s+/).map(part=>part[0]||'').join('').slice(0,2).toUpperCase())}</div>`}<div><button class="table-link person-card-name" data-open-person="${person.id}">${escapeHtml(person.name||'Personne sans nom')}</button><p>${i18n(includesNearby?'{what} dans cette zone sur cette période':'{what} dans cette commune sur cette période',{what:plural(person.count,'occurrence')})}</p><div class="research-matches">${events}${more}</div></div></article>`;
     }
 
     window.LCNDA_PARTS = window.LCNDA_PARTS || {};
-    Object.assign(window.LCNDA_PARTS, {renderResearch, renderResearchSidebar});
+    Object.assign(window.LCNDA_PARTS, {renderResearch, renderResearchSidebar, inseeStartup});
     if (state.module === 'recherche' && state.bootstrap) renderSidebar(); // la colonne de gauche attendait ce fichier (sinon le démarrage s'en charge)
 })();

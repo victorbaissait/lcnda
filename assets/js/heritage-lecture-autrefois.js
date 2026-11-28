@@ -43,6 +43,8 @@
     /* ═════════════════════════ 📜 Aide à la lecture ═════════════════════════ */
     const LA_TAB = 'lcnda-aide-lecture-tab', LA_BEST = 'lcnda-aide-lecture-scores', LA_LANG = 'lcnda-aide-lecture-lang';
     const LA_TABS = [['dict', '🔍 Dictionnaire'], ['lettres', `✍️ ${i18n('Les lettres')}`], ['exos', '🎓 Exercices']];
+    /* onglets en plus, posés par d'autres fichiers : ext.readingAidTabs.push({id, label, enabled?(), render(pane, {q, lang, year})}) (ex. ✂️ Cappelli, heritage-lot10-regles-actes.js) */
+    const laExtra = () => (Array.isArray(ext.readingAidTabs) ? ext.readingAidTabs.filter(x => x && x.id && typeof x.render === 'function' && (!x.enabled || x.enabled())) : []);
     const KIND_BADGE = {mot: 'blue', formule: 'green', abrev: 'yellow', vieux: 'grey', mois: 'blue', nombre: 'blue', parente: 'blue', metier: 'blue'};
     /** la langue d'une ligne : attributs lang et dir (hébreu, arabe : de droite à gauche) */
     const langAttrs = code => { const l = L().langOf?.(code); return l ? ` lang="${esc(code === 'grc' ? 'grc' : code)}" dir="${l.dir === 'rtl' ? 'rtl' : 'auto'}"` : ''; };
@@ -62,15 +64,17 @@
     /** l'alphabet d'une langue (grec…) : majuscule, minuscules, nom, lettres latines, valeur de nombre */
     const alphabetHtml = l => (!Array.isArray(l?.alphabet) || !l.alphabet.length ? '' : `<details class="la-alpha" open><summary>🔤 ${i18n('L’alphabet ({n} lettres)', {n: l.alphabet.length})}</summary><table class="af-table la-alpha-table"><thead><tr><th>Lettre</th><th>Nom</th><th>Se lit</th><th>Nombre</th></tr></thead><tbody>${l.alphabet.map(a => `<tr><td${langAttrs(l.code)}><b>${esc(a.big)}</b> ${esc(a.small)}</td><td>${esc(a.name)}</td><td>${esc(a.latin)}</td><td>${a.value != null ? nf(a.value, 0) : ''}</td></tr>`).join('')}</tbody></table></details>`);
     /** sous la liste : d'où viennent les mots de cette langue */
-    const sourcesHtml = l => (!l || l.builtin || !(l.sources || []).length ? '' : `<p class="ui-hint la-sources">${i18n('Sources : {x}.', {x: l.sources.map(x => /^https:\/\//.test(String(x.url || '')) ? `<a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">${esc(x.label)}</a>` : esc(x.label)).join(' · ')})}</p>`);
+    const sourcesHtml = l => (!l || l.builtin || !(l.sources || []).length ? '' : `<p class="ui-hint la-sources">${i18n('Sources : {x}.', {x: l.sources.map(x => /^https:\/\//.test(String(x.url || '')) ? `${window.LCNDA_UI.extLink(x.url, x.label)}` : esc(x.label)).join(' · ')})}</p>`);
     const LEVEL_BADGE = {facile: 'green', moyen: 'yellow', difficile: 'red'};
-    function mountReading(host, {tab = '', q = '', lang} = {}) {
+    function mountReading(host, {tab = '', q = '', lang, year = ''} = {}) {
+        const TABS = LA_TABS.concat(laExtra().map(x => [x.id, x.label]));
         if (!L()) { host.innerHTML = emptyLine(i18n('L’aide à la lecture n’a pas pu se charger (fichier app-aide-lecture.js manquant ?).'), '⚠️'); return null; }
         const st = {tab: tab || (q ? 'dict' : store.get(LA_TAB, 'dict')), q: String(q || ''), kind: '', acte: '', shown: 60, exo: '', lang: lang != null ? String(lang) : q ? '' : store.get(LA_LANG, '')}; // un mot cherché : dans toutes les langues
         if (st.lang && !L().langOf?.(st.lang)) st.lang = '';
-        if (!LA_TABS.some(([k]) => k === st.tab)) st.tab = 'dict';
+        if (!TABS.some(([k]) => k === st.tab)) st.tab = 'dict';
+        st.year = year;
         host.classList.add('la');
-        host.innerHTML = `${tabsHtml(LA_TABS, st.tab, 'data-la-tab')}<div class="la-search" data-la-search></div><div class="la-filters" data-la-filters></div><div class="la-body" data-la-body aria-live="polite"></div>`;
+        host.innerHTML = `${tabsHtml(TABS, st.tab, 'data-la-tab')}<div class="la-search" data-la-search></div><div class="la-filters" data-la-filters></div><div class="la-body" data-la-body aria-live="polite"></div>`;
         const $ = s => host.querySelector(s), body = $('[data-la-body]');
         const field = UI().searchField ? UI().searchField({placeholder: i18n('Chercher… ex. vve, feu, filius, ſ, cult., d°'), value: st.q, label: i18n('Chercher dans l’aide à la lecture'), delay: 120, onInput: v => { st.q = v; st.shown = 60; draw(); }}) : null;
         if (field) $('[data-la-search]').appendChild(field); else $('[data-la-search]').innerHTML = `<input type="search" data-la-q value="${esc(st.q)}" placeholder="${esc(i18n('Chercher…'))}">`;
@@ -87,6 +91,7 @@
             return `<div class="ui-filters la-langs" role="group" aria-label="Langue">${pill('data-la-lang', '', i18n('Toutes les langues'), c.all, st.lang)}${main.map(l => pill('data-la-lang', l.code, l.name, c[l.code], st.lang, ` title="${esc(l.native || l.name)}"`)).join('')}${rest > 0 ? `<button type="button" class="la-langs-more" data-la-langs-more aria-expanded="false">＋ ${rest} autre${rest > 1 ? 's' : ''} langue${rest > 1 ? 's' : ''}</button>` : ls.length > 12 ? `<button type="button" class="la-langs-more" data-la-langs-more aria-expanded="true">− ${i18n('Moins de langues')}</button>` : ''}</div>`;
         }
         function filters() {
+            if (laExtra().some(x => x.id === st.tab)) { $('[data-la-filters]').innerHTML = ''; return; }
             if (st.tab === 'exos' && st.exo) { $('[data-la-filters]').innerHTML = ''; return; }
             if (st.tab !== 'dict') { $('[data-la-filters]').innerHTML = langPills(); return; }
             const c = L().counts(st.q, st.acte, st.lang), K = L().KINDS, AC = L().ACTES;
@@ -161,6 +166,7 @@
         function draw() {
             host.querySelectorAll('[data-la-tab]').forEach(b => { const on = b.dataset.laTab === st.tab; b.classList.toggle('is-active', on); b.setAttribute('aria-selected', String(on)); });
             filters(); $('[data-la-search]').hidden = !!(st.tab === 'exos' && st.exo); // dans un exercice : pas de recherche
+            const xt = laExtra().find(x => x.id === st.tab); if (xt) { Promise.resolve(xt.render(body, {q: st.q, lang: st.lang, year: st.year})).catch(e => { body.innerHTML = emptyLine((e?.name === 'AbortError' || e?.network === true || (e instanceof TypeError && /fetch|network|load failed/i.test(String(e.message || '')))) ? i18n('Pas de connexion avec LCNDA : rien n’est perdu, réessaie.') : e.message, '⚠️'); }); return; } // téléchargement coupé : « réessaie », pas « Failed to fetch »
             if (st.tab === 'lettres') drawLetters(); else if (st.tab === 'exos') drawExos(); else drawDict();
         }
         host.addEventListener('click', e => {
@@ -187,17 +193,19 @@
         return {set(o = {}) { if (o.tab) st.tab = o.tab; if (o.lang != null) st.lang = o.lang; if (o.q != null) { st.q = o.q; const i = host.querySelector('.la-search input'); if (i) i.value = o.q; } st.exo = ''; draw(); }, state: () => ({...st})};
     }
     /** open({tab, q, lang}) : lang = « de », « la », « grc »… (ou « deu », « fra+lat » : la langue choisie dans la transcription) */
-    function openReading({tab = '', q = '', lang} = {}) {
+    function openReading({tab = '', q = '', lang, year = ''} = {}) {
         if (lang && !L()?.langOf?.(lang)) lang = L()?.langForOcr?.(lang) || '';
         if (!ext.openDialog) return toast(i18n('La fenêtre n’est pas encore prête : réessaie dans un instant.'), 'error');
         return ext.openDialog({eyebrow: i18n('AIDE · LECTURE DES ACTES'), title: `📜 ${i18n('Aide à la lecture des actes anciens')}`, wide: true, submitLabel: i18n('Fermer'), onSubmit: () => true,
-            body: '<div data-la-host></div>', onOpen: dg => { dg.classList.add('la-dialog'); mountReading(dg.querySelector('[data-la-host]'), {tab, q, lang}); setTimeout(() => dg.querySelector('.la-search input')?.focus(), 30); }});
+            body: '<div data-la-host></div>', onOpen: dg => { dg.classList.add('la-dialog'); mountReading(dg.querySelector('[data-la-host]'), {tab, q, lang, year}); setTimeout(() => dg.querySelector('.la-search input')?.focus(), 30); }});
     }
     ext.readingAid = {open: openReading, mount: mountReading, search: (q, o) => L()?.search(q, o) || []};
 
     /* ═════════════════════════ 🪙 Convertisseur d'autrefois ═════════════════════════ */
     const AF_TAB = 'lcnda-autrefois-tab', AF_REGION = 'lcnda-autrefois-region';
-    const AF_TABS = [['argent', '💰 Argent'], ['mesures', '📏 Mesures anciennes'], ['calendrier', `📅 ${i18n('Calendrier républicain')}`]];
+    const AF_BASE = [['argent', '💰 Argent'], ['mesures', '📏 Mesures anciennes'], ['calendrier', `📅 ${i18n('Calendrier républicain')}`]];
+    /* onglets en plus, posés par d'autres fichiers : ext.autrefoisTabs.push({id, label, mount(pane, {year, value})}) (ex. 💶 Ailleurs en Europe, heritage-prix-europe.js) */
+    const afExtra = () => (Array.isArray(ext.autrefoisTabs) ? ext.autrefoisTabs.filter(x => x && x.id && typeof x.mount === 'function') : []);
     /** l'année d'un texte : « 1780 », « vers 1780 », « 12 mars 1780 », « an X » (an X = 1801-1802 : on garde 1802, comme les champs de date) */
     function yearOf(text) {
         const s = String(text || '').toLowerCase(); let m;
@@ -208,6 +216,7 @@
     function mountConverter(host, {tab = '', value = '', year = ''} = {}) {
         if (!F()) { host.innerHTML = emptyLine(i18n('Le convertisseur n’a pas pu se charger (fichier app-autrefois-engine.js manquant ?).'), '⚠️'); return null; }
         const st = {tab: tab || store.get(AF_TAB, 'argent'), region: store.get(AF_REGION, 'paris')};
+        const extra = afExtra(), AF_TABS = [...AF_BASE, ...extra.map(x => [x.id, x.label])];
         if (!AF_TABS.some(([k]) => k === st.tab)) st.tab = 'argent';
         host.classList.add('af');
         const regs = F().regions();
@@ -228,6 +237,7 @@
                 <div class="af-fields"><label class="af-field af-wide"><span>${i18n('La date (républicaine ou de tous les jours)')}</span><input type="text" data-af-date autocomplete="off" spellcheck="false" placeholder="12 thermidor an II, 14 juillet 1794, 14/07/1794…" value="${esc(init.calendrier)}"><span data-af-date-hint></span></label></div>
                 <p class="af-examples">Exemples : ${['9 thermidor an II', '18 brumaire an VIII', i18n('1er vendémiaire an I'), '14 juillet 1794', '25/12/1800'].map(s => `<button type="button" class="link-button" data-af-ex-date="${esc(s)}">${esc(s)}</button>`).join(' · ')}</p>
                 <div class="af-out" data-af-out="calendrier" aria-live="polite"></div></section>
+            ${extra.map(x => `<section class="af-pane" data-af-pane="${esc(x.id)}" data-af-extra></section>`).join('')}
             <p class="af-source ui-hint">${i18n('Tout est calculé ici, sans internet. Argent : {x} à partir de 1901 ; avant, un ordre de grandeur. Les résultats sont des repères (≈), pas des valeurs exactes.', {x: esc(F().SOURCE)})}</p>`;
         const $ = s => host.querySelector(s);
         const copyBtn = text => `<button type="button" class="button small secondary af-copy" data-af-copy="${esc(text)}">📋 ${i18n('Copier')}</button>`;
@@ -244,9 +254,15 @@
             out.innerHTML = `<div class="af-big"><small>${i18n('En euros d’aujourd’hui')}</small><strong>${esc(F().euroText(w.euros))}</strong>${badge(w.source === 'insee' ? 'INSEE' : i18n('Ordre de grandeur'), w.source === 'insee' ? 'green' : 'yellow')}${copyBtn(txt)}</div>
                 <div class="af-cards"><div><small>${i18n('Dans la monnaie de {y}', {y})}</small><b>${esc(w.nativeText)}</b></div><div><small>${i18n('En pain')}</small><b>🥖 ${nf(w.bread, w.bread < 10 ? 1 : 0)} kg</b></div>${w.days != null ? `<div><small>${i18n('En journées de travail')}</small><b>🔨 ${nf(w.days, 1)}</b><small>${i18n('d’un journalier en {y}', {y})}</small></div>` : ''}</div>
                 ${w.warn.map(t => UI().notice ? UI().notice('warn', t.charAt(0).toUpperCase() + t.slice(1) + '.') : '').join('')}
-                <details class="af-steps"><summary>${i18n('Le calcul, pas à pas')}</summary><ol>${w.steps.map(s => `<li>${esc(s)}</li>`).join('')}</ol><p class="ui-hint">${i18n('Source :')} <a href="${esc(F().SOURCE_URL)}" target="_blank" rel="noopener noreferrer">${esc(F().SOURCE)}</a>. Parités exactes : 1 livre = 20 sous = 240 deniers · 81 livres = 80 francs (franc germinal, 1795) · 1 nouveau franc = 100 anciens francs (1960) · 1 € = 6,55957 F (1999).</p></details>
-`;
+                <details class="af-steps"><summary>${i18n('Le calcul, pas à pas')}</summary><ol>${w.steps.map(s => `<li>${esc(s)}</li>`).join('')}</ol><p class="ui-hint">${i18n('Source :')} ${window.LCNDA_UI.extLink(F().SOURCE_URL, F().SOURCE)}. Parités exactes : 1 livre = 20 sous = 240 deniers · 81 livres = 80 francs (franc germinal, 1795) · 1 nouveau franc = 100 anciens francs (1960) · 1 € = 6,55957 F (1999).</p></details>
+                ${pricesHtml(y)}`;
         }
+        /** 💰 les prix sourcés de l'année (assets/data/prix-reference.json, le même fichier que « Une journée dans la vie de… ») */
+        function pricesHtml(y) {
+            const list = window.LCNDA_MONTANTS && ext.prixReference ? window.LCNDA_MONTANTS.prices(y, ext.prixReference) : [];
+            return list.length ? `<h4 class="af-h">${i18n('Les prix de cette année-là')}</h4><ul class="af-prices">${list.map(p => `<li>${esc(p.text)} <small class="muted">— ${esc(p.source)}</small></li>`).join('')}</ul>` : '';
+        }
+        if (!ext.prixReference) window.LCNDA_MONTANTS?.loadPrices?.()?.then(() => { if (host.isConnected && st.tab === 'argent') drawMoney(); }); // le fichier des prix de l'app (app-montants-core.js)
         function drawMeasure() {
             const inp = $('[data-af-measure]'), out = $('[data-af-out="mesures"]');
             const r = inp.value.trim() ? F().readMeasure(inp.value, st.region) : null;
@@ -257,7 +273,7 @@
             out.innerHTML = `<div class="af-big"><small>${esc(r.kindName)} · ${esc(r.region)}</small><strong>${r.approx ? '≈ ' : '= '}${esc(r.metric)}</strong>${r.approx ? badge(i18n('Valeur approchée'), 'yellow') : ''}${copyBtn(txt)}</div>
                 ${r.units.length ? `<h4 class="af-h">${i18n('Dans les autres mesures de la région')}</h4><table class="af-table"><tbody>${r.units.map(u => `<tr><td>${u.approx ? '≈ ' : ''}${nf(u.value, u.value < 10 ? 3 : 1)}</td><td>${esc(u.label)}${u.note ? ` <small class="muted">(${esc(u.note)})</small>` : ''}</td></tr>`).join('')}</tbody></table>` : ''}
                 ${r.elsewhere.length ? `<h4 class="af-h">${i18n('La même mesure ailleurs (pour 1)')}</h4><table class="af-table"><tbody>${r.elsewhere.map(u => `<tr><td>${u.approx ? '≈ ' : ''}${esc(u.metric)}</td><td>${esc(u.label)} <small class="muted">— ${esc(u.region)}</small></td></tr>`).join('')}</tbody></table>` : ''}
-`;
+                ${r.src ? `<p class="ui-hint af-src">${i18n('Source :')} ${r.url ? `<a href="${esc(r.url)}" target="_blank" rel="noopener noreferrer">${esc(r.src)} ↗</a>` : esc(r.src)}</p>` : ''}`;
         }
         function drawDate() {
             const inp = $('[data-af-date]'), out = $('[data-af-out="calendrier"]');
@@ -273,7 +289,9 @@
         function show() {
             host.querySelectorAll('[data-af-tab]').forEach(b => { const on = b.dataset.afTab === st.tab; b.classList.toggle('is-active', on); b.setAttribute('aria-selected', String(on)); });
             host.querySelectorAll('[data-af-pane]').forEach(p => { p.hidden = p.dataset.afPane !== st.tab; });
-            if (st.tab === 'argent') drawMoney(); else if (st.tab === 'mesures') drawMeasure(); else drawDate();
+            const x = extra.find(t => t.id === st.tab);
+            if (x) { const pane = host.querySelector(`[data-af-pane="${st.tab}"]`); if (!pane.dataset.afMounted) { pane.dataset.afMounted = '1'; try { x.mount(pane, {year: year || '', value: x.id === tab ? value : ''}); } catch (e) { pane.innerHTML = emptyLine(e.message || String(e), '⚠️'); } } }
+            else if (st.tab === 'argent') drawMoney(); else if (st.tab === 'mesures') drawMeasure(); else drawDate();
         }
         host.addEventListener('input', e => {
             if (e.target.matches('[data-af-sum], [data-af-year]')) drawMoney();
@@ -297,7 +315,7 @@
         return ext.openDialog({eyebrow: 'OUTILS · CONVERTIR', title: `🪙 ${i18n('Convertisseur d’autrefois')}`, wide: true, submitLabel: i18n('Fermer'), onSubmit: () => true,
             body: '<div data-af-host></div>', onOpen: dg => { dg.classList.add('af-dialog'); mountConverter(dg.querySelector('[data-af-host]'), {tab, value, year}); setTimeout(() => dg.querySelector('.af-pane:not([hidden]) input')?.focus(), 30); }});
     }
-    ext.autrefois = {open: openConverter, mount: mountConverter, yearOf};
+        ext.autrefois = {open: openConverter, mount: mountConverter, yearOf};
 
     /* ═════════ Les entrées ═════════ */
     // n'importe quel bouton : data-la-open="mot cherché" (ou vide), data-autrefois-open="argent|mesures|calendrier" (+ data-autrefois-value)

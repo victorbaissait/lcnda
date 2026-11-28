@@ -485,6 +485,7 @@ class LanGate extends EventEmitter {
         if (!dev) {
             if (method === 'GET' && (u.pathname === '/' || u.pathname === '/index.php')) { this._pairingPage(req, res); return; }
             if (method === 'GET' && u.pathname === '/terrain') { this._pairingPage(req, res, true); return; } // 📱 le QR code du téléphone mène ici
+            if (method === 'GET' && u.pathname === '/famille.php') { this._pairingPage(req, res, false, true); return; } // 👪 le lien d'invitation de la famille mène ici (puis à la page de la famille)
             // les mots de la page « Demander l'accès » (assets/js/app-i18n.js les lit à cette adresse) : un dictionnaire, rien de la généalogie
             const m = u.pathname.match(/^\/assets\/i18n\/([a-z]{2})\.json$/);
             if (method === 'GET' && m) { this._asset(res, `i18n-${m[1]}.json`); return; }
@@ -696,12 +697,13 @@ class LanGate extends EventEmitter {
         });
     }
 
-    /** @param {boolean} [terrain] le QR code « ＋ Ajouter un téléphone de terrain » : la demande propose cette sorte, puis la page du téléphone */
-    _pairingPage(req, res, terrain = false) {
+    /** @param {boolean} [terrain] le QR code « ＋ Ajouter un téléphone de terrain » : la demande propose cette sorte, puis la page du téléphone
+     *  @param {boolean} [famille] 👪 le lien d'invitation d'un compte de la famille : une fois accepté, l'appareil va sur /famille.php */
+    _pairingPage(req, res, terrain = false, famille = false) {
         const lang = this._lang(req.headers['accept-language']);
         const html = `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="referrer" content="no-referrer"><title>🖧 LCNDA</title><link rel="stylesheet" href="/__lan/f/appairage.css">
-<script>window.LCNDA_I18N_FIRST=${JSON.stringify(lang)};window.LCNDA_LAN_PAIR={invite:${this.state.settings.invite === 'demande' ? 'true' : 'false'},terrain:${terrain ? 'true' : 'false'}};</script>
+<script>window.LCNDA_I18N_FIRST=${JSON.stringify(lang)};window.LCNDA_LAN_PAIR={invite:${this.state.settings.invite === 'demande' ? 'true' : 'false'},terrain:${terrain ? 'true' : 'false'},famille:${famille ? 'true' : 'false'}};</script>
 <script src="/__lan/f/i18n.js"></script></head><body class="lan-pair-body"><main id="lan-pair" class="lan-pair"></main>
 <script src="/__lan/f/appairage.js"></script></body></html>`;
         this._send(res, 200, html, 'text/html; charset=utf-8', { 'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-ancestors 'none'" });

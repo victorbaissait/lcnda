@@ -112,6 +112,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
         const wait = ms => page.waitForTimeout(ms);
         const api = (action, body, get = false) => page.evaluate(async ({ action, body, get }) => { try { const r = get ? await window.LCNDA_APP.api(action, body || {}) : await window.LCNDA_APP.api(action, {}, { method: 'POST', body }); return { ok: true, r }; } catch (e) { return { ok: false, e: e.message }; } }, { action, body, get });
         const dgId = (await api('save_diagram', { name: 'Âges au décès', kind: 'columns', spec: { kind: 'columns', o: { title: 'Âges' } } })).r.result.id;
+        await api('save_textdoc', { name: 'Lettre de Jean', data: { sections: [{ html: '<p>Bonjour de Tulle.</p>' }] } }); // pour le bloc 📝 Document
         // 🗺 « Une de mes cartes » : une vraie carte sur mesure (Carte → Mes cartes), pour que le bloc ait quelque chose à mettre en image
         const cm = await api('cartes_perso_write', { op: 'save', name: 'Les naissances', def: { time: { mode: 'cumul' }, layers: [{ id: 'nais', kind: 'births', name: 'Naissances' }] } });
         const cmId = cm.ok && (cm.r.result ?? cm.r).map?.id; assert.ok(cmId, 'carte sur mesure créée : ' + JSON.stringify(cm));
@@ -190,13 +191,20 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
         /* ═════ Insertion (menu) et blocs ═════ */
         group = 'Blocs (menu Insertion et panneau ＋ Blocs)';
         const BLOCKS = await page.evaluate(() => window.LCNDA_EXT.siteKit.BLOCKS.map(b => [b.key, b.label, b.group]));
+        const GROUPS = Object.fromEntries(await page.evaluate(() => window.LCNDA_EXT.siteKit.GROUPS));
         for (const [key, label, g] of BLOCKS) {
             await cmd(`${label} (${key})`, async () => {
                 await page.click('[data-sw-view="visual"]');
                 const n0 = await count('[data-lc-name], [data-lc-block]');
                 await pick('footer'); // posé après l'élément choisi
-                if (key === 'diagram') { await page.click('.sw-dlg [data-ui-menu="Insertion"]'); await page.locator('.ui-actmenu .ui-actmenu-i', { hasText: label }).first().click(); await page.click('dialog[open] [data-dg-way="pick"]'); }
-                else await menu('Insertion', label);
+                // Insertion : les blocs de la page tout de suite, les autres familles dans un second petit menu (le menu tient dans l'écran depuis les blocs vidéo, son, dessin…)
+                if (g === 'page') await menu('Insertion', label);
+                else { await menu('Insertion', GROUPS[g]); await page.locator('.ui-actmenu .ui-actmenu-i', { hasText: label }).first().click(); await wait(300); }
+                if (key === 'diagram') await page.click('dialog[open] [data-dg-way="pick"]');
+                // les blocs qui demandent quelque chose (🎧 ce qu'on entend, ✒️ un SVG collé, 📝 quel document)
+                if (key === 'audio') { await page.waitForSelector('dialog.h-modal[open] textarea[name="lc-long"]'); await page.fill('dialog.h-modal[open] textarea[name="lc-long"]', 'Bonjour.'); await page.click('dialog.h-modal[open] [type=submit]'); }
+                if (key === 'drawing') { await page.click('dialog.h-modal[open] [data-lc-way="paste"]'); await page.waitForSelector('dialog.h-modal[open] textarea[name="lc-long"]'); await page.fill('dialog.h-modal[open] textarea[name="lc-long"]', '<svg viewBox="0 0 10 10"><circle cx="5" cy="5" r="4"/></svg>'); await page.click('dialog.h-modal[open] [type=submit]'); }
+                if (key === 'document') { await page.waitForSelector('dialog.h-modal[open] [name="lc-pick"]'); await page.click('dialog.h-modal[open] [type=submit]'); }
                 await until(() => count('[data-lc-name], [data-lc-block]'), n => n > n0, 4000);
                 must(await count('[data-lc-name], [data-lc-block]') > n0, 'rien de posé');
                 if (g === 'genea') { await until(() => frame().evaluate(() => document.body.textContent), t => !/⏳/.test(t), 15000); must(!/⏳|Bloc inconnu|impossible/.test(await frame().evaluate(() => document.body.textContent)), 'bloc pas rempli'); }
@@ -463,7 +471,8 @@ print(json.dumps(out))`, zipPath], { encoding: 'utf8' });
         await cmd('La liste montre les sites (vignette, pages)', async () => { must(await page.locator('.h-et-page [data-et-open]').count() >= 2); must(/page/.test(await page.textContent('.h-et-page'))); });
         await cmd('Ouvrir depuis la liste', async () => { await page.locator('.h-et-page button[data-et-open]:visible').last().click(); await page.waitForSelector('dialog.sw-dlg[open] [data-sw-frame]'); await wait(400); await page.evaluate(() => { const c = window.LCNDA_EXT.siteWeb.current; c.dirty = false; c.close(); }); await wait(300); });
         await cmd('Renommer depuis la liste', async () => { await page.evaluate(() => { const b = document.querySelector('.h-et-page [data-et-ren]'); b?.click(); }); await ask('Renommé'); must((await api('websites', {}, true)).r.items.some(x => x.name === 'Renommé')); });
-        await cmd('Supprimer depuis la liste', async () => { const n0 = (await api('websites', {}, true)).r.items.length; await page.evaluate(() => document.querySelector('.h-et-page [data-et-del]')?.click()); await page.waitForSelector('.confirm-box-dialog[open]'); await page.locator('.confirm-box-dialog[open] .modal-actions button').last().click(); await wait(500); must((await api('websites', {}, true)).r.items.length === n0 - 1); });
+        await cmd('Supprimer depuis la liste', async () => { const n0 = (await api('websites', {}, true)).r.items.length; await page.evaluate(() => document.querySelector('.h-et-page [data-et-del]')?.click()); await wait(800); must(!(await page.$('.confirm-box-dialog[open]')), 'H7 : pas de « Es-tu sûr ? », ↶ Annuler à la place'); must((await api('websites', {}, true)).r.items.length === n0 - 1);
+            await page.locator('.toast .ui-toast-btn', {hasText: 'Annuler'}).last().click(); await wait(800); must((await api('websites', {}, true)).r.items.length === n0, '↶ Annuler remet le site'); });
 
         group = 'Console';
         await cmd('Aucune erreur dans la console', async () => { must(!errors.length, errors.slice(0, 3).join(' ; ')); });

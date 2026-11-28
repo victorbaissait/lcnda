@@ -1,0 +1,24 @@
+/* LCNDA — 🌌 Ciel, climat et mémoire (assets/js/heritage-telech-e.js) : le reste vient de histoire.css (hist-row…) */
+.te-life { display: grid; gap: 12px; }
+.te-ul { margin: 6px 0; }
+.te-ul li { margin-bottom: 6px; overflow-wrap: anywhere; }
+.te-src-link { font-size: 12px; white-space: nowrap; }
+.te-more > summary { list-style: none; cursor: pointer; color: var(--accent, inherit); font-size: 12.5px; margin-top: 2px; }
+.te-more[open] > summary { margin-bottom: 4px; }
+.te-more > summary::-webkit-details-marker { display: none; }
+.te-latin { display: block; margin: 3px 0 0; padding-left: 8px; border-left: 3px solid var(--border, rgba(127, 127, 127, .35)); font-style: italic; font-size: 13px; quotes: "« " " »"; overflow-wrap: anywhere; }
+.hist-t > p > .te-latin { display: inline; border: 0; padding: 0; }
+.te-actions { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 2px; }
+.te-spark { display: block; width: 100%; max-width: 560px; height: 40px; margin: 6px 0 2px; }
+.te-spark .te-axis { stroke: var(--border, rgba(127, 127, 127, .45)); stroke-width: 1; }
+.te-spark .te-dry { fill: var(--te-dry, #b7791f); }
+.te-spark .te-wet { fill: var(--te-wet, #2f855a); }
+.te-dry-txt { color: var(--te-dry, #b7791f); }
+.te-wet-txt { color: var(--te-wet, #2f855a); }
+.te-spark-legend { display: block; margin-bottom: 4px; }
+:root[data-theme="dark"] { --te-dry: #e0a85a; --te-wet: #68d391; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --te-dry: #e0a85a; --te-wet: #68d391; } }
+.te-place { margin: 16px 0; }
+.te-settings .cplus-tg { margin: 6px 0; }
+@media (max-width: 600px) { .te-actions .button { flex: 1 1 100%; } .te-place { margin: 12px 0; } }
+@media print { .te-more:not([open]) { display: none; } .te-actions { display: none; } }

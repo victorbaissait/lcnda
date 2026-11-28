@@ -175,6 +175,7 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding: 'utf8', e
         await serve(tmpEmpty);
         await t('premier lancement : le menu propose cs, sv, da ; l’écran passe en tchèque tout de suite', async () => {
             const page = await open();
+            await page.waitForSelector('#install-screen select[data-lc-lang-pick] option', {state: 'attached', timeout: 15000}); // le menu est rempli par le script de l'écran d'installation
             const opts = await page.$$eval('#install-screen select[data-lc-lang-pick] option', o => o.map(x => x.value));
             assert.deepEqual(opts.slice(8, 11), NEW); assert.equal(opts.length, 32);
             await page.selectOption('#install-screen select[data-lc-lang-pick]', 'cs'); await page.waitForTimeout(600);
@@ -192,7 +193,7 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding: 'utf8', e
             const nav0 = await page.evaluate(() => document.querySelector('.main-nav').innerText);
             const opts = await page.$$eval('select[data-lc-lang] option', o => o.map(x => x.value + ':' + x.textContent));
             assert.equal(opts.length, 32); assert.ok(opts.some(o => /^cs:.*Čeština/.test(o)) && opts.some(o => /^sv:.*Svenska/.test(o)) && opts.some(o => /^da:.*Dansk/.test(o)));
-            await page.selectOption('select[data-lc-lang]', 'sv'); await page.waitForTimeout(1200);
+            await page.selectOption('select[data-lc-lang]', 'sv'); await page.waitForTimeout(1200); await page.waitForFunction(() => [...document.querySelectorAll('.toast')].some(x => /↶/.test(x.innerText) && document.documentElement.lang !== 'fr'), null, {timeout: 15000}).catch(() => {}); // l'écran redessiné dans la langue, puis « ↶ Annuler » (lent sur une machine chargée)
             const sv = await page.evaluate(() => ({lang: document.documentElement.lang, nav: document.querySelector('.main-nav').innerText, banner: document.getElementById('lc-i18n-banner')?.innerText || '', saved: localStorage.getItem('lcnda-langue'), toast: [...document.querySelectorAll('.toast')].map(x => x.innerText).join(' | ')}));
             assert.equal(sv.lang, 'sv'); assert.equal(sv.saved, 'sv');
             assert.ok(sv.nav.includes('Översikt') && sv.nav.includes('Inställningar'), sv.nav);

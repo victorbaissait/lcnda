@@ -69,7 +69,11 @@
 
     /* ═════════════════════ 1. ⚖️ Ouvrir un dossier (ou le créer) ═════════════════════ */
     /** {subject, person_id, related_id, event_id} : le dossier déjà ouvert pour cette question, sinon un nouveau (↶ Annuler) */
-    async function openFor(q) {
+    /* double-clic (ou deux clics pendant que le serveur répond) : une seule fenêtre, un seul dossier créé */
+    const inflight = new Map();
+    const once = (key, fn) => { if (inflight.has(key)) return inflight.get(key); const p = Promise.resolve().then(fn).finally(() => inflight.delete(key)); inflight.set(key, p); return p; };
+    function openFor(q) { return once('for:' + JSON.stringify(q), () => openForNow(q)); }
+    async function openForNow(q) {
         if (RO()) { toast('Lecture seule : les dossiers de preuve se consultent dans Listes → « ⚖️ Dossiers de preuve ».'); return; }
         let f; try { f = await get('find', q); } catch (e) { toast(e.message, 'error'); return; }
         if (f.case) return openCase(f.case.id);
@@ -282,7 +286,8 @@
 
     /* ═════════════════════ 4. 🛡 Un lien : pourquoi ce niveau, choix à la main ═════════════════════ */
     let RULES = null;
-    async function openLink(childId, parentId) {
+    function openLink(childId, parentId) { return once(`link:${childId}:${parentId}`, () => openLinkNow(childId, parentId)); }
+    async function openLinkNow(childId, parentId) {
         if (!ext.openDialog) return;
         let d; try { [d, RULES] = await Promise.all([get('link', {child_id: childId, parent_id: parentId}), RULES ? Promise.resolve(RULES) : get('rules')]); } catch (e) { toast(e.message, 'error'); return; }
         if (!d.link) { toast('Ce lien parent-enfant n’existe pas.', 'error'); return; }

@@ -1,0 +1,158 @@
+# 🌍 Le monde à côté (lot K) : refaire assets/data/tk-*.json.gz, puis les enregistrer dans la branche lancée.
+#  - 🏛 tk-patrimoine_<pays> : les biens protégés d'un pays (Wikidata CC0, identifiant du registre officiel → lien vers sa fiche) ;
+#    un pack par pays (Europe sans la France — Mérimée est déjà dans l'app —, Canada, États-Unis), installé à la demande dans
+#    Réglages → 🗂 Données. Choisir les pays dans « pays » (ex. « gb nl de ») ou « tout ».
+#  - 🏛 tk-patrimoine_monde : le patrimoine mondial de l'UNESCO (Wikidata CC0).
+#  - 🖼 tk-musees_<continent> : l'annuaire des musées (Wikidata CC0), un pack par continent (eu, am, as, af, oc).
+#  - 🎨 tk-collections : index des œuvres du domaine public du Metropolitan Museum (CC0 ; README relu par le script).
+#  - 🗣 tk-langues (Glottolog, CC BY 4.0), 🌸 tk-cerisiers, 🌾 tk-secheresses (NOAA/NCEI, libre à citer), 🌌 tk-ciel (Zenodo, CC BY 4.0),
+#    👶 tk-prenoms (WGND 2.0, CC0).
+# Le service de requêtes de Wikidata est lent et limité : une requête à la fois, une minute entre deux, Retry-After respecté
+# (scripts/telech-k/wm.py) ; un grand pays peut prendre plus d'une heure. Chaque script relit la licence de sa source et s'arrête
+# si elle a changé.
+# Puis le sommaire assets/data/manifest.json (Réglages → 🗂 Données : « ↻ Vérifier » voit la nouvelle version).
+#
+# Lancer : onglet « Actions » → « Le monde à côté (lot K) » → « Run workflow » (choisir ce qu'on refait et les pays).
+
+name: Le monde à côté (lot K)
+
+on:
+  workflow_dispatch:
+    inputs:
+      quoi:
+        description: 'tout, patrimoine, musees, collections, monde (langues, cerisiers, sécheresses, ciel, prénoms) ou publier (rien n’est refait : les grands packs vont dans la version)'
+        required: false
+        default: 'patrimoine'
+      pays:
+        description: 'pour « patrimoine » : codes des pays (pour « musees » : continents eu am as af oc) séparés par des espaces (gb ie nl be lu de ch at it es pt dk no se fi is ee lv lt pl cz sk hu si hr ro bg gr mt mc ad li ca us), « monde » ou « tout »'
+        required: false
+        default: 'tout'
+      depuis:
+        description: 'facultatif : un n° d’enregistrement (sha) où les grands packs tk-* étaient encore dans la branche ; avec quoi = publier, ils sont seulement déposés dans la version telech-k-donnees'
+        required: false
+        default: ''
+  push:
+    branches: ['claude/**']
+    paths: ['.github/workflows/telech-k.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: telech-k-donnees
+  cancel-in-progress: false
+
+jobs:
+  donnees:
+    # le « push » sert seulement à faire connaître ce travail à GitHub : il ne fabrique rien
+    if: github.event_name != 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 360
+    env:
+      QUOI: ${{ github.event.inputs.quoi || 'patrimoine' }}
+      PAYS: ${{ github.event.inputs.pays || 'tout' }}
+    steps:
+      - name: Dossier de travail
+        run: echo "TK_RAW=$RUNNER_TEMP/tk-cache" >> "$GITHUB_ENV"
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: "Préférer IPv4 (pas d’IPv6 sur la machine GitHub, « Network is unreachable »)"
+        run: echo 'precedence ::ffff:0:0/96 100' | sudo tee -a /etc/gai.conf
+      - name: Reprendre les réponses déjà téléchargées
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ runner.temp }}/tk-cache
+          key: telech-k-${{ github.run_id }}
+          restore-keys: telech-k-
+      - name: "🏛 Patrimoine protégé (Wikidata, un pack par pays)"
+        if: env.QUOI == 'tout' || env.QUOI == 'patrimoine'
+        timeout-minutes: 300
+        # un dépassement ne perd plus le travail fait : les pays finis sont enregistrés quand même (étape « Enregistrer »)
+        continue-on-error: true
+        env:
+          TK_WDQS_GAP: '30'
+        run: |
+          # les pays un par un : un pays raté (service saturé) n'empêche pas les autres ; le cache garde ce qui est déjà lu.
+          # Pas de nouveau pays après 200 min : la suite au prochain passage (les pays déjà faits reviennent vite, par le cache).
+          t0=$(date +%s)
+          for p in $( [ "$PAYS" = "tout" ] && echo "monde gb ie nl be lu de ch at it es pt dk no se fi is ee lv lt pl cz sk hu si hr ro bg gr mt mc ad li ca us" || echo "$PAYS" ); do
+            case "$p" in *[!a-z]*) echo "code de pays refusé : $p"; continue;; esac
+            if [ $(( $(date +%s) - t0 )) -gt 12000 ]; then echo "temps écoulé : $p et la suite au prochain passage"; break; fi
+            if [ "$p" = "monde" ]; then python3 -I scripts/telech-k/build_patrimoine.py --api assets/data monde || echo "raté : $p";
+            else python3 -I scripts/telech-k/build_patrimoine.py assets/data "$p" || echo "raté : $p"; fi
+          done
+      - name: "🖼 Musées du monde (Wikidata, un pack par continent)"
+        if: env.QUOI == 'tout' || env.QUOI == 'musees'
+        timeout-minutes: 300
+        continue-on-error: true
+        env:
+          TK_WDQS_GAP: '30'
+        run: |
+          # un continent à la fois (chacun est écrit dès qu'il est fini) ; pas de nouveau continent après 200 min
+          t0=$(date +%s)
+          for c in $( [ "$PAYS" = "tout" ] && echo "eu am as af oc" || echo "$PAYS" ); do
+            case "$c" in eu|am|as|af|oc) ;; *) echo "continent inconnu : $c"; continue;; esac
+            if [ $(( $(date +%s) - t0 )) -gt 12000 ]; then echo "temps écoulé : $c et la suite au prochain passage"; break; fi
+            python3 -I scripts/telech-k/build_musees.py assets/data "$c" || echo "raté : $c"
+          done
+      - name: "🎨 Œuvres du domaine public (Metropolitan Museum, CC0)"
+        if: env.QUOI == 'tout' || env.QUOI == 'collections'
+        run: python3 -I scripts/telech-k/build_collections.py assets/data
+      - name: "🗣 🌸 🌾 🌌 👶 Langues, cerisiers, sécheresses, ciel, prénoms"
+        if: env.QUOI == 'tout' || env.QUOI == 'monde'
+        run: |
+          python3 -I scripts/telech-k/build_langues.py assets/data
+          python3 -I scripts/telech-k/build_climat.py assets/data
+          python3 -I scripts/telech-k/build_prenoms.py assets/data
+      - name: Garder les réponses pour la prochaine fois
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ runner.temp }}/tk-cache
+          key: telech-k-${{ github.run_id }}
+      - name: "📦 Les grands packs : dans la version « telech-k-donnees », pas dans la branche (installés à la demande)"
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DEPUIS: ${{ github.event.inputs.depuis || '' }}
+        run: |
+          set -e
+          R=telech-k-donnees
+          mkdir -p gp-sortie
+          # « depuis » (un n° d'enregistrement) : reprendre les fichiers tk-* qui y étaient encore (ex. avant qu'ils quittent la branche)
+          if [ -n "$DEPUIS" ]; then
+            case "$DEPUIS" in *[!0-9a-f]*) echo "depuis refusé : $DEPUIS"; exit 1;; esac
+            git fetch --no-tags --depth=1 origin "$DEPUIS"
+            git ls-tree --name-only FETCH_HEAD assets/data/ | grep -E '^assets/data/tk-[a-z]+(_[a-z]{2,5})?\.json\.gz$' | while read -r f; do [ -f "$f" ] || git show "FETCH_HEAD:$f" > "$f"; done
+          fi
+          gh release download $R --repo "$GITHUB_REPOSITORY" --dir gp-sortie --pattern 'telech-k-manifest.json' 2>/dev/null || echo "pas encore de version"
+          node scripts/grands-packs.js k gp-sortie
+          gh release view $R --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 || \
+            gh release create $R --repo "$GITHUB_REPOSITORY" --title "Le monde à côté (lot K)" --prerelease \
+              --notes "Packs installés à la demande par l'app (Réglages → 🗂 Données, ou Réglages → 🌍 Le monde à côté) : biens protégés par pays (Wikidata, CC0), et tout pack de plus de 3 Mo. Licence et source dans chaque fichier."
+          if ls gp-sortie/*.json.gz >/dev/null 2>&1; then gh release upload $R --repo "$GITHUB_REPOSITORY" --clobber gp-sortie/*.json.gz; fi
+          gh release upload $R --repo "$GITHUB_REPOSITORY" --clobber gp-sortie/telech-k-manifest.json
+          cat gp-sortie/telech-k-manifest.json
+      - name: Sommaire des données
+        run: node scripts/donnees-manifest.js
+      - name: Enregistrer dans la branche
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A -- 'assets/data/tk-*.json.gz' assets/data/manifest.json # -A : les grands packs partis dans la version quittent aussi la branche
+          git diff --cached --quiet && { echo "rien de neuf"; exit 0; }
+          git commit -m "Le monde à côté (lot K) : données refaites sur GitHub (Wikidata CC0, Met CC0, Glottolog CC BY 4.0, NOAA/NCEI…)"
+          ok=
+          for i in 1 2 3 4 5; do
+            if ! git pull --rebase origin "$GITHUB_REF_NAME"; then
+              # le sommaire a changé entre-temps (un autre atelier) : on garde celui de la branche et on le refait par-dessus
+              git checkout --ours assets/data/manifest.json && node scripts/donnees-manifest.js \
+                && git add assets/data/manifest.json && GIT_EDITOR=true git rebase --continue || { git rebase --abort; sleep 15; continue; }
+            fi
+            git push origin "HEAD:$GITHUB_REF_NAME" && { ok=1; break; }; sleep 15
+          done
+          [ -n "$ok" ] || { echo "::error::pas enregistré dans la branche"; exit 1; }

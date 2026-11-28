@@ -43,11 +43,44 @@
     /* ═════════ Les fonds de carte ═════════ */
     const GEO_DIR = 'assets/data/geo/', GEO_V = 2;
     const ATTR = {ne: 'Fond : Natural Earth', ign: 'Fond : IGN Admin Express (Licence Ouverte)', nuts: 'Fond : © EuroGeographics (Eurostat GISCO)', osm: 'Fond : © contributeurs OpenStreetMap (ODbL)',
-        frc: 'Fond : IGN Admin Express, INSEE COG 2025 (Licence Ouverte)', bec: 'Fond : IGN-NGI, Statbel (CC BY 4.0)', chc: 'Fond : © swisstopo (Opendata BY)', luc: 'Fond : ACT Luxembourg (CC0)'};
-    const FILES = {'monde-110m': 'ne', 'monde-50m': 'ne', continents: 'ne', 'fr-departements': 'ign', 'fr-regions': 'ign', 'be-provinces': 'nuts', 'be-regions': 'nuts', 'ch-cantons': 'nuts', 'ch-regions': 'nuts', 'lu-cantons': 'osm', 'eu-nuts1': 'nuts', 'eu-nuts2': 'nuts',
+        ne1: 'Fond : Natural Earth (domaine public)', usc: 'Fond : U.S. Census Bureau (domaine public)', frc: 'Fond : IGN Admin Express, INSEE COG 2025 (Licence Ouverte)', bec: 'Fond : IGN-NGI, Statbel (CC BY 4.0)', chc: 'Fond : © swisstopo (Opendata BY)', luc: 'Fond : ACT Luxembourg (CC0)'};
+    const FILES = {'monde-110m': 'ne', 'monde-50m': 'ne', continents: 'ne', 'fr-departements': 'ign', 'fr-regions': 'ign', 'be-provinces': 'nuts', 'be-regions': 'nuts', 'ch-cantons': 'nuts', 'ch-regions': 'nuts', 'lu-cantons': 'osm', 'eu-nuts1': 'nuts', 'eu-nuts2': 'nuts', 'eu-nuts3': 'nuts', 'us-comtes': 'usc',
         'fr-communes': 'frc', 'be-communes': 'bec', 'ch-communes': 'chc', 'lu-communes': 'luc'};
     // les communes : gros fichiers livrés compressés (gzip), chargés seulement quand on choisit ce niveau
-    const GZ = new Set(['fr-communes', 'be-communes', 'ch-communes', 'lu-communes']);
+    const GZ = new Set(['fr-communes', 'be-communes', 'ch-communes', 'lu-communes', 'eu-nuts3', 'us-comtes']);
+    // 🌍 « Un autre pays… » (scripts/build-geo-pays.js) : la liste des pays (pays/index.json) et un fichier par pays
+    // (adm1-XX : régions, États, provinces ; reg-XX : grandes régions), lus seulement quand on choisit ce pays ;
+    // le NUTS 3 d'un pays (« nuts3-IT ») = eu-nuts3.json.gz, lu une fois et découpé ici
+    const PAYS_SHORT = ['DE', 'IT', 'ES', 'PT', 'GB', 'IE', 'NL', 'PL', 'AT', 'US', 'CA', 'DZ', 'MA', 'TN', 'AR', 'BR', 'AU', 'RU'];
+    const PAYS_FR = {DE: 'Allemagne', IT: 'Italie', ES: 'Espagne', PT: 'Portugal', GB: 'Royaume-Uni', IE: 'Irlande', NL: 'Pays-Bas', PL: 'Pologne', AT: 'Autriche', US: 'États-Unis', CA: 'Canada', DZ: 'Algérie', MA: 'Maroc', TN: 'Tunisie', AR: 'Argentine', BR: 'Brésil', AU: 'Australie', RU: 'Russie'}; // en attendant pays/index.json (mêmes noms)
+    // copie de pays/index.json (r : grandes régions, nuts : NUTS 3) : les réglages se construisent avant la liste
+    const PAYS_REG = new Set('AZ BE BT BF CA ES US GN GW HK HU IE IT XK LV MV MT NP NZ UG PH RU SI SD SS LK TW TH'.split(' '));
+    const PAYS_NUTS = new Set('AL DE AT BE BG CY HR DK ES EE FI FR GR HU IE IS IT XK LV LI LT LU MK MT ME NO NL PL PT RO RS SK SI SE CH CZ TR'.split(' '));
+    const PAYS_LV = {IT: {reg: 'Régions', adm1: 'Provinces'}, ES: {reg: 'Communautés autonomes', adm1: 'Provinces'}, US: {adm1: 'États fédérés', reg: 'Grandes régions (Census)'}, DE: {adm1: 'Länder'}, AT: {adm1: 'Länder'}, CA: {adm1: 'Provinces et territoires'}};
+    const PAYS_REG_FIRST = new Set(['IT', 'ES']); // des provinces nombreuses : les régions d'abord
+    const fileOf = id => {
+        if (FILES[id]) return {url: `${GEO_DIR}${id}.json${GZ.has(id) ? '.gz' : ''}`, gz: GZ.has(id), attr: ATTR[FILES[id]], shared: id === 'eu-nuts3'};
+        if (/^(adm1|reg)-[A-Z]{2}$/.test(id)) return {url: `${GEO_DIR}pays/${id}.json.gz`, gz: true, attr: ATTR.ne1};
+        if (/^nuts3-[A-Z]{2}$/.test(id)) return {url: `${GEO_DIR}eu-nuts3.json.gz`, gz: true, attr: ATTR.nuts, shared: true, sub: id.slice(6)};
+        return null;
+    };
+    let paysIdx = null, paysIdxP = null;
+    const paysIndex = () => paysIdx ? Promise.resolve(paysIdx) : paysIdxP || (paysIdxP = fetch(`${GEO_DIR}pays/index.json?v=${GEO_V}`, {credentials: 'same-origin'})
+        .then(r => { if (!r.ok) throw new Error('Liste des pays introuvable.'); return r.json(); }).then(j => { paysIdx = Array.isArray(j?.countries) ? j.countries : []; redrawWaiting(); return paysIdx; })
+        .catch(e => { paysIdxP = null; throw e; }));
+    const paysEntry = cc => paysIdx?.find(x => x.c === cc) || null;
+    const paysName = cc => paysEntry(cc)?.n || PAYS_FR[cc] || cc;
+    const paysOf = o => /^[A-Z]{2}$/.test(String(o?.country || '')) ? String(o.country) : 'DE';
+    /** les niveaux de détail d'un pays : [niveau, fond, nom] */
+    function paysLevels(cc) {
+        const e = paysEntry(cc), r = e ? !!e.r : PAYS_REG.has(cc), n = e ? !!e.nuts : PAYS_NUTS.has(cc), names = PAYS_LV[cc] || {};
+        const L = MAPS.pays.levels.filter(([l]) => l === 'adm1' || (l === 'reg' && r) || (l === 'nuts3' && n) || (l === 'cty' && cc === 'US')).map(([l, id, nm]) => [l, id.replace('*', cc), names[l] || nm]);
+        return PAYS_REG_FIRST.has(cc) ? [...L.filter(x => x[0] === 'reg'), ...L.filter(x => x[0] !== 'reg')] : L;
+    }
+    const paysKey = cc => paysLevels(cc).map(([l, , n]) => l + ':' + n).join('|');
+    /** le NUTS 3 d'un pays, découpé dans celui de l'Europe */
+    const nutsPart = (raw, cc) => { const e = paysEntry(cc); return {...raw, name: `${paysName(cc)} — NUTS 3`, country: e ? [e.n, cc, ...(e.a || [])] : [cc], view: e?.v,
+        topo: {...raw.topo, objects: {z: {...raw.topo.objects.z, geometries: raw.topo.objects.z.geometries.filter(g => g.properties?.p === cc)}}}}; };
     // pays de chaque fond des communes (un lieu d'un autre pays n'y est pas cherché par son nom)
     const COUNTRY = {'fr-communes': ['france', 'fr', 'fra', 'guadeloupe', 'martinique', 'guyane', 'guyane francaise', 'la reunion', 'reunion', 'mayotte'], 'be-communes': ['belgique', 'belgium', 'belgie', 'belgien', 'be', 'bel'],
         'ch-communes': ['suisse', 'switzerland', 'schweiz', 'svizzera', 'ch', 'che'], 'lu-communes': ['luxembourg', 'luxemburg', 'letzebuerg', 'lu', 'lux']};
@@ -56,11 +89,13 @@
     // les cartes, leurs niveaux de détail [niveau, fond, nom] et leur cadrage de départ [ouest, sud, est, nord]
     const MAPS = {
         fr: {label: 'France', levels: [['dep', 'fr-departements', 'Départements'], ['reg', 'fr-regions', 'Régions'], ['com', 'fr-communes', 'Communes (villes)'], ['par', 'fr-departements', 'Paroisses (zones autour des églises)']], view: [-5.2, 41.3, 9.6, 51.15], ctx: true, insets: true, zoneBase: 'fr-departements', zoneWord: ['un département', 'Département', 'des départements', '35, Gers, Côtes-d’Armor…']},
-        be: {label: 'Belgique', levels: [['prov', 'be-provinces', 'Provinces'], ['reg', 'be-regions', 'Régions'], ['com', 'be-communes', 'Communes (villes)']], view: [2.5, 49.47, 6.43, 51.53], ctx: true, zoneBase: 'be-provinces', zoneWord: ['une province', 'Province', 'des provinces', 'Liège, Anvers, Hainaut…']},
+        be: {label: 'Belgique', levels: [['prov', 'be-provinces', 'Provinces'], ['reg', 'be-regions', 'Régions'], ['nuts3', 'nuts3-BE', 'Arrondissements (NUTS 3)'], ['com', 'be-communes', 'Communes (villes)']], view: [2.5, 49.47, 6.43, 51.53], ctx: true, zoneBase: 'be-provinces', zoneWord: ['une province', 'Province', 'des provinces', 'Liège, Anvers, Hainaut…']},
         ch: {label: 'Suisse', levels: [['cant', 'ch-cantons', 'Cantons'], ['reg', 'ch-regions', 'Grandes régions'], ['com', 'ch-communes', 'Communes (villes)']], view: [5.92, 45.8, 10.52, 47.84], ctx: true, zoneBase: 'ch-cantons', zoneWord: ['un canton', 'Canton', 'des cantons', 'Vaud, VD, Berne…']},
         lu: {label: 'Luxembourg', levels: [['cant', 'lu-cantons', 'Cantons'], ['com', 'lu-communes', 'Communes (villes)']], view: [5.72, 49.43, 6.55, 50.19], ctx: true, zoneBase: 'lu-cantons', zoneWord: ['un canton', 'Canton', 'des cantons', 'Clervaux, Esch-sur-Alzette…']},
-        eu: {label: 'Europe', levels: [['pays', 'monde-50m', 'Pays'], ['nuts1', 'eu-nuts1', 'Grandes régions (NUTS 1)'], ['nuts2', 'eu-nuts2', 'Régions (NUTS 2)']], view: [-24.5, 34.3, 44.8, 71.3], ctx: true},
+        eu: {label: 'Europe', levels: [['pays', 'monde-50m', 'Pays'], ['nuts1', 'eu-nuts1', 'Grandes régions (NUTS 1)'], ['nuts2', 'eu-nuts2', 'Régions (NUTS 2)'], ['nuts3', 'eu-nuts3', 'NUTS 3 (départements, Kreise, provinces…)']], view: [-24.5, 34.3, 44.8, 71.3], ctx: true},
         monde: {label: 'Monde', levels: [['pays', 'monde', 'Pays'], ['cont', 'continents', 'Continents']], view: [-180, -57, 180, 83.7]},
+        // 🌍 n'importe quel pays (o.country) : ses niveaux et son cadrage viennent de pays/index.json (paysLevels, viewOf)
+        pays: {label: '🌍 Un autre pays…', levels: [['adm1', 'adm1-*', 'Régions, États, provinces'], ['reg', 'reg-*', 'Grandes régions'], ['nuts3', 'nuts3-*', 'NUTS 3 (départements, Kreise, provinces…)'], ['cty', 'us-comtes', 'Comtés']], ctx: true},
     };
     // cadrages tout faits [clé, nom, [ouest, sud, est, nord]]
     const FRAMES_WORLD = [['monde', 'Le monde entier', [-180, -57, 180, 83.7]], ['europe', 'Europe', [-24.5, 34.3, 44.8, 71.3]], ['euouest', 'Europe de l’Ouest', [-11, 35.6, 17.5, 59.5]], ['france', 'France et voisins', [-6.5, 41, 11, 51.8]],
@@ -114,7 +149,8 @@
                 const arr = ka.match(/^(.+ \d+)(e|er) arrondissement$/); if (arr) { push(byAlt, arr[1] + arr[2], z); push(byAlt, arr[1], z); } } }); // « Paris 12e », « Lyon 3 »
         });
         const dupNames = new Set(); const seen = new Set(); zones.forEach(z => { const f = fold(z.name); if (seen.has(f)) dupNames.add(f); seen.add(f); });
-        return {id, name: String(raw.name || id), attr: ATTR[FILES[id]] || '', zones, index, dupNames, bbox: raw.bbox, communes, byName, byAlt, lines, pfx, parentBase: String(raw.parentBase || ''), country: COUNTRY[id] || []};
+        return {id, name: String(raw.name || id), attr: fileOf(id)?.attr || '', zones, index, dupNames, bbox: raw.bbox, communes, byName, byAlt, lines, pfx, parentBase: String(raw.parentBase || ''),
+            country: COUNTRY[id] || (Array.isArray(raw.country) ? raw.country.map(fold).filter(Boolean) : []), view: Array.isArray(raw.view) && raw.view.length === 4 ? raw.view.map(Number) : null};
     }
     /** un fichier compressé (gzip) : décompressé ici, sans dépendre du serveur */
     async function readGeo(r, gz) {
@@ -124,12 +160,15 @@
         if (typeof DecompressionStream === 'undefined') throw new Error('Ce navigateur ne sait pas ouvrir ce fond de carte.');
         return JSON.parse(await new Response(new Blob([buf]).stream().pipeThrough(new DecompressionStream('gzip'))).text());
     }
+    const rawMem = new Map(); // eu-nuts3 : lu une fois, puis découpé par pays
     function load(id) {
-        if (!FILES[id]) return Promise.reject(new Error('Fond de carte inconnu.'));
+        const f = fileOf(id); if (!f) return Promise.reject(new Error('Fond de carte inconnu.'));
         const hit = store.get(id); if (hit?.data) return Promise.resolve(hit.data); if (hit?.promise) return hit.promise;
-        const promise = fetch(`${GEO_DIR}${id}.json${GZ.has(id) ? '.gz' : ''}?v=${GEO_V}`, {credentials: 'same-origin'}).then(r => { if (!r.ok) throw new Error('Fond de carte introuvable.'); return readGeo(r, GZ.has(id)); })
+        const get = () => fetch(`${f.url}?v=${GEO_V}`, {credentials: 'same-origin'}).then(r => { if (!r.ok) throw new Error('Fond de carte introuvable.'); return readGeo(r, f.gz); });
+        const raw0 = !f.shared ? get() : rawMem.get(f.url) || (rawMem.set(f.url, get().catch(e => { rawMem.delete(f.url); throw e; })), rawMem.get(f.url));
+        const promise = (f.sub ? Promise.all([raw0, paysIndex().catch(() => null)]).then(([raw]) => nutsPart(raw, f.sub)) : raw0)
             .then(raw => { const data = decode(raw, id); store.set(id, {data}); redrawWaiting(); return data; })
-            .catch(e => { store.set(id, {error: e.message || 'Fond de carte indisponible.'}); redrawWaiting(); throw e; });
+            .catch(e => { store.set(id, {error: (e?.name === 'AbortError' || e?.network === true || (e instanceof TypeError && /fetch|network|load failed/i.test(String(e.message || '')))) ? i18n('Pas de connexion avec LCNDA : rien n’est perdu, réessaie.') : e.message || 'Fond de carte indisponible.'}); redrawWaiting(); throw e; }); // téléchargement coupé : « réessaie », pas « Failed to fetch »
         store.set(id, {promise}); return promise;
     }
     const loaded = id => store.get(id)?.data || null;
@@ -176,7 +215,8 @@
             fq: (l, p, o) => { let dl = l - lam0; if (dl > MPI || dl < -MPI) dl = wrap(dl); const cp = mcos(p), sp = msin(p), cl = mcos(dl), d = 1 + sp0 * sp + cp0 * cp * cl, k = msqrt(2 / (d > 1e-9 ? d : 1e-9)); o[0] = k * cp * msin(dl); o[1] = k * (cp0 * sp - sp0 * cp * cl); },
             inv: (x, y) => { const r = Math.sqrt(x * x + y * y); if (r < 1e-12) return [lam0, phi0]; const c = 2 * Math.asin(clamp(r / 2, -1, 1)), sc = Math.sin(c), cc = Math.cos(c); return [lam0 + Math.atan2(x * sc, r * cp0 * cc - y * sp0 * sc), Math.asin(clamp(cc * sp0 + y * sc * cp0 / r, -1, 1))]; }};
     }
-    const autoProj = view => (view[2] - view[0] > 100 || view[3] - view[1] > 80) ? 'equalearth' : 'laea';
+    // un pays très large loin de l'équateur (Russie) : Lambert conique ; le monde : Equal Earth ; sinon Lambert azimutale
+    const autoProj = view => view[2] - view[0] > 100 && view[3] - view[1] < 50 && Math.min(Math.abs(view[1]), Math.abs(view[3])) > 30 ? 'lambert' : (view[2] - view[0] > 100 || view[3] - view[1] > 80) ? 'equalearth' : 'laea';
     /** projection ajustée à une boîte de w × h pixels (le cadrage tient en entier, centré) */
     function fitProj(kind, view, w, hMax, hAuto) {
         const P = makeProj(kind, view), pts = [];
@@ -225,7 +265,10 @@
 
     /* ── ce que dessine une carte : fond, cadrage, projection ── */
     const mapOf = o => MAPS[o.map] ? o.map : 'fr';
-    const levelOf = o => { const M = MAPS[mapOf(o)], l = M.levels.find(x => x[0] === o.level); return l || M.levels[0]; };
+    const levelsOf = o => mapOf(o) === 'pays' ? paysLevels(paysOf(o)) : MAPS[mapOf(o)].levels;
+    const levelOf = o => { const L = levelsOf(o), l = L.find(x => x[0] === o.level); return l || L[0]; };
+    /** le cadrage d'un pays : pays/index.json, sinon son fond déjà chargé, sinon le monde */
+    const paysView = o => { const b = loaded(levelOf(o)[1]); return paysEntry(paysOf(o))?.v || b?.view || (Array.isArray(b?.bbox) ? b.bbox : null) || MAPS.monde.view; };
     const parseView = v => { const a = String(v || '').split(/[\s,;]+/).map(Number); return a.length === 4 && a.every(Number.isFinite) && a[2] > a[0] && a[3] > a[1] ? [clamp(a[0], -180, 180), clamp(a[1], -85, 85), clamp(a[2], -180, 180), clamp(a[3], -85, 85)] : null; };
     function viewOf(o, auto = null) {
         const M = MAPS[mapOf(o)];
@@ -235,7 +278,7 @@
             if (z) { const b = z.bbox, mx = Math.max(.04, (b[2] - b[0]) * .06), my = Math.max(.03, (b[3] - b[1]) * .06); return [b[0] - mx, b[1] - my, b[2] + mx, b[3] + my]; }
         }
         const f = framesOf(mapOf(o)).find(x => x[0] === o.frame); if (f) return f[2];
-        return auto || M.view;
+        return auto || M.view || paysView(o);
     }
     const baseIdOf = (o, view) => { const id = levelOf(o)[1]; return id === 'monde' ? (view[2] - view[0] > 70 ? 'monde-110m' : 'monde-50m') : id; };
     /** le fond des départements (provinces, cantons) : pour cadrer sur l'un d'eux, et lire « Saint-Martin (Gers) » */
@@ -252,7 +295,7 @@
         const h = Math.round(W * .62);
         return {h, svg: `<g data-geo-wait="${tok}"><rect width="${r1(W)}" height="${h}" rx="10" fill="#eef2f6"/>${T(W / 2, h / 2, '🗺️ Chargement du fond de carte…', {anchor: 'middle', size: Math.max(11, W / 40), fill: '#667'})}</g>`};
     }
-    const attrOf = (base, ctx) => ctx && ctx.attr && ctx.attr !== base.attr ? `${base.attr} ; ${ctx.attr.replace(/^Fond : /, '')}` : base.attr;
+    const attrOf = (base, ctx) => ctx && ctx.attr && !base.attr.includes(ctx.attr.replace(/^Fond : /, '')) ? `${base.attr} ; ${ctx.attr.replace(/^Fond : /, '')}` : base.attr;
     const unitFor = (v, unit) => Math.abs(v) < 2 ? String(unit).replace(/(\S)s\b/g, '$1') : unit; // « 1 personne », « 6 personnes »
     const PARENT_LINE = '#4a4f57'; // limites des départements par-dessus les communes
     const SEA = '#e3edf6', LAND = '#f1f0ec', LAND_LINE = '#c9c6bd';
@@ -486,7 +529,7 @@
         const {byZone, missing} = joinRows(spec, base);
         const vals = [...byZone.values()].filter(e => e.has).map(e => e.v), sc = vals.length ? scaleOf(vals, o) : null, noData = color(o.noData, '#e4e4e7');
         const hoverAll = o.hoverAll ?? !base.communes; // 35 000 bulles : seulement si on le demande
-        const nameOf = z => `${z.name}${z.id && !/^x-/.test(z.id) ? ` (${z.old ? 'ancienne commune, ' : ''}${z.id})` : ''}`;
+        const nameOf = z => `${z.name}${z.id && !/^[xr]-/.test(z.id) ? ` (${z.old ? 'ancienne commune, ' : ''}${z.id})` : ''}`;
         const fillOf = z => { const e = byZone.get(z); if (!e) return {fill: noData, title: hoverAll ? i18n('{name} : pas de chiffre', {name: nameOf(z)}) : ''};
             return {fill: e.has && sc ? sc.color(e.v) : noData, title: `${e.has ? `${nameOf(z)} : ${fmt(e.v) + unit}` : i18n('{name} : pas de chiffre', {name: nameOf(z)})}${series && e.has ? ' — ' + series : ''}${e.notes.length ? '\n' + e.notes.join('\n') : ''}`, v: e.has ? e.v : null}; };
         pr.allOutre = o.frame === 'custom' || (o.frame && o.frame !== '') || !MAPS[mapOf(o)].insets || o.insets === false;
@@ -780,10 +823,31 @@
 
     /* ═════════ Réglages, exemples ═════════ */
     const C = (k, label, type = 'text', extra = {}) => ({k, label, type, ...extra});
+    /** 🌍 les listes de niveaux possibles d'un pays (une case « Niveau de détail » par liste) */
+    const PAYS_COMBOS = () => { const m = new Map(); ['ZZ', 'US', ...PAYS_REG, ...PAYS_NUTS, ...Object.keys(PAYS_LV)].forEach(cc => { const L = paysLevels(cc); if (L.length > 1) m.set(paysKey(cc), L); }); return [...m]; };
+    /** 🌍 la case « Pays » : les raccourcis, puis tous les pays (pays/index.json) ; q : le texte cherché */
+    function paysGroups(s, q = '') {
+        const cur = paysOf(s?.o), k = fold(q), hit = c => { if (!k) return true; const e = paysEntry(c); return fold(paysName(c)).includes(k) || c.toLowerCase() === k || !!e?.a?.some(a => a.includes(k)); };
+        if (!paysIdx) paysIndex().catch(() => {});
+        const short = PAYS_SHORT.filter(c => c === cur || hit(c)), all = (paysIdx || []).map(x => x.c).filter(c => c === cur || hit(c)); // « Tous les pays » : vraiment tous, raccourcis compris (on y cherche par ordre alphabétique)
+        if (!paysIdx && !PAYS_SHORT.includes(cur)) all.push(cur);
+        return [[i18n('Raccourcis'), short.map(c => [c, paysName(c)])], ...(all.length ? [[i18n('Tous les pays'), all.map(c => [c, paysName(c)])]] : [])].filter(g => g[1].length);
+    }
+    // la case de recherche au-dessus de la liste des pays (heritage-diagrams.js : select avec « search ») : la liste se resserre ; Entrée choisit le premier
+    if (typeof document !== 'undefined') {
+        const fill = inp => { const sel = (inp.closest('label') || inp.parentElement)?.querySelector('select[data-opt="country"]'); /* la case est parfois habillée (.ui-search) */ if (!sel) return null; const cur = sel.value;
+            sel.innerHTML = paysGroups({o: {country: cur}}, inp.value).map(([gl, ch]) => `<optgroup label="${esc(gl)}">${ch.map(([c, n]) => `<option value="${esc(c)}"${c === cur ? ' selected' : ''}>${esc(n)}</option>`).join('')}</optgroup>`).join(''); return sel; };
+        document.addEventListener('input', e => { const inp = e.target.closest?.('[data-opt-filter="country"]'); if (!inp) return; fill(inp); paysIndex().then(() => fill(inp)).catch(() => {}); });
+        document.addEventListener('keydown', e => { const inp = e.target.closest?.('[data-opt-filter="country"]'); if (!inp || e.key !== 'Enter') return; e.preventDefault(); const sel = fill(inp); if (!sel) return;
+            const k = fold(inp.value), first = [...sel.options].find(op => !k || fold(op.textContent).includes(k) || op.value.toLowerCase() === k) || sel.options[0]; if (!first || first.value === sel.value) return; sel.value = first.value; sel.dispatchEvent(new Event('input', {bubbles: true})); sel.dispatchEvent(new Event('change', {bubbles: true})); });
+    }
     const mapOpts = ({parishes = false} = {}) => [ // parishes : le niveau « Paroisses » (carte colorée par zones seulement)
         C('map', 'Carte', 'select', {choices: Object.entries(MAPS).map(([k, m]) => [k, m.label]), def: 'fr'}),
-        ...Object.entries(MAPS).filter(([, m]) => m.levels.length > 1).map(([k, m]) => C('level', 'Niveau de détail', 'select', {choices: m.levels.filter(([l]) => parishes || l !== 'par').map(([l, , n]) => [l, n]), when: s => mapOf(s.o || {}) === k})),
-        ...Object.keys(MAPS).map(k => C('frame', 'Partie de la carte (cadrage)', 'select', {choices: [['', k === 'fr' ? 'France entière' : k === 'monde' ? 'Le monde entier' : `${MAPS[k].label} entière`], ...framesOf(k).map(([f, n]) => [f, n]),
+        C('country', 'Pays', 'select', {def: 'DE', search: 'Chercher un pays…', groups: paysGroups, choices: PAYS_SHORT.map(c => [c, PAYS_FR[c]]), when: s => mapOf(s.o || {}) === 'pays'}),
+        ...PAYS_COMBOS().map(([key, L]) => C('level', 'Niveau de détail', 'select', {choices: L.map(([l, , n]) => [l, n]), when: s => mapOf(s.o || {}) === 'pays' && paysKey(paysOf(s.o)) === key})),
+        C('frame', 'Partie de la carte (cadrage)', 'select', {choices: [['', 'Le pays entier'], ['custom', '✋ Mon cadrage (souris ou cadre tracé)']], when: s => mapOf(s.o || {}) === 'pays'}),
+        ...Object.entries(MAPS).filter(([k, m]) => k !== 'pays' && m.levels.length > 1).map(([k, m]) => C('level', 'Niveau de détail', 'select', {choices: m.levels.filter(([l]) => parishes || l !== 'par').map(([l, , n]) => [l, n]), when: s => mapOf(s.o || {}) === k})),
+        ...Object.keys(MAPS).filter(k => k !== 'pays').map(k => C('frame', 'Partie de la carte (cadrage)', 'select', {choices: [['', k === 'fr' ? 'France entière' : k === 'monde' ? 'Le monde entier' : `${MAPS[k].label} entière`], ...framesOf(k).map(([f, n]) => [f, n]),
             ...(MAPS[k].zoneWord ? [['zone', `📍 Zoomer sur ${MAPS[k].zoneWord[0]}…`]] : []), ['custom', '✋ Mon cadrage (souris ou cadre tracé)']], when: s => mapOf(s.o || {}) === k})),
         ...Object.entries(MAPS).filter(([, m]) => m.zoneWord).map(([k, m]) => C('frameZone', `${m.zoneWord[1]} (nom ou numéro : ${m.zoneWord[3]})`, 'text', {when: s => mapOf(s.o || {}) === k && s.o?.frame === 'zone'})),
         C('view', 'Mon cadrage : ouest, sud, est, nord (degrés)', 'text', {when: s => s.o?.frame === 'custom'}),
@@ -877,10 +941,11 @@
     function zoneOfPlace(base, pl, why) {
         if (base.communes) return communeOfPlace(base, pl, why);
         if (pl.lat !== null && pl.lon !== null && Number.isFinite(pl.lat) && Number.isFinite(pl.lon)) { const z = base.zones.find(zz => inZone(zz, pl.lon, pl.lat)); if (z) return z; }
-        for (const k of [pl.code, pl.county, pl.state, pl.country]) { const z = k && matchZone(base, k); if (z) return z; }
+        if (base.country.length && String(pl.country ?? '').trim() && !base.country.includes(fold(pl.country))) return null; // un lieu d'un autre pays : pas cherché par son nom
+        for (const k of [pl.county && pl.state ? `${pl.county}, ${pl.state}` : '', pl.code, pl.county, pl.state, pl.country]) { const z = k && matchZone(base, k); if (z) return z; }
         return null;
     }
-    const zoneLabel = (base, z) => base.dupNames.has(fold(z.name)) ? `${z.name} (${z.id})` : z.name;
+    const zoneLabel = (base, z) => base.dupNames.has(fold(z.name)) ? `${z.name} (${base.id === 'us-comtes' && z.parent ? z.parent.replace(/^US-/, '') : z.id})` : z.name; // « Washington (OR) »
     async function fillZones(spec, q) {
         const o = spec.o || {}, view = viewOf(o), base = await load(baseIdOf(o, view)), r = await fetchGeo(q);
         const sums = new Map(); let lost = 0, lostN = 0; const lostNames = [];
@@ -955,6 +1020,7 @@
 
     /** avant le dessin : le fond (et le fond autour) chargés, les chiffres tenus à jour relus */
     async function resolve(spec) {
+        if (mapOf(spec?.o || {}) === 'pays') await paysIndex().catch(() => {}); // 🌍 la liste des pays : cadrage, niveaux
         const s = JSON.parse(JSON.stringify(spec || {})), o = s.o || {}, q0 = parseLive(s.live?.key), q = q0 && s.live?.dg && typeof s.live.dg === 'object' ? {...q0, ...Object.fromEntries(Object.entries(s.live.dg).filter(([k, v]) => /^dg_[a-z]+$/.test(k) && (typeof v === 'string' || typeof v === 'number') && String(v).length <= 4000))} : q0; // dg : le groupe de personnes gardé avec « Tenir à jour »
         if (q) { try { if (s.kind === 'flowmap') await fillFlows(s, q); else if (s.kind === 'bubblemap') await fillBubbles(s, q); else if (levelOf(o)[0] === 'par') await fillParishes(s, q); else await fillZones(s, q); } catch (_) {} }
         if (MAPS[mapOf(o)].zoneBase) await load(MAPS[mapOf(o)].zoneBase).catch(() => {}); // cadrage sur un département, « nom (département) »
@@ -967,6 +1033,16 @@
             await Promise.all([baseIdOf(o, v2), ctxIdOf(o, baseIdOf(o, v2), v2)].filter(Boolean).map(id => load(id).catch(() => {})));
         }
         return s;
+    }
+
+    /** 🌍 la carte qui va à des points [lon, lat] : celle de leur pays (≥ 75 % des points), l'Europe, sinon null (la carte par défaut) */
+    async function mapForPoints(pts) {
+        const P = (Array.isArray(pts) ? pts : []).filter(p => isF(p?.[0]) && isF(p?.[1])).slice(0, 3000); if (!P.length) return null;
+        const [w] = await Promise.all([load('monde-110m'), paysIndex().catch(() => null)]);
+        const n = new Map(); let eu = 0; P.forEach(([lo, la]) => { const z = zoneAtPoint(w, lo, la); if (!z) return; n.set(z.id, (n.get(z.id) || 0) + 1); if (z.parent === 'EU') eu++; });
+        const [cc, k] = [...n].sort((a, b) => b[1] - a[1])[0] || [];
+        if (cc && k >= P.length * .75) { const m = {FR: 'fr', BE: 'be', CH: 'ch', LU: 'lu'}[cc]; if (m) return {map: m}; if (paysEntry(cc)) return {map: 'pays', country: cc}; }
+        return eu >= P.length * .75 ? {map: 'eu'} : null;
     }
 
     /* ═════════ Dans l'éditeur : le cadrage à la souris ═════════ */
@@ -983,9 +1059,10 @@
                 if (b.dataset.dgm === 'reset') return a.set({frame: '', view: ''});
                 if (b.dataset.dgm === 'box') { prev._dgmBox = !prev._dgmBox; b.setAttribute('aria-pressed', String(!!prev._dgmBox)); b.classList.toggle('is-active', !!prev._dgmBox); return; }
                 const g = geoOf(prev); if (!g) return; zoomAt(prev, g, g.w / 2, g.h / 2, b.dataset.dgm === 'in' ? 1.6 : 1 / 1.6); });
-            new MutationObserver(() => { bar.hidden = !prev.querySelector('[data-geo-map]'); }).observe(prev, {childList: true});
+            new MutationObserver(() => { bar.hidden = !prev.querySelector('[data-geo-map]'); srcNote(prev); }).observe(prev, {childList: true});
         }
         if (bar) bar.hidden = !prev.querySelector('[data-geo-map]');
+        srcNote(prev);
         if (prev._dgmBound) return; prev._dgmBound = true;
         let drag = null, wheelT = 0, wheelK = 1, wheelAt = null;
         const pt = (g, e) => { const r = g.hit.getBoundingClientRect(); return [(e.clientX - r.left) / r.width * g.w, (e.clientY - r.top) / r.height * g.h, r]; };
@@ -1019,6 +1096,19 @@
             clearTimeout(wheelT); wheelT = setTimeout(() => { const [wx, wy, wg] = wheelAt, k = wheelK; wheelAt = null; wheelK = 1; zoomAt(prev, wg, wx, wy, k); }, 260);
         }, {passive: false});
     }
+    /** sous l'aperçu : la source du fond de carte, avec un lien vers sa licence (↗) — le dessin, lui, la rappelle en petit */
+    const SRC_LINKS = [[/Natural Earth/, 'Natural Earth', 'https://www.naturalearthdata.com/about/terms-of-use/'], [/EuroGeographics|GISCO/, 'Eurostat GISCO, © EuroGeographics', 'https://ec.europa.eu/eurostat/web/gisco/geodata/administrative-units'],
+        [/Census/, 'U.S. Census Bureau', 'https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html'], [/IGN Admin|INSEE/, 'IGN Admin Express (Licence Ouverte)', 'https://geoservices.ign.fr/adminexpress'],
+        [/OpenStreetMap/, '© OpenStreetMap (ODbL)', 'https://www.openstreetmap.org/copyright'], [/swisstopo/, '© swisstopo', 'https://www.swisstopo.admin.ch/fr/conditions-d-utilisation-des-geodonnees-ogd'], [/IGN-NGI|Statbel/, 'Statbel (CC BY 4.0)', 'https://creativecommons.org/licenses/by/4.0/'], [/ACT Luxembourg/, 'ACT Luxembourg (CC0)', 'https://data.public.lu/']];
+    function srcNote(prev) {
+        const t = [...(prev.querySelectorAll('[data-geo-map] text') || [])].map(x => x.textContent || '').find(x => /^Fond : /.test(x)) || '';
+        let el = prev.nextElementSibling?.classList?.contains('dgm-src') ? prev.nextElementSibling : null;
+        const hits = SRC_LINKS.filter(([rx]) => rx.test(t));
+        if (!hits.length) { if (el) el.remove(); return; }
+        if (!el) { el = document.createElement('p'); el.className = 'dgm-src'; prev.after(el); }
+        const html = `${esc(i18n('Source du fond de carte :'))} ${hits.map(([, n, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(n)} ↗</a>`).join(' · ')}`;
+        if (el.innerHTML !== html) el.innerHTML = html;
+    }
     function geoOf(prev) { const el = prev.querySelector('[data-geo-map]'); const g = el && geoReg.get(el.getAttribute('data-geo-map')); const hit = el?.querySelector('[data-geo-hit]'); return g && hit ? {...g, el, hit} : null; }
     function zoomAt(prev, g, x, y, k) {
         const api = prev._dgmApi; if (!api) return;
@@ -1050,7 +1140,7 @@
             <label class="checkbox-line"><input type="checkbox" data-dgm-live ${spec.live?.key && cur.what ? 'checked' : ''}> 🔄 Tenir à jour (relire l’arbre à chaque affichage)</label>
             <button type="button" class="button small" data-dgm-go>Prendre ces chiffres</button><p class="dgm-msg" data-dgm-msg role="status"></p></div>
             ${flows ? `<h4>＋ Ajouter un flux</h4><div class="dgm-form dgm-addflow"><span class="pk-lab">Départ</span><div data-dgm-pa>${P.pickerField({name: '', hiddenName: false, kind: 'place', inline: true})}</div><span class="pk-lab">Arrivée</span><div data-dgm-pb>${P.pickerField({name: '', hiddenName: false, kind: 'place', inline: true})}</div><label>Combien<input type="number" inputmode="decimal" min="0" value="1" data-dgm-n></label><button type="button" class="button small" data-dgm-addflow>＋ Ajouter ce flux</button></div>
-            <h4>📍 Les lieux du tableau</h4><p class="muted">Un lieu sans position (⚠) : choisis-le dans ta base ou dans les communes et villes du monde, ou tape ses coordonnées dans le tableau (« Rennes 48.11, -1.68 »).</p><div data-dgm-places></div><button type="button" class="button small secondary" data-dgm-find>🔎 Retrouver les lieux sans position</button>` : ''}`;
+            <h4>📍 Les lieux du tableau</h4><p class="muted">Un lieu sans position (⚠) : choisis-le dans ta base ou dans les communes et villes du monde, ou tape ses coordonnées dans le tableau (« Rennes 48.11, -1.68 »).</p><div data-dgm-places></div><button type="button" class="button small secondary" data-dgm-find>🔍 Retrouver les lieux sans position</button>` : ''}`;
         const msg = t => { box.querySelector('[data-dgm-msg]').textContent = t; };
         if (!flows) loadTypes().then(() => { const sel = box.querySelector('[data-dgm-type]'); if (sel && box.isConnected) { const v = sel.value || cur.type; sel.innerHTML = typeOptions(v); } });
         box.querySelector('[data-dgm-what]').addEventListener('change', e => { const tb = box.querySelector('[data-dgm-typebox]'); if (tb) tb.hidden = e.target.value !== 'type'; const sb = box.querySelector('[data-dgm-starbox]'); if (sb) sb.hidden = e.target.value !== 'star'; });
@@ -1124,13 +1214,13 @@
     // niveau → [mot, finesse (0 = commune), « son … », « leur … », un/une]
     const LV = {com: ['ville', 0, 'sa commune', 'leur commune', 'une ville'], par: ['paroisse', 0, 'sa paroisse', 'leur paroisse', 'une paroisse'], dep: ['département', 1, 'son département', 'leur département', 'un département'], prov: ['province', 1, 'sa province', 'leur province', 'une province'],
         cant: ['canton', 1, 'son canton', 'leur canton', 'un canton'], nuts2: ['région', 1, 'sa région', 'leur région', 'une région'], reg: ['région', 2, 'sa région', 'leur région', 'une région'],
-        nuts1: ['grande région', 2, 'sa grande région', 'leur grande région', 'une grande région'], pays: ['pays', 3, 'son pays', 'leur pays', 'un pays'], cont: ['continent', 4, 'son continent', 'leur continent', 'un continent']};
+        nuts1: ['grande région', 2, 'sa grande région', 'leur grande région', 'une grande région'], adm1: ['région', 1, 'sa région', 'leur région', 'une région'], nuts3: ['zone', .8, 'sa zone', 'leur zone', 'une zone'], cty: ['comté', .5, 'son comté', 'leur comté', 'un comté'], pays: ['pays', 3, 'son pays', 'leur pays', 'un pays'], cont: ['continent', 4, 'son continent', 'leur continent', 'un continent']};
     const levelWord = (map, lv) => { const w = map === 'ch' && lv === 'reg' ? LV.nuts1 : LV[lv] || ['zone', 1, 'sa zone', 'leur zone', 'une zone']; return [i18n(w[0], {ctx: 'niveau'}), w[1], i18n(w[2]), i18n(w[3]), i18n(w[4])]; };
     const ICON = lv => lv === 'com' ? '🏘' : lv === 'pays' || lv === 'cont' ? '🌍' : '🏛';
     /** les niveaux de la carte choisie, avec leur fond ; here = le niveau dessiné, com = celui des communes (ou null) */
     function zoneCtx(spec) {
         const o = spec.o || {}, map = mapOf(o), M = MAPS[map], cur = levelOf(o)[0];
-        const levels = M.levels.map(([lv, id, name]) => ({lv, id: lv === cur ? baseIdOf(o, viewOf(o)) : id === 'monde' ? 'monde-110m' : id, name, word: levelWord(map, lv), cur: lv === cur}));
+        const levels = levelsOf(o).map(([lv, id, name]) => ({lv, id: lv === cur ? baseIdOf(o, viewOf(o)) : id === 'monde' ? 'monde-110m' : id, name, word: levelWord(map, lv), cur: lv === cur}));
         return {o, map, M, levels, here: levels.find(l => l.cur), com: levels.find(l => l.lv === 'com') || null};
     }
     /** la ville (communes) de la carte qui contient ce fond, si son fichier est déjà chargé */
@@ -1317,7 +1407,7 @@
         choropleth: {icon: '🗺️', label: 'Carte colorée par zones (départements, régions, pays…)', group: 'Cartes', render: remember(choropleth), noLegend: true,
             grids: [{key: 'rows', label: 'Les zones et leurs chiffres', series: 1, cols: [C('label', 'Zone (nom ou code : 35, FRH03, BE, Vaud…)'), C('note', 'Note (dans la bulle)')]}],
             options: CHORO_OPTS, sample: CHORO_SAMPLE, resolve, afterDraw, fromApp: FROM_APP, dataPane,
-            describe: spec => i18n('Carte colorée : {n} zones ({map}, {level}).', {n: rowsOf(spec).length, map: i18n(MAPS[mapOf(spec.o || {})].label), level: i18n(levelOf(spec.o || {})[2]).toLowerCase()})},
+            describe: spec => i18n('Carte colorée : {n} zones ({map}, {level}).', {n: rowsOf(spec).length, map: mapOf(spec.o || {}) === 'pays' ? paysName(paysOf(spec.o)) : i18n(MAPS[mapOf(spec.o || {})].label), level: i18n(levelOf(spec.o || {})[2]).toLowerCase()})},
         flowmap: {icon: '🧭', label: 'Carte des migrations (flèches d’un lieu à un autre)', group: 'Cartes', render: remember(flowmap), noLegend: true,
             grids: [{key: 'rows', label: 'Les flux (départ → arrivée)', cols: [C('from', 'Départ (lieu)'), C('to', 'Arrivée (lieu)'), C('value', 'Combien', 'number'), C('color', 'Couleur', 'color')]}],
             options: FLOW_OPTS, sample: FLOW_SAMPLE, resolve, afterDraw, fromApp: FROM_APP,
@@ -1328,7 +1418,7 @@
             describe: spec => i18n('Carte à symboles proportionnels : {n} lieux.', {n: rowsOf(spec).length})},
     };
     for (const [k, kind] of Object.entries(KINDS)) { if (!DR.KINDS[k]) DR.KINDS[k] = kind; }
-    ext.diagramCartes = {MAPS, FRAMES_WORLD, FRAMES_FR, load, loaded, decode, makeProj, fitProj, matchZone, matchCommune, joinRows, zoneOfRow, zoneSuggest, rowStatus, rememberPick, zoneOfPlace, placeOf, flowsOf, breaksOf, scaleOf, resolve, parseLive, liveKey, inZone, idfOf, SRC_GROUPS, bubblesOf,
+    ext.diagramCartes = {MAPS, paysIndex, paysLevels, paysName, paysOf, fileOf, mapForPoints, paysList: () => (paysIdx ? paysIdx.map(x => [x.c, x.n, x.a || []]) : PAYS_SHORT.map(c => [c, PAYS_FR[c], []])), FRAMES_WORLD, FRAMES_FR, load, loaded, decode, makeProj, fitProj, matchZone, matchCommune, joinRows, zoneOfRow, zoneSuggest, rowStatus, rememberPick, zoneOfPlace, placeOf, flowsOf, breaksOf, scaleOf, resolve, parseLive, liveKey, inZone, idfOf, SRC_GROUPS, bubblesOf,
         // pour les cartes de heritage-diagram-cartes2.js (points, hexagones, cartogramme, carte qui raconte) : mêmes fonds, mêmes projections
         mapOf, levelOf, viewOf, baseIdOf, ctxIdOf, needBases, drawBase, attrOf, autoProj, fitView, mapOpts, remember, afterDraw, fillZones, communeOfPlace, zoneAt, RAMPS, rampAt, SEA, LAND, FROM_APP};
 })();

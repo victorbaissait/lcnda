@@ -1,0 +1,36 @@
+fr ¦ is
+# 🔤 La langue de chaque page, 📇 tables et index (heritage-recueil-etat.js, heritage-recueil-index.js)
+dont {l} : p. {x} ¦ þar af {l}: bls. {x}
+Sorte de page ¦ Tegund síðu
+Langue : ¦ Tungumál:
+Langue de ces pages… ¦ Tungumál þessara síðna…
+Sorte : {x} ¦ Tegund: {x}
+Langue de {n} pages ¦ Tungumál {n} síðna
+Langue de la page ¦ Tungumál síðunnar
+Langue (vide : comme le recueil) ¦ Tungumál (autt: eins og safnritið)
+ex. Latin ¦ t.d. Latína
+Langue : {l} ¦ Tungumál: {l}
+Langue : comme le recueil ¦ Tungumál: eins og safnritið
+comme le recueil : {l} ¦ eins og safnritið: {l}
+pas dite ¦ ekki tilgreint
+Le texte de cette page semble en latin. ¦ Textinn á þessari síðu virðist vera á latínu.
+Noter « Latin » ¦ Skrá „Latína“
+Tables et index ¦ Skrár og atriðaskrár
+Une table décennale, un index en fin de registre ? Marque la page « 📇 Table ou index » (onglet 🗂 État ou sur la page), puis fais son « 📊 Tableau de la page » : une ligne par entrée, une colonne pour le renvoi (f° 12, p. 3). Elles arrivent ici, avec un lien vers chaque page annoncée. ¦ Tíu ára skrá, atriðaskrá aftast í bókinni? Merktu síðuna „📇 Skrá eða atriðaskrá“ (flipinn 🗂 Staða eða á síðunni) og gerðu svo „📊 Tafla síðunnar“ fyrir hana: ein lína fyrir hverja færslu, einn dálkur fyrir tilvísunina (f° 12, bls. 3). Færslurnar birtast hér, með tengli á hverja síðu sem vísað er í.
+{r} : page absente ¦ {r}: síða vantar
+pas de page « {r} » ¦ engin síða „{r}“
+sans renvoi ¦ án tilvísunar
+{a} renvois trouvés · {b} vers des pages absentes · {c} introuvables ¦ Tilvísanir fundnar: {a} · á síður sem vantar: {b} · finnast ekki: {c}
+« {p} » est une table, mais son tableau est vide : ouvre la page → « 📊 Tableau de la page » (une ligne par entrée, une colonne pour le renvoi). ¦ „{p}“ er skrá, en taflan hennar er tóm: opnaðu síðuna → „📊 Tafla síðunnar“ (ein lína fyrir hverja færslu, einn dálkur fyrir tilvísunina).
+Ouvrir la page ¦ Opna síðuna
+Chercher dans les tables… ¦ Leita í skrám…
+Chercher dans les tables ¦ Leita í skrám
+Toutes les entrées ¦ Allar færslur
+Renvois trouvés ¦ Tilvísanir fundnar
+Vers des pages absentes ¦ Á síður sem vantar
+Introuvables ¦ Finnast ekki
+dans {p} ¦ í {p}
+… et {n} autres : affine la recherche. ¦ … og {n} í viðbót: þrengdu leitina.
+Page ordinaire ¦ Venjuleg síða
+📇 Table ou index ¦ 📇 Skrá eða atriðaskrá
+Page de garde ¦ Saurblað

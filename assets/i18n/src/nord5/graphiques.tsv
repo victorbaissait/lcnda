@@ -653,7 +653,7 @@ Pas installé ¦ Nije instalirano ¦ Ni nameščeno
 L’historique officiel des communes de l’INSEE (depuis 1943) : chaque commune disparue avec sa date et sa commune d’aujourd’hui. Livré avec l’app (5,5 Mo, Licence Ouverte 2.0 de l’INSEE) : installé tout seul, sans Internet. Les anciens noms aident aussi le menu de choix des lieux (« anc. « … » »). ¦ Službena povijest općina INSEE-a (od 1943.): svaka nestala općina s datumom i današnjom općinom. Isporučuje se s aplikacijom (5,5 MB, Licence Ouverte 2.0 INSEE-a): instalira se samo, bez interneta. Stari nazivi pomažu i izborniku za odabir mjesta („nekad „…””). ¦ Uradna zgodovina občin INSEE (od leta 1943): vsaka izginula občina z datumom in današnjo občino. Priložena aplikaciji (5,5 MB, Licence Ouverte 2.0 INSEE): namesti se sama, brez interneta. Stara imena pomagajo tudi meniju za izbiro krajev (»nekdaj »…««).
 ⤓ Télécharger de nouveau (mise à jour) ¦ ⤓ Preuzmi ponovno (ažuriranje) ¦ ⤓ Prenesi znova (posodobitev)
 🗑 Retirer ¦ 🗑 Ukloni ¦ 🗑 Odstrani
-⤓ Installer les frontières anciennes ¦ ⤓ Instaliraj stare granice ¦ ⤓ Namesti stare meje
+📦 Installer les frontières anciennes ¦ 📦 Instaliraj stare granice ¦ 📦 Namesti stare meje
 (taille…) ¦ (veličina…) ¦ (velikost…)
 dossier des données ¦ mapa podataka ¦ mapa s podatki
 Rangé dans le {name}, commun à toutes tes généalogies. ¦ Spremljeno u {name}, zajedničko svim tvojim rodoslovljima. ¦ Shranjeno v {name}, skupno vsem tvojim rodoslovjem.
@@ -1672,7 +1672,7 @@ Jusqu’à l’année ¦ Do godine ¦ Do leta
 Départ ¦ Polazak ¦ Odhod
 Arrivée ¦ Dolazak ¦ Prihod
 📍 Les lieux du tableau ¦ 📍 Mjesta u tablici ¦ 📍 Kraji v tabeli
-🔎 Retrouver les lieux sans position ¦ 🔎 Pronađi mjesta bez položaja ¦ 🔎 Poišči kraje brez položaja
+🔍 Retrouver les lieux sans position ¦ 🔍 Pronađi mjesta bez položaja ¦ 🔍 Poišči kraje brez položaja
 Choisis d’abord une sorte d’événement. ¦ Najprije odaberi vrstu događaja. ¦ Najprej izberi vrsto dogodka.
 Choisis une sorte d’événement. ¦ Odaberi vrstu događaja. ¦ Izberi vrsto dogodka.
 Aucun lieu retrouvé : choisis-les un par un. ¦ Nijedno mjesto nije pronađeno: odaberi ih jedno po jedno. ¦ Noben kraj ni najden: izberi jih enega za drugim.

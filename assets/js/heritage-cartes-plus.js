@@ -258,6 +258,9 @@
         // la barre de la Carte défile de côté (et couperait le menu) : le menu est posé sur la page, sous le bouton
         const r = btn.getBoundingClientRect(), mw = Math.min(300, window.innerWidth - 16);
         menu.style.left = `${Math.max(8, Math.min(window.innerWidth - mw - 8, r.left))}px`; menu.style.top = `${r.bottom + 6}px`;
+        // un petit écran (téléphone) : le menu reste dans la fenêtre (remonté au besoin, sinon il défile)
+        menu.style.maxHeight = `${window.innerHeight - 16}px`; menu.style.overflowY = 'auto';
+        const mh = menu.getBoundingClientRect().height; if (r.bottom + 6 + mh > window.innerHeight - 8) menu.style.top = `${Math.max(8, window.innerHeight - mh - 8)}px`;
         if (gone.installed === false) menu.querySelector('[data-cp-fr-dl]').hidden = false;
         A().api('frontieres_status').then(st => { if (!st.installed && menu.isConnected) menu.querySelector('[data-cp-fr-dl]').hidden = false; }).catch(() => {});
         menu.addEventListener('change', e => { const k = e.target.dataset.cpFrK; if (!k) return; const q = {...frPrefs(), [k]: e.target.checked}; lsSet(FR_KEY, q); gone.key = '';
@@ -310,7 +313,7 @@
                 <div class="cp-set-files">${rows}</div>
                 ${st.installed ? `<p>${A().plural(st.gone || 0, 'commune disparue', 'communes disparues')} · ${A().plural(st.renamed || 0, 'commune renommée', 'communes renommées')} · ${A().plural(st.located || 0, 'placée sur la carte', 'placées sur la carte')}.</p>` : ''}
                 <div class="page-actions">${st.installed ? '<button type="button" class="button secondary" data-cp-dl>⤓ Télécharger de nouveau (mise à jour)</button><button type="button" class="button secondary" data-cp-rm>🗑 Retirer</button>'
-                    : '<button type="button" class="button" data-cp-dl>⤓ Installer les frontières anciennes <span data-cp-size>(taille…)</span></button>'}</div>
+                    : '<button type="button" class="button" data-cp-dl>📦 Installer les frontières anciennes <span data-cp-size>(taille…)</span></button>'}</div>
                 <p class="ui-hint" data-cp-remote></p>
                 <p class="ui-hint">${esc(st.licence || '')}. ${i18n('Rangé dans le {name}, commun à toutes tes généalogies.', {name: esc(i18n(st.dir_label || 'dossier des données'))})}</p></section>
             <section class="maintenance-panel"><h3>🏛 Provinces (≈ 1789) et départements de 1790</h3>

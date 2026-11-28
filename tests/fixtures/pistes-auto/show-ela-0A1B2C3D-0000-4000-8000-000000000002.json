@@ -1,0 +1,8 @@
+{"_note": "Réponse de https://api.openarch.nl/1.1/records/show.json (forme A2A relevée le 25/11/2026), noms fictifs.",
+ "Person": [
+  {"@pid": "Person900000201", "PersonName": {"PersonNameFirstName": "Jan", "PersonNameLastName": "Mazaud"}, "Gender": "Man", "Age": {"PersonAgeLiteral": "59"}, "Profession": "timmerman"},
+  {"@pid": "Person900000202", "PersonName": {"PersonNameFirstName": "Kees", "PersonNameLastName": "Lacombe"}, "Gender": "Man", "Profession": "buurman"}],
+ "Event": {"@eid": "Event1", "EventType": "Overlijden", "EventDate": {"Year": "1910", "Month": "02", "Day": "12"}, "EventPlace": {"Place": "Leiden"}},
+ "RelationEP": [{"PersonKeyRef": "Person900000201", "EventKeyRef": "Event1", "RelationType": "Overledene"}, {"PersonKeyRef": "Person900000202", "EventKeyRef": "Event1", "RelationType": "Aangever"}],
+ "Source": {"SourcePlace": {"Place": "Leiden"}, "SourceDate": {"Year": "1910", "Month": "02", "Day": "13"}, "SourceType": "BS Overlijden",
+  "SourceReference": {"Place": "Leiden", "InstitutionName": "Erfgoed Leiden en Omstreken", "Collection": "Burgerlijke Stand Leiden", "Book": "Overlijden 1910", "DocumentNumber": "201"}}}

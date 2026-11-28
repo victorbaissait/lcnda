@@ -1,0 +1,51 @@
+fr ¦ ru ¦ uk
+# 🧩 Atelier de transcription, vague 3 (3b) : les gabarits d’actes (heritage-transcribe-gabarit.js)
+Choisis la sorte d’acte (en haut) : chaque sorte a ses cases. ¦ Выбери вид акта (вверху): у каждого вида свои поля. ¦ Обери вид акта (угорі): кожен вид має свої поля.
+On dirait : {x}. Utiliser ce gabarit ? ¦ Похоже на: {x}. Использовать этот шаблон? ¦ Схоже на: {x}. Використати цей шаблон?
+Cases remplies : {a}/{b} · vérifiées : {c} ¦ Заполнено полей: {a}/{b} · проверено: {c} ¦ Заповнено полів: {a}/{b} · перевірено: {c}
+Gabarit ¦ Шаблон ¦ Шаблон
+Vert : rempli par « 🧭 Repérer », à vérifier · Entrée : ✓ vérifié · un clic sur « l. 3 » montre le passage. ¦ Зелёное: заполнено «🧭 Найти», нужно проверить · Enter: ✓ проверено · щелчок по «стр. 3» показывает место в тексте. ¦ Зелене: заповнено «🧭 Знайти», треба перевірити · Enter: ✓ перевірено · клік на «р. 3» показує місце в тексті.
+Date du baptême ¦ Дата крещения ¦ Дата хрещення
+Père, métier ¦ Отец, занятие ¦ Батько, заняття
+Officier de l’état civil ¦ Чиновник записи актов ¦ Реєстратор актів
+Parents de l’époux ¦ Родители жениха ¦ Батьки нареченого
+Parents de l’épouse ¦ Родители невесты ¦ Батьки нареченої
+Contrat de mariage ¦ Брачный договор ¦ Шлюбний договір
+Publications ¦ Оглашения ¦ Оголошення
+Décédé le ¦ Умер ¦ Помер
+Déclarants ¦ Заявители ¦ Заявники
+Date d’inhumation ¦ Дата погребения ¦ Дата поховання
+Parties ¦ Стороны ¦ Сторони
+Juge ou notaire ¦ Судья или нотариус ¦ Суддя або нотаріус
+Personne concernée ¦ Лицо, о котором идёт речь ¦ Особа, про яку йдеться
+Ce qui est attesté ¦ Что удостоверяется ¦ Що засвідчується
+Rue ou maison ¦ Улица или дом ¦ Вулиця або будинок
+Ménage ¦ Домохозяйство ¦ Домогосподарство
+Matricule ¦ Учётный номер ¦ Обліковий номер
+Classe ¦ Призывной год ¦ Призовний рік
+Régiment ¦ Полк ¦ Полк
+Campagnes ¦ Походы ¦ Походи
+Blessures ¦ Ранения ¦ Поранення
+page {n}, l. {line} ¦ стр. {n}, строка {line} ¦ с. {n}, р. {line}
+l. {n} ¦ стр. {n} ¦ р. {n}
+🧩 Gabarit à cases (conseillé) ¦ 🧩 Шаблон с полями (рекомендуется) ¦ 🧩 Шаблон з полями (рекомендовано)
+Texte à trous (comme avant) ¦ Текст с пропусками (как раньше) ¦ Текст із пропусками (як раніше)
+Remplir à nouveau ¦ Заполнить заново ¦ Заповнити знову
+Coller le texte à trous ¦ Вставить текст с пропусками ¦ Вставити текст із пропусками
+Repris du gabarit (cases vérifiées ou écrites par toi) : ¦ Взято из шаблона (поля, проверенные или написанные тобой): ¦ Взято з шаблону (поля, перевірені або написані тобою):
+Retirer cette case ¦ Убрать это поле ¦ Прибрати це поле
+Ajouter une case ¦ Добавить поле ¦ Додати поле
+Nom de la case (ex. Profession du parrain) ¦ Название поля (напр. Занятие крёстного) ¦ Назва поля (напр. Заняття хрещеного)
+Nom de la case ¦ Название поля ¦ Назва поля
+Case retirée ¦ Поле убрано ¦ Поле прибрано
+Mes gabarits… ¦ Мои шаблоны… ¦ Мої шаблони…
+Mes gabarits ¦ Мои шаблоны ¦ Мої шаблони
+Tableur de tous les actes « {x} » ¦ Таблица всех актов «{x}» ¦ Таблиця всіх актів «{x}»
+Les cases cochées se montrent dans le gabarit de chaque acte de cette sorte. Gardé sur cet ordinateur. ¦ Отмеченные поля показываются в шаблоне каждого акта этого вида. Хранится на этом компьютере. ¦ Позначені поля показуються в шаблоні кожного акта цього виду. Зберігається на цьому комп’ютері.
+Aucun acte de cette sorte pour l’instant. ¦ Пока нет ни одного акта этого вида. ¦ Поки немає жодного акта цього виду.
+gabarits ¦ шаблоны ¦ шаблони
+Tableur : {x} ¦ Таблица: {x} ¦ Таблиця: {x}
+Pas encore relié : le relier dans l’Atelier ¦ Ещё не связано: свяжи в мастерской ¦ Ще не пов’язано: пов’яжи в майстерні
+Numéros de ligne ¦ Номера строк ¦ Номери рядків
+Transcription faite avec LCNDA (Le Carnet numérique des ancêtres). ¦ Расшифровка сделана в LCNDA (Le Carnet numérique des ancêtres). ¦ Розшифрування зроблено в LCNDA (Le Carnet numérique des ancêtres).
+XML des chercheurs et des archives (lignes, zones, personnes) ¦ XML исследователей и архивов (строки, зоны, люди) ¦ XML дослідників і архівів (рядки, зони, люди)

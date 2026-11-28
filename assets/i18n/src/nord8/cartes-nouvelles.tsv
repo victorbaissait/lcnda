@@ -264,7 +264,7 @@ Par branche (bleu père, orange mère) ¦ Dala göre (mavi baba, turuncu anne)
 Flèche du village du parrain vers celui de l’acte ¦ Vaftiz ebeveyninin köyünden kaydın köyüne ok
 La phrase sous la carte ¦ Haritanın altındaki cümle
 Clic : les liens derrière ce trait ¦ Tıkla: bu çizginin ardındaki bağlar
-{place} : {p} % des liens sont du village même ; les autres viennent surtout de {others}. ¦ {place}: bağların %{p}’i köyün kendisinden; diğerleri çoğunlukla şuradan geliyor: {others}.
+{place} : {p} % des liens sont du village même ; les autres viennent surtout de {others}. ¦ {place}: köyün kendisinden gelen bağların oranı yüzde {p}; diğerleri çoğunlukla şuradan geliyor: {others}.
 Calculé sur {a} dont le village est connu ; {b} sans lieu ne sont pas dessinés. ¦ Köyü bilinen {a} üzerinden hesaplandı; yeri olmayan {b} çizilmez.
 Parrains et témoins : {a} entre {b}. ¦ Vaftiz ebeveynleri ve tanıklar: {b} arasında {a}.
 Parrains et témoins : {n}. ¦ Vaftiz ebeveynleri ve tanıklar: {n}.

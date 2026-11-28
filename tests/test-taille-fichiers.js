@@ -8,7 +8,7 @@ process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '
  *  2. un vrai « php -S » : une image de 30 Mo est acceptée (avant : « dépasse 25 Mo ») ; réglée à 25 Mo, la même est refusée
  *     avec un message qui le dit ; une image immense (13 000 × 10 000) est gardée avec un avertissement, et la lecture
  *     d'écriture ne la décode pas ; sans jeton CSRF ou en mode consultation, le réglage ne change pas ;
- *  3. navigateur (1440 px) : Réglages → « 📎 Fichiers des médias » (trois menus, « (conseillé) » sur le choix conseillé, pas
+ *  3. navigateur (1440 px) : Réglages → « 📁 Fichiers des médias » (trois menus, « (conseillé) » sur le choix conseillé, pas
  *     d'unité dans les libellés), un changement enregistré puis « ↶ Annuler » ; les limites dans le navigateur (menu de
  *     choix des médias, outils d'image) ; l'aide (FAQ) en parle ; aucune erreur JavaScript.
  */
@@ -138,7 +138,7 @@ const freePort = () => new Promise(res => { const s = net.createServer(); s.list
         page.on('console', m => { if (m.type() === 'error' && !/Failed to load resource|net::ERR/.test(m.text())) errors.push(m.text()); });
         await page.goto(base);
         await page.waitForFunction(() => window.LCNDA_APP?.api && window.LCNDA_APP.mediaLimits && window.LCNDA_EXT?.maintenance?.media_files);
-        await t('Réglages → 📎 Fichiers des médias : trois menus, « (conseillé) », pas d’unité dans les libellés', async () => {
+        await t('Réglages → 📁 Fichiers des médias : trois menus, « (conseillé) », pas d’unité dans les libellés', async () => {
             await page.evaluate(() => { location.hash = '#maintenance/media_files'; });
             await page.waitForSelector('[data-mf-page] select[data-mf-key="mpx"]');
             const o = await page.evaluate(() => [...document.querySelectorAll('[data-mf-page] select[data-mf-key]')].map(s => ({ k: s.dataset.mfKey, v: s.value, label: s.closest('label').querySelector('span').textContent, rec: [...s.options].filter(x => /\(conseillé\)/.test(x.textContent)).map(x => x.value), opts: [...s.options].map(x => x.textContent) })));
@@ -176,7 +176,7 @@ const freePort = () => new Promise(res => { const s = net.createServer(); s.list
         });
         await t('l’aide (FAQ) dit ce que ça implique : disque, sauvegardes, mémoire ; et la mention en marge', async () => {
             const src = fs.readFileSync(path.join(appRoot, 'assets/js/heritage-more.js'), 'utf8');
-            assert.match(src, /Quelle taille de photo, de scan, de son ou de vidéo puis-je ajouter \?', 'Réglages → « 📎 Fichiers des médias »[^']*sur le disque[^']*sauvegardes complètes[^']*mémoire/);
+            assert.match(src, /Quelle taille de photo, de scan, de son ou de vidéo puis-je ajouter \?', 'Réglages → « 📁 Fichiers des médias »[^']*sur le disque[^']*sauvegardes complètes[^']*mémoire/);
             assert.match(src, /Pourquoi « Mieux voir », la lecture ou la retouche ne traitent-ils pas une très grande image \?/);
             assert.match(src, /Lire l’acte : et les mentions écrites à la verticale dans la marge \?/);
         });

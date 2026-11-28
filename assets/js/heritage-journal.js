@@ -20,7 +20,7 @@
     const i18n = (text, vars) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(text, vars) : String(text ?? '')); // 🌐 app-i18n.js
     const KEY = 'listes:research_journal';
     const RESULTS = {found: ['Trouvé', 'green'], none: ['Rien trouvé', 'grey'], partial: ['En partie', 'yellow'], not_consulted: ['Pas consulté', 'grey']};
-    const KINDS = {digest: ['📜', 'Dépouillement', 'Dépouillements'], visit: ['🗄️', 'Visite faite', 'Visites faites'], lead: ['🔍', 'Piste d’enquête', 'Pistes d’enquête'], battue: ['🧭', 'Battue', 'Battues'], request: ['📮', 'Demande', 'Demandes']};
+    const KINDS = {digest: ['📜', 'Dépouillement', 'Dépouillements'], visit: ['🗄️', 'Visite faite', 'Visites faites'], lead: ['🔍', 'Piste d’enquête', 'Pistes d’enquête'], battue: ['🔦', 'Battue', 'Battues'], request: ['📮', 'Demande', 'Demandes']};
     const fold = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
     const badge = r => (RESULTS[r] ? (UI()?.badge ? UI().badge(RESULTS[r][0], RESULTS[r][1]) : `<span class="ui-badge is-${RESULTS[r][1]}">${esc(RESULTS[r][0])}</span>`) : '');
     /** le menu fixe du résultat (un simple menu déroulant : choix fixes) */
@@ -94,6 +94,8 @@
     function csvExport(rows) {
         const cell = v => (A().csvCell ? A().csvCell(v, {sep: ';'}) : `"${String(v ?? '').replace(/"/g, '""')}"`);
         const head = ['Date', 'Sorte', 'Titre', 'Résultat', 'État', 'Service d’archives', 'Cote', 'Commune', 'Années', 'Personnes', 'Note'];
+        const line = r => [String(r.date || '').slice(0, 10), KINDS[r.kind]?.[1] || r.kind, r.title, r.result_label, r.status_label, r.service, r.cote, r.commune, r.years, peopleText(r), r.note];
+        if (window.LCNDA_UI?.exportRows) return window.LCNDA_UI.exportRows({title: i18n('Journal des recherches'), name: 'journal-des-recherches', rows: () => [head, ...rows.map(line)]}); // ⤓ la fenêtre d'export commune
         const lines = [head.map(cell).join(';'), ...rows.map(r => [String(r.date || '').slice(0, 10), KINDS[r.kind]?.[1] || r.kind, r.title, r.result_label, r.status_label, r.service, r.cote, r.commune, r.years, peopleText(r), r.note].map(cell).join(';'))];
         const blob = new Blob(['﻿' + lines.join('\r\n')], {type: 'text/csv;charset=utf-8'});
         const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${A().safeExportFilename ? A().safeExportFilename('journal-des-recherches') : 'journal-des-recherches'}.csv`;
@@ -108,7 +110,7 @@
         const header = UI().pageHeader({title: 'Journal des recherches', where: where === 'recherche' ? 'Recherche' : undefined,
             help: 'Tout ce que tu as déjà cherché, du plus récent au plus ancien : pour ne pas chercher deux fois au même endroit.',
             primary: '<button type="button" class="button" data-rj-new-digest>＋ Nouveau dépouillement</button>',
-            actions: ['<button type="button" class="button secondary" data-rj-csv>⤓ Exporter en CSV</button>', '<button type="button" class="button secondary" data-rj-visits>🗄️ Visites d’archives</button>'],
+            actions: ['<button type="button" class="button secondary" data-rj-csv>⤓ Exporter</button>', '<button type="button" class="button secondary" data-rj-visits>🗄️ Visites d’archives</button>'],
             more: [ext.textDocTools ? '<button type="button" data-rj-report title="Un compte rendu des recherches montrées (avec les filtres), dans le traitement de texte">📝 Compte rendu</button>' : '']});
         ws.innerHTML = `<section class="page h-rj">${header}<div data-rj-bar></div><div data-rj-list>${UI().spinner('Chargement du journal…')}</div></section>`;
         let data;
@@ -132,6 +134,7 @@
         const box = ws.querySelector('[data-rj-list]');
         let filtered = [];
         ws.querySelector('[data-rj-bar]').replaceWith(bar);
+        bar.after(UI().framesOption?.('journal', () => paint()) || '');
         const person = S().rjPerson; if (person?.id) { S().rjPerson = null; bar.setFilter?.('person', {id: Number(person.id), title: person.title || ''}); }
         function paint() {
             const st = bar.state, q = fold(st.q).trim(), f = st.filters;
@@ -147,7 +150,11 @@
             if (!all.length) { box.innerHTML = A().emptyState({icon: '🗓', text: 'Rien de cherché pour l’instant', hint: 'Note tes dépouillements, tes visites d’archives (« ✓ Fait le … »), tes pistes d’enquête et tes battues : tout s’affichera ici, du plus récent au plus ancien.', action: {label: '＋ Nouveau dépouillement', attrs: 'data-rj-new-digest'}}); return; }
             if (!filtered.length) { box.innerHTML = A().emptyState({icon: '🔍', text: 'Rien ne correspond', hint: 'Enlève un filtre, ou cherche autrement (une cote, une commune, un nom).'}); return; }
             const view = st.view === 'cards' ? 'cards' : 'list';
-            box.innerHTML = UI().itemsHtml(view, filtered.slice(0, shown).map(r => itemOf(r, view)));
+            // 🗂 « Ranger par personne » (case de cet écran, non au départ : l'ordre des dates compte ; seulement si le réglage « Un cadre par personne » est mis)
+            const page = filtered.slice(0, shown);
+            box.innerHTML = UI().framesOn?.() && UI().framesPref('journal') ? UI().personCardsHtml(UI().groupByPerson(page, r => r.people?.[0]?.id).map(g => (
+                UI().personCardHtml({id: g.key, name: g.key ? g.items[0].people[0].title || '' : i18n('Sans personne'), count: A().plural(g.items.length, 'recherche'), body: UI().itemsHtml(view, g.items.map(r => itemOf(r, view)))}))).join(''))
+                : UI().itemsHtml(view, page.map(r => itemOf(r, view)));
             if (filtered.length > shown) { const more = UI().moreButton({remaining: filtered.length - shown, step: 60, feminine: true, onClick: () => { shown += 60; paint(); }}); box.appendChild(more); }
         }
         paint();

@@ -531,7 +531,7 @@ Le nom du modèle (les données restent : vide-les avant si tu veux un modèle v
 Le nom de la copie : ¦ Emri i kopjes: ¦ L-isem tal-kopja:
 {name} (copie) ¦ {name} (kopje) ¦ {name} (kopja)
 Les changements faits depuis le dernier enregistrement seront perdus. ¦ Ndryshimet e bëra që nga ruajtja e fundit do të humbasin. ¦ It-tibdiliet li saru mill-aħħar issejvjar se jintilfu.
-📋 Partir d’un modèle ¦ 📋 Nis nga një model ¦ 📋 Ibda minn mudell
+🧩 Partir d’un modèle ¦ 🧩 Nis nga një model ¦ 🧩 Ibda minn mudell
 Mes modèles ¦ Modelet e mia ¦ Il-mudelli tiegħi
 Pas encore de modèle à toi : dans un classeur, Fichier → « Enregistrer comme modèle… ». ¦ Ende asnjë model yti: në një libër pune, Skedari → «Ruaj si model…». ¦ Għad m’għandek l-ebda mudell tiegħek: f’workbook, Fajl → “Issejvja bħala mudell…”.
 séparateur « {sep} » ¦ ndarësi «{sep}» ¦ separatur “{sep}”
@@ -615,7 +615,7 @@ Sosa, génération, côté, âge ¦ Sosa, brezi, ana, mosha ¦ Sosa, ġenerazzjo
 objets, prix, total en livres ¦ sende, çmime, total në livres ¦ oġġetti, prezzijiet, total f’livres
 Registre matricule ¦ Regjistër ushtarak ¦ Reġistru militari
 classe, signalement, campagnes ¦ klasa, përshkrimi, fushatat ¦ klassi, deskrizzjoni, kampanji
-📋 Partir d’un modèle… ¦ 📋 Nis nga një model… ¦ 📋 Ibda minn mudell…
+🧩 Partir d’un modèle… ¦ 🧩 Nis nga një model… ¦ 🧩 Ibda minn mudell…
 ⤒ Importer un tableau… ¦ ⤒ Importo një tabelë… ¦ ⤒ Importa tabella…
 ⤓ Exporter… ¦ ⤓ Eksporto… ¦ ⤓ Esporta…
 🖨 Imprimer… ¦ 🖨 Printo… ¦ 🖨 Ipprintja…

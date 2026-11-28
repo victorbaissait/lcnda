@@ -1,0 +1,67 @@
+Données « 🧺 Vie de tous les jours » (assets/js/heritage-terre-quotidien.js)
+==========================================================================
+
+Ces fichiers sont produits par scripts/terre-quotidien/build-terre-quotidien.py (et curated.py pour les listes recopiées)
+à partir des sources ci-dessous, téléchargées le 24/11/2026. Aucun chiffre n'est ajouté à la main : les tableaux sont
+seulement réduits ; les deux petites listes recopiées (pièces, tarifs de la lettre) gardent pour chaque ligne la page lue
+et la phrase qui la justifie (« evidence »). L'app rappelle la source à chaque ligne affichée.
+
+
+1. tq-meteorites.json — chutes de météorites observées (« Fell »)
+------------------------------------------------------------------
+Source : The Meteoritical Society, Meteoritical Bulletin Database, publié par la NASA sous le nom « Meteorite Landings »
+sur le portail NASA Open Data — https://data.nasa.gov/dataset/meteorite-landings
+Fichier : https://data.nasa.gov/docs/legacy/meteorite_landings/Meteorite_Landings.csv
+Licence : le portail indique « License not specified », accès public (« accessLevel: public »), sans restriction écrite.
+Ce sont des faits (nom, année, position, masse) ; la source est citée à chaque ligne. Seules les chutes observées avec une
+année et une position sont gardées (1 096). La base donne l'année, pas le jour.
+
+2. tq-climat.json — température moyenne de chaque année
+--------------------------------------------------------
+a) Central England Temperature (HadCET), Met Office Hadley Centre — https://www.metoffice.gov.uk/hadobs/hadcet/
+   Fichier : data/meantemp_monthly_totals.txt (moyennes annuelles depuis 1659).
+   Licence : Open Government Licence v3.0 — « CET datasets are freely available for use under Open Government License.
+   However, please acknowledge the source » ; © Crown Copyright.
+   Références : Manley (Q.J.R. Meteorol. Soc., 1974) ; Parker, Legg & Folland (Int. J. Climatol., 1992) ;
+   Parker & Horton (Int. J. Climatol., 2005).
+b) Berkeley Earth, séries régionales (Regional/TAVG/<pays>-TAVG-Trend.txt) — https://berkeleyearth.org/data/
+   Pays : France (Europe), Belgique, Suisse, Luxembourg, Allemagne, Italie, Espagne, Pays-Bas (Europe), Autriche,
+   Portugal, Danemark (Europe), Royaume-Uni (Europe). L'app garde la moyenne des 12 mois (écart à 1951-1980).
+   Licence : Creative Commons Attribution - Pas d'utilisation commerciale 4.0 (CC BY-NC 4.0) —
+   « Attribution under CC BY-NC terms should be given to Berkeley Earth, including reference to www.berkeleyearth.org ».
+
+3. tq-glaciers.json — position du front des glaciers (Alpes, Pyrénées)
+----------------------------------------------------------------------
+Source : WGMS (2026) : Fluctuations of Glaciers (FoG) Database. World Glacier Monitoring Service (WGMS), Zurich,
+Switzerland. https://doi.org/10.5904/wgms-fog-2026-02-10 (fichiers glacier.csv et front_variation.csv).
+Conditions : « Open access under the requirement of correct citation » (citation ci-dessus).
+Traitement : la position du front par rapport au dernier relevé = somme des variations de longueur, séries recollées
+quand elles se touchent (à 200 jours près). Pays : FR, CH, IT, AT, DE, ES, SI, AD, LI.
+
+4. tq-arbres.json.gz — arbres remarquables  /  5. tq-sites.json.gz — sites préhistoriques et antiques
+------------------------------------------------------------------------------------------------------
+Source : Wikidata (requêtes SPARQL dans le script) — https://www.wikidata.org/
+Licence : CC0 1.0 (domaine public). Arbres : éléments « arbre » (Q10884 et sous-classes) avec une position, date P571.
+Sites : dolmens, menhirs, tumulus, grottes ornées, abris sous roche, oppidums, villas romaines, sites archéologiques…
+(France, Belgique, Suisse, Luxembourg et alentours). Les sites décrits sur Wikidata, pas tous les sites connus.
+
+6. tq-poche.json — pièces de monnaie (France)
+---------------------------------------------
+Textes : Wikipédia en français (CC BY-SA 4.0) — articles « Louis (monnaie) », « Écu (monnaie) », « Franc français »,
+« Napoléon (pièce de monnaie) », « Type Semeuse (monnaie) », « Type Lindauer », « Type Morlon »,
+« Pièce de 10 francs Hercule ». Années de frappe.
+Images : Wikimedia Commons, chaque fichier avec son auteur et sa licence (CC0, domaine public, CC BY 3.0, CC BY-SA 1.0 /
+3.0 / 4.0) ; seuls les noms de fichiers sont dans l'app, les images sont lues sur Commons à l'affichage.
+
+7. tq-timbre.json — tarif de la lettre simple pour la France
+-------------------------------------------------------------
+Wikipédia en français (CC BY-SA 4.0) : « Timbres de France 1849 », « … 1850 », « … 1854 », « … 1871 », « … 1900 »,
+« … 1917 », « … 1926 », « Marianne de Dulac », « Marianne de Gandon », « Évolution du prix du timbre en France »
+(tableau 1983-2026). Seules les périodes trouvées écrites sont gardées ; entre deux, l'app ne montre rien.
+
+8. tq-esperance.json — espérance de vie à divers âges
+-----------------------------------------------------
+Insee, « Espérance de vie à divers âges » — https://www.insee.fr/fr/statistiques/2416631
+(fichier demo-deces-esp-vie-age-2.xlsx, 1994-2025). Licence ouverte 2.0 (Etalab).
+Non livré : les tables historiques de l'Ined (Vallin et Meslé, depuis 1806) — le site de l'Ined était indisponible
+(erreur 503) au moment de la fabrication ; la Human Mortality Database demande un compte (non utilisée).

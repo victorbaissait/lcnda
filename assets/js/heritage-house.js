@@ -265,13 +265,13 @@
                 <details class="h-hs-menu h-hs-snapm" data-hs-snapmenu><summary class="ed-tog" title="Réglages de l’aimant : grille, coins, angles, précision et 💾 réglages enregistrés" aria-label="Réglages de l’aimant">▾</summary><div data-hs-snapbox></div></details>
                 <details class="h-hs-menu"><summary class="button small secondary">⤒ Importer</summary><div><button type="button" data-hs-cmd="importplan">📐 Un plan ancien, un cadastre, à calquer…</button><button type="button" data-hs-cmd="importimg">🖼️ Un objet en image (vue de dessus)…</button><button type="button" data-hs-cmd="import3d">🧊 Un objet 3D (OBJ, STL, glTF, GLB)…</button><button type="button" data-hs-cmd="importhouse">🏠 Une maison (fichier .json)…</button><button type="button" data-hs-cmd="importdxf">📐 Un plan DXF (AutoCAD, LibreCAD, architecte, notaire)…</button></div></details></span>
                 <span class="spacer"></span><span class="ui-status" data-ui-status></span>
-                ${ext.tbButton ? ext.tbButton('house') : ''}<button type="button" class="button small secondary" data-hs-cmd="export" title="Le plan (PNG, JPG, PDF, SVG, impression), la vue 3D, le fichier de la maison">⤓ Exporter</button><button type="button" class="button small" data-hs-cmd="save" data-shortcut="⌘S" title="Enregistrer">💾 Enregistrer</button>${ext.fullButton ? ext.fullButton('house') : ''}<button type="button" class="icon-button" data-hs-cmd="close" title="Fermer" aria-label="Fermer">×</button></header>
+                ${ext.tbButton ? ext.tbButton('house') : ''}<button type="button" class="button small secondary" data-hs-cmd="export" title="Le plan (PNG, JPG, PDF, SVG, impression), la vue 3D, le fichier de la maison">⤓ Exporter</button>${ext.sendTo ? `<button type="button" class="button small secondary" data-hs-cmd="sendto" title="${esc(i18n('Le plan ou la vue 3D dans un autre outil : montage, présentation, mise en page, dessin…'))}">📤 ${esc(i18n('Envoyer vers…'))}</button>` : ''}<button type="button" class="button small" data-hs-cmd="save" data-shortcut="⌘S" title="Enregistrer">💾 Enregistrer</button>${ext.fullButton ? ext.fullButton('house') : ''}<button type="button" class="icon-button" data-hs-cmd="close" title="Fermer" aria-label="Fermer">×</button></header>
             <div class="h-hs-main">
                 <nav class="h-hs-tools" data-tbg="hs-tools" data-tbg-label="${esc(i18n('Outils (colonne de gauche)'))}">${[['select', '➤', 'Choisir, déplacer (V)'], ['pan', '✋', 'Déplacer la vue, ou barre d’espace (H)'], ['room', '⬚', 'Pièce rectangulaire, murs compris (R) : glisser'], ['void', '▨', 'Vide, trémie, double hauteur (O) : glisser, sans murs'], ['wall', '▬', 'Mur (W) : un clic par coin, double-clic ou Entrée pour finir'], ['zone', '▱', 'Pièce de forme libre, sans murs (P) : un clic par coin'], ['door', '🚪', 'Porte (D) : clic sur un mur'], ['window', '🪟', 'Fenêtre (F) : clic sur un mur'], ['dim', '📏', 'Cote, mesure (M) : deux clics'], ['text', 'T', 'Texte (T)'], ['note', '🏷', 'Étiquette à flèche (E) : un clic sur le point, un clic où écrire']].map(([k, i, l]) => { const sc = ({select: 'V', pan: 'H', wall: 'W', zone: 'P', door: 'D', window: 'F', dim: 'M', text: 'T', note: 'E', room: 'R', void: 'O'})[k] || ''; return `<button type="button" data-hs-tool="${k}" title="${esc(i18n(sc ? l.replace(` (${sc})`, '') : l))}" data-shortcut="${sc}">${i}</button>`; }).join('')}</nav>
                 <section class="h-hs-stage" data-hs-stage tabindex="-1"><svg data-hs-svg><defs data-hs-defs></defs><g data-hs-world></g></svg><div class="h-hs-3d" data-hs-3d hidden></div><div class="h-hs-3dbar" data-h3bar data-tbg="hs-3d" data-tbg-label="${esc(i18n('Barre de la vue 3D'))}" hidden><label class="ui-toggle" data-tb="h3-all"><input type="checkbox" data-h3="all" checked><i></i>Tous les étages</label><label class="ui-toggle" data-tb="h3-roof"><input type="checkbox" data-h3="roof"><i></i>Toit</label><label class="checkbox-line" data-tb="h3-cut"><input type="checkbox" data-h3="cut"> Murs coupés (voir dedans)</label><label class="ui-toggle" data-tb="h3-dims"><input type="checkbox" data-h3="dims"><i></i>Cotes</label><label class="ui-toggle" data-tb="h3-epoch" title="Une autre époque de la maison en fantôme (celle du calque 🕰, sinon l’époque d’avant) : murs très transparents, arêtes en pointillés" hidden><input type="checkbox" data-h3="epoch"><i></i>🕰 Autre époque</label><button type="button" class="button small secondary" data-h3="measure" title="Deux clics sur la maison : la distance (et la hauteur entre les deux points)">📏 Mesurer</button><span class="segmented" data-tb="h3-views" data-tb-label="${esc(i18n('Vues dessus / face / côté'))}"><button type="button" data-h3="view" data-v="top" title="Vue de dessus">Dessus</button><button type="button" data-h3="view" data-v="front" title="Vue de face">Face</button><button type="button" data-h3="view" data-v="side" title="Vue de côté">Côté</button></span><button type="button" class="button small secondary" data-h3="sun" title="Le soleil selon l’heure, la date et le lieu ; la nuit, les lampes">☀️ Lumière</button><button type="button" class="button small secondary" data-h3="walk" title="Visiter la maison à hauteur d’yeux">🚶 Visiter</button><button type="button" class="button small secondary" data-h3="home">⌂ Vue d’ensemble</button></div><div class="h-hs-verbadge" data-hs-verbadge hidden></div><div class="h-hs-eplegend" data-hs-eplegend hidden></div><div class="h-hs-pbar" data-hs-pbar><span data-hs-xy>X — · Y —</span><span data-hs-seg></span><input data-hs-num autocomplete="off" spellcheck="false" hidden></div></section>
                 <aside class="h-hs-side"><nav class="segmented h-hs-tabs" data-tbg="hs-tabs" data-tbg-label="${esc(i18n('Onglets du panneau de droite'))}">${[['props', 'ⓘ', 'Propriétés', 'Propriétés de l’élément choisi'], ['lib', '🛋', 'Mobilier', 'Mobilier : meubles, portes, fenêtres à poser'], ['floor', '▤', 'Étage', 'L’étage affiché : niveaux, hauteur, sol'], ['house', '🏠', 'Maison', 'La maison : nom, époque, réglages généraux']].map(([k, i, l, t]) => `<button type="button" data-hs-tab="${k}" title="${esc(i18n(t))}" data-tb-label="${i} ${esc(i18n(l))}"><span class="h-hs-ti" aria-hidden="true">${i}</span><span class="h-hs-tl">${esc(i18n(l))}</span></button>`).join('')}</nav><div class="h-hs-pane" data-hs-pane></div></aside>
             </div></div>`;
-        document.body.appendChild(dlg); ext.fullInit?.(dlg, 'house', true); dlg.showModal(); // plein écran par défaut ; ⛶ pour passer en fenêtre (retenu)
+        document.body.appendChild(dlg); if (ctx.headless) dlg.setAttribute('aria-hidden', 'true'); else { ext.fullInit?.(dlg, 'house', true); dlg.showModal(); } // plein écran par défaut ; ⛶ pour passer en fenêtre (retenu) ; headless : caché, pour dessiner les plans (🎞 Studio)
         const $ = s => dlg.querySelector(s), svg = $('[data-hs-svg]'), world = $('[data-hs-world]'), stage = $('[data-hs-stage]'), pane = $('[data-hs-pane]');
         dlg.addEventListener('pointerdown', e => { if (e.target.closest?.('.ui-pop, #toast-region')) return; dlg.querySelectorAll('details.h-hs-menu[open]').forEach(d => { if (!d.contains(e.target)) d.removeAttribute('open'); }); }); // un menu ouvert se ferme quand on clique ailleurs
         // E1 : « ✓ Enregistré » (ou « • modifié ») toujours au même endroit, sans toast ; la dernière action en petit à côté
@@ -507,7 +507,7 @@
             if (tab === 'lib' && ext.houseLibUI) { pane.innerHTML = ext.houseLibUI.pane({cat: libCat, q: libQ, mine, sym2d, setCat: c => { libCat = c; }}); return; } // catégories rangées, objets créés, bibliothèque en ligne (heritage-house-lib.js)
             if (tab === 'lib') {
                 const cats = [...new Set(LIB.map(l => l[2]))], q = libQ.toLowerCase();
-                const list = q ? LIB.filter(l => l[1].toLowerCase().includes(q) || i18n(l[1]).toLowerCase().includes(q)) : LIB.filter(l => l[2] === libCat);
+                const list = q ? LIB.filter(l => (window.LCNDA_UI?.listMatch?.text || ((q, ...h) => h.join(' ').toLowerCase().includes(String(q).toLowerCase())))(q, l[1]) || (window.LCNDA_UI?.listMatch?.text || ((q, ...h) => h.join(' ').toLowerCase().includes(String(q).toLowerCase())))(q, i18n(l[1]))) : LIB.filter(l => l[2] === libCat);
                 pane.innerHTML = `<input type="search" data-hs-libq placeholder="Chercher : lit, poêle, rouet…" value="${esc(libQ)}"><div class="h-hs-cats">${[...cats, 'Mes objets'].map(c => `<button type="button" class="${c === libCat && !q ? 'is-on' : ''}" data-hs-cat="${esc(c)}">${esc(c)}</button>`).join('')}</div>
                     ${libCat === 'Mes objets' && !q ? `<div class="h-hs-lib">${mine.map(m => `<button type="button" data-hs-mine="${m.id}" title="${esc(m.name)} (${m.ext.toUpperCase()})">${m.thumb ? `<img src="${esc(m.thumb)}" alt="">` : '<span>🧊</span>'}<small>${esc(m.name)}</small></button>`).join('') || A().emptyState({icon: '🧊', text: 'Aucun objet importé pour l’instant', hint: '« ⤒ Importer » (en haut) un fichier 3D (OBJ, STL, glTF, GLB) ou une image.'})}</div>`
                     : `<div class="h-hs-lib">${list.map(l => `<button type="button" data-hs-lib="${l[0]}" title="${esc(i18n(l[1]))} — ${l[3]} × ${l[4]} cm"><svg viewBox="${-l[3] / 2 - 6} ${-l[4] / 2 - 6} ${l[3] + 12} ${l[4] + 12}" width="46" height="40">${sym2d({kind: l[0], w: l[3], d: l[4]})}</svg><small>${esc(l[1])}</small></button>`).join('')}</div>`}
@@ -665,7 +665,8 @@
             const box = $('[data-hs-vers]'); if (!box) return; const l = verList(), cur = verCur(), i = l.indexOf(cur);
             box.innerHTML = !l.length ? '<button type="button" class="button small secondary" data-hs-cmd="vernew" title="Des versions de la maison selon les années ou des dates : la voir évoluer, rattacher une époque à un recensement">🕰 Époques</button>'
                 : `<button type="button" class="h-hs-vstep" data-hs-cmd="verprev" title="L’époque d’avant" ${i <= 0 ? 'disabled' : ''}>‹</button><select data-hs-ver title="L’époque montrée (plan 2D et vue 3D)" aria-label="Époque">${l.map(v => `<option value="${esc(v.id)}" ${v === cur ? 'selected' : ''}>🕰 ${esc(verName(v))}${verCensus(v).length ? ' · 📋' : ''}</option>`).join('')}<option value="__new">＋ Nouvelle époque (copie de celle-ci)…</option><option value="__manage">⋯ Gérer les époques…</option></select><button type="button" class="h-hs-vstep" data-hs-cmd="vernext" title="L’époque d’après" ${i >= l.length - 1 ? 'disabled' : ''}>›</button>`
-                + `<button type="button" class="h-hs-vstep${playT ? ' is-on' : ''}" data-hs-cmd="verplay" title="${playT ? 'Arrêter' : '▶ Voir évoluer : les époques l’une après l’autre'}">${playT ? '⏹' : '▶'}</button>`;
+                + `<button type="button" class="h-hs-vstep${playT ? ' is-on' : ''}" data-hs-cmd="verplay" title="${playT ? 'Arrêter' : '▶ Voir évoluer : les époques l’une après l’autre'}">${playT ? '⏹' : '▶'}</button>`
+                + (l.length > 1 && ext.openAnimStudio ? `<button type="button" class="h-hs-vstep" data-hs-cmd="veranim" title="${esc(i18n('🎞 Animer les époques dans le Studio'))}" aria-label="${esc(i18n('🎞 Animer les époques dans le Studio'))}">🎞</button>` : '');
             badge(!!playT);
         }
         function verDialog(v = null) {
@@ -1322,6 +1323,18 @@
             vernew: () => { stopPlay(); verDialog(); }, verplay: play, vers: () => { tab = 'house'; paintSide(); pane.querySelector('[data-hs-versec]')?.scrollIntoView({block: 'start'}); },
             verprev: () => { stopPlay(); const l = verList(), i = l.indexOf(verCur()); if (i > 0) switchVer(l[i - 1].id); }, vernext: () => { stopPlay(); const l = verList(), i = l.indexOf(verCur()); if (i >= 0 && i < l.length - 1) switchVer(l[i + 1].id); },
             addcensus: addCensus, nocolor2: () => { const it = F().items.find(q => q.id === sel?.id); if (!it) return; delete it.color2; commit('Sans deuxième couleur'); },
+            /* 📤 le plan (image ou dessin) ou la vue 3D vers un autre outil (heritage-envoyer.js) */
+            sendto: () => { const b = dlg.querySelector('[data-hs-cmd="sendto"]'), U = window.LCNDA_UI, title = `${name} — ${F().name}${verCur() ? ` · ${verName(verCur())}` : ''}`;
+                const items = [{icon: '🖼', label: i18n('Le plan (image)'), run: async () => { const sv = planSvg(); if (!sv) return toast(i18n('Le plan de cet étage est vide.'), 'error'); ext.sendTo('image', {blob: await svgToBlob(sv, 2, 'image/png')}, {title, anchor: b}); }},
+                    {icon: '🧊', label: i18n('La vue 3D (image)'), run: async () => { if (!view3d) { await toggle3d(true); await sleep(600); } const bl = await view3d?.shot(); if (!bl) return toast('Vue 3D indisponible.', 'error'); ext.sendTo('image', {blob: bl}, {title: `${title} (3D)`, anchor: b}); }},
+                    {icon: '✒️', label: i18n('Le plan en dessin (vectoriel, mise en page…)'), run: () => { const sv = planSvg(); if (!sv) return toast(i18n('Le plan de cet étage est vide.'), 'error'); ext.sendTo('svg', {svg: sv, name: title}, {title, anchor: b}); }}];
+                if ((H.versions || []).length > 1 && ext.openAnimStudio) items.push('-', {icon: '🎞', label: i18n('Animer les époques dans le Studio'), run: () => CMD.veranim()});
+                if (U?.menuAt && b) U.menuAt(b, items, {title: i18n('Envoyer vers…')}); else items[0].run(); },
+            /* 🎞 les époques en film : la maison enregistrée, puis une scène « 🏠 Maison par époques » dans le Studio d'animation */
+            veranim: async () => { stopPlay(); if (!ext.openAnimStudio) return toast(i18n('Le Studio d’animation n’est pas chargé.'), 'error');
+                if ((H.versions || []).length < 2) return toast('Crée au moins deux époques (＋ Nouvelle époque) pour voir la maison évoluer.', 'error');
+                if (!id || dirty) await save(); if (!id || dirty) return; // pas enregistrée : le message d'erreur est déjà là
+                ext.openAnimStudio({id: 0, house: {id, name, level: F()?.level ?? 0}}); },
             shot3d: async () => { if (!view3d) { await toggle3d(true); await new Promise(r => setTimeout(r, 400)); } const b = await view3d?.shot(); if (b) download(b, fname('png')); },
         };
         /* ─── événements ─── */
@@ -1446,7 +1459,7 @@
             const t = {v: 'select', h: 'pan', w: 'wall', p: 'zone', d: 'door', f: 'window', m: 'dim', t: 'text', e: 'note', r: 'room', o: 'void'}[k]; if (t && !mod) setTool(t);
         };
         const onKeyUp = e => { if (e.key === ' ') { space = false; stage.dataset.tool = tool; } };
-        document.addEventListener('keydown', onKey, true); document.addEventListener('keyup', onKeyUp, true);
+        if (!ctx.headless) { document.addEventListener('keydown', onKey, true); document.addEventListener('keyup', onKeyUp, true); }
         dlg.addEventListener('cancel', e => { e.preventDefault(); if (view3d?.walking?.()) { if (!view3d.justUnlocked()) view3d.stopWalk(); return; } const ae = document.activeElement; if (ae && dlg.contains(ae) && ae.matches('input, textarea, select')) { ae.blur(); stage.focus({preventScroll: true}); return; } if (draft) { draft = null; render(); return; } if (sel) { sel = null; render(); return; } close(); }); // Échap : quitter le champ, le tracé, la sélection, puis fermer
         new ResizeObserver(() => { if (dlg.isConnected && !view3d) render(); }).observe(stage);
         $('.h-hs-snapm').addEventListener('toggle', e => { if (e.target.open) paintSnap(); }); paintSnap(); ext.tbApply?.(dlg, 'house'); ext.editorKeysAttach?.(dlg, 'house'); // boutons rangés à sa façon (⚙️ Personnaliser), raccourcis à soi
@@ -1460,8 +1473,8 @@
             findItem: iid => { for (const fl of H.floors) { const it = fl.items.find(q => q.id === iid); if (it) return it; } return null; }, select: iid => { sel = {type: 'item', id: iid}; tab = 'props'; }});
         if (H.site?.length) refreshSite(); // 🏘 les autres bâtiments du terrain
         if (ctx.ver) switchVer(String(ctx.ver), true); // ouverte depuis un recensement : à l'époque qui lui est rattachée
-        setTool(H.floors.some(f => f.walls.length) ? 'select' : 'room'); badge(); hist = [snap0()]; hpos = 0; fit(); render(); paintCompass(); syncSt(); stage.focus({preventScroll: true});
-        return {get house() { return H; }, get view3d() { return view3d; }, get dirty() { return dirty; }, setTool, commit, render, toggle3d, save, cmd: k => CMD[k]?.(), switchVer, verList, openMemView, select: (type, sid) => { sel = {type, id: sid}; tab = 'props'; render(); }, setTab: t => { tab = t; paintSide(); }};
+        setTool(H.floors.some(f => f.walls.length) ? 'select' : 'room'); badge(); hist = [snap0()]; hpos = 0; fit(); render(); paintCompass(); syncSt(); if (!ctx.headless) stage.focus({preventScroll: true});
+        return {get house() { return H; }, planSvg, verName, destroy: () => { dlg.remove(); }, get view3d() { return view3d; }, get dirty() { return dirty; }, setTool, commit, render, toggle3d, save, cmd: k => CMD[k]?.(), switchVer, verList, openMemView, select: (type, sid) => { sel = {type, id: sid}; tab = 'props'; render(); }, setTab: t => { tab = t; paintSide(); }};
     }
 
     /* ═════════ La liste « Maisons de famille » ═════════ */
@@ -1558,10 +1571,22 @@
 
     ext.lists = ext.lists || {}; ext.lists.houses = listPage;
     ext.openHouse = open;
+    /** 🎞 les plans d'une maison enregistrée, une par époque (de la plus ancienne à la plus récente), pour le Studio d'animation :
+     *  [{id, label, date, svg}] ; sans époques : le plan dessiné. level : l'étage (0 : le rez-de-chaussée). Dessiné dans l'éditeur, caché. */
+    ext.houseEpochPlans = async (hid, {level = 0} = {}) => {
+        const ed = await open({id: Number(hid), headless: true}); if (!ed) throw new Error(i18n('Maison introuvable'));
+        try {
+            const pick = () => { const fl = ed.house.floors; return fl.find(f => f.level === Number(level)) || fl.find(f => f.level === 0) || fl[0]; };
+            const l = ed.verList(), out = [];
+            if (!l.length) { const sv = ed.planSvg(pick()); return sv ? [{id: '', label: '', date: '', svg: sv}] : []; }
+            for (const v of l) { ed.switchVer(v.id, true); const sv = ed.planSvg(pick()); if (sv) out.push({id: v.id, label: String(v.label || ''), date: String(v.date || ''), svg: sv}); }
+            return out;
+        } finally { ed.destroy(); }
+    };
     ext.houseInternals = {sym2d, area, LIB};
     ext.editToolsExtra = ext.editToolsExtra || [];
     ext.editToolsExtra.push({key: 'house', icon: '🏠', label: 'Maison (plan et 3D)', what: 'maison',
         load: async () => ((await api('houses')).items || []).map(h => ({id: h.id, name: h.name, date: h.updated_at, thumb: h.thumb ? `<img src="${esc(h.thumb)}" alt="">` : '<span class="h-et-ico">🏠</span>', info: [h.place, h.period, nW(h.rooms, '{n} pièce', '{n} pièces')].filter(Boolean).join(' · ')})),
         open: (id, again) => open({id, onSaved: again, onClose: again}), create: again => open({onSaved: again, onClose: again}),
-        rename: (id, name) => post('rename_house', {id, name}), remove: id => post('delete_house', {id}), createLabel: '＋ Nouvelle maison'});
+        rename: (id, name) => post('rename_house', {id, name}), remove: id => (ext.projectDelUndo ? ext.projectDelUndo('delete_house')(id) : post('delete_house', {id})), undo: true, createLabel: '＋ Nouvelle maison'});
 })();

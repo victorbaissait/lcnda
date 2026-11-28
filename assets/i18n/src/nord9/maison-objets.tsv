@@ -1,0 +1,710 @@
+fr ¦ lb
+# 🏠 Plan de maison : les objets en plus, les styles, le choix « 🎨 Style » (heritage-house-objets.js, heritage-house-lib.js)
+Meubles de style ¦ Stilmiwwelen
+🎨 Tous les styles ¦ 🎨 All d’Stiler
+Sans les meubles de style ¦ Ouni Stilmiwwelen
+D’ailleurs ¦ Vun anerwäerts
+Modernes ¦ Modern
+Rien dans le style « {s} » ici : choisis « 🎨 Tous les styles ». ¦ Hei ass näischt am Stil „{s}“: wiel „🎨 All d’Stiler“.
+Louis XIII ¦ Louis XIII
+Louis XIV ¦ Louis XIV
+Régence ¦ Régence
+Louis XV ¦ Louis XV
+Louis XVI ¦ Louis XVI
+Directoire ¦ Directoire
+Empire ¦ Empire
+Restauration ¦ Restauratioun
+Charles X ¦ Charles X
+Louis-Philippe ¦ Louis-Philippe
+Napoléon III ¦ Napoléon III
+Art nouveau ¦ Art nouveau
+Art déco ¦ Art déco
+Henri II ¦ Henri II
+Renaissance ¦ Renaissance
+Biedermeier ¦ Biedermeier
+victorien ¦ viktorianesch
+Chippendale ¦ Chippendale
+Queen Anne ¦ Queen Anne
+gustavien ¦ gustavianesch
+shaker ¦ Shaker
+colonial ¦ kolonial
+marocain ¦ marokkanesch
+japonais ¦ japanesch
+chinois laqué ¦ chinesesch lackéiert
+Thonet ¦ Thonet
+vénitien ¦ venezianesch
+normand ¦ normannesch
+breton ¦ bretonesch
+basque ¦ baskesch
+alsacien ¦ elsässesch
+savoyard ¦ savoyardesch
+auvergnat ¦ aus der Auvergne
+bressan ¦ aus der Bresse
+lorrain ¦ lothringesch
+landais ¦ aus de Landes
+vendéen ¦ aus der Vendée
+limousin ¦ aus dem Limousin
+bourguignon ¦ burgundesch
+catalan ¦ katalanesch
+corse ¦ korsesch
+champenois ¦ aus der Champagne
+flamand ¦ flämesch
+franc-comtois ¦ aus der Franche-Comté
+béarnais ¦ aus dem Béarn
+dauphinois ¦ aus der Dauphiné
+picard ¦ picardesch
+gascon ¦ gascognesch
+années 1930 ¦ 1930er Joren
+années 1950 ¦ 1950er Joren
+années 1960 ¦ 1960er Joren
+années 1970 ¦ 1970er Joren
+années 1980 ¦ 1980er Joren
+scandinave ¦ skandinavesch
+industriel ¦ industriell
+contemporain ¦ zäitgenëssesch
+laqué blanc ¦ wäiss lackéiert
+en pin ¦ aus Dännenholz
+en chêne clair ¦ aus hellem Eechen
+en merisier ¦ aus Kiischtenholz
+en noyer ¦ aus Nossbam
+en acajou ¦ aus Mahagoni
+en rotin ¦ aus Rattan
+en bambou ¦ aus Bambus
+en métal ¦ aus Metall
+patiné (shabby chic) ¦ patinéiert (Shabby Chic)
+bohème ¦ boho
+en teck ¦ aus Teak
+Chiffonnier ¦ Héich Kommod
+Table de salle à manger ¦ Iesszëmmerdësch
+Pendule ¦ Kamäinsauer
+Bonnetière ¦ Klenge Schaf (Bonnetière)
+Desserte ¦ Serviceswon
+Buffet de cuisine ¦ Kichebuffet
+Table de toilette ¦ Wäschdësch
+Horloge de parquet ¦ Stänneauer
+Pommier ¦ Äppelbam
+Poirier ¦ Bierebam
+Cerisier ¦ Kiischtebam
+Prunier ¦ Promebam
+Pêcher ¦ Piischtebam
+Abricotier ¦ Aprikosebam
+Cognassier ¦ Quittebam
+Châtaignier ¦ Kascheschtebam
+Figuier ¦ Figebam
+Olivier ¦ Olivebam
+Citronnier en bac ¦ Zitrounebam am Bac
+Oranger en bac ¦ Orangebam am Bac
+Noisetier ¦ Hieselnossstrauch
+Mûrier ¦ Maulbierbam
+Tilleul ¦ Lann
+Platane ¦ Platan
+Marronnier ¦ Rosskascheschtebam
+Hêtre ¦ Bich
+Frêne ¦ Äsch
+Saule pleureur ¦ Trauerweid
+Peuplier ¦ Pappel
+Érable ¦ Ahorn
+Magnolia ¦ Magnolie
+Lilas ¦ Fliedder
+Cerisier du Japon ¦ Japanesche Kiischtebam
+Orme ¦ Ulm
+Acacia ¦ Akazie
+Charme ¦ Hagebich
+Sureau ¦ Hollënner
+Tilleul de la Liberté ¦ Fräiheetslann
+Sapin ¦ Dänn
+Épicéa ¦ Fiicht
+Pin parasol ¦ Pinie
+Pin sylvestre ¦ Bësch-Kiefer
+Cyprès ¦ Zypress
+If ¦ Eif
+Cèdre ¦ Zeder
+Thuya ¦ Thuja
+Rosier ¦ Rousestack
+Rosier grimpant ¦ Klammrous
+Hortensia ¦ Hortensie
+Lavande ¦ Lavendel
+Romarin ¦ Rosmarin
+Thym ¦ Thymian
+Buis taillé en boule ¦ Buschbaum als Kugel geschnidden
+Forsythia ¦ Forsythie
+Laurier-sauce ¦ Lorbeer
+Laurier-rose ¦ Oleander
+Buddleia ¦ Päiperleksstrauch
+Camélia ¦ Kamelie
+Rhododendron ¦ Rhododendron
+Azalée ¦ Azalee
+Houx ¦ Stiechpalm
+Cassissier ¦ Schwaarz Kréckelchersstrauch
+Groseillier ¦ Kréckelchersstrauch
+Framboisier ¦ Himbierstrauch
+Pied de vigne ¦ Wäistack
+Bambou ¦ Bambus
+Bananier ¦ Bananebam
+Palmier ¦ Palm
+Herbes de la pampa ¦ Pampasgras
+Graminées ¦ Ziergräser
+Fuchsia ¦ Fuchsie
+Glycine ¦ Glyzinie
+Lierre ¦ Wantergréng
+Fougère ¦ Farn
+Massif de géraniums ¦ Geraniebeet
+Massif de tournesols ¦ Sonneblummebeet
+Massif de tulipes ¦ Tulpebeet
+Massif de jonquilles ¦ Narzissebeet
+Massif d’iris ¦ Irisbeet
+Massif de dahlias ¦ Dahliebeet
+Massif de soucis ¦ Ringelblummebeet
+Massif de pivoines ¦ Pinksrousebeet
+Massif de marguerites ¦ Margréitebeet
+Carré de fraisiers ¦ Äerdbierbeet
+Rang de pommes de terre ¦ Gromperereih
+Rang de salades ¦ Zalotereih
+Rang de tomates ¦ Tomatereih
+Rang de carottes ¦ Muerereih
+Rang de poireaux ¦ Poreereih
+Rang de haricots à rames ¦ Stangebounereih
+Rang de choux ¦ Kabesreih
+Planche de courges ¦ Kürbisbeet
+Planche d’oignons ¦ Ziwwelbeet
+Carré d’aromatiques ¦ Kraiderbeet
+Pelouse ¦ Rasen
+Prairie fleurie ¦ Blummewiss
+Pot de géraniums ¦ Geraniendëppen
+Jardinière de fleurs ¦ Blummekëscht
+Agapanthe en pot ¦ Agapanthus am Dëppen
+Buis en pot ¦ Buschbaum am Dëppen
+Pot de basilic ¦ Basilikumdëppen
+Bac à fleurs en zinc ¦ Blummebac aus Zénk
+Pot en terre d’Anduze ¦ Terrakotta-Dëppen aus Anduze
+Grande jarre provençale ¦ Grousse provenzaleschen Kruch
+Yucca ¦ Yucca
+Plante grasse (aloe) ¦ Sukkulent (Aloe)
+Cactus colonne ¦ Säulekaktus
+Kentia ¦ Kentiapalm
+Sansevieria ¦ Sansevieria
+Pothos suspendu ¦ Hängende Pothos
+Oiseau de paradis (strelitzia) ¦ Paradäisvull (Strelitzie)
+Bonsaï sur sellette ¦ Bonsai op engem Socle
+Poinsettia ¦ Chrëschtstär
+Plante aromatique sur rebord ¦ Kraider op der Fënsterbänk
+Palmier d’intérieur ¦ Zëmmerpalm
+Banc de jardin en bois et fonte ¦ Gaardebänk aus Holz a Goss
+Banc de jardin en bois ¦ Gaardebänk aus Holz
+Banc en pierre sculpté ¦ Geschnëtzte Steebänk
+Table de bistrot en fer ¦ Bistrosdësch aus Eisen
+Table de jardin ronde en résine ¦ Ronnen Gaardendësch aus Plastik
+Table de jardin en teck ¦ Gaardendësch aus Teak
+Table de pique-nique ¦ Picknickdësch
+Chaise longue ¦ Liegestull
+Transat de plage rayé ¦ Gesträifte Strandstull
+Bain de soleil en résine ¦ Sonneliege aus Plastik
+Portique de jeux ¦ Spillgerüst mat Schaukelen
+Grand toboggan ¦ Grousse Rutschbunn
+Bac à sable couvert ¦ Ofgedeckte Sandkëscht
+Petit trampoline ¦ Klengen Trampolin
+Hamac sur pied ¦ Hängematt mat Gestell
+Tonnelle de jardin ¦ Gaardelaf
+Pergola en bois ¦ Holzpergola
+Pergola bioclimatique ¦ Bioklimatesch Pergola
+Parasol déporté ¦ Ampelschiermer
+Parasol rouge de terrasse ¦ Rouden Terrassenschiermer
+Fontaine en pierre ¦ Steebrunnen
+Fontaine murale ¦ Wandbrunnen
+Bassin rond ¦ Ronnen Weier
+Bassin aux nénuphars ¦ Weier mat Séirousen
+Piscine rectangulaire ¦ Rechteckege Schwämm
+Petite piscine ¦ Klenge Schwämm
+Piscine hors-sol ronde ¦ Ronnen Opstellpool
+Spa d’extérieur ¦ Whirlpool dobaussen
+Barbecue au charbon ¦ Holzkuelegrill
+Plancha sur chariot ¦ Plancha um Won
+Four à pizza ¦ Pizzaueween
+Brasero en acier ¦ Feierschuel aus Stol
+Composteur en bois ¦ Komposter aus Holz
+Potager surélevé ¦ Héichbeet
+Serre de jardin ¦ Gewächshaus
+Petite serre adossée ¦ Klengt Ulehngewächshaus
+Mangeoire à oiseaux ¦ Vugelfudderhaischen
+Cadran solaire sur colonne ¦ Sonnenauer op enger Säul
+Enrouleur de tuyau ¦ Schlauchtrommel
+Lanterne de jardin ¦ Gaardelanteren
+Mât de drapeau ¦ Fändelsmast
+Clôture en bois ¦ Holzzonk
+Grillage rigide ¦ Stabmattenzonk
+Barrière blanche ¦ Wäissen Zonk
+Haie de lauriers ¦ Lorbeerheck
+Haie de charmille ¦ Hagebichenheck
+Muret en pierres sèches ¦ Dréchemauer
+Portail en fer forgé ¦ Schmeedeisenpaart
+Portail en bois ¦ Holzpaart
+Portillon ¦ Gaardepäertchen
+Abri à bûches ¦ Holzschapp
+Éolienne de pompage ¦ Wandrad fir Waasser ze pompelen
+Puits couvert ¦ Iwwerdaachte Pëtz
+Abreuvoir en pierre ¦ Stengen Dränk
+Abri de jardin en bois ¦ Gaardenhaischen aus Holz
+Abri de jardin en métal ¦ Gaardenhaischen aus Metall
+Cabane dans les arbres ¦ Bamhaus
+Carport ¦ Carport
+Kiosque de jardin ¦ Gaardepavillon
+Cabane de jardin pour enfants ¦ Spillhaischen fir Kanner
+Allée en gravier ¦ Kiesswee
+Terrasse dallée ¦ Plättercher-Terrass
+Terrasse en bois ¦ Holzterrass
+Bac à compost ouvert ¦ Oppene Kompostbac
+Jardin japonais ¦ Japanesche Gaart
+Rocaille ¦ Steegaart
+Vasque de jardin ¦ Gaardeschuel
+Statue de jardin ¦ Gaardestatu
+Lion en pierre ¦ Steelëiw
+Boule décorative ¦ Dekokugel
+Nichoir à mésanges ¦ Nistkëscht fir Meesen
+Hôtel à insectes ¦ Insektenhotel
+Boîte à livres ¦ Bicherkëscht
+Ruche kenyane ¦ Kenianesche Beiestack
+Pompe d’arrosage ¦ Gaardepompel
+Arroseur oscillant ¦ Schwenkreener
+Arrosoir en zinc ¦ Netzkan aus Zénk
+Tondeuse hélicoïdale ¦ Spindelméiert
+Motoculteur ¦ Motorhack
+Débroussailleuse ¦ Motorsens
+Souffleur à feuilles ¦ Lafbléiser
+Réverbère ancien ¦ Al Stroosseluucht
+Enseigne de commerce ¦ Geschäftsschëld
+Vache normande ¦ Normannesch Kou
+Vache limousine ¦ Limousin-Kou
+Vache charolaise ¦ Charolais-Kou
+Vache bretonne pie noir ¦ Schwaarzbonte bretonesch Kou
+Vache montbéliarde ¦ Montbéliarde-Kou
+Veau ¦ Kallef
+Bœuf de trait ¦ Zuchochs
+Cheval de trait (percheron) ¦ Zuchpäerd (Percheron)
+Cheval de trait breton ¦ Bretonescht Zuchpäerd
+Cheval de selle ¦ Reitpäerd
+Poney ¦ Pony
+Mulet ¦ Maulesel
+Poulain ¦ Fuel
+Brebis ¦ Schof
+Agneau ¦ Lämmchen
+Bélier ¦ Widder
+Chevreau ¦ Zickel
+Truie ¦ Sau
+Porcelet ¦ Ferkel
+Coq ¦ Hunn
+Poule blanche ¦ Wäiss Hong
+Poussin ¦ Kiken
+Canard ¦ Int
+Dindon ¦ Kalkun
+Pintade ¦ Perlhong
+Pigeon ¦ Dauf
+Lapin ¦ Kanéngchen
+Chien de berger ¦ Hiertenhond
+Grand chien ¦ Groussen Hond
+Petit chien ¦ Klengen Hond
+Chat roux ¦ Roude Kaz
+Chat noir ¦ Schwaarz Kaz
+Chat tigré ¦ Getigert Kaz
+Chat endormi en boule ¦ Zesummegerullt schlofend Kaz
+Lama ¦ Lama
+Cerf ¦ Hirsch
+Sanglier ¦ Wëllschwäin
+Renard ¦ Fuuss
+Tortue ¦ Schildkröt
+Héron ¦ Reier
+Cygne ¦ Schwan
+Cage à oiseaux en osier ¦ Vullekeeg aus Wëllen
+Cage à canaris ¦ Kanarievullkeeg
+Poulailler en bois ¦ Hingerstall aus Holz
+Niche en bois ¦ Hondshaus aus Holz
+Abri pour moutons ¦ Schofsstall
+Box à cheval ¦ Päerdsbox
+Ruche Dadant ¦ Dadant-Beiestack
+Ruche Langstroth ¦ Langstroth-Beiestack
+Ruche en paille tressée ¦ Beiekuerf aus geflochtenem Stréi
+Stalle de vache ¦ Kéistand
+Box de veau ¦ Kallefsbox
+Mangeoire à foin ¦ Hairëf
+Tonneaux de cidre ¦ Viezfässer
+Cuve à lait ¦ Mëllechtank
+Barrique de vin ¦ Wäifass
+Brabant ¦ Brabant-Plou
+Herse en bois ¦ Holzeeg
+Charrette à foin ¦ Hauwon
+Char à bancs ¦ Bänkewon
+Chariot à ridelles ¦ Leederwon
+Tracteur rouge des années 1950 ¦ Rouden Trakter aus den 1950er Joren
+Tracteur vert ¦ Gréngen Trakter
+Petit tracteur gris (Ferguson) ¦ Klengen groen Trakter (Ferguson)
+Faneuse ¦ Hauwender
+Moissonneuse-lieuse ¦ Mähbinder
+Batteuse ¦ Dräschmaschinn
+Andaineur ¦ Schwader
+Alambic de bouilleur de cru ¦ Brennkessel vum Hausbrenner
+Seau à traire ¦ Mellech-Eemer
+Chèvre angora ¦ Angoragees
+Cochon noir gascon ¦ Schwaarzt gascognescht Schwäin
+Vache salers ¦ Salers-Kou
+Vache aubrac ¦ Aubrac-Kou
+Vache jersiaise ¦ Jersey-Kou
+Mouton noir ¦ Schwaarzt Schof
+Mouton mérinos ¦ Merinoschof
+Poule noire ¦ Schwaarzt Hong
+Poule rousse ¦ Rout Hong
+Poule naine ¦ Zwerghong
+Paon blanc ¦ Wäisse Pau
+Paon ¦ Pau
+Lapin blanc ¦ Wäisst Kanéngchen
+Cochon d’Inde ¦ Mierschwéngchen
+Hamster ¦ Hamster
+Perroquet ¦ Papagei
+Canari ¦ Kanarievull
+Cheval blanc ¦ Wäisst Päerd
+Cheval noir ¦ Schwaarzt Päerd
+Chien terre-neuve ¦ Neifundlänner Hond
+Chien labrador ¦ Labrador
+Chien beauceron ¦ Beauceron
+Chien teckel ¦ Dackel
+Volière ¦ Voliere
+Cage à lapin d’intérieur ¦ Kanéngchenkeeg fir dobannen
+Panier pour chien ¦ Hondskuerf
+Corbeille pour chat ¦ Kazekuerf
+Arbre à chat ¦ Kratzbam
+Gamelles ¦ Frësskummen
+Abreuvoir automatique ¦ Automatesch Dränk
+Tonneau de pluie en chêne ¦ Reewaasserfass aus Eechen
+Cuve à vendange ¦ Drauwebottich
+Pot à lait en fer-blanc ¦ Mëllechkan aus Blech
+Charrette à bras ¦ Handkar
+Diligence ¦ Postkutsch
+Roulotte ¦ Zigeinerwon
+Râteau-faneur à cheval ¦ Hairech fir Päerd
+Botteleuse ¦ Ballepress
+Semoir ¦ Seemaschinn
+Pulvérisateur ¦ Sprëtzmaschinn
+Bouilloire électrique ¦ Waasserkocher
+Machine à expresso ¦ Espressomaschinn
+Machine à café à levier ¦ Hiewel-Kaffismaschinn
+Cafetière à dosettes ¦ Kapselkaffismaschinn
+Presse-agrumes ¦ Zitrussepress
+Four à micro-ondes encastrable ¦ Abau-Mikrowell
+Corbeille de fruits ¦ Uebstkuerf
+Corbeille à pain sur pied ¦ Broutkuerf mat Fouss
+Étagère à épices ¦ Gewierzregal
+Desserte de cuisine en bois ¦ Kichewon aus Holz
+Bar de cuisine ¦ Kichebar
+Plaque vitrocéramique ¦ Glaskeramik-Kachplack
+Grande plaque à induction ¦ Grouss Induktiounskachplack
+Table de cuisson au gaz (5 feux) ¦ Gaskachfeld (5 Brenner)
+Hotte en inox ¦ Dampabzug aus Inox
+Lave-vaisselle compact ¦ Kompakt Spullmaschinn
+Réfrigérateur rétro vert d’eau ¦ Retro-Frigo waassergréng
+Réfrigérateur rétro orange ¦ Retro-Frigo orange
+Évier à deux bacs en céramique ¦ Duebel Keramik-Spullbecken
+Évier timbre d’office ¦ Déift Keramik-Spullbecken
+Évier en pierre à potager ¦ Steen-Spullbecken
+Cuisinière à charbon ¦ Kuelenhiewel
+Buffet de cuisine en formica ¦ Kichebuffet aus Formica
+Buffet de cuisine bleu ciel ¦ Hellbloe Kichebuffet
+Table en formica ¦ Formica-Dësch
+Chaise en formica ¦ Formica-Stull
+Tabouret de cuisine ¦ Kichenhocker
+Cruche en grès ¦ Steenzeegkrug
+Fontaine à eau en grès ¦ Waasserbrunnen aus Steenzeeg
+Balance de cuisine Roberval ¦ Roberval-Kichewo
+Batterie de casseroles en cuivre ¦ Koffer-Kasserollen-Set
+Égouttoir à vaisselle ¦ Ofdrëpper fir Geschier
+Poubelles de tri ¦ Dreckskëschte fir ze trennen
+Planche à découper ¦ Schneidbriet
+Bassine à confiture en cuivre ¦ Koffer-Konfiturekessel
+Pot-au-feu en fonte ¦ Gossdëppen
+Service à vaisselle ¦ Geschiersservice
+Soupière en faïence ¦ Faïence-Zoppeschossel
+Panier de légumes ¦ Geméiskuerf
+Bocaux de conserves ¦ Konservegliser
+Stérilisateur à bocaux ¦ Gliserkachapparat
+Moulin à légumes ¦ Geméismillen
+Crêpière ¦ Pannekuchspan
+Appareil à fondue ¦ Fondue-Apparat
+Extracteur de jus ¦ Entsafter
+Cafetière italienne ¦ Italienesch Kaffiskan
+Samovar ¦ Samowar
+Étagère à confitures ¦ Konfitureregal
+Chariot de cuisine à roulettes ¦ Kichewon mat Rieder
+Garde-manger grillagé ¦ Gitter-Spënd
+Coffre à bois de cuisine ¦ Holzkëscht fir d’Kiche
+Baignoire en fonte sur pieds de lion ¦ Goss-Bidden op Léiwefeiss
+Baignoire îlot moderne ¦ Modern fräistoend Bidden
+Meuble double vasque ¦ Miwwel mat Duebelbecken
+Vasque à poser sur plan bois ¦ Opsatzbecken op Holzplack
+Meuble vasque suspendu ¦ Hängend Lavabomiwwel
+WC à chasse haute ¦ Toilett mat héijem Spullkasten
+WC rehaussé ¦ Erhéicht Toilett
+Miroir lumineux ¦ Beliichte Spigel
+Panier à linge en osier ¦ Wëllewäschkuerf
+Broc et cuvette en faïence ¦ Kan a Schossel aus Faïence
+Tub en zinc ¦ Zénkbidden
+Échelle porte-serviettes ¦ Handdochleeder
+Tapis de bain ¦ Buedmatt
+Panier à linge en tissu ¦ Stoffwäschkuerf
+Colonne de salle de bain ¦ Buedzëmmerschaf
+Étagère de douche ¦ Duschregal
+Vasque en pierre ¦ Steebecken
+Baignoire noire ¦ Schwaarze Bidden
+Paroi de douche en verre ¦ Glas-Duschwand
+WC avec abattant bois ¦ Toilett mat Holzbrëll
+Meuble vasque en bois ¦ Lavabomiwwel aus Holz
+Lave-mains ¦ Handwäschbecken
+Lave-linge hublot ¦ Wäschmaschinn mat Bulli
+Bac à laver ¦ Wäschbottich
+Table à repasser ¦ Strécksbriet
+Fil à linge ¦ Wäschseel
+Essoreuse à rouleaux ¦ Wäschmang
+Machine à laver à manivelle ¦ Wäschmaschinn mat Kurbel
+Balai et pelle ¦ Biesem a Schëpp
+Nettoyeur vapeur ¦ Dampreiniger
+Vestiaire d’entrée ¦ Garderobe
+Patère murale ¦ Wandhoken
+Boîte à clés ¦ Schlësselkëscht
+Console avec miroir ¦ Konsol mat Spigel
+Valet de nuit ¦ Kleederstänner
+Fauteuil ergonomique ¦ Ergonomesche Bürosstull
+Bureau d’angle ¦ Eckbüro
+Petit bureau d’écolier ¦ Klenge Schülerbüro
+Ordinateur de bureau et écran ¦ Computer a Bildschierm
+Deux écrans ¦ Zwee Bildschiermer
+Imprimante multifonction ¦ Multifunktiounsdrécker
+Destructeur de papier ¦ Pabeierschredder
+Armoire à classeurs ¦ Ordnerschaf
+Caisson à roulettes ¦ Rollcontainer
+Tableau en liège ¦ Pinnwand aus Kork
+Téléphone de bureau ¦ Bürostelefon
+Globe terrestre de bureau ¦ Dëschglobus
+Globe terrestre sur pied ¦ Stänneglobus
+Pupitre de lecture ¦ Liespult
+Lampe de banquier ¦ Bankierslamp
+Albums de famille ¦ Familljenalben
+Console de jeux ¦ Spillkonsol
+Scanner de documents ¦ Dokumentescanner
+Carte de France ancienne ¦ Al Frankräichkaart
+Carte de Cassini encadrée ¦ Gerummte Cassini-Kaart
+Lutrin d’archives ¦ Archivpult
+Loupe sur pied ¦ Lupp mat Stänner
+Lecteur de microfilms ¦ Mikrofilm-Lieser
+Couffin en osier ¦ Wëllekuerf fir Puppelcher
+Berceau en fer ¦ Eisewéi
+Lit mezzanine ¦ Hochbett
+Poussette ¦ Kannerwon
+Parc pour bébé ¦ Laafställchen
+Cuisine pour enfant ¦ Kannerkichen
+Ours en peluche géant ¦ Risegen Teddybier
+Poupée en porcelaine ¦ Porzeläinspopp
+Cubes de construction ¦ Bauklötzer
+Théâtre de marionnettes ¦ Poppentheater
+Luge ¦ Schlitt
+Table de jeux de société ¦ Gesellschaftsspilldësch
+Petite table d’enfant ¦ Klenge Kannerdësch
+Chevalet de peinture ¦ Moler-Staffelei
+Pupitre d’écolier double ¦ Duebel Schoulbank
+Tableau noir d’école ¦ Schoultafel
+Coiffeuse d’enfant ¦ Kanner-Coiffeuse
+Marchande ¦ Kafléiden
+Circuit de voitures ¦ Autosbunn
+Arche de Noé en bois ¦ Arche Noah aus Holz
+Toupie ¦ Dréikräisel
+Tapis d’éveil ¦ Spilldecken
+Piscine à balles ¦ Ballebad
+Tipi d’enfant ¦ Kannertipi
+Draisienne ¦ Lafvelo
+Voiture à pédales ¦ Tretauto
+Cheval sur roulettes ¦ Päerd op Rieder
+Bureau d’écolier réglable ¦ Verstellbare Schülerbüro
+Tabouret d’enfant ¦ Kannerhocker
+Suspension trois globes ¦ Luucht mat dräi Kugelen
+Lampe Tiffany ¦ Tiffany-Lamp
+Lampe en opaline ¦ Opalin-Lamp
+Lampe à poser en céramique ¦ Keramik-Dëschlamp
+Lampadaire trépied en bois ¦ Holz-Stählamp mat Dräifouss
+Lampadaire arc en marbre ¦ Bogelamp mat Marmerfouss
+Liseuse sur pied ¦ Lieslamp mat Fouss
+Réglette néon ¦ Neonröhr
+Lanterne à bougie ¦ Käerzelanteren
+Lampe à pétrole en cuivre ¦ Petrollamp aus Koffer
+Lampe à huile romaine ¦ Réimesch Uelegslamp
+Bougies sur plateau ¦ Käerzen op engem Plateau
+Chandelier à trois branches ¦ Dräiarmege Käerzestänner
+Borne lumineuse ¦ Luuchtpilz
+Mur de cadres photos ¦ Fotowand
+Portrait d’ancêtre ¦ Ahneportrait
+Tableau de paysage ¦ Landschaftsbild
+Marine ¦ Mieresbild
+Cadre photo sur pied ¦ Fotorumm mat Stänner
+Trophée de chasse ¦ Juegdtrophä
+Maquette de bateau ¦ Schëffsmodell
+Sculpture sur socle ¦ Skulptur op engem Sockel
+Buste en plâtre ¦ Gipsbüst
+Statuette en bronze ¦ Bronzestatuett
+Grand vase en terre ¦ Grouss Terrakotta-Vas
+Bouquet de fleurs ¦ Blummebouquet
+Horloge de gare ¦ Bahnhofsauer
+Coucou de la Forêt-Noire ¦ Kuckucksauer aus dem Schwarzwald
+Rideaux ¦ Riddoen
+Grand tapis persan ¦ Grousse persesche Teppech
+Tapis berbère à losanges ¦ Berberteppech mat Rauten
+Kilim ¦ Kelim
+Tapis rond en jute ¦ Ronne Jute-Teppech
+Paravent japonais ¦ Japanesch Paravent
+Panier à journaux ¦ Zeitungskuerf
+Grand panier en osier ¦ Grousse Wëllekuerf
+Garde-feu en laiton ¦ Funkeschutz aus Messing
+Terrarium ¦ Terrarium
+Diplôme encadré ¦ Gerummten Diplom
+Photo de classe encadrée ¦ Gerummte Klassefoto
+Livret de famille sous verre ¦ Familljebuch ënner Glas
+Canevas brodé ¦ Gesticktent Canevas
+Tapisserie murale ¦ Wandteppech
+Médaillon de famille ¦ Familljemedaillon
+Trophée sportif ¦ Sportspokal
+Buste de Marianne ¦ Marianne-Büst
+Vase de Gien ¦ Vas aus Gien
+Vase de Sèvres ¦ Vas aus Sèvres
+Potiche chinoise ¦ Chinesesch Deckelvas
+Vase en étain ¦ Zennvas
+Bouquet de fleurs séchées ¦ Bouquet aus gedréchente Blummen
+Sapin de Noël décoré ¦ Geschmückte Chrëschtbam
+Couronne de porte ¦ Dierkranz
+Photophores ¦ Windliichter
+Bateau en bouteille ¦ Schëff an der Fläsch
+Maquette de locomotive ¦ Lokomotivsmodell
+Collection de dés à coudre ¦ Fangerhutsammlung
+Vitrine de minéraux ¦ Mineralienvitrine
+Collection de papillons ¦ Päiperleksammlung
+Boîte à musique ¦ Musekskëscht
+Baromètre ¦ Barometer
+Thermomètre ancien ¦ Alen Thermometer
+Voilages ¦ Gardinnen
+Rideaux de velours ¦ Samtriddoen
+Store bateau ¦ Raffrollo
+Tapis moderne ¦ Modernen Teppech
+Tapis en peau de mouton ¦ Schofsfell
+Poêle à granulés rouge ¦ Roude Pelletuewen
+Poêle Godin ¦ Godin-Uewen
+Radiateur vertical design ¦ Vertikalen Design-Heizkierper
+Chauffe-eau ¦ Waasserheizer
+Téléviseur sur meuble ¦ Fernseh op engem Miwwel
+Téléviseur au mur ¦ Fernseh un der Mauer
+Téléviseur à tube ¦ Rieren-Fernseh
+Chaîne hi-fi ¦ Hi-Fi-Anlag
+Enceintes colonnes ¦ Stand-Lautsprecher
+Radiocassette ¦ Radiorecorder
+Magnétoscope ¦ Videorecorder
+Ventilateur de plafond ¦ Plafongsventilator
+Ventilateur de table ¦ Dëschventilator
+Radiateur soufflant ¦ Heizlëfter
+Convecteur électrique ¦ Elektresche Konvekter
+Poêle à bois moderne ¦ Moderne Holzuewen
+Cuisinière à bois moderne ¦ Moderne Holzkachhiewel
+Pompe à chaleur ¦ Wäermepompel
+Chaudière au fioul ¦ Mazoutsheizung
+Chaudière à gaz murale ¦ Gasheizung fir un d’Mauer
+Cuve à fioul ¦ Mazoutstank
+Robot tondeuse ¦ Mähroboter
+Téléviseur portatif années 70 ¦ Portabelen Fernseh aus den 70er Joren
+Lecteur CD ¦ CD-Spiller
+Magnétophone à bandes ¦ Tonbandgerät
+Enceinte connectée ¦ Connectéierte Lautsprecher
+Piano droit noir ¦ Schwaarze Klavier
+Piano droit en acajou ¦ Klavier aus Mahagoni
+Piano demi-queue ¦ Stutzflillek
+Piano à queue de concert ¦ Konzertflillek
+Épinette ¦ Spinett
+Orgue de salon ¦ Hausuergel
+Clavier électronique ¦ Elektronescht Keyboard
+Guitare classique ¦ Klassesch Gittar
+Banjo ¦ Banjo
+Mandoline ¦ Mandolin
+Violon sur pupitre ¦ Gei um Notepult
+Bandonéon ¦ Bandoneon
+Trompette sur pied ¦ Trompett um Stänner
+Saxophone sur pied ¦ Saxophon um Stänner
+Cor de chasse ¦ Juegdhorn
+Clarinette sur pied ¦ Klarinett um Stänner
+Pupitre de musique ¦ Notepult
+Gramophone à pavillon ¦ Grammophon mat Trichter
+Cornemuse (biniou) ¦ Dudelsak (Biniou)
+Timbales ¦ Pauken
+Xylophone ¦ Xylophon
+Marimba ¦ Marimba
+Cithare ¦ Zither
+Ukulélé ¦ Ukulele
+Luth ¦ Laut
+Flûte traversière sur support ¦ Querflüt um Stänner
+Flûte à bec ¦ Blockflüt
+Trombone sur pied ¦ Posaun um Stänner
+Hautbois sur support ¦ Oboe um Stänner
+Harmonica et pupitre ¦ Mondharmonika a Pult
+Meuble à partitions ¦ Noteschaf
+Table de mixage ¦ Mëschpult
+Rayonnage de cave ¦ Kellerregal
+Cartons de déménagement ¦ Plënnerkartongen
+Étagère d’archives familiales ¦ Regal mat Familljenarchiven
+Coffret à bijoux ¦ Bijouskëscht
+Portant à vêtements ¦ Kleederstaang
+Dressing d’angle ¦ Eck-Ukleedzëmmer
+Meuble à cases (cubes) ¦ Fächerregal (Wierfelen)
+Étagère de cellier ¦ Vorroutsregal
+Boîtes de rangement en plastique ¦ Plastikskëschte fir anzeraumen
+Caisses en bois ¦ Holzkëschten
+Panier à pique-nique ¦ Picknickkuerf
+Boîte à couture ¦ Nähkëscht
+Housse à vêtements ¦ Kleederhülle
+Crucifix mural ¦ Kräiz un der Mauer
+Crèche provençale et santons ¦ Provenzalesch Krëppchen mat Santons
+Chapelet ¦ Rousekranz
+Coin du souvenir (photos et bougie) ¦ Erënnerungsecke (Fotoen a Käerz)
+Boîte à lettres d’amour ¦ Këscht mat Léiftebréiwer
+Vitrine de médailles ¦ Medaillevitrine
+Bouquet de mariée sous globe ¦ Braut-Bouquet ënner Glasglock
+Bénitier mural ¦ Wäiwaasserkessel un der Mauer
+Icône orthodoxe ¦ Orthodox Ikon
+Rameau de buis bénit ¦ Geseente Buschbaumzweig
+Statue de saint ¦ Hellegestatu
+Plaque de communion encadrée ¦ Gerummt Kommiounsandenken
+Livre de prières ancien ¦ Aalt Gebiedbuch
+Scie circulaire sur table ¦ Dëschkreessee
+Scie à onglets ¦ Kappsee
+Forge et soufflet ¦ Schmëdd mat Blosbalg
+Établi de mécanicien ¦ Mechanikerwierkbänk
+Établi d’horloger ¦ Auermacherwierkbänk
+Table de cordonnier ¦ Schongmacherdësch
+Table de coupe de tailleur ¦ Schneiderzouschneiddësch
+Paillasse de laboratoire ¦ Laborbänk
+Scie à ruban ¦ Bandsee
+Tour à métaux ¦ Metalldréibänk
+Surjeteuse ¦ Overlock-Nähmaschinn
+Métier à broder ¦ Stickrumm
+Petite citadine ¦ Klengen Stadauto
+Voiture familiale ¦ Familljenauto
+Voiture ancienne (années 30) ¦ Oldtimer (1930er Joren)
+Deux-chevaux ¦ Citroën 2CV
+Coccinelle ¦ VW Käfer
+Fourgonnette ¦ Camionnette
+Mobylette ¦ Mobylette
+Vélo de course ¦ Course-Vëlo
+Vélo hollandais ¦ Hollännesche Vëlo
+Vélo cargo ¦ Lastevëlo
+Pneus empilés ¦ Gestapelte Pneuen
+Échelle double ¦ Duebel Leeder
+Second congélateur ¦ Zweet Déifkillschaf
+Voiture tout-terrain ¦ Geländewon
+Voiture de sport ¦ Sportsauto
+Voiture électrique ¦ Elektroauto
+Camping-car ¦ Camping-Car
+Moto ancienne avec side-car ¦ Ale Motorrad mat Säitewon
+Vélo ancien ¦ Ale Vëlo
+VTT ¦ Mountainbike
+Borne de recharge ¦ Luedstatioun
+Armoire à outils ¦ Geschirschaf
+Chariot de pneus ¦ Pneuswon
+Caisse à outils ¦ Geschirkëscht
+Chargeur de batterie ¦ Batterieluedgerät

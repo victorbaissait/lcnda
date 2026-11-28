@@ -1,0 +1,16 @@
+/* ⚖️🎩🏛️ Droit et pouvoir (assets/js/heritage-droit-pouvoir.js) — reprend l'allure des blocs voisins (Pays à l'époque, Le lieu à son époque) */
+.dp-lines, .dp-laws, .dp-heads, .dp-ouc-list { list-style: none; margin: 0; padding: 0; }
+.dp-line, .dp-law { display: flex; gap: .5em; align-items: flex-start; padding: .3em 0; border-bottom: 1px solid var(--line-soft, rgba(127,127,127,.18)); }
+.dp-line:last-child, .dp-law:last-child { border-bottom: 0; }
+.dp-ico { flex: 0 0 1.4em; text-align: center; }
+.dp-heads li { padding: .15em 0; }
+.dp-more { margin-top: .5em; }
+.dp-more > summary, .dp-quote > summary { cursor: pointer; }
+.dp-quote { margin: .2em 0 .1em; }
+.dp-quote blockquote { margin: .3em 0; padding: .3em .7em; border-left: 3px solid var(--accent, #9a4b00); font-style: italic; }
+.dp-src-link { white-space: nowrap; font-size: .9em; }
+.dp-warn { color: var(--warn, #9a4b00); }
+.dp-ouc-list > li { margin: .4em 0; }
+.dp-facts { margin: .3em 0 0; padding-left: 1.1em; }
+.dp-af { flex-wrap: wrap; }
+@media print { .dp-more:not([open]) > :not(summary) { display: none; } }

@@ -33,7 +33,7 @@
         ['source', 'Sources', ['source']], ['census', 'Recensements', ['census']], ['military', 'Service militaire', ['military']],
         ['digest', 'Dépouillements', ['digest']], ['collection', 'Collections, listes, atelier', ['collection']],
     ];
-    const OWNER_ICONS = {person: '👤', family: '💍', event: '📅', source: '📜', census: '🏠', military: '🎖️', battue: '🧭', investigation: '🔍', digest: '📚', collection: '🗂️'};
+    const OWNER_ICONS = {person: '👤', family: '💍', event: '📅', source: '📜', census: '🏠', military: '🎖️', battue: '🔦', investigation: '🔍', digest: '📚', collection: '🗂️'};
 
     /** Saut de « −N s / +N s » : réglage d'Apparence (15 s par défaut). */
     const skipSeconds = () => { try { const n = Math.round(Number(JSON.parse(localStorage.getItem('genealogie-design') || '{}')?.avSkipSeconds)); return n >= 1 && n <= 3600 ? n : 15; } catch (_) { return 15; } };
@@ -85,7 +85,7 @@
         return items.filter(it => {
             if (p.owner === 'none' && it.owners.length) return false;
             if (group && !it.owners.some(o => group[2].includes(o.type))) return false;
-            if (q && ![nameOf(it), it.description, it.filename, it.date_text, ownerText(it)].join(' ').toLowerCase().includes(q)) return false;
+            if (q && !(window.LCNDA_UI?.listMatch?.text || ((q, ...h) => h.join(' ').toLowerCase().includes(String(q).toLowerCase())))(q, nameOf(it), it.description, it.filename, it.date_text, ownerText(it))) return false;
             return true;
         });
     }
@@ -144,7 +144,7 @@
                 <span class="av-rate">Vitesse <select class="av-rate-select" aria-label="Vitesse">${rateOptions(p.rate)}</select><input type="range" class="av-rate-range" min="${RATE_MIN}" max="${RATE_MAX}" step="0.05" value="${p.rate}" aria-label="Vitesse (curseur)" title="Glisser : de ${fmtRate(RATE_MIN)} à ${fmtRate(RATE_MAX)} · double-clic : 1×"><output class="av-rate-out">${fmtRate(p.rate)}</output><button type="button" class="button small secondary av-rate-reset" title="Remettre la vitesse normale (1×)"${p.rate === 1 ? ' disabled' : ''}>↺ 1×</button></span>
                 <label class="ui-toggle av-auto"><input type="checkbox" class="av-auto-box"${p.auto ? ' checked' : ''}><i></i>${i18n('Enchaîner {what}', {what: opts.chainLabel ? i18n(opts.chainLabel) : (kind === 'audio' ? i18n('les sons') : i18n('les vidéos'))})}<span data-help="${kind === 'audio' ? i18n('À la fin d’un son, le suivant de la liste démarre tout seul, dans l’ordre du tri choisi.') : i18n('À la fin d’une vidéo, la suivante de la liste démarre toute seule, dans l’ordre du tri choisi.')}"></span></label>
                 <button type="button" class="button small secondary" data-av="size" title="Agrandir / réduire la vidéo" hidden>⤢</button>
-                <button type="button" class="button small ghost" data-av="close" title="Fermer le lecteur">✕</button>
+                <button type="button" class="button small ghost" data-av="close" title="Fermer le lecteur">×</button>
             </div>
         </div>`;
         const box = host.querySelector('.av-player');

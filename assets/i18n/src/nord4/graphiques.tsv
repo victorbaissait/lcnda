@@ -653,7 +653,7 @@ Pas installé ¦ Ei asennettu ¦ Nincs telepítve
 L’historique officiel des communes de l’INSEE (depuis 1943) : chaque commune disparue avec sa date et sa commune d’aujourd’hui. Livré avec l’app (5,5 Mo, Licence Ouverte 2.0 de l’INSEE) : installé tout seul, sans Internet. Les anciens noms aident aussi le menu de choix des lieux (« anc. « … » »). ¦ INSEE:n virallinen kuntahistoria (vuodesta 1943): jokainen kadonnut kunta päivämäärineen ja nykyisine kuntineen. Toimitetaan sovelluksen mukana (5,5 Mt, INSEE:n Licence Ouverte 2.0): asentuu itsestään, ilman internetiä. Vanhat nimet auttavat myös paikkojen valintavalikkoa (”vanh. ”…””). ¦ Az INSEE hivatalos településtörténete (1943 óta): minden megszűnt település a dátumával és a mai településével. Az alkalmazással együtt érkezik (5,5 MB, az INSEE Licence Ouverte 2.0 licence): magától települ, internet nélkül. A régi nevek a helyválasztó menüt is segítik („régi „…””).
 ⤓ Télécharger de nouveau (mise à jour) ¦ ⤓ Lataa uudelleen (päivitys) ¦ ⤓ Újbóli letöltés (frissítés)
 🗑 Retirer ¦ 🗑 Irrota ¦ 🗑 Eltávolítás
-⤓ Installer les frontières anciennes ¦ ⤓ Asenna vanhat rajat ¦ ⤓ A régi határok telepítése
+📦 Installer les frontières anciennes ¦ 📦 Asenna vanhat rajat ¦ 📦 A régi határok telepítése
 (taille…) ¦ (koko…) ¦ (méret…)
 dossier des données ¦ tietokansio ¦ adatmappa
 Rangé dans le {name}, commun à toutes tes généalogies. ¦ Tallennettu kohteeseen {name}, yhteinen kaikille sukututkimuksillesi. ¦ A(z) {name} helyen tárolva, minden családfád közös.
@@ -1672,7 +1672,7 @@ Jusqu’à l’année ¦ Vuoteen asti ¦ Eddig az évig
 Départ ¦ Lähtö ¦ Kiindulás
 Arrivée ¦ Saapuminen ¦ Érkezés
 📍 Les lieux du tableau ¦ 📍 Taulukon paikat ¦ 📍 A táblázat helyei
-🔎 Retrouver les lieux sans position ¦ 🔎 Etsi paikat ilman sijaintia ¦ 🔎 Pozíció nélküli helyek megkeresése
+🔍 Retrouver les lieux sans position ¦ 🔍 Etsi paikat ilman sijaintia ¦ 🔍 Pozíció nélküli helyek megkeresése
 Choisis d’abord une sorte d’événement. ¦ Valitse ensin tapahtumalaji. ¦ Először válassz egy eseményfajtát.
 Choisis une sorte d’événement. ¦ Valitse tapahtumalaji. ¦ Válassz egy eseményfajtát.
 Aucun lieu retrouvé : choisis-les un par un. ¦ Paikkoja ei löytynyt: valitse ne yksitellen. ¦ Nem található hely: válaszd ki őket egyenként.

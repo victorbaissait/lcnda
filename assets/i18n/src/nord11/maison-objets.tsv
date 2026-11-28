@@ -1,0 +1,710 @@
+fr ¦ vi ¦ id
+# 🏠 Plan de maison : les objets en plus, les styles, le choix « 🎨 Style » (heritage-house-objets.js, heritage-house-lib.js)
+Meubles de style ¦ Đồ nội thất cổ điển ¦ Furnitur bergaya
+🎨 Tous les styles ¦ 🎨 Tất cả phong cách ¦ 🎨 Semua gaya
+Sans les meubles de style ¦ Không có đồ nội thất cổ điển ¦ Tanpa furnitur bergaya
+D’ailleurs ¦ Từ nơi khác ¦ Dari luar negeri
+Modernes ¦ Hiện đại ¦ Modern
+Rien dans le style « {s} » ici : choisis « 🎨 Tous les styles ». ¦ Không có gì theo phong cách “{s}” ở đây: hãy chọn “🎨 Tất cả phong cách”. ¦ Tidak ada yang bergaya “{s}” di sini: pilih “🎨 Semua gaya”.
+Louis XIII ¦ Louis XIII ¦ Louis XIII
+Louis XIV ¦ Louis XIV ¦ Louis XIV
+Régence ¦ Régence ¦ Régence
+Louis XV ¦ Louis XV ¦ Louis XV
+Louis XVI ¦ Louis XVI ¦ Louis XVI
+Directoire ¦ Directoire ¦ Directoire
+Empire ¦ Đế chế (Empire) ¦ Empire
+Restauration ¦ Phục hưng vương triều (Restauration) ¦ Restorasi
+Charles X ¦ Charles X ¦ Charles X
+Louis-Philippe ¦ Louis-Philippe ¦ Louis-Philippe
+Napoléon III ¦ Napoléon III ¦ Napoleon III
+Art nouveau ¦ Art Nouveau ¦ Art Nouveau
+Art déco ¦ Art Deco ¦ Art Deco
+Henri II ¦ Henri II ¦ Henri II
+Renaissance ¦ Phục hưng (Renaissance) ¦ Renaisans
+Biedermeier ¦ Biedermeier ¦ Biedermeier
+victorien ¦ Victoria ¦ Victoria
+Chippendale ¦ Chippendale ¦ Chippendale
+Queen Anne ¦ Queen Anne ¦ Queen Anne
+gustavien ¦ Gustavian ¦ Gustavian
+shaker ¦ Shaker ¦ Shaker
+colonial ¦ Thuộc địa ¦ Kolonial
+marocain ¦ Ma-rốc ¦ Maroko
+japonais ¦ Nhật Bản ¦ Jepang
+chinois laqué ¦ Sơn mài Trung Hoa ¦ Pernis Tiongkok
+Thonet ¦ Thonet ¦ Thonet
+vénitien ¦ Venice ¦ Venesia
+normand ¦ Normandie ¦ Normandia
+breton ¦ Bretagne ¦ Bretagne
+basque ¦ Basque ¦ Basque
+alsacien ¦ Alsace ¦ Alsace
+savoyard ¦ Savoie ¦ Savoie
+auvergnat ¦ Auvergne ¦ Auvergne
+bressan ¦ Bresse ¦ Bresse
+lorrain ¦ Lorraine ¦ Lorraine
+landais ¦ Landes ¦ Landes
+vendéen ¦ Vendée ¦ Vendée
+limousin ¦ Limousin ¦ Limousin
+bourguignon ¦ Bourgogne ¦ Burgundia
+catalan ¦ Catalan ¦ Katalan
+corse ¦ Corse ¦ Korsika
+champenois ¦ Champagne ¦ Champagne
+flamand ¦ Flandre ¦ Flandria
+franc-comtois ¦ Franche-Comté ¦ Franche-Comté
+béarnais ¦ Béarn ¦ Béarn
+dauphinois ¦ Dauphiné ¦ Dauphiné
+picard ¦ Picardie ¦ Picardie
+gascon ¦ Gascogne ¦ Gascogne
+années 1930 ¦ Thập niên 1930 ¦ Tahun 1930-an
+années 1950 ¦ Thập niên 1950 ¦ Tahun 1950-an
+années 1960 ¦ Thập niên 1960 ¦ Tahun 1960-an
+années 1970 ¦ Thập niên 1970 ¦ Tahun 1970-an
+années 1980 ¦ Thập niên 1980 ¦ Tahun 1980-an
+scandinave ¦ Bắc Âu ¦ Skandinavia
+industriel ¦ Công nghiệp ¦ Industrial
+contemporain ¦ Đương đại ¦ Kontemporer
+laqué blanc ¦ Sơn mài trắng ¦ Pernis putih
+en pin ¦ Gỗ thông ¦ Kayu pinus
+en chêne clair ¦ Gỗ sồi sáng màu ¦ Kayu ek terang
+en merisier ¦ Gỗ anh đào ¦ Kayu ceri
+en noyer ¦ Gỗ óc chó ¦ Kayu walnut
+en acajou ¦ Gỗ gụ ¦ Kayu mahoni
+en rotin ¦ Mây ¦ Rotan
+en bambou ¦ Tre ¦ Bambu
+en métal ¦ Kim loại ¦ Logam
+patiné (shabby chic) ¦ Cũ kỹ (shabby chic) ¦ Usang (shabby chic)
+bohème ¦ Boho ¦ Boho
+en teck ¦ Gỗ tếch ¦ Kayu jati
+Chiffonnier ¦ Tủ ngăn kéo cao ¦ Lemari laci tinggi
+Table de salle à manger ¦ Bàn ăn ¦ Meja makan
+Pendule ¦ Đồng hồ để bàn ¦ Jam meja
+Bonnetière ¦ Tủ đựng mũ ¦ Lemari topi
+Desserte ¦ Bàn phụ ¦ Meja saji
+Buffet de cuisine ¦ Tủ bếp ¦ Bufet dapur
+Table de toilette ¦ Bàn trang điểm rửa mặt ¦ Meja rias cuci muka
+Horloge de parquet ¦ Đồng hồ cây ¦ Jam lantai
+Pommier ¦ Cây táo ¦ Pohon apel
+Poirier ¦ Cây lê ¦ Pohon pir
+Cerisier ¦ Cây anh đào ¦ Pohon ceri
+Prunier ¦ Cây mận ¦ Pohon prem
+Pêcher ¦ Cây đào ¦ Pohon persik
+Abricotier ¦ Cây mơ ¦ Pohon aprikot
+Cognassier ¦ Cây mộc qua ¦ Pohon quince
+Châtaignier ¦ Cây hạt dẻ ¦ Pohon kastanye
+Figuier ¦ Cây sung ¦ Pohon ara
+Olivier ¦ Cây ô liu ¦ Pohon zaitun
+Citronnier en bac ¦ Cây chanh trong chậu ¦ Pohon lemon dalam pot
+Oranger en bac ¦ Cây cam trong chậu ¦ Pohon jeruk dalam pot
+Noisetier ¦ Cây phỉ ¦ Pohon hazel
+Mûrier ¦ Cây dâu tằm ¦ Pohon murbei
+Tilleul ¦ Cây đoạn ¦ Pohon linden
+Platane ¦ Cây tiêu huyền ¦ Pohon plane
+Marronnier ¦ Cây dẻ ngựa ¦ Pohon kastanye kuda
+Hêtre ¦ Cây sồi dẻ ¦ Pohon beech
+Frêne ¦ Cây tần bì ¦ Pohon ash
+Saule pleureur ¦ Cây liễu rủ ¦ Dedalu tangis
+Peuplier ¦ Cây dương ¦ Pohon poplar
+Érable ¦ Cây phong ¦ Pohon maple
+Magnolia ¦ Mộc lan ¦ Magnolia
+Lilas ¦ Tử đinh hương ¦ Lilak
+Cerisier du Japon ¦ Anh đào Nhật Bản ¦ Sakura
+Orme ¦ Cây du ¦ Pohon elm
+Acacia ¦ Cây keo ¦ Pohon akasia
+Charme ¦ Cây trăn ¦ Pohon hornbeam
+Sureau ¦ Cây cơm cháy ¦ Pohon elder
+Tilleul de la Liberté ¦ Cây đoạn Tự do ¦ Pohon linden Kebebasan
+Sapin ¦ Cây linh sam ¦ Pohon cemara
+Épicéa ¦ Cây vân sam ¦ Pohon spruce
+Pin parasol ¦ Thông lọng ¦ Pinus payung
+Pin sylvestre ¦ Thông Scotland ¦ Pinus Skotlandia
+Cyprès ¦ Cây bách ¦ Pohon sipres
+If ¦ Cây thủy tùng ¦ Pohon yew
+Cèdre ¦ Cây tuyết tùng ¦ Pohon cedar
+Thuya ¦ Cây trắc bách diệp ¦ Pohon thuja
+Rosier ¦ Hoa hồng ¦ Mawar
+Rosier grimpant ¦ Hồng leo ¦ Mawar rambat
+Hortensia ¦ Cẩm tú cầu ¦ Hortensia
+Lavande ¦ Oải hương ¦ Lavender
+Romarin ¦ Hương thảo ¦ Rosemary
+Thym ¦ Cỏ xạ hương ¦ Timi
+Buis taillé en boule ¦ Hoàng dương cắt tỉa tròn ¦ Boxwood bentuk bola
+Forsythia ¦ Liên kiều ¦ Forsythia
+Laurier-sauce ¦ Nguyệt quế ¦ Daun salam laurel
+Laurier-rose ¦ Trúc đào ¦ Oleander
+Buddleia ¦ Bông bướm (buddleia) ¦ Buddleia
+Camélia ¦ Hoa trà ¦ Kamelia
+Rhododendron ¦ Đỗ quyên ¦ Rhododendron
+Azalée ¦ Hoa đỗ quyên (azalea) ¦ Azalea
+Houx ¦ Cây ô rô ¦ Holly
+Cassissier ¦ Cây lý chua đen ¦ Semak blackcurrant
+Groseillier ¦ Cây lý chua đỏ ¦ Semak redcurrant
+Framboisier ¦ Cây mâm xôi ¦ Semak raspberi
+Pied de vigne ¦ Gốc nho ¦ Batang anggur
+Bambou ¦ Tre ¦ Bambu
+Bananier ¦ Cây chuối ¦ Pohon pisang
+Palmier ¦ Cây cọ ¦ Pohon palem
+Herbes de la pampa ¦ Cỏ lau pampas ¦ Rumput pampas
+Graminées ¦ Cỏ cảnh ¦ Rumput hias
+Fuchsia ¦ Hoa vân anh ¦ Fuchsia
+Glycine ¦ Tử đằng ¦ Wisteria
+Lierre ¦ Dây thường xuân ¦ Tanaman ivy
+Fougère ¦ Dương xỉ ¦ Pakis
+Massif de géraniums ¦ Bồn hoa phong lữ ¦ Hamparan geranium
+Massif de tournesols ¦ Bồn hoa hướng dương ¦ Hamparan bunga matahari
+Massif de tulipes ¦ Bồn hoa tulip ¦ Hamparan tulip
+Massif de jonquilles ¦ Bồn hoa thủy tiên vàng ¦ Hamparan daffodil
+Massif d’iris ¦ Bồn hoa diên vĩ ¦ Hamparan iris
+Massif de dahlias ¦ Bồn hoa thược dược ¦ Hamparan dahlia
+Massif de soucis ¦ Bồn hoa cúc vạn thọ ¦ Hamparan marigold
+Massif de pivoines ¦ Bồn hoa mẫu đơn ¦ Hamparan peoni
+Massif de marguerites ¦ Bồn hoa cúc trắng ¦ Hamparan aster putih
+Carré de fraisiers ¦ Luống dâu tây ¦ Petak stroberi
+Rang de pommes de terre ¦ Luống khoai tây ¦ Barisan kentang
+Rang de salades ¦ Luống xà lách ¦ Barisan selada
+Rang de tomates ¦ Luống cà chua ¦ Barisan tomat
+Rang de carottes ¦ Luống cà rốt ¦ Barisan wortel
+Rang de poireaux ¦ Luống tỏi tây ¦ Barisan daun bawang
+Rang de haricots à rames ¦ Luống đậu leo ¦ Barisan buncis rambat
+Rang de choux ¦ Luống bắp cải ¦ Barisan kubis
+Planche de courges ¦ Luống bí ¦ Bedengan labu
+Planche d’oignons ¦ Luống hành ¦ Bedengan bawang
+Carré d’aromatiques ¦ Luống rau thơm ¦ Petak tanaman herbal
+Pelouse ¦ Bãi cỏ ¦ Halaman rumput
+Prairie fleurie ¦ Đồng cỏ hoa dại ¦ Padang bunga
+Pot de géraniums ¦ Chậu phong lữ ¦ Pot geranium
+Jardinière de fleurs ¦ Bồn hoa treo cửa sổ ¦ Bak bunga
+Agapanthe en pot ¦ Hoa thanh anh trong chậu ¦ Agapanthus dalam pot
+Buis en pot ¦ Hoàng dương trong chậu ¦ Boxwood dalam pot
+Pot de basilic ¦ Chậu húng quế ¦ Pot kemangi
+Bac à fleurs en zinc ¦ Bồn hoa bằng kẽm ¦ Bak bunga seng
+Pot en terre d’Anduze ¦ Chậu đất nung Anduze ¦ Pot tanah liat Anduze
+Grande jarre provençale ¦ Chum lớn kiểu Provence ¦ Guci besar khas Provence
+Yucca ¦ Cây ngọc giá ¦ Yuka
+Plante grasse (aloe) ¦ Cây mọng nước (lô hội) ¦ Sukulen (lidah buaya)
+Cactus colonne ¦ Xương rồng cột ¦ Kaktus tiang
+Kentia ¦ Cây cau Kentia ¦ Palem kentia
+Sansevieria ¦ Lưỡi hổ ¦ Lidah mertua
+Pothos suspendu ¦ Trầu bà treo ¦ Sirih gading gantung
+Oiseau de paradis (strelitzia) ¦ Thiên điểu (strelitzia) ¦ Cenderawasih (strelitzia)
+Bonsaï sur sellette ¦ Bonsai trên đôn ¦ Bonsai di atas dudukan
+Poinsettia ¦ Trạng nguyên ¦ Kastuba
+Plante aromatique sur rebord ¦ Cây gia vị trên bậu cửa ¦ Tanaman herbal di ambang jendela
+Palmier d’intérieur ¦ Cây cọ trong nhà ¦ Palem dalam ruangan
+Banc de jardin en bois et fonte ¦ Ghế băng vườn bằng gỗ và gang ¦ Bangku taman dari kayu dan besi cor
+Banc de jardin en bois ¦ Ghế băng vườn bằng gỗ ¦ Bangku taman kayu
+Banc en pierre sculpté ¦ Ghế băng đá chạm khắc ¦ Bangku batu berukir
+Table de bistrot en fer ¦ Bàn bistro bằng sắt ¦ Meja bistro besi
+Table de jardin ronde en résine ¦ Bàn vườn tròn bằng nhựa ¦ Meja taman bundar dari resin
+Table de jardin en teck ¦ Bàn vườn bằng gỗ tếch ¦ Meja taman dari jati
+Table de pique-nique ¦ Bàn dã ngoại ¦ Meja piknik
+Chaise longue ¦ Ghế dài thư giãn ¦ Kursi malas
+Transat de plage rayé ¦ Ghế bãi biển sọc ¦ Kursi pantai bergaris
+Bain de soleil en résine ¦ Giường tắm nắng bằng nhựa ¦ Kursi berjemur dari resin
+Portique de jeux ¦ Khung xích đu ¦ Rangka ayunan
+Grand toboggan ¦ Cầu trượt lớn ¦ Perosotan besar
+Bac à sable couvert ¦ Hộp cát có nắp ¦ Bak pasir bertutup
+Petit trampoline ¦ Bạt nhún nhỏ ¦ Trampolin kecil
+Hamac sur pied ¦ Võng có giá đỡ ¦ Hammock dengan rangka
+Tonnelle de jardin ¦ Giàn hoa vườn ¦ Gazebo taman
+Pergola en bois ¦ Giàn pergola bằng gỗ ¦ Pergola kayu
+Pergola bioclimatique ¦ Giàn pergola lam xoay ¦ Pergola bioklimatik
+Parasol déporté ¦ Dù lệch tâm ¦ Payung kantilever
+Parasol rouge de terrasse ¦ Dù đỏ sân hiên ¦ Payung teras merah
+Fontaine en pierre ¦ Đài phun nước bằng đá ¦ Air mancur batu
+Fontaine murale ¦ Vòi phun nước gắn tường ¦ Air mancur dinding
+Bassin rond ¦ Hồ tròn ¦ Kolam bundar
+Bassin aux nénuphars ¦ Hồ hoa súng ¦ Kolam teratai
+Piscine rectangulaire ¦ Bể bơi hình chữ nhật ¦ Kolam renang persegi panjang
+Petite piscine ¦ Bể bơi nhỏ ¦ Kolam renang kecil
+Piscine hors-sol ronde ¦ Bể bơi nổi hình tròn ¦ Kolam renang bundar di atas tanah
+Spa d’extérieur ¦ Bồn sục ngoài trời ¦ Spa luar ruangan
+Barbecue au charbon ¦ Lò nướng than ¦ Panggangan arang
+Plancha sur chariot ¦ Bếp nướng plancha có xe đẩy ¦ Plancha dengan troli
+Four à pizza ¦ Lò nướng pizza ¦ Oven pizza
+Brasero en acier ¦ Lò sưởi lửa bằng thép ¦ Tungku api baja
+Composteur en bois ¦ Thùng ủ phân bằng gỗ ¦ Komposter kayu
+Potager surélevé ¦ Luống rau nâng cao ¦ Kebun sayur bertingkat
+Serre de jardin ¦ Nhà kính vườn ¦ Rumah kaca taman
+Petite serre adossée ¦ Nhà kính nhỏ dựa tường ¦ Rumah kaca kecil menempel dinding
+Mangeoire à oiseaux ¦ Máng ăn cho chim ¦ Tempat makan burung
+Cadran solaire sur colonne ¦ Đồng hồ mặt trời trên cột ¦ Jam matahari di atas tiang
+Enrouleur de tuyau ¦ Cuộn ống tưới ¦ Penggulung selang
+Lanterne de jardin ¦ Đèn lồng vườn ¦ Lentera taman
+Mât de drapeau ¦ Cột cờ ¦ Tiang bendera
+Clôture en bois ¦ Hàng rào gỗ ¦ Pagar kayu
+Grillage rigide ¦ Hàng rào lưới cứng ¦ Pagar kawat kaku
+Barrière blanche ¦ Hàng rào trắng ¦ Pagar putih
+Haie de lauriers ¦ Hàng rào nguyệt quế ¦ Pagar tanaman laurel
+Haie de charmille ¦ Hàng rào cây trăn ¦ Pagar tanaman hornbeam
+Muret en pierres sèches ¦ Tường đá khô ¦ Tembok batu kering
+Portail en fer forgé ¦ Cổng sắt rèn ¦ Gerbang besi tempa
+Portail en bois ¦ Cổng gỗ ¦ Gerbang kayu
+Portillon ¦ Cổng nhỏ ¦ Pintu pagar kecil
+Abri à bûches ¦ Lán chứa củi ¦ Gudang kayu bakar
+Éolienne de pompage ¦ Cối xay gió bơm nước ¦ Kincir angin pompa air
+Puits couvert ¦ Giếng có mái che ¦ Sumur beratap
+Abreuvoir en pierre ¦ Máng nước bằng đá ¦ Tempat minum ternak dari batu
+Abri de jardin en bois ¦ Nhà kho vườn bằng gỗ ¦ Gudang taman kayu
+Abri de jardin en métal ¦ Nhà kho vườn bằng kim loại ¦ Gudang taman logam
+Cabane dans les arbres ¦ Nhà trên cây ¦ Rumah pohon
+Carport ¦ Mái che ô tô ¦ Carport
+Kiosque de jardin ¦ Chòi nghỉ trong vườn ¦ Paviliun taman
+Cabane de jardin pour enfants ¦ Nhà chơi trong vườn cho trẻ em ¦ Rumah bermain anak di taman
+Allée en gravier ¦ Lối đi rải sỏi ¦ Jalan setapak kerikil
+Terrasse dallée ¦ Sân hiên lát đá ¦ Teras berlantai batu
+Terrasse en bois ¦ Sân hiên lát gỗ ¦ Teras kayu
+Bac à compost ouvert ¦ Thùng ủ phân hở ¦ Bak kompos terbuka
+Jardin japonais ¦ Vườn Nhật Bản ¦ Taman Jepang
+Rocaille ¦ Vườn đá ¦ Taman batu
+Vasque de jardin ¦ Chậu đá trang trí vườn ¦ Pot hias taman
+Statue de jardin ¦ Tượng vườn ¦ Patung taman
+Lion en pierre ¦ Sư tử đá ¦ Singa batu
+Boule décorative ¦ Quả cầu trang trí ¦ Bola dekoratif
+Nichoir à mésanges ¦ Tổ chim sẻ ngô ¦ Rumah burung tit
+Hôtel à insectes ¦ Khách sạn côn trùng ¦ Hotel serangga
+Boîte à livres ¦ Hộp sách chia sẻ ¦ Kotak buku
+Ruche kenyane ¦ Tổ ong Kenya ¦ Sarang lebah Kenya
+Pompe d’arrosage ¦ Bơm tưới tay ¦ Pompa air tangan
+Arroseur oscillant ¦ Vòi phun tưới dao động ¦ Penyiram berosilasi
+Arrosoir en zinc ¦ Bình tưới bằng kẽm ¦ Gembor seng
+Tondeuse hélicoïdale ¦ Máy cắt cỏ đẩy tay ¦ Mesin potong rumput dorong
+Motoculteur ¦ Máy xới đất ¦ Mesin bajak kecil
+Débroussailleuse ¦ Máy cắt cỏ cầm tay ¦ Mesin pemotong semak
+Souffleur à feuilles ¦ Máy thổi lá ¦ Peniup daun
+Réverbère ancien ¦ Đèn đường cổ ¦ Lampu jalan antik
+Enseigne de commerce ¦ Biển hiệu cửa hàng ¦ Papan nama toko
+Vache normande ¦ Bò Normande ¦ Sapi Normande
+Vache limousine ¦ Bò Limousin ¦ Sapi Limousin
+Vache charolaise ¦ Bò Charolais ¦ Sapi Charolais
+Vache bretonne pie noir ¦ Bò Bretonne lang đen ¦ Sapi Bretonne belang hitam
+Vache montbéliarde ¦ Bò Montbéliarde ¦ Sapi Montbéliarde
+Veau ¦ Bê con ¦ Anak sapi
+Bœuf de trait ¦ Bò kéo ¦ Lembu penarik
+Cheval de trait (percheron) ¦ Ngựa kéo (Percheron) ¦ Kuda penarik (Percheron)
+Cheval de trait breton ¦ Ngựa kéo Breton ¦ Kuda penarik Breton
+Cheval de selle ¦ Ngựa cưỡi ¦ Kuda tunggang
+Poney ¦ Ngựa lùn ¦ Kuda poni
+Mulet ¦ Con la ¦ Bagal
+Poulain ¦ Ngựa con ¦ Anak kuda
+Brebis ¦ Cừu cái ¦ Domba betina
+Agneau ¦ Cừu con ¦ Anak domba
+Bélier ¦ Cừu đực ¦ Domba jantan
+Chevreau ¦ Dê con ¦ Anak kambing
+Truie ¦ Lợn nái ¦ Babi betina
+Porcelet ¦ Lợn con ¦ Anak babi
+Coq ¦ Gà trống ¦ Ayam jago
+Poule blanche ¦ Gà mái trắng ¦ Ayam betina putih
+Poussin ¦ Gà con ¦ Anak ayam
+Canard ¦ Vịt ¦ Bebek
+Dindon ¦ Gà tây ¦ Kalkun
+Pintade ¦ Gà sao ¦ Ayam mutiara
+Pigeon ¦ Chim bồ câu ¦ Merpati
+Lapin ¦ Thỏ ¦ Kelinci
+Chien de berger ¦ Chó chăn cừu ¦ Anjing gembala
+Grand chien ¦ Chó lớn ¦ Anjing besar
+Petit chien ¦ Chó nhỏ ¦ Anjing kecil
+Chat roux ¦ Mèo lông hung ¦ Kucing oranye
+Chat noir ¦ Mèo đen ¦ Kucing hitam
+Chat tigré ¦ Mèo mướp ¦ Kucing belang
+Chat endormi en boule ¦ Mèo ngủ cuộn tròn ¦ Kucing tidur meringkuk
+Lama ¦ Lạc đà không bướu ¦ Llama
+Cerf ¦ Hươu ¦ Rusa
+Sanglier ¦ Lợn rừng ¦ Babi hutan
+Renard ¦ Cáo ¦ Rubah
+Tortue ¦ Rùa ¦ Kura-kura
+Héron ¦ Diệc ¦ Bangau
+Cygne ¦ Thiên nga ¦ Angsa
+Cage à oiseaux en osier ¦ Lồng chim bằng mây ¦ Sangkar burung rotan
+Cage à canaris ¦ Lồng chim hoàng yến ¦ Sangkar kenari
+Poulailler en bois ¦ Chuồng gà bằng gỗ ¦ Kandang ayam kayu
+Niche en bois ¦ Chuồng chó bằng gỗ ¦ Rumah anjing kayu
+Abri pour moutons ¦ Chuồng cừu ¦ Kandang domba
+Box à cheval ¦ Chuồng ngựa ¦ Kandang kuda
+Ruche Dadant ¦ Tổ ong Dadant ¦ Sarang lebah Dadant
+Ruche Langstroth ¦ Tổ ong Langstroth ¦ Sarang lebah Langstroth
+Ruche en paille tressée ¦ Tổ ong bện rơm ¦ Sarang lebah jerami anyam
+Stalle de vache ¦ Chuồng bò ¦ Kandang sapi
+Box de veau ¦ Chuồng bê ¦ Kandang anak sapi
+Mangeoire à foin ¦ Máng cỏ khô ¦ Palungan jerami
+Tonneaux de cidre ¦ Thùng rượu táo ¦ Tong sari apel
+Cuve à lait ¦ Bồn chứa sữa ¦ Tangki susu
+Barrique de vin ¦ Thùng rượu vang ¦ Tong anggur
+Brabant ¦ Cày Brabant ¦ Bajak Brabant
+Herse en bois ¦ Bừa gỗ ¦ Garu kayu
+Charrette à foin ¦ Xe chở cỏ khô ¦ Gerobak jerami
+Char à bancs ¦ Xe ngựa có ghế ¦ Kereta kuda berbangku
+Chariot à ridelles ¦ Xe kéo có thành chắn ¦ Gerobak berpagar
+Tracteur rouge des années 1950 ¦ Máy kéo đỏ thập niên 1950 ¦ Traktor merah tahun 1950-an
+Tracteur vert ¦ Máy kéo xanh lá ¦ Traktor hijau
+Petit tracteur gris (Ferguson) ¦ Máy kéo nhỏ màu xám (Ferguson) ¦ Traktor kecil abu-abu (Ferguson)
+Faneuse ¦ Máy đảo cỏ ¦ Mesin pembalik jerami
+Moissonneuse-lieuse ¦ Máy gặt bó ¦ Mesin panen pengikat
+Batteuse ¦ Máy tuốt lúa ¦ Mesin perontok
+Andaineur ¦ Máy cào cỏ thành hàng ¦ Mesin penggaru jerami
+Alambic de bouilleur de cru ¦ Nồi chưng cất rượu thủ công ¦ Alat penyuling rumahan
+Seau à traire ¦ Xô vắt sữa ¦ Ember perah
+Chèvre angora ¦ Dê Angora ¦ Kambing angora
+Cochon noir gascon ¦ Lợn đen Gascon ¦ Babi hitam Gascon
+Vache salers ¦ Bò Salers ¦ Sapi Salers
+Vache aubrac ¦ Bò Aubrac ¦ Sapi Aubrac
+Vache jersiaise ¦ Bò Jersey ¦ Sapi Jersey
+Mouton noir ¦ Cừu đen ¦ Domba hitam
+Mouton mérinos ¦ Cừu Merino ¦ Domba merino
+Poule noire ¦ Gà mái đen ¦ Ayam betina hitam
+Poule rousse ¦ Gà mái nâu đỏ ¦ Ayam betina cokelat
+Poule naine ¦ Gà tre ¦ Ayam kate
+Paon blanc ¦ Công trắng ¦ Merak putih
+Paon ¦ Con công ¦ Merak
+Lapin blanc ¦ Thỏ trắng ¦ Kelinci putih
+Cochon d’Inde ¦ Chuột lang ¦ Marmut
+Hamster ¦ Chuột hamster ¦ Hamster
+Perroquet ¦ Vẹt ¦ Burung beo
+Canari ¦ Chim hoàng yến ¦ Burung kenari
+Cheval blanc ¦ Ngựa trắng ¦ Kuda putih
+Cheval noir ¦ Ngựa đen ¦ Kuda hitam
+Chien terre-neuve ¦ Chó Newfoundland ¦ Anjing Newfoundland
+Chien labrador ¦ Chó Labrador ¦ Anjing Labrador
+Chien beauceron ¦ Chó Beauceron ¦ Anjing Beauceron
+Chien teckel ¦ Chó Dachshund ¦ Anjing Dachshund
+Volière ¦ Chuồng chim lớn ¦ Kandang burung besar
+Cage à lapin d’intérieur ¦ Lồng thỏ trong nhà ¦ Kandang kelinci dalam ruangan
+Panier pour chien ¦ Giỏ nằm cho chó ¦ Keranjang tidur anjing
+Corbeille pour chat ¦ Giỏ nằm cho mèo ¦ Keranjang tidur kucing
+Arbre à chat ¦ Trụ cào cho mèo ¦ Pohon garukan kucing
+Gamelles ¦ Bát ăn cho thú cưng ¦ Mangkuk makan hewan
+Abreuvoir automatique ¦ Máng uống tự động ¦ Tempat minum otomatis
+Tonneau de pluie en chêne ¦ Thùng hứng nước mưa bằng gỗ sồi ¦ Tong air hujan kayu ek
+Cuve à vendange ¦ Thùng chứa nho thu hoạch ¦ Bak panen anggur
+Pot à lait en fer-blanc ¦ Bình sữa bằng sắt tây ¦ Kaleng susu seng
+Charrette à bras ¦ Xe đẩy tay ¦ Gerobak dorong
+Diligence ¦ Xe ngựa chở khách ¦ Kereta pos
+Roulotte ¦ Xe ngựa du mục ¦ Kereta karavan kuda
+Râteau-faneur à cheval ¦ Máy cào cỏ kéo bằng ngựa ¦ Penggaru jerami tarikan kuda
+Botteleuse ¦ Máy đóng kiện ¦ Mesin pengepres jerami
+Semoir ¦ Máy gieo hạt ¦ Mesin penabur benih
+Pulvérisateur ¦ Máy phun thuốc ¦ Alat penyemprot
+Bouilloire électrique ¦ Ấm đun nước điện ¦ Ketel listrik
+Machine à expresso ¦ Máy pha espresso ¦ Mesin espresso
+Machine à café à levier ¦ Máy pha cà phê cần gạt ¦ Mesin kopi tuas
+Cafetière à dosettes ¦ Máy pha cà phê viên nén ¦ Mesin kopi kapsul
+Presse-agrumes ¦ Máy vắt cam ¦ Pemeras jeruk
+Four à micro-ondes encastrable ¦ Lò vi sóng âm tủ ¦ Microwave tanam
+Corbeille de fruits ¦ Giỏ trái cây ¦ Keranjang buah
+Corbeille à pain sur pied ¦ Giỏ bánh mì có chân ¦ Keranjang roti berkaki
+Étagère à épices ¦ Kệ gia vị ¦ Rak bumbu
+Desserte de cuisine en bois ¦ Xe đẩy bếp bằng gỗ ¦ Meja saji dapur dari kayu
+Bar de cuisine ¦ Quầy bar bếp ¦ Meja bar dapur
+Plaque vitrocéramique ¦ Bếp hồng ngoại mặt kính ¦ Kompor keramik kaca
+Grande plaque à induction ¦ Bếp từ lớn ¦ Kompor induksi besar
+Table de cuisson au gaz (5 feux) ¦ Bếp ga (5 lò) ¦ Kompor gas (5 tungku)
+Hotte en inox ¦ Máy hút mùi inox ¦ Tudung asap stainless
+Lave-vaisselle compact ¦ Máy rửa bát nhỏ gọn ¦ Mesin cuci piring ringkas
+Réfrigérateur rétro vert d’eau ¦ Tủ lạnh cổ điển màu xanh ngọc nhạt ¦ Kulkas retro hijau mint
+Réfrigérateur rétro orange ¦ Tủ lạnh cổ điển màu cam ¦ Kulkas retro oranye
+Évier à deux bacs en céramique ¦ Bồn rửa đôi bằng gốm ¦ Bak cuci keramik dua lubang
+Évier timbre d’office ¦ Bồn rửa sâu kiểu cũ ¦ Bak cuci keramik dalam
+Évier en pierre à potager ¦ Bồn rửa bằng đá ¦ Bak cuci batu kuno
+Cuisinière à charbon ¦ Bếp lò than ¦ Kompor arang
+Buffet de cuisine en formica ¦ Tủ bếp bằng formica ¦ Bufet dapur formika
+Buffet de cuisine bleu ciel ¦ Tủ bếp màu xanh da trời ¦ Bufet dapur biru langit
+Table en formica ¦ Bàn formica ¦ Meja formika
+Chaise en formica ¦ Ghế formica ¦ Kursi formika
+Tabouret de cuisine ¦ Ghế đẩu bếp ¦ Bangku dapur
+Cruche en grès ¦ Bình sành ¦ Kendi gerabah
+Fontaine à eau en grès ¦ Bình lọc nước bằng sành ¦ Wadah air gerabah
+Balance de cuisine Roberval ¦ Cân bàn Roberval ¦ Timbangan dapur Roberval
+Batterie de casseroles en cuivre ¦ Bộ nồi bằng đồng ¦ Set panci tembaga
+Égouttoir à vaisselle ¦ Giá úp bát ¦ Rak pengering piring
+Poubelles de tri ¦ Thùng rác phân loại ¦ Tempat sampah pilah
+Planche à découper ¦ Thớt ¦ Talenan
+Bassine à confiture en cuivre ¦ Nồi đồng nấu mứt ¦ Panci tembaga untuk selai
+Pot-au-feu en fonte ¦ Nồi gang hầm ¦ Panci besi cor
+Service à vaisselle ¦ Bộ bát đĩa ¦ Set peralatan makan
+Soupière en faïence ¦ Liễn súp bằng sứ ¦ Mangkuk sup keramik
+Panier de légumes ¦ Giỏ rau ¦ Keranjang sayur
+Bocaux de conserves ¦ Hũ đồ hộp ¦ Stoples pengawetan
+Stérilisateur à bocaux ¦ Nồi tiệt trùng hũ ¦ Alat sterilisasi stoples
+Moulin à légumes ¦ Máy nghiền rau ¦ Penggiling sayur
+Crêpière ¦ Chảo làm bánh crêpe ¦ Wajan krep
+Appareil à fondue ¦ Bộ nồi lẩu fondue ¦ Set fondue
+Extracteur de jus ¦ Máy ép chậm ¦ Juicer
+Cafetière italienne ¦ Ấm pha cà phê kiểu Ý ¦ Teko kopi moka
+Samovar ¦ Ấm samovar ¦ Samovar
+Étagère à confitures ¦ Kệ đựng mứt ¦ Rak selai
+Chariot de cuisine à roulettes ¦ Xe đẩy bếp có bánh xe ¦ Troli dapur beroda
+Garde-manger grillagé ¦ Tủ đựng thức ăn có lưới ¦ Lemari makanan berkasa
+Coffre à bois de cuisine ¦ Thùng đựng củi trong bếp ¦ Peti kayu bakar dapur
+Baignoire en fonte sur pieds de lion ¦ Bồn tắm gang chân sư tử ¦ Bak mandi besi cor berkaki singa
+Baignoire îlot moderne ¦ Bồn tắm đặt độc lập hiện đại ¦ Bak mandi berdiri modern
+Meuble double vasque ¦ Tủ chậu rửa đôi ¦ Kabinet wastafel ganda
+Vasque à poser sur plan bois ¦ Chậu rửa đặt trên mặt gỗ ¦ Wastafel atas meja kayu
+Meuble vasque suspendu ¦ Tủ chậu rửa treo tường ¦ Kabinet wastafel gantung
+WC à chasse haute ¦ Bồn cầu két nước cao ¦ Toilet tangki tinggi
+WC rehaussé ¦ Bồn cầu nâng cao ¦ Toilet tinggi
+Miroir lumineux ¦ Gương có đèn ¦ Cermin berlampu
+Panier à linge en osier ¦ Giỏ đựng đồ giặt bằng mây ¦ Keranjang cucian rotan
+Broc et cuvette en faïence ¦ Bình và chậu rửa bằng sứ ¦ Kendi dan baskom keramik
+Tub en zinc ¦ Chậu tắm bằng kẽm ¦ Bak mandi seng
+Échelle porte-serviettes ¦ Thang treo khăn ¦ Rak handuk tangga
+Tapis de bain ¦ Thảm nhà tắm ¦ Keset kamar mandi
+Panier à linge en tissu ¦ Giỏ đựng đồ giặt bằng vải ¦ Keranjang cucian kain
+Colonne de salle de bain ¦ Tủ cao phòng tắm ¦ Lemari tinggi kamar mandi
+Étagère de douche ¦ Kệ nhà tắm đứng ¦ Rak pancuran
+Vasque en pierre ¦ Chậu rửa bằng đá ¦ Wastafel batu
+Baignoire noire ¦ Bồn tắm màu đen ¦ Bak mandi hitam
+Paroi de douche en verre ¦ Vách tắm kính ¦ Partisi pancuran kaca
+WC avec abattant bois ¦ Bồn cầu nắp gỗ ¦ Toilet dengan tutup kayu
+Meuble vasque en bois ¦ Tủ chậu rửa bằng gỗ ¦ Kabinet wastafel kayu
+Lave-mains ¦ Chậu rửa tay nhỏ ¦ Wastafel cuci tangan kecil
+Lave-linge hublot ¦ Máy giặt cửa trước ¦ Mesin cuci bukaan depan
+Bac à laver ¦ Bồn giặt ¦ Bak cuci baju
+Table à repasser ¦ Bàn ủi đồ ¦ Meja setrika
+Fil à linge ¦ Dây phơi quần áo ¦ Tali jemuran
+Essoreuse à rouleaux ¦ Máy vắt trục lăn ¦ Pemeras rol
+Machine à laver à manivelle ¦ Máy giặt quay tay ¦ Mesin cuci engkol
+Balai et pelle ¦ Chổi và hốt rác ¦ Sapu dan pengki
+Nettoyeur vapeur ¦ Máy làm sạch hơi nước ¦ Pembersih uap
+Vestiaire d’entrée ¦ Tủ treo đồ ở lối vào ¦ Gantungan mantel di pintu masuk
+Patère murale ¦ Móc treo tường ¦ Gantungan dinding
+Boîte à clés ¦ Hộp chìa khóa ¦ Kotak kunci
+Console avec miroir ¦ Bàn console có gương ¦ Meja konsol dengan cermin
+Valet de nuit ¦ Giá treo vest ¦ Gantungan jas
+Fauteuil ergonomique ¦ Ghế công thái học ¦ Kursi ergonomis
+Bureau d’angle ¦ Bàn làm việc góc ¦ Meja sudut
+Petit bureau d’écolier ¦ Bàn học sinh nhỏ ¦ Meja belajar anak kecil
+Ordinateur de bureau et écran ¦ Máy tính để bàn và màn hình ¦ Komputer meja dan monitor
+Deux écrans ¦ Hai màn hình ¦ Dua monitor
+Imprimante multifonction ¦ Máy in đa năng ¦ Printer multifungsi
+Destructeur de papier ¦ Máy hủy giấy ¦ Penghancur kertas
+Armoire à classeurs ¦ Tủ hồ sơ ¦ Lemari arsip
+Caisson à roulettes ¦ Tủ hộc có bánh xe ¦ Laci beroda
+Tableau en liège ¦ Bảng ghim bần ¦ Papan gabus
+Téléphone de bureau ¦ Điện thoại bàn ¦ Telepon meja
+Globe terrestre de bureau ¦ Quả địa cầu để bàn ¦ Globe meja
+Globe terrestre sur pied ¦ Quả địa cầu có chân ¦ Globe berkaki
+Pupitre de lecture ¦ Bàn đọc sách ¦ Meja baca berdiri
+Lampe de banquier ¦ Đèn ngân hàng ¦ Lampu bankir
+Albums de famille ¦ Album ảnh gia đình ¦ Album foto keluarga
+Console de jeux ¦ Máy chơi game ¦ Konsol game
+Scanner de documents ¦ Máy quét tài liệu ¦ Pemindai dokumen
+Carte de France ancienne ¦ Bản đồ Pháp cổ ¦ Peta Prancis kuno
+Carte de Cassini encadrée ¦ Bản đồ Cassini đóng khung ¦ Peta Cassini berbingkai
+Lutrin d’archives ¦ Giá đỡ sổ lưu trữ ¦ Penyangga buku arsip
+Loupe sur pied ¦ Kính lúp có chân ¦ Kaca pembesar berkaki
+Lecteur de microfilms ¦ Máy đọc vi phim ¦ Pembaca mikrofilm
+Couffin en osier ¦ Nôi mây ¦ Keranjang bayi rotan
+Berceau en fer ¦ Nôi sắt ¦ Boks bayi besi
+Lit mezzanine ¦ Giường tầng lửng ¦ Ranjang loteng
+Poussette ¦ Xe đẩy em bé ¦ Kereta dorong bayi
+Parc pour bébé ¦ Quây cũi cho bé ¦ Boks main bayi
+Cuisine pour enfant ¦ Bộ đồ chơi nhà bếp ¦ Dapur mainan anak
+Ours en peluche géant ¦ Gấu bông khổng lồ ¦ Boneka beruang raksasa
+Poupée en porcelaine ¦ Búp bê sứ ¦ Boneka porselen
+Cubes de construction ¦ Khối xếp hình ¦ Balok bangunan
+Théâtre de marionnettes ¦ Sân khấu múa rối ¦ Panggung boneka
+Luge ¦ Xe trượt tuyết ¦ Kereta luncur
+Table de jeux de société ¦ Bàn chơi board game ¦ Meja permainan papan
+Petite table d’enfant ¦ Bàn nhỏ cho trẻ em ¦ Meja kecil anak
+Chevalet de peinture ¦ Giá vẽ ¦ Kuda-kuda lukis
+Pupitre d’écolier double ¦ Bàn học đôi kiểu cũ ¦ Meja sekolah ganda
+Tableau noir d’école ¦ Bảng đen trường học ¦ Papan tulis sekolah
+Coiffeuse d’enfant ¦ Bàn trang điểm cho trẻ em ¦ Meja rias anak
+Marchande ¦ Quầy bán hàng đồ chơi ¦ Warung mainan
+Circuit de voitures ¦ Đường đua ô tô đồ chơi ¦ Sirkuit mobil mainan
+Arche de Noé en bois ¦ Thuyền Nô-ê bằng gỗ ¦ Bahtera Nuh kayu
+Toupie ¦ Con quay ¦ Gasing
+Tapis d’éveil ¦ Thảm chơi cho bé ¦ Matras bermain bayi
+Piscine à balles ¦ Bể bóng ¦ Kolam bola
+Tipi d’enfant ¦ Lều tipi cho trẻ em ¦ Tenda tipi anak
+Draisienne ¦ Xe thăng bằng ¦ Sepeda keseimbangan
+Voiture à pédales ¦ Ô tô đạp chân ¦ Mobil kayuh
+Cheval sur roulettes ¦ Ngựa có bánh xe ¦ Kuda beroda
+Bureau d’écolier réglable ¦ Bàn học sinh điều chỉnh được ¦ Meja belajar yang bisa diatur
+Tabouret d’enfant ¦ Ghế đẩu trẻ em ¦ Bangku anak
+Suspension trois globes ¦ Đèn treo ba bóng cầu ¦ Lampu gantung tiga bola
+Lampe Tiffany ¦ Đèn Tiffany ¦ Lampu Tiffany
+Lampe en opaline ¦ Đèn thủy tinh opal ¦ Lampu opalin
+Lampe à poser en céramique ¦ Đèn bàn bằng gốm ¦ Lampu meja keramik
+Lampadaire trépied en bois ¦ Đèn cây ba chân bằng gỗ ¦ Lampu lantai kaki tiga kayu
+Lampadaire arc en marbre ¦ Đèn cây cần cong chân đá cẩm thạch ¦ Lampu lantai lengkung marmer
+Liseuse sur pied ¦ Đèn đọc sách đứng ¦ Lampu baca berdiri
+Réglette néon ¦ Đèn tuýp neon ¦ Lampu neon batang
+Lanterne à bougie ¦ Đèn lồng nến ¦ Lentera lilin
+Lampe à pétrole en cuivre ¦ Đèn dầu hỏa bằng đồng ¦ Lampu minyak tanah tembaga
+Lampe à huile romaine ¦ Đèn dầu La Mã ¦ Lampu minyak Romawi
+Bougies sur plateau ¦ Nến trên khay ¦ Lilin di atas nampan
+Chandelier à trois branches ¦ Chân nến ba nhánh ¦ Kandil tiga cabang
+Borne lumineuse ¦ Đèn trụ sân vườn ¦ Lampu tiang taman
+Mur de cadres photos ¦ Tường khung ảnh ¦ Dinding bingkai foto
+Portrait d’ancêtre ¦ Chân dung tổ tiên ¦ Potret leluhur
+Tableau de paysage ¦ Tranh phong cảnh ¦ Lukisan pemandangan
+Marine ¦ Tranh biển ¦ Lukisan laut
+Cadre photo sur pied ¦ Khung ảnh để bàn ¦ Bingkai foto berdiri
+Trophée de chasse ¦ Đầu thú săn treo tường ¦ Trofi buruan
+Maquette de bateau ¦ Mô hình thuyền ¦ Miniatur kapal
+Sculpture sur socle ¦ Tượng điêu khắc trên bệ ¦ Patung di atas alas
+Buste en plâtre ¦ Tượng bán thân bằng thạch cao ¦ Patung dada gips
+Statuette en bronze ¦ Tượng nhỏ bằng đồng ¦ Patung kecil perunggu
+Grand vase en terre ¦ Bình gốm lớn ¦ Vas tanah liat besar
+Bouquet de fleurs ¦ Bó hoa ¦ Buket bunga
+Horloge de gare ¦ Đồng hồ nhà ga ¦ Jam stasiun
+Coucou de la Forêt-Noire ¦ Đồng hồ cúc cu Rừng Đen ¦ Jam kukuk Black Forest
+Rideaux ¦ Rèm cửa ¦ Gorden
+Grand tapis persan ¦ Thảm Ba Tư lớn ¦ Karpet Persia besar
+Tapis berbère à losanges ¦ Thảm Berber họa tiết thoi ¦ Karpet Berber motif belah ketupat
+Kilim ¦ Thảm kilim ¦ Kilim
+Tapis rond en jute ¦ Thảm đay tròn ¦ Karpet goni bundar
+Paravent japonais ¦ Bình phong Nhật Bản ¦ Penyekat Jepang
+Panier à journaux ¦ Giỏ đựng báo ¦ Keranjang koran
+Grand panier en osier ¦ Giỏ mây lớn ¦ Keranjang rotan besar
+Garde-feu en laiton ¦ Tấm chắn lò sưởi bằng đồng thau ¦ Pelindung perapian kuningan
+Terrarium ¦ Bể kính trồng cây ¦ Terarium
+Diplôme encadré ¦ Bằng cấp đóng khung ¦ Ijazah berbingkai
+Photo de classe encadrée ¦ Ảnh lớp học đóng khung ¦ Foto kelas berbingkai
+Livret de famille sous verre ¦ Sổ gia đình trong khung kính ¦ Buku keluarga di balik kaca
+Canevas brodé ¦ Tranh thêu ¦ Sulaman kanvas
+Tapisserie murale ¦ Thảm thêu treo tường ¦ Permadani dinding
+Médaillon de famille ¦ Mặt dây chuyền gia đình ¦ Liontin keluarga
+Trophée sportif ¦ Cúp thể thao ¦ Trofi olahraga
+Buste de Marianne ¦ Tượng bán thân Marianne ¦ Patung dada Marianne
+Vase de Gien ¦ Bình gốm Gien ¦ Vas Gien
+Vase de Sèvres ¦ Bình sứ Sèvres ¦ Vas Sèvres
+Potiche chinoise ¦ Bình sứ Trung Hoa ¦ Guci Tiongkok
+Vase en étain ¦ Bình thiếc ¦ Vas timah
+Bouquet de fleurs séchées ¦ Bó hoa khô ¦ Buket bunga kering
+Sapin de Noël décoré ¦ Cây thông Noel trang trí ¦ Pohon Natal berhias
+Couronne de porte ¦ Vòng hoa treo cửa ¦ Karangan bunga pintu
+Photophores ¦ Đèn nến thủy tinh ¦ Wadah lilin kaca
+Bateau en bouteille ¦ Thuyền trong chai ¦ Kapal dalam botol
+Maquette de locomotive ¦ Mô hình đầu máy xe lửa ¦ Miniatur lokomotif
+Collection de dés à coudre ¦ Bộ sưu tập đê khâu ¦ Koleksi bidal
+Vitrine de minéraux ¦ Tủ kính khoáng vật ¦ Lemari pajang mineral
+Collection de papillons ¦ Bộ sưu tập bướm ¦ Koleksi kupu-kupu
+Boîte à musique ¦ Hộp nhạc ¦ Kotak musik
+Baromètre ¦ Phong vũ biểu ¦ Barometer
+Thermomètre ancien ¦ Nhiệt kế cổ ¦ Termometer antik
+Voilages ¦ Rèm voan ¦ Gorden tipis
+Rideaux de velours ¦ Rèm nhung ¦ Gorden beludru
+Store bateau ¦ Rèm La Mã ¦ Tirai Romawi
+Tapis moderne ¦ Thảm hiện đại ¦ Karpet modern
+Tapis en peau de mouton ¦ Thảm da cừu ¦ Karpet kulit domba
+Poêle à granulés rouge ¦ Lò sưởi viên nén màu đỏ ¦ Kompor pelet merah
+Poêle Godin ¦ Lò sưởi Godin ¦ Kompor Godin
+Radiateur vertical design ¦ Bộ tản nhiệt đứng thiết kế ¦ Radiator vertikal desain
+Chauffe-eau ¦ Bình nóng lạnh ¦ Pemanas air
+Téléviseur sur meuble ¦ Tivi trên kệ ¦ Televisi di atas meja
+Téléviseur au mur ¦ Tivi treo tường ¦ Televisi di dinding
+Téléviseur à tube ¦ Tivi màn hình ống ¦ Televisi tabung
+Chaîne hi-fi ¦ Dàn hi-fi ¦ Sistem hi-fi
+Enceintes colonnes ¦ Loa cột ¦ Speaker menara
+Radiocassette ¦ Máy cassette radio ¦ Radio kaset
+Magnétoscope ¦ Đầu video ¦ Pemutar video
+Ventilateur de plafond ¦ Quạt trần ¦ Kipas angin langit-langit
+Ventilateur de table ¦ Quạt bàn ¦ Kipas angin meja
+Radiateur soufflant ¦ Máy sưởi quạt ¦ Pemanas kipas
+Convecteur électrique ¦ Máy sưởi đối lưu điện ¦ Pemanas konvektor listrik
+Poêle à bois moderne ¦ Lò sưởi củi hiện đại ¦ Kompor kayu modern
+Cuisinière à bois moderne ¦ Bếp củi hiện đại ¦ Tungku masak kayu modern
+Pompe à chaleur ¦ Máy bơm nhiệt ¦ Pompa kalor
+Chaudière au fioul ¦ Nồi hơi dầu ¦ Boiler minyak
+Chaudière à gaz murale ¦ Nồi hơi gas treo tường ¦ Boiler gas dinding
+Cuve à fioul ¦ Bồn chứa dầu sưởi ¦ Tangki minyak pemanas
+Robot tondeuse ¦ Robot cắt cỏ ¦ Robot pemotong rumput
+Téléviseur portatif années 70 ¦ Tivi xách tay thập niên 70 ¦ Televisi portabel tahun 70-an
+Lecteur CD ¦ Đầu đĩa CD ¦ Pemutar CD
+Magnétophone à bandes ¦ Máy ghi âm băng cối ¦ Perekam pita reel
+Enceinte connectée ¦ Loa thông minh ¦ Speaker pintar
+Piano droit noir ¦ Đàn piano đứng màu đen ¦ Piano tegak hitam
+Piano droit en acajou ¦ Đàn piano đứng gỗ gụ ¦ Piano tegak mahoni
+Piano demi-queue ¦ Đàn piano bán cánh ¦ Piano baby grand
+Piano à queue de concert ¦ Đàn grand piano hòa nhạc ¦ Piano konser
+Épinette ¦ Đàn spinet ¦ Spinet
+Orgue de salon ¦ Đàn organ phòng khách ¦ Organ ruang tamu
+Clavier électronique ¦ Đàn phím điện tử ¦ Keyboard elektronik
+Guitare classique ¦ Đàn guitar cổ điển ¦ Gitar klasik
+Banjo ¦ Đàn banjo ¦ Banjo
+Mandoline ¦ Đàn mandolin ¦ Mandolin
+Violon sur pupitre ¦ Đàn violin trên giá ¦ Biola di atas penyangga
+Bandonéon ¦ Đàn bandoneon ¦ Bandoneon
+Trompette sur pied ¦ Kèn trumpet trên giá ¦ Trompet di atas penyangga
+Saxophone sur pied ¦ Kèn saxophone trên giá ¦ Saksofon di atas penyangga
+Cor de chasse ¦ Tù và săn ¦ Terompet berburu
+Clarinette sur pied ¦ Kèn clarinet trên giá ¦ Klarinet di atas penyangga
+Pupitre de musique ¦ Giá nhạc ¦ Stand partitur
+Gramophone à pavillon ¦ Máy hát loa kèn ¦ Gramofon bercorong
+Cornemuse (biniou) ¦ Kèn túi (biniou) ¦ Bagpipe (biniou)
+Timbales ¦ Trống timpani ¦ Timpani
+Xylophone ¦ Đàn xylophone ¦ Xilofon
+Marimba ¦ Đàn marimba ¦ Marimba
+Cithare ¦ Đàn tranh zither ¦ Siter
+Ukulélé ¦ Đàn ukulele ¦ Ukulele
+Luth ¦ Đàn luýt ¦ Lute
+Flûte traversière sur support ¦ Sáo ngang trên giá ¦ Flute di atas penyangga
+Flûte à bec ¦ Sáo dọc ¦ Rekorder
+Trombone sur pied ¦ Kèn trombone trên giá ¦ Trombon di atas penyangga
+Hautbois sur support ¦ Kèn oboe trên giá ¦ Obo di atas penyangga
+Harmonica et pupitre ¦ Kèn harmonica và giá nhạc ¦ Harmonika dan stand partitur
+Meuble à partitions ¦ Tủ đựng bản nhạc ¦ Lemari partitur
+Table de mixage ¦ Bàn trộn âm thanh ¦ Mixer audio
+Rayonnage de cave ¦ Kệ hầm chứa ¦ Rak gudang bawah tanah
+Cartons de déménagement ¦ Thùng các-tông chuyển nhà ¦ Kardus pindahan
+Étagère d’archives familiales ¦ Kệ lưu trữ hồ sơ gia đình ¦ Rak arsip keluarga
+Coffret à bijoux ¦ Hộp đựng trang sức ¦ Kotak perhiasan
+Portant à vêtements ¦ Giá treo quần áo ¦ Rak gantung pakaian
+Dressing d’angle ¦ Phòng thay đồ góc ¦ Walk-in closet sudut
+Meuble à cases (cubes) ¦ Kệ ô vuông (khối) ¦ Rak kubus
+Étagère de cellier ¦ Kệ kho thực phẩm ¦ Rak gudang makanan
+Boîtes de rangement en plastique ¦ Hộp đựng đồ bằng nhựa ¦ Kotak penyimpanan plastik
+Caisses en bois ¦ Thùng gỗ ¦ Peti kayu
+Panier à pique-nique ¦ Giỏ dã ngoại ¦ Keranjang piknik
+Boîte à couture ¦ Hộp đồ khâu ¦ Kotak jahit
+Housse à vêtements ¦ Túi bọc quần áo ¦ Sarung pakaian
+Crucifix mural ¦ Thánh giá treo tường ¦ Salib dinding
+Crèche provençale et santons ¦ Hang đá Giáng sinh Provence và tượng santon ¦ Kandang Natal Provence dan santon
+Chapelet ¦ Chuỗi tràng hạt ¦ Rosario
+Coin du souvenir (photos et bougie) ¦ Góc tưởng niệm (ảnh và nến) ¦ Sudut kenangan (foto dan lilin)
+Boîte à lettres d’amour ¦ Hộp thư tình ¦ Kotak surat cinta
+Vitrine de médailles ¦ Tủ kính huy chương ¦ Lemari pajang medali
+Bouquet de mariée sous globe ¦ Bó hoa cưới trong lồng kính ¦ Buket pengantin di bawah kubah kaca
+Bénitier mural ¦ Bình nước thánh treo tường ¦ Tempat air suci dinding
+Icône orthodoxe ¦ Tranh thánh Chính Thống giáo ¦ Ikon Ortodoks
+Rameau de buis bénit ¦ Cành hoàng dương được làm phép ¦ Ranting boxwood yang diberkati
+Statue de saint ¦ Tượng thánh ¦ Patung santo
+Plaque de communion encadrée ¦ Kỷ niệm rước lễ đóng khung ¦ Kenang-kenangan komuni berbingkai
+Livre de prières ancien ¦ Sách kinh cổ ¦ Buku doa antik
+Scie circulaire sur table ¦ Máy cưa đĩa để bàn ¦ Gergaji meja
+Scie à onglets ¦ Máy cưa góc ¦ Gergaji potong miring
+Forge et soufflet ¦ Lò rèn và ống bễ ¦ Tempa dan ububan
+Établi de mécanicien ¦ Bàn thợ cơ khí ¦ Meja kerja mekanik
+Établi d’horloger ¦ Bàn thợ đồng hồ ¦ Meja kerja tukang jam
+Table de cordonnier ¦ Bàn thợ đóng giày ¦ Meja tukang sepatu
+Table de coupe de tailleur ¦ Bàn cắt vải thợ may ¦ Meja potong penjahit
+Paillasse de laboratoire ¦ Bàn thí nghiệm ¦ Meja laboratorium
+Scie à ruban ¦ Máy cưa vòng ¦ Gergaji pita
+Tour à métaux ¦ Máy tiện kim loại ¦ Mesin bubut logam
+Surjeteuse ¦ Máy vắt sổ ¦ Mesin obras
+Métier à broder ¦ Khung thêu ¦ Pemidangan sulam
+Petite citadine ¦ Xe đô thị nhỏ ¦ Mobil kota kecil
+Voiture familiale ¦ Xe gia đình ¦ Mobil keluarga
+Voiture ancienne (années 30) ¦ Xe cổ (thập niên 30) ¦ Mobil antik (tahun 30-an)
+Deux-chevaux ¦ Citroën 2CV ¦ Citroën 2CV
+Coccinelle ¦ Xe VW Beetle ¦ VW Kodok
+Fourgonnette ¦ Xe tải van nhỏ ¦ Mobil van kecil
+Mobylette ¦ Xe gắn máy Mobylette ¦ Mobylette
+Vélo de course ¦ Xe đạp đua ¦ Sepeda balap
+Vélo hollandais ¦ Xe đạp kiểu Hà Lan ¦ Sepeda Belanda
+Vélo cargo ¦ Xe đạp chở hàng ¦ Sepeda kargo
+Pneus empilés ¦ Chồng lốp xe ¦ Tumpukan ban
+Échelle double ¦ Thang chữ A ¦ Tangga lipat
+Second congélateur ¦ Tủ đông thứ hai ¦ Freezer kedua
+Voiture tout-terrain ¦ Xe địa hình ¦ Mobil off-road
+Voiture de sport ¦ Xe thể thao ¦ Mobil sport
+Voiture électrique ¦ Xe điện ¦ Mobil listrik
+Camping-car ¦ Xe nhà di động ¦ Mobil kemping
+Moto ancienne avec side-car ¦ Mô tô cổ có thuyền bên ¦ Motor antik dengan sespan
+Vélo ancien ¦ Xe đạp cổ ¦ Sepeda antik
+VTT ¦ Xe đạp leo núi ¦ Sepeda gunung
+Borne de recharge ¦ Trạm sạc ¦ Stasiun pengisian daya
+Armoire à outils ¦ Tủ dụng cụ ¦ Lemari perkakas
+Chariot de pneus ¦ Xe đẩy lốp ¦ Troli ban
+Caisse à outils ¦ Hộp dụng cụ ¦ Kotak perkakas
+Chargeur de batterie ¦ Bộ sạc ắc quy ¦ Pengisi aki

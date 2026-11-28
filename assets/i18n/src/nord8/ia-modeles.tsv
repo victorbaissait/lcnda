@@ -1,0 +1,35 @@
+fr ¦ tr
+# 🔬 Lecture approfondie : les modèles d’IA (avantages, inconvénients, « à l’essai », avancé) — lib/transcription_actes.php, heritage-transcribe-acte.js
+ia|Modèle ¦ Model
+conseillé pour cet ordinateur ({n} Go) ¦ bu bilgisayar için önerilen ({n} GB)
+à l’essai ¦ denemelik
+≈ {x} Go à télécharger ¦ ≈ {x} GB indirilecek
+{n} Go de mémoire conseillés ¦ {n} GB bellek önerilir
+trop gros pour cet ordinateur ¦ bu bilgisayar için fazla büyük
+Autres modèles à essayer ({n}) ¦ Diğer denenecek modeller ({n})
+Pas encore essayés par l’app sur des actes : compare-les sur tes actes (« Les deux lectures côte à côte ») avant de t’y fier. ¦ Uygulama bunları henüz belgelerde denemedi: güvenmeden önce kendi belgelerinde karşılaştır (“İki okuma yan yana”).
+Avancé : autre modèle (Ollama) ¦ Gelişmiş: başka model (Ollama)
+Les modèles déjà installés dans Ollama sur cet ordinateur. Un modèle qui ne sait pas lire une image ne peut pas lire l’acte. Pas essayé par l’app : vérifie toujours le texte. ¦ Bu bilgisayarda Ollama’ya zaten kurulu modeller. Görüntü okuyamayan bir model belgeyi okuyamaz. Uygulama denemedi: metni her zaman kontrol et.
+lit les images ¦ görüntü okur
+ne lit pas les images ¦ görüntü okumaz
+Aucun autre modèle installé. Dans un terminal : « ollama pull » suivi du nom du modèle. ¦ Başka kurulu model yok. Bir terminalde: “ollama pull” ve ardından modelin adı.
+cet ordinateur : {n} Go · chaque modèle se télécharge une seule fois ¦ bu bilgisayar: {n} GB · her model yalnızca bir kez indirilir
+Ce modèle ne sait pas lire une image : choisis un modèle « vision ». ¦ Bu model görüntü okuyamaz: bir “vision” modeli seç.
+le meilleur essayé sur les actes anciens, bon en français et en latin ¦ eski belgelerde denenen en iyisi, Fransızca ve Latincede iyi
+16 Go de mémoire conseillés ¦ 16 GB bellek önerilir
+léger et rapide, pour un ordinateur modeste ¦ hafif ve hızlı, mütevazı bir bilgisayar için
+se trompe plus souvent sur les noms et les écritures difficiles ¦ isimlerde ve zor el yazılarında daha sık yanılır
+pour les ordinateurs puissants (64 Go) : la même famille que le conseillé, plus précise sur les écritures difficiles ¦ güçlü bilgisayarlar için (64 GB): önerilenle aynı aile, zor el yazılarında daha isabetli
+lent, gros téléchargement ¦ yavaş, büyük indirme
+le plus gros qui tienne dans 64 Go ¦ 64 GB’a sığan en büyüğü
+très lent, très gros téléchargement, licence moins ouverte ¦ çok yavaş, çok büyük indirme, daha az açık lisans
+fort en français, bon pour comprendre l’acte ¦ Fransızcada güçlü, belgeyi anlamada iyi
+32 Go de mémoire conseillés, plus lent ¦ 32 GB bellek önerilir, daha yavaş
+bon dans les langues européennes ¦ Avrupa dillerinde iyi
+licence de Google moins ouverte, moins précis sur l’écriture à la main ¦ daha az açık Google lisansı, el yazısında daha az isabetli
+léger, plusieurs langues ¦ hafif, birkaç dil
+licence de Google, se trompe souvent sur les noms ¦ Google lisansı, isimlerde sık yanılır
+annoncé bon en écriture manuscrite ¦ el yazısında iyi olduğu söyleniyor
+moins connu, résultats à comparer ¦ daha az bilinen, sonuçlar karşılaştırılmalı
+très léger, fait pour les documents, ordinateurs modestes ¦ çok hafif, belgeler için yapılmış, mütevazı bilgisayarlar
+faible sur l’écriture à la main ancienne ¦ eski el yazısında zayıf

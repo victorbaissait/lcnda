@@ -531,7 +531,7 @@ Le nom du modèle (les données restent : vide-les avant si tu veux un modèle v
 Le nom de la copie : ¦ Naziv kopije: ¦ Ime kopije:
 {name} (copie) ¦ {name} (kopija) ¦ {name} (kopija)
 Les changements faits depuis le dernier enregistrement seront perdus. ¦ Promjene napravljene od posljednjeg spremanja bit će izgubljene. ¦ Spremembe od zadnjega shranjevanja bodo izgubljene.
-📋 Partir d’un modèle ¦ 📋 Kreni od predloška ¦ 📋 Začni s predlogo
+🧩 Partir d’un modèle ¦ 🧩 Kreni od predloška ¦ 🧩 Začni s predlogo
 Mes modèles ¦ Moji predlošci ¦ Moje predloge
 Pas encore de modèle à toi : dans un classeur, Fichier → « Enregistrer comme modèle… ». ¦ Još nemaš svoj predložak: u radnoj knjizi, Datoteka → „Spremi kao predložak…”. ¦ Svoje predloge še nimaš: v delovnem zvezku Datoteka → »Shrani kot predlogo …«.
 séparateur « {sep} » ¦ razdjelnik „{sep}” ¦ ločilo »{sep}«
@@ -615,7 +615,7 @@ Sosa, génération, côté, âge ¦ Sosa broj, generacija, strana, dob ¦ Sosa �
 objets, prix, total en livres ¦ predmeti, cijene, ukupno u livres ¦ predmeti, cene, skupaj v livres
 Registre matricule ¦ Vojni matični registar ¦ Vojaški matični register
 classe, signalement, campagnes ¦ godište, osobni opis, pohodi ¦ letnik, osebni opis, pohodi
-📋 Partir d’un modèle… ¦ 📋 Kreni od predloška… ¦ 📋 Začni s predlogo …
+🧩 Partir d’un modèle… ¦ 🧩 Kreni od predloška… ¦ 🧩 Začni s predlogo …
 ⤒ Importer un tableau… ¦ ⤒ Uvezi tablicu… ¦ ⤒ Uvozi tabelo …
 ⤓ Exporter… ¦ ⤓ Izvezi… ¦ ⤓ Izvozi …
 🖨 Imprimer… ¦ 🖨 Ispiši… ¦ 🖨 Natisni …

@@ -1,0 +1,170 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Documents liés et recueils</title>
+<style>
+:root{--bg:#f4f5f7;--paper:#fff;--ink:#111;--muted:#555;--soft:#777;--line:#eceef2;--line2:#c9ced8;--blue:#055dff;--blue-bg:#eef4ff;--blue-ink:#1a3d8f;--green:#1a7f37;--green-bg:#eaf6ee;--yel:#d4a800;--yel-bg:#fff8d6;--yel-ink:#7a5d00;--red:#c62828;--red-bg:#fdecec;--vio:#6929c4;--vio-bg:#f3ecff;--grey-bg:#f1f2f4;--shadow:rgba(5,93,255,.25);--bar:#141414;--bar-ink:#fff;--sheet:#fffdf8;--parch:#e8d6ae;--parch-ink:#4a3218;--stage:#3a3d44}
+@media (prefers-color-scheme:dark){:root{--bg:#121417;--paper:#1c1f24;--ink:#eceef2;--muted:#b4b9c3;--soft:#9aa0aa;--line:#2c3038;--line2:#454b55;--blue:#5b93ff;--blue-bg:#18233a;--blue-ink:#a9c4ff;--green:#4cc070;--green-bg:#15281c;--yel:#e0b93a;--yel-bg:#2c2612;--yel-ink:#f0d276;--red:#ff6b6b;--red-bg:#331a1a;--vio:#b48cff;--vio-bg:#261d38;--grey-bg:#262a31;--shadow:rgba(91,147,255,.22);--bar:#000;--bar-ink:#eceef2;--sheet:#23262b;--parch:#c9b48a;--parch-ink:#2e1f0e;--stage:#0d0f12}}
+*{box-sizing:border-box}
+body{background:var(--bg);padding:28px;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);margin:0;line-height:1.45}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:19px;margin:40px 0 6px}
+.part{font:800 12px system-ui;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin:46px 0 0;border-top:3px solid var(--ink);padding-top:10px}
+.sub{color:var(--muted);margin:0 0 18px;font-size:14px;max-width:1000px}
+.wrap{max-width:1240px;margin:0 auto}
+.simple{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:12px 16px;font-size:14px;max-width:1000px}
+.simple p{margin:0 0 8px}.simple p:last-child{margin:0}
+.toc{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+.toc a{background:var(--paper);border:2px solid var(--ink);padding:8px 14px;box-shadow:4px 4px 0 var(--shadow);color:var(--ink);text-decoration:none;font-size:13px}
+.toc a b{display:block;font-size:16px}
+.badge{font:700 10.5px/1.2 system-ui;border:1.5px solid var(--ink);padding:3px 6px;letter-spacing:.03em;display:inline-block;text-transform:uppercase;white-space:nowrap;vertical-align:middle}
+.badge.new{border-color:var(--blue);color:#fff;background:var(--blue)}
+.badge.have{border-color:#8a8f99;color:var(--muted);background:var(--grey-bg)}
+.badge.ok{border-color:var(--green);color:var(--green);background:var(--green-bg)}.badge.warn{border-color:var(--yel);color:var(--yel-ink);background:var(--yel-bg)}.badge.red{border-color:var(--red);color:var(--red);background:var(--red-bg)}.badge.blue{border-color:var(--blue);color:var(--blue)}.badge.vio{border-color:var(--vio);color:var(--vio);background:var(--vio-bg)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{font:700 11px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);text-align:left;padding:8px;border-bottom:2px solid var(--ink)}
+td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+code{font:11.5px ui-monospace,Menlo,Consolas,monospace;color:var(--muted);word-break:break-word}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 26px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.wide{grid-column:1 / -1}
+.grid>*,.grid3>*{min-width:0}
+.case{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:16px 18px 18px;min-width:0}
+.case .head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.case .tag{font:700 11px/1 system-ui;letter-spacing:.1em;color:var(--blue);text-transform:uppercase}
+.num-b{display:inline-block;background:var(--blue);color:#fff;font:800 12px system-ui;padding:3px 7px;margin-right:6px;letter-spacing:0}
+.case h3{margin:8px 0 10px;font-size:17px}
+.note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+.msg{border-left:4px solid var(--blue);background:var(--blue-bg);padding:9px 12px;font-size:13px;margin:12px 0}
+.msg.warn{border-color:var(--yel);background:var(--yel-bg)}.msg.ok{border-color:var(--green);background:var(--green-bg)}.msg.red{border-color:var(--red);background:var(--red-bg)}
+.meta{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 0;font-size:12px}
+.meta span{border:1.5px solid var(--line2);padding:2px 7px;background:var(--grey-bg)}
+.meta .p1{border-color:var(--red);color:var(--red);background:var(--red-bg);font-weight:800}
+.meta .p2{border-color:var(--yel);color:var(--yel-ink);background:var(--yel-bg);font-weight:800}
+.meta .p3{border-color:#8a8f99;color:var(--muted);font-weight:800}
+.why{font-size:13px;margin:0 0 10px}
+.btn{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--ink);background:var(--paper);font:700 13px system-ui;padding:7px 11px;box-shadow:3px 3px 0 var(--shadow);color:var(--ink);white-space:nowrap}
+.btn.blue{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.small{font-size:12px;padding:4px 8px;box-shadow:none}
+.btn.ghost{border-color:var(--line2);box-shadow:none;color:var(--muted)}
+.row{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.mini{font-size:12px;color:var(--muted)}
+.input{border:1.5px solid var(--line2);padding:4px 8px;font-size:12.5px;background:var(--paper);min-height:28px;display:inline-flex;align-items:center;color:var(--ink)}
+.pill{display:inline-block;font:700 11px/1.2 system-ui;padding:2px 6px;border:1.5px solid var(--line2);background:var(--grey-bg);color:var(--muted);white-space:nowrap}
+.pill.ok{border-color:var(--green);background:var(--green-bg);color:var(--green)}
+.pill.q{border-color:var(--yel);background:var(--yel-bg);color:var(--yel-ink)}
+.pill.blue{border-color:var(--blue);background:var(--blue-bg);color:var(--blue-ink)}
+.seg{display:inline-flex;border:2px solid var(--ink);flex-wrap:wrap;max-width:100%}.seg span{padding:4px 9px;font:700 12px system-ui;border-right:1.5px solid var(--ink);background:var(--paper)}.seg span:last-child{border-right:0}.seg span.on{background:var(--blue);color:#fff}
+.tg{display:inline-flex;align-items:center;gap:7px;font-size:12.5px}.tg i{width:30px;height:17px;border-radius:9px;background:var(--blue);position:relative;flex:none}.tg i:after{content:"";position:absolute;right:2px;top:2px;width:13px;height:13px;border-radius:50%;background:#fff}
+.tg.off i{background:var(--line2)}.tg.off i:after{right:auto;left:2px}
+.scrollx{overflow-x:auto;max-width:100%}
+.cb{width:14px;height:14px;border:2px solid var(--ink);display:inline-block;flex:none;vertical-align:-2px}.cb.on{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--paper)}
+.scrollx>table{min-width:720px}
+/* gabarit */
+.fld{display:grid;grid-template-columns:120px minmax(0,1fr) auto;gap:6px 8px;font-size:12.5px;align-items:center}
+.fld .k{color:var(--muted)}
+.fld .v{border:1.5px solid var(--line2);padding:3px 7px;background:var(--paper);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fld .v.empty{color:var(--soft);font-style:italic;border-style:dashed}
+.fld .v.got{border-color:var(--green);background:var(--green-bg)}
+/* documents liés */
+.doc{border:2px solid var(--ink);background:var(--paper);box-shadow:6px 6px 0 var(--shadow);padding:12px 14px;min-width:0}
+.doc h3{margin:0 0 6px;font-size:16px}
+.blk{border-top:1.5px solid var(--line2);padding-top:8px;margin-top:10px}
+.blk h4{margin:0 0 6px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.lk{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 10px;align-items:center;padding:6px 0;border-bottom:1px dashed var(--line2);font-size:13px}
+.common{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.learn{font-size:13px;margin:4px 0;padding:6px 8px;background:var(--blue-bg);border-left:3px solid var(--blue)}
+.toc{list-style:none;margin:0;padding:0;font-size:13px}
+.toc li{display:flex;gap:8px;align-items:center;padding:4px 0;border-bottom:1px dashed var(--line2)}
+.toc li.sub{padding-left:22px}
+.toc .rng{color:var(--muted);font-variant-numeric:tabular-nums;min-width:86px}
+.strip{display:flex;gap:4px;flex-wrap:wrap;margin:6px 0}
+.strip span{width:26px;height:34px;border:1.5px solid var(--line2);background:var(--grey-bg);font:700 10px system-ui;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px}
+.strip span.c1{background:var(--blue-bg);border-color:var(--blue)}.strip span.c2{background:var(--green-bg);border-color:var(--green)}.strip span.c3{background:var(--yel-bg);border-color:var(--yel)}
+.dq{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:14px 16px;margin:14px 0;max-width:1000px}
+.dq h3{margin:0 0 8px;font-size:16px}
+.opt{border-left:4px solid var(--line2);padding:6px 10px;margin:6px 0;font-size:13px}
+.opt.rec{border-left-color:var(--blue);background:var(--blue-bg)}
+.opt b{display:block}
+@media (max-width:820px){.grid{grid-template-columns:1fr}body{padding:16px}}
+</style></head><body><div class="wrap">
+<span class="part" style="border:0;margin:0;padding:0">Documents · Enquêtes · Recueils</span>
+<h1>🔗 Documents liés, 📚 recueils et chapitres</h1>
+<p class="sub">Maquette. Les noms (MAZAUD, DURAND, LACOMBE) sont inventés. Options conseillées choisies (« fais tout ») et mises en réglage quand c’est un choix.</p>
+
+<div class="simple">
+<p><b>Trois notions qui s’emboîtent, sans se contredire :</b></p>
+<p>📑 <b>Pages d’un document</b> : un seul document sur plusieurs images (recto, verso). Un seul texte.<br>
+📚 <b>Recueil</b> : une suite de documents dans l’ordre (registre, liasse, cahier), découpée en <b>chapitres</b> (« Mariages 1870 », pages 12 à 19).<br>
+🔗 <b>Documents liés</b> : des documents différents, reliés pour une raison (« même régiment »).</p>
+<p>Un recueil contient des documents ; un document peut avoir plusieurs pages ; n’importe quel document peut être lié à un autre, même dans un autre recueil. L’app dit toujours lequel des trois (« 📑 page 2 de ce document », « 📚 Registre de Sancoins, f° 12 · Mariages 1870 », « 🔗 lié à … »).</p>
+</div>
+
+<div class="part">1 · La page d’un document</div>
+<h2>« 🔗 Documents liés » et « 📚 Dans le recueil »</h2>
+<div class="grid">
+<div class="doc">
+<h3>📜 Acte de notoriété de Pierre MAZAUD, 1814</h3>
+<div class="blk"><h4>📚 Recueil</h4>
+<p style="margin:0;font-size:13px">« Justice de paix de Sancoins, 1810-1820 » · f° 23 · chapitre <b>Actes de notoriété 1814</b></p>
+<div class="row" style="margin-top:6px"><span class="btn small">‹ f° 22</span><span class="btn small">f° 24 ›</span><span class="btn small ghost">📚 Ouvrir le recueil</span></div></div>
+<div class="blk"><h4>🔗 Documents liés (2)</h4>
+<div class="lk"><span>📜</span><span><b>Acte de notoriété de Jean DURAND, 1815</b><br><small class="mini">même régiment · « 152e de ligne »</small></span><span class="btn small ghost">⋯</span></div>
+<div class="lk"><span>✉️</span><span><b>Lettre du capitaine, 1813</b><br><small class="mini">même affaire</small></span><span class="btn small ghost">⋯</span></div>
+<div class="row" style="margin-top:8px"><span class="btn small">＋ Lier un document…</span></div></div>
+</div>
+<div class="doc">
+<h3>En commun avec l’acte de Jean DURAND</h3>
+<div class="common"><span class="pill blue">152e régiment de ligne</span><span class="pill blue">bataille d’Ulm</span><span class="pill blue">Sancoins</span><span class="pill blue">1805</span><span class="pill">témoin : Louis LACOMBE</span></div>
+<p class="mini" style="margin:0">Un clic : le passage dans les deux textes, côte à côte.</p>
+<h4 style="margin:12px 0 4px">Ce que l’acte de Jean DURAND t’apprend</h4>
+<div class="learn">Le régiment est passé par la Bohême en 1805 <span class="mini">(l. 7)</span> <span class="btn small">＋ Ajouter à une fiche…</span> <span class="btn small ghost">🔎 En faire une piste</span></div>
+<div class="learn">Prisonniers libérés en 1814 à Prague <span class="mini">(l. 11)</span> <span class="btn small">＋ Ajouter à une fiche…</span></div>
+<p class="note">Comme « Ce que l’app a trouvé » : la source jointe est l’autre document.</p>
+</div>
+</div>
+<div class="simple" style="margin-top:14px"><p><b>Lier :</b> « ＋ Lier un document… » (page du document, visionneuse, Atelier, enquête) → choisir le document → la raison : <span class="pill">même régiment</span> <span class="pill">même famille</span> <span class="pill">même affaire</span> <span class="pill">même lieu</span> <span class="pill">même notaire</span> <span class="pill">autre (écrire)</span>. ⋯ : modifier la raison, retirer le lien, ↶ Annuler. Le lien va dans les deux sens.</p>
+<p><b>Garde-fou :</b> deux images reliées comme « pages d’un même document » alors que l’app y lit deux actes (deux dates, deux sujets) → « Ce sont peut-être deux documents : les lier plutôt ? ».</p></div>
+
+<div class="part">2 · Dans une enquête</div>
+<h2>Les documents de l’enquête et leurs liens</h2>
+<div class="doc" style="max-width:1000px">
+<h3>🔎 Enquête « Pierre MAZAUD, soldat de l’Empire »</h3>
+<div class="blk"><h4>Documents du dossier (3) · liés entre eux</h4>
+<div class="lk"><span>📜</span><span><b>Acte de notoriété de Pierre MAZAUD</b> <small class="mini">🔗 2 liés</small><br><small class="mini">en commun avec 1 autre document du dossier : 152e régiment, Ulm</small></span><span class="btn small ghost">⋯</span></div>
+<div class="lk"><span>📜</span><span><b>Acte de notoriété de Jean DURAND</b> <small class="pill q">pas dans le dossier</small><br><small class="mini">lié au premier (même régiment)</small></span><span class="btn small">＋ Ajouter au dossier</span></div>
+</div>
+<div class="blk"><h4>💡 Ce que les documents liés apprennent</h4>
+<div class="learn">Le régiment est passé par la Bohême en 1805 <span class="btn small">🔎 En faire une piste</span> <span class="btn small ghost">⚖️ Au dossier de preuve</span></div>
+</div>
+<p class="note">Les documents liés à ceux du dossier sont proposés (« pas dans le dossier ») ; « ＋ Lier deux documents… » existe aussi dans l’enquête.</p>
+</div>
+
+<div class="part">3 · Recueils depuis Documents, et chapitres</div>
+<div class="grid">
+<div class="doc">
+<h3>📄 Documents → choisir plusieurs → « 📚 Faire un recueil »</h3>
+<p class="mini">Ordre de la sélection, puis on range en glissant ⠿. Nom, cote, lieu, années. Les documents restent à leur place dans Documents : le recueil les regroupe, il ne les déplace pas.</p>
+<div class="row"><span class="btn small">📚 Faire un recueil avec ces 12 documents</span><span class="btn small ghost">📚 Ajouter à un recueil…</span></div>
+<p class="mini" style="margin-top:10px">Une page de recueil = une image. Un acte sur 2 pages = un document de 2 pages, dans le recueil.</p>
+</div>
+<div class="doc">
+<h3>📚 Registre de Sancoins, 1870-1872 · table des matières</h3>
+<ol class="toc">
+<li><span class="rng">f° 1–34</span><b>Année 1870</b></li>
+<li class="sub"><span class="rng">f° 1–14</span>Naissances 1870 <span class="pill">naissance</span></li>
+<li class="sub"><span class="rng">f° 15–19</span>Mariages 1870 <span class="pill">mariage</span></li>
+<li class="sub"><span class="rng">f° 20–34</span>Décès 1870 <span class="pill">décès</span></li>
+<li><span class="rng">f° 35–68</span><b>Année 1871</b> <span class="pill q">⚠️ f° 50 : un mariage dans « Décès »</span></li>
+</ol>
+<div class="strip"><span class="c1">1</span><span class="c1">…</span><span class="c1">14</span><span class="c2">15</span><span class="c2">19</span><span class="c3">20</span><span class="c3">34</span></div>
+<div class="row"><span class="btn small">＋ Chapitre…</span><span class="btn small ghost">✨ Proposer le découpage</span></div>
+</div>
+</div>
+<div class="simple" style="margin-top:14px"><p><b>Chapitre</b> : titre, de la page … à la page …, sorte d’acte (facultatif), années (facultatif), sous-chapitres (2 niveaux). Un clic : la première page. Dans Documents et la recherche : « 📚 Registre de Sancoins › 1870 › Mariages ».</p>
+<p><b>✨ Proposer le découpage</b> : d’après les transcriptions (sorte d’acte et année repérées par page) ; tu acceptes, tu corriges, ↶ Annuler. <b>Incohérences signalées</b> : deux chapitres qui se chevauchent au même niveau, une page hors de son chapitre (mariage dans « Décès », année 1871 dans « 1870 »).</p></div>
+
+<div class="part">4 · Choix faits (conseillés) — modifiables en réglage</div>
+<div class="dq"><h3>Les liens vont dans les deux sens</h3><div class="opt rec"><b>Oui (conseillé)</b>A lié à B = B lié à A, avec la même raison.</div></div>
+<div class="dq"><h3>« En commun » et « Ce que l’autre t’apprend »</h3><div class="opt rec"><b>Calculés à partir des transcriptions, au moment où on regarde (conseillé)</b>Rien de nouveau à remplir ; mis à jour quand un texte change. Réglage : montrer ou non « Ce que l’autre t’apprend ».</div></div>
+<div class="dq"><h3>Proposer le découpage des chapitres</h3><div class="opt rec"><b>Sur demande (« ✨ Proposer le découpage »), jamais tout seul (conseillé)</b></div></div>
+<div class="dq"><h3>Export</h3><div class="opt rec"><b>Les liens et leur raison dans le TEI et en note de source dans le GEDCOM ; la table des matières à l’impression du recueil (conseillé)</b></div></div>
+<p class="note">Ordre de travail : 1) documents liés (page du document, visionneuse, Atelier, « En commun », « Ce que l’autre t’apprend ») ; 2) dans les enquêtes ; 3) recueil depuis Documents et « Dans le recueil » ; 4) chapitres et table des matières ; 5) « Proposer le découpage » et incohérences ; 6) exports, FAQ.</p>
+</div></body></html>

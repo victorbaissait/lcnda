@@ -203,7 +203,9 @@
         let mode = opts.mode || 'sign', img = null, imgName = '', crop = null, f = null, person = null, autoThr = 140;
         const PK = () => window.LCNDA_PICKER || A();
         const pickPersonHtml = pre => `<span class="h-fp-who" data-who="${pre}">${PK().pickerField({name: pre + '_person', kind: 'person'})}<button type="button" class="button small secondary" data-${pre}-cur>Fiche affichée</button></span>`;
-        ext.openDialog({eyebrow: 'CALLIGRAPHIE ET SCEAUX', title: '🔤 Signatures et sceaux', wide: true, submitLabel: 'Créer et ouvrir dans le dessin',
+        // opts.src : une image (adresse media/…, data: ou blob:, ou un Blob) déjà recadrée sur la signature (Atelier de transcription…) ; opts.title : son nom ; opts.personId : la personne qui signe
+        if (opts.src instanceof Blob) opts = {...opts, src: URL.createObjectURL(opts.src)};
+        const dlgEl = ext.openDialog({eyebrow: 'CALLIGRAPHIE ET SCEAUX', title: '🔤 Signatures et sceaux', wide: true, submitLabel: 'Créer et ouvrir dans le dessin',
             body: `<div class="h-sl">
                 <div class="h-sl-tabs" role="tablist"><button type="button" data-sl-mode="sign">✍️ La signature d’un acte</button><button type="button" data-sl-mode="seal">🔏 Monogramme, cachet, tampon</button></div>
                 <section data-sl-pane="sign">
@@ -277,7 +279,12 @@
                     f = null; drawStage(); preview(true);
                     if (r.person_id) { const p = (await api('person', {id: r.person_id}).catch(() => null))?.person; if (p) { PK().pickerSet($('[data-who="sl"] .pk'), Number(r.person_id)); person = {id: Number(r.person_id), first: p.first_name, last: p.last_name, name: A().personName(p), year: p.birth_year}; if (!form.elements.caption.value) form.elements.caption.value = [person.name, r.date_text].filter(Boolean).join(', '); } } };
                 $('[data-sl-known]').addEventListener('click', async () => { const r = await pickKnownSignature(); if (r) await useKnown(r); });
-                if (opts.signature) useKnown(opts.signature); else if (opts.src) loadImg(opts.src, opts.title || 'Acte');
+                if (opts.signature) useKnown(opts.signature); else if (opts.src) loadImg(String(opts.src), opts.title || i18n('Acte'));
+                if (!opts.signature && Number(opts.personId) > 0) api('person', {id: Number(opts.personId)}).then(r => { const p = r?.person; if (!p) return; PK().pickerSet($('[data-who="sl"] .pk'), Number(opts.personId)); person = {id: Number(opts.personId), first: p.first_name, last: p.last_name, name: A().personName(p), year: p.birth_year}; if (!form.elements.caption.value) form.elements.caption.value = [person.name, opts.caption || ''].filter(Boolean).join(', '); }).catch(() => {});
+                else if (opts.caption && !form.elements.caption.value) form.elements.caption.value = String(opts.caption).slice(0, 200);
+                // 📤 créer et envoyer vers… (à côté de « Créer et ouvrir dans le dessin »)
+                const sub = dg.querySelector('[type=submit]');
+                if (sub && ext.sendTo && !dg.querySelector('[data-sl-send]')) { const sb = document.createElement('button'); sb.type = 'button'; sb.className = 'button secondary'; sb.dataset.slSend = ''; sb.title = i18n('Le dessin va dans un autre outil : un livre de la Mise en page, une page de mon site, le Dessin vectoriel…'); sb.textContent = `📤 ${i18n('Créer et envoyer vers…')}`; sub.before(sb); sb.addEventListener('click', () => makeAndSend(form, sb)); }
                 /* — le sceau — */
                 const sp = $('[data-sl-sprev]');
                 function sealPrev() { const o = Object.fromEntries(new FormData(form)); o.bigMiddle = form.elements.bigMiddle.checked; const V = ext.vectorInternals; if (!V?.docSvg) { sp.innerHTML = '<p class="muted">Aperçu indisponible.</p>'; return; } try { sp.innerHTML = V.docSvg(buildSeal(o)); } catch (e) { sp.innerHTML = `<p class="muted">${esc(e.message)}</p>`; } }
@@ -297,17 +304,33 @@
                 setMode(mode);
             },
             onSubmit: async form => {
-                const o = Object.fromEntries(new FormData(form));
-                if (mode === 'seal') { o.bigMiddle = form.elements.bigMiddle.checked; const doc = buildSeal(o); ext.openVectorEditor({doc, name: `Sceau ${o.initials || ''}`.trim(), onSaved: onDone, onClose: onDone}); return; }
-                if (!img) return window.LCNDA_UI.fail(form.querySelector('[data-sl-file], [data-sl-media], input[type=file]'), 'Choisis d’abord l’image d’un acte.');
-                const cr = crop || {x: 0, y: 0, w: img.naturalWidth, h: img.naturalHeight}; f = f || flatten(img, cr);
-                const m = inkMask(f, {thr: Number(o.thr), speck: Number(o.speck), grow: Number(o.grow), lines: !!o.lines});
-                try {
-                    const name = person ? `Signature ${deName(person.name)}` : 'Signature', doc = await signatureDoc(f, m, {ink: o.ink, caption: String(o.caption || '').trim(), name});
-                    if (person && o.tomedia) await toMedia(maskCanvas(f, m, o.ink), person, name).catch(e => toast(i18n('Image non rangée : {err}', {err: e.message}), 'error'));
-                    ext.openVectorEditor({doc, name, onSaved: onDone, onClose: onDone});
-                } catch (e) { toast(e.message, 'error'); return false; }
+                const r = await makeDoc(form); if (!r) return false;
+                ext.openVectorEditor({doc: r.doc, name: r.name, onSaved: onDone, onClose: onDone});
             }});
+        /** le dessin fabriqué (sceau, ou signature détourée) → {doc, name} ; null si rien à faire (le message est déjà montré) */
+        async function makeDoc(form) {
+            const o = Object.fromEntries(new FormData(form));
+            if (mode === 'seal') { o.bigMiddle = form.elements.bigMiddle.checked; return {doc: buildSeal(o), name: `Sceau ${o.initials || ''}`.trim()}; }
+            if (!img) { window.LCNDA_UI.fail(form.querySelector('[data-sl-file], [data-sl-media], input[type=file]'), 'Choisis d’abord l’image d’un acte.'); return null; }
+            const cr = crop || {x: 0, y: 0, w: img.naturalWidth, h: img.naturalHeight}; f = f || flatten(img, cr);
+            const m = inkMask(f, {thr: Number(o.thr), speck: Number(o.speck), grow: Number(o.grow), lines: !!o.lines});
+            try {
+                const name = person ? `Signature ${deName(person.name)}` : 'Signature', doc = await signatureDoc(f, m, {ink: o.ink, caption: String(o.caption || '').trim(), name});
+                if (person && o.tomedia) await toMedia(maskCanvas(f, m, o.ink), person, name).catch(e => toast(i18n('Image non rangée : {err}', {err: e.message}), 'error'));
+                return {doc, name};
+            } catch (e) { toast(e.message, 'error'); return null; }
+        }
+        /** 📤 créer, puis le menu commun « Envoyer vers… » (le dessin en SVG : Mise en page, Mon site web, Dessin vectoriel…) */
+        async function makeAndSend(form, anchor) {
+            const V = ext.vectorInternals; if (!V?.docSvg || !ext.sendTo) return toast(i18n('L’envoi vers les autres outils n’est pas chargé.'), 'error');
+            const r = await makeDoc(form); if (!r) return null;
+            const svg = V.docSvg(r.doc), list = ext.sendTargetsFor ? ext.sendTargetsFor('svg') : [];
+            // la fenêtre se ferme quand on a choisi où envoyer (l'outil choisi s'ouvre par-dessus la page)
+            if (!list.length || !window.LCNDA_UI?.menuAt) return ext.sendTo('svg', {svg, name: r.name}, {anchor, title: r.name});
+            window.LCNDA_UI.menuAt(anchor, list.map(t => ({icon: t.icon, label: i18n(t.label), run: () => { form.closest('dialog')?.close(); return ext.sendTo('svg', {svg, name: r.name}, {title: r.name, to: t.key}); }})), {title: i18n('Envoyer le dessin vers…')});
+            return null;
+        }
+        return dlgEl;
     }
     /* une image transparente de la signature, rangée dans les médias de la personne */
     async function toMedia(canvas, person, title) {
@@ -350,6 +373,6 @@
         open: (id, again) => ext.openVectorEditor?.({id, onSaved: again, onClose: again}),
         create: again => open(again),
         rename: (id, name) => api('rename_vector_doc', {}, {method: 'POST', body: {id, name}}),
-        remove: id => api('delete_vector_doc', {}, {method: 'POST', body: {id}}), createLabel: '＋ Signature ou sceau',
+        remove: id => (ext.projectDelUndo ? ext.projectDelUndo('delete_vector_doc')(id) : api('delete_vector_doc', {}, {method: 'POST', body: {id}})), undo: true, createLabel: '＋ Signature ou sceau',
         extra: '<button type="button" class="button small secondary" data-et-x="seal">🔏 Monogramme, cachet…</button>', onExtra: (k, again) => open(again, {mode: 'seal'})});
 })();

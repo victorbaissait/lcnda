@@ -653,7 +653,7 @@ Pas installé ¦ Ekki uppsett
 L’historique officiel des communes de l’INSEE (depuis 1943) : chaque commune disparue avec sa date et sa commune d’aujourd’hui. Livré avec l’app (5,5 Mo, Licence Ouverte 2.0 de l’INSEE) : installé tout seul, sans Internet. Les anciens noms aident aussi le menu de choix des lieux (« anc. « … » »). ¦ Opinber saga sveitarfélaga frá INSEE (frá 1943): hvert horfið sveitarfélag með dagsetningu sinni og sveitarfélagi nútímans. Fylgir appinu (5,5 MB, Licence Ouverte 2.0 frá INSEE): sett upp sjálfkrafa, án nets. Gömlu heitin hjálpa líka valmyndinni til að velja staði („anc. „…““).
 ⤓ Télécharger de nouveau (mise à jour) ¦ ⤓ Sækja aftur (uppfærsla)
 🗑 Retirer ¦ 🗑 Fjarlægja
-⤓ Installer les frontières anciennes ¦ ⤓ Setja upp gömlu landamærin
+📦 Installer les frontières anciennes ¦ 📦 Setja upp gömlu landamærin
 (taille…) ¦ (stærð…)
 dossier des données ¦ gagnamöppunni
 Rangé dans le {name}, commun à toutes tes généalogies. ¦ Geymt í {name}, sameiginlegt fyrir allar ættfræðirnar þínar.
@@ -1672,7 +1672,7 @@ Jusqu’à l’année ¦ Fram að árinu
 Départ ¦ Brottför
 Arrivée ¦ Koma
 📍 Les lieux du tableau ¦ 📍 Staðirnir í töflunni
-🔎 Retrouver les lieux sans position ¦ 🔎 Finna staði án staðsetningar
+🔍 Retrouver les lieux sans position ¦ 🔍 Finna staði án staðsetningar
 Choisis d’abord une sorte d’événement. ¦ Veldu fyrst tegund atburðar.
 Choisis une sorte d’événement. ¦ Veldu tegund atburðar.
 Aucun lieu retrouvé : choisis-les un par un. ¦ Enginn staður fannst: veldu þá einn í einu.

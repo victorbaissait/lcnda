@@ -91,6 +91,8 @@ function geneweb_to_gedcom(string $raw): array
 {
     if (strlen($raw) > GW_MAX_BYTES) { throw new RuntimeException('Ce fichier GeneWeb est trop gros (plus de 300 Mo).'); }
     if (str_starts_with($raw, "\xEF\xBB\xBF")) { $raw = substr($raw, 3); }
+    // enregistré en « Unicode » (UTF-16) par le Bloc-notes de Windows : relu en UTF-8 (sinon pris pour une base binaire .gwb)
+    elseif (str_starts_with($raw, "\xFF\xFE") || str_starts_with($raw, "\xFE\xFF")) { $raw = (string) mb_convert_encoding(substr($raw, 2), 'UTF-8', $raw[0] === "\xFF" ? 'UTF-16LE' : 'UTF-16BE'); }
     if (str_contains(substr($raw, 0, 4096), "\0")) { throw new RuntimeException('Ce fichier n’est pas un fichier texte GeneWeb (.gw) : il contient des données binaires. Une base GeneWeb (.gwb) ne se lit pas : dans GeneWeb, fais « gwu » (ou « Exporter en .gw ») puis importe ce fichier.'); }
     if (!mb_check_encoding($raw, 'UTF-8')) { $raw = mb_convert_encoding($raw, 'UTF-8', 'ISO-8859-1'); }
     $lines = preg_split('/\r\n|\r|\n/', $raw) ?: [];

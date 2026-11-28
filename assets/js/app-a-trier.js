@@ -76,9 +76,9 @@
                 const acts = view() === 'box' && !ro() ? `${r.for_kind ? `<button type="button" class="button small" data-tw-quick="${r.id}">${esc(r.for_kind === 'visit' ? i18n('🗄 Relier à la visite') : i18n('🔗 Relier à {name}', {name: r.for}))}</button>` : ''}
                     <button type="button" class="button small secondary" data-tw-to="${r.id}">${esc(i18n('Relier à…'))}</button>` : view() === 'deleted' && !ro() ? `<button type="button" class="button small secondary" data-tw-restore="${r.id}">${esc(i18n('Remettre'))}</button>` : '';
                 const more = view() === 'box' && !ro() ? `<button type="button" class="icon-button small" data-tw-more="${r.id}" title="${esc(i18n('Plus d’actions'))}" aria-label="${esc(i18n('Plus d’actions'))}">⋯</button>` : '';
-                const all = `${view() === 'box' && !ro() ? `<label class="tw-pick" title="${esc(i18n('Cocher'))}"><input type="checkbox" data-tw-check="${r.id}"${picked.has(r.id) ? ' checked' : ''} aria-label="${esc(i18n('Cocher'))}"></label>` : ''}${acts}${more}`;
+                const all = `${acts}${more}`;
                 // en fiches, les boutons restent visibles (quick) : « ⋯ » est déjà le nôtre (le menu d'actions)
-                return {name: r.note || i18n('(sans texte)'), cls: picked.has(r.id) ? 'is-picked' : '', attrs: `data-tw-row="${r.id}"`, when: r.at,
+                return {name: r.note || i18n('(sans texte)'), cls: picked.has(r.id) ? 'is-sel' : '', attrs: `data-tw-row="${r.id}"`, when: r.at,
                     thumb: `<img src="${esc(fileUrl(r.id, '&thumb=1'))}" alt="" loading="lazy">`, open: `data-tw-big="${r.id}"`, lines: lines(r),
                     ...(st.view === 'cards' ? {quick: `<span class="tw-acts">${all}</span>`, noOpen: true} : {actions: all})};
             });
@@ -89,10 +89,20 @@
             if (ro()) box.insertAdjacentHTML('afterbegin', UI().notice('info', i18n('Mode consultation : la boîte se lit, mais rien ne se relie ni ne se supprime.')));
             paintBulk();
         }
+        // ☑ la barre de sélection commune (app-selection.js) : Tout cocher, Maj+clic, 🔗 Relier…, 🗑 Supprimer, ✕ Décocher
+        let selBar = null;
         function paintBulk() {
-            const b = root.querySelector('[data-tw-bulk]');
-            const n = [...picked].filter(id => rowOf(id)).length;
-            b.innerHTML = n ? `<div class="tw-bulk"><b>${esc(i18n('Cochées : {n}', {n}))}</b><button type="button" class="button small" data-tw-bulk-link>${esc(i18n('🔗 Relier…'))}</button><button type="button" class="button small secondary danger" data-tw-bulk-del>${esc(i18n('🗑 Supprimer'))}</button><button type="button" class="button small secondary" data-tw-bulk-none>${esc(i18n('Décocher'))}</button></div>` : '';
+            selBar?.destroy(); selBar = null;
+            const box = root.querySelector('[data-tw-list]');
+            if (view() !== 'box' || ro() || !ext.selectionBar || !box?.querySelector('[data-tw-row]')) return;
+            const keep = [...picked].filter(id => rowOf(id)).map(String);
+            selBar = ext.selectionBar({host: box, rowSelector: '[data-tw-row]', idOf: el => el.dataset.twRow, what: [i18n('photo cochée'), i18n('photos cochées')], place: root.querySelector('[data-tw-bulk]'),
+                onChange: ids => { picked = new Set(ids.map(Number)); },
+                actions: [
+                    {id: 'link', icon: '🔗', label: i18n('Relier…'), edit: true, run: ids => { const n = ids.map(Number), b = selBar?.el.querySelector('[data-sel-act="0"]'); const items = [{label: i18n('👤 Une personne…'), run: () => linkTo(n, 'person')}, {label: i18n('📅 Un événement… (inhumation, mariage…)'), run: () => linkTo(n, 'event')}, {label: i18n('📚 Une source… (l’acte, la cote)'), run: () => linkTo(n, 'source')}]; if (b && UI().menuAt) UI().menuAt(b, items); else items[0].run(); }},
+                    {id: 'delete', icon: '🗑', label: i18n('Supprimer'), edit: true, danger: true, run: ids => remove(ids.map(Number))},
+                ]});
+            selBar?.set(keep);
         }
 
         /* ─── les gestes ─── */
@@ -103,11 +113,11 @@
             try { r = await write('link', {ids, kind, target, keep_gps: !!keep}); } catch (e) { toast(e.message, 'error'); return; }
             const done = (r.linked || []).map(x => x.id);
             picked.clear();
-            toast(i18n('✓ Reliées à {name} : {n}', {name: r.label || title, n: pl(done.length, 'photo')}), 'success', {duration: 10000, action: {label: i18n('↶ Annuler'), run: async () => { try { await write('unlink', {ids: done}); toast(i18n('Annulé'), 'success'); } catch (e) { toast(e.message, 'error'); } load(); }}});
+            toast(i18n('✓ Reliées à {name} : {n}', {name: r.label || title, n: pl(done.length, 'photo')}), '', {kind: 'undo', action: {label: i18n('↶ Annuler'), run: async () => { try { await write('unlink', {ids: done}); toast(i18n('Annulé'), 'success'); } catch (e) { toast(e.message, 'error'); } load(); }}});
             if (r.tomb && r.kind === 'person' && r.burial_type) {
-                toast(i18n('🪦 Une photo de tombe : ajouter aussi l’inhumation à {name} ?', {name: r.label}), '', {duration: 15000, action: {label: i18n('＋ Ajouter'), run: async () => {
+                toast(i18n('🪦 Une photo de tombe : ajouter aussi l’inhumation à {name} ?', {name: r.label}), '', {action: {label: i18n('＋ Ajouter'), run: async () => {
                     try { const ev = await A().api('add_event', {}, {method: 'POST', body: {person_id: r.target, event_type_id: r.burial_type, date_text: ''}});
-                        toast(i18n('✓ Inhumation ajoutée à {name}.', {name: r.label}), 'success', {duration: 10000, action: {label: i18n('↶ Annuler'), run: () => A().api('delete_event', {}, {method: 'POST', body: {id: ev.id}}).catch(e => toast(e.message, 'error'))}});
+                        toast(i18n('✓ Inhumation ajoutée à {name}.', {name: r.label}), '', {kind: 'undo', action: {label: i18n('↶ Annuler'), run: () => A().api('delete_event', {}, {method: 'POST', body: {id: ev.id}}).catch(e => toast(e.message, 'error'))}});
                     } catch (e) { toast(e.message, 'error'); }
                 }}});
             }
@@ -126,7 +136,7 @@
             picked.clear();
             const n = r.deleted || 0;
             toast(DATA.settings.suppr === 'direct' ? i18n('✓ Supprimées : {n}', {n: pl(n, 'photo')}) : i18n('✓ Supprimées : {n}. Gardées 30 jours dans « 🗑 Supprimées » (Filtrer ▾).', {n: pl(n, 'photo')}), 'success',
-                {duration: 10000, action: {label: i18n('↶ Annuler'), run: async () => { try { await write('restore', {ids}); } catch (e) { toast(e.message, 'error'); } load(); }}});
+                {action: {label: i18n('↶ Annuler'), run: async () => { try { await write('restore', {ids}); } catch (e) { toast(e.message, 'error'); } load(); }}});
             load();
         }
         function bigView(r) {
@@ -147,7 +157,7 @@
             dl.querySelector('form').addEventListener('submit', async e => {
                 e.preventDefault(); const prev = r.note; dl.close();
                 try { await write('note', {id: r.id, note: inp.value}); } catch (err) { toast(err.message, 'error'); return; }
-                toast(i18n('Texte enregistré'), 'success', {action: {label: i18n('↶ Annuler'), run: async () => { await write('note', {id: r.id, note: prev}).catch(() => {}); load(); }}});
+                toast(i18n('Texte enregistré'), '', {kind: 'undo', action: {label: i18n('↶ Annuler'), run: async () => { await write('note', {id: r.id, note: prev}).catch(() => {}); load(); }}});
                 load();
             });
             dl.showModal(); inp.focus();
@@ -172,11 +182,7 @@
             const m = t.closest('[data-tw-more]'); if (m) { const r = rowOf(m.dataset.twMore); if (r && UI().contextMenu) UI().contextMenu(e, menuItems(r)); return; }
             const big = t.closest('[data-tw-big]'); if (big) { const r = rowOf(big.dataset.twBig); if (r) bigView(r); return; }
             const rs = t.closest('[data-tw-restore]'); if (rs) { write('restore', {ids: [Number(rs.dataset.twRestore)]}).then(() => { toast(i18n('Remise dans 📥 À trier.'), 'success'); load(); }).catch(err => toast(err.message, 'error')); return; }
-            if (t.closest('[data-tw-bulk-none]')) { picked.clear(); paint(); return; }
-            if (t.closest('[data-tw-bulk-del]')) { remove([...picked]); return; }
-            if (t.closest('[data-tw-bulk-link]')) { const ids = [...picked]; if (UI().contextMenu) UI().contextMenu(e, [{label: i18n('👤 Une personne…'), run: () => linkTo(ids, 'person')}, {label: i18n('📅 Un événement… (inhumation, mariage…)'), run: () => linkTo(ids, 'event')}, {label: i18n('📚 Une source… (l’acte, la cote)'), run: () => linkTo(ids, 'source')}]); }
         }, {signal: sig});
-        root.addEventListener('change', e => { const c = e.target.closest?.('[data-tw-check]'); if (!c) return; const id = Number(c.dataset.twCheck); if (c.checked) picked.add(id); else picked.delete(id); c.closest('[data-tw-row]')?.classList.toggle('is-picked', c.checked); paintBulk(); }, {signal: sig});
         // clic droit : le même menu d'actions que « ⋯ »
         root.addEventListener('contextmenu', e => { const row = e.target.closest('[data-tw-row]'); if (!row || view() !== 'box' || ro()) return; const r = rowOf(row.dataset.twRow); if (r && UI().contextMenu) UI().contextMenu(e, menuItems(r)); }, {signal: sig});
         root.addEventListener('keydown', e => { if ((e.key === 'Delete' || e.key === 'Backspace') && picked.size && !e.target.closest('input,textarea')) { e.preventDefault(); remove([...picked]); } }, {signal: sig});

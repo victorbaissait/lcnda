@@ -47,6 +47,14 @@ require_once __DIR__ . '/cadastre.php'; // 🗺 Cadastre : les parcelles et leur
 require_once __DIR__ . '/successions.php'; // 🏠 Héritages et successions : actes, héritiers, biens, chaîne des propriétaires
 require_once __DIR__ . '/transcriptions.php'; // 📜 Transcription d'actes
 require_once __DIR__ . '/media_pages.php'; // 📑 un document en plusieurs pages (ensembles de pages)
+require_once __DIR__ . '/doc_links.php'; // 🔗 documents liés (deux documents différents, reliés pour une raison)
+require_once __DIR__ . '/recueil_etat.php'; // 🗂 état des pages d'un recueil (migration 106)
+require_once __DIR__ . '/recueil_toc.php'; // 📑 sommaire d'un recueil (migration 107)
+require_once __DIR__ . '/recueil_fiche.php'; // 🏛 fiche d'identité d'un recueil (migration 108)
+require_once __DIR__ . '/recueil_sens.php'; // 💡 ce qu'on trouve dans un recueil
+require_once __DIR__ . '/recueil_plus.php';
+require_once __DIR__ . '/recueil_iiif.php'; // 📚 un recueil depuis un registre en ligne (IIIF)
+require_once __DIR__ . '/anim_studio.php'; // 🎞 Studio d'animation : projets, données des modèles (migration 110) // ➕ confiée à, avancement, EAD (migration 109)
 require_once __DIR__ . '/slideshows.php'; // 🎞️ Diaporamas et récits
 require_once __DIR__ . '/houses.php'; // 🏠 Maisons de famille
 require_once __DIR__ . '/house_library.php'; // 🏠 Plan de maison : objets créés, bibliothèque en ligne libre de droit, packs ZIP
@@ -56,6 +64,7 @@ require_once __DIR__ . '/layout_docs.php'; // 📐 Atelier de mise en page
 require_once __DIR__ . '/montage_projects.php'; // 🎬 Projets de montage vidéo
 require_once __DIR__ . '/retouch_projects.php'; // 🎚️ Projets de retouche
 require_once __DIR__ . '/audio_projects.php'; // 🎧 Projets audio
+require_once __DIR__ . '/projets_annuler.php'; // ↶ Annuler la suppression d'un projet d'outil (au lieu de « Es-tu sûr ? »)
 require_once __DIR__ . '/audio_studio.php'; // 🎚️ Studio son : zones, passages reliés, transcription
 require_once __DIR__ . '/family_book.php'; // livre de famille (parties, formats) // fiches d'employeurs
 require_once __DIR__ . '/suggestions.php'; // suggestions de recherche (trous de la lignée Sosa)
@@ -93,6 +102,7 @@ require_once __DIR__ . '/heritage_links.php'; // question en français, langues,
 require_once __DIR__ . '/heritage_more.php';
 require_once __DIR__ . '/biographie.php';     // 📖 biographie écrite par l'app (fiche, livres, Fiches, présentations)
 require_once __DIR__ . '/monde_autour.php';   // 🌍 le monde autour : grands événements et histoire locale
+require_once __DIR__ . '/mouvements.php';     // 🌍 ta famille dans les grands mouvements de population
 require_once __DIR__ . '/sante.php';          // 🩺 santé de la famille (privée : cachée au départ, jamais exportée)
 require_once __DIR__ . '/cousinade.php';      // 🎉 organiser une cousinade (descendants vivants, invités, badges, plan de table)
 require_once __DIR__ . '/successoral.php';    // ⚖️ généalogiste successoral : dossiers de succession (jamais exportés)
@@ -1443,6 +1453,36 @@ function log_change(PDO $pdo, string $entityType, ?int $entityId, string $action
     ]);
     // ⚖️ une fiche créée pendant que le filtre ⚖️ est actif est rattachée d'office au(x) dossier(s) du filtre (lib/successoral_dossiers.php)
     if ($entityType === 'person' && $action === 'create' && $entityId && !empty($_SERVER['HTTP_X_LCNDA_SUCC']) && function_exists('succ_auto_attach')) { succ_auto_attach($pdo, (int) $entityId); }
+}
+
+/**
+ * H7 « ↶ Annuler » au lieu de « Es-tu sûr ? » : juste AVANT de supprimer, garder dans le journal tout ce que la suppression
+ * emporte (une ou plusieurs tables). restore_last_delete($pdo, ['entity_type' => $type, 'entity_id' => $id]) remet tout (api.php).
+ *   undo_keep($pdo, 'voter_cards', $personId, 'Cartes d’électeur effacées', [['voter_cards', 'person_id=?', [$personId]], …],
+ *             ['needs' => [['persons', $personId, 'La fiche n’existe plus.']], 'set' => [['persons', $personId, ['show_voter_block' => 1]]], 'files' => […]]);
+ * « needs » : ce qui doit encore exister pour remettre ; « set » : des cases à remettre comme avant ; « files » : fichiers gardés
+ * le temps de pouvoir annuler (undo_old_files() les rend ensuite au ménage). Renvoie le numéro de la ligne du journal.
+ */
+function undo_keep(PDO $pdo, string $type, int $id, string $summary, array $parts, array $extra = []): int
+{
+    $rows = [];
+    foreach ($parts as [$table, $where, $params]) {
+        if (!preg_match('/^[a-z_]+$/', (string) $table)) { continue; }
+        $s = $pdo->prepare("SELECT * FROM {$table} WHERE {$where}"); $s->execute($params);
+        $rows[] = [$table, $s->fetchAll(PDO::FETCH_ASSOC)];
+    }
+    log_change($pdo, $type, $id, 'delete', $summary, ['_undo' => 1, '_rows' => $rows] + $extra);
+    return (int) $pdo->lastInsertId();
+}
+
+/** Les fichiers gardés pour « ↶ Annuler » par des suppressions de cette sorte, faites il y a plus d'un jour : à rendre au ménage. */
+function undo_old_files(PDO $pdo, string $type): array
+{
+    $s = $pdo->prepare("SELECT before_json FROM change_log WHERE action='delete' AND entity_type=? AND created_at < datetime('now','-1 day') ORDER BY id DESC LIMIT 200");
+    $s->execute([$type]);
+    $files = [];
+    foreach ($s->fetchAll(PDO::FETCH_COLUMN) as $j) { foreach ((json_decode((string) $j, true)['files'] ?? []) as $f) { $files[] = (string) $f; } }
+    return array_values(array_unique(array_filter($files)));
 }
 
 function safe_int(mixed $value, int $fallback = 0): int

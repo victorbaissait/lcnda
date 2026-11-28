@@ -295,7 +295,7 @@
             <input type="range" min="0" max="${T.years.length - 1}" step="1" value="${i}" aria-label="Année" data-ui-done="1"><output>${esc(fmt(T.years[i], 0))}</output>
             <select data-dgp-speed aria-label="Vitesse">${SPEEDS.map(([k, l]) => `<option value="${k}" ${k === (tm.speed || '') ? 'selected' : ''}>${l}</option>`).join('')}</select>
             <label class="ui-toggle h-dgp-loop"><input type="checkbox" data-dgp-loop ${loop ? 'checked' : ''}><i></i>Boucle</label>
-            <button type="button" class="link-button" data-dgp-all title="Revenir au dessin complet">⤢ Tout</button>${canVideo ? '<button type="button" class="link-button" data-dgp-video title="Enregistrer la lecture en vidéo">🎬 Vidéo</button>' : ''}${calm() ? '<small class="muted" title="Réglages → Accessibilité → Mouvement">Mouvements réduits : une étape à la fois, sans glisser</small>' : ''}`;
+            <button type="button" class="link-button" data-dgp-all title="Revenir au dessin complet">⤢ Tout</button>${canVideo ? '<button type="button" class="link-button" data-dgp-video title="Enregistrer la lecture en vidéo">🎬 Vidéo</button>' : ''}${ext.openAnimStudio ? '<button type="button" class="link-button" data-dgp-anim title="Le Studio d’animation : passages en douceur, caméra, légendes, musique, MP4, GIF">🎞 Animer</button>' : ''}${calm() ? '<small class="muted" title="Réglages → Accessibilité → Mouvement">Mouvements réduits : une étape à la fois, sans glisser</small>' : ''}`;
         box.after(bar);
         const range = bar.querySelector('input[type=range]'), out = bar.querySelector('output'), pb = bar.querySelector('[data-dgp-p]');
         const show = k => { i = clamp(k, 0, T.years.length - 1); range.value = String(i); out.textContent = fmt(T.years[i], 0); box.innerHTML = R().svg(T.at(T.years[i])); };
@@ -308,6 +308,7 @@
         bar.querySelector('[data-dgp-loop]').addEventListener('change', e => { loop = e.target.checked; });
         bar.querySelector('[data-dgp-all]').addEventListener('click', () => { stop(); i = T.years.length - 1; range.value = String(i); out.textContent = fmt(T.years[i], 0); box.innerHTML = R().svg(spec); onStop?.(); });
         bar.querySelector('[data-dgp-video]')?.addEventListener('click', e => recordVideo(spec, T, speed, e.currentTarget));
+        bar.querySelector('[data-dgp-anim]')?.addEventListener('click', () => { stop(); ext.openAnimStudio({diagram: {spec: clone(spec), name: spec.title || spec.o?.title || spec.name || ''}}); }); // 🎞 heritage-anim-studio.js
         bar._stop = stop; bar._show = show;
         return bar;
     }
@@ -348,6 +349,8 @@
 
     /* ═════════ ⚙️ Le panneau « Personnaliser » de l'éditeur ═════════ */
     const openSecs = () => { const v = ls.get(OPEN_KEY, null); return v && typeof v === 'object' ? v : {style: 1}; };
+    /** 🧩 sections apportées par d'autres fichiers : ext.diagramPersoExtra = [{id, title, html(spec), hint?, when?(spec), bind?(el, api, {signal})}] */
+    const extraSecs = s => (ext.diagramPersoExtra || []).map(x => { try { return x.when && !x.when(s) ? '' : `<details class="h-dgp-sec" data-dgp-xsec="${esc(x.id)}"${openSecs()['x:' + x.id] ? ' open' : ''}><summary>${x.title}</summary><div class="h-dgp-body">${x.hint ? `<p class="ui-hint">${x.hint}</p>` : ''}${x.html(s)}</div></details>`; } catch (e) { console.error(e); return ''; } }).join('');
     const sec = (id, title, body, help = '') => `<details class="h-dgp-sec" data-dgp-sec="${id}"${openSecs()[id] ? ' open' : ''}><summary>${title}</summary><div class="h-dgp-body">${help ? `<p class="ui-hint">${help}</p>` : ''}${body}</div></details>`;
     const sel = (attr, choices, v) => `<select ${attr}>${choices.map(([k, l]) => `<option value="${esc(k)}" ${String(v ?? '') === String(k) ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select>`;
     const swatches = c => `<span class="h-dgp-sw">${(c || []).slice(0, 8).map(x => `<i style="background:${esc(col(x, '#888'))}"></i>`).join('')}</span>`;
@@ -420,16 +423,17 @@
                 ${sec('notes', '✏️ Annotations', notesSec(s), 'Pose-les ici, puis glisse-les sur l’aperçu (et leurs poignées pour les agrandir). Elles partent avec le diagramme à l’export et à l’impression.')}
                 ${hasAxis(k) ? sec('refs', '📏 Lignes de repère et axes', refsSec(s), 'Moyenne et médiane se calculent seules ; l’objectif et la valeur sont à toi.') : ''}
                 ${canFacet(k) ? sec('facet', '▦ Petits multiples', facetSec(s), 'Un petit diagramme par groupe, côte à côte, avec la même échelle pour comparer d’un coup d’œil.') : ''}
-                ${T ? sec('time', '▶ Lecture dans le temps', timeSec(s)) : ''}</div>`;
+                ${T ? sec('time', '▶ Lecture dans le temps', timeSec(s)) : ''}${extraSecs(s)}</div>`;
             el.scrollTop = y;
             const slot = el.querySelector('[data-dgp-presets]'); if (slot && UI()?.presetsFrame) slot.appendChild(presetsFrame(() => spec(), changed));
         };
         const changed = (repaint = true) => { api.changed(); if (repaint) paint(); };
+        (ext.diagramPersoExtra || []).forEach(x => { try { x.bind?.(el, {...api, changed, spec}, sig); } catch (e) { console.error(e); } }); // 🧩 sections en plus (heritage-diagram-donnees.js : format, note sur une colonne, ⭐ modèle)
         api.repaintPerso = () => { if (el.isConnected && el.querySelector('[data-dgp]')) paint(); };
         const o = () => { const s = spec(); s.o = s.o || {}; return s.o; };
         const ownColors = () => { const oo = o(); if (!Array.isArray(oo.colors) || !oo.colors.length) oo.colors = (defStyle?.v?.colors && !oo.style ? defStyle.v.colors : (R().PALETTES[oo.palette] || R().PALETTES.vive).slice(0, 8)).slice(); return oo.colors; };
         const mineStyle = () => { const oo = o(); if (!oo.style || oo.style === 'none' || oo.style === 'default') { const base = !oo.style && defStyle ? defStyle.v : {}; STYLE_KEYS.forEach(k => { if (oo[k] === undefined && base[k] !== undefined) oo[k] = clone(base[k]); }); oo.style = 'custom'; } else if (!String(oo.style).endsWith('*') && oo.style !== 'custom') oo.style = String(oo.style) + '*'; };
-        el.addEventListener('toggle', e => { const d = e.target.closest?.('[data-dgp-sec]'); if (!d) return; const v = openSecs(); if (d.open) v[d.dataset.dgpSec] = 1; else delete v[d.dataset.dgpSec]; ls.set(OPEN_KEY, v); }, {capture: true, signal: ac.signal});
+        el.addEventListener('toggle', e => { const d = e.target.closest?.('[data-dgp-sec], [data-dgp-xsec]'); if (!d) return; const v = openSecs(), id = d.dataset.dgpSec || 'x:' + d.dataset.dgpXsec; if (d.open) v[id] = 1; else delete v[id]; ls.set(OPEN_KEY, v); }, {capture: true, signal: ac.signal});
         el.addEventListener('input', e => {
             const t = e.target;
             if (t.dataset.dgpK) { mineStyle(); const k = t.dataset.dgpK; o()[k] = t.type === 'range' ? Number(t.value) : t.value; return changed(t.tagName === 'SELECT'); }

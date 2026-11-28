@@ -87,6 +87,8 @@
             });
         });
         if (S6) { (S6.PAID || []).forEach(k => { if (map.has(k)) map.get(k).paid = true; }); Object.keys(S6.PARTLY_PAID || {}).forEach(k => { if (map.has(k) && !map.get(k).paid) map.get(k).paid = 'partiel'; }); }
+        // 🌍 les sites du monde et du plan (app-ou-chercher-monde.js) : FamilySearch par pays, PRDH, SHPF, noblesse… (règle, sorte, période)
+        (window.LCNDA_OUC_MONDE?.SITES || []).forEach(s => { if (s?.key && typeof s.url === 'function' && !map.has(s.key)) map.set(s.key, {...s}); });
         return [...map.values()];
     }
 
@@ -147,14 +149,24 @@
 
     /* ═════════════════════ l'affichage d'une proposition ═════════════════════ */
     const PAID_BADGE = {paid: ['Payant', 'red'], partly: ['En partie payant', 'yellow'], library: ['Gratuit en bibliothèque', 'blue']};
-    function rowHtml(x, {compact = false, extra = ''} = {}) {
+    function rowHtml(x, {compact = false, extra = '', cls = ''} = {}) {
         const s = x.site, pb = PAID_BADGE[x.paid], prev = x.searched;
         const res = prev ? (prev.status === 'review' ? RESULT.review : RESULT[prev.result] || ['Cherché', 'grey']) : null;
-        return `<li class="ouc-row${prev && prev.status !== 'review' ? ' is-done' : ''}" data-ouc-key="${esc(s.key)}">
+        return `<li class="ouc-row${prev && prev.status !== 'review' ? ' is-done' : ''}${cls ? ' ' + cls : ''}" data-ouc-key="${esc(s.key)}">
             <span class="ouc-ico" aria-hidden="true">${esc(s.icon || (prev ? '✓' : '🌐'))}</span>
             <div class="ouc-main"><div class="ouc-name"><b>${esc(s.label)}</b>${pb ? ' ' + badge(pb[0], pb[1]) : ''}${res ? ` ${badge(res[0], res[1])} <small class="muted">${when(prev.date)}</small>` : ''}</div>
-                <div class="ouc-why">${esc(x.reasons[0] || '')}</div>${!compact && x.reasons.length > 1 ? `<div class="ouc-why2">${x.reasons.slice(1).map(esc).join(' · ')}</div>` : ''}${extra}</div>
+                <div class="ouc-why">${esc(x.reasons[0] || '')}</div>${!compact && x.reasons.length > 1 ? `<div class="ouc-why2">${x.reasons.slice(1).map(esc).join(' · ')}</div>` : ''}${compact ? '' : periodHtml(s)}${extra}</div>
             <div class="ouc-acts"><a class="button small${prev && prev.status !== 'review' ? ' secondary' : ''}" href="${esc(s.href)}" target="_blank" rel="noopener noreferrer" data-ouc-go title="S’ouvre dans ton navigateur, avec son nom déjà rempli">↗ Chercher</a>${prev && prev.status !== 'review' ? '' : `<button type="button" class="button small secondary" data-ouc-done title="Noter dans le Journal des recherches ce que ça a donné">✓ Déjà cherché</button>`}<button type="button" class="icon-button small" data-ouc-more title="Plus d’actions" aria-label="Plus d’actions">⋯</button></div></li>`;
+    }
+    /** 🗓 la période que couvre le registre et 🌐 en ligne / 🏛 sur place (règle du moteur, ou le site lui-même) */
+    function periodHtml(s) {
+        const r = C().ruleOf(s) || {};
+        const per = Array.isArray(s.period) ? s.period : (r.from || r.to ? [r.from || 0, r.to || 0] : Array.isArray(s.years) ? s.years : null);
+        const acc = s.access || '', AC = window.LCNDA_OUC_MONDE?.ACCESS?.[acc];
+        if (!per && !AC) return '';
+        const yNow = new Date().getFullYear();
+        const pt = per ? (per[0] ? `${per[0]}–${per[1] && per[1] < yNow ? per[1] : i18n('aujourd’hui')}` : per[1] ? i18n('jusqu’en {y}', {y: per[1]}) : '') : '';
+        return `<div class="ouc-meta">${pt ? `<span class="ouc-period">🗓 ${esc(pt)}</span>` : ''}${AC ? ` <span class="ouc-acc is-${esc(acc)}">${esc(AC[0])} ${esc(i18n(AC[1]))}</span>` : ''}</div>`;
     }
     function listHtml(rows, opts = {}) { return rows.length ? `<ul class="ouc-list">${rows.map(x => rowHtml(x, opts)).join('')}</ul>` : ''; }
 
@@ -179,10 +191,14 @@
     async function makeLead(view, x) {
         const ctx = view.res.ctx;
         let r;
-        try { r = await post('ou_chercher_piste', {person_id: view.pid, title: `Chercher sur ${x.site.label}`.slice(0, 200), url: x.site.href, notes: `${x.reasons.join('. ')}. — proposé par « 🌍 Où chercher ? » pour ${ctx.name}.`}); }
+        // 🧺 choisir l'enquête (ou en créer une) au lieu de prendre la dernière ouverte (heritage-connexions.js ; éteint : comme avant)
+        const where = ext.connexions?.leadTarget ? await ext.connexions.leadTarget(view.pid, `Où chercher ? — ${ctx.name}`) : {};
+        if (where === null) return;
+        try { r = await post('ou_chercher_piste', {person_id: view.pid, title: `Chercher sur ${x.site.label}`.slice(0, 200), url: x.site.href, notes: `${x.reasons.join('. ')}. — proposé par « 🌍 Où chercher ? » pour ${ctx.name}.`, ...where}); }
         catch (e) { A().toast(e.message, 'error'); return; }
         await refreshView(view);
-        A().undoToast(i18n(r.created ? '＋ Piste ajoutée : « Chercher sur {site} » (nouvelle enquête « Où chercher ? »)' : '＋ Piste ajoutée : « Chercher sur {site} »', {site: x.site.label}), {undo: async () => {
+        A().undoToast(r.link_id ? i18n('＋ Ajouté à la piste choisie : « Chercher sur {site} »', {site: x.site.label}) : i18n(r.created ? '＋ Piste ajoutée : « Chercher sur {site} » (nouvelle enquête « Où chercher ? »)' : '＋ Piste ajoutée : « Chercher sur {site} »', {site: x.site.label}), {undo: async () => {
+            if (r.link_id) await post('cx_write', {op: 'item_link_remove', ids: [r.link_id]});
             if (r.item_id) await post('delete_investigation_item', {id: r.item_id});
             if (r.created && r.investigation_id) await post('delete_investigation', {id: r.investigation_id});
             await refreshView(view);
@@ -238,6 +254,11 @@
         if (!top.length) return '';
         return `<div class="ouc-shortcuts" role="group" aria-label="${esc(i18n('Ouvrir la page filtrée sur une sorte de source'))}">${top.map(s => `<button type="button" class="ouc-chip${s.profile ? ' is-profile' : ''}" data-ouc-short="${esc(s.id)}" data-ouc-pid="${pid}">${esc(s.profile ? `${s.icon} ${i18n(SHORT_ALL[s.id] || s.short)}` : sortName(s))} <small>${s.n}</small></button>`).join('')}${rest.length ? `<button type="button" class="ouc-chip is-more" data-ouc-short-more="${pid}" title="${esc(i18n('Les autres sortes'))}" aria-label="${esc(i18n('Les autres sortes'))}">⋯</button>` : ''}</div>`;
     }
+    /** 🧭 le premier conseil du plan de recherche (app-ou-chercher-monde.js) : ce qui manque, et où ça a le plus de chances d'être */
+    function topTipHtml(res, pid) {
+        const t = window.LCNDA_OUC_MONDE?.tips?.(res.ctx)?.[0]; if (!t) return '';
+        return `<p class="ouc-toptip">🧭 <b>${esc(t.title)}</b>${t.period ? ` <span class="ouc-period">🗓 ${esc(t.period)}</span>` : ''} — ${esc(t.why)} <button type="button" class="link-button" data-ouc-page="${pid}">${esc(i18n('Ton plan de recherche ↗'))}</button></p>`;
+    }
     /** le libellé d'un raccourci de profil : « Tout le militaire » */
     const SHORT_ALL = {militaire: 'Tout le militaire', marins: 'Tout pour un marin', emigration: 'Tout sur l’émigration', metiers: 'Tout sur son métier', notaires: 'Tout chez les notaires'};
     ext.personBlocks = ext.personBlocks || {};
@@ -259,7 +280,7 @@
             const top = view.res.list.slice(0, BLOCK_N);
             const n = view.res.list.length, done = view.res.searched.length;
             box.innerHTML = `<p class="ouc-intro">${i18n('Les sites les plus utiles pour {name}, d’après ses lieux, ses dates et ce qui manque. Chaque site s’ouvre dans ton navigateur, son nom déjà rempli.', {name: esc(view.res.ctx.name)})}</p>
-                ${shortcutsHtml(view.res, pid)}${freeToggle()}${top.length ? listHtml(top, {compact: true}) : A().empty('Aucun site à proposer pour cette fiche.', {icon: '🌍', hint: 'Ajoute un lieu ou une date : les propositions s’affinent.'})}
+                ${shortcutsHtml(view.res, pid)}${topTipHtml(view.res, pid)}${freeToggle()}${top.length ? listHtml(top, {compact: true}) : A().empty('Aucun site à proposer pour cette fiche.', {icon: '🌍', hint: 'Ajoute un lieu ou une date : les propositions s’affinent.'})}
                 <p class="ouc-foot">${n > BLOCK_N ? `<button type="button" class="link-button" data-ouc-page="${pid}">${i18n('Voir les {n} autres propositions ↓', {n: n - BLOCK_N})}</button>` : ''}${done ? ` <span class="muted">· ✓ ${plural(done, 'site déjà cherché', 'sites déjà cherchés')}</span>` : ''}${view.res.hidden ? ` <span class="muted">· ${plural(view.res.hidden, 'site payant caché', 'sites payants cachés')}</span>` : ''}</p>`;
         };
         // le bloc grandit une fois rempli : si on est plus bas dans la fiche (adresse #personnes/1/documents…), rien ne bouge à l'écran
@@ -377,7 +398,9 @@
             let list;
             if (view.tab === 'out') list = rows.length ? outHtml(rows) : emptyHtml();
             else if (rows.length) {
-                list = `<ul class="ouc-list">${rows.slice(0, view.shown).map(x => rowHtml(x, {extra: catsLine(x)})).join('')}</ul>` + (rows.length > view.shown ? `<button type="button" class="ui-more" data-ouc-more-rows>${rows.length - view.shown === 1 ? i18n('Voir le suivant ↓') : i18n('Voir les {n} suivants ↓', {n: Math.min(15, rows.length - view.shown)})}</button>` : '');
+                // 🗂 un cadre par site (réglage « Un cadre par personne », genealogie-cadres : oui au départ)
+                const carded = !!UI().framesOn?.();
+                list = `<ul class="ouc-list${carded ? ' is-cards' : ''}">${rows.slice(0, view.shown).map(x => rowHtml(x, {extra: catsLine(x), cls: carded ? 'ui-item-card' : ''})).join('')}</ul>` + (rows.length > view.shown ? `<button type="button" class="ui-more" data-ouc-more-rows>${rows.length - view.shown === 1 ? i18n('Voir le suivant ↓') : i18n('Voir les {n} suivants ↓', {n: Math.min(15, rows.length - view.shown)})}</button>` : '');
             } else list = emptyHtml();
             function outHtml(l) {
                 return (So ? So.outGroups(l) : [{label: '', rows: l}]).map(g => `<section class="ouc-outg"><h4>${esc(i18n(g.label))} · ${g.rows.length}</h4><ul class="ouc-out">${g.rows.slice(0, 200).map(o => `<li><b>${esc(o.site.label)}</b> <span class="muted">— ${esc(o.why)}</span>${So ? ` ${So.catsOf(o.site).map(c => `<small class="ouc-cat">${esc((So.SORT[c] || So.OTHER).icon)}</small>`).join('')}` : ''}${g.id === 'low' && o.site.href ? ` <a class="link-button" href="${esc(o.site.href)}" target="_blank" rel="noopener noreferrer">${esc(i18n('↗ Chercher quand même'))}</a>` : ''}</li>`).join('')}</ul></section>`).join('');
@@ -645,21 +668,21 @@
     // le menu ⋯ de la fiche (app-sections.js lit ext.personMoreItems : une fonction → une ligne ou null)
     ext.personMoreItems = ext.personMoreItems || [];
     const humanOf = detail => { const p = detail?.person; return p?.id && p.kind !== 'animal' ? p : null; };
-    ext.personMoreItems.push(detail => { const p = humanOf(detail); return p ? {icon: '🌍', label: 'Où chercher ?', run: () => openPerson(Number(p.id))} : null; });
+    ext.personMoreItems.push(detail => { const p = humanOf(detail); return p ? {key: 'ou-chercher', icon: '🌍', label: 'Où chercher ?', run: () => openPerson(Number(p.id))} : null; });
     // et ses raccourcis (les 3 premiers du bloc, écran 5b) quand le bloc les a déjà calculés
     [0, 1, 2].forEach(i => ext.personMoreItems.push(detail => {
         const p = humanOf(detail); if (!p || !SO()) return null;
         const v = [...VIEWS.values()].find(x => x.pid === Number(p.id) && x.res && !x.bar); if (!v) return null;
         const s = SO().shortcuts(v.res.ctx, v.res.list)[i]; if (!s) return null;
-        return {icon: '🌍', label: `› ${s.icon} ${i18n(s.short)} (${s.n})`, run: () => openPerson(Number(p.id), 'ou_chercher', {cats: [s.id]})};
+        return {key: `ou-chercher-${i + 1}`, name: `Où chercher ? › raccourci n° ${i + 1}`, icon: '🌍', label: `› ${s.icon} ${i18n(s.short)} (${s.n})`, run: () => openPerson(Number(p.id), 'ou_chercher', {cats: [s.id]})};
     }));
     ext.personMoreItems.push(detail => {
         const p = humanOf(detail); if (!p) return null;
         const manual = !!(cache.get(Number(p.id))?.raw?.wall?.manual);
-        return {icon: '🧱', label: manual ? 'Ne plus bloquer ici' : 'Je bloque ici (mur de brique)', run: async () => {
+        return {key: 'mur', name: 'Je bloque ici (mur de brique)', icon: '🧱', label: manual ? 'Ne plus bloquer ici' : 'Je bloque ici (mur de brique)', run: async () => {
             let on = !manual; try { on = !(await loadPerson(Number(p.id), {fresh: true, detail})).raw.wall?.manual; } catch (_) {}
             await toggleManual(Number(p.id), A().personName?.(p) || p.first_name || '', on); cache.delete(Number(p.id)); }};
     });
 
-    ext.ouChercher = {afterRedraw: ext.ouChercher?.afterRedraw || [], page, openPerson, openWall, allSites, suggest, loadPerson, lots, freeOnly, setFreeOnly, widgetBody, loadWalls};
+    ext.ouChercher = {...(ext.ouChercher || {}), afterRedraw: ext.ouChercher?.afterRedraw || [], page, openPerson, openWall, allSites, suggest, loadPerson, lots, freeOnly, setFreeOnly, widgetBody, loadWalls};
 })();

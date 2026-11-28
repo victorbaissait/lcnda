@@ -110,7 +110,7 @@ const t = async (name, fn) => { try { await fn(); count++; console.log('✓', na
     if (!chromium || !phpPath) { console.log('— navigateur : Playwright ou PHP absent, partie sautée'); console.log(`${failed ? '✗' : '✓'} harmonisation K2 / K5 / K9 : ${count} vérifications`); process.exit(failed ? 1 : 0); }
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'carnet-harmo-pages-'));
     const shots = process.env.HARMO_PAGES_SHOTS || '';
-    const envFor = d => ({...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1'});
+    const envFor = d => ({...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4'});
     fs.mkdirSync(path.join(tmp, 'media'), {recursive: true});
     const r = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', String.raw`
 require 'lib/paths.php';

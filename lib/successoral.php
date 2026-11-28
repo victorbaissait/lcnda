@@ -27,7 +27,8 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/successoral_dossiers.php'; // rangement, filtre ⚖️, rattachement, tableau de bord, archive en fichier (migration 91)
 require_once __DIR__ . '/successoral_outils.php'; // ⏱ chronomètre, 🔔 échéances, ✉️ courriers en série, modèles à soi (migration 93)
-require_once __DIR__ . '/successoral_plus2.php'; // ⚰️ 📋 📞 📮 🧾 📈 🤝 🗺 📝 💶 🔗 🗓 👥 🕵️ 📦 : quinze outils de plus et cinq idées (migration 97)
+require_once __DIR__ . '/successoral_plus2.php';
+require_once __DIR__ . '/successoral_droit.php'; // ⚖️ le droit en plus : loi de l'époque, testament, cascade, régime, droits, suivi des héritiers // ⚰️ 📋 📞 📮 🧾 📈 🤝 🗺 📝 💶 🔗 🗓 👥 🕵️ 📦 : quinze outils de plus et cinq idées (migration 97)
 
 const SUCC_STATES = ['ouvert', 'recherche', 'trouves', 'remis', 'clos', 'archive'];
 const SUCC_STATE_LABELS = ['ouvert' => 'Ouvert', 'recherche' => 'En recherche', 'trouves' => 'Héritiers trouvés', 'remis' => 'Remis au notaire', 'clos' => 'Clos', 'archive' => 'Archivé'];
@@ -694,6 +695,7 @@ function successoral_api_get(PDO $pdo, array $g): array
     $tools = succ_outils_get($pdo, $op, $g); if ($tools !== null) { return $tools; } // ✉️ modèles à soi (successoral_outils.php)
     if ($op === 'archive_download') { succ_archive_download((string) ($g['token'] ?? '')); }
     $more = succ_dossiers_get($pdo, $op, $g); if ($more !== null) { return $more; } // ⚖️ dossiers : rangement, filtre, rattachement (successoral_dossiers.php)
+    if (str_starts_with($op, 'au_')) { require_once __DIR__ . '/successoral_audit.php'; return succ_audit_get($pdo, $op, $g); } // 👥 chargé du dossier, 🛡 conflits, 🔎 pièces (audit des onglets)
     return match ($op) {
         'list' => ['items' => succ_list($pdo)],
         'get' => succ_case_out($pdo, succ_row($pdo, safe_int($g['id'] ?? 0))),
@@ -721,6 +723,7 @@ function successoral_api_post(PDO $pdo, array $d): array
     $p2 = succ_p2_post($pdo, $op, $d); if ($p2 !== null) { return $p2; } // ⚖️ outils de plus (successoral_plus2.php)
     $tools = succ_outils_post($pdo, $op, $d); if ($tools !== null) { return $tools; } // ⏱ 🔔 ✉️ (successoral_outils.php)
     $more = succ_dossiers_post($pdo, $op, $d); if ($more !== null) { return $more; } // ⚖️ dossiers (successoral_dossiers.php)
+    if (str_starts_with($op, 'au_')) { require_once __DIR__ . '/successoral_audit.php'; return succ_audit_post($pdo, $op, $d); } // 👥 chargé du dossier (audit des onglets)
     return match ($op) {
         'save' => succ_save($pdo, $d),
         'delete', 'restore' => (static function () use ($pdo, $d, $op) {

@@ -1,0 +1,21 @@
+/* LCNDA — 🌅 Ciel, mer et métier (assets/js/heritage-lot8-ciel-metier.js). Les lignes reprennent le style de « 🏘 Le lieu à
+ * son époque » (.hist-row / .hist-life, assets/css/histoire.css) ; ici, seulement le pli « ▸ plus », la citation et les vignettes. */
+.l8a-more { margin-top: 3px; }
+.l8a-more > summary { cursor: pointer; color: var(--blue-bright, #055dff); font-size: 13px; list-style: none; }
+.l8a-more > summary::-webkit-details-marker { display: none; }
+.l8a-more[open] > summary { margin-bottom: 3px; }
+.l8a-src-link { white-space: nowrap; font-size: 12px; }
+.l8a-quote { margin: 4px 0 6px; padding: 2px 0 2px 10px; border-left: 3px solid var(--line, rgba(127, 127, 127, .35)); font-size: 13px; line-height: 1.45; color: var(--muted, #555); }
+.l8a-badge { display: inline-block; margin-left: 4px; padding: 0 6px; border-radius: 8px; font-size: 11px; line-height: 17px; vertical-align: 1px;
+    background: color-mix(in srgb, var(--blue-bright, #055dff) 12%, transparent); color: var(--blue-bright, #055dff); white-space: nowrap; }
+.l8a-figs { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0; }
+.l8a-fig { margin: 0; width: 150px; font-size: 11px; line-height: 1.3; }
+.l8a-fig img { display: block; width: 150px; height: 120px; object-fit: cover; border-radius: 4px; background: var(--card-bg, rgba(127, 127, 127, .12)); }
+.l8a-fig.l8a-map img { object-fit: contain; }
+.l8a-fig figcaption { margin-top: 3px; overflow-wrap: anywhere; }
+.l8a-fig.l8a-off img { visibility: hidden; height: 24px; }
+.l8a-panel .hist-life { margin-top: 6px; }
+.l8a-place:empty { display: none; }
+.l8a-maps-ask { margin: 8px 0 0; }
+@media (max-width: 520px) { .l8a-fig, .l8a-fig img { width: 120px; } .l8a-fig img { height: 96px; } }
+@media print { .l8a-more:not([open]) > :not(summary) { display: none; } .l8a-fig img { height: 90px; } .l8a-maps-ask { display: none; } }

@@ -1,0 +1,14 @@
+/* LCNDA — 🌍 Le monde à côté (assets/js/heritage-telech-k.js) : le reste vient de histoire.css (hist-row…) */
+.tkx-life { display: grid; gap: 12px; }
+.tkx-ul li { margin-bottom: 6px; overflow-wrap: anywhere; }
+.tkx-src-link { font-size: 12px; white-space: nowrap; }
+.tkx-more > summary { cursor: pointer; color: var(--accent, inherit); font-size: 12.5px; margin-top: 2px; }
+.tkx-more[open] > summary { margin-bottom: 6px; }
+.tkx-online { margin-top: 6px; }
+.tkx-links { margin: 8px 0 0; font-size: 12.5px; line-height: 1.7; overflow-wrap: anywhere; }
+.tkx-panel { margin-top: 12px; }
+.tkx-opts { display: grid; gap: 10px; margin-top: 10px; }
+.tkx-opt { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
+.tkx-opt input[type="number"] { width: 5em; }
+@media (max-width: 600px) { .tkx-ul { padding-left: 18px; } }
+@media print { .tkx-more:not([open]) { display: none; } }

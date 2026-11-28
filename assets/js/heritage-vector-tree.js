@@ -58,12 +58,14 @@
         pat: [hx(t.pat?.[0], b.pat[0]), hx(t.pat?.[1], b.pat[1])], mat: [hx(t.mat?.[0], b.mat[0]), hx(t.mat?.[1], b.mat[1])], center: hx(t.center, b.center), empty: hx(t.empty, b.empty), trunk: hx(t.trunk, b.trunk), leaf: (() => { const l = (Array.isArray(t.leaf) ? t.leaf : []).filter(c => HEX.test(c)).slice(0, 5); return l.length ? l : b.leaf; })(), title: hx(t.title, b.title), frame: t.frame !== false}; }
     const themeOf = k => (themes().find(x => x[0] === k) || themes()[0])[1];
     const SHAPES = [['fan180', 'Éventail (demi-cercle)', 'land', 12], ['fan240', 'Éventail ouvert (240°)', 'land', 12], ['fan270', 'Éventail trois-quarts (270°)', 'land', 12], ['wheel', 'Roue (cercle complet)', 'port', 12],
-        ['tree', 'Arbre dessiné (tronc et branches)', 'port', 8], ['boxesV', 'Arbre en cases (de bas en haut)', 'land', 7], ['boxesH', 'Tableau d’ascendance (de gauche à droite)', 'land', 7], ['bowtie', 'Nœud papillon (père à gauche, mère à droite)', 'land', 7]];
+        ['tree', 'Arbre dessiné (tronc et branches)', 'port', 8], ['boxesV', 'Arbre en cases (de bas en haut)', 'land', 7], ['boxesH', 'Tableau d’ascendance (de gauche à droite)', 'land', 7], ['bowtie', 'Nœud papillon (père à gauche, mère à droite)', 'land', 7],
+        ['desc', 'Descendance (de haut en bas, une couleur par branche)', 'land', 8]];
     // la petite image de chaque forme (dans le choix)
     const SHAPE_ICON = {fan180: '<path d="M4 30a20 20 0 0 1 40 0Z M14 30a10 10 0 0 1 20 0" fill="none" stroke="currentColor" stroke-width="2"/>', fan240: '<path d="M7.7 34A20 20 0 1 1 40.3 34L24 24Z M24 24L14.3 9.4M24 24l9.7-14.6" fill="none" stroke="currentColor" stroke-width="2"/>',
         fan270: '<path d="M9.9 38.1A20 20 0 1 1 38.1 38.1L24 24Z M24 24V4M24 24H4M24 24h20" fill="none" stroke="currentColor" stroke-width="2"/>', wheel: '<circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="24" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M24 4v12M24 32v12M4 24h12M32 24h12" stroke="currentColor" stroke-width="2"/>',
         tree: '<path d="M24 44V26M24 30l-9-9M24 28l9-10" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="24" cy="15" r="11" fill="currentColor" opacity=".35"/>', boxesV: '<g fill="none" stroke="currentColor" stroke-width="2"><rect x="18" y="38" width="12" height="7"/><rect x="7" y="22" width="12" height="7"/><rect x="29" y="22" width="12" height="7"/><rect x="2" y="6" width="9" height="6"/><rect x="13" y="6" width="9" height="6"/><rect x="26" y="6" width="9" height="6"/><rect x="37" y="6" width="9" height="6"/><path d="M24 38v-5H13v-4M24 33h11v-4"/></g>',
         bowtie: '<g fill="none" stroke="currentColor" stroke-width="2"><rect x="18" y="20" width="12" height="8"/><rect x="6" y="9" width="8" height="6"/><rect x="6" y="33" width="8" height="6"/><rect x="34" y="9" width="8" height="6"/><rect x="34" y="33" width="8" height="6"/><path d="M18 24h-2V12h-2M16 24v12h-2M30 24h2V12h2M32 24v12h2"/><path d="M2 4v40M46 4v40" stroke-dasharray="2 3"/></g>',
+        desc: '<g fill="none" stroke="currentColor" stroke-width="2"><rect x="18" y="4" width="12" height="7"/><rect x="4" y="20" width="10" height="7"/><rect x="19" y="20" width="10" height="7"/><rect x="34" y="20" width="10" height="7"/><rect x="2" y="37" width="8" height="6"/><rect x="12" y="37" width="8" height="6"/><rect x="38" y="37" width="8" height="6"/><path d="M24 11v5M9 16h30M9 16v4M24 16v4M39 16v4M9 27v5M6 32h10M6 32v5M16 32v5M39 27v10"/></g>',
         boxesH: '<g fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="20" width="12" height="8"/><rect x="18" y="9" width="12" height="7"/><rect x="18" y="32" width="12" height="7"/><rect x="34" y="3" width="12" height="6"/><rect x="34" y="14" width="12" height="6"/><rect x="34" y="28" width="12" height="6"/><rect x="34" y="39" width="12" height="6"/><path d="M14 24h2v-11h2M16 24v11h2"/></g>'};
 
     /* mesure des textes (pour qu'ils tiennent dans leur case) */
@@ -152,9 +154,9 @@
                     const {lines: L, size} = fitLines(lines, fw, fh, T, (g === 0 ? 44 : g < 3 ? 30 : 22) * unit * 1.6, 4.5 * unit);
                     let rot = g === 0 ? 0 : tangential ? mid : mid - 90;
                     const norm = ((rot % 360) + 360) % 360; if (norm > 90 && norm < 270) rot += 180; // jamais la tête en bas
-                    if (L.length) kids.push(textObj(L, px, py, size, rot, p ? ink(fill, T) : T.ink, T, p ? `${p.first_name || ''} ${p.last_name || ''}`.trim() : '?'));
+                    if (L.length) kids.push(textObj(L, px, py, size, rot, p ? ink(fill, T) : T.ink, T, p ? A().personName(p) : '?'));
                 }
-                groups.push({id: uid(), type: 'group', name: p ? `${s}. ${`${p.first_name || ''} ${p.last_name || ''}`.trim() || 'Sans nom'}` : `${s}. (à trouver)`, children: kids});
+                groups.push({id: uid(), type: 'group', name: p ? `${s}. ${A().personName(p)}` : `${s}. (à trouver)`, children: kids});
             }
         }
         // les numéros de génération le long du bord, pour s'y retrouver
@@ -215,7 +217,7 @@
             const lines = p ? linesOf(p, o, s) : ['?'];
             const {lines: L, size} = fitLines(lines, mw * .8, mh * .74, T, (s === 1 ? 40 : 24) * unit * 1.5, 4.5 * unit);
             if (L.length) kids.push(textObj(L, x, ty, size, rotE, p ? ink(fill, T) : T.ink, T)); void th;
-            groups.push({id: uid(), type: 'group', name: p ? `${s}. ${`${p.first_name || ''} ${p.last_name || ''}`.trim() || 'Sans nom'}` : `${s}. (à trouver)`, children: kids});
+            groups.push({id: uid(), type: 'group', name: p ? `${s}. ${A().personName(p)}` : `${s}. (à trouver)`, children: kids});
         }
         return {groups, branches, leaves, labels: [], box: {cx: ccx, cy: ccy, R: crownR}};
     }
@@ -234,7 +236,7 @@
             const turn = vertical && b.w < b.h * .8, lines = p ? linesOf(p, o, s) : ['?'];
             const {lines: L, size} = fitLines(lines, (turn ? b.h : b.w) * .88, (turn ? b.w : b.h) * .8, T, (s === 1 ? 34 : 24) * unit * 1.5, 4 * unit);
             if (L.length) kids.push(textObj(L, b.x + b.w / 2, b.y + b.h / 2, size, turn ? 270 : 0, p ? ink(fill, T) : T.ink, T));
-            groups.push({id: uid(), type: 'group', name: p ? `${s}. ${`${p.first_name || ''} ${p.last_name || ''}`.trim() || 'Sans nom'}` : `${s}. (à trouver)`, children: kids});
+            groups.push({id: uid(), type: 'group', name: p ? `${s}. ${A().personName(p)}` : `${s}. (à trouver)`, children: kids});
             if (s > 1) { const c = box(s >> 1), d = vertical ? (() => { const x1 = c.x + c.w / 2, y1 = c.y, x2 = b.x + b.w / 2, y2 = b.y + b.h, ym = (y1 + y2) / 2; return `M${n2(x1)} ${n2(y1)}V${n2(ym)}H${n2(x2)}V${n2(y2)}`; })()
                 : (() => { const x1 = c.x + c.w, y1 = c.y + c.h / 2, x2 = b.x, y2 = b.y + b.h / 2, xm = (x1 + x2) / 2; return `M${n2(x1)} ${n2(y1)}H${n2(xm)}V${n2(y2)}H${n2(x2)}`; })();
                 links.push({id: uid(), type: 'svgpath', name: `Lien ${s}`, d, fill: 'none', stroke: T.trunk, sw: n2(Math.max(.8, 2 * unit * .85 ** genOf(s))), join: 'round'}); }
@@ -262,7 +264,7 @@
                 kids.push({id: uid(), type: 'group', name: 'Portrait', clip, children: [{id: uid(), type: 'image', name: 'Portrait', src: p.portraitData, x: clip.x, y: clip.y, w: clip.w, h: clip.h}]}); tx = px2 + ph * .8; tw = b.x + b.w - tx; }
             const {lines: L, size} = fitLines(p ? linesOf(p, o, s) : ['?'], tw * .86, b.h * .8, T, (s === 1 ? 34 : 24) * unit * 1.5, 4 * unit);
             if (L.length) kids.push(textObj(L, tx + tw / 2, b.y + b.h / 2, size, 0, p ? ink(fill, T) : T.ink, T));
-            groups.push({id: uid(), type: 'group', name: p ? `${s}. ${`${p.first_name || ''} ${p.last_name || ''}`.trim() || 'Sans nom'}` : `${s}. (à trouver)`, children: kids});
+            groups.push({id: uid(), type: 'group', name: p ? `${s}. ${A().personName(p)}` : `${s}. (à trouver)`, children: kids});
             if (s > 1) { const c = box(s >> 1), right = b.x > cx, x1 = right ? c.x + c.w : c.x, y1 = c.y + c.h / 2, x2 = right ? b.x : b.x + b.w, y2 = b.y + b.h / 2, xm = (x1 + x2) / 2;
                 links.push({id: uid(), type: 'svgpath', name: `Lien ${s}`, d: `M${n2(x1)} ${n2(y1)}H${n2(xm)}V${n2(y2)}H${n2(x2)}`, fill: 'none', stroke: T.trunk, sw: n2(Math.max(.8, 2 * unit * .85 ** genOf(s))), join: 'round'}); }
         }
@@ -293,8 +295,28 @@
         try { const blob = await (await fetch(`media/${encodeURIComponent(file)}`)).blob(); const img = await createImageBitmap(blob); const k = Math.min(1, 220 / Math.max(img.width, img.height)), c = document.createElement('canvas'); c.width = Math.round(img.width * k); c.height = Math.round(img.height * k); c.getContext('2d').drawImage(img, 0, 0, c.width, c.height); return c.toDataURL('image/jpeg', .82); } catch (_) { return ''; }
     }
 
+    /** 🌳 la descendance : le même dessin que le grand arbre des Cousinades (ext.cousinade.buildTree), une couleur par enfant de la personne */
+    async function buildDesc(o) {
+        const CZ = ext.cousinade, C = window.LCNDA_COUSINADE;
+        if (!CZ?.buildTree) throw new Error(i18n('La descendance a besoin de l’outil Cousinades, qui n’est pas chargé.'));
+        const first = await api('tree', {id: o.person, mode: 'descendants', depth: 1});
+        if (!first.tree) throw new Error(i18n('Aucune descendance pour cette personne.'));
+        const P0 = first.tree.person || {}, nm = p => `${String(p?.first_name || '').trim()} ${String(p?.last_name || '').trim()}`.trim();
+        const kids = (first.tree.children || []).map(c => c.person).filter(p => p && Number(p.is_private) !== 1);
+        if (!kids.length) throw new Error(i18n('Aucun enfant connu pour cette personne : pas de descendance à dessiner.'));
+        const branches = kids.map((p, i) => ({id: Number(p.id), name: nm(p) || i18n('Sans nom'), first: String(p.first_name || '').trim(), color: C?.branchColor ? C.branchColor(i) : ['#2f6fdf', '#d9534f', '#2e9d5b', '#e08a1e', '#8a4fd0', '#1aa3a3'][i % 6]}));
+        const d = {ancestor_id: o.person, ancestor_name: nm(P0), title: o.title || i18n('La descendance de {nm}', {nm: nm(P0) || i18n('la famille')}), date_text: '', place_text: '', guests: [], branches, options: {branchColors: Object.fromEntries(branches.map(b => [b.id, b.color]))}};
+        const doc = await CZ.buildTree(d, {format: o.format, theme: o.theme, gens: Number(o.gens) || 4, spouses: o.spouses !== false, photos: false, title: d.title});
+        if (!doc) throw new Error(i18n('Aucune descendance pour cette personne.'));
+        const walk = list => list.forEach(x => { if (x.name === 'Sous-titre' && x.type === 'text') { x.text = String(o.subtitle || '').trim() || x.text; } if (x.children) walk(x.children); });
+        walk(doc.objs || []);
+        doc.count = (doc.objs.find(l => l.name === 'Descendants')?.children || []).length;
+        return doc;
+    }
+
     /** fabrique le dessin complet */
     async function build(o) {
+        if (o.shape === 'desc') return buildDesc(o);
         // « N générations » : la personne compte pour la première (comme le dit le choix) ; les formes dessinent ensuite N − 1 rangées d'ancêtres
         o = {...o, gens: clamp((Number(o.gens) || 5) - 1, 1, (SHAPES.find(x => x[0] === o.shape)?.[3] || 10) - 1)};
         const T = themeOf(o.theme), fmt = formats().find(f => f[0] === o.format) || formats().find(f => f[0] === 'a3'), land = o.orient === 'land' || (o.orient === 'auto' && SHAPES.find(s => s[0] === o.shape)?.[2] === 'land');
@@ -346,6 +368,59 @@
                     const t = cleanTheme({label, paper: v('paper'), ink: v('ink'), title: v('title'), center: v('center'), empty: v('empty'), trunk: v('trunk'), font: v('font'), pat: [v('pat0'), v('pat1')], mat: [v('mat0'), v('mat1')], leaf: [v('leaf0'), v('leaf1'), v('leaf2')], frame: dg.querySelector('[name=frame]').checked});
                     const p2 = readJ(SKEY, {}), key = id || rid(); p2.custom = {...(p2.custom || {}), [key]: t}; if (Object.keys(p2.custom).length > 60) { toast('60 styles au plus.', 'error'); return false; } writeJ(SKEY, p2); res(key); } }).addEventListener('close', () => res(null)); });
     }
+    /** les réglages lus dans la fenêtre du créateur (null si aucune personne choisie) ; ils sont retenus pour la prochaine fois */
+    function readMaker(f) {
+        const chosen = Number(f.querySelector('input[type=hidden][name=person]')?.value) || 0;
+        if (!chosen) { window.LCNDA_UI.fail(f.querySelector('.pk'), 'Choisis une personne dans la liste.'); return null; }
+        const o = {person: chosen}; ['gens', 'format', 'orient', 'theme', 'colors', 'layoutNames', 'title', 'subtitle', 'titlePos'].forEach(k => { const el = f.querySelector(`[name=${k}]:checked`) || f.querySelector(`[name=${k}]`); o[k] = el?.value ?? ''; });
+        o.shape = f.querySelector('input[name=shape]').value; o.gens = clamp(Number(o.gens) || 5, 2, SHAPES.find(x => x[0] === o.shape)?.[3] || 10); ['dates', 'fullDates', 'places', 'jobs', 'sosa', 'empty', 'photos', 'leaves', 'frame', 'genLabels'].forEach(k => { o[k] = !!f.querySelector(`[name=${k}]`)?.checked; });
+        writeJ(PREF, {...o, person: undefined});
+        return o;
+    }
+
+    /* ═════ 📰 L'arbre en fond d'un faire-part (cousinade ou noces) : le moteur des faire-part (ext.cardInternals) + cet arbre ═════ */
+    const CARD_PREF = 'lcnda-decor-tree-card';
+    /** pose l'arbre (sans son cadre ni son titre) derrière les textes d'un faire-part déjà fabriqué ; op = transparence de l'arbre */
+    function treeBehindCard(card, tree, {op = .3} = {}) {
+        const V = ext.vectorInternals, W = card.w, H = card.h, keep = (tree.objs || []).filter(l => !['Titre', 'Cadre', 'Cadre et ornements'].includes(l.name));
+        const kids = JSON.parse(JSON.stringify(keep.flatMap(l => l.children || [])));
+        if (!kids.length) return card;
+        const k = Math.min(W * .86 / tree.w, H * .86 / tree.h), ox = (W - tree.w * k) / 2, oy = (H - tree.h * k) / 2;
+        kids.forEach(o => (V?.mapObj ? V.mapObj(o, (x, y) => [ox + x * k, oy + y * k], k) : null));
+        const layer = {id: uid(), type: 'group', layer: true, name: i18n('L’arbre (en fond)'), op: clamp(Number(op) || .3, .05, 1), children: kids};
+        const objs = card.objs.slice(), at = objs.findIndex(l => l.name === 'Cadre et ornements');
+        objs.splice(at >= 0 ? at + 1 : 0, 0, layer);
+        return {...card, objs};
+    }
+    /** 📰 « En faire un faire-part » : choisir la sorte (cousinade, noces), le format et la force de l'arbre, puis tout s'ouvre dans le dessin */
+    async function treeCard(o, {onDone} = {}) {
+        const CI = ext.cardInternals;
+        if (!CI?.build || !ext.openVectorEditor) return toast(i18n('Les faire-part ne sont pas chargés.'), 'error');
+        const pf = readJ(CARD_PREF, {}), kinds = ['cousinade', 'noces'].filter(k => CI.KINDS[k]), fmts = CI.FORMATS.filter(f => ['Cartes', 'Carrés', 'Affiches'].includes(f[4]));
+        ext.openDialog({eyebrow: 'ARBRE DÉCORATIF', title: '📰 En faire un faire-part', submitLabel: 'Créer le faire-part',
+            body: `<p class="muted">${esc(i18n('L’arbre se pose en fond, derrière les textes du faire-part. Tout s’ouvre ensuite dans le dessin vectoriel pour le retoucher.'))}</p>
+                <div class="h-fp-kinds">${kinds.map(k => `<label class="h-fp-kind"><input type="radio" name="dtc_kind" value="${k}" ${(pf.kind || 'cousinade') === k ? 'checked' : ''}><span>${esc(i18n(CI.KINDS[k].label))}</span></label>`).join('')}</div>
+                <div class="form-grid"><label>${esc(i18n('Format'))}<select name="dtc_format">${fmts.map(f => `<option value="${esc(f[0])}" ${(pf.format || 'a5') === f[0] ? 'selected' : ''}>${esc(i18n(f[1]))}</option>`).join('')}</select></label>
+                    <label>${esc(i18n('Sens'))}<select name="dtc_orient"><option value="port">${esc(i18n('Portrait'))}</option><option value="land" ${pf.orient === 'land' ? 'selected' : ''}>${esc(i18n('Paysage'))}</option></select></label>
+                    <label>${esc(i18n('L’arbre derrière le texte'))}<select name="dtc_op">${[['.18', 'Très pâle'], ['.3', 'Pâle'], ['.5', 'Moyen'], ['1', 'Bien visible']].map(([v, l]) => `<option value="${v}" ${String(pf.op || '.3') === v ? 'selected' : ''}>${esc(i18n(l))}</option>`).join('')}</select></label></div>`,
+            onSubmit: async f => {
+                const kind = f.querySelector('[name=dtc_kind]:checked')?.value || 'cousinade', format = f.querySelector('[name=dtc_format]').value, orient = f.querySelector('[name=dtc_orient]').value, op = f.querySelector('[name=dtc_op]').value;
+                writeJ(CARD_PREF, {kind, format, orient, op});
+                toast(i18n('Fabrication du faire-part…'));
+                try {
+                    const tree = await build(o); if (!tree.count) { toast(i18n('Personne à dessiner dans l’arbre.'), 'error'); return false; } delete tree.count;
+                    const K = CI.KINDS[kind]; let vals = {};
+                    try { vals = (await CI.fillFrom(kind, o.person)).values || {}; } catch (_) {}
+                    if (o.title && kind === 'cousinade') vals.intro = o.title;
+                    const fields = K.fields.map(([key, label, value]) => ({key, role: key, label, value: vals[key] ?? value, hidden: false}));
+                    const card = await CI.build({kind, style: K.style, format, orient, fold: 'single', fields});
+                    const doc = treeBehindCard(card, tree, {op: Number(op)});
+                    const nm = fields.find(x => x.role === 'name')?.value || '';
+                    ext.openVectorEditor({doc, name: `${String(i18n(K.label)).replace(/^\S+\s/, '')} — ${nm}`.trim().replace(/ —$/, ''), personId: o.person, onSaved: onDone, onClose: onDone});
+                } catch (e) { toast(e.message, 'error'); return false; }
+            }});
+    }
+
     function openMaker(onDone) {
         const S = A().state, cur = Number(S.currentPersonId) || Number(S.bootstrap?.startPersonId) || 0;
         const saved = readJ(PREF, {});
@@ -361,7 +436,7 @@
             body: `<div class="h-dt-form"><div data-dt-presets></div><p class="muted">L’arbre est fabriqué comme un dessin : il s’ouvre ensuite dans l’outil de dessin vectoriel pour changer les couleurs, les polices, les textes, ajouter des ornements, un blason… puis l’exporter en PDF ou en image, à la taille voulue.</p>
                 <div class="h-dt-person"><span class="pk-lab">Personne au centre (ou au pied de l’arbre)</span>${(window.LCNDA_PICKER || A()).pickerField({name: 'person', kind: 'person', value: cur || null})}</div>
                 <fieldset class="h-dt-shapes-box"><legend>Forme</legend><input type="hidden" name="shape" value="${shape0}"><div class="h-dt-shapes" data-tbg="dt-shapes" data-tbg-label="Formes de l’arbre">${SHAPES.map(([k, l]) => `<button type="button" class="h-dt-shape${shape0 === k ? ' is-on' : ''}" data-dt-shape="${k}" data-tb-label="${esc(l)}" aria-pressed="${shape0 === k}"><svg viewBox="0 0 48 48" aria-hidden="true">${SHAPE_ICON[k]}</svg><small>${esc(l)}</small></button>`).join('')}</div></fieldset>
-                <div class="h-dt-tools" data-tbg="dt-tools" data-tbg-label="Boutons de la fenêtre"><button type="button" class="button small secondary" data-dt-cmd="fmts">⚙️ Mes formats</button><button type="button" class="button small secondary" data-dt-cmd="themes">🎨 Mes styles</button><button type="button" class="button small secondary" data-dt-cmd="newtheme">＋ Créer un style</button><button type="button" class="button small secondary" data-dt-cmd="reset">↺ Remettre comme au départ</button>${ext.tbButton ? ext.tbButton('decortree') : ''}</div>
+                <div class="h-dt-tools" data-tbg="dt-tools" data-tbg-label="Boutons de la fenêtre"><button type="button" class="button small secondary" data-dt-cmd="fmts">⚙️ Mes formats</button><button type="button" class="button small secondary" data-dt-cmd="themes">🎨 Mes styles</button><button type="button" class="button small secondary" data-dt-cmd="newtheme">＋ Créer un style</button><button type="button" class="button small secondary" data-dt-cmd="reset">↺ Remettre comme au départ</button>${ext.cardInternals ? `<button type="button" class="button small secondary" data-dt-cmd="card" title="${esc(i18n('L’arbre en fond d’un faire-part de cousinade ou de noces'))}">📰 ${esc(i18n('En faire un faire-part'))}</button>` : ''}${ext.tbButton ? ext.tbButton('decortree') : ''}</div>
                 <div class="form-grid"><label><span data-help="Le nombre de rangées d’ancêtres, la personne comptant pour la première. Au-delà de 7, choisis un grand format (A2, A1…) pour que les noms restent lisibles.">Générations</span><select name="gens">${gensOpts(shape0).map(([k, l], _, all) => `<option value="${k}" ${Math.min(Number(v('gens', 5)) || 5, all.at(-1)[0]) === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                     <label>Format<span class="h-dt-withbtn"><span data-fmtbox>${sel('format', fmtOpts(v('format', 'a3')), v('format', 'a3'))}</span><button type="button" class="button small secondary" data-dt-cmd="fmts" title="Mes formats ; ranger, montrer ou cacher">⚙️</button></span></label>
                     <label>Sens${sel('orient', [['auto', 'Selon la forme'], ['land', 'Paysage'], ['port', 'Portrait']], v('orient', 'auto'))}</label>
@@ -395,6 +470,7 @@
                 const refill = () => { const f = dg.querySelector('[name=format]').value, t = dg.querySelector('[name=theme]').value; dg.querySelector('[data-fmtbox]').innerHTML = sel('format', fmtOpts(f), f); dg.querySelector('[data-themebox]').innerHTML = themeSel(t); };
                 dg.addEventListener('click', async e => { const b = e.target.closest('button'); if (!b) return; const c = b.dataset.dtCmd;
                     if (b.dataset.dtShape) return setShape(b.dataset.dtShape);
+                    if (c === 'card') { const o = readMaker(dg.querySelector('form') || dg); if (!o) return; dg.close(); treeCard(o, {onDone}); return; }
                     if (c === 'reset') { if (!await A().confirmBox('Forme, format, style, cases… reviennent comme au départ.', {title: 'Revenir aux réglages de départ de l’arbre ?', okLabel: 'Remettre comme au départ'})) return; try { localStorage.removeItem(PREF); } catch (_) {} dg.close(); setTimeout(() => openMaker(onDone), 50); return; }
                     if (c === 'fmts') manageList({key: FKEY, title: '⚙️ Les formats', intro: 'Coche ceux qu’on voit dans la liste, range-les avec ↑ ↓, et crée les tiens (en cm).', all: () => formats().map(f => [f[0], f[1], f[4]]), addLabel: '＋ Un format à moi',
                         onAdd: () => editFormat(null), onEdit: id => editFormat(id), onDelete: id => { const p2 = readJ(FKEY, {}); p2.custom = (p2.custom || []).filter(x => x.id !== id); writeJ(FKEY, p2); }, onDone: refill});
@@ -404,11 +480,7 @@
                 });
             },
             onSubmit: async f => {
-                const chosen = Number(f.querySelector('input[type=hidden][name=person]')?.value) || 0;
-                if (!chosen) return window.LCNDA_UI.fail(f.querySelector('.pk'), 'Choisis une personne dans la liste.');
-                const o = {person: chosen}; ['gens', 'format', 'orient', 'theme', 'colors', 'layoutNames', 'title', 'subtitle', 'titlePos'].forEach(k => { const el = f.querySelector(`[name=${k}]:checked`) || f.querySelector(`[name=${k}]`); o[k] = el?.value ?? ''; });
-                o.shape = f.querySelector('input[name=shape]').value; o.gens = clamp(Number(o.gens) || 5, 2, SHAPES.find(x => x[0] === o.shape)?.[3] || 10); ['dates', 'fullDates', 'places', 'jobs', 'sosa', 'empty', 'photos', 'leaves', 'frame', 'genLabels'].forEach(k => { o[k] = !!f.querySelector(`[name=${k}]`)?.checked; });
-                writeJ(PREF, {...o, person: undefined});
+                const o = readMaker(f); if (!o) return false;
                 toast('Fabrication de l’arbre…');
                 try { const doc = await build(o); if (!doc.count) { toast('Aucun ancêtre trouvé.', 'error'); return false; } delete doc.count;
                     ext.openVectorEditor({doc, name: o.title || `Arbre — ${chosenName || 'famille'}`, onSaved: onDone, onClose: onDone}); }
@@ -416,14 +488,14 @@
             }});
     }
     ext.openDecorTree = openMaker;
-    ext.decorTreeInternals = {build, bySosa, THEMES, FORMATS, SHAPES, formats, themes};
+    ext.decorTreeInternals = {build, buildDesc, treeBehindCard, treeCard, bySosa, THEMES, FORMATS, SHAPES, formats, themes};
     /* Réglages → Montage, retouche, mise en page et son : les réglages de l'arbre décoratif */
     ext.decorTreePrefs = {
         html: () => { const sv = readJ(PREF, {}), o = (list, cur2) => list.map(([k, l]) => `<option value="${esc(k)}" ${String(cur2) === String(k) ? 'selected' : ''}>${esc(l)}</option>`).join('');
             return `<div class="form-grid h-mtp-grid"><label>Forme au départ<select data-dtp="shape">${o(SHAPES.map(x => [x[0], x[1]]), sv.shape || 'fan180')}</select></label><label>Générations<select data-dtp="gens">${o(Array.from({length: 11}, (_, i) => [i + 2, i18n('{n} générations', {n: i + 2})]), sv.gens || 5)}</select></label>
                 <label>Format<select data-dtp="format">${o(formats(true).map(f => [f[0], f[1]]), sv.format || 'a3')}</select></label><label>Style<select data-dtp="theme">${o(themes(true).map(([k, t]) => [k, t.label]), sv.theme || 'parchemin')}</select></label>
                 <label>Couleurs<select data-dtp="colors">${o([['branch', 'Côté paternel / maternel'], ['gender', 'Hommes / femmes'], ['generation', 'Dégradé par génération'], ['none', 'Une seule couleur']], sv.colors || 'branch')}</select></label><label>Place du titre<select data-dtp="titlePos">${o([['bottom', 'En bas'], ['top', 'En haut']], sv.titlePos || 'bottom')}</select></label></div>
-                <div class="h-mtp-row"><button type="button" class="button small secondary" data-dtp-cmd="fmts">⚙️ Les formats (à moi, montrés, rangés)</button><button type="button" class="button small secondary" data-dtp-cmd="themes">🎨 Les styles (à moi, montrés, rangés)</button><button type="button" class="button small secondary" data-dtp-cmd="reset">↺ Réglages de départ</button></div>`; },
+                <div class="h-mtp-row"><button type="button" class="button small secondary" data-dtp-cmd="fmts">⚙️ Les formats (à moi, montrés, rangés)</button><button type="button" class="button small secondary" data-dtp-cmd="themes">🎨 Les styles (à moi, montrés, rangés)</button><button type="button" class="button small secondary" data-dtp-cmd="reset">↺ Remettre comme au départ</button></div>`; },
         bind: (box, redraw) => {
             box.addEventListener('change', e => { const k = e.target.dataset.dtp; if (!k) return; const sv = readJ(PREF, {}); sv[k] = k === 'gens' ? Number(e.target.value) : e.target.value; if (k === 'shape' || k === 'gens') sv.gens = Math.min(sv.gens || 5, SHAPES.find(x => x[0] === sv.shape)?.[3] || 10); writeJ(PREF, sv); toast('Enregistré.'); });
             box.addEventListener('click', e => { const c = e.target.closest('[data-dtp-cmd]')?.dataset.dtpCmd; if (!c) return;
@@ -440,5 +512,5 @@
         open: (id, again) => ext.openVectorEditor?.({id, onSaved: again, onClose: again}),
         create: again => openMaker(again),
         rename: (id, name) => api('rename_vector_doc', {}, {method: 'POST', body: {id, name}}),
-        remove: id => api('delete_vector_doc', {}, {method: 'POST', body: {id}}), createLabel: '＋ Nouvel arbre décoratif'});
+        remove: id => (ext.projectDelUndo ? ext.projectDelUndo('delete_vector_doc')(id) : api('delete_vector_doc', {}, {method: 'POST', body: {id}})), undo: true, createLabel: '＋ Nouvel arbre décoratif'});
 })();

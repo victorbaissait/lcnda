@@ -25,8 +25,8 @@
             {key: 'hom_when', label: 'Quand l’afficher', options: [['each', 'À chaque courrier, appel et questionnaire'], ['first', 'Au premier contact d’un héritier seulement'], ['never', 'Jamais']]},
             {key: 'hom_after_ok', label: 'Après « ✓ C’est bien lui »', options: [['again', 'L’alerte revient au prochain contact'], ['case', 'Elle ne revient plus dans ce dossier']]},
             {key: 'hom_scope', label: 'Où chercher l’homonyme', options: [['base', 'Toute la base'], ['cases', 'Seulement les autres dossiers']]}]},
-        {part: 'C', title: '📋 Tous les doutes', items: [
-            {key: 'doutes_name', label: 'Nom de la liste', options: [['all', '📋 Tous les doutes'], ['verify', 'À vérifier'], ['review', 'Points à revoir']]},
+        {part: 'C', title: '❓ Tous les doutes', items: [
+            {key: 'doutes_name', label: 'Nom de la liste', options: [['all', '❓ Tous les doutes'], ['verify', 'À vérifier'], ['review', 'Points à revoir']]},
             {key: 'doutes_nosource', label: '« Sans source »', options: [['sosa', 'Seulement les ancêtres Sosa'], ['all', 'Toute la base'], ['none', 'Pas du tout']]},
             {key: 'doutes_seen_back', label: 'Une ligne marquée vue', options: [['again', 'Revient si la chose change'], ['never', 'Ne revient jamais']]},
             {key: 'doutes_seen_show', label: 'Les lignes vues', options: [['hide', 'Cachées par le filtre de départ « Pas encore vus »'], ['pale', 'Montrées en pâle']]},
@@ -111,11 +111,11 @@ main{max-width:760px;margin:0 auto;padding:14px 14px 120px}h1{font-size:1.25rem;
 .vm-c{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;margin:0 0 12px}.vm-c.is-done{border-color:var(--ok)}
 .vm-cote{font-weight:800}.vm-what{margin:.15rem 0}.vm-known{color:var(--muted);font-size:.9rem;margin:.2rem 0 .5rem;padding-left:1rem}
 .vm-res{display:flex;flex-wrap:wrap;gap:6px;margin:.4rem 0}.vm-res button,.vm-btn{font:inherit;font-size:.95rem;min-height:44px;padding:0 12px;border-radius:9px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
-.vm-res button[aria-pressed=true]{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:700}textarea,input[type=text]{width:100%;font:inherit;padding:8px 10px;border-radius:9px;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
+.vm-res button[aria-pressed=true]{background:var(--blue);border-color:var(--blue);color:var(--on-blue,#fff);font-weight:700}textarea,input[type=text]{width:100%;font:inherit;padding:8px 10px;border-radius:9px;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
 .vm-ph{display:flex;flex-wrap:wrap;gap:6px;margin:.4rem 0}.vm-ph figure{margin:0;position:relative}.vm-ph img{width:84px;height:84px;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
 .vm-ph button{position:absolute;top:2px;right:2px;min-height:28px;width:28px;padding:0;border-radius:50%}.vm-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .vm-bar{position:fixed;left:0;right:0;bottom:0;background:var(--paper);border-top:1px solid var(--line);padding:10px 14px;display:flex;flex-direction:column;gap:6px;align-items:stretch}
-.vm-main{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:800;min-height:52px}.vm-state{font-size:.9rem;color:var(--ok);min-height:1.2em}.vm-state.is-warn{color:var(--warn)}
+.vm-main{background:var(--blue);border-color:var(--blue);color:var(--on-blue,#fff);font-weight:800;min-height:52px}.vm-state{font-size:.9rem;color:var(--ok);min-height:1.2em}.vm-state.is-warn{color:var(--warn)}
 @media (min-width:700px){.vm-bar{flex-direction:row;justify-content:center}.vm-main{min-width:320px}}`;
     /** le script de la page : aucune requête, tout texte posé par textContent ; résultats dans localStorage, photos dans IndexedDB */
     const PAGE_JS = `(function(){'use strict';var D,T;try{D=JSON.parse(document.getElementById('vm-data').textContent);T=JSON.parse(document.getElementById('vm-t').textContent);}catch(e){return;}

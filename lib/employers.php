@@ -188,9 +188,10 @@ function save_employer_record(PDO $pdo, array $data): array
 function delete_employer_record(PDO $pdo, array $data): array
 {
     $key = employer_key(safe_text($data['name'] ?? ''));
+    $s = $pdo->prepare('SELECT id FROM employer_records WHERE key=?'); $s->execute([$key]); $id = (int) $s->fetchColumn();
+    if ($id) { undo_keep($pdo, 'employer_record', $id, 'Fiche employeur effacée : ' . safe_text($data['name'] ?? ''), [['employer_records', 'id=?', [$id]]]); } // ↶ Annuler (H7)
     $pdo->prepare('DELETE FROM employer_records WHERE key=?')->execute([$key]);
-    log_change($pdo, 'meta', 0, 'delete', 'Fiche employeur effacée : ' . safe_text($data['name'] ?? ''));
-    return ['ok' => true];
+    return ['ok' => true, 'id' => $id];
 }
 
 /**

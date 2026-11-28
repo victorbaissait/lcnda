@@ -1,0 +1,93 @@
+/* LCNDA — audit des onglets : 🏠 Tableau de bord, ⏱ Temps de recherche, ✨ Trésors (app-tableau-de-bord.js, app-chrono-recherche.js, heritage-tresors*.js) */
+
+/* ── 🏠 Tableau de bord ── */
+.dashboard-page .dash-pages-host { margin: -.4rem 0 .9rem; }
+.dashboard-page .dash-pages-host .dash-pages { margin: 0; }
+.dash-filterbar { display: flex; flex-wrap: wrap; gap: .4rem .8rem; align-items: center; margin: 0 0 .9rem; padding: .55rem .8rem; border: 1px solid var(--line-color, #d9dce2); border-left: 4px solid var(--accent, #0066cc); border-radius: 8px; background: var(--card-bg, #fff); }
+.dash-period { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; margin: .7rem 0 0; font-size: .92rem; }
+.dash-period select { width: auto; min-height: 0; padding: 2px 6px; }
+.dash-filter-body { display: grid; gap: .45rem; padding: 0 1rem 1rem; }
+.dash-filter-body select, .dash-filter-pk { margin: 0 0 .4rem 1.7rem; max-width: calc(100% - 1.7rem); }
+.dash-pin-more { margin-left: auto; }
+.dashboard-widget .dashboard-widget-tools [data-dash-more] { font-weight: 700; }
+/* 📈 croissance */
+.dg-chart { width: 100%; height: auto; max-height: 240px; display: block; color: var(--muted-color, #555); }
+.dg-legend { display: flex; flex-wrap: wrap; gap: .3rem 1rem; list-style: none; padding: 0; margin: .5rem 0 .2rem; }
+.dg-legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+/* 🎯 objectifs */
+.lg-list { list-style: none; padding: 0; margin: 0 0 .6rem; display: grid; gap: .7rem; }
+.lg-top { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+.lg-top .icon-action { margin-left: auto; }
+.lg-bar { height: 10px; border-radius: 6px; background: var(--soft-bg, #eef0f4); overflow: hidden; margin: .3rem 0 .15rem; }
+.lg-bar span { display: block; height: 100%; background: var(--accent, #0066cc); border-radius: 6px; }
+.lg-late { color: #b3261e; font-size: .85rem; }
+.lg-add { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; }
+.lg-add input[type=number] { width: 6.5em; }
+.lg-add input, .lg-add select { width: auto; }
+/* 🧭 prochaine action */
+.na-q { margin: 0 0 .2rem; }
+.na-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem; margin-top: .5rem; }
+/* 📐 les deux champs restent dans le widget (un champ a une largeur minimale : sans min-width 0, « Lieu » dépassait du cadre) */
+.na-form > label { min-width: 0; }
+.na-form > label input { display: block; width: 100%; min-width: 0; max-width: 100%; box-sizing: border-box; }
+.na-acts { grid-column: 1 / -1; display: flex; gap: .5rem; flex-wrap: wrap; align-items: center; }
+
+/* ── ⏱ Temps de recherche ── */
+.rcl-top { display: flex; flex-wrap: wrap; align-items: end; gap: .6rem; }
+.rcl-clock { font-variant-numeric: tabular-nums; font-size: 2rem; font-weight: 700; min-width: 4.5ch; }
+.rcl-box.is-on .rcl-clock { color: var(--accent, #0066cc); }
+.rcl-scope { display: grid; gap: 2px; flex: 1 1 160px; font-size: .85rem; }
+.rcl-sum { display: flex; flex-wrap: wrap; gap: .3rem 1.2rem; margin: .6rem 0 .3rem; }
+.rcl-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 2px; }
+.rcl-list li { display: flex; justify-content: space-between; gap: .8rem; border-bottom: 1px dashed var(--line-color, #e3e5ea); padding: 2px 0; }
+.rcl-others { margin: .5rem 0 0; font-size: .88rem; }
+
+/* ── ✨ Trésors : chercher, favoris, récents, ⋯ ── */
+.h-tr-find { display: flex; align-items: center; gap: .8rem; margin: 0 0 .8rem; max-width: 560px; }
+.h-tr-find .ui-search, .h-tr-find > input { flex: 1 1 auto; }
+.h-tr-quick { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; margin: 0 0 .6rem; }
+.h-tr-quick-lab { font-weight: 600; margin-right: .3rem; }
+.h-tr-chip { border: 1px solid var(--line, #d9dce2); border-radius: 999px; background: var(--card-bg, #fff); color: inherit; padding: 4px 12px; font: inherit; cursor: pointer; }
+.h-tr-chip:hover, .h-tr-chip:focus-visible { border-color: var(--accent, #0066cc); }
+.h-tr-cell { position: relative; display: grid; }
+.h-tr-cell[hidden], .h-tr-sec[hidden] { display: none; }
+.h-tr-cell > .h-tr-card { padding-right: 64px; height: 100%; }
+.h-tr-fav, .h-tr-more { position: absolute; top: 8px; width: 28px; height: 28px; border: 0; border-radius: 6px; background: transparent; color: var(--muted-color, #777); font-size: 18px; line-height: 1; cursor: pointer; }
+.h-tr-fav { right: 8px; }
+.h-tr-more { right: 38px; opacity: 0; }
+.h-tr-cell:hover .h-tr-more, .h-tr-more:focus-visible { opacity: 1; }
+.h-tr-fav.is-on { color: #c79100; }
+.h-tr-fav:hover, .h-tr-more:hover { background: var(--soft-bg, #eef0f4); }
+/* 📅 Ce jour-là */
+.h-tr-cj { border: 1px solid var(--line, #d9dce2); border-radius: 12px; padding: 16px 20px; background: #fbf7ef; color: #3b2a14; max-width: 760px; }
+.h-tr-cj-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+/* 🎞 Une vie */
+.h-tr-unevie .h-tr-uv-map { width: min(80vw, 800px); height: auto; border-radius: 16px; }
+.h-tr-uv-list { columns: 2 260px; }
+/* 📮 Questionnaire */
+.h-tr-qp-new { display: grid; gap: .6rem; max-width: 760px; }
+.h-tr-qp-qs { display: grid; gap: .3rem; }
+.h-tr-qp-list { list-style: none; padding: 0; display: grid; gap: .5rem; }
+.h-tr-qp-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem; align-items: center; border: 1px solid var(--line, #d9dce2); border-radius: 10px; padding: 10px 12px; }
+.h-tr-qp-acts { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; }
+
+/* ── R6 : mode consultation — rien qui modifie ── */
+body.is-kiosk .dashboard-widget-tools, body.is-kiosk [data-add-dashboard-widget], body.is-kiosk .dashboard-footer-actions, body.is-kiosk [data-pin-block],
+body.is-kiosk [data-dash-filter], body.is-kiosk [data-dash-add], body.is-kiosk [data-dash-reorder], body.is-kiosk [data-tr-settings] { display: none !important; }
+
+/* ── R12 : téléphone (390 px) ── */
+@media (max-width: 700px) {
+    .dashboard-grid { grid-template-columns: 1fr !important; }
+    .dashboard-grid > .card, .dashboard-grid > .dash-group { grid-column: 1 / -1 !important; min-width: 0; }
+    .dashboard-page .ui-ph-actions { flex-wrap: wrap; }
+    .dash-pages { max-width: 100%; overflow-x: auto; }
+    .dashboard-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+    .na-form { grid-template-columns: 1fr; }
+    .lg-add input, .lg-add select { flex: 1 1 100%; }
+    .rcl-clock { font-size: 1.6rem; }
+    .h-tr-grid { grid-template-columns: 1fr; }
+    .h-tr-find { max-width: none; }
+    .h-tr-cj { padding: 12px; }
+    .h-tr-uv-list { columns: 1; }
+    .h-tr-qp-row { flex-direction: column; align-items: stretch; }
+}

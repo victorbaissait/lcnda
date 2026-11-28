@@ -31,8 +31,10 @@
     let bust = Date.now();
     const thumbUrl = i => i ? `media/${encodeURIComponent(i.thumbnail || i.filename)}?v=${bust}` : '';
     const fullUrl = i => i ? `media/${encodeURIComponent(i.filename)}?v=${bust}` : '';
-    const LINK_TYPES = {person: ['👤', 'Fiche'], village: ['🏘️', 'Village'], investigation: ['🔍', 'Enquête'], atelier_project: ['📚', 'Projet de l’Atelier'], battue: ['🧭', 'Battue']};
-    const pageName = p => p ? (p.label ? i18n('p. {num} — {label}', {num: String(p.num), label: p.label}) : i18n('Page {num}', {num: String(p.num)})) : '';
+    const LINK_TYPES = {person: ['👤', 'Fiche'], village: ['🏘️', 'Village'], investigation: ['🔍', 'Enquête'], atelier_project: ['📚', 'Projet de l’Atelier'], battue: ['🔦', 'Battue']};
+    const pageName = p => p ? (p.label ? i18n('p. {num} — {label}', {num: String(p.num), label: p.label}) : ['liasse', 'archives'].includes(D?.recueil?.numbering) ? i18n('Pièce {n}', {n: String(p.num)}) : i18n('Page {num}', {num: String(p.num)})) : ''; // 🗃 une liasse : « pièce »
+    /** le nom court d'une page : son nom, sinon « Page 3 » (« Pièce 3 » dans une liasse) */
+    const pageShort = p => (p.label || (['liasse', 'archives'].includes(D?.recueil?.numbering) ? i18n('Pièce {n}', {n: String(p.num)}) : 'Page ' + p.num));
     const excerpt = (t, n = 140) => { const s = String(t || '').replace(/\s+/g, ' ').trim(); return s.length > n ? s.slice(0, n - 1) + '…' : s; };
 
     /* ─────────── Ouvrir un recueil depuis n'importe où ─────────── */
@@ -85,7 +87,7 @@
         ws.innerHTML = `<section class="page collection-page h-rc">
             <header class="page-header"><div><span class="eyebrow">LISTES · MÉDIAS</span><h2>📚 Recueils</h2>
                 <p>Un recueil rassemble des pages photographiées dans l’ordre : un registre, une liste de prisonniers, un cahier, un album. Tu peux y transcrire chaque page, garder plusieurs campagnes de photos (celles d’il y a dix ans et les nouvelles) et choisir, page par page, la meilleure image.</p></div>
-                <div class="page-actions"><button type="button" class="button secondary" data-h-open-list="media">🖼️ Tous les médias</button><button type="button" class="button" data-rc-new>＋ Nouveau recueil</button></div></header>
+                <div class="page-actions">${ext.recueilFonds && all.length ? `<span class="segmented rf-mode" role="radiogroup" aria-label="${esc(i18n('Façon de montrer les recueils'))}">${[['list', '📚 ' + i18n('Recueils')], ['fonds', '🏛 ' + i18n('Par fonds')]].map(([k, l]) => `<button type="button" role="radio" aria-checked="${ext.recueilFonds.mode() === k}" class="${ext.recueilFonds.mode() === k ? 'is-active' : ''}" data-rc-mode="${k}">${esc(l)}</button>`).join('')}</span>` : ''}${ext.recueilSens ? `<button type="button" class="icon-button" data-rc-settings title="${esc(i18n('Réglages des recueils'))}" aria-label="${esc(i18n('Réglages des recueils'))}">⚙️</button>` : ''}<button type="button" class="button secondary" data-h-open-list="media">🖼️ Tous les médias</button><button type="button" class="button" data-rc-new>＋ Nouveau recueil</button>${ext.recueilIiif && !document.body.classList.contains('is-kiosk') ? `<button type="button" class="button secondary" data-rc-iiif title="${esc(i18n('Un registre publié en ligne (IIIF) : ses vues téléchargées dans un nouveau recueil'))}">🌐 ${esc(i18n('Depuis un registre en ligne…'))}</button>` : ''}</div></header>
             ${all.length || s.q ? '<div data-rc-bar></div>' : ''}${rows.length && view === 'list' && UI?.rowsHtml ? UI.rowsHtml(rows.map(r => ({thumb: r.cover ? `<img src="${esc(thumbUrl(r.cover))}" alt="" loading="lazy">` : `<span class="ui-card-ico">${esc(r.icon || '📚')}</span>`, name: r.title, open: `data-open-recueil="${r.id}"`, lines: [[r.reference, r.place_text, r.date_text].filter(Boolean).join(' · '), `${plural(r.pages, 'page', 'pages')} · ${pctOf(r)} % transcrit`], when: r.updated_at, whenLabel: 'Modifié'}))) : rows.length ? UI.cardsHtml(rows.map(r => { const pct = r.pages ? Math.round(r.transcribed / r.pages * 100) : 0; // K9 : la vignette unique
                 return {thumb: r.cover ? `<img src="${esc(thumbUrl(r.cover))}" alt="" loading="lazy">` : `<span class="ui-card-ico">${esc(r.icon || '📚')}</span>`, name: `${r.icon || '📚'} ${r.title}`, open: `data-open-recueil="${r.id}"`,
                     lines: [[r.reference, r.place_text, r.date_text].filter(Boolean).join(' · ') || 'Sans cote', `${plural(r.pages, 'page', 'pages')} · ${plural(r.versions, 'version', 'versions')}${r.links ? ` · 🔗 ${r.links}` : ''}`],
@@ -93,12 +95,20 @@
             : (s.q || all.length ? A().emptyState({icon: '🔍', text: 'Aucun recueil ne correspond.', hint: 'Change les mots cherchés ou retire un filtre.'}) : A().emptyState({icon: '📚', text: 'Aucun recueil pour l’instant', hint: 'Crée le recueil (registre, liste, cahier…), puis ajoute tes photos : chaque photo devient une page.', action: {label: '＋ Nouveau recueil', attrs: 'data-rc-new'}}))}
         </section>`;
         const sec = ws.querySelector('.h-rc');
+        // 🏛 « Par fonds » (heritage-recueil-fonds.js) : la vue des fonds à la place des vignettes ; la recherche de la barre s'applique
+        sec.querySelector('[data-rc-settings]')?.addEventListener('click', () => ext.recueilSens.settings(() => ext.lists.recueils(++S().workspaceToken))); // ⚙️ profil, options
+        sec.querySelectorAll('[data-rc-mode]').forEach(b => b.addEventListener('click', () => { ext.recueilFonds.setMode(b.dataset.rcMode); ext.lists.recueils(++S().workspaceToken); }));
+        if (ext.recueilFonds && all.length && ext.recueilFonds.mode() === 'fonds') {
+            sec.querySelectorAll(':scope > .ui-rows, :scope > .ui-cards, :scope > .empty-box, :scope > .ui-empty').forEach(x => x.remove());
+            const host = document.createElement('div'); host.className = 'rf-host'; sec.appendChild(host); ext.recueilFonds.paint(host, {q: s.q || ''});
+        }
         const slot = sec.querySelector('[data-rc-bar]');
         if (slot && UI?.listBar) { const bar = UI.listBar({key: KEY, search: {placeholder: 'Chercher un recueil… (titre, cote, lieu)', value: s.q || ''}, view: {dflt: 'cards', what: 'recueils'},
             filters: [{id: 'place', label: 'Lieu', type: 'place', chipPrefix: 'Lieu :'}],
             sort: {options: [['recent', 'Les plus récents'], ['old', 'Les plus anciens'], ['az', 'A → Z'], ['za', 'Z → A']], value: sort},
             onChange: b => { s.q = b.q.trim(); UI.setSort(KEY, b.sort); ext.lists.recueils(++S().workspaceToken); }}); bar.setCount(rows.length === all.length ? A().plural(rows.length, 'recueil') : `${A().plural(rows.length, 'recueil')} sur ${all.length}`); slot.replaceWith(bar); }
         sec.querySelectorAll('[data-rc-new]').forEach(b => b.addEventListener('click', () => recueilDialog(null)));
+        sec.querySelector('[data-rc-iiif]')?.addEventListener('click', () => ext.recueilIiif.open({onDone: id => ext.openRecueil(id || 0)}));
     };
 
     function recueilDialog(r) {
@@ -109,8 +119,10 @@
                 <label>Lieu de conservation<input name="place_text" value="${esc(r?.place_text || '')}" placeholder="Vincennes, Service historique de la Défense"></label>
                 <label>Date du document<input name="date_text" value="${esc(r?.date_text || '')}" placeholder="1805"></label>
                 ${r ? '' : `<label>Nom de la première série de photos<input name="first_version" value="Photos ${new Date().getFullYear()}" placeholder="Photos 2015"></label>`}
-                <label class="span-2">Description<textarea name="description" rows="4" placeholder="Ce que contient le recueil, ce qui manque, où le consulter…">${esc(r?.description || '')}</textarea></label></div>`,
-            onOpen: dl => dl.querySelector('[data-rc-emoji]').addEventListener('click', () => ext.pickEmoji?.(dl.querySelector('[name=icon]'))),
+                <label class="span-2">Description<textarea name="description" rows="4" placeholder="Ce que contient le recueil, ce qui manque, où le consulter…">${esc(r?.description || '')}</textarea></label>
+                ${ext.recueilEtat ? `<div class="span-2">${ext.recueilEtat.fields(r)}</div>` : ''}
+                ${ext.recueilFiche ? `<div class="span-2">${ext.recueilFiche.fields(r)}</div>` : ''}</div>`,
+            onOpen: dl => { dl.querySelector('[data-rc-emoji]').addEventListener('click', () => ext.pickEmoji?.(dl.querySelector('[name=icon]'))); ext.recueilFiche?.bind(dl, r); },
             onSubmit: async form => {
                 const f = Object.fromEntries(new FormData(form));
                 const res = await post('save_recueil', {...f, id: r?.id || 0});
@@ -141,6 +153,9 @@
 
     async function load(id) { const d = await get('recueil', {id}); D = d; return d; }
     const reload = async () => { await load(st().id); paint(); };
+    /** 🗂 l'état des pages (heritage-recueil-etat.js) : ce qu'il lui faut de ce recueil */
+    const etatCtx = () => ({D: () => D, reload, post, openPage: id => { Object.assign(st(), {tab: 'pages', page: Number(id), image: 0, compare: 0}); paint(); }, addPhotos: pid => addPhotosDialog({pageId: pid}),
+        openTab: tab => { Object.assign(st(), {tab, page: 0, image: 0, compare: 0}); paint(); }});
     const run = async (action, body, msg) => { try { const r = await post(action, body); if (msg) toast(msg); await reload(); return r.result || r; } catch (e) { toast(e.message, 'error'); return null; } };
 
     async function renderRecueil(token) {
@@ -154,10 +169,10 @@
     function paint() {
         const s = st(), r = D.recueil, ws = A().$('#workspace');
         const pct = D.pages.length ? Math.round(D.pages.filter(p => p.transcription.trim()).length / D.pages.length * 100) : 0;
-        const tabs = [['summary', '📋', 'Résumé', ''], ['pages', '📄', 'Pages', D.pages.length], ['versions', '🗂️', 'Versions', D.versions.length], ['links', '🔗', 'Rattachements', D.links.length]];
+        const tabs = [['summary', '📋', 'Résumé', ''], ...(ext.recueilEtat ? [['etat', '🗂', 'État', '']] : []), ...(ext.recueilSommaire ? [['sommaire', '📑', 'Sommaire', '']] : []), ['pages', '📄', 'Pages', D.pages.length], ['versions', '🗂️', 'Versions', D.versions.length], ['links', '🔗', 'Rattachements', D.links.length]];
         ws.innerHTML = `<section class="page collection-page h-rc h-rc-one">
             <header class="page-header"><div><button type="button" class="back-link" data-rc-back>← Tous les recueils</button><span class="eyebrow">RECUEIL</span><h2>${esc(r.icon || '📚')} ${esc(r.title)}</h2>
-                <p class="muted">${esc([r.reference, r.place_text, r.date_text].filter(Boolean).join(' · ')) || '&nbsp;'}</p></div>
+                <p class="muted">${esc([r.service ? (r.service.short_name || r.service.name) : r.place_text, r.fonds, r.reference, r.date_text].filter(Boolean).join(' · ')) || '&nbsp;'}</p></div>
                 <div class="page-actions"><button type="button" class="button secondary" data-rc-cover title="Choisir l’image de couverture du recueil">🖼️ Couverture</button><button type="button" class="button secondary" data-rc-edit>Modifier</button><button type="button" class="button" data-rc-add>＋ Ajouter des photos</button></div></header>
             <div class="h-rc-tabs segmented">${tabs.map(([k, icon, label, n]) => `<button type="button" class="${s.tab === k ? 'is-active' : ''}" data-rc-tab="${k}">${icon} ${label}${n !== '' ? ` <small>${n}</small>` : ''}</button>`).join('')}
                 <span class="h-rc-tabs-info muted">${plural(D.pages.length, 'page', 'pages')} · ${pct} % transcrit${loose().length ? ` · <button type="button" class="link-button h-rc-warn" data-rc-goloose>${plural(loose().length, 'photo à ranger', 'photos à ranger')}</button>` : ''}</span></div>
@@ -171,6 +186,8 @@
         sec.querySelector('[data-rc-goloose]')?.addEventListener('click', () => { s.tab = 'pages'; s.page = 0; paint(); sec.querySelector('.h-rc-loose')?.scrollIntoView({block: 'center'}); });
         const body = sec.querySelector('.h-rc-body');
         if (s.tab === 'pages' && s.page) return paintPage(body);
+        if (s.tab === 'etat' && ext.recueilEtat) return ext.recueilEtat.paint(body, etatCtx());
+        if (s.tab === 'sommaire' && ext.recueilSommaire) return ext.recueilSommaire.paint(body, etatCtx());
         ({summary: paintSummary, pages: paintPages, versions: paintVersions, links: paintLinks}[s.tab] || paintSummary)(body);
     }
 
@@ -179,27 +196,28 @@
         const shown = imgById(p.shown_image_id), imgs = pageImages(p.id), details = imgs.filter(i => i.role === 'detail').length;
         const dots = D.versions.length > 1 ? `<span class="h-rc-dots">${D.versions.map(v => `<i class="${imgs.some(i => i.version_id === v.id && i.role === 'page') ? 'on' : ''}" title="${esc(v.name)} : ${imgs.some(i => i.version_id === v.id && i.role === 'page') ? 'photographiée' : 'pas de photo'}"></i>`).join('')}</span>` : '';
         return `<button type="button" class="h-rc-page" draggable="true" data-rc-page="${p.id}" data-rc-num="${p.num}">
-            <span class="h-rc-thumb">${shown ? `<img src="${esc(thumbUrl(shown))}" alt="" loading="lazy">` : '<span class="h-rc-nophoto">pas de photo</span>'}<span class="h-rc-num">${p.num}</span>${p.transcription.trim() ? '<span class="h-rc-done" title="Transcrite">✍️</span>' : ''}</span>
-            <span class="h-rc-page-name">${esc(p.label || 'Page ' + p.num)}</span>
+            <span class="h-rc-thumb">${shown ? `<img src="${esc(thumbUrl(shown))}" alt="" loading="lazy">` : '<span class="h-rc-nophoto">pas de photo</span>'}<span class="h-rc-num">${p.num}</span>${p.state && ext.recueilEtat ? `<span class="h-rc-done" title="${esc(p.absent ? i18n('Absente') : i18n(ext.recueilEtat.STATES[p.state][1]))}">${p.absent ? '⛔' : ext.recueilEtat.STATES[p.state][0]}</span>` : p.transcription.trim() ? '<span class="h-rc-done" title="Transcrite">✍️</span>' : ''}</span>
+            <span class="h-rc-page-name">${esc(pageShort(p))}</span>
             <span class="h-rc-page-meta">${dots}${details ? `<small title="Détails (zooms)">🔍 ${details}</small>` : ''}</span></button>`;
     }
     function paintPages(body) {
-        const s = st(), q = (s.q || '').toLowerCase();
+        const s = st(), q = (s.q || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
         const tableText = p => p.table ? p.table.rows.map(r => Object.values(r.c || {}).join(' ')).join(' ') : '';
-        const pages = q ? D.pages.filter(p => (p.label + ' ' + p.transcription + ' ' + p.notes + ' ' + tableText(p)).toLowerCase().includes(q)) : D.pages;
+        const pages = q ? D.pages.filter(p => (window.LCNDA_UI?.listMatch?.text || ((q, ...h) => h.join(' ').toLowerCase().includes(String(q).toLowerCase())))(q, p.label, p.transcription, p.notes, tableText(p))) : D.pages;
         const ls = loose();
         body.innerHTML = `<div class="collection-toolbar h-rc-toolbar"><input type="search" data-rc-q2 value="${esc(s.q || '')}" placeholder="Chercher dans les transcriptions, les noms de page…">
                 <span class="segmented"><button type="button" class="${s.view !== 'table' ? 'is-active' : ''}" data-rc-view="grid">▦ Mosaïque</button><button type="button" class="${s.view === 'table' ? 'is-active' : ''}" data-rc-view="table">☰ Tableau</button></span>
-                <button type="button" class="button small secondary" data-rc-newpage>＋ Page sans photo</button></div>
+                <button type="button" class="button small secondary" data-rc-newpage>＋ Page sans photo</button>${ext.recueilSommaire && ['liasse', 'archives'].includes(D.recueil.numbering) ? `<button type="button" class="button small secondary" data-rc-arrange>🗃 ${i18n('Ranger par…')}</button>` : ''}</div>
             ${ls.length || trays().length ? looseHtml(ls) : ''}
             ${!D.pages.length ? A().emptyState({icon: '📄', text: 'Aucune page pour l’instant', hint: 'Chaque photo devient une page, dans l’ordre.', action: {label: '＋ Ajouter des photos', attrs: 'data-rc-add-empty'}}) :
             s.view === 'table' ? `<div class="data-table-wrap"><table class="data-table h-rc-table"><thead><tr><th>N°</th><th>Page</th>${D.versions.map(v => `<th>${esc(v.name)}</th>`).join('')}<th>Transcription</th></tr></thead><tbody>${pages.map(p => {
                 const imgs = pageImages(p.id);
-                return `<tr data-rc-row="${p.id}"><td>${p.num}</td><td><button type="button" class="table-link" data-rc-open="${p.id}">${esc(p.label || 'Page ' + p.num)}</button></td>${D.versions.map(v => `<td>${imgs.filter(i => i.version_id === v.id).map(i => `<button type="button" class="h-rc-thumb tiny ${i.id === p.shown_image_id ? 'is-best' : ''}" data-rc-open="${p.id}" data-rc-image="${i.id}" title="${i.role === 'detail' ? 'Détail' : 'Page'}${i.id === p.shown_image_id ? ' · image retenue' : ''}"><img src="${esc(thumbUrl(i))}" alt="" loading="lazy">${i.role === 'detail' ? '<em>🔍</em>' : ''}</button>`).join('') || '<span class="muted">—</span>'}</td>`).join('')}<td class="h-rc-excerpt">${esc(excerpt(p.transcription)) || '<span class="muted">—</span>'}</td></tr>`; }).join('')}</tbody></table></div>`
+                return `<tr data-rc-row="${p.id}"><td>${p.num}</td><td><button type="button" class="table-link" data-rc-open="${p.id}">${esc(pageShort(p))}</button></td>${D.versions.map(v => `<td>${imgs.filter(i => i.version_id === v.id).map(i => `<button type="button" class="h-rc-thumb tiny ${i.id === p.shown_image_id ? 'is-best' : ''}" data-rc-open="${p.id}" data-rc-image="${i.id}" title="${i.role === 'detail' ? 'Détail' : 'Page'}${i.id === p.shown_image_id ? ' · image retenue' : ''}"><img src="${esc(thumbUrl(i))}" alt="" loading="lazy">${i.role === 'detail' ? '<em>🔍</em>' : ''}</button>`).join('') || '<span class="muted">—</span>'}</td>`).join('')}<td class="h-rc-excerpt">${esc(excerpt(p.transcription)) || '<span class="muted">—</span>'}</td></tr>`; }).join('')}</tbody></table></div>`
             : `<p class="muted h-rc-hint">Clique sur une page pour l’ouvrir et la transcrire ; glisse-la pour changer l’ordre.</p><div class="h-rc-pages">${pages.map(pageCard).join('')}</div>`}`;
         let timer = 0;
         body.querySelector('[data-rc-q2]').addEventListener('input', e => { clearTimeout(timer); timer = setTimeout(() => { s.q = e.target.value.trim(); paintPages(body); const i = body.querySelector('[data-rc-q2]'); i.focus(); i.setSelectionRange(i.value.length, i.value.length); }, 250); });
         body.querySelectorAll('[data-rc-view]').forEach(b => b.addEventListener('click', () => { s.view = b.dataset.rcView; paintPages(body); }));
+        body.querySelector('[data-rc-arrange]')?.addEventListener('click', e => ext.recueilSommaire.arrange(e.currentTarget, etatCtx())); // 🗃 une liasse
         body.querySelector('[data-rc-newpage]').addEventListener('click', async () => { const r = await run('save_recueil_page', {recueil_id: D.recueil.id}); if (r) { s.page = r.id; paint(); } });
         body.querySelector('[data-rc-add-empty]')?.addEventListener('click', () => addPhotosDialog());
         body.querySelectorAll('[data-rc-page],[data-rc-open]').forEach(b => b.addEventListener('click', () => { s.page = Number(b.dataset.rcPage || b.dataset.rcOpen); s.image = Number(b.dataset.rcImage || 0); s.compare = 0; paint(); }));
@@ -246,8 +264,7 @@
     const picked = () => (st().picked ||= new Set());
     function looseItem(i) {
         const ts = trays(), on = picked().has(i.id);
-        return `<div class="h-rc-loose-item ${on ? 'is-picked' : ''}" data-rc-img="${i.id}" draggable="true">
-            <label class="h-rc-pick" title="Choisir plusieurs photos pour les ranger d’un coup"><input type="checkbox" data-rc-check ${on ? 'checked' : ''}></label>
+        return `<div class="h-rc-loose-item ${on ? 'is-sel' : ''}" data-rc-img="${i.id}" draggable="true">
             <button type="button" class="h-rc-thumb small" data-rc-zoom="${i.id}" title="Voir en grand"><img src="${esc(thumbUrl(i))}" alt="" loading="lazy"></button>
             <small>${esc(versionById(i.version_id)?.name || '')}</small>
             <select data-rc-trayset title="Dossier de tri"><option value="">📂 Sans dossier</option>${ts.map(t => `<option value="${esc(t)}" ${t === i.tray ? 'selected' : ''}>📁 ${esc(t)}</option>`).join('')}<option value="__new">＋ Nouveau dossier…</option></select>
@@ -256,15 +273,11 @@
     function looseHtml(ls) {
         const ts = trays(), o = openTrays(), groups = new Map(ts.map(t => [t, []])), none = [];
         ls.forEach(i => (groups.get(i.tray) || none).push(i));
-        const n = [...picked()].filter(id => ls.some(i => i.id === id)).length;
         const tray = (name, list, k) => `<details class="h-rc-tray" data-rc-tray="${esc(name)}" ${o[name] ? 'open' : ''}><summary draggable="true" title="Glisser pour changer l’ordre des dossiers"><span class="h-rc-tray-grip" aria-hidden="true">⠿</span><span class="h-rc-tray-name">📁 ${esc(name)}</span> <small class="muted">${plural(list.length, 'photo', 'photos')}</small>
                 <span class="h-rc-tray-tools">${ts.length > 1 ? `<button type="button" class="icon-button" data-rc-traymove="-1" ${k ? '' : 'disabled'} title="Monter le dossier">↑</button><button type="button" class="icon-button" data-rc-traymove="1" ${k < ts.length - 1 ? '' : 'disabled'} title="Descendre le dossier">↓</button>` : ''}<button type="button" class="icon-button" data-rc-trayren="${esc(name)}" title="Renommer le dossier">✎</button><button type="button" class="icon-button" data-rc-traydel="${esc(name)}" title="Supprimer le dossier (ses photos restent à ranger)">🗑</button></span></summary>
                 <div class="h-rc-loose-list">${list.map(looseItem).join('') || '<p class="muted">Vide : glisse des photos ici, ou choisis ce dossier sous une photo.</p>'}</div></details>`;
         return `<div class="h-rc-loose maintenance-panel"><div class="h-rc-loose-head"><h3>🧺 À ranger <small class="muted">${ts.length ? i18n('{count} sans page · trie-les d’abord dans des dossiers, puis choisis leur page', {count: plural(ls.length, 'photo', 'photos')}) : i18n('{count} sans page : choisis sa page', {count: plural(ls.length, 'photo', 'photos')})}</small></h3>
-                <span class="h-rc-loose-tools"><button type="button" class="button small secondary" data-rc-traynew>＋ Dossier</button>${ls.length ? `<button type="button" class="button small secondary" data-rc-pickall>${n ? 'Tout décocher' : 'Tout cocher'}</button>` : ''}</span></div>
-            ${n ? `<div class="h-rc-bulk"><strong>${plural(n, 'photo choisie', 'photos choisies')}</strong>
-                <label>Mettre dans <select data-rc-bulktray><option value="">—</option><option value="__none">📂 Sans dossier</option>${ts.map(t => `<option value="${esc(t)}">📁 ${esc(t)}</option>`).join('')}<option value="__new">＋ Nouveau dossier…</option></select></label>
-                <label>Mettre sur ${pageSelect('data-rc-bulkpage', 0, true)}</label><small class="muted">Une nouvelle page = une page par photo, dans l’ordre.</small></div>` : ''}
+                <span class="h-rc-loose-tools"><button type="button" class="button small secondary" data-rc-traynew>＋ Dossier</button></span></div>
             ${ts.map((t, k) => tray(t, groups.get(t), k)).join('')}
             ${none.length || !ts.length ? `<div class="h-rc-tray-none">${ts.length ? '<h4>📂 Sans dossier</h4>' : ''}<div class="h-rc-loose-list" data-rc-tray-drop="">${none.map(looseItem).join('') || '<p class="muted">Toutes les photos sont dans un dossier.</p>'}</div></div>` : ''}</div>`;
     }
@@ -302,7 +315,6 @@
         };
         box.querySelectorAll('details[data-rc-tray]').forEach(d => d.addEventListener('toggle', () => { openTrays()[d.dataset.rcTray] = d.open; }));
         box.querySelector('[data-rc-traynew]').addEventListener('click', async () => { if (await addTray()) paint(); });
-        box.querySelector('[data-rc-pickall]')?.addEventListener('click', () => { const ids = loose().map(i => i.id); if (ids.some(id => picked().has(id))) picked().clear(); else ids.forEach(id => picked().add(id)); paint(); });
         box.querySelectorAll('[data-rc-trayren]').forEach(b => b.addEventListener('click', async e => { e.preventDefault(); const from = b.dataset.rcTrayren, to = await askTrayName('Nouveau nom du dossier :', from); if (!to || to === from) return;
             openTrays()[to] = openTrays()[from]; await run('save_recueil_trays', {recueil_id: D.recueil.id, trays: trays().map(t => t === from ? to : t), rename: {from, to}}, 'Dossier renommé.'); }));
         box.querySelectorAll('[data-rc-traydel]').forEach(b => b.addEventListener('click', async e => { e.preventDefault(); const name = b.dataset.rcTraydel; if (!await A().confirmBox(i18n('Supprimer le dossier « {nm} » ?', {nm: name}) + '\n\n' + i18n('Ses photos restent « à ranger », sans dossier.'), {title: 'Supprimer le dossier', okLabel: 'Supprimer le dossier'})) return;
@@ -310,12 +322,25 @@
         const saveOrder = list => run('save_recueil_trays', {recueil_id: D.recueil.id, trays: list});
         box.querySelectorAll('[data-rc-traymove]').forEach(b => b.addEventListener('click', e => { e.preventDefault(); const name = b.closest('[data-rc-tray]').dataset.rcTray, list = [...trays()], i = list.indexOf(name), j = i + Number(b.dataset.rcTraymove);
             if (i < 0 || j < 0 || j >= list.length) return; [list[i], list[j]] = [list[j], list[i]]; saveOrder(list); }));
-        box.querySelectorAll('[data-rc-check]').forEach(c => c.addEventListener('change', () => { const id = imgId(c); if (c.checked) picked().add(id); else picked().delete(id); paint(); }));
         box.querySelectorAll('[data-rc-trayset]').forEach(sel => sel.addEventListener('change', async () => { let t = sel.value; if (t === '__new') { t = await addTray(); if (!t) { paint(); return; } } setTray([imgId(sel)], t); }));
         box.querySelectorAll('[data-rc-assign]').forEach(sel => sel.addEventListener('change', async () => { const t = await pageTarget(sel.value); if (!t) { sel.value = ''; return; } place([imgId(sel)], t); }));
         const chosen = () => loose().filter(i => picked().has(i.id)).map(i => i.id);
-        box.querySelector('[data-rc-bulktray]')?.addEventListener('change', async e => { let t = e.target.value; if (!t) return; if (t === '__new') { t = await addTray(); if (!t) { paint(); return; } } const ids = chosen(); picked().clear(); setTray(ids, t === '__none' ? '' : t); });
-        box.querySelector('[data-rc-bulkpage]')?.addEventListener('change', async e => { const t = await pageTarget(e.target.value); if (!t) { e.target.value = ''; return; } place(chosen(), t); });
+        // ☑ cocher plusieurs photos : la barre commune (Tout cocher, Maj+clic pour une suite, ✕ Décocher) — app-selection.js
+        if (ext.selectionBar) {
+            const keep = [...picked()];
+            const sel = ext.selectionBar({host: box, rowSelector: '.h-rc-loose-item', idOf: el => el.dataset.rcImg, what: [i18n('photo cochée'), i18n('photos cochées')],
+                place: box.querySelector('.h-rc-loose-head')?.nextElementSibling || null,
+                onChange: ids => { const s = picked(); s.clear(); ids.forEach(x => s.add(Number(x))); },
+                actions: [
+                    {id: 'tray', icon: '📁', label: i18n('Mettre dans un dossier'), help: i18n('Ranger les photos cochées dans un dossier de tri'), edit: true, run: ids => dialog({eyebrow: i18n('À RANGER'), title: i18n('Mettre {n} dans un dossier', {n: plural(ids.length, 'photo', 'photos')}), submitLabel: i18n('Ranger'),
+                        body: `<label>${esc(i18n('Dossier'))}<select name="tray"><option value="__none">📂 ${esc(i18n('Sans dossier'))}</option>${trays().map(t => `<option value="${esc(t)}">📁 ${esc(t)}</option>`).join('')}<option value="__new">＋ ${esc(i18n('Nouveau dossier…'))}</option></select></label>`,
+                        onSubmit: form => { const v = form.querySelector('[name=tray]').value; setTimeout(async () => { let t = v; if (t === '__new') { t = await addTray(); if (!t) return; } picked().clear(); setTray(ids.map(Number), t === '__none' ? '' : t); }, 0); }})},
+                    {id: 'page', icon: '📄', label: i18n('Mettre sur une page'), help: i18n('Une nouvelle page = une page par photo, dans l’ordre'), edit: true, run: ids => dialog({eyebrow: i18n('À RANGER'), title: i18n('Mettre {n} sur une page', {n: plural(ids.length, 'photo', 'photos')}), submitLabel: i18n('Ranger'),
+                        body: `<label>${esc(i18n('Page'))}${pageSelect('name="page"', 0, true)}</label><p class="muted">${esc(i18n('Une nouvelle page = une page par photo, dans l’ordre.'))}</p>`,
+                        onSubmit: form => { const v = form.querySelector('[name=page]').value; setTimeout(async () => { const t = await pageTarget(v); if (t) place(ids.map(Number), t); }, 0); }})},
+                ]});
+            sel?.set(keep.filter(id => loose().some(i => i.id === id)));
+        }
         // Glisser une photo (ou la sélection) sur un dossier
         let dragIds = [], dragTray = null;
         box.querySelectorAll('details[data-rc-tray] > summary').forEach(sm => {
@@ -361,9 +386,13 @@
                         <button type="button" class="h-rc-thumb h-rc-addthumb" data-rc-addhere title="Ajouter une photo de cette page (autre version, détail…)">＋</button></div>
                 </div>
                 <div class="h-rc-side">
+                    <div class="h-rc-path" data-rc-path hidden></div>
+                    <div class="h-rc-etat" data-rc-etat></div>
+                    <div class="h-rc-fiche" data-rc-fiche></div>
                     <label>Nom de la page <small class="muted">(facultatif)</small><input data-rc-field="label" value="${esc(p.label)}" placeholder="f° 12 r°, page 3, lettre B…"></label>
                     <label class="h-rc-trans">Transcription <span class="h-rc-saved muted" data-rc-saved></span><textarea data-rc-field="transcription" rows="16" placeholder="Recopie ici ce qui est écrit sur la page (une ligne par ligne du document)…">${esc(p.transcription)}</textarea></label>
                     ${cur?.media_transcription && !p.transcription.trim() ? `<button type="button" class="link-button" data-rc-usemedia>↧ Reprendre la transcription déjà faite sur cette photo</button>` : ''}
+                    ${cur && ext.openActTranscriber && !document.body.classList.contains('is-kiosk') ? `<button type="button" class="button small secondary h-rc-txopen" data-rc-txopen title="${esc(i18n('L’outil complet : zones sur l’image, lecture automatique de l’écriture, repérage des noms, versions ; le texte revient ici'))}">📜 ${esc(i18n('Ouvrir dans l’Atelier de transcription'))}</button>` : ''}
                     <button type="button" class="link-button h-rc-totable" data-rc-totable>📊 ${p.table ? 'Voir le tableau de la page' : 'Une liste à transposer ? Faire un tableau'} ↓</button>
                     <label>Notes<textarea data-rc-field="notes" rows="4" placeholder="Abréviations, mots incertains, ce qu’il reste à vérifier…">${esc(p.notes)}</textarea></label>
                     <div class="h-rc-sideactions"><button type="button" class="button small secondary" data-rc-pagemove="-1" ${idx ? '' : 'disabled'}>↑ Avancer la page</button><button type="button" class="button small secondary" data-rc-pagemove="1" ${next ? '' : 'disabled'}>↓ Reculer la page</button><button type="button" class="button small secondary" data-rc-insert>＋ Page après</button><button type="button" class="button small secondary" data-rc-linkpage title="Relier cette page à une fiche, un village, une enquête, un projet de l’Atelier, une battue">🔗 Relier la page…</button><button type="button" class="button small secondary danger" data-rc-delpage>Supprimer la page</button></div>
@@ -374,6 +403,9 @@
                 <div data-rc-table>${p.table ? '' : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">Pas encore de tableau sur cette page.</span></p><button type="button" class="button small" data-rc-tnew>＋ Créer le tableau</button>'}</div></details>`;
         const go = id => { if (!id) return; s.page = Number(id); s.image = 0; s.compare = 0; paint(); };
         bindPageTable(body, p);
+        ext.recueilSommaire?.pagePath(body.querySelector('[data-rc-path]'), p, etatCtx()); // 📑 « Année 1789 › Baptêmes 1789 »
+        ext.recueilEtat?.pageBox(body.querySelector('[data-rc-etat]'), p, etatCtx());
+        ext.recueilFiche?.pageLinks(body.querySelector('[data-rc-fiche]'), p, etatCtx()); // 🏛 vue en ligne, citer // 🗂 état du texte, fiabilité, lisibilité, absente
         body.querySelector('[data-rc-totable]')?.addEventListener('click', () => { const tb = body.querySelector('[data-rc-tablebox]'); tb.open = true; tb.scrollIntoView({behavior: 'smooth', block: 'start'}); });
         body.querySelector('[data-rc-allpages]').addEventListener('click', () => { s.page = 0; paint(); });
         body.querySelectorAll('[data-rc-go]').forEach(b => b.addEventListener('click', () => go(b.dataset.rcGo)));
@@ -400,6 +432,20 @@
         body.querySelectorAll('[data-rc-imgstep]').forEach(b => b.addEventListener('click', e => { e.stopPropagation(); stepImg(Number(b.dataset.rcImgstep)); }));
         body.querySelector('[data-rc-linkimg]')?.addEventListener('click', () => pageLinkDialog({page: p, image: cur, scope: 'image'}));
         body.querySelector('[data-rc-linkpage]').addEventListener('click', () => pageLinkDialog({page: p, image: cur, scope: 'page'}));
+        // 📜 l'Atelier sur la photo de la page : la transcription déjà commencée sur elle, sinon une nouvelle (avec le texte de la page) ; au retour, le texte de l'Atelier remplit la page si elle était vide
+        body.querySelector('[data-rc-txopen]')?.addEventListener('click', async e => {
+            const b = e.currentTarget; if (b.disabled) return; b.disabled = true;
+            try {
+                let acts = []; try { acts = (await A().api('act_transcriptions_media', {media_id: cur.media_id})).items || []; } catch (_) { acts = []; }
+                const pid = p.id, back = async () => { await load(st().id); const np = D.pages.find(q => q.id === pid), im = D.images.find(i => i.id === cur.id);
+                    if (np && !String(np.transcription || '').trim() && String(im?.media_transcription || '').trim()) { await post('save_recueil_page', {id: pid, transcription: im.media_transcription}); await load(st().id); A().undoToast?.(i18n('Le texte de l’Atelier est mis dans la page.'), {undo: async () => { await post('save_recueil_page', {id: pid, transcription: ''}); await reload(); }}); }
+                    paint(); };
+                const title = `${D.recueil.title} — ${pageName(p)}`;
+                if (acts.length) await ext.openActTranscriber({id: acts[0].id, page: cur.media_id, onClose: back});
+                else await ext.openActTranscriber({mediaId: cur.media_id, filename: cur.filename, title, text: p.transcription || cur.media_transcription || '', onClose: back});
+            } catch (err) { console.error(err); A().toast(i18n('L’Atelier de transcription n’a pas pu s’ouvrir : {x}', {x: String(err?.message || err).slice(0, 200)}), 'error'); }
+            finally { b.disabled = false; }
+        });
         const ownersBox = body.querySelector('[data-rc-owners]');
         if (ownersBox && cur) get('recueil_media_owners', {media_id: cur.media_id}).then(r => { if (!ownersBox.isConnected) return; const o = r.owners || []; ownersBox.innerHTML = o.length ? `🔗 Cette image est aussi : ${o.map(x => `<span class="h-rc-chip">${esc(x.label)}${x.name ? ' · ' + esc(x.name) : ''}</span>`).join(' ')}` : ''; }).catch(() => {});
         body.querySelector('[data-rc-insert]').addEventListener('click', async () => { const r = await run('save_recueil_page', {recueil_id: D.recueil.id, after: p.id}); if (r) go(r.id); });
@@ -494,7 +540,10 @@
             host.innerHTML = '';
             ext.recueilTable(host, t, {
                 onChange: tt => { saved.textContent = '…'; clearTimeout(timer); timer = setTimeout(() => flush(tt), 700); },
-                onPerson: (row, mode) => mode === 'pick' ? pickRowPerson(t, row, p) : row.person?.link ? post('delete_recueil_link', {id: row.person.link}).then(() => { delete row.person; toast('Ligne détachée de la fiche.'); }).catch(e => toast(e.message, 'error')) : Promise.resolve(),
+                // 'drop' : la ligne est supprimée (le lien part sans message, gardé pour ↶ Annuler) ; 'restore' : ↶ Annuler le remet
+                onPerson: (row, mode, per) => mode === 'pick' ? pickRowPerson(t, row, p)
+                    : mode === 'restore' ? (row._restore ? post('save_recueil_link', row._restore).then(res => { row.person = {...per, link: (res.result || res).id}; delete row._restore; }).catch(e => toast(e.message, 'error')) : Promise.resolve())
+                    : row.person?.link ? post('delete_recueil_link', {id: row.person.link}).then(res => { row._restore = (res.result || res).restore || null; delete row.person; if (mode !== 'drop') toast('Ligne détachée de la fiche.'); }).catch(e => toast(e.message, 'error')) : Promise.resolve(),
                 onOpenPerson: per => { clearTimeout(timer); flush(t); S().currentPersonId = per.id; A().setModule('personnes'); },
             });
         };
@@ -559,7 +608,7 @@
     }
 
     /* ─── Rattacher une page (ou juste une image) à une fiche, un bloc, une enquête, une battue, l'Atelier, un village ─── */
-    const LINK_KINDS = [['person', '👤 Une fiche (ses médias ou un de ses blocs)'], ['investigation', '🔍 Une enquête'], ['battue', '🧭 Une battue'], ['atelier_project', '📚 Un projet de l’Atelier'], ['village', '🏘️ Un village'], ['family_booklet', '📘 Un livret de famille'], ['pet', '🐾 Un animal']];
+    const LINK_KINDS = [['person', '👤 Une fiche (ses médias ou un de ses blocs)'], ['investigation', '🔍 Une enquête'], ['battue', '🔦 Une battue'], ['atelier_project', '📚 Un projet de l’Atelier'], ['village', '🏘️ Un village'], ['family_booklet', '📘 Un livret de famille'], ['pet', '🐾 Un animal']];
     function pageLinkDialog({page, image, scope = 'page'}) {
         let pkItem = null; // la chose choisie dans le menu de choix unique
         dialog({eyebrow: 'RATTACHER', title: `${D.recueil.title} — ${pageName(page)}`, wide: true, submitLabel: 'Relier',
@@ -734,9 +783,16 @@
         progress: ['📈', 'Avancement de la transcription', 'Barre et pages restantes'], versions: ['🗂️', 'Versions', 'Ce que couvre chaque série de photos'], missing: ['❓', 'Pages manquantes', 'Pages sans photo dans une version'],
         toc: ['📑', 'Table des pages', 'Nom et début de la transcription'], latest: ['✍️', 'Transcriptions', 'Les pages transcrites, en entier'], links: ['🔗', 'Rattachements', 'Fiches, villages, enquêtes…'],
         mosaic: ['▦', 'Mosaïque', 'Les pages en vignettes'], note: ['🗒️', 'Note libre', 'Un texte à toi'],
+        ...(ext.recueilEtat ? {etat: ['🗂', 'État des pages', 'Une case par page, une couleur par état'], todo: ['📋', 'Reste à faire', 'Ce qui reste, dans l’ordre conseillé']} : {}),
+        ...(ext.recueilSommaire ? {chapters: ['📑', 'Sommaire', 'Chapitres et sous-chapitres, avec leur avancement']} : {}),
+        ...(ext.recueilFiche ? {where: ['🏛', 'Où il est', 'Service d’archives, fonds, cote, liens, citation'], access: ['🔐', 'Qui peut le voir', 'Communicabilité, réutilisation, support, état']} : {}),
+        ...(ext.recueilSens ? {found: ['💡', 'Ce qu’on y trouve', 'Actes par année, noms, métiers, lieux, remarques à vérifier']} : {}),
     };
-    const DEFAULT_SUMMARY = ['cover', 'figures', 'description', 'progress', 'versions', 'links', 'toc', 'mosaic', 'missing'].map(type => ({type, on: true, n: type === 'toc' ? 20 : type === 'mosaic' ? 24 : 12, wide: ['description', 'toc', 'mosaic', 'versions'].includes(type)}));
-    const summaryBlocks = () => { const b = D.recueil.summary?.blocks; return Array.isArray(b) && b.length ? b : DEFAULT_SUMMARY; };
+    // le résumé d'un nouveau recueil : profil « Ma généalogie » ou « Centre d'archives » (« ⚙️ Réglages des recueils », heritage-recueil-sens.js)
+    const SUMMARY_ORDER = {genealogie: ['cover', 'figures', 'etat', 'todo', 'chapters', 'found', 'where', 'access', 'description', 'progress', 'versions', 'links', 'toc', 'mosaic', 'missing'],
+        archives: ['where', 'access', 'etat', 'todo', 'chapters', 'found', 'cover', 'figures', 'description', 'progress', 'versions', 'links', 'toc', 'mosaic', 'missing']};
+    const defaultSummary = () => SUMMARY_ORDER[ext.recueilSens?.opt('profil') === 'archives' ? 'archives' : 'genealogie'].filter(type => BLOCKS[type]).map(type => ({type, on: true, n: type === 'toc' ? 20 : type === 'mosaic' ? 24 : 12, wide: ['description', 'toc', 'mosaic', 'versions', 'etat', 'todo', 'chapters', 'found'].includes(type)}));
+    const summaryBlocks = () => { const b = D.recueil.summary?.blocks; return Array.isArray(b) && b.length ? b : defaultSummary(); };
     function blockHtml(b) {
         const [icon, label] = BLOCKS[b.type] || ['•', ''], title = b.title || label, pages = D.pages, imgs = D.images;
         const done = pages.filter(p => p.transcription.trim());
@@ -754,10 +810,14 @@
             case 'missing': { const rows = D.versions.map(v => ({v, miss: pages.filter(p => !imgs.some(i => i.page_id === p.id && i.version_id === v.id && i.role === 'page'))})).filter(x => x.miss.length);
                 const none = pages.filter(p => !imgs.some(i => i.page_id === p.id));
                 inner = rows.length || none.length ? `${none.length ? `<p><b>${i18n('Sans aucune photo :')}</b> ${none.slice(0, b.n).map(p => `<button type="button" class="link-button" data-rc-open="${p.id}">${p.num}</button>`).join(', ')}</p>` : ''}${D.versions.length > 1 ? rows.map(x => `<p><b>${esc(x.v.name)} :</b> ${x.miss.slice(0, b.n).map(p => `<button type="button" class="link-button" data-rc-open="${p.id}">${p.num}</button>`).join(', ')}${x.miss.length > b.n ? '…' : ''}</p>`).join('') : ''}` : '<p class="muted">Toutes les pages ont leurs photos.</p>'; break; }
-            case 'toc': inner = pages.length ? `<ol class="h-rc-toc">${pages.slice(0, b.n).map(p => `<li><button type="button" class="link-button" data-rc-open="${p.id}">${esc(p.label || 'Page ' + p.num)}</button> ${p.transcription.trim() ? `<small class="muted">${esc(excerpt(p.transcription, 90))}</small>` : '<small class="muted">—</small>'}</li>`).join('')}</ol>${pages.length > b.n ? `<p class="muted">${i18n('… et {n} autres.', {n: pages.length - b.n})}</p>` : ''}` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">Pas de page.</span></p>'; break;
+            case 'toc': inner = pages.length ? `<ol class="h-rc-toc">${pages.slice(0, b.n).map(p => `<li><button type="button" class="link-button" data-rc-open="${p.id}">${esc(pageShort(p))}</button> ${p.transcription.trim() ? `<small class="muted">${esc(excerpt(p.transcription, 90))}</small>` : '<small class="muted">—</small>'}</li>`).join('')}</ol>${pages.length > b.n ? `<p class="muted">${i18n('… et {n} autres.', {n: pages.length - b.n})}</p>` : ''}` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">Pas de page.</span></p>'; break;
             case 'latest': inner = done.length ? done.slice(0, b.n).map(p => `<div class="h-rc-tr"><button type="button" class="link-button" data-rc-open="${p.id}">${esc(pageName(p))}</button><p>${nl(p.transcription)}</p></div>`).join('') : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📝</span><span class="empty-line-text">Aucune page transcrite.</span></p>'; break;
             case 'links': inner = D.links.length ? `<ul class="h-rc-llist">${D.links.map(l => `<li>${linkLabel(l)} <small class="muted">· ${esc(linkPages(l))}</small></li>`).join('')}</ul>` : '<p class="muted">Rattaché à rien.</p>'; break;
             case 'mosaic': inner = pages.length ? `<div class="h-rc-mosaic">${pages.slice(0, b.n).map(p => { const i = imgById(p.shown_image_id); return `<button type="button" class="h-rc-thumb" data-rc-open="${p.id}" title="${esc(pageName(p))}">${i ? `<img src="${esc(thumbUrl(i))}" alt="" loading="lazy">` : '<span class="h-rc-nophoto">—</span>'}<small>${p.num}</small></button>`; }).join('')}</div>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">Pas de page.</span></p>'; break;
+            case 'etat': case 'todo': inner = ext.recueilEtat ? ext.recueilEtat.block(b.type, b, etatCtx()) : ''; break;
+            case 'chapters': inner = `<div data-rs-host="${b.n || 30}"></div>`; break; // rempli après (heritage-recueil-sommaire.js)
+            case 'where': case 'access': inner = ext.recueilFiche ? ext.recueilFiche.block(b.type, etatCtx()) : ''; break;
+            case 'found': inner = '<div data-rsn-host></div>'; break; // rempli après (heritage-recueil-sens.js)
             case 'note': inner = b.text ? `<p>${nl(b.text)}</p>` : '<p class="muted">Note vide : « Personnaliser » pour l’écrire.</p>'; break;
         }
         return `<section class="maintenance-panel h-rc-block ${b.wide ? 'is-wide' : ''}"><h3>${icon} ${esc(title)}</h3>${inner}</section>`;
@@ -771,6 +831,10 @@
         body.querySelector('[data-rc-cover2]')?.addEventListener('click', () => coverDialog());
         body.querySelector('[data-rc-coverzoom]')?.addEventListener('click', () => { const c = D.recueil.cover; openViewer([{id: 0, media_id: c.media_id, filename: c.filename, thumbnail: c.thumbnail, title: 'Couverture'}], 0); });
         bindEntityOpen(body);
+        ext.recueilEtat?.bindBlocks(body, etatCtx()); // 📋 reste à faire
+        ext.recueilFiche?.bindBlocks(body, etatCtx()); // 🏛 citer, le service, le mode consultation
+        body.querySelectorAll('[data-rsn-host]').forEach(el => { el.innerHTML = ext.recueilSens?.block(etatCtx(), el) || ''; }); // 💡 ce qu'on y trouve
+        body.querySelectorAll('[data-rs-host]').forEach(el => { el.innerHTML = ext.recueilSommaire?.block({n: Number(el.dataset.rsHost)}, etatCtx(), el) || ''; }); // 📑 sommaire
         A().bindTableLinks?.();
     }
     function summaryDialog() {
@@ -779,7 +843,7 @@
         const row = (b, i) => { const [icon, label, help] = BLOCKS[b.type];
             return `<div class="h-cfg-row ${b.on ? '' : 'is-hidden'}" data-sb="${i}"><span class="h-rb-tools"><button type="button" class="icon-button" data-sb-move="-1" ${i ? '' : 'disabled'}>↑</button><button type="button" class="icon-button" data-sb-move="1" ${i < blocks.length - 1 ? '' : 'disabled'}>↓</button></span>
                 <label class="checkbox-line"><input type="checkbox" data-sb-f="on" ${b.on ? 'checked' : ''}> ${icon}</label><input data-sb-f="title" value="${esc(b.title || '')}" placeholder="${esc(label)}" class="h-cfg-label" title="${esc(help)}">
-                ${['toc', 'latest', 'mosaic', 'missing', 'progress'].includes(b.type) ? `<label class="h-sb-n">combien <input type="number" min="1" max="200" data-sb-f="n" value="${b.n || 12}" class="h-lr-year"></label>` : ''}
+                ${['toc', 'latest', 'mosaic', 'missing', 'progress', 'todo', 'chapters'].includes(b.type) ? `<label class="h-sb-n">combien <input type="number" min="1" max="200" data-sb-f="n" value="${b.n || 12}" class="h-lr-year"></label>` : ''}
                 <label class="checkbox-line"><input type="checkbox" data-sb-f="wide" ${b.wide ? 'checked' : ''}> large</label>
                 ${b.type === 'note' ? `<textarea data-sb-f="text" rows="2" placeholder="Ta note…" class="span-all">${esc(b.text || '')}</textarea><button type="button" class="icon-button danger" data-sb-del title="Supprimer">🗑</button>` : ''}</div>`; };
         dialog({eyebrow: 'RÉSUMÉ DU RECUEIL', title: 'Ce qu’on voit dans le résumé', wide: true, submitLabel: 'Enregistrer',
@@ -795,7 +859,7 @@
                     if (e.target.closest('[data-sb-del]')) { blocks.splice(i, 1); draw(); } });
                 box.addEventListener('change', e => { if (e.target.dataset.sbF === 'on') e.target.closest('[data-sb]').classList.toggle('is-hidden', !e.target.checked); });
                 dl.querySelector('[data-sb-note]').addEventListener('click', () => { read(); blocks.push({type: 'note', on: true, n: 12, wide: true, title: '', text: ''}); draw(); box.lastElementChild?.querySelector('textarea')?.focus(); });
-                dl.querySelector('[data-sb-reset]').addEventListener('click', () => { blocks = JSON.parse(JSON.stringify(DEFAULT_SUMMARY)); Object.keys(BLOCKS).forEach(type => { if (type !== 'note' && !blocks.some(b => b.type === type)) blocks.push({type, on: false, n: 12, wide: false}); }); draw(); });
+                dl.querySelector('[data-sb-reset]').addEventListener('click', () => { blocks = JSON.parse(JSON.stringify(defaultSummary())); Object.keys(BLOCKS).forEach(type => { if (type !== 'note' && !blocks.some(b => b.type === type)) blocks.push({type, on: false, n: 12, wide: false}); }); draw(); });
                 dl._read = read;
             },
             onSubmit: async form => { form.closest('dialog')._read(); await run('save_recueil', {...D.recueil, summary: {blocks}}, 'Résumé enregistré.'); },
@@ -804,7 +868,7 @@
 
     /* ─────────── Dans une fiche, un village, une enquête, un projet : les recueils rattachés ─────────── */
     /** Choix « où le montrer » dans une enquête : partout, à la racine, dans un dossier. */
-    const folderOptions = (folders, current) => `<option value="" ${current == null ? 'selected' : ''}>🌐 Partout dans l’enquête</option><option value="0" ${current === 0 ? 'selected' : ''}>Racine de l’enquête</option>${folders.map(f => `<option value="${f.id}" ${current === f.id ? 'selected' : ''}>${'— '.repeat(f.depth || 0)}📁 ${esc(f.name)}</option>`).join('')}`;
+    const folderOptions = (folders, current) => `<option value="" ${current == null ? 'selected' : ''}>🌐 Partout dans l’enquête</option><option value="0" ${current === 0 ? 'selected' : ''}>Racine de l’enquête</option>${folders.map(f => `<option value="${f.id}" ${current === f.id ? 'selected' : ''}>${'— '.repeat(f.depth || 0)}${esc(f.icon || '📁')} ${esc(f.name)}</option>`).join('')}`;
     function forEntityHtml(rows, type, key, place = null) {
         return `<div class="h-rc-for">${rows.map(r => `<div class="h-rc-for-item"><div class="h-rc-for-head"><button type="button" class="table-link" data-open-recueil="${r.recueil_id}"><strong>${esc(r.icon || '📚')} ${esc(r.title)}</strong></button>
                 <small class="muted">${r.from_num ? (r.to_num && r.to_num !== r.from_num ? i18n('pages {from} à {to}', {from: String(r.from_num), to: String(r.to_num)}) : i18n('page {num}', {num: String(r.from_num)})) : i18n('tout le recueil ({n} p.)', {n: r.total_pages})} · ${r.transcribed > 1 ? i18n('{done}/{all} transcrites', {done: r.transcribed, all: r.pages}) : i18n('{done}/{all} transcrite', {done: r.transcribed, all: r.pages})}${r.reference ? ' · ' + esc(r.reference) : ''}</small>
@@ -815,7 +879,9 @@
             <button type="button" class="button small secondary" data-rc-attach="${esc(type)}:${esc(key)}">🔗 Relier un recueil</button></div>`;
     }
     /** Fenêtre « Relier un recueil » depuis une fiche, un village… */
-    ext.recueilAttachDialog = async (type, key, after, {folderId = null, folders = null} = {}) => {
+    // double-clic sur « 🔗 Relier un recueil » : une seule question / une seule fenêtre (avant : deux fois « Aucun recueil »)
+    ext.recueilAttachDialog = (type, key, after, o = {}) => A().once(`rc-attach:${type}:${key}`, () => attachDialogNow(type, key, after, o));
+    const attachDialogNow = async (type, key, after, {folderId = null, folders = null} = {}) => {
         if (type === 'investigation' && !folders) { const host = document.querySelector(`[data-rc-host][data-rc-type="investigation"][data-rc-key="${CSS.escape(String(key))}"]`); try { folders = JSON.parse(host?.dataset.rcFolders || '[]'); } catch (_) { folders = []; } }
         const list = (await get('recueils').catch(() => ({recueils: []}))).recueils || [];
         if (!list.length) { if (await A().confirmBox('Pas encore de recueil. En créer un maintenant (Listes › Recueils) ?', {title: 'Aucun recueil', okLabel: 'Créer un recueil'})) { S().listType = 'recueils'; Object.assign(st(), {id: 0}); A().setModule('listes'); } return; }

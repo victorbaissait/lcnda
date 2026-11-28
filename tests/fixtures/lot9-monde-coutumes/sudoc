@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet type="text/xsl" href="https://www.sudoc.abes.fr/cbs/sru/DB=2.1/?xsl=searchRetrieveResponse" ?>
+<srw:searchRetrieveResponse xmlns:srw="http://www.loc.gov/zing/srw/"
+			    xmlns:dc="http://purl.org/dc/elements/1.1/"
+			    xmlns:diag="http://www.loc.gov/zing/srw/diagnostic/"
+			    xmlns:xcql="http://www.loc.gov/zing/cql/xcql/">
+    <srw:version>1.1</srw:version>
+    <srw:numberOfRecords>13</srw:numberOfRecords>
+    <srw:resultSetId>SID765ed9ab-ccS47314</srw:resultSetId>
+    <srw:records>
+    
+
+
+<srw:record>
+<srw:recordSchema>unimarc</srw:recordSchema>
+<srw:recordPacking>xml</srw:recordPacking>
+<srw:recordData>
+<record>
+<controlfield tag="005">20260227080802.000</controlfield>
+<leader>     cam0 22        450 </leader>
+<controlfield tag="001">129027197</controlfield>
+<controlfield tag="003">http://www.sudoc.fr/129027197</controlfield>
+<datafield tag="035" ind1=" " ind2=" "><subfield code="a">077204417</subfield>
+<subfield code="9">sudoc</subfield></datafield>
+<datafield tag="801" ind1=" " ind2="3"><subfield code="a">FR</subfield>
+<subfield code="b">Abes</subfield>
+<subfield code="c">20260227</subfield>
+<subfield code="g">AFNOR</subfield>
+<subfield code="h">077204417</subfield></datafield>
+<datafield tag="035" ind1=" " ind2=" "><subfield code="a">(OCoLC)493695495</subfield></datafield>
+<datafield tag="035" ind1=" " ind2=" "><subfield code="a">FRBNF369044590000006</subfield>
+<subfield code="z">FRBNF36904459</subfield></datafield>
+<datafield tag="035" ind1=" " ind2=" "><subfield code="a">frBNTM002611400001P</subfield></datafield>
+<datafield tag="033" ind1=" " ind2=" "><subfield code="a">http://catalogue.bnf.fr/ark:/12148/cb36904459g</subfield></datafield>
+<datafield tag="100" ind1=" " ind2=" "><subfield code="a">20081112d1885    k  y0frey50      ba</subfield></datafield>
+<datafield tag="101" ind1="0" ind2=" "><subfield code="a">fre</subfield>
+<subfield code="2">639-2</subfield></datafield>
+<datafield tag="105" ind1=" " ind2=" "><subfield code="a">y   m   000yy</subfield></datafield>
+<datafield tag="106" ind1=" " ind2=" "><subfield code="a">r</subfield></datafield>
+<datafield tag="181" ind1=" " ind2=" "><subfield code="6">z01</subfield>
+<subfield code="c">txt</subfield>
+<subfield code="2">rdacontent</subfield></datafield>
+<datafield tag="181" ind1=" " ind2="1"><subfield code="6">z01</subfield>
+<subfield code="a">i#</subfield>
+<subfield code="b">xxxe##</subfield></datafield>
+<datafield tag="182" ind1=" " ind2=" "><subfield code="6">z01</subfield>
+<subfield code="c">n</subfield>
+<subfield code="2">rdamedia</subfield></datafield>
+<datafield tag="182" ind1=" " ind2="1"><subfield code="6">z01</subfield>
+<subfield code="a">n</subfield></datafield>
+<datafield tag="183" ind1=" " ind2="1"><subfield code="6">z01</subfield>
+<subfield code="a">nga</subfield>
+<subfield code="2">RDAfrCarrier</subfield></datafield>
+<datafield tag="102" ind1=" " ind2=" "><subfield code="a">FR</subfield></datafield>
+<datafield tag="328" ind1=" " ind2="0"><subfield code="b">Thèse d&apos;exercice</subfield>
+<subfield code="c">Médecine</subfield>
+<subfield code="e">Paris</subfield>
+<subfield code="d">1885</subfield></datafield>
+<datafield tag="320" ind1=" " ind2=" "><subfield code="a">Bibliographie pages [152]-153</subfield></datafield>
+<datafield tag="200" ind1="1" ind2=" "><subfield code="a">Des pseudo-tabès</subfield>
+<subfield code="e">thèse pour le doctorat en médecine présentée et soutenue le vendredi 18 décembre 1885 à 1 heure</subfield>
+<subfield code="f">par L. Leval-Pichechef,...</subfield>
+<subfield code="g">président, M. Charcot,...</subfield>
+<subfield code="g">jugés, MM. Lannelongue, Reclus, A. Robin</subfield></datafield>
+<datafield tag="700" ind1=" " ind2="1"><subfield code="3">06868214X</subfield>
+<subfield code="a">Leval-Picquechef</subfield>
+<subfield code="b">L.</subfield>
+<subfield code="f">1855-1924</subfield>
+<subfield code="4">070</subfield></datafield>
+<datafield tag="701" ind1=" " ind2="1"><subfield code="3">033372519</subfield>
+<subfield code="a">Charcot</subfield>
+<subfield code="b">Jean-Martin</subfield>
+<subfield code="f">1825-1893</subfield>
+<subfield code="c">médecin</subfield>
+<subfield code="4">956</subfield></datafield>
+<datafield tag="711" ind1="0" ind2="2"><subfield code="3">13681865X</subfield>
+<subfield code="a">Faculté de médecine</subfield>
+<subfield code="c">Paris ; 1808-1896</subfield>
+<subfield code="4">295</subfield></datafield>
+<datafield tag="316" ind1=" " ind2=" "><subfield code="5">765402102:200018663</subfield>
+<subfield code="a">Reliure 1/2 dos long orné. Relié avec d&apos;autres pièces sous le titre générique &quot;Thèses de système nerveux - 5 »</subfield></datafield>
+<datafield tag="316" ind1=" " ind2=" "><subfield code="5">765402102:453707807</subfield>
+<subfield code="a">Reliure 1/2 dos 4 nerfs. Relié avec d&apos;autres pièces sous le titre générique &quot;Système nerveux - 1&quot;</subfield></datafield>
+<datafield tag="317" ind1=" " ind2=" "><subfield code="5">765402102:453707807</subfield>
+<subfield code="a">Dédicace ms de l&apos;auteur au Dr Leudet</subfield></datafield>
+<datafield tag="702" ind1=" " ind2="1"><subfield code="5">765402102:453707807</subfield>
+<subfield code="3">060151218</subfield>
+<subfield code="a">Leudet</subfield>
+<subfield code="b">Théodore Émile</subfield>
+<subfield code="f">1825-1887</subfield>
+<subfield code="4">390</subfield></datafield>
+<datafield tag="316" ind1=" " ind2=" "><subfield code="5">674822101:471144983</subfield>
+<subfield code="a">Collection BNU en dépôt à l&apos;Unistra</subfield></datafield>
+<datafield tag="317" ind1=" " ind2=" "><subfield code="5">674822101:512720843</subfield>
+<subfield code="a">Dédicace de l&apos;auteur au Dr Ballet</subfield></datafield>
+<datafield tag="214" ind1=" " ind2="1"><subfield code="d">1885</subfield></datafield>
+<datafield tag="215" ind1=" " ind2=" "><subfield code="a">1 volume (153 pages)</subfield>
+<subfield code="d">24 cm</subfield></datafield>
+<datafield tag="606" ind1=" " ind2=" "><subfield code="3">031181317</subfield>
+<subfield code="a">Ataxie</subfield>
+<subfield code="2">rameau</subfield></datafield>
+<datafield tag="606" ind1=" " ind2=" "><subfield code="3">027822370</subfield>
+<subfield code="a">Troubles de la locomotion</subfield>
+<subfield code="2">rameau</subfield></datafield>
+<datafield tag="608" ind1=" " ind2=" "><subfield code="3">027253139</subfield>
+<subfield code="a">Thèses et écrits académiques</subfield>
+<subfield code="2">rameau</subfield></datafield>
+<datafield tag="686" ind1=" " ind2=" "><subfield code="a">610</subfield>
+<subfield code="2">TEF</subfield></datafield>
+<datafield tag="301" ind1=" " ind2=" "><subfield code="a">Numéro d&apos;ordre : 60</subfield></datafield>
+<datafield tag="306" ind1=" " ind2=" "><subfield code="a">La thèse porte : &quot;Lille (26, rue Royale) : Imprimerie Desclée, De Brouwer et c.ie, 1885&quot;</subfield></datafield>
+<datafield tag="801" ind1=" " ind2="0"><subfield code="a">FR</subfield>
+<subfield code="b">BNF</subfield>
+<subfield code="c">19991101</subfield>
+<subfield code="g">AFNOR</subfield>
+<subfield code="2">intermrc</subfield></datafield>
+<datafield tag="930" ind1=" " ind2=" "><subfield code="5">765402102:200018663</subfield>
+<subfield code="b">765402102</subfield>
+<subfield code="c">Magasin</subfield>
+<subfield code="e">Fonds ancien</subfield>
+<subfield code="a">Res B 1267/4</subfield>
+<subfield code="j">s</subfield></datafield>
+<datafield tag="930" ind1=" " ind2=" "><subfield code="5">765402102:453707807</subfield>
+<subfield code="b">765402102</subfield>
+<subfield code="c">Magasin</subfield>
+<subfield code="e">Fonds ancien</subfield>
+<subfield code="a">Res B 1135/1</subfield>
+<subfield code="j">s</subfield></datafield>
+<datafield tag="915" ind1=" " ind2=" "><subfield code="5">674822101:471144983</subfield>
+<subfield code="a">Th.Paris.Méd.1885-1886,13,LEVAL</subfield></datafield>
+<datafield tag="917" ind1=" " ind2=" "><subfield code="5">674822101:471144983</subfield>
+<subfield code="a">cbbd</subfield></datafield>
+<datafield tag="930" ind1=" " ind2=" "><subfield code="5">674822101:471144983</subfield>
+<subfield code="b">674822101</subfield>
+<subfield code="a">Th.Paris.Méd.1885-1886,13,LEVAL</subfield>
+<subfield code="j">g</subfield></datafield>
+<datafield tag="931" ind1=" " ind2=" "><subfield code="5">674822101:471144983</subfield>
+<subfield code="b">674822101</subfield>
+<subfield code="a">Jb.Diss</subfield></datafield>
+<datafield tag="991" ind1=" " ind2=" "><subfield code="5">674822101:471144983</subfield>
+<subfield code="a">RETRO-2013-LOC-REGISTRES.NOIRS</subfield>
+<subfield code="b">Jm</subfield>
+<subfield code="b">2013-02</subfield>
+<subfield code="b">531849</subfield>
+<subfield code="b">REVU-BMO</subfield></datafield>
+<datafield tag="915" ind1=" " ind2=" "><subfield code="5">674822101:512720843</subfield>
+<subfield code="a">FA/TH 1436,1</subfield></datafield>
+<datafield tag="917" ind1=" " ind2=" "><subfield code="5">674822101:512720843</subfield>
+<subfield code="a">xxbd</subfield></datafield>
+<datafield tag="930" ind1=" " ind2=" "><subfield code="5">674822101:512720843</subfield>
+<subfield code="b">674822101</subfield>
+<subfield code="c">BHm1</subfield>
+<subfield code="a">FA/TH 1436,1</subfield>
+<subfield code="j">g</subfield></datafield>
+<datafield tag="991" ind1=" " ind2=" "><subfield code="5">674822101:512720843</subfield>
+<subfield code="a">Catalogage rétrospectif-2014-FINANCEMENT ABES-LOC-Bib. historique Fac. Médecine</subfield></datafield>
+<datafield tag="991" ind1=" " ind2=" "><subfield code="5">674822101:512720843</subfield>
+<subfield code="a">Exemplaire modifié automatiquement. le 09-07-2021 13:34</subfield></datafield>
+<datafield tag="999" ind1=" " ind2=" "><subfield code="5">674822101:512720843</subfield>
+<subfield code="c">j</subfield></datafield>
+<datafield tag="917" ind1=" " ind2=" "><subfield code="5">751062103:351651373</subfield>
+<subfield code="a">abbd</subfield></datafield>
+<datafield tag="930" ind1=" " ind2=" "><subfield code="5">751062103:351651373</subfield>
+<subfield code="b">751062103</subfield>
+<subfield code="c">MAGASIN</subfield>
+<subfield code="a">151682 (12)</subfield>
+<subfield code="j">s</subfield></datafield>
+<datafield tag="991" ind1=" " ind2=" "><subfield code="5">751062103:351651373</subfield>
+<subfield code="a">Rétro 2008</subfield></datafield>
+<datafield tag="999" ind1=" " ind2=" "><subfield code="5">751062103:351651373</subfield>
+<subfield code="a">1MONR</subfield>
+<subfield code="b">1MONR</subfield>
+<subfield code="r">courant</subfield></datafield>
+<datafield tag="917" ind1=" " ind2=" "><subfield code="5">751062103:351159797</subfield>
+<subfield code="a">abbd</subfield></datafield>
+<datafield tag="930" ind1=" " ind2=" "><subfield code="5">751062103:351159797</subfield>
+<subfield code="b">751062103</subfield>
+<subfield code="c">MAGASIN</subfield>
+<subfield code="a">Paris 1885 / 86 n° 60</subfield>
+<subfield code="j">s</subfield></datafield>
+<datafield tag="999" ind1=" " ind2=" "><subfield code="5">751062103:351159797</subfield>
+<subfield code="a">1MONR</subfield>
+<subfield code="b">1MONR</subfield>
+<subfield code="r">courant</subfield></datafield></record></srw:recordData><srw:recordPosition>1</srw:recordPosition>
+</srw:record>
+
+<srw:record>
+<srw:recordSchema>unimarc</srw:recordSchema>
+<srw:recordPacking>xml</srw:recordPacking>
+<srw:recordData>
+<record>
+<controlfield tag="005">20260627021202.000</controlfield>
+<leader>     clm0 22        450 </leader>
+<controlfield tag="001">297787144</controlfield>
+<controlfield tag="003">http://www.sudoc.fr/297787144</controlfield>
+<datafield tag="856" ind1="4" ind2=" "><subfield code="u">https://docnum.unistra.fr/digital/collection/coll8/id/35983/rec/63</subfield></datafield>
+<datafield tag="100" ind1=" " ind2=" "><subfield code="a">20260626e20251886k  y0frey50      ba</subfield></datafield>
+<datafield tag="101" ind1="0" ind2=" "><subfield code="a">fre</subfield>
+<subfield code="2">639-2</subfield></datafield>
+<datafield tag="105" ind1=" " ind2=" "><subfield code="a">y   v   000yy</subfield></datafield>
+<datafield tag="135" ind1=" " ind2=" "><subfield code="a">drm|#||||uad|</subfield></datafield>
+<datafield tag="181" ind1=" " ind2=" "><subfield code="6">z01</subfield>
+<subfield code="c">txt</subfield>
+<subfield code="2">rdacontent</subfield></datafield>
+<datafield tag="181" ind1=" " ind2="1"><subfield code="6">z01</subfield>
+<subfield code="a">i#</subfield>
+<subfield code="b">xxxe##</subfield></datafield>
+<datafield tag="182" ind1=" " ind2=" "><subfield code="6">z01</subfield>
+<subfield code="c">c</subfield>
+<subfield code="2">rdamedia</subfield></datafield>
+<datafield tag="182" ind1=" " ind2="1"><subfield code="6">z01</subfield>
+<subfield code="a">b</subfield></datafield>
+<datafield tag="183" ind1=" " ind2="1"><subfield code="6">z01</subfield>
+<subfield code="a">ceb</subfield>
+<subfield code="2">RDAfrCarrier</subfield></datafield>
+<datafield tag="102" ind1=" " ind2=" "><subfield code="a">FR</subfield></datafield>
+<datafield tag="328" ind1=" " ind2="0"><subfield code="z">Reproduction de</subfield>
+<subfield code="b">Thèse d&apos;exercice</subfield>
+<subfield code="c">médecine</subfield>
+<subfield code="e"> Paris</subfield>
+<subfield code="d">1886</subfield></datafield>
+<datafield tag="320" ind1=" " ind2=" "><subfield code="a">Bibliographie p. [169]-171</subfield></datafield>
+<datafield tag="200" ind1="1" ind2=" "><subfield code="a">Des rapports de la paralysie générale chez la femme avec certains troubles de la menstruation</subfield>
+<subfield code="e">Thèse pour le doctorat en médecine présentée et soutenue le 22 décembre 1886, à 1 heure</subfield>
+<subfield code="f">par Gilbert Petit,...</subfield>
+<subfield code="g">président, M. Charcot,...</subfield></datafield>
+<datafield tag="700" ind1=" " ind2="1"><subfield code="3">07147076X</subfield>
+<subfield code="a">Petit</subfield>
+<subfield code="b">Gilbert</subfield>
+<subfield code="f">1857-18..</subfield>
+<subfield code="c">médecin</subfield>
+<subfield code="4">070</subfield></datafield>
+<datafield tag="701" ind1=" " ind2="1"><subfield code="3">027971384</subfield>
+<subfield code="a">Charcot</subfield>
+<subfield code="b">Jean-Baptiste</subfield>
+<subfield code="f">1867-1936</subfield>
+<subfield code="c">Commandant</subfield>
+<subfield code="4">956</subfield></datafield>
+<datafield tag="711" ind1="0" ind2="2"><subfield code="3">13681865X</subfield>
+<subfield code="a">Faculté de médecine</subfield>
+<subfield code="c">Paris ; 1808-1896</subfield>
+<subfield code="4">295</subfield></datafield>
+<datafield tag="712" ind1="0" ind2="1"><subfield code="3">278843395</subfield>
+<subfield code="a">Université de Strasbourg</subfield>
+<subfield code="b">Service des bibliothèques</subfield>
+<subfield code="4">015</subfield></datafield>
+<datafield tag="801" ind1=" " ind2="3"><subfield code="a">FR</subfield>
+<subfield code="b">Abes</subfield>
+<subfield code="c">20260627</subfield>
+<subfield code="g">AFNOR</subfield></datafield>
+<datafield tag="214" ind1=" " ind2="2"><subfield code="a">Strasbourg</subfield>
+<subfield code="c">Bibliothèques de l&apos;Université de Strasbourg</subfield>
+<subfield code="d">2025</subfield></datafield>
+<datafield tag="455" ind1=" " ind2="|"><subfield code="0">073465658</subfield>
+<subfield code="t">Des rapports de la paralysie générale chez la femme avec certains troubles de la menstruation</subfield>
+<subfield code="o">Thèse pour le doctorat en médecine présentée et soutenue le 22 décembre 1886, à 1 heure</subfield>
+<subfield code="f">par Gilbert Petit,...</subfield>
+<subfield code="p">1 vol. (171 p.)</subfield></datafield>
+<datafield tag="606" ind1=" " ind2=" "><subfield code="3">027245608</subfield>
+<subfield code="a">Paralysie</subfield>
+<subfield code="2">rameau</subfield></datafield>
+<datafield tag="606" ind1=" " ind2=" "><subfield code="3">029333121</subfield>
+<subfield code="a">Troubles de la menstruation</subfield>
+<subfield code="2">rameau</subfield></datafield>
+<datafield tag="608" ind1=" " ind2=" "><subfield code="3">027253139</subfield>
+<subfield code="a">Thèses et écrits académiques</subfield>
+<subfield code="2">rameau</subfield></datafield>
+<datafield tag="686" ind1=" " ind2=" "><subfield code="a">610</subfield>
+<subfield code="2">TEF</subfield></datafield>
+<datafield tag="301" ind1=" " ind2=" "><subfield code="a">Numéro d&apos;ordre : 54</subfield></datafield>
+<datafield tag="371" ind1="0" ind2=" "><subfield code="a">Accès libre en ligne à l&apos;intégralité de la ressource</subfield></datafield>
+<datafield tag="930" ind1=" " ind2=" "><subfield code="5">674829902:89006248X</subfield>
+<subfield code="b">674829902</subfield>
+<subfield code="a">Ouvrage ancien numérisé</subfield>
+<subfield code="j">g</subfield></datafield></record></srw:recordData><srw:recordPosition>2</srw:recordPosition>
+</srw:record>
+
+<srw:record>
+<srw:recordSchema>unimarc</srw:recordSchema>
+<srw:recordPacking>xml</srw:recordPacking>
+<srw:recordData>
+<record>
+<controlfield tag="005">20260627021202.000</controlfield>
+<leader>     cam0 22        450 </leader>
+<controlfield tag="001">073465658</controlfield>
+<controlfield tag="003">http://www.sudoc.fr/073465658</controlfield>
+<datafield tag="035" ind1=" " ind2=" "><subfield code="a">147316901</subfield>
+<subfield code="9">sudoc</subfield></datafield>
+<datafield tag="801" ind1=" " ind2="3"><subfield code="a">FR</subfield>
+<subfield code="b">Abes</subfield>
+<subfield code="c">20260627</subfield>
+<subfield code="g">AFNOR</subfield>
+<subfield code="h">147316901</subfield></datafield>
+<datafield tag="035" ind1=" " ind2=" "><subfield code="a">(OCoLC)491298018</subfield></datafield>
+<datafield tag="100" ind1=" " ind2=" "><subfield code="a">20030717d1886    k  y0frey50      ba</subfield></datafield>
+<datafield tag="101" ind1="0" ind2=" "><subfield code="a">fre</subfield>
+<subfield code="2">639-2</subfield></datafield>
+<datafield tag="105" ind1=" " ind2=" "><subfield code="a">y   m   000yy</subfield></datafield>
+<datafield tag="106" ind1=" " ind2=" "><subfield code="a">r</subfield></datafield>
+<datafield tag="181" ind1=" " ind2=" "><subfield code="6">z01</subfield>
+<subfield code="c">txt</subfield>
+<subfield code="2">rdacontent</subfield></datafield>
+<datafield tag="181" ind1=" " ind2="1"><subfield code="6">z01</subfield>
+<subfield code="a">i#</subfield>
+<subfield code="b">xxxe##</subfield></datafield>
+<datafield tag="182" ind1=" " ind2=" "><subfield code="6">z01</subfield>
+<subfield code="c">n</subfield>
+<subfield code="2">rdamedia</subfield></datafield>
+<datafield tag="182" ind1=" " ind2="1"><subfield code="6">z01</subfield>
+<subfield code="a">n</subfield></datafield>
+<datafield tag="183" ind1=" " ind2="1"><subfield code="6">z01</subfield>
+<subfield code="a">nga</subfield>
+<subfield code="2">RDAfrCarrier</subfield></datafield>
+<datafield tag="102" ind1=" " ind2=" "><subfield code="a">FR</subfield></datafield>
+<datafield tag="328" ind1=" " ind2="0"><subfield code="b">Thèse d&apos;exercice</subfield>
+<subfield code="c">médecine</subfield>
+<subfield code="e"> Paris</subfield>
+<subfield code="d">1886</subfield></datafield>
+<datafield tag="320" ind1=" " ind2=" "><subfield code="a">Bibliographie p. [169]-171</subfield></datafield>
+<datafield tag="200" ind1="1" ind2=" "><subfield code="a">Des rapports de la paralysie générale chez la femme avec certains troubles de la menstruation</subfield>
+<subfield code="e">Thèse pour le doctorat en médecine présentée et soutenue le 22 décembre 1886, à 1 heure</subfield>
+<subfield code="f">par Gilbert Petit,...</subfield>
+<subfield code="g">président, M. Charcot,...</subfield></datafield>
+<datafield tag="700" ind1=" " ind2="1"><subfield code="3">07147076X</subfield>
+<subfield code="a">Petit</subfield>
+<subfield code="b">Gilbert</subfield>
+<subfield code="f">1857-18..</subfield>
+<subfield code="c">médecin</subfield>
+<subfield code="4">070</subfield></datafield>
+<datafield tag="701" ind1=" " ind2="1"><subfield code="3">027971384</subfield>
+<subfield code="a">Charcot</subfield>
+<subfield code="b">Jean-Baptiste</subfield>
+<subfield code="f">1867-1936</subfield>
+<subfield code="c">Commandant</subfield>
+<subfield code="4">956</subfield></datafield>
+<datafield tag="711" ind1="0" ind2="2"><subfield code="3">13681865X</subfield>
+<subfield code="a">Faculté de médecine</subfield>
+<subfield code="c">Paris ; 1808-1896</subfield>
+<subfield code="4">295</subfield></datafield>
+<datafield tag="316" ind1=" " ind2=" "><subfield code="5">765402102:183550382</subfield>
+<subfield code="a">relié avec d&apos;autres pièces sous le titre générique &quot;Thèses d&apos;aliénation mentale - 3&quot;</subfield></datafield>
+<datafield tag="316" ind1=" " ind2=" "><subfield code="5">674822101:471350206</subfield>
+<subfield code="a">Collection BNU en dépôt à l&apos;Unistra</subfield></datafield>
+<datafield tag="316" ind1=" " ind2=" "><subfield code="5">751062103:407298738</subfield>
+<subfield code="a">Thèse d&apos;origine</subfield></datafield>
+<datafield tag="214" ind1=" " ind2="1"><subfield code="d">1886</subfield></datafield>
+<datafield tag="215" ind1=" " ind2=" "><subfield code="a">1 vol. (171 p.)</subfield>
+<subfield code="d">26 cm</subfield></datafield>
+<datafield tag="456" ind1=" " ind2="|"><subfield code="0">297787144</subfield>
+<subfield code="t">Des rapports de la paralysie générale chez la femme avec certains troubles de la menstruation</subfield>
+<subfield code="o">Thèse pour le doctorat en médecine présentée et soutenue le 22 décembre 1886, à 1 heure</subfield>
+<subfield code="f">par Gilbert Petit,...</subfield></datafield>
+<datafield tag="606" ind1=" " ind2=" "><subfield code="3">027245608</subfield>
+<subfield code="a">Paralysie</subfield>
+<subfield code="2">rameau</subfield></datafield>
+<datafield tag="606" ind1=" " ind2=" "><subfield code="3">029333121</subfield>
+<subfield code="a">Troubles de la menstruation</subfield>
+<subfield code="2">rameau</subfield></datafield>
+<datafield tag="608" ind1=" " ind2=" "><subfield code="3">027253139</subfield>
+<subfield code="a">Thèses et écrits académiques</subfield>
+<subfield code="2">rameau</subfield></datafield>
+<datafield tag="686" ind1=" " ind2=" "><subfield code="a">610</subfield>
+<subfield code="2">TEF</subfield></datafield>
+<datafield tag="301" ind1=" " ind2=" "><subfield code="a">Numéro d&apos;ordre : 54</subfield></datafield>
+<datafield tag="306" ind1=" " ind2=" "><subfield code="a">La thèse porte : &quot;Coulommiers : Imprimerie P. Brodard et Gallois, 1886&quot;</subfield></datafield>
+<datafield tag="930" ind1=" " ind2=" "><subfield code="5">765402102:183550382</subfield>
+<subfield code="b">765402102</subfield>
+<subfield code="a">Res B 1253/3</subfield>
+<subfield code="j">f</subfield></datafield>
+<datafield tag="915" ind1=" " ind2=" "><subfield code="5">674822101:471350206</subfield>
+<subfield code="a">Th.Paris.Méd.1886-1887,16,PETIT (G)</subfield></datafield>
+<datafield tag="917" ind1=" " ind2=" "><subfield code="5">674822101:471350206</subfield>
+<subfield code="a">xxbd</subfield></datafield>
+<datafield tag="930" ind1=" " ind2=" "><subfield code="5">674822101:471350206</subfield>
+<subfield code="b">674822101</subfield>
+<subfield code="c">Magasin</subfield>
+<subfield code="a">Th.Paris.Méd.1886-1887,16,PETIT (G)</subfield>
+<subfield code="j">g</subfield></datafield>
+<datafield tag="931" ind1=" " ind2=" "><subfield code="5">674822101:471350206</subfield>
+<subfield code="b">674822101</subfield>
+<subfield code="a">Jb.Diss</subfield></datafield>
+<datafield tag="991" ind1=" " ind2=" "><subfield code="5">674822101:471350206</subfield>
+<subfield code="a">RETRO-2013-LOC-REGISTRES.NOIRS</subfield>
+<subfield code="b">Jm</subfield>
+<subfield code="b">2013-02</subfield>
+<subfield code="b">677401</subfield>
+<subfield code="b">REVU-BMO</subfield></datafield>
+<datafield tag="999" ind1=" " ind2=" "><subfield code="5">674822101:471350206</subfield>
+<subfield code="c">j</subfield></datafield>
+<datafield tag="917" ind1=" " ind2=" "><subfield code="5">751062103:407298738</subfield>
+<subfield code="a">abbd</subfield></datafield>
+<datafield tag="930" ind1=" " ind2=" "><subfield code="5">751062103:407298738</subfield>
+<subfield code="b">751062103</subfield>
+<subfield code="c">MAGASIN</subfield>
+<subfield code="a">Paris 1886-87 n° 54</subfield>
+<subfield code="j">s</subfield></datafield>
+<datafield tag="991" ind1=" " ind2=" "><subfield code="5">751062103:407298738</subfield>
+<subfield code="a">Retro 2010</subfield></datafield>
+<datafield tag="999" ind1=" " ind2=" "><subfield code="5">751062103:407298738</subfield>
+<subfield code="a">1MONR</subfield>
+<subfield code="b">1MONR</subfield></datafield></record></srw:recordData><srw:recordPosition>3</srw:recordPosition>
+</srw:record>
+</srw:records>
+    <srw:echoedSearchRetrieveRequest>
+	<srw:version>1.1</srw:version>
+	<srw:query>aut%3Dcharcot+and+mti%3Dthese</srw:query>
+	<srw:xQuery><xcql:triple><xcql:boolean> <xcql:value>and</xcql:value></xcql:boolean><xcql:leftOperand><xcql:searchClause><xcql:index>aut</xcql:index><xcql:relation><xcql:value>=</xcql:value></xcql:relation><xcql:term>charcot</xcql:term></xcql:searchClause></xcql:leftOperand><xcql:rightOperand><xcql:searchClause><xcql:index>mti</xcql:index><xcql:relation><xcql:value>=</xcql:value></xcql:relation><xcql:term>these</xcql:term></xcql:searchClause></xcql:rightOperand></xcql:triple></srw:xQuery>
+	<startRecord>1</startRecord>
+	<maximumRecords>3</maximumRecords>
+	<srw:recordPacking>xml</srw:recordPacking>
+	<srw:recordSchema>unimarc</srw:recordSchema>
+	
+	<srw:stylesheet>https://www.sudoc.abes.fr/cbs/sru/DB=2.1/?xsl=searchRetrieveResponse</srw:stylesheet>
+    </srw:echoedSearchRetrieveRequest>
+    <diag:diagnostics>
+        <diag:uri>info:srw/diagnostic/1/0</diag:uri>
+	
+	
+    </diag:diagnostics>
+    <srw:extraResponseData>
+	<rob:authenticationToken xmlns:rob="info:srw/extension/2/auth-1.0">U10178,Klecteurweb,D2.1,E765ed9ab-cc,I250,B341720009,SY,QDEF,A%5C9008+1,,J,H2-26,,29,,34,,39,,44,,49-50,,53-78,,80-87,NLECTEUR+PSI,R10.34.103.198,FN,MNNN</rob:authenticationToken>
+        <mg:resultGrouping xmlns:mg="info:srw/extension/5/metadata-grouping-v1.0">
+	    
+	    <mg:grouping key="9001" description="Type de document"></mg:grouping>
+	    
+	    <mg:grouping key="9000" description="Année de publication"></mg:grouping>
+	    
+	    <mg:grouping key="9005" description="Pays de publication"></mg:grouping>
+	    
+	    <mg:grouping key="9004" description="Langue du document"></mg:grouping>
+	    
+
+	
+	</mg:resultGrouping>
+	
+    </srw:extraResponseData>
+</srw:searchRetrieveResponse>

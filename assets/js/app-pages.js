@@ -41,12 +41,18 @@
         return '';
     }
     /** pagePlace({detail}) → {where: « Listes · Médias et documents », icon} : l’endroit où l’on est, d’après le menu */
+    let placeMemo = null;
     UI.pagePlace = ({detail = false} = {}) => {
         const st = A().state || {}, mod = st.module || '';
         const nav = navOf(mod);
         if (mod === 'listes' || mod === 'maintenance') {
             const key = mod === 'listes' ? st.listType : st.maintenanceTab;
-            const g = key ? groupOf(mod, key) : null, item = key ? itemOf(mod, key) : '';
+            // ⏱ gardé 1 s : l'en-tête est rangé à chaque changement de la page (toutes les 150 ms quand elle bouge), et le nom d'une liste
+            // se cherche dans les 600 listes rangées (≈ 2 s sur une fiche de village qui se remplit)
+            let ls = ''; try { ls = ['genealogie-list-groups', 'genealogie-list-order', 'genealogie-maintenance-groups', 'genealogie-maintenance-groups-a'].map(x => localStorage.getItem(x) || '').join('|'); } catch (_) {}
+            const ck = `${mod}|${key}|${A().reglagesA?.() ? 1 : 0}|${ls}`, now = Date.now();
+            if (!placeMemo || placeMemo.k !== ck || now - placeMemo.at > 1000) placeMemo = {k: ck, at: now, g: key ? groupOf(mod, key) : null, item: key ? itemOf(mod, key) : ''};
+            const {g, item} = placeMemo;
             if (detail && item) return {where: `${nav.label} · ${item}`, icon: g?.icon || ''};
             return {where: g ? `${nav.label} · ${g.label}` : nav.label, icon: g?.icon || ''};
         }
@@ -131,7 +137,10 @@
         }
         // Réglages : le titre est le nom de la page dans le menu (« Étiquettes », pas « Catégoriser sans modifier les actes »)
         if (h2 && st.module === 'maintenance' && !detail && !head.hasAttribute('data-ph-title')) {
-            const name = itemOf('maintenance', st.maintenanceTab), ico = h2.querySelector(':scope > .ui-ph-ico');
+            const full = itemOf('maintenance', st.maintenanceTab), ico = h2.querySelector(':scope > .ui-ph-ico');
+            // le nom du menu porte souvent son icône (« ⛏️ Métiers et rivières ») : elle va dans la pastille, pas deux fois (« ⛏️⛏️ », « ❓🪦 »)
+            const em = ico && full ? full.match(EMOJI_RE) : null, name = em ? full.slice(em[0].length) : full;
+            if (em && ico.textContent !== em[1]) ico.textContent = em[1];
             const rest = [...h2.childNodes].filter(n => n !== ico);
             if (name && rest.every(n => n.nodeType === 3) && !same(rest.map(n => n.textContent).join('').trim(), name)) { rest.forEach(n => n.remove()); h2.append(name); }
         }
@@ -154,7 +163,10 @@
         const vis = items.filter(shown);
         const primary = vis.find(isPrimary) || null;
         const reset = vis.find(isReset) || null;
-        const others = vis.filter(x => x !== primary && x !== reset);
+        // 🔎 recherches : « 🗺 Carte » et « ⤓ Exporter » d'abord (réglage genealogie-recherche-boutons : 'outils' par défaut, 'ecran' = les boutons de l'écran d'abord)
+        const toolsFirst = (() => { try { return localStorage.getItem('genealogie-recherche-boutons') !== 'ecran'; } catch (_) { return true; } })();
+        const rankOf = x => (toolsFirst && x.matches?.('[data-rk-map-btn], [data-rp-export]') ? 0 : 1);
+        const others = vis.filter(x => x !== primary && x !== reset).map((x, i) => [x, i]).sort((a, b) => rankOf(a[0]) - rankOf(b[0]) || a[1] - b[1]).map(a => a[0]);
         const front = [reset, ...others].filter(Boolean).slice(0, 2);
         const over = items.filter(x => x !== primary && !front.includes(x));
         if (reset && !reset.children.length && !same(reset.textContent.trim(), '↺ Remettre comme au départ')) reset.textContent = '↺ Remettre comme au départ';
@@ -189,7 +201,7 @@
      * Une seule écoute sur #workspace dans les Réglages : après chaque changement fait dans la page (case, menu, curseur, glisser, bouton),
      * on lit les réglages gardés sur cet ordinateur ; s’ils ont changé : « ✓ Enregistré » à droite du titre + « ↶ Annuler » (H7).
      * Une page qui garde un brouillon (Réglages des tableaux, des animaux, Montage…, ADN) donne sa fonction save() avec UI.autoSave. */
-    const VOLATILE = /^(lcnda-listbar:|lcnda-sort:|lcnda-view:|lcnda-journal-erreurs)|ui-sections|reglages-ouverts|last-route|-ui-v\d|ui-state|recent|-tab$|-open$|warned|dashboard-recent|-groups$|toolbar-sets|succ-chrono-act/; // succ-chrono-act : l’heure du dernier geste (chronomètre du successoral), pas un réglage
+    const VOLATILE = /^(lcnda-listbar:|lcnda-sort:|lcnda-view:|lcnda-journal-erreurs|lcnda-abc-)|ui-sections|reglages-ouverts|last-route|-ui-v\d|ui-state|recent|-tab$|-open$|warned|dashboard-recent|-groups$|organiser-vus|toolbar-sets|succ-chrono-act/; // succ-chrono-act : l’heure du dernier geste (chronomètre du successoral), pas un réglage ; lcnda-abc- : l’alphabet regardé dans l’outil 🔤 Alphabets (Réglages → Calendriers), pas un réglage
     const snap = () => { const o = {}; try { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && !VOLATILE.test(k)) o[k] = localStorage.getItem(k); } } catch (_) {} return o; };
     const write = v => Object.entries(v).forEach(([k, x]) => { try { if (x == null) localStorage.removeItem(k); else localStorage.setItem(k, x); } catch (_) {} });
     let page = {token: -1, base: null, save: null, redraw: null, label: '', timer: 0};
@@ -206,6 +218,9 @@
         return p;
     };
     UI.autoSavePage = () => page; // pour les essais (tests/test-harmo-pages.js)
+    /** UI.settingsRebase() : une page vient de changer elle-même des réglages et l’a déjà dit (avec son « ↶ Annuler ») :
+     *  ce qu’elle a écrit devient le point de départ, pas de second « Réglage changé » (⭐ Sosa 1 après un import) */
+    UI.settingsRebase = () => { const p = fresh(); if (p.key) p.base = snap(); };
     /** UI.savedStatus pour une page : « ✓ Enregistré » à droite du titre */
     UI.pageSaved = (state = 'saved') => {
         const acts = document.querySelector('#workspace .page-header .page-actions'); if (!acts) return;

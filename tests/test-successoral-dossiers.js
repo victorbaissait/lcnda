@@ -66,7 +66,7 @@ const t = async (name, fn) => { try { await fn(); console.log('✓', name); } ca
     if (!phpPath) { console.log('— PHP absent : partie serveur sautée'); return finish(); }
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'carnet-succ-dossiers-'));
     const dir = path.join(tmp, 'data');
-    const env = { ...process.env, GENEALOGY_DATA_DIR: dir, GENEALOGY_MEDIA_DIR: path.join(dir, 'media'), GENEALOGY_SKIP_REFERENCE: '1' };
+    const env = { ...process.env, GENEALOGY_DATA_DIR: dir, GENEALOGY_MEDIA_DIR: path.join(dir, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4' };
     fs.mkdirSync(path.join(dir, 'media'), { recursive: true });
     fs.writeFileSync(path.join(dir, 'media', 'deces-marcel.jpg'), 'image-fictive');
     const seed = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', String.raw`
@@ -498,7 +498,8 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
                 await pg.check(`[data-succ-bchk=":${A}"]`); await pg.check(`[data-succ-bchk=":${b2}"]`);
                 assert.match(await pg.textContent('[data-succ-bsel]'), /Cochés : 2/);
                 await shot(pg, 'tableau-coches-1440', false);
-                const [dl] = await Promise.all([pg.waitForEvent('download'), pg.click('[data-succ-bcsv]')]);
+                await pg.click('[data-succ-bcsv]'); await pg.waitForSelector('dialog.ui-export[open]'); // ⤓ la fenêtre d'export commune
+                const [dl] = await Promise.all([pg.waitForEvent('download'), pg.click('dialog.ui-export [data-ui-go]')]);
                 const csv = fs.readFileSync(await dl.path(), 'utf8'); assert.match(csv, /2026-014/); assert.match(csv, /Marcel MAZAUD/);
                 await pg.click('[data-succ-bonly]');
                 await pg.waitForFunction(() => window.LCNDA_APP.state.module === 'personnes' && document.querySelector('.succ-fbanner'));

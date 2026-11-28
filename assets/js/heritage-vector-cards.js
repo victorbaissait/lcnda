@@ -313,6 +313,13 @@
 
     function openMaker(onDone, kind0 = 'naissance') {
         let photoFile = '', personId = Number(A().state.currentPersonId) || 0, kind = kind0, fields = fieldsOf(kind0);
+        /** tous les réglages de la fenêtre (modèle, style, format, pliage, champs, photo, enveloppe) */
+        const collect = async f => {
+            const dg = f.closest('dialog') || f, o = Object.fromEntries(new FormData(f)); o.kind = kind; o.fields = (dg._fpGrab ? dg._fpGrab() : fields).map(x => ({...x}));
+            if (f.querySelector('[name=usephoto]').checked && photoFile) { const im = typeof photoFile === 'string' ? await toData(photoFile) : await (async () => { const i = await new Promise(ok => { const x = new Image(); x.onload = () => ok(x); x.onerror = () => ok(null); x.src = photoFile.data; }); return i ? {src: photoFile.data, ratio: i.naturalWidth / i.naturalHeight} : null; })(); if (im) { o.photo = im.src; o.photoRatio = Math.max(.55, Math.min(1.4, im.ratio)); } }
+            o.env = !!f.querySelector('[name=env]')?.checked;
+            return o;
+        };
         const pf = prefs();
         const fieldHtml = (f, i) => { const long = f.role === 'detail' || f.role === 'family' || (kind === 'presse' && f.role === 'date') || (f.role === 'custom' && f.multi);
             return `<div class="h-fp-field ${f.role === 'intro' || f.role === 'name' ? '' : 'span-2'} ${f.hidden ? 'is-off' : ''}" data-fp-i="${i}"><div class="h-fp-fhead">
@@ -338,6 +345,7 @@
                         <div data-fp-envwho><span class="pk-lab">Destinataire</span>${(window.LCNDA_PICKER || A()).pickerField({name: 'env_person', kind: 'person'})}</div>
                         <label class="span-2">Adresse du destinataire<textarea name="envTo" rows="3" placeholder="Prénom NOM&#10;12 rue des Écoles&#10;19000 Tulle"></textarea></label>
                         <label class="span-2">Expéditeur (en haut à gauche)<textarea name="envFrom" rows="2" placeholder="Famille Martin&#10;3 place de l’Église, 19000 Tulle">${esc(pf.envFrom || '')}</textarea></label></div></fieldset>
+                <div class="h-fp-merge"><button type="button" class="button small secondary" data-fp-merge title="${esc(i18n('Les mêmes réglages, un faire-part pour chaque personne (une liste, une étiquette) ou chaque foyer d’une cousinade, tous dans un seul PDF'))}">📬 ${esc(i18n('Un faire-part par personne / par foyer…'))}</button></div>
                 <p class="muted">Coche ou décoche un champ pour l’afficher ou le masquer, ↑ ↓ pour le ranger, 🗑 pour l’enlever. Le faire-part s’ouvre ensuite dans le dessin vectoriel : tout se retouche (textes, couleurs, polices, ornements), puis « ⤓ Exporter » (PDF, image, impression, recto-verso sur A4).</p></div>`,
             onOpen: dg => {
                 const box = dg.querySelector('[data-fp-fields]');
@@ -386,22 +394,108 @@
                         fv('env').checked = !!d.env; dg.querySelector('[data-fp-envbox]').hidden = !d.env; dg.querySelector('.h-fp-custom').hidden = fv('format').value !== 'custom';
                         const p = prefs(); ['format', 'orient', 'cw', 'ch', 'fold', 'envFmt', 'envFrom'].forEach(k => { p[k] = fv(k).value; }); p.env = !!d.env; savePrefs(p); }});
                 if (pbox) dg.querySelector('[data-fp-presets]').appendChild(pbox);
+                // 📬 publipostage : un faire-part par personne ou par foyer, tous dans un seul PDF
+                dg.querySelector('[data-fp-merge]')?.addEventListener('click', async () => { const o = await collect(dg.querySelector('form') || dg); openMerge(o); });
             },
             onSubmit: async f => {
-                const dg = f.closest('dialog') || f, o = Object.fromEntries(new FormData(f)); o.kind = kind; o.fields = (dg._fpGrab ? dg._fpGrab() : fields).map(x => ({...x}));
-                if (f.querySelector('[name=usephoto]').checked && photoFile) { const im = typeof photoFile === 'string' ? await toData(photoFile) : await (async () => { const i = await new Promise(ok => { const x = new Image(); x.onload = () => ok(x); x.onerror = () => ok(null); x.src = photoFile.data; }); return i ? {src: photoFile.data, ratio: i.naturalWidth / i.naturalHeight} : null; })(); if (im) { o.photo = im.src; o.photoRatio = Math.max(.55, Math.min(1.4, im.ratio)); } }
-                o.env = !!f.querySelector('[name=env]')?.checked;
+                const o = await collect(f);
                 const doc = await build(o), nm = o.fields.find(x => x.role === 'name')?.value || '';
                 ext.openVectorEditor({doc, name: `${KINDS[o.kind].label.replace(/^\S+\s/, '')} — ${nm}`.trim().replace(/ —$/, ''), personId: personId || 0, onSaved: onDone, onClose: onDone});
             }});
     }
+    /* ═════════ 📬 Publipostage : un faire-part par personne ou par foyer, tous dans un seul PDF ═════════
+     * Les champs gardent leurs textes ; ces mots s'y remplacent pour chacun : {prenom} {nom} {nom_complet} {foyer} {prenoms} {adresse},
+     * et pour une cousinade {titre} {date} {lieu} {ancetre} {reponse_avant} {contact} {branche}. */
+    const MERGE_KEYS = ['prenom', 'nom', 'nom_complet', 'foyer', 'prenoms', 'adresse', 'titre', 'date', 'lieu', 'ancetre', 'reponse_avant', 'contact', 'branche'];
+    const fillMerge = (t, v) => String(t ?? '').replace(/\{([a-z_]+)\}/g, (m, k) => (MERGE_KEYS.includes(k) && v[k] != null ? String(v[k]) : m));
+    const personVals = p => { const first = String(p?.first_name || '').trim(), last = String(p?.last_name || '').trim().toLocaleUpperCase('fr-FR'), full = `${first} ${last}`.trim(); return {prenom: first, nom: last, nom_complet: full, foyer: full, prenoms: first}; };
+    /** les destinataires : [{pid, name, values, address}] */
+    async function mergeRecipients(src, f, {fiche, env, kind}) {
+        const out = [];
+        if (src === 'cousinade') {
+            const id = Number(f.querySelector('[name=fpm_cous]')?.value) || 0; if (!id || !ext.cousinade?.households) return out;
+            const h = await ext.cousinade.households(id);
+            for (const it of h.items) out.push({pid: 0, name: it.name, address: [it.name, ...it.address].join('\n'), values: {...it.values, prenom: it.prenoms, nom: '', nom_complet: it.name, adresse: it.address.join(', ')}});
+            return out;
+        }
+        let ids = [];
+        if (src === 'label') { const lid = Number(f.querySelector('[name=fpm_label]')?.value) || 0; const L = ((await api('labels')).labels || []).find(l => Number(l.id) === lid); ids = (L?.linked?.persons || []).map(p => Number(p.id)); }
+        else ids = ((window.LCNDA_PICKER || A()).pickerValue?.(f.querySelector('[data-fpm-people] .pk')) || []).map(Number).filter(Boolean);
+        ids = [...new Set(ids)].slice(0, 300);
+        for (const pid of ids) {
+            let p = {}; try { p = (await api('person', {id: pid})).person || {}; } catch (_) { continue; }
+            if (Number(p.is_private) === 1) continue;
+            const values = personVals(p); let fill = {};
+            if (fiche) { try { fill = (await fillFrom(kind, pid)).values || {}; } catch (_) {} }
+            let address = ''; if (env) { try { address = await addressOf(pid); } catch (_) { address = values.nom_complet; } }
+            values.adresse = address.split('\n').slice(1).join(', ');
+            out.push({pid, name: values.nom_complet || i18n('Sans nom'), address: address || values.nom_complet, values, fill});
+        }
+        return out;
+    }
+    /** les champs de chacun : les mots {…} remplacés ; « depuis la fiche » remplit les champs sans {…} ; le nom en haut si demandé */
+    function mergeFields(o, r, {top}) {
+        const fields = o.fields.map(f => { const has = /\{[a-z_]+\}/.test(String(f.value || '')); return {...f, value: has ? fillMerge(f.value, r.values) : (r.fill?.[f.role] || f.value)}; });
+        if (top) fields.unshift({key: 'x_dest', role: 'custom', label: i18n('Pour'), value: r.name, hidden: false, size: 's', italic: true, bold: false});
+        return fields;
+    }
+    /** fabrique toutes les cartes → un seul PDF (le moteur d'export du dessin vectoriel : docSvg, svgCanvas, makePdf) */
+    async function mergePdf(o, list, {top, ppp = 200, onStep} = {}) {
+        const V = ext.vectorInternals;
+        if (!V?.docSvg || !V?.svgCanvas || !V?.makePdf) throw new Error(i18n('Le dessin vectoriel n’est pas chargé : le PDF ne peut pas être fabriqué.'));
+        const pages = [];
+        for (const [i, r] of list.entries()) {
+            onStep?.(i, list.length);
+            const doc = await build({...o, fields: mergeFields(o, r, {top}), envTo: o.env ? r.address : o.envTo});
+            for (const pg of (doc.pages && doc.pages.length ? doc.pages : [null])) {
+                const svg = V.docSvg(doc, pg ? {page: pg} : {}), W = pg ? pg.w : doc.w, H = pg ? pg.h : doc.h;
+                const c = await V.svgCanvas(svg, Math.min(ppp / 96, 7000 / Math.max(W, H)), '#ffffff'), blob = await new Promise(ok => c.toBlob(ok, 'image/jpeg', .9));
+                pages.push({jpeg: new Uint8Array(await blob.arrayBuffer()), w: c.width, h: c.height, pw: W * .75, ph: H * .75});
+            }
+        }
+        return {blob: V.makePdf(pages, i18n('Faire-part'), {title: i18n('Faire-part')}), pages: pages.length};
+    }
+    const saveBlob = (blob, name) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); };
+    async function openMerge(o) {
+        const pm = prefs().merge || {}, src0 = ['people', 'label', 'cousinade'].includes(pm.src) ? pm.src : 'people';
+        let labels = [], cous = [];
+        try { labels = (await api('labels')).labels || []; } catch (_) {}
+        if (ext.cousinade?.list) { try { cous = await ext.cousinade.list(); } catch (_) {} }
+        const srcs = [['people', i18n('Une liste de personnes')], ['label', i18n('Les personnes d’une étiquette')], ...(cous.length ? [['cousinade', i18n('Les foyers d’une cousinade')]] : [])];
+        const src1 = srcs.some(x => x[0] === src0) ? src0 : 'people';
+        const sw = (name, label, on) => `<label class="ui-toggle"><input type="checkbox" name="${name}" ${on ? 'checked' : ''}><i></i>${esc(label)}</label>`;
+        const dlg = ext.openDialog({eyebrow: 'FAIRE-PART ET AFFICHES', title: '📬 Un faire-part par personne / par foyer', submitLabel: '📄 Fabriquer le PDF', wide: true,
+            body: `<div class="h-fp-mergebox"><p class="muted">${esc(i18n('Le faire-part tel que tu l’as réglé, une fois pour chaque personne ou chaque foyer. Tous les faire-part sont rangés dans un seul PDF, prêt à imprimer.'))}</p>
+                <div class="segmented" role="radiogroup">${srcs.map(([k, l]) => `<label class="h-fp-kind"><input type="radio" name="fpm_src" value="${k}" ${k === src1 ? 'checked' : ''}><span>${esc(l)}</span></label>`).join('')}</div>
+                <div data-fpm-for="people" data-fpm-people ${src1 === 'people' ? '' : 'hidden'}><span class="pk-lab">${esc(i18n('Les personnes'))}</span>${(window.LCNDA_PICKER || A()).pickerField({name: 'fpm_people', kind: 'person', multiple: true})}</div>
+                <label data-fpm-for="label" ${src1 === 'label' ? '' : 'hidden'}>${esc(i18n('L’étiquette'))}<select name="fpm_label">${labels.length ? labels.map(l => `<option value="${Number(l.id)}" ${Number(pm.label) === Number(l.id) ? 'selected' : ''}>${esc(l.name)} (${(l.linked?.persons || []).length})</option>`).join('') : `<option value="">${esc(i18n('Aucune étiquette'))}</option>`}</select></label>
+                <label data-fpm-for="cousinade" ${src1 === 'cousinade' ? '' : 'hidden'}>${esc(i18n('La cousinade (les foyers invités)'))}<select name="fpm_cous">${cous.map(c => `<option value="${c.id}" ${Number(pm.cous) === c.id ? 'selected' : ''}>${esc(c.title)}</option>`).join('')}</select></label>
+                <p class="ui-hint">${esc(i18n('Dans les champs du faire-part, ces mots se remplacent pour chacun :'))} ${MERGE_KEYS.slice(0, 6).map(k => `<code>{${k}}</code>`).join(' ')} ${cous.length ? `<small class="muted">${esc(i18n('(cousinade : aussi {titre}, {date}, {lieu}, {ancetre}…)'))}</small>` : ''}</p>
+                ${sw('fpm_top', i18n('Le nom de la personne (ou du foyer) en haut de chaque faire-part'), pm.top !== false)}
+                ${sw('fpm_fiche', i18n('Remplir aussi depuis la fiche de chacun (noms, dates, lieux)'), !!pm.fiche)}
+                ${o.env ? `<p class="ui-hint">✉️ ${esc(i18n('L’enveloppe de chacun porte son adresse.'))}</p>` : ''}</div>`,
+            onOpen: dg => { dg.addEventListener('change', e => { if (e.target.name === 'fpm_src') dg.querySelectorAll('[data-fpm-for]').forEach(x => { x.hidden = x.dataset.fpmFor !== e.target.value; }); }); },
+            onSubmit: async f => {
+                const src = f.querySelector('[name=fpm_src]:checked')?.value || 'people', top = !!f.querySelector('[name=fpm_top]')?.checked, fiche = !!f.querySelector('[name=fpm_fiche]')?.checked;
+                const p = prefs(); p.merge = {src, top, fiche, label: f.querySelector('[name=fpm_label]')?.value || '', cous: f.querySelector('[name=fpm_cous]')?.value || ''}; savePrefs(p);
+                let list; try { list = await mergeRecipients(src, f, {fiche, env: o.env, kind: o.kind}); } catch (e) { toast(e.message, 'error'); return false; }
+                if (!list.length) { toast(src === 'cousinade' ? i18n('Aucun foyer invité dans cette cousinade : coche des invités d’abord.') : i18n('Choisis au moins une personne.'), 'error'); return false; }
+                toast(i18n('Fabrication de {n} faire-part…', {n: list.length}));
+                try { const r = await mergePdf(o, list, {top, onStep: (i, n) => { if (i && i % 10 === 0) toast(i18n('{i} sur {n}…', {i, n})); }});
+                    saveBlob(r.blob, `${(A().safeExportFilename ? A().safeExportFilename(KINDS[o.kind]?.label.replace(/^\S+\s/, '') || 'faire-part', 'faire-part') : 'faire-part')}-${list.length}.pdf`);
+                    toast(i18n('{n} faire-part dans un seul PDF ({p} pages).', {n: list.length, p: r.pages}), 'success');
+                } catch (e) { toast(e.message, 'error'); return false; }
+            }});
+        return dlg;
+    }
+
     ext.openCardMaker = openMaker;
-    ext.cardInternals = {build, buildOne, fillFrom, addressOf, envFor, KINDS, STYLES, FORMATS, FOLDS, ENVELOPES};
+    ext.cardInternals = {build, buildOne, fillFrom, addressOf, envFor, KINDS, STYLES, FORMATS, FOLDS, ENVELOPES, mergeFields, mergePdf, mergeRecipients, openMerge, fillMerge, MERGE_KEYS};
     ext.editToolsExtra = ext.editToolsExtra || [];
     ext.editToolsExtra.push({key: 'cards', icon: '📰', label: 'Faire-part et affiches', what: 'faire-part',
         load: async () => ((await api('vector_docs')).docs || []).filter(d => d.kind === 'card').map(d => ({id: d.id, name: d.name, date: d.updated_at, thumb: d.thumb ? `<img src="${esc(d.thumb)}" alt="">` : '<span class="h-et-ico">📰</span>', info: 'Dessin vectoriel'})),
         open: (id, again) => ext.openVectorEditor?.({id, onSaved: again, onClose: again}),
         create: again => openMaker(again),
         rename: (id, name) => api('rename_vector_doc', {}, {method: 'POST', body: {id, name}}),
-        remove: id => api('delete_vector_doc', {}, {method: 'POST', body: {id}}), createLabel: '＋ Nouveau faire-part'});
+        remove: id => (ext.projectDelUndo ? ext.projectDelUndo('delete_vector_doc')(id) : api('delete_vector_doc', {}, {method: 'POST', body: {id}})), undo: true, createLabel: '＋ Nouveau faire-part'});
 })();

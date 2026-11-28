@@ -1,0 +1,5 @@
+# LCNDA : tout peut être lu, par les moteurs de recherche comme par les assistants IA.
+User-agent: *
+Allow: /
+
+# Sitemap : sitemap.xml, à côté de cette page (adresse complète : LCNDA_SITE_URL=https://… node scripts/build-presentation-faq.js)

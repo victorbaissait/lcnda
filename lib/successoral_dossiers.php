@@ -731,6 +731,7 @@ function succ_bundle_import(PDO $to, array $b, string $mediaTo, ?callable $media
         $set = [];
         foreach (['filename', 'thumbnail'] as $col) {
             $fn = (string) ($m[$col] ?? ''); if ($fn === '' || str_contains($fn, '..') || preg_match('#^[a-z]+://#i', $fn)) { continue; }
+            if (str_contains($fn, "\0") || str_contains($fn, '\\') || preg_match('#(^|/)\.#', $fn) || (function_exists('media_import_name_ok') && !media_import_name_ok($fn))) { continue; } // 🔒 jamais « .php », « .svg », « .js », fichier caché
             $data = $mediaRead ? $mediaRead($fn) : null;
             if ($data === null) { continue; }
             $dest = $fn; $i = 1;
@@ -771,7 +772,7 @@ function succ_bundle_import(PDO $to, array $b, string $mediaTo, ?callable $media
         $options = json_decode((string) ($c['options_json'] ?? '{}'), true); if (!is_array($options)) { $options = []; }
         $options['similar'] = array_map(static fn($x) => [$x[0], $x[1]], $similar);
         $set = ['deceased_id' => $pmap[(int) $c['deceased_id']] ?? null, 'notary_person_id' => $notary ? ($pmap[$notary] ?? null) : null,
-            'notary_text' => $notary && !isset($pmap[$notary]) ? ((string) ($opts['notary_name'] ?? '') ?: (string) $c['notary_text']) : (string) $c['notary_text'],
+            'notary_text' => $notary && !isset($pmap[$notary]) ? ((string) ($opts['notary_name'] ?? '') ?: (string) ($c['notary_text'] ?? '')) : (string) ($c['notary_text'] ?? ''),
             'death_place_id' => null, 'overrides_json' => json_encode($ov2 ?: new stdClass(), JSON_UNESCAPED_UNICODE), 'snapshot_json' => is_array($snap) ? json_encode($snap, JSON_UNESCAPED_UNICODE) : '',
             'options_json' => json_encode($options ?: new stdClass(), JSON_UNESCAPED_UNICODE), 'deleted_at' => null, 'progress' => $c['progress'] ?? null, 'progress_json' => (string) ($c['progress_json'] ?? '')];
         if (!empty($opts['state'])) { $set['state'] = $opts['state']; $set['archived_at'] = null; }

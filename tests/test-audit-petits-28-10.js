@@ -26,7 +26,7 @@ const phpPath = findPhp([devBundledPhp()]);
 if (!phpPath) { console.log('— PHP absent : test sauté'); process.exit(0); }
 const SHOTS = process.env.SHOTS || '';
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'carnet-audit2810-'));
-const envFor = d => ({ ...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1' });
+const envFor = d => ({ ...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4' });
 const freePort = () => new Promise(res => { const s = net.createServer(); s.listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => res(p)); }); });
 const read = f => fs.readFileSync(path.join(appRoot, f), 'utf8');
 
@@ -70,7 +70,8 @@ const startServer = async dir => {
         const s = read('assets/js/app.js');
         assert.match(s, /addEventListener\('beforeunload',\(\)=>\{if\(timer\|\|Object\.keys\(pending\.set\)\.length\|\|pending\.remove\.size\)flush\(true\);\}\)/);
         assert.match(s, /const UNSENT='genealogie-settings-unsent'/);
-        assert.match(s, /'genealogie-bg-photo',UNSENT\]/, 'la clé reste sur cet ordinateur');
+        // (avec le secret « genealogie-artist-keys », jeton Discogs / clé TMDb, lui aussi gardé sur cet ordinateur : docs/reglages-inventaire.md)
+        assert.match(s, /'genealogie-bg-photo','genealogie-artist-keys',UNSENT\]/, 'la clé reste sur cet ordinateur');
     });
     await t('statique : petits écarts (7)', async () => {
         const idx = read('index.php'), et = read('assets/js/heritage-edittools.js'), app = read('assets/js/app.js'), css = read('assets/css/app.css');
@@ -175,7 +176,8 @@ const startServer = async dir => {
                 await t(`${name} : « ⚙️ Ranger les outils » — poignée ⠿, K1 si tout est décoché (7)`, async () => {
                     await p.evaluate(() => window.LCNDA_EXT.arrangeEditTools());
                     await p.waitForSelector('dialog[open] [data-list] [data-k]'); await p.waitForTimeout(400);
-                    assert.ok(await p.$('dialog[open] [data-list] .dnd-grip'), 'poignée ⠿');
+                    // la poignée est posée par heritage-dnd.js quand la page se calme (au plus 600 ms, même si le tableau de bord bouge sans arrêt)
+                    assert.ok(await p.waitForSelector('dialog[open] [data-list] .dnd-grip', {timeout: 3000}).catch(() => null), 'poignée ⠿');
                     if (vp.width > 800) assert.equal(await p.$eval('dialog[open] [data-list] [data-up]', b => getComputedStyle(b).display), 'none', 'flèches cachées à la souris');
                     await p.$$eval('dialog[open] [data-list] input[type=checkbox]', xs => xs.forEach(x => { x.checked = false; }));
                     await p.click('dialog[open] .modal-actions button[type=submit], dialog[open] .modal-actions .button:not(.secondary)');

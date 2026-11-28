@@ -17,7 +17,8 @@ const GRAMPS_MAX_XML = 400 * 1048576;        // XML décompressé : 400 Mo au pl
 const GRAMPS_MAX_TAR_FILES = 20000;
 const GRAMPS_MAX_TAR_TOTAL = 8 * 1073741824;  // 8 Go une fois ouvert
 const IMPORT_RECEIPT_TABLES = ['persons', 'name_variants', 'families', 'family_children', 'events', 'event_witnesses', 'notes',
-    'sources', 'source_links', 'media', 'media_links', 'labels', 'label_links', 'places', 'event_types', 'surname_groups', 'pets'];
+    'sources', 'source_links', 'media', 'media_links', 'labels', 'label_links', 'places', 'event_types', 'surname_groups', 'pets',
+    'standalone_reminders', 'saved_views']; // tâches (Hérédis, MacFamilyTree) et vues de départ (MacFamilyTree) : retirées aussi par « ↶ Annuler »
 
 /** Retire un dossier temporaire et son contenu (sans suivre les liens). */
 function imports_rmdir(string $dir): void
@@ -408,6 +409,8 @@ function gramps_to_gedcom(DOMDocument $dom): array
     $lines[] = '1 GEDC'; $lines[] = '2 VERS 5.5.1'; $lines[] = '2 FORM LINEAGE-LINKED';
     $lines[] = '1 CHAR UTF-8';
     $lines[] = '1 PLAC'; $lines[] = '2 FORM ' . GEDCOM_PLACE_FORM;
+    // personne de départ de Gramps (« <people home="…"> ») : la personne n°1 (Sosa 1) après l'import (ticket #7)
+    if (($home = (string) $section('people')?->getAttribute('home')) !== '') { $lines[] = '1 _HOME @' . $idFor($home, 'I') . '@'; }
 
     // ── Personnes
     $nameTypes = ['Married Name' => 'married', 'Also Known As' => 'aka', 'Birth Name' => 'birth'];
@@ -693,8 +696,34 @@ function import_preview(PDO $pdo, ?array $file): never
             elseif ($kind !== '') { $out['producer_label'] = $kind; $out['format'] = $kind; }
             else { $za->close(); throw new RuntimeException('Ni fichier GEDCOM, ni Hérédis, ni MacFamilyTree dans cette archive.'); }
             $za->close();
+        } elseif ($ext === 'heredis') {
+            // vérifié dès l'aperçu (sinon n'importe quel fichier renommé passait l'étape 2) : une base Hérédis lisible, ses tables
+            $out['producer_label'] = 'Hérédis';
+            $fh = @fopen((string) $file['tmp_name'], 'rb'); $magic = $fh ? (string) fread($fh, 16) : ''; if ($fh) { fclose($fh); }
+            if ($magic !== "SQLite format 3\0") { throw new RuntimeException('Ce fichier n’est pas un fichier Hérédis lisible (Hérédis 2019 ou plus récent). Les fichiers plus anciens doivent être exportés en GEDCOM.'); }
+            try {
+                $h = new PDO('sqlite:file:' . rawurlencode((string) $file['tmp_name']) . '?mode=ro&immutable=1', null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+                $tables = $h->query("SELECT name FROM sqlite_master WHERE type='table'")->fetchAll(PDO::FETCH_COLUMN);
+            } catch (Throwable) { throw new RuntimeException('Ce fichier n’est pas un fichier Hérédis lisible (Hérédis 2019 ou plus récent).'); }
+            foreach (['Individus', 'Unions', 'Evenements', 'Lieux', 'Notes'] as $t) {
+                if (!in_array($t, $tables, true)) { throw new RuntimeException('Fichier Hérédis non reconnu (table « ' . $t . ' » absente). Les fichiers Hérédis antérieurs à 2019 doivent être exportés en GEDCOM.'); }
+            }
+            foreach (['Individus' => ['codeid', 'noms', 'prenoms'], 'Unions' => ['codeid', 'xrefepoux', 'xrefepouse'], 'Evenements' => ['codeid', 'eventtype', 'dateged']] as $t => $want) {
+                $cols = array_map(static fn($c) => strtolower((string) $c['name']), $h->query('PRAGMA table_info("' . $t . '")')->fetchAll(PDO::FETCH_ASSOC));
+                if (array_diff($want, $cols)) { throw new RuntimeException('Ce fichier Hérédis ne se lit pas (fichier abîmé, ou version d’Hérédis que l’app ne connaît pas). Dans Hérédis, exporte-le en GEDCOM, puis importe le fichier .ged.'); }
+            }
+            try { $out['persons'] = (int) $h->query('SELECT count(*) FROM Individus')->fetchColumn(); $out['families'] = (int) $h->query('SELECT count(*) FROM Unions')->fetchColumn(); } catch (Throwable) {}
+            $h = null;
         } else {
-            $out['producer_label'] = $ext === 'heredis' ? 'Hérédis' : 'MacFamilyTree';
+            // MacFamilyTree envoyé par un navigateur : le paquet arrive zippé et doit contenir sa base « database »
+            $out['producer_label'] = 'MacFamilyTree';
+            $za = new ZipArchive();
+            if ($za->open((string) $file['tmp_name']) !== true) { throw new RuntimeException('Ce fichier n’est pas un paquet MacFamilyTree lisible (.mftpkg zippé) : il est abîmé ou d’un autre format.'); }
+            if (function_exists('import_zip_guard')) { import_zip_guard($za, sys_get_temp_dir()); }
+            $hasDb = false;
+            for ($i = 0; $i < $za->numFiles; $i++) { if (basename((string) $za->getNameIndex($i)) === 'database') { $hasDb = true; break; } }
+            $za->close();
+            if (!$hasDb) { throw new RuntimeException('Base MacFamilyTree introuvable dans le paquet (fichier « database » absent).'); }
         }
     } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); }
     if (($out['media_remote'] ?? 0) > 0) { $out['notices'][] = ['kind' => 'info', 'text' => imports_plural((int) $out['media_remote'], 'photo ou document en ligne', 'photos ou documents en ligne') . ' (' . ($out['producer_label'] ?: 'site') . ') : gardés comme liens dans une note de la fiche, jamais téléchargés.']; }
@@ -746,14 +775,21 @@ function import_receipt_begin(PDO $pdo): array
     return $max;
 }
 
-/** Garde ce que l'import a ajouté (plages d'identifiants) ; renvoie le jeton pour « ↶ Annuler ». */
-function import_receipt_save(PDO $pdo, string $kind, array $before, array $extra = []): string
+/** Ce que l'import a ajouté depuis import_receipt_begin() : plages d'identifiants par table (à prendre avant de rendre le verrou). */
+function import_receipt_ranges(PDO $pdo, array $before): array
 {
     $ranges = [];
     foreach ($before as $t => $from) {
         $to = (int) $pdo->query("SELECT COALESCE(MAX(id),0) FROM \"$t\"")->fetchColumn();
         if ($to > $from) { $ranges[$t] = [$from, $to]; }
     }
+    return $ranges;
+}
+
+/** Garde ce que l'import a ajouté (plages d'identifiants, comptées maintenant ou données) ; renvoie le jeton pour « ↶ Annuler ». */
+function import_receipt_save(PDO $pdo, string $kind, array $before, array $extra = [], ?array $ranges = null): string
+{
+    $ranges ??= import_receipt_ranges($pdo, $before);
     $token = bin2hex(random_bytes(12));
     $files = glob(import_receipt_dir() . '/*.json') ?: [];
     usort($files, static fn($a, $b) => filemtime($a) <=> filemtime($b));
@@ -805,6 +841,7 @@ function import_undo(PDO $pdo, array $d): array
     $del = static function (string $sql) use ($pdo, &$n): void { $n += (int) $pdo->exec($sql); };
     foreach (['event_witnesses', 'name_variants', 'family_children', 'source_links', 'media_links', 'label_links', 'notes', 'events'] as $t) { if (isset($rg[$t])) { $del("DELETE FROM $t WHERE {$in($t)}"); } }
     if (isset($rg['pets'])) { $del("DELETE FROM pets WHERE {$in('pets')}"); }
+    foreach (['standalone_reminders', 'saved_views'] as $t) { if (isset($rg[$t])) { $del("DELETE FROM $t WHERE {$in($t)}"); } }
     if (isset($rg['families'])) { $del("DELETE FROM families WHERE {$in('families')}"); }
     if (isset($rg['persons'])) { $del("DELETE FROM persons WHERE {$in('persons')}"); }
     // ce qui sert encore ailleurs reste (lieu cité par un autre événement, source citée, étiquette posée…)

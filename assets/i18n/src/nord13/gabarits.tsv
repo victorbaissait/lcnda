@@ -1,0 +1,51 @@
+fr ¦ el ¦ bg
+# 🧩 Atelier de transcription, vague 3 (3b) : les gabarits d’actes (heritage-transcribe-gabarit.js)
+Choisis la sorte d’acte (en haut) : chaque sorte a ses cases. ¦ Διάλεξε το είδος της πράξης (πάνω): κάθε είδος έχει τα δικά του πεδία. ¦ Избери вида на акта (горе): всеки вид има свои полета.
+On dirait : {x}. Utiliser ce gabarit ? ¦ Μοιάζει με: {x}. Να χρησιμοποιηθεί αυτό το πρότυπο; ¦ Прилича на: {x}. Да се използва ли този образец?
+Cases remplies : {a}/{b} · vérifiées : {c} ¦ Συμπληρωμένα πεδία: {a}/{b} · ελεγμένα: {c} ¦ Попълнени полета: {a}/{b} · проверени: {c}
+Gabarit ¦ Πρότυπο ¦ Образец
+Vert : rempli par « 🧭 Repérer », à vérifier · Entrée : ✓ vérifié · un clic sur « l. 3 » montre le passage. ¦ Πράσινο: συμπληρώθηκε από «🧭 Εντοπισμός», προς έλεγχο · Enter: ✓ ελέγχθηκε · ένα κλικ στο «γρ. 3» δείχνει το απόσπασμα. ¦ Зелено: попълнено от „🧭 Открий“, за проверка · Enter: ✓ проверено · щракване върху „р. 3“ показва мястото.
+Date du baptême ¦ Ημερομηνία βάπτισης ¦ Дата на кръщението
+Père, métier ¦ Πατέρας, επάγγελμα ¦ Баща, занятие
+Officier de l’état civil ¦ Ληξίαρχος ¦ Длъжностно лице по гражданското състояние
+Parents de l’époux ¦ Γονείς του γαμπρού ¦ Родители на младоженеца
+Parents de l’épouse ¦ Γονείς της νύφης ¦ Родители на младоженката
+Contrat de mariage ¦ Προγαμιαίο συμβόλαιο ¦ Брачен договор
+Publications ¦ Αναγγελίες ¦ Оповестявания
+Décédé le ¦ Απεβίωσε στις ¦ Починал на
+Déclarants ¦ Δηλούντες ¦ Заявители
+Date d’inhumation ¦ Ημερομηνία ταφής ¦ Дата на погребението
+Parties ¦ Συμβαλλόμενοι ¦ Страни
+Juge ou notaire ¦ Δικαστής ή συμβολαιογράφος ¦ Съдия или нотариус
+Personne concernée ¦ Ενδιαφερόμενο πρόσωπο ¦ Засегнатото лице
+Ce qui est attesté ¦ Τι βεβαιώνεται ¦ Какво се удостоверява
+Rue ou maison ¦ Οδός ή σπίτι ¦ Улица или къща
+Ménage ¦ Νοικοκυριό ¦ Домакинство
+Matricule ¦ Αριθμός μητρώου ¦ Номер в регистъра
+Classe ¦ Κλάση ¦ Набор
+Régiment ¦ Σύνταγμα ¦ Полк
+Campagnes ¦ Εκστρατείες ¦ Походи
+Blessures ¦ Τραύματα ¦ Рани
+page {n}, l. {line} ¦ σελ. {n}, γρ. {line} ¦ стр. {n}, р. {line}
+l. {n} ¦ γρ. {n} ¦ р. {n}
+🧩 Gabarit à cases (conseillé) ¦ 🧩 Πρότυπο με πεδία (προτείνεται) ¦ 🧩 Образец с полета (препоръчително)
+Texte à trous (comme avant) ¦ Κείμενο με κενά (όπως πριν) ¦ Текст с празни места (както досега)
+Remplir à nouveau ¦ Συμπλήρωση ξανά ¦ Попълни отново
+Coller le texte à trous ¦ Επικόλληση του κειμένου με κενά ¦ Постави текста с празни места
+Repris du gabarit (cases vérifiées ou écrites par toi) : ¦ Από το πρότυπο (πεδία που έλεγξες ή έγραψες εσύ): ¦ Взето от образеца (полета, проверени или написани от теб):
+Retirer cette case ¦ Αφαίρεση αυτού του πεδίου ¦ Махни това поле
+Ajouter une case ¦ Προσθήκη πεδίου ¦ Добави поле
+Nom de la case (ex. Profession du parrain) ¦ Όνομα πεδίου (π.χ. Επάγγελμα του νονού) ¦ Име на полето (напр. Занятие на кръстника)
+Nom de la case ¦ Όνομα πεδίου ¦ Име на полето
+Case retirée ¦ Το πεδίο αφαιρέθηκε ¦ Полето е махнато
+Mes gabarits… ¦ Τα πρότυπά μου… ¦ Моите образци…
+Mes gabarits ¦ Τα πρότυπά μου ¦ Моите образци
+Tableur de tous les actes « {x} » ¦ Υπολογιστικό φύλλο όλων των πράξεων «{x}» ¦ Таблица на всички актове „{x}“
+Les cases cochées se montrent dans le gabarit de chaque acte de cette sorte. Gardé sur cet ordinateur. ¦ Τα επιλεγμένα πεδία εμφανίζονται στο πρότυπο κάθε πράξης αυτού του είδους. Αποθηκεύεται σε αυτόν τον υπολογιστή. ¦ Отметнатите полета се показват в образеца на всеки акт от този вид. Пази се на този компютър.
+Aucun acte de cette sorte pour l’instant. ¦ Δεν υπάρχει ακόμα πράξη αυτού του είδους. ¦ Все още няма акт от този вид.
+gabarits ¦ πρότυπα ¦ образци
+Tableur : {x} ¦ Υπολογιστικό φύλλο: {x} ¦ Таблица: {x}
+Pas encore relié : le relier dans l’Atelier ¦ Δεν έχει συνδεθεί ακόμα: σύνδεσέ το στο εργαστήριο ¦ Още не е свързано: свържи го в работилницата
+Numéros de ligne ¦ Αριθμοί γραμμών ¦ Номера на редовете
+Transcription faite avec LCNDA (Le Carnet numérique des ancêtres). ¦ Μεταγραφή με το LCNDA (Le Carnet numérique des ancêtres). ¦ Препис, направен с LCNDA (Le Carnet numérique des ancêtres).
+XML des chercheurs et des archives (lignes, zones, personnes) ¦ XML ερευνητών και αρχείων (γραμμές, ζώνες, πρόσωπα) ¦ XML на изследователи и архиви (редове, зони, хора)

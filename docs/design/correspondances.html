@@ -1,0 +1,245 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Correspondances, cartes postales et sortes</title>
+<style>
+:root{--bg:#f4f5f7;--paper:#fff;--ink:#111;--muted:#555;--soft:#777;--line:#eceef2;--line2:#c9ced8;--blue:#055dff;--blue-bg:#eef4ff;--blue-ink:#1a3d8f;--green:#1a7f37;--green-bg:#eaf6ee;--yel:#d4a800;--yel-bg:#fff8d6;--yel-ink:#7a5d00;--red:#c62828;--red-bg:#fdecec;--vio:#6929c4;--vio-bg:#f3ecff;--grey-bg:#f1f2f4;--shadow:rgba(5,93,255,.25);--bar:#141414;--bar-ink:#fff;--sheet:#fffdf8;--parch:#e8d6ae;--parch-ink:#4a3218;--stage:#3a3d44}
+@media (prefers-color-scheme:dark){:root{--bg:#121417;--paper:#1c1f24;--ink:#eceef2;--muted:#b4b9c3;--soft:#9aa0aa;--line:#2c3038;--line2:#454b55;--blue:#5b93ff;--blue-bg:#18233a;--blue-ink:#a9c4ff;--green:#4cc070;--green-bg:#15281c;--yel:#e0b93a;--yel-bg:#2c2612;--yel-ink:#f0d276;--red:#ff6b6b;--red-bg:#331a1a;--vio:#b48cff;--vio-bg:#261d38;--grey-bg:#262a31;--shadow:rgba(91,147,255,.22);--bar:#000;--bar-ink:#eceef2;--sheet:#23262b;--parch:#c9b48a;--parch-ink:#2e1f0e;--stage:#0d0f12}}
+*{box-sizing:border-box}
+body{background:var(--bg);padding:28px;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);margin:0;line-height:1.45}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:19px;margin:40px 0 6px}
+.part{font:800 12px system-ui;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin:46px 0 0;border-top:3px solid var(--ink);padding-top:10px}
+.sub{color:var(--muted);margin:0 0 18px;font-size:14px;max-width:1000px}
+.wrap{max-width:1240px;margin:0 auto}
+.simple{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:12px 16px;font-size:14px;max-width:1000px}
+.simple p{margin:0 0 8px}.simple p:last-child{margin:0}
+.toc{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+.toc a{background:var(--paper);border:2px solid var(--ink);padding:8px 14px;box-shadow:4px 4px 0 var(--shadow);color:var(--ink);text-decoration:none;font-size:13px}
+.toc a b{display:block;font-size:16px}
+.badge{font:700 10.5px/1.2 system-ui;border:1.5px solid var(--ink);padding:3px 6px;letter-spacing:.03em;display:inline-block;text-transform:uppercase;white-space:nowrap;vertical-align:middle}
+.badge.new{border-color:var(--blue);color:#fff;background:var(--blue)}
+.badge.have{border-color:#8a8f99;color:var(--muted);background:var(--grey-bg)}
+.badge.ok{border-color:var(--green);color:var(--green);background:var(--green-bg)}.badge.warn{border-color:var(--yel);color:var(--yel-ink);background:var(--yel-bg)}.badge.red{border-color:var(--red);color:var(--red);background:var(--red-bg)}.badge.blue{border-color:var(--blue);color:var(--blue)}.badge.vio{border-color:var(--vio);color:var(--vio);background:var(--vio-bg)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{font:700 11px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);text-align:left;padding:8px;border-bottom:2px solid var(--ink)}
+td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+code{font:11.5px ui-monospace,Menlo,Consolas,monospace;color:var(--muted);word-break:break-word}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 26px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.wide{grid-column:1 / -1}
+.grid>*,.grid3>*{min-width:0}
+.case{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:16px 18px 18px;min-width:0}
+.case .head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.case .tag{font:700 11px/1 system-ui;letter-spacing:.1em;color:var(--blue);text-transform:uppercase}
+.num-b{display:inline-block;background:var(--blue);color:#fff;font:800 12px system-ui;padding:3px 7px;margin-right:6px;letter-spacing:0}
+.case h3{margin:8px 0 10px;font-size:17px}
+.note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+.msg{border-left:4px solid var(--blue);background:var(--blue-bg);padding:9px 12px;font-size:13px;margin:12px 0}
+.msg.warn{border-color:var(--yel);background:var(--yel-bg)}.msg.ok{border-color:var(--green);background:var(--green-bg)}.msg.red{border-color:var(--red);background:var(--red-bg)}
+.meta{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 0;font-size:12px}
+.meta span{border:1.5px solid var(--line2);padding:2px 7px;background:var(--grey-bg)}
+.meta .p1{border-color:var(--red);color:var(--red);background:var(--red-bg);font-weight:800}
+.meta .p2{border-color:var(--yel);color:var(--yel-ink);background:var(--yel-bg);font-weight:800}
+.meta .p3{border-color:#8a8f99;color:var(--muted);font-weight:800}
+.why{font-size:13px;margin:0 0 10px}
+.btn{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--ink);background:var(--paper);font:700 13px system-ui;padding:7px 11px;box-shadow:3px 3px 0 var(--shadow);color:var(--ink);white-space:nowrap}
+.btn.blue{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.small{font-size:12px;padding:4px 8px;box-shadow:none}
+.btn.ghost{border-color:var(--line2);box-shadow:none;color:var(--muted)}
+.row{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.mini{font-size:12px;color:var(--muted)}
+.input{border:1.5px solid var(--line2);padding:4px 8px;font-size:12.5px;background:var(--paper);min-height:28px;display:inline-flex;align-items:center;color:var(--ink)}
+.pill{display:inline-block;font:700 11px/1.2 system-ui;padding:2px 6px;border:1.5px solid var(--line2);background:var(--grey-bg);color:var(--muted);white-space:nowrap}
+.pill.ok{border-color:var(--green);background:var(--green-bg);color:var(--green)}
+.pill.q{border-color:var(--yel);background:var(--yel-bg);color:var(--yel-ink)}
+.pill.blue{border-color:var(--blue);background:var(--blue-bg);color:var(--blue-ink)}
+.seg{display:inline-flex;border:2px solid var(--ink);flex-wrap:wrap;max-width:100%}.seg span{padding:4px 9px;font:700 12px system-ui;border-right:1.5px solid var(--ink);background:var(--paper)}.seg span:last-child{border-right:0}.seg span.on{background:var(--blue);color:#fff}
+.tg{display:inline-flex;align-items:center;gap:7px;font-size:12.5px}.tg i{width:30px;height:17px;border-radius:9px;background:var(--blue);position:relative;flex:none}.tg i:after{content:"";position:absolute;right:2px;top:2px;width:13px;height:13px;border-radius:50%;background:#fff}
+.tg.off i{background:var(--line2)}.tg.off i:after{right:auto;left:2px}
+.scrollx{overflow-x:auto;max-width:100%}
+.cb{width:14px;height:14px;border:2px solid var(--ink);display:inline-block;flex:none;vertical-align:-2px}.cb.on{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--paper)}
+.scrollx>table{min-width:720px}
+/* gabarit */
+.fld{display:grid;grid-template-columns:120px minmax(0,1fr) auto;gap:6px 8px;font-size:12.5px;align-items:center}
+.fld .k{color:var(--muted)}
+.fld .v{border:1.5px solid var(--line2);padding:3px 7px;background:var(--paper);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fld .v.empty{color:var(--soft);font-style:italic;border-style:dashed}
+.fld .v.got{border-color:var(--green);background:var(--green-bg)}
+/* documents liés */
+.doc{border:2px solid var(--ink);background:var(--paper);box-shadow:6px 6px 0 var(--shadow);padding:12px 14px;min-width:0}
+.doc h3{margin:0 0 6px;font-size:16px}
+.blk{border-top:1.5px solid var(--line2);padding-top:8px;margin-top:10px}
+.blk h4{margin:0 0 6px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.lk{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 10px;align-items:center;padding:6px 0;border-bottom:1px dashed var(--line2);font-size:13px}
+.common{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.learn{font-size:13px;margin:4px 0;padding:6px 8px;background:var(--blue-bg);border-left:3px solid var(--blue)}
+.toc{list-style:none;margin:0;padding:0;font-size:13px}
+.toc li{display:flex;gap:8px;align-items:center;padding:4px 0;border-bottom:1px dashed var(--line2)}
+.toc li.sub{padding-left:22px}
+.toc .rng{color:var(--muted);font-variant-numeric:tabular-nums;min-width:86px}
+.strip{display:flex;gap:4px;flex-wrap:wrap;margin:6px 0}
+.strip span{width:26px;height:34px;border:1.5px solid var(--line2);background:var(--grey-bg);font:700 10px system-ui;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px}
+.strip span.c1{background:var(--blue-bg);border-color:var(--blue)}.strip span.c2{background:var(--green-bg);border-color:var(--green)}.strip span.c3{background:var(--yel-bg);border-color:var(--yel)}
+.dq{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:14px 16px;margin:14px 0;max-width:1000px}
+.dq h3{margin:0 0 8px;font-size:16px}
+.opt{border-left:4px solid var(--line2);padding:6px 10px;margin:6px 0;font-size:13px}
+.opt.rec{border-left-color:var(--blue);background:var(--blue-bg)}
+.opt b{display:block}
+@media (max-width:820px){.grid{grid-template-columns:1fr}body{padding:16px}}
+
+/* registres : état des pages */
+.pmap{display:grid;grid-template-columns:repeat(auto-fill,minmax(30px,1fr));gap:3px;margin:8px 0}
+.pmap span{height:38px;border:1.5px solid var(--line2);font:700 10px system-ui;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px;background:var(--grey-bg);color:var(--muted);position:relative}
+.pmap .s-fin{background:var(--green-bg);border-color:var(--green);color:var(--green)}
+.pmap .s-relue{background:#e3eeff;border-color:var(--blue);color:var(--blue-ink)}
+.pmap .s-cours{background:var(--yel-bg);border-color:var(--yel);color:var(--yel-ink)}
+.pmap .s-todo{background:var(--paper)}
+.pmap .s-abs{background:repeating-linear-gradient(135deg,var(--red-bg) 0 4px,var(--paper) 4px 8px);border-color:var(--red);border-style:dashed;color:var(--red)}
+.pmap .s-pasligne{background:repeating-linear-gradient(135deg,var(--vio-bg) 0 4px,var(--paper) 4px 8px);border-color:var(--vio);border-style:dashed;color:var(--vio)}
+.pmap .s-blank{background:var(--paper);border-style:dotted;color:var(--soft)}
+.pmap .s-cur{outline:3px solid var(--ink);outline-offset:1px}
+.leg{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;margin:6px 0}
+.leg i{display:inline-block;width:14px;height:14px;border:1.5px solid var(--line2);vertical-align:-3px;margin-right:4px}
+.stack{display:flex;height:16px;border:2px solid var(--ink);margin:6px 0;overflow:hidden}
+.stack b{display:block;height:100%}
+.stack .a{background:var(--green)}.stack .b{background:var(--blue)}.stack .c{background:var(--yel)}.stack .d{background:var(--line2)}.stack .e{background:repeating-linear-gradient(135deg,var(--red) 0 3px,var(--red-bg) 3px 6px)}
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:8px 0}
+.kpi div{border:2px solid var(--ink);background:var(--paper);padding:8px 10px}
+.kpi b{display:block;font-size:22px;line-height:1.1}.kpi small{color:var(--muted);font-size:12px}
+.todo{list-style:none;margin:0;padding:0;font-size:13px}
+.todo li{display:flex;gap:8px;align-items:baseline;padding:5px 0;border-bottom:1px dashed var(--line2)}
+.todo li b{min-width:28px;text-align:right}
+.tree{list-style:none;margin:0;padding:0;font-size:13px}
+.tree li{padding:0}
+.tree .ln{display:grid;grid-template-columns:20px minmax(0,1fr) auto;gap:6px;align-items:center;padding:5px 0;border-bottom:1px dashed var(--line2)}
+.tree ul{list-style:none;margin:0;padding:0 0 0 22px}
+.tree .tw{font:700 12px system-ui;color:var(--muted);text-align:center;border:1.5px solid var(--line2);height:20px;line-height:17px}
+.tree .rng{color:var(--muted);font-variant-numeric:tabular-nums;font-size:12px;margin-right:6px}
+.tree .el{color:var(--muted);font-style:italic}
+.minibar{display:inline-flex;width:70px;height:8px;border:1.5px solid var(--ink);vertical-align:middle;overflow:hidden}.minibar b{display:block;height:100%}
+.ft td:has(.minibar){white-space:nowrap}.ft td.num{font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.ft tr.grp td{background:var(--grey-bg);font-weight:800;border-bottom:2px solid var(--ink)}
+.ft tr.fonds td{font-weight:700}
+.idf{display:grid;grid-template-columns:170px minmax(0,1fr);gap:6px 10px;font-size:13px}
+.idf .k{color:var(--muted)}
+.hist{display:flex;align-items:flex-end;gap:2px;height:70px;border-bottom:2px solid var(--ink);margin:6px 0 2px}
+.hist i{flex:1;background:var(--blue);min-height:2px}.hist i.gap{background:repeating-linear-gradient(135deg,var(--red) 0 3px,transparent 3px 6px);height:100%!important;opacity:.6}
+.hx{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}
+.chk{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 16px;font-size:12.5px}
+@media (max-width:820px){.grid,.grid3{grid-template-columns:minmax(0,1fr)}.idf{grid-template-columns:minmax(0,1fr)}.chk{grid-template-columns:minmax(0,1fr)}body{padding:14px}}
+
+.idea{border:2px solid var(--ink);background:var(--paper);padding:10px 12px;box-shadow:4px 4px 0 var(--shadow);margin:0 0 10px}
+.idea h4{margin:0 0 4px;font-size:15px}.idea p{margin:4px 0;font-size:13.5px}
+.ideas{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px}
+.pr{font:700 10.5px system-ui;padding:2px 6px;border:1.5px solid;margin-left:6px;vertical-align:2px;white-space:nowrap}
+.pr.a{color:var(--green);background:var(--green-bg)}.pr.b{color:var(--blue-ink);background:var(--blue-bg)}.pr.c{color:var(--muted);background:var(--grey-bg)}
+table.t{border-collapse:collapse;width:100%;font-size:13px;background:var(--paper)}table.t td,table.t th{border:1px solid var(--line2);padding:5px 7px;text-align:left;vertical-align:top}table.t th{background:var(--grey-bg)}
+.ask{border:2px solid var(--ink);background:var(--paper);padding:12px;box-shadow:6px 6px 0 var(--shadow);max-width:900px}
+.ask .in{border:2px solid var(--blue);padding:9px 12px;font-size:15px;margin-bottom:10px}
+.sugg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.sugg>div{border:2px solid var(--line2);padding:8px}.sugg>div.on{border-color:var(--blue)}
+.sugg .pv{height:70px;display:flex;align-items:flex-end;gap:3px;margin-bottom:6px;background:var(--grey-bg);padding:6px}.sugg .pv b{flex:1;background:var(--blue)}
+.boxes{display:flex;flex-wrap:wrap;gap:12px}.bx{width:150px;font-size:12px;text-align:center}
+.bx .c{height:74px;display:flex;flex-direction:column;justify-content:center;align-items:center;margin-bottom:4px;padding:4px;color:#111}
+@media (max-width:700px){.sugg{grid-template-columns:1fr}}
+</style></head>
+<body><div class="wrap">
+<h1>✉️ Correspondances, 🏞 cartes postales et 🏷 sortes de documents — maquette</h1>
+<p class="sub">Les lettres, cartes postales, télégrammes qui se répondent, rangés comme un recueil : un « fil » par échange, lu dans l’ordre, avec qui écrit à qui, les réponses, les trous, la carte des envois. Rien n’est codé : coche ce que tu veux, je fais ensuite.</p>
+<div class="toc"><a href="#p1"><b>1</b>Ce qui existe</a><a href="#p2"><b>2</b>Où, dans Documents</a><a href="#p3"><b>3</b>Le fil d’une correspondance</a><a href="#p4"><b>4</b>Les cartes postales</a><a href="#p5"><b>5</b>Relier les réponses</a><a href="#p45"><b>4 bis</b>Les autres sortes</a><a href="#p6"><b>6</b>Réglages et exports</a><a href="#p7"><b>7</b>Ce que tu décides</a></div>
+
+<div class="part" id="p1">Partie 1</div><h2>Ce qui existe déjà (regardé dans le code)</h2>
+<table><thead><tr><th>Quoi</th><th>Où</th><th>Limite</th></tr></thead><tbody>
+<tr><td>Sorte « correspondance » d’un média (lettre, carte postale, télégramme…) et ses correspondants (fiches ou noms libres)</td><td>Fenêtre du média, bloc « Correspondance » de la fiche</td><td>Vu personne par personne, jamais l’échange entier</td></tr>
+<tr><td>« Répond à » : une pièce peut répondre à <b>une</b> autre</td><td>Fenêtre du média</td><td>Une seule réponse, pas de fil, rien dans Documents</td></tr>
+<tr><td>La fiche d’une carte postale : recto/verso, éditeur, n°, date d’envoi, cachet, écrite par / à, adresse, lieu montré, angle de vue</td><td>Listes → 🏞 Cartes postales, calque de la Carte, fiche du lieu</td><td>Pas dans Documents ; pas d’échanges entre cartes</td></tr>
+<tr><td>Documents liés (« va avec », pour une raison) ; pages d’un document (recto/verso)</td><td>Page du document</td><td>Lien simple, sans ordre ni sens (qui → qui)</td></tr>
+<tr><td>Recueils : sommaire, état, résumé, IIIF…</td><td>Listes → Recueils, Documents</td><td>Pensé pour un registre, pas pour un échange</td></tr>
+</tbody></table>
+
+<div class="part" id="p2">Partie 2</div><h2>Où le mettre dans Documents (il y a déjà 4 cases)</h2>
+<div class="grid3">
+<div class="case"><div class="head"><span class="tag"><span class="num-b">A</span>conseillé</span><span class="badge ok">recommandé</span></div><h3>6 façons de ranger, en 3 × 2</h3>
+<div class="seg" style="display:grid;grid-template-columns:repeat(3,1fr)"><span>A → Z</span><span>👤 Personnes</span><span>📚 Recueils</span><span>📁 Dossiers</span><span class="on">✉️ Lettres</span><span>🏷 Sortes</span></div>
+<p class="why">Les mots raccourcis tiennent dans la colonne. « ✉️ Lettres » range par correspondance (fil) ; « 🏷 Sortes » range par sorte de document (cartes postales, photos de famille, faire-part, presse, militaire…, partie 4 bis), chacune avec sa vue. Chaque case se cache (⋯ → Façons de ranger), retenu.</p></div>
+<div class="case"><div class="head"><span class="tag"><span class="num-b">B</span></span></div><h3>« 📚 Recueils » devient « 📚 Ensembles »</h3>
+<div class="seg"><span>A → Z</span><span>👤</span><span class="on">📚 Ensembles</span><span>📁</span></div><div class="row" style="margin-top:8px"><span class="pill blue">Recueils</span><span class="pill">Correspondances</span><span class="pill">Cartes postales</span></div>
+<p class="why">Garde 4 cases ; un petit sélecteur dessous. Moins visible, un clic de plus.</p></div>
+<div class="case"><div class="head"><span class="tag"><span class="num-b">C</span></span></div><h3>Dans « ⋯ » seulement</h3><div class="seg"><span>A → Z</span><span>👤</span><span>📚</span><span>📁</span></div> <span class="btn small">⋯</span>
+<p class="why">Rien ne change à l’écran, mais on ne le trouve pas. Déconseillé.</p></div>
+</div>
+<div class="case" style="margin-top:20px"><h3>La colonne en mode « ✉️ Lettres » (A)</h3>
+<div class="row"><b>▾ ✉️ Pierre MAZAUD ⇄ Marie LACOMBE</b><span class="mini">1914-1918 · 38 pièces</span></div>
+<div style="margin:6px 0 6px 18px" class="mini">↗ 1914-08-03 · Lettre de Pierre · <span class="pill ok">transcrite</span><br>↙ 1914-08-19 · Carte de Marie · répond à la précédente<br>↗ 1914-09-02 · Lettre de Pierre · <span class="pill q">à transcrire</span><br>⚠ <i>rien entre le 2 sept. et le 14 déc. (3 mois)</i></div>
+<div class="row"><b>▸ ✉️ Jean DURAND → famille</b><span class="mini">1870 · 4 pièces</span></div><div class="row"><b>▸ Sans correspondance</b><span class="mini">6</span></div>
+<p class="note">En bas, comme pour les recueils : « ✉️ Voir toutes les correspondances » (en vignettes à droite).</p></div>
+
+<div class="part" id="p3">Partie 3</div><h2>Le fil d’une correspondance (à la manière d’un recueil)</h2>
+<p class="sub">Une « correspondance » = un échange entre deux personnes (ou plus), avec ses pièces dans l’ordre. Elle a sa page, ses onglets, comme un recueil.</p>
+<div class="case"><div class="head"><span class="tag">✉️ Correspondance</span><div class="row"><span class="btn small">✎ Modifier</span><span class="btn small">📖 Lire comme un livre</span><span class="btn small">⤓ Exporter</span></div></div>
+<h3>Pierre MAZAUD ⇄ Marie LACOMBE · 1914-1918</h3>
+<div class="seg"><span class="on">Le fil</span><span>📖 Lire</span><span>🗺 Carte</span><span>📅 Frise</span><span>👥 Personnes</span><span>🗂 État</span><span>💡 Ce qu’on y trouve</span></div>
+<div class="grid" style="margin-top:12px">
+<div><div style="border-left:4px solid var(--blue);padding:6px 10px;margin:6px 40px 6px 0;background:var(--blue-bg)"><b>Pierre → Marie</b> · 3 août 1914 · Lettre · Tulle<br><span class="mini">« Ma chère Marie, nous partons demain pour… »</span><div class="row"><span class="pill ok">transcrite</span><span class="pill">2 pages</span></div></div>
+<div style="border-left:4px solid #c0392b;padding:6px 10px;margin:6px 0 6px 40px;background:var(--red-bg)"><b>Marie → Pierre</b> · 19 août 1914 · 🏞 Carte postale (recto : Malvialle, l’église)<br><span class="mini">↩ répond à la lettre du 3 août · délai : 16 jours</span></div>
+<div style="border:2px dashed var(--yel);padding:6px 10px;margin:6px 20px;background:var(--yel-bg)" class="mini">⚠ 3 mois sans pièce (2 sept. → 14 déc.) : perdues ? <span class="btn small">Noter une pièce manquante</span></div>
+<div style="border-left:4px solid var(--blue);padding:6px 10px;margin:6px 40px 6px 0;background:var(--blue-bg)"><b>Pierre → Marie</b> · 14 déc. 1914 · Lettre · secteur postal 112<br><span class="row"><span class="pill q">à transcrire</span><span class="btn small">📜 Atelier</span></span></div></div>
+<div><table><tbody><tr><td>Pièces</td><td><b>38</b> (21 de Pierre, 17 de Marie) · 9 cartes postales</td></tr><tr><td>Période</td><td>3 août 1914 → 11 nov. 1918</td></tr><tr><td>Délai moyen de réponse</td><td>12 jours (le plus long : 41 j)</td></tr><tr><td>Transcrites</td><td>26 / 38 (68 %)</td></tr><tr><td>Trous</td><td>2 (plus de 2 mois)</td></tr><tr><td>Lieux</td><td>Tulle, Verdun, secteur 112, Malvialle</td></tr><tr><td>Personnes citées</td><td>14 (6 reliées à une fiche)</td></tr></tbody></table>
+<p class="note">💡 Comme le résumé d’un recueil : années, lieux, personnes citées (repérées dans les transcriptions), mots qui reviennent.</p></div></div>
+<p class="note"><b>📖 Lire</b> : les pièces à la suite, image à gauche et transcription à droite, comme un livre (flèches ← →). <b>🗺 Carte</b> : d’où part chaque pièce et où elle arrive (traits orientés, couleurs par auteur). <b>📅 Frise</b> : les pièces sur une ligne du temps, avec les événements de la fiche (mobilisation, naissance…). <b>🗂 État</b> : à transcrire, à relire, manquantes.</p></div>
+
+<div class="part" id="p4">Partie 4</div><h2>Les cartes postales</h2>
+<div class="grid">
+<div class="case"><h3>🏞 La collection</h3><div class="row"><span class="seg"><span class="on">Vignettes</span><span>Par éditeur</span><span>Par lieu</span><span>🗺 Carte</span></span></div>
+<div class="row" style="margin-top:8px"><span class="input">Recto ⇄ Verso (survol ou clic)</span><span class="pill">éditeur + n° de série</span><span class="pill">écrite / vierge</span></div>
+<p class="why">Ranger par éditeur et numéro (« ND Phot. 142 »), par lieu montré, et voir les cartes vierges (jamais envoyées) à part. Les séries incomplètes : « il manque le n° 143 ».</p></div>
+<div class="case"><h3>Une carte</h3><p class="why">La fiche d’aujourd’hui (recto/verso, cachet, timbre, écrite par / à) + : la <b>correspondance</b> dont elle fait partie, « ↩ répond à », la <b>date du cachet</b> lue sur l’image (proposée), et <b>« Hier / aujourd’hui »</b> : la même vue sur une carte actuelle (angle de vue déjà noté).</p></div>
+</div>
+
+
+<div class="part" id="p45">Partie 4 bis</div><h2>Les autres sortes de documents à mettre à part</h2>
+<p class="sub">Plutôt qu’une case par sorte (il y en aurait trop), une seule case <b>« 🏷 Sortes »</b> : la colonne range les documents par sorte, et chaque sorte importante a <b>sa vue à droite</b>, pensée pour elle. Les sortes sans vue spéciale gardent les vignettes. On choisit les sortes montrées et leur ordre (glisser), on peut en créer.</p>
+<div class="scrollx"><table><thead><tr><th>Sorte</th><th>Ce qu’elle a de spécial (sa vue à droite)</th><th>Déjà dans l’app</th><th></th></tr></thead><tbody>
+<tr><td>🏞 Cartes postales</td><td>Recto ⇄ verso, éditeurs et séries (numéros manquants), lieu montré, hier / aujourd’hui (partie 4)</td><td>fiche de la carte</td><td><span class="badge ok">conseillé</span></td></tr>
+<tr><td>✉️ Lettres, télégrammes</td><td>Le fil de la correspondance (partie 3)</td><td>sorte « correspondance »</td><td><span class="badge ok">conseillé</span></td></tr>
+<tr><td>📷 Photos de famille</td><td>Albums par décennie, visages reconnus (personnes sur la photo), « qui est-ce ? » pour les inconnus, photos de groupe (mariage, communion)</td><td>visages, doublons</td><td><span class="badge ok">conseillé</span></td></tr>
+<tr><td>📜 Actes d’état civil et paroissiaux</td><td>Par sorte (naissance, mariage, décès…), par lieu et année, transcrits ou non, reliés aux événements des fiches</td><td>sortes d’actes, Atelier</td><td><span class="badge ok">conseillé</span></td></tr>
+<tr><td>🕊 Faire-part, souvenirs mortuaires, images pieuses</td><td>Une frise des naissances, mariages et décès annoncés ; la personne et la date lues sur le document</td><td>—</td><td><span class="badge ok">conseillé</span></td></tr>
+<tr><td>🎖 Papiers militaires (registres matricules, livrets, citations, médailles)</td><td>Par soldat : ses pièces dans l’ordre, son parcours sur la carte (régiments, blessures)</td><td>bloc militaire, fiches matricules</td><td><span class="badge ok">conseillé</span></td></tr>
+<tr><td>📰 Presse (coupures de journaux)</td><td>Par journal et date, le titre, le lien vers la source en ligne (Gallica, Retronews)</td><td>—</td><td><span class="badge blue">utile</span></td></tr>
+<tr><td>🖋 Actes notariés (contrats de mariage, testaments, inventaires, ventes)</td><td>Par notaire et étude, par sorte d’acte, la cote, les parties (personnes)</td><td>sorte « actes notariés »</td><td><span class="badge blue">utile</span></td></tr>
+<tr><td>🪪 Papiers d’identité et de vie (livrets de famille, passeports, cartes, permis)</td><td>Par personne : sa « vie en papiers », une frise</td><td>—</td><td><span class="badge blue">utile</span></td></tr>
+<tr><td>🎓 École et travail (diplômes, bulletins, certificats, contrats, fiches de paie)</td><td>Par personne et année ; les métiers repérés</td><td>métiers</td><td><span class="badge blue">utile</span></td></tr>
+<tr><td>🗺 Cartes, plans, cadastre</td><td>Sur la carte : posés à leur place (calage), comparés avec aujourd’hui</td><td>cadastre, cartes anciennes</td><td><span class="badge blue">utile</span></td></tr>
+<tr><td>🏠 Biens et maison (actes de propriété, plans, factures)</td><td>Par maison : reliés au plan de la maison</td><td>plan de la maison</td><td><span class="badge">plus tard</span></td></tr>
+<tr><td>🎙 Sons et vidéos (témoignages, films de famille)</td><td>Le lecteur, la transcription minutée, les personnes qui parlent</td><td>montage, témoignages</td><td><span class="badge">plus tard</span></td></tr>
+<tr><td>🍽 Souvenirs (menus de noce, invitations, recettes, dessins)</td><td>Par fête et par personne</td><td>recettes</td><td><span class="badge">plus tard</span></td></tr>
+<tr><td>📦 Autres</td><td>Les vignettes, comme aujourd’hui ; « ＋ Nouvelle sorte » (nom, émoji, couleur)</td><td>—</td><td></td></tr>
+</tbody></table></div>
+<div class="case" style="margin-top:18px"><h3>La colonne en mode « 🏷 Sortes »</h3>
+<div class="mini">▾ 📷 Photos de famille <b>312</b> · ▸ 📜 Actes <b>204</b> · ▸ 🏞 Cartes postales <b>41</b> · ▸ ✉️ Lettres <b>38</b> · ▸ 🎖 Militaire <b>22</b> · ▸ 🕊 Faire-part <b>17</b> · ▸ 📰 Presse <b>9</b> · ▸ 📦 Autres <b>164</b></div>
+<p class="why">La sorte vient de ce qui est déjà noté (sorte du média, sorte d’acte, correspondance, fiche de carte postale) ; sinon elle est <b>devinée</b> d’après le titre et proposée (« Faire-part de décès de… » → 🕊), jamais imposée : « ✓ C’est ça » ou « Changer ». Un document peut avoir une seule sorte.</p></div>
+<div class="part" id="p5">Partie 5</div><h2>Relier les réponses</h2>
+<div class="grid3">
+<div class="case"><h3>À la main</h3><p class="why">« ↩ Répond à… » (plusieurs pièces possibles), « ➕ Ajouter à une correspondance », glisser une pièce dans le fil.</p></div>
+<div class="case"><h3>Proposé par l’app</h3><p class="why">Mêmes deux personnes, dates proches, sens inverse → « Cette carte répond-elle à la lettre du 3 août ? » (Oui / Non, jamais tout seul).</p></div>
+<div class="case"><h3>Pièces manquantes</h3><p class="why">« Noter une pièce manquante » : une case vide dans le fil (citée dans une autre lettre, perdue), pour ne pas oublier qu’elle a existé.</p></div>
+</div>
+
+<div class="part" id="p6">Partie 6</div><h2>Réglages et exports</h2>
+<table><tbody>
+<tr><td>Trou signalé à partir de</td><td><span class="input">2 mois</span></td><td class="mini">conseillé</td></tr>
+<tr><td>Couleur de chaque correspondant</td><td><span class="input">auto</span></td><td class="mini">couleurs de la palette des stats</td></tr>
+<tr><td>Ordre du fil</td><td><span class="seg"><span class="on">Date d’envoi</span><span>Date d’arrivée</span><span>Ordre à la main</span></span></td><td></td></tr>
+<tr><td>Montrer les pièces manquantes</td><td><span class="tg"><i></i></span></td><td></td></tr>
+<tr><td>Exports</td><td colspan="2">📕 Livre de la correspondance (PDF : images + transcriptions + notes), 📝 traitement de texte, 📊 tableur (une ligne par pièce), 🎞 film dans le Studio (la carte des envois qui s’anime)</td></tr>
+</tbody></table>
+
+<div class="part" id="p7">Partie 7</div><h2>Ce que tu décides</h2>
+<table><tbody>
+<tr><td><span class="cb on"></span></td><td>Où : <b>A</b> (6 façons de ranger, 3 × 2 : A → Z, Personnes, Recueils, Dossiers, Lettres, Sortes) — sinon dis B ou C</td></tr>
+<tr><td><span class="cb on"></span></td><td>Le fil d’une correspondance, avec ses onglets (fil, lire, carte, frise, personnes, état, résumé)</td></tr>
+<tr><td><span class="cb on"></span></td><td>Les cartes postales dans Documents (collection, éditeurs et séries, hier / aujourd’hui)</td></tr>
+<tr><td><span class="cb on"></span></td><td>« 🏷 Sortes » : les sortes marquées « conseillé » avec leur vue (photos de famille, actes, faire-part, militaire), les « utiles » ensuite</td></tr>
+<tr><td><span class="cb on"></span></td><td>« Répond à » multiple, propositions de l’app, pièces manquantes</td></tr>
+<tr><td><span class="cb on"></span></td><td>Exports : livre PDF, traitement de texte, tableur, film</td></tr>
+</tbody></table>
+<div class="msg">Tout est coché (conseillé). Réponds « vas-y », ou dis ce qu’il faut changer.</div>
+</div></body></html>

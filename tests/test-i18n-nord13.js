@@ -307,7 +307,7 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding: 'utf8', e
             assert.equal(r.lang, 'bg'); assert.ok(r.nav.includes('Табло') && r.nav.includes('Настройки'), r.nav); assert.deepEqual(r.plural, ['1 човек', '22 души']);
             assert.equal(Number(r.cur), 2); assert.ok(/Marie/.test(r.page), r.page.slice(0, 200));
             await page.evaluate(() => { window.__pk = window.LCNDA_PICKER.openPicker({kind: 'person'}); });
-            await page.waitForSelector('.pk-dialog .pk-input'); await page.fill('.pk-dialog .pk-input', 'Mar'); await page.waitForTimeout(1200);
+            await page.waitForSelector('.pk-dialog .pk-input'); await page.fill('.pk-dialog .pk-input', 'Mar'); await page.waitForSelector('.pk-dialog .pk-item', {timeout: 15000}); // la liste trouvée (recherche après 180 ms + serveur)
             const list = await page.locator('.pk-dialog').innerText();
             assert.ok(/Marie/.test(list) && /DURAND/i.test(list), list.slice(0, 400));
             assert.ok(!/fiches trouvées|Aucune fiche/.test(list), `textes du menu de choix traduits : ${list.slice(0, 300)}`);

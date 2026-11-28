@@ -77,7 +77,8 @@ function delete_retouch_project(PDO $pdo, array $data): array
     $s = $pdo->prepare('SELECT name FROM retouch_projects WHERE id=?'); $s->execute([$id]);
     $name = $s->fetchColumn();
     if ($name === false) { throw new RuntimeException('Projet introuvable.'); }
+    $undo = project_undo_keep($pdo, 'retouch_projects', $id); // ↶ Annuler (restore_project)
     $pdo->prepare('DELETE FROM retouch_projects WHERE id=?')->execute([$id]);
     log_change($pdo, 'meta', 0, 'delete', 'Projet de retouche supprimé : ' . $name);
-    return ['ok' => true];
+    return ['ok' => true, 'undo' => $undo];
 }

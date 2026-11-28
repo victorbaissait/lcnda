@@ -981,6 +981,8 @@ function save_help_request(PDO $pdo, array $data): array
 
 function delete_help_request(PDO $pdo, array $data): array
 {
-    $pdo->prepare('DELETE FROM help_requests WHERE id=?')->execute([safe_int($data['id'] ?? 0)]);
+    $id = safe_int($data['id'] ?? 0);
+    undo_keep($pdo, 'help_request', $id, 'Demande d’entraide supprimée', [['help_requests', 'id=?', [$id]]]); // ↶ Annuler (H7) ; ses étiquettes restent rattachées au même numéro
+    $pdo->prepare('DELETE FROM help_requests WHERE id=?')->execute([$id]);
     return ['ok' => true];
 }

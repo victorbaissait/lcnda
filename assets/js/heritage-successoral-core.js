@@ -231,7 +231,7 @@
         const sibTrees = sibs.map(s => souche(C, T, s, 2, 6, new Set([dead, ...parents])));
         const sibsCome = sibTrees.filter(s => s.comes);
         const parentRow = (p, share, art) => shares.push({id: p, share, role: 'parent', via: 'chef', art});
-        if (spouse && (pAlive.length || true)) {
+        if (spouse) { // le conjoint passe toujours avant les frères et sœurs ; avec ou sans père et mère, voir ci-dessous
             // sans descendant : le conjoint passe avant les frères et sœurs (art. 757-1, 757-2)
             if (pAlive.length === 2) { res.order = 2; res.spouse = {id: spouse.id, share: F(1, 2), art: '757-1'}; pAlive.forEach(p => parentRow(p, F(1, 4), '757-1')); notes.push(t('Sans descendant, avec le père et la mère : la moitié au conjoint, un quart à chaque parent (art. 757-1).')); }
             else if (pAlive.length === 1) { res.order = 2; res.spouse = {id: spouse.id, share: F(3, 4), art: '757-1'}; parentRow(pAlive[0], F(1, 4), '757-1'); notes.push(t('Sans descendant, avec un seul parent : trois quarts au conjoint, un quart au parent (art. 757-1).')); }
@@ -312,7 +312,7 @@
         return {ids: [], deg: 0};
     }
     /** ascendants de root (root compris) : id → génération au-dessus du défunt */
-    function ascendantsOf(C, root, max = 6) {
+    function ascendantsOf(C, root, max = 12) { // les ascendants héritent à tout degré (art. 746) : on regarde jusqu'à 12 générations
         const out = new Map([[root, 1]]); let level = [root];
         for (let g = 2; g <= max && level.length; g++) {
             const next = [];
@@ -661,7 +661,7 @@
     function lawCited(text) { const out = new Set(); String(text || '').replace(ART_RE, (m, pre, list) => { (list.match(/\d{2,3}(?:-\d(?!\d))?/g) || []).forEach(x => out.add(x)); return m; }); return [...out].filter(Boolean); }
     /** le texte (déjà échappé) avec chaque numéro d'article en lien vers Légifrance (s'ouvre dans le navigateur) */
     function lawLinks(html) {
-        const a = n => `<a class="succ-law" href="${lawUrl(n)}" target="_blank" rel="noopener noreferrer" title="Légifrance">${n}</a>`;
+        const a = n => `<a class="succ-law" href="${lawUrl(n)}" target="_blank" rel="noopener noreferrer" title="Légifrance">↗ ${n}</a>`;
         return String(html || '').replace(ART_RE, (m, pre, list) => pre + list.replace(/\d{2,3}(?:-\d(?!\d))?/g, n => (LAW[n] ? a(n) : n)));
     }
 
@@ -682,7 +682,7 @@
     const escH = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
     function lawJournalHtml(text) {
         const s = String(text ?? ''), m = s.match(/^([\s\S]*») — (\S+)$/), u = m ? officialLink(m[2]) : '';
-        return u ? `${escH(m[1])} — <a class="succ-law" href="${escH(u)}" target="_blank" rel="noopener noreferrer">${escH(u)}</a>` : escH(s);
+        return u ? `${escH(m[1])} — <a class="succ-law" href="${escH(u)}" target="_blank" rel="noopener noreferrer" title="${escH(u)}">↗ ${({'www.legifrance.gouv.fr': 'Légifrance', 'eur-lex.europa.eu': 'EUR-Lex'})[u.match(LAW_LINK_RE)[1]] || 'Service-public.fr'}</a>` : escH(s);
     }
 
     /* ═════ ❔ Absents et disparus : le bon chemin ═════ */

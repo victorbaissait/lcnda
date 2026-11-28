@@ -1,0 +1,36 @@
+fr ¦ vi ¦ id
+# 🔤 La langue de chaque page, 📇 tables et index (heritage-recueil-etat.js, heritage-recueil-index.js)
+dont {l} : p. {x} ¦ trong đó {l}: tr. {x} ¦ di antaranya {l}: hlm. {x}
+Sorte de page ¦ Loại trang ¦ Jenis halaman
+Langue : ¦ Ngôn ngữ: ¦ Bahasa:
+Langue de ces pages… ¦ Ngôn ngữ của các trang này… ¦ Bahasa halaman-halaman ini…
+Sorte : {x} ¦ Loại: {x} ¦ Jenis: {x}
+Langue de {n} pages ¦ Ngôn ngữ của {n} trang ¦ Bahasa {n} halaman
+Langue de la page ¦ Ngôn ngữ của trang ¦ Bahasa halaman
+Langue (vide : comme le recueil) ¦ Ngôn ngữ (để trống: như tuyển tập) ¦ Bahasa (kosong: sama dengan kumpulan)
+ex. Latin ¦ vd. Tiếng Latinh ¦ mis. Bahasa Latin
+Langue : {l} ¦ Ngôn ngữ: {l} ¦ Bahasa: {l}
+Langue : comme le recueil ¦ Ngôn ngữ: như tuyển tập ¦ Bahasa: sama dengan kumpulan
+comme le recueil : {l} ¦ như tuyển tập: {l} ¦ sama dengan kumpulan: {l}
+pas dite ¦ chưa nói ¦ belum disebut
+Le texte de cette page semble en latin. ¦ Văn bản của trang này có vẻ là tiếng Latinh. ¦ Teks halaman ini tampaknya berbahasa Latin.
+Noter « Latin » ¦ Ghi “Tiếng Latinh” ¦ Catat “Bahasa Latin”
+Tables et index ¦ Bảng tra và chỉ mục ¦ Daftar dan indeks
+Une table décennale, un index en fin de registre ? Marque la page « 📇 Table ou index » (onglet 🗂 État ou sur la page), puis fais son « 📊 Tableau de la page » : une ligne par entrée, une colonne pour le renvoi (f° 12, p. 3). Elles arrivent ici, avec un lien vers chaque page annoncée. ¦ Một bảng tra mười năm, một chỉ mục ở cuối sổ? Đánh dấu trang là “📇 Bảng tra hoặc chỉ mục” (thẻ 🗂 Tình trạng hoặc trên trang), rồi làm “📊 Bảng của trang” cho nó: mỗi mục một dòng, một cột cho chỗ dẫn (f° 12, tr. 3). Các mục sẽ hiện ở đây, kèm liên kết tới từng trang được nêu. ¦ Daftar sepuluh tahunan, indeks di akhir register? Tandai halaman sebagai “📇 Daftar atau indeks” (tab 🗂 Status atau di halaman), lalu buat “📊 Tabel halaman”-nya: satu baris per entri, satu kolom untuk rujukan (f° 12, hlm. 3). Entri-entrinya muncul di sini, dengan tautan ke setiap halaman yang dirujuk.
+{r} : page absente ¦ {r}: trang vắng mặt ¦ {r}: halaman tidak ada
+pas de page « {r} » ¦ không có trang “{r}” ¦ tidak ada halaman “{r}”
+sans renvoi ¦ không có chỗ dẫn ¦ tanpa rujukan
+{a} renvois trouvés · {b} vers des pages absentes · {c} introuvables ¦ {a} chỗ dẫn tìm thấy · {b} tới trang vắng mặt · {c} không tìm thấy ¦ {a} rujukan ditemukan · {b} ke halaman yang tidak ada · {c} tidak ditemukan
+« {p} » est une table, mais son tableau est vide : ouvre la page → « 📊 Tableau de la page » (une ligne par entrée, une colonne pour le renvoi). ¦ “{p}” là một bảng tra, nhưng bảng của nó còn trống: mở trang → “📊 Bảng của trang” (mỗi mục một dòng, một cột cho chỗ dẫn). ¦ “{p}” adalah daftar, tetapi tabelnya kosong: buka halamannya → “📊 Tabel halaman” (satu baris per entri, satu kolom untuk rujukan).
+Ouvrir la page ¦ Mở trang ¦ Buka halaman
+Chercher dans les tables… ¦ Tìm trong bảng tra… ¦ Cari di daftar…
+Chercher dans les tables ¦ Tìm trong bảng tra ¦ Cari di daftar
+Toutes les entrées ¦ Tất cả các mục ¦ Semua entri
+Renvois trouvés ¦ Chỗ dẫn tìm thấy ¦ Rujukan ditemukan
+Vers des pages absentes ¦ Tới trang vắng mặt ¦ Ke halaman yang tidak ada
+Introuvables ¦ Không tìm thấy ¦ Tidak ditemukan
+dans {p} ¦ trong {p} ¦ di {p}
+… et {n} autres : affine la recherche. ¦ … và {n} mục khác: thu hẹp tìm kiếm. ¦ … dan {n} lainnya: persempit pencarian.
+Page ordinaire ¦ Trang thường ¦ Halaman biasa
+📇 Table ou index ¦ 📇 Bảng tra hoặc chỉ mục ¦ 📇 Daftar atau indeks
+Page de garde ¦ Trang lót ¦ Halaman pelindung

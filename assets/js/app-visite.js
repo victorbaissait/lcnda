@@ -17,6 +17,9 @@
  *   start({force, at})  lance la visite tout de suite (même déjà vue) ; rend false si impossible ici
  *   offer()             au premier lancement : propose la visite (petite bulle « ▶ Commencer · Plus tard ·
  *                       Ne plus proposer ») seulement si elle n'a jamais été vue ni refusée sur cet appareil
+ *   guide({steps, hint, doIt, doLabel}) 👣 Montre-moi (app-je-veux-ui.js) : la même bulle et le même halo, sur d'autres étapes
+ *                       ({id, icon, title, text, go, targets: [sélecteur | fonction → élément]}) ; « ▶ Fais-le pour moi » (doIt) ;
+ *                       possible aussi en consultation (on regarde, on apprend) ; « déjà vue » n'est pas touché
  * Relancer : Réglages → FAQ / tuto → « ▶ Relancer la visite guidée », recherche rapide (« visite »),
  * ou tout bouton [data-tour-start].
  */
@@ -34,7 +37,7 @@
     const lsGet = () => { try { return JSON.parse(localStorage.getItem(KEY) || 'null') || {}; } catch (_) { return {}; } };
     const lsSet = v => { try { localStorage.setItem(KEY, JSON.stringify({...lsGet(), ...v})); } catch (_) {} };
 
-    const blocked = () => document.documentElement.classList.contains('ms-open') || document.body.classList.contains('is-kiosk')
+    const blocked = (guide = !!T?.guide) => document.documentElement.classList.contains('ms-open') || (!guide && document.body.classList.contains('is-kiosk'))
         || !!document.querySelector('#app.is-not-ready') || !!document.querySelector('.ms-root:not([hidden])');
     const calm = () => document.documentElement.classList.contains('a11y-calm') || !!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     const dialogOpen = () => !!document.querySelector('dialog[open]');
@@ -84,6 +87,7 @@
             go: null, targets: ['.main-nav .nav-item[data-module="maintenance"]']},
     ];
 
+    const steps = () => T?.steps || STEPS; // 👣 Montre-moi : ses étapes à lui
     const visible = el => {
         if (!el || !el.isConnected || el.closest('[hidden]')) return false;
         const r = el.getBoundingClientRect(); if (r.width < 2 || r.height < 2) return false;
@@ -92,7 +96,7 @@
     };
     function findTarget(step) {
         for (const sel of step.targets) {
-            let list = []; try { list = [...document.querySelectorAll(sel)]; } catch (_) { continue; }
+            let list = []; try { list = typeof sel === 'function' ? [sel()].filter(Boolean) : [...document.querySelectorAll(sel)]; } catch (_) { continue; }
             for (const el of list) {
                 if (step.reveal && !visible(el)) revealIn(el);
                 if (visible(el) && !el.disabled) return el;
@@ -105,6 +109,7 @@
     let T = null; // l'état de la visite en cours
     const ACTIONS = {
         tour: '<button type="button" class="vg-skip" data-vg="skip">Passer la visite</button><span class="vg-spacer"></span><button type="button" class="button secondary small" data-vg="prev">← Précédent</button><button type="button" class="button small" data-vg="next">Suivant →</button>',
+        guide: '<button type="button" class="vg-skip" data-vg="skip">Fermer</button><span class="vg-spacer"></span><button type="button" class="button secondary small" data-vg="prev">← Précédent</button><button type="button" class="button small" data-vg="next">Suivant →</button><button type="button" class="link-button vg-doit" data-vg="doit"></button>',
         offer: '<button type="button" class="vg-skip" data-vg="never">Ne plus proposer</button><span class="vg-spacer"></span><button type="button" class="button secondary small" data-vg="later">Plus tard</button><button type="button" class="button small" data-vg="go">▶ Commencer</button>',
     };
     const setActions = kind => { const a = T.root.querySelector('.vg-actions'); if (a.dataset.kind !== kind) { a.innerHTML = ACTIONS[kind]; a.dataset.kind = kind; } };
@@ -118,14 +123,14 @@
                 <div class="vg-head"><span class="vg-ico" aria-hidden="true"></span><h2 id="vg-title" class="vg-title"></h2><span class="vg-count"></span></div>
                 <p id="vg-text" class="vg-text"></p>
                 <p class="vg-hint ui-hint">Tu peux cliquer le bouton entouré pour le faire pour de vrai, ou juste avancer.</p>
-                <div class="vg-dots" aria-hidden="true">${STEPS.map(() => '<i></i>').join('')}</div>
+                <div class="vg-dots" aria-hidden="true">${steps().map(() => '<i></i>').join('')}</div>
                 <div class="vg-actions" data-kind="tour">${ACTIONS.tour}</div>
             </div>
             <div class="vg-live" aria-live="polite" aria-atomic="true"></div>`;
         document.body.appendChild(root);
         root.addEventListener('click', e => {
             const b = e.target.closest('[data-vg]');
-            if (b) { e.preventDefault(); const a = b.dataset.vg; if (a === 'next') next(); else if (a === 'prev') prev(); else if (a === 'skip') stop('skip'); else if (a === 'go') begin(); else if (a === 'later') stop('later'); else if (a === 'never') stop('never'); return; }
+            if (b) { e.preventDefault(); const a = b.dataset.vg; if (a === 'next') next(); else if (a === 'prev') prev(); else if (a === 'skip') stop('skip'); else if (a === 'go') begin(); else if (a === 'later') stop('later'); else if (a === 'never') stop('never'); else if (a === 'doit') { const f = T?.doIt; stop('doit', true); f?.(); } return; }
             if (e.target.closest('[data-vg-dim]')) { e.preventDefault(); nudge(); }
         });
         return root;
@@ -170,33 +175,34 @@
     const schedule = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; place(); }); };
 
     function paint(i) {
-        const s = STEPS[i], root = T.root;
-        root.classList.remove('is-offer'); setActions('tour');
+        const s = steps()[i], root = T.root, STEPS = steps();
+        root.classList.remove('is-offer'); setActions(T.guide ? 'guide' : 'tour');
         root.querySelector('.vg-ico').textContent = s.icon;
         root.querySelector('.vg-title').textContent = s.title;
         root.querySelector('.vg-text').textContent = fr(s.text);
         root.querySelector('.vg-count').textContent = `${i + 1} / ${STEPS.length}`;
         root.querySelector('.vg-count').setAttribute('aria-label', i18n('Étape {i} sur {n}', {i: i + 1, n: STEPS.length}));
         root.querySelector('.vg-hint').hidden = false;
+        if (T.guide) { root.querySelector('.vg-hint').textContent = T.hint || ''; const d = root.querySelector('[data-vg="doit"]'); d.hidden = !T.doIt; d.textContent = T.doLabel || '▶'; }
         root.querySelectorAll('.vg-dots i').forEach((d, k) => { d.className = k < i ? 'is-done' : k === i ? 'is-on' : ''; });
         const prevB = root.querySelector('[data-vg="prev"]'), nextB = root.querySelector('[data-vg="next"]');
         prevB.hidden = false; prevB.disabled = i <= firstAvailable(); nextB.dataset.vg = 'next';
         nextB.textContent = isLast(i) ? '✓ Terminer' : 'Suivant →';
         root.querySelector('[data-vg="skip"]').hidden = false;
-        root.querySelector('.vg-live').textContent = i18n('Visite guidée, étape {i} sur {n} : {what}', {i: i + 1, n: STEPS.length, what: `${i18n(s.title)}. ${i18n(s.text)}`});
+        root.querySelector('.vg-live').textContent = i18n(T.guide ? '👣 Montre-moi, étape {i} sur {n} : {what}' : 'Visite guidée, étape {i} sur {n} : {what}', {i: i + 1, n: STEPS.length, what: `${i18n(s.title)}. ${i18n(s.text)}`});
         root.hidden = false;
         place();
         nextB.focus({preventScroll: true});
     }
     const firstAvailable = () => T?.first ?? 0;
-    const isLast = i => { for (let k = i + 1; k < STEPS.length; k++) if (!T.skipped.has(k)) return false; return true; };
+    const isLast = i => { for (let k = i + 1; k < steps().length; k++) if (!T.skipped.has(k)) return false; return true; };
 
     /* ───── aller à une étape (dir = +1 / −1 : sens où l'on saute une étape impossible) ───── */
     async function show(i, dir = 1) {
         if (!T) return;
         const token = ++T.token;
-        while (i >= 0 && i < STEPS.length) {
-            const s = STEPS[i];
+        while (i >= 0 && i < steps().length) {
+            const s = steps()[i];
             T.root.hidden = true; T.target = null;
             try { if (s.go) await s.go(); } catch (_) {}
             if (!T || token !== T.token) return;
@@ -209,7 +215,7 @@
                 await sleep(calm() ? 30 : 320);
                 if (!T || token !== T.token) return;
                 { const b = el.getBoundingClientRect(); if (b.top < 56 || b.bottom > innerHeight - 24) el.scrollIntoView({block: 'center', inline: 'nearest', behavior: 'auto'}); } // l'écran a bougé pendant le défilement
-                paint(i); lsSet({step: s.id});
+                paint(i); if (!T.guide) lsSet({step: s.id});
                 return;
             }
             T.skipped.add(i); i += dir;
@@ -254,7 +260,7 @@
         document.addEventListener('keydown', onKey, true);
         document.addEventListener('click', onRealClick, true);
         addEventListener('resize', schedule); addEventListener('scroll', schedule, true);
-        watch = setInterval(() => { if (!T) return; if (blocked()) return stop('blocked'); if (!T.paused && !T.root.hidden) { if (T.target && !T.target.isConnected) { const el = findTarget(STEPS[T.i]); if (el) T.target = el; } place(); } }, 400);
+        watch = setInterval(() => { if (!T) return; if (blocked()) return stop('blocked'); if (!T.paused && !T.root.hidden) { if (T.target && !T.target.isConnected) { const el = findTarget(steps()[T.i]); if (el) T.target = el; } place(); } }, 400);
     }
     function detach() {
         document.removeEventListener('keydown', onKey, true);
@@ -263,10 +269,11 @@
         clearInterval(watch);
     }
 
-    function open() {
+    function open(guide = null) {
         if (T) return true;
-        if (blocked()) return false;
-        T = {root: build(), i: null, first: null, token: 0, skipped: new Set(), paused: false, target: null, back: document.activeElement};
+        if (blocked(!!guide)) return false;
+        T = {...(guide || {}), guide: !!guide, i: null, first: null, token: 0, skipped: new Set(), paused: false, target: null, back: document.activeElement};
+        T.root = build();
         T.root.classList.toggle('is-calm', calm());
         attach();
         return true;
@@ -275,7 +282,7 @@
         if (!T && !open()) return false;
         T.root.classList.remove('is-offer');
         lsSet({started: new Date().toISOString()});
-        await show(Math.max(0, Math.min(STEPS.length - 1, Number(at) || 0)), 1);
+        await show(Math.max(0, Math.min(steps().length - 1, Number(at) || 0)), 1);
         return true;
     }
     function start(opts = {}) {
@@ -283,6 +290,15 @@
         if (T) stop('restart', true);
         if (!open()) return false;
         begin(opts.at);
+        return true;
+    }
+    /** 👣 Montre-moi : d'autres étapes, la même bulle (rend false si impossible ici : mode simple, rien à montrer) */
+    function guide(o = {}) {
+        const list = Array.isArray(o.steps) ? o.steps.filter(x => x && Array.isArray(x.targets)) : [];
+        if (!list.length || blocked(true)) return false;
+        if (T) stop('restart', true);
+        if (!open({steps: list, hint: String(o.hint || ''), doIt: typeof o.doIt === 'function' ? o.doIt : null, doLabel: String(o.doLabel || '')})) return false;
+        begin(0);
         return true;
     }
     /* premier lancement : l'invitation (une bulle au milieu), jamais si déjà vue, refusée ou impossible ici */
@@ -308,6 +324,7 @@
         const t = T; T = null; t.token++;
         detach();
         t.root.remove();
+        if (t.guide) { if (!silent) { const toast = A().toast; if (why === 'done') toast?.(i18n('👣 Fini. Tu sais maintenant où c’est.'), 'success'); else if (why === 'empty') toast?.(i18n('👣 Je n’ai pas trouvé les boutons sur cet écran.')); } try { if (t.back && t.back.isConnected && !dialogOpen()) t.back.focus({preventScroll: true}); } catch (_) {} return; }
         if (why === 'done' || why === 'skip' || why === 'empty') lsSet({seen: true, at: new Date().toISOString(), how: why});
         if (why === 'never') lsSet({never: true});
         if (silent) return;
@@ -325,7 +342,7 @@
         if (!start({force: true})) A().toast?.(document.body.classList.contains('is-kiosk') ? 'Pas de visite guidée en mode consultation.' : 'La visite guidée n’est pas possible ici.');
     });
 
-    ext.tour = {start, offer, stop: (why) => stop(why || 'skip'), isActive: () => !!T, seen: () => !!lsGet().seen, forget: () => { try { localStorage.removeItem(KEY); } catch (_) {} }, steps: () => STEPS.map(({id, title, text, targets}) => ({id, title, text, targets: [...targets]})), KEY};
+    ext.tour = {start, offer, guide, stop: (why) => stop(why || 'skip'), isActive: () => !!T, seen: () => !!lsGet().seen, forget: () => { try { localStorage.removeItem(KEY); } catch (_) {} }, steps: () => STEPS.map(({id, title, text, targets}) => ({id, title, text, targets: [...targets]})), KEY};
     const app = window.LCNDA_APP = window.LCNDA_APP || {};
     app.startTour = opts => start(opts || {});
     app.offerTour = () => offer();

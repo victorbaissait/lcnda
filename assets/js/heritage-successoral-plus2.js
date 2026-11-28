@@ -1,5 +1,5 @@
 /* LCNDA — ⚖️ Successoral, quinze outils de plus (maquette validée docs/design/successoral-plus-2.html) : écrans, partie 1.
- * ⚰️ Vérifier les décès (fichier INSEE déjà importé) · 📋 Questionnaire · 📞 Échanges · 📮 Recommandés · 🗺 Carte des héritiers ·
+ * ⚰️ Vérifier les décès (fichier INSEE déjà importé) · 📝 Questionnaire · 📞 Échanges · 📮 Recommandés · 🗺 Carte des héritiers ·
  * 🔗 Double preuve · 🗓 Dates importantes · 👥 Fusion · 🕵️ Recherches par héritier · 📦 Archive chiffrée ; idées : 🔗 dossier lié,
  * 📮 une lettre par service, ⏳ délai par organisme, 📅 date de délivrance, 🙈 écran partagé ; réglages de tous les outils.
  * Partie 2 (heritage-successoral-plus2b.js) : 🧾 factures, 💶 fonds, 📈 activité, 📝 contrat, 🤝 copie pour le notaire.
@@ -215,7 +215,7 @@
     function heirsExtra(body, D, R, ro) {
         const box = body.querySelector('.succ-heirs')?.closest('.succ-box');
         const acts = box?.querySelector('.succ-acts');
-        if (acts && !ro) acts.insertAdjacentHTML('afterbegin', `<button type="button" class="button small" data-sp2-insee>⚰️ ${esc(i18n('Vérifier les décès'))}</button><button type="button" class="button small secondary" data-sp2-map="${D.id}">🗺 ${esc(i18n('Voir sur la carte'))}</button><button type="button" class="button small secondary" data-sp2-q>📋 ${esc(i18n('Questionnaire…'))}</button>`);
+        if (acts && !ro) acts.insertAdjacentHTML('afterbegin', `<button type="button" class="button small" data-sp2-insee>⚰️ ${esc(i18n('Vérifier les décès'))}</button><button type="button" class="button small secondary" data-sp2-map="${D.id}">🗺 ${esc(i18n('Voir sur la carte'))}</button><button type="button" class="button small secondary" data-sp2-q>📝 ${esc(i18n('Questionnaire…'))}</button>`);
         const last = D.p2?.insee_last || {};
         const calls = D.p2?.calls || [];
         body.querySelectorAll('tr[data-succ-pid]').forEach(tr => {
@@ -353,16 +353,16 @@
     /* ═════ ✉️ Héritiers contactés : 📋 questionnaire, 📮 recommandé par courrier ═════ */
     function contactsExtra(body, D, R, ro) {
         const acts = body.querySelector('.succ-box-head .succ-acts');
-        if (acts && !ro) acts.insertAdjacentHTML('beforeend', `<button type="button" class="button secondary" data-sp2-q>📋 ${esc(i18n('Questionnaire…'))}</button><button type="button" class="button secondary" data-sp2-q-import>⤓ ${esc(i18n('Importer des réponses…'))}</button><button type="button" class="button secondary" data-sp2-q-paper>✍ ${esc(i18n('Saisir un questionnaire papier'))}</button>${SP.contractButton ? SP.contractButton() : ''}`);
+        if (acts && !ro) acts.insertAdjacentHTML('beforeend', `<button type="button" class="button secondary" data-sp2-q>📝 ${esc(i18n('Questionnaire…'))}</button><button type="button" class="button secondary" data-sp2-q-import>⤓ ${esc(i18n('Importer des réponses…'))}</button><button type="button" class="button secondary" data-sp2-q-paper>✍ ${esc(i18n('Saisir un questionnaire papier'))}</button>${SP.contractButton ? SP.contractButton() : ''}`);
         body.querySelectorAll('select[data-succ-answer]').forEach(sel => {
             const id = Number(sel.dataset.succAnswer), r = D.p2?.rec?.[id];
             sel.closest('td')?.insertAdjacentHTML('beforeend', ` <span class="sp2-recbadge">${recBadge(r)}</span>${ro ? '' : ` <button type="button" class="icon-button small" data-sp2-rec="${id}" title="${esc(i18n('📮 Recommandé'))}" aria-label="${esc(i18n('📮 Recommandé'))}">📮</button>`}`);
         });
         const q = D.p2?.questionnaires || [];
-        if (q.length) after(body, `<section class="succ-box"><h3>📋 ${esc(i18n('Questionnaires'))}</h3><ul>${q.map(x => `<li>${esc(nameOf(D, x.person_id))} · ${esc(i18n('préparé le {d}', {d: fmtDate(x.made_at.slice(0, 10))}))}${x.answered_at ? ' · ' + badge(i18n('réponses écrites le {d}', {d: fmtDate(x.answered_at.slice(0, 10))}), 'green') : ''}</li>`).join('')}</ul></section>`, 'contacts');
+        if (q.length) after(body, `<section class="succ-box"><h3>📝 ${esc(i18n('Questionnaires'))}</h3><ul>${q.map(x => `<li>${esc(nameOf(D, x.person_id))} · ${esc(i18n('préparé le {d}', {d: fmtDate(x.made_at.slice(0, 10))}))}${x.answered_at ? ' · ' + badge(i18n('réponses écrites le {d}', {d: fmtDate(x.answered_at.slice(0, 10))}), 'green') : ''}</li>`).join('')}</ul></section>`, 'contacts');
     }
 
-    /* ═════ 2. 📋 Questionnaire ═════ */
+    /* ═════ 2. 📝 Questionnaire ═════ */
     const QF = [['civil', 'Son état civil', 'nom de naissance, prénoms, date et lieu de naissance'], ['spouses', 'Conjoint(s)', 'mariage, PACS, divorce, dates'], ['children', 'Enfants', 'prénoms, dates de naissance, décédés ?'], ['contact', 'Adresse, téléphone, courriel', ''], ['family', 'Autres membres de la famille connus', 'avec un moyen de les joindre'], ['documents', 'Documents qu’il peut fournir', 'livret de famille, actes, jugement…'], ['question', 'Une question à toi', '']];
     const qTexts = () => ({title: i18n('Questionnaire'), about: i18n('au sujet d’une succession'), file: i18n('dossier'), you: i18n('Vous'), last: i18n('Nom de naissance'), first: i18n('Prénoms'), birth: i18n('Date de naissance'), birthPlace: i18n('Lieu de naissance'),
         spouses: i18n('Conjoint(s)'), name: i18n('Prénom et nom'), marriage: i18n('Date du mariage (ou PACS)'), place: i18n('Lieu'), children: i18n('Enfants'), dead: i18n('décédé(e)'), contact: i18n('Adresse, téléphone, courriel'), address: i18n('Adresse'), postal: i18n('Code postal'),
@@ -530,7 +530,7 @@
     function groupDialog(D, R, P_) {
         const groups = C().groupMissing(D, P_, {scope: cfg().group_scope, t: i18n});
         const letter = g => [i18n('Madame, Monsieur,'), i18n('Pour une recherche, je vous serais reconnaissant(e) de m’adresser une copie des actes suivants :'), g.items.map(it => `– ${it.what}${it.act ? ' (' + it.act + ')' : ''}`).join('\n'), i18n('Je vous prie d’agréer, Madame, Monsieur, l’expression de mes salutations distinguées.')].join('\n\n');
-        ext.openDialog({eyebrow: '📮', title: i18n('Les actes manquants, regroupés'), wide: true, submitLabel: i18n('📋 Ranger dans le Registre de courriers'),
+        ext.openDialog({eyebrow: '📮', title: i18n('Les actes manquants, regroupés'), wide: true, submitLabel: i18n('📮 Ranger dans le Registre de courriers'),
             body: `<p class="muted">${esc(i18n('Une seule lettre par service au lieu d’une par acte : moins de timbres, moins de relances. Relis et corrige chaque lettre.'))} ${setLink('group_scope')}</p>
                 ${groups.map((g, gi) => `<fieldset class="sp2-group"><legend>${ck(`${g.service} · ${plural(g.keys.length, 'acte')}`, `data-sp2-g="${gi}"`, true)}</legend><label>${esc(i18n('Destinataire'))}<input data-sp2-gs="${gi}" value="${esc(g.service)}" maxlength="200"></label><textarea data-sp2-gl="${gi}" rows="7" class="cl-letter">${esc(letter(g))}</textarea></fieldset>`).join('')}
                 <div class="succ-2"><label>${esc(i18n('Envoyé le'))}<input type="date" name="date_envoi" value="${today()}"></label><label>${esc(i18n('Relance dans (jours)'))}<input type="number" name="relance_jours" min="0" max="365" value="30"></label></div>`,

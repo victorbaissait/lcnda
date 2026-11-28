@@ -1,0 +1,33 @@
+/* LCNDA — 🕰 Son époque et son travail (assets/js/heritage-epoque-travail.js). Les lignes reprennent le style de « 🏘 Le lieu à
+ * son époque » (.hist-row, assets/css/histoire.css) ; ici, seulement le pli « ▸ plus », la citation, la frise et les vignettes. */
+.et-more { margin-top: 3px; }
+.et-more > summary { cursor: pointer; color: var(--blue-bright, #055dff); font-size: 13px; list-style: none; }
+.et-more > summary::-webkit-details-marker { display: none; }
+.et-more[open] > summary { margin-bottom: 3px; }
+.et-links, .et-src-link { white-space: nowrap; font-size: 12px; }
+.et-links a { margin-right: 6px; }
+.et-quote { margin: 4px 0; padding: 4px 10px; border-left: 3px solid var(--line, rgba(127, 127, 127, .35)); font-size: 13px; line-height: 1.45; }
+.et-panel .hist-life { margin-top: 6px; }
+/* 💡 la frise des nouveautés */
+.et-tl { position: relative; height: 62px; margin: 10px 4px 2px; }
+.et-tl-axis { position: absolute; left: 0; right: 0; top: 30px; height: 2px; background: var(--line, rgba(127, 127, 127, .4)); }
+.et-tl-life { position: absolute; top: 26px; height: 10px; border-radius: 5px; background: color-mix(in srgb, var(--blue-bright, #055dff) 35%, transparent); }
+.et-tl-mark { position: absolute; top: 0; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; font-size: 15px; line-height: 1; }
+.et-tl-mark small { font-size: 9.5px; color: var(--muted); margin-top: 1px; }
+.et-tl-mark.et-tl-low { top: 36px; flex-direction: column-reverse; }
+.et-tl-end { position: absolute; top: 48px; font-size: 10px; color: var(--muted); }
+.et-tl-legend { font-size: 11.5px; margin: 2px 0 6px; }
+.et-tl-key { display: inline-block; width: 18px; height: 8px; border-radius: 4px; vertical-align: middle; background: color-mix(in srgb, var(--blue-bright, #055dff) 35%, transparent); }
+/* 👗 les vignettes de mode */
+.et-figs { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0; }
+.et-fig { margin: 0; width: 150px; font-size: 11px; line-height: 1.3; }
+.et-fig img { display: block; width: 150px; height: 190px; object-fit: cover; border-radius: 4px; background: var(--card-bg, rgba(127, 127, 127, .12)); }
+.et-fig figcaption { margin-top: 3px; overflow-wrap: anywhere; }
+.et-fig.et-off img { visibility: hidden; height: 24px; }
+.et-fig-photo { width: 220px; }
+.et-fig-photo img { width: 220px; height: auto; max-height: 300px; object-fit: contain; }
+/* 📷 dater une photo */
+.et-body { padding: 14px 18px; }
+.et-decs { display: flex; flex-wrap: wrap; gap: 4px; margin: 6px 0; }
+.et-decs .chip.is-active { outline: 2px solid var(--blue-bright, #055dff); }
+.et-photo-tbl td { vertical-align: top; font-size: 13px; }

@@ -1,0 +1,835 @@
+fr ¦ tr
+Au bout de combien de jours sans nouvelles un animal est-il « en retard » ? Rouge au double du délai. ¦ Kaç gün haber alınamazsa bir hayvan “gecikmiş” sayılır? Sürenin iki katında kırmızı.
+Espèce inconnue ¦ Bilinmeyen tür
+Délais par espèce changés ¦ Türe göre süreler değiştirildi
+Animal (nom, bague…) ¦ Hayvan (ad, halka…)
+ou bague lue ¦ ya da okunan halka
+Bague lue ¦ Okunan halka
+nb ¦ sayı
+Nombre vus ¦ Görülen sayısı
+Le menu de choix n’est pas encore chargé. ¦ Seçim menüsü henüz yüklenmedi.
+⚡ Saisie d’une séance ¦ ⚡ Bir oturum girişi
+Tout enregistrer ¦ Tümünü kaydet
+Le lieu, la date et l’observateur une seule fois ; puis une ligne par animal vu (ou par bague lue, si tu ne sais pas encore qui c’est). ¦ Yer, tarih ve gözlemci yalnızca bir kez; sonra görülen her hayvan için bir satır (ya da kim olduğunu henüz bilmiyorsan okunan her halka için).
+Site de suivi ¦ İzleme alanı
+Observateur ¦ Gözlemci
+Nb ¦ Sayı
+Dis quand a eu lieu la séance. ¦ Oturumun ne zaman yapıldığını söyle.
+Choisis un site ou un lieu pour la séance. ¦ Oturum için bir alan ya da yer seç.
+Ajoute au moins un animal vu. ¦ En az bir görülen hayvan ekle.
+Séance enregistrée : {n} ¦ Oturum kaydedildi: {n}
+🖨 Fiche de terrain ¦ 🖨 Arazi formu
+Aperçu et impression ¦ Önizleme ve yazdırma
+Les animaux attendus sur un site (ceux qu’on y a déjà vus), avec leurs bagues et marques, et des cases à cocher : pour une sortie sans ordinateur. ¦ Bir alanda beklenen hayvanlar (orada daha önce görülenler), halkaları ve işaretleriyle, işaret kutularıyla: bilgisayarsız bir çıkış için.
+Tous les animaux suivis ¦ Tüm izlenen hayvanlar
+Tous les sites ¦ Tüm alanlar
+Aucun animal déjà vu sur ce site. ¦ Bu alanda daha önce görülmüş hayvan yok.
+Fiche de terrain — {s} ¦ Arazi formu — {s}
+Fiche de terrain ¦ Arazi formu
+Date de la dernière observation ¦ Son gözlemin tarihi
+Une colonne pour les notes ¦ Notlar için bir sütun
+Date : ____________  Observateur : ____________________  Météo : ____________ ¦ Tarih: ____________  Gözlemci: ____________________  Hava: ____________
+SUCCESSIONS ¦ MİRASLAR
+Qui s’en charge ? ¦ Bununla kim ilgileniyor?
+ex. Claire LACOMBE (vide : personne) ¦ örn. Claire LACOMBE (boş: kimse)
+C’est moi (pour le filtre « Mes dossiers ») ¦ Benim (“Dosyalarım” filtresi için)
+Sur cet ordinateur, « moi » = {name}. ¦ Bu bilgisayarda “ben” = {name}.
+Confié à {who} ¦ {who} kişisine verildi
+Plus personne n’en est chargé ¦ Artık kimse ilgilenmiyor
+Chargé du dossier : ¦ Dosyadan sorumlu:
+👥 Confier le dossier… ¦ 👥 Dosyayı devret…
+👥 Chargé du dossier n° {n} ¦ 👥 {n} numaralı dosyadan sorumlu
+à confier ¦ devredilecek
+👥 Qui s’occupe de cette échéance ? ¦ 👥 Bu son tarihle kim ilgileniyor?
+🛡 Conflit d’intérêts possible : {n} déjà dans un autre dossier ouvert. Vérifie avant de signer un contrat. ¦ 🛡 Olası çıkar çatışması: {n} zaten başka bir açık dosyada. Sözleşme imzalamadan önce kontrol et.
+dossier n° {n} ¦ {n} numaralı dosya
+Pas d’image de cette pièce dans la base : relie l’acte scanné à l’événement, puis recommence. ¦ Veritabanında bu belgenin görüntüsü yok: taranmış kaydı olaya bağla, sonra yeniden dene.
+La lecture automatique n’a pas marché : {err} ¦ Otomatik okuma çalışmadı: {err}
+Aucun texte lu sur cette image (écriture manuscrite ? essaie l’Atelier de transcription). ¦ Bu görüntüde hiç metin okunmadı (el yazısı mı? Transkripsiyon atölyesini dene).
+rien de trouvé ¦ hiçbir şey bulunamadı
+PIÈCE ¦ BELGE
+🔎 Lecture automatique — à vérifier ¦ 🔎 Otomatik okuma — kontrol edilmeli
+✍️ Noter au journal ¦ ✍️ Günlüğe yaz
+Ce que la machine a cru lire sur « {t} ». Décoche ce qui est faux : rien n’est changé dans les fiches. ¦ Makinenin “{t}” üzerinde okuduğunu sandığı şey. Yanlış olanların işaretini kaldır: kartlarda hiçbir şey değişmez.
+Lecture automatique de la pièce « {p} » (à vérifier) — {line} ¦ “{p}” belgesinin otomatik okunması (kontrol edilmeli) — {line}
+Noté au journal du dossier. ¦ Dosyanın günlüğüne yazıldı.
+Lire le texte de l’acte scanné et proposer noms, dates et lieux ¦ Taranmış kaydın metnini oku ve adlar, tarihler ve yerler öner
+🔎 Lire la pièce ¦ 🔎 Belgeyi oku
+demandée ¦ istendi
+à obtenir ¦ alınacak
+Tableau généalogique de dévolution ¦ Mirasçılık soy tablosu
+PROJET — à vérifier et compléter par le notaire. Calcul indicatif établi d’après les fiches de la base. ¦ TASLAK — noter tarafından kontrol edilip tamamlanmalı. Veritabanındaki kartlara göre yapılmış yaklaşık hesap.
+Pièces (renvois) ¦ Belgeler (göndermeler)
+conjoint survivant ¦ sağ kalan eş
+Aucun héritier calculé pour l’instant. ¦ Şimdilik hesaplanmış mirasçı yok.
+Les pièces ¦ Belgeler
+Établi le {d}. Document de travail : il ne remplace ni l’acte de notoriété ni le certificat d’hérédité. ¦ {d} tarihinde hazırlandı. Çalışma belgesi: ne şöhret senedinin ne de veraset ilamının yerini tutar.
+Projet de tableau de dévolution ¦ Mirasçılık tablosu taslağı
+🖨 Imprimer le tableau ¦ 🖨 Tabloyu yazdır
+À joindre à l’acte de notoriété : chaque héritier, son lien, sa part, et les pièces qui le prouvent (P1, P2…). ¦ Şöhret senedine eklenecek: her mirasçı, bağı, payı ve bunu kanıtlayan belgeler (P1, P2…).
+Tableau de dévolution — {n} ¦ Mirasçılık tablosu — {n}
+Tableau de dévolution ¦ Mirasçılık tablosu
+Tableau de dévolution {n} ¦ Mirasçılık tablosu {n}
+12 juin 1890 ¦ 12 Haziran 1890
+2000 et après ¦ 2000 ve sonrası
+7 mai 1925 ¦ 7 Mayıs 1925
+Aucun chemin de parenté connu avec la personne de départ. ¦ Başlangıç kişisiyle bilinen bir akrabalık yolu yok.
+Aucun lien de parenté connu. ¦ Bilinen akrabalık bağı yok.
+Aucun lien de parenté trouvé avec {nm} (personne de départ). ¦ {nm} (başlangıç kişisi) ile akrabalık bağı bulunamadı.
+Aucune différence : la fiche est comme avant cette modification. ¦ Fark yok: kart bu değişiklikten önceki gibi.
+Aucune union enregistrée pour cette fiche. ¦ Bu kart için kayıtlı birliktelik yok.
+Avant cette modification ¦ Bu değişiklikten önce
+Caché en mode consultation, dans les exports, les partages et le site. ¦ Görüntüleme modunda, dışa aktarımlarda, paylaşımlarda ve sitede gizli.
+Cet élément n’existe plus : utilise « Restaurer » s’il a été supprimé. ¦ Bu öğe artık yok: silindiyse “Geri yükle”yi kullan.
+Cette fiche a {n} {what} : garde la bonne, l’autre devient une « autre version » de ce fait. ¦ Bu kartta {n} {what} var: doğru olanı tut, diğeri bu olgunun “başka bir sürümü” olur.
+Chargement de la fiche familiale… ¦ Aile kartı yükleniyor…
+Chargement des pesées… ¦ Tartımlar yükleniyor…
+Choisis « ⤓ PDF » pour enregistrer le fichier. ¦ Dosyayı kaydetmek için “⤓ PDF”yi seç.
+Confidentialité et recherche ¦ Gizlilik ve arama
+Courbe de poids ¦ Ağırlık eğrisi
+Créer la famille ¦ Aileyi oluştur
+C’est la personne de départ (de cujus). ¦ Bu başlangıç kişisi (de cujus).
+C’est la personne de départ. ¦ Bu başlangıç kişisi.
+Date du média moins date de naissance ¦ Medya tarihi eksi doğum tarihi
+Dernière modification ¦ Son değişiklik
+Dernières fiches créées ¦ Son oluşturulan kartlar
+En vie et décédés ¦ Yaşayan ve ölmüş
+Exporter la fiche ¦ Kartı dışa aktar
+Exporter la fiche (JSON) ¦ Kartı dışa aktar (JSON)
+Exports rapides de cette fiche : 🖨 Imprimer ouvre l’aperçu de l’app (format, sens, PDF), avec l’ordre, la taille et la visibilité des blocs de cette fiche. Les événements 🔒 confidentiels ne sont jamais exportés. ¦ Bu kartın hızlı dışa aktarımları: 🖨 Yazdır, uygulamanın önizlemesini açar (biçim, yön, PDF), bu kartın bloklarının sırası, boyutu ve görünürlüğüyle. 🔒 Gizli olaylar asla dışa aktarılmaz.
+FICHE FAMILIALE ¦ AİLE KARTI
+Famille enregistrée : {n} fiche(s) créée(s). ¦ Aile kaydedildi: {n} kart oluşturuldu.
+Famille enregistrée. ¦ Aile kaydedildi.
+Fiche en JSON ¦ JSON olarak kart
+Fiche familiale ¦ Aile kartı
+Fiche familiale de {nm} ¦ {nm} aile kartı
+Fiche familiale… ¦ Aile kartı…
+Gardé : l’autre version est notée dans « Date alternative ». ¦ Tutuldu: diğer sürüm “Alternatif tarih” içine yazıldı.
+Genre inconnu ¦ Bilinmeyen cinsiyet
+Hors Sosa ¦ Sosa dışı
+Imprimer la fiche ¦ Kartı yazdır
+Indique au moins le père ou la mère. ¦ En azından babayı ya da anneyi belirt.
+Inhumation ¦ Defin
+Les deux branches ¦ İki kol
+Lien retiré : {nm} ¦ Bağ kaldırıldı: {nm}
+Naissance (les plus anciens d’abord) ¦ Doğum (en eskiler önce)
+Naissance (les plus récents d’abord) ¦ Doğum (en yeniler önce)
+Naissance inconnue ¦ Doğum bilinmiyor
+Note de recherche ¦ Araştırma notu
+Ouvre d’abord une fiche. ¦ Önce bir kart aç.
+PDF (aperçu d’impression) ¦ PDF (baskı önizlemesi)
+Pas de fiche d’animal liée. ¦ Bağlı hayvan kartı yok.
+Pas de mariage enregistré. ¦ Kayıtlı evlilik yok.
+Pas encore de pesée : ajoute un poids dans 🩺 Santé. ¦ Henüz tartım yok: 🩺 Sağlık bölümünde bir ağırlık ekle.
+Personnaliser l’export… ¦ Dışa aktarımı özelleştir…
+Prénom NOM, ou choisis une fiche ¦ Ad SOYADI, ya da bir kart seç
+Père, mère, mariage et enfants en une seule saisie ¦ Baba, anne, evlilik ve çocuklar tek girişte
+Père, mère, mariage et enfants en une seule saisie. Pour chaque nom : choisis une fiche existante, ou tape « Prénom NOM » pour en créer une. ¦ Baba, anne, evlilik ve çocuklar tek girişte. Her ad için: var olan bir kartı seç ya da yeni bir kart oluşturmak için “Ad SOYADI” yaz.
+Recherche du chemin… ¦ Yol aranıyor…
+Remis : {f} ¦ Geri konuldu: {f}
+Rien à exporter dans cet écran. ¦ Bu ekranda dışa aktarılacak bir şey yok.
+SAISIE RAPIDE ¦ HIZLI GİRİŞ
+Sans aucune source ¦ Hiç kaynak olmadan
+Sans parents ¦ Ebeveynsiz
+Sans parents connus ¦ Bilinen ebeveyni yok
+Sous chaque nom : son lien de parenté avec la personne de départ. ¦ Her adın altında: başlangıç kişisiyle akrabalık bağı.
+TON LIEN ¦ SENİN BAĞIN
+Tableau (CSV) ¦ Tablo (CSV)
+Ton lien avec cette personne ¦ Bu kişiyle bağın
+Ton lien avec cette personne (depuis {nm}) — clique pour voir le chemin. ¦ Bu kişiyle bağın ({nm} üzerinden) — yolu görmek için tıkla.
+Tous les genres ¦ Tüm cinsiyetler
+Un enfant sans nom de famille prend celui du père. ¦ Soyadı olmayan bir çocuk babanın soyadını alır.
+Voir la note de recherche ¦ Araştırma notunu gör
+conjoint de ¦ eşi
+enfant de ¦ çocuğu
+ex. à vérifier : cote 3 E 125, piste : registre de la paroisse voisine ¦ örn. kontrol edilecek: dosya no 3 E 125, ipucu: komşu cemaatin kilise defteri
+inconnu(e) ¦ bilinmiyor
+par {nm} ¦ {nm} tarafından
+parent de ¦ ebeveyni
+{a}–{b} ¦ {a}–{b}
+{nm} avait environ {age} ¦ {nm} yaklaşık {age} yaşındaydı
+{nm} avait moins d’un an ¦ {nm} bir yaşından küçüktü
+{nm} avait {age} ¦ {nm} {age} yaşındaydı
+{n} pesée(s) · dernière : {w} le {d} ¦ {n} tartım · son: {w}, {d}
+{n} {what} ¦ {n} {what}
+{n} étape(s) depuis la personne de départ. ¦ Başlangıç kişisinden {n} adım.
+{s} depuis la première ¦ ilkinden beri {s}
+Événement confidentiel : caché en consultation, dans les exports, les partages et le site. ¦ Gizli olay: görüntülemede, dışa aktarımlarda, paylaşımlarda ve sitede gizli.
+à {x} ¦ {x} konumunda
+↩ Remettre ¦ ↩ Geri koy
+⇆ Comparer avec maintenant ¦ ⇆ Şimdiki hâliyle karşılaştır
+⚡ ＋ Famille ¦ ⚡ ＋ Aile
+✓ Garder celle-ci ¦ ✓ Bunu tut
+✓ Remis ¦ ✓ Geri konuldu
+＋ Un enfant de plus ¦ ＋ Bir çocuk daha
+👪 Fiche familiale ¦ 👪 Aile kartı
+📈 Animal : poids et croissance ¦ 📈 Hayvan: ağırlık ve büyüme
+📝 Avec une note de recherche ¦ 📝 Araştırma notuyla
+📝 Note de recherche (à vérifier, cote, piste) ¦ 📝 Araştırma notu (kontrol edilecek, dosya no, ipucu)
+📝 Note de recherche : {x} ¦ 📝 Araştırma notu: {x}
+🔒 confidentiel ¦ 🔒 gizli
+🔒 Événement confidentiel ¦ 🔒 Gizli olay
+🧭 Aucun lien connu ¦ 🧭 Bilinen bağ yok
+🧭 Personne de départ ¦ 🧭 Başlangıç kişisi
+🧭 Ton lien ¦ 🧭 Bağın
+🧭 Ton lien avec cette personne ¦ 🧭 Bu kişiyle bağın
+🧭 personne de départ ¦ 🧭 başlangıç kişisi
+Nouveau… dans l’onglet ouvert (une personne dans Personnes) ¦ Yeni… açık sekmede (Kişiler’de bir kişi)
+Annuler la dernière modification d’une fiche (hors d’une case de texte, tout de suite, avec « ↷ Rétablir ») ¦ Bir kartın son değişikliğini geri al (metin kutusu dışında, hemen, “↷ Yinele” ile)
+Exporter ce que montre l’onglet ouvert (⤓ Exporter) ¦ Açık sekmenin gösterdiğini dışa aktar (⤓ Dışa aktar)
+Chercher dans la colonne de gauche ¦ Sol sütunda ara
+Aucune personne ne correspond à ces filtres. ¦ Bu filtrelere uyan kişi yok.
+Retire un filtre (Filtrer ▾) ou change le tri. ¦ Bir filtreyi kaldır (Filtrele ▾) ya da sıralamayı değiştir.
+Peau ¦ Ten
+Origine / mention ¦ Köken / not
+Mention conjoint ¦ Eş notu
+Mention enfants ¦ Çocuklar notu
+Date alternative ¦ Alternatif tarih
+Lieu (n°) ¦ Yer (no)
+Type (n°) ¦ Tür (no)
+Confidentiel ¦ Gizli
+A : « {a} » ({na}) · B : « {b} » ({nb}) → {n} personne(s) {op}. ¦ A: “{a}” ({na}) · B: “{b}” ({nb}) → {n} kişi {op}.
+Acte à commander supprimé ¦ Sipariş edilecek kayıt silindi
+Ajouter à une liste ¦ Bir listeye ekle
+Apparence (thème, couleurs, police) ¦ Görünüm (tema, renkler, yazı tipi)
+Aucune citation ne contient ce texte. ¦ Bu metni içeren alıntı yok.
+Aucune de « Mes listes » ne contient des personnes : crée-en une dans Réglages → Éditeur de listes. ¦ “Listelerim”den hiçbiri kişi içermiyor: Ayarlar → Liste düzenleyici’de bir tane oluştur.
+Aucune ligne ne contient « {find} ». ¦ “{find}” içeren satır yok.
+Aucune source ne contient ce texte. ¦ Bu metni içeren kaynak yok.
+Ce qui est dans une recherche enregistrée et pas dans l’autre (ex. les Sosa nés en Corrèze sans acte de baptême) : pour trouver les trous. ¦ Bir kayıtlı aramada olup diğerinde olmayanlar (örn. vaftiz kaydı olmayan Corrèze doğumlu Sosa’lar): boşlukları bulmak için.
+Changer cette ligne ¦ Bu satırı değiştir
+Chercher et remplacer : où chercher, majuscules, mot entier ¦ Bul ve değiştir: nerede aranacak, büyük harfler, tam sözcük
+Chercher un mot dans le titre, l’auteur et le texte des sources, et dans la page et la note de chaque citation. ¦ Kaynakların başlığında, yazarında ve metninde, ayrıca her alıntının sayfasında ve notunda bir sözcük ara.
+Choisis deux lieux différents. ¦ İki farklı yer seç.
+Choisis deux recherches enregistrées. ¦ İki kayıtlı arama seç.
+Choisis les deux lieux. ¦ İki yeri de seç.
+Choisis ou écris une étiquette. ¦ Bir etiket seç ya da yaz.
+Choisis où chercher. ¦ Nerede aranacağını seç.
+Citée ¦ Alıntılanan
+Cocher {name} ¦ {name} işaretle
+Comparer deux recherches ¦ İki aramayı karşılaştır
+Corrige une faute partout d’un coup (« cultivatr » → « cultivateur »). Tu vois d’abord chaque ligne qui changerait ; décoche celles à garder. « ↶ Annuler » remet tout comme avant. ¦ Bir hatayı her yerde tek seferde düzelt (“cultivatr” → “cultivateur”). Önce değişecek her satırı görürsün; tutmak istediklerinin işaretini kaldır. “↶ Geri al” her şeyi eskisi gibi yapar.
+Dernières recherches vidées ¦ Son aramalar temizlendi
+Descriptions des événements ¦ Olay açıklamaları
+Définition supprimée ¦ Tanım silindi
+Dépouillement supprimé ¦ Döküm silindi
+Essaie un autre lien ou moins de critères. ¦ Başka bir bağ ya da daha az ölçüt dene.
+Ex : Poilu, À vérifier… ¦ Örn: Poilu, Kontrol edilecek…
+Ex : cultivateur (vide = effacer) ¦ Örn: cultivateur (boş = sil)
+Ex : cultivatr ¦ Örn: cultivatr
+Ex : registre paroissial, folio 12, Tulle… ¦ Örn: kilise defteri, varak 12, Tulle…
+Extrait ¦ Alıntı
+Fais-les dans « Recherche multicritère », puis « Enregistrer ». ¦ Bunları “Çok ölçütlü arama”da yap, sonra “Kaydet”.
+Graphiques et tableau de bord ¦ Grafikler ve gösterge paneli
+Il faut au moins deux recherches enregistrées. ¦ En az iki kayıtlı arama gerekir.
+Lacune supprimée ¦ Boşluk silindi
+Les recherches enregistrées ne sont pas disponibles. ¦ Kayıtlı aramalar kullanılamıyor.
+Lien de parenté inconnu. ¦ Bilinmeyen akrabalık bağı.
+Ligne de transcription supprimée ¦ Transkripsiyon satırı silindi
+Mot entier seulement ¦ Yalnızca tam sözcük
+Neveux et nièces ¦ Yeğenler
+Nom de table invalide. ¦ Geçersiz tablo adı.
+Noms de lieux ¦ Yer adları
+Nouvelle étiquette… ¦ Yeni etiket…
+Nés en ou après ¦ Bu yılda ya da sonra doğanlar
+Nés en ou avant ¦ Bu yılda ya da önce doğanlar
+Oncles et tantes ¦ Amcalar, dayılar ve teyzeler, halalar
+Onglets ajoutés au menu ¦ Menüye eklenen sekmeler
+Onglets cachés du menu ¦ Menüde gizlenen sekmeler
+Ordre des types de recherche ¦ Arama türlerinin sırası
+Ordre du menu ¦ Menü sırası
+Ouvrir la recherche multicritère ¦ Çok ölçütlü aramayı aç
+Où chercher ¦ Nerede aranacak
+Personne relevée retirée ¦ Dökümü yapılan kişi kaldırıldı
+Puis le lien de parenté cherché. ¦ Sonra aranan akrabalık bağı.
+Rangement des pages des Réglages ¦ Ayarlar sayfalarının düzeni
+Recherche A ¦ Arama A
+Recherche B ¦ Arama B
+Recherche dans les sources… ¦ Kaynaklarda aranıyor…
+Recherche dans l’arbre… ¦ Ağaçta aranıyor…
+Recherche des lignes à changer… ¦ Değiştirilecek satırlar aranıyor…
+Recherche par lien de parenté ¦ Akrabalık bağına göre arama
+Respecter les majuscules ¦ Büyük/küçük harfe dikkat et
+Rien de coché : les actions portent sur les {t} résultats ¦ Hiçbir şey işaretli değil: işlemler {t} sonucun tümüne uygulanır
+Règle introuvable. ¦ Kural bulunamadı.
+Règle supprimée ¦ Kural silindi
+Résultats de la recherche ¦ Arama sonuçları
+Sections ouvertes ou fermées ¦ Açık ya da kapalı bölümler
+Seulement les décédés ¦ Yalnızca ölmüş olanlar
+Seulement les vivants ¦ Yalnızca yaşayanlar
+Seules les {n} premières lignes sont montrées ; « Remplacer » change les lignes cochées. ¦ Yalnızca ilk {n} satır gösteriliyor; “Değiştir” işaretli satırları değiştirir.
+Sources et citations ¦ Kaynaklar ve alıntılar
+Suppression impossible ici. ¦ Burada silinemez.
+Tape au moins deux lettres. ¦ En az iki harf yaz.
+Tape le texte à chercher. ¦ Aranacak metni yaz.
+Texte à chercher ¦ Aranacak metin
+Texte à chercher trop long. ¦ Aranacak metin çok uzun.
+Tous les ancêtres ¦ Tüm atalar
+Tous les descendants ¦ Tüm torunlar
+Trouvé dans ¦ Bulunduğu yer
+Type d’événement supprimé ¦ Olay türü silindi
+Types de recherche cachés ¦ Gizli arama türleri
+Vider la liste ¦ Listeyi boşalt
+Vivant(e) ¦ Yaşıyor
+Vivants et décédés ¦ Yaşayan ve ölmüş
+dans A et dans B ¦ A’da ve B’de
+dans A mais pas dans B ¦ A’da ama B’de değil
+dans A ou dans B ¦ A’da ya da B’de
+dans une seule des deux ¦ ikisinden yalnızca birinde
+{n} cochée(s) sur {t} ¦ {t} içinden {n} işaretli
+{n} ligne(s) cochée(s) sur {t} ¦ {t} satırdan {n} işaretli
+{rel} de {name} : {n} personne(s). ¦ {name} kişisinin {rel}: {n} kişi.
+« Tous les cousins germains de… », « les descendants vivants de… nés après 1900 » : choisis une personne et un lien. ¦ “…kişisinin tüm birinci dereceden kuzenleri”, “…kişisinin 1900’den sonra doğan yaşayan torunları”: bir kişi ve bir bağ seç.
+Étiqueter {n} personne(s) ¦ {n} kişiyi etiketle
+⟳ Recharger la page ¦ ⟳ Sayfayı yeniden yükle
+🏷 « {label} » posée sur {n} personne(s) ¦ 🏷 “{label}” {n} kişiye konuldu
+🏷 Étiqueter ¦ 🏷 Etiketle
+📊 Comparer deux recherches ¦ 📊 İki aramayı karşılaştır
+📑 Ajouter à Mes listes ¦ 📑 Listelerim’e ekle
+📑 {n} personne(s) ajoutée(s) à « {list} » ¦ 📑 {n} kişi “{list}” listesine eklendi
+📚 Sources ({n}) ¦ 📚 Kaynaklar ({n})
+🔁 Chercher et remplacer ¦ 🔁 Bul ve değiştir
+🔁 Remplacer ¦ 🔁 Değiştir
+🔁 Remplacer ({n}) ¦ 🔁 Değiştir ({n})
+🔁 {n} remplacement(s) faits ¦ 🔁 {n} değiştirme yapıldı
+🔎 Ce que j’ai changé ¦ 🔎 Değiştirdiklerim
+🔒 {n} ligne(s) d’une fiche verrouillée : elles ne changeront pas. ¦ 🔒 Kilitli bir karttan {n} satır: değişmeyecekler.
+🔖 Citations ({n}) ¦ 🔖 Alıntılar ({n})
+🕘 Dernières recherches ¦ 🕘 Son aramalar
+🗄 Santé de la base ¦ 🗄 Veritabanının sağlığı
+🧬 Lien de parenté ¦ 🧬 Akrabalık bağı
+🧾 Sources et citations ¦ 🧾 Kaynaklar ve alıntılar
+Lieux « {q} » ¦ Yerler “{q}”
+Transcriptions « {q} » ¦ Transkripsiyonlar “{q}”
+Export impossible : les événements confidentiels n’ont pas pu être retirés. Réessaie dans un instant. ¦ Dışa aktarılamıyor: gizli olaylar çıkarılamadı. Birazdan yeniden dene.
+Les événements confidentiels n’ont pas pu être cachés : réessaie dans un instant. ¦ Gizli olaylar gizlenemedi: birazdan yeniden dene.
+, ni les fiches et événements confidentiels. ¦ , ne de gizli kartlar ve olaylar.
+🔒  ¦ 🔒 
+📤 Envoyer vers… ¦ 📤 Şuraya gönder…
+Dans une nouvelle présentation ¦ Yeni bir sunuma
+Dans un nouveau diaporama ¦ Yeni bir slayt gösterisine
+Dans un livre de la Mise en page… ¦ Sayfa düzenindeki bir kitaba…
+Dans un nouveau document (Traitement de texte) ¦ Yeni bir belgeye (Kelime işlemci)
+Dans le Tableur ¦ Tabloya
+Sur une page de mon site… ¦ Sitemdeki bir sayfaya…
+Dans la Retouche des photos ¦ Fotoğraf rötuşuna
+Comparer avec une autre photo ¦ Başka bir fotoğrafla karşılaştır
+Dans l’Atelier de transcription ¦ Transkripsiyon atölyesine
+Dans le Dessin vectoriel ¦ Vektör çizime
+Dans les Traitements par lot ¦ Toplu işlemlere
+Envoyer les images vers… ¦ Görüntüleri şuraya gönder…
+Envoyer le texte vers… ¦ Metni şuraya gönder…
+Envoyer le tableau vers… ¦ Tabloyu şuraya gönder…
+Envoyer le son vers… ¦ Sesi şuraya gönder…
+Envoyer la vidéo vers… ¦ Videoyu şuraya gönder…
+Envoyer le dessin vers… ¦ Çizimi şuraya gönder…
+Rangement du son dans les médias… ¦ Ses medyaya kaydediliyor…
+Rangement de la vidéo dans les médias… ¦ Video medyaya kaydediliyor…
+Rien à envoyer. ¦ Gönderilecek bir şey yok.
+Aucun outil ne peut recevoir ça pour l’instant. ¦ Şimdilik hiçbir araç bunu alamaz.
+En image (montage, studio, présentation, document…) ¦ Görüntü olarak (kurgu, stüdyo, sunum, belge…)
+En dessin, net à toutes les tailles (livre, site…) ¦ Çizim olarak, her boyutta net (kitap, site…)
+＋ Nouvelle crise ¦ ＋ Yeni kriz
+Modifier cette crise ¦ Bu krizi düzenle
+Supprimer cette crise ¦ Bu krizi sil
+Nouvelle crise ¦ Yeni kriz
+Modifier la crise ¦ Krizi düzenle
+ÉPIDÉMIES, GUERRES, HIVERS TERRIBLES ¦ SALGINLAR, SAVAŞLAR, KORKUNÇ KIŞLAR
+Les grandes crises de l’histoire de France à côté des décès de ta famille : pour comprendre une vague de morts (choléra de 1832, Grand Hiver de 1709, grippe espagnole…). Ajoute les tiennes : une épidémie au village, un incendie, une inondation… ¦ Fransa tarihinin büyük krizleri ailendeki ölümlerin yanında: bir ölüm dalgasını anlamak için (1832 kolerası, 1709 Büyük Kışı, İspanyol gribi…). Kendi krizlerini ekle: köyde bir salgın, bir yangın, bir sel…
+▦ Vignettes ¦ ▦ Küçük resimler
+🏷 Par éditeur ¦ 🏷 Yayınevine göre
+📍 Par lieu ¦ 📍 Yere göre
+✉️ Écrites / vierges ¦ ✉️ Yazılmış / boş
+Survole pour voir le verso ¦ Arka yüzü görmek için üzerine gel
+Aucune fiche de carte postale pour l’instant ¦ Henüz kartpostal kartı yok
+Listes → 🏞 Cartes postales : donne à chaque carte son éditeur, son numéro, son lieu, son recto et son verso. ¦ Listeler → 🏞 Kartpostallar: her karta yayınevini, numarasını, yerini, ön ve arka yüzünü ver.
+Éditeur inconnu ¦ Bilinmeyen yayınevi
+Écrites ou envoyées ¦ Yazılmış ya da gönderilmiş
+Vierges (jamais envoyées) ¦ Boş (hiç gönderilmemiş)
+Il manque les n° {n} ¦ {n} numaralar eksik
+Il manque le n° {n} ¦ {n} numara eksik
+cartes ¦ kart
+Marge de « vers » ¦ “Civarı” payı
+Portée de « avant » / « après » ¦ “Önce” / “sonra” kapsamı
+Longueur d’une vie sans fin connue ¦ Sonu bilinmeyen bir ömrün uzunluğu
+Ouvrir dans le Tableur… ¦ Tabloda aç…
+🧾 Ouvrir les invités dans le Tableur ¦ 🧾 Davetlileri Tabloda aç
+📤 Envoyer le tableau des invités ¦ 📤 Davetli tablosunu gönder
+🧾 Ouvrir dans le Tableur ¦ 🧾 Tabloda aç
+Le tableau des invités, avec leur branche, leur lien de parenté et leur réponse. ¦ Davetliler tablosu, kolları, akrabalık bağları ve yanıtlarıyla.
+Toutes les photos de l’album : un diaporama, un film, un traitement par lot… ¦ Albümün tüm fotoğrafları: slayt gösterisi, film, toplu işlem…
+Album — {nm} ¦ Albüm — {nm}
+Descendance (de haut en bas, une couleur par branche) ¦ Torunlar (yukarıdan aşağıya, her kol için bir renk)
+La descendance a besoin de l’outil Cousinades, qui n’est pas chargé. ¦ Torunlar için Aile buluşmaları aracı gerekir, ama yüklenmedi.
+Aucune descendance pour cette personne. ¦ Bu kişinin torunu yok.
+Aucun enfant connu pour cette personne : pas de descendance à dessiner. ¦ Bu kişinin bilinen çocuğu yok: çizilecek torun yok.
+La descendance de {nm} ¦ {nm} kişisinin torunları
+la famille ¦ aile
+L’arbre (en fond) ¦ Ağaç (arka planda)
+📰 En faire un faire-part ¦ 📰 Bundan bir duyuru kartı yap
+Créer le faire-part ¦ Duyuru kartını oluştur
+L’arbre se pose en fond, derrière les textes du faire-part. Tout s’ouvre ensuite dans le dessin vectoriel pour le retoucher. ¦ Ağaç, duyuru kartının metinlerinin arkasına, arka plana yerleşir. Sonra her şey düzeltmek için vektör çizimde açılır.
+L’arbre derrière le texte ¦ Metnin arkasındaki ağaç
+Très pâle ¦ Çok soluk
+Pâle ¦ Soluk
+Bien visible ¦ İyice görünür
+Fabrication du faire-part… ¦ Duyuru kartı hazırlanıyor…
+Personne à dessiner dans l’arbre. ¦ Ağaçta çizilecek kişi.
+L’arbre en fond d’un faire-part de cousinade ou de noces ¦ Bir aile buluşması ya da düğün duyuru kartının arka planında ağaç
+En faire un faire-part ¦ Bundan bir duyuru kartı yap
+Les mêmes réglages, un faire-part pour chaque personne (une liste, une étiquette) ou chaque foyer d’une cousinade, tous dans un seul PDF ¦ Aynı ayarlar, her kişi (bir liste, bir etiket) ya da bir aile buluşmasındaki her hane için bir duyuru kartı, hepsi tek PDF’de
+Un faire-part par personne / par foyer… ¦ Kişi / hane başına bir duyuru kartı…
+📬 Un faire-part par personne / par foyer ¦ 📬 Kişi / hane başına bir duyuru kartı
+📄 Fabriquer le PDF ¦ 📄 PDF’yi oluştur
+Le faire-part tel que tu l’as réglé, une fois pour chaque personne ou chaque foyer. Tous les faire-part sont rangés dans un seul PDF, prêt à imprimer. ¦ Ayarladığın şekliyle duyuru kartı, her kişi ya da her hane için bir kez. Tüm kartlar yazdırmaya hazır tek bir PDF’de toplanır.
+Une liste de personnes ¦ Bir kişi listesi
+Les personnes d’une étiquette ¦ Bir etiketin kişileri
+Les foyers d’une cousinade ¦ Bir aile buluşmasının haneleri
+La cousinade (les foyers invités) ¦ Aile buluşması (davetli haneler)
+Dans les champs du faire-part, ces mots se remplacent pour chacun : ¦ Duyuru kartının alanlarında bu sözcükler herkes için değiştirilir:
+(cousinade : aussi {titre}, {date}, {lieu}, {ancetre}…) ¦ (aile buluşması: ayrıca {titre}, {date}, {lieu}, {ancetre}…)
+Le nom de la personne (ou du foyer) en haut de chaque faire-part ¦ Her duyuru kartının üstünde kişinin (ya da hanenin) adı
+Remplir aussi depuis la fiche de chacun (noms, dates, lieux) ¦ Herkesin kartından da doldur (adlar, tarihler, yerler)
+L’enveloppe de chacun porte son adresse. ¦ Herkesin zarfında kendi adresi yazar.
+Aucun foyer invité dans cette cousinade : coche des invités d’abord. ¦ Bu aile buluşmasında davetli hane yok: önce davetlileri işaretle.
+Fabrication de {n} faire-part… ¦ {n} duyuru kartı hazırlanıyor…
+{i} sur {n}… ¦ {n} içinden {i}…
+{n} faire-part dans un seul PDF ({p} pages). ¦ Tek PDF’de {n} duyuru kartı ({p} sayfa).
+Le dessin vectoriel n’est pas chargé : le PDF ne peut pas être fabriqué. ¦ Vektör çizim yüklenmedi: PDF oluşturulamaz.
+Une action de la Retouche ¦ Rötuştan bir işlem
+Une action enregistrée dans la Retouche des photos (Fichier → Actions), sur chaque image. ¦ Fotoğraf rötuşunda kaydedilmiş bir işlem (Dosya → İşlemler), her görüntüye.
+aucune action choisie ¦ seçili işlem yok
+La Retouche des photos n’est pas chargée : l’action « {name} » ne peut pas se faire. ¦ Fotoğraf rötuşu yüklenmedi: “{name}” işlemi yapılamaz.
+L’action « {name} » de la Retouche n’a rien rendu. ¦ Rötuştaki “{name}” işlemi hiçbir şey vermedi.
+La Retouche des photos n’est pas chargée : cette étape ne pourra pas se faire. ¦ Fotoğraf rötuşu yüklenmedi: bu adım yapılamayacak.
+Aucune action enregistrée dans la Retouche. Ouvre une photo dans la Retouche, puis Fichier → Actions pour en enregistrer une. ¦ Rötuşta kayıtlı işlem yok. Rötuşta bir fotoğraf aç, sonra bir işlem kaydetmek için Dosya → İşlemler.
+L’action ¦ İşlem
+Choisir une action… ¦ Bir işlem seç…
+Une action enregistrée dans la Retouche des photos, faite sur chaque image du lot. ¦ Fotoğraf rötuşunda kaydedilmiş, toplu işteki her görüntüye uygulanan bir işlem.
+Les images rangées dans les médias par ce lot : un diaporama, un montage… ¦ Bu toplu işin medyaya kaydettiği görüntüler: bir slayt gösterisi, bir kurgu…
+Traitement par lot ¦ Toplu işlem
+{x} introuvable dans les médias. ¦ {x} medyada bulunamadı.
+Ouvrir cette image dans la Retouche des photos ¦ Bu görüntüyü Fotoğraf rötuşunda aç
+Retoucher ¦ Rötuşla
+Envoyer cette image vers un autre outil ¦ Bu görüntüyü başka bir araca gönder
+📤 Envoyer le tableau en image vers… ¦ 📤 Tabloyu görüntü olarak şuraya gönder…
+Le dessin va dans un autre outil : un livre de la Mise en page, une page de mon site, le Dessin vectoriel… ¦ Çizim başka bir araca gider: sayfa düzeninde bir kitap, sitemde bir sayfa, Vektör çizim…
+Créer et envoyer vers… ¦ Oluştur ve şuraya gönder…
+✒️ Placer un dessin vectoriel (arbre, carte, blason…)… ¦ ✒️ Bir vektör çizim yerleştir (ağaç, harita, arma…)…
+Dessin vectoriel placé ¦ Vektör çizim yerleştirildi
+✒️ « {name} » placé : modifié dans le Dessin vectoriel, il se met à jour ici (« ↻ Mettre à jour »). ¦ ✒️ “{name}” yerleştirildi: Vektör çizimde değiştirilirse burada güncellenir (“↻ Güncelle”).
+✒️ Dessin vectoriel <b>lié</b>{state} : modifié dans le Dessin vectoriel, il se redessine ici (« Mettre à jour »). ¦ ✒️ Vektör çizim <b>bağlı</b>{state}: Vektör çizimde değiştirilirse burada yeniden çizilir (“Güncelle”).
+✎ Modifier le dessin ¦ ✎ Çizimi düzenle
+Le dessin reste tel quel et ne suit plus le Dessin vectoriel ¦ Çizim olduğu gibi kalır ve artık Vektör çizimi izlemez
+Dessin détaché ¦ Çizim ayrıldı
+Le Dessin vectoriel n’est pas chargé. ¦ Vektör çizim yüklenmedi.
+Aucun dessin vectoriel : fais-en un dans Listes → Outils de modification (Dessin vectoriel, Arbre décoratif, Carte…). ¦ Vektör çizim yok: Listeler → Düzenleme araçları’nda bir tane yap (Vektör çizim, Süs ağacı, Harita…).
+PLACER ¦ YERLEŞTİR
+✒️ Un dessin vectoriel (arbre, carte, blason…) ¦ ✒️ Bir vektör çizim (ağaç, harita, arma…)
+Placer ce dessin ¦ Bu çizimi yerleştir
+Le dessin reste lié : modifié dans le Dessin vectoriel, il se met à jour dans le livre (« ↻ Mettre à jour »). Il reste net à toutes les tailles. ¦ Çizim bağlı kalır: Vektör çizimde değiştirilirse kitapta güncellenir (“↻ Güncelle”). Her boyutta net kalır.
+Choisis un dessin. ¦ Bir çizim seç.
+Le dessin n’a pas pu être lu. ¦ Çizim okunamadı.
+📐 Mettre dans un livre ¦ 📐 Bir kitaba koy
+Mettre dans le livre ¦ Kitaba koy
+Le dessin est rangé dans les Médias (en image), puis posé sur une page à lui, dans les marges. ¦ Çizim Medya’ya (görüntü olarak) kaydedilir, sonra kenar boşlukları içinde kendi sayfasına yerleştirilir.
+L’image est posée sur une page à elle, dans les marges. Elle reste liée à la photo des Médias. ¦ Görüntü kenar boşlukları içinde kendi sayfasına yerleştirilir. Medya’daki fotoğrafa bağlı kalır.
+Rangement du dessin dans les médias… ¦ Çizim medyaya kaydediliyor…
+Mon livre ¦ Kitabım
+Image ajoutée sur une nouvelle page à la fin du livre : vérifie, puis enregistre. ¦ Görüntü kitabın sonunda yeni bir sayfaya eklendi: kontrol et, sonra kaydet.
+Nouveau livre avec l’image : vérifie, puis enregistre le livre. ¦ Görüntüyle yeni kitap: kontrol et, sonra kitabı kaydet.
+📱 Livre numérique (.epub) ¦ 📱 E-kitap (.epub)
+liseuses : Kobo, Livres, Calibre… ¦ e-okuyucular: Kobo, Kitaplar, Calibre…
+La mise en page n’est pas chargée : l’ePub ne peut pas être fait. ¦ Sayfa düzeni yüklenmedi: ePub yapılamaz.
+« Envoyer vers… » n’est pas chargé. ¦ “Şuraya gönder…” yüklenmedi.
+Retoucher cette image ¦ Bu görüntüyü rötuşla
+Cette image n’est pas dans les Médias : elle ne peut pas être retouchée. ¦ Bu görüntü Medya’da değil: rötuşlanamaz.
+Image retouchée mise à jour dans le texte. ¦ Rötuşlanan görüntü metinde güncellendi.
+Un document (Traitement de texte) ¦ Bir belge (Kelime işlemci)
+le tableau dans un texte ¦ tablo bir metinde
+📝 Créer le document ¦ 📝 Belgeyi oluştur
+Image du graphique (PNG) : {kind} ¦ Grafik görüntüsü (PNG): {kind}
+Le graphique n’a pas pu être dessiné. ¦ Grafik çizilemedi.
+Image du graphique enregistrée : {name} ¦ Grafik görüntüsü kaydedildi: {name}
+La feuille est vide : rien à envoyer. ¦ Sayfa boş: gönderilecek bir şey yok.
+⤓ Image du graphique (PNG) ¦ ⤓ Grafik görüntüsü (PNG)
+{what} au montage, l’une après l’autre. ¦ {what} kurguya, art arda.
+image ajoutée ¦ görüntü eklendi
+images ajoutées ¦ görüntü eklendi
+sous-titre ajouté ¦ altyazı eklendi
+sous-titres ajoutés ¦ altyazılar eklendi
+Le fabricant de GIF n’est pas chargé. ¦ GIF oluşturucu yüklenmedi.
+🎞 GIF animé ¦ 🎞 Hareketli GIF
+sans son, petit, tourne en boucle ¦ sessiz, küçük, döngüde döner
+GIF… {n} % ¦ GIF… %{n}
+La vidéo est d’abord fabriquée (le film est rejoué en entier, laisse la fenêtre ouverte), puis rangée dans les médias. ¦ Video önce oluşturulur (film baştan sona yeniden oynatılır, pencereyi açık bırak), sonra medyaya kaydedilir.
+Fabriquer la vidéo pour l’envoyer ? ¦ Göndermek için video oluşturulsun mu?
+Fabriquer et envoyer ¦ Oluştur ve gönder
+ENVOYER ¦ GÖNDER
+Fabrication de la vidéo… ¦ Video oluşturuluyor…
+La vidéo n’a pas pu être rangée dans les médias. ¦ Video medyaya kaydedilemedi.
+Le son fini est rangé dans les médias (une copie), puis envoyé. ¦ Bitmiş ses medyaya kaydedilir (bir kopya), sonra gönderilir.
+Envoyer le son ? ¦ Ses gönderilsin mi?
+Ranger et envoyer ¦ Kaydet ve gönder
+Pas encore de transcription : « ⏱ Insérer l’heure » (⌘T), puis tape ce qui est dit. ¦ Henüz transkripsiyon yok: “⏱ Saati ekle” (⌘T), sonra söyleneni yaz.
+Transcription — {name} ¦ Transkripsiyon — {name}
+ (avec la transcription en sous-titres) ¦  (transkripsiyon altyazı olarak)
+La transcription (texte) ¦ Transkripsiyon (metin)
+Pas encore de transcription. ¦ Henüz transkripsiyon yok.
+Agnès Bernauer ¦ Agnes Bernauer
+7 colonnes en escalier et une réserve de 7 tas. La première carte posée sur une fondation donne la valeur de départ des quatre ; on descend en alternant rouge et noir, le Roi passe sur l’As. La pioche pose une carte sur chaque tas de la réserve ; une colonne vide prend la carte juste sous la valeur de départ. ¦ Merdiven gibi 7 sütun ve 7 yığınlık bir yedek. Bir temele konan ilk kart dördünün başlangıç değerini belirler; kırmızı ve siyahı değiştirerek aşağı dizilir, Papaz As’ın üstüne geçer. Deste yedeğin her yığınına bir kart koyar; boş bir sütun başlangıç değerinin hemen altındaki kartı alır.
+Thumb and Pouch ¦ Thumb and Pouch
+Klondike où l’on descend sur n’importe quelle couleur de carte sauf la sienne ; une colonne vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Kendi takımı dışında herhangi bir takımın üstüne aşağı dizilen Klondike; boş bir sütun herhangi bir kartı alır. Deste yalnızca bir kez geçer.
+Pas seul ¦ Yalnız değil
+6 colonnes d’une seule carte ; on descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte. La pioche se retourne une carte à la fois et ne passe qu’une fois. ¦ Tek kartlık 6 sütun; kırmızı ve siyahı değiştirerek aşağı dizilir, boş bir sütun herhangi bir kartı alır. Deste her seferinde bir kart açılır ve yalnızca bir kez geçer.
+Les impasses ¦ Çıkmazlar
+Les As sont posés d’avance ; 6 colonnes de 3 cartes (deux cachées). On descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte ; la pioche repasse une fois. ¦ Aslar önceden konmuş; 3 kartlık 6 sütun (ikisi kapalı). Kırmızı ve siyahı değiştirerek aşağı dizilir, boş bir sütun herhangi bir kartı alır; deste bir kez daha geçer.
+Huit fois huit ¦ Sekiz kere sekiz
+Deux jeux, 8 colonnes de 8 cartes visibles ; on descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte. La pioche repasse deux fois. ¦ İki deste, 8 açık kartlık 8 sütun; kırmızı ve siyahı değiştirerek aşağı dizilir, boş bir sütun herhangi bir kartı alır. Deste iki kez daha geçer.
+Spike ¦ Spike
+7 colonnes en escalier comme Klondike ; on descend en alternant rouge et noir et on déplace des suites entières. La pioche pose une carte sur chaque colonne. ¦ Klondike gibi merdiven şeklinde 7 sütun; kırmızı ve siyahı değiştirerek aşağı dizilir ve tüm diziler taşınır. Deste her sütuna bir kart koyar.
+Alternance ¦ Dönüşüm
+Deux jeux, 7 colonnes de 7 cartes, une cachée sur deux. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ İki deste, 7 kartlık 7 sütun, bir kapalı bir açık. Kırmızı ve siyahı değiştirerek aşağı dizilir ve tüm diziler taşınır; boş bir sütun herhangi bir kartı alır. Deste yalnızca bir kez geçer.
+La harpe ¦ Arp
+Deux jeux, 9 colonnes en escalier ; on descend en alternant rouge et noir. La pioche se retourne une carte à la fois et repasse trois fois. ¦ İki deste, merdiven gibi 9 sütun; kırmızı ve siyahı değiştirerek aşağı dizilir. Deste her seferinde bir kart açılır ve üç kez daha geçer.
+La grande harpe ¦ Büyük arp
+Deux jeux, 10 colonnes en escalier ; on descend en alternant rouge et noir. La pioche se retourne une carte à la fois et ne passe qu’une fois. ¦ İki deste, merdiven gibi 10 sütun; kırmızı ve siyahı değiştirerek aşağı dizilir. Deste her seferinde bir kart açılır ve yalnızca bir kez geçer.
+Acme ¦ Acme
+Une réserve de 13 cartes et 4 colonnes ; les fondations partent de l’As. On descend dans la même couleur de carte, une carte à la fois ; une colonne vide se remplit avec la réserve. La pioche repasse une fois. ¦ 13 kartlık bir yedek ve 4 sütun; temeller As’tan başlar. Aynı takımdan aşağı dizilir, her seferinde bir kart; boş bir sütun yedekten doldurulur. Deste bir kez daha geçer.
+Le crapaud américain ¦ Amerikan kurbağası
+Deux jeux, une réserve de 20 cartes et 8 colonnes. La première carte posée sur une fondation donne la valeur de départ des huit ; on descend dans la même couleur de carte, le Roi passe sur l’As. Une colonne vide se remplit avec la réserve ; la pioche repasse une fois. ¦ İki deste, 20 kartlık bir yedek ve 8 sütun. Bir temele konan ilk kart sekizinin başlangıç değerini belirler; aynı takımdan aşağı dizilir, Papaz As’ın üstüne geçer. Boş bir sütun yedekten doldurulur; deste bir kez daha geçer.
+Canfield bigarré ¦ Alacalı Canfield
+Deux jeux : les As sont posés d’avance, une réserve de 14 cartes et 5 colonnes. On descend en alternant rouge et noir ; une colonne vide se remplit avec la réserve. La pioche se retourne trois cartes à la fois et repasse deux fois. ¦ İki deste: Aslar önceden konmuş, 14 kartlık bir yedek ve 5 sütun. Kırmızı ve siyahı değiştirerek aşağı dizilir; boş bir sütun yedekten doldurulur. Deste üçer kart açılır ve iki kez daha geçer.
+La duchesse ¦ Düşes
+Quatre tas de réserve de 3 cartes et 4 colonnes d’une carte. La première carte posée sur une fondation donne la valeur de départ des quatre ; on descend en alternant rouge et noir, le Roi passe sur l’As. Une colonne vide prend n’importe quelle carte ; la pioche repasse une fois. ¦ 3 kartlık dört yedek yığın ve tek kartlık 4 sütun. Bir temele konan ilk kart dördünün başlangıç değerini belirler; kırmızı ve siyahı değiştirerek aşağı dizilir, Papaz As’ın üstüne geçer. Boş bir sütun herhangi bir kartı alır; deste bir kez daha geçer.
+La porte ¦ Kapı
+Deux tas de réserve de 5 cartes (les battants de la porte) et 8 colonnes d’une carte. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ 5 kartlık iki yedek yığın (kapının kanatları) ve tek kartlık 8 sütun. Kırmızı ve siyahı değiştirerek aşağı dizilir ve tüm diziler taşınır; boş bir sütun herhangi bir kartı alır. Deste yalnızca bir kez geçer.
+Le pingouin ¦ Penguen
+La première carte donne la valeur de départ des fondations, et les trois autres de même valeur y montent tout de suite. 7 colonnes de 7, 7 cases libres ; on descend dans la même couleur de carte, le Roi passe sur l’As. Une colonne vide prend la carte juste sous la valeur de départ. ¦ İlk kart temellerin başlangıç değerini belirler ve aynı değerdeki diğer üçü hemen oraya çıkar. 7’şer kartlık 7 sütun, 7 boş hücre; aynı takımdan aşağı dizilir, Papaz As’ın üstüne geçer. Boş bir sütun başlangıç değerinin hemen altındaki kartı alır.
+Baker’s Game (Roi seul) ¦ Baker’s Game (yalnızca Papaz)
+Baker’s Game (descendre dans la même couleur de carte, 4 cases libres), mais une colonne vide ne prend qu’un Roi. ¦ Baker’s Game (aynı takımdan aşağı dizilir, 4 boş hücre), ama boş bir sütun yalnızca Papaz alır.
+Seahaven détendu ¦ Rahat Seahaven
+Seahaven, mais une suite bien rangée dans la même couleur de carte se déplace d’un coup, quelle que soit sa longueur. ¦ Seahaven, ama aynı takımdan düzgün dizilmiş bir dizi, uzunluğu ne olursa olsun tek seferde taşınır.
+Repair ¦ Repair
+Deux jeux, 10 colonnes de 10 cartes visibles et 4 cases libres déjà occupées ; on descend en alternant rouge et noir, une carte à la fois (ou une suite si les cases libres le permettent). ¦ İki deste, 10 açık kartlık 10 sütun ve önceden dolu 4 boş hücre; kırmızı ve siyahı değiştirerek aşağı dizilir, her seferinde bir kart (ya da boş hücreler izin verirse bir dizi).
+Ocean Towers ¦ Ocean Towers
+Deux jeux, 14 colonnes de 7 cartes et 8 cases libres dont 6 déjà occupées ; on descend dans la même couleur de carte, une colonne vide ne prend qu’un Roi. ¦ İki deste, 7 kartlık 14 sütun ve 6’sı önceden dolu 8 boş hücre; aynı takımdan aşağı dizilir, boş bir sütun yalnızca Papaz alır.
+Sept par quatre ¦ Yedi çarpı dört
+FreeCell à 7 colonnes et 4 cases libres : les colonnes sont plus hautes. ¦ 7 sütun ve 4 boş hücreli FreeCell: sütunlar daha uzun.
+Sept par cinq ¦ Yedi çarpı beş
+FreeCell à 7 colonnes et 5 cases libres. ¦ 7 sütun ve 5 boş hücreli FreeCell.
+FreeCell défi ¦ FreeCell meydan okuma
+FreeCell, mais les As et les 2 sont tout au fond des colonnes, sous toutes les autres cartes. ¦ FreeCell, ama Aslar ve 2’ler sütunların en dibinde, tüm diğer kartların altında.
+FreeCell super défi ¦ FreeCell süper meydan okuma
+FreeCell défi (les As et les 2 au fond des colonnes), et une colonne vide ne prend qu’un Roi. ¦ FreeCell meydan okuma (Aslar ve 2’ler sütunların dibinde), ve boş bir sütun yalnızca Papaz alır.
+Le scarabée ¦ Bok böceği
+Scorpion sans pioche : les 52 cartes sont visibles en 7 colonnes. On descend dans la même couleur de carte et on déplace n’importe quel groupe ; une colonne vide ne prend qu’un Roi. Une suite complète du Roi à l’As s’en va. ¦ Destesiz Scorpion: 52 kartın tamamı 7 sütunda görünür. Aynı takımdan aşağı dizilir ve herhangi bir grup taşınır; boş bir sütun yalnızca Papaz alır. Papaz’dan As’a tam bir dizi çıkar.
+Queue de scorpion ¦ Akrep kuyruğu
+Comme Scorpion (7 colonnes de 7, n’importe quel groupe se déplace), mais on descend en alternant rouge et noir et les cartes montent sur les fondations de l’As au Roi. ¦ Scorpion gibi (7’şer kartlık 7 sütun, herhangi bir grup taşınır), ama kırmızı ve siyahı değiştirerek aşağı dizilir ve kartlar temellere As’tan Papaz’a doğru çıkar.
+Scorpion double ¦ Çift Scorpion
+Deux jeux, 10 colonnes, tout est distribué (les cinq premières colonnes cachent 4 cartes). On descend dans la même couleur de carte et on déplace n’importe quel groupe ; une suite complète du Roi à l’As s’en va. ¦ İki deste, 10 sütun, her şey dağıtılır (ilk beş sütun 4 kart gizler). Aynı takımdan aşağı dizilir ve herhangi bir grup taşınır; Papaz’dan As’a tam bir dizi çıkar.
+Motif de divorce ¦ Boşanma sebebi
+Deux jeux, 10 colonnes de 5 cartes visibles. On descend sans s’occuper des couleurs ; seules les suites d’une même couleur de carte se déplacent ensemble ; une suite complète du Roi à l’As s’en va. La pioche pose une carte sur chaque colonne qui n’est pas vide. ¦ İki deste, 5 açık kartlık 10 sütun. Renklere bakmadan aşağı dizilir; yalnızca aynı takımdan diziler birlikte taşınır; Papaz’dan As’a tam bir dizi çıkar. Deste boş olmayan her sütuna bir kart koyar.
+La tarentule ¦ Tarantula
+L’araignée à quatre couleurs, mais une suite qui descend dans la même teinte (rouge ou noire) se déplace d’un coup. Une suite complète du Roi à l’As dans une même couleur de carte s’en va. ¦ Dört takımlı Örümcek, ama aynı renkte (kırmızı ya da siyah) aşağı inen bir dizi tek seferde taşınır. Aynı takımdan Papaz’dan As’a tam bir dizi çıkar.
+Araignée à découvert ¦ Açık örümcek
+L’araignée à quatre couleurs, mais toutes les cartes sont visibles dès le départ. ¦ Dört takımlı Örümcek, ama tüm kartlar baştan görünür.
+La harpe de Milligan ¦ Milligan’ın arpı
+Deux jeux, 8 colonnes en escalier ; on descend en alternant rouge et noir et on déplace des suites entières. Une colonne vide ne prend qu’un Roi ; la pioche pose une carte sur chaque colonne. Les fondations montent de l’As au Roi. ¦ İki deste, merdiven gibi 8 sütun; kırmızı ve siyahı değiştirerek aşağı dizilir ve tüm diziler taşınır. Boş bir sütun yalnızca Papaz alır; deste her sütuna bir kart koyar. Temeller As’tan Papaz’a yükselir.
+La harpe de Lexington ¦ Lexington arpı
+La harpe de Milligan (deux jeux, 8 colonnes en escalier, la pioche pose une carte sur chaque colonne), mais on déplace n’importe quel groupe de cartes visibles. ¦ Milligan’ın arpı (iki deste, merdiven gibi 8 sütun, deste her sütuna bir kart koyar), ama açık kartlardan herhangi bir grup taşınır.
+Brunswick ¦ Brunswick
+La harpe de Lexington avec toutes les cartes visibles : n’importe quel groupe se déplace, la pioche pose une carte sur chaque colonne. ¦ Tüm kartları açık Lexington arpı: herhangi bir grup taşınır, deste her sütuna bir kart koyar.
+Carlton ¦ Carlton
+La harpe de Milligan avec toutes les cartes visibles, et une colonne vide prend n’importe quelle carte. ¦ Tüm kartları açık Milligan’ın arpı, ve boş bir sütun herhangi bir kartı alır.
+Miss Milligan ¦ Miss Milligan
+Deux jeux, 8 colonnes d’une carte ; la pioche pose une carte sur chaque colonne. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide ne prend qu’un Roi. Quand la pioche est vide, une case libre s’ouvre pour mettre une carte de côté. ¦ İki deste, tek kartlık 8 sütun; deste her sütuna bir kart koyar. Kırmızı ve siyahı değiştirerek aşağı dizilir ve tüm diziler taşınır; boş bir sütun yalnızca Papaz alır. Deste bitince bir kartı kenara koymak için bir boş hücre açılır.
+Millie ¦ Millie
+Deux jeux, 8 colonnes d’une carte ; la pioche pose une carte sur chaque colonne. On descend en alternant rouge et noir et une colonne vide prend n’importe quelle carte. ¦ İki deste, tek kartlık 8 sütun; deste her sütuna bir kart koyar. Kırmızı ve siyahı değiştirerek aşağı dizilir ve boş bir sütun herhangi bir kartı alır.
+L’île d’Elbe ¦ Elba adası
+Deux jeux, 10 colonnes de 5 cartes (quatre cachées) ; on descend en alternant rouge et noir et on déplace des suites entières. Une colonne vide ne prend qu’un Roi ; la pioche pose une carte sur chaque colonne. ¦ İki deste, 5 kartlık 10 sütun (dördü kapalı); kırmızı ve siyahı değiştirerek aşağı dizilir ve tüm diziler taşınır. Boş bir sütun yalnızca Papaz alır; deste her sütuna bir kart koyar.
+Le mont Olympe ¦ Olimpos dağı
+Deux jeux : les As et les 2 sont posés d’avance, et les fondations montent de deux en deux dans la même couleur de carte (As, 3, 5… ou 2, 4, 6…). 9 colonnes ; on descend de deux en deux dans la même couleur de carte. La pioche pose une carte sur chaque colonne. ¦ İki deste: Aslar ve 2’ler önceden konmuş, temeller aynı takımdan ikişer ikişer yükselir (As, 3, 5… ya da 2, 4, 6…). 9 sütun; aynı takımdan ikişer ikişer aşağı dizilir. Deste her sütuna bir kart koyar.
+La patience australienne ¦ Avustralya sabır oyunu
+7 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte et on déplace n’importe quel groupe de cartes visibles. Une colonne vide ne prend qu’un Roi ; la pioche ne passe qu’une fois. ¦ 4 açık kartlık 7 sütun; aynı takımdan aşağı dizilir ve açık kartlardan herhangi bir grup taşınır. Boş bir sütun yalnızca Papaz alır; deste yalnızca bir kez geçer.
+Canberra ¦ Canberra
+La patience australienne, mais la pioche repasse une fois. ¦ Avustralya sabır oyunu, ama deste bir kez daha geçer.
+Raw Prawn ¦ Raw Prawn
+La patience australienne, mais une colonne vide prend n’importe quelle carte. ¦ Avustralya sabır oyunu, ama boş bir sütun herhangi bir kartı alır.
+Rushdike ¦ Rushdike
+7 colonnes en escalier ; on descend dans la même couleur de carte et on déplace n’importe quel groupe de cartes visibles. La pioche pose une carte sur chaque colonne. ¦ Merdiven gibi 7 sütun; aynı takımdan aşağı dizilir ve açık kartlardan herhangi bir grup taşınır. Deste her sütuna bir kart koyar.
+La discipline chinoise ¦ Çin disiplini
+7 colonnes de 7 cartes (trois cachées, sauf dans la première) ; on descend en alternant rouge et noir et on déplace n’importe quel groupe de cartes visibles. Les 3 dernières cartes vont sur les trois premières colonnes. ¦ 7 kartlık 7 sütun (ilki hariç üçü kapalı); kırmızı ve siyahı değiştirerek aşağı dizilir ve açık kartlardan herhangi bir grup taşınır. Son 3 kart ilk üç sütuna gider.
+Solitaire russe double ¦ Çift Rus sabır oyunu
+Deux jeux, 10 colonnes, 8 fondations ; on descend dans la même couleur de carte et on déplace n’importe quel groupe de cartes visibles. ¦ İki deste, 10 sütun, 8 temel; aynı takımdan aşağı dizilir ve açık kartlardan herhangi bir grup taşınır.
+Ali Baba ¦ Ali Baba
+Un seul jeu : les As sont posés d’avance, 10 colonnes de 4 cartes visibles. On descend dans la même couleur de carte et on déplace des suites entières ; la pioche ne passe qu’une fois. ¦ Tek deste: Aslar önceden konmuş, 4 açık kartlık 10 sütun. Aynı takımdan aşağı dizilir ve tüm diziler taşınır; deste yalnızca bir kez geçer.
+Cassim ¦ Kasım
+Un seul jeu : les As sont posés d’avance, 7 colonnes de 3 cartes visibles. On descend dans la même couleur de carte et on déplace des suites entières ; la pioche repasse autant que tu veux. ¦ Tek deste: Aslar önceden konmuş, 3 açık kartlık 7 sütun. Aynı takımdan aşağı dizilir ve tüm diziler taşınır; deste istediğin kadar yeniden geçer.
+Rang et file ¦ Saf ve sıra
+L’empereur (deux jeux, 10 colonnes de 4 cartes dont 3 cachées, en alternant rouge et noir), mais on déplace des suites entières. ¦ İmparator (iki deste, 3’ü kapalı 4 kartlık 10 sütun, kırmızı ve siyahı değiştirerek), ama tüm diziler taşınır.
+Les As affairés ¦ Meşgul Aslar
+Deux jeux, 12 colonnes d’une carte ; on descend dans la même couleur de carte, une carte à la fois. La pioche ne passe qu’une fois. ¦ İki deste, tek kartlık 12 sütun; aynı takımdan aşağı dizilir, her seferinde bir kart. Deste yalnızca bir kez geçer.
+La cour ¦ Saray
+Deux jeux, 12 colonnes d’une carte ; on descend dans la même couleur de carte et on déplace des suites entières. La pioche ne passe qu’une fois. ¦ İki deste, tek kartlık 12 sütun; aynı takımdan aşağı dizilir ve tüm diziler taşınır. Deste yalnızca bir kez geçer.
+Le carré de Napoléon ¦ Napolyon’un karesi
+Deux jeux, 12 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte et on déplace des suites entières. La pioche ne passe qu’une fois. ¦ İki deste, 4 açık kartlık 12 sütun; aynı takımdan aşağı dizilir ve tüm diziler taşınır. Deste yalnızca bir kez geçer.
+L’exil de Napoléon ¦ Napolyon’un sürgünü
+Les quarante voleurs où l’on descend sans s’occuper des couleurs, une carte à la fois. La pioche ne passe qu’une fois. ¦ Renklere bakmadan, her seferinde bir kart aşağı dizilen Kırk haramiler. Deste yalnızca bir kez geçer.
+Deuces ¦ Deuces
+Deux jeux : les huit 2 sont posés d’avance, et les fondations montent dans la même couleur de carte jusqu’à l’As. 10 colonnes d’une carte ; on descend dans la même couleur de carte (l’As va sur le 2, le Roi sur l’As), une carte à la fois. La pioche ne passe qu’une fois. ¦ İki deste: sekiz 2’li önceden konmuş, temeller aynı takımdan As’a kadar yükselir. Tek kartlık 10 sütun; aynı takımdan aşağı dizilir (As 2’nin, Papaz As’ın üstüne), her seferinde bir kart. Deste yalnızca bir kez geçer.
+La lune décroissante ¦ Küçülen ay
+Deux jeux, 13 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte et on déplace des suites entières. La pioche ne passe qu’une fois. ¦ İki deste, 4 açık kartlık 13 sütun; aynı takımdan aşağı dizilir ve tüm diziler taşınır. Deste yalnızca bir kez geçer.
+Les cinquante fameux ¦ Ünlü elliler
+Les quarante voleurs avec 5 cartes par colonne : deux jeux, 10 colonnes de 5, même couleur de carte, une carte à la fois. La pioche ne passe qu’une fois. ¦ Sütun başına 5 kartlı Kırk haramiler: iki deste, 5’er kartlık 10 sütun, aynı takım, her seferinde bir kart. Deste yalnızca bir kez geçer.
+Quarante-neuf ¦ Kırk dokuz
+Deux jeux, 7 colonnes de 7 cartes visibles ; on descend en alternant rouge et noir, une carte à la fois. La pioche ne passe qu’une fois. ¦ İki deste, 7 açık kartlık 7 sütun; kırmızı ve siyahı değiştirerek aşağı dizilir, her seferinde bir kart. Deste yalnızca bir kez geçer.
+Sans limite ¦ Sınırsız
+Les quarante voleurs, mais la pioche repasse autant que tu veux. ¦ Kırk haramiler, ama deste istediğin kadar yeniden geçer.
+Les petits quarante ¦ Küçük kırklar
+Les quarante voleurs où l’on descend sans s’occuper des couleurs et on déplace des suites entières ; la pioche se retourne trois cartes à la fois et repasse trois fois. ¦ Renklere bakmadan aşağı dizilen ve tüm dizilerin taşındığı Kırk haramiler; deste üçer kart açılır ve üç kez daha geçer.
+Le zèbre ¦ Zebra
+Deux jeux, les As posés d’avance, 8 colonnes d’une carte ; on descend en alternant rouge et noir, une carte à la fois. La pioche repasse une fois. ¦ İki deste, Aslar önceden konmuş, tek kartlık 8 sütun; kırmızı ve siyahı değiştirerek aşağı dizilir, her seferinde bir kart. Deste bir kez daha geçer.
+Le congrès ¦ Kongre
+Deux jeux, 8 colonnes d’une carte ; on descend sans s’occuper des couleurs, une carte à la fois. La pioche ne passe qu’une fois. ¦ İki deste, tek kartlık 8 sütun; renklere bakmadan aşağı dizilir, her seferinde bir kart. Deste yalnızca bir kez geçer.
+Le parlement ¦ Parlamento
+Le congrès (deux jeux, 8 colonnes d’une carte, on descend sans s’occuper des couleurs), avec les As posés d’avance. ¦ Kongre (iki deste, tek kartlık 8 sütun, renklere bakmadan aşağı dizilir), Aslar önceden konmuş olarak.
+Pair et impair ¦ Tek ve çift
+Deux jeux : un As et un 2 de chaque couleur de carte sont posés d’avance, et les fondations montent de deux en deux dans leur couleur (As, 3, 5… Roi, 2, 4… ou 2, 4… Dame, As, 3…). 9 places d’une carte, sur lesquelles on ne construit pas ; une place vide prend n’importe quelle carte. La pioche repasse une fois. ¦ İki deste: her takımdan bir As ve bir 2 önceden konmuş, temeller kendi takımlarında ikişer ikişer yükselir (As, 3, 5… Papaz, 2, 4… ya da 2, 4… Kız, As, 3…). Tek kartlık 9 yer, üzerlerine dizilmez; boş bir yer herhangi bir kartı alır. Deste bir kez daha geçer.
+Le cotillon royal ¦ Kraliyet kotiyonu
+Deux jeux : un As et un 2 de chaque couleur de carte sont posés d’avance, et les fondations montent de deux en deux dans leur couleur. Quatre tas de réserve de 3 cartes (seule celle du dessus se joue) et 16 places d’une carte, sur lesquelles on ne construit pas ; une place vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ İki deste: her takımdan bir As ve bir 2 önceden konmuş, temeller kendi takımlarında ikişer ikişer yükselir. 3 kartlık dört yedek yığın (yalnızca üstteki oynanır) ve tek kartlık 16 yer, üzerlerine dizilmez; boş bir yer herhangi bir kartı alır. Deste yalnızca bir kez geçer.
+Le treize porte-bonheur ¦ Uğurlu on üç
+13 colonnes de 4 cartes visibles ; on descend sans s’occuper des couleurs, une carte à la fois ; une colonne vide reste vide. ¦ 4 açık kartlık 13 sütun; renklere bakmadan aşağı dizilir, her seferinde bir kart; boş bir sütun boş kalır.
+La patience portugaise ¦ Portekiz sabır oyunu
+13 colonnes de 4 cartes visibles ; on descend sans s’occuper des couleurs, une carte à la fois ; seul un Roi va dans une colonne vide. ¦ 4 açık kartlık 13 sütun; renklere bakmadan aşağı dizilir, her seferinde bir kart; boş bir sütuna yalnızca Papaz gider.
+Bonne mesure ¦ Bol ölçü
+Deux As sont posés d’avance ; 10 colonnes de 5 cartes visibles. On descend sans s’occuper des couleurs, une carte à la fois ; une colonne vide prend n’importe quelle carte. ¦ İki As önceden konmuş; 5 açık kartlık 10 sütun. Renklere bakmadan aşağı dizilir, her seferinde bir kart; boş bir sütun herhangi bir kartı alır.
+La cruelle ¦ Acımasız
+Les As sont posés d’avance ; 12 tas de 4 cartes. On descend dans la même couleur de carte, une carte à la fois ; une place vide reste vide. Autant de fois que tu veux, on ramasse les tas dans l’ordre, sans mélanger, et on redistribue par 4. ¦ Aslar önceden konmuş; 4 kartlık 12 yığın. Aynı takımdan aşağı dizilir, her seferinde bir kart; boş bir yer boş kalır. İstediğin kadar, yığınlar karıştırılmadan sırayla toplanır ve dörder dörder yeniden dağıtılır.
+La persévérance ¦ Sebat
+Comme la cruelle (les As posés d’avance, 12 tas de 4, même couleur de carte), mais on déplace des suites entières et on ne ramasse que deux fois. ¦ Acımasız gibi (Aslar önceden konmuş, 4’er kartlık 12 yığın, aynı takım), ama tüm diziler taşınır ve yalnızca iki kez toplanır.
+L’éventail en vagues ¦ Dalgalı yelpaze
+13 tas de 4 cartes, les As restent mélangés aux autres ; on descend dans la même couleur de carte, une carte à la fois ; une place vide reste vide. Autant de fois que tu veux, on ramasse les tas dans l’ordre, sans mélanger, et on redistribue par 4. ¦ 4 kartlık 13 yığın, Aslar diğerlerine karışık kalır; aynı takımdan aşağı dizilir, her seferinde bir kart; boş bir yer boş kalır. İstediğin kadar, yığınlar karıştırılmadan sırayla toplanır ve dörder dörder yeniden dağıtılır.
+L’éventail en boîte ¦ Kutudaki yelpaze
+Les As sont posés d’avance ; 16 éventails de 3 cartes. On descend en alternant rouge et noir, une carte à la fois ; seul un Roi va dans une place vide. ¦ Aslar önceden konmuş; 3 kartlık 16 yelpaze. Kırmızı ve siyahı değiştirerek aşağı dizilir, her seferinde bir kart; boş bir yere yalnızca Papaz gider.
+L’éventail fascinant ¦ Büyüleyici yelpaze
+La Belle Lucie (17 éventails de 3 cartes) où l’on descend en alternant rouge et noir, avec six redistributions. ¦ Kırmızı ve siyahı değiştirerek aşağı dizilen La Belle Lucie (3 kartlık 17 yelpaze), altı yeniden dağıtımla.
+La lampe de minuit ¦ Gece yarısı lambası
+La Belle Lucie (17 éventails de 3 cartes) où l’on descend en alternant rouge et noir, avec deux redistributions. ¦ Kırmızı ve siyahı değiştirerek aşağı dizilen La Belle Lucie (3 kartlık 17 yelpaze), iki yeniden dağıtımla.
+Shamrocks ¦ Shamrocks
+17 éventails de 3 cartes ; on monte ou on descend d’un rang sans s’occuper des couleurs, une carte à la fois, et un éventail ne garde jamais plus de 3 cartes. Pas de redistribution. ¦ 3 kartlık 17 yelpaze; renklere bakmadan bir değer yukarı ya da aşağı gidilir, her seferinde bir kart, ve bir yelpaze asla 3’ten fazla kart tutmaz. Yeniden dağıtım yok.
+La maison dans les bois ¦ Ormandaki ev
+Deux jeux, 35 éventails de 3 cartes ; on monte ou on descend d’un rang dans la même couleur de carte, une carte à la fois. Une place vide reste vide. ¦ İki deste, 3 kartlık 35 yelpaze; aynı takımda bir değer yukarı ya da aşağı gidilir, her seferinde bir kart. Boş bir yer boş kalır.
+La maison sur la colline ¦ Tepedeki ev
+La maison dans les bois (deux jeux, 35 éventails), mais quatre fondations montent de l’As au Roi et quatre autres descendent du Roi à l’As. ¦ Ormandaki ev (iki deste, 35 yelpaze), ama dört temel As’tan Papaz’a yükselir ve dört diğeri Papaz’dan As’a iner.
+Bisley ¦ Bisley
+Les As sont posés d’avance ; 13 colonnes (4 de 3 cartes, 9 de 4). Les fondations des As montent, celles des Rois descendent, dans la même couleur de carte. Sur le tableau, on monte ou on descend dans la même couleur de carte, une carte à la fois ; une colonne vide reste vide. ¦ Aslar önceden konmuş; 13 sütun (4’ü 3 kartlık, 9’u 4 kartlık). As temelleri yükselir, Papaz temelleri iner, aynı takımda. Masada aynı takımda yukarı ya da aşağı gidilir, her seferinde bir kart; boş bir sütun boş kalır.
+Le cadran du grand-père ¦ Büyükbaba saati
+12 fondations comme les heures d’une horloge, qui commencent par 2♥, 3♠, 4♦, 5♣… jusqu’au Roi ♣ et montent dans la même couleur de carte (le Roi passe à l’As). 8 colonnes de 5 cartes ; on descend sans s’occuper des couleurs, une carte à la fois ; une colonne vide prend n’importe quelle carte. ¦ Bir saatin saatleri gibi 12 temel; 2♥, 3♠, 4♦, 5♣… ile başlayıp Papaz ♣’ye kadar gider ve aynı takımda yükselir (Papaz As’a geçer). 5 kartlık 8 sütun; renklere bakmadan aşağı dizilir, her seferinde bir kart; boş bir sütun herhangi bir kartı alır.
+Le mur de pierre ¦ Taş duvar
+6 colonnes de 6 cartes, une cachée sur deux, et un bouquet de 16 cartes où l’on peut prendre n’importe laquelle. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. ¦ 6 kartlık 6 sütun, bir kapalı bir açık, ve istediğin kartın alınabildiği 16 kartlık bir buket. Kırmızı ve siyahı değiştirerek aşağı dizilir ve tüm diziler taşınır; boş bir sütun herhangi bir kartı alır.
+La fleur sauvage ¦ Yaban çiçeği
+Le jardin fleuri (6 colonnes de 6 et un bouquet de 16 cartes), mais on déplace des suites entières. ¦ Çiçekli bahçe (6’şar kartlık 6 sütun ve 16 kartlık bir buket), ama tüm diziler taşınır.
+10 colonnes toutes visibles. La première carte posée sur une fondation donne la valeur de départ des quatre (le Roi passe à l’As). On monte ou on descend dans la même couleur de carte, une carte à la fois, et le Roi touche l’As. ¦ Tamamı açık 10 sütun. Bir temele konan ilk kart dördünün başlangıç değerini belirler (Papaz As’a geçer). Aynı takımda yukarı ya da aşağı gidilir, her seferinde bir kart, ve Papaz As’a değer.
+La place forte ¦ Kale
+Rues et ruelles (8 colonnes, on descend sans s’occuper des couleurs), avec une case libre. ¦ Sokaklar ve dar yollar (8 sütun, renklere bakmadan aşağı dizilir), bir boş hücreyle.
+Le fort ¦ Hisar
+Rues et ruelles (8 colonnes, on descend sans s’occuper des couleurs), avec deux cases libres. ¦ Sokaklar ve dar yollar (8 sütun, renklere bakmadan aşağı dizilir), iki boş hücreyle.
+L’art du siège ¦ Kuşatma sanatı
+Le château assiégé (les As posés d’avance, 8 colonnes de 6), avec une case libre. ¦ Kuşatılmış şato (Aslar önceden konmuş, 6’şar kartlık 8 sütun), bir boş hücreyle.
+La toile de Pénélope ¦ Penelope’nin dokuması
+Le château assiégé (les As posés d’avance, 8 colonnes de 6), mais seul un Roi va dans une colonne vide. ¦ Kuşatılmış şato (Aslar önceden konmuş, 6’şar kartlık 8 sütun), ama boş bir sütuna yalnızca Papaz gider.
+La citadelle ¦ İç kale
+Le château assiégé, mais pendant la distribution, toute carte qui peut monter sur une fondation y va tout de suite. ¦ Kuşatılmış şato, ama dağıtım sırasında bir temele çıkabilen her kart hemen oraya gider.
+Les rois exilés ¦ Sürgün krallar
+La citadelle (les cartes qui peuvent monter y vont pendant la distribution), mais seul un Roi va dans une colonne vide. ¦ İç kale (çıkabilen kartlar dağıtım sırasında oraya gider), ama boş bir sütuna yalnızca Papaz gider.
+Le bastion ¦ Burç
+10 colonnes de 5 cartes et 2 cases libres déjà occupées ; on monte ou on descend dans la même couleur de carte, une carte à la fois ; une colonne vide prend n’importe quelle carte. ¦ 5 kartlık 10 sütun ve önceden dolu 2 boş hücre; aynı takımda yukarı ya da aşağı gidilir, her seferinde bir kart; boş bir sütun herhangi bir kartı alır.
+La boîte à thé ¦ Çay kutusu
+8 colonnes de 6 ou 7 cartes, tout est visible ; on descend sans s’occuper des couleurs et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. ¦ 6 ya da 7 kartlık 8 sütun, her şey görünür; renklere bakmadan aşağı dizilir ve tüm diziler taşınır; boş bir sütun herhangi bir kartı alır.
+La boîte à thé américaine ¦ Amerikan çay kutusu
+8 colonnes de 6 ou 7 cartes, tout est visible ; on descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. ¦ 6 ya da 7 kartlık 8 sütun, her şey görünür; kırmızı ve siyahı değiştirerek aşağı dizilir ve tüm diziler taşınır; boş bir sütun herhangi bir kartı alır.
+La boîte à thé anglaise ¦ İngiliz çay kutusu
+8 colonnes de 6 ou 7 cartes, tout est visible ; on descend en alternant rouge et noir, une carte à la fois ; seul un Roi va dans une colonne vide. ¦ 6 ya da 7 kartlık 8 sütun, her şey görünür; kırmızı ve siyahı değiştirerek aşağı dizilir, her seferinde bir kart; boş bir sütuna yalnızca Papaz gider.
+Les trois sommets stricts ¦ Katı üç tepe
+Les trois sommets, mais le Roi et l’As ne se suivent pas : la partie est plus difficile. ¦ Üç tepe, ama Papaz ile As birbirini izlemez: oyun daha zordur.
+Golf double ¦ Çift Golf
+Golf avec deux jeux : 9 colonnes de 7 cartes. Envoie sur la défausse une carte juste au-dessus ou au-dessous ; rien ne va sur un Roi. ¦ İki desteyle Golf: 7 kartlık 9 sütun. Atık yığınına hemen bir üst ya da bir alt kartı gönder; Papaz’ın üstüne hiçbir şey gitmez.
+As en haut (5 colonnes) ¦ Aslar yukarı (5 sütun)
+As en haut avec 5 colonnes : enlève une carte quand une autre colonne montre une carte plus forte de la même couleur de carte (l’As est le plus fort). Gagné s’il ne reste que les 4 As. ¦ 5 sütunlu Aslar yukarı: başka bir sütun aynı takımdan daha yüksek bir kart gösterdiğinde bir kartı kaldır (As en yüksektir). Yalnızca 4 As kalırsa kazandın.
+La baronne ¦ Barones
+5 tas : enlève un Roi seul, ou deux cartes du dessus qui font 13 (Valet 11, Dame 12). La pioche pose une carte sur chaque tas. ¦ 5 yığın: tek başına bir Papaz’ı ya da toplamı 13 eden iki üst kartı kaldır (Vale 11, Kız 12). Deste her yığına bir kart koyar.
+Sir Tommy ¦ Sir Tommy
+Chaque carte piochée va sur une fondation ou sur l’un des 4 tas d’attente. Les fondations commencent par un As et montent de 1 en 1, sans s’occuper des couleurs. ¦ Çekilen her kart bir temele ya da 4 bekleme yığınından birine gider. Temeller bir As’la başlar ve renklere bakmadan birer birer yükselir.
+Le chat dans le coin ¦ Köşedeki kedi
+Les As sont posés d’avance et montent de 1 en 1 dans leur teinte (rouge sur rouge, noir sur noir). Chaque carte piochée va sur une fondation ou sur l’un des 4 tas d’attente ; une fois, on ramasse les tas pour repiocher. ¦ Aslar önceden konmuş ve kendi renklerinde birer birer yükselir (kırmızı üstüne kırmızı, siyah üstüne siyah). Çekilen her kart bir temele ya da 4 bekleme yığınından birine gider; bir kez, yeniden çekmek için yığınlar toplanır.
+La stratégie ¦ Strateji
+Chaque carte piochée va sur l’un des 8 tas d’attente ; seuls les As montent tout de suite. Quand la pioche est vide, on monte les cartes du dessus des tas, de 1 en 1 dans la même couleur de carte. ¦ Çekilen her kart 8 bekleme yığınından birine gider; yalnızca Aslar hemen çıkar. Deste bitince yığınların üstteki kartları aynı takımda birer birer çıkarılır.
+Gizeh ¦ Gize
+La pyramide sans pioche : les 24 autres cartes sont visibles en 3 rangées et se prennent toutes. Enlève les paires qui font 13 (Valet 11, Dame 12 ; un Roi s’en va seul). ¦ Destesiz Piramit: diğer 24 kart 3 sırada görünür ve hepsi alınabilir. Toplamı 13 eden çiftleri kaldır (Vale 11, Kız 12; Papaz tek başına gider).
+Toutânkhamon ¦ Tutankamon
+La pyramide, mais la pioche se retourne trois cartes à la fois (seule la dernière se joue) et repasse autant que tu veux. ¦ Piramit, ama deste üçer kart açılır (yalnızca sonuncusu oynanır) ve istediğin kadar yeniden geçer.
+La lune bleue ¦ Mavi ay
+Montana, mais les As vont au début des rangées : il faut ranger chaque rangée de l’As au Roi dans une même couleur. Un trou prend la carte de même couleur juste au-dessus de sa voisine de gauche. Deux fois, on peut ramasser ce qui n’est pas rangé et redistribuer. ¦ Montana, ama Aslar sıraların başına gider: her sırayı aynı takımda As’tan Papaz’a dizmek gerekir. Bir boşluk, soldaki komşusunun hemen üstündeki aynı takımdan kartı alır. İki kez, dizilmemiş olanı toplayıp yeniden dağıtabilirsin.
+La lune rouge ¦ Kızıl ay
+La lune bleue, mais les As sont posés d’avance au début des rangées et les trous sont au bout des rangées dès le départ. ¦ Mavi ay, ama Aslar önceden sıraların başına konmuş ve boşluklar baştan sıraların sonundadır.
+Le voisin ¦ Komşu
+Une grille de 5 × 5 : enlève deux cartes qui se touchent (même en diagonale) et font 13 (Valet 11, Dame 12) ; un Roi s’en va seul. Puis tasse la grille. ¦ 5 × 5’lik bir ızgara: birbirine değen (çapraz da olur) ve toplamı 13 eden iki kartı kaldır (Vale 11, Kız 12); Papaz tek başına gider. Sonra ızgarayı sıkıştır.
+Isabelle ¦ İzabel
+13 colonnes de 4 cartes (seule la dernière est visible) : enlève deux cartes de même valeur prises en bas des colonnes. Un jeu de pure chance, pour se détendre. ¦ 4 kartlık 13 sütun (yalnızca sonuncusu görünür): sütunların altından alınan aynı değerde iki kartı kaldır. Kafa dağıtmak için saf bir şans oyunu.
+Quatorze en colonnes ¦ Sütunlarda on dört
+12 colonnes avec toutes les cartes visibles : enlève deux cartes prises en bas des colonnes qui font 14 (Valet 11, Dame 12, Roi 13). ¦ Tüm kartları açık 12 sütun: sütunların altından alınan ve toplamı 14 eden iki kartı kaldır (Vale 11, Kız 12, Papaz 13).
+Ramassé et redistribué, sans mélanger. ¦ Karıştırılmadan toplandı ve yeniden dağıtıldı.
+Les tas d’attente sont ramassés dans la pioche. ¦ Bekleme yığınları desteye toplanır.
+Ouvre le Jeu, choisis « 🂠 Patiences (jeux de cartes) » dans « Jeu », puis le jeu parmi 233 patiences rangées par famille (Klondike, FreeCell, Araignée, Yukon, Les quarante voleurs, Châteaux et jardins, jeux de paires). Glisse une carte (ou une suite) sur une autre pile, ou clique-la puis clique où la poser ; double-clic : sur une fondation ; clic sur la pioche : piocher. Dans les jeux de paires (Pyramide, Onze, Treize…), clique les cartes qui vont ensemble. ¦ Oyun’u aç, “Oyun” içinde “🂠 Patiens (kâğıt oyunları)”nı seç, sonra aileye göre sıralanmış 233 patiens arasından oyunu seç (Klondike, FreeCell, Örümcek, Yukon, Kırk haramiler, Şatolar ve bahçeler, çift oyunları). Bir kartı (ya da bir diziyi) başka bir yığına sürükle, ya da ona tıkla sonra koyacağın yere tıkla; çift tıklama: bir temele; desteye tıklama: kart çek. Çift oyunlarında (Piramit, On bir, On üç…) birlikte giden kartlara tıkla.
+Quelles autres patiences sont arrivées ensuite ? ¦ Sonra hangi başka patiensler geldi?
+Cent deux patiences classiques de plus, chacune avec ses règles dans « 📖 Les règles » de la partie. Famille Klondike et Canfield : Agnès Bernauer, Thumb and Pouch, Pas seul, Les impasses, Huit fois huit, Spike, Alternance, La harpe, La grande harpe, Acme, Le crapaud américain, Canfield bigarré, La duchesse, La porte. Avec des cases libres : Le pingouin, Baker’s Game (Roi seul), Seahaven détendu, Repair, Ocean Towers, Sept par quatre, Sept par cinq, FreeCell défi, FreeCell super défi. Araignées et gitanes : Le scarabée, Queue de scorpion, Scorpion double, Motif de divorce, La tarentule, Araignée à découvert, La harpe de Milligan, La harpe de Lexington, Brunswick, Carlton, Miss Milligan, Millie, L’île d’Elbe, Le mont Olympe. Yukon : La patience australienne, Canberra, Raw Prawn, Rushdike, La discipline chinoise, Solitaire russe double. Les quarante voleurs et leurs cousins : Ali Baba, Cassim, Rang et file, Les As affairés, La cour, Le carré de Napoléon, L’exil de Napoléon, Deuces, La lune décroissante, Les cinquante fameux, Quarante-neuf, Sans limite, Les petits quarante, Le zèbre, Le congrès, Le parlement, Pair et impair, Le cotillon royal. Châteaux, éventails et jardins : Le treize porte-bonheur, La patience portugaise, Bonne mesure, La cruelle, La persévérance, L’éventail en vagues, L’éventail en boîte, L’éventail fascinant, La lampe de minuit, Shamrocks, La maison dans les bois, La maison sur la colline, Bisley, Le cadran du grand-père, Le mur de pierre, La fleur sauvage, L’échiquier, La place forte, Le fort, L’art du siège, La toile de Pénélope, La citadelle, Les rois exilés, Le bastion, La boîte à thé (et ses versions américaine et anglaise). Paires, suites et calculs : Les trois sommets stricts, Golf double, As en haut (5 colonnes), La baronne, Sir Tommy, Le chat dans le coin, La stratégie, Gizeh, Toutânkhamon, La lune bleue, La lune rouge, Le voisin, Isabelle et Quatorze en colonnes. ¦ Yüz iki klasik patiens daha, her biri oyunun “📖 Kurallar” bölümünde kendi kurallarıyla. Klondike ve Canfield ailesi: Agnes Bernauer, Thumb and Pouch, Yalnız değil, Çıkmazlar, Sekiz kere sekiz, Spike, Dönüşüm, Arp, Büyük arp, Acme, Amerikan kurbağası, Alacalı Canfield, Düşes, Kapı. Boş hücreli: Penguen, Baker’s Game (yalnızca Papaz), Rahat Seahaven, Repair, Ocean Towers, Yedi çarpı dört, Yedi çarpı beş, FreeCell meydan okuma, FreeCell süper meydan okuma. Örümcekler ve çingeneler: Bok böceği, Akrep kuyruğu, Çift Scorpion, Boşanma sebebi, Tarantula, Açık örümcek, Milligan’ın arpı, Lexington arpı, Brunswick, Carlton, Miss Milligan, Millie, Elba adası, Olimpos dağı. Yukon: Avustralya sabır oyunu, Canberra, Raw Prawn, Rushdike, Çin disiplini, Çift Rus sabır oyunu. Kırk haramiler ve kuzenleri: Ali Baba, Kasım, Saf ve sıra, Meşgul Aslar, Saray, Napolyon’un karesi, Napolyon’un sürgünü, Deuces, Küçülen ay, Ünlü elliler, Kırk dokuz, Sınırsız, Küçük kırklar, Zebra, Kongre, Parlamento, Tek ve çift, Kraliyet kotiyonu. Şatolar, yelpazeler ve bahçeler: Uğurlu on üç, Portekiz sabır oyunu, Bol ölçü, Acımasız, Sebat, Dalgalı yelpaze, Kutudaki yelpaze, Büyüleyici yelpaze, Gece yarısı lambası, Shamrocks, Ormandaki ev, Tepedeki ev, Bisley, Büyükbaba saati, Taş duvar, Yaban çiçeği, Satranç tahtası, Kale, Hisar, Kuşatma sanatı, Penelope’nin dokuması, İç kale, Sürgün krallar, Burç, Çay kutusu (ve Amerikan ve İngiliz sürümleri). Çiftler, diziler ve hesaplar: Katı üç tepe, Çift Golf, Aslar yukarı (5 sütun), Barones, Sir Tommy, Köşedeki kedi, Strateji, Gize, Tutankamon, Mavi ay, Kızıl ay, Komşu, İzabel ve Sütunlarda on dört.
+(suite) ¦ (devam)
+.pptx : textes, images, formes, tableaux ¦ .pptx: metinler, görüntüler, şekiller, tablolar
+Ce texte est vide : rien à mettre en diapositives. ¦ Bu metin boş: slayta konacak bir şey yok.
+Cette image n’est pas dans les médias. ¦ Bu görüntü medyada değil.
+Envoyer vers… : la présentation en vidéo, dans le Montage vidéo ou sur ton site ¦ Şuraya gönder…: video olarak sunum, Video kurgusunda ya da sitende
+Fichier PowerPoint téléchargé. ¦ PowerPoint dosyası indirildi.
+La présentation devient une vidéo ({time}), rangée dans les Médias, puis tu choisis où elle va : le Montage vidéo ou ton site. Laisse la fenêtre ouverte pendant l’enregistrement. ¦ Sunum bir videoya dönüşür ({time}), Medya’ya kaydedilir, sonra nereye gideceğini seçersin: Video kurgusu ya da siten. Kayıt sırasında pencereyi açık bırak.
+Le diaporama devient une vidéo ({time}), rangée dans les Médias, puis tu choisis où elle va : le Montage vidéo ou ton site. Laisse la fenêtre ouverte pendant l’enregistrement. ¦ Slayt gösterisi bir videoya dönüşür ({time}), Medya’ya kaydedilir, sonra nereye gideceğini seçersin: Video kurgusu ya da siten. Kayıt sırasında pencereyi açık bırak.
+Le diaporama en vidéo, rangé dans les médias, puis dans le Montage vidéo ou sur ton site ¦ Video olarak slayt gösterisi, medyaya kaydedilir, sonra Video kurgusuna ya da sitene
+PowerPoint : assemblage du fichier… ¦ PowerPoint: dosya birleştiriliyor…
+PowerPoint : diapositive {n} / {total} ¦ PowerPoint: slayt {n} / {total}
+PowerPoint impossible : {error} ¦ PowerPoint yapılamadı: {error}
+📊 PowerPoint ¦ 📊 PowerPoint
+📊 PowerPoint (.pptx) ¦ 📊 PowerPoint (.pptx)
+📤 Envoyer la présentation ¦ 📤 Sunumu gönder
+📤 Envoyer le diaporama ¦ 📤 Slayt gösterisini gönder
+📤 Envoyer vers… (la vidéo) ¦ 📤 Şuraya gönder… (video)
+📤 Envoyer vers… (le Montage vidéo, ton site) ¦ 📤 Şuraya gönder… (Video kurgusu, siten)
+⤓ Exporter l’image (PNG, JPG, WebP, TIFF, imprimer)… ¦ ⤓ Görüntüyü dışa aktar (PNG, JPG, WebP, TIFF, yazdır)…
+Exporter : l’image retouchée (PNG, JPG, WebP, TIFF, imprimer) ou l’avant / après ¦ Dışa aktar: rötuşlanmış görüntü (PNG, JPG, WebP, TIFF, yazdır) ya da önce / sonra
+🖼 L’image retouchée (PNG, JPG, WebP, TIFF, imprimer)… ¦ 🖼 Rötuşlanmış görüntü (PNG, JPG, WebP, TIFF, yazdır)…
+🌐 WebP ¦ 🌐 WebP
+léger, pour le web ¦ hafif, web için
+🗂 TIFF ¦ 🗂 TIFF
+sans perte, pour archiver ¦ kayıpsız, arşivlemek için
+Ce navigateur ne sait pas faire du WebP : choisis PNG ou JPG. ¦ Bu tarayıcı WebP yapamıyor: PNG ya da JPG seç.
+Cette action de retouche n’existe plus. ¦ Bu rötuş işlemi artık yok.
+Choisis une photo à retoucher. ¦ Rötuşlanacak bir fotoğraf seç.
+Envoyer l’image affichée ou le compte rendu vers un autre outil ¦ Gösterilen görüntüyü ya da raporu başka bir araca gönder
+Ouvrir la photo A ou B dans la Retouche des photos ¦ A ya da B fotoğrafını Fotoğraf rötuşunda aç
+Exporter l’image affichée, ou imprimer les deux photos avec la ressemblance et les notes ¦ Gösterilen görüntüyü dışa aktar ya da iki fotoğrafı benzerlik ve notlarla yazdır
+Exporter l’image (ce qui est affiché)… ¦ Görüntüyü dışa aktar (gösterilen)…
+Imprimer (les deux photos, la ressemblance, les notes)… ¦ Yazdır (iki fotoğraf, benzerlik, notlar)…
+L’image affichée ¦ Gösterilen görüntü
+Le compte rendu (photos, ressemblance, notes) ¦ Rapor (fotoğraflar, benzerlik, notlar)
+La Retouche des photos n’est pas chargée. ¦ Fotoğraf rötuşu yüklenmedi.
+Photo {side} — {name} ¦ Fotoğraf {side} — {name}
+Retoucher quelle photo ? ¦ Hangi fotoğraf rötuşlansın?
+Utiliser ¦ Kullan
+✒️ Quel dessin ? ¦ ✒️ Hangi çizim?
+Aucun dessin enregistré dans le Dessin vectoriel. ¦ Vektör çizimde kayıtlı çizim yok.
+Ce dessin n’a pas pu être lu : ouvre le Dessin vectoriel une fois, puis recommence. ¦ Bu çizim okunamadı: Vektör çizimi bir kez aç, sonra yeniden dene.
+📝 Quel document ? ¦ 📝 Hangi belge?
+Aucun document dans le Traitement de texte. ¦ Kelime işlemcide belge yok.
+Des images qui défilent (‹ ›) ; sans script, elles glissent au doigt ¦ Kayan görüntüler (‹ ›); betik olmadan parmakla kayarlar
+Les images du diaporama ¦ Slayt gösterisinin görüntüleri
+Une vidéo de tes médias (ou d’un fichier : 📁 Importer…), avec ses boutons lecture et plein écran ¦ Medyandan bir video (ya da bir dosyadan: 📁 İçe aktar…), oynatma ve tam ekran düğmeleriyle
+La vidéo du site ¦ Sitenin videosu
+Télécharger la vidéo ¦ Videoyu indir
+Un son de tes médias (témoignage, chanson…), et ce qu’on y entend écrit dessous si tu veux ¦ Medyandan bir ses (tanıklık, şarkı…), ve istersen altında duyulanların yazılı hâli
+Le son du site ¦ Sitenin sesi
+🎧 Ce qu’on entend (facultatif) ¦ 🎧 Duyulanlar (isteğe bağlı)
+Écris ou colle la transcription : elle sera sous le son, pour ceux qui ne peuvent pas l’écouter. Laisse vide si tu n’en veux pas. ¦ Transkripsiyonu yaz ya da yapıştır: dinleyemeyenler için sesin altında olacak. İstemiyorsan boş bırak.
+Ajouter le son ¦ Sesi ekle
+Télécharger le son ¦ Sesi indir
+Ce qu’on entend ¦ Duyulanlar
+Un de tes dessins vectoriels, ou un SVG collé (sans script ni lien vers l’extérieur) ¦ Vektör çizimlerinden biri ya da yapıştırılmış bir SVG (betik ve dışarıya bağlantı olmadan)
+Un de mes dessins ¦ Çizimlerimden biri
+Dessin vectoriel → mes dessins enregistrés ¦ Vektör çizim → kayıtlı çizimlerim
+Coller un SVG ¦ SVG yapıştır
+Le code <svg>…</svg> d’un dessin ¦ Bir çizimin <svg>…</svg> kodu
+📋 Coller un SVG ¦ 📋 SVG yapıştır
+Colle ici le code du dessin, de <svg> à </svg>. Les scripts et les liens vers l’extérieur sont retirés. ¦ Çizimin kodunu buraya yapıştır, <svg>’den </svg>’ye kadar. Betikler ve dışarıya bağlantılar kaldırılır.
+Ajouter le dessin ¦ Çizimi ekle
+Un texte du Traitement de texte (une lettre, un récit), mis au propre pour la page ¦ Kelime işlemciden bir metin (bir mektup, bir anlatı), sayfa için temize çekilmiş
+Ce document est vide. ¦ Bu belge boş.
+Vidéo, son, dessin et texte ¦ Video, ses, çizim ve metin
+🎬 Changer la vidéo… ¦ 🎬 Videoyu değiştir…
+🎧 Changer le son… ¦ 🎧 Sesi değiştir…
+Le fichier part avec le site (dossier medias/) à l’export et à la publication. ¦ Dosya dışa aktarma ve yayımlamada siteyle birlikte gider (medias/ klasörü).
+Un autre son ¦ Başka bir ses
+Une autre vidéo ¦ Başka bir video
+{what} (dossier medias/) ¦ {what} (medias/ klasörü)
+vidéo ou son ¦ video ya da ses
+vidéos ou sons ¦ videolar ya da sesler
+{what} : trop lourd pour un site (90 Mo au plus par fichier, 300 Mo en tout) ¦ {what}: bir site için çok ağır (dosya başına en fazla 90 MB, toplam 300 MB)
+vidéo ou son pas mis ¦ video ya da ses eklenmedi
+vidéos ou sons pas mis ¦ videolar ya da sesler eklenmedi
+Mon site web n’est pas chargé : recharge la page. ¦ Web sitem yüklenmedi: sayfayı yeniden yükle.
+Mon site web ne sait pas recevoir ça. ¦ Web sitem bunu alamıyor.
+Ce texte est vide. ¦ Bu metin boş.
+Mon site ¦ Sitem
+ouvert ¦ açık
+la dernière fois ¦ son kez
+ouvert, pas encore enregistré ¦ açık, henüz kaydedilmedi
+{what} : sur quel site ? ¦ {what}: hangi sitede?
+Un nouveau site ¦ Yeni bir site
+Sur quelle page ? ¦ Hangi sayfada?
+Une nouvelle page… ¦ Yeni bir sayfa…
+📄 Nouvelle page ¦ 📄 Yeni sayfa
+Le nom de la page (il apparaît dans le menu) : ¦ Sayfanın adı (menüde görünür):
+La vidéo ¦ Video
+{what} est sur la page « {page} » de « {site} » ¦ {what}, “{site}” sitesinin “{page}” sayfasında
+vidéos WebM ¦ WebM videoları
+Les iPhone d’avant 2024 ne la lisent pas : préfère le MP4 (H.264), que tout le monde lit. ¦ 2024 öncesi iPhone’lar bunu oynatamaz: herkesin oynatabildiği MP4’ü (H.264) tercih et.
+vidéos .mov (QuickTime) ¦ .mov videoları (QuickTime)
+Souvent illisible hors d’Apple : refais-la en MP4 (🎬 Montage vidéo → Exporter). ¦ Apple dışında çoğu zaman okunamaz: MP4 olarak yeniden yap (🎬 Video kurgusu → Dışa aktar).
+vidéos Ogg (.ogv) ¦ Ogg videoları (.ogv)
+Jamais sur Safari ni sur iPhone : préfère le MP4. ¦ Safari’de ve iPhone’da asla: MP4’ü tercih et.
+sons Ogg (Vorbis, Opus) ¦ Ogg sesleri (Vorbis, Opus)
+Safari ne les lit que depuis 2025 : préfère le MP3 (🎧 Son → Exporter). ¦ Safari bunları ancak 2025’ten beri okuyor: MP3’ü tercih et (🎧 Ses → Dışa aktar).
+sons FLAC ¦ FLAC sesleri
+Marche partout, mais c’est lourd pour un site : le MP3 se charge bien plus vite. ¦ Her yerde çalışır, ama bir site için ağır: MP3 çok daha hızlı yüklenir.
+scroll-snap (le diaporama s’arrête sur chaque image) ¦ scroll-snap (slayt gösterisi her görüntüde durur)
+Marche partout depuis 2019 ; ailleurs, les images défilent sans s’arrêter. ¦ 2019’dan beri her yerde çalışır; başka yerlerde görüntüler durmadan kayar.
+Maison par époques ¦ Dönemlere göre ev
+Ma carte animée ¦ Hareketli haritam
+La maison au fil du temps ¦ Zaman içinde ev
+Le dessin vectoriel n’est pas chargé. ¦ Vektör çizim yüklenmedi.
+Lecture de la carte… ¦ Harita okunuyor…
+Carte introuvable ¦ Harita bulunamadı
+La maison n’est pas chargée. ¦ Ev yüklenmedi.
+Lecture de la maison… ¦ Ev okunuyor…
+Maison introuvable ¦ Ev bulunamadı
+Le plan de cette maison est vide. ¦ Bu evin planı boş.
+Choisir une carte ¦ Bir harita seç
+Chercher une carte… ¦ Harita ara…
+{n} objets ¦ {n} nesne
+Les objets qui ont des années (onglet Propriétés de la carte) apparaissent à leur date. ¦ Yılları olan nesneler (haritanın Özellikler sekmesi) kendi tarihlerinde görünür.
+Aucune carte enregistrée : fais-en une dans Outils de modification → 🗺️ Carte. ¦ Kayıtlı harita yok: Düzenleme araçları → 🗺️ Harita’da bir tane yap.
+Choisir une maison ¦ Bir ev seç
+Chercher une maison… ¦ Ev ara…
+Chaque époque de la maison (🕰) devient un plan, l’un après l’autre, en fondu. ¦ Evin her dönemi (🕰) bir plan olur, art arda, geçişle.
+Aucune maison enregistrée : dessine-en une dans Outils de modification → 🏠 Maison. ¦ Kayıtlı ev yok: Düzenleme araçları → 🏠 Ev’de bir tane çiz.
+Apparition des objets ¦ Nesnelerin görünmesi
+D’un coup ¦ Bir anda
+Avance doucement ¦ Yavaşça ilerler
+Fondu d’une époque à l’autre (0 à 0,9) ¦ Bir dönemden ötekine geçiş (0 ile 0,9)
+L’année et le nom de l’époque en légende ¦ Yıl ve dönemin adı alt yazı olarak
+(une copie de la carte) ¦ (haritanın bir kopyası)
+En faire la musique ¦ Müzik yap
+Ce son passe en musique de fond, pour tout le film ¦ Bu ses tüm film için arka plan müziği olur
+Voix retirée. ¦ Ses kaldırıldı.
+Le son est maintenant la musique du film. ¦ Ses artık filmin müziği.
+Le son est la voix du film (onglet Film). « 🎵 En faire la musique » pour le mettre en fond. ¦ Ses filmin sesi (Film sekmesi). Arka plana koymak için “🎵 Müzik yap”.
+Animer dans le Studio ¦ Stüdyoda canlandır
+Le curseur du temps joue tout seul : les objets apparaissent à leur date ¦ Zaman imleci kendi kendine oynar: nesneler kendi tarihlerinde görünür
+Le Studio d’animation n’est pas chargé. ¦ Animasyon Stüdyosu yüklenmedi.
+Aucune carte enregistrée : commence par « ＋ Nouvelle carte ». ¦ Kayıtlı harita yok: “＋ Yeni harita” ile başla.
+Quelle carte animer ? ¦ Hangi harita canlandırılsın?
+Les objets qui ont des années (onglet Propriétés) apparaissent à leur date, de la première année à la dernière. ¦ Yılları olan nesneler (Özellikler sekmesi) ilk yıldan sonuncuya kadar kendi tarihlerinde görünür.
+Un film où le curseur du temps avance tout seul, de la première année à la dernière ¦ Zaman imlecinin ilk yıldan sonuncuya kendi kendine ilerlediği bir film
+Cette carte est trop lourde pour être copiée dans un film : enregistre-la, puis Outils de modification → 🗺️ Carte → « 🎞 Animer dans le Studio ». ¦ Bu harita bir filme kopyalanamayacak kadar ağır: kaydet, sonra Düzenleme araçları → 🗺️ Harita → “🎞 Stüdyoda canlandır”.
+Le plan ou la vue 3D dans un autre outil : montage, présentation, mise en page, dessin… ¦ Plan ya da 3B görünüm başka bir araçta: kurgu, sunum, sayfa düzeni, çizim…
+🎞 Animer les époques dans le Studio ¦ 🎞 Dönemleri Stüdyoda canlandır
+Animer les époques dans le Studio ¦ Dönemleri Stüdyoda canlandır
+Le plan (image) ¦ Plan (görüntü)
+La vue 3D (image) ¦ 3B görünüm (görüntü)
+Le plan en dessin (vectoriel, mise en page…) ¦ Çizim olarak plan (vektörel, sayfa düzeni…)

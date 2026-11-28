@@ -1,0 +1,128 @@
+fr ¦ lt ¦ lv ¦ et
+# 🗂 État d’un recueil (heritage-recueil-etat.js, lib/recueil_etat.php)
+{n} lignes, {r} relues ¦ Eilutės: {n}, peržiūrėta: {r} ¦ Rindas: {n}, pārskatītas: {r} ¦ {n} rida, {r} üle vaadatud
+Photo à refaire ¦ Nuotrauką reikia perdaryti ¦ Foto jāuzņem vēlreiz ¦ Foto tuleb uuesti teha
+🟢 finies ou 🔵 relues ¦ 🟢 baigti arba 🔵 peržiūrėti ¦ 🟢 pabeigtas vai 🔵 pārskatītas ¦ 🟢 valmis või 🔵 üle vaadatud
+🟡 en cours ¦ 🟡 vykdomi ¦ 🟡 notiek ¦ 🟡 pooleli
+⚪ pas encore transcrites ¦ ⚪ dar neperrašyti ¦ ⚪ vēl nav pārrakstītas ¦ ⚪ veel ümber kirjutamata
+⛔ absentes ¦ ⛔ trūkstami ¦ ⛔ trūkstošas ¦ ⛔ puuduvad
+{a} finies, {b} relues, {c} en cours, {d} à faire, {e} absentes ¦ Baigta: {a}, peržiūrėta: {b}, vykdoma: {c}, reikia atlikti: {d}, trūksta: {e} ¦ Pabeigtas: {a}, pārskatītas: {b}, notiek: {c}, jāizdara: {d}, trūkst: {e} ¦ {a} valmis, {b} üle vaadatud, {c} pooleli, {d} teha, {e} puudu
+Fiabilité : ¦ Patikimumas: ¦ Ticamība: ¦ Usaldusväärsus:
+Pas en ligne ¦ Ne internete ¦ Nav tiešsaistē ¦ Pole veebis
+Blanche ¦ Tuščias ¦ Tukša ¦ Tühi
+p. {x} ¦ p. {x} ¦ {x}. lpp. ¦ lk {x}
+Ajouter aux demandes ¦ Pridėti prie prašymų ¦ Pievienot pieprasījumiem ¦ Lisa taotlustesse
+Non communicables ¦ Neprieinami visuomenei ¦ Nav publiski pieejamas ¦ Pole avalikud
+Ouvrir la première ¦ Atidaryti pirmąjį ¦ Atvērt pirmo ¦ Ava esimene
+Relire la première ¦ Peržiūrėti pirmąjį ¦ Pārskatīt pirmo ¦ Vaata esimene üle
+À transcrire ¦ Reikia perrašyti ¦ Jāpārraksta ¦ Ümber kirjutada
+Commencer p. {n} ¦ Pradėti p. {n} ¦ Sākt {n}. lpp. ¦ Alusta lk {n}
+Rien ne reste à faire sur ce recueil. ¦ Šiame rinkinyje nebeliko ką daryti. ¦ Šajā krājumā vairs nav ko darīt. ¦ Selles kogumikus pole enam midagi teha.
+Demande ajoutée ({t}) : Recherche › Suivi des registres › Demandes. ¦ Prašymas pridėtas ({t}): Tyrimai › Peržiūrėtų registrų stebėjimas › Prašymai. ¦ Pieprasījums pievienots ({t}): Pētniecība › Izskatīto reģistru uzskaite › Pieprasījumi. ¦ Taotlus lisatud ({t}): Uurimine › Läbitöötatud registrite jälgimine › Taotlused.
+Après « {a} » vient « {b} » : il manque peut-être {x}. ¦ Po „{a}“ eina „{b}“: galbūt trūksta {x}. ¦ Pēc „{a}“ nāk „{b}“: varbūt trūkst {x}. ¦ „{a}“ järel tuleb „{b}“: võib-olla puudub {x}.
+Poser ces pages comme absentes… ¦ Pridėti šiuos puslapius kaip trūkstamus… ¦ Pievienot šīs lapas kā trūkstošas… ¦ Lisa need leheküljed puuduvatena…
+C’est normal ¦ Taip ir turi būti ¦ Tā ir normāli ¦ See on normaalne
+« {a} » deux fois (pages {x} et {y}) : une photo en double, ou « bis » ? ¦ „{a}“ du kartus (puslapiai {x} ir {y}): dviguba nuotrauka ar „bis“? ¦ „{a}“ divreiz (lapas {x} un {y}): dubulta fotogrāfija vai „bis“? ¦ „{a}“ kaks korda (leheküljed {x} ja {y}): topeltfoto või „bis“?
+Renommer en « {a} bis » ¦ Pervadinti į „{a} bis“ ¦ Pārdēvēt par „{a} bis“ ¦ Nimeta ümber: „{a} bis“
+Laisser ¦ Palikti ¦ Atstāt ¦ Jäta
+Le recueil devrait avoir {e} pages, il en a {n} ici (absentes comprises) : {x} ¦ Rinkinyje turėtų būti puslapių: {e}, čia yra {n} (įskaitant trūkstamus): {x} ¦ Krājumā vajadzētu būt lapām: {e}, šeit ir {n} (ieskaitot trūkstošās): {x} ¦ Kogumikus peaks olema {e} lehekülge, siin on {n} (koos puuduvatega): {x}
+il en manque {d}. ¦ trūksta {d}. ¦ trūkst {d}. ¦ puudu on {d}.
+{d} de trop (une photo en double ?). ¦ {d} per daug (dviguba nuotrauka?). ¦ {d} par daudz (dubulta fotogrāfija?). ¦ {d} liiga palju (topeltfoto?).
+Poser {n} pages absentes ¦ Pridėti trūkstamus puslapius ({n}) ¦ Pievienot trūkstošās lapas ({n}) ¦ Lisa {n} puuduvat lehekülge
+Marquer {n} pages absentes ¦ Pažymėti puslapius kaip trūkstamus ({n}) ¦ Atzīmēt lapas kā trūkstošas ({n}) ¦ Märgi {n} lehekülge puuduvaks
+Marquer « {p} » absente ¦ Pažymėti „{p}“ kaip trūkstamą ¦ Atzīmēt „{p}“ kā trūkstošu ¦ Märgi „{p}“ puuduvaks
+🗂 ÉTAT DU RECUEIL ¦ 🗂 RINKINIO BŪSENA ¦ 🗂 KRĀJUMA STĀVOKLIS ¦ 🗂 KOGUMIKU OLEK
+Poser les pages ¦ Pridėti puslapius ¦ Pievienot lapas ¦ Lisa leheküljed
+Marquer absentes ¦ Pažymėti kaip trūkstamus ¦ Atzīmēt kā trūkstošas ¦ Märgi puuduvaks
+Pourquoi ces pages ne sont pas là ? ¦ Kodėl šių puslapių čia nėra? ¦ Kāpēc šo lapu šeit nav? ¦ Miks neid lehekülgi siin pole?
+ex. arrachées, mentionné en marge du f° 16 ¦ pvz., išplėšti, paminėta f° 16 paraštėje ¦ piem., izplēstas, minēts f° 16 malā ¦ nt välja rebitud, mainitud f° 16 äärel
+Ajouter aussi aux Lacunes d’archives (conseillé) ¦ Taip pat pridėti prie Archyvų spragų (rekomenduojama) ¦ Pievienot arī Arhīvu robiem (ieteicams) ¦ Lisa ka Arhiivide lünkadesse (soovitatav)
+Les pages ¦ Puslapiai ¦ Lapas ¦ Leheküljed
+Lisibilité ¦ Įskaitomumas ¦ Salasāmība ¦ Loetavus
+(choisi) ¦ (pasirinkta) ¦ (izvēlēts) ¦ (valitud)
+État du recueil ¦ Rinkinio būsena ¦ Krājuma stāvoklis ¦ Kogumiku olek
+Numérotation pas dite ¦ Numeracija nenurodyta ¦ Numerācija nav norādīta ¦ Nummerdus määramata
+{n} pages attendues ¦ Laukiami puslapiai: {n} ¦ Gaidāmās lapas: {n} ¦ Oodatud lehekülgi: {n}
+Numérotation, pages attendues ¦ Numeracija, laukiami puslapiai ¦ Numerācija, gaidāmās lapas ¦ Nummerdus, oodatud leheküljed
+Cases ¦ Langeliai ¦ Rūtiņas ¦ Ruudud
+Choisir des pages ¦ Pasirinkti puslapius ¦ Izvēlēties lapas ¦ Vali leheküljed
+Exporter l’état (tableur) ¦ Eksportuoti būseną (skaičiuoklė) ¦ Eksportēt stāvokli (izklājlapa) ¦ Ekspordi olek (tabel)
+Clique sur les pages (Maj + clic : de… à…) ¦ Spustelėk puslapius (Shift + spustelėjimas: nuo… iki…) ¦ Noklikšķini uz lapām (Shift + klikšķis: no… līdz…) ¦ Klõpsa lehekülgedel (Shift + klõps: alates… kuni…)
+Changer l’état… ¦ Keisti būseną… ¦ Mainīt stāvokli… ¦ Muuda olekut…
+Marquer absentes… ¦ Pažymėti kaip trūkstamus… ¦ Atzīmēt kā trūkstošas… ¦ Märgi puuduvaks…
+Tout choisir ¦ Pasirinkti viską ¦ Izvēlēties visu ¦ Vali kõik
+Pas encore de page ¦ Dar nėra puslapių ¦ Vēl nav nevienas lapas ¦ Lehekülgi veel pole
+Ajoute des photos : chaque photo devient une page. ¦ Pridėk nuotraukų: kiekviena nuotrauka tampa puslapiu. ¦ Pievieno fotogrāfijas: katra fotogrāfija kļūst par lapu. ¦ Lisa fotosid: igast fotost saab lehekülg.
+Ce qui reste, dans l’ordre conseillé ¦ Kas liko, rekomenduojama tvarka ¦ Kas atlicis, ieteicamajā secībā ¦ Mis on jäänud, soovitatud järjekorras
+Les demandes vont dans Recherche › Suivi des registres › Demandes, les lacunes dans les Lacunes d’archives : les listes qui existent. ¦ Prašymai patenka į Tyrimai › Peržiūrėtų registrų stebėjimas › Prašymai, spragos – į Archyvų spragas: jau esančius sąrašus. ¦ Pieprasījumi nonāk sadaļā Pētniecība › Izskatīto reģistru uzskaite › Pieprasījumi, robi – Arhīvu robos: sarakstos, kas jau pastāv. ¦ Taotlused lähevad jaotisse Uurimine › Läbitöötatud registrite jälgimine › Taotlused, lüngad Arhiivide lünkadesse: juba olemasolevatesse loenditesse.
+Revenir à l’état calculé ¦ Grįžti prie apskaičiuotos būsenos ¦ Atgriezties pie aprēķinātā stāvokļa ¦ Taasta arvutatud olek
+État du texte ¦ Teksto būsena ¦ Teksta stāvoklis ¦ Teksti olek
+Photo bonne (plus à refaire) ¦ Nuotrauka gera (nebereikia perdaryti) ¦ Foto ir labs (vairs nav jāuzņem vēlreiz) ¦ Foto on hea (pole vaja uuesti teha)
+Lisibilité : {x} ¦ Įskaitomumas: {x} ¦ Salasāmība: {x} ¦ Loetavus: {x}
+Plus absentes ¦ Nebetrūksta ¦ Vairs netrūkst ¦ Enam ei puudu
+Renommée en « {a} » ¦ Pervadinta į „{a}“ ¦ Pārdēvēta par „{a}“ ¦ Ümber nimetatud: „{a}“
+État choisi ¦ Būsena pasirinkta ¦ Stāvoklis izvēlēts ¦ Olek valitud
+Lignes relues ¦ Peržiūrėtos eilutės ¦ Pārskatītās rindas ¦ Ülevaadatud read
+Mots peu sûrs ¦ Neaiškūs žodžiai ¦ Nedrošie vārdi ¦ Ebakindlad sõnad
+Numérotation enregistrée ¦ Numeracija išsaugota ¦ Numerācija saglabāta ¦ Nummerdus salvestatud
+Comment ce recueil est numéroté ? ¦ Kaip sunumeruotas šis rinkinys? ¦ Kā šis krājums ir numurēts? ¦ Kuidas see kogumik on nummerdatud?
+Pas dit ¦ Nenurodyta ¦ Nav norādīts ¦ Määramata
+Pages attendues (pour repérer ce qui manque) ¦ Laukiami puslapiai (kad pastebėtum, ko trūksta) ¦ Gaidāmās lapas (lai pamanītu, kas trūkst) ¦ Oodatud leheküljed (et märgata, mis puudub)
+ex. 40 ¦ pvz., 40 ¦ piem., 40 ¦ nt 40
+dans les Lacunes d’archives ¦ Archyvų spragose ¦ Arhīvu robos ¦ Arhiivide lünkades
+Plus absente ¦ Nebetrūksta ¦ Vairs netrūkst ¦ Enam ei puudu
+Revenir à l’état calculé ({s}) ¦ Grįžti prie apskaičiuotos būsenos ({s}) ¦ Atgriezties pie aprēķinātā stāvokļa ({s}) ¦ Taasta arvutatud olek ({s})
+Calculé par l’Atelier (acte n° {n}) ¦ Apskaičiavo Dirbtuvės (įrašas nr. {n}) ¦ Aprēķinājusi Darbnīca (ieraksts nr. {n}) ¦ Arvutanud Töökoda (kanne nr {n})
+Calculé : texte écrit = en cours ¦ Apskaičiuota: parašytas tekstas = vykdoma ¦ Aprēķināts: uzrakstīts teksts = notiek ¦ Arvutatud: kirjutatud tekst = pooleli
+Fiabilité de la lecture ¦ Skaitymo patikimumas ¦ Lasījuma ticamība ¦ Lugemise usaldusväärsus
+rien d’écrit ¦ nieko neparašyta ¦ nekas nav uzrakstīts ¦ midagi pole kirjutatud
+{r} lignes relues sur {n} ¦ Peržiūrėta eilučių: {r} iš {n} ¦ Pārskatītas rindas: {r} no {n} ¦ {r}/{n} rida üle vaadatud
+Cette page est absente… ¦ Šio puslapio trūksta… ¦ Šīs lapas trūkst… ¦ See lehekülg puudub…
+État calculé ¦ Apskaičiuota būsena ¦ Aprēķinātais stāvoklis ¦ Arvutatud olek
+Lisibilité notée ¦ Įskaitomumas pažymėtas ¦ Salasāmība atzīmēta ¦ Loetavus märgitud
+Photo bonne ¦ Nuotrauka gera ¦ Foto ir labs ¦ Foto on hea
+Manquante ¦ Trūksta ¦ Trūkst ¦ Puudub
+on ne sait pas encore ¦ dar nežinoma ¦ vēl nav zināms ¦ veel teadmata
+Perdue ou détruite ¦ Prarastas arba sunaikintas ¦ Pazaudēta vai iznīcināta ¦ Kadunud või hävinud
+n’existe plus ¦ nebeegzistuoja ¦ vairs nepastāv ¦ pole enam olemas
+Pas encore photographiée ¦ Dar nenufotografuotas ¦ Vēl nav nofotografēta ¦ Veel pildistamata
+par moi ¦ mano ¦ no manas puses ¦ minu poolt
+Pas numérisée ¦ Nesuskaitmenintas ¦ Nav digitalizēta ¦ Digiteerimata
+par le service d’archives ¦ archyvo ¦ no arhīva puses ¦ arhiivi poolt
+Numérisée, pas en ligne ¦ Suskaitmenintas, ne internete ¦ Digitalizēta, nav tiešsaistē ¦ Digiteeritud, pole veebis
+Non communicable ¦ Neprieinamas visuomenei ¦ Nav publiski pieejama ¦ Pole avalik
+jusqu’à une date ¦ iki tam tikros datos ¦ līdz noteiktam datumam ¦ kuni teatud kuupäevani
+En restauration ¦ Restauruojamas ¦ Restaurācijā ¦ Restaureerimisel
+pas consultable ¦ negalima peržiūrėti ¦ nav pieejama apskatei ¦ pole kasutatav
+dans un autre registre, un autre fonds ¦ kitame registre, kitame fonde ¦ citā reģistrā, citā fondā ¦ teises registris, teises fondis
+pas absente : vide ¦ netrūksta: tuščias ¦ netrūkst: tukša ¦ ei puudu: tühi
+Paginé ¦ Puslapiais ¦ Lappušu numerācija ¦ Lehekülgede kaupa
+p. 1, 2, 3… ¦ p. 1, 2, 3… ¦ 1, 2, 3… lpp. ¦ lk 1, 2, 3…
+Folioté ¦ Lapais ¦ Lapu numerācija ¦ Lehtede kaupa
+f° 1 r°, f° 1 v°… — conseillé pour les registres anciens ¦ f° 1 r°, f° 1 v°… — rekomenduojama seniems registrams ¦ f° 1 r°, f° 1 v°… — ieteicams veciem reģistriem ¦ f° 1 r°, f° 1 v°… — soovitatav vanade registrite puhul
+Sans ordre (liasse, carton) ¦ Be tvarkos (ryšulys, dėžė) ¦ Bez kārtības (saišķis, kaste) ¦ Järjestuseta (kimp, karp)
+des pièces, rangées par toi ¦ vienetai, kuriuos tvarkai tu ¦ vienības, ko sakārto tu ¦ üksused, sinu järjestatud
+Numérotation des archives ¦ Archyvo numeracija ¦ Arhīva numerācija ¦ Arhiivi nummerdus
+pièce 1, 2… donnée par le service ¦ vienetas 1, 2…, nurodytas archyvo ¦ vienība 1, 2…, ko piešķir arhīvs ¦ üksus 1, 2… arhiivi antud
+Bonne ¦ Gera ¦ Laba ¦ Hea
+Illisible en partie ¦ Iš dalies neįskaitoma ¦ Daļēji nesalasāma ¦ Osaliselt loetamatu
+Illisible ¦ Neįskaitoma ¦ Nesalasāma ¦ Loetamatu
+Sûre ¦ Tikra ¦ Droši ¦ Kindel
+=mot peu sûr ¦ neaiškus žodis|neaiškūs žodžiai|neaiškių žodžių ¦ nedrošu vārdu|nedrošs vārds|nedroši vārdi ¦ ebakindel sõna|ebakindlat sõna
+=blanche ¦ tuščias|tušti|tuščių ¦ tukšu|tukša|tukšas ¦ tühi|tühja
+=page à relire ¦ peržiūrėtinas puslapis|peržiūrėtini puslapiai|peržiūrėtinų puslapių ¦ pārskatāmu lapu|pārskatāma lapa|pārskatāmas lapas ¦ ülevaadatav lehekülg|ülevaadatavat lehekülge
+=page avec des mots peu sûrs ¦ puslapis su neaiškiais žodžiais|puslapiai su neaiškiais žodžiais|puslapių su neaiškiais žodžiais ¦ lapu ar nedrošiem vārdiem|lapa ar nedrošiem vārdiem|lapas ar nedrošiem vārdiem ¦ ebakindlate sõnadega lehekülg|ebakindlate sõnadega lehekülge
+=page absente posée ¦ pridėtas trūkstamas puslapis|pridėti trūkstami puslapiai|pridėtų trūkstamų puslapių ¦ pievienotu trūkstošu lapu|pievienota trūkstoša lapa|pievienotas trūkstošas lapas ¦ puuduv lehekülg lisatud|puuduvat lehekülge lisatud
+=page marquée absente ¦ puslapis pažymėtas kaip trūkstamas|puslapiai pažymėti kaip trūkstami|puslapių pažymėta kaip trūkstami ¦ kā trūkstošu atzīmētu lapu|kā trūkstoša atzīmēta lapa|kā trūkstošas atzīmētas lapas ¦ puuduvaks märgitud lehekülg|puuduvaks märgitud lehekülge
+=page changée ¦ pakeistas puslapis|pakeisti puslapiai|pakeistų puslapių ¦ mainītu lapu|mainīta lapa|mainītas lapas ¦ muudetud lehekülg|muudetud lehekülge
+=page choisie ¦ pasirinktas puslapis|pasirinkti puslapiai|pasirinktų puslapių ¦ izvēlētu lapu|izvēlēta lapa|izvēlētas lapas ¦ valitud lehekülg|valitud lehekülge
+État des pages ¦ Puslapių būsena ¦ Lapu stāvoklis ¦ Lehekülgede olek
+Une case par page, une couleur par état ¦ Vienas langelis puslapiui, viena spalva būsenai ¦ Viena rūtiņa katrai lapai, viena krāsa katram stāvoklim ¦ Üks ruut lehekülje kohta, üks värv oleku kohta
+Reste à faire ¦ Liko atlikti ¦ Atlicis izdarīt ¦ Teha jäänud
+Autre demande ¦ Kitas prašymas ¦ Cits pieprasījums ¦ Muu taotlus
+À consulter en salle ¦ Peržiūrėti skaitykloje ¦ Jāaplūko lasītavā ¦ Vaadata lugemissaalis
+À photographier / numériser ¦ Nufotografuoti / suskaitmeninti ¦ Jānofotografē / jādigitalizē ¦ Pildistada / digiteerida
+pages photographiées sur les {n} attendues ¦ nufotografuotų puslapių iš {n} laukiamų ¦ nofotografētas lapas no {n} gaidāmajām ¦ lehekülge pildistatud {n} oodatust
+pages photographiées ¦ nufotografuotų puslapių ¦ nofotografētas lapas ¦ lehekülge pildistatud
+pièces photographiées sur les {n} attendues ¦ nufotografuotų vienetų iš {n} laukiamų ¦ nofotografētas vienības no {n} gaidāmajām ¦ üksust pildistatud {n} oodatust
+pièces photographiées ¦ nufotografuotų vienetų ¦ nofotografētas vienības ¦ üksust pildistatud

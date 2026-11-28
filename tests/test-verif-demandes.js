@@ -109,15 +109,16 @@ const STATS_KINDS = ['columns', 'bars', 'stacked', 'stacked100', 'line', 'area',
             });
             await t(`[${tag}] 1. l’ordre et les types cachés réglés dans Apparence suivent dans Recherche après rechargement`, async () => {
                 const up = async i => { const row = `#research-kinds-config [data-index="${i}"]`; await p.waitForSelector(`${row} .order-grip[data-grip-done]`, { timeout: 3000 }).catch(() => {}); await p.focus(`${row} .order-grip`); await p.keyboard.press('Alt+ArrowUp'); await p.waitForTimeout(200); };
-                // au départ : question, 🔍 Que manque-t-il ?, 🌍 Où chercher ?, 🧩 Murs de brique (heritage-ou-chercher.js), puis le texte (5e) : on le monte en tête
-                assert.equal(await p.getAttribute('#research-kinds-config [data-rk="text"]', 'data-index'), '4');
-                for (let i = 4; i >= 1; i--) await up(i);
+                // au départ : 🧭 Je veux faire… (app-je-veux.js, dans la Recherche au départ), question, 🔍 Que manque-t-il ?, 🌍 Où chercher ?, 🧩 Murs de brique (heritage-ou-chercher.js), puis le texte (6e) : on le monte en tête
+                assert.equal(await p.getAttribute('#research-kinds-config [data-rk="je_veux"]', 'data-index'), '0');
+                assert.equal(await p.getAttribute('#research-kinds-config [data-rk="text"]', 'data-index'), '5');
+                for (let i = 5; i >= 1; i--) await up(i);
                 await p.click('#research-kinds-config [data-rk="web"] [data-eye]');
                 await p.reload(); await ready();
                 await p.evaluate(async () => { window.LCNDA_APP.state.researchKind = 'question'; await window.LCNDA_APP.setModule('recherche'); });
                 await p.waitForSelector('#research-form');
                 const menu = await p.$$eval('#research-form [name=search_kind] option', o => o.map(x => x.value));
-                assert.deepEqual(menu.slice(0, 5), ['text', 'question', 'gaps', 'ou_chercher', 'murs']); assert.ok(!menu.includes('web'));
+                assert.deepEqual(menu.slice(0, 6), ['text', 'je_veux', 'question', 'gaps', 'ou_chercher', 'murs']); assert.ok(!menu.includes('web'));
                 await shot('1-recherche');
                 await p.evaluate(k => k.forEach(x => localStorage.removeItem(x)), RK);
                 await p.evaluate(() => window.LCNDA_APP.setReglagesA(true));
@@ -165,7 +166,8 @@ const STATS_KINDS = ['columns', 'bars', 'stacked', 'stacked100', 'line', 'area',
                 for (const k of tools) {
                     await closeAll(); const before = errors.length;
                     await p.evaluate(k => { window.LCNDA_EXT.shortcuts.openTarget('create:' + k); }, k);
-                    await p.waitForFunction(() => document.querySelector('dialog[open]'), null, { timeout: 10000 });
+                    // une fenêtre pour chacun ; 🧰 Traitements en lot ouvre directement sa page « Nouveau traitement » (heritage-rapports.js : openBatch)
+                    await p.waitForFunction(k => !!document.querySelector('dialog[open]') || (k === 'traitements' && !!document.querySelector('#workspace .rt-page [data-rb-back]')), k, { timeout: 10000 });
                     assert.equal(errors.length, before, `${k} : ${errors.slice(before)}`);
                 }
                 await closeAll();

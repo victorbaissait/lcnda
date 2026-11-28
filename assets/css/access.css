@@ -254,7 +254,7 @@ html.side-right .a11y-dock, .app-shell.sidebar-collapsed ~ .a11y-dock { left: 16
 .a11y-seg { display: inline-flex; flex-wrap: wrap; border: 2px solid var(--ink); }
 .a11y-seg button { border: 0; background: var(--card-bg, #fff); color: var(--ink); padding: 7px 12px; font-weight: 700; cursor: pointer; font-size: 13px; }
 .a11y-seg button + button { border-left: 2px solid var(--ink); }
-.a11y-seg button.is-active { background: var(--blue); color: #fff; }
+.a11y-seg button.is-active { background: var(--blue); color: var(--on-blue, #fff); }
 .a11y-note.is-warn { border: 2px solid #e1a500; background: #fff8e1; padding: 8px 12px; }
 :root[data-theme="dark"] .a11y-note.is-warn { background: #2e2715; }
 .a11y-dl { display: grid; grid-template-columns: minmax(140px, 200px) 1fr; gap: 8px 16px; margin: 8px 0; }

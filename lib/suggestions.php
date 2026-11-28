@@ -13,11 +13,12 @@ declare(strict_types=1);
 
 const SUGGESTION_MAX_SOSA = 4095; // 12 générations
 
-function research_suggestions_data(PDO $pdo, int $limit = 40): array
+/** $root : la personne de départ (0 = le de cujus) ; $positions / $maxSosa : la lignée déjà lue (« Que manque-t-il ? », lib/research_gaps.php). */
+function research_suggestions_data(PDO $pdo, int $limit = 40, int $root = 0, ?array $positions = null, int $maxSosa = SUGGESTION_MAX_SOSA): array
 {
-    $root = (int) $pdo->query('SELECT id FROM persons ORDER BY is_start DESC, id LIMIT 1')->fetchColumn();
-    if (!$root || !function_exists('sosa_positions')) { return ['root_id' => 0, 'items' => [], 'total' => 0]; }
-    $positions = array_filter(sosa_positions($pdo, $root, 20000)['positions'] ?? [], static fn($s) => $s <= SUGGESTION_MAX_SOSA, ARRAY_FILTER_USE_KEY);
+    $root = $root ?: (int) $pdo->query('SELECT id FROM persons ORDER BY is_start DESC, id LIMIT 1')->fetchColumn();
+    if (!$root || ($positions === null && !function_exists('sosa_positions'))) { return ['root_id' => 0, 'items' => [], 'total' => 0]; }
+    $positions ??= array_filter(sosa_positions($pdo, $root, 20000)['positions'] ?? [], static fn($s) => $s <= $maxSosa, ARRAY_FILTER_USE_KEY);
     ksort($positions);
     if (!$positions) { return ['root_id' => $root, 'items' => [], 'total' => 0]; }
     $ids = array_values(array_unique($positions));
@@ -96,7 +97,7 @@ function research_suggestions_data(PDO $pdo, int $limit = 40): array
             }
         }
         // Parents inconnus : l'acte de mariage (ou de baptême) les nomme
-        if ($sosa * 2 <= SUGGESTION_MAX_SOSA && !isset($positions[$sosa * 2]) && !isset($positions[$sosa * 2 + 1]) && ($my || $by)) {
+        if ($sosa * 2 <= $maxSosa && !isset($positions[$sosa * 2]) && !isset($positions[$sosa * 2 + 1]) && ($my || $by)) {
             $add($sosa, $pid, 'parents', 'parents', $my ? $my - 1 : $by - 1, $my ? $my + 1 : $by + 1, $placeOf($marr, $p['birth']),
                 $my ? i18n_t('son acte de mariage ({y}) nomme ses parents', ['y' => $my]) : i18n_t('son acte de baptême ({y}) nomme ses parents', ['y' => $by]));
         }

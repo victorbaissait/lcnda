@@ -217,7 +217,7 @@
         ['gray', i18n('Gris'), 'pos', v => ck('gray', i18n('Gris'), v)],
         ['mirror', i18n('Miroir'), 'pos', v => ck('mirror', i18n('Miroir'), v, i18n('Retourner l’image : pour lire un texte vu par transparence (le verso)'))],
         ['keep', `💾 ${i18n('Retenir pour cet acte')}`, 'act', () => `<button type="button" data-tx-cmd="keepview" title="${esc(i18n('Ces réglages de l’image sont enregistrés avec l’acte et reviennent à la prochaine ouverture'))}">💾 ${i18n('Retenir pour cet acte')}</button>`],
-        ['reset', `↺ ${i18n('Remettre l’image comme au départ')}`, 'act', (v, inPanel, layout) => resetBtn(layout === 'B' && !inPanel)],
+        ['reset', `↺ ${i18n('Remettre comme au départ')}`, 'act', (v, inPanel, layout) => resetBtn(layout === 'B' && !inPanel)],
     ];
     /** ↺ : seul dans la barre courte (le nom au survol), en toutes lettres ailleurs (K3 : « ↺ Remettre comme au départ ») */
     function resetBtn(short) { const tip = i18n('Remettre l’image comme au départ (tous les réglages de l’image à zéro)'); return `<button type="button" data-tx-cmd="resetview" title="${esc(tip)}"${short ? ` aria-label="${esc(tip)}"` : ''}>↺${short ? '' : ` ${esc(i18n('Remettre comme au départ'))}`}</button>`; }
@@ -231,8 +231,14 @@
     /** vague 2 : 👁 la relecture ligne à ligne en plein écran (décision 7 : un réglage, conseillé oui) ; les abréviations connues soulignées (conseillé oui) */
     const flag = key => () => { try { return localStorage.getItem(key) !== '0'; } catch (_) { return true; } };
     const setFlag = key => on => { try { localStorage.setItem(key, on ? '1' : '0'); } catch (_) {} window.dispatchEvent(new CustomEvent('lcnda-txbar-change')); };
-    const RV_KEY = 'genealogie-tx-relecture', AB_KEY = 'genealogie-tx-abrev';
-    const reviewMode = flag(RV_KEY), setReviewMode = setFlag(RV_KEY), abbrevOn = flag(AB_KEY), setAbbrevOn = setFlag(AB_KEY);
+    const RV_KEY = 'genealogie-tx-relecture', AB_KEY = 'genealogie-tx-abrev', AM_KEY = 'genealogie-tx-montants';
+    const reviewMode = flag(RV_KEY), setReviewMode = setFlag(RV_KEY), abbrevOn = flag(AB_KEY), setAbbrevOn = setFlag(AB_KEY), amountsOn = flag(AM_KEY), setAmountsOn = setFlag(AM_KEY);
+    /* maquette atelier-etapes.html : 🧠 la place du seul bouton « Aider l'IA » (étape Lire, conseillé ; barre du haut ; étape Corriger) et
+     * 🧾 « Ce que l'app a trouvé » (A : fermé en Lire et Corriger, ouvert en Repérer et Ajouter, conseillé ; B : toujours fermé, retenu ; C : toujours ouvert, plus petit) */
+    const IA_KEY = 'genealogie-tx-aide-ia-place', TROUVE_KEY = 'genealogie-tx-trouve-mode';
+    const choice = (key, list) => () => { try { const v = localStorage.getItem(key); return list.includes(v) ? v : list[0]; } catch (_) { return list[0]; } };
+    const setChoice = (key, list) => v => { if (!list.includes(v)) return; try { localStorage.setItem(key, v); } catch (_) {} window.dispatchEvent(new CustomEvent('lcnda-txbar-change')); };
+    const iaPlace = choice(IA_KEY, ['read', 'top', 'fix']), setIaPlace = setChoice(IA_KEY, ['read', 'top', 'fix']), trouveMode = choice(TROUVE_KEY, ['A', 'B', 'C']), setTrouveMode = setChoice(TROUVE_KEY, ['A', 'B', 'C']);
     const BAR_KEY = 'genealogie-transcribe-bar', SETS_KEY = 'genealogie-toolbar-sets', SETS_ID = 'transcribe';
     const readJson = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v && typeof v === 'object' ? v : d; } catch (_) { return d; } };
     const writeJson = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (_) { toast(i18n('Plus de place pour garder ce réglage.'), 'error'); return false; } };
@@ -282,7 +288,10 @@
                 <button type="button" data-txb-layout="A" class="${B ? '' : 'is-active'}" aria-pressed="${!B}" title="${esc(i18n('Tous les réglages dans la barre ; elle passe à la ligne s’il le faut'))}">${esc(i18n('Barre complète'))}</button></span></div>
             <label class="ui-toggle h-txb-ln"><input type="checkbox" data-txb-ln ${lineNos() ? 'checked' : ''}><i></i>${esc(i18n('Numéros de ligne dans la marge du texte (conseillé)'))}</label>
             <label class="ui-toggle h-txb-ab"><input type="checkbox" data-txb-ab ${abbrevOn() ? 'checked' : ''}><i></i>${esc(i18n('Abréviations connues soulignées, leur sens au survol (conseillé)'))}</label>
+            <label class="ui-toggle h-txb-am"><input type="checkbox" data-txb-am ${amountsOn() ? 'checked' : ''}><i></i>${esc(i18n('Sommes et mesures anciennes soulignées : en euros d’aujourd’hui et en mètres au survol (conseillé)'))}</label>
             <label class="ui-toggle h-txb-rv"><input type="checkbox" data-txb-rv ${reviewMode() ? 'checked' : ''}><i></i>${esc(i18n('Relecture ligne à ligne en plein écran (conseillé)'))}</label>
+            <label class="h-txb-pick">🧠 ${esc(i18n('« Aider l’IA » : un seul bouton'))} <select data-txb-ia>${[['read', 'Dans l’étape Lire, à côté de « ✨ Lire ▾ » (conseillé)'], ['top', 'Dans la barre du haut, toujours visible'], ['fix', 'Dans l’étape Corriger']].map(([v, l]) => `<option value="${v}" ${iaPlace() === v ? 'selected' : ''}>${esc(i18n(l))}</option>`).join('')}</select></label>
+            <label class="h-txb-pick">🧾 ${esc(i18n('« Ce que l’app a trouvé »'))} <select data-txb-trouve>${[['A', 'Fermé en Lire et Corriger, ouvert en Repérer et Ajouter (conseillé)'], ['B', 'Toujours fermé : je l’ouvre quand je veux (retenu)'], ['C', 'Toujours ouvert, plus petit']].map(([v, l]) => `<option value="${v}" ${trouveMode() === v ? 'selected' : ''}>${esc(i18n(l))}</option>`).join('')}</select></label>
             <div data-presets-slot="txb"></div>
             <p class="muted">${i18n('Coche ce qu’on montre (👁), range avec ↑ ↓ (ou en glissant ⠿){x}. Gardé aussitôt ; l’outil ouvert suit tout de suite.', {x: B ? i18n(', et choisis ce qui va dans la barre ou dans le panneau « 🎚️ Mieux voir »') : ''})}</p>
             <ol class="h-pet-layout h-txb-list" data-txb-list>${cfg.order.map(row).join('')}</ol>
@@ -314,7 +323,7 @@
             if (e.target.closest('[data-txb-reset]')) { const before = readJson(BAR_KEY, null); try { localStorage.removeItem(BAR_KEY); } catch (_) {} window.dispatchEvent(new CustomEvent('lcnda-txbar-change')); redraw2();
                 A().undoToast?.(i18n('Barre de la transcription remise comme au départ'), {undo: () => { if (before) saveBar(before); redraw2(); }, redo: () => { try { localStorage.removeItem(BAR_KEY); } catch (_) {} window.dispatchEvent(new CustomEvent('lcnda-txbar-change')); redraw2(); }}); return; }
         });
-        box.addEventListener('change', e => { if (e.target.matches('[data-txb-ln]')) { setLineNos(e.target.checked); return; } if (e.target.matches('[data-txb-rv]')) { setReviewMode(e.target.checked); return; } if (e.target.matches('[data-txb-ab]')) { setAbbrevOn(e.target.checked); return; } if (e.target.closest('[data-txb-list]')) keep(); });
+        box.addEventListener('change', e => { if (e.target.matches('[data-txb-ln]')) { setLineNos(e.target.checked); return; } if (e.target.matches('[data-txb-rv]')) { setReviewMode(e.target.checked); return; } if (e.target.matches('[data-txb-ab]')) { setAbbrevOn(e.target.checked); return; } if (e.target.matches('[data-txb-am]')) { setAmountsOn(e.target.checked); return; } if (e.target.matches('[data-txb-ia]')) { setIaPlace(e.target.value); return; } if (e.target.matches('[data-txb-trouve]')) { setTrouveMode(e.target.value); return; } if (e.target.closest('[data-txb-list]')) keep(); });
     }
     /** ⚙️ dans l'outil : la même liste, dans une fenêtre */
     function openBarDialog(parent) {
@@ -327,7 +336,7 @@
         dlg.addEventListener('close', () => dlg.remove()); dlg.showModal();
     }
 
-    ext.txView = {DEFAULT_VIEW, viewOf, needsPixels, cssFilter, changedCount, CHANGED, enhancer, toolbarHtml, barCfg, saveBar, cleanBar, panelKeys, badgeKeys, openBarDialog, ITEMS, DEFAULT_PANEL, RECIPES, recipeView, recipeOn, lineNos, setLineNos, reviewMode, setReviewMode, abbrevOn, setAbbrevOn};
+    ext.txView = {DEFAULT_VIEW, viewOf, needsPixels, cssFilter, changedCount, CHANGED, enhancer, toolbarHtml, barCfg, saveBar, cleanBar, panelKeys, badgeKeys, openBarDialog, ITEMS, DEFAULT_PANEL, RECIPES, recipeView, recipeOn, lineNos, setLineNos, reviewMode, setReviewMode, abbrevOn, setAbbrevOn, amountsOn, setAmountsOn, iaPlace, setIaPlace, trouveMode, setTrouveMode};
     // Réglages → Montage, retouche, mise en page et son → « 📜 Atelier de transcription : barre d’outils »
     ext.transcribePrefs = {html: () => prefsHtml(), bind: (box, redraw) => prefsBind(box, redraw)};
 })();

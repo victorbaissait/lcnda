@@ -40,3 +40,20 @@
 @media print { .ad-badge, .ad-ouc { display: none !important; } }
 body.is-kiosk .ad-badge, body.is-kiosk .ad-ouc { display: none !important; }
 .event-date .ad-badge { white-space: normal; text-align: left; }
+/* dans la colonne étroite de la date : le texte coule sur plusieurs lignes (plus « · Ma / de / Argen » coupé), sans dépasser de la colonne */
+.event-date .ad-badge { display: inline-block; margin: 2px 0 0; border-radius: 10px; overflow: visible; overflow-wrap: anywhere; box-sizing: border-box; }
+/* 🗂 Les séries, c'est quoi ? (heritage-series-archives.js) */
+.ser-link { font-size: 12.5px; font-weight: 500; margin-left: 6px; white-space: nowrap; }
+.ser-help h3 { margin: 14px 0 6px; font-size: 15px; }
+.ser-help h3:first-child { margin-top: 0; }
+.ser-help p { margin: 0 0 8px; }
+.ser-table { table-layout: fixed; min-width: 0; }
+.ser-table .ser-c1 { width: 5.5em; }
+.ser-table th { white-space: normal; }
+.ser-table td { overflow-wrap: anywhere; }
+.ser-table .ser-l { white-space: nowrap; overflow-wrap: normal; }
+.ser-table .ser-period td { background: rgba(127, 127, 127, .12); font-weight: 700; font-size: 12.5px; padding: 6px 12px; }
+@media (max-width: 600px) { .ser-table td, .ser-table th { padding: 8px 6px; } .ser-table .ser-c1 { width: 4.5em; } }
+.ser-acts { display: flex; flex-wrap: wrap; gap: 6px; }
+.ser-sources { margin: 0; padding-left: 18px; font-size: 13px; }
+.ser-sources li { margin: 0 0 4px; }

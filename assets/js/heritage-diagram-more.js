@@ -131,6 +131,8 @@
     const EVENTS_FR = [['1789', '1799', 'Révolution'], ['1870', '1871', 'Guerre de 1870'], ['1914', '1918', 'Grande Guerre'], ['1939', '1945', 'Seconde Guerre mondiale']];
 
     /* ═════════ 📉 Naissances, décès et crises ═════════ */
+    const CRISIS_COLOR = {'épidémie': '#f28e2b', famine: '#b07aa1', hiver: '#76b7b2', guerre: '#e15759', crise: '#9c755f'};
+    // l'exemple seulement (sans base) ; avec la base, les crises viennent de la liste unique du 🌍 Monde autour (dmo_crises)
     const CRISES = [['1693', '1694', 'Grande famine', '#b07aa1'], ['1709', '1710', 'Grand hiver', '#76b7b2'], ['1740', '1741', 'Disette', '#b07aa1'], ['1832', '', 'Choléra', '#f28e2b'], ['1849', '', 'Choléra', '#f28e2b'], ['1854', '', 'Choléra', '#f28e2b'],
         ['1870', '1871', 'Guerre de 1870', '#e15759'], ['1914', '1918', 'Grande Guerre', '#e15759'], ['1918', '1919', 'Grippe espagnole', '#edc948'], ['1939', '1945', 'Seconde Guerre mondiale', '#e15759']];
     const smooth = (a, k) => k < 2 ? a : a.map((_, i) => { let s = 0, n = 0; for (let j = i - Math.floor(k / 2); j <= i + Math.floor(k / 2); j++) if (j >= 0 && j < a.length) { s += a[j]; n++; } return s / n; });
@@ -718,7 +720,7 @@
         bind: (pane, io) => bindApp(pane, async () => {
             const q = {what: 'crises', step: val(pane, 'step'), place: Number(pane.querySelector('[name="dm_place"]')?.value) || ''}; const f = val(pane, 'from'), t = val(pane, 'to'); if (/^\d{3,4}$/.test(f)) q.from = f; if (/^\d{3,4}$/.test(t)) q.to = t;
             const r = await getM(q); if (!r.rows?.length) throw new Error(r.place ? i18n('Aucune naissance ni aucun décès daté à {place}.', {place: r.place}) : i18n('Aucune naissance ni aucun décès daté.'));
-            const s = io.spec(); s.rows = r.rows; if (!rows(s, 'crises').length) s.crises = CRISES.map(([start, end, label, c]) => ({start, end, label, color: c}));
+            const s = io.spec(); s.rows = r.rows; if (!rows(s, 'crises').length) s.crises = r.crises?.length ? r.crises.map(c => ({start: c.start, end: c.end, label: c.label, color: CRISIS_COLOR[c.cat] || '#999'})) : CRISES.map(([start, end, label, c]) => ({start, end, label, color: c})); // la liste unique du 🌍 Monde autour
             s.o = {...s.o, smooth: Number(q.step) > 1 ? 0 : s.o.smooth}; titleIf(s, K.crises.sample(), `Naissances et décès${r.place ? ' à ' + r.place : ''}`); io.apply(s);
             return Number(q.step) > 1 ? i18n('{n} périodes prises dans ta base.', {n: r.rows.length}) : i18n('{n} années prises dans ta base.', {n: r.rows.length});
         }),

@@ -27,6 +27,7 @@ require 'lib/paths.php';
 if (!is_file(DATA_DIR.'/genealogy.sqlite')) (new PDO('sqlite:'.DATA_DIR.'/genealogy.sqlite'))->exec(file_get_contents(APP_ROOT.'/data/schema.sql'));
 require 'lib/bootstrap.php';
 $pdo = db();
+if (!function_exists('zip_entry_copy_bounded')) require_once 'lib/backup.php'; // insee_deces_import (repris d'api.php) lit le zip par zip_entry_copy_bounded
 $src = file_get_contents('api.php'); $a = strpos($src, 'function insee_deces_import(PDO'); $b = strpos($src, "\n}\n", $a); eval(substr($src, $a, $b - $a + 3));
 `;
 const res = JSON.stringify([

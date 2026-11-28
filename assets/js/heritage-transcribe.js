@@ -17,12 +17,107 @@
     const post = (action, body) => api(action, {}, {method: 'POST', body});
     const toast = (...a) => A().toast(...a);
     const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+    /* ─── 🧲 les zones reliées aux lignes du texte : décalées de quelques caractères sur les anciennes transcriptions.
+     * La cause : la case du texte était remplie par du HTML (<textarea>texte</textarea>), qui mange le saut de ligne du tout début
+     * (et change \r\n en \n) : un texte qui commençait par une ligne vide perdait 1 caractère, et toutes les zones (posées sur le
+     * texte enregistré) commençaient un caractère trop tard, à chaque ligne. La case est maintenant remplie par .value, et le texte
+     * \r\n ramené à \n avec ses zones (normBody). snapZones recale les zones déjà abîmées sur les lignes du texte. ─── */
+    /** \r\n et \r → \n ; les passages (zones, personnes…) de chaque liste suivent. Rend le texte. */
+    function normBody(body, lists = []) {
+        body = String(body ?? ''); if (!body.includes('\r')) return body;
+        const map = new Array(body.length + 1); let out = '';
+        for (let i = 0; i < body.length; i++) { map[i] = out.length; if (body[i] === '\r') { if (body[i + 1] !== '\n') out += '\n'; } else out += body[i]; }
+        map[body.length] = out.length;
+        const at = v => map[clamp(Math.round(Number(v) || 0), 0, body.length)];
+        lists.forEach(list => (list || []).forEach(r => { if (r && r.s != null && r.e != null) { r.s = at(r.s); r.e = Math.max(r.s, at(r.e)); } }));
+        return out;
+    }
+    const PAGE_MARK = /^—[ \t]*[\p{L}.]+[ \t]+\d+[^\n—]*—[ \t]*$/u, SNAP_MAX = 3, SNAP_SKIP = ['sign', 'note', 'skip'];
+    /** les lignes du texte (sans les blancs du bord, sans les lignes vides ni les repères « — page 2 — ») : [{s, e}] */
+    function textLinesOf(text) {
+        const out = []; let pos = 0;
+        for (const raw of String(text ?? '').split('\n')) { const s = pos; pos += raw.length + 1; const body = raw.trim(); if (!body || PAGE_MARK.test(raw)) continue; const lead = raw.length - raw.trimStart().length; out.push({s: s + lead, e: s + lead + body.length}); }
+        return out;
+    }
+    /**
+     * Les zones reliées à une ligne du texte dont le passage déborde ou s'arrête à quelques caractères des bords de la ligne :
+     * {fixes: [{i, id, s, e}] (i : la place de la zone dans la liste ; le passage recalé sur la ligne), left: n (sans doute décalées, mais pas sûr : laissées)}.
+     * Jamais touchées : les zones sans texte, les signatures / notes / « à ne pas lire », les zones de plusieurs lignes, celles d'un
+     * mot ou d'un passage dans la ligne. startOnly : seulement les zones dont le début est décalé (le défaut des anciennes transcriptions).
+     */
+    function snapZones(text, zones, {startOnly = false} = {}) {
+        text = String(text ?? ''); const lines = textLinesOf(text), fixes = [], key = l => `${l.s}:${l.e}`;
+        const taken = new Set((zones || []).filter(z => lines.some(l => l.s === z.s && l.e === z.e)).map(z => `${z.s}:${z.e}`));
+        let left = 0;
+        (zones || []).forEach(z => {
+            if (!z || !(z.e > z.s) || SNAP_SKIP.includes(z.kind) || taken.has(`${z.s}:${z.e}`)) return;
+            const ov = lines.map(l => ({l, n: Math.min(z.e, l.e) - Math.max(z.s, l.s)})).filter(o => o.n > 0).sort((a, b) => b.n - a.n);
+            if (!ov.length) return;
+            if (ov.length > 1 && ov[1].n > SNAP_MAX) return; // plusieurs lignes : voulu
+            const b = ov[0].l, ds = z.s - b.s, de = z.e - b.e, len = b.e - b.s;
+            if (z.s <= b.s && z.e >= b.e && !text.slice(z.s, z.e).trim().replace(text.slice(b.s, b.e), '')) return; // la ligne et des blancs autour : juste
+            if (Math.abs(ds) > 2 * SNAP_MAX || Math.abs(de) > 2 * SNAP_MAX) return; // un mot, un passage dans la ligne : pas une zone de ligne
+            if (startOnly && !ds) return;
+            const lim = Math.min(SNAP_MAX, Math.floor(len / 8)), shifted = ds === de && Math.abs(ds) <= SNAP_MAX;
+            const ok = (shifted || (Math.abs(ds) <= lim && Math.abs(de) <= lim)) && ov[0].n >= len * .6 && !taken.has(key(b));
+            if (!ok) { left++; return; }
+            taken.add(key(b)); fixes.push({i: zones.indexOf(z), id: z.id, s: b.s, e: b.e});
+        });
+        return {fixes, left};
+    }
+    /* ─── 🧲 les zones de ligne suivent ce qu'on écrit : une zone qui couvrait toute sa ligne la couvre encore après la modification
+     * (une lettre au début ou à la fin de la ligne, la 1re lettre effacée, un collage sur le début, Entrée au milieu : la zone garde la
+     * 1re partie ; Retour arrière au début d'une ligne : les deux zones se partagent la ligne ; le contraire les remet comme avant). ─── */
+    const lineBounds = (text, pos) => { const ls = text.lastIndexOf('\n', pos - 1) + 1; let le = text.indexOf('\n', pos); if (le < 0) le = text.length; return [ls, le]; };
+    /** la zone couvre exactement le texte de sa ligne (sans les blancs du bord) */
+    function isFullLine(text, z) {
+        if (!(z.e > z.s) || z.e > text.length || text.slice(z.s, z.e).includes('\n')) return false;
+        const [ls, le] = lineBounds(text, z.s), raw = text.slice(ls, le), lead = raw.length - raw.trimStart().length;
+        return z.s === ls + lead && z.e === ls + lead + raw.trim().length;
+    }
+    /** before → now (un seul morceau changé : [p, oldEnd) de before devient [p, oldEnd + delta) de now) : les zones suivent */
+    function followEdit(before, now, zones, {p, oldEnd, delta}) {
+        const nowEnd = oldEnd + delta, ins = now.slice(p, nowEnd);
+        const full = new Set(zones.filter(z => !SNAP_SKIP.includes(z.kind) && z.s - 1 <= oldEnd && p <= z.e + 1 && isFullLine(before, z)));
+        const f = v => (v >= oldEnd ? v + delta : v > p ? Math.max(p, Math.min(v, nowEnd)) : v);
+        const lead = oldEnd === p && delta > 0 && (p === 0 || now[p - 1] === '\n') && !ins.includes('\n'); // écrit tout au début de la ligne
+        const nl = oldEnd === p && delta > 0 ? ins.indexOf('\n') : -1; // un retour à la ligne écrit juste à la fin d'une zone : elle s'arrête avant
+        zones.forEach(z => { if (lead && z.s === p && z.e > z.s) z.e += delta; else if (nl >= 0 && z.e === p && z.e > z.s && z.s < p) z.e = p + nl; else { z.s = f(z.s); z.e = Math.max(z.s, f(z.e)); } });
+        full.forEach(z => {
+            const k = now.slice(z.s, z.e).search(/\S/); if (k < 0) return; const pos = z.s + k; // la 1re lettre de la zone : sa ligne
+            const [ls, le] = lineBounds(now, pos); let a = ls, b = le;
+            full.forEach(o => { if (o === z || !(o.e > o.s) || o.e <= ls || o.s >= le) return; if (o.s >= pos) b = Math.min(b, o.s); else if (o.e <= pos) a = Math.max(a, o.e); }); // une autre zone de ligne sur la même ligne (deux lignes jointes)
+            while (a < b && /\s/.test(now[a])) a++; while (b > a && /\s/.test(now[b - 1])) b--;
+            if (b > a) { z.s = a; z.e = b; }
+        });
+        return zones;
+    }
+    /** le morceau changé entre deux textes : {p, oldEnd, delta} */
+    function diffOf(before, now) {
+        let p = 0; while (p < before.length && p < now.length && before[p] === now[p]) p++;
+        let q = 0; while (q < before.length - p && q < now.length - p && before[before.length - 1 - q] === now[now.length - 1 - q]) q++;
+        return {p, q, oldEnd: before.length - q, delta: now.length - before.length};
+    }
+    ext.txSnap = {normBody, textLinesOf, snapZones, followEdit, diffOf, isFullLine}; // pour les essais (tests/test-zones-recalees.js)
     let deepRun = null; // 📑 « 🔬 Lecture approfondie » sur toutes les pages : la lecture en cours (elle suit l'Atelier d'un acte à l'autre, un texte par page)
     let seq = 0; const zid = () => 'z' + Date.now().toString(36) + (++seq);
+    const TXX = () => ext.txXml; // 🧾 ALTO / 📄 PAGE et les sortes de zone (heritage-transcribe-xml.js)
+    const XK = k => { const r = TXX()?.KINDS.find(q => q[0] === k); return r ? `${r[1]} ${i18n(r[2])}` : ''; };
+    const dl = (blob, name) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.parentNode.removeChild(a); setTimeout(() => URL.revokeObjectURL(a.href), 3000); };
 
-    const KINDS = [['apreciser', i18n('À préciser')], ['bapteme', i18n('Baptême')], ['naissance', i18n('Naissance')], ['mariage', i18n('Mariage')], ['deces', i18n('Décès')], ['sepulture', i18n('Sépulture')], ['notarial', i18n('Acte notarié')], ['recensement', i18n('Recensement')], ['militaire', i18n('Registre militaire')], ['lettre', i18n('Lettre')], ['autre', i18n('Autre')]];
+    const KINDS = [['apreciser', i18n('À préciser')], ['bapteme', i18n('Baptême')], ['naissance', i18n('Naissance')], ['mariage', i18n('Mariage')], ['deces', i18n('Décès')], ['sepulture', i18n('Sépulture')], ['notarial', i18n('Acte notarié')], ['notoriete', i18n('Acte de notoriété')], ['recensement', i18n('Recensement')], ['militaire', i18n('Registre militaire')], ['lettre', i18n('Lettre')], ['autre', i18n('Autre')]];
     const COLORS = ['#f6c343', '#7cc4f0', '#9be08f', '#f59ab0', '#c3a6f2', '#f7a35c', '#6fd6c8', '#e6e15a'];
+    /* 24 (audit ; maquette atelier-etapes.html) : la couleur d'une zone se choisit parmi 8 couleurs qui ont un nom (plus de « #9BE08F ») */
+    const ZCOLORS = [['#f6c343', 'jaune'], ['#7cc4f0', 'bleu clair'], ['#9be08f', 'vert clair'], ['#f59ab0', 'rose'], ['#c3a6f2', 'lilas'], ['#f7a35c', 'orange'], ['#6fd6c8', 'turquoise'], ['#b8bcc4', 'gris']];
+    /** le nom de la couleur (la plus proche des 8, pour une couleur choisie autrefois au nuancier) */
+    function colorName(hex) {
+        const rgb = h => { const m = String(h || '').replace('#', '').match(/^([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i); return m ? m.slice(1).map(x => parseInt(x, 16)) : null; };
+        const c = rgb(hex); if (!c) return i18n(ZCOLORS[0][1], {ctx: 'couleur'});
+        let best = ZCOLORS[0], bd = Infinity; ZCOLORS.forEach(z => { const q = rgb(z[0]), d = q.reduce((s, v, i) => s + (v - c[i]) ** 2, 0); if (d < bd) { bd = d; best = z; } });
+        return i18n(best[1], {ctx: 'couleur'});
+    }
     // des modèles d'acte, pour ne pas partir d'une page blanche
+    let fixAfterSwitch = false; // 📑 un texte par page : la barre des corrections suit sur l'acte de l'autre page
     const TEMPLATES = {
         bapteme: 'L’an [année], le [jour] du mois de [mois], a été [baptisé / baptisée] [prénom], [né / née] [hier / ce jour], [fils / fille] légitime de [prénom et nom du père], [métier], et de [prénom et nom de la mère], son épouse, de cette paroisse. Le parrain a été [nom], la marraine [nom], qui ont signé avec nous / déclaré ne savoir signer.\n[signatures]',
         naissance: 'L’an [année], le [jour] [mois], à [heure], par-devant nous, [nom], maire, officier de l’état civil de la commune de [commune], est comparu [prénom et nom du père], [âge], [métier], demeurant à [lieu], lequel nous a présenté un enfant de sexe [masculin / féminin], né [date] de lui déclarant et de [prénom et nom de la mère], son épouse, auquel il a donné le prénom de [prénom]. En présence de [témoin 1] et de [témoin 2].\n[signatures]',
@@ -36,7 +131,18 @@
         ['find', 'Repérer', 'Repérer les noms, dates, lieux et métiers'], ['add', 'Ajouter', 'Ajouter les personnes et l’événement à la généalogie']];
     const USE_KEY = 'genealogie-transcribe-useenh';
     const useEnh = () => { try { return localStorage.getItem(USE_KEY) !== '0'; } catch (_) { return true; } };
-    const SPECIAL = ['ſ', 'œ', 'Œ', 'æ', 'ç', 'é', 'è', 'ê', 'ë', 'à', 'â', 'î', 'ï', 'ô', 'ù', 'û', 'ÿ', '&', '«', '»', '…', '†', '°', '[', ']', '[?]', '[illisible]', '/'];
+    /* ſ 23 et 33 (audit ; maquette atelier-etapes.html) : la barre des caractères est courte — tes favoris, puis « ＋ » qui ouvre tous
+     * les caractères rangés en groupes (📌 : choisir ses favoris, retenus sur cet ordinateur) ; un seul arrêt de Tab, ← → pour choisir. */
+    const CAR_KEY = 'genealogie-tx-car-favoris';
+    const CAR_GROUPS = [['Lettres anciennes et abréviations', ['ſ', 'ꝑ', 'ꝓ', 'ꝗ', 'ꝯ', 'ꝰ', 'ł', '⁊', '℞', '&']], ['Lettres surmontées', ['ỹ', 'ā', 'ē', 'ī', 'ō', 'ū', 'ñ', 'm̄', 'ñ']],
+        ['Lettres en haut (Mᵉ, 8ᵇʳᵉ)', ['ᵉ', 'ʳ', 'ˢ', 'ᵗ', 'ᵐ', 'ᵇ', 'ᵈ', 'ⁿ', 'ᵒ', 'ᵃ']], ['Accents et lettres liées', ['œ', 'Œ', 'æ', 'Æ', 'ç', 'é', 'è', 'ê', 'ë', 'à', 'â', 'î', 'ï', 'ô', 'ù', 'û', 'ü', 'ÿ']],
+        ['Signes', ['«', '»', '…', '†', '°', '§', '[', ']', '/', '[?]', '[illisible]']]].map(([n, l]) => [n, [...new Set(l)]]);
+    const CAR_DEFAULT = ['ſ', 'œ', 'é', 'è', 'à', 'ç', 'ꝑ', 'ᵉ', '[?]', '[illisible]'];
+    const carFavs = () => { try { const a = JSON.parse(localStorage.getItem(CAR_KEY) || 'null'); if (Array.isArray(a)) return [...new Set(a.filter(c => typeof c === 'string' && c && c.length <= 16))].slice(0, 40); } catch (_) {} return [...CAR_DEFAULT]; };
+    const setCarFavs = list => { try { localStorage.setItem(CAR_KEY, JSON.stringify(list)); } catch (_) {} };
+    /* 🧠 « Aider l'IA » : un seul bouton, à la place choisie (Réglages ; heritage-transcribe-view.js) ; 🎯 « Suivre la ligne » (retenu) */
+    const FOLLOW_KEY = 'genealogie-tx-suivre';
+    const followHtml = on => `<button type="button" class="h-tx-follow${on ? ' is-active' : ''}" data-tx-follow aria-pressed="${on}" title="${esc(i18n('Suivre la ligne : quand je change de ligne dans le texte, l’image zoome sur toute la largeur de cette ligne'))}">🎯 ${esc(i18n('Suivre la ligne'))}</button>`;
 
     /* ═════════ Repérage : nombres et dates en toutes lettres, noms, rôles, lieux, métiers ═════════ */
     const NUM = {un: 1, une: 1, premier: 1, première: 1, deux: 2, trois: 3, quatre: 4, cinq: 5, six: 6, sept: 7, huit: 8, neuf: 9, dix: 10, onze: 11, douze: 12, treize: 13, quatorze: 14, quinze: 15, seize: 16,
@@ -200,7 +306,7 @@
     function readPanelHtml() {
         const opt = ([k, ic, label, what]) => `<button type="button" class="h-tx-readopt" data-tx-cmd="${k}" role="menuitem"><span class="h-tx-readt">${ic} <b>${esc(i18n(label))}</b><span class="h-tx-readst" data-tx-readst="${k}"></span></span><small>${esc(i18n(what))}</small></button>`;
         return `<div class="h-tx-readpanel" data-tx-readpanel hidden role="menu" aria-label="${esc(i18n('Lire', {ctx: 'atelier'}))}">${READS.map(opt).join('')}
-            <div class="h-tx-readscope" data-tx-readscope hidden role="radiogroup" aria-label="${esc(i18n('Plusieurs pages'))}"><label><input type="radio" name="txreadscope" value="page" checked> ${esc(i18n('Sur la page affichée'))}</label><label><input type="radio" name="txreadscope" value="all"> ${esc(i18n('Sur toutes les pages'))}</label></div>
+            <div class="h-tx-readscope" data-tx-readscope hidden role="radiogroup" aria-label="${esc(i18n('Plusieurs pages'))}"><label><input type="radio" name="txreadscope" value="page" checked> ${esc(i18n('Sur la page affichée'))}</label><label><input type="radio" name="txreadscope" value="all"> ${esc(i18n('Sur toutes les pages'))}</label><label><input type="radio" name="txreadscope" value="empty"> ${esc(i18n('Seulement les pages pas encore lues'))}</label><small class="h-tx-pread" data-tx-pread></small></div>
             <div class="h-tx-readmore"><button type="button" class="h-tx-readopt h-tx-readline" data-tx-cmd="lines" role="menuitem" title="${esc(i18n('Relier chaque ligne du texte à sa ligne sur l’image (zones de couleur, clic ligne ↔ zone) : après la lecture approfondie, ou sur un texte déjà mis'))}">▤ ${esc(i18n('Relier les lignes à l’image'))}</button>
             <label class="h-tx-readlang">🌐 ${esc(i18n('Langue du texte'))} <select data-tx-lang title="${esc(i18n('Langue du texte : sert à la lecture automatique, et « 📖 Aide à la lecture » s’ouvre sur cette langue'))}">${txLangs().map(([v, l]) => `<option value="${esc(v)}" ${txLang() === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
             <label class="ui-toggle h-tx-useenh" title="${esc(i18n('La lecture (imprimé et manuscrit) et l’export prennent l’image avec les réglages « Mieux voir » (contraste, netteté, canal, seuil…), sinon l’image d’origine'))}"><input type="checkbox" data-tx-useenh ${useEnh() ? 'checked' : ''}><i></i>${i18n('Lire et exporter l’image améliorée')}</label></div></div>`;
@@ -219,58 +325,127 @@
     const zopHtml = () => `<label class="h-tx-zop" title="${esc(i18n('Opacité des cadres de couleur (0 = presque invisibles)'))}">${esc(i18n('Cadres'))} <input type="range" min="0" max="100" step="5" value="${Math.round(zop() * 100)}" data-tx-zop aria-label="${esc(i18n('Opacité des cadres de couleur (0 = presque invisibles)'))}"></label>`;
 
     /* ═════════ L'atelier ═════════ */
+    /* 🔴 8 (audit) : un seul Atelier à la fois. Deux ouvertures rapprochées (double-clic, ou deux clics pendant le chargement) n'en
+     * ouvrent qu'un ; « Ouverture de l'acte… » se voit tout de suite ; un autre acte demandé pendant qu'un Atelier est ouvert :
+     * « Enregistrer et ouvrir l'autre » (ou rien, s'il n'y a rien à enregistrer). */
+    let opening = null;
+    function openingNote() {
+        const el = document.createElement('div'); el.className = 'h-tx-opening'; el.dataset.txOpening = ''; el.setAttribute('role', 'status');
+        el.textContent = `📜 ${i18n('Ouverture de l’acte…')}`;
+        try { el.popover = 'manual'; } catch (_) {}
+        document.body.appendChild(el); try { el.showPopover?.(); } catch (_) {}
+        return el;
+    }
     async function open(ctx = {}) {
+        if (opening) return opening;
+        const cur = [...document.querySelectorAll('dialog.h-tx-dlg')].find(d => d.isConnected && d.txApi);
+        if (cur) {
+            if (ctx.id && Number(cur.txApi.get().id) === Number(ctx.id)) { cur.focus?.(); return null; } // le même acte : il est déjà là
+            if (!await cur.txApi.leave()) return null;
+        }
+        const note = openingNote();
+        opening = openNow(ctx).finally(() => { opening = null; try { note.hidePopover?.(); } catch (_) {} note.remove(); });
+        return opening;
+    }
+    async function openNow(ctx = {}) {
         const TV = ext.txView; // « 🎚️ Mieux voir » et la barre réglable (heritage-transcribe-view.js)
         let t = {id: 0, title: '', kind: 'apreciser', media_id: 0, filename: '', date_text: '', place: '', source: '', body: '', data: {zones: [], people: [], status: 'todo', view: TV.viewOf()}};
         if (!ctx.id && ctx.mediaId) { try { const o = await api('act_page_owner', {media_id: ctx.mediaId}); if (o?.id) ctx = {...ctx, id: Number(o.id), page: Number(ctx.mediaId)}; } catch (_) {} } // 📑
         if (ctx.id) { try { const r = await api('act_transcription', {id: ctx.id}); t = {...t, ...r, data: {...t.data, ...(r.data || {})}}; t.data.view = TV.viewOf(r.data?.view); if (!['todo', 'doing', 'checked', 'done'].includes(t.data.status)) t.data.status = String(t.body || '').trim() ? 'doing' : 'todo'; } catch (e) { return toast(e.message, 'error'); } }
         else if (ctx.mediaId) { t.media_id = Number(ctx.mediaId); t.filename = ctx.filename || ''; t.title = fileLikeTitle(ctx.title, ctx.filename) ? '' : (ctx.title || ''); t.body = ctx.text || ''; if (KINDS.some(k => k[0] === ctx.kind)) t.kind = ctx.kind; } // kind : ex. « lettre » pour le dos d'une carte postale
+        t.data.zones = Array.isArray(t.data.zones) ? t.data.zones : []; t.data.people = Array.isArray(t.data.people) ? t.data.people : [];
+        t.body = normBody(t.body, [t.data.zones, t.data.people]); // 🧲 \r\n → \n : la case le ferait de toute façon, les zones suivent
         let dirty = false, tool = 'pan', fitMode = 'page', fitOn = true, zoom = 1, panX = 0, panY = 0, selZone = null, found = [], imgW = 0, imgH = 0, matchCache = new Map();
         let flowView = '', flowCur = '', flowT = 0, fixCount = null, fixCountFor = ''; // la frise (plus bas)
+        let foundManual = null, fixWas = null, autoRelue = false, rvView = false; // « Ce que l'app a trouvé » ouvert ou fermé à la main (jusqu'au changement d'étape) ; « Corriger » fait
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-tx-dlg';
         dlg.innerHTML = `<div class="h-tx" data-ptab="text">
-            <header class="h-tx-top"><span class="h-tx-logo">📜</span><nav class="h-tx-menus" data-tx-menus></nav><span class="ui-topbar-hist h-tx-hist"><button type="button" class="icon-button small" data-tx-hist="undo" title="${esc(i18n('Annuler'))}" data-shortcut="⌘Z" disabled>↶</button><button type="button" class="icon-button small" data-tx-hist="redo" title="${esc(i18n('Rétablir'))}" data-shortcut="⇧⌘Z" disabled>↷</button></span><input data-tx="title" class="h-tx-title" maxlength="200" placeholder="${esc(i18n('Titre de l’acte (ex. Baptême de Jean Martin, 1790)'))}" value="${esc(t.title)}">
-                <select data-tx="kind" title="${esc(i18n('Genre d’acte'))}">${KINDS.map(([k, l]) => `<option value="${k}" ${t.kind === k ? 'selected' : ''}>${l}</option>`).join('')}</select>
-                <input data-tx="date_text" placeholder="${esc(i18n('Date'))}" value="${esc(t.date_text)}" title="${esc(i18n('Date de l’acte'))}"><input data-tx="place" placeholder="${esc(i18n('Lieu'))}" value="${esc(t.place)}" title="${esc(i18n('Paroisse, commune'))}"><input data-tx="source" placeholder="${esc(i18n('Source (AD, cote, vue)'))}" value="${esc(t.source)}" title="${esc(i18n('Archives, cote, numéro de vue'))}">
-                <select data-tx-state title="${esc(i18n('Où en est cette transcription (pour la liste « Transcriptions d’actes »)'))}">${[['todo', i18n('À faire')], ['doing', i18n('En cours')], ['checked', i18n('Relue')], ['done', i18n('Finie')]].map(([k, l]) => `<option value="${k}" ${t.data.status === k ? 'selected' : ''}>${l}</option>`).join('')}</select>
-                <span class="spacer"></span><span class="muted h-tx-status" data-tx-status data-ui-status></span>
+            <header class="h-tx-top"><span class="h-tx-logo">📜</span><nav class="h-tx-menus" data-tx-menus></nav><span class="ui-topbar-hist h-tx-hist"><button type="button" class="icon-button small" data-tx-hist="undo" title="${esc(i18n('Annuler'))}" data-shortcut="⌘Z" disabled>↶</button><button type="button" class="icon-button small" data-tx-hist="redo" title="${esc(i18n('Rétablir'))}" data-shortcut="⇧⌘Z" disabled>↷</button></span><input data-tx="title" class="h-tx-title" maxlength="200" placeholder="${esc(i18n('Titre de l’acte (ex. Baptême de Jean Martin, 1790)'))}" value="${esc(t.title)}" title="${esc(t.title)}">
+                <span class="spacer"></span><span class="muted h-tx-status ui-status" data-tx-status data-ui-status role="status" aria-live="polite"></span><span class="h-tx-iaslot" data-tx-iaslot="top"></span>
                 <button type="button" class="button small secondary" data-tx-cmd="export" title="${esc(i18n('Le texte (.txt), l’impression ou un PDF (image + texte)'))}">⤓ ${i18n('Exporter ▾')}</button><button type="button" class="button small" data-tx-cmd="save" title="${esc(i18n('Enregistrer'))}" data-shortcut="${esc(ext.shortcutLabel?.('⌘S') || '⌘S')}">💾 ${i18n('Enregistrer')}</button>${ext.fullButton ? ext.fullButton('transcribe') : ''}<button type="button" class="icon-button" data-tx-cmd="close" title="${esc(i18n('Fermer'))}">×</button></header>
+            <div class="h-tx-meta" data-tx-meta role="group" aria-label="${esc(i18n('Fiche de l’acte'))}"><span class="h-tx-metalab">ⓘ ${esc(i18n('Fiche de l’acte'))}</span><select data-tx="kind" title="${esc(i18n('Genre d’acte'))}">${KINDS.map(([k, l]) => `<option value="${k}" ${t.kind === k ? 'selected' : ''}>${l}</option>`).join('')}</select>
+                <input data-tx="date_text" placeholder="${esc(i18n('Date'))}" value="${esc(t.date_text)}" title="${esc(i18n('Date de l’acte'))}"><input data-tx="place" placeholder="${esc(i18n('Lieu'))}" value="${esc(t.place)}" title="${esc(i18n('Paroisse, commune'))}"><input data-tx="source" placeholder="${esc(i18n('Source (AD, cote, vue)'))}" value="${esc(t.source)}" title="${esc(i18n('Archives, cote, numéro de vue'))}">
+</div>
             <div class="ui-tabs h-tx-ptabs" role="tablist" aria-label="${esc(i18n('Image, texte ou personnes'))}" data-tx-ptabs>${[['image', '🖼️', 'Image'], ['text', '📝', 'Texte'], ['people', '👥', 'Personnes']].map(([k, ic, l]) => `<button type="button" role="tab" data-tx-ptab="${k}" class="${k === 'text' ? 'is-active' : ''}" aria-selected="${k === 'text'}">${ic} ${esc(i18n(l))}${k === 'people' ? ' <span class="h-tx-pcount" data-tx-pcount></span>' : ''}</button>`).join('')}</div>
             <div class="h-tx-main">
                 <nav class="h-tx-rail" data-tx-rail aria-label="${esc(i18n('Outils'))}"><button type="button" data-tx-tool="pan" title="${esc(i18n('Déplacer l’image, ou barre d’espace'))}" aria-label="${esc(i18n('Déplacer l’image'))}" data-shortcut="H">✋</button><button type="button" data-tx-tool="zone" title="${esc(i18n('Dessiner une zone : choisis un passage dans le texte, puis dessine son rectangle sur l’image (les deux restent liés)'))}" aria-label="${esc(i18n('Dessiner une zone'))}" data-shortcut="Z">▭</button><button type="button" data-tx-cmd="loupe" title="${esc(i18n('Loupe qui suit la souris (la molette change le grossissement)'))}" aria-label="${esc(i18n('Loupe'))}" data-shortcut="L">🔍</button><button type="button" data-tx-cmd="rot" title="${esc(i18n('Tourner l’image de 90°'))}" aria-label="${esc(i18n('Tourner de 90°'))}">⟳</button><button type="button" data-tx-cmd="image" title="${esc(i18n('Choisir l’image de l’acte (base ou ordinateur)'))}" aria-label="${esc(i18n('Image de l’acte'))}">🖼️</button></nav>
                 <section class="h-tx-left">
-                    <div class="h-tx-barwrap" data-tx-barwrap>${TV.toolbarHtml(t.data.view)}${zopHtml()}</div><div class="h-tx-pages" data-tx-pages role="tablist" aria-label="${esc(i18n('Pages du document'))}" hidden></div>
-                    <div class="h-tx-stage" data-tx-stage tabindex="-1"><svg data-tx-svg><g data-tx-world><image data-tx-img/><g data-tx-zones></g><g data-tx-handles></g><rect data-tx-draw class="h-tx-draw" hidden/></g></svg><canvas class="h-tx-loupe" data-tx-loupe hidden aria-hidden="true"></canvas><p class="h-tx-empty" data-tx-empty>${i18n('Choisis l’image de l’acte : « 🖼️ Image… » (une photo de la base, ou un fichier de l’ordinateur).')}</p></div>
+                    <div class="h-tx-barwrap" data-tx-barwrap>${TV.toolbarHtml(t.data.view)}${zopHtml()}${ext.txCtx ? ext.txCtx.wordColorHtml() : ''}${followHtml(lsGet(FOLLOW_KEY) === '1')}</div><div class="h-tx-pages" data-tx-pages role="tablist" aria-label="${esc(i18n('Pages du document'))}" hidden></div>
+                    <div class="h-tx-stage" data-tx-stage tabindex="-1"><svg data-tx-svg><g data-tx-world><image data-tx-img/><g data-tx-zones></g><g data-tx-words></g><g data-tx-handles></g><rect data-tx-draw class="h-tx-draw" hidden/></g></svg><canvas class="h-tx-loupe" data-tx-loupe hidden aria-hidden="true"></canvas><div class="h-tx-empty" data-tx-empty><span><button type="button" class="button h-tx-emptybtn" data-tx-cmd="image">🖼️ ${esc(i18n('Choisir l’image de l’acte'))}</button><small>${esc(i18n('ou glisse une photo ici (une photo de la base, ou un fichier de l’ordinateur)'))}</small></span></div></div>
                     <div class="h-tx-zonebar" data-tx-zonebar hidden></div>
                 </section>
                 <section class="h-tx-right">
                     <div class="h-tx-flow" data-tx-flow><div class="h-tx-steps" role="tablist" aria-label="${esc(i18n('Les étapes : Lire, Corriger, Repérer, Ajouter à la généalogie'))}" data-tx-steps>${STEPS.map(([k, label, help], i) => `<button type="button" role="tab" class="h-tx-step" data-tx-step="${k}" aria-selected="false" aria-controls="h-tx-pane-${k}" title="${esc(i18n(help))}"><i aria-hidden="true">${i + 1}</i><span><b>${esc(k === 'read' ? i18n('Lire', {ctx: 'atelier'}) : i18n(label))}</b><small data-tx-steprest="${k}"></small></span></button>`).join('')}</div>
-                    <div class="h-tx-tools h-tx-stepbody" data-tx-stepbody><span class="h-tx-readw"><button type="button" class="h-tx-readbtn" data-tx-cmd="readmenu" aria-haspopup="true" aria-expanded="false" title="${esc(i18n('Lire le texte de l’image : écriture à la main, texte imprimé, ou lecture approfondie par l’IA'))}">✨ ${esc(i18n('Lire', {ctx: 'atelier'}))} ▾</button>${readPanelHtml()}</span><span class="h-tx-htrrun" data-tx-htrrun hidden>${window.LCNDA_UI.spinner('', {inline: true})}<button type="button" class="button small secondary" data-tx-cmd="htrstop" title="${esc(i18n('Arrêter la lecture'))}">■ ${i18n('Arrêter')}</button></span>
-                        <span class="h-tx-pane" role="tabpanel" id="h-tx-pane-read" data-tx-pane="read"><button type="button" data-tx-cmd="template" title="${esc(i18n('Un modèle d’acte à compléter'))}">🧩 ${i18n('Modèle')}</button><small class="muted h-tx-panehint">${esc(i18n('Toute la page ou la zone choisie (▭) ; ou écris le texte toi-même, ligne à ligne.'))}</small></span>
-                        <span class="h-tx-pane" role="tabpanel" id="h-tx-pane-fix" data-tx-pane="fix"><button type="button" data-tx-cmd="fix" title="${esc(i18n('Proposer des corrections pour les mots mal lus (un mot souligné : clique-le pour choisir)'))}">🪄 ${i18n('Corrections')}</button><button type="button" data-tx-cmd="aide" title="${esc(i18n('Le latin des registres, les abréviations, les anciennes lettres (ſ, ꝑ…) et des exercices : choisis d’abord un mot dans le texte pour le chercher'))}">📖 ${i18n('Aide à la lecture')}</button><button type="button" data-tx-cmd="review" data-shortcut="R" title="${esc(i18n('Relire ligne à ligne en plein écran : le morceau d’image au-dessus de chaque ligne'))}">👁 ${esc(i18n('Relire ligne à ligne'))}</button><small class="muted h-tx-panehint" data-tx-fixinfo></small></span>
-                        <span class="h-tx-pane" role="tabpanel" id="h-tx-pane-find" data-tx-pane="find"><button type="button" data-tx-cmd="detect" title="${esc(i18n('Repérer les noms, dates, lieux et métiers'))}" data-help="${esc(i18n('Cherche dans le texte les noms (avec leur rôle : parrain, témoin…), les dates (même en toutes lettres ou au calendrier républicain), les lieux et les métiers, pour les relier aux fiches.'))}">🧭 ${i18n('Repérer')}</button><small class="muted h-tx-panehint" data-tx-findinfo></small></span>
-                        <span class="h-tx-pane" role="tabpanel" id="h-tx-pane-add" data-tx-pane="add"><button type="button" data-tx-cmd="found" title="${esc(i18n('L’événement, les personnes et leurs liens, la source : relier, comparer ou créer les fiches'))}">✓ ${i18n('Ajouter à la généalogie')}…</button><small class="muted h-tx-panehint">${esc(i18n("L’événement, les personnes et leurs liens, la source : relier, comparer ou créer les fiches"))}</small></span>
-                        <span class="spacer"></span><button type="button" class="h-tx-stepnext" data-tx-stepnext title="${esc(i18n('Étape suivante'))}">${esc(i18n('Étape suivante'))} ›</button></div><div class="h-tx-prog" data-tx-prog aria-label="${esc(i18n('Avancement'))}"></div></div>
-                    <div class="h-tx-chars">${SPECIAL.map(c => `<button type="button" data-tx-char="${esc(c)}" title="${esc(i18n('Insérer {c}', {c: esc(c)}))}">${esc(c)}</button>`).join('')}</div>
+                    <div class="h-tx-prog" data-tx-prog role="group" aria-label="${esc(i18n('État de l’acte'))}"></div>
+                    <div class="h-tx-tools h-tx-stepbody" data-tx-stepbody><span class="h-tx-htrrun" data-tx-htrrun hidden>${window.LCNDA_UI.spinner('', {inline: true})}<button type="button" class="button small secondary" data-tx-cmd="htrstop" title="${esc(i18n('Arrêter la lecture'))}">■ ${i18n('Arrêter')}</button></span>
+                        <span class="h-tx-pane" role="tabpanel" id="h-tx-pane-read" data-tx-pane="read"><span class="h-tx-readw"><button type="button" class="h-tx-readbtn" data-tx-cmd="readmenu" aria-haspopup="true" aria-expanded="false" title="${esc(i18n('Lire le texte de l’image : écriture à la main, texte imprimé, ou lecture approfondie par l’IA'))}">✨ ${esc(i18n('Lire', {ctx: 'atelier'}))} ▾</button>${readPanelHtml()}</span><span class="h-tx-iaslot" data-tx-iaslot="read"><button type="button" class="h-tx-iabtn" data-tx-cmd="aideia" title="${esc(i18n('Aider l’IA à lire cet acte : ce qui est coché part avec l’image vers l’IA (lecture approfondie)'))}">🧠 ${esc(i18n('Aider l’IA'))}<span data-tx-iacount></span></button></span><button type="button" data-tx-cmd="template" title="${esc(i18n('Un modèle d’acte à compléter'))}">🧩 ${i18n('Modèle')}</button><span class="spacer"></span><span class="h-tx-pinfo" data-tx-pinfo="read"></span></span>
+                        <span class="h-tx-pane" role="tabpanel" id="h-tx-pane-fix" data-tx-pane="fix"><button type="button" data-tx-cmd="fix" title="${esc(i18n('Proposer des corrections pour les mots mal lus (un mot souligné : clique-le pour choisir)'))}">🪄 ${i18n('Corrections')}</button><button type="button" data-tx-cmd="review" data-shortcut="R" title="${esc(i18n('Relire ligne à ligne en plein écran : le morceau d’image au-dessus de chaque ligne'))}">👁 ${esc(i18n('Relire ligne à ligne'))}</button><button type="button" data-tx-cmd="aide" title="${esc(i18n('Le latin des registres, les abréviations, les anciennes lettres (ſ, ꝑ…) et des exercices : choisis d’abord un mot dans le texte pour le chercher'))}">📖 ${i18n('Aide à la lecture')}</button><span class="h-tx-iaslot" data-tx-iaslot="fix"></span><span class="spacer"></span><span class="h-tx-pinfo" data-tx-pinfo="fix"></span></span>
+                        <span class="h-tx-pane" role="tabpanel" id="h-tx-pane-find" data-tx-pane="find"><button type="button" data-tx-cmd="detect" title="${esc(i18n('Repérer les noms, dates, lieux et métiers'))}" data-help="${esc(i18n('Cherche dans le texte les noms (avec leur rôle : parrain, témoin…), les dates (même en toutes lettres ou au calendrier républicain), les lieux et les métiers, pour les relier aux fiches.'))}">🧭 ${i18n('Repérer')}</button><span class="spacer"></span><small class="muted h-tx-panehint" data-tx-findinfo></small></span>
+                        <span class="h-tx-pane" role="tabpanel" id="h-tx-pane-add" data-tx-pane="add"><button type="button" class="h-tx-addbtn" data-tx-cmd="found" title="${esc(i18n('L’événement, les personnes et leurs liens, la source : relier, comparer ou créer les fiches'))}">✓ ${i18n('Ajouter à la généalogie')}…</button><span class="spacer"></span><small class="h-tx-addinfo" data-tx-addinfo></small><span class="h-tx-pinfo" data-tx-pinfo="add"></span></span></div></div>
+                    <div class="h-tx-why" data-tx-whyrow hidden></div><div class="h-tx-chars" data-tx-chars></div>
                     <div class="h-tx-find" data-tx-find hidden role="search" aria-label="${esc(i18n('Chercher dans le texte'))}"><input type="search" data-tx-fq placeholder="${esc(i18n('Chercher…'))}" aria-label="${esc(i18n('Chercher'))}" spellcheck="false" autocomplete="off" data-ui-off><span class="h-tx-fcount" data-tx-fcount aria-live="polite"></span><button type="button" data-tx-f="prev" title="${esc(i18n('Précédent'))}" aria-label="${esc(i18n('Précédent'))}" data-shortcut="⇧↩">↑</button><button type="button" data-tx-f="next" title="${esc(i18n('Suivant'))}" aria-label="${esc(i18n('Suivant'))}" data-shortcut="↩">↓</button><button type="button" data-tx-f="case" aria-pressed="false" title="${esc(i18n('Majuscules et minuscules comptent'))}">Aa</button><button type="button" data-tx-f="rep" aria-pressed="false" title="${esc(i18n('Chercher et remplacer'))}" data-shortcut="⌥⌘F">⇄</button><button type="button" class="h-tx-fclose" data-tx-f="close" title="${esc(i18n('Fermer'))}" aria-label="${esc(i18n('Fermer'))}">×</button>
                         <span class="h-tx-frep" data-tx-frep hidden><input type="text" data-tx-fr placeholder="${esc(i18n('Remplacer par…'))}" aria-label="${esc(i18n('Remplacer par…'))}" spellcheck="false" autocomplete="off" data-ui-off><button type="button" data-tx-f="one">${esc(i18n('Remplacer'))}</button><button type="button" data-tx-f="all">${esc(i18n('Tout remplacer'))}</button></span></div>
                     <div class="h-tx-editor${TV.lineNos() ? ' has-ln' : ''}" data-tx-editor><div class="h-tx-mirror" data-tx-mirror aria-hidden="true"></div><textarea data-tx-body spellcheck="false" placeholder="${esc(i18n('La transcription, ligne à ligne comme sur l’acte. Choisis un passage, puis dessine sa zone sur l’image (▭ Zone) : les deux restent liés.'))}">${esc(t.body)}</textarea><div class="h-tx-abtip" data-tx-abtip hidden role="tooltip"></div></div>
                     <div class="h-tx-fixbar" data-tx-fixbar hidden></div>
-                    <p class="h-tx-docnote" data-tx-docnote hidden>📄 ${esc(i18n('Ce texte est celui du document : il se voit dans la visionneuse, la page du document et la fiche des personnes reliées.'))}</p>
-                    <div class="h-tx-found" data-tx-found></div>
-                    <div class="h-tx-addbar" data-tx-addbar><span class="h-tx-addinfo" data-tx-addinfo></span><span class="h-tx-extra"><button type="button" class="button small secondary" data-tx-cmd="copy">📋 ${i18n("Copier le texte")}</button><button type="button" class="button small" data-tx-cmd="found" title="${esc(i18n('L’événement, les personnes et leurs liens, la source : relier, comparer ou créer les fiches'))}">✓ ${i18n('Ajouter à la généalogie')}…</button></span></div>
+                    <div class="h-tx-vers" data-tx-vers hidden></div><div class="h-tx-vprev" data-tx-vprev hidden></div><p class="h-tx-docnote" data-tx-docnote hidden title="${esc(i18n('Ce texte est celui du document : il se voit dans la visionneuse, la page du document et la fiche des personnes reliées.'))}">📄 ${esc(i18n('Ce texte est celui du document : il se voit dans la visionneuse, la page du document et la fiche des personnes reliées.'))}</p>
+                    <button type="button" class="h-tx-foundhead" data-tx-foundtoggle aria-expanded="true" aria-controls="h-tx-found"><span class="h-tx-foundt">🧾 ${esc(i18n('Ce que l’app a trouvé'))}</span><small class="h-tx-foundsum" data-tx-foundsum></small><span class="h-tx-foundcar" aria-hidden="true">▾</span></button>
+                    <div class="h-tx-found" id="h-tx-found" data-tx-found></div>
                 </section>
             </div></div>`;
         document.body.appendChild(dlg); ext.fullInit?.(dlg, 'transcribe', true); dlg.showModal();
         dlg.txApi = {get: () => t, touch: () => touch()}; // 🌐 « Traduire » (plus-famille-latin.js) : garder la traduction dans la transcription (t.data.translation) // plein écran par défaut ; ⛶ pour passer en fenêtre (retenu)
         const $ = s => dlg.querySelector(s), area = $('[data-tx-body]'), mirror = $('[data-tx-mirror]'), svg = $('[data-tx-svg]'), world = $('[data-tx-world]'), img = $('[data-tx-img]'), stage = $('[data-tx-stage]');
-        const UI = window.LCNDA_UI || {}, STATES = {'modifié': 'dirty', '✓ Enregistré': 'saved', 'Enregistrement…': 'saving'};
-        const status = s => { const el = $('[data-tx-status]'); el.title = s || ''; if (STATES[s] && UI.savedStatus) UI.savedStatus(el, STATES[s]); else el.textContent = s || ''; };
+        area.value = t.body; // 🧲 le HTML d'une <textarea> mange le saut de ligne du tout début : sans ceci, toutes les zones commençaient 1 caractère trop tard
+        const UI = window.LCNDA_UI || {};
+        /* 11 (audit ; maquette atelier-etapes.html, partie 3) : en haut, seulement l'état de l'enregistrement, toujours à la même place
+         * (« ● modifié », « ⟳ Enregistrement… », « ✓ Enregistré · il y a 3 s », « ⚠ Pas enregistré · nouvel essai dans 15 s ») ; au survol,
+         * l'heure exacte. Les consignes et les messages (« Zone posée : choisis son passage… ») vont dans la barre du bas, qui a la place. */
+        let lastStatus = '', saveSt = '', savedAt = 0, retryAt = 0;
+        function paintSave() {
+            const el = $('[data-tx-status]'); if (!el) return;
+            const ago = s => (s < 60 ? i18n('il y a {n} s', {n: s}) : i18n('il y a {n} min', {n: Math.round(s / 60)}));
+            const S = {dirty: ['is-dirty', `● ${i18n('modifié')}`], saving: ['is-saving', `⟳ ${i18n('Enregistrement…')}`],
+                saved: ['is-saved', `✓ ${i18n('Enregistré')} · ${ago(Math.max(0, Math.round((Date.now() - savedAt) / 1000)))}`],
+                retry: ['is-error', `⚠ ${i18n('Pas enregistré')} · ${retryAt > Date.now() ? i18n('nouvel essai dans {n} s', {n: Math.ceil((retryAt - Date.now()) / 1000)}) : i18n('nouvel essai…')}`],
+                conflict: ['is-error', `⚠ ${i18n('Modifié dans une autre fenêtre')}`], held: ['is-error', `⚠ ${i18n('Pas enregistré : modifié dans une autre fenêtre')}`]}[saveSt];
+            if (!S) { el.textContent = ''; el.title = ''; delete dlg.dataset.txSave; return; }
+            el.innerHTML = `<span class="ui-status-txt ${S[0]}">${esc(S[1])}</span>`; dlg.dataset.txSave = saveSt;
+            el.title = saveSt === 'saved' ? i18n('Enregistré à {h}', {h: new Date(savedAt).toLocaleTimeString()}) : S[1];
+        }
+        const saveState = k => { saveSt = k; if (k === 'saved') savedAt = Date.now(); paintSave(); };
+        const saveTick = setInterval(() => { if (!dlg.isConnected) { clearInterval(saveTick); return; } if (saveSt === 'saved' || saveSt === 'retry') paintSave(); }, 1000);
+        /** un message (ce qui vient de se faire, ce qu'il faut faire ensuite) : dans la barre du bas, jusqu'au message suivant ou au changement d'étape */
+        const status = s => { lastStatus = s || ''; const el = $('[data-tx-say]'); if (el) { el.textContent = lastStatus; el.title = lastStatus; } };
         let commitT = 0, HX = null, txBar = null; // E1 : un vrai historique ↶ ↷ (texte, zones, personnes, réglages de l'image, fiche de l'acte) ; K18 : la barre du bas
         const flushCommit = () => { if (commitT) { clearTimeout(commitT); commitT = 0; } HX?.commit(); };
-        const touch = () => { dirty = true; status(i18n('modifié')); clearTimeout(commitT); commitT = setTimeout(() => { commitT = 0; HX?.commit(); }, 450); };
+        /* 🔴 2 (audit) : « modifié » se voit aussi de la page (data-dirty : « Quitter la page ? »), même sans rien taper (une zone
+         * dessinée, déplacée, supprimée) ; après un enregistrement, plus rien à demander. rev compte les modifications (🔴 1 : ce qui
+         * change pendant un enregistrement n'est pas marqué « enregistré »). 12 : enregistrement automatique 4 s après la dernière
+         * modification (les versions automatiques du serveur gardent l'historique) et un brouillon sur cet ordinateur. */
+        let rev = 0, autoT = 0, draftT = 0, conflictHold = false;
+        const setDirty = on => { dirty = !!on; dlg.dataset.dirty = dirty ? '1' : ''; };
+        const touch = ({text = false} = {}) => { rev++; setDirty(true); saveState('dirty'); clearTimeout(commitT); commitT = setTimeout(() => { commitT = 0; HX?.commit(); }, text ? 1000 : 450); autoSoon(); draftSoon(); };
+        // la page marque « modifié » à chaque frappe dans la fenêtre (même dans « Chercher ») : ici, seul compte ce qui change l'acte
+        ['input', 'change'].forEach(ev => dlg.addEventListener(ev, () => { dlg.dataset.dirty = dirty ? '1' : ''; }, true));
+        const AUTO_MS = 4000;
+        function autoSoon() { clearTimeout(autoT); autoT = setTimeout(autoSave, AUTO_MS); }
+        async function autoSave() {
+            autoT = 0; if (!dlg.isConnected || !dirty || conflictHold) return;
+            if (!t.id && !area.value.trim()) return; // un acte nouveau sans texte : rien à créer tout seul
+            if (saving || htrJob) { autoSoon(); return; }
+            await save({auto: true});
+        }
+        const draftKey = () => `genealogie-tx-draft-${t.id || (t.media_id ? 'm' + t.media_id : 'new')}`;
+        function draftSoon() { clearTimeout(draftT); draftT = setTimeout(writeDraft, 700); }
+        function writeDraft() {
+            draftT = 0; if (!dlg.isConnected || !dirty) return;
+            const fields = Object.fromEntries(['title', 'kind', 'date_text', 'place', 'source'].map(k => [k, $(`[data-tx="${k}"]`)?.value ?? '']));
+            try { localStorage.setItem(draftKey(), JSON.stringify({at: Date.now(), base: t.updated_at || '', fields, body: area.value, zones: t.data.zones, people: t.data.people, reviewed: t.data.reviewed || []})); } catch (_) {}
+        }
+        const dropDraft = (key = draftKey()) => { clearTimeout(draftT); draftT = 0; try { localStorage.removeItem(key); } catch (_) {} };
         // E4 : une image glissée (ou collée) sur l'acte entre dans les Médias et devient l'image de l'acte
         UI.bindFileDrop?.(stage, async files => {
+            if (pagesLocked()) return;
             const f = files[0], fd = new FormData(); fd.append('file', f, f.name); fd.append('kind', 'image'); fd.append('title', f.name.replace(/\.[^.]+$/, '')); fd.append('csrf', A().state.csrf);
             try { const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': A().state.csrf}}), j = await r.json().catch(() => ({})); if (!r.ok || j.error) throw new Error(j.error || 'envoi impossible');
                 if (t.data.zones.length && !await A().confirmBox(i18n('Elles étaient posées pour l’ancienne image.'), {title: i18n('Garder les zones déjà posées ?'), okLabel: i18n('Garder les zones'), cancelLabel: i18n('Les retirer'), danger: false})) { snap(); t.data.zones = []; }
@@ -283,11 +458,34 @@
         const PG = ext.txPages;
         let PAGES = [], pageIx = 0, pageForm = '', switching = false, readQ = null, perSet = null, perCombo = null, perWarnAt = 0;
         const curPid = () => Number(PAGES[pageIx]?.media_id || t.media_id);
+        /** ⛔ le centre de ce rectangle (pixels de l'image affichée) est dans une zone « à ne pas lire » de cette page */
+        const skipped = b => !!TXX()?.inSkip(t.data.zones.filter(z => z.kind === 'skip' && onHere(z)), b);
         const onHere = z => pageForm !== 'one' || Number(z.p || t.media_id) === curPid();
         const pz = () => (pageForm === 'one' ? {p: curPid()} : {});
         const pageZone = z => Object.assign(z, pz());
         const segIx = () => { const i = (t.data.pages || []).map(Number).indexOf(curPid()); return i < 0 ? 0 : i; };
         const pageName = (p, i) => (ext.mediaPages ? ext.mediaPages.labelOf(p, i) : i18n('Page {n}', {n: i + 1}));
+        /** 📑 le morceau du texte d'une page (son n° de média) : une lecture va dans le bloc de la page lue, même si on regarde une autre page */
+        const segOf = pid => { const i = (t.data.pages || []).map(Number).indexOf(Number(pid)); return i < 0 ? segIx() : i; };
+        const segName = i => { const id = Number((t.data.pages || [])[i] || 0), k = PAGES.findIndex(p => Number(p.media_id) === id), n = (k < 0 ? i : k) + 1, nm = k >= 0 ? pageName(PAGES[k], k) : '', pg = i18n('Page {n}', {n});
+            return nm && nm !== pg ? `${pg} (${nm})` : pg; };
+        const blocksOn = () => pageForm === 'one' && PAGES.length > 1 && !!PG;
+        /* 📑 les pages l'une sous l'autre, chacune dans son bloc (heritage-transcribe-blocs.js) : sa barre, « ✨ Lire cette page », ▸ replier */
+        const BK = ext.txBlocks ? ext.txBlocks.mount({editor: $('[data-tx-editor]'), area, mirror, on: blocksOn,
+            pages: () => (t.data.pages || []).map((id, i) => ({pid: Number(id), n: i + 1, name: segName(i)})), cur: () => segIx(),
+            zones: pid => t.data.zones.filter(z => Number(z.p || t.media_id) === Number(pid)).length, key: () => (t.id ? String(t.id) : `m${t.media_id}`),
+            show: i => showSeg(i), read: i => readSeg(i), readTitle: () => i18n('Lire cette page avec : {x}', {x: i18n((READS.find(r => r[0] === readChoice()) || READS[0])[2])}),
+            caret: () => followCaret()}) : null;
+        const READ_CHOICE_KEY = 'genealogie-tx-lire-choix';
+        /** la lecture choisie la dernière fois (✍️ rapide, 🖨 imprimé, 🔬 approfondie) : celle de « ✨ Lire cette page » */
+        const readChoice = () => { let v = ''; try { v = localStorage.getItem(READ_CHOICE_KEY) || ''; } catch (_) {} return READS.some(r => r[0] === v) ? v : 'htr'; };
+        const setReadChoice = v => { try { localStorage.setItem(READ_CHOICE_KEY, v); } catch (_) {} };
+        const idxOfSeg = i => PAGES.findIndex(p => Number(p.media_id) === Number((t.data.pages || [])[i] || 0));
+        /** ↦ Voir l'image : la page de ce bloc s'affiche, le curseur au début de son texte */
+        async function showSeg(i) { const k = idxOfSeg(i); if (k < 0) return; BK?.unfold(i); if (k !== pageIx) await goPage(k, {keepText: true}); const sg = PG.segments(area.value)[i]; if (sg) { area.focus({preventScroll: true}); area.setSelectionRange(sg.s, sg.s); } BK?.scrollTo(i); BK?.paint(); }
+        /** ✨ Lire cette page : la page s'affiche, puis la lecture choisie (sur cette page seulement) ; le texte lu va dans son bloc */
+        async function readSeg(i) { const k = idxOfSeg(i); if (k < 0) return; if (k !== pageIx) await goPage(k, {keepText: true}); BK?.unfold(i);
+            const c = readChoice(); if (c === 'ocr') return runOcr(); if (c === 'deep') return openDeep(); return runHtr(); }
         /** remplace [at, end) du texte par str ; les zones, personnes et repérages qui suivent se décalent */
         function spliceText(at, end, str) {
             const v = area.value, delta = str.length - (end - at);
@@ -297,20 +495,75 @@
             area.value = v.slice(0, at) + str + v.slice(end); before = area.value; t.body = area.value;
         }
         /** un texte lu (text = l'ancien texte + le nouveau, zones posées dessus) : à la fin du texte, ou à la fin de la page affichée (un seul texte) */
-        function putRead(text, made) {
+        function putRead(text, made, {pid = curPid(), ask = true} = {}) {
             if (pageForm !== 'one') { before = area.value = text; t.body = text; snap(); t.data.zones.push(...made); touch(); drawZones(); return; }
-            const old = area.value, rest = text.slice(old.length), add = rest.replace(/^\n+/, ''), base = old.length + (rest.length - add.length);
-            const sg = PG.segments(old)[segIx()] || {s: old.length, e: old.length}, at = sg.e, had = !!old.slice(sg.s, at).trim();
+            const old = area.value, rest = text.slice(old.length), add = rest.replace(/^\n+/, ''), base = old.length + (rest.length - add.length), si = segOf(pid);
+            const sg = PG.segments(old)[si] || {s: old.length, e: old.length}, at = sg.e, had = !!old.slice(sg.s, at).trim();
+            const was = had && ask && blocksOn() ? snapText() : null, rel = made.map(z => ({...z, s: z.s - base, e: z.e - base})); // 📑 la page avait déjà du texte : on proposera de remplacer
             const pre = had ? (old.slice(0, at).endsWith('\n') ? '\n' : '\n\n') : '', ins = pre + (at < old.length ? add.replace(/\n+$/, '') : add);
             spliceText(at, at, ins); snap();
-            const k = at + pre.length - base; made.forEach(z => { z.s += k; z.e += k; z.p = curPid(); });
-            t.data.zones.push(...made); touch(); drawZones();
+            const k = at + pre.length - base; made.forEach(z => { z.s += k; z.e += k; z.p = Number(pid) || curPid(); });
+            t.data.zones.push(...made); touch(); BK?.unfold(si); drawZones(); BK?.scrollTo(si);
+            if (was) offerPlace({pid, was, add: add.replace(/\n+$/, ''), rel});
             return {s: at + pre.length, e: at + ins.length};
         }
-        function appendRead(str) {
+        /** 📑 l'état du texte où la lecture (add, ses zones rel posées à partir de 0) remplace le texte de la page pid : les zones de la page
+         *  reliées ligne à ligne quand le nombre de lignes est le même (ext.txCtx.relinkZones), celles d'une lecture d'avant retirées */
+        function replacedState(x, pid, add, rel = []) {
+            const body = x.body, sg = PG.segments(body)[segOf(pid)] || {s: 0, e: body.length}, str = add.replace(/\n+$/, '') + (sg.e < body.length ? '' : '\n');
+            const old = body.slice(sg.s, sg.e), d = str.length - (sg.e - sg.s), mineP = z => Number(z.p || t.media_id) === Number(pid);
+            const inSeg = z => z.e > z.s && z.s >= sg.s && z.e <= sg.e && mineP(z), mine = x.zones.filter(inSeg);
+            const R = mine.length && ext.txCtx?.relinkZones && ext.txSnap ? ext.txCtx.relinkZones(mine.map(z => ({...z, s: z.s - sg.s, e: z.e - sg.s})), old, str, ext.txSnap.textLinesOf) : null;
+            const mv = r => { const f = v => (v >= sg.e ? v + d : v > sg.s ? sg.s : v); return {...r, s: f(r.s), e: Math.max(f(r.s), f(r.e))}; };
+            const zones = [];
+            x.zones.forEach(z => { const j = mine.indexOf(z);
+                if (j < 0) { if (!(z.src && mineP(z) && z.s < sg.e && z.e > sg.s)) zones.push(mv(z)); return; } // une zone d'une lecture à cheval : partie avec son texte
+                if (rel.length && z.src) return; // la nouvelle lecture a ses zones de ligne : celles de la lecture d'avant s'en vont
+                const r = R?.zones[j]; if (r && r.e > r.s) { zones.push({...r, s: r.s + sg.s, e: r.e + sg.s}); return; }
+                if (!z.src) zones.push({...z, s: sg.s, e: sg.s}); }); // pas de ligne pour elle : gardée sur l'image, à relier à la main
+            zones.push(...rel.map(z => ({...z, s: z.s + sg.s, e: z.e + sg.s, p: Number(pid)})));
+            return {body: body.slice(0, sg.s) + str + body.slice(sg.e), zones, people: x.people.map(mv), reviewed: x.reviewed};
+        }
+        /** 📑 une lecture arrivée sur une page qui avait déjà du texte : elle est ajoutée à la fin de la page (rien n'est perdu), et on
+         *  propose « ⇄ Remplacer la page », « ⚖️ Garder pour comparer » (le texte comme avant, la lecture dans ⚖️) ou « ↶ Annuler » */
+        let placeBar = null;
+        function offerPlace({pid, was, add, rel}) {
+            placeBar?.remove();
+            const to = snapText(), name = segName(segOf(pid)), bar = placeBar = document.createElement('div');
+            bar.className = 'h-tx-place'; bar.dataset.txPlacebar = String(pid); bar.setAttribute('role', 'status');
+            bar.innerHTML = `<span class="h-tx-placet">📄 ${esc(i18n('{page} avait déjà du texte : la lecture est ajoutée à la fin de la page.', {page: name}))}</span>`
+                + `<button type="button" class="button small secondary" data-tx-place="replace">⇄ ${esc(i18n('Remplacer la page'))}</button>`
+                + `<button type="button" class="button small" data-tx-place="append" aria-pressed="true">＋ ${esc(i18n('Ajouter à la fin de la page'))}</button>`
+                + `<button type="button" class="button small secondary" data-tx-place="compare">⚖️ ${esc(i18n('Garder pour comparer'))}</button>`
+                + `<button type="button" class="button small secondary" data-tx-place="undo">↶ ${esc(i18n('Annuler'))}</button>`
+                + `<button type="button" class="icon-button small" data-tx-place="close" title="${esc(i18n('Fermer'))}" aria-label="${esc(i18n('Fermer'))}">×</button>`;
+            $('[data-tx-editor]').before(bar);
+            const show = x => { putText(x); const i = segOf(pid); BK?.unfold(i); BK?.scrollTo(i); };
+            bar.addEventListener('click', e => { const b = e.target.closest('[data-tx-place]'); if (!b) return; const k = b.dataset.txPlace; bar.remove(); if (placeBar === bar) placeBar = null;
+                if (k === 'close' || k === 'append') return;
+                const now = snapText();
+                if (k === 'undo') { show(was); status(i18n('Lecture retirée du texte')); A().undoToast?.(i18n('Lecture retirée de {page}', {page: name}), {undo: () => show(now), redo: () => show(was), icon: '📄'}); return; }
+                if (k === 'replace') { const rep = replacedState(was, pid, add, rel); versionBefore('Avant « Remplacer la page »', was); show(rep); status(i18n('Texte lu (à relire)'));
+                    A().undoToast?.(i18n('Lecture mise à la place du texte de {page}', {page: name}), {undo: () => show(now), redo: () => show(rep), icon: '⇄'}); return; }
+                if (k === 'compare') { show(was); status(i18n('Lecture gardée pour comparer'));
+                    A().undoToast?.(i18n('Lecture gardée pour comparer : le texte de {page} est comme avant', {page: name}), {undo: () => show(now), redo: () => show(was), icon: '⚖️'});
+                    setTimeout(() => openCompare(null, 'line'), 400); } // ⚖️ la lecture est gardée (keepReading) : « Ligne par ligne »
+            });
+            void to;
+        }
+        /** remplacer le texte de la page affichée (un seul texte pour plusieurs pages) ou tout le texte ; ses zones de lecture partent avec lui */
+        function replaceRead(str, {pid = curPid()} = {}) {
+            snap();
+            if (blocksOn()) { const si = segOf(pid), sg = PG.segments(area.value)[si], x = replacedState(snapText(), pid, str); // 📑 les zones de la page reliées ligne à ligne si elles le peuvent
+                const s0 = sg.s; putText(x); BK?.unfold(si); const e0 = PG.segments(area.value)[si]?.e ?? area.value.length; return {s: s0, e: e0}; }
+            const sg = {s: 0, e: area.value.length};
+            t.data.zones = t.data.zones.filter(z => !(z.src && onHere(z) && z.s < sg.e && z.e > sg.s));
+            spliceText(sg.s, sg.e, str); return {s: sg.s, e: sg.s + str.length};
+        }
+        function appendRead(str, {pid = curPid(), ask = false} = {}) {
             const old = area.value, s0 = old.length + (old.trim() ? 2 : 0);
             if (pageForm !== 'one') { area.value += (old.trim() ? '\n\n' : '') + str; return {s: s0, e: area.value.length}; }
-            return putRead(old + (old.trim() ? '\n\n' : '') + str, []);
+            return putRead(old + (old.trim() ? '\n\n' : '') + str, [], {pid, ask});
         }
         function paintPages() {
             const bar = $('[data-tx-pages]'); if (!bar) return;
@@ -330,9 +583,10 @@
             const has = Array.isArray(t.data.pages) && t.data.pages.length > 1;
             pageForm = has ? 'one' : set.some(p => Number(p.media_id) !== Number(t.media_id) && (p.acts || []).length) ? 'per' : PG.mode();
             pageIx = Math.max(0, PAGES.findIndex(p => Number(p.media_id) === Number(ctx.page || t.media_id)));
-            if (pageForm === 'one' && layoutText()) { dirty = true; status(i18n('modifié')); }
+            if (pageForm === 'one' && layoutText()) { dirty = true; saveState('dirty'); }
             if (pageForm === 'per') await loadPerSet();
             t.filename = PAGES[pageIx].filename; paintPages();
+            const pv0 = t.data.pageViews?.[curPid()]; if (pageForm === 'one' && pv0 && typeof pv0 === 'object') { t.data.view = TV.viewOf(pv0); syncControls(); paintBadge(); } // 🎚 les réglages de cette page
         }
         function layoutText() {
             const ids = PAGES.map(p => Number(p.media_id)), byId = id => PAGES.find(p => Number(p.media_id) === id);
@@ -359,8 +613,13 @@
         async function goPage(i, {keepText = false, goto = null} = {}) {
             if (i < 0 || i >= PAGES.length || i === pageIx) return;
             if (pageForm === 'per') return switchAct(i, goto);
+            // 🎚 chaque page garde ses réglages d'image (rotation, miroir, redressement, « Mieux voir ») : deux photos n'ont pas le même cadrage
+            const pv = t.data.pageViews = (t.data.pageViews && typeof t.data.pageViews === 'object' && !Array.isArray(t.data.pageViews)) ? t.data.pageViews : {};
+            pv[curPid()] = {...t.data.view};
             pageIx = i; t.filename = PAGES[i].filename; selZone = null; paintPages();
-            if (!keepText) { const sg = PG.segments(area.value)[segIx()]; if (sg) { area.setSelectionRange(sg.s, sg.s); const lineH = parseFloat(getComputedStyle(area).lineHeight) || 20; area.scrollTop = Math.max(0, (area.value.slice(0, sg.s).split('\n').length - 2) * lineH); mirror.scrollTop = area.scrollTop; } }
+            t.data.view = TV.viewOf(pv[curPid()] || {...t.data.view, rot: 0, tilt: 0, mirror: false}); syncControls(); paintBadge();
+            if (!keepText) focusSeg();
+            paintMirror(); // 📑 le morceau de la page affichée en clair, les autres grisés
             await loadImage();
         }
         /** un texte par page : les actes des autres pages du même ensemble (pour « Ce que l'app a trouvé » sur tout le document) */
@@ -386,7 +645,7 @@
             if (dirty) { await save(); if (dirty) return; }
             switching = true; teardown();
             const next = (p.acts || []).length ? {id: Number(p.acts[0])} : {mediaId: Number(p.media_id), filename: p.filename, title: '', text: p.transcription || ''};
-            return open({...next, page: Number(p.media_id), goto, onClose: ctx.onClose, onSaved: ctx.onSaved});
+            return openNow({...next, page: Number(p.media_id), goto, onClose: ctx.onClose, onSaved: ctx.onSaved});
         }
         /** un clic (ou les flèches) dans le texte d'une autre page : son image s'affiche */
         function followCaret() {
@@ -394,15 +653,72 @@
             const id = Number((t.data.pages || [])[PG.segAt(area.value, area.selectionStart)] || 0), i = PAGES.findIndex(p => Number(p.media_id) === id);
             if (i >= 0 && i !== pageIx) goPage(i, {keepText: true});
         }
+        /** 🔴 5 (audit) : le curseur au début du morceau de la page affichée, le texte défile jusqu'à lui (à l'ouverture, à chaque page) */
+        function focusSeg() {
+            if (pageForm !== 'one' || PAGES.length < 2) return;
+            const sg = PG.segments(area.value)[segIx()]; if (!sg) return;
+            area.setSelectionRange(sg.s, sg.s); const lineH = parseFloat(getComputedStyle(area).lineHeight) || 20;
+            area.scrollTop = Math.max(0, (area.value.slice(0, sg.s).split('\n').length - 2) * lineH); mirror.scrollTop = area.scrollTop;
+        }
+        /** un clic dans le blanc sous le texte (le curseur irait tout à la fin, sur la dernière page) : la fin du morceau de la page affichée */
+        area.addEventListener('mouseup', e => {
+            if (pageForm !== 'one' || PAGES.length < 2 || area.selectionStart !== area.selectionEnd || area.selectionEnd !== area.value.length) return;
+            const sg = PG.segments(area.value), here = sg[segIx()]; if (!here || segIx() === sg.length - 1) return;
+            const last = mirror.lastElementChild, rs = last ? last.getClientRects() : [], textBottom = rs.length ? rs[rs.length - 1].bottom : area.getBoundingClientRect().top; // le bas de la dernière ligne écrite (le miroir suit le texte)
+            if (e.clientY <= textBottom) return;
+            area.setSelectionRange(here.e, here.e);
+        });
+        let markWarnAt = 0;
+        /** 🔴 5 : les repères « — page 2 — » séparent les pages ; ni effacés, ni coupés par une frappe (sinon le texte change de page) */
+        function guardMarks(e) {
+            if (pageForm !== 'one' || PAGES.length < 2 || !PG || !/^(insert|delete)/.test(e.inputType)) return false;
+            const v = area.value, s = area.selectionStart, en = area.selectionEnd, mk = PG.marks(v); if (!mk.length) return false;
+            let a = s, b = en;
+            if (s === en && e.inputType.startsWith('delete')) {
+                const back = /Backward$/.test(e.inputType), word = /Word/.test(e.inputType), line = /Line/.test(e.inputType);
+                if (back) { a = line ? v.lastIndexOf('\n', s - 1) + 1 : word ? Math.max(0, v.slice(0, s).search(/\S*\s*$/)) : s - 1; if (a === s) a = s - 1; }
+                else { const nl = v.indexOf('\n', s); b = line ? (nl < 0 ? v.length : nl) : word ? s + (v.slice(s).match(/^\s*\S*/)?.[0].length || 1) : s + 1; if (b === s) b = s + 1; }
+                a = Math.max(0, a); b = Math.min(v.length, b);
+            }
+            const nl = e.inputType === 'insertLineBreak' || e.inputType === 'insertParagraph' || /^\n/.test(e.data || '');
+            // 📑 la dernière page, vide, sans ligne sous son repère : écrire là commence sa première ligne (le repère reste entier)
+            if (s === en && s === v.length && mk[mk.length - 1].end === v.length && e.inputType.startsWith('insert') && !nl) {
+                const put = e.data ?? e.dataTransfer?.getData('text/plain') ?? ''; if (!put) return false;
+                e.preventDefault(); area.setRangeText('\n' + put, s, s, 'end'); area.dispatchEvent(new Event('input')); return true; }
+            const hit = mk.some(k => (a < b ? a < k.end + 1 && b > k.at - 1 : (a > k.at && a < k.end) || ((a === k.at || a === k.end) && !nl && e.inputType.startsWith('insert'))));
+            if (!hit) return false;
+            e.preventDefault();
+            if (Date.now() - markWarnAt > 1500) { markWarnAt = Date.now(); toast(i18n('Les repères « — page 2 — » séparent les pages : ils ne s’effacent pas ici (📑 « Pages du document »).')); }
+            return true;
+        }
+        /** 12 : un brouillon de cet ordinateur plus récent que ce qui est enregistré : « Reprendre le brouillon » ou le laisser */
+        function offerDraft() {
+            if (!dlg.isConnected) return;
+            let d = null; try { d = JSON.parse(localStorage.getItem(draftKey()) || 'null'); } catch (_) { d = null; }
+            if (!d || typeof d.body !== 'string') return;
+            const savedAt = t.updated_at ? Date.parse(String(t.updated_at).replace(' ', 'T') + 'Z') : 0;
+            if ((d.body === area.value && JSON.stringify(d.zones || []) === JSON.stringify(t.data.zones)) || (savedAt && Number(d.at) <= savedAt)) { dropDraft(); return; }
+            const bar = document.createElement('div'); bar.className = 'h-tx-draft'; bar.dataset.txDraftbar = ''; bar.setAttribute('role', 'status');
+            const when = new Date(Number(d.at) || Date.now());
+            bar.innerHTML = `<span>📝 ${esc(i18n('Un brouillon pas enregistré a été retrouvé sur cet ordinateur ({when}).', {when: when.toLocaleString()}))}</span><button type="button" class="button small" data-tx-draft="use">${esc(i18n('Reprendre le brouillon'))}</button><button type="button" class="button small secondary" data-tx-draft="drop">${esc(i18n('Laisser'))}</button>`;
+            $('[data-tx-editor]').before(bar);
+            bar.addEventListener('click', ev => { const b = ev.target.closest('[data-tx-draft]'); if (!b) return; bar.remove();
+                if (b.dataset.txDraft === 'drop') { dropDraft(); return; }
+                const was = {...snapText(), fields: Object.fromEntries(['title', 'kind', 'date_text', 'place', 'source'].map(k => [k, $(`[data-tx="${k}"]`).value]))};
+                const put = x => { Object.entries(x.fields || {}).forEach(([k, val]) => { const el = $(`[data-tx="${k}"]`); if (el && typeof val === 'string') { el.value = val; t[k] = val; } }); putText({body: x.body, zones: Array.isArray(x.zones) ? x.zones : [], people: Array.isArray(x.people) ? x.people : [], reviewed: Array.isArray(x.reviewed) ? x.reviewed : []}); };
+                put(d); A().undoToast?.(i18n('Brouillon repris (pas encore enregistré)'), {undo: () => put(was), redo: () => put(d), icon: '📝'}); });
+        }
         /** « (page 3, ligne 7) » d'une position du texte (un seul texte sur plusieurs pages) ; null sinon */
         const pageRef = pos => { if (pageForm !== 'one' || PAGES.length < 2 || !(pos >= 0)) return null; const li = PG.lineOf(area.value, pos), id = Number((t.data.pages || [])[li.seg] || 0), i = PAGES.findIndex(p => Number(p.media_id) === id); if (i < 0) return null;
             return {n: i + 1, code: PAGES[i].label || 'page', name: pageName(PAGES[i], i), line: li.line, text: i18n('(page {n}, ligne {line})', {n: i + 1, line: li.line})}; };
         const blankMarks = v => (PG ? v.replace(/^—[ \t]*[\p{L}.]+[ \t]+\d+[^\n—]*—[ \t]*$/gmu, m => ' '.repeat(m.length)) : v);
         const findText = () => blankMarks(area.value);
-        const readAllAny = () => PAGES.length > 1 && !!$('[data-tx-readscope] input[value="all"]')?.checked;
+        const readAllAny = () => PAGES.length > 1 && !!$('[data-tx-readscope] input:is([value="all"], [value="empty"]):checked');
+        // 📑 les pages à lire : toutes, ou seulement celles sans texte (« Seulement les pages pas encore lues »)
+        const pagesToRead = () => PAGES.map((_, i) => i).filter(i => !$('[data-tx-readscope] input[value="empty"]')?.checked || !pageLines(i));
         const readAllOn = () => pageForm === 'one' && readAllAny();
         const perOnly = () => { if (pageForm === 'per' && readAllAny()) toast(i18n('Un texte par page : la lecture rapide et la lecture d’un imprimé se font page par page ; la lecture approfondie peut lire toutes les pages.')); };
-        function readAll(kind) { readQ = {kind, left: PAGES.map((_, i) => i)}; readNext(true); }
+        function readAll(kind) { const left = pagesToRead(); if (!left.length) return toast(i18n('Toutes les pages ont déjà du texte.')); readQ = {kind, left}; readNext(true); }
         async function readNext(ok) {
             if (!readQ) return; if (!ok || !dlg.isConnected) { readQ = null; return; }
             const i = readQ.left.shift(); if (i == null) { readQ = null; status(i18n('Toutes les pages sont lues (à relire)')); return; }
@@ -446,7 +762,7 @@
             const pts = [[0, 0], [imgW, 0], [0, imgH], [imgW, imgH]].map(([x, y]) => A0.transformPoint(new DOMPoint(x, y))), xs = pts.map(q => q.x), ys = pts.map(q => q.y);
             const minX = Math.min(...xs), minY = Math.min(...ys);
             M = new DOMMatrix().translate(-minX, -minY).multiply(A0); Mi = M.inverse(); WH = [Math.max(...xs) - minX, Math.max(...ys) - minY];
-            const tr = mstr(M); img.setAttribute('transform', tr); $('[data-tx-zones]').setAttribute('transform', tr); $('[data-tx-draw]').setAttribute('transform', tr);
+            const tr = mstr(M); img.setAttribute('transform', tr); $('[data-tx-zones]').setAttribute('transform', tr); $('[data-tx-words]').setAttribute('transform', tr); $('[data-tx-draw]').setAttribute('transform', tr);
             if (before) { const [ax, ay] = rotPt(cx, cy); panX += (before[0] - ax) * zoom; panY += (before[1] - ay) * zoom; } // le centre de l'image ne bouge pas à l'écran
         }
         const rotWH = () => WH;
@@ -459,7 +775,7 @@
             $('[data-tx-zoomtxt]').textContent = now; b.dataset.fit = on ? fitMode : '';
             b.title = i18n('Zoom : {now}. Clic : {next} (puis {then}, {last})', {now: on ? FIT_HELP[fitMode] : now, next: FIT_HELP[next], then: FIT_HELP[FIT_NEXT[next]], last: FIT_HELP[FIT_NEXT[FIT_NEXT[next]]]});
         }
-        const applyView = () => { world.setAttribute('transform', `translate(${panX} ${panY}) scale(${zoom})`); paintOverlay(); paintZoomLabel(); txBar?.sync(); };
+        const applyView = () => { world.setAttribute('transform', `translate(${panX} ${panY}) scale(${zoom})`); paintOverlay(); paintZoomLabel(); txBar?.sync(); paintWords(); };
         /** ⤢ : trois façons d'ajuster — toute l'image, la largeur (on lit l'acte de haut en bas), la taille réelle (100 %) */
         function applyFit(mode = 'page', {keepY = false} = {}) {
             if (!imgW) return; const r = stage.getBoundingClientRect(); if (!r.width || !r.height) return;
@@ -528,10 +844,23 @@
         const colorOf = (z, i) => z.c || COLORS[i % COLORS.length];
         function paintZoneRects() {
             const g = $('[data-tx-zones]'), sw = 2 / zoom;
-            g.innerHTML = t.data.zones.map((z, i) => !onHere(z) ? '' : `<rect data-tx-zone="${esc(z.id)}"${selZone === z.id ? ' class="is-sel"' : ''} x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" fill="${colorOf(z, i)}" fill-opacity="${(selZone === z.id ? .38 : .2) * zop()}" stroke="${colorOf(z, i)}" stroke-opacity="${selZone === z.id ? 1 : Math.max(.08, zop())}" stroke-width="${selZone === z.id ? sw * 2 : sw}"><title>${esc(t.body.slice(z.s, z.e).slice(0, 120) || z.note || i18n('Zone non reliée'))}${selZone === z.id ? ` ${i18n('— glisse pour la déplacer, tire une poignée pour la redimensionner (flèches, Maj + flèches)')}` : ''}</title></rect>`).join('');
+            g.innerHTML = t.data.zones.map((z, i) => !onHere(z) ? '' : `<rect data-tx-zone="${esc(z.id)}"${selZone === z.id || z.kind ? ` class="${selZone === z.id ? 'is-sel' : ''}${z.kind ? ` is-k-${esc(z.kind)}` : ''}"` : ''}${z.kind === 'skip' ? ` stroke-dasharray="${6 / zoom} ${4 / zoom}"` : ''} x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" fill="${z.kind === 'skip' ? '#6b7280' : colorOf(z, i)}" fill-opacity="${(selZone === z.id ? .38 : .2) * zop()}" stroke="${colorOf(z, i)}" stroke-opacity="${selZone === z.id ? 1 : Math.max(.08, zop())}" stroke-width="${selZone === z.id ? sw * 2 : sw}"><title>${z.kind ? `${esc(XK(z.kind))} — ` : ''}${esc(t.body.slice(z.s, z.e).slice(0, 120) || z.note || i18n('Zone non reliée'))}${selZone === z.id ? ` ${i18n('— glisse pour la déplacer, tire une poignée pour la redimensionner (flèches, Maj + flèches)')}` : ''}</title></rect>`).join('');
             paintHandles();
         }
-        function drawZones() { paintZoneRects(); paintMirror(); paintZoneBar(); paintTxBar(); }
+        function drawZones() { paintZoneRects(); paintMirror(); paintZoneBar(); paintTxBar(); paintWords(); }
+        /* 🔦 les mots choisis dans le texte : un cadre serré dans la bande de leur ligne (≈ estimé, ou exact si la lecture a donné la place des mots) */
+        function paintWords() {
+            const g = $('[data-tx-words]'); if (!g) return; const C = ext.txCtx, s = area.selectionStart, e = area.selectionEnd;
+            const boxes = C && imgW && e > s && area.value.slice(s, e).trim() ? C.wordBoxes(area.value, t.data.zones.filter(onHere), s, e) : [];
+            dlg.dataset.txWords = String(boxes.length);
+            if (!boxes.length) { if (g.firstChild) g.innerHTML = ''; return; }
+            const col = C.wordColor(), sw = 2.5 / zoom, fs = 12 / zoom, cut = x => (x.length > 32 ? x.slice(0, 31) + '…' : x);
+            g.innerHTML = boxes.map((b, i) => `<rect class="h-tx-wbox" data-tx-wbox="${b.exact ? 'exact' : 'est'}" x="${b.x}" y="${b.y}" width="${b.w}" height="${b.h}" rx="${3 / zoom}" fill="${col}" fill-opacity=".18" stroke="${col}" stroke-width="${sw}"><title>${esc(b.exact ? i18n('Place donnée par la lecture') : i18n('≈ place estimée d’après la position des mots dans la ligne'))}</title></rect>${i ? '' : `<text class="h-tx-wlab" x="${b.x}" y="${b.y - 5 / zoom}" font-size="${fs}" fill="${col}">${b.exact ? '' : '≈ '}« ${esc(cut(boxes.map(q => q.label).join(' ')))} »</text>`}`).join('');
+        }
+        // 🔦 selectionchange : un choix au clavier ou à la souris relâchée hors de la case (sans mouseup sur elle) ; un rAF à la fois
+        let wordsRaf = 0; ['select', 'selectionchange', 'mouseup', 'keyup', 'input', 'focus'].forEach(ev => area.addEventListener(ev, () => { if (!wordsRaf) wordsRaf = requestAnimationFrame(() => { wordsRaf = 0; paintWords(); }); }));
+        dlg.addEventListener('click', e => { const b = e.target.closest('[data-tx-wcol]'); if (!b || !ext.txCtx) return; ext.txCtx.setWordColor(b.dataset.txWcol);
+            dlg.querySelectorAll('[data-tx-wcol]').forEach(x => { const on = x === b; x.classList.toggle('is-on', on); x.setAttribute('aria-checked', String(on)); }); paintWords(); });
         dlg.addEventListener('input', e => { if (!e.target.matches?.('[data-tx-zop]')) return; try { localStorage.setItem(ZOP_KEY, String(Math.round(Number(e.target.value) || 0))); } catch (_) {} paintZoneRects(); });
         /* ─── la zone choisie : 8 poignées (coins et milieux), toujours de la même taille à l'écran ─── */
         // les poignées sont nommées dans l'image (nw = coin haut-gauche de l'image) ; leur curseur suit leur direction à l'écran
@@ -559,22 +888,33 @@
         let txFix = [], txFixOn = false, txFixT = 0; const txFixUndo = [], txKept = new Set();
         /* ce qu'on dessine dans le texte, par-dessus les couleurs des lignes : 🔍 les résultats de la recherche, 🪄 les corrections proposées,
          * les abréviations connues (soulignées en pointillé) ; un mot coupé par le bord d'une zone : marqué des deux côtés */
-        let findHits = [], findCur = -1, abbrevs = [];
-        const decos = () => [...findHits.map((f, i) => ({s: f.s, e: f.e, o: `<span class="h-tx-hit${i === findCur ? ' is-cur' : ''}">`, c: '</span>', w: 0})),
+        let findHits = [], findCur = -1, abbrevs = [], hintW = [];
+        const decos = () => [...hintW.map((f, i) => ({s: f.s, e: f.e, o: `<span class="h-tx-hintw" data-hw="${i}">`, c: '</span>', w: 3})),...findHits.map((f, i) => ({s: f.s, e: f.e, o: `<span class="h-tx-hit${i === findCur ? ' is-cur' : ''}">`, c: '</span>', w: 0})),
             ...txFix.map(f => ({s: f.s, e: f.e, o: `<u class="h-tx-fix${f.sure ? ' is-sure' : ''}">`, c: '</u>', w: 1})),
-            ...abbrevs.map((f, i) => ({s: f.s, e: f.e, o: `<span class="h-tx-ab" data-ab="${i}">`, c: '</span>', w: 2}))].sort((x, y) => x.s - y.s || x.w - y.w);
+            ...abbrevs.map((f, i) => ({s: f.s, e: f.e, o: `<span class="h-tx-ab${f.amount ? ' is-amount' : ''}" data-ab="${i}">`, c: '</span>', w: 2}))].sort((x, y) => x.s - y.s || x.w - y.w);
         let curDecos = [];
         const fixSeg = (text, a, b) => { let h = '', q = a; curDecos.filter(f => f.e > a && f.s < b).forEach(f => { const s0 = Math.max(a, f.s), e0 = Math.min(b, f.e); if (s0 < q) return; h += esc(text.slice(q, s0)) + f.o + esc(text.slice(s0, e0)) + f.c; q = e0; }); return h + esc(text.slice(q, b)); };
         async function runFix({quiet = false} = {}) {
             if (!window.LCNDA_HTRFIX) { if (!quiet) toast(i18n('Les corrections proposées ne sont pas chargées.'), 'error'); return; }
             const lex = await fixLexicon($('[data-tx-lang]').value, $('[data-tx="place"]').value); if (!lex || !dlg.isConnected) return;
-            txFix = window.LCNDA_HTRFIX.propose(area.value, lex, {level: fixLevel(), keep: txKept}); txFixOn = true; paintMirror(); paintTxFix();
+            txFix = window.LCNDA_HTRFIX.propose(area.value, lex, {level: fixLevel(), keep: txKept}); txFixOn = true;
+            // 📑 un texte par page : les corrections des autres pages (leurs actes), comptées pour la barre
+            perFix = pageForm === 'per' && PAGES.length > 1 ? PAGES.map((_, i) => (i === pageIx ? txFix.length : window.LCNDA_HTRFIX.propose(String(perSet?.[i]?.body || ''), lex, {level: fixLevel()}).length)) : null;
+            paintMirror(); paintTxFix();
             if (!quiet) status(txFix.length ? (A().plural ? A().plural(txFix.length, 'correction proposée', 'corrections proposées') : String(txFix.length)) : i18n('Aucune correction à proposer'));
+        }
+        // 📑 un seul texte pour plusieurs pages : combien de corrections sur chaque page (un clic montre la page)
+        let perFix = null;
+        function fixByPage() {
+            if (pageForm === 'per' && perFix && PAGES.length > 1) return perFix.some(n => n) ? `<span class="h-tx-fixpages">${perFix.map((n, i) => (n ? `<button type="button" class="button small ${i === pageIx ? '' : 'secondary'}" data-txfix-page="${i}">${esc(pageName(PAGES[i], i))} : ${n}</button>` : '')).join('')}</span>` : '';
+            if (pageForm !== 'one' || PAGES.length < 2 || !txFix.length) return '';
+            const per = new Map(); txFix.forEach(f => { const id = Number((t.data.pages || [])[PG.segAt(area.value, f.s)] || 0), i = PAGES.findIndex(p => Number(p.media_id) === id); if (i >= 0) per.set(i, (per.get(i) || 0) + 1); });
+            return `<span class="h-tx-fixpages">${[...per].sort((x, y) => x[0] - y[0]).map(([i, n]) => `<button type="button" class="button small secondary" data-txfix-page="${i}">${esc(pageName(PAGES[i], i))} : ${n}</button>`).join('')}</span>`;
         }
         function paintTxFix() {
             const bar = $('[data-tx-fixbar]'); if (!bar) return; bar.hidden = !txFixOn; if (!txFixOn) return;
             const sure = txFix.filter(f => f.sure).length;
-            bar.innerHTML = `<span>🪄 ${txFix.length ? esc(A().plural ? A().plural(txFix.length, 'correction proposée', 'corrections proposées') : txFix.length) + ` <small class="muted">${esc(i18n('(soulignées en violet : clique un mot)'))}</small>` : esc(i18n('Aucune correction à proposer'))}</span>
+            bar.innerHTML = `<span>🪄 ${txFix.length ? esc(A().plural ? A().plural(txFix.length, 'correction proposée', 'corrections proposées') : txFix.length) + ` <small class="muted">${esc(i18n('(soulignées en violet : clique un mot)'))}</small>` : esc(i18n('Aucune correction à proposer'))}</span>${fixByPage()}
                 ${sure ? `<button type="button" class="button small" data-txfix="accept">✓ ${esc(sure > 1 ? i18n('Accepter les {n} propositions sûres', {n: sure}) : i18n('Accepter la proposition sûre'))}</button>` : ''}
                 <button type="button" class="button small secondary" data-txfix="undo" ${txFixUndo.length ? '' : 'disabled'}>↶ ${esc(i18n('Annuler'))}</button><span class="spacer"></span>${fixSettingsHtml()}
                 <button type="button" class="icon-button small" data-txfix="close" title="${esc(i18n('Fermer'))}">×</button>`;
@@ -588,6 +928,7 @@
             runFix({quiet: true}); A().undoToast?.(label, {undo: back});
         }
         $('[data-tx-fixbar]')?.addEventListener('click', e => {
+            const pg = e.target.closest('[data-txfix-page]'); if (pg) { const i = Number(pg.dataset.txfixPage); if (pageForm === 'per') { if (i !== pageIx) { fixAfterSwitch = true; goPage(i).finally(() => { fixAfterSwitch = false; }); } return; } goPage(i); return; }
             const b = e.target.closest('[data-txfix]'); if (!b) return; const k = b.dataset.txfix;
             if (k === 'close') { txFixOn = false; txFix = []; paintMirror(); paintTxFix(); return; }
             if (k === 'undo') { const old = txFixUndo.pop(); if (old != null) { area.value = old; area.dispatchEvent(new Event('input')); runFix({quiet: true}); } return; }
@@ -601,22 +942,93 @@
                 addLex: () => addToLexicon(fx.word, () => runFix({quiet: true}))});
         });
         function paintMirror() {
-            const text = area.value, marks = []; abbrevs = TV.abbrevOn?.() && window.LCNDA_AIDE_LECTURE?.abbrevs ? window.LCNDA_AIDE_LECTURE.abbrevs(text, aideLang($('[data-tx-lang]')?.value || '')) : []; curDecos = decos();
+            const text = area.value, marks = []; abbrevs = TV.abbrevOn?.() && window.LCNDA_AIDE_LECTURE?.abbrevs ? window.LCNDA_AIDE_LECTURE.abbrevs(text, aideLang($('[data-tx-lang]')?.value || '')) : [];
+            // 💰📏 les sommes et les mesures anciennes (app-montants-core.js) : soulignées comme les abréviations, leur valeur au survol
+            if (TV.amountsOn?.() && window.LCNDA_MONTANTS) { const am = window.LCNDA_MONTANTS.scan(text).filter(h => !abbrevs.some(a => h.s < a.e && h.e > a.s)); abbrevs = [...abbrevs, ...am.map(h => ({s: h.s, e: h.e, word: h.raw, amount: h}))].sort((x, y) => x.s - y.s); }
+            hintW = Number(t.data.hinted) > 0 && ext.txCtx?.doubtWords ? ext.txCtx.doubtWords(text) : []; // 🧠 les mots [?] d'une lecture faite avec des indices
+            curDecos = decos();
             t.data.zones.forEach((z, i) => { if (z.e > z.s) marks.push({s: z.s, e: z.e, c: colorOf(z, i), on: selZone === z.id}); });
             found.forEach(f => marks.push({s: f.s, e: f.e, cls: `is-${f.type}`}));
-            marks.sort((a, b) => a.s - b.s); let h = '', pos = 0;
-            marks.forEach(m => { if (m.s < pos) return; h += fixSeg(text, pos, m.s); h += `<mark class="${m.cls || (m.c ? 'h-tx-zm' : '')}${m.on ? ' is-on' : ''}" ${m.c ? `style="--zc:${m.c}"` : ''}>${fixSeg(text, m.s, m.e)}</mark>`; pos = m.e; });
-            h += fixSeg(text, pos, text.length);
-            if (TV.lineNos()) { let n = 1; h = `<span class="h-tx-ln" data-n="1"></span>${h.replace(/\n/g, () => `\n<span class="h-tx-ln" data-n="${++n}"></span>`)}`; } // le numéro au début de chaque ligne, dans la marge
-            mirror.innerHTML = h + '\n';
-            mirror.scrollTop = area.scrollTop; flowSoon();
+            marks.sort((a, b) => a.s - b.s); const kept = []; let pos = 0;
+            marks.forEach(m => { if (m.s < pos) return; kept.push(m); pos = m.e; });
+            /* 28 (audit) : le miroir en morceaux (une ligne, ou plusieurs quand une couleur ou un soulignement passe d'une ligne à
+             * l'autre) ; seuls les morceaux qui ont changé sont remplacés. 📑 Plusieurs pages : les morceaux des autres pages grisés. */
+            const cuts = [...kept, ...curDecos].map(m => [m.s, m.e - 1]).filter(([x, y]) => y > x).sort((x, y) => x[0] - y[0]);
+            const chunks = [], ln = TV.lineNos(), many = pageForm === 'one' && PAGES.length > 1 && !!PG, mk = many ? PG.marks(text) : [], here = many ? segIx() : 0;
+            // 👁 13 (audit) : à l'étape Corriger, un rond ○ devant chaque ligne (✓ une fois relue) ; un clic dans la marge la coche
+            const rvMap = new Map(); if (rvView && ext.txReview) { const keys = new Set(t.data.reviewed || []); ext.txReview.linesOf(text).forEach(l => rvMap.set(l.n, keys.has(ext.txReview.lineKey(l.text)))); }
+            const lnSpan = n => `<span class="h-tx-ln${ln ? '' : ' no-n'}${rvMap.has(n) ? (rvMap.get(n) ? ' is-tk is-rv' : ' is-tk') : ''}" data-n="${n}"></span>`;
+            let from = 0, ci = 0, mi = 0, line = 1, seg = 0, k = -1;
+            const chunkHtml = (a0, b0) => { let h = '', q = a0; while (mi < kept.length && kept[mi].e <= b0) { const m = kept[mi++]; if (m.s < q) continue; h += fixSeg(text, q, m.s) + `<mark class="${m.cls || (m.c ? 'h-tx-zm' : '')}${m.on ? ' is-on' : ''}" ${m.c ? `style="--zc:${m.c}"` : ''}>${fixSeg(text, m.s, m.e)}</mark>`; q = m.e; } return h + fixSeg(text, q, b0); };
+            const push = b0 => {
+                while (seg < mk.length && mk[seg].at <= from) seg++;
+                let h = chunkHtml(from, b0);
+                if (ln || rvView) { let n = line; h = (from === 0 ? lnSpan(1) : '') + h.replace(/\n/g, () => `\n${lnSpan(++n)}`); line = n; }
+                const mj = many ? mk.findIndex(q => q.at === from) : -1; // 📑 la ligne du repère « — page 2 — » : la barre de sa page est posée dessus (heritage-transcribe-blocs.js)
+                chunks.push(`<span class="h-tx-mc${many && seg !== here ? ' is-off' : ''}${mj >= 0 ? ' is-mk' : ''}"${mj >= 0 ? ` data-mk="${mj}"` : ''}>${h}</span>`); from = b0;
+            };
+            while ((k = text.indexOf('\n', k + 1)) >= 0) {
+                while (ci < cuts.length && cuts[ci][1] <= k) ci++;
+                let inside = false; for (let j = ci; j < cuts.length && cuts[j][0] <= k; j++) if (cuts[j][0] <= k && k < cuts[j][1]) { inside = true; break; }
+                if (!inside) push(k + 1);
+            }
+            if (from < text.length || !chunks.length) push(text.length);
+            const old = paintMirror.chunks || [], kids = mirror.children;
+            if (paintMirror.root !== mirror || kids.length !== old.length) { mirror.innerHTML = chunks.join('') + '\n'; }
+            else {
+                let p0 = 0; while (p0 < old.length && p0 < chunks.length && old[p0] === chunks[p0]) p0++;
+                let q0 = 0; while (q0 < old.length - p0 && q0 < chunks.length - p0 && old[old.length - 1 - q0] === chunks[chunks.length - 1 - q0]) q0++;
+                const anchor = kids[old.length - q0] || mirror.lastChild; // le morceau gardé qui suit (ou le dernier retour à la ligne)
+                for (let i = old.length - q0 - 1; i >= p0; i--) kids[i].remove();
+                if (chunks.length - q0 > p0) { const tp = document.createElement('template'); tp.innerHTML = chunks.slice(p0, chunks.length - q0).join(''); mirror.insertBefore(tp.content, anchor); }
+            }
+            paintMirror.chunks = chunks; paintMirror.root = mirror;
+            mirror.scrollTop = area.scrollTop; flowSoon(); BK?.paint();
         }
         function paintZoneBar() {
             const bar = $('[data-tx-zonebar]'), z = t.data.zones.find(q => q.id === selZone); bar.hidden = !z; if (!z) return;
+            requestAnimationFrame(() => { if (!bar.hidden) dlg.style.setProperty('--h-tx-toast-bottom', `${Math.max(24, Math.round(innerHeight - bar.getBoundingClientRect().top + 8))}px`); }); // 18 : les messages au-dessus de la barre
             const linked = z.e > z.s;
             bar.innerHTML = `<b>Zone</b> ${linked ? `« ${esc(t.body.slice(z.s, z.e).slice(0, 60))}${z.e - z.s > 60 ? '…' : ''} »` : `<span class="muted">${i18n('pas encore reliée au texte')}</span>`}
-                <button type="button" class="button small secondary" data-tx-zlink title="${esc(i18n('Relier cette zone au passage choisi dans le texte'))}">🔗 ${i18n('Au passage choisi')}</button><input data-tx-znote placeholder="${esc(i18n('Note (mot illisible, signature…)'))}" value="${esc(z.note || '')}" maxlength="300"><input type="color" data-tx-zcolor value="${esc(z.c || COLORS[t.data.zones.indexOf(z) % COLORS.length])}" title="${esc(i18n('Couleur'))}"><button type="button" class="button small secondary" data-tx-cmd="htrzone" title="${esc(i18n('Lire l’écriture à la main dans cette zone seulement'))}">✨ ${i18n('Lire cette zone')}</button><button type="button" class="button small danger" data-tx-zdel title="${esc(i18n('Supprimer la zone (Suppr) — « ↶ Annuler » la remet'))}">🗑</button>
+                <button type="button" class="button small secondary" data-tx-zlink title="${esc(i18n('Relier cette zone au passage choisi dans le texte'))}">🔗 ${i18n('Au passage choisi')}</button><select data-tx-zkind title="${esc(i18n('Ce qu’est cette zone : « ⛔ À ne pas lire » est sautée par la lecture automatique et les exports ; les autres donnent l’ordre de lecture et la sorte de bloc (ALTO, PAGE)'))}">${(TXX()?.KINDS || []).map(([v, ic, l]) => `<option value="${v}"${(z.kind || '') === v ? ' selected' : ''}>${ic} ${esc(i18n(l))}</option>`).join('')}</select><input data-tx-znote placeholder="${esc(i18n('Note (mot illisible, signature…)'))}" value="${esc(z.note || '')}" maxlength="300">${zcolorHtml(z.c || COLORS[t.data.zones.indexOf(z) % COLORS.length])}<button type="button" class="button small secondary" data-tx-cmd="htrzone" title="${esc(i18n('Lire l’écriture à la main dans cette zone seulement'))}">✨ ${i18n('Lire cette zone')}</button>${z.kind === 'sign' && ext.openSeals ? `<button type="button" class="button small secondary" data-tx-zsign title="${esc(i18n('Ouvrir cette signature dans « Signatures et sceaux » : le papier s’efface, l’encre devient un tracé net'))}">✍️ ${i18n('Détourer la signature')}</button>` : ''}<button type="button" class="button small danger" data-tx-zdel title="${esc(i18n('Supprimer la zone (Suppr) — « ↶ Annuler » la remet'))}">🗑</button>
                 <small class="muted h-tx-zkeys" title="${esc(i18n('Glisse la zone pour la déplacer, tire une des 8 poignées pour changer sa taille'))}">↔ ${i18n('glisser · poignées · flèches · Maj + flèches · ⌘Z')}</small>`;
+        }
+        /** 24 (audit) : la couleur de la zone : une pastille et son nom, 8 couleurs au choix */
+        function zcolorHtml(c) {
+            const cur = String(c).toLowerCase();
+            return `<span class="h-tx-zcw"><span class="muted h-tx-zclab">${esc(i18n('Couleur'))}</span><button type="button" class="h-tx-zcbtn" data-tx-zcbtn aria-haspopup="true" aria-expanded="false" title="${esc(i18n('Couleur de la zone'))}"><span class="h-tx-sw" style="background:${esc(c)}"></span><span data-tx-zcname>${esc(colorName(c))}</span> ▾</button>
+                <span class="h-tx-zcpop" data-tx-zcpop hidden role="group" aria-label="${esc(i18n('Couleur de la zone'))}">${ZCOLORS.map(([h, n]) => `<button type="button" data-tx-zc="${h}" aria-pressed="${h === cur}"><span class="h-tx-sw" style="background:${h}"></span>${esc(i18n(n, {ctx: 'couleur'}))}</button>`).join('')}</span></span>`;
+        }
+        /* ſ la barre des caractères : les favoris (un seul arrêt de Tab, ← → pour choisir), « ＋ » ouvre tous les caractères ; 📌 pour choisir ses favoris */
+        let carPin = false, carAt = 0;
+        function charsHtml() {
+            const favs = carFavs(), all = CAR_GROUPS.flatMap(g => g[1]);
+            const b = (c, i) => `<button type="button" class="h-tx-ch${c.length > 2 ? ' is-wide' : ''}" data-tx-char="${esc(c)}" tabindex="${i === carAt ? 0 : -1}" title="${esc(i18n('Insérer {c}', {c}))}">${esc(c)}</button>`;
+            const extra = favs.filter(c => !all.includes(c)); // un favori venu d'ailleurs (ancien réglage) : il reste dans le panneau pour pouvoir l'enlever
+            return `<span class="h-tx-favs" role="toolbar" aria-label="${esc(i18n('Caractères spéciaux (← → pour choisir)'))}" data-tx-favs>${favs.map(b).join('')}<button type="button" class="h-tx-ch h-tx-charplus" data-tx-charplus aria-expanded="false" aria-controls="h-tx-cpanel" tabindex="${carAt >= favs.length ? 0 : -1}" title="${esc(i18n('Plus de caractères, et choisir mes favoris'))}">＋</button></span><small class="muted h-tx-charkbd">${esc(i18n('⇥ un arrêt · ← → pour choisir'))}</small>
+                <div class="h-tx-cpanel${carPin ? ' is-pin' : ''}" id="h-tx-cpanel" data-tx-cpanel hidden role="dialog" aria-label="${esc(i18n('Plus de caractères'))}"><div class="h-tx-cptop"><b>${esc(i18n('Plus de caractères'))}</b><span class="spacer"></span><button type="button" class="button small ${carPin ? '' : 'secondary'}" data-tx-carpin aria-pressed="${carPin}">📌 ${esc(i18n('Choisir mes favoris'))}</button><button type="button" class="button small secondary" data-tx-carclose>${esc(i18n('Fermer'))}</button></div>
+                ${carPin ? `<p class="muted h-tx-cphint">${esc(i18n('Touche un caractère pour l’ajouter à ta barre (📌) ou l’en retirer.'))}</p>` : ''}
+                ${[...CAR_GROUPS, ...(extra.length ? [['Autres', extra]] : [])].map(([n, l]) => `<h4>${esc(i18n(n))}</h4><div class="h-tx-cgrp">${l.map(c => { const on = favs.includes(c); return `<button type="button" class="h-tx-ch${c.length > 2 ? ' is-wide' : ''}${on ? ' is-pinned' : ''}" data-tx-char="${esc(c)}" data-tx-pc${carPin ? ` aria-pressed="${on}"` : ''} title="${esc(carPin ? (on ? i18n('Retirer {c} de mes favoris', {c}) : i18n('Ajouter {c} à mes favoris', {c})) : i18n('Insérer {c}', {c}))}">${esc(c)}</button>`; }).join('')}</div>`).join('')}</div>`;
+        }
+        function paintChars({open = null, focus = false} = {}) {
+            const bar = $('[data-tx-chars]'); if (!bar) return; const old = $('[data-tx-cpanel]'), was = !!old && !old.hidden;
+            bar.innerHTML = charsHtml(); const on = open ?? was, pn = $('[data-tx-cpanel]');
+            pn.hidden = !on; $('[data-tx-charplus]').setAttribute('aria-expanded', String(on)); bar.classList.toggle('is-open', on);
+            if (on && focus) pn.querySelector('[data-tx-pc]')?.focus();
+        }
+        /** un caractère touché dans le panneau en mode 📌 : il entre dans les favoris (ou en sort) */
+        function pinChar(c) { const favs = carFavs(), i = favs.indexOf(c); if (i >= 0) favs.splice(i, 1); else favs.push(c); setCarFavs(favs); carAt = Math.min(carAt, favs.length); paintChars({open: true});
+            $(`[data-tx-cpanel] [data-tx-char="${CSS.escape(c)}"]`)?.focus(); toast(i >= 0 ? i18n('« {c} » retiré de tes favoris.', {c}) : i18n('📌 « {c} » ajouté à tes favoris.', {c})); }
+        /** ← → Début Fin : d'un bouton à l'autre dans un groupe (les favoris, le panneau, l'état de l'acte) ; un seul arrêt de Tab */
+        function rovingKey(e) {
+            if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key) || e.metaKey || e.ctrlKey || e.altKey) return false;
+            const st = e.target.closest?.('[data-tx-setstate]');
+            if (st) { e.preventDefault(); e.stopPropagation(); const ks = Object.keys(STATE), i = ks.indexOf(st.dataset.txSetstate), n = e.key === 'Home' ? 0 : e.key === 'End' ? ks.length - 1 : (i + (e.key === 'ArrowRight' ? 1 : ks.length - 1)) % ks.length; setState(ks[n]); $(`[data-tx-setstate="${ks[n]}"]`)?.focus(); return true; }
+            const grp = e.target.closest?.('[data-tx-favs], [data-tx-cpanel]'); if (!grp || !e.target.matches('button')) return false;
+            const bs = [...grp.querySelectorAll(grp.matches('[data-tx-favs]') ? ':scope > button' : '[data-tx-pc]')], i = bs.indexOf(e.target); if (i < 0) return false;
+            e.preventDefault(); e.stopPropagation(); const n = e.key === 'Home' ? 0 : e.key === 'End' ? bs.length - 1 : (i + (e.key === 'ArrowRight' ? 1 : bs.length - 1)) % bs.length;
+            if (grp.matches('[data-tx-favs]')) { bs.forEach((b, k) => { b.tabIndex = k === n ? 0 : -1; }); carAt = n; }
+            bs[n].focus(); return true;
         }
         /* ─── ⌘Z / ⇧⌘Z pour les zones (le texte garde l'annulation de la case) ─── */
         const hist = {undo: [], redo: []}, cloneZones = () => t.data.zones.map(z => ({...z}));
@@ -637,22 +1049,56 @@
         /** garder les liens quand on écrit : les passages après la modification se décalent */
         let before = area.value;
         area.addEventListener('input', () => {
-            const now = area.value; let p = 0; while (p < before.length && p < now.length && before[p] === now[p]) p++;
-            let q = 0; while (q < before.length - p && q < now.length - p && before[before.length - 1 - q] === now[now.length - 1 - q]) q++;
-            const oldEnd = before.length - q, delta = now.length - before.length;
+            const now = area.value, dd = diffOf(before, now), {p, q, oldEnd, delta} = dd;
             const shift = r => { const f = v => v >= oldEnd ? v + delta : v > p ? Math.max(p, Math.min(v, p + (now.length - q - p))) : v; r.s = f(r.s); r.e = Math.max(r.s, f(r.e)); };
-            t.data.zones.forEach(shift); t.data.people.forEach(shift); found.forEach(shift); [...hist.undo, ...hist.redo].forEach(list => list.forEach(shift));
+            followEdit(before, now, t.data.zones, dd); t.data.people.forEach(shift); found.forEach(shift); // 🧲 les zones de ligne restent sur toute leur ligne
             txFix.forEach(shift); txFix = txFix.filter(f => now.slice(f.s, f.e) === f.word); if (txFixOn) { clearTimeout(txFixT); txFixT = setTimeout(() => runFix({quiet: true}), 900); }
-            before = now; t.body = now; touch(); if (!findBar.hidden) findRun({keep: true}); paintMirror(); paintPeople();
+            before = now; t.body = now; touch({text: true});
+            // 28 (audit) : le texte surligné se redessine à la prochaine image de l'écran (et seulement les lignes touchées),
+            // les personnes après une pause dans la frappe
+            paintSoon(); peopleSoon();
+        });
+        let paintRaf = 0, peopleT = 0;
+        function paintSoon() { if (area.value.length < 20000 && !paintRaf) { if (!findBar.hidden) findRun({keep: true}); else paintMirror(); return; } // un acte court : tout de suite (le miroir ne remplace que les lignes touchées)
+            if (paintRaf) return; paintRaf = requestAnimationFrame(() => { paintRaf = 0; if (!dlg.isConnected) return; if (!findBar.hidden) findRun({keep: true}); else paintMirror(); }); }
+        function peopleSoon() { clearTimeout(peopleT); peopleT = setTimeout(() => { peopleT = 0; if (dlg.isConnected) paintPeople(); }, 500); }
+        /* 16 (audit) : un seul historique. ⌘Z dans la case passe par celui de l'Atelier (texte, zones, personnes…), un pas par mot
+         * (l'état d'avant chaque espace ou retour à la ligne tapé après un mot) ou par pause dans la frappe. */
+        area.addEventListener('beforeinput', e => {
+            if (e.inputType === 'historyUndo' || e.inputType === 'historyRedo') { e.preventDefault(); undoZones(e.inputType === 'historyRedo'); return; }
+            if (guardMarks(e)) return;
+            const ws = e.inputType === 'insertLineBreak' || e.inputType === 'insertParagraph' || (e.inputType === 'insertText' && /^\s$/.test(e.data || ''));
+            const prev = area.value[area.selectionStart - 1] || '';
+            if (ws && prev && /\S/.test(prev)) flushCommit();
         });
         area.addEventListener('scroll', () => { mirror.scrollTop = area.scrollTop; });
         area.addEventListener('click', () => followCaret()); area.addEventListener('keyup', e => { if (/^(Arrow|Page|Home|End)/.test(e.key)) followCaret(); });
+        /* 👁 la marge, à l'étape Corriger : un clic sur le rond ○ d'une ligne la dit relue (✓), un autre clic l'enlève */
+        const inGutter = e => { if (!rvView) return false; const r = area.getBoundingClientRect(), pl = parseFloat(getComputedStyle(area).paddingLeft) || 0; return e.clientX >= r.left && e.clientX - r.left < pl - 1 && e.clientY >= r.top && e.clientY <= r.bottom; };
+        function lineAtY(y) { let best = null; mirror.querySelectorAll('.h-tx-ln').forEach(sp => { const top = sp.getBoundingClientRect().top; if (top <= y + 2 && (!best || top >= best.top)) best = {top, sp}; }); return best ? Number(best.sp.dataset.n) : 0; }
+        area.addEventListener('pointerdown', e => { if (!inGutter(e) || e.button > 0) return; e.preventDefault(); const n = lineAtY(e.clientY); if (n) toggleReviewed(n); });
+        area.addEventListener('pointermove', e => { const g = inGutter(e); if (g !== !!area.dataset.gut) { if (g) area.dataset.gut = '1'; else delete area.dataset.gut; } });
         // un clic dans le texte : la zone qui contient cet endroit s'allume
         area.addEventListener('click', () => { const c = area.selectionStart, z = t.data.zones.find(q => q.e > q.s && c >= q.s && c <= q.e); if (z && z.id !== selZone) { selZone = z.id; drawZones(); reveal(z); } });
         const reveal = z => { if (!onHere(z)) { const i = PAGES.findIndex(p => Number(p.media_id) === Number(z.p || t.media_id)); if (i >= 0) { goPage(i, {keepText: true}).then(() => { if (onHere(z)) { drawZones(); revealNow(z); } }); return; } } revealNow(z); };
-        const revealNow = z => { const r = stage.getBoundingClientRect(); const cx = z.x + z.w / 2, cy = z.y + z.h / 2; const [X, Y] = rotPt(cx, cy); if (X * zoom + panX < 0 || X * zoom + panX > r.width || Y * zoom + panY < 0 || Y * zoom + panY > r.height) { panX = r.width / 2 - X * zoom; panY = r.height / 2 - Y * zoom; applyView(); } };
+        /* 🎯 15 (audit) : « Suivre la ligne » — à chaque changement de ligne (clic dans le texte, ⌥↓ ⌥↑, relecture), l'image zoome sur toute
+         * la largeur de la zone de la ligne, posée au tiers du haut (retenu sur cet ordinateur : genealogie-tx-suivre) */
+        let followOn = lsGet(FOLLOW_KEY) === '1';
+        function followZoom(z) {
+            const r = stage.getBoundingClientRect(); if (!imgW || !r.width || !r.height || !(z?.w > 0)) return false;
+            const pts = [[z.x, z.y], [z.x + z.w, z.y], [z.x, z.y + z.h], [z.x + z.w, z.y + z.h]].map(([x, y]) => rotPt(x, y)), xs = pts.map(q => q[0]), ys = pts.map(q => q[1]);
+            const x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys), zz = clamp(Math.min((r.width - 32) / Math.max(1, x1 - x0), (r.height * .45) / Math.max(1, y1 - y0)), .02, 20);
+            zoom = zz; fitOn = false; panX = r.width / 2 - (x0 + x1) / 2 * zz; panY = r.height * .38 - (y0 + y1) / 2 * zz; applyView(); dlg.dataset.txFollowed = String(z.id || ''); return true;
+        }
+        function setFollow(on) {
+            followOn = !!on; lsSet(FOLLOW_KEY, followOn ? '1' : '0'); dlg.querySelectorAll('[data-tx-follow]').forEach(b => { b.classList.toggle('is-active', followOn); b.setAttribute('aria-pressed', String(followOn)); });
+            if (!followOn) { status(''); if (imgW) applyFit('page'); return; }
+            const c = area.selectionStart, z = t.data.zones.find(q => q.id === selZone) || t.data.zones.find(q => q.e > q.s && c >= q.s && c <= q.e && onHere(q));
+            if (z && onHere(z)) followZoom(z); status(i18n('🎯 Suivre la ligne : l’image zoome sur la ligne en cours (clique une ligne, ou ⌥↓)'));
+        }
+        const revealNow = z => { if (followOn && followZoom(z)) return; const r = stage.getBoundingClientRect(); const cx = z.x + z.w / 2, cy = z.y + z.h / 2; const [X, Y] = rotPt(cx, cy); if (X * zoom + panX < 0 || X * zoom + panX > r.width || Y * zoom + panY < 0 || Y * zoom + panY > r.height) { panX = r.width / 2 - X * zoom; panY = r.height / 2 - Y * zoom; applyView(); } };
         const gotoRange = (s, en) => { if (phone()) showPtab('text', false); selectText({s, e: en}); const z = t.data.zones.find(q => q.s < en && s < q.e); if (z) { selZone = z.id; drawZones(); reveal(z); } else followCaret(); };
-        const selectText = (z, focus = true) => { if (!(z?.e > z?.s)) return; if (focus) area.focus(); area.setSelectionRange(z.s, z.e); const lineH = parseFloat(getComputedStyle(area).lineHeight) || 20, lines = area.value.slice(0, z.s).split('\n').length; area.scrollTop = Math.max(0, (lines - 3) * lineH); mirror.scrollTop = area.scrollTop; };
+        const selectText = (z, focus = true) => { if (!(z?.e > z?.s)) return; BK?.revealPos(z.s); if (focus) area.focus(); area.setSelectionRange(z.s, z.e); const lineH = parseFloat(getComputedStyle(area).lineHeight) || 20, lines = area.value.slice(0, z.s).split('\n').length; area.scrollTop = Math.max(0, (lines - 3) * lineH); mirror.scrollTop = area.scrollTop; };
         /* ─── glisser sur l'image : déplacer l'image, dessiner une zone, déplacer ou redimensionner la zone choisie ─── */
         let drag = null, space = false, pinch = null;
         const pointers = new Map();
@@ -670,6 +1116,10 @@
             return {x: x1, y: y1, w: x2 - x1, h: y2 - y1};
         }
         const setGeom = (z, R) => Object.assign(z, {x: Math.round(R.x), y: Math.round(R.y), w: Math.round(R.w), h: Math.round(R.h)});
+        /** le curseur au début du mot, dans le texte (le mot montré dans la barre d'état) */
+        const caretTo = w => { if (phone()) showPtab('text', false); BK?.revealPos(w.s); area.focus({preventScroll: true}); area.setSelectionRange(w.s, w.s); const lineH = parseFloat(getComputedStyle(area).lineHeight) || 20, lines = area.value.slice(0, w.s).split('\n').length;
+            if ((lines - 1) * lineH < area.scrollTop || (lines + 1) * lineH > area.scrollTop + area.clientHeight) { area.scrollTop = Math.max(0, (lines - 3) * lineH); mirror.scrollTop = area.scrollTop; }
+            dlg.dataset.txCaret = String(w.s); status(i18n('Curseur sur « {w} »', {w: w.word})); };
         const pickZone = (id, {showText = true} = {}) => { const z = t.data.zones.find(q => q.id === id); if (!z) return null; if (selZone !== id) { selZone = id; drawZones(); } if (showText) selectText(z, false); stage.focus({preventScroll: true}); return z; };
         svg.addEventListener('pointerdown', e => {
             if (!imgW) return;
@@ -707,7 +1157,11 @@
         const endPointer = e => {
             pointers.delete(e.pointerId); if (pinch) { if (pointers.size < 2) pinch = null; drag = null; return; }
             const d = drag; drag = null; delete stage.dataset.drag; $('[data-tx-draw]').hidden = true; if (!d) return;
-            if (d.pan) { if (d.pick && e.type !== 'pointercancel' && Math.hypot(e.clientX - d.sx, e.clientY - d.sy) < 5) pickZone(d.pick); return; }
+            if (d.pan) { if (e.type === 'pointercancel' || Math.hypot(e.clientX - d.sx, e.clientY - d.sy) >= 5) return;
+                // un clic sur un mot de la ligne déjà choisie (ou à côté d'une ligne) : le curseur va sur ce mot dans le texte ; sinon le clic choisit la ligne, comme avant
+                const w = (!d.pick || d.pick === selZone) && ext.txCtx?.wordAt ? ext.txCtx.wordAt(area.value, t.data.zones.filter(onHere), ...toImg(e)) : null;
+                if (w) { if (w.zone !== selZone) { selZone = w.zone; drawZones(); } caretTo(w); return; }
+                if (d.pick) pickZone(d.pick); return; }
             if (d.edit) { if (d.moved && e.type !== 'pointercancel') { hist.undo.push(d.before); hist.redo = []; touch(); drawZones(); status(d.edit === 'move' ? i18n('Zone déplacée (⌘Z pour annuler)') : i18n('Zone redimensionnée (⌘Z pour annuler)')); } else if (d.moved) { Object.assign(d.z, d.orig); drawZones(); } return; }
             if (!d.zone || e.type === 'pointercancel') return;
             const x = clamp(Math.min(d.x0, d.x1), 0, imgW), y = clamp(Math.min(d.y0, d.y1), 0, imgH), w = Math.min(imgW - x, Math.abs(d.x1 - d.x0)), h = Math.min(imgH - y, Math.abs(d.y1 - d.y0));
@@ -730,7 +1184,12 @@
             setGeom(z, editRect({x: z.x, y: z.y, w: z.w, h: z.h}, corner, dx, dy)); touch(); paintZoneRects(); reveal(z);
         }
         const TOOL_HELP = {pan: i18n('Glisse pour déplacer l’image (ou barre d’espace) · molette : zoomer · clic sur une zone : la choisir'), zone: i18n('Choisis un passage dans le texte, puis dessine son rectangle sur l’image : les deux restent liés')};
-        function paintTxBar() { if (!txBar) return; txBar.setHelp(TOOL_HELP[tool] || ''); txBar.setWhere(imgW ? `${imgW} × ${imgH} px · ${A().plural ? A().plural(t.data.zones.length, 'zone') : t.data.zones.length + ' zones'}` : i18n('Pas encore d’image')); txBar.sync(); }
+        // 📑 plusieurs pages (un seul texte) : les zones de la page affichée, et le total du document
+        function zoneCount() {
+            const pl = n => (A().plural ? A().plural(n, 'zone') : n + ' zones'), all = t.data.zones.length, here = t.data.zones.filter(onHere).length;
+            return PAGES.length > 1 && here !== all ? i18n('{zones} sur cette page ({n} en tout)', {zones: pl(here), n: all}) : pl(all);
+        }
+        function paintTxBar() { if (!txBar) return; paintHint(); txBar.setWhere(imgW ? `${imgW} × ${imgH} px · ${zoneCount()}` : i18n('Pas encore d’image')); txBar.sync(); }
         const setTool = k => { tool = k; dlg.querySelectorAll('[data-tx-tool]').forEach(b => { b.classList.toggle('is-active', b.dataset.txTool === k); b.setAttribute('aria-pressed', String(b.dataset.txTool === k)); }); stage.dataset.tool = k; paintTxBar(); };
         setTool('pan');
         /* ─── ce qui est repéré : noms (et fiches), dates, lieux, métiers ─── */
@@ -746,8 +1205,11 @@
             const ex = lastExtract && (found.length || lastRich?.people.length) ? lastExtract : null;
             const rfT = perCombo && lastRichAll ? lastRichAll : lastRich;
             const tf = ext.txTrouve && rfT && (found.length || rfT.people.length) ? '<div data-tx-trouve></div>' : ''; // 🧭 le bloc riche (heritage-transcribe-trouve.js)
-            const cta = ex && ex.people.length && ext.txActe ? `<div class="h-txa-cta"><span><b>${{mariage: '💍', bapteme: '💧', naissance: '👶', deces: '✝', sepulture: '⚱'}[ex.kind] || '📜'} ${esc(i18n('Ce que l’app a trouvé dans l’acte'))}</b> <small class="muted">${esc(A().plural ? A().plural(ex.people.length, 'personne') : ex.people.length)}${ex.date ? ' · ' + esc(ex.date.label) : ''}${ex.place ? ' · ' + esc(ex.place) : ''}</small></span><button type="button" class="button small" data-tx-cmd="found">✓ ${i18n('Ajouter à la généalogie')}…</button></div>` : '';
-            box.innerHTML = cta + kept + (tf || groups) + words || `<p class="muted h-tx-hint">${i18n('« 🧭 Repérer » cherche dans le texte les noms (et leur rôle : parrain, témoin, fils de…), les dates (même en toutes lettres, ou au calendrier républicain), les lieux et les métiers, et propose les fiches de ta base qui leur ressemblent.')}</p>`;
+            const cta = ex && ex.people.length && ext.txActe ? `<div class="h-txa-cta"><span><b>${{mariage: '💍', bapteme: '💧', naissance: '👶', deces: '✝', sepulture: '⚱'}[ex.kind] || '📜'} ${esc(i18n('Ce que l’app a trouvé dans l’acte'))}</b> <small class="muted">${esc(A().plural ? A().plural(ex.people.length, 'personne') : ex.people.length)}${ex.date ? ' · ' + esc(ex.date.label) : ''}${ex.place ? ' · ' + esc(ex.place) : ''}</small></span></div>` : ''; // 14 (audit) : « ✓ Ajouter à la généalogie… » n'existe qu'une fois, dans l'étape Ajouter
+            foundSum = ex && ex.people.length ? [A().plural ? A().plural(ex.people.length, 'personne') : String(ex.people.length), ex.date?.label, ex.place].filter(Boolean).join(' · ') : '';
+            const gb = GB(), gabTabs = gb ? `<div class="ui-tabs h-gab-tabs" role="tablist" aria-label="${esc(i18n('Ce que l’app a trouvé'))}">${[['found', `🧾 ${i18n('Ce que l’app a trouvé')}`], ['gab', `🧩 ${i18n('Gabarit')}`]].map(([k, l]) => `<button type="button" role="tab" class="ui-tab${gabTab === k ? ' is-active' : ''}" aria-selected="${gabTab === k}" data-gab-tab="${k}">${esc(l)}</button>`).join('')}</div>` : '';
+            if (gb && gabTab === 'gab') { box.innerHTML = gabTabs + '<div class="h-gab" data-gab-box></div>'; paintGabarit(); flowSoon(60); return; }
+            box.innerHTML = gabTabs + ((cta + kept + (tf || groups) + words) || `<p class="muted h-tx-hint">${i18n('« 🧭 Repérer » cherche dans le texte les noms (et leur rôle : parrain, témoin, fils de…), les dates (même en toutes lettres, ou au calendrier républicain), les lieux et les métiers, et propose les fiches de ta base qui leur ressemblent.')}</p>`);
             if (tf) ext.txTrouve.mount($('[data-tx-trouve]'), {text: rfT === lastRichAll ? blankMarks(perCombo.text) : area.value, rf: rfT, kind: $('[data-tx="kind"]').value, date: $('[data-tx="date_text"]').value, place: $('[data-tx="place"]').value, source: $('[data-tx="source"]').value,
                 filename: t.filename, title: $('[data-tx="title"]').value, mediaId: t.media_id, transcriptionId: t.id, people: t.data.people, keep: (f, pid) => keepAt(f, pid, rfT === lastRichAll), pageRef: rfT === lastRichAll ? perRef : pageForm === 'one' && PAGES.length > 1 ? pageRef : null,
                 gotoOf: rfT === lastRichAll ? (a, b) => { const r = perRef(a); return r ? `p${r.seg}:${r.at}:${r.at + (b - a)}` : `${a}:${b}`; } : null,
@@ -764,44 +1226,82 @@
             if (!fixOn() || !window.LCNDA_HTRFIX || !text.trim()) { fixCount = 0; fixCountFor = key; return; }
             try { const lex = await fixLexicon($('[data-tx-lang]').value, $('[data-tx="place"]').value); if (!lex || !dlg.isConnected || area.value !== text) return; fixCount = window.LCNDA_HTRFIX.propose(text, lex, {level: fixLevel(), keep: txKept}).length; fixCountFor = key; } catch (_) { fixCount = 0; }
         }
+        /* 13 (audit) : « Corriger » est fait quand toutes les lignes sont relues (○ devant chaque ligne, ou « 👁 Relire ligne à ligne »),
+         * ou quand on le dit (« ✓ J'ai relu », data.fixOk) — plus jamais « ✓ rien à revoir » sur un texte que personne n'a relu. */
+        const reviewOf = () => { const RV = ext.txReview, ls = RV ? RV.linesOf(area.value) : [], keys = new Set(t.data.reviewed || []); return {total: ls.length, done: RV ? ls.filter(l => keys.has(RV.lineKey(l.text))).length : 0}; };
         function flowState() {
             const text = area.value, has = !!findText().trim(), lines = ext.txReview ? ext.txReview.linesOf(text).length : text.split('\n').filter(l => l.trim()).length; // 📑 sans les repères « — page 2 — »
-            const fixes = txFixOn ? txFix.length : (fixCount ?? 0), marks = markCount(text), toFix = fixes + marks;
+            const fixes = txFixOn ? txFix.length : (fixCount ?? 0), marks = markCount(text), toFix = fixes + marks, rv = reviewOf(), all = rv.total > 0 && rv.done === rv.total, said = !!t.data.fixOk;
             const people = t.data.people, toLink = people.filter(p => !p.person_id).length, names = found.filter(f => f.type === 'person' && !people.some(p => p.s < f.e && f.s < p.e)).length;
             const st = {read: {done: has, rest: has ? plural(lines, 'ligne') : i18n('À faire')},
-                fix: {done: has && !toFix && (txFixOn || fixCount !== null), rest: !has ? '' : toFix ? plural(toFix, 'mot à revoir', 'mots à revoir') : i18n('rien à revoir'), fixes, marks, toFix},
+                fix: {done: has && (all || said), rest: !has ? '' : all || !said ? i18n('{n} / {total} relues', {n: rv.done, total: rv.total}) : i18n('relu (dit par toi)'), fixes, marks, toFix, all, said, reviewed: rv.done, total: rv.total},
                 find: {done: people.length > 0, rest: people.length ? plural(people.length, 'personne') : names ? plural(names, 'nom repéré', 'noms repérés') : has ? i18n('À faire') : '', names},
                 add: {done: people.length > 0 && !toLink, rest: people.length ? (toLink ? i18n('{n} à relier', {n: toLink}) : i18n('Tout est relié')) : '', toLink, people: people.length}};
             st.cur = STEPS.map(s => s[0]).find(k => !st[k].done) || 'add';
             return st;
         }
+        /** les consignes de chaque étape, dans la barre du bas (11 : plus coupées dans la barre du haut) */
+        const STEP_HINT = {read: 'Toute la page ou la zone choisie (▭) ; ou écris le texte toi-même, ligne à ligne.', fix: 'Clique ○ devant une ligne quand tu l’as relue (⌥ Entrée), ou « 👁 Relire ligne à ligne » (R). ⌥↓ : ligne suivante.',
+            find: '« 🧭 Repérer » cherche les noms (et leur rôle), les dates, les lieux et les métiers, et propose les fiches de ta base qui leur ressemblent.', add: 'L’événement, les personnes et leurs liens, la source : relier, comparer ou créer les fiches'};
+        const IA_PLACES = ['read', 'top', 'fix'];
+        /** 🧠 le seul bouton « Aider l'IA » va à la place choisie (Réglages : étape Lire, barre du haut, étape Corriger) */
+        function placeIa() {
+            const b = $('.h-tx-iabtn'), k = TV.iaPlace?.() || 'read', slot = $(`[data-tx-iaslot="${IA_PLACES.includes(k) ? k : 'read'}"]`); if (!b || !slot) return;
+            if (b.parentNode !== slot) slot.appendChild(b);
+            b.classList.toggle('button', k === 'top'); b.classList.toggle('small', k === 'top'); b.classList.toggle('secondary', k === 'top'); dlg.dataset.txIa = k;
+        }
+        /* 15 (audit) : « Ce que l'app a trouvé » se replie (Réglages, genealogie-tx-trouve-mode) — A (conseillé) : fermé en Lire et Corriger,
+         * ouvert en Repérer et Ajouter, un clic le change jusqu'au changement d'étape ; B : toujours fermé, je l'ouvre quand je veux (retenu) ;
+         * C : toujours ouvert, plus petit. La case du texte gagne la place. */
+        const foundMode = () => { const m = TV.trouveMode?.() || 'A'; return ['A', 'B', 'C'].includes(m) ? m : 'A'; };
+        const foundOpen = view => { const m = foundMode(); if (m === 'C') return true; if (m === 'B') return lsGet('genealogie-tx-trouve-ouvert') === '1'; return foundManual ?? (view === 'find' || view === 'add'); };
+        let foundSum = '';
+        function paintFoundFold(view = flowView || flowCur) {
+            const box = $('[data-tx-found]'), head = $('[data-tx-foundtoggle]'); if (!box || !head) return;
+            const m = foundMode(), on = foundOpen(view);
+            box.classList.toggle('is-folded', !on); box.classList.toggle('is-small', m === 'C'); head.hidden = m === 'C'; head.setAttribute('aria-expanded', String(on));
+            head.querySelector('.h-tx-foundcar').textContent = on ? '▾' : '▸';
+            const sum = foundSum || (t.data.people.length ? plural(t.data.people.length, 'personne') : found.length ? i18n(found.length > 1 ? '{n} éléments repérés' : '{n} élément repéré', {n: found.length}) : i18n('Rien encore : à l’étape 3, « 🧭 Repérer » cherche les noms, les dates et les lieux'));
+            head.querySelector('[data-tx-foundsum]').textContent = on ? '' : sum; dlg.dataset.txFound = on ? 'open' : 'folded';
+        }
+        function toggleFound(on = !foundOpen(flowView || flowCur)) { if (foundMode() === 'B') lsSet('genealogie-tx-trouve-ouvert', on ? '1' : '0'); else foundManual = on; paintFoundFold(); }
+        function paintHint() { if (!txBar) return; txBar.setHelp(tool === 'zone' ? TOOL_HELP.zone : i18n(STEP_HINT[flowView || flowCur] || STEP_HINT.read)); }
         function paintFlow() {
             if (!dlg.isConnected) return;
-            const st = flowState(); if (st.cur !== flowCur) { flowCur = st.cur; flowView = ''; } // une étape faite : la frise passe d'elle-même à la suivante
-            const view = flowView || st.cur; dlg.dataset.txFlow = st.cur; dlg.dataset.txFlowView = view;
+            const st = flowState(); flowCur = st.cur; if (!flowView) flowView = st.cur; // à l'ouverture : l'étape en cours ; ensuite, plus de passage tout seul à l'étape suivante
+            const view = flowView; dlg.dataset.txFlow = st.cur; dlg.dataset.txFlowView = view;
             dlg.querySelectorAll('[data-tx-step]').forEach((b, i) => { const k = b.dataset.txStep, s = st[k], on = k === view;
-                b.classList.toggle('is-done', s.done); b.classList.toggle('is-cur', k === st.cur); b.classList.toggle('is-active', on); b.setAttribute('aria-selected', String(on)); b.tabIndex = on ? 0 : -1;
+                b.classList.toggle('is-done', s.done); b.classList.toggle('is-cur', k === st.cur); b.classList.toggle('is-active', on); b.classList.toggle('is-half', k === 'fix' && !s.done && s.reviewed > 0); b.setAttribute('aria-selected', String(on)); b.tabIndex = on ? 0 : -1;
                 b.querySelector('i').textContent = s.done ? '✓' : String(i + 1); b.querySelector('[data-tx-steprest]').textContent = s.rest; });
-            dlg.querySelectorAll('[data-tx-pane]').forEach(p => { const on = p.dataset.txPane === view; p.classList.toggle('is-shown', on); p.classList.toggle('is-cur', p.dataset.txPane === st.cur); }); // les boutons de l'étape montrée en avant (sur téléphone : seulement eux)
+            dlg.querySelectorAll('[data-tx-pane]').forEach(p => { const on = p.dataset.txPane === view; p.classList.toggle('is-shown', on); p.classList.toggle('is-cur', p.dataset.txPane === st.cur); p.hidden = !on; }); // 14 (audit) : seulement les boutons de l'étape choisie, sur ordinateur aussi
             const nx = $('[data-tx-stepnext]'); if (nx) nx.hidden = view === 'add';
             const rvb = $('[data-tx-cmd="review"]'); if (rvb) rvb.hidden = !TV.reviewMode?.();
-            const fi = $('[data-tx-fixinfo]'); if (fi) fi.textContent = [st.fix.fixes ? plural(st.fix.fixes, 'correction proposée', 'corrections proposées') : '', st.fix.marks ? i18n('{n} × [?] ou [illisible]', {n: st.fix.marks}) : '', st.fix.toFix || !area.value.trim() ? '' : i18n('rien à revoir')].filter(Boolean).join(' · ');
+            placeIa();
             const fd = $('[data-tx-findinfo]'); if (fd) fd.textContent = found.length ? i18n(found.length > 1 ? '{n} éléments repérés' : '{n} élément repéré', {n: found.length}) : '';
             const ai = $('[data-tx-addinfo]'); if (ai) ai.textContent = st.add.people ? `👥 ${plural(st.add.people, 'personne dans l’acte', 'personnes dans l’acte')} · ${st.add.toLink ? i18n('{n} à relier', {n: st.add.toLink}) : i18n('Tout est relié')}` : `👥 ${i18n('Personne dans l’acte pour l’instant : « 🧭 Repérer » les trouve dans le texte')}`;
             const pc = $('[data-tx-pcount]'); if (pc) pc.textContent = st.add.people ? String(st.add.people) : '';
-            paintProg();
+            // « Relue » se met toute seule quand « Corriger » devient fait (et revient à « En cours » si c'était elle qui l'avait mis)
+            const done = st.fix.done;
+            if (fixWas === false && done && ['todo', 'doing'].includes(t.data.status)) { autoRelue = true; setState('checked', {undo: false}); toast(st.fix.all ? i18n('✓ Corriger : fait, toutes les lignes sont relues. L’acte passe à « Relue ».') : i18n('✓ Corriger : fait (relu, dit par toi). L’acte passe à « Relue ».')); }
+            else if (fixWas === true && !done && autoRelue && t.data.status === 'checked') { autoRelue = false; setState('doing', {undo: false}); }
+            fixWas = done;
+            const rvOn = view === 'fix' && !!ext.txReview; if (rvOn !== rvView) { rvView = rvOn; $('[data-tx-editor]')?.classList.toggle('has-rv', rvOn); paintMirror(); }
+            paintFoundFold(view); paintHint(); paintProg(st);
         }
         function flowSoon(ms = 350) { clearTimeout(flowT); flowT = setTimeout(() => { flowT = 0; paintFlow(); countFixes().then(paintFlow); }, ms); }
         /** 📱 téléphone (décision 4) : trois onglets Image / Texte / Personnes ; l'écran étroit est décidé par la CSS (même seuil) */
         const phone = () => matchMedia('(max-width: 700px)').matches;
         function showPtab(k, focus = true) { const h = $('.h-tx'); h.dataset.ptab = k; dlg.querySelectorAll('[data-tx-ptab]').forEach(b => { const on = b.dataset.txPtab === k; b.classList.toggle('is-active', on); b.setAttribute('aria-selected', String(on)); b.tabIndex = on ? 0 : -1; }); if (focus) dlg.querySelector(`[data-tx-ptab="${k}"]`)?.focus({preventScroll: true}); }
-        const showStep = k => { flowView = k; paintFlow(); dlg.querySelector(`[data-tx-step="${k}"]`)?.focus({preventScroll: true}); };
+        const showStep = (k, {focus = true} = {}) => { if (flowView !== k) { foundManual = null; status(''); } flowView = k; paintFlow(); if (focus) dlg.querySelector(`[data-tx-step="${k}"]`)?.focus({preventScroll: true}); };
         /* ─── 👁 relecture ligne à ligne en plein écran (heritage-transcribe-relecture.js ; réglage, conseillé oui) ─── */
         function openReview() {
             if (!TV.reviewMode?.() || !ext.txReview) return;
             if (!area.value.trim()) return toast(i18n('Le texte est vide : lis ou écris d’abord l’acte.'), 'error');
             flushCommit();
-            return ext.txReview.open({title: $('[data-tx="title"]').value, text: () => area.value, start: area.selectionStart, zones: () => t.data.zones.filter(onHere), imageSrc: () => (t.filename ? origSrc() : ''), filter: () => TV.cssFilter(t.data.view),
+            return ext.txReview.open({title: $('[data-tx="title"]').value, text: () => area.value, start: area.selectionStart, zones: () => (pageForm === 'one' && PAGES.length > 1 ? t.data.zones : t.data.zones.filter(onHere)), imageSrc: () => (t.filename ? origSrc() : ''),
+                // 📑 un seul texte pour plusieurs pages : l'image de la page de chaque zone, et la page de chaque ligne (« Page 2 (2 sur 4) · Ligne 7 sur 39 »)
+                imageFor: z => { if (pageForm !== 'one' || PAGES.length < 2) return ''; const p = PAGES.find(q => Number(q.media_id) === Number(z.p || t.media_id)); return p?.filename ? `media/${encodeURIComponent(p.filename)}` : ''; },
+                pageOf: pos => { if (pageForm === 'per' && PAGES.length > 1) return i18n('{page} ({i} sur {n})', {page: pageName(PAGES[pageIx], pageIx), i: pageIx + 1, n: PAGES.length}); const r = pageRef(pos); if (!r) return ''; const i = PAGES.findIndex(q => Number(q.media_id) === Number((t.data.pages || [])[PG.lineOf(area.value, pos).seg])); return i < 0 ? '' : i18n('{page} ({i} sur {n})', {page: pageName(PAGES[i], i), i: i + 1, n: PAGES.length}); }, filter: () => TV.cssFilter(t.data.view),
                 replace: (s, e, str) => { area.setRangeText(str, s, e, 'end'); area.dispatchEvent(new Event('input')); },
                 reviewed: () => t.data.reviewed || [], setReviewed: list => { t.data.reviewed = list.slice(-5000); touch(); flowSoon(60); },
                 onClose: l => { flushCommit(); if (phone()) showPtab('text', false); if (!l) return; selectText(l); const z = t.data.zones.find(q => q.e > q.s && q.s < l.e && l.s < q.e); if (z) { selZone = z.id; drawZones(); reveal(z); } }});
@@ -819,7 +1319,7 @@
             $('[data-tx-fcount]').classList.toggle('is-none', !!q && !out.length); paintMirror();
         }
         /** montrer le résultat en cours : choisi dans le texte (sans y aller), le texte défile jusqu'à lui */
-        function findShow() { const h = findHits[findCur]; if (!h) return; area.setSelectionRange(h.s, h.e); const lineH = parseFloat(getComputedStyle(area).lineHeight) || 20; area.scrollTop = Math.max(0, (area.value.slice(0, h.s).split('\n').length - 3) * lineH); mirror.scrollTop = area.scrollTop; $('[data-tx-fcount]').textContent = i18n('{n} sur {total}', {n: findCur + 1, total: findHits.length}); paintMirror(); }
+        function findShow() { const h = findHits[findCur]; if (!h) return; BK?.revealPos(h.s); area.setSelectionRange(h.s, h.e); const lineH = parseFloat(getComputedStyle(area).lineHeight) || 20; area.scrollTop = Math.max(0, (area.value.slice(0, h.s).split('\n').length - 3) * lineH); mirror.scrollTop = area.scrollTop; $('[data-tx-fcount]').textContent = i18n('{n} sur {total}', {n: findCur + 1, total: findHits.length}); paintMirror(); }
         const findStep = d => { if (!findHits.length) return; findCur = (findCur + d + findHits.length) % findHits.length; findShow(); };
         function openFind(replace = false) {
             const sel = area.value.slice(area.selectionStart, area.selectionEnd);
@@ -855,7 +1355,7 @@
         function putText(x) { flushCommit(); area.value = x.body; before = x.body; t.body = x.body; t.data.zones = (x.zones || []).map(z => ({...z})); t.data.people = (x.people || []).map(p => ({...p})); t.data.reviewed = [...(x.reviewed || [])];
             if (!t.data.zones.some(z => z.id === selZone)) selZone = null; txFix = []; touch(); drawZones(); paintPeople(); if (!findBar.hidden) findRun(); flushCommit(); }
         /** juste avant un gros changement (tout remplacer, propositions sûres, lecture mise dans le texte) : une version automatique, si l'acte est enregistré */
-        function versionBefore(label) { if (!t.id || !area.value.trim()) return; post('save_act_transcription_version', {act_id: t.id, label, body: area.value, data: {zones: t.data.zones, people: t.data.people, reviewed: t.data.reviewed || []}, auto: 1}).catch(() => {}); }
+        function versionBefore(label, x = null) { const b = x ? x.body : area.value; if (!t.id || !b.trim()) return; post('save_act_transcription_version', {act_id: t.id, label, body: b, data: {zones: x ? x.zones : t.data.zones, people: x ? x.people : t.data.people, reviewed: (x ? x.reviewed : t.data.reviewed) || []}, auto: 1}).then(() => VS?.soon(), () => {}); }
         async function openVersions() {
             if (!UI.openVersions) return toast(i18n('La fenêtre des versions n’est pas chargée.'), 'error');
             if (!t.id) { await save(); if (!t.id) return; }
@@ -871,15 +1371,117 @@
                     return {undo: () => putText(was), redo: () => putText(to)}; },
                 rename: (v, label) => post('rename_act_transcription_version', {id: v.id, label}),
                 remove: async v => { const r = await post('delete_act_transcription_version', {id: v.id}); full.delete(v.id); return {undo: () => post('restore_act_transcription_version', {version: (r.result || r).version})}; },
+                removeMany: async vs => { const r = await ext.txCtx.removeVersions(vs); vs.forEach(v => full.delete(v.id)); return r; }, onChange: () => VS?.soon(), // 🗑 plusieurs cochées, une seule ↶ Annuler ; la bande suit
                 saveNow: async () => { const name = await A().askText({title: `🕘 ${i18n('Nouvelle version')}`, message: i18n('Un nom pour cette version (facultatif) :'), value: '', okLabel: i18n('Enregistrer')}); if (name === null) return;
                     await post('save_act_transcription_version', {act_id: t.id, label: String(name || '').trim().slice(0, 120), body: area.value, data: dataOf(), auto: 0}); }});
         }
+        /* ─── ⚖️ chaque lecture gardée (✍ main, 🔬 IA, 🔎 OCR) pour les comparer et prendre le meilleur (heritage-transcribe-compare.js) ─── */
+        /** meta : ce que la lecture retient avec elle (🕘 la bande « Versions ») — img : auto | mine | orig, part : page | zone, hints : les indices de « 🧠 Aider l'IA » */
+        async function keepReading(text, source, model = '', meta = {}) {
+            const C = ext.txCompare; if (!C || !C.keepOn() || !String(text || '').trim()) return;
+            const page = PAGES.length > 1 ? pageName(PAGES[pageIx], pageIx) : '';
+            const v = {label: C.labelOf(source, model, page), body: String(text).trim(), data: {zones: [], people: [], meta: {model: String(model || '').slice(0, 80), ...meta}}, auto: 0, source: `${source}:${String(model || '').slice(0, 80)}`};
+            // un acte pas encore enregistré : la lecture attend le premier enregistrement (l'enregistrer ici, pendant la lecture, écrasait le texte lu)
+            if (!t.id) { readsWaiting.push(v); return; }
+            post('save_act_transcription_version', {act_id: t.id, ...v}).then(() => VS?.soon(), () => {});
+        }
+        const readsWaiting = [];
+        let lastHints = 0; // 🧠 le nombre d'indices de la dernière lecture approfondie
+        const flushReads = () => { if (!t.id) return; readsWaiting.splice(0).forEach(v => post('save_act_transcription_version', {act_id: t.id, ...v}).then(() => VS?.soon(), () => {})); VS?.soon(); };
+        /** l'image envoyée à la lecture rapide et à l'OCR : améliorée (« Mieux voir ») ou d'origine */
+        const readImg = () => (useEnh() && viewChanged() ? 'mine' : 'orig');
+        /* ─── 🕘 la bande « Versions » au-dessus de « 📄 Ce texte est celui du document » (heritage-transcribe-contexte.js) ─── */
+        const VS = ext.txCtx ? ext.txCtx.versionsStrip($('[data-tx-vers]'), $('[data-tx-vprev]'), {
+            list: async () => (t.id ? ((await api('act_transcription_versions', {act_id: t.id})).items || []) : []),
+            body: id => api('act_transcription_version', {id}),
+            use: async v => { // ✓ Utiliser cette version : elle devient « Ma version » ; l'ancienne est gardée (🕘), ↶ Annuler
+                let x; try { x = await api('act_transcription_version', {id: v.id}); } catch (e) { return toast(e.message, 'error'); }
+                versionBefore('Avant « Utiliser cette version »');
+                const was = snapText(), to = {body: x.body, zones: x.data?.zones || [], people: x.data?.people || [], reviewed: x.data?.reviewed || []};
+                const hWas = Number(t.data.hinted) || 0, hTo = Number(x.data?.meta?.hints) || 0, put = (o, h) => { t.data.hinted = h; putText(o); }; // 🧠 les mots [?] de cette lecture : « lu avec un indice »
+                put(to, hTo); status(i18n('Version mise dans le texte (à relire)'));
+                A().undoToast?.(i18n('« {x} » est maintenant ta version (l’ancienne est gardée dans 🕘 Versions)', {x: ext.txCtx.chipOf(v)[1]}), {undo: () => put(was, hWas), redo: () => put(to, hTo), icon: '🕘'}); },
+            compare: v => openCompare([v.id]),
+            compareLines: v => openCompare([v.id], 'line'), // ⚖️ « Comparer ligne à ligne » (≡ Par lignes, ✍ Ma lecture)
+            current: () => area.value, zones: () => t.data.zones.map((z, i) => ({s: z.s, e: z.e, c: z.c || COLORS[i % COLORS.length]})), // ≡ l'aperçu « Par lignes » : mes lignes, leurs couleurs
+            duplicate: async v => { // ⧉ garder une copie de la version affichée (ou de ma version)
+                if (!t.id) { await save(); if (!t.id) return; }
+                let x = {body: area.value, data: {zones: t.data.zones, people: t.data.people}}; if (v) { try { x = await api('act_transcription_version', {id: v.id}); } catch (e) { return toast(e.message, 'error'); } }
+                const src = String(v?.source || '').split(':')[0], label = !v ? 'Copie de ma version' : ['deep', 'htr', 'ocr'].includes(src) ? 'Copie de l’IA' : 'Copie';
+                let id = 0; try { id = Number(((await post('save_act_transcription_version', {act_id: t.id, label, body: x.body, data: {zones: x.data?.zones || [], people: x.data?.people || [], meta: {from: v ? ext.txCtx.chipOf(v)[1] : i18n('Ma version')}}, auto: 0, source: 'copy'})).result || {}).id || 0); } catch (e) { return toast(e.message, 'error'); }
+                await VS.refresh();
+                A().undoToast?.(i18n('Copie gardée : « {x} »', {x: i18n(label)}), {undo: async () => { if (id) await post('delete_act_transcription_version', {id}); VS.refresh(); }, icon: '⧉'}); },
+            rename: async v => { const name = await A().askText({title: `✎ ${i18n('Renommer')}`, message: i18n('Le nouveau nom de cette version :'), value: i18n(v.label || ''), okLabel: i18n('Renommer')}); if (name === null || !String(name).trim()) return;
+                const old = v.label; try { await post('rename_act_transcription_version', {id: v.id, label: String(name).trim().slice(0, 120)}); } catch (e) { return toast(e.message, 'error'); } await VS.refresh();
+                A().undoToast?.(i18n('Version renommée'), {undo: async () => { await post('rename_act_transcription_version', {id: v.id, label: old}); VS.refresh(); }, icon: '✎'}); },
+            openAll: () => openVersions(),
+            /* ✎ « Travailler sur cette version dans l'éditeur » : elle devient le texte (le mien gardé), ses zones à elle ou les miennes reliées à ses lignes */
+            work: async v => {
+                if (!t.id) { await save(); if (!t.id) return; }
+                let x; try { x = await api('act_transcription_version', {id: v.id}); } catch (e) { return toast(e.message, 'error'); }
+                const C = ext.txCtx, cur = VS.working(), here = snapText(), hHere = Number(t.data.hinted) || 0, mine = cur ? cur.was : here;
+                if (cur) await keepWork(cur); else versionBefore('Avant « Travailler sur cette version »');
+                const body = String(x.body || ''), own = (x.data?.zones || []).filter(z => z.e > z.s);
+                const R = own.length && own.every(z => z.e <= body.length) ? {zones: x.data.zones, unlinked: 0} : C.relinkZones(mine.zones, mine.body, body, ext.txSnap.textLinesOf);
+                const to = {body, zones: R.zones, people: x.data?.people || [], reviewed: []}, hTo = Number(x.data?.meta?.hints) || 0, w = {v, body, was: mine, wasHinted: cur ? cur.wasHinted : hHere};
+                const put = (o, h, ww) => { t.data.hinted = h; putText(o); VS.setWorking(ww); };
+                put(to, hTo, w); status(R.unlinked ? i18n(R.unlinked > 1 ? '{n} zones à relier aux lignes de cette version' : '{n} zone à relier aux lignes de cette version', {n: R.unlinked}) : i18n('Zones reliées aux lignes de cette version'));
+                A().undoToast?.(i18n('Tu travailles sur « {x} » dans l’éditeur (ton texte est gardé)', {x: C.chipOf(v)[1]}), {undo: () => put(here, hHere, cur), redo: () => put(to, hTo, w), icon: '✎'}); },
+            back: async () => { const w = VS.working(); if (!w) return; await keepWork(w); const here = snapText(), hHere = Number(t.data.hinted) || 0;
+                const put = (o, h, ww) => { t.data.hinted = h; putText(o); VS.setWorking(ww); }; put(w.was, w.wasHinted, null); status(i18n('Retour à ta version'));
+                A().undoToast?.(i18n('Retour à ta version'), {undo: () => put(here, hHere, w), redo: () => put(w.was, w.wasHinted, null), icon: '↩'}); },
+            keep: w => keepWork(w),
+            dim: on => $('[data-tx-editor]')?.classList.toggle('is-dim', on)}) : null;
+        /** ✎ en quittant une version : elle garde ses zones reliées ; son texte corrigé → une copie (une lecture n'est jamais écrasée) */
+        async function keepWork(w) {
+            if (!w || !t.id) return; const from = ext.txCtx.chipOf(w.v)[1];
+            try { if (area.value === w.body) await post('save_act_transcription_version_zones', {id: w.v.id, zones: t.data.zones});
+                else await post('save_act_transcription_version', {act_id: t.id, label: 'Copie corrigée', body: area.value, data: {zones: t.data.zones, people: t.data.people, meta: {from}}, auto: 0, source: 'copy'}); } catch (e) { toast(e.message, 'error'); }
+            VS?.soon(); }
+        async function openCompare(pick = null, mode = '') {
+            if (!ext.txCompare) return toast(i18n('La comparaison des lectures n’est pas chargée.'), 'error');
+            if (!t.id) { await save(); if (!t.id) return; }
+            ext.txCompare.open({actId: t.id, title: $('[data-tx="title"]').value || i18n('Acte'), current: () => area.value, api, post, pick: Array.isArray(pick) ? pick : null, mode: mode === 'line' ? 'line' : '', // ⚖️ « Comparer avec ma version » : ces lectures cochées
+                images: PAGES.length > 1 ? PAGES.map((p, i) => ({src: `media/${encodeURIComponent(p.filename)}`, label: pageName(p, i)})) : t.filename ? [{src: origSrc()}] : [], // 🖼 l'image de l'acte à côté des lectures
+                apply: (txt, label) => { versionBefore(label); const was = snapText(), to = {...was, body: txt + (txt.endsWith('\n') ? '' : '\n')}; putText(to); status(i18n('Texte fusionné (à relire)'));
+                    A().undoToast?.(i18n('Lectures fusionnées dans le texte.'), {undo: () => putText(was), redo: () => putText(to)}); }});
+        }
+        /* ─── 🧠 « Aider l'IA » (heritage-transcribe-contexte.js) : le titre, de quoi parle l'acte, les personnes reliées, les indices de la base ;
+         * cochés au départ : l'événement, les noms, les lieux (et ❓ pourquoi l'acte). Envoyés avec l'image à la lecture approfondie. ─── */
+        let iaOn = true, iaCache = {key: null, list: []};
+        const iaPeople = () => [...new Set(t.data.people.map(p => Number(p.person_id) || 0).filter(Boolean))].sort((a, b) => a - b);
+        async function iaList() {
+            const key = JSON.stringify([iaPeople(), $('[data-tx="place"]').value]); if (iaCache.key === key) return iaCache.list;
+            let list = []; try { const r = await post('act_ai_hints', {person_ids: iaPeople(), place: $('[data-tx="place"]').value}); list = (r.result || r).hints || []; } catch (_) { list = []; }
+            iaCache = {key, list}; return list;
+        }
+        const IA = {get key() { return String(t.id || `m${t.media_id}`); }, title: () => $('[data-tx="title"]').value, setTitle: v => { const el = $('[data-tx="title"]'); el.value = v; t.title = v; touch(); },
+            about: () => t.data.about || '', setAbout: v => { t.data.about = String(v).slice(0, 600); touch(); }, people: () => t.data.people, hints: iaList,
+            reason: () => (kindNow() === 'notoriete' ? t.data.reason || null : null), lang: () => $('[data-tx-lang]').value, onChange: () => paintIaCount(),
+            doc: () => { const kl = KINDS.find(k => k[0] === kindNow() && k[0] !== 'apreciser')?.[1] || '', where = [$('[data-tx="date_text"]').value, $('[data-tx="place"]').value].filter(x => x.trim()).join(', '), ti = $('[data-tx="title"]').value.trim();
+                return [ti, kl && kl !== ti ? `${kl}${where ? ` (${where})` : ''}` : where].filter(Boolean).join(' — '); },
+            onRead: withHints => { iaOn = withHints; paintIaCount(); openDeep(); }};
+        /** ce qui part vers l'IA avec l'image (null : sans « Aider l'IA ») */
+        const iaContext = async () => (iaOn && ext.txCtx ? ext.txCtx.contextOf(IA, await iaList()) : null);
+        const iaCount = () => (iaOn && ext.txCtx ? ext.txCtx.checkedCount(IA, iaCache.list) : 0);
+        async function paintIaCount() { const el = $('[data-tx-iacount]'); if (!el || !ext.txCtx) return; await iaList(); const n = iaCount(); el.textContent = n ? ` · ${n}` : ''; }
+        function openIa() { if (!ext.txCtx) return toast(i18n('« Aider l’IA » n’est pas chargé.'), 'error'); flushCommit(); return ext.txCtx.openAide(IA); }
+        /* ─── ❓ acte de notoriété : « Pourquoi cet acte a été fait » (data.reason), au-dessus du texte et dans le 🧩 Gabarit ─── */
+        function paintWhy() { const row = $('[data-tx-whyrow]'), on = kindNow() === 'notoriete' && !!ext.txCtx; if (!row) return; row.hidden = !on; row.innerHTML = on ? ext.txCtx.whyHtml(t.data.reason) : ''; }
+        const whySync = () => { const r = t.data.reason; dlg.querySelectorAll('[data-tx-why-k]').forEach(x => { x.value = r?.k || ''; }); dlg.querySelectorAll('[data-tx-why-t]').forEach(x => { if (x !== document.activeElement) x.value = r?.t || ''; }); dlg.querySelectorAll('.h-why-k').forEach(x => x.classList.toggle('is-auto', !!r?.auto)); dlg.querySelectorAll('.h-why-auto').forEach(x => { if (!r?.auto) x.remove(); }); };
+        dlg.addEventListener('change', e => { if (!e.target.matches?.('[data-tx-why-k]')) return; snap(); const k = e.target.value, txt = t.data.reason?.t || '';
+            if (k) t.data.reason = {k, t: txt}; else delete t.data.reason; touch(); whySync(); paintIaCount(); });
+        dlg.addEventListener('input', e => { if (!e.target.matches?.('[data-tx-why-t]')) return; const v = e.target.value.slice(0, 300);
+            t.data.reason = {k: t.data.reason?.k || 'autre', t: v}; touch(); whySync(); });
+        /** « 🧭 Repérer » : la raison lue dans le texte, en vert, à vérifier (jamais à la place d'un choix fait à la main) */
+        function guessWhy(src) { if (kindNow() !== 'notoriete' || !ext.txCtx || (t.data.reason && !t.data.reason.auto)) return; const g = ext.txCtx.reasonGuess(src); if (!g || t.data.reason?.k === g.k) return;
+            t.data.reason = {k: g.k, t: t.data.reason?.t || '', auto: true}; touch(); paintWhy(); }
         /* ─── ⌨️ les touches de l'Atelier (⌘/ ou ?) ─── */
         function showKeys() {
             const K = A().keys, kk = s => (K?.html ? K.html(s) : `<kbd>${esc(s)}</kbd>`);
             const rows = [['⌘S', 'Enregistrer'], ['⌘Z', 'Annuler'], ['⇧⌘Z', 'Rétablir'], ['⌘F', 'Chercher dans le texte'], ['⌥⌘F', 'Chercher et remplacer'], ['↩ / ⇧↩', 'Résultat suivant, résultat d’avant'],
-                ...(TV.reviewMode?.() ? [['R', 'Relire ligne à ligne']] : []), ['⌥↓ / ⌥↑', 'Ligne suivante, ligne d’avant : l’image suit sa zone'], ['H', 'Déplacer l’image'], ['Espace', 'Déplacer l’image, en restant appuyé'], ['Z', 'Dessiner une zone'], ['L', 'Loupe'],
-                ['← → ↑ ↓', 'Déplacer la zone choisie (⇧ : l’agrandir)'], ['Suppr', 'Supprimer la zone choisie'], ['⌘0', 'Ajuster à la fenêtre'], ['⌘1', '100 %'], ['⌘+ / ⌘−', 'Zoom avant, zoom arrière'], ['⌘P', 'Imprimer'], ['⌘/ / ?', 'Cette liste des touches'], ['Échap', 'Fermer']];
+                ...(TV.reviewMode?.() ? [['R', 'Relire ligne à ligne']] : []), ['⌥↓ / ⌥↑', 'Ligne suivante, ligne d’avant : l’image suit sa zone'], ['⌘↓ / ⌘↑', 'Plusieurs pages : la page suivante, la page d’avant'], ['⌥↩', 'Étape Corriger : la ligne est relue, puis la suivante'], ['H', 'Déplacer l’image'], ['Espace', 'Déplacer l’image, en restant appuyé'], ['Z', 'Dessiner une zone'], ['L', 'Loupe'],
+                ['← → ↑ ↓', 'Déplacer la zone choisie (⇧ : l’agrandir)'], ['Suppr', 'Supprimer la zone choisie'], ['⌘0', 'Ajuster à la fenêtre'], ['⌘1', '100 %'], ['Mod++ / ⌘−', 'Zoom avant, zoom arrière'], ['⌘P', 'Imprimer'], ['⌘/ / ?', 'Cette liste des touches'], ['Échap', 'Fermer']];
             ext.openDialog({eyebrow: i18n('Atelier de transcription').toUpperCase(), title: `⌨️ ${i18n('Raccourcis clavier')}`, submitLabel: i18n('Fermer'),
                 body: `<table class="h-tx-keys" data-tx-keys><tbody>${rows.map(([k, l]) => `<tr><td>${k.split(' / ').map(kk).join(' / ')}</td><td>${esc(i18n(l))}</td></tr>`).join('')}</tbody></table><p class="ui-hint">${esc(i18n('Sur PC et Linux : Ctrl au lieu de ⌘, Alt au lieu de ⌥.'))}</p>`, onSubmit: () => {}});
         }
@@ -891,23 +1493,41 @@
         }
         /* ─── avancement (F6) : l'état de l'acte, les lignes relues, les mots douteux, les lignes reliées ; un clic va au premier endroit ─── */
         const STATE = {todo: ['À faire', 'grey'], doing: ['En cours', 'yellow'], checked: ['Relue', 'blue'], done: ['Finie', 'green']};
-        const setState = (k, {undo = true} = {}) => { const sel = $('[data-tx-state]'), was = sel.value; if (was === k) return; sel.value = k; t.data.status = k; touch(); paintProg();
+        /* 14 (audit) : l'état de l'acte se règle à un seul endroit, à côté de la frise (À faire · En cours · Relue · Finie) */
+        const setState = (k, {undo = true} = {}) => { const was = t.data.status; if (was === k || !STATE[k]) return; t.data.status = k; if (undo) autoRelue = false; touch(); paintProg();
             if (undo) A().undoToast?.(i18n('État : {x}', {x: i18n(STATE[k][0])}), {undo: () => setState(was, {undo: false}), redo: () => setState(k, {undo: false})}); };
         function progState() {
             const RV = ext.txReview, text = area.value, ls = RV ? RV.linesOf(text) : [], keys = new Set(t.data.reviewed || []);
             const reviewed = RV ? ls.filter(l => keys.has(RV.lineKey(l.text))).length : 0, linked = ls.filter(l => t.data.zones.some(z => z.e > z.s && z.s < l.e && l.s < z.e)).length;
             const fixes = txFixOn ? txFix.length : (fixCount ?? 0), doubt = fixes + markCount(text), toLink = t.data.people.filter(p => !p.person_id).length;
-            return {lines: ls, total: ls.length, reviewed, linked, doubt, toLink, people: t.data.people.length, keys};
+            return {lines: ls, total: ls.length, reviewed, linked, doubt, toLink, people: t.data.people.length, keys, fixes, marks: markCount(text)};
         }
-        function paintProg() {
-            const box = $('[data-tx-prog]'); if (!box) return; const s = progState(), st = $('[data-tx-state]').value, [lab, col] = STATE[st] || STATE.doing;
-            const chip = (k, ic, txt, warn) => `<button type="button" class="h-tx-pchip${warn ? ' is-warn' : ' is-ok'}" data-tx-pgo="${k}">${ic} ${esc(txt)}${warn ? ' ›' : ''}</button>`;
-            const allDone = s.total && s.reviewed === s.total && !s.doubt && s.linked === s.total && !s.toLink;
-            const propose = !s.total ? '' : allDone && st !== 'done' ? `<button type="button" class="button small" data-tx-pset="done">✓ ${esc(i18n('Marquer comme finie'))}</button>` : s.reviewed === s.total && !s.doubt && (st === 'todo' || st === 'doing') ? `<button type="button" class="button small secondary" data-tx-pset="checked">✓ ${esc(i18n('Marquer comme relue'))}</button>` : '';
-            box.innerHTML = `<button type="button" class="h-tx-pstate" data-tx-pstate aria-haspopup="menu" title="${esc(i18n('Où en est cette transcription (pour la liste « Transcriptions d’actes »)'))}">${UI.badge ? UI.badge(i18n(lab), col) : esc(i18n(lab))} ▾</button>
-                ${s.total ? chip('doubt', '🟡', s.doubt ? plural(s.doubt, 'mot douteux', 'mots douteux') : i18n('aucun mot douteux'), s.doubt) + chip('review', '👁', i18n('{n} / {total} lignes relues', {n: s.reviewed, total: s.total}), s.reviewed < s.total) + chip('zone', '▭', i18n('{n} / {total} lignes reliées', {n: s.linked, total: s.total}), s.linked < s.total) : ''}
-                ${s.people ? chip('link', '👥', s.toLink ? i18n('{n} à relier', {n: s.toLink}) : i18n('Tout est relié'), s.toLink) : ''}${propose}`;
-            dlg.dataset.txProg = JSON.stringify({state: st, total: s.total, reviewed: s.reviewed, linked: s.linked, doubt: s.doubt, toLink: s.toLink});
+        function paintProg(fl = null) {
+            const box = $('[data-tx-prog]'); if (!box) return; const s = progState(), st = STATE[t.data.status] ? t.data.status : 'doing';
+            if (!box.querySelector('[data-tx-states]')) box.innerHTML = `<span class="h-tx-statelab">${esc(i18n('État de l’acte'))}</span><span class="h-tx-states" role="radiogroup" aria-label="${esc(i18n('État de l’acte'))}" data-tx-states title="${esc(i18n('Où en est cette transcription (pour la liste « Transcriptions d’actes »)'))}">${Object.entries(STATE).map(([k, [l]]) => `<button type="button" role="radio" data-tx-setstate="${k}" class="is-${k}">${esc(i18n(l))}</button>`).join('')}</span>
+                <span class="spacer"></span><button type="button" class="h-tx-stepnext" data-tx-stepnext title="${esc(i18n('Étape suivante'))}"><span class="h-tx-stepnextl">${esc(i18n('Étape suivante'))} </span>›</button>`;
+            box.querySelectorAll('[data-tx-setstate]').forEach(b => { const on = b.dataset.txSetstate === st; b.setAttribute('aria-checked', String(on)); b.classList.toggle('is-on', on); b.tabIndex = on ? 0 : -1; });
+            const nx = box.querySelector('[data-tx-stepnext]'); if (nx) nx.hidden = (flowView || flowCur) === 'add';
+            // ce qui reste, dans l'étape qu'il concerne : les lignes reliées (Lire), relues et les mots douteux (Corriger), les personnes à relier (Ajouter)
+            const chip = (k, ic, txt, warn, title = '') => `<button type="button" class="h-tx-pchip${warn ? ' is-warn' : ' is-ok'}" data-tx-pgo="${k}"${title ? ` title="${esc(title)}"` : ''}>${ic} ${esc(txt)}${warn ? ' ›' : ''}</button>`;
+            const f = (fl || flowState()).fix, put = (k, h) => { const el = $(`[data-tx-pinfo="${k}"]`); if (el && el.innerHTML !== h) el.innerHTML = h; };
+            put('read', s.total ? chip('zone', '▭', i18n('{n} / {total} lignes reliées', {n: s.linked, total: s.total}), s.linked < s.total) : '');
+            const why = [s.fixes ? plural(s.fixes, 'correction proposée', 'corrections proposées') : '', s.marks ? i18n('{n} × [?] ou [illisible]', {n: s.marks}) : ''].filter(Boolean).join(' · ');
+            put('fix', s.total ? chip('review', '👁', i18n('{n} / {total} lignes relues', {n: s.reviewed, total: s.total}), s.reviewed < s.total) + chip('doubt', '🟡', s.doubt ? plural(s.doubt, 'mot douteux', 'mots douteux') : i18n('aucun mot douteux'), s.doubt, why)
+                + (f.done ? (f.all ? `<span class="h-tx-reludone">✓ ${esc(i18n('Tout est relu'))}</span>` : `<button type="button" class="button small h-tx-relu is-done" data-tx-unrelu title="${esc(i18n('Annuler « J’ai relu » : Corriger redevient à faire'))}">✓ ${esc(i18n('Relu (dit par toi)'))}</button>`)
+                    : `<button type="button" class="button small h-tx-relu" data-tx-relu title="${esc(i18n('Dire que la lecture est vérifiée, même si toutes les lignes ne sont pas cochées'))}">✓ ${esc(i18n('J’ai relu'))}</button>`) : '');
+            put('add', s.people ? chip('link', '👥', s.toLink ? i18n('{n} à relier', {n: s.toLink}) : i18n('Tout est relié'), s.toLink) : '');
+            dlg.dataset.txProg = JSON.stringify({state: st, total: s.total, reviewed: s.reviewed, linked: s.linked, doubt: s.doubt, toLink: s.toLink, fixDone: !!f.done});
+        }
+        /** « ✓ J'ai relu » (et l'inverse) ; ↶ Annuler */
+        function setRelu(on, {undo = true} = {}) { if (!!t.data.fixOk === on) return; if (on) t.data.fixOk = true; else delete t.data.fixOk; touch(); paintFlow();
+            if (undo) A().undoToast?.(on ? i18n('Corriger : relu (dit par toi)') : i18n('Corriger : à faire'), {undo: () => setRelu(!on, {undo: false}), redo: () => setRelu(on, {undo: false})}); }
+        /** une ligne relue ou pas (le rond ○ devant la ligne, à l'étape Corriger ; ⌥ Entrée au clavier) */
+        function toggleReviewed(n) {
+            const RV = ext.txReview; if (!RV) return false; const l = RV.linesOf(area.value).find(x => x.n === n); if (!l) return false;
+            const key = RV.lineKey(l.text), list = [...(t.data.reviewed || [])], at = list.indexOf(key);
+            if (at >= 0) list.splice(at, 1); else list.push(key);
+            t.data.reviewed = list.slice(-5000); touch(); paintMirror(); paintFlow(); return at < 0;
         }
         /** un compteur : aller au premier endroit concerné */
         function progGo(k) {
@@ -918,34 +1538,54 @@
                 if (!first && !txFixOn && fixCount) return runFix(); if (first) { if (phone()) showPtab('text', false); selectText(first); } return; }
             if (k === 'link') { if (phone()) showPtab('people', false); const i = t.data.people.findIndex(p => !p.person_id); if (i >= 0) $(`[data-tx-plink="${i}"]`)?.scrollIntoView({block: 'nearest'}); return showStep('add'); }
         }
-        $('[data-tx-prog]').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return;
+        $('[data-tx-flow]').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return;
             if (b.dataset.txPgo) return progGo(b.dataset.txPgo);
-            if (b.dataset.txPset) return setState(b.dataset.txPset);
-            if (b.hasAttribute('data-tx-pstate')) { const cur = $('[data-tx-state]').value; // menu de choix unique
-                return UI.menuAt?.(b, Object.entries(STATE).map(([k, [l]]) => ({icon: k === cur ? '●' : '○', label: i18n(l), run: () => setState(k)})), {title: i18n('État')}); } });
+            if (b.dataset.txSetstate) return setState(b.dataset.txSetstate);
+            if (b.hasAttribute('data-tx-relu')) return setRelu(true);
+            if (b.hasAttribute('data-tx-unrelu')) return setRelu(false); });
         /* ─── abréviations connues (F4) : soulignées en pointillé, leur sens au survol ou au toucher (données de « 📖 Aide à la lecture ») ─── */
         const abTip = $('[data-tx-abtip]'); let abShown = -1, abHide = 0;
+        /** 💰📏 la bulle d'une somme ou d'une mesure : l'année de l'acte, la région des mesures d'après le lieu (« (35) ») ou celle du Convertisseur */
+        function amountInfo(h) {
+            const MT = window.LCNDA_MONTANTS, cm = ext.calendarMore; if (!MT) return null; if (!ext.prixReference) MT.loadPrices?.();
+            const ym = String($('[data-tx="date_text"]')?.value || '').match(/\b(1[2-9]\d{2}|20[0-2]\d)\b/), dm = String($('[data-tx="place"]')?.value || '').match(/\((\d{2}|2[AB])\)/i);
+            let region = dm && cm?.regionOfDept ? cm.regionOfDept(dm[1]) : ''; if (!region) { try { region = JSON.parse(localStorage.getItem('lcnda-autrefois-region') || '"paris"'); } catch (_) { region = 'paris'; } }
+            return MT.explain(h, {year: ym ? Number(ym[1]) : 0, region, wageSols: A().journalierWageSols, calendarMore: cm, prices: ext.prixReference});
+        }
         const abAt = (x, y) => { let hit = -1; mirror.querySelectorAll('.h-tx-ab').forEach(sp => { if (hit >= 0) return; for (const r of sp.getClientRects()) if (x >= r.left && x <= r.right && y >= r.top - 2 && y <= r.bottom + 2) { hit = Number(sp.dataset.ab); return; } }); return hit; };
         function showAb(i) {
             const a = abbrevs[i]; if (!a) return hideAb(); clearTimeout(abHide); if (abShown === i && !abTip.hidden) return; abShown = i;
             const sp = mirror.querySelector(`.h-tx-ab[data-ab="${i}"]`); if (!sp) return;
-            abTip.innerHTML = `<b data-i18n-off>${esc(a.word)}</b> = <span data-i18n-off>${esc(a.item.d)}</span>${a.item.ex ? `<small data-i18n-off>${esc(a.item.ex)}</small>` : ''}<button type="button" class="link-button" data-tx-abopen>${esc(i18n('Ouvrir dans 📖 Aide à la lecture'))}</button>`;
+            if (a.amount) { const x = amountInfo(a.amount); if (!x) return hideAb();
+                abTip.innerHTML = `<b>${a.amount.type === 'money' ? '💰' : '📏'} ${esc(x.title)}</b>${x.lines.map(l => `<span class="h-tx-amline">${esc(l)}</span>`).join('')}${x.source ? `<small>${esc(i18n('Source'))} : ${x.url ? `<a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">${esc(x.source)} ↗</a>` : esc(x.source)}</small>` : ''}<button type="button" class="link-button" data-tx-abopen>${esc(i18n('Voir le calcul dans 🪙 le Convertisseur d’autrefois'))}</button>`; }
+            else abTip.innerHTML = `<b data-i18n-off>${esc(a.word)}</b> = <span data-i18n-off>${esc(a.item.d)}</span>${a.item.ex ? `<small data-i18n-off>${esc(a.item.ex)}</small>` : ''}<button type="button" class="link-button" data-tx-abopen>${esc(i18n('Ouvrir dans 📖 Aide à la lecture'))}</button>`;
             abTip.hidden = false; const ed = $('[data-tx-editor]').getBoundingClientRect(), r = sp.getClientRects()[0] || sp.getBoundingClientRect(), w = abTip.offsetWidth, h = abTip.offsetHeight;
             const left = Math.max(4, Math.min(ed.width - w - 4, r.left - ed.left)), below = r.bottom - ed.top + 4; abTip.style.left = `${left}px`; abTip.style.top = `${below + h > ed.height ? Math.max(4, r.top - ed.top - h - 4) : below}px`;
             dlg.dataset.txAb = a.word;
         }
         function hideAb() { abShown = -1; abTip.hidden = true; delete dlg.dataset.txAb; }
         let abRaf = 0;
-        area.addEventListener('mousemove', e => { if (!abbrevs.length) return; cancelAnimationFrame(abRaf); abRaf = requestAnimationFrame(() => { const i = abAt(e.clientX, e.clientY); if (i >= 0) showAb(i); else if (!abTip.hidden) { clearTimeout(abHide); abHide = setTimeout(hideAb, 350); } }); });
+        /* 🧠 un mot [?] lu avec un indice de « Aider l'IA » : la bulle « lu avec un indice » (la même que celle des abréviations) */
+        const hwAt = (x, y) => { let hit = -1; mirror.querySelectorAll('.h-tx-hintw').forEach(sp => { if (hit >= 0) return; for (const r of sp.getClientRects()) if (x >= r.left && x <= r.right && y >= r.top - 2 && y <= r.bottom + 2) { hit = Number(sp.dataset.hw); return; } }); return hit; };
+        function showHint(i) {
+            const w = hintW[i], sp = mirror.querySelector(`.h-tx-hintw[data-hw="${i}"]`); if (!w || !sp) return hideAb(); clearTimeout(abHide);
+            if (abShown === 1e6 + i && !abTip.hidden) return; abShown = 1e6 + i;
+            abTip.innerHTML = `<b>🧠 ${esc(i18n('lu avec un indice'))}</b> <span data-i18n-off>« ${esc(w.word)} »</span><small>${esc(i18n('L’IA a lu ce mot en s’aidant d’un indice de « Aider l’IA » : vérifie-le sur l’image.'))}</small>`;
+            abTip.hidden = false; const ed = $('[data-tx-editor]').getBoundingClientRect(), r = sp.getClientRects()[0] || sp.getBoundingClientRect(), tw = abTip.offsetWidth, th = abTip.offsetHeight;
+            const left = Math.max(4, Math.min(ed.width - tw - 4, r.left - ed.left)), below = r.bottom - ed.top + 4; abTip.style.left = `${left}px`; abTip.style.top = `${below + th > ed.height ? Math.max(4, r.top - ed.top - th - 4) : below}px`;
+            dlg.dataset.txAb = w.word;
+        }
+        area.addEventListener('mousemove', e => { if (!abbrevs.length && !hintW.length) return; cancelAnimationFrame(abRaf); abRaf = requestAnimationFrame(() => { const i = abbrevs.length ? abAt(e.clientX, e.clientY) : -1; if (i >= 0) return showAb(i); const h = hintW.length ? hwAt(e.clientX, e.clientY) : -1; if (h >= 0) return showHint(h); if (!abTip.hidden) { clearTimeout(abHide); abHide = setTimeout(hideAb, 350); } }); });
         area.addEventListener('mouseleave', () => { clearTimeout(abHide); abHide = setTimeout(hideAb, 350); });
         abTip.addEventListener('mouseenter', () => clearTimeout(abHide)); abTip.addEventListener('mouseleave', () => { abHide = setTimeout(hideAb, 250); });
-        abTip.addEventListener('click', e => { if (!e.target.closest('[data-tx-abopen]')) return; const a = abbrevs[abShown]; hideAb(); if (a) ext.readingAid?.open({q: String(a.item.t).split(',')[0].trim(), lang: aideLang($('[data-tx-lang]').value)}); });
+        abTip.addEventListener('click', e => { if (!e.target.closest('[data-tx-abopen]')) return; const a = abShown < 1e6 ? abbrevs[abShown] : null; hideAb(); if (a?.amount) { const x = amountInfo(a.amount); if (x) ext.autrefois?.open({tab: x.convert.tab, value: x.convert.value, year: x.convert.year}); return; } if (a) ext.readingAid?.open({q: String(a.item.t).split(',')[0].trim(), lang: aideLang($('[data-tx-lang]').value)}); });
         // au toucher (ou un clic) : le mot touché montre sa bulle (sauf s'il a une correction proposée : son menu passe d'abord)
         area.addEventListener('click', () => { if (!abbrevs.length || area.selectionStart !== area.selectionEnd) return hideAb(); const c = area.selectionStart; if (txFix.some(f => c >= f.s && c <= f.e)) return; const i = abbrevs.findIndex(a => c >= a.s && c <= a.e); if (i >= 0) showAb(i); else hideAb(); });
         area.addEventListener('input', hideAb); area.addEventListener('scroll', hideAb);
         let lastExtract = null, lastUnsure = 0, lastRich = null, lastRichAll = null;
-        async function runDetect() {
+        async function runDetect({quiet = false} = {}) {
             const src = findText(); // 📑 les repères « — page 2 — » ne sont ni des noms, ni des nombres
+            if (!src.trim() && !quiet) return toast(i18n('Le texte est vide : lis ou écris d’abord l’acte.'), 'error'); // 21 : comme les autres commandes
             found = detect(src);
             const names = [...new Set(found.filter(f => f.type === 'person').map(f => f.label))].filter(n => !matchCache.has(n));
             if (names.length) { try { const r = await post('act_match_people', {names}); (r.result || []).forEach((list, i) => matchCache.set(names[i], list)); } catch (_) {} }
@@ -954,7 +1594,80 @@
             // 📑 un texte par page : « Ce que l'app a trouvé » lit aussi les actes des autres pages (une carte par personne sur tout le document)
             perCombo = makeCombo(); lastRichAll = null; 
             if (perCombo) { try { lastRichAll = window.LCNDA_TXACTE?.richFind?.(blankMarks(perCombo.text), {kind: $('[data-tx="kind"]').value, place: $('[data-tx="place"]').value, date: $('[data-tx="date_text"]').value, helpers: {detect, findDates, wordsToNumber}}) || null; } catch (_) { lastRichAll = null; } }
+            fillGabarit(src); guessWhy(src);
             paintMirror(); paintPeople(); status(i18n(found.length > 1 ? '{n} éléments repérés' : '{n} élément repéré', {n: found.length}));
+        }
+        /* ─── 🧩 le gabarit (heritage-transcribe-gabarit.js) : les cases de la sorte d'acte, remplies par Repérer, jamais une case ✓ ou écrite écrasée ─── */
+        const GB = () => (ext.txGabarit && ext.txGabarit.mode() === 'gabarit' ? ext.txGabarit : null);
+        let gabTab = 'found';
+        const kindNow = () => $('[data-tx="kind"]').value;
+        function fillGabarit(src) {
+            const g = GB(); if (!g || !g.has(kindNow())) return;
+            const next = g.fill(t.data.gabarit, kindNow(), lastExtract, src ?? findText());
+            if (JSON.stringify(next) !== JSON.stringify(t.data.gabarit || null)) { t.data.gabarit = next; touch(); }
+        }
+        const gabWhere = s0 => { const r = pageRef(s0); return r ? i18n('page {n}, l. {line}', {n: r.n, line: r.line}) : i18n('l. {n}', {n: area.value.slice(0, s0).split('\n').length}); };
+        function paintGabarit() { const box = $('[data-gab-box]'); if (box) GB()?.render(box, {gab: t.data.gabarit, kind: kindNow(), guess: lastExtract?.kind, where: gabWhere, top: kindNow() === 'notoriete' && ext.txCtx ? ext.txCtx.whyHtml(t.data.reason) : ''}); }
+        function gabCount() { const g = GB(), el = $('[data-gab-count]'); if (!g || !el || !g.has(kindNow())) return; const F = g.fieldsOf(kindNow(), t.data.gabarit), f = t.data.gabarit?.fields || {};
+            el.textContent = i18n('Cases remplies : {a}/{b} · vérifiées : {c}', {a: F.filter(([k]) => f[k]?.v).length, b: F.length, c: F.filter(([k]) => f[k]?.ok).length}); }
+        function gabField(k) { const g = t.data.gabarit = (t.data.gabarit && t.data.gabarit.kind === kindNow()) ? t.data.gabarit : {kind: kindNow(), fields: {}}; g.fields = g.fields || {}; return g; }
+        /** le texte à trous d'avant (« Coller le texte à trous » dans le menu ⋯, ou le réglage « Modèle d'acte : texte à trous ») */
+        async function pasteTemplate() { const tp = TEMPLATES[$('[data-tx="kind"]').value]; if (!tp) return toast(i18n('Pas de modèle pour ce genre d’acte.'), 'error'); const sgT = multiPages() ? PG.segments(area.value)[segIx()] : null; if ((sgT ? area.value.slice(sgT.s, sgT.e) : area.value).trim() && !await A().confirmBox(i18n('Le texte déjà écrit est gardé.'), {title: i18n('Ajouter le modèle à la fin du texte ?'), okLabel: i18n('Ajouter le modèle')})) return; if (multiPages()) { const sg = PG.segments(area.value)[segIx()]; if (sg) { snap(); spliceText(sg.e, sg.e, (area.value.slice(sg.s, sg.e).trim() ? '\n\n' : '') + tp); area.dispatchEvent(new Event('input')); return; } } // 📑 dans la page affichée
+                area.value += (area.value.trim() ? '\n\n' : '') + tp; area.dispatchEvent(new Event('input')); return; }
+        /** « ＋ Ajouter une case » : une case à toi, dans cet acte seulement (pour toute la sorte : « 🧩 Mes gabarits… ») */
+        function gabAddCase() {
+            const inp = $('[data-gab-newlabel]'), label = String(inp?.value || '').replace(/\s+/g, ' ').trim().slice(0, 60); if (!label) { inp?.focus(); return; }
+            const g = gabField(), taken = new Set(ext.txGabarit.fieldsOf(kindNow(), g).map(x => x[0])), key = ext.txGabarit.uniqueKey(label, taken);
+            snap(); g.extra = [...(g.extra || []), {key, label}].slice(0, 20); touch(); paintGabarit(); $(`[data-gab-field="${key}"]`)?.focus();
+        }
+        /** « 🧩 Mes gabarits… » : pour une sorte d'acte, montrer ou masquer les cases prêtes, et ajouter les siennes (gardé sur cet ordinateur) */
+        function openMesGabarits() {
+            const G2 = ext.txGabarit; let kind = G2.KIND_NAME[kindNow()] ? kindNow() : 'bapteme';
+            const d = ext.openDialog({eyebrow: i18n('GABARITS'), title: `🧩 ${i18n('Mes gabarits')}`, body: '<div class="h-gab-mine" data-gab-mine></div>'});
+            const box = d.querySelector('[data-gab-mine]');
+            const paint = () => { const P = G2.perso(), mine = P[kind] || {}, hide = new Set(mine.hide || []);
+                box.innerHTML = `<label class="h-gab-mk">${esc(i18n('Sorte d’acte'))} <select data-gab-mkind>${Object.entries(G2.KIND_NAME).map(([k, l]) => `<option value="${k}" ${k === kind ? 'selected' : ''}>${esc(i18n(l))}</option>`).join('')}</select></label>
+                    <p class="muted">${esc(i18n('Les cases cochées se montrent dans le gabarit de chaque acte de cette sorte. Gardé sur cet ordinateur.'))}</p>
+                    <ul class="h-gab-mlist">${(G2.G[kind] || []).map(([k, l]) => `<li><label><input type="checkbox" data-gab-mshow="${k}" ${hide.has(k) ? '' : 'checked'}> ${esc(i18n(l))}</label></li>`).join('')}
+                    ${(mine.add || []).map(x => `<li><label><input type="checkbox" checked disabled> ${esc(x.label)}</label> <button type="button" class="icon-button small" data-gab-mdel="${esc(x.key)}" title="${esc(i18n('Retirer cette case'))}" aria-label="${esc(i18n('Retirer cette case'))}">×</button></li>`).join('')}</ul>
+                    <div class="h-gab-addrow"><input type="text" data-gab-mnew maxlength="60" placeholder="${esc(i18n('Nom de la case (ex. Profession du parrain)'))}" aria-label="${esc(i18n('Nom de la case'))}" spellcheck="false" autocomplete="off"><button type="button" class="button small" data-gab-madd>＋ ${esc(i18n('Ajouter une case'))}</button></div>`; };
+            const save = fn => { const P = G2.perso(); P[kind] = P[kind] || {add: [], hide: []}; fn(P[kind]); G2.setPerso(P); paint(); paintGabarit(); };
+            const add = () => { const inp = box.querySelector('[data-gab-mnew]'), label = String(inp.value || '').replace(/\s+/g, ' ').trim().slice(0, 60); if (!label) return inp.focus();
+                save(m => { const taken = new Set([...(G2.G[kind] || []).map(x => x[0]), ...(m.add || []).map(x => x.key)]); m.add = [...(m.add || []), {key: G2.uniqueKey(label, taken), label}].slice(0, 30); }); box.querySelector('[data-gab-mnew]')?.focus(); };
+            box.addEventListener('change', e => { if (e.target.matches('[data-gab-mkind]')) { kind = e.target.value; paint(); return; }
+                const k = e.target.dataset.gabMshow; if (k) save(m => { const h = new Set(m.hide || []); if (e.target.checked) h.delete(k); else h.add(k); m.hide = [...h]; }); });
+            box.addEventListener('click', e => { if (e.target.closest('[data-gab-madd]')) return add();
+                const del = e.target.closest('[data-gab-mdel]'); if (!del) return; const k = del.dataset.gabMdel, before = (G2.perso()[kind]?.add || []).slice();
+                save(m => { m.add = (m.add || []).filter(x => x.key !== k); });
+                A().undoToast?.(i18n('Case retirée'), {undo: () => save(m => { m.add = before; })}); });
+            box.addEventListener('keydown', e => { if (e.target.matches('[data-gab-mnew]') && e.key === 'Enter') { e.preventDefault(); e.stopPropagation(); add(); } });
+            paint();
+        }
+        /** « ⤓ Tableur » : tous les actes d'une sorte, une ligne par acte, une colonne par case (relevé de paroisse) */
+        async function gabSheet(kind) {
+            const G2 = ext.txGabarit; flushCommit(); if (dirty) await save();
+            let items = []; try { items = (await api('act_gabarits', {kind})).items || []; } catch (e) { return toast(e.message, 'error'); }
+            if (!items.length) return toast(i18n('Aucun acte de cette sorte pour l’instant.'));
+            const cols = []; const seen = new Set(); const addCol = (k, l) => { if (!seen.has(k)) { seen.add(k); cols.push([k, l]); } };
+            G2.fieldsOf(kind, null).forEach(([k, l]) => addCol(k, l));
+            items.forEach(it => (it.gabarit?.extra || []).forEach(x => addCol(x.key, x.label)));
+            const cell = v => (A().csvCell ? A().csvCell(v, {sep: ';', quote: 'always'}) : `"${String(v ?? '').replace(/"/g, '""')}"`);
+            const head = [i18n('Titre'), i18n('Date'), i18n('Lieu'), i18n('Source'), ...cols.map(c => c[1])];
+            const rows = items.map(it => [it.title, it.date_text, it.place, it.source, ...cols.map(([k]) => it.gabarit?.fields?.[k]?.v || '')]);
+            const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['\ufeff' + [head, ...rows].map(r => r.map(cell).join(';')).join('\r\n')], {type: 'text/csv;charset=utf-8'}));
+            a.download = `${A().safeExportFilename ? A().safeExportFilename(`${i18n(G2.KIND_NAME[kind] || 'Autre')} ${i18n('gabarits')}`, 'gabarits') : 'gabarits'}.csv`; /* sans accents : sinon le navigateur l'appelle « download » */ document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000);
+                        toast(i18n('Tableur : {x}', {x: plural(items.length, 'acte')}));
+        }
+        function gabMenu(at) {
+            const g = GB() || ext.txGabarit, m = g.mode(), set = v => { g.setMode(v); paintPeople(); };
+            UI.menuAt?.(at, [
+                {icon: m === 'gabarit' ? '✓' : '', label: i18n('🧩 Gabarit à cases (conseillé)'), run: () => set('gabarit')},
+                {icon: m === 'texte' ? '✓' : '', label: i18n('Texte à trous (comme avant)'), run: () => set('texte')},
+                '-', {icon: '🧭', label: i18n('Remplir à nouveau'), run: () => runDetect()},
+                {icon: '🧩', label: i18n('Mes gabarits…'), run: () => openMesGabarits()},
+                {icon: '⤓', label: i18n('Tableur de tous les actes « {x} »', {x: i18n(g.KIND_NAME[kindNow()] || 'Autre')}), run: () => gabSheet(kindNow())},
+                {icon: '📝', label: i18n('Coller le texte à trous'), run: () => pasteTemplate()},
+            ], {title: i18n('Modèle d’acte')});
         }
         /** garder une personne de « Ce que l'app a trouvé » ; sur toutes les pages (un texte par page) : une mention sur la page affichée */
         function keepAt(f, pid, all) {
@@ -971,8 +1684,29 @@
                 onOpen: dg => { const q = dg.querySelector('.pk-search:not([hidden]) .pk-input'); if (!q) return; q.value = p.name; setTimeout(() => { q.focus(); q.dispatchEvent(new Event('input', {bubbles: true})); }, 30); }, // les fiches du nom lu s’affichent tout de suite
                 onSubmit: f => { const chosen = Number(f.elements.tx_pick?.value) || 0; if (!chosen) return window.LCNDA_UI.fail(f.elements.tx_pick, i18n('Choisis une fiche.')); p.person_id = chosen; touch(); paintPeople(); }});
         }
+        $('[data-tx-found]').addEventListener('input', e => {
+            const k = e.target.dataset?.gabField; if (!k) return; const g = gabField(), f = g.fields[k] = g.fields[k] || {v: '', s: -1, e: -1};
+            f.v = e.target.value.slice(0, 300); f.own = !!f.v; f.ok = false; if (!f.v) delete g.fields[k];
+            e.target.className = `h-gab-v ${!f.v ? 'is-empty' : 'is-own'}`; touch(); gabCount();
+        });
+        $('[data-tx-found]').addEventListener('keydown', e => {
+            if (e.target.matches?.('[data-gab-newlabel]') && e.key === 'Enter') { e.preventDefault(); e.stopPropagation(); return gabAddCase(); }
+            const k = e.target.dataset?.gabField; if (!k || e.key !== 'Enter') return; e.preventDefault(); e.stopPropagation();
+            const g = gabField(), f = g.fields[k]; if (f?.v) { snap(); f.ok = true; touch(); }
+            paintGabarit(); const all = [...dlg.querySelectorAll('[data-gab-field]')], i = all.findIndex(x => x.dataset.gabField === k); (all[i + 1] || all[i])?.focus();
+        });
         $('[data-tx-found]').addEventListener('click', async e => {
             const b = e.target.closest('button'); if (!b) return; const d = b.dataset;
+            // 🧩 le gabarit : onglets, ✓ vérifié, la sorte devinée, le menu ⋯
+            if (d.gabTab) { gabTab = d.gabTab; if (gabTab === 'gab') { fillGabarit(); } paintPeople(); return; }
+            if (d.gabOk) { const g = gabField(); const f = g.fields[d.gabOk]; if (!f?.v) return; snap(); f.ok = true; touch(); paintGabarit(); $(`[data-gab-field="${d.gabOk}"]`)?.focus(); return; }
+            if (d.gabKind) { const sel = $('[data-tx="kind"]'); if (sel && [...sel.options].some(o => o.value === d.gabKind)) { sel.value = d.gabKind; sel.dispatchEvent(new Event('change', {bubbles: true})); } return; }
+            if ('gabMenu' in d) return gabMenu(b);
+            if ('gabAdd' in d) { const r = $('[data-gab-addrow]'); if (r) { r.hidden = !r.hidden; if (!r.hidden) r.querySelector('input')?.focus(); } return; }
+            if ('gabAddok' in d) return gabAddCase();
+            if (d.gabDel) { const g = gabField(), k = d.gabDel, before = {extra: (g.extra || []).slice(), f: g.fields[k] ? {...g.fields[k]} : null};
+                snap(); g.extra = (g.extra || []).filter(x => x.key !== k); delete g.fields[k]; touch(); paintGabarit();
+                A().undoToast?.(i18n('Case retirée'), {undo: () => { const h = gabField(); h.extra = before.extra; if (before.f) h.fields[k] = before.f; touch(); paintGabarit(); }}); return; }
             if (d.txLookword) return ext.readingAid?.open({q: d.txLookword, lang: aideLang($('[data-tx-lang]').value)});
             if (d.txGoto && d.txGoto[0] === 'p') { const [i, s, en] = d.txGoto.slice(1).split(':').map(Number); if (i !== pageIx) return void goPage(i, {goto: {s, e: en}}); return gotoRange(s, en); } // 📑 un texte par page : l'acte de l'autre page
             if (d.txGoto) { const [s, en] = d.txGoto.split(':').map(Number); return gotoRange(s, en); }
@@ -990,8 +1724,8 @@
         /* ─── lecture automatique ─── */
         /** l'image pour la lecture (gris) ou l'export (couleurs) : améliorée (« Mieux voir », pleine taille) si c'est choisi dans « Plus ▾ ».
          *  Sans redressement ni miroir : les zones posées par la lecture restent en pixels de l'image. */
-        async function filteredCanvas({gray = true} = {}) {
-            const v = t.data.view, enhanced = useEnh();
+        async function filteredCanvas({gray = true, enhanced = useEnh()} = {}) {
+            const v = t.data.view;
             if (!imgW || !imgH) throw new Error(i18n('Image de l’acte illisible.'));
             let i = await new Promise((ok, ko) => { const im = new Image(); im.onload = () => ok(im); im.onerror = () => ko(new Error(i18n('Image de l’acte illisible.'))); im.src = origSrc(); });
             if (enhanced && TV.needsPixels(v) && getEnh().ok) { srcEl = srcEl || i; if (!await ensureSource()) throw new Error(i18n('« Mieux voir » : cette image n’a pas pu être préparée.')); i = await createImageBitmap(await enh.full(v)); }
@@ -1002,17 +1736,18 @@
         const viewChanged = () => Object.entries(TV.DEFAULT_VIEW).some(([k, d]) => k !== 'rot' && k !== 'tilt' && k !== 'mirror' && String(t.data.view[k]) !== String(d));
         async function runOcr() {
             if (!t.filename) return toast(i18n('Choisis d’abord l’image de l’acte.'), 'error');
-            const lang = $('[data-tx-lang]').value; status(i18n('Chargement du lecteur…'));
+            const lang = $('[data-tx-lang]').value, pid = curPid(); status(i18n('Chargement du lecteur…')); // 📑 la page lue : son texte va dans son bloc
             try {
                 const T = await A().loadOcrEngine(); status(i18n('Lecture de l’image…'));
                 const r = await T.recognize(await filteredCanvas(), lang);
-                const dd = r?.data || {}, lines = (dd.lines?.length ? dd.lines : (dd.blocks || []).flatMap(bl => (bl.paragraphs || []).flatMap(pg => pg.lines || []))).filter(l => (l.text || '').trim() && l.bbox);
-                if (!lines.length) { const plain = String(dd.text || '').trim(); if (!plain) { status(''); return toast(i18n('Aucun texte lu sur cette image (essaie le contraste, ou « Lire (manuscrit) »).'), 'error'); }
-                    appendRead(plain); before = area.value; t.body = area.value; touch(); paintMirror(); status(i18n('Texte lu (à relire)')); return; }
+                const dd = r?.data || {}, lines = (dd.lines?.length ? dd.lines : (dd.blocks || []).flatMap(bl => (bl.paragraphs || []).flatMap(pg => pg.lines || []))).filter(l => (l.text || '').trim() && l.bbox && !skipped({x: l.bbox.x0, y: l.bbox.y0, w: l.bbox.x1 - l.bbox.x0, h: l.bbox.y1 - l.bbox.y0}));
+                if (!lines.length) { const plain = String(dd.text || '').trim(); if (plain) keepReading(plain, 'ocr', lang, {img: readImg(), part: 'page'}); if (!plain) { status(''); return toast(i18n('Aucun texte lu sur cette image (essaie le contraste, ou « Lire (manuscrit) »).'), 'error'); }
+                    appendRead(plain, {pid, ask: true}); before = area.value; t.body = area.value; touch(); paintMirror(); status(i18n('Texte lu (à relire)')); return; }
+                keepReading(lines.map(l => l.text.replace(/\s+$/, '')).join('\n'), 'ocr', lang, {img: readImg(), part: 'page'}); // ⚖️
                 let text = area.value; if (text.trim()) text += '\n\n'; const start = text.length;
                 const made = [];
                 lines.forEach(l => { const s = text.length, line = l.text.replace(/\s+$/, ''); text += line + '\n'; const b = l.bbox; made.push({id: zid(), x: b.x0, y: b.y0, w: b.x1 - b.x0, h: b.y1 - b.y0, s, e: s + line.length, note: '', c: '', src: 'ocr'}); });
-                putRead(text, made);
+                putRead(text, made, {pid});
                 status(i18n(lines.length > 1 ? '{n} lignes lues (à relire)' : '{n} ligne lue (à relire)', {n: lines.length})); toast(i18n('Texte lu et zones posées ligne par ligne : relis et corrige.')); void start;
             } catch (e) { status(''); toast(e.message || 'Lecture impossible.', 'error'); }
         }
@@ -1041,12 +1776,15 @@
             if (!cropChoice && ask) { cropChoice = await ext.txActe.askCrop(await loadSrcImg(), b) || ''; if (!cropChoice) return false; }
             return cropChoice === 'crop' ? {x: b.x, y: b.y, w: b.w, h: b.h} : null;
         }
-        /** l'image de la zone (ou de toute la page), en PNG base64 — pour la lecture approfondie */
-        async function areaB64(box, {max = 0} = {}) {
-            const full = await filteredCanvas({gray: false}); let c = full;
+        /** l'image de la zone (ou de toute la page), en PNG base64 — pour la lecture approfondie. mode (🖼 choisi dans sa fenêtre) :
+         *  'orig' l'image d'origine, 'mine' avec « Mieux voir », 'auto' l'origine améliorée doucement (heritage-transcribe-acte.js autoEnhance) ;
+         *  sans mode : comme « Lire et exporter l'image améliorée ». Une copie en mémoire : le fichier de l'acte n'est jamais touché. */
+        async function areaB64(box, {max = 0, mode = ''} = {}) {
+            const full = await filteredCanvas(mode ? {gray: false, enhanced: mode === 'mine'} : {gray: false}); let c = full;
             if (box) { c = document.createElement('canvas'); c.width = Math.max(1, Math.min(box.w, imgW - box.x)); c.height = Math.max(1, Math.min(box.h, imgH - box.y)); const g = c.getContext('2d');
                 if (box.mask) { g.fillStyle = '#fff'; g.fillRect(0, 0, c.width, c.height); box.mask.forEach(z => g.drawImage(full, z.x, z.y, z.w, z.h, z.x - box.x, z.y - box.y, z.w, z.h)); } else g.drawImage(full, box.x, box.y, c.width, c.height, 0, 0, c.width, c.height); }
             if (max && Math.max(c.width, c.height) > max) { const k = max / Math.max(c.width, c.height), r = document.createElement('canvas'); r.width = Math.round(c.width * k); r.height = Math.round(c.height * k); r.getContext('2d').drawImage(c, 0, 0, r.width, r.height); c = r; }
+            if (mode === 'auto' && ext.txActe?.autoEnhance) c = ext.txActe.autoEnhance(c, {target: 2000, max});
             const b = await new Promise(r2 => c.toBlob(r2, 'image/png'));
             return new Promise(r2 => { const fr = new FileReader(); fr.onload = () => r2(String(fr.result).split(',')[1] || ''); fr.readAsDataURL(b); });
         }
@@ -1057,12 +1795,13 @@
             if (A().mediaLimits?.tooBig(imgW, imgH)) return bail(); // 📎 trop de points pour être lue sans saturer la mémoire (le message le dit)
             let st; try { st = await api('htr_setup_status'); } catch (e) { return bail(toast(e.message, 'error')); }
             const installed = (st.models || []).filter(m => m.present);
-            if (!st.ready || !installed.length) return bail(), toast(i18n('La lecture d’écriture manuscrite n’est pas encore installée : Réglages → Reconnaissance d’écriture (HTR) (une seule fois, l’assistant explique tout).'), 'error');
-            let pick = model; if (!pick) { try { pick = localStorage.getItem(HTR_MODEL_KEY) || ''; } catch (_) {} }
-            if (!installed.some(m => m.file === pick)) pick = (installed.find(m => m.recommended) || installed[0]).file;
+            if (!st.ready || !installed.length) return bail(), notInstalled();
+            const own = model ? '' : (ext.txModelFor?.(t) || ''); // 🎓 le modèle entraîné choisi pour ce registre (heritage-atelier-entrainer.js)
+            let pick = model || own; if (!pick) { try { pick = localStorage.getItem(HTR_MODEL_KEY) || ''; } catch (_) {} }
+            if (!own && !installed.some(m => m.file === pick)) pick = (installed.find(m => m.recommended) || installed[0]).file;
             let box = zone === undefined ? htrArea() : zone;
             if (zone === undefined && !box) { box = await pageArea(); if (box === false) return bail(); } // A : capture d'écran → recadrer sur le texte ?
-            htrBusy(true, box && !box.mask && zone !== undefined ? i18n('Lecture de la zone…') : i18n('Lecture de l’acte…')); status('');
+            htrBusy(true, box && !box.mask && zone !== undefined ? i18n('Lecture de la zone…') : i18n('Lecture de l’acte…')); status(''); const pid = curPid(); // 📑 la page lue
             try {
                 const body = {media_id: curPid(), model_file: pick, language: $('[data-tx-lang]').value};
                 if (box || (useEnh() && viewChanged())) { // la zone découpée, et/ou l'image améliorée (« Mieux voir »)
@@ -1088,14 +1827,22 @@
                     if (then) { htrBusy(false); return then(true); }
                     try { localStorage.setItem(HTR_MODEL_KEY, j.model_file || pick); } catch (_) {}
                     if (!(j.lines || []).length) { setTimeout(() => readNext(true), 60); } if (!(j.lines || []).length) return toast(i18n('Aucune ligne d’écriture trouvée : essaie « 🎚️ Mieux voir » (contraste), ou une zone plus serrée.'), 'error');
-                    htrReview(j.lines, box, j.model_file || pick, installed);
+                    keepReading((j.lines || []).map(l => l.text || '').join('\n'), 'htr', j.model_file || pick, {img: readImg(), part: box ? 'zone' : 'page'}); // ⚖️ la lecture gardée, même si elle n'est pas mise dans le texte
+                    htrReview(j.lines, box, j.model_file || pick, installed, pid);
                 };
                 htrJob.timer = setTimeout(poll, 700);
             } catch (e) { htrJob = null; htrBusy(false); bail(); toast(e.message || 'Lecture impossible.', 'error'); }
         }
+        /** 22 (audit) : la lecture à la main pas encore installée : le message a un bouton qui ouvre l'assistant (Réglages → Reconnaissance
+         *  d'écriture), l'acte enregistré d'abord */
+        function notInstalled() {
+            return toast(i18n('La lecture d’écriture manuscrite n’est pas encore installée : Réglages → Reconnaissance d’écriture (HTR) (une seule fois, l’assistant explique tout).'), 'error',
+                {action: {label: `📦 ${i18n('Installer maintenant')}`, run: async () => { if (dirty) { await save(); if (dirty) return; } teardown(); const st = A().state; if (!st) return; st.maintenanceTab = 'htr'; A().persistUiState?.(); A().setModule?.('maintenance'); }}});
+        }
         /** Les lignes lues, à côté de leur morceau d'image ; les mots peu sûrs surlignés ; on corrige, puis on met dans le texte */
-        async function htrReview(lines, box, modelFile, installed) {
+        async function htrReview(lines, box, modelFile, installed, pid = curPid()) {
             const ox = box?.x || 0, oy = box?.y || 0;
+            lines = lines.filter(l => !l.bbox || !skipped({x: l.bbox[0] + ox, y: l.bbox[1] + oy, w: l.bbox[2] - l.bbox[0], h: l.bbox[3] - l.bbox[1]})); // ⛔ zones à ne pas lire
             let im = null; try { im = await new Promise((ok, ko) => { const i = new Image(); i.onload = () => ok(i); i.onerror = ko; i.src = origSrc(); }); } catch (_) {}
             const crop = b => { if (!im || !b) return ''; const [x0, y0, x1, y1] = b, w = Math.max(1, x1 - x0), h = Math.max(1, y1 - y0), k = Math.min(1, 52 / h, 900 / w); const c = document.createElement('canvas'); c.width = Math.max(1, Math.round(w * k)); c.height = Math.max(1, Math.round(h * k)); c.getContext('2d').drawImage(im, x0 + ox, y0 + oy, w, h, 0, 0, c.width, c.height); try { return c.toDataURL('image/jpeg', .85); } catch (_) { return ''; } };
             const pct = c => Math.round(c * 100);
@@ -1201,10 +1948,12 @@
                     if (!kept.length) { toast(i18n('Aucune ligne gardée.')); return; }
                     versionBefore('Avant la lecture mise dans le texte'); let text = area.value; if (text.trim()) text += '\n\n';
                     const made = [];
-                    kept.forEach(({l, text: line}) => { const s = text.length; text += line + '\n'; if (l.bbox) { const [x0, y0, x1, y1] = l.bbox; made.push({id: zid(), x: x0 + ox, y: y0 + oy, w: x1 - x0, h: y1 - y0, s, e: s + line.length, note: l.conf != null && l.conf < UNSURE ? i18n('Lu automatiquement (sûr à {x} %)', {x: pct(l.conf)}) : '', c: '', src: 'htr'}); } });
-                    putRead(text, made);
+                    kept.forEach(({l, text: line}) => { const s = text.length; text += line + '\n'; if (l.bbox) { const [x0, y0, x1, y1] = l.bbox; const z = {id: zid(), x: x0 + ox, y: y0 + oy, w: x1 - x0, h: y1 - y0, s, e: s + line.length, note: l.conf != null && l.conf < UNSURE ? i18n('Lu automatiquement (sûr à {x} %)', {x: pct(l.conf)}) : '', c: '', src: 'htr'};
+                        const wb = line === lineText(l) ? ext.txCtx?.wordsOfLine(wordsOf(l), ox) : null; if (wb) { z.wb = wb; z.wl = line.length; } // 🔦 la place de chaque mot (le cadre des mots choisis est alors exact)
+                        made.push(z); } });
+                    putRead(text, made, {pid}); // 📑 dans le bloc de la page lue (vide : rempli ; déjà écrit : ajouté, et le choix proposé)
                     status(i18n('{x} (à relire)', {x: A().plural ? A().plural(kept.length, 'ligne lue', 'lignes lues') : kept.length + ' lignes lues'}));
-                    runDetect().then(() => toast(i18n('Texte mis dans la transcription, zones posées ligne par ligne ; noms, dates et lieux repérés à droite.')));
+                    runDetect({quiet: true}).then(() => toast(i18n('Texte mis dans la transcription, zones posées ligne par ligne ; noms, dates et lieux repérés à droite.')));
                     if (fixOn()) runFix({quiet: true});
                 }});
             dlgR?.addEventListener?.('close', () => setTimeout(() => readNext(true), 60)); // 📑 « Sur toutes les pages » : la page suivante
@@ -1214,24 +1963,36 @@
         async function openDeep({htrText = '', box, all = false} = {}) {
             if (!ext.txActe) return toast(i18n('La lecture approfondie n’est pas chargée.'), 'error');
             if (!t.media_id || !imgW) return toast(i18n('Choisis d’abord l’image de l’acte.'), 'error');
+            if (all && !pagesToRead().length) return toast(i18n('Toutes les pages ont déjà du texte.'));
             if (all) { if (deepRun) return toast(i18n('Lecture approfondie : page {i} sur {n}…', {i: deepRun.done + 1, n: deepRun.n})); // 📑 toutes les pages, l'une après l'autre
-                return ext.txActe.openDeep({lang: $('[data-tx-lang]').value, all: {n: PAGES.length, run: model => startDeepAll(model)}, onCompare: out => LG()?.compareExtras(out, {})}); }
-            let b = box; if (b === undefined) { b = htrArea(); if (!b) { b = await pageArea(); if (b === false) return; } }
-            const cur = htrText || area.value.trim();
-            ext.txActe.openDeep({lang: $('[data-tx-lang]').value, htrText: cur, getImage: () => areaB64(b, {max: 2200}),
+                return ext.txActe.openDeep({lang: $('[data-tx-lang]').value, all: {n: pagesToRead().length, run: model => startDeepAll(model)}, onCompare: out => LG()?.compareExtras(out, {})}); }
+            let b = box; const isZone = box !== undefined ? !!box : !!htrArea(); if (b === undefined) { b = htrArea(); if (!b) { b = await pageArea(); if (b === false) return; } }
+            // 📑 un seul texte pour plusieurs pages : on compare avec le morceau de la page affichée, pas avec tout le document
+            const many = pageForm === 'one' && PAGES.length > 1, sg = many ? PG.segments(area.value)[segIx()] : null;
+            const cur = htrText || (sg ? area.value.slice(sg.s, sg.e) : area.value).trim();
+            const pageLabel = PAGES.length > 1 ? i18n('{page} ({i} sur {n})', {page: pageName(PAGES[pageIx], pageIx), i: pageIx + 1, n: PAGES.length}) : '', pid = curPid(); // 📑 la page lue
+            ext.txActe.openDeep({lang: $('[data-tx-lang]').value, htrText: cur, htrFrom: htrText ? 'htr' : 'mine', pageLabel, getImage: mode => areaB64(b, {max: 2200, mode: mode || ext.txActe.imageMode?.() || 'auto'}), expectedLines: () => knownLines(b), onReading: (txt, model, info) => { lastHints = Number(info?.hints) || 0; keepReading(txt, 'deep', model, {img: info?.img || '', hints: info?.hints || 0, part: isZone ? 'zone' : 'page'}); }, context: iaContext, ctxCount: iaCount, onCtx: () => openIa(), onCompareAll: () => openCompare(), // ⚖️ chaque lecture de chaque modèle gardée, et la comparaison
                 onCompare: out => LG()?.compareExtras(out, {fix: ext.htrFix, lang: $('[data-tx-lang]').value, place: $('[data-tx="place"]').value}), // 🪄 et la case ▤ dans la fenêtre des deux lectures
-                onKeep: (text, from) => { if (text.trim() === area.value.trim()) return; const put = appendRead(text.trim() + '\n'), start = put.s;
-                    before = area.value; t.body = area.value; touch(); paintMirror(); status(i18n('Texte lu (à relire)')); runDetect();
-                    if (LG()?.linkOn()) linkLines({s: start, e: put.e, box: b || null, src: from === 'htr' ? 'htr' : 'deep'}); // ▤ une zone par ligne, comme la lecture rapide
+                existing: !htrText && !!cur, // le texte déjà là (de la page) : « Remplacer » ou « Ajouter à la suite »
+                onKeep: (text, from, mode) => { if (text.trim() === area.value.trim() || (!htrText && from === 'htr' && text.trim() === cur)) return; /* garder le texte déjà là : rien à ajouter */
+                    if (mode === 'replace') versionBefore('Avant « Remplacer par la lecture approfondie »'); // l'ancien texte reste dans 🕘 Versions
+                    const put = mode === 'replace' ? replaceRead(text.trim() + '\n', {pid}) : appendRead(text.trim() + '\n', {pid}), start = put.s;
+                    if (from !== 'htr') t.data.hinted = mode === 'replace' ? lastHints : Math.max(Number(t.data.hinted) || 0, lastHints); // 🧠 lue avec des indices : ses mots [?] le disent au survol
+                    before = area.value; t.body = area.value; touch(); paintMirror(); status(i18n('Texte lu (à relire)')); runDetect({quiet: true});
+                    if (LG()?.linkOn() && curPid() === pid) linkLines({s: start, e: put.e, box: b || null, src: from === 'htr' ? 'htr' : 'deep'}); // ▤ une zone par ligne, comme la lecture rapide (sur l'image de la page lue)
                     if (fixOn()) runFix({quiet: true}); }}); // 🪄 les corrections proposées aussi sur ce texte
         }
         /* ─── 📑 la lecture approfondie de toutes les pages : une demande à Ollama par page, l'une après l'autre ; le texte de chaque page
          * dans son morceau (un seul texte) ou dans l'acte de sa page (un texte par page, l'Atelier passe d'un acte à l'autre) ;
          * ▤ les lignes reliées à l'image page par page si la case est cochée ; 🪄 les corrections proposées comme pour une page ─── */
+        /** 🔁 les lignes déjà repérées dans cette zone (lecture rapide) : la lecture approfondie est bornée d'après elles (0 : inconnu) */
+        function knownLines(b) { if (htrCache?.file !== t.filename) return 0;
+            return htrCache.lines.filter(l => !b || !Array.isArray(l.bbox) || ((l.bbox[1] + l.bbox[3]) / 2 >= b.y && (l.bbox[1] + l.bbox[3]) / 2 <= b.y + b.h)).length; }
         function startDeepAll(model) {
             if (deepRun || PAGES.length < 2) return;
-            deepRun = {model, lang: $('[data-tx-lang]').value, left: PAGES.map((_, i) => i), n: PAGES.length, done: 0, stop: false, job: 0, busy: false};
-            deepAllStep();
+            const left = pagesToRead(); if (!left.length) return toast(i18n('Toutes les pages ont déjà du texte.'));
+            deepRun = {model, lang: $('[data-tx-lang]').value, left, n: left.length, done: 0, stop: false, job: 0, busy: false};
+            iaContext().then(c => { if (deepRun) deepRun.ctx = c; }, () => {}).finally(() => deepAllStep());
         }
         function paintDeepAll() {
             let bar = $('[data-tx-deepall]'); const R = deepRun;
@@ -1247,30 +2008,36 @@
             const i = R.left[0]; if (i == null) return deepAllEnd(false);
             if (i !== pageIx) { await goPage(i); if (pageForm === 'per') { if (dlg.isConnected) deepAllEnd(true); return; } } // un texte par page : l'Atelier de l'autre acte continue
             R.busy = true; paintDeepAll();
-            let txt = '', err = '', b = null;
+            let txt = '', err = '', b = null, warn = '';
             try {
                 b = await pageArea({ask: false}); if (b === false) b = null;
-                const img = await areaB64(b, {max: 2200});
-                if (!R.stop) { const r = await post('tx_deep_read', {model: R.model, language: R.lang, image_b64: img}); R.job = r.result.id; }
-                while (!R.stop && R.job) { await new Promise(res => setTimeout(res, 900)); if (R.stop) break;
-                    const j = await api('tx_deep_job', {id: R.job}); if (j.state === 'running') continue;
-                    if (j.state === 'done') txt = String(j.text || ''); else if (j.state !== 'cancelled') err = j.error ? i18n(j.error) : i18n('La lecture approfondie n’a pas abouti.');
+                const img = await areaB64(b, {max: 2200, mode: ext.txActe?.imageMode?.() || 'auto'}); // 🖼 l'image choisie dans la fenêtre
+                const lines = knownLines(b); // 🔁 bornée (lignes attendues, temps maximum choisi dans la fenêtre)
+                if (!R.stop) { const r = await post('tx_deep_read', {model: R.model, language: R.lang, image_b64: img, time_limit: ext.txActe?.timeLimit?.() || 0, ...(lines ? {lines} : {}), ...(R.ctx ? {context: R.ctx} : {})}); R.job = r.result.id; } // 🧠 « Aider l'IA »
+                // ■ Arrêter : la lecture en cours s'arrête et rend le texte déjà lu (gardé pour cette page) ; on l'attend quelques secondes
+                for (let waited = 0; R.job;) { await new Promise(res => setTimeout(res, 900));
+                    const j = await api('tx_deep_job', {id: R.job}); if (j.state === 'running') { if (R.stop && ++waited > 12) break; continue; }
+                    if (j.state === 'done' || (j.state === 'cancelled' && String(j.text || '').trim())) { txt = String(j.text || ''); warn = ext.txActe?.warnText?.(j.state === 'cancelled' ? {...j, warn: j.warn || 'stopped'} : j) || ''; }
+                    else if (j.state !== 'cancelled') err = j.error ? i18n(j.error, j.error_vars && typeof j.error_vars === 'object' ? j.error_vars : undefined) : i18n('La lecture approfondie n’a pas abouti.');
                     break; }
             } catch (e) { err = e?.message || String(e); }
             R.busy = false; R.job = 0;
-            if (R.stop || !dlg.isConnected) return deepAllEnd(true);
+            if (!dlg.isConnected) return deepAllEnd(true);
             if (err) { toast(err, 'error'); return deepAllEnd(true); }
-            if (txt.trim()) { const put = appendRead(txt.trim() + '\n'); before = area.value; t.body = area.value; touch(); paintMirror();
+            if (warn) { toast(`${pageName(PAGES[pageIx], pageIx)} · ${warn}`, 'error'); R.warns = [...(R.warns || []), `${pageName(PAGES[pageIx], pageIx)} · ${warn}`]; } // 🔁 ⏱ ■ dit, page par page
+            if (txt.trim()) keepReading(txt, 'deep', R.model, {img: ext.txActe?.imageMode?.() || 'auto', hints: R.ctx?.hints?.length || 0, part: 'page'}); // ⚖️
+            if (txt.trim()) { if (R.ctx?.hints?.length) t.data.hinted = Math.max(Number(t.data.hinted) || 0, R.ctx.hints.length); const put = appendRead(txt.trim() + '\n', {pid: Number(PAGES[i]?.media_id) || curPid()}); before = area.value; t.body = area.value; touch(); paintMirror();
                 if (LG()?.linkOn()) await linkLines({s: put.s, e: put.e, box: b || null, src: 'deep'}); // ▤ une zone par ligne, sur l'image de cette page
                 if (fixOn()) runFix({quiet: true}); } // 🪄
+            if (R.stop) return deepAllEnd(true); // ■ le texte déjà lu de cette page est gardé ci-dessus
             R.left.shift(); R.done++;
             deepAllStep();
         }
         async function deepAllEnd(stopped) {
             const R = deepRun; deepRun = null; paintDeepAll(); if (!R || !dlg.isConnected) return;
-            await runDetect();
+            await runDetect({quiet: true});
             if (pageForm === 'per' && dirty) await save(); // un texte par page : l'acte de la dernière page aussi (les autres l'ont été en changeant de page)
-            status(stopped ? i18n('La lecture a été arrêtée.') : i18n('Toutes les pages sont lues (à relire)'));
+            status(R.warns?.length ? R.warns[R.warns.length - 1] : stopped ? i18n('La lecture a été arrêtée.') : i18n('Toutes les pages sont lues (à relire)'));
             if (!stopped) toast(i18n('Toutes les pages sont lues (à relire)'));
         }
         /* ─── ▤ Relier les lignes du texte à l'image (calculs : app-lignes-alignement.js) : après la lecture approfondie, ou à la demande ─── */
@@ -1350,7 +2117,7 @@
             flushCommit();
             let undoSnap = null;
             ext.txActe.openFound({text: findText(), kind: $('[data-tx="kind"]').value, date: $('[data-tx="date_text"]').value, place: $('[data-tx="place"]').value, source: $('[data-tx="source"]').value,
-                filename: t.filename, title: $('[data-tx="title"]').value, mediaId: t.media_id, transcriptionId: t.id, unsure: lastUnsure, kinds: KINDS, helpers: {detect, findDates, wordsToNumber}, frameText, rich: ext.txTrouve?.selection(area.value),
+                filename: t.filename, title: $('[data-tx="title"]').value, mediaId: t.media_id, transcriptionId: t.id, unsure: lastUnsure, kinds: KINDS, gabarit: GB() && t.data.gabarit?.kind === kindNow() ? t.data.gabarit : null, helpers: {detect, findDates, wordsToNumber}, frameText, rich: ext.txTrouve?.selection(area.value),
                 onKeepOnly: list => { keepPeople(list.map(p => ({...p, person_id: p.person_id || 0}))); touch(); paintPeople(); toast(i18n('Personnes gardées dans la transcription, sans créer de fiche.')); },
                 onApplied: async ({result, people, source}) => {
                     undoSnap = {people: t.data.people.map(p => ({...p})), source: $('[data-tx="source"]').value};
@@ -1361,7 +2128,15 @@
                 onUndone: async () => { if (!undoSnap) return; t.data.people = undoSnap.people; $('[data-tx="source"]').value = undoSnap.source; t.source = undoSnap.source; touch(); paintPeople(); await save(); }});
         }
         /* ─── image : de la base ou de l'ordinateur ─── */
+        // 📑 document en plusieurs pages : changer l'image ici remplaçait toujours la page 1 et « Les retirer » effaçait les zones de
+        // toutes les pages ; on change une page dans « 📑 Pages du document » (retirer l'ancienne, relier la nouvelle)
+        function pagesLocked() {
+            if (PAGES.length < 2) return false;
+            toast(i18n('Ce document a plusieurs pages : pour changer l’image d’une page, ouvre « 📑 Pages du document », retire l’ancienne page puis relie la nouvelle.'), 'error');
+            return true;
+        }
         async function pickImage() {
+            if (pagesLocked()) return;
             const m = await ext.pickImage({eyebrow: 'TRANSCRIPTION', title: i18n('Image de l’acte'), intro: i18n('Clique sur l’image de l’acte. Une image de l’ordinateur est ajoutée aux Médias.')}); if (!m) return;
             t.media_id = Number(m.id); t.filename = m.filename;
             if (!t.title && m.title && !m.imported) { t.title = m.title; $('[data-tx="title"]').value = t.title; }
@@ -1371,35 +2146,167 @@
         }
         /* ─── enregistrer, exporter ─── */
         let saving = null; // deux ⌘S rapides : le second attend le premier et réutilise l'id créé (jamais deux transcriptions)
-        async function save() {
-            if (saving) { const p = saving; await p.catch(() => {}); return; }
-            saving = saveNow().finally(() => { saving = null; });
+        /** 🔴 1 (audit) : un enregistrement demandé pendant un autre attend la fin du premier, puis renvoie ce qui a changé entre-temps */
+        async function save({auto = false, force = false} = {}) {
+            if (saving) { await saving.catch(() => {}); if (!dirty) return; }
+            if (auto && conflictHold) return;
+            clearTimeout(autoT); autoT = 0;
+            saving = saveNow({auto, force}).finally(() => { saving = null; });
             return saving;
         }
-        async function saveNow() {
-            ['title', 'kind', 'date_text', 'place', 'source'].forEach(k => { t[k] = $(`[data-tx="${k}"]`).value; }); t.body = area.value; t.data.status = $('[data-tx-state]').value;
+        let autoErr = '';
+        async function saveNow({auto = false, force = false} = {}) {
+            ['title', 'kind', 'date_text', 'place', 'source'].forEach(k => { t[k] = $(`[data-tx="${k}"]`).value; }); t.body = area.value; if (!STATE[t.data.status]) t.data.status = 'doing';
             if (!t.title.trim()) { const subj = t.data.people.find(p => p.role === 'sujet' || p.role === 'défunt'); t.title = `${t.kind === 'apreciser' ? i18n('Acte') : (KINDS.find(k => k[0] === t.kind)?.[1] || i18n('Acte'))}${subj ? ` — ${subj.name}` : ''}${t.date_text ? ` — ${t.date_text}` : ''}`; $('[data-tx="title"]').value = t.title; }
-            status('Enregistrement…');
-            try { const r = await post('save_act_transcription', {id: t.id, title: t.title, kind: t.kind, media_id: t.media_id, date_text: t.date_text, place: t.place, source: t.source, body: t.body, data: t.data}); t.id = r.result.id; dirty = false; status(`✓ ${i18n('Enregistré')}`);
-                // 📄 un seul texte par document : le texte d'avant de cette image est gardé sous le tien (rien n'est écrasé)
-                if (typeof r.result.body === 'string' && r.result.body !== t.body) { snap(); area.value = r.result.body; before = area.value; t.body = area.value; paintMirror(); toast(i18n('Le texte déjà écrit pour ce document est gardé sous le tien.')); }
-                docNote(); ctx.onSaved?.(t.id); }
-            catch (e) { status(''); toast(e.message, 'error'); }
+            saveState('saving'); // 12 : l'état de l'enregistrement a sa place en haut ; les messages utiles (« La lecture a été arrêtée »…) restent en bas
+            if (pageForm === 'one' && PAGES.length > 1) { if (!t.data.pageViews || typeof t.data.pageViews !== 'object' || Array.isArray(t.data.pageViews)) t.data.pageViews = {}; t.data.pageViews[curPid()] = {...t.data.view}; }
+            const sent = t.body, rev0 = rev, key0 = draftKey(); // ce qui part : ce qui change pendant l'envoi reste « modifié »
+            // 🔴 10 : l'heure de la version lue ; le serveur refuse si l'acte a été enregistré ailleurs depuis (conflit)
+            // 🔢 et le numéro de révision lu (data.rev) : aussi deux enregistrements dans la même seconde, depuis deux onglets
+            const guard = t.id && !force && (t.updated_at || Number.isInteger(t.data.rev)) ? {...(t.updated_at ? {base_updated_at: t.updated_at} : {}), ...(Number.isInteger(t.data.rev) ? {base_rev: t.data.rev} : {})} : {};
+            try { const r = await post('save_act_transcription', {id: t.id, title: t.title, kind: t.kind, media_id: t.media_id, date_text: t.date_text, place: t.place, source: t.source, body: sent, data: t.data, ...guard, ...(auto ? {auto: 1} : {})}), res = r.result || {};
+                t.id = res.id; if (res.updated_at) t.updated_at = res.updated_at; if (Number.isInteger(res.rev)) t.data.rev = res.rev; conflictHold = false; autoErr = ''; flushReads();
+                if (key0 !== draftKey()) dropDraft(key0); // un acte nouveau : son brouillon prend son numéro
+                // 📄 un seul texte par document : le texte d'avant de cette image est gardé sous le tien (rien n'est écrasé) ;
+                // ce qui a été tapé pendant l'enregistrement reste (le texte d'avant va à la fin)
+                if (typeof res.body === 'string' && res.body !== sent) {
+                    const tail = res.body.startsWith(sent.trimEnd()) ? res.body.slice(sent.trimEnd().length) : null;
+                    if (area.value === sent) { snap(); area.value = res.body; before = area.value; t.body = area.value; paintMirror(); toast(i18n('Le texte déjà écrit pour ce document est gardé sous le tien.')); }
+                    else if (tail) { snap(); area.value = area.value.trimEnd() + tail; before = area.value; t.body = area.value; rev++; paintMirror(); toast(i18n('Le texte déjà écrit pour ce document est gardé sous le tien.')); }
+                }
+                if (rev === rev0) { setDirty(false); saveState('saved'); dropDraft(); } else { saveState('dirty'); autoSoon(); }
+                // 31 : au-delà des limites, ce qui n'a pas été gardé est dit
+                const dz = Number(res.dropped?.zones) || 0, dp = Number(res.dropped?.people) || 0;
+                if (dz) toast(i18n(dz > 1 ? '{n} zones n’ont pas été gardées ({max} au plus par acte).' : '{n} zone n’a pas été gardée ({max} au plus par acte).', {n: dz, max: (res.limits?.zones || 10000).toLocaleString()}), 'error');
+                if (dp) toast(i18n(dp > 1 ? '{n} personnes n’ont pas été gardées ({max} au plus par acte).' : '{n} personne n’a pas été gardée ({max} au plus par acte).', {n: dp, max: (res.limits?.people || 1000).toLocaleString()}), 'error');
+                docNote(); VS?.soon(); ctx.onSaved?.(t.id);
+                // 🧩 un acte enregistré peut répondre à ce qui manque à une enquête (heritage-connexions-besoins.js : un message seulement si c'est presque sûr, une fois)
+                ext.cxNeeds?.announce?.({kind: 'act', ref_id: t.id, what: t.kind, person_ids: (t.data.people || []).map(p => Number(p.person_id) || 0).filter(Boolean), names: (t.data.people || []).map(p => p.name).filter(Boolean), date: t.date_text, place: t.place, title: t.title, text: String(t.body || '').slice(0, 4000)}); }
+            catch (e) {
+                writeDraft(); // rien n'est perdu : le brouillon reste sur cet ordinateur
+                if (e.conflict) { conflictHold = true; saveState('conflict'); setTimeout(askConflict, 0); return; }
+                if (auto) { retryAt = Date.now() + 15000; saveState('retry'); if (autoErr !== e.message) { autoErr = e.message; toast(e.message, 'error'); } clearTimeout(autoT); autoT = setTimeout(autoSave, 15000); return; }
+                saveState(dirty ? 'dirty' : ''); toast(e.message, 'error');
+            }
+        }
+        /** 🔴 10 : l'acte a été enregistré ailleurs (un autre onglet, l'app de bureau) : recharger (mon texte gardé dans 🕘 Versions)
+         *  ou garder le mien (l'autre reste dans 🕘 Versions) ; fermé sans choisir : rien n'est enregistré tout seul jusqu'au prochain 💾 */
+        async function askConflict() {
+            if (!dlg.isConnected || !A().conflictBox) return;
+            const ans = await A().conflictBox({what: i18n('Cet acte')});
+            if (!dlg.isConnected) return;
+            if (ans === 'overwrite') { await save({force: true}); if (!dirty) toast(i18n('Ta version est enregistrée ; l’autre reste dans 🕘 Versions.')); return; }
+            if (ans !== 'reload') { saveState('held'); return; }
+            try { await post('save_act_transcription_version', {act_id: t.id, label: 'Ma version (avant de recharger)', body: area.value, data: {zones: t.data.zones, people: t.data.people, reviewed: t.data.reviewed || []}, auto: 0}); }
+            catch (e) { return toast(e.message, 'error'); }
+            let r; try { r = await api('act_transcription', {id: t.id}); } catch (e) { return toast(e.message, 'error'); }
+            const d = r.data && typeof r.data === 'object' ? r.data : {}, zs = Array.isArray(d.zones) ? d.zones : [], ps = Array.isArray(d.people) ? d.people : [];
+            const b = normBody(r.body, [zs, ps]);
+            ['title', 'kind', 'date_text', 'place', 'source'].forEach(k => { const el = $(`[data-tx="${k}"]`); if (el) el.value = r[k] ?? ''; t[k] = r[k] ?? ''; });
+            t.updated_at = r.updated_at; t.data = {...t.data, ...d, view: t.data.view};
+            if (!['todo', 'doing', 'checked', 'done'].includes(t.data.status)) t.data.status = 'doing'; paintProg();
+            putText({body: b, zones: zs, people: ps, reviewed: Array.isArray(d.reviewed) ? d.reviewed : []});
+            clearTimeout(autoT); autoT = 0; setDirty(false); conflictHold = false; dropDraft(); saveState('saved'); VS?.soon();
+            toast(i18n('Le texte de l’autre fenêtre est chargé ; le tien est gardé dans 🕘 Versions (« Ma version (avant de recharger) »).'));
         }
         /** L1 : la fenêtre « Imprimer » commune — image et texte côte à côte, l'un puis l'autre, ou le texte seul ; image améliorée ; personnes et rôles */
+        // 📑 un seul texte pour plusieurs pages : les morceaux du texte avec le nom et l'image de leur page (export et impression)
+        const multiPages = () => pageForm === 'one' && PAGES.length > 1;
+        function pageParts() {
+            const segs = PG.segments(area.value);
+            return segs.map((sg, k) => { const id = Number((t.data.pages || [])[k] || 0), i = PAGES.findIndex(p => Number(p.media_id) === id);
+                return {i, name: i >= 0 ? pageName(PAGES[i], i) : i18n('Page {n}', {n: k + 1}), text: area.value.slice(sg.s, sg.e).replace(/^\n+|\n+$/g, ''), file: i >= 0 ? PAGES[i].filename : ''}; });
+        }
+        // 3d : « l. 5 » se cite dans une preuve — les numéros comme dans l'Atelier (par page : « page 2, l. 3 »)
+        const numbered = text => { const L = String(text).split('\n'), w = String(L.length).length; return L.map((l, i) => `${String(i + 1).padStart(w, ' ')}  ${l}`).join('\n'); };
+        const peopleText = () => (t.data.people || []).filter(p => p.name).map(p => `- ${p.name}${p.role ? ` — ${i18n(p.role)}` : ''}`).join('\n');
+        const namedText = (o = {}) => { const body = multiPages() ? pageParts().map(q => `— ${q.name} —\n${o.ln ? numbered(q.text) : q.text}`).join('\n\n') : (o.ln ? numbered(area.value) : area.value);
+            const pp = o.people ? peopleText() : ''; return pp ? `${body}\n\n${i18n('Personnes')}\n${pp}\n` : body; };
+        /** les cases remplies du gabarit, dans l'ordre : [[nom, valeur]] (impression, PDF) */
+        const gabRows = () => { const g = GB(), gb = t.data.gabarit; if (!g || !gb || gb.kind !== kindNow()) return []; return g.fieldsOf(kindNow(), gb).filter(([k]) => gb.fields?.[k]?.v).map(([k, l]) => [l, gb.fields[k].v + (gb.fields[k].ok ? ' ✓' : '')]); };
+        /**
+         * 3e · TEI (P5) : le format XML des chercheurs et des archives. En-tête (titre, sorte, date, lieu, source), une « surface » par page
+         * avec son image et ses zones (coordonnées en pixels de l'image), le texte avec un <pb/> par page et un <lb n="…"/> par ligne (relié à
+         * sa zone par @facs quand une zone couvre la ligne), les personnes et leur rôle (<listPerson>), les cases du 🧩 gabarit (<interpGrp>).
+         */
+        /** ALTO / PAGE : chaque page, ses lignes (avec la zone qui les couvre) et ses zones typées */
+        function xmlPages() {
+            const pages = multiPages() ? pageParts() : [{i: -1, name: '', text: area.value, file: t.filename}], pidOf = q => (q.i >= 0 ? Number(PAGES[q.i].media_id) : Number(t.media_id));
+            let at = 0; return pages.map(q => {
+                const start = multiPages() ? area.value.indexOf(q.text, at) : 0; if (start >= 0) at = start + q.text.length;
+                const zs = t.data.zones.filter(z => (q.i < 0 ? true : Number(z.p || t.media_id) === pidOf(q)) && z.w > 0 && z.h > 0);
+                let pos = Math.max(0, start); const lines = q.text.split('\n').map((l, k) => { const s0 = pos; pos += l.length + 1; const z = zs.find(zz => zz.e > zz.s && zz.s < s0 + l.length && s0 < zz.e); return {id: k + 1, text: l, box: z ? {x: z.x, y: z.y, w: z.w, h: z.h} : null}; });
+                const cur = q.i < 0 || pidOf(q) === curPid();
+                return {n: q.name || '1', file: q.file || '', w: cur ? imgW : 0, h: cur ? imgH : 0, lines, zones: zs.filter(z => z.kind).map(z => ({id: z.id, kind: z.kind, x: z.x, y: z.y, w: z.w, h: z.h}))};
+            });
+        }
+        function teiXml() {
+            const zid = z => 'z_' + String(z.id).replace(/[^A-Za-z0-9_.-]/g, '_'); // un identifiant XML commence par une lettre
+            const x = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;'}[c])).replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, '');
+            const title = $('[data-tx="title"]').value || 'Transcription', kind = KINDS.find(k => k[0] === kindNow())?.[1] || '';
+            const pages = multiPages() ? pageParts() : [{i: -1, name: '', text: area.value, file: t.filename}];
+            const pageId = q => `p${q.i >= 0 ? q.i + 1 : 1}`, pidOf = q => (q.i >= 0 ? Number(PAGES[q.i].media_id) : Number(t.media_id));
+            const zonesOf = q => t.data.zones.filter(z => (q.i < 0 ? true : Number(z.p || t.media_id) === pidOf(q)) && z.w > 0 && z.h > 0);
+            const surf = pages.map(q => `      <surface xml:id="${pageId(q)}"${q.name ? ` n="${x(q.name)}"` : ''}>\n        <graphic url="${x(q.file ? 'media/' + q.file : '')}"/>\n${zonesOf(q).map(z => `        <zone xml:id="${zid(z)}" ulx="${Math.round(z.x)}" uly="${Math.round(z.y)}" lrx="${Math.round(z.x + z.w)}" lry="${Math.round(z.y + z.h)}"/>`).join('\n')}${zonesOf(q).length ? '\n' : ''}      </surface>`).join('\n');
+            // le texte : chaque ligne et la zone qui la couvre (positions dans le texte de l'Atelier)
+            let at = 0; const body = pages.map(q => {
+                const start = multiPages() ? area.value.indexOf(q.text, at) : 0; if (start >= 0) at = start + q.text.length;
+                let pos = Math.max(0, start); const ls = q.text.split('\n').map((l, k) => { const s0 = pos; pos += l.length + 1; const z = zonesOf(q).find(zz => zz.e > zz.s && zz.s < s0 + l.length && s0 < zz.e);
+                    return `        <lb n="${k + 1}"${z ? ` facs="#${zid(z)}"` : ''}/>${x(l)}`; });
+                return `        <pb n="${x(q.name || '1')}" facs="#${pageId(q)}"/>\n${ls.join('\n')}`; }).join('\n');
+            const ppl = (t.data.people || []).filter(p => p.name).map((p, k) => `          <person xml:id="pers${k + 1}"${p.role ? ` role="${x(p.role)}"` : ''}${p.person_id ? ` corresp="lcnda:person/${Number(p.person_id)}"` : ''}><persName>${x(p.name)}</persName></person>`).join('\n');
+            const gb = gabRows();
+            return `<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt><title>${x(title)}</title></titleStmt>
+      <publicationStmt><p>${x(i18n('Transcription faite avec LCNDA (Le Carnet numérique des ancêtres).'))}</p></publicationStmt>
+      <sourceDesc><msDesc><msIdentifier><idno>${x($('[data-tx="source"]').value)}</idno></msIdentifier>${kind ? `<msContents><p>${x(kind)}</p></msContents>` : ''}<history><origin>${$('[data-tx="date_text"]').value ? `<origDate>${x($('[data-tx="date_text"]').value)}</origDate>` : ''}${$('[data-tx="place"]').value ? `<origPlace>${x($('[data-tx="place"]').value)}</origPlace>` : ''}</origin></history></msDesc></sourceDesc>
+    </fileDesc>${ppl ? `
+    <profileDesc>
+      <particDesc>
+        <listPerson>
+${ppl}
+        </listPerson>
+      </particDesc>
+    </profileDesc>` : ''}
+  </teiHeader>
+  <facsimile>
+${surf}
+  </facsimile>
+  <text>
+    <body>
+      <ab>
+${body}
+      </ab>${gb.length ? `
+      <interpGrp type="gabarit">
+${gb.map(([l, v]) => `        <interp n="${x(l)}">${x(v)}</interp>`).join('\n')}
+      </interpGrp>` : ''}
+    </body>
+  </text>
+</TEI>
+`;
+        }
+        /** le texte à l'impression : tel quel, ou une liste numérotée (les numéros dans la marge, comme dans l'Atelier) */
+        const preOf = (text, ln) => (ln ? `<ol class="ln">${String(text).split('\n').map(l => `<li>${esc(l) || '&#8203;'}</li>`).join('')}</ol>` : `<pre>${esc(text)}</pre>`);
         async function printIt() {
             const UI2 = window.LCNDA_UI; if (!UI2?.openPrintDialog) return toast(i18n('La fenêtre « Imprimer » n’est pas chargée.'), 'error');
             const plainUrl = t.filename ? `${location.origin}${location.pathname.replace(/[^/]*$/, '')}media/${encodeURIComponent(t.filename)}` : '';
             let enhUrl = '';
             const canEnh = !!t.filename && viewChanged();
+            const base = `${location.origin}${location.pathname.replace(/[^/]*$/, '')}media/`;
             const imgFor = async c => { if (!c.enh || !canEnh) return plainUrl; if (!enhUrl) { try { const cv = await filteredCanvas({gray: false}); enhUrl = URL.createObjectURL(await new Promise(r2 => cv.toBlob(r2, 'image/png'))); setTimeout(() => URL.revokeObjectURL(enhUrl), 300000); } catch (_) { return plainUrl; } } return enhUrl; };
             const title = $('[data-tx="title"]').value || 'Transcription', meta = [KINDS.find(k => k[0] === $('[data-tx="kind"]').value)?.[1], $('[data-tx="date_text"]').value, $('[data-tx="place"]').value, $('[data-tx="source"]').value].filter(Boolean).join(' · ');
             UI2.openPrintDialog({title, key: 'transcription', zone: 'Transcription', photos: false, margin: 14,
                 options: [{key: 'lay', type: 'radio', value: 'side', choices: [['side', i18n('Image + texte côte à côte')], ['stack', i18n('Image puis texte')], ['text', i18n('Texte seul')]]},
-                    ...(canEnh ? [{key: 'enh', label: i18n('Image améliorée'), checked: useEnh(), show: c => c.lay !== 'text'}] : []), {key: 'people', label: i18n('Personnes et rôles'), checked: true}],
+                    ...(multiPages() ? [{key: 'pages', type: 'radio', value: 'all', choices: [['all', i18n('Sur toutes les pages')], ['here', i18n('Sur la page affichée')]]}] : []),
+                    ...(canEnh ? [{key: 'enh', label: i18n('Image améliorée'), checked: useEnh(), show: c => c.lay !== 'text'}] : []), {key: 'people', label: i18n('Personnes et rôles'), checked: true},
+                    ...(gabRows().length ? [{key: 'gab', label: `🧩 ${i18n('Gabarit')}`, checked: true}] : []), {key: 'ln', label: i18n('Numéros de ligne'), checked: true}],
                 html: async c => { const img = c.lay === 'text' ? '' : await imgFor(c);
-                    return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(title)}</title><style>body{font:14px/1.5 Georgia,serif;margin:0;color:#111}h1{font-size:20px;margin:0 0 4px}.m{color:#555;margin:0 0 12px}.g{display:grid;gap:16px;align-items:start}.g.side{grid-template-columns:1fr 1fr}img{max-width:100%;border:1px solid #ccc;display:block}.g.stack img{max-height:150mm;margin:0 auto 4mm;object-fit:contain}pre{white-space:pre-wrap;font:inherit;margin:0}ul{padding-left:18px}</style></head><body>
-                        <h1>${esc(title)}</h1><p class="m">${esc(meta)}</p><div class="g ${c.lay}">${img ? `<img src="${esc(img)}" alt="">` : ''}<div><pre>${esc(area.value)}</pre>${c.people && t.data.people.length ? `<h3>${i18n('Personnes')}</h3><ul>${t.data.people.map(p => `<li>${esc(p.name)}${p.role ? ` — ${esc(p.role)}` : ''}</li>`).join('')}</ul>` : ''}</div></div></body></html>`; }});
+                    return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(title)}</title><style>body{font:14px/1.5 Georgia,serif;margin:0;color:#111}h1{font-size:20px;margin:0 0 4px}.m{color:#555;margin:0 0 12px}.g{display:grid;gap:16px;align-items:start}.g.side{grid-template-columns:1fr 1fr}img{max-width:100%;border:1px solid #ccc;display:block}.g.stack img{max-height:150mm;margin:0 auto 4mm;object-fit:contain}pre{white-space:pre-wrap;font:inherit;margin:0}ul{padding-left:18px}h2{font-size:16px;margin:12px 0 6px}.brk{break-before:page}ol.ln{margin:0;padding-left:3.2em;white-space:pre-wrap;font:inherit}ol.ln li{padding-left:.4em}ol.ln li::marker{color:#888;font-size:11px}table.gab{border-collapse:collapse;width:100%;font-size:13px;margin:6px 0 10px}table.gab th{text-align:left;font-weight:600;color:#555;width:34%;padding:3px 8px 3px 0;vertical-align:top}table.gab td{padding:3px 0;border-bottom:1px solid #ddd}</style></head><body>
+                        <h1>${esc(title)}</h1><p class="m">${esc(meta)}</p>${multiPages() ? (await Promise.all(pageParts().filter(q => c.pages !== 'here' || q.i === pageIx).map(async (q, k) => { const u = c.lay === 'text' || !q.file ? '' : q.i === pageIx ? img : base + encodeURIComponent(q.file);
+                            return `<section class="pg${k ? ' brk' : ''}"><h2>${esc(q.name)}</h2><div class="g ${c.lay}">${u ? `<img src="${esc(u)}" alt="">` : ''}<div>${preOf(q.text, c.ln)}</div></div></section>`; }))).join('') + '<div><div>' : `<div class="g ${c.lay}">${img ? `<img src="${esc(img)}" alt="">` : ''}<div>${preOf(area.value, c.ln)}`}${c.gab && gabRows().length ? `<h3>🧩 ${esc(i18n('Gabarit'))}</h3><table class="gab">${gabRows().map(([l, v]) => `<tr><th>${esc(l)}</th><td>${esc(v)}</td></tr>`).join('')}</table>` : ''}${c.people && t.data.people.length ? `<h3>${i18n('Personnes')}</h3><ul>${t.data.people.map(p => `<li>${esc(p.name)}${p.role ? ` — ${esc(p.role)}` : ''}</li>`).join('')}</ul>` : ''}</div></div></body></html>`; }});
         }
         window.LCNDA_UI?.onPrintKey?.(dlg, () => printIt()); // L1 : ⌘P
         dlg.addEventListener('click', async e => {
@@ -1409,15 +2316,28 @@
                 const before = {...t.data.view}, id = rcp.dataset.txRecipe, r = TV.RECIPES.find(x => x[0] === id); if (!r) return;
                 const put = v => { t.data.view = TV.viewOf(v); syncControls(); geom({keepCenter: !fitOn}); if (fitOn) applyFit(fitMode); else applyView(); applyImage(); touch(); };
                 put(TV.recipeView(before, id)); A().undoToast?.(i18n('Recette « {name} » posée sur l’image', {name: r[2]}), {undo: () => put(before), redo: () => put(TV.recipeView(before, id))}); return; }
-            const ch = e.target.closest('[data-tx-char]'); if (ch) { const s = area.selectionStart, en = area.selectionEnd, c = ch.dataset.txChar; area.setRangeText(c, s, en, 'end'); area.dispatchEvent(new Event('input')); area.focus(); return; }
+            if (e.target.closest('[data-tx-charplus]')) { const on = !!$('[data-tx-cpanel]')?.hidden; paintChars({open: on, focus: true}); if (!on) $('[data-tx-charplus]')?.focus(); return; }
+            if (e.target.closest('[data-tx-carpin]')) { carPin = !carPin; paintChars({open: true}); $('[data-tx-carpin]')?.focus(); return; }
+            if (e.target.closest('[data-tx-carclose]')) { carPin = false; paintChars({open: false}); $('[data-tx-charplus]')?.focus(); return; }
+            const zcb = e.target.closest('[data-tx-zcbtn]'); if (zcb) { const pop = $('[data-tx-zcpop]'); pop.hidden = !pop.hidden; zcb.setAttribute('aria-expanded', String(!pop.hidden)); if (!pop.hidden) (pop.querySelector('[aria-pressed="true"]') || pop.querySelector('button'))?.focus(); return; }
+            const zc = e.target.closest('[data-tx-zc]'); if (zc) { const z = t.data.zones.find(q => q.id === selZone); if (z) { snap(); z.c = zc.dataset.txZc; touch(); paintZoneRects(); paintMirror(); paintZoneBar(); $('[data-tx-zcbtn]')?.focus(); } return; }
+            if (e.target.closest('[data-tx-foundtoggle]')) return toggleFound();
+            if (e.target.closest('[data-tx-follow]')) return setFollow(!followOn);
+            const ch = e.target.closest('[data-tx-char]'); if (ch) { // 26 : un mot choisi garde sa lecture : « mot[?] », « [mot] » (l'usage des paléographes)
+                if (carPin && ch.closest('[data-tx-cpanel]')) return pinChar(ch.dataset.txChar);
+                const s = area.selectionStart, en = area.selectionEnd, c = ch.dataset.txChar, sel = area.value.slice(s, en), word = sel && !/\n/.test(sel) ? sel : '';
+                const put = word && c === '[?]' ? `${word.replace(/\s+$/, '')}[?]${word.slice(word.replace(/\s+$/, '').length)}` : word && (c === '[' || c === ']') ? `[${word}]` : c;
+                area.setRangeText(put, s, en, 'end'); area.dispatchEvent(new Event('input')); area.focus(); return; }
             if (e.target.closest('[data-tx-zlink]')) { const z = t.data.zones.find(q => q.id === selZone), s = area.selectionStart, en = area.selectionEnd; if (!z) return; if (en <= s) return toast(i18n('Choisis d’abord un passage dans le texte.'), 'error'); snap(); z.s = s; z.e = en; touch(); drawZones(); return; }
             if (e.target.closest('[data-tx-zdel]')) return deleteZone();
+            if (e.target.closest('[data-tx-zsign]')) return signZone();
             const pt = e.target.closest('[data-tx-ptab]'); if (pt) return showPtab(pt.dataset.txPtab);
             const stp = e.target.closest('[data-tx-step]'); if (stp) return showStep(stp.dataset.txStep);
+            const dn = e.target.closest('[data-tx-docnote]'); if (dn) { dn.classList.toggle('is-open'); return; } // 📱 sur une ligne : la toucher la montre en entier
             if (e.target.closest('[data-tx-stepnext]')) { const ks = STEPS.map(s => s[0]), i = ks.indexOf(flowView || flowCur); return showStep(ks[Math.min(ks.length - 1, i + 1)]); }
             const c = e.target.closest('[data-tx-cmd]'); if (!c) return; c.closest('details')?.removeAttribute('open');
             const k = c.dataset.txCmd;
-            if (k === 'readmenu') { toggleRead(); return; }
+            if (k === 'readmenu') { if ((flowView || flowCur) !== 'read') showStep('read', {focus: false}); toggleRead(); return; }
             if (c.closest('[data-tx-readpanel]')) toggleRead(false);
             if (k === 'close') return close();
             if (k === 'save') return save();
@@ -1432,6 +2352,7 @@
             if (k === 'resetview') { const before = {...t.data.view}, origin = () => { t.data.view = TV.viewOf(); fitOn = true; fitMode = 'page'; syncControls(); geom({keepCenter: false}); applyFit('page'); applyImage(); touch(); };
                 if (!Object.entries(TV.DEFAULT_VIEW).some(([kk, d]) => String(before[kk]) !== String(d))) return status(i18n('L’image est déjà comme au départ'));
                 origin(); A().undoToast?.(i18n('Image remise comme au départ'), {undo: () => { t.data.view = TV.viewOf(before); syncControls(); geom({keepCenter: false}); applyFit(fitMode); applyImage(); touch(); }, redo: origin}); return; }
+            if (k === 'ocr' || k === 'htr' || k === 'deep') setReadChoice(k); // ✨ « Lire cette page » (la barre de chaque page) reprend ce choix
             if (k === 'ocr') return readAllOn() ? readAll('ocr') : (perOnly(), runOcr());
             if (k === 'htr') return readAllOn() ? readAll('htr') : (perOnly(), runHtr());
             if (k === 'htrstop') return htrStop();
@@ -1440,20 +2361,30 @@
             if (k === 'detect') return runDetect();
             if (k === 'fix') return runFix();
             if (k === 'deep') return openDeep({all: readAllAny()});
+            if (k === 'aideia') return openIa();
             if (k === 'lines') return linkLines({manual: true});
             if (k === 'found') return openFound();
             if (k === 'aide') { const sel = area.value.slice(area.selectionStart, area.selectionEnd).trim().slice(0, 40); return ext.readingAid ? ext.readingAid.open({q: /\n/.test(sel) ? '' : sel, lang: aideLang($('[data-tx-lang]').value)}) : toast(i18n('L’aide à la lecture n’est pas chargée.'), 'error'); } // heritage-lecture-autrefois.js : ouverte sur la langue du texte
-            if (k === 'template') { const tp = TEMPLATES[$('[data-tx="kind"]').value]; if (!tp) return toast(i18n('Pas de modèle pour ce genre d’acte.'), 'error'); if (area.value.trim() && !await A().confirmBox(i18n('Le texte déjà écrit est gardé.'), {title: i18n('Ajouter le modèle à la fin du texte ?'), okLabel: i18n('Ajouter le modèle')})) return; area.value += (area.value.trim() ? '\n\n' : '') + tp; area.dispatchEvent(new Event('input')); return; }
-            if (k === 'txt') { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([area.value], {type: 'text/plain;charset=utf-8'})); a.download = `${(A().safeExportFilename ? A().safeExportFilename($('[data-tx="title"]').value || 'transcription', 'transcription') : 'transcription')}.txt`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); return; }
+            if (k === 'template' && GB() && GB().has(kindNow())) { gabTab = 'gab'; showStep('find'); toggleFound(true); fillGabarit(); paintPeople(); return; }
+            if (k === 'template' && GB() && kindNow() === 'apreciser') { gabTab = 'gab'; showStep('find'); toggleFound(true); paintPeople(); return; }
+            if (k === 'template') return pasteTemplate();
+            if (k === 'txt') { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([namedText()], {type: 'text/plain;charset=utf-8'})); a.download = `${(A().safeExportFilename ? A().safeExportFilename($('[data-tx="title"]').value || 'transcription', 'transcription') : 'transcription')}.txt`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); return; }
             if (k === 'copy') { navigator.clipboard?.writeText(area.value).then(() => toast(i18n('Texte copié.'))).catch(() => toast(i18n('Copie impossible ici.'), 'error')); return; }
             if (k === 'print') return printIt();
             if (k === 'export') { // E3 : une seule fenêtre d'export
                 if (!UI.openExportDialog) return printIt();
                 const nm = $('[data-tx="title"]').value || 'transcription';
                 return UI.openExportDialog({title: nm, defaultName: nm, quality: false, info: `${i18n('Mots : {n}', {n: area.value.trim().split(/\s+/).filter(Boolean).length})}${t.filename ? ` · ${i18n('avec l’image de l’acte')}` : ''}`, formats: [
-                    {id: 'file', label: '📝 Texte', hint: i18n('le texte seul (.txt)'), ext: 'txt', run: async o => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([area.value], {type: 'text/plain;charset=utf-8'})); a.download = o.filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); }},
+                    {id: 'file', label: '📝 Texte', hint: i18n('le texte seul (.txt)'), ext: 'txt', run: async o => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([namedText({ln: o.checks?.ln !== false, people: !!o.checks?.people})], {type: 'text/plain;charset=utf-8'})); a.download = o.filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); }},
+                    ...(window.LCNDA_TEXT?.toDocx ? [{id: 'docx', label: '📝 Word', hint: i18n('le texte mis en page, à ouvrir dans Word ou LibreOffice (.docx)'), ext: 'docx', run: async o => { try { dl(await docxBlob({people: o.checks?.people !== false}), o.filename); } catch (e) { toast(e.message || String(e), 'error'); } }}] : []),
                     {id: 'pdf', hint: i18n('image + texte (« Enregistrer en PDF »)'), ext: '', run: async () => printIt()},
-                    {id: 'print', hint: 'image + texte', run: async () => printIt()}]});
+                    {id: 'print', hint: 'image + texte', run: async () => printIt()},
+                    {id: 'tei', label: '🗂 TEI', hint: i18n('XML des chercheurs et des archives (lignes, zones, personnes)'), ext: 'xml', run: async o => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([teiXml()], {type: 'application/xml;charset=utf-8'})); a.download = o.filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); }},
+                    ...(TXX() ? [{id: 'alto', label: '🧾 ALTO', hint: i18n('XML des bibliothèques et archives (lignes et mots avec leur place sur l’image)'), ext: 'xml', run: async o => dl(new Blob([TXX().alto(xmlPages(), {title: nm})], {type: 'application/xml;charset=utf-8'}), o.filename)},
+                        {id: 'pagexml', label: '📄 PAGE', hint: i18n('XML de Transkribus et eScriptorium (régions, lignes, ordre de lecture) ; un fichier par page, en .zip s’il y en a plusieurs'), ext: 'xml', run: async o => { const F = TXX().page(xmlPages()); if (F.length === 1) return dl(new Blob([F[0].xml], {type: 'application/xml;charset=utf-8'}), o.filename);
+                            const Z = window.LCNDA_SHEET?.zipStore; if (Z) return dl(Z(F.map(f => ({name: f.name, data: f.xml}))), o.filename.replace(/\.xml$/i, '') + '.zip'); for (const f of F) dl(new Blob([f.xml], {type: 'application/xml;charset=utf-8'}), f.name); }}] : []),
+                    ],
+                    checks: [{id: 'ln', label: i18n('Numéros de ligne'), checked: true, show: id => id === 'file'}, {id: 'people', label: i18n('Personnes et rôles'), checked: true, show: id => id === 'file' || id === 'docx'}]});
             }
         });
         dlg.addEventListener('input', e => {
@@ -1461,24 +2392,37 @@
             if (e.target.matches('[data-tx-useenh]')) { try { localStorage.setItem(USE_KEY, e.target.checked ? '1' : '0'); } catch (_) {} return; }
             if (e.target.dataset.tx) { t[e.target.dataset.tx] = e.target.value; touch(); }
             if (e.target.matches('[data-tx-znote]')) { const z = t.data.zones.find(q => q.id === selZone); if (z) { z.note = e.target.value.slice(0, 300); touch(); } }
-            if (e.target.matches('[data-tx-zcolor]')) { const z = t.data.zones.find(q => q.id === selZone); if (z) { if (!e.target.dataset.snapped) { snap(); e.target.dataset.snapped = '1'; } z.c = e.target.value; touch(); paintZoneRects(); paintMirror(); } }
         });
-        dlg.addEventListener('change', e => { if (e.target.dataset.tx === 'kind') { t.kind = e.target.value; touch(); } if (e.target.matches('[data-tx-state]')) { t.data.status = e.target.value; touch(); paintProg(); }
+        dlg.addEventListener('change', e => { if (e.target.matches('[data-tx-zkind]')) { const z = t.data.zones.find(q => q.id === selZone); if (z) { snap(); if (e.target.value) z.kind = e.target.value; else delete z.kind; touch(); paintZoneRects(); paintZoneBar(); $('[data-tx-zkind]')?.focus(); } return; }
+            if (e.target.dataset.tx === 'kind') { t.kind = e.target.value; touch(); paintWhy(); paintIaCount(); if (GB()) { fillGabarit(); paintPeople(); } }
             if (e.target.matches('[data-tx-lang]')) { try { localStorage.setItem(TX_LANG_KEY, e.target.value); } catch (_) {} if (found.length) paintPeople(); } }); // la langue : retenue, et les mots connus suivent
         /* ─── « 🎚️ Mieux voir » (disposition B) : un panneau qui s'ouvre sous son bouton ─── */
         const togglePanel = (open) => { const pn = $('[data-tx-panel]'), b = $('[data-tx-cmd="better"]'); if (!pn) return; const on = open ?? pn.hidden; pn.hidden = !on; b.setAttribute('aria-expanded', String(on)); b.classList.toggle('is-active', on); };
         dlg.addEventListener('pointerdown', e => { const pn = $('[data-tx-panel]'); if (pn && !pn.hidden && !e.target.closest('[data-tx-item="better"]')) togglePanel(false);
-            const rp = $('[data-tx-readpanel]'); if (rp && !rp.hidden && !e.target.closest('.h-tx-readw')) toggleRead(false); });
+            const rp = $('[data-tx-readpanel]'); if (rp && !rp.hidden && !e.target.closest('.h-tx-readw')) toggleRead(false);
+            const zp = $('[data-tx-zcpop]'); if (zp && !zp.hidden && !e.target.closest('.h-tx-zcw')) { zp.hidden = true; $('[data-tx-zcbtn]')?.setAttribute('aria-expanded', 'false'); }
+            const cp = $('[data-tx-cpanel]'); if (cp && !cp.hidden && !e.target.closest('[data-tx-chars]')) { carPin = false; paintChars({open: false}); } });
         /* ─── « ✨ Lire ▾ » : le menu des trois lectures, avec l'état de chacune ─── */
+        // 📑 l'état de chaque page sous « Sur la page affichée / Sur toutes les pages » : « Page 1 : 39 lignes · Page 2 : vide »
+        function pageLines(i) {
+            const n = v => String(v || '').split('\n').filter(x => x.trim()).length;
+            if (pageForm === 'one') { const sg = PG.segments(area.value)[(t.data.pages || []).map(Number).indexOf(Number(PAGES[i]?.media_id))]; return sg ? n(area.value.slice(sg.s, sg.e)) : 0; }
+            return i === pageIx ? n(area.value) : n(perSet?.[i]?.body ?? PAGES[i]?.transcription);
+        }
+        function paintPageRead() {
+            const el = $('[data-tx-pread]'); if (!el) return;
+            el.textContent = PAGES.length > 1 ? `${i18n('Lignes déjà écrites')} — ${PAGES.map((p, i) => `${pageName(p, i)} : ${pageLines(i)}`).join(' · ')}` : '';
+        }
         function toggleRead(open) {
             const pn = $('[data-tx-readpanel]'), b = $('[data-tx-cmd="readmenu"]'); if (!pn) return; const on = open ?? pn.hidden; pn.hidden = !on; b.setAttribute('aria-expanded', String(on)); b.classList.toggle('is-active', on);
-            if (!on) return; pn.querySelector('.h-tx-readopt:not(:disabled)')?.focus();
+            if (!on) return; pn.querySelector('.h-tx-readopt:not(:disabled)')?.focus(); ext.txActe?.srvRename?.(pn); // 🖥 le serveur d'IA choisi, s'il n'est pas Ollama
+            paintPageRead();
             readStates().then(st => { if (!dlg.isConnected) return; pn.querySelectorAll('[data-tx-readst]').forEach(el => { const ok = st[el.dataset.txReadst];
                 el.innerHTML = UI.badge ? UI.badge(ok ? i18n('Installé') : i18n('À installer'), ok ? 'green' : 'yellow') : esc(ok ? i18n('Installé') : i18n('À installer')); el.dataset.state = ok ? 'ok' : 'todo'; }); });
         }
         /* ─── la barre se redessine quand on la règle (⚙️, ou Réglages) ─── */
         let narrow = false; const isNarrow = () => ($('.h-tx-left')?.getBoundingClientRect().width || 1000) < 620;
-        function renderBar() { narrow = isNarrow(); $('[data-tx-barwrap]').innerHTML = TV.toolbarHtml(t.data.view, TV.barCfg(), {narrow}) + zopHtml(); setTool(tool); paintZoomLabel(); paintBadge(); paintLoupeBtn(); }
+        function renderBar() { narrow = isNarrow(); $('[data-tx-barwrap]').innerHTML = TV.toolbarHtml(t.data.view, TV.barCfg(), {narrow}) + zopHtml() + (ext.txCtx ? ext.txCtx.wordColorHtml() : '') + followHtml(followOn); setTool(tool); paintZoomLabel(); paintBadge(); paintLoupeBtn(); }
         const roBar = new ResizeObserver(() => { if (dlg.isConnected && isNarrow() !== narrow) renderBar(); }); roBar.observe($('.h-tx-left'));
         const onBar = () => { renderBar(); $('[data-tx-editor]')?.classList.toggle('has-ln', TV.lineNos()); paintMirror(); paintFlow(); }; window.addEventListener('lcnda-txbar-change', onBar);
         /* ─── 🔍 Loupe : suit la souris ; la molette change le grossissement ─── */
@@ -1503,14 +2447,20 @@
             if (!dlg.open || [...document.querySelectorAll('dialog[open]')].at(-1) !== dlg) return; // une fenêtre par-dessus (confirmation…) garde ses touches
             if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') { e.preventDefault(); save(); return; }
             if (e.key === 'Escape' && e.target.closest?.('[data-tx-panel]')) { e.preventDefault(); e.stopPropagation(); togglePanel(false); $('[data-tx-cmd="better"]')?.focus(); return; }
+            if (rovingKey(e)) return; // ſ les caractères, l'état de l'acte : ← → dans le groupe
+            if (e.key === 'Escape' && $('[data-tx-cpanel]') && !$('[data-tx-cpanel]').hidden) { e.preventDefault(); e.stopPropagation(); carPin = false; paintChars({open: false}); $('[data-tx-charplus]')?.focus(); return; }
+            if (e.key === 'Escape' && $('[data-tx-zcpop]') && !$('[data-tx-zcpop]').hidden) { e.preventDefault(); e.stopPropagation(); $('[data-tx-zcpop]').hidden = true; $('[data-tx-zcbtn]')?.setAttribute('aria-expanded', 'false'); $('[data-tx-zcbtn]')?.focus(); return; }
             if (e.key === 'Escape' && $('[data-tx-readpanel]') && !$('[data-tx-readpanel]').hidden) { e.preventDefault(); e.stopPropagation(); toggleRead(false); $('[data-tx-cmd="readmenu"]')?.focus(); return; }
             { const mk = e.metaKey || e.ctrlKey; // 🔍 ⌘F, ⌥⌘F (et Ctrl+H) ; ⌨️ ⌘/ ; ⌥↓ ⌥↑ dans le texte
               if (mk && !e.shiftKey && (e.code === 'KeyF' || e.key.toLowerCase() === 'f')) { e.preventDefault(); e.stopPropagation(); openFind(e.altKey); return; }
               if (e.ctrlKey && !e.metaKey && !e.altKey && e.key.toLowerCase() === 'h' && e.target === area) { e.preventDefault(); e.stopPropagation(); openFind(true); return; }
               if (mk && (e.key === '/' || e.code === 'Slash')) { e.preventDefault(); e.stopPropagation(); showKeys(); return; }
-              if (e.altKey && !mk && (e.key === 'ArrowDown' || e.key === 'ArrowUp') && e.target === area) { e.preventDefault(); e.stopPropagation(); lineStep(e.key === 'ArrowDown' ? 1 : -1); return; } }
+              if (e.altKey && !mk && e.key === 'Enter' && e.target === area && rvView) { e.preventDefault(); e.stopPropagation(); if (toggleReviewed(area.value.slice(0, area.selectionStart).split('\n').length)) lineStep(1); return; } // 👁 ⌥ Entrée : la ligne est relue, on passe à la suivante
+              if (e.altKey && !mk && (e.key === 'ArrowDown' || e.key === 'ArrowUp') && e.target === area) { e.preventDefault(); e.stopPropagation(); lineStep(e.key === 'ArrowDown' ? 1 : -1); return; }
+              if (mk && !e.altKey && !e.shiftKey && (e.key === 'ArrowDown' || e.key === 'ArrowUp') && e.target === area && blocksOn() && BK) { e.preventDefault(); e.stopPropagation(); BK.jump(e.key === 'ArrowDown' ? 1 : -1); return; } } // 📑 Ctrl/⌘ ↓ ↑ : la page suivante, la page d'avant
             if (e.target.closest?.('[data-tx-ptabs]') && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) { e.preventDefault(); e.stopPropagation(); const ks = ['image', 'text', 'people'], i = ks.indexOf(e.target.closest('[data-tx-ptab]')?.dataset.txPtab); showPtab(ks[(i + (e.key === 'ArrowRight' ? 1 : 2)) % 3]); return; }
             if (e.target.closest?.('[data-tx-steps]') && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) { e.preventDefault(); e.stopPropagation(); const ks = STEPS.map(s => s[0]), i = ks.indexOf(e.target.closest('[data-tx-step]')?.dataset.txStep); showStep(ks[(i + (e.key === 'ArrowRight' ? 1 : ks.length - 1)) % ks.length]); return; } // C5 : les flèches d'un onglet à l'autre
+            if (e.target === area && (e.metaKey || e.ctrlKey) && !e.altKey && ['z', 'y'].includes(e.key.toLowerCase())) { e.preventDefault(); e.stopPropagation(); undoZones(e.key.toLowerCase() === 'y' || e.shiftKey); return; } // 16 : un seul historique
             if (e.target.closest?.('input, textarea, select')) return;
             if (e.target.closest?.('button, [contenteditable="true"]') && (e.key === ' ' || e.key === 'Enter')) return;
             const mod = e.metaKey || e.ctrlKey, k = e.key.toLowerCase();
@@ -1528,45 +2478,138 @@
         const onKeyUp = e => { if (e.key === ' ') { space = false; stage.dataset.tool = tool; } };
         document.addEventListener('keydown', onKey, true); document.addEventListener('keyup', onKeyUp, true);
         /** l'outil s'en va (× ou Échap, ou « ↗ Fiche » d'une personne) : touches, worker « Mieux voir », observateurs, fenêtre */
-        function teardown() { if (!dlg.isConnected) return; htrStop(true); if (!switching && deepRun) { deepRun.stop = true; if (deepRun.job) post('tx_deep_cancel', {id: deepRun.job}).catch(() => {}); deepRun = null; } document.removeEventListener('keydown', onKey, true); document.removeEventListener('keyup', onKeyUp, true); window.removeEventListener('lcnda-txbar-change', onBar); enh?.stop(); ro.disconnect(); roBar.disconnect(); dlg.close(); dlg.remove(); if (!switching) ctx.onClose?.(); }
-        async function close() { if (dirty && !await A().confirmBox(i18n('Les dernières modifications de la transcription seront perdues.'), {title: i18n('Fermer sans enregistrer la transcription ?'), okLabel: i18n('Fermer sans enregistrer'), danger: true})) return; teardown(); }
+        function teardown() { if (!dlg.isConnected) return; clearTimeout(autoT); clearTimeout(draftT); clearTimeout(peopleT); htrStop(true); if (!switching && deepRun) { deepRun.stop = true; if (deepRun.job) post('tx_deep_cancel', {id: deepRun.job}).catch(() => {}); deepRun = null; } document.removeEventListener('keydown', onKey, true); document.removeEventListener('keyup', onKeyUp, true); window.removeEventListener('lcnda-txbar-change', onBar); enh?.stop(); ro.disconnect(); roBar.disconnect(); dlg.close(); dlg.remove(); if (!switching) ctx.onClose?.(); }
+        async function close() { if (saving) await saving.catch(() => {}); if (dirty && !await A().confirmBox(i18n('Les dernières modifications de la transcription seront perdues.'), {title: i18n('Fermer sans enregistrer la transcription ?'), okLabel: i18n('Fermer sans enregistrer'), danger: true})) return; if (dirty) dropDraft(); teardown(); }
+        /** 🔴 8 : un autre acte demandé : enregistrer celui-ci d'abord (s'il a changé), puis le fermer ; false : on reste */
+        async function leave() {
+            if (saving) await saving.catch(() => {});
+            if (dirty) { if (!await A().confirmBox(i18n('Celui-ci est enregistré d’abord, puis l’autre acte s’ouvre.'), {title: i18n('Enregistrer et ouvrir l’autre acte ?'), okLabel: i18n('Enregistrer et ouvrir l’autre'), danger: false})) return false; await save(); if (dirty) return false; }
+            teardown(); return true;
+        }
+        Object.assign(dlg.txApi, {save: () => save(), isDirty: () => dirty, leave});
         dlg.dataset.ownClose = '1'; // Échap : l'outil demande lui-même s'il faut (une seule question « Fermer sans enregistrer ? »)
         dlg.addEventListener('cancel', e => { e.preventDefault(); close(); });
         // la fenêtre change de taille (⛶, panneau) : l'ajustement choisi (toute l'image, largeur) suit
         let roW = 0, roH = 0; const ro = new ResizeObserver(() => { const r = stage.getBoundingClientRect(); if (!imgW || drag || (r.width === roW && r.height === roH)) return; roW = r.width; roH = r.height; if (fitOn && fitMode !== 'real') applyFit(fitMode, {keepY: true}); else applyView(); }); ro.observe(stage);
         function docNote() { const n = $('[data-tx-docnote]'); if (n) n.hidden = !t.media_id; }
-        renderBar(); paintMirror(); paintPeople(); docNote(); await initPages(); if (PAGES.length) { paintMirror(); paintPeople(); } await loadImage();
+        renderBar(); paintChars(); paintMirror(); paintPeople(); docNote(); paintWhy(); VS?.refresh(); paintIaCount(); await initPages(); if (PAGES.length) { paintMirror(); paintPeople(); } focusSeg(); await loadImage();
+        offerDraft();
         if (deepRun && dlg.isConnected) setTimeout(deepAllStep, 0); // 📑 la lecture approfondie de toutes les pages continue sur cette page
-        if (ctx.goto && dlg.isConnected) { runDetect(); setTimeout(() => gotoRange(ctx.goto.s, ctx.goto.e), 60); } // 📑 venu d'un « (page 3, ligne 7) » d'une autre page
+        if (fixAfterSwitch && dlg.isConnected) { fixAfterSwitch = false; runFix({quiet: true}); }
+        if (ctx.goto && dlg.isConnected) { showStep('find', {focus: false}); /* venu de « Ce que l'app a trouvé » : il reste ouvert */ runDetect({quiet: true}); setTimeout(() => gotoRange(ctx.goto.s, ctx.goto.e), 60); } // 📑 venu d'un « (page 3, ligne 7) » d'une autre page
         /* E1 : l'historique (instantanés de tout l'acte) ; ⌘Z dans une case de texte garde l'annulation de la case */
         const F_KEYS = ['title', 'kind', 'date_text', 'place', 'source'];
-        HX = UI.editorHistory?.({get: () => ({f: Object.fromEntries(F_KEYS.map(k => [k, $(`[data-tx="${k}"]`).value])), st: $('[data-tx-state]').value, body: area.value, zones: t.data.zones, people: t.data.people, view: t.data.view}),
-            set: o => { F_KEYS.forEach(k => { $(`[data-tx="${k}"]`).value = o.f[k] ?? ''; t[k] = o.f[k] ?? ''; }); $('[data-tx-state]').value = o.st; t.data.status = o.st;
+        HX = UI.editorHistory?.({get: () => ({f: Object.fromEntries(F_KEYS.map(k => [k, $(`[data-tx="${k}"]`).value])), st: t.data.status, body: area.value, zones: t.data.zones, people: t.data.people, view: t.data.view}),
+            set: o => { F_KEYS.forEach(k => { $(`[data-tx="${k}"]`).value = o.f[k] ?? ''; t[k] = o.f[k] ?? ''; }); t.data.status = o.st; paintProg();
+                const was = area.value, focused = document.activeElement === area; // 16 : le curseur va là où le texte a changé (comme un traitement de texte)
                 area.value = o.body; before = o.body; t.body = o.body; t.data.zones = o.zones || []; t.data.people = o.people || []; if (!t.data.zones.some(z => z.id === selZone)) selZone = null;
+                if (was !== o.body) { const dd = diffOf(was, o.body), c = o.body.length - dd.q; area.setSelectionRange(Math.max(dd.p, Math.min(c, o.body.length)), Math.max(dd.p, Math.min(c, o.body.length))); if (focused) area.focus({preventScroll: true}); }
                 const vOld = JSON.stringify(t.data.view); t.data.view = TV.viewOf(o.view); syncControls(); if (JSON.stringify(t.data.view) !== vOld) { geom(); applyImage(); }
-                dirty = true; status(i18n('modifié')); drawZones(); paintMirror(); paintPeople(); },
+                rev++; setDirty(true); saveState('dirty'); autoSoon(); draftSoon(); drawZones(); paintMirror(); paintPeople(); },
             onChange: h => { $('[data-tx-hist="undo"]').disabled = !h.canUndo(); $('[data-tx-hist="redo"]').disabled = !h.canRedo(); }});
         HX?.reset();
+        /** 🧲 recaler sur les lignes du texte les zones décalées de quelques caractères ; auto (à l'ouverture) : seulement si c'est sûr
+         *  (au moins 2 zones dont le début est décalé, comme sur les anciennes transcriptions) ; « ↶ Annuler » remet les zones d'avant */
+        function snapToLines({auto = false} = {}) {
+            const r = snapZones(area.value, t.data.zones, {startOnly: auto});
+            dlg.dataset.txSnap = JSON.stringify({fixed: auto && r.fixes.length < 2 ? 0 : r.fixes.length, left: r.left, auto}); // pour les essais
+            if (auto && r.fixes.length < 2) return r;
+            if (!r.fixes.length) { toast(r.left ? i18n('Aucune zone recalée : {n} à vérifier à la main (pas sûr)', {n: r.left}) : i18n('Les zones sont déjà calées sur les lignes du texte.')); return r; }
+            const prev = cloneZones(); snap(); r.fixes.forEach(f => { const z = t.data.zones[f.i]; if (z) { z.s = f.s; z.e = f.e; } }); touch(); drawZones(); const next = cloneZones();
+            const put = list => () => { snap(); t.data.zones = list.map(z => ({...z})); if (!t.data.zones.some(z => z.id === selZone)) selZone = null; touch(); drawZones(); };
+            const msg = [i18n(r.fixes.length > 1 ? '{n} lignes recalées sur le texte' : '{n} ligne recalée sur le texte', {n: r.fixes.length}), r.left ? i18n('{n} à vérifier à la main (pas sûr)', {n: r.left}) : ''].filter(Boolean).join(' · ');
+            status(msg); (A().undoToast || toast)(msg, {undo: put(prev), redo: put(next), icon: '🧲'});
+            return r;
+        }
+        if (dlg.isConnected && t.data.zones.length) snapToLines({auto: true});
         dlg.addEventListener('click', e => { const hb = e.target.closest('[data-tx-hist]'); if (hb) undoZones(hb.dataset.txHist === 'redo'); });
         const cmdOf = k => () => { const b = document.createElement('button'); b.type = 'button'; b.hidden = true; b.dataset.txCmd = k; dlg.appendChild(b); b.click(); b.remove(); };
-        UI.editorMenus?.($('[data-tx-menus]'), {
-            Fichier: () => [{icon: '💾', label: i18n('Enregistrer'), shortcut: '⌘S', run: cmdOf('save')}, {icon: '⤓', label: i18n('Exporter (texte, PDF, imprimer)…'), run: cmdOf('export')}, '-', {icon: '🖼️', label: i18n('Image de l’acte…'), run: cmdOf('image')}, {icon: '🕘', label: `${i18n('Versions')}…`, run: () => openVersions()}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}],
-            Édition: () => [{icon: '↶', label: i18n('Annuler'), shortcut: '⌘Z', disabled: !HX?.canUndo(), run: () => undoZones(false)}, {icon: '↷', label: i18n('Rétablir'), shortcut: '⇧⌘Z', disabled: !HX?.canRedo(), run: () => undoZones(true)}, '-', {icon: '📋', label: i18n('Copier le texte'), run: cmdOf('copy')}, {icon: '🔍', label: `${i18n('Chercher et remplacer')}…`, shortcut: '⌘F', run: () => openFind(true)}, {icon: '🧩', label: i18n('Modèle d’acte'), run: cmdOf('template')}],
+        /* ═════ 🔗 Liens avec les autres outils (maquette docs/design/outils-liens.html) : 📤 Envoyer vers…, 📝 Traitement de texte,
+           🎚️ Retouche, ✍️ Signatures et sceaux, Word (.docx) ═════ */
+        const actTitle = () => ($('[data-tx="title"]').value || t.title || '').trim() || i18n('Transcription');
+        /** l'image affichée (la page choisie d'un acte en plusieurs pages) → {id, filename, title} ; null sans image rangée */
+        const curMedia = () => { const p = PAGES[pageIx]; if (p && p.media_id && p.filename) return {id: Number(p.media_id), filename: p.filename, title: p.title || actTitle()};
+            return t.media_id && t.filename ? {id: Number(t.media_id), filename: t.filename, title: actTitle()} : null; };
+        /** le texte en paragraphes (une ligne vide = un nouveau paragraphe, un retour à la ligne = <br>) */
+        const textHtml = () => String(namedText() || '').replace(/\r/g, '').split(/\n{2,}/).filter(p => p.trim()).map(p => `<p>${esc(p).replace(/\n/g, '<br>')}</p>`).join('') || '<p></p>';
+        const metaLine = () => [kindNow() && kindNow() !== 'apreciser' ? kindLabel(kindNow()) : '', $('[data-tx="date_text"]').value.trim(), $('[data-tx="place"]').value.trim()].filter(Boolean).join(' · ');
+        /** les personnes de l'acte (gardées, sinon repérées), avec les dates, lieux et métiers trouvés dans la même phrase */
+        function peopleRows() {
+            const src = findText(), det = detect(src), sentOf = pos => { const L = src.slice(0, pos), a = Math.max(L.lastIndexOf('.'), L.lastIndexOf(';'), L.lastIndexOf('\n')) + 1, r = src.slice(pos).search(/[.;\n]/); return [a, r < 0 ? src.length : pos + r]; };
+            const kept = (t.data.people || []).filter(p => p.name), list = kept.length ? kept.map(p => ({label: p.name, role: p.role || '', s: p.s, e: p.e, linked: !!p.person_id})) : det.filter(f => f.type === 'person').map(f => ({label: f.label, role: f.role || '', s: f.s, e: f.e, linked: false}));
+            const near = (p, type) => { const [a, b] = sentOf(Number(p.s) || 0); return [...new Set(det.filter(f => f.type === type && f.s >= a && f.e <= b).map(f => f.label))].join(', '); };
+            const rows = list.map(p => [p.label, p.role ? i18n(p.role) : '', near(p, 'job'), near(p, 'date'), near(p, 'place'), p.linked ? i18n('Oui') : '']);
+            return [[i18n('Nom'), i18n('Rôle'), i18n('Métier'), i18n('Dates'), i18n('Lieux'), i18n('Reliée à une fiche')], ...rows];
+        }
+        const sendOpts = title => ({anchor: $('[data-ui-menu="Fichier"]') || dlg, title, exclude: ['atelier']});
+        function sendImageTo() { const m = curMedia(); if (!m) return toast(i18n('Choisis d’abord l’image de l’acte.'), 'error'); return ext.sendTo('image', {media: m}, sendOpts(m.title)); }
+        function sendTextTo() { if (!area.value.trim()) return toast(i18n('Le texte est vide : écris ou lis d’abord l’acte.'), 'error'); return ext.sendTo('text', {html: textHtml(), name: actTitle()}, sendOpts(actTitle())); }
+        function sendPeopleTo() { const rows = peopleRows(); if (rows.length < 2) return toast(i18n('Aucune personne repérée dans le texte pour l’instant.'), 'error'); return ext.sendTo('rows', {rows, name: i18n('Personnes — {t}', {t: actTitle()})}, sendOpts(actTitle())); }
+        function sendMenu() {
+            if (!ext.sendTo) return toast(i18n('L’envoi vers les autres outils n’est pas chargé.'), 'error');
+            UI.menuAt?.($('[data-ui-menu="Fichier"]') || dlg, [{icon: '🖼️', label: i18n('L’image de l’acte'), disabled: !curMedia(), run: sendImageTo}, {icon: '📝', label: i18n('Le texte de la transcription'), disabled: !area.value.trim(), run: sendTextTo},
+                {icon: '👥', label: i18n('Les personnes repérées (tableau)'), run: sendPeopleTo}], {title: i18n('Envoyer vers…')});
+        }
+        /** 📝 comme « Documents » (data-ong-wp) : un nouveau document du traitement de texte avec le titre et le texte */
+        function toTextDoc() {
+            if (!ext.openTextDoc) return toast(i18n('Le traitement de texte n’est pas chargé.'), 'error');
+            const meta = metaLine(), html = `<h1>${esc(actTitle())}</h1>${meta ? `<p><i>${esc(meta)}</i></p>` : ''}${textHtml()}`, name = i18n('Transcription — {t}', {t: actTitle()});
+            const data = ext.textDocTools?.dataOf ? ext.textDocTools.dataOf(html) : null;
+            return ext.openTextDoc(data ? {data, name} : {name});
+        }
+        function retouchImage() { const m = curMedia(); if (!m) return toast(i18n('Choisis d’abord l’image de l’acte.'), 'error'); return ext.retouchMedia?.(m); }
+        /** ✍️ la zone « signature » découpée dans l'image de l'acte (avec une petite marge), en PNG data: → Signatures et sceaux */
+        async function signZone(z = t.data.zones.find(q => q.id === selZone)) {
+            if (!z || !ext.openSeals) return null;
+            let im; try { im = await loadSrcImg(); } catch (e) { return toast(e.message, 'error'); }
+            const W = im.naturalWidth, H = im.naturalHeight, kx = imgW ? W / imgW : 1, ky = imgH ? H / imgH : 1, pad = Math.round(Math.max(z.w * kx, z.h * ky) * .04);
+            const x = clamp(Math.round(z.x * kx) - pad, 0, W - 1), y = clamp(Math.round(z.y * ky) - pad, 0, H - 1), w = clamp(Math.round(z.w * kx) + 2 * pad, 1, W - x), h = clamp(Math.round(z.h * ky) + 2 * pad, 1, H - y);
+            const c = document.createElement('canvas'); c.width = w; c.height = h; c.getContext('2d').drawImage(im, x, y, w, h, 0, 0, w, h);
+            const src = c.toDataURL('image/png'), title = z.note?.trim() || i18n('Signature — {t}', {t: actTitle()});
+            ext.openSeals(null, {src, title}); return {src, w, h};
+        }
+        /** Word (.docx) : le moteur du traitement de texte (app-texte-formats.js, LCNDA_TEXT.toDocx), sans passer par l'éditeur */
+        async function docxBlob({people = true} = {}) {
+            const X = window.LCNDA_TEXT; if (!X?.toDocx || !X.newDoc) throw new Error(i18n('L’export Word n’est pas chargé.'));
+            const doc = X.newDoc({title: actTitle()}), P = (txt, o) => X.para([X.run(txt)], o), lines = s => { const out = []; String(s).split('\n').forEach((l, i) => { if (i) out.push({br: true}); out.push(X.run(l)); }); return X.para(out); };
+            const meta = metaLine(), src = $('[data-tx="source"]')?.value.trim() || t.source || '', blocks = [P(actTitle(), {st: 'title'})];
+            if (meta) blocks.push(P(meta, {st: 'subtitle'}));
+            if (src) blocks.push(P(`${i18n('Source')} : ${src}`));
+            String(namedText() || '').replace(/\r/g, '').split(/\n{2,}/).filter(p => p.trim()).forEach(p => blocks.push(lines(p)));
+            const pp = people ? (t.data.people || []).filter(p => p.name) : [];
+            if (pp.length) { blocks.push(P(i18n('Personnes'), {st: 'h2'})); pp.forEach(p => blocks.push(P(`${p.name}${p.role ? ` — ${i18n(p.role)}` : ''}`))); }
+            doc.sections = [{page: null, blocks}];
+            return X.toDocx(doc);
+        }
+        const fichierLinks = () => [ext.sendTo ? {icon: '📤', label: i18n('Envoyer vers…'), run: sendMenu} : null, ext.openTextDoc ? {icon: '📝', label: i18n('Dans le traitement de texte'), run: toTextDoc} : null,
+            ext.retouchMedia ? {icon: '🎚️', label: i18n('Éclaircir / restaurer l’image'), disabled: !curMedia(), run: retouchImage} : null].filter(Boolean);
+        /* 🧩 idées 35 à 40 (heritage-atelier-*.js) : ext.txPlugins (f(plug) à l'ouverture), ext.txMenus (f(menu, plug) → [items], mis avant le dernier groupe) */
+        const plug = {dlg, ctx, get t() { return t; }, area, $, touch, save, status, drawZones, gotoRange, selectText, setTool, onHere, kindNow, curPid, isDirty: () => dirty, findDates,
+            geo: () => ({zoom, panX, panY, imgW, imgH, rotPt, unrot, stage}), reveal: z => reveal(z), runHtr: (o = {}) => runHtr(o),
+            switchTo: async next => { if (dirty) { await save(); if (dirty) return; } switching = true; teardown(); return open({...next, onClose: ctx.onClose, onSaved: ctx.onSaved}); }};
+        const txPlugMenus = defs => Object.fromEntries(Object.entries(defs).map(([k, f]) => [k, () => { const base = f(), more = (ext.txMenus || []).flatMap(g => { try { return g(k, plug) || []; } catch (_) { return []; } }).filter(Boolean);
+            if (!more.length) return base; const i = base.lastIndexOf('-'); return i < 0 ? [...base, '-', ...more] : [...base.slice(0, i), '-', ...more, ...base.slice(i)]; }]));
+        UI.editorMenus?.($('[data-tx-menus]'), txPlugMenus({
+            Fichier: () => [{icon: '💾', label: i18n('Enregistrer'), shortcut: '⌘S', run: cmdOf('save')}, {icon: '⤓', label: i18n('Exporter (texte, PDF, imprimer)…'), run: cmdOf('export')}, {icon: '📋', label: i18n('Copier le texte'), run: cmdOf('copy')}, '-', ...(fichierLinks().length ? [...fichierLinks(), '-'] : []), {icon: '🖼️', label: i18n('Image de l’acte…'), run: cmdOf('image')}, {icon: '🕘', label: `${i18n('Versions')}…`, run: () => openVersions()}, {icon: '⚖️', label: `${i18n('Comparer les lectures')}…`, run: () => openCompare()}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}],
+            Édition: () => [{icon: '↶', label: i18n('Annuler'), shortcut: '⌘Z', disabled: !HX?.canUndo(), run: () => undoZones(false)}, {icon: '↷', label: i18n('Rétablir'), shortcut: '⇧⌘Z', disabled: !HX?.canRedo(), run: () => undoZones(true)}, '-', {icon: '🔍', label: `${i18n('Chercher et remplacer')}…`, shortcut: '⌘F', run: () => openFind(true)}, {icon: '🧩', label: i18n('Modèle d’acte'), run: cmdOf('template')}, '-', {icon: '🧲', label: i18n('Recaler les zones sur les lignes'), disabled: !t.data.zones.some(z => z.e > z.s), run: () => snapToLines()}],
             // K1 : les lectures, Repérer et « Ajouter à la généalogie » sont des outils (plus dans Édition) ; un symbole = une action (K11)
             Outils: () => [{icon: '✋', label: i18n('Déplacer l’image'), shortcut: 'H', run: () => setTool('pan')}, {icon: '▭', label: i18n('Dessiner une zone'), shortcut: 'Z', run: () => setTool('zone')}, {icon: '🔍', label: i18n('Loupe'), shortcut: 'L', run: cmdOf('loupe')}, '-',
                 {icon: '✍️', label: i18n('Lire l’écriture à la main (rapide)'), run: cmdOf('htr')}, {icon: '🖨', label: i18n('Lire un texte imprimé'), run: cmdOf('ocr')}, {icon: '🔬', label: `${i18n('Lecture approfondie (IA)')}…`, run: cmdOf('deep')}, {icon: '▤', label: i18n('Relier les lignes à l’image'), run: cmdOf('lines')}, '-',
                 {icon: '🪄', label: i18n('Corrections'), run: cmdOf('fix')}, {icon: '🧭', label: i18n('Repérer les noms, dates, lieux'), run: cmdOf('detect')}, {icon: '✓', label: `${i18n('Ajouter à la généalogie')}…`, run: cmdOf('found')}, '-',
                 {icon: '📖', label: i18n('Aide à la lecture…'), run: cmdOf('aide')}, {icon: '🪙', label: i18n('Convertisseur d’autrefois…'), run: () => ext.autrefois?.open()}],
-            Affichage: () => [{icon: '⤢', label: i18n('Ajuster à la fenêtre'), shortcut: '⌘0', run: () => txBar?.zoom.fit()}, {icon: '↔', label: i18n('Toute la largeur (pour lire)'), run: () => imgW && applyFit('width')}, {label: '100 %', shortcut: '⌘1', run: () => txBar?.zoom.actual()}, {icon: '＋', label: i18n('Zoom avant'), shortcut: '⌘+', run: () => txBar?.zoom.in()}, {icon: '−', label: i18n('Zoom arrière'), shortcut: '⌘−', run: () => txBar?.zoom.out()}, '-',
-                {icon: '⟳', label: i18n('Tourner de 90°'), run: cmdOf('rot')}, $('[data-tx-cmd="better"]') ? {icon: '🎚️', label: `${i18n('Mieux voir')}…`, run: () => togglePanel(true)} : null, {icon: '↺', label: i18n('Remettre l’image comme au départ'), run: cmdOf('resetview')}, '-',
-                TV.reviewMode?.() ? {icon: '👁', label: i18n('Relire ligne à ligne'), shortcut: 'R', run: cmdOf('review')} : null, {icon: '№', label: TV.lineNos() ? i18n('Cacher les numéros de ligne') : i18n('Montrer les numéros de ligne'), run: () => TV.setLineNos(!TV.lineNos())}, {label: TV.abbrevOn?.() ? i18n('Ne plus souligner les abréviations') : i18n('Souligner les abréviations connues'), run: () => TV.setAbbrevOn(!TV.abbrevOn())}, '-', {icon: '⌨️', label: i18n('Raccourcis clavier'), shortcut: '⌘/', run: () => showKeys()}]});
+            Affichage: () => [{icon: '⤢', label: i18n('Ajuster à la fenêtre'), shortcut: '⌘0', run: () => txBar?.zoom.fit()}, {icon: '↔', label: i18n('Toute la largeur (pour lire)'), run: () => imgW && applyFit('width')}, {label: '100 %', shortcut: '⌘1', run: () => txBar?.zoom.actual()}, {icon: '＋', label: i18n('Zoom avant'), shortcut: 'Mod++', run: () => txBar?.zoom.in()}, {icon: '−', label: i18n('Zoom arrière'), shortcut: '⌘−', run: () => txBar?.zoom.out()}, '-',
+                {icon: '⟳', label: i18n('Tourner de 90°'), run: cmdOf('rot')}, $('[data-tx-cmd="better"]') ? {icon: '🎚️', label: `${i18n('Mieux voir')}…`, run: () => togglePanel(true)} : null, {icon: '↺', label: i18n('Remettre comme au départ'), help: i18n('Remettre l’image comme au départ (tous les réglages de l’image à zéro)'), run: cmdOf('resetview')}, '-',
+                TV.reviewMode?.() ? {icon: '👁', label: i18n('Relire ligne à ligne'), shortcut: 'R', run: cmdOf('review')} : null, {icon: '№', label: TV.lineNos() ? i18n('Cacher les numéros de ligne') : i18n('Montrer les numéros de ligne'), run: () => TV.setLineNos(!TV.lineNos())}, {label: TV.abbrevOn?.() ? i18n('Ne plus souligner les abréviations') : i18n('Souligner les abréviations connues'), run: () => TV.setAbbrevOn(!TV.abbrevOn())}, '-', {icon: '⌨️', label: i18n('Raccourcis clavier'), shortcut: '⌘/', run: () => showKeys()}]}));
         UI.editorRail?.($('[data-tx-rail]'), {breaks: ['[data-tx-cmd="loupe"]', '[data-tx-cmd="image"]']});
+        (ext.txPlugins || []).forEach(f => { try { f(plug); } catch (e) { console.error(e); } });
         if (UI.editorStatus) { // K18 : l'image à gauche, l'aide de l'outil au milieu, le zoom à droite (⌘ + molette, ⌘0, ⌘1)
             txBar = UI.editorStatus({zoom: {get: () => zoom, set: k => { if (!imgW) return; const r = stage.getBoundingClientRect(); zoomAt(k, r.width / 2, r.height / 2); }, fit: () => imgW && applyFit('page'), min: .02, max: 20}});
+            const say = document.createElement('span'); say.className = 'h-tx-say'; say.dataset.txSay = ''; say.setAttribute('role', 'status'); say.setAttribute('aria-live', 'polite'); say.textContent = lastStatus; say.title = lastStatus;
+            txBar.querySelector('[data-ed-help]')?.before(say); // 11 (audit) : les messages et les consignes de l'étape, en bas, sur toute la largeur
             $('.h-tx').appendChild(txBar); paintTxBar();
         }
         if (!t.filename && !ctx.id) setTimeout(pickImage, 50);
-        return {get t() { return t; }, detect: runDetect, save};
+        return {get t() { return t; }, detect: runDetect, save, links: {curMedia, textHtml, peopleRows, sendImageTo, sendTextTo, sendPeopleTo, toTextDoc, retouchImage, signZone, docxBlob, selectZone: id => { selZone = id; drawZones(); }}};
     }
 
     /* ═════════ Dans la visionneuse : un seul texte par document, partagé avec l'Atelier de transcription ═════════ */
@@ -1579,6 +2622,7 @@
      *  zones, personnes relevées) et « 📜 Ouvrir dans l'Atelier » ; plusieurs actes sur l'image : un bloc par acte, la case en lecture */
     async function lbRefresh(force = false) {
         const area = document.getElementById('lightbox-transcription'), it = lbItem(); if (!area || !document.getElementById('lightbox')?.open) return;
+        ext.txAligne?.gutter(area)?.paint();
         let box = document.getElementById('lightbox-acts'); if (!box) { box = document.createElement('div'); box.id = 'lightbox-acts'; box.className = 'lb-acts'; area.after(box); }
         const old = document.getElementById('act-transcriber-open'); if (old) old.hidden = true; // remplacé par « 📜 Ouvrir dans l'Atelier » ci-dessous
         const isImg = it && /\.(jpe?g|png|webp|gif|tiff?)$/i.test(it.filename || '');
@@ -1592,8 +2636,11 @@
         if (force && text != null && area.value !== text) { area.value = text; it.transcription = text; }
         const many = lbActs.length > 1, ro = !!document.body?.classList.contains('is-kiosk'), pageOf = lbActs.some(a => a.page_of); // 📑 une page d'un acte en plusieurs pages
         area.readOnly = many || pageOf;
+        ext.txAligne?.gutter(area)?.paint(); // 3c : les mêmes numéros de ligne que dans l'Atelier
         area.title = many ? i18n('Plusieurs actes sur cette image : chacun se modifie dans l’Atelier de transcription.') : pageOf ? i18n('Cette page fait partie d’un acte en plusieurs pages : son texte se modifie dans l’Atelier de transcription.') : '';
-        const people = a => (a.people || []).filter(p => p.name).map(p => `<span class="lb-acts-chip">${esc(p.name)}${p.role ? ` <small>${esc(p.role)}</small>` : ''}${p.person_id ? ' ✓' : ''}</span>`).join('');
+        // 3c : comme sur la page du document, un nom pas encore relié se relie dans l'Atelier (🔗)
+        const people = a => (a.people || []).filter(p => p.name).map(p => (!p.person_id && !ro ? `<button type="button" class="lb-acts-chip is-unlinked" data-lbact-open="${a.id}" title="${esc(i18n('Pas encore relié : le relier dans l’Atelier'))}">🔗 ${esc(p.name)}${p.role ? ` <small>${esc(p.role)}</small>` : ''}</button>`
+            : `<span class="lb-acts-chip">${esc(p.name)}${p.role ? ` <small>${esc(p.role)}</small>` : ''}${p.person_id ? ' ✓' : ''}</span>`)).join('');
         const actRow = a => { const st = ST_LABEL[a.status] || ST_LABEL.doing;
             return `<li><div class="lb-acts-meta">${many ? `<b>📜 ${esc(a.title || kindLabel(a.kind))}</b> ` : ''}${badgeH(kindLabel(a.kind), 'grey')}${badgeH(i18n(st[0]), st[1])}${a.zones ? badgeH(A().plural(a.zones, 'zone'), 'blue') : ''}${many && !ro ? ` <button type="button" class="link-button" data-lbact-open="${a.id}">${esc(i18n('📜 Ouvrir dans l’Atelier'))}</button>` : ''}</div>
                 ${(a.people || []).some(p => p.name) ? `<div class="lb-acts-people"><span class="muted">${esc(i18n('Relevés dans le texte :'))}</span> ${people(a)}</div>` : ''}</li>`; };
@@ -1622,7 +2669,7 @@
         const people = a => (a.people || []).filter(p => p.name).map(p => `${esc(p.name)}${p.role ? ` <small class="muted">(${esc(p.role)})</small>` : ''}`).join(', ');
         const body = `<div class="lb-read"><figure class="lb-read-img"><img src="media/${encodeURIComponent(it.filename)}" alt=""></figure><div class="lb-read-txt">
             ${lbActs.length ? '' : `<h3>${i18n('Transcription du document')}</h3>`}${lbActs.length ? '' : txt.trim() ? `<pre class="lb-read-pre">${esc(txt)}</pre>` : `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📝</span><span class="empty-line-text">${i18n('Rien d’écrit pour l’instant dans la visionneuse.')}</span></p>`}
-            ${lbActs.map(a => `<section class="lb-read-act"><h3>📜 ${esc(a.title || kindLabel(a.kind))}</h3><p class="muted">${esc([kindLabel(a.kind), a.date_text, a.place, a.source].filter(Boolean).join(' · '))}</p>${a.people?.length ? `<p><b>${i18n('Personnes :')}</b> ${people(a)}</p>` : ''}${a.body?.trim() ? `<pre class="lb-read-pre">${esc(a.body)}</pre>` : ''}<button type="button" class="button small secondary" data-lbact-open="${a.id}">${esc(i18n('📜 Ouvrir dans l’Atelier'))}</button></section>`).join('')}</div></div>`;
+            ${lbActs.map(a => `<section class="lb-read-act"><h3>📜 ${esc(a.title || kindLabel(a.kind))}</h3><p class="muted">${esc([kindLabel(a.kind), a.date_text, a.place, a.source].filter(Boolean).join(' · '))}</p>${a.reason && ext.txCtx ? `<p class="lb-read-why">${ext.txCtx.reasonHtml(a.reason)}</p>` : ''}${a.people?.length ? `<p><b>${i18n('Personnes :')}</b> ${people(a)}</p>` : ''}${a.body?.trim() ? `<pre class="lb-read-pre">${esc(a.body)}</pre>` : ''}<button type="button" class="button small secondary" data-lbact-open="${a.id}">${esc(i18n('📜 Ouvrir dans l’Atelier'))}</button></section>`).join('')}</div></div>`;
         ext.openDialog({eyebrow: 'TRANSCRIPTION', title: `📖 ${it.title || 'Document'}`, wide: true, submitLabel: `🖨 ${i18n('Imprimer')}`, body,
             onOpen: dg => { dg.classList.add('lb-read-dlg'); dg.addEventListener('click', e => { const b = e.target.closest('[data-lbact-open]'); if (b) { dg.close(); lbOpenTool(Number(b.dataset.lbactOpen)); } }); },
             onSubmit: f => { const UI2 = window.LCNDA_UI; if (!UI2?.openPrintDialog) { toast(i18n('La fenêtre « Imprimer » n’est pas chargée.'), 'error'); return false; } // L1 : la fenêtre « Imprimer » commune
@@ -1672,9 +2719,9 @@
         const row = (r, i) => { const role = r.state === 'tolink' ? badgeH(i18n('relevé, à relier'), 'yellow') : r.role ? badgeH(r.role, 'grey') : '';
             const th = r.thumb ? `<img src="media/${esc(encodeURIComponent(r.thumb))}" alt="" loading="lazy">` : '<span aria-hidden="true">📜</span>';
             const main = r.state === 'tolink' ? (kiosk ? '' : `<button type="button" class="button small secondary" data-pacts-link="${i}">${esc(i18n('Relier'))}</button>`) : `<button type="button" class="button small secondary" data-pacts-open="${i}">${esc(i18n('Ouvrir'))}</button>`;
-            return `<li data-pacts-row="${i}"><span class="h-pacts-img">${th}</span><div><b>${esc(r.title || kindLabel(r.kind))}</b> ${role}${r.state === 'tolink' && r.name ? ` <small class="muted">${esc(r.name)}</small>` : ''}${r.excerpt ? `<q data-i18n-off>${esc(r.excerpt)}</q>` : ''}</div><span class="h-pacts-acts">${main}<button type="button" class="icon-button small" data-pacts-more="${i}" aria-label="${esc(i18n('Plus d’actions'))}" title="${esc(i18n('Plus d’actions'))}">⋯</button></span></li>`; };
+            return `<li data-pacts-row="${i}"><span class="h-pacts-img">${th}</span><div><b>${esc(r.title || kindLabel(r.kind))}</b> ${role}${r.state === 'tolink' && r.name ? ` <small class="muted">${esc(r.name)}</small>` : ''}${r.reason && ext.txCtx ? `<div class="h-pacts-why">${ext.txCtx.reasonHtml(r.reason)}</div>` : ''}${r.excerpt ? `<q data-i18n-off>${esc(r.excerpt)}</q>` : ''}</div><span class="h-pacts-acts">${main}<button type="button" class="icon-button small" data-pacts-more="${i}" aria-label="${esc(i18n('Plus d’actions'))}" title="${esc(i18n('Plus d’actions'))}">⋯</button></span></li>`; };
         const guessN = all.filter(r => r.state === 'tolink').length;
-        const body = `<div class="h-pacts" data-pacts-person="${pid}">${list.length ? `<ul class="h-pacts-list">${list.map(r => row(r, all.indexOf(r))).join('')}</ul>` : `<p class="muted">${esc(i18n('Aucun document transcrit pour l’instant.'))}</p>`}
+        const body = `<div class="h-pacts" data-pacts-person="${pid}">${list.length ? `<ul class="h-pacts-list">${list.map(r => row(r, all.indexOf(r))).join('')}</ul>` : `${window.LCNDA_APP.empty(i18n('Aucun document transcrit pour l’instant.'))}`}
             ${guessN ? `<div class="h-pacts-foot">${window.LCNDA_UI?.checkHtml ? window.LCNDA_UI.checkHtml(i18n('Avec les noms relevés pas encore reliés'), {checked: withGuess(), attrs: 'data-pacts-guess'}) : ''}</div>` : ''}</div>`;
         ext._pacts = {all, pid};
         return A().card(index, i18n('📜 Actes et transcriptions'), list.length, body, 'span-12', '');

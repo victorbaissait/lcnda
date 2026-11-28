@@ -1,0 +1,128 @@
+fr ¦ hr ¦ sl
+# 🗂 État d’un recueil (heritage-recueil-etat.js, lib/recueil_etat.php)
+{n} lignes, {r} relues ¦ Retci: {n}, provjereno: {r} ¦ Vrstice: {n}, pregledane: {r}
+Photo à refaire ¦ Fotografiju treba ponoviti ¦ Fotografijo je treba ponoviti
+🟢 finies ou 🔵 relues ¦ 🟢 gotove ili 🔵 provjerene ¦ 🟢 končane ali 🔵 pregledane
+🟡 en cours ¦ 🟡 u tijeku ¦ 🟡 v teku
+⚪ pas encore transcrites ¦ ⚪ još neprepisane ¦ ⚪ še neprepisane
+⛔ absentes ¦ ⛔ nedostaju ¦ ⛔ manjkajoče
+{a} finies, {b} relues, {c} en cours, {d} à faire, {e} absentes ¦ Gotove: {a}, provjerene: {b}, u tijeku: {c}, za napraviti: {d}, nedostaju: {e} ¦ Končane: {a}, pregledane: {b}, v teku: {c}, za opraviti: {d}, manjkajoče: {e}
+Fiabilité : ¦ Pouzdanost: ¦ Zanesljivost:
+Pas en ligne ¦ Nije na mreži ¦ Ni na spletu
+Blanche ¦ Prazna ¦ Prazna
+p. {x} ¦ str. {x} ¦ str. {x}
+Ajouter aux demandes ¦ Dodaj u zahtjeve ¦ Dodaj med prošnje
+Non communicables ¦ Nedostupne javnosti ¦ Nedostopne javnosti
+Ouvrir la première ¦ Otvori prvu ¦ Odpri prvo
+Relire la première ¦ Provjeri prvu ¦ Preglej prvo
+À transcrire ¦ Za prijepis ¦ Za prepis
+Commencer p. {n} ¦ Počni str. {n} ¦ Začni str. {n}
+Rien ne reste à faire sur ce recueil. ¦ U ovoj zbirci više nema ništa za napraviti. ¦ V tej zbirki ni ostalo nič več za opraviti.
+Demande ajoutée ({t}) : Recherche › Suivi des registres › Demandes. ¦ Zahtjev dodan ({t}): Istraživanje › Praćenje indeksiranih matičnih knjiga › Zahtjevi. ¦ Prošnja dodana ({t}): Raziskovanje › Spremljanje indeksiranih matičnih knjig › Prošnje.
+Après « {a} » vient « {b} » : il manque peut-être {x}. ¦ Nakon „{a}” dolazi „{b}”: možda nedostaje {x}. ¦ Za »{a}« pride »{b}«: morda manjka {x}.
+Poser ces pages comme absentes… ¦ Dodaj ove stranice kao nedostajuće… ¦ Dodaj te strani kot manjkajoče…
+C’est normal ¦ To je normalno ¦ To je v redu
+« {a} » deux fois (pages {x} et {y}) : une photo en double, ou « bis » ? ¦ „{a}” dvaput (stranice {x} i {y}): dvostruka fotografija ili „bis”? ¦ »{a}« dvakrat (strani {x} in {y}): podvojena fotografija ali »bis«?
+Renommer en « {a} bis » ¦ Preimenuj u „{a} bis” ¦ Preimenuj v »{a} bis«
+Laisser ¦ Ostavi ¦ Pusti
+Le recueil devrait avoir {e} pages, il en a {n} ici (absentes comprises) : {x} ¦ Zbirka bi trebala imati {e} stranica, ovdje ih ima {n} (uključujući nedostajuće): {x} ¦ Zbirka bi morala imeti strani: {e}, tukaj jih ima {n} (vključno z manjkajočimi): {x}
+il en manque {d}. ¦ nedostaje ih {d}. ¦ manjka jih {d}.
+{d} de trop (une photo en double ?). ¦ {d} viška (dvostruka fotografija?). ¦ {d} preveč (podvojena fotografija?).
+Poser {n} pages absentes ¦ Dodaj nedostajuće stranice ({n}) ¦ Dodaj manjkajoče strani ({n})
+Marquer {n} pages absentes ¦ Označi stranice kao nedostajuće ({n}) ¦ Označi strani kot manjkajoče ({n})
+Marquer « {p} » absente ¦ Označi „{p}” kao nedostajuću ¦ Označi »{p}« kot manjkajočo
+🗂 ÉTAT DU RECUEIL ¦ 🗂 STANJE ZBIRKE ¦ 🗂 STANJE ZBIRKE
+Poser les pages ¦ Dodaj stranice ¦ Dodaj strani
+Marquer absentes ¦ Označi kao nedostajuće ¦ Označi kot manjkajoče
+Pourquoi ces pages ne sont pas là ? ¦ Zašto ovih stranica nema? ¦ Zakaj teh strani ni tukaj?
+ex. arrachées, mentionné en marge du f° 16 ¦ npr. istrgnute, spomenuto na margini f° 16 ¦ npr. iztrgane, omenjeno na robu f° 16
+Ajouter aussi aux Lacunes d’archives (conseillé) ¦ Dodaj i u Praznine u arhivima (preporučeno) ¦ Dodaj tudi med Vrzeli v arhivih (priporočeno)
+Les pages ¦ Stranice ¦ Strani
+Lisibilité ¦ Čitljivost ¦ Berljivost
+(choisi) ¦ (odabrano) ¦ (izbrano)
+État du recueil ¦ Stanje zbirke ¦ Stanje zbirke
+Numérotation pas dite ¦ Numeracija nije navedena ¦ Številčenje ni navedeno
+{n} pages attendues ¦ Očekivane stranice: {n} ¦ Pričakovane strani: {n}
+Numérotation, pages attendues ¦ Numeracija, očekivane stranice ¦ Številčenje, pričakovane strani
+Cases ¦ Kućice ¦ Polja
+Choisir des pages ¦ Odaberi stranice ¦ Izberi strani
+Exporter l’état (tableur) ¦ Izvezi stanje (proračunska tablica) ¦ Izvozi stanje (preglednica)
+Clique sur les pages (Maj + clic : de… à…) ¦ Klikni na stranice (Shift + klik: od… do…) ¦ Klikni strani (Shift + klik: od… do…)
+Changer l’état… ¦ Promijeni stanje… ¦ Spremeni stanje…
+Marquer absentes… ¦ Označi kao nedostajuće… ¦ Označi kot manjkajoče…
+Tout choisir ¦ Odaberi sve ¦ Izberi vse
+Pas encore de page ¦ Još nema stranica ¦ Še ni strani
+Ajoute des photos : chaque photo devient une page. ¦ Dodaj fotografije: svaka fotografija postaje stranica. ¦ Dodaj fotografije: vsaka fotografija postane stran.
+Ce qui reste, dans l’ordre conseillé ¦ Što je preostalo, preporučenim redom ¦ Kaj ostane, v priporočenem vrstnem redu
+Les demandes vont dans Recherche › Suivi des registres › Demandes, les lacunes dans les Lacunes d’archives : les listes qui existent. ¦ Zahtjevi idu u Istraživanje › Praćenje indeksiranih matičnih knjiga › Zahtjevi, praznine u Praznine u arhivima: popise koji već postoje. ¦ Prošnje gredo v Raziskovanje › Spremljanje indeksiranih matičnih knjig › Prošnje, vrzeli med Vrzeli v arhivih: sezname, ki že obstajajo.
+Revenir à l’état calculé ¦ Vrati na izračunato stanje ¦ Vrni na izračunano stanje
+État du texte ¦ Stanje teksta ¦ Stanje besedila
+Photo bonne (plus à refaire) ¦ Fotografija je dobra (ne treba je ponoviti) ¦ Fotografija je dobra (ni je treba ponoviti)
+Lisibilité : {x} ¦ Čitljivost: {x} ¦ Berljivost: {x}
+Plus absentes ¦ Više ne nedostaju ¦ Ne manjkajo več
+Renommée en « {a} » ¦ Preimenovano u „{a}” ¦ Preimenovano v »{a}«
+État choisi ¦ Stanje odabrano ¦ Stanje izbrano
+Lignes relues ¦ Provjereni retci ¦ Pregledane vrstice
+Mots peu sûrs ¦ Nesigurne riječi ¦ Negotove besede
+Numérotation enregistrée ¦ Numeracija spremljena ¦ Številčenje shranjeno
+Comment ce recueil est numéroté ? ¦ Kako je ova zbirka numerirana? ¦ Kako je ta zbirka oštevilčena?
+Pas dit ¦ Nije navedeno ¦ Ni navedeno
+Pages attendues (pour repérer ce qui manque) ¦ Očekivane stranice (da uočiš što nedostaje) ¦ Pričakovane strani (da opaziš, kaj manjka)
+ex. 40 ¦ npr. 40 ¦ npr. 40
+dans les Lacunes d’archives ¦ u Prazninama u arhivima ¦ v Vrzelih v arhivih
+Plus absente ¦ Više ne nedostaje ¦ Ne manjka več
+Revenir à l’état calculé ({s}) ¦ Vrati na izračunato stanje ({s}) ¦ Vrni na izračunano stanje ({s})
+Calculé par l’Atelier (acte n° {n}) ¦ Izračunala Radionica (zapis br. {n}) ¦ Izračunala Delavnica (vpis št. {n})
+Calculé : texte écrit = en cours ¦ Izračunato: napisan tekst = u tijeku ¦ Izračunano: napisano besedilo = v teku
+Fiabilité de la lecture ¦ Pouzdanost čitanja ¦ Zanesljivost branja
+rien d’écrit ¦ ništa nije napisano ¦ nič napisanega
+{r} lignes relues sur {n} ¦ Provjereni retci: {r} od {n} ¦ Pregledane vrstice: {r} od {n}
+Cette page est absente… ¦ Ova stranica nedostaje… ¦ Ta stran manjka…
+État calculé ¦ Izračunato stanje ¦ Izračunano stanje
+Lisibilité notée ¦ Čitljivost zabilježena ¦ Berljivost zabeležena
+Photo bonne ¦ Fotografija je dobra ¦ Fotografija je dobra
+Manquante ¦ Nedostaje ¦ Manjkajoča
+on ne sait pas encore ¦ još se ne zna ¦ še ni znano
+Perdue ou détruite ¦ Izgubljena ili uništena ¦ Izgubljena ali uničena
+n’existe plus ¦ više ne postoji ¦ ne obstaja več
+Pas encore photographiée ¦ Još nije fotografirana ¦ Še ni fotografirana
+par moi ¦ od mene ¦ z moje strani
+Pas numérisée ¦ Nije digitalizirana ¦ Ni digitalizirana
+par le service d’archives ¦ od strane arhiva ¦ s strani arhiva
+Numérisée, pas en ligne ¦ Digitalizirana, nije na mreži ¦ Digitalizirana, ni na spletu
+Non communicable ¦ Nedostupna javnosti ¦ Nedostopna javnosti
+jusqu’à une date ¦ do određenog datuma ¦ do določenega datuma
+En restauration ¦ Na restauraciji ¦ V restavriranju
+pas consultable ¦ ne može se pregledati ¦ ni na voljo za vpogled
+dans un autre registre, un autre fonds ¦ u drugoj knjizi, drugom fondu ¦ v drugi knjigi, drugem fondu
+pas absente : vide ¦ ne nedostaje: prazna ¦ ne manjka: prazna
+Paginé ¦ Paginirano ¦ Paginirano
+p. 1, 2, 3… ¦ str. 1, 2, 3… ¦ str. 1, 2, 3…
+Folioté ¦ Folijirano ¦ Foliirano
+f° 1 r°, f° 1 v°… — conseillé pour les registres anciens ¦ f° 1 r°, f° 1 v°… — preporučeno za stare matične knjige ¦ f° 1 r°, f° 1 v°… — priporočeno za stare matične knjige
+Sans ordre (liasse, carton) ¦ Bez redoslijeda (svežanj, kutija) ¦ Brez vrstnega reda (sveženj, škatla)
+des pièces, rangées par toi ¦ jedinice koje slažeš sam ¦ enote, ki jih urediš sam
+Numérotation des archives ¦ Numeracija arhiva ¦ Številčenje arhiva
+pièce 1, 2… donnée par le service ¦ jedinica 1, 2… koju daje arhiv ¦ enota 1, 2…, ki jo določi arhiv
+Bonne ¦ Dobra ¦ Dobra
+Illisible en partie ¦ Djelomično nečitljiva ¦ Delno neberljiva
+Illisible ¦ Nečitljiva ¦ Neberljiva
+Sûre ¦ Sigurno ¦ Zanesljivo
+=mot peu sûr ¦ nesigurna riječ|nesigurne riječi|nesigurnih riječi ¦ negotova beseda|negotovi besedi|negotove besede|negotovih besed
+=blanche ¦ prazna|prazne|praznih ¦ prazna|prazni|prazne|praznih
+=page à relire ¦ stranica za provjeru|stranice za provjeru|stranica za provjeru ¦ stran za pregled|strani za pregled|strani za pregled|strani za pregled
+=page avec des mots peu sûrs ¦ stranica s nesigurnim riječima|stranice s nesigurnim riječima|stranica s nesigurnim riječima ¦ stran z negotovimi besedami|strani z negotovimi besedami|strani z negotovimi besedami|strani z negotovimi besedami
+=page absente posée ¦ dodana nedostajuća stranica|dodane nedostajuće stranice|dodanih nedostajućih stranica ¦ dodana manjkajoča stran|dodani manjkajoči strani|dodane manjkajoče strani|dodanih manjkajočih strani
+=page marquée absente ¦ stranica označena kao nedostajuća|stranice označene kao nedostajuće|stranica označenih kao nedostajuće ¦ stran, označena kot manjkajoča|strani, označeni kot manjkajoči|strani, označene kot manjkajoče|strani, označenih kot manjkajoče
+=page changée ¦ promijenjena stranica|promijenjene stranice|promijenjenih stranica ¦ spremenjena stran|spremenjeni strani|spremenjene strani|spremenjenih strani
+=page choisie ¦ odabrana stranica|odabrane stranice|odabranih stranica ¦ izbrana stran|izbrani strani|izbrane strani|izbranih strani
+État des pages ¦ Stanje stranica ¦ Stanje strani
+Une case par page, une couleur par état ¦ Jedna kućica po stranici, jedna boja po stanju ¦ Eno polje na stran, ena barva na stanje
+Reste à faire ¦ Preostalo za napraviti ¦ Še za opraviti
+Autre demande ¦ Drugi zahtjev ¦ Druga prošnja
+À consulter en salle ¦ Za pregled u čitaonici ¦ Za vpogled v čitalnici
+À photographier / numériser ¦ Za fotografiranje / digitalizaciju ¦ Za fotografiranje / digitalizacijo
+pages photographiées sur les {n} attendues ¦ fotografiranih stranica od {n} očekivanih ¦ fotografiranih strani od {n} pričakovanih
+pages photographiées ¦ fotografiranih stranica ¦ fotografiranih strani
+pièces photographiées sur les {n} attendues ¦ fotografiranih jedinica od {n} očekivanih ¦ fotografiranih enot od {n} pričakovanih
+pièces photographiées ¦ fotografiranih jedinica ¦ fotografiranih enot

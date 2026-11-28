@@ -1,0 +1,21 @@
+/* 🖼️ Voir son village (assets/js/heritage-lot10-voir-village.js) : les lignes reprennent .hist-row / .hist-life (histoire.css) */
+.l10v-more { margin-top: 3px; }
+.l10v-more > summary { cursor: pointer; color: var(--blue-bright, #055dff); font-size: 13px; list-style: none; }
+.l10v-more > summary::-webkit-details-marker { display: none; }
+.l10v-more[open] > summary { margin-bottom: 3px; }
+.l10v-src { white-space: nowrap; font-size: 12px; }
+.l10v-where { margin: 0 0 6px; font-size: 12.5px; }
+.l10v-place:empty { display: none; }
+.l10v-pair { display: flex; flex-wrap: wrap; gap: 10px; margin: 6px 0 2px; }
+.l10v-fig { margin: 0; max-width: 100%; font-size: 12px; line-height: 1.35; }
+.l10v-fig figcaption { margin-top: 3px; }
+.l10v-map { position: relative; overflow: hidden; max-width: 100%; border-radius: 6px; background: var(--card-bg, rgba(127, 127, 127, .12)); }
+.l10v-map img { position: absolute; width: 256px; height: 256px; max-width: none; }
+.l10v-under { position: absolute; inset: 0; }
+.l10v-pin { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); color: #e0003a; font-weight: 700; font-size: 18px; text-shadow: 0 0 3px #fff, 0 0 3px #fff; pointer-events: none; }
+.l10v-sw { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin: 0 3px 0 6px; vertical-align: -1px; }
+.l10v-tools { margin: 2px 0 4px; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.l10v-table { font-size: 12.5px; margin: 4px 0; }
+.l10v-table td, .l10v-table th { padding: 2px 8px; }
+.l10v-demand .button { margin: 2px 4px 2px 0; }
+@media print { .l10v-more:not([open]) > :not(summary) { display: none; } .l10v-demand, .l10v-tools { display: none; } }

@@ -531,7 +531,7 @@ Le nom du modèle (les données restent : vide-les avant si tu veux un modèle v
 Le nom de la copie : ¦ Το όνομα του αντιγράφου: ¦ Името на копието:
 {name} (copie) ¦ {name} (αντίγραφο) ¦ {name} (копие)
 Les changements faits depuis le dernier enregistrement seront perdus. ¦ Οι αλλαγές από την τελευταία αποθήκευση θα χαθούν. ¦ Промените след последното запазване ще бъдат загубени.
-📋 Partir d’un modèle ¦ 📋 Ξεκίνα από πρότυπο ¦ 📋 Започни от шаблон
+🧩 Partir d’un modèle ¦ 🧩 Ξεκίνα από πρότυπο ¦ 🧩 Започни от шаблон
 Mes modèles ¦ Τα πρότυπά μου ¦ Моите шаблони
 Pas encore de modèle à toi : dans un classeur, Fichier → « Enregistrer comme modèle… ». ¦ Δεν έχεις ακόμη δικό σου πρότυπο: σε ένα βιβλίο εργασίας, Αρχείο → «Αποθήκευση ως πρότυπο…». ¦ Все още нямаш свой шаблон: в работна книга, Файл → „Запази като шаблон…“.
 séparateur « {sep} » ¦ διαχωριστικό «{sep}» ¦ разделител „{sep}“
@@ -615,7 +615,7 @@ Sosa, génération, côté, âge ¦ Sosa, γενιά, πλευρά, ηλικία
 objets, prix, total en livres ¦ αντικείμενα, τιμές, σύνολο σε λίβρες ¦ предмети, цени, общо в ливри
 Registre matricule ¦ Στρατολογικό μητρώο ¦ Военен регистър
 classe, signalement, campagnes ¦ κλάση, περιγραφή, εκστρατείες ¦ набор, описание, походи
-📋 Partir d’un modèle… ¦ 📋 Ξεκίνα από πρότυπο… ¦ 📋 Започни от шаблон…
+🧩 Partir d’un modèle… ¦ 🧩 Ξεκίνα από πρότυπο… ¦ 🧩 Започни от шаблон…
 ⤒ Importer un tableau… ¦ ⤒ Εισαγωγή πίνακα… ¦ ⤒ Импортирай таблица…
 ⤓ Exporter… ¦ ⤓ Εξαγωγή… ¦ ⤓ Експортирай…
 🖨 Imprimer… ¦ 🖨 Εκτύπωση… ¦ 🖨 Печат…

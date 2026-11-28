@@ -55,15 +55,22 @@
         return `<li class="msr-row${done ? ' is-done' : ''} is-${esc(it.urgency)}" data-msr-key="${esc(it.key)}"${hide ? ' hidden' : ''}>
             <span class="msr-ico" aria-hidden="true">${done ? '✓' : ic}</span>
             <div class="msr-main"><div class="msr-title">${esc(it.title)}</div><div class="msr-sub">${badges}${esc(it.detail || '')}${when ? ` · ${when}` : ''}</div></div>
-            <div class="msr-acts">${sf ? `<a class="button small secondary msr-ext" href="${esc(sf)}" target="_blank" rel="noopener noreferrer">🔍 SocFace ↗</a>` : url ? `<a class="icon-button small msr-ext" href="${esc(url)}" target="_blank" rel="noopener noreferrer" title="Ouvrir le lien" aria-label="Ouvrir le lien">🔗</a>` : ''}${it.open ? `<button type="button" class="icon-button small" data-msr-open title="Ouvrir" aria-label="Ouvrir">↗</button>` : ''}${done ? '' : `<button type="button" class="icon-button small msr-done" data-msr-done title="✓ ${esc(it.done_label || 'Fait')}" aria-label="${esc(it.done_label || 'Fait')}">✓</button><button type="button" class="icon-button small" data-msr-snooze title="Reporter à demain ou à la semaine prochaine" aria-label="Reporter">⏭</button>`}</div></li>`;
+            <div class="msr-acts">${sf ? `<a class="button small secondary msr-ext" href="${esc(sf)}" target="_blank" rel="noopener noreferrer">🔍 SocFace ↗</a>` : url ? `<a class="icon-button small msr-ext" href="${esc(url)}" target="_blank" rel="noopener noreferrer" title="${esc(url)}" aria-label="${esc(window.LCNDA_UI?.siteName?.(url) || url)}">↗</a>` : ''}${it.open ? `<button type="button" class="icon-button small" data-msr-open title="Ouvrir" aria-label="Ouvrir">↗</button>` : ''}${done ? '' : `<button type="button" class="icon-button small msr-done" data-msr-done title="✓ ${esc(it.done_label || 'Fait')}" aria-label="${esc(it.done_label || 'Fait')}">✓</button><button type="button" class="icon-button small" data-msr-snooze title="Reporter à demain ou à la semaine prochaine" aria-label="Reporter">⏭</button>`}</div></li>`;
     }
     const moreLabel = n => n === 1 ? i18n('Voir le suivant ↓') : i18n('Voir les {n} suivants ↓', {n}); // C6
     function sectionHtml(id, icon, label, rows, cfg, big) {
         if (!rows.length) return '';
         const lim = big ? Infinity : cfg.limit;
-        const more = rows.length - lim;
+        // 🗂 « Par sorte », la section 💡 À chercher : un cadre par personne (réglage genealogie-cadres) ; « Voir les suivants » montre les cadres suivants
+        const framed = id === 'manque' && cfg.group === 'sorte' && UI().framesOn?.() && rows.some(r => r.person_id);
+        const groups = framed ? UI().groupByPerson(rows, r => r.person_id) : null;
+        const more = (framed ? groups.length : rows.length) - lim;
+        const list = framed ? UI().personCardsHtml(groups.map((g, i) => { const r0 = g.items[0];
+            return UI().personCardHtml({id: g.key, name: r0.person || '', sub: r0.sosa ? `Sosa ${r0.sosa}` : '', cls: 'is-light msr-pc', attrs: i >= lim ? 'hidden' : '', count: g.items.length > 1 ? String(g.items.length) : '',
+                body: `<ul class="msr-list">${g.items.map(r => rowHtml(r, cfg, false)).join('')}</ul>`}); }).join(''))
+            : `<ul class="msr-list">${rows.map((r, i) => rowHtml(r, cfg, i >= lim)).join('')}</ul>`;
         return `<section class="msr-sec" data-msr-sec="${esc(id)}"><h4 class="msr-sec-h"><span aria-hidden="true">${icon}</span> ${esc(label)} <small>${rows.length}</small>${id === 'verifier' && ext.doutes ? ` <button type="button" class="link-button msr-all" data-doutes-all>${esc(i18n('Tout voir →'))}</button>` : ''}</h4>
-            <ul class="msr-list">${rows.map((r, i) => rowHtml(r, cfg, i >= lim)).join('')}</ul>${more > 0 ? `<button type="button" class="link-button msr-more" data-msr-more="${lim}">Voir les ${Math.min(more, lim)} suivants ↓</button>` : ''}</section>`;
+            ${list}${more > 0 ? `<button type="button" class="link-button msr-more" data-msr-more="${lim}">Voir les ${Math.min(more, lim)} suivants ↓</button>` : ''}</section>`;
     }
     function countersHtml(items, done) {
         const c = {late: 0, today: 0, week: 0, later: 0}; items.forEach(i => { c[i.urgency] = (c[i.urgency] || 0) + 1; });
@@ -170,9 +177,9 @@
     });
 
     /* ─────────── ⛶ en grand ─────────── */
-    let bigDlg = null, bigFilter = 'all', bigCfg = null;
+    let bigDlg = null, bigFilter = 'all', bigCfg = null, bigTab = 'todo'; // bigTab : 🗓 à faire | 🧩 ce qui manque (heritage-connexions-besoins.js)
     function drawBig() {
-        if (!bigDlg || !LAST) return;
+        if (!bigDlg || !LAST || bigTab === 'needs') return;
         const {items, done} = visible(LAST, bigCfg);
         const n = k => k === 'all' ? items.length + done.length : k === 'fait' ? done.length : items.filter(i => i.sort === k).length;
         const pills = ['all', ...bigCfg.order.filter(k => !bigCfg.hidden.includes(k))].filter(k => k === 'all' || n(k));
@@ -181,13 +188,15 @@
         bigDlg.querySelector('[data-msr-horizon]').innerHTML = [['today', 'Aujourd’hui'], ['week', 'Cette semaine']].map(([v, l]) => `<button type="button" class="${bigCfg.horizon === v ? 'is-active' : ''}" data-msr-hz="${v}">${l}</button>`).join('');
         bigDlg.querySelector('[data-msr-body]').innerHTML = bodyHtml(LAST, bigCfg, {big: true, filter: bigFilter});
     }
-    async function openBig(widgetId) {
+    async function openBig(widgetId, {tab = 'todo'} = {}) {
         const w = (A().dashboardBlockSettings?.().widgets || []).find(x => x.id === widgetId) || {config: {}};
-        bigCfg = cfgOf(w); bigFilter = 'all';
+        const NX = ext.cxNeeds?.enabled?.() ? ext.cxNeeds : null;
+        bigCfg = cfgOf(w); bigFilter = 'all'; bigTab = NX && tab === 'needs' ? 'needs' : 'todo';
         bigDlg?.close();
         const dlg = bigDlg = document.createElement('dialog');
         dlg.className = 'modal modal-xl msr-big'; dlg.dataset.ownClose = '1';
         dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">TABLEAU DE BORD · EN GRAND</span><h2>🗓 Ma semaine de recherche</h2><p class="muted">Ce qu’il y a à faire, le plus urgent d’abord. ✓ quand c’est fait, ⏭ pour reporter : « ↶ Annuler » en bas à gauche si tu te trompes.</p></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
+            ${NX ? `<div class="segmented msr-tabs" role="tablist" data-msr-tabs><button type="button" role="tab" data-msr-tab="todo">🗓 ${esc(i18n('À faire'))}</button><button type="button" role="tab" data-msr-tab="needs">🧩 ${esc(i18n('Ce qui manque'))}</button></div>` : ''}
             <div class="msr-big-bar"><div class="segmented" role="tablist" data-msr-horizon></div><div class="ui-filters msr-filters" role="tablist" data-msr-filters></div></div>
             <div class="msr-big-body" data-msr-body data-msr-big-body>${UI().spinner ? UI().spinner('Ta semaine…') : '…'}</div>
             <div class="modal-actions"><span class="spacer"></span><button type="button" class="button" data-x>Fermer</button></div>`;
@@ -197,10 +206,19 @@
             if (e.target.closest('[data-x]')) return dlg.close();
             const f = e.target.closest('[data-msr-filter]'); if (f) { bigFilter = f.dataset.msrFilter; drawBig(); return; }
             const h = e.target.closest('[data-msr-hz]'); if (h) { bigCfg = {...bigCfg, horizon: h.dataset.msrHz}; drawBig(); }
+            const tb = e.target.closest('[data-msr-tab]'); if (tb) { bigTab = tb.dataset.msrTab; paintTab(); }
         });
+        const paintTab = () => { // 🧩 « Ce qui manque » : le tableau central des besoins (heritage-connexions-besoins.js)
+            dlg.querySelectorAll('[data-msr-tab]').forEach(b => { const on = b.dataset.msrTab === bigTab; b.classList.toggle('is-active', on); b.setAttribute('aria-selected', String(on)); });
+            dlg.querySelector('.msr-big-bar').hidden = bigTab === 'needs';
+            const body = dlg.querySelector('[data-msr-body]');
+            if (bigTab === 'needs') { delete body.dataset.cxSemBound; body.replaceWith(body.cloneNode(false)); ext.cxNeeds.semaineHtml(dlg.querySelector('[data-msr-body]'), {reload: true}); }
+            else { const b2 = dlg.querySelector('[data-msr-body]'); if (b2.dataset.cxSemBound) { const fresh = b2.cloneNode(false); delete fresh.dataset.cxSemBound; b2.replaceWith(fresh); } drawBig(); }
+        };
         dlg.addEventListener('keydown', e => { if (e.key === 'Tab' && e.target.closest?.('[data-msr-filters]')) { const bs = [...dlg.querySelectorAll('[data-msr-filter]')], i = bs.findIndex(b => b.dataset.msrFilter === bigFilter); if (bs.length > 1) { e.preventDefault(); bigFilter = bs[(i + (e.shiftKey ? bs.length - 1 : 1)) % bs.length].dataset.msrFilter; drawBig(); dlg.querySelector(`[data-msr-filter="${bigFilter}"]`)?.focus(); } } });
         dlg.showModal();
-        try { await load(); } catch (err) { dlg.querySelector('[data-msr-body]').innerHTML = UI().notice ? UI().notice('error', err.message) : esc(err.message); return; }
+        if (NX) paintTab();
+        try { await load(); } catch (err) { if (bigTab !== 'needs') dlg.querySelector('[data-msr-body]').innerHTML = UI().notice ? UI().notice('error', err.message) : esc(err.message); return; }
         drawBig();
     }
 
@@ -259,7 +277,7 @@
         if (t.closest?.('[data-msr-big]')) { e.preventDefault(); const card = t.closest('.dashboard-widget'); openBig(card?.dataset.dashboardWidget || ''); return; }
         const go = t.closest?.('[data-msr-go]'); if (go) { e.preventDefault(); bigDlg?.close(); A().state.researchKind = 'gaps'; A().setModule('recherche'); return; }
         const more = t.closest?.('[data-msr-more]');
-        if (more) { const n = Number(more.dataset.msrMore) || 5; const hid = [...more.closest('.msr-sec').querySelectorAll('.msr-row[hidden]')]; hid.slice(0, n).forEach(r => { r.hidden = false; }); const left = hid.length - n; if (left > 0) more.textContent = moreLabel(Math.min(left, n)); else more.remove(); return; }
+        if (more) { const n = Number(more.dataset.msrMore) || 5; const hid = [...more.closest('.msr-sec').querySelectorAll('.msr-row[hidden], .msr-pc[hidden]')]; hid.slice(0, n).forEach(r => { r.hidden = false; }); const left = hid.length - n; if (left > 0) more.textContent = moreLabel(Math.min(left, n)); else more.remove(); return; }
         const row = t.closest?.('[data-msr-key]'); if (!row || !t.closest('[data-msr-open], [data-msr-done], [data-msr-snooze]')) return;
         const it = byKey(row.dataset.msrKey); if (!it) return;
         e.preventDefault();
@@ -280,5 +298,5 @@
         ], {title: it.title});
     }, true);
 
-    ext.semaine = {load, refresh, openBig, bodyHtml, cfgOf, visible, SORTS, ORDER}; // pour les tests
+    ext.semaine = {load, refresh, openBig, openNeeds: () => openBig('', {tab: 'needs'}), bodyHtml, cfgOf, visible, SORTS, ORDER}; // pour les tests
 })();

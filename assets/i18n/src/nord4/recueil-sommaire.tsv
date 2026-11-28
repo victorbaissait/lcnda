@@ -1,0 +1,88 @@
+fr ¦ fi ¦ hu
+# 📑 Sommaire d’un recueil, messages du serveur (heritage-recueil-sommaire.js, lib/recueil_toc.php, lib/recueil_etat.php, lib/recueils.php)
+haut de ¦ ylhäällä ¦ fent:
+milieu de ¦ keskellä ¦ középen:
+bas de ¦ alhaalla ¦ lent:
+p. ¦ s. ¦ o.
+pages pas dites ¦ sivuja ei kerrottu ¦ nincs megadva oldal
+{d} sur {n} pages finies ou relues ¦ {d}/{n} sivua valmiina tai tarkistettuna ¦ {d}/{n} oldal kész vagy átnézve
+Chargement du sommaire… ¦ Ladataan sisällysluetteloa… ¦ Tartalomjegyzék betöltése…
+Le sommaire ne s’ouvre pas ¦ Sisällysluettelo ei aukea ¦ A tartalomjegyzék nem nyílik meg
+« {a} » et « {b} » se chevauchent ({p} {x}–{y}). ¦ ”{a}” ja ”{b}” menevät päällekkäin ({p} {x}–{y}). ¦ „{a}” és „{b}” átfedi egymást ({x}–{y}. {p}).
+{p} {n} : un acte « {k} » dans « {t} ». ¦ {p} {n}: ”{k}”-merkintä kohdassa ”{t}”. ¦ {n}. {p}: egy „{k}” bejegyzés itt: „{t}”.
+{p} {n} : un acte de {y} dans « {t} ». ¦ {p} {n}: vuoden {y} merkintä kohdassa ”{t}”. ¦ {n}. {p}: egy {y}-es bejegyzés itt: „{t}”.
+Tout ouvrir ¦ Avaa kaikki ¦ Az összes kinyitása
+Tout fermer ¦ Sulje kaikki ¦ Az összes becsukása
+Niveaux montrés ¦ Näytetyt tasot ¦ Megjelenített szintek
+Niveau 1 ¦ Taso 1 ¦ 1. szint
++ passages ¦ + jaksot ¦ + szakaszok
+Chercher dans le sommaire… ¦ Hae sisällysluettelosta… ¦ Keresés a tartalomjegyzékben…
+Chercher dans le sommaire ¦ Hae sisällysluettelosta ¦ Keresés a tartalomjegyzékben
+Chapitre… ¦ Luku… ¦ Fejezet…
+Passage… ¦ Jakso… ¦ Szakasz…
+Proposer le découpage ¦ Ehdota jakoa ¦ Felosztás javaslata
+Ranger par… ¦ Järjestä… ¦ Rendezés…
+Mode lecture ¦ Lukutila ¦ Olvasó mód
+Pas encore de sommaire ¦ Ei vielä sisällysluetteloa ¦ Még nincs tartalomjegyzék
+« ＋ Chapitre… » : un titre, de telle page à telle page (ex. « Mariages 1870 », pages 15 à 19). Ou « ✨ Proposer le découpage » d’après les actes déjà transcrits. ¦ ”＋ Luku…”: otsikko, sivulta toiselle (esim. ”Avioliitot 1870”, sivut 15–19). Tai ”✨ Ehdota jakoa” jo litteroitujen merkintöjen perusteella. ¦ „＋ Fejezet…”: egy cím, ettől az oldaltól addig az oldalig (pl. „Házasságok 1870”, 15–19. oldal). Vagy „✨ Felosztás javaslata” a már átírt bejegyzések alapján.
+Un clic sur un titre : sa première page. Un passage décrit (« du milieu de la page 5 au milieu de la page 7 : mariage… ») ne crée pas de fiche. ¦ Otsikon napsautus avaa sen ensimmäisen sivun. Kuvattu jakso (”sivun 5 keskeltä sivun 7 keskelle: avioliitto…”) ei luo korttia. ¦ Egy címre kattintva megnyílik az első oldala. Egy leírt szakasz („az 5. oldal közepétől a 7. oldal közepéig: házasság…”) nem hoz létre adatlapot.
+Modifier… ¦ Muokkaa… ¦ Szerkesztés…
+Sous-chapitre… ¦ Alaluku… ¦ Alfejezet…
+Passage dans ce chapitre… ¦ Jakso tähän lukuun… ¦ Szakasz ebben a fejezetben…
+Proposer le découpage de ce chapitre ¦ Ehdota tämän luvun jakoa ¦ Felosztás javaslata ehhez a fejezethez
+Supprimer (avec ce qu’il contient) ¦ Poista (sisältöineen) ¦ Törlés (a tartalmával együtt)
+« {t} » retiré du sommaire ¦ ”{t}” poistettu sisällysluettelosta ¦ „{t}” eltávolítva a tartalomjegyzékből
+toute la page ¦ koko sivu ¦ az egész oldal
+Nouveau passage ¦ Uusi jakso ¦ Új szakasz
+Modifier le passage ¦ Muokkaa jaksoa ¦ Szakasz szerkesztése
+Modifier le chapitre ¦ Muokkaa lukua ¦ Fejezet szerkesztése
+📑 SOMMAIRE ¦ 📑 SISÄLLYSLUETTELO ¦ 📑 TARTALOMJEGYZÉK
+Ce que c’est (sans créer de fiche) ¦ Mikä se on (luomatta korttia) ¦ Mi ez (adatlap létrehozása nélkül)
+ex. Mariage de Louis LACOMBE et Anne MAZAUD ¦ esim. Louis LACOMBEn ja Anne MAZAUDin avioliitto ¦ pl. Louis LACOMBE és Anne MAZAUD házassága
+ex. Mariages 1870 ¦ esim. Avioliitot 1870 ¦ pl. Házasságok 1870
+— au premier niveau — ¦ — ylimmällä tasolla — ¦ — a legfelső szinten —
+— pas dit — ¦ — ei kerrottu — ¦ — nincs megadva —
+Endroit ¦ Kohta ¦ Hely
+À la page ¦ Sivulle ¦ Melyik oldalig
+— la même — ¦ — sama — ¦ — ugyanaz —
+Sorte d’acte (facultatif) ¦ Asiakirjan laji (valinnainen) ¦ Bejegyzés fajtája (nem kötelező)
+— toutes — ¦ — kaikki — ¦ — mind —
+Années (facultatif) ¦ Vuodet (valinnainen) ¦ Évek (nem kötelező)
+Description, résumé, ce qu’on y apprend ¦ Kuvaus, tiivistelmä, mitä siitä selviää ¦ Leírás, összefoglaló, mit tudsz meg belőle
+Note (facultatif) ¦ Huomautus (valinnainen) ¦ Megjegyzés (nem kötelező)
+Un passage décrit sert à retrouver ce qu’il y a dans le recueil ; « 👤 » sur les fiches reste possible depuis l’Atelier. ¦ Kuvattu jakso auttaa löytämään, mitä kokoelmassa on; ”👤” korteilla onnistuu edelleen Työpajasta. ¦ Egy leírt szakasz segít megtalálni, mi van a gyűjteményben; a „👤” az adatlapokon továbbra is elérhető a Műhelyből.
+Un chapitre peut contenir des sous-chapitres et des passages. La sorte et les années servent à repérer ce qui n’est pas à sa place. ¦ Luku voi sisältää alalukuja ja jaksoja. Laji ja vuodet auttavat huomaamaan, mikä ei ole paikallaan. ¦ Egy fejezet tartalmazhat alfejezeteket és szakaszokat. A fajta és az évek segítenek kiszúrni, ami nincs a helyén.
+« {t} » ajouté au sommaire ¦ ”{t}” lisätty sisällysluetteloon ¦ „{t}” hozzáadva a tartalomjegyzékhez
+« {t} » modifié ¦ ”{t}” muokattu ¦ „{t}” módosítva
+Rien à proposer : aucun acte repéré sur ces pages. ¦ Ei ehdotettavaa: näiltä sivuilta ei löytynyt merkintöjä. ¦ Nincs mit javasolni: ezeken az oldalakon nincs bejegyzés.
+Découper « {t} » ¦ Jaa ”{t}” ¦ „{t}” felosztása
+✨ Proposer le découpage ¦ ✨ Ehdota jakoa ¦ ✨ Felosztás javaslata
+Ajouter au sommaire ¦ Lisää sisällysluetteloon ¦ Hozzáadás a tartalomjegyzékhez
+D’après les actes déjà transcrits dans l’Atelier (leur sorte et leur année), page par page. Décoche ce qui ne va pas, corrige les titres : rien n’est ajouté avant que tu acceptes. ¦ Työpajassa jo litteroitujen merkintöjen perusteella (niiden laji ja vuosi), sivu sivulta. Poista valinta siitä, mikä ei sovi, korjaa otsikot: mitään ei lisätä ennen kuin hyväksyt. ¦ A Műhelyben már átírt bejegyzések alapján (fajtájuk és évük szerint), oldalról oldalra. Vedd ki a pipát abból, ami nem jó, javítsd a címeket: semmi sem kerül be, amíg el nem fogadod.
+Déjà dans cet ordre. ¦ Jo tässä järjestyksessä. ¦ Már ebben a sorrendben van.
+Pièces rangées ({x}) ¦ Asiakirjat järjestetty ({x}) ¦ Darabok rendezve ({x})
+par sorte ¦ lajin mukaan ¦ fajta szerint
+par cote ¦ signumin mukaan ¦ jelzet szerint
+Par date (de l’acte, sinon du document) ¦ Päivämäärän mukaan (merkinnän, muuten asiakirjan) ¦ Dátum szerint (a bejegyzésé, különben a dokumentumé)
+Par sorte d’acte ¦ Asiakirjan lajin mukaan ¦ Bejegyzés fajtája szerint
+Ranger les pièces ¦ Järjestä asiakirjat ¦ Darabok rendezése
+Tout le sommaire ¦ Koko sisällysluettelo ¦ A teljes tartalomjegyzék
+Pas encore de sommaire. ¦ Ei vielä sisällysluetteloa. ¦ Még nincs tartalomjegyzék.
+Faire le sommaire ¦ Tee sisällysluettelo ¦ Tartalomjegyzék készítése
+=chapitre ajouté au sommaire ¦ luku lisätty sisällysluetteloon|lukua lisätty sisällysluetteloon ¦ fejezet hozzáadva a tartalomjegyzékhez|fejezet hozzáadva a tartalomjegyzékhez
+Document militaire ¦ Sotilasasiakirja ¦ Katonai dokumentum
+Choisis au moins une page. ¦ Valitse vähintään yksi sivu. ¦ Válassz legalább egy oldalt.
+Trop de pages d’un coup. ¦ Liian monta sivua kerralla. ¦ Túl sok oldal egyszerre.
+Une de ces pages n’est pas dans ce recueil. ¦ Yksi näistä sivuista ei ole tässä kokoelmassa. ¦ Az egyik oldal nincs ebben a gyűjteményben.
+Donne le nom des pages à poser (400 au plus). ¦ Anna lisättävien sivujen nimet (enintään 400). ¦ Add meg a felveendő oldalak nevét (legfeljebb 400).
+Une de ces pages a déjà une photo : retire-la à la main. ¦ Yhdellä näistä sivuista on jo kuva: poista se käsin. ¦ Az egyik oldalnak már van fotója: vedd ki kézzel.
+Ligne du sommaire introuvable. ¦ Sisällysluettelon riviä ei löydy. ¦ A tartalomjegyzék sora nem található.
+La première page n’est pas dans ce recueil. ¦ Ensimmäinen sivu ei ole tässä kokoelmassa. ¦ Az első oldal nincs ebben a gyűjteményben.
+La dernière page n’est pas dans ce recueil. ¦ Viimeinen sivu ei ole tässä kokoelmassa. ¦ Az utolsó oldal nincs ebben a gyűjteményben.
+Dis sur quelle page commence ce passage. ¦ Kerro, miltä sivulta tämä jakso alkaa. ¦ Add meg, melyik oldalon kezdődik ez a szakasz.
+Le chapitre parent n’est pas dans ce recueil. ¦ Ylempi luku ei ole tässä kokoelmassa. ¦ A szülőfejezet nincs ebben a gyűjteményben.
+Un passage décrit ne peut pas contenir de chapitre : choisis un chapitre. ¦ Kuvattu jakso ei voi sisältää lukua: valitse luku. ¦ Egy leírt szakasz nem tartalmazhat fejezetet: válassz egy fejezetet.
+Un chapitre ne peut pas être dans lui-même. ¦ Luku ei voi olla itsensä sisällä. ¦ Egy fejezet nem lehet önmagán belül.
+Le sommaire suit l’ordre des pages : change plutôt les pages de ce chapitre. ¦ Sisällysluettelo seuraa sivujen järjestystä: muuta mieluummin tämän luvun sivuja. ¦ A tartalomjegyzék az oldalak sorrendjét követi: inkább ennek a fejezetnek az oldalait módosítsd.
+Trop de documents d’un coup (2000 au plus). ¦ Liian monta asiakirjaa kerralla (enintään 2000). ¦ Túl sok dokumentum egyszerre (legfeljebb 2000).
+Un recueil se fait avec des images (photos de pages) : aucun de ces documents n’en est une. ¦ Kokoelma tehdään kuvista (sivujen kuvista): mikään näistä asiakirjoista ei ole kuva. ¦ Gyűjtemény képekből (oldalfotókból) készül: ezek közül egyik dokumentum sem kép.

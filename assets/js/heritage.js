@@ -48,15 +48,8 @@
 
     /* ─── Petits outils partagés ─────────────────────────────────────── */
 
-    // Liens vers une fiche personne (délégué : marche partout, même dans les widgets et les fenêtres)
-    document.addEventListener('click', event => {
-        const b = event.target.closest?.('[data-h-person]');
-        if (!b) return;
-        event.preventDefault();
-        document.querySelectorAll('dialog.h-modal[open]').forEach(d => d.close());
-        S().currentPersonId = Number(b.dataset.hPerson);
-        A().setModule('personnes');
-    });
+    // Liens vers une fiche personne (data-h-person) : écoutés une seule fois pour toute l'app, comme data-open-person (app.js,
+    // « Ouvrir une fiche : un seul geste partout ») : clic = la fiche, ⌘ / Ctrl + clic = l'autre moitié, clic droit = le menu de la personne
     // Ouvrir une liste (Listes → …)
     function openList(type) { S().listType = type; S().precisePlaceKey = ''; A().setModule('listes'); }
     document.addEventListener('click', event => {
@@ -258,20 +251,22 @@
         return out;
     }
     /**
-     * Carte fixe : points {lat, lon, label, color, n} et trajets {coords:[[lat,lon]…], color, dashed, ocean}.
-     * Les trajets « ocean » suivent le grand cercle.
+     * Carte : points {lat, lon, label, color, n} et trajets {coords:[[lat,lon]…], color, dashed, ocean}.
+     * Les trajets « ocean » suivent le grand cercle. Écrite fixe ici, puis réveillée par heritage-mini-carte.js (zoom, déplacement,
+     * points regroupés, ◐ noir et blanc) ; options : view {lat, lon, zoom}, circles [{lat, lon, km}], cluster, interactive (false = sans gestes).
      */
-    function miniMap(points = [], paths = [], {height = 360, emptyText = 'Rien à placer sur la carte (lieux sans coordonnées).'} = {}) {
+    function miniMap(points = [], paths = [], {height = 360, emptyText = 'Rien à placer sur la carte (lieux sans coordonnées).', view = null, circles = [], cluster, interactive, bg: bgOpt = ''} = {}) { // bg : un fond imposé (ex. « offline » en consultation)
         const app = A();
         // En mer : le trajet qui ne passe que par la mer (sea-route.js) ; en attendant sa carte, le grand cercle
         const seaPath = p => window.LCNDA_SEA?.route(p.coords, p.year) || p.coords.slice(1).reduce((acc, c, i) => acc.concat(greatCircle(p.coords[i], c).slice(i ? 1 : 0)), []);
         // Carte terre / mer pas encore chargée : cette carte se redessine d'elle-même dès qu'elle l'est
         const mapId = paths.some(p => p.ocean) && window.LCNDA_SEA && !window.LCNDA_SEA.ready() ? 'h-map-' + Math.random().toString(36).slice(2, 9) : '';
-        if (mapId) window.LCNDA_SEA.onReady(() => { const el = document.getElementById(mapId); if (el) el.outerHTML = miniMap(points, paths, {height, emptyText}); });
+        if (mapId) window.LCNDA_SEA.onReady(() => { const el = document.getElementById(mapId); if (el) el.outerHTML = miniMap(points, paths, {height, emptyText, view, circles, cluster, interactive, bg: bgOpt}); });
         const drawn = paths.map(p => ({...p, coords: p.ocean ? seaPath(p) : p.coords}))
             .filter(p => p.coords.length > 1);
         const all = [...points.filter(p => Number.isFinite(p.lat) && Number.isFinite(p.lon)).map(p => [p.lat, p.lon]), ...drawn.flatMap(p => p.coords)];
-        if (!all.length) return `<div class="person-map-stage person-map-empty h-map-empty">${empty(emptyText)}</div>`;
+        // 🧩 ce qui manque à la carte (docs/design/connexions-besoins.html) : au lieu de se taire, elle propose de placer les lieux
+        if (!all.length) return `<div class="person-map-stage person-map-empty h-map-empty">${empty(emptyText, ext.lieuxAPlacer && !document.body.classList.contains('is-kiosk') ? {action: {label: i18n('📍 Placer les lieux sans position…'), attrs: 'data-lap-open=""'}} : undefined)}</div>`;
         const width = 1000, pad = 90;
         let zoom = 2;
         for (let z = 13; z >= 1; z--) {
@@ -281,7 +276,7 @@
         if (all.length === 1) zoom = Math.min(zoom, 10);
         const xs = all.map(c => app.lngToX(c[1], zoom)), ys = all.map(c => app.latToY(c[0], zoom));
         const left = (Math.min(...xs) + Math.max(...xs)) / 2 - width / 2, top = (Math.min(...ys) + Math.max(...ys)) / 2 - height / 2;
-        const bg = designBg(), world = 2 ** zoom;
+        const bg = bgOpt || designBg(), world = 2 ** zoom;
         let tiles = '';
         if (bg !== 'grid') {
             for (let tx = Math.floor(left / 256); tx <= Math.ceil((left + width) / 256); tx++) {
@@ -297,7 +292,9 @@
             const [x, y] = px([p.lat, p.lon]);
             return `<g class="h-map-point" transform="translate(${x.toFixed(1)} ${y.toFixed(1)})"><title>${esc(p.label || '')}</title><circle r="${p.n ? 11 : 7}" fill="${esc(p.color || '#0066cc')}" stroke="#fff" stroke-width="2"/>${p.n ? `<text text-anchor="middle" dy="4" font-size="11" font-weight="700" fill="#fff">${esc(p.n)}</text>` : ''}${p.showLabel ? `<text x="12" y="-10" font-size="13" font-weight="700" class="h-map-label">${esc(p.label || '')}</text>` : ''}</g>`;
         }).join('');
-        return `<div class="person-map-stage h-map map-bg-${esc(bg)}"${mapId ? ` id="${mapId}"` : ''} style="aspect-ratio:${width}/${height}" role="img" aria-label="Carte">${tiles}<svg viewBox="0 0 ${width} ${height}">${lines}${marks}</svg></div>`;
+        // 🗺 zoom, déplacement, regroupement, ◐ noir et blanc : la carte est « réveillée » par heritage-mini-carte.js dès qu'elle est dans la page
+        const mm = ext.miniMapEngine ? ext.miniMapEngine.register({points, paths: drawn, bg, view, circles, cluster, interactive}) : '';
+        return `<div class="person-map-stage h-map map-bg-${esc(bg)}"${mapId ? ` id="${mapId}"` : ''}${mm ? ` data-mm="${mm}"` : ''} style="aspect-ratio:${width}/${height}" role="img" aria-label="Carte">${tiles}<svg viewBox="0 0 ${width} ${height}" preserveAspectRatio="none">${lines}${marks}</svg></div>`;
     }
     /* ─── Blocs spéciaux de la fiche : cochés fiche par fiche, ou sur toutes les fiches (Apparence) ─── */
     const FLAG_BLOCKS = [['show_voyage_block', '🚢 Départs / émigration'], ['show_placement_block', '👶 Enfant placé'], ['show_heraldry_block', '🛡️ Noblesse / blason'], ['show_poilu_block', '🎖️ Poilu 14-18'], ['show_resistance_block', '✊ Résistant'], ['show_voter_block', '🗳️ Cartes d’électeur'], ['show_language_block', '🗣️ Langues']];
@@ -768,11 +765,17 @@
         const wage = A().journalierWageSols(year);
         return wage ? sols / wage : null;
     }
+    /** 💰 en euros d'aujourd'hui (🪙 Convertisseur d'autrefois, app-autrefois-engine.js) ; null sans année */
+    function euroToday(value, currency, year) {
+        const F = window.LCNDA_AUTREFOIS; if (!F || !year || !value) return null;
+        const w = F.worth({ok: true, kind: currency === 'livre' ? 'deniers' : currency === 'nf' ? 'nf' : 'franc', value: currency === 'livre' ? Number(value) * 240 : Number(value)}, year);
+        return w ? w.euros : null;
+    }
     function probateSummaryHtml(inv) {
-        const days = workDays(inv.net, inv.currency, inv.year);
+        const days = workDays(inv.net, inv.currency, inv.year), eur = euroToday(inv.net, inv.currency, inv.year);
         const cats = Object.entries(inv.by_category || {}).sort((a, b) => b[1] - a[1]).slice(0, 4);
         return `<article class="h-record"><header><div><strong>📜 Inventaire ${inv.date_text ? 'du ' + esc(inv.date_text) : ''}</strong>${LC(inv.labels)}${inv.notary ? ` <small>— ${esc(inv.notary)}</small>` : ''}${inv.person_name ? `<div>${personLink(inv.person_id, inv.person_name)}</div>` : ''}</div>${tools(`data-h-open-list="probate" data-h-edit="${inv.id}"`, `data-h-probate-delete="${inv.id}"`, 'cet inventaire')}</header>
-            <p class="h-probate-total">${i18n('Total : <strong>{x}</strong>', {x: esc(moneyText(inv.total, inv.currency))})}${inv.debts ? ` · ${i18n('dettes {x}', {x: esc(moneyText(inv.debts, inv.currency))})} · ${i18n('net <strong>{x}</strong>', {x: esc(moneyText(inv.net, inv.currency))})}` : ''}${days ? ` · ${i18n('≈ <strong>{n} journées de travail</strong> d’un journalier ({y} années)', {n: fmt(days), y: fmt(days / 250, 1)})}` : ''}</p>
+            <p class="h-probate-total">${i18n('Total : <strong>{x}</strong>', {x: esc(moneyText(inv.total, inv.currency))})}${inv.debts ? ` · ${i18n('dettes {x}', {x: esc(moneyText(inv.debts, inv.currency))})} · ${i18n('net <strong>{x}</strong>', {x: esc(moneyText(inv.net, inv.currency))})}` : ''}${days ? ` · ${i18n('≈ <strong>{n} journées de travail</strong> d’un journalier ({y} années)', {n: fmt(days), y: fmt(days / 250, 1)})}` : ''}${eur != null ? ` · ${i18n('<strong>{x}</strong> d’aujourd’hui', {x: esc(window.LCNDA_AUTREFOIS.euroText(eur))})}` : ''}</p>
             ${cats.length ? `<p class="muted">${cats.map(([k, v]) => `${esc(probateCategories[k] || k)} : ${esc(moneyText(v, inv.currency))}`).join(' · ')}</p>` : ''}${thumbs('probate-' + inv.id, inv.media)}</article>`;
     }
     ext.personBlocks.probate = (index, detail) => {
@@ -999,7 +1002,7 @@
         if (editing) bindProbateForm(editing);
     };
     function probateItemRow(it = {}) {
-        return `<tr class="h-item-row"><td><input name="room" value="${esc(it.room || '')}" list="h-rooms" placeholder="Cuisine"></td><td><select name="category">${Object.entries(probateCategories).map(([k, l]) => `<option value="${k}" ${it.category === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></td><td><input name="description" value="${esc(it.description || '')}" placeholder="Une table de noyer avec ses deux bancs"></td><td><input name="quantity" value="${esc(it.quantity || '')}" placeholder="1" class="h-narrow"></td><td><input name="value_text" value="${esc(it.value_text || '')}" placeholder="3 l 10 s" class="h-narrow"></td><td><button type="button" class="button small secondary" data-h-row-remove aria-label="Retirer">✕</button></td></tr>`;
+        return `<tr class="h-item-row"><td><input name="room" value="${esc(it.room || '')}" list="h-rooms" placeholder="Cuisine"></td><td><select name="category">${Object.entries(probateCategories).map(([k, l]) => `<option value="${k}" ${it.category === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></td><td><input name="description" value="${esc(it.description || '')}" placeholder="Une table de noyer avec ses deux bancs"></td><td><input name="quantity" value="${esc(it.quantity || '')}" placeholder="1" class="h-narrow"></td><td><input name="value_text" value="${esc(it.value_text || '')}" placeholder="3 l 10 s" class="h-narrow"></td><td class="h-item-eur" data-h-item-eur></td><td><button type="button" class="button small secondary" data-h-row-remove aria-label="Retirer">✕</button></td></tr>`;
     }
     function probateFormHtml(inv) {
         const f = k => esc(inv[k] || '');
@@ -1008,7 +1011,7 @@
             <label>Notaire<input name="notary" value="${f('notary')}" placeholder="Me Dubois, notaire à Tulle"></label><label>Lieu<input name="place_text" value="${f('place_text')}"></label>
             <label>Monnaie<select name="currency"><option value="livre" ${inv.currency === 'livre' ? 'selected' : ''}>Livres tournois (l, s, d)</option><option value="franc" ${inv.currency === 'franc' ? 'selected' : ''}>Francs</option><option value="nf" ${inv.currency === 'nf' ? 'selected' : ''}>Nouveaux francs (1960-2001)</option></select></label><label>Cote<input name="reference" value="${f('reference')}" placeholder="AD19, 3 E 1234"></label></div>
             <h4>Objets, pièce par pièce</h4><p class="muted">Valeur : « 12 l 5 s 3 d » (livres, sols, deniers), « 12 livres 5 sols », ou un nombre (« 152,50 »). La catégorie « Dettes » est déduite du total.</p>
-            <table class="data-table h-items"><thead><tr><th>Pièce</th><th>Catégorie</th><th>Objet</th><th>Qté</th><th>Valeur</th><th></th></tr></thead><tbody data-h-rows="items">${(inv.items?.length ? inv.items : [{}, {}, {}]).map(probateItemRow).join('')}</tbody></table>
+            <table class="data-table h-items"><thead><tr><th>Pièce</th><th>Catégorie</th><th>Objet</th><th>Qté</th><th>Valeur</th><th title="${esc(i18n('Ordre de grandeur : indice des prix de l’INSEE après 1901, prix des denrées avant'))}">${i18n('≈ € d’aujourd’hui')}</th><th></th></tr></thead><tbody data-h-rows="items">${(inv.items?.length ? inv.items : [{}, {}, {}]).map(probateItemRow).join('')}</tbody></table>
             <datalist id="h-rooms"><option>Cuisine</option><option>Chambre</option><option>Grenier</option><option>Cave</option><option>Écurie</option><option>Étable</option><option>Grange</option><option>Boutique</option><option>Atelier</option><option>Cour</option></datalist>
             <p><button type="button" class="button small secondary" data-h-item-add>＋ Ligne</button> <button type="button" class="button small secondary" data-h-item-add5>+ 5 lignes</button> <strong class="h-probate-live"></strong></p>
             <label class="h-block-label">Notes<textarea name="notes" rows="2">${f('notes')}</textarea></label>
@@ -1020,9 +1023,11 @@
         bindMediaEditor(form); form.scrollIntoView({block: 'start'});
         const live = () => {
             const cur = form.elements.currency.value; let total = 0, debts = 0;
-            form.querySelectorAll('.h-item-row').forEach(r => { const v = parseAmount(r.querySelector('[name=value_text]').value) || 0; if (r.querySelector('[name=category]').value === 'dettes') debts += v; else total += v; });
-            const year = yearOf(form.elements.date_text.value), days = workDays(total - debts, cur, year);
-            form.querySelector('.h-probate-live').textContent = `${i18n('Total {x}', {x: moneyText(total, cur)})}${debts ? ` − ${i18n('dettes {x}', {x: moneyText(debts, cur)})} = ${moneyText(total - debts, cur)}` : ''}${days ? ` ≈ ${i18n('{n} journées de travail', {n: fmt(days)})}` : ''}`;
+            const year = yearOf(form.elements.date_text.value);
+            form.querySelectorAll('.h-item-row').forEach(r => { const v = parseAmount(r.querySelector('[name=value_text]').value) || 0; if (r.querySelector('[name=category]').value === 'dettes') debts += v; else total += v;
+                const ce = r.querySelector('[data-h-item-eur]'), eu = v ? euroToday(v, cur, year) : null; if (ce) ce.textContent = eu != null ? window.LCNDA_AUTREFOIS.euroText(eu) : ''; });
+            const days = workDays(total - debts, cur, year), eur = euroToday(total - debts, cur, year);
+            form.querySelector('.h-probate-live').textContent = `${i18n('Total {x}', {x: moneyText(total, cur)})}${debts ? ` − ${i18n('dettes {x}', {x: moneyText(debts, cur)})} = ${moneyText(total - debts, cur)}` : ''}${days ? ` ≈ ${i18n('{n} journées de travail', {n: fmt(days)})}` : ''}${eur != null ? ` · ${i18n('{x} d’aujourd’hui', {x: window.LCNDA_AUTREFOIS.euroText(eur)})}` : ''}`;
         };
         form.addEventListener('input', live); live();
         form.querySelector('[data-h-item-add]').addEventListener('click', () => { form.querySelector('[data-h-rows=items]').insertAdjacentHTML('beforeend', probateItemRow()); });
@@ -1347,7 +1352,7 @@
                 ${contact.length ? `<div class="h-stop-x"><span title="Contact">☎</span> ${x.contact_name ? esc(x.contact_name) : ''}${contact.slice(x.contact_name ? 1 : 0).length ? ' · ' + contact.slice(x.contact_name ? 1 : 0).join(' · ') : ''}</div>` : ''}
                 ${x.booking ? `<div class="h-stop-x"><span title="Réservation">📅</span> ${nl(x.booking)} ${x.booking_done ? '<span class="collection-kind">réservé</span>' : '<span class="collection-kind is-warn">à réserver</span>'}</div>` : ''}
                 ${line('💶', 'Coût', x.cost)}${line('🪪', 'Documents à emporter', x.documents)}${line('🧰', 'Matériel', x.equipment)}${line('📸', 'Photographie', x.photo_rules)}${line('🗂️', 'Cotes à consulter', x.references)}
-                ${x.website ? `<div class="h-stop-x"><span>🔗</span> <a href="${esc(x.website)}" target="_blank" rel="noopener noreferrer">${esc(x.website.replace(/^https?:\/\//, '').slice(0, 60))}</a></div>` : ''}
+                ${x.website ? `<div class="h-stop-x"><span>🔗</span> ${window.LCNDA_UI.extLink(x.website, '')}</div>` : ''}
                 ${who.length ? `<div class="h-stop-x"><span title="Personnes recherchées">👤</span> ${who.map(p => personLink(p.id, A().personName(p))).join(', ')}</div>` : ''}
                 ${line('🎯', 'Ce que je cherche', x.goals)}
                 ${(x.checklist || []).length ? `<ul class="h-stop-checklist">${x.checklist.map((c, i) => `<li><label class="checkbox-line"><input type="checkbox" data-h-stop-ck="${s.id}" data-i="${i}" ${c.done ? 'checked' : ''}> ${esc(c.text)}</label></li>`).join('')}</ul>` : ''}
@@ -1719,7 +1724,8 @@
                 const r = await api('saved_search_results', {criteria: JSON.stringify(criteria), id});
                 const newOnes = r.people.filter(p => p.is_new).length;
                 box.innerHTML = `<h3>${plural(r.count, 'fiche trouvée', 'fiches trouvées')}${newOnes ? ` <span class="h-new-badge">${plural(newOnes, 'nouvelle', 'nouvelles')}</span>` : ''}</h3><p class="muted">${esc(r.description)}</p>
-                    ${r.people.length ? `<table class="data-table"><thead><tr><th>Personne</th><th>Naissance</th><th>Décès</th><th></th></tr></thead><tbody>${r.people.map(p => `<tr class="${p.is_new ? 'is-new' : ''}"><td>${personLink(p.id, A().personName(p))}</td><td>${esc(p.birth_date || p.birth_year || '')}</td><td>${esc(p.death_date || p.death_year || '')}</td><td>${p.is_new ? '<span class="h-new-badge">nouvelle</span>' : ''}</td></tr>`).join('')}</tbody></table>${r.count > r.people.length ? `<p class="muted">${i18n('Seules les {n} premières sont affichées.', {n: r.people.length})}</p>` : ''}` : empty('Aucune fiche ne répond à ces critères.')}`;
+                    ${r.people.length ? `<table class="data-table"><thead><tr>${ext.researchBar ? '<th class="rp-pick-cell"></th>' : ''}<th>Personne</th><th>Naissance</th><th>Décès</th><th></th></tr></thead><tbody>${r.people.map(p => `<tr class="${p.is_new ? 'is-new' : ''}">${ext.researchBar ? ext.researchBar.pickCell(p) : ''}<td>${personLink(p.id, A().personName(p))}</td><td>${esc(p.birth_date || p.birth_year || '')}</td><td>${esc(p.death_date || p.death_year || '')}</td><td>${p.is_new ? '<span class="h-new-badge">nouvelle</span>' : ''}</td></tr>`).join('')}</tbody></table>${r.count > r.people.length ? `<p class="muted">${i18n('Seules les {n} premières sont affichées.', {n: r.people.length})}</p>` : ''}` : empty('Aucune fiche ne répond à ces critères.')}`;
+                if (r.people.length) ext.researchBar?.attach(box, r.people, {title: st.hSearch.name || i18n('Recherche multicritère'), criteria: `${i18n('Recherche multicritère')} : ${r.description || ''}`, key: 'saved'}); // ☑ 🏷 📋 · 🗺 Carte · 🧺 📎 (app-recherche-outils.js, app-recherche-kit.js)
             } catch (error) { box.innerHTML = empty(error.message); }
         };
         form.addEventListener('submit', event => { event.preventDefault(); st.hSearch = {criteria: criteriaOf(form), id: 0, name: ''}; run(st.hSearch.criteria); });
@@ -1737,7 +1743,7 @@
             run(s.criteria, s.id);
         }));
         ws.querySelectorAll('[data-h-saved-seen]').forEach(b => b.addEventListener('click', async () => { await api('mark_saved_search_seen', {}, {method: 'POST', body: {id: b.dataset.hSavedSeen}}); notified = {}; ext.research(++S().workspaceToken); }));
-        ws.querySelectorAll('[data-h-saved-delete]').forEach(b => b.addEventListener('click', async () => { if (!await A().confirmBox('', {title: 'Supprimer cette recherche enregistrée ?', okLabel: 'Supprimer la recherche'})) return; await api('delete_saved_search', {}, {method: 'POST', body: {id: b.dataset.hSavedDelete}}); ext.research(++S().workspaceToken); }));
+        ws.querySelectorAll('[data-h-saved-delete]').forEach(b => b.addEventListener('click', () => A().deleteWithUndo({action: 'delete_saved_search', body: {id: b.dataset.hSavedDelete}, type: 'saved_search', id: b.dataset.hSavedDelete, message: i18n('Recherche enregistrée supprimée'), after: () => ext.research(++S().workspaceToken)}))); // H7 : ↶ Annuler au lieu de demander
         if (st.hSearch.id || Object.values(st.hSearch.criteria || {}).some(Boolean)) run(st.hSearch.criteria, st.hSearch.id);
     };
     // Nouvelles fiches qui répondent à une recherche enregistrée : signalées après un import, une fusion, une nouvelle fiche…
@@ -1771,23 +1777,40 @@
     }
     ext.graphStats.firstnames_france = async token => {
         const st = S(), minYear = Number(st.hNamesMinYear) || 1900;
-        const data = await api('firstnames_france', {min_year: minYear});
+        // 📊 la zone de comparaison (pack « Prénoms d’ici et d’ailleurs » : France, un département, Suisse, Québec)
+        if (st.hNamesZone === undefined) { try { st.hNamesZone = Number(localStorage.getItem('genealogie-prenoms-zone')) || 0; } catch (_) { st.hNamesZone = 0; } }
+        const data = await api('firstnames_france', {min_year: minYear, ...(st.hNamesZone ? {zone: st.hNamesZone} : {})});
         if (token !== st.workspaceToken || st.module !== 'graphiques') return;
         const meta = data.meta;
         const rows = data.names || [];
+        const zones = data.zones || [];
         const from = meta ? Math.max(meta.from, minYear) : minYear, to = meta ? meta.to : new Date().getFullYear();
+        const where = meta?.pack ? meta.zone_where : i18n('en France');
         const phrase = r => {
             if (!meta) return '';
-            if (!r.peak_year) return i18n('<em>{name}</em> : prénom très rare en France (moins de 3 naissances par an), absent du fichier.', {name: esc(r.name)});
+            if (!r.peak_year) return meta.pack ? i18n('<em>{name}</em> : prénom rare {where}, absent du fichier.', {name: esc(r.name), where: esc(where)}) : i18n('<em>{name}</em> : prénom très rare en France (moins de 3 naissances par an), absent du fichier.', {name: esc(r.name)});
             const given = r.family_years.map(y => { const diff = y - r.peak_year; return `${y} ${Math.abs(diff) <= 2 ? i18n('(en pleine mode)') : diff < 0 ? i18n('({n} ans avant le pic : en avance)', {n: -diff}) : i18n('({n} ans après le pic)', {n: diff})}`; });
-            return i18n('<strong>{name}</strong> : au sommet en France vers <strong>{year}</strong> ({n} bébés). Ta famille l’a donné en {list}.', {name: esc(r.name), year: String(r.peak_year), n: fmt(r.peak_count), list: given.join(', ')});
+            return meta.pack ? i18n('<strong>{name}</strong> : au sommet {where} vers <strong>{year}</strong> ({n} enfants). Ta famille l’a donné en {list}.', {name: esc(r.name), where: esc(where), year: String(r.peak_year), n: fmt(r.peak_count), list: given.join(', ')})
+                : i18n('<strong>{name}</strong> : au sommet en France vers <strong>{year}</strong> ({n} bébés). Ta famille l’a donné en {list}.', {name: esc(r.name), year: String(r.peak_year), n: fmt(r.peak_count), list: given.join(', ')});
         };
-        A().$('#workspace').innerHTML = `<section class="page">${pageHeader('STATISTIQUES', 'Prénoms : la famille et la France', 'La mode des prénoms de ta famille comparée à la France entière, d’après le fichier public des prénoms de l’INSEE (naissances depuis 1900 : il n’y a pas de données avant).')}
-            <section class="maintenance-panel"><h3>Fichier des prénoms de l’INSEE</h3>${meta ? `<p>✅ ${i18n('{n} lignes importées, de {a} à {b}', {n: fmt(meta.rows), a: String(meta.from), b: String(meta.to)})}${meta.file ? ` (${esc(meta.file)})` : ''}.</p>` : '<p>Pas encore importé. Télécharge le « Fichier des prénoms — France » (CSV, quelques Mo) sur le site de l’INSEE, puis importe-le ici. Il reste sur ton ordinateur.</p>'}
+        const manual = meta?.pack ? meta.manual : meta;
+        const COUNTRY = {FR: 'France', CH: 'Suisse', QC: 'Québec'};
+        const zoneSelect = zones.length ? `<label class="h-inline">${esc(i18n('Comparer avec'))} <select id="h-names-zone">${['FR', 'CH', 'QC'].filter(c => zones.some(z => z.country === c)).map(c => `<optgroup label="${esc(i18n(COUNTRY[c]))}">${zones.filter(z => z.country === c).sort((a, b) => (a.code === '' ? -1 : b.code === '' ? 1 : a.code.localeCompare(b.code))).map(z => `<option value="${z.country === 'FR' && z.code === '' ? 0 : z.id}" ${(meta?.zone === z.id) ? 'selected' : ''}>${esc(z.code === '' ? i18n('{c} entière', {c: i18n(COUNTRY[c])}) : `${z.code} — ${z.name}`)}${z.country === 'CH' && z.code === '' ? ' ' + esc(i18n('(personnes vivant en Suisse)')) : ''}</option>`).join('')}</optgroup>`).join('')}</select></label>` : '';
+        const manualBlock = `<p>${manual ? `✅ ${i18n('{n} lignes importées, de {a} à {b}', {n: fmt(manual.rows), a: String(manual.from), b: String(manual.to)})}${manual.file ? ` (${esc(manual.file)})` : ''}.` : 'Télécharge le « Fichier des prénoms — France » (CSV, quelques Mo) sur le site de l’INSEE, puis importe-le ici. Il reste sur ton ordinateur.'}</p>
                 <p><a href="https://www.insee.fr/fr/statistiques/2540004" target="_blank" rel="noopener noreferrer">Fichier des prénoms sur insee.fr ↗</a> · <a href="https://www.data.gouv.fr/fr/datasets/fichier-des-prenoms-depuis-1900/" target="_blank" rel="noopener noreferrer">sur data.gouv.fr ↗</a></p>
-                <form id="h-prenoms-import" class="page-actions"><input type="file" name="file" accept=".csv,.txt,.zip" required><button class="button small" type="submit">${meta ? 'Remplacer' : 'Importer'}</button><span class="muted" data-h-import-status></span></form>
+                <form id="h-prenoms-import" class="page-actions"><input type="file" name="file" accept=".csv,.txt,.zip" required><button class="button small" type="submit">${manual ? 'Remplacer' : 'Importer'}</button><span class="muted" data-h-import-status></span></form>`;
+        const hasPack = !!ext.prenomsPays;
+        A().$('#workspace').innerHTML = `<section class="page">${pageHeader('STATISTIQUES', 'Prénoms : la famille et la France', 'La mode des prénoms de ta famille comparée à la France entière, à un département, à la Suisse ou au Québec, d’après les fichiers publics des prénoms (en France : naissances depuis 1900, il n’y a pas de données avant).')}
+            <section class="maintenance-panel"><h3>${esc(i18n('Fichiers des prénoms'))}</h3>
+                ${hasPack ? '<div data-h-prenoms-pack></div>' : ''}
+                ${meta?.pack ? `<p>✅ ${esc(i18n('Comparé avec : {z} ({a}–{b})', {z: meta.zone_name, a: String(meta.from), b: String(meta.to)}))}${meta.source ? ` · <small>${esc(meta.source.mention)}</small>` : ''}</p>` : ''}
+                ${zoneSelect}
+                ${hasPack ? `<details class="h-prenoms-manual" ${!meta?.pack && manual ? 'open' : ''}><summary>${esc(i18n('Ou importer un fichier de l’INSEE (France entière, sans Internet)'))}</summary>${manualBlock}</details>` : manualBlock}
                 <label class="h-inline">Prénoms donnés à partir de <select id="h-names-min">${[1900, 1920, 1945, 1970].map(y => `<option value="${y}" ${minYear === y ? 'selected' : ''}>${y}</option>`).join('')}</select></label></section>
-            ${rows.length ? `<div class="data-table-wrap"><table class="data-table h-names-table"><thead><tr><th>Prénom</th><th>Dans la famille</th><th>${i18n('En France ({a}–{b})', {a: String(from), b: String(to)})}</th><th>Comparaison</th></tr></thead><tbody>${rows.map(r => `<tr><td><strong>${esc(r.name)}</strong> <small>${r.sex === 2 ? '♀' : r.sex === 1 ? '♂' : ''}</small></td><td>${r.people.slice(0, 6).map(p => `${personLink(p.id, p.name)} <small>${p.year}</small>`).join('<br>')}${r.people.length > 6 ? `<span data-h-names-more hidden><br>${r.people.slice(6).map(p => `${personLink(p.id, p.name)} <small>${p.year}</small>`).join('<br>')}</span><br><button type="button" class="link-button" data-h-names-toggle data-more="${r.people.length - 6}" aria-expanded="false">+ ${r.people.length - 6} personne${r.people.length - 6 > 1 ? 's' : ''}</button>` : ''}</td><td>${meta && r.peak_year ? sparkline(r.series, r.family_years, from, to, r.peak_year) : '—'}</td><td>${phrase(r)}</td></tr>`).join('')}</tbody></table></div><p class="muted">Courbe : nombre de naissances en France chaque année ; trait pointillé : l’année du pic ; points orange : les années où ta famille l’a donné.</p>` : empty(i18n('Aucune naissance datée depuis {year} dans ta base.', {year: String(minYear)}))}</section>`;
+            ${rows.length ? `<div class="data-table-wrap"><table class="data-table h-names-table"><thead><tr><th>Prénom</th><th>Dans la famille</th><th>${meta?.pack ? esc(`${meta.zone_name} (${from}–${to})`) : i18n('En France ({a}–{b})', {a: String(from), b: String(to)})}</th><th>Comparaison</th></tr></thead><tbody>${rows.map(r => `<tr><td><strong>${esc(r.name)}</strong> <small>${r.sex === 2 ? '♀' : r.sex === 1 ? '♂' : ''}</small></td><td>${r.people.slice(0, 6).map(p => `${personLink(p.id, p.name)} <small>${p.year}</small>`).join('<br>')}${r.people.length > 6 ? `<span data-h-names-more hidden><br>${r.people.slice(6).map(p => `${personLink(p.id, p.name)} <small>${p.year}</small>`).join('<br>')}</span><br><button type="button" class="link-button" data-h-names-toggle data-more="${r.people.length - 6}" aria-expanded="false">+ ${r.people.length - 6} personne${r.people.length - 6 > 1 ? 's' : ''}</button>` : ''}</td><td>${meta && r.peak_year ? sparkline(r.series, r.family_years, from, to, r.peak_year) : '—'}</td><td>${phrase(r)}</td></tr>`).join('')}</tbody></table></div><p class="muted">${meta?.pack ? esc(i18n('Courbe : nombre d’enfants comptés chaque année ({z}) ; trait pointillé : l’année du pic ; points orange : les années où ta famille l’a donné.', {z: meta.zone_name})) : 'Courbe : nombre de naissances en France chaque année ; trait pointillé : l’année du pic ; points orange : les années où ta famille l’a donné.'}</p>` : empty(i18n('Aucune naissance datée depuis {year} dans ta base.', {year: String(minYear)}))}</section>`;
+        // 📦 Installer / 🗑 Supprimer le pack (assets/js/heritage-prenoms-pays.js) : la page se redessine quand il change
+        const packHost = A().$('[data-h-prenoms-pack]');
+        if (packHost) ext.prenomsPays.panel(packHost, () => { if (token === st.workspaceToken) ext.graphStats.firstnames_france(++st.workspaceToken); });
         // « ＋ 12 personnes » : déplie (ou replie) le reste de la liste
         A().$('#workspace > section').addEventListener('click', event => {
             const button = event.target.closest('[data-h-names-toggle]'); if (!button) return;
@@ -1797,6 +1820,7 @@
             button.textContent = open ? 'Replier' : `+ ${n} personne${n > 1 ? 's' : ''}`;
         });
         A().$('#h-names-min').addEventListener('change', event => { st.hNamesMinYear = Number(event.target.value); ext.graphStats.firstnames_france(++st.workspaceToken); });
+        A().$('#h-names-zone')?.addEventListener('change', event => { st.hNamesZone = Number(event.target.value) || 0; try { localStorage.setItem('genealogie-prenoms-zone', String(st.hNamesZone)); } catch (_) {} ext.graphStats.firstnames_france(++st.workspaceToken); });
         A().$('#h-prenoms-import').addEventListener('submit', async event => {
             event.preventDefault();
             const fd = new FormData(event.currentTarget); fd.append('csrf', st.csrf);

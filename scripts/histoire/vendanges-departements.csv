@@ -1,0 +1,107 @@
+# 🍇 Table de correspondance : département → séries régionales de dates de vendanges (Daux et al. 2012), dans l'ordre de préférence.
+# Écrite pour LCNDA (scripts/histoire/build-histoire.py la range dans le pack, table ghd_dep).
+# Règle : la série du vignoble du département quand il y en a une ; sinon la série la plus proche (centre de la région du
+# fichier NOAA) et, à distance égale, celle dont le climat est le plus semblable (même façade, même vallée). La 2e série sert
+# quand la 1re n'a pas de date pour l'année. À l'affichage, la distance au centre de la série est dite, et rien n'est montré
+# au-delà de 250 km (Bretagne, Corse, Manche : pas de série assez proche).
+# Codes des séries (colonnes du fichier europe2012ghd.txt) :
+#  Als Alsace · Auv Auvergne · Aux Auxerre-Avalon · Bea Beaujolais et Mâconnais · Bor Bordeaux · Bur Bourgogne ·
+#  Cha1 Champagne 1 (Marne) · Cha2 Champagne 2 (Aube) · Gai Gaillac et Sud-Ouest · Ger Allemagne · HLV Haute vallée de la Loire ·
+#  IdF Île-de-France · Jur Jura · Lan Languedoc · LLV Basse vallée de la Loire · Lux Luxembourg · MAl Alpes maritimes (Var) ·
+#  NIt Italie du Nord · NLo Lorraine du Nord · NRh Rhône du Nord · Sav Savoie · Spa Espagne · SLo Lorraine du Sud ·
+#  SRh Rhône du Sud · Swi Suisse (Léman) · VSE Sud-Est divers · Ven Vendée, Poitou, Charentes
+dep,series,note
+01,Bea Sav Jur,Bugey et Dombes : entre Mâconnais et Savoie
+02,Cha1 IdF,vignoble de Champagne (vallée de la Marne)
+03,Auv HLV,Saint-Pourçain : Auvergne
+04,SRh MAl,Haute-Provence
+05,SRh Sav,Hautes-Alpes : la plus proche
+06,MAl SRh,Nice et la côte
+07,NRh SRh,rive droite du Rhône
+08,Cha1 NLo,la plus proche : Champagne
+09,Gai Lan,Sud-Ouest
+10,Cha2 Bur,Champagne de l'Aube
+11,Lan VSE,Languedoc
+12,Gai VSE,Marcillac : Sud-Ouest
+13,SRh MAl,Provence rhodanienne
+14,IdF LLV,la plus proche : Île-de-France
+15,Auv Gai,Auvergne
+16,Ven Bor,Cognac : Charentes
+17,Ven Bor,Charentes
+18,HLV LLV,Sancerre : haute Loire
+19,Auv Gai Bor,Corrèze : la plus proche (Auvergne) puis le Sud-Ouest
+21,Bur Bea,Côte-d'Or : Bourgogne
+22,LLV,Bretagne : trop loin d'une série (rien au-delà de 250 km)
+23,Auv HLV,Creuse : la plus proche
+24,Bor Gai,Bergerac : Bordeaux
+25,Jur Swi,Doubs : Jura
+26,NRh SRh,Drôme
+27,IdF,Normandie : Île-de-France
+28,IdF HLV,Beauce : Île-de-France
+29,LLV,Bretagne : trop loin d'une série
+30,SRh VSE,Gard rhodanien
+31,Gai,Frontonnais : Sud-Ouest
+32,Gai Bor,Gers : Sud-Ouest
+33,Bor,Gironde : Bordeaux
+34,Lan VSE,Hérault : Languedoc
+35,LLV,Bretagne : basse Loire
+36,HLV LLV,Berry
+37,LLV HLV,Touraine
+38,NRh Sav,Isère : Rhône du Nord
+39,Jur,Jura
+40,Bor Gai,Landes
+41,LLV HLV,Loir-et-Cher
+42,NRh Bea,Forez : Rhône du Nord
+43,Auv NRh,Velay : Auvergne
+44,LLV Ven,Muscadet : basse Loire
+45,HLV IdF,Orléanais
+46,Gai Bor,Cahors : Sud-Ouest
+47,Bor Gai,Lot-et-Garonne
+48,VSE Auv,Lozère
+49,LLV,Anjou : basse Loire
+50,IdF LLV,Manche : trop loin d'une série
+51,Cha1,Marne : Champagne
+52,SLo Cha2,Haute-Marne : Lorraine du Sud
+53,LLV,Mayenne : basse Loire
+54,NLo,Toulois : Lorraine du Nord
+55,NLo,Meuse : Lorraine du Nord
+56,LLV,Bretagne : basse Loire
+57,NLo Lux,Moselle
+58,HLV Aux,Pouilly : haute Loire
+59,Cha1 IdF,Nord : la plus proche
+60,IdF Cha1,Oise : Île-de-France
+61,IdF LLV,Orne
+62,IdF Cha1,Pas-de-Calais
+63,Auv,Puy-de-Dôme : Auvergne
+64,Gai Bor Spa,Béarn : Sud-Ouest
+65,Gai,Madiran : Sud-Ouest
+66,Lan,Roussillon : Languedoc
+67,Als,Alsace
+68,Als,Alsace
+69,Bea NRh,Beaujolais
+70,SLo Jur,Haute-Saône
+71,Bea Bur,Mâconnais et Côte chalonnaise
+72,LLV,Sarthe : Loir
+73,Sav,Savoie
+74,Sav Swi,Haute-Savoie
+75,IdF,Paris
+76,IdF,Seine-Maritime : Île-de-France
+77,IdF,Seine-et-Marne
+78,IdF,Yvelines
+79,Ven LLV,Deux-Sèvres
+80,IdF Cha1,Somme
+81,Gai,Gaillac
+82,Gai,Tarn-et-Garonne
+83,MAl SRh,Var
+84,SRh,Vaucluse
+85,Ven,Vendée
+86,Ven LLV,Haut-Poitou
+87,Auv LLV Ven,Haute-Vienne : la plus proche
+88,SLo NLo,Vosges
+89,Aux Bur,Chablis et Auxerrois
+90,Als Jur,Territoire de Belfort
+91,IdF,Essonne
+92,IdF,Hauts-de-Seine
+93,IdF,Seine-Saint-Denis
+94,IdF,Val-de-Marne
+95,IdF,Val-d'Oise

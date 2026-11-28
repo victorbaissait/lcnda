@@ -117,3 +117,47 @@ d'après les fonds be-provinces, ch-cantons et lu-cantons (point 3 et 4).
 
 Encart de l'Île-de-France : fr-departements.json et fr-regions.json gardent des tracés plus fins dans la boîte
 1,4° E – 3,6° E, 48,1° N – 49,25° N (scripts/build-geo-maps.js, IDF_BOOST), pour rester lisibles une fois agrandis.
+
+
+6. pays/index.json, pays/adm1-XX.json.gz, pays/reg-XX.json.gz, eu-nuts3.json.gz, us-comtes.json.gz — « 🌍 Un autre pays… »
+--------------------------------------------------------------------------------------------------------------------------
+Produits par scripts/build-geo-pays.js (licences lues le 26 novembre 2026). Fichiers JSON compressés en gzip, chargés
+seulement quand on choisit le pays (ou le niveau) dans un diagramme ; rien n'est demandé à Internet.
+
+Régions, États, provinces de 213 pays (pays/adm1-XX.json.gz, XX = code ISO 3166-1 du pays) et grandes régions
+(pays/reg-XX.json.gz, les provinces fondues d'après le champ « region », par exemple les 20 régions italiennes) :
+  Source : Natural Earth, « Admin 1 – States, Provinces » 1:10m, version 5, fichier
+  geojson/ne_10m_admin_1_states_provinces.geojson du dépôt https://github.com/nvkelso/natural-earth-vector
+  Licence : domaine public. Texte du LICENSE.md de ce dépôt : « All versions of Natural Earth raster + vector map data
+  found on this website are in the public domain. You may use the maps in any manner, including modifying the content
+  and design, electronic dissemination, and offset printing. » — « No permission is needed to use Natural Earth.
+  Crediting the authors is unnecessary. » (sur la carte : « Fond : Natural Earth (domaine public) »).
+  Noms : name_fr de Natural Earth quand il existe (sinon le nom d'origine) ; noms français des grandes régions d'Italie,
+  d'Espagne, des États-Unis, de Russie, d'Irlande et du Canada ajoutés dans le script. Noms des pays : i18n-iso-countries
+  7.14.0 (MIT, point 1).
+
+Europe, NUTS 3 (eu-nuts3.json.gz, 1 333 zones ; découpé par pays dans l'app : « NUTS 3 » de l'Italie, de l'Allemagne…,
+« Arrondissements (NUTS 3) » de la Belgique) :
+  Source : Eurostat GISCO, NUTS 2024, échelle 1:10 000 000, fichier pub/v2/2024/4326/10M/nutsrg_3.json de
+  https://github.com/eurostat/Nuts2json. Mêmes conditions que eu-nuts1 / eu-nuts2 (point 3). Texte du README de
+  Nuts2json : « The Eurostat NUTS dataset is copyrighted. There are specific provisions for the usage of this dataset
+  which must be respected. » Mention obligatoire : « © EuroGeographics for the administrative boundaries »
+  (sur la carte : « Fond : © EuroGeographics (Eurostat GISCO) »). La page des conditions d'Eurostat
+  (https://ec.europa.eu/eurostat/web/gisco/geodata/administrative-units) n'était pas joignable depuis la machine de
+  construction : à relire avant toute diffusion commerciale (voir la remarque du point 3).
+  Le Royaume-Uni n'est plus dans NUTS 2024 : ses « régions » sont celles de Natural Earth.
+
+États-Unis, comtés (us-comtes.json.gz, 3 231 comtés, codes FIPS) :
+  Source : U.S. Census Bureau, « cartographic boundary files » 2017, 1:10 000 000 (cb_2017_us_county), repris du paquet
+  npm us-atlas 3.0.1 (https://github.com/topojson/us-atlas ; README : « This repository provides a convenient
+  redistribution of the Census Bureau’s cartographic boundary shapefiles, 2017 edition as TopoJSON »).
+  Licence des données : œuvre du gouvernement fédéral des États-Unis, sans droit d'auteur (17 U.S.C. § 105) : domaine
+  public. Code de us-atlas : licence ISC, Copyright 2013-2019 Michael Bostock (même texte que world-atlas, point 1).
+  La page census.gov n'était pas joignable depuis la machine de construction.
+  (sur la carte : « Fond : U.S. Census Bureau (domaine public) »).
+
+Pas livrés (lien seulement) :
+  - Communes des autres pays d'Europe (Eurostat GISCO, LAU) : le serveur GISCO n'était pas joignable pour lire ses
+    conditions ni télécharger les fichiers (et des milliers de communes par pays dépasseraient vite la taille raisonnable). https://ec.europa.eu/eurostat/web/gisco/geodata/statistical-units/local-administrative-units
+  - Frontières historiques : déjà dans l'app (monde-frontieres.json.gz, CShapes 2.0, ETH Zürich, CC BY-NC-SA 4.0,
+    heritage-monde-contexte.js) ; pas reprises dans les diagrammes (licence non commerciale, partage à l'identique).

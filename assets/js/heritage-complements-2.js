@@ -1,5 +1,5 @@
 /* LCNDA — 🧩 Compléter quatre outils existants (maquette validée docs/design/complements-existants.html), partie 2 :
- *  C 📋 Tous les doutes — Listes → Recherche et organisation → « 📋 Tous les doutes » (nom réglable), 🗓 Ma semaine → « à vérifier »
+ *  C ❓ Tous les doutes — Listes → Recherche et organisation → « ❓ Tous les doutes » (nom réglable), 🗓 Ma semaine → « à vérifier »
  *    → « Tout voir → », widget « 📋 Doutes » du tableau de bord. Chaque ligne est lue dans l'outil d'origine (✅ Contrôle,
  *    ⚖️ Hypothèses, 🛡 Liens fragiles, ⚔️ Désaccords de preuve, 📚 Sans source, 🧾 SocFace) et « ↗ » y emmène ; rien n'est recopié.
  *    « 👁 Marquer vu » n'est pas « Ce n'est pas une erreur » (↶ Annuler) ; clic droit ou ⋯ sur une ligne ; glisser vers la gauche
@@ -29,12 +29,12 @@
     const fmtDate = iso => (X().fmtDate ? X().fmtDate(iso) : String(iso || ''));
     const today = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
 
-    /* ═════ C 📋 Tous les doutes ═════ */
+    /* ═════ C ❓ Tous les doutes ═════ */
     const LIST = 'doutes';
     const SORT = {controle: ['✅', 'Contrôle de la base', '↗ Contrôle'], hypothese: ['⚖️', 'Hypothèse ouverte', '↗ Comparer'], lien: ['🛡', 'Liens fragiles', '↗ Solidité'], preuve: ['⚔️', 'Désaccord de preuve', '↗ Dossier de preuve'],
         source: ['📚', 'Sans source', '↗ Fiche'], socface: ['🧾', 'Lecture SocFace', '↗ Image'], succ: ['⚖️', 'Successoral', '↗ Ouvrir']};
     const LEVEL = {red: ['🔴', 'impossible', 'red'], orange: ['🟠', 'à vérifier', 'yellow'], yellow: ['🟡', 'curieux', 'grey']};
-    const NAMES = {all: '📋 Tous les doutes', verify: 'À vérifier', review: 'Points à revoir'};
+    const NAMES = {all: '❓ Tous les doutes', verify: 'À vérifier', review: 'Points à revoir'};
     const listName = () => NAMES[cfg().doutes_name] || NAMES.all;
     const isHere = token => token === S().workspaceToken && S().module === 'listes' && S().listType === LIST;
     let DATA = null;
@@ -111,13 +111,18 @@
             if (!list.length) { box.innerHTML = A().emptyState({icon: '🔍', text: i18n('Rien ne correspond'), hint: i18n('Enlève un filtre, ou cherche autrement.')}); return; }
             const view = bar.state.view === 'cards' ? 'cards' : 'list';
             const pale = cfg().doutes_seen_show === 'pale' || bar.state.filters.seen !== 'unseen';
-            box.innerHTML = UI().itemsHtml(view, list.slice(0, shown).map(r => {
+            const item = r => {
                 const s = SORT[r.sort] || ['•', r.sort, '↗'], lv = LEVEL[r.level] || LEVEL.yellow;
                 return {thumb: `<span class="ui-card-ico" aria-hidden="true">${s[0]}</span>`, name: r.title, cls: r.seen && pale ? 'compl-dt-seen' : '', attrs: `data-dt-key="${esc(r.key)}"`,
                     lines: [[i18n(s[1]), r.detail, r.sosa ? `Sosa ${r.sosa}` : ''].filter(Boolean).join(' · '), r.seen ? i18n('vu le {d}', {d: fmtDate(r.seen_at)}) : r.returned ? i18n('revenu : la chose a changé') : ''],
                     badges: [{text: `${lv[0]} ${i18n(lv[1])}`, kind: lv[2]}],
                     actions: `${badge(`${lv[0]} ${i18n(lv[1])}`, lv[2])}<button type="button" class="button small secondary" data-dt-go>${esc(i18n(s[2]))}</button>${menuHtml(r)}`};
-            }));
+            };
+            const page = list.slice(0, shown);
+            // 🗂 un cadre par personne (réglage genealogie-cadres) : les doutes d'une même personne ensemble, dans l'ordre du tri
+            box.innerHTML = UI().framesOn?.() ? UI().personCardsHtml(UI().groupByPerson(page, r => (r.masked ? '' : (r.people || [])[0])).map(g => { const r0 = g.items.find(r => (r.people || []).length === 1 && r.sosa) || {};
+                return UI().personCardHtml({id: g.key, name: g.key ? names[g.key] || '' : i18n('Sans personne'), sub: g.key && r0.sosa ? `Sosa ${r0.sosa}` : '', count: plural(g.items.length, 'doute'), body: UI().itemsHtml(view, g.items.map(item))}); }).join(''))
+                : UI().itemsHtml(view, page.map(item));
             if (list.length > shown) box.appendChild(UI().moreButton({remaining: list.length - shown, step: 60, onClick: () => { shown += 60; paint(); }}));
         }
         const rowOf = el => { const k = el.closest('[data-dt-key]')?.dataset.dtKey; return rows.find(r => r.key === k); };
@@ -162,7 +167,7 @@
         render: (index, widget, span, data) => {
             const c = data?.counts || {red: 0, orange: 0, yellow: 0};
             const body = !data ? `<p class="muted">${esc(i18n('Lecture impossible.'))}</p>` : cfg().doutes_widget === 'top5'
-                ? (data.top?.length ? `<ul class="compl-dtw-top">${data.top.map(r => `<li><span aria-hidden="true">${(LEVEL[r.level] || LEVEL.yellow)[0]}</span> <button type="button" class="table-link" data-dtw-go>${esc(r.title)}</button></li>`).join('')}</ul>` : `<p class="muted">${esc(i18n('Aucun doute pour l’instant'))}</p>`)
+                ? (data.top?.length ? `<ul class="compl-dtw-top">${data.top.map(r => `<li><span aria-hidden="true">${(LEVEL[r.level] || LEVEL.yellow)[0]}</span> <button type="button" class="table-link" data-dtw-go>${esc(r.title)}</button></li>`).join('')}</ul>` : `${window.LCNDA_APP.empty(i18n('Aucun doute pour l’instant'))}`)
                 : `<div class="compl-dtw"><button type="button" class="compl-dtw-n is-red" data-dtw-go="red"><b>${c.red}</b><span>${esc(i18n('impossibles'))}</span></button><button type="button" class="compl-dtw-n is-orange" data-dtw-go="orange"><b>${c.orange}</b><span>${esc(i18n('à vérifier'))}</span></button><button type="button" class="compl-dtw-n is-yellow" data-dtw-go="yellow"><b>${c.yellow}</b><span>${esc(i18n('curieux'))}</span></button></div>
                     ${data.top?.[0] ? `<p class="compl-dtw-worst">${esc(i18n('Le plus grave : {t}', {t: data.top[0].title}))}</p>` : ''}`;
             return A().card(index, `📋 ${i18n('Doutes')}`, data ? data.total : '', body, span, `<button type="button" class="icon-button small" data-dtw-set title="${esc(i18n('⚙️ Réglages de cet outil'))}" aria-label="${esc(i18n('⚙️ Réglages de cet outil'))}">⚙️</button><button type="button" class="button small secondary" data-dtw-go>${esc(i18n('Tout voir'))}</button>`);

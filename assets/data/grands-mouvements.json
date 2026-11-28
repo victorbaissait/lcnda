@@ -1,0 +1,803 @@
+{
+ "title": "Grands mouvements de population",
+ "version": 1,
+ "count": 33,
+ "licence": "CC BY-SA 4.0",
+ "licence_url": "https://creativecommons.org/licenses/by-sa/4.0/deed.fr",
+ "credit": "Liste rédigée pour LCNDA : dates et faits historiques (non protégés), un court texte écrit pour l’app ; chaque mouvement renvoie à l’article de Wikipédia en français qui le décrit.",
+ "note": "de / vers : départements (numéros), pays ou villes ; les dates bornent l’époque où le mouvement a eu lieu (un déplacement de la famille à cette époque, de là vers là, y est rapproché). « sauf » : un départ de là n'est pas compté (on ne quitte pas la campagne en partant de Paris).",
+ "mouvements": [
+  {
+   "id": "exode-paris",
+   "title": "Exode rural vers Paris",
+   "from": 1850,
+   "to": 1930,
+   "de": {
+    "pays": [
+     "France"
+    ]
+   },
+   "vers": {
+    "dep": [
+     "75",
+     "92",
+     "93",
+     "94",
+     "77",
+     "78",
+     "91",
+     "95"
+    ]
+   },
+   "desc": "Des centaines de milliers de ruraux quittent les campagnes pour les usines, les chantiers et les services de Paris et de sa banlieue.",
+   "src": "Wikipédia : Exode rural",
+   "url": "https://fr.wikipedia.org/w/index.php?search=Exode+rural&go=Lire"
+  },
+  {
+   "id": "exode-villes",
+   "title": "Exode rural vers les villes de province",
+   "from": 1850,
+   "to": 1960,
+   "de": {
+    "pays": [
+     "France"
+    ]
+   },
+   "vers": {
+    "villes": [
+     "Lyon",
+     "Marseille",
+     "Lille",
+     "Roubaix",
+     "Tourcoing",
+     "Saint-Étienne",
+     "Bordeaux",
+     "Toulouse",
+     "Nantes",
+     "Le Havre",
+     "Rouen",
+     "Grenoble",
+     "Clermont-Ferrand",
+     "Limoges",
+     "Nancy",
+     "Strasbourg",
+     "Montpellier",
+     "Nice",
+     "Toulon",
+     "Reims"
+    ]
+   },
+   "desc": "Les campagnes se vident vers les villes industrielles et les préfectures voisines.",
+   "src": "Wikipédia : Exode rural",
+   "url": "https://fr.wikipedia.org/w/index.php?search=Exode+rural&go=Lire",
+   "sauf": {
+    "dep": [
+     "75",
+     "92",
+     "93",
+     "94"
+    ]
+   }
+  },
+  {
+   "id": "bougnats",
+   "title": "Auvergnats et Aveyronnais à Paris (les « bougnats »)",
+   "from": 1850,
+   "to": 1960,
+   "de": {
+    "dep": [
+     "15",
+     "12",
+     "63",
+     "43",
+     "48",
+     "19"
+    ]
+   },
+   "vers": {
+    "dep": [
+     "75",
+     "92",
+     "93",
+     "94",
+     "77",
+     "78",
+     "91",
+     "95"
+    ]
+   },
+   "desc": "Porteurs d’eau, charbonniers puis cafetiers : une grande partie des cafés de Paris est tenue par des familles du Massif central.",
+   "src": "Wikipédia : Bougnat",
+   "url": "https://fr.wikipedia.org/w/index.php?search=Bougnat&go=Lire"
+  },
+  {
+   "id": "bretons-paris",
+   "title": "Bretons à Paris",
+   "from": 1870,
+   "to": 1960,
+   "de": {
+    "dep": [
+     "22",
+     "29",
+     "56",
+     "35"
+    ]
+   },
+   "vers": {
+    "dep": [
+     "75",
+     "92",
+     "93",
+     "94",
+     "77",
+     "78",
+     "91",
+     "95"
+    ]
+   },
+   "desc": "Le chemin de fer amène les Bretons à Paris, surtout autour de la gare Montparnasse ; domestiques, ouvriers, cheminots.",
+   "src": "Wikipédia : Diaspora bretonne",
+   "url": "https://fr.wikipedia.org/w/index.php?search=Diaspora+bretonne&go=Lire"
+  },
+  {
+   "id": "bretons-havre",
+   "title": "Bretons au Havre et dans les ports",
+   "from": 1870,
+   "to": 1960,
+   "de": {
+    "dep": [
+     "22",
+     "29",
+     "56"
+    ]
+   },
+   "vers": {
+    "villes": [
+     "Le Havre",
+     "Saint-Nazaire",
+     "Brest",
+     "Lorient",
+     "Nantes"
+    ]
+   },
+   "desc": "Dockers et ouvriers des chantiers navals.",
+   "src": "Wikipédia : Diaspora bretonne",
+   "url": "https://fr.wikipedia.org/w/index.php?search=Diaspora+bretonne&go=Lire"
+  },
+  {
+   "id": "creusois",
+   "title": "Maçons de la Creuse et du Limousin",
+   "from": 1800,
+   "to": 1914,
+   "de": {
+    "dep": [
+     "23",
+     "87",
+     "19"
+    ]
+   },
+   "vers": {
+    "dep": [
+     "75",
+     "92",
+     "93",
+     "94",
+     "77",
+     "78",
+     "91",
+     "95"
+    ],
+    "villes": [
+     "Lyon"
+    ]
+   },
+   "desc": "Les « maçons de la Creuse » partent chaque printemps sur les chantiers de Paris et de Lyon, puis s’y installent.",
+   "src": "Wikipédia : Maçons de la Creuse",
+   "url": "https://fr.wikipedia.org/w/index.php?search=Ma%C3%A7ons+de+la+Creuse&go=Lire"
+  },
+  {
+   "id": "savoyards",
+   "title": "Savoyards à Paris et à Lyon",
+   "from": 1800,
+   "to": 1914,
+   "de": {
+    "dep": [
+     "73",
+     "74"
+    ]
+   },
+   "vers": {
+    "dep": [
+     "75",
+     "92",
+     "93",
+     "94",
+     "77",
+     "78",
+     "91",
+     "95"
+    ],
+    "villes": [
+     "Lyon"
+    ]
+   },
+   "desc": "Ramoneurs, colporteurs, commissionnaires : l’émigration savoyarde vers les grandes villes.",
+   "src": "Wikipédia : Ramoneur savoyard",
+   "url": "https://fr.wikipedia.org/w/index.php?search=Ramoneur+savoyard&go=Lire"
+  },
+  {
+   "id": "barcelonnettes",
+   "title": "Barcelonnettes au Mexique",
+   "from": 1821,
+   "to": 1950,
+   "de": {
+    "dep": [
+     "04"
+    ]
+   },
+   "vers": {
+    "pays": [
+     "Mexique"
+    ]
+   },
+   "desc": "Des habitants de la vallée de l’Ubaye fondent des commerces de tissus au Mexique.",
+   "src": "Wikipédia : Barcelonnettes",
+   "url": "https://fr.wikipedia.org/w/index.php?search=Barcelonnettes&go=Lire"
+  },
+  {
+   "id": "basques-ameriques",
+   "title": "Basques et Béarnais aux Amériques",
+   "from": 1830,
+   "to": 1930,
+   "de": {
+    "dep": [
+     "64",
+     "65",
+     "40"
+    ]
+   },
+   "vers": {
+    "pays": [
+     "Argentine",
+     "Uruguay",
+     "Chili",
+     "États-Unis",
+     "Mexique"
+    ]
+   },
+   "desc": "Bergers et commerçants partent pour la Pampa, l’Uruguay et l’Ouest américain.",
+   "src": "Wikipédia : Diaspora basque",
+   "url": "https://fr.wikipedia.org/w/index.php?search=Diaspora+basque&go=Lire"
+  },
+  {
+   "id": "aveyron-argentine",
+   "title": "Aveyronnais à Pigüé (Argentine)",
+   "from": 1884,
+   "to": 1914,
+   "de": {
+    "dep": [
+     "12"
+    ]
+   },
+   "vers": {
+    "pays": [
+     "Argentine"
+    ]
+   },
+   "desc": "En 1884, des familles de l’Aveyron fondent Pigüé, dans la province de Buenos Aires.",
+   "src": "Wikipédia : Pigüé",
+   "url": "https://fr.wikipedia.org/w/index.php?search=Pig%C3%BC%C3%A9&go=Lire"
+  },
+  {
+   "id": "francais-argentine",
+   "title": "Français en Argentine et en Uruguay",
+   "from": 1850,
+   "to": 1914,
+   "de": {
+    "pays": [
+     "France"
+    ]
+   },
+   "vers": {
+    "pays": [
+     "Argentine",
+     "Uruguay"
+    ]
+   },
+   "desc": "Plus de 200 000 Français, surtout du Sud-Ouest, partent pour le Río de la Plata.",
+   "src": "Wikipédia : Immigration française en Argentine",
+   "url": "https://fr.wikipedia.org/w/index.php?search=Immigration+fran%C3%A7aise+en+Argentine&go=Lire"
+  },
+  {
+   "id": "francais-usa",
+   "title": "Français aux États-Unis",
+   "from": 1840,
+   "to": 1914,
+   "de": {
+    "pays": [
+     "France"
+    ]
+   },
+   "vers": {
+    "pays": [
+     "États-Unis",
+     "USA",
+     "United States"
+    ]
+   },
+   "desc": "Ruée vers l’or en Californie, Louisiane, Nouvelle-Angleterre : une émigration plus petite que celle des voisins européens.",
+   "src": "Wikipédia : Immigration française aux États-Unis",
+   "url": "https://fr.wikipedia.org/w/index.php?search=Immigration+fran%C3%A7aise+aux+%C3%89tats-Unis&go=Lire"
+  },
+  {
+   "id": "alsaciens-usa",
+   "title": "Alsaciens et Lorrains en Amérique",
+   "from": 1817,
+   "to": 1914,
+   "de": {
+    "dep": [
+     "67",
+     "68",
+     "57",
+     "54"
+    ]
+   },
+   "vers": {
+    "pays": [
+     "États-Unis",
+     "USA",
+     "Canada",
+     "Brésil",
+     "Argentine"
+    ]
+   },
+   "desc": "Disettes de 1817 puis annexion de 1871 : Alsaciens et Lorrains partent pour le Texas (Castroville), l’Ohio, New York.",
+   "src": "Wikipédia : Castroville (Texas)",
+   "url": "https://fr.wikipedia.org/w/index.php?search=Castroville+%28Texas%29&go=Lire"
+  },
+  {
+   "id": "optants",
+   "title": "Alsaciens-Lorrains qui « optent » pour la France",
+   "from": 1871,
+   "to": 1872,
+   "de": {
+    "dep": [
+     "67",
+     "68",
+     "57"
+    ]
+   },
+   "vers": {
+    "pays": [
+     "France",
+     "Algérie"
+    ]
+   },
+   "desc": "Après l’annexion de 1871, ceux qui veulent rester français doivent partir : vers la France de l’intérieur ou l’Algérie.",
+   "src": "Wikipédia : Alsace-Lorraine",
+   "url": "https://fr.wikipedia.org/w/index.php?search=Alsace-Lorraine&go=Lire"
+  },
+  {
+   "id": "quebec",
+   "title": "Les colons de la Nouvelle-France",
+   "from": 1608,
+   "to": 1760,
+   "de": {
+    "pays": [
+     "France"
+    ]
+   },
+   "vers": {
+    "pays": [
+     "Canada",
+     "Québec"
+    ]
+   },
+   "desc": "Environ 10 000 Français, surtout du Perche, de Normandie, du Poitou et de Paris, s’installent au Canada.",
+   "src": "Wikipédia : Nouvelle-France",
+   "url": "https://fr.wikipedia.org/w/index.php?search=Nouvelle-France&go=Lire"
+  },
+  {
+   "id": "acadie",
+   "title": "Acadiens",
+   "from": 1604,
+   "to": 1755,
+   "de": {
+    "dep": [
+     "86",
+     "79",
+     "17",
+     "85"
+    ]
+   },
+   "vers": {
+    "pays": [
+     "Canada"
+    ]
+   },
+   "desc": "Des familles du Poitou et de l’Aunis peuplent l’Acadie, puis sont déportées en 1755 (le Grand Dérangement).",
+   "src": "Wikipédia : Acadiens",
+   "url": "https://fr.wikipedia.org/w/index.php?search=Acadiens&go=Lire"
+  },
+  {
+   "id": "antilles",
+   "title": "Engagés et colons des Antilles",
+   "from": 1635,
+   "to": 1789,
+   "de": {
+    "pays": [
+     "France"
+    ]
+   },
+   "vers": {
+    "pays": [
+     "Guadeloupe",
+     "Martinique",
+     "Haïti",
+     "Saint-Domingue"
+    ]
+   },
+   "desc": "Engagés « trente-six mois », colons et marins partent des ports de l’Atlantique vers les îles.",
+   "src": "Wikipédia : Engagés (colonisation)",
+   "url": "https://fr.wikipedia.org/w/index.php?search=Engag%C3%A9s+%28colonisation%29&go=Lire"
+  },
+  {
+   "id": "algerie",
+   "title": "La colonisation de l’Algérie",
+   "from": 1830,
+   "to": 1914,
+   "de": {
+    "pays": [
+     "France",
+     "Espagne",
+     "Italie",
+     "Malte"
+    ]
+   },
+   "vers": {
+    "pays": [
+     "Algérie"
+    ]
+   },
+   "desc": "Colons du Midi, d’Alsace, d’Espagne, d’Italie et de Malte s’installent en Algérie.",
+   "src": "Wikipédia : Algérie française",
+   "url": "https://fr.wikipedia.org/w/index.php?search=Alg%C3%A9rie+fran%C3%A7aise&go=Lire"
+  },
+  {
+   "id": "rapatries",
+   "title": "Les rapatriés d’Algérie (pieds-noirs)",
+   "from": 1954,
+   "to": 1964,
+   "de": {
+    "pays": [
+     "Algérie"
+    ]
+   },
+   "vers": {
+    "pays": [
+     "France"
+    ]
+   },
+   "desc": "En 1962, près d’un million de Français d’Algérie gagnent la métropole, surtout le Midi, la Corse et Paris.",
+   "src": "Wikipédia : Pieds-noirs",
+   "url": "https://fr.wikipedia.org/w/index.php?search=Pieds-noirs&go=Lire"
+  },
+  {
+   "id": "tunisie-maroc",
+   "title": "Retour des Français de Tunisie et du Maroc",
+   "from": 1955,
+   "to": 1967,
+   "de": {
+    "pays": [
+     "Tunisie",
+     "Maroc"
+    ]
+   },
+   "vers": {
+    "pays": [
+     "France"
+    ]
+   },
+   "desc": "Après les indépendances, les Français de Tunisie et du Maroc rentrent en métropole.",
+   "src": "Wikipédia : Pieds-noirs",
+   "url": "https://fr.wikipedia.org/w/index.php?search=Pieds-noirs&go=Lire"
+  },
+  {
+   "id": "italiens",
+   "title": "Les Italiens en France",
+   "from": 1870,
+   "to": 1960,
+   "de": {
+    "pays": [
+     "Italie"
+    ]
+   },
+   "vers": {
+    "pays": [
+     "France"
+    ]
+   },
+   "desc": "La première immigration de France : Provence, Lorraine du fer, Paris, Sud-Ouest agricole.",
+   "src": "Wikipédia : Immigration italienne en France",
+   "url": "https://fr.wikipedia.org/w/index.php?search=Immigration+italienne+en+France&go=Lire"
+  },
+  {
+   "id": "polonais",
+   "title": "Les Polonais du Nord et de Lorraine",
+   "from": 1919,
+   "to": 1939,
+   "de": {
+    "pays": [
+     "Pologne",
+     "Allemagne"
+    ]
+   },
+   "vers": {
+    "pays": [
+     "France"
+    ]
+   },
+   "desc": "Mineurs recrutés par contrat pour les houillères du Nord-Pas-de-Calais et de Lorraine.",
+   "src": "Wikipédia : Immigration polonaise en France",
+   "url": "https://fr.wikipedia.org/w/index.php?search=Immigration+polonaise+en+France&go=Lire"
+  },
+  {
+   "id": "belges",
+   "title": "Les Belges du Nord",
+   "from": 1850,
+   "to": 1914,
+   "de": {
+    "pays": [
+     "Belgique"
+    ]
+   },
+   "vers": {
+    "dep": [
+     "59",
+     "62",
+     "02",
+     "08"
+    ]
+   },
+   "desc": "Ouvriers du textile de Roubaix-Tourcoing, de Lille, et ouvriers agricoles.",
+   "src": "Wikipédia : Immigration belge en France",
+   "url": "https://fr.wikipedia.org/w/index.php?search=Immigration+belge+en+France&go=Lire"
+  },
+  {
+   "id": "espagnols",
+   "title": "Les Espagnols en France",
+   "from": 1880,
+   "to": 1975,
+   "de": {
+    "pays": [
+     "Espagne"
+    ]
+   },
+   "vers": {
+    "pays": [
+     "France"
+    ]
+   },
+   "desc": "Ouvriers agricoles du Midi, puis réfugiés républicains (1939) et immigration des années 1960.",
+   "src": "Wikipédia : Immigration espagnole en France",
+   "url": "https://fr.wikipedia.org/w/index.php?search=Immigration+espagnole+en+France&go=Lire"
+  },
+  {
+   "id": "retirada",
+   "title": "La Retirada : réfugiés républicains espagnols",
+   "from": 1939,
+   "to": 1939,
+   "de": {
+    "pays": [
+     "Espagne"
+    ]
+   },
+   "vers": {
+    "pays": [
+     "France"
+    ]
+   },
+   "desc": "En février 1939, près de 500 000 Espagnols passent les Pyrénées.",
+   "src": "Wikipédia : Retirada",
+   "url": "https://fr.wikipedia.org/w/index.php?search=Retirada&go=Lire"
+  },
+  {
+   "id": "portugais",
+   "title": "Les Portugais en France",
+   "from": 1957,
+   "to": 1974,
+   "de": {
+    "pays": [
+     "Portugal"
+    ]
+   },
+   "vers": {
+    "pays": [
+     "France"
+    ]
+   },
+   "desc": "Fuyant la dictature et les guerres coloniales, près de 900 000 Portugais s’installent en France.",
+   "src": "Wikipédia : Immigration portugaise en France",
+   "url": "https://fr.wikipedia.org/w/index.php?search=Immigration+portugaise+en+France&go=Lire"
+  },
+  {
+   "id": "armeniens",
+   "title": "Les Arméniens en France",
+   "from": 1915,
+   "to": 1930,
+   "de": {
+    "pays": [
+     "Turquie",
+     "Arménie",
+     "Syrie",
+     "Liban"
+    ]
+   },
+   "vers": {
+    "pays": [
+     "France"
+    ]
+   },
+   "desc": "Rescapés du génocide de 1915, arrivés par Marseille ; Lyon, Paris, Valence, Décines.",
+   "src": "Wikipédia : Arméniens de France",
+   "url": "https://fr.wikipedia.org/w/index.php?search=Arm%C3%A9niens+de+France&go=Lire"
+  },
+  {
+   "id": "russes-blancs",
+   "title": "Les Russes blancs",
+   "from": 1919,
+   "to": 1930,
+   "de": {
+    "pays": [
+     "Russie",
+     "Ukraine"
+    ]
+   },
+   "vers": {
+    "pays": [
+     "France"
+    ]
+   },
+   "desc": "Après la révolution de 1917, des dizaines de milliers d’exilés russes s’installent en France.",
+   "src": "Wikipédia : Russes blancs",
+   "url": "https://fr.wikipedia.org/w/index.php?search=Russes+blancs&go=Lire"
+  },
+  {
+   "id": "exode-1940",
+   "title": "L’exode de 1940",
+   "from": 1940,
+   "to": 1940,
+   "de": {
+    "dep": [
+     "59",
+     "62",
+     "80",
+     "02",
+     "08",
+     "51",
+     "55",
+     "54",
+     "57",
+     "67",
+     "68",
+     "75",
+     "92",
+     "93",
+     "94",
+     "95",
+     "78",
+     "77",
+     "91"
+    ]
+   },
+   "vers": {
+    "pays": [
+     "France"
+    ]
+   },
+   "desc": "En mai-juin 1940, huit à dix millions de personnes fuient vers le sud devant l’armée allemande.",
+   "src": "Wikipédia : Exode de 1940",
+   "url": "https://fr.wikipedia.org/w/index.php?search=Exode+de+1940&go=Lire"
+  },
+  {
+   "id": "alsaciens-1939",
+   "title": "Évacuation des Alsaciens et Mosellans (1939)",
+   "from": 1939,
+   "to": 1940,
+   "de": {
+    "dep": [
+     "67",
+     "68",
+     "57"
+    ]
+   },
+   "vers": {
+    "dep": [
+     "24",
+     "87",
+     "86",
+     "36",
+     "23",
+     "19",
+     "16",
+     "47"
+    ]
+   },
+   "desc": "En septembre 1939, les villages frontaliers sont évacués vers le Sud-Ouest (Dordogne, Haute-Vienne, Vienne…).",
+   "src": "Wikipédia : Évacuation des Alsaciens et Mosellans en 1939",
+   "url": "https://fr.wikipedia.org/w/index.php?search=%C3%89vacuation+des+Alsaciens+et+Mosellans+en+1939&go=Lire"
+  },
+  {
+   "id": "bumidom",
+   "title": "Les Antillais et Réunionnais en métropole (BUMIDOM)",
+   "from": 1963,
+   "to": 1981,
+   "de": {
+    "pays": [
+     "Guadeloupe",
+     "Martinique",
+     "La Réunion",
+     "Réunion"
+    ]
+   },
+   "vers": {
+    "pays": [
+     "France"
+    ]
+   },
+   "desc": "Le BUMIDOM organise le départ de dizaines de milliers d’Antillais et de Réunionnais vers la métropole.",
+   "src": "Wikipédia : BUMIDOM",
+   "url": "https://fr.wikipedia.org/w/index.php?search=BUMIDOM&go=Lire"
+  },
+  {
+   "id": "huguenots",
+   "title": "Les huguenots du Refuge",
+   "from": 1685,
+   "to": 1720,
+   "de": {
+    "pays": [
+     "France"
+    ]
+   },
+   "vers": {
+    "pays": [
+     "Suisse",
+     "Allemagne",
+     "Pays-Bas",
+     "Angleterre",
+     "Royaume-Uni",
+     "Prusse",
+     "Afrique du Sud"
+    ]
+   },
+   "desc": "Après la révocation de l’édit de Nantes, environ 200 000 protestants quittent la France.",
+   "src": "Wikipédia : Huguenot",
+   "url": "https://fr.wikipedia.org/w/index.php?search=Huguenot&go=Lire"
+  },
+  {
+   "id": "scieurs-long",
+   "title": "Scieurs de long du Livradois et du Forez",
+   "from": 1700,
+   "to": 1914,
+   "de": {
+    "dep": [
+     "63",
+     "42",
+     "43"
+    ]
+   },
+   "vers": {
+    "dep": [
+     "21",
+     "71",
+     "58",
+     "89"
+    ]
+   },
+   "desc": "Migration saisonnière : quand la terre gelait, les hommes du Livradois et du Forez partaient scier les troncs à la main dans les forêts, notamment en Bourgogne, et rentraient au village pour les travaux des champs.",
+   "saison": true,
+   "src": "Wikipédia : Scieur de long",
+   "url": "https://fr.wikipedia.org/wiki/Scieur_de_long"
+  }
+ ]
+}

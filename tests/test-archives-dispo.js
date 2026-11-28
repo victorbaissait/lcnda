@@ -34,7 +34,7 @@ const XSS = '<img src=x onerror=window.__xss=1>';
     if (!phpPath) { console.log('— PHP absent : test sauté'); return done(); }
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'carnet-ad-'));
     fs.mkdirSync(path.join(tmp, 'media'), {recursive: true});
-    const env = {...process.env, GENEALOGY_DATA_DIR: tmp, GENEALOGY_MEDIA_DIR: path.join(tmp, 'media'), GENEALOGY_SKIP_REFERENCE: '1', LCNDA_ARCHIVES_EN_LIGNE: FIX, XSS};
+    const env = {...process.env, GENEALOGY_DATA_DIR: tmp, GENEALOGY_MEDIA_DIR: path.join(tmp, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4', LCNDA_ARCHIVES_EN_LIGNE: FIX, XSS};
     const seed = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', String.raw`
 require 'lib/paths.php';
 $p = new PDO('sqlite:'.DATA_DIR.'/genealogy.sqlite'); $p->exec(file_get_contents(APP_ROOT.'/data/schema.sql')); $p = null;

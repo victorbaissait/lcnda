@@ -531,7 +531,7 @@ Le nom du modèle (les données restent : vide-les avant si tu veux un modèle v
 Le nom de la copie : ¦ Kopijos pavadinimas: ¦ Kopijas nosaukums: ¦ Koopia nimi:
 {name} (copie) ¦ {name} (kopija) ¦ {name} (kopija) ¦ {name} (koopia)
 Les changements faits depuis le dernier enregistrement seront perdus. ¦ Pakeitimai, atlikti po paskutinio išsaugojimo, bus prarasti. ¦ Izmaiņas, kas veiktas kopš pēdējās saglabāšanas, tiks zaudētas. ¦ Pärast viimast salvestamist tehtud muudatused lähevad kaotsi.
-📋 Partir d’un modèle ¦ 📋 Pradėti nuo šablono ¦ 📋 Sākt no veidnes ¦ 📋 Alusta mallist
+🧩 Partir d’un modèle ¦ 🧩 Pradėti nuo šablono ¦ 🧩 Sākt no veidnes ¦ 🧩 Alusta mallist
 Mes modèles ¦ Mano šablonai ¦ Manas veidnes ¦ Minu mallid
 Pas encore de modèle à toi : dans un classeur, Fichier → « Enregistrer comme modèle… ». ¦ Savo šablonų dar neturi: sąsiuvinyje Failas → „Išsaugoti kaip šabloną…“. ¦ Tev vēl nav savu veidņu: darbgrāmatā Fails → „Saglabāt kā veidni…“. ¦ Sul pole veel oma malle: töövihikus Fail → „Salvesta mallina…“.
 séparateur « {sep} » ¦ skyriklis „{sep}“ ¦ atdalītājs „{sep}“ ¦ eraldaja „{sep}“
@@ -615,7 +615,7 @@ Sosa, génération, côté, âge ¦ Sosa, karta, pusė, amžius ¦ Sosa, paaudze
 objets, prix, total en livres ¦ daiktai, kainos, suma livres ¦ priekšmeti, cenas, kopsumma livres ¦ esemed, hinnad, summa livres'ides
 Registre matricule ¦ Karinis registras ¦ Militārais reģistrs ¦ Väeteenistusregister
 classe, signalement, campagnes ¦ šaukimo metai, asmens aprašas, kampanijos ¦ iesaukuma gads, apraksts, kampaņas ¦ kutsealiste klass, isikukirjeldus, sõjakäigud
-📋 Partir d’un modèle… ¦ 📋 Pradėti nuo šablono… ¦ 📋 Sākt no veidnes… ¦ 📋 Alusta mallist…
+🧩 Partir d’un modèle… ¦ 🧩 Pradėti nuo šablono… ¦ 🧩 Sākt no veidnes… ¦ 🧩 Alusta mallist…
 ⤒ Importer un tableau… ¦ ⤒ Importuoti lentelę… ¦ ⤒ Importēt tabulu… ¦ ⤒ Impordi tabel…
 ⤓ Exporter… ¦ ⤓ Eksportuoti… ¦ ⤓ Eksportēt… ¦ ⤓ Ekspordi…
 🖨 Imprimer… ¦ 🖨 Spausdinti… ¦ 🖨 Drukāt… ¦ 🖨 Prindi…

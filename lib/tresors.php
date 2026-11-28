@@ -8,6 +8,8 @@ declare(strict_types=1);
  *   GET  api.php?action=tresors[&kind=letter|candle|passport|stamp|sense…][&person_id=N]
  *        → {items: [...]} ; une lettre encore scellée (open_at dans le futur) n'envoie pas son texte, seulement sa date
  *   POST api.php?action=tresor_write {op: save | delete, item: {id?, kind, person_id?, place_id?, title, body, data, open_at}, csrf}
+ *        delete → {ok, undo} ; {op: restore, undo} remet l'élément (↶ Annuler, 24 h) ; pareil pour tresor_memory_write
+ *   GET  api.php?action=tresors&dash=… → les calculs en plus du tableau de bord (lib/tableau_de_bord_plus.php)
  *   GET  api.php?action=tresor_media&ids=1,2 → {media: [{id, title, media_type, filename, thumbnail}]}
  *   POST api.php?action=tresor_write {op: link_media, media_id, person_id} → le média (un entretien enregistré) rangé sur la fiche
  *   GET  api.php?action=tresor_signatures → {signatures: [{media_id, filename, person_id, x, y, w, h, year}]} (les zones « signature » des médias)
@@ -327,9 +329,57 @@ function tresor_mem_list(PDO $pdo, string $kind, int $personId = 0): array
     return array_map(static fn(array $m) => tresor_mem_item($pdo, $m), $st->fetchAll(PDO::FETCH_ASSOC));
 }
 
+/**
+ * ↶ Les éléments supprimés gardés de côté (24 h) pour « ↶ Annuler » : les lignes de chaque table, copiées telles quelles côté
+ * serveur (une lettre scellée ne repasse donc jamais par l'écran). $parts : [[table, colonne ou condition, valeur]].
+ */
+function tresor_trash_ensure(PDO $pdo): void
+{
+    $pdo->exec('CREATE TABLE IF NOT EXISTS tresor_trash (token TEXT PRIMARY KEY, what TEXT NOT NULL, rows_json TEXT NOT NULL, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)');
+    $pdo->exec("DELETE FROM tresor_trash WHERE created_at < datetime('now', '-1 day')");
+}
+function tresor_trash_keep(PDO $pdo, string $what, array $parts): string
+{
+    tresor_trash_ensure($pdo);
+    $rows = [];
+    foreach ($parts as [$table, $col, $val]) {
+        if (!$pdo->query("SELECT 1 FROM sqlite_master WHERE type='table' AND name=" . $pdo->quote($table))->fetchColumn()) { continue; }
+        $st = $pdo->prepare("SELECT * FROM {$table} WHERE {$col}=?"); $st->execute([$val]);
+        $rows[$table] = $st->fetchAll(PDO::FETCH_ASSOC);
+    }
+    $token = bin2hex(random_bytes(12));
+    $pdo->prepare('INSERT INTO tresor_trash(token, what, rows_json) VALUES(?,?,?)')->execute([$token, $what, json_encode($rows, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR)]);
+    return $token;
+}
+function tresor_trash_restore(PDO $pdo, string $token): array
+{
+    tresor_trash_ensure($pdo);
+    $st = $pdo->prepare('SELECT rows_json FROM tresor_trash WHERE token=?'); $st->execute([$token]); $json = $st->fetchColumn();
+    if ($json === false) { return ['ok' => true, 'already' => true]; }
+    $rows = json_decode((string) $json, true) ?: [];
+    $pdo->beginTransaction();
+    try {
+        foreach ($rows as $table => $list) {
+            if (!preg_match('/^[a-z_]+$/', (string) $table)) { continue; }
+            foreach ($list as $r) {
+                $cols = array_keys($r); if (!$cols || array_filter($cols, static fn($c) => !preg_match('/^[a-z_0-9]+$/', (string) $c))) { continue; }
+                $pdo->prepare("INSERT OR IGNORE INTO {$table}(" . implode(',', $cols) . ') VALUES(' . implode(',', array_fill(0, count($cols), '?')) . ')')->execute(array_values($r));
+            }
+        }
+        $pdo->prepare('DELETE FROM tresor_trash WHERE token=?')->execute([$token]);
+        $pdo->commit();
+    } catch (Throwable $e) { if ($pdo->inTransaction()) { $pdo->rollBack(); } throw $e; }
+    return ['ok' => true];
+}
+
 function tresors_dispatch(PDO $pdo, string $action, bool $isWrite, array $payload): never
 {
     try {
+        // 🏠 les calculs en plus du tableau de bord (lib/tableau_de_bord_plus.php), en attendant une action à eux dans api.php
+        if (!$isWrite && $action === 'tresors' && isset($_GET['dash'])) {
+            require_once __DIR__ . '/tableau_de_bord_plus.php';
+            dashplus_dispatch($pdo, (string) $_GET['dash']);
+        }
         if (!$isWrite && $action === 'tresors') {
             $kind = (string) ($_GET['kind'] ?? ''); if ($kind !== '' && !in_array($kind, TRESOR_KINDS, true)) { $kind = '-'; }
             $hid = tresor_hidden_people($pdo);
@@ -390,7 +440,10 @@ function tresors_dispatch(PDO $pdo, string $action, bool $isWrite, array $payloa
             $op = (string) ($payload['op'] ?? '');
             if ($op === 'save') { json_response(tresor_mem_save($pdo, is_array($payload['item'] ?? null) ? $payload['item'] : [])); }
             if ($op === 'delete') { $mid = preg_match('/^m(\d+)$/', (string) ($payload['id'] ?? ''), $mm) ? (int) $mm[1] : 0; $k = $pdo->prepare('SELECT kind FROM family_memories WHERE id=?'); $k->execute([$mid]);
-                if (!in_array($k->fetchColumn(), TRESOR_MEM_KINDS, true)) { throw new LcndaBadInput('Élément introuvable.'); } delete_family_memory($pdo, ['id' => $mid]); json_response(['ok' => true]); }
+                if (!in_array($k->fetchColumn(), TRESOR_MEM_KINDS, true)) { throw new LcndaBadInput('Élément introuvable.'); }
+                $undo = tresor_trash_keep($pdo, 'memory', [['family_memories', 'id', $mid], ['family_memory_people', 'memory_id', $mid], ['label_links', "entity_type='family_memory' AND entity_id", $mid], ['family_collection_media', "collection_type='family_memory' AND collection_id", $mid]]);
+                delete_family_memory($pdo, ['id' => $mid]); json_response(['ok' => true, 'undo' => $undo]); }
+            if ($op === 'restore') { json_response(tresor_trash_restore($pdo, (string) ($payload['undo'] ?? ''))); }
             throw new LcndaBadInput('Opération inconnue.');
         }
         if ($isWrite && $action === 'tresor_write') {
@@ -404,7 +457,10 @@ function tresors_dispatch(PDO $pdo, string $action, bool $isWrite, array $payloa
                 if (!$has->fetchColumn()) { $pdo->prepare("INSERT INTO media_links(media_id, entity_type, entity_id, position) VALUES(?, 'person', ?, (SELECT COALESCE(MAX(position),0)+1 FROM media_links WHERE entity_type='person' AND entity_id=?))")->execute([$mid, $pid, $pid]); }
                 json_response(['ok' => true]);
             }
-            if ($op === 'delete') { tresors_ensure($pdo); $pdo->prepare('DELETE FROM tresor_items WHERE id=?')->execute([(int) ($payload['id'] ?? 0)]); json_response(['ok' => true]); }
+            if ($op === 'delete') { tresors_ensure($pdo); $id = (int) ($payload['id'] ?? 0); $undo = tresor_trash_keep($pdo, 'item', [['tresor_items', 'id', $id]]);
+                $pdo->prepare('DELETE FROM tresor_items WHERE id=?')->execute([$id]); json_response(['ok' => true, 'undo' => $undo]); }
+            // ↶ Annuler une suppression : la ligne gardée de côté revient telle quelle (même numéro), sans repasser par l'écran
+            if ($op === 'restore') { json_response(tresor_trash_restore($pdo, (string) ($payload['undo'] ?? ''))); }
             throw new LcndaBadInput('Opération inconnue.');
         }
         json_response(['error' => 'Action inconnue.'], 400);

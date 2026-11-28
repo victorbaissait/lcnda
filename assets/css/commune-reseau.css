@@ -1,0 +1,37 @@
+/* LCNDA — 🏛 Communes de l'époque (heritage-commune-histoire.js) et 🤝 Son réseau (heritage-reseau.js) */
+:root { --rs-line: rgba(0, 0, 0, .08); --ch-orange-bg: #fff4e5; --ch-orange-bd: #f0a64a; --ch-yellow-bg: #fffbe6; --ch-yellow-bd: #e6c84a; }
+:root[data-theme="dark"] { --rs-line: rgba(255, 255, 255, .12); --ch-orange-bg: #3a2a14; --ch-orange-bd: #b8772a; --ch-yellow-bg: #35301a; --ch-yellow-bd: #a8902f; }
+
+/* 🏛 l'avertissement dans la fenêtre d'un événement */
+.ch-warn { margin: 6px 0 2px; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--ch-orange-bd); background: var(--ch-orange-bg); font-size: .92em; }
+.ch-warn.is-yellow { border-color: var(--ch-yellow-bd); background: var(--ch-yellow-bg); }
+.ch-warn p { margin: 0 0 4px; }
+.ch-warn-acts { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; }
+.ch-src { display: block; color: var(--muted, #666); margin-top: 4px; }
+.ch-choices { display: grid; gap: 6px; margin: 8px 0; }
+.ch-person ul { margin: 0; padding-left: 18px; }
+.ch-person li { margin: 4px 0; }
+
+/* 🤝 le bloc de la fiche */
+.rs-group { margin: 10px 0 4px; font-size: .85em; text-transform: uppercase; letter-spacing: .04em; color: var(--muted, #666); }
+.rs-list { list-style: none; margin: 0; padding: 0; }
+.rs-row { display: flex; gap: 8px; align-items: flex-start; padding: 6px 0; border-bottom: 1px solid var(--rs-line); }
+.rs-row:last-child { border-bottom: 0; }
+.rs-ico { width: 1.6em; text-align: center; flex: none; }
+.rs-main { flex: 1; min-width: 0; }
+.rs-acts { display: flex; gap: 2px; flex: none; }
+.rs-acts .icon-button { width: 28px; height: 28px; font-size: .9em; }
+.rs-note summary { cursor: pointer; color: var(--muted, #666); font-size: .9em; }
+.rs-note p { margin: 4px 0; white-space: pre-wrap; }
+.rs-empty { margin: 4px 0; }
+.rs-modal .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.rs-modal .span-2 { grid-column: 1 / -1; }
+.rs-modal label { display: flex; flex-direction: column; gap: 4px; }
+@media (max-width: 640px) { .rs-modal .form-grid { grid-template-columns: 1fr; } }
+
+/* 💞 génogramme : la légende des liens affectifs */
+.rs-leg { margin-left: 6px; white-space: nowrap; }
+.rs-leg.is-proche, .rs-leg.is-ami { color: #2e7d32; }
+.rs-leg.is-conflit { color: #c62828; }
+.rs-leg.is-distance { color: #757575; }
+.rs-leg.is-rupture { color: #6d4c41; }

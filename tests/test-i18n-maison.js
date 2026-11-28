@@ -1,6 +1,6 @@
 'use strict';
 /* 🌐 Traduction de la zone « maison » (vague 5, les éditeurs) : 🏠 plan de la maison, 3D et visite — heritage-house.js, -lib.js,
- * -more.js, -equip.js, -cultes.js, -plus.js, -pics.js, -vides.js, heritage-house3d.js (heritage-house-metiers.js reste en français).
+ * -more.js, -equip.js, -cultes.js, -objets.js, -plus.js, -pics.js, -vides.js, heritage-house3d.js (heritage-house-metiers.js reste en français).
  * Mode d'emploi : docs/I18N.md.
  *     node tests/test-i18n-maison.js                 (I18N_SHOTS=dossier pour garder des captures, I18N_PORT=20580 par défaut)
  *     I18N_PROBE=de node tests/test-i18n-maison.js    liste les textes français restés dans l’éditeur et ses panneaux (sans rien vérifier)
@@ -59,15 +59,16 @@ const ALLOWED = Number(process.env.I18N_ALLOWED || 4);
         const doc = {addEventListener() {}, querySelector() { return null; }, getElementById() { return null; }, createElement() { return {getContext() { return null; }, style: {}}; }, head: {appendChild() {}}, body: {appendChild() {}}};
         const win = {setTimeout, clearTimeout, requestAnimationFrame: () => 0, LCNDA_EXT: {}, document: doc, addEventListener() {}, localStorage: {getItem() { return null; }, setItem() {}}};
         win.window = win; const ctx = vm.createContext(win); ctx.globalThis = ctx;
-        for (const f of ['heritage-house-vides', 'heritage-house-plus', 'heritage-house', 'heritage-house-lib', 'heritage-house-more', 'heritage-house-metiers', 'heritage-house-cultes', 'heritage-house-equip']) vm.runInContext(fs.readFileSync(path.join(root, 'assets/js', `${f}.js`), 'utf8'), ctx, {filename: f});
+        for (const f of ['heritage-house-vides', 'heritage-house-plus', 'heritage-house', 'heritage-house-lib', 'heritage-house-more', 'heritage-house-metiers', 'heritage-house-cultes', 'heritage-house-equip', 'heritage-house-objets']) vm.runInContext(fs.readFileSync(path.join(root, 'assets/js', `${f}.js`), 'utf8'), ctx, {filename: f});
         try { win.LCNDA_EXT.houseLibUI.pane({cat: 'Chambre', q: '', mine: [], sym2d: () => ''}); } catch (_) {} // extend() : tout le catalogue
         return win.LCNDA_EXT;
     };
     await t('les noms et les catégories du mobilier sont traduits (sauf les métiers, données de référence)', () => {
         const E = loadCatalog(), met = fs.readFileSync(path.join(root, 'assets/js/heritage-house-metiers.js'), 'utf8');
-        const others = ['heritage-house', 'heritage-house-lib', 'heritage-house-more', 'heritage-house-cultes', 'heritage-house-equip'].map(f => fs.readFileSync(path.join(root, 'assets/js', `${f}.js`), 'utf8')).join('\n');
+        const others = ['heritage-house', 'heritage-house-lib', 'heritage-house-more', 'heritage-house-cultes', 'heritage-house-equip', 'heritage-house-objets'].map(f => fs.readFileSync(path.join(root, 'assets/js', `${f}.js`), 'utf8')).join('\n');
         const lit = s => `'${s.replace(/'/g, "\\'")}'`;
-        const names = new Set(); E.houseLib.LIB.forEach(l => { if (!(met.includes(lit(l[1])) && !others.includes(lit(l[1])))) names.add(l[1]); names.add(l[2]); });
+        const names = new Set(), parts = Object.fromEntries((E.houseObjets?.styled() || []).map(r => [r[1], r[10]])); // un meuble de style : ses deux morceaux (« Armoire » + « Louis XV »)
+        E.houseLib.LIB.forEach(l => { if (parts[l[1]]) parts[l[1]].forEach(x => names.add(x)); else if (!(met.includes(lit(l[1])) && !others.includes(lit(l[1])))) names.add(l[1]); names.add(l[2]); });
         E.houseLibUI.CATS.forEach(c => names.add(c));
         assert.ok(names.size > 800, `catalogue : ${names.size}`);
         for (const l of LANGS) { const dict = X.loadDict(l), miss = [...names].filter(n => dict[n] == null); assert.deepEqual(miss, [], `${l} : ${miss.slice(0, 30).join(' | ')}`); }

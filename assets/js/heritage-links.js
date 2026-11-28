@@ -78,6 +78,9 @@
                 <div data-h-question-sub></div>
                 ${r.criteria && !r.criteria.same_birthday ? '<p><button type="button" class="button small secondary" data-h-question-save>Enregistrer comme recherche</button></p>' : ''}`;
             out.querySelector('[data-h-question-save]')?.addEventListener('click', () => saveQuestion(q, r.criteria, after));
+            // 🗺 Carte · 🧺 📎 sur les fiches trouvées (app-recherche-kit.js) — l'écran « Poser une question » seulement (la recherche multicritère a les siens)
+            if (S().researchKind === 'question' && r.people.length && ext.researchKit) ext.researchKit.people(out.closest('.page'), {people: r.people, title: q, criteria: `${i18n('Question')} : ${q}`, key: 'question',
+                head: [i18n('Personne'), i18n('Naissance'), i18n('Décès'), i18n('Métier')], nameOf: p => A().personName(p), row: p => [A().personName(p), p.birth_date || p.birth_year || '', p.death_date || p.death_year || '', p.occupation || '']});
             // les boutons de renvoi vers un outil (« Ouvrir la fiche », « Que manque-t-il ? », dossier ⚖️… : heritage-questions-plus.js)
             out.querySelectorAll('[data-h-question-open]').forEach(b => b.addEventListener('click', () => ext.qpOpen?.((r.open || [])[Number(b.dataset.hQuestionOpen)])));
             // « voir » sur une ligne d'un classement (un prénom, un lieu…) : les personnes concernées
@@ -109,7 +112,7 @@
             } catch (error) { out.innerHTML = `<p class="h-offsite-sentence is-warn">${esc(error.message)}</p>`; }
         }));
         box.querySelectorAll('[data-hq-seen]').forEach(b => b.addEventListener('click', async () => { await api('mark_saved_search_seen', {}, {method: 'POST', body: {id: b.dataset.hqSeen}}); renderSavedQuestions(); }));
-        box.querySelectorAll('[data-hq-delete]').forEach(b => b.addEventListener('click', async () => { if (!await A().confirmBox('Supprimer cette recherche enregistrée ?', {title: 'Supprimer la recherche', okLabel: 'Supprimer la recherche'})) return; await api('delete_saved_search', {}, {method: 'POST', body: {id: b.dataset.hqDelete}}); toast('Recherche supprimée.'); renderSavedQuestions(); }));
+        box.querySelectorAll('[data-hq-delete]').forEach(b => b.addEventListener('click', () => A().deleteWithUndo({action: 'delete_saved_search', body: {id: b.dataset.hqDelete}, type: 'saved_search', id: b.dataset.hqDelete, message: i18n('Recherche enregistrée supprimée'), after: () => renderSavedQuestions()}))); // H7 : ↶ Annuler au lieu de demander
     }
     // Recherche → « Poser une question en français » : un écran à part
     ext.question = async token => {
@@ -173,7 +176,17 @@
         const ed = event.target.closest?.('[data-h-lang-edit]');
         if (ed) { const L = S().currentPerson?.heritage?.languages; const l = L?.own.find(x => Number(x.id) === Number(ed.dataset.hLangEdit)); if (l) personLanguageDialog(Number(l.person_id), l); }
         const del = event.target.closest?.('[data-h-lang-delete]');
-        if (del && await A().confirmBox('Supprimer cette langue ?', {title: 'Supprimer la langue', okLabel: 'Supprimer la langue'})) { await api('delete_person_language', {}, {method: 'POST', body: {id: del.dataset.hLangDelete}}); toast('Langue supprimée.'); await refresh(); }
+        if (del) { // H7 : supprimée tout de suite, « ↶ Annuler » la remet (même langue, même certitude, même note)
+            const l = S().currentPerson?.heritage?.languages?.own?.find(x => Number(x.id) === Number(del.dataset.hLangDelete));
+            await api('delete_person_language', {}, {method: 'POST', body: {id: del.dataset.hLangDelete}}); await refresh();
+            const back = l ? {person_id: l.person_id, language: l.language, certainty: l.certainty, to_descendants: Number(l.to_descendants) ? 1 : 0, note: l.note || ''} : null;
+            if (!back) { toast('Langue supprimée.'); return; }
+            let again = 0; // l'id change quand la langue revient : « ↷ Rétablir » supprime la nouvelle
+            A().undoToast(i18n('Langue « {nm} » supprimée', {nm: l.language}), {
+                undo: async () => { const r = await api('save_person_language', {}, {method: 'POST', body: back}); again = Number(r?.result?.id || r?.id) || 0; await refresh(); },
+                redo: async () => { if (again) await api('delete_person_language', {}, {method: 'POST', body: {id: again}}); await refresh(); },
+            });
+        }
     });
     document.addEventListener('change', async event => {
         const c = event.target.closest?.('[data-h-lang-noinherit]');
@@ -308,7 +321,18 @@
         });
     }
     let mentionScan = 0;
-    new MutationObserver(() => { clearTimeout(mentionScan); mentionScan = setTimeout(() => linkMentions(document.body), 80); }).observe(document.body, {childList: true, subtree: true, characterData: true});
+    // ⏱ seulement ce qui vient d'apparaître ou de changer (avant : toute la page relue à chaque changement, ≈ 0,8 s à l'ouverture)
+    const mentionRoots = new Set();
+    new MutationObserver(recs => {
+        for (const r of recs) { if (r.type === 'characterData') mentionRoots.add(r.target.parentNode || r.target); else for (const a of r.addedNodes) mentionRoots.add(a.nodeType === 3 ? a.parentNode || a : a); }
+        clearTimeout(mentionScan);
+        mentionScan = setTimeout(() => {
+            const roots = new Set([...mentionRoots].filter(x => x && x.isConnected && x.nodeType === 1)); mentionRoots.clear();
+            const inside = x => { for (let p = x.parentNode; p; p = p.parentNode) if (roots.has(p)) return true; return false; };
+            for (const x of roots) if (!inside(x) && (x.textContent || '').includes('@[')) linkMentions(x);
+        }, 80);
+    }).observe(document.body, {childList: true, subtree: true, characterData: true});
+    linkMentions(document.body);
     ext.personBlocks.mentions = (index, detail) => {
         const rows = detail.heritage?.mentions || [];
         if (!rows.length) return '';
@@ -405,7 +429,7 @@
                     : A().emptyState({icon: '🔍', text: 'Aucune demande ne correspond', hint: 'Change les mots cherchés ou retire un filtre (« Tout effacer » montre aussi les demandes terminées).'});
                 A().bindTableLinks();
                 ws.querySelectorAll('[data-h10-rows] [data-h-help-edit]').forEach(x => x.addEventListener('click', () => ext.lists.help_requests(++S().workspaceToken, {id: Number(x.dataset.hHelpEdit)})));
-                ws.querySelectorAll('[data-h10-rows] [data-h-help-delete]').forEach(x => x.addEventListener('click', async () => { if (!await A().confirmBox('Supprimer cette demande ?', {title: 'Supprimer la demande', okLabel: 'Supprimer la demande'})) return; await api('delete_help_request', {}, {method: 'POST', body: {id: x.dataset.hHelpDelete}}); A().renderList(); }));
+                ws.querySelectorAll('[data-h10-rows] [data-h-help-delete]').forEach(x => x.addEventListener('click', () => A().deleteWithUndo({action: 'delete_help_request', body: {id: x.dataset.hHelpDelete}, type: 'help_request', id: x.dataset.hHelpDelete, message: i18n('Demande d’entraide supprimée'), after: () => A().renderList()}))); // H7
             };
             paint();
         }
@@ -481,7 +505,9 @@
                 <label>Durée de la vidéo<select name="seconds"><option value="20">20 secondes</option><option value="40" selected>40 secondes</option><option value="60">1 minute</option><option value="90">1 min 30</option><option value="120">2 minutes</option></select></label>
                 <label>Format<select name="size"><option value="1280x720">Paysage 1280 × 720 (écran, réunion)</option><option value="1080x1080">Carré 1080 × 1080 (messages)</option><option value="720x1280">Portrait 720 × 1280 (téléphone)</option></select></label>
                 <label class="span-2 checkbox-line"><input type="checkbox" name="online" checked> Fond de carte détaillé (Internet) — sinon, fond hors ligne</label></div>
+                ${ext.openAnimStudio ? `<p><button type="button" class="link-button" data-h-film-studio>🎞 ${i18n('Plus de réglages (couleurs, caméra qui suit, légendes, musique, voix, GIF) : ouvrir dans le Studio d’animation')}</button></p>` : ''}
                 <div class="h-film-preview" hidden><canvas></canvas><div class="h-progress"><span></span></div><p class="muted" data-h-film-status></p></div>`,
+            onOpen: dlg => dlg.querySelector('[data-h-film-studio]')?.addEventListener('click', () => { dlg.close?.(); ext.openAnimStudio({template: 'migrations'}); }),
             onSubmit: async form => { if (!mime) { toast('Cet ordinateur ne sait pas enregistrer de vidéo depuis l’application.', 'error'); return false; } await recordFilm(form, mime); return false; },
         });
     }
@@ -517,7 +543,7 @@
             const world = 2 ** zoom, tiles = [];
             for (let tx = Math.floor(left / 256); tx <= Math.floor((left + W) / 256); tx++) for (let ty = Math.floor(top / 256); ty <= Math.floor((top + H) / 256); ty++) { if (ty >= 0 && ty < world) tiles.push([tx, ty]); }
             const drawTiles = async online => {
-                const style = online ? 'light' : 'offline';
+                const style = online ? 'osmfr' : 'offline'; // fond libre par défaut (Esri n'est pas une carte libre)
                 const imgs = await Promise.all(tiles.map(([tx, ty]) => loadImage(online ? app.mapTileUrl(style, zoom, ((tx % world) + world) % world, ty) : `api.php?action=offline_tile&z=${zoom}&x=${((tx % world) + world) % world}&y=${ty}`, online)));
                 bg.fillStyle = '#dfe6ea'; bg.fillRect(0, 0, W, H);
                 imgs.forEach((img, i) => { if (img) bg.drawImage(img, tiles[i][0] * 256 - left, tiles[i][1] * 256 - top, 256, 256); });

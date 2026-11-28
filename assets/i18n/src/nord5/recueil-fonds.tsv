@@ -1,0 +1,155 @@
+fr ¦ hr ¦ sl
+# 🏛 Fiche d’identité, vue des fonds, ce qu’on y trouve, réglages des recueils (heritage-recueil-fiche.js, heritage-recueil-fonds.js, heritage-recueil-sens.js, lib/recueil_fiche.php)
+pièce {n} ¦ jedinica {n} ¦ enota {n}
+vue {n} ¦ snimka {n} ¦ posnetek {n}
+Citer ¦ Citiraj ¦ Citiraj
+Copie le texte : ¦ Kopiraj tekst: ¦ Kopiraj besedilo:
+Communicable ¦ Dostupna javnosti ¦ Dostopna javnosti
+le délai est passé ({y}) ¦ rok je istekao ({y}) ¦ rok je potekel ({y})
+acte le plus récent : {y} ; délai {d} ans ¦ najnoviji zapis: {y}; rok {d} godina ¦ najnovejši vpis: {y}; rok {d} let
+Réservé jusqu’en {y} ¦ Nedostupna do {y}. ¦ Nedostopna do leta {y}
+acte le plus récent : {y} ; délai {d} ans ({k}) ¦ najnoviji zapis: {y}; rok {d} godina ({k}) ¦ najnovejši vpis: {y}; rok {d} let ({k})
+sorte d’acte pas dite : 75 ans par prudence ¦ vrsta zapisa nije navedena: 75 godina iz opreza ¦ vrsta vpisa ni navedena: 75 let iz previdnosti
+Sur autorisation ¦ Uz odobrenje ¦ Z dovoljenjem
+écris les années du recueil (ou fais son sommaire) pour que l’app calcule ¦ upiši godine zbirke (ili napravi njezin sadržaj) da aplikacija izračuna ¦ vpiši leta zbirke (ali naredi njeno kazalo), da aplikacija izračuna
+Où il est, qui peut le voir ¦ Gdje je, tko je može vidjeti ¦ Kje je, kdo jo lahko vidi
+service d’archives, fonds, liens, communicabilité, support… ¦ arhivska služba, fond, poveznice, dostupnost, nosač… ¦ arhivska služba, fond, povezave, dostopnost, nosilec…
+Dans la liste de Réglages › Services d’archives ; « Lieu de conservation » reste pour un texte libre. ¦ Iz popisa Postavke › Arhivske službe; „Mjesto pohrane” ostaje za slobodan tekst. ¦ S seznama Nastavitve › Arhivske službe; »Kraj hrambe« ostane za prosto besedilo.
+Fonds ¦ Fond ¦ Fond
+ex. Fonds de la paroisse de Sancoins ¦ npr. Fond župe Sancoins ¦ npr. Fond župnije Sancoins
+Série · sous-série ¦ Serija · podserija ¦ Serija · podserija
+ex. E · 3 E (état civil) ¦ npr. E · 3 E (matične knjige) ¦ npr. E · 3 E (matične knjige)
+Lien en ligne du recueil ¦ Mrežna poveznica zbirke ¦ Spletna povezava zbirke
+Lien d’une vue ({n} = numéro de la vue) ¦ Poveznica na snimku ({n} = broj snimke) ¦ Povezava do posnetka ({n} = številka posnetka)
+Vue = page + … ¦ Snimka = stranica + … ¦ Posnetek = stran + …
+ex. 2 si la vue 1 est la couverture et la vue 2 une page blanche ¦ npr. 2 ako je snimka 1 korica, a snimka 2 prazna stranica ¦ npr. 2, če je posnetek 1 platnica in posnetek 2 prazna stran
+Autre exemplaire (un autre recueil) ¦ Drugi primjerak (druga zbirka) ¦ Drug izvod (druga zbirka)
+… ou décrit ¦ … ili opisan ¦ … ali opisan
+ex. Collection du greffe, AD 18, 3 E 1235 ¦ npr. Sudski primjerak, AD 18, 3 E 1235 ¦ npr. Sodni izvod, AD 18, 3 E 1235
+Communicabilité ¦ Dostupnost ¦ Dostopnost
+Calculée d’après les années et les sortes d’actes (conseillé) ¦ Izračunata prema godinama i vrstama zapisa (preporučeno) ¦ Izračunana po letih in vrstah vpisov (priporočeno)
+Réservée jusqu’en… ¦ Nedostupna do… ¦ Nedostopna do…
+Réutilisation ¦ Ponovna uporaba ¦ Ponovna uporaba
+Support ¦ Nosač ¦ Nosilec
+État matériel ¦ Fizičko stanje ¦ Fizično stanje
+Numérisé par ¦ Digitalizirao ¦ Digitaliziral
+ex. AD 18 (2009), moi (2026) ¦ npr. AD 18 (2009), ja (2026) ¦ npr. AD 18 (2009), jaz (2026)
+Provenance ¦ Provenijencija ¦ Provenienca
+ex. Dépôt de la commune, 1952 ¦ npr. Polog općine, 1952. ¦ npr. Depozit občine, 1952
+vue = page + {n} ¦ snimka = stranica + {n} ¦ posnetek = stran + {n}
+Pas encore dit : « Modifier » → « 🏛 Où il est, qui peut le voir ». ¦ Još nije navedeno: „Uredi” → „🏛 Gdje je, tko je može vidjeti”. ¦ Še ni navedeno: »Uredi« → »🏛 Kje je, kdo jo lahko vidi«.
+Citer : ¦ Citiraj: ¦ Citiraj:
+Mode consultation : cacher les recueils non communicables (conseillé) ¦ Način pregledavanja: sakrij zbirke nedostupne javnosti (preporučeno) ¦ Način ogleda: skrij zbirke, nedostopne javnosti (priporočeno)
+En mode consultation, les recueils non communicables sont cachés. ¦ U načinu pregledavanja zbirke nedostupne javnosti su skrivene. ¦ V načinu ogleda so zbirke, nedostopne javnosti, skrite.
+En mode consultation, tous les recueils sont montrés. ¦ U načinu pregledavanja prikazane su sve zbirke. ¦ V načinu ogleda so prikazane vse zbirke.
+Vue {n} en ligne ¦ Snimka {n} na mreži ¦ Posnetek {n} na spletu
+Citer cette page ¦ Citiraj ovu stranicu ¦ Citiraj to stran
+Recueils chez eux ¦ Zbirke kod njih ¦ Zbirke pri njih
+{p} pages · {d} finies ou relues · {a} absentes ¦ {p} stranica · {d} gotovih ili provjerenih · {a} nedostaje ¦ {p} strani · {d} končanih ali pregledanih · {a} manjkajočih
+Fonds · série ¦ Fond · serija ¦ Fond · serija
+Transcrit · relu ¦ Prepisano · provjereno ¦ Prepisano · pregledano
+Aucun recueil relié à ce service : dans un recueil, « Modifier » → « 🏛 Où il est » → Service d’archives. ¦ Nijedna zbirka nije povezana s ovom službom: u zbirci „Uredi” → „🏛 Gdje je” → Arhivska služba. ¦ S to službo ni povezana nobena zbirka: v zbirki »Uredi« → »🏛 Kje je« → Arhivska služba.
+Lacunes ({n}) ¦ Praznine ({n}) ¦ Vrzeli ({n})
+Licence ouverte (Etalab) ¦ Otvorena licencija (Etalab) ¦ Odprta licenca (Etalab)
+CC BY ¦ CC BY ¦ CC BY
+CC BY-SA ¦ CC BY-SA ¦ CC BY-SA
+CC BY-NC ¦ CC BY-NC ¦ CC BY-NC
+Domaine public ¦ Javno dobro ¦ Javna last
+Tous droits réservés ¦ Sva prava pridržana ¦ Vse pravice pridržane
+À demander au service ¦ Pitati arhivsku službu ¦ Vprašati arhivsko službo
+Microfilm ¦ Mikrofilm ¦ Mikrofilm
+Bon ¦ Dobro ¦ Dobro
+Abîmé ¦ Oštećeno ¦ Poškodovano
+Fragile (ne pas manipuler) ¦ Krhko (ne rukovati) ¦ Krhko (ne prijemati)
+Restauré ¦ Restaurirano ¦ Restavrirano
+{n} à transcrire ¦ {n} za prijepis ¦ {n} za prepis
+{n} à relire ¦ {n} za provjeru ¦ {n} za pregled
+{n} absentes ¦ {n} nedostaje ¦ {n} manjkajočih
+{n} à photographier ¦ {n} za fotografiranje ¦ {n} za fotografiranje
+pas en ligne ¦ nije na mreži ¦ ni na spletu
+Chargement des fonds… ¦ Učitavanje fondova… ¦ Nalaganje fondov…
+La vue des fonds ne s’ouvre pas ¦ Pregled fondova se ne otvara ¦ Pregled fondov se ne odpre
+Sans service d’archives ¦ Bez arhivske službe ¦ Brez arhivske službe
+Sans fonds ¦ Bez fonda ¦ Brez fonda
+{n} · {t} % transcrit · {r} % relu ¦ {n} · {t} % prepisano · {r} % provjereno ¦ {n} · {t} % prepisano · {r} % pregledano
+recueils · {s} ¦ zbirke · {s} ¦ zbirke · {s}
+pages attendues ¦ očekivane stranice ¦ pričakovane strani
+photographiées ¦ fotografirane ¦ fotografirane
+transcrites · {r} % relues ¦ prepisane · {r} % provjerene ¦ prepisane · {r} % pregledane
+pages absentes · {g} ¦ nedostajuće stranice · {g} ¦ manjkajoče strani · {g}
+Montrer : ¦ Prikaži: ¦ Prikaži:
+Colonnes… ¦ Stupci… ¦ Stolpci…
+État des fonds ¦ Stanje fondova ¦ Stanje fondov
+Aucun recueil ne correspond ¦ Nijedna zbirka ne odgovara ¦ Nobena zbirka ne ustreza
+Change « Montrer » ou les mots cherchés. ¦ Promijeni „Prikaži” ili tražene riječi. ¦ Spremeni »Prikaži« ali iskane besede.
+Crée un recueil, puis dis où il est : « Modifier » → « 🏛 Où il est ». ¦ Napravi zbirku, a zatim navedi gdje je: „Uredi” → „🏛 Gdje je”. ¦ Ustvari zbirko, nato povej, kje je: »Uredi« → »🏛 Kje je«.
+Chaque groupe se replie. Un clic sur « Reste » ouvre l’état du recueil. Un recueil sans service d’archives va dans « Sans service d’archives » : « Modifier » → « 🏛 Où il est ». ¦ Svaka se skupina može sklopiti. Klik na „Preostalo” otvara stanje zbirke. Zbirka bez arhivske službe ide u „Bez arhivske službe”: „Uredi” → „🏛 Gdje je”. ¦ Vsako skupino lahko strneš. Klik na »Ostane« odpre stanje zbirke. Zbirka brez arhivske službe gre v »Brez arhivske službe«: »Uredi« → »🏛 Kje je«.
+🏛 VUE DES FONDS ¦ 🏛 PREGLED FONDOVA ¦ 🏛 PREGLED FONDOV
+Coche les colonnes à montrer (le recueil est toujours là). ¦ Označi stupce koje želiš prikazati (zbirka je uvijek tu). ¦ Označi stolpce, ki jih želiš prikazati (zbirka je vedno tam).
+Les recueils n’ont pas pu être lus. ¦ Zbirke se nisu mogle učitati. ¦ Zbirk ni bilo mogoče prebrati.
+Rien ne reste à faire dans tes recueils. ¦ U tvojim zbirkama više nema ništa za napraviti. ¦ V tvojih zbirkah ni ostalo nič več za opraviti.
+Registres : reste à faire ¦ Matične knjige: preostalo ¦ Matične knjige: ostane za opraviti
+Vue des fonds ¦ Pregled fondova ¦ Pregled fondov
+=recueil ¦ zbirka|zbirke|zbirki ¦ zbirka|zbirki|zbirke|zbirk
+=service ¦ služba|službe|službi ¦ služba|službi|službe|služb
+=lacune ¦ praznina|praznine|praznina ¦ vrzel|vrzeli|vrzeli|vrzeli
+Photographié ¦ Fotografirano ¦ Fotografirano
+Reste ¦ Preostalo ¦ Ostane
+Numérotation ¦ Numeracija ¦ Številčenje
+Reste à transcrire ¦ Preostalo za prijepis ¦ Ostane za prepis
+Reste à relire ¦ Preostalo za provjeru ¦ Ostane za pregled
+Avec des pages absentes ¦ S nedostajućim stranicama ¦ Z manjkajočimi stranmi
+📚 RECUEILS ¦ 📚 ZBIRKE ¦ 📚 ZBIRKE
+Réglages des recueils ¦ Postavke zbirki ¦ Nastavitve zbirk
+Ma généalogie (conseillé) ¦ Moje rodoslovlje (preporučeno) ¦ Moje rodoslovje (priporočeno)
+Centre d’archives, association ¦ Arhivski centar, udruga ¦ Arhivski center, društvo
+Centre d’archives : la vue des fonds en premier, les colonnes support, état matériel, langue et réutilisation, et la fiche (« Où il est », « Qui peut le voir ») en tête du résumé des nouveaux recueils. Rien n’est caché pour de bon : on change d’avis quand on veut. ¦ Arhivski centar: najprije pregled fondova, stupci nosač, fizičko stanje, jezik i ponovna uporaba te kartica („Gdje je”, „Tko je može vidjeti”) na vrhu sažetka novih zbirki. Ništa nije skriveno zauvijek: možeš se predomisliti kad god želiš. ¦ Arhivski center: najprej pregled fondov, stolpci nosilec, fizično stanje, jezik in ponovna uporaba ter kartica (»Kje je«, »Kdo jo lahko vidi«) na vrhu povzetka novih zbirk. Nič ni skrito za vedno: premisliš si lahko kadar koli.
+Me signaler les trous de numérotation (conseillé) ¦ Upozori me na rupe u numeraciji (preporučeno) ¦ Opozori me na luknje v številčenju (priporočeno)
+Montrer la fiabilité de la lecture sur chaque page (conseillé) ¦ Prikaži pouzdanost čitanja na svakoj stranici (preporučeno) ¦ Prikaži zanesljivost branja na vsaki strani (priporočeno)
+Montrer les remarques « à vérifier » (années sans acte, pics de décès) (conseillé) ¦ Prikaži napomene „za provjeru” (godine bez zapisa, vrhunci smrti) (preporučeno) ¦ Prikaži opombe »za preverjanje« (leta brez vpisov, vrhovi smrti) (priporočeno)
+Réglages des recueils enregistrés. ¦ Postavke zbirki su spremljene. ¦ Nastavitve zbirk so shranjene.
+Rien à montrer pour l’instant : transcris des actes dans l’Atelier (sur les photos des pages), l’app en tire les années, les noms, les métiers, les lieux. ¦ Zasad nema što prikazati: prepisuj zapise u Radionici (na fotografijama stranica), a aplikacija iz njih izvlači godine, prezimena, zanimanja, mjesta. ¦ Zaenkrat ni ničesar za prikaz: prepisuj vpise v Delavnici (na fotografijah strani), aplikacija iz njih izlušči leta, priimke, poklice, kraje.
+Actes par année, de {a} à {b} ¦ Zapisi po godinama, od {a} do {b} ¦ Vpisi po letih, od {a} do {b}
+{y} : aucun acte ¦ {y}: nijedan zapis ¦ {y}: noben vpis
+{a}-{b} : aucun acte ¦ {a}-{b}: nijedan zapis ¦ {a}-{b}: noben vpis
+registre perdu, ailleurs, ou pas encore transcrit ? ¦ izgubljena knjiga, negdje drugdje ili još nije prepisana? ¦ izgubljena knjiga, drugje ali še neprepisana?
+Marquer une lacune ¦ Označi prazninu ¦ Označi vrzel
+{y} : {n} décès ou sépultures ¦ {y}: {n} smrti ili ukopa ¦ {y}: {n} smrti ali pokopov
+au moins deux fois plus que d’habitude ({m}) : épidémie, disette, guerre ? À vérifier. ¦ barem dvostruko više nego obično ({m}): epidemija, glad, rat? Za provjeru. ¦ vsaj dvakrat več kot običajno ({m}): epidemija, lakota, vojna? Za preverjanje.
+{n} ({l} reliées à une fiche) ¦ {n} ({l} povezanih s karticom) ¦ {n} ({l} povezanih s kartico)
+{p} % signent ({s} sur {t} actes qui le disent) ¦ {p} % se potpisuje ({s} od {t} zapisa koji to navode) ¦ {p} % se podpisuje ({s} od {t} vpisov, ki to navajajo)
+sans acte : {x} ¦ bez zapisa: {x} ¦ brez vpisov: {x}
+Calculé depuis les actes transcrits dans l’Atelier : ce n’est jamais affirmé, c’est à vérifier. ¦ Izračunato iz zapisa prepisanih u Radionici: to nikad nije sigurno, treba provjeriti. ¦ Izračunano iz vpisov, prepisanih v Delavnici: to nikoli ni gotovo, treba je preveriti.
+{w} : aucun acte en {y} ¦ {w}: nijedan zapis u {y}. ¦ {w}: noben vpis v letu {y}
+Lacune ajoutée : Recherche › Suivi des registres › Lacunes d’archives. ¦ Praznina dodana: Istraživanje › Praćenje indeksiranih matičnih knjiga › Praznine u arhivima. ¦ Vrzel dodana: Raziskovanje › Spremljanje indeksiranih matičnih knjig › Vrzeli v arhivih.
+Lacune notée ¦ Praznina zabilježena ¦ Vrzel zabeležena
+Calcul… ¦ Izračun… ¦ Izračun…
+Ce qu’on trouve chez eux ¦ Što se kod njih nalazi ¦ Kaj najdeš pri njih
+Règle (Code du patrimoine, L213-2) : tout de suite dans le cas général et pour les actes de décès ; 50 ans (vie privée, documents militaires) ; 75 ans (naissances, mariages, notaires, recensements) ; 100 ans si des mineurs sont concernés ; 120 ans après la naissance pour les dossiers médicaux. L’app propose, tu corriges : le service d’archives a le dernier mot. ¦ Pravilo (francuski Code du patrimoine, L213-2): odmah u općem slučaju i za zapise o smrti; 50 godina (privatni život, vojni dokumenti); 75 godina (rođenja, vjenčanja, bilježnici, popisi stanovništva); 100 godina ako se tiče maloljetnika; 120 godina od rođenja za medicinsku dokumentaciju. Aplikacija predlaže, ti ispravljaš: arhivska služba ima posljednju riječ. ¦ Pravilo (francoski Code du patrimoine, L213-2): takoj v splošnem primeru in za mrliške vpise; 50 let (zasebno življenje, vojaški dokumenti); 75 let (rojstva, poroke, notarji, popisi prebivalstva); 100 let, če gre za mladoletne; 120 let od rojstva za zdravstveno dokumentacijo. Aplikacija predlaga, ti popraviš: zadnjo besedo ima arhivska služba.
+Alsacien ¦ Alzaški ¦ Alzaščina
+Catalan ¦ Katalonski ¦ Katalonščina
+Flamand ¦ Flamanski ¦ Flamščina
+Basque ¦ Baskijski ¦ Baskovščina
+Cursive moderne ¦ Moderni kurziv ¦ Sodobna kurziva
+Cursive XVIIIᵉ ¦ Kurziv 18. stoljeća ¦ Kurziva 18. stoletja
+Écriture secrétaire ¦ Tajničko pismo ¦ Tajniška pisava
+Gothique ¦ Gotica ¦ Gotica
+Kurrent (allemande) ¦ Kurrent (njemačko pismo) ¦ Kurrent (nemška pisava)
+Imprimé ¦ Tiskano ¦ Tiskano
+Dactylographié ¦ Strojopis ¦ Tipkano
+Par fonds ¦ Po fondovima ¦ Po fondih
+Façon de montrer les recueils ¦ Način prikaza zbirki ¦ Način prikaza zbirk
+Où il est ¦ Gdje je ¦ Kje je
+Service d’archives, fonds, cote, liens, citation ¦ Arhivska služba, fond, signatura, poveznice, citiranje ¦ Arhivska služba, fond, signatura, povezave, citiranje
+Qui peut le voir ¦ Tko je može vidjeti ¦ Kdo jo lahko vidi
+Communicabilité, réutilisation, support, état ¦ Dostupnost, ponovna uporaba, nosač, stanje ¦ Dostopnost, ponovna uporaba, nosilec, stanje
+Ce qu’on y trouve ¦ Što se u njoj nalazi ¦ Kaj najdeš v njej
+Actes par année, noms, métiers, lieux, remarques à vérifier ¦ Zapisi po godinama, prezimena, zanimanja, mjesta, napomene za provjeru ¦ Vpisi po letih, priimki, poklici, kraji, opombe za preverjanje
+🗂 Registres : reste à faire ¦ 🗂 Matične knjige: preostalo ¦ 🗂 Matične knjige: ostane za opraviti
+Les recueils (registres, liasses) où il reste des pages à transcrire, à relire, absentes ou à photographier. ¦ Zbirke (knjige, svežnjevi) u kojima još ima stranica za prijepis, za provjeru, nedostajućih ili za fotografiranje. ¦ Zbirke (knjige, svežnji), v katerih so še strani za prepis, za pregled, manjkajoče ali za fotografiranje.
+Le lien doit commencer par http:// ou https://. ¦ Poveznica mora početi s http:// ili https://. ¦ Povezava se mora začeti s http:// ali https://.
+Le lien d’une vue doit contenir {n} à la place du numéro de la vue. ¦ Poveznica na snimku mora sadržavati {n} umjesto broja snimke. ¦ Povezava do posnetka mora vsebovati {n} namesto številke posnetka.
+Ce lien n’est pas une adresse valide. ¦ Ova poveznica nije valjana adresa. ¦ Ta povezava ni veljaven naslov.
+Un recueil ne peut pas être son propre autre exemplaire. ¦ Zbirka ne može biti vlastiti drugi primjerak. ¦ Zbirka ne more biti sama svoj drug izvod.
+Mode consultation : ce recueil n’est pas communicable. ¦ Način pregledavanja: ova zbirka nije dostupna javnosti. ¦ Način ogleda: ta zbirka ni dostopna javnosti.
+archives|Cote ¦ Signatura ¦ Signatura

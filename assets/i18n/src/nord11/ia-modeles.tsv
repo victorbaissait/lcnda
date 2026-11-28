@@ -1,0 +1,35 @@
+fr ¦ vi ¦ id
+# 🔬 Lecture approfondie : les modèles d’IA (avantages, inconvénients, « à l’essai », avancé) — lib/transcription_actes.php, heritage-transcribe-acte.js
+ia|Modèle ¦ Mô hình ¦ Model
+conseillé pour cet ordinateur ({n} Go) ¦ khuyên dùng cho máy này ({n} GB) ¦ disarankan untuk komputer ini ({n} GB)
+à l’essai ¦ để thử ¦ untuk dicoba
+≈ {x} Go à télécharger ¦ ≈ {x} GB cần tải ¦ ≈ {x} GB untuk diunduh
+{n} Go de mémoire conseillés ¦ nên có {n} GB bộ nhớ ¦ disarankan memori {n} GB
+trop gros pour cet ordinateur ¦ quá lớn cho máy này ¦ terlalu besar untuk komputer ini
+Autres modèles à essayer ({n}) ¦ Các mô hình khác để thử ({n}) ¦ Model lain untuk dicoba ({n})
+Pas encore essayés par l’app sur des actes : compare-les sur tes actes (« Les deux lectures côte à côte ») avant de t’y fier. ¦ Ứng dụng chưa thử chúng trên giấy tờ: hãy so sánh trên giấy tờ của bạn (“Hai bản đọc cạnh nhau”) trước khi tin dùng. ¦ Belum dicoba aplikasi pada akta: bandingkan di aktamu (“Dua pembacaan berdampingan”) sebelum mengandalkannya.
+Avancé : autre modèle (Ollama) ¦ Nâng cao: mô hình khác (Ollama) ¦ Lanjutan: model lain (Ollama)
+Les modèles déjà installés dans Ollama sur cet ordinateur. Un modèle qui ne sait pas lire une image ne peut pas lire l’acte. Pas essayé par l’app : vérifie toujours le texte. ¦ Các mô hình đã cài trong Ollama trên máy này. Mô hình không đọc được hình thì không đọc được giấy tờ. Ứng dụng chưa thử: luôn kiểm tra văn bản. ¦ Model yang sudah terpasang di Ollama di komputer ini. Model yang tidak bisa membaca gambar tidak bisa membaca akta. Belum dicoba aplikasi: selalu periksa teksnya.
+lit les images ¦ đọc được hình ¦ membaca gambar
+ne lit pas les images ¦ không đọc được hình ¦ tidak membaca gambar
+Aucun autre modèle installé. Dans un terminal : « ollama pull » suivi du nom du modèle. ¦ Chưa cài mô hình nào khác. Trong cửa sổ lệnh: “ollama pull” rồi tên mô hình. ¦ Tidak ada model lain yang terpasang. Di terminal: “ollama pull” diikuti nama model.
+cet ordinateur : {n} Go · chaque modèle se télécharge une seule fois ¦ máy này: {n} GB · mỗi mô hình chỉ tải một lần ¦ komputer ini: {n} GB · setiap model diunduh sekali saja
+Ce modèle ne sait pas lire une image : choisis un modèle « vision ». ¦ Mô hình này không đọc được hình: hãy chọn mô hình “vision”. ¦ Model ini tidak bisa membaca gambar: pilih model “vision”.
+le meilleur essayé sur les actes anciens, bon en français et en latin ¦ tốt nhất đã thử trên giấy tờ cổ, giỏi tiếng Pháp và Latinh ¦ terbaik yang dicoba pada akta lama, bagus untuk bahasa Prancis dan Latin
+16 Go de mémoire conseillés ¦ nên có 16 GB bộ nhớ ¦ disarankan memori 16 GB
+léger et rapide, pour un ordinateur modeste ¦ nhẹ và nhanh, cho máy cấu hình vừa phải ¦ ringan dan cepat, untuk komputer sederhana
+se trompe plus souvent sur les noms et les écritures difficiles ¦ hay sai hơn với tên riêng và chữ viết khó ¦ lebih sering salah pada nama dan tulisan sulit
+pour les ordinateurs puissants (64 Go) : la même famille que le conseillé, plus précise sur les écritures difficiles ¦ cho máy mạnh (64 GB): cùng họ với mô hình khuyên dùng, chính xác hơn với chữ viết khó ¦ untuk komputer kuat (64 GB): keluarga yang sama dengan yang disarankan, lebih tepat pada tulisan sulit
+lent, gros téléchargement ¦ chậm, tải về nặng ¦ lambat, unduhan besar
+le plus gros qui tienne dans 64 Go ¦ lớn nhất vừa với 64 GB ¦ yang terbesar yang muat di 64 GB
+très lent, très gros téléchargement, licence moins ouverte ¦ rất chậm, tải về rất nặng, giấy phép kém mở hơn ¦ sangat lambat, unduhan sangat besar, lisensi kurang terbuka
+fort en français, bon pour comprendre l’acte ¦ giỏi tiếng Pháp, hiểu giấy tờ tốt ¦ kuat dalam bahasa Prancis, bagus memahami akta
+32 Go de mémoire conseillés, plus lent ¦ nên có 32 GB bộ nhớ, chậm hơn ¦ disarankan memori 32 GB, lebih lambat
+bon dans les langues européennes ¦ giỏi các ngôn ngữ châu Âu ¦ bagus dalam bahasa-bahasa Eropa
+licence de Google moins ouverte, moins précis sur l’écriture à la main ¦ giấy phép Google kém mở hơn, kém chính xác với chữ viết tay ¦ lisensi Google kurang terbuka, kurang tepat pada tulisan tangan
+léger, plusieurs langues ¦ nhẹ, nhiều ngôn ngữ ¦ ringan, beberapa bahasa
+licence de Google, se trompe souvent sur les noms ¦ giấy phép Google, hay sai tên riêng ¦ lisensi Google, sering salah pada nama
+annoncé bon en écriture manuscrite ¦ được giới thiệu là giỏi chữ viết tay ¦ katanya bagus untuk tulisan tangan
+moins connu, résultats à comparer ¦ ít được biết đến, cần so sánh kết quả ¦ kurang dikenal, hasilnya perlu dibandingkan
+très léger, fait pour les documents, ordinateurs modestes ¦ rất nhẹ, làm cho giấy tờ, máy cấu hình vừa phải ¦ sangat ringan, dibuat untuk dokumen, komputer sederhana
+faible sur l’écriture à la main ancienne ¦ yếu với chữ viết tay cổ ¦ lemah pada tulisan tangan lama

@@ -156,8 +156,22 @@
                     {icon: '▣', label: i18n('Aligné sur le texte (seul sur sa ligne)'), disabled: f.tagName !== 'FIGURE', run: wrap('topbottom')}, {icon: '◧', label: i18n('Carré (le texte autour)'), disabled: f.tagName !== 'FIGURE', run: wrap('square')},
                     {icon: '⟸', label: i18n('À gauche'), run: al('left')}, {icon: '≡', label: i18n('Centré'), run: al('center')}, {icon: '⟹', label: i18n('À droite'), run: al('right')}, '-',
                     {icon: '✎', label: f.querySelector?.('figcaption') ? i18n('Retirer la légende') : i18n('Ajouter une légende'), disabled: f.tagName !== 'FIGURE', run: () => { const c = f.querySelector('figcaption'); if (c) c.remove(); else { const fc = document.createElement('figcaption'); fc.setAttribute('contenteditable', 'true'); fc.textContent = i18n('Légende'); f.appendChild(fc); } this.commit(); this.layoutSoon(0); }},
-                    {icon: '↔', label: i18n('Taille…'), run: () => this.imageSize(f)}, {icon: '🖼', label: i18n('Changer l’image…'), run: () => ext.textDocTools?.run(this, 'image', {replace: f})}, '-',
+                    {icon: '↔', label: i18n('Taille…'), run: () => this.imageSize(f)}, {icon: '🖼', label: i18n('Changer l’image…'), run: () => ext.textDocTools?.run(this, 'image', {replace: f})},
+                    ...(ext.retouchMedia ? [{icon: '🎚️', label: i18n('Retoucher cette image'), disabled: !this.mediaOfImg(f), run: () => this.retouchImg(f)}] : []), '-',
                     {icon: '🗑', label: i18n('Supprimer l’image'), danger: true, shortcut: '⌫', run: () => { this.unpick(); f.remove(); this.commit(); this.layoutSoon(0); this.undoable(i18n('Image supprimée')); }}]);
+            },
+            /** l'image des Médias derrière une image du texte : {id, filename, title} (ou null : image collée, intégrée) */
+            mediaOfImg(f) {
+                const img = f?.tagName === 'IMG' ? f : f?.querySelector?.('img'), src = img?.getAttribute('src') || '', id = Number(img?.dataset.media || 0);
+                return id && /^media\//.test(src) ? {id, filename: decodeURIComponent(src.replace(/^media\//, '').split('?')[0]), title: img.getAttribute('alt') || ''} : null;
+            },
+            /** 🎚️ « Retoucher cette image » : la Retouche s'ouvre ; à sa fermeture, l'image du texte suit la nouvelle version de la photo */
+            async retouchImg(f) {
+                const m = this.mediaOfImg(f); if (!m) return toast(i18n('Cette image n’est pas dans les Médias : elle ne peut pas être retouchée.'), 'error');
+                const img = f.tagName === 'IMG' ? f : f.querySelector('img'), before = new Set(document.querySelectorAll('dialog'));
+                await ext.retouchMedia(m);
+                const follow = async () => { try { const r = ((await A().api('media_av_list', {kind: 'image'})).items || []).find(x => Number(x.id) === m.id); if (r?.filename && r.filename !== m.filename && img?.isConnected) { img.setAttribute('src', `media/${r.filename}`); this.commit(); this.layoutSoon(0); this.status?.flash(i18n('Image retouchée mise à jour dans le texte.')); } } catch (_) {} };
+                let seen = false, n = 0; const t = setInterval(() => { n++; const fresh = [...document.querySelectorAll('dialog')].filter(d => !before.has(d) && d.isConnected && d.open); if (fresh.length) seen = true; else if (seen || n > 10) { clearInterval(t); if (seen) follow(); } }, 600);
             },
             /** une image choisie : poignées pour la taille (carrés blancs au bord bleu, K20) */
             pick(f) {

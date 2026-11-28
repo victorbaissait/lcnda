@@ -1,0 +1,710 @@
+fr ¦ sq ¦ mt
+# 🏠 Plan de maison : les objets en plus, les styles, le choix « 🎨 Style » (heritage-house-objets.js, heritage-house-lib.js)
+Meubles de style ¦ Mobilie stili ¦ Għamara tal-istil
+🎨 Tous les styles ¦ 🎨 Të gjitha stilet ¦ 🎨 L-istili kollha
+Sans les meubles de style ¦ Pa mobiliet e stilit ¦ Mingħajr l-għamara tal-istil
+D’ailleurs ¦ Nga vende të tjera ¦ Minn postijiet oħra
+Modernes ¦ Moderne ¦ Moderni
+Rien dans le style « {s} » ici : choisis « 🎨 Tous les styles ». ¦ Asgjë këtu në stilin «{s}»: zgjidh «🎨 Të gjitha stilet». ¦ M’hemm xejn fl-istil “{s}” hawn: agħżel “🎨 L-istili kollha”.
+Louis XIII ¦ Luigji XIII ¦ Luwiġi XIII
+Louis XIV ¦ Luigji XIV ¦ Luwiġi XIV
+Régence ¦ Regjenca ¦ Reġenza
+Louis XV ¦ Luigji XV ¦ Luwiġi XV
+Louis XVI ¦ Luigji XVI ¦ Luwiġi XVI
+Directoire ¦ Direktoria ¦ Direttorju
+Empire ¦ Perandoria (Empire) ¦ Imperu
+Restauration ¦ Restaurimi ¦ Restawrazzjoni
+Charles X ¦ Karli X ¦ Karlu X
+Louis-Philippe ¦ Lui-Filipi ¦ Louis-Philippe
+Napoléon III ¦ Napoleoni III ¦ Napuljun III
+Art nouveau ¦ Art nouveau ¦ Art nouveau
+Art déco ¦ Art déco ¦ Art déco
+Henri II ¦ Henri II ¦ Enriku II
+Renaissance ¦ Rilindja ¦ Rinaxximent
+Biedermeier ¦ Biedermeier ¦ Biedermeier
+victorien ¦ viktorian ¦ Vittorjan
+Chippendale ¦ Chippendale ¦ Chippendale
+Queen Anne ¦ Queen Anne ¦ Queen Anne
+gustavien ¦ gustavian ¦ Gustavjan
+shaker ¦ shaker ¦ Shaker
+colonial ¦ kolonial ¦ kolonjali
+marocain ¦ maroken ¦ Marokkin
+japonais ¦ japonez ¦ Ġappuniż
+chinois laqué ¦ kinez i llakuar ¦ Ċiniż illakkjat
+Thonet ¦ Thonet ¦ Thonet
+vénitien ¦ venecian ¦ Venezjan
+normand ¦ normand ¦ Normann
+breton ¦ breton ¦ Breton
+basque ¦ bask ¦ Bask
+alsacien ¦ alzacian ¦ Alsazjan
+savoyard ¦ savojard ¦ Savojard
+auvergnat ¦ nga Auvergne ¦ tal-Auvergne
+bressan ¦ nga Bresse ¦ tal-Bresse
+lorrain ¦ lorenas ¦ tal-Lorena
+landais ¦ nga Landes ¦ tal-Landes
+vendéen ¦ nga Vendée ¦ tal-Vendée
+limousin ¦ nga Limousin ¦ tal-Limousin
+bourguignon ¦ burgonjez ¦ Burgundjan
+catalan ¦ katalanas ¦ Katalan
+corse ¦ korsikan ¦ Korsiku
+champenois ¦ nga Champagne ¦ tax-Champagne
+flamand ¦ flamand ¦ Fjamming
+franc-comtois ¦ nga Franche-Comté ¦ tal-Franche-Comté
+béarnais ¦ nga Béarn ¦ tal-Béarn
+dauphinois ¦ nga Dauphiné ¦ tad-Dauphiné
+picard ¦ pikard ¦ tal-Picardie
+gascon ¦ gaskon ¦ Gaskun
+années 1930 ¦ vitet 1930 ¦ is-snin 30
+années 1950 ¦ vitet 1950 ¦ is-snin 50
+années 1960 ¦ vitet 1960 ¦ is-snin 60
+années 1970 ¦ vitet 1970 ¦ is-snin 70
+années 1980 ¦ vitet 1980 ¦ is-snin 80
+scandinave ¦ skandinav ¦ Skandinav
+industriel ¦ industrial ¦ industrijali
+contemporain ¦ bashkëkohor ¦ kontemporanju
+laqué blanc ¦ llak i bardhë ¦ illakkjat abjad
+en pin ¦ prej pishe ¦ tal-arżnu
+en chêne clair ¦ prej lisi të çelët ¦ tal-ballut ċar
+en merisier ¦ prej qershie ¦ taċ-ċirasa
+en noyer ¦ prej arre ¦ tal-ġewż
+en acajou ¦ prej mahogani ¦ tal-mogano
+en rotin ¦ prej rattani ¦ tar-rattan
+en bambou ¦ prej bambuje ¦ tal-bambu
+en métal ¦ prej metali ¦ tal-metall
+patiné (shabby chic) ¦ i patinuar (shabby chic) ¦ antikat (shabby chic)
+bohème ¦ bohem ¦ bohemjan
+en teck ¦ prej tiku ¦ tat-teak
+Chiffonnier ¦ Komo e lartë ¦ Kommò għoli
+Table de salle à manger ¦ Tavolinë ngrënieje ¦ Mejda tal-ikel
+Pendule ¦ Sahat oxhaku ¦ Arloġġ tal-ixkaffa
+Bonnetière ¦ Dollap i vogël ¦ Armarju żgħir
+Desserte ¦ Tavolinë shërbimi ¦ Mejda tas-servizz
+Buffet de cuisine ¦ Bufe kuzhine ¦ Kredenza tal-kċina
+Table de toilette ¦ Tavolinë tualeti ¦ Mejda tat-tlettija
+Horloge de parquet ¦ Sahat dysheme me lavjerrës ¦ Arloġġ tal-art
+Pommier ¦ Mollë ¦ Siġra tat-tuffieħ
+Poirier ¦ Dardhë ¦ Siġra tal-lanġas
+Cerisier ¦ Qershi ¦ Siġra taċ-ċirasa
+Prunier ¦ Kumbull ¦ Siġra tal-għanbaqar
+Pêcher ¦ Pjeshkë ¦ Siġra tal-ħawħ
+Abricotier ¦ Kajsi ¦ Siġra tal-berquq
+Cognassier ¦ Ftua ¦ Siġra tas-sfarġel
+Châtaignier ¦ Gështenjë ¦ Siġra tal-qastan
+Figuier ¦ Fik ¦ Siġra tat-tin
+Olivier ¦ Ulli ¦ Siġra taż-żebbuġ
+Citronnier en bac ¦ Limon në vazo ¦ Lumija f’qasrija
+Oranger en bac ¦ Portokall në vazo ¦ Larinġa f’qasrija
+Noisetier ¦ Lajthi ¦ Siġra tal-ġellewż
+Mûrier ¦ Man ¦ Siġra taċ-ċawsli
+Tilleul ¦ Bli ¦ Siġra tat-tilju
+Platane ¦ Rrap ¦ Platanu
+Marronnier ¦ Gështenjë kali ¦ Qastan tal-ħmar
+Hêtre ¦ Ah ¦ Faġu
+Frêne ¦ Frashër ¦ Fraxxnu
+Saule pleureur ¦ Shelg vajtues ¦ Żafżafa
+Peuplier ¦ Plep ¦ Luq
+Érable ¦ Panjë ¦ Aċru
+Magnolia ¦ Manjolë ¦ Manjolja
+Lilas ¦ Jargavan ¦ Lellux
+Cerisier du Japon ¦ Qershi japoneze ¦ Siġra taċ-ċirasa Ġappuniża
+Orme ¦ Vidh ¦ Ulmu
+Acacia ¦ Akacie ¦ Akaċja
+Charme ¦ Shkozë ¦ Karpinu
+Sureau ¦ Shtog ¦ Sebuq
+Tilleul de la Liberté ¦ Bli i Lirisë ¦ Tilju tal-Libertà
+Sapin ¦ Bredh ¦ Żnuber
+Épicéa ¦ Bredh i kuq ¦ Abeti
+Pin parasol ¦ Pishë e butë ¦ Żnuber tal-umbrella
+Pin sylvestre ¦ Pishë e egër ¦ Żnuber silvestri
+Cyprès ¦ Selvi ¦ Ċipress
+If ¦ Tis ¦ Tassu
+Cèdre ¦ Kedër ¦ Ċedru
+Thuya ¦ Tuja ¦ Tuja
+Rosier ¦ Trëndafil ¦ Warda
+Rosier grimpant ¦ Trëndafil kacavjerrës ¦ Warda li titla’
+Hortensia ¦ Hortensie ¦ Ortensja
+Lavande ¦ Livandë ¦ Lavanda
+Romarin ¦ Rozmarinë ¦ Klin
+Thym ¦ Trumzë ¦ Sagħtar
+Buis taillé en boule ¦ Shimshir i krasitur si top ¦ Bossu ffurmat bħal ballun
+Forsythia ¦ Forsitie ¦ Forsizja
+Laurier-sauce ¦ Dafinë ¦ Rand
+Laurier-rose ¦ Leandër ¦ Oleandru
+Buddleia ¦ Budleja ¦ Buddleja
+Camélia ¦ Kamelie ¦ Kamelja
+Rhododendron ¦ Rododendron ¦ Rododendru
+Azalée ¦ Azale ¦ Azalea
+Houx ¦ Ashe ¦ Agrifoljo
+Cassissier ¦ Rrush frëngu i zi ¦ Ribes iswed
+Groseillier ¦ Rrush frëngu i kuq ¦ Ribes aħmar
+Framboisier ¦ Mjedër ¦ Arbuxxell tal-lampun
+Pied de vigne ¦ Hardhi ¦ Dielja
+Bambou ¦ Bambu ¦ Bambu
+Bananier ¦ Bananë ¦ Siġra tal-banana
+Palmier ¦ Palmë ¦ Palma
+Herbes de la pampa ¦ Bar pampas ¦ Ħaxix tal-pampas
+Graminées ¦ Bar dekorativ ¦ Ħaxix ornamentali
+Fuchsia ¦ Fuksie ¦ Fuksja
+Glycine ¦ Glicinë ¦ Wisterja
+Lierre ¦ Urth ¦ Liedna
+Fougère ¦ Fier ¦ Felċi
+Massif de géraniums ¦ Lehe me barbarozë ¦ Ġnien tal-ġeranji
+Massif de tournesols ¦ Lehe me luledielli ¦ Ġnien tal-ġirasol
+Massif de tulipes ¦ Lehe me tulipanë ¦ Ġnien tat-tulipani
+Massif de jonquilles ¦ Lehe me narcizë ¦ Ġnien tan-narċisi
+Massif d’iris ¦ Lehe me shpatore ¦ Ġnien tal-irisi
+Massif de dahlias ¦ Lehe me dalie ¦ Ġnien tad-dalji
+Massif de soucis ¦ Lehe me kalendula ¦ Ġnien tal-kalendula
+Massif de pivoines ¦ Lehe me bozhure ¦ Ġnien tal-pewnji
+Massif de marguerites ¦ Lehe me margarita ¦ Ġnien tal-margeriti
+Carré de fraisiers ¦ Lehe me luleshtrydhe ¦ Ġnien tal-frawli
+Rang de pommes de terre ¦ Rresht patatesh ¦ Filliera ta’ patata
+Rang de salades ¦ Rresht sallatash ¦ Filliera ta’ ħass
+Rang de tomates ¦ Rresht domatesh ¦ Filliera ta’ tadam
+Rang de carottes ¦ Rresht karotash ¦ Filliera ta’ karrotti
+Rang de poireaux ¦ Rresht preshësh ¦ Filliera ta’ kurrat
+Rang de haricots à rames ¦ Rresht fasulesh me hunj ¦ Filliera ta’ fażola tat-tixbit
+Rang de choux ¦ Rresht lakrash ¦ Filliera ta’ kaboċċi
+Planche de courges ¦ Lehe me kunguj ¦ Ġnien tal-qargħa
+Planche d’oignons ¦ Lehe me qepë ¦ Ġnien tal-basal
+Carré d’aromatiques ¦ Lehe me erëza ¦ Ġnien tal-ħxejjex aromatiċi
+Pelouse ¦ Lëndinë ¦ Ħaxix tal-ġnien
+Prairie fleurie ¦ Livadh me lule ¦ Mergħa bil-fjuri
+Pot de géraniums ¦ Vazo me barbarozë ¦ Qasrija tal-ġeranji
+Jardinière de fleurs ¦ Kuti lulesh ¦ Kaxxa tal-fjuri
+Agapanthe en pot ¦ Agapant në vazo ¦ Agapantu f’qasrija
+Buis en pot ¦ Shimshir në vazo ¦ Bossu f’qasrija
+Pot de basilic ¦ Vazo me borzilok ¦ Qasrija tal-ħabaq
+Bac à fleurs en zinc ¦ Kuti lulesh prej zinku ¦ Kaxxa tal-fjuri taż-żingu
+Pot en terre d’Anduze ¦ Vazo balte nga Anduze ¦ Qasrija tal-fuħħar ta’ Anduze
+Grande jarre provençale ¦ Qyp i madh provansal ¦ Ġarra kbira Provenzali
+Yucca ¦ Juka ¦ Jukka
+Plante grasse (aloe) ¦ Bimë sukulente (aloe) ¦ Pjanta sukkulenti (aloe)
+Cactus colonne ¦ Kaktus kolonë ¦ Kaktus kolonna
+Kentia ¦ Palmë kentia ¦ Kentja
+Sansevieria ¦ Sansevieria ¦ Sansevieria
+Pothos suspendu ¦ Potos i varur ¦ Pothos imdendel
+Oiseau de paradis (strelitzia) ¦ Zog parajse (strelitzia) ¦ Għasfur tal-ġenna (strelitzia)
+Bonsaï sur sellette ¦ Bonsai mbi stendë ¦ Bonsai fuq stand
+Poinsettia ¦ Puansetia ¦ Poinsettia
+Plante aromatique sur rebord ¦ Bimë aromatike në parvaz ¦ Pjanta aromatika fuq it-tieqa
+Palmier d’intérieur ¦ Palmë e brendshme ¦ Palma ta’ ġewwa
+Banc de jardin en bois et fonte ¦ Stol kopshti prej druri dhe gize ¦ Bank tal-ġnien tal-injam u l-ħadid fondut
+Banc de jardin en bois ¦ Stol kopshti prej druri ¦ Bank tal-ġnien tal-injam
+Banc en pierre sculpté ¦ Stol guri i gdhendur ¦ Bank tal-ġebel minqux
+Table de bistrot en fer ¦ Tavolinë bistroje prej hekuri ¦ Mejda tal-bistro tal-ħadid
+Table de jardin ronde en résine ¦ Tavolinë kopshti e rrumbullakët prej rrëshire ¦ Mejda tonda tal-ġnien tar-reżina
+Table de jardin en teck ¦ Tavolinë kopshti prej tiku ¦ Mejda tal-ġnien tat-teak
+Table de pique-nique ¦ Tavolinë pikniku ¦ Mejda tal-pikniks
+Chaise longue ¦ Shezlong ¦ Siġġu twil
+Transat de plage rayé ¦ Shezlong plazhi me vija ¦ Deck chair tal-bajja bl-istrixxi
+Bain de soleil en résine ¦ Shtrat dielli prej rrëshire ¦ Sodda tax-xemx tar-reżina
+Portique de jeux ¦ Kënd lojërash me kolovajzë ¦ Struttura tal-logħob bl-imbandla
+Grand toboggan ¦ Rrëshqitëse e madhe ¦ Żerżieqa kbira
+Bac à sable couvert ¦ Kuti rëre me kapak ¦ Kaxxa tar-ramel b’għatu
+Petit trampoline ¦ Trampolinë e vogël ¦ Trampolin żgħir
+Hamac sur pied ¦ Hamak me mbajtëse ¦ Ħammokk fuq stand
+Tonnelle de jardin ¦ Kupolë kopshti ¦ Pavaljun tal-ġnien
+Pergola en bois ¦ Pergolë prej druri ¦ Pergola tal-injam
+Pergola bioclimatique ¦ Pergolë bioklimatike ¦ Pergola bijoklimatika
+Parasol déporté ¦ Çadër me krah anësor ¦ Umbrella b’driegħ fil-ġenb
+Parasol rouge de terrasse ¦ Çadër e kuqe tarace ¦ Umbrella ħamra tat-terrazzin
+Fontaine en pierre ¦ Shatërvan guri ¦ Funtana tal-ġebel
+Fontaine murale ¦ Shatërvan muri ¦ Funtana tal-ħajt
+Bassin rond ¦ Pellg i rrumbullakët ¦ Għadira tonda
+Bassin aux nénuphars ¦ Pellg me zambakë uji ¦ Għadira bil-ġilji tal-ilma
+Piscine rectangulaire ¦ Pishinë drejtkëndëshe ¦ Pixxina rettangolari
+Petite piscine ¦ Pishinë e vogël ¦ Pixxina żgħira
+Piscine hors-sol ronde ¦ Pishinë e rrumbullakët mbi tokë ¦ Pixxina tonda ’l fuq mill-art
+Spa d’extérieur ¦ Spa e jashtme ¦ Spa ta’ barra
+Barbecue au charbon ¦ Skarë me qymyr ¦ Barbecue tal-faħam
+Plancha sur chariot ¦ Plancha mbi karrocë ¦ Plancha fuq trolley
+Four à pizza ¦ Furrë pice ¦ Forn tal-pizza
+Brasero en acier ¦ Mangall çeliku ¦ Braġier tal-azzar
+Composteur en bois ¦ Kompostues prej druri ¦ Kompostjatur tal-injam
+Potager surélevé ¦ Kopsht perimesh i ngritur ¦ Ġnien tal-ħxejjex mgħolli
+Serre de jardin ¦ Serrë kopshti ¦ Serra tal-ġnien
+Petite serre adossée ¦ Serrë e vogël pranë murit ¦ Serra żgħira mal-ħajt
+Mangeoire à oiseaux ¦ Ushqyes zogjsh ¦ Mitma’ tal-għasafar
+Cadran solaire sur colonne ¦ Orë diellore mbi kolonë ¦ Arloġġ tax-xemx fuq kolonna
+Enrouleur de tuyau ¦ Mbështjellëse zorre uji ¦ Rukkell tal-pajp
+Lanterne de jardin ¦ Fener kopshti ¦ Fanal tal-ġnien
+Mât de drapeau ¦ Shtizë flamuri ¦ Arblu tal-bandiera
+Clôture en bois ¦ Gardh prej druri ¦ Ċint tal-injam
+Grillage rigide ¦ Rrjetë e ngurtë ¦ Ċint tal-wajer riġidu
+Barrière blanche ¦ Gardh i bardhë ¦ Ċint abjad
+Haie de lauriers ¦ Gardh dafinash ¦ Sisla tar-rand
+Haie de charmille ¦ Gardh shkoze ¦ Sisla tal-karpinu
+Muret en pierres sèches ¦ Mur me gurë të thatë ¦ Ħajt tas-sejjieħ
+Portail en fer forgé ¦ Portë prej hekuri të farkëtuar ¦ Grada tal-ħadid maħdum
+Portail en bois ¦ Portë prej druri ¦ Grada tal-injam
+Portillon ¦ Portë e vogël ¦ Bieb żgħir tal-ġnien
+Abri à bûches ¦ Strehë për dru zjarri ¦ Kenn għaz-zkuk
+Éolienne de pompage ¦ Mulli me erë për pompim uji ¦ Mitħna tar-riħ għall-ippumpjar
+Puits couvert ¦ Pus i mbuluar ¦ Bir mgħotti
+Abreuvoir en pierre ¦ Ujëtore guri ¦ Ħawt tal-ġebel
+Abri de jardin en bois ¦ Kasolle kopshti prej druri ¦ Kamra tal-ġnien tal-injam
+Abri de jardin en métal ¦ Kasolle kopshti prej metali ¦ Kamra tal-ġnien tal-metall
+Cabane dans les arbres ¦ Shtëpi në pemë ¦ Dar fis-siġra
+Carport ¦ Strehë makine ¦ Carport
+Kiosque de jardin ¦ Kioskë kopshti ¦ Kjosk tal-ġnien
+Cabane de jardin pour enfants ¦ Shtëpizë lojërash për fëmijë ¦ Dar tal-logħob għat-tfal
+Allée en gravier ¦ Shteg me zhavorr ¦ Mogħdija taż-żrar
+Terrasse dallée ¦ Tarracë me pllaka ¦ Terrazzin bil-madum
+Terrasse en bois ¦ Tarracë prej druri ¦ Terrazzin tal-injam
+Bac à compost ouvert ¦ Kosh i hapur kompostimi ¦ Kaxxa miftuħa tal-kompost
+Jardin japonais ¦ Kopsht japonez ¦ Ġnien Ġappuniż
+Rocaille ¦ Kopsht shkëmbor ¦ Ġnien tal-blat
+Vasque de jardin ¦ Vazo kopshti ¦ Vażun tal-ġnien
+Statue de jardin ¦ Statujë kopshti ¦ Statwa tal-ġnien
+Lion en pierre ¦ Luan guri ¦ Iljun tal-ġebel
+Boule décorative ¦ Top dekorativ ¦ Ballun dekorattiv
+Nichoir à mésanges ¦ Fole për trishtila ¦ Bejta għall-għasafar
+Hôtel à insectes ¦ Hotel insektesh ¦ Lukanda tal-insetti
+Boîte à livres ¦ Kuti librash ¦ Kaxxa tal-kotba
+Ruche kenyane ¦ Koshere keniane ¦ Doqqajs Kenjan
+Pompe d’arrosage ¦ Pompë ujitjeje ¦ Pompa tat-tisqija
+Arroseur oscillant ¦ Spërkatës lëkundës ¦ Sprinkler li jitbandal
+Arrosoir en zinc ¦ Ujitëse prej zinku ¦ Sqija taż-żingu
+Tondeuse hélicoïdale ¦ Kositëse me cilindër ¦ Magna tal-ħaxix manwali
+Motoculteur ¦ Motokultivator ¦ Motozappa
+Débroussailleuse ¦ Trimer bari ¦ Trimmer tal-ħaxix
+Souffleur à feuilles ¦ Fryrëse gjethesh ¦ Blower tal-weraq
+Réverbère ancien ¦ Fanar i vjetër rruge ¦ Lampa tat-triq antika
+Enseigne de commerce ¦ Tabelë dyqani ¦ Tabella tal-ħanut
+Vache normande ¦ Lopë normande ¦ Baqra Normanna
+Vache limousine ¦ Lopë limousine ¦ Baqra Limousin
+Vache charolaise ¦ Lopë charolaise ¦ Baqra Charolaise
+Vache bretonne pie noir ¦ Lopë bretone laraske e zezë ¦ Baqra Bretona iswed u abjad
+Vache montbéliarde ¦ Lopë montbéliarde ¦ Baqra Montbéliarde
+Veau ¦ Viç ¦ Għoġol
+Bœuf de trait ¦ Ka pune ¦ Gendus tax-xogħol
+Cheval de trait (percheron) ¦ Kalë pune (percheron) ¦ Żiemel tax-xogħol (percheron)
+Cheval de trait breton ¦ Kalë pune breton ¦ Żiemel tax-xogħol Breton
+Cheval de selle ¦ Kalë kalërimi ¦ Żiemel tar-riekba
+Poney ¦ Poni ¦ Poni
+Mulet ¦ Mushkë ¦ Bagħal
+Poulain ¦ Mëz ¦ Mohor
+Brebis ¦ Dele ¦ Nagħġa
+Agneau ¦ Qengj ¦ Ħaruf
+Bélier ¦ Dash ¦ Muntun
+Chevreau ¦ Kec ¦ Gidi
+Truie ¦ Dosë ¦ Ħanżira
+Porcelet ¦ Gic ¦ Qażquż
+Coq ¦ Gjel ¦ Serduk
+Poule blanche ¦ Pulë e bardhë ¦ Tiġieġa bajda
+Poussin ¦ Zogth pule ¦ Flusa
+Canard ¦ Rosë ¦ Papra
+Dindon ¦ Gjel deti ¦ Dundjan
+Pintade ¦ Pulë Guineje ¦ Tiġieġa tal-Ginea
+Pigeon ¦ Pëllumb ¦ Ħamiema
+Lapin ¦ Lepur ¦ Fenek
+Chien de berger ¦ Qen bariu ¦ Kelb tar-ragħaj
+Grand chien ¦ Qen i madh ¦ Kelb kbir
+Petit chien ¦ Qen i vogël ¦ Kelb żgħir
+Chat roux ¦ Mace e kuqe ¦ Qattus aħmar
+Chat noir ¦ Mace e zezë ¦ Qattus iswed
+Chat tigré ¦ Mace laraske ¦ Qattus imnaqqax
+Chat endormi en boule ¦ Mace e fjetur kruspull ¦ Qattus rieqed imkebbeb
+Lama ¦ Lama ¦ Lama
+Cerf ¦ Dre ¦ Ċerv
+Sanglier ¦ Derr i egër ¦ Ħanżir salvaġġ
+Renard ¦ Dhelpër ¦ Volpi
+Tortue ¦ Breshkë ¦ Fekruna
+Héron ¦ Çafkë ¦ Russett
+Cygne ¦ Mjellmë ¦ Ċinju
+Cage à oiseaux en osier ¦ Kafaz zogjsh prej thuprash ¦ Gaġġa tal-għasafar tal-qasab
+Cage à canaris ¦ Kafaz kanarinash ¦ Gaġġa tal-kanarini
+Poulailler en bois ¦ Kotec prej druri ¦ Ġiebja tat-tiġieġ tal-injam
+Niche en bois ¦ Kolibe qeni prej druri ¦ Bejta tal-kelb tal-injam
+Abri pour moutons ¦ Strehë për dele ¦ Kenn għan-nagħaġ
+Box à cheval ¦ Boks për kalë ¦ Box taż-żwiemel
+Ruche Dadant ¦ Koshere Dadant ¦ Doqqajs Dadant
+Ruche Langstroth ¦ Koshere Langstroth ¦ Doqqajs Langstroth
+Ruche en paille tressée ¦ Koshere prej kashte të thurur ¦ Doqqajs tat-tiben minsuġ
+Stalle de vache ¦ Stallë lope ¦ Stalla tal-baqra
+Box de veau ¦ Boks për viç ¦ Box tal-għoġol
+Mangeoire à foin ¦ Grazhd sanë ¦ Maxtura tat-tiben
+Tonneaux de cidre ¦ Fuçi musht molle ¦ Btieti tas-sidru
+Cuve à lait ¦ Cisternë qumështi ¦ Tank tal-ħalib
+Barrique de vin ¦ Fuçi vere ¦ Bettija tal-inbid
+Brabant ¦ Plug brabant ¦ Moħriet brabant
+Herse en bois ¦ Lesë prej druri ¦ Erpiċi tal-injam
+Charrette à foin ¦ Qerre sane ¦ Karettun tat-tiben
+Char à bancs ¦ Karrocë me stola ¦ Karru bil-bankijiet
+Chariot à ridelles ¦ Qerre me parmakë ¦ Karettun bil-ġnub
+Tracteur rouge des années 1950 ¦ Traktor i kuq i viteve 1950 ¦ Trattur aħmar tas-snin 50
+Tracteur vert ¦ Traktor jeshil ¦ Trattur aħdar
+Petit tracteur gris (Ferguson) ¦ Traktor i vogël gri (Ferguson) ¦ Trattur żgħir griż (Ferguson)
+Faneuse ¦ Makinë për kthimin e barit ¦ Magna tat-tqallib tat-tiben
+Moissonneuse-lieuse ¦ Korrëse-lidhëse ¦ Magna li taħsad u torbot
+Batteuse ¦ Shirëse ¦ Magna tad-dris
+Andaineur ¦ Rreshtuese bari ¦ Magna li tiġbor it-tiben
+Alambic de bouilleur de cru ¦ Kazan rakie ¦ Lambik tal-bidwi
+Seau à traire ¦ Kovë mjeljeje ¦ Barmil tal-ħlib
+Chèvre angora ¦ Dhi angora ¦ Mogħża angora
+Cochon noir gascon ¦ Derr i zi gaskon ¦ Ħanżir iswed Gaskun
+Vache salers ¦ Lopë salers ¦ Baqra Salers
+Vache aubrac ¦ Lopë aubrac ¦ Baqra Aubrac
+Vache jersiaise ¦ Lopë jersey ¦ Baqra Jersey
+Mouton noir ¦ Dele e zezë ¦ Nagħġa sewda
+Mouton mérinos ¦ Dele merinos ¦ Nagħġa merino
+Poule noire ¦ Pulë e zezë ¦ Tiġieġa sewda
+Poule rousse ¦ Pulë e kuqe ¦ Tiġieġa ħamra
+Poule naine ¦ Pulë xhuxhe ¦ Tiġieġa nana
+Paon blanc ¦ Pallua e bardhë ¦ Pagun abjad
+Paon ¦ Pallua ¦ Pagun
+Lapin blanc ¦ Lepur i bardhë ¦ Fenek abjad
+Cochon d’Inde ¦ Derr gini ¦ Porċellin tal-Indja
+Hamster ¦ Hamster ¦ Ħamster
+Perroquet ¦ Papagall ¦ Pappagall
+Canari ¦ Kanarinë ¦ Kanarin
+Cheval blanc ¦ Kalë i bardhë ¦ Żiemel abjad
+Cheval noir ¦ Kalë i zi ¦ Żiemel iswed
+Chien terre-neuve ¦ Qen Njufaundlendi ¦ Kelb Newfoundland
+Chien labrador ¦ Qen labrador ¦ Kelb labrador
+Chien beauceron ¦ Qen beauceron ¦ Kelb beauceron
+Chien teckel ¦ Qen dakshund ¦ Kelb dachshund
+Volière ¦ Kafaz i madh zogjsh ¦ Avjarju
+Cage à lapin d’intérieur ¦ Kafaz lepuri për brenda ¦ Gaġġa tal-fniek ta’ ġewwa
+Panier pour chien ¦ Shportë për qen ¦ Basket tal-kelb
+Corbeille pour chat ¦ Shportë për mace ¦ Basket tal-qattus
+Arbre à chat ¦ Pemë për mace ¦ Siġra tal-qtates
+Gamelles ¦ Enë ushqimi ¦ Skutelli tal-ikel
+Abreuvoir automatique ¦ Pirës automatik ¦ Xorb awtomatiku
+Tonneau de pluie en chêne ¦ Fuçi shiu prej lisi ¦ Bettija tal-ilma tax-xita tal-ballut
+Cuve à vendange ¦ Vozë rrushi ¦ Tank tal-qtugħ tal-għeneb
+Pot à lait en fer-blanc ¦ Bidon qumështi prej teneqeje ¦ Bott tal-ħalib tal-landa
+Charrette à bras ¦ Karrocë dore ¦ Karettun tal-idejn
+Diligence ¦ Karrocë postare ¦ Kowċ tal-posta
+Roulotte ¦ Karvan i vjetër ¦ Karavan tal-injam
+Râteau-faneur à cheval ¦ Grabujë sane me kalë ¦ Mgħażqa tat-tiben biż-żiemel
+Botteleuse ¦ Makinë për bala ¦ Magna tal-bales
+Semoir ¦ Mbjellëse ¦ Magna taż-żriegħ
+Pulvérisateur ¦ Spërkatës ¦ Sprejer
+Bouilloire électrique ¦ Kazan elektrik ¦ Kitla elettrika
+Machine à expresso ¦ Makinë ekspresi ¦ Magna tal-espresso
+Machine à café à levier ¦ Makinë kafeje me levë ¦ Magna tal-kafè bil-lieva
+Cafetière à dosettes ¦ Makinë kafeje me kapsula ¦ Magna tal-kafè bil-kapsuli
+Presse-agrumes ¦ Shtrydhëse agrumesh ¦ Għasara taċ-ċitru
+Four à micro-ondes encastrable ¦ Mikrovalë e integruar ¦ Microwave inkorporat
+Corbeille de fruits ¦ Shportë frutash ¦ Basket tal-frott
+Corbeille à pain sur pied ¦ Shportë buke me këmbë ¦ Basket tal-ħobż fuq sieq
+Étagère à épices ¦ Raft erëzash ¦ Xkaffa tal-ħwawar
+Desserte de cuisine en bois ¦ Karrocë kuzhine prej druri ¦ Trolley tal-kċina tal-injam
+Bar de cuisine ¦ Banak kuzhine ¦ Bar tal-kċina
+Plaque vitrocéramique ¦ Pllakë qeramike gatimi ¦ Ħalliela taċ-ċeramika
+Grande plaque à induction ¦ Pllakë e madhe me induksion ¦ Ħalliela kbira bl-induzzjoni
+Table de cuisson au gaz (5 feux) ¦ Sobë me gaz (5 vatra) ¦ Kuker tal-gass (5 fuklari)
+Hotte en inox ¦ Aspirator inoksi ¦ Kappa tal-istainless steel
+Lave-vaisselle compact ¦ Pjatalarëse kompakte ¦ Dishwasher kompatt
+Réfrigérateur rétro vert d’eau ¦ Frigorifer retro jeshil uji ¦ Friġġ retro aħdar ċar
+Réfrigérateur rétro orange ¦ Frigorifer retro portokalli ¦ Friġġ retro oranġjo
+Évier à deux bacs en céramique ¦ Lavaman qeramike me dy gropa ¦ Sink doppju taċ-ċeramika
+Évier timbre d’office ¦ Lavaman i thellë qeramike ¦ Sink fond taċ-ċeramika
+Évier en pierre à potager ¦ Lavaman i vjetër guri ¦ Sink tal-ġebel antik
+Cuisinière à charbon ¦ Sobë gatimi me qymyr ¦ Kuker tal-faħam
+Buffet de cuisine en formica ¦ Bufe kuzhine prej formike ¦ Kredenza tal-kċina tal-formica
+Buffet de cuisine bleu ciel ¦ Bufe kuzhine blu e çelët ¦ Kredenza tal-kċina ċelesti
+Table en formica ¦ Tavolinë prej formike ¦ Mejda tal-formica
+Chaise en formica ¦ Karrige prej formike ¦ Siġġu tal-formica
+Tabouret de cuisine ¦ Stol kuzhine ¦ Sedil għoli tal-kċina
+Cruche en grès ¦ Kanë balte ¦ Buqal tal-fuħħar
+Fontaine à eau en grès ¦ Enë uji prej balte me rubinet ¦ Funtana tal-ilma tal-fuħħar
+Balance de cuisine Roberval ¦ Peshore kuzhine Roberval ¦ Miżien tal-kċina Roberval
+Batterie de casseroles en cuivre ¦ Set tenxheresh prej bakri ¦ Sett ta’ kazzaroli tar-ram
+Égouttoir à vaisselle ¦ Kullesë enësh ¦ Nixxiefa tal-platti
+Poubelles de tri ¦ Kosha për riciklim ¦ Kontenituri tar-riċiklaġġ
+Planche à découper ¦ Dërrasë prerjeje ¦ Lavanċa tat-tqattigħ
+Bassine à confiture en cuivre ¦ Kazan reçeli prej bakri ¦ Borma tal-ġamm tar-ram
+Pot-au-feu en fonte ¦ Tenxhere gize ¦ Borma tal-ħadid fondut
+Service à vaisselle ¦ Servis enësh ¦ Servizz tal-platti
+Soupière en faïence ¦ Supierë prej fajance ¦ Zuppiera tal-majolika
+Panier de légumes ¦ Shportë perimesh ¦ Basket tal-ħaxix
+Bocaux de conserves ¦ Kavanoza konservash ¦ Vażetti tal-ippreservar
+Stérilisateur à bocaux ¦ Sterilizues kavanozash ¦ Sterilizzatur tal-vażetti
+Moulin à légumes ¦ Mulli perimesh ¦ Mitħna tal-ħaxix
+Crêpière ¦ Tigan krepash ¦ Taġen tal-crêpes
+Appareil à fondue ¦ Set fondue ¦ Sett tal-fondue
+Extracteur de jus ¦ Shtrydhëse lëngjesh ¦ Estrattur tal-meraq
+Cafetière italienne ¦ Kafetierë italiane ¦ Kafettiera Taljana
+Samovar ¦ Samovar ¦ Samovar
+Étagère à confitures ¦ Raft për reçel ¦ Xkaffa tal-ġamm
+Chariot de cuisine à roulettes ¦ Karrocë kuzhine me rrota ¦ Trolley tal-kċina bir-roti
+Garde-manger grillagé ¦ Dollap ushqimi me rrjetë ¦ Kexxun tal-ikel bix-xibka
+Coffre à bois de cuisine ¦ Arkë drush për kuzhinë ¦ Kaxxa tal-injam tal-ħatab tal-kċina
+Baignoire en fonte sur pieds de lion ¦ Vaskë gize me këmbë luani ¦ Banju tal-ħadid fondut fuq saqajn tal-iljun
+Baignoire îlot moderne ¦ Vaskë moderne e lirë ¦ Banju modern waħdu
+Meuble double vasque ¦ Mobilie me dy lavamanë ¦ Għamara b’żewġ sinkijiet
+Vasque à poser sur plan bois ¦ Lavaman mbi pllakë druri ¦ Sink fuq bank tal-injam
+Meuble vasque suspendu ¦ Mobilie lavamani e varur ¦ Għamara tas-sink imdendla
+WC à chasse haute ¦ WC me rezervuar të lartë ¦ Tojlit b’tank għoli
+WC rehaussé ¦ WC i ngritur ¦ Tojlit mgħolli
+Miroir lumineux ¦ Pasqyrë me ndriçim ¦ Mera bid-dawl
+Panier à linge en osier ¦ Shportë rrobash prej thuprash ¦ Basket tal-ħwejjeġ tal-qasab
+Broc et cuvette en faïence ¦ Ibrik dhe legen fajance ¦ Buqar u bieqja tal-majolika
+Tub en zinc ¦ Legen zinku ¦ Banju taż-żingu
+Échelle porte-serviettes ¦ Shkallë për peshqirë ¦ Sellum tax-xugamani
+Tapis de bain ¦ Tapet banjoje ¦ Tapit tal-kamra tal-banju
+Panier à linge en tissu ¦ Shportë rrobash prej pëlhure ¦ Basket tal-ħwejjeġ tad-drapp
+Colonne de salle de bain ¦ Dollap kolonë banjoje ¦ Armarju għoli tal-kamra tal-banju
+Étagère de douche ¦ Raft dushi ¦ Xkaffa tad-doċċa
+Vasque en pierre ¦ Lavaman guri ¦ Sink tal-ġebel
+Baignoire noire ¦ Vaskë e zezë ¦ Banju iswed
+Paroi de douche en verre ¦ Panel xhami dushi ¦ Ħajt tad-doċċa tal-ħġieġ
+WC avec abattant bois ¦ WC me kapak druri ¦ Tojlit b’għatu tal-injam
+Meuble vasque en bois ¦ Mobilie lavamani prej druri ¦ Għamara tas-sink tal-injam
+Lave-mains ¦ Lavaman i vogël duarsh ¦ Sink żgħir tal-idejn
+Lave-linge hublot ¦ Makinë larëse me derë të përparme ¦ Washing machine bil-bieb minn quddiem
+Bac à laver ¦ Govatë rrobash ¦ Lavatur tal-ħwejjeġ
+Table à repasser ¦ Tavolinë hekurosjeje ¦ Mejda tal-mogħdija
+Fil à linge ¦ Tel rrobash ¦ Ħabel tal-ħasil
+Essoreuse à rouleaux ¦ Shtrydhëse me rula ¦ Għasara bir-rombli
+Machine à laver à manivelle ¦ Makinë larëse me dorezë ¦ Washing machine bil-manku
+Balai et pelle ¦ Fshesë dhe kaci ¦ Xkupa u palella
+Nettoyeur vapeur ¦ Pastrues me avull ¦ Tindif bil-fwar
+Vestiaire d’entrée ¦ Varëse rrobash në hyrje ¦ Attakkapanni tad-daħla
+Patère murale ¦ Varëse muri ¦ Ganċ tal-ħajt
+Boîte à clés ¦ Kuti çelësash ¦ Kaxxa taċ-ċwievet
+Console avec miroir ¦ Konsol me pasqyrë ¦ Konsol bil-mera
+Valet de nuit ¦ Varëse rrobash (shërbëtor nate) ¦ Valet tal-ħwejjeġ
+Fauteuil ergonomique ¦ Kolltuk ergonomik ¦ Siġġu ergonomiku
+Bureau d’angle ¦ Tavolinë pune këndore ¦ Skrivanija tal-kantuniera
+Petit bureau d’écolier ¦ Bankë e vogël shkolle ¦ Skrivanija żgħira tal-iskola
+Ordinateur de bureau et écran ¦ Kompjuter dhe monitor ¦ Kompjuter u skrin
+Deux écrans ¦ Dy monitorë ¦ Żewġ skrins
+Imprimante multifonction ¦ Printer shumëfunksional ¦ Printer multifunzjonali
+Destructeur de papier ¦ Grirëse letrash ¦ Shredder tal-karti
+Armoire à classeurs ¦ Dollap dosjesh ¦ Armarju tal-files
+Caisson à roulettes ¦ Sirtar me rrota ¦ Kexxun bir-roti
+Tableau en liège ¦ Tabelë tape ¦ Bord tas-sufra
+Téléphone de bureau ¦ Telefon zyre ¦ Telefon tal-uffiċċju
+Globe terrestre de bureau ¦ Glob tavoline ¦ Globu tal-mejda
+Globe terrestre sur pied ¦ Glob me këmbë ¦ Globu fuq sieq
+Pupitre de lecture ¦ Analog leximi ¦ Leġġiu tal-qari
+Lampe de banquier ¦ Llambë bankieri ¦ Lampa tal-bankier
+Albums de famille ¦ Albume familjare ¦ Albums tal-familja
+Console de jeux ¦ Konsolë lojërash ¦ Console tal-logħob
+Scanner de documents ¦ Skaner dokumentesh ¦ Scanner tad-dokumenti
+Carte de France ancienne ¦ Hartë e vjetër e Francës ¦ Mappa antika ta’ Franza
+Carte de Cassini encadrée ¦ Hartë Cassini e kornizuar ¦ Mappa ta’ Cassini fi gwarniċ
+Lutrin d’archives ¦ Analog arkivi ¦ Leġġiu tal-arkivji
+Loupe sur pied ¦ Lupë me këmbë ¦ Lenti fuq sieq
+Lecteur de microfilms ¦ Lexues mikrofilmash ¦ Qarrej tal-mikrofilms
+Couffin en osier ¦ Djep thuprash ¦ Benniena tal-qasab
+Berceau en fer ¦ Djep hekuri ¦ Benniena tal-ħadid
+Lit mezzanine ¦ Shtrat në kat ¦ Sodda mgħollija (mezzanine)
+Poussette ¦ Karrocë fëmijësh ¦ Pram
+Parc pour bébé ¦ Rrethore për foshnje ¦ Park tat-trabi
+Cuisine pour enfant ¦ Kuzhinë lodër ¦ Kċina tal-logħob
+Ours en peluche géant ¦ Arush pelushi gjigant ¦ Teddy bear ġgant
+Poupée en porcelaine ¦ Kukull porcelani ¦ Pupa tal-porċellana
+Cubes de construction ¦ Kube ndërtimi ¦ Kubi tal-bini
+Théâtre de marionnettes ¦ Teatër kukullash ¦ Teatru tal-pupazzi
+Luge ¦ Slitë ¦ Slitta
+Table de jeux de société ¦ Tavolinë lojërash me tabelë ¦ Mejda tal-board games
+Petite table d’enfant ¦ Tavolinë e vogël për fëmijë ¦ Mejda żgħira tat-tfal
+Chevalet de peinture ¦ Kavalet pikture ¦ Kavallett tal-pittura
+Pupitre d’écolier double ¦ Bankë shkolle dyshe ¦ Bank doppju tal-iskola
+Tableau noir d’école ¦ Dërrasë e zezë shkolle ¦ Blackboard tal-iskola
+Coiffeuse d’enfant ¦ Tualetë për fëmijë ¦ Mejda tat-tlettija tat-tfal
+Marchande ¦ Dyqan lodër ¦ Ħanut tal-logħob
+Circuit de voitures ¦ Pistë makinash ¦ Korsa tal-karozzi
+Arche de Noé en bois ¦ Arka e Noes prej druri ¦ Arka ta’ Noè tal-injam
+Toupie ¦ Fugë ¦ Żugraga
+Tapis d’éveil ¦ Qilim aktivitetesh ¦ Tapit tal-attivitajiet
+Piscine à balles ¦ Pishinë me topa ¦ Pixxina tal-blalen
+Tipi d’enfant ¦ Tipi për fëmijë ¦ Tipi tat-tfal
+Draisienne ¦ Biçikletë ekuilibri ¦ Rota tal-bilanċ
+Voiture à pédales ¦ Makinë me pedale ¦ Karozza bil-pedali
+Cheval sur roulettes ¦ Kalë me rrota ¦ Żiemel bir-roti
+Bureau d’écolier réglable ¦ Bankë shkolle e rregullueshme ¦ Skrivanija tal-iskola aġġustabbli
+Tabouret d’enfant ¦ Stol për fëmijë ¦ Sedil tat-tfal
+Suspension trois globes ¦ Llambadar me tre globe ¦ Linfa bi tliet globi
+Lampe Tiffany ¦ Llambë Tiffany ¦ Lampa Tiffany
+Lampe en opaline ¦ Llambë opaline ¦ Lampa tal-opalina
+Lampe à poser en céramique ¦ Llambë tavoline qeramike ¦ Lampa tal-mejda taċ-ċeramika
+Lampadaire trépied en bois ¦ Llambadar trekëmbësh prej druri ¦ Lampa tal-art bi tliet saqajn tal-injam
+Lampadaire arc en marbre ¦ Llambadar hark me bazë mermeri ¦ Lampa tal-art fil-forma ta’ ark b’bażi tal-irħam
+Liseuse sur pied ¦ Llambë leximi me këmbë ¦ Lampa tal-qari fuq sieq
+Réglette néon ¦ Llambë neoni ¦ Dawl tan-neon
+Lanterne à bougie ¦ Fener me qiri ¦ Fanal bix-xemgħa
+Lampe à pétrole en cuivre ¦ Llambë vajguri prej bakri ¦ Lampa tal-pitrolju tar-ram
+Lampe à huile romaine ¦ Kandil romak ¦ Musbieħ Ruman
+Bougies sur plateau ¦ Qirinj mbi tabaka ¦ Xemgħat fuq trej
+Chandelier à trois branches ¦ Shandan me tre krahë ¦ Gandlier bi tliet friegħi
+Borne lumineuse ¦ Shtyllë ndriçuese ¦ Lampa baxxa tal-ġnien
+Mur de cadres photos ¦ Mur me korniza fotosh ¦ Ħajt tar-ritratti
+Portrait d’ancêtre ¦ Portret paraardhësi ¦ Ritratt ta’ antenat
+Tableau de paysage ¦ Pikturë peizazhi ¦ Pittura ta’ pajsaġġ
+Marine ¦ Pikturë detare ¦ Pittura tal-baħar
+Cadre photo sur pied ¦ Kornizë fotoje me këmbë ¦ Gwarniċ tar-ritratti fuq sieq
+Trophée de chasse ¦ Trofe gjuetie ¦ Trofew tal-kaċċa
+Maquette de bateau ¦ Maketë anijeje ¦ Mudell ta’ vapur
+Sculpture sur socle ¦ Skulpturë mbi piedestal ¦ Skultura fuq pedestall
+Buste en plâtre ¦ Bust allçie ¦ Busti tal-ġibs
+Statuette en bronze ¦ Statujë bronzi ¦ Statwetta tal-bronż
+Grand vase en terre ¦ Vazo e madhe balte ¦ Vażun kbir tal-fuħħar
+Bouquet de fleurs ¦ Buqetë lulesh ¦ Bukkett fjuri
+Horloge de gare ¦ Orë stacioni ¦ Arloġġ tal-istazzjon
+Coucou de la Forêt-Noire ¦ Orë qyqe nga Pylli i Zi ¦ Arloġġ cuckoo tal-Foresta s-Sewda
+Rideaux ¦ Perde ¦ Purtieri
+Grand tapis persan ¦ Qilim i madh persian ¦ Tapit Persjan kbir
+Tapis berbère à losanges ¦ Qilim berber me romba ¦ Tapit Berber bir-rombi
+Kilim ¦ Kilim ¦ Kilim
+Tapis rond en jute ¦ Qilim i rrumbullakët jute ¦ Tapit tond tal-ġuta
+Paravent japonais ¦ Paravan japonez ¦ Paraventu Ġappuniż
+Panier à journaux ¦ Shportë gazetash ¦ Basket tal-gazzetti
+Grand panier en osier ¦ Shportë e madhe thuprash ¦ Basket kbir tal-qasab
+Garde-feu en laiton ¦ Mbrojtëse oxhaku prej tunxhi ¦ Lqugħ tan-nar tar-ram isfar
+Terrarium ¦ Terrarium ¦ Terrarju
+Diplôme encadré ¦ Diplomë e kornizuar ¦ Diploma fi gwarniċ
+Photo de classe encadrée ¦ Foto klase e kornizuar ¦ Ritratt tal-klassi fi gwarniċ
+Livret de famille sous verre ¦ Libreza familjare nën xham ¦ Ktieb tal-familja taħt il-ħġieġ
+Canevas brodé ¦ Kanavacë e qëndisur ¦ Kanvas irrakkmat
+Tapisserie murale ¦ Tapiceri muri ¦ Tapizzerija tal-ħajt
+Médaillon de famille ¦ Medalion familjar ¦ Medaljun tal-familja
+Trophée sportif ¦ Trofe sportiv ¦ Trofew sportiv
+Buste de Marianne ¦ Bust i Mariannës ¦ Busti ta’ Marianne
+Vase de Gien ¦ Vazo nga Gien ¦ Vażun ta’ Gien
+Vase de Sèvres ¦ Vazo nga Sèvres ¦ Vażun ta’ Sèvres
+Potiche chinoise ¦ Vazo kineze ¦ Vażun Ċiniż
+Vase en étain ¦ Vazo kallaji ¦ Vażun tal-landa
+Bouquet de fleurs séchées ¦ Buqetë me lule të thara ¦ Bukkett fjuri mnixxfa
+Sapin de Noël décoré ¦ Pemë Krishtlindjesh e zbukuruar ¦ Siġra tal-Milied imżejna
+Couronne de porte ¦ Kurorë dere ¦ Kuruna tal-bieb
+Photophores ¦ Mbajtëse qirinjsh ¦ Fanali tax-xemgħa
+Bateau en bouteille ¦ Anije në shishe ¦ Vapur fi flixkun
+Maquette de locomotive ¦ Maketë lokomotive ¦ Mudell ta’ lokomottiva
+Collection de dés à coudre ¦ Koleksion gishtëzash ¦ Kollezzjoni ta’ kustbanijiet
+Vitrine de minéraux ¦ Vitrinë mineralesh ¦ Vetrina tal-minerali
+Collection de papillons ¦ Koleksion fluturash ¦ Kollezzjoni ta’ friefet
+Boîte à musique ¦ Kuti muzikore ¦ Kaxxa tal-mużika
+Baromètre ¦ Barometër ¦ Barometru
+Thermomètre ancien ¦ Termometër i vjetër ¦ Termometru antik
+Voilages ¦ Perde tyli ¦ Purtieri rqaq
+Rideaux de velours ¦ Perde kadifeje ¦ Purtieri tal-bellus
+Store bateau ¦ Grilë romake ¦ Blind Ruman
+Tapis moderne ¦ Qilim modern ¦ Tapit modern
+Tapis en peau de mouton ¦ Qilim prej lëkure deleje ¦ Tapit tal-ġilda tan-nagħaġ
+Poêle à granulés rouge ¦ Sobë e kuqe me pelet ¦ Stufa tal-pellets ħamra
+Poêle Godin ¦ Sobë Godin ¦ Stufa Godin
+Radiateur vertical design ¦ Radiator vertikal dizajni ¦ Radjatur vertikali tad-disinn
+Chauffe-eau ¦ Ngrohës uji ¦ Heater tal-ilma
+Téléviseur sur meuble ¦ Televizor mbi mobilie ¦ Televixin fuq għamara
+Téléviseur au mur ¦ Televizor në mur ¦ Televixin mal-ħajt
+Téléviseur à tube ¦ Televizor me tub ¦ Televixin bit-tubu
+Chaîne hi-fi ¦ Sistem hi-fi ¦ Sistema hi-fi
+Enceintes colonnes ¦ Altoparlantë kolonë ¦ Speakers kolonna
+Radiocassette ¦ Radiokasetofon ¦ Radju-cassette
+Magnétoscope ¦ Videoregjistrues ¦ Video recorder
+Ventilateur de plafond ¦ Ventilator tavani ¦ Fann tas-saqaf
+Ventilateur de table ¦ Ventilator tavoline ¦ Fann tal-mejda
+Radiateur soufflant ¦ Ngrohës me ventilator ¦ Heater bil-fann
+Convecteur électrique ¦ Konvektor elektrik ¦ Konvettur elettriku
+Poêle à bois moderne ¦ Sobë moderne me dru ¦ Stufa tal-ħatab moderna
+Cuisinière à bois moderne ¦ Sobë gatimi moderne me dru ¦ Kuker tal-ħatab modern
+Pompe à chaleur ¦ Pompë nxehtësie ¦ Pompa tas-sħana
+Chaudière au fioul ¦ Kaldajë me naftë ¦ Bojler tad-diżil
+Chaudière à gaz murale ¦ Kaldajë muri me gaz ¦ Bojler tal-gass tal-ħajt
+Cuve à fioul ¦ Rezervuar nafte ¦ Tank tad-diżil
+Robot tondeuse ¦ Kositëse robot ¦ Magna tal-ħaxix robot
+Téléviseur portatif années 70 ¦ Televizor portativ i viteve 70 ¦ Televixin portabbli tas-snin 70
+Lecteur CD ¦ Lexues CD ¦ Plejer tas-CDs
+Magnétophone à bandes ¦ Magnetofon me shirit ¦ Tape recorder bir-rombli
+Enceinte connectée ¦ Altoparlant inteligjent ¦ Speaker intelliġenti
+Piano droit noir ¦ Piano e zezë vertikale ¦ Pjanu wieqaf iswed
+Piano droit en acajou ¦ Piano vertikale prej mahogani ¦ Pjanu wieqaf tal-mogano
+Piano demi-queue ¦ Piano me bisht të shkurtër ¦ Pjanu baby grand
+Piano à queue de concert ¦ Piano koncerti me bisht ¦ Pjanu grand tal-kunċerti
+Épinette ¦ Spinet ¦ Spinetta
+Orgue de salon ¦ Organo salloni ¦ Orgni tas-salott
+Clavier électronique ¦ Tastierë elektronike ¦ Keyboard elettroniku
+Guitare classique ¦ Kitarë klasike ¦ Kitarra klassika
+Banjo ¦ Banjo ¦ Banjo
+Mandoline ¦ Mandolinë ¦ Mandolina
+Violon sur pupitre ¦ Violinë mbi analog ¦ Vjolin fuq leġġiu
+Bandonéon ¦ Bandoneon ¦ Bandoneon
+Trompette sur pied ¦ Trombë mbi mbajtëse ¦ Trumbetta fuq stand
+Saxophone sur pied ¦ Saksofon mbi mbajtëse ¦ Saxophone fuq stand
+Cor de chasse ¦ Bri gjuetie ¦ Qarn tal-kaċċa
+Clarinette sur pied ¦ Klarinetë mbi mbajtëse ¦ Klarinett fuq stand
+Pupitre de musique ¦ Analog muzike ¦ Leġġiu tal-mużika
+Gramophone à pavillon ¦ Gramafon me hinkë ¦ Gramophone bit-tromba
+Cornemuse (biniou) ¦ Gajde (biniou) ¦ Żaqq (biniou)
+Timbales ¦ Timpane ¦ Timpani
+Xylophone ¦ Ksilofon ¦ Xylophone
+Marimba ¦ Marimbë ¦ Marimba
+Cithare ¦ Citër ¦ Zither
+Ukulélé ¦ Ukulele ¦ Ukulele
+Luth ¦ Laute ¦ Lawta
+Flûte traversière sur support ¦ Flaut mbi mbajtëse ¦ Flawt traversier fuq stand
+Flûte à bec ¦ Flaut me sqep ¦ Flawt dritt
+Trombone sur pied ¦ Trombon mbi mbajtëse ¦ Trombone fuq stand
+Hautbois sur support ¦ Oboe mbi mbajtëse ¦ Oboe fuq stand
+Harmonica et pupitre ¦ Harmonikë goje dhe analog ¦ Armonika u leġġiu
+Meuble à partitions ¦ Dollap partiturash ¦ Armarju tal-partituri
+Table de mixage ¦ Mikser zëri ¦ Mixer tal-ħoss
+Rayonnage de cave ¦ Rafte bodrumi ¦ Xkaffar tal-kantina
+Cartons de déménagement ¦ Kuti transferimi ¦ Kaxxi tal-ġarr
+Étagère d’archives familiales ¦ Raft me arkivin familjar ¦ Xkaffa tal-arkivji tal-familja
+Coffret à bijoux ¦ Kuti bizhuterish ¦ Kaxxa tal-ġojjelli
+Portant à vêtements ¦ Varëse rrobash me rrota ¦ Rack tal-ħwejjeġ
+Dressing d’angle ¦ Gardërobë këndore ¦ Walk-in wardrobe tal-kantuniera
+Meuble à cases (cubes) ¦ Raft me kube ¦ Xkaffa bil-kaxxi (kubi)
+Étagère de cellier ¦ Raft depoje ¦ Xkaffa tal-ħażna
+Boîtes de rangement en plastique ¦ Kuti plastike magazinimi ¦ Kaxxi tal-ħażna tal-plastik
+Caisses en bois ¦ Arka druri ¦ Kaxxi tal-injam
+Panier à pique-nique ¦ Shportë pikniku ¦ Basket tal-pikniks
+Boîte à couture ¦ Kuti qepjeje ¦ Kaxxa tal-ħjata
+Housse à vêtements ¦ Mbulesë rrobash ¦ Kisja tal-ħwejjeġ
+Crucifix mural ¦ Kryq muri ¦ Kurċifiss tal-ħajt
+Crèche provençale et santons ¦ Grazhd provansal me figurina santons ¦ Presepju Provenzali bis-santons
+Chapelet ¦ Rruzare ¦ Kurunell
+Coin du souvenir (photos et bougie) ¦ Kënd kujtimi (foto dhe qiri) ¦ Rokna tat-tifkira (ritratti u xemgħa)
+Boîte à lettres d’amour ¦ Kuti letrash dashurie ¦ Kaxxa tal-ittri tal-imħabba
+Vitrine de médailles ¦ Vitrinë medaljesh ¦ Vetrina tal-midalji
+Bouquet de mariée sous globe ¦ Buqetë nusërie nën kambanë xhami ¦ Bukkett tal-għarusa taħt kampnar tal-ħġieġ
+Bénitier mural ¦ Enë uji të bekuar në mur ¦ Fonti tal-ilma mbierek tal-ħajt
+Icône orthodoxe ¦ Ikonë ortodokse ¦ Ikona Ortodossa
+Rameau de buis bénit ¦ Degë shimshiri e bekuar ¦ Fergħa tal-bossu mbierka
+Statue de saint ¦ Statujë shenjtori ¦ Statwa ta’ qaddis
+Plaque de communion encadrée ¦ Kujtim kungimi i kornizuar ¦ Tifkira tal-Ewwel Tqarbina fi gwarniċ
+Livre de prières ancien ¦ Libër i vjetër lutjesh ¦ Ktieb tat-talb antik
+Scie circulaire sur table ¦ Sharrë rrethore tavoline ¦ Serrieq ċirkulari tal-mejda
+Scie à onglets ¦ Sharrë këndore ¦ Serrieq tal-angoli
+Forge et soufflet ¦ Farkë me fryrëse ¦ Forġa u minfaħ
+Établi de mécanicien ¦ Bankë pune mekaniku ¦ Bank tax-xogħol tal-mekkaniku
+Établi d’horloger ¦ Bankë pune orëndreqësi ¦ Bank tax-xogħol tal-arloġġier
+Table de cordonnier ¦ Tavolinë këpucari ¦ Mejda tal-kalzolar
+Table de coupe de tailleur ¦ Tavolinë prerjeje rrobaqepësi ¦ Mejda tal-qtugħ tal-ħajjat
+Paillasse de laboratoire ¦ Bankë laboratori ¦ Bank tal-laboratorju
+Scie à ruban ¦ Sharrë shiritore ¦ Serrieq tal-faxxa
+Tour à métaux ¦ Torno metali ¦ Tornju tal-metall
+Surjeteuse ¦ Makinë overloku ¦ Overlocker
+Métier à broder ¦ Kornizë qëndisjeje ¦ Telar tar-rakkmu
+Petite citadine ¦ Makinë e vogël qyteti ¦ Karozza żgħira tal-belt
+Voiture familiale ¦ Makinë familjare ¦ Karozza tal-familja
+Voiture ancienne (années 30) ¦ Makinë antike (vitet 30) ¦ Karozza antika (is-snin 30)
+Deux-chevaux ¦ Citroën 2CV ¦ Citroën 2CV
+Coccinelle ¦ VW Beetle (Brumbulli) ¦ VW Beetle
+Fourgonnette ¦ Furgon i vogël ¦ Vann żgħir
+Mobylette ¦ Motoçikletë e vogël (moped) ¦ Moped
+Vélo de course ¦ Biçikletë gare ¦ Rota tat-tiġrijiet
+Vélo hollandais ¦ Biçikletë holandeze ¦ Rota Olandiża
+Vélo cargo ¦ Biçikletë ngarkese ¦ Rota tal-merkanzija
+Pneus empilés ¦ Goma të grumbulluara ¦ Tajers f’munzell
+Échelle double ¦ Shkallë dyshe ¦ Sellum doppju
+Second congélateur ¦ Ngrirës i dytë ¦ Friża oħra
+Voiture tout-terrain ¦ Fuoristradë ¦ Karozza off-road
+Voiture de sport ¦ Makinë sportive ¦ Karozza sportiva
+Voiture électrique ¦ Makinë elektrike ¦ Karozza elettrika
+Camping-car ¦ Autokamper ¦ Camper van
+Moto ancienne avec side-car ¦ Motoçikletë e vjetër me karroçino ¦ Mutur antik b’sidecar
+Vélo ancien ¦ Biçikletë e vjetër ¦ Rota antika
+VTT ¦ Biçikletë malore ¦ Mountain bike
+Borne de recharge ¦ Stacion karikimi ¦ Stazzjon tal-iċċarġjar
+Armoire à outils ¦ Dollap veglash ¦ Armarju tal-għodda
+Chariot de pneus ¦ Karrocë gomash ¦ Trolley tat-tajers
+Caisse à outils ¦ Kuti veglash ¦ Kaxxa tal-għodda
+Chargeur de batterie ¦ Karikues baterie ¦ Ċarġer tal-batterija

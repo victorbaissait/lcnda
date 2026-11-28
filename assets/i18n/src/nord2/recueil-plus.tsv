@@ -1,0 +1,41 @@
+fr ¦ sk ¦ nb
+# ➕ Pages confiées, avancement, EAD, page à partager (heritage-recueil-plus.js)
+Confier {n} pages ¦ Zveriť {n} strán ¦ Tildel {n} sider
+Confier la page ¦ Zveriť stranu ¦ Tildel siden
+Confier ¦ Zveriť ¦ Tildel
+À qui ? (vide : à personne) ¦ Komu? (prázdne: nikomu) ¦ Til hvem? (tomt: ingen)
+ex. Marie ¦ napr. Mária ¦ f.eks. Marie
+Pour se répartir un registre : chacun voit ses pages avec « Pages de : … » dans l’onglet État. ¦ Na rozdelenie matriky: každý vidí svoje strany cez „Strany pre: …“ na karte Stav. ¦ For å dele opp en protokoll: hver ser sine sider med «Sider for: …» i Status-fanen.
+{p} confiées à {w} ¦ {p} zverené osobe {w} ¦ {p} tildelt {w}
+{p} confiées à personne ¦ {p} nezverené nikomu ¦ {p} ikke tildelt noen
+Avancement du {a} au {b} ¦ Postup od {a} do {b} ¦ Fremdrift fra {a} til {b}
+transcrites ¦ prepísané ¦ transkribert
+relues ou finies ¦ skontrolované alebo hotové ¦ gjennomgått eller ferdige
+Tout est relu ou fini. ¦ Všetko je skontrolované alebo hotové. ¦ Alt er gjennomgått eller ferdig.
+Au rythme actuel ({r} pages relues par semaine), fini vers le {d}. ¦ Pri súčasnom tempe ({r} skontrolovaných strán týždenne) hotovo okolo {d}. ¦ I nåværende tempo ({r} sider gjennomgått per uke) ferdig rundt {d}.
+Pas encore de pages relues sur la période : pas d’estimation. ¦ V tomto období zatiaľ žiadne skontrolované strany: bez odhadu. ¦ Ingen gjennomgåtte sider i perioden ennå: ingen anslag.
+Pas assez de recul : l’app note l’avancement chaque jour où tu ouvres le recueil. ¦ Zatiaľ málo údajov: aplikácia zaznamenáva postup každý deň, keď otvoríš zborník. ¦ For lite data ennå: appen noterer fremdriften hver dag du åpner samlingen.
+Objectif : fini pour le {d} ¦ Cieľ: hotovo do {d} ¦ Mål: ferdig innen {d}
+à ce rythme, en retard ¦ pri tomto tempe meškáš ¦ i dette tempoet: forsinket
+en avance ¦ v predstihu ¦ foran skjema
+Inventaire EAD : {n} ¦ Inventár EAD: {n} ¦ EAD-katalog: {n}
+absente ¦ chýbajúca ¦ mangler
+Actes transcrits ¦ Prepísané záznamy ¦ Transkriberte dokumenter
+Sortes d’actes ¦ Druhy záznamov ¦ Dokumenttyper
+Noms les plus fréquents ¦ Najčastejšie priezviská ¦ Vanligste etternavn
+Consulter en ligne ¦ Pozrieť online ¦ Se på nett
+pages ¦ strany ¦ sider
+absentes ¦ chýbajúce ¦ mangler
+Fait avec LCNDA le {d}. ¦ Vytvorené s LCNDA {d}. ¦ Laget med LCNDA {d}.
+Page à partager enregistrée : un seul fichier, qui s’ouvre dans n’importe quel navigateur. ¦ Stránka na zdieľanie uložená: jediný súbor, ktorý sa otvorí v akomkoľvek prehliadači. ¦ Delingsside lagret: én enkelt fil som åpnes i hvilken som helst nettleser.
+Confiée à ¦ Zverené osobe ¦ Tildelt
+Page à partager ¦ Stránka na zdieľanie ¦ Delingsside
+Pages de : ¦ Strany pre: ¦ Sider for:
+personne (pas encore confiées) ¦ nikto (ešte nezverené) ¦ ingen (ikke tildelt ennå)
+Confier à… ¦ Zveriť osobe… ¦ Tildel til…
+Objectif : tout relu pour le (facultatif) ¦ Cieľ: všetko skontrolované do (nepovinné) ¦ Mål: alt gjennomgått innen (valgfritt)
+Confier… ¦ Zveriť… ¦ Tildel…
+Personnes citées ¦ Spomínané osoby ¦ Personer nevnt
+Lien d’une vue ¦ Odkaz na snímku ¦ Lenke til et bilde
+Autre exemplaire ¦ Iný exemplár ¦ Annet eksemplar
+=page absente ¦ chýbajúca strana|chýbajúce strany|chýbajúcich strán ¦ manglende side|manglende sider

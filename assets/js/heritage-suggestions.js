@@ -25,7 +25,12 @@
             default: return `ses parents sont inconnus : ${it.why}${whereIn ? ` (${it.place})` : ''}`;
         }
     }
+    const cap = t => t.charAt(0).toUpperCase() + t.slice(1);
     function rowsHtml(items) {
+        // 🗂 un cadre léger par personne (réglage genealogie-cadres) : ses trous dedans, la personne en tête
+        if (window.LCNDA_UI?.framesOn?.()) return window.LCNDA_UI.personCardsHtml(window.LCNDA_UI.groupByPerson(items, it => it.person_id).map(g => { const it0 = g.items[0];
+            return window.LCNDA_UI.personCardHtml({id: it0.person_id, name: it0.name, sub: `Sosa ${fmt(it0.sosa)} · génération ${it0.generation}`, cls: 'is-light', count: g.items.length > 1 ? String(g.items.length) : '',
+                body: `<ul class="h-sugg">${g.items.map(it => `<li><span class="h-sugg-icon" aria-hidden="true">${ICON[it.kind] || '🔎'}</span><div><p>${esc(cap(sentence(it)))}.</p>${it.kind !== 'parents' && it.why ? `<small class="muted">d’après : ${esc(it.why)}</small>` : ''}</div></li>`).join('')}</ul>`}); }).join(''));
         return `<ul class="h-sugg">${items.map(it => `<li><span class="h-sugg-icon" aria-hidden="true">${ICON[it.kind] || '🔎'}</span><div>
             <p>Ton <strong>Sosa ${fmt(it.sosa)}</strong>, <button type="button" class="table-link" data-h-person="${Number(it.person_id)}">${esc(it.name)}</button>, ${esc(sentence(it))}.</p>
             <small class="muted">Génération ${it.generation}${it.kind !== 'parents' && it.why ? ' · d’après : ' + esc(it.why) : ''}</small></div></li>`).join('')}</ul>`;

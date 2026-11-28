@@ -425,7 +425,7 @@ Les pistes sont montrées à partir de ce score (sur 100). Plus haut : moins de 
 Après chaque nouvel import du fichier INSEE : vérifier les dossiers en cours tout seul (jamais de changement sans ton clic). ¦ Μετά από κάθε νέα εισαγωγή του αρχείου INSEE: έλεγχος των φακέλων σε εξέλιξη αυτόματα (ποτέ αλλαγή χωρίς το κλικ σου). ¦ След всеки нов импорт на файла на INSEE: проверявай делата в ход самостоятелно (никога промяна без твоето щракване).
 Automatique, dans la cloche ¦ Αυτόματα, στο καμπανάκι ¦ Автоматично, в звънчето
 Seulement à la main ¦ Μόνο χειροκίνητα ¦ Само ръчно
-📋 Questionnaire ¦ 📋 Ερωτηματολόγιο ¦ 📋 Въпросник
+📝 Questionnaire ¦ 📝 Ερωτηματολόγιο ¦ 📝 Въпросник
 Ce que l’héritier te renvoie après avoir rempli le questionnaire. ¦ Τι σου επιστρέφει ο κληρονόμος αφού το συμπληρώσει. ¦ Какво ти връща наследникът, след като го попълни.
 Un petit fichier .json ¦ Ένα μικρό αρχείο .json ¦ Малък файл .json
 La page .html remplie ¦ Η συμπληρωμένη σελίδα .html ¦ Попълнената страница .html

@@ -1,0 +1,51 @@
+fr ¦ vi ¦ id
+# 🧩 Atelier de transcription, vague 3 (3b) : les gabarits d’actes (heritage-transcribe-gabarit.js)
+Choisis la sorte d’acte (en haut) : chaque sorte a ses cases. ¦ Chọn loại giấy tờ (ở trên): mỗi loại có các ô riêng. ¦ Pilih jenis akta (di atas): setiap jenis punya kotaknya sendiri.
+On dirait : {x}. Utiliser ce gabarit ? ¦ Có vẻ là: {x}. Dùng mẫu này? ¦ Tampaknya: {x}. Pakai templat ini?
+Cases remplies : {a}/{b} · vérifiées : {c} ¦ Ô đã điền: {a}/{b} · đã kiểm tra: {c} ¦ Kotak terisi: {a}/{b} · diperiksa: {c}
+Gabarit ¦ Mẫu ¦ Templat
+Vert : rempli par « 🧭 Repérer », à vérifier · Entrée : ✓ vérifié · un clic sur « l. 3 » montre le passage. ¦ Xanh lá: do “🧭 Nhận diện” điền, cần kiểm tra · Enter: ✓ đã kiểm tra · bấm vào “dòng 3” để xem đoạn văn. ¦ Hijau: diisi oleh “🧭 Kenali”, perlu diperiksa · Enter: ✓ sudah diperiksa · klik “baris 3” untuk melihat bagiannya.
+Date du baptême ¦ Ngày rửa tội ¦ Tanggal pembaptisan
+Père, métier ¦ Cha, nghề nghiệp ¦ Ayah, pekerjaan
+Officier de l’état civil ¦ Viên chức hộ tịch ¦ Pegawai catatan sipil
+Parents de l’époux ¦ Cha mẹ chú rể ¦ Orang tua mempelai pria
+Parents de l’épouse ¦ Cha mẹ cô dâu ¦ Orang tua mempelai wanita
+Contrat de mariage ¦ Hợp đồng hôn nhân ¦ Perjanjian perkawinan
+Publications ¦ Rao hôn phối ¦ Pengumuman nikah
+Décédé le ¦ Mất ngày ¦ Meninggal pada
+Déclarants ¦ Người khai ¦ Pelapor
+Date d’inhumation ¦ Ngày an táng ¦ Tanggal pemakaman
+Parties ¦ Các bên ¦ Para pihak
+Juge ou notaire ¦ Thẩm phán hoặc công chứng viên ¦ Hakim atau notaris
+Personne concernée ¦ Người liên quan ¦ Orang yang bersangkutan
+Ce qui est attesté ¦ Điều được xác nhận ¦ Yang dinyatakan
+Rue ou maison ¦ Phố hoặc nhà ¦ Jalan atau rumah
+Ménage ¦ Hộ gia đình ¦ Rumah tangga
+Matricule ¦ Số quân bạ ¦ Nomor registrasi
+Classe ¦ Lớp tuổi ¦ Angkatan
+Régiment ¦ Trung đoàn ¦ Resimen
+Campagnes ¦ Chiến dịch ¦ Kampanye
+Blessures ¦ Vết thương ¦ Luka
+page {n}, l. {line} ¦ trang {n}, dòng {line} ¦ halaman {n}, baris {line}
+l. {n} ¦ dòng {n} ¦ baris {n}
+🧩 Gabarit à cases (conseillé) ¦ 🧩 Mẫu có ô (khuyên dùng) ¦ 🧩 Templat berkotak (disarankan)
+Texte à trous (comme avant) ¦ Văn bản điền chỗ trống (như trước) ¦ Teks isian (seperti sebelumnya)
+Remplir à nouveau ¦ Điền lại ¦ Isi ulang
+Coller le texte à trous ¦ Dán văn bản điền chỗ trống ¦ Tempel teks isian
+Repris du gabarit (cases vérifiées ou écrites par toi) : ¦ Lấy từ mẫu (các ô bạn đã kiểm tra hoặc tự viết): ¦ Diambil dari templat (kotak yang kamu periksa atau tulis):
+Retirer cette case ¦ Gỡ ô này ¦ Hapus kotak ini
+Ajouter une case ¦ Thêm ô ¦ Tambah kotak
+Nom de la case (ex. Profession du parrain) ¦ Tên ô (vd. Nghề của cha đỡ đầu) ¦ Nama kotak (mis. Pekerjaan bapak baptis)
+Nom de la case ¦ Tên ô ¦ Nama kotak
+Case retirée ¦ Đã gỡ ô ¦ Kotak dihapus
+Mes gabarits… ¦ Mẫu của tôi… ¦ Templat saya…
+Mes gabarits ¦ Mẫu của tôi ¦ Templat saya
+Tableur de tous les actes « {x} » ¦ Bảng tính mọi giấy tờ “{x}” ¦ Lembar kerja semua akta “{x}”
+Les cases cochées se montrent dans le gabarit de chaque acte de cette sorte. Gardé sur cet ordinateur. ¦ Các ô đã đánh dấu hiện trong mẫu của mọi giấy tờ loại này. Lưu trên máy tính này. ¦ Kotak yang dicentang muncul di templat setiap akta jenis ini. Disimpan di komputer ini.
+Aucun acte de cette sorte pour l’instant. ¦ Chưa có giấy tờ nào thuộc loại này. ¦ Belum ada akta jenis ini.
+gabarits ¦ mẫu ¦ templat
+Tableur : {x} ¦ Bảng tính: {x} ¦ Lembar kerja: {x}
+Pas encore relié : le relier dans l’Atelier ¦ Chưa liên kết: liên kết trong xưởng ¦ Belum ditautkan: tautkan di bengkel
+Numéros de ligne ¦ Số dòng ¦ Nomor baris
+Transcription faite avec LCNDA (Le Carnet numérique des ancêtres). ¦ Bản phiên âm làm bằng LCNDA (Le Carnet numérique des ancêtres). ¦ Transkripsi dibuat dengan LCNDA (Le Carnet numérique des ancêtres).
+XML des chercheurs et des archives (lignes, zones, personnes) ¦ XML của nhà nghiên cứu và lưu trữ (dòng, vùng, người) ¦ XML peneliti dan arsip (baris, zona, orang)

@@ -1,0 +1,98 @@
+# 🌍 Partir et nommer (lot J) : refaire assets/data/tj-*.json.gz, puis les enregistrer dans la branche lancée.
+#  - 🌀 tj-cyclones : NOAA NCEI IBTrACS v04r01 (données publiques ; citation demandée ; le script relit la page des conditions d'usage).
+#  - 🏺 tj-pleiades : Pleiades, paquet pleiades.datasets (CC BY 3.0 ; le script relit README.md et LICENSE et s'arrête s'ils changent).
+#  - 🏷 tj-noms, 🔀 tj-fusions : Wikidata (CC0) — noms de lieux datés du monde, communes disparues dans une fusion.
+#  - 🏡 tj-villages, ⚜️ tj-cajuns, 🧊 tj-charcot, 📘 tj-oberamt : Wikipédia (CC BY-SA 4.0, une phrase et la position) et Wikidata (CC0).
+# Tout se fabrique aussi sur un ordinateur ; ce travail sert à les remettre à jour, et à finir les pays que le service de requêtes de
+# Wikidata a refusés (trop lourds : Allemagne, Tchéquie…) : une requête à la fois, avec de longues pauses (scripts/telech-j/wm.py).
+# Puis le sommaire assets/data/manifest.json (Réglages → 🗂 Données : « ↻ Vérifier » voit la nouvelle version).
+#
+# Lancer : onglet « Actions » → « Partir et nommer (lot J) » → « Run workflow » (choisir ce qu'on refait).
+
+name: Partir et nommer (lot J)
+
+on:
+  workflow_dispatch:
+    inputs:
+      quoi:
+        description: 'tout, cyclones, pleiades, noms, fusions ou monde'
+        required: false
+        default: 'tout'
+  push:
+    branches: ['claude/**']
+    paths: ['.github/workflows/telech-j.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: telech-j-donnees
+  cancel-in-progress: false
+
+jobs:
+  donnees:
+    # le « push » sert seulement à faire connaître ce travail à GitHub : il ne fabrique rien
+    if: github.event_name != 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 300
+    env:
+      QUOI: ${{ github.event.inputs.quoi || 'tout' }}
+      TJ_WDQS_GAP: '30'
+    steps:
+      - name: Dossier de travail
+        run: echo "TJ_RAW=$RUNNER_TEMP/tj-cache" >> "$GITHUB_ENV"
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: "Préférer IPv4 (pas d’IPv6 sur la machine GitHub, « Network is unreachable »)"
+        run: echo 'precedence ::ffff:0:0/96 100' | sudo tee -a /etc/gai.conf
+      - name: Reprendre les réponses déjà téléchargées
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ env.TJ_RAW }}
+          key: telech-j-${{ github.run_id }}
+          restore-keys: telech-j-
+      - name: "🌀 Cyclones (NOAA IBTrACS)"
+        if: env.QUOI == 'tout' || env.QUOI == 'cyclones'
+        run: python3 -I scripts/telech-j/build_cyclones.py assets/data
+      - name: "🏺 Noms antiques (Pleiades, CC BY 3.0)"
+        if: env.QUOI == 'tout' || env.QUOI == 'pleiades'
+        run: python3 -I scripts/telech-j/build_pleiades.py assets/data
+      - name: "🏷 Noms de lieux d’autrefois du monde (Wikidata)"
+        if: env.QUOI == 'tout' || env.QUOI == 'noms'
+        run: python3 -I scripts/telech-j/build_noms.py assets/data noms
+      - name: "🔀 Communes disparues dans une fusion (Wikidata)"
+        if: env.QUOI == 'tout' || env.QUOI == 'fusions'
+        run: python3 -I scripts/telech-j/build_noms.py assets/data fusions
+      - name: "🏡 ⚜️ 🧊 📘 Villages fondés par des Français, Louisiane, Charcot, Oberämter (Wikipédia, Wikidata)"
+        if: env.QUOI == 'tout' || env.QUOI == 'monde'
+        run: python3 -I scripts/telech-j/build_monde.py assets/data
+      - name: Garder les réponses pour la prochaine fois
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ env.TJ_RAW }}
+          key: telech-j-${{ github.run_id }}
+      - name: Sommaire des données
+        run: node scripts/donnees-manifest.js
+      - name: Enregistrer dans la branche
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/data/tj-*.json.gz assets/data/manifest.json
+          git diff --cached --quiet && { echo "rien de neuf"; exit 0; }
+          git commit -m "Partir et nommer (lot J) : données refaites sur GitHub (NOAA IBTrACS, Pleiades CC BY 3.0, Wikidata CC0, Wikipédia CC BY-SA 4.0)"
+          ok=
+          for i in 1 2 3 4 5; do
+            if ! git pull --rebase origin "$GITHUB_REF_NAME"; then
+              # le sommaire a changé entre-temps (un autre atelier) : on garde celui de la branche et on le refait par-dessus
+              git checkout --ours assets/data/manifest.json && node scripts/donnees-manifest.js \
+                && git add assets/data/manifest.json && GIT_EDITOR=true git rebase --continue || { git rebase --abort; sleep 15; continue; }
+            fi
+            git push origin "HEAD:$GITHUB_REF_NAME" && { ok=1; break; }; sleep 15
+          done
+          [ -n "$ok" ] || { echo "::error::pas enregistré dans la branche"; exit 1; }

@@ -1,0 +1,112 @@
+/* LCNDA — ▶ Dans le temps : les batailles sur la carte, année après année (assets/js/heritage-guerres-temps.js ;
+ * maquette validée docs/design/carte-guerres-temps.html). Couleurs : variables de l'app ; le mode sombre suit. */
+
+.gt { --gt-sea: #f3f6fa; --gt-land: #ffffff; --gt-coast: #a9a9a9; --gt-border: #c4c8cf; --gt-dot: #0066cc; --gt-fog: #9aa0a8; --gt-near: #d9480f; --gt-home: #2b8a3e; --gt-ink: #111111; --gt-halo: #ffffff; --gt-pulse: #055dff;
+    min-width: 0; }
+:root[data-theme="dark"] .gt { --gt-sea: #16191d; --gt-land: #262a30; --gt-coast: #6b7079; --gt-border: #4a4f57; --gt-dot: #4d9fff; --gt-fog: #7d838c; --gt-near: #ff8a4c; --gt-home: #4cc070; --gt-ink: #eceef2; --gt-halo: #1a1a1a; --gt-pulse: #7fb2ff; }
+.gt-wait { margin: 14px 0; }
+
+/* la barre calme sous celle de la liste (comme le mode Animation de l'onglet Carte) */
+.gt-bar { margin: 4px 0 0; padding: 12px 0 0; border-top: 1px solid var(--line-color, #d6d6d6); }
+.gt-row { display: flex; gap: 8px 10px; align-items: center; flex-wrap: wrap; }
+.gt-row2 { margin-top: 8px; gap: 6px 18px; }
+.gt-sep { width: 1px; align-self: stretch; background: var(--line-color, #d6d6d6); margin: 0 2px; }
+.gt-play { min-width: 110px; }
+.gt-step { min-width: 34px; font-size: 15px; }
+.gt-lbl { font-size: 12px; font-weight: 700; white-space: nowrap; }
+.gt-yearnum { width: 74px; min-height: 34px; padding: 4px 8px; border: 2px solid var(--ink, #111); background: var(--card-bg, #fff); color: var(--ink, #111); text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; border-radius: 0; }
+.gt-speed button { min-height: 34px; }
+.gt-war { flex: 0 1 330px; min-width: 0; max-width: 100%; min-height: 34px; }
+.gt-tg { font-size: 13px; }
+.gt-track { margin: 12px 0 0; }
+.gt-hist { display: block; width: 100%; height: 42px; }
+.gt-hist rect { fill: var(--line-color, #d6d6d6); }
+.gt-hist rect.is-on { fill: var(--blue-bright, #055dff); }
+.gt-range { display: block; width: 100%; margin: 2px 0 0; accent-color: var(--blue, #0066cc); min-height: 26px; padding: 0; border: 0; background: transparent; }
+.gt-ticks { position: relative; height: 16px; font-size: 11.5px; color: var(--muted, #6d6d6d); font-variant-numeric: tabular-nums; }
+.gt-ticks span { position: absolute; top: 0; transform: translateX(-50%); white-space: nowrap; }
+.gt-ticks span:first-child { transform: none; }
+.gt-ticks span:last-child { transform: translateX(-100%); }
+.gt-lives { margin: 10px 0 0; display: grid; gap: 5px; }
+.gt-life { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 10px; align-items: center; font-size: 12.5px; color: var(--muted, #6d6d6d); }
+.gt-life b { color: var(--ink, #111); }
+.gt-ax { position: relative; height: 10px; background: var(--line-color, #e3e5ea); }
+.gt-ax i { position: absolute; top: 0; bottom: 0; background: var(--gt-home); }
+.gt-ax u { position: absolute; top: -4px; bottom: -4px; width: 3px; margin-left: -1px; background: var(--ink, #111); text-decoration: none; }
+.gt-more, .gt-nofam { margin: 2px 0 0; font-size: 12.5px; }
+
+/* la carte (le fond de l'app, sans tuiles) et la colonne */
+.gt-layout { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 22px; align-items: start; margin: 14px 0 0; }
+.gt-mapcol { min-width: 0; }
+.gt-stage { position: relative; border: 2px solid var(--ink, #111); background: var(--gt-sea); overflow: hidden; min-height: 300px; }
+.gt-stage:focus-visible { outline: 3px solid var(--blue-bright, #055dff); outline-offset: 2px; }
+.gt-cv { position: absolute; left: 0; top: 0; display: block; touch-action: manipulation; }
+.gt-fx { pointer-events: none; }
+.gt-box { position: absolute; z-index: 4; background: color-mix(in srgb, var(--card-bg, #fff) 94%, transparent); color: var(--ink, #111); border: 2px solid var(--ink, #111); padding: 7px 10px; font-size: 12px; }
+.gt-yearbox { left: 10px; top: 10px; max-width: min(340px, calc(100% - 150px)); pointer-events: none; }
+.gt-yr { font: 800 30px/1 system-ui, sans-serif; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.gt-sub { font-size: 12px; color: var(--muted, #555); margin-top: 3px; }
+.gt-legend { left: 10px; bottom: 34px; display: flex; flex-direction: column; gap: 3px; pointer-events: none; max-width: 300px; }
+.gt-legend b { font-size: 12px; }
+.gt-legend span { display: flex; align-items: center; gap: 6px; }
+.gt-sw { width: 11px; height: 11px; border-radius: 50%; display: inline-block; flex: none; background: var(--gt-dot); border: 1.5px solid var(--gt-halo); box-shadow: 0 0 0 1px var(--gt-dot); }
+.gt-sw.is-a { background: var(--gt-halo); border: 2px dashed var(--gt-dot); box-shadow: none; }
+.gt-sw.is-o { background: transparent; border: 2.5px solid var(--gt-near); box-shadow: none; }
+.gt-sw.is-f { background: var(--gt-fog); box-shadow: 0 0 0 1px var(--gt-fog); }
+.gt-sw.is-h { border-radius: 0; background: var(--gt-home); border: 1.5px solid var(--gt-ink); box-shadow: none; transform: rotate(45deg) scale(.85); }
+.gt-ctl { position: absolute; z-index: 4; top: 8px; right: 8px; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+.gt-ctl button { min-width: 34px; height: 34px; padding: 0 8px; border: 1.5px solid var(--ink, #111); background: var(--card-bg, #fff); color: var(--ink, #111); font: inherit; font-size: 16px; line-height: 1; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 5px; border-radius: 0; }
+.gt-ctl button:hover { background: var(--blue-soft, #eaf1ff); }
+.gt-ctl button[aria-pressed="true"] { background: var(--ink, #111); color: var(--card-bg, #fff); }
+.gt-ctl .gt-lab { font-size: 12.5px; font-weight: 600; }
+.gt-attr { position: absolute; z-index: 3; right: 4px; bottom: 4px; max-width: calc(100% - 8px); font: 11px/1.3 system-ui, sans-serif; color: var(--muted, #333); background: color-mix(in srgb, var(--card-bg, #fff) 85%, transparent); padding: 4px 6px; }
+.gt-attr a { color: inherit; }
+.gt-tip { position: absolute; z-index: 5; max-width: min(260px, 80%); padding: 4px 8px; background: #111; color: #fff; font-size: 12.5px; line-height: 1.3; pointer-events: none; transform: translate(-50%, calc(-100% - 12px)); opacity: 0; transition: opacity .12s; }
+.gt-tip.is-on { opacity: 1; }
+.gt-note { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; margin: 8px 0 0; font-size: 13px; }
+.gt-side { min-width: 0; }
+.gt-side-head { min-height: 0; }
+.gt-side-head h3 { margin: 0; font-size: 17px; }
+.gt-side-head h3 small { color: var(--muted, #6d6d6d); font-weight: 400; font-size: 13px; }
+.gt-list { list-style: none; margin: 0; padding: 4px 0; max-height: 360px; overflow: auto; }
+.gt-list li + li { border-top: 1px solid var(--line-color, #e3e5ea); }
+.gt-list button { all: unset; box-sizing: border-box; display: grid; grid-template-columns: 12px minmax(0, 1fr); gap: 10px; width: 100%; padding: 8px 15px; cursor: pointer; font-size: 13.5px; }
+.gt-list button:hover { background: var(--blue-soft, #eaf2ff); }
+.gt-list button[aria-current="true"] { background: var(--blue-soft, #eaf2ff); box-shadow: inset 4px 0 0 var(--blue-bright, #055dff); }
+.gt-list button:focus-visible { outline: 3px solid var(--blue, #0066cc); outline-offset: -3px; }
+.gt-nm { color: var(--blue, #0066cc); font-weight: 700; }
+.gt-list small { display: block; color: var(--muted, #6d6d6d); font-size: 12px; margin-top: 1px; }
+.gt-m { width: 10px; height: 10px; border-radius: 50%; background: var(--gt-dot); margin-top: 4px; }
+.gt-m.is-a { background: var(--card-bg, #fff); border: 2px dashed var(--gt-dot); width: 6px; height: 6px; }
+.gt-m.is-n { box-shadow: 0 0 0 2px var(--card-bg, #fff), 0 0 0 4px var(--gt-near); }
+.gt-empty { color: var(--muted, #6d6d6d); font-size: 13.5px; padding: 10px 15px; }
+.gt-detail { border-top: 2px solid var(--ink, #111); }
+.gt-dh { padding: 14px 15px; background: var(--card-head-bg, #fafafa); border-bottom: 2px solid var(--ink, #111); }
+.gt-dh h4 { margin: 4px 0 0; font-size: 20px; line-height: 1.15; letter-spacing: -.01em; }
+.gt-db { padding: 12px 15px 14px; font-size: 14px; }
+.gt-when { font-weight: 700; margin: 0 0 8px; }
+.gt-facts { margin: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 12px; font-size: 13.5px; }
+.gt-facts dt { color: var(--muted, #6d6d6d); font-weight: 700; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; padding-top: 3px; }
+.gt-facts dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.gt-tag { display: inline-block; font: 700 11px/1.4 system-ui, sans-serif; padding: 0 6px; border: 1.5px dashed var(--line-color, #d6d6d6); color: var(--muted, #6d6d6d); margin-left: 6px; white-space: nowrap; }
+.gt-near { margin: 10px 0 0; padding: 8px 11px; border-left: 4px solid var(--gt-near); background: color-mix(in srgb, var(--gt-near) 10%, var(--card-bg, #fff)); font-size: 13.5px; }
+.gt-src { display: flex; gap: 6px 14px; flex-wrap: wrap; margin-top: 12px; font-size: 13px; }
+.gt-src a { color: var(--blue, #0066cc); font-weight: 700; }
+.gt-src a:hover { text-decoration: underline; }
+.gt-cite { font-size: 11.5px; color: var(--muted, #6d6d6d); margin: 8px 0 0; }
+.ui-listbar-btn.gt-on[aria-pressed="true"] { box-shadow: inset 0 -3px 0 var(--blue-bright, #055dff); }
+
+@media (max-width: 1100px) { .gt-layout { grid-template-columns: minmax(0, 1fr); } .gt-list { max-height: 320px; } }
+@media (max-width: 760px) {
+    .gt-life { grid-template-columns: minmax(0, 1fr); gap: 3px; }
+    .gt-war { flex: 1 1 100%; }
+    .gt-sep { display: none; }
+    .gt-play { min-width: 0; }
+    .gt-yr { font-size: 20px; }
+    .gt-sub { display: none; } /* l'année seule : « Ces années-là » dit le reste */
+    .gt-ctl .gt-lab { display: none; }
+    .gt-legend { left: 6px; bottom: 26px; max-width: calc(100% - 12px); flex-flow: row wrap; gap: 2px 10px; padding: 5px 7px; font-size: 11px; }
+    .gt-legend b { flex-basis: 100%; }
+    .gt-yearbox { left: 6px; top: 6px; padding: 4px 8px; max-width: calc(100% - 64px); }
+}
+@media (prefers-reduced-motion: reduce) { .gt-tip { transition: none; } }

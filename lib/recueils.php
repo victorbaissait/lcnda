@@ -47,7 +47,8 @@ function recueils_list(PDO $pdo, string $q = ''): array
     $out = [];
     foreach ($rows as $r) {
         $id = (int) $r['id'];
-        if ($q !== '' && !str_contains(mb_strtolower($r['title'] . ' ' . $r['reference'] . ' ' . $r['place_text'] . ' ' . $r['description']), $q)) { continue; }
+        if ($q !== '' && !str_contains(mb_strtolower($r['title'] . ' ' . $r['reference'] . ' ' . $r['place_text'] . ' ' . $r['description'] . ' ' . ($r['fonds'] ?? '') . ' ' . ($r['series'] ?? '')), $q)) { continue; }
+        if (function_exists('recueil_hidden_in_kiosk') && recueil_hidden_in_kiosk($pdo, $r)) { continue; } // 🔐 mode consultation : pas les recueils non communicables
         $cover = recueil_cover($pdo, $id);
         $out[] = ['id' => $id, 'title' => $r['title'], 'icon' => $r['icon'], 'reference' => $r['reference'], 'place_text' => $r['place_text'], 'date_text' => $r['date_text'],
             'description' => $r['description'], 'updated_at' => $r['updated_at'], 'cover' => $cover,
@@ -76,6 +77,7 @@ function recueil_cover(PDO $pdo, int $id): ?array
 function recueil_detail(PDO $pdo, int $id): array
 {
     $r = recueil_row($pdo, $id);
+    if (function_exists('recueil_hidden_in_kiosk') && recueil_hidden_in_kiosk($pdo, $r)) { throw new RuntimeException('Mode consultation : ce recueil n’est pas communicable.'); } // 🔐
     $r['id'] = (int) $r['id'];
     $summary = json_decode((string) $r['summary'], true);
     $r['summary'] = is_array($summary) ? $summary : null;
@@ -113,7 +115,10 @@ function recueil_detail(PDO $pdo, int $id): array
         if ($p['best_image_id'] && $p['best_image_id'] !== $chosen) { $p['best_image_id'] = null; } // image retenue retirée depuis
     }
     unset($p);
-    return ['recueil' => $r, 'versions' => $versions, 'pages' => $pages, 'images' => $images, 'links' => recueil_links_resolved($pdo, $id, $pages)];
+    $out = ['recueil' => $r, 'versions' => $versions, 'pages' => $pages, 'images' => $images, 'links' => recueil_links_resolved($pdo, $id, $pages)];
+    if (function_exists('recueil_etat_decorate')) { $out = recueil_etat_decorate($pdo, $out); } // 🗂 l'état de chaque page (lib/recueil_etat.php)
+    if (function_exists('recueil_fiche_decorate')) { $out = recueil_fiche_decorate($pdo, $out); } // 🏛 la fiche d'identité (lib/recueil_fiche.php)
+    return $out;
 }
 
 function save_recueil(PDO $pdo, array $data): array
@@ -132,6 +137,8 @@ function save_recueil(PDO $pdo, array $data): array
         $name = mb_substr(safe_text($data['first_version'] ?? ''), 0, 120) ?: 'Photos ' . date('Y');
         $pdo->prepare('INSERT INTO recueil_versions(recueil_id, name, position) VALUES(?,?,1)')->execute([$id, $name]);
     }
+    if (function_exists('recueil_etat_save_meta')) { recueil_etat_save_meta($pdo, $id, $data); } // 🗂 numérotation, pages attendues
+    if (function_exists('recueil_fiche_save_meta')) { recueil_fiche_save_meta($pdo, $id, $data); } // 🏛 service, fonds, liens, communicabilité…
     if (array_key_exists('cover_media_id', $data)) {
         $cover = safe_int($data['cover_media_id'] ?? 0);
         if ($cover) { $m = $pdo->prepare("SELECT 1 FROM media WHERE id=? AND media_type='image'"); $m->execute([$cover]); if (!$m->fetchColumn()) { throw new RuntimeException('Choisis une image pour la couverture.'); } }
@@ -165,6 +172,7 @@ function delete_recueil(PDO $pdo, array $data): array
     $media = $pdo->prepare('SELECT DISTINCT media_id FROM recueil_images WHERE recueil_id=?'); $media->execute([$id]);
     $mediaIds = array_map('intval', $media->fetchAll(PDO::FETCH_COLUMN));
     $pdo->prepare("DELETE FROM family_collection_media WHERE collection_type='recueil' AND collection_id=?")->execute([$id]);
+    if (function_exists('recueil_toc_ensure')) { recueil_toc_ensure($pdo); $pdo->prepare('DELETE FROM recueil_toc WHERE recueil_id=?')->execute([$id]); } // 📑 son sommaire
     $pdo->prepare('DELETE FROM recueils WHERE id=?')->execute([$id]);
     $deleted = 0;
     if (!empty($data['delete_media']) && $mediaIds) {
@@ -343,6 +351,7 @@ function recueil_page_to_index(PDO $pdo, int $rid, int $id, int $index): void
 function delete_recueil_page(PDO $pdo, array $data): array
 {
     $id = safe_int($data['id'] ?? 0); $rid = recueil_page_owner($pdo, $id);
+    if (function_exists('recueil_toc_forget_page')) { recueil_toc_forget_page($pdo, $id); } // 📑 le sommaire se resserre
     $pdo->prepare('UPDATE recueil_images SET page_id=NULL WHERE page_id=?')->execute([$id]);
     // Un rattachement « de telle page à telle page » garde sa plage : il se resserre sur les pages qui restent.
     // Un rattachement qui ne visait que cette page (une page, une ligne de son tableau) n'a plus d'objet
@@ -606,8 +615,8 @@ function recueil_media_targets(PDO $pdo, string $type, string $key): array
             }
         } elseif ($type === 'investigation') {
             $add("investigation:$id:0", '📂 Racine de l’enquête');
-            $s = $pdo->prepare('SELECT id, name FROM investigation_media_folders WHERE investigation_id=? ORDER BY name COLLATE NOCASE'); $s->execute([$id]);
-            foreach ($s as $f) { $add("investigation:$id:" . $f['id'], '📁 ' . $f['name']); }
+            $s = $pdo->prepare('SELECT * FROM investigation_media_folders WHERE investigation_id=? ORDER BY name COLLATE NOCASE'); $s->execute([$id]);
+            foreach ($s as $f) { $add("investigation:$id:" . $f['id'], (($f['icon'] ?? '') ?: '📁') . ' ' . $f['name']); }
         } elseif ($type === 'atelier_project') {
             $add("atelier:$id:0", '📂 Racine du projet');
             $s = $pdo->prepare('SELECT id, name FROM atelier_folders WHERE project_id=? ORDER BY position, id'); $s->execute([$id]);
@@ -740,4 +749,119 @@ function recueil_clean_table(array $t): ?array
         if (isset($rowIds[$r], $colIds[$c]) && ($rs > 1 || $cs > 1)) { $merges[] = ['r' => $r, 'c' => $c, 'rs' => $rs, 'cs' => $cs]; }
     }
     return ['v' => 1, 'locked' => !empty($t['locked']), 'cols' => $cols, 'rows' => $rows, 'merges' => $merges];
+}
+
+/* ─────────── 📚 Recueils depuis Documents (maquette docs/design/documents-lies-recueils.html, partie 3) ───────────
+ * Les documents restent à leur place dans Documents : le recueil les regroupe, il ne les déplace pas.
+ * Une page de recueil = une image ; un document en plusieurs pages (📑 lib/media_pages.php) y entre avec toutes ses pages, dans l'ordre. */
+
+/** le rang (1, 2, 3…) de chaque page de chaque recueil, et l'image montrée pour chaque page */
+function recueil_doc_pages(PDO $pdo): array
+{
+    $pages = []; $rank = []; $n = [];
+    foreach ($pdo->query('SELECT id, recueil_id, best_image_id FROM recueil_pages ORDER BY recueil_id, position, id') as $p) {
+        $rid = (int) $p['recueil_id']; $n[$rid] = ($n[$rid] ?? 0) + 1;
+        $pages[$rid][] = ['id' => (int) $p['id'], 'num' => $n[$rid], 'best' => $p['best_image_id'] !== null ? (int) $p['best_image_id'] : 0];
+        $rank[(int) $p['id']] = [$rid, $n[$rid]];
+    }
+    return [$pages, $rank];
+}
+
+/** pour la liste de Documents : les recueils, et pour chaque document les recueils où il est (avec sa page) */
+function recueil_doc_index(PDO $pdo): array
+{
+    try {
+        [$pages, $rank] = recueil_doc_pages($pdo);
+        $list = [];
+        foreach ($pdo->query('SELECT id, title, icon, reference FROM recueils ORDER BY title COLLATE NOCASE, id') as $r) {
+            $list[] = ['id' => (int) $r['id'], 'title' => mb_substr((string) $r['title'], 0, 200), 'icon' => (string) ($r['icon'] ?: '📚'), 'reference' => mb_substr((string) $r['reference'], 0, 120), 'pages' => count($pages[(int) $r['id']] ?? [])];
+        }
+        $of = [];
+        foreach ($pdo->query("SELECT media_id, page_id FROM recueil_images WHERE page_id IS NOT NULL AND role='page' ORDER BY id") as $i) {
+            $pr = $rank[(int) $i['page_id']] ?? null; if (!$pr) { continue; }
+            $mid = (int) $i['media_id']; $k = $pr[0] . ':' . $pr[1];
+            if (isset($of[$mid][$k]) || count($of[$mid] ?? []) >= 8) { continue; }
+            $of[$mid][$k] = ['id' => $pr[0], 'num' => $pr[1]];
+        }
+        return ['recueils' => $list, 'of' => array_map('array_values', $of)];
+    } catch (Throwable $_) { return ['recueils' => [], 'of' => []]; }
+}
+
+/** la page d'un document dans chaque recueil (le document, ou une autre page du même document), avec la page d'avant et la suivante */
+function recueil_places_of(PDO $pdo, int $mediaId): array
+{
+    $ids = function_exists('media_page_ids') && function_exists('media_page_set_of') ? media_page_ids($pdo, media_page_set_of($pdo, $mediaId)) : [];
+    if (!in_array($mediaId, $ids, true)) { array_unshift($ids, $mediaId); }
+    [$pages, $rank] = recueil_doc_pages($pdo);
+    $img = $pdo->query("SELECT id, page_id, media_id, role, version_id FROM recueil_images WHERE page_id IS NOT NULL ORDER BY (role='page') DESC, version_id DESC, position, id")->fetchAll();
+    $shown = []; $byId = [];
+    foreach ($img as $i) { $byId[(int) $i['id']] = $i; $shown[(int) $i['page_id']] ??= (int) $i['media_id']; }
+    foreach ($pages as $list) { foreach ($list as $p) { if ($p['best'] && isset($byId[$p['best']])) { $shown[$p['id']] = (int) $byId[$p['best']]['media_id']; } } }
+    $titles = []; foreach ($pdo->query('SELECT id, title, icon, reference FROM recueils') as $r) { $titles[(int) $r['id']] = $r; }
+    $out = []; $seen = [];
+    // le document lui-même d'abord ; une autre page du même document seulement s'il n'est pas dans ce recueil
+    usort($img, static fn($x, $y) => ((int) $y['media_id'] === $mediaId) <=> ((int) $x['media_id'] === $mediaId));
+    foreach ($img as $i) {
+        if ($i['role'] !== 'page' || !in_array((int) $i['media_id'], $ids, true)) { continue; }
+        $pr = $rank[(int) $i['page_id']] ?? null; if (!$pr || isset($seen[$pr[0]])) { continue; } // un recueil : sa première page où est le document
+        $seen[$pr[0]] = true; [$rid, $num] = $pr; $list = $pages[$rid];
+        $nb = static fn($k) => isset($list[$k]) ? ['page_id' => $list[$k]['id'], 'num' => $list[$k]['num'], 'media_id' => $shown[$list[$k]['id']] ?? 0] : null;
+        $r = $titles[$rid] ?? ['title' => '', 'icon' => '📚', 'reference' => ''];
+        $out[] = ['recueil_id' => $rid, 'title' => (string) $r['title'], 'icon' => (string) ($r['icon'] ?: '📚'), 'reference' => (string) $r['reference'], 'page_id' => (int) $i['page_id'], 'num' => $num,
+            'chapters' => function_exists('recueil_toc_path') ? array_column(recueil_toc_path($pdo, $rid, $num), 'title') : [],
+            'total' => count($list), 'other_page' => (int) $i['media_id'] !== $mediaId, 'prev' => $nb($num - 2), 'next' => $nb($num)];
+    }
+    usort($out, static fn($a, $b) => strcasecmp($a['title'], $b['title']));
+    return ['places' => $out];
+}
+
+/**
+ * « 📚 Faire un recueil avec ces documents » (recueil_id = 0 : nom, cote, lieu, années) ou « 📚 Ajouter à un recueil… » :
+ * chaque document devient une page à la fin (dans l'ordre donné), avec ses autres pages s'il en a. Seulement les images ;
+ * un document déjà dans ce recueil n'est pas remis. Renvoie de quoi défaire (pages et images créées).
+ */
+function recueil_from_documents(PDO $pdo, array $data): array
+{
+    $rid = safe_int($data['recueil_id'] ?? 0);
+    $given = array_values(array_unique(array_filter(array_map('intval', is_array($data['media_ids'] ?? null) ? $data['media_ids'] : []))));
+    if (!$given) { throw new RuntimeException('Choisis au moins un document.'); }
+    if (count($given) > 2000) { throw new RuntimeException('Trop de documents d’un coup (2000 au plus).'); }
+    $all = [];
+    foreach ($given as $mid) {
+        $set = function_exists('media_page_set_of') ? media_page_ids($pdo, media_page_set_of($pdo, $mid)) : [];
+        foreach ($set ?: [$mid] as $x) { $all[$x] = true; }
+    }
+    $isImg = $pdo->prepare("SELECT media_type FROM media WHERE id=?");
+    $images = []; $notImages = 0;
+    foreach (array_keys($all) as $mid) { $isImg->execute([$mid]); $t = $isImg->fetchColumn(); if ($t === false) { continue; } if ($t !== 'image') { $notImages++; continue; } $images[] = $mid; }
+    if (!$images) { throw new RuntimeException('Un recueil se fait avec des images (photos de pages) : aucun de ces documents n’en est une.'); }
+    $created = false;
+    if (!$rid) { $rid = save_recueil($pdo, $data)['id']; $created = true; } else { recueil_row($pdo, $rid); }
+    $in = $pdo->prepare("SELECT 1 FROM recueil_images WHERE recueil_id=? AND media_id=? AND page_id IS NOT NULL"); $skip = 0; $todo = [];
+    foreach ($images as $mid) { $in->execute([$rid, $mid]); if ($in->fetchColumn()) { $skip++; } else { $todo[] = $mid; } }
+    $v = $pdo->prepare('SELECT id FROM recueil_versions WHERE recueil_id=? ORDER BY position, id LIMIT 1'); $v->execute([$rid]); $vid = (int) $v->fetchColumn();
+    if (!$vid) { $vid = save_recueil_version($pdo, ['recueil_id' => $rid, 'name' => 'Photos ' . date('Y')])['id']; }
+    $maxP = $pdo->prepare('SELECT COALESCE(MAX(id),0) FROM recueil_pages'); $maxP->execute(); $p0 = (int) $maxP->fetchColumn();
+    $maxI = $pdo->prepare('SELECT COALESCE(MAX(id),0) FROM recueil_images'); $maxI->execute(); $i0 = (int) $maxI->fetchColumn();
+    $added = $todo ? recueil_add_images($pdo, ['recueil_id' => $rid, 'version_id' => $vid, 'mode' => 'new_pages', 'media_ids' => $todo])['added'] : 0;
+    $pg = $pdo->prepare('SELECT id FROM recueil_pages WHERE recueil_id=? AND id>?'); $pg->execute([$rid, $p0]);
+    $im = $pdo->prepare('SELECT id FROM recueil_images WHERE recueil_id=? AND id>?'); $im->execute([$rid, $i0]);
+    $title = (string) recueil_row($pdo, $rid)['title'];
+    return ['id' => $rid, 'title' => $title, 'created' => $created, 'added' => $added, 'skipped' => $skip, 'not_images' => $notImages,
+        'page_ids' => array_map('intval', $pg->fetchAll(PDO::FETCH_COLUMN)), 'image_ids' => array_map('intval', $im->fetchAll(PDO::FETCH_COLUMN))];
+}
+
+/** ↶ Annuler « Ajouter à un recueil » : retire les pages et les images ajoutées (les documents restent dans Documents) */
+function recueil_undo_documents(PDO $pdo, array $data): array
+{
+    $rid = safe_int($data['recueil_id'] ?? 0); recueil_row($pdo, $rid);
+    $imgs = array_values(array_filter(array_map('intval', is_array($data['image_ids'] ?? null) ? $data['image_ids'] : [])));
+    $pages = array_values(array_filter(array_map('intval', is_array($data['page_ids'] ?? null) ? $data['page_ids'] : [])));
+    $mids = []; $gm = $pdo->prepare('SELECT media_id FROM recueil_images WHERE id=? AND recueil_id=?'); $di = $pdo->prepare('DELETE FROM recueil_images WHERE id=? AND recueil_id=?');
+    foreach ($imgs as $i) { $gm->execute([$i, $rid]); $m = $gm->fetchColumn(); if ($m === false) { continue; } $mids[] = (int) $m; $di->execute([$i, $rid]); }
+    $empty = $pdo->prepare('SELECT COUNT(*) FROM recueil_images WHERE page_id=?'); $removed = 0;
+    foreach ($pages as $p) { $empty->execute([$p]); if ((int) $empty->fetchColumn() === 0) { $s = $pdo->prepare('SELECT 1 FROM recueil_pages WHERE id=? AND recueil_id=?'); $s->execute([$p, $rid]); if ($s->fetchColumn()) { delete_recueil_page($pdo, ['id' => $p]); $removed++; } } }
+    recueil_unlink_media($pdo, $rid, $mids);
+    recueil_touch($pdo, $rid);
+    return ['removed' => count($mids), 'pages_removed' => $removed];
 }

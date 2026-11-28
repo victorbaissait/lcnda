@@ -5,7 +5,7 @@ declare(strict_types=1);
  * 🌍 Le monde autour : la vie d'un ancêtre à côté des grands événements (guerres, épidémies, lois, inventions, régimes)
  * et de l'histoire locale (département, commune).
  *
- * - assets/data/monde-autour.json : la liste livrée avec l'app (331 événements, 1500–1960 surtout, source de chacun) ;
+ * - assets/data/monde-autour.json : la liste livrée avec l'app (351 événements, 1350–1970, dont des crises locales, source de chacun) ;
  *   ses « crises » (crisis: true) sont aussi la liste « Épidémies, guerres, hivers terribles » (lib/heritage_more.php,
  *   historical_crises()) : une seule liste pour toute l'app.
  * - table history_events (structure n°50) : mes événements à moi (une fête, une inondation, un incendie au village…),
@@ -28,12 +28,21 @@ function world_events_bundled(): array
     return $doc;
 }
 
-/** Les crises de « Épidémies, guerres, hivers terribles » : [début, fin, sorte, titre, portée, description] */
-function historical_crises(): array
+/** Les crises de « Épidémies, guerres, hivers terribles » : [début, fin, sorte, titre, portée, description, à moi ?, {src, url}]
+ *  avec $pdo : aussi mes événements à moi d'une sorte « crise » (épidémie, famine, hiver, guerre, crise : « incendie de Malvialle, 1789 ») */
+function historical_crises(?PDO $pdo = null): array
 {
     $out = [];
     foreach (world_events_bundled()['events'] as $e) {
-        if (!empty($e['crisis'])) { $out[] = [(int) $e['from'], (int) $e['to'], (string) $e['cat'], (string) $e['title'], (string) $e['scope'], (string) $e['desc']]; }
+        if (!empty($e['crisis'])) { $out[] = [(int) $e['from'], (int) $e['to'], (string) $e['cat'], (string) $e['title'], (string) $e['scope'], (string) $e['desc'], false, ['src' => (string) ($e['src'] ?? ''), 'url' => (string) ($e['url'] ?? '')]]; }
+    }
+    if ($pdo) {
+        foreach (world_own_as_events($pdo) as $e) {
+            if (!in_array($e['cat'], ['épidémie', 'famine', 'hiver', 'guerre', 'crise'], true)) { continue; }
+            // la portée : la commune (son département, faute de mieux pour les décès d'ailleurs), le département, la France
+            $scope = $e['reach'] === 'monde' || $e['reach'] === 'france' ? 'France' : ($e['dept'] !== '' ? $e['dept'] : ($e['scope'] ?: 'France'));
+            $out[] = [(int) $e['from'], (int) $e['to'], (string) $e['cat'], (string) $e['title'], $scope, (string) $e['desc'], (int) $e['own'], ['src' => (string) $e['src'], 'url' => (string) $e['url']]];
+        }
     }
     return $out;
 }

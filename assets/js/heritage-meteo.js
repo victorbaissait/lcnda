@@ -13,6 +13,8 @@
     const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && k in v ? v[k] : m)));
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP || {};
+    // ⚠ la vérification « installé ? » a échoué (serveur) : on le DIT (pas « pas installé » en silence), une fois toutes les 30 s au plus
+    const statusErr = e => { const now = Date.now(); if (now - (statusErr.at || 0) < 30000) return; statusErr.at = now; A().toast?.(i18n('Impossible de vérifier si ces données sont installées : {e}', {e: e?.message || String(e)}), 'error'); };
     const UI = () => window.LCNDA_UI || {};
     const esc = v => (A().escapeHtml ? A().escapeHtml(String(v ?? '')) : String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c])));
     const api = (...a) => A().api(...a);
@@ -21,7 +23,7 @@
     const PACK_URLS = {complet: '', europe: '', socle: ''};
     const KINDS = [['BIRT', 'Naissance', ['BIRT']], ['BAPM', 'Baptême', ['BAPM', 'CHR', 'BAPT']], ['MARR', 'Mariage', ['MARR', 'MARB', 'MARC', 'MARL', 'MARS', 'ENGA']], ['DEAT', 'Décès', ['DEAT']],
         ['BURI', 'Inhumation', ['BURI', 'CREM']], ['CENS', 'Recensement', ['CENS']], ['TRAVEL', 'Départ, voyage', ['EMIG', 'IMMI', 'TRAV', 'TRAVEL', 'RESI']], ['OTHER', 'Tous les autres', []]];
-    const DEF = {show: 'always', open: 'window', temp: 'c', rain: 'mm', phrase: true, normal: true, sources: true, block: false, curious: true, today: true, coarse: false,
+    const DEF = {show: 'always', open: 'window', temp: 'c', rain: 'mm', phrase: true, normal: true, sources: true, block: false, curious: true, today: true, coarse: false, plus: true,
         kinds: {BIRT: true, BAPM: true, MARR: true, DEAT: true, BURI: true, CENS: false, TRAVEL: false, OTHER: false}, hidePersons: [], hideEvents: []};
     const clone = o => JSON.parse(JSON.stringify(o));
     function settings() {
@@ -99,16 +101,20 @@
     function badge(r) {
         const B = UI().badge || ((t, k) => `<span class="ui-badge is-${k}">${esc(t)}</span>`);
         if (r.reliability === 'measured') return B(i18n('Mesuré'), 'green', {title: i18n('Station à moins de 15 km (et moins de 150 m d’écart d’altitude)')});
-        if (r.reliability === 'station') return B(i18n('Station à {n} km', {n: Math.round(r.station?.km || 0)}), 'yellow', {title: i18n('Station entre 15 et 40 km : indicatif (la pluie change vite d’un village à l’autre)')});
+        if (r.reliability === 'station') return B(i18n('Station à {n} km', {n: Math.round(r.station?.km || 0)}), 'yellow', {title: (r.station?.km || 0) > 40 ? i18n('Station entre 40 et 150 km (pack du monde, là où les stations sont rares) : une idée du temps de la région') : i18n('Station entre 15 et 40 km : indicatif (la pluie change vite d’un village à l’autre)')});
         if (r.reliability === 'estimated') return B(i18n('Estimé (carreau ≈ 30 km)'), 'yellow', {title: i18n('Réanalyse ERA5 : aucune station à moins de 40 km')});
         if (r.reliability === 'coarse') return B(i18n('Reconstitution grossière (≈ 100 km)'), 'grey', {title: i18n('Réanalyse 20CR (1836–1939) : une idée du temps, pas une mesure')});
         return '';
     }
     const badgeShort = r => (r.reliability === 'station' ? (UI().badge ? UI().badge(`${Math.round(r.station?.km || 0)} km`, 'yellow') : '') : badge(r));
     const COUNTRY = {FR: 'France', BE: 'Belgique', CH: 'Suisse', LU: 'Luxembourg', IT: 'Italie', NL: 'Pays-Bas', ES: 'Espagne', DE: 'Allemagne', PT: 'Portugal', GB: 'Royaume-Uni', PL: 'Pologne', DK: 'Danemark', CZ: 'Tchéquie', SK: 'Slovaquie'};
-    const emptyText = r => i18n(r.why === 'nodata' ? 'Les données météo ne sont pas installées.' : r.why === 'place' ? 'Le lieu n’a pas de coordonnées : place-le sur la carte pour avoir sa météo.'
+    let regionNames = null; // les autres pays (packs du monde) : le nom donné par le navigateur
+    const countryName = c => COUNTRY[c] || (() => { try { regionNames = regionNames || new Intl.DisplayNames(['fr'], {type: 'region'}); return regionNames.of(c) || c; } catch (_) { return c; } })();
+    // 🧺 une date hors des données installées ici (trop tôt, ou pas encore dans les packs) : dire de quand à quand c'est possible
+    const outOfSpan = r => { const y = Number(String(r?.date || '').slice(0, 4)); return r?.why === 'far' && r.span && y && (y < r.span.from || y > r.span.to) ? y : 0; };
+    const emptyText = r => outOfSpan(r) ? i18n(outOfSpan(r) > r.span.to ? 'Pas encore de météo pour {year} ici : les données installées couvrent ce lieu de {from} à {to}.' : 'Pas de météo pour {year} ici : les données installées couvrent ce lieu de {from} à {to}.', {year: String(outOfSpan(r)), from: String(r.span.from), to: String(r.span.to)}) : i18n(r.why === 'nodata' ? 'Les données météo ne sont pas installées.' : r.why === 'place' ? 'Le lieu n’a pas de coordonnées : place-le sur la carte pour avoir sa météo.'
         : r.why === 'date' ? 'La date n’est pas connue au jour près.'
-        : r.why === 'out' ? 'Pas de météo pour ce lieu : les données installées couvrent la France, la Belgique, la Suisse et le Luxembourg (le pack Europe ajoute le reste).' : r.first ? 'Pas de relevé connu près d’ici avant {year} (première station : {name}).' : 'Pas de relevé connu près d’ici avant {year}.', {year: String(r.first?.year || 1836), name: r.first?.name || ''});
+        : r.why === 'out' ? 'Pas de météo pour ce lieu : aucune station connue à moins de 150 km dans les données installées (Réglages → 🌦 Météo d’autrefois : le pack Europe et les packs du monde ajoutent les autres pays).' : r.first ? 'Pas de relevé connu près d’ici avant {year} (première station : {name}).' : 'Pas de relevé connu près d’ici avant {year}.', {year: String(r.first?.year || 1836), name: r.first?.name || ''});
     const sourcesLine = r => (r.sources || []).map(x => { const m = x.mention || x.nom || ''; return `${x.id === 'era5' && r.hours_source && r.reliability !== 'estimated' ? 'Heures : ' : ''}${m}${x.licence && !/Copernicus|20th/.test(m) ? ', ' + x.licence : ''}`; }).join(' · ');
     const shown = (r, s = settings()) => r && r.ok && (r.reliability !== 'coarse' || s.coarse);
 
@@ -226,6 +232,7 @@
             const where = r.station?.short ? ` à ${r.station.short}` : '';
             parts.push(`<div class="wx-norm"><span aria-hidden="true">${near ? '〰️' : a < 0 ? '📉' : '📈'}</span><span>${near ? '<b>Proche de la normale</b>' : `<b>${esc(dT(a, s))} ${a < 0 ? 'sous' : 'au-dessus de'} la normale</b>`} ${MONTHS[r.normal.month - 1] && /^[aeiouéo]/.test(MONTHS[r.normal.month - 1]) ? 'd’' : 'de '}${esc(MONTHS[r.normal.month - 1])} ${esc(r.normal.period)}${esc(where)} (min. ${esc(T(r.normal.tn, s))}, max. ${esc(T(r.normal.tx, s))}).</span></div>`);
         }
+        if (s.plus && r.plus) parts.push(plusHtml(r, s, {compact}));
         if (!compact) {
             const rows = [['Fiabilité', badge(r)]];
             if (r.station) rows.push(['Station', esc(`${r.station.name} · à ${Math.round(r.station.km)} km${r.station.alt != null ? `, ${metres(r.station.alt)}` : ''}${r.alt ? ` — ton lieu ${r.alt.from === 'carte' ? '≈ ' : ''}${metres(r.alt.m)}` : ''}`)]);
@@ -238,9 +245,46 @@
         } else {
             parts.push(`<div class="wx-fold-meta">${badge(r)}<span class="muted">${esc([r.station ? `${r.station.short}, ${Math.round(r.station.km)} km` : '', r.normal?.anomaly != null && Math.abs(r.normal.anomaly) >= 1 ? `${dT(r.normal.anomaly, s)} ${r.normal.anomaly < 0 ? 'sous' : 'au-dessus de'} la normale` : ''].filter(Boolean).join(' · '))}</span></div>`);
         }
-        parts.push(`<div class="wx-links">${compact ? `<button type="button" class="link-button" data-wx-full="${Number(r.event_id) || ''}">Tout le détail…</button>` : ''}<button type="button" class="link-button" data-wx-about>↗ Source</button><button type="button" class="link-button" data-wx-map>🗺 Voir sur la carte</button>${r.place_id && !kiosk() && !compact ? `<button type="button" class="link-button" data-wx-place-edit="${Number(r.place_id)}">⛰ Altitude du lieu</button>` : ''}${r.event_id ? `<button type="button" class="icon-button wx-more" data-wx-more title="Plus d’actions" aria-label="Plus d’actions">⋯</button>` : ''}</div>`);
+        const cx = !compact && !kiosk() && ext.connexions && ext.connexions.enabled?.() !== false ? `<button type="button" class="link-button" data-wx-cxtake>🧺 ${esc(i18n('Au panier'))}</button><button type="button" class="link-button" data-wx-cxput>📍 ${esc(i18n('Mettre dans…'))}</button>` : '';
+        parts.push(`<div class="wx-links">${cx}${compact ? `<button type="button" class="link-button" data-wx-full="${Number(r.event_id) || ''}">Tout le détail…</button>` : ''}<button type="button" class="link-button" data-wx-about>↗ Source</button><button type="button" class="link-button" data-wx-map>🗺 Voir sur la carte</button>${r.place_id && !kiosk() && !compact ? `<button type="button" class="link-button" data-wx-place-edit="${Number(r.place_id)}">⛰ Altitude du lieu</button>` : ''}${r.event_id ? `<button type="button" class="icon-button wx-more" data-wx-more title="Plus d’actions" aria-label="Plus d’actions">⋯</button>` : ''}</div>`);
         if (!compact || s.sources) parts.push(`<div class="wx-src">${esc(sourcesLine(r))}</div>`); // la ligne des sources reste toujours dans le détail (licences)
         return parts.join('');
+    }
+    /* les compléments Copernicus (packs « plus-… », lib/meteo_plus.php) : une phrase par complément, les sources repliées */
+    const utciWord = v => (v > 46 ? 'chaleur extrême' : v > 38 ? 'chaleur très forte' : v > 32 ? 'forte chaleur' : v > 26 ? 'chaleur modérée' : v >= 9 ? 'pas de gêne' : v >= 0 ? 'un peu de froid' : v >= -13 ? 'froid modéré' : v >= -27 ? 'froid fort' : v >= -40 ? 'froid très fort' : 'froid extrême');
+    const nf = (v, d = 0) => Number(v).toLocaleString('fr-FR', {maximumFractionDigits: d});
+    function plusLines(r, s = settings()) {
+        const p = r.plus || {}, out = [];
+        const sn = p.snow;
+        if (sn && (sn.sh > 0 || sn.sf > 0)) {
+            out.push(['❄️', sn.sh > 0 ? `<b>${esc(i18n('Neige au sol : {n} cm', {n: nf(sn.sh)}))}</b>${sn.sf > 0 ? esc(i18n(' ; il en est tombé ≈ {n} cm ce jour-là', {n: nf(sn.sf)})) : ''}.`
+                : esc(i18n('Il est tombé ≈ {n} cm de neige ce jour-là (pas de neige au sol le matin).', {n: nf(sn.sf)})), 'era5land']);
+        }
+        const fe = p.feel;
+        if (fe) {
+            if (fe.ux != null && fe.ux > 26) out.push(['🥵', esc(i18n('Ressenti au plus chaud : {t} ({w}).', {t: T(fe.ux, s), w: i18n(utciWord(fe.ux))})), 'utci']);
+            if (fe.un != null && fe.un < 0) out.push(['🥶', esc(i18n('Ressenti au plus froid : {t} ({w}).', {t: T(fe.un, s), w: i18n(utciWord(fe.un))})), 'utci']);
+            if (!(fe.ux > 26) && !(fe.un < 0) && fe.ux != null && fe.un != null) out.push(['🙂', esc(i18n('Ressenti : de {a} à {b} (pas de gêne).', {a: T(fe.un, s), b: T(fe.ux, s)})), 'utci']);
+        }
+        const rv = p.river;
+        if (rv && rv.mean > 0) {
+            const ratio = rv.q / rv.mean;
+            const state = rv.q >= rv.p99 ? 'en crue' : rv.q >= rv.p90 ? 'hautes eaux' : rv.q <= rv.p10 ? 'basses eaux' : '';
+            const cmp = ratio >= 1.5 ? i18n('{n} fois son débit moyen', {n: nf(ratio, 1)}) : ratio <= 0.67 ? i18n('{n} % de son débit moyen', {n: nf(Math.round(ratio * 100))}) : i18n('proche de son débit moyen');
+            out.push([state === 'en crue' ? '🌊' : '〰️', `${esc(i18n('La grande rivière la plus proche (à {km} km) : {q} m³/s, {cmp}', {km: nf(Math.max(1, Math.round(rv.km))), q: nf(rv.q, rv.q < 10 ? 1 : 0), cmp}))}${state ? ` — <b>${esc(i18n(state))}</b>` : ''}.`, 'glofas']);
+        }
+        const fi = p.fine;
+        if (fi && r.reliability !== 'measured' && (fi.tn != null || fi.tx != null)) {
+            out.push(['🌡', esc(i18n('Au plus près ({src}, carreau ≈ {size} km) : min. {tn}, max. {tx}.', {src: fi.source === 'cerra' ? 'CERRA' : 'ERA5-Land', size: nf(fi.size, 1), tn: T(fi.tn, s), tx: T(fi.tx, s)})), fi.source]);
+        }
+        return out;
+    }
+    function plusHtml(r, s = settings(), {compact = false} = {}) {
+        const lines = plusLines(r, s);
+        if (!lines.length) return '';
+        const srcs = (r.plus.sources || []).filter(x => lines.some(l => l[2] === x.id));
+        const more = !compact && srcs.length ? `<details class="wx-plus-more"><summary>${esc(i18n('▸ Sources des compléments'))}</summary><ul>${srcs.map(x => `<li><b>${esc(x.nom)}</b> — ${esc(x.licence)}${x.mention ? ` — « ${esc(x.mention)} »` : ''}${x.url ? ` <a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(i18n('↗ source'))}</a>` : ''}</li>`).join('')}</ul></details>` : '';
+        return `<div class="wx-plus" data-wx-plus>${lines.map(([icon, html]) => `<div class="wx-norm wx-plus-line"><span aria-hidden="true">${icon}</span><span>${html}</span></div>`).join('')}${more}</div>`;
     }
     async function openDay(id, {result = null} = {}) {
         let r = result;
@@ -265,11 +309,58 @@
         box.addEventListener('click', e => {
             if (e.target.closest('[data-wx-about]')) return openAbout();
             if (e.target.closest('[data-wx-map]')) return openMap(r);
+            if (e.target.closest('[data-wx-cxtake]')) return ext.connexions?.take?.([dayItem(r)]); // 🧺 heritage-connexions.js
+            if (e.target.closest('[data-wx-cxput]')) { close?.(); return ext.connexions?.putInto?.([dayItem(r)]); }
             const pe = e.target.closest('[data-wx-place-edit]'); if (pe) return editPlaceAltitude(Number(pe.dataset.wxPlaceEdit), () => { cache.clear(); close?.(); openDay(r.event_id); A().state?.module === 'personnes' && A().refreshScreen?.(); });
             const full = e.target.closest('[data-wx-full]'); if (full) return openDay(Number(full.dataset.wxFull));
             const more = e.target.closest('[data-wx-more]'); if (more) UI().menuAt?.(more, menuItems(r, {after: () => close?.()}));
         });
     }
+    /* ═════════════════ 🧺 Prendre la météo d'un jour (heritage-connexions.js) : des infos précises, sourcées ═════════════════ */
+    const strip = h => { const d = document.createElement('div'); d.innerHTML = h; return (d.textContent || '').replace(/\s+/g, ' ').trim(); };
+    function factsOf(r, s = settings()) {
+        const lk = look(r, s), d = r.day || {}, out = [], url = (r.sources || []).map(x => x.url).find(Boolean) || '', src = sourcesLine(r);
+        out.push({label: i18n('Le temps'), value: `${lk.icon} ${lk.title}. ${lk.desc}`.trim()});
+        if (d.tn != null) out.push({label: i18n('Température la plus basse'), value: T(d.tn, s)});
+        if (d.tx != null) out.push({label: i18n('Température la plus haute'), value: T(d.tx, s)});
+        if (d.rr != null) out.push({label: i18n('Pluie'), value: R(d.rr, s)});
+        if (d.sn > 0) out.push({label: i18n('Neige'), value: `${d.sn} cm`});
+        if (r.normal?.anomaly != null) out.push({label: i18n('Par rapport à la normale'), value: Math.abs(r.normal.anomaly) < 1 ? i18n('proche de la normale') : `${dT(r.normal.anomaly, s)} ${r.normal.anomaly < 0 ? i18n('sous') : i18n('au-dessus de')} ${i18n('la normale')} (${r.normal.period})`});
+        plusLines(r, s).forEach(([, html]) => out.push({label: i18n('Complément'), value: strip(html)}));
+        out.push({label: i18n('Fiabilité'), value: [strip(badge(r)), r.station ? i18n('station {n} à {k} km', {n: r.station.name, k: Math.round(r.station.km)}) : r.cell ? i18n('carreau {s}', {s: r.cell.source === '20cr' ? '20CR (≈ 100 km)' : 'ERA5 (≈ 30 km)'}) : ''].filter(Boolean).join(' · ')});
+        return {facts: out.map(f => ({...f, url, source: src})), source: src, url};
+    }
+    function dayItem(r) {
+        const f = factsOf(r), title = `🌦 ${i18n('Météo du {d}', {d: r.date ? dayLong(r.date) : ''})}${r.place ? ` · ${r.place}` : ''}`;
+        return {kind: 'data', title, value: f.facts.map(x => `${x.label} : ${x.value}`).join(' · '), data: {facts: f.facts, date: r.date, place: r.place}, origin: {label: `${i18n('Météo d’autrefois')} — ${f.source}`, url: f.url, person_id: Number(r.person_id) || 0}};
+    }
+    async function dayAt(place, date) {
+        const lat = place?.lat ?? place?.latitude, lon = place?.lon ?? place?.longitude;
+        if (lat == null || lon == null) throw new Error(i18n('Le lieu n’a pas de coordonnées : place-le sur la carte pour avoir sa météo.'));
+        const r = await api('meteo_point', {lat, lon, date, country: place.country || '', place: place.name || '', detail: '1'});
+        if (r.installed === false) { const e = new Error(i18n('Les données météo ne sont pas installées.')); e.notInstalled = true; throw e; }
+        const day = r.result || {}; if (!day.ok) throw new Error(emptyText(day));
+        return {...day, date: day.date || date, place: day.place || place.name || ''};
+    }
+    /* « 📥 Prendre depuis… → 🧰 Données → 🌦 Météo d'autrefois » : pour une date et un lieu (ou du… au…), sans fiche */
+    (ext.pickSources = ext.pickSources || []).push({id: 'meteo_jour', icon: '🌦', label: 'Météo d’autrefois', group: 'Le lieu', needs: ['place', 'date'], source: 'Météo d’autrefois (packs installés)',
+        enabled: () => settings().on !== false,
+        installed: async () => { const st = await api('meteo_status'); return Object.values(st.files || {}).some(f => f && f.ok); }, // une erreur remonte : ce n'est pas « pas installé »
+        install: () => openSettings(),
+        fetch: async ctx => { const r = await dayAt(ctx.place, ctx.date); const f = factsOf(r); return {title: `🌦 ${i18n('Météo du {d}', {d: dayLong(r.date)})} · ${r.place}`, ...f}; },
+        range: async (ctx, progress) => {
+            const days = []; for (let t = Date.parse(ctx.from + 'T12:00:00Z'), end = Date.parse(ctx.to + 'T12:00:00Z'); t <= end && days.length < 92; t += 864e5) days.push(new Date(t).toISOString().slice(0, 10));
+            const rows = [], s = settings(); let url = '', source = '';
+            for (let i = 0; i < days.length; i++) {
+                progress?.(i + 1, days.length);
+                try { const r = await dayAt(ctx.place, days[i]), lk = look(r, s), d = r.day || {}, f = factsOf(r, s); url = url || f.url; source = source || f.source;
+                    rows.push([days[i], `${lk.icon} ${lk.title}`, d.tn != null ? T(d.tn, s) : '', d.tx != null ? T(d.tx, s) : '', d.rr != null ? R(d.rr, s) : '', strip(badge(r))]); }
+                catch (e) { if (e.notInstalled) throw e; rows.push([days[i], '—', '', '', '', e.message]); }
+            }
+            if (rows.length && rows.every(x => x[1] === '—') && new Set(rows.map(x => x[5])).size === 1) throw new Error(rows[0][5]); // rien sur toute la période : la raison une fois (ex. « couvrent ce lieu de 1836 à 2025 »)
+            return {columns: [i18n('Jour'), i18n('Temps'), i18n('Min.'), i18n('Max.'), i18n('Pluie'), i18n('Fiabilité')], rows, source, url};
+        }});
+
     /* variante : le panneau qui se déplie sous l'événement */
     async function toggleFold(btn, id) {
         const row = btn.closest('.event-row'), open = row.querySelector('.wx-fold');
@@ -377,7 +468,7 @@
         let d;
         try { d = await api('meteo_person', {id: pid}); } catch (e) { host.innerHTML = A().empty ? A().empty(e.message, {icon: '⛔'}) : ''; return; }
         if (!host.isConnected) return;
-        if (!d.installed) { host.innerHTML = A().empty('Les données météo ne sont pas installées.', {icon: '🌦', action: {label: 'Comment les obtenir', attrs: 'data-wx-howto="socle"'}}); return; }
+        if (!d.installed) { host.innerHTML = A().empty('Les données météo ne sont pas installées.', {icon: '🌦', action: {label: '📦 Installer les données météo', attrs: 'data-wx-goset'}}); return; }
         const evs = (d.events || []).filter(r => !eventHidden(r.event_id, s) && kindOn(r.tag, s, r.type_id, r.type));
         const ok = evs.filter(r => shown(r, s));
         const card = host.closest('.card'); const small = card?.querySelector('.card-title h3'); if (small && !small.querySelector('small')) small.insertAdjacentHTML('beforeend', ` <small>(${ok.length})</small>`);
@@ -406,6 +497,7 @@
         const more = e.target.closest?.('[data-wx-block-more]');
         if (more) { const pid = Number(more.dataset.wxBlockMore); return UI().menuAt?.(more, [...(kiosk() ? [] : [{icon: '🙈', label: 'Masquer la météo de cette personne', run: () => hidePerson(pid)}, '-']), {icon: '⚙️', label: 'Réglages de la météo', run: openSettings}, {icon: '📚', label: 'À propos des données', run: openAbout}]); }
         const how = e.target.closest?.('[data-wx-howto]'); if (how) return openHowTo(how.dataset.wxHowto || 'socle');
+        if (e.target.closest?.('[data-wx-goset]')) return openSettings();
     });
     (ext.afterPerson = ext.afterPerson || []).push(detail => {
         const pid = Number(detail?.person?.id) || 0;
@@ -431,14 +523,37 @@
     /* ═════════════════ M5 : les réglages (Réglages → 🌦 Météo d'autrefois) ═════════════════ */
     const SEG = (key, val, opts) => `<span class="segmented wx-seg" role="group">${opts.map(([v, l]) => `<button type="button" class="${val === v ? 'is-active' : ''}" aria-pressed="${val === v}" data-wx-set="${key}" data-wx-val="${esc(v)}">${esc(l)}</button>`).join('')}</span>`;
     const fmtSize = b => (b >= 1e9 ? `${String(Math.round(b / 1e8) / 10).replace('.', ',')} Go` : b >= 1e6 ? `${Math.round(b / 1e6)} Mo` : `${Math.max(1, Math.round(b / 1e3))} Ko`);
-    const PACKS = [['socle', 'Socle inclus', '1836 à 2025 · France, Belgique, Suisse, Luxembourg · ≈ 300 stations chaque jour, 4 heures par jour depuis 1940 · ≈ 550 Mo'],
+    const PACKS = [['socle', 'Socle', '1836 à 2025 · France, Belgique, Suisse, Luxembourg · ≈ 300 stations chaque jour, 4 heures par jour depuis 1940 · ≈ 550 Mo'],
         ['complet', 'Pack complet', 'Toutes les stations (≈ 14 700), heure par heure depuis 1950 · ≈ 3 Go'],
-        ['europe', 'Pack Europe', 'Stations d’Allemagne, des Pays-Bas, du Danemark, du Royaume-Uni, d’Espagne, de Pologne, de Tchéquie, d’Italie, du Portugal et de Slovaquie + reconstitution 20CR (1836–1939) et ERA5 sur toute l’Europe · ≈ 1,5 à 3,5 Go']];
+        ['europe', 'Pack Europe', 'Stations d’Allemagne, des Pays-Bas, du Danemark, du Royaume-Uni, d’Espagne, de Pologne, de Tchéquie, d’Italie, du Portugal et de Slovaquie + reconstitution 20CR (1836–1939) et ERA5 sur toute l’Europe · ≈ 1,5 à 3,5 Go'],
+        // les packs du monde (NOAA GHCN-Daily) : un par continent, les plus longues séries bien réparties, chaque jour (températures, pluie, neige)
+        ['monde-amerique-nord', 'Amérique du Nord', '≈ 2 500 stations (États-Unis, Canada, Mexique, Amérique centrale, Caraïbes, Groenland) · ≈ 300 Mo'],
+        ['monde-amerique-sud', 'Amérique du Sud', '≈ 400 stations · ≈ 15 Mo'],
+        ['monde-afrique', 'Afrique', '≈ 600 stations · ≈ 25 Mo'],
+        ['monde-asie', 'Asie', '≈ 1 800 stations (avec la Russie à l’est de l’Oural, la Turquie et le Caucase) · ≈ 100 Mo'],
+        ['monde-oceanie', 'Océanie', '≈ 1 000 stations (Australie, Nouvelle-Zélande, îles du Pacifique) · ≈ 50 Mo'],
+        ['monde-europe', 'Europe (hors pack Europe)', '≈ 1 200 stations des pays que le pack Europe n’a pas (Autriche, Scandinavie, Europe de l’Est, Russie jusqu’à l’Oural…) · ≈ 80 Mo'],
+        // les compléments Copernicus (scripts/meteo/meteo_plus.py) : facultatifs, chacun s'installe à part (France, Belgique, Suisse, Luxembourg)
+        ['plus-neige', 'Neige et températures fines', 'ERA5-Land : neige au sol, neige tombée, min. et max. sur des carreaux de ≈ 9 km · 1950 → · ≈ 150 à 300 Mo'],
+        ['plus-cerra', 'Températures très fines', 'CERRA : min. et max. sur des carreaux de ≈ 5,5 km · 1985 → 2021 · ≈ 300 à 600 Mo'],
+        ['plus-ressenti', 'Ressenti thermique', 'UTCI (ERA5-HEAT) : le ressenti le plus chaud et le plus froid de chaque jour, en tenant compte du vent, du soleil et de l’humidité · 1940 → · ≈ 100 Mo'],
+        ['plus-rivieres', 'Débit des rivières', 'GloFAS : le débit des grandes rivières chaque jour (crues, basses eaux) · 1979 → · ≈ 100 à 200 Mo'],
+        ['plus-anciennes', 'Relevés anciens (avant 1836)', 'Les plus vieilles séries de relevés d’Europe, avant le socle (relevés à heures fixes) · quelques Mo']];
+    /* source, licence et page officielle de chaque complément (ligne sous le pack, lien « ↗ source ») */
+    const PLUS_SRC = {'plus-neige': ['ERA5-Land (Copernicus)', 'https://cds.climate.copernicus.eu/datasets/reanalysis-era5-land'],
+        'plus-cerra': ['CERRA (Copernicus)', 'https://cds.climate.copernicus.eu/datasets/reanalysis-cerra-single-levels'],
+        'plus-ressenti': ['ERA5-HEAT, UTCI (Copernicus)', 'https://cds.climate.copernicus.eu/datasets/derived-utci-historical'],
+        'plus-rivieres': ['GloFAS (Copernicus CEMS)', 'https://ewds.climate.copernicus.eu/datasets/cems-glofas-historical'],
+        'plus-anciennes': ['Observations in situ (Copernicus)', 'https://cds.climate.copernicus.eu/datasets/insitu-observations-surface-land']};
+    const PLUS_LIC = {'plus-rivieres': 'Licence CEMS-FLOODS, libre avec mention'};
+    const isWorld = k => String(k).startsWith('monde-');
+    const isPlus = k => String(k).startsWith('plus-');
+    const packName = k => (PACKS.find(p => p[0] === k) || [k, 'Pack'])[1];
     ext.maintenance = ext.maintenance || {};
     ext.maintenance.meteo = async token => {
         const ws = document.getElementById('workspace'); if (!ws) return;
         let st = {files: {}};
-        try { st = await api('meteo_status'); } catch (_) {}
+        try { st = await api('meteo_status'); } catch (e) { statusErr(e); }
         if (token !== undefined && A().state && token !== A().state.workspaceToken) return;
         const draw = () => {
             const s = settings(), K = UI().toggleHtml, C = UI().checkHtml;
@@ -448,10 +563,14 @@
             const dataRows = PACKS.map(([k, name, sub]) => {
                 const f = files[k];
                 const on = f && f.ok;
-                const desc = on ? `${k === 'europe' && f.station_countries?.length ? `Stations : ${f.station_countries.map(c => COUNTRY[c] || c).join(', ')} · ` : ''}${k === 'europe' && f.c20?.n ? `20CR ${f.c20.a}–${f.c20.b} (toute l’Europe) · ` : ''}${f.stations ? A().plural(f.stations, 'station') : ''}${f.cells ? ` · ${A().plural(f.cells, 'carreau', 'carreaux')}` : ''}${f.from ? ` · ${f.from} → ${f.to}` : ''}${f.hours_from ? ` · heures depuis ${f.hours_from}` : ''}${f.relief ? ` · altitudes : ${A().plural(f.relief, 'carré')} de 1°${f.relief_countries?.length ? ` (${f.relief_countries.map(c => COUNTRY[c] || c).join(', ')})` : ''}` : ''} · ${fmtSize(f.size)}${f.fixture ? ' · jeu d’essai fabriqué' : ''}` : sub;
+                const head = k === 'monde-amerique-nord' ? `<div class="wx-data-head"><b>${esc(i18n('Le reste du monde'))}</b><small>${esc(i18n('Un pack par continent (NOAA GHCN-Daily) : chaque jour, températures, pluie et neige des plus longues séries. Là où les stations sont rares, la plus proche jusqu’à 150 km.'))}</small></div>`
+                    : k === 'plus-neige' ? `<div class="wx-data-head"><b>${esc(i18n('Compléments Copernicus (facultatifs)'))}</b><small>${esc(i18n('Chacun s’installe à part et s’ajoute au détail d’un jour : neige, ressenti, rivière, températures plus fines, relevés d’avant 1836. France, Belgique, Suisse, Luxembourg (les relevés anciens : toute l’Europe).'))}</small></div>` : '';
+                const plusSrc = isPlus(k) && PLUS_SRC[k] ? `<small class="wx-plus-src">${esc(i18n('Source : {s} · {l} · citation demandée', {s: PLUS_SRC[k][0], l: i18n(PLUS_LIC[k] || 'CC BY 4.0')}))} <a href="${esc(PLUS_SRC[k][1])}" target="_blank" rel="noopener">${esc(i18n('↗ source'))}</a></small>` : '';
+                const desc = on ? `${isWorld(k) && f.station_countries?.length ? `${A().plural(f.station_countries.length, 'pays', 'pays')} · ` : ''}${k === 'europe' && f.station_countries?.length ? `Stations : ${f.station_countries.map(countryName).join(', ')} · ` : ''}${k === 'europe' && f.c20?.n ? `20CR ${f.c20.a}–${f.c20.b} (toute l’Europe) · ` : ''}${f.stations ? A().plural(f.stations, 'station') : ''}${f.cells ? ` · ${A().plural(f.cells, 'carreau', 'carreaux')}` : ''}${f.from ? ` · ${f.from} → ${f.to}` : ''}${f.hours_from ? ` · heures depuis ${f.hours_from}` : ''}${f.relief ? ` · altitudes : ${A().plural(f.relief, 'carré')} de 1°${f.relief_countries?.length ? ` (${f.relief_countries.map(countryName).join(', ')})` : ''}` : ''} · ${fmtSize(f.size)}${f.fixture ? ' · jeu d’essai fabriqué' : ''}` : sub;
+                const desc1 = desc.replace(/^ · /, '');
                 const acts = on ? (f.removable ? `<button type="button" class="button small secondary" data-wx-remove="${k}">🗑 Supprimer le pack</button>` : '')
-                    : `<button type="button" class="button small secondary" data-wx-howto="${k}">⤓ ${k === 'socle' ? 'Comment l’obtenir' : `Télécharger le ${k === 'complet' ? 'pack complet (≈ 3 Go)' : 'pack Europe (≈ 2 Go)'}`}</button><button type="button" class="button small secondary" data-wx-import="${k}">⤒ Importer le fichier…</button>`;
-                return `<div class="wx-data-row"><span><b>${esc(name)}</b><small>${esc(desc)}</small></span>${UI().badge(on ? 'Installé' : 'Pas installé', on ? 'green' : 'grey')}${acts ? `<span class="wx-acts">${acts}</span>` : ''}</div>`;
+                    : dlActs(k);
+                return `${head}<div class="wx-data-row${isWorld(k) ? ' wx-world' : ''}${isPlus(k) ? ' wx-plus-row' : ''}" data-wx-pack="${esc(k)}"><span><b>${esc(name)}</b><small>${esc(desc1)}</small>${plusSrc}</span>${UI().badge(on ? 'Installé' : 'Pas installé', on ? 'green' : 'grey')}${acts ? `<span class="wx-acts">${acts}</span>` : ''}</div>`;
             }).join('');
             ws.innerHTML = `<section class="page wx-settings">${UI().pageHeader({title: 'Météo d’autrefois', icon: '🌦', attrs: 'data-ph-title', where: 'Réglages · Données', saved: true, help: 'Le temps qu’il faisait le jour de chaque événement, sans Internet.',
                 actions: ['<button type="button" class="button secondary" data-wx-reset data-ui-reset>↺ Remettre comme au départ</button>']})}
@@ -468,6 +587,7 @@
                     ${tg('curious', 'Phrases curieuses (« Né le jour le plus froid… »)')}
                     ${tg('today', 'Dans « Ce jour-là » et le tableau de bord')}
                     ${tg('coarse', 'Montrer aussi les reconstitutions grossières (avant 1940)')}
+                    ${tg('plus', 'Les compléments Copernicus dans le détail', 'Neige, ressenti, rivière, températures plus fines… quand le pack est installé.')}
                     <h4>Pour quels événements</h4>
                     ${(() => { const used = (A()?.state?.bootstrap?.eventTypes || []).filter(t => Number(t.usage_count) > 0).sort((a, b) => String(a.label).localeCompare(String(b.label), 'fr', {sensitivity: 'base'}));
                         if (!used.length) return `<div class="wx-chks">${KINDS.map(([k, l]) => C(l, {checked: !!s.kinds[k], attrs: `data-wx-kind="${k}"`})).join('')}</div>`;
@@ -485,7 +605,12 @@
                 </section></div></section>`;
         };
         draw();
-        const refresh = async () => { try { st = await api('meteo_status'); } catch (_) {} cache.clear(); draw(); };
+        const refresh = async () => { try { st = await api('meteo_status'); } catch (e) { statusErr(e); } cache.clear(); draw(); };
+        dlRedraw = draw; dlRefresh = refresh;
+        // ce qui est en ligne (taille de chaque pack), et les téléchargements interrompus à reprendre
+        api('meteo_dl_info').then(r => { DL.online = r.packs || {}; DL.err = r.error || ''; }).catch(x => { DL.online = {}; DL.err = x.message; }).finally(async () => {
+            const ids = dlSaved(); for (const [k, id] of Object.entries(ids)) { if (DL.run[k]) continue; try { const r = await api('meteo_dl_resume', {id}); if (r.exists) DL.paused[k] = {id, received: r.received, size: r.size}; else dlForget(k); } catch (_) {} }
+            if (ws.querySelector('.wx-settings')) draw(); });
         if (ws.__wxBound !== true) {
             ws.__wxBound = true;
             ws.addEventListener('click', async e => {
@@ -497,12 +622,15 @@
                 if (un) { const [t, id] = un.dataset.wxUnhide.split(':'); const s = settings(); if (t === 'p') s.hidePersons = s.hidePersons.filter(x => Number(x.id) !== Number(id)); else s.hideEvents = s.hideEvents.filter(x => Number(x.id) !== Number(id)); save(s); return draw(); }
                 if (e.target.closest('[data-wx-about]')) return openAbout();
                 const imp = e.target.closest('[data-wx-import]'); if (imp) { await importPack(imp.dataset.wxImport); return refresh(); }
+                const dl = e.target.closest('[data-wx-dl]'); if (dl) return dlRun(dl.dataset.wxDl);
+                const pz = e.target.closest('[data-wx-dl-pause]'); if (pz) { const k = pz.dataset.wxDlPause; if (DL.run[k]) DL.run[k].stop = true; return; }
+                const cx = e.target.closest('[data-wx-dl-cancel]'); if (cx) return dlCancel(cx.dataset.wxDlCancel);
                 const rm = e.target.closest('[data-wx-remove]');
                 if (rm) {
                     const kind = rm.dataset.wxRemove;
                     try { await api('meteo_pack_remove', {}, {method: 'POST', body: {kind}}); } catch (x) { return A().toast(x.message, 'error'); }
                     await refresh();
-                    A().undoToast(i18n('🗑 {name} supprimé', {name: i18n(PACKS.find(p => p[0] === kind)?.[1] || 'Pack')}), {undo: async () => { await api('meteo_pack_restore', {}, {method: 'POST', body: {kind}}); await refresh(); }, redo: async () => { await api('meteo_pack_remove', {}, {method: 'POST', body: {kind}}); await refresh(); }});
+                    A().undoToast(i18n('🗑 {name} supprimé', {name: i18n(packName(kind))}), {undo: async () => { await api('meteo_pack_restore', {}, {method: 'POST', body: {kind}}); await refresh(); }, redo: async () => { await api('meteo_pack_remove', {}, {method: 'POST', body: {kind}}); await refresh(); }});
                 }
             });
             ws.addEventListener('change', e => {
@@ -522,13 +650,62 @@
         UI().autoSave?.(ws, {redraw: () => draw()});
     };
 
-    /* ⤓ comment obtenir un pack (pas de téléchargement obligatoire depuis l'app : le fichier se fabrique ou se télécharge une fois) */
+    /* ═════════ 📦 Installer un pack en un bouton (lib/meteo_dl.php) : rien de météo n'est livré avec l'app ═════════ */
+    const DL = {online: null, err: '', run: {}, paused: {}}, DL_KEY = 'genealogie-meteo-dl';
+    let dlRedraw = () => {}, dlRefresh = async () => {};
+    const dlSaved = () => { try { return JSON.parse(localStorage.getItem(DL_KEY) || '{}') || {}; } catch (_) { return {}; } };
+    const dlRemember = (k, id) => { const v = dlSaved(); v[k] = id; try { localStorage.setItem(DL_KEY, JSON.stringify(v)); } catch (_) {} };
+    const dlForget = k => { const v = dlSaved(); delete v[k]; try { localStorage.setItem(DL_KEY, JSON.stringify(v)); } catch (_) {} };
+    const pct = (a, b) => (b ? Math.floor(a / b * 100) : 0);
+    function dlActs(k) {
+        const run = DL.run[k], pz = DL.paused[k], on = DL.online && DL.online[k];
+        if (run) return `<span class="wx-dl" data-wx-dl-box="${k}"><span class="wx-prog"><i style="width:${pct(run.received, run.size)}%"></i></span><small data-wx-dl-txt>${esc(dlText(run))}</small><button type="button" class="button small secondary" data-wx-dl-pause="${k}">⏸ ${esc(i18n('Pause'))}</button></span>`;
+        const imp = `<button type="button" class="button small secondary" data-wx-import="${k}" title="${esc(i18n('Un fichier .lcmeteo déjà téléchargé ou fabriqué'))}">⤒ ${esc(i18n('Importer un fichier…'))}</button>`;
+        if (pz) return `<span class="wx-dl"><span class="wx-prog"><i style="width:${pct(pz.received, pz.size)}%"></i></span><small>${esc(i18n('En pause : {p} %', {p: String(pct(pz.received, pz.size))}))}</small><button type="button" class="button small" data-wx-dl="${k}">▶ ${esc(i18n('Reprendre'))}</button><button type="button" class="button small secondary" data-wx-dl-cancel="${k}">✕ ${esc(i18n('Abandonner'))}</button></span>`;
+        if (DL.online === null) return `${window.LCNDA_UI.spinner(i18n('Recherche des données en ligne…'), {inline: true})}${imp}`;
+        if (!on) return `<small class="muted" title="${esc(DL.err)}">${esc(DL.err ? i18n('Pas de connexion aux données en ligne.') : i18n('Pas encore en ligne.'))}</small>${imp}<button type="button" class="link-button" data-wx-howto="${k}">${esc(i18n('Le fabriquer soi-même'))}</button>`;
+        return `<button type="button" class="button small" data-wx-dl="${k}">📦 ${esc(i18n('Installer ({s})', {s: fmtSize(on.size)}))}</button>${imp}`;
+    }
+    function dlText(run) { const el = (Date.now() - run.t0) / 1000, rate = el > 2 ? (run.received - run.r0) / el : 0, left = rate > 0 ? (run.size - run.received) / rate : 0;
+        return `${pct(run.received, run.size)} % · ${fmtSize(run.received)} ${i18n('sur')} ${fmtSize(run.size)}${left > 0 ? ` · ${i18n('reste ≈ {m} min', {m: String(Math.max(1, Math.round(left / 60)))})}` : ''}`; }
+    function dlPaint(k) { const run = DL.run[k], box = document.querySelector(`[data-wx-dl-box="${k}"]`); if (!run || !box) return; box.querySelector('.wx-prog i').style.width = `${pct(run.received, run.size)}%`; box.querySelector('[data-wx-dl-txt]').textContent = dlText(run); }
+    async function dlRun(k) {
+        if (DL.run[k]) return;
+        const post = (a, b) => api(a, {}, {method: 'POST', body: b}).then(r => r.result || r);
+        let id = DL.paused[k]?.id || dlSaved()[k] || '', run;
+        try {
+            if (id) { const r = await api('meteo_dl_resume', {id}); if (!r.exists) id = ''; else run = {id, received: r.received, size: r.size}; }
+            if (!id) { const r = await post('meteo_dl_start', {kind: k}); id = r.id; run = {id, received: 0, size: r.size}; }
+        } catch (x) { return A().toast(x.message, 'error'); }
+        dlRemember(k, id); delete DL.paused[k];
+        DL.run[k] = {...run, t0: Date.now(), r0: run.received, stop: false}; dlRedraw();
+        let fails = 0;
+        while (!DL.run[k].stop) {
+            try { const r = await post('meteo_dl_step', {id}); DL.run[k].received = r.received; fails = 0; dlPaint(k); if (r.done) break; }
+            catch (x) { if (++fails >= 3) { A().toast(i18n('Téléchargement arrêté : {e}', {e: x.message}), 'error'); DL.paused[k] = {id, received: DL.run[k].received, size: DL.run[k].size}; delete DL.run[k]; return dlRedraw(); } await new Promise(r => setTimeout(r, 1500 * fails)); }
+        }
+        if (DL.run[k].stop) { DL.paused[k] = {id, received: DL.run[k].received, size: DL.run[k].size}; delete DL.run[k]; return dlRedraw(); }
+        const box = document.querySelector(`[data-wx-dl-box="${k}"] [data-wx-dl-txt]`); if (box) box.textContent = i18n('Vérification et installation…');
+        try {
+            const r = await post('meteo_pack_finish', {id}); dlForget(k); delete DL.run[k];
+            await dlRefresh();
+            A().undoToast?.(r.stations || !isPlus(k) ? i18n('🌦 {name} installé ({n} stations).', {name: i18n(packName(k)), n: String(r.stations || 0)}) : i18n('🌦 {name} installé.', {name: i18n(packName(k))}), {undo: async () => { await post('meteo_pack_undo', {kind: k}); await dlRefresh(); }});
+        } catch (x) { dlForget(k); delete DL.run[k]; dlRedraw(); A().toast(x.message, 'error'); }
+    }
+    async function dlCancel(k) {
+        const id = DL.paused[k]?.id || dlSaved()[k]; delete DL.paused[k]; dlForget(k);
+        if (id) { try { await api('meteo_dl_cancel', {}, {method: 'POST', body: {id}}); } catch (_) {} }
+        dlRedraw();
+    }
+    ext.meteoDl = {run: dlRun, state: DL};
+
+    /* ⤓ le fabriquer soi-même (le fichier se fabrique une fois, puis s'importe) */
     function openHowTo(kind) {
         const url = PACK_URLS[kind];
-        const name = {socle: 'le socle', complet: 'le pack complet', europe: 'le pack Europe'}[kind] || 'le pack';
-        const cmd = {socle: 'socle', complet: 'complet', europe: 'europe'}[kind] || 'socle';
+        const name = {socle: 'le socle', complet: 'le pack complet', europe: 'le pack Europe'}[kind] || (isWorld(kind) || isPlus(kind) ? i18n('le pack « {name} »', {name: i18n(packName(kind))}) : 'le pack');
+        const cmd = PACKS.some(p => p[0] === kind) ? kind : 'socle';
         const body = `${url ? `<p><a class="button" href="${esc(url)}" target="_blank" rel="noopener">⤓ Télécharger ${esc(name)}</a></p>` : ''}
-            <ol class="wx-steps"><li>${url ? 'Ou bien, sur' : 'Sur'} un ordinateur qui a Internet, suis le mode d’emploi <b>docs/METEO.md</b> (livré avec l’app) : il installe Python si besoin, puis lance<br><code>python3 scripts/meteo/build-meteo.py ${esc(cmd)}</code></li>
+            <ol class="wx-steps">${isPlus(kind) ? `<li>${esc(i18n('Il faut un compte Copernicus gratuit, sa clé (docs/METEO.md, « Le compte Copernicus ») et avoir accepté les conditions du jeu sur sa page (onglet « Download »).'))}</li>` : ''}<li>${url ? 'Ou bien, sur' : 'Sur'} un ordinateur qui a Internet, suis le mode d’emploi <b>docs/METEO.md</b> (livré avec l’app) : il installe Python si besoin, puis lance<br><code>python3 scripts/meteo/build-meteo.py ${esc(cmd)}</code></li>
             <li>Le fichier <code>meteo-${esc(cmd === 'socle' ? 'socle.sqlite' : 'pack-' + cmd + '.lcmeteo')}</code> apparaît dans le dossier <code>meteo-sortie</code>.</li>
             <li>Ici : <b>⤒ Importer le fichier…</b> (une seule fois). Ensuite l’app n’a plus besoin d’Internet.</li></ol>
             ${UI().notice('info', 'Rien n’est envoyé sur Internet par l’app : le fichier reste sur ton ordinateur.')}`;
@@ -545,9 +722,9 @@
                 const head = await f.slice(0, 4096).text();
                 if (!head.startsWith('LCMETEO1\n')) throw new Error('ce n’est pas un pack météo de LCNDA (il faut un fichier .lcmeteo, fabriqué par build-meteo.py).');
                 let h; try { h = JSON.parse(head.slice(9).trim()); } catch (_) { throw new Error('l’en-tête du pack est abîmé.'); }
-                if (!['socle', 'complet', 'europe'].includes(h.kind)) throw new Error('sorte de pack inconnue.');
+                if (!PACKS.some(p => p[0] === h.kind)) throw new Error('sorte de pack inconnue.');
                 if (f.size - 4096 !== Number(h.size)) throw new Error('le fichier est incomplet (téléchargement interrompu ?).');
-                const name = {socle: 'Socle', complet: 'Pack complet', europe: 'Pack Europe'}[h.kind];
+                const name = packName(h.kind);
                 const nf = n => Number(n || 0).toLocaleString('fr-FR');
                 const what = `<div class="wx-what"><div><b>${nf(h.stations)}</b><small>stations</small></div>${h.cells ? `<div><b>${nf(h.cells)}</b><small>carreaux</small></div>` : ''}<div><b>${h.from || '?'}–${h.to || '?'}</b><small>chaque jour</small></div>${h.hours_from ? `<div><b>${h.hours_from} →</b><small>heure par heure</small></div>` : ''}<div><b>${fmtSize(h.size)}</b><small>sur le disque</small></div></div>`;
                 const notes = [{kind: 'ok', text: h.kind === 'socle' ? 'Le socle sert de base : les packs s’ajoutent par-dessus.' : 'Le socle reste : le pack s’ajoute par-dessus.'}];
@@ -570,7 +747,7 @@
                 if (txt) txt.textContent = 'Vérification du pack…';
                 const r = await api('meteo_pack_finish', {}, {method: 'POST', body: {id}});
                 cache.clear();
-                const name = {socle: 'Socle', complet: 'Pack complet', europe: 'Pack Europe'}[r.kind];
+                const name = packName(r.kind);
                 return {message: `✓ ${name} importé : ${A().plural(r.stations || h.stations || 0, 'station')}`, undo: async () => { await api('meteo_pack_undo', {}, {method: 'POST', body: {kind: r.kind}}); cache.clear(); if (A().state?.maintenanceTab === 'meteo') ext.maintenance.meteo(); }};
             }});
     }
@@ -584,7 +761,7 @@
         const today = new Date(), md = `${today.getDate() === 1 ? '1er' : today.getDate()} ${MONTHS[today.getMonth()]}`;
         let body;
         if (d?.off) body = A().empty('La météo est masquée ici (Réglages → 🌦 Météo d’autrefois).', {icon: '🌦'});
-        else if (!d || !d.installed) body = A().empty('Les données météo ne sont pas installées.', {icon: '🌦', action: {label: 'Comment les obtenir', attrs: 'data-wx-howto="socle"'}});
+        else if (!d || !d.installed) body = A().empty('Les données météo ne sont pas installées.', {icon: '🌦', action: {label: '📦 Installer les données météo', attrs: 'data-wx-goset'}});
         else if (!d.pick) body = A().empty('Aucun anniversaire rond avec une météo connue aujourd’hui.', {icon: '🌦', hint: 'Il en faut un de 10, 25, 50, 100 ans… d’une naissance, d’un mariage ou d’un décès.'});
         else {
             const r = d.pick, s = settings(), lk = look(r, s), k = kindOf(r.tag);

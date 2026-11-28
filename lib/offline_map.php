@@ -5,7 +5,62 @@ declare(strict_types=1);
  * Fond de carte hors ligne : tuiles dessinées sur l'ordinateur à partir des contours de communes déjà dans la base
  * (France et pays des battues ajoutés). Même découpage que les tuiles OpenStreetMap (z/x/y, 256 px), en SVG.
  * Gardées dans DATA_DIR/cache/offline-tiles pour ne les dessiner qu'une fois (le cache se vide si les contours changent).
+ * 🌍 Sous les communes : la carte du monde de Natural Earth (domaine public), livrée avec l'app (assets/data/ne-monde-50m.json.gz,
+ * scripts/build-ne-monde.js) : les terres et les frontières des pays d'aujourd'hui, partout dans le monde, sans Internet.
  */
+
+/** les pays de Natural Earth (lus une fois par requête) : [['n'=>nom, 'b'=>[x0,y0,x1,y1], 'r'=>[[x,y,x,y…]…]]…], en centièmes de degré */
+function offline_world_countries(): array
+{
+    static $c = null;
+    if ($c !== null) { return $c; }
+    $f = APP_ROOT . '/assets/data/ne-monde-50m.json.gz';
+    $j = is_file($f) ? json_decode((string) @gzdecode((string) file_get_contents($f)), true) : null;
+    return $c = is_array($j['countries'] ?? null) ? $j['countries'] : [];
+}
+
+/** un polygone coupé au cadre [lo, hi]² (Sutherland–Hodgman) : les grands pays ne débordent pas de la tuile */
+function offline_clip_ring(array $pts, float $lo, float $hi): array
+{
+    $edges = [[0, $lo, true], [0, $hi, false], [1, $lo, true], [1, $hi, false]];
+    foreach ($edges as [$k, $v, $min]) {
+        $out = []; $n = count($pts); if (!$n) { break; }
+        $in = static fn($p) => $min ? $p[$k] >= $v : $p[$k] <= $v;
+        for ($i = 0; $i < $n; $i++) {
+            $a = $pts[$i]; $b = $pts[($i + 1) % $n]; $ia = $in($a); $ib = $in($b);
+            if ($ia) { $out[] = $a; }
+            if ($ia !== $ib) { $t = ($v - $a[$k]) / (($b[$k] - $a[$k]) ?: 1e-9); $q = [$a[0] + ($b[0] - $a[0]) * $t, $a[1] + ($b[1] - $a[1]) * $t]; $q[$k] = $v; $out[] = $q; }
+        }
+        $pts = $out;
+    }
+    return $pts;
+}
+
+/** les terres et les frontières des pays dans une tuile (chemins SVG, mêmes conventions que les communes) */
+function offline_world_paths(int $z, int $x, int $y, callable $px, callable $py): string
+{
+    $b = offline_tile_bounds($z, $x, $y);
+    $padLon = ($b['east'] - $b['west']) * 0.02; $padLat = ($b['north'] - $b['south']) * 0.02;
+    $w = ($b['west'] - $padLon) * 100; $e = ($b['east'] + $padLon) * 100; $s = ($b['south'] - $padLat) * 100; $n = ($b['north'] + $padLat) * 100;
+    $tol = $z <= 3 ? 1.5 : ($z <= 6 ? 1.0 : 0.6);
+    $d = '';
+    foreach (offline_world_countries() as $c) {
+        [$x0, $y0, $x1, $y1] = $c['b'];
+        if ($x1 < $w || $x0 > $e || $y1 < $s || $y0 > $n) { continue; }
+        foreach ($c['r'] as $flat) {
+            $pts = []; $last = null; $cnt = count($flat);
+            for ($i = 0; $i + 1 < $cnt; $i += 2) {
+                $p = [$px($flat[$i] / 100), $py($flat[$i + 1] / 100)];
+                if ($last && abs($p[0] - $last[0]) < $tol && abs($p[1] - $last[1]) < $tol) { continue; }
+                $pts[] = $p; $last = $p;
+            }
+            $pts = array_map(static fn($p) => [round($p[0], 1), round($p[1], 1)], offline_clip_ring($pts, -4.0, 260.0));
+            if (count($pts) < 3) { continue; }
+            $d .= 'M' . implode('L', array_map(static fn($p) => $p[0] . ' ' . $p[1], $pts)) . 'Z';
+        }
+    }
+    return $d === '' ? '' : '<path fill="#f7f3e8" stroke="#c4b9a2" stroke-width="' . ($z >= 6 ? '0.9' : '0.6') . '" stroke-linejoin="round" d="' . $d . '"/>';
+}
 
 function offline_tile_bounds(int $z, int $x, int $y): array
 {
@@ -21,7 +76,7 @@ function offline_tile_svg(PDO $pdo, int $z, int $x, int $y): string
     $n = 2 ** $z;
     if ($x < 0 || $y < 0 || $x >= $n || $y >= $n) { return offline_tile_wrap(''); }
     $count = (int) $pdo->query('SELECT count(*) FROM commune_contours')->fetchColumn();
-    $dir = SHARED_DATA_DIR . '/cache/offline-tiles/' . $count . '/' . $z . '/' . $x;
+    $dir = SHARED_DATA_DIR . '/cache/offline-tiles/w1-' . $count . '/' . $z . '/' . $x;
     $file = $dir . '/' . $y . '.svg';
     if (is_file($file)) { return (string) file_get_contents($file); }
     $b = offline_tile_bounds($z, $x, $y);
@@ -72,7 +127,8 @@ function offline_tile_svg(PDO $pdo, int $z, int $x, int $y): string
         }
     }
     $stroke = $z >= 9 ? ' stroke="#b9b09c" stroke-width="' . ($z >= 11 ? '0.8' : '0.4') . '"' : '';
-    $body = ($paths ? '<path fill="#f7f3e8"' . $stroke . ' d="' . implode('', $paths) . '"/>' : '')
+    $body = offline_world_paths($z, $x, $y, $px, $py)
+        . ($paths ? '<path fill="#f7f3e8"' . $stroke . ' d="' . implode('', $paths) . '"/>' : '')
         . ($labels ? '<g font-family="Helvetica,Arial,sans-serif" font-size="' . ($z >= 13 ? 12 : 10) . '" fill="#5d5648" text-anchor="middle" stroke="#f7f3e8" stroke-width="3" paint-order="stroke">' . implode('', $labels) . '</g>' : '');
     $svg = offline_tile_wrap($body);
     if (!is_dir($dir)) { @mkdir($dir, 0775, true); }

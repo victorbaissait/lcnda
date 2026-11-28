@@ -1,0 +1,51 @@
+fr ¦ sk ¦ nb
+# 🧩 Atelier de transcription, vague 3 (3b) : les gabarits d’actes (heritage-transcribe-gabarit.js)
+Choisis la sorte d’acte (en haut) : chaque sorte a ses cases. ¦ Vyber druh záznamu (hore): každý druh má svoje polia. ¦ Velg dokumenttype (øverst): hver type har sine egne felt.
+On dirait : {x}. Utiliser ce gabarit ? ¦ Vyzerá to na: {x}. Použiť túto šablónu? ¦ Det ser ut som: {x}. Bruke denne malen?
+Cases remplies : {a}/{b} · vérifiées : {c} ¦ Vyplnené polia: {a}/{b} · overené: {c} ¦ Utfylte felt: {a}/{b} · kontrollert: {c}
+Gabarit ¦ Šablóna ¦ Mal
+Vert : rempli par « 🧭 Repérer », à vérifier · Entrée : ✓ vérifié · un clic sur « l. 3 » montre le passage. ¦ Zelené: vyplnené funkciou „🧭 Nájsť“, na overenie · Enter: ✓ overené · kliknutie na „r. 3“ ukáže miesto v texte. ¦ Grønt: fylt ut av «🧭 Finn», skal kontrolleres · Enter: ✓ kontrollert · et klikk på «l. 3» viser stedet.
+Date du baptême ¦ Dátum krstu ¦ Dåpsdato
+Père, métier ¦ Otec, povolanie ¦ Far, yrke
+Officier de l’état civil ¦ Matrikár ¦ Folkeregisterfører
+Parents de l’époux ¦ Rodičia ženícha ¦ Brudgommens foreldre
+Parents de l’épouse ¦ Rodičia nevesty ¦ Brudens foreldre
+Contrat de mariage ¦ Manželská zmluva ¦ Ektepakt
+Publications ¦ Ohlášky ¦ Lysing
+Décédé le ¦ Zomrel dňa ¦ Død den
+Déclarants ¦ Oznamovatelia ¦ Anmeldere
+Date d’inhumation ¦ Dátum pohrebu ¦ Begravelsesdato
+Parties ¦ Strany ¦ Parter
+Juge ou notaire ¦ Sudca alebo notár ¦ Dommer eller notarius
+Personne concernée ¦ Dotknutá osoba ¦ Berørt person
+Ce qui est attesté ¦ Čo sa dosvedčuje ¦ Det som bekreftes
+Rue ou maison ¦ Ulica alebo dom ¦ Gate eller hus
+Ménage ¦ Domácnosť ¦ Husstand
+Matricule ¦ Matričné číslo ¦ Stamrullenummer
+Classe ¦ Ročník ¦ Årsklasse
+Régiment ¦ Pluk ¦ Regiment
+Campagnes ¦ Ťaženia ¦ Felttog
+Blessures ¦ Zranenia ¦ Sår
+page {n}, l. {line} ¦ strana {n}, r. {line} ¦ side {n}, l. {line}
+l. {n} ¦ r. {n} ¦ l. {n}
+🧩 Gabarit à cases (conseillé) ¦ 🧩 Šablóna s poliami (odporúčané) ¦ 🧩 Mal med felt (anbefalt)
+Texte à trous (comme avant) ¦ Text s medzerami (ako predtým) ¦ Tekst med hull (som før)
+Remplir à nouveau ¦ Vyplniť znova ¦ Fyll ut på nytt
+Coller le texte à trous ¦ Vložiť text s medzerami ¦ Lim inn teksten med hull
+Repris du gabarit (cases vérifiées ou écrites par toi) : ¦ Prevzaté zo šablóny (polia overené alebo napísané tebou): ¦ Hentet fra malen (felt du har kontrollert eller skrevet):
+Retirer cette case ¦ Odobrať toto pole ¦ Fjern dette feltet
+Ajouter une case ¦ Pridať pole ¦ Legg til et felt
+Nom de la case (ex. Profession du parrain) ¦ Názov poľa (napr. Povolanie krstného otca) ¦ Feltets navn (f.eks. Gudfarens yrke)
+Nom de la case ¦ Názov poľa ¦ Feltets navn
+Case retirée ¦ Pole odobrané ¦ Felt fjernet
+Mes gabarits… ¦ Moje šablóny… ¦ Mine maler …
+Mes gabarits ¦ Moje šablóny ¦ Mine maler
+Tableur de tous les actes « {x} » ¦ Tabuľka všetkých záznamov „{x}“ ¦ Regneark med alle dokumenter «{x}»
+Les cases cochées se montrent dans le gabarit de chaque acte de cette sorte. Gardé sur cet ordinateur. ¦ Zaškrtnuté polia sa zobrazia v šablóne každého záznamu tohto druhu. Uložené v tomto počítači. ¦ Avkryssede felt vises i malen for hvert dokument av denne typen. Lagret på denne datamaskinen.
+Aucun acte de cette sorte pour l’instant. ¦ Zatiaľ žiadny záznam tohto druhu. ¦ Ennå ingen dokumenter av denne typen.
+gabarits ¦ šablóny ¦ maler
+Tableur : {x} ¦ Tabuľka: {x} ¦ Regneark: {x}
+Pas encore relié : le relier dans l’Atelier ¦ Zatiaľ neprepojené: prepojiť v dielni ¦ Ikke koblet ennå: koble i verkstedet
+Numéros de ligne ¦ Čísla riadkov ¦ Linjenumre
+Transcription faite avec LCNDA (Le Carnet numérique des ancêtres). ¦ Prepis vytvorený v LCNDA (Le Carnet numérique des ancêtres). ¦ Transkripsjon laget med LCNDA (Le Carnet numérique des ancêtres).
+XML des chercheurs et des archives (lignes, zones, personnes) ¦ XML bádateľov a archívov (riadky, zóny, osoby) ¦ XML for forskere og arkiver (linjer, soner, personer)

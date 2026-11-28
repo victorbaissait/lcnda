@@ -1379,6 +1379,7 @@ function succ_p2_post(PDO $pdo, string $op, array $d): ?array
     if (!str_starts_with($op, 'p2_')) { return null; }
     succ_p2_ensure($pdo);
     return match ($op) {
+        'p2_droit_save' => succ_droit_save($pdo, $d), // ⚖️ lib/successoral_droit.php
         'p2_insee_check' => succ_p2_insee_check($pdo, $d),
         'p2_insee_confirm' => succ_p2_insee_confirm($pdo, $d),
         'p2_insee_not_same' => succ_p2_insee_not_same($pdo, $d),

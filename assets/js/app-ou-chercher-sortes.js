@@ -76,6 +76,7 @@
         so5_consulaire_nantes: ['actes', 'emigration'], so2_an_naturalisation: ['emigration'], so5_fichier_origine: ['emigration', 'actes'], so5_cea_acadie: ['emigration', 'actes'],
         so3_antenati_nom: ['actes'], so3_geneteka: ['actes'], so3_openarchives: ['actes'], so3_torre_tombo: ['actes'], so3_freebmd: ['actes'], so3_banq: ['actes'],
         so2_be_arch: ['actes'], so2_ch_canton: ['actes'], so3_paris_ec: ['actes'],
+        so27_plaques_antibes: ['cartes'], // 🪧 plaques commémoratives d'une ville : un lieu à voir (« lieux » dans les archives en ligne)
         so4_geopatronyme: ['cartes'], so4_cassini: ['cartes'], so7_gov: ['cartes', 'guides'], so7_mapire: ['cartes'], so7_archivni_mapy: ['cartes'], so2_pop_merimee: ['cartes'], so2_pop_palissy: ['bibliotheques'],
         so7_fs_wiki: ['guides'], so7_genwiki: ['guides'], so5_geneawiki: ['guides'], so8_geneawiki_releves: ['guides', 'actes'], so7_ffg_annuaire: ['guides'], so7_cercle_dept: ['actes'], so8_geneabank: ['actes'],
         so5_fs_tree: ['arbres'], so5_fs_catalog: ['actes'], so5_pamyat_naroda: ['militaire'], so5_memorial_urss: ['deportation'], so3_cicr_pg: ['militaire'],

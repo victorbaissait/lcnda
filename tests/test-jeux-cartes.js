@@ -190,7 +190,8 @@ function playOut(st, guard = 60000) {
     });
 
     console.log('Patiences');
-    const OLD = 108, NEW = ['agnessorel', 'whitehorse', 'fourseasons', 'chameleon', 'canfield2', 'forecell', 'freefan', 'mrsmop', 'blackwidow', 'threeblindmice', 'gypsy', 'irmgard', 'queenie', 'brisbane', 'blockade', 'fortunesfavor', 'midshipman', 'martha', 'morehead', 'montana', 'nestor', 'simplepairs', 'allinarow'];
+    const OLD = 210, // 108 d’origine + 102 ajoutées ensuite (tests/test-patiences.js les vérifie toutes)
+    NEW = ['agnessorel', 'whitehorse', 'fourseasons', 'chameleon', 'canfield2', 'forecell', 'freefan', 'mrsmop', 'blackwidow', 'threeblindmice', 'gypsy', 'irmgard', 'queenie', 'brisbane', 'blockade', 'fortunesfavor', 'midshipman', 'martha', 'morehead', 'montana', 'nestor', 'simplepairs', 'allinarow'];
     await t(`${P.GAMES.length} patiences (${OLD} + ${NEW.length}), noms et règles tous différents`, () => {
         assert.equal(P.GAMES.length, OLD + NEW.length); NEW.forEach(k => assert.ok(P.get(k), k));
         assert.equal(new Set(P.GAMES.map(g => g.k)).size, P.GAMES.length); assert.equal(new Set(P.GAMES.map(g => g.name)).size, P.GAMES.length);
@@ -345,6 +346,13 @@ echo 'ok';`], {cwd: appRoot, encoding: 'utf8', env});
             const g = (await games())[0]; assert.equal(g.finished, true);
             const rec = await page.evaluate(() => JSON.parse(localStorage.getItem('lcnda-jeux-plateau-records') || '{}').cartes?.bataille);
             assert.ok(rec && rec.w + rec.l >= 1, 'compté dans les records');
+        });
+        await t('🗑 une partie supprimée ne revient pas (même si la partie encore ouverte s’enregistre une dernière fois)', async () => {
+            const g = await start('huit'); assert.ok((await games()).some(x => x.id === g.id));
+            await page.click('[data-jf-del]'); await page.waitForSelector('[data-cb-ok]'); await page.click('[data-cb-ok]'); await page.waitForTimeout(400);
+            assert.ok(!(await games()).some(x => x.id === g.id), 'retirée');
+            await page.evaluate(g => window.LCNDA_JEUX_FAMILLE._write(g), g); await page.waitForTimeout(100); // le dernier enregistrement de la partie qui se ferme
+            assert.ok(!(await games()).some(x => x.id === g.id), 'pas revenue');
         });
         await t('390 px et sombre : ni la préparation ni la table ne débordent', async () => {
             await page.setViewportSize({width: 390, height: 860}); await page.evaluate(() => { document.documentElement.dataset.theme = 'dark'; localStorage.removeItem('lcnda-jeux-famille-v1'); });

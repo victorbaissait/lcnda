@@ -379,7 +379,9 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(tmp) });
                 await p.evaluate(async () => { document.body.classList.add('is-kiosk'); await window.LCNDA_APP.setModule('dashboard'); });
                 const card = `[data-dashboard-widget][data-widget-type="${NEW}"]`;
                 await p.waitForSelector(`${card} .h-sc-tile`);
-                await p.$eval(`${card} [data-edit-dashboard-widget]`, b => b.click()); // le ✎ ouvert (même s'il est caché en consultation)
+                // R6 (audit des onglets) : en consultation, le ✎ n'est plus affiché ; la fenêtre de réglage forcée reste sans bouton de modification
+                assert.equal(await p.$$eval(`${card} [data-edit-dashboard-widget]`, e => e.length), 0, 'pas de ✎ en consultation');
+                await p.evaluate(async c => { const A = window.LCNDA_APP; A.state.dashboardEditingWidget = document.querySelector(c).dataset.dashboardWidget; await A.renderDashboard(); }, card);
                 await p.waitForSelector(`${card} [data-dashboard-widget-editor]`);
                 assert.equal(await p.$$eval(`${card} [data-sc-editwidget]`, e => e.length), 0, 'pas de bouton en consultation');
                 assert.ok(await p.$(`${card} .h-sc-panelro`));

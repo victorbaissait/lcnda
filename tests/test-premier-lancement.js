@@ -136,7 +136,10 @@ async function server(dir) {
         await page.waitForFunction(() => window.LCNDA_APP.state.module === 'catalogue', null, {timeout: 6000}).catch(() => {}); // premier écran : posé un peu après le démarrage
         assert.equal(await page.evaluate(() => window.LCNDA_APP.state.module), 'catalogue');
         const tour = await page.evaluate(() => typeof window.LCNDA_APP.offerTour);
-        if (tour === 'function') assert.match(await page.textContent('body'), /petite visite/i, 'la visite est proposée à la fin du premier lancement');
+        if (tour === 'function') { // « Une petite visite ? » vient 0,7 s après le premier écran : on l'attend
+            await page.waitForFunction(() => /petite visite/i.test(document.body.textContent), null, {timeout: 10000}).catch(() => {});
+            assert.match(await page.textContent('body'), /petite visite/i, 'la visite est proposée à la fin du premier lancement');
+        }
         else console.log('    (visite guidée absente : branchement non vérifié)');
         const set = q(path.join(d1, 'genealogy.sqlite'), "SELECT key FROM app_settings WHERE key IN ('genealogie-premier','genealogie-menu-catalogue','genealogie-usage')");
         assert.equal(set.length, 3);
@@ -222,7 +225,8 @@ async function server(dir) {
         assert.equal(fs.existsSync(path.join(d2, 'genealogy.sqlite')), false, 'la vraie base n’existe même pas');
     });
     await t('« Repartir d’une base vide » : la vraie base est créée vide et s’ouvre', async () => {
-        await Promise.all([p2.waitForNavigation({timeout: 30000}), p2.click('[data-pl-leave="empty"]')]);
+        // la page se recharge une fois la vraie base créée (premier_start) : on attend ce rechargement, pas un simple changement d'adresse (#…) de la page d'avant
+        await Promise.all([p2.waitForEvent('load', {timeout: 30000}), p2.click('[data-pl-leave="empty"]')]);
         await booted(p2);
         assert.equal(await p2.locator('#install-screen').count(), 0);
         assert.equal(await p2.locator('#example-banner').count(), 0);

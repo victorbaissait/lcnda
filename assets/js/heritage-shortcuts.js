@@ -46,7 +46,7 @@
         place: {icon: '📍', label: 'Lieu', open: (id, info) => { const st = S(); st.graphPlaceMonograph = {...(st.graphPlaceMonograph || {}), id, name: info?.name || info?.title || '', county: info?.county || '', country: info?.country || '', showEvents: true, showDigests: true, showBattues: true, showCemetery: true}; st.graphMode = 'place_monograph'; return A().setModule('graphiques'); }},
         sheet: {icon: '📒', label: 'Fiche', open: id => { S().ficheId = id; return A().setModule('fiches'); }},
         investigation: {icon: '🔍', label: 'Enquête', open: id => { const st = S(); st.enquetesTab = 'enquetes'; st.currentBattueId = 0; st.currentInvestigationId = id; st.investigationFolderId = 0; return A().setModule('enquetes'); }},
-        battue: {icon: '🧭', label: 'Battue', open: id => { const st = S(); st.enquetesTab = 'battue'; st.currentInvestigationId = 0; st.currentBattueId = id; return A().setModule('enquetes'); }},
+        battue: {icon: '🔦', label: 'Battue', open: id => { const st = S(); st.enquetesTab = 'battue'; st.currentInvestigationId = 0; st.currentBattueId = id; return A().setModule('enquetes'); }},
         atelier: {icon: '📚', label: 'Projet de l’Atelier', open: id => { const st = S(); st.atelier = {...(st.atelier && typeof st.atelier === 'object' ? st.atelier : {}), project: id, node: 'overview', sel: []}; st.enquetesTab = 'atelier'; st.currentInvestigationId = 0; st.currentBattueId = 0; return A().setModule('enquetes'); }},
         board: {icon: '🧩', label: 'Tableau', thumb: true, open: id => ext.openBoardById?.(id)},
         layout: {icon: '📐', label: 'Mise en page', open: id => ext.openLayoutDoc?.(id)},
@@ -85,7 +85,7 @@
         ['calculette', '🧮', 'Calculette (simple, scientifique, courbes)', () => ext.calculator?.open()],
         ['transcription', '📜', 'Atelier de transcription', () => ext.openActTranscriber?.({})],
         ['puzzle', '🧩', 'Jeux et puzzle', () => A().setModule('jeu')],
-        ['battues', '🧭', 'Battues', enq('battue')],
+        ['battues', '🔦', 'Battues', enq('battue')],
         ['atelier', '📚', 'Atelier de recherche', enq('atelier')],
         ['tableaux', '🧩', 'Tableaux (Freeform)', enq('tableaux', {currentBoardId: 0})],
         ['projets', '🛠️', 'Outils de modification (tous les projets)', () => listWith('edit_tools')],
@@ -97,7 +97,7 @@
         (kit?.commands?.() || []).filter(c => ['global', 'any'].includes(c.ctx) && !['back', 'forward', 'find', 'split_orientation', 'switch_half', 'undo'].includes(c.id))
             .forEach(c => out.push({key: c.id, icon: ACTION_ICONS[c.id] || '⚡', label: ACTION_LABELS[c.id] || c.label, run: () => kit.run(c.id)}));
         if (!out.some(a => a.key === 'new_person') && A()?.openNewPersonDialog) out.unshift({key: 'new_person', icon: '＋', label: '＋ Nouvelle personne', run: () => A().openNewPersonDialog()});
-        if (A()?.openBattueDialog) out.push({key: 'new_battue', icon: '🧭', label: '＋ Nouvelle battue', run: async () => { await enq('battue')(); A().openBattueDialog(); }});
+        if (A()?.openBattueDialog) out.push({key: 'new_battue', icon: '🔦', label: '＋ Nouvelle battue', run: async () => { await enq('battue')(); A().openBattueDialog(); }});
         if (ext.atelierNewProject) out.push({key: 'new_atelier', icon: '📚', label: '＋ Nouveau projet de l’Atelier', run: async () => { await enq('atelier')(); ext.atelierNewProject(); }});
         out.push({key: 'new_widget', icon: '🧱', label: '＋ Nouveau widget', run: () => { S().maintenanceTab = 'widget_editor'; return A().setModule('maintenance'); }});
         return out;

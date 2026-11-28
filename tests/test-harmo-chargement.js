@@ -58,6 +58,11 @@ const t = async (name, fn) => { try { await fn(); count++; console.log('  ✓ ' 
         const s = hits(/<section class="loading-screen"><(?!\/section)(?![^']*spinner)[^`']*<p>/g);
         assert.deepEqual(s, [], 'écrans d’attente de la Recherche');
     });
+    await t('plus de « Chargement… » traduit écrit seul (<p class="muted">${esc(T(\'Chargement…\'))}</p>), sans le rond', () => {
+        const re = new RegExp(`<(p|small|div|span)[^>]*class="(?:muted|cell-muted)[^"]*"[^>]*>\\$\\{(?:(?:esc|escapeHtml|T\\.esc)\\()?(?:T|i18n)\\('${WAIT}[^']*…'`, 'g');
+        assert.deepEqual(hits(re, l => !/spinner|skeleton/.test(l)), []);
+        assert.ok(files.reduce((n, f) => n + (all[f].match(/\$\{window\.LCNDA_UI\.spinner\((T|i18n)\('/g) || []).length, 0) >= 20, 'les phrases traduites passent par UI.spinner');
+    });
     await t('app.js passe par waitHtml (rond commun, texte seul tant qu’app-ui.js n’est pas chargé)', () => {
         const app = all['app.js'];
         assert.ok(/const waitHtml = text => window\.LCNDA_UI\?\.spinner \? window\.LCNDA_UI\.spinner\(text\) : escapeHtml\(text\);/.test(app));

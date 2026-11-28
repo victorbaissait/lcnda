@@ -425,7 +425,7 @@ Les pistes sont montrées à partir de ce score (sur 100). Plus haut : moins de 
 Après chaque nouvel import du fichier INSEE : vérifier les dossiers en cours tout seul (jamais de changement sans ton clic). ¦ Eftir hvern nýjan innflutning INSEE-skrárinnar: athuga málin í vinnslu sjálfkrafa (aldrei breyting án þíns smells).
 Automatique, dans la cloche ¦ Sjálfvirkt, í bjöllunni
 Seulement à la main ¦ Aðeins handvirkt
-📋 Questionnaire ¦ 📋 Spurningalisti
+📝 Questionnaire ¦ 📝 Spurningalisti
 Ce que l’héritier te renvoie après avoir rempli le questionnaire. ¦ Það sem erfinginn sendir þér til baka eftir útfyllingu.
 Un petit fichier .json ¦ Lítil .json-skrá
 La page .html remplie ¦ Útfyllta .html-síðan

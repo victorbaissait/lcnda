@@ -198,7 +198,7 @@
         const t = `data-id="${Number(place.id)}" data-name="${esc(place.name || '')}" data-county="${esc(place.county || '')}" data-country="${esc(place.country || '')}"`;
         const p = {place: place.name || '', county: place.county || '', country: place.country || ''};
         const wiki = S7().url('fs_wiki', p, custom());
-        return `<p class="so-row so7-place"><a class="button small secondary" href="${esc(wiki)}" target="_blank" rel="noopener noreferrer" data-so7-go="fs_wiki" title="Quels registres existent pour ce lieu, où ils sont, lesquels sont en ligne">🧭 Comment chercher ici (FamilySearch Wiki)</a>
+        return `<p class="so-row so7-place"><a class="button small secondary" href="${esc(wiki)}" target="_blank" rel="noopener noreferrer" data-so7-go="fs_wiki" title="Quels registres existent pour ce lieu, où ils sont, lesquels sont en ligne">↗ Comment chercher ici (FamilySearch Wiki)</a>
             <button type="button" class="button small secondary" data-so7-place="lieu" ${t}>🌍 Archives d’Europe, monument, cadastre ancien, cercle…</button>
             <button type="button" class="button small secondary" data-so7-place-import ${t} title="Une photo du monument aux morts, un plan de cadastre…">⤒ Importer pour ce lieu…</button></p>`;
     }

@@ -30,7 +30,10 @@
     const games = () => { const v = ls.get(GAMES_KEY, []); return Array.isArray(v) ? v.filter(g => g && typeof g.id === 'string' && DEFS.has(g.kind)).slice(0, MAX_GAMES) : []; };
     const saveGames = list => ls.set(GAMES_KEY, list.slice(0, MAX_GAMES));
     const gameById = id => games().find(g => g.id === id) || null;
-    const writeGame = g => { const l = games(), i = l.findIndex(x => x.id === g.id); g.updated = Date.now(); if (i >= 0) l[i] = g; else l.unshift(g); return saveGames(l); };
+    // 🗑 une partie supprimée ne revient pas : la partie encore ouverte (patience, échecs…) s'enregistre parfois une dernière fois
+    // en se fermant (minuteur, fin d'animation, nettoyage) ; sans cette liste, cet enregistrement la remettait dans la liste
+    const DELETED = new Set();
+    const writeGame = g => { if (!g || DELETED.has(g.id)) return true; const l = games(), i = l.findIndex(x => x.id === g.id); g.updated = Date.now(); if (i >= 0) l[i] = g; else l.unshift(g); return saveGames(l); };
     const owns = id => typeof id === 'string' && id.startsWith('fam-') && !!gameById(id);
     const gameCount = () => games().length;
     let stopper = null, setupKey = 'quiz';
@@ -191,18 +194,20 @@
     }
 
     /* ═════ Une partie ═════ */
+    /** l'en-tête : « PARTIE EN COURS · ÉCHECS », ou « PARTIE TERMINÉE · ÉCHECS » quand la partie est finie (mat, victoire…) */
+    const eyebrow = (g, def) => esc(g.finished ? i18n('PARTIE TERMINÉE · {scope}', {scope: UP(lab(def))}) : i18n('PARTIE EN COURS · {scope}', {scope: UP(lab(def))})) + (g.cfg?.scope && def.scope ? ` · ${esc(UPN(g.cfg.scope))}` : '');
     function render(ws, id, ctx) {
         stop();
         const g = gameById(id), def = g && DEFS.get(g.kind); if (!def) return false;
         const ac = new AbortController(); let cleanup = null;
         stopper = () => { ac.abort(); try { cleanup?.(); } catch (_) {} };
-        ws.innerHTML = `<section class="goose-page jf-page jf-${def.key}"><header class="goose-head goose-game-head jf-gamehead"><div><span class="eyebrow">${esc(i18n('PARTIE EN COURS · {scope}', {scope: UP(lab(def))}))}${g.cfg?.scope && def.scope ? ` · ${esc(UPN(g.cfg.scope))}` : ''}</span><h2>${def.icon} ${esc(g.name)}</h2><p data-jf-sub></p></div>
+        ws.innerHTML = `<section class="goose-page jf-page jf-${def.key}"><header class="goose-head goose-game-head jf-gamehead"><div><span class="eyebrow" data-jf-eyebrow>${eyebrow(g, def)}</span><h2>${def.icon} ${esc(g.name)}</h2><p data-jf-sub></p></div>
             <div class="page-actions"><button type="button" class="button small" data-jf-again title="${esc(i18n('Une nouvelle partie avec les mêmes réglages'))}">↻ ${esc(i18n('Rejouer'))}</button><button type="button" class="button small secondary" data-jf-new>＋ ${esc(i18n('Nouvelle partie', {ctx: 'jeu'}))}</button><button type="button" class="button small secondary" data-jf-del>🗑 ${esc(i18n('Supprimer'))}</button></div></header>
             <div class="jf-play" data-jf-play></div></section>`;
         const host = ws.querySelector('[data-jf-play]');
         try { ws.scrollTop = 0; ws.closest('.main, main')?.scrollTo?.(0, 0); window.scrollTo(0, 0); } catch (_) {}
         const api = {
-            save: () => writeGame(g), sub: t => { const el = ws.querySelector('[data-jf-sub]'); if (el) el.textContent = t; },
+            save: () => { const r = writeGame(g), el = ws.querySelector('[data-jf-eyebrow]'); if (el) { const h = eyebrow(g, def); if (el.innerHTML !== h) el.innerHTML = h; } return r; }, sub: t => { const el = ws.querySelector('[data-jf-sub]'); if (el) el.textContent = t; },
             signal: ac.signal, esc, avatar, PK, plural, toast, notice, seg, toggle, fmtTime, L: L(), A: A(), UI: UI(),
             onCleanup: fn => { cleanup = fn; }, sidebar: () => ctx.renderSidebar?.(), data: loadData,
         };
@@ -218,20 +223,133 @@
         }, {signal: ac.signal});
         ws.querySelector('[data-jf-del]').addEventListener('click', async () => {
             const ok = !A().confirmBox || await A().confirmBox(i18n('La partie et sa progression seront supprimées.'), {title: i18n('Supprimer « {name} » ?', {name: g.name}), okLabel: i18n('Supprimer la partie'), danger: true});
-            if (!ok) return; saveGames(games().filter(x => x.id !== g.id)); toast(i18n('« {name} » est supprimée.', {name: g.name})); setupKey = def.key; ctx.newGame?.(def.key);
+            if (!ok) return; DELETED.add(g.id); saveGames(games().filter(x => x.id !== g.id)); toast(i18n('« {name} » est supprimée.', {name: g.name})); setupKey = def.key; ctx.newGame?.(def.key);
         }, {signal: ac.signal});
         try { def.mount(host, g, api); } catch (er) { host.innerHTML = notice('error', i18n('Cette partie ne peut pas s’ouvrir : {err}', {err: er?.message || er})); }
         return true;
     }
 
+    /* ═════ 🂠 Le dos des cartes (patiences, jeux de cartes à plusieurs) ═════
+     * cfg.back : 'bleu' | 'rouge' | 'vert' | 'sepia' (les 4 d'avant) | 'couleur' (cfg.backColor, #rrggbb) | 'photo' (cfg.backMedia : un média de l'app,
+     * jamais la photo d'une personne vivante ni d'une fiche confidentielle : la même règle que les portraits des jeux) | 'fichier' (une image de
+     * l'ordinateur, réduite et gardée dans ce navigateur, une seule à la fois). La table reçoit data-back="…" et les variables --jb-c, --jb-line, --jb-img. */
+    const BACK_KEY = 'lcnda-jeux-dos-image', BACK_MAX = 420 * 1024, BACK_FILE_MAX = 25 * 1024 * 1024;
+    const BACK_PRESETS = [['bleu', 'Bleu'], ['rouge', 'Rouge'], ['vert', 'Vert'], ['sepia', 'Sépia']];
+    const BACK_TYPES = /^image\/(jpeg|png|webp|gif|bmp|avif)$/i;
+    const backImage = () => { try { const v = localStorage.getItem(BACK_KEY) || ''; return /^data:image\/(jpeg|png|webp);base64,/.test(v) ? v : ''; } catch (_) { return ''; } };
+    const putBackImage = v => { try { if (v) localStorage.setItem(BACK_KEY, v); else localStorage.removeItem(BACK_KEY); return true; } catch (_) { toast(i18n('Plus de place dans ce navigateur pour garder cette image.'), 'error'); return false; } };
+    const hexOk = v => /^#[0-9a-f]{6}$/i.test(String(v || ''));
+    const mediaSrcOk = v => typeof v === 'string' && /^media\/[^"'()\\\s]+$/.test(v);
+    function backClean(c) {
+        const out = {back: 'bleu', backColor: hexOk(c?.backColor) ? c.backColor.toLowerCase() : '#6b3fa0', backMedia: null};
+        const m = c?.backMedia; if (m && Number(m.id) > 0 && mediaSrcOk(m.src)) out.backMedia = {id: Number(m.id), src: m.src, title: String(m.title || '').slice(0, 120)};
+        const b = String(c?.back || '');
+        if (BACK_PRESETS.some(x => x[0] === b) || b === 'couleur' || (b === 'photo' && out.backMedia) || b === 'fichier') out.back = b;
+        return out;
+    }
+    /** des rayures claires sur un fond foncé, foncées sur un fond clair : le motif reste visible */
+    const backLine = hex => { const n = parseInt(hex.slice(1), 16), [r, g, b] = [n >> 16, (n >> 8) & 255, n & 255].map(v => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }); return 0.2126 * r + 0.7152 * g + 0.0722 * b > 0.35 ? 'rgba(0,0,0,.22)' : 'rgba(255,255,255,.2)'; };
+    /** la clé posée sur la table (data-back) : 'image' quand l'image manque, on retombe sur le bleu */
+    const backKey = c => { const b = c?.back || 'bleu'; if (b === 'couleur') return hexOk(c.backColor) ? 'couleur' : 'bleu'; if (b === 'photo') return mediaSrcOk(c.backMedia?.src) ? 'image' : 'bleu'; if (b === 'fichier') return backImage() ? 'image' : 'bleu'; return BACK_PRESETS.some(x => x[0] === b) ? b : 'bleu'; };
+    /** les variables CSS du dos, posées une fois sur un élément (les tables se redessinent dedans) */
+    function backApply(el, c) {
+        if (!el?.style) return;
+        ['--jb-c', '--jb-line', '--jb-img'].forEach(v => el.style.removeProperty(v));
+        const k = backKey(c);
+        if (k === 'couleur') { el.style.setProperty('--jb-c', c.backColor); el.style.setProperty('--jb-line', backLine(c.backColor)); }
+        if (k === 'image') { const src = c.back === 'photo' ? c.backMedia.src : backImage(); el.style.setProperty('--jb-img', `url("${src.replace(/"/g, '%22')}")`); }
+    }
+    const backLabel = c => (c.back === 'couleur' ? i18n('une couleur au choix') : c.back === 'photo' ? i18n('la photo « {name} »', {name: c.backMedia?.title || i18n('sans titre')}) : c.back === 'fichier' ? i18n('une image de l’ordinateur') : i18n((BACK_PRESETS.find(x => x[0] === c.back) || BACK_PRESETS[0])[1]).toLocaleLowerCase(window.LCNDA_I18N?.locale?.() || 'fr-FR'));
+    function backFieldHtml(c) {
+        const b = backClean(c), btn = (k, t, title = '') => `<button type="button" class="${b.back === k ? 'is-active' : ''}" aria-pressed="${b.back === k}" data-jfb="${k}"${title ? ` title="${esc(title)}"` : ''}>${t}</button>`;
+        return `<div class="jfp-backs jfb" data-jfb-box><span>${esc(i18n('Dos des cartes'))}</span>
+            <span class="jfp jfb-prev" data-jfb-prev data-back="${esc(backKey(b))}" aria-hidden="true"><span class="pc-card is-back"></span></span>
+            <div class="segmented jf-seg jfb-seg" role="radiogroup" aria-label="${esc(i18n('Dos des cartes'))}">${BACK_PRESETS.map(([k, l]) => btn(k, esc(i18n(l)))).join('')}${btn('couleur', `🎨 ${esc(i18n('Couleur'))}`, i18n('Une couleur au choix'))}${btn('photo', `🖼 ${esc(i18n('Photo de l’app'))}`, i18n('Une photo des médias de l’app'))}${btn('fichier', `📁 ${esc(i18n('Image de l’ordinateur'))}`, i18n('Une image choisie sur cet ordinateur, ou glissée ici'))}</div>
+            <div class="jfb-more" data-jfb-more></div>
+            <input type="file" accept="image/jpeg,image/png,image/webp,image/gif,image/bmp,image/avif" data-jfb-file hidden></div>`;
+    }
+    function backMoreHtml(c) {
+        if (c.back === 'couleur') return `<label class="jfb-color">${esc(i18n('La couleur du dos'))} <input type="color" value="${esc(c.backColor)}" data-jfb-color></label>`;
+        if (c.back === 'photo') return `<span class="jfb-what">🖼 ${esc(c.backMedia?.title || i18n('sans titre'))}</span><button type="button" class="button small secondary" data-jfb-act="photo">${esc(i18n('Choisir une autre photo…'))}</button>`;
+        if (c.back === 'fichier') return `<button type="button" class="button small secondary" data-jfb-act="fichier">📁 ${esc(i18n('Choisir une autre image…'))}</button><small class="muted">${esc(i18n('ou glisse une image sur ce cadre · gardée dans ce navigateur'))}</small>`;
+        return `<small class="muted">${esc(i18n('Glisse une image sur ce cadre pour en faire le dos des cartes.'))}</small>`;
+    }
+    /** une image de l'ordinateur → recadrée au format d'une carte, réduite (JPEG), au plus BACK_MAX */
+    async function backFromFile(file) {
+        if (!file || !BACK_TYPES.test(file.type || '')) throw new Error(i18n('Ce fichier n’est pas une image (JPEG, PNG, WebP, GIF…).'));
+        if (file.size > BACK_FILE_MAX) throw new Error(i18n('Cette image est trop lourde (plus de {n} Mo).', {n: 25}));
+        const url = URL.createObjectURL(file);
+        try {
+            const img = await new Promise((res, rej) => { const im = new Image(); im.onload = () => res(im); im.onerror = () => rej(new Error(i18n('Cette image ne peut pas être lue.'))); im.src = url; });
+            const W = 300, H = 420, cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+            const x = cv.getContext('2d'), s = Math.max(W / img.naturalWidth, H / img.naturalHeight), w = img.naturalWidth * s, h = img.naturalHeight * s;
+            x.fillStyle = '#fff'; x.fillRect(0, 0, W, H); x.drawImage(img, (W - w) / 2, (H - h) / 2, w, h);
+            for (const q of [0.85, 0.72, 0.6, 0.45]) { const d = cv.toDataURL('image/jpeg', q); if (d.length <= BACK_MAX) return d; }
+            throw new Error(i18n('Cette image ne peut pas être lue.'));
+        } finally { URL.revokeObjectURL(url); }
+    }
+    /** une photo des médias de l'app : jamais une personne vivante, une fiche confidentielle ni une fiche à respecter (comme les portraits des jeux) */
+    async function backFromMedia(item) {
+        const find = d => (d?.media || []).find(m => Number(m.id) === Number(item.id));
+        let d = await loadData(), m = find(d); if (!m) { d = await loadData(true); m = find(d); }
+        if (!m || !mediaSrcOk(m.src || m.thumb)) throw new Error(i18n('Cette image ne peut pas servir de dos de cartes.'));
+        const byId = new Map((d.persons || []).map(p => [Number(p.id), p]));
+        if ((m.people || []).some(id => { const p = byId.get(Number(id)); return p && (p.living || p.priv || p.mem); })) throw new Error(i18n('Cette photo montre une personne vivante ou une fiche confidentielle : elle ne peut pas servir de dos de cartes.'));
+        return {id: Number(m.id), src: m.src || m.thumb, title: String(m.title || item.title || '').slice(0, 120)};
+    }
+    /** la préparation : boutons, aperçu, couleur, photo, fichier, glisser-déposer, ↶ Annuler */
+    function backBind(form, c, save) {
+        const box = form.querySelector('[data-jfb-box]'); if (!box) return;
+        Object.assign(c, backClean(c));
+        const prev = box.querySelector('[data-jfb-prev]'), more = box.querySelector('[data-jfb-more]'), file = box.querySelector('[data-jfb-file]');
+        const paint = () => {
+            prev.dataset.back = backKey(c); backApply(prev, c);
+            box.querySelectorAll('[data-jfb]').forEach(b => { const on = b.dataset.jfb === c.back; b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', String(on)); });
+            more.innerHTML = backMoreHtml(c);
+        };
+        const snap = () => ({back: c.back, backColor: c.backColor, backMedia: c.backMedia ? {...c.backMedia} : null, img: backImage()});
+        const restore = s => { if (s.img !== backImage()) putBackImage(s.img); Object.assign(c, {back: s.back, backColor: s.backColor, backMedia: s.backMedia}); save(); if (box.isConnected) paint(); };
+        const commit = before => { save(); paint(); const after = snap(); A()?.undoToast ? A().undoToast(i18n('Dos des cartes : {what}.', {what: backLabel(c)}), {undo: () => restore(before), redo: () => restore(after), icon: '🂠'}) : toast(i18n('Dos des cartes : {what}.', {what: backLabel(c)})); };
+        const useFile = async f => {
+            if (!f) return;
+            try { const before = snap(), d = await backFromFile(f); if (!putBackImage(d)) return; c.back = 'fichier'; commit(before); }
+            catch (er) { toast(er?.message || String(er), 'error'); }
+        };
+        const pickPhoto = async () => {
+            const open = PK()?.openMediaPicker || window.LCNDA_MEDIA_PICKER?.openMediaPicker; if (!open) return toast(i18n('Le choix des médias n’est pas disponible.'), 'error');
+            const it = await open({types: ['image'], title: i18n('🖼 Une photo pour le dos des cartes'), intro: i18n('Les photos d’une personne vivante ou d’une fiche confidentielle ne peuvent pas servir.'), value: c.backMedia ? [c.backMedia.id] : []});
+            const one = Array.isArray(it) ? it[0] : it; if (!one) return;
+            try { const before = snap(); c.backMedia = await backFromMedia(one); c.back = 'photo'; commit(before); } catch (er) { toast(er?.message || String(er), 'error'); }
+        };
+        let colorBefore = null;
+        box.addEventListener('click', e => {
+            const b = e.target.closest('[data-jfb],[data-jfb-act]'); if (!b) return; e.preventDefault();
+            const k = b.dataset.jfb || b.dataset.jfbAct;
+            if (k === 'photo' && (b.dataset.jfbAct || !c.backMedia)) return pickPhoto();
+            if (k === 'fichier' && (b.dataset.jfbAct || !backImage())) { file.value = ''; return file.click(); }
+            if (k === c.back) return;
+            const before = snap(); c.back = k; commit(before);
+        });
+        box.addEventListener('input', e => { if (!e.target.matches('[data-jfb-color]')) return; e.stopPropagation(); colorBefore = colorBefore || snap(); if (hexOk(e.target.value)) { c.backColor = e.target.value.toLowerCase(); prev.dataset.back = backKey(c); backApply(prev, c); save(); } });
+        box.addEventListener('change', e => {
+            if (e.target.matches('[data-jfb-color]')) { e.stopPropagation(); const before = colorBefore || snap(); colorBefore = null; if (before.backColor !== c.backColor) commit(before); return; }
+            if (e.target.matches('[data-jfb-file]')) { e.stopPropagation(); useFile(e.target.files?.[0]); }
+        });
+        box.addEventListener('dragover', e => { if (![...(e.dataTransfer?.types || [])].includes('Files')) return; e.preventDefault(); box.classList.add('is-drop'); });
+        box.addEventListener('dragleave', e => { if (!box.contains(e.relatedTarget)) box.classList.remove('is-drop'); });
+        box.addEventListener('drop', e => { const f = e.dataTransfer?.files?.[0]; box.classList.remove('is-drop'); if (!f) return; e.preventDefault(); useFile(f); });
+        paint();
+    }
+    const cardBack = {PRESETS: BACK_PRESETS, clean: backClean, key: backKey, apply: backApply, fieldHtml: backFieldHtml, bind: backBind, fromFile: backFromFile, fromMedia: backFromMedia, image: backImage};
+
     /* ═════ Colonne de gauche ═════ */
     function sidebarHtml(active) {
-        return games().map(g => { const def = DEFS.get(g.kind); return `<button class="side-button jf-side ${g.id === active ? 'is-active' : ''}" type="button" data-jf-open="${esc(g.id)}" title="${esc(i18n('Reprendre cette partie'))}"><strong>${def.icon} ${esc(g.name)}</strong><small>${esc(lab(def))}${g.finished ? ` · 🏁 ${esc(i18n('terminée'))}` : ''}</small>${g.status ? `<small>${esc(i18n(g.status))}</small>` : ''}</button>`; }).join('');
+        return games().map(g => { const def = DEFS.get(g.kind); return `<button class="side-button jf-side ${g.id === active ? 'is-active' : ''}" type="button" data-jf-open="${esc(g.id)}" data-jeu-type="${esc(g.kind)}" data-jeu-when="${Number(g.updated || g.created) || 0}" title="${esc(i18n('Reprendre cette partie'))}"><strong>${def.icon} ${esc(g.name)}</strong><small>${esc(lab(def))}${g.finished ? ` · 🏁 ${esc(i18n('terminée'))}` : ''}</small>${g.status ? `<small>${esc(i18n(g.status))}</small>` : ''}</button>`; }).join('');
     }
     function bindSidebar(content, ctx, signal) { content.querySelectorAll('[data-jf-open]').forEach(b => b.addEventListener('click', () => ctx.open?.(b.dataset.jfOpen), signal ? {signal} : undefined)); }
 
     function register(def) { DEFS.set(def.key, def); }
-    window.LCNDA_JEUX_FAMILLE = {register, owns, renderSetup, render, sidebarHtml, bindSidebar, stop, gameCount, MAX_GAMES,
+    window.LCNDA_JEUX_FAMILLE = {register, owns, renderSetup, render, sidebarHtml, bindSidebar, stop, gameCount, MAX_GAMES, cardBack,
         get KEYS() { return [...DEFS.keys()]; }, get VARIANTS() { return [...DEFS.values()].map(d => [d.key, i18n(d.label)]); },
         loadData, peopleFor, cleanCfg: (k, raw) => cleanCfg(DEFS.get(k), raw), _games: games, _write: writeGame,
         debug: () => ({setupKey, games: games().map(g => ({id: g.id, kind: g.kind, finished: !!g.finished}))})};

@@ -63,6 +63,10 @@
 /* la pastille à côté d'un parent, sur la fiche */
 .pv-sol { border: 0; background: none; padding: 0 2px; margin: 0 0 0 4px; cursor: pointer; line-height: 1; align-self: center; }
 .pv-sol .ui-badge { font-size: 9.5px; padding: 1px 5px; }
+/* colonne étroite (Parents à 1024 px) : la fiche, « Sans source » et 🗑 passent à la ligne au lieu de déborder sur la colonne Conjoints */
+.relation-entry:has(> .pv-sol) { flex-wrap: nowrap; max-width: 100%; } /* la corbeille reste à droite de la carte, même avec « Supposé » */
+.relation-entry:has(> .pv-sol) > :not(.relation-chip) { flex: 0 0 auto; }
+.relation-entry:has(> .pv-sol) > .relation-chip { min-width: 0; max-width: 100%; flex: 0 1 auto; }
 .pv-sol:focus-visible { outline: 2px solid var(--blue, #1f6fd1); outline-offset: 2px; }
 /* listes et widget */
 .pv-counts, .pv-w-counts { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 0 0 10px; }

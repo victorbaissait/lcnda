@@ -425,7 +425,7 @@ Les pistes sont montrées à partir de ce score (sur 100). Plus haut : moins de 
 Après chaque nouvel import du fichier INSEE : vérifier les dossiers en cours tout seul (jamais de changement sans ton clic). ¦ Jokaisen INSEE-tiedoston uuden tuonnin jälkeen: tarkista avoimet asiat itsestään (ei koskaan muutosta ilman napsautustasi). ¦ Az INSEE-fájl minden új importja után: a folyamatban lévő ügyek ellenőrzése magától (soha nincs változás a kattintásod nélkül).
 Automatique, dans la cloche ¦ Automaattisesti, kellossa ¦ Automatikusan, a csengőben
 Seulement à la main ¦ Vain käsin ¦ Csak kézzel
-📋 Questionnaire ¦ 📋 Kyselylomake ¦ 📋 Kérdőív
+📝 Questionnaire ¦ 📝 Kyselylomake ¦ 📝 Kérdőív
 Ce que l’héritier te renvoie après avoir rempli le questionnaire. ¦ Mitä perillinen palauttaa sinulle täytettyään. ¦ Amit az örökös visszaküld kitöltés után.
 Un petit fichier .json ¦ Pieni .json-tiedosto ¦ Egy kis .json fájl
 La page .html remplie ¦ Täytetty .html-sivu ¦ A kitöltött .html oldal

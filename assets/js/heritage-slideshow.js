@@ -43,6 +43,11 @@
     const TRANS = [['fade', 'Fondu'], ['slide', 'Glissement'], ['black', 'Fondu au noir'], ['none', 'Coupe nette']];
     const newShow = () => ({aspect: '16:9', theme: 'classique', music: null, musicVol: .5, slides: []});
     const newSlide = (type, o = {}) => ({id: sid(), type, dur: type === 'map' ? 10 : type === 'title' ? 5 : 6, trans: 'fade', kb: ['in', 'out', 'left', 'right'][seq % 4], text: '', textPos: 'bottom', ...o});
+    /** une diapositive venue d'un autre outil : {media_id, filename, title} sans « type » (📤 images → diaporama) devient une photo légendée */
+    const presetSlide = x => { if (['photo', 'title', 'map'].includes(x.type)) return {id: x.id || sid(), ...x};
+        if (typeof x.filename === 'string' && x.filename) return newSlide('photo', {media_id: Number(x.media_id || x.mediaId || x.id) || 0, filename: x.filename, text: String(x.text ?? x.title ?? '').slice(0, 400)});
+        if (x.title || x.text) return newSlide('title', {title: String(x.title || ''), sub: String(x.text || '')});
+        return null; };
     const fontOf = (show, T) => (show.font ? `'${String(show.font).replace(/['"\\]/g, '')}', ${T.font}` : T.font);
 
     /* ═════════ Styles propres (injectés : la barre du haut commune, les sections, le récit) ═════════ */
@@ -266,7 +271,8 @@
         const titleSub = [yrs, clean(p.occupation)].filter(Boolean).join(' — ');
         const opening = newSlide('title', {title: nm, sub: titleSub, dur: 6, notes: srcPerson.join('\n'), ...(portraitFile ? {filename: portraitFile, media_id: Number(p.portrait_media_id) || 0} : {})});
         // 2. les événements, dans l'ordre
-        const evs = (r.events || []).filter(e => e && (Number(e.person_id) === pid || e.scope === 'family')).sort((a, b) => (a.year || 9999) - (b.year || 9999) || String(a.sort_date || '').localeCompare(String(b.sort_date || '')) || a.id - b.id);
+        // 🔒 un événement confidentiel n'entre pas dans le récit : la présentation se garde, se montre à la famille et s'exporte
+        const evs = (r.events || []).filter(e => e && !Number(e.is_private) && (Number(e.person_id) === pid || e.scope === 'family')).sort((a, b) => (a.year || 9999) - (b.year || 9999) || String(a.sort_date || '').localeCompare(String(b.sort_date || '')) || a.id - b.id);
         const birth = evs.find(e => isType(e, ['BIRT'], ['naissance']));
         const birthY = Number(p.birth_year || birth?.year) || 0, deathE = evs.find(e => isType(e, ['DEAT'], ['deces'])), deathY = Number(p.death_year || deathE?.year) || 0;
         const partnerOf = e => { const other = Number(e.partner1_id) === pid ? Number(e.partner2_id) : Number(e.partner1_id); const q = (r.partners || []).find(x => Number(x.id) === other); return q ? AP.personName(q) : ''; };
@@ -361,7 +367,7 @@
         }
         // 📖 sa biographie (lib/biographie.php : ta version, sinon le texte court de l'app), juste après le titre
         if (o.bio) {
-            try { const bi = await api('biography', {id: pid, length: 'short'}); const txt = clean(String(bi.own || bi.generated || '').split(/\n\s*Notes :/)[0].replace(/\n+/g, ' '));
+            try { const bi = await api('biography', {id: pid, length: 'short'}); const txt = clean(String(bi.own || bi.generated || '').split(/\n\s*Notes :/)[0].replace(/🔒[^\n]*?(?:\.(?=\s|$)|(?=\n)|$)[ \t]*/gu, '').replace(/\n+/g, ' ')); // 🔒 sans les phrases d'événements confidentiels
                 if (txt) add(-1, 0, newSlide('title', {title: i18n('Sa vie en quelques mots'), sub: txt.length > 700 ? txt.slice(0, 697).replace(/\s+\S*$/, '') + '…' : txt, dur: durFor(txt), notes: bi.own ? i18n('Ta version de la biographie (📖 sur la fiche).') : i18n('Biographie écrite par l’app d’après la fiche.')})); } catch (_) {}
         }
         // la carte des lieux de vie, reliés dans l'ordre (seulement s'il y a au moins deux lieux)
@@ -424,7 +430,7 @@
                         const my = ++loadSeq; photoIds = null; personMedia = []; sum.hidden = true; paintPhotos(); if (!pid) return;
                         try { const r = await api('person', {id: pid}); if (my !== loadSeq) return; const pp = r.person || {};
                             personMedia = (r.media || []).filter(isImage).filter(m => Number(m.id) !== Number(pp.portrait_media_id));
-                            const n = (r.events || []).filter(e => Number(e.person_id) === pid || e.scope === 'family').length;
+                            const n = (r.events || []).filter(e => !Number(e.is_private) && (Number(e.person_id) === pid || e.scope === 'family')).length;
                             sum.hidden = false; sum.innerHTML = `<b>${esc(A().personName(pp))}</b> ${esc(A().years?.(pp) || '')} · ${esc(plural(n, 'événement'))} · ${esc(plural(personMedia.length, 'photo'))}${(r.children || []).length ? ` · ${esc(plural(r.children.length, 'enfant'))}` : ''}${pp.portrait_media_id || pp.portrait ? ' · ' + esc(i18n('portrait ✓')) : ''}`;
                             paintPhotos(); } catch (e) { toast(e.message, 'error'); }
                     };
@@ -460,7 +466,7 @@
         injectCss();
         let id = 0, name = 'Mon diaporama', show = newShow();
         if (ctx.id) { try { const r = await api('slideshow', {id: ctx.id}); if (r.show?.mode === 'keynote') return ext.openKeynote ? ext.openKeynote({...ctx, preload: r}) : toast('L’éditeur de présentation n’est pas chargé.', 'error'); id = r.id; name = r.name; show = {...newShow(), ...(r.show || {})}; show.slides = (Array.isArray(show.slides) ? show.slides : []).filter(x => x && typeof x === 'object').map(x => ({...x, dur: Math.min(600, Math.max(1, Number(x.dur) || 5))})); } catch (e) { return toast(e.message, 'error'); } }
-        if (ctx.preset?.show) { show = {...newShow(), ...ctx.preset.show}; show.slides = (Array.isArray(show.slides) ? show.slides : []).filter(x => x && typeof x === 'object').map(x => ({...x, dur: Math.min(600, Math.max(1, Number(x.dur) || 5))})); name = ctx.preset.name || name; }
+        if (ctx.preset?.show) { show = {...newShow(), ...ctx.preset.show}; show.slides = (Array.isArray(show.slides) ? show.slides : []).filter(x => x && typeof x === 'object').map(presetSlide).filter(Boolean).map(x => ({...x, dur: Math.min(600, Math.max(1, Number(x.dur) || 5))})); name = ctx.preset.name || name; }
         let cur = 0, dirty = !!ctx.preset, t = 0, playing = false, raf = 0, t0 = 0, p0 = 0, recording = null, hist = [], hi = -1, histT = 0;
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-ss-dlg';
         const ui = UI(), extra = `<span class="h-ss-extra" data-tbg="ss-top" data-tbg-label="Barre du haut (format, style, musique)">
@@ -472,7 +478,7 @@
             : `<header class="h-ss-top"><span class="h-ss-logo">🎞️</span><input class="h-ss-name" data-ss-name value="${esc(name)}" maxlength="200">${extra}<span class="spacer"></span><span data-ui-status></span><button type="button" class="button small secondary" data-ss-cmd="export">⤓ Exporter ▾</button><button type="button" class="button small" data-ss-cmd="save">💾 Enregistrer</button><button type="button" class="icon-button" data-ss-cmd="close">×</button></header>`;
         dlg.innerHTML = `<div class="h-ss">${top}
             <div class="h-ss-main">
-                <nav class="h-ss-rail" data-ss-rail aria-label="Outils"><button type="button" data-ss-cmd="addphotos" title="Ajouter des photos" aria-label="Ajouter des photos">🖼️</button><button type="button" data-ss-cmd="addtitle" title="Ajouter un titre" aria-label="Ajouter un titre">🔤</button><button type="button" data-ss-cmd="addmap" title="Ajouter une carte (trajet)" aria-label="Ajouter une carte">🗺️</button><button type="button" data-ss-cmd="story" title="✨ Récit d’une vie : un diaporama tout fait à partir de la fiche d’une personne" aria-label="Récit d’une vie">✨</button><button type="button" data-ss-cmd="play" title="Lire / pause" aria-label="Lire" data-shortcut="Espace">▶</button><button type="button" data-ss-cmd="watch" title="Regarder en plein écran (Échap pour revenir)" aria-label="Regarder">📺</button></nav>
+                <nav class="h-ss-rail" data-ss-rail aria-label="Outils"><button type="button" data-ss-cmd="addphotos" title="Ajouter des photos" aria-label="Ajouter des photos">🖼️</button><button type="button" data-ss-cmd="addtitle" title="Ajouter un titre" aria-label="Ajouter un titre">🔤</button><button type="button" data-ss-cmd="addmap" title="Ajouter une carte (trajet)" aria-label="Ajouter une carte">🗺️</button><button type="button" data-ss-cmd="story" title="✨ Récit d’une vie : un diaporama tout fait à partir de la fiche d’une personne" aria-label="Récit d’une vie">✨</button><button type="button" data-ss-cmd="play" title="Lire / pause" aria-label="Lire" data-shortcut="Espace">▶</button><button type="button" data-ss-cmd="watch" title="Regarder en plein écran (Échap pour revenir)" aria-label="Regarder">📺</button><button type="button" data-ss-cmd="sendto" title="${esc(i18n('📤 Envoyer vers… (le Montage vidéo, ton site)'))}" aria-label="${esc(i18n('Envoyer vers…'))}">📤</button></nav>
                 <aside class="h-ss-list"><div class="h-ss-add" data-tbg="ss-add" data-tbg-label="Ajouter (à gauche)"><button type="button" data-ss-cmd="addphotos">＋ Photos</button><button type="button" data-ss-cmd="addtitle">＋ Titre</button><button type="button" data-ss-cmd="addmap">＋ Carte (trajet)</button><button type="button" class="is-story" data-ss-cmd="story" title="Un diaporama tout fait à partir de la fiche d’une personne">✨ Récit d’une vie</button></div><ol data-ss-slides></ol></aside>
                 <section class="h-ss-center"><div class="h-ss-stage" data-ss-stage><canvas data-ss-canvas></canvas></div>
                     <div class="h-ss-transport"><span class="h-ss-tgrp" data-tbg="ss-transport" data-tbg-label="Lecture"><button type="button" class="button small" data-ss-cmd="play" data-shortcut="Espace">▶ Lire</button><button type="button" class="button small secondary" data-ss-cmd="watch" title="Regarder en plein écran (Échap pour revenir)">📺 Regarder</button></span><input type="range" data-ss-seek min="0" max="1000" value="0" aria-label="Avancer dans le diaporama" data-ui-done="other-scale"><output data-ss-time>0:00 / 0:00</output></div></section>
@@ -513,7 +519,7 @@
         }
         function paintProps() {
             const s = show.slides[cur], box = $('[data-ss-props]'), th = THEMES[show.theme] || THEMES.classique;
-            const doc = sec('doc', '🎞️ Tout le diaporama', `${F('Police des textes', `<button type="button" class="button small secondary h-ss-fontbtn" data-ss-cmd="font" style="font-family:${esc(fontOf(show, th))}">${esc(show.font || i18n('Police du style ({name})', {name: i18n(th.label)}))} ▾</button>`, 'La police de tous les titres et légendes. Sans choix, c’est celle du style (Classique, Album ancien…).')}${show.font ? '<button type="button" class="link-button" data-ss-cmd="fontreset">↺ Revenir à la police du style</button>' : ''}${F('Musique de fond', '<span class="h-ss-music" data-ss-music></span>')}<p class="muted">${plural(show.slides.length, 'diapositive')} · ${fmt(eng.total())}</p><button type="button" class="button small secondary" data-ss-cmd="tokeynote" title="Une présentation façon Keynote faite de ces diapositives (textes, formes, animations, mode présentateur…) ; le diaporama reste tel quel">🎤 En faire une présentation…</button>`, true);
+            const doc = sec('doc', '🎞️ Tout le diaporama', `${F('Police des textes', `<button type="button" class="button small secondary h-ss-fontbtn" data-ss-cmd="font" style="font-family:${esc(fontOf(show, th))}">${esc(show.font || i18n('Police du style ({name})', {name: i18n(th.label)}))} ▾</button>`, 'La police de tous les titres et légendes. Sans choix, c’est celle du style (Classique, Album ancien…).')}${show.font ? '<button type="button" class="link-button" data-ss-cmd="fontreset">↺ Revenir à la police du style</button>' : ''}${F('Musique de fond', '<span class="h-ss-music" data-ss-music></span>')}<p class="muted">${plural(show.slides.length, 'diapositive')} · ${fmt(eng.total())}</p><button type="button" class="button small secondary" data-ss-cmd="tokeynote" title="Une présentation façon Keynote faite de ces diapositives (textes, formes, animations, mode présentateur…) ; le diaporama reste tel quel">🎤 En faire une présentation…</button><button type="button" class="button small secondary" data-ss-cmd="sendto" title="${esc(i18n('Le diaporama en vidéo, rangé dans les médias, puis dans le Montage vidéo ou sur ton site'))}">${esc(i18n('📤 Envoyer vers…'))}</button>`, true);
             if (!s) { box.innerHTML = `<p class="muted">Choisis une diapositive (à gauche) pour régler sa durée, sa transition, son texte, sa voix.</p>${doc}`; paintMusic(); return; }
             const h = [`<h4>${ICON[s.type]} Diapositive ${cur + 1}</h4>`];
             // Couleur
@@ -586,7 +592,7 @@
         /* ─── ✨ le récit d'une vie ─── */
         async function placesOf(pid) {
             const r = await api('person', {id: pid}); const p = r.person || {};
-            const ev = (r.events || []).filter(e => e.latitude && e.longitude).sort((a, b) => (a.year || 9999) - (b.year || 9999) || String(a.sort_date || '').localeCompare(String(b.sort_date || '')));
+            const ev = (r.events || []).filter(e => e.latitude && e.longitude && !Number(e.is_private)).sort((a, b) => (a.year || 9999) - (b.year || 9999) || String(a.sort_date || '').localeCompare(String(b.sort_date || '')));
             const route = []; ev.forEach(e => { const last = route[route.length - 1]; if (last && Math.abs(last.lat - e.latitude) < 1e-4 && Math.abs(last.lon - e.longitude) < 1e-4) return; route.push({name: e.place_name, label: `${e.place_name}${e.type_label ? ` (${String(e.type_label).toLowerCase()})` : ''}`, year: e.year || '', lat: +e.latitude, lon: +e.longitude}); });
             return {r, p, route};
         }
@@ -683,6 +689,23 @@
                 }});
         }
         ui.onPrintKey?.(dlg, () => printShow()); // L1 : ⌘P
+        /* ─── 📤 Envoyer vers… : le diaporama en vidéo (WebM), rangé dans les médias (comme « 💾 Dans les médias »), puis le Montage ou le site ─── */
+        const sendOpts = (r, title) => (r && ext.sendTo ? {action: {label: i18n('📤 Envoyer vers…'), run: () => ext.sendTo('video', {media: {id: Number(r.media_id), filename: r.filename, title}}, {title, exclude: ['slideshow', 'keynote']})}} : {});
+        let sending = false;
+        async function sendTo(anchor) {
+            if (sending) return;
+            if (!ext.sendTo) return toast(i18n('« Envoyer vers… » n’est pas chargé.'), 'error');
+            if (!show.slides.length) return toast('Le diaporama est vide : ajoute une diapositive d’abord.', 'error');
+            if (playing) play();
+            if (!await A().confirmBox(i18n('Le diaporama devient une vidéo ({time}), rangée dans les Médias, puis tu choisis où elle va : le Montage vidéo ou ton site. Laisse la fenêtre ouverte pendant l’enregistrement.', {time: fmt(eng.total())}), {title: i18n('📤 Envoyer le diaporama'), okLabel: i18n('Fabriquer la vidéo'), danger: false})) return;
+            sending = true; const n = curName(), here = t;
+            try {
+                const {blob, total} = await recordVideo(); progress(i18n('Rangement de la vidéo dans les médias…'));
+                const r = await toMedia(blob, `${safeName(n)}.webm`, 'video', n, {duration: total}); progress(''); drawAt(here);
+                return ext.sendTo('video', {media: {id: Number(r.media_id), filename: r.filename, title: n}}, {anchor, title: n, exclude: ['slideshow', 'keynote']});
+            } catch (e) { progress(''); toast(e.message || String(e), 'error'); }
+            finally { sending = false; }
+        }
         async function exportDialog() {
             if (!show.slides.length) return toast('Le diaporama est vide : ajoute une diapositive d’abord.', 'error');
             if (playing) play();
@@ -692,7 +715,7 @@
             await ui.openExportDialog({title: n, defaultName: n, quality: false, saveCopy: true, info: `${plural(show.slides.length, 'diapositive')} · ${fmt(eng.total())} · ${show.aspect}`,
                 preview: () => canvas.toDataURL('image/jpeg', .8),
                 formats: [
-                    {id: 'video', label: '🎬 Vidéo', hint: 'WebM, avec le son', ext: 'webm', run: async o => { const {blob, total} = await recordVideo(); download(blob, o.filename); if (o.saveCopy) await toMedia(blob, o.filename, 'video', n, {duration: total}); drawAt(here); toast(o.saveCopy ? 'Vidéo téléchargée et rangée dans les Médias.' : 'Vidéo téléchargée.'); }},
+                    {id: 'video', label: '🎬 Vidéo', hint: 'WebM, avec le son', ext: 'webm', run: async o => { const {blob, total} = await recordVideo(); download(blob, o.filename); const u = o.saveCopy ? await toMedia(blob, o.filename, 'video', n, {duration: total}) : null; drawAt(here); toast(o.saveCopy ? 'Vidéo téléchargée et rangée dans les Médias.' : 'Vidéo téléchargée.', '', sendOpts(u, n)); }},
                     {id: 'png', hint: 'cette diapositive', run: imgRun('png')},
                     {id: 'jpg', hint: 'cette diapositive', run: imgRun('jpg')},
                     {id: 'pdf', hint: 'une diapositive par page (« Enregistrer en PDF »)', ext: '', run: pagesRun},
@@ -727,6 +750,7 @@
             if (k === 'addtitle') { show.slides.splice(cur + 1, 0, newSlide('title', {title: 'Titre', sub: ''})); cur = Math.min(cur + 1, show.slides.length - 1); touch(); return rebuild(); }
             if (k === 'addmap') { show.slides.splice(cur + 1, 0, newSlide('map', {title: 'Le trajet', route: [], mapBg: 'offline'})); cur = Math.min(cur + 1, show.slides.length - 1); touch(); return rebuild(); }
             if (k === 'story') return story();
+            if (k === 'sendto') return sendTo(c);
             if (k === 'tokeynote') { if (!ext.keynoteFromSlideshow) return toast('L’éditeur de présentation n’est pas chargé.', 'error'); if (playing) play(); return ext.keynoteFromSlideshow(show, curName(), {onSaved: ctx.onSaved, onClose: ctx.onClose}); }
             if (k === 'font') { if (!ui.openFontPicker) return; const f = await ui.openFontPicker({value: show.font || '', sample: show.slides.find(x => x.type === 'title')?.title || name}); if (f) { show.font = String(f).slice(0, 100); touch(); await rebuild(); } return; }
             if (k === 'fontreset') { delete show.font; touch(); return rebuild(); }
@@ -784,6 +808,19 @@
     }
 
     ext.openSlideshow = open;
+    /** ✨ Récit d'une vie depuis une fiche (ou la liste) : d'abord ses choix, puis le diaporama déjà rempli. Une seule fenêtre à la fois
+     *  (avant : le diaporama vide s'ouvrait derrière les choix et restait là après « Annuler » ; un double-clic en ouvrait deux de chaque). */
+    function storyThenOpen(ctx = {}) {
+        return A().once('ss-story', async () => {
+            const o = await storyOptions({pid: Number(ctx.personId) || 0}); if (!o) return null;
+            let st; try { st = await lifeStory(o); } catch (e) { toast(e.message, 'error'); return null; }
+            if (!st.show.slides.length) { toast('Rien à raconter pour cette personne.', 'error'); return null; }
+            const r = await open({...ctx, preset: {show: st.show, name: st.name}});
+            toast(`✨ ${plural(st.count, 'diapositive')} : chaque texte vient de la fiche. Tout reste modifiable.`);
+            return r;
+        });
+    }
+    ext.storyThenOpen = storyThenOpen;
     ext.slideshowInternals = {makeEngine, mapBackground, whenOf, fullDate};
     ext.editToolsExtra = ext.editToolsExtra || [];
     /** ⤒ Rouvrir un diaporama exporté (« 💾 Fichier », type lcnda-diaporama) : il s'ouvre dans l'éditeur, tel quel (cartes animées,
@@ -815,9 +852,9 @@
         open: (id, again) => open({id, onSaved: again, onClose: again}),
         create: again => chooseKind(again),
         rename: (id, name) => post('rename_slideshow', {id, name}),
-        remove: id => post('delete_slideshow', {id}), createLabel: '＋ Nouveau',
+        remove: id => (ext.projectDelUndo ? ext.projectDelUndo('delete_slideshow')(id) : post('delete_slideshow', {id})), undo: true, createLabel: '＋ Nouveau',
         extra: '<button type="button" class="button secondary" data-et-x="story" title="Les photos, les lieux et la vie d’une personne, en diaporama tout fait">✨ Récit d’une vie</button><button type="button" class="button secondary" data-et-x="kimport" title="PowerPoint (.pptx), OpenDocument (.odp), PDF, images, Markdown, texte, JSON">⤒ Importer une présentation</button><button type="button" class="button secondary" data-et-x="ssimport" title="Un fichier de diaporama exporté par LCNDA (⤓ Exporter → 💾 Fichier)">⤒ Importer un diaporama</button>',
-        onExtra: (k, again) => { if (k === 'ssimport') return importShowFile(again); if (k === 'story') open({story: true, onSaved: again, onClose: again}); if (k === 'kimport') ext.importPresentation ? ext.importPresentation({onSaved: again, onClose: again}) : toast('L’éditeur de présentation n’est pas chargé.', 'error'); }});
+        onExtra: (k, again) => { if (k === 'ssimport') return importShowFile(again); if (k === 'story') storyThenOpen({onSaved: again, onClose: again}); if (k === 'kimport') ext.importPresentation ? ext.importPresentation({onSaved: again, onClose: again}) : toast('L’éditeur de présentation n’est pas chargé.', 'error'); }});
 
     /* ✨ sur la fiche d'une personne : un bouton dans la rangée du haut (ext.afterPerson, sans toucher app.js) */
     ext.afterPerson = ext.afterPerson || [];
@@ -827,5 +864,5 @@
         row.insertAdjacentHTML('afterbegin', `<button type="button" class="icon-action h-ss-storybtn" data-ss-story-person="${Number(p.id)}" title="${esc(i18n('✨ Récit d’une vie : un diaporama tout fait à partir de cette fiche'))}" aria-label="${esc(i18n('Récit d’une vie en diaporama'))}">✨</button>`);
     });
     injectCss();
-    document.addEventListener('click', e => { const b = e.target.closest?.('[data-ss-story-person]'); if (!b) return; e.preventDefault(); open({story: true, personId: Number(b.dataset.ssStoryPerson)}); });
+    document.addEventListener('click', e => { const b = e.target.closest?.('[data-ss-story-person]'); if (!b) return; e.preventDefault(); storyThenOpen({personId: Number(b.dataset.ssStoryPerson)}); });
 })();

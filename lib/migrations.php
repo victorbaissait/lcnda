@@ -23,7 +23,7 @@ declare(strict_types=1);
  * autre fichier appelée ici doit faire « $own = !$pdo->inTransaction() » avant d'ouvrir la sienne.
  */
 
-const SCHEMA_VERSION = 104;
+const SCHEMA_VERSION = 112;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -133,6 +133,14 @@ function migration_steps(): array
         102 => 'schema_v102',
         103 => 'schema_v103',
         104 => 'schema_v104',
+        105 => 'schema_v105',
+        106 => 'schema_v106',
+        107 => 'schema_v107',
+        108 => 'schema_v108',
+        109 => 'schema_v109',
+        110 => 'schema_v110',
+        111 => 'schema_v111',
+        112 => 'schema_v112',
     ];
 }
 
@@ -2823,4 +2831,65 @@ function schema_v104(PDO $pdo): void
 {
     if (!function_exists('media_pages_install')) { require_once __DIR__ . '/media_pages.php'; }
     media_pages_install($pdo);
+}
+
+/** 🔗 documents liés (lib/doc_links.php) : la table doc_links */
+function schema_v105(PDO $pdo): void
+{
+    if (!function_exists('doc_links_install')) { require_once __DIR__ . '/doc_links.php'; }
+    doc_links_install($pdo);
+}
+
+/** 111 : 👤 Personnes — 🔒 événement confidentiel (events.is_private : caché en consultation, dans les exports, les partages et
+ *  le site) et 📝 note de recherche par fait (events.research_note : « à vérifier : cote, piste »), audit des onglets §2 */
+function schema_v111(PDO $pdo): void
+{
+    $cols = array_column($pdo->query('PRAGMA table_info(events)')->fetchAll(PDO::FETCH_ASSOC), 'name');
+    if (!in_array('is_private', $cols, true)) { $pdo->exec('ALTER TABLE events ADD COLUMN is_private INTEGER NOT NULL DEFAULT 0'); }
+    if (!in_array('research_note', $cols, true)) { $pdo->exec("ALTER TABLE events ADD COLUMN research_note TEXT NOT NULL DEFAULT ''"); }
+}
+
+/** 112 : 🕵️ Enquêtes — la couleur et l'icône d'un dossier de pièces (investigation_media_folders.color : « #rrggbb » ou vide ;
+ *  .icon : un emoji, vide = 📁) */
+function schema_v112(PDO $pdo): void
+{
+    $cols = array_column($pdo->query('PRAGMA table_info(investigation_media_folders)')->fetchAll(PDO::FETCH_ASSOC), 'name');
+    if (!in_array('color', $cols, true)) { $pdo->exec("ALTER TABLE investigation_media_folders ADD COLUMN color TEXT NOT NULL DEFAULT ''"); }
+    if (!in_array('icon', $cols, true)) { $pdo->exec("ALTER TABLE investigation_media_folders ADD COLUMN icon TEXT NOT NULL DEFAULT ''"); }
+}
+
+/** 109 : ➕ recueils — l'avancement dans le temps (recueil_progress), « confiée à » d'une page, l'objectif d'un recueil */
+/** 110 : 🎞 Studio d'animation, les projets */
+function schema_v110(PDO $pdo): void
+{
+    if (!function_exists('anim_install')) { require_once __DIR__ . '/anim_studio.php'; }
+    anim_install($pdo);
+}
+
+function schema_v109(PDO $pdo): void
+{
+    if (!function_exists('recueil_etat_install')) { require_once __DIR__ . '/recueil_etat.php'; }
+    if (!function_exists('recueil_plus_install')) { require_once __DIR__ . '/recueil_plus.php'; }
+    recueil_plus_install($pdo);
+}
+
+/** 108 : 🏛 la fiche d'identité d'un recueil (service d'archives, fonds, série, liens, autre exemplaire, communicabilité, réutilisation, support, état…) */
+function schema_v108(PDO $pdo): void
+{
+    if (!function_exists('recueil_fiche_install')) { require_once __DIR__ . '/recueil_fiche.php'; }
+    recueil_fiche_install($pdo);
+}
+
+/** 107 : 📑 le sommaire d'un recueil (chapitres sur plusieurs niveaux, passages décrits) */
+function schema_v107(PDO $pdo): void
+{
+    if (!function_exists('recueil_toc_install')) { require_once __DIR__ . '/recueil_toc.php'; }
+    recueil_toc_install($pdo);
+}
+
+/** 106 : 🗂 l'état des pages d'un recueil (état choisi, absence et sa raison, lisibilité, photo à refaire, lacune) ; numérotation et pages attendues */
+function schema_v106(PDO $pdo): void
+{
+    if (!function_exists('recueil_etat_install')) { require_once __DIR__ . '/recueil_etat.php'; }
+    recueil_etat_install($pdo);
 }

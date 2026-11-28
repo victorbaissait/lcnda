@@ -17,6 +17,7 @@ declare(strict_types=1);
  */
 
 const BIO_LENGTHS = ['short', 'normal', 'long'];
+const BIO_PRIVATE_MARK = '🔒 '; // une phrase tirée d'un événement confidentiel
 const BIO_TONES = ['neutral', 'warm'];
 const BIO_SOURCES = ['none', 'inline', 'notes'];
 const BIO_MONTHS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
@@ -109,13 +110,25 @@ function bio_cap(string $s): string
     return $s === '' ? '' : mb_strtoupper(mb_substr($s, 0, 1)) . mb_substr($s, 1);
 }
 
+/**
+ * 🔒 Les fiches qu'un export ne montre pas (vivants, fiches confidentielles, mode confidentialité) : le temps d'une requête, la
+ * biographie écrite pour un autre fiche ne les nomme pas (parents, conjoints, enfants, témoins). null = ne rien changer.
+ */
+function bio_hidden_persons(?array $set = null): array
+{
+    static $hidden = [];
+    if ($set !== null) { $hidden = $set; }
+    return $hidden;
+}
+
 /** Tout ce que la fiche sait, rangé pour écrire */
 function bio_facts(PDO $pdo, int $id): array
 {
+    $hiddenIds = bio_hidden_persons();
     $s = $pdo->prepare('SELECT * FROM persons WHERE id=?'); $s->execute([$id]);
     $p = $s->fetch(PDO::FETCH_ASSOC);
     if (!$p) { throw new RuntimeException('Fiche introuvable.'); }
-    $evq = "SELECT e.id, e.scope, e.person_id, e.family_id, e.date_text, e.year, e.title, e.description, e.cause, e.address, t.gedcom_tag AS tag, t.label AS type_label,
+    $evq = "SELECT e.id, e.scope, e.person_id, e.family_id, e.date_text, e.year, COALESCE(e.is_private,0) AS is_private, e.title, e.description, e.cause, e.address, t.gedcom_tag AS tag, t.label AS type_label,
             pl.name AS place_name, pl.county, pl.country
         FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id";
     $s = $pdo->prepare("$evq WHERE e.person_id=? ORDER BY COALESCE(e.year,9999), e.sort_date, e.id"); $s->execute([$id]);
@@ -124,7 +137,7 @@ function bio_facts(PDO $pdo, int $id): array
     $s = $pdo->prepare('SELECT f.id, f.partner1_id, f.partner2_id FROM family_children fc JOIN families f ON f.id=fc.family_id WHERE fc.child_id=? ORDER BY fc.id'); $s->execute([$id]);
     $parentFams = $s->fetchAll(PDO::FETCH_ASSOC);
     $pp = $pdo->prepare('SELECT id, first_name, last_name, gender, occupation FROM persons WHERE id=?');
-    $person = static function (?int $pid) use ($pp): ?array { if (!$pid) { return null; } $pp->execute([$pid]); return $pp->fetch(PDO::FETCH_ASSOC) ?: null; };
+    $person = static function (?int $pid) use ($pp, $hiddenIds): ?array { if (!$pid || isset($hiddenIds[$pid])) { return null; } $pp->execute([$pid]); return $pp->fetch(PDO::FETCH_ASSOC) ?: null; };
     $parents = [];
     if ($parentFams) { foreach ([(int) $parentFams[0]['partner1_id'], (int) $parentFams[0]['partner2_id']] as $x) { if ($q = $person($x)) { $parents[] = $q; } } }
     $siblings = 0;
@@ -138,7 +151,7 @@ function bio_facts(PDO $pdo, int $id): array
     foreach ($s->fetchAll(PDO::FETCH_ASSOC) as $f) {
         $other = (int) $f['partner1_id'] === $id ? (int) $f['partner2_id'] : (int) $f['partner1_id'];
         $fe->execute([(int) $f['id']]); $kids->execute([(int) $f['id']]);
-        $unions[] = ['id' => (int) $f['id'], 'spouse' => $person($other), 'events' => $fe->fetchAll(PDO::FETCH_ASSOC), 'children' => $kids->fetchAll(PDO::FETCH_ASSOC)];
+        $unions[] = ['id' => (int) $f['id'], 'spouse' => $person($other), 'events' => $fe->fetchAll(PDO::FETCH_ASSOC), 'children' => array_values(array_filter($kids->fetchAll(PDO::FETCH_ASSOC), static fn($k) => !isset($hiddenIds[(int) $k['id']])))];
     }
     // témoins, parrains, marraines
     $allIds = array_merge(array_column($events, 'id'), ...array_map(static fn($u) => array_column($u['events'], 'id'), $unions ?: [['events' => []]]));
@@ -148,7 +161,7 @@ function bio_facts(PDO $pdo, int $id): array
         try {
             $w = $pdo->prepare("SELECT w.event_id, w.note, p.id, p.first_name, p.last_name, p.gender FROM event_witnesses w JOIN persons p ON p.id=w.person_id WHERE w.event_id IN ($marks) ORDER BY w.position, w.id");
             $w->execute($allIds);
-            foreach ($w->fetchAll(PDO::FETCH_ASSOC) as $r) { $witnesses[(int) $r['event_id']][] = $r; }
+            foreach ($w->fetchAll(PDO::FETCH_ASSOC) as $r) { if (!isset($hiddenIds[(int) $r['id']])) { $witnesses[(int) $r['event_id']][] = $r; } }
         } catch (Throwable $_) {}
     }
     // recensements
@@ -201,6 +214,9 @@ function bio_write(array $F, array $o): array
     };
     $jobOf = static fn(?array $q) => $q && $o['jobs'] && trim((string) ($q['occupation'] ?? '')) !== '' ? ', ' . bio_job((string) $q['occupation']) : '';
     $P1 = []; $P2 = []; $P3 = []; $P4 = [];
+    // 🔒 événement confidentiel : sa phrase commence par 🔒 pour le propriétaire (en consultation et dans les exports, l'événement n'est
+    // même pas lu : private_events_shadow) ; bio_strip_private() retire ces phrases d'un texte gardé qui sortirait de l'app
+    $lk = static fn(?array $ev): string => $ev && !empty($ev['is_private']) ? BIO_PRIVATE_MARK : '';
 
     // ── 1. naissance et parents ──
     $birth = $find(['BIRT']); $bapt = $find(['CHR', 'BAPM']);
@@ -213,7 +229,7 @@ function bio_write(array $F, array $o): array
     if ($birth && (trim((string) $birth['date_text']) !== '' || $birth['year'] || $birth['place_name'])) {
         $when = bio_when($birth['date_text'], $birth['year']); $where = bio_place($birth);
         $verb = $warm ? 'voit le jour' : 'naît';
-        $P1[] = trim("$full $verb " . trim("$when $where")) . ($parentTxt ? ", $parentTxt" : '') . $cite($srcOf($birth)) . '.';
+        $P1[] = $lk($birth) . trim("$full $verb " . trim("$when $where")) . ($parentTxt ? ", $parentTxt" : '') . $cite($srcOf($birth)) . '.';
     } elseif ($parentTxt) {
         $P1[] = "$full est " . ($f ? 'la ' : ($m ? 'le ' : 'l’')) . $parentTxt . '.';
     }
@@ -221,9 +237,9 @@ function bio_write(array $F, array $o): array
         $who = $P1 ? $il : $full;
         $s = trim("$who est baptisé$e " . trim(bio_when($bapt['date_text'], $bapt['year']) . ' ' . bio_place($bapt)));
         $wt = $o['witnesses'] ? $witnessText($bapt) : '';
-        $P1[] = $s . ($wt ? " ; sont présents $wt" : '') . $cite($srcOf($bapt)) . '.';
+        $P1[] = $lk($bapt) . $s . ($wt ? " ; sont présents $wt" : '') . $cite($srcOf($bapt)) . '.';
     } elseif ($bapt && !$P1) {
-        $P1[] = "$full est baptisé$e " . trim(bio_when($bapt['date_text'], $bapt['year']) . ' ' . bio_place($bapt)) . '.';
+        $P1[] = $lk($bapt) . "$full est baptisé$e " . trim(bio_when($bapt['date_text'], $bapt['year']) . ' ' . bio_place($bapt)) . '.';
     }
     if (!$P1) { $P1[] = $warm ? "Voici ce que l’on sait de $full." : "La naissance de $full n’est pas encore notée dans la fiche."; }
     if ($long && $F['siblings'] > 0) { $P1[] = ($F['siblings'] === 1 ? "$il a un frère ou une sœur dans la base." : "$il a {$F['siblings']} frères et sœurs dans la base."); }
@@ -237,13 +253,13 @@ function bio_write(array $F, array $o): array
         foreach ($occ as $ev) {
             $j = trim((string) ($ev['description'] ?: $ev['title'])); if ($j === '' || isset($seen[(int) $ev['id']])) { continue; }
             $seen[(int) $ev['id']] = true;
-            $jobs[] = ['job' => bio_job($j), 'when' => bio_when($ev['date_text'], $ev['year']), 'where' => bio_place($ev), 'src' => $srcOf($ev)];
+            $jobs[] = ['lock' => !empty($ev['is_private']), 'job' => bio_job($j), 'when' => bio_when($ev['date_text'], $ev['year']), 'where' => bio_place($ev), 'src' => $srcOf($ev)];
         }
         $living = ($p['living_status'] ?? '') === 'living';
         if ($jobs && !$short) {
             $parts = array_map(static fn($j) => trim($j['job'] . ' ' . trim($j['when'] . ' ' . $j['where'])), $jobs);
             $srcs = array_merge(...array_map(static fn($j) => $j['src'], $jobs));
-            $P2[] = ($warm ? "Au fil de sa vie, $first est " : "$il est ") . bio_join(array_values(array_unique($parts))) . $cite($srcs) . '.';
+            $P2[] = (in_array(true, array_column($jobs, 'lock'), true) ? BIO_PRIVATE_MARK : '') . ($warm ? "Au fil de sa vie, $first est " : "$il est ") . bio_join(array_values(array_unique($parts))) . $cite($srcs) . '.';
         } elseif ($mainJob !== '' || $jobs) {
             $j = $mainJob !== '' ? bio_job($mainJob) : $jobs[0]['job'];
             $P2[] = $warm ? ($living ? "$first exerce le métier de $j." : "$first a exercé le métier de $j.") : ($living ? "$il est $j." : "$il était $j.");
@@ -264,7 +280,7 @@ function bio_write(array $F, array $o): array
             $s = $again . $first . " $verb" . ($spName ?: '') . ' ' . trim("$when $where");
             if ($age && $age[1]) { $s .= ", à {$age[0]} ans"; }
             $wt = $o['witnesses'] && !$short ? $witnessText($marr) : '';
-            $P3[] = trim($s) . ($wt ? " ; les témoins sont $wt" : '') . $cite($srcOf($marr)) . '.';
+            $P3[] = $lk($marr) . trim($s) . ($wt ? " ; les témoins sont $wt" : '') . $cite($srcOf($marr)) . '.';
         } elseif ($spName) {
             $P3[] = $again . "$first " . ($marr ? "épouse $spName" : "a pour conjoint" . ($sp && ($sp['gender'] ?? '') === 'female' ? 'e' : '') . " $spName") . '.';
         }
@@ -288,7 +304,7 @@ function bio_write(array $F, array $o): array
         foreach (array_slice($homes, 0, $long ? 12 : 4) as $ev) {
             $where = bio_place($ev); if ($where === '' || $where === $last) { continue; }
             $when = bio_when($ev['date_text'], $ev['year']);
-            $P4[] = ($when ? bio_cap($when) . ', ' : '') . "$first " . ($last ? 's’installe' : 'habite') . " $where" . (trim((string) $ev['address']) !== '' && $long ? ', ' . trim((string) $ev['address']) : '') . $cite($srcOf($ev)) . '.';
+            $P4[] = $lk($ev) . ($when ? bio_cap($when) . ', ' : '') . "$first " . ($last ? 's’installe' : 'habite') . " $where" . (trim((string) $ev['address']) !== '' && $long ? ', ' . trim((string) $ev['address']) : '') . $cite($srcOf($ev)) . '.';
             $last = $where;
         }
         if ($o['census'] && $F['census']) {
@@ -313,7 +329,7 @@ function bio_write(array $F, array $o): array
                 if (in_array($tag, $skip, true) || preg_match('/^(profession|métier|metier|domicile|résidence|residence|recensement)/u', $lab)) { continue; }
                 $when = bio_when($ev['date_text'], $ev['year']); $where = bio_place($ev); $desc = trim((string) ($ev['description'] ?: $ev['title']));
                 if ($when === '' && $where === '' && $desc === '') { continue; }
-                $P4[] = bio_cap(trim(($lab !== '' ? $lab : 'événement') . ' ' . trim("$when $where"))) . ($desc !== '' && mb_strtolower($desc) !== $lab ? ' : ' . rtrim($desc, '.') : '') . $cite($srcOf($ev)) . '.';
+                $P4[] = $lk($ev) . bio_cap(trim(($lab !== '' ? $lab : 'événement') . ' ' . trim("$when $where"))) . ($desc !== '' && mb_strtolower($desc) !== $lab ? ' : ' . rtrim($desc, '.') : '') . $cite($srcOf($ev)) . '.';
             }
         }
     }
@@ -328,7 +344,7 @@ function bio_write(array $F, array $o): array
         $s = "$first $verb " . trim(bio_when($death['date_text'], $death['year']) . ' ' . bio_place($death));
         if ($age) { $s .= $age[1] ? ", à {$age[0]} ans" : ($long || $o['length'] === 'normal' ? ", vers {$age[0]} ans" : ''); }
         if ($long && trim((string) $death['cause']) !== '') { $s .= ' (cause notée : ' . mb_strtolower(trim((string) $death['cause'])) . ')'; }
-        $P5[] = trim($s) . $cite($srcOf($death)) . '.';
+        $P5[] = $lk($death) . trim($s) . $cite($srcOf($death)) . '.';
     } elseif (($p['living_status'] ?? '') === 'living' && $bD && !$short) {
         $now = [(int) date('Y'), (int) date('n'), (int) date('j'), false];
         $age = bio_age($bD, $now);
@@ -336,7 +352,7 @@ function bio_write(array $F, array $o): array
     }
     if ($buri && !$short && ($buri['place_name'] || trim((string) $buri['date_text']) !== '')) {
         $kind = strtoupper((string) $buri['tag']) === 'CREM' ? 'incinéré' : 'inhumé';
-        $P5[] = ($P5 ? $il : $first) . " est $kind$e " . trim(bio_when($buri['date_text'], $buri['year']) . ' ' . bio_place($buri)) . $cite($srcOf($buri)) . '.';
+        $P5[] = $lk($buri) . ($P5 ? $il : $first) . " est $kind$e " . trim(bio_when($buri['date_text'], $buri['year']) . ' ' . bio_place($buri)) . $cite($srcOf($buri)) . '.';
     }
     if ($o['sources'] !== 'none' && $F['sources']['person'] && !$short) {
         $c = $cite($F['sources']['person']);
@@ -373,6 +389,7 @@ function bio_get(PDO $pdo, int $id, array $q = []): array
     $o = bio_options(array_intersect_key($q, array_flip(['length', 'tone', 'jobs', 'witnesses', 'census', 'sources'])) + $saved);
     $gen = bio_generate($pdo, $id, $o);
     $own = $row && trim((string) $row['text']) !== '' ? (string) $row['text'] : '';
+    if ($own !== '' && function_exists('private_events_masked') && private_events_masked()) { $own = bio_strip_private($own); } // 🔒 en consultation
     return [
         'person_id' => $id, 'options' => $o, 'generated' => $gen['text'], 'paragraphs' => $gen['paragraphs'], 'notes' => $gen['notes'],
         'own' => $own, 'own_base' => $own !== '' ? (string) $row['generated_text'] : '',
@@ -398,13 +415,71 @@ function bio_save(PDO $pdo, array $d): array
     return ['ok' => true] + bio_get($pdo, $id);
 }
 
+/**
+ * 🔒 Sans les phrases d'événements confidentiels (celles qui commencent par 🔒, jusqu'au point) : pour ta version gardée quand
+ * elle sort de l'app (exports, livre, site) ou se lit en consultation.
+ */
+function bio_strip_private(string $text): string
+{
+    if (!str_contains($text, trim(BIO_PRIVATE_MARK))) { return $text; }
+    $out = preg_replace('/' . preg_quote(trim(BIO_PRIVATE_MARK), '/') . '[^\n]*?(?:\.(?=\s|$)|(?=\n)|$)[ \t]*/u', '', $text);
+    return trim((string) preg_replace("/\n{3,}/", "\n\n", (string) $out));
+}
+
 /** Le texte à utiliser ailleurs (livre de famille, mise en page) : ta version, sinon celui de l'app avec tes réglages */
 function bio_text_for(PDO $pdo, int $id): string
 {
     $row = bio_row($pdo, $id);
-    if ($row && trim((string) $row['text']) !== '') { return (string) $row['text']; }
+    if ($row && trim((string) $row['text']) !== '') { return function_exists('private_events_masked') && private_events_masked() ? bio_strip_private((string) $row['text']) : (string) $row['text']; }
     $o = $row ? (json_decode((string) $row['options_json'], true) ?: []) : [];
     return bio_generate($pdo, $id, $o)['text'];
+}
+
+/**
+ * 🔒 GET bio_living_mentions : les récits écrits à la main (« ta version ») qui nomment une personne vivante, probablement
+ * vivante (statut inconnu, née il y a moins de 100 ans, sans décès) ou confidentielle. Le livre de famille prévient avant
+ * l'export : le texte écrit à la main sort tel quel. Rien n'est modifié.
+ */
+function bio_living_mentions(PDO $pdo): array
+{
+    $norm = static function (string $t): string {
+        $t = mb_strtolower($t);
+        if (class_exists('Normalizer')) { $t = (string) preg_replace('/\p{Mn}+/u', '', (string) Normalizer::normalize($t, Normalizer::FORM_D)); }
+        return ' ' . trim((string) preg_replace('/[^\p{L}\p{N}]+/u', ' ', $t)) . ' ';
+    };
+    $rows = $pdo->query("SELECT b.person_id, b.text FROM person_biographies b WHERE TRIM(b.text) <> ''")->fetchAll(PDO::FETCH_ASSOC);
+    if (!$rows) { return ['items' => []]; }
+    $people = [];
+    foreach ($pdo->query(person_select())->fetchAll(PDO::FETCH_ASSOC) as $p) { $people[(int) $p['id']] = $p; }
+    $now = (int) date('Y');
+    $hidden = [];
+    foreach ($people as $id => $p) {
+        $birth = isset($p['birth_year']) && $p['birth_year'] !== null && $p['birth_year'] !== '' ? (int) $p['birth_year'] : null;
+        $status = (string) ($p['living_status'] ?? '');
+        $living = $status === 'living' || (in_array($status, ['', 'unknown'], true) && $birth && $birth > $now - 100 && empty($p['death_year']));
+        if (!$living && (int) ($p['is_private'] ?? 0) !== 1) { continue; }
+        $first = trim((string) ($p['first_name'] ?? '')); $last = trim((string) ($p['last_name'] ?? ''));
+        if ($first === '' || $last === '') { continue; }
+        $first1 = preg_split('/\s+/u', $first)[0];
+        $hidden[$id] = ['name' => trim($first . ' ' . $last), 'why' => $living ? 'vivante' : 'confidentielle',
+            'keys' => array_unique([$norm($first1 . ' ' . $last), $norm($last . ' ' . $first1), $norm($first . ' ' . $last)])];
+    }
+    $items = [];
+    foreach ($rows as $r) {
+        $pid = (int) $r['person_id'];
+        if (isset($hidden[$pid])) { continue; } // la fiche elle-même n'est pas dans le livre
+        $txt = $norm((string) $r['text']);
+        $found = [];
+        foreach ($hidden as $hid => $h) {
+            if ($hid === $pid) { continue; }
+            foreach ($h['keys'] as $k) { if (trim($k) !== '' && str_contains($txt, $k)) { $found[] = ['id' => $hid, 'name' => $h['name'], 'why' => $h['why']]; break; } }
+        }
+        if ($found) {
+            $p = $people[$pid] ?? [];
+            $items[] = ['person_id' => $pid, 'person' => trim(($p['first_name'] ?? '') . ' ' . ($p['last_name'] ?? '')), 'mentions' => $found];
+        }
+    }
+    return ['items' => $items];
 }
 
 /** Les tables de 📖 la biographie, 🌍 du monde autour et 🛠️ des métiers anciens (migration de lib/migrations.php) */

@@ -1,0 +1,12 @@
+/* LCNDA — 🌐 Les équivalents d’ailleurs (assets/js/heritage-telech-l.js) : le reste vient de histoire.css (hist-row…) */
+.tlx-life { display: grid; gap: 12px; }
+.tlx-ul li { margin-bottom: 6px; overflow-wrap: anywhere; }
+.tlx-src-link { font-size: 12px; white-space: nowrap; }
+.tlx-more > summary { cursor: pointer; color: var(--accent, inherit); font-size: 12.5px; margin-top: 2px; }
+.tlx-more[open] > summary { margin-bottom: 6px; }
+.tlx-panel { margin-top: 12px; }
+.tlx-opts { display: grid; gap: 10px; margin-top: 10px; }
+.tlx-opt { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
+.tlx-opt input[type="number"] { width: 5em; }
+@media (max-width: 600px) { .tlx-ul { padding-left: 18px; } }
+@media print { .tlx-more:not([open]) { display: none; } }

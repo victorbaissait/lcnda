@@ -53,7 +53,7 @@ const finish = () => { console.log(`${failed ? '✗' : '✓'} réglages enregist
     const procs = [];
     async function makeBase(name, port) {
         const dir = path.join(tmpAll, name); fs.mkdirSync(path.join(dir, 'media'), {recursive: true});
-        const env = {...process.env, GENEALOGY_DATA_DIR: dir, GENEALOGY_MEDIA_DIR: path.join(dir, 'media'), GENEALOGY_SKIP_REFERENCE: '1'};
+        const env = {...process.env, GENEALOGY_DATA_DIR: dir, GENEALOGY_MEDIA_DIR: path.join(dir, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4'};
         const r = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', String.raw`
 require 'lib/paths.php';
 $p = new PDO('sqlite:'.DATA_DIR.'/genealogy.sqlite'); $p->exec(file_get_contents(APP_ROOT.'/data/schema.sql'));

@@ -9,6 +9,8 @@
     'use strict';
     const i18n = (text, vars) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(text, vars) : String(text ?? '')); // 🌐 app-i18n.js
     const i18nFr = () => !window.LCNDA_I18N || window.LCNDA_I18N.lang === 'fr';
+    // 🌐 hors du français, le mot accordé dans la langue (« =fiche » des .tsv : « Знайдено: 3 картки ») ; en français, rien ne change
+    const tPlural = (n, one, many) => (!i18nFr() && window.LCNDA_I18N?.plural ? window.LCNDA_I18N.plural(n, one, many) : plural(n, one, many));
     const A = () => window.LCNDA_APP || {};
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
     const fold = s => String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
@@ -22,12 +24,12 @@
         source: {sym: '📚', add: '＋ Ajouter une source…', one: 'source', fem: true, none: 'Aucune source', label: '📚 Sources'},
         media: {sym: '🖼', add: '＋ Ajouter un média…', one: 'média', none: 'Aucun média', label: '🖼 Médias'},
         investigation: {sym: '🔍', add: '＋ Ajouter une enquête…', one: 'enquête', fem: true, none: 'Aucune enquête', label: '🔍 Enquêtes'},
-        battue: {sym: '🧭', add: '＋ Ajouter une battue…', one: 'battue', fem: true, none: 'Aucune battue', label: '🧭 Battues'},
+        battue: {sym: '🔦', add: '＋ Ajouter une battue…', one: 'battue', fem: true, none: 'Aucune battue', label: '🔦 Battues'},
         label: {sym: '🏷', add: '＋ Ajouter une étiquette…', one: 'étiquette', fem: true, none: 'Aucune étiquette', label: '🏷 Étiquettes'},
         house: {sym: '🏠', add: '＋ Ajouter une maison…', one: 'maison', fem: true, none: 'Aucune maison', label: '🏠 Maisons'},
         periodical: {sym: '📰', add: '＋ Ajouter une revue…', one: 'revue', fem: true, none: 'Aucune revue', label: '📰 Revues'},
         employer: {sym: '🏭', add: '＋ Ajouter un employeur…', one: 'employeur', none: 'Aucun employeur', label: '🏭 Employeurs'},
-        census: {sym: '📋', add: '＋ Ajouter un recensement…', one: 'recensement', none: 'Aucun recensement', label: '📋 Recensements'},
+        census: {sym: '🏠', add: '＋ Ajouter un recensement…', one: 'recensement', none: 'Aucun recensement', label: '🏠 Recensements'},
         artwork: {sym: '🎨', add: '＋ Ajouter une fiche…', one: 'fiche', fem: true, none: 'Aucune fiche', label: '🎨 Œuvres'},
         graph: {sym: '📈', ph: 'Chercher un graphique… (ex. naissances, camembert)', add: '＋ Ajouter un graphique…', one: 'graphique', none: 'Aucun graphique', create: 'Créer le graphique', createEmpty: 'Nouveau graphique', label: '📈 Graphiques'},
         // 🔗 sortes ajoutées pour le widget « Raccourcis » (lib/widget_links.php)
@@ -53,7 +55,7 @@
         maplayer: {sym: '✏️', ph: 'Nom d’une de mes couches…', add: '＋ Choisir une couche…', one: 'couche', fem: true, none: 'Aucune couche dessinée', label: '✏️ Mes couches'},
         digest: {sym: '📜', ph: 'Commune, cote, année… (2 lettres suffisent)', add: '🔗 Relier un dépouillement…', one: 'dépouillement', none: 'Aucun dépouillement', label: '📜 Dépouillements'}, // journal des recherches (lib/picker.php)
         contact: {sym: '📇', ph: 'Nom, prénom d’un contact… (2 lettres suffisent)', add: '＋ Ajouter un contact…', one: 'contact', none: 'Aucun contact', label: '📇 Contacts'}, // Répertoire des vivants (Questions aux proches)
-        mylist: {sym: '📋', ph: 'Chercher une de mes listes…', add: '＋ Ajouter une liste…', one: 'liste', fem: true, none: 'Aucune liste', label: '📋 Mes listes'}, // Mes listes (lib/picker.php) : le groupe de personnes d'un diagramme
+        mylist: {sym: '📑', ph: 'Chercher une de mes listes…', add: '＋ Ajouter une liste…', one: 'liste', fem: true, none: 'Aucune liste', label: '📑 Mes listes'}, // Mes listes (lib/picker.php) : le groupe de personnes d'un diagramme
         event: {sym: '📅', ph: 'Événement, personne, année… (2 lettres suffisent)', add: '＋ Ajouter un événement…', one: 'événement', none: 'Aucun événement', label: '📅 Événements'}, // 📅 événements (Studio son : un passage relié)
         archive_service: {sym: '🏛', ph: 'Nom, sigle, ville… (ex. AD 19, Tulle)', add: '＋ Ajouter un service d’archives…', one: 'service d’archives', many: 'services d’archives', none: 'Aucun service d’archives', create: 'Créer le service', label: '🏛 Services d’archives'}, // lib/archive_services.php (heritage-archive-services.js)
         citation: {sym: '🔖', ph: 'Source, page, nom de la personne citée…', add: '＋ Choisir une citation…', one: 'citation', fem: true, none: 'Aucune citation', label: '🔖 Citations'}, // ⚖️ dossiers de preuve (lib/preuve.php : source_links)
@@ -120,7 +122,7 @@
     function rowHtml(it, q, idx, on) {
         const s = sosaOf(it), title = mark(it.title, q), titleHit = title.includes('<mark>'); // la ligne grise n'est surlignée que si le nom ne l'est pas
         const badge = s ? `<span class="pk-badge sosa">Sosa ${s}</span>` : it.badge ? `<span class="pk-badge2${it.badge_style === 'blue' ? ' blue' : ''}">${esc(it.badge)}</span>` : '';
-        return `<div class="pk-item pk-row${on ? ' on' : ''}" role="option" data-row="${idx}" aria-selected="${on ? 'true' : 'false'}">${sym(it)}<div class="pk-txt"><div class="pk-name">${title}</div>${it.meta ? `<div class="pk-meta">${titleHit ? esc(it.meta) : mark(it.meta, q, 3)}</div>` : ''}${window.LCNDA_RFR?.whyHtml?.(it.why, 'rfr-why pk-why') || ''}</div>${badge}</div>`;
+        return `<div class="pk-item pk-row${on ? ' on' : ''}" role="option" data-row="${idx}" aria-selected="${on ? 'true' : 'false'}">${sym(it)}<div class="pk-txt"><div class="pk-name">${title}</div>${it.meta ? `<div class="pk-meta">${titleHit ? esc(it.meta) : mark(it.meta, q, 3)}</div>` : ''}${window.LCNDA_RFR?.whyHtml?.(it.why, 'rfr-why pk-why') || ''}${it.dup_of ? window.LCNDA_EXT?.placeDup?.hintHtml?.(it) || '' : ''}</div>${badge}</div>`; // 📍 « ≈ même lieu que … ? » (app-lieux-doublons.js)
     }
     /** Pastille d'une chose choisie (seule : avec « ↗ Fiche » ; dans une liste : petite). */
     function chipHtml(it, i, small) {
@@ -359,13 +361,13 @@
         const st = S(s), kind = st.kind.includes(',') ? '' : st.kind;
         if (kind === 'place') {
             const g = Object.fromEntries(st.groups.map(x => [x.key, x])), parts = [];
-            if (g.base?.total) parts.push(i18n('{what} de ta base', {what: plural(g.base.total, 'lieu', 'lieux')}));
-            if (g.fr?.total) parts.push(i18n('{what} de France', {what: plural(g.fr.total, 'commune')}));
-            if (g.world?.total) parts.push(g.world.total >= 300 ? i18n('300 villes du monde et plus') : i18n('{what} du monde', {what: plural(g.world.total, 'ville')}));
+            if (g.base?.total) parts.push(i18n('{what} de ta base', {what: tPlural(g.base.total, 'lieu', 'lieux')}));
+            if (g.fr?.total) parts.push(i18n('{what} de France', {what: tPlural(g.fr.total, 'commune')}));
+            if (g.world?.total) parts.push(g.world.total >= 300 ? i18n('300 villes du monde et plus') : i18n('{what} du monde', {what: tPlural(g.world.total, 'ville')}));
             return parts.join(' · ');
         }
         const k = K[kind] || K.person, n = st.groups.reduce((a, g) => a + (g.total || 0), 0);
-        if (!i18nFr()) return i18n('{what} trouvés', {what: plural(n, k.one, k.many), n}); // 🌐 « 3 records found »
+        if (!i18nFr()) return i18n('{what} trouvés', {what: tPlural(n, k.one, k.many), n}); // 🌐 « 3 records found »
         return `${plural(n, k.one, k.many)} ${k.fem ? (n > 1 ? 'trouvées' : 'trouvée') : (n > 1 ? 'trouvés' : 'trouvé')}`;
     }
     function renderList(c, s, keepScroll) {
@@ -646,6 +648,9 @@
     function onClick(c, e) {
         const f = e.target.closest('[data-filter]');
         if (f) { e.preventDefault(); const s = f.closest('.pk-search'); setFilter(c, s, f.dataset.filter); s.querySelector('.pk-input').focus(); return; }
+        const dup = e.target.closest('[data-pldup-merge], [data-pldup-empty]'); // 📍 doublon de lieu : fusionner (fenêtre) ou retirer le doublon vide (un clic, ↶)
+        if (dup) { e.preventDefault(); e.stopPropagation(); const s = dup.closest('.pk-search'), P = window.LCNDA_EXT?.placeDup, again = () => { if (s?.isConnected) run(c, s); };
+            if (dup.dataset.pldupEmpty) P?.removeEmpty(Number(dup.dataset.pldupEmpty), Number(dup.dataset.pldupInto), again); else P?.open(Number(dup.dataset.pldupMerge), Number(dup.dataset.pldupInto), again); return; }
         const r = e.target.closest('.pk-row');
         if (r) { const s = r.closest('.pk-search'); choose(c, s, S(s).flat[Number(r.dataset.row)]); return; }
         const rm = e.target.closest('.pk-rolemenu [data-role]');

@@ -1,0 +1,5 @@
+URL de FranceArchives,Libellé de FranceArchives,URLdeGeonames1,URLdeGeonames2,URLdeGeonames3,Latitude et longitude (WGS 84),types
+https://francearchives.gouv.fr/location/12345678,"Digne-les-Bains (Alpes-de-Haute-Provence, France)",https://www.geonames.org/3021670,,,POINT (6.2358 44.0925),geogname
+https://francearchives.gouv.fr/location/22334455,"Lamballe (Côtes-d'Armor, France)",https://www.geonames.org/3008218,,,POINT (-2.5170 48.4690),geogname
+https://francearchives.gouv.fr/location/99887766,"Rome (Italie)",,,,POINT (12.48 41.89),geogname
+https://francearchives.gouv.fr/location/11112222,"Saint-Lieu-Inconnu (Drôme, France)",,,,,geogname

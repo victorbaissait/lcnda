@@ -40,3 +40,11 @@ page {n}, ligne {line} ¦ trang {n}, dòng {line} ¦ halaman {n}, baris {line}
 Un texte par page : la lecture rapide et la lecture d’un imprimé se font page par page ; la lecture approfondie peut lire toutes les pages. ¦ Mỗi trang một văn bản: đọc nhanh và đọc chữ in làm từng trang một; đọc kỹ có thể đọc tất cả các trang. ¦ Satu teks per halaman: pembacaan cepat dan pembacaan teks cetak dilakukan halaman demi halaman; pembacaan mendalam bisa membaca semua halaman.
 Lecture approfondie : page {i} sur {n}… ¦ Đọc kỹ: trang {i} trên {n}… ¦ Pembacaan mendalam: halaman {i} dari {n}…
 Lire toutes les pages avec ce modèle ({n}) ¦ Đọc tất cả các trang bằng mô hình này ({n}) ¦ Baca semua halaman dengan model ini ({n})
+Ce document a plusieurs pages : pour changer l’image d’une page, ouvre « 📑 Pages du document », retire l’ancienne page puis relie la nouvelle. ¦ Tài liệu này có nhiều trang: để đổi hình của một trang, hãy mở “📑 Các trang của tài liệu”, gỡ trang cũ rồi liên kết trang mới. ¦ Dokumen ini punya beberapa halaman: untuk mengganti gambar sebuah halaman, buka “📑 Halaman dokumen”, lepaskan halaman lama, lalu tautkan yang baru.
+{zones} sur cette page ({n} en tout) ¦ {zones} trên trang này (tổng cộng {n}) ¦ {zones} di halaman ini ({n} seluruhnya)
+{page} ({i} sur {n}) ¦ {page} ({i} trên {n}) ¦ {page} ({i} dari {n})
+Lignes déjà écrites ¦ Số dòng đã viết ¦ Baris yang sudah ditulis
+Seulement les pages pas encore lues ¦ Chỉ những trang chưa đọc ¦ Hanya halaman yang belum dibaca
+Toutes les pages ont déjà du texte. ¦ Tất cả các trang đã có văn bản. ¦ Semua halaman sudah berisi teks.
+Lignes à relire ¦ Các dòng cần đọc lại ¦ Baris yang perlu diperiksa
+Seulement les lignes pas encore relues ¦ Chỉ những dòng chưa đọc lại ¦ Hanya baris yang belum diperiksa

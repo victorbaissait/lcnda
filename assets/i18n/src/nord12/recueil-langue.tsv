@@ -1,0 +1,36 @@
+fr ¦ ru ¦ uk
+# 🔤 La langue de chaque page, 📇 tables et index (heritage-recueil-etat.js, heritage-recueil-index.js)
+dont {l} : p. {x} ¦ из них {l}: с. {x} ¦ з них {l}: с. {x}
+Sorte de page ¦ Вид страницы ¦ Вид сторінки
+Langue : ¦ Язык: ¦ Мова:
+Langue de ces pages… ¦ Язык этих страниц… ¦ Мова цих сторінок…
+Sorte : {x} ¦ Вид: {x} ¦ Вид: {x}
+Langue de {n} pages ¦ Язык {n} страниц ¦ Мова {n} сторінок
+Langue de la page ¦ Язык страницы ¦ Мова сторінки
+Langue (vide : comme le recueil) ¦ Язык (пусто: как у сборника) ¦ Мова (порожньо: як у збірки)
+ex. Latin ¦ напр. Латынь ¦ напр. Латина
+Langue : {l} ¦ Язык: {l} ¦ Мова: {l}
+Langue : comme le recueil ¦ Язык: как у сборника ¦ Мова: як у збірки
+comme le recueil : {l} ¦ как у сборника: {l} ¦ як у збірки: {l}
+pas dite ¦ не указан ¦ не вказано
+Le texte de cette page semble en latin. ¦ Текст этой страницы похож на латынь. ¦ Текст цієї сторінки схожий на латину.
+Noter « Latin » ¦ Отметить «Латынь» ¦ Позначити «Латина»
+Tables et index ¦ Указатели и индексы ¦ Покажчики та індекси
+Une table décennale, un index en fin de registre ? Marque la page « 📇 Table ou index » (onglet 🗂 État ou sur la page), puis fais son « 📊 Tableau de la page » : une ligne par entrée, une colonne pour le renvoi (f° 12, p. 3). Elles arrivent ici, avec un lien vers chaque page annoncée. ¦ Десятилетний указатель, индекс в конце книги? Отметь страницу как «📇 Указатель или индекс» (вкладка 🗂 Состояние или на странице), затем заполни её «📊 Таблица страницы»: одна строка на запись, один столбец для ссылки (f° 12, с. 3). Записи попадают сюда, со ссылкой на каждую указанную страницу. ¦ Десятирічний покажчик, індекс наприкінці книги? Познач сторінку як «📇 Покажчик або індекс» (вкладка 🗂 Стан або на сторінці), потім заповни її «📊 Таблиця сторінки»: один рядок на запис, один стовпець для посилання (f° 12, с. 3). Записи потрапляють сюди, з посиланням на кожну вказану сторінку.
+{r} : page absente ¦ {r}: отсутствующая страница ¦ {r}: відсутня сторінка
+pas de page « {r} » ¦ нет страницы «{r}» ¦ немає сторінки «{r}»
+sans renvoi ¦ без ссылки ¦ без посилання
+{a} renvois trouvés · {b} vers des pages absentes · {c} introuvables ¦ Найдено ссылок: {a} · на отсутствующие страницы: {b} · не найдено: {c} ¦ Знайдено посилань: {a} · на відсутні сторінки: {b} · не знайдено: {c}
+« {p} » est une table, mais son tableau est vide : ouvre la page → « 📊 Tableau de la page » (une ligne par entrée, une colonne pour le renvoi). ¦ «{p}» — указатель, но его таблица пуста: открой страницу → «📊 Таблица страницы» (одна строка на запись, один столбец для ссылки). ¦ «{p}» — покажчик, але його таблиця порожня: відкрий сторінку → «📊 Таблиця сторінки» (один рядок на запис, один стовпець для посилання).
+Ouvrir la page ¦ Открыть страницу ¦ Відкрити сторінку
+Chercher dans les tables… ¦ Искать в указателях… ¦ Шукати в покажчиках…
+Chercher dans les tables ¦ Искать в указателях ¦ Шукати в покажчиках
+Toutes les entrées ¦ Все записи ¦ Усі записи
+Renvois trouvés ¦ Найденные ссылки ¦ Знайдені посилання
+Vers des pages absentes ¦ На отсутствующие страницы ¦ На відсутні сторінки
+Introuvables ¦ Не найдены ¦ Не знайдено
+dans {p} ¦ в {p} ¦ у {p}
+… et {n} autres : affine la recherche. ¦ … и ещё {n}: уточни поиск. ¦ … і ще {n}: уточни пошук.
+Page ordinaire ¦ Обычная страница ¦ Звичайна сторінка
+📇 Table ou index ¦ 📇 Указатель или индекс ¦ 📇 Покажчик або індекс
+Page de garde ¦ Форзац ¦ Форзац

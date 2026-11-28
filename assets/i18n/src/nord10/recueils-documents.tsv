@@ -1,0 +1,55 @@
+fr ¦ sq ¦ mt
+# 📚 Recueils depuis Documents, chercher par recueil, sorte d’acte, lieu et rayon (heritage-recueil-docs.js, heritage-onglets-documents.js)
+{n} déjà dans ce recueil ¦ {n} tashmë në këtë përmbledhje ¦ {n} diġà f’din il-ġabra
+pas des images, laissés de côté : {n} ¦ nuk janë figura, lënë mënjanë: {n} ¦ mhumiex stampi, ma ttiħdux: {n}
+Choisis au moins un document. ¦ Zgjidh të paktën një dokument. ¦ Agħżel mill-inqas dokument wieħed.
+📚 RECUEIL ¦ 📚 PËRMBLEDHJE ¦ 📚 ĠABRA
+📚 Faire le recueil ¦ 📚 Bëj përmbledhjen ¦ 📚 Agħmel il-ġabra
+Les documents restent à leur place dans Documents : le recueil les regroupe, il ne les déplace pas. Un document en plusieurs pages y entre avec toutes ses pages. ¦ Dokumentet mbeten në vendin e tyre te Dokumentet: përmbledhja i grupon, nuk i lëviz. Një dokument me disa faqe hyn me të gjitha faqet e tij. ¦ Id-dokumenti jibqgħu f’posthom f’Dokumenti: il-ġabra tiġborhom flimkien, ma tmexxihomx. Dokument b’diversi paġni jidħol bil-paġni kollha tiegħu.
+Nom du recueil ¦ Emri i përmbledhjes ¦ Isem il-ġabra
+ex. Registre de Sancoins, 1870-1872 ¦ p.sh. Regjistri i Sancoins, 1870-1872 ¦ eż. Reġistru ta’ Sancoins, 1870-1872
+ex. 3 E 1234 ¦ p.sh. 3 E 1234 ¦ eż. 3 E 1234
+ex. Sancoins ¦ p.sh. Sancoins ¦ eż. Sancoins
+ex. 1870-1872 ¦ p.sh. 1870-1872 ¦ eż. 1870-1872
+L’ordre des pages ¦ Radha e faqeve ¦ L-ordni tal-paġni
+glisse ⠿ ou utilise ↑ ↓ ¦ tërhiq ⠿ ose përdor ↑ ↓ ¦ kaxkar ⠿ jew uża ↑ ↓
+Recueil « {t} » fait : {x} ¦ Përmbledhja «{t}» u bë: {x} ¦ Il-ġabra “{t}” saret: {x}
+Recueil « {t} » ¦ Përmbledhja «{t}» ¦ Il-ġabra “{t}”
+Ajouter {x} à un recueil ¦ Shto {x} në një përmbledhje ¦ Żid {x} ma’ ġabra
+Ajouter « {t} » à un recueil ¦ Shto «{t}» në një përmbledhje ¦ Żid “{t}” ma’ ġabra
+Les pages vont à la fin du recueil, dans l’ordre ; un document déjà dans ce recueil n’est pas remis. ¦ Faqet shkojnë në fund të përmbledhjes, me radhë; një dokument që është tashmë në këtë përmbledhje nuk shtohet përsëri. ¦ Il-paġni jmorru fl-aħħar tal-ġabra, f’ordni; dokument li diġà jinsab f’din il-ġabra ma jerġax jiżdied.
+Chercher un recueil… ¦ Kërko një përmbledhje… ¦ Fittex ġabra…
+Nouveau recueil avec ces documents… ¦ Përmbledhje e re me këto dokumente… ¦ Ġabra ġdida b’dawn id-dokumenti…
+Choisis un recueil. ¦ Zgjidh një përmbledhje. ¦ Agħżel ġabra.
+Rien à ajouter : {x} ¦ Asgjë për të shtuar: {x} ¦ M’hemm xejn x’tiżdied: {x}
+Ajouté à « {t} » : {x} ¦ U shtua te «{t}»: {x} ¦ Miżjud ma’ “{t}”: {x}
+page {n} ¦ faqja {n} ¦ paġna {n}
+Dans les recueils ¦ Në përmbledhjet ¦ Fil-ġabriet
+Dans le recueil ¦ Në përmbledhje ¦ Fil-ġabra
+page {n} sur {t} ¦ faqja {n} nga {t} ¦ paġna {n} minn {t}
+(une autre page de ce document) ¦ (një faqe tjetër e këtij dokumenti) ¦ (paġna oħra ta’ dan id-dokument)
+📚 Ouvrir le recueil ¦ 📚 Hap përmbledhjen ¦ 📚 Iftaħ il-ġabra
+à {n} km autour ¦ brenda {n} km ¦ f’raġġ ta’ {n} km
+« {x} » n’a pas encore de coordonnées : seuls les documents de ce lieu sont montrés (ajoute-les dans Lieux pour chercher autour). ¦ «{x}» nuk ka ende koordinata: shfaqen vetëm dokumentet e këtij vendi (shtoji te Vendet për të kërkuar përreth). ¦ “{x}” għad m’għandux koordinati: jintwerew biss id-dokumenti ta’ dan il-post (żidhom f’Postijiet biex tfittex madwaru).
+Dans aucun recueil ¦ Në asnjë përmbledhje ¦ F’ebda ġabra
+p. {n} ¦ f. {n} ¦ p. {n}
+choisi n° {n} ¦ zgjedhur nr. {n} ¦ magħżul nru {n}
+{x}, dans l’ordre des clics ¦ {x}, sipas radhës së klikimeve ¦ {x}, fl-ordni tal-klikks
+Clique sur les documents à prendre, dans l’ordre des pages. ¦ Kliko dokumentet që do të marrësh, sipas radhës së faqeve. ¦ Ikklikkja d-dokumenti li trid tieħu, fl-ordni tal-paġni.
+📚 Faire un recueil avec {x} ¦ 📚 Bëj një përmbledhje me {x} ¦ 📚 Agħmel ġabra b’{x}
+📚 Faire un recueil ¦ 📚 Bëj një përmbledhje ¦ 📚 Agħmel ġabra
+📚 Ajouter à un recueil… ¦ 📚 Shto në një përmbledhje… ¦ 📚 Żid ma’ ġabra…
+Tout choisir (ceux montrés) ¦ Zgjidh të gjitha (të shfaqurat) ¦ Agħżel kollha (dawk murija)
+☑ Choisir plusieurs ¦ ☑ Zgjidh disa ¦ ☑ Agħżel diversi
+Les recueils ne sont pas encore chargés : réessaie dans un instant. ¦ Përmbledhjet nuk janë ngarkuar ende: provo përsëri pas pak. ¦ Il-ġabriet għadhom mhux mgħobbija: erġa’ pprova ftit wara.
+Ville ou lieu ¦ Qytet ose vend ¦ Belt jew post
+Dans un rayon de (km) ¦ Brenda rrezes (km) ¦ F’raġġ ta’ (km)
+ex. 20 (vide : le lieu seul) ¦ p.sh. 20 (bosh: vetëm vendi) ¦ eż. 20 (vojt: il-post biss)
+ex. Registre de Sancoins ¦ p.sh. Regjistri i Sancoins ¦ eż. Reġistru ta’ Sancoins
+Actes de notoriété ¦ Akte të notorietetit ¦ Atti ta’ notorjetà
+Documents militaires ¦ Dokumente ushtarake ¦ Dokumenti militari
+📚 Dans un recueil ¦ 📚 Në një përmbledhje ¦ 📚 F’ġabra
+📚 Recueils ¦ 📚 Përmbledhje ¦ 📚 Ġabriet
+Les médias et pièces d’archives de ta base, comme les personnes : la liste à gauche (A → Z, 👤 par personne, 📚 par recueil ou en 📁 dossiers), la fiche à droite. ¦ Mediat dhe dokumentet e arkivit të bazës sate, si personat: lista majtas (A → Z, 👤 sipas personit, 📚 sipas përmbledhjes ose në 📁 dosje), kartela djathtas. ¦ Il-midja u d-dokumenti tal-arkivju tad-database tiegħek, bħall-persuni: il-lista fuq ix-xellug (A → Z, 👤 skont il-persuna, 📚 skont il-ġabra jew f’📁 folders), l-iskeda fuq il-lemin.
+=document choisi ¦ dokument i zgjedhur|dokumente të zgjedhura ¦ dokument magħżul|dokumenti magħżula|dokumenti magħżula|dokument magħżul|dokument magħżul
+Montrer « Dans aucun recueil » ¦ Shfaq «Në asnjë përmbledhje» ¦ Uri “F’ebda ġabra”

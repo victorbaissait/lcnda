@@ -11,7 +11,7 @@ declare(strict_types=1);
 const ATELIER_KINDS = ['these' => 'Thèse', 'livre' => 'Livre', 'article' => 'Article', 'memoire' => 'Mémoire', 'exposition' => 'Exposition', 'enquete' => 'Enquête', 'autre' => 'Autre'];
 const ATELIER_TYPES = ['reference', 'note', 'quote', 'media', 'person', 'place', 'event', 'link', 'task', 'draft', 'custom', 'app'];
 /** « Venant du logiciel » : ce que l'élément montre (une fiche, un bloc d'une fiche, la fiche d'un village, une liste, un recueil…). */
-const ATELIER_APP_KINDS = ['person', 'person_block', 'village', 'list', 'recueil', 'investigation', 'battue', 'media', 'atelier_project', 'workbook']; // workbook : 🧾 un classeur du tableur
+const ATELIER_APP_KINDS = ['person', 'person_block', 'village', 'list', 'recueil', 'investigation', 'battue', 'media', 'atelier_project', 'workbook', 'data']; // workbook : 🧾 un classeur du tableur ; data : 📊 une donnée téléchargée (ds : la liste, les filtres, les lignes gardées)
 const ATELIER_REF_KINDS = ['livre', 'article', 'chapitre', 'these', 'archive', 'image', 'presse', 'web', 'objet', 'autre'];
 const ATELIER_READ = ['', 'a_lire', 'en_cours', 'lu', 'exploite'];
 
@@ -202,6 +202,21 @@ function atelier_item_row(PDO $pdo, int $id): array
     return $i;
 }
 
+/** 📊 la description d'une donnée téléchargée (liste, filtres, lignes gardées) : clés simples, textes courts, 60 lignes au plus, 4 niveaux. */
+function atelier_clean_ds(mixed $v, int $depth = 0): mixed
+{
+    if (is_bool($v) || is_int($v) || is_float($v) || $v === null) { return is_float($v) && !is_finite($v) ? null : $v; }
+    if (is_scalar($v)) { return mb_substr(safe_text((string) $v), 0, 2000); }
+    if (!is_array($v) || $depth > 3) { return null; }
+    $out = [];
+    foreach (array_slice($v, 0, 60, true) as $k => $x) {
+        $k = is_int($k) ? $k : preg_replace('/[^A-Za-z0-9_]/', '', (string) $k);
+        if ($k === '') { continue; }
+        $out[$k] = atelier_clean_ds($x, $depth + 1);
+    }
+    return $out;
+}
+
 function atelier_clean_data(PDO $pdo, string $type, array $in, int $projectId): array
 {
     $t = static fn(string $k, int $max = 500) => mb_substr(safe_text(is_scalar($in[$k] ?? null) ? (string) $in[$k] : ''), 0, $max);
@@ -257,7 +272,9 @@ function atelier_clean_data(PDO $pdo, string $type, array $in, int $projectId): 
             $out += ['ctype' => preg_replace('/[^a-z0-9_]/', '', strtolower((string) ($in['ctype'] ?? ''))) ?: 'perso', 'values' => $vals, 'pkeys' => $pkeys];
             break;
         case 'app': $out += ['kind' => in_array($in['kind'] ?? '', ATELIER_APP_KINDS, true) ? (string) $in['kind'] : 'person', 'key' => $t('key', 200), 'sub' => $t('sub', 200), 'label' => $t('label', 300), 'extra' => $t('extra', 300),
-            'page_from' => max(0, safe_int($in['page_from'] ?? 0)), 'page_to' => max(0, safe_int($in['page_to'] ?? 0))]; break;
+            'page_from' => max(0, safe_int($in['page_from'] ?? 0)), 'page_to' => max(0, safe_int($in['page_to'] ?? 0))];
+            if ($out['kind'] === 'data') { $out['ds'] = atelier_clean_ds($in['ds'] ?? []); } // 📊 heritage-atelier-donnees.js : du texte et des nombres seulement, jamais le pack
+            break;
         case 'note': default: $out += ['text' => $long('text', 200000)];
     }
     return $out;

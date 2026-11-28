@@ -95,22 +95,22 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(tmp) });
                     await p.evaluate(async () => { const s = window.LCNDA_APP.state; s.researchKind = 'text'; await window.LCNDA_APP.setModule('recherche'); });
                     await p.waitForSelector('#research-reorder');
                     const def = await kinds();
-                    // au départ : ❓ question, 🔍 Que manque-t-il ?, 🌍 Où chercher ?, 🧩 Murs de brique (heritage-ou-chercher.js), puis le texte
-                    const DEF = ['question', 'gaps', 'ou_chercher', 'murs', 'text'], MOVED = ['text', 'question', 'gaps', 'ou_chercher', 'murs'];
-                    assert.deepEqual(def.slice(0, 5), DEF);
-                    assert.equal(await p.$eval('#research-form [name=search_kind]', s => [...s.options].findIndex(o => o.value === 'text')), 4);
+                    // au départ : 🧭 Je veux faire… (app-je-veux.js, le premier de la colonne), ❓ question, 🔍 Que manque-t-il ?, 🌍 Où chercher ?, 🧩 Murs de brique (heritage-ou-chercher.js), puis le texte
+                    const DEF = ['je_veux', 'question', 'gaps', 'ou_chercher', 'murs', 'text'], MOVED = ['text', 'je_veux', 'question', 'gaps', 'ou_chercher', 'murs'];
+                    assert.deepEqual(def.slice(0, 6), DEF);
+                    assert.equal(await p.$eval('#research-form [name=search_kind]', s => [...s.options].findIndex(o => o.value === 'text')), 5);
                     await p.click('#research-reorder');
                     await p.waitForSelector('dialog[open].research-kind-dialog [data-rk-list] li');
                     assert.equal(await p.$$eval('.research-kind-dialog .modal-actions button', b => b.map(x => x.textContent.trim()).join('|')), 'Fermer', 'K2/K3 : pas d’Enregistrer, « Fermer » seul');
                     // K20 : à la souris, les flèches ↑ ↓ sont cachées (on glisse ⠿, ou Alt + ↑ au clavier sur la poignée) ; au doigt, elles restent
                     const up = i => moveUp(`.research-kind-dialog [data-index="${i}"]`);
-                    assert.equal(await p.getAttribute('.research-kind-dialog [data-rk="text"]', 'data-index'), '4');
-                    for (let i = 4; i >= 1; i--) await up(i); // texte monte, jusqu'en premier
+                    assert.equal(await p.getAttribute('.research-kind-dialog [data-rk="text"]', 'data-index'), '5');
+                    for (let i = 5; i >= 1; i--) await up(i); // texte monte, jusqu'en premier
                     await p.click('.research-kind-dialog [data-rk="insee"] [data-eye]'); // INSEE caché
-                    assert.deepEqual(JSON.parse(await lsGet(RK[0])).slice(0, 5), MOVED);
+                    assert.deepEqual(JSON.parse(await lsGet(RK[0])).slice(0, 6), MOVED);
                     assert.deepEqual(JSON.parse(await lsGet(RK[1])), ['insee']);
                     const now = await kinds();
-                    assert.deepEqual(now.slice(0, 5), MOVED, 'le menu suit tout de suite');
+                    assert.deepEqual(now.slice(0, 6), MOVED, 'le menu suit tout de suite');
                     assert.ok(!now.includes('insee'), 'INSEE caché');
                     await p.waitForFunction(() => [...document.querySelectorAll('.toast')].some(x => /Types de recherche/.test(x.textContent) && /Annuler/.test(x.textContent)), null, { timeout: 5000 });
                     await shot('recherche-reordonner');
@@ -118,7 +118,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(tmp) });
                     await p.evaluate(() => [...document.querySelectorAll('.toast')].find(x => /Types de recherche/.test(x.textContent)).querySelectorAll('button').forEach(b => { if (/Annuler/.test(b.textContent)) b.click(); }));
                     await p.waitForFunction(() => !localStorage.getItem('genealogie-research-kind-order') && !localStorage.getItem('genealogie-research-kind-hidden'));
                     await p.waitForFunction(() => document.querySelector('#research-form [name=search_kind] option[value="insee"]'));
-                    assert.deepEqual((await kinds()).slice(0, 5), DEF);
+                    assert.deepEqual((await kinds()).slice(0, 6), DEF);
                     // au moins un type affiché
                     const n = await p.$$eval('.research-kind-dialog [data-eye]', b => b.length);
                     for (let i = 0; i < n; i++) await p.click(`.research-kind-dialog [data-index="${i}"] [data-eye]`);
@@ -136,7 +136,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(tmp) });
                     assert.equal(await p.$eval('#research-archive-digest-fields', e => e.hidden), false, 'ses champs sont là');
                     await p.waitForFunction(() => document.querySelector('#workspace')?.textContent.trim().length > 20, null, { timeout: 10000 });
                     // on change de type : l'écran suit
-                    await p.selectOption('#research-form [name=search_kind]', 'question');
+                    await p.click('#research-form [data-rk-pick="question"]'); // R2 (audit des onglets) : la colonne de boutons numérotés remplace le menu déroulant
                     await p.waitForFunction(() => window.LCNDA_APP.state.researchKind === 'question');
                     await p.evaluate(() => localStorage.removeItem('genealogie-research-kind-hidden'));
                 });

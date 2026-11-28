@@ -40,3 +40,11 @@ page {n}, ligne {line} ¦ sayfa {n}, satır {line}
 Un texte par page : la lecture rapide et la lecture d’un imprimé se font page par page ; la lecture approfondie peut lire toutes les pages. ¦ Sayfa başına bir metin: hızlı okuma ve basılı metin okuma sayfa sayfa yapılır; derin okuma tüm sayfaları okuyabilir.
 Lecture approfondie : page {i} sur {n}… ¦ Derin okuma: sayfa {i} / {n}…
 Lire toutes les pages avec ce modèle ({n}) ¦ Tüm sayfaları bu modelle oku ({n})
+Ce document a plusieurs pages : pour changer l’image d’une page, ouvre « 📑 Pages du document », retire l’ancienne page puis relie la nouvelle. ¦ Bu belgenin birkaç sayfası var: bir sayfanın görüntüsünü değiştirmek için “📑 Belgenin sayfaları”nı aç, eski sayfayı kaldır, sonra yenisini bağla.
+{zones} sur cette page ({n} en tout) ¦ Bu sayfada {zones} (toplam {n})
+{page} ({i} sur {n}) ¦ {page} ({i}/{n})
+Lignes déjà écrites ¦ Zaten yazılmış satırlar
+Seulement les pages pas encore lues ¦ Yalnızca henüz okunmamış sayfalar
+Toutes les pages ont déjà du texte. ¦ Tüm sayfalarda zaten metin var.
+Lignes à relire ¦ Gözden geçirilecek satırlar
+Seulement les lignes pas encore relues ¦ Yalnızca henüz gözden geçirilmemiş satırlar

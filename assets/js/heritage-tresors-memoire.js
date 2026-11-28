@@ -6,6 +6,8 @@
  *    les deux derniers s'impriment en livre (couverture, sommaire, une page chacun).
  *  - 🎙️ L'entretien guidé : questions par thème lues à voix haute, enregistrement au micro rangé sur la fiche, un repère par question.
  *  - 🕯️ La veillée : en plein écran, les vies d'une branche racontées à voix haute, musique douce synthétisée.
+ *  - 🎞 Une vie : le diaporama d'une seule personne (portrait, étapes datées, photos, carte, musique).
+ *  - 📮 Questionnaire aux anciens : préparer et télécharger un questionnaire, le suivre, importer les réponses (lib/questions_proches.php).
  */
 (() => {
     'use strict';
@@ -69,7 +71,7 @@
         };
         host.addEventListener('click', async e => {
             const ed = e.target.closest('[data-l-edit]'); if (ed) { const it = (await T.items('letter')).find(x => x.id === Number(ed.dataset.lEdit)); return editLetter(T, it, draw); }
-            const del = e.target.closest('[data-l-del]'); if (del && await window.LCNDA_APP.confirmBox(i18n('La lettre sera effacée pour de bon.'), {title: i18n('Supprimer la lettre ?'), okLabel: i18n('Supprimer'), danger: true})) { await T.remove(Number(del.dataset.lDel)); draw(); }
+            const del = e.target.closest('[data-l-del]'); if (del) await T.removeUndo(Number(del.dataset.lDel), {msg: i18n('Lettre supprimée.'), after: draw}); // R7 : ↶ Annuler (le serveur la garde de côté, scellée)
         });
         T.actions(host, {primary: {label: i18n('✉️ Écrire une lettre'), attrs: 'data-l-new', run: () => editLetter(T, null, draw)}});
         await draw();
@@ -111,7 +113,7 @@
             ${cfg.intro ? `<p class="h-tr-muted h-tr-noprint">${i18n(cfg.intro)}</p>` : ''}<div class="h-tr-body" data-c-list></div>`;
         const list = host.querySelector('[data-c-list]');
         const paint = async () => {
-            const vis = all.filter(x => (!filt || x.data?.[cfg.filter.key] === filt) && (!q || `${x.title} ${x.body} ${Object.values(x.data || {}).join(' ')} ${who(T, tr, x.data?.[cfg.personKey || 'from'])}`.toLowerCase().includes(q)));
+            const vis = all.filter(x => (!filt || x.data?.[cfg.filter.key] === filt) && (!q || (window.LCNDA_UI?.listMatch?.text || ((q, ...h) => h.join(' ').toLowerCase().includes(String(q).toLowerCase())))(q, x.title, x.body, Object.values(x.data || {}), who(T, tr, x.data?.[cfg.personKey || 'from']))));
             host.querySelector('[data-c-n]').textContent = i18n('{n} sur {total}', {n: String(vis.length), total: String(all.length)});
             list.innerHTML = vis.length ? (await Promise.all(vis.map(async x => `<article class="h-tr-panel h-tr-print" data-c-id="${x.id}">${cfg.card(T, tr, x)}${await mediaHtml(T, x.data?.media)}<p class="h-tr-noprint" style="margin:8px 0 0"><button type="button" class="h-tr-link" data-c-edit="${x.id}">${i18n('Modifier')}</button> · <button type="button" class="h-tr-link" data-c-del="${x.id}">${i18n('Supprimer')}</button></p></article>`))).join('') : T.empty(i18n(all.length ? 'Rien ne correspond à ta recherche' : cfg.empty), {icon: cfg.icon});
         };
@@ -122,7 +124,7 @@
         host.querySelector('[data-c-f]')?.addEventListener('change', e => { filt = e.target.value; paint(); });
         host.addEventListener('click', async e => {
             const ed = e.target.closest('[data-c-edit]'); if (ed) return editItem(T, cfg, all.find(x => String(x.id) === ed.dataset.cEdit), load);
-            const del = e.target.closest('[data-c-del]'); if (del && await A().confirmBox(i18n('Cet élément sera effacé pour de bon.'), {title: i18n('Supprimer ?'), okLabel: i18n('Supprimer'), danger: true})) { await store(T, cfg).remove(cfg.mem ? del.dataset.cDel : Number(del.dataset.cDel)); load(); }
+            const del = e.target.closest('[data-c-del]'); if (del) await T.removeUndo(cfg.mem ? del.dataset.cDel : Number(del.dataset.cDel), {mem: !!cfg.mem, msg: i18n('Élément supprimé.'), after: load}); // R7
         });
         T.actions(host, {primary: {label: `＋ ${i18n(cfg.newLabel)}`, attrs: 'data-c-new', run: () => editItem(T, cfg, null, load)},
             print: cfg.book ? {label: i18n(cfg.book.label), attrs: 'data-c-book', title: i18n('{label} : couverture, sommaire, une page chacun', {label: i18n(cfg.book.label)}), run: async () => { if (!all.length) return T.toast(i18n('Rien à mettre dans le livre pour l’instant.')); await cfg.book.print(T, tr, all); }} : null,
@@ -214,7 +216,7 @@
         };
         host.addEventListener('click', async e => {
             const sk = e.target.closest('[data-iv-seek]'); if (sk) { const au = sk.closest('[data-iv-item]').querySelector('audio'); if (au) { au.currentTime = Number(sk.dataset.ivSeek); au.play().catch(() => {}); } return; }
-            const del = e.target.closest('[data-iv-del]'); if (del && await A().confirmBox(i18n('La fiche de l’entretien (les questions et les repères) sera effacée ; le son reste dans les médias.'), {title: i18n('Supprimer ?'), okLabel: i18n('Supprimer'), danger: true})) { await T.remove(Number(del.dataset.ivDel)); drawList(); return; }
+            const del = e.target.closest('[data-iv-del]'); if (del) { await T.removeUndo(Number(del.dataset.ivDel), {msg: i18n('Entretien supprimé (le son reste dans les médias).'), after: drawList}); return; } // R7
         });
         const paper = () => { const qs = questions(), p = tr.byId.get(Number(form.elements.who.value));
                 const dayL = new Date().toLocaleDateString(T.lang() !== 'fr' && window.LCNDA_I18N?.locale ? window.LCNDA_I18N.locale() : 'fr-FR');
@@ -325,4 +327,132 @@
     }
     F.push({key: 'veillee', group: 'memoire', icon: '🕯️', title: 'La veillée en un clic', desc: 'En plein écran, les portraits d’une branche défilent, chaque vie est racontée à voix haute, avec une musique douce.', render: renderVeillee});
     ext.tresorVeillee = {slides: veilleeSlides};
+
+    /* ═════════ 🎞 Une vie : une personne → un diaporama prêt (portrait, dates, photos, carte, musique) ═════════ */
+    function vieSlides(T, tr, p, photos) {
+        const evs = [...(tr.evBy.get('p' + p.id) || []), ...((tr.fams.get(p.id) || []).flatMap(f => tr.evBy.get('f' + f.id) || []))].filter(e => e.y || e.d).sort((a, b) => (a.d || String(a.y)).localeCompare(b.d || String(b.y)));
+        const age = e => { const a = T.ageAt?.(p, e.d, e.y); return a != null && a >= 0 && e.tag !== 'BIRT' ? i18n('à {n} ans', {n: String(a)}) : ''; };
+        const slides = [{kind: 'intro', title: T.name(p), sub: T.life(p), text: (T.story(tr, p) || []).slice(0, 2).join(' '), img: T.portraitUrl(p)}];
+        evs.forEach(e => { const pl = T.place(tr, e.place); slides.push({kind: 'event', title: e.label, sub: [T.on(e.d, e.y), pl ? T.at(pl) : '', age(e)].filter(Boolean).join(' · '), text: e.what || ''}); });
+        photos.slice(0, 12).forEach(m => slides.push({kind: 'photo', title: m.title || '', img: `media/${encodeURIComponent(m.filename)}`}));
+        const pts = evs.map(e => tr.places?.[e.place]).filter(x => x && x.lat != null && x.lng != null);
+        if (pts.length) slides.push({kind: 'map', title: i18n('Les lieux de sa vie'), pts: pts.map(x => ({lat: x.lat, lng: x.lng, name: x.name}))});
+        slides.push({kind: 'intro', title: i18n('Fin'), text: i18n('Et toi, que sais-tu encore de {name} ?', {name: p.first || T.name(p)})});
+        return slides;
+    }
+    function vieMapSvg(T, pts) {
+        const W = 800, H = 500, lats = pts.map(x => x.lat), lngs = pts.map(x => x.lng);
+        const [a0, a1, b0, b1] = [Math.min(...lats), Math.max(...lats), Math.min(...lngs), Math.max(...lngs)], sa = Math.max(0.5, a1 - a0), sb = Math.max(0.5, b1 - b0);
+        const X = g => 60 + (W - 120) * (g - b0 + (sb - (b1 - b0)) / 2) / sb, Y = a => H - 60 - (H - 120) * (a - a0 + (sa - (a1 - a0)) / 2) / sa;
+        const seen = new Set();
+        return `<svg class="h-tr-uv-map" viewBox="0 0 ${W} ${H}" role="img" aria-label="${T.esc(i18n('Les lieux de sa vie'))}"><rect width="${W}" height="${H}" rx="16" fill="#f3efe6"/><polyline fill="none" stroke="#b08d57" stroke-width="3" stroke-dasharray="8 6" points="${pts.map(x => `${X(x.lng).toFixed(0)},${Y(x.lat).toFixed(0)}`).join(' ')}"/>
+            ${pts.map((x, i) => { const k = x.name + x.lat; const label = seen.has(k) ? '' : `<text x="${X(x.lng) + 12}" y="${Y(x.lat) + 5}" font-size="20" fill="#3b2a14">${T.esc(x.name)}</text>`; seen.add(k); return `<circle cx="${X(x.lng).toFixed(0)}" cy="${Y(x.lat).toFixed(0)}" r="${i === 0 ? 10 : 7}" fill="#8a3b12"/>${label}`; }).join('')}</svg>`;
+    }
+    function vieMusic() {
+        const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return () => {};
+        const ac = new AC(), out = ac.createGain(); out.gain.value = 0; out.connect(ac.destination); out.gain.linearRampToValueAtTime(0.05, ac.currentTime + 3);
+        const notes = [261.6, 329.6, 392, 329.6, 293.7, 349.2, 440, 349.2]; let k = 0;
+        const play = () => { const o = ac.createOscillator(), g = ac.createGain(), t = ac.currentTime; o.type = 'sine'; o.frequency.value = notes[k++ % notes.length]; g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(1, t + 0.4); g.gain.linearRampToValueAtTime(0, t + 2.2); o.connect(g); g.connect(out); o.start(t); o.stop(t + 2.4); };
+        play(); const iv = setInterval(play, 1500);
+        return () => { clearInterval(iv); out.gain.setTargetAtTime(0, ac.currentTime, 0.3); setTimeout(() => ac.close().catch(() => {}), 1200); };
+    }
+    async function renderUneVie(host, T) {
+        const tr = await T.tree(), st = T.start(tr);
+        host.innerHTML = `<form class="h-tr-panel h-tr-row" data-uv-form><div style="min-width:260px"><span class="pk-lab">${i18n('La vie de')}</span>${T.personField('who', st?.id)}</div>
+            <label>${i18n('Secondes par image')}<input type="number" name="sec" min="3" max="60" value="6" style="width:5em"></label>
+            <label class="checkbox-line"><input type="checkbox" name="voice"> ${i18n('Raconter à voix haute')}</label><label class="checkbox-line"><input type="checkbox" name="music" checked> ${i18n('Musique douce')}</label></form>
+            <p class="h-tr-muted">${i18n('En plein écran : le portrait, chaque étape avec sa date et son lieu, les photos, la carte. Espace = pause, flèches = avant / après, Échap = fin.')}</p><div data-uv-prev></div>`;
+        const form = host.querySelector('[data-uv-form]'), prev = host.querySelector('[data-uv-prev]');
+        let slides = [], cur = null;
+        const load = async () => {
+            const id = Number(form.elements.who.value) || st?.id, p = tr.byId.get(id); cur = p || null;
+            if (!p) { slides = []; prev.innerHTML = T.empty(i18n('Choisis une personne.'), {icon: '🎞'}); return; }
+            const photos = await T.api('tresor_photos', {person_id: p.id}).then(r => r.photos || []).catch(() => []);
+            slides = vieSlides(T, tr, p, photos);
+            const n = k => slides.filter(s => s.kind === k).length;
+            prev.innerHTML = `<p data-uv-count>${T.esc(i18n('{n} images : {e} étapes, {ph} photos{map}.', {n: String(slides.length), e: String(n('event')), ph: String(n('photo')), map: n('map') ? i18n(', une carte') : ''}))}</p><ol class="h-tr-uv-list">${slides.filter(s => s.kind === 'event').map(s => `<li><b>${T.esc(s.title)}</b> <small class="h-tr-muted">${T.esc(s.sub)}</small></li>`).join('')}</ol>`;
+        };
+        form.addEventListener('change', load);
+        form.addEventListener('submit', e => e.preventDefault());
+        await load();
+        T.actions(host, {primary: {label: i18n('🎞 Lancer le diaporama'), attrs: 'data-uv-go', run: () => play()}});
+        function play() {
+            if (slides.length < 2) return T.toast(i18n('Pas assez d’éléments pour un diaporama.'), 'error');
+            const sec = Math.max(3, Number(form.elements.sec.value) || 6), voice = form.elements.voice.checked, stopMusic = form.elements.music.checked ? vieMusic() : () => {};
+            const ov = document.createElement('div'); ov.className = 'h-tr-veillee h-tr-unevie'; ov.tabIndex = 0; ov.dataset.uvShow = '1'; document.body.appendChild(ov);
+            let i = 0, timer = null, paused = false, alive = true, turn = 0;
+            const close = () => { if (!alive) return; alive = false; clearTimeout(timer); T.hush(); stopMusic(); document.removeEventListener('keydown', key, true); if (document.fullscreenElement) document.exitFullscreen().catch(() => {}); ov.remove(); };
+            const go = n => { i = Math.max(0, Math.min(slides.length - 1, n)); draw(); };
+            const draw = async () => {
+                clearTimeout(timer); T.hush(); const x = slides[i], my = ++turn;
+                const pic = x.kind === 'map' ? vieMapSvg(T, x.pts) : x.img ? `<img src="${x.img}" alt="">` : `<div class="h-tr-vl-ini">${x.kind === 'event' ? '📍' : T.esc(((cur?.first || '?')[0] || '') + ((cur?.last || '')[0] || ''))}</div>`;
+                ov.innerHTML = `<div class="h-tr-vl-slide is-${x.kind}">${pic}<h2>${T.esc(x.title)}</h2>${x.sub ? `<p class="h-tr-vl-sub">${T.esc(x.sub)}</p>` : ''}${x.text ? `<p class="h-tr-vl-text">${T.esc(x.text)}</p>` : ''}</div>
+                    <div class="h-tr-vl-bar"><span>${i + 1} / ${slides.length}</span><button type="button" data-uv="prev" aria-label="${T.esc(i18n('Avant'))}">◀</button><button type="button" data-uv="pause" aria-label="${T.esc(i18n('Pause'))}">${paused ? '▶' : '⏸'}</button><button type="button" data-uv="next" aria-label="${T.esc(i18n('Après'))}">▶▶</button><button type="button" data-uv="close">${T.esc(i18n('✕ Fin'))}</button></div>`;
+                if (paused) return;
+                const t0 = Date.now(); if (voice && x.kind !== 'map') await T.say([x.title, x.sub, x.text].filter(Boolean).join('. '));
+                if (my !== turn || !alive || paused) return;
+                timer = setTimeout(() => { if (i < slides.length - 1) go(i + 1); else close(); }, Math.max(1200, sec * 1000 - (Date.now() - t0)));
+            };
+            const key = e => { if (!alive) return; if (e.key === 'Escape') { e.preventDefault(); close(); } else if (e.key === 'ArrowRight') go(i + 1); else if (e.key === 'ArrowLeft') go(i - 1); else if (e.key === ' ') { e.preventDefault(); paused = !paused; draw(); } };
+            document.addEventListener('keydown', key, true);
+            ov.addEventListener('click', ev => { const b = ev.target.closest('[data-uv]'); if (!b) return; const a = b.dataset.uv; if (a === 'close') close(); else if (a === 'prev') go(i - 1); else if (a === 'next') go(i + 1); else { paused = !paused; draw(); } });
+            ov.requestFullscreen?.().catch(() => {});
+            draw();
+        }
+    }
+    F.push({key: 'une-vie', group: 'memoire', icon: '🎞', title: 'Une vie en diaporama', desc: 'Une personne, et le diaporama est prêt : son portrait, chaque étape avec sa date et son lieu, ses photos, la carte de sa vie, une musique douce.', render: renderUneVie});
+
+    /* ═════════ 📮 Questionnaire aux anciens : préparer, télécharger, suivre, recevoir les réponses (lib/questions_proches.php) ═════════ */
+    const QP_WORD = {prepared: ['À faire', 'yellow'], sent: ['En cours', 'blue'], answered: ['Terminé', 'green'], filed: ['Terminé', 'grey']};
+    const QP_INTRO = 'Je fais l’histoire de notre famille et tes souvenirs comptent beaucoup. Réponds à ce que tu veux, avec tes mots : une phrase suffit, et tu peux en écrire autant que tu veux.';
+    async function renderQuestionnaire(host, T) {
+        const tr = await T.tree(), st = T.start(tr), ro = document.body.classList.contains('is-kiosk');
+        const qp = (op, body = {}) => T.post('qp_write', {op, ...body}).then(r => r?.result || r);
+        let tpl = null;
+        try { tpl = (await T.api('qp_templates')).themes || []; } catch (_) { tpl = []; }
+        const theme = tpl.find(t => t.key === 'personne') || tpl[0] || {questions: []};
+        host.innerHTML = `${ro ? '' : `<form class="h-tr-panel h-tr-qp-new" data-qpn-form>
+            <label>${i18n('Pour qui (le proche qui répond)')}<input name="to" required maxlength="160" placeholder="${T.esc(i18n('Tante Lucie'))}"></label>
+            <div><span class="pk-lab">${i18n('Sur quel ancêtre ?')}</span>${T.personField('about', st?.id)}</div>
+            <fieldset class="h-tr-qp-qs"><legend>${i18n('Les questions')}</legend>${(theme.questions || []).slice(0, 10).map((q, i) => `<label class="checkbox-line"><input type="checkbox" name="q" value="${i}" ${i < 5 ? 'checked' : ''}> ${T.esc(String(q.text || ''))}</label>`).join('')}
+                <label>${i18n('Une question à toi')}<input name="mine" maxlength="500" placeholder="${T.esc(i18n('Te souviens-tu de sa maison ?'))}"></label></fieldset>
+            <div class="h-tr-row"><button type="submit" class="button">${i18n('📮 Préparer et télécharger')}</button><span class="h-tr-muted">${i18n('Un seul fichier à envoyer par e-mail ; il le remplit chez lui et te renvoie ses réponses.')}</span></div></form>`}
+            <h3>${i18n('Mes questionnaires')}</h3><div data-qpn-list>${window.LCNDA_UI?.spinner ? window.LCNDA_UI.spinner(i18n('Lecture…')) : ''}</div>`;
+        const list = host.querySelector('[data-qpn-list]');
+        const draw = async () => {
+            let rows = [];
+            try { rows = (await T.api('qp_list')).questionnaires || []; } catch (err) { list.innerHTML = T.empty(i18n('Les questionnaires n’ont pas pu être lus.'), {icon: '⚠️'}); return; }
+            list.innerHTML = rows.length ? `<ul class="h-tr-qp-list">${rows.map(r => { const [w, c] = QP_WORD[r.status] || QP_WORD.prepared;
+                return `<li class="h-tr-qp-row" data-qpn-row="${r.id}"><div><b>${T.esc(r.title)}</b> ${window.LCNDA_UI?.badge ? window.LCNDA_UI.badge(i18n(w), c) : T.esc(i18n(w))}<br><small class="h-tr-muted">${T.esc([r.recipient_name, i18n('{n} questions', {n: String(r.question_count)}), r.answer_count ? i18n('{n} réponses', {n: String(r.answer_count)}) : ''].filter(Boolean).join(' · '))}</small></div>
+                    ${ro ? '' : `<div class="h-tr-qp-acts"><button type="button" class="button small secondary" data-qpn-dl="${r.id}">${i18n('⤓ Télécharger')}</button>${r.status === 'prepared' ? `<button type="button" class="button small secondary" data-qpn-sent="${r.id}">${i18n('✉ Envoyé')}</button>` : ''}<button type="button" class="button small secondary" data-qpn-import>${i18n('⤒ Importer les réponses')}</button><button type="button" class="icon-action" data-qpn-more="${r.id}" title="${T.esc(i18n('Plus d’actions'))}" aria-label="${T.esc(i18n('Plus d’actions'))}">⋯</button></div>`}</li>`; }).join('')}</ul>`
+                : T.empty(i18n('Aucun questionnaire pour l’instant'), {icon: '📮', hint: i18n('Prépare-en un ci-dessus : il part en un seul fichier, les réponses reviennent dans les fiches.')});
+            list._rows = rows;
+        };
+        const download = async id => { const r = await qp('render', {id, mode: 'file'}); T.download(r.filename || 'questionnaire.html', new Blob([r.html], {type: 'text/html;charset=utf-8'})); T.toast(i18n('Questionnaire téléchargé : joins-le à un e-mail.')); };
+        const remove = async id => { const r = (list._rows || []).find(x => x.id === id); await qp('delete', {id}); await draw(); A().undoToast?.(i18n('Questionnaire « {nm} » supprimé', {nm: r?.title || ''}), {undo: async () => { await qp('restore', {id}); await draw(); }}); };
+        host.querySelector('[data-qpn-form]')?.addEventListener('submit', async e => {
+            e.preventDefault(); const f = e.currentTarget, to = f.elements.to.value.trim(), pid = Number(f.elements.about.value) || 0, p = tr.byId.get(pid);
+            if (!to) return T.fail(f.elements.to, i18n('Écris le nom du proche.'));
+            const picked = [...f.querySelectorAll('input[name=q]:checked')].map(x => theme.questions[Number(x.value)]).filter(Boolean);
+            const qs = [...picked.map(q => ({text: q.text, kind: q.kind || 'text', theme: q.theme || theme.key || '', person_id: pid})), ...(f.elements.mine.value.trim() ? [{text: f.elements.mine.value.trim(), kind: 'text', theme: '', person_id: pid}] : [])];
+            if (!qs.length) return T.fail(f.elements.mine, i18n('Choisis au moins une question.'));
+            try {
+                const r = await qp('save', {title: p ? i18n('Tes souvenirs de {nm}', {nm: p.first || T.name(p)}) : i18n('Tes souvenirs de famille'), intro: i18n(QP_INTRO), recipient: 'txt:' + to, person_id: pid, questions: qs});
+                const id = r?.questionnaire?.id; await draw(); if (id) await download(id);
+                f.elements.to.value = ''; f.elements.mine.value = '';
+            } catch (err) { T.toast(err.message || String(err), 'error'); }
+        });
+        list.addEventListener('click', async e => {
+            const t = e.target.closest('[data-qpn-dl], [data-qpn-sent], [data-qpn-import], [data-qpn-more]'); if (!t) return;
+            try {
+                if (t.dataset.qpnDl) await download(Number(t.dataset.qpnDl));
+                else if (t.dataset.qpnSent) { const id = Number(t.dataset.qpnSent); await qp('status', {id, status: 'sent'}); await draw(); A().undoToast?.(i18n('Questionnaire noté comme envoyé.'), {undo: async () => { await qp('status', {id, status: 'prepared'}); await draw(); }}); }
+                else if (t.hasAttribute('data-qpn-import')) { if (window.LCNDA_QUESTIONS?.importAnswers) window.LCNDA_QUESTIONS.importAnswers({after: draw}); else T.toast(i18n('L’import des réponses n’est pas encore prêt.'), 'error'); }
+                else if (t.dataset.qpnMore) { const id = Number(t.dataset.qpnMore); window.LCNDA_UI?.menuAt?.(t, [{icon: '⤓', label: i18n('Télécharger'), run: () => download(id)}, '-', {icon: '🗑', label: i18n('Supprimer'), danger: true, run: () => remove(id)}], {title: i18n('Questionnaire')}); }
+            } catch (err) { T.toast(err.message || String(err), 'error'); }
+        });
+        list.addEventListener('contextmenu', e => { const row = e.target.closest('[data-qpn-row]'); if (!row || ro || e.shiftKey) return; const id = Number(row.dataset.qpnRow); window.LCNDA_UI?.contextMenu?.(e, [{icon: '⤓', label: i18n('Télécharger'), run: () => download(id)}, '-', {icon: '🗑', label: i18n('Supprimer'), danger: true, run: () => remove(id)}], {title: i18n('Questionnaire')}); });
+        await draw();
+    }
+    F.push({key: 'questionnaire', group: 'memoire', icon: '📮', title: 'Questionnaire aux anciens', desc: 'Des questions sur un ancêtre envoyées en un fichier à un proche ; ses réponses reviennent dans les fiches.', render: renderQuestionnaire});
 })();

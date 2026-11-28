@@ -1,0 +1,835 @@
+fr ¦ ru ¦ uk
+Au bout de combien de jours sans nouvelles un animal est-il « en retard » ? Rouge au double du délai. ¦ Через сколько дней без вестей животное считается « опаздывающим »? Красным — при двойном сроке. ¦ Через скільки днів без звісток тварина вважається « запізнілою »? Червоним — при подвійному терміні.
+Espèce inconnue ¦ Неизвестный вид ¦ Невідомий вид
+Délais par espèce changés ¦ Сроки по видам изменены ¦ Терміни за видами змінено
+Animal (nom, bague…) ¦ Животное (кличка, кольцо…) ¦ Тварина (кличка, кільце…)
+ou bague lue ¦ или прочитанное кольцо ¦ або прочитане кільце
+Bague lue ¦ Прочитанное кольцо ¦ Прочитане кільце
+nb ¦ кол. ¦ к-сть
+Nombre vus ¦ Сколько видели ¦ Скільки бачили
+Le menu de choix n’est pas encore chargé. ¦ Меню выбора ещё не загружено. ¦ Меню вибору ще не завантажено.
+⚡ Saisie d’une séance ¦ ⚡ Запись выхода ¦ ⚡ Запис виходу
+Tout enregistrer ¦ Сохранить всё ¦ Зберегти все
+Le lieu, la date et l’observateur une seule fois ; puis une ligne par animal vu (ou par bague lue, si tu ne sais pas encore qui c’est). ¦ Место, дата и наблюдатель — один раз; затем по строке на каждое увиденное животное (или прочитанное кольцо, если ты ещё не знаешь, кто это). ¦ Місце, дата й спостерігач — один раз; далі по рядку на кожну побачену тварину (або прочитане кільце, якщо ти ще не знаєш, хто це).
+Site de suivi ¦ Место наблюдения ¦ Місце спостереження
+Observateur ¦ Наблюдатель ¦ Спостерігач
+Nb ¦ Кол. ¦ К-сть
+Dis quand a eu lieu la séance. ¦ Укажи, когда был выход. ¦ Вкажи, коли був вихід.
+Choisis un site ou un lieu pour la séance. ¦ Выбери место наблюдения или место для выхода. ¦ Обери місце спостереження або місце для виходу.
+Ajoute au moins un animal vu. ¦ Добавь хотя бы одно увиденное животное. ¦ Додай хоча б одну побачену тварину.
+Séance enregistrée : {n} ¦ Выход сохранён: {n} ¦ Вихід збережено: {n}
+🖨 Fiche de terrain ¦ 🖨 Полевой лист ¦ 🖨 Польовий аркуш
+Aperçu et impression ¦ Просмотр и печать ¦ Перегляд і друк
+Les animaux attendus sur un site (ceux qu’on y a déjà vus), avec leurs bagues et marques, et des cases à cocher : pour une sortie sans ordinateur. ¦ Животные, ожидаемые на месте (те, что там уже видели), с их кольцами и метками и с галочками: для выхода без компьютера. ¦ Тварини, очікувані на місці (ті, що їх там уже бачили), з їхніми кільцями й позначками та з квадратиками: для виходу без комп’ютера.
+Tous les animaux suivis ¦ Все наблюдаемые животные ¦ Усі тварини під наглядом
+Tous les sites ¦ Все места ¦ Усі місця
+Aucun animal déjà vu sur ce site. ¦ На этом месте ещё не видели ни одного животного. ¦ На цьому місці ще не бачили жодної тварини.
+Fiche de terrain — {s} ¦ Полевой лист — {s} ¦ Польовий аркуш — {s}
+Fiche de terrain ¦ Полевой лист ¦ Польовий аркуш
+Date de la dernière observation ¦ Дата последнего наблюдения ¦ Дата останнього спостереження
+Une colonne pour les notes ¦ Столбец для заметок ¦ Стовпець для нотаток
+Date : ____________  Observateur : ____________________  Météo : ____________ ¦ Дата: ____________  Наблюдатель: ____________________  Погода: ____________ ¦ Дата: ____________  Спостерігач: ____________________  Погода: ____________
+SUCCESSIONS ¦ НАСЛЕДСТВА ¦ СПАДЩИНИ
+Qui s’en charge ? ¦ Кто этим занимается? ¦ Хто цим займається?
+ex. Claire LACOMBE (vide : personne) ¦ напр. Claire LACOMBE (пусто: никто) ¦ напр. Claire LACOMBE (порожньо: ніхто)
+C’est moi (pour le filtre « Mes dossiers ») ¦ Это я (для фильтра « Мои дела ») ¦ Це я (для фільтра « Мої справи »)
+Sur cet ordinateur, « moi » = {name}. ¦ На этом компьютере « я » = {name}. ¦ На цьому комп’ютері « я » = {name}.
+Confié à {who} ¦ Поручено: {who} ¦ Доручено: {who}
+Plus personne n’en est chargé ¦ Больше никто не отвечает ¦ Більше ніхто не відповідає
+Chargé du dossier : ¦ Ответственный за дело: ¦ Відповідальний за справу:
+👥 Confier le dossier… ¦ 👥 Поручить дело… ¦ 👥 Доручити справу…
+👥 Chargé du dossier n° {n} ¦ 👥 Ответственный за дело № {n} ¦ 👥 Відповідальний за справу № {n}
+à confier ¦ поручить ¦ доручити
+👥 Qui s’occupe de cette échéance ? ¦ 👥 Кто занимается этим сроком? ¦ 👥 Хто займається цим терміном?
+🛡 Conflit d’intérêts possible : {n} déjà dans un autre dossier ouvert. Vérifie avant de signer un contrat. ¦ 🛡 Возможен конфликт интересов: {n} уже в другом открытом деле. Проверь перед подписанием договора. ¦ 🛡 Можливий конфлікт інтересів: {n} уже в іншій відкритій справі. Перевір перед підписанням договору.
+dossier n° {n} ¦ дело № {n} ¦ справа № {n}
+Pas d’image de cette pièce dans la base : relie l’acte scanné à l’événement, puis recommence. ¦ В базе нет изображения этого документа: привяжи отсканированную запись к событию и попробуй снова. ¦ У базі немає зображення цього документа: прив’яжи відсканований запис до події й спробуй знову.
+La lecture automatique n’a pas marché : {err} ¦ Автоматическое чтение не удалось: {err} ¦ Автоматичне читання не вдалося: {err}
+Aucun texte lu sur cette image (écriture manuscrite ? essaie l’Atelier de transcription). ¦ На этом изображении текст не прочитан (рукопись? попробуй Мастерскую расшифровки). ¦ На цьому зображенні текст не прочитано (рукопис? спробуй Майстерню транскрипції).
+rien de trouvé ¦ ничего не найдено ¦ нічого не знайдено
+PIÈCE ¦ ДОКУМЕНТ ¦ ДОКУМЕНТ
+🔎 Lecture automatique — à vérifier ¦ 🔎 Автоматическое чтение — проверь ¦ 🔎 Автоматичне читання — перевір
+✍️ Noter au journal ¦ ✍️ Записать в журнал ¦ ✍️ Записати в журнал
+Ce que la machine a cru lire sur « {t} ». Décoche ce qui est faux : rien n’est changé dans les fiches. ¦ Что машина, как ей кажется, прочитала на « {t} ». Сними галочки с неверного: в карточках ничего не меняется. ¦ Що машина, як їй здається, прочитала на « {t} ». Зніми позначки з хибного: у картках нічого не змінюється.
+Lecture automatique de la pièce « {p} » (à vérifier) — {line} ¦ Автоматическое чтение документа « {p} » (проверить) — {line} ¦ Автоматичне читання документа « {p} » (перевірити) — {line}
+Noté au journal du dossier. ¦ Записано в журнал дела. ¦ Записано в журнал справи.
+Lire le texte de l’acte scanné et proposer noms, dates et lieux ¦ Прочитать текст отсканированной записи и предложить имена, даты и места ¦ Прочитати текст відсканованого запису й запропонувати імена, дати й місця
+🔎 Lire la pièce ¦ 🔎 Прочитать документ ¦ 🔎 Прочитати документ
+demandée ¦ запрошен ¦ запитано
+à obtenir ¦ получить ¦ отримати
+Tableau généalogique de dévolution ¦ Генеалогическая таблица наследования ¦ Генеалогічна таблиця спадкування
+PROJET — à vérifier et compléter par le notaire. Calcul indicatif établi d’après les fiches de la base. ¦ ПРОЕКТ — нотариус должен проверить и дополнить. Ориентировочный расчёт по карточкам базы. ¦ ПРОЄКТ — нотаріус має перевірити й доповнити. Орієнтовний розрахунок за картками бази.
+Pièces (renvois) ¦ Документы (ссылки) ¦ Документи (посилання)
+conjoint survivant ¦ переживший супруг ¦ той з подружжя, хто пережив
+Aucun héritier calculé pour l’instant. ¦ Наследники пока не рассчитаны. ¦ Спадкоємців поки не розраховано.
+Les pièces ¦ Документы ¦ Документи
+Établi le {d}. Document de travail : il ne remplace ni l’acte de notoriété ni le certificat d’hérédité. ¦ Составлено {d}. Рабочий документ: не заменяет ни нотариальный акт о наследниках, ни свидетельство о наследстве. ¦ Складено {d}. Робочий документ: не замінює ні нотаріального акта про спадкоємців, ні свідоцтва про спадщину.
+Projet de tableau de dévolution ¦ Проект таблицы наследования ¦ Проєкт таблиці спадкування
+🖨 Imprimer le tableau ¦ 🖨 Печать таблицы ¦ 🖨 Друк таблиці
+À joindre à l’acte de notoriété : chaque héritier, son lien, sa part, et les pièces qui le prouvent (P1, P2…). ¦ Приложить к акту о наследниках: каждый наследник, его родство, его доля и подтверждающие документы (P1, P2…). ¦ Додати до акта про спадкоємців: кожен спадкоємець, його спорідненість, його частка й документи, що це підтверджують (P1, P2…).
+Tableau de dévolution — {n} ¦ Таблица наследования — {n} ¦ Таблиця спадкування — {n}
+Tableau de dévolution ¦ Таблица наследования ¦ Таблиця спадкування
+Tableau de dévolution {n} ¦ Таблица наследования {n} ¦ Таблиця спадкування {n}
+12 juin 1890 ¦ 12 июня 1890 ¦ 12 червня 1890
+2000 et après ¦ 2000 и позже ¦ 2000 і пізніше
+7 mai 1925 ¦ 7 мая 1925 ¦ 7 травня 1925
+Aucun chemin de parenté connu avec la personne de départ. ¦ Нет известной цепочки родства с исходным человеком. ¦ Немає відомого ланцюжка спорідненості з вихідною особою.
+Aucun lien de parenté connu. ¦ Родство неизвестно. ¦ Спорідненість невідома.
+Aucun lien de parenté trouvé avec {nm} (personne de départ). ¦ Родство с {nm} (исходный человек) не найдено. ¦ Спорідненість із {nm} (вихідна особа) не знайдено.
+Aucune différence : la fiche est comme avant cette modification. ¦ Различий нет: карточка такая же, как до этого изменения. ¦ Відмінностей немає: картка така сама, як до цієї зміни.
+Aucune union enregistrée pour cette fiche. ¦ В этой карточке нет ни одного союза. ¦ У цій картці немає жодного союзу.
+Avant cette modification ¦ До этого изменения ¦ До цієї зміни
+Caché en mode consultation, dans les exports, les partages et le site. ¦ Скрыто в режиме просмотра, в экспорте, при обмене и на сайте. ¦ Приховано в режимі перегляду, в експорті, під час поширення й на сайті.
+Cet élément n’existe plus : utilise « Restaurer » s’il a été supprimé. ¦ Этого элемента больше нет: используй « Восстановить », если он был удалён. ¦ Цього елемента більше немає: скористайся « Відновити », якщо його видалено.
+Cette fiche a {n} {what} : garde la bonne, l’autre devient une « autre version » de ce fait. ¦ В этой карточке {n} {what}: оставь верный вариант, другой станет « другой версией » этого факта. ¦ У цій картці {n} {what}: залиш правильний варіант, інший стане « іншою версією » цього факту.
+Chargement de la fiche familiale… ¦ Загрузка семейной карточки… ¦ Завантаження сімейної картки…
+Chargement des pesées… ¦ Загрузка взвешиваний… ¦ Завантаження зважувань…
+Choisis « ⤓ PDF » pour enregistrer le fichier. ¦ Выбери « ⤓ PDF », чтобы сохранить файл. ¦ Обери « ⤓ PDF », щоб зберегти файл.
+Confidentialité et recherche ¦ Конфиденциальность и поиск ¦ Конфіденційність і пошук
+Courbe de poids ¦ Кривая веса ¦ Крива ваги
+Créer la famille ¦ Создать семью ¦ Створити сім’ю
+C’est la personne de départ (de cujus). ¦ Это исходный человек (de cujus). ¦ Це вихідна особа (de cujus).
+C’est la personne de départ. ¦ Это исходный человек. ¦ Це вихідна особа.
+Date du média moins date de naissance ¦ Дата медиафайла минус дата рождения ¦ Дата медіафайлу мінус дата народження
+Dernière modification ¦ Последнее изменение ¦ Остання зміна
+Dernières fiches créées ¦ Последние созданные карточки ¦ Останні створені картки
+En vie et décédés ¦ Живые и умершие ¦ Живі й померлі
+Exporter la fiche ¦ Экспорт карточки ¦ Експорт картки
+Exporter la fiche (JSON) ¦ Экспорт карточки (JSON) ¦ Експорт картки (JSON)
+Exports rapides de cette fiche : 🖨 Imprimer ouvre l’aperçu de l’app (format, sens, PDF), avec l’ordre, la taille et la visibilité des blocs de cette fiche. Les événements 🔒 confidentiels ne sont jamais exportés. ¦ Быстрый экспорт этой карточки: 🖨 Печать открывает просмотр в приложении (формат, ориентация, PDF) с порядком, размером и видимостью блоков этой карточки. Конфиденциальные 🔒 события никогда не экспортируются. ¦ Швидкий експорт цієї картки: 🖨 Друк відкриває перегляд у застосунку (формат, орієнтація, PDF) з порядком, розміром і видимістю блоків цієї картки. Конфіденційні 🔒 події ніколи не експортуються.
+FICHE FAMILIALE ¦ СЕМЕЙНАЯ КАРТОЧКА ¦ СІМЕЙНА КАРТКА
+Famille enregistrée : {n} fiche(s) créée(s). ¦ Семья сохранена: создано карточек: {n}. ¦ Сім’ю збережено: створено карток: {n}.
+Famille enregistrée. ¦ Семья сохранена. ¦ Сім’ю збережено.
+Fiche en JSON ¦ Карточка в JSON ¦ Картка в JSON
+Fiche familiale ¦ Семейная карточка ¦ Сімейна картка
+Fiche familiale de {nm} ¦ Семейная карточка: {nm} ¦ Сімейна картка: {nm}
+Fiche familiale… ¦ Семейная карточка… ¦ Сімейна картка…
+Gardé : l’autre version est notée dans « Date alternative ». ¦ Сохранено: другая версия записана в « Альтернативная дата ». ¦ Збережено: іншу версію записано в « Альтернативна дата ».
+Genre inconnu ¦ Пол неизвестен ¦ Стать невідома
+Hors Sosa ¦ Вне Sosa ¦ Поза Sosa
+Imprimer la fiche ¦ Печать карточки ¦ Друк картки
+Indique au moins le père ou la mère. ¦ Укажи хотя бы отца или мать. ¦ Вкажи хоча б батька чи матір.
+Inhumation ¦ Погребение ¦ Поховання
+Les deux branches ¦ Обе ветви ¦ Обидві гілки
+Lien retiré : {nm} ¦ Связь удалена: {nm} ¦ Зв’язок видалено: {nm}
+Naissance (les plus anciens d’abord) ¦ Рождение (сначала старшие) ¦ Народження (спочатку старші)
+Naissance (les plus récents d’abord) ¦ Рождение (сначала младшие) ¦ Народження (спочатку молодші)
+Naissance inconnue ¦ Рождение неизвестно ¦ Народження невідоме
+Note de recherche ¦ Исследовательская заметка ¦ Дослідницька нотатка
+Ouvre d’abord une fiche. ¦ Сначала открой карточку. ¦ Спершу відкрий картку.
+PDF (aperçu d’impression) ¦ PDF (предпросмотр печати) ¦ PDF (попередній перегляд друку)
+Pas de fiche d’animal liée. ¦ Нет связанной карточки животного. ¦ Немає пов’язаної картки тварини.
+Pas de mariage enregistré. ¦ Брак не записан. ¦ Шлюб не записано.
+Pas encore de pesée : ajoute un poids dans 🩺 Santé. ¦ Взвешиваний пока нет: добавь вес в 🩺 Здоровье. ¦ Зважувань поки немає: додай вагу в 🩺 Здоров’я.
+Personnaliser l’export… ¦ Настроить экспорт… ¦ Налаштувати експорт…
+Prénom NOM, ou choisis une fiche ¦ Имя ФАМИЛИЯ или выбери карточку ¦ Ім’я ПРІЗВИЩЕ або обери картку
+Père, mère, mariage et enfants en une seule saisie ¦ Отец, мать, брак и дети за один ввод ¦ Батько, мати, шлюб і діти за одне введення
+Père, mère, mariage et enfants en une seule saisie. Pour chaque nom : choisis une fiche existante, ou tape « Prénom NOM » pour en créer une. ¦ Отец, мать, брак и дети за один ввод. Для каждого имени: выбери существующую карточку или введи « Имя ФАМИЛИЯ », чтобы создать новую. ¦ Батько, мати, шлюб і діти за одне введення. Для кожного імені: обери наявну картку або введи « Ім’я ПРІЗВИЩЕ », щоб створити нову.
+Recherche du chemin… ¦ Поиск цепочки… ¦ Пошук ланцюжка…
+Remis : {f} ¦ Возвращено: {f} ¦ Повернуто: {f}
+Rien à exporter dans cet écran. ¦ На этом экране нечего экспортировать. ¦ На цьому екрані нічого експортувати.
+SAISIE RAPIDE ¦ БЫСТРЫЙ ВВОД ¦ ШВИДКЕ ВВЕДЕННЯ
+Sans aucune source ¦ Без единого источника ¦ Без жодного джерела
+Sans parents ¦ Без родителей ¦ Без батьків
+Sans parents connus ¦ Родители неизвестны ¦ Батьки невідомі
+Sous chaque nom : son lien de parenté avec la personne de départ. ¦ Под каждым именем — родство с исходным человеком. ¦ Під кожним ім’ям — спорідненість із вихідною особою.
+TON LIEN ¦ ТВОЁ РОДСТВО ¦ ТВОЯ СПОРІДНЕНІСТЬ
+Tableau (CSV) ¦ Таблица (CSV) ¦ Таблиця (CSV)
+Ton lien avec cette personne ¦ Твоё родство с этим человеком ¦ Твоя спорідненість із цією особою
+Ton lien avec cette personne (depuis {nm}) — clique pour voir le chemin. ¦ Твоё родство с этим человеком (от {nm}) — нажми, чтобы увидеть цепочку. ¦ Твоя спорідненість із цією особою (від {nm}) — натисни, щоб побачити ланцюжок.
+Tous les genres ¦ Любой пол ¦ Будь-яка стать
+Un enfant sans nom de famille prend celui du père. ¦ Ребёнок без фамилии получает фамилию отца. ¦ Дитина без прізвища отримує прізвище батька.
+Voir la note de recherche ¦ Посмотреть исследовательскую заметку ¦ Переглянути дослідницьку нотатку
+conjoint de ¦ супруг(а) ¦ чоловік / дружина
+enfant de ¦ ребёнок ¦ дитина
+ex. à vérifier : cote 3 E 125, piste : registre de la paroisse voisine ¦ напр. проверить: шифр 3 E 125, зацепка: книга соседнего прихода ¦ напр. перевірити: шифр 3 E 125, слід: книга сусідньої парафії
+inconnu(e) ¦ неизвестен(-на) ¦ невідомий(-а)
+par {nm} ¦ от {nm} ¦ від {nm}
+parent de ¦ родитель ¦ батько / мати
+{a}–{b} ¦ {a}–{b} ¦ {a}–{b}
+{nm} avait environ {age} ¦ {nm} было около {age} ¦ {nm} було близько {age}
+{nm} avait moins d’un an ¦ {nm} не было и года ¦ {nm} не було й року
+{nm} avait {age} ¦ {nm} было {age} ¦ {nm} було {age}
+{n} pesée(s) · dernière : {w} le {d} ¦ Взвешиваний: {n} · последнее: {w}, {d} ¦ Зважувань: {n} · останнє: {w}, {d}
+{n} {what} ¦ {n} {what} ¦ {n} {what}
+{n} étape(s) depuis la personne de départ. ¦ Шагов от исходного человека: {n}. ¦ Кроків від вихідної особи: {n}.
+{s} depuis la première ¦ {s} с первого ¦ {s} від першого
+Événement confidentiel : caché en consultation, dans les exports, les partages et le site. ¦ Конфиденциальное событие: скрыто при просмотре, в экспорте, при обмене и на сайте. ¦ Конфіденційна подія: прихована під час перегляду, в експорті, під час поширення й на сайті.
+à {x} ¦ в {x} ¦ у {x}
+↩ Remettre ¦ ↩ Вернуть ¦ ↩ Повернути
+⇆ Comparer avec maintenant ¦ ⇆ Сравнить с текущим ¦ ⇆ Порівняти з поточним
+⚡ ＋ Famille ¦ ⚡ ＋ Семья ¦ ⚡ ＋ Сім’я
+✓ Garder celle-ci ¦ ✓ Оставить этот ¦ ✓ Залишити цей
+✓ Remis ¦ ✓ Возвращено ¦ ✓ Повернуто
+＋ Un enfant de plus ¦ ＋ Ещё один ребёнок ¦ ＋ Ще одна дитина
+👪 Fiche familiale ¦ 👪 Семейная карточка ¦ 👪 Сімейна картка
+📈 Animal : poids et croissance ¦ 📈 Животное: вес и рост ¦ 📈 Тварина: вага й ріст
+📝 Avec une note de recherche ¦ 📝 С исследовательской заметкой ¦ 📝 З дослідницькою нотаткою
+📝 Note de recherche (à vérifier, cote, piste) ¦ 📝 Исследовательская заметка (проверить, шифр, зацепка) ¦ 📝 Дослідницька нотатка (перевірити, шифр, слід)
+📝 Note de recherche : {x} ¦ 📝 Исследовательская заметка: {x} ¦ 📝 Дослідницька нотатка: {x}
+🔒 confidentiel ¦ 🔒 конфиденциально ¦ 🔒 конфіденційно
+🔒 Événement confidentiel ¦ 🔒 Конфиденциальное событие ¦ 🔒 Конфіденційна подія
+🧭 Aucun lien connu ¦ 🧭 Родство неизвестно ¦ 🧭 Спорідненість невідома
+🧭 Personne de départ ¦ 🧭 Исходный человек ¦ 🧭 Вихідна особа
+🧭 Ton lien ¦ 🧭 Твоё родство ¦ 🧭 Твоя спорідненість
+🧭 Ton lien avec cette personne ¦ 🧭 Твоё родство с этим человеком ¦ 🧭 Твоя спорідненість із цією особою
+🧭 personne de départ ¦ 🧭 исходный человек ¦ 🧭 вихідна особа
+Nouveau… dans l’onglet ouvert (une personne dans Personnes) ¦ Новое… в открытой вкладке (человек в Люди) ¦ Нове… у відкритій вкладці (особа в Люди)
+Annuler la dernière modification d’une fiche (hors d’une case de texte, tout de suite, avec « ↷ Rétablir ») ¦ Отменить последнее изменение карточки (вне текстового поля, сразу, с « ↷ Вернуть ») ¦ Відмінити останню зміну картки (поза текстовим полем, одразу, з « ↷ Повторити »)
+Exporter ce que montre l’onglet ouvert (⤓ Exporter) ¦ Экспортировать то, что показывает открытая вкладка (⤓ Экспорт) ¦ Експортувати те, що показує відкрита вкладка (⤓ Експорт)
+Chercher dans la colonne de gauche ¦ Искать в левой колонке ¦ Шукати в лівій колонці
+Aucune personne ne correspond à ces filtres. ¦ Никто не подходит под эти фильтры. ¦ Ніхто не відповідає цим фільтрам.
+Retire un filtre (Filtrer ▾) ou change le tri. ¦ Убери фильтр (Фильтр ▾) или измени сортировку. ¦ Прибери фільтр (Фільтр ▾) або зміни сортування.
+Peau ¦ Кожа ¦ Шкіра
+Origine / mention ¦ Происхождение / пометка ¦ Походження / примітка
+Mention conjoint ¦ Пометка о супруге ¦ Примітка про подружжя
+Mention enfants ¦ Пометка о детях ¦ Примітка про дітей
+Date alternative ¦ Альтернативная дата ¦ Альтернативна дата
+Lieu (n°) ¦ Место (№) ¦ Місце (№)
+Type (n°) ¦ Тип (№) ¦ Тип (№)
+Confidentiel ¦ Конфиденциально ¦ Конфіденційно
+A : « {a} » ({na}) · B : « {b} » ({nb}) → {n} personne(s) {op}. ¦ A: « {a} » ({na}) · B: « {b} » ({nb}) → людей: {n} {op}. ¦ A: « {a} » ({na}) · B: « {b} » ({nb}) → осіб: {n} {op}.
+Acte à commander supprimé ¦ Запись для заказа удалена ¦ Запис для замовлення видалено
+Ajouter à une liste ¦ Добавить в список ¦ Додати до списку
+Apparence (thème, couleurs, police) ¦ Внешний вид (тема, цвета, шрифт) ¦ Вигляд (тема, кольори, шрифт)
+Aucune citation ne contient ce texte. ¦ Ни одна цитата не содержит этот текст. ¦ Жодна цитата не містить цього тексту.
+Aucune de « Mes listes » ne contient des personnes : crée-en une dans Réglages → Éditeur de listes. ¦ Ни в одном из « Мои списки » нет людей: создай список в Настройки → Редактор списков. ¦ У жодному з « Мої списки » немає людей: створи список у Налаштування → Редактор списків.
+Aucune ligne ne contient « {find} ». ¦ Ни одна строка не содержит « {find} ». ¦ Жоден рядок не містить « {find} ».
+Aucune source ne contient ce texte. ¦ Ни один источник не содержит этот текст. ¦ Жодне джерело не містить цього тексту.
+Ce qui est dans une recherche enregistrée et pas dans l’autre (ex. les Sosa nés en Corrèze sans acte de baptême) : pour trouver les trous. ¦ То, что есть в одном сохранённом поиске и нет в другом (напр. Sosa, родившиеся в Коррезе, без записи о крещении): чтобы найти пробелы. ¦ Те, що є в одному збереженому пошуку і немає в іншому (напр. Sosa, народжені в Коррезі, без запису про хрещення): щоб знайти прогалини.
+Changer cette ligne ¦ Изменить эту строку ¦ Змінити цей рядок
+Chercher et remplacer : où chercher, majuscules, mot entier ¦ Найти и заменить: где искать, регистр, слово целиком ¦ Знайти й замінити: де шукати, регістр, слово цілком
+Chercher un mot dans le titre, l’auteur et le texte des sources, et dans la page et la note de chaque citation. ¦ Искать слово в названии, авторе и тексте источников, а также в странице и заметке каждой цитаты. ¦ Шукати слово в назві, авторі й тексті джерел, а також у сторінці й нотатці кожної цитати.
+Choisis deux lieux différents. ¦ Выбери два разных места. ¦ Обери два різні місця.
+Choisis deux recherches enregistrées. ¦ Выбери два сохранённых поиска. ¦ Обери два збережені пошуки.
+Choisis les deux lieux. ¦ Выбери оба места. ¦ Обери обидва місця.
+Choisis ou écris une étiquette. ¦ Выбери или напиши метку. ¦ Обери або напиши мітку.
+Choisis où chercher. ¦ Выбери, где искать. ¦ Обери, де шукати.
+Citée ¦ Цитируется ¦ Цитується
+Cocher {name} ¦ Отметить {name} ¦ Позначити {name}
+Comparer deux recherches ¦ Сравнить два поиска ¦ Порівняти два пошуки
+Corrige une faute partout d’un coup (« cultivatr » → « cultivateur »). Tu vois d’abord chaque ligne qui changerait ; décoche celles à garder. « ↶ Annuler » remet tout comme avant. ¦ Исправь ошибку везде сразу (« cultivatr » → « cultivateur »). Сначала ты видишь каждую строку, которая изменится; сними галочки с тех, что нужно оставить. « ↶ Отменить » вернёт всё как было. ¦ Виправ помилку скрізь одразу (« cultivatr » → « cultivateur »). Спершу ти бачиш кожен рядок, який зміниться; зніми позначки з тих, що треба залишити. « ↶ Відмінити » поверне все як було.
+Dernières recherches vidées ¦ Последние поиски очищены ¦ Останні пошуки очищено
+Descriptions des événements ¦ Описания событий ¦ Описи подій
+Définition supprimée ¦ Определение удалено ¦ Визначення видалено
+Dépouillement supprimé ¦ Выписка удалена ¦ Виписку видалено
+Essaie un autre lien ou moins de critères. ¦ Попробуй другое родство или меньше условий. ¦ Спробуй іншу спорідненість або менше умов.
+Ex : Poilu, À vérifier… ¦ Напр.: Poilu, Проверить… ¦ Напр.: Poilu, Перевірити…
+Ex : cultivateur (vide = effacer) ¦ Напр.: cultivateur (пусто = стереть) ¦ Напр.: cultivateur (порожньо = стерти)
+Ex : cultivatr ¦ Напр.: cultivatr ¦ Напр.: cultivatr
+Ex : registre paroissial, folio 12, Tulle… ¦ Напр.: приходская книга, лист 12, Тюль… ¦ Напр.: парафіяльна книга, аркуш 12, Тюль…
+Extrait ¦ Отрывок ¦ Уривок
+Fais-les dans « Recherche multicritère », puis « Enregistrer ». ¦ Создай их в « Поиск по нескольким условиям », затем « Сохранить ». ¦ Створи їх у « Пошук за кількома умовами », потім « Зберегти ».
+Graphiques et tableau de bord ¦ Графики и панель управления ¦ Графіки й панель керування
+Il faut au moins deux recherches enregistrées. ¦ Нужно хотя бы два сохранённых поиска. ¦ Потрібно щонайменше два збережені пошуки.
+Lacune supprimée ¦ Пробел удалён ¦ Прогалину видалено
+Les recherches enregistrées ne sont pas disponibles. ¦ Сохранённые поиски недоступны. ¦ Збережені пошуки недоступні.
+Lien de parenté inconnu. ¦ Родство неизвестно. ¦ Спорідненість невідома.
+Ligne de transcription supprimée ¦ Строка расшифровки удалена ¦ Рядок транскрипції видалено
+Mot entier seulement ¦ Только слово целиком ¦ Лише слово цілком
+Neveux et nièces ¦ Племянники и племянницы ¦ Племінники й племінниці
+Nom de table invalide. ¦ Недопустимое имя таблицы. ¦ Неприпустима назва таблиці.
+Noms de lieux ¦ Названия мест ¦ Назви місць
+Nouvelle étiquette… ¦ Новая метка… ¦ Нова мітка…
+Nés en ou après ¦ Родились в или после ¦ Народжені в або після
+Nés en ou avant ¦ Родились в или до ¦ Народжені в або до
+Oncles et tantes ¦ Дяди и тёти ¦ Дядьки й тітки
+Onglets ajoutés au menu ¦ Вкладки, добавленные в меню ¦ Вкладки, додані до меню
+Onglets cachés du menu ¦ Вкладки, скрытые из меню ¦ Вкладки, приховані з меню
+Ordre des types de recherche ¦ Порядок типов поиска ¦ Порядок типів пошуку
+Ordre du menu ¦ Порядок меню ¦ Порядок меню
+Ouvrir la recherche multicritère ¦ Открыть поиск по нескольким условиям ¦ Відкрити пошук за кількома умовами
+Où chercher ¦ Где искать ¦ Де шукати
+Personne relevée retirée ¦ Записанный человек убран ¦ Записану особу прибрано
+Puis le lien de parenté cherché. ¦ Затем искомое родство. ¦ Потім шукана спорідненість.
+Rangement des pages des Réglages ¦ Порядок страниц Настроек ¦ Порядок сторінок Налаштувань
+Recherche A ¦ Поиск A ¦ Пошук A
+Recherche B ¦ Поиск B ¦ Пошук B
+Recherche dans les sources… ¦ Поиск в источниках… ¦ Пошук у джерелах…
+Recherche dans l’arbre… ¦ Поиск в древе… ¦ Пошук у дереві…
+Recherche des lignes à changer… ¦ Поиск строк для замены… ¦ Пошук рядків для заміни…
+Recherche par lien de parenté ¦ Поиск по родству ¦ Пошук за спорідненістю
+Respecter les majuscules ¦ Учитывать регистр ¦ Враховувати регістр
+Rien de coché : les actions portent sur les {t} résultats ¦ Ничего не отмечено: действия касаются всех результатов ({t}) ¦ Нічого не позначено: дії стосуються всіх результатів ({t})
+Règle introuvable. ¦ Правило не найдено. ¦ Правило не знайдено.
+Règle supprimée ¦ Правило удалено ¦ Правило видалено
+Résultats de la recherche ¦ Результаты поиска ¦ Результати пошуку
+Sections ouvertes ou fermées ¦ Открытые или закрытые разделы ¦ Відкриті або закриті розділи
+Seulement les décédés ¦ Только умершие ¦ Лише померлі
+Seulement les vivants ¦ Только живые ¦ Лише живі
+Seules les {n} premières lignes sont montrées ; « Remplacer » change les lignes cochées. ¦ Показаны только первые строки ({n}); « Заменить » меняет отмеченные строки. ¦ Показано лише перші рядки ({n}); « Замінити » змінює позначені рядки.
+Sources et citations ¦ Источники и цитаты ¦ Джерела й цитати
+Suppression impossible ici. ¦ Здесь удалить нельзя. ¦ Тут видалити не можна.
+Tape au moins deux lettres. ¦ Введи хотя бы две буквы. ¦ Введи хоча б дві літери.
+Tape le texte à chercher. ¦ Введи текст для поиска. ¦ Введи текст для пошуку.
+Texte à chercher ¦ Текст для поиска ¦ Текст для пошуку
+Texte à chercher trop long. ¦ Текст для поиска слишком длинный. ¦ Текст для пошуку задовгий.
+Tous les ancêtres ¦ Все предки ¦ Усі предки
+Tous les descendants ¦ Все потомки ¦ Усі нащадки
+Trouvé dans ¦ Найдено в ¦ Знайдено в
+Type d’événement supprimé ¦ Тип события удалён ¦ Тип події видалено
+Types de recherche cachés ¦ Скрытые типы поиска ¦ Приховані типи пошуку
+Vider la liste ¦ Очистить список ¦ Очистити список
+Vivant(e) ¦ Жив(а) ¦ Живий(-а)
+Vivants et décédés ¦ Живые и умершие ¦ Живі й померлі
+dans A et dans B ¦ в A и в B ¦ в A і в B
+dans A mais pas dans B ¦ в A, но не в B ¦ в A, але не в B
+dans A ou dans B ¦ в A или в B ¦ в A або в B
+dans une seule des deux ¦ только в одном из двух ¦ лише в одному з двох
+{n} cochée(s) sur {t} ¦ Отмечено {n} из {t} ¦ Позначено {n} з {t}
+{n} ligne(s) cochée(s) sur {t} ¦ Отмечено строк: {n} из {t} ¦ Позначено рядків: {n} з {t}
+{rel} de {name} : {n} personne(s). ¦ {rel} — {name}: людей: {n}. ¦ {rel} — {name}: осіб: {n}.
+« Tous les cousins germains de… », « les descendants vivants de… nés après 1900 » : choisis une personne et un lien. ¦ « Все двоюродные братья и сёстры… », « живые потомки… родившиеся после 1900 »: выбери человека и родство. ¦ « Усі двоюрідні брати й сестри… », « живі нащадки… народжені після 1900 »: обери особу й спорідненість.
+Étiqueter {n} personne(s) ¦ Пометить людей: {n} ¦ Позначити осіб: {n}
+⟳ Recharger la page ¦ ⟳ Перезагрузить страницу ¦ ⟳ Перезавантажити сторінку
+🏷 « {label} » posée sur {n} personne(s) ¦ 🏷 Метка « {label} » поставлена людям: {n} ¦ 🏷 Мітку « {label} » поставлено особам: {n}
+🏷 Étiqueter ¦ 🏷 Пометить ¦ 🏷 Позначити
+📊 Comparer deux recherches ¦ 📊 Сравнить два поиска ¦ 📊 Порівняти два пошуки
+📑 Ajouter à Mes listes ¦ 📑 Добавить в Мои списки ¦ 📑 Додати до Мої списки
+📑 {n} personne(s) ajoutée(s) à « {list} » ¦ 📑 Добавлено в « {list} » людей: {n} ¦ 📑 Додано до « {list} » осіб: {n}
+📚 Sources ({n}) ¦ 📚 Источники ({n}) ¦ 📚 Джерела ({n})
+🔁 Chercher et remplacer ¦ 🔁 Найти и заменить ¦ 🔁 Знайти й замінити
+🔁 Remplacer ¦ 🔁 Заменить ¦ 🔁 Замінити
+🔁 Remplacer ({n}) ¦ 🔁 Заменить ({n}) ¦ 🔁 Замінити ({n})
+🔁 {n} remplacement(s) faits ¦ 🔁 Выполнено замен: {n} ¦ 🔁 Виконано замін: {n}
+🔎 Ce que j’ai changé ¦ 🔎 Что я изменил ¦ 🔎 Що я змінив
+🔒 {n} ligne(s) d’une fiche verrouillée : elles ne changeront pas. ¦ 🔒 Строк из заблокированной карточки: {n} — они не изменятся. ¦ 🔒 Рядків із заблокованої картки: {n} — вони не зміняться.
+🔖 Citations ({n}) ¦ 🔖 Цитаты ({n}) ¦ 🔖 Цитати ({n})
+🕘 Dernières recherches ¦ 🕘 Последние поиски ¦ 🕘 Останні пошуки
+🗄 Santé de la base ¦ 🗄 Состояние базы ¦ 🗄 Стан бази
+🧬 Lien de parenté ¦ 🧬 Родство ¦ 🧬 Спорідненість
+🧾 Sources et citations ¦ 🧾 Источники и цитаты ¦ 🧾 Джерела й цитати
+Lieux « {q} » ¦ Места « {q} » ¦ Місця « {q} »
+Transcriptions « {q} » ¦ Расшифровки « {q} » ¦ Транскрипції « {q} »
+Export impossible : les événements confidentiels n’ont pas pu être retirés. Réessaie dans un instant. ¦ Экспорт невозможен: не удалось убрать конфиденциальные события. Попробуй ещё раз чуть позже. ¦ Експорт неможливий: не вдалося прибрати конфіденційні події. Спробуй ще раз трохи згодом.
+Les événements confidentiels n’ont pas pu être cachés : réessaie dans un instant. ¦ Не удалось скрыть конфиденциальные события: попробуй ещё раз чуть позже. ¦ Не вдалося приховати конфіденційні події: спробуй ще раз трохи згодом.
+, ni les fiches et événements confidentiels. ¦ , ни конфиденциальных карточек и событий. ¦ , ані конфіденційних карток і подій.
+🔒  ¦ 🔒 ¦ 🔒
+📤 Envoyer vers… ¦ 📤 Отправить в… ¦ 📤 Надіслати в…
+Dans une nouvelle présentation ¦ В новую презентацию ¦ У нову презентацію
+Dans un nouveau diaporama ¦ В новое слайд-шоу ¦ У нове слайд-шоу
+Dans un livre de la Mise en page… ¦ В книгу из Расположения… ¦ У книгу з Розташування…
+Dans un nouveau document (Traitement de texte) ¦ В новый документ (Текстовый редактор) ¦ У новий документ (Текстовий редактор)
+Dans le Tableur ¦ В Электронную таблицу ¦ В Електронну таблицю
+Sur une page de mon site… ¦ На страницу моего сайта… ¦ На сторінку мого сайту…
+Dans la Retouche des photos ¦ В Ретушь фото ¦ У Ретуш фото
+Comparer avec une autre photo ¦ Сравнить с другим фото ¦ Порівняти з іншим фото
+Dans l’Atelier de transcription ¦ В Мастерскую расшифровки ¦ У Майстерню транскрипції
+Dans le Dessin vectoriel ¦ В Векторный рисунок ¦ У Векторний малюнок
+Dans les Traitements par lot ¦ В Пакетную обработку ¦ У Пакетну обробку
+Envoyer les images vers… ¦ Отправить изображения в… ¦ Надіслати зображення в…
+Envoyer le texte vers… ¦ Отправить текст в… ¦ Надіслати текст у…
+Envoyer le tableau vers… ¦ Отправить таблицу в… ¦ Надіслати таблицю в…
+Envoyer le son vers… ¦ Отправить звук в… ¦ Надіслати звук у…
+Envoyer la vidéo vers… ¦ Отправить видео в… ¦ Надіслати відео в…
+Envoyer le dessin vers… ¦ Отправить рисунок в… ¦ Надіслати малюнок у…
+Rangement du son dans les médias… ¦ Сохранение звука в медиафайлы… ¦ Збереження звуку в медіафайли…
+Rangement de la vidéo dans les médias… ¦ Сохранение видео в медиафайлы… ¦ Збереження відео в медіафайли…
+Rien à envoyer. ¦ Нечего отправлять. ¦ Нічого надсилати.
+Aucun outil ne peut recevoir ça pour l’instant. ¦ Пока ни один инструмент не может это принять. ¦ Поки жоден інструмент не може це прийняти.
+En image (montage, studio, présentation, document…) ¦ Изображением (монтаж, студия, презентация, документ…) ¦ Зображенням (монтаж, студія, презентація, документ…)
+En dessin, net à toutes les tailles (livre, site…) ¦ Рисунком, чётким в любом размере (книга, сайт…) ¦ Малюнком, чітким у будь-якому розмірі (книга, сайт…)
+＋ Nouvelle crise ¦ ＋ Новый кризис ¦ ＋ Нова криза
+Modifier cette crise ¦ Изменить этот кризис ¦ Змінити цю кризу
+Supprimer cette crise ¦ Удалить этот кризис ¦ Видалити цю кризу
+Nouvelle crise ¦ Новый кризис ¦ Нова криза
+Modifier la crise ¦ Изменить кризис ¦ Змінити кризу
+ÉPIDÉMIES, GUERRES, HIVERS TERRIBLES ¦ ЭПИДЕМИИ, ВОЙНЫ, СТРАШНЫЕ ЗИМЫ ¦ ЕПІДЕМІЇ, ВІЙНИ, СТРАШНІ ЗИМИ
+Les grandes crises de l’histoire de France à côté des décès de ta famille : pour comprendre une vague de morts (choléra de 1832, Grand Hiver de 1709, grippe espagnole…). Ajoute les tiennes : une épidémie au village, un incendie, une inondation… ¦ Великие кризисы истории Франции рядом со смертями в твоей семье: чтобы понять волну смертей (холера 1832 года, Великая зима 1709 года, испанка…). Добавь свои: эпидемию в деревне, пожар, наводнение… ¦ Великі кризи історії Франції поруч зі смертями у твоїй родині: щоб зрозуміти хвилю смертей (холера 1832 року, Велика зима 1709 року, іспанка…). Додай свої: епідемію в селі, пожежу, повінь…
+▦ Vignettes ¦ ▦ Миниатюры ¦ ▦ Мініатюри
+🏷 Par éditeur ¦ 🏷 По издателю ¦ 🏷 За видавцем
+📍 Par lieu ¦ 📍 По месту ¦ 📍 За місцем
+✉️ Écrites / vierges ¦ ✉️ Подписанные / чистые ¦ ✉️ Підписані / чисті
+Survole pour voir le verso ¦ Наведи, чтобы увидеть оборот ¦ Наведи, щоб побачити зворот
+Aucune fiche de carte postale pour l’instant ¦ Пока нет ни одной карточки открытки ¦ Поки немає жодної картки листівки
+Listes → 🏞 Cartes postales : donne à chaque carte son éditeur, son numéro, son lieu, son recto et son verso. ¦ Списки → 🏞 Открытки: укажи для каждой открытки издателя, номер, место, лицевую и оборотную сторону. ¦ Списки → 🏞 Листівки: вкажи для кожної листівки видавця, номер, місце, лицьовий бік і зворот.
+Éditeur inconnu ¦ Издатель неизвестен ¦ Видавець невідомий
+Écrites ou envoyées ¦ Подписанные или отправленные ¦ Підписані або надіслані
+Vierges (jamais envoyées) ¦ Чистые (не отправлялись) ¦ Чисті (не надсилалися)
+Il manque les n° {n} ¦ Не хватает №: {n} ¦ Бракує №: {n}
+Il manque le n° {n} ¦ Не хватает № {n} ¦ Бракує № {n}
+cartes ¦ открытки ¦ листівки
+Marge de « vers » ¦ Допуск для « около » ¦ Допуск для « близько »
+Portée de « avant » / « après » ¦ Охват « до » / « после » ¦ Охоплення « до » / « після »
+Longueur d’une vie sans fin connue ¦ Длина жизни без известного конца ¦ Тривалість життя без відомого кінця
+Ouvrir dans le Tableur… ¦ Открыть в Электронной таблице… ¦ Відкрити в Електронній таблиці…
+🧾 Ouvrir les invités dans le Tableur ¦ 🧾 Открыть гостей в Электронной таблице ¦ 🧾 Відкрити гостей в Електронній таблиці
+📤 Envoyer le tableau des invités ¦ 📤 Отправить таблицу гостей ¦ 📤 Надіслати таблицю гостей
+🧾 Ouvrir dans le Tableur ¦ 🧾 Открыть в Электронной таблице ¦ 🧾 Відкрити в Електронній таблиці
+Le tableau des invités, avec leur branche, leur lien de parenté et leur réponse. ¦ Таблица гостей с их ветвью, родством и ответом. ¦ Таблиця гостей з їхньою гілкою, спорідненістю й відповіддю.
+Toutes les photos de l’album : un diaporama, un film, un traitement par lot… ¦ Все фото альбома: слайд-шоу, фильм, пакетная обработка… ¦ Усі фото альбому: слайд-шоу, фільм, пакетна обробка…
+Album — {nm} ¦ Альбом — {nm} ¦ Альбом — {nm}
+Descendance (de haut en bas, une couleur par branche) ¦ Потомство (сверху вниз, по цвету на ветвь) ¦ Нащадки (згори вниз, по кольору на гілку)
+La descendance a besoin de l’outil Cousinades, qui n’est pas chargé. ¦ Для потомства нужен инструмент Встречи родни, он не загружен. ¦ Для нащадків потрібен інструмент Зустрічі родини, його не завантажено.
+Aucune descendance pour cette personne. ¦ У этого человека нет потомства. ¦ У цієї особи немає нащадків.
+Aucun enfant connu pour cette personne : pas de descendance à dessiner. ¦ У этого человека нет известных детей: нечего рисовать. ¦ У цієї особи немає відомих дітей: нічого малювати.
+La descendance de {nm} ¦ Потомство: {nm} ¦ Нащадки: {nm}
+la famille ¦ семья ¦ родина
+L’arbre (en fond) ¦ Древо (фоном) ¦ Дерево (тлом)
+📰 En faire un faire-part ¦ 📰 Сделать извещение ¦ 📰 Зробити оголошення
+Créer le faire-part ¦ Создать извещение ¦ Створити оголошення
+L’arbre se pose en fond, derrière les textes du faire-part. Tout s’ouvre ensuite dans le dessin vectoriel pour le retoucher. ¦ Древо ложится фоном за текстами извещения. Потом всё открывается в Векторном рисунке для доработки. ¦ Дерево лягає тлом за текстами оголошення. Потім усе відкривається у Векторному малюнку для доопрацювання.
+L’arbre derrière le texte ¦ Древо за текстом ¦ Дерево за текстом
+Très pâle ¦ Очень бледно ¦ Дуже бліде
+Pâle ¦ Бледно ¦ Бліде
+Bien visible ¦ Хорошо видно ¦ Добре видно
+Fabrication du faire-part… ¦ Создание извещения… ¦ Створення оголошення…
+Personne à dessiner dans l’arbre. ¦ В древе некого рисовать. ¦ У дереві нікого малювати.
+L’arbre en fond d’un faire-part de cousinade ou de noces ¦ Древо фоном для извещения о встрече родни или свадьбе ¦ Дерево тлом для оголошення про зустріч родини чи весілля
+En faire un faire-part ¦ Сделать извещение ¦ Зробити оголошення
+Les mêmes réglages, un faire-part pour chaque personne (une liste, une étiquette) ou chaque foyer d’une cousinade, tous dans un seul PDF ¦ С теми же настройками — извещение для каждого человека (список, метка) или каждой семьи встречи родни, всё в одном PDF ¦ З тими самими налаштуваннями — оголошення для кожної особи (список, мітка) або кожної сім’ї зустрічі родини, усе в одному PDF
+Un faire-part par personne / par foyer… ¦ Извещение на каждого / на каждую семью… ¦ Оголошення на кожного / на кожну сім’ю…
+📬 Un faire-part par personne / par foyer ¦ 📬 Извещение на каждого / на каждую семью ¦ 📬 Оголошення на кожного / на кожну сім’ю
+📄 Fabriquer le PDF ¦ 📄 Создать PDF ¦ 📄 Створити PDF
+Le faire-part tel que tu l’as réglé, une fois pour chaque personne ou chaque foyer. Tous les faire-part sont rangés dans un seul PDF, prêt à imprimer. ¦ Извещение в твоих настройках — по одному на каждого человека или семью. Все извещения собраны в одном PDF, готовом к печати. ¦ Оголошення у твоїх налаштуваннях — по одному на кожну особу чи сім’ю. Усі оголошення зібрано в одному PDF, готовому до друку.
+Une liste de personnes ¦ Список людей ¦ Список осіб
+Les personnes d’une étiquette ¦ Люди с меткой ¦ Особи з міткою
+Les foyers d’une cousinade ¦ Семьи встречи родни ¦ Сім’ї зустрічі родини
+La cousinade (les foyers invités) ¦ Встреча родни (приглашённые семьи) ¦ Зустріч родини (запрошені сім’ї)
+Dans les champs du faire-part, ces mots se remplacent pour chacun : ¦ В полях извещения эти слова заменяются для каждого: ¦ У полях оголошення ці слова замінюються для кожного:
+(cousinade : aussi {titre}, {date}, {lieu}, {ancetre}…) ¦ (встреча родни: также {titre}, {date}, {lieu}, {ancetre}…) ¦ (зустріч родини: також {titre}, {date}, {lieu}, {ancetre}…)
+Le nom de la personne (ou du foyer) en haut de chaque faire-part ¦ Имя человека (или семьи) вверху каждого извещения ¦ Ім’я особи (або сім’ї) вгорі кожного оголошення
+Remplir aussi depuis la fiche de chacun (noms, dates, lieux) ¦ Заполнять также из карточки каждого (имена, даты, места) ¦ Заповнювати також із картки кожного (імена, дати, місця)
+L’enveloppe de chacun porte son adresse. ¦ На конверте каждого — его адрес. ¦ На конверті кожного — його адреса.
+Aucun foyer invité dans cette cousinade : coche des invités d’abord. ¦ В этой встрече родни нет приглашённых семей: сначала отметь гостей. ¦ У цій зустрічі родини немає запрошених сімей: спершу познач гостей.
+Fabrication de {n} faire-part… ¦ Создание извещений: {n}… ¦ Створення оголошень: {n}…
+{i} sur {n}… ¦ {i} из {n}… ¦ {i} з {n}…
+{n} faire-part dans un seul PDF ({p} pages). ¦ Извещений: {n} в одном PDF (страниц: {p}). ¦ Оголошень: {n} в одному PDF (сторінок: {p}).
+Le dessin vectoriel n’est pas chargé : le PDF ne peut pas être fabriqué. ¦ Векторный рисунок не загружен: PDF не может быть создан. ¦ Векторний малюнок не завантажено: PDF не можна створити.
+Une action de la Retouche ¦ Действие Ретуши фото ¦ Дія Ретуші фото
+Une action enregistrée dans la Retouche des photos (Fichier → Actions), sur chaque image. ¦ Действие, сохранённое в Ретуши фото (Файл → Действия), для каждого изображения. ¦ Дія, збережена в Ретуші фото (Файл → Дії), для кожного зображення.
+aucune action choisie ¦ действие не выбрано ¦ дію не обрано
+La Retouche des photos n’est pas chargée : l’action « {name} » ne peut pas se faire. ¦ Ретушь фото не загружена: действие « {name} » выполнить нельзя. ¦ Ретуш фото не завантажено: дію « {name} » виконати не можна.
+L’action « {name} » de la Retouche n’a rien rendu. ¦ Действие « {name} » Ретуши ничего не дало. ¦ Дія « {name} » Ретуші нічого не дала.
+La Retouche des photos n’est pas chargée : cette étape ne pourra pas se faire. ¦ Ретушь фото не загружена: этот шаг выполнить не получится. ¦ Ретуш фото не завантажено: цей крок виконати не вийде.
+Aucune action enregistrée dans la Retouche. Ouvre une photo dans la Retouche, puis Fichier → Actions pour en enregistrer une. ¦ В Ретуши нет сохранённых действий. Открой фото в Ретуши, затем Файл → Действия, чтобы сохранить действие. ¦ У Ретуші немає збережених дій. Відкрий фото в Ретуші, потім Файл → Дії, щоб зберегти дію.
+L’action ¦ Действие ¦ Дія
+Choisir une action… ¦ Выбрать действие… ¦ Обрати дію…
+Une action enregistrée dans la Retouche des photos, faite sur chaque image du lot. ¦ Действие, сохранённое в Ретуши фото, для каждого изображения пакета. ¦ Дія, збережена в Ретуші фото, для кожного зображення пакета.
+Les images rangées dans les médias par ce lot : un diaporama, un montage… ¦ Изображения, сохранённые этим пакетом в медиафайлы: слайд-шоу, монтаж… ¦ Зображення, збережені цим пакетом у медіафайли: слайд-шоу, монтаж…
+Traitement par lot ¦ Пакетная обработка ¦ Пакетна обробка
+{x} introuvable dans les médias. ¦ {x} не найдено в медиафайлах. ¦ {x} не знайдено в медіафайлах.
+Ouvrir cette image dans la Retouche des photos ¦ Открыть это изображение в Ретуши фото ¦ Відкрити це зображення в Ретуші фото
+Retoucher ¦ Ретушировать ¦ Ретушувати
+Envoyer cette image vers un autre outil ¦ Отправить это изображение в другой инструмент ¦ Надіслати це зображення в інший інструмент
+📤 Envoyer le tableau en image vers… ¦ 📤 Отправить таблицу изображением в… ¦ 📤 Надіслати таблицю зображенням у…
+Le dessin va dans un autre outil : un livre de la Mise en page, une page de mon site, le Dessin vectoriel… ¦ Рисунок уходит в другой инструмент: книгу из Расположения, страницу моего сайта, Векторный рисунок… ¦ Малюнок іде в інший інструмент: книгу з Розташування, сторінку мого сайту, Векторний малюнок…
+Créer et envoyer vers… ¦ Создать и отправить в… ¦ Створити й надіслати в…
+✒️ Placer un dessin vectoriel (arbre, carte, blason…)… ¦ ✒️ Вставить векторный рисунок (древо, карта, герб…)… ¦ ✒️ Вставити векторний малюнок (дерево, мапа, герб…)…
+Dessin vectoriel placé ¦ Векторный рисунок вставлен ¦ Векторний малюнок вставлено
+✒️ « {name} » placé : modifié dans le Dessin vectoriel, il se met à jour ici (« ↻ Mettre à jour »). ¦ ✒️ « {name} » вставлен: если изменить его в Векторном рисунке, он обновится здесь (« ↻ Обновить »). ¦ ✒️ « {name} » вставлено: якщо змінити його у Векторному малюнку, він оновиться тут (« ↻ Оновити »).
+✒️ Dessin vectoriel <b>lié</b>{state} : modifié dans le Dessin vectoriel, il se redessine ici (« Mettre à jour »). ¦ ✒️ Векторный рисунок <b>связан</b>{state}: если изменить его в Векторном рисунке, он перерисуется здесь (« Обновить »). ¦ ✒️ Векторний малюнок <b>пов’язаний</b>{state}: якщо змінити його у Векторному малюнку, він перемалюється тут (« Оновити »).
+✎ Modifier le dessin ¦ ✎ Изменить рисунок ¦ ✎ Змінити малюнок
+Le dessin reste tel quel et ne suit plus le Dessin vectoriel ¦ Рисунок остаётся как есть и больше не следует за Векторным рисунком ¦ Малюнок лишається як є і більше не стежить за Векторним малюнком
+Dessin détaché ¦ Рисунок отвязан ¦ Малюнок від’єднано
+Le Dessin vectoriel n’est pas chargé. ¦ Векторный рисунок не загружен. ¦ Векторний малюнок не завантажено.
+Aucun dessin vectoriel : fais-en un dans Listes → Outils de modification (Dessin vectoriel, Arbre décoratif, Carte…). ¦ Векторных рисунков нет: создай рисунок в Списки → Инструменты редактирования (Векторный рисунок, Декоративное древо, Карта…). ¦ Векторних малюнків немає: створи малюнок у Списки → Інструменти редагування (Векторний малюнок, Декоративне дерево, Мапа…).
+PLACER ¦ ВСТАВИТЬ ¦ ВСТАВИТИ
+✒️ Un dessin vectoriel (arbre, carte, blason…) ¦ ✒️ Векторный рисунок (древо, карта, герб…) ¦ ✒️ Векторний малюнок (дерево, мапа, герб…)
+Placer ce dessin ¦ Вставить этот рисунок ¦ Вставити цей малюнок
+Le dessin reste lié : modifié dans le Dessin vectoriel, il se met à jour dans le livre (« ↻ Mettre à jour »). Il reste net à toutes les tailles. ¦ Рисунок остаётся связанным: если изменить его в Векторном рисунке, он обновится в книге (« ↻ Обновить »). Он чёткий в любом размере. ¦ Малюнок лишається пов’язаним: якщо змінити його у Векторному малюнку, він оновиться в книзі (« ↻ Оновити »). Він чіткий у будь-якому розмірі.
+Choisis un dessin. ¦ Выбери рисунок. ¦ Обери малюнок.
+Le dessin n’a pas pu être lu. ¦ Не удалось прочитать рисунок. ¦ Не вдалося прочитати малюнок.
+📐 Mettre dans un livre ¦ 📐 Поместить в книгу ¦ 📐 Помістити в книгу
+Mettre dans le livre ¦ Поместить в книгу ¦ Помістити в книгу
+Le dessin est rangé dans les Médias (en image), puis posé sur une page à lui, dans les marges. ¦ Рисунок сохраняется в Медиафайлы (изображением), затем ставится на отдельную страницу, в поля. ¦ Малюнок зберігається в Медіафайли (зображенням), потім ставиться на окрему сторінку, в поля.
+L’image est posée sur une page à elle, dans les marges. Elle reste liée à la photo des Médias. ¦ Изображение ставится на отдельную страницу, в поля. Оно остаётся связанным с фото в Медиафайлах. ¦ Зображення ставиться на окрему сторінку, в поля. Воно лишається пов’язаним із фото в Медіафайлах.
+Rangement du dessin dans les médias… ¦ Сохранение рисунка в медиафайлы… ¦ Збереження малюнка в медіафайли…
+Mon livre ¦ Моя книга ¦ Моя книга
+Image ajoutée sur une nouvelle page à la fin du livre : vérifie, puis enregistre. ¦ Изображение добавлено на новую страницу в конце книги: проверь и сохрани. ¦ Зображення додано на нову сторінку в кінці книги: перевір і збережи.
+Nouveau livre avec l’image : vérifie, puis enregistre le livre. ¦ Новая книга с изображением: проверь и сохрани книгу. ¦ Нова книга із зображенням: перевір і збережи книгу.
+📱 Livre numérique (.epub) ¦ 📱 Электронная книга (.epub) ¦ 📱 Електронна книга (.epub)
+liseuses : Kobo, Livres, Calibre… ¦ читалки: Kobo, Книги, Calibre… ¦ читалки: Kobo, Книги, Calibre…
+La mise en page n’est pas chargée : l’ePub ne peut pas être fait. ¦ Расположение не загружено: ePub создать нельзя. ¦ Розташування не завантажено: ePub створити не можна.
+« Envoyer vers… » n’est pas chargé. ¦ « Отправить в… » не загружено. ¦ « Надіслати в… » не завантажено.
+Retoucher cette image ¦ Ретушировать это изображение ¦ Ретушувати це зображення
+Cette image n’est pas dans les Médias : elle ne peut pas être retouchée. ¦ Этого изображения нет в Медиафайлах: его нельзя ретушировать. ¦ Цього зображення немає в Медіафайлах: його не можна ретушувати.
+Image retouchée mise à jour dans le texte. ¦ Отретушированное изображение обновлено в тексте. ¦ Відретушоване зображення оновлено в тексті.
+Un document (Traitement de texte) ¦ Документ (Текстовый редактор) ¦ Документ (Текстовий редактор)
+le tableau dans un texte ¦ таблица в тексте ¦ таблиця в тексті
+📝 Créer le document ¦ 📝 Создать документ ¦ 📝 Створити документ
+Image du graphique (PNG) : {kind} ¦ Изображение графика (PNG): {kind} ¦ Зображення графіка (PNG): {kind}
+Le graphique n’a pas pu être dessiné. ¦ Не удалось нарисовать график. ¦ Не вдалося намалювати графік.
+Image du graphique enregistrée : {name} ¦ Изображение графика сохранено: {name} ¦ Зображення графіка збережено: {name}
+La feuille est vide : rien à envoyer. ¦ Лист пуст: нечего отправлять. ¦ Аркуш порожній: нічого надсилати.
+⤓ Image du graphique (PNG) ¦ ⤓ Изображение графика (PNG) ¦ ⤓ Зображення графіка (PNG)
+{what} au montage, l’une après l’autre. ¦ {what} в монтаж, одно за другим. ¦ {what} у монтаж, одне за одним.
+image ajoutée ¦ изображение добавлено ¦ зображення додано
+images ajoutées ¦ изображения добавлены ¦ зображення додано
+sous-titre ajouté ¦ субтитр добавлен ¦ субтитр додано
+sous-titres ajoutés ¦ субтитры добавлены ¦ субтитри додано
+Le fabricant de GIF n’est pas chargé. ¦ Модуль создания GIF не загружен. ¦ Модуль створення GIF не завантажено.
+🎞 GIF animé ¦ 🎞 Анимированный GIF ¦ 🎞 Анімований GIF
+sans son, petit, tourne en boucle ¦ без звука, маленький, по кругу ¦ без звуку, маленький, по колу
+GIF… {n} % ¦ GIF… {n} % ¦ GIF… {n} %
+La vidéo est d’abord fabriquée (le film est rejoué en entier, laisse la fenêtre ouverte), puis rangée dans les médias. ¦ Сначала создаётся видео (фильм проигрывается целиком, не закрывай окно), затем оно сохраняется в медиафайлы. ¦ Спершу створюється відео (фільм програється повністю, не закривай вікно), потім воно зберігається в медіафайли.
+Fabriquer la vidéo pour l’envoyer ? ¦ Создать видео для отправки? ¦ Створити відео для надсилання?
+Fabriquer et envoyer ¦ Создать и отправить ¦ Створити й надіслати
+ENVOYER ¦ ОТПРАВИТЬ ¦ НАДІСЛАТИ
+Fabrication de la vidéo… ¦ Создание видео… ¦ Створення відео…
+La vidéo n’a pas pu être rangée dans les médias. ¦ Не удалось сохранить видео в медиафайлы. ¦ Не вдалося зберегти відео в медіафайли.
+Le son fini est rangé dans les médias (une copie), puis envoyé. ¦ Готовый звук сохраняется в медиафайлы (копия), затем отправляется. ¦ Готовий звук зберігається в медіафайли (копія), потім надсилається.
+Envoyer le son ? ¦ Отправить звук? ¦ Надіслати звук?
+Ranger et envoyer ¦ Сохранить и отправить ¦ Зберегти й надіслати
+Pas encore de transcription : « ⏱ Insérer l’heure » (⌘T), puis tape ce qui est dit. ¦ Расшифровки пока нет: « ⏱ Вставить время » (⌘T), затем введи, что говорят. ¦ Транскрипції поки немає: « ⏱ Вставити час » (⌘T), потім введи, що кажуть.
+Transcription — {name} ¦ Расшифровка — {name} ¦ Транскрипція — {name}
+ (avec la transcription en sous-titres) ¦ (с расшифровкой в субтитрах) ¦ (з транскрипцією в субтитрах)
+La transcription (texte) ¦ Расшифровка (текст) ¦ Транскрипція (текст)
+Pas encore de transcription. ¦ Расшифровки пока нет. ¦ Транскрипції поки немає.
+Agnès Bernauer ¦ Агнес Бернауэр ¦ Агнес Бернауер
+7 colonnes en escalier et une réserve de 7 tas. La première carte posée sur une fondation donne la valeur de départ des quatre ; on descend en alternant rouge et noir, le Roi passe sur l’As. La pioche pose une carte sur chaque tas de la réserve ; une colonne vide prend la carte juste sous la valeur de départ. ¦ 7 колонок лесенкой и резерв из 7 стопок. Первая карта на базе задаёт начальное значение всех четырёх; строим по убыванию, чередуя красные и чёрные, король кладётся на туза. Колода кладёт по карте на каждую стопку резерва; пустая колонка принимает карту сразу ниже начального значения. ¦ 7 стовпців драбинкою і резерв із 7 стосів. Перша карта на базі задає початкове значення всіх чотирьох; будуємо за спаданням, чергуючи червоні й чорні, король кладеться на туза. Колода кладе по карті на кожен стос резерву; порожній стовпець приймає карту одразу нижче початкового значення.
+Thumb and Pouch ¦ Thumb and Pouch ¦ Thumb and Pouch
+Klondike où l’on descend sur n’importe quelle couleur de carte sauf la sienne ; une colonne vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Клондайк, где строим по убыванию на любую масть, кроме своей; пустая колонка принимает любую карту. Колода проходится только один раз. ¦ Клондайк, де будуємо за спаданням на будь-яку масть, крім своєї; порожній стовпець приймає будь-яку карту. Колода проходиться лише один раз.
+Pas seul ¦ Pas seul ¦ Pas seul
+6 colonnes d’une seule carte ; on descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte. La pioche se retourne une carte à la fois et ne passe qu’une fois. ¦ 6 колонок по одной карте; строим по убыванию, чередуя красные и чёрные, пустая колонка принимает любую карту. Колода открывается по одной карте и проходится только один раз. ¦ 6 стовпців по одній карті; будуємо за спаданням, чергуючи червоні й чорні, порожній стовпець приймає будь-яку карту. Колода відкривається по одній карті й проходиться лише один раз.
+Les impasses ¦ Тупики ¦ Глухі кути
+Les As sont posés d’avance ; 6 colonnes de 3 cartes (deux cachées). On descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte ; la pioche repasse une fois. ¦ Тузы выложены заранее; 6 колонок по 3 карты (две закрыты). Строим по убыванию, чередуя красные и чёрные, пустая колонка принимает любую карту; колоду можно пройти заново один раз. ¦ Тузи викладено заздалегідь; 6 стовпців по 3 карти (дві закриті). Будуємо за спаданням, чергуючи червоні й чорні, порожній стовпець приймає будь-яку карту; колоду можна пройти заново один раз.
+Huit fois huit ¦ Восемь на восемь ¦ Вісім на вісім
+Deux jeux, 8 colonnes de 8 cartes visibles ; on descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte. La pioche repasse deux fois. ¦ Две колоды, 8 колонок по 8 открытых карт; строим по убыванию, чередуя красные и чёрные, пустая колонка принимает любую карту. Колоду можно пройти заново дважды. ¦ Дві колоди, 8 стовпців по 8 відкритих карт; будуємо за спаданням, чергуючи червоні й чорні, порожній стовпець приймає будь-яку карту. Колоду можна пройти заново двічі.
+Spike ¦ Spike ¦ Spike
+7 colonnes en escalier comme Klondike ; on descend en alternant rouge et noir et on déplace des suites entières. La pioche pose une carte sur chaque colonne. ¦ 7 колонок лесенкой, как в Клондайке; строим по убыванию, чередуя красные и чёрные, и переносим целые последовательности. Колода кладёт по карте на каждую колонку. ¦ 7 стовпців драбинкою, як у Клондайку; будуємо за спаданням, чергуючи червоні й чорні, і переносимо цілі послідовності. Колода кладе по карті на кожен стовпець.
+Alternance ¦ Чередование ¦ Чергування
+Deux jeux, 7 colonnes de 7 cartes, une cachée sur deux. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Две колоды, 7 колонок по 7 карт, каждая вторая закрыта. Строим по убыванию, чередуя красные и чёрные, и переносим целые последовательности; пустая колонка принимает любую карту. Колода проходится только один раз. ¦ Дві колоди, 7 стовпців по 7 карт, кожна друга закрита. Будуємо за спаданням, чергуючи червоні й чорні, і переносимо цілі послідовності; порожній стовпець приймає будь-яку карту. Колода проходиться лише один раз.
+La harpe ¦ Арфа ¦ Арфа
+Deux jeux, 9 colonnes en escalier ; on descend en alternant rouge et noir. La pioche se retourne une carte à la fois et repasse trois fois. ¦ Две колоды, 9 колонок лесенкой; строим по убыванию, чередуя красные и чёрные. Колода открывается по одной карте, её можно пройти заново трижды. ¦ Дві колоди, 9 стовпців драбинкою; будуємо за спаданням, чергуючи червоні й чорні. Колода відкривається по одній карті, її можна пройти заново тричі.
+La grande harpe ¦ Большая арфа ¦ Велика арфа
+Deux jeux, 10 colonnes en escalier ; on descend en alternant rouge et noir. La pioche se retourne une carte à la fois et ne passe qu’une fois. ¦ Две колоды, 10 колонок лесенкой; строим по убыванию, чередуя красные и чёрные. Колода открывается по одной карте и проходится только один раз. ¦ Дві колоди, 10 стовпців драбинкою; будуємо за спаданням, чергуючи червоні й чорні. Колода відкривається по одній карті й проходиться лише один раз.
+Acme ¦ Acme ¦ Acme
+Une réserve de 13 cartes et 4 colonnes ; les fondations partent de l’As. On descend dans la même couleur de carte, une carte à la fois ; une colonne vide se remplit avec la réserve. La pioche repasse une fois. ¦ Резерв из 13 карт и 4 колонки; базы начинаются с туза. Строим по убыванию в одной масти, по одной карте; пустая колонка заполняется из резерва. Колоду можно пройти заново один раз. ¦ Резерв із 13 карт і 4 стовпці; бази починаються з туза. Будуємо за спаданням в одній масті, по одній карті; порожній стовпець заповнюється з резерву. Колоду можна пройти заново один раз.
+Le crapaud américain ¦ Американская жаба ¦ Американська жаба
+Deux jeux, une réserve de 20 cartes et 8 colonnes. La première carte posée sur une fondation donne la valeur de départ des huit ; on descend dans la même couleur de carte, le Roi passe sur l’As. Une colonne vide se remplit avec la réserve ; la pioche repasse une fois. ¦ Две колоды, резерв из 20 карт и 8 колонок. Первая карта на базе задаёт начальное значение всех восьми; строим по убыванию в одной масти, король кладётся на туза. Пустая колонка заполняется из резерва; колоду можно пройти заново один раз. ¦ Дві колоди, резерв із 20 карт і 8 стовпців. Перша карта на базі задає початкове значення всіх восьми; будуємо за спаданням в одній масті, король кладеться на туза. Порожній стовпець заповнюється з резерву; колоду можна пройти заново один раз.
+Canfield bigarré ¦ Пёстрый Канфилд ¦ Строкатий Канфілд
+Deux jeux : les As sont posés d’avance, une réserve de 14 cartes et 5 colonnes. On descend en alternant rouge et noir ; une colonne vide se remplit avec la réserve. La pioche se retourne trois cartes à la fois et repasse deux fois. ¦ Две колоды: тузы выложены заранее, резерв из 14 карт и 5 колонок. Строим по убыванию, чередуя красные и чёрные; пустая колонка заполняется из резерва. Колода открывается по три карты, её можно пройти заново дважды. ¦ Дві колоди: тузи викладено заздалегідь, резерв із 14 карт і 5 стовпців. Будуємо за спаданням, чергуючи червоні й чорні; порожній стовпець заповнюється з резерву. Колода відкривається по три карти, її можна пройти заново двічі.
+La duchesse ¦ Герцогиня ¦ Герцогиня
+Quatre tas de réserve de 3 cartes et 4 colonnes d’une carte. La première carte posée sur une fondation donne la valeur de départ des quatre ; on descend en alternant rouge et noir, le Roi passe sur l’As. Une colonne vide prend n’importe quelle carte ; la pioche repasse une fois. ¦ Четыре стопки резерва по 3 карты и 4 колонки по одной карте. Первая карта на базе задаёт начальное значение всех четырёх; строим по убыванию, чередуя красные и чёрные, король кладётся на туза. Пустая колонка принимает любую карту; колоду можно пройти заново один раз. ¦ Чотири стоси резерву по 3 карти і 4 стовпці по одній карті. Перша карта на базі задає початкове значення всіх чотирьох; будуємо за спаданням, чергуючи червоні й чорні, король кладеться на туза. Порожній стовпець приймає будь-яку карту; колоду можна пройти заново один раз.
+La porte ¦ Ворота ¦ Ворота
+Deux tas de réserve de 5 cartes (les battants de la porte) et 8 colonnes d’une carte. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Две стопки резерва по 5 карт (створки ворот) и 8 колонок по одной карте. Строим по убыванию, чередуя красные и чёрные, и переносим целые последовательности; пустая колонка принимает любую карту. Колода проходится только один раз. ¦ Два стоси резерву по 5 карт (стулки воріт) і 8 стовпців по одній карті. Будуємо за спаданням, чергуючи червоні й чорні, і переносимо цілі послідовності; порожній стовпець приймає будь-яку карту. Колода проходиться лише один раз.
+Le pingouin ¦ Пингвин ¦ Пінгвін
+La première carte donne la valeur de départ des fondations, et les trois autres de même valeur y montent tout de suite. 7 colonnes de 7, 7 cases libres ; on descend dans la même couleur de carte, le Roi passe sur l’As. Une colonne vide prend la carte juste sous la valeur de départ. ¦ Первая карта задаёт начальное значение баз, и три другие карты того же значения сразу идут туда. 7 колонок по 7, 7 свободных ячеек; строим по убыванию в одной масти, король кладётся на туза. Пустая колонка принимает карту сразу ниже начального значения. ¦ Перша карта задає початкове значення баз, і три інші карти того самого значення одразу йдуть туди. 7 стовпців по 7, 7 вільних клітинок; будуємо за спаданням в одній масті, король кладеться на туза. Порожній стовпець приймає карту одразу нижче початкового значення.
+Baker’s Game (Roi seul) ¦ Baker’s Game (только король) ¦ Baker’s Game (лише король)
+Baker’s Game (descendre dans la même couleur de carte, 4 cases libres), mais une colonne vide ne prend qu’un Roi. ¦ Baker’s Game (по убыванию в одной масти, 4 свободные ячейки), но пустая колонка принимает только короля. ¦ Baker’s Game (за спаданням в одній масті, 4 вільні клітинки), але порожній стовпець приймає лише короля.
+Seahaven détendu ¦ Облегчённый Seahaven ¦ Полегшений Seahaven
+Seahaven, mais une suite bien rangée dans la même couleur de carte se déplace d’un coup, quelle que soit sa longueur. ¦ Seahaven, но правильно сложенная последовательность одной масти переносится сразу, какой бы длинной она ни была. ¦ Seahaven, але правильно складена послідовність однієї масті переноситься одразу, хоч яка довга.
+Repair ¦ Repair ¦ Repair
+Deux jeux, 10 colonnes de 10 cartes visibles et 4 cases libres déjà occupées ; on descend en alternant rouge et noir, une carte à la fois (ou une suite si les cases libres le permettent). ¦ Две колоды, 10 колонок по 10 открытых карт и 4 уже занятые свободные ячейки; строим по убыванию, чередуя красные и чёрные, по одной карте (или последовательностью, если позволяют свободные ячейки). ¦ Дві колоди, 10 стовпців по 10 відкритих карт і 4 вже зайняті вільні клітинки; будуємо за спаданням, чергуючи червоні й чорні, по одній карті (або послідовністю, якщо дозволяють вільні клітинки).
+Ocean Towers ¦ Ocean Towers ¦ Ocean Towers
+Deux jeux, 14 colonnes de 7 cartes et 8 cases libres dont 6 déjà occupées ; on descend dans la même couleur de carte, une colonne vide ne prend qu’un Roi. ¦ Две колоды, 14 колонок по 7 карт и 8 свободных ячеек, из них 6 уже заняты; строим по убыванию в одной масти, пустая колонка принимает только короля. ¦ Дві колоди, 14 стовпців по 7 карт і 8 вільних клітинок, з них 6 уже зайняті; будуємо за спаданням в одній масті, порожній стовпець приймає лише короля.
+Sept par quatre ¦ Семь на четыре ¦ Сім на чотири
+FreeCell à 7 colonnes et 4 cases libres : les colonnes sont plus hautes. ¦ FreeCell с 7 колонками и 4 свободными ячейками: колонки выше. ¦ FreeCell із 7 стовпцями і 4 вільними клітинками: стовпці вищі.
+Sept par cinq ¦ Семь на пять ¦ Сім на п’ять
+FreeCell à 7 colonnes et 5 cases libres. ¦ FreeCell с 7 колонками и 5 свободными ячейками. ¦ FreeCell із 7 стовпцями і 5 вільними клітинками.
+FreeCell défi ¦ FreeCell-испытание ¦ FreeCell-випробування
+FreeCell, mais les As et les 2 sont tout au fond des colonnes, sous toutes les autres cartes. ¦ FreeCell, но тузы и двойки лежат в самом низу колонок, под всеми другими картами. ¦ FreeCell, але тузи й двійки лежать у самому низу стовпців, під усіма іншими картами.
+FreeCell super défi ¦ FreeCell-супериспытание ¦ FreeCell-супервипробування
+FreeCell défi (les As et les 2 au fond des colonnes), et une colonne vide ne prend qu’un Roi. ¦ FreeCell-испытание (тузы и двойки внизу колонок), и пустая колонка принимает только короля. ¦ FreeCell-випробування (тузи й двійки внизу стовпців), і порожній стовпець приймає лише короля.
+Le scarabée ¦ Скарабей ¦ Скарабей
+Scorpion sans pioche : les 52 cartes sont visibles en 7 colonnes. On descend dans la même couleur de carte et on déplace n’importe quel groupe ; une colonne vide ne prend qu’un Roi. Une suite complète du Roi à l’As s’en va. ¦ Скорпион без колоды: все 52 карты открыты в 7 колонках. Строим по убыванию в одной масти и переносим любую группу; пустая колонка принимает только короля. Полная последовательность от короля до туза уходит. ¦ Скорпіон без колоди: усі 52 карти відкриті в 7 стовпцях. Будуємо за спаданням в одній масті й переносимо будь-яку групу; порожній стовпець приймає лише короля. Повна послідовність від короля до туза зникає.
+Queue de scorpion ¦ Хвост скорпиона ¦ Хвіст скорпіона
+Comme Scorpion (7 colonnes de 7, n’importe quel groupe se déplace), mais on descend en alternant rouge et noir et les cartes montent sur les fondations de l’As au Roi. ¦ Как Скорпион (7 колонок по 7, переносится любая группа), но строим по убыванию, чередуя красные и чёрные, а карты идут на базы от туза до короля. ¦ Як Скорпіон (7 стовпців по 7, переноситься будь-яка група), але будуємо за спаданням, чергуючи червоні й чорні, а карти йдуть на бази від туза до короля.
+Scorpion double ¦ Двойной скорпион ¦ Подвійний скорпіон
+Deux jeux, 10 colonnes, tout est distribué (les cinq premières colonnes cachent 4 cartes). On descend dans la même couleur de carte et on déplace n’importe quel groupe ; une suite complète du Roi à l’As s’en va. ¦ Две колоды, 10 колонок, всё роздано (в первых пяти колонках 4 закрытые карты). Строим по убыванию в одной масти и переносим любую группу; полная последовательность от короля до туза уходит. ¦ Дві колоди, 10 стовпців, усе роздано (у перших п’яти стовпцях 4 закриті карти). Будуємо за спаданням в одній масті й переносимо будь-яку групу; повна послідовність від короля до туза зникає.
+Motif de divorce ¦ Повод для развода ¦ Привід для розлучення
+Deux jeux, 10 colonnes de 5 cartes visibles. On descend sans s’occuper des couleurs ; seules les suites d’une même couleur de carte se déplacent ensemble ; une suite complète du Roi à l’As s’en va. La pioche pose une carte sur chaque colonne qui n’est pas vide. ¦ Две колоды, 10 колонок по 5 открытых карт. Строим по убыванию, не глядя на масть; вместе переносятся только последовательности одной масти; полная последовательность от короля до туза уходит. Колода кладёт по карте на каждую непустую колонку. ¦ Дві колоди, 10 стовпців по 5 відкритих карт. Будуємо за спаданням, не зважаючи на масть; разом переносяться лише послідовності однієї масті; повна послідовність від короля до туза зникає. Колода кладе по карті на кожен непорожній стовпець.
+La tarentule ¦ Тарантул ¦ Тарантул
+L’araignée à quatre couleurs, mais une suite qui descend dans la même teinte (rouge ou noire) se déplace d’un coup. Une suite complète du Roi à l’As dans une même couleur de carte s’en va. ¦ Паук в четыре масти, но убывающая последовательность одного цвета (красная или чёрная) переносится сразу. Полная последовательность от короля до туза одной масти уходит. ¦ Павук у чотири масті, але спадна послідовність одного кольору (червона чи чорна) переноситься одразу. Повна послідовність від короля до туза однієї масті зникає.
+Araignée à découvert ¦ Открытый паук ¦ Відкритий павук
+L’araignée à quatre couleurs, mais toutes les cartes sont visibles dès le départ. ¦ Паук в четыре масти, но все карты открыты с самого начала. ¦ Павук у чотири масті, але всі карти відкриті від самого початку.
+La harpe de Milligan ¦ Арфа Миллиган ¦ Арфа Мілліган
+Deux jeux, 8 colonnes en escalier ; on descend en alternant rouge et noir et on déplace des suites entières. Une colonne vide ne prend qu’un Roi ; la pioche pose une carte sur chaque colonne. Les fondations montent de l’As au Roi. ¦ Две колоды, 8 колонок лесенкой; строим по убыванию, чередуя красные и чёрные, и переносим целые последовательности. Пустая колонка принимает только короля; колода кладёт по карте на каждую колонку. Базы растут от туза до короля. ¦ Дві колоди, 8 стовпців драбинкою; будуємо за спаданням, чергуючи червоні й чорні, і переносимо цілі послідовності. Порожній стовпець приймає лише короля; колода кладе по карті на кожен стовпець. Бази ростуть від туза до короля.
+La harpe de Lexington ¦ Арфа Лексингтон ¦ Арфа Лексінгтон
+La harpe de Milligan (deux jeux, 8 colonnes en escalier, la pioche pose une carte sur chaque colonne), mais on déplace n’importe quel groupe de cartes visibles. ¦ Арфа Миллиган (две колоды, 8 колонок лесенкой, колода кладёт по карте на каждую колонку), но переносим любую группу открытых карт. ¦ Арфа Мілліган (дві колоди, 8 стовпців драбинкою, колода кладе по карті на кожен стовпець), але переносимо будь-яку групу відкритих карт.
+Brunswick ¦ Брансуик ¦ Брансвік
+La harpe de Lexington avec toutes les cartes visibles : n’importe quel groupe se déplace, la pioche pose une carte sur chaque colonne. ¦ Арфа Лексингтон со всеми открытыми картами: переносится любая группа, колода кладёт по карте на каждую колонку. ¦ Арфа Лексінгтон з усіма відкритими картами: переноситься будь-яка група, колода кладе по карті на кожен стовпець.
+Carlton ¦ Карлтон ¦ Карлтон
+La harpe de Milligan avec toutes les cartes visibles, et une colonne vide prend n’importe quelle carte. ¦ Арфа Миллиган со всеми открытыми картами, и пустая колонка принимает любую карту. ¦ Арфа Мілліган з усіма відкритими картами, і порожній стовпець приймає будь-яку карту.
+Miss Milligan ¦ Мисс Миллиган ¦ Міс Мілліган
+Deux jeux, 8 colonnes d’une carte ; la pioche pose une carte sur chaque colonne. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide ne prend qu’un Roi. Quand la pioche est vide, une case libre s’ouvre pour mettre une carte de côté. ¦ Две колоды, 8 колонок по одной карте; колода кладёт по карте на каждую колонку. Строим по убыванию, чередуя красные и чёрные, и переносим целые последовательности; пустая колонка принимает только короля. Когда колода пуста, открывается свободная ячейка, чтобы отложить одну карту. ¦ Дві колоди, 8 стовпців по одній карті; колода кладе по карті на кожен стовпець. Будуємо за спаданням, чергуючи червоні й чорні, і переносимо цілі послідовності; порожній стовпець приймає лише короля. Коли колода порожня, відкривається вільна клітинка, щоб відкласти одну карту.
+Millie ¦ Милли ¦ Міллі
+Deux jeux, 8 colonnes d’une carte ; la pioche pose une carte sur chaque colonne. On descend en alternant rouge et noir et une colonne vide prend n’importe quelle carte. ¦ Две колоды, 8 колонок по одной карте; колода кладёт по карте на каждую колонку. Строим по убыванию, чередуя красные и чёрные, и пустая колонка принимает любую карту. ¦ Дві колоди, 8 стовпців по одній карті; колода кладе по карті на кожен стовпець. Будуємо за спаданням, чергуючи червоні й чорні, і порожній стовпець приймає будь-яку карту.
+L’île d’Elbe ¦ Остров Эльба ¦ Острів Ельба
+Deux jeux, 10 colonnes de 5 cartes (quatre cachées) ; on descend en alternant rouge et noir et on déplace des suites entières. Une colonne vide ne prend qu’un Roi ; la pioche pose une carte sur chaque colonne. ¦ Две колоды, 10 колонок по 5 карт (четыре закрыты); строим по убыванию, чередуя красные и чёрные, и переносим целые последовательности. Пустая колонка принимает только короля; колода кладёт по карте на каждую колонку. ¦ Дві колоди, 10 стовпців по 5 карт (чотири закриті); будуємо за спаданням, чергуючи червоні й чорні, і переносимо цілі послідовності. Порожній стовпець приймає лише короля; колода кладе по карті на кожен стовпець.
+Le mont Olympe ¦ Гора Олимп ¦ Гора Олімп
+Deux jeux : les As et les 2 sont posés d’avance, et les fondations montent de deux en deux dans la même couleur de carte (As, 3, 5… ou 2, 4, 6…). 9 colonnes ; on descend de deux en deux dans la même couleur de carte. La pioche pose une carte sur chaque colonne. ¦ Две колоды: тузы и двойки выложены заранее, базы растут через одну в одной масти (туз, 3, 5… или 2, 4, 6…). 9 колонок; строим по убыванию через одну в одной масти. Колода кладёт по карте на каждую колонку. ¦ Дві колоди: тузи й двійки викладено заздалегідь, бази ростуть через одну в одній масті (туз, 3, 5… або 2, 4, 6…). 9 стовпців; будуємо за спаданням через одну в одній масті. Колода кладе по карті на кожен стовпець.
+La patience australienne ¦ Австралийский пасьянс ¦ Австралійський пасьянс
+7 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte et on déplace n’importe quel groupe de cartes visibles. Une colonne vide ne prend qu’un Roi ; la pioche ne passe qu’une fois. ¦ 7 колонок по 4 открытые карты; строим по убыванию в одной масти и переносим любую группу открытых карт. Пустая колонка принимает только короля; колода проходится только один раз. ¦ 7 стовпців по 4 відкриті карти; будуємо за спаданням в одній масті й переносимо будь-яку групу відкритих карт. Порожній стовпець приймає лише короля; колода проходиться лише один раз.
+Canberra ¦ Канберра ¦ Канберра
+La patience australienne, mais la pioche repasse une fois. ¦ Австралийский пасьянс, но колоду можно пройти заново один раз. ¦ Австралійський пасьянс, але колоду можна пройти заново один раз.
+Raw Prawn ¦ Raw Prawn ¦ Raw Prawn
+La patience australienne, mais une colonne vide prend n’importe quelle carte. ¦ Австралийский пасьянс, но пустая колонка принимает любую карту. ¦ Австралійський пасьянс, але порожній стовпець приймає будь-яку карту.
+Rushdike ¦ Rushdike ¦ Rushdike
+7 colonnes en escalier ; on descend dans la même couleur de carte et on déplace n’importe quel groupe de cartes visibles. La pioche pose une carte sur chaque colonne. ¦ 7 колонок лесенкой; строим по убыванию в одной масти и переносим любую группу открытых карт. Колода кладёт по карте на каждую колонку. ¦ 7 стовпців драбинкою; будуємо за спаданням в одній масті й переносимо будь-яку групу відкритих карт. Колода кладе по карті на кожен стовпець.
+La discipline chinoise ¦ Китайская дисциплина ¦ Китайська дисципліна
+7 colonnes de 7 cartes (trois cachées, sauf dans la première) ; on descend en alternant rouge et noir et on déplace n’importe quel groupe de cartes visibles. Les 3 dernières cartes vont sur les trois premières colonnes. ¦ 7 колонок по 7 карт (три закрыты, кроме первой колонки); строим по убыванию, чередуя красные и чёрные, и переносим любую группу открытых карт. Последние 3 карты идут на первые три колонки. ¦ 7 стовпців по 7 карт (три закриті, крім першого стовпця); будуємо за спаданням, чергуючи червоні й чорні, і переносимо будь-яку групу відкритих карт. Останні 3 карти йдуть на перші три стовпці.
+Solitaire russe double ¦ Двойной русский пасьянс ¦ Подвійний російський пасьянс
+Deux jeux, 10 colonnes, 8 fondations ; on descend dans la même couleur de carte et on déplace n’importe quel groupe de cartes visibles. ¦ Две колоды, 10 колонок, 8 баз; строим по убыванию в одной масти и переносим любую группу открытых карт. ¦ Дві колоди, 10 стовпців, 8 баз; будуємо за спаданням в одній масті й переносимо будь-яку групу відкритих карт.
+Ali Baba ¦ Али-Баба ¦ Алі-Баба
+Un seul jeu : les As sont posés d’avance, 10 colonnes de 4 cartes visibles. On descend dans la même couleur de carte et on déplace des suites entières ; la pioche ne passe qu’une fois. ¦ Одна колода: тузы выложены заранее, 10 колонок по 4 открытые карты. Строим по убыванию в одной масти и переносим целые последовательности; колода проходится только один раз. ¦ Одна колода: тузи викладено заздалегідь, 10 стовпців по 4 відкриті карти. Будуємо за спаданням в одній масті й переносимо цілі послідовності; колода проходиться лише один раз.
+Cassim ¦ Касим ¦ Касим
+Un seul jeu : les As sont posés d’avance, 7 colonnes de 3 cartes visibles. On descend dans la même couleur de carte et on déplace des suites entières ; la pioche repasse autant que tu veux. ¦ Одна колода: тузы выложены заранее, 7 колонок по 3 открытые карты. Строим по убыванию в одной масти и переносим целые последовательности; колоду можно проходить заново сколько хочешь. ¦ Одна колода: тузи викладено заздалегідь, 7 стовпців по 3 відкриті карти. Будуємо за спаданням в одній масті й переносимо цілі послідовності; колоду можна проходити заново скільки хочеш.
+Rang et file ¦ Шеренга и колонна ¦ Шеренга й колона
+L’empereur (deux jeux, 10 colonnes de 4 cartes dont 3 cachées, en alternant rouge et noir), mais on déplace des suites entières. ¦ Император (две колоды, 10 колонок по 4 карты, из них 3 закрыты, чередуя красные и чёрные), но переносим целые последовательности. ¦ Імператор (дві колоди, 10 стовпців по 4 карти, з них 3 закриті, чергуючи червоні й чорні), але переносимо цілі послідовності.
+Les As affairés ¦ Занятые тузы ¦ Заклопотані тузи
+Deux jeux, 12 colonnes d’une carte ; on descend dans la même couleur de carte, une carte à la fois. La pioche ne passe qu’une fois. ¦ Две колоды, 12 колонок по одной карте; строим по убыванию в одной масти, по одной карте. Колода проходится только один раз. ¦ Дві колоди, 12 стовпців по одній карті; будуємо за спаданням в одній масті, по одній карті. Колода проходиться лише один раз.
+La cour ¦ Двор ¦ Двір
+Deux jeux, 12 colonnes d’une carte ; on descend dans la même couleur de carte et on déplace des suites entières. La pioche ne passe qu’une fois. ¦ Две колоды, 12 колонок по одной карте; строим по убыванию в одной масти и переносим целые последовательности. Колода проходится только один раз. ¦ Дві колоди, 12 стовпців по одній карті; будуємо за спаданням в одній масті й переносимо цілі послідовності. Колода проходиться лише один раз.
+Le carré de Napoléon ¦ Каре Наполеона ¦ Каре Наполеона
+Deux jeux, 12 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte et on déplace des suites entières. La pioche ne passe qu’une fois. ¦ Две колоды, 12 колонок по 4 открытые карты; строим по убыванию в одной масти и переносим целые последовательности. Колода проходится только один раз. ¦ Дві колоди, 12 стовпців по 4 відкриті карти; будуємо за спаданням в одній масті й переносимо цілі послідовності. Колода проходиться лише один раз.
+L’exil de Napoléon ¦ Изгнание Наполеона ¦ Вигнання Наполеона
+Les quarante voleurs où l’on descend sans s’occuper des couleurs, une carte à la fois. La pioche ne passe qu’une fois. ¦ Сорок разбойников, где строим по убыванию, не глядя на масть, по одной карте. Колода проходится только один раз. ¦ Сорок розбійників, де будуємо за спаданням, не зважаючи на масть, по одній карті. Колода проходиться лише один раз.
+Deuces ¦ Двойки ¦ Двійки
+Deux jeux : les huit 2 sont posés d’avance, et les fondations montent dans la même couleur de carte jusqu’à l’As. 10 colonnes d’une carte ; on descend dans la même couleur de carte (l’As va sur le 2, le Roi sur l’As), une carte à la fois. La pioche ne passe qu’une fois. ¦ Две колоды: восемь двоек выложены заранее, базы растут в одной масти до туза. 10 колонок по одной карте; строим по убыванию в одной масти (туз на двойку, король на туза), по одной карте. Колода проходится только один раз. ¦ Дві колоди: вісім двійок викладено заздалегідь, бази ростуть в одній масті до туза. 10 стовпців по одній карті; будуємо за спаданням в одній масті (туз на двійку, король на туза), по одній карті. Колода проходиться лише один раз.
+La lune décroissante ¦ Убывающая луна ¦ Спадний місяць
+Deux jeux, 13 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte et on déplace des suites entières. La pioche ne passe qu’une fois. ¦ Две колоды, 13 колонок по 4 открытые карты; строим по убыванию в одной масти и переносим целые последовательности. Колода проходится только один раз. ¦ Дві колоди, 13 стовпців по 4 відкриті карти; будуємо за спаданням в одній масті й переносимо цілі послідовності. Колода проходиться лише один раз.
+Les cinquante fameux ¦ Знаменитые пятьдесят ¦ Славетні п’ятдесят
+Les quarante voleurs avec 5 cartes par colonne : deux jeux, 10 colonnes de 5, même couleur de carte, une carte à la fois. La pioche ne passe qu’une fois. ¦ Сорок разбойников с 5 картами в колонке: две колоды, 10 колонок по 5, одна масть, по одной карте. Колода проходится только один раз. ¦ Сорок розбійників із 5 картами в стовпці: дві колоди, 10 стовпців по 5, одна масть, по одній карті. Колода проходиться лише один раз.
+Quarante-neuf ¦ Сорок девять ¦ Сорок дев’ять
+Deux jeux, 7 colonnes de 7 cartes visibles ; on descend en alternant rouge et noir, une carte à la fois. La pioche ne passe qu’une fois. ¦ Две колоды, 7 колонок по 7 открытых карт; строим по убыванию, чередуя красные и чёрные, по одной карте. Колода проходится только один раз. ¦ Дві колоди, 7 стовпців по 7 відкритих карт; будуємо за спаданням, чергуючи червоні й чорні, по одній карті. Колода проходиться лише один раз.
+Sans limite ¦ Без ограничений ¦ Без обмежень
+Les quarante voleurs, mais la pioche repasse autant que tu veux. ¦ Сорок разбойников, но колоду можно проходить заново сколько хочешь. ¦ Сорок розбійників, але колоду можна проходити заново скільки хочеш.
+Les petits quarante ¦ Малые сорок ¦ Малі сорок
+Les quarante voleurs où l’on descend sans s’occuper des couleurs et on déplace des suites entières ; la pioche se retourne trois cartes à la fois et repasse trois fois. ¦ Сорок разбойников, где строим по убыванию, не глядя на масть, и переносим целые последовательности; колода открывается по три карты, её можно пройти заново трижды. ¦ Сорок розбійників, де будуємо за спаданням, не зважаючи на масть, і переносимо цілі послідовності; колода відкривається по три карти, її можна пройти заново тричі.
+Le zèbre ¦ Зебра ¦ Зебра
+Deux jeux, les As posés d’avance, 8 colonnes d’une carte ; on descend en alternant rouge et noir, une carte à la fois. La pioche repasse une fois. ¦ Две колоды, тузы выложены заранее, 8 колонок по одной карте; строим по убыванию, чередуя красные и чёрные, по одной карте. Колоду можно пройти заново один раз. ¦ Дві колоди, тузи викладено заздалегідь, 8 стовпців по одній карті; будуємо за спаданням, чергуючи червоні й чорні, по одній карті. Колоду можна пройти заново один раз.
+Le congrès ¦ Конгресс ¦ Конгрес
+Deux jeux, 8 colonnes d’une carte ; on descend sans s’occuper des couleurs, une carte à la fois. La pioche ne passe qu’une fois. ¦ Две колоды, 8 колонок по одной карте; строим по убыванию, не глядя на масть, по одной карте. Колода проходится только один раз. ¦ Дві колоди, 8 стовпців по одній карті; будуємо за спаданням, не зважаючи на масть, по одній карті. Колода проходиться лише один раз.
+Le parlement ¦ Парламент ¦ Парламент
+Le congrès (deux jeux, 8 colonnes d’une carte, on descend sans s’occuper des couleurs), avec les As posés d’avance. ¦ Конгресс (две колоды, 8 колонок по одной карте, по убыванию, не глядя на масть), с тузами, выложенными заранее. ¦ Конгрес (дві колоди, 8 стовпців по одній карті, за спаданням, не зважаючи на масть), з тузами, викладеними заздалегідь.
+Pair et impair ¦ Чёт и нечет ¦ Парне й непарне
+Deux jeux : un As et un 2 de chaque couleur de carte sont posés d’avance, et les fondations montent de deux en deux dans leur couleur (As, 3, 5… Roi, 2, 4… ou 2, 4… Dame, As, 3…). 9 places d’une carte, sur lesquelles on ne construit pas ; une place vide prend n’importe quelle carte. La pioche repasse une fois. ¦ Две колоды: туз и двойка каждой масти выложены заранее, базы растут через одну в своей масти (туз, 3, 5… король, 2, 4… или 2, 4… дама, туз, 3…). 9 мест по одной карте, на них не строят; пустое место принимает любую карту. Колоду можно пройти заново один раз. ¦ Дві колоди: туз і двійка кожної масті викладено заздалегідь, бази ростуть через одну у своїй масті (туз, 3, 5… король, 2, 4… або 2, 4… дама, туз, 3…). 9 місць по одній карті, на них не будують; порожнє місце приймає будь-яку карту. Колоду можна пройти заново один раз.
+Le cotillon royal ¦ Королевский котильон ¦ Королівський котильйон
+Deux jeux : un As et un 2 de chaque couleur de carte sont posés d’avance, et les fondations montent de deux en deux dans leur couleur. Quatre tas de réserve de 3 cartes (seule celle du dessus se joue) et 16 places d’une carte, sur lesquelles on ne construit pas ; une place vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Две колоды: туз и двойка каждой масти выложены заранее, базы растут через одну в своей масти. Четыре стопки резерва по 3 карты (играет только верхняя) и 16 мест по одной карте, на них не строят; пустое место принимает любую карту. Колода проходится только один раз. ¦ Дві колоди: туз і двійка кожної масті викладено заздалегідь, бази ростуть через одну у своїй масті. Чотири стоси резерву по 3 карти (грає лише верхня) і 16 місць по одній карті, на них не будують; порожнє місце приймає будь-яку карту. Колода проходиться лише один раз.
+Le treize porte-bonheur ¦ Счастливая тринадцатка ¦ Щаслива тринадцятка
+13 colonnes de 4 cartes visibles ; on descend sans s’occuper des couleurs, une carte à la fois ; une colonne vide reste vide. ¦ 13 колонок по 4 открытые карты; строим по убыванию, не глядя на масть, по одной карте; пустая колонка остаётся пустой. ¦ 13 стовпців по 4 відкриті карти; будуємо за спаданням, не зважаючи на масть, по одній карті; порожній стовпець лишається порожнім.
+La patience portugaise ¦ Португальский пасьянс ¦ Португальський пасьянс
+13 colonnes de 4 cartes visibles ; on descend sans s’occuper des couleurs, une carte à la fois ; seul un Roi va dans une colonne vide. ¦ 13 колонок по 4 открытые карты; строим по убыванию, не глядя на масть, по одной карте; в пустую колонку идёт только король. ¦ 13 стовпців по 4 відкриті карти; будуємо за спаданням, не зважаючи на масть, по одній карті; у порожній стовпець іде лише король.
+Bonne mesure ¦ Хорошая мера ¦ Добра міра
+Deux As sont posés d’avance ; 10 colonnes de 5 cartes visibles. On descend sans s’occuper des couleurs, une carte à la fois ; une colonne vide prend n’importe quelle carte. ¦ Два туза выложены заранее; 10 колонок по 5 открытых карт. Строим по убыванию, не глядя на масть, по одной карте; пустая колонка принимает любую карту. ¦ Два тузи викладено заздалегідь; 10 стовпців по 5 відкритих карт. Будуємо за спаданням, не зважаючи на масть, по одній карті; порожній стовпець приймає будь-яку карту.
+La cruelle ¦ Жестокая ¦ Жорстока
+Les As sont posés d’avance ; 12 tas de 4 cartes. On descend dans la même couleur de carte, une carte à la fois ; une place vide reste vide. Autant de fois que tu veux, on ramasse les tas dans l’ordre, sans mélanger, et on redistribue par 4. ¦ Тузы выложены заранее; 12 стопок по 4 карты. Строим по убыванию в одной масти, по одной карте; пустое место остаётся пустым. Сколько хочешь раз собираешь стопки по порядку, не тасуя, и раздаёшь заново по 4. ¦ Тузи викладено заздалегідь; 12 стосів по 4 карти. Будуємо за спаданням в одній масті, по одній карті; порожнє місце лишається порожнім. Скільки хочеш разів збираєш стоси по порядку, не тасуючи, і роздаєш знову по 4.
+La persévérance ¦ Упорство ¦ Наполегливість
+Comme la cruelle (les As posés d’avance, 12 tas de 4, même couleur de carte), mais on déplace des suites entières et on ne ramasse que deux fois. ¦ Как Жестокая (тузы выложены заранее, 12 стопок по 4, одна масть), но переносим целые последовательности и собираем только дважды. ¦ Як Жорстока (тузи викладено заздалегідь, 12 стосів по 4, одна масть), але переносимо цілі послідовності й збираємо лише двічі.
+L’éventail en vagues ¦ Веер волнами ¦ Віяло хвилями
+13 tas de 4 cartes, les As restent mélangés aux autres ; on descend dans la même couleur de carte, une carte à la fois ; une place vide reste vide. Autant de fois que tu veux, on ramasse les tas dans l’ordre, sans mélanger, et on redistribue par 4. ¦ 13 стопок по 4 карты, тузы остаются вперемешку с другими; строим по убыванию в одной масти, по одной карте; пустое место остаётся пустым. Сколько хочешь раз собираешь стопки по порядку, не тасуя, и раздаёшь заново по 4. ¦ 13 стосів по 4 карти, тузи лишаються впереміш з іншими; будуємо за спаданням в одній масті, по одній карті; порожнє місце лишається порожнім. Скільки хочеш разів збираєш стоси по порядку, не тасуючи, і роздаєш знову по 4.
+L’éventail en boîte ¦ Веер в коробке ¦ Віяло в коробці
+Les As sont posés d’avance ; 16 éventails de 3 cartes. On descend en alternant rouge et noir, une carte à la fois ; seul un Roi va dans une place vide. ¦ Тузы выложены заранее; 16 вееров по 3 карты. Строим по убыванию, чередуя красные и чёрные, по одной карте; на пустое место идёт только король. ¦ Тузи викладено заздалегідь; 16 віял по 3 карти. Будуємо за спаданням, чергуючи червоні й чорні, по одній карті; на порожнє місце іде лише король.
+L’éventail fascinant ¦ Чарующий веер ¦ Чарівне віяло
+La Belle Lucie (17 éventails de 3 cartes) où l’on descend en alternant rouge et noir, avec six redistributions. ¦ Прекрасная Люси (17 вееров по 3 карты), где строим по убыванию, чередуя красные и чёрные, с шестью пересдачами. ¦ Прекрасна Люсі (17 віял по 3 карти), де будуємо за спаданням, чергуючи червоні й чорні, із шістьма перездачами.
+La lampe de minuit ¦ Полуночная лампа ¦ Опівнічна лампа
+La Belle Lucie (17 éventails de 3 cartes) où l’on descend en alternant rouge et noir, avec deux redistributions. ¦ Прекрасная Люси (17 вееров по 3 карты), где строим по убыванию, чередуя красные и чёрные, с двумя пересдачами. ¦ Прекрасна Люсі (17 віял по 3 карти), де будуємо за спаданням, чергуючи червоні й чорні, із двома перездачами.
+Shamrocks ¦ Shamrocks ¦ Shamrocks
+17 éventails de 3 cartes ; on monte ou on descend d’un rang sans s’occuper des couleurs, une carte à la fois, et un éventail ne garde jamais plus de 3 cartes. Pas de redistribution. ¦ 17 вееров по 3 карты; кладём на ранг выше или ниже, не глядя на масть, по одной карте, и в веере никогда не больше 3 карт. Без пересдачи. ¦ 17 віял по 3 карти; кладемо на ранг вище або нижче, не зважаючи на масть, по одній карті, і у віялі ніколи не більше 3 карт. Без перездачі.
+La maison dans les bois ¦ Дом в лесу ¦ Дім у лісі
+Deux jeux, 35 éventails de 3 cartes ; on monte ou on descend d’un rang dans la même couleur de carte, une carte à la fois. Une place vide reste vide. ¦ Две колоды, 35 вееров по 3 карты; кладём на ранг выше или ниже в одной масти, по одной карте. Пустое место остаётся пустым. ¦ Дві колоди, 35 віял по 3 карти; кладемо на ранг вище або нижче в одній масті, по одній карті. Порожнє місце лишається порожнім.
+La maison sur la colline ¦ Дом на холме ¦ Дім на пагорбі
+La maison dans les bois (deux jeux, 35 éventails), mais quatre fondations montent de l’As au Roi et quatre autres descendent du Roi à l’As. ¦ Дом в лесу (две колоды, 35 вееров), но четыре базы растут от туза до короля, а четыре другие идут вниз от короля до туза. ¦ Дім у лісі (дві колоди, 35 віял), але чотири бази ростуть від туза до короля, а чотири інші йдуть униз від короля до туза.
+Bisley ¦ Бисли ¦ Біслі
+Les As sont posés d’avance ; 13 colonnes (4 de 3 cartes, 9 de 4). Les fondations des As montent, celles des Rois descendent, dans la même couleur de carte. Sur le tableau, on monte ou on descend dans la même couleur de carte, une carte à la fois ; une colonne vide reste vide. ¦ Тузы выложены заранее; 13 колонок (4 по 3 карты, 9 по 4). Базы тузов растут, базы королей убывают, в одной масти. На столе кладём выше или ниже в одной масти, по одной карте; пустая колонка остаётся пустой. ¦ Тузи викладено заздалегідь; 13 стовпців (4 по 3 карти, 9 по 4). Бази тузів ростуть, бази королів спадають, в одній масті. На столі кладемо вище або нижче в одній масті, по одній карті; порожній стовпець лишається порожнім.
+Le cadran du grand-père ¦ Дедушкины часы ¦ Дідів годинник
+12 fondations comme les heures d’une horloge, qui commencent par 2♥, 3♠, 4♦, 5♣… jusqu’au Roi ♣ et montent dans la même couleur de carte (le Roi passe à l’As). 8 colonnes de 5 cartes ; on descend sans s’occuper des couleurs, une carte à la fois ; une colonne vide prend n’importe quelle carte. ¦ 12 баз, как часы на циферблате, начинаются с 2♥, 3♠, 4♦, 5♣… до короля ♣ и растут в одной масти (после короля — туз). 8 колонок по 5 карт; строим по убыванию, не глядя на масть, по одной карте; пустая колонка принимает любую карту. ¦ 12 баз, як години на циферблаті, починаються з 2♥, 3♠, 4♦, 5♣… до короля ♣ і ростуть в одній масті (після короля — туз). 8 стовпців по 5 карт; будуємо за спаданням, не зважаючи на масть, по одній карті; порожній стовпець приймає будь-яку карту.
+Le mur de pierre ¦ Каменная стена ¦ Кам’яна стіна
+6 colonnes de 6 cartes, une cachée sur deux, et un bouquet de 16 cartes où l’on peut prendre n’importe laquelle. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. ¦ 6 колонок по 6 карт, каждая вторая закрыта, и букет из 16 карт, откуда можно брать любую. Строим по убыванию, чередуя красные и чёрные, и переносим целые последовательности; пустая колонка принимает любую карту. ¦ 6 стовпців по 6 карт, кожна друга закрита, і букет із 16 карт, звідки можна брати будь-яку. Будуємо за спаданням, чергуючи червоні й чорні, і переносимо цілі послідовності; порожній стовпець приймає будь-яку карту.
+La fleur sauvage ¦ Дикий цветок ¦ Дика квітка
+Le jardin fleuri (6 colonnes de 6 et un bouquet de 16 cartes), mais on déplace des suites entières. ¦ Цветущий сад (6 колонок по 6 и букет из 16 карт), но переносим целые последовательности. ¦ Квітучий сад (6 стовпців по 6 і букет із 16 карт), але переносимо цілі послідовності.
+10 colonnes toutes visibles. La première carte posée sur une fondation donne la valeur de départ des quatre (le Roi passe à l’As). On monte ou on descend dans la même couleur de carte, une carte à la fois, et le Roi touche l’As. ¦ 10 колонок, все открыты. Первая карта на базе задаёт начальное значение всех четырёх (после короля — туз). Кладём выше или ниже в одной масти, по одной карте, и король соседствует с тузом. ¦ 10 стовпців, усі відкриті. Перша карта на базі задає початкове значення всіх чотирьох (після короля — туз). Кладемо вище або нижче в одній масті, по одній карті, і король сусідить із тузом.
+La place forte ¦ Крепость ¦ Твердиня
+Rues et ruelles (8 colonnes, on descend sans s’occuper des couleurs), avec une case libre. ¦ Улицы и переулки (8 колонок, по убыванию, не глядя на масть), с одной свободной ячейкой. ¦ Вулиці й провулки (8 стовпців, за спаданням, не зважаючи на масть), з однією вільною клітинкою.
+Le fort ¦ Форт ¦ Форт
+Rues et ruelles (8 colonnes, on descend sans s’occuper des couleurs), avec deux cases libres. ¦ Улицы и переулки (8 колонок, по убыванию, не глядя на масть), с двумя свободными ячейками. ¦ Вулиці й провулки (8 стовпців, за спаданням, не зважаючи на масть), з двома вільними клітинками.
+L’art du siège ¦ Искусство осады ¦ Мистецтво облоги
+Le château assiégé (les As posés d’avance, 8 colonnes de 6), avec une case libre. ¦ Осаждённый замок (тузы выложены заранее, 8 колонок по 6), с одной свободной ячейкой. ¦ Обложений замок (тузи викладено заздалегідь, 8 стовпців по 6), з однією вільною клітинкою.
+La toile de Pénélope ¦ Ткань Пенелопы ¦ Полотно Пенелопи
+Le château assiégé (les As posés d’avance, 8 colonnes de 6), mais seul un Roi va dans une colonne vide. ¦ Осаждённый замок (тузы выложены заранее, 8 колонок по 6), но в пустую колонку идёт только король. ¦ Обложений замок (тузи викладено заздалегідь, 8 стовпців по 6), але в порожній стовпець іде лише король.
+La citadelle ¦ Цитадель ¦ Цитадель
+Le château assiégé, mais pendant la distribution, toute carte qui peut monter sur une fondation y va tout de suite. ¦ Осаждённый замок, но при раздаче каждая карта, которая может пойти на базу, сразу идёт туда. ¦ Обложений замок, але під час роздачі кожна карта, яка може піти на базу, одразу йде туди.
+Les rois exilés ¦ Изгнанные короли ¦ Вигнані королі
+La citadelle (les cartes qui peuvent monter y vont pendant la distribution), mais seul un Roi va dans une colonne vide. ¦ Цитадель (карты, которые могут, идут на базы при раздаче), но в пустую колонку идёт только король. ¦ Цитадель (карти, які можуть, ідуть на бази під час роздачі), але в порожній стовпець іде лише король.
+Le bastion ¦ Бастион ¦ Бастіон
+10 colonnes de 5 cartes et 2 cases libres déjà occupées ; on monte ou on descend dans la même couleur de carte, une carte à la fois ; une colonne vide prend n’importe quelle carte. ¦ 10 колонок по 5 карт и 2 уже занятые свободные ячейки; кладём выше или ниже в одной масти, по одной карте; пустая колонка принимает любую карту. ¦ 10 стовпців по 5 карт і 2 вже зайняті вільні клітинки; кладемо вище або нижче в одній масті, по одній карті; порожній стовпець приймає будь-яку карту.
+La boîte à thé ¦ Чайная шкатулка ¦ Чайна скринька
+8 colonnes de 6 ou 7 cartes, tout est visible ; on descend sans s’occuper des couleurs et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. ¦ 8 колонок по 6 или 7 карт, всё открыто; строим по убыванию, не глядя на масть, и переносим целые последовательности; пустая колонка принимает любую карту. ¦ 8 стовпців по 6 або 7 карт, усе відкрито; будуємо за спаданням, не зважаючи на масть, і переносимо цілі послідовності; порожній стовпець приймає будь-яку карту.
+La boîte à thé américaine ¦ Американская чайная шкатулка ¦ Американська чайна скринька
+8 colonnes de 6 ou 7 cartes, tout est visible ; on descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. ¦ 8 колонок по 6 или 7 карт, всё открыто; строим по убыванию, чередуя красные и чёрные, и переносим целые последовательности; пустая колонка принимает любую карту. ¦ 8 стовпців по 6 або 7 карт, усе відкрито; будуємо за спаданням, чергуючи червоні й чорні, і переносимо цілі послідовності; порожній стовпець приймає будь-яку карту.
+La boîte à thé anglaise ¦ Английская чайная шкатулка ¦ Англійська чайна скринька
+8 colonnes de 6 ou 7 cartes, tout est visible ; on descend en alternant rouge et noir, une carte à la fois ; seul un Roi va dans une colonne vide. ¦ 8 колонок по 6 или 7 карт, всё открыто; строим по убыванию, чередуя красные и чёрные, по одной карте; в пустую колонку идёт только король. ¦ 8 стовпців по 6 або 7 карт, усе відкрито; будуємо за спаданням, чергуючи червоні й чорні, по одній карті; у порожній стовпець іде лише король.
+Les trois sommets stricts ¦ Строгие три вершины ¦ Суворі три вершини
+Les trois sommets, mais le Roi et l’As ne se suivent pas : la partie est plus difficile. ¦ Три вершины, но король и туз не идут друг за другом: игра сложнее. ¦ Три вершини, але король і туз не йдуть один за одним: гра складніша.
+Golf double ¦ Двойной гольф ¦ Подвійний гольф
+Golf avec deux jeux : 9 colonnes de 7 cartes. Envoie sur la défausse une carte juste au-dessus ou au-dessous ; rien ne va sur un Roi. ¦ Гольф с двумя колодами: 9 колонок по 7 карт. Клади в сброс карту ровно на ранг выше или ниже; на короля ничего не кладётся. ¦ Гольф із двома колодами: 9 стовпців по 7 карт. Клади в скидання карту рівно на ранг вищу або нижчу; на короля нічого не кладеться.
+As en haut (5 colonnes) ¦ Тузы наверх (5 колонок) ¦ Тузи нагору (5 стовпців)
+As en haut avec 5 colonnes : enlève une carte quand une autre colonne montre une carte plus forte de la même couleur de carte (l’As est le plus fort). Gagné s’il ne reste que les 4 As. ¦ Тузы наверх с 5 колонками: убери карту, когда в другой колонке видна более старшая карта той же масти (туз старше всех). Победа, если остались только 4 туза. ¦ Тузи нагору з 5 стовпцями: прибери карту, коли в іншому стовпці видно старшу карту тієї самої масті (туз найстарший). Перемога, якщо лишилися тільки 4 тузи.
+La baronne ¦ Баронесса ¦ Баронеса
+5 tas : enlève un Roi seul, ou deux cartes du dessus qui font 13 (Valet 11, Dame 12). La pioche pose une carte sur chaque tas. ¦ 5 стопок: убери одного короля или две верхние карты, дающие в сумме 13 (валет 11, дама 12). Колода кладёт по карте на каждую стопку. ¦ 5 стосів: прибери одного короля або дві верхні карти, що разом дають 13 (валет 11, дама 12). Колода кладе по карті на кожен стос.
+Sir Tommy ¦ Сэр Томми ¦ Сер Томмі
+Chaque carte piochée va sur une fondation ou sur l’un des 4 tas d’attente. Les fondations commencent par un As et montent de 1 en 1, sans s’occuper des couleurs. ¦ Каждая взятая карта идёт на базу или в одну из 4 стопок ожидания. Базы начинаются с туза и растут по одной, не глядя на масть. ¦ Кожна взята карта йде на базу або в один із 4 стосів очікування. Бази починаються з туза й ростуть по одній, не зважаючи на масть.
+Le chat dans le coin ¦ Кот в углу ¦ Кіт у кутку
+Les As sont posés d’avance et montent de 1 en 1 dans leur teinte (rouge sur rouge, noir sur noir). Chaque carte piochée va sur une fondation ou sur l’un des 4 tas d’attente ; une fois, on ramasse les tas pour repiocher. ¦ Тузы выложены заранее и растут по одной в своём цвете (красное на красное, чёрное на чёрное). Каждая взятая карта идёт на базу или в одну из 4 стопок ожидания; один раз стопки собираются, чтобы тянуть снова. ¦ Тузи викладено заздалегідь, і вони ростуть по одній у своєму кольорі (червоне на червоне, чорне на чорне). Кожна взята карта йде на базу або в один із 4 стосів очікування; один раз стоси збираються, щоб тягнути знову.
+La stratégie ¦ Стратегия ¦ Стратегія
+Chaque carte piochée va sur l’un des 8 tas d’attente ; seuls les As montent tout de suite. Quand la pioche est vide, on monte les cartes du dessus des tas, de 1 en 1 dans la même couleur de carte. ¦ Каждая взятая карта идёт в одну из 8 стопок ожидания; сразу на базы идут только тузы. Когда колода пуста, поднимаем верхние карты стопок по одной в одной масти. ¦ Кожна взята карта йде в один із 8 стосів очікування; одразу на бази йдуть лише тузи. Коли колода порожня, піднімаємо верхні карти стосів по одній в одній масті.
+Gizeh ¦ Гиза ¦ Гіза
+La pyramide sans pioche : les 24 autres cartes sont visibles en 3 rangées et se prennent toutes. Enlève les paires qui font 13 (Valet 11, Dame 12 ; un Roi s’en va seul). ¦ Пирамида без колоды: остальные 24 карты открыты в 3 ряда, и брать можно любую. Убирай пары, дающие 13 (валет 11, дама 12; король уходит один). ¦ Піраміда без колоди: решта 24 карти відкриті в 3 ряди, і брати можна будь-яку. Прибирай пари, що дають 13 (валет 11, дама 12; король іде сам).
+Toutânkhamon ¦ Тутанхамон ¦ Тутанхамон
+La pyramide, mais la pioche se retourne trois cartes à la fois (seule la dernière se joue) et repasse autant que tu veux. ¦ Пирамида, но колода открывается по три карты (играет только последняя), и её можно проходить заново сколько хочешь. ¦ Піраміда, але колода відкривається по три карти (грає лише остання), і її можна проходити заново скільки хочеш.
+La lune bleue ¦ Голубая луна ¦ Блакитний місяць
+Montana, mais les As vont au début des rangées : il faut ranger chaque rangée de l’As au Roi dans une même couleur. Un trou prend la carte de même couleur juste au-dessus de sa voisine de gauche. Deux fois, on peut ramasser ce qui n’est pas rangé et redistribuer. ¦ Монтана, но тузы идут в начало рядов: нужно сложить каждый ряд от туза до короля в одной масти. Дырка принимает карту той же масти, на ранг выше её соседки слева. Дважды можно собрать то, что не уложено, и пересдать. ¦ Монтана, але тузи йдуть на початок рядів: треба скласти кожен ряд від туза до короля в одній масті. Дірка приймає карту тієї самої масті, на ранг вищу за сусідку зліва. Двічі можна зібрати те, що не складено, і перездати.
+La lune rouge ¦ Красная луна ¦ Червоний місяць
+La lune bleue, mais les As sont posés d’avance au début des rangées et les trous sont au bout des rangées dès le départ. ¦ Голубая луна, но тузы заранее выложены в начале рядов, а дырки с самого начала стоят в конце рядов. ¦ Блакитний місяць, але тузи заздалегідь викладено на початку рядів, а дірки від самого початку стоять у кінці рядів.
+Le voisin ¦ Сосед ¦ Сусід
+Une grille de 5 × 5 : enlève deux cartes qui se touchent (même en diagonale) et font 13 (Valet 11, Dame 12) ; un Roi s’en va seul. Puis tasse la grille. ¦ Сетка 5 × 5: убери две соприкасающиеся карты (даже по диагонали), дающие 13 (валет 11, дама 12); король уходит один. Затем уплотни сетку. ¦ Сітка 5 × 5: прибери дві сусідні карти (навіть по діагоналі), що дають 13 (валет 11, дама 12); король іде сам. Потім ущільни сітку.
+Isabelle ¦ Изабелла ¦ Ізабелла
+13 colonnes de 4 cartes (seule la dernière est visible) : enlève deux cartes de même valeur prises en bas des colonnes. Un jeu de pure chance, pour se détendre. ¦ 13 колонок по 4 карты (открыта только последняя): убери две карты одного значения снизу колонок. Игра на чистую удачу, чтобы расслабиться. ¦ 13 стовпців по 4 карти (відкрита лише остання): прибери дві карти одного значення знизу стовпців. Гра на чисту удачу, щоб розслабитися.
+Quatorze en colonnes ¦ Четырнадцать в колонках ¦ Чотирнадцять у стовпцях
+12 colonnes avec toutes les cartes visibles : enlève deux cartes prises en bas des colonnes qui font 14 (Valet 11, Dame 12, Roi 13). ¦ 12 колонок, все карты открыты: убери две карты снизу колонок, дающие 14 (валет 11, дама 12, король 13). ¦ 12 стовпців, усі карти відкриті: прибери дві карти знизу стовпців, що дають 14 (валет 11, дама 12, король 13).
+Ramassé et redistribué, sans mélanger. ¦ Собрано и пересдано, без тасования. ¦ Зібрано й перездано, без тасування.
+Les tas d’attente sont ramassés dans la pioche. ¦ Стопки ожидания собраны в колоду. ¦ Стоси очікування зібрано в колоду.
+Ouvre le Jeu, choisis « 🂠 Patiences (jeux de cartes) » dans « Jeu », puis le jeu parmi 233 patiences rangées par famille (Klondike, FreeCell, Araignée, Yukon, Les quarante voleurs, Châteaux et jardins, jeux de paires). Glisse une carte (ou une suite) sur une autre pile, ou clique-la puis clique où la poser ; double-clic : sur une fondation ; clic sur la pioche : piocher. Dans les jeux de paires (Pyramide, Onze, Treize…), clique les cartes qui vont ensemble. ¦ Открой Игру, выбери « 🂠 Пасьянсы (карточные игры) » в « Игра », затем игру среди 233 пасьянсов, разложенных по семействам (Клондайк, FreeCell, Паук, Юкон, Сорок разбойников, Замки и сады, игры на пары). Перетащи карту (или последовательность) на другую стопку или нажми на неё, а потом туда, куда положить; двойной щелчок — на базу; щелчок по колоде — взять карту. В играх на пары (Пирамида, Одиннадцать, Тринадцать…) нажимай на карты, которые составляют пару. ¦ Відкрий Гру, обери « 🂠 Пасьянси (карткові ігри) » у « Гра », потім гру серед 233 пасьянсів, розкладених за родинами (Клондайк, FreeCell, Павук, Юкон, Сорок розбійників, Замки й сади, ігри на пари). Перетягни карту (або послідовність) на інший стос або натисни на неї, а потім туди, куди покласти; подвійне натискання — на базу; натискання на колоду — взяти карту. В іграх на пари (Піраміда, Одинадцять, Тринадцять…) натискай на карти, що складають пару.
+Quelles autres patiences sont arrivées ensuite ? ¦ Какие ещё пасьянсы появились потом? ¦ Які ще пасьянси з’явилися потім?
+Cent deux patiences classiques de plus, chacune avec ses règles dans « 📖 Les règles » de la partie. Famille Klondike et Canfield : Agnès Bernauer, Thumb and Pouch, Pas seul, Les impasses, Huit fois huit, Spike, Alternance, La harpe, La grande harpe, Acme, Le crapaud américain, Canfield bigarré, La duchesse, La porte. Avec des cases libres : Le pingouin, Baker’s Game (Roi seul), Seahaven détendu, Repair, Ocean Towers, Sept par quatre, Sept par cinq, FreeCell défi, FreeCell super défi. Araignées et gitanes : Le scarabée, Queue de scorpion, Scorpion double, Motif de divorce, La tarentule, Araignée à découvert, La harpe de Milligan, La harpe de Lexington, Brunswick, Carlton, Miss Milligan, Millie, L’île d’Elbe, Le mont Olympe. Yukon : La patience australienne, Canberra, Raw Prawn, Rushdike, La discipline chinoise, Solitaire russe double. Les quarante voleurs et leurs cousins : Ali Baba, Cassim, Rang et file, Les As affairés, La cour, Le carré de Napoléon, L’exil de Napoléon, Deuces, La lune décroissante, Les cinquante fameux, Quarante-neuf, Sans limite, Les petits quarante, Le zèbre, Le congrès, Le parlement, Pair et impair, Le cotillon royal. Châteaux, éventails et jardins : Le treize porte-bonheur, La patience portugaise, Bonne mesure, La cruelle, La persévérance, L’éventail en vagues, L’éventail en boîte, L’éventail fascinant, La lampe de minuit, Shamrocks, La maison dans les bois, La maison sur la colline, Bisley, Le cadran du grand-père, Le mur de pierre, La fleur sauvage, L’échiquier, La place forte, Le fort, L’art du siège, La toile de Pénélope, La citadelle, Les rois exilés, Le bastion, La boîte à thé (et ses versions américaine et anglaise). Paires, suites et calculs : Les trois sommets stricts, Golf double, As en haut (5 colonnes), La baronne, Sir Tommy, Le chat dans le coin, La stratégie, Gizeh, Toutânkhamon, La lune bleue, La lune rouge, Le voisin, Isabelle et Quatorze en colonnes. ¦ Ещё сто два классических пасьянса, у каждого свои правила в « 📖 Правила » партии. Семейство Клондайк и Канфилд: Агнес Бернауэр, Thumb and Pouch, Pas seul, Тупики, Восемь на восемь, Spike, Чередование, Арфа, Большая арфа, Acme, Американская жаба, Пёстрый Канфилд, Герцогиня, Ворота. Со свободными ячейками: Пингвин, Baker’s Game (только король), Облегчённый Seahaven, Repair, Ocean Towers, Семь на четыре, Семь на пять, FreeCell-испытание, FreeCell-супериспытание. Пауки и цыганки: Скарабей, Хвост скорпиона, Двойной скорпион, Повод для развода, Тарантул, Открытый паук, Арфа Миллиган, Арфа Лексингтон, Брансуик, Карлтон, Мисс Миллиган, Милли, Остров Эльба, Гора Олимп. Юкон: Австралийский пасьянс, Канберра, Raw Prawn, Rushdike, Китайская дисциплина, Двойной русский пасьянс. Сорок разбойников и родня: Али-Баба, Касим, Шеренга и колонна, Занятые тузы, Двор, Каре Наполеона, Изгнание Наполеона, Двойки, Убывающая луна, Знаменитые пятьдесят, Сорок девять, Без ограничений, Малые сорок, Зебра, Конгресс, Парламент, Чёт и нечет, Королевский котильон. Замки, веера и сады: Счастливая тринадцатка, Португальский пасьянс, Хорошая мера, Жестокая, Упорство, Веер волнами, Веер в коробке, Чарующий веер, Полуночная лампа, Shamrocks, Дом в лесу, Дом на холме, Бисли, Дедушкины часы, Каменная стена, Дикий цветок, Шахматная доска, Крепость, Форт, Искусство осады, Ткань Пенелопы, Цитадель, Изгнанные короли, Бастион, Чайная шкатулка (и её американская и английская версии). Пары, последовательности и счёт: Строгие три вершины, Двойной гольф, Тузы наверх (5 колонок), Баронесса, Сэр Томми, Кот в углу, Стратегия, Гиза, Тутанхамон, Голубая луна, Красная луна, Сосед, Изабелла и Четырнадцать в колонках. ¦ Ще сто два класичні пасьянси, у кожного свої правила в « 📖 Правила » партії. Родина Клондайк і Канфілд: Агнес Бернауер, Thumb and Pouch, Pas seul, Глухі кути, Вісім на вісім, Spike, Чергування, Арфа, Велика арфа, Acme, Американська жаба, Строкатий Канфілд, Герцогиня, Ворота. З вільними клітинками: Пінгвін, Baker’s Game (лише король), Полегшений Seahaven, Repair, Ocean Towers, Сім на чотири, Сім на п’ять, FreeCell-випробування, FreeCell-супервипробування. Павуки й циганки: Скарабей, Хвіст скорпіона, Подвійний скорпіон, Привід для розлучення, Тарантул, Відкритий павук, Арфа Мілліган, Арфа Лексінгтон, Брансвік, Карлтон, Міс Мілліган, Міллі, Острів Ельба, Гора Олімп. Юкон: Австралійський пасьянс, Канберра, Raw Prawn, Rushdike, Китайська дисципліна, Подвійний російський пасьянс. Сорок розбійників і їхня рідня: Алі-Баба, Касим, Шеренга й колона, Заклопотані тузи, Двір, Каре Наполеона, Вигнання Наполеона, Двійки, Спадний місяць, Славетні п’ятдесят, Сорок дев’ять, Без обмежень, Малі сорок, Зебра, Конгрес, Парламент, Парне й непарне, Королівський котильйон. Замки, віяла й сади: Щаслива тринадцятка, Португальський пасьянс, Добра міра, Жорстока, Наполегливість, Віяло хвилями, Віяло в коробці, Чарівне віяло, Опівнічна лампа, Shamrocks, Дім у лісі, Дім на пагорбі, Біслі, Дідів годинник, Кам’яна стіна, Дика квітка, Шахівниця, Твердиня, Форт, Мистецтво облоги, Полотно Пенелопи, Цитадель, Вигнані королі, Бастіон, Чайна скринька (і її американська та англійська версії). Пари, послідовності й підрахунок: Суворі три вершини, Подвійний гольф, Тузи нагору (5 стовпців), Баронеса, Сер Томмі, Кіт у кутку, Стратегія, Гіза, Тутанхамон, Блакитний місяць, Червоний місяць, Сусід, Ізабелла і Чотирнадцять у стовпцях.
+(suite) ¦ (продолжение) ¦ (продовження)
+.pptx : textes, images, formes, tableaux ¦ .pptx: тексты, изображения, фигуры, таблицы ¦ .pptx: тексти, зображення, фігури, таблиці
+Ce texte est vide : rien à mettre en diapositives. ¦ Этот текст пуст: нечего превращать в слайды. ¦ Цей текст порожній: нічого перетворювати на слайди.
+Cette image n’est pas dans les médias. ¦ Этого изображения нет в медиафайлах. ¦ Цього зображення немає в медіафайлах.
+Envoyer vers… : la présentation en vidéo, dans le Montage vidéo ou sur ton site ¦ Отправить в…: презентация видео, в Видеомонтаж или на твой сайт ¦ Надіслати в…: презентація відео, у Відеомонтаж або на твій сайт
+Fichier PowerPoint téléchargé. ¦ Файл PowerPoint скачан. ¦ Файл PowerPoint завантажено.
+La présentation devient une vidéo ({time}), rangée dans les Médias, puis tu choisis où elle va : le Montage vidéo ou ton site. Laisse la fenêtre ouverte pendant l’enregistrement. ¦ Презентация становится видео ({time}), сохраняется в Медиафайлы, затем ты выбираешь, куда она идёт: в Видеомонтаж или на твой сайт. Не закрывай окно во время записи. ¦ Презентація стає відео ({time}), зберігається в Медіафайли, потім ти обираєш, куди вона йде: у Відеомонтаж або на твій сайт. Не закривай вікно під час запису.
+Le diaporama devient une vidéo ({time}), rangée dans les Médias, puis tu choisis où elle va : le Montage vidéo ou ton site. Laisse la fenêtre ouverte pendant l’enregistrement. ¦ Слайд-шоу становится видео ({time}), сохраняется в Медиафайлы, затем ты выбираешь, куда оно идёт: в Видеомонтаж или на твой сайт. Не закрывай окно во время записи. ¦ Слайд-шоу стає відео ({time}), зберігається в Медіафайли, потім ти обираєш, куди воно йде: у Відеомонтаж або на твій сайт. Не закривай вікно під час запису.
+Le diaporama en vidéo, rangé dans les médias, puis dans le Montage vidéo ou sur ton site ¦ Слайд-шоу видео, в медиафайлах, затем в Видеомонтаже или на твоём сайте ¦ Слайд-шоу відео, у медіафайлах, потім у Відеомонтажі або на твоєму сайті
+PowerPoint : assemblage du fichier… ¦ PowerPoint: сборка файла… ¦ PowerPoint: збирання файлу…
+PowerPoint : diapositive {n} / {total} ¦ PowerPoint: слайд {n} / {total} ¦ PowerPoint: слайд {n} / {total}
+PowerPoint impossible : {error} ¦ PowerPoint невозможен: {error} ¦ PowerPoint неможливий: {error}
+📊 PowerPoint ¦ 📊 PowerPoint ¦ 📊 PowerPoint
+📊 PowerPoint (.pptx) ¦ 📊 PowerPoint (.pptx) ¦ 📊 PowerPoint (.pptx)
+📤 Envoyer la présentation ¦ 📤 Отправить презентацию ¦ 📤 Надіслати презентацію
+📤 Envoyer le diaporama ¦ 📤 Отправить слайд-шоу ¦ 📤 Надіслати слайд-шоу
+📤 Envoyer vers… (la vidéo) ¦ 📤 Отправить в… (видео) ¦ 📤 Надіслати в… (відео)
+📤 Envoyer vers… (le Montage vidéo, ton site) ¦ 📤 Отправить в… (Видеомонтаж, твой сайт) ¦ 📤 Надіслати в… (Відеомонтаж, твій сайт)
+⤓ Exporter l’image (PNG, JPG, WebP, TIFF, imprimer)… ¦ ⤓ Экспорт изображения (PNG, JPG, WebP, TIFF, печать)… ¦ ⤓ Експорт зображення (PNG, JPG, WebP, TIFF, друк)…
+Exporter : l’image retouchée (PNG, JPG, WebP, TIFF, imprimer) ou l’avant / après ¦ Экспорт: отретушированное изображение (PNG, JPG, WebP, TIFF, печать) или до / после ¦ Експорт: відретушоване зображення (PNG, JPG, WebP, TIFF, друк) або до / після
+🖼 L’image retouchée (PNG, JPG, WebP, TIFF, imprimer)… ¦ 🖼 Отретушированное изображение (PNG, JPG, WebP, TIFF, печать)… ¦ 🖼 Відретушоване зображення (PNG, JPG, WebP, TIFF, друк)…
+🌐 WebP ¦ 🌐 WebP ¦ 🌐 WebP
+léger, pour le web ¦ лёгкий, для веба ¦ легкий, для вебу
+🗂 TIFF ¦ 🗂 TIFF ¦ 🗂 TIFF
+sans perte, pour archiver ¦ без потерь, для архива ¦ без втрат, для архіву
+Ce navigateur ne sait pas faire du WebP : choisis PNG ou JPG. ¦ Этот браузер не умеет WebP: выбери PNG или JPG. ¦ Цей браузер не вміє WebP: обери PNG або JPG.
+Cette action de retouche n’existe plus. ¦ Этого действия ретуши больше нет. ¦ Цієї дії ретуші більше немає.
+Choisis une photo à retoucher. ¦ Выбери фото для ретуши. ¦ Обери фото для ретуші.
+Envoyer l’image affichée ou le compte rendu vers un autre outil ¦ Отправить показанное изображение или отчёт в другой инструмент ¦ Надіслати показане зображення або звіт в інший інструмент
+Ouvrir la photo A ou B dans la Retouche des photos ¦ Открыть фото A или B в Ретуши фото ¦ Відкрити фото A або B в Ретуші фото
+Exporter l’image affichée, ou imprimer les deux photos avec la ressemblance et les notes ¦ Экспортировать показанное изображение или напечатать оба фото со сходством и заметками ¦ Експортувати показане зображення або надрукувати обидва фото зі схожістю й нотатками
+Exporter l’image (ce qui est affiché)… ¦ Экспорт изображения (то, что показано)… ¦ Експорт зображення (те, що показано)…
+Imprimer (les deux photos, la ressemblance, les notes)… ¦ Печать (оба фото, сходство, заметки)… ¦ Друк (обидва фото, схожість, нотатки)…
+L’image affichée ¦ Показанное изображение ¦ Показане зображення
+Le compte rendu (photos, ressemblance, notes) ¦ Отчёт (фото, сходство, заметки) ¦ Звіт (фото, схожість, нотатки)
+La Retouche des photos n’est pas chargée. ¦ Ретушь фото не загружена. ¦ Ретуш фото не завантажено.
+Photo {side} — {name} ¦ Фото {side} — {name} ¦ Фото {side} — {name}
+Retoucher quelle photo ? ¦ Какое фото ретушировать? ¦ Яке фото ретушувати?
+Utiliser ¦ Использовать ¦ Використати
+✒️ Quel dessin ? ¦ ✒️ Какой рисунок? ¦ ✒️ Який малюнок?
+Aucun dessin enregistré dans le Dessin vectoriel. ¦ В Векторном рисунке нет сохранённых рисунков. ¦ У Векторному малюнку немає збережених малюнків.
+Ce dessin n’a pas pu être lu : ouvre le Dessin vectoriel une fois, puis recommence. ¦ Не удалось прочитать этот рисунок: открой Векторный рисунок один раз и попробуй снова. ¦ Не вдалося прочитати цей малюнок: відкрий Векторний малюнок один раз і спробуй знову.
+📝 Quel document ? ¦ 📝 Какой документ? ¦ 📝 Який документ?
+Aucun document dans le Traitement de texte. ¦ В Текстовом редакторе нет документов. ¦ У Текстовому редакторі немає документів.
+Des images qui défilent (‹ ›) ; sans script, elles glissent au doigt ¦ Прокручивающиеся изображения (‹ ›); без скрипта листаются пальцем ¦ Зображення, що прокручуються (‹ ›); без скрипту гортаються пальцем
+Les images du diaporama ¦ Изображения слайд-шоу ¦ Зображення слайд-шоу
+Une vidéo de tes médias (ou d’un fichier : 📁 Importer…), avec ses boutons lecture et plein écran ¦ Видео из твоих медиафайлов (или из файла: 📁 Импорт…) с кнопками воспроизведения и полного экрана ¦ Відео з твоїх медіафайлів (або з файлу: 📁 Імпорт…) з кнопками відтворення й повного екрана
+La vidéo du site ¦ Видео сайта ¦ Відео сайту
+Télécharger la vidéo ¦ Скачать видео ¦ Завантажити відео
+Un son de tes médias (témoignage, chanson…), et ce qu’on y entend écrit dessous si tu veux ¦ Звук из твоих медиафайлов (рассказ, песня…) и, если хочешь, написанное под ним то, что слышно ¦ Звук із твоїх медіафайлів (розповідь, пісня…) і, якщо хочеш, написане під ним те, що чути
+Le son du site ¦ Звук сайта ¦ Звук сайту
+🎧 Ce qu’on entend (facultatif) ¦ 🎧 Что слышно (необязательно) ¦ 🎧 Що чути (необов’язково)
+Écris ou colle la transcription : elle sera sous le son, pour ceux qui ne peuvent pas l’écouter. Laisse vide si tu n’en veux pas. ¦ Напиши или вставь расшифровку: она будет под звуком для тех, кто не может его послушать. Оставь пустым, если не нужно. ¦ Напиши або встав транскрипцію: вона буде під звуком для тих, хто не може його послухати. Залиш порожнім, якщо не треба.
+Ajouter le son ¦ Добавить звук ¦ Додати звук
+Télécharger le son ¦ Скачать звук ¦ Завантажити звук
+Ce qu’on entend ¦ Что слышно ¦ Що чути
+Un de tes dessins vectoriels, ou un SVG collé (sans script ni lien vers l’extérieur) ¦ Один из твоих векторных рисунков или вставленный SVG (без скриптов и внешних ссылок) ¦ Один із твоїх векторних малюнків або вставлений SVG (без скриптів і зовнішніх посилань)
+Un de mes dessins ¦ Один из моих рисунков ¦ Один із моїх малюнків
+Dessin vectoriel → mes dessins enregistrés ¦ Векторный рисунок → мои сохранённые рисунки ¦ Векторний малюнок → мої збережені малюнки
+Coller un SVG ¦ Вставить SVG ¦ Вставити SVG
+Le code <svg>…</svg> d’un dessin ¦ Код <svg>…</svg> рисунка ¦ Код <svg>…</svg> малюнка
+📋 Coller un SVG ¦ 📋 Вставить SVG ¦ 📋 Вставити SVG
+Colle ici le code du dessin, de <svg> à </svg>. Les scripts et les liens vers l’extérieur sont retirés. ¦ Вставь сюда код рисунка, от <svg> до </svg>. Скрипты и внешние ссылки удаляются. ¦ Встав сюди код малюнка, від <svg> до </svg>. Скрипти й зовнішні посилання видаляються.
+Ajouter le dessin ¦ Добавить рисунок ¦ Додати малюнок
+Un texte du Traitement de texte (une lettre, un récit), mis au propre pour la page ¦ Текст из Текстового редактора (письмо, рассказ), аккуратно оформленный для страницы ¦ Текст із Текстового редактора (лист, розповідь), охайно оформлений для сторінки
+Ce document est vide. ¦ Этот документ пуст. ¦ Цей документ порожній.
+Vidéo, son, dessin et texte ¦ Видео, звук, рисунок и текст ¦ Відео, звук, малюнок і текст
+🎬 Changer la vidéo… ¦ 🎬 Сменить видео… ¦ 🎬 Змінити відео…
+🎧 Changer le son… ¦ 🎧 Сменить звук… ¦ 🎧 Змінити звук…
+Le fichier part avec le site (dossier medias/) à l’export et à la publication. ¦ Файл уходит вместе с сайтом (папка medias/) при экспорте и публикации. ¦ Файл іде разом із сайтом (тека medias/) під час експорту й публікації.
+Un autre son ¦ Другой звук ¦ Інший звук
+Une autre vidéo ¦ Другое видео ¦ Інше відео
+{what} (dossier medias/) ¦ {what} (папка medias/) ¦ {what} (тека medias/)
+vidéo ou son ¦ видео или звук ¦ відео або звук
+vidéos ou sons ¦ видео или звуки ¦ відео або звуки
+{what} : trop lourd pour un site (90 Mo au plus par fichier, 300 Mo en tout) ¦ {what}: слишком тяжело для сайта (не больше 90 МБ на файл, 300 МБ всего) ¦ {what}: завеликі для сайту (не більше 90 МБ на файл, 300 МБ усього)
+vidéo ou son pas mis ¦ видео или звук не добавлены ¦ відео або звук не додано
+vidéos ou sons pas mis ¦ видео или звуки не добавлены ¦ відео або звуки не додано
+Mon site web n’est pas chargé : recharge la page. ¦ Мой сайт не загружен: перезагрузи страницу. ¦ Мій сайт не завантажено: перезавантаж сторінку.
+Mon site web ne sait pas recevoir ça. ¦ Мой сайт не умеет это принимать. ¦ Мій сайт не вміє це приймати.
+Ce texte est vide. ¦ Этот текст пуст. ¦ Цей текст порожній.
+Mon site ¦ Мой сайт ¦ Мій сайт
+ouvert ¦ открыт ¦ відкрито
+la dernière fois ¦ в прошлый раз ¦ минулого разу
+ouvert, pas encore enregistré ¦ открыт, ещё не сохранён ¦ відкрито, ще не збережено
+{what} : sur quel site ? ¦ {what}: на какой сайт? ¦ {what}: на який сайт?
+Un nouveau site ¦ Новый сайт ¦ Новий сайт
+Sur quelle page ? ¦ На какую страницу? ¦ На яку сторінку?
+Une nouvelle page… ¦ Новая страница… ¦ Нова сторінка…
+📄 Nouvelle page ¦ 📄 Новая страница ¦ 📄 Нова сторінка
+Le nom de la page (il apparaît dans le menu) : ¦ Название страницы (появится в меню): ¦ Назва сторінки (з’явиться в меню):
+La vidéo ¦ Видео ¦ Відео
+{what} est sur la page « {page} » de « {site} » ¦ {what} на странице « {page} » сайта « {site} » ¦ {what} на сторінці « {page} » сайту « {site} »
+vidéos WebM ¦ видео WebM ¦ відео WebM
+Les iPhone d’avant 2024 ne la lisent pas : préfère le MP4 (H.264), que tout le monde lit. ¦ iPhone до 2024 года его не воспроизводят: лучше MP4 (H.264), который читают все. ¦ iPhone до 2024 року його не відтворюють: краще MP4 (H.264), який читають усі.
+vidéos .mov (QuickTime) ¦ видео .mov (QuickTime) ¦ відео .mov (QuickTime)
+Souvent illisible hors d’Apple : refais-la en MP4 (🎬 Montage vidéo → Exporter). ¦ Часто не воспроизводится вне Apple: переделай в MP4 (🎬 Видеомонтаж → Экспорт). ¦ Часто не відтворюється поза Apple: перероби в MP4 (🎬 Відеомонтаж → Експорт).
+vidéos Ogg (.ogv) ¦ видео Ogg (.ogv) ¦ відео Ogg (.ogv)
+Jamais sur Safari ni sur iPhone : préfère le MP4. ¦ Никогда не работает в Safari и на iPhone: лучше MP4. ¦ Ніколи не працює в Safari та на iPhone: краще MP4.
+sons Ogg (Vorbis, Opus) ¦ звуки Ogg (Vorbis, Opus) ¦ звуки Ogg (Vorbis, Opus)
+Safari ne les lit que depuis 2025 : préfère le MP3 (🎧 Son → Exporter). ¦ Safari читает их только с 2025 года: лучше MP3 (🎧 Звук → Экспорт). ¦ Safari читає їх лише з 2025 року: краще MP3 (🎧 Звук → Експорт).
+sons FLAC ¦ звуки FLAC ¦ звуки FLAC
+Marche partout, mais c’est lourd pour un site : le MP3 se charge bien plus vite. ¦ Работает везде, но тяжело для сайта: MP3 загружается гораздо быстрее. ¦ Працює всюди, але важко для сайту: MP3 завантажується набагато швидше.
+scroll-snap (le diaporama s’arrête sur chaque image) ¦ scroll-snap (слайд-шоу останавливается на каждом изображении) ¦ scroll-snap (слайд-шоу зупиняється на кожному зображенні)
+Marche partout depuis 2019 ; ailleurs, les images défilent sans s’arrêter. ¦ Работает везде с 2019 года; в остальных случаях изображения прокручиваются без остановки. ¦ Працює всюди з 2019 року; в інших випадках зображення прокручуються без зупинки.
+Maison par époques ¦ Дом по эпохам ¦ Дім за епохами
+Ma carte animée ¦ Моя анимированная карта ¦ Моя анімована мапа
+La maison au fil du temps ¦ Дом сквозь время ¦ Дім крізь час
+Le dessin vectoriel n’est pas chargé. ¦ Векторный рисунок не загружен. ¦ Векторний малюнок не завантажено.
+Lecture de la carte… ¦ Чтение карты… ¦ Читання мапи…
+Carte introuvable ¦ Карта не найдена ¦ Мапу не знайдено
+La maison n’est pas chargée. ¦ Дом не загружен. ¦ Дім не завантажено.
+Lecture de la maison… ¦ Чтение дома… ¦ Читання дому…
+Maison introuvable ¦ Дом не найден ¦ Дім не знайдено
+Le plan de cette maison est vide. ¦ План этого дома пуст. ¦ План цього дому порожній.
+Choisir une carte ¦ Выбрать карту ¦ Обрати мапу
+Chercher une carte… ¦ Найти карту… ¦ Знайти мапу…
+{n} objets ¦ Объектов: {n} ¦ Об’єктів: {n}
+Les objets qui ont des années (onglet Propriétés de la carte) apparaissent à leur date. ¦ Объекты с годами (вкладка Свойства карты) появляются в свою дату. ¦ Об’єкти з роками (вкладка Властивості мапи) з’являються у свою дату.
+Aucune carte enregistrée : fais-en une dans Outils de modification → 🗺️ Carte. ¦ Сохранённых карт нет: создай карту в Инструменты редактирования → 🗺️ Карта. ¦ Збережених мап немає: створи мапу в Інструменти редагування → 🗺️ Мапа.
+Choisir une maison ¦ Выбрать дом ¦ Обрати дім
+Chercher une maison… ¦ Найти дом… ¦ Знайти дім…
+Chaque époque de la maison (🕰) devient un plan, l’un après l’autre, en fondu. ¦ Каждая эпоха дома (🕰) становится планом, один за другим, с плавным переходом. ¦ Кожна епоха дому (🕰) стає планом, один за одним, із плавним переходом.
+Aucune maison enregistrée : dessine-en une dans Outils de modification → 🏠 Maison. ¦ Сохранённых домов нет: нарисуй дом в Инструменты редактирования → 🏠 Дом. ¦ Збережених домів немає: намалюй дім в Інструменти редагування → 🏠 Дім.
+Apparition des objets ¦ Появление объектов ¦ Поява об’єктів
+D’un coup ¦ Сразу ¦ Одразу
+Avance doucement ¦ Плавно ¦ Плавно
+Fondu d’une époque à l’autre (0 à 0,9) ¦ Плавный переход между эпохами (от 0 до 0,9) ¦ Плавний перехід між епохами (від 0 до 0,9)
+L’année et le nom de l’époque en légende ¦ Год и название эпохи в подписи ¦ Рік і назва епохи в підписі
+(une copie de la carte) ¦ (копия карты) ¦ (копія мапи)
+En faire la musique ¦ Сделать музыкой ¦ Зробити музикою
+Ce son passe en musique de fond, pour tout le film ¦ Этот звук станет фоновой музыкой для всего фильма ¦ Цей звук стане фоновою музикою для всього фільму
+Voix retirée. ¦ Голос убран. ¦ Голос прибрано.
+Le son est maintenant la musique du film. ¦ Теперь звук — музыка фильма. ¦ Тепер звук — музика фільму.
+Le son est la voix du film (onglet Film). « 🎵 En faire la musique » pour le mettre en fond. ¦ Звук — это голос фильма (вкладка Фильм). « 🎵 Сделать музыкой », чтобы поставить его фоном. ¦ Звук — це голос фільму (вкладка Фільм). « 🎵 Зробити музикою », щоб поставити його тлом.
+Animer dans le Studio ¦ Анимировать в Студии ¦ Анімувати в Студії
+Le curseur du temps joue tout seul : les objets apparaissent à leur date ¦ Ползунок времени движется сам: объекты появляются в свою дату ¦ Повзунок часу рухається сам: об’єкти з’являються у свою дату
+Le Studio d’animation n’est pas chargé. ¦ Студия анимации не загружена. ¦ Студію анімації не завантажено.
+Aucune carte enregistrée : commence par « ＋ Nouvelle carte ». ¦ Сохранённых карт нет: начни с « ＋ Новая карта ». ¦ Збережених мап немає: почни з « ＋ Нова мапа ».
+Quelle carte animer ? ¦ Какую карту анимировать? ¦ Яку мапу анімувати?
+Les objets qui ont des années (onglet Propriétés) apparaissent à leur date, de la première année à la dernière. ¦ Объекты с годами (вкладка Свойства) появляются в свою дату, от первого года до последнего. ¦ Об’єкти з роками (вкладка Властивості) з’являються у свою дату, від першого року до останнього.
+Un film où le curseur du temps avance tout seul, de la première année à la dernière ¦ Фильм, где ползунок времени движется сам, от первого года до последнего ¦ Фільм, де повзунок часу рухається сам, від першого року до останнього
+Cette carte est trop lourde pour être copiée dans un film : enregistre-la, puis Outils de modification → 🗺️ Carte → « 🎞 Animer dans le Studio ». ¦ Эта карта слишком тяжёлая, чтобы копировать её в фильм: сохрани её, затем Инструменты редактирования → 🗺️ Карта → « 🎞 Анимировать в Студии ». ¦ Ця мапа завелика, щоб копіювати її у фільм: збережи її, потім Інструменти редагування → 🗺️ Мапа → « 🎞 Анімувати в Студії ».
+Le plan ou la vue 3D dans un autre outil : montage, présentation, mise en page, dessin… ¦ План или 3D-вид в другом инструменте: монтаж, презентация, вёрстка, рисунок… ¦ План або 3D-вигляд в іншому інструменті: монтаж, презентація, верстка, малюнок…
+🎞 Animer les époques dans le Studio ¦ 🎞 Анимировать эпохи в Студии ¦ 🎞 Анімувати епохи в Студії
+Animer les époques dans le Studio ¦ Анимировать эпохи в Студии ¦ Анімувати епохи в Студії
+Le plan (image) ¦ План (изображение) ¦ План (зображення)
+La vue 3D (image) ¦ 3D-вид (изображение) ¦ 3D-вигляд (зображення)
+Le plan en dessin (vectoriel, mise en page…) ¦ План рисунком (вектор, вёрстка…) ¦ План малюнком (вектор, верстка…)

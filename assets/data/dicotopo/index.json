@@ -1,0 +1,539 @@
+{
+ "api": "https://dicotopo.cths.fr/api/1.0/search",
+ "built": "2026-11-24",
+ "deps": {
+  "01": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de l’Ain",
+    "bibl": "Philipon (Édouard), Dictionnaire topographique du département de l’Ain, Paris, 1911.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k367437"
+   },
+   "communes": 426,
+   "label": "Ain",
+   "old": 15183,
+   "places": 11281,
+   "size": 504452
+  },
+  "02": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de l’Aisne",
+    "bibl": "Matton (Auguste), Dictionnaire topographique du département de l’Aisne, Paris, 1871.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k39289w"
+   },
+   "communes": 816,
+   "label": "Aisne",
+   "old": 12732,
+   "places": 6435,
+   "size": 357950
+  },
+  "05": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique des Hautes-Alpes",
+    "bibl": "Roman (Joseph), Dictionnaire topographique du département des Hautes-Alpes, Paris, 1884.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k392903"
+   },
+   "communes": 180,
+   "label": "Hautes-Alpes",
+   "old": 6121,
+   "places": 9661,
+   "size": 240417
+  },
+  "07": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de l’Ardèche",
+    "bibl": "Charrié (Pierre), Dictionnaire topographique du département de l’Ardèche, Paris, 1979.",
+    "gallica": ""
+   },
+   "communes": 340,
+   "label": "Ardèche",
+   "old": 7324,
+   "places": 16127,
+   "size": 356010
+  },
+  "10": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de l’Aube",
+    "bibl": "Boutiot (Théophile) et Socard (Émile), Dictionnaire topographique du département de l’Aube, Paris, 1874.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k39291f"
+   },
+   "communes": 443,
+   "label": "Aube",
+   "old": 8735,
+   "places": 3710,
+   "size": 223849
+  },
+  "11": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de l’Aude",
+    "bibl": "Sabarthès (Antoine), Dictionnaire topographique du département de l’Aude, Paris, 1912.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k110095d"
+   },
+   "communes": 441,
+   "label": "Aude",
+   "old": 20590,
+   "places": 14815,
+   "size": 708643
+  },
+  "14": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique du Calvados",
+    "bibl": "Hippeau (Célestin), Dictionnaire topographique du département du Calvados, Paris, 1883.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k2064144"
+   },
+   "communes": 709,
+   "label": "Calvados",
+   "old": 5408,
+   "places": 15320,
+   "size": 359311
+  },
+  "15": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique du Cantal",
+    "bibl": "Amé (Émile), Dictionnaire topographique du département du Cantal, Paris, 1897.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k110093n"
+   },
+   "communes": 264,
+   "label": "Cantal",
+   "old": 35002,
+   "places": 16596,
+   "size": 728923
+  },
+  "18": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique du Cher",
+    "bibl": "Boyer (Hippolyte) et Latouche (Robert), Dictionnaire topographique du département du Cher, Paris, 1926.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k65611244"
+   },
+   "communes": 296,
+   "label": "Cher",
+   "old": 18566,
+   "places": 15716,
+   "size": 528198
+  },
+  "21": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Côte-d’Or",
+    "bibl": "Roserot (Alphonse), Dictionnaire topographique du département de la Côte-d’Or, Paris, 1924.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k1100941"
+   },
+   "communes": 716,
+   "label": "Côte-d'Or",
+   "old": 22557,
+   "places": 7560,
+   "size": 540069
+  },
+  "22": {
+   "bibl": {
+    "abbr": "Dictionnaire des communes des Côtes-d’Armor",
+    "bibl": "Saint-Jouan (Régis de), Dictionnaire des communes : éléments d'histoire et d'archéologie, Saint-Brieuc, 1990.",
+    "gallica": ""
+   },
+   "communes": 373,
+   "label": "Côtes-d'Armor",
+   "old": 1535,
+   "places": 409,
+   "size": 35731
+  },
+  "23": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Creuse",
+    "bibl": "Hemmer (Henri), Dictionnaire topographique du département de la Creuse, dactyl., archives départementales de la Creuse.",
+    "gallica": ""
+   },
+   "communes": 263,
+   "label": "Creuse",
+   "old": 42273,
+   "places": 23704,
+   "size": 1024111
+  },
+  "24": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Dordogne",
+    "bibl": "Gourgues (Alexis de), Dictionnaire topographique du département de la Dordogne, Paris, 1873.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k39292s"
+   },
+   "communes": 571,
+   "label": "Dordogne",
+   "old": 9586,
+   "places": 18551,
+   "size": 540479
+  },
+  "26": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Drôme",
+    "bibl": "Brun-Durand (Justin), Dictionnaire topographique du département de la Drôme, Paris, 1891.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k392934"
+   },
+   "communes": 370,
+   "label": "Drôme",
+   "old": 11618,
+   "places": 12385,
+   "size": 418436
+  },
+  "27": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de l’Eure",
+    "bibl": "Poret de Blosseville (Ernest), Dictionnaire topographique du département de l’Eure, Paris, 1877.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k39294g"
+   },
+   "communes": 676,
+   "label": "Eure",
+   "old": 7908,
+   "places": 11628,
+   "size": 419161
+  },
+  "28": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique d’Eure-et-Loir",
+    "bibl": "Merlet (Lucien), Dictionnaire topographique du département d’Eure-et-Loir, Paris, 1861.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k36741j"
+   },
+   "communes": 412,
+   "label": "Eure-et-Loir",
+   "old": 8107,
+   "places": 7270,
+   "size": 268305
+  },
+  "29": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique du Finistère",
+    "bibl": "Deshayes (Albert), Dictionnaire topographique du Finistère avec la liste exhaustive de toutes les communes, lieux-dits et écarts dans leurs formes officielles et anciennes, Spézet, 2003 ; 2e version inédite, 2021.",
+    "gallica": ""
+   },
+   "communes": 283,
+   "label": "Finistère",
+   "old": 66601,
+   "places": 34976,
+   "size": 1271928
+  },
+  "30": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique du Gard",
+    "bibl": "Germer-Durand (Eugène), Dictionnaire topographique du département du Gard, Paris, 1868.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k39295t"
+   },
+   "communes": 359,
+   "label": "Gard",
+   "old": 9162,
+   "places": 7412,
+   "size": 299809
+  },
+  "34": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de l’Hérault",
+    "bibl": "Thomas (Eugène), Dictionnaire topographique du département de l’Hérault, Paris, 1865.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k110096s"
+   },
+   "communes": 338,
+   "label": "Hérault",
+   "old": 4876,
+   "places": 6482,
+   "size": 211785
+  },
+  "36": {
+   "bibl": {
+    "abbr": "Dictionnaire historique de l’Indre",
+    "bibl": "Hubert (Eugène), Dictionnaire historique, géographique et statistique de l’Indre, Châteauroux/Paris, 1889 ; réimpr., Paris, 1985.",
+    "gallica": ""
+   },
+   "communes": 250,
+   "label": "Indre",
+   "old": 1591,
+   "places": 8419,
+   "size": 156372
+  },
+  "41": {
+   "bibl": {
+    "abbr": "Noms des communes de Loir-et-Cher",
+    "bibl": "Villette (Guy), « L’origine des noms des communes de Loir-et-Cher », dans Hommage à Guy Villette. Quelques études toponymiques et historiques, éd. Marianne Mulon et Gérard Taverdet, s.l., 1992, p. 135-196.",
+    "gallica": ""
+   },
+   "communes": 290,
+   "label": "Loir-et-Cher",
+   "old": 1351,
+   "places": 324,
+   "size": 25317
+  },
+  "42": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Loire",
+    "bibl": "Dufour (Jean-Édouard), Dictionnaire topographique du Forez et des paroisses du Lyonnais et du Beaujolais formant le département de la Loire, Mâcon, 1946.",
+    "gallica": ""
+   },
+   "communes": 330,
+   "label": "Loire",
+   "old": 29396,
+   "places": 12613,
+   "size": 763692
+  },
+  "43": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Haute-Loire",
+    "bibl": "Chassaing (Augustin) et Jacotin (Antoine), Dictionnaire topographique du département de la Haute-Loire, Paris, 1907.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k392965"
+   },
+   "communes": 277,
+   "label": "Haute-Loire",
+   "old": 17370,
+   "places": 9269,
+   "size": 441763
+  },
+  "44": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Loire-Inférieure",
+    "bibl": "Quilgars (Henri), Dictionnaire topographique du département de la Loire-Inférieure, Nantes, 1906.",
+    "gallica": ""
+   },
+   "communes": 221,
+   "label": "Loire-Atlantique",
+   "old": 1790,
+   "places": 20577,
+   "size": 373021
+  },
+  "51": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Marne",
+    "bibl": "Longnon (Auguste), Dictionnaire topographique du département de la Marne, Paris, 1891.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k39298v"
+   },
+   "communes": 635,
+   "label": "Marne",
+   "old": 15768,
+   "places": 6626,
+   "size": 424890
+  },
+  "52": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Haute-Marne",
+    "bibl": "Roserot (Alphonse), Dictionnaire topographique du département de la Haute-Marne, Paris, 1903.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k39297h"
+   },
+   "communes": 437,
+   "label": "Haute-Marne",
+   "old": 7784,
+   "places": 4139,
+   "size": 203100
+  },
+  "54": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Meurthe",
+    "bibl": "Lepage (Henri), Dictionnaire topographique du département de la Meurthe, Paris, 1862.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k96349681"
+   },
+   "communes": 718,
+   "label": "Meurthe-et-Moselle",
+   "old": 6150,
+   "places": 3933,
+   "size": 222571
+  },
+  "55": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Meuse",
+    "bibl": "Liénard (Félix), Dictionnaire topographique du département de la Meuse, Paris, 1872.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k392996"
+   },
+   "communes": 511,
+   "label": "Meuse",
+   "old": 6844,
+   "places": 6079,
+   "size": 256531
+  },
+  "56": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique du Morbihan",
+    "bibl": "Rosenzweig (Louis), Dictionnaire topographique du département du Morbihan, Paris, 1870.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k39300k"
+   },
+   "communes": 238,
+   "label": "Morbihan",
+   "old": 1705,
+   "places": 20742,
+   "size": 442569
+  },
+  "57": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Moselle",
+    "bibl": "Bouteiller (Ernest de), Dictionnaire topographique du département de la Moselle, Paris, 1874.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k39301x"
+   },
+   "communes": 611,
+   "label": "Moselle",
+   "old": 9728,
+   "places": 3662,
+   "size": 236033
+  },
+  "58": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Nièvre",
+    "bibl": "Soultrait (Georges de), Dictionnaire topographique du département de la Nièvre, Paris, 1865.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k61272v"
+   },
+   "communes": 313,
+   "label": "Nièvre",
+   "old": 7161,
+   "places": 9276,
+   "size": 283419
+  },
+  "60": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de l’Oise",
+    "bibl": "Lambert (Émile), Dictionnaire topographique du département de l’Oise, Amiens, 1982.",
+    "gallica": ""
+   },
+   "communes": 706,
+   "label": "Oise",
+   "old": 30444,
+   "places": 3863,
+   "size": 443521
+  },
+  "62": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique du Pas-de-Calais",
+    "bibl": "Loisne (Auguste de), Dictionnaire topographique du département du Pas-de-Calais, Paris, 1907.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k1101013"
+   },
+   "communes": 890,
+   "label": "Pas-de-Calais",
+   "old": 19357,
+   "places": 10667,
+   "size": 538560
+  },
+  "64": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique des Basses-Pyrénées",
+    "bibl": "Raymond (Paul), Dictionnaire topographique du département des Basses-Pyrénées, Paris, 1863.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k110099x"
+   },
+   "communes": 555,
+   "label": "Pyrénées-Atlantiques",
+   "old": 5412,
+   "places": 5799,
+   "size": 232326
+  },
+  "68": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique du Haut-Rhin",
+    "bibl": "Stoffel (Georges), Dictionnaire topographique du département du Haut-Rhin, Paris, 1868.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k399665"
+   },
+   "communes": 479,
+   "label": "Haut-Rhin",
+   "old": 7608,
+   "places": 10922,
+   "size": 357055
+  },
+  "71": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de Saône-et-Loire",
+    "bibl": "Rigault (Jean), Dictionnaire topographique du département de Saône-et-Loire, Paris, 2008.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k3205682j"
+   },
+   "communes": 576,
+   "label": "Saône-et-Loire",
+   "old": 69103,
+   "places": 20208,
+   "size": 1298707
+  },
+  "72": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Sarthe",
+    "bibl": "Vallée (Eugène) et Latouche (Robert), Dictionnaire topographique du département de la Sarthe, tome 1, Paris, 1950-1952.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k6562600r"
+   },
+   "communes": 414,
+   "label": "Sarthe",
+   "old": 30831,
+   "places": 49115,
+   "size": 1335512
+  },
+  "76": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Seine-Maritime",
+    "bibl": "Robillard de Beaurepaire (Charles de) et Laporte (dom Jean), Dictionnaire topographique du département de la Seine-Maritime, 2 t., Paris, 1982-1984.",
+    "gallica": ""
+   },
+   "communes": 750,
+   "label": "Seine-Maritime",
+   "old": 76293,
+   "places": 31052,
+   "size": 2035068
+  },
+  "77": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de Seine-et-Marne",
+    "bibl": "Stein (Henri) et Hubert (Jean), Dictionnaire topographique du département de Seine-et-Marne, Paris, 1954.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k96129891"
+   },
+   "communes": 523,
+   "label": "Seine-et-Marne",
+   "old": 28625,
+   "places": 17402,
+   "size": 874522
+  },
+  "79": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique des Deux-Sèvres",
+    "bibl": "Ledain (Bélisaire), Dictionnaire topographique du département des Deux-Sèvres, Poitiers, 1902.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k110100q"
+   },
+   "communes": 304,
+   "label": "Deux-Sèvres",
+   "old": 12190,
+   "places": 11651,
+   "size": 395300
+  },
+  "80": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Somme",
+    "bibl": "Garnier (Jacques), Dictionnaire topographique du département de la Somme, tome 1, Paris/Amiens, 1867-1878.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k1109689"
+   },
+   "communes": 783,
+   "label": "Somme",
+   "old": 19734,
+   "places": 5802,
+   "size": 369431
+  },
+  "86": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Vienne",
+    "bibl": "Redet (Louis-François-Xavier), Dictionnaire topographique du département de la Vienne, Paris, 1881.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k110098j"
+   },
+   "communes": 295,
+   "label": "Vienne",
+   "old": 22363,
+   "places": 11968,
+   "size": 597440
+  },
+  "88": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique des Vosges",
+    "bibl": "Marichal (Paul), Dictionnaire topographique du département des Vosges, Paris, 1941.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k6561169q"
+   },
+   "communes": 531,
+   "label": "Vosges",
+   "old": 16774,
+   "places": 17258,
+   "size": 635138
+  },
+  "89": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de l’Yonne",
+    "bibl": "Quantin (Maximilien), Dictionnaire topographique du département de l’Yonne, Paris, 1862.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k1100975"
+   },
+   "communes": 467,
+   "label": "Yonne",
+   "old": 4582,
+   "places": 5925,
+   "size": 199232
+  }
+ },
+ "licence": "Licence Ouverte 2.0 (Etalab), équivalente à CC BY 4.0",
+ "licence_url": "https://www.etalab.gouv.fr/wp-content/uploads/2017/04/ETALAB-Licence-Ouverte-v2.0.pdf",
+ "mention": "DicoTopo — Dictionnaire topographique de la France, Comité des travaux historiques et scientifiques (CTHS), Archives nationales (Centre d’onomastique), École nationale des chartes",
+ "source": "DicoTopo — Dictionnaire topographique de la France",
+ "url": "https://dicotopo.cths.fr"
+}

@@ -1,0 +1,710 @@
+fr ¦ ro
+# 🏠 Plan de maison : les objets en plus, les styles, le choix « 🎨 Style » (heritage-house-objets.js, heritage-house-lib.js)
+Meubles de style ¦ Mobilier de epocă
+🎨 Tous les styles ¦ 🎨 Toate stilurile
+Sans les meubles de style ¦ Fără mobilier de epocă
+D’ailleurs ¦ Din alte părți
+Modernes ¦ Moderne
+Rien dans le style « {s} » ici : choisis « 🎨 Tous les styles ». ¦ Nimic în stilul „{s}” aici: alege „🎨 Toate stilurile”.
+Louis XIII ¦ Ludovic al XIII-lea
+Louis XIV ¦ Ludovic al XIV-lea
+Régence ¦ Regență
+Louis XV ¦ Ludovic al XV-lea
+Louis XVI ¦ Ludovic al XVI-lea
+Directoire ¦ Directorat
+Empire ¦ Empire
+Restauration ¦ Restaurație
+Charles X ¦ Carol al X-lea
+Louis-Philippe ¦ Louis-Philippe
+Napoléon III ¦ Napoleon al III-lea
+Art nouveau ¦ Art nouveau
+Art déco ¦ Art deco
+Henri II ¦ Henric al II-lea
+Renaissance ¦ Renaștere
+Biedermeier ¦ Biedermeier
+victorien ¦ victorian
+Chippendale ¦ Chippendale
+Queen Anne ¦ Queen Anne
+gustavien ¦ gustavian
+shaker ¦ shaker
+colonial ¦ colonial
+marocain ¦ marocan
+japonais ¦ japonez
+chinois laqué ¦ chinezesc lăcuit
+Thonet ¦ Thonet
+vénitien ¦ venețian
+normand ¦ normand
+breton ¦ breton
+basque ¦ basc
+alsacien ¦ alsacian
+savoyard ¦ savoiard
+auvergnat ¦ auvergnat
+bressan ¦ din Bresse
+lorrain ¦ lorren
+landais ¦ din Landes
+vendéen ¦ din Vendée
+limousin ¦ limousin
+bourguignon ¦ burgund
+catalan ¦ catalan
+corse ¦ corsican
+champenois ¦ din Champagne
+flamand ¦ flamand
+franc-comtois ¦ din Franche-Comté
+béarnais ¦ din Béarn
+dauphinois ¦ din Dauphiné
+picard ¦ picard
+gascon ¦ gascon
+années 1930 ¦ anii 1930
+années 1950 ¦ anii 1950
+années 1960 ¦ anii 1960
+années 1970 ¦ anii 1970
+années 1980 ¦ anii 1980
+scandinave ¦ scandinav
+industriel ¦ industrial
+contemporain ¦ contemporan
+laqué blanc ¦ lăcuit alb
+en pin ¦ din pin
+en chêne clair ¦ din stejar deschis
+en merisier ¦ din cireș
+en noyer ¦ din nuc
+en acajou ¦ din mahon
+en rotin ¦ din ratan
+en bambou ¦ din bambus
+en métal ¦ din metal
+patiné (shabby chic) ¦ patinat (shabby chic)
+bohème ¦ boem
+en teck ¦ din tec
+Chiffonnier ¦ Chifonier
+Table de salle à manger ¦ Masă de sufragerie
+Pendule ¦ Pendulă
+Bonnetière ¦ Dulap înalt îngust
+Desserte ¦ Masă de servire
+Buffet de cuisine ¦ Bufet de bucătărie
+Table de toilette ¦ Masă de toaletă
+Horloge de parquet ¦ Ceas cu pendul de podea
+Pommier ¦ Măr
+Poirier ¦ Păr
+Cerisier ¦ Cireș
+Prunier ¦ Prun
+Pêcher ¦ Piersic
+Abricotier ¦ Cais
+Cognassier ¦ Gutui
+Châtaignier ¦ Castan comestibil
+Figuier ¦ Smochin
+Olivier ¦ Măslin
+Citronnier en bac ¦ Lămâi în ghiveci
+Oranger en bac ¦ Portocal în ghiveci
+Noisetier ¦ Alun
+Mûrier ¦ Dud
+Tilleul ¦ Tei
+Platane ¦ Platan
+Marronnier ¦ Castan sălbatic
+Hêtre ¦ Fag
+Frêne ¦ Frasin
+Saule pleureur ¦ Salcie plângătoare
+Peuplier ¦ Plop
+Érable ¦ Arțar
+Magnolia ¦ Magnolie
+Lilas ¦ Liliac
+Cerisier du Japon ¦ Cireș japonez
+Orme ¦ Ulm
+Acacia ¦ Salcâm
+Charme ¦ Carpen
+Sureau ¦ Soc
+Tilleul de la Liberté ¦ Teiul Libertății
+Sapin ¦ Brad
+Épicéa ¦ Molid
+Pin parasol ¦ Pin umbrelă
+Pin sylvestre ¦ Pin silvestru
+Cyprès ¦ Chiparos
+If ¦ Tisă
+Cèdre ¦ Cedru
+Thuya ¦ Tuia
+Rosier ¦ Trandafir
+Rosier grimpant ¦ Trandafir agățător
+Hortensia ¦ Hortensie
+Lavande ¦ Lavandă
+Romarin ¦ Rozmarin
+Thym ¦ Cimbru
+Buis taillé en boule ¦ Buxus tuns în formă de sferă
+Forsythia ¦ Forsiția
+Laurier-sauce ¦ Dafin
+Laurier-rose ¦ Leandru
+Buddleia ¦ Buddleia
+Camélia ¦ Camelie
+Rhododendron ¦ Rododendron
+Azalée ¦ Azalee
+Houx ¦ Ilice
+Cassissier ¦ Coacăz negru
+Groseillier ¦ Coacăz
+Framboisier ¦ Zmeur
+Pied de vigne ¦ Viță-de-vie
+Bambou ¦ Bambus
+Bananier ¦ Bananier
+Palmier ¦ Palmier
+Herbes de la pampa ¦ Iarbă de pampas
+Graminées ¦ Graminee ornamentale
+Fuchsia ¦ Fucsie
+Glycine ¦ Glicină
+Lierre ¦ Iederă
+Fougère ¦ Ferigă
+Massif de géraniums ¦ Strat de mușcate
+Massif de tournesols ¦ Strat de floarea-soarelui
+Massif de tulipes ¦ Strat de lalele
+Massif de jonquilles ¦ Strat de narcise
+Massif d’iris ¦ Strat de stânjenei
+Massif de dahlias ¦ Strat de dalii
+Massif de soucis ¦ Strat de gălbenele
+Massif de pivoines ¦ Strat de bujori
+Massif de marguerites ¦ Strat de margarete
+Carré de fraisiers ¦ Strat de căpșuni
+Rang de pommes de terre ¦ Rând de cartofi
+Rang de salades ¦ Rând de salată
+Rang de tomates ¦ Rând de roșii
+Rang de carottes ¦ Rând de morcovi
+Rang de poireaux ¦ Rând de praz
+Rang de haricots à rames ¦ Rând de fasole urcătoare
+Rang de choux ¦ Rând de varză
+Planche de courges ¦ Strat de dovleci
+Planche d’oignons ¦ Strat de ceapă
+Carré d’aromatiques ¦ Strat de plante aromatice
+Pelouse ¦ Gazon
+Prairie fleurie ¦ Pajiște cu flori
+Pot de géraniums ¦ Ghiveci cu mușcate
+Jardinière de fleurs ¦ Jardinieră cu flori
+Agapanthe en pot ¦ Agapanthus în ghiveci
+Buis en pot ¦ Buxus în ghiveci
+Pot de basilic ¦ Ghiveci cu busuioc
+Bac à fleurs en zinc ¦ Jardinieră din zinc
+Pot en terre d’Anduze ¦ Vas de lut din Anduze
+Grande jarre provençale ¦ Amforă mare provensală
+Yucca ¦ Yucca
+Plante grasse (aloe) ¦ Suculentă (aloe)
+Cactus colonne ¦ Cactus columnar
+Kentia ¦ Kentia
+Sansevieria ¦ Limba-soacrei
+Pothos suspendu ¦ Pothos suspendat
+Oiseau de paradis (strelitzia) ¦ Pasărea paradisului (strelitzia)
+Bonsaï sur sellette ¦ Bonsai pe postament
+Poinsettia ¦ Crăciuniță
+Plante aromatique sur rebord ¦ Plantă aromatică pe pervaz
+Palmier d’intérieur ¦ Palmier de interior
+Banc de jardin en bois et fonte ¦ Bancă de grădină din lemn și fontă
+Banc de jardin en bois ¦ Bancă de grădină din lemn
+Banc en pierre sculpté ¦ Bancă de piatră sculptată
+Table de bistrot en fer ¦ Masă de bistro din fier
+Table de jardin ronde en résine ¦ Masă rotundă de grădină din plastic
+Table de jardin en teck ¦ Masă de grădină din tec
+Table de pique-nique ¦ Masă de picnic
+Chaise longue ¦ Șezlong
+Transat de plage rayé ¦ Șezlong de plajă cu dungi
+Bain de soleil en résine ¦ Șezlong din plastic
+Portique de jeux ¦ Ansamblu de joacă
+Grand toboggan ¦ Tobogan mare
+Bac à sable couvert ¦ Cutie cu nisip acoperită
+Petit trampoline ¦ Trambulină mică
+Hamac sur pied ¦ Hamac cu suport
+Tonnelle de jardin ¦ Foișor de grădină
+Pergola en bois ¦ Pergolă din lemn
+Pergola bioclimatique ¦ Pergolă bioclimatică
+Parasol déporté ¦ Umbrelă suspendată
+Parasol rouge de terrasse ¦ Umbrelă roșie de terasă
+Fontaine en pierre ¦ Fântână de piatră
+Fontaine murale ¦ Fântână de perete
+Bassin rond ¦ Iaz rotund
+Bassin aux nénuphars ¦ Iaz cu nuferi
+Piscine rectangulaire ¦ Piscină dreptunghiulară
+Petite piscine ¦ Piscină mică
+Piscine hors-sol ronde ¦ Piscină rotundă supraterană
+Spa d’extérieur ¦ Jacuzzi exterior
+Barbecue au charbon ¦ Grătar cu cărbune
+Plancha sur chariot ¦ Plancha pe cărucior
+Four à pizza ¦ Cuptor de pizza
+Brasero en acier ¦ Vatră de foc din oțel
+Composteur en bois ¦ Compostor din lemn
+Potager surélevé ¦ Strat înălțat
+Serre de jardin ¦ Seră de grădină
+Petite serre adossée ¦ Seră mică lipită de perete
+Mangeoire à oiseaux ¦ Hrănitoare pentru păsări
+Cadran solaire sur colonne ¦ Cadran solar pe coloană
+Enrouleur de tuyau ¦ Tambur pentru furtun
+Lanterne de jardin ¦ Felinar de grădină
+Mât de drapeau ¦ Catarg de steag
+Clôture en bois ¦ Gard din lemn
+Grillage rigide ¦ Gard din plasă rigidă
+Barrière blanche ¦ Gard alb
+Haie de lauriers ¦ Gard viu de laur
+Haie de charmille ¦ Gard viu de carpen
+Muret en pierres sèches ¦ Zid de piatră seacă
+Portail en fer forgé ¦ Poartă din fier forjat
+Portail en bois ¦ Poartă din lemn
+Portillon ¦ Portiță
+Abri à bûches ¦ Șopron pentru lemne
+Éolienne de pompage ¦ Moară de vânt pentru pompare
+Puits couvert ¦ Fântână acoperită
+Abreuvoir en pierre ¦ Adăpătoare de piatră
+Abri de jardin en bois ¦ Magazie de grădină din lemn
+Abri de jardin en métal ¦ Magazie de grădină din metal
+Cabane dans les arbres ¦ Căsuță în copac
+Carport ¦ Carport
+Kiosque de jardin ¦ Chioșc de grădină
+Cabane de jardin pour enfants ¦ Căsuță de grădină pentru copii
+Allée en gravier ¦ Alee cu pietriș
+Terrasse dallée ¦ Terasă pavată
+Terrasse en bois ¦ Terasă din lemn
+Bac à compost ouvert ¦ Ladă de compost deschisă
+Jardin japonais ¦ Grădină japoneză
+Rocaille ¦ Grădină de stânci
+Vasque de jardin ¦ Vas de grădină
+Statue de jardin ¦ Statuie de grădină
+Lion en pierre ¦ Leu de piatră
+Boule décorative ¦ Sferă decorativă
+Nichoir à mésanges ¦ Căsuță pentru pițigoi
+Hôtel à insectes ¦ Hotel pentru insecte
+Boîte à livres ¦ Cutie de schimb de cărți
+Ruche kenyane ¦ Stup kenian
+Pompe d’arrosage ¦ Pompă de udat
+Arroseur oscillant ¦ Aspersor oscilant
+Arrosoir en zinc ¦ Stropitoare din zinc
+Tondeuse hélicoïdale ¦ Mașină de tuns elicoidală
+Motoculteur ¦ Motocultor
+Débroussailleuse ¦ Motocositoare
+Souffleur à feuilles ¦ Suflantă de frunze
+Réverbère ancien ¦ Felinar stradal vechi
+Enseigne de commerce ¦ Firmă de magazin
+Vache normande ¦ Vacă normandă
+Vache limousine ¦ Vacă limousin
+Vache charolaise ¦ Vacă charolaise
+Vache bretonne pie noir ¦ Vacă bretonă bălțată neagră
+Vache montbéliarde ¦ Vacă montbéliarde
+Veau ¦ Vițel
+Bœuf de trait ¦ Bou de tracțiune
+Cheval de trait (percheron) ¦ Cal de tracțiune (percheron)
+Cheval de trait breton ¦ Cal de tracțiune breton
+Cheval de selle ¦ Cal de călărie
+Poney ¦ Ponei
+Mulet ¦ Catâr
+Poulain ¦ Mânz
+Brebis ¦ Oaie
+Agneau ¦ Miel
+Bélier ¦ Berbec
+Chevreau ¦ Ied
+Truie ¦ Scroafă
+Porcelet ¦ Purcel
+Coq ¦ Cocoș
+Poule blanche ¦ Găină albă
+Poussin ¦ Pui
+Canard ¦ Rață
+Dindon ¦ Curcan
+Pintade ¦ Bibilică
+Pigeon ¦ Porumbel
+Lapin ¦ Iepure
+Chien de berger ¦ Câine ciobănesc
+Grand chien ¦ Câine mare
+Petit chien ¦ Câine mic
+Chat roux ¦ Pisică roșcată
+Chat noir ¦ Pisică neagră
+Chat tigré ¦ Pisică tărcată
+Chat endormi en boule ¦ Pisică dormind ghemuită
+Lama ¦ Lamă
+Cerf ¦ Cerb
+Sanglier ¦ Mistreț
+Renard ¦ Vulpe
+Tortue ¦ Broască țestoasă
+Héron ¦ Bâtlan
+Cygne ¦ Lebădă
+Cage à oiseaux en osier ¦ Colivie din răchită
+Cage à canaris ¦ Colivie pentru canari
+Poulailler en bois ¦ Coteț de găini din lemn
+Niche en bois ¦ Cușcă de câine din lemn
+Abri pour moutons ¦ Adăpost pentru oi
+Box à cheval ¦ Boxă pentru cal
+Ruche Dadant ¦ Stup Dadant
+Ruche Langstroth ¦ Stup Langstroth
+Ruche en paille tressée ¦ Stup din paie împletite
+Stalle de vache ¦ Stand pentru vacă
+Box de veau ¦ Boxă pentru vițel
+Mangeoire à foin ¦ Iesle pentru fân
+Tonneaux de cidre ¦ Butoaie de cidru
+Cuve à lait ¦ Bidon de lapte
+Barrique de vin ¦ Butoi de vin
+Brabant ¦ Plug brabant
+Herse en bois ¦ Grapă din lemn
+Charrette à foin ¦ Car cu fân
+Char à bancs ¦ Căruță cu bănci
+Chariot à ridelles ¦ Car cu loitre
+Tracteur rouge des années 1950 ¦ Tractor roșu din anii 1950
+Tracteur vert ¦ Tractor verde
+Petit tracteur gris (Ferguson) ¦ Tractor mic gri (Ferguson)
+Faneuse ¦ Mașină de întors fânul
+Moissonneuse-lieuse ¦ Secerătoare-legătoare
+Batteuse ¦ Batoză
+Andaineur ¦ Greblă de brazdă
+Alambic de bouilleur de cru ¦ Cazan de țuică
+Seau à traire ¦ Găleată de muls
+Chèvre angora ¦ Capră angora
+Cochon noir gascon ¦ Porc negru gascon
+Vache salers ¦ Vacă salers
+Vache aubrac ¦ Vacă aubrac
+Vache jersiaise ¦ Vacă Jersey
+Mouton noir ¦ Oaie neagră
+Mouton mérinos ¦ Oaie merinos
+Poule noire ¦ Găină neagră
+Poule rousse ¦ Găină roșcată
+Poule naine ¦ Găină pitică
+Paon blanc ¦ Păun alb
+Paon ¦ Păun
+Lapin blanc ¦ Iepure alb
+Cochon d’Inde ¦ Cobai
+Hamster ¦ Hamster
+Perroquet ¦ Papagal
+Canari ¦ Canar
+Cheval blanc ¦ Cal alb
+Cheval noir ¦ Cal negru
+Chien terre-neuve ¦ Câine Terra-Nova
+Chien labrador ¦ Câine labrador
+Chien beauceron ¦ Câine beauceron
+Chien teckel ¦ Câine teckel
+Volière ¦ Volieră
+Cage à lapin d’intérieur ¦ Cușcă de interior pentru iepure
+Panier pour chien ¦ Coș pentru câine
+Corbeille pour chat ¦ Coș pentru pisică
+Arbre à chat ¦ Ansamblu de cățărat pentru pisici
+Gamelles ¦ Boluri
+Abreuvoir automatique ¦ Adăpătoare automată
+Tonneau de pluie en chêne ¦ Butoi de stejar pentru apă de ploaie
+Cuve à vendange ¦ Cadă pentru struguri
+Pot à lait en fer-blanc ¦ Cană de lapte din tablă
+Charrette à bras ¦ Cărucior de mână
+Diligence ¦ Diligență
+Roulotte ¦ Rulotă de lemn
+Râteau-faneur à cheval ¦ Greblă de fân trasă de cal
+Botteleuse ¦ Presă de baloți
+Semoir ¦ Semănătoare
+Pulvérisateur ¦ Pulverizator
+Bouilloire électrique ¦ Fierbător electric
+Machine à expresso ¦ Espressor
+Machine à café à levier ¦ Espressor cu pârghie
+Cafetière à dosettes ¦ Cafetieră cu capsule
+Presse-agrumes ¦ Storcător de citrice
+Four à micro-ondes encastrable ¦ Cuptor cu microunde încorporat
+Corbeille de fruits ¦ Coș cu fructe
+Corbeille à pain sur pied ¦ Coș de pâine cu picior
+Étagère à épices ¦ Raft pentru condimente
+Desserte de cuisine en bois ¦ Masă de servire din lemn pentru bucătărie
+Bar de cuisine ¦ Bar de bucătărie
+Plaque vitrocéramique ¦ Plită vitroceramică
+Grande plaque à induction ¦ Plită mare cu inducție
+Table de cuisson au gaz (5 feux) ¦ Plită pe gaz (5 arzătoare)
+Hotte en inox ¦ Hotă din inox
+Lave-vaisselle compact ¦ Mașină de spălat vase compactă
+Réfrigérateur rétro vert d’eau ¦ Frigider retro verde-apă
+Réfrigérateur rétro orange ¦ Frigider retro portocaliu
+Évier à deux bacs en céramique ¦ Chiuvetă dublă din ceramică
+Évier timbre d’office ¦ Chiuvetă adâncă de serviciu
+Évier en pierre à potager ¦ Chiuvetă de piatră
+Cuisinière à charbon ¦ Mașină de gătit pe cărbuni
+Buffet de cuisine en formica ¦ Bufet de bucătărie din formica
+Buffet de cuisine bleu ciel ¦ Bufet de bucătărie bleu
+Table en formica ¦ Masă din formica
+Chaise en formica ¦ Scaun din formica
+Tabouret de cuisine ¦ Taburet de bucătărie
+Cruche en grès ¦ Ulcior din gresie
+Fontaine à eau en grès ¦ Vas de apă din gresie
+Balance de cuisine Roberval ¦ Cântar de bucătărie Roberval
+Batterie de casseroles en cuivre ¦ Set de cratițe din cupru
+Égouttoir à vaisselle ¦ Uscător de vase
+Poubelles de tri ¦ Coșuri pentru reciclare
+Planche à découper ¦ Tocător
+Bassine à confiture en cuivre ¦ Lighean de dulceață din cupru
+Pot-au-feu en fonte ¦ Oală din fontă
+Service à vaisselle ¦ Serviciu de masă
+Soupière en faïence ¦ Supieră din faianță
+Panier de légumes ¦ Coș cu legume
+Bocaux de conserves ¦ Borcane cu conserve
+Stérilisateur à bocaux ¦ Sterilizator pentru borcane
+Moulin à légumes ¦ Râșniță de legume
+Crêpière ¦ Aparat de clătite
+Appareil à fondue ¦ Set de fondue
+Extracteur de jus ¦ Storcător de suc
+Cafetière italienne ¦ Cafetieră italiană
+Samovar ¦ Samovar
+Étagère à confitures ¦ Raft pentru dulcețuri
+Chariot de cuisine à roulettes ¦ Cărucior de bucătărie pe roți
+Garde-manger grillagé ¦ Cămară cu plasă
+Coffre à bois de cuisine ¦ Ladă pentru lemne de bucătărie
+Baignoire en fonte sur pieds de lion ¦ Cadă din fontă cu picioare de leu
+Baignoire îlot moderne ¦ Cadă modernă independentă
+Meuble double vasque ¦ Mobilier cu lavoar dublu
+Vasque à poser sur plan bois ¦ Lavoar pe blat de lemn
+Meuble vasque suspendu ¦ Mobilier cu lavoar suspendat
+WC à chasse haute ¦ WC cu rezervor sus
+WC rehaussé ¦ WC înălțat
+Miroir lumineux ¦ Oglindă cu lumină
+Panier à linge en osier ¦ Coș de rufe din răchită
+Broc et cuvette en faïence ¦ Cană și lighean din faianță
+Tub en zinc ¦ Cadă din zinc
+Échelle porte-serviettes ¦ Scară port-prosoape
+Tapis de bain ¦ Covoraș de baie
+Panier à linge en tissu ¦ Coș de rufe din material textil
+Colonne de salle de bain ¦ Coloană de baie
+Étagère de douche ¦ Raft de duș
+Vasque en pierre ¦ Lavoar din piatră
+Baignoire noire ¦ Cadă neagră
+Paroi de douche en verre ¦ Perete de duș din sticlă
+WC avec abattant bois ¦ WC cu capac din lemn
+Meuble vasque en bois ¦ Mobilier cu lavoar din lemn
+Lave-mains ¦ Lavoar mic
+Lave-linge hublot ¦ Mașină de spălat cu hublou
+Bac à laver ¦ Cadă de spălat rufe
+Table à repasser ¦ Masă de călcat
+Fil à linge ¦ Sârmă de rufe
+Essoreuse à rouleaux ¦ Storcător cu role
+Machine à laver à manivelle ¦ Mașină de spălat cu manivelă
+Balai et pelle ¦ Mătură și făraș
+Nettoyeur vapeur ¦ Aparat de curățat cu abur
+Vestiaire d’entrée ¦ Garderobă de hol
+Patère murale ¦ Cuier de perete
+Boîte à clés ¦ Cutie pentru chei
+Console avec miroir ¦ Consolă cu oglindă
+Valet de nuit ¦ Valet pentru haine
+Fauteuil ergonomique ¦ Fotoliu ergonomic
+Bureau d’angle ¦ Birou de colț
+Petit bureau d’écolier ¦ Birou mic de școlar
+Ordinateur de bureau et écran ¦ Calculator de birou cu monitor
+Deux écrans ¦ Două monitoare
+Imprimante multifonction ¦ Imprimantă multifuncțională
+Destructeur de papier ¦ Distrugător de documente
+Armoire à classeurs ¦ Dulap pentru dosare
+Caisson à roulettes ¦ Container pe roți
+Tableau en liège ¦ Panou de plută
+Téléphone de bureau ¦ Telefon de birou
+Globe terrestre de bureau ¦ Glob pământesc de birou
+Globe terrestre sur pied ¦ Glob pământesc pe picior
+Pupitre de lecture ¦ Pupitru de lectură
+Lampe de banquier ¦ Lampă de bancher
+Albums de famille ¦ Albume de familie
+Console de jeux ¦ Consolă de jocuri
+Scanner de documents ¦ Scaner de documente
+Carte de France ancienne ¦ Hartă veche a Franței
+Carte de Cassini encadrée ¦ Hartă Cassini înrămată
+Lutrin d’archives ¦ Pupitru de arhivă
+Loupe sur pied ¦ Lupă pe stativ
+Lecteur de microfilms ¦ Cititor de microfilme
+Couffin en osier ¦ Coș de răchită pentru bebeluș
+Berceau en fer ¦ Leagăn din fier
+Lit mezzanine ¦ Pat mezanin
+Poussette ¦ Cărucior de copil
+Parc pour bébé ¦ Țarc pentru bebeluș
+Cuisine pour enfant ¦ Bucătărie de jucărie
+Ours en peluche géant ¦ Ursuleț de pluș uriaș
+Poupée en porcelaine ¦ Păpușă de porțelan
+Cubes de construction ¦ Cuburi de construcție
+Théâtre de marionnettes ¦ Teatru de păpuși
+Luge ¦ Sanie
+Table de jeux de société ¦ Masă pentru jocuri de societate
+Petite table d’enfant ¦ Măsuță de copil
+Chevalet de peinture ¦ Șevalet
+Pupitre d’écolier double ¦ Bancă dublă de școală
+Tableau noir d’école ¦ Tablă neagră de școală
+Coiffeuse d’enfant ¦ Masă de toaletă pentru copii
+Marchande ¦ Magazin de jucărie
+Circuit de voitures ¦ Circuit de mașinuțe
+Arche de Noé en bois ¦ Arca lui Noe din lemn
+Toupie ¦ Titirez
+Tapis d’éveil ¦ Saltea de joacă
+Piscine à balles ¦ Piscină cu bile
+Tipi d’enfant ¦ Cort tipi pentru copii
+Draisienne ¦ Bicicletă fără pedale
+Voiture à pédales ¦ Mașinuță cu pedale
+Cheval sur roulettes ¦ Căluț pe rotile
+Bureau d’écolier réglable ¦ Birou de școlar reglabil
+Tabouret d’enfant ¦ Taburet de copil
+Suspension trois globes ¦ Lustră cu trei globuri
+Lampe Tiffany ¦ Lampă Tiffany
+Lampe en opaline ¦ Lampă din opalină
+Lampe à poser en céramique ¦ Veioză din ceramică
+Lampadaire trépied en bois ¦ Lampadar trepied din lemn
+Lampadaire arc en marbre ¦ Lampadar arcuit cu marmură
+Liseuse sur pied ¦ Lampă de citit cu picior
+Réglette néon ¦ Tub fluorescent
+Lanterne à bougie ¦ Felinar cu lumânare
+Lampe à pétrole en cuivre ¦ Lampă de petrol din cupru
+Lampe à huile romaine ¦ Opaiț roman
+Bougies sur plateau ¦ Lumânări pe tavă
+Chandelier à trois branches ¦ Sfeșnic cu trei brațe
+Borne lumineuse ¦ Stâlp luminos
+Mur de cadres photos ¦ Perete cu rame foto
+Portrait d’ancêtre ¦ Portret de strămoș
+Tableau de paysage ¦ Tablou cu peisaj
+Marine ¦ Tablou marin
+Cadre photo sur pied ¦ Ramă foto cu suport
+Trophée de chasse ¦ Trofeu de vânătoare
+Maquette de bateau ¦ Machetă de navă
+Sculpture sur socle ¦ Sculptură pe soclu
+Buste en plâtre ¦ Bust din ipsos
+Statuette en bronze ¦ Statuetă din bronz
+Grand vase en terre ¦ Vază mare din lut
+Bouquet de fleurs ¦ Buchet de flori
+Horloge de gare ¦ Ceas de gară
+Coucou de la Forêt-Noire ¦ Ceas cu cuc din Pădurea Neagră
+Rideaux ¦ Draperii
+Grand tapis persan ¦ Covor persan mare
+Tapis berbère à losanges ¦ Covor berber cu romburi
+Kilim ¦ Chilim
+Tapis rond en jute ¦ Covor rotund din iută
+Paravent japonais ¦ Paravan japonez
+Panier à journaux ¦ Suport pentru ziare
+Grand panier en osier ¦ Coș mare din răchită
+Garde-feu en laiton ¦ Paravan de șemineu din alamă
+Terrarium ¦ Terariu
+Diplôme encadré ¦ Diplomă înrămată
+Photo de classe encadrée ¦ Fotografie de clasă înrămată
+Livret de famille sous verre ¦ Carnet de familie sub sticlă
+Canevas brodé ¦ Goblen brodat
+Tapisserie murale ¦ Tapiserie de perete
+Médaillon de famille ¦ Medalion de familie
+Trophée sportif ¦ Trofeu sportiv
+Buste de Marianne ¦ Bustul Mariannei
+Vase de Gien ¦ Vază de Gien
+Vase de Sèvres ¦ Vază de Sèvres
+Potiche chinoise ¦ Vas chinezesc
+Vase en étain ¦ Vază din cositor
+Bouquet de fleurs séchées ¦ Buchet de flori uscate
+Sapin de Noël décoré ¦ Brad de Crăciun împodobit
+Couronne de porte ¦ Coroniță de ușă
+Photophores ¦ Suporturi pentru lumânări
+Bateau en bouteille ¦ Corabie în sticlă
+Maquette de locomotive ¦ Machetă de locomotivă
+Collection de dés à coudre ¦ Colecție de degetare
+Vitrine de minéraux ¦ Vitrină cu minerale
+Collection de papillons ¦ Colecție de fluturi
+Boîte à musique ¦ Cutie muzicală
+Baromètre ¦ Barometru
+Thermomètre ancien ¦ Termometru vechi
+Voilages ¦ Perdele
+Rideaux de velours ¦ Draperii de catifea
+Store bateau ¦ Roletă romană
+Tapis moderne ¦ Covor modern
+Tapis en peau de mouton ¦ Covor din blană de oaie
+Poêle à granulés rouge ¦ Sobă roșie pe peleți
+Poêle Godin ¦ Sobă Godin
+Radiateur vertical design ¦ Calorifer vertical de design
+Chauffe-eau ¦ Boiler
+Téléviseur sur meuble ¦ Televizor pe comodă
+Téléviseur au mur ¦ Televizor pe perete
+Téléviseur à tube ¦ Televizor cu tub
+Chaîne hi-fi ¦ Combină muzicală
+Enceintes colonnes ¦ Boxe tip coloană
+Radiocassette ¦ Radiocasetofon
+Magnétoscope ¦ Videocasetofon
+Ventilateur de plafond ¦ Ventilator de tavan
+Ventilateur de table ¦ Ventilator de masă
+Radiateur soufflant ¦ Aerotermă
+Convecteur électrique ¦ Convector electric
+Poêle à bois moderne ¦ Sobă modernă pe lemne
+Cuisinière à bois moderne ¦ Mașină de gătit modernă pe lemne
+Pompe à chaleur ¦ Pompă de căldură
+Chaudière au fioul ¦ Centrală pe motorină
+Chaudière à gaz murale ¦ Centrală pe gaz de perete
+Cuve à fioul ¦ Rezervor de motorină
+Robot tondeuse ¦ Robot de tuns iarba
+Téléviseur portatif années 70 ¦ Televizor portabil din anii ’70
+Lecteur CD ¦ CD player
+Magnétophone à bandes ¦ Magnetofon cu bandă
+Enceinte connectée ¦ Boxă inteligentă
+Piano droit noir ¦ Pianină neagră
+Piano droit en acajou ¦ Pianină din mahon
+Piano demi-queue ¦ Pian semicoadă
+Piano à queue de concert ¦ Pian de concert
+Épinette ¦ Spinetă
+Orgue de salon ¦ Armoniu de salon
+Clavier électronique ¦ Orgă electronică
+Guitare classique ¦ Chitară clasică
+Banjo ¦ Banjo
+Mandoline ¦ Mandolină
+Violon sur pupitre ¦ Vioară pe pupitru
+Bandonéon ¦ Bandoneon
+Trompette sur pied ¦ Trompetă pe stativ
+Saxophone sur pied ¦ Saxofon pe stativ
+Cor de chasse ¦ Corn de vânătoare
+Clarinette sur pied ¦ Clarinet pe stativ
+Pupitre de musique ¦ Pupitru de note
+Gramophone à pavillon ¦ Gramofon cu pâlnie
+Cornemuse (biniou) ¦ Cimpoi (biniou)
+Timbales ¦ Timpane
+Xylophone ¦ Xilofon
+Marimba ¦ Marimbă
+Cithare ¦ Țiteră
+Ukulélé ¦ Ukulele
+Luth ¦ Lăută
+Flûte traversière sur support ¦ Flaut traversier pe suport
+Flûte à bec ¦ Flaut drept
+Trombone sur pied ¦ Trombon pe stativ
+Hautbois sur support ¦ Oboi pe suport
+Harmonica et pupitre ¦ Muzicuță și pupitru
+Meuble à partitions ¦ Dulap pentru partituri
+Table de mixage ¦ Mixer audio
+Rayonnage de cave ¦ Raft de pivniță
+Cartons de déménagement ¦ Cutii de mutare
+Étagère d’archives familiales ¦ Raft cu arhiva familiei
+Coffret à bijoux ¦ Cutie de bijuterii
+Portant à vêtements ¦ Stender de haine
+Dressing d’angle ¦ Dressing de colț
+Meuble à cases (cubes) ¦ Raft cu compartimente (cuburi)
+Étagère de cellier ¦ Raft de cămară
+Boîtes de rangement en plastique ¦ Cutii de depozitare din plastic
+Caisses en bois ¦ Lăzi din lemn
+Panier à pique-nique ¦ Coș de picnic
+Boîte à couture ¦ Cutie de cusut
+Housse à vêtements ¦ Husă pentru haine
+Crucifix mural ¦ Crucifix de perete
+Crèche provençale et santons ¦ Iesle provensală cu santoni
+Chapelet ¦ Mătănii
+Coin du souvenir (photos et bougie) ¦ Colț al amintirii (fotografii și lumânare)
+Boîte à lettres d’amour ¦ Cutie cu scrisori de dragoste
+Vitrine de médailles ¦ Vitrină cu medalii
+Bouquet de mariée sous globe ¦ Buchet de mireasă sub clopot de sticlă
+Bénitier mural ¦ Agheasmatar de perete
+Icône orthodoxe ¦ Icoană ortodoxă
+Rameau de buis bénit ¦ Ramură de buxus sfințită
+Statue de saint ¦ Statuie de sfânt
+Plaque de communion encadrée ¦ Amintire de la împărtășanie înrămată
+Livre de prières ancien ¦ Carte de rugăciuni veche
+Scie circulaire sur table ¦ Fierăstrău circular de masă
+Scie à onglets ¦ Fierăstrău pentru unghiuri
+Forge et soufflet ¦ Forjă cu foale
+Établi de mécanicien ¦ Banc de mecanic
+Établi d’horloger ¦ Banc de ceasornicar
+Table de cordonnier ¦ Masă de cizmar
+Table de coupe de tailleur ¦ Masă de croit de croitor
+Paillasse de laboratoire ¦ Masă de laborator
+Scie à ruban ¦ Fierăstrău panglică
+Tour à métaux ¦ Strung pentru metale
+Surjeteuse ¦ Mașină de surfilat
+Métier à broder ¦ Gherghef
+Petite citadine ¦ Mașină mică de oraș
+Voiture familiale ¦ Mașină de familie
+Voiture ancienne (années 30) ¦ Mașină de epocă (anii ’30)
+Deux-chevaux ¦ Citroën 2CV
+Coccinelle ¦ VW Broscuță
+Fourgonnette ¦ Furgonetă
+Mobylette ¦ Motoretă
+Vélo de course ¦ Bicicletă de cursă
+Vélo hollandais ¦ Bicicletă olandeză
+Vélo cargo ¦ Bicicletă cargo
+Pneus empilés ¦ Anvelope stivuite
+Échelle double ¦ Scară dublă
+Second congélateur ¦ Al doilea congelator
+Voiture tout-terrain ¦ Mașină de teren
+Voiture de sport ¦ Mașină sport
+Voiture électrique ¦ Mașină electrică
+Camping-car ¦ Autorulotă
+Moto ancienne avec side-car ¦ Motocicletă veche cu ataș
+Vélo ancien ¦ Bicicletă veche
+VTT ¦ Bicicletă de munte
+Borne de recharge ¦ Stație de încărcare
+Armoire à outils ¦ Dulap pentru scule
+Chariot de pneus ¦ Cărucior pentru anvelope
+Caisse à outils ¦ Ladă de scule
+Chargeur de batterie ¦ Încărcător de baterii

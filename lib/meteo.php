@@ -19,12 +19,24 @@ declare(strict_types=1);
  * Résultats gardés dans DATA_DIR/cache/meteo-cache.sqlite (la clé change quand un fichier de données change).
  */
 
-const METEO_COLS = [1 => 'TN', 2 => 'TX', 3 => 'T', 4 => 'RR', 5 => 'SN', 6 => 'FX', 7 => 'NN', 8 => 'SS', 9 => 'WW', 10 => 'Z'];
-const METEO_KINDS = ['complet' => 3, 'europe' => 2, 'socle' => 1]; // ordre de préférence quand une station est dans deux fichiers
+const METEO_COLS = [1 => 'TN', 2 => 'TX', 3 => 'T', 4 => 'RR', 5 => 'SN', 6 => 'FX', 7 => 'NN', 8 => 'SS', 9 => 'WW', 10 => 'Z',
+    11 => 'SH', 12 => 'SF', 13 => 'UX', 14 => 'UN', 15 => 'QL']; // 11 à 15 : les compléments Copernicus (lib/meteo_plus.php)
+require_once __DIR__ . '/meteo_dl.php'; // ⤓ installer un pack en un bouton (version « meteo-donnees » du dépôt)
+require_once __DIR__ . '/meteo_plus.php'; // les compléments Copernicus (packs « plus-… » : neige, ressenti, rivières, CERRA, relevés d'avant 1836)
+const METEO_KINDS = ['complet' => 3, 'europe' => 2, 'socle' => 1, // ordre de préférence quand une station est dans deux fichiers
+    // les packs du monde (GHCN-Daily, NOAA ; scripts/meteo/build-meteo.py monde-<région>) : un par continent, après les autres
+    'monde-europe' => 0, 'monde-amerique-nord' => 0, 'monde-amerique-sud' => 0, 'monde-afrique' => 0, 'monde-asie' => 0, 'monde-oceanie' => 0,
+    // les compléments Copernicus (scripts/meteo/build-meteo.py plus-…) : à part, ils n'entrent pas dans le choix du socle
+    'plus-neige' => -1, 'plus-ressenti' => -1, 'plus-rivieres' => -1, 'plus-cerra' => -1, 'plus-anciennes' => -1];
+/** hors d'Europe, les stations sont rares : sans station à moins de 40 km ni carreau de réanalyse, celle d'un pack du monde
+ *  jusqu'à 150 km (« Station à N km », la pluie devient « il a plu dans la région ») ; une station d'un pack du monde à moins
+ *  de 3 km d'une station d'un autre pack est la même : sautée */
+const METEO_WORLD_KM = 150.0;
+const METEO_WORLD_SAME_KM = 3.0;
 const METEO_MEASURED_KM = 15.0;
 const METEO_STATION_KM = 40.0;
 const METEO_MAX_ALT = 150.0;
-const METEO_CACHE_VERSION = 4; // à monter quand le calcul change
+const METEO_CACHE_VERSION = 5; // à monter quand le calcul change
 const METEO_HEADER_SIZE = 4096;
 const METEO_PACK_MAX = 16 * 1024 * 1024 * 1024; // un pack fait ≈ 3,5 Go au plus : au-delà, ce n'en est pas un
 /** les pays dont la grille des altitudes est dans le socle (meta.relief_countries) ; la météo, elle, reste FR, BE, CH, LU */
@@ -43,8 +55,13 @@ const METEO_SOURCES_INFO = [
     'aemet' => ['AEMET (Espagne)', 'Stations d’Espagne, chaque jour', '≈ 1920 → 2025', 'Pack Europe', 'Réutilisation libre avec mention', '© AEMET — Información elaborada por la Agencia Estatal de Meteorología'],
     'imgw' => ['IMGW-PIB (Pologne)', 'Stations synoptiques de Pologne, chaque jour', '1951 → 2025', 'Pack Europe', 'Données publiques, mention obligatoire', 'Źródło: Instytut Meteorologii i Gospodarki Wodnej – Państwowy Instytut Badawczy'],
     'chmi' => ['ČHMÚ (Tchéquie)', 'Stations de Tchéquie, chaque jour', '≈ 1961 → 2025', 'Pack Europe', 'CC BY 4.0', 'Zdroj: Český hydrometeorologický ústav'],
-    'ghcn' => ['GHCN-Daily (NOAA)', 'Quelques longues séries d’Italie, du Portugal et de Slovaquie', '≈ 1860 → 2025', 'Pack Europe', 'Domaine public (données américaines) ; autres pays : échange OMM, usage non commercial conseillé', 'Menne et al., Global Historical Climatology Network – Daily (GHCN-Daily), NOAA NCEI'],
+    'ghcn' => ['GHCN-Daily (NOAA)', 'Quelques longues séries d’Italie, du Portugal et de Slovaquie (pack Europe) ; dans les packs du monde, les plus longues séries de chaque continent (températures, pluie, neige)', '≈ 1760 → 2025', 'Pack Europe · Packs du monde (Amérique du Nord, Amérique du Sud, Afrique, Asie, Océanie, Europe hors pack Europe)', 'Domaine public (données américaines) ; autres pays : échange OMM, usage non commercial conseillé', 'Menne et al., Global Historical Climatology Network – Daily (GHCN-Daily), NOAA NCEI'],
     'era5' => ['ERA5 (Copernicus)', 'Réanalyse : carreaux ≈ 30 km, 4 heures par jour (socle) ou toutes les heures (packs)', '1940 → 2025', 'Socle · Pack complet · Pack Europe', 'CC BY 4.0', 'Generated using Copernicus Climate Change Service information [2025]'],
+    'era5land' => ['ERA5-Land (Copernicus)', 'Neige au sol, neige tombée, températures min. et max. : carreaux ≈ 9 km, sur terre', '1950 → 2025', 'Complément « Neige et températures fines »', 'CC BY 4.0 (licence Copernicus)', 'Generated using Copernicus Climate Change Service information [2025] — ERA5-Land (Muñoz Sabater, 2019)'],
+    'cerra' => ['CERRA (Copernicus)', 'Réanalyse régionale de l’Europe : températures min. et max., carreaux ≈ 5,5 km', '1985 → 2021', 'Complément « Températures très fines »', 'CC BY 4.0 (licence Copernicus)', 'Generated using Copernicus Climate Change Service information [2025] — CERRA (Ridal et al.)'],
+    'utci' => ['ERA5-HEAT : ressenti UTCI (Copernicus)', 'Ressenti thermique le plus chaud et le plus froid de la journée, carreaux ≈ 30 km', '1940 → 2025', 'Complément « Ressenti thermique »', 'CC BY 4.0 (licence Copernicus)', 'Generated using Copernicus Climate Change Service information [2025] — Thermal comfort indices derived from ERA5 reanalysis (Di Napoli et al.)'],
+    'glofas' => ['GloFAS : débit des rivières (Copernicus CEMS)', 'Débit des grandes rivières chaque jour (modèle LISFLOOD), carreaux ≈ 5 km', '1979 → 2025', 'Complément « Débit des rivières »', 'Licence CEMS-FLOODS (libre, redistribution permise avec mention)', 'Copernicus Emergency Management Service information [2025] — GloFAS historical river discharge (Harrigan et al.)'],
+    'c3s-insitu' => ['Relevés anciens (Copernicus, in situ)', 'Les plus vieilles séries de relevés d’Europe (relevés à heures fixes : le plus bas et le plus haut du jour)', '≈ 1720 → 1835', 'Complément « Relevés anciens »', 'CC BY 4.0 (licence Copernicus ; données « open » seulement)', 'Generated using Copernicus Climate Change Service information [2025] — Global land surface atmospheric variables from comprehensive in-situ observations'],
     '20cr' => ['20CRv3 (NOAA / DOE)', 'Reconstitution quotidienne, ≈ 100 km', '1836 → 1939', 'Socle (France, Belgique, Suisse, Luxembourg) · Pack Europe (toute l’Europe)', 'CC BY 4.0 — usage libre avec mention', '20th Century Reanalysis V3, NOAA / DOE'],
 ];
 
@@ -171,11 +188,13 @@ function meteo_km(float $lat1, float $lon1, float $lat2, float $lon2): float
 }
 
 /** Les stations proches qui couvrent l'année, de la plus proche (distance + pénalité d'altitude) à la plus lointaine. */
-function meteo_near_stations(float $lat, float $lon, ?float $alt, int $year, float $maxKm = METEO_STATION_KM, bool $anyYear = false): array
+function meteo_near_stations(float $lat, float $lon, ?float $alt, int $year, float $maxKm = METEO_STATION_KM, bool $anyYear = false, bool $worldOnly = false): array
 {
     $dLat = $maxKm / 111.0; $dLon = $maxKm / max(10.0, 111.0 * cos(deg2rad($lat)));
-    $out = [];
+    $out = []; $others = []; // $others : les stations des autres packs (une station d'un pack du monde trop près d'elles est la même)
     foreach (meteo_files() as $f) {
+        $world = str_starts_with($f['kind'], 'monde-');
+        if ($worldOnly && !$world) { continue; }
         $pdo = meteo_pdo($f['path']); if (!$pdo) { continue; }
         $sql = 'SELECT * FROM stations WHERE lat BETWEEN ? AND ? AND lon BETWEEN ? AND ?' . ($anyYear ? '' : ' AND (debut IS NULL OR debut<=?) AND (fin IS NULL OR fin>=?)');
         $s = $pdo->prepare($sql);
@@ -183,6 +202,8 @@ function meteo_near_stations(float $lat, float $lon, ?float $alt, int $year, flo
         foreach ($s->fetchAll() as $st) {
             $key = $st['source'] . '|' . $st['code'];
             if (isset($out[$key])) { continue; } // déjà trouvée dans un fichier plus complet
+            if ($world) { foreach ($others as [$a, $b]) { if (meteo_km($a, $b, (float) $st['lat'], (float) $st['lon']) < METEO_WORLD_SAME_KM) { continue 2; } } }
+            else { $others[] = [(float) $st['lat'], (float) $st['lon']]; }
             $km = meteo_km($lat, $lon, (float) $st['lat'], (float) $st['lon']);
             $dalt = ($alt !== null && $st['alt'] !== null) ? (float) $st['alt'] - $alt : null;
             $eff = $km + ($dalt !== null ? abs($dalt) / 10.0 : 0.0);
@@ -216,11 +237,33 @@ function meteo_near_cell(string $source, float $lat, float $lon, int $year): ?ar
 function meteo_first_station(float $lat, float $lon): ?array
 {
     $first = null;
-    foreach (meteo_near_stations($lat, $lon, null, 0, 120.0, true) as $st) {
-        if ($st['km'] > 120 || $st['debut'] === null) { continue; }
+    foreach (meteo_near_stations($lat, $lon, null, 0, METEO_WORLD_KM, true) as $st) {
+        if ($st['km'] > ($st['kind'] !== '' && str_starts_with($st['kind'], 'monde-') ? METEO_WORLD_KM : 120) || $st['debut'] === null) { continue; }
         if (!$first || (int) $st['debut'] < (int) $first['debut'] || ((int) $st['debut'] === (int) $first['debut'] && $st['km'] < $first['km'])) { $first = $st; }
     }
     return $first ? ['name' => meteo_short_name((string) $first['nom']), 'year' => (int) $first['debut'], 'km' => (int) round($first['km'])] : null;
+}
+
+/** Les années couvertes près d'ici par les données installées (stations à moins de 120 km, carreaux), ou null : ['from' => 1836, 'to' => 2025]. */
+function meteo_span(float $lat, float $lon): ?array
+{
+    $from = null; $to = null;
+    $take = static function ($a, $b) use (&$from, &$to): void { if ($a !== null) { $from = $from === null ? (int) $a : min($from, (int) $a); } if ($b !== null) { $to = $to === null ? (int) $b : max($to, (int) $b); } };
+    foreach (meteo_near_stations($lat, $lon, null, 0, METEO_WORLD_KM, true) as $st) {
+        if ($st['km'] > (str_starts_with((string) $st['kind'], 'monde-') ? METEO_WORLD_KM : 120)) { continue; }
+        $take($st['debut'], $st['fin']);
+    }
+    foreach (meteo_files() as $f) {
+        $pdo = meteo_pdo($f['path']); if (!$pdo) { continue; }
+        foreach (['era5' => 0.35, '20cr' => 1.0] as $src => $w) {
+            try {
+                $s = $pdo->prepare('SELECT MIN(debut) a, MAX(fin) b FROM grid WHERE source=? AND lat BETWEEN ? AND ? AND lon BETWEEN ? AND ?');
+                $s->execute([$src, $lat - $w, $lat + $w, $lon - $w * 1.5, $lon + $w * 1.5]);
+                $r = $s->fetch(); if ($r && $r['a'] !== null) { $take($r['a'], $r['b']); }
+            } catch (Throwable) {}
+        }
+    }
+    return $from !== null && $to !== null ? ['from' => $from, 'to' => $to] : null;
 }
 
 function meteo_short_name(string $n): string { return trim(preg_split('/\s+[–-]\s+/u', $n)[0] ?? $n); }
@@ -554,9 +597,25 @@ function meteo_day(float $lat, float $lon, ?float $alt, string $date, ?string $t
             $sources[] = '20cr'; $series = [$cell['file'], 'grid_daily', (int) $cell['id'], 'grid'];
         }
     }
+    // hors d'Europe : la station d'un pack du monde jusqu'à 150 km (les stations y sont rares, et il n'y a pas de réanalyse)
+    if (!$series) {
+        foreach (meteo_near_stations($lat, $lon, $alt, $y, METEO_WORLD_KM, false, true) as $st) {
+            $b = meteo_block($st['file'], 'daily', (int) $st['id'], $y);
+            $row = $b ? meteo_row($b, $i) : null;
+            if ($row && (isset($row['tn']) || isset($row['tx']))) { $pick = ['st' => $st, 'row' => $row]; break; }
+        }
+        if ($pick) {
+            $st = $pick['st'];
+            $res += ['reliability' => 'station', 'day' => $pick['row'], 'regional_rain' => true,
+                'station' => ['name' => (string) $st['nom'], 'short' => meteo_short_name((string) $st['nom']), 'km' => round($st['km'], 1), 'dalt' => $st['dalt'] === null ? null : (int) round($st['dalt']), 'alt' => $st['alt'] === null ? null : (int) round((float) $st['alt']), 'country' => $st['pays'], 'source' => $st['source'], 'lat' => (float) $st['lat'], 'lon' => (float) $st['lon']]];
+            $sources[] = $st['source'];
+            $series = [$st['file'], 'daily', (int) $st['id'], 'station'];
+        }
+    }
     if (!$series) {
         $res['ok'] = false; $res['reliability'] = 'none'; $res['why'] = 'far';
         $res['first'] = meteo_first_station($lat, $lon);
+        $res['span'] = meteo_span($lat, $lon); // 🧺 « de quand à quand » la météo existe ici (ex. une date d'après les données installées)
         // ni station à moins de 120 km, ni carreau : hors de la zone de la météo (ex. l'Italie, qui n'a que l'altitude)
         if (!$res['first'] && !meteo_near_cell('era5', $lat, $lon, max(1940, $y)) && !meteo_near_cell('20cr', $lat, $lon, min(1939, max(1836, $y)))) { $res['why'] = 'out'; }
         return $res;
@@ -617,6 +676,8 @@ function meteo_day(float $lat, float $lon, ?float $alt, string $date, ?string $t
         $res['around'] = $around;
     }
     $res['sources'] = meteo_source_rows($sources);
+    // 5. les compléments Copernicus (détail seulement, s'il y a un pack « plus-… ») : neige, températures fines, ressenti, rivière
+    if ($detail && ($plus = meteo_plus_day($lat, $lon, $y, $i))) { $res['plus'] = $plus; }
     return $res;
 }
 
@@ -1076,6 +1137,9 @@ function meteo_api_get(PDO $pdo, string $action, array $q): array
         'meteo_today' => meteo_today_data($pdo, $q),
         'meteo_place' => meteo_place_data($pdo, safe_int($q['id'] ?? 0)),
         'meteo_altitude' => ['m' => meteo_altitude((float) ($q['lat'] ?? 0), (float) ($q['lon'] ?? 0))],
+        // sans internet (ou rien encore en ligne) : une réponse normale qui le dit, pas une erreur du serveur
+        'meteo_dl_info' => (static function () { try { return meteo_dl_info(); } catch (RuntimeException $e) { return $e->getCode() === 404 ? ['version' => '', 'packs' => (object) [], 'not_yet' => true] /* rien de publié encore : « pas encore prêt », pas « site injoignable » */ : ['version' => '', 'packs' => (object) [], 'offline' => true, 'error' => $e->getMessage()]; } })(),
+        'meteo_dl_resume' => meteo_dl_resume((string) ($q['id'] ?? '')),
         default => throw new RuntimeException('Action météo inconnue.'),
     };
 }
@@ -1089,6 +1153,9 @@ function meteo_api_post(string $action, array $data, array $q): array
         'meteo_pack_undo' => meteo_pack_undo($data),
         'meteo_pack_remove' => meteo_pack_remove($data),
         'meteo_pack_restore' => meteo_pack_restore($data),
+        'meteo_dl_start' => meteo_dl_start($data),
+        'meteo_dl_step' => meteo_dl_step($data),
+        'meteo_dl_cancel' => meteo_dl_cancel($data),
         default => throw new RuntimeException('Action météo inconnue.'),
     };
 }

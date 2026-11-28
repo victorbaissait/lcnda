@@ -50,13 +50,17 @@
         const main = [...row.children].find(c => !c.style.order && /\S/.test(c.textContent) && !c.matches('button, select, input, .order-number'));
         (main || (box && /\S/.test(childOf(row, box).textContent) ? childOf(row, box) : null))?.classList.add('ord-main'); // la case et son libellé ensemble : ils prennent la place
     }
+    // ⏱ un bouton déjà examiné (pas une flèche ↑, ou sa ligne déjà rangée) n'est plus relu : la fiche d'une personne en a des centaines,
+    // et la page est relue toutes les 600 ms tant qu'elle se remplit (≈ 1,3 s sur une fiche)
+    const doneBtn = new WeakSet();
     function enhance() {
-        const ups = [...document.querySelectorAll('#workspace button, dialog[open] button')].filter(b => isArrow(b, UP));
+        const ups = [...document.querySelectorAll('#workspace button, dialog[open] button')].filter(b => { if (doneBtn.has(b)) return false; if (isArrow(b, UP)) return true; doneBtn.add(b); return false; });
         for (const up of ups) {
             const row = rowOf(up);
             if (row) setTimeout(() => tidy(row, up), 0); // après la poignée, posée juste en dessous
-            if (!row || row.dataset.dndRow || row.querySelector(HAS_OWN_GRIP) || row.closest('[data-dnd-off]')) continue;
+            if (!row || row.dataset.dndRow || row.querySelector(HAS_OWN_GRIP) || row.closest('[data-dnd-off]')) { if (!row || row.dataset.dndRow || row.dataset.ordRow) doneBtn.add(up); continue; }
             if (!downOf(row)) continue;
+            doneBtn.add(up);
             row.dataset.dndRow = '1';
             const grip = document.createElement('span');
             grip.className = 'dnd-grip'; grip.title = 'Glisser pour déplacer'; grip.setAttribute('aria-hidden', 'true'); grip.textContent = '⠿';
@@ -68,9 +72,11 @@
     }
     /** attendre que la page se calme, mais pas plus de 600 ms : une page qui change sans arrêt (une barre de temps, une animation) ne doit pas laisser les poignées sans clavier.
      *  Seulement pour les poignées (des attributs, rien n'est déplacé) : ranger les lignes, lui, attend vraiment le calme, pour ne pas relancer sans fin les autres outils. */
-    const settle = (fn, wait) => { let t = 0, first = 0; return () => { const now = Date.now(); if (!t) first = now; clearTimeout(t); t = setTimeout(() => { t = 0; fn(); }, now - first > 600 ? 0 : wait); }; };
-    let timer = 0;
-    new MutationObserver(() => { clearTimeout(timer); timer = setTimeout(enhance, 80); }).observe(document.documentElement, {childList: true, subtree: true});
+    // au-delà de 600 ms, le minuteur déjà posé n'est plus repoussé : avant, chaque changement le relançait (même à 0 ms) et une page
+    // qui change à chaque tâche (aperçus qui se chargent, images) ne voyait jamais ses poignées prêtes (⠿ sans Tab, test K20)
+    const settle = (fn, wait) => { let t = 0, first = 0; return () => { const now = Date.now(); if (!t) first = now; else if (now - first > 600) return; clearTimeout(t); t = setTimeout(() => { t = 0; fn(); }, wait); }; };
+    // une page qui bouge sans arrêt (horloge, widgets du tableau de bord) ne doit pas retarder les poignées : au plus 600 ms (settle)
+    new MutationObserver(settle(enhance, 80)).observe(document.documentElement, {childList: true, subtree: true});
 
     const wait = ms => new Promise(r => setTimeout(r, ms));
     /** Presse le bouton, puis attend que l'écran se soit redessiné (ou qu'il ait juste déplacé la ligne) */
@@ -132,7 +138,9 @@
     const GRIPS = '.dnd-grip, .order-grip, .saved-grip, .tile-cat-grip, .h-rt-grip, .ar-grip, .h-sc-grip, .qp-grip, .investigation-item-grip, [data-event-order-grip], .ui-grip';
     const GRIP_LABEL = 'Déplacer : glisse la poignée, ou Alt + ↑ / ↓';
     function gripsReady() {
-        document.querySelectorAll(`#workspace :is(${GRIPS}), dialog[open] :is(${GRIPS})`).forEach(g => {
+        // ⏱ cherché dans #workspace et les fenêtres ouvertes seulement, sans les poignées déjà prêtes (avant : toute la page à chaque fois)
+        const ws = document.getElementById('workspace'), sel = `:is(${GRIPS}):not([data-grip-done])`;
+        [...(ws ? ws.querySelectorAll(sel) : []), ...[...document.querySelectorAll('dialog[open]')].flatMap(d => [...d.querySelectorAll(sel)])].forEach(g => {
             if (g.dataset.gripDone) return; g.dataset.gripDone = '1';
             if (/^[☰≡↕⋮]+$/.test(g.textContent.trim())) g.textContent = '⠿'; // une seule poignée : ⠿
             if (!g.matches('button, a, input') && !g.hasAttribute('tabindex')) g.tabIndex = 0;
@@ -140,7 +148,9 @@
             g.setAttribute('aria-label', GRIP_LABEL); if (!g.title || /^(Déplacer|Glisser pour (déplacer|ranger))$/.test(g.title)) g.title = GRIP_LABEL;
         });
     }
-    new MutationObserver(settle(() => gripsReady(), 90)).observe(document.documentElement, {childList: true, subtree: true});
+    // ⏱ seulement quand une poignée arrive (avant : #workspace relu toutes les 600 ms tant que la page change, ≈ 0,7 s sur une fiche)
+    const gripsSoon = settle(() => gripsReady(), 90);
+    new MutationObserver(recs => { for (const r of recs) for (const n of r.addedNodes) if (n.nodeType === 1 && (n.matches(GRIPS) || n.querySelector(GRIPS))) { gripsSoon(); return; } }).observe(document.documentElement, {childList: true, subtree: true});
     const sameKind = (a, b) => a && b && a.tagName === b.tagName && (a.className.split(' ')[0] || '') === (b.className.split(' ')[0] || '');
     /** une liste à poignée sans flèches (glisser-déposer du navigateur) : on joue le même glisser, d'une ligne */
     function dragOneStep(row, grip, dir) {
@@ -181,4 +191,13 @@
             now?.querySelector(GRIPS)?.focus();
         }
     }, true);
+
+    /* ⠿ une poignée tenue (glisser-déposer du navigateur) : les messages en bas à gauche ne cachent plus l'endroit où l'on dépose.
+     * Sans cela, une ligne sous la pile des messages (ex. renommer trois pages de suite) ne recevait pas le glisser : rien n'était rangé. */
+    let held = false, dragging = false;
+    const hold = on => { held = on; document.documentElement.classList.toggle('lc-grip-held', on); };
+    document.addEventListener('pointerdown', e => { if (e.button === 0 && e.target.closest?.(`[draggable="true"], ${GRIPS}`)) hold(true); }, true);
+    document.addEventListener('dragstart', () => { dragging = true; }, true);
+    ['pointerup', 'dragend', 'drop'].forEach(ev => document.addEventListener(ev, () => { dragging = false; if (held) hold(false); }, true));
+    document.addEventListener('pointercancel', () => setTimeout(() => { if (held && !dragging) hold(false); }, 0), true); // un glisser qui commence annule aussi le pointeur : on garde
 })();

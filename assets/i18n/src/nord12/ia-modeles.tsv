@@ -1,0 +1,35 @@
+fr ¦ ru ¦ uk
+# 🔬 Lecture approfondie : les modèles d’IA (avantages, inconvénients, « à l’essai », avancé) — lib/transcription_actes.php, heritage-transcribe-acte.js
+ia|Modèle ¦ Модель ¦ Модель
+conseillé pour cet ordinateur ({n} Go) ¦ рекомендуется для этого компьютера ({n} ГБ) ¦ рекомендовано для цього комп’ютера ({n} ГБ)
+à l’essai ¦ на пробу ¦ на пробу
+≈ {x} Go à télécharger ¦ ≈ {x} ГБ для загрузки ¦ ≈ {x} ГБ для завантаження
+{n} Go de mémoire conseillés ¦ рекомендуется {n} ГБ памяти ¦ рекомендовано {n} ГБ пам’яті
+trop gros pour cet ordinateur ¦ слишком велика для этого компьютера ¦ завелика для цього комп’ютера
+Autres modèles à essayer ({n}) ¦ Другие модели на пробу ({n}) ¦ Інші моделі на пробу ({n})
+Pas encore essayés par l’app sur des actes : compare-les sur tes actes (« Les deux lectures côte à côte ») avant de t’y fier. ¦ Приложение ещё не пробовало их на актах: сравни их на своих актах («Два прочтения рядом»), прежде чем им доверять. ¦ Застосунок ще не пробував їх на актах: порівняй їх на своїх актах («Два прочитання поруч»), перш ніж їм довіряти.
+Avancé : autre modèle (Ollama) ¦ Дополнительно: другая модель (Ollama) ¦ Додатково: інша модель (Ollama)
+Les modèles déjà installés dans Ollama sur cet ordinateur. Un modèle qui ne sait pas lire une image ne peut pas lire l’acte. Pas essayé par l’app : vérifie toujours le texte. ¦ Модели, уже установленные в Ollama на этом компьютере. Модель, которая не умеет читать изображение, не прочтёт акт. Приложение её не пробовало: всегда проверяй текст. ¦ Моделі, уже встановлені в Ollama на цьому комп’ютері. Модель, яка не вміє читати зображення, не прочитає акт. Застосунок її не пробував: завжди перевіряй текст.
+lit les images ¦ читает изображения ¦ читає зображення
+ne lit pas les images ¦ не читает изображения ¦ не читає зображень
+Aucun autre modèle installé. Dans un terminal : « ollama pull » suivi du nom du modèle. ¦ Других моделей не установлено. В терминале: «ollama pull» и название модели. ¦ Інших моделей не встановлено. У терміналі: «ollama pull» і назва моделі.
+cet ordinateur : {n} Go · chaque modèle se télécharge une seule fois ¦ этот компьютер: {n} ГБ · каждая модель загружается один раз ¦ цей комп’ютер: {n} ГБ · кожна модель завантажується лише раз
+Ce modèle ne sait pas lire une image : choisis un modèle « vision ». ¦ Эта модель не умеет читать изображения: выбери модель «vision». ¦ Ця модель не вміє читати зображення: обери модель «vision».
+le meilleur essayé sur les actes anciens, bon en français et en latin ¦ лучшая из испробованных на старых актах, хороша во французском и латыни ¦ найкраща з випробуваних на старих актах, добра у французькій і латині
+16 Go de mémoire conseillés ¦ рекомендуется 16 ГБ памяти ¦ рекомендовано 16 ГБ пам’яті
+léger et rapide, pour un ordinateur modeste ¦ лёгкая и быстрая, для скромного компьютера ¦ легка й швидка, для скромного комп’ютера
+se trompe plus souvent sur les noms et les écritures difficiles ¦ чаще ошибается в именах и трудном почерке ¦ частіше помиляється в іменах і складному почерку
+pour les ordinateurs puissants (64 Go) : la même famille que le conseillé, plus précise sur les écritures difficiles ¦ для мощных компьютеров (64 ГБ): та же семья, что и рекомендуемая, точнее на трудном почерке ¦ для потужних комп’ютерів (64 ГБ): та сама родина, що й рекомендована, точніша на складному почерку
+lent, gros téléchargement ¦ медленная, большая загрузка ¦ повільна, велике завантаження
+le plus gros qui tienne dans 64 Go ¦ самая большая, что помещается в 64 ГБ ¦ найбільша, що вміщується в 64 ГБ
+très lent, très gros téléchargement, licence moins ouverte ¦ очень медленная, очень большая загрузка, менее открытая лицензия ¦ дуже повільна, дуже велике завантаження, менш відкрита ліцензія
+fort en français, bon pour comprendre l’acte ¦ силён во французском, хорошо понимает акт ¦ сильна у французькій, добре розуміє акт
+32 Go de mémoire conseillés, plus lent ¦ рекомендуется 32 ГБ памяти, медленнее ¦ рекомендовано 32 ГБ пам’яті, повільніша
+bon dans les langues européennes ¦ хорош в европейских языках ¦ добре знає європейські мови
+licence de Google moins ouverte, moins précis sur l’écriture à la main ¦ менее открытая лицензия Google, менее точен на рукописном тексте ¦ менш відкрита ліцензія Google, менш точна на рукописі
+léger, plusieurs langues ¦ лёгкая, несколько языков ¦ легка, кілька мов
+licence de Google, se trompe souvent sur les noms ¦ лицензия Google, часто ошибается в именах ¦ ліцензія Google, часто помиляється в іменах
+annoncé bon en écriture manuscrite ¦ заявлен как хороший в рукописях ¦ заявлена як добра в рукописах
+moins connu, résultats à comparer ¦ менее известна, результаты надо сравнить ¦ менш відома, результати треба порівняти
+très léger, fait pour les documents, ordinateurs modestes ¦ очень лёгкая, сделана для документов, скромные компьютеры ¦ дуже легка, створена для документів, скромні комп’ютери
+faible sur l’écriture à la main ancienne ¦ слаба в старом рукописном тексте ¦ слабка на старому рукописі

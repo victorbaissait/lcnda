@@ -40,3 +40,11 @@ page {n}, ligne {line} ¦ stranica {n}, redak {line} ¦ stran {n}, vrstica {line
 Un texte par page : la lecture rapide et la lecture d’un imprimé se font page par page ; la lecture approfondie peut lire toutes les pages. ¦ Jedan tekst po stranici: brzo čitanje i čitanje tiska idu stranicu po stranicu; temeljito čitanje može pročitati sve stranice. ¦ En besedilo na stran: hitro branje in branje tiska gresta stran za stranjo; temeljito branje lahko prebere vse strani.
 Lecture approfondie : page {i} sur {n}… ¦ Temeljito čitanje: stranica {i} od {n}… ¦ Temeljito branje: stran {i} od {n}…
 Lire toutes les pages avec ce modèle ({n}) ¦ Pročitaj sve stranice ovim modelom ({n}) ¦ Preberi vse strani s tem modelom ({n})
+Ce document a plusieurs pages : pour changer l’image d’une page, ouvre « 📑 Pages du document », retire l’ancienne page puis relie la nouvelle. ¦ Ovaj dokument ima više stranica: da promijeniš sliku stranice, otvori „📑 Stranice dokumenta“, ukloni staru stranicu pa poveži novu. ¦ Ta dokument ima več strani: če želiš zamenjati sliko strani, odpri »📑 Strani dokumenta«, odstrani staro stran in nato poveži novo.
+{zones} sur cette page ({n} en tout) ¦ {zones} na ovoj stranici (ukupno {n}) ¦ {zones} na tej strani (skupaj {n})
+{page} ({i} sur {n}) ¦ {page} ({i} od {n}) ¦ {page} ({i} od {n})
+Lignes déjà écrites ¦ Već napisani retci ¦ Že napisane vrstice
+Seulement les pages pas encore lues ¦ Samo stranice koje još nisu pročitane ¦ Samo strani, ki še niso prebrane
+Toutes les pages ont déjà du texte. ¦ Sve stranice već imaju tekst. ¦ Vse strani že imajo besedilo.
+Lignes à relire ¦ Retci za provjeru ¦ Vrstice za pregled
+Seulement les lignes pas encore relues ¦ Samo retci koji još nisu provjereni ¦ Samo vrstice, ki še niso pregledane

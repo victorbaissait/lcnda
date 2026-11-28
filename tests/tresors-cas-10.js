@@ -26,7 +26,12 @@ module.exports = async (t, {page}, assert) => {
         assert.ok(await page.$('[data-c-memlist]'), 'lien vers Listes › Mémoire familiale');
         page.once('dialog', d => d.accept());
         const id = await page.$eval('[data-c-list] article', a => a.dataset.cId); assert.match(id, /^m\d+$/);
-        await page.click(`[data-c-del="${id}"]`); await page.click('dialog[open] .modal-actions button:not(.secondary)').catch(() => {});
+        // R7 (audit des onglets) : supprimé tout de suite, sans question ; « ↶ Annuler » le remet
+        await page.click(`[data-c-del="${id}"]`);
+        await page.waitForFunction(() => !/Le bruit du moulin/.test(document.querySelector('[data-c-list]')?.innerText || ''), null, {timeout: 8000});
+        await page.evaluate(() => [...document.querySelectorAll('.ui-toast')].reverse().find(x => /supprimé/.test(x.textContent))?.querySelectorAll('button').forEach(b => { if (/Annuler/.test(b.textContent)) b.click(); }));
+        await page.waitForFunction(() => /Le bruit du moulin/.test(document.querySelector('[data-c-list]')?.innerText || ''), null, {timeout: 8000});
+        await page.click(`[data-c-del="${id}"]`);
         await page.waitForFunction(() => !/Le bruit du moulin/.test(document.querySelector('[data-c-list]')?.innerText || ''), null, {timeout: 8000});
     });
 };

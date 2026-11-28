@@ -22,7 +22,7 @@
 .lap-dlg.is-side { position: fixed; inset: 64px 12px auto auto; margin: 0; z-index: 60; box-shadow: 6px 6px 0 rgba(0, 0, 0, .14); max-height: calc(100vh - 80px); }
 .lap-dlg::backdrop { background: rgba(0, 0, 0, .25); }
 .lap-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap; padding: 10px 12px; border-bottom: 2px solid var(--ink); position: sticky; top: 0; background: inherit; z-index: 1; }
-.lap-head h3 { margin: 2px 0 0; font-size: 17px; }
+.lap-head h2 { margin: 2px 0 0; font-size: 17px; }
 .lap-head small { color: var(--muted); font-weight: 400; }
 .lap-acts { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
 .lap-bar, .lap-chips, .lap-sum, .lap-only { padding: 0 12px; }

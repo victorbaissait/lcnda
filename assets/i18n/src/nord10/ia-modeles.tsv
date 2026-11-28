@@ -1,0 +1,35 @@
+fr ¦ sq ¦ mt
+# 🔬 Lecture approfondie : les modèles d’IA (avantages, inconvénients, « à l’essai », avancé) — lib/transcription_actes.php, heritage-transcribe-acte.js
+ia|Modèle ¦ Modeli ¦ Mudell
+conseillé pour cet ordinateur ({n} Go) ¦ e rekomanduar për këtë kompjuter ({n} GB) ¦ rakkomandat għal dan il-kompjuter ({n} GB)
+à l’essai ¦ për t’u provuar ¦ għall-prova
+≈ {x} Go à télécharger ¦ ≈ {x} GB për t’u shkarkuar ¦ ≈ {x} GB biex tniżżel
+{n} Go de mémoire conseillés ¦ rekomandohen {n} GB memorie ¦ {n} GB memorja rakkomandata
+trop gros pour cet ordinateur ¦ shumë i madh për këtë kompjuter ¦ kbir wisq għal dan il-kompjuter
+Autres modèles à essayer ({n}) ¦ Modele të tjera për t’u provuar ({n}) ¦ Mudelli oħra biex tipprova ({n})
+Pas encore essayés par l’app sur des actes : compare-les sur tes actes (« Les deux lectures côte à côte ») avant de t’y fier. ¦ Ende të paprovuara nga aplikacioni në akte: krahasoji në aktet e tua («Dy leximet krah për krah») para se t’u besosh. ¦ Għadhom ma ġewx ippruvati mill-app fuq atti: qabbilhom fuq l-atti tiegħek (“Iż-żewġ qari ħdejn xulxin”) qabel ma tafdahom.
+Avancé : autre modèle (Ollama) ¦ E avancuar: model tjetër (Ollama) ¦ Avvanzat: mudell ieħor (Ollama)
+Les modèles déjà installés dans Ollama sur cet ordinateur. Un modèle qui ne sait pas lire une image ne peut pas lire l’acte. Pas essayé par l’app : vérifie toujours le texte. ¦ Modelet tashmë të instaluara në Ollama në këtë kompjuter. Një model që s’di të lexojë imazh s’mund ta lexojë aktin. I paprovuar nga aplikacioni: kontrollo gjithmonë tekstin. ¦ Il-mudelli diġà installati f’Ollama fuq dan il-kompjuter. Mudell li ma jafx jaqra immaġni ma jistax jaqra l-att. Mhux ippruvat mill-app: dejjem iċċekkja t-test.
+lit les images ¦ lexon imazhe ¦ jaqra l-immaġnijiet
+ne lit pas les images ¦ nuk lexon imazhe ¦ ma jaqrax l-immaġnijiet
+Aucun autre modèle installé. Dans un terminal : « ollama pull » suivi du nom du modèle. ¦ Asnjë model tjetër i instaluar. Në një terminal: «ollama pull» dhe emri i modelit. ¦ L-ebda mudell ieħor installat. F’terminal: “ollama pull” segwit mill-isem tal-mudell.
+cet ordinateur : {n} Go · chaque modèle se télécharge une seule fois ¦ ky kompjuter: {n} GB · çdo model shkarkohet vetëm një herë ¦ dan il-kompjuter: {n} GB · kull mudell jitniżżel darba biss
+Ce modèle ne sait pas lire une image : choisis un modèle « vision ». ¦ Ky model s’di të lexojë imazh: zgjidh një model «vision». ¦ Dan il-mudell ma jafx jaqra immaġni: agħżel mudell “vision”.
+le meilleur essayé sur les actes anciens, bon en français et en latin ¦ më i miri i provuar në akte të vjetra, i mirë në frëngjisht dhe latinisht ¦ l-aħjar ippruvat fuq atti antiki, tajjeb bil-Franċiż u bil-Latin
+16 Go de mémoire conseillés ¦ rekomandohen 16 GB memorie ¦ 16 GB memorja rakkomandata
+léger et rapide, pour un ordinateur modeste ¦ i lehtë dhe i shpejtë, për një kompjuter modest ¦ ħafif u mgħaġġel, għal kompjuter modest
+se trompe plus souvent sur les noms et les écritures difficiles ¦ gabon më shpesh te emrat dhe shkrimet e vështira ¦ jiżbalja aktar spiss fl-ismijiet u fil-kitba diffiċli
+pour les ordinateurs puissants (64 Go) : la même famille que le conseillé, plus précise sur les écritures difficiles ¦ për kompjuterë të fuqishëm (64 GB): e njëjta familje si i rekomanduari, më i saktë në shkrimet e vështira ¦ għal kompjuters qawwija (64 GB): l-istess familja tar-rakkomandat, aktar preċiż fil-kitba diffiċli
+lent, gros téléchargement ¦ i ngadaltë, shkarkim i madh ¦ bil-mod, tniżżil kbir
+le plus gros qui tienne dans 64 Go ¦ më i madhi që nxë në 64 GB ¦ l-akbar li jidħol f’64 GB
+très lent, très gros téléchargement, licence moins ouverte ¦ shumë i ngadaltë, shkarkim shumë i madh, licencë më pak e hapur ¦ bil-mod ħafna, tniżżil kbir ħafna, liċenzja inqas miftuħa
+fort en français, bon pour comprendre l’acte ¦ i fortë në frëngjisht, i mirë për ta kuptuar aktin ¦ b’saħħtu fil-Franċiż, tajjeb biex jifhem l-att
+32 Go de mémoire conseillés, plus lent ¦ rekomandohen 32 GB memorie, më i ngadaltë ¦ 32 GB memorja rakkomandata, aktar bil-mod
+bon dans les langues européennes ¦ i mirë në gjuhët evropiane ¦ tajjeb fil-lingwi Ewropej
+licence de Google moins ouverte, moins précis sur l’écriture à la main ¦ licencë më pak e hapur e Google, më pak i saktë në dorëshkrim ¦ liċenzja ta’ Google inqas miftuħa, inqas preċiż fil-kitba bl-idejn
+léger, plusieurs langues ¦ i lehtë, disa gjuhë ¦ ħafif, diversi lingwi
+licence de Google, se trompe souvent sur les noms ¦ licencë e Google, gabon shpesh te emrat ¦ liċenzja ta’ Google, spiss jiżbalja l-ismijiet
+annoncé bon en écriture manuscrite ¦ thuhet se është i mirë në dorëshkrim ¦ jingħad li hu tajjeb fil-kitba bl-idejn
+moins connu, résultats à comparer ¦ më pak i njohur, rezultatet duhen krahasuar ¦ inqas magħruf, ir-riżultati jridu jitqabblu
+très léger, fait pour les documents, ordinateurs modestes ¦ shumë i lehtë, i bërë për dokumente, kompjuterë modestë ¦ ħafif ħafna, magħmul għad-dokumenti, kompjuters modesti
+faible sur l’écriture à la main ancienne ¦ i dobët në dorëshkrimin e vjetër ¦ dgħajjef fil-kitba antika bl-idejn

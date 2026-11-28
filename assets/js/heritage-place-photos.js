@@ -496,7 +496,8 @@
     function refreshAll() {
         if (S()?.module === 'listes' && S().listType === 'place_images') list({all: 1}).then(d => { LD = d; if (S().listType === 'place_images') drawList(); }).catch(() => {});
         document.querySelectorAll('[data-pli-host]').forEach(h => { h.dataset.pliDone = ''; fillHost(h); });
-        if (S()?.module === 'carte' && layerOn()) { MD = null; loadLayer(); }
+        MD = null; // le calque de la Carte est relu à la prochaine ouverture (sinon une image située ailleurs n'y venait qu'après rechargement)
+        if (S()?.module === 'carte' && layerOn()) loadLayer();
     }
     document.addEventListener('click', e => {
         const t = e.target.closest('[data-pp-open], [data-pp-add], [data-pp-map], [data-pp-onmap], [data-pp-askm]');

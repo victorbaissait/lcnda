@@ -1,0 +1,26 @@
+/* ⛰️👥 Sa terre et ses gens (assets/js/heritage-lot10-terre-gens.js) — reprend l'allure de « Son monde et ses coutumes » et de
+ * « Son terroir » (.tr-*, .cplus-*) ; clair et sombre : couleurs prises du texte (currentColor). */
+.l10-place{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:1rem;margin:1rem 0}
+.l10-place:empty{display:none}
+.l10-src{margin:.6rem 0 0;font-size:.82em;opacity:.78}
+.l10-more summary,.l10-quote summary{cursor:pointer;margin:.35rem 0}
+.l10-quote blockquote{margin:.3rem 0 .3rem .2rem;padding:.3rem .7rem;border-left:3px solid color-mix(in srgb,currentColor 25%,transparent);font-style:italic;opacity:.92}
+.l10-quote blockquote small{font-style:normal}
+.l10-list .tr-item small{display:block}
+.l10-item .page-actions{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.25rem}
+.l10-nom-grid{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:1rem;align-items:start}
+.l10-nommap{width:100%;max-width:220px;height:auto}
+.l10-nommap-bg{fill:color-mix(in srgb,currentColor 6%,transparent)}
+.l10-dot{fill:color-mix(in srgb,#4e79a7 70%,transparent);stroke:currentColor;stroke-opacity:.35;stroke-width:.6}
+.l10-bars{display:flex;align-items:flex-end;gap:2px;height:64px;overflow-x:auto;padding-bottom:1rem}
+.l10-bar{position:relative;flex:0 0 16px;height:100%;display:flex;align-items:flex-end}
+.l10-bar i{display:block;width:100%;height:var(--h);background:color-mix(in srgb,currentColor 35%,transparent);border-radius:2px 2px 0 0}
+.l10-bar small{position:absolute;bottom:-1rem;left:0;font-size:.62em;opacity:.7}
+.l10-profil{width:100%;max-width:420px;height:62px;opacity:.85}
+.l10-parcel-form,.l10-walk-form{display:flex;flex-wrap:wrap;gap:.5rem;align-items:flex-end;margin:.3rem 0}
+.l10-parcel-form label{display:flex;flex-direction:column;gap:.2rem;min-width:min(100%,220px)}
+.l10-walk-form [data-l10-walk-to]{min-width:min(100%,260px)}
+.l10-offer{opacity:.85}
+.l10-links{margin:.3rem 0;padding-left:1.1rem;display:grid;gap:.3rem}
+@media (max-width:640px){.l10-nom-grid{grid-template-columns:1fr}.l10-nommap{max-width:100%}}
+@media print{.l10-more[open] summary,.l10-quote summary{display:none}.l10-parcel-form,.l10-item .page-actions,.l10-offer button{display:none}}

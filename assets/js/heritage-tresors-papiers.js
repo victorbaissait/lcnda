@@ -124,7 +124,7 @@
             more: [{label: i18n('⤒ Importer un relevé (XML, CSV)…'), attrs: 'data-pp-imp', title: i18n('Un relevé publié (par exemple sur data.gouv.fr)'), run: importRecords}]});
         host.addEventListener('click', async e => {
             const ed = e.target.closest('[data-pp-edit]'); if (ed) { const it = (await T.items('passport')).find(x => x.id === Number(ed.dataset.ppEdit)); return editPassport(T, it, null, draw); }
-            const del = e.target.closest('[data-pp-del]'); if (del && await A().confirmBox(i18n('Le passeport sera effacé.'), {title: i18n('Supprimer ?'), okLabel: i18n('Supprimer'), danger: true})) { await T.remove(Number(del.dataset.ppDel)); return draw(); }
+            const del = e.target.closest('[data-pp-del]'); if (del) { await T.removeUndo(Number(del.dataset.ppDel), {msg: i18n('Passeport supprimé.'), after: draw}); return; } // R7 : ↶ Annuler
             const at = e.target.closest('[data-pp-attach]'); if (at) { const [ri, pid] = at.dataset.ppAttach.split(':').map(Number), r = imported.records[ri], p = tr.byId.get(pid), {nom, prenom, autres, ...rest} = r;
                 await T.save({kind: 'passport', person_id: pid, title: r.date ? i18n('{what} de {name} ({date})', {what: i18n('Passeport intérieur'), name: T.name(p), date: r.date}) : i18n('{what} de {name}', {what: i18n('Passeport intérieur'), name: T.name(p)}), body: '', data: {...rest, sorte: 'interieur', cote: [r.cote, imported.source].filter(Boolean).join(' · '), releve: `${nom || ''} ${prenom || ''}`.trim(), autres}});
                 T.toast(i18n('Rattaché à {name}.', {name: T.name(p)}), 'success'); return draw(); }

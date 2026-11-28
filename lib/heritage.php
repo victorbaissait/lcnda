@@ -1424,7 +1424,39 @@ function saved_search_results(PDO $pdo, array $criteria, int $searchId = 0): arr
     $people = collection_people($pdo, array_slice($ids, 0, 1000));
     $out = [];
     foreach ($ids as $id) { if (isset($people[$id])) { $out[] = $people[$id] + ['is_new' => $searchId && !isset($seen[$id])]; } }
+    $geo = research_people_places($pdo, array_map(static fn($p) => (int) $p['id'], $out));
+    foreach ($out as &$p) { $p['places'] = $geo[(int) $p['id']] ?? []; } unset($p);
     return ['people' => $out, 'count' => count($ids), 'description' => saved_search_label($criteria)];
+}
+
+/** une réponse avec des fiches (« people ») : chacune reçoit ses lieux placés */
+function research_with_places(PDO $pdo, array $r): array
+{
+    if (empty($r['people']) || !is_array($r['people'])) return $r;
+    $geo = research_people_places($pdo, array_map(static fn($p) => (int) ($p['id'] ?? 0), $r['people']));
+    foreach ($r['people'] as &$p) { if (is_array($p)) $p['places'] = $geo[(int) ($p['id'] ?? 0)] ?? []; } unset($p);
+    return $r;
+}
+
+/** 🗺 les lieux placés d'une liste de personnes (naissance, mariage, décès… au plus 4 chacune) : la carte des résultats de recherche (app-recherche-kit.js) */
+function research_people_places(PDO $pdo, array $ids): array
+{
+    $ids = array_values(array_unique(array_filter(array_map('intval', $ids))));
+    $out = [];
+    foreach (array_chunk($ids, 400) as $chunk) {
+        $m = implode(',', array_fill(0, count($chunk), '?'));
+        $s = $pdo->prepare("SELECT e.id, e.person_id, e.date_text, e.year, t.label AS type, t.gedcom_tag, pl.name AS place, pl.latitude AS lat, pl.longitude AS lon
+            FROM events e JOIN event_types t ON t.id=e.event_type_id JOIN places pl ON pl.id=e.place_id
+            WHERE e.person_id IN ($m) AND pl.latitude IS NOT NULL AND pl.longitude IS NOT NULL
+            ORDER BY e.person_id, CASE WHEN t.gedcom_tag IN ('BIRT','CHR','BAPM') THEN 0 WHEN t.gedcom_tag IN ('MARR') THEN 1 WHEN t.gedcom_tag IN ('DEAT','BURI') THEN 2 ELSE 3 END, COALESCE(e.year, 9999), e.id");
+        $s->execute($chunk);
+        foreach ($s->fetchAll() as $r) {
+            $pid = (int) $r['person_id'];
+            if (count($out[$pid] ?? []) >= 4) continue;
+            $out[$pid][] = ['event_id' => (int) $r['id'], 'type' => (string) $r['type'], 'gedcom_tag' => (string) $r['gedcom_tag'], 'date' => (string) ($r['date_text'] ?: ($r['year'] ?? '')), 'place' => (string) $r['place'], 'lat' => (float) $r['lat'], 'lon' => (float) $r['lon']];
+        }
+    }
+    return $out;
 }
 
 function save_saved_search(PDO $pdo, array $data): array
@@ -1459,7 +1491,9 @@ function mark_saved_search_seen(PDO $pdo, array $data): array
 
 function delete_saved_search(PDO $pdo, array $data): array
 {
-    $pdo->prepare('DELETE FROM saved_searches WHERE id=?')->execute([safe_int($data['id'] ?? 0)]);
+    $id = safe_int($data['id'] ?? 0);
+    undo_keep($pdo, 'saved_search', $id, 'Recherche enregistrée supprimée', [['saved_searches', 'id=?', [$id]]]); // ↶ Annuler (H7)
+    $pdo->prepare('DELETE FROM saved_searches WHERE id=?')->execute([$id]);
     return ['ok' => true];
 }
 
@@ -1492,13 +1526,17 @@ function insee_prenoms_import(PDO $pdo, ?array $file): never
         if ($entry === null) { for ($i = 0; $i < $zip->numFiles; $i++) { $n = (string) $zip->getNameIndex($i); if (preg_match('/\.(csv|txt)$/i', $n)) { $entry = $n; break; } } }
         if ($entry === null) { json_response(['error' => 'Aucun fichier CSV dans ce ZIP.'], 422); }
         $tmpCsv = tempnam(sys_get_temp_dir(), 'prenoms');
-        file_put_contents($tmpCsv, $zip->getFromName($entry));
+        // borné : une « bombe zip » n'est jamais ouverte en entier (le fichier national fait environ 40 Mo)
+        $why = zip_entry_copy_bounded($zip, $entry, $tmpCsv, 1024 * 1048576);
         $zip->close();
+        if ($why !== '') { @unlink($tmpCsv); json_response(['error' => $why], 422); }
         $path = $tmpCsv;
     }
+    if (($conv = text_file_utf16_to_utf8($path)) !== '') { if ($tmpCsv) { @unlink($tmpCsv); } $tmpCsv = $conv; $path = $conv; } // « Texte Unicode » (UTF-16)
     $fh = fopen($path, 'rb');
     $first = (string) fgets($fh);
-    $first = preg_replace('/^\xEF\xBB\xBF/', '', $first);
+    $first = (string) preg_replace('/^\xEF\xBB\xBF/', '', $first);
+    if (!mb_check_encoding($first, 'UTF-8')) { $first = mb_convert_encoding($first, 'UTF-8', 'Windows-1252'); } // n'importe quel octet : jamais d'erreur interne
     $sep = substr_count($first, ';') >= substr_count($first, ',') ? ';' : ',';
     $cols = array_map(static fn($c) => strtolower(ascii_fold(trim($c, " \"\r\n"))), explode($sep, $first));
     $find = static function (array $names) use ($cols): ?int { foreach ($cols as $i => $c) { if (in_array($c, $names, true)) { return $i; } } return null; };
@@ -1537,9 +1575,25 @@ function insee_prenoms_import(PDO $pdo, ?array $file): never
  * Prénoms de la famille comparés à la France : pour chaque prénom donné au XXᵉ siècle (ou après), année du pic national,
  * rang, et années où la famille l'a donné.
  */
-function firstnames_france_data(PDO $pdo, int $minYear = 1900): array
+function firstnames_france_data(PDO $pdo, int $minYear = 1900, int $zoneId = 0): array
 {
     $meta = json_decode((string) ($pdo->query("SELECT value FROM app_settings WHERE key='lcnda-insee-prenoms'")->fetchColumn() ?: ''), true) ?: null;
+    // 📊 le pack « Prénoms d'ici et d'ailleurs » (lib/prenoms_pays.php), s'il est installé, passe devant le fichier importé à la main :
+    // France entière, un département, la Suisse ou le Québec (zone choisie dans la page)
+    $zone = null; $zones = [];
+    if (is_file(__DIR__ . '/prenoms_pays.php')) {
+        require_once __DIR__ . '/prenoms_pays.php';
+        $st = pp_status();
+        if ($st['installed']) {
+            $zones = $st['zones'];
+            foreach ($zones as $z) { if ($zoneId && $z['id'] === $zoneId) { $zone = $z; break; } }
+            foreach ($zone ? [] : $zones as $z) { if ($z['country'] === 'FR' && $z['code'] === '') { $zone = $z; break; } } // sinon la France entière
+            if ($zone) {
+                $src = array_values(array_filter($st['sources'], static fn($x) => $x['pays'] === $zone['country']))[0] ?? null;
+                $meta = ['pack' => true, 'zone' => $zone['id'], 'zone_name' => $zone['name'], 'zone_where' => pp_where($zone), 'from' => $zone['from'], 'to' => $zone['to'], 'source' => $src, 'manual' => $meta];
+            }
+        }
+    }
     $births = $pdo->query("SELECT p.id, p.first_name, p.gender, p.last_name,
             (SELECT e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag IN ('BIRT','CHR','BAPM') AND e.year IS NOT NULL ORDER BY t.gedcom_tag='BIRT' DESC, e.year LIMIT 1) AS year
         FROM persons p WHERE TRIM(COALESCE(p.first_name,''))<>''")->fetchAll();
@@ -1560,8 +1614,9 @@ function firstnames_france_data(PDO $pdo, int $minYear = 1900): array
         $years = array_column($f['people'], 'year'); sort($years);
         $row = ['name' => $f['label'], 'sex' => $f['sex'], 'family_years' => $years, 'people' => $f['people'], 'peak_year' => null, 'peak_count' => 0, 'total' => 0, 'series' => []];
         if ($meta) {
-            $series->execute([$f['key'], $f['sex'], $f['sex']]);
-            foreach ($series->fetchAll() as $s) {
+            if ($zone) { $rowsS = []; foreach (pp_series_by_key($f['key'], $f['sex'], $zone['id']) ?? [] as $y => $n) { $rowsS[] = ['annee' => $y, 'n' => $n]; } }
+            else { $series->execute([$f['key'], $f['sex'], $f['sex']]); $rowsS = $series->fetchAll(); }
+            foreach ($rowsS as $s) {
                 $row['series'][(int) $s['annee']] = (int) $s['n']; $row['total'] += (int) $s['n'];
                 if ((int) $s['n'] > $row['peak_count']) { $row['peak_count'] = (int) $s['n']; $row['peak_year'] = (int) $s['annee']; }
             }
@@ -1571,7 +1626,7 @@ function firstnames_france_data(PDO $pdo, int $minYear = 1900): array
         $out[] = $row;
     }
     usort($out, static fn($a, $b) => count($b['people']) <=> count($a['people']) ?: strcmp($a['name'], $b['name']));
-    return ['meta' => $meta, 'names' => $out, 'min_year' => $minYear];
+    return ['meta' => $meta, 'names' => $out, 'min_year' => $minYear, 'zones' => $zones];
 }
 
 /* ─── 📊 Inventaires après décès ─────────────────────────────────────── */

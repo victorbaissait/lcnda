@@ -100,9 +100,10 @@ function delete_layout_doc(PDO $pdo, array $data): array
     $s = $pdo->prepare('SELECT name FROM layout_documents WHERE id=?'); $s->execute([$id]);
     $name = $s->fetchColumn();
     if ($name === false) { throw new RuntimeException('Document introuvable.'); }
+    $undo = project_undo_keep($pdo, 'layout_documents', $id); // ↶ Annuler (restore_project)
     $pdo->prepare('DELETE FROM layout_documents WHERE id=?')->execute([$id]);
     log_change($pdo, 'meta', 0, 'delete', 'Document de mise en page supprimé : ' . $name);
-    return ['ok' => true];
+    return ['ok' => true, 'undo' => $undo];
 }
 
 /** Les données du livre de famille (mêmes réglages qu'Export propre), pour remplir un document de mise en page */

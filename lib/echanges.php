@@ -485,12 +485,21 @@ function export_ics(PDO $pdo): never
     }
     $people = [];
     foreach ($pdo->query("SELECT p.id, p.first_name, p.last_name, p.gender, p.is_private, p.living_status, p.kind,
-            EXISTS(SELECT 1 FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag IN ('DEAT','BURI','CREM')) AS dead FROM persons p") as $p) {
+            EXISTS(SELECT 1 FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag IN ('DEAT','BURI','CREM')) AS dead,
+            (SELECT MIN(e.year) FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag IN ('BIRT','CHR','BAPM')) AS birth_year FROM persons p") as $p) {
         $people[(int) $p['id']] = $p;
     }
-    $keepPerson = static function (int $id) use ($people, $ids, $onlyLiving): bool {
+    // 🔒 mode confidentialité (Réglages → Exports) : pas d'anniversaire des personnes vivantes ou probablement vivantes
+    // (statut « vivant », ou statut inconnu, né il y a moins de 100 ans et sans décès connu : la règle des autres exports)
+    $privacy = function_exists('export_privacy_enabled') && export_privacy_enabled();
+    $keepPerson = static function (int $id) use ($people, $ids, $onlyLiving, $privacy): bool {
         $p = $people[$id] ?? null;
         if (!$p || (int) $p['is_private'] === 1) { return false; }
+        if ($privacy) {
+            $birth = $p['birth_year'] !== null && $p['birth_year'] !== '' ? (int) $p['birth_year'] : null;
+            $status = (string) ($p['living_status'] ?? '');
+            if ($status === 'living' || (!(int) $p['dead'] && $status !== 'deceased' && $birth && $birth > (int) date('Y') - 100)) { return false; }
+        }
         if ($ids !== null && !isset($ids[$id])) { return false; }
         if ($onlyLiving && ((int) $p['dead'] || ($p['living_status'] ?? '') === 'deceased')) { return false; }
         return true;
@@ -519,6 +528,7 @@ function export_ics(PDO $pdo): never
             if ($e['group'] === 'birth' && !in_array($e['tag'], ['BIRT', 'BAPM', 'CHR'], true)) { continue; }
             $whoIds = array_map(static fn($w) => (int) $w['id'], $e['who']);
             if (!$whoIds || !array_filter($whoIds, $keepPerson)) { continue; }
+            if ($privacy && count(array_filter($whoIds, $keepPerson)) !== count($whoIds)) { continue; } // 🔒 un mariage avec une personne vivante n'est pas écrit (il la nommerait)
             if (array_filter($whoIds, static fn($id) => (int) ($people[$id]['is_private'] ?? 0) === 1)) { continue; }
             if (!$e['d'] || !$e['m'] || $e['approx'] || $e['y'] < 1583) { $skipped++; continue; }
             $names = implode(' et ', array_map(static fn($w) => $w['name'], $e['who']));
@@ -724,6 +734,12 @@ function echanges_geneanet(): bool
     return ($_GET['target'] ?? '') === 'geneanet';
 }
 
+/** Vrai pour un export GEDCOM réglé pour Ancestry (target=ancestry) : voir lib/gedcom.php et lib/arbres_en_ligne.php. */
+function echanges_ancestry(): bool
+{
+    return ($_GET['target'] ?? '') === 'ancestry';
+}
+
 /**
  * Lieu au format de Geneanet (GeneWeb) : « [Lieu-dit] - Commune, Code INSEE, Département, Région, Pays » ; en-tête
  * « PLAC FORM Town, Area code, County, Region, Country ». Le code est celui de la commune s'il est connu.
@@ -739,4 +755,16 @@ function echanges_geneanet_place(array $parts, array $e): string
     $country = trim((string) $parts['country']);
     if (gedcom_fold($country) === 'france') { $country = 'France'; }
     return implode(', ', array_map(static fn($p) => str_replace(',', ' ', gedcom_value($p)), [$town, $code, $parts['county'], $parts['state'], $country]));
+}
+
+/**
+ * Lieu pour Ancestry : « Lieu-dit, Commune, Département, Région, Pays », sans morceau vide (Ancestry rapproche ses lieux de cette
+ * façon : « Tulle, Corrèze, Nouvelle-Aquitaine, France ») ; en-tête « PLAC FORM City, County, State, Country ».
+ */
+function echanges_ancestry_place(array $parts): string
+{
+    $country = trim((string) ($parts['country'] ?? ''));
+    if (gedcom_fold($country) === 'france') { $country = 'France'; }
+    $bits = array_filter(array_map(static fn($p) => trim(str_replace(',', ' ', gedcom_value((string) $p))), [$parts['subdivision'] ?? '', $parts['town'] ?? '', $parts['county'] ?? '', $parts['state'] ?? '', $country]), static fn($p) => $p !== '');
+    return implode(', ', $bits);
 }

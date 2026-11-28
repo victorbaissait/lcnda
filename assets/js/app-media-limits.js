@@ -1,5 +1,5 @@
-/* LCNDA — 📎 Fichiers des médias (serveur : lib/media_limits.php ; maquette : la page des Réglages ci-dessous).
- *  1. Réglages → « 📎 Fichiers des médias » : la taille la plus grande d'une image ou d'un document (100 Mo conseillés),
+/* LCNDA — 📁 Fichiers des médias (serveur : lib/media_limits.php ; maquette : la page des Réglages ci-dessous).
+ *  1. Réglages → « 📁 Fichiers des médias » : la taille la plus grande d'une image ou d'un document (100 Mo conseillés),
  *     d'un son ou d'une vidéo (250 Mo conseillés), et la taille d'image (en millions de points, 120 conseillés) au-delà de
  *     laquelle les outils qui décodent une image (« 🎚️ Mieux voir », ✨ Lire l'acte, Atelier, retouche, vignettes du serveur)
  *     ne la traitent pas — l'image reste gardée. Rangé dans la base (api.php?action=save_media_limits), chaque changement
@@ -70,14 +70,14 @@
                 }
             } catch (_) { watch = null; }
             const p = orig.call(this, input, init);
-            if (watch) p.then(r => { if (!r || !r.ok) return; r.clone().json().then(j => { if (j && !j.error && j.notice && watch.source === 'upload') toast(String(j.notice), '', {duration: 15000}); if (j && !j.error) emit({...watch, ids: Array.isArray(j.media) ? j.media.map(Number) : j.result?.media_id ? [Number(j.result.media_id)] : []}); }, () => {}); }, () => {});
+            if (watch) p.then(r => { if (!r || !r.ok) return; r.clone().json().then(j => { if (j && !j.error && j.notice && watch.source === 'upload') toast(String(j.notice)); if (j && !j.error) emit({...watch, ids: Array.isArray(j.media) ? j.media.map(Number) : j.result?.media_id ? [Number(j.result.media_id)] : []}); }, () => {}); }, () => {});
             return p;
         };
         wrapped.__lcndaMedia = true; if (orig.__lcndaGen) wrapped.__lcndaGen = true;
         window.fetch = wrapped;
     }
 
-    /* ═════════ 1. Réglages → 📎 Fichiers des médias ═════════ */
+    /* ═════════ 1. Réglages → 📁 Fichiers des médias ═════════ */
     const ROWS = [
         ['image_mb', 'Taille la plus grande d’une image ou d’un document', n => i18n('{n} Mo', {n}), 'Une photo, un scan ou un PDF plus gros est refusé à l’ajout, avec un message qui le dit. Les scans d’archives en très haute définition dépassent souvent 25 Mo.'],
         ['av_mb', 'Taille la plus grande d’un son ou d’une vidéo', n => (n >= 1000 ? i18n('{n} Go', {n: n / 1000}) : i18n('{n} Mo', {n})), 'Un enregistrement ou un film plus gros est refusé à l’ajout.'],
@@ -96,7 +96,7 @@
         const draw = () => {
             const cur = get(), d = {...DEFAULTS, ...(DATA.defaults || {})}, ch = {...CHOICES, ...(DATA.choices || {})};
             const changed = ROWS.some(([k]) => cur[k] !== d[k]);
-            ws.innerHTML = `<section class="page mf-page" data-mf-page>${UI().pageHeader ? UI().pageHeader({title: i18n('Fichiers des médias'), icon: '📎', attrs: 'data-ph-title', where: i18n('Réglages'), saved: true,
+            ws.innerHTML = `<section class="page mf-page" data-mf-page>${UI().pageHeader ? UI().pageHeader({title: i18n('Fichiers des médias'), icon: '📁', attrs: 'data-ph-title', where: i18n('Réglages'), saved: true,
                     help: i18n('La taille des photos, documents, sons et vidéos que tu ajoutes, et ce que les outils d’image acceptent de traiter.'),
                     actions: [`<button type="button" class="button secondary" data-mf-reset data-ui-reset${changed && !ro ? '' : ' disabled'}>${esc(i18n('↺ Remettre comme au départ'))}</button>`]}) : `<h2>📎 ${esc(i18n('Fichiers des médias'))}</h2>`}
                 <section class="card mf-card maintenance-panel">${ROWS.map(([k, label, fmt, help]) => `<div class="mf-row" style="margin-bottom:16px">

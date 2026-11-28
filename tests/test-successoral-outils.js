@@ -465,7 +465,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
             });
             await t('navigateur 1440 : 📋 avant de remettre (encadré, fenêtre au passage à « Remis »), 🧾 chaîne de filiation dans le PDF, texte piégé jamais exécuté', async () => {
                 const { ctx, pg, errs } = await open(1440, 900, false);
-                await pg.evaluate(() => localStorage.removeItem('lcnda-succ-npages'));
+                await pg.evaluate(() => localStorage.removeItem('genealogie-succ-npages'));
                 await pg.evaluate(id => window.LCNDA_EXT.successoral.openCase(id, 'notary'), A);
                 await pg.waitForSelector('.succ-ck-box [data-succ-ck]');
                 const ck = await pg.textContent('.succ-ck-box');

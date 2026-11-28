@@ -82,7 +82,15 @@ function dmo_crises(PDO $pdo, array $q): array
     if ($hi - $lo > 600 * $step) { $lo = $hi - 600 * $step; } // au plus 600 points
     $rows = [];
     for ($y = intdiv($lo, $step) * $step; $y <= $hi; $y += $step) { $rows[] = ['year' => (string) $y, 'births' => $b[$y] ?? 0, 'deaths' => $d[$y] ?? 0]; }
-    return ['rows' => $rows, 'place' => $pname, 'step' => $step];
+    // 🦠 les crises de la période : la liste unique « Le monde autour » (les grandes, de toute la France), et les miennes
+    $crises = [];
+    if (function_exists('historical_crises')) {
+        foreach (historical_crises($pdo) as $c) {
+            if ($c[1] < $lo || $c[0] > $hi || ($c[4] !== 'France' && empty($c[6]))) { continue; }
+            $crises[] = ['start' => (string) $c[0], 'end' => $c[1] > $c[0] ? (string) $c[1] : '', 'label' => $c[3], 'cat' => $c[2]];
+        }
+    }
+    return ['rows' => $rows, 'place' => $pname, 'step' => $step, 'crises' => $crises];
 }
 
 /* ═════════ 👨‍👩‍👧 Une fratrie ═════════ */

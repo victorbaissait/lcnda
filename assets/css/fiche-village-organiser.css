@@ -1,0 +1,77 @@
+/* LCNDA — ⚙️ Organiser la fiche d'un village : toutes les parties (d'ici et des autres outils) à la largeur choisie,
+ * et la fenêtre qui les range (heritage-more.js, villageLayoutDialog). Essai : tests/test-fiche-village-organiser.js */
+
+/* ── la page : chaque partie tient dans sa colonne (1/4 … pleine), son contenu se replie ── */
+.h-village-flow > .is-vhidden { display:none !important; }
+.h-village-flow > :empty { display:none; }
+.h-village-flow > * { box-sizing:border-box; overflow-wrap:break-word; }
+.h-village-flow > * > * { max-width:100%; }
+.h-village-flow :is(img, video, canvas, iframe, svg, object, embed):not(.h-village-map img) { max-width:100%; }
+.h-village-flow :is(img, video):not(.h-village-map img) { height:auto; }
+.h-village-flow table:not(.data-table-wrap table) { display:block; max-width:100%; overflow-x:auto; }
+.h-village-flow .data-table-wrap, .h-village-flow pre { max-width:100%; overflow-x:auto; }
+.h-village-flow :is(.h-tabs, .h-panel-head, .page-actions, .h-links, .so-row, .item-title-row) { flex-wrap:wrap; }
+.h-village-flow .h-village-map { max-width:100%; }
+.h-village-flow .h-village-collect { display:flex; flex-direction:column; gap:8px; }
+.h-village-flow .h-village-collect > * { margin:0; }
+/* une partie étroite (1/4, 1/3) : ce qui était côte à côte passe l'un sous l'autre */
+.h-village-flow > .is-vnarrow :is(.data-row) { display:block; }
+.h-village-flow > .is-vnarrow :is(.data-row dt) { margin-bottom:2px; }
+.h-village-flow > .is-vnarrow :is(.h-bars li) { grid-template-columns:minmax(0, 1fr) !important; }
+.h-village-flow > .is-vnarrow :is([class*="-grid"], [class*="-cols"], .collection-grid, .card-grid) { grid-template-columns:minmax(0, 1fr) !important; }
+.h-village-flow > .is-vnarrow :is(.h-panel-head) { gap:6px; }
+.h-village-flow > .is-vnarrow :is(input, select, textarea) { max-width:100%; }
+.h-village-flow > .is-vnarrow .h-decades { overflow-x:auto; }
+.h-village-flow > .is-vnarrow :is(.h-am-main, .cplus-place) { grid-template-columns:minmax(0, 1fr) !important; }
+.h-village-flow > .is-vnarrow :is(.cad-host-pk, .pk, .pk-search) { min-width:0 !important; max-width:100%; }
+.h-village-flow > .is-vnarrow .tr-coiffe { flex-wrap:wrap; }
+.h-village-flow > .is-vnarrow .pk .pk-box { flex-wrap:wrap; min-width:0; }
+.h-village-flow > .is-vnarrow .pk .pk-box input.pk-input { min-width:0; flex:1 1 40px; }
+.h-village-flow > .is-vnarrow .tr-photo { flex-shrink:1; max-width:100%; }
+.h-village-flow > .is-vnarrow .tr-photo img { max-width:100%; }
+.h-village-flow > .is-vnarrow label:has(select, input, .ui-icf-host) { display:inline-flex; flex-wrap:wrap; align-items:center; gap:4px; max-width:100%; min-width:0; }
+.h-village-flow > .is-vnarrow :is(select, .ui-icf-host, .ui-icf-box, .ui-icf) { max-width:100% !important; min-width:0 !important; }
+.h-village-flow > .is-vnarrow :is(div, p, header):has(> label, > select, > button) { flex-wrap:wrap; }
+@media (max-width: 700px) { .h-village-flow > * { grid-column:span 12 !important; } }
+
+/* ── la fenêtre « Organiser la fiche » ── */
+.vl-dialog .h-dialog-body { display:flex; flex-direction:column; gap:12px; padding:4px 2px; }
+.vl-dialog .vl-help { margin:0; }
+.vl-tools { display:flex; flex-wrap:wrap; gap:8px 12px; align-items:center; }
+.vl-search { flex:1 1 220px; min-width:0; max-width:360px; }
+.vl-groups { display:flex; flex-wrap:wrap; gap:6px; }
+.vl-chip { border:1px solid var(--line, #d6d0c4); background:transparent; color:inherit; border-radius:999px; padding:3px 10px; font:inherit; font-size:.86em; cursor:pointer; }
+.vl-chip:hover { background:var(--soft, rgba(0,0,0,.04)); }
+.vl-chip.is-on { background:var(--accent-soft, rgba(60,90,160,.12)); border-color:var(--accent, #3c5aa0); font-weight:600; }
+.vl-wrap { max-width:100%; overflow-x:auto; max-height:min(60vh, 640px); overflow-y:auto; border:1px solid var(--line, #e2ddd2); border-radius:8px; }
+.vl-table { width:100%; margin:0; }
+.vl-table th, .vl-table td { padding:6px 10px; vertical-align:middle; }
+.vl-table thead th { position:sticky; top:0; z-index:1; background:var(--panel, #fff); }
+.vl-ord { white-space:nowrap; }
+.vl-grip, .vl-move { border:0; background:transparent; color:var(--muted, #6b6b6b); font:inherit; width:28px; height:28px; border-radius:6px; cursor:pointer; padding:0; }
+.vl-grip { cursor:grab; font-size:1.1em; }
+.vl-grip:hover, .vl-move:hover:not(:disabled) { background:var(--soft, rgba(0,0,0,.06)); color:inherit; }
+.vl-grip:focus-visible, .vl-move:focus-visible { outline:2px solid var(--accent, #3c5aa0); outline-offset:1px; }
+.vl-move:disabled { opacity:.3; cursor:default; }
+.vl-name { min-width:12em; }
+.vl-grp { color:var(--muted, #6b6b6b); font-size:.8em; margin-left:4px; white-space:nowrap; }
+.vl-new { margin-left:4px; font-size:.75em; vertical-align:middle; }
+.vl-na { color:var(--muted, #6b6b6b); font-style:italic; }
+.vl-table tr.is-off td:not(.vl-show):not(.vl-ord) { opacity:.55; }
+.vl-table tr.is-na td.vl-name > span:first-child { opacity:.6; }
+.vl-table tr.is-drag { opacity:.4; }
+.vl-table tr.is-drop-before td { box-shadow:inset 0 2px 0 var(--accent, #3c5aa0); }
+.vl-table tr.is-drop-after td { box-shadow:inset 0 -2px 0 var(--accent, #3c5aa0); }
+.vl-table select { max-width:7.5em; }
+.vl-foot { display:flex; flex-wrap:wrap; gap:8px; align-items:center; padding-top:2px; }
+.vl-count { margin-left:auto; font-size:.88em; }
+@media (max-width: 560px) {
+    .vl-table th:first-child, .vl-table td.vl-ord { padding-left:4px; padding-right:2px; }
+    .vl-table th, .vl-table td { padding:5px 6px; }
+    .vl-grp { display:block; margin-left:0; }
+    .vl-name { min-width:8em; }
+    .vl-count { margin-left:0; width:100%; }
+}
+
+/* « Nouveau » dans toutes les listes à ranger (heritage-organiser-nouveau.js) */
+.org-new { margin-left:6px; font-size:.72em; vertical-align:middle; white-space:nowrap; }

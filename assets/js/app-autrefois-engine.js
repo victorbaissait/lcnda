@@ -8,6 +8,8 @@
  *      Pouvoir d'achat : à partir de 1901, l'indice de l'INSEE (convertisseur franc-euro « Pouvoir d'achat de l'euro et du franc »,
  *      insee.fr/fr/information/2417794, indice base 2025 = 100, arrondi à 2 décimales : avant 1920, l'arrondi donne ± 15 %) — le même
  *      calcul que le convertisseur de l'INSEE ; avant 1901, un ordre de grandeur (prix des denrées), raccordé à l'INSEE en 1901.
+ *  - Monnaies de compte : livre parisis = 1 livre ¼ tournois (25 sous tournois) ; livre de Lorraine (ou du Barrois) ≈ 15 sous 6 deniers
+ *      tournois (1 livre tournois = 1 livre 5 sous 10 deniers de Lorraine) — Wikipédia : « Livre parisis », « Livre lorraine ».
  *  - Mesures anciennes : readMeasure(texte, région) avec les régions de LCNDA_EXT.calendarMore (heritage-calendar-more.js).
  *  - Calendrier républicain dans les deux sens : republican(texte) avec LCNDA_SHEET (app-tableur-engine.js), le même calcul que
  *      les champs de date (C4), le Tableur et la Calculette.
@@ -67,6 +69,7 @@
     }
     const UNIT_WORDS = [ // [expression régulière, sorte, valeur dans cette sorte]
         [/^(?:livres?(?:\s+tournois)?|lt|lts|l|#|£)$/, 'deniers', 240], [/^(?:sous|sou|sols?|s)$/, 'deniers', 12], [/^(?:deniers?|d)$/, 'deniers', 1],
+        [/^livres?\s+parisis$/, 'deniers', 300], [/^livres?\s+(?:de\s+lorraine|lorraines?|du\s+barrois|barroises?)$/, 'deniers', 186],
         [/^(?:ecus?(?:\s+de\s+3\s+livres)?|ecu\s+blanc)$/, 'deniers', 720], [/^ecus?\s+de\s+6\s+livres$/, 'deniers', 1440], [/^(?:louis(?:\s+d'or)?)$/, 'deniers', 5760], [/^(?:pistoles?)$/, 'deniers', 2400],
         [/^(?:francs?\s+germinal|francs?\s+or)$/, 'germinal', 1], [/^(?:francs?|fr|frs|f)$/, 'franc', 1], [/^(?:centimes?|cts?|c)$/, 'franc', .01],
         [/^(?:anciens?\s+francs?|af|a\.?\s?f\.?)$/, 'af', 1], [/^(?:nouveaux?\s+francs?|nf|n\.?\s?f\.?)$/, 'nf', 1], [/^(?:euros?|eur|€)$/, 'euro', 1],
@@ -79,7 +82,7 @@
     function readSum(raw) {
         const s = fold(raw).replace(/(\d)\s+(?=\d{3}\b)/g, '$1').replace(/(\d)([a-z€#£])/g, '$1 $2').replace(/,(?!\d)/g, ' ').replace(/\bet\b/g, ' ').trim();
         if (!s) return null;
-        const re = /(\d+(?:[.,]\d+)?)\s*((?:[a-z€#£'.]+(?:\s+(?:tournois|germinal|or|d'or|de\s+[36]\s+livres|blanc|francs?))?)?)/g;
+        const re = /(\d+(?:[.,]\d+)?)\s*((?:[a-z€#£'.]+(?:\s+(?:tournois|parisis|germinal|or|d'or|de\s+[36]\s+livres|de\s+lorraine|lorraines?|du\s+barrois|barroises?|blanc|francs?))?)?)/g;
         let m, kind = '', value = 0, any = false, parts = [], coins = false;
         while ((m = re.exec(s))) {
             const n = num(m[1]), unit = m[2].replace(/\.$/, '').trim(); any = true;
@@ -87,7 +90,7 @@
             const hit = UNIT_WORDS.find(([r]) => r.test(unit.replace(/\./g, '')));
             if (!hit) return {ok: false, text: `je ne connais pas « ${unit} » (exemples : 12 livres 10 sous, 300 francs, 45 NF, 3 écus, 10 €)`};
             if (kind && kind !== hit[1]) return {ok: false, text: 'une seule monnaie à la fois (livres, sous et deniers vont ensemble)'};
-            kind = hit[1]; value += n * hit[2]; parts.push(`${nf(n)} ${unit.replace(/^ecu/, 'écu')}`); if (hit[2] > 240) coins = true;
+            kind = hit[1]; value += n * hit[2]; parts.push(`${nf(n)} ${unit.replace(/^ecu/, 'écu').replace(/lorraine/, 'Lorraine').replace(/barrois/, 'Barrois')}`); if (hit[2] > 240 || hit[2] === 186) coins = true;
         }
         if (!any) return {ok: false, text: 'écris un nombre (exemples : 12 livres 10 sous, 300 francs, 45 NF, 3 écus, 10 €)'};
         if (/[a-z]/.test(s.replace(re, '').replace(/\s+/g, ''))) return {ok: false, text: 'je ne comprends pas toute la somme (exemples : 12 livres 10 sous 6 deniers, 300 francs, 45 NF)'};
@@ -162,7 +165,7 @@
     /** les régions et leurs unités : [{id, label, units: [{id, label, kind, value, approx, note}]}] */
     function regions(opts) {
         const cm = calMore(opts); if (!cm?.REGIONS) return [];
-        return cm.REGIONS.map(r => ({id: r.id, label: r.label, units: r.units.map(u => ({id: u[0], label: u[1], kind: u[2], value: u[3], approx: !!u[4], note: u[5] || ''}))}));
+        return cm.REGIONS.map(r => ({id: r.id, label: r.label, src: r.src || '', url: r.url || '', deps: r.deps || [], units: r.units.map(u => ({id: u[0], label: u[1], kind: u[2], value: u[3], approx: !!u[4], note: u[5] || ''}))}));
     }
     /** les noms qu'on peut taper pour une unité : son id, son nom, le premier mot du nom, au pluriel */
     const plurals = w => [w, w + 's', w + 'x', w.replace(/al$/, 'aux'), w.replace(/eau$/, 'eaux')];
@@ -214,7 +217,8 @@
         // la même unité dans les autres régions (« l'arpent selon les lieux »)
         const elsewhere = first && !first.metric ? regs.filter(r => r.id !== (first.region || region)).map(r => { const u = r.units.find(x => namesOf(x).has(fold(first.label).replace(/\s*\(.*$/, '').split(' ')[0]) && sameKind(x.kind, kind)); return u ? {region: r.label, label: u.label, metric: metricText(u.value, u.kind), approx: u.approx} : null; }).filter(Boolean) : [];
         return {ok: true, kind, kindName: KIND_NAMES[kind] || '', base, label: parts.join(' '), metric: metricText(base, kind), approx, units, elsewhere,
-            region: R.label, fromRegion: first?.regionLabel && first.region !== R.id ? first.regionLabel : ''};
+            region: R.label, fromRegion: first?.regionLabel && first.region !== R.id ? first.regionLabel : '',
+            src: first?.metric ? '' : ((regs.find(r => r.id === (first?.region || R.id)) || R).src || ''), url: first?.metric ? '' : ((regs.find(r => r.id === (first?.region || R.id)) || R).url || '')};
     }
 
     /* ═════════════ Le calendrier républicain (dans les deux sens) ═════════════ */

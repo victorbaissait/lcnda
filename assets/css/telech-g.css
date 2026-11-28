@@ -1,0 +1,18 @@
+/* LCNDA — 🏰 Grands noms et remparts (assets/js/heritage-telech-g.js) : le reste vient de histoire.css (hist-row…) */
+.tg-life { display: grid; gap: 12px; }
+.tg-ul { margin: 6px 0; }
+.tg-ul li { margin-bottom: 6px; overflow-wrap: anywhere; }
+.tg-src-link { font-size: 12px; white-space: nowrap; }
+.tg-more > summary { cursor: pointer; color: var(--accent, inherit); font-size: 12.5px; margin-top: 2px; }
+.tg-more[open] > summary { margin-bottom: 6px; }
+.tg-small { margin: 6px 0 0; font-size: 12.5px; }
+.tg-actions { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 2px; }
+.tg-badge { display: inline-block; padding: 0 6px; border-radius: 999px; font-size: 11px; line-height: 18px; white-space: nowrap; border: 1px solid var(--border, rgba(127, 127, 127, .35)); color: var(--muted, inherit); }
+.tg-badge.tg-probable { border-color: var(--tg-ok, #2f855a); color: var(--tg-ok, #2f855a); }
+:root[data-theme="dark"] { --tg-ok: #68d391; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --tg-ok: #68d391; } }
+.tg-place { margin: 16px 0; }
+.tg-panel { margin-top: 12px; }
+.tg-settings .cplus-tg { margin: 6px 0; }
+@media (max-width: 600px) { .tg-ul { padding-left: 18px; } .tg-actions .button { flex: 1 1 100%; } .tg-place { margin: 12px 0; } }
+@media print { .tg-more:not([open]) { display: none; } .tg-actions { display: none; } }

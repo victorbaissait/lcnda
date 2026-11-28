@@ -1,0 +1,84 @@
+/* LCNDA — 🔎 Noms de lieux d'autrefois, tous pays (assets/js/noms-lieux-monde.js ; maquette validée docs/design/noms-de-lieux-monde.html) */
+.nlm { --nlm-orange: #d9480f; display: grid; gap: 0; min-width: 0; }
+:root[data-theme="dark"] .nlm { --nlm-orange: #ff8a4c; }
+/* la vue se dessine elle-même : la barre du tableau (critères, colonnes…) se range, les vues restent */
+.ld-page.ld-self .ld-bar-row > :not(.ld-view) { display: none; }
+.ld-page.ld-self :is(.ld-qchips, .ld-chips, .ld-editor, .ldc-tools, .ld-saved, .ldr-stats) { display: none; }
+.ld-page.ld-self .ld-bar { margin-bottom: 10px; }
+.nlm-source { margin: 0 0 12px; color: var(--muted); font-size: 13.3px; overflow-wrap: anywhere; }
+.nlm-source a { color: var(--link, var(--blue)); text-decoration: underline; text-underline-offset: 2px; }
+.nlm-big { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 4px 0 10px; }
+.nlm-big .nlm-search-box { flex: 1 1 320px; max-width: 640px; min-width: 0; }
+.nlm-big .nlm-search-box input { font-size: 16px; }
+.nlm-ex { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 0 0 14px; font-size: 13px; }
+.nlm-ex > span { color: var(--muted); }
+.nlm-res { display: grid; gap: 16px; min-width: 0; }
+.nlm-list { display: grid; gap: 16px; min-width: 0; }
+.nlm-hint { margin: 0; font-size: 14px; }
+.nlm-place { display: grid; grid-template-columns: minmax(0, 1fr) 220px; background: var(--card-bg); border: var(--line); box-shadow: var(--shadow-small); min-width: 0; }
+.nlm-ph { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: baseline; padding: 12px 14px; border-bottom: 1.5px solid var(--line-color); background: var(--card-head-bg); }
+.nlm-ph h3 { margin: 0; font-size: 18px; overflow-wrap: anywhere; }
+.nlm-ph small { color: var(--muted); }
+.nlm-why { font-size: 13px; color: var(--muted); }
+.nlm-why b { color: var(--ink); }
+.nlm-guess { font-size: 12px; border: 1.5px dashed var(--line-color); padding: 0 6px; }
+.nlm-names { list-style: none; margin: 0; padding: 10px 14px; display: grid; gap: 6px; align-content: start; min-width: 0; }
+.nlm-names li { display: grid; grid-template-columns: auto minmax(0, 9.5em) minmax(0, 1fr) auto; gap: 4px 10px; align-items: center; font-size: 14px; }
+.nlm-names li[hidden] { display: none; }
+.nlm-names li.is-hit .nlm-nm { background: var(--ui-soft); outline: 1.5px solid var(--ui-blue); }
+.nlm-names li.is-picked { background: var(--blue-soft); }
+.nlm-ck { display: inline-flex; align-items: center; min-height: 24px; cursor: pointer; }
+.nlm-ck input { width: 16px; height: 16px; margin: 0; accent-color: var(--ui-blue); cursor: pointer; }
+.nlm-nm { font-weight: 700; overflow-wrap: anywhere; padding: 0 4px; }
+.nlm-when { color: var(--muted); font-size: 12.5px; overflow-wrap: anywhere; min-width: 0; }
+.nlm-k { font-size: 11.5px; }
+.nlm-srcs { display: inline-flex; flex-wrap: wrap; gap: 4px; justify-content: flex-end; }
+.nlm-srcchip { font-size: 11.5px; font-weight: 700; border: 1.5px solid var(--line-color); padding: 1px 6px; white-space: nowrap; text-decoration: none; color: inherit; }
+a.nlm-srcchip:hover, a.nlm-srcchip:focus-visible { border-color: var(--ui-blue); }
+.nlm-bar { display: block; position: relative; height: 6px; background: var(--ui-line); margin-top: 3px; }
+.nlm-bar i { position: absolute; top: 0; bottom: 0; background: var(--ui-blue); opacity: .75; }
+.nlm-morep { margin: 0; padding: 0 14px 10px; grid-column: 1; }
+.nlm-res > .nlm-morep { padding: 0; }
+.nlm-link { border: 0; background: none; padding: 2px 0; color: var(--link, var(--blue)); font: inherit; font-size: 13px; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+.nlm-mini { grid-column: 2; grid-row: 2 / span 2; border-left: 1.5px solid var(--line-color); padding: 10px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.nlm-mini svg { display: block; width: 100%; height: auto; border: 1.5px solid var(--line-color); background: var(--paper); color: var(--ink); }
+.nlm-mini .nlm-gl line { stroke: var(--line-color); stroke-width: .6; }
+.nlm-mini .nlm-land path { fill: none; stroke: currentColor; stroke-width: .8; stroke-linejoin: round; opacity: .7; }
+.nlm-mini .nlm-dot { fill: var(--nlm-orange); stroke: var(--paper); stroke-width: 1.5; }
+.nlm-mini .nlm-ring { fill: none; stroke: var(--nlm-orange); stroke-width: 1.5; opacity: .5; }
+.nlm-mini small { color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }
+.nlm-fam { grid-column: 1; display: flex; flex-wrap: wrap; gap: 6px 8px; align-items: center; padding: 0 14px 10px; font-size: 13px; }
+.nlm-fam[hidden] { display: none; }
+.nlm-fam-lab { font-weight: 700; }
+.nlm-famb { border: 1.5px solid var(--line-color); background: var(--card-bg); color: inherit; font: inherit; font-size: 13px; padding: 3px 8px; cursor: pointer; text-align: left; max-width: 100%; overflow-wrap: anywhere; }
+.nlm-famb:hover, .nlm-famb:focus-visible { border-color: var(--ui-blue); background: var(--ui-soft); }
+.nlm-famb small { color: var(--muted); }
+.nlm-acts { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 14px 12px; }
+.nlm-acts .button { text-decoration: none; }
+.nlm-ib { min-width: 34px; }
+.nlm-none { padding: 14px; border: 2px dashed var(--line-color); color: var(--muted); }
+.nlm-else { margin-top: 16px; }
+.nlm-else ul { margin: 0 0 8px; padding-left: 18px; font-size: 13.5px; }
+.nlm-else li { margin-bottom: 4px; overflow-wrap: anywhere; }
+.nlm-else a { color: var(--link, var(--blue)); }
+.nlm-kiosk-note { margin: 0; font-size: 12px; color: var(--muted); }
+.nlm-lock { margin: 10px 0 0; }
+.nlm-selbar .ldc-acts { display: inline-flex; flex-wrap: wrap; gap: 6px; }
+/* 📊 Récap : « Presbourg » posé comme une question */
+.nlm-ans { margin: 0 0 14px; padding: 10px 14px 12px; border: 2px solid var(--ui-blue); background: var(--ui-soft); }
+.nlm-ans h4 { margin: 0 0 6px; font-size: 15px; }
+.nlm-ans ul { margin: 0 0 10px; padding-left: 18px; font-size: 13.5px; }
+.nlm-ans li { margin-bottom: 3px; overflow-wrap: anywhere; }
+@media (max-width: 760px) {
+  .nlm-place { grid-template-columns: minmax(0, 1fr); }
+  .nlm-mini { grid-column: 1; grid-row: auto; border-left: 0; border-top: 1.5px solid var(--line-color); grid-template-columns: 120px minmax(0, 1fr); align-items: center; }
+  .nlm-names { padding: 10px 12px; }
+  .nlm-names li { grid-template-columns: auto minmax(0, 1fr) auto; }
+  .nlm-names .nlm-ck { grid-column: 1; grid-row: 1; }
+  .nlm-names .nlm-nm { grid-column: 2; grid-row: 1; }
+  .nlm-names .nlm-srcs { grid-column: 3; grid-row: 1; }
+  .nlm-names .nlm-when { grid-column: 2 / -1; grid-row: 2; }
+  .nlm-ph, .nlm-acts, .nlm-fam, .nlm-morep { padding-left: 12px; padding-right: 12px; }
+  .nlm-big .nlm-search-box { flex-basis: 100%; max-width: none; }
+}
+@media print { .nlm-selbar, .nlm-acts, .nlm-ex, .nlm-big { display: none !important; } }

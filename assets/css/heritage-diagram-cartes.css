@@ -36,10 +36,16 @@ svg .dgm-f:hover path{stroke-opacity:1}
 .dgm-ac .pk-name small{font-weight:400;color:#666}
 .dgm-ac .pk-hint .link-button,.dgm-zhint .link-button{font-size:inherit;padding:0;color:#055dff;text-decoration:underline;font-weight:600;background:none;border:0;cursor:pointer}
 @media (max-width:600px){.dgm-bar-h{display:none}.dgm-bar{gap:4px}}
+/* 🌍 « Un autre pays… » : la case de recherche au-dessus de la liste des pays ; la source du fond sous l'aperçu */
+.h-dg-optsearch input[type=search]{width:100%;min-width:0;box-sizing:border-box}
+.h-dg-optsearch select{width:100%;min-width:0}
+.dgm-src{margin:6px 2px 0;font-size:12px;line-height:1.4;color:#5b6470;overflow-wrap:anywhere}
+.dgm-src a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 :root[data-theme="dark"] .dgm-bar{background:rgba(33,33,33,0.93);border-bottom:1px solid #4c4c4c}
 :root[data-theme="dark"] .dgm-places li{border:1px solid #4c4c4c;background:#232323}
 :root[data-theme="dark"] .dgm-zdot{border:2px solid #4c4c4c}
 :root[data-theme="dark"] .dgm-zhint{background:#3c2e12;border:1px solid #6b542e}
 :root[data-theme="dark"] .dgm-ac .pk-name small{color:#c7c7c7}
+:root[data-theme="dark"] .dgm-src{color:#c2c6cc}
 /* ═════ fin du mode sombre automatique ═════ */

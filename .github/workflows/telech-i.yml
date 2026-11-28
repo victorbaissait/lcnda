@@ -1,0 +1,103 @@
+# ⚓ Le pays au travail et à l'école (lot I) : refaire assets/data/ti-*.json.gz, puis les enregistrer dans la branche lancée.
+#  - 🌊 ti-maregraphe : PSMSL (niveau moyen annuel de la mer à Brest et Marseille) — psmsl.org est injoignable depuis l'atelier de
+#    développement, d'où ce travail ici (quoi = maregraphe). Le script lit d'abord les conditions du PSMSL et s'arrête s'il n'y
+#    trouve pas que les données sont libres.
+#  - ⚓ 🚗 🍬 🏥 🔒 🏛 🐎 ti-navals, ti-autos, ti-sucreries, ti-sanas, ti-centrales, ti-romains, ti-hippodromes : Wikidata (CC0) ;
+#    🧭 ti-tour, 📕 ti-dico, ✏️ ti-ecole, 🎶 ti-chansons : Wikisource (textes du domaine public, transcriptions CC BY-SA 4.0) ;
+#    📖 ti-contexte : Wikipédia (CC BY-SA 4.0).
+# Puis le sommaire assets/data/manifest.json (Réglages → 🗂 Données : « ↻ Vérifier » voit la nouvelle version).
+#
+# Lancer : onglet « Actions » → « Le pays au travail et à l'école (lot I) » → « Run workflow » (choisir ce qu'on refait).
+
+name: Le pays au travail et à l'école (lot I)
+
+on:
+  workflow_dispatch:
+    inputs:
+      quoi:
+        description: 'tout, maregraphe, wikidata, tour, dico, ecole, chansons ou contexte'
+        required: false
+        default: 'tout'
+  push:
+    branches: ['claude/**']
+    paths: ['.github/workflows/telech-i.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: telech-i-donnees
+  cancel-in-progress: false
+
+jobs:
+  donnees:
+    # le « push » sert seulement à faire connaître ce travail à GitHub : il ne fabrique rien
+    if: github.event_name != 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    env:
+      QUOI: ${{ github.event.inputs.quoi || 'tout' }}
+    steps:
+      - name: Dossier de travail
+        run: echo "TI_RAW=$RUNNER_TEMP/ti-cache" >> "$GITHUB_ENV"
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: "Préférer IPv4 (pas d’IPv6 sur la machine GitHub, « Network is unreachable »)"
+        run: echo 'precedence ::ffff:0:0/96 100' | sudo tee -a /etc/gai.conf
+      - name: Reprendre les réponses déjà téléchargées
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ env.TI_RAW }}
+          key: telech-i-${{ github.run_id }}
+          restore-keys: telech-i-
+      - name: "🌊 Niveau de la mer à Brest et Marseille (PSMSL)"
+        if: env.QUOI == 'tout' || env.QUOI == 'maregraphe'
+        run: python3 -I scripts/telech-i/build_maregraphe.py assets/data
+      - name: "⚓ 🚗 🍬 🏥 🔒 🏛 🐎 Lieux connus de Wikidata"
+        if: env.QUOI == 'tout' || env.QUOI == 'wikidata'
+        run: python3 -I scripts/telech-i/build_wikidata.py assets/data
+      - name: "🧭 Le Tour de la France par deux enfants (Wikisource)"
+        if: env.QUOI == 'tout' || env.QUOI == 'tour'
+        run: python3 -I scripts/telech-i/build_tour.py assets/data
+      - name: "📕 Les métiers dans le dictionnaire de 1860 (Wikisource)"
+        if: env.QUOI == 'tout' || env.QUOI == 'dico'
+        run: python3 -I scripts/telech-i/build_dico.py assets/data
+      - name: "✏️ Dictées et certificat d’études (Wikisource)"
+        if: env.QUOI == 'tout' || env.QUOI == 'ecole'
+        run: python3 -I scripts/telech-i/build_ecole.py assets/data
+      - name: "🎶 Chansons de métier (Wikisource)"
+        if: env.QUOI == 'tout' || env.QUOI == 'chansons'
+        run: python3 -I scripts/telech-i/build_chansons.py assets/data
+      - name: "📖 Phrases de contexte (Wikipédia)"
+        if: env.QUOI == 'tout' || env.QUOI == 'contexte'
+        run: python3 -I scripts/telech-i/build_contexte.py assets/data
+      - name: Garder les réponses pour la prochaine fois
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ env.TI_RAW }}
+          key: telech-i-${{ github.run_id }}
+      - name: Sommaire des données
+        run: node scripts/donnees-manifest.js
+      - name: Enregistrer dans la branche
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/data/ti-*.json.gz assets/data/manifest.json
+          git diff --cached --quiet && { echo "rien de neuf"; exit 0; }
+          git commit -m "Le pays au travail et à l'école (lot I) : données refaites sur GitHub (PSMSL, Wikidata CC0, Wikisource, Wikipédia CC BY-SA 4.0)"
+          ok=
+          for i in 1 2 3 4 5; do
+            if ! git pull --rebase origin "$GITHUB_REF_NAME"; then
+              # le sommaire a changé entre-temps (un autre atelier) : on garde celui de la branche et on le refait par-dessus
+              git checkout --ours assets/data/manifest.json && node scripts/donnees-manifest.js \
+                && git add assets/data/manifest.json && GIT_EDITOR=true git rebase --continue || { git rebase --abort; sleep 15; continue; }
+            fi
+            git push origin "HEAD:$GITHUB_REF_NAME" && { ok=1; break; }; sleep 15
+          done
+          [ -n "$ok" ] || { echo "::error::pas enregistré dans la branche"; exit 1; }

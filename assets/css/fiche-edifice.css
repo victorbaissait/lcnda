@@ -1,0 +1,68 @@
+/* 🏰⛪ Fiches des édifices (assets/js/heritage-fiche-edifice.js) — maquette : docs/design/fiche-chateau-culte.html.
+   Reprend .modal, .maintenance-panel / .cplus-panel, .button, .link-button ; les couleurs suivent le thème (clair / sombre). */
+.fe-dlg { width: var(--modal-m); max-width: none; }
+.fe-dlg .modal-body { padding: 0; }
+.fe-sheet { --fe-accent: #8a4b12; --fe-who: #7a1f5c; --fe-chip: rgba(127, 110, 80, .14); }
+:root[data-theme="dark"] .fe-sheet, :root[data-theme="dark"] .fe-panel, :root[data-theme="dark"] .fe-block, :root[data-theme="dark"] .fe-evline { --fe-accent: #e0a35c; --fe-who: #f0a8d8; --fe-chip: rgba(255, 240, 210, .1); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .fe-sheet { --fe-accent: #e0a35c; --fe-who: #f0a8d8; --fe-chip: rgba(255, 240, 210, .1); } }
+.fe-hero { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 14px; padding: 14px; border-bottom: 1px solid var(--line, rgba(127, 127, 127, .25)); }
+.fe-hero h3 { margin: 2px 0; font-size: 19px; }
+.fe-ph { position: relative; width: 120px; height: 96px; margin: 0; border-radius: 9px; overflow: hidden; background: linear-gradient(135deg, #c9b38a, #8a6a3c); display: flex; align-items: center; justify-content: center; }
+.fe-ph img { width: 100%; height: 100%; object-fit: cover; display: block; position: relative; z-index: 1; }
+.fe-ph span { position: absolute; font-size: 42px; }
+.fe-ph:not(.is-ico) span { display: none; }
+.fe-eyebrow { font: 700 11px system-ui, sans-serif; letter-spacing: .12em; text-transform: uppercase; color: var(--fe-accent); }
+.fe-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; }
+.fe-chip { background: var(--fe-chip); border-radius: 999px; padding: 3px 9px; font-size: 12.5px; }
+.fe-chip .fe-src { font-size: 11px; }
+.fe-tools { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 14px; margin: 0; border-bottom: 1px solid var(--line, rgba(127, 127, 127, .25)); }
+.fe-tools span:empty { display: none; }
+.fe-sec { padding: 12px 14px; border-bottom: 1px solid var(--line, rgba(127, 127, 127, .25)); }
+.fe-sec:last-child { border-bottom: 0; }
+.fe-sec h4 { margin: 0 0 6px; }
+.fe-sec p { margin: .3em 0; }
+ul.fe-l { list-style: none; margin: .3em 0; padding: 0; }
+ul.fe-l li { padding: 5px 0; border-bottom: 1px dashed var(--line, rgba(127, 127, 127, .25)); display: flex; gap: 8px; flex-wrap: wrap; align-items: baseline; }
+ul.fe-l li:last-child { border-bottom: 0; }
+.fe-yr { font-variant-numeric: tabular-nums; color: var(--muted, #6b665c); min-width: 7.5em; }
+.fe-who { color: var(--fe-who, #7a1f5c); font-weight: 600; text-decoration: underline dotted; }
+.fe-acts { margin-left: auto; display: inline-flex; gap: 4px; }
+.fe-src { font-size: 12px; white-space: nowrap; }
+.fe-note { font-size: 13px; color: var(--muted, #6b665c); }
+.fe-quote { white-space: pre-line; }
+.fe-more summary::-webkit-details-marker { display: none; }
+.fe-more summary { list-style: none; cursor: pointer; color: var(--fe-accent, #8a4b12); font-weight: 600; }
+.fe-prop { margin-top: 8px; padding: 8px 10px; border-radius: 8px; background: var(--fe-chip, rgba(127, 110, 80, .12)); }
+.fe-dec { list-style: none; padding: 0; margin: .3em 0; }
+.fe-dec li { display: grid; grid-template-columns: 4em 1fr 2.5em; gap: 8px; align-items: center; font-size: 13px; }
+.fe-dec i { display: block; height: 8px; border-radius: 4px; background: var(--fe-accent, #8a4b12); min-width: 2px; }
+.fe-fig { margin: 0; }
+.fe-fig img { max-width: 100%; max-height: 300px; border-radius: 8px; display: block; }
+.fe-fig figcaption { font-size: 12px; color: var(--muted, #6b665c); }
+.fe-map { position: relative; overflow: hidden; border-radius: 9px; border: 1px solid var(--line, rgba(127, 127, 127, .25)); max-width: 100%; }
+.fe-map img { position: absolute; width: 256px; height: 256px; max-width: none; }
+.fe-pin { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -60%); font-size: 26px; z-index: 2; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .5)); }
+.fe-src-list { margin: .3em 0; padding-left: 1.2em; }
+.fe-form { margin-top: 8px; padding: 10px; border: 1px solid var(--line, rgba(127, 127, 127, .25)); border-radius: 8px; }
+.fe-edit .fe-form { margin: 14px; }
+.fe-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 8px 12px; }
+.fe-field { display: flex; flex-direction: column; gap: 3px; font-size: 13px; min-width: 0; }
+.fe-field > span { font-weight: 600; }
+.fe-field input, .fe-field select, .fe-field textarea { width: 100%; box-sizing: border-box; }
+.fe-form-btns { margin: 10px 0 0; }
+.fe-wd { padding: 10px 14px; border-bottom: 1px solid var(--line, rgba(127, 127, 127, .25)); }
+.fe-wd table { width: 100%; }
+.fe-evline { margin: .25em 0 0; font-size: 13px; }
+.fe-relink { margin-top: 6px; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line, rgba(127, 127, 127, .25)); }
+.fe-place .fe-make { padding: 1px 8px; }
+/* la Carte */
+.fe-layer { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+.fe-layer svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.fe-layer .fe-mk circle { fill: rgba(255, 214, 120, .55); stroke: #8a4b12; stroke-width: 2; }
+.fe-layer .fe-mk text { font-size: 15px; text-anchor: middle; }
+@media (max-width: 480px) {
+    .fe-hero { grid-template-columns: 72px minmax(0, 1fr); }
+    .fe-ph { width: 72px; height: 72px; }
+    .fe-ph span { font-size: 30px; }
+    .fe-yr { min-width: 5em; }
+}

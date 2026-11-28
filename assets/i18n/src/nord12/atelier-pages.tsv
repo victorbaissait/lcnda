@@ -40,3 +40,11 @@ page {n}, ligne {line} ¦ страница {n}, строка {line} ¦ стор�
 Un texte par page : la lecture rapide et la lecture d’un imprimé se font page par page ; la lecture approfondie peut lire toutes les pages. ¦ Один текст на страницу: быстрое чтение и чтение печатного текста идут постранично; углублённое чтение может прочитать все страницы. ¦ Один текст на сторінку: швидке читання й читання друкованого тексту йдуть посторінково; поглиблене читання може прочитати всі сторінки.
 Lecture approfondie : page {i} sur {n}… ¦ Углублённое чтение: страница {i} из {n}… ¦ Поглиблене читання: сторінка {i} з {n}…
 Lire toutes les pages avec ce modèle ({n}) ¦ Прочитать все страницы этой моделью ({n}) ¦ Прочитати всі сторінки цією моделлю ({n})
+Ce document a plusieurs pages : pour changer l’image d’une page, ouvre « 📑 Pages du document », retire l’ancienne page puis relie la nouvelle. ¦ В этом документе несколько страниц: чтобы заменить изображение страницы, открой «📑 Страницы документа», убери старую страницу, затем привяжи новую. ¦ У цьому документі кілька сторінок: щоб замінити зображення сторінки, відкрий «📑 Сторінки документа», прибери стару сторінку, а потім прив’яжи нову.
+{zones} sur cette page ({n} en tout) ¦ {zones} на этой странице (всего {n}) ¦ {zones} на цій сторінці (усього {n})
+{page} ({i} sur {n}) ¦ {page} ({i} из {n}) ¦ {page} ({i} з {n})
+Lignes déjà écrites ¦ Уже написанные строки ¦ Уже написані рядки
+Seulement les pages pas encore lues ¦ Только ещё не прочитанные страницы ¦ Лише ще не прочитані сторінки
+Toutes les pages ont déjà du texte. ¦ На всех страницах уже есть текст. ¦ На всіх сторінках уже є текст.
+Lignes à relire ¦ Строки для проверки ¦ Рядки для перевірки
+Seulement les lignes pas encore relues ¦ Только ещё не проверенные строки ¦ Лише ще не перевірені рядки

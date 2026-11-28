@@ -16,7 +16,7 @@
         ['deaths', '✝', 'Décès', '#495057', 'square', 'Les lieux de décès.'],
         ['burials', '⚱', 'Inhumations et tombes', '#7048e8', 'square', 'Inhumations, crémations et tombes placées (GPS).'],
         ['residences', '🏠', 'Résidences', '#1971c2', 'circle', 'Les lieux où ils ont habité.'],
-        ['census', '📋', 'Recensements', '#0b7285', 'triangle', 'Les foyers recensés.'],
+        ['census', '🏠', 'Recensements', '#0b7285', 'triangle', 'Les foyers recensés.'],
         ['events', '📅', 'Événements (choisis)', '#e8590c', 'circle', 'Les sortes d’événements que tu choisis.'],
         ['moves', '➜', 'Migrations et voyages', '#d9480f', 'circle', 'De la naissance au décès, et les voyages notés.'],
         ['life', '🧭', 'Lieux de vie d’une personne', '#f08c00', 'circle', 'Les étapes d’une ou plusieurs vies, dans l’ordre.'],

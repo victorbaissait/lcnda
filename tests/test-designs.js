@@ -299,6 +299,40 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             assert.equal(await page.evaluate(() => document.documentElement.getAttribute('data-lc-grid')), null);
             await setDesigns(page, null);
         });
+        await t('📊 palette des statistiques : 100 couleurs, « ＋ 10 couleurs » (enregistré, retrouvé), « − 10 » avec ↶ Annuler, « Remettre comme au départ »', async () => {
+            await page.evaluate(() => localStorage.removeItem('genealogie-stats-colors'));
+            await page.evaluate(() => window.LCNDA_APP.openStatsColorsDialog()); await page.waitForSelector('#stats-colors-dialog[open] #stats-colors-swatches input[name="color_99"]');
+            const n = () => page.$$eval('#stats-colors-swatches input[type=color]', l => l.length);
+            assert.equal(await n(), 100); assert.equal(await page.textContent('#stats-colors-count'), '100');
+            const all = await page.$$eval('#stats-colors-swatches input[type=color]', l => l.map(x => x.value)); assert.equal(new Set(all).size, 100, 'toutes différentes');
+            await page.click('[data-stats-more]'); await page.click('[data-stats-more]'); assert.equal(await n(), 120);
+            await page.click('#stats-colors-dialog button[type="submit"]');
+            assert.equal(JSON.parse(await page.evaluate(() => localStorage.getItem('genealogie-stats-colors'))).length, 120);
+            assert.equal(await page.evaluate(() => window.LCNDA_APP.getStatsColors().length), 120);
+            await page.evaluate(() => window.LCNDA_APP.openStatsColorsDialog()); await page.waitForSelector('#stats-colors-dialog[open] input[name="color_119"]');
+            await page.click('[data-stats-less]'); assert.equal(await n(), 110);
+            await page.evaluate(() => [...document.querySelectorAll('.ui-toast')].reverse().find(x => /couleurs retirées/.test(x.textContent)).querySelector('button').click()); await new Promise(r => setTimeout(r, 300));
+            assert.equal(await n(), 120, '↶ Annuler');
+            await page.click('#stats-colors-reset'); assert.equal(await n(), 100);
+            await page.evaluate(() => { document.querySelector('#stats-colors-dialog').close(); localStorage.removeItem('genealogie-stats-colors'); });
+        });
+        await t('A5 : 14 cases au choix (dont parchemin, médaillon, écusson, timbre, polaroïd, musée, pastel par génération, nuit) ; le pastel colore par génération', async () => {
+            await page.evaluate(() => window.LCNDA_APP.openStatsColorsDialog());
+            await page.waitForSelector('#stats-colors-dialog[open] #tree-cards-panel [data-tc-v="parchemin"]');
+            const ks = await page.$$eval('#tree-cards-panel [data-tc-v]', l => l.map(x => x.dataset.tcV));
+            assert.deepEqual(ks, ['avant', 'genre', 'photo', 'mini', 'parchemin', 'medaillon', 'ecusson', 'postale', 'timbre', 'polaroid', 'musee', 'pastel', 'trait', 'nuit']);
+            await page.screenshot({path: require('path').join(require('os').tmpdir(), 'lcnda-a5-cases.png')});
+            await page.evaluate(() => document.querySelector('#stats-colors-dialog').close());
+            for (const v of ['parchemin', 'pastel', 'nuit']) {
+                await setDesigns(page, {ver: 2, a5: {v}});
+                assert.equal(await page.evaluate(() => document.documentElement.getAttribute('data-lc-tree')), v);
+            }
+            await setDesigns(page, {ver: 2, a5: {v: 'pastel'}});
+            const gens = await page.evaluate(() => { const root = document.createElement('div'); root.innerHTML = '<div class="tree-node-shell"><div class="tree-person-unit"><button class="tree-card gender-male" data-tree-person="1"><strong>A</strong></button></div><div class="tree-node-shell"><div class="tree-person-unit"><button class="tree-card gender-female" data-tree-person="2"><strong>B</strong></button></div></div></div>'; document.body.appendChild(root);
+                window.LCNDA_DESIGNS.decorate(root, window.LCNDA_DESIGNS.read()); const g = [...root.querySelectorAll('.tree-card')].map(c => c.dataset.lcGen); const bg = getComputedStyle(root.querySelector('.tree-card')).backgroundColor; root.remove(); return {g, bg}; });
+            assert.deepEqual(gens.g, ['0', '1']); assert.equal(gens.bg, 'rgb(253, 226, 228)');
+            await setDesigns(page, null);
+        });
         await t('recoupements : A7 et « Réduire les animations », A5 et les portraits', async () => {
             await setDesigns(page, {ver: 2, a7: {v: 'petit'}});
             const anim = () => page.evaluate(() => { const d = document.createElement('dialog'); d.className = 'modal'; document.body.appendChild(d); d.show(); const a = getComputedStyle(d).animationDuration; d.remove(); return a; });

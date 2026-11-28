@@ -68,7 +68,7 @@
         function openDialog() { return editor(null); }
         /** l'éditeur de rangement : dans une fenêtre (« Réordonner »), ou posé dans une page (host) et enregistré à chaque changement */
         function editor(host) {
-            let p = prefs(); const hid = hiddenSet(); let flat = cfg.flatOrder(), mine = mineOrdered().map(m => ({v: m[0], label: m[2], icon: m[1]}));
+            let p = prefs(); const hid = hiddenSet(); const extra = cfg.extraState ? cfg.extraState() : {}; /* options en plus (Listes : masquer les données) */ let flat = cfg.flatOrder(), mine = mineOrdered().map(m => ({v: m[0], label: m[2], icon: m[1]}));
             const inline = !!host, what = cfg.what || 'pages', dialog = inline ? host : document.createElement('dialog'); if (!inline) dialog.className = 'modal dashboard-reorder-dialog mt-reorder'; else dialog.classList.add('mt-reorder', 'sg-inline');
             const vis = k => cfg.canHide ? `<label class="mt-vis" title="Afficher dans la colonne"><input type="checkbox" data-vis="${esc(k)}" ${hid.has(k) ? '' : 'checked'}></label>` : '';
             const arrows = (i, len) => `<button type="button" class="button small secondary" data-move="-1" aria-label="Monter" ${i ? '' : 'disabled'}>↑</button><button type="button" class="button small secondary" data-move="1" aria-label="Descendre" ${i < len - 1 ? '' : 'disabled'}>↓</button>`;
@@ -78,17 +78,18 @@
                 dialog.querySelector('[data-mt-body]').innerHTML = `
                     <label class="checkbox-line mt-enable"><input type="checkbox" data-mt-enabled ${p.enabled ? 'checked' : ''}> <span><b>Ranger en groupes</b> (familles qu’on ouvre et referme)<small class="muted">Décoché : une seule liste. Chaque façon garde ses propres réglages : tu les retrouves en recochant ou en décochant.</small></span></label>
                     ${p.enabled ? `<fieldset class="mt-openmode"><legend>Les groupes, dans la colonne</legend><label class="checkbox-line"><input type="radio" name="mt-open" value="open" ${p.open === 'open' ? 'checked' : ''}> Tous ouverts</label><label class="checkbox-line"><input type="radio" name="mt-open" value="closed" ${p.open === 'closed' ? 'checked' : ''}> Tous fermés (sauf celui de la page affichée)</label>
-                        <div class="mt-closedmode" ${p.open === 'closed' ? '' : 'hidden'}><label class="checkbox-line"><input type="radio" name="mt-closed" value="always" ${p.closedMode === 'always' ? 'checked' : ''}> Toujours tout refermer</label><label class="checkbox-line"><input type="radio" name="mt-closed" value="remember" ${p.closedMode === 'remember' ? 'checked' : ''}> Garder ouvert ce que j’ai ouvert</label></div></fieldset>
-                    ${p.groups.map((g, gi) => `<section class="mt-rgroup" data-gi="${gi}"><div class="mt-rghead"><input class="mt-ricon" data-gicon value="${esc(g.icon)}" maxlength="4" aria-label="Icône du groupe"><input class="mt-rlabel" data-glabel value="${esc(g.label)}" maxlength="60" aria-label="Nom du groupe">
+                        <div class="mt-closedmode" ${p.open === 'closed' ? '' : 'hidden'}><label class="checkbox-line"><input type="radio" name="mt-closed" value="always" ${p.closedMode === 'always' ? 'checked' : ''}> Toujours tout refermer</label><label class="checkbox-line"><input type="radio" name="mt-closed" value="remember" ${p.closedMode === 'remember' ? 'checked' : ''}> Garder ouvert ce que j’ai ouvert</label></div></fieldset>${cfg.extraHtml ? cfg.extraHtml(extra) : ''}
+                    ${p.groups.map((g, gi) => `<section class="mt-rgroup" data-gi="${gi}"><div class="mt-rghead">${cfg.canHide && g.items.length ? `<label class="mt-gvis" title="${esc(i18n('Afficher ou masquer tout le groupe d’un coup'))}"><input type="checkbox" data-gvis ${g.items.every(k => hid.has(k)) ? '' : 'checked'} data-gvis-some="${g.items.some(k => hid.has(k)) && !g.items.every(k => hid.has(k)) ? 1 : 0}" aria-label="${esc(i18n('Tout le groupe « {g} »', {g: g.label}))}"></label>` : ''}<input class="mt-ricon" data-gicon value="${esc(g.icon)}" maxlength="4" aria-label="Icône du groupe"><input class="mt-rlabel" data-glabel value="${esc(g.label)}" maxlength="60" aria-label="Nom du groupe">
                         <button type="button" class="button small secondary" data-gmove="-1" title="Monter le groupe" ${gi ? '' : 'disabled'}>↑</button><button type="button" class="button small secondary" data-gmove="1" title="Descendre le groupe" ${gi < p.groups.length - 1 ? '' : 'disabled'}>↓</button><button type="button" class="button small secondary is-danger" data-gdel title="Effacer le groupe (son contenu va dans le groupe d’à côté)">🗑</button></div>
                         <ol class="dashboard-reorder-list">${g.items.map((k, ii) => row(k, ++n, ii, g.items.length, `<select data-imove aria-label="Changer de groupe">${p.groups.map((x, xi) => `<option value="${xi}" ${xi === gi ? 'selected' : ''}>${esc(x.icon)} ${esc(x.label)}</option>`).join('')}</select>`)).join('') || '<li class="muted mt-empty">Groupe vide</li>'}</ol></section>`).join('')}`
-                    : `<section class="mt-rgroup" data-flat><ol class="dashboard-reorder-list">${flat.map((k, i) => row(k, i + 1, i, flat.length)).join('')}</ol></section>`}
-                    ${mine.length ? `<section class="mt-rgroup mt-rmine" data-mine><div class="mt-rghead"><span class="mt-ricon">⭐</span><b class="mt-rlabel">Mes listes</b><small class="muted">toujours en bas, à part : range-les entre elles</small></div><ol class="dashboard-reorder-list">${mine.map((m, i) => `<li class="dashboard-reorder-row" data-ii="${i}"><span class="order-number">${esc(m.icon)}</span><b style="flex:1">${esc(m.label)}</b><span class="order-actions">${arrows(i, mine.length)}</span></li>`).join('')}</ol></section>` : ''}`; };
+                    : `${cfg.extraHtml ? cfg.extraHtml(extra) : ''}<section class="mt-rgroup" data-flat><ol class="dashboard-reorder-list">${flat.map((k, i) => row(k, i + 1, i, flat.length)).join('')}</ol></section>`}
+                    ${mine.length ? `<section class="mt-rgroup mt-rmine" data-mine><div class="mt-rghead"><span class="mt-ricon">⭐</span><b class="mt-rlabel">Mes listes</b><small class="muted">toujours en bas, à part : range-les entre elles</small></div><ol class="dashboard-reorder-list">${mine.map((m, i) => `<li class="dashboard-reorder-row" data-ii="${i}"><span class="order-number">${esc(m.icon)}</span><b style="flex:1">${esc(m.label)}</b><span class="order-actions">${arrows(i, mine.length)}</span></li>`).join('')}</ol></section>` : ''}`; dialog.querySelectorAll('[data-gvis-some="1"]').forEach(x => { x.indeterminate = true; }); };
+            const marks = () => dialog.querySelectorAll('[data-gvis-some="1"]').forEach(x => { x.indeterminate = true; }); // à moitié : une partie du groupe masquée
             dialog.innerHTML = inline ? `<p class="muted sg-inline-help">${i18n(cfg.canHide ? 'Range avec ↑ ↓, coche ce qui s’affiche dans la colonne, en groupes ou en une seule liste.' : 'Range avec ↑ ↓, en groupes ou en une seule liste.')} <b>Enregistré tout seul.</b></p>
                 <div class="dash-reorder-tools" data-mt-tools></div><div class="mt-rbody" data-mt-body></div>`
                 : `<div class="modal-head"><div><span class="eyebrow">${esc(cfg.eyebrow)}</span><h2>${i18n(what === 'listes' ? 'Réordonner les listes' : what === 'pages' ? 'Réordonner les pages' : 'Réordonner les {what}', {what: esc(what)})}</h2><p>${i18n(cfg.canHide ? 'Range avec ↑ ↓, coche ce qui s’affiche, en groupes ou en une seule liste. Puis Enregistrer.' : 'Range avec ↑ ↓, en groupes ou en une seule liste. Puis Enregistrer.')}</p></div><button class="icon-button" type="button" data-close aria-label="Fermer">×</button></div>
                 <div class="dash-reorder-tools" data-mt-tools></div><div class="mt-rbody" data-mt-body></div><div class="modal-actions"><span class="spacer"></span><button class="button secondary" type="button" data-close>Annuler</button><button class="button" type="button" data-save>Enregistrer</button></div>`;
-            if (!inline) document.body.append(dialog); draw();
+            if (!inline) document.body.append(dialog); draw(); marks();
             /** dans une page : chaque changement est gardé tout de suite (sans redessiner l'éditeur) */
             let quiet = 0;
             const keep = () => { if (!inline) return; const all = cfg.allKeys(); if (cfg.canHide && all.every(k => hid.has(k))) { A().toast(what === 'listes' ? 'Garde au moins une liste visible.' : 'Garde au moins une page visible.', 'error'); return; }
@@ -97,10 +98,13 @@
             const sync = () => dialog.querySelectorAll('[data-gi]').forEach(s => { const g = p.groups[Number(s.dataset.gi)]; g.icon = s.querySelector('[data-gicon]').value.trim() || '📁'; g.label = s.querySelector('[data-glabel]').value.trim() || 'Groupe'; });
             const close = () => { dialog.close(); dialog.remove(); };
             dialog.addEventListener('change', e => { const t = e.target;
+                if (t.dataset.mtExtra) { extra[t.dataset.mtExtra] = t.checked; if (inline) cfg.applyExtra?.(extra); return; }
                 if (t.matches('[data-mt-enabled]')) { sync(); p.enabled = t.checked; draw(); return; }
                 if (t.name === 'mt-open') { p.open = t.value; dialog.querySelector('.mt-closedmode').hidden = p.open !== 'closed'; return; }
                 if (t.name === 'mt-closed') { p.closedMode = t.value; return; }
-                if (t.dataset.vis) { if (t.checked) hid.delete(t.dataset.vis); else hid.add(t.dataset.vis); t.closest('li')?.classList.toggle('is-hidden-row', !t.checked); return; }
+                if (t.matches('[data-gvis]')) { sync(); const g = p.groups[Number(t.closest('[data-gi]').dataset.gi)]; g.items.forEach(k => { if (t.checked) hid.delete(k); else hid.add(k); }); draw(); marks(); return; } // ☑ tout le groupe d'un coup
+                if (t.dataset.vis) { if (t.checked) hid.delete(t.dataset.vis); else hid.add(t.dataset.vis); t.closest('li')?.classList.toggle('is-hidden-row', !t.checked);
+                    const sec = t.closest('[data-gi]'), gv = sec?.querySelector('[data-gvis]'); if (gv) { const g = p.groups[Number(sec.dataset.gi)], n = g.items.filter(k => hid.has(k)).length; gv.checked = n < g.items.length; gv.indeterminate = n > 0 && n < g.items.length; } return; }
                 if (t.matches('[data-imove]')) { sync(); const gi = Number(t.closest('[data-gi]').dataset.gi), ii = Number(t.closest('[data-ii]').dataset.ii), to = Number(t.value); const [k] = p.groups[gi].items.splice(ii, 1); p.groups[to].items.push(k); draw(); } });
             dialog.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; const sec = b.closest('[data-gi]'), gi = sec ? Number(sec.dataset.gi) : -1;
                 if (b.hasAttribute('data-close')) { close(); return; }
@@ -114,7 +118,7 @@
                 if (b.hasAttribute('data-save')) {
                     const all = cfg.allKeys(); if (cfg.canHide && all.every(k => hid.has(k))) return A().toast(what === 'listes' ? 'Garde au moins une liste visible.' : 'Garde au moins une page visible.', 'error');
                     // les deux façons gardent leurs réglages : on enregistre l'une et l'autre
-                    save(p); cfg.setFlatOrder(flat); if (cfg.canHide) cfg.setHidden([...hid]); if (cfg.mineKey) writeJ(cfg.mineKey, mine.map(m => m.v));
+                    save(p); cfg.setFlatOrder(flat); if (cfg.canHide) cfg.setHidden([...hid]); if (cfg.mineKey) writeJ(cfg.mineKey, mine.map(m => m.v)); cfg.applyExtra?.(extra);
                     close(); A().renderSidebar(); refreshPanels(); A().toast(p.enabled ? 'Rangement en groupes enregistré.' : 'Rangement en une liste enregistré.'); } });
             if (inline) return dialog;
             dialog.addEventListener('cancel', e => { if (e.target !== dialog) return; e.preventDefault(); close(); });
@@ -141,4 +145,46 @@
     document.addEventListener('click', e => { const b = e.target.closest?.('[data-sg-open]'); if (!b) return; inst[b.closest('[data-sg-panel]')?.dataset.sgPanel]?.openDialog(); });
     make.instances = inst; make.refreshPanels = refreshPanels;
     window.LCNDA_SIDEGROUPS = make;
+
+    /* 📐 La colonne de gauche, sur toutes les pages : l'icône de tête dans sa propre colonne (span.side-ico, 8 px avant le texte),
+       une colonne vide pour les lignes sans icône — les textes commencent tous au même endroit ; une barre de défilement
+       « par-dessus » (téléphone, macOS) → data-overlay-scroll : plus de marge à droite (app.css « l'espacement de la colonne »).
+       Fait après le filet de traduction (rAF) : le texte est déjà dans sa langue ; textContent ne change pas (l'espace reste). */
+    const ICO = /^(\s*)((?:\p{Extended_Pictographic}|\p{Regional_Indicator})(?:️|⃣|[\u{1F3FB}-\u{1F3FF}]|‍(?:\p{Extended_Pictographic}|\p{Regional_Indicator})|\p{Regional_Indicator})*)(\s+)/u;
+    function sideIcons(box) {
+        const items = [...box.querySelectorAll('.side-menu-item')];
+        const plan = items.map(b => {
+            if (b.dataset.sideIco && b.querySelector(':scope > .side-ico')) return {b, done: true, has: b.dataset.sideIco === 'ico'};
+            const nodes = [...b.childNodes], i = nodes.findIndex(n => !(n.nodeType === 1 && n.classList.contains('side-number')) && !(n.nodeType === 3 && !n.nodeValue.trim()));
+            const first = nodes[i]; if (!first || first.nodeType !== 3) return {b, skip: true};
+            const m = first.nodeValue.match(ICO);
+            return {b, first, m, has: !!m};
+        });
+        if (!plan.some(p => p.has)) return;
+        for (const p of plan) {
+            if (p.done || p.skip) continue;
+            const ico = document.createElement('span'); ico.className = 'side-ico'; ico.setAttribute('aria-hidden', 'true');
+            const lab = document.createElement('span'); lab.className = 'side-label';
+            let n = p.first;
+            if (p.m) { ico.textContent = p.m[2]; n.nodeValue = n.nodeValue.slice(p.m[0].length); }
+            p.b.insertBefore(ico, n);
+            if (p.m) p.b.insertBefore(document.createTextNode(p.m[3]), n); // l'espace d'origine : textContent ne change pas
+            p.b.insertBefore(lab, n);
+            while (n) { const next = n.nextSibling; lab.appendChild(n); n = next; }
+            p.b.dataset.sideIco = p.m ? 'ico' : 'none'; p.b.classList.add('has-side-ico');
+        }
+    }
+    function overlayScroll(box) {
+        const over = box.scrollHeight > box.clientHeight + 1 && box.offsetWidth - box.clientWidth - (parseFloat(getComputedStyle(box).borderLeftWidth) || 0) - (parseFloat(getComputedStyle(box).borderRightWidth) || 0) < 1;
+        if (over !== box.hasAttribute('data-overlay-scroll')) box.toggleAttribute('data-overlay-scroll', over);
+    }
+    const sideWatch = () => {
+        const box = document.getElementById('sidebar-content'); if (!box) return setTimeout(sideWatch, 300);
+        let raf = 0;
+        const run = () => { raf = 0; try { sideIcons(box); overlayScroll(box); } catch (e) { console.error(e); } };
+        new MutationObserver(() => { if (!raf) raf = requestAnimationFrame(run); }).observe(box, {childList: true, subtree: true});
+        if (typeof ResizeObserver === 'function') new ResizeObserver(() => { if (!raf) raf = requestAnimationFrame(run); }).observe(box);
+        run();
+    };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', sideWatch); else sideWatch();
 })();

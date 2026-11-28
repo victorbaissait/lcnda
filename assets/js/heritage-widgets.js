@@ -497,6 +497,7 @@
         dlg.querySelector('[data-who-q]')?.addEventListener('input', () => { shown = STEP; redraw(); });
         dlg.querySelector('[data-who-csv]')?.addEventListener('click', () => {
             const q = x => `"${(A().csvSafe || (x => String(x ?? '')))(x).replace(/"/g, '""')}"`; // pas de formule glissée dans un tableur
+            if (window.LCNDA_UI?.exportRows) return window.LCNDA_UI.exportRows({quote: 'always', title: csvName || 'Personnes', name: csvName || 'personnes', rows: () => [['Nom', 'Prénoms', 'Naissance', 'Décès', 'Métier'], ...people.map(p => [p.last_name, p.first_name, p.birth_date || p.birth_year || '', p.death_date || p.death_year || '', p.occupation])]}); // ⤓ la fenêtre d'export commune
             const csv = '\ufeff' + [['Nom', 'Prénoms', 'Naissance', 'Décès', 'Métier'].map(q).join(';'), ...people.map(p => [p.last_name, p.first_name, p.birth_date || p.birth_year || '', p.death_date || p.death_year || '', p.occupation].map(q).join(';'))].join('\r\n');
             const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type: 'text/csv;charset=utf-8'})); a.download = (A().safeExportFilename?.(csvName) || 'personnes') + '.csv'; document.body.appendChild(a); a.click(); a.remove();
         });
@@ -745,11 +746,17 @@
         ws.querySelectorAll('[data-cw-del]').forEach(b => b.addEventListener('click', async () => {
             const d = find(b.dataset.cwDel);
             const posed = ext.myGraphPlaces?.(d.id);
-            if (!await A().confirmBox(i18n(posed ? 'Supprimer le widget « {name} » ? Il disparaît aussi du tableau de bord et de tous les endroits où ce graphique est posé (fiches, enquêtes, mise en page…).' : 'Supprimer le widget « {name} » ? Il disparaît aussi du tableau de bord.', {name: d.name || i18n('Mon widget')}), {title: i18n('Supprimer le widget'), okLabel: i18n('Supprimer le widget')})) return;
-            saveDefs(all.filter(x => x.id !== d.id));
-            if (posed) ext.forgetMyGraph?.(d.id);
-            const settings = A().dashboardBlockSettings(); A().saveDashboardBlockSettings(settings); // les exemplaires posés partent (type inconnu)
-            toast('Widget supprimé.'); backToList();
+            // R7 : un widget qui n'est posé que sur le tableau de bord part tout de suite (↶ Annuler le remet, avec ses exemplaires) ;
+            // un graphique posé ailleurs (fiches, enquêtes…) garde la question : ses liens ne reviendraient pas
+            if (posed && !await A().confirmBox(i18n('Supprimer le widget « {name} » ? Il disparaît aussi du tableau de bord et de tous les endroits où ce graphique est posé (fiches, enquêtes, mise en page…).', {name: d.name || i18n('Mon widget')}), {title: i18n('Supprimer le widget'), okLabel: i18n('Supprimer le widget'), danger: true})) return;
+            const drop = () => {
+                saveDefs(defs().filter(x => x.id !== d.id));
+                if (posed) ext.forgetMyGraph?.(d.id);
+                const settings = A().dashboardBlockSettings(); A().saveDashboardBlockSettings(settings); // les exemplaires posés partent (type inconnu)
+            };
+            if (!posed && A().undoLocalChange) A().undoLocalChange(i18n('Widget « {name} » supprimé.', {name: d.name || i18n('Mon widget')}), [KEY, 'genealogie-dashboard-blocks'], drop, () => backToList());
+            else { drop(); toast('Widget supprimé.'); }
+            backToList();
         }));
         ws.querySelector('[data-cw-import]').addEventListener('change', async e => {
             const file = e.target.files[0]; if (!file) return;
@@ -1544,14 +1551,7 @@
         const title = `${d.icon ? d.icon + ' ' : ''}${d.name || 'Mon graphique'}`;
         const html = `<div class="h-cs-sheet" style="background:#fff;padding:24px;font-family:inherit"><h2 style="margin:0 0 6px">${esc(title)}</h2>${d.note ? `<p style="margin:0 0 12px">${nl(d.note)}</p>` : ''}${cardEl.outerHTML}<p style="margin:10px 0 0;font-size:12px;color:#666">LCNDA · ${esc(new Date().toLocaleDateString('fr-FR'))}</p></div>`;
         if (kind === 'print' && window.LCNDA_UI?.openPrintDialog) { window.LCNDA_UI.openPrintDialog({title, html: `<!doctype html><html><head><meta charset="utf-8"><title>${esc(title)}</title><base href="${esc(location.href)}"><style>${css}@page{margin:12mm}body{background:#fff}</style></head><body>${html}</body></html>`}); return; } // K13
-        if (kind === 'print') {
-            const w = window.open('', '_blank', 'width=1000,height=800');
-            if (!w) { toast('Fenêtre d’impression bloquée.', 'error'); return; }
-            w.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>${esc(title)}</title><style>${css}@page{margin:12mm}body{background:#fff}</style></head><body>${html}<script>window.onload=()=>setTimeout(()=>window.print(),200);<\/script></body></html>`); // secours (sans la fenêtre commune)
-            w.document.close();
-            toast('Dans la fenêtre d’impression, choisis « Enregistrer en PDF » pour un fichier PDF.');
-            return;
-        }
+        if (kind === 'print') { toast(i18n('L’impression n’est pas encore prête : réessaie dans un instant.'), 'error'); return; } // R4 : une seule fenêtre d’impression (UI.openPrintDialog), plus de fenêtre faite à la main
         // Image : dessinée directement sur un canevas (une page HTML copiée dans une image est refusée par le navigateur)
         try {
             const canvas = drawStatImage(d, datas, title);

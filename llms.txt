@@ -1,0 +1,21 @@
+# LCNDA — Le Carnet numérique des ancêtres
+
+> Application de généalogie gratuite (AGPL-3.0) qui fonctionne sur l'ordinateur, sans compte ni nuage :
+> fiches, sources, arbres, cartes, transcription des actes (aussi par une IA locale), successions. 32 langues.
+> (English: a free genealogy app that runs on your own computer, with no account and no cloud.)
+
+## L'essentiel
+
+- [Présentation et téléchargement](carnet-numerique-des-ancetres.php) : version 0.11.0 du 28/11/2026, macOS, Windows, Linux
+- [Nouveautés de chaque version](carnet-numerique-des-ancetres.php#v0-11-0) : une fiche par version (date, en bref, le détail)
+- [FAQ complète, en texte](llms-full.txt) : 956 questions et réponses, par thème
+
+## English
+
+- [Presentation and download](carnet-numerique-des-ancetres-en.php)
+- [Full FAQ, as text](llms-full-en.txt) : 956 questions and answers, by topic
+
+## Optionnel
+
+- [Code source](https://github.com/victorbaissait/lcnda)
+- [Notes de version](https://github.com/victorbaissait/lcnda/tree/HEAD/release-notes)

@@ -531,7 +531,7 @@ Le nom du modèle (les données restent : vide-les avant si tu veux un modèle v
 Le nom de la copie : ¦ Názov kópie: ¦ Navnet på kopien:
 {name} (copie) ¦ {name} (kópia) ¦ {name} (kopi)
 Les changements faits depuis le dernier enregistrement seront perdus. ¦ Zmeny od posledného uloženia sa stratia. ¦ Endringene siden sist du lagret, går tapt.
-📋 Partir d’un modèle ¦ 📋 Začať zo šablóny ¦ 📋 Start fra en mal
+🧩 Partir d’un modèle ¦ 🧩 Začať zo šablóny ¦ 🧩 Start fra en mal
 Mes modèles ¦ Moje šablóny ¦ Mine maler
 Pas encore de modèle à toi : dans un classeur, Fichier → « Enregistrer comme modèle… ». ¦ Zatiaľ nemáš vlastnú šablónu: v zošite Súbor → „Uložiť ako šablónu…“. ¦ Ingen egne maler ennå: i en arbeidsbok, Fil → «Lagre som mal…».
 séparateur « {sep} » ¦ oddeľovač „{sep}“ ¦ skilletegn «{sep}»
@@ -615,7 +615,7 @@ Sosa, génération, côté, âge ¦ Sosa, generácia, strana, vek ¦ Sosa, gener
 objets, prix, total en livres ¦ predmety, ceny, súčet v livrách ¦ gjenstander, priser, sum i livres
 Registre matricule ¦ Vojenská kmeňová kniha ¦ Militærrulle
 classe, signalement, campagnes ¦ ročník, osobný popis, ťaženia ¦ årsklasse, signalement, felttog
-📋 Partir d’un modèle… ¦ 📋 Začať zo šablóny… ¦ 📋 Start fra en mal…
+🧩 Partir d’un modèle… ¦ 🧩 Začať zo šablóny… ¦ 🧩 Start fra en mal…
 ⤒ Importer un tableau… ¦ ⤒ Importovať tabuľku… ¦ ⤒ Importer en tabell…
 ⤓ Exporter… ¦ ⤓ Exportovať… ¦ ⤓ Eksporter…
 🖨 Imprimer… ¦ 🖨 Tlačiť… ¦ 🖨 Skriv ut…

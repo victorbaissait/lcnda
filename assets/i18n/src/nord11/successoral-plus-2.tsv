@@ -425,7 +425,7 @@ Les pistes sont montrées à partir de ce score (sur 100). Plus haut : moins de 
 Après chaque nouvel import du fichier INSEE : vérifier les dossiers en cours tout seul (jamais de changement sans ton clic). ¦ Sau mỗi lần nhập mới tệp INSEE: tự kiểm tra các hồ sơ đang làm (không bao giờ thay đổi khi bạn chưa nhấp). ¦ Setelah setiap impor baru berkas INSEE: periksa sendiri berkas berjalan (tidak pernah ada perubahan tanpa klikmu).
 Automatique, dans la cloche ¦ Tự động, trong chuông ¦ Otomatis, di lonceng
 Seulement à la main ¦ Chỉ thủ công ¦ Hanya manual
-📋 Questionnaire ¦ 📋 Bảng hỏi ¦ 📋 Kuesioner
+📝 Questionnaire ¦ 📝 Bảng hỏi ¦ 📝 Kuesioner
 Ce que l’héritier te renvoie après avoir rempli le questionnaire. ¦ Những gì người thừa kế gửi lại sau khi điền. ¦ Apa yang dikirim kembali ahli waris setelah mengisi.
 Un petit fichier .json ¦ Một tệp .json nhỏ ¦ Berkas .json kecil
 La page .html remplie ¦ Trang .html đã điền ¦ Halaman .html yang sudah diisi

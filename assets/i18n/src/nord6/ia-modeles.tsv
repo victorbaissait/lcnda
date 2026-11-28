@@ -1,0 +1,35 @@
+fr ¦ lt ¦ lv ¦ et
+# 🔬 Lecture approfondie : les modèles d’IA (avantages, inconvénients, « à l’essai », avancé) — lib/transcription_actes.php, heritage-transcribe-acte.js
+ia|Modèle ¦ Modelis ¦ Modelis ¦ Mudel
+conseillé pour cet ordinateur ({n} Go) ¦ rekomenduojama šiam kompiuteriui ({n} GB) ¦ ieteicams šim datoram ({n} GB) ¦ soovitatav sellele arvutile ({n} GB)
+à l’essai ¦ bandymui ¦ izmēģināšanai ¦ proovimiseks
+≈ {x} Go à télécharger ¦ ≈ {x} GB atsisiųsti ¦ ≈ {x} GB lejupielādei ¦ ≈ {x} GB allalaadimiseks
+{n} Go de mémoire conseillés ¦ rekomenduojama {n} GB atminties ¦ ieteicami {n} GB atmiņas ¦ soovitatav {n} GB mälu
+trop gros pour cet ordinateur ¦ per didelis šiam kompiuteriui ¦ pārāk liels šim datoram ¦ liiga suur selle arvuti jaoks
+Autres modèles à essayer ({n}) ¦ Kiti modeliai bandymui ({n}) ¦ Citi modeļi izmēģināšanai ({n}) ¦ Muud proovitavad mudelid ({n})
+Pas encore essayés par l’app sur des actes : compare-les sur tes actes (« Les deux lectures côte à côte ») avant de t’y fier. ¦ Programa jų dar neišbandė su dokumentais: palygink juos su savo dokumentais („Abu skaitymai greta“), prieš jais pasitikėdamas. ¦ Lietotne tos vēl nav izmēģinājusi ar dokumentiem: salīdzini tos ar saviem dokumentiem (“Abi lasījumi blakus”), pirms tiem uzticies. ¦ Rakendus pole neid veel dokumentidel proovinud: võrdle neid oma dokumentidel („Kaks lugemist kõrvuti“), enne kui neid usaldad.
+Avancé : autre modèle (Ollama) ¦ Išplėstinė: kitas modelis (Ollama) ¦ Papildu: cits modelis (Ollama) ¦ Täpsem: muu mudel (Ollama)
+Les modèles déjà installés dans Ollama sur cet ordinateur. Un modèle qui ne sait pas lire une image ne peut pas lire l’acte. Pas essayé par l’app : vérifie toujours le texte. ¦ Modeliai, jau įdiegti Ollama šiame kompiuteryje. Modelis, kuris nemoka skaityti vaizdo, negali perskaityti dokumento. Programa jo neišbandė: visada patikrink tekstą. ¦ Modeļi, kas jau instalēti Ollama šajā datorā. Modelis, kas neprot lasīt attēlu, nevar nolasīt dokumentu. Lietotne to nav izmēģinājusi: vienmēr pārbaudi tekstu. ¦ Selle arvuti Ollamasse juba paigaldatud mudelid. Mudel, mis ei oska pilti lugeda, ei saa dokumenti lugeda. Rakendus pole seda proovinud: kontrolli alati teksti.
+lit les images ¦ skaito vaizdus ¦ lasa attēlus ¦ loeb pilte
+ne lit pas les images ¦ neskaito vaizdų ¦ nelasa attēlus ¦ ei loe pilte
+Aucun autre modèle installé. Dans un terminal : « ollama pull » suivi du nom du modèle. ¦ Kitų įdiegtų modelių nėra. Terminale: „ollama pull“ ir modelio pavadinimas. ¦ Nav instalēts neviens cits modelis. Terminālī: “ollama pull” un modeļa nosaukums. ¦ Muid mudeleid pole paigaldatud. Terminalis: „ollama pull“ ja mudeli nimi.
+cet ordinateur : {n} Go · chaque modèle se télécharge une seule fois ¦ šis kompiuteris: {n} GB · kiekvienas modelis atsisiunčiamas tik kartą ¦ šis dators: {n} GB · katru modeli lejupielādē tikai vienreiz ¦ see arvuti: {n} GB · iga mudel laaditakse alla ainult üks kord
+Ce modèle ne sait pas lire une image : choisis un modèle « vision ». ¦ Šis modelis nemoka skaityti vaizdo: pasirink „vision“ modelį. ¦ Šis modelis neprot lasīt attēlu: izvēlies “vision” modeli. ¦ See mudel ei oska pilti lugeda: vali „vision“-mudel.
+le meilleur essayé sur les actes anciens, bon en français et en latin ¦ geriausias išbandytas su senais dokumentais, geras prancūzų ir lotynų kalbomis ¦ labākais, izmēģināts ar veciem dokumentiem, labs franču un latīņu valodā ¦ parim vanadel dokumentidel proovitud, hea prantsuse ja ladina keeles
+16 Go de mémoire conseillés ¦ rekomenduojama 16 GB atminties ¦ ieteicami 16 GB atmiņas ¦ soovitatav 16 GB mälu
+léger et rapide, pour un ordinateur modeste ¦ lengvas ir greitas, kukliam kompiuteriui ¦ viegls un ātrs, pieticīgam datoram ¦ kerge ja kiire, tagasihoidlikule arvutile
+se trompe plus souvent sur les noms et les écritures difficiles ¦ dažniau klysta dėl vardų ir sunkios rašysenos ¦ biežāk kļūdās vārdos un grūtā rokrakstā ¦ eksib sagedamini nimedes ja raskes käekirjas
+pour les ordinateurs puissants (64 Go) : la même famille que le conseillé, plus précise sur les écritures difficiles ¦ galingiems kompiuteriams (64 GB): ta pati šeima kaip rekomenduojamas, tikslesnis su sunkia rašysena ¦ jaudīgiem datoriem (64 GB): tā pati saime kā ieteiktais, precīzāks grūtā rokrakstā ¦ võimsatele arvutitele (64 GB): sama pere mis soovitatav, täpsem raskes käekirjas
+lent, gros téléchargement ¦ lėtas, didelis atsisiuntimas ¦ lēns, liela lejupielāde ¦ aeglane, suur allalaadimine
+le plus gros qui tienne dans 64 Go ¦ didžiausias, telpantis į 64 GB ¦ lielākais, kas ietilpst 64 GB ¦ suurim, mis mahub 64 GB-sse
+très lent, très gros téléchargement, licence moins ouverte ¦ labai lėtas, labai didelis atsisiuntimas, mažiau atvira licencija ¦ ļoti lēns, ļoti liela lejupielāde, mazāk atvērta licence ¦ väga aeglane, väga suur allalaadimine, vähem avatud litsents
+fort en français, bon pour comprendre l’acte ¦ stiprus prancūzų kalba, gerai supranta dokumentą ¦ spēcīgs franču valodā, labi saprot dokumentu ¦ tugev prantsuse keeles, mõistab dokumenti hästi
+32 Go de mémoire conseillés, plus lent ¦ rekomenduojama 32 GB atminties, lėtesnis ¦ ieteicami 32 GB atmiņas, lēnāks ¦ soovitatav 32 GB mälu, aeglasem
+bon dans les langues européennes ¦ geras Europos kalbomis ¦ labs Eiropas valodās ¦ hea Euroopa keeltes
+licence de Google moins ouverte, moins précis sur l’écriture à la main ¦ mažiau atvira „Google“ licencija, mažiau tikslus su rankraščiu ¦ mazāk atvērta Google licence, mazāk precīzs rokrakstā ¦ vähem avatud Google’i litsents, vähem täpne käekirja puhul
+léger, plusieurs langues ¦ lengvas, kelios kalbos ¦ viegls, vairākas valodas ¦ kerge, mitu keelt
+licence de Google, se trompe souvent sur les noms ¦ „Google“ licencija, dažnai klysta dėl vardų ¦ Google licence, bieži kļūdās vārdos ¦ Google’i litsents, eksib sageli nimedes
+annoncé bon en écriture manuscrite ¦ teigiama, kad geras su rankraščiu ¦ tiek teikts, ka labs rokrakstā ¦ väidetavalt hea käekirjas
+moins connu, résultats à comparer ¦ mažiau žinomas, rezultatus reikia palyginti ¦ mazāk zināms, rezultāti jāsalīdzina ¦ vähem tuntud, tulemusi tuleb võrrelda
+très léger, fait pour les documents, ordinateurs modestes ¦ labai lengvas, skirtas dokumentams, kuklūs kompiuteriai ¦ ļoti viegls, veidots dokumentiem, pieticīgi datori ¦ väga kerge, tehtud dokumentide jaoks, tagasihoidlikud arvutid
+faible sur l’écriture à la main ancienne ¦ silpnas su senu rankraščiu ¦ vājš vecā rokrakstā ¦ nõrk vana käekirja puhul

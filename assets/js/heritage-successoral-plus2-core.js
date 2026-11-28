@@ -28,7 +28,7 @@
             {key: 'insee_write', def: 'both', options: [['both', 'Le décès sur la fiche et le statut du dossier'], ['case', 'Seulement le statut du dossier']], help: 'Ce que « ✓ C’est lui » écrit : la fiche sert aussi aux autres dossiers.'},
             {key: 'insee_threshold', def: 40, options: [[40, '40'], [60, '60']], custom: [1, 100], help: 'Les pistes sont montrées à partir de ce score (sur 100). Plus haut : moins de bruit, risque d’en rater.'},
             {key: 'insee_auto', def: 'auto', options: [['auto', 'Automatique, dans la cloche'], ['manual', 'Seulement à la main']], help: 'Après chaque nouvel import du fichier INSEE : vérifier les dossiers en cours tout seul (jamais de changement sans ton clic).'}]},
-        {tool: '📋 Questionnaire', items: [
+        {tool: '📝 Questionnaire', items: [
             {key: 'q_format', def: 'json', options: [['json', 'Un petit fichier .json'], ['html', 'La page .html remplie']], help: 'Ce que l’héritier te renvoie après avoir rempli le questionnaire.'},
             {key: 'q_prefill', def: 'yes', options: [['yes', 'Pré-rempli (ce qui le concerne)'], ['no', 'Tout vide']], help: 'Pré-rempli : son nom et sa naissance seulement, jamais le défunt ni un montant.'}]},
         {tool: '📞 Échanges', items: [
@@ -186,7 +186,7 @@
     const AMOUNT_RE = /(?:[−-]\s?)?\d{1,3}(?:[\s  .,]\d{3})*(?:[.,]\d{1,2})?\s?€|€\s?\d[\d\s  .,]*/g;
     const maskAmounts = s => String(s).replace(AMOUNT_RE, '••• €');
 
-    /* ═════ 📋 Questionnaire hors ligne ═════ */
+    /* ═════ 📝 Questionnaire hors ligne ═════ */
     /** la même somme que le serveur : SHA-256 de « identifiant|réponses en JSON » */
     async function qSum(token, answers) {
         const data = new TextEncoder().encode(`${token}|${JSON.stringify(answers)}`);

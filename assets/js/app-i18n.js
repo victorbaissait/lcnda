@@ -71,7 +71,7 @@
     ]);
     const CODES = LANGS.map(l => l.code);
     const KEY = 'lcnda-langue', COOKIE = 'lcnda_lang', BANNER_KEY = 'lcnda-i18n-banner-closed';
-    const VERSION = 84; // monter avec ?v= de assets/i18n/*.json dans index.php
+    const VERSION = 128; // monter avec ?v= de assets/i18n/*.json dans index.php
     const hasDom = typeof document !== 'undefined' && typeof window !== 'undefined';
     const isCode = c => CODES.includes(String(c || ''));
 
@@ -183,7 +183,11 @@
         if (!r) return OWN_RULES[code] ? OWN_RULES[code](x) : (x === 1 ? 'one' : 'other');
         return r.select(x);
     }
-    function fmtNumber(n, opts) { const v = Number(n); if (!Number.isFinite(v)) return String(n); try { return v.toLocaleString(locale(), opts); } catch (_) { return String(v); } }
+    // ⏱ un seul Intl.NumberFormat par langue (toLocaleString en crée un à chaque nombre : ≈ 0,3 s à l'ouverture, pour les {n} des textes)
+    const NF = new Map();
+    const nfOf = loc => { let f = NF.get(loc); if (!f) { f = new Intl.NumberFormat(loc); NF.set(loc, f); } return f; };
+    function frNumber(v) { try { return nfOf('fr-FR').format(v); } catch (_) { return v.toLocaleString('fr-FR'); } }
+    function fmtNumber(n, opts) { const v = Number(n); if (!Number.isFinite(v)) return String(n); try { return opts === undefined ? nfOf(locale()).format(v) : v.toLocaleString(locale(), opts); } catch (_) { return String(v); } }
     function fmtDate(d, opts = {day: 'numeric', month: 'short', year: 'numeric'}) {
         const x = d instanceof Date ? d : new Date(d); if (isNaN(x)) return '';
         try { return x.toLocaleDateString(locale(), opts); } catch (_) { return x.toISOString().slice(0, 10); }
@@ -194,7 +198,7 @@
         return s.replace(/\{([a-z_][a-z0-9_]*)\}/gi, (m, k) => {
             if (!Object.prototype.hasOwnProperty.call(vars, k) || k === 'ctx') return m;
             const v = vars[k];
-            return typeof v === 'number' ? (lang === 'fr' ? v.toLocaleString('fr-FR') : fmtNumber(v)) : String(v ?? '');
+            return typeof v === 'number' ? (lang === 'fr' ? frNumber(v) : fmtNumber(v)) : String(v ?? '');
         });
     }
     function pick(v, vars) {
@@ -203,11 +207,18 @@
         if (typeof v === 'object') { const n = vars && vars.n != null ? Number(vars.n) : 1; return v[category(n)] || v.other || v.one || null; }
         return null;
     }
+    /* des noms faits de deux morceaux (« Armoire Louis XV » = « Armoire » + « Louis XV ») : chaque morceau traduit, joints par « · »
+       (compose({'Armoire Louis XV': ['Armoire', 'Louis XV']}) ; le plan de maison s'en sert pour ses meubles de style) */
+    const composed = Object.create(null);
+    function compose(map) { Object.entries(map || {}).forEach(([k, v]) => { if (Array.isArray(v) && v.length === 2) composed[k] = v; }); }
     function lookup(text, ctx) {
         if (lang === 'fr') return null;
         if (ctx) { const v = dict[`${ctx}|${text}`]; if (v != null) return v; }
         const v = dict[text];
-        return v == null ? null : v;
+        if (v != null) return v;
+        const c = composed[text]; if (!c) return null;
+        const a = dict[c[0]], b = dict[c[1]];
+        return a == null && b == null ? null : `${typeof a === 'string' ? a : c[0]} · ${typeof b === 'string' ? b : c[1]}`;
     }
     /** t('texte français', {vars, ctx}) : le texte dans la langue choisie, sinon le français */
     function t(text, vars) {
@@ -350,7 +361,8 @@
                 else if (m.type === 'attributes' && !skipped(m.target)) doAttrs(m.target);
             }
         });
-        observer.observe(document.documentElement, {subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ATTRS});
+        // immédiat (app-observateurs.js) : un texte ajouté est traduit avant la tâche suivante, comme avant
+        observer.observe(document.documentElement, {subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ATTRS, lcndaImmediate: true});
     }
     function unobserve() { if (observer) { observer.disconnect(); observer = null; } }
 
@@ -452,7 +464,7 @@
         LANGS, CODES, KEY, COOKIE, AI_NOTE, VERSION,
         get lang() { return lang; }, getLang: () => lang, storedLang, locale, intlLocale, info,
         t, has, plural, frPlural, category, fmtNumber, fmtDate, fmtTime,
-        setLang, provide, load, translateText, translate: walk, revert,
+        setLang, provide, load, translateText, translate: walk, revert, compose,
         banner, setBannerClosed, bannerClosed, report, selectHtml,
         _dict: () => dict,
     };

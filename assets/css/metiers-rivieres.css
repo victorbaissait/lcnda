@@ -1,0 +1,30 @@
+/* ⛏️🏭⚙️🌊🖼️ Métiers et rivières (assets/js/heritage-metiers-rivieres.js) — reprend .hist-row (histoire.css) et .cplus-* (commune-plus.css) ;
+   ici seulement le peu qui manque. Couleurs prises du texte (currentColor) : clair et sombre. */
+.mr-block, .mr-hist { display: grid; gap: 10px; }
+.mr-hist { margin-top: 2px; }
+.mr-place { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 1rem; margin: 1rem 0; }
+.mr-place:empty { display: none; }
+.mr-place .mr-panel[data-mr-part="place_pop"] { grid-column: 1 / -1; }
+.mr-panel p { margin: .2rem 0 .4rem; line-height: 1.45; }
+.mr-more summary { cursor: pointer; margin: .3rem 0; font-size: .92em; }
+.mr-list { list-style: none; margin: .3rem 0; padding: 0; display: grid; gap: .3rem; max-height: 22rem; overflow: auto; }
+.mr-list li { padding: .3rem .55rem; border: 1px solid color-mix(in srgb, currentColor 14%, transparent); border-radius: 8px; overflow-wrap: anywhere; }
+.mr-filter { width: 100%; max-width: 22rem; margin: .2rem 0 .4rem; }
+.mr-src { margin: .5rem 0 0; font-size: .82em; opacity: .78; }
+.mr-life { font-weight: 600; }
+.mr-off { font-size: .9em; }
+@media (max-width: 640px) { .mr-place { grid-template-columns: 1fr; } }
+/* la bande d'images et les petits textes, comme « Autour du village » (commune-plus.css), au cas où celle-ci n'est pas chargée */
+.mr-place .cplus-strip { display: flex; gap: .8rem; overflow-x: auto; padding: .2rem .1rem .6rem; scroll-snap-type: x proximity; }
+.mr-place .cplus-img { flex: 0 0 220px; margin: 0; scroll-snap-align: start; border: 1px solid color-mix(in srgb, currentColor 14%, transparent); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; }
+.mr-place .cplus-img img { display: block; width: 100%; height: 150px; object-fit: cover; background: color-mix(in srgb, currentColor 8%, transparent); }
+.mr-place .cplus-img.is-noimg a:first-child { display: block; height: 150px; background: color-mix(in srgb, currentColor 8%, transparent); }
+.mr-place .cplus-img figcaption { display: flex; flex-direction: column; gap: .2rem; padding: .5rem .6rem .6rem; font-size: .9em; }
+.mr-place .cplus-img figcaption small { opacity: .8; overflow-wrap: anywhere; }
+.mr-place .cplus-img-t { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.mr-place .cplus-img figcaption .button { margin-top: auto; align-self: flex-start; }
+.mr-place .cplus-src { margin: .6rem 0 0; font-size: .82em; opacity: .78; }
+.mr-off.cplus-off, .mr-place .cplus-off { margin: .2rem 0; padding: .5rem .7rem; border-radius: 8px; background: color-mix(in srgb, currentColor 7%, transparent); }
+.mr-settings .cplus-tg { display: flex; gap: .6rem; align-items: flex-start; margin: .45rem 0; }
+.mr-settings .cplus-scroll { overflow-x: auto; }
+@media (max-width: 640px) { .mr-place .cplus-img { flex-basis: 180px; } }

@@ -1,0 +1,36 @@
+fr ¦ sq ¦ mt
+# 🔤 La langue de chaque page, 📇 tables et index (heritage-recueil-etat.js, heritage-recueil-index.js)
+dont {l} : p. {x} ¦ prej tyre {l}: f. {x} ¦ fosthom {l}: p. {x}
+Sorte de page ¦ Lloji i faqes ¦ Tip ta’ paġna
+Langue : ¦ Gjuha: ¦ Lingwa:
+Langue de ces pages… ¦ Gjuha e këtyre faqeve… ¦ Lingwa ta’ dawn il-paġni…
+Sorte : {x} ¦ Lloji: {x} ¦ Tip: {x}
+Langue de {n} pages ¦ Gjuha e {n} faqeve ¦ Lingwa ta’ {n} paġni
+Langue de la page ¦ Gjuha e faqes ¦ Lingwa tal-paġna
+Langue (vide : comme le recueil) ¦ Gjuha (bosh: si e përmbledhjes) ¦ Lingwa (vojta: bħall-ġabra)
+ex. Latin ¦ p.sh. Latinisht ¦ eż. Latin
+Langue : {l} ¦ Gjuha: {l} ¦ Lingwa: {l}
+Langue : comme le recueil ¦ Gjuha: si e përmbledhjes ¦ Lingwa: bħall-ġabra
+comme le recueil : {l} ¦ si e përmbledhjes: {l} ¦ bħall-ġabra: {l}
+pas dite ¦ nuk është treguar ¦ mhux speċifikata
+Le texte de cette page semble en latin. ¦ Teksti i kësaj faqeje duket në latinisht. ¦ It-test ta’ din il-paġna jidher bil-Latin.
+Noter « Latin » ¦ Shëno «Latinisht» ¦ Immarka “Latin”
+Tables et index ¦ Tabela dhe indekse ¦ Tabelli u indiċi
+Une table décennale, un index en fin de registre ? Marque la page « 📇 Table ou index » (onglet 🗂 État ou sur la page), puis fais son « 📊 Tableau de la page » : une ligne par entrée, une colonne pour le renvoi (f° 12, p. 3). Elles arrivent ici, avec un lien vers chaque page annoncée. ¦ Një tabelë dhjetëvjeçare, një indeks në fund të regjistrit? Shëno faqen «📇 Tabelë ose indeks» (skeda 🗂 Gjendja ose te faqja), pastaj bëj «📊 Tabela e faqes» të saj: një rresht për çdo hyrje, një kolonë për referimin (f° 12, f. 3). Hyrjet vijnë këtu, me një lidhje për çdo faqe të treguar. ¦ Tabella ta’ għaxar snin, indiċi fl-aħħar tar-reġistru? Immarka l-paġna “📇 Tabella jew indiċi” (tab 🗂 Stat jew fuq il-paġna), imbagħad agħmel it-“📊 Tabella tal-paġna” tagħha: ringiela għal kull daħla, kolonna għar-referenza (f° 12, p. 3). Id-daħliet jaslu hawn, b’link għal kull paġna indikata.
+{r} : page absente ¦ {r}: faqe që mungon ¦ {r}: paġna nieqsa
+pas de page « {r} » ¦ nuk ka faqe «{r}» ¦ l-ebda paġna “{r}”
+sans renvoi ¦ pa referim ¦ mingħajr referenza
+{a} renvois trouvés · {b} vers des pages absentes · {c} introuvables ¦ {a} referime të gjetura · {b} drejt faqeve që mungojnë · {c} të pagjetshme ¦ Referenzi misjuba: {a} · għal paġni nieqsa: {b} · ma jinstabux: {c}
+« {p} » est une table, mais son tableau est vide : ouvre la page → « 📊 Tableau de la page » (une ligne par entrée, une colonne pour le renvoi). ¦ «{p}» është tabelë, por tabela e saj është bosh: hap faqen → «📊 Tabela e faqes» (një rresht për çdo hyrje, një kolonë për referimin). ¦ “{p}” hija tabella, iżda t-tabella tagħha hija vojta: iftaħ il-paġna → “📊 Tabella tal-paġna” (ringiela għal kull daħla, kolonna għar-referenza).
+Ouvrir la page ¦ Hap faqen ¦ Iftaħ il-paġna
+Chercher dans les tables… ¦ Kërko në tabela… ¦ Fittex fit-tabelli…
+Chercher dans les tables ¦ Kërko në tabela ¦ Fittex fit-tabelli
+Toutes les entrées ¦ Të gjitha hyrjet ¦ Id-daħliet kollha
+Renvois trouvés ¦ Referime të gjetura ¦ Referenzi misjuba
+Vers des pages absentes ¦ Drejt faqeve që mungojnë ¦ Għal paġni nieqsa
+Introuvables ¦ Të pagjetshme ¦ Ma jinstabux
+dans {p} ¦ në {p} ¦ f’{p}
+… et {n} autres : affine la recherche. ¦ … dhe {n} të tjera: ngushto kërkimin. ¦ … u {n} oħra: irfina t-tfittxija.
+Page ordinaire ¦ Faqe e zakonshme ¦ Paġna ordinarja
+📇 Table ou index ¦ 📇 Tabelë ose indeks ¦ 📇 Tabella jew indiċi
+Page de garde ¦ Fletë mbrojtëse ¦ Werqa tal-għata

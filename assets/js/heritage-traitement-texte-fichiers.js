@@ -105,6 +105,7 @@
                 if (fmt === 'txt') return new Blob([T().toText(im)], {type: 'text/plain;charset=utf-8'});
                 if (fmt === 'html') return new Blob([await this.htmlFile()], {type: 'text/html;charset=utf-8'});
                 if (fmt === 'file') return new Blob([JSON.stringify({format: 'lcnda-texte', version: 1, name: this.name, data: this.docData()})], {type: 'application/json'});
+                if (fmt === 'epub') return epubOf(this);
                 throw new Error('format inconnu');
             },
             exportDialog(value = '') {
@@ -118,6 +119,7 @@
                         {id: 'rtf', label: i18n('📝 RTF'), hint: i18n('tous les traitements de texte'), ext: 'rtf', copy: false, run: async o => download(await this.fileOf('rtf'), o.filename)},
                         {id: 'md', label: i18n('✳️ Markdown (.md)'), hint: i18n('texte avec les titres'), ext: 'md', copy: false, run: async o => download(await this.fileOf('md'), o.filename)},
                         {id: 'txt', label: i18n('🧾 Texte (.txt)'), hint: i18n('le texte seul'), ext: 'txt', copy: false, run: async o => download(await this.fileOf('txt'), o.filename)},
+                        {id: 'epub', label: i18n('📱 Livre numérique (.epub)'), hint: i18n('liseuses : Kobo, Livres, Calibre…'), ext: 'epub', copy: false, run: async o => download(await this.fileOf('epub'), o.filename)},
                         {id: 'html', label: i18n('🌐 Page web (.html)'), hint: i18n('à ouvrir dans un navigateur'), ext: 'html', copy: false, run: async o => download(await this.fileOf('html'), o.filename)},
                         {id: 'file', label: i18n('💾 Fichier de l’outil'), hint: i18n('.lcnda-texte (tout est gardé)'), ext: 'lcnda-texte', copy: false, run: async o => download(await this.fileOf('file'), o.filename)},
                     ]}).then(r => { if (r && !['pdf', 'print'].includes(r.format)) toast(i18n('Exporté : {name}', {name: r.filename || base})); });
@@ -191,6 +193,7 @@
             case 'print': return ed.exportDialog('print');
             case 'tomedia': return ed.toMedia();
             case 'tolayout': return toLayout(ed);
+            case 'sendto': return sendTo(ed);
             default: toast(i18n('Commande inconnue : {cmd}', {cmd}), 'error');
         }
     };
@@ -242,7 +245,7 @@
     tools.dataOf = dataOf;
     async function chooseTemplate(ctx = {}) {
         let mine = []; try { mine = (await api('textdocs', {kind: 'template'})).items || []; } catch (_) {}
-        ext.openDialog({eyebrow: i18n('TRAITEMENT DE TEXTE'), title: i18n('📋 Partir d’un modèle'), wide: true, submitLabel: i18n('Fermer'),
+        ext.openDialog({eyebrow: i18n('TRAITEMENT DE TEXTE'), title: i18n('🧩 Partir d’un modèle'), wide: true, submitLabel: i18n('Fermer'),
             body: `<div class="wp-tpls">${tools.TEMPLATES.filter(t => !t.when || t.when()).map(t => `<button type="button" class="wp-tpl" data-tpl="${t.key}"><b>${t.icon} ${esc(i18n(t.name))}</b><small>${esc(i18n(t.hint))}</small></button>`).join('')}</div>
                 <h4>${esc(i18n('Mes modèles'))}</h4>${mine.length ? `<div class="wp-tpls">${mine.map(t => `<button type="button" class="wp-tpl" data-mine="${t.id}"><b data-i18n-off>📝 ${esc(t.name)}</b><small>${esc(plural(t.info?.words || 0, 'mot'))} · ${UI()?.whenText ? esc(UI().whenText(t.updated_at, {label: i18n('Modifié')})) : ''}</small></button>`).join('')}</div>` : A().empty(i18n('Pas encore de modèle à toi : dans un document, Fichier → « Enregistrer comme modèle… ».'), {icon: '📋'})}`,
             onOpen: d => d.addEventListener('click', async e => {
@@ -257,7 +260,9 @@
     }
     tools.chooseTemplate = chooseTemplate;
     /** depuis une fiche : « 📝 Écrire sur cette personne » (la biographie F5 déjà posée) */
-    tools.writeAbout = async (pid, ctx = {}) => { try { const t = tools.TEMPLATES.find(x => x.key === 'recit'); const html = await t.html(pid); const ppl = await api('textdoc_people', {ids: String(pid)}).catch(() => ({people: {}})); return openDoc({...ctx, data: dataOf(html, {tpl: 'recit'}), name: i18n('Récit — {name}', {name: ppl.people?.[pid]?.name || i18n('un ancêtre')})}); } catch (e) { toast(e.message, 'error'); } };
+    // double-clic sur 📝 : un seul traitement de texte (avant : deux, empilés, tous deux « modifié »)
+    tools.writeAbout = (pid, ctx = {}) => A().once(`wp-write:${Number(pid)}`, () => writeAboutNow(pid, ctx));
+    const writeAboutNow = async (pid, ctx = {}) => { try { const t = tools.TEMPLATES.find(x => x.key === 'recit'); const html = await t.html(pid); const ppl = await api('textdoc_people', {ids: String(pid)}).catch(() => ({people: {}})); return openDoc({...ctx, data: dataOf(html, {tpl: 'recit'}), name: i18n('Récit — {name}', {name: ppl.people?.[pid]?.name || i18n('un ancêtre')})}); } catch (e) { toast(e.message, 'error'); } };
 
     /* ═════════ ⤒ Importer (K13) : un nouveau document fait du fichier ═════════ */
     async function readAny(file) {
@@ -335,6 +340,42 @@
         void dlg;
     }
 
+    /* ═════════ 📱 Export ePub : le même fabricant que la Mise en page (ext.layoutKit.buildEpub) ═════════
+     * Une page de couverture (le titre), puis tout le texte dans l'ordre : chaque titre 1 commence un chapitre, les images suivent leur place, les notes à la fin. */
+    async function epubOf(ed) {
+        const Kit = ext.layoutKit; if (!Kit?.buildEpub) throw new Error(i18n('La mise en page n’est pas chargée : l’ePub ne peut pas être fait.'));
+        const th = Kit.THEMES[0], g = ed.secs[0].geo, doc = Kit.themeDoc(th, '', {w: Math.round(g.wmm), h: Math.round(g.hmm)});
+        Kit.baseStyles({titleFont: th.titleFont, bodyFont: th.bodyFont, bodySize: 11}).forEach(s => { if (!doc.paraStyles.some(x => x.id === s.id)) doc.paraStyles.push(s); });
+        const meta = ed.doc.meta || {}, title = String(meta.title || ed.name || i18n('Document')).trim();
+        doc.title = title; doc.info = {...(doc.info || {}), title, ...(meta.author ? {author: meta.author} : {})};
+        const cover = {id: Kit.nid('p'), master: 'A', items: [Kit.textItem({x: 20, y: 40, w: 150, h: 40, html: `<p data-ps="ps-title">${esc(title)}</p>${meta.subject ? `<p data-ps="ps-subtitle">${esc(meta.subject)}</p>` : ''}`})]};
+        const body = {id: Kit.nid('p'), master: 'A', items: []}; doc.pages = [cover, body];
+        const notes = [], im = ed.imOf(); let chunk = [], y = 0;
+        const flush = () => { if (!chunk.length) return; body.items.push(Kit.textItem({x: 20, y: y++, w: 150, h: 1, html: chunk.join('')})); chunk = []; };
+        const para = b => { const ps = LY_PS[b.st] || (b.list ? 'ps-list' : 'ps-body'), h = lyRuns(b.runs, notes); return h.trim() ? `<p data-ps="${ps}">${b.list && b.list.k !== 'ol' ? '• ' : ''}${h}</p>` : ''; };
+        const walk = bs => bs.forEach(b => {
+            if (b.t === 'p') { const h = para(b); if (h) chunk.push(h); }
+            else if (b.t === 'img') { flush(); if (/^media\/|^data:image\//.test(b.src || '')) body.items.push(Kit.shapeItem('frame', {x: 20, y: y++, w: 150, h: 1, src: b.src, srcName: b.cap || b.alt || i18n('Image')})); if (b.cap) chunk.push(`<p data-ps="ps-caption">${esc(b.cap)}</p>`); }
+            else if (b.t === 'table') b.rows.forEach(row => chunk.push(`<p data-ps="ps-list">${row.map(c => esc((c.blocks || []).map(T().blockText).join(' '))).join(' · ')}</p>`));
+            else if (b.blocks) walk(b.blocks);
+            (b.runs || []).forEach(r => { if (r.img?.src && /^media\//.test(r.img.src)) { flush(); body.items.push(Kit.shapeItem('frame', {x: 20, y: y++, w: 150, h: 1, src: r.img.src, srcName: r.img.alt || i18n('Image')})); } });
+        });
+        im.sections.forEach(s => walk(s.blocks)); flush();
+        if (notes.length) body.items.push(Kit.textItem({x: 20, y: y++, w: 150, h: 1, html: `<p data-ps="ps-chapter">${esc(i18n('Notes'))}</p>${notes.map((t, i) => `<p data-ps="ps-list">${i + 1}. ${esc(t)}</p>`).join('')}`}));
+        return Kit.buildEpub(doc, ed.name);
+    }
+    tools.epubOf = epubOf;
+
+    /* ═════════ 📤 Envoyer vers… : le texte (HTML simple) vers les autres outils (heritage-envoyer.js) ═════════ */
+    function sendTo(ed) {
+        if (!ext.sendTo) return toast(i18n('« Envoyer vers… » n’est pas chargé.'), 'error');
+        if (ed.typeT) ed.commit();
+        const html = ed.secs.map(s => cleanForSave(s.body)).join('');
+        const anchor = ed.dlg?.querySelector('[data-wp-menu="Fichier"] summary') || ed.dlg || null;
+        return ext.sendTo('text', {html, name: ed.name}, {anchor, title: ed.name, exclude: ['textdoc']});
+    }
+    tools.sendTo = sendTo;
+
     /* ═════════ Dans 🛠️ Outils de modification ═════════ */
     const mini = d => `<span class="wp-mini${d.info?.page?.orient === 'landscape' ? ' is-land' : ''}"><b>${esc((d.info?.heads || [])[0] || d.name)}</b>${esc(String(d.info?.preview || '').slice(0, 260))}</span>`;
     ext.editToolsExtra = ext.editToolsExtra || [];
@@ -343,8 +384,9 @@
         open: (id, again) => openDoc({id, onSaved: again, onClose: again}),
         create: again => openDoc({onSaved: again, onClose: again}),
         rename: (id, name) => post('rename_textdoc', {id, name}),
-        remove: id => post('delete_textdoc', {id}), createLabel: i18n('＋ Nouveau document'),
-        get extra() { return `<button type="button" class="button secondary" data-et-x="tpl" title="${esc(i18n('Lettre aux archives, demande d’acte, récit d’un ancêtre, compte rendu de visite, rapport de recherche…'))}">${esc(i18n('📋 Partir d’un modèle'))}</button><button type="button" class="button secondary" data-et-x="import" title="Word (.docx), LibreOffice (.odt), RTF, Markdown, texte, HTML">${esc(i18n('⤒ Importer…'))}</button>`; },
+        remove: async id => { const r = await post('delete_textdoc', {id}), doc = (r?.result || r)?.doc; if (!doc) return null; const o = {undo: async () => { const x = (await post('restore_textdoc', {doc}))?.result; o.restoredId = Number(x?.id) || 0; return x; }}; return o; }, undo: true, // ↶ Annuler : le document revient avec ses versions
+        createLabel: i18n('＋ Nouveau document'),
+        get extra() { return `<button type="button" class="button secondary" data-et-x="tpl" title="${esc(i18n('Lettre aux archives, demande d’acte, récit d’un ancêtre, compte rendu de visite, rapport de recherche…'))}">${esc(i18n('🧩 Partir d’un modèle'))}</button><button type="button" class="button secondary" data-et-x="import" title="Word (.docx), LibreOffice (.odt), RTF, Markdown, texte, HTML">${esc(i18n('⤒ Importer…'))}</button>`; },
         onExtra: (k, again) => { if (k === 'tpl') return chooseTemplate({onSaved: again, onClose: again}); if (k === 'import') return importDialog(again); }});
 
     /* ═════════ Les liens depuis le reste de l'app ═════════ */

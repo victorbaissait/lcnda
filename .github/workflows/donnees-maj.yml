@@ -1,0 +1,79 @@
+# 🗂 Rafraîchir les données tirées de Wikidata (CC0) livrées avec l'app, puis le sommaire assets/data/manifest.json,
+# et les enregistrer dans la branche lancée. L'app (Réglages → 🗂 Données, ou « ↻ Vérifier » sous le titre d'une liste)
+# lit ce sommaire sur raw.githubusercontent.com/victorbaissait/lcnda/<branche>/ : elle propose alors la mise à jour
+# (lib/donnees_maj.php : fichier vérifié par son sha256, l'ancienne version gardée).
+#
+# Lancer : onglet « Actions » → « Données Wikidata à jour » → « Run workflow » (choisir les listes).
+# Seulement des questions courtes au service SPARQL de Wikidata (User-Agent du script, sans adresse), une à la fois.
+
+name: Données Wikidata à jour
+
+on:
+  workflow_dispatch:
+    inputs:
+      lot8:
+        description: 'Le monde du village (scripts/lot8-monde-village) : tour, clubs, seigneurs, eglises'
+        type: string
+        default: 'tour'
+      histoire:
+        description: 'Histoire autour (scripts/histoire-autour) : batailles,guerres (dans cet ordre), institutions, navires (vide = rien)'
+        type: string
+        default: ''
+  push:
+    branches: ['claude/**']
+    paths: ['.github/workflows/donnees-maj.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: donnees-maj
+  cancel-in-progress: false
+
+jobs:
+  donnees:
+    # le « push » sert seulement à faire connaître ce travail à GitHub : il ne fabrique rien
+    if: github.event_name != 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # les dates git des fichiers sans « built » (scripts/donnees-manifest.js)
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: "Préférer IPv4 (pas d’IPv6 sur la machine GitHub, « Network is unreachable »)"
+        run: echo 'precedence ::ffff:0:0/96 100' | sudo tee -a /etc/gai.conf
+      - name: Le monde du village (Wikidata)
+        if: inputs.lot8 != ''
+        continue-on-error: true
+        env:
+          L8C_ONLY: ${{ inputs.lot8 }}
+          L8C_RAW: ${{ runner.temp }}/l8c-raw
+          L8C_SPARQL_GAP: '10'
+          L8C_TRIES: '6'
+        run: |
+          case "$L8C_ONLY" in *[!a-z,]*) echo "listes refusées : $L8C_ONLY"; exit 1;; esac
+          python3 scripts/lot8-monde-village/build.py
+      - name: Histoire autour (Wikidata)
+        if: inputs.histoire != ''
+        continue-on-error: true
+        env:
+          HA_ONLY: ${{ inputs.histoire }}
+        run: |
+          case "$HA_ONLY" in *[!a-z,]*) echo "listes refusées : $HA_ONLY"; exit 1;; esac
+          python3 scripts/histoire-autour/build.py --cache "$RUNNER_TEMP/ha-cache" --only "$HA_ONLY"
+      - name: Le sommaire des données (assets/data/manifest.json)
+        run: node scripts/donnees-manifest.js --branch "$GITHUB_REF_NAME"
+      - name: Enregistrer dans la branche
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/data
+          git diff --cached --quiet && { echo "rien de neuf"; exit 0; }
+          git commit -m "Données Wikidata (CC0) rafraîchies sur GitHub, et leur sommaire"
+          for i in 1 2 3; do git pull --rebase origin "$GITHUB_REF_NAME" && git push origin "HEAD:$GITHUB_REF_NAME" && break; sleep 10; done

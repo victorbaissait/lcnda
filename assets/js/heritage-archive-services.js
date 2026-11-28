@@ -8,6 +8,7 @@
  *  - « ＋ Nouveau service » (peut partir des Archives départementales d'un département) et « ＋ Créer leurs fiches » pour les
  *    services écrits à la main dans les recherches ;
  *  - le service, la série et la cote d'une source (fenêtre « Source ») et d'un média (sa fenêtre), avec le menu de choix (kind « archive_service ») ;
+ *  - ⓘ « Les séries, c’est quoi ? » (heritage-series-archives.js) : carte « 🗂 Séries », champ « Séries », champ « Série » de la source et du média ;
  *  - ext.archiveServices.open(id) (↗ Ouvrir du menu de choix), .edit(row), .lightbox(item, readOnly).
  */
 (() => {
@@ -56,7 +57,7 @@
                         <label>Recherche en ligne<input name="search_url" type="url" maxlength="600" value="${esc(r.search_url)}" placeholder="https://… (état civil, registres)"></label>
                         <label>Téléphone<input name="phone" maxlength="60" value="${esc(r.phone)}"></label>
                         <label>E-mail<input name="email" type="email" maxlength="200" value="${esc(r.email)}"></label>
-                        <label class="span-2">Séries <small>(une par ligne : « 3 E — Notaires », « 4 E — État civil », « 2 Mi — Microfilms »)</small><textarea name="series_text" rows="4" maxlength="8000" placeholder="3 E — Notaires&#10;4 E — État civil&#10;6 M — Recensements">${esc(r.series_text)}</textarea></label>
+                        <label class="span-2">Séries <small>(une par ligne : « 3 E — Notaires », « 4 E — État civil », « 2 Mi — Microfilms »)</small> ${ext.seriesArchives?.link({site: r.website_url, name: r.name}) || ''}<textarea name="series_text" rows="4" maxlength="8000" placeholder="3 E — Notaires&#10;4 E — État civil&#10;6 M — Recensements">${esc(r.series_text)}</textarea></label>
                         <label class="span-2">Autres noms <small>(ceux que tu as pu écrire dans tes dépouillements, séparés par des virgules : tout ce qui y a été consulté s’affichera sur la fiche)</small><input name="aliases" maxlength="1000" value="${esc(r.aliases)}" placeholder="AD Corrèze, Archives de Tulle"></label>
                         <label class="span-2">Notes<textarea name="notes" rows="3" maxlength="8000" placeholder="Salle de lecture, carte de lecteur, appareil photo autorisé…">${esc(r.notes)}</textarea></label>
                     </div>`,
@@ -184,8 +185,10 @@
                     ${infoRow('Adresse', nl(s.address)) + infoRow('Horaires', nl(s.opening_hours)) + infoRow('Site', link(s.website_url, 'Site du service')) + infoRow('Recherche en ligne', link(s.search_url, 'Registres et fonds en ligne'))
                     + infoRow('Téléphone', esc(s.phone)) + infoRow('E-mail', s.email ? `<a href="mailto:${esc(s.email)}">${esc(s.email)}</a>` : '') + infoRow('Autres noms', esc(s.aliases)) + infoRow('Notes', nl(s.notes))
                     || A().empty('Rien de noté : ajoute l’adresse, les horaires et le site.', {icon: '📍', action: {label: '✎ Modifier', attrs: 'data-empty-click="[data-as-edit-me]"'}})}</dl></div></section>
-                <section class="card h-asv-card"><header class="card-head"><div class="card-title"><h3>🗂 Séries</h3></div></header><div class="card-body">${series.length ? `<div class="h-asv-tablewrap"><table class="data-table h-asv-series"><thead><tr><th>Série</th><th>Ce que c’est</th><th>Consulté</th><th>Sources</th><th>Médias</th></tr></thead><tbody>${series.map(r => `<tr${r.code ? ` data-as-serie="${esc(r.code)}"` : ''}><td><strong>${esc(r.code || 'Sans série')}</strong></td><td>${esc(r.label || (r.declared ? '' : r.code ? i18n('vue dans une cote') : i18n('cote sans série reconnue')))}</td><td>${r.consulted ? `${r.consulted}${r.found ? ` <small>(${plural(r.found, 'trouvé', 'trouvés')})</small>` : ''}` : '—'}</td><td>${r.sources || '—'}</td><td>${r.media || '—'}</td></tr>`).join('')}</tbody></table></div>` : A().empty('Aucune série notée : écris-les sur la fiche (« 3 E — Notaires »), ou elles viendront des cotes de tes recherches.', {icon: '🗂'})}</div></section>
+                <section class="card h-asv-card"><header class="card-head"><div class="card-title"><h3>🗂 Séries</h3>${ext.seriesArchives?.link({site: s.website_url, name: s.name}) || ''}</div></header><div class="card-body">${series.length ? `<div class="h-asv-tablewrap"><table class="data-table h-asv-series"><thead><tr><th>Série</th><th>Ce que c’est</th><th>Consulté</th><th>Sources</th><th>Médias</th></tr></thead><tbody>${series.map(r => `<tr${r.code ? ` data-as-serie="${esc(r.code)}"` : ''}><td><strong>${esc(r.code || 'Sans série')}</strong></td><td>${esc(r.label || (r.declared ? '' : r.code ? i18n('vue dans une cote') : i18n('cote sans série reconnue')))}</td><td>${r.consulted ? `${r.consulted}${r.found ? ` <small>(${plural(r.found, 'trouvé', 'trouvés')})</small>` : ''}` : '—'}</td><td>${r.sources || '—'}</td><td>${r.media || '—'}</td></tr>`).join('')}</tbody></table></div>` : A().empty('Aucune série notée : écris-les sur la fiche (« 3 E — Notaires »), ou elles viendront des cotes de tes recherches.', {icon: '🗂'})}</div></section>
             </div>
+            <section class="card h-asv-card" data-as-recueils hidden></section>
+            <section class="card h-asv-card" data-as-sens hidden></section>
             <section class="card h-asv-card"><header class="card-head"><div class="card-title"><h3>✓ Déjà consulté chez eux <small>(${consulted.length})</small></h3></div></header><div class="card-body"><div data-as-filters></div><div data-as-consulted></div></div></section>
             <div class="h-asv-grid">
                 <section class="card h-asv-card"><header class="card-head"><div class="card-title"><h3>📚 Sources <small>(${d.sources.length})</small></h3></div></header><div class="card-body">${d.sources.length ? UI().rowsHtml(d.sources.map(x => ({thumb: '<span class="ui-card-ico" aria-hidden="true">📚</span>', name: x.title, lines: [[x.series && i18n('série {s}', {s: x.series}), x.cote && i18n('cote {c}', {c: x.cote}), plural(x.citations, 'citation')].filter(Boolean).join(' · ')], actions: x.linked ? '' : UI().badge('nom écrit', 'yellow')}))) : A().empty('Aucune source reliée : choisis ce service dans la fenêtre d’une source (« 🏛 Service d’archives »).', {icon: '📚'})}</div></section>
@@ -193,6 +196,8 @@
             </div>
             <section class="card h-asv-card"><header class="card-head"><div class="card-title"><h3>🗄️ Visites <small>(${d.visits.length})</small></h3></div></header><div class="card-body">${d.visits.length ? UI().rowsHtml(d.visits.map(v => ({thumb: '<span class="ui-card-ico" aria-hidden="true">🗄️</span>', name: v.title, open: openAttr({kind: 'visit', id: v.id}), lines: [[v.visit_date && i18n('prévue le {date}', {date: v.visit_date}), plural(v.items, 'cote')].filter(Boolean).join(' · ')], actions: v.done_at ? UI().badge('Faite', 'green') : UI().badge('À faire', 'blue')}))) : A().empty('Aucune visite préparée chez eux.', {icon: '🗄️', action: {label: '🗄️ Visites d’archives', attrs: 'data-as-visits-go'}})}</div></section>
         </section>`;
+        ext.recueilFiche?.serviceSection(ws.querySelector('[data-as-recueils]'), s);
+        ext.recueilSens?.serviceBlock(ws.querySelector('[data-as-sens]'), s); // 💡 ce qu'on trouve dans leurs recueils // 📚 les recueils chez eux, leurs lacunes (heritage-recueil-fiche.js)
         if (s.kind === 'notary') ext.complEtudes?.decorateSheet?.(ws, s); // 🏛 une étude : notaires et clercs, dossiers, courriers, délai constaté
         const box = ws.querySelector('[data-as-consulted]'), fbox = ws.querySelector('[data-as-filters]');
         const seriesCodes = [...new Set(consulted.map(c => c.series || ''))];
@@ -244,7 +249,7 @@
         const linkId = Number(form.elements.link_id?.value) || 0, sid = Number(form.elements.id?.value) || 0;
         const src = (S().currentPerson?.sources || []).find(s => (linkId && Number(s.link_id) === linkId) || (!linkId && sid && Number(s.id) === sid)) || {};
         box.innerHTML = `<legend>🏛 Service d’archives <small>(facultatif)</small></legend><div class="h-asv-source-grid"><div class="h-asv-source-svc"><span class="pk-lab">Service</span>${P().pickerField({name: 'archive_service_id', kind: 'archive_service', allowCreate: true, value: Number(src.archive_service_id) || null})}</div>
-            <label>Série<input name="archive_series" maxlength="120" value="${esc(src.archive_series || '')}" placeholder="3 E"></label><label>Cote<input name="archive_cote" maxlength="200" value="${esc(src.archive_cote || '')}" placeholder="3 E 12/4"></label></div>
+            <label>Série ${ext.seriesArchives?.link() || ''}<input name="archive_series" maxlength="120" value="${esc(src.archive_series || '')}" placeholder="3 E"></label><label>Cote<input name="archive_cote" maxlength="200" value="${esc(src.archive_cote || '')}" placeholder="3 E 12/4"></label></div>
             <p class="muted">Tout ce qui vient de ce service se retrouve sur sa fiche (Listes → Services d’archives), rangé par série.</p>`;
         const fill = () => { const c = form.elements.archive_cote?.value || '', s = form.elements.archive_series; const m = c.match(/^\s*(\d{0,3})\s*([A-Za-z]{1,4})(?=$|[\s\d/._-])/); if (s && !s.value.trim() && m) s.value = `${m[1] ? m[1] + ' ' : ''}${m[2].toUpperCase()}`; };
         form.elements.archive_cote?.addEventListener('change', fill);
@@ -273,8 +278,8 @@
         if (my !== lbSeq) return;
         box.dataset.mediaId = String(mid);
         box.innerHTML = `<span class="pk-lab">🏛 Service d’archives</span>${P().pickerField({name: '', hiddenName: false, kind: 'archive_service', allowCreate: true, value: d.service || null})}
-            <label class="h-asv-lb-series">Série <input class="lightbox-input" data-as-lb-series maxlength="120" value="${esc(d.archive_series || '')}" placeholder="3 E"></label><small class="muted" data-as-lb-state></small>`;
-        if (readOnly) box.querySelectorAll('input,button').forEach(x => { x.disabled = true; });
+            <label class="h-asv-lb-series">Série <input class="lightbox-input" data-as-lb-series maxlength="120" value="${esc(d.archive_series || '')}" placeholder="3 E"></label>${ext.seriesArchives?.link() || ''}<small class="muted" data-as-lb-state></small>`;
+        if (readOnly) box.querySelectorAll('input,button:not([data-ser-help])').forEach(x => { x.disabled = true; });
         const save = async () => {
             if (readOnly || Number(box.dataset.mediaId) !== mid) return;
             const pk = box.querySelector('.pk'), v = pk ? P().pickerValue(pk) : null;

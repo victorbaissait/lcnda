@@ -1,0 +1,128 @@
+fr ¦ lb
+# 🗂 État d’un recueil (heritage-recueil-etat.js, lib/recueil_etat.php)
+{n} lignes, {r} relues ¦ {n} Zeilen, {r} nogekuckt
+Photo à refaire ¦ Foto nei maachen
+🟢 finies ou 🔵 relues ¦ 🟢 fäerdeg oder 🔵 nogekuckt
+🟡 en cours ¦ 🟡 amgaang
+⚪ pas encore transcrites ¦ ⚪ nach net transkribéiert
+⛔ absentes ¦ ⛔ feelen
+{a} finies, {b} relues, {c} en cours, {d} à faire, {e} absentes ¦ {a} fäerdeg, {b} nogekuckt, {c} amgaang, {d} ze maachen, {e} feelen
+Fiabilité : ¦ Zouverlässegkeet:
+Pas en ligne ¦ Net online
+Blanche ¦ Eidel
+p. {x} ¦ S. {x}
+Ajouter aux demandes ¦ Bei d’Ufroen derbäisetzen
+Non communicables ¦ Net zougänglech
+Ouvrir la première ¦ Déi éischt opmaachen
+Relire la première ¦ Déi éischt nokucken
+À transcrire ¦ Ze transkribéieren
+Commencer p. {n} ¦ Mat S. {n} ufänken
+Rien ne reste à faire sur ce recueil. ¦ Op dëser Sammlung ass näischt méi ze maachen.
+Demande ajoutée ({t}) : Recherche › Suivi des registres › Demandes. ¦ Ufro derbäigesat ({t}): Recherche › Suivi vun de Registeren › Ufroen.
+Après « {a} » vient « {b} » : il manque peut-être {x}. ¦ No „{a}“ kënnt „{b}“: et feelt vläicht {x}.
+Poser ces pages comme absentes… ¦ Dës Säiten als feelend aschreiwen…
+C’est normal ¦ Dat ass normal
+« {a} » deux fois (pages {x} et {y}) : une photo en double, ou « bis » ? ¦ „{a}“ zweemol (Säiten {x} an {y}): eng duebel Foto, oder „bis“?
+Renommer en « {a} bis » ¦ An „{a} bis“ ëmbenennen
+Laisser ¦ Loossen
+Le recueil devrait avoir {e} pages, il en a {n} ici (absentes comprises) : {x} ¦ D’Sammlung misst {e} Säiten hunn, hei sinn der {n} (feelend matgezielt): {x}
+il en manque {d}. ¦ et feelen der {d}.
+{d} de trop (une photo en double ?). ¦ {d} ze vill (eng duebel Foto?).
+Poser {n} pages absentes ¦ {n} feelend Säiten aschreiwen
+Marquer {n} pages absentes ¦ {n} Säiten als feelend markéieren
+Marquer « {p} » absente ¦ „{p}“ als feelend markéieren
+🗂 ÉTAT DU RECUEIL ¦ 🗂 ZOUSTAND VUN DER SAMMLUNG
+Poser les pages ¦ D’Säiten aschreiwen
+Marquer absentes ¦ Als feelend markéieren
+Pourquoi ces pages ne sont pas là ? ¦ Firwat sinn dës Säiten net do?
+ex. arrachées, mentionné en marge du f° 16 ¦ z. B. erausgerappt, um Rand vum f° 16 erwähnt
+Ajouter aussi aux Lacunes d’archives (conseillé) ¦ Och bei d’Lücken an den Archiver derbäisetzen (ugeroden)
+Les pages ¦ D’Säiten
+Lisibilité ¦ Liesbarkeet
+(choisi) ¦ (gewielt)
+État du recueil ¦ Zoustand vun der Sammlung
+Numérotation pas dite ¦ Nummeréierung net uginn
+{n} pages attendues ¦ {n} Säiten erwaart
+Numérotation, pages attendues ¦ Nummeréierung, erwaart Säiten
+Cases ¦ Felder
+Choisir des pages ¦ Säite wielen
+Exporter l’état (tableur) ¦ Zoustand exportéieren (Tabelle)
+Clique sur les pages (Maj + clic : de… à…) ¦ Klick op d’Säiten (Shift + Klick: vu… bis…)
+Changer l’état… ¦ Zoustand änneren…
+Marquer absentes… ¦ Als feelend markéieren…
+Tout choisir ¦ Alles wielen
+Pas encore de page ¦ Nach keng Säit
+Ajoute des photos : chaque photo devient une page. ¦ Setz Fotoen derbäi: all Foto gëtt eng Säit.
+Ce qui reste, dans l’ordre conseillé ¦ Wat bleift, an der ugerodener Reiefolleg
+Les demandes vont dans Recherche › Suivi des registres › Demandes, les lacunes dans les Lacunes d’archives : les listes qui existent. ¦ D’Ufroe ginn an Recherche › Suivi vun de Registeren › Ufroen, d’Lücken an d’Lücken an den Archiver: d’Lëschten, déi et scho gëtt.
+Revenir à l’état calculé ¦ Zréck op de berechenten Zoustand
+État du texte ¦ Zoustand vum Text
+Photo bonne (plus à refaire) ¦ Foto gutt (net méi nei ze maachen)
+Lisibilité : {x} ¦ Liesbarkeet: {x}
+Plus absentes ¦ Net méi feelend
+Renommée en « {a} » ¦ Ëmbenannt an „{a}“
+État choisi ¦ Gewielten Zoustand
+Lignes relues ¦ Nogekuckt Zeilen
+Mots peu sûrs ¦ Onsécher Wierder
+Numérotation enregistrée ¦ Nummeréierung gespäichert
+Comment ce recueil est numéroté ? ¦ Wéi ass dës Sammlung nummeréiert?
+Pas dit ¦ Net uginn
+Pages attendues (pour repérer ce qui manque) ¦ Erwaart Säiten (fir ze fannen, wat feelt)
+ex. 40 ¦ z. B. 40
+dans les Lacunes d’archives ¦ an de Lücken an den Archiver
+Plus absente ¦ Net méi feelend
+Revenir à l’état calculé ({s}) ¦ Zréck op de berechenten Zoustand ({s})
+Calculé par l’Atelier (acte n° {n}) ¦ Vum Atelier berechent (Akt Nr. {n})
+Calculé : texte écrit = en cours ¦ Berechent: Text geschriwwen = amgaang
+Fiabilité de la lecture ¦ Zouverlässegkeet vun der Liesung
+rien d’écrit ¦ näischt geschriwwen
+{r} lignes relues sur {n} ¦ {r} vun {n} Zeilen nogekuckt
+Cette page est absente… ¦ Dës Säit feelt…
+État calculé ¦ Berechenten Zoustand
+Lisibilité notée ¦ Liesbarkeet notéiert
+Photo bonne ¦ Foto gutt
+Manquante ¦ Feelend
+on ne sait pas encore ¦ mir wëssen et nach net
+Perdue ou détruite ¦ Verluer oder zerstéiert
+n’existe plus ¦ gëtt et net méi
+Pas encore photographiée ¦ Nach net fotograféiert
+par moi ¦ vu mir
+Pas numérisée ¦ Net digitaliséiert
+par le service d’archives ¦ vum Archiv
+Numérisée, pas en ligne ¦ Digitaliséiert, net online
+Non communicable ¦ Net zougänglech
+jusqu’à une date ¦ bis zu engem Datum
+En restauration ¦ An der Restauratioun
+pas consultable ¦ net consultéierbar
+dans un autre registre, un autre fonds ¦ an engem anere Register, engem anere Fong
+pas absente : vide ¦ net feelend: eidel
+Paginé ¦ Paginéiert
+p. 1, 2, 3… ¦ S. 1, 2, 3…
+Folioté ¦ Foliéiert
+f° 1 r°, f° 1 v°… — conseillé pour les registres anciens ¦ f° 1 r°, f° 1 v°… — ugeroden fir al Registeren
+Sans ordre (liasse, carton) ¦ Ouni Uerdnung (Bëndel, Kartong)
+des pièces, rangées par toi ¦ Stécker, vun dir sortéiert
+Numérotation des archives ¦ Nummeréierung vum Archiv
+pièce 1, 2… donnée par le service ¦ Stéck 1, 2… vum Archiv ginn
+Bonne ¦ Gutt
+Illisible en partie ¦ Deelweis onliesbar
+Illisible ¦ Onliesbar
+Sûre ¦ Sécher
+=mot peu sûr ¦ onsécher Wuert|onsécher Wierder
+=blanche ¦ eidel|eidel
+=page à relire ¦ Säit nozekucken|Säiten nozekucken
+=page avec des mots peu sûrs ¦ Säit mat onsécheren Wierder|Säiten mat onsécheren Wierder
+=page absente posée ¦ feelend Säit ageschriwwen|feelend Säiten ageschriwwen
+=page marquée absente ¦ Säit als feelend markéiert|Säiten als feelend markéiert
+=page changée ¦ Säit geännert|Säiten geännert
+=page choisie ¦ Säit gewielt|Säiten gewielt
+État des pages ¦ Zoustand vun de Säiten
+Une case par page, une couleur par état ¦ Ee Feld pro Säit, eng Faarf pro Zoustand
+Reste à faire ¦ Bleift ze maachen
+Autre demande ¦ Aner Ufro
+À consulter en salle ¦ Am Liessall ze consultéieren
+À photographier / numériser ¦ Ze fotograféieren / ze digitaliséieren
+pages photographiées sur les {n} attendues ¦ Säite fotograféiert vun den {n} erwaarten
+pages photographiées ¦ Säite fotograféiert
+pièces photographiées sur les {n} attendues ¦ Stécker fotograféiert vun den {n} erwaarten
+pièces photographiées ¦ Stécker fotograféiert

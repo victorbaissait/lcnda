@@ -1,5 +1,5 @@
 /**
- * Atelier : 🎨 mises en page enregistrées (Apparence) · 🖼️ retouche des photos · 📋 Mes listes dans Listes et partagées.
+ * Atelier : 🎨 mises en page enregistrées (Apparence) · 🖼️ retouche des photos · 📑 Mes listes dans Listes et partagées.
  * Chargé après heritage-more.js (window.LCNDA_APP, window.LCNDA_EXT).
  */
 (() => {
@@ -44,9 +44,9 @@
         'genealogie-list-order', 'genealogie-list-hidden', 'genealogie-map-order', 'genealogie-map-hidden', 'genealogie-maintenance-order', 'genealogie-maintenance-groups', 'genealogie-list-groups', 'genealogie-mylists-order',
         'genealogie-graph-diagram-order', 'genealogie-graph-diagram-hidden', 'genealogie-graph-stats-order', 'genealogie-graph-stats-hidden',
         'genealogie-research-kind-order', 'genealogie-research-kind-hidden', // 🔎 Recherche → ordre et types cachés de « Type de recherche »
-        'genealogie-tile-cat-order', 'genealogie-tile-hidden-cats', 'genealogie-tile-hidden', 'genealogie-tile-custom-cats',
+        'genealogie-tile-cat-order', 'genealogie-tile-hidden-cats', 'genealogie-tile-hidden', 'genealogie-tile-custom-cats', 'genealogie-tile-user',
         'genealogie-person-blocks', 'genealogie-animal-blocks', 'genealogie-sheet-sections', 'genealogie-sheet-head', 'genealogie-dashboard-blocks', 'genealogie-dashboard-widget-catalog-order', 'genealogie-dashboard-widget-catalog-hidden',
-        'genealogie-events-filter', 'genealogie-stats-colors', 'genealogie-gender-colors', 'genealogie-tree-card-fields', 'genealogie-identity-name-variants-display',
+        'genealogie-events-filter', 'genealogie-stats-colors', 'genealogie-gender-colors', 'genealogie-tree-card-fields', 'genealogie-identity-name-variants-display', 'genealogie-sources-defaut',
         'genealogie-battue-level-colors', 'genealogie-person-badge-colors', 'genealogie-archive-digest-category-order', 'genealogie-heritage-flags',
         'genealogie-village-maps', 'genealogie-transcription-layout',
         'genealogie-design-custom-presets', 'genealogie-avatar-shapes', 'genealogie-person-header', 'genealogie-topbar-buttons', // ✎ Mes thèmes, formes des avatars, en-tête des fiches (app-apparence.js)
@@ -132,7 +132,7 @@
         'genealogie-accessibilite': v => ext.access?.clean ? reparse(ext.access.clean, v) : v,
         'genealogie-mode-simple': v => ext.modeSimple?.portable ? reparse(ext.modeSimple.portable, v) : null,
     };
-    const tidy = (k, v) => { const f = TIDY[k] || (isListKey(k) ? listValue : null); if (!f) return v; try { const out = f(v, k); return typeof out === 'string' && out.length <= 200000 ? out : null; } catch (_) { return null; } };
+    const tidy = (k, v) => { const f = TIDY[k] || (isListKey(k) || isLdKey(k) ? listValue : null); if (!f) return v; try { const out = f(v, k); return typeof out === 'string' && out.length <= 200000 ? out : null; } catch (_) { return null; } };
     const cleanWith = (ok, settings) => Object.fromEntries(Object.entries(settings || {}).slice(0, 3000).filter(([k, v]) => ok(k) && safeLayoutValue(k, v)).map(([k, v]) => [k, tidy(k, v)]).filter(([, v]) => v !== null));
     const cleanLayout = settings => cleanWith(isLayoutKey, settings);
     const validProfile = p => p && typeof p === 'object' && typeof p.name === 'string' && p.settings && typeof p.settings === 'object';
@@ -142,8 +142,8 @@
         const frame = UI.presetsFrame({id: o.id, what: o.what, quietApply: true,
             list: () => o.list().map(p => ({name: p.name, date: [o.summary(p.settings), day(p), p.from ? `${o.from} ${p.from}` : ''].filter(Boolean).join(' · ')})),
             apply: i => { const p = o.list()[i]; return p ? o.apply(p) : false; },
-            save: name => { const list = o.list(), same = list.findIndex(p => p.name === name), entry = {name, saved: new Date().toISOString(), settings: o.current()}; if (same >= 0) list[same] = entry; else list.push(entry); return o.keep(list); },
-            replace: i => { const list = o.list(); list[i] = {...list[i], saved: new Date().toISOString(), settings: o.current()}; return o.keep(list); },
+            save: name => { const list = o.list(), same = list.findIndex(p => p.name === name), entry = {name, saved: new Date().toISOString(), settings: o.current(), ...(o.mark || {})}; if (same >= 0) list[same] = entry; else list.push(entry); return o.keep(list); },
+            replace: i => { const list = o.list(); list[i] = {...list[i], saved: new Date().toISOString(), settings: o.current(), ...(o.mark || {})}; return o.keep(list); },
             rename: (i, name) => { const list = o.list(); list[i] = {...list[i], name}; return o.keep(list); },
             duplicate: i => { const list = o.list(), name = UI.freeName(list[i].name, list.map(x => x.name)); list.splice(i + 1, 0, {...JSON.parse(JSON.stringify(list[i])), name, saved: new Date().toISOString()}); if (!o.keep(list)) return false; toast(i18n('Copie « {name} » créée.', {name})); },
             exportOne: i => { o.exportOne(o.list()[i]); return false; },
@@ -186,31 +186,94 @@
     // Tous les réglages de l'app (« genealogie-… ») : apparence, mais aussi listes, statistiques, onglets, widgets,
     // tableaux, animaux, raccourcis… Pas ce qui est propre à cet ordinateur ni ce qui vise une fiche précise de la base.
     const ALL_PROFILES_KEY = 'genealogie-settings-profiles';
-    const ALL_SKIP = ['genealogie-auto-backup-lock', 'genealogie-baissait-ui-v2', 'genealogie-last-route', PROFILES_KEY, ALL_PROFILES_KEY, 'genealogie-site-defaults-applied',
+    const ALL_SKIP = ['genealogie-auto-backup-lock', 'genealogie-organiser-vus', 'genealogie-baissait-ui-v2', 'genealogie-last-route', PROFILES_KEY, ALL_PROFILES_KEY, 'genealogie-site-defaults-applied',
         'genealogie-dashboard-recent-people', 'genealogie-sosa-root', 'genealogie-sosa-root-name', 'genealogie-sosa-map', 'genealogie-daboville-root', 'genealogie-daboville-root-name', 'genealogie-daboville-map', 'genealogie-atelier-timers'];
     // (et pas non plus : un chemin de dossier de cet ordinateur, les fiches du Sosa multiple, les descriptions des médias de cette base,
     //  le nom de la personne qui relit, ni ce que l'app note toute seule : sections ouvertes, boutons et commandes des éditeurs)
-    ALL_SKIP.push('genealogie-auto-backup-settings', 'genealogie-sosa-multi', 'genealogie-media-alt', 'genealogie-layout-reviewer', 'genealogie-reglages-ouverts', 'genealogie-toolbar-defs', 'genealogie-editor-cmds');
+    ALL_SKIP.push('genealogie-auto-backup-settings', 'genealogie-sosa-multi', 'genealogie-media-alt', 'genealogie-layout-reviewer', 'genealogie-toolbar-defs', 'genealogie-editor-cmds');
     ALL_SKIP.push('genealogie-designs-presets'); // les « Ensembles prêts » des designs au choix et leurs réglages enregistrés : retirés (un vieux fichier qui les a s’applique sans eux)
     ALL_SKIP.push('genealogie-bg-photo'); // la photo du fond des pages (app-fond.js) : lourde, elle reste sur cet ordinateur (et un ensemble ne l’efface pas)
-    // des réglages gardés hors « genealogie-… » (sur cet ordinateur seulement) : Réordonner, Trésors, arbre décoré, citations,
-    // partage avec la famille, gabarits des décennales, voix du musée, éditeurs (dessin, montage, images en double, choix d’un média)
+    /* ═══ 📒 LE REGISTRE DES RÉGLAGES (« toute l’app », son fichier, son ↶ Annuler) — inventaire : docs/reglages-inventaire.md ═══
+     * La règle : TOUT ce que l'app garde dans localStorage sous « genealogie-… » ou « lcnda-… » est un réglage gardé par
+     * « Réglages enregistrés : toute l’app », sans rien à déclarer (un réglage ajouté demain y est d'office : ordre des listes,
+     * groupes cachés, colonnes, tris, sections repliées, favoris, raccourcis, cartes, Atelier…). Seules exceptions, ici avec leur raison :
+     * les secrets, ce qui est propre à cet ordinateur, l'état passager (brouillons, tâches, caches, dates, « déjà montré »),
+     * les données (parties, scores, calculs) et ce qui vise une fiche précise de la base (clés « …-<nombre> »).
+     * sessionStorage : jamais (passager par nature). Une clé sans ces préfixes : à déclarer dans ALL_EXTRA (gardée) ou ALL_OUTSIDE (pas
+     * gardée) — tests/test-reglages-tout.js passe tout assets/js au crible et échoue sur une clé que ce registre ne classe pas. */
+    ALL_SKIP.push(
+        'genealogie-settings-unsent', // la file d'envoi des réglages vers la base (app.js) : interne
+        'genealogie-artist-keys', // 🔑 secrets : jeton Discogs, clé TMDb (heritage-artist-import.js)
+        'genealogie-research-clock', 'genealogie-research-history', 'genealogie-atelier-wordbase', // le temps passé, l'historique des recherches, les mots du jour : des données
+        'genealogie-goose-games-v1', 'genealogie-goose-active-v1', // les parties en cours du jeu de l'oie : des données
+        'genealogie-donnees-maj-dernier', 'genealogie-donnees-file', // la date de la dernière mise à jour des données, la file des téléchargements : passager
+        'genealogie-dp-locks', 'genealogie-succ-me', 'genealogie-sosa-off', 'genealogie-dash-next-skip', // des fiches, pages ou suggestions précises de cette base
+        'genealogie-connexions-panier', 'genealogie-connexions-recents', 'genealogie-cx-put-recents', 'genealogie-inserer-recents', // le panier et ses derniers éléments, les derniers insérés (des fiches de cette base)
+        'genealogie-retouch-tip', 'genealogie-suivi-hint-closed'); // « déjà montré » (un ensemble ne les fait pas revenir)
+    // (« genealogie-reglages-ouverts », les sections ouvertes ou repliées des réglages, est désormais gardé : c'est un choix de mise en page)
+    const ALL_SKIP_RX = [
+        /-dl$/, // un téléchargement en cours (Météo, GOV, Élections, Bases officielles, Patrimoine, Prénoms, Histoire…) : passager
+        /^genealogie-tx-(cmp-)?draft-/, // les brouillons de lecture d'un acte (même « new ») : du contenu
+        /^genealogie-tx-pages-pliees-/, // les pages repliées d'UN acte (heritage-transcribe-blocs.js) : vise un acte précis, pas un réglage
+        /[-:]\d+$/, // une fiche, un acte, une carte précise de cette base (…-12, …:12)
+    ];
+    // « lcnda-… » : gardé aussi (Réordonner, groupes des Trésors, panneau de côté, cartes et calques, calculette, Atelier…), sauf :
+    const LCNDA_SKIP = [
+        'lcnda-settings-renamed-v1', // marque interne de la reprise des anciens noms (app.js)
+        'lcnda-designs-ui-v2', // copie des designs au choix pour index.php : refaite à partir de « genealogie-designs »
+        'lcnda-designs-ui-v1', 'lcnda-designs-open', 'lcnda-designs-prev-tab', // anciennes clés, retirées au démarrage
+        'lcnda-langue', 'lcnda-i18n-banner-closed', // la langue de CET ordinateur (avec le cookie lcnda_lang lu par le serveur) ; un ensemble reçu d'un cousin ne la change pas
+        'lcnda-mises-a-jour', // « Vérifier les mises à jour » : réglage de l'app installée sur cet ordinateur (Electron)
+        'lcnda-mode-simple-device', 'lcnda-mode-simple-local', // le mode simple « propre à cet appareil » : jamais ailleurs, par définition
+        'lcnda-signaler', 'lcnda-act-requester', 'lcnda-vault-owner', // une adresse e-mail, ton nom de signature : privés
+        'lcnda-jeux-famille-v1', 'lcnda-laby-games-v1', 'lcnda-bunker', 'lcnda-coloriage', // les parties et coloriages : des données
+        'lcnda-patiences-records', 'lcnda-jeux-plateau-records', 'lcnda-bunker-records', 'lcnda-tr-mystery', 'lcnda-aide-lecture-scores', // scores et records : des données
+        'lcnda-jeux-dos-image', // l'image du dos des cartes : lourde (comme la photo du fond)
+        'lcnda-calculette-ruban', 'lcnda-calculette-memoire', 'lcnda-calculette-widget', // les calculs faits : des données
+        'lcnda-journal-erreurs', 'lcnda-l10r-mots', 'lcnda-terrain-n', 'lcnda-graphs-ping', 'lcnda-faces-job', // journal, cache, compte, signal, tâche en cours
+        'lcnda-media-picker-recent', 'lcnda-mes-cartes-cur', 'lcnda-photomaps-current', // les derniers médias, la carte ouverte : des fiches de cette base
+        'lcnda-research-forms', // les formulaires de recherche remplis : des brouillons
+        'lcnda-succ-chrono', 'lcnda-succ-chrono-act', // le chronomètre des Successions en marche
+        'lcnda-premier-choice', 'lcnda-premier-go', 'lcnda-shape-one', 'lcnda-insee-checked', 'lcnda-insee-told', 'lcnda-ael-reminded', // premier lancement, « déjà montré », dates
+        'lcnda-sa-warned', 'lcnda-sd-warned', 'lcnda-vd-told', 'lcnda-offsite-warned'];
+    const LCNDA_SKIP_RX = [/^lcnda-relecture-/, /^lcnda-visite-/, /^lcnda-(roles|scene)-view:/]; // réponses d'une relecture, carnet d'une visite, vue d'UN projet
+    // une clé gardée hors des deux préfixes (aucune pour l'instant) ; et celles qui ne le sont pas, avec leur raison (le test les vérifie)
+    const ALL_EXTRA = [];
+    const ALL_OUTSIDE = {
+        'lcnda_puzzle-prefs-v1': 'ancien nom des réglages du puzzle, repris sous « lcnda-puzzle-prefs » (app-puzzle.js)',
+        'theme': 'pas une clé de l’app : un exemple de code dans l’aide-mémoire JavaScript du site web (heritage-site-web-cssjs-ref.js)',
+        'lcnda_puzzle-base-v2': 'les parties de puzzle : des données', 'lcnda_puzzle-pending-v2:': 'puzzle en cours : passager', 'lcnda_puzzle-list-v2:': 'les parties de puzzle : des données',
+    };
+    // l'ancien nom d'un réglage repris en « genealogie-… » (app.js, LCNDA_SETTING_RENAMES) n'est qu'un reflet du nouveau : gardé avec lui
     const ALL_LOCAL = ['lcnda-side-order', 'lcnda-tresors-order', 'lcnda-decor-tree', 'lcnda-cite-style', 'lcnda-layout-cite-style', 'lcnda-family-share', 'lcnda-decennale-gabarits',
         'lcnda-museum-voice-rate', 'lcnda-vx-smart', 'lcnda-vx-alignto', 'lcnda-mt-rush-sort', 'lcnda-imgdup-mode', 'lcnda-imgdup-sens', 'lcnda-media-picker-size'];
     // 🔍 le tri et l'affichage (Liste | Fiches) de chaque liste (barre H10, UI.sortOf / UI.viewOf) : sans la recherche tapée ni les filtres
     const isListKey = key => /^lcnda-(sort|view|listbar):[A-Za-z0-9_:.-]{1,120}$/.test(key);
     const isBarKey = key => key.startsWith('lcnda-listbar:');
+    // 📚 une liste de données (app-listes-donnees.js) : colonnes cachées, colonne GPS, tri, affichage, critères ; pas la recherche tapée
+    const isLdKey = key => /^lcnda-ld:[A-Za-z0-9_.-]{1,80}$/.test(key);
+    const isMergeKey = key => isBarKey(key) || isLdKey(key); // remis par-dessus ce qui est là (la recherche tapée reste), jamais effacés
     function listValue(v, key) {
+        if (isLdKey(key)) { const o = JSON.parse(v); if (!o || typeof o !== 'object' || Array.isArray(o)) return null; delete o.q; return JSON.stringify(o); }
         if (!isBarKey(key)) return key.startsWith('lcnda-view:') ? (v === 'cards' || v === 'list' ? v : null) : /^[A-Za-z0-9_.:-]{1,60}$/.test(v) ? v : null;
         const o = JSON.parse(v), out = {};
         if (typeof o?.sort === 'string' && /^[A-Za-z0-9_.:-]{1,60}$/.test(o.sort)) out.sort = o.sort;
         if (o?.view === 'cards' || o?.view === 'list') out.view = o.view;
         return Object.keys(out).length ? JSON.stringify(out) : null;
     }
-    const isAllKey = key => (/^genealogie-[a-z0-9-]{1,80}$/.test(key) && !ALL_SKIP.includes(key) && !/-\d+$/.test(key)) || isListKey(key) || ALL_LOCAL.includes(key);
+    /** la clé est-elle un réglage gardé par « toute l’app » ? (le registre ci-dessus) */
+    const isAllKey = key => typeof key === 'string' && (isListKey(key) || isLdKey(key) || ALL_LOCAL.includes(key) || ALL_EXTRA.includes(key)
+        || (/^genealogie-[a-z0-9-]{1,80}$/.test(key) && !ALL_SKIP.includes(key) && !ALL_SKIP_RX.some(rx => rx.test(key)))
+        || (/^lcnda-[A-Za-z0-9_.:-]{1,120}$/.test(key) && !LCNDA_SKIP.includes(key) && !LCNDA_SKIP_RX.some(rx => rx.test(key)) && !ALL_SKIP_RX.some(rx => rx.test(key))));
+    // un ensemble d'avant ce registre (sans « reg: 2 ») ne connaissait que « genealogie-… » et ces quelques « lcnda-… » : il n'efface pas les autres
+    const ALL_REG = 2;
+    const isAllKeyV1 = key => (/^genealogie-[a-z0-9-]{1,80}$/.test(key) || isListKey(key) || ALL_LOCAL.includes(key)) && isAllKey(key);
+    /** pourquoi une clé n'est pas gardée ('' si elle l'est) : pour le test et docs/reglages-inventaire.md */
+    const whyNot = key => isAllKey(key) ? '' : ALL_OUTSIDE[key] || (ALL_SKIP.includes(key) || LCNDA_SKIP.includes(key) ? 'listée' : 'hors registre');
+    ext.settingsRegistry = {isAllKey, whyNot, ALL_REG, skip: [...ALL_SKIP, ...LCNDA_SKIP], outside: {...ALL_OUTSIDE}, extra: [...ALL_EXTRA]};
     const MS_KEY = 'genealogie-mode-simple';
     /** un ensemble qui part dans un fichier (même enregistré avant ces précautions) : sans ce qui ne doit pas quitter cet ordinateur */
-    const portableAll = settings => Object.fromEntries(Object.entries(settings || {}).filter(([k]) => isAllKey(k)).map(([k, v]) => [k, k === MS_KEY || isListKey(k) ? tidy(k, v) : v]).filter(([, v]) => typeof v === 'string'));
+    const portableAll = settings => Object.fromEntries(Object.entries(settings || {}).filter(([k]) => isAllKey(k)).map(([k, v]) => [k, k === MS_KEY || isListKey(k) || isLdKey(k) ? tidy(k, v) : v]).filter(([, v]) => typeof v === 'string'));
     // 📈 mes graphiques et widgets sont rangés dans la base (lib/graphs.php) : l'ensemble en garde une copie sous leur
     // ancienne clé ; « Appliquer » les remet dans la base (sans effacer ceux faits depuis : ce sont des données)
     const GRAPHS_KEY = 'genealogie-custom-widgets';
@@ -218,11 +281,20 @@
         const settings = {};
         for (let i = 0; i < localStorage.length; i++) { const key = localStorage.key(i); if (key && isAllKey(key)) settings[key] = localStorage.getItem(key); }
         // le mode simple : sans le code de sortie (même haché), la personne qui regarde ni les photos cachées ; la liste : son tri et son affichage
-        Object.keys(settings).forEach(key => { if (key === MS_KEY || isListKey(key)) { const v = tidy(key, settings[key]); if (v === null) delete settings[key]; else settings[key] = v; } });
+        Object.keys(settings).forEach(key => { if (key === MS_KEY || isListKey(key) || isLdKey(key)) { const v = tidy(key, settings[key]); if (v === null) delete settings[key]; else settings[key] = v; } });
         const graphs = ext.customWidgetList?.();
         if (Array.isArray(graphs) && graphs.length) settings[GRAPHS_KEY] = JSON.stringify(graphs);
         return settings;
     }
+    /** ↶ Annuler un ensemble appliqué : tout ce que le registre garde, tel quel (le mode simple avec son code : rien ne quitte cet onglet) */
+    function snapshotAll() {
+        const settings = {};
+        for (const key of lsKeys()) if (isAllKey(key)) settings[key] = ls(key);
+        const graphs = ext.customWidgetList?.();
+        if (Array.isArray(graphs) && graphs.length) settings[GRAPHS_KEY] = JSON.stringify(graphs);
+        return settings;
+    }
+    const UNDO_KEY = 'lcnda-reglages-annuler'; // sessionStorage (cet onglet) : {name, phase: 'applied' | 'undone', settings}
     async function restoreGraphs(json) {
         let list = []; try { list = JSON.parse(json); } catch (_) { return; }
         list = (Array.isArray(list) ? list : []).filter(d => d && typeof d === 'object' && /^cw_[a-z0-9]{4,24}$/.test(String(d.id)));
@@ -232,10 +304,13 @@
     const saveAllProfiles = list => { try { localStorage.setItem(ALL_PROFILES_KEY, JSON.stringify(list)); return true; } catch (_) { toast(i18n('Trop de réglages enregistrés pour la place disponible : supprimes-en un.'), 'error'); return false; } };
     const allSummary = s => { const n = Object.keys(s).length; return `${n} réglage${n > 1 ? 's' : ''}`; };
     /** Remet un ensemble : ses réglages remplacent tous les réglages actuels (les autres reviennent à ceux de départ). */
-    async function applyAll(settings, {layoutOnly = false, keep = []} = {}) {
+    async function applyAll(settings, {layoutOnly = false, keep = [], reg = ALL_REG, name = '', undo = false} = {}) {
         // un fichier reçu : ce qui a été laissé de côté à l'import (illisible) n'efface rien ; une mise en page ne touche qu'à l'Apparence
         const release = holdAutoSave();
         const removed = [];
+        // ↶ Annuler : les réglages d'avant, gardés dans cet onglet ; après le rechargement, le message propose de les remettre
+        try { sessionStorage.setItem(UNDO_KEY, JSON.stringify(undo ? {name, phase: 'undone'} : {name, phase: 'applied', settings: snapshotAll()})); } catch (_) { try { sessionStorage.removeItem(UNDO_KEY); } catch (__) {} }
+        const known = reg >= ALL_REG ? isAllKey : isAllKeyV1; // un ensemble d'avant le registre n'efface pas ce qu'il ne connaissait pas
         if (!layoutOnly && typeof settings[GRAPHS_KEY] === 'string') {
             try { await restoreGraphs(settings[GRAPHS_KEY]); } catch (e) { release(); toast(i18n('Tes graphiques n’ont pas pu être remis : {err}', {err: e.message}), 'error'); return; }
         }
@@ -245,21 +320,36 @@
         const msNow = ls(MS_KEY);
         if (msNow && ext.modeSimple?.keepPrivate && (!layoutOnly) && !keep.includes(MS_KEY)) { try { settings = {...settings, [MS_KEY]: JSON.stringify(ext.modeSimple.keepPrivate(typeof settings[MS_KEY] === 'string' ? JSON.parse(settings[MS_KEY]) : {}, JSON.parse(msNow)))}; } catch (_) {} }
         // la barre d'une liste garde la recherche tapée et les filtres : seuls le tri et l'affichage sont remis (une liste absente ne bouge pas)
-        for (const key of lsKeys()) { if (key && key !== GRAPHS_KEY && isAllKey(key) && !isBarKey(key) && !(key in settings) && !keep.includes(key) && (!layoutOnly || isLayoutKey(key))) { removed.push(key); lsDel(key); } }
+        for (const key of lsKeys()) { if (key && key !== GRAPHS_KEY && known(key) && (undo || !isMergeKey(key)) && !(key in settings) && !keep.includes(key) && (!layoutOnly || isLayoutKey(key))) { removed.push(key); lsDel(key); } }
         const set = {};
         Object.entries(settings).forEach(([key, value]) => {
             if (!isAllKey(key) || typeof value !== 'string') return;
-            if (isBarKey(key)) { let o = {}; try { o = JSON.parse(ls(key, '{}')) || {}; } catch (_) {} try { value = JSON.stringify({...o, ...JSON.parse(value)}); } catch (_) { return; } }
-            lsSet(key, value); if (!isListKey(key)) set[key] = value;
+            if (isMergeKey(key) && !undo) { let o = {}; try { o = JSON.parse(ls(key, '{}')) || {}; } catch (_) {} try { value = JSON.stringify({...o, ...JSON.parse(value)}); } catch (_) { return; } }
+            lsSet(key, value); if (/^genealogie-/.test(key)) set[key] = value; // (seuls les « genealogie-… » vont dans la base)
         });
         refreshEarly();
         try {
             const csrf = window.INSTALL_CSRF || S().csrf || '';
-            const r = await fetch('api.php?action=save_settings', {method: 'POST', headers: {'Content-Type': 'application/json', 'X-CSRF-Token': csrf}, body: JSON.stringify({set, remove: removed.filter(k => !isListKey(k)), csrf})});
+            const r = await fetch('api.php?action=save_settings', {method: 'POST', headers: {'Content-Type': 'application/json', 'X-CSRF-Token': csrf}, body: JSON.stringify({set, remove: removed.filter(k => /^genealogie-/.test(k)), csrf})});
             if (!r.ok) throw new Error();
         } catch (_) { release(); toast(i18n('La base n’a pas pu enregistrer ces réglages : réessaie.'), 'error'); return; }
         location.reload();
     }
+    // après le rechargement : « Ensemble … appliqué » avec ↶ Annuler (une fois), ou « remis comme avant »
+    (function offerUndoAfterApply() {
+        let u = null; try { u = JSON.parse(sessionStorage.getItem(UNDO_KEY) || 'null'); sessionStorage.removeItem(UNDO_KEY); } catch (_) { u = null; }
+        if (!u || typeof u !== 'object') return;
+        const name = String(u.name || '').slice(0, 60);
+        const show = () => {
+            if (!A()?.toast) return void setTimeout(show, 300);
+            if (u.phase === 'undone') return void toast(i18n('Réglages remis comme avant l’ensemble « {name} ».', {name}));
+            if (u.phase !== 'applied' || !u.settings || typeof u.settings !== 'object') return;
+            const msg = i18n('Ensemble « {name} » appliqué.', {name});
+            const undo = () => applyAll(u.settings, {name, undo: true});
+            toast(`💾 ${msg}`, '', {kind: 'undo', action: {label: i18n('↶ Annuler'), run: undo}}); // (H7 : 6 s comme partout ; la souris dessus le garde)
+        };
+        if (document.readyState === 'complete') setTimeout(show, 600); else window.addEventListener('load', () => setTimeout(show, 600), {once: true});
+    })();
     // un fichier reçu : les mêmes précautions que pour une mise en page
     const cleanAll = settings => cleanWith(isAllKey, settings);
     ext.designPanelsEnd.push(() => `<section class="person-block-config h-layouts" id="h-allsets"><header><span class="eyebrow">${i18n('TOUS LES RÉGLAGES')}</span><h3>💾 ${i18n('Réglages enregistrés : toute l’app')}</h3><p>${i18n('Garde <b>l’intégralité</b> des réglages de l’app sous un nom : l’Apparence, mais aussi les listes et leurs colonnes, les graphiques et onglets à soi, les widgets, les tableaux, les animaux, les livrets, les raccourcis, la recherche sur internet… Tu peux y revenir en un clic, ou les passer à un autre ordinateur avec un fichier. Ne sont pas gardés : tes données, ce qui vise une fiche précise (de cujus, exceptions d’une fiche), le code pour quitter le mode simple et la personne qui regarde, et ce qui est propre à cet ordinateur.')}</p></header>
@@ -267,15 +357,15 @@
     ext.afterDesign.push(() => {
         const box = document.getElementById('h-allsets'), slot = box?.querySelector('[data-presets-slot="allsets"]');
         if (!slot) return;
-        const fileOf = (name, saved, settings) => JSON.stringify({type: 'lcnda-reglages', version: 1, name, saved, settings}, null, 1);
+        const fileOf = (name, saved, settings, reg = ALL_REG) => JSON.stringify({type: 'lcnda-reglages', version: 1, reg: Number(reg) === ALL_REG ? ALL_REG : 1, name, saved, settings}, null, 1); // reg 2 : fait avec le registre (tout « lcnda-… » aussi)
         box.querySelector('[data-h-allset-export-now]').addEventListener('click', () => { downloadText(`reglages-lcnda-${new Date().toISOString().slice(0, 10)}.lcnda-reglages.json`, fileOf(i18n('Mes réglages'), new Date().toISOString(), currentAll())); toast(i18n('Fichier prêt : il s’importe ici, sur un autre ordinateur.')); });
         slot.replaceWith(profilesFrame({id: 'apparence-tous-les-reglages', key: ALL_PROFILES_KEY, what: i18n('tous les réglages de l’app'), from: i18n('reçu de'), removed: n => i18n('Ensemble « {name} » supprimé', {name: n}),
-            list: allProfiles, keep: saveAllProfiles, current: currentAll, summary: allSummary,
+            list: allProfiles, keep: saveAllProfiles, current: currentAll, summary: allSummary, mark: {reg: ALL_REG},
             apply: async p => {
                 if (!await A().confirmBox(i18n('Tous les réglages de l’app seront remplacés (pense à enregistrer les réglages actuels si tu veux les garder). Tes données ne bougent pas. L’écran va se recharger.'), {title: i18n('Appliquer l’ensemble « {name} » ?', {name: p.name}), okLabel: i18n('Appliquer')})) return false;
-                toast(i18n('Ensemble « {name} » appliqué.', {name: p.name})); applyAll(p.settings, {layoutOnly: !!p.layoutOnly, keep: Array.isArray(p.keep) ? p.keep : []}); return false;
+                toast(i18n('Ensemble « {name} » appliqué.', {name: p.name})); applyAll(p.settings, {layoutOnly: !!p.layoutOnly, keep: Array.isArray(p.keep) ? p.keep : [], reg: Number(p.reg) || 1, name: p.name}); return false;
             },
-            exportOne: p => { downloadText(`reglages-${slug(p.name)}.lcnda-reglages.json`, fileOf(p.name, p.saved, portableAll(p.settings))); toast(i18n('Fichier prêt : il s’importe dans Réglages → Apparence → « Mes ensembles de réglages ».')); },
+            exportOne: p => { downloadText(`reglages-${slug(p.name)}.lcnda-reglages.json`, fileOf(p.name, p.saved, portableAll(p.settings), p.reg || 1)); toast(i18n('Fichier prêt : il s’importe dans Réglages → Apparence → « Mes ensembles de réglages ».')); },
             importOne: async () => {
                 const text = await pickFile('.json,application/json');
                 if (text === null) return false;
@@ -285,7 +375,7 @@
                 const settings = cleanAll(data.settings), dropped = Object.keys(data.settings).filter(k => !(k in settings)).slice(0, 500), ignored = dropped.length;
                 const list = allProfiles(); let name = String(data.name).slice(0, 60) || i18n('Réglages importés');
                 if (list.some(p => p.name === name)) name = window.LCNDA_UI.freeName(name, list.map(p => p.name));
-                list.push({name, saved: new Date().toISOString(), from: String(data.author || '').slice(0, 60), settings, keep: dropped.filter(k => typeof k === 'string'), layoutOnly: data.type === 'lcnda-mise-en-page'});
+                list.push({name, saved: new Date().toISOString(), from: String(data.author || '').slice(0, 60), settings, keep: dropped.filter(k => typeof k === 'string'), layoutOnly: data.type === 'lcnda-mise-en-page', reg: Number(data.reg) === ALL_REG ? ALL_REG : 1});
                 if (!saveAllProfiles(list)) return false;
                 toast(i18n('Ensemble « {name} » importé : clique sur « Appliquer » pour l’utiliser.', {name}) + (ignored > 0 ? ' ' + (ignored > 1 ? i18n('({n} réglages illisibles laissés de côté)', {n: ignored}) : i18n('(1 réglage illisible laissé de côté)')) : ''));
             }}));
@@ -1585,6 +1675,29 @@
     ext.rtEmbedMeta = rtEmbedMeta; ext.rtResample = rtResample; ext.rtCanvasSize = rtCanvasSize;
     const canvasBlob = (c, type = 'image/jpeg', q = 0.92) => new Promise((ok, ko) => c.toBlob(b => (b ? ok(b) : ko(new Error('Image trop grande pour le navigateur.'))), type, q));
     const saveBlobAs = (blob, name) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); };
+    /** 🗂 TIFF de base, sans compression (lisible partout) : RVB, ou RVBA si l'image a de la transparence → ArrayBuffer */
+    function rtTiff(c, dpi = 300) {
+        const W = c.width, H = c.height, px = c.getContext('2d', {willReadFrequently: true}).getImageData(0, 0, W, H).data;
+        let alpha = false; for (let i = 3; i < px.length; i += 4) if (px[i] !== 255) { alpha = true; break; }
+        const spp = alpha ? 4 : 3, len = W * H * spp;
+        const tags = [[256, 4, 1, W], [257, 4, 1, H], [258, 3, spp, 0], [259, 3, 1, 1], [262, 3, 1, 2], [273, 4, 1, 0], [274, 3, 1, 1], [277, 3, 1, spp], [278, 4, 1, H], [279, 4, 1, len], [282, 5, 1, 0], [283, 5, 1, 0], [284, 3, 1, 1], [296, 3, 1, 2]];
+        if (alpha) tags.push([338, 3, 1, 2]); // ExtraSamples : transparence non prémultipliée
+        const bpsOff = 8 + 2 + tags.length * 12 + 4, xOff = bpsOff + spp * 2, yOff = xOff + 8, dataOff = yOff + 8;
+        const buf = new ArrayBuffer(dataOff + len), v = new DataView(buf), u8 = new Uint8Array(buf);
+        v.setUint8(0, 0x49); v.setUint8(1, 0x49); v.setUint16(2, 42, true); v.setUint32(4, 8, true); v.setUint16(8, tags.length, true);
+        const late = {258: bpsOff, 273: dataOff, 282: xOff, 283: yOff};
+        tags.forEach(([tag, type, count, val], i) => {
+            const o = 10 + i * 12; v.setUint16(o, tag, true); v.setUint16(o + 2, type, true); v.setUint32(o + 4, count, true);
+            if (tag in late) v.setUint32(o + 8, late[tag], true); else if (type === 3) v.setUint16(o + 8, val, true); else v.setUint32(o + 8, val, true);
+        });
+        v.setUint32(10 + tags.length * 12, 0, true); // pas d'autre page
+        for (let k = 0; k < spp; k++) v.setUint16(bpsOff + k * 2, 8, true);
+        [xOff, yOff].forEach(o => { v.setUint32(o, dpi, true); v.setUint32(o + 4, 1, true); });
+        if (alpha) u8.set(px, dataOff);
+        else for (let i = 0, j = dataOff; i < px.length; i += 4, j += 3) { u8[j] = px[i]; u8[j + 1] = px[i + 1]; u8[j + 2] = px[i + 2]; }
+        return buf;
+    }
+    ext.rtTiff = rtTiff;
     /** 🖨 Imprimer une image (une page, centrée) sans quitter l'outil */
     const printBlob = (blob, title = 'Image') => new Promise(res => {
         if (window.LCNDA_UI?.openPrintDialog) { const u = URL.createObjectURL(blob); setTimeout(() => URL.revokeObjectURL(u), 600000); window.LCNDA_UI.openPrintDialog({title, key: 'image', photos: false, margin: 10, html: `<!doctype html><title>${esc(title)}</title><style>html,body{margin:0}img{display:block;max-width:100%;max-height:96vh;margin:auto}</style><img alt="" src="${u}">`}); res(); return; } // L1 : la fenêtre « Imprimer » commune ; sinon, le secours ci-dessous
@@ -1595,7 +1708,7 @@
     });
     /** Une copie de l'image dans les médias, rattachée aux mêmes fiches que le média de départ (ou seule, sans média de départ) */
     async function rtUploadCopy(blob, {mediaId = 0, title = 'Image'} = {}) {
-        const fd = new FormData(), ext0 = blob.type === 'image/png' ? 'png' : 'jpg'; fd.append('file', blob, 'export.' + ext0); fd.append('title', String(title).slice(0, 300)); fd.append('csrf', A().state.csrf);
+        const fd = new FormData(), ext0 = blob.type === 'image/png' ? 'png' : blob.type === 'image/webp' ? 'webp' : 'jpg'; fd.append('file', blob, 'export.' + ext0); fd.append('title', String(title).slice(0, 300)); fd.append('csrf', A().state.csrf);
         if (mediaId) { fd.append('media_id', mediaId); fd.append('mode', 'copy'); fd.append('show', '0'); } else fd.append('kind', 'image');
         const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': A().state.csrf}}), j = await r.json().catch(() => ({error: 'Réponse illisible du serveur'}));
         if (!r.ok || j.error) throw new Error(j.error || 'Copie impossible.');
@@ -1613,12 +1726,21 @@
             let c = await full();
             if (o.format === 'print' || type === 'image/jpeg') { const w = document.createElement('canvas'); w.width = c.width; w.height = c.height; const g = w.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, w.width, w.height); g.drawImage(c, 0, 0); c = w; } // le JPG n'a pas de transparence : fond blanc
             if (o.format === 'print') return printBlob(await canvasBlob(c, 'image/jpeg', 0.95), title);
-            let blob = await canvasBlob(c, type, 0.93); if (meta) blob = await rtEmbedMeta(blob, await meta()); saveBlobAs(blob, o.filename);
-            if (o.saveCopy) { await rtUploadCopy(blob, {mediaId, title: copyTitle || title}); toast('Image téléchargée ; une copie est rangée dans les médias.'); }
+            let blob;
+            if (type === 'image/tiff') blob = new Blob([rtTiff(c)], {type: 'image/tiff'}); // 🗂 TIFF sans compression (archives)
+            else {
+                blob = await canvasBlob(c, type, 0.93);
+                if (type === 'image/webp' && blob.type !== 'image/webp') throw new Error(i18n('Ce navigateur ne sait pas faire du WebP : choisis PNG ou JPG.'));
+                if (meta && type !== 'image/webp') blob = await rtEmbedMeta(blob, await meta());
+            }
+            saveBlobAs(blob, o.filename);
+            if (o.saveCopy) { await rtUploadCopy(type === 'image/tiff' ? await canvasBlob(c, 'image/png') : blob, {mediaId, title: copyTitle || title}); toast('Image téléchargée ; une copie est rangée dans les médias.'); } // les médias ne gardent pas le TIFF : une copie en PNG
         };
         return UI.openExportDialog({title, defaultName: title, quality: false, saveCopy: !!mediaId, copyChecked: !!mediaId, info: '',
             preview: async () => { const c = await full(), k = Math.min(1, 360 / Math.max(c.width, c.height)), t = document.createElement('canvas'); t.width = Math.max(1, Math.round(c.width * k)); t.height = Math.max(1, Math.round(c.height * k)); t.getContext('2d').drawImage(c, 0, 0, t.width, t.height); return t.toDataURL('image/jpeg', 0.85); },
-            formats: [{id: png ? 'png' : 'jpg', run: run(png ? 'image/png' : 'image/jpeg')}, {id: png ? 'jpg' : 'png', run: run(png ? 'image/jpeg' : 'image/png')}, {id: 'print', run: run('print')}]});
+            formats: [{id: png ? 'png' : 'jpg', run: run(png ? 'image/png' : 'image/jpeg')}, {id: png ? 'jpg' : 'png', run: run(png ? 'image/jpeg' : 'image/png')},
+                {id: 'webp', label: i18n('🌐 WebP'), hint: i18n('léger, pour le web'), ext: 'webp', run: run('image/webp')}, {id: 'tiff', label: i18n('🗂 TIFF'), hint: i18n('sans perte, pour archiver'), ext: 'tif', run: run('image/tiff')},
+                {id: 'print', run: run('print')}]});
     };
     /** ⤓ Exporter l'avant / après : la fenêtre d'export unique, avec la disposition, la position du rideau et la légende dans l'aperçu */
     ext.rtBeforeAfterExport = ({title = 'Photo', getBefore, getAfter, mediaId = 0, pos = 0.5, vertical = true, layout = ''} = {}) => {
@@ -1748,7 +1870,7 @@
                 for (const [i, r] of rows.entries()) {
                     state.innerHTML = window.LCNDA_UI?.spinner ? window.LCNDA_UI.spinner(`${i + 1} / ${rows.length} · ${r.name}`) : esc(r.name);
                     try {
-                        const d = await api('person', {id: r.id}), pe = d.person || {}; r.name = `${pe.first_name || ''} ${pe.last_name || ''}`.trim() || r.name;
+                        const d = await api('person', {id: r.id}), pe = d.person || {}; r.name = (pe.first_name || pe.last_name ? A().personName(pe) : '') || r.name;
                         const imgs = (d.media || []).filter(m => (m.media_type || 'image') === 'image' && /\.(jpe?g|png|webp)$/i.test(m.filename || ''));
                         // le portrait d'abord, puis les photos où la personne est identifiée (la boîte de son visage aide quand le modèle manque)
                         const portrait = imgs.find(x => Number(x.id) === Number(pe.portrait_media_id)) || null; let m = null, hint = null;
@@ -1869,6 +1991,31 @@
         ['colorize', '🌈 Coloriser une photo en noir et blanc', 'Tout seul (un dégradé de couleurs d’époque), ou à la main : choisis une couleur ci-dessous et peins doucement, la lumière de la photo est gardée.', '<button type="button" class="button small" data-rt-cmd="colorize:auto">🎨 Coloriser tout seul</button><button type="button" class="button small secondary" data-rt-cmd="colorize:paint">🖌 Coloriser au pinceau</button><div class="h-rt-palette">' + RT_PALETTE.map(([c, l]) => `<button type="button" data-rt-cmd="restore:color:${c}" style="background:${c}" title="${l}"></button>`).join('') + '</div>'],
         ['save', '✅ Comparer et enregistrer', 'Garde appuyé « 👁 Avant / après » (sous la photo) pour comparer, ou « ◧ Rideau » pour glisser de l’un à l’autre. La photo restaurée devient une nouvelle version : l’original reste.', '<button type="button" class="button small" data-rt-cmd="save:show">💾 Enregistrer et afficher</button><button type="button" class="button small secondary" data-rt-cmd="proj:save">Garder le travail pour plus tard</button>'],
     ];
+    /* ⚡ Actions de la retouche (réglages gardés sous un nom) : lues ici, rejouées sur une image entière — aussi par les Traitements par lot (ext.retouchActions) */
+    const RT_ACT_KEY = 'genealogie-retouch-actions';
+    const rtActList = () => { try { const v = JSON.parse(localStorage.getItem(RT_ACT_KEY) || '[]'); return Array.isArray(v) ? v : []; } catch (_) { return []; } };
+    const rtActId = (a, i) => String(a?.id || `act-${a?.at || i}`);
+    /** une action sur une image entière (en pleine taille) → un canevas */
+    const rtActRender = (im, a) => {
+        const W = im.naturalWidth || im.width, H = im.naturalHeight || im.height, mk = () => { const c = document.createElement('canvas'); c.width = W; c.height = H; return c; };
+        const adj0 = () => { const d = rtDefault(); delete d.crop; delete d.persp; return d; };
+        const c = mk(), g = c.getContext('2d', {willReadFrequently: true}); g.drawImage(im, 0, 0);
+        const d = g.getImageData(0, 0, W, H); g.putImageData(rtApply(d, d, {...rtDefault(), ...a.st}), 0, 0);
+        for (const x of a.adj || []) { const id = g.getImageData(0, 0, W, H), o = new ImageData(W, H); rtApply(id, o, {...adj0(), ...x.st}); const t = mk(); t.getContext('2d').putImageData(o, 0, 0); g.globalAlpha = x.opacity ?? 1; g.drawImage(t, 0, 0); g.globalAlpha = 1; }
+        return c;
+    };
+    ext.retouchActions = {
+        /** [{id, name}] : les actions enregistrées dans la Retouche (Fichier → ⚡ Actions) */
+        list: () => rtActList().map((a, i) => ({id: rtActId(a, i), name: String(a.name || i18n('Action'))})),
+        /** rejoue l'action sur une image (Blob) → Promise<Blob> (PNG ou WebP gardés, sinon JPG) */
+        apply: async (blob, id) => {
+            const all = rtActList(), a = all.find((x, i) => rtActId(x, i) === String(id)); if (!a) throw new Error(i18n('Cette action de retouche n’existe plus.'));
+            const url = URL.createObjectURL(blob), im = new Image();
+            try { im.src = url; await im.decode(); } catch (_) { throw new Error(i18n('Impossible d’ouvrir cette image.')); } finally { setTimeout(() => URL.revokeObjectURL(url), 1000); }
+            const type = /png|webp/.test(blob.type) ? blob.type : 'image/jpeg';
+            return canvasBlob(rtActRender(im, a), type, 0.93);
+        },
+    };
     async function openRetouch(source = '', project = null, {advanced = false, tab = '', restoreAll = false, idphoto = false} = {}) {
         // la retouche simple (celle de la 0.5.0) si c'est la dernière choisie ; un projet s'ouvre toujours ici
         let mode0 = ''; try { mode0 = localStorage.getItem('genealogie-retouch-mode') || ''; } catch (_) {}
@@ -1899,7 +2046,7 @@
         const VTOOLS = [['move', '➤', 'Déplacer un élément d’un calque (V)', 'v'], ['marquee', '⬚', 'Sélection rectangle (M)', 'm'], ['ellipsesel', '◯', 'Sélection ellipse (⇧M)', ''], ['lasso', '➰', 'Lasso : entourer à main levée (L)', 'l'], ['polysel', '✒︎', 'Plume : sélection point par point (P) — double-clic ou Entrée pour fermer', 'p'], ['wand', '🪄', 'Sélection automatique (baguette magique) (W)', 'w'], ['crop', '⌗', 'Recadrer et redresser (C)', 'c'],
             ['heal', '🩹', 'Correcteur de taches (J)', 'j'], ['repair', '🪡', 'Réparer un pli ou une déchirure (R) : peins dessus, c’est refait d’après les alentours', 'r'], ['clone', '🧬', 'Tampon : un endroit, ou une zone sélectionnée (S)', 's'], ['brush', '🖌', 'Pinceau (B)', 'b'], ['eraser', '🧽', 'Gomme (E) : efface le calque choisi ; sur la photo, elle la cache avec un masque (rien n’est perdu)', 'e'], ['shape', '⬜', 'Formes : rectangle, ellipse, ligne, flèche (U)', 'u'], ['gradient', '▦', 'Dégradé (G) : glisse pour le tracer ; sur un masque, il fond le calque', 'g'], ['text', 'T', 'Texte (T)', 't'], ['hand', '✋', 'Main, ou barre d’espace (H)', 'h'], ['zoom', '🔍', 'Zoom (Z) — ⌥ pour reculer', 'z']];
         const MENUS = [
-            ['Fichier', [['proj:save', '💾 Enregistrer le projet (pour continuer plus tard)', '⌘S'], ['proj:saveas', 'Enregistrer le projet sous un autre nom…', '⇧⌘S'], ['proj:open', '📂 Ouvrir un projet…'], ['-'], ['save:show', 'Enregistrer et afficher cette version'], ['save:keep', 'Enregistrer sans l’afficher'], ['save:copy', 'Copie séparée'], ['versions', '🕘 Versions…'], ['-'], ['info', 'ℹ️ Informations…'], ['-'], ['export:image', '⤓ Exporter l’image (PNG, JPG, imprimer)…'], ['export:ba', '⤓ Exporter l’avant / après…'], ['psd:export', '🗂 Exporter en PSD (avec les calques)…'], ['psd:import', '🗂 Importer les calques d’un PSD…'], ['-'], ['actions', '⚡ Actions : réglages enregistrés, à refaire sur plusieurs photos…'], ['-'], ['simple', '⚡ Passer à la retouche rapide'], ['close', 'Fermer']]],
+            ['Fichier', [['proj:save', '💾 Enregistrer le projet (pour continuer plus tard)', '⌘S'], ['proj:saveas', 'Enregistrer le projet sous un autre nom…', '⇧⌘S'], ['proj:open', '📂 Ouvrir un projet…'], ['-'], ['save:show', 'Enregistrer et afficher cette version'], ['save:keep', 'Enregistrer sans l’afficher'], ['save:copy', 'Copie séparée'], ['versions', '🕘 Versions…'], ['-'], ['info', 'ℹ️ Informations…'], ['-'], ['export:image', '⤓ Exporter l’image (PNG, JPG, WebP, TIFF, imprimer)…'], ['export:ba', '⤓ Exporter l’avant / après…'], ['send', '📤 Envoyer vers…'], ['psd:export', '🗂 Exporter en PSD (avec les calques)…'], ['psd:import', '🗂 Importer les calques d’un PSD…'], ['-'], ['actions', '⚡ Actions : réglages enregistrés, à refaire sur plusieurs photos…'], ['-'], ['simple', '⚡ Passer à la retouche rapide'], ['close', 'Fermer']]],
             ['Édition', [['undo', '↶ Annuler', '⌘Z'], ['redo', '↷ Rétablir', '⇧⌘Z'], ['tab:history', '🕘 Historique']]],
             ['Image', [['tab:adjust', '🎚 Réglages, niveaux et courbe'], ['hs:photo', '🎨 Teinte/Saturation…'], ['preset:0', 'Réglage automatique'], ['mode:crop', '⌗ Recadrer et redresser'], ['straighten:auto', '📐 Redresser automatiquement'], ['cropclear', 'Annuler le recadrage'], ['mode:persp', '⧈ Redresser la perspective (photo prise de biais)…'], ['persp:clear', 'Enlever la perspective'], ['-'], ['imgsize', '📏 Taille de l’image…'], ['canvassize', '⬚ Taille de la zone de travail…'],
                 ['>', '🔄 Rotation de l’image', [['rot:cw', '↻ 90° horaire'], ['rot:ccw', '↺ 90° antihoraire'], ['rot:180', '180°'], ['rot:angle', 'Angle…'], ['rot:level', '📐 Redresser l’horizon (tracer une ligne)…'], ['flip:h', '⇆ Symétrie horizontale de l’image'], ['flip:v', '⇅ Symétrie verticale de l’image']]], ['-'],
@@ -1915,7 +2062,7 @@
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-retouch h-rt2'; dlg.dataset.ownClose = '1'; // il demande lui-même avant de fermer
         // E1 : icône · nom tapable · menus · ↶ ↷ · … · ✓ Enregistré · ⚙️ Personnaliser · ⤓ Exporter ▾ · 💾 Enregistrer · ⛶ · ×
         const sec = (title, key, body, open = true) => window.LCNDA_UI?.panelSection ? window.LCNDA_UI.panelSection({title, key, open, body}) : `<details ${open ? 'open' : ''}><summary>${esc(title)}</summary>${body}</details>`;
-        dlg.innerHTML = `<div class="h-rt-head h-rt-topbar"><span class="ui-topbar-icon" aria-hidden="true">🎚️</span><input class="ui-topbar-name" data-rt-name value="${esc(project?.name || item.title || item.filename || 'Photo')}" maxlength="160" aria-label="Nom du projet de retouche" title="Le nom du projet de retouche (tape pour le changer)"><nav class="h-rt-menubar">${MENUS.map(([l, items]) => `<details class="h-rt-menu"><summary>${esc(i18n(l, {ctx: 'menu'}) !== l ? i18n(l, {ctx: 'menu'}) : tr(l))}</summary><div class="h-rt-menulist">${items.map(([k, t, sc]) => k === '-' ? '<hr>' : k === '>' ? `<div class="h-rt-sub"><button type="button" class="h-rt-subh"><span>${esc(tr(t))}</span><kbd>▸</kbd></button><div class="h-rt-menulist h-rt-sublist">${sc.map(([k2, t2]) => `<button type="button" data-rt-cmd="${k2}"><span>${esc(tr(t2))}</span></button>`).join('')}</div></div>` : `<button type="button" data-rt-cmd="${k}"><span>${esc(tr(t))}</span>${sc ? `<kbd>${sc}</kbd>` : ''}</button>`).join('')}</div></details>`).join('')}</nav><span class="ui-topbar-hist h-rt-hist-btns"><button type="button" class="icon-button small" data-rt-undo disabled title="Annuler (⌘Z)" data-shortcut="⌘Z">↶</button><button type="button" class="icon-button small" data-rt-redo disabled title="Rétablir (⇧⌘Z)" data-shortcut="⇧⌘Z">↷</button></span><button type="button" class="button small secondary" data-rt-cmd="simple" title="Passer à la retouche rapide (celle de la version 0.5.0) : réglages, courbe, taches, tampon — moins de boutons">⚡ Rapide</button><span class="spacer"></span><span class="ui-status" data-ui-status data-rt-status></span>${ext.tbButton('retouch')}<details class="h-rt-menu h-rt-exportmenu"><summary title="Exporter : l’image retouchée (PNG, JPG, imprimer) ou l’avant / après">⤓ Exporter ▾</summary><div class="h-rt-menulist"><button type="button" data-rt-cmd="export:image"><span>🖼 L’image retouchée (PNG, JPG, imprimer)…</span></button><button type="button" data-rt-cmd="export:ba"><span>◧ Avant / après (côte à côte ou rideau)…</span></button></div></details><button type="button" class="button small" data-rt-projsave data-ui-cmd="save" title="Enregistrer le projet : tout le travail (calques, masques, réglages…) pour le rouvrir et continuer" data-shortcut="⌘S">💾 Enregistrer</button>${ext.fullButton('retouch')}<button type="button" class="icon-button" data-rt-close aria-label="Fermer" title="Fermer">×</button></div>
+        dlg.innerHTML = `<div class="h-rt-head h-rt-topbar"><span class="ui-topbar-icon" aria-hidden="true">🎚️</span><input class="ui-topbar-name" data-rt-name value="${esc(project?.name || item.title || item.filename || 'Photo')}" maxlength="160" aria-label="Nom du projet de retouche" title="Le nom du projet de retouche (tape pour le changer)"><nav class="h-rt-menubar">${MENUS.map(([l, items]) => `<details class="h-rt-menu"><summary>${esc(i18n(l, {ctx: 'menu'}) !== l ? i18n(l, {ctx: 'menu'}) : tr(l))}</summary><div class="h-rt-menulist">${items.map(([k, t, sc]) => k === '-' ? '<hr>' : k === '>' ? `<div class="h-rt-sub"><button type="button" class="h-rt-subh"><span>${esc(tr(t))}</span><kbd>▸</kbd></button><div class="h-rt-menulist h-rt-sublist">${sc.map(([k2, t2]) => `<button type="button" data-rt-cmd="${k2}"><span>${esc(tr(t2))}</span></button>`).join('')}</div></div>` : `<button type="button" data-rt-cmd="${k}"><span>${esc(tr(t))}</span>${sc ? `<kbd>${sc}</kbd>` : ''}</button>`).join('')}</div></details>`).join('')}</nav><span class="ui-topbar-hist h-rt-hist-btns"><button type="button" class="icon-button small" data-rt-undo disabled title="Annuler (⌘Z)" data-shortcut="⌘Z">↶</button><button type="button" class="icon-button small" data-rt-redo disabled title="Rétablir (⇧⌘Z)" data-shortcut="⇧⌘Z">↷</button></span><button type="button" class="button small secondary" data-rt-cmd="simple" title="Passer à la retouche rapide (celle de la version 0.5.0) : réglages, courbe, taches, tampon — moins de boutons">⚡ Rapide</button><span class="spacer"></span><span class="ui-status" data-ui-status data-rt-status></span>${ext.tbButton('retouch')}<details class="h-rt-menu h-rt-exportmenu"><summary title="${esc(i18n('Exporter : l’image retouchée (PNG, JPG, WebP, TIFF, imprimer) ou l’avant / après'))}">⤓ Exporter ▾</summary><div class="h-rt-menulist"><button type="button" data-rt-cmd="export:image"><span>${esc(i18n('🖼 L’image retouchée (PNG, JPG, WebP, TIFF, imprimer)…'))}</span></button><button type="button" data-rt-cmd="export:ba"><span>◧ Avant / après (côte à côte ou rideau)…</span></button></div></details><button type="button" class="button small" data-rt-projsave data-ui-cmd="save" title="Enregistrer le projet : tout le travail (calques, masques, réglages…) pour le rouvrir et continuer" data-shortcut="⌘S">💾 Enregistrer</button>${ext.fullButton('retouch')}<button type="button" class="icon-button" data-rt-close aria-label="Fermer" title="Fermer">×</button></div>
             <div class="h-rt-bar" data-tbg="rt-bar" data-tbg-label="Barre du haut (groupes)">
                 <span class="h-rt-modes" role="toolbar" data-tb="modes" data-tb-label="Les outils" data-tbg="rt-modes" data-tbg-label="Outils">${TOOLS.map(([k, i, l]) => `<button type="button" class="button small ${k === 'adjust' ? '' : 'secondary'}" data-rt-mode="${k}" title="${esc(tr(l))}" data-shortcut="${esc((VTOOLS.find(v => v[0] === k)?.[3] || '').toUpperCase())}">${i} ${esc(tr(l))}</button>`).join('')}</span>
             </div>
@@ -3096,7 +3243,7 @@
             editingTA = {ta, op, restyle, finish};
             ta.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); finish(true); } if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); finish(false); } });
             // cliquer dans le panneau de droite (🔤 Caractère) ne termine pas l'écriture : on revient dans la zone
-            ta.addEventListener('blur', () => setTimeout(() => { if (over) return; const a = document.activeElement; if (a && a.closest?.('.h-rt-side, .h-rt-opts, [data-rt-opts], .ui-fontpick, dialog.ui-fontpick, .ui-colorbox')) return; finish(true); }, 0));
+            ta.addEventListener('blur', () => setTimeout(() => { if (over) return; const a = document.activeElement; if (a && a.closest?.('.h-rt-side, .h-rt-opts, [data-rt-opts], .ui-fontpick, dialog.ui-fontpick, .ui-colorbox, .cx-qi')) return; finish(true); }, 0));
         };
         // ── Sélections : rectangle, ovale, lasso, plume, baguette ; ⇧ ajoute, ⌥ enlève ──
         function selPath(g, d) {
@@ -3430,8 +3577,7 @@
         dlg.addEventListener('change', e => { if (!e.target.matches('[data-rt-fxadd]')) return; const k = e.target.value, n = adjNode(); e.target.value = ''; if (!k || !n) return; n.st.filters = n.st.filters || {}; const ch = n.st.filters.chain = n.st.filters.chain || []; ch.push({t: k, ...fxDefaults(k)}); syncControls(); fxDialog(k, {node: n.id, i: ch.length - 1, added: true}); }); // « Annuler » l'enlève
         /* ⚡ Actions : les réglages de la photo (niveaux, courbe, filtres, colorisation…) et ses calques de réglage sans masque,
            gardés sous un nom, pour les remettre ici ou les appliquer d'un coup à plusieurs photos (une nouvelle version de chacune). */
-        const ACT_KEY = 'genealogie-retouch-actions';
-        const actList = () => { try { const v = JSON.parse(localStorage.getItem(ACT_KEY) || '[]'); return Array.isArray(v) ? v : []; } catch (_) { return []; } };
+        const ACT_KEY = RT_ACT_KEY, actList = rtActList;
         const actSave = l => { try { localStorage.setItem(ACT_KEY, JSON.stringify(l)); return true; } catch (_) { toast('Plus de place pour les actions : supprimes-en une.', 'error'); return false; } };
         const actOf = () => { const s0 = rtClone({...st}); ['strokes', 'crop', 'persp', '_persp0'].forEach(k => delete s0[k]);
             const adj = []; layers.forEach(n => { if (typeOf(n) === 'adjust' && n.visible && !n.mask && !n.clip) adj.push({name: n.name, opacity: n.opacity ?? 1, st: rtClone(n.st)}); });
@@ -3446,12 +3592,7 @@
         };
         const actApplyHere = a => { Object.assign(st, rtDefault(), rtClone(a.st), {strokes: st.strokes, crop: st.crop, persp: st.persp}); (a.adj || []).forEach(x => { const n = newAdjust(x.name); n.opacity = x.opacity; n.st = {...adjDefault(), ...rtClone(x.st)}; }); refreshLayers(); syncControls(); commit(i18n('Action « {name} »', {name: a.name})); };
         /** une action sur une image entière (en pleine taille) */
-        const actRender = (im, a) => {
-            const W = im.naturalWidth, H = im.naturalHeight, c = blank(W, H), g = c.getContext('2d', {willReadFrequently: true}); g.drawImage(im, 0, 0);
-            const d = g.getImageData(0, 0, W, H); g.putImageData(rtApply(d, d, {...rtDefault(), ...a.st}), 0, 0);
-            for (const x of a.adj || []) { const id = g.getImageData(0, 0, W, H), o = new ImageData(W, H); rtApply(id, o, {...adjDefault(), ...x.st}); const t = blank(W, H); t.getContext('2d').putImageData(o, 0, 0); g.globalAlpha = x.opacity ?? 1; g.drawImage(t, 0, 0); g.globalAlpha = 1; }
-            return c;
-        };
+        const actRender = rtActRender;
         function actionsDialog() {
             const d2 = document.createElement('dialog'); d2.className = 'modal h-modal h-modal-wide h-rt-actions';
             const draw2 = () => { const list = actList();
@@ -3843,6 +3984,7 @@
             if (k === 'repair:detect') return creasePanel();
             if (k === 'imgsize') return imageSizeDialog();
             if (k === 'canvassize') return canvasSizeDialog();
+            if (k === 'send') { if (!ext.sendImage) return; try { const c = await renderFull(), bl = await canvasBlob(c, 'image/png'); ext.sendImage(bl, {title: (typeof docTitle === 'function' ? docTitle() : '') || i18n('Image retouchée'), anchor: dlg.querySelector('.h-rt-menubar, nav'), exclude: ['retouch']}); } catch (e) { toast(e.message, 'error'); } return; }
             if (k === 'info') return infoDialog();
             if (k === 'versions') return openVersionsWin();
             if (k === 'idphoto') return openIdPhoto();
@@ -4393,7 +4535,9 @@
             try {
                 if (b.dataset.open) { const p = list.find(x => x.id === Number(b.dataset.open)); if (await onOpen?.(p) === false) return; dlg.close(); return; }
                 if (b.dataset.ren) { const p = list.find(x => x.id === Number(b.dataset.ren)), n = await A().askText({title: 'Renommer le projet', message: 'Nouveau nom :', value: p.name, okLabel: 'Renommer'}); if (!n?.trim()) return; const r = await api('rename_retouch_project', {}, {method: 'POST', body: {id: p.id, name: n}}); p.name = r.result.name; return draw(); }
-                if (b.dataset.del) { const p = list.find(x => x.id === Number(b.dataset.del)); if (!await A().confirmBox('La photo et ses versions restent.', {title: i18n('Supprimer le projet « {name} » ?', {name: p.name}), okLabel: i18n('Supprimer le projet')})) return; await api('delete_retouch_project', {}, {method: 'POST', body: {id: p.id}}); list = list.filter(x => x !== p); return draw(); }
+                if (b.dataset.del) { const p = list.find(x => x.id === Number(b.dataset.del)); if (!p) return; const at = list.indexOf(p); // H7 : supprimé tout de suite, « ↶ Annuler » le remet
+                    if (ext.deleteProjectWithUndo) return await ext.deleteProjectWithUndo({action: 'delete_retouch_project', id: p.id, name: p.name, onGone: () => { list = list.filter(x => x !== p); if (dlg.isConnected) draw(); }, onBack: () => { if (!list.includes(p)) list.splice(at, 0, p); if (dlg.isConnected) draw(); }});
+                    if (!await A().confirmBox('La photo et ses versions restent.', {title: i18n('Supprimer le projet « {name} » ?', {name: p.name}), okLabel: i18n('Supprimer le projet')})) return; await api('delete_retouch_project', {}, {method: 'POST', body: {id: p.id}}); list = list.filter(x => x !== p); return draw(); }
             } catch (err) { toast(err.message, 'error'); }
         });
     }
@@ -4406,6 +4550,15 @@
     ext.retouchDrawOp = rtDrawOp; // pour les essais
     document.addEventListener('click', e => { if (e.target.closest('#retouch-media')) openRetouch(); });
     ext.openRetouch = openRetouch;
+    /** 🎚️ Ouvrir la Retouche sur une photo des médias {id, filename, title} (depuis un autre outil, « 📤 Envoyer vers… ») ;
+     *  la visionneuse retrouve ensuite ce qu'elle montrait. opts : {advanced, tab} comme openRetouch. */
+    ext.retouchMedia = async (media, opts = {}) => {
+        const id = Number(media?.id || media?.media_id || media?.mediaId || 0), filename = String(media?.filename || '');
+        if (!id || !filename) return toast(i18n('Choisis une photo à retoucher.'), 'error');
+        const st = A().state, keep = [st.lightboxMedia, st.lightboxIndex];
+        st.lightboxMedia = [{id, filename, thumbnail: media.thumbnail || filename, title: media.title || '', media_type: 'image'}]; st.lightboxIndex = 0;
+        try { return await openRetouch('', null, opts); } finally { [st.lightboxMedia, st.lightboxIndex] = keep; }
+    };
 
     /** Listes → Médias → « 🎚️ Retoucher » : une photo de l'app (les plus récentes, ou filtrées) ou une photo importée, puis la Retouche */
     /** ⬜ Canevas vide : une image de la taille voulue (blanche, transparente ou d'une couleur), ajoutée aux Médias ; done(média) l'ouvre */

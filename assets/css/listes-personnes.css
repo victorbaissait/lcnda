@@ -1,0 +1,20 @@
+/* LCNDA — 👤 Listes → Données : les noms reliés aux fiches (assets/js/app-listes-personnes.js).
+ * Couleurs : variables de l'app (--blue-bright, --blue-soft, --card-bg, --ink, --muted) : le mode sombre suit. */
+.ld-table td.lp-td { overflow: visible; white-space: normal; }
+.lp-cell { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 3px; margin-left: 6px; vertical-align: middle; max-width: 100%; }
+.lp-chip { border: 1px solid var(--blue-bright, #055dff); background: var(--blue-soft, #eaf2ff); color: var(--ink, #080808); border-radius: 999px; font: inherit; font-size: 12px;
+    line-height: 1.3; padding: 1px 8px; cursor: pointer; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lp-chip:hover, .lp-chip:focus-visible { background: var(--blue-bright, #055dff); color: #fff; }
+.lp-chip.is-linked { font-weight: 700; border-style: solid; }
+.lp-chip.is-many { border-style: dashed; }
+.lp-act { border: 1px solid var(--line-color, #d6d6d6); background: var(--card-bg, #fff); color: var(--ink, #080808); border-radius: 6px; font-size: 12px; line-height: 1.2; padding: 1px 5px; cursor: pointer; opacity: 0; transition: opacity .12s; }
+.ld-table tr:hover .lp-act, .ld-table tr:focus-within .lp-act, .lp-act:focus-visible, .lp-act.is-open { opacity: 1; }
+@media (hover: none) { .lp-act { opacity: .75; } }
+.lp-inbase.is-active { background: var(--blue-soft, #eaf2ff); border-color: var(--blue-bright, #055dff); font-weight: 700; }
+.lp-create-body { display: grid; gap: 10px; }
+.lp-create-body label { display: grid; gap: 4px; }
+.lp-create-body label.lp-create-ev { display: flex; gap: 6px; align-items: baseline; }
+.lp-create-src { margin: 0; overflow-wrap: anywhere; }
+.lp-person-links { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
+@media (max-width: 600px) { .lp-chip { white-space: normal; text-align: left; } .lp-cell { margin-left: 0; } }
+:root[data-theme="dark"] .lp-chip:hover, :root[data-theme="dark"] .lp-chip:focus-visible { color: #111; }

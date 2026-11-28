@@ -240,7 +240,7 @@
         graph: {eb: '03 — VISUALISER', h: 'Graphiques', tabs: [['🌳', 'Diagrammes'], ['💾', 'Enregistrés']], oldTabs: 'texte', first: 'Diagrammes', groups: [
             ['', [['01', 'Arbre des ascendants', 1], ['02', 'Arbre des descendants'], ['03', 'Sablier familial'], ['04', 'Éventail des générations'], ['05', 'Liens de parenté']]],
             ['Statistiques', [['S1', 'Naissances par décennie'], ['S2', 'Prénoms les plus donnés'], ['S3', 'Âge au mariage']]]], more: '… jusqu’à S36', moreNew: '… jusqu’à 46', list: false},
-        enq: {eb: '08 — ENQUÊTER', h: 'Enquêtes', tabs: [['🔍', 'Enquêtes'], ['🧭', 'Battue'], ['📚', 'Atelier'], ['🧩', 'Tableaux']], oldTabs: 'dessus', first: 'Où en est l’enquête', groups: [
+        enq: {eb: '08 — ENQUÊTER', h: 'Enquêtes', tabs: [['🔍', 'Enquêtes'], ['🔦', 'Battue'], ['📚', 'Atelier'], ['🧩', 'Tableaux']], oldTabs: 'dessus', first: 'Où en est l’enquête', groups: [
             ['', [['01', 'Toutes', 1], ['02', 'En cours'], ['03', 'En pause'], ['04', 'Terminées']]]], list: true},
     };
     function sidebarHtml(S, t, scale = 1) {

@@ -653,7 +653,7 @@ Pas installé ¦ Kurulu değil
 L’historique officiel des communes de l’INSEE (depuis 1943) : chaque commune disparue avec sa date et sa commune d’aujourd’hui. Livré avec l’app (5,5 Mo, Licence Ouverte 2.0 de l’INSEE) : installé tout seul, sans Internet. Les anciens noms aident aussi le menu de choix des lieux (« anc. « … » »). ¦ INSEE’nin resmî yerleşim yeri geçmişi (1943’ten beri): ortadan kalkmış her yerleşim yeri, tarihi ve bugünkü yerleşim yeriyle. Uygulamayla birlikte gelir (5,5 MB, INSEE Licence Ouverte 2.0): İnternet olmadan kendiliğinden kurulur. Eski adlar yer seçme menüsüne de yardım eder (“eski “…””).
 ⤓ Télécharger de nouveau (mise à jour) ¦ ⤓ Yeniden indir (güncelleme)
 🗑 Retirer ¦ 🗑 Çıkar
-⤓ Installer les frontières anciennes ¦ ⤓ Eski sınırları kur
+📦 Installer les frontières anciennes ¦ 📦 Eski sınırları kur
 (taille…) ¦ (boyut…)
 dossier des données ¦ veri klasörü
 Rangé dans le {name}, commun à toutes tes généalogies. ¦ Tüm soy ağaçlarında ortak olan yere kondu: {name}.
@@ -1672,7 +1672,7 @@ Jusqu’à l’année ¦ Şu yıla kadar
 Départ ¦ Çıkış
 Arrivée ¦ Varış
 📍 Les lieux du tableau ¦ 📍 Tablodaki yerler
-🔎 Retrouver les lieux sans position ¦ 🔎 Konumu olmayan yerleri bul
+🔍 Retrouver les lieux sans position ¦ 🔍 Konumu olmayan yerleri bul
 Choisis d’abord une sorte d’événement. ¦ Önce bir olay türü seç.
 Choisis une sorte d’événement. ¦ Bir olay türü seç.
 Aucun lieu retrouvé : choisis-les un par un. ¦ Hiçbir yer bulunamadı: onları tek tek seç.

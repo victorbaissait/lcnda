@@ -1,0 +1,1163 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Je veux faire ça</title>
+<style>
+/* Les jetons et les composants de l'app (assets/css/app.css, ui.css, listes-donnees.css, fiche-village-organiser.css), recopiés ici pour que la maquette s'ouvre seule — même base que onglet-diagrammes.html et diagrammes-donnees.html. */
+:root{
+  color-scheme:light;
+  --ink:#080808;--paper:#fff;--card-bg:#fff;--card-head-bg:#fafafa;--card-line:#080808;
+  --blue:#0066cc;--blue-bright:#055dff;--blue-soft:#eaf2ff;--on-blue:#fff;--line-color:#d6d6d6;--muted:#6d6d6d;
+  --shadow:6px 6px 0 rgba(5,93,255,.34);--shadow-small:4px 4px 0 rgba(5,93,255,.28);--shadow-btn:3px 3px 0 rgba(5,93,255,.25);--shadow-modal:10px 10px 0 rgba(5,93,255,.45);
+  --ui-ink:#111;--ui-bg:#fff;--ui-soft:#eaf1ff;--ui-line:#e3e5ea;--ui-muted:#666;--ui-blue:#055dff;
+  --eyebrow:#0066cc;--btn2-bg:#fff;--btn2-line:#080808;--btn2-ink:#080808;
+  --seg-bg:#fff;--seg-ink:#111;--seg-line:#111;--seg-on-bg:#055dff;--seg-on-ink:#fff;
+  --grid:rgba(0,102,204,.035);--topbar:#fff;--topline:#080808;
+  --toggle-off:#b8bec9;--kbd-line:#c9ccd3;--link:#2b6cb0;
+  --green:#1a7f37;--green-soft:#eaf6ee;--orange:#d9480f;--orange-soft:#fff1e8;--red:#c62828;--red-soft:#fdecec;--yel-soft:#fff8d6;--yel-ink:#7a5d00;--fog:#9aa0a8;
+  --toast-bg:#111;--toast-ink:#fff;
+  --font:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;
+  --ink:#e8e8e8;--paper:#1a1a1a;--card-bg:#242424;--card-head-bg:#2e2e2e;--card-line:#3a3a3a;
+  --blue:#4d9fff;--blue-bright:#5599ff;--blue-soft:#1a2a3d;--on-blue:#111;--line-color:#555;--muted:#a3a3a3;
+  --shadow:6px 6px 0 rgba(77,159,255,.25);--shadow-small:4px 4px 0 rgba(77,159,255,.2);--shadow-btn:3px 3px 0 rgba(5,93,255,.25);--shadow-modal:10px 10px 0 rgba(77,159,255,.28);
+  --ui-ink:#e8e8e8;--ui-bg:#1f1f1f;--ui-soft:#1d2f4d;--ui-line:#3a3a3a;--ui-muted:#a8a8a8;--ui-blue:#3d7dff;
+  --eyebrow:#aaa;--btn2-bg:#2a2a2a;--btn2-line:#555;--btn2-ink:#e8e8e8;
+  --seg-bg:#242424;--seg-ink:#bbb;--seg-line:#e8e8e8;--seg-on-bg:#4d9fff;--seg-on-ink:#111;
+  --topbar:#1e1e1e;--topline:#3a3a3a;
+  --toggle-off:#555;--kbd-line:#555;--link:#6aa8ff;
+  --green:#4cc070;--green-soft:#15281c;--orange:#ff8a4c;--orange-soft:#2e1e14;--red:#ff6b6b;--red-soft:#2e1717;--yel-soft:#2c2612;--yel-ink:#f0d276;
+  --toast-bg:#e8e8e8;--toast-ink:#111;
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ink:#e8e8e8;--paper:#1a1a1a;--card-bg:#242424;--card-head-bg:#2e2e2e;--card-line:#3a3a3a;
+  --blue:#4d9fff;--blue-bright:#5599ff;--blue-soft:#1a2a3d;--on-blue:#111;--line-color:#555;--muted:#a3a3a3;
+  --shadow:6px 6px 0 rgba(77,159,255,.25);--shadow-small:4px 4px 0 rgba(77,159,255,.2);--shadow-btn:3px 3px 0 rgba(5,93,255,.25);--shadow-modal:10px 10px 0 rgba(77,159,255,.28);
+  --ui-ink:#e8e8e8;--ui-bg:#1f1f1f;--ui-soft:#1d2f4d;--ui-line:#3a3a3a;--ui-muted:#a8a8a8;--ui-blue:#3d7dff;
+  --eyebrow:#aaa;--btn2-bg:#2a2a2a;--btn2-line:#555;--btn2-ink:#e8e8e8;
+  --seg-bg:#242424;--seg-ink:#bbb;--seg-line:#e8e8e8;--seg-on-bg:#4d9fff;--seg-on-ink:#111;
+  --topbar:#1e1e1e;--topline:#3a3a3a;
+  --toggle-off:#555;--kbd-line:#555;--link:#6aa8ff;
+  --green:#4cc070;--green-soft:#15281c;--orange:#ff8a4c;--orange-soft:#2e1e14;--red:#ff6b6b;--red-soft:#2e1717;--yel-soft:#2c2612;--yel-ink:#f0d276;
+  --toast-bg:#e8e8e8;--toast-ink:#111;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.4 var(--font);padding:24px 24px 56px;overflow-wrap:break-word}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:inherit}
+:is(button,input,select,textarea,a,[tabindex]):focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{max-width:1440px;margin:0 auto}
+
+/* ── la maquette autour ── */
+.mock{display:flex;justify-content:space-between;align-items:flex-start;gap:12px 24px;flex-wrap:wrap;margin:0 0 18px}
+.mock .eyebrow{display:block}
+.mock h1{margin:5px 0 6px;font-size:22px;letter-spacing:-.01em}
+.mock p{margin:0;max-width:860px;color:var(--muted);font-size:14px;line-height:1.45}
+.tag-new{display:inline-block;font:800 10px/1.5 var(--font);letter-spacing:.08em;text-transform:uppercase;background:var(--ui-blue);color:#fff;padding:0 6px;margin-right:6px;vertical-align:1px}
+.path{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center;margin:8px 0 0;font-size:13px;font-weight:600}
+.path span{border:1.5px solid var(--line-color);background:var(--card-bg);padding:2px 8px}
+.path span.on{border-color:var(--ui-blue);background:var(--ui-soft);color:var(--ink)}
+.path i{font-style:normal;color:var(--muted)}
+.toc{display:flex;flex-wrap:wrap;gap:6px 8px;margin:0 0 26px}
+.toc a{text-decoration:none;border:2px solid var(--card-line);background:var(--card-bg);padding:6px 11px;font-size:13px;font-weight:700;box-shadow:var(--shadow-btn)}
+.toc a:hover{background:var(--ui-soft)}
+.toc a small{color:var(--muted);font-weight:600;margin-left:4px}
+.sec{margin:46px 0 0}
+.sec-h{margin:0 0 16px;max-width:900px}
+.sec-h h2{margin:4px 0 4px;font-size:24px;letter-spacing:-.02em}
+.sec-h p{margin:0;color:var(--muted);font-size:14px}
+.callout{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 5px;background:var(--orange);color:#fff;font:800 12px/1 var(--font);border-radius:11px;vertical-align:2px}
+
+/* ── composants de l'app ── */
+.eyebrow{color:var(--eyebrow);font-weight:700;font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.button{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:2px solid var(--ink);background:var(--blue);color:var(--on-blue);padding:11px 15px;min-height:42px;font-weight:700;cursor:pointer;box-shadow:var(--shadow-small);transition:.15s ease;white-space:nowrap;border-radius:0;text-decoration:none}
+:root[data-theme="dark"] .button:not(.secondary){border-color:var(--blue)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .button:not(.secondary){border-color:var(--blue)}}
+.button:hover{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+.button:disabled{opacity:.45;cursor:default;transform:none;box-shadow:none}
+.button.secondary{color:var(--btn2-ink);background:var(--btn2-bg);border-color:var(--btn2-line)}
+.button.small{min-height:32px;padding:6px 10px;font-size:11.5px;box-shadow:var(--shadow-btn)}
+.button.small:hover{box-shadow:1px 1px 0 var(--ink)}
+.button.icon{font-size:18px;line-height:1;padding:9px 13px}
+.link-button{border:0;background:none;padding:0;color:var(--link);text-decoration:underline;text-underline-offset:2px;cursor:pointer;font-size:13px}
+.segmented{display:inline-flex;flex-wrap:wrap;padding:1px 0 0 1px;flex:none;max-width:100%}
+.segmented button{min-height:32px;margin:-1px 0 0 -1px;position:relative;border:2px solid var(--seg-line);background:var(--seg-bg);color:var(--seg-ink);cursor:pointer;font-size:12px;font-weight:700;padding:1px 9px;white-space:nowrap;border-radius:0}
+.segmented button[aria-pressed="true"]{z-index:1;background:var(--seg-on-bg);color:var(--seg-on-ink)}
+.segmented.sm button{min-height:28px;font-size:11.5px;padding:1px 7px}
+.ui-listbar-btn{display:inline-flex;align-items:center;gap:4px;border:2px solid var(--ui-ink);background:var(--ui-bg);color:var(--ui-ink);padding:5px 9px;min-height:34px;font:600 13px/1.2 var(--font);cursor:pointer;white-space:nowrap;border-radius:0}
+.ui-listbar-btn:hover{background:var(--ui-soft)}
+.ui-listbar-btn[aria-pressed="true"]{background:var(--ui-soft);border-color:var(--ui-blue);box-shadow:inset 0 -3px 0 var(--ui-blue)}
+.ui-listbar-chip{display:inline-flex;align-items:center;gap:4px;background:var(--ui-soft);border:1.5px solid var(--ui-blue);color:var(--ui-blue);padding:3px 8px;font:700 12px/1.3 var(--font);cursor:pointer;border-radius:0}
+.ui-listbar-chip.off{background:transparent;border-color:var(--line-color);color:var(--muted);text-decoration:line-through}
+.ui-select{appearance:none;border:2px solid var(--ui-ink);border-radius:0;background:var(--ui-bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0h10L5 6z' fill='%23888'/%3E%3C/svg%3E") no-repeat right 9px center;color:var(--ui-ink);padding:5px 28px 5px 9px;font:600 13px var(--font);min-height:34px;max-width:100%;min-width:0}
+.ui-toggle{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;cursor:pointer;position:relative;user-select:none;min-height:30px}
+.ui-toggle>input{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
+.ui-toggle>i{width:34px;height:20px;border-radius:12px;background:var(--toggle-off);position:relative;flex:none;transition:background .15s}
+.ui-toggle>i::after{content:'';position:absolute;left:3px;top:3px;width:14px;height:14px;background:#fff;border-radius:50%;transition:left .15s}
+.ui-toggle>input:checked+i{background:var(--ui-blue)}
+.ui-toggle>input:checked+i::after{left:17px}
+.ui-toggle>input:disabled+i{opacity:.55}
+.ui-toggle>input:focus-visible+i{outline:3px solid rgba(5,93,255,.5);outline-offset:2px}
+.ui-num{display:inline-flex;align-items:center;border:2px solid var(--ui-ink);background:var(--ui-bg);min-height:30px}
+.ui-num input{width:50px;border:0;background:transparent;padding:3px 7px;text-align:right;font-weight:700;font-variant-numeric:tabular-nums;color:var(--ui-ink);outline:0}
+.ui-num span{padding:0 7px 0 0;font-size:12px;color:var(--muted)}
+.ui-badge{display:inline-block;font:800 10px/1.5 var(--font);letter-spacing:.06em;text-transform:uppercase;padding:0 6px;border:1.5px solid var(--ui-ink);white-space:nowrap;vertical-align:1px}
+.ui-badge.is-blue{background:var(--ui-blue);border-color:var(--ui-blue);color:#fff}
+.ui-badge.is-green{border-color:var(--green);color:var(--green);background:var(--green-soft)}
+.ui-badge.is-grey{border-color:var(--line-color);color:var(--muted)}
+.ui-badge.is-orange{border-color:var(--orange);color:var(--orange);background:var(--orange-soft)}
+.lbl{font-size:12px;font-weight:700;white-space:nowrap}
+.muted{color:var(--muted)}
+.small{font-size:12.5px}
+.card{background:var(--card-bg);border:2px solid var(--card-line);box-shadow:var(--shadow-small);min-width:0}
+.card-head{display:flex;align-items:center;justify-content:space-between;gap:8px 10px;flex-wrap:wrap;padding:12px 15px;border-bottom:2px solid var(--card-line);background:var(--card-head-bg)}
+.card-head h3{margin:0;font-size:16px;line-height:1.2}
+.card-head h3 small{color:var(--muted);font-weight:400;font-size:12.5px}
+.card-body{padding:14px 15px}
+.data-table{width:100%;border-collapse:collapse;font-size:12.5px}
+.data-table th{text-align:left;padding:9px 10px;color:var(--on-blue);background:var(--blue);border-bottom:2px solid var(--ink);white-space:nowrap;font-weight:800}
+.data-table td{padding:9px 10px;border-bottom:1px solid var(--line-color);vertical-align:top}
+.data-table tr:hover td{background:var(--blue-soft)}
+.data-table td small{display:block;color:var(--muted);font-size:11.5px}
+.tw{max-width:100%;overflow-x:auto;position:relative}
+.ib{display:inline-flex;align-items:center;justify-content:center;width:30px;height:28px;border:1.5px solid var(--line-color);background:var(--card-bg);font-size:13px;margin-left:3px;color:var(--ink);cursor:pointer;padding:0;vertical-align:middle}
+.ib:hover{border-color:var(--ui-blue);background:var(--ui-soft)}
+.ib.on{border-color:var(--ui-blue);background:var(--ui-soft)}
+.src a,.srca{font:700 11px var(--font);border:1px solid var(--line-color);padding:1px 6px;color:var(--blue);background:var(--blue-soft);text-decoration:none;white-space:nowrap}
+.toast{position:fixed;left:24px;bottom:24px;z-index:50;display:flex;align-items:center;gap:12px;max-width:min(470px,calc(100vw - 32px));background:var(--toast-bg);color:var(--toast-ink);padding:11px 14px;font:500 14px/1.35 var(--font);box-shadow:5px 5px 0 rgba(5,93,255,.45)}
+.toast button{border:1.5px solid currentColor;background:transparent;color:inherit;font-weight:700;font-size:13px;padding:3px 9px;cursor:pointer;white-space:nowrap}
+
+/* ── la fenêtre de l'app : barre du haut ── */
+.app{border:2px solid var(--topline);background:var(--paper);min-width:0}
+.topbar{display:grid;grid-template-columns:240px minmax(0,1fr);align-items:center;background:var(--topbar);border-bottom:2px solid var(--topline);min-height:72px}
+.brand{height:100%;border-right:2px solid var(--topline);display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;align-items:end;padding:12px 24px 9px;font-size:12px;line-height:1;letter-spacing:.04em;position:relative;overflow:hidden}
+.brand::after{content:"";position:absolute;width:130px;height:130px;right:-62px;top:-85px;background:repeating-radial-gradient(circle,var(--blue) 0 1px,transparent 1px 4px);transform:rotate(-8deg)}
+.brand span{background:var(--topbar);border:1px solid var(--blue);color:var(--blue);justify-self:end;padding:3px 5px;transform:rotate(-5deg);z-index:1;text-transform:uppercase}
+.brand strong{background:var(--blue);color:var(--on-blue);justify-self:start;padding:4px 6px;transform:rotate(-5deg);z-index:1;text-transform:uppercase}
+.brand small{grid-column:1/-1;font-size:10px;letter-spacing:.18em;align-self:end;text-align:center;color:var(--muted)}
+.main-nav{display:flex;align-items:center;overflow-x:auto;overflow-y:hidden;padding:8px 16px;gap:8px;min-width:0}
+.nav-item{border:2px solid transparent;background:transparent;font-weight:700;padding:6px 12px;white-space:nowrap;line-height:1.1;font-size:15px;color:var(--ink);text-align:left}
+.nav-item span{display:block;font-size:9px;line-height:1;color:var(--blue);letter-spacing:.12em;margin-bottom:4px}
+.nav-item.is-active{background:var(--blue);border-color:var(--ink);color:var(--on-blue);box-shadow:var(--shadow-small)}
+.nav-item.is-active span{color:var(--on-blue)}
+.workspace{background-color:var(--paper);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px}
+.page{padding:28px 3.5% 34px}
+.page-header{display:flex;align-items:flex-end;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;margin:0 0 16px}
+.page-header h2{margin:6px 0 0;font-size:clamp(26px,3vw,34px);line-height:1.02;letter-spacing:-.03em}
+.page-header p{margin:6px 0 0;color:var(--muted);font-size:13.5px;max-width:640px}
+.ph-ico{font-size:.86em;margin-right:.19em}
+.page-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.ld-source{margin:-4px 0 12px;color:var(--muted);font-size:13px}
+.ld-bar-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ld-chips{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:10px 0 0}
+.ld-count{font-weight:700;margin-right:4px;font-size:14px}
+.kiosk{font-size:12.5px;color:var(--muted);border-top:1px dashed var(--line-color);margin:14px 0 0;padding:9px 0 0}
+
+/* ── modale (app.css .modal) ── */
+.modal{border:3px solid var(--ink);box-shadow:var(--shadow-modal);background:var(--card-bg);min-width:0}
+:root[data-theme="dark"] .modal{border-color:#555}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .modal{border-color:#555}}
+.modal-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:16px 18px;border-bottom:2px solid var(--card-line);background:var(--card-head-bg)}
+.modal-head h2{margin:4px 0 0;font-size:21px;letter-spacing:-.01em}
+.modal-body{padding:14px 18px}
+.modal-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:12px 18px 16px;border-top:1px solid var(--ui-line)}
+.modal-actions .spacer{flex:1}
+.x{border:0;background:none;font-size:20px;cursor:pointer;color:var(--muted);padding:2px 6px}
+</style>
+<style>
+/* ── repris de onglet-diagrammes.html : colonne, fil d’Ariane, pastilles, case « J’ai compris », réglages, questions ── */
+.addr{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 8px;font-size:12.5px}
+.addr code{font:600 12.5px ui-monospace,Menlo,Consolas,monospace;border:1.5px solid var(--line-color);background:var(--card-bg);padding:3px 8px;overflow-wrap:anywhere}
+.addr .sp{flex:1}
+.scen{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin:0 0 10px}
+.note{font-size:13px;color:var(--muted);margin:12px 0 0;max-width:900px}
+.note b{color:var(--ink)}
+.shell{display:grid;grid-template-columns:300px minmax(0,1fr);min-width:0}
+.shell.no-side{grid-template-columns:minmax(0,1fr)}
+.shell.no-side .sb{display:none}
+.sb{border-right:2px solid var(--topline);background:var(--card-bg);display:flex;flex-direction:column;min-width:0}
+.sb-top{min-height:98px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 18px 16px 24px;border-bottom:2px solid var(--topline);background:var(--card-head-bg)}
+.sb-top h1{margin:4px 0 0;font-size:24px;line-height:1}
+.icon-button{width:38px;height:38px;border:2px solid var(--smi-line);background:var(--smi-bg);color:var(--ink);cursor:pointer;font-weight:700;font-size:19px;box-shadow:3px 3px 0 rgba(5,93,255,.28);flex:none}
+.icon-button:hover{background:var(--blue);color:var(--on-blue)}
+.sb-content{flex:1;padding:18px;min-width:0}
+.sb-foot{border-top:2px solid var(--topline);padding:12px 18px 14px;font-size:11px;color:var(--muted);display:flex;flex-direction:column;gap:8px}
+.sb-search{width:100%;margin:0 0 12px;padding:7px 10px;border:2px solid var(--smi-line);background:var(--smi-bg);color:var(--ink);font-size:13px;border-radius:0}
+.side-menu{display:grid;gap:9px}
+.smi{width:100%;text-align:left;border:2px solid var(--smi-line);background:var(--smi-bg);color:var(--ink);padding:10px 12px;cursor:pointer;box-shadow:3px 3px 0 rgba(5,93,255,.18);display:flex;align-items:center;gap:11px;font-weight:700;font-size:14px;transition:.15s ease;min-width:0}
+.smi:hover{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--blue)}
+.smi.is-active{background:var(--blue);color:var(--on-blue);box-shadow:4px 4px 0 var(--ink)}
+.smi .lb{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.smi small{margin-left:auto;color:var(--muted);font-weight:600;font-size:12px;flex:none}
+.smi.is-active small,.smi.is-active .side-number{color:var(--on-blue)}
+.side-number{color:var(--blue);font-size:10px;min-width:22px;flex:none}
+.mt-group{margin:12px 0 0}
+.mt-group>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:8px 4px;font-weight:800;font-size:13px;border-bottom:1px solid var(--line-color)}
+.mt-group>summary::-webkit-details-marker{display:none}
+.mt-group>summary::after{content:'›';margin-left:2px;font-size:16px;transition:transform .15s}
+.mt-group[open]>summary::after{transform:rotate(90deg)}
+.mt-group>summary small{color:var(--muted);font-weight:600;margin-left:auto}
+.mt-group[open]>summary{margin-bottom:9px}
+.crumb{display:flex;flex-wrap:wrap;gap:2px 6px;align-items:center}
+.crumb a{color:inherit;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.crumb i{font-style:normal;opacity:.7}
+.k{display:inline-flex;align-items:center;gap:5px;border:1.5px solid var(--line-color);padding:3px 10px;font-size:12px;background:var(--card-bg);border-radius:999px;color:var(--ink);cursor:pointer;white-space:nowrap;font-weight:600}
+.k:hover{border-color:var(--ui-blue)}
+.k[aria-pressed="true"]{background:var(--ui-soft);border-color:var(--ui-blue);color:var(--ui-blue)}
+.ask{display:flex;gap:8px;align-items:center;border:2px solid var(--ui-ink);background:var(--ui-bg);box-shadow:var(--shadow-small);padding:5px 5px 5px 12px;min-width:0}
+.ask input{flex:1;min-width:0;border:0;background:transparent;font-size:14.5px;outline:0;padding:6px 0}
+.ask .button{box-shadow:none}
+.ex{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:10px 0 0;font-size:12px}
+.ex .lbl,.understood .lbl{color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-size:10.5px}
+.understood{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:14px 0 0}
+.panel{border:2px solid var(--card-line);background:var(--card-bg);box-shadow:var(--shadow-small);padding:16px 18px}
+.panel h3{margin:0 0 4px;font-size:16px}
+.panel>p.muted{margin:0 0 12px;font-size:13px}
+.cmp td:first-child{font-weight:700;width:22%}
+.cmp td small{display:block;color:var(--muted);font-size:11.5px}
+.cmp .now{color:var(--muted)}
+.cmp .new{color:var(--ink)}
+code.k2c{font:600 11.5px ui-monospace,Menlo,Consolas,monospace;background:var(--ui-soft);padding:0 4px}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:start}
+.setrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 14px;align-items:center;padding:11px 0;border-bottom:1px solid var(--ui-line);font-size:13.5px}
+.setrow:last-child{border-bottom:0}
+.setrow small{display:block;color:var(--muted);font-size:12px}
+.setrow>div:last-child{justify-self:end;max-width:100%}
+.catalog-tile{display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:10px;align-items:center;border:2px solid var(--card-line);background:var(--card-bg);padding:10px 12px;margin:0 0 10px}
+.catalog-tile .ic{font-size:24px;text-align:center}
+.catalog-tile small{display:block;color:var(--muted);font-size:12px}
+.catalog-tile.dim{opacity:.55}
+.priv ul{margin:0;padding:0;list-style:none}
+.priv li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:8px;padding:9px 0;border-bottom:1px solid var(--ui-line);font-size:13.5px}
+.priv li:last-child{border-bottom:0}
+.priv li small{display:block;color:var(--muted);font-size:12px}
+.exp-line{display:flex;gap:8px;align-items:flex-start;padding:9px 11px;background:var(--yel-soft);color:var(--yel-ink);border-left:4px solid var(--yel-ink);font-size:12.5px;margin:0 0 10px}
+.qs{counter-reset:q;list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 22px}
+.qs li{counter-increment:q;padding:14px 16px}
+.qs li>b{display:block;font-size:15px;margin:0 0 6px}
+.qs li>b::before{content:counter(q) ". ";color:var(--blue)}
+.qs .opt2{font-size:13px;color:var(--muted);margin:0}
+.qs .reco{font-size:13px;margin:9px 0 0;border-left:4px solid var(--green);background:var(--green-soft);padding:7px 11px}
+.nav-plus{border:2px dashed var(--line-color);background:transparent;color:var(--muted);font-weight:700;padding:6px 10px;font-size:15px;flex:none}
+/* ── les tailles d’écran (repris de onglet-diagrammes.html) ── */
+@media (max-width:1180px){
+  .shell{grid-template-columns:260px minmax(0,1fr)}
+}
+@media (max-width:980px){
+  .shell{grid-template-columns:minmax(0,1fr)}
+  .sb{border-right:0;border-bottom:2px solid var(--topline)}
+  .sb-content{max-height:420px;overflow:auto}
+  .qs,.two{grid-template-columns:minmax(0,1fr)}
+  .doors{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:760px){
+  body{padding:16px 16px 40px}
+  .topbar{grid-template-columns:minmax(0,1fr);min-height:0}
+  .brand{border-right:0;border-bottom:2px solid var(--topline);height:50px;padding:10px 100px 8px}
+  .brand small{display:none}
+  .main-nav{padding:8px 10px}
+  .nav-item{font-size:13px;padding:5px 8px}
+  .page{padding:18px 12px 22px}
+  .page-header h2{font-size:25px}
+  .sec{margin-top:36px}
+  .sec-h h2{font-size:21px}
+  .sb-top{min-height:0;padding:12px 14px}
+  .sb-top h1{font-size:20px}
+  .sb-content{padding:12px 14px;max-height:340px}
+  .sb-foot{padding:10px 14px 12px}
+  .panel{padding:12px}
+  .card-body{padding:12px}
+  .setrow{grid-template-columns:minmax(0,1fr)}
+  .setrow>div:last-child{justify-self:start}
+}
+/* ── 🧭 Je veux… : ce qui est propre à cette maquette ── */
+.app{position:relative;overflow:hidden}
+.topbar{grid-template-columns:240px minmax(0,1fr) auto;position:relative}
+.tb-right{display:flex;align-items:center;gap:6px;padding:0 14px 0 6px}
+.tbb{display:inline-grid;place-items:center;min-width:34px;height:34px;border:2px solid var(--smi-line,#080808);background:var(--card-bg);color:var(--ink);font-size:15px;cursor:pointer;padding:0 6px;box-shadow:2px 2px 0 rgba(5,93,255,.22);white-space:nowrap}
+.tbb:hover{background:var(--ui-soft)}
+.tbb.jv{display:inline-flex;gap:5px;font:700 13px var(--font);padding:0 10px}
+.tbb.jv.hl{outline:3px solid var(--orange);outline-offset:2px}
+.tb-count{font-size:12px;color:var(--muted);font-weight:600;white-space:nowrap;margin-right:4px}
+.mark{position:relative}
+.mark>.callout{position:absolute;top:-10px;right:-10px;z-index:3}
+.page-header h2 .ui-help{vertical-align:8px}
+.ui-help{display:inline-grid;place-items:center;width:20px;height:20px;padding:0;margin:0 0 0 8px;border-radius:50%;border:1.5px solid var(--ui-blue);color:var(--ui-blue);background:transparent;font:800 12px/1 var(--font);cursor:pointer}
+.ui-help:hover,.ui-help[aria-expanded="true"]{background:var(--ui-blue);color:#fff}
+.bubble{position:relative;max-width:380px;background:var(--card-bg);border:2px solid var(--card-line);box-shadow:var(--shadow-small);padding:12px 14px;font-size:13px;margin:10px 0 0}
+.bubble p{margin:0 0 8px}
+.bubble .more{color:var(--link);font-weight:600;text-underline-offset:2px}
+.bubble h6{margin:12px 0 6px;padding:8px 0 0;border-top:1px solid var(--ui-line);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--eyebrow)}
+.bubble .bl{display:flex;flex-direction:column;gap:4px}
+.bubble .bl button{display:flex;gap:8px;align-items:center;text-align:left;border:1.5px solid var(--line-color);background:var(--card-bg);padding:5px 8px;font-size:12.5px;cursor:pointer;color:var(--ink)}
+.bubble .bl button:hover{border-color:var(--ui-blue);background:var(--ui-soft)}
+.bubble .bl button small{margin-left:auto;color:var(--muted);font-size:11px}
+/* tableau de bord */
+.dash{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:16px;align-items:start}
+.dash .card-body p{margin:0 0 10px;font-size:13px}
+.w-list{list-style:none;margin:0;padding:0;font-size:13px}
+.w-list li{display:flex;gap:8px;padding:7px 0;border-bottom:1px solid var(--ui-line)}
+.w-list li:last-child{border-bottom:0}
+.w-list li small{margin-left:auto;color:var(--muted);white-space:nowrap}
+.rec{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;margin:12px 0 0;font-size:12px}
+.rec .lbl{color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-size:10.5px}
+/* la recherche rapide ⌘K (app.css .quick-search) */
+.qk-wrap{background:rgba(0,0,0,.18);padding:34px 16px 30px;display:flex;justify-content:center}
+.qk{width:min(660px,100%);background:var(--paper);color:var(--ink);border:2px solid var(--ink);box-shadow:var(--shadow);padding:.6rem;display:flex;flex-direction:column;gap:.45rem;min-width:0}
+:root[data-theme="dark"] .qk{border-color:#555}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .qk{border-color:#555}}
+.qk-top{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.qk input{width:100%;font-size:1.05rem;padding:.55rem .7rem;border:1px solid var(--line-color);background:var(--paper);min-width:0}
+.qk ul{list-style:none;margin:0;padding:0}
+.qk li{display:flex;align-items:center;gap:10px;padding:.45rem .6rem;cursor:pointer;border-radius:6px;min-width:0}
+.qk li .lb{min-width:0;flex:1}
+.qk li .lb small{display:block;color:var(--muted);font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.qk li>small{color:var(--muted);white-space:nowrap;font-size:12.5px}
+.qk li.is-active,.qk li:hover{background:var(--blue-soft)}
+.qk li.sep{cursor:default;padding:.5rem .6rem .15rem;font:800 10.5px var(--font);letter-spacing:.1em;text-transform:uppercase;color:var(--eyebrow)}
+.qk li.sep:hover{background:none}
+.qk .go{display:inline-flex;gap:4px;flex:none}
+.qk .foot{font-size:11.5px;color:var(--muted)}
+/* le guide */
+.guide-wrap{background:rgba(0,0,0,.16);padding:26px 3.5% 30px}
+.guide{max-width:900px;margin:0 auto}
+.guide .modal-body{display:flex;flex-direction:column;gap:12px}
+.guide .ask input{font-size:15.5px}
+.homo{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;padding:8px 11px;background:var(--yel-soft);color:var(--yel-ink);border-left:4px solid var(--yel-ink);font-size:12.5px}
+.homo button{border:1.5px solid currentColor;background:transparent;color:inherit;font:700 12px var(--font);padding:2px 8px;cursor:pointer}
+.homo button[aria-pressed="true"]{background:var(--yel-ink);color:var(--card-bg)}
+.ignored{font-size:12px;color:var(--muted);margin:-4px 0 0}
+.ms{display:grid;gap:12px}
+.ma{display:grid;grid-template-columns:48px minmax(0,1fr);gap:4px 12px;border:2px solid var(--card-line);background:var(--card-bg);box-shadow:var(--shadow-btn);padding:12px 14px;min-width:0}
+.ma.best{border-color:var(--ui-blue);box-shadow:inset 4px 0 0 var(--ui-blue),var(--shadow-small)}
+.ma-ic{font-size:28px;line-height:1;text-align:center;padding-top:2px}
+.ma h3{margin:0;font-size:16px;line-height:1.25;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center}
+.ma-what{margin:2px 0 6px;font-size:13px;color:var(--muted)}
+.ma .path{margin:0 0 6px;font-size:12px}
+.ma .path span{padding:1px 7px}
+.ma-pre{display:flex;flex-wrap:wrap;gap:5px 6px;align-items:center;font-size:12px;margin:0 0 8px}
+.ma-pre .lbl{color:var(--green);font-size:11px}
+.ma-pre .k{cursor:default;font-size:11.5px;padding:2px 8px}
+.ma-acts{grid-column:2;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ma-acts .sp{flex:1}
+.ma-ro{grid-column:2;font-size:12px;color:var(--muted);margin:6px 0 0}
+.star{border:1.5px solid var(--line-color);background:var(--card-bg);width:32px;height:32px;cursor:pointer;font-size:15px;color:var(--muted);padding:0}
+.star.on{color:#d28e05;border-color:#d28e05}
+.others{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center}
+.others .lbl,.nomatch .lbl{color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-size:10.5px}
+.nomatch{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;border-top:1px solid var(--ui-line);padding:12px 0 0;font-size:13px}
+.empty-g{border:2px dashed var(--line-color);padding:18px;text-align:center;color:var(--muted);font-size:13.5px}
+.empty-g b{display:block;color:var(--ink);font-size:15px;margin-bottom:4px}
+.aia{display:flex;gap:8px;align-items:flex-start;padding:9px 11px;background:var(--blue-soft);border-left:4px solid var(--ui-blue);font-size:12.5px}
+/* 👣 Montre-moi (visite.css : .vg-halo, .vg-bubble) */
+.show-app .page{min-height:360px}
+.tbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 12px;position:relative}
+.tree{border:1px dashed var(--line-color);background:var(--card-bg);padding:10px;min-width:0}
+.tree svg{display:block;width:100%;height:auto}
+.tree .bx{fill:var(--card-bg);stroke:var(--ink);stroke-width:1.5}
+.tree .bx.a{fill:var(--blue-soft);stroke:var(--ui-blue)}
+.tree text{fill:var(--ink);font:700 10px var(--font)}
+.tree .ln{stroke:var(--muted);stroke-width:1.2;fill:none}
+.vg-halo{position:absolute;z-index:20;pointer-events:none;border-radius:4px;box-shadow:0 0 0 3px var(--blue-bright),0 0 0 7px rgba(5,93,255,.28),0 0 0 9999px rgba(8,12,20,.42);transition:all .25s ease}
+.vg-bubble{position:absolute;z-index:21;width:300px;max-width:calc(100% - 24px);padding:14px 16px 12px;background:var(--card-bg);color:var(--ink);border:2px solid var(--ink);box-shadow:var(--shadow);font-size:14px;line-height:1.4}
+:root[data-theme="dark"] .vg-bubble{border-color:#777}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .vg-bubble{border-color:#777}}
+.vg-head{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.vg-title{flex:1;margin:0;font-size:16px;line-height:1.25}
+.vg-count{font-size:12px;font-weight:700;color:var(--muted);white-space:nowrap}
+.vg-text{margin:0 0 8px;font-size:13.5px}
+.vg-hint{margin:0 0 10px;font-size:12px;color:var(--muted)}
+.vg-dots{display:flex;gap:6px;margin:0 0 10px}
+.vg-dots i{width:8px;height:8px;border-radius:50%;background:var(--line-color)}
+.vg-dots i.on{background:var(--blue-bright)}
+.vg-acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.vg-acts .sp{flex:1}
+.fake-menu{position:absolute;z-index:6;width:250px;max-width:calc(100vw - 60px);background:var(--card-bg);border:2px solid var(--card-line);box-shadow:var(--shadow-small);padding:6px 0}
+.fake-menu div{padding:7px 12px;font-size:13px;display:flex;gap:8px}
+/* comment il comprend */
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;counter-reset:fl}
+.fl{position:relative;border:2px solid var(--card-line);background:var(--card-bg);box-shadow:var(--shadow-btn);padding:11px 12px;font-size:12.5px;min-width:0}
+.fl b{display:block;font-size:14px;margin:0 0 4px}
+.fl b::before{counter-increment:fl;content:counter(fl);display:inline-grid;place-items:center;width:20px;height:20px;margin-right:6px;background:var(--ui-blue);color:#fff;font-size:11px;border-radius:50%;vertical-align:1px}
+.fl p{margin:0;color:var(--muted)}
+.fl code{font:600 11px ui-monospace,Menlo,Consolas,monospace;background:var(--ui-soft);padding:0 3px}
+.fl:not(:last-child)::after{content:'→';position:absolute;right:-12px;top:50%;transform:translate(50%,-50%);color:var(--blue);font-weight:800;z-index:1}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:start;margin:16px 0 0}
+pre.code{margin:0;font:12px/1.5 ui-monospace,Menlo,Consolas,monospace;background:var(--card-head-bg);border:1.5px solid var(--line-color);padding:12px;overflow-x:auto;white-space:pre;max-width:100%}
+pre.code .c{color:var(--muted)}
+pre.code .s{color:var(--green)}
+/* le registre */
+.fam{display:flex;flex-wrap:wrap;gap:6px 8px;margin:0 0 12px}
+.igrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.it{display:grid;grid-template-columns:30px minmax(0,1fr);gap:2px 8px;border:1.5px solid var(--line-color);background:var(--card-bg);padding:8px 10px;font-size:12.5px;min-width:0;text-align:left;cursor:pointer;color:var(--ink)}
+.it:hover{border-color:var(--ui-blue);background:var(--ui-soft)}
+.it .i{font-size:19px;grid-row:span 2;text-align:center}
+.it b{font-size:13px}
+.it small{color:var(--muted);font-size:11.5px;overflow-wrap:anywhere}
+.it .ro{color:var(--orange);font-weight:700}
+.fh{grid-column:1/-1;margin:8px 0 0;font:800 11px var(--font);letter-spacing:.1em;text-transform:uppercase;color:var(--eyebrow)}
+.fh small{text-transform:none;letter-spacing:0;font-weight:600;color:var(--muted)}
+/* historique */
+.hl{list-style:none;margin:0;padding:0}
+.hl li{display:flex;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid var(--ui-line);font-size:13px;min-width:0}
+.hl li:last-child{border-bottom:0}
+.hl li .t{flex:1;min-width:0}
+.hl li .t small{display:block;color:var(--muted);font-size:11.5px}
+.hl .bar{display:block;height:6px;background:var(--ui-soft);margin-top:4px}
+.hl .bar i{display:block;height:100%;background:var(--ui-blue)}
+.reuse td:first-child{font-weight:700;width:24%}
+.reuse td small{display:block;color:var(--muted);font-size:11.5px}
+@media (max-width:1180px){.flow{grid-template-columns:repeat(3,minmax(0,1fr))}.fl:nth-child(3)::after{display:none}}
+@media (max-width:980px){
+  .dash,.three{grid-template-columns:minmax(0,1fr)}
+  .flow{grid-template-columns:minmax(0,1fr)}
+  .fl:not(:last-child)::after{content:'↓';right:50%;top:auto;bottom:-13px;transform:translate(50%,50%)}
+  .fl:nth-child(3)::after{display:block}
+}
+@media (max-width:760px){
+  .topbar{grid-template-columns:minmax(0,1fr)}
+  .tb-right{position:absolute;right:8px;top:8px;padding:0;z-index:2}
+  .tb-right .tbb:not(.jv),.tb-right .tb-count{display:none}
+  .tbb.jv .jvt{display:none}
+  .brand{padding:10px 70px 8px}
+  .qk-wrap{padding:18px 8px}
+  .qk li{padding:.45rem .4rem;gap:6px}
+  .qk li>small{display:none}
+  .guide-wrap{padding:12px 8px 16px}
+  .guide .modal-head,.guide .modal-body,.guide .modal-actions{padding-left:12px;padding-right:12px}
+  .ma{grid-template-columns:34px minmax(0,1fr);padding:10px 11px;gap:4px 9px}
+  .ma-ic{font-size:22px}
+  .ma-acts{grid-column:1/-1}
+  .ma-ro{grid-column:1/-1}
+  .igrid{grid-template-columns:minmax(0,1fr)}
+}
+/* ── « Ce que j’ai compris » : recopié de assets/css/donnees-recap.css (Données → question), pour que ce soit identique ── */
+.dr-und { border-left: 4px solid var(--blue-bright, #055dff); background: var(--blue-soft, #eef4ff); padding: 10px 12px 11px; }
+.dr-und h4, .dr-nope h4 { margin: 0 0 7px; font: 800 11px system-ui, sans-serif; letter-spacing: .1em; text-transform: uppercase; color: var(--blue, #1a3d8f); }
+.dr-und h4 small { font: 400 12px system-ui, sans-serif; letter-spacing: 0; text-transform: none; color: var(--muted, #555); margin-left: 6px; }
+.dr-pills { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.dr-pill { display: inline-flex; align-items: center; gap: 6px; border: 1.5px solid var(--blue-bright, #055dff); background: var(--card-bg, #fff); color: var(--ink, #111); border-radius: 999px; padding: 4px 10px 4px 9px; font-size: 12.5px; max-width: 100%; cursor: pointer; text-align: left; }
+.dr-pill > span { min-width: 0; overflow-wrap: anywhere; }
+.dr-pill em { font-style: normal; font: 700 9.5px system-ui, sans-serif; letter-spacing: .07em; text-transform: uppercase; color: var(--muted, #6d6d6d); }
+.dr-pill::after { content: "▾"; color: var(--blue-bright, #055dff); font-size: 10px; }
+.dr-pill.is-auto { border-style: dashed; }
+.dr-pill.is-open { box-shadow: 0 0 0 3px rgba(5, 93, 255, .25); }
+.dr-pill.is-chg { background: var(--blue-bright, #055dff); color: #fff; }
+.dr-pill.is-chg em, .dr-pill.is-chg::after { color: #fff; opacity: .85; }
+.dr-why { font-size: 12px; color: var(--muted, #555); margin: 7px 0 0; }
+.dr-pop { border: 2px solid var(--ink, #111); background: var(--card-bg, #fff); box-shadow: 6px 6px 0 rgba(0, 0, 0, .14); padding: 12px 14px; font-size: 13px; max-width: 420px; margin: 10px 0 0; display: grid; gap: 8px; }
+.dr-pop > b { font: 800 11px system-ui, sans-serif; letter-spacing: .1em; text-transform: uppercase; color: var(--muted, #6d6d6d); }
+.dr-pop label { display: flex; flex-wrap: wrap; gap: 6px 8px; align-items: center; }
+.dr-pop select, .dr-pop input[type="text"] { flex: 1 1 180px; min-width: 0; max-width: 100%; }
+.dr-pop input[type="number"] { width: 6em; }
+.dr-say{margin:0 0 8px;font-size:14.5px;line-height:1.45}
+.dr-say b{font-weight:800}
+.dr-say .ok{color:var(--green);font-weight:800;margin-right:4px}
+.dr-pop .opts{display:flex;flex-wrap:wrap;gap:6px}
+.dr-pop .opts .k[aria-pressed="true"]{background:var(--ui-soft);border-color:var(--ui-blue);color:var(--ui-blue)}
+.dr-confirm{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;margin:10px 0 0;padding:9px 0 0;border-top:1px dashed var(--ui-blue);font-size:13.5px}
+.dr-confirm b{margin-right:4px}
+.dr-alt{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;margin:9px 0 0;font-size:12.5px}
+.dr-alt>span:first-child{color:var(--muted)}
+.dr-alt .k small{color:var(--muted);font-weight:500;margin-left:2px}
+.dr-und.is-low{border-left-color:var(--orange);background:var(--orange-soft)}
+.dr-und.is-low h4{color:var(--orange)}
+.qk .dr-und{padding:8px 10px 9px;margin:0}
+.qk .dr-say{font-size:13.5px;margin:0 0 6px}
+.qk .dr-pill{font-size:12px;padding:3px 9px 3px 8px}
+.dr-alt .k,.ex .k,.rec .k,.others .k{white-space:normal;text-align:left;max-width:100%}
+@media (max-width:760px){.ex .k:nth-child(n+6):not(:last-child){display:none}}
+[data-understood] .dr-und{margin-top:14px}
+@media (max-width:760px){.tb-right{right:16px;top:11px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="mock">
+    <div>
+      <span class="eyebrow"><span class="tag-new">Maquette</span>validée · tel que dans l’app (voir « Décisions »)</span>
+      <h1>🧭 Je veux… — dire ce qu’on veut faire, et l’app y emmène</h1>
+      <p>Tu écris ton but en français, comme tu le dirais (« imprimer un arbre pour mamie »). L’app trouve <b>1 à 3 endroits</b> qui le font, dit en une ligne ce que ça fait et où c’est, puis <b>▶ t’y emmène</b> (avec la bonne personne et les bons choix déjà mis) ou <b>👣 te montre</b> les boutons un par un. Un seul moteur, à deux endroits : <b>⌘K</b> et <b>🔍 Recherche</b>. Il marche <b>sans Internet et sans IA</b>. Familles inventées MAZAUD (Tulle), LACOMBE (Nice), DURAND (Salon-de-Provence) ; les nombres sont des exemples.</p>
+      <div class="path" aria-label="Où c’est dans l’app"><span class="on">⌘K → 🧭 Je veux…</span><i>et</i><span class="on">07 Recherche → 🧭 Je veux faire…</span><i>en option :</i><span>bouton du haut</span><span>tableau de bord</span><span>« ? » des titres</span></div>
+    </div>
+    <span class="segmented" role="group" aria-label="Thème"><button type="button" data-theme-set="auto" aria-pressed="true">Auto</button><button type="button" data-theme-set="light" aria-pressed="false">Clair</button><button type="button" data-theme-set="dark" aria-pressed="false">Sombre</button></span>
+  </div>
+
+  <nav class="toc" aria-label="Sommaire">
+    <a href="#decisions">✓ Décisions</a><a href="#s1">1 · Dans ⌘K</a><a href="#s2">2 · Dans Recherche</a><a href="#s3">3 · 👣 Montre-moi</a><a href="#s4">4 · Les autres entrées <small>en option</small></a><a href="#s5">5 · Comment il comprend</a><a href="#s6">6 · Toutes les intentions</a><a href="#s7">7 · Récents, ⭐, souvent</a><a href="#s8">8 · Réglages</a><a href="#qs">? Questions <small>6</small></a><a href="#reuse">♻ Ce qu’on reprend</a>
+  </nav>
+
+  <!-- ═══════════ 1 · ⌘K ═══════════ -->
+  <section class="sec" id="s1" aria-labelledby="s1h" style="margin-top:0">
+    <div class="sec-h"><span class="eyebrow">1 · Partout, au clavier</span><h2 id="s1h">⌘K : « 🧭 Je veux… » passe en premier</h2>
+      <p>La recherche rapide d’aujourd’hui (⌘K sur Mac, Ctrl+K ailleurs) garde tout ce qu’elle trouve. On y ajoute un premier mode : quand tu tapes une phrase avec un verbe (« imprimer », « fusionner », « envoyer »…), les buts trouvés passent en tête, avec ▶ et 👣 sur la ligne. Juste au-dessus, la ligne <b>« ✓ Ce que j’ai compris »</b> dit en clair ce que l’app a lu ; chaque pastille se touche pour la corriger. <b>Tab</b> passe à « 🔎 Trouver » (personnes, lieux, écrans, comme aujourd’hui). Clique les deux modes et les lignes.</p></div>
+    <div class="app">
+      <div class="topbar" data-topbar data-tab="Tableau de bord"></div>
+      <div class="qk-wrap">
+        <div class="qk" role="dialog" aria-label="Recherche rapide">
+          <div class="qk-top"><span class="segmented sm" role="group" aria-label="Mode" data-qkmode><button type="button" data-m="goal" aria-pressed="true">🧭 Je veux…</button><button type="button" data-m="find" aria-pressed="false">🔎 Trouver</button></span><span class="muted small">Tab pour changer</span></div>
+          <input type="search" value="imprimer un arbre pour mamie" aria-label="Recherche rapide" data-qkq autocomplete="off">
+          <ul role="listbox" data-qklist></ul>
+          <small class="foot">↑ ↓ pour choisir · Entrée : ▶ m’y emmener · ⇧ + Entrée : 👣 montre-moi · Tab : changer de mode · Échap pour fermer</small>
+        </div>
+      </div>
+    </div>
+    <p class="note">Branché comme les autres : un fournisseur de plus dans <code class="k2c">LCNDA_EXT.quickSearchProviders</code> (là où « Poser une question » et « Demander aux données » s’ajoutent déjà). « Voir tout dans Recherche → » ouvre la page complète avec la même phrase.</p>
+  </section>
+
+  <!-- ═══════════ 2 · Recherche ═══════════ -->
+  <section class="sec" id="s2" aria-labelledby="s2h">
+    <div class="sec-h"><span class="eyebrow">2 · La page complète</span><h2 id="s2h">🔍 Recherche → « 🧭 Je veux faire… », en haut de la colonne</h2>
+      <p>Un type de recherche de plus, le premier de la colonne, au-dessus de « Poser une question en français ». La grande case, des exemples, tes buts récents et ⭐, puis <b>« ✓ Ce que j’ai compris »</b> (la même que dans Données → question) et les réponses. Touche une pastille pour la corriger : les réponses se reclassent tout de suite, et ▶ M’y emmener prend ta correction. Quand l’app n’est pas sûre, elle demande d’abord « C’est bien ça ? ». <b>Essaie</b> : clique un exemple (le dernier est flou exprès) ou tape autre chose (« faire une sauvegarde », « changer les couleurs », « lire un vieil acte »…). Change aussi le scénario.</p></div>
+    <div class="scen"><span class="lbl">Voir :</span><span class="segmented sm" role="group" aria-label="Scénario" data-scen><button type="button" data-s="normal" aria-pressed="true">Normal</button><button type="button" data-s="kiosk" aria-pressed="false">Mode consultation</button><button type="button" data-s="ai" aria-pressed="false">🤖 IA installée</button></span></div>
+    <div class="addr"><span class="lbl">Adresse</span><code data-addr>#recherche/je-veux</code></div>
+    <div class="app">
+      <div class="topbar" data-topbar data-tab="Recherche"></div>
+      <div class="shell"><aside class="sb" aria-label="Types de recherche" data-rsb></aside>
+        <div class="workspace"><section class="page">
+          <header class="page-header"><div><span class="eyebrow crumb"><span>Recherche</span><i>›</i><span>Je veux faire…</span></span><h2><span class="ph-ico">🧭</span>Que veux-tu faire ?</h2><p>Écris ton but avec tes mots. L’app cherche parmi tout ce qu’elle sait faire, et t’y emmène.</p></div>
+            <div class="page-actions"><button type="button" class="button secondary" data-jump="s6">🗂 Tout parcourir</button></div></header>
+          <div data-kioskline></div>
+          <form class="ask" data-ask onsubmit="return false"><span aria-hidden="true">🧭</span><input type="search" data-q value="imprimer un arbre pour mamie" aria-label="Ce que tu veux faire" autocomplete="off"><button type="submit" class="button small">Trouver</button></form>
+          <div class="ex" data-ex><span class="lbl">Par exemple</span></div>
+          <div class="rec" data-recline></div>
+          <div data-understood></div>
+          <div class="ms" data-results style="margin-top:14px"></div>
+          <div class="others" data-others style="margin-top:14px"></div>
+          <div class="nomatch" data-nomatch style="margin-top:14px"></div>
+          <div style="margin-top:22px"><span class="gh eyebrow">Parcourir par famille</span><div class="fam" data-fam2 style="margin-top:8px"></div></div>
+        </section></div></div>
+    </div>
+    <p class="note">Les ⭐ et les récents sont les mêmes ici et dans ⌘K. « 🗂 Tout parcourir » montre toutes les intentions rangées par famille (partie 6) : utile quand on ne sait pas quoi écrire.</p>
+  </section>
+
+  <!-- ═══════════ 3 · Montre-moi ═══════════ -->
+  <section class="sec" id="s3" aria-labelledby="s3h">
+    <div class="sec-h"><span class="eyebrow">3 · Apprendre le chemin</span><h2 id="s3h">👣 Montre-moi : les vrais boutons, un par un</h2>
+      <p>La même bulle que la ▶ Visite guidée : le reste de l’écran s’assombrit, le bouton à toucher est entouré, « Précédent · Suivant ». Tu peux cliquer toi-même le bouton entouré. « ▶ Fais-le pour moi » saute directement au bout. Choisis un but :</p></div>
+    <div class="scen"><span class="lbl">But :</span><span class="segmented sm" role="group" aria-label="But montré" data-showpick></span></div>
+    <div class="app show-app" data-showapp>
+      <div class="topbar" data-topbar data-showtop></div>
+      <div class="shell"><aside class="sb" data-showsb aria-label="Colonne"></aside>
+        <div class="workspace"><section class="page" data-showpage></section></div></div>
+      <div class="vg-halo" data-halo hidden></div>
+      <div class="vg-bubble" data-vgb role="dialog" aria-live="polite" hidden></div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 4 · Autres entrées ═══════════ -->
+  <section class="sec" id="s4" aria-labelledby="s4h">
+    <div class="sec-h"><span class="eyebrow">4 · En option, éteintes au départ</span><h2 id="s4h">Le bouton du haut, le tableau de bord, le « ? » des titres</h2>
+      <p>Pour qui ne pense pas au clavier. Chacune s’allume dans Réglages → 🧭 Je veux… (partie 8). Ici, les trois allumées pour les voir.</p></div>
+    <div class="app">
+      <div class="topbar" data-topbar data-tab="Tableau de bord" data-jvbtn></div>
+      <div class="workspace"><section class="page">
+        <header class="page-header"><div><span class="eyebrow crumb"><span>01 — Piloter</span><i>›</i><span>Tableau de bord</span></span><h2><span class="ph-ico">🏠</span>Bonjour Camille<button type="button" class="ui-help" aria-expanded="true" aria-label="Aide : le tableau de bord" data-helpbtn>?</button><span class="callout" style="margin-left:6px">C</span></h2><p>Ce qui t’attend aujourd’hui dans ta généalogie.</p></div>
+          <div class="page-actions"><button type="button" class="button secondary">✎ Organiser</button></div></header>
+        <div class="bubble" data-bubble><p>Le tableau de bord rassemble des widgets : anniversaires, rappels, chiffres clés… « ✎ Organiser » les range.</p><a href="#" class="more" onclick="return false">En savoir plus (FAQ) →</a>
+          <h6>🧭 Ce qu’on fait souvent ici</h6><div class="bl" data-bubblelist></div></div>
+        <div class="dash" style="margin-top:18px">
+          <div class="card mark"><span class="callout">B</span><div class="card-head"><h3>🧭 Que veux-tu faire ?</h3><button type="button" class="ib" title="Régler ce widget">✎</button></div>
+            <div class="card-body"><p class="muted">Écris ton but, l’app t’y emmène.</p>
+              <form class="ask" data-dashask onsubmit="return false"><input type="search" placeholder="ex. imprimer un arbre pour mamie" aria-label="Ce que tu veux faire"><button type="submit" class="button small">Trouver</button></form>
+              <div class="rec" data-dashfav></div></div></div>
+          <div class="card"><div class="card-head"><h3>🎂 Anniversaires du jour</h3></div><div class="card-body"><ul class="w-list"><li>🎂 Marius DURAND <small>né le 26 nov. 1879</small></li><li>💍 Jean MAZAUD &amp; Marie DURAND <small>mariés le 26 nov. 1878</small></li><li>🕯 Honoré LACOMBE <small>† 26 nov. 1899</small></li></ul></div></div>
+        </div>
+      </section></div>
+    </div>
+    <p class="note"><b>A</b> le bouton « 🧭 Je veux… » de la barre du haut (à ranger avec les autres dans Réglages → Boutons en haut à droite) ; <b>B</b> le widget « 🧭 Que veux-tu faire ? » (un widget comme les autres) ; <b>C</b> la bulle « ? » qui existe déjà sur les titres gagne « 🧭 Ce qu’on fait souvent ici » : les intentions de cet écran. Toutes envoient vers la page de Recherche (partie 2) avec la phrase tapée.</p>
+  </section>
+
+  <!-- ═══════════ 5 · Comprendre ═══════════ -->
+  <section class="sec" id="s5" aria-labelledby="s5h">
+    <div class="sec-h"><span class="eyebrow">5 · Sous le capot, en mots simples</span><h2 id="s5h">Comment l’app comprend ta phrase</h2>
+      <p>Pas d’intelligence artificielle par défaut : des mots, des synonymes et une liste de tout ce que l’app sait faire. C’est la même lecture que « Poser une question en français » et « Demander aux données », qui reconnaissent déjà les personnes, les lieux et les dates.</p></div>
+    <div class="flow">
+      <div class="fl"><b>La phrase</b><p>Sans accents ni majuscules, les fautes courantes rattrapées (« imprimé », « arbe »), les petits mots retirés.</p></div>
+      <div class="fl"><b>Les mots connus</b><p>Synonymes : « mamie » = grand-mère, « envoyer » = partager, exporter. Un verbe (l’action) et une chose (l’objet).</p></div>
+      <div class="fl"><b>Qui, où, quand</b><p>Personnes, lieux, années, « chez nous », « mon ancêtre » : lus comme dans <code>dataAsk</code> et la question en français.</p></div>
+      <div class="fl"><b>Les intentions</b><p>Chaque but a des phrases, des synonymes, ce qu’il lui faut (une personne, un lieu). On donne des points à chacun.</p></div>
+      <div class="fl"><b>1 à 3 réponses</b><p>Les meilleures, « J’ai compris » en pastilles qu’on corrige, d’autres idées, et la FAQ si rien ne va.</p></div>
+    </div>
+    <div class="three">
+      <div class="card"><div class="card-head"><h3>🤖 L’IA, seulement si tu l’as</h3></div><div class="card-body small">
+        <p style="margin-top:0">Si l’assistant IA est installé sur l’ordinateur (Ollama, Réglages → 🤖 IA), et seulement quand aucune réponse n’est bonne, « 🤖 Reformuler avec l’IA » réécrit ta phrase avec les mots de l’app, puis le moteur cherche à nouveau.</p>
+        <p style="margin-bottom:0"><b>Rien ne part sur Internet.</b> L’IA ne choisit pas l’action : elle ne fait que proposer une autre phrase, que tu vois.</p></div></div>
+      <div class="card"><div class="card-head"><h3>🔒 En mode consultation</h3></div><div class="card-body small">
+        <p style="margin-top:0">Le guide marche aussi : il montre et emmène vers ce qui se regarde (arbres, cartes, listes, impressions).</p>
+        <p style="margin-bottom:0">Ce qui modifie (fusionner, ajouter, importer) est montré grisé, avec « En consultation : on regarde, on ne change rien ». 👣 Montre-moi reste possible, pour apprendre.</p></div></div>
+      <div class="card"><div class="card-head"><h3>🧓 Quand c’est ambigu</h3></div><div class="card-body small">
+        <p style="margin-top:0">« le mariage de Jean » : deux Jean dans la base ? L’app le dit, comme la question en français le fait déjà (« 2 fiches portent ce nom »), et tu touches le bon.</p>
+        <p style="margin-bottom:0">Une pastille est fausse ? Touche-la pour la changer ou la retirer, les réponses suivent.</p></div></div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 6 · Intentions ═══════════ -->
+  <section class="sec" id="s6" aria-labelledby="s6h">
+    <div class="sec-h"><span class="eyebrow">6 · Pour que rien ne manque</span><h2 id="s6h">Le registre des intentions, et comment il reste complet</h2>
+      <p>Une « intention », c’est une petite fiche par chose que l’app sait faire. Beaucoup se fabriquent toutes seules à partir des listes qui existent déjà (onglets, pages des Réglages, diagrammes, listes, outils) ; on ajoute à la main les phrases et ce qu’il faut pré-remplir.</p></div>
+    <div class="two">
+      <div class="card"><div class="card-head"><h3>Une intention <small>— exemple</small></h3></div><div class="card-body">
+<pre class="code"><span class="c">// assets/js/app-je-veux-intentions.js</span>
+intent({
+  id: <span class="s">'imprimer_arbre'</span>, famille: <span class="s">'imprimer'</span>,
+  icone: <span class="s">'🖨'</span>, nom: <span class="s">'Imprimer un arbre'</span>,
+  fait: <span class="s">'Un arbre sur papier, A4 ou A3.'</span>,
+  chemin: [<span class="s">'Graphiques'</span>, <span class="s">'Arbre des ascendants'</span>, <span class="s">'🖨 Imprimer'</span>],
+  phrases: [<span class="s">'imprimer un arbre'</span>, <span class="s">'arbre sur papier'</span>],
+  mots: <span class="s">'imprimer imprimante papier pdf feuille'</span>,
+  besoin: { personne: <span class="s">'départ'</span> },
+  consultation: <span class="s">'oui'</span>,
+  aller: ctx =&gt; openGraph(<span class="s">'ancestors'</span>, ctx.personne, {print: 1}),
+  etapes: [<span class="s">'[data-nav=graphiques]'</span>, <span class="s">'[data-graph=ancestors]'</span>, <span class="s">'[data-gp-print]'</span>]
+})</pre></div></div>
+      <div class="card"><div class="card-head"><h3>D’où elles viennent</h3></div><div class="card-body" style="padding:0">
+        <div class="tw"><table class="data-table cmp"><thead><tr><th>Source</th><th>Ce qu’elle donne</th></tr></thead><tbody>
+          <tr><td>Les onglets<small>app.js · modules</small></td><td>22 écrans : « ouvrir… »</td></tr>
+          <tr><td>Les pages des Réglages<small>defaultMaintenanceTabs + MAINT_KEYWORDS</small></td><td>49 pages, déjà avec leurs mots de « Chercher un réglage… »</td></tr>
+          <tr><td>Graphiques<small>defaultGraphDiagramItems</small></td><td>19 arbres et dessins</td></tr>
+          <tr><td>Diagrammes<small>la galerie, « Je veux représenter… »</small></td><td>plus de 100 types : un seul but « faire un diagramme », qui passe la phrase</td></tr>
+          <tr><td>Listes et 🧰 Données<small>Listes, listes de données</small></td><td>« voir », « exporter », « mettre dans une fiche »</td></tr>
+          <tr><td>Outils et actions<small>heritage-shortcuts.js · toolOf, actionOf</small></td><td>les outils et actions des widgets Raccourcis</td></tr>
+          <tr><td>＋ Ajouter un onglet<small>app-onglets-plus.js · CATALOG</small></td><td>39 entrées qui ont déjà des mots</td></tr>
+          <tr><td>FAQ<small>heritage-more.js · faqSearch</small></td><td>environ 930 réponses : « Autres idées » quand aucune intention ne va</td></tr>
+        </tbody></table></div></div></div>
+    </div>
+    <div class="card" style="margin-top:16px"><div class="card-head"><h3>🛡 Le test de garde <small>— pour qu’une nouveauté n’oublie pas son intention</small></h3></div><div class="card-body small">
+      <p style="margin-top:0"><code class="k2c">tests/test-je-veux-couverture.js</code> lit les onglets, les pages des Réglages, les Graphiques, les listes, les outils et les exports, et <b>échoue</b> si l’un d’eux n’a pas d’intention (ou n’est pas écrit dans une courte liste « exprès sans intention », avec la raison). Il vérifie aussi que chaque intention a un nom, une ligne « ce que ça fait », un chemin dont chaque étape existe, et qu’elle dit si elle marche en consultation. Les 7 phrases d’exemple de cette page sont gardées comme essais : chacune doit donner la bonne réponse en premier.</p>
+      <p style="margin-bottom:0">Couverture affichée dans Réglages → 🧭 Je veux… : « 312 choses de l’app, 312 avec une intention » (exemple).</p></div></div>
+    <h3 style="margin:22px 0 8px;font-size:17px">Un échantillon : <span data-icount></span> intentions, par famille</h3>
+    <div class="fam" data-fam></div>
+    <div class="igrid" data-igrid></div>
+  </section>
+
+  <!-- ═══════════ 7 · Historique ═══════════ -->
+  <section class="sec" id="s7" aria-labelledby="s7h">
+    <div class="sec-h"><span class="eyebrow">7 · Ce qu’on refait</span><h2 id="s7h">Récemment demandé, ⭐ mes buts, souvent fait ici</h2>
+      <p>Tout est gardé sur cet ordinateur seulement. « Souvent fait ici » compte ce que les gens de cet ordinateur (et du même réseau, si l’app est partagée à la maison) ont choisi ; au début, une petite liste fournie avec l’app. Rien n’est envoyé.</p></div>
+    <div class="three" style="margin-top:0">
+      <div class="card"><div class="card-head"><h3>🕘 Récemment demandé</h3><button type="button" class="link-button">Effacer</button></div><div class="card-body"><ul class="hl" data-hrec></ul></div></div>
+      <div class="card"><div class="card-head"><h3>⭐ Mes buts</h3><button type="button" class="link-button">Ranger</button></div><div class="card-body"><ul class="hl" data-hfav></ul><p class="small muted" style="margin:8px 0 0">Touche ☆ sur une réponse pour l’ajouter. Un but ⭐ garde ses choix (« arbre de Camille, 4 générations, A4 »).</p></div></div>
+      <div class="card"><div class="card-head"><h3>📈 Souvent fait ici</h3><span class="ui-badge is-grey">sur cet ordinateur</span></div><div class="card-body"><ul class="hl" data-hoft></ul></div></div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 8 · Réglages ═══════════ -->
+  <section class="sec" id="s8" aria-labelledby="s8h">
+    <div class="sec-h"><span class="eyebrow">8 · À ta façon</span><h2 id="s8h">Réglages → 🧭 Je veux…</h2>
+      <p>Une page dans le groupe « Navigation », à côté des Raccourcis clavier. Chaque réglage est gardé tout de suite.</p></div>
+    <div class="app">
+      <div class="topbar" data-topbar data-tab="Réglages"></div>
+      <div class="shell"><aside class="sb" aria-label="Réglages" data-setsb></aside>
+        <div class="workspace"><section class="page">
+          <header class="page-header"><div><span class="eyebrow crumb"><span>Réglages</span><i>›</i><span>Navigation</span><i>›</i><span>Je veux…</span></span><h2><span class="ph-ico">🧭</span>Je veux…</h2><p>Dire ce qu’on veut faire, et y aller. Rien ne part sur Internet.</p></div>
+            <div class="page-actions"><button type="button" class="button secondary">↺ Comme au départ</button></div></header>
+          <div class="two">
+            <div class="panel">
+              <h3>Allumer et où le montrer</h3>
+              <div class="setrow"><div><b>🧭 Je veux…</b><small>Éteint, il disparaît de partout.</small></div><div><label class="ui-toggle"><input type="checkbox" checked><i></i></label></div></div>
+              <div class="setrow"><div>Dans ⌘K, en premier<small>Sinon, les buts arrivent après les personnes.</small></div><div><label class="ui-toggle"><input type="checkbox" checked><i></i></label></div></div>
+              <div class="setrow"><div>Dans 🔍 Recherche<small>« 🧭 Je veux faire… » en haut de la colonne.</small></div><div><label class="ui-toggle"><input type="checkbox" checked><i></i></label></div></div>
+              <div class="setrow"><div>Bouton dans la barre du haut<small>À ranger avec les autres boutons en haut à droite.</small></div><div><label class="ui-toggle"><input type="checkbox"><i></i></label></div></div>
+              <div class="setrow"><div>Widget « Que veux-tu faire ? »<small>Posé en haut du tableau de bord.</small></div><div><label class="ui-toggle"><input type="checkbox"><i></i></label></div></div>
+              <div class="setrow"><div>Dans les bulles « ? » des titres<small>« Ce qu’on fait souvent ici ».</small></div><div><label class="ui-toggle"><input type="checkbox"><i></i></label></div></div>
+            </div>
+            <div class="panel">
+              <h3>Les réponses</h3>
+              <div class="setrow"><div>👣 Montre-moi tout seul<small>Après ▶ M’y emmener, montrer aussi les boutons.</small></div><div><span class="segmented sm" role="group" aria-label="Montre-moi tout seul" data-seg><button type="button" aria-pressed="false">Jamais</button><button type="button" aria-pressed="true">La 1re fois</button><button type="button" aria-pressed="false">Toujours</button></span></div></div>
+              <div class="setrow"><div>Nombre de réponses<small>Les autres vont dans « Autres idées ».</small></div><div><span class="segmented sm" role="group" aria-label="Nombre de réponses" data-seg><button type="button" aria-pressed="false">1</button><button type="button" aria-pressed="false">2</button><button type="button" aria-pressed="true">3</button></span></div></div>
+              <div class="setrow"><div>🤖 Reformuler avec l’IA de l’ordinateur<small>Seulement si l’assistant IA est installé (Réglages → 🤖 IA). Ici : pas installé.</small></div><div><label class="ui-toggle"><input type="checkbox" disabled><i></i></label></div></div>
+              <div class="setrow"><div>Garder « Récemment demandé »<small>Sur cet ordinateur. <button type="button" class="link-button">Effacer maintenant</button></small></div><div><label class="ui-toggle"><input type="checkbox" checked><i></i></label></div></div>
+              <div class="setrow"><div>Montrer « Souvent fait ici »<small>Compté sur cet ordinateur seulement.</small></div><div><label class="ui-toggle"><input type="checkbox" checked><i></i></label></div></div>
+              <div class="setrow"><div>Couverture<small>312 choses de l’app, 312 avec une intention (exemple).</small></div><div><span class="ui-badge is-green">complet</span></div></div>
+            </div>
+          </div>
+        </section></div></div>
+    </div>
+  </section>
+
+  <!-- ═══════════ Questions ═══════════ -->
+  <!-- ═══════════ ✓ Décisions ═══════════ -->
+  <section class="sec" id="decisions" aria-labelledby="dech">
+    <div class="sec-h"><span class="eyebrow">✓ Validé · ce qui est construit</span><h2 id="dech">Décisions</h2><p>Toutes les recommandations sont acceptées. Voici ce que l’app fait, et où c’est dans le code.</p></div>
+    <ol class="qs">
+      <li class="card"><b>⌘K et Recherche, allumés au départ</b><p class="opt2">« 🧭 Je veux… » est le premier mode de ⌘K (Tab → « 🔎 Trouver » ; sans verbe dans la phrase, ⌘K cherche les noms comme avant) et le premier type de 🔍 Recherche (« 🧭 Je veux faire… »). Le bouton 🧭 du haut (rangé avec les autres dans « Boutons en haut à droite »), le widget « 🧭 Que veux-tu faire ? » et « 🧭 Ce qu’on fait souvent ici » dans les bulles « ? » sont là, éteints au départ.</p><p class="reco">assets/js/app-je-veux.js (petit, chargé au démarrage) ; le moteur et les écrans se chargent à la première ouverture : le démarrage ne change pas.</p></li>
+      <li class="card"><b>« C’est bien ça ? » seulement quand l’app n’est pas sûre</b><p class="opt2">La ligne « ✓ Ce que j’ai compris » est toujours visible ; ses pastilles se corrigent (les mêmes que Données → question : .dr-und, .dr-pill, .dr-pop) et les réponses se reclassent tout de suite. Quand c’est ambigu : les homonymes avec leurs dates (« 3 fiches portent ce nom : lequel ? »), d’autres lectures (« Ce n’est pas ça ? »), les fautes corrigées (« J’ai corrigé : arbe → arbre ») et les mots ignorés (« Je n’ai pas tenu compte de : … »).</p><p class="reco">Pas sûr = verbe ou objet manquant, deux personnes du même nom, ou deux réponses de familles différentes presque à égalité.</p></li>
+      <li class="card"><b>▶ M’y emmener remplit, mais ne fait jamais le dernier geste</b><p class="opt2">Le bon écran, la bonne personne, le lieu, les années, la phrase déjà posés. Imprimer, fusionner, envoyer, supprimer, importer : c’est toi qui cliques le dernier bouton (« ✓ C’est ici. Vérifie les choix, puis clique toi-même « ⤓ Exporter » »).</p><p class="reco">Chaque intention dit son dernier bouton (last) ; un essai vérifie que rien n’est imprimé ni fusionné.</p></li>
+      <li class="card"><b>👣 Montre-moi : tout seul la 1re fois pour chaque but, puis sur demande</b><p class="opt2">La même bulle et le même halo que la ▶ Visite guidée (app-visite.js, LCNDA_EXT.tour.guide), sur les vrais boutons, avec « ▶ Fais-le pour moi » (même règle que ▶). Réglage : Jamais / La 1re fois / Toujours. Possible aussi en mode consultation.</p></li>
+      <li class="card"><b>🤖 L’IA seulement si elle est installée, seulement quand rien ne va</b><p class="opt2">« 🤖 Reformuler avec l’IA de l’ordinateur » : éteint au départ, à allumer dans Réglages → 🧭 Je veux…, seulement si l’assistant IA est installé (heritage-assistant-ia.js) et seulement quand aucune réponse ne correspond. L’IA de cet ordinateur seulement (lib/assistant_ia.php, aia_rephrase) : jamais en ligne ; elle propose une phrase, que tu vois, puis le moteur cherche à nouveau.</p></li>
+      <li class="card"><b>🧭 pour « Je veux… », 🔦 pour la Battue</b><p class="opt2">La Battue passe à 🔦 partout où son icône était 🧭 (onglets d’Enquêtes, raccourcis, menu de choix, recueils, tableaux, journal, monographie, médias), pour ne pas mélanger.</p></li>
+      <li class="card"><b>En plus : la liste de tout ce que l’app sait faire</b><p class="opt2">« pas bête d’avoir une liste qui permet de mieux voir » : dans Recherche → 🧭 Je veux faire…, « 🗂 Tout parcourir » montre toutes les intentions (pas un échantillon) en cartes calmes (icône, nom, une ligne, chemin, ▶ 👣 ☆), rangées par famille (Toutes, Saisir, Chercher, Montrer, Imprimer/exporter, Partager, Ranger/panier, Vérifier, Données, Outils, Réglages), avec une case pour filtrer. La même chose en tableau dans Listes → « 🧭 Tout ce que l’app sait faire » (famille, nom, ce que ça fait, chemin, ▶).</p></li>
+      <li class="card"><b>Le registre et le test de garde</b><p class="opt2">Un seul moteur pour ⌘K et Recherche (app-je-veux-moteur.js, LCNDA_EXT.intents) : environ 90 intentions écrites à la main, plus celles fabriquées toutes seules depuis les onglets, les pages des Réglages (et leurs mots), les listes, Graphiques, les types de Recherche, les outils et actions des Raccourcis, les thèmes des données et le catalogue « ＋ Ajouter un onglet ». tests/test-je-veux-couverture.js échoue si un onglet, une page des Réglages ou un outil n’a pas d’intention.</p></li>
+    </ol>
+  </section>
+
+  <section class="sec" id="qs" aria-labelledby="qsh">
+    <div class="sec-h"><span class="eyebrow">Avant de le faire</span><h2 id="qsh">6 questions pour toi</h2><p>Ma recommandation est en vert. Réponds juste par le numéro et oui ou non, ou change ce que tu veux.</p></div>
+    <ol class="qs">
+      <li class="card"><b>⌘K et Recherche, c’est bien les deux endroits ?</b><p class="opt2">Allumés au départ : ⌘K (en premier) et 🔍 Recherche → « 🧭 Je veux faire… » (en haut de la colonne). Le bouton du haut, le widget et le « ? » sont là mais éteints.</p><p class="reco">Oui, comme ça. Si tu veux en allumer un troisième, je prendrais le bouton du haut.</p></li>
+      <li class="card"><b>« Ce que j’ai compris » : demander « C’est bien ça ? » à chaque fois ?</b><p class="opt2">La ligne « Tu veux : imprimer · un arbre · de Camille… » est toujours là, au-dessus des réponses, et chaque pastille se corrige. La question est : faut-il en plus dire « Oui » avant de voir les réponses ?</p><p class="reco">Seulement quand l’app n’est pas sûre (verbe manquant, deux Jean, deux réponses aussi bonnes). Sinon, les réponses s’affichent tout de suite, la ligne restant visible.</p></li>
+      <li class="card"><b>▶ M’y emmener remplit les choix tout seul ?</b><p class="opt2">Par exemple : l’arbre de Camille, 4 générations, A4, gros caractères, puis tu vérifies avant d’imprimer.</p><p class="reco">Oui, mais sans jamais lancer l’impression, la fusion ou l’envoi : tu cliques toi-même le dernier bouton.</p></li>
+      <li class="card"><b>👣 Montre-moi : tout seul la première fois ?</b><p class="opt2">Jamais / la 1re fois pour chaque but / toujours.</p><p class="reco">La 1re fois pour chaque but, puis seulement si tu le demandes.</p></li>
+      <li class="card"><b>L’IA pour reformuler, quand elle est là ?</b><p class="opt2">Seulement si l’assistant IA est installé sur l’ordinateur, et seulement quand rien ne correspond. Rien ne part sur Internet.</p><p class="reco">Oui, éteint au départ, à allumer dans les réglages.</p></li>
+      <li class="card"><b>L’icône 🧭 te va ?</b><p class="opt2">🧭 sert déjà à la Battue (bouton du haut) et à « Usage de l’app ». Autre idée : 🙋 ou 💡.</p><p class="reco">Garder 🧭 pour « Je veux… » et passer la Battue à 🐾 ou 🔦, pour éviter de mélanger.</p></li>
+    </ol>
+  </section>
+
+  <!-- ═══════════ Ce qu'on reprend ═══════════ -->
+  <section class="sec" id="reuse" aria-labelledby="reh">
+    <div class="sec-h"><span class="eyebrow">Rien en double</span><h2 id="reh">Ce qui existe déjà, et qu’on reprend</h2></div>
+    <div class="card"><div class="tw"><table class="data-table reuse"><thead><tr><th>Ce qui existe</th><th>Où</th><th>Ce qu’on en prend</th></tr></thead><tbody>
+      <tr><td>Recherche rapide ⌘K</td><td>app.js · openQuickSearch, quickSearchScreens<small>personnes, battues, enquêtes, lieux, graphiques, transcriptions, écrans, Réglages</small></td><td>La fenêtre, le clavier (↑ ↓ Entrée ⇧Entrée), l’accroche <code class="k2c">quickSearchProviders</code> ; la liste des écrans sert de base au registre.</td></tr>
+      <tr><td>Types de recherche</td><td>app-recherche.js · RESEARCH_KINDS</td><td>Une ligne de plus en tête : « 🧭 Je veux faire… ».</td></tr>
+      <tr><td>« Je veux représenter… »</td><td>heritage-diagram-assistant.js · parse, suggest</td><td>Sa lecture (sujet, envie, années, siècles, lieu, nom) ; le but « faire un diagramme » lui passe la phrase.</td></tr>
+      <tr><td>« Demander aux données »</td><td>app-donnees-accueil.js · dataAsk ; heritage-connexions.js · parseAsk</td><td>Quoi · Qui · Quand · Où + rayon ; les pastilles « J’ai compris » qu’on touche pour corriger.</td></tr>
+      <tr><td>« Poser une question en français »</td><td>heritage-links.js, lib/question_plus.php</td><td>Les personnes et homonymes (« 2 fiches portent ce nom »), « Je n’ai pas tenu compte de : … », les fautes courantes.</td></tr>
+      <tr><td>Assistant IA</td><td>heritage-assistant-ia.js, lib/assistant_ia.php<small>Ollama sur l’ordinateur ; réglage local, en ligne (bientôt), éteint</small></td><td>Seulement pour reformuler, si installé et allumé ; jamais en ligne.</td></tr>
+      <tr><td>FAQ et bulles « ? »</td><td>heritage-more.js · FAQ, faqSearch, FAQ_SYN ; app-ui.js · helpTip, data-help, data-help-faq</td><td>Les synonymes et la façon de couper les mots ; « Voir la FAQ » quand rien ne va ; la bulle « ? » gagne « Ce qu’on fait souvent ici ».</td></tr>
+      <tr><td>« Chercher un réglage… »</td><td>app-maintenance.js · MAINT_KEYWORDS</td><td>Les mots de chaque page des Réglages, repris tels quels.</td></tr>
+      <tr><td>▶ Visite guidée</td><td>app-visite.js, visite.css (.vg-halo, .vg-bubble)</td><td>La bulle et le halo de 👣 Montre-moi, le saut des boutons cachés, ← → Échap.</td></tr>
+      <tr><td>Raccourcis et catalogue d’onglets</td><td>heritage-shortcuts.js · describe, toolOf ; app-onglets-plus.js · CATALOG ; heritage-tabs.js · appScreen</td><td>Les cibles déjà nommées (écran, liste, outil, action) pour ▶ M’y emmener et pour ⭐ Mes buts.</td></tr>
+      <tr><td>Mode consultation</td><td>body.is-kiosk</td><td>Ce qui modifie est grisé, le reste marche.</td></tr>
+    </tbody></table></div></div>
+  </section>
+</div>
+<div class="toast" data-toast hidden role="status"><span data-toastt></span><button type="button" data-toastx>OK</button></div>
+<script>
+(() => {
+'use strict';
+const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+const fold = s => String(s ?? '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[’']/g, ' ');
+
+/* ── thème ── */
+$$('[data-theme-set]').forEach(b => b.addEventListener('click', () => {
+  const v = b.dataset.themeSet; if (v === 'auto') document.documentElement.removeAttribute('data-theme'); else document.documentElement.dataset.theme = v;
+  $$('[data-theme-set]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+}));
+$$('[data-seg]').forEach(g => g.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; $$('button', g).forEach(x => x.setAttribute('aria-pressed', String(x === b))); }));
+let toastT = 0;
+const toast = m => { const t = $('[data-toast]'); $('[data-toastt]').textContent = m; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => { t.hidden = true; }, 5200); };
+$('[data-toastx]').addEventListener('click', () => { $('[data-toast]').hidden = true; });
+$$('[data-jump]').forEach(b => b.addEventListener('click', () => $('#' + b.dataset.jump).scrollIntoView({behavior: 'smooth'})));
+
+/* ── la base (inventée) ── */
+const PEOPLE = [
+  {id: 1, n: 'Camille MAZAUD', f: 'camille', l: 'mazaud', y: 'née en 1990 · personne de départ', start: true},
+  {id: 2, n: 'Jean MAZAUD', f: 'jean', l: 'mazaud', y: '1852–1921 · Tulle'},
+  {id: 3, n: 'Jean LACOMBE', f: 'jean', l: 'lacombe', y: '1888–1916 · Nice · mort pour la France'},
+  {id: 4, n: 'Jean-Baptiste DURAND', f: 'jean', l: 'durand', y: '1820–1884 · Salon-de-Provence'},
+  {id: 5, n: 'Marie DURAND', f: 'marie', l: 'durand', y: '1856–1930 · Tulle'},
+  {id: 6, n: 'Honoré LACOMBE', f: 'honore', l: 'lacombe', y: '1834–1899 · Nice'},
+  {id: 7, n: 'Marius DURAND', f: 'marius', l: 'durand', y: '1879–1957 · Salon-de-Provence'}
+];
+const START = PEOPLE[0], HOME = 'Salon-de-Provence';
+const PLACES = ['Salon-de-Provence', 'Tulle', 'Nice', 'Lambesc', 'Paris'];
+
+/* ── les mots : action, chose, destinataire ── */
+const ACTS = {imprimer: ['🖨', 'imprimer', /imprim|sur papier|sur une feuille/], trouver: ['🔎', 'trouver', /trouv|cherch|savoir|connaitre|qui (etait|a)/], fusionner: ['🔗', 'fusionner', /fusion|regroup|reunir|doublon/],
+  faire: ['✏️', 'faire', /\bfaire\b|\bfais\b|creer|dessin|represent|montrer en/], mettre: ['📥', 'mettre', /\bmettre\b|\bmets\b|ranger|inserer|coller/], envoyer: ['📤', 'envoyer', /envoy|partag|transmet|donner a|mail/],
+  exporter: ['⤓', 'exporter', /export|gedcom|csv|excel/], verifier: ['✅', 'vérifier', /verifi|control|erreur|incoheren/], voir: ['👀', 'voir', /\bvoir\b|afficher|regarder|montre/],
+  ajouter: ['＋', 'ajouter', /ajout|saisi|nouvel|nouveau|entrer|noter/], sauvegarder: ['💾', 'sauvegarder', /sauveg|copie de secours|backup/], changer: ['🎨', 'changer', /chang|regl|modifier l|personnalis/],
+  lire: ['📜', 'lire', /\blire\b|dechiffr|transcri|latin/], importer: ['⤒', 'importer', /import|heredis|geneanet|ancestry/]};
+const OBJS = {arbre: ['🌳', 'un arbre', /arbre|ascendan|genealogi|eventail/], fiche: ['📒', 'une fiche', /\bfiches?\b/], liste: ['📋', 'une liste', /\blistes?\b|tableau/], lieu: ['📍', 'des lieux', /\blieux?\b|commune|village|ville/],
+  personne: ['👤', 'une personne', /personne|\bfiches? de|enfant/], diagramme: ['📈', 'un diagramme', /diagramm|graphique|camembert|courbe/], metier: ['🧱', 'les métiers', /metier|profession/],
+  seisme: ['🌋', 'les séismes', /seism|tremblement/], guerre: ['⚔️', 'la guerre', /guerre|soldat|poilu|militaire|mort pour la france|1914/], temoin: ['🕸', 'les témoins', /temoin|parrain|marraine/],
+  mariage: ['💍', 'un mariage', /mariage|marie\b|noces/], photo: ['🖼', 'une photo', /photo|image|scan/], base: ['🗃', 'toute la base', /\bbase\b|tout l arbre|toute la genealogie/],
+  couleur: ['🎨', 'les couleurs', /couleur|theme|sombre|police/], acte: ['📜', 'un acte ancien', /\bactes?\b|papiers|registre|vieux document/], doublon: ['👥', 'les doublons', /doublon|en double/],
+  carte: ['🗺', 'une carte', /\bcarte\b|plan\b/], famille: ['👪', 'une famille', /famille|parents/], meteo: ['🌦', 'la météo', /meteo|temps qu il|hiver|orage/], sauvegarde: ['💾', 'une sauvegarde', /sauvegarde/]};
+const POUR = {mamie: ['🧓', 'mamie', 'gros caractères, grand format', /\b(mamie|mamy|mémé|meme|grand mere|papi|papy|pepe|grand pere|grands parents)\b/], cousin: ['🤝', 'un cousin', 'sans les vivants (« Pour partager »)', /\b(cousin|cousine|oncle|tante|famille)\b/], moi: ['🙂', 'moi', 'pour toi seulement', /pour moi\b/]};
+
+/* ── le registre des intentions (un échantillon) ── */
+const FAM = {saisir: ['✍️', 'Saisir'], chercher: ['🔎', 'Chercher'], montrer: ['🌳', 'Montrer'], imprimer: ['🖨', 'Imprimer, exporter'], partager: ['📤', 'Partager'], ranger: ['🧺', 'Ranger, panier'], verifier: ['✅', 'Vérifier'], donnees: ['📊', 'Données'], outils: ['🛠', 'Outils'], reglages: ['⚙️', 'Réglages']};
+const I = (id, f, ic, n, d, p, act, obj, w, o = {}) => ({id, f, ic, n, d, p, act, obj, w, ro: true, pr: 0, ...o});
+const INT = [
+  I('add_person', 'saisir', '👤', 'Ajouter une personne', 'Une nouvelle fiche, avec ses dates et ses lieux.', ['Personnes', '＋ Nouvelle personne'], ['ajouter'], ['personne'], 'creer fiche nouvelle', {ro: false}),
+  I('add_family', 'saisir', '⚡', 'Saisir une famille d’un coup', 'Père, mère, mariage et enfants en une seule fenêtre.', ['Personnes', '⚡ ＋ Famille'], ['ajouter'], ['famille', 'mariage'], 'pere mere enfants', {ro: false}),
+  I('add_event', 'saisir', '📅', 'Ajouter un événement à une fiche', 'Naissance, mariage, métier, déménagement… avec sa date et son lieu.', ['Personnes', 'la fiche', '＋ Événement'], ['ajouter'], ['mariage', 'personne'], 'evenement naissance deces bapteme date', {ro: false, need: 'who'}),
+  I('add_photo', 'saisir', '🖼', 'Ajouter une photo ou un scan', 'Une image sur une fiche : portrait, acte, carte postale.', ['Personnes', 'la fiche', '📎 Médias'], ['ajouter', 'mettre'], ['photo'], 'image portrait scanner', {ro: false, need: 'who'}),
+  I('transcribe', 'saisir', '📜', 'Transcrire un acte', 'Recopier un acte à côté de son image, mot à mot.', ['Documents', 'Transcriptions', '＋ Nouvelle'], ['lire', 'ajouter'], ['acte'], 'recopier ecrire texte', {ro: false}),
+  I('ask', 'chercher', '🔎', 'Poser une question sur la famille', 'La réponse courte, avec les fiches : témoins, enfants, cousins, records…', ['Recherche', 'Poser une question en français'], ['trouver'], ['temoin', 'mariage', 'personne', 'guerre'], 'qui quand combien question temoins', {pr: 5, pre: u => [u.objs.includes('temoin') ? `💬 « Qui étaient les témoins du mariage de ${u.whoP ? u.whoP.n : (u.whoCands[0]?.n.split(' ')[0] || '…')} ? »` : u.objs.includes('guerre') ? '💬 « Quels ancêtres ont connu la Grande Guerre ? »' : `💬 « ${u.q} »`]}),
+  I('witness', 'chercher', '🕸', 'Réseau : témoins et voisins', 'Qui était là aux baptêmes et mariages, et qui revient souvent.', ['Graphiques', 'Réseau : témoins et voisins'], ['trouver', 'voir'], ['temoin', 'mariage'], 'reseau voisins parrains', {need: 'who'}),
+  I('gaps', 'chercher', '🔍', 'Que manque-t-il ?', 'Les actes qui manquent à une fiche, et où les chercher.', ['Recherche', '🔍 Que manque-t-il ?'], ['trouver'], ['acte', 'personne'], 'manque trou manquant', {need: 'who'}),
+  I('ou', 'chercher', '🌍', 'Où chercher ?', 'Les archives et les séries à ouvrir pour un lieu et une époque.', ['Recherche', '🌍 Où chercher ?'], ['trouver'], ['acte', 'lieu'], 'archives departementales registre'),
+  I('insee', 'chercher', '🪦', 'Décès depuis 1970 (INSEE)', 'Chercher un décès dans le fichier de l’INSEE.', ['Recherche', 'Décès (fichier INSEE)'], ['trouver'], ['personne'], 'deces mort insee 1970'),
+  I('war', 'chercher', '⚔️', 'Guerres et soldats', 'Morts pour la France, Poilus, régiments : qui a fait la guerre dans ta famille.', ['Données', '⚔️ Guerres et soldats', 'Morts pour la France'], ['trouver', 'voir', 'verifier'], ['guerre'], 'soldat poilu regiment combattant', {pr: 1, pre: u => [`👤 ${u.who === 'anc' ? 'tes ancêtres (Sosa de Camille)' : u.whoP ? u.whoP.n : 'toute la famille'}`, '📅 1870 → 1945']}),
+  I('tree', 'montrer', '🌳', 'Voir l’arbre des ascendants', 'Les parents, grands-parents… d’une personne, à l’écran.', ['Graphiques', 'Arbre des ascendants'], ['voir', 'faire'], ['arbre'], 'ascendants ancetres', {need: 'who'}),
+  I('fan', 'montrer', '🌀', 'Éventail des générations', 'L’arbre en demi-cercle, joli à montrer.', ['Graphiques', 'Éventail des générations'], ['voir', 'faire'], ['arbre'], 'eventail roue cercle', {need: 'who'}),
+  I('lifemap', 'montrer', '🗺', 'Carte de la vie', 'Les lieux d’une vie, animés sur la carte.', ['Carte', '🗺 Carte de la vie'], ['voir'], ['carte', 'lieu'], 'parcours deplacements', {need: 'who'}),
+  I('diagram', 'montrer', '📈', 'Faire un diagramme', 'Tu dis ce que tu veux montrer, l’app propose les bons dessins (« Je veux représenter… »).', ['Diagrammes', '＋ Nouveau', '💬 Je veux représenter…'], ['faire'], ['diagramme', 'metier'], 'representer statistique chiffres', {pr: 2, pre: u => [`💬 « ${u.objs.filter(o => o !== 'diagramme').map(o => OBJS[o][1].replace(/^(un|une|des) /, '')).join(', ') || 'à écrire'} »`]}),
+  I('occ', 'montrer', '🧱', 'Transmission des métiers', 'Qui faisait quel métier, de père en fils.', ['Graphiques', 'Transmission des métiers'], ['voir', 'faire'], ['metier'], 'profession pere fils'),
+  I('occtree', 'montrer', '🌲', 'Arbre des métiers', 'L’arbre où chaque case dit le métier.', ['Graphiques', 'Arbre des métiers'], ['voir', 'faire'], ['metier', 'arbre'], 'profession'),
+  I('simple', 'montrer', '🧓', 'Mode simple', 'Gros boutons, gros textes, rien à casser : pour montrer l’arbre à quelqu’un.', ['Barre du haut', '🧓 Mode simple'], ['voir'], ['arbre'], 'montrer personne agee gros', {pourBonus: 'mamie'}),
+  I('kiosk', 'montrer', '🔒', 'Mode consultation', 'La famille regarde sans pouvoir rien changer.', ['Barre du haut', '🔒 Mode consultation'], ['voir'], ['base'], 'regarder sans modifier lecture'),
+  I('print_tree', 'imprimer', '🖨', 'Imprimer un arbre', 'Un arbre sur papier, A4 ou A3, portrait ou paysage.', ['Graphiques', 'Arbre des ascendants', '🖨 Imprimer'], ['imprimer'], ['arbre'], 'pdf feuille papier', {pr: 3, need: 'who', pre: u => [`👤 ${u.whoP ? u.whoP.n : START.n}`, '4 générations', 'A4 paysage', ...(u.pour === 'mamie' ? ['🔠 gros caractères'] : [])], steps: [['Ouvre l’onglet Graphiques', 'C’est en haut. Tous les arbres et les dessins de famille sont là.'], ['Choisis « Arbre des ascendants »', 'Dans la colonne de gauche. L’arbre part de la personne affichée : ici Camille MAZAUD.'], ['Clique 🖨 Imprimer', 'Au-dessus de l’arbre. Tu choisis le papier (A4, A3), le sens, et « gros caractères ». Rien ne s’imprime avant ton OK.']]}),
+  I('poster', 'imprimer', '🧩', 'Grand format à assembler', 'Un très grand arbre, sur plusieurs feuilles A4 ou A3 à coller.', ['Graphiques', 'Arbre des ascendants', '🧩 Grand format à assembler'], ['imprimer'], ['arbre'], 'affiche poster grand mur', {pr: 1, need: 'who', pre: u => [`👤 ${u.whoP ? u.whoP.n : START.n}`, '6 générations', '4 × A4']}),
+  I('deco', 'imprimer', '🌳', 'Arbre décoratif à offrir', 'Un bel arbre illustré, à imprimer ou à offrir.', ['Listes', 'Outils de modification', 'Arbre décoratif'], ['imprimer', 'faire'], ['arbre'], 'offrir cadeau decoratif joli', {pourBonus: 'mamie', pre: u => [`👤 ${u.whoP ? u.whoP.n : START.n}`, '🌿 modèle « Chêne »']}),
+  I('print_sheet', 'imprimer', '📄', 'Imprimer une fiche', 'La fiche d’une personne sur papier (⌘P).', ['Personnes', 'la fiche', '🖨 Imprimer'], ['imprimer'], ['fiche', 'personne'], 'fiche papier', {need: 'who'}),
+  I('gedcom', 'imprimer', '⤓', 'Exporter en GEDCOM', 'Un fichier lisible par les autres logiciels de généalogie.', ['Réglages', 'Export propre', 'GEDCOM'], ['exporter', 'envoyer'], ['base', 'arbre'], 'fichier logiciel geneanet'),
+  I('share_list', 'partager', '📤', 'Envoyer une liste à quelqu’un', 'Les lignes choisies, en fichier tableur (CSV ou Excel), à joindre à un mail.', ['Listes', 'ta liste', '☑ Choisir', '⤓ Exporter'], ['envoyer', 'exporter'], ['liste'], 'csv excel tableur mail', {pr: 2, pre: u => ['📋 la liste ouverte', '⤓ Excel (.xlsx)', ...(u.pour === 'cousin' ? ['🔒 sans les vivants'] : [])]}),
+  I('share_export', 'partager', '🤝', 'Export « Pour partager »', 'Tout l’arbre, sans les vivants ni les fiches confidentielles.', ['Réglages', 'Export propre', 'Pour partager'], ['envoyer', 'exporter'], ['base', 'arbre', 'liste'], 'sans vivants confidentiel', {pourBonus: 'cousin'}),
+  I('cousin', 'partager', '🗄', 'Copie chez un cousin', 'Une copie de secours de ta base, gardée chez quelqu’un de confiance.', ['Réglages', 'Copie chez un cousin'], ['envoyer'], ['base'], 'copie confiance', {pourBonus: 'cousin'}),
+  I('sync', 'partager', '👥', 'Travail à deux', 'Deux personnes sur la même généalogie, sans se marcher dessus.', ['Réglages', 'Travail à deux'], ['envoyer'], ['base'], 'deux ensemble synchroniser', {ro: false}),
+  I('fiche_add', 'ranger', '📒', 'Mettre dans une fiche', 'Ajouter des lignes (une liste, des données) dans une de tes Fiches, avec « 📥 Prendre depuis… ».', ['Fiches', 'ta fiche', '📥 Prendre depuis…'], ['mettre', 'ajouter'], ['seisme', 'guerre', 'meteo', 'liste', 'fiche'], 'prendre depuis inserer', {pr: 2, into: 'fiche', ro: false, pre: u => [u.objs.includes('seisme') ? '🌋 Séismes' : '📋 une liste', ...(u.where ? [`📍 ${u.where}, 50 km`] : []), '📒 « Notre coin de Provence »']}),
+  I('basket', 'ranger', '🧺', 'Mettre dans un panier', 'Rassembler des fiches, des lieux, des sources pour plus tard.', ['Paniers', '＋ Nouveau panier'], ['mettre'], ['personne', 'lieu', 'liste'], 'rassembler garder', {into: 'panier'}),
+  I('labels', 'ranger', '🏷', 'Mettre une étiquette', 'Marquer des fiches (« à vérifier », « branche Nice »…).', ['Réglages', 'Étiquettes'], ['mettre', 'ajouter'], ['personne'], 'etiquette tag marquer', {ro: false}),
+  I('control', 'verifier', '✅', 'Contrôle de la base', 'Les dates impossibles, les âges bizarres, les oublis.', ['Réglages', '✅ Contrôle de la base'], ['verifier'], ['base'], 'erreurs incoherences', {ro: false}),
+  I('dupes', 'verifier', '👥', 'Fusionner deux personnes', 'Deux fiches pour la même personne : on en garde une.', ['Réglages', 'Fusion de doublons'], ['fusionner'], ['personne', 'doublon'], 'doublon double meme personne', {ro: false}),
+  I('merge_places', 'verifier', '📍', 'Fusionner deux lieux', 'Deux noms pour le même lieu (« St-Chamas » et « Saint-Chamas ») : on garde le bon, tout suit.', ['Réglages', 'Modifications groupées', '📍 Lieux en double'], ['fusionner'], ['lieu', 'doublon'], 'commune village double', {pr: 2, ro: false, pre: () => ['📍 « Salon » ≈ « Salon-de-Provence »', '12 événements à déplacer'], steps: [['Ouvre les Réglages', 'Le dernier onglet en haut.'], ['Choisis « Modifications groupées »', 'Dans la colonne, groupe « Qualité des données ».'], ['Clique « 📍 Lieux en double »', 'L’app montre les lieux qui se ressemblent. « Fusionner… » ouvre la petite fenêtre : gardé à gauche, doublon à droite, ↶ Annuler après.']]}),
+  I('harmo', 'verifier', '🔤', 'Harmoniser les variantes', 'Mettre la même orthographe partout (noms, lieux, métiers).', ['Réglages', 'Harmoniser les variantes'], ['fusionner', 'verifier'], ['lieu', 'personne', 'metier'], 'orthographe variante', {ro: false}),
+  I('data_ask', 'donnees', '📊', 'Demander aux données', 'Une question sur les listes de l’app : météo, séismes, élections…', ['Données', '💬 Demander'], ['trouver', 'voir'], ['seisme', 'meteo', 'guerre'], 'question donnees', {pre: u => [u.objs.includes('seisme') ? '🌋 séismes' : '📊 données', ...(u.where ? [`📍 ${u.where}`] : [])]}),
+  I('seismes', 'donnees', '🌋', 'Séismes près d’un lieu', 'Les tremblements de terre connus, autour d’une commune, avec la distance.', ['Données', '🌋 Séismes', 'Séismes réunis'], ['voir', 'trouver'], ['seisme'], 'tremblement terre', {pre: u => [`📍 ${u.where || HOME}`, '50 km']}),
+  I('meteo', 'donnees', '🌦', 'Météo d’autrefois', 'Le temps qu’il faisait un jour de mariage ou un hiver terrible.', ['Données', '🌦 Météo d’autrefois'], ['voir', 'trouver'], ['meteo', 'mariage'], 'temps hiver'),
+  I('reading', 'outils', '📜', 'Lire un acte ancien', 'Le latin des registres, les abréviations, les vieilles lettres.', ['Outil', '📜 Aide à la lecture'], ['lire', 'trouver'], ['acte'], 'latin abreviation dechiffrer vieux papiers', {pr: 1}),
+  I('autrefois', 'outils', '🪙', 'Convertir une vieille mesure', 'Livres, francs, toises, calendrier républicain.', ['Outil', '🪙 Convertisseur d’autrefois'], ['changer', 'trouver'], [], 'convertir mesure monnaie republicain'),
+  I('calc', 'outils', '🧮', 'Calculette', 'Un âge, un écart entre deux dates.', ['Barre du haut', '🧮 Calculette'], ['trouver'], [], 'calcul age ecart'),
+  I('ai', 'outils', '🤖', 'Demander à l’assistant IA', 'Une conversation sur ton arbre, avec l’IA de l’ordinateur (si installée).', ['Barre du haut', '🤖 Assistant'], ['trouver'], ['personne'], 'ia intelligence artificielle assistant'),
+  I('backup', 'reglages', '💾', 'Faire une sauvegarde', 'Une copie de toute ta base, maintenant.', ['Réglages', 'Sauvegarde automatique', '💾 Sauvegarder maintenant'], ['sauvegarder'], ['sauvegarde', 'base'], 'copie secours', {pr: 2}),
+  I('import', 'reglages', '⤒', 'Importer un arbre', 'Un fichier GEDCOM, Gramps, Heredis… ajouté à côté, avec ↶ Annuler.', ['Réglages', 'Import'], ['importer'], ['arbre', 'base'], 'gedcom fichier', {ro: false}),
+  I('theme', 'reglages', '🎨', 'Changer les couleurs', 'Clair, sombre, la couleur principale, la taille du texte.', ['Réglages', 'Apparence', 'Thème et couleurs'], ['changer'], ['couleur'], 'sombre clair police taille', {ro: false}),
+  I('addtab', 'reglages', '＋', 'Ajouter un onglet', 'Montrer un onglet caché ou un raccourci vers une liste.', ['Barre du haut', '＋ Ajouter un onglet'], ['ajouter', 'changer'], [], 'onglet menu', {ro: false}),
+  I('tour', 'reglages', '▶', 'Relancer la visite guidée', 'Les 6 gestes de base, montrés sur les vrais boutons.', ['Réglages', 'FAQ / tuto', '▶ Visite guidée'], ['voir'], [], 'apprendre tuto debut')
+];
+const byId = id => INT.find(x => x.id === id);
+
+/* ── lire la phrase ── */
+const STOP = new Set('a ai au aux avec ce ces dans de des du en et je j la le les leur ma me mes mon ne pas pour que qui sur ta tes ton tu un une veux voudrais faire fais comment est etait il elle y on nous chez pres moi un'.split(' '));
+function understand(q) {
+  const t = ` ${fold(q).replace(/[^a-z0-9 -]/g, ' ').replace(/-/g, ' ')} `;
+  const u = {q: q.trim(), act: '', objs: [], into: '', who: '', whoP: null, whoCands: [], where: '', whereAuto: false, when: '', pour: '', chg: {}, unread: []};
+  let best = 1e9;
+  Object.entries(ACTS).forEach(([k, [, , rx]]) => { const m = t.match(rx); if (m && m.index < best) { best = m.index; u.act = k; } });
+  const intoM = t.match(/\bdans (une |un |la |le |mes |ma |mon )?(fiche|panier)/);
+  if (intoM) u.into = intoM[2];
+  const found = Object.entries(OBJS).map(([k, [, , rx]]) => { const m = t.match(rx); return m ? [k, m.index] : null; }).filter(Boolean).sort((a, b) => a[1] - b[1]).map(x => x[0]);
+  // une petite faute (« arbe », « diagrame ») : une lettre de trop, de moins ou changée
+  t.trim().split(/\s+/).filter(w => w.length >= 4).forEach(w => Object.keys(OBJS).forEach(k => { if (!found.includes(k) && w !== k && w[0] === k[0] && lev1(w, k)) { found.push(k); u.fixed = (u.fixed || []).concat(`${w} → ${k}`); } }));
+  u.objs = found.filter(k => !(u.into && k === u.into));
+  if (u.into && !u.objs.length) u.objs = [u.into];
+  if (/\b(un|mes|mon|nos) ancetres?\b/.test(t)) u.who = 'anc';
+  const hitsF = PEOPLE.filter(p => new RegExp(`\\b${p.f}\\b`).test(t)), hitsL = PEOPLE.filter(p => new RegExp(`\\b${p.l}s?\\b`).test(t));
+  const both = hitsF.filter(p => hitsL.includes(p));
+  if (both.length === 1) { u.whoP = both[0]; u.who = 'p'; } else if (hitsF.length === 1) { u.whoP = hitsF[0]; u.who = 'p'; } else if (hitsF.length > 1) { u.who = 'p'; u.whoCands = hitsF; }
+  const pl = PLACES.find(p => t.includes(` ${fold(p).replace(/-/g, ' ')} `)) || (/\bsalon\b/.test(t) && !intoM ? 'Salon-de-Provence' : '');
+  if (pl) u.where = pl; else if (/chez (nous|moi)|pres de chez|notre (coin|village|ville)|par ici/.test(t)) { u.where = HOME; u.whereAuto = true; }
+  const ys = t.match(/\b(1[0-9]{3}|20[0-2][0-9])\b/g); if (ys) u.when = ys.length > 1 ? `${ys[0]} → ${ys[ys.length - 1]}` : ys[0];
+  Object.entries(POUR).forEach(([k, a]) => { if (!u.pour && a[3].test(t) && (/\b(pour|a|au|avec)\b/.test(t))) u.pour = k; });
+  // ce qui n'a pas été lu
+  const known = [...Object.values(ACTS).map(a => a[2]), ...Object.values(OBJS).map(a => a[2]), ...Object.values(POUR).map(a => a[3])];
+  u.unread = t.trim().split(/\s+/).filter(w => w.length > 2 && !STOP.has(w) && !/^\d+$/.test(w) && !known.some(rx => rx.test(` ${w} `)) && !PEOPLE.some(p => p.f === w || p.l === w || p.l + 's' === w) && !PLACES.some(p => fold(p).includes(w)) && !(u.fixed || []).some(f => f.startsWith(w + ' ')) && !/^(chez|nous|deux|trois|etait|avait|fait|truc|chose|quelque|avoir|ancetres?|guerre)$/.test(w) && !INT.some(i => fold(i.w).split(' ').includes(w)));
+  return u;
+}
+function lev1(a, b) { if (Math.abs(a.length - b.length) > 1) return false; let i = 0, j = 0, e = 0; while (i < a.length && j < b.length) { if (a[i] === b[j]) { i++; j++; continue; } if (++e > 1) return false; if (a.length > b.length) i++; else if (b.length > a.length) j++; else { i++; j++; } } return e + (a.length - i) + (b.length - j) <= 1; }
+function rank(u) {
+  const words = fold(u.q).split(/[^a-z0-9]+/).filter(w => w.length > 3 && !STOP.has(w));
+  const out = INT.map(it => {
+    let s = 0;
+    if (u.act && it.act.includes(u.act)) s += 4;
+    if (u.objs[0] && it.obj.includes(u.objs[0])) s += 6;
+    u.objs.slice(1).forEach(o => { if (it.obj.includes(o)) s += 2.5; });
+    if (u.into && it.into === u.into) s += 5;
+    if (u.pour && it.pourBonus === u.pour) s += 2;
+    const iw = fold(`${it.w} ${it.n}`).split(/[^a-z0-9]+/).filter(w => w.length > 3);
+    words.forEach(w => { if (iw.some(x => x === w || (w.length >= 5 && (x.startsWith(w.slice(0, 5)) || lev1(w, x))))) s += 1.5; });
+    return {it, s: s ? s + it.pr * .3 : 0};
+  }).filter(x => x.s > 0).sort((a, b) => b.s - a.s);
+  return out;
+}
+const confOf = (u, r) => {
+  if (!r.length || (!u.act && !u.objs.length)) return 'none';
+  if (u.whoCands.length > 1 && !u.chg.who) return 'low';
+  if (!u.act || !u.objs.length) return 'low';
+  if (r[0].s < 8) return 'low';
+  return 'ok';
+};
+
+/* ── les pastilles « Ce que j'ai compris » (comme Données) ── */
+const whoTxt = u => u.whoP ? `👤 ${u.whoP.n}` : u.who === 'anc' ? '👤 tes ancêtres (Sosa de Camille)' : u.whoCands.length ? `👤 ${u.whoCands[0].n.split(' ')[0]} ? (${u.whoCands.length} fiches)` : `👤 ${START.n}`;
+function sayHtml(u, top) {
+  const parts = [];
+  parts.push(u.act ? `<b>${esc(ACTS[u.act][1])}</b>` : '<b>?</b> (que faire)');
+  if (u.objs[0]) parts.push(esc(OBJS[u.objs[0]][1]));
+  u.objs.slice(1, 3).forEach(o => parts.push(esc(OBJS[o][1])));
+  if (u.into) parts.push(`dans ${esc(OBJS[u.into][1])}`);
+  if (u.who) parts.push(u.whoP ? `de ${esc(u.whoP.n)}` : u.who === 'anc' ? 'pour tes ancêtres' : `de ${esc(u.whoCands[0].n.split(' ')[0])} (lequel ?)`);
+  else if (top?.need === 'who') parts.push(`de ${esc(START.n)} <span class="muted">(personne de départ)</span>`);
+  if (u.where) parts.push(`près de ${esc(u.where)}${u.whereAuto ? ' <span class="muted">(chez toi)</span>' : ''}`);
+  if (u.when) parts.push(esc(u.when));
+  if (u.pour) parts.push(`pour ${esc(POUR[u.pour][1])} <span class="muted">(${esc(POUR[u.pour][2])})</span>`);
+  return parts.join(' · ');
+}
+function pillsHtml(u, top, open) {
+  const pill = (k, lab, val, auto = false) => `<button type="button" class="dr-pill${auto ? ' is-auto' : ''}${u.chg[k] ? ' is-chg' : ''}${open === k ? ' is-open' : ''}" data-pill="${k}" aria-expanded="${open === k}"><em>${esc(lab)}</em> <span>${esc(val)}</span></button>`;
+  const out = [pill('act', 'Action', u.act ? `${ACTS[u.act][0]} ${ACTS[u.act][1]}` : '— à choisir'), pill('obj', 'Quoi', u.objs[0] ? `${OBJS[u.objs[0]][0]} ${OBJS[u.objs[0]][1]}` : '— à choisir')];
+  if (u.into) out.push(pill('into', 'Dans', `${OBJS[u.into][0]} ${OBJS[u.into][1]}`));
+  if (u.who || top?.need === 'who') out.push(pill('who', 'Qui', whoTxt(u), !u.who));
+  if (u.where) out.push(pill('where', 'Où', `📍 ${u.where}${u.whereAuto ? ' (chez toi)' : ''}`, u.whereAuto));
+  if (u.when) out.push(pill('when', 'Quand', `📅 ${u.when}`));
+  if (u.pour) out.push(pill('pour', 'Pour', `${POUR[u.pour][0]} ${POUR[u.pour][1]}`));
+  return out.join('');
+}
+function popHtml(u, k) {
+  if (!k) return '';
+  const opts = (list, cur, attr) => `<div class="opts">${list.map(([v, l]) => `<button type="button" class="k" data-${attr}="${esc(v)}" aria-pressed="${v === cur}">${esc(l)}</button>`).join('')}</div>`;
+  const x = '<div class="dr-pop-act"><button type="button" class="button small secondary" data-popx>Fermer</button></div>';
+  if (k === 'act') return `<div class="dr-pop" data-pop><b>Action</b>${opts(Object.entries(ACTS).map(([v, a]) => [v, `${a[0]} ${a[1]}`]), u.act, 'setact')}${x}</div>`;
+  if (k === 'obj') return `<div class="dr-pop" data-pop><b>Quoi</b>${opts(Object.entries(OBJS).map(([v, a]) => [v, `${a[0]} ${a[1]}`]), u.objs[0], 'setobj')}${x}</div>`;
+  if (k === 'into') return `<div class="dr-pop" data-pop><b>Dans</b>${opts([['fiche', '📒 une fiche'], ['panier', '🧺 un panier'], ['', '— nulle part']], u.into, 'setinto')}${x}</div>`;
+  if (k === 'who') return `<div class="dr-pop" data-pop><b>Qui</b><label>Une personne de l’arbre <input type="text" placeholder="Prénom NOM" aria-label="Chercher une personne"></label><div class="opts">${PEOPLE.map(p => `<button type="button" class="k" data-setwho="${p.id}" aria-pressed="${u.whoP?.id === p.id}">👤 ${esc(p.n)} <small class="muted">${esc(p.y.split(' · ')[0])}</small></button>`).join('')}<button type="button" class="k" data-setwho="anc" aria-pressed="${u.who === 'anc'}">🌳 tes ancêtres (Sosa)</button></div>${x}</div>`;
+  if (k === 'where') return `<div class="dr-pop" data-pop><b>Où</b>${opts(PLACES.map(p => [p, `📍 ${p}`]).concat([['', 'partout']]), u.where, 'setwhere')}${x}</div>`;
+  if (k === 'when') return `<div class="dr-pop" data-pop><b>Quand</b><label>de <input type="number" value="${esc((u.when.split(' → ')[0]) || '')}" aria-label="De"> à <input type="number" value="${esc(u.when.split(' → ')[1] || u.when)}" aria-label="À"></label><small class="muted">Vide : toutes les années.</small>${x}</div>`;
+  if (k === 'pour') return `<div class="dr-pop" data-pop><b>Pour</b>${opts(Object.entries(POUR).map(([v, a]) => [v, `${a[0]} ${a[1]} — ${a[2]}`]).concat([['', 'personne en particulier']]), u.pour, 'setpour')}${x}</div>`;
+  return '';
+}
+function altsHtml(u, r) {
+  if (u.whoCands.length > 1 && !u.chg.who) return `<div class="dr-alt"><span>Ce n’est pas ça ? Reformule, ou choisis :</span>${u.whoCands.map(p => `<button type="button" class="k" data-setwho="${p.id}">👤 ${esc(p.n)} <small>${esc(p.y)}</small></button>`).join('')}</div>`;
+  const seen = new Set([`${u.act}|${u.objs[0]}`]), alts = [];
+  const floor = (r[0]?.s || 0) * .6;
+  r.slice(1, 8).filter(x => x.s >= floor).forEach(({it}) => { const a = it.act[0], o = it.obj[0] || ''; const key = `${a}|${o}`; if (!o || seen.has(key) || alts.length >= 3) return; seen.add(key); alts.push([a, o]); });
+  if (!alts.length) return '';
+  return `<div class="dr-alt"><span>Ce n’est pas ça ? Reformule, ou choisis :</span>${alts.map(([a, o]) => `<button type="button" class="k" data-alt="${a}|${o}">${esc(ACTS[a][0])} ${esc(ACTS[a][1])} · ${esc(OBJS[o][1])}</button>`).join('')}</div>`;
+}
+function undHtml(u, r, open, confirmed, compact = false) {
+  const conf = confOf(u, r), low = conf === 'low' && !confirmed, top = r[0]?.it;
+  return `<div class="dr-und${low ? ' is-low' : ''}"><h4>${low ? '? Ce que j’ai compris' : '✓ Ce que j’ai compris'} <small>touche une pastille pour la changer</small></h4>
+    <p class="dr-say"><span class="ok">${low ? '' : '✓'}</span>Tu veux : ${sayHtml(u, top)}</p>
+    <div class="dr-pills">${pillsHtml(u, top, open)}</div>${compact ? '' : popHtml(u, open)}
+    ${!compact && u.fixed ? `<p class="dr-why">J’ai corrigé : ${esc(u.fixed.join(', '))}</p>` : ''}${!compact && u.unread.length ? `<p class="dr-why">Je n’ai pas tenu compte de : ${esc(u.unread.join(', '))}</p>` : ''}
+    ${low ? `<div class="dr-confirm"><b>C’est bien ça ?</b><button type="button" class="button small" data-yes>Oui, montre les réponses</button><button type="button" class="button small secondary" data-fix>Corriger</button></div>` : ''}
+    ${compact ? '' : altsHtml(u, r)}</div>`;
+}
+
+/* ── barre du haut ── */
+const TABS = [['01', 'Tableau de bord'], ['02', 'Personnes'], ['03', 'Graphiques'], ['03', 'Diagrammes'], ['04', 'Carte'], ['05', 'Listes'], ['05', 'Données'], ['06', 'Chronologie'], ['07', 'Recherche'], ['08', 'Fiches'], ['10', 'Réglages']];
+function topbar(el, active, jvOn) {
+  el.innerHTML = `<div class="brand"><span>Le carnet</span><strong>des ancêtres</strong><small>numérique</small></div><nav class="main-nav" aria-label="Onglets">${TABS.map(([n, l]) => `<span class="nav-item${l === active ? ' is-active' : ''}" data-tabn="${esc(l)}"${l === active ? ' aria-current="page"' : ''}><span>${n}</span>${esc(l)}</span>`).join('')}</nav>
+    <div class="tb-right"><span class="tb-count">1 248 personnes</span>${jvOn ? '<span class="mark"><button type="button" class="tbb jv hl" title="🧭 Je veux… (⌘K)" data-jvgo>🧭<span class="jvt"> Je veux…</span></button><span class="callout">A</span></span>' : ''}<button type="button" class="tbb" title="Mode consultation" data-showbar="🔒 Mode consultation">🔒</button><button type="button" class="tbb" title="Mode simple" data-showbar="🧓 Mode simple">🧓</button><button type="button" class="tbb" title="Assistant IA">🤖</button></div>`;
+  const nav = $('.main-nav', el), a = $('.is-active', nav); if (a) requestAnimationFrame(() => { nav.scrollLeft = Math.max(0, a.offsetLeft - nav.offsetLeft - 60); });
+}
+$$('[data-topbar]').forEach(t => { if (!t.hasAttribute('data-showtop')) topbar(t, t.dataset.tab, t.hasAttribute('data-jvbtn')); });
+document.addEventListener('click', e => { if (e.target.closest('[data-jvgo]')) { $('#s2').scrollIntoView({behavior: 'smooth'}); setTimeout(() => $('[data-q]').focus(), 400); } });
+
+/* ── fiches de réponse ── */
+const S = {scen: 'normal', q: '', u: null, open: '', confirmed: false, fav: new Set(['print_tree', 'backup'])};
+const kiosk = () => S.scen === 'kiosk';
+function matchCard(it, u, best) {
+  const pre = it.pre ? it.pre(u) : it.need === 'who' ? [whoTxt(u)] : [];
+  const ro = kiosk() && !it.ro;
+  return `<article class="ma${best ? ' best' : ''}"><div class="ma-ic" aria-hidden="true">${it.ic}</div><div>
+    <h3>${esc(it.n)}${best ? '<span class="ui-badge is-blue">le plus proche</span>' : ''}${it.ro ? '' : '<span class="ui-badge is-grey">modifie</span>'}</h3>
+    <p class="ma-what">${esc(it.d)}</p>
+    <div class="path" aria-label="Où c’est">${it.p.map((s, i) => `${i ? '<i>›</i>' : ''}<span${i === it.p.length - 1 ? ' class="on"' : ''}>${esc(s)}</span>`).join('')}</div>
+    ${pre.length ? `<div class="ma-pre"><span class="lbl">✓ Prêt pour toi :</span>${pre.map(x => `<span class="k">${esc(x)}</span>`).join('')}</div>` : ''}</div>
+    <div class="ma-acts"><button type="button" class="button small" data-go="${it.id}"${ro ? ' disabled' : ''}>▶ M’y emmener</button><button type="button" class="button small secondary" data-show="${it.id}">👣 Montre-moi</button><span class="sp"></span><button type="button" class="star${S.fav.has(it.id) ? ' on' : ''}" data-fav="${it.id}" aria-pressed="${S.fav.has(it.id)}" title="⭐ Mes buts" aria-label="Ajouter à mes buts">${S.fav.has(it.id) ? '★' : '☆'}</button></div>
+    ${ro ? '<p class="ma-ro">🔒 En consultation : on regarde, on ne change rien. 👣 Montre-moi reste possible.</p>' : ''}</article>`;
+}
+const EX = ['imprimer un arbre pour mamie', 'trouver qui était témoin au mariage de Jean', 'fusionner deux lieux', 'faire un diagramme des métiers', 'mettre les séismes près de chez nous dans une fiche', 'envoyer une liste à mon cousin', 'savoir si un ancêtre a fait la guerre', 'le truc pour les vieux papiers'];
+const AI_RE = {'le truc pour les vieux papiers': 'lire un acte ancien'};
+$('[data-ex]').insertAdjacentHTML('beforeend', EX.map(x => `<button type="button" class="k" data-exq="${esc(x)}">${esc(x)}</button>`).join(''));
+function recLine() {
+  $('[data-recline]').innerHTML = `<span class="lbl">⭐ Mes buts</span>${[...S.fav].map(id => byId(id)).filter(Boolean).map(it => `<button type="button" class="k" data-exq="${esc(it.n.toLowerCase())}">${it.ic} ${esc(it.n)}</button>`).join('')}<span class="lbl" style="margin-left:6px">🕘 Récents</span><button type="button" class="k" data-exq="envoyer une liste à mon cousin">envoyer une liste à mon cousin</button><button type="button" class="k" data-exq="faire une sauvegarde">faire une sauvegarde</button>`;
+}
+function apply(u) {
+  // corrections → on relit avec ces valeurs
+  const r = rank(u);
+  return r;
+}
+function paint() {
+  const u = S.u, r = apply(u), conf = confOf(u, r), low = conf === 'low' && !S.confirmed;
+  $('[data-addr]').textContent = `#recherche/je-veux?q=${encodeURIComponent(S.q).replace(/%20/g, '+')}`;
+  $('[data-kioskline]').innerHTML = kiosk() ? '<div class="kiosk-line" style="display:flex;gap:8px;align-items:center;font-size:12.5px;padding:8px 11px;background:var(--blue-soft);border-left:4px solid var(--ui-blue);margin:0 0 12px">🔒 Mode consultation : le guide montre et emmène vers ce qui se regarde ; ce qui modifie est grisé.</div>' : '';
+  $('[data-understood]').innerHTML = S.q.trim() && conf !== 'none' ? undHtml(u, r, S.open, S.confirmed) : '';
+  const top = r.slice(0, 3);
+  $('[data-results]').innerHTML = !S.q.trim() ? '' : conf === 'none' ? `<div class="empty-g"><b>Je n’ai pas trouvé ce que tu veux faire.</b>Essaie avec d’autres mots, un verbe (« imprimer », « trouver », « envoyer »…), ou regarde la FAQ.</div>` : low ? '' : top.map((x, i) => matchCard(x.it, u, i === 0)).join('');
+  const others = low ? [] : r.slice(3, 8);
+  $('[data-others]').innerHTML = others.length ? `<span class="lbl">Autres idées</span>${others.map(({it}) => `<button type="button" class="k" data-exq="${esc(it.n.toLowerCase())}">${it.ic} ${esc(it.n)}</button>`).join('')}` : '';
+  const aiOn = S.scen === 'ai';
+  $('[data-nomatch]').innerHTML = !S.q.trim() ? '' : `<span class="lbl">Ça ne correspond pas ?</span><button type="button" class="button small secondary" data-refocus>✎ Reformuler</button><button type="button" class="button small secondary" data-faq>📖 Voir la FAQ <small>(${conf === 'none' ? 1 : 3})</small></button>${aiOn && (conf !== 'ok') ? '<button type="button" class="button small secondary" data-ai>🤖 Reformuler avec l’IA de l’ordinateur</button><span class="muted small">rien ne part sur Internet</span>' : ''}`;
+  if (aiOn && conf !== 'ok') $('[data-nomatch]').insertAdjacentHTML('afterend', '');
+}
+function setQ(q) { S.q = q; S.u = understand(q); S.open = ''; S.confirmed = false; $('[data-q]').value = q; paint(); paintQk(); }
+let typeT = 0;
+$('[data-q]').addEventListener('input', e => { clearTimeout(typeT); typeT = setTimeout(() => setQ(e.target.value), 150); });
+$('[data-ask]').addEventListener('submit', () => setQ($('[data-q]').value));
+
+/* corrections : la même logique pour la page et pour ⌘K */
+function correct(e, rerender) {
+  const u = S.u; let t;
+  if ((t = e.target.closest('[data-pill]'))) { S.open = S.open === t.dataset.pill ? '' : t.dataset.pill; rerender(); return true; }
+  if (e.target.closest('[data-popx]')) { S.open = ''; rerender(); return true; }
+  if ((t = e.target.closest('[data-setact]'))) { u.act = t.dataset.setact; u.chg.act = 1; S.open = ''; S.confirmed = true; rerender(); return true; }
+  if ((t = e.target.closest('[data-setobj]'))) { const o = t.dataset.setobj; u.objs = [o, ...u.objs.filter(x => x !== o)]; u.chg.obj = 1; S.open = ''; S.confirmed = true; rerender(); return true; }
+  if ((t = e.target.closest('[data-setinto]'))) { u.into = t.dataset.setinto; u.chg.into = 1; S.open = ''; rerender(); return true; }
+  if ((t = e.target.closest('[data-setwho]'))) { const v = t.dataset.setwho; if (v === 'anc') { u.who = 'anc'; u.whoP = null; } else { u.who = 'p'; u.whoP = PEOPLE.find(p => String(p.id) === v); } u.whoCands = []; u.chg.who = 1; S.open = ''; rerender(); return true; }
+  if ((t = e.target.closest('[data-setwhere]'))) { u.where = t.dataset.setwhere; u.whereAuto = false; u.chg.where = 1; S.open = ''; rerender(); return true; }
+  if ((t = e.target.closest('[data-setpour]'))) { u.pour = t.dataset.setpour; u.chg.pour = 1; S.open = ''; rerender(); return true; }
+  if ((t = e.target.closest('[data-alt]'))) { const [a, o] = t.dataset.alt.split('|'); u.act = a; u.objs = [o, ...u.objs.filter(x => x !== o)]; u.chg.act = u.chg.obj = 1; S.confirmed = true; rerender(); return true; }
+  if (e.target.closest('[data-yes]')) { S.confirmed = true; rerender(); return true; }
+  if (e.target.closest('[data-fix]')) { S.open = !u.act ? 'act' : !u.objs.length ? 'obj' : u.whoCands.length ? 'who' : 'act'; rerender(); return true; }
+  return false;
+}
+const both = () => { paint(); paintQk(); };
+function go(it) {
+  const u = S.u, pre = it.pre ? it.pre(u) : it.need === 'who' ? [whoTxt(u)] : [];
+  toast(`▶ ${it.p.join(' › ')}${pre.length ? ' — ' + pre.join(', ') : ''} (maquette : l’écran s’ouvrirait ici)`);
+}
+$('#s2').addEventListener('click', e => {
+  if (correct(e, both)) return;
+  let t;
+  if ((t = e.target.closest('[data-exq]'))) { setQ(t.dataset.exq); return; }
+  if ((t = e.target.closest('[data-go]'))) { go(byId(t.dataset.go)); return; }
+  if ((t = e.target.closest('[data-show]'))) { showIntent(t.dataset.show, true); return; }
+  if ((t = e.target.closest('[data-fav]'))) { const id = t.dataset.fav; S.fav.has(id) ? S.fav.delete(id) : S.fav.add(id); recLine(); paint(); paintHist(); return; }
+  if (e.target.closest('[data-refocus]')) { $('[data-q]').focus(); $('[data-q]').select(); return; }
+  if (e.target.closest('[data-faq]')) { toast('📖 Réglages › FAQ / tuto, avec ta phrase déjà dans la recherche de la FAQ (maquette).'); return; }
+  if (e.target.closest('[data-ai]')) { const re = AI_RE[fold(S.q).trim()] || AI_RE[S.q] || 'exporter une liste en fichier'; toast(`🤖 L’IA de l’ordinateur propose : « ${re} »`); setQ(re); return; }
+  if ((t = e.target.closest('[data-famgo]'))) { FAMSEL = t.dataset.famgo; paintReg(); $('#s6').scrollIntoView({behavior: 'smooth'}); }
+});
+$('[data-scen]').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; $$('button', e.currentTarget).forEach(x => x.setAttribute('aria-pressed', String(x === b))); S.scen = b.dataset.s; paint(); });
+
+/* ── colonne de Recherche ── */
+const KINDS = [['🧭', 'Je veux faire…', 1], ['💬', 'Poser une question en français'], ['🔍', 'Que manque-t-il ?'], ['🌍', 'Où chercher ?'], ['🧩', 'Murs de brique'], ['🔤', 'Texte, personne ou lieu'], ['✳️', 'Nom de lieu avec joker'], ['📅', 'Période ou date précise'], ['📍', 'Proximité géographique'], ['📝', 'Plein texte des transcriptions'], ['🗓', 'Journal des recherches'], ['🪦', 'Décès (fichier INSEE)'], ['🌐', 'Chercher sur internet']];
+$('[data-rsb]').innerHTML = `<div class="sb-top"><div><span class="eyebrow">07 — RECHERCHER</span><h1>Recherche</h1></div><button type="button" class="icon-button" aria-label="Replier la colonne">‹</button></div><div class="sb-content"><div class="side-menu">${KINDS.map(([ic, l, on], i) => `<button type="button" class="smi${on ? ' is-active' : ''}"><span class="side-number">${String(i + 1).padStart(2, '0')}</span><span class="lb">${ic} ${esc(l)}</span>${on ? '<small>nouveau</small>' : ''}</button>`).join('')}</div></div>`;
+const famBtns = () => Object.entries(FAM).map(([k, [ic, l]]) => `<button type="button" class="k" data-famgo="${k}">${ic} ${esc(l)} <small class="muted">${INT.filter(i => i.f === k).length}</small></button>`).join('');
+$('[data-fam2]').innerHTML = famBtns();
+
+/* ── ⌘K ── */
+let QKM = 'goal';
+function paintQk() {
+  const q = $('[data-qkq]').value, u = understand(q), r = rank(u), list = $('[data-qklist]');
+  if (QKM === 'goal') {
+    // dans ⌘K, la phrase est celle de la case ⌘K ; les corrections de la page s'appliquent si c'est la même
+    const uu = fold(q) === fold(S.q) ? S.u : u, rr = fold(q) === fold(S.q) ? rank(S.u) : r;
+    const low = confOf(uu, rr) === 'low' && !S.confirmed;
+    const rows = low ? [] : rr.slice(0, 3);
+    list.innerHTML = `<li class="sep" style="padding-top:.2rem">🧭 Ce que tu veux faire</li><li class="sep" style="cursor:default;padding:.15rem .2rem .35rem;text-transform:none;letter-spacing:0;font:inherit;color:inherit" data-qkund>${undHtml(uu, rr, '', S.confirmed, true)}</li>${rows.map(({it}, i) => `<li class="${i ? '' : 'is-active'}" role="option"><span aria-hidden="true">${it.ic}</span><span class="lb">${esc(it.n)}<small>${esc(it.p.join(' › '))}</small></span><span class="go"><button type="button" class="button small" data-go="${it.id}" title="M’y emmener"${kiosk() && !it.ro ? ' disabled' : ''}>▶</button><button type="button" class="button small secondary" data-show="${it.id}" title="Montre-moi">👣</button></span></li>`).join('')}
+      <li class="sep">🔎 Aussi trouvé</li><li role="option"><span aria-hidden="true">🌳</span><span class="lb">Arbre des ascendants</span><small>Graphiques</small></li><li role="option"><span aria-hidden="true">👤</span><span class="lb">Camille MAZAUD (1990)</span><small>Personne</small></li><li role="option" data-more><span aria-hidden="true">→</span><span class="lb">Voir tout dans Recherche → 🧭 Je veux faire…</span></li>`;
+  } else {
+    list.innerHTML = `<li class="is-active"><span class="lb">Arbre des ascendants</span><small>Graphiques</small></li><li><span class="lb">🧩 Grand format à assembler</span><small>Outil</small></li><li><span class="lb">Arbre décoratif</span><small>Outil</small></li><li><span class="lb">Camille MAZAUD (1990)</span><small>Personne</small></li><li><span class="lb">« Mamie » — surnom de Marie DURAND</span><small>Personne · Trouvé par : surnom</small></li>`;
+  }
+}
+$('[data-qkmode]').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; QKM = b.dataset.m; $$('button', e.currentTarget).forEach(x => x.setAttribute('aria-pressed', String(x === b))); paintQk(); });
+$('[data-qkq]').addEventListener('input', paintQk);
+$('[data-qkq]').addEventListener('keydown', e => { if (e.key === 'Tab') { e.preventDefault(); $$('[data-qkmode] button').find(b => b.dataset.m !== QKM).click(); } });
+$('[data-qklist]').addEventListener('click', e => {
+  let t;
+  if ((t = e.target.closest('[data-pill]'))) { const q = $('[data-qkq]').value; if (fold(q) !== fold(S.q)) setQ(q); S.open = t.dataset.pill; paint(); $('#s2').scrollIntoView({behavior: 'smooth'}); return; }
+  if (e.target.closest('[data-yes]')) { S.confirmed = true; paintQk(); paint(); return; }
+  if (e.target.closest('[data-fix]')) { setQ($('[data-qkq]').value); S.open = 'act'; paint(); $('#s2').scrollIntoView({behavior: 'smooth'}); return; }
+  if ((t = e.target.closest('[data-go]'))) { const q = $('[data-qkq]').value; if (fold(q) !== fold(S.q)) setQ(q); go(byId(t.dataset.go)); return; }
+  if ((t = e.target.closest('[data-show]'))) { showIntent(t.dataset.show, true); return; }
+  if (e.target.closest('[data-more]')) { setQ($('[data-qkq]').value); $('#s2').scrollIntoView({behavior: 'smooth'}); }
+});
+
+/* ── 👣 Montre-moi ── */
+const SIDE = {Graphiques: ['Arbre des descendants', 'Sablier familial', 'Éventail des générations', 'Liens de parenté', 'Réseau : témoins et voisins'], Réglages: ['Apparence', '✅ Contrôle de la base', 'Fusion de doublons', 'Harmoniser les variantes', 'Export propre', 'Import'], Fiches: ['Toutes mes fiches', '📒 « Notre coin de Provence »', '📒 « La Grande Guerre à Tulle »'], Listes: ['Personnes', 'Lieux', 'Sources', 'Outils de modification'], Données: ['⚔️ Guerres et soldats', '🌋 Séismes', '🌦 Météo d’autrefois', '🗳️ Votes et élections'], Recherche: KINDS.slice(1, 6).map(k => k[1]), Personnes: ['Camille MAZAUD', 'Jean MAZAUD', 'Marie DURAND'], Documents: ['Médias', 'Transcriptions'], Diagrammes: ['Tous mes diagrammes', 'Favoris'], Carte: ['Tous les lieux', '🗺 Carte de la vie']};
+const TOOLS = ['👤 Camille MAZAUD ▾', '4 générations ▾', '💾 Enregistrer la vue'];
+const SHOWS = ['print_tree', 'merge_places', 'fiche_add'];
+let SH = {id: 'print_tree', i: 0};
+function stepsOf(it) {
+  if (it.steps) return it.steps;
+  return it.p.map((s, i) => [i === 0 ? `Ouvre « ${s} »` : `Puis « ${s} »`, i === it.p.length - 1 ? 'C’est ici. Tu peux cliquer le bouton entouré toi-même.' : 'Le bouton est entouré en bleu.']);
+}
+function buildShow() {
+  const it = byId(SH.id), p = it.p, tab = TABS.some(t => t[1] === p[0]) ? p[0] : 'Tableau de bord';
+  const top = $('[data-showtop]'); topbar(top, '', false);
+  if (!TABS.some(t => t[1] === p[0])) { $('.tb-right', top).insertAdjacentHTML('afterbegin', ''); }
+  const sideList = [...(SIDE[tab] || [])]; if (p[1] && !sideList.includes(p[1])) sideList.splice(2, 0, p[1]);
+  $('[data-showsb]').innerHTML = `<div class="sb-top"><div><span class="eyebrow">${esc(tab.toUpperCase())}</span><h1>${esc(tab)}</h1></div></div><div class="sb-content"><div class="side-menu">${sideList.map((l, i) => `<button type="button" class="smi" data-sstep="${l === p[1] ? 1 : ''}"><span class="side-number">${String(i + 1).padStart(2, '0')}</span><span class="lb">${esc(l)}</span></button>`).join('')}</div></div>`;
+  const base = tab === 'Graphiques' ? TOOLS : ['⋯ Plus', '☑ Choisir'];
+  const tools = p[2] ? [...base.slice(0, 2), p[2], ...base.slice(2)] : base;
+  $('[data-showpage]').innerHTML = `<header class="page-header"><div><span class="eyebrow crumb"><span>${esc(tab)}</span>${p[1] ? `<i>›</i><span>${esc(p[1])}</span>` : ''}</span><h2>${esc(p[1] || tab)}</h2></div></header>
+    <div class="tbar">${tools.map(l => `<button type="button" class="button small secondary" data-sstep="${l === p[2] ? 2 : ''}">${esc(l)}</button>`).join('')}${p[3] ? `<div class="fake-menu" data-fmenu hidden style="top:40px;left:0"><div>📄 Toute la liste</div><div data-sstep="3">${esc(p[3])}</div><div>🖨 Imprimer</div></div>` : ''}</div>
+    ${tab === 'Graphiques' ? `<div class="tree"><svg viewBox="0 0 520 170" aria-hidden="true"><path class="ln" d="M260 130 V110 M140 110 H380 M140 110 V90 M380 110 V90 M140 60 V48 M80 48 H200 M80 48 V36 M200 48 V36 M380 60 V48 M320 48 H440 M320 48 V36 M440 48 V36"/>
+      <rect class="bx a" x="200" y="130" width="120" height="30"/><text x="260" y="149" text-anchor="middle">Camille MAZAUD</text>
+      <rect class="bx" x="80" y="60" width="120" height="30"/><text x="140" y="79" text-anchor="middle">Paul MAZAUD</text><rect class="bx" x="320" y="60" width="120" height="30"/><text x="380" y="79" text-anchor="middle">Anne DURAND</text>
+      ${[[20, 'Louis MAZAUD'], [140, 'Rose LACOMBE'], [260, 'Marius DURAND'], [380, 'Léonie FAURE']].map(([x, n]) => `<rect class="bx" x="${x}" y="6" width="116" height="30"/><text x="${x + 58}" y="25" text-anchor="middle">${n}</text>`).join('')}</svg></div>` : `<div class="empty-g"><b>${esc(p[p.length - 1])}</b>L’écran tel qu’il est dans l’app.</div>`}`;
+  $('[data-showpick]').innerHTML = SHOWS.concat(SHOWS.includes(SH.id) ? [] : [SH.id]).map(id => `<button type="button" data-sp="${id}" aria-pressed="${id === SH.id}">${byId(id).ic} ${esc(byId(id).n)}</button>`).join('');
+  placeStep();
+}
+function targetOf(i) {
+  const app = $('[data-showapp]'), it = byId(SH.id);
+  if (i === 0) { const tab = TABS.some(t => t[1] === it.p[0]) ? it.p[0] : null; return tab ? $(`[data-tabn="${CSS.escape(tab)}"]`, app) : ($(`[data-showbar="${CSS.escape(it.p[1] || '')}"]`, app) || $('.tb-right', app)); }
+  if (i === 1 && !TABS.some(t => t[1] === it.p[0])) return $(`[data-showbar="${CSS.escape(it.p[1])}"]`, app) || $('.tb-right', app);
+  return $(`[data-sstep="${i}"]`, app);
+}
+function placeStep() {
+  const app = $('[data-showapp]'), it = byId(SH.id), st = stepsOf(it), n = st.length, i = Math.min(SH.i, n - 1);
+  const fm = $('[data-fmenu]', app); if (fm) fm.hidden = i < 3;
+  const el = targetOf(i), halo = $('[data-halo]'), b = $('[data-vgb]');
+  if (!el) { halo.hidden = true; b.hidden = true; return; }
+  const nav = el.closest('.main-nav'); if (nav) nav.scrollLeft = Math.max(0, el.offsetLeft - nav.offsetLeft - 40);
+  const sc = el.closest('.sb-content'); if (sc) sc.scrollTop = Math.max(0, el.offsetTop - sc.offsetTop - 30);
+  const A = app.getBoundingClientRect(), R = el.getBoundingClientRect();
+  const x = R.left - A.left, y = R.top - A.top;
+  Object.assign(halo.style, {left: `${x - 4}px`, top: `${y - 4}px`, width: `${R.width + 8}px`, height: `${R.height + 8}px`}); halo.hidden = false;
+  b.innerHTML = `<div class="vg-head"><span aria-hidden="true">👣</span><h3 class="vg-title">${esc(st[i][0])}</h3><span class="vg-count">${i + 1} / ${n}</span></div><p class="vg-text">${esc(st[i][1])}</p><p class="vg-hint">Pour : ${esc(it.ic)} ${esc(it.n)}</p><div class="vg-dots">${st.map((_, k) => `<i class="${k === i ? 'on' : ''}"></i>`).join('')}</div>
+    <div class="vg-acts"><button type="button" class="button small secondary" data-vprev ${i ? '' : 'disabled'}>Précédent</button><button type="button" class="button small" data-vnext>${i === n - 1 ? 'Terminer' : 'Suivant'}</button><span class="sp"></span><button type="button" class="link-button" data-vdo>▶ Fais-le pour moi</button></div>`;
+  b.hidden = false;
+  const bw = Math.min(300, A.width - 24), bh = b.offsetHeight;
+  let bx = Math.min(Math.max(12, x), A.width - bw - 12), by = y + R.height + 14;
+  if (by + bh > A.height - 8) by = Math.max(8, y - bh - 14);
+  Object.assign(b.style, {left: `${bx}px`, top: `${by}px`});
+}
+function showIntent(id, scroll) { SH = {id, i: 0}; buildShow(); if (scroll) $('#s3').scrollIntoView({behavior: 'smooth'}); setTimeout(placeStep, 450); }
+$('#s3').addEventListener('click', e => {
+  let t; const n = stepsOf(byId(SH.id)).length;
+  if ((t = e.target.closest('[data-sp]'))) { showIntent(t.dataset.sp, false); return; }
+  if (e.target.closest('[data-vprev]')) { SH.i = Math.max(0, SH.i - 1); placeStep(); return; }
+  if (e.target.closest('[data-vnext]')) { if (SH.i >= n - 1) { toast('👣 Fini. Tu sais maintenant où c’est.'); SH.i = 0; } else SH.i++; placeStep(); return; }
+  if (e.target.closest('[data-vdo]')) { go(byId(SH.id)); return; }
+  if ((t = e.target.closest('[data-sstep]')) && t.dataset.sstep !== '' && Number(t.dataset.sstep) === SH.i) { SH.i = Math.min(n - 1, SH.i + 1); placeStep(); return; }
+  if ((t = e.target.closest('[data-tabn]')) && SH.i === 0) { SH.i = 1; placeStep(); }
+});
+window.addEventListener('resize', () => { clearTimeout(window.__rz); window.__rz = setTimeout(placeStep, 120); });
+
+/* ── autres entrées ── */
+$('[data-bubblelist]').innerHTML = ['backup', 'tree', 'addtab'].map(id => { const it = byId(id); return `<button type="button" data-show="${id}">${it.ic} ${esc(it.n)} <small>👣</small></button>`; }).join('') + '<button type="button" data-jvgo>🧭 Autre chose… <small>Je veux…</small></button>';
+$('[data-bubblelist]').addEventListener('click', e => { const t = e.target.closest('[data-show]'); if (t) showIntent(t.dataset.show, true); });
+$('[data-helpbtn]').addEventListener('click', e => { const bub = $('[data-bubble]'); bub.hidden = !bub.hidden; e.currentTarget.setAttribute('aria-expanded', String(!bub.hidden)); });
+$('[data-dashfav]').innerHTML = `<span class="lbl">⭐</span><button type="button" class="k" data-dq="imprimer un arbre pour mamie">🖨 Imprimer un arbre</button><button type="button" class="k" data-dq="faire une sauvegarde">💾 Faire une sauvegarde</button>`;
+$('#s4').addEventListener('click', e => { const t = e.target.closest('[data-dq]'); if (t) { setQ(t.dataset.dq); $('#s2').scrollIntoView({behavior: 'smooth'}); } });
+$('[data-dashask]').addEventListener('submit', e => { const v = $('input', e.currentTarget).value.trim(); if (v) { setQ(v); $('#s2').scrollIntoView({behavior: 'smooth'}); } });
+
+/* ── le registre ── */
+let FAMSEL = '';
+function paintReg() {
+  $('[data-icount]').textContent = INT.length;
+  $('[data-fam]').innerHTML = `<button type="button" class="k" data-fsel="" aria-pressed="${!FAMSEL}">Toutes <small class="muted">${INT.length}</small></button>` + Object.entries(FAM).map(([k, [ic, l]]) => `<button type="button" class="k" data-fsel="${k}" aria-pressed="${FAMSEL === k}">${ic} ${esc(l)} <small class="muted">${INT.filter(i => i.f === k).length}</small></button>`).join('');
+  $('[data-igrid]').innerHTML = Object.entries(FAM).filter(([k]) => !FAMSEL || FAMSEL === k).map(([k, [ic, l]]) => `<p class="fh">${ic} ${esc(l)} <small>· ${INT.filter(i => i.f === k).length}</small></p>` + INT.filter(i => i.f === k).map(it => `<button type="button" class="it" data-ito="${it.id}"><span class="i" aria-hidden="true">${it.ic}</span><b>${esc(it.n)}</b><small>${esc(it.p.join(' › '))}${it.ro ? '' : ' · <span class="ro">modifie</span>'}${it.need === 'who' ? ' · 👤 une personne' : ''}</small></button>`).join('')).join('');
+}
+$('#s6').addEventListener('click', e => { let t; if ((t = e.target.closest('[data-fsel]'))) { FAMSEL = t.dataset.fsel; paintReg(); return; } if ((t = e.target.closest('[data-ito]'))) { setQ(byId(t.dataset.ito).n.toLowerCase()); $('#s2').scrollIntoView({behavior: 'smooth'}); } });
+
+/* ── historique ── */
+function paintHist() {
+  $('[data-hrec]').innerHTML = [['imprimer un arbre pour mamie', 'aujourd’hui, 10 h 12 · 🖨 Imprimer un arbre'], ['envoyer une liste à mon cousin', 'hier · 📤 Envoyer une liste'], ['fusionner deux lieux', 'il y a 3 jours · 📍 Fusionner deux lieux'], ['faire une sauvegarde', 'il y a 1 semaine · 💾 Faire une sauvegarde']].map(([q, s]) => `<li><span class="t">« ${esc(q)} »<small>${esc(s)}</small></span><button type="button" class="ib" data-hq="${esc(q)}" title="Redemander" aria-label="Redemander">↻</button></li>`).join('');
+  $('[data-hfav]').innerHTML = [...S.fav].map(byId).filter(Boolean).map(it => `<li><span aria-hidden="true">${it.ic}</span><span class="t">${esc(it.n)}<small>${esc(it.p.join(' › '))}</small></span><button type="button" class="button small" data-hgo="${it.id}">▶</button></li>`).join('') || '<li class="muted">Aucun pour l’instant.</li>';
+  const oft = [['backup', 41], ['print_tree', 27], ['add_person', 22], ['share_list', 12], ['merge_places', 7]];
+  $('[data-hoft]').innerHTML = oft.map(([id, n]) => { const it = byId(id); return `<li><span aria-hidden="true">${it.ic}</span><span class="t">${esc(it.n)}<small>${n} fois</small><span class="bar"><i style="width:${Math.round(n / 41 * 100)}%"></i></span></span><button type="button" class="button small secondary" data-hgo="${id}">▶</button></li>`; }).join('');
+}
+$('#s7').addEventListener('click', e => { let t; if ((t = e.target.closest('[data-hq]'))) { setQ(t.dataset.hq); $('#s2').scrollIntoView({behavior: 'smooth'}); } else if ((t = e.target.closest('[data-hgo]'))) go(byId(t.dataset.hgo)); });
+
+/* ── colonne des Réglages ── */
+$('[data-setsb]').innerHTML = `<div class="sb-top"><div><span class="eyebrow">10 — RÉGLER</span><h1>Réglages</h1></div></div><div class="sb-content"><input type="search" class="sb-search" placeholder="Chercher un réglage…" aria-label="Chercher un réglage"><div class="side-menu">
+  <details class="mt-group" open><summary><span aria-hidden="true">🎨</span><span>Look</span><small>5</small></summary></details>
+  <details class="mt-group" open><summary><span aria-hidden="true">🧭</span><span>Navigation</span><small>3</small></summary><div class="mt-gitems"><button type="button" class="smi"><span class="side-number">01</span><span class="lb">Menus, colonne et listes</span></button><button type="button" class="smi"><span class="side-number">17</span><span class="lb">Raccourcis clavier</span></button><button type="button" class="smi is-active"><span class="side-number">17b</span><span class="lb">🧭 Je veux…</span><small>nouveau</small></button></div></details>
+  <details class="mt-group"><summary><span aria-hidden="true">🖼</span><span>Écrans</span><small>5</small></summary></details>
+  <details class="mt-group"><summary><span aria-hidden="true">🧹</span><span>Qualité des données</span><small>6</small></summary></details></div></div>`;
+
+/* ── départ ── */
+recLine(); setQ('imprimer un arbre pour mamie'); paintReg(); paintHist(); buildShow();
+})();
+</script>
+</body>
+</html>

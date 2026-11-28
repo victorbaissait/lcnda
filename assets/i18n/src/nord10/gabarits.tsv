@@ -1,0 +1,51 @@
+fr ¦ sq ¦ mt
+# 🧩 Atelier de transcription, vague 3 (3b) : les gabarits d’actes (heritage-transcribe-gabarit.js)
+Choisis la sorte d’acte (en haut) : chaque sorte a ses cases. ¦ Zgjidh llojin e aktit (lart): çdo lloj ka kutitë e veta. ¦ Agħżel it-tip ta’ att (fuq): kull tip għandu l-kaxxi tiegħu.
+On dirait : {x}. Utiliser ce gabarit ? ¦ Duket si: {x}. Ta përdorësh këtë shabllon? ¦ Jidher: {x}. Tuża din il-mudell?
+Cases remplies : {a}/{b} · vérifiées : {c} ¦ Kuti të plotësuara: {a}/{b} · të verifikuara: {c} ¦ Kaxxi mimlija: {a}/{b} · ivverifikati: {c}
+Gabarit ¦ Shabllon ¦ Mudell
+Vert : rempli par « 🧭 Repérer », à vérifier · Entrée : ✓ vérifié · un clic sur « l. 3 » montre le passage. ¦ E gjelbër: plotësuar nga «🧭 Gjej», për t’u verifikuar · Enter: ✓ verifikuar · një klik te «r. 3» tregon pjesën. ¦ Aħdar: mimli minn “🧭 Sib”, irid jiġi vverifikat · Enter: ✓ ivverifikat · klikk fuq “l. 3” juri s-silta.
+Date du baptême ¦ Data e pagëzimit ¦ Data tal-magħmudija
+Père, métier ¦ Babai, profesioni ¦ Missier, xogħol
+Officier de l’état civil ¦ Nëpunësi i gjendjes civile ¦ Uffiċjal tar-reġistru pubbliku
+Parents de l’époux ¦ Prindërit e dhëndrit ¦ Il-ġenituri tal-għarus
+Parents de l’épouse ¦ Prindërit e nuses ¦ Il-ġenituri tal-għarusa
+Contrat de mariage ¦ Kontratë martese ¦ Kuntratt taż-żwieġ
+Publications ¦ Shpalljet ¦ Pubblikazzjonijiet
+Décédé le ¦ Vdiq më ¦ Miet fi
+Déclarants ¦ Deklaruesit ¦ Dikjaranti
+Date d’inhumation ¦ Data e varrimit ¦ Data tad-difna
+Parties ¦ Palët ¦ Partijiet
+Juge ou notaire ¦ Gjyqtar ose noter ¦ Imħallef jew nutar
+Personne concernée ¦ Personi në fjalë ¦ Il-persuna kkonċernata
+Ce qui est attesté ¦ Çfarë vërtetohet ¦ X’inhu attestat
+Rue ou maison ¦ Rruga ose shtëpia ¦ Triq jew dar
+Ménage ¦ Familja ¦ Familja
+Matricule ¦ Numri i regjistrit ¦ Numru tar-reġistru
+Classe ¦ Klasa ¦ Klassi
+Régiment ¦ Regjimenti ¦ Riġiment
+Campagnes ¦ Fushatat ¦ Kampanji
+Blessures ¦ Plagët ¦ Feriti
+page {n}, l. {line} ¦ faqja {n}, r. {line} ¦ paġna {n}, l. {line}
+l. {n} ¦ r. {n} ¦ l. {n}
+🧩 Gabarit à cases (conseillé) ¦ 🧩 Shabllon me kuti (e rekomanduar) ¦ 🧩 Mudell b’kaxxi (rakkomandat)
+Texte à trous (comme avant) ¦ Tekst me boshllëqe (si më parë) ¦ Test b’vojt (bħal qabel)
+Remplir à nouveau ¦ Plotëso përsëri ¦ Erġa’ imla
+Coller le texte à trous ¦ Ngjit tekstin me boshllëqe ¦ Waħħal it-test b’vojt
+Repris du gabarit (cases vérifiées ou écrites par toi) : ¦ Marrë nga shablloni (kuti të verifikuara ose të shkruara nga ti): ¦ Meħud mill-mudell (kaxxi li vverifikajt jew ktibt int):
+Retirer cette case ¦ Hiq këtë kuti ¦ Neħħi din il-kaxxa
+Ajouter une case ¦ Shto një kuti ¦ Żid kaxxa
+Nom de la case (ex. Profession du parrain) ¦ Emri i kutisë (p.sh. Profesioni i kumbarit) ¦ Isem il-kaxxa (eż. Xogħol il-parrinu)
+Nom de la case ¦ Emri i kutisë ¦ Isem il-kaxxa
+Case retirée ¦ Kutia u hoq ¦ Kaxxa mneħħija
+Mes gabarits… ¦ Shabllonet e mia… ¦ Il-mudelli tiegħi…
+Mes gabarits ¦ Shabllonet e mia ¦ Il-mudelli tiegħi
+Tableur de tous les actes « {x} » ¦ Fletë llogaritëse e të gjitha akteve «{x}» ¦ Spreadsheet tal-atti kollha “{x}”
+Les cases cochées se montrent dans le gabarit de chaque acte de cette sorte. Gardé sur cet ordinateur. ¦ Kutitë e shënuara shfaqen në shabllonin e çdo akti të këtij lloji. Ruhet në këtë kompjuter. ¦ Il-kaxxi mmarkati jidhru fil-mudell ta’ kull att ta’ dan it-tip. Maħżun fuq dan il-kompjuter.
+Aucun acte de cette sorte pour l’instant. ¦ Ende asnjë akt i këtij lloji. ¦ Għad m’hemmx atti ta’ dan it-tip.
+gabarits ¦ shabllone ¦ mudelli
+Tableur : {x} ¦ Fletë llogaritëse: {x} ¦ Spreadsheet: {x}
+Pas encore relié : le relier dans l’Atelier ¦ Ende e palidhur: lidhe në punishte ¦ Għadu mhux marbut: orbtu fil-workshop
+Numéros de ligne ¦ Numrat e rreshtave ¦ Numri tal-linji
+Transcription faite avec LCNDA (Le Carnet numérique des ancêtres). ¦ Transkriptim i bërë me LCNDA (Le Carnet numérique des ancêtres). ¦ Traskrizzjoni magħmula b’LCNDA (Le Carnet numérique des ancêtres).
+XML des chercheurs et des archives (lignes, zones, personnes) ¦ XML i studiuesve dhe arkivave (rreshta, zona, persona) ¦ XML tar-riċerkaturi u l-arkivji (linji, żoni, persuni)

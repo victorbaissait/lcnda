@@ -250,6 +250,7 @@
         if (it.type === 'frame' && it.qr && typeof it.qr === 'object' && String(it.qr.text || '').trim()) o.qr = {kind: ['person', 'url', 'text'].includes(it.qr.kind) ? it.qr.kind : 'text', text: String(it.qr.text).slice(0, 600), person: Math.max(0, Math.round(Number(it.qr.person) || 0)), dark: hexOk(it.qr.dark) ? it.qr.dark : '#000000', light: it.qr.light === 'none' ? 'none' : hexOk(it.qr.light) ? it.qr.light : '#ffffff', quiet: clamp(it.qr.quiet ?? 4, 0, 10)}; // ▦ QR code (redessiné d'après ces réglages)
         if (Number(it.mediaId) > 0) o.mediaId = Math.round(Number(it.mediaId));
         if (it.type === 'frame' && Number(it.diagramId) > 0) o.diagramId = Math.round(Number(it.diagramId));
+        if (it.type === 'frame' && Number(it.vectorId) > 0) o.vectorId = Math.round(Number(it.vectorId)); // ✒️ un dessin vectoriel enregistré (arbre décoratif, carte, blason…)
         if (it.type === 'text' && it.dyn?.type === 'person' && Number(it.dyn.id) > 0) o.dyn = {type: 'person', id: Math.round(Number(it.dyn.id)), fields: (Array.isArray(it.dyn.fields) ? it.dyn.fields : []).filter(f => DYN_FIELDS.some(d => d[0] === f)), at: String(it.dyn.at || '').slice(0, 40)};
         if (it.type === 'text' && it.dyn?.type === 'meteo' && Number(it.dyn.id) > 0) o.dyn = {type: 'meteo', id: Math.round(Number(it.dyn.id)), at: String(it.dyn.at || '').slice(0, 40)}; // 🌦 encadré météo d'un événement (heritage-meteo.js)
         if (it.type === 'text' && it.dyn?.type === 'art' && Number(it.dyn.id) > 0) o.dyn = {type: 'art', id: Math.round(Number(it.dyn.id)), fields: (Array.isArray(it.dyn.fields) ? it.dyn.fields : []).map(String).slice(0, 60), part: String(it.dyn.part || '').slice(0, 20), at: String(it.dyn.at || '').slice(0, 40)}; // 🎨 notice qui suit sa fiche
@@ -669,7 +670,7 @@
                     textItem({x: x0 + 6, y, w: r1(b.w - 36), h: 12, html: `<p data-ps="ps-body" style="text-indent:0;text-align:left"><b>${esc(e.type)}</b>${e.place ? ` — ${esc(e.place)}` : ''}</p>`, name: 'Événement'})); });
             }
             chapter('Sa vie', String(p.bio || '').split(/\n+/).filter(Boolean).map(t => ({ps: 'ps-body', text: t})));
-            let sources = []; try { sources = (await api('person', {id: p.id})).sources || []; } catch (_) {}
+            let sources = []; try { const r = await api('person', {id: p.id}), priv = new Set((r.events || []).filter(e => Number(e.is_private)).map(e => Number(e.id))); sources = (r.sources || []).filter(s => !(s.entity_type === 'event' && priv.has(Number(s.entity_id)))); } catch (_) {} // 🔒 pas les sources d'un événement confidentiel
             chapter('Sources', sources.length ? sources.map(s => ({ps: 'ps-list', text: `• ${[s.title || s.name || 'Source', s.author, s.citation || s.page || s.reference].filter(Boolean).join(' — ')}`})) : [{ps: 'ps-body', text: 'Aucune source rattachée à la fiche pour l’instant : ajoute-les dans la fiche, ou écris-les ici.'}]);
             if ((p.photos || []).length > 1) photoPages(p.photos, 'Photos');
         } else if (kind === 'tree2') {
@@ -768,7 +769,7 @@
                 <span class="ly-brand">📐</span><input class="ly-name" data-ly-name value="${esc(docName)}" aria-label="Nom du document"><span class="ly-kind" data-ly-kind></span>
                 <span class="ly-menus" data-tbg="ly-menus" data-tbg-label="Menus du haut">${menu('Fichier', [['save', '💾 Enregistrer', '⌘S'], ['saveas', 'Enregistrer une copie…'], ['savedesign', '🎨 Enregistrer comme design…'], ['-'], ['docformat', '📐 Format du document…'], ['docinfo', 'ℹ️ Informations du document…'], ['-'], ['export', '⤓ Exporter (PDF, ePub, HTML, fichier)…'], ['-'], ['preflight', '✅ Contrôle avant impression…'], ['relink', '↻ Mettre à jour les objets dynamiques (photos, fiches, arbres)'], ['stylelib', '🎨 Mes styles (pour tous mes documents)…'], ['-'], ['close', 'Fermer']])}
                 ${menu('Édition', [['undo', '↶ Annuler', '⌘Z'], ['redo', '↷ Rétablir', '⇧⌘Z'], ['-'], ['cut', 'Couper', '⌘X'], ['copy', 'Copier', '⌘C'], ['paste', 'Coller', '⌘V'], ['dup', 'Dupliquer', '⌘D'], ['del', 'Supprimer', '⌫'], ['-'], ['all', 'Tout sélectionner', '⌘A'], ['none', 'Désélectionner', 'Échap']])}
-                ${menu('Objet', [['front', 'Premier plan', '⇧⌘]'], ['fwd', 'Avancer', '⌘]'], ['back', 'Reculer', '⌘['], ['bottom', 'Arrière-plan', '⇧⌘['], ['-'], ['lock', '🔒 Verrouiller / déverrouiller'], ['hide', '🙈 Masquer'], ['showall', '👁 Tout afficher'], ['-'], ['fitframe', 'Ajuster le cadre au contenu'], ['place', '🖼️ Placer une image (liée si elle vient de l’app)…'], ['-'], ['chain', '➜ Chaîner le bloc de texte vers un autre…'], ['autoflow', '⤵ Faire couler le texte sur de nouvelles pages'], ['unchain', 'Couper le chaînage'], ['-'], ['toc', '📑 Insérer une table des matières'], ['index', '🔤 Insérer un index des noms'], ['idxplaces', '📍 Insérer un index des lieux'], ['idxjobs', '🔨 Insérer un index des métiers'], ['-'], ['fnote', '¹ Insérer une note de bas de page…'], ['cite', '📚 Citer une source (en note)…'], ['notesblock', '🗒 Insérer les notes du chapitre'], ['biblio', '📚 Insérer la bibliographie'], ['-'], ['tree', '🌳 Insérer un arbre généalogique (objet dynamique)…'], ['dynperson', '👤 Insérer le texte d’une fiche (objet dynamique)…'], ['dynmeteo', '🌦 Encadré météo d’un événement…'], ['dyndiagram', '📊 Insérer un diagramme (objet dynamique)…'], ['-'], ['qr', '▦ Insérer un QR code (fiche, adresse, texte)…']])}
+                ${menu('Objet', [['front', 'Premier plan', '⇧⌘]'], ['fwd', 'Avancer', '⌘]'], ['back', 'Reculer', '⌘['], ['bottom', 'Arrière-plan', '⇧⌘['], ['-'], ['lock', '🔒 Verrouiller / déverrouiller'], ['hide', '🙈 Masquer'], ['showall', '👁 Tout afficher'], ['-'], ['fitframe', 'Ajuster le cadre au contenu'], ['place', '🖼️ Placer une image (liée si elle vient de l’app)…'], ['placevec', '✒️ Placer un dessin vectoriel (arbre, carte, blason…)…'], ['-'], ['chain', '➜ Chaîner le bloc de texte vers un autre…'], ['autoflow', '⤵ Faire couler le texte sur de nouvelles pages'], ['unchain', 'Couper le chaînage'], ['-'], ['toc', '📑 Insérer une table des matières'], ['index', '🔤 Insérer un index des noms'], ['idxplaces', '📍 Insérer un index des lieux'], ['idxjobs', '🔨 Insérer un index des métiers'], ['-'], ['fnote', '¹ Insérer une note de bas de page…'], ['cite', '📚 Citer une source (en note)…'], ['notesblock', '🗒 Insérer les notes du chapitre'], ['biblio', '📚 Insérer la bibliographie'], ['-'], ['tree', '🌳 Insérer un arbre généalogique (objet dynamique)…'], ['dynperson', '👤 Insérer le texte d’une fiche (objet dynamique)…'], ['dynmeteo', '🌦 Encadré météo d’un événement…'], ['dyndiagram', '📊 Insérer un diagramme (objet dynamique)…'], ['-'], ['qr', '▦ Insérer un QR code (fiche, adresse, texte)…']])}
                 ${menu('Page', [['addend', '＋ Ajouter une page à la fin'], ['insert', '＋ Insérer des pages…'], ['duppage', 'Dupliquer la page'], ['delpage', '🗑 Supprimer la page'], ['-'], ['masters', '📄 Gabarit de plusieurs pages…'], ['-'], ['merge', '📨 Publipostage : une page par personne…'], ['mergesample', '📨 Page modèle de publipostage (avec des champs)'], ['-'], ['goto', 'Aller à la page…', '⌘J'], ['first', '⏮ Première page'], ['prev', '‹ Page précédente', 'Pg↑'], ['next', 'Page suivante ›', 'Pg↓'], ['last', 'Dernière page ⏭']])}
                 ${menu('Relecture', [['comment', '💬 Commenter le passage ou l’objet choisi…'], ['suggest', '✎ Suggérer une modification du texte choisi…'], ['reviewpanel', '🗂 Voir les commentaires'], ['-'], ['sendreview', '📨 Envoyer à un cousin (fichier de relecture)…'], ['importreview', '⤒ Importer les commentaires d’un cousin…'], ['annot', '📝 PDF annoté (avec les commentaires)…']])}
                 ${menu('Affichage', [['zin', 'Zoom avant', '⌘+'], ['zout', 'Zoom arrière', '⌘−'], ['zfit', '⤢ Ajuster à la fenêtre', '⌘0'], ['z100', '100 % (taille réelle)', '⌘1'], ['-'], ['guides', '📏 Repères et marges'], ['snap', '🧲 Aimanter'], ['preview', 'Aperçu (sans repères)', 'W']])}</span>
@@ -1203,7 +1204,7 @@
         async function placeSrc(res, target = null, k = 0) {
             let it = target;
             if (!it) { const b = box(D, cur); const im = await new Promise(r => { const x = new Image(); x.onload = () => r(x); x.onerror = () => r(null); x.src = res.src; }); const ratio = im ? im.naturalHeight / im.naturalWidth : 0.75, w = Math.min(b.w, 100); it = shapeItem('frame', {x: r1(b.x + k * 8), y: r1(b.y + k * 8), w, h: r1(w * ratio), layer: activeLayer(), fit: 'fill'}); curList().push(it); }
-            it.src = res.src; it.srcName = res.name; if (res.mediaId) it.mediaId = res.mediaId; else delete it.mediaId; delete it.tree; it.fill = it.fill === 'sw-light' ? 'none' : it.fill; sel = [it.id]; return it;
+            it.src = res.src; it.srcName = res.name; if (res.mediaId) it.mediaId = res.mediaId; else delete it.mediaId; delete it.tree; delete it.vectorId; delete it.diagramId; it.fill = it.fill === 'sw-light' ? 'none' : it.fill; sel = [it.id]; return it;
         }
         /* ─── Texte chaîné : un texte qui continue d'un bloc à l'autre, sur plusieurs pages ─── */
         let linkFrom = null;
@@ -1285,7 +1286,8 @@
             const dyn = [...D.pages.flatMap(p => p.items), ...D.masters.flatMap(m => m.items)].filter(it => it.dyn);
             const dgs = [...D.pages.flatMap(p => p.items), ...D.masters.flatMap(m => m.items)].filter(it => it.type === 'frame' && it.diagramId);
             const trees = [...D.pages.flatMap(p => p.items), ...D.masters.flatMap(m => m.items)].filter(it => it.type === 'frame' && it.tree);
-            if (!frames.length && !dyn.length && !dgs.length && !trees.length) { if (!silent) msg('Aucun objet dynamique dans ce document (photos liées, textes de fiches, diagrammes, arbres).'); return; }
+            const vecs = [...D.pages.flatMap(p => p.items), ...D.masters.flatMap(m => m.items)].filter(it => it.type === 'frame' && it.vectorId);
+            if (!frames.length && !dyn.length && !dgs.length && !trees.length && !vecs.length) { if (!silent) msg('Aucun objet dynamique dans ce document (photos liées, textes de fiches, diagrammes, arbres).'); return; }
             let changed = 0;
             if (frames.length) {
                 try { mediaRows = (await api('media_av_list', {kind: 'image'})).items || []; } catch (_) { mediaRows = mediaRows || []; }
@@ -1299,6 +1301,7 @@
             for (const it of dyn) { try { const h = await dynHtmlOf(it.dyn); if (h !== it.html) { it.html = h; changed++; linkState[it.id] = 'updated'; } else linkState[it.id] = 'ok'; it.dyn.at = new Date().toISOString().slice(0, 16); } catch (_) { linkState[it.id] = 'missing'; } }
             for (const it of trees) { try { const r = await treeSvg(it.tree, lookOf()), src = svgSrc(r.svg); if (src !== it.src) { it.src = src; it.srcName = r.name; it.tree.at = new Date().toISOString().slice(0, 16); changed++; linkState[it.id] = 'updated'; } else linkState[it.id] = linkState[it.id] === 'updated' ? 'updated' : 'ok'; } catch (_) { linkState[it.id] = 'missing'; } }
             for (const it of dgs) { try { const svg = ext.diagramSvg ? await ext.diagramSvg(it.diagramId) : ''; if (!svg) { linkState[it.id] = 'missing'; continue; } const src = svgSrc(svg); if (src !== it.src) { it.src = src; changed++; linkState[it.id] = 'updated'; } else linkState[it.id] = linkState[it.id] === 'updated' ? 'updated' : 'ok'; } catch (_) { linkState[it.id] = 'missing'; } }
+            for (const it of vecs) { try { const r = await vectorSvg(it.vectorId), src = svgSrc(r.svg); if (src !== it.src) { it.src = src; it.srcName = r.name; changed++; linkState[it.id] = 'updated'; } else linkState[it.id] = linkState[it.id] === 'updated' ? 'updated' : 'ok'; } catch (_) { linkState[it.id] = 'missing'; } }
             if (changed) { commit('Objets dynamiques mis à jour'); render(); }
             const miss = Object.values(linkState).filter(v => v === 'missing').length;
             if (!silent || changed || miss) msg(miss ? i18n('↻ Objets dynamiques : {a}, {b}.', {a: changed ? i18n('{n} mis à jour', {n: changed}) : i18n('tout est à jour'), b: A().plural(miss, 'introuvable')}) : i18n('↻ Objets dynamiques : {a}.', {a: changed ? i18n('{n} mis à jour', {n: changed}) : i18n('tout est à jour')}));
@@ -1324,6 +1327,18 @@
             const b = box(D, cur), w = Math.min(b.w, 140), it = shapeItem('frame', {x: b.x, y: b.y, w, h: r1(w * ratio), layer: activeLayer(), fit: 'fit'});
             Object.assign(it, {src: svgSrc(svg), srcName: 'Diagramme', diagramId: id, fill: 'none', name: 'Diagramme'}); curList().push(it); sel = [it.id];
             commit('Diagramme inséré'); render();
+        }
+        /** ✒️ un de mes dessins vectoriels (arbre décoratif, carte, blason, sceau…) : posé net (SVG) et lié au dessin — « ↻ Mettre à jour » le redessine */
+        async function placeVector() {
+            if (editMaster) return msg('Pas dans un gabarit : sur une page.');
+            const id = await pickVector(); if (!id) return;
+            let r; try { r = await vectorSvg(id); } catch (err) { return msg(err.message); }
+            const target = one()?.type === 'frame' && !one().tree ? one() : null, b = box(D, cur);
+            const it = target || shapeItem('frame', {x: b.x, y: b.y, w: b.w, h: Math.min(b.h, r1(b.w * r.ratio)), layer: activeLayer()});
+            if (!target) curList().push(it);
+            Object.assign(it, {src: svgSrc(r.svg), srcName: r.name, vectorId: id, fit: 'fit', fill: it.fill === 'sw-light' ? 'none' : it.fill, name: 'Dessin vectoriel'}); delete it.mediaId; delete it.diagramId; delete it.tree;
+            sel = [it.id]; panel = 'obj'; linkState[it.id] = 'ok'; commit(i18n('Dessin vectoriel placé')); render();
+            msg(i18n('✒️ « {name} » placé : modifié dans le Dessin vectoriel, il se met à jour ici (« ↻ Mettre à jour »).', {name: r.name}));
         }
         /** le texte d'un objet dynamique : fiche, notice d'œuvre (🎨) ou encadré météo (🌦) */
         const dynHtmlOf = d => (d.type === 'art' ? ext.artistCatalogue.noticeHtml(d) : d.type === 'meteo' ? ext.meteo.noticeHtml(d) : personDynHtml(d.id, d.fields));
@@ -1407,8 +1422,8 @@
                 }});
         }
         async function personQrChoices(id) {
-            const r = await api('person', {id}), p = r.person || {}, nm = [p.first_name, p.last_name].filter(Boolean).join(' ') || 'Fiche';
-            const ev = r.events || [], find = re => ev.find(e => re.test(String(e.type_label || e.type || e.event_type || ''))), when = e => String(e?.date_text || e?.year || '');
+            const r = await api('person', {id}), p = r.person || {}, nm = p.first_name || p.last_name ? A().personName(p) : 'Fiche';
+            const ev = (r.events || []).filter(e => !Number(e.is_private)), find = re => ev.find(e => re.test(String(e.type_label || e.type || e.event_type || ''))), when = e => String(e?.date_text || e?.year || ''); // 🔒 un événement confidentiel ne va pas dans un QR code
             const b = find(/naiss|birth|bapt/i), d = find(/décè|deces|death|inhum|sépult/i);
             const life = [b && `° ${[when(b), b.place_name || b.place].filter(Boolean).join(' ')}`, d && `† ${[when(d), d.place_name || d.place].filter(Boolean).join(' ')}`].filter(Boolean).join(' ');
             const ident = [nm, life, p.reference_number ? `réf. ${p.reference_number}` : ''].filter(Boolean).join(' — ');
@@ -1791,7 +1806,7 @@
                 addend: () => addPages(1, D.pages.length), insert: insertPagesDialog, masters: () => mastersDialog(), duppage: dupPage, delpage: delPage, goto: gotoDialog, first: () => goPage(0), prev: () => goPage(cur - 1), next: () => goPage(cur + 1), last: () => goPage(D.pages.length - 1),
                 zin: () => setZoom(zoom * 1.25), zout: () => setZoom(zoom / 1.25), zfit: zoomFit, z100: () => setZoom(1), guides: () => { guides = !guides; render(); }, snap: () => { snapOn = !snapOn; syncChrome(); msg(snapOn ? '🧲 Aimanter : oui.' : '🧲 Aimanter : arrêté.'); }, preview: () => { preview = !preview; render(); },
                 endmaster: () => { editMaster = null; sel = []; render(); },
-                docformat: () => docFormatDialog(), docinfo: () => docInfoDialog(), preflight: () => preflight(), relink: () => refreshLinks(false), stylelib: () => styleLibrary(), toc: () => insertAuto('toc'), index: () => insertAuto('index'), idxplaces: () => insertAuto('places'), idxjobs: () => insertAuto('jobs'), notesblock: () => insertAuto('notes'), biblio: () => insertAuto('biblio'), dynperson: () => dynPersonDialog(), dynmeteo: () => meteoDialog(), dyndiagram: () => insertDiagram(),
+                docformat: () => docFormatDialog(), docinfo: () => docInfoDialog(), preflight: () => preflight(), relink: () => refreshLinks(false), stylelib: () => styleLibrary(), toc: () => insertAuto('toc'), index: () => insertAuto('index'), idxplaces: () => insertAuto('places'), idxjobs: () => insertAuto('jobs'), notesblock: () => insertAuto('notes'), biblio: () => insertAuto('biblio'), dynperson: () => dynPersonDialog(), dynmeteo: () => meteoDialog(), dyndiagram: () => insertDiagram(), placevec: () => placeVector(),
                 tree: () => treeDialog(), fnote: () => insertNote(), cite: () => citeDialog(), qr: () => qrDialog(), merge: () => mergeDialog(), mergesample: () => mergeSample(),
                 comment: () => addComment(false), suggest: () => addComment(true), reviewpanel: () => { panel = 'review'; renderPanel(); }, sendreview: () => exportDialog('review'), importreview: () => importReview(), annot: () => exportDialog('annot'),
                 chain: () => { const it = one(); if (it?.type !== 'text') return msg('Choisis d’abord un bloc de texte.'); if (it.next) return msg('Ce bloc est déjà chaîné (« Couper le chaînage » d’abord).'); linkFrom = it.id; canvas.classList.add('is-linking'); render(); msg('➜ Clique sur le bloc de texte qui reçoit la suite (sur n’importe quelle page). Échap : annuler.'); },
@@ -1985,6 +2000,7 @@
             if (it && it.type !== 'text') h += sec('Habillage du texte', `${sel2('wrap.mode', help('Le texte voisin', 'Les blocs de texte posés sous cet objet le contournent au lieu de passer dessous.', 'habillage'), WRAPS, it.wrap?.mode || 'none')}${num('wrap.off', 'Distance', it.wrap?.off ?? 3, {min: 0, max: 100, step: 0.5})}<p class="ly-help">Les blocs de texte de la page contournent cet objet.</p>`, !!it.wrap?.mode && it.wrap.mode !== 'none');
             if (it?.type === 'frame' && it.tree) h += sec('🌳 Arbre (objet dynamique)', `<p class="ly-help">${esc(i18n(TREE_MODES.find(m => m[0] === it.tree.mode)?.[1] || ''))} · ${A().plural(it.tree.gens, 'génération')}${it.tree.at ? ` · ${esc(window.LCNDA_UI?.whenText?.(it.tree.at, {label: 'mis à jour'}) || it.tree.at)}` : ''}${linkState[it.id] === 'missing' ? ` — ⛔ ${i18n('personne introuvable')}` : ''}. ${i18n('Il suit la base : il se refait à l’ouverture du document et avec « ↻ Mettre à jour ».')}</p><div class="ly-row"><button type="button" class="button small" data-ly-treeedit>✎ Modifier l’arbre…</button><button type="button" class="button small secondary" data-ly-treeupd>↻ Mettre à jour</button><button type="button" class="button small secondary" data-ly-treeopen>↗ Fiche</button><button type="button" class="button small secondary" data-ly-treedetach title="L’arbre reste tel quel et ne suit plus la base">Détacher</button></div>`);
             else if (it?.type === 'frame' && it.qr) h += sec('▦ QR code', `<p class="ly-help">${i18n('Il contient : « {x} ». Il se redessine net à toutes les tailles (PDF, ePub, HTML).', {x: esc(it.qr.text.length > 120 ? it.qr.text.slice(0, 119) + '…' : it.qr.text)})}</p><div class="ly-row"><button type="button" class="button small" data-ly-qredit>▦ Modifier le QR code…</button></div>`);
+            else if (it?.type === 'frame' && it.src && it.vectorId) h += sec('🔗 Objet dynamique', `<p class="ly-help">${i18n('✒️ Dessin vectoriel <b>lié</b>{state} : modifié dans le Dessin vectoriel, il se redessine ici (« Mettre à jour »).', {state: linkState[it.id] === 'missing' ? ` — ⛔ ${i18n('introuvable')}` : linkState[it.id] === 'updated' ? ` — ${i18n('mis à jour')}` : ''})}</p><div class="ly-row"><button type="button" class="button small" data-ly-editvec>${esc(i18n('✎ Modifier le dessin'))}</button><button type="button" class="button small secondary" data-ly-cmd="relink">↻ Mettre à jour</button><button type="button" class="button small secondary" data-ly-unlinkvec title="${esc(i18n('Le dessin reste tel quel et ne suit plus le Dessin vectoriel'))}">${esc(i18n('Détacher'))}</button></div>`);
             else if (it?.type === 'frame' && it.src) h += sec('🔗 Objet dynamique', it.diagramId ? `<p class="ly-help">${i18n('📊 Diagramme <b>lié</b>{state} : modifié dans Graphiques → Mes diagrammes, il se redessine ici (« Mettre à jour »).', {state: linkState[it.id] === 'missing' ? ` — ⛔ ${i18n('introuvable')}` : ''})}</p><div class="ly-row"><button type="button" class="button small" data-ly-editdg>✎ Modifier le diagramme</button><button type="button" class="button small secondary" data-ly-cmd="relink">↻ Mettre à jour</button></div>` : it.mediaId ? `<p class="ly-help">${i18n('Image <b>liée</b> à une photo de l’app{state} : elle reste en pleine qualité (rien n’est réduit), et toute retouche faite dans l’app arrive ici.', {state: linkState[it.id] === 'missing' ? ` — ⛔ ${i18n('introuvable')}` : linkState[it.id] === 'updated' ? ` — ${i18n('mise à jour')}` : ''})}</p><div class="ly-row"><button type="button" class="button small" data-ly-editorig>✎ Modifier l’original (retouche)</button><button type="button" class="button small secondary" data-ly-cmd="relink">↻ Mettre à jour</button><button type="button" class="button small secondary" data-ly-unlinkimg title="L’image ne suit plus la photo de l’app">Incorporer (ne plus suivre)</button></div>`
                 : '<p class="ly-help">Image incorporée au document. Pour qu’elle suive une photo de l’app (et ses retouches) : « Remplacer l’image » et choisis-la dans la base.</p>');
             if (it?.type === 'frame') h += sec('Cadre d’image', `<div class="ly-row"><button type="button" class="button small" data-ly-cmd="place">${it.src ? i18n('🖼️ Remplacer l’image') : i18n('🖼️ Placer l’image')}</button>${it.src ? '<button type="button" class="button small secondary" data-ly-imgclear>Vider</button><button type="button" class="button small secondary" data-ly-cmd="fitframe">Cadre au contenu</button>' : ''}</div>${sel2('fit', 'Ajustement', FITS, it.fit || 'fill')}<div class="ly-grid2">${num('imgS', 'Échelle', it.imgS || 100, {min: 5, max: 2000, step: 1, unit: '%'})}${num('imgX', 'Décalage X', it.imgX || 0)}${num('imgY', 'Décalage Y', it.imgY || 0)}</div>`);
@@ -2120,6 +2136,8 @@
             if (e.target.closest('[data-ly-editorig]')) return editOriginal(one());
             const eo2 = e.target.closest('[data-ly-editorig2]'); if (eo2) return editOriginal(findItem(eo2.dataset.lyEditorig2)?.it);
             if (e.target.closest('[data-ly-editdg]')) { const it = one(); if (it?.diagramId) ext.openDiagramEditor?.(it.diagramId, {onSave: () => refreshLinks(false)}); return; }
+            if (e.target.closest('[data-ly-editvec]')) { const it = one(); if (it?.vectorId && ext.openVectorEditor) ext.openVectorEditor({id: it.vectorId, onSaved: () => refreshLinks(false)}); return; }
+            if (e.target.closest('[data-ly-unlinkvec]')) { const it = one(); if (it) { delete it.vectorId; commit(i18n('Dessin détaché')); render(); } return; }
             if (e.target.closest('[data-ly-unlinkimg]')) { const it = one(); if (it) { delete it.mediaId; commit('Image incorporée'); render(); } return; }
             if (e.target.closest('[data-ly-dynupd]')) { const it = one(); if (it?.dyn) { it.html = await dynHtmlOf(it.dyn); it.dyn.at = new Date().toISOString().slice(0, 16); commit('Texte de la fiche mis à jour'); render(); } return; }
             if (e.target.closest('[data-ly-dynedit]')) return one()?.dyn?.type === 'meteo' ? meteoDialog(one()) : dynPersonDialog(one());
@@ -2173,7 +2191,7 @@
             if (d.lySwdel) { const used = JSON.stringify(D).split(`"${d.lySwdel}"`).length - 2; D.swatches = D.swatches.filter(s => s.id !== d.lySwdel); const txt = JSON.stringify(D).split(`"${d.lySwdel}"`).join('"sw-black"'); D = JSON.parse(txt); commit('Nuance supprimée'); render(); undoable(used > 0 ? i18n(used > 1 ? 'Nuance supprimée ({n} objets passent en noir)' : 'Nuance supprimée ({n} objet passe en noir)', {n: used}) : i18n('Nuance supprimée')); return; }
             if (d.lyFlip) { selected().forEach(it => { it[d.lyFlip] = !it[d.lyFlip]; }); commit(); render(); return; }
             if (d.lyConvert) { selected().forEach(it => { if (it.type === 'frame') it.shape = d.lyConvert; else it.type = d.lyConvert; }); commit(); render(); return; }
-            if (d.lyImgclear !== undefined) { const it = one(); if (it) { it.src = ''; delete it.srcName; commit(); render(); } return; }
+            if (d.lyImgclear !== undefined) { const it = one(); if (it) { it.src = ''; delete it.srcName; delete it.vectorId; delete it.diagramId; delete it.mediaId; commit(); render(); } return; }
             if (d.lyAlign) return align(d.lyAlign);
             if (d.lyDist) return distribute(d.lyDist);
             if (d.lyPf) return pathfinder(d.lyPf);
@@ -2424,7 +2442,7 @@
     const DYN_FIELDS = [['name', 'Nom complet'], ['life', 'Naissance et décès (dates et lieux)'], ['parents', 'Parents'], ['partners', 'Conjoints'], ['children', 'Enfants'], ['occupation', 'Profession'], ['events', 'Tous les événements'], ['notes', 'Notes']];
     async function personDynHtml(id, fields) {
         const r = await api('person', {id}), p = r.person || {}, nm = x => [x?.first_name, x?.last_name].filter(Boolean).join(' ') || x?.name || '';
-        const ev = (r.events || []), find = re => ev.find(e => re.test(String(e.type || e.type_label || e.event_type || '')));
+        const ev = (r.events || []).filter(e => !Number(e.is_private)), find = re => ev.find(e => re.test(String(e.type || e.type_label || e.event_type || ''))); // 🔒 un événement confidentiel n'entre pas dans un livre (il s'imprime, s'exporte)
         const evTxt = e => e ? [e.date_text || e.year, e.place_name || e.place].filter(Boolean).join(', ') : '';
         const out = [];
         if (fields.includes('name')) out.push(`<p data-ps="ps-name">${esc(nm(p))}</p>`);
@@ -2802,6 +2820,75 @@ ${chFiles.map((c, k) => `<item id="ch${k + 1}" href="${c.file}" media-type="appl
                 openEditor({id: 0, name: (v.name || 'Mon livre').slice(0, 160), doc, onSaved});
             }});
     }
+    /* ═════════════ ✒️ Dessins vectoriels (lib/vector.php, lecture seule) et 📤 « Envoyer vers… » une image dans un livre ═════════════ */
+    /** un dessin enregistré en SVG : {svg, name, ratio} (heritage-vector.js le dessine) */
+    async function vectorSvg(id) {
+        const V = ext.vectorInternals; if (!V?.docSvg) throw new Error(i18n('Le Dessin vectoriel n’est pas chargé.'));
+        const r = await api('vector_doc', {id}), d = {w: 800, h: 600, bg: '#ffffff', objs: [], ...(r.doc && typeof r.doc === 'object' ? r.doc : {})};
+        const svg = V.docSvg(d), W = Number(d.w) || 800, H = Number(d.h) || 600;
+        return {svg, name: r.name || i18n('Dessin'), ratio: H / W};
+    }
+    const VEC_KINDS = {tree: '🌳', map: '🗺️', card: '📰', seal: '🔤', blason: '🛡️'};
+    /** choisir un de mes dessins (vignettes) → id ou 0 */
+    async function pickVector() {
+        let list = []; try { list = (await api('vector_docs')).docs || []; } catch (err) { toast(err.message, 'error'); return 0; }
+        if (!list.length) { toast(i18n('Aucun dessin vectoriel : fais-en un dans Listes → Outils de modification (Dessin vectoriel, Arbre décoratif, Carte…).')); return 0; }
+        return new Promise(res => {
+            let chosen = 0;
+            const cards = list.map(v => `<label class="ly-vecpick"><input type="radio" name="vec" value="${Number(v.id)}"><span class="ly-vecthumb">${/^data:image\/(png|jpeg|webp);base64,/.test(v.thumb || '') ? `<img src="${esc(v.thumb)}" alt="">` : `<b>${VEC_KINDS[v.kind] || '✒️'}</b>`}</span><span class="ly-vecname">${VEC_KINDS[v.kind] ? `${VEC_KINDS[v.kind]} ` : ''}${esc(v.name || i18n('Sans nom'))}</span></label>`).join('');
+            const dlg = ext.openDialog({eyebrow: i18n('PLACER'), title: i18n('✒️ Un dessin vectoriel (arbre, carte, blason…)'), submitLabel: i18n('Placer ce dessin'), wide: true,
+                body: `<style>.ly-vecgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;max-height:56vh;overflow:auto}.ly-vecpick{display:flex;flex-direction:column;gap:4px;border:2px solid #e3e5ea;padding:6px;cursor:pointer}.ly-vecpick:has(input:checked){border-color:#055dff;background:#eaf1ff}.ly-vecpick input{position:absolute;opacity:0}.ly-vecthumb{height:96px;display:flex;align-items:center;justify-content:center;background:#fff}.ly-vecthumb img{max-width:100%;max-height:96px}.ly-vecthumb b{font-size:36px}.ly-vecname{font-size:12.5px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}:root[data-theme="dark"] .ly-vecpick{border-color:#3a3a3a}:root[data-theme="dark"] .ly-vecpick:has(input:checked){border-color:#4d9fff;background:#16263d}</style>
+                    <p class="muted">${esc(i18n('Le dessin reste lié : modifié dans le Dessin vectoriel, il se met à jour dans le livre (« ↻ Mettre à jour »). Il reste net à toutes les tailles.'))}</p><div class="ly-vecgrid">${cards}</div>`,
+                onOpen: d => d.addEventListener('dblclick', e => { if (e.target.closest('.ly-vecpick')) d.querySelector('form').requestSubmit(); }),
+                onSubmit: f => { chosen = Number(f.querySelector('[name=vec]:checked')?.value) || 0; if (!chosen) { toast(i18n('Choisis un dessin.'), 'error'); return false; } }});
+            dlg.addEventListener('close', () => res(chosen));
+        });
+    }
+    /** un SVG en image PNG (pour le ranger dans les Médias) */
+    async function svgPng(svg, long = 2400) {
+        const url = URL.createObjectURL(new Blob([svg], {type: 'image/svg+xml'}));
+        try {
+            const im = await new Promise((ok, ko) => { const x = new Image(); x.onload = () => ok(x); x.onerror = () => ko(new Error(i18n('Le dessin n’a pas pu être lu.'))); x.src = url; });
+            const w0 = im.naturalWidth || 800, h0 = im.naturalHeight || 600, k = long / Math.max(w0, h0), c = document.createElement('canvas');
+            c.width = Math.max(1, Math.round(w0 * k)); c.height = Math.max(1, Math.round(h0 * k)); c.getContext('2d').drawImage(im, 0, 0, c.width, c.height);
+            return await new Promise((ok, ko) => c.toBlob(b => (b ? ok(b) : ko(new Error(i18n('Image trop grande pour le navigateur.')))), 'image/png'));
+        } finally { URL.revokeObjectURL(url); }
+    }
+    const imgRatio = src => new Promise(r => { const x = new Image(); x.onload = () => r(x.naturalWidth ? x.naturalHeight / x.naturalWidth : 0.75); x.onerror = () => r(0.75); x.src = src; });
+    /** 📤 « Envoyer vers… → Dans un livre de la Mise en page » : un nouveau livre, ou à la fin d'un livre existant ; l'image sur une page à elle, dans les marges */
+    const WM_KEY = 'genealogie-layout-send-to', WM_TH_KEY = 'genealogie-layout-send-theme';
+    async function layoutWithMedia(src = {}, {anchor = null} = {}) {
+        void anchor;
+        let to = 'new', th0 = ''; try { to = localStorage.getItem(WM_KEY) === 'end' ? 'end' : 'new'; th0 = localStorage.getItem(WM_TH_KEY) || ''; } catch (_) {}
+        return ext.openDialog({eyebrow: i18n('MISE EN PAGE'), title: i18n('📐 Mettre dans un livre'), submitLabel: i18n('Mettre dans le livre'),
+            body: `<p class="muted">${esc(src.svg ? i18n('Le dessin est rangé dans les Médias (en image), puis posé sur une page à lui, dans les marges.') : i18n('L’image est posée sur une page à elle, dans les marges. Elle reste liée à la photo des Médias.'))}</p>
+            <div class="form-grid one-column"><label class="checkbox-line"><input type="radio" name="to" value="new"${to === 'new' ? ' checked' : ''}> ${esc(i18n('Un nouveau livre'))}</label><label class="checkbox-line"><input type="radio" name="to" value="end"${to === 'end' ? ' checked' : ''}> ${esc(i18n('À la fin d’un livre existant'))}</label><div data-ly-pick${to === 'end' ? '' : ' hidden'}>${(window.LCNDA_PICKER || A()).pickerField({name: 'ly', kind: 'layout', inline: true})}</div>
+            <label data-ly-th${to === 'end' ? ' hidden' : ''}>${esc(i18n('Design'))}<select name="th">${THEMES.map(t => `<option value="${esc(t.id)}"${t.id === th0 ? ' selected' : ''}>${esc(t.name)}</option>`).join('')}</select></label></div>`,
+            onOpen: d => d.addEventListener('change', e => { if (e.target.name === 'to') { const end = e.target.value === 'end'; d.querySelector('[data-ly-pick]').hidden = !end; d.querySelector('[data-ly-th]').hidden = end; try { localStorage.setItem(WM_KEY, e.target.value); } catch (_) {} } if (e.target.name === 'th') { try { localStorage.setItem(WM_TH_KEY, e.target.value); } catch (_) {} } }),
+            onSubmit: async f => {
+                const toEnd = f.elements.to.value === 'end'; let lyId = 0, doc, name, rev = '';
+                if (toEnd) { lyId = Number(f.elements.ly?.value) || 0; if (!lyId) return window.LCNDA_UI?.fail?.(f.querySelector('[data-ly-pick] input') || f.elements.ly, i18n('Choisis le livre.')) ?? false; }
+                // l'image : celle des Médias, ou le dessin rangé d'abord dans les Médias
+                let media = src.media;
+                if (!media && src.svg) {
+                    if (!ext.rtUploadCopy) throw new Error(i18n('L’envoi dans les médias n’est pas chargé.'));
+                    toast(i18n('Rangement du dessin dans les médias…'));
+                    const r = await ext.rtUploadCopy(await svgPng(src.svg), {title: src.name || i18n('Dessin')});
+                    media = {id: Number(r.media_id || r.id || 0), filename: r.filename || '', title: src.name || i18n('Dessin')};
+                    if (!media.id || !media.filename) throw new Error(i18n('L’image n’a pas pu être rangée dans les médias.'));
+                }
+                if (!media?.filename) throw new Error(i18n('Rien à envoyer.'));
+                if (toEnd) { const r = await api('layout_doc', {id: lyId}); doc = r.doc; name = r.name; rev = r.rev; doc = cleanDoc(doc); doc.pages.push({id: nid('p'), master: doc.pages.at(-1)?.master || 'A', items: []}); }
+                else { const th = THEMES.find(t => t.id === f.elements.th.value) || THEMES[0]; doc = themeDoc(th, defaults().size); name = media.title || i18n('Mon livre'); doc.title = name; if (!doc.pages.length) doc.pages.push({id: nid('p'), master: 'A', items: []}); }
+                const i = doc.pages.length - 1, b = box(doc, i), imgSrc = `media/${media.filename}`, ratio = await imgRatio(imgSrc);
+                let w = b.w, h = r1(w * ratio); if (h > b.h) { h = b.h; w = r1(h / ratio); }
+                doc.pages[i].items.push(shapeItem('frame', {x: r1(b.x + (b.w - w) / 2), y: r1(b.y + (b.h - h) / 2), w, h, src: imgSrc, srcName: media.title || media.filename, mediaId: Number(media.id) || undefined, fit: 'fit', fill: 'none', stroke: {c: 'none', w: 0}, name: 'Image'}));
+                openEditor({id: lyId, name: String(name || i18n('Mon livre')).slice(0, 160), doc, rev});
+                toast(toEnd ? i18n('Image ajoutée sur une nouvelle page à la fin du livre : vérifie, puis enregistre.') : i18n('Nouveau livre avec l’image : vérifie, puis enregistre le livre.'));
+            }});
+    }
+    ext.layoutWithMedia = layoutWithMedia;
+    ext.layoutVectorSvg = vectorSvg;
     ext.openLayoutStudio = openLibrary;
     /* Listes → 📐 Livres de famille : ce qu'on a fait dans l'atelier (livres et designs), pour les ouvrir, en créer, régler */
     ext.lists = ext.lists || {};

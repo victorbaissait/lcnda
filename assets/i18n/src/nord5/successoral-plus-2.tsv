@@ -425,7 +425,7 @@ Les pistes sont montrées à partir de ce score (sur 100). Plus haut : moins de 
 Après chaque nouvel import du fichier INSEE : vérifier les dossiers en cours tout seul (jamais de changement sans ton clic). ¦ Nakon svakog novog uvoza INSEE datoteke: sam provjeri predmete u tijeku (nikad promjena bez tvog klika). ¦ Po vsakem novem uvozu datoteke INSEE: sam preveri zadeve v teku (nikoli sprememba brez tvojega klika).
 Automatique, dans la cloche ¦ Automatski, u zvonu ¦ Samodejno, v zvončku
 Seulement à la main ¦ Samo ručno ¦ Samo ročno
-📋 Questionnaire ¦ 📋 Upitnik ¦ 📋 Vprašalnik
+📝 Questionnaire ¦ 📝 Upitnik ¦ 📝 Vprašalnik
 Ce que l’héritier te renvoie après avoir rempli le questionnaire. ¦ Što ti nasljednik vraća nakon ispunjavanja. ¦ Kaj ti dedič vrne po izpolnitvi.
 Un petit fichier .json ¦ Mala .json datoteka ¦ Majhna datoteka .json
 La page .html remplie ¦ Ispunjena .html stranica ¦ Izpolnjena stran .html

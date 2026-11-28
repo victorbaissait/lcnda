@@ -1,0 +1,835 @@
+fr ¦ sk ¦ nb
+Au bout de combien de jours sans nouvelles un animal est-il « en retard » ? Rouge au double du délai. ¦ Po koľkých dňoch bez správ je zviera „oneskorené“? Červené pri dvojnásobku lehoty. ¦ Etter hvor mange dager uten nytt er et dyr «forsinket»? Rødt ved dobbel frist.
+Espèce inconnue ¦ Neznámy druh ¦ Ukjent art
+Délais par espèce changés ¦ Lehoty podľa druhu zmenené ¦ Frister per art endret
+Animal (nom, bague…) ¦ Zviera (meno, krúžok…) ¦ Dyr (navn, ring…)
+ou bague lue ¦ alebo prečítaný krúžok ¦ eller avlest ring
+Bague lue ¦ Prečítaný krúžok ¦ Avlest ring
+nb ¦ poč. ¦ stk
+Nombre vus ¦ Počet videných ¦ Antall sett
+Le menu de choix n’est pas encore chargé. ¦ Ponuka na výber ešte nie je načítaná. ¦ Valgmenyen er ikke lastet ennå.
+⚡ Saisie d’une séance ¦ ⚡ Zápis jednej vychádzky ¦ ⚡ Registrer en økt
+Tout enregistrer ¦ Uložiť všetko ¦ Lagre alt
+Le lieu, la date et l’observateur une seule fois ; puis une ligne par animal vu (ou par bague lue, si tu ne sais pas encore qui c’est). ¦ Miesto, dátum a pozorovateľa len raz; potom jeden riadok na každé videné zviera (alebo na prečítaný krúžok, ak ešte nevieš, kto to je). ¦ Sted, dato og observatør bare én gang; så én linje per dyr du så (eller per avlest ring, hvis du ikke vet hvem det er ennå).
+Site de suivi ¦ Sledovaná lokalita ¦ Overvåkingssted
+Observateur ¦ Pozorovateľ ¦ Observatør
+Nb ¦ Poč. ¦ Antall
+Dis quand a eu lieu la séance. ¦ Povedz, kedy vychádzka prebehla. ¦ Si når økten fant sted.
+Choisis un site ou un lieu pour la séance. ¦ Vyber lokalitu alebo miesto pre vychádzku. ¦ Velg et sted for økten.
+Ajoute au moins un animal vu. ¦ Pridaj aspoň jedno videné zviera. ¦ Legg til minst ett dyr du så.
+Séance enregistrée : {n} ¦ Vychádzka uložená: {n} ¦ Økt lagret: {n}
+🖨 Fiche de terrain ¦ 🖨 Terénny list ¦ 🖨 Feltark
+Aperçu et impression ¦ Náhľad a tlač ¦ Forhåndsvisning og utskrift
+Les animaux attendus sur un site (ceux qu’on y a déjà vus), avec leurs bagues et marques, et des cases à cocher : pour une sortie sans ordinateur. ¦ Zvieratá očakávané na lokalite (tie, ktoré tam už boli videné), s ich krúžkami a značkami a políčkami na zaškrtnutie: na vychádzku bez počítača. ¦ Dyrene som ventes på et sted (de som allerede er sett der), med ringer og merker og avkrysningsbokser: for en tur uten datamaskin.
+Tous les animaux suivis ¦ Všetky sledované zvieratá ¦ Alle fulgte dyr
+Tous les sites ¦ Všetky lokality ¦ Alle steder
+Aucun animal déjà vu sur ce site. ¦ Na tejto lokalite ešte nebolo videné žiadne zviera. ¦ Ingen dyr er sett på dette stedet ennå.
+Fiche de terrain — {s} ¦ Terénny list — {s} ¦ Feltark — {s}
+Fiche de terrain ¦ Terénny list ¦ Feltark
+Date de la dernière observation ¦ Dátum posledného pozorovania ¦ Dato for siste observasjon
+Une colonne pour les notes ¦ Stĺpec na poznámky ¦ En kolonne for notater
+Date : ____________  Observateur : ____________________  Météo : ____________ ¦ Dátum: ____________  Pozorovateľ: ____________________  Počasie: ____________ ¦ Dato: ____________  Observatør: ____________________  Vær: ____________
+SUCCESSIONS ¦ DEDIČSTVÁ ¦ DØDSBO
+Qui s’en charge ? ¦ Kto sa o to stará? ¦ Hvem tar seg av det?
+ex. Claire LACOMBE (vide : personne) ¦ napr. Claire LACOMBE (prázdne: nikto) ¦ f.eks. Claire LACOMBE (tomt: ingen)
+C’est moi (pour le filtre « Mes dossiers ») ¦ To som ja (pre filter „Moje spisy“) ¦ Det er meg (for filteret «Mine saker»)
+Sur cet ordinateur, « moi » = {name}. ¦ Na tomto počítači „ja“ = {name}. ¦ På denne datamaskinen er «meg» = {name}.
+Confié à {who} ¦ Zverené: {who} ¦ Overlatt til {who}
+Plus personne n’en est chargé ¦ Už sa o to nikto nestará ¦ Ingen har ansvaret lenger
+Chargé du dossier : ¦ Zodpovedná osoba: ¦ Saksbehandler:
+👥 Confier le dossier… ¦ 👥 Zveriť spis… ¦ 👥 Overlat saken…
+👥 Chargé du dossier n° {n} ¦ 👥 Zodpovedná osoba spisu č. {n} ¦ 👥 Saksbehandler for sak nr. {n}
+à confier ¦ na zverenie ¦ skal overlates
+👥 Qui s’occupe de cette échéance ? ¦ 👥 Kto sa stará o tento termín? ¦ 👥 Hvem tar seg av denne fristen?
+🛡 Conflit d’intérêts possible : {n} déjà dans un autre dossier ouvert. Vérifie avant de signer un contrat. ¦ 🛡 Možný konflikt záujmov: {n} je už v inom otvorenom spise. Over to pred podpisom zmluvy. ¦ 🛡 Mulig interessekonflikt: {n} er allerede i en annen åpen sak. Sjekk før du skriver under en kontrakt.
+dossier n° {n} ¦ spis č. {n} ¦ sak nr. {n}
+Pas d’image de cette pièce dans la base : relie l’acte scanné à l’événement, puis recommence. ¦ V databáze nie je obrázok tohto dokladu: prepoj naskenovaný záznam s udalosťou a skús to znova. ¦ Det finnes ikke noe bilde av dette dokumentet i databasen: koble den skannede akten til hendelsen og prøv igjen.
+La lecture automatique n’a pas marché : {err} ¦ Automatické čítanie nefungovalo: {err} ¦ Den automatiske lesingen fungerte ikke: {err}
+Aucun texte lu sur cette image (écriture manuscrite ? essaie l’Atelier de transcription). ¦ Na tomto obrázku nebol prečítaný žiadny text (rukopis? skús Dielňu prepisu). ¦ Ingen tekst lest på dette bildet (håndskrift? prøv Transkripsjonsverkstedet).
+rien de trouvé ¦ nič sa nenašlo ¦ ingenting funnet
+PIÈCE ¦ DOKLAD ¦ DOKUMENT
+🔎 Lecture automatique — à vérifier ¦ 🔎 Automatické čítanie — na overenie ¦ 🔎 Automatisk lesing — må sjekkes
+✍️ Noter au journal ¦ ✍️ Zapísať do denníka ¦ ✍️ Noter i loggen
+Ce que la machine a cru lire sur « {t} ». Décoche ce qui est faux : rien n’est changé dans les fiches. ¦ Čo si stroj myslel, že prečítal na „{t}“. Odškrtni, čo je zle: v kartách sa nič nemení. ¦ Det maskinen trodde den leste på «{t}». Fjern avkrysningen for det som er feil: ingenting endres i oppføringene.
+Lecture automatique de la pièce « {p} » (à vérifier) — {line} ¦ Automatické čítanie dokladu „{p}“ (na overenie) — {line} ¦ Automatisk lesing av dokumentet «{p}» (må sjekkes) — {line}
+Noté au journal du dossier. ¦ Zapísané do denníka spisu. ¦ Notert i sakens logg.
+Lire le texte de l’acte scanné et proposer noms, dates et lieux ¦ Prečítať text naskenovaného záznamu a navrhnúť mená, dátumy a miesta ¦ Les teksten i den skannede akten og foreslå navn, datoer og steder
+🔎 Lire la pièce ¦ 🔎 Prečítať doklad ¦ 🔎 Les dokumentet
+demandée ¦ vyžiadané ¦ bestilt
+à obtenir ¦ na zaobstaranie ¦ må skaffes
+Tableau généalogique de dévolution ¦ Genealogická tabuľka dedičskej postupnosti ¦ Genealogisk arvefølgetabell
+PROJET — à vérifier et compléter par le notaire. Calcul indicatif établi d’après les fiches de la base. ¦ NÁVRH — notár ho musí overiť a doplniť. Orientačný výpočet podľa kariet v databáze. ¦ UTKAST — skal sjekkes og fylles ut av notarien. Veiledende beregning ut fra oppføringene i databasen.
+Pièces (renvois) ¦ Doklady (odkazy) ¦ Dokumenter (henvisninger)
+conjoint survivant ¦ pozostalý manžel(ka) ¦ gjenlevende ektefelle
+Aucun héritier calculé pour l’instant. ¦ Zatiaľ nebol vypočítaný žiadny dedič. ¦ Ingen arving beregnet ennå.
+Les pièces ¦ Doklady ¦ Dokumentene
+Établi le {d}. Document de travail : il ne remplace ni l’acte de notoriété ni le certificat d’hérédité. ¦ Vyhotovené {d}. Pracovný dokument: nenahrádza akt notoriety ani osvedčenie o dedičstve. ¦ Utarbeidet {d}. Arbeidsdokument: det erstatter verken notorietetsakten eller arveattesten.
+Projet de tableau de dévolution ¦ Návrh tabuľky dedičskej postupnosti ¦ Utkast til arvefølgetabell
+🖨 Imprimer le tableau ¦ 🖨 Vytlačiť tabuľku ¦ 🖨 Skriv ut tabellen
+À joindre à l’acte de notoriété : chaque héritier, son lien, sa part, et les pièces qui le prouvent (P1, P2…). ¦ Priložiť k aktu notoriety: každý dedič, jeho vzťah, jeho podiel a doklady, ktoré to dokazujú (P1, P2…). ¦ Legges ved notorietetsakten: hver arving, slektskapet, andelen og dokumentene som beviser det (P1, P2…).
+Tableau de dévolution — {n} ¦ Tabuľka dedičskej postupnosti — {n} ¦ Arvefølgetabell — {n}
+Tableau de dévolution ¦ Tabuľka dedičskej postupnosti ¦ Arvefølgetabell
+Tableau de dévolution {n} ¦ Tabuľka dedičskej postupnosti {n} ¦ Arvefølgetabell {n}
+12 juin 1890 ¦ 12. júna 1890 ¦ 12. juni 1890
+2000 et après ¦ 2000 a neskôr ¦ 2000 og senere
+7 mai 1925 ¦ 7. mája 1925 ¦ 7. mai 1925
+Aucun chemin de parenté connu avec la personne de départ. ¦ Nie je známa žiadna príbuzenská cesta k východiskovej osobe. ¦ Ingen kjent slektsvei til startpersonen.
+Aucun lien de parenté connu. ¦ Žiadny známy príbuzenský vzťah. ¦ Ingen kjent slektskap.
+Aucun lien de parenté trouvé avec {nm} (personne de départ). ¦ S {nm} (východisková osoba) sa nenašiel žiadny príbuzenský vzťah. ¦ Ingen slektskap funnet med {nm} (startperson).
+Aucune différence : la fiche est comme avant cette modification. ¦ Žiadny rozdiel: karta je rovnaká ako pred touto zmenou. ¦ Ingen forskjell: oppføringen er som før denne endringen.
+Aucune union enregistrée pour cette fiche. ¦ Pre túto kartu nie je zaznamenaný žiadny zväzok. ¦ Ingen forbindelse registrert for denne oppføringen.
+Avant cette modification ¦ Pred touto zmenou ¦ Før denne endringen
+Caché en mode consultation, dans les exports, les partages et le site. ¦ Skryté v režime prehliadania, v exportoch, zdieľaniach a na webe. ¦ Skjult i visningsmodus, i eksporter, delinger og på nettstedet.
+Cet élément n’existe plus : utilise « Restaurer » s’il a été supprimé. ¦ Táto položka už neexistuje: použi „Obnoviť“, ak bola vymazaná. ¦ Dette elementet finnes ikke lenger: bruk «Gjenopprett» hvis det er slettet.
+Cette fiche a {n} {what} : garde la bonne, l’autre devient une « autre version » de ce fait. ¦ Táto karta má {n} {what}: nechaj si tú správnu, druhá sa stane „inou verziou“ tohto údaja. ¦ Denne oppføringen har {n} {what}: behold den riktige, den andre blir en «annen versjon» av opplysningen.
+Chargement de la fiche familiale… ¦ Načítava sa rodinný list… ¦ Laster familiearket…
+Chargement des pesées… ¦ Načítavajú sa váženia… ¦ Laster veiingene…
+Choisis « ⤓ PDF » pour enregistrer le fichier. ¦ Zvoľ „⤓ PDF“, aby si súbor uložil. ¦ Velg «⤓ PDF» for å lagre filen.
+Confidentialité et recherche ¦ Súkromie a hľadanie ¦ Personvern og søk
+Courbe de poids ¦ Krivka hmotnosti ¦ Vektkurve
+Créer la famille ¦ Vytvoriť rodinu ¦ Opprett familien
+C’est la personne de départ (de cujus). ¦ To je východisková osoba (de cujus). ¦ Det er startpersonen (probanden).
+C’est la personne de départ. ¦ To je východisková osoba. ¦ Det er startpersonen.
+Date du média moins date de naissance ¦ Dátum média mínus dátum narodenia ¦ Mediets dato minus fødselsdato
+Dernière modification ¦ Posledná zmena ¦ Siste endring
+Dernières fiches créées ¦ Naposledy vytvorené karty ¦ Sist opprettede oppføringer
+En vie et décédés ¦ Žijúci aj zosnulí ¦ Levende og døde
+Exporter la fiche ¦ Exportovať kartu ¦ Eksporter oppføringen
+Exporter la fiche (JSON) ¦ Exportovať kartu (JSON) ¦ Eksporter oppføringen (JSON)
+Exports rapides de cette fiche : 🖨 Imprimer ouvre l’aperçu de l’app (format, sens, PDF), avec l’ordre, la taille et la visibilité des blocs de cette fiche. Les événements 🔒 confidentiels ne sont jamais exportés. ¦ Rýchle exporty tejto karty: 🖨 Vytlačiť otvorí náhľad aplikácie (formát, orientácia, PDF) s poradím, veľkosťou a viditeľnosťou blokov tejto karty. Dôverné 🔒 udalosti sa nikdy neexportujú. ¦ Hurtigeksporter av denne oppføringen: 🖨 Skriv ut åpner appens forhåndsvisning (format, retning, PDF), med rekkefølgen, størrelsen og synligheten til blokkene i oppføringen. Konfidensielle 🔒 hendelser eksporteres aldri.
+FICHE FAMILIALE ¦ RODINNÝ LIST ¦ FAMILIEARK
+Famille enregistrée : {n} fiche(s) créée(s). ¦ Rodina uložená: vytvorených kariet: {n}. ¦ Familien lagret: {n} oppføring(er) opprettet.
+Famille enregistrée. ¦ Rodina uložená. ¦ Familien lagret.
+Fiche en JSON ¦ Karta v JSON ¦ Oppføringen i JSON
+Fiche familiale ¦ Rodinný list ¦ Familieark
+Fiche familiale de {nm} ¦ Rodinný list: {nm} ¦ Familieark for {nm}
+Fiche familiale… ¦ Rodinný list… ¦ Familieark…
+Gardé : l’autre version est notée dans « Date alternative ». ¦ Ponechané: druhá verzia je zapísaná v „Alternatívny dátum“. ¦ Beholdt: den andre versjonen er notert i «Alternativ dato».
+Genre inconnu ¦ Neznáme pohlavie ¦ Ukjent kjønn
+Hors Sosa ¦ Mimo Sosa ¦ Utenfor Sosa
+Imprimer la fiche ¦ Vytlačiť kartu ¦ Skriv ut oppføringen
+Indique au moins le père ou la mère. ¦ Uveď aspoň otca alebo matku. ¦ Oppgi minst faren eller moren.
+Inhumation ¦ Pohreb ¦ Begravelse
+Les deux branches ¦ Obe vetvy ¦ Begge greiner
+Lien retiré : {nm} ¦ Väzba odobratá: {nm} ¦ Kobling fjernet: {nm}
+Naissance (les plus anciens d’abord) ¦ Narodenie (najstarší prví) ¦ Fødsel (eldste først)
+Naissance (les plus récents d’abord) ¦ Narodenie (najmladší prví) ¦ Fødsel (yngste først)
+Naissance inconnue ¦ Narodenie neznáme ¦ Fødsel ukjent
+Note de recherche ¦ Poznámka k pátraniu ¦ Forskningsnotat
+Ouvre d’abord une fiche. ¦ Najprv otvor kartu. ¦ Åpne en oppføring først.
+PDF (aperçu d’impression) ¦ PDF (náhľad tlače) ¦ PDF (forhåndsvisning)
+Pas de fiche d’animal liée. ¦ Žiadna prepojená karta zvieraťa. ¦ Ingen koblet dyreoppføring.
+Pas de mariage enregistré. ¦ Žiadny sobáš nie je zaznamenaný. ¦ Ingen ekteskap registrert.
+Pas encore de pesée : ajoute un poids dans 🩺 Santé. ¦ Zatiaľ žiadne váženie: pridaj hmotnosť v 🩺 Zdravie. ¦ Ingen veiing ennå: legg til en vekt i 🩺 Helse.
+Personnaliser l’export… ¦ Prispôsobiť export… ¦ Tilpass eksporten…
+Prénom NOM, ou choisis une fiche ¦ Meno PRIEZVISKO, alebo vyber kartu ¦ Fornavn ETTERNAVN, eller velg en oppføring
+Père, mère, mariage et enfants en une seule saisie ¦ Otec, matka, sobáš a deti jedným zápisom ¦ Far, mor, ekteskap og barn i én registrering
+Père, mère, mariage et enfants en une seule saisie. Pour chaque nom : choisis une fiche existante, ou tape « Prénom NOM » pour en créer une. ¦ Otec, matka, sobáš a deti jedným zápisom. Pri každom mene: vyber existujúcu kartu, alebo napíš „Meno PRIEZVISKO“ a vytvor novú. ¦ Far, mor, ekteskap og barn i én registrering. For hvert navn: velg en eksisterende oppføring, eller skriv «Fornavn ETTERNAVN» for å opprette en.
+Recherche du chemin… ¦ Hľadanie cesty… ¦ Søker veien…
+Remis : {f} ¦ Vrátené: {f} ¦ Lagt tilbake: {f}
+Rien à exporter dans cet écran. ¦ Na tejto obrazovke nie je čo exportovať. ¦ Ingenting å eksportere på denne skjermen.
+SAISIE RAPIDE ¦ RÝCHLY ZÁPIS ¦ HURTIGREGISTRERING
+Sans aucune source ¦ Bez akéhokoľvek zdroja ¦ Uten noen kilde
+Sans parents ¦ Bez rodičov ¦ Uten foreldre
+Sans parents connus ¦ Bez známych rodičov ¦ Uten kjente foreldre
+Sous chaque nom : son lien de parenté avec la personne de départ. ¦ Pod každým menom: jeho príbuzenský vzťah k východiskovej osobe. ¦ Under hvert navn: slektskapet med startpersonen.
+TON LIEN ¦ TVOJ VZŤAH ¦ DITT SLEKTSKAP
+Tableau (CSV) ¦ Tabuľka (CSV) ¦ Tabell (CSV)
+Ton lien avec cette personne ¦ Tvoj vzťah k tejto osobe ¦ Ditt slektskap med denne personen
+Ton lien avec cette personne (depuis {nm}) — clique pour voir le chemin. ¦ Tvoj vzťah k tejto osobe (od {nm}) — klikni a uvidíš cestu. ¦ Ditt slektskap med denne personen (fra {nm}) — klikk for å se veien.
+Tous les genres ¦ Všetky pohlavia ¦ Alle kjønn
+Un enfant sans nom de famille prend celui du père. ¦ Dieťa bez priezviska dostane priezvisko otca. ¦ Et barn uten etternavn får farens.
+Voir la note de recherche ¦ Zobraziť poznámku k pátraniu ¦ Vis forskningsnotatet
+conjoint de ¦ manžel(ka) ¦ ektefelle til
+enfant de ¦ dieťa ¦ barn av
+ex. à vérifier : cote 3 E 125, piste : registre de la paroisse voisine ¦ napr. na overenie: signatúra 3 E 125, stopa: matrika susednej farnosti ¦ f.eks. må sjekkes: signatur 3 E 125, spor: nabosognets kirkebok
+inconnu(e) ¦ neznámy/a ¦ ukjent
+par {nm} ¦ od {nm} ¦ av {nm}
+parent de ¦ rodič ¦ forelder til
+{a}–{b} ¦ {a}–{b} ¦ {a}–{b}
+{nm} avait environ {age} ¦ {nm} mal(a) asi {age} ¦ {nm} var omtrent {age}
+{nm} avait moins d’un an ¦ {nm} mal(a) menej ako rok ¦ {nm} var under ett år
+{nm} avait {age} ¦ {nm} mal(a) {age} ¦ {nm} var {age}
+{n} pesée(s) · dernière : {w} le {d} ¦ Váženia: {n} · posledné: {w} dňa {d} ¦ {n} veiing(er) · siste: {w} den {d}
+{n} {what} ¦ {n} {what} ¦ {n} {what}
+{n} étape(s) depuis la personne de départ. ¦ Krokov od východiskovej osoby: {n}. ¦ {n} trinn fra startpersonen.
+{s} depuis la première ¦ {s} od prvej ¦ {s} siden den første
+Événement confidentiel : caché en consultation, dans les exports, les partages et le site. ¦ Dôverná udalosť: skrytá v režime prehliadania, v exportoch, zdieľaniach a na webe. ¦ Konfidensiell hendelse: skjult i visningsmodus, i eksporter, delinger og på nettstedet.
+à {x} ¦ na {x} ¦ til {x}
+↩ Remettre ¦ ↩ Vrátiť ¦ ↩ Sett tilbake
+⇆ Comparer avec maintenant ¦ ⇆ Porovnať so súčasným stavom ¦ ⇆ Sammenlign med nå
+⚡ ＋ Famille ¦ ⚡ ＋ Rodina ¦ ⚡ ＋ Familie
+✓ Garder celle-ci ¦ ✓ Ponechať túto ¦ ✓ Behold denne
+✓ Remis ¦ ✓ Vrátené ¦ ✓ Satt tilbake
+＋ Un enfant de plus ¦ ＋ Ďalšie dieťa ¦ ＋ Ett barn til
+👪 Fiche familiale ¦ 👪 Rodinný list ¦ 👪 Familieark
+📈 Animal : poids et croissance ¦ 📈 Zviera: hmotnosť a rast ¦ 📈 Dyr: vekt og vekst
+📝 Avec une note de recherche ¦ 📝 S poznámkou k pátraniu ¦ 📝 Med et forskningsnotat
+📝 Note de recherche (à vérifier, cote, piste) ¦ 📝 Poznámka k pátraniu (na overenie, signatúra, stopa) ¦ 📝 Forskningsnotat (må sjekkes, signatur, spor)
+📝 Note de recherche : {x} ¦ 📝 Poznámka k pátraniu: {x} ¦ 📝 Forskningsnotat: {x}
+🔒 confidentiel ¦ 🔒 dôverné ¦ 🔒 konfidensiell
+🔒 Événement confidentiel ¦ 🔒 Dôverná udalosť ¦ 🔒 Konfidensiell hendelse
+🧭 Aucun lien connu ¦ 🧭 Žiadny známy vzťah ¦ 🧭 Ingen kjent slektskap
+🧭 Personne de départ ¦ 🧭 Východisková osoba ¦ 🧭 Startperson
+🧭 Ton lien ¦ 🧭 Tvoj vzťah ¦ 🧭 Ditt slektskap
+🧭 Ton lien avec cette personne ¦ 🧭 Tvoj vzťah k tejto osobe ¦ 🧭 Ditt slektskap med denne personen
+🧭 personne de départ ¦ 🧭 východisková osoba ¦ 🧭 startperson
+Nouveau… dans l’onglet ouvert (une personne dans Personnes) ¦ Nový… v otvorenej záložke (osoba v Osobách) ¦ Ny… i den åpne fanen (en person i Personer)
+Annuler la dernière modification d’une fiche (hors d’une case de texte, tout de suite, avec « ↷ Rétablir ») ¦ Vrátiť späť poslednú zmenu karty (mimo textového poľa, okamžite, s „↷ Znova“) ¦ Angre den siste endringen av en oppføring (utenfor et tekstfelt, med en gang, med «↷ Gjør om»)
+Exporter ce que montre l’onglet ouvert (⤓ Exporter) ¦ Exportovať to, čo ukazuje otvorená záložka (⤓ Exportovať) ¦ Eksporter det den åpne fanen viser (⤓ Eksporter)
+Chercher dans la colonne de gauche ¦ Hľadať v ľavom stĺpci ¦ Søk i venstre kolonne
+Aucune personne ne correspond à ces filtres. ¦ Týmto filtrom nezodpovedá žiadna osoba. ¦ Ingen person passer til disse filtrene.
+Retire un filtre (Filtrer ▾) ou change le tri. ¦ Odober filter (Filtrovať ▾) alebo zmeň radenie. ¦ Fjern et filter (Filtrer ▾) eller endre sorteringen.
+Peau ¦ Pleť ¦ Hud
+Origine / mention ¦ Pôvod / zmienka ¦ Opprinnelse / omtale
+Mention conjoint ¦ Zmienka o manželovi ¦ Omtale av ektefelle
+Mention enfants ¦ Zmienka o deťoch ¦ Omtale av barn
+Date alternative ¦ Alternatívny dátum ¦ Alternativ dato
+Lieu (n°) ¦ Miesto (č.) ¦ Sted (nr.)
+Type (n°) ¦ Typ (č.) ¦ Type (nr.)
+Confidentiel ¦ Dôverné ¦ Konfidensiell
+A : « {a} » ({na}) · B : « {b} » ({nb}) → {n} personne(s) {op}. ¦ A: „{a}“ ({na}) · B: „{b}“ ({nb}) → osôb: {n} {op}. ¦ A: «{a}» ({na}) · B: «{b}» ({nb}) → {n} person(er) {op}.
+Acte à commander supprimé ¦ Záznam na objednanie vymazaný ¦ Dokument å bestille slettet
+Ajouter à une liste ¦ Pridať do zoznamu ¦ Legg til i en liste
+Apparence (thème, couleurs, police) ¦ Vzhľad (motív, farby, písmo) ¦ Utseende (tema, farger, skrift)
+Aucune citation ne contient ce texte. ¦ Žiadny citát neobsahuje tento text. ¦ Ingen sitater inneholder denne teksten.
+Aucune de « Mes listes » ne contient des personnes : crée-en une dans Réglages → Éditeur de listes. ¦ Žiadny z „Mojich zoznamov“ neobsahuje osoby: vytvor si ho v Nastaveniach → Editor zoznamov. ¦ Ingen av «Mine lister» inneholder personer: opprett en i Innstillinger → Listeredigering.
+Aucune ligne ne contient « {find} ». ¦ Žiadny riadok neobsahuje „{find}“. ¦ Ingen linje inneholder «{find}».
+Aucune source ne contient ce texte. ¦ Žiadny zdroj neobsahuje tento text. ¦ Ingen kilde inneholder denne teksten.
+Ce qui est dans une recherche enregistrée et pas dans l’autre (ex. les Sosa nés en Corrèze sans acte de baptême) : pour trouver les trous. ¦ Čo je v jednom uloženom hľadaní a nie v druhom (napr. Sosa narodení v Corrèze bez krstného záznamu): na nájdenie medzier. ¦ Det som er i ett lagret søk og ikke i det andre (f.eks. Sosa født i Corrèze uten dåpsakt): for å finne hullene.
+Changer cette ligne ¦ Zmeniť tento riadok ¦ Endre denne linjen
+Chercher et remplacer : où chercher, majuscules, mot entier ¦ Nájsť a nahradiť: kde hľadať, veľké písmená, celé slovo ¦ Søk og erstatt: hvor du skal søke, store bokstaver, helt ord
+Chercher un mot dans le titre, l’auteur et le texte des sources, et dans la page et la note de chaque citation. ¦ Hľadať slovo v názve, autorovi a texte zdrojov a v strane a poznámke každého citátu. ¦ Søk etter et ord i kildenes tittel, forfatter og tekst, og i siden og notatet til hvert sitat.
+Choisis deux lieux différents. ¦ Vyber dve rôzne miesta. ¦ Velg to forskjellige steder.
+Choisis deux recherches enregistrées. ¦ Vyber dve uložené hľadania. ¦ Velg to lagrede søk.
+Choisis les deux lieux. ¦ Vyber obe miesta. ¦ Velg begge stedene.
+Choisis ou écris une étiquette. ¦ Vyber alebo napíš štítok. ¦ Velg eller skriv en etikett.
+Choisis où chercher. ¦ Vyber, kde hľadať. ¦ Velg hvor du skal søke.
+Citée ¦ Citované ¦ Sitert
+Cocher {name} ¦ Zaškrtnúť {name} ¦ Merk av {name}
+Comparer deux recherches ¦ Porovnať dve hľadania ¦ Sammenlign to søk
+Corrige une faute partout d’un coup (« cultivatr » → « cultivateur »). Tu vois d’abord chaque ligne qui changerait ; décoche celles à garder. « ↶ Annuler » remet tout comme avant. ¦ Oprav chybu všade naraz („cultivatr“ → „cultivateur“). Najprv uvidíš každý riadok, ktorý by sa zmenil; odškrtni tie, ktoré chceš ponechať. „↶ Späť“ vráti všetko, ako bolo. ¦ Rett en feil overalt på én gang («cultivatr» → «cultivateur»). Du ser først hver linje som ville blitt endret; fjern avkrysningen for dem du vil beholde. «↶ Angre» setter alt tilbake som før.
+Dernières recherches vidées ¦ Posledné hľadania vymazané ¦ Siste søk tømt
+Descriptions des événements ¦ Popisy udalostí ¦ Beskrivelser av hendelser
+Définition supprimée ¦ Definícia vymazaná ¦ Definisjon slettet
+Dépouillement supprimé ¦ Výpis vymazaný ¦ Gjennomgang slettet
+Essaie un autre lien ou moins de critères. ¦ Skús iný vzťah alebo menej kritérií. ¦ Prøv et annet slektskap eller færre kriterier.
+Ex : Poilu, À vérifier… ¦ Napr.: Poilu, Na overenie… ¦ F.eks.: Poilu, Må sjekkes…
+Ex : cultivateur (vide = effacer) ¦ Napr.: cultivateur (prázdne = vymazať) ¦ F.eks.: cultivateur (tomt = slett)
+Ex : cultivatr ¦ Napr.: cultivatr ¦ F.eks.: cultivatr
+Ex : registre paroissial, folio 12, Tulle… ¦ Napr.: farská matrika, fólio 12, Tulle… ¦ F.eks.: kirkebok, folio 12, Tulle…
+Extrait ¦ Úryvok ¦ Utdrag
+Fais-les dans « Recherche multicritère », puis « Enregistrer ». ¦ Vytvor ich v „Hľadaní podľa viacerých kritérií“ a potom „Uložiť“. ¦ Lag dem i «Søk med flere kriterier», og så «Lagre».
+Graphiques et tableau de bord ¦ Grafy a prehľad ¦ Diagrammer og oversikt
+Il faut au moins deux recherches enregistrées. ¦ Sú potrebné aspoň dve uložené hľadania. ¦ Det trengs minst to lagrede søk.
+Lacune supprimée ¦ Medzera vymazaná ¦ Hull slettet
+Les recherches enregistrées ne sont pas disponibles. ¦ Uložené hľadania nie sú k dispozícii. ¦ De lagrede søkene er ikke tilgjengelige.
+Lien de parenté inconnu. ¦ Neznámy príbuzenský vzťah. ¦ Ukjent slektskap.
+Ligne de transcription supprimée ¦ Riadok prepisu vymazaný ¦ Transkripsjonslinje slettet
+Mot entier seulement ¦ Len celé slovo ¦ Bare hele ord
+Neveux et nièces ¦ Synovci a netere ¦ Nevøer og nieser
+Nom de table invalide. ¦ Neplatný názov tabuľky. ¦ Ugyldig tabellnavn.
+Noms de lieux ¦ Názvy miest ¦ Stedsnavn
+Nouvelle étiquette… ¦ Nový štítok… ¦ Ny etikett…
+Nés en ou après ¦ Narodení v roku alebo po ¦ Født i eller etter
+Nés en ou avant ¦ Narodení v roku alebo pred ¦ Født i eller før
+Oncles et tantes ¦ Strýkovia a tety ¦ Onkler og tanter
+Onglets ajoutés au menu ¦ Záložky pridané do ponuky ¦ Faner lagt til i menyen
+Onglets cachés du menu ¦ Záložky skryté z ponuky ¦ Faner skjult i menyen
+Ordre des types de recherche ¦ Poradie typov hľadania ¦ Rekkefølge for søketyper
+Ordre du menu ¦ Poradie ponuky ¦ Menyrekkefølge
+Ouvrir la recherche multicritère ¦ Otvoriť hľadanie podľa viacerých kritérií ¦ Åpne søk med flere kriterier
+Où chercher ¦ Kde hľadať ¦ Hvor du skal søke
+Personne relevée retirée ¦ Zapísaná osoba odobratá ¦ Notert person fjernet
+Puis le lien de parenté cherché. ¦ Potom hľadaný príbuzenský vzťah. ¦ Så slektskapet du søker.
+Rangement des pages des Réglages ¦ Usporiadanie stránok Nastavení ¦ Ordning av sidene i Innstillinger
+Recherche A ¦ Hľadanie A ¦ Søk A
+Recherche B ¦ Hľadanie B ¦ Søk B
+Recherche dans les sources… ¦ Hľadanie v zdrojoch… ¦ Søker i kildene…
+Recherche dans l’arbre… ¦ Hľadanie v strome… ¦ Søker i treet…
+Recherche des lignes à changer… ¦ Hľadanie riadkov na zmenu… ¦ Søker linjer som skal endres…
+Recherche par lien de parenté ¦ Hľadanie podľa príbuzenského vzťahu ¦ Søk etter slektskap
+Respecter les majuscules ¦ Rozlišovať veľké písmená ¦ Skill mellom store og små bokstaver
+Rien de coché : les actions portent sur les {t} résultats ¦ Nič nie je zaškrtnuté: akcie sa týkajú všetkých {t} výsledkov ¦ Ingenting avkrysset: handlingene gjelder de {t} resultatene
+Règle introuvable. ¦ Pravidlo sa nenašlo. ¦ Fant ikke regelen.
+Règle supprimée ¦ Pravidlo vymazané ¦ Regel slettet
+Résultats de la recherche ¦ Výsledky hľadania ¦ Søkeresultater
+Sections ouvertes ou fermées ¦ Otvorené alebo zatvorené sekcie ¦ Åpne eller lukkede seksjoner
+Seulement les décédés ¦ Len zosnulí ¦ Bare døde
+Seulement les vivants ¦ Len žijúci ¦ Bare levende
+Seules les {n} premières lignes sont montrées ; « Remplacer » change les lignes cochées. ¦ Zobrazených je len prvých {n} riadkov; „Nahradiť“ zmení zaškrtnuté riadky. ¦ Bare de første {n} linjene vises; «Erstatt» endrer de avkryssede linjene.
+Sources et citations ¦ Zdroje a citáty ¦ Kilder og sitater
+Suppression impossible ici. ¦ Tu sa nedá mazať. ¦ Kan ikke slettes her.
+Tape au moins deux lettres. ¦ Napíš aspoň dve písmená. ¦ Skriv minst to bokstaver.
+Tape le texte à chercher. ¦ Napíš text, ktorý chceš hľadať. ¦ Skriv teksten du vil søke etter.
+Texte à chercher ¦ Hľadaný text ¦ Tekst å søke etter
+Texte à chercher trop long. ¦ Hľadaný text je príliš dlhý. ¦ Søketeksten er for lang.
+Tous les ancêtres ¦ Všetci predkovia ¦ Alle aner
+Tous les descendants ¦ Všetci potomkovia ¦ Alle etterkommere
+Trouvé dans ¦ Nájdené v ¦ Funnet i
+Type d’événement supprimé ¦ Typ udalosti vymazaný ¦ Hendelsestype slettet
+Types de recherche cachés ¦ Skryté typy hľadania ¦ Skjulte søketyper
+Vider la liste ¦ Vyprázdniť zoznam ¦ Tøm listen
+Vivant(e) ¦ Žijúci/a ¦ Levende
+Vivants et décédés ¦ Žijúci aj zosnulí ¦ Levende og døde
+dans A et dans B ¦ v A aj v B ¦ i A og i B
+dans A mais pas dans B ¦ v A, ale nie v B ¦ i A men ikke i B
+dans A ou dans B ¦ v A alebo v B ¦ i A eller i B
+dans une seule des deux ¦ len v jednom z oboch ¦ i bare én av dem
+{n} cochée(s) sur {t} ¦ zaškrtnuté {n} z {t} ¦ {n} avkrysset av {t}
+{n} ligne(s) cochée(s) sur {t} ¦ zaškrtnuté riadky: {n} z {t} ¦ {n} avkryssede linjer av {t}
+{rel} de {name} : {n} personne(s). ¦ {rel}: {name}: osôb: {n}. ¦ {rel} til {name}: {n} person(er).
+« Tous les cousins germains de… », « les descendants vivants de… nés après 1900 » : choisis une personne et un lien. ¦ „Všetci bratranci a sesternice…“, „žijúci potomkovia… narodení po roku 1900“: vyber osobu a vzťah. ¦ «Alle søskenbarn av…», «levende etterkommere av… født etter 1900»: velg en person og et slektskap.
+Étiqueter {n} personne(s) ¦ Označiť štítkom osoby: {n} ¦ Merk {n} person(er) med etikett
+⟳ Recharger la page ¦ ⟳ Znova načítať stránku ¦ ⟳ Last inn siden på nytt
+🏷 « {label} » posée sur {n} personne(s) ¦ 🏷 „{label}“ pridaný k osobám: {n} ¦ 🏷 «{label}» satt på {n} person(er)
+🏷 Étiqueter ¦ 🏷 Označiť štítkom ¦ 🏷 Merk med etikett
+📊 Comparer deux recherches ¦ 📊 Porovnať dve hľadania ¦ 📊 Sammenlign to søk
+📑 Ajouter à Mes listes ¦ 📑 Pridať do Mojich zoznamov ¦ 📑 Legg til i Mine lister
+📑 {n} personne(s) ajoutée(s) à « {list} » ¦ 📑 Pridané osoby do „{list}“: {n} ¦ 📑 {n} person(er) lagt til i «{list}»
+📚 Sources ({n}) ¦ 📚 Zdroje ({n}) ¦ 📚 Kilder ({n})
+🔁 Chercher et remplacer ¦ 🔁 Nájsť a nahradiť ¦ 🔁 Søk og erstatt
+🔁 Remplacer ¦ 🔁 Nahradiť ¦ 🔁 Erstatt
+🔁 Remplacer ({n}) ¦ 🔁 Nahradiť ({n}) ¦ 🔁 Erstatt ({n})
+🔁 {n} remplacement(s) faits ¦ 🔁 Vykonané nahradenia: {n} ¦ 🔁 {n} erstatning(er) utført
+🔎 Ce que j’ai changé ¦ 🔎 Čo som zmenil ¦ 🔎 Det jeg har endret
+🔒 {n} ligne(s) d’une fiche verrouillée : elles ne changeront pas. ¦ 🔒 Riadky zamknutej karty ({n}): nezmenia sa. ¦ 🔒 {n} linje(r) i en låst oppføring: de endres ikke.
+🔖 Citations ({n}) ¦ 🔖 Citáty ({n}) ¦ 🔖 Sitater ({n})
+🕘 Dernières recherches ¦ 🕘 Posledné hľadania ¦ 🕘 Siste søk
+🗄 Santé de la base ¦ 🗄 Stav databázy ¦ 🗄 Databasens tilstand
+🧬 Lien de parenté ¦ 🧬 Príbuzenský vzťah ¦ 🧬 Slektskap
+🧾 Sources et citations ¦ 🧾 Zdroje a citáty ¦ 🧾 Kilder og sitater
+Lieux « {q} » ¦ Miesta „{q}“ ¦ Steder «{q}»
+Transcriptions « {q} » ¦ Prepisy „{q}“ ¦ Transkripsjoner «{q}»
+Export impossible : les événements confidentiels n’ont pas pu être retirés. Réessaie dans un instant. ¦ Export nie je možný: dôverné udalosti sa nepodarilo odobrať. Skús to o chvíľu znova. ¦ Eksport ikke mulig: de konfidensielle hendelsene kunne ikke fjernes. Prøv igjen om litt.
+Les événements confidentiels n’ont pas pu être cachés : réessaie dans un instant. ¦ Dôverné udalosti sa nepodarilo skryť: skús to o chvíľu znova. ¦ De konfidensielle hendelsene kunne ikke skjules: prøv igjen om litt.
+, ni les fiches et événements confidentiels. ¦ , ani dôverné karty a udalosti. ¦ , heller ikke konfidensielle oppføringer og hendelser.
+🔒  ¦ 🔒  ¦ 🔒 
+📤 Envoyer vers… ¦ 📤 Poslať do… ¦ 📤 Send til…
+Dans une nouvelle présentation ¦ Do novej prezentácie ¦ Til en ny presentasjon
+Dans un nouveau diaporama ¦ Do novej prezentácie fotiek ¦ Til en ny lysbildefremvisning
+Dans un livre de la Mise en page… ¦ Do knihy v Rozložení… ¦ Til en bok i Oppsett…
+Dans un nouveau document (Traitement de texte) ¦ Do nového dokumentu (Textový editor) ¦ Til et nytt dokument (Tekstbehandling)
+Dans le Tableur ¦ Do Tabuľkového procesora ¦ Til Regneark
+Sur une page de mon site… ¦ Na stránku môjho webu… ¦ Til en side på nettstedet mitt…
+Dans la Retouche des photos ¦ Do Úpravy fotiek ¦ Til Bilderedigering
+Comparer avec une autre photo ¦ Porovnať s inou fotkou ¦ Sammenlign med et annet bilde
+Dans l’Atelier de transcription ¦ Do Dielne prepisu ¦ Til Transkripsjonsverkstedet
+Dans le Dessin vectoriel ¦ Do Vektorovej kresby ¦ Til Vektortegning
+Dans les Traitements par lot ¦ Do Hromadných úprav ¦ Til Massebehandling
+Envoyer les images vers… ¦ Poslať obrázky do… ¦ Send bildene til…
+Envoyer le texte vers… ¦ Poslať text do… ¦ Send teksten til…
+Envoyer le tableau vers… ¦ Poslať tabuľku do… ¦ Send tabellen til…
+Envoyer le son vers… ¦ Poslať zvuk do… ¦ Send lyden til…
+Envoyer la vidéo vers… ¦ Poslať video do… ¦ Send videoen til…
+Envoyer le dessin vers… ¦ Poslať kresbu do… ¦ Send tegningen til…
+Rangement du son dans les médias… ¦ Ukladanie zvuku do médií… ¦ Lagrer lyden i medier…
+Rangement de la vidéo dans les médias… ¦ Ukladanie videa do médií… ¦ Lagrer videoen i medier…
+Rien à envoyer. ¦ Nie je čo poslať. ¦ Ingenting å sende.
+Aucun outil ne peut recevoir ça pour l’instant. ¦ Zatiaľ to nemôže prijať žiadny nástroj. ¦ Ingen verktøy kan ta imot det ennå.
+En image (montage, studio, présentation, document…) ¦ Ako obrázok (strih, štúdio, prezentácia, dokument…) ¦ Som bilde (redigering, studio, presentasjon, dokument…)
+En dessin, net à toutes les tailles (livre, site…) ¦ Ako kresba, ostrá v každej veľkosti (kniha, web…) ¦ Som tegning, skarp i alle størrelser (bok, nettsted…)
+＋ Nouvelle crise ¦ ＋ Nová kríza ¦ ＋ Ny krise
+Modifier cette crise ¦ Upraviť túto krízu ¦ Endre denne krisen
+Supprimer cette crise ¦ Vymazať túto krízu ¦ Slett denne krisen
+Nouvelle crise ¦ Nová kríza ¦ Ny krise
+Modifier la crise ¦ Upraviť krízu ¦ Endre krisen
+ÉPIDÉMIES, GUERRES, HIVERS TERRIBLES ¦ EPIDÉMIE, VOJNY, KRUTÉ ZIMY ¦ EPIDEMIER, KRIGER, FRYKTELIGE VINTRE
+Les grandes crises de l’histoire de France à côté des décès de ta famille : pour comprendre une vague de morts (choléra de 1832, Grand Hiver de 1709, grippe espagnole…). Ajoute les tiennes : une épidémie au village, un incendie, une inondation… ¦ Veľké krízy francúzskych dejín vedľa úmrtí v tvojej rodine: aby si pochopil vlnu úmrtí (cholera 1832, Veľká zima 1709, španielska chrípka…). Pridaj svoje vlastné: epidémiu v dedine, požiar, povodeň… ¦ De store krisene i Frankrikes historie ved siden av dødsfallene i familien din: for å forstå en bølge av dødsfall (kolera i 1832, Den store vinteren 1709, spanskesyken…). Legg til dine egne: en epidemi i bygda, en brann, en flom…
+▦ Vignettes ¦ ▦ Náhľady ¦ ▦ Miniatyrer
+🏷 Par éditeur ¦ 🏷 Podľa vydavateľa ¦ 🏷 Etter forlag
+📍 Par lieu ¦ 📍 Podľa miesta ¦ 📍 Etter sted
+✉️ Écrites / vierges ¦ ✉️ Popísané / nepopísané ¦ ✉️ Skrevne / ubeskrevne
+Survole pour voir le verso ¦ Prejdi myšou a uvidíš rub ¦ Hold musepekeren over for å se baksiden
+Aucune fiche de carte postale pour l’instant ¦ Zatiaľ žiadna karta pohľadnice ¦ Ingen postkortoppføring ennå
+Listes → 🏞 Cartes postales : donne à chaque carte son éditeur, son numéro, son lieu, son recto et son verso. ¦ Zoznamy → 🏞 Pohľadnice: daj každej pohľadnici vydavateľa, číslo, miesto, líc a rub. ¦ Lister → 🏞 Postkort: gi hvert kort forlag, nummer, sted, forside og bakside.
+Éditeur inconnu ¦ Neznámy vydavateľ ¦ Ukjent forlag
+Écrites ou envoyées ¦ Popísané alebo odoslané ¦ Skrevne eller sendte
+Vierges (jamais envoyées) ¦ Nepopísané (nikdy neodoslané) ¦ Ubeskrevne (aldri sendt)
+Il manque les n° {n} ¦ Chýbajú č. {n} ¦ Nr. {n} mangler
+Il manque le n° {n} ¦ Chýba č. {n} ¦ Nr. {n} mangler
+cartes ¦ pohľadníc ¦ kort
+Marge de « vers » ¦ Rozpätie pre „okolo“ ¦ Margin for «omkring»
+Portée de « avant » / « après » ¦ Dosah „pred“ / „po“ ¦ Rekkevidde for «før» / «etter»
+Longueur d’une vie sans fin connue ¦ Dĺžka života bez známeho konca ¦ Livslengde uten kjent slutt
+Ouvrir dans le Tableur… ¦ Otvoriť v Tabuľkovom procesore… ¦ Åpne i Regneark…
+🧾 Ouvrir les invités dans le Tableur ¦ 🧾 Otvoriť hostí v Tabuľkovom procesore ¦ 🧾 Åpne gjestene i Regneark
+📤 Envoyer le tableau des invités ¦ 📤 Poslať tabuľku hostí ¦ 📤 Send gjestetabellen
+🧾 Ouvrir dans le Tableur ¦ 🧾 Otvoriť v Tabuľkovom procesore ¦ 🧾 Åpne i Regneark
+Le tableau des invités, avec leur branche, leur lien de parenté et leur réponse. ¦ Tabuľka hostí s ich vetvou, príbuzenským vzťahom a odpoveďou. ¦ Gjestetabellen, med gren, slektskap og svar.
+Toutes les photos de l’album : un diaporama, un film, un traitement par lot… ¦ Všetky fotky albumu: prezentácia fotiek, film, hromadné spracovanie… ¦ Alle bildene i albumet: en lysbildefremvisning, en film, en satsvis behandling…
+Album — {nm} ¦ Album — {nm} ¦ Album — {nm}
+Descendance (de haut en bas, une couleur par branche) ¦ Rozrod (zhora nadol, jedna farba na vetvu) ¦ Etterkommere (ovenfra og ned, én farge per gren)
+La descendance a besoin de l’outil Cousinades, qui n’est pas chargé. ¦ Rozrod potrebuje nástroj Rodinné stretnutia, ktorý nie je načítaný. ¦ Etterkommerne trenger verktøyet Slektstreff, som ikke er lastet.
+Aucune descendance pour cette personne. ¦ Táto osoba nemá žiadnych potomkov. ¦ Ingen etterkommere for denne personen.
+Aucun enfant connu pour cette personne : pas de descendance à dessiner. ¦ Táto osoba nemá žiadne známe dieťa: nie je čo kresliť. ¦ Ingen kjente barn for denne personen: ingen etterkommere å tegne.
+La descendance de {nm} ¦ Rozrod: {nm} ¦ Etterkommerne til {nm}
+la famille ¦ rodina ¦ familien
+L’arbre (en fond) ¦ Strom (v pozadí) ¦ Treet (i bakgrunnen)
+📰 En faire un faire-part ¦ 📰 Urobiť z toho oznámenie ¦ 📰 Lag et kunngjøringskort av det
+Créer le faire-part ¦ Vytvoriť oznámenie ¦ Opprett kunngjøringskortet
+L’arbre se pose en fond, derrière les textes du faire-part. Tout s’ouvre ensuite dans le dessin vectoriel pour le retoucher. ¦ Strom sa umiestni do pozadia za texty oznámenia. Všetko sa potom otvorí vo vektorovej kresbe na úpravy. ¦ Treet legges i bakgrunnen, bak tekstene på kunngjøringskortet. Alt åpnes så i vektortegningen så du kan finjustere.
+L’arbre derrière le texte ¦ Strom za textom ¦ Treet bak teksten
+Très pâle ¦ Veľmi bledý ¦ Svært blek
+Pâle ¦ Bledý ¦ Blek
+Bien visible ¦ Dobre viditeľný ¦ Godt synlig
+Fabrication du faire-part… ¦ Výroba oznámenia… ¦ Lager kunngjøringskortet…
+Personne à dessiner dans l’arbre. ¦ Osoba, ktorú nakresliť v strome. ¦ Person som skal tegnes i treet.
+L’arbre en fond d’un faire-part de cousinade ou de noces ¦ Strom v pozadí oznámenia rodinného stretnutia alebo svadby ¦ Treet i bakgrunnen på et kunngjøringskort for slektstreff eller bryllup
+En faire un faire-part ¦ Urobiť z toho oznámenie ¦ Lag et kunngjøringskort av det
+Les mêmes réglages, un faire-part pour chaque personne (une liste, une étiquette) ou chaque foyer d’une cousinade, tous dans un seul PDF ¦ Rovnaké nastavenia, jedno oznámenie pre každú osobu (zoznam, štítok) alebo každú domácnosť rodinného stretnutia, všetko v jednom PDF ¦ Samme innstillinger, et kunngjøringskort for hver person (en liste, en etikett) eller hver husstand i et slektstreff, alle i én PDF
+Un faire-part par personne / par foyer… ¦ Jedno oznámenie na osobu / na domácnosť… ¦ Et kunngjøringskort per person / per husstand…
+📬 Un faire-part par personne / par foyer ¦ 📬 Jedno oznámenie na osobu / na domácnosť ¦ 📬 Et kunngjøringskort per person / per husstand
+📄 Fabriquer le PDF ¦ 📄 Vytvoriť PDF ¦ 📄 Lag PDF-en
+Le faire-part tel que tu l’as réglé, une fois pour chaque personne ou chaque foyer. Tous les faire-part sont rangés dans un seul PDF, prêt à imprimer. ¦ Oznámenie tak, ako si ho nastavil, raz pre každú osobu alebo domácnosť. Všetky oznámenia sú v jednom PDF pripravenom na tlač. ¦ Kunngjøringskortet slik du har stilt det inn, én gang for hver person eller husstand. Alle kortene samles i én PDF, klar til utskrift.
+Une liste de personnes ¦ Zoznam osôb ¦ En liste med personer
+Les personnes d’une étiquette ¦ Osoby so štítkom ¦ Personene med en etikett
+Les foyers d’une cousinade ¦ Domácnosti rodinného stretnutia ¦ Husstandene i et slektstreff
+La cousinade (les foyers invités) ¦ Rodinné stretnutie (pozvané domácnosti) ¦ Slektstreffet (inviterte husstander)
+Dans les champs du faire-part, ces mots se remplacent pour chacun : ¦ V poliach oznámenia sa tieto slová nahradia pre každého: ¦ I feltene på kunngjøringskortet byttes disse ordene ut for hver enkelt:
+(cousinade : aussi {titre}, {date}, {lieu}, {ancetre}…) ¦ (rodinné stretnutie: aj {titre}, {date}, {lieu}, {ancetre}…) ¦ (slektstreff: også {titre}, {date}, {lieu}, {ancetre}…)
+Le nom de la personne (ou du foyer) en haut de chaque faire-part ¦ Meno osoby (alebo domácnosti) hore na každom oznámení ¦ Navnet på personen (eller husstanden) øverst på hvert kort
+Remplir aussi depuis la fiche de chacun (noms, dates, lieux) ¦ Doplniť aj z karty každého (mená, dátumy, miesta) ¦ Fyll også ut fra hver enkelts oppføring (navn, datoer, steder)
+L’enveloppe de chacun porte son adresse. ¦ Obálka každého nesie jeho adresu. ¦ Konvolutten til hver enkelt får adressen deres.
+Aucun foyer invité dans cette cousinade : coche des invités d’abord. ¦ V tomto rodinnom stretnutí nie je pozvaná žiadna domácnosť: najprv zaškrtni hostí. ¦ Ingen inviterte husstander i dette slektstreffet: kryss av gjester først.
+Fabrication de {n} faire-part… ¦ Výroba oznámení: {n}… ¦ Lager {n} kunngjøringskort…
+{i} sur {n}… ¦ {i} z {n}… ¦ {i} av {n}…
+{n} faire-part dans un seul PDF ({p} pages). ¦ Oznámenia: {n} v jednom PDF (strán: {p}). ¦ {n} kunngjøringskort i én PDF ({p} sider).
+Le dessin vectoriel n’est pas chargé : le PDF ne peut pas être fabriqué. ¦ Vektorová kresba nie je načítaná: PDF sa nedá vytvoriť. ¦ Vektortegningen er ikke lastet: PDF-en kan ikke lages.
+Une action de la Retouche ¦ Akcia z Úpravy fotiek ¦ En handling fra Bilderedigering
+Une action enregistrée dans la Retouche des photos (Fichier → Actions), sur chaque image. ¦ Akcia uložená v Úprave fotiek (Súbor → Akcie), na každom obrázku. ¦ En handling lagret i Bilderedigering (Fil → Handlinger), på hvert bilde.
+aucune action choisie ¦ nie je vybraná žiadna akcia ¦ ingen handling valgt
+La Retouche des photos n’est pas chargée : l’action « {name} » ne peut pas se faire. ¦ Úprava fotiek nie je načítaná: akciu „{name}“ nemožno vykonať. ¦ Bilderedigering er ikke lastet: handlingen «{name}» kan ikke utføres.
+L’action « {name} » de la Retouche n’a rien rendu. ¦ Akcia „{name}“ z Úpravy nevrátila nič. ¦ Handlingen «{name}» i Bilderedigering ga ingenting.
+La Retouche des photos n’est pas chargée : cette étape ne pourra pas se faire. ¦ Úprava fotiek nie je načítaná: tento krok nebude možné vykonať. ¦ Bilderedigering er ikke lastet: dette trinnet kan ikke utføres.
+Aucune action enregistrée dans la Retouche. Ouvre une photo dans la Retouche, puis Fichier → Actions pour en enregistrer une. ¦ V Úprave nie je uložená žiadna akcia. Otvor fotku v Úprave, potom Súbor → Akcie a nejakú ulož. ¦ Ingen handling lagret i Bilderedigering. Åpne et bilde i Bilderedigering, og så Fil → Handlinger for å lagre en.
+L’action ¦ Akcia ¦ Handlingen
+Choisir une action… ¦ Vybrať akciu… ¦ Velg en handling…
+Une action enregistrée dans la Retouche des photos, faite sur chaque image du lot. ¦ Akcia uložená v Úprave fotiek, vykonaná na každom obrázku dávky. ¦ En handling lagret i Bilderedigering, utført på hvert bilde i bunken.
+Les images rangées dans les médias par ce lot : un diaporama, un montage… ¦ Obrázky uložené touto dávkou do médií: prezentácia fotiek, strih… ¦ Bildene som denne bunken har lagret i medier: en lysbildefremvisning, en redigering…
+Traitement par lot ¦ Hromadné spracovanie ¦ Satsvis behandling
+{x} introuvable dans les médias. ¦ {x} sa nenašlo v médiách. ¦ Fant ikke {x} i medier.
+Ouvrir cette image dans la Retouche des photos ¦ Otvoriť tento obrázok v Úprave fotiek ¦ Åpne dette bildet i Bilderedigering
+Retoucher ¦ Upraviť ¦ Rediger
+Envoyer cette image vers un autre outil ¦ Poslať tento obrázok do iného nástroja ¦ Send dette bildet til et annet verktøy
+📤 Envoyer le tableau en image vers… ¦ 📤 Poslať tabuľku ako obrázok do… ¦ 📤 Send tabellen som bilde til…
+Le dessin va dans un autre outil : un livre de la Mise en page, une page de mon site, le Dessin vectoriel… ¦ Kresba ide do iného nástroja: kniha v Rozložení, stránka môjho webu, Vektorová kresba… ¦ Tegningen går til et annet verktøy: en bok i Oppsett, en side på nettstedet mitt, Vektortegning…
+Créer et envoyer vers… ¦ Vytvoriť a poslať do… ¦ Opprett og send til…
+✒️ Placer un dessin vectoriel (arbre, carte, blason…)… ¦ ✒️ Umiestniť vektorovú kresbu (strom, mapa, erb…)… ¦ ✒️ Plasser en vektortegning (tre, kart, våpen…)…
+Dessin vectoriel placé ¦ Vektorová kresba umiestnená ¦ Vektortegning plassert
+✒️ « {name} » placé : modifié dans le Dessin vectoriel, il se met à jour ici (« ↻ Mettre à jour »). ¦ ✒️ „{name}“ umiestnená: keď ju upravíš vo Vektorovej kresbe, aktualizuje sa aj tu („↻ Aktualizovať“). ¦ ✒️ «{name}» plassert: endres den i Vektortegning, oppdateres den her («↻ Oppdater»).
+✒️ Dessin vectoriel <b>lié</b>{state} : modifié dans le Dessin vectoriel, il se redessine ici (« Mettre à jour »). ¦ ✒️ Vektorová kresba <b>prepojená</b>{state}: keď ju upravíš vo Vektorovej kresbe, prekreslí sa tu („Aktualizovať“). ¦ ✒️ Vektortegning <b>koblet</b>{state}: endres den i Vektortegning, tegnes den på nytt her («Oppdater»).
+✎ Modifier le dessin ¦ ✎ Upraviť kresbu ¦ ✎ Endre tegningen
+Le dessin reste tel quel et ne suit plus le Dessin vectoriel ¦ Kresba zostane, ako je, a už nesleduje Vektorovú kresbu ¦ Tegningen blir som den er og følger ikke lenger Vektortegning
+Dessin détaché ¦ Kresba odpojená ¦ Tegning frakoblet
+Le Dessin vectoriel n’est pas chargé. ¦ Vektorová kresba nie je načítaná. ¦ Vektortegning er ikke lastet.
+Aucun dessin vectoriel : fais-en un dans Listes → Outils de modification (Dessin vectoriel, Arbre décoratif, Carte…). ¦ Žiadna vektorová kresba: vytvor ju v Zoznamy → Nástroje úprav (Vektorová kresba, Ozdobný strom, Mapa…). ¦ Ingen vektortegning: lag en i Lister → Redigeringsverktøy (Vektortegning, Dekorativt tre, Kart…).
+PLACER ¦ UMIESTNIŤ ¦ PLASSER
+✒️ Un dessin vectoriel (arbre, carte, blason…) ¦ ✒️ Vektorová kresba (strom, mapa, erb…) ¦ ✒️ En vektortegning (tre, kart, våpen…)
+Placer ce dessin ¦ Umiestniť túto kresbu ¦ Plasser denne tegningen
+Le dessin reste lié : modifié dans le Dessin vectoriel, il se met à jour dans le livre (« ↻ Mettre à jour »). Il reste net à toutes les tailles. ¦ Kresba zostane prepojená: keď ju upravíš vo Vektorovej kresbe, aktualizuje sa v knihe („↻ Aktualizovať“). Zostane ostrá v každej veľkosti. ¦ Tegningen forblir koblet: endres den i Vektortegning, oppdateres den i boken («↻ Oppdater»). Den forblir skarp i alle størrelser.
+Choisis un dessin. ¦ Vyber kresbu. ¦ Velg en tegning.
+Le dessin n’a pas pu être lu. ¦ Kresbu sa nepodarilo prečítať. ¦ Tegningen kunne ikke leses.
+📐 Mettre dans un livre ¦ 📐 Vložiť do knihy ¦ 📐 Legg i en bok
+Mettre dans le livre ¦ Vložiť do knihy ¦ Legg i boken
+Le dessin est rangé dans les Médias (en image), puis posé sur une page à lui, dans les marges. ¦ Kresba sa uloží do Médií (ako obrázok) a potom sa umiestni na vlastnú stránku, v okrajoch. ¦ Tegningen lagres i Medier (som bilde) og legges så på en egen side, innenfor margene.
+L’image est posée sur une page à elle, dans les marges. Elle reste liée à la photo des Médias. ¦ Obrázok sa umiestni na vlastnú stránku, v okrajoch. Zostane prepojený s fotkou v Médiách. ¦ Bildet legges på en egen side, innenfor margene. Det forblir koblet til bildet i Medier.
+Rangement du dessin dans les médias… ¦ Ukladanie kresby do médií… ¦ Lagrer tegningen i medier…
+Mon livre ¦ Moja kniha ¦ Min bok
+Image ajoutée sur une nouvelle page à la fin du livre : vérifie, puis enregistre. ¦ Obrázok pridaný na novú stránku na konci knihy: skontroluj a ulož. ¦ Bilde lagt til på en ny side på slutten av boken: sjekk, og lagre så.
+Nouveau livre avec l’image : vérifie, puis enregistre le livre. ¦ Nová kniha s obrázkom: skontroluj a potom knihu ulož. ¦ Ny bok med bildet: sjekk, og lagre så boken.
+📱 Livre numérique (.epub) ¦ 📱 Elektronická kniha (.epub) ¦ 📱 E-bok (.epub)
+liseuses : Kobo, Livres, Calibre… ¦ čítačky: Kobo, Knihy, Calibre… ¦ lesebrett: Kobo, Bøker, Calibre…
+La mise en page n’est pas chargée : l’ePub ne peut pas être fait. ¦ Rozloženie nie je načítané: ePub sa nedá vytvoriť. ¦ Oppsett er ikke lastet: ePub kan ikke lages.
+« Envoyer vers… » n’est pas chargé. ¦ „Poslať do…“ nie je načítané. ¦ «Send til…» er ikke lastet.
+Retoucher cette image ¦ Upraviť tento obrázok ¦ Rediger dette bildet
+Cette image n’est pas dans les Médias : elle ne peut pas être retouchée. ¦ Tento obrázok nie je v Médiách: nedá sa upraviť. ¦ Dette bildet er ikke i Medier: det kan ikke redigeres.
+Image retouchée mise à jour dans le texte. ¦ Upravený obrázok aktualizovaný v texte. ¦ Redigert bilde oppdatert i teksten.
+Un document (Traitement de texte) ¦ Dokument (Textový editor) ¦ Et dokument (Tekstbehandling)
+le tableau dans un texte ¦ tabuľka v texte ¦ tabellen i en tekst
+📝 Créer le document ¦ 📝 Vytvoriť dokument ¦ 📝 Opprett dokumentet
+Image du graphique (PNG) : {kind} ¦ Obrázok grafu (PNG): {kind} ¦ Bilde av diagrammet (PNG): {kind}
+Le graphique n’a pas pu être dessiné. ¦ Graf sa nepodarilo nakresliť. ¦ Diagrammet kunne ikke tegnes.
+Image du graphique enregistrée : {name} ¦ Obrázok grafu uložený: {name} ¦ Bilde av diagrammet lagret: {name}
+La feuille est vide : rien à envoyer. ¦ Hárok je prázdny: nie je čo poslať. ¦ Arket er tomt: ingenting å sende.
+⤓ Image du graphique (PNG) ¦ ⤓ Obrázok grafu (PNG) ¦ ⤓ Bilde av diagrammet (PNG)
+{what} au montage, l’une après l’autre. ¦ {what} do strihu, jeden po druhom. ¦ {what} i redigeringen, én etter én.
+image ajoutée ¦ obrázok pridaný ¦ bilde lagt til
+images ajoutées ¦ obrázky pridané ¦ bilder lagt til
+sous-titre ajouté ¦ titulok pridaný ¦ undertekst lagt til
+sous-titres ajoutés ¦ titulky pridané ¦ undertekster lagt til
+Le fabricant de GIF n’est pas chargé. ¦ Výroba GIF nie je načítaná. ¦ GIF-verktøyet er ikke lastet.
+🎞 GIF animé ¦ 🎞 Animovaný GIF ¦ 🎞 Animert GIF
+sans son, petit, tourne en boucle ¦ bez zvuku, malý, v slučke ¦ uten lyd, liten, går i loop
+GIF… {n} % ¦ GIF… {n} % ¦ GIF… {n} %
+La vidéo est d’abord fabriquée (le film est rejoué en entier, laisse la fenêtre ouverte), puis rangée dans les médias. ¦ Video sa najprv vytvorí (film sa celý prehrá, nechaj okno otvorené) a potom sa uloží do médií. ¦ Videoen lages først (filmen spilles av i sin helhet, la vinduet være åpent), og lagres så i medier.
+Fabriquer la vidéo pour l’envoyer ? ¦ Vytvoriť video a poslať ho? ¦ Lage videoen for å sende den?
+Fabriquer et envoyer ¦ Vytvoriť a poslať ¦ Lag og send
+ENVOYER ¦ POSLAŤ ¦ SEND
+Fabrication de la vidéo… ¦ Výroba videa… ¦ Lager videoen…
+La vidéo n’a pas pu être rangée dans les médias. ¦ Video sa nepodarilo uložiť do médií. ¦ Videoen kunne ikke lagres i medier.
+Le son fini est rangé dans les médias (une copie), puis envoyé. ¦ Hotový zvuk sa uloží do médií (kópia) a potom sa pošle. ¦ Den ferdige lyden lagres i medier (en kopi) og sendes så.
+Envoyer le son ? ¦ Poslať zvuk? ¦ Sende lyden?
+Ranger et envoyer ¦ Uložiť a poslať ¦ Lagre og send
+Pas encore de transcription : « ⏱ Insérer l’heure » (⌘T), puis tape ce qui est dit. ¦ Zatiaľ žiadny prepis: „⏱ Vložiť čas“ (⌘T), potom napíš, čo sa hovorí. ¦ Ingen transkripsjon ennå: «⏱ Sett inn tiden» (⌘T), og skriv så det som blir sagt.
+Transcription — {name} ¦ Prepis — {name} ¦ Transkripsjon — {name}
+ (avec la transcription en sous-titres) ¦  (s prepisom ako titulky) ¦  (med transkripsjonen som undertekster)
+La transcription (texte) ¦ Prepis (text) ¦ Transkripsjonen (tekst)
+Pas encore de transcription. ¦ Zatiaľ žiadny prepis. ¦ Ingen transkripsjon ennå.
+Agnès Bernauer ¦ Agnès Bernauer ¦ Agnès Bernauer
+7 colonnes en escalier et une réserve de 7 tas. La première carte posée sur une fondation donne la valeur de départ des quatre ; on descend en alternant rouge et noir, le Roi passe sur l’As. La pioche pose une carte sur chaque tas de la réserve ; une colonne vide prend la carte juste sous la valeur de départ. ¦ 7 stĺpcov do schodov a rezerva 7 kôpok. Prvá karta položená na základňu určí počiatočnú hodnotu všetkých štyroch; skladá sa zostupne so striedaním červenej a čiernej, kráľ ide na eso. Talón položí kartu na každú kôpku rezervy; prázdny stĺpec berie kartu tesne pod počiatočnou hodnotou. ¦ 7 kolonner i trappeform og en reserve med 7 bunker. Det første kortet på en grunnbunke gir startverdien for alle fire; man bygger nedover med vekselvis rødt og svart, kongen går på esset. Bunken legger ett kort på hver reservebunke; en tom kolonne tar kortet like under startverdien.
+Thumb and Pouch ¦ Thumb and Pouch ¦ Thumb and Pouch
+Klondike où l’on descend sur n’importe quelle couleur de carte sauf la sienne ; une colonne vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Klondike, kde sa skladá zostupne na akúkoľvek farbu okrem vlastnej; prázdny stĺpec berie akúkoľvek kartu. Talónom sa prejde len raz. ¦ Klondike der man bygger nedover på hvilken som helst sort unntatt sin egen; en tom kolonne tar et hvilket som helst kort. Bunken gås bare gjennom én gang.
+Pas seul ¦ Pas seul ¦ Pas seul
+6 colonnes d’une seule carte ; on descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte. La pioche se retourne une carte à la fois et ne passe qu’une fois. ¦ 6 stĺpcov po jednej karte; skladá sa zostupne so striedaním červenej a čiernej, prázdny stĺpec berie akúkoľvek kartu. Talón sa otáča po jednej karte a prejde sa len raz. ¦ 6 kolonner med ett enkelt kort; man bygger nedover med vekselvis rødt og svart, en tom kolonne tar et hvilket som helst kort. Bunken snus ett kort om gangen og gås bare gjennom én gang.
+Les impasses ¦ Slepé uličky ¦ Blindveier
+Les As sont posés d’avance ; 6 colonnes de 3 cartes (deux cachées). On descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte ; la pioche repasse une fois. ¦ Esá sú vyložené vopred; 6 stĺpcov po 3 kartách (dve skryté). Skladá sa zostupne so striedaním červenej a čiernej, prázdny stĺpec berie akúkoľvek kartu; talónom sa prejde ešte raz. ¦ Essene er lagt ut på forhånd; 6 kolonner med 3 kort (to skjulte). Man bygger nedover med vekselvis rødt og svart, en tom kolonne tar et hvilket som helst kort; bunken gås gjennom én gang til.
+Huit fois huit ¦ Osemkrát osem ¦ Åtte ganger åtte
+Deux jeux, 8 colonnes de 8 cartes visibles ; on descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte. La pioche repasse deux fois. ¦ Dva balíčky, 8 stĺpcov po 8 viditeľných kartách; skladá sa zostupne so striedaním červenej a čiernej, prázdny stĺpec berie akúkoľvek kartu. Talónom sa prejde ešte dvakrát. ¦ To kortstokker, 8 kolonner med 8 synlige kort; man bygger nedover med vekselvis rødt og svart, en tom kolonne tar et hvilket som helst kort. Bunken gås gjennom to ganger til.
+Spike ¦ Spike ¦ Spike
+7 colonnes en escalier comme Klondike ; on descend en alternant rouge et noir et on déplace des suites entières. La pioche pose une carte sur chaque colonne. ¦ 7 stĺpcov do schodov ako Klondike; skladá sa zostupne so striedaním červenej a čiernej a presúvajú sa celé postupky. Talón položí kartu na každý stĺpec. ¦ 7 kolonner i trappeform som Klondike; man bygger nedover med vekselvis rødt og svart og flytter hele rekker. Bunken legger ett kort på hver kolonne.
+Alternance ¦ Striedanie ¦ Veksling
+Deux jeux, 7 colonnes de 7 cartes, une cachée sur deux. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Dva balíčky, 7 stĺpcov po 7 kartách, každá druhá skrytá. Skladá sa zostupne so striedaním červenej a čiernej a presúvajú sa celé postupky; prázdny stĺpec berie akúkoľvek kartu. Talónom sa prejde len raz. ¦ To kortstokker, 7 kolonner med 7 kort, annethvert skjult. Man bygger nedover med vekselvis rødt og svart og flytter hele rekker; en tom kolonne tar et hvilket som helst kort. Bunken gås bare gjennom én gang.
+La harpe ¦ Harfa ¦ Harpen
+Deux jeux, 9 colonnes en escalier ; on descend en alternant rouge et noir. La pioche se retourne une carte à la fois et repasse trois fois. ¦ Dva balíčky, 9 stĺpcov do schodov; skladá sa zostupne so striedaním červenej a čiernej. Talón sa otáča po jednej karte a prejde sa ešte trikrát. ¦ To kortstokker, 9 kolonner i trappeform; man bygger nedover med vekselvis rødt og svart. Bunken snus ett kort om gangen og gås gjennom tre ganger til.
+La grande harpe ¦ Veľká harfa ¦ Den store harpen
+Deux jeux, 10 colonnes en escalier ; on descend en alternant rouge et noir. La pioche se retourne une carte à la fois et ne passe qu’une fois. ¦ Dva balíčky, 10 stĺpcov do schodov; skladá sa zostupne so striedaním červenej a čiernej. Talón sa otáča po jednej karte a prejde sa len raz. ¦ To kortstokker, 10 kolonner i trappeform; man bygger nedover med vekselvis rødt og svart. Bunken snus ett kort om gangen og gås bare gjennom én gang.
+Acme ¦ Acme ¦ Acme
+Une réserve de 13 cartes et 4 colonnes ; les fondations partent de l’As. On descend dans la même couleur de carte, une carte à la fois ; une colonne vide se remplit avec la réserve. La pioche repasse une fois. ¦ Rezerva 13 kariet a 4 stĺpce; základne začínajú esom. Skladá sa zostupne v rovnakej farbe, po jednej karte; prázdny stĺpec sa doplní z rezervy. Talónom sa prejde ešte raz. ¦ En reserve med 13 kort og 4 kolonner; grunnbunkene starter med ess. Man bygger nedover i samme sort, ett kort om gangen; en tom kolonne fylles fra reserven. Bunken gås gjennom én gang til.
+Le crapaud américain ¦ Americká ropucha ¦ Den amerikanske padden
+Deux jeux, une réserve de 20 cartes et 8 colonnes. La première carte posée sur une fondation donne la valeur de départ des huit ; on descend dans la même couleur de carte, le Roi passe sur l’As. Une colonne vide se remplit avec la réserve ; la pioche repasse une fois. ¦ Dva balíčky, rezerva 20 kariet a 8 stĺpcov. Prvá karta položená na základňu určí počiatočnú hodnotu všetkých ôsmich; skladá sa zostupne v rovnakej farbe, kráľ ide na eso. Prázdny stĺpec sa doplní z rezervy; talónom sa prejde ešte raz. ¦ To kortstokker, en reserve med 20 kort og 8 kolonner. Det første kortet på en grunnbunke gir startverdien for alle åtte; man bygger nedover i samme sort, kongen går på esset. En tom kolonne fylles fra reserven; bunken gås gjennom én gang til.
+Canfield bigarré ¦ Pestrý Canfield ¦ Broket Canfield
+Deux jeux : les As sont posés d’avance, une réserve de 14 cartes et 5 colonnes. On descend en alternant rouge et noir ; une colonne vide se remplit avec la réserve. La pioche se retourne trois cartes à la fois et repasse deux fois. ¦ Dva balíčky: esá sú vyložené vopred, rezerva 14 kariet a 5 stĺpcov. Skladá sa zostupne so striedaním červenej a čiernej; prázdny stĺpec sa doplní z rezervy. Talón sa otáča po troch kartách a prejde sa ešte dvakrát. ¦ To kortstokker: essene er lagt ut på forhånd, en reserve med 14 kort og 5 kolonner. Man bygger nedover med vekselvis rødt og svart; en tom kolonne fylles fra reserven. Bunken snus tre kort om gangen og gås gjennom to ganger til.
+La duchesse ¦ Vojvodkyňa ¦ Hertuginnen
+Quatre tas de réserve de 3 cartes et 4 colonnes d’une carte. La première carte posée sur une fondation donne la valeur de départ des quatre ; on descend en alternant rouge et noir, le Roi passe sur l’As. Une colonne vide prend n’importe quelle carte ; la pioche repasse une fois. ¦ Štyri kôpky rezervy po 3 kartách a 4 stĺpce po jednej karte. Prvá karta položená na základňu určí počiatočnú hodnotu všetkých štyroch; skladá sa zostupne so striedaním červenej a čiernej, kráľ ide na eso. Prázdny stĺpec berie akúkoľvek kartu; talónom sa prejde ešte raz. ¦ Fire reservebunker med 3 kort og 4 kolonner med ett kort. Det første kortet på en grunnbunke gir startverdien for alle fire; man bygger nedover med vekselvis rødt og svart, kongen går på esset. En tom kolonne tar et hvilket som helst kort; bunken gås gjennom én gang til.
+La porte ¦ Brána ¦ Porten
+Deux tas de réserve de 5 cartes (les battants de la porte) et 8 colonnes d’une carte. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Dve kôpky rezervy po 5 kartách (krídla brány) a 8 stĺpcov po jednej karte. Skladá sa zostupne so striedaním červenej a čiernej a presúvajú sa celé postupky; prázdny stĺpec berie akúkoľvek kartu. Talónom sa prejde len raz. ¦ To reservebunker med 5 kort (portfløyene) og 8 kolonner med ett kort. Man bygger nedover med vekselvis rødt og svart og flytter hele rekker; en tom kolonne tar et hvilket som helst kort. Bunken gås bare gjennom én gang.
+Le pingouin ¦ Tučniak ¦ Pingvinen
+La première carte donne la valeur de départ des fondations, et les trois autres de même valeur y montent tout de suite. 7 colonnes de 7, 7 cases libres ; on descend dans la même couleur de carte, le Roi passe sur l’As. Une colonne vide prend la carte juste sous la valeur de départ. ¦ Prvá karta určí počiatočnú hodnotu základní a tri ďalšie rovnakej hodnoty na ne hneď vystúpia. 7 stĺpcov po 7, 7 voľných polí; skladá sa zostupne v rovnakej farbe, kráľ ide na eso. Prázdny stĺpec berie kartu tesne pod počiatočnou hodnotou. ¦ Det første kortet gir startverdien for grunnbunkene, og de tre andre med samme verdi flyttes opp dit med en gang. 7 kolonner med 7, 7 frie celler; man bygger nedover i samme sort, kongen går på esset. En tom kolonne tar kortet like under startverdien.
+Baker’s Game (Roi seul) ¦ Baker’s Game (len kráľ) ¦ Baker’s Game (bare konge)
+Baker’s Game (descendre dans la même couleur de carte, 4 cases libres), mais une colonne vide ne prend qu’un Roi. ¦ Baker’s Game (zostupne v rovnakej farbe, 4 voľné polia), ale prázdny stĺpec berie len kráľa. ¦ Baker’s Game (nedover i samme sort, 4 frie celler), men en tom kolonne tar bare en konge.
+Seahaven détendu ¦ Uvoľnený Seahaven ¦ Avslappet Seahaven
+Seahaven, mais une suite bien rangée dans la même couleur de carte se déplace d’un coup, quelle que soit sa longueur. ¦ Seahaven, ale správne zoradená postupka v rovnakej farbe sa presunie naraz, nech je akokoľvek dlhá. ¦ Seahaven, men en ordnet rekke i samme sort flyttes på én gang, uansett lengde.
+Repair ¦ Repair ¦ Repair
+Deux jeux, 10 colonnes de 10 cartes visibles et 4 cases libres déjà occupées ; on descend en alternant rouge et noir, une carte à la fois (ou une suite si les cases libres le permettent). ¦ Dva balíčky, 10 stĺpcov po 10 viditeľných kartách a 4 voľné polia už obsadené; skladá sa zostupne so striedaním červenej a čiernej, po jednej karte (alebo postupka, ak to voľné polia dovolia). ¦ To kortstokker, 10 kolonner med 10 synlige kort og 4 frie celler som allerede er opptatt; man bygger nedover med vekselvis rødt og svart, ett kort om gangen (eller en rekke hvis de frie cellene tillater det).
+Ocean Towers ¦ Ocean Towers ¦ Ocean Towers
+Deux jeux, 14 colonnes de 7 cartes et 8 cases libres dont 6 déjà occupées ; on descend dans la même couleur de carte, une colonne vide ne prend qu’un Roi. ¦ Dva balíčky, 14 stĺpcov po 7 kartách a 8 voľných polí, z ktorých 6 je už obsadených; skladá sa zostupne v rovnakej farbe, prázdny stĺpec berie len kráľa. ¦ To kortstokker, 14 kolonner med 7 kort og 8 frie celler, hvorav 6 allerede er opptatt; man bygger nedover i samme sort, en tom kolonne tar bare en konge.
+Sept par quatre ¦ Sedem na štyri ¦ Sju ganger fire
+FreeCell à 7 colonnes et 4 cases libres : les colonnes sont plus hautes. ¦ FreeCell so 7 stĺpcami a 4 voľnými poľami: stĺpce sú vyššie. ¦ FreeCell med 7 kolonner og 4 frie celler: kolonnene er høyere.
+Sept par cinq ¦ Sedem na päť ¦ Sju ganger fem
+FreeCell à 7 colonnes et 5 cases libres. ¦ FreeCell so 7 stĺpcami a 5 voľnými poľami. ¦ FreeCell med 7 kolonner og 5 frie celler.
+FreeCell défi ¦ FreeCell výzva ¦ FreeCell utfordring
+FreeCell, mais les As et les 2 sont tout au fond des colonnes, sous toutes les autres cartes. ¦ FreeCell, ale esá a dvojky sú úplne na dne stĺpcov, pod všetkými ostatnými kartami. ¦ FreeCell, men essene og toerne ligger helt nederst i kolonnene, under alle de andre kortene.
+FreeCell super défi ¦ FreeCell super výzva ¦ FreeCell superutfordring
+FreeCell défi (les As et les 2 au fond des colonnes), et une colonne vide ne prend qu’un Roi. ¦ FreeCell výzva (esá a dvojky na dne stĺpcov) a prázdny stĺpec berie len kráľa. ¦ FreeCell utfordring (essene og toerne nederst i kolonnene), og en tom kolonne tar bare en konge.
+Le scarabée ¦ Skarabeus ¦ Skarabeen
+Scorpion sans pioche : les 52 cartes sont visibles en 7 colonnes. On descend dans la même couleur de carte et on déplace n’importe quel groupe ; une colonne vide ne prend qu’un Roi. Une suite complète du Roi à l’As s’en va. ¦ Scorpion bez talónu: všetkých 52 kariet je viditeľných v 7 stĺpcoch. Skladá sa zostupne v rovnakej farbe a presúva sa akákoľvek skupina; prázdny stĺpec berie len kráľa. Úplná postupka od kráľa po eso odchádza. ¦ Scorpion uten bunke: alle 52 kortene er synlige i 7 kolonner. Man bygger nedover i samme sort og flytter en hvilken som helst gruppe; en tom kolonne tar bare en konge. En hel rekke fra konge til ess forsvinner.
+Queue de scorpion ¦ Chvost škorpióna ¦ Skorpionhale
+Comme Scorpion (7 colonnes de 7, n’importe quel groupe se déplace), mais on descend en alternant rouge et noir et les cartes montent sur les fondations de l’As au Roi. ¦ Ako Scorpion (7 stĺpcov po 7, presúva sa akákoľvek skupina), ale skladá sa zostupne so striedaním červenej a čiernej a karty stúpajú na základne od esa po kráľa. ¦ Som Scorpion (7 kolonner med 7, hvilken som helst gruppe flyttes), men man bygger nedover med vekselvis rødt og svart, og kortene går opp på grunnbunkene fra ess til konge.
+Scorpion double ¦ Dvojitý Scorpion ¦ Dobbel Scorpion
+Deux jeux, 10 colonnes, tout est distribué (les cinq premières colonnes cachent 4 cartes). On descend dans la même couleur de carte et on déplace n’importe quel groupe ; une suite complète du Roi à l’As s’en va. ¦ Dva balíčky, 10 stĺpcov, všetko je rozdané (prvých päť stĺpcov skrýva 4 karty). Skladá sa zostupne v rovnakej farbe a presúva sa akákoľvek skupina; úplná postupka od kráľa po eso odchádza. ¦ To kortstokker, 10 kolonner, alt er delt ut (de fem første kolonnene skjuler 4 kort). Man bygger nedover i samme sort og flytter en hvilken som helst gruppe; en hel rekke fra konge til ess forsvinner.
+Motif de divorce ¦ Dôvod na rozvod ¦ Grunn til skilsmisse
+Deux jeux, 10 colonnes de 5 cartes visibles. On descend sans s’occuper des couleurs ; seules les suites d’une même couleur de carte se déplacent ensemble ; une suite complète du Roi à l’As s’en va. La pioche pose une carte sur chaque colonne qui n’est pas vide. ¦ Dva balíčky, 10 stĺpcov po 5 viditeľných kartách. Skladá sa zostupne bez ohľadu na farby; spolu sa presúvajú len postupky jednej farby; úplná postupka od kráľa po eso odchádza. Talón položí kartu na každý stĺpec, ktorý nie je prázdny. ¦ To kortstokker, 10 kolonner med 5 synlige kort. Man bygger nedover uten å bry seg om sortene; bare rekker i samme sort flyttes sammen; en hel rekke fra konge til ess forsvinner. Bunken legger ett kort på hver kolonne som ikke er tom.
+La tarentule ¦ Tarantula ¦ Tarantellen
+L’araignée à quatre couleurs, mais une suite qui descend dans la même teinte (rouge ou noire) se déplace d’un coup. Une suite complète du Roi à l’As dans une même couleur de carte s’en va. ¦ Štvorfarebný pavúk, ale postupka zostupujúca v rovnakom odtieni (červená alebo čierna) sa presunie naraz. Úplná postupka od kráľa po eso v jednej farbe odchádza. ¦ Edderkoppen med fire sorter, men en rekke som går nedover i samme farge (rød eller svart) flyttes på én gang. En hel rekke fra konge til ess i samme sort forsvinner.
+Araignée à découvert ¦ Odkrytý pavúk ¦ Åpen edderkopp
+L’araignée à quatre couleurs, mais toutes les cartes sont visibles dès le départ. ¦ Štvorfarebný pavúk, ale všetky karty sú viditeľné od začiatku. ¦ Edderkoppen med fire sorter, men alle kortene er synlige fra start.
+La harpe de Milligan ¦ Milliganova harfa ¦ Milligans harpe
+Deux jeux, 8 colonnes en escalier ; on descend en alternant rouge et noir et on déplace des suites entières. Une colonne vide ne prend qu’un Roi ; la pioche pose une carte sur chaque colonne. Les fondations montent de l’As au Roi. ¦ Dva balíčky, 8 stĺpcov do schodov; skladá sa zostupne so striedaním červenej a čiernej a presúvajú sa celé postupky. Prázdny stĺpec berie len kráľa; talón položí kartu na každý stĺpec. Základne stúpajú od esa po kráľa. ¦ To kortstokker, 8 kolonner i trappeform; man bygger nedover med vekselvis rødt og svart og flytter hele rekker. En tom kolonne tar bare en konge; bunken legger ett kort på hver kolonne. Grunnbunkene bygges opp fra ess til konge.
+La harpe de Lexington ¦ Lexingtonská harfa ¦ Lexington-harpen
+La harpe de Milligan (deux jeux, 8 colonnes en escalier, la pioche pose une carte sur chaque colonne), mais on déplace n’importe quel groupe de cartes visibles. ¦ Milliganova harfa (dva balíčky, 8 stĺpcov do schodov, talón položí kartu na každý stĺpec), ale presúva sa akákoľvek skupina viditeľných kariet. ¦ Milligans harpe (to kortstokker, 8 kolonner i trappeform, bunken legger ett kort på hver kolonne), men man flytter en hvilken som helst gruppe synlige kort.
+Brunswick ¦ Brunswick ¦ Brunswick
+La harpe de Lexington avec toutes les cartes visibles : n’importe quel groupe se déplace, la pioche pose une carte sur chaque colonne. ¦ Lexingtonská harfa so všetkými kartami viditeľnými: presúva sa akákoľvek skupina, talón položí kartu na každý stĺpec. ¦ Lexington-harpen med alle kortene synlige: hvilken som helst gruppe flyttes, bunken legger ett kort på hver kolonne.
+Carlton ¦ Carlton ¦ Carlton
+La harpe de Milligan avec toutes les cartes visibles, et une colonne vide prend n’importe quelle carte. ¦ Milliganova harfa so všetkými kartami viditeľnými a prázdny stĺpec berie akúkoľvek kartu. ¦ Milligans harpe med alle kortene synlige, og en tom kolonne tar et hvilket som helst kort.
+Miss Milligan ¦ Miss Milligan ¦ Miss Milligan
+Deux jeux, 8 colonnes d’une carte ; la pioche pose une carte sur chaque colonne. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide ne prend qu’un Roi. Quand la pioche est vide, une case libre s’ouvre pour mettre une carte de côté. ¦ Dva balíčky, 8 stĺpcov po jednej karte; talón položí kartu na každý stĺpec. Skladá sa zostupne so striedaním červenej a čiernej a presúvajú sa celé postupky; prázdny stĺpec berie len kráľa. Keď je talón prázdny, otvorí sa voľné pole, kam možno odložiť kartu. ¦ To kortstokker, 8 kolonner med ett kort; bunken legger ett kort på hver kolonne. Man bygger nedover med vekselvis rødt og svart og flytter hele rekker; en tom kolonne tar bare en konge. Når bunken er tom, åpnes en fri celle der du kan legge et kort til side.
+Millie ¦ Millie ¦ Millie
+Deux jeux, 8 colonnes d’une carte ; la pioche pose une carte sur chaque colonne. On descend en alternant rouge et noir et une colonne vide prend n’importe quelle carte. ¦ Dva balíčky, 8 stĺpcov po jednej karte; talón položí kartu na každý stĺpec. Skladá sa zostupne so striedaním červenej a čiernej a prázdny stĺpec berie akúkoľvek kartu. ¦ To kortstokker, 8 kolonner med ett kort; bunken legger ett kort på hver kolonne. Man bygger nedover med vekselvis rødt og svart, og en tom kolonne tar et hvilket som helst kort.
+L’île d’Elbe ¦ Ostrov Elba ¦ Elba
+Deux jeux, 10 colonnes de 5 cartes (quatre cachées) ; on descend en alternant rouge et noir et on déplace des suites entières. Une colonne vide ne prend qu’un Roi ; la pioche pose une carte sur chaque colonne. ¦ Dva balíčky, 10 stĺpcov po 5 kartách (štyri skryté); skladá sa zostupne so striedaním červenej a čiernej a presúvajú sa celé postupky. Prázdny stĺpec berie len kráľa; talón položí kartu na každý stĺpec. ¦ To kortstokker, 10 kolonner med 5 kort (fire skjulte); man bygger nedover med vekselvis rødt og svart og flytter hele rekker. En tom kolonne tar bare en konge; bunken legger ett kort på hver kolonne.
+Le mont Olympe ¦ Olymp ¦ Olympen
+Deux jeux : les As et les 2 sont posés d’avance, et les fondations montent de deux en deux dans la même couleur de carte (As, 3, 5… ou 2, 4, 6…). 9 colonnes ; on descend de deux en deux dans la même couleur de carte. La pioche pose une carte sur chaque colonne. ¦ Dva balíčky: esá a dvojky sú vyložené vopred a základne stúpajú po dvoch v rovnakej farbe (eso, 3, 5… alebo 2, 4, 6…). 9 stĺpcov; skladá sa zostupne po dvoch v rovnakej farbe. Talón položí kartu na každý stĺpec. ¦ To kortstokker: essene og toerne er lagt ut på forhånd, og grunnbunkene bygges opp to og to i samme sort (ess, 3, 5… eller 2, 4, 6…). 9 kolonner; man bygger nedover to og to i samme sort. Bunken legger ett kort på hver kolonne.
+La patience australienne ¦ Austrálsky pasians ¦ Australsk kabal
+7 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte et on déplace n’importe quel groupe de cartes visibles. Une colonne vide ne prend qu’un Roi ; la pioche ne passe qu’une fois. ¦ 7 stĺpcov po 4 viditeľných kartách; skladá sa zostupne v rovnakej farbe a presúva sa akákoľvek skupina viditeľných kariet. Prázdny stĺpec berie len kráľa; talónom sa prejde len raz. ¦ 7 kolonner med 4 synlige kort; man bygger nedover i samme sort og flytter en hvilken som helst gruppe synlige kort. En tom kolonne tar bare en konge; bunken gås bare gjennom én gang.
+Canberra ¦ Canberra ¦ Canberra
+La patience australienne, mais la pioche repasse une fois. ¦ Austrálsky pasians, ale talónom sa prejde ešte raz. ¦ Australsk kabal, men bunken gås gjennom én gang til.
+Raw Prawn ¦ Raw Prawn ¦ Raw Prawn
+La patience australienne, mais une colonne vide prend n’importe quelle carte. ¦ Austrálsky pasians, ale prázdny stĺpec berie akúkoľvek kartu. ¦ Australsk kabal, men en tom kolonne tar et hvilket som helst kort.
+Rushdike ¦ Rushdike ¦ Rushdike
+7 colonnes en escalier ; on descend dans la même couleur de carte et on déplace n’importe quel groupe de cartes visibles. La pioche pose une carte sur chaque colonne. ¦ 7 stĺpcov do schodov; skladá sa zostupne v rovnakej farbe a presúva sa akákoľvek skupina viditeľných kariet. Talón položí kartu na každý stĺpec. ¦ 7 kolonner i trappeform; man bygger nedover i samme sort og flytter en hvilken som helst gruppe synlige kort. Bunken legger ett kort på hver kolonne.
+La discipline chinoise ¦ Čínska disciplína ¦ Kinesisk disiplin
+7 colonnes de 7 cartes (trois cachées, sauf dans la première) ; on descend en alternant rouge et noir et on déplace n’importe quel groupe de cartes visibles. Les 3 dernières cartes vont sur les trois premières colonnes. ¦ 7 stĺpcov po 7 kartách (tri skryté, okrem prvého); skladá sa zostupne so striedaním červenej a čiernej a presúva sa akákoľvek skupina viditeľných kariet. Posledné 3 karty idú na prvé tri stĺpce. ¦ 7 kolonner med 7 kort (tre skjulte, unntatt i den første); man bygger nedover med vekselvis rødt og svart og flytter en hvilken som helst gruppe synlige kort. De 3 siste kortene legges på de tre første kolonnene.
+Solitaire russe double ¦ Dvojitý ruský pasians ¦ Dobbel russisk kabal
+Deux jeux, 10 colonnes, 8 fondations ; on descend dans la même couleur de carte et on déplace n’importe quel groupe de cartes visibles. ¦ Dva balíčky, 10 stĺpcov, 8 základní; skladá sa zostupne v rovnakej farbe a presúva sa akákoľvek skupina viditeľných kariet. ¦ To kortstokker, 10 kolonner, 8 grunnbunker; man bygger nedover i samme sort og flytter en hvilken som helst gruppe synlige kort.
+Ali Baba ¦ Alí Baba ¦ Ali Baba
+Un seul jeu : les As sont posés d’avance, 10 colonnes de 4 cartes visibles. On descend dans la même couleur de carte et on déplace des suites entières ; la pioche ne passe qu’une fois. ¦ Jeden balíček: esá sú vyložené vopred, 10 stĺpcov po 4 viditeľných kartách. Skladá sa zostupne v rovnakej farbe a presúvajú sa celé postupky; talónom sa prejde len raz. ¦ Én kortstokk: essene er lagt ut på forhånd, 10 kolonner med 4 synlige kort. Man bygger nedover i samme sort og flytter hele rekker; bunken gås bare gjennom én gang.
+Cassim ¦ Kasim ¦ Kassim
+Un seul jeu : les As sont posés d’avance, 7 colonnes de 3 cartes visibles. On descend dans la même couleur de carte et on déplace des suites entières ; la pioche repasse autant que tu veux. ¦ Jeden balíček: esá sú vyložené vopred, 7 stĺpcov po 3 viditeľných kartách. Skladá sa zostupne v rovnakej farbe a presúvajú sa celé postupky; talónom môžeš prejsť, koľkokrát chceš. ¦ Én kortstokk: essene er lagt ut på forhånd, 7 kolonner med 3 synlige kort. Man bygger nedover i samme sort og flytter hele rekker; bunken kan gås gjennom så mange ganger du vil.
+Rang et file ¦ Rady a šíky ¦ Rekke og rad
+L’empereur (deux jeux, 10 colonnes de 4 cartes dont 3 cachées, en alternant rouge et noir), mais on déplace des suites entières. ¦ Cisár (dva balíčky, 10 stĺpcov po 4 kartách, z ktorých 3 skryté, so striedaním červenej a čiernej), ale presúvajú sa celé postupky. ¦ Keiseren (to kortstokker, 10 kolonner med 4 kort hvorav 3 skjulte, med vekselvis rødt og svart), men man flytter hele rekker.
+Les As affairés ¦ Zaneprázdnené esá ¦ Travle ess
+Deux jeux, 12 colonnes d’une carte ; on descend dans la même couleur de carte, une carte à la fois. La pioche ne passe qu’une fois. ¦ Dva balíčky, 12 stĺpcov po jednej karte; skladá sa zostupne v rovnakej farbe, po jednej karte. Talónom sa prejde len raz. ¦ To kortstokker, 12 kolonner med ett kort; man bygger nedover i samme sort, ett kort om gangen. Bunken gås bare gjennom én gang.
+La cour ¦ Nádvorie ¦ Gården
+Deux jeux, 12 colonnes d’une carte ; on descend dans la même couleur de carte et on déplace des suites entières. La pioche ne passe qu’une fois. ¦ Dva balíčky, 12 stĺpcov po jednej karte; skladá sa zostupne v rovnakej farbe a presúvajú sa celé postupky. Talónom sa prejde len raz. ¦ To kortstokker, 12 kolonner med ett kort; man bygger nedover i samme sort og flytter hele rekker. Bunken gås bare gjennom én gang.
+Le carré de Napoléon ¦ Napoleonov štvorec ¦ Napoleons firkant
+Deux jeux, 12 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte et on déplace des suites entières. La pioche ne passe qu’une fois. ¦ Dva balíčky, 12 stĺpcov po 4 viditeľných kartách; skladá sa zostupne v rovnakej farbe a presúvajú sa celé postupky. Talónom sa prejde len raz. ¦ To kortstokker, 12 kolonner med 4 synlige kort; man bygger nedover i samme sort og flytter hele rekker. Bunken gås bare gjennom én gang.
+L’exil de Napoléon ¦ Napoleonov exil ¦ Napoleons eksil
+Les quarante voleurs où l’on descend sans s’occuper des couleurs, une carte à la fois. La pioche ne passe qu’une fois. ¦ Štyridsať zbojníkov, kde sa skladá zostupne bez ohľadu na farby, po jednej karte. Talónom sa prejde len raz. ¦ De førti røverne der man bygger nedover uten å bry seg om sortene, ett kort om gangen. Bunken gås bare gjennom én gang.
+Deuces ¦ Deuces ¦ Deuces
+Deux jeux : les huit 2 sont posés d’avance, et les fondations montent dans la même couleur de carte jusqu’à l’As. 10 colonnes d’une carte ; on descend dans la même couleur de carte (l’As va sur le 2, le Roi sur l’As), une carte à la fois. La pioche ne passe qu’une fois. ¦ Dva balíčky: osem dvojok je vyložených vopred a základne stúpajú v rovnakej farbe až po eso. 10 stĺpcov po jednej karte; skladá sa zostupne v rovnakej farbe (eso ide na dvojku, kráľ na eso), po jednej karte. Talónom sa prejde len raz. ¦ To kortstokker: de åtte toerne er lagt ut på forhånd, og grunnbunkene bygges opp i samme sort helt til ess. 10 kolonner med ett kort; man bygger nedover i samme sort (ess går på toer, konge på ess), ett kort om gangen. Bunken gås bare gjennom én gang.
+La lune décroissante ¦ Ubúdajúci mesiac ¦ Minkende måne
+Deux jeux, 13 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte et on déplace des suites entières. La pioche ne passe qu’une fois. ¦ Dva balíčky, 13 stĺpcov po 4 viditeľných kartách; skladá sa zostupne v rovnakej farbe a presúvajú sa celé postupky. Talónom sa prejde len raz. ¦ To kortstokker, 13 kolonner med 4 synlige kort; man bygger nedover i samme sort og flytter hele rekker. Bunken gås bare gjennom én gang.
+Les cinquante fameux ¦ Slávnych päťdesiat ¦ De berømte femti
+Les quarante voleurs avec 5 cartes par colonne : deux jeux, 10 colonnes de 5, même couleur de carte, une carte à la fois. La pioche ne passe qu’une fois. ¦ Štyridsať zbojníkov s 5 kartami na stĺpec: dva balíčky, 10 stĺpcov po 5, rovnaká farba, po jednej karte. Talónom sa prejde len raz. ¦ De førti røverne med 5 kort per kolonne: to kortstokker, 10 kolonner med 5, samme sort, ett kort om gangen. Bunken gås bare gjennom én gang.
+Quarante-neuf ¦ Štyridsaťdeväť ¦ Førtini
+Deux jeux, 7 colonnes de 7 cartes visibles ; on descend en alternant rouge et noir, une carte à la fois. La pioche ne passe qu’une fois. ¦ Dva balíčky, 7 stĺpcov po 7 viditeľných kartách; skladá sa zostupne so striedaním červenej a čiernej, po jednej karte. Talónom sa prejde len raz. ¦ To kortstokker, 7 kolonner med 7 synlige kort; man bygger nedover med vekselvis rødt og svart, ett kort om gangen. Bunken gås bare gjennom én gang.
+Sans limite ¦ Bez obmedzenia ¦ Uten grense
+Les quarante voleurs, mais la pioche repasse autant que tu veux. ¦ Štyridsať zbojníkov, ale talónom môžeš prejsť, koľkokrát chceš. ¦ De førti røverne, men bunken kan gås gjennom så mange ganger du vil.
+Les petits quarante ¦ Malých štyridsať ¦ Lille førti
+Les quarante voleurs où l’on descend sans s’occuper des couleurs et on déplace des suites entières ; la pioche se retourne trois cartes à la fois et repasse trois fois. ¦ Štyridsať zbojníkov, kde sa skladá zostupne bez ohľadu na farby a presúvajú sa celé postupky; talón sa otáča po troch kartách a prejde sa ešte trikrát. ¦ De førti røverne der man bygger nedover uten å bry seg om sortene og flytter hele rekker; bunken snus tre kort om gangen og gås gjennom tre ganger til.
+Le zèbre ¦ Zebra ¦ Sebraen
+Deux jeux, les As posés d’avance, 8 colonnes d’une carte ; on descend en alternant rouge et noir, une carte à la fois. La pioche repasse une fois. ¦ Dva balíčky, esá vyložené vopred, 8 stĺpcov po jednej karte; skladá sa zostupne so striedaním červenej a čiernej, po jednej karte. Talónom sa prejde ešte raz. ¦ To kortstokker, essene lagt ut på forhånd, 8 kolonner med ett kort; man bygger nedover med vekselvis rødt og svart, ett kort om gangen. Bunken gås gjennom én gang til.
+Le congrès ¦ Kongres ¦ Kongressen
+Deux jeux, 8 colonnes d’une carte ; on descend sans s’occuper des couleurs, une carte à la fois. La pioche ne passe qu’une fois. ¦ Dva balíčky, 8 stĺpcov po jednej karte; skladá sa zostupne bez ohľadu na farby, po jednej karte. Talónom sa prejde len raz. ¦ To kortstokker, 8 kolonner med ett kort; man bygger nedover uten å bry seg om sortene, ett kort om gangen. Bunken gås bare gjennom én gang.
+Le parlement ¦ Parlament ¦ Parlamentet
+Le congrès (deux jeux, 8 colonnes d’une carte, on descend sans s’occuper des couleurs), avec les As posés d’avance. ¦ Kongres (dva balíčky, 8 stĺpcov po jednej karte, zostupne bez ohľadu na farby) s esami vyloženými vopred. ¦ Kongressen (to kortstokker, 8 kolonner med ett kort, nedover uten å bry seg om sortene), med essene lagt ut på forhånd.
+Pair et impair ¦ Párne a nepárne ¦ Odde og jevne
+Deux jeux : un As et un 2 de chaque couleur de carte sont posés d’avance, et les fondations montent de deux en deux dans leur couleur (As, 3, 5… Roi, 2, 4… ou 2, 4… Dame, As, 3…). 9 places d’une carte, sur lesquelles on ne construit pas ; une place vide prend n’importe quelle carte. La pioche repasse une fois. ¦ Dva balíčky: eso a dvojka každej farby sú vyložené vopred a základne stúpajú po dvoch vo svojej farbe (eso, 3, 5… kráľ, 2, 4… alebo 2, 4… dáma, eso, 3…). 9 miest po jednej karte, na ktoré sa nestavia; prázdne miesto berie akúkoľvek kartu. Talónom sa prejde ešte raz. ¦ To kortstokker: ett ess og en toer i hver sort er lagt ut på forhånd, og grunnbunkene bygges opp to og to i sin sort (ess, 3, 5… konge, 2, 4… eller 2, 4… dame, ess, 3…). 9 plasser med ett kort, som man ikke bygger på; en tom plass tar et hvilket som helst kort. Bunken gås gjennom én gang til.
+Le cotillon royal ¦ Kráľovský kotilión ¦ Kongelig kotiljong
+Deux jeux : un As et un 2 de chaque couleur de carte sont posés d’avance, et les fondations montent de deux en deux dans leur couleur. Quatre tas de réserve de 3 cartes (seule celle du dessus se joue) et 16 places d’une carte, sur lesquelles on ne construit pas ; une place vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Dva balíčky: eso a dvojka každej farby sú vyložené vopred a základne stúpajú po dvoch vo svojej farbe. Štyri kôpky rezervy po 3 kartách (hrá sa len horná) a 16 miest po jednej karte, na ktoré sa nestavia; prázdne miesto berie akúkoľvek kartu. Talónom sa prejde len raz. ¦ To kortstokker: ett ess og en toer i hver sort er lagt ut på forhånd, og grunnbunkene bygges opp to og to i sin sort. Fire reservebunker med 3 kort (bare det øverste spilles) og 16 plasser med ett kort, som man ikke bygger på; en tom plass tar et hvilket som helst kort. Bunken gås bare gjennom én gang.
+Le treize porte-bonheur ¦ Šťastná trinástka ¦ Lykketretten
+13 colonnes de 4 cartes visibles ; on descend sans s’occuper des couleurs, une carte à la fois ; une colonne vide reste vide. ¦ 13 stĺpcov po 4 viditeľných kartách; skladá sa zostupne bez ohľadu na farby, po jednej karte; prázdny stĺpec zostane prázdny. ¦ 13 kolonner med 4 synlige kort; man bygger nedover uten å bry seg om sortene, ett kort om gangen; en tom kolonne forblir tom.
+La patience portugaise ¦ Portugalský pasians ¦ Portugisisk kabal
+13 colonnes de 4 cartes visibles ; on descend sans s’occuper des couleurs, une carte à la fois ; seul un Roi va dans une colonne vide. ¦ 13 stĺpcov po 4 viditeľných kartách; skladá sa zostupne bez ohľadu na farby, po jednej karte; do prázdneho stĺpca ide len kráľ. ¦ 13 kolonner med 4 synlige kort; man bygger nedover uten å bry seg om sortene, ett kort om gangen; bare en konge kan gå i en tom kolonne.
+Bonne mesure ¦ Dobrá miera ¦ Godt mål
+Deux As sont posés d’avance ; 10 colonnes de 5 cartes visibles. On descend sans s’occuper des couleurs, une carte à la fois ; une colonne vide prend n’importe quelle carte. ¦ Dve esá sú vyložené vopred; 10 stĺpcov po 5 viditeľných kartách. Skladá sa zostupne bez ohľadu na farby, po jednej karte; prázdny stĺpec berie akúkoľvek kartu. ¦ To ess er lagt ut på forhånd; 10 kolonner med 5 synlige kort. Man bygger nedover uten å bry seg om sortene, ett kort om gangen; en tom kolonne tar et hvilket som helst kort.
+La cruelle ¦ Krutá ¦ Den grusomme
+Les As sont posés d’avance ; 12 tas de 4 cartes. On descend dans la même couleur de carte, une carte à la fois ; une place vide reste vide. Autant de fois que tu veux, on ramasse les tas dans l’ordre, sans mélanger, et on redistribue par 4. ¦ Esá sú vyložené vopred; 12 kôpok po 4 kartách. Skladá sa zostupne v rovnakej farbe, po jednej karte; prázdne miesto zostane prázdne. Koľkokrát chceš, pozbierajú sa kôpky poporiadku, bez miešania, a znova sa rozdajú po 4. ¦ Essene er lagt ut på forhånd; 12 bunker med 4 kort. Man bygger nedover i samme sort, ett kort om gangen; en tom plass forblir tom. Så mange ganger du vil, samles bunkene i rekkefølge, uten å stokke, og deles ut på nytt fire og fire.
+La persévérance ¦ Vytrvalosť ¦ Utholdenhet
+Comme la cruelle (les As posés d’avance, 12 tas de 4, même couleur de carte), mais on déplace des suites entières et on ne ramasse que deux fois. ¦ Ako Krutá (esá vyložené vopred, 12 kôpok po 4, rovnaká farba), ale presúvajú sa celé postupky a pozbiera sa len dvakrát. ¦ Som Den grusomme (essene lagt ut på forhånd, 12 bunker med 4, samme sort), men man flytter hele rekker og samler bare inn to ganger.
+L’éventail en vagues ¦ Vlnitý vejár ¦ Bølgevifte
+13 tas de 4 cartes, les As restent mélangés aux autres ; on descend dans la même couleur de carte, une carte à la fois ; une place vide reste vide. Autant de fois que tu veux, on ramasse les tas dans l’ordre, sans mélanger, et on redistribue par 4. ¦ 13 kôpok po 4 kartách, esá zostávajú zamiešané medzi ostatnými; skladá sa zostupne v rovnakej farbe, po jednej karte; prázdne miesto zostane prázdne. Koľkokrát chceš, pozbierajú sa kôpky poporiadku, bez miešania, a znova sa rozdajú po 4. ¦ 13 bunker med 4 kort, essene blir liggende blandet med de andre; man bygger nedover i samme sort, ett kort om gangen; en tom plass forblir tom. Så mange ganger du vil, samles bunkene i rekkefølge, uten å stokke, og deles ut på nytt fire og fire.
+L’éventail en boîte ¦ Vejár v krabici ¦ Vifte i eske
+Les As sont posés d’avance ; 16 éventails de 3 cartes. On descend en alternant rouge et noir, une carte à la fois ; seul un Roi va dans une place vide. ¦ Esá sú vyložené vopred; 16 vejárov po 3 kartách. Skladá sa zostupne so striedaním červenej a čiernej, po jednej karte; na prázdne miesto ide len kráľ. ¦ Essene er lagt ut på forhånd; 16 vifter med 3 kort. Man bygger nedover med vekselvis rødt og svart, ett kort om gangen; bare en konge kan gå på en tom plass.
+L’éventail fascinant ¦ Okúzľujúci vejár ¦ Den fascinerende vifta
+La Belle Lucie (17 éventails de 3 cartes) où l’on descend en alternant rouge et noir, avec six redistributions. ¦ La Belle Lucie (17 vejárov po 3 kartách), kde sa skladá zostupne so striedaním červenej a čiernej, so šiestimi novými rozdaniami. ¦ La Belle Lucie (17 vifter med 3 kort) der man bygger nedover med vekselvis rødt og svart, med seks nye utdelinger.
+La lampe de minuit ¦ Polnočná lampa ¦ Midnattslampen
+La Belle Lucie (17 éventails de 3 cartes) où l’on descend en alternant rouge et noir, avec deux redistributions. ¦ La Belle Lucie (17 vejárov po 3 kartách), kde sa skladá zostupne so striedaním červenej a čiernej, s dvoma novými rozdaniami. ¦ La Belle Lucie (17 vifter med 3 kort) der man bygger nedover med vekselvis rødt og svart, med to nye utdelinger.
+Shamrocks ¦ Shamrocks ¦ Shamrocks
+17 éventails de 3 cartes ; on monte ou on descend d’un rang sans s’occuper des couleurs, une carte à la fois, et un éventail ne garde jamais plus de 3 cartes. Pas de redistribution. ¦ 17 vejárov po 3 kartách; skladá sa nahor alebo nadol o jeden stupeň bez ohľadu na farby, po jednej karte, a vejár nikdy nemá viac ako 3 karty. Žiadne nové rozdanie. ¦ 17 vifter med 3 kort; man bygger opp eller ned ett trinn uten å bry seg om sortene, ett kort om gangen, og en vifte har aldri mer enn 3 kort. Ingen ny utdeling.
+La maison dans les bois ¦ Dom v lese ¦ Huset i skogen
+Deux jeux, 35 éventails de 3 cartes ; on monte ou on descend d’un rang dans la même couleur de carte, une carte à la fois. Une place vide reste vide. ¦ Dva balíčky, 35 vejárov po 3 kartách; skladá sa nahor alebo nadol o jeden stupeň v rovnakej farbe, po jednej karte. Prázdne miesto zostane prázdne. ¦ To kortstokker, 35 vifter med 3 kort; man bygger opp eller ned ett trinn i samme sort, ett kort om gangen. En tom plass forblir tom.
+La maison sur la colline ¦ Dom na kopci ¦ Huset på haugen
+La maison dans les bois (deux jeux, 35 éventails), mais quatre fondations montent de l’As au Roi et quatre autres descendent du Roi à l’As. ¦ Dom v lese (dva balíčky, 35 vejárov), ale štyri základne stúpajú od esa po kráľa a štyri ďalšie klesajú od kráľa po eso. ¦ Huset i skogen (to kortstokker, 35 vifter), men fire grunnbunker bygges opp fra ess til konge og fire andre ned fra konge til ess.
+Bisley ¦ Bisley ¦ Bisley
+Les As sont posés d’avance ; 13 colonnes (4 de 3 cartes, 9 de 4). Les fondations des As montent, celles des Rois descendent, dans la même couleur de carte. Sur le tableau, on monte ou on descend dans la même couleur de carte, une carte à la fois ; une colonne vide reste vide. ¦ Esá sú vyložené vopred; 13 stĺpcov (4 po 3 kartách, 9 po 4). Základne es stúpajú, základne kráľov klesajú, v rovnakej farbe. Na stole sa skladá nahor alebo nadol v rovnakej farbe, po jednej karte; prázdny stĺpec zostane prázdny. ¦ Essene er lagt ut på forhånd; 13 kolonner (4 med 3 kort, 9 med 4). Essenes grunnbunker bygges opp, kongenes ned, i samme sort. På bordet bygger man opp eller ned i samme sort, ett kort om gangen; en tom kolonne forblir tom.
+Le cadran du grand-père ¦ Dedkove hodiny ¦ Bestefars klokke
+12 fondations comme les heures d’une horloge, qui commencent par 2♥, 3♠, 4♦, 5♣… jusqu’au Roi ♣ et montent dans la même couleur de carte (le Roi passe à l’As). 8 colonnes de 5 cartes ; on descend sans s’occuper des couleurs, une carte à la fois ; une colonne vide prend n’importe quelle carte. ¦ 12 základní ako hodiny na ciferníku, ktoré začínajú 2♥, 3♠, 4♦, 5♣… až po kráľa ♣ a stúpajú v rovnakej farbe (kráľ prechádza na eso). 8 stĺpcov po 5 kartách; skladá sa zostupne bez ohľadu na farby, po jednej karte; prázdny stĺpec berie akúkoľvek kartu. ¦ 12 grunnbunker som timene på en klokke, som begynner med 2♥, 3♠, 4♦, 5♣… opp til konge ♣ og bygges opp i samme sort (kongen går videre til ess). 8 kolonner med 5 kort; man bygger nedover uten å bry seg om sortene, ett kort om gangen; en tom kolonne tar et hvilket som helst kort.
+Le mur de pierre ¦ Kamenný múr ¦ Steinmuren
+6 colonnes de 6 cartes, une cachée sur deux, et un bouquet de 16 cartes où l’on peut prendre n’importe laquelle. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. ¦ 6 stĺpcov po 6 kartách, každá druhá skrytá, a kytica 16 kariet, z ktorej možno vziať ktorúkoľvek. Skladá sa zostupne so striedaním červenej a čiernej a presúvajú sa celé postupky; prázdny stĺpec berie akúkoľvek kartu. ¦ 6 kolonner med 6 kort, annethvert skjult, og en bukett med 16 kort der du kan ta hvilket som helst. Man bygger nedover med vekselvis rødt og svart og flytter hele rekker; en tom kolonne tar et hvilket som helst kort.
+La fleur sauvage ¦ Divý kvet ¦ Villblomsten
+Le jardin fleuri (6 colonnes de 6 et un bouquet de 16 cartes), mais on déplace des suites entières. ¦ Kvetinová záhrada (6 stĺpcov po 6 a kytica 16 kariet), ale presúvajú sa celé postupky. ¦ Blomsterhagen (6 kolonner med 6 og en bukett med 16 kort), men man flytter hele rekker.
+10 colonnes toutes visibles. La première carte posée sur une fondation donne la valeur de départ des quatre (le Roi passe à l’As). On monte ou on descend dans la même couleur de carte, une carte à la fois, et le Roi touche l’As. ¦ 10 stĺpcov, všetky viditeľné. Prvá karta položená na základňu určí počiatočnú hodnotu všetkých štyroch (kráľ prechádza na eso). Skladá sa nahor alebo nadol v rovnakej farbe, po jednej karte, a kráľ nadväzuje na eso. ¦ 10 kolonner, alle synlige. Det første kortet på en grunnbunke gir startverdien for alle fire (kongen går videre til ess). Man bygger opp eller ned i samme sort, ett kort om gangen, og kongen henger sammen med esset.
+La place forte ¦ Pevnosť ¦ Festningen
+Rues et ruelles (8 colonnes, on descend sans s’occuper des couleurs), avec une case libre. ¦ Ulice a uličky (8 stĺpcov, zostupne bez ohľadu na farby) s jedným voľným poľom. ¦ Gater og smug (8 kolonner, nedover uten å bry seg om sortene) med én fri celle.
+Le fort ¦ Tvrdza ¦ Fortet
+Rues et ruelles (8 colonnes, on descend sans s’occuper des couleurs), avec deux cases libres. ¦ Ulice a uličky (8 stĺpcov, zostupne bez ohľadu na farby) s dvoma voľnými poľami. ¦ Gater og smug (8 kolonner, nedover uten å bry seg om sortene) med to frie celler.
+L’art du siège ¦ Umenie obliehania ¦ Beleiringskunsten
+Le château assiégé (les As posés d’avance, 8 colonnes de 6), avec une case libre. ¦ Obliehaný hrad (esá vyložené vopred, 8 stĺpcov po 6) s jedným voľným poľom. ¦ Den beleirede borgen (essene lagt ut på forhånd, 8 kolonner med 6) med én fri celle.
+La toile de Pénélope ¦ Penelopina tkanina ¦ Penelopes vev
+Le château assiégé (les As posés d’avance, 8 colonnes de 6), mais seul un Roi va dans une colonne vide. ¦ Obliehaný hrad (esá vyložené vopred, 8 stĺpcov po 6), ale do prázdneho stĺpca ide len kráľ. ¦ Den beleirede borgen (essene lagt ut på forhånd, 8 kolonner med 6), men bare en konge kan gå i en tom kolonne.
+La citadelle ¦ Citadela ¦ Citadellet
+Le château assiégé, mais pendant la distribution, toute carte qui peut monter sur une fondation y va tout de suite. ¦ Obliehaný hrad, ale počas rozdávania ide každá karta, ktorá môže na základňu, rovno tam. ¦ Den beleirede borgen, men under utdelingen går hvert kort som kan gå opp på en grunnbunke, dit med en gang.
+Les rois exilés ¦ Vyhnaní králi ¦ De landflyktige kongene
+La citadelle (les cartes qui peuvent monter y vont pendant la distribution), mais seul un Roi va dans une colonne vide. ¦ Citadela (karty, ktoré môžu hore, tam idú počas rozdávania), ale do prázdneho stĺpca ide len kráľ. ¦ Citadellet (kort som kan gå opp, gjør det under utdelingen), men bare en konge kan gå i en tom kolonne.
+Le bastion ¦ Bašta ¦ Bastionen
+10 colonnes de 5 cartes et 2 cases libres déjà occupées ; on monte ou on descend dans la même couleur de carte, une carte à la fois ; une colonne vide prend n’importe quelle carte. ¦ 10 stĺpcov po 5 kartách a 2 voľné polia už obsadené; skladá sa nahor alebo nadol v rovnakej farbe, po jednej karte; prázdny stĺpec berie akúkoľvek kartu. ¦ 10 kolonner med 5 kort og 2 frie celler som allerede er opptatt; man bygger opp eller ned i samme sort, ett kort om gangen; en tom kolonne tar et hvilket som helst kort.
+La boîte à thé ¦ Čajová škatuľka ¦ Teboksen
+8 colonnes de 6 ou 7 cartes, tout est visible ; on descend sans s’occuper des couleurs et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. ¦ 8 stĺpcov po 6 alebo 7 kartách, všetko je viditeľné; skladá sa zostupne bez ohľadu na farby a presúvajú sa celé postupky; prázdny stĺpec berie akúkoľvek kartu. ¦ 8 kolonner med 6 eller 7 kort, alt er synlig; man bygger nedover uten å bry seg om sortene og flytter hele rekker; en tom kolonne tar et hvilket som helst kort.
+La boîte à thé américaine ¦ Americká čajová škatuľka ¦ Den amerikanske teboksen
+8 colonnes de 6 ou 7 cartes, tout est visible ; on descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. ¦ 8 stĺpcov po 6 alebo 7 kartách, všetko je viditeľné; skladá sa zostupne so striedaním červenej a čiernej a presúvajú sa celé postupky; prázdny stĺpec berie akúkoľvek kartu. ¦ 8 kolonner med 6 eller 7 kort, alt er synlig; man bygger nedover med vekselvis rødt og svart og flytter hele rekker; en tom kolonne tar et hvilket som helst kort.
+La boîte à thé anglaise ¦ Anglická čajová škatuľka ¦ Den engelske teboksen
+8 colonnes de 6 ou 7 cartes, tout est visible ; on descend en alternant rouge et noir, une carte à la fois ; seul un Roi va dans une colonne vide. ¦ 8 stĺpcov po 6 alebo 7 kartách, všetko je viditeľné; skladá sa zostupne so striedaním červenej a čiernej, po jednej karte; do prázdneho stĺpca ide len kráľ. ¦ 8 kolonner med 6 eller 7 kort, alt er synlig; man bygger nedover med vekselvis rødt og svart, ett kort om gangen; bare en konge kan gå i en tom kolonne.
+Les trois sommets stricts ¦ Prísne tri vrcholy ¦ De tre toppene, strenge
+Les trois sommets, mais le Roi et l’As ne se suivent pas : la partie est plus difficile. ¦ Tri vrcholy, ale kráľ a eso na seba nenadväzujú: hra je ťažšia. ¦ De tre toppene, men konge og ess følger ikke etter hverandre: spillet blir vanskeligere.
+Golf double ¦ Dvojitý Golf ¦ Dobbel Golf
+Golf avec deux jeux : 9 colonnes de 7 cartes. Envoie sur la défausse une carte juste au-dessus ou au-dessous ; rien ne va sur un Roi. ¦ Golf s dvoma balíčkami: 9 stĺpcov po 7 kartách. Pošli na odkladaciu kôpku kartu o jedna vyššiu alebo nižšiu; na kráľa nejde nič. ¦ Golf med to kortstokker: 9 kolonner med 7 kort. Legg på kastebunken et kort som er ett høyere eller lavere; ingenting går på en konge.
+As en haut (5 colonnes) ¦ Esá hore (5 stĺpcov) ¦ Ess øverst (5 kolonner)
+As en haut avec 5 colonnes : enlève une carte quand une autre colonne montre une carte plus forte de la même couleur de carte (l’As est le plus fort). Gagné s’il ne reste que les 4 As. ¦ Esá hore s 5 stĺpcami: odober kartu, keď iný stĺpec ukazuje vyššiu kartu rovnakej farby (eso je najvyššie). Vyhrané, keď zostanú len 4 esá. ¦ Ess øverst med 5 kolonner: fjern et kort når en annen kolonne viser et høyere kort i samme sort (ess er høyest). Vunnet hvis bare de 4 essene er igjen.
+La baronne ¦ Barónka ¦ Baronessen
+5 tas : enlève un Roi seul, ou deux cartes du dessus qui font 13 (Valet 11, Dame 12). La pioche pose une carte sur chaque tas. ¦ 5 kôpok: odober samotného kráľa alebo dve horné karty, ktoré dajú spolu 13 (dolník 11, dáma 12). Talón položí kartu na každú kôpku. ¦ 5 bunker: fjern en konge alene, eller to øverste kort som til sammen blir 13 (knekt 11, dame 12). Bunken legger ett kort på hver bunke.
+Sir Tommy ¦ Sir Tommy ¦ Sir Tommy
+Chaque carte piochée va sur une fondation ou sur l’un des 4 tas d’attente. Les fondations commencent par un As et montent de 1 en 1, sans s’occuper des couleurs. ¦ Každá ťahaná karta ide na základňu alebo na jednu zo 4 odkladacích kôpok. Základne začínajú esom a stúpajú po jednej, bez ohľadu na farby. ¦ Hvert trukket kort går på en grunnbunke eller på en av de 4 ventebunkene. Grunnbunkene begynner med et ess og bygges opp ett og ett, uten å bry seg om sortene.
+Le chat dans le coin ¦ Mačka v kúte ¦ Katten i hjørnet
+Les As sont posés d’avance et montent de 1 en 1 dans leur teinte (rouge sur rouge, noir sur noir). Chaque carte piochée va sur une fondation ou sur l’un des 4 tas d’attente ; une fois, on ramasse les tas pour repiocher. ¦ Esá sú vyložené vopred a stúpajú po jednej vo svojom odtieni (červená na červenú, čierna na čiernu). Každá ťahaná karta ide na základňu alebo na jednu zo 4 odkladacích kôpok; raz sa kôpky pozbierajú a ťahá sa znova. ¦ Essene er lagt ut på forhånd og bygges opp ett og ett i sin farge (rødt på rødt, svart på svart). Hvert trukket kort går på en grunnbunke eller på en av de 4 ventebunkene; én gang samles bunkene inn for å trekke på nytt.
+La stratégie ¦ Stratégia ¦ Strategien
+Chaque carte piochée va sur l’un des 8 tas d’attente ; seuls les As montent tout de suite. Quand la pioche est vide, on monte les cartes du dessus des tas, de 1 en 1 dans la même couleur de carte. ¦ Každá ťahaná karta ide na jednu z 8 odkladacích kôpok; hneď hore idú len esá. Keď je talón prázdny, presúvajú sa horné karty kôpok hore, po jednej v rovnakej farbe. ¦ Hvert trukket kort går på en av de 8 ventebunkene; bare essene går opp med en gang. Når bunken er tom, flytter man de øverste kortene i bunkene opp, ett og ett i samme sort.
+Gizeh ¦ Gíza ¦ Giza
+La pyramide sans pioche : les 24 autres cartes sont visibles en 3 rangées et se prennent toutes. Enlève les paires qui font 13 (Valet 11, Dame 12 ; un Roi s’en va seul). ¦ Pyramída bez talónu: ostatných 24 kariet je viditeľných v 3 radoch a všetky sa dajú vziať. Odober dvojice, ktoré dajú 13 (dolník 11, dáma 12; kráľ odchádza sám). ¦ Pyramiden uten bunke: de 24 andre kortene er synlige i 3 rader og kan alle tas. Fjern parene som blir 13 (knekt 11, dame 12; en konge går bort alene).
+Toutânkhamon ¦ Tutanchamón ¦ Tutankhamon
+La pyramide, mais la pioche se retourne trois cartes à la fois (seule la dernière se joue) et repasse autant que tu veux. ¦ Pyramída, ale talón sa otáča po troch kartách (hrá sa len posledná) a prejsť ním môžeš, koľkokrát chceš. ¦ Pyramiden, men bunken snus tre kort om gangen (bare det siste spilles) og kan gås gjennom så mange ganger du vil.
+La lune bleue ¦ Modrý mesiac ¦ Den blå månen
+Montana, mais les As vont au début des rangées : il faut ranger chaque rangée de l’As au Roi dans une même couleur. Un trou prend la carte de même couleur juste au-dessus de sa voisine de gauche. Deux fois, on peut ramasser ce qui n’est pas rangé et redistribuer. ¦ Montana, ale esá idú na začiatok radov: každý rad treba zoradiť od esa po kráľa v jednej farbe. Diera berie kartu rovnakej farby o jedna vyššiu ako jej ľavá susedka. Dvakrát môžeš pozbierať, čo nie je zoradené, a znova rozdať. ¦ Montana, men essene går til begynnelsen av radene: hver rad må ordnes fra ess til konge i samme sort. Et hull tar kortet i samme sort som er ett høyere enn naboen til venstre. To ganger kan du samle inn det som ikke er ordnet, og dele ut på nytt.
+La lune rouge ¦ Červený mesiac ¦ Den røde månen
+La lune bleue, mais les As sont posés d’avance au début des rangées et les trous sont au bout des rangées dès le départ. ¦ Modrý mesiac, ale esá sú vyložené vopred na začiatku radov a diery sú od začiatku na konci radov. ¦ Den blå månen, men essene er lagt ut på forhånd i begynnelsen av radene, og hullene er på slutten av radene fra start.
+Le voisin ¦ Sused ¦ Naboen
+Une grille de 5 × 5 : enlève deux cartes qui se touchent (même en diagonale) et font 13 (Valet 11, Dame 12) ; un Roi s’en va seul. Puis tasse la grille. ¦ Mriežka 5 × 5: odober dve karty, ktoré sa dotýkajú (aj uhlopriečne) a dajú 13 (dolník 11, dáma 12); kráľ odchádza sám. Potom mriežku zhusti. ¦ Et rutenett på 5 × 5: fjern to kort som berører hverandre (også diagonalt) og blir 13 (knekt 11, dame 12); en konge går bort alene. Skyv så sammen rutenettet.
+Isabelle ¦ Izabela ¦ Isabella
+13 colonnes de 4 cartes (seule la dernière est visible) : enlève deux cartes de même valeur prises en bas des colonnes. Un jeu de pure chance, pour se détendre. ¦ 13 stĺpcov po 4 kartách (viditeľná je len posledná): odober dve karty rovnakej hodnoty zo spodku stĺpcov. Hra čistej náhody, na oddych. ¦ 13 kolonner med 4 kort (bare det siste er synlig): fjern to kort med samme verdi nederst i kolonnene. Et rent flaksspill, for å slappe av.
+Quatorze en colonnes ¦ Štrnásť v stĺpcoch ¦ Fjorten i kolonner
+12 colonnes avec toutes les cartes visibles : enlève deux cartes prises en bas des colonnes qui font 14 (Valet 11, Dame 12, Roi 13). ¦ 12 stĺpcov so všetkými kartami viditeľnými: odober dve karty zo spodku stĺpcov, ktoré dajú 14 (dolník 11, dáma 12, kráľ 13). ¦ 12 kolonner med alle kortene synlige: fjern to kort nederst i kolonnene som blir 14 (knekt 11, dame 12, konge 13).
+Ramassé et redistribué, sans mélanger. ¦ Pozbierané a znova rozdané, bez miešania. ¦ Samlet inn og delt ut på nytt, uten å stokke.
+Les tas d’attente sont ramassés dans la pioche. ¦ Odkladacie kôpky sú pozbierané do talónu. ¦ Ventebunkene samles inn i bunken.
+Ouvre le Jeu, choisis « 🂠 Patiences (jeux de cartes) » dans « Jeu », puis le jeu parmi 233 patiences rangées par famille (Klondike, FreeCell, Araignée, Yukon, Les quarante voleurs, Châteaux et jardins, jeux de paires). Glisse une carte (ou une suite) sur une autre pile, ou clique-la puis clique où la poser ; double-clic : sur une fondation ; clic sur la pioche : piocher. Dans les jeux de paires (Pyramide, Onze, Treize…), clique les cartes qui vont ensemble. ¦ Otvor Hru, vyber „🂠 Pasiansy (kartové hry)“ v „Hra“, potom hru z 233 pasiansov zoradených podľa rodín (Klondike, FreeCell, Pavúk, Yukon, Štyridsať zbojníkov, Hrady a záhrady, párové hry). Presuň kartu (alebo postupku) na inú kôpku, alebo na ňu klikni a potom klikni, kam ju položiť; dvojklik: na základňu; klik na talón: ťahať. V párových hrách (Pyramída, Jedenásť, Trinásť…) klikaj na karty, ktoré k sebe patria. ¦ Åpne Spill, velg «🂠 Kabaler (kortspill)» i «Spill», og så spillet blant 233 kabaler ordnet etter familie (Klondike, FreeCell, Edderkopp, Yukon, De førti røverne, Slott og hager, parspill). Dra et kort (eller en rekke) til en annen bunke, eller klikk på det og så der du vil legge det; dobbeltklikk: på en grunnbunke; klikk på bunken: trekk et kort. I parspillene (Pyramiden, Elleve, Tretten…) klikker du på kortene som hører sammen.
+Quelles autres patiences sont arrivées ensuite ? ¦ Aké ďalšie pasiansy pribudli potom? ¦ Hvilke andre kabaler har kommet siden?
+Cent deux patiences classiques de plus, chacune avec ses règles dans « 📖 Les règles » de la partie. Famille Klondike et Canfield : Agnès Bernauer, Thumb and Pouch, Pas seul, Les impasses, Huit fois huit, Spike, Alternance, La harpe, La grande harpe, Acme, Le crapaud américain, Canfield bigarré, La duchesse, La porte. Avec des cases libres : Le pingouin, Baker’s Game (Roi seul), Seahaven détendu, Repair, Ocean Towers, Sept par quatre, Sept par cinq, FreeCell défi, FreeCell super défi. Araignées et gitanes : Le scarabée, Queue de scorpion, Scorpion double, Motif de divorce, La tarentule, Araignée à découvert, La harpe de Milligan, La harpe de Lexington, Brunswick, Carlton, Miss Milligan, Millie, L’île d’Elbe, Le mont Olympe. Yukon : La patience australienne, Canberra, Raw Prawn, Rushdike, La discipline chinoise, Solitaire russe double. Les quarante voleurs et leurs cousins : Ali Baba, Cassim, Rang et file, Les As affairés, La cour, Le carré de Napoléon, L’exil de Napoléon, Deuces, La lune décroissante, Les cinquante fameux, Quarante-neuf, Sans limite, Les petits quarante, Le zèbre, Le congrès, Le parlement, Pair et impair, Le cotillon royal. Châteaux, éventails et jardins : Le treize porte-bonheur, La patience portugaise, Bonne mesure, La cruelle, La persévérance, L’éventail en vagues, L’éventail en boîte, L’éventail fascinant, La lampe de minuit, Shamrocks, La maison dans les bois, La maison sur la colline, Bisley, Le cadran du grand-père, Le mur de pierre, La fleur sauvage, L’échiquier, La place forte, Le fort, L’art du siège, La toile de Pénélope, La citadelle, Les rois exilés, Le bastion, La boîte à thé (et ses versions américaine et anglaise). Paires, suites et calculs : Les trois sommets stricts, Golf double, As en haut (5 colonnes), La baronne, Sir Tommy, Le chat dans le coin, La stratégie, Gizeh, Toutânkhamon, La lune bleue, La lune rouge, Le voisin, Isabelle et Quatorze en colonnes. ¦ O sto dva klasických pasiansov viac, každý s pravidlami v „📖 Pravidlá“ hry. Rodina Klondike a Canfield: Agnès Bernauer, Thumb and Pouch, Pas seul, Slepé uličky, Osemkrát osem, Spike, Striedanie, Harfa, Veľká harfa, Acme, Americká ropucha, Pestrý Canfield, Vojvodkyňa, Brána. S voľnými poľami: Tučniak, Baker’s Game (len kráľ), Uvoľnený Seahaven, Repair, Ocean Towers, Sedem na štyri, Sedem na päť, FreeCell výzva, FreeCell super výzva. Pavúky a Gypsy: Skarabeus, Chvost škorpióna, Dvojitý Scorpion, Dôvod na rozvod, Tarantula, Odkrytý pavúk, Milliganova harfa, Lexingtonská harfa, Brunswick, Carlton, Miss Milligan, Millie, Ostrov Elba, Olymp. Yukon: Austrálsky pasians, Canberra, Raw Prawn, Rushdike, Čínska disciplína, Dvojitý ruský pasians. Štyridsať zbojníkov a príbuzní: Alí Baba, Kasim, Rady a šíky, Zaneprázdnené esá, Nádvorie, Napoleonov štvorec, Napoleonov exil, Deuces, Ubúdajúci mesiac, Slávnych päťdesiat, Štyridsaťdeväť, Bez obmedzenia, Malých štyridsať, Zebra, Kongres, Parlament, Párne a nepárne, Kráľovský kotilión. Hrady, vejáre a záhrady: Šťastná trinástka, Portugalský pasians, Dobrá miera, Krutá, Vytrvalosť, Vlnitý vejár, Vejár v krabici, Okúzľujúci vejár, Polnočná lampa, Shamrocks, Dom v lese, Dom na kopci, Bisley, Dedkove hodiny, Kamenný múr, Divý kvet, Šachovnica, Pevnosť, Tvrdza, Umenie obliehania, Penelopina tkanina, Citadela, Vyhnaní králi, Bašta, Čajová škatuľka (a jej americká a anglická verzia). Páry, postupky a počty: Prísne tri vrcholy, Dvojitý Golf, Esá hore (5 stĺpcov), Barónka, Sir Tommy, Mačka v kúte, Stratégia, Gíza, Tutanchamón, Modrý mesiac, Červený mesiac, Sused, Izabela a Štrnásť v stĺpcoch. ¦ Hundre og to klassiske kabaler til, hver med sine regler i spillets «📖 Reglene». Familien Klondike og Canfield: Agnès Bernauer, Thumb and Pouch, Pas seul, Blindveier, Åtte ganger åtte, Spike, Veksling, Harpen, Den store harpen, Acme, Den amerikanske padden, Broket Canfield, Hertuginnen, Porten. Med frie celler: Pingvinen, Baker’s Game (bare konge), Avslappet Seahaven, Repair, Ocean Towers, Sju ganger fire, Sju ganger fem, FreeCell utfordring, FreeCell superutfordring. Edderkopper og Gypsy: Skarabeen, Skorpionhale, Dobbel Scorpion, Grunn til skilsmisse, Tarantellen, Åpen edderkopp, Milligans harpe, Lexington-harpen, Brunswick, Carlton, Miss Milligan, Millie, Elba, Olympen. Yukon: Australsk kabal, Canberra, Raw Prawn, Rushdike, Kinesisk disiplin, Dobbel russisk kabal. De førti røverne og fetterne deres: Ali Baba, Kassim, Rekke og rad, Travle ess, Gården, Napoleons firkant, Napoleons eksil, Deuces, Minkende måne, De berømte femti, Førtini, Uten grense, Lille førti, Sebraen, Kongressen, Parlamentet, Odde og jevne, Kongelig kotiljong. Slott, vifter og hager: Lykketretten, Portugisisk kabal, Godt mål, Den grusomme, Utholdenhet, Bølgevifte, Vifte i eske, Den fascinerende vifta, Midnattslampen, Shamrocks, Huset i skogen, Huset på haugen, Bisley, Bestefars klokke, Steinmuren, Villblomsten, Sjakkbrettet, Festningen, Fortet, Beleiringskunsten, Penelopes vev, Citadellet, De landflyktige kongene, Bastionen, Teboksen (og den amerikanske og engelske utgaven). Par, rekker og regning: De tre toppene, strenge, Dobbel Golf, Ess øverst (5 kolonner), Baronessen, Sir Tommy, Katten i hjørnet, Strategien, Giza, Tutankhamon, Den blå månen, Den røde månen, Naboen, Isabella og Fjorten i kolonner.
+(suite) ¦ (pokračovanie) ¦ (fortsettelse)
+.pptx : textes, images, formes, tableaux ¦ .pptx: texty, obrázky, tvary, tabuľky ¦ .pptx: tekster, bilder, former, tabeller
+Ce texte est vide : rien à mettre en diapositives. ¦ Tento text je prázdny: nie je čo dať do snímok. ¦ Denne teksten er tom: ingenting å legge i lysbilder.
+Cette image n’est pas dans les médias. ¦ Tento obrázok nie je v médiách. ¦ Dette bildet er ikke i medier.
+Envoyer vers… : la présentation en vidéo, dans le Montage vidéo ou sur ton site ¦ Poslať do…: prezentácia ako video, do Strihu videa alebo na tvoj web ¦ Send til…: presentasjonen som video, til Videoredigering eller til nettstedet ditt
+Fichier PowerPoint téléchargé. ¦ Súbor PowerPoint stiahnutý. ¦ PowerPoint-fil lastet ned.
+La présentation devient une vidéo ({time}), rangée dans les Médias, puis tu choisis où elle va : le Montage vidéo ou ton site. Laisse la fenêtre ouverte pendant l’enregistrement. ¦ Z prezentácie sa stane video ({time}), uloží sa do Médií a potom vyberieš, kam pôjde: do Strihu videa alebo na tvoj web. Počas nahrávania nechaj okno otvorené. ¦ Presentasjonen blir en video ({time}), lagret i Medier, og så velger du hvor den skal: Videoredigering eller nettstedet ditt. La vinduet være åpent under opptaket.
+Le diaporama devient une vidéo ({time}), rangée dans les Médias, puis tu choisis où elle va : le Montage vidéo ou ton site. Laisse la fenêtre ouverte pendant l’enregistrement. ¦ Z prezentácie fotiek sa stane video ({time}), uloží sa do Médií a potom vyberieš, kam pôjde: do Strihu videa alebo na tvoj web. Počas nahrávania nechaj okno otvorené. ¦ Lysbildefremvisningen blir en video ({time}), lagret i Medier, og så velger du hvor den skal: Videoredigering eller nettstedet ditt. La vinduet være åpent under opptaket.
+Le diaporama en vidéo, rangé dans les médias, puis dans le Montage vidéo ou sur ton site ¦ Prezentácia fotiek ako video, uložená do médií, potom do Strihu videa alebo na tvoj web ¦ Lysbildefremvisningen som video, lagret i medier, så i Videoredigering eller på nettstedet ditt
+PowerPoint : assemblage du fichier… ¦ PowerPoint: skladanie súboru… ¦ PowerPoint: setter sammen filen…
+PowerPoint : diapositive {n} / {total} ¦ PowerPoint: snímka {n} / {total} ¦ PowerPoint: lysbilde {n} / {total}
+PowerPoint impossible : {error} ¦ PowerPoint nie je možný: {error} ¦ PowerPoint ikke mulig: {error}
+📊 PowerPoint ¦ 📊 PowerPoint ¦ 📊 PowerPoint
+📊 PowerPoint (.pptx) ¦ 📊 PowerPoint (.pptx) ¦ 📊 PowerPoint (.pptx)
+📤 Envoyer la présentation ¦ 📤 Poslať prezentáciu ¦ 📤 Send presentasjonen
+📤 Envoyer le diaporama ¦ 📤 Poslať prezentáciu fotiek ¦ 📤 Send lysbildefremvisningen
+📤 Envoyer vers… (la vidéo) ¦ 📤 Poslať do… (video) ¦ 📤 Send til… (videoen)
+📤 Envoyer vers… (le Montage vidéo, ton site) ¦ 📤 Poslať do… (Strih videa, tvoj web) ¦ 📤 Send til… (Videoredigering, nettstedet ditt)
+⤓ Exporter l’image (PNG, JPG, WebP, TIFF, imprimer)… ¦ ⤓ Exportovať obrázok (PNG, JPG, WebP, TIFF, tlač)… ¦ ⤓ Eksporter bildet (PNG, JPG, WebP, TIFF, skriv ut)…
+Exporter : l’image retouchée (PNG, JPG, WebP, TIFF, imprimer) ou l’avant / après ¦ Exportovať: upravený obrázok (PNG, JPG, WebP, TIFF, tlač) alebo pred / po ¦ Eksporter: det redigerte bildet (PNG, JPG, WebP, TIFF, skriv ut) eller før / etter
+🖼 L’image retouchée (PNG, JPG, WebP, TIFF, imprimer)… ¦ 🖼 Upravený obrázok (PNG, JPG, WebP, TIFF, tlač)… ¦ 🖼 Det redigerte bildet (PNG, JPG, WebP, TIFF, skriv ut)…
+🌐 WebP ¦ 🌐 WebP ¦ 🌐 WebP
+léger, pour le web ¦ ľahký, pre web ¦ lett, for nettet
+🗂 TIFF ¦ 🗂 TIFF ¦ 🗂 TIFF
+sans perte, pour archiver ¦ bezstratový, na archiváciu ¦ tapsfritt, for arkivering
+Ce navigateur ne sait pas faire du WebP : choisis PNG ou JPG. ¦ Tento prehliadač nevie WebP: vyber PNG alebo JPG. ¦ Denne nettleseren kan ikke lage WebP: velg PNG eller JPG.
+Cette action de retouche n’existe plus. ¦ Táto akcia úprav už neexistuje. ¦ Denne redigeringshandlingen finnes ikke lenger.
+Choisis une photo à retoucher. ¦ Vyber fotku na úpravu. ¦ Velg et bilde å redigere.
+Envoyer l’image affichée ou le compte rendu vers un autre outil ¦ Poslať zobrazený obrázok alebo správu do iného nástroja ¦ Send det viste bildet eller rapporten til et annet verktøy
+Ouvrir la photo A ou B dans la Retouche des photos ¦ Otvoriť fotku A alebo B v Úprave fotiek ¦ Åpne bilde A eller B i Bilderedigering
+Exporter l’image affichée, ou imprimer les deux photos avec la ressemblance et les notes ¦ Exportovať zobrazený obrázok, alebo vytlačiť obe fotky s podobnosťou a poznámkami ¦ Eksporter det viste bildet, eller skriv ut begge bildene med likheten og notatene
+Exporter l’image (ce qui est affiché)… ¦ Exportovať obrázok (čo je zobrazené)… ¦ Eksporter bildet (det som vises)…
+Imprimer (les deux photos, la ressemblance, les notes)… ¦ Vytlačiť (obe fotky, podobnosť, poznámky)… ¦ Skriv ut (begge bildene, likheten, notatene)…
+L’image affichée ¦ Zobrazený obrázok ¦ Det viste bildet
+Le compte rendu (photos, ressemblance, notes) ¦ Správa (fotky, podobnosť, poznámky) ¦ Rapporten (bilder, likhet, notater)
+La Retouche des photos n’est pas chargée. ¦ Úprava fotiek nie je načítaná. ¦ Bilderedigering er ikke lastet.
+Photo {side} — {name} ¦ Fotka {side} — {name} ¦ Bilde {side} — {name}
+Retoucher quelle photo ? ¦ Ktorú fotku upraviť? ¦ Hvilket bilde skal redigeres?
+Utiliser ¦ Použiť ¦ Bruk
+✒️ Quel dessin ? ¦ ✒️ Ktorú kresbu? ¦ ✒️ Hvilken tegning?
+Aucun dessin enregistré dans le Dessin vectoriel. ¦ Vo Vektorovej kresbe nie je uložená žiadna kresba. ¦ Ingen tegning lagret i Vektortegning.
+Ce dessin n’a pas pu être lu : ouvre le Dessin vectoriel une fois, puis recommence. ¦ Túto kresbu sa nepodarilo prečítať: raz otvor Vektorovú kresbu a skús to znova. ¦ Denne tegningen kunne ikke leses: åpne Vektortegning én gang, og prøv igjen.
+📝 Quel document ? ¦ 📝 Ktorý dokument? ¦ 📝 Hvilket dokument?
+Aucun document dans le Traitement de texte. ¦ V Textovom editore nie je žiadny dokument. ¦ Ingen dokumenter i Tekstbehandling.
+Des images qui défilent (‹ ›) ; sans script, elles glissent au doigt ¦ Obrázky, ktoré sa posúvajú (‹ ›); bez skriptu sa posúvajú prstom ¦ Bilder som ruller (‹ ›); uten skript glir de med fingeren
+Les images du diaporama ¦ Obrázky prezentácie ¦ Bildene i lysbildefremvisningen
+Une vidéo de tes médias (ou d’un fichier : 📁 Importer…), avec ses boutons lecture et plein écran ¦ Video z tvojich médií (alebo zo súboru: 📁 Importovať…), s tlačidlami prehrávania a celej obrazovky ¦ En video fra mediene dine (eller fra en fil: 📁 Importer…), med avspillings- og fullskjermknapper
+La vidéo du site ¦ Video webu ¦ Nettstedets video
+Télécharger la vidéo ¦ Stiahnuť video ¦ Last ned videoen
+Un son de tes médias (témoignage, chanson…), et ce qu’on y entend écrit dessous si tu veux ¦ Zvuk z tvojich médií (svedectvo, pieseň…) a pod ním, ak chceš, napísané, čo je počuť ¦ En lyd fra mediene dine (vitnemål, sang…), og det man hører, skrevet under hvis du vil
+Le son du site ¦ Zvuk webu ¦ Nettstedets lyd
+🎧 Ce qu’on entend (facultatif) ¦ 🎧 Čo je počuť (nepovinné) ¦ 🎧 Det man hører (valgfritt)
+Écris ou colle la transcription : elle sera sous le son, pour ceux qui ne peuvent pas l’écouter. Laisse vide si tu n’en veux pas. ¦ Napíš alebo vlož prepis: bude pod zvukom pre tých, ktorí ho nemôžu počúvať. Ak ho nechceš, nechaj prázdne. ¦ Skriv eller lim inn transkripsjonen: den havner under lyden, for dem som ikke kan høre på den. La feltet stå tomt hvis du ikke vil ha den.
+Ajouter le son ¦ Pridať zvuk ¦ Legg til lyden
+Télécharger le son ¦ Stiahnuť zvuk ¦ Last ned lyden
+Ce qu’on entend ¦ Čo je počuť ¦ Det man hører
+Un de tes dessins vectoriels, ou un SVG collé (sans script ni lien vers l’extérieur) ¦ Jedna z tvojich vektorových kresieb, alebo vložené SVG (bez skriptu a odkazov von) ¦ En av vektortegningene dine, eller en innlimt SVG (uten skript eller lenker utover)
+Un de mes dessins ¦ Jedna z mojich kresieb ¦ En av tegningene mine
+Dessin vectoriel → mes dessins enregistrés ¦ Vektorová kresba → moje uložené kresby ¦ Vektortegning → mine lagrede tegninger
+Coller un SVG ¦ Vložiť SVG ¦ Lim inn en SVG
+Le code <svg>…</svg> d’un dessin ¦ Kód <svg>…</svg> kresby ¦ Koden <svg>…</svg> til en tegning
+📋 Coller un SVG ¦ 📋 Vložiť SVG ¦ 📋 Lim inn en SVG
+Colle ici le code du dessin, de <svg> à </svg>. Les scripts et les liens vers l’extérieur sont retirés. ¦ Sem vlož kód kresby, od <svg> po </svg>. Skripty a odkazy von sa odstránia. ¦ Lim inn koden til tegningen her, fra <svg> til </svg>. Skript og lenker utover fjernes.
+Ajouter le dessin ¦ Pridať kresbu ¦ Legg til tegningen
+Un texte du Traitement de texte (une lettre, un récit), mis au propre pour la page ¦ Text z Textového editora (list, rozprávanie), upravený pre stránku ¦ En tekst fra Tekstbehandling (et brev, en fortelling), renskrevet for siden
+Ce document est vide. ¦ Tento dokument je prázdny. ¦ Dette dokumentet er tomt.
+Vidéo, son, dessin et texte ¦ Video, zvuk, kresba a text ¦ Video, lyd, tegning og tekst
+🎬 Changer la vidéo… ¦ 🎬 Zmeniť video… ¦ 🎬 Bytt video…
+🎧 Changer le son… ¦ 🎧 Zmeniť zvuk… ¦ 🎧 Bytt lyd…
+Le fichier part avec le site (dossier medias/) à l’export et à la publication. ¦ Súbor odchádza s webom (priečinok medias/) pri exporte a zverejnení. ¦ Filen følger med nettstedet (mappen medias/) ved eksport og publisering.
+Un autre son ¦ Iný zvuk ¦ En annen lyd
+Une autre vidéo ¦ Iné video ¦ En annen video
+{what} (dossier medias/) ¦ {what} (priečinok medias/) ¦ {what} (mappen medias/)
+vidéo ou son ¦ video alebo zvuk ¦ video eller lyd
+vidéos ou sons ¦ videá alebo zvuky ¦ videoer eller lyder
+{what} : trop lourd pour un site (90 Mo au plus par fichier, 300 Mo en tout) ¦ {what}: príliš veľké pre web (najviac 90 MB na súbor, 300 MB celkovo) ¦ {what}: for tungt for et nettsted (maks. 90 MB per fil, 300 MB totalt)
+vidéo ou son pas mis ¦ video alebo zvuk nevložené ¦ video eller lyd ikke lagt inn
+vidéos ou sons pas mis ¦ videá alebo zvuky nevložené ¦ videoer eller lyder ikke lagt inn
+Mon site web n’est pas chargé : recharge la page. ¦ Môj web nie je načítaný: znova načítaj stránku. ¦ Min nettside er ikke lastet: last inn siden på nytt.
+Mon site web ne sait pas recevoir ça. ¦ Môj web toto nevie prijať. ¦ Min nettside kan ikke ta imot dette.
+Ce texte est vide. ¦ Tento text je prázdny. ¦ Denne teksten er tom.
+Mon site ¦ Môj web ¦ Min nettside
+ouvert ¦ otvorený ¦ åpen
+la dernière fois ¦ naposledy ¦ sist
+ouvert, pas encore enregistré ¦ otvorený, ešte neuložený ¦ åpen, ikke lagret ennå
+{what} : sur quel site ? ¦ {what}: na ktorý web? ¦ {what}: på hvilket nettsted?
+Un nouveau site ¦ Nový web ¦ Et nytt nettsted
+Sur quelle page ? ¦ Na ktorú stránku? ¦ På hvilken side?
+Une nouvelle page… ¦ Nová stránka… ¦ En ny side…
+📄 Nouvelle page ¦ 📄 Nová stránka ¦ 📄 Ny side
+Le nom de la page (il apparaît dans le menu) : ¦ Názov stránky (zobrazí sa v ponuke): ¦ Sidens navn (det vises i menyen):
+La vidéo ¦ Video ¦ Videoen
+{what} est sur la page « {page} » de « {site} » ¦ {what} je na stránke „{page}“ webu „{site}“ ¦ {what} er på siden «{page}» på «{site}»
+vidéos WebM ¦ videá WebM ¦ WebM-videoer
+Les iPhone d’avant 2024 ne la lisent pas : préfère le MP4 (H.264), que tout le monde lit. ¦ iPhony staršie ako 2024 ho neprehrajú: radšej zvoľ MP4 (H.264), ktoré prehrá každý. ¦ iPhone fra før 2024 kan ikke spille den: velg heller MP4 (H.264), som alle kan spille.
+vidéos .mov (QuickTime) ¦ videá .mov (QuickTime) ¦ .mov-videoer (QuickTime)
+Souvent illisible hors d’Apple : refais-la en MP4 (🎬 Montage vidéo → Exporter). ¦ Mimo Apple často nečitateľné: prerob ho do MP4 (🎬 Strih videa → Exportovať). ¦ Ofte uleselig utenfor Apple: lag den om til MP4 (🎬 Videoredigering → Eksporter).
+vidéos Ogg (.ogv) ¦ videá Ogg (.ogv) ¦ Ogg-videoer (.ogv)
+Jamais sur Safari ni sur iPhone : préfère le MP4. ¦ Nikdy v Safari ani na iPhone: radšej zvoľ MP4. ¦ Aldri i Safari eller på iPhone: velg heller MP4.
+sons Ogg (Vorbis, Opus) ¦ zvuky Ogg (Vorbis, Opus) ¦ Ogg-lyder (Vorbis, Opus)
+Safari ne les lit que depuis 2025 : préfère le MP3 (🎧 Son → Exporter). ¦ Safari ich prehráva až od roku 2025: radšej zvoľ MP3 (🎧 Zvuk → Exportovať). ¦ Safari spiller dem bare siden 2025: velg heller MP3 (🎧 Lyd → Eksporter).
+sons FLAC ¦ zvuky FLAC ¦ FLAC-lyder
+Marche partout, mais c’est lourd pour un site : le MP3 se charge bien plus vite. ¦ Funguje všade, ale pre web je to ťažké: MP3 sa načíta oveľa rýchlejšie. ¦ Fungerer overalt, men det er tungt for et nettsted: MP3 lastes mye raskere.
+scroll-snap (le diaporama s’arrête sur chaque image) ¦ scroll-snap (prezentácia sa zastaví na každom obrázku) ¦ scroll-snap (lysbildefremvisningen stopper på hvert bilde)
+Marche partout depuis 2019 ; ailleurs, les images défilent sans s’arrêter. ¦ Funguje všade od roku 2019; inde sa obrázky posúvajú bez zastavenia. ¦ Fungerer overalt siden 2019; ellers ruller bildene uten å stoppe.
+Maison par époques ¦ Dom podľa obdobia ¦ Huset per periode
+Ma carte animée ¦ Moja animovaná mapa ¦ Mitt animerte kart
+La maison au fil du temps ¦ Dom v priebehu času ¦ Huset gjennom tiden
+Le dessin vectoriel n’est pas chargé. ¦ Vektorová kresba nie je načítaná. ¦ Vektortegningen er ikke lastet.
+Lecture de la carte… ¦ Čítanie mapy… ¦ Leser kartet…
+Carte introuvable ¦ Mapa sa nenašla ¦ Fant ikke kartet
+La maison n’est pas chargée. ¦ Dom nie je načítaný. ¦ Huset er ikke lastet.
+Lecture de la maison… ¦ Čítanie domu… ¦ Leser huset…
+Maison introuvable ¦ Dom sa nenašiel ¦ Fant ikke huset
+Le plan de cette maison est vide. ¦ Pôdorys tohto domu je prázdny. ¦ Plantegningen for dette huset er tom.
+Choisir une carte ¦ Vybrať mapu ¦ Velg et kart
+Chercher une carte… ¦ Hľadať mapu… ¦ Søk etter et kart…
+{n} objets ¦ Objektov: {n} ¦ {n} objekter
+Les objets qui ont des années (onglet Propriétés de la carte) apparaissent à leur date. ¦ Objekty, ktoré majú roky (záložka Vlastnosti mapy), sa objavia k svojmu dátumu. ¦ Objekter som har årstall (fanen Egenskaper på kartet), vises på sin dato.
+Aucune carte enregistrée : fais-en une dans Outils de modification → 🗺️ Carte. ¦ Žiadna uložená mapa: vytvor ju v Nástroje úprav → 🗺️ Mapa. ¦ Ingen lagrede kart: lag et i Redigeringsverktøy → 🗺️ Kart.
+Choisir une maison ¦ Vybrať dom ¦ Velg et hus
+Chercher une maison… ¦ Hľadať dom… ¦ Søk etter et hus…
+Chaque époque de la maison (🕰) devient un plan, l’un après l’autre, en fondu. ¦ Každé obdobie domu (🕰) sa stane záberom, jedno po druhom, s prelínaním. ¦ Hver periode i huset (🕰) blir et bilde, den ene etter den andre, med overtoning.
+Aucune maison enregistrée : dessine-en une dans Outils de modification → 🏠 Maison. ¦ Žiadny uložený dom: nakresli ho v Nástroje úprav → 🏠 Dom. ¦ Ingen lagrede hus: tegn et i Redigeringsverktøy → 🏠 Hus.
+Apparition des objets ¦ Objavovanie objektov ¦ Objektenes framtreden
+D’un coup ¦ Naraz ¦ På én gang
+Avance doucement ¦ Pomaly pribúda ¦ Sakte fram
+Fondu d’une époque à l’autre (0 à 0,9) ¦ Prelínanie medzi obdobiami (0 až 0,9) ¦ Overtoning mellom perioder (0 til 0,9)
+L’année et le nom de l’époque en légende ¦ Rok a názov obdobia v popise ¦ Året og periodens navn som bildetekst
+(une copie de la carte) ¦ (kópia mapy) ¦ (en kopi av kartet)
+En faire la musique ¦ Urobiť z toho hudbu ¦ Gjør det til musikk
+Ce son passe en musique de fond, pour tout le film ¦ Tento zvuk sa stane hudbou na pozadí pre celý film ¦ Denne lyden blir bakgrunnsmusikk for hele filmen
+Voix retirée. ¦ Hlas odobratý. ¦ Stemmen fjernet.
+Le son est maintenant la musique du film. ¦ Zvuk je teraz hudbou filmu. ¦ Lyden er nå filmens musikk.
+Le son est la voix du film (onglet Film). « 🎵 En faire la musique » pour le mettre en fond. ¦ Zvuk je hlasom filmu (záložka Film). „🎵 Urobiť z toho hudbu“ ho dá do pozadia. ¦ Lyden er filmens stemme (fanen Film). «🎵 Gjør det til musikk» legger den i bakgrunnen.
+Animer dans le Studio ¦ Animovať v Štúdiu ¦ Animer i Studioet
+Le curseur du temps joue tout seul : les objets apparaissent à leur date ¦ Časový posúvač hrá sám: objekty sa objavujú k svojmu dátumu ¦ Tidsglidebryteren spiller av seg selv: objektene vises på sin dato
+Le Studio d’animation n’est pas chargé. ¦ Animačné štúdio nie je načítané. ¦ Animasjonsstudioet er ikke lastet.
+Aucune carte enregistrée : commence par « ＋ Nouvelle carte ». ¦ Žiadna uložená mapa: začni „＋ Nová mapa“. ¦ Ingen lagrede kart: begynn med «＋ Nytt kart».
+Quelle carte animer ? ¦ Ktorú mapu animovať? ¦ Hvilket kart skal animeres?
+Les objets qui ont des années (onglet Propriétés) apparaissent à leur date, de la première année à la dernière. ¦ Objekty, ktoré majú roky (záložka Vlastnosti), sa objavia k svojmu dátumu, od prvého roku po posledný. ¦ Objekter som har årstall (fanen Egenskaper), vises på sin dato, fra det første året til det siste.
+Un film où le curseur du temps avance tout seul, de la première année à la dernière ¦ Film, v ktorom sa časový posúvač posúva sám, od prvého roku po posledný ¦ En film der tidsglidebryteren går fram av seg selv, fra det første året til det siste
+Cette carte est trop lourde pour être copiée dans un film : enregistre-la, puis Outils de modification → 🗺️ Carte → « 🎞 Animer dans le Studio ». ¦ Táto mapa je príliš veľká na skopírovanie do filmu: ulož ju a potom Nástroje úprav → 🗺️ Mapa → „🎞 Animovať v Štúdiu“. ¦ Dette kartet er for tungt til å kopieres inn i en film: lagre det, og så Redigeringsverktøy → 🗺️ Kart → «🎞 Animer i Studioet».
+Le plan ou la vue 3D dans un autre outil : montage, présentation, mise en page, dessin… ¦ Pôdorys alebo 3D zobrazenie v inom nástroji: strih, prezentácia, rozloženie, kresba… ¦ Plantegningen eller 3D-visningen i et annet verktøy: redigering, presentasjon, oppsett, tegning…
+🎞 Animer les époques dans le Studio ¦ 🎞 Animovať obdobia v Štúdiu ¦ 🎞 Animer periodene i Studioet
+Animer les époques dans le Studio ¦ Animovať obdobia v Štúdiu ¦ Animer periodene i Studioet
+Le plan (image) ¦ Pôdorys (obrázok) ¦ Plantegningen (bilde)
+La vue 3D (image) ¦ 3D zobrazenie (obrázok) ¦ 3D-visningen (bilde)
+Le plan en dessin (vectoriel, mise en page…) ¦ Pôdorys ako kresba (vektorová, rozloženie…) ¦ Plantegningen som tegning (vektor, oppsett…)

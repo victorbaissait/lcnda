@@ -92,6 +92,7 @@
         if (load().accent) form.dataset.accentSet = '1';
         const persist = () => save(read(form));
         form.addEventListener('input', persist); form.addEventListener('change', persist);
+        ext.cxNeeds?.bookHint?.(form); // 🧩 « il me manque… » : une ligne repliée sous la branche (heritage-connexions-besoins.js)
         form.elements.accent.addEventListener('input', () => { form.dataset.accentSet = '1'; persist(); });
         form.addEventListener('click', async e => {
             const mv = e.target.closest('[data-book-move]');
@@ -127,6 +128,18 @@
                 photo_count: String(c.photo_count), event_count: String(c.event_count), accent: c.accent || ''};
             Object.keys(p).forEach(k => { if (p[k] === '') delete p[k]; });
             const kind = f.dataset.bookFormat;
+            // 🔒 un récit écrit à la main (« ta version ») sort tel quel : prévenir s'il nomme une personne vivante ou confidentielle
+            try {
+                const m = await A().api('bio_living_mentions');
+                const items = m?.items || [];
+                if (items.length) {
+                    const lines = items.slice(0, 6).map(it => `• ${it.person || '?'} : nomme ${it.mentions.map(x => `${x.name} (${x.why})`).join(', ')}`);
+                    if (items.length > 6) lines.push(`• … et ${items.length - 6} autre(s) récit(s)`);
+                    const ok = await A().confirmBox(`Ces récits, écrits par toi, sortent tels quels dans le livre :\n${lines.join('\n')}\n\nTu peux les relire dans la fiche (📖 Récit d’une vie) avant d’exporter.`,
+                        {title: 'Un récit nomme une personne vivante', okLabel: 'Exporter quand même', danger: false});
+                    if (!ok) return;
+                }
+            } catch (_) { /* pas bloquant : l'export reste possible */ }
             if (kind === 'print') { // L1 : la fenêtre « Imprimer » commune (aperçu, pages), sans nouvel onglet
                 const UI = window.LCNDA_UI; if (!UI?.openPrintDialog) { A().toast('La fenêtre « Imprimer » n’est pas chargée.', 'error'); return; }
                 let html = ''; try { const r = await fetch(exportUrl('export_family_book', {...p, inline: '1'}), {credentials: 'same-origin'}); if (!r.ok) throw new Error(`erreur ${r.status}`); html = await r.text(); } catch (e) { A().toast(`Le livre n’a pas pu être préparé : ${e.message}`, 'error'); return; }

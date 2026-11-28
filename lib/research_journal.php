@@ -207,7 +207,7 @@ function research_journal_data(PDO $pdo, array $q = []): array
         }
     }
 
-    // 🧭 battues : les communes déjà cherchées
+    // 🔦 battues : les communes déjà cherchées
     if (journal_has_table($pdo, 'battue_search_items')) {
         $bStatus = function_exists('battue_search_statuses') ? battue_search_statuses() : [];
         $bTypes = function_exists('battue_target_types') ? battue_target_types() : [];
@@ -256,7 +256,7 @@ function research_journal_data(PDO $pdo, array $q = []): array
     usort($rows, static fn($a, $b) => [$b['date'], $b['key']] <=> [$a['date'], $a['key']]);
     $total = count($rows);
     return ['rows' => array_slice($rows, 0, $limit), 'total' => $total, 'results' => $results,
-        'kinds' => ['digest' => '📜 Dépouillements', 'visit' => '🗄️ Visites faites', 'lead' => '🔍 Pistes d’enquête', 'battue' => '🧭 Battues', 'request' => '📮 Demandes']];
+        'kinds' => ['digest' => '📜 Dépouillements', 'visit' => '🗄️ Visites faites', 'lead' => '🔍 Pistes d’enquête', 'battue' => '🔦 Battues', 'request' => '📮 Demandes']];
 }
 
 /**

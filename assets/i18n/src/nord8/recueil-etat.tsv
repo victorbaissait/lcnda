@@ -1,0 +1,128 @@
+fr ¦ tr
+# 🗂 État d’un recueil (heritage-recueil-etat.js, lib/recueil_etat.php)
+{n} lignes, {r} relues ¦ {n} satır, {r} gözden geçirildi
+Photo à refaire ¦ Fotoğraf yeniden çekilecek
+🟢 finies ou 🔵 relues ¦ 🟢 biten veya 🔵 gözden geçirilen
+🟡 en cours ¦ 🟡 sürüyor
+⚪ pas encore transcrites ¦ ⚪ henüz yazıya geçirilmedi
+⛔ absentes ¦ ⛔ eksik
+{a} finies, {b} relues, {c} en cours, {d} à faire, {e} absentes ¦ {a} bitti, {b} gözden geçirildi, {c} sürüyor, {d} yapılacak, {e} eksik
+Fiabilité : ¦ Güvenilirlik:
+Pas en ligne ¦ Çevrimiçi değil
+Blanche ¦ Boş
+p. {x} ¦ s. {x}
+Ajouter aux demandes ¦ Taleplere ekle
+Non communicables ¦ Erişime kapalı
+Ouvrir la première ¦ İlkini aç
+Relire la première ¦ İlkini gözden geçir
+À transcrire ¦ Yazıya geçirilecek
+Commencer p. {n} ¦ s. {n} ile başla
+Rien ne reste à faire sur ce recueil. ¦ Bu derlemede yapılacak bir şey kalmadı.
+Demande ajoutée ({t}) : Recherche › Suivi des registres › Demandes. ¦ Talep eklendi ({t}): Araştırma › Kayıt defterlerinin takibi › Talepler.
+Après « {a} » vient « {b} » : il manque peut-être {x}. ¦ “{a}” sonrasında “{b}” geliyor: belki {x} eksik.
+Poser ces pages comme absentes… ¦ Bu sayfaları eksik olarak ekle…
+C’est normal ¦ Bu normal
+« {a} » deux fois (pages {x} et {y}) : une photo en double, ou « bis » ? ¦ “{a}” iki kez (sayfa {x} ve {y}): çift fotoğraf mı, yoksa “bis” mi?
+Renommer en « {a} bis » ¦ “{a} bis” olarak yeniden adlandır
+Laisser ¦ Bırak
+Le recueil devrait avoir {e} pages, il en a {n} ici (absentes comprises) : {x} ¦ Derlemede {e} sayfa olmalı, burada {n} var (eksikler dahil): {x}
+il en manque {d}. ¦ {d} tane eksik.
+{d} de trop (une photo en double ?). ¦ {d} fazla (çift fotoğraf mı?).
+Poser {n} pages absentes ¦ {n} eksik sayfa ekle
+Marquer {n} pages absentes ¦ {n} sayfayı eksik olarak işaretle
+Marquer « {p} » absente ¦ “{p}” sayfasını eksik olarak işaretle
+🗂 ÉTAT DU RECUEIL ¦ 🗂 DERLEMENİN DURUMU
+Poser les pages ¦ Sayfaları ekle
+Marquer absentes ¦ Eksik olarak işaretle
+Pourquoi ces pages ne sont pas là ? ¦ Bu sayfalar neden yok?
+ex. arrachées, mentionné en marge du f° 16 ¦ ör. koparılmış, f° 16 kenarında belirtilmiş
+Ajouter aussi aux Lacunes d’archives (conseillé) ¦ Arşiv boşluklarına da ekle (önerilir)
+Les pages ¦ Sayfalar
+Lisibilité ¦ Okunabilirlik
+(choisi) ¦ (seçili)
+État du recueil ¦ Derlemenin durumu
+Numérotation pas dite ¦ Numaralandırma belirtilmedi
+{n} pages attendues ¦ {n} sayfa bekleniyor
+Numérotation, pages attendues ¦ Numaralandırma, beklenen sayfalar
+Cases ¦ Kutular
+Choisir des pages ¦ Sayfa seç
+Exporter l’état (tableur) ¦ Durumu dışa aktar (tablo)
+Clique sur les pages (Maj + clic : de… à…) ¦ Sayfalara tıkla (Shift + tıklama: şuradan… şuraya…)
+Changer l’état… ¦ Durumu değiştir…
+Marquer absentes… ¦ Eksik olarak işaretle…
+Tout choisir ¦ Tümünü seç
+Pas encore de page ¦ Henüz sayfa yok
+Ajoute des photos : chaque photo devient une page. ¦ Fotoğraf ekle: her fotoğraf bir sayfa olur.
+Ce qui reste, dans l’ordre conseillé ¦ Kalanlar, önerilen sırayla
+Les demandes vont dans Recherche › Suivi des registres › Demandes, les lacunes dans les Lacunes d’archives : les listes qui existent. ¦ Talepler Araştırma › Kayıt defterlerinin takibi › Talepler’e, boşluklar Arşiv boşluklarına gider: zaten var olan listeler.
+Revenir à l’état calculé ¦ Hesaplanan duruma dön
+État du texte ¦ Metnin durumu
+Photo bonne (plus à refaire) ¦ Fotoğraf iyi (artık yeniden çekilmeyecek)
+Lisibilité : {x} ¦ Okunabilirlik: {x}
+Plus absentes ¦ Artık eksik değil
+Renommée en « {a} » ¦ “{a}” olarak yeniden adlandırıldı
+État choisi ¦ Seçilen durum
+Lignes relues ¦ Gözden geçirilmiş satırlar
+Mots peu sûrs ¦ Emin olunmayan kelimeler
+Numérotation enregistrée ¦ Numaralandırma kaydedildi
+Comment ce recueil est numéroté ? ¦ Bu derleme nasıl numaralandırılmış?
+Pas dit ¦ Belirtilmedi
+Pages attendues (pour repérer ce qui manque) ¦ Beklenen sayfalar (eksikleri bulmak için)
+ex. 40 ¦ ör. 40
+dans les Lacunes d’archives ¦ Arşiv boşluklarında
+Plus absente ¦ Artık eksik değil
+Revenir à l’état calculé ({s}) ¦ Hesaplanan duruma dön ({s})
+Calculé par l’Atelier (acte n° {n}) ¦ Atölye tarafından hesaplandı (belge no. {n})
+Calculé : texte écrit = en cours ¦ Hesaplandı: yazılmış metin = sürüyor
+Fiabilité de la lecture ¦ Okumanın güvenilirliği
+rien d’écrit ¦ hiçbir şey yazılmadı
+{r} lignes relues sur {n} ¦ {n} satırdan {r} tanesi gözden geçirildi
+Cette page est absente… ¦ Bu sayfa eksik…
+État calculé ¦ Hesaplanan durum
+Lisibilité notée ¦ Okunabilirlik not edildi
+Photo bonne ¦ Fotoğraf iyi
+Manquante ¦ Kayıp
+on ne sait pas encore ¦ henüz bilinmiyor
+Perdue ou détruite ¦ Kayıp veya yok edilmiş
+n’existe plus ¦ artık mevcut değil
+Pas encore photographiée ¦ Henüz fotoğraflanmadı
+par moi ¦ benim tarafımdan
+Pas numérisée ¦ Dijitalleştirilmedi
+par le service d’archives ¦ arşiv kurumu tarafından
+Numérisée, pas en ligne ¦ Dijitalleştirildi, çevrimiçi değil
+Non communicable ¦ Erişime kapalı
+jusqu’à une date ¦ belli bir tarihe kadar
+En restauration ¦ Restorasyonda
+pas consultable ¦ incelenemiyor
+dans un autre registre, un autre fonds ¦ başka bir kayıt defterinde, başka bir fonda
+pas absente : vide ¦ eksik değil: boş
+Paginé ¦ Sayfa numaralı
+p. 1, 2, 3… ¦ s. 1, 2, 3…
+Folioté ¦ Yaprak numaralı
+f° 1 r°, f° 1 v°… — conseillé pour les registres anciens ¦ f° 1 r°, f° 1 v°… — eski kayıt defterleri için önerilir
+Sans ordre (liasse, carton) ¦ Sırasız (dosya demeti, kutu)
+des pièces, rangées par toi ¦ parçalar, senin sıraladığın
+Numérotation des archives ¦ Arşivin numaralandırması
+pièce 1, 2… donnée par le service ¦ parça 1, 2… kurumun verdiği
+Bonne ¦ İyi
+Illisible en partie ¦ Kısmen okunaksız
+Illisible ¦ Okunaksız
+Sûre ¦ Kesin
+=mot peu sûr ¦ emin olunmayan kelime|emin olunmayan kelime
+=blanche ¦ boş|boş
+=page à relire ¦ gözden geçirilecek sayfa|gözden geçirilecek sayfa
+=page avec des mots peu sûrs ¦ emin olunmayan kelimeler içeren sayfa|emin olunmayan kelimeler içeren sayfa
+=page absente posée ¦ eksik sayfa eklendi|eksik sayfa eklendi
+=page marquée absente ¦ sayfa eksik olarak işaretlendi|sayfa eksik olarak işaretlendi
+=page changée ¦ sayfa değişti|sayfa değişti
+=page choisie ¦ sayfa seçildi|sayfa seçildi
+État des pages ¦ Sayfaların durumu
+Une case par page, une couleur par état ¦ Her sayfa için bir kutu, her durum için bir renk
+Reste à faire ¦ Yapılacaklar
+Autre demande ¦ Başka talep
+À consulter en salle ¦ Okuma salonunda incelenecek
+À photographier / numériser ¦ Fotoğraflanacak / dijitalleştirilecek
+pages photographiées sur les {n} attendues ¦ sayfa fotoğraflandı, beklenen {n} sayfadan
+pages photographiées ¦ sayfa fotoğraflandı
+pièces photographiées sur les {n} attendues ¦ parça fotoğraflandı, beklenen {n} parçadan
+pièces photographiées ¦ parça fotoğraflandı

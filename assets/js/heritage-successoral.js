@@ -35,6 +35,8 @@
     const simple = () => document.documentElement.classList.contains('ms-open');
     const hidden = () => kiosk() || simple();
     const store = {get(k, d) { try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v ?? d; } catch (_) { return d; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} }};
+    // R8 : les réglages de l'onglet sont des « genealogie-* » (suivent la base, la sauvegarde, l'autre ordinateur) ; l'ancienne valeur est reprise une fois
+    ['tab', 'famtab', 'view', 'npages', 'bell'].forEach(k => { try { const o = 'lcnda-succ-' + k, n = 'genealogie-succ-' + k, v = localStorage.getItem(o); if (v != null) { if (localStorage.getItem(n) == null) localStorage.setItem(n, v); localStorage.removeItem(o); } } catch (_) {} });
     const usageOn = () => { const c = store.get('genealogie-usage', null); return Array.isArray(c?.usages) && c.usages.includes('successoral'); };
     const law = html => S().lawLinks(html); // chaque « art. 738 » devient un lien vers Légifrance
     const tx = (s, v) => law(esc(i18n(s, v)));
@@ -76,7 +78,7 @@
 
     const VIEWS0 = [['cases', 'Dossiers'], ['heirs', 'Héritiers à contacter'], ['mail', 'Courriers']]; // le sélecteur en haut de la liste (retenu : « lcnda-succ-view »)
     const viewsOf = () => (P2().views ? P2().views(VIEWS0) : VIEWS0); // + 📈 Activité
-    let cur = {id: 0, data: null, R: null, tab: store.get('lcnda-succ-tab', 'dossier'), where: 'list', pieceView: 'heir', view: store.get('lcnda-succ-view', 'cases')};
+    let cur = {id: 0, data: null, R: null, tab: store.get('genealogie-succ-tab', 'dossier'), where: 'list', pieceView: 'heir', view: store.get('genealogie-succ-view', 'cases')};
     const ws = () => document.getElementById('workspace');
     const sameTurn = token => token === undefined || !A().state || token === A().state.workspaceToken;
     /** ouvrir un dossier (0 = la liste), dans l'onglet ⚖️ Successions s'il est montré, sinon dans Listes */
@@ -103,7 +105,7 @@
         if (!VIEWS.some(v => v[0] === cur.view)) cur.view = 'cases';
         w.innerHTML = `<section class="page succ-page">${UI().pageHeader({title: i18n('Dossiers de succession'), icon: '⚖️', where,
             help: i18n('Retrouver les héritiers d’une personne décédée, pour un notaire : un dossier par défunt. À ne pas confondre avec « 🏠 Héritages et successions » (les actes anciens des ancêtres).'),
-            actions: [LAW_BTN(), `<button type="button" class="button" data-succ-new>${esc(i18n('＋ Ouvrir un dossier'))}</button>`], more: [...(ext.succDossiers?.boardMore?.() || []), ...(P2().boardMore?.() || []), ...(ext.complEtudes?.boardMore?.() || []), `<button type="button" data-succ-b8all>📜 ${esc(i18n('Qui a vu quoi'))}</button>`]})}
+            actions: [LAW_BTN(), ...(ext.succDroit?.wizard ? [`<button type="button" class="button secondary" data-succ-wizard title="${esc(i18n('Le dossier en 4 étapes : le défunt, la famille trouvée, les doutes, les héritiers'))}">🧭 ${esc(i18n('Pas à pas'))}</button>`] : []), `<button type="button" class="button" data-succ-new>${esc(i18n('＋ Ouvrir un dossier'))}</button>`], more: [...(ext.succDossiers?.boardMore?.() || []), ...(P2().boardMore?.() || []), ...(ext.complEtudes?.boardMore?.() || []), `<button type="button" data-succ-b8all>📜 ${esc(i18n('Qui a vu quoi'))}</button>`]})}
             <div class="segmented succ-views" role="tablist" aria-label="${esc(i18n('Que montrer'))}">${VIEWS.map(([k, l]) => `<button type="button" role="tab" data-succ-view="${k}" class="${cur.view === k ? 'is-active' : ''}" aria-selected="${cur.view === k}">${esc(i18n(l))}</button>`).join('')}</div>
             <div data-succ-body>${UI().spinner(i18n(cur.view === 'heirs' ? 'Lecture des héritiers…' : cur.view === 'mail' ? 'Lecture des courriers…' : 'Lecture des dossiers…'))}</div></section>`;
         const body = w.querySelector('[data-succ-body]');
@@ -196,6 +198,8 @@
         draw();
         body.querySelector('[data-succ-hcsv]').addEventListener('click', () => {
             const cell = v => (A().csvCell ? A().csvCell(v, {sep: ';'}) : `"${String(v ?? '').replace(/"/g, '""')}"`);
+            const line = r => [r.name, r.number, r.deceased, r.kin, r.share, r.address || i18n('adresse à trouver'), r.email, r.phone, r.stateText + (r.contact.state ? ' · ' + contactWord(r.contact.state) : '')];
+            if (window.LCNDA_UI?.exportRows) return window.LCNDA_UI.exportRows({title: i18n('Héritiers à contacter'), name: 'heritiers-a-contacter', rows: () => [['Héritier', 'Dossier', 'Défunt', 'Lien avec le défunt', 'Part', 'Adresse', 'Courriel', 'Téléphone', 'État du contact'].map(h => i18n(h)), ...shown.map(line)]}); // ⤓ la fenêtre d'export commune
             const head = ['Héritier', 'Dossier', 'Défunt', 'Lien avec le défunt', 'Part', 'Adresse', 'Courriel', 'Téléphone', 'État du contact'].map(h => cell(i18n(h)));
             const csv = '﻿' + [head.join(';'), ...shown.map(r => [r.name, r.number, r.deceased, r.kin, r.share, r.address || i18n('adresse à trouver'), r.email, r.phone, r.stateText + (r.contact.state ? ' · ' + contactWord(r.contact.state) : '')].map(cell).join(';'))].join('\r\n');
             const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type: 'text/csv;charset=utf-8'})); a.download = 'heritiers-a-contacter.csv'; document.body.appendChild(a); a.click(); a.remove();
@@ -370,6 +374,7 @@
         if (own[cur.tab]) own[cur.tab](body, D, R, P_); else P2().tab?.(cur.tab, body, D, R, P_); // 📞 Échanges
         try { P2().after?.(cur.tab, body, D, R, P_); } catch (e) { console.error(e); } // ⚖️ ajouts des outils de plus à chaque onglet
         try { ext.complEtudes?.after?.(cur.tab, body, D); } catch (e) { console.error(e); } // 🏛 📁 Dossier → « Étude de notaire » (heritage-complements.js)
+        try { ext.succAudit?.after?.(cur.tab, body, D, R, P_); } catch (e) { console.error(e); } // 👥 chargé du dossier, 🛡 conflits, 🔎 lire une pièce, 📜 tableau de dévolution (heritage-successoral-audit.js)
     }
 
     /* ── 🗂 Les onglets d'un dossier (maquette docs/design/dossier-et-transcriptions.html, A ; essai tests/test-dossier-onglets.js) :
@@ -435,7 +440,7 @@
         });
     }
     /** ouvrir un onglet (retenu ; en familles, la famille retient son dernier onglet) */
-    const goTab = k => { cur.tab = k; store.set('lcnda-succ-tab', k); const f = FAMS.find(x => x[2].includes(k)) || FAMS.at(-1); store.set('lcnda-succ-famtab', {...store.get('lcnda-succ-famtab', {}), [f[0]]: k}); render(); };
+    const goTab = k => { cur.tab = k; store.set('genealogie-succ-tab', k); const f = FAMS.find(x => x[2].includes(k)) || FAMS.at(-1); store.set('genealogie-succ-famtab', {...store.get('genealogie-succ-famtab', {}), [f[0]]: k}); render(); };
     const openTabsSetting = () => { const b = document.createElement('button'); b.type = 'button'; b.hidden = true; b.dataset.sp2Setlink = 'tabs_layout'; document.body.appendChild(b); b.click(); b.remove(); };
     /** 📁 Dossier, en bas : où en est le dossier, cliquable (au lieu des boutons des onglets une deuxième fois) */
     function recapHtml(D, R, P_) {
@@ -668,7 +673,7 @@
         const why = r => r.why === 'introuvable' ? `🔎 ${i18n('introuvable')}${r.since ? ' ' + i18n('depuis le {d}', {d: fmtDate(r.since)}) : ''} · ${i18n('décoché')}` : r.why === 'silence' ? `🔇 ${i18n('ne répond pas')}${r.since ? ' ' + i18n('depuis le {d}', {d: fmtDate(r.since)}) : ''} · ${i18n('décoché')}` : r.why === 'noaddr' ? `${i18n('pas d’adresse dans le Répertoire des vivants')} · ${i18n('décoché')}` : '';
         const sub = r => [r.address, why(r), r.last ? i18n('déjà écrit le {d} ({k})', {d: fmtDate(r.last.date), k: kindLabel(r.last.kind).toLocaleLowerCase()}) : ''].filter(Boolean).join(' · ');
         const chips = k => O_.FIELDS.filter(f => f !== 'notaire' || k === 'contrat').map(f => `<button type="button" class="succ-chip" data-succ-field="${f}">{${esc(f)}}</button>`).join('');
-        return ext.openDialog({eyebrow: i18n('✉️ HÉRITIERS CONTACTÉS'), title: serial || all.length > 1 ? i18n('✉️ Courriers en série · {n}', {n: D.number}) : kind === 'contrat' ? i18n('📝 Contrat de révélation') : kind === 'relance' ? i18n('Relance') : i18n('✉️ Lettre de premier contact'), wide: true, submitLabel: i18n('📋 Ranger dans le Registre de courriers'),
+        return ext.openDialog({eyebrow: i18n('✉️ HÉRITIERS CONTACTÉS'), title: serial || all.length > 1 ? i18n('✉️ Courriers en série · {n}', {n: D.number}) : kind === 'contrat' ? i18n('📝 Contrat de révélation') : kind === 'relance' ? i18n('Relance') : i18n('✉️ Lettre de premier contact'), wide: true, submitLabel: i18n('📮 Ranger dans le Registre de courriers'),
             body: `<div class="succ-letter succ-serial"><div class="succ-letter-side"><p class="succ-serial-count" data-succ-scount></p><span class="pk-lab">${esc(i18n('À qui'))}</span><ul class="succ-letter-who">${all.map(r => `<li class="${r.why ? 'is-off' : ''}">${UI().checkHtml(r.name, {checked: sel.has(r.id), attrs: `data-succ-to="${r.id}"`, sub: sub(r)})}</li>`).join('')}</ul>
                 <p class="ui-hint">${esc(i18n('Les héritiers dont l’existence n’est pas établie ne sont pas dans la liste. Les décochés peuvent être cochés à la main (une lettre sans adresse est alors imprimée sans bloc adresse).'))}</p>
                 <label>${esc(i18n('Modèle'))}<select name="kind">${SERIAL_KINDS.map(([k, l]) => `<option value="${k}"${kind === k ? ' selected' : ''}>${esc(i18n(l))}</option>`).join('')}<optgroup label="${esc(i18n('Mes modèles'))}" data-succ-mine></optgroup></select></label>
@@ -778,7 +783,7 @@
     /* ── 🖨 Tableau généalogique pour le notaire : tableau, arbre, 🧾 chaîne de filiation (B4), liste des pièces ── */
     const abbr = (D, key) => { const a = D.acts?.[key]; const k = key[0]; const l = {N: i18n('N.'), D: i18n('D.'), M: i18n('M.'), V: i18n('Div.'), R: i18n('Ren.')}[k] || ''; return a ? [l, a.place, a.year].filter(Boolean).join(' ') : `${l} ${i18n('(à fournir)')}`; };
     const NPAGES = [['table', 'Tableau'], ['tree', 'Arbre'], ['chain', 'Chaîne par héritier'], ['pieces', 'Liste des pièces']];
-    const npages = () => ({table: true, tree: true, chain: true, pieces: true, ...(store.get('lcnda-succ-npages', {}) || {})}); // cochées d'office (la chaîne aussi)
+    const npages = () => ({table: true, tree: true, chain: true, pieces: true, ...(store.get('genealogie-succ-npages', {}) || {})}); // cochées d'office (la chaîne aussi)
     /** la qualité d'un héritier, avec les représentés (« nièce, repr. Louise ») */
     const qualityOf = (R, r) => { const rep = []; let x = R.rows.find(y => y.id === r.id); while (x?.parent) { const pr = R.rows.find(y => y.id === x.parent); if (!pr) break; rep.unshift(pr.name.split(' ')[0]); x = pr; } return r.kin + (rep.length ? ', ' + i18n('repr. {who}', {who: rep.length > 1 ? i18n('{a} et {b}', {a: rep.slice(0, -1).join(', '), b: rep[rep.length - 1]}) : rep[0]}) : '') + (r.unknown ? ' — ' + i18n('existence à ce jour non établie') : ''); };
     /** 🧾 la chaîne de filiation : pour chaque héritier, du défunt vers lui, chaque acte avec sa cote ; aucun texte de loi recopié */
@@ -827,7 +832,7 @@
                 <div class="succ-npreview" data-i18n-off>${notaryHtml(D, R, P_, {addresses: withAddr, pages: pg})}</div>
                 <p class="ui-hint">${esc(i18n('Aucune photo ni note privée : les noms, les qualités, les parts et les sources. Pas d’adresse sauf si la case est cochée.'))}</p></section>`;
             body.querySelector('[data-succ-naddr]').addEventListener('change', e => { withAddr = e.target.checked; paint(); });
-            body.querySelectorAll('[data-succ-npage]').forEach(c => c.addEventListener('change', () => { store.set('lcnda-succ-npages', {...npages(), [c.dataset.succNpage]: c.checked}); paint(); }));
+            body.querySelectorAll('[data-succ-npage]').forEach(c => c.addEventListener('change', () => { store.set('genealogie-succ-npages', {...npages(), [c.dataset.succNpage]: c.checked}); paint(); }));
             body.querySelector('[data-succ-nprint]').addEventListener('click', () => printNotary(D, R, P_, {addresses: withAddr}));
             body.querySelector('[data-succ-nwp]').addEventListener('click', () => { ext.openTextDoc?.({data: ext.textDocTools?.dataOf ? ext.textDocTools.dataOf(notaryHtml(D, R, P_, {addresses: withAddr, pages: npages()}).replace(/<section[^>]*>/g, '').replace(/<\/section>/g, '')) : null, name: i18n('Tableau généalogique — {n}', {n: D.number})}); journal(D, 'pdf', i18n('Tableau pour le notaire : ouvert dans le traitement de texte')); });
             body.querySelector('[data-succ-nmedia]').addEventListener('click', async e => {
@@ -854,6 +859,8 @@
             <p class="ui-hint">${esc(i18n('Les changements des fiches restent dans Réglages → Journal des modifications.'))}</p></section>`;
         body.querySelector('[data-succ-b8]')?.addEventListener('click', () => ext.accessLogDialog?.({caseId: D.id, number: D.number})); // 📜 app-verrou.js
         body.querySelector('[data-succ-jcsv]').addEventListener('click', () => {
+            if (window.LCNDA_UI?.exportRows) return window.LCNDA_UI.exportRows({title: i18n('🕓 Journal du dossier {n}', {n: D.number}), name: `journal-dossier-${D.number}`, // ⤓ la fenêtre d'export commune
+                rows: () => [[i18n('Date'), i18n('Action')], ...[...D.journal].reverse().map(j => [atTxt(j.at), j.text])]}).then(r => { if (r) journal(D, 'export', i18n('Journal exporté (CSV)')); });
             const csv = '﻿' + S().journalCsv([...D.journal].reverse().map(j => ({at: atTxt(j.at), text: j.text})), [i18n('Date'), i18n('Action')]);
             const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type: 'text/csv;charset=utf-8'})); a.download = `journal-dossier-${D.number}.csv`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
             journal(D, 'export', i18n('Journal exporté (CSV)'));
@@ -936,7 +943,7 @@
         const name = nameOf(D, pid), p = D.graph.persons[pid] || {};
         const langs = [['fr', 'Français'], ['en', 'English'], ['es', 'Español'], ['it', 'Italiano'], ['de', 'Deutsch'], ['pt', 'Português']];
         const vars = lang => ({notary: D.notary || '…', person: name, when: p.birth?.year ? (lang === 'fr' ? `né(e) en ${p.birth.year}` : lang === 'en' ? `born in ${p.birth.year}` : lang === 'es' ? `nacido/a en ${p.birth.year}` : lang === 'it' ? `nato/a nel ${p.birth.year}` : lang === 'de' ? `geboren ${p.birth.year}` : `nascido/a em ${p.birth.year}`) : '…', sender: [sender().name, sender().address].filter(Boolean).join('\n'), actKind: 'N'});
-        ext.openDialog({eyebrow: i18n('🌍 HÉRITIER À L’ÉTRANGER'), title: i18n('Chercher {name} hors de France', {name}), wide: true, submitLabel: i18n('📋 Ranger dans le Registre de courriers'),
+        ext.openDialog({eyebrow: i18n('🌍 HÉRITIER À L’ÉTRANGER'), title: i18n('Chercher {name} hors de France', {name}), wide: true, submitLabel: i18n('📮 Ranger dans le Registre de courriers'),
             body: `<div class="succ-letter"><div class="succ-letter-side"><h4>${esc(i18n('Les services à interroger'))}</h4><ul class="succ-abroad">${S().ABROAD.map(a => `<li>${esc(i18n(a.text))}</li>`).join('')}</ul>
                 <p>${ext.openActLetter ? `<button type="button" class="button small secondary" data-scec>${esc(i18n('📮 Demander l’acte au Service central d’état civil'))}</button>` : ''}</p>
                 <label>${esc(i18n('Langue de la lettre'))}<select name="lang">${langs.map(([k, l]) => `<option value="${k}">${esc(l)}</option>`).join('')}</select></label>
@@ -1027,6 +1034,7 @@
     /* ═════ Les clics ═════ */
     document.addEventListener('click', async e => {
         const t = e.target; if (!t.closest) return;
+        if (t.closest('[data-succ-wizard]')) { e.preventDefault(); return ext.succDroit?.wizard?.(); } // 🧭 heritage-successoral-droit.js
         if (t.closest('[data-succ-new]')) { e.preventDefault(); if (ext.succDossiers?.beforeNew && await ext.succDossiers.beforeNew()) return; return caseDialog(); } // 1. la première fois : où ranger les dossiers
         const op = t.closest('[data-succ-open]'); if (op) { e.preventDefault(); return openCase(op.dataset.succOpen); }
         if (t.closest('[data-succ-back]')) { e.preventDefault(); return openCase(0); }
@@ -1034,7 +1042,7 @@
         const del = t.closest('[data-succ-del]'); if (del) { e.preventDefault(); return deleteCase(del.dataset.succDel); }
         if (t.closest('[data-succ-b8all]')) { e.preventDefault(); return ext.openAccessLog?.(); } // 📜 tous les dossiers (app-verrou.js)
         const lo = t.closest('[data-succ-loi]'); if (lo) { e.preventDefault(); return lawDialog(lo.dataset.succLoi === 'case' && cur.data?.id === cur.id ? cur.data : null); }
-        const vw = t.closest('[data-succ-view]'); if (vw) { e.preventDefault(); cur.view = vw.dataset.succView; store.set('lcnda-succ-view', cur.view); return render(); }
+        const vw = t.closest('[data-succ-view]'); if (vw) { e.preventDefault(); cur.view = vw.dataset.succView; store.set('genealogie-succ-view', cur.view); return render(); }
         const full = t.closest('[data-succ-full]'); if (full) { e.preventDefault(); t.closest('dialog')?.close?.(); A().state.listType = full.dataset.succFull === 'courriers' ? 'courriers' : 'living_contacts'; return A().setModule('listes'); }
         const hw = t.closest('[data-succ-hwrite]'); if (hw) { e.preventDefault(); const [cid, pid] = hw.dataset.succHwrite.split(':').map(Number); const c = board.cases.get(cid); if (!c) return; return letterDialog(c.D, c.R, c.D.courriers.some(x => x.person_id === pid && x.kind !== 'acte') ? 'relance' : 'contact', pid); }
         const ha = t.closest('[data-succ-haddr]'); if (ha) { e.preventDefault(); const [cid, pid] = ha.dataset.succHaddr.split(':').map(Number); const c = board.cases.get(cid); const a = c?.D.addresses?.[pid]; return openLiving(a?.contact_id || 0, pid, c ? nameOf(c.D, pid) : ''); }
@@ -1045,7 +1053,7 @@
         if (!cur.data || !t.closest('[data-succ-case], dialog')) return;
         const D = cur.data, R = cur.R;
         const tab = t.closest('[data-succ-tab]'); if (tab) { t.closest('dialog')?.close?.(); return goTab(tab.dataset.succTab); }
-        const fam = t.closest('[data-succ-fam]'); if (fam) { const f = famsOf(tabsOf()).find(x => x[0] === fam.dataset.succFam); if (!f) return; const last = store.get('lcnda-succ-famtab', {})[f[0]]; return goTab(f[2].includes(last) ? last : f[2][0]); }
+        const fam = t.closest('[data-succ-fam]'); if (fam) { const f = famsOf(tabsOf()).find(x => x[0] === fam.dataset.succFam); if (!f) return; const last = store.get('genealogie-succ-famtab', {})[f[0]]; return goTab(f[2].includes(last) ? last : f[2][0]); }
         if (t.closest('[data-succ-dlgo]')) { t.closest('[data-succ-case]')?.querySelector('.succ-deadlines')?.scrollIntoView({behavior: 'smooth', block: 'center'}); return; }
         const em = t.closest('[data-succ-eur-mode]'); if (em) { OUT().setEuroMode?.(em.dataset.succEurMode); return render(); }
         const fed = t.closest('[data-succ-fee-edit]'); if (fed) { const f = D.fees.find(x => x.id === Number(fed.dataset.succFeeEdit)); if (f) feeDialog(D, f.kind, f); return; }
@@ -1109,7 +1117,7 @@
         const p = detail?.person; if (!p?.id || p.kind === 'animal' || hidden()) return null;
         const dead = p.living_status === 'deceased' || (detail.events || []).some(ev => ['DEAT', 'BURI', 'CREM'].includes(ev.gedcom_tag || ev.tag));
         if (!dead) return null;
-        return {icon: '⚖️', label: i18n('Rechercher les héritiers…'), run: () => openFor(Number(p.id))};
+        return {key: 'succ-heritiers', icon: '⚖️', label: i18n('Rechercher les héritiers…'), run: () => openFor(Number(p.id))};
     });
 
     /* ═════ Le widget « ⚖️ Dossiers de succession » (dossiers en cours, prochaine échéance) ═════ */

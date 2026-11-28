@@ -4,7 +4,7 @@
  *  - ✨ Trésors (famille 6) : ✉️ Lettres aux descendants (jamais de recherche dans le texte d'une lettre scellée), 🕯️ Bougies (« Allumées » au
  *    départ, en pastille), 🔗 Partages temporaires (« En cours » au départ), 📍 Passeport des lieux, 🏛️ Actes manquants (l'assistant dans l'en-tête), 📰 Gazettes ;
  *  - les deux calendriers (choix B : 🔍 et Filtrer ▾ seulement, dans leur barre) ;
- *  - 📋 Mes listes (choix A : Liste | Fiches + « Plus ▾ », ⤓ Exporter ▾, 🖨 Imprimer L1, ✎ ⧉ 🗑 dans ⋯, filtres par colonne rangés dans la liste) ;
+ *  - 📑 Mes listes (choix A : Liste | Fiches + « Plus ▾ », ⤓ Exporter ▾, 🖨 Imprimer L1, ✎ ⧉ 🗑 dans ⋯, filtres par colonne rangés dans la liste) ;
  *  - les 10 listes « Déjà là » alignées (en-tête K5, mots des tris C6, Recueils → Lieu, Fiches thématiques → Étiquette, Recensement › Groupes → Espèce) ;
  *  - le composant : le nombre à droite d'un choix, openFilter(id), setSort(valeur, libellé) ;
  *  - liste tout à fait vide : la grande boîte K10 seule, sans barre.
@@ -238,7 +238,7 @@ $pdo->exec("INSERT INTO persons(id,first_name,last_name,gender,living_status) VA
     await t('🗓️ Mon agenda : rien de prévu → pas de barre', async () => {
         await open(p, 'my_calendar'); assert.ok(!(await p.$('#workspace .ui-listbar')));
     });
-    await t('📋 Mes listes : barre, Plus ▾, filtres rangés dans la liste, ⤓ Exporter ▾, 🖨 L1, ⋯', async () => {
+    await t('📑 Mes listes : barre, Plus ▾, filtres rangés dans la liste, ⤓ Exporter ▾, 🖨 L1, ⋯', async () => {
         await open(p, `mylist:${mylistId}`); await p.waitForSelector('#workspace .h-mylist .ui-listbar');
         let i = await info(p); assert.equal(i.count, '4 personnes'); assert.equal(i.opts[0], 'Dans l’ordre de la liste');
         assert.ok(await p.$('#workspace .page-header [data-lv-export]')); assert.ok(await p.$('#workspace .page-header [data-lv-print]'));
@@ -260,10 +260,10 @@ $pdo->exec("INSERT INTO persons(id,first_name,last_name,gender,living_status) VA
         assert.ok(await p.$('#workspace .h-lv-table'), 'retour au tableau');
         // un clic sur un titre de colonne trie et met « Trier » à jour
         await p.click('#workspace [data-lv-sort] >> nth=0'); await p.waitForTimeout(200); i = await info(p); assert.match(i.sortLabel, /A → Z/);
-        // ⤓ Exporter ▾ : CSV, tableur, Excel
-        await p.click('#workspace [data-lv-export]'); await p.waitForTimeout(200);
-        const exp = await p.evaluate(() => document.body.innerText); assert.match(exp, /CSV \(tableur, Excel\)/); assert.match(exp, /Fichier Excel \(\.xlsx\)/);
-        await p.keyboard.press('Escape');
+        // ⤓ Exporter ▾ : la fenêtre d'export commune — CSV, tableur, Excel, et « ce qu'on voit / toute la liste »
+        await p.click('#workspace [data-lv-export]'); await p.waitForSelector('dialog.ui-export[open]');
+        const exp = await p.$eval('dialog.ui-export', d => d.innerText); assert.match(exp, /CSV/); assert.match(exp, /Excel/); assert.match(exp, /Ouvrir dans le tableur/); assert.match(exp, /Toute la liste/);
+        await p.keyboard.press('Escape'); await p.waitForTimeout(200);
         // 🖨 Imprimer : la fenêtre unique L1, « La vue affichée » / « Toute la liste »
         await p.click('#workspace [data-lv-print]'); await p.waitForSelector('dialog[open]'); const dl = await p.$eval('dialog[open]', d => d.innerText);
         assert.match(dl, /La vue affichée/); assert.match(dl, /Toute la liste/); await p.keyboard.press('Escape'); await p.waitForTimeout(200);

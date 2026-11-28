@@ -78,7 +78,12 @@ step('K14 : « ⋯ » ouvre toujours le menu de l’app ; le clic droit aussi', 
     const cm = grepAll(/addEventListener\('contextmenu'/).filter(([f]) => !['app-actions.js', 'app-ui.js'].includes(f));
     // le clic droit peut passer par une méthode de l'outil (« e => this.onContext(e) ») : on regarde alors dans cette méthode
     const viaMethod = (f, l) => [...l.slice(l.indexOf("'contextmenu'")).matchAll(/this\.([A-Za-z_$][\w$]*)\(/g)].some(([, name]) => { const at = all[f].search(new RegExp(`\\n\\s*(?:async\\s+)?${name}\\([\\w, ]*\\)\\s*\\{`)); return at >= 0 && /contextMenu\(|menuAt\(/.test(all[f].slice(at, at + 4000)); }); // menuAt : le menu de l'app (contextMenu n'en est qu'un raccourci)
-    for (const [f, n, l] of cm) assert.ok(/contextMenu|e => e\.preventDefault\(\)\);/.test(l) || /contextMenu/.test(all[f].split('\n').slice(n - 1, n + 6).join('\n')) || viaMethod(f, l), `${f}:${n}`);
+    // … ou par une fonction du même fichier (« e => moreMenu(id, {x, y}) ») : on regarde aussi dans cette fonction
+    const viaFunction = (f, n) => { const body = all[f].split('\n').slice(n - 1, n + 6).join('\n'); return [...body.matchAll(/\b([A-Za-z_$][\w$]*)\(/g)].some(([, name]) => { const at = all[f].search(new RegExp(`\\bfunction ${name}\\(`)); return at >= 0 && /contextMenu(\?\.)?\(|menuAt(\?\.)?\(/.test(all[f].slice(at, at + 4000)); }); };
+    // 🧺 clic droit sur un bouton panier : ouvre le menu de l'app « Dans quel panier ? » (bkBtn → take → askBasket → UI.menuAt)
+    const bk = ([f, , l]) => f === 'heritage-connexions.js' && /bkBtn\(e\.target\)/.test(l);
+    if (cm.some(bk)) assert.match(all['heritage-connexions.js'], /UI\(\)\.menuAt\?\.\(ptOf\(anchor\), rows, \{title: n > 1 \? T\('Dans quel panier \? \(\{n\}\)'/);
+    for (const [f, n, l] of cm.filter(x => !bk(x))) assert.ok(/contextMenu|e => e\.preventDefault\(\)\);/.test(l) || /contextMenu/.test(all[f].split('\n').slice(n - 1, n + 6).join('\n')) || viaMethod(f, l) || viaFunction(f, n), `${f}:${n}`);
     assert.doesNotMatch(all['heritage-keynote.js'], /contextmenu', e => \{ e\.preventDefault\(\); prev\(\); \}/);
     assert.match(all['app-ui.js'], /UI\.menuAt = \(anchor, items, \{title = '', onClose = null, at = null\}/);
 });
@@ -100,7 +105,7 @@ try { ({ chromium } = require('playwright')); } catch (_) { try { ({ chromium } 
 const phpPath = findPhp([devBundledPhp()]);
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'carnet-harmo-menus-'));
 const shots = process.env.HARMO_MENUS_SHOTS || '';
-const envFor = d => ({ ...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1' });
+const envFor = d => ({ ...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4' });
 const freePort = () => new Promise(res => { const s = net.createServer(); s.listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => res(p)); }); });
 
 (async () => {
@@ -147,10 +152,12 @@ require 'lib/bootstrap.php'; $pdo = db(); echo 'ok';`], { cwd: appRoot, encoding
             });
             await t(`${tag} K13 : « 🖨 Imprimer » d’une fiche (aperçu, A5, Paysage)`, async () => {
                 await p.evaluate(async () => { await window.LCNDA_APP.openPersonById?.(1); }); await p.waitForTimeout(1200);
-                await p.evaluate(() => { window.LCNDA_UI.printPage(''); }); await p.waitForTimeout(1500);
-                assert.ok(await p.$('dialog.k-print[open] .k-print-prev iframe'), 'aperçu');
+                // l'aperçu se construit après coup (feuille de styles, pages mesurées) : on attend qu'il soit là, puis qu'il suive le papier choisi
+                await p.evaluate(() => { window.LCNDA_UI.printPage(''); });
+                assert.ok(await p.waitForSelector('dialog.k-print[open] .k-print-prev iframe', {timeout: 20000}).catch(() => null), 'aperçu');
                 await p.click('dialog.k-print [data-k-paper="A5"]'); await p.click('dialog.k-print [data-k-or="landscape"]'); await p.waitForTimeout(400);
                 assert.equal(await p.evaluate(() => document.querySelector('dialog.k-print [data-k-or="landscape"]').classList.contains('is-active')), true);
+                await p.waitForFunction(() => /@page\{size:A5 landscape\}/.test(document.querySelector('dialog.k-print .k-print-prev iframe')?.srcdoc || ''), null, {timeout: 20000}).catch(() => {});
                 const doc = await p.evaluate(() => document.querySelector('dialog.k-print .k-print-prev iframe').srcdoc);
                 assert.match(doc, /@page\{size:A5 landscape\}/); assert.doesNotMatch(doc, /<script/i, 'pas de script dans l’aperçu');
                 if (shots) await p.locator('dialog.k-print').screenshot({ path: path.join(shots, `k13-imprimer-${tag}.png`) });

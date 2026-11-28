@@ -1,0 +1,4 @@
+_departement,_commune,_insee,titre,cotes,intitule,dates,_date_debut,_date_fin,producteur,index_sujet,_theme,index_personne,index_organisation,index_famille,index_lieu,index_typologie,index_occupation,index_fonction,fichier
+04,Digne-les-Bains,04070,"Archives communales de Digne-les-Bains (1237-1950)",1 à 900 W,Archives communales,1237-1950,1237,1950,Commune de Digne,cadastre|délibérations,Administration communale,,,,,,,,FRAC04070_digne.xml
+22,Lamballe,22093,"Archives anciennes de Lamballe, registres paroissiaux et délibérations",GG 1-80,Archives anciennes,1550-1790,1550,1790,,,État civil,,,,,,,,FRAC22093_lamballe.xml
+65,Tarbes,65440,"Fonds moderne de Tarbes",1 D 1-40,Délibérations,1790-1960,1790,1960,,,,,,,,,,,FRAC65440.xml

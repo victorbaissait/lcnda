@@ -334,7 +334,7 @@ function delete_archive_service(PDO $pdo, array $data): array
     $old = archive_service_row($pdo, $id);
     if (!$old) { throw new RuntimeException('Service d’archives introuvable.'); }
     $links = [];
-    foreach (['sources', 'media'] as $t) {
+    foreach (['sources', 'media', 'recueils'] as $t) { // 📚 les recueils aussi (lib/recueil_fiche.php)
         if (archive_services_has_col($pdo, $t, 'archive_service_id')) {
             $s = $pdo->prepare("SELECT id FROM {$t} WHERE archive_service_id=?"); $s->execute([$id]);
             $links[$t] = array_map('intval', $s->fetchAll(PDO::FETCH_COLUMN));
@@ -366,7 +366,7 @@ function restore_archive_service(PDO $pdo, array $data): array
     $own = !$pdo->inTransaction(); if ($own) { $pdo->beginTransaction(); }
     try {
         $pdo->prepare('INSERT INTO archive_services(' . implode(',', $cols) . ') VALUES(' . implode(',', array_fill(0, count($cols), '?')) . ')')->execute(array_map(static fn($k) => $row[$k], $cols));
-        foreach (['sources', 'media'] as $t) {
+        foreach (['sources', 'media', 'recueils'] as $t) {
             if (!isset($links[$t]) || !is_array($links[$t]) || !archive_services_has_col($pdo, $t, 'archive_service_id')) { continue; }
             $u = $pdo->prepare("UPDATE {$t} SET archive_service_id=? WHERE id=? AND archive_service_id IS NULL");
             foreach (array_slice($links[$t], 0, 5000) as $lid) { $u->execute([$id, (int) $lid]); }

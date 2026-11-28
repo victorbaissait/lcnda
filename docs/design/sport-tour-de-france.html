@@ -1,0 +1,667 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Le Tour pas à pas</title>
+<style>
+:root{--bg:#f4f5f7;--paper:#fff;--ink:#111;--muted:#555;--soft:#777;--line:#eceef2;--line2:#c9ced8;--blue:#055dff;--blue-bg:#eef4ff;--blue-ink:#1a3d8f;--green:#1a7f37;--green-bg:#eaf6ee;--yel:#d4a800;--yel-bg:#fff8d6;--yel-ink:#7a5d00;--red:#c62828;--red-bg:#fdecec;--vio:#6929c4;--vio-bg:#f3ecff;--grey-bg:#f1f2f4;--shadow:rgba(5,93,255,.25);--bar:#141414;--bar-ink:#fff;--map:#eef2f7;--map-line:#d5dce6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121417;--paper:#1c1f24;--ink:#eceef2;--muted:#b4b9c3;--soft:#9aa0aa;--line:#2c3038;--line2:#454b55;--blue:#5b93ff;--blue-bg:#18233a;--blue-ink:#a9c4ff;--green:#4cc070;--green-bg:#15281c;--yel:#e0b93a;--yel-bg:#2c2612;--yel-ink:#f0d276;--red:#ff6b6b;--red-bg:#331a1a;--vio:#b48cff;--vio-bg:#261d38;--grey-bg:#262a31;--shadow:rgba(91,147,255,.22);--bar:#000;--bar-ink:#eceef2;--map:#182029;--map-line:#2b3542}}
+:root[data-theme="dark"],.force-dark{--bg:#121417;--paper:#1c1f24;--ink:#eceef2;--muted:#b4b9c3;--soft:#9aa0aa;--line:#2c3038;--line2:#454b55;--blue:#5b93ff;--blue-bg:#18233a;--blue-ink:#a9c4ff;--green:#4cc070;--green-bg:#15281c;--yel:#e0b93a;--yel-bg:#2c2612;--yel-ink:#f0d276;--red:#ff6b6b;--red-bg:#331a1a;--vio:#b48cff;--vio-bg:#261d38;--grey-bg:#262a31;--shadow:rgba(91,147,255,.22);--bar:#000;--bar-ink:#eceef2;--map:#182029;--map-line:#2b3542}
+.force-dark{color:var(--ink)}
+*{box-sizing:border-box}
+body{background:var(--bg);padding:28px;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);margin:0;line-height:1.45}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:19px;margin:44px 0 6px}
+.sub{color:var(--muted);margin:0 0 18px;font-size:14px;max-width:1000px}
+.wrap{max-width:1240px;margin:0 auto}
+.top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap}
+.sum{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 18px}
+.sum a{background:var(--paper);border:2px solid var(--ink);padding:8px 14px;box-shadow:4px 4px 0 var(--shadow);color:inherit;text-decoration:none}
+.sum b{font-size:18px;display:block}.sum span{font-size:12px;color:var(--muted)}
+.badge{font:700 10.5px/1.2 system-ui;border:1.5px solid var(--ink);padding:3px 6px;letter-spacing:.03em;display:inline-block;text-transform:uppercase;white-space:nowrap;vertical-align:middle}
+.badge.new{border-color:var(--blue);color:#fff;background:var(--blue)}
+.badge.re{border-color:var(--green);color:var(--green);background:var(--green-bg)}
+.badge.warn{border-color:var(--yel);color:var(--yel-ink);background:var(--yel-bg)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{font:700 11px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);text-align:left;padding:8px;border-bottom:2px solid var(--ink);white-space:nowrap}
+td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+td.num,th.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+code,pre{font:11.5px/1.5 ui-monospace,Menlo,Consolas,monospace;color:var(--muted);word-break:break-word}
+pre{background:var(--grey-bg);border:1px solid var(--line);padding:12px 14px;overflow-x:auto;white-space:pre;margin:10px 0 0;color:var(--ink)}
+pre .c{color:var(--soft)}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 26px}
+.wide{grid-column:1 / -1}.grid>*{min-width:0}
+.case{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:18px 20px 20px;min-width:0}
+.case .tag{font:700 11px/1 system-ui;letter-spacing:.1em;color:var(--blue);text-transform:uppercase}
+.num-b{display:inline-block;background:var(--blue);color:#fff;font:800 12px system-ui;padding:3px 7px;margin-right:6px;letter-spacing:0}
+.case h3{margin:8px 0 10px;font-size:17px}
+.note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+.msg{border-left:4px solid var(--blue);background:var(--blue-bg);padding:10px 14px;font-size:13px;margin:12px 0}
+.msg.warn{border-color:var(--yel);background:var(--yel-bg)}
+.msg.ok{border-color:var(--green);background:var(--green-bg)}
+.dec{border:2px dashed var(--vio);background:var(--vio-bg);padding:12px 16px;margin:14px 0 0;font-size:13px}
+.dec>b:first-child{display:block;font:800 11px system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--vio);margin-bottom:6px}
+.dec ol,.dec ul{margin:4px 0 0;padding-left:20px}.dec li{margin:4px 0}
+.btn{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--ink);background:var(--paper);font:700 13px system-ui;padding:7px 11px;box-shadow:3px 3px 0 var(--shadow);color:var(--ink);white-space:nowrap;cursor:pointer}
+.btn.blue{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.small{font-size:12px;padding:4px 8px;box-shadow:none}
+.btn.ghost{border-color:var(--line2);box-shadow:none;color:var(--muted)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.mini{font-size:12px;color:var(--muted)}
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+/* fenêtre de l'app */
+.win{border:2px solid var(--ink);background:var(--paper);min-width:0;color:var(--ink)}
+.win-bar{display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:2px solid var(--ink);background:var(--grey-bg);flex-wrap:wrap;justify-content:space-between}
+.eyebrow{font:700 10.5px system-ui;letter-spacing:.12em;color:var(--soft);text-transform:uppercase}
+.win-body{padding:18px 20px 20px;min-width:0}
+.ph{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.ph h4{margin:0;font-size:20px}.ph small{display:block;font:700 10.5px system-ui;letter-spacing:.12em;color:var(--soft);text-transform:uppercase;margin-bottom:2px}
+.ph p{margin:4px 0 0;font-size:13px;color:var(--muted)}
+.lbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:16px 0 10px}
+.lsearch{flex:1 1 260px;border:1.5px solid var(--line2);padding:8px 11px;font-size:13.5px;color:var(--soft);min-width:0;background:var(--paper)}
+.lsearch.on{color:var(--ink);border-color:var(--blue)}
+.lbtn{border:1.5px solid var(--line2);padding:7px 11px;font:700 12.5px system-ui;background:var(--paper);white-space:nowrap;color:var(--ink)}
+.lbtn .n{background:var(--blue);color:#fff;font:800 10.5px system-ui;padding:1px 5px;margin-left:4px}
+.seg{display:inline-flex;border:1.5px solid var(--line2)}
+.seg span{padding:6px 11px;font:700 12.5px system-ui;white-space:nowrap}
+.seg span.on{background:var(--ink);color:var(--paper)}
+.chips{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin:0 0 12px}
+.chips .klab{font:700 11px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin-right:2px}
+.k{display:inline-flex;align-items:center;gap:5px;border:1.5px solid var(--line2);padding:4px 10px;font-size:12.5px;background:var(--paper);white-space:nowrap;border-radius:999px;color:var(--ink)}
+.k i{font-style:normal;font:700 11px system-ui;color:var(--soft);font-variant-numeric:tabular-nums}
+.k.on{border-color:var(--blue);background:var(--blue);color:#fff}.k.on i{color:#fff;opacity:.85}
+.k.soon{border-style:dashed;color:var(--muted)}
+.chip{border:1.5px solid var(--blue);color:var(--blue-ink);background:var(--blue-bg);padding:3px 9px;font-size:12px;white-space:nowrap}
+.chip:after{content:" ×";font-weight:800}
+.clear{color:var(--blue);text-decoration:underline;font-size:12px}
+/* cartes de thèmes */
+.themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.th{border:1.5px solid var(--line2);background:var(--paper);padding:14px 16px;display:grid;grid-template-columns:34px minmax(0,1fr);gap:2px 10px;align-content:start;min-width:0}
+.th:hover{border-color:var(--blue)}
+.th .ic{font-size:24px;line-height:1.1;grid-row:1 / 4}
+.th b{font-size:14.5px;display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.th b i{font-style:normal;font:700 12px system-ui;color:var(--soft);white-space:nowrap}
+.th small{font-size:12px;color:var(--muted);line-height:1.35}
+.th .mg{font:700 11px system-ui;color:var(--green);margin-top:5px}
+.th.hit{border-color:var(--blue);box-shadow:inset 3px 0 0 var(--blue)}
+.th.dim{opacity:.42}
+/* résultats de recherche */
+.res{list-style:none;margin:0;padding:0}
+.res li{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:2px 10px;padding:10px 4px;border-bottom:1px solid var(--line);align-items:start}
+.res li .ic{font-size:18px}
+.res li b{font-size:13.5px}
+.res li small{display:block;color:var(--muted);font-size:12px}
+.res .grp{grid-column:1 / -1;font:800 10.5px system-ui;letter-spacing:.1em;color:var(--soft);text-transform:uppercase;background:var(--grey-bg);padding:6px 8px;border:0;margin-top:10px;display:block}
+.res .mg{color:var(--green);font-weight:700}
+/* onglets du thème */
+.tabsx{display:flex;flex-wrap:wrap;align-items:stretch;border-bottom:2px solid var(--ink);margin:16px 0 0}
+.tabsx span{padding:8px 12px;font-size:13px;white-space:nowrap}
+.tabsx span.on{background:var(--ink);color:var(--paper);font-weight:700}
+.tabsx span small{opacity:.7}
+/* tableau réuni */
+.mt td{font-size:12.8px}
+.mt .d{white-space:nowrap;font-variant-numeric:tabular-nums}
+.mt .pl b{display:block}
+.mt .pl small,.mt .fam small{color:var(--muted);font-size:11.5px;display:block}
+.srcs{display:flex;gap:4px;flex-wrap:wrap}
+.srcs a{font:700 10.5px system-ui;border:1px solid var(--line2);padding:1px 6px;color:var(--blue-ink);background:var(--blue-bg);text-decoration:none;white-space:nowrap}
+.srcs a.soon{border-style:dashed;background:transparent;color:var(--muted)}
+.diff{font:800 10px system-ui;color:var(--yel-ink);background:var(--yel-bg);border:1px solid var(--yel);padding:0 4px;margin-left:4px;white-space:nowrap}
+.fam .who{display:inline-block;border:1px solid var(--line2);border-radius:999px;padding:1px 8px;font-size:11.5px;background:var(--grey-bg);white-space:nowrap}
+.acts{white-space:nowrap;text-align:right}
+.ib{display:inline-flex;align-items:center;justify-content:center;width:30px;height:28px;border:1.5px solid var(--line2);background:var(--paper);font-size:14px;margin-left:3px}
+tr.sel td{background:var(--blue-bg)}
+tr.open td{background:var(--grey-bg)}
+.cb{width:15px;height:15px;border:2px solid var(--ink);display:inline-block;vertical-align:middle}
+.cb.on{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--paper)}
+.selbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;border:2px solid var(--blue);background:var(--blue-bg);padding:8px 12px;margin:12px 0 0;font-size:13px}
+.selbar .sp{flex:1}
+.detail{padding:12px 14px 14px;border:1.5px dashed var(--line2);background:var(--paper)}
+.detail table td,.detail table th{font-size:12px;padding:6px 8px}
+.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:12px}
+/* carte */
+.map{background:var(--map);border:1.5px solid var(--line2);position:relative}
+.map svg{display:block;width:100%;height:auto}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);padding:8px 12px;border-top:1px solid var(--line2);background:var(--paper)}
+/* menu Filtrer */
+.menu{border:2px solid var(--ink);background:var(--paper);box-shadow:6px 6px 0 rgba(0,0,0,.14);font-size:13px}
+.menu .mg2{padding:11px 14px;border-bottom:1px solid var(--line)}
+.menu .mg2>b{display:block;font:800 11px system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);margin-bottom:7px}
+.menu label{display:flex;gap:8px;align-items:center;padding:3px 0}
+.menu label i{margin-left:auto;font-style:normal;font:700 11px system-ui;color:var(--soft)}
+.inp{border:1.5px solid var(--line2);padding:4px 8px;font-size:12.5px;display:inline-block;min-width:56px;background:var(--paper)}
+.menu .mf{display:flex;justify-content:space-between;gap:8px;padding:11px 14px;flex-wrap:wrap}
+/* tableau de répartition */
+.mapd{border:1.5px solid var(--line2);background:var(--paper);margin:0 0 8px}
+.mapd summary{cursor:pointer;padding:10px 14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;list-style:none}
+.mapd summary::-webkit-details-marker{display:none}
+.mapd summary:before{content:"▸";color:var(--soft);width:12px}
+.mapd[open] summary:before{content:"▾"}
+.mapd summary i{font-style:normal;font:800 11px system-ui;background:var(--ink);color:var(--paper);padding:1px 6px}
+.mapd summary code{margin-left:auto}
+.mapd .ti{font-size:18px}
+.mapt{margin:0 0 6px}.mapt td{font-size:12.3px;padding:6px 10px}
+.mapt td.g{white-space:nowrap;color:var(--muted)}
+.mapt td.src{color:var(--muted);font-size:11.5px}
+.lk{font:800 9.5px system-ui;border:1px solid var(--line2);padding:0 4px;color:var(--soft);text-transform:uppercase;margin-left:4px}
+.bars{display:grid;grid-template-columns:minmax(0,1fr);gap:4px;font-size:12.5px}
+.bars div{display:grid;grid-template-columns:200px minmax(0,1fr) 34px;gap:8px;align-items:center}
+.bars s{display:block;height:10px;background:var(--blue);text-decoration:none}
+.bars em{font-style:normal;text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
+/* questions */
+.qs{counter-reset:q;list-style:none;padding:0;margin:0;display:grid;gap:14px}
+.qs li{background:var(--paper);border:2px solid var(--ink);padding:14px 18px;counter-increment:q}
+.qs li>b:before{content:counter(q) ". ";color:var(--blue)}
+.qs li>b{font-size:15px;display:block;margin-bottom:6px}
+.qs .reco{font-size:13px;margin-top:8px;border-left:4px solid var(--green);background:var(--green-bg);padding:7px 11px}
+.qs .opt{font-size:13px;color:var(--muted)}
+/* téléphone */
+.phones{display:grid;grid-template-columns:repeat(2,minmax(0,390px));gap:30px;justify-content:center}
+.phone{width:100%;max-width:390px;border:10px solid #222;border-radius:26px;background:var(--paper);overflow:hidden;margin:0 auto;color:var(--ink)}
+.phone .ptop{display:flex;align-items:center;gap:8px;background:var(--bar);color:var(--bar-ink);padding:10px 14px;font-size:13px;font-weight:700}
+.phone .ptop .sp{flex:1}
+.phone .pbody{padding:16px;font-size:13px}
+.phone .themes{grid-template-columns:1fr;gap:8px}
+.phone .th{padding:10px 12px}
+.phone .th small{display:none}
+.phone .lbar{margin:10px 0}
+.pcard{border-bottom:1px solid var(--line);padding:11px 2px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 10px}
+.pcard b{font-size:13.5px}
+.pcard small{display:block;color:var(--muted);font-size:12px}
+.pcard .srcs{margin-top:4px}
+.pcard .acts{grid-row:1 / 3;grid-column:2;display:flex;flex-direction:column;gap:5px}
+.pcard .ib{margin:0}
+.cap{font:700 11px system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);text-align:center;margin:0 0 10px}
+.toggle{border:1.5px solid var(--line2);background:var(--paper);color:var(--ink);font:700 12.5px system-ui;padding:7px 12px;cursor:pointer}
+@media (max-width:900px){.grid{grid-template-columns:1fr}.phones{grid-template-columns:minmax(0,390px)}}
+@media (max-width:760px){
+ body{padding:16px}
+ .case{padding:14px 16px}
+ .win-body{padding:14px 14px 16px}
+ .phone{border-width:0;border-radius:0}
+ .bars div{grid-template-columns:130px minmax(0,1fr) 30px}
+ .mapd summary code{margin-left:0}
+ .hide-s{display:none}
+}
+/* ── ajouts pour ce parcours ── */
+.flow{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:16px 20px;margin:0 0 6px;font-size:13.5px}
+.flow .st{border:1.5px solid var(--line2);padding:5px 10px;white-space:nowrap;background:var(--paper)}
+.flow .st b{color:var(--blue);margin-right:5px}
+.flow .ar{color:var(--soft);font:800 12px system-ui}
+.flow .tot{flex-basis:100%;font-size:12.5px;color:var(--muted);margin-top:4px}
+.tap{outline:3px solid var(--blue);outline-offset:3px;position:relative}
+.tap:after{content:"👆";position:absolute;right:-6px;bottom:-14px;font-size:17px;line-height:1}
+.next{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:20px 0 0;padding:12px 16px;border:2px dashed var(--blue);background:var(--blue-bg);font-size:13.5px;color:var(--ink)}
+.next .go{font:800 10.5px system-ui;letter-spacing:.08em;text-transform:uppercase;background:var(--blue);color:#fff;padding:3px 8px}
+.ex{font-style:italic;color:var(--soft)}
+.near{display:inline-block;font:700 11px/1.5 system-ui;color:var(--green);background:var(--green-bg);border:1px solid var(--green);padding:0 7px;border-radius:999px;white-space:nowrap}
+tr.soon td{color:var(--muted)}tr.soon td b{font-weight:600}
+tr.gap td{color:var(--soft);font-size:11.5px;text-align:center;background:var(--grey-bg);padding:4px}
+tr.hot td{background:var(--green-bg)}
+tr.pick td{background:var(--blue-bg)}
+.srow{display:grid;grid-template-columns:34px minmax(0,1fr);gap:2px 8px;padding:9px 2px;border-bottom:1px solid var(--line);font-size:13px}
+.srow .n{font:800 12px system-ui;color:var(--soft);padding-top:1px}
+.srow small{display:block;color:var(--muted);font-size:12px}
+.srow.hot{background:var(--green-bg);margin:0 -16px;padding:9px 18px}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.45fr);gap:22px;margin-top:16px;align-items:start}
+.kv{display:grid;grid-template-columns:150px minmax(0,1fr);gap:9px 16px;font-size:13.5px;margin:16px 0 0}
+.kv dt{color:var(--soft);font:700 10.5px system-ui;letter-spacing:.1em;text-transform:uppercase;padding-top:3px}.kv dd{margin:0}
+.sheet .hrow{display:grid;grid-template-columns:26px minmax(0,1fr);gap:4px 10px;padding:12px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.sheet .hrow:last-child{border-bottom:0}
+.sheet .hrow small{display:block;color:var(--soft);font-size:11.5px;margin-top:3px}
+.sheet .hrow ul{margin:8px 0 0;padding-left:18px;font-size:12.5px;color:var(--muted)}
+.sheet .hrow li{margin:3px 0}
+.sheet .sec{font:800 11px system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);margin:14px 0 2px;padding-bottom:6px;border-bottom:2px solid var(--ink)}
+.add{box-shadow:inset 3px 0 0 var(--blue);padding-left:12px!important;background:var(--blue-bg)}
+.ba{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px}
+.ba>div{border:2px solid var(--ink);background:var(--paper);padding:18px 20px;box-shadow:6px 6px 0 var(--shadow)}
+.ba>div.was{border-color:var(--line2);box-shadow:none}
+.ba h4{margin:0 0 10px;font-size:15px}
+.ba ul{margin:0;padding-left:18px;font-size:13px}.ba li{margin:6px 0}
+.pathbox{font:600 12.5px system-ui;color:var(--muted);background:var(--grey-bg);padding:8px 11px;margin:10px 0 0}
+.phones3{grid-template-columns:repeat(3,minmax(0,390px))}
+.pmap{margin:10px 0 4px}
+.pmap svg{display:block;width:100%;height:auto;background:var(--map);border:1.5px solid var(--line2)}
+.phone .seg{margin:0 0 10px}
+.phone .pcard .near{white-space:normal}
+.quote{border-left:4px solid var(--line2);padding:8px 12px;margin:12px 0 0;font-size:13px;background:var(--grey-bg)}
+@media (max-width:1240px){.phones3{grid-template-columns:repeat(2,minmax(0,390px))}}
+@media (max-width:900px){.split,.ba{grid-template-columns:1fr}.phones3{grid-template-columns:minmax(0,390px)}}
+@media (max-width:760px){.kv{grid-template-columns:1fr;gap:2px 0}.kv dd{margin-bottom:8px}.flow{padding:12px 14px}}
+</style></head><body><div class="wrap">
+
+<div class="top">
+ <div>
+  <h1>🏆 Chercher le Tour de France, pas à pas</h1>
+  <p class="sub">Maquette à valider. Tu veux <b>voir</b> si c’est fluide une fois les changements décidés en place : 20 thèmes dont <b>🏆 Sport</b>, un thème qui s’ouvre sur sa <b>liste réunie</b>, les mêmes boutons <b>📎 Insérer</b>, <b>🧺 Panier</b> et <b>↗ source</b> partout. Voici le chemin, écran par écran, avec le clic qui mène au suivant. Les étapes (dates, villes, km) sont <b>les vraies</b>, lues dans <code>assets/data/l8c-tour.json.gz</code> (Wikidata, CC0). Les vainqueurs du Tour (maillot jaune) sont vrais aussi, mais ne sont pas encore dans le fichier. Les familles sont inventées : <b>MAZAUD</b> (Tulle), <b>LACOMBE</b> (Nice), <b>DURAND</b> (Salon-de-Provence). Ce qui n’est qu’un exemple porte la mention <span class="ex">(exemple)</span>.</p>
+ </div>
+ <button class="toggle" type="button" id="tgl">☾ Thème sombre</button>
+</div>
+
+<div class="flow" aria-label="Le chemin en un coup d’œil">
+ <span class="st"><b>1</b>🧰 Listes</span><span class="ar">→</span>
+ <span class="st"><b>2</b>🏆 Sport</span><span class="ar">→</span>
+ <span class="st"><b>3</b>🚲 Tour de France</span><span class="ar">→</span>
+ <span class="st"><b>4</b>Le Tour 1976</span><span class="ar">→</span>
+ <span class="st"><b>5</b>Étape 19 · Sainte-Foy → Tulle</span><span class="ar">→</span>
+ <span class="st"><b>6</b>📎 / 🧺 / fiche du village</span>
+ <span class="tot"><b>4 clics</b> de l’écran Listes jusqu’à l’étape qui arrive près de chez Jean MAZAUD. En tapant « tour de france » dans la recherche : <b>2 clics</b> pour arriver à l’écran 3.</span>
+</div>
+
+<div class="sum" style="margin-top:18px">
+ <a href="#e1"><b>1</b><span>Listes : les 20 thèmes</span></a>
+ <a href="#e2"><b>2</b><span>🏆 Sport, liste réunie</span></a>
+ <a href="#e3"><b>3</b><span>Tour de France</span></a>
+ <a href="#e4"><b>4</b><span>Une édition : 1976</span></a>
+ <a href="#e5"><b>5</b><span>Une étape</span></a>
+ <a href="#e6"><b>6</b><span>Ailleurs dans l’app</span></a>
+ <a href="#e7"><b>7</b><span>Téléphone · sombre</span></a>
+ <a href="#e8"><b>8</b><span>Avant / après</span></a>
+ <a href="#eq"><b>?</b><span>4 questions</span></a>
+</div>
+
+<!-- ═══════════ 1 ═══════════ -->
+<h2 id="e1"><span class="num-b">1</span>L’écran Listes : 20 thèmes et une recherche</h2>
+<p class="sub">Tu ouvres <b>Listes → 🧰 Données</b>. Les 20 thèmes sont en cartes, 🏆 Sport en dernier. La recherche en haut cherche dans toutes les listes. Deux chemins : tu cliques la carte, ou tu tapes ce que tu cherches.</p>
+<div class="win">
+ <div class="win-bar"><span class="eyebrow">Listes › 🧰 Données</span><span class="mini">216 listes · 20 thèmes</span></div>
+ <div class="win-body">
+  <div class="ph"><div><small>Données</small><h4>🧰 Toutes les données</h4><p>Des listes toutes prêtes pour comprendre la vie de ta famille. Lecture seule.</p></div></div>
+  <div class="lbar"><span class="lsearch">🔍 Chercher dans les 216 listes (ex. séisme, moulin, Tour de France, 1887)…</span></div>
+  <div class="chips"><span class="klab">Montrer</span><span class="k on">Toutes <i>216</i></span><span class="k">📍 Avec une carte <i>129</i></span><span class="k">📅 Avec des dates <i>159</i></span><span class="k">⤓ À installer <i>29</i></span></div>
+  <div class="themes">
+   <div class="th"><span class="ic">🌋</span><b>Séismes, volcans et terrains <i>9</i></b><small>EPICA, NOAA, volcans, cavités…</small><span class="mg">🔀 Séismes réunis</span></div>
+   <div class="th"><span class="ic">🌊</span><b>Eaux, crues et mers <i>8</i></b><small>Inondations, repères de crues, marées…</small><span class="mg">🔀 Crues réunies</span></div>
+   <div class="th"><span class="ic">⛅</span><b>Climat, ciel et saisons <i>14</i></b><small>Vendanges, météo, comètes…</small></div>
+   <div class="th"><span class="ic">⚔️</span><b>Guerres et soldats <i>11</i></b><small>Morts pour la France, batailles…</small><span class="mg">🔀 Batailles réunies</span></div>
+   <div class="th"><span class="ic">🏛</span><b>Monuments et patrimoine <i>12</i></b><small>Châteaux, Mérimée, Palissy…</small><span class="mg">🔀 Édifices réunis</span></div>
+   <div class="th"><span class="ic">🏘</span><b>Petit patrimoine du village <i>11</i></b><small>Fours, lavoirs, croix…</small></div>
+   <div class="th"><span class="ic">🖼</span><b>Musées, images et sons <i>12</i></b><small>Joconde, films, 78 tours…</small></div>
+   <div class="th"><span class="ic">🗺</span><b>Lieux et noms de lieux <i>14</i></b><small>GOV, DicoTopo, lieux-dits…</small><span class="mg">🔀 Anciens noms réunis</span></div>
+   <div class="th"><span class="ic">👑</span><b>Pouvoirs, lois et frontières <i>13</i></b><small>Préfets, maires, seigneurs…</small></div>
+   <div class="th"><span class="ic">👶</span><b>Prénoms et noms de famille <i>8</i></b><small>Prénoms par pays, blasons…</small></div>
+   <div class="th"><span class="ic">🔎</span><b>Retrouver une personne <i>11</i></b><small>Décès INSEE, Léonore…</small></div>
+   <div class="th"><span class="ic">⚒️</span><b>Métiers et industries <i>13</i></b><small>Mines, moulins, forges…</small></div>
+   <div class="th"><span class="ic">🌾</span><b>Champs, bêtes et plantes <i>14</i></b><small>AOC, races, fruits anciens…</small></div>
+   <div class="th"><span class="ic">🚂</span><b>Routes, trains et bateaux <i>13</i></b><small>Gares, voies romaines…</small></div>
+   <div class="th"><span class="ic">✝️</span><b>Croire, soigner, enfermer <i>12</i></b><small>Églises, hospices, prisons…</small></div>
+   <div class="th"><span class="ic">💶</span><b>Prix, monnaies et chiffres <i>7</i></b><small>Prix des denrées, pièces…</small></div>
+   <div class="th"><span class="ic">📚</span><b>Livres, journaux et écritures <i>13</i></b><small>Journaux, almanachs, latin…</small></div>
+   <div class="th"><span class="ic">🎉</span><b>Fêtes, jeux et vie de tous les jours <i>12</i></b><small>Fêtes, jeux, chansons, plats…</small></div>
+   <div class="th"><span class="ic">🌍</span><b>Grands événements et dates <i>7</i></b><small>Le monde autour, nouveautés…</small></div>
+   <div class="th tap"><span class="ic">🏆</span><b>Sport <i>2</i></b><small>Tour de France, clubs ; bientôt JO, Roland-Garros…</small><span class="mg">🔀 Compétitions sportives</span></div>
+  </div>
+  <p class="note">🏆 Sport prend les 2 listes de sport qui étaient dans 🎉 Fêtes (14 → 12) : <i>Étapes du Tour de France</i> et <i>Clubs sportifs</i>. Le total reste 216. Si tu as choisi les 4 groupes d’avant dans les Réglages, cet écran les montre à la place des thèmes.</p>
+ </div>
+</div>
+<div class="next"><span class="go">Clic</span>Tu cliques sur la carte <b>🏆 Sport</b> → écran 2.</div>
+
+<h3 style="margin:30px 0 8px;font-size:16px">Autre chemin : tu tapes « tour de france »</h3>
+<div class="grid">
+ <div class="win">
+  <div class="win-bar"><span class="eyebrow">Recherche tapée</span><span class="mini">pendant la frappe</span></div>
+  <div class="win-body">
+   <div class="lbar" style="margin-top:0"><span class="lsearch on">🔍 tour de france</span><span class="clear">effacer</span></div>
+   <p class="mini" style="margin:0 0 10px">2 résultats, dans 1 thème. Les autres thèmes sont pâlis.</p>
+   <ul class="res">
+    <li class="grp">🏆 Sport</li>
+    <li class="tap"><span class="ic">🔀</span><div><b class="mg">Compétitions sportives › 🚲 Tour de France</b><small>liste réunie, déjà filtrée sur le Tour · 114 éditions, 1903 → 2027</small></div><span class="mini">liste réunie</span></li>
+    <li><span class="ic">🚲</span><div><b>Étapes du Tour de France (1903–2025)</b><small>Wikidata · 2 446 étapes, départ et arrivée</small></div><span class="mini">la liste seule</span></li>
+   </ul>
+  </div>
+ </div>
+ <div class="case">
+  <span class="tag">Pourquoi c’est rapide</span>
+  <h3>La recherche ouvre la liste déjà filtrée</h3>
+  <p style="font-size:13px;margin:0">Le premier résultat n’ouvre pas seulement le thème : il ouvre la liste réunie <b>avec la pastille « 🚲 Tour de France » déjà mise</b>. Tu sautes l’écran 2 et tu arrives tout de suite à l’écran 3.</p>
+  <div class="next" style="margin-top:14px"><span class="go">Clic</span>Tu cliques sur <b>Compétitions sportives › 🚲 Tour de France</b> → écran 3.</div>
+ </div>
+</div>
+
+<!-- ═══════════ 2 ═══════════ -->
+<h2 id="e2"><span class="num-b">2</span>🏆 Sport s’ouvre sur sa liste réunie : « Compétitions sportives »</h2>
+<p class="sub">Une ligne = une édition d’une compétition, quelle que soit la source. Les compétitions qui ne sont pas encore dans l’app sont en pointillés (<i>à venir</i>) : <b>aujourd’hui, seul le Tour de France a des données</b>. Les pastilles sont calmes : une par compétition, avec son nombre.</p>
+<div class="win">
+ <div class="win-bar"><span class="eyebrow">Listes › 🧰 Données › 🏆 Sport</span><span class="mini">← Tous les thèmes</span></div>
+ <div class="win-body">
+  <div class="ph">
+   <div><small>Liste réunie</small><h4>🔀 Compétitions sportives</h4><p>Toutes les compétitions, une édition par ligne, avec la source sur chaque ligne.</p></div>
+   <div class="row"><span class="seg"><span class="on">▦ Tableau</span><span>🗺 Carte</span></span><span class="lbtn">⋯</span></div>
+  </div>
+  <div class="tabsx"><span class="on">🔀 Compétitions sportives <small>1 source aujourd’hui</small></span><span>Les 2 listes</span></div>
+  <div class="lbar"><span class="lsearch">🔍 Chercher une année, un lieu, un nom…</span><span class="lbtn">Filtrer</span></div>
+  <div class="chips"><span class="klab">Compétition</span>
+   <span class="k on">Toutes <i>114</i></span>
+   <span class="k tap">🚲 Tour de France <i>114</i></span>
+   <span class="k soon">🏅 Jeux olympiques <i>à venir</i></span>
+   <span class="k soon">🎾 Roland-Garros <i>à venir</i></span>
+   <span class="k soon">🏉 Six Nations <i>à venir</i></span>
+   <span class="k soon">🚴 Paris-Roubaix <i>à venir</i></span>
+  </div>
+  <div class="scrollx">
+  <table class="mt">
+   <thead><tr><th>Année</th><th>Compétition</th><th>Où</th><th>Vainqueur</th><th>Dans la famille</th><th>Source</th><th></th></tr></thead>
+   <tbody>
+    <tr><td class="d">2025</td><td>🚲 <b>Tour de France</b></td><td class="pl"><b>Lille → Paris</b><small>21 étapes · 3 302 km</small></td><td>Tadej Pogačar</td><td class="fam"></td><td><div class="srcs"><a href="#">Wikidata ↗</a></div></td><td class="acts"><span class="ib" title="Insérer">📎</span><span class="ib" title="Au panier">🧺</span></td></tr>
+    <tr class="soon"><td class="d">2024</td><td>🏅 <b>Jeux olympiques d’été</b></td><td class="pl"><b>Paris</b></td><td>—</td><td class="fam"></td><td><div class="srcs"><a class="soon">Wikidata · à venir</a></div></td><td class="acts"></td></tr>
+    <tr><td class="d">2017</td><td>🚲 <b>Tour de France</b></td><td class="pl"><b>Düsseldorf → Paris</b><small>21 étapes · 3 542 km</small></td><td>Chris Froome</td><td class="fam"><span class="near">arrivée à Salon, chez les DURAND</span></td><td><div class="srcs"><a href="#">Wikidata ↗</a></div></td><td class="acts"><span class="ib">📎</span><span class="ib">🧺</span></td></tr>
+    <tr><td class="d">1976</td><td>🚲 <b>Tour de France</b></td><td class="pl"><b>Saint-Jean-de-Monts → Paris</b><small>22 étapes + prologue · 4 026 km</small></td><td>Lucien Van Impe</td><td class="fam"><span class="who">Jean MAZAUD, 12 ans</span><small>arrivée à 7 km de chez lui</small></td><td><div class="srcs"><a href="#">Wikidata ↗</a></div></td><td class="acts"><span class="ib">📎</span><span class="ib">🧺</span></td></tr>
+    <tr><td class="d">1924</td><td>🚲 <b>Tour de France</b></td><td class="pl"><b>Paris → Paris</b><small>15 étapes · 5 425 km</small></td><td>Ottavio Bottecchia</td><td class="fam"><span class="who">Jeanne LACOMBE, 52 ans</span><small>arrivée à Nice, chez elle</small></td><td><div class="srcs"><a href="#">Wikidata ↗</a></div></td><td class="acts"><span class="ib">📎</span><span class="ib">🧺</span></td></tr>
+    <tr class="soon"><td class="d">1924</td><td>🏅 <b>Jeux olympiques d’été</b></td><td class="pl"><b>Paris</b></td><td>—</td><td class="fam"></td><td><div class="srcs"><a class="soon">Wikidata · à venir</a></div></td><td class="acts"></td></tr>
+    <tr class="soon"><td class="d">1924</td><td>⛷ <b>Jeux olympiques d’hiver</b></td><td class="pl"><b>Chamonix</b></td><td>—</td><td class="fam"></td><td><div class="srcs"><a class="soon">Wikidata · à venir</a></div></td><td class="acts"></td></tr>
+    <tr class="soon"><td class="d">1896</td><td>🚴 <b>Paris-Roubaix</b> <span class="mini">1<sup>re</sup> édition</span></td><td class="pl"><b>Paris → Roubaix</b></td><td>—</td><td class="fam"></td><td><div class="srcs"><a class="soon">Wikidata · à venir</a></div></td><td class="acts"></td></tr>
+   </tbody>
+  </table>
+  </div>
+  <div class="foot"><span>Extrait : les lignes avec la famille, et quelques compétitions à venir pour montrer le mélange.</span><span>Trier : année ▾</span></div>
+ </div>
+</div>
+<div class="next"><span class="go">Clic</span>Tu cliques sur la pastille <b>🚲 Tour de France</b> → écran 3.</div>
+
+<!-- ═══════════ 3 ═══════════ -->
+<h2 id="e3"><span class="num-b">3</span>Le Tour de France : une ligne par édition</h2>
+<p class="sub">Avec la pastille, la liste change de forme : un petit choix <b>Éditions · Étapes · Carte</b> apparaît. Par défaut : <b>Éditions</b>, une ligne par année. La colonne <b>Dans la famille</b> dit qui vivait près du parcours, et son âge : <span class="near">en vert</span> à 15 km ou moins, en gris plus loin (jusqu’à 100 km).</p>
+<div class="win">
+ <div class="win-bar"><span class="eyebrow">🏆 Sport › 🔀 Compétitions sportives › 🚲 Tour de France</span><span class="mini">114 éditions</span></div>
+ <div class="win-body">
+  <div class="ph">
+   <div><small>Liste réunie · filtrée</small><h4>🚲 Tour de France</h4><p>1903 → 2027 · 2 446 étapes (Wikidata). 2026 a déjà couru ; 2027 est le parcours annoncé.</p></div>
+   <div class="row"><span class="seg"><span class="on">Éditions</span><span>Étapes</span><span>🗺 Carte</span></span><span class="lbtn">⋯</span></div>
+  </div>
+  <div class="lbar"><span class="lsearch">🔍 Une année, une ville, un coureur…</span><span class="lbtn">Filtrer</span></div>
+  <div class="chips"><span class="chip">🚲 Tour de France</span><span class="k">👪 Seulement près de la famille</span></div>
+  <div class="scrollx">
+  <table class="mt">
+   <thead><tr><th>Année</th><th>Maillot jaune</th><th class="num">Étapes</th><th class="num">km</th><th>Parcours</th><th>Dans la famille</th><th>Source</th><th></th></tr></thead>
+   <tbody>
+    <tr><td class="d"><b>2025</b></td><td>Tadej Pogačar</td><td class="num">21</td><td class="num">3 302</td><td class="pl"><small>Lille → Paris</small></td><td class="fam"></td><td><div class="srcs"><a href="#">Wikidata ↗</a></div></td><td class="acts"><span class="ib">📎</span><span class="ib">🧺</span></td></tr>
+    <tr class="gap"><td colspan="8">⋯ 7 éditions (2018 → 2024)</td></tr>
+    <tr><td class="d"><b>2017</b></td><td>Chris Froome</td><td class="num">21</td><td class="num">3 542</td><td class="pl"><small>Düsseldorf → Paris</small></td><td class="fam"><span class="near">arrivée à Salon, chez les DURAND</span></td><td><div class="srcs"><a href="#">Wikidata ↗</a></div></td><td class="acts"><span class="ib">📎</span><span class="ib">🧺</span></td></tr>
+    <tr class="gap"><td colspan="8">⋯ 40 éditions (1977 → 2016)</td></tr>
+    <tr class="pick"><td class="d"><b class="tap">1976</b></td><td>Lucien Van Impe</td><td class="num">22 + prologue</td><td class="num">4 026</td><td class="pl"><small>Saint-Jean-de-Monts → Paris</small></td><td class="fam"><span class="who">Jean MAZAUD avait 12 ans</span><small>arrivée à Tulle, à 7 km de chez lui</small></td><td><div class="srcs"><a href="#">Wikidata ↗</a></div></td><td class="acts"><span class="ib">📎</span><span class="ib">🧺</span></td></tr>
+    <tr class="gap"><td colspan="8">⋯ 11 éditions (1965 → 1975)</td></tr>
+    <tr><td class="d"><b>1964</b></td><td>Jacques Anquetil</td><td class="num">22</td><td class="num">4 506</td><td class="pl"><small>Rennes → Paris</small></td><td class="fam"><span class="who">Jean MAZAUD naît cette année-là</span></td><td><div class="srcs"><a href="#">Wikidata ↗</a></div></td><td class="acts"><span class="ib">📎</span><span class="ib">🧺</span></td></tr>
+    <tr class="gap"><td colspan="8">⋯ 32 éditions (1925 → 1963, sans les années de guerre)</td></tr>
+    <tr><td class="d"><b>1924</b></td><td>Ottavio Bottecchia</td><td class="num">15</td><td class="num">5 425</td><td class="pl"><small>Paris → Paris</small></td><td class="fam"><span class="who">Jeanne LACOMBE avait 52 ans</span><small>arrivée à Nice, chez elle</small></td><td><div class="srcs"><a href="#">Wikidata ↗</a></div></td><td class="acts"><span class="ib">📎</span><span class="ib">🧺</span></td></tr>
+    <tr class="gap"><td colspan="8">⋯ 16 éditions (1904 → 1923)</td></tr>
+    <tr><td class="d"><b>1903</b></td><td>Maurice Garin</td><td class="num">6</td><td class="num">2 428</td><td class="pl"><small>Villeneuve-Saint-Georges → Ville-d’Avray</small></td><td class="fam"><small>Marseille, à 44 km des DURAND (Louis, 23 ans)</small></td><td><div class="srcs"><a href="#">Wikidata ↗</a></div></td><td class="acts"><span class="ib">📎</span><span class="ib">🧺</span></td></tr>
+   </tbody>
+  </table>
+  </div>
+  <div class="foot"><span>Étapes et km : comptés dans le fichier (somme des étapes). « Maillot jaune » : colonne à ajouter au fichier (Wikidata, propriété « vainqueur »).</span><span>Trier : année ▾</span></div>
+ </div>
+</div>
+<div class="grid" style="margin-top:22px">
+ <div class="case">
+  <span class="tag">Les trois vues</span>
+  <h3>Éditions · Étapes · Carte</h3>
+  <ul style="font-size:13px;padding-left:18px;margin:0">
+   <li><b>Éditions</b> : 114 lignes, une par année (ce que fait aujourd’hui « Le Tour de France de cette année-là », mais pour toutes les années à la fois).</li>
+   <li><b>Étapes</b> : les 2 446 étapes, la liste qui existe déjà, avec la même colonne « Dans la famille ».</li>
+   <li><b>🗺 Carte</b> : toutes les villes-étapes, plus grosses quand le Tour y est venu souvent (Nice : 73 étapes, sur 36 années).</li>
+  </ul>
+ </div>
+ <div class="case">
+  <span class="tag">« Dans la famille », comment c’est calculé</span>
+  <h3>Départ ou arrivée près d’un lieu de vie</h3>
+  <p style="font-size:13px;margin:0">Le fichier ne connaît que la <b>ville de départ</b> et la <b>ville d’arrivée</b> de chaque étape, pas les villages traversés. Donc l’app dit « arrivée à 7 km de chez lui », jamais « le Tour est passé devant sa porte ». Aujourd’hui le code cherche à <b>3 km</b> ; je propose <b>15 km</b> (question 3).</p>
+ </div>
+</div>
+<div class="next"><span class="go">Clic</span>Tu cliques sur la ligne <b>1976</b> (celle où Jean MAZAUD avait 12 ans) → écran 4.</div>
+
+<!-- ═══════════ 4 ═══════════ -->
+<h2 id="e4"><span class="num-b">4</span>Une édition ouverte : le Tour 1976</h2>
+<p class="sub">À gauche, le parcours en petite carte, avec les lieux de la famille. À droite, les étapes, toutes, dans l’ordre (les vraies, avec les demi-étapes 5a, 18a…). Pas de boutons sur chaque ligne : on clique une étape pour l’ouvrir. Les étapes près de chez quelqu’un sont <b style="color:var(--green)">en vert</b>.</p>
+<div class="win">
+ <div class="win-bar"><span class="eyebrow">🚲 Tour de France › 1976</span><span class="mini">← Toutes les éditions</span></div>
+ <div class="win-body">
+  <div class="ph">
+   <div><small>Édition</small><h4>Tour de France 1976</h4><p>24 juin → 18 juillet 1976 · 22 étapes + prologue (27 tronçons) · 4 026 km · maillot jaune : <b>Lucien Van Impe</b></p></div>
+   <div class="row"><span class="btn small">📎 Insérer</span><span class="btn small">🧺 Panier</span><span class="srcs"><a href="#">Wikidata ↗</a><a href="#">Wikipédia ↗</a></span></div>
+  </div>
+  <div class="msg ok"><b>Dans ta famille :</b> le 15 juillet, l’étape arrive à <b>Tulle</b>, à 7 km de Gimel-les-Cascades, où vivait <b>Jean MAZAUD</b> (12 ans). Le lendemain, elle repart de Tulle.</div>
+  <div class="split">
+   <div>
+    <div class="map">
+     <svg viewBox="0 0 600 510" role="img" aria-label="Schéma : le parcours du Tour 1976 et les lieux de la famille"><polygon points="311.1,20.3 345.2,38.4 412.2,68.6 450.4,103.2 551.9,133.4 525.6,209.7 466.4,285.5 501.4,302.0 493.2,356.9 530.1,400.8 521.9,418.4 501.4,431.0 456.2,455.7 434.4,444.7 402.7,436.5 374.0,433.7 341.1,461.2 344.0,491.9 283.6,483.1 213.7,472.2 140.5,441.4 162.3,370.0 164.4,318.4 166.4,287.7 123.3,226.7 69.9,200.4 19.3,184.5 29.2,165.3 53.4,148.2 131.5,151.0 152.1,151.5 147.9,115.3 134.0,92.2 162.3,96.6 199.3,115.3 217.8,104.9 258.1,81.3 279.5,36.8 289.7,24.7" fill="var(--paper)" stroke="var(--line2)" stroke-width="1.5"/><path d="M198.8 121.8L278.8 48.1M387.7 16.7L407.0 28.7M454.1 44.8L448.8 76.6M515.3 200.5L494.5 216.2M463.2 346.4L461.5 348.3M451.4 415.4L338.4 472.8M299.1 487.8L297.3 488.7M225.8 471.5L227.0 471.3M189.9 360.3L222.6 360.1M335.4 309.0L326.0 186.8M301.4 142.5L310.4 139.6" fill="none" stroke="var(--soft)" stroke-width="1.4" stroke-dasharray="3 5"/><path d="M129.0 252.9L191.0 215.7M191.0 215.7L198.8 121.8M278.8 48.1L387.7 16.7M407.0 28.7L454.1 44.8M448.8 76.6L467.8 148.6M467.8 148.6L515.3 200.5M494.5 216.2L466.1 276.9M466.1 276.9L463.2 346.4M461.5 348.3L489.9 355.2M489.9 355.2L451.4 415.4M338.4 472.8L299.1 487.8M297.3 488.7L243.4 455.2M243.4 455.2L225.8 471.5M227.0 471.3L198.5 444.7M198.5 444.7L241.0 414.5M241.0 414.5L237.9 425.7M237.9 425.7L203.4 375.9M203.4 375.9L169.3 352.5M169.3 352.5L189.9 360.3M326.0 186.8L301.4 142.5" fill="none" stroke="var(--yel)" stroke-width="3.2" stroke-linecap="round"/><path d="M222.6 360.1L286.5 336.7M286.5 336.7L335.4 309.0" fill="none" stroke="var(--blue)" stroke-width="5" stroke-linecap="round"/><g fill="var(--paper)" stroke="var(--yel-ink)" stroke-width="1.4"><circle cx="129.0" cy="252.9" r="3.2"/><circle cx="191.0" cy="215.7" r="3.2"/><circle cx="198.8" cy="121.8" r="3.2"/><circle cx="278.8" cy="48.1" r="3.2"/><circle cx="387.7" cy="16.7" r="3.2"/><circle cx="407.0" cy="28.7" r="3.2"/><circle cx="454.1" cy="44.8" r="3.2"/><circle cx="467.8" cy="148.6" r="3.2"/><circle cx="515.3" cy="200.5" r="3.2"/><circle cx="466.1" cy="276.9" r="3.2"/><circle cx="463.2" cy="346.4" r="3.2"/><circle cx="489.9" cy="355.2" r="3.2"/><circle cx="451.4" cy="415.4" r="3.2"/><circle cx="299.1" cy="487.8" r="3.2"/><circle cx="243.4" cy="455.2" r="3.2"/><circle cx="225.8" cy="471.5" r="3.2"/><circle cx="198.5" cy="444.7" r="3.2"/><circle cx="241.0" cy="414.5" r="3.2"/><circle cx="237.9" cy="425.7" r="3.2"/><circle cx="203.4" cy="375.9" r="3.2"/><circle cx="169.3" cy="352.5" r="3.2"/><circle cx="189.9" cy="360.3" r="3.2"/><circle cx="286.5" cy="336.7" r="3.2"/><circle cx="335.4" cy="309.0" r="3.2"/><circle cx="301.4" cy="142.5" r="3.2"/><circle cx="310.4" cy="139.6" r="3.2"/><circle cx="310.4" cy="139.6" r="3.2"/></g><circle cx="286.5" cy="336.7" r="8" fill="var(--green)" fill-opacity=".12" stroke="var(--green)" stroke-dasharray="4 3"/><rect x="280.5" y="330.7" width="12" height="12" fill="var(--blue)" stroke="var(--paper)" stroke-width="2"/><text x="71.5" y="318.7" font-size="15" font-weight="700" fill="var(--blue-ink)">Tulle · Jean MAZAUD · 7 km</text><rect x="506.4" y="416.6" width="12" height="12" fill="var(--blue)" stroke="var(--paper)" stroke-width="2"/><text x="462.4" y="458.6" font-size="15" font-weight="700" fill="var(--blue-ink)">Nice · LACOMBE</text><rect x="417.2" y="420.0" width="12" height="12" fill="var(--blue)" stroke="var(--paper)" stroke-width="2"/><text x="293.2" y="414.0" font-size="15" font-weight="700" fill="var(--blue-ink)">Salon · DURAND</text><text x="320.4" y="131.6" font-size="13" fill="var(--muted)">Paris</text><text x="345.4" y="313.0" font-size="13" fill="var(--muted)">puy de Dôme</text><text x="371.2" y="350.4" font-size="13" fill="var(--muted)">Alpe d’Huez</text><text x="109.0" y="274.9" font-size="13" fill="var(--muted)">Saint-Jean-de-Monts</text><text x="168.5" y="448.7" font-size="13" fill="var(--muted)">Pau</text><text x="459.4" y="411.4" font-size="13" fill="var(--muted)">Manosque</text></svg>
+     <div class="legend"><span><b style="color:var(--yel)">━</b> une étape</span><span><b style="color:var(--blue)">━</b> les étapes 19 et 20</span><span>┄ transfert</span><span><b style="color:var(--blue)">■</b> lieu de la famille</span><span><b style="color:var(--green)">◌</b> 15 km</span></div>
+    </div>
+    <p class="note">Schéma (traits droits du départ à l’arrivée). La vraie carte est celle de l’app. Une ville d’arrivée manque dans Wikidata (étape 4, en Belgique) : on l’écrit, on n’invente pas.</p>
+   </div>
+   <div class="scrollx">
+    <table class="mt">
+     <thead><tr><th>Étape</th><th>Date</th><th>Départ → arrivée</th><th class="num">km</th><th>Vainqueur d’étape</th></tr></thead>
+     <tbody>
+<tr><td class="d">prologue</td><td class="d">24 juin</td><td class="pl"><b style="white-space:nowrap" class="">Saint-Jean-de-Monts → Saint-Jean-de-Monts</b></td><td class="num">8</td><td><span class=mini>—</span></td></tr>
+<tr><td class="d">1</td><td class="d">25 juin</td><td class="pl"><b style="white-space:nowrap" class="">Saint-Jean-de-Monts → Angers</b></td><td class="num">173</td><td><span class=mini>—</span></td></tr>
+<tr><td class="d">2</td><td class="d">26 juin</td><td class="pl"><b style="white-space:nowrap" class="">Angers → Caen</b></td><td class="num">236</td><td><span class=mini>—</span></td></tr>
+<tr><td class="d">3</td><td class="d">27 juin</td><td class="pl"><b style="white-space:nowrap" class="">Le Touquet-Paris-Plage → Le Touquet-Paris-Plage</b></td><td class="num">37</td><td><span class=mini>—</span></td></tr>
+<tr><td class="d">4</td><td class="d">28 juin</td><td class="pl"><b style="white-space:nowrap" class="">Le Touquet-Paris-Plage → <span class="ex">(nom manquant dans Wikidata)</span></b></td><td class="num">258</td><td><span class=mini>—</span></td></tr>
+<tr><td class="d">5a</td><td class="d">29 juin</td><td class="pl"><b style="white-space:nowrap" class="">Louvain → Louvain</b></td><td class="num">4</td><td><span class=mini>—</span></td></tr>
+<tr><td class="d">5b</td><td class="d">29 juin</td><td class="pl"><b style="white-space:nowrap" class="">Louvain → Verviers</b></td><td class="num">144</td><td><span class=mini>—</span></td></tr>
+<tr><td class="d">6</td><td class="d">30 juin</td><td class="pl"><b style="white-space:nowrap" class="">Bastogne → Nancy</b></td><td class="num">209</td><td><span class=mini>—</span></td></tr>
+<tr><td class="d">7</td><td class="d">1er juil.</td><td class="pl"><b style="white-space:nowrap" class="">Nancy → Mulhouse</b></td><td class="num">208</td><td><span class=mini>—</span></td></tr>
+<tr><td class="d">8</td><td class="d">2 juil.</td><td class="pl"><b style="white-space:nowrap" class="">Valentigney → Divonne-les-Bains</b></td><td class="num">220</td><td><span class=mini>—</span></td></tr>
+<tr><td class="d">9</td><td class="d">4 juil.</td><td class="pl"><b style="white-space:nowrap" class="">Divonne-les-Bains → Alpe d&#x27;Huez</b></td><td class="num">258</td><td><span class=mini>—</span></td></tr>
+<tr><td class="d">10</td><td class="d">5 juil.</td><td class="pl"><b style="white-space:nowrap" class="">Le Bourg-d&#x27;Oisans → Montgenèvre</b></td><td class="num">166</td><td><span class=mini>—</span></td></tr>
+<tr><td class="d">11</td><td class="d">6 juil.</td><td class="pl"><b style="white-space:nowrap" class="">Montgenèvre → Manosque</b><div style="margin-top:4px"><small>Manosque : 59 km des DURAND</small></div></td><td class="num">224</td><td><span class=mini>—</span></td></tr>
+<tr><td class="d">12</td><td class="d">8 juil.</td><td class="pl"><b style="white-space:nowrap" class="">Le Barcarès → Bolquère - Pyrénées 2000</b></td><td class="num">206</td><td><span class=mini>—</span></td></tr>
+<tr><td class="d">13</td><td class="d">9 juil.</td><td class="pl"><b style="white-space:nowrap" class="">Font-Romeu-Odeillo-Via → Saint-Gaudens</b></td><td class="num">188</td><td><span class=mini>—</span></td></tr>
+<tr><td class="d">14</td><td class="d">10 juil.</td><td class="pl"><b style="white-space:nowrap" class="">Saint-Gaudens → Saint-Lary-Soulan</b></td><td class="num">139</td><td><span class=mini>—</span></td></tr>
+<tr><td class="d">15</td><td class="d">11 juil.</td><td class="pl"><b style="white-space:nowrap" class="">Saint-Lary-Soulan → Pau</b></td><td class="num">195</td><td><span class=mini>—</span></td></tr>
+<tr><td class="d">16</td><td class="d">12 juil.</td><td class="pl"><b style="white-space:nowrap" class="">Pau → Fleurance</b></td><td class="num">152</td><td><span class=mini>—</span></td></tr>
+<tr><td class="d">17</td><td class="d">13 juil.</td><td class="pl"><b style="white-space:nowrap" class="">Fleurance → Auch</b></td><td class="num">39</td><td><span class=mini>—</span></td></tr>
+<tr><td class="d">18a</td><td class="d">14 juil.</td><td class="pl"><b style="white-space:nowrap" class="">Auch → Langon</b></td><td class="num">86</td><td><span class=mini>—</span></td></tr>
+<tr><td class="d">18b</td><td class="d">14 juil.</td><td class="pl"><b style="white-space:nowrap" class="">Langon → Lacanau</b></td><td class="num">123</td><td><span class=mini>—</span></td></tr>
+<tr><td class="d">18c</td><td class="d">14 juil.</td><td class="pl"><b style="white-space:nowrap" class="">Lacanau → Bordeaux</b></td><td class="num">70</td><td><span class=mini>—</span></td></tr>
+<tr class="hot"><td class="d">19</td><td class="d">15 juil.</td><td class="pl"><b style="white-space:nowrap" class="tap">Sainte-Foy-la-Grande → Tulle</b><div style="margin-top:4px"><span class="near">Jean MAZAUD, 12 ans · arrivée à 7 km de chez lui</span></div></td><td class="num">220</td><td><span class="ex">un nom (exemple)</span></td></tr>
+<tr class="hot"><td class="d">20</td><td class="d">16 juil.</td><td class="pl"><b style="white-space:nowrap" class="">Tulle → puy de Dôme</b><div style="margin-top:4px"><span class="near">départ à 7 km de chez lui</span></div></td><td class="num">220</td><td><span class="ex">un nom (exemple)</span></td></tr>
+<tr><td class="d">21</td><td class="d">17 juil.</td><td class="pl"><b style="white-space:nowrap" class="">Montargis → Versailles</b></td><td class="num">146</td><td><span class=mini>—</span></td></tr>
+<tr><td class="d">22a</td><td class="d">18 juil.</td><td class="pl"><b style="white-space:nowrap" class="">Paris → Paris</b></td><td class="num">6</td><td><span class=mini>—</span></td></tr>
+<tr><td class="d">22b</td><td class="d">18 juil.</td><td class="pl"><b style="white-space:nowrap" class="">Paris → Paris</b></td><td class="num">91</td><td><span class=mini>—</span></td></tr>
+     </tbody>
+    </table>
+   </div>
+  </div>
+  <p class="note">« Vainqueur d’étape » : pas dans le fichier aujourd’hui. Les deux noms marqués <span class="ex">(exemple)</span> montrent seulement la place. On les prendrait dans Wikidata, qui les donne pour beaucoup d’étapes ; sinon « — ».</p>
+ </div>
+</div>
+<div class="next"><span class="go">Clic</span>Tu cliques sur l’étape <b>19 · Sainte-Foy-la-Grande → Tulle</b> → écran 5.</div>
+
+<!-- ═══════════ 5 ═══════════ -->
+<h2 id="e5"><span class="num-b">5</span>Une étape ouverte : tout, et trois gestes</h2>
+<p class="sub">La ligne s’ouvre : le détail, la famille, les sources ↗. Puis les mêmes boutons que partout : <b>📎 Insérer dans…</b>, <b>🧺 Mettre dans un panier</b>, et un lien vers la <b>fiche du village</b>.</p>
+<div class="grid">
+ <div class="win">
+  <div class="win-bar"><span class="eyebrow">Tour de France 1976 › Étape 19</span><span class="mini">ligne ouverte</span></div>
+  <div class="win-body">
+   <div class="ph"><div><small>19<sup>e</sup> étape</small><h4>Sainte-Foy-la-Grande → Tulle</h4><p>Jeudi 15 juillet 1976 · 220 km</p></div></div>
+   <dl class="kv">
+    <dt>Départ</dt><dd>Sainte-Foy-la-Grande <span class="mini">(Gironde · 33402)</span></dd>
+    <dt>Arrivée</dt><dd>Tulle <span class="mini">(Corrèze · 19272)</span></dd>
+    <dt>Dans la famille</dt><dd><span class="near">Jean MAZAUD, 12 ans</span><br><span class="mini">vivait à Gimel-les-Cascades, à 7 km de l’arrivée</span></dd>
+    <dt>Vainqueur d’étape</dt><dd><span class="ex">un nom (exemple)</span> <span class="mini">· à prendre dans Wikidata</span></dd>
+    <dt>Maillot jaune final</dt><dd>Lucien Van Impe</dd>
+    <dt>Le lendemain</dt><dd>Étape 20, Tulle → puy de Dôme, 220 km</dd>
+    <dt>Sources</dt><dd><div class="srcs"><a href="#">Wikidata Q107572420 ↗</a><a href="#">Wikipédia « Tour de France 1976 » ↗</a></div></dd>
+   </dl>
+   <div class="row" style="margin-top:18px"><span class="btn small blue tap">📎 Insérer dans…</span><span class="btn small">🧺 Mettre dans un panier</span><span class="btn small ghost">🏘 Voir sur la fiche du village</span></div>
+  </div>
+ </div>
+ <div>
+  <div class="menu">
+   <div class="mg2"><b>📎 Insérer dans… (ouvert)</b><span class="mini">Les endroits récents d’abord.</span></div>
+   <div class="mg2">
+    <label>🔎 L’enquête « L’enfance de Jean à Gimel » <i>récente</i></label>
+    <label>📝 Une note sur Jean MAZAUD</label>
+    <label>📚 L’Atelier : chapitre « L’été 1976 »</label>
+    <label style="color:var(--muted)">⌖ Là où est le curseur</label>
+   </div>
+   <div class="mg2"><b>Ce qui sera inséré</b>
+    <div class="quote">Le Tour de France 1976 est arrivé à Tulle le jeudi 15 juillet 1976 (19<sup>e</sup> étape, Sainte-Foy-la-Grande → Tulle, 220 km). Jean MAZAUD avait 12 ans.<br><span class="mini">Source : Wikidata, Q107572420 (CC0)</span></div>
+   </div>
+   <div class="mf"><span class="clear">annuler</span><span class="btn blue small">Insérer</span></div>
+  </div>
+  <div class="case" style="margin-top:22px">
+   <span class="tag">Les deux autres gestes</span>
+   <ul style="font-size:13px;padding-left:18px;margin:8px 0 0">
+    <li><b>🧺 Mettre dans un panier</b> : propose le dernier panier utilisé (« Famille MAZAUD › Enfance de Jean »), ou un autre. La source suit.</li>
+    <li><b>🏘 Voir sur la fiche du village</b> : ouvre la fiche de Tulle, au bloc « Le Tour est passé ici » (écran 6).</li>
+   </ul>
+   <p class="note">Rien d’autre : pas de 4<sup>e</sup> bouton. Exporter, imprimer, envoyer : dans le ⋯ de la liste, comme ailleurs.</p>
+  </div>
+ </div>
+</div>
+<div class="next"><span class="go">Clic</span>Tu cliques sur <b>🏘 Voir sur la fiche du village</b> → écran 6.</div>
+
+<!-- ═══════════ 6 ═══════════ -->
+<h2 id="e6"><span class="num-b">6</span>Où l’info apparaît aussi : la fiche du village, la page de la personne</h2>
+<p class="sub">Ces deux blocs <b>existent déjà</b> (<span class="badge re">existe</span>). Je propose d’y ajouter peu de chose (<span class="badge new">nouveau</span>, en bleu) : le vainqueur de l’année, la famille, et un lien vers 🏆 Sport.</p>
+<div class="grid">
+ <div class="win sheet">
+  <div class="win-bar"><span class="eyebrow">Fiche du village › Tulle</span><span class="mini">bloc « 🎡 Le monde de son village »</span></div>
+  <div class="win-body">
+   <div class="ph"><div><small>Commune · Corrèze</small><h4>🏘 Tulle</h4></div></div>
+   <div class="sec">🎡 Le monde de son village</div>
+   <div class="hrow"><span>🚲</span><div><span class="badge re">existe</span> Le Tour de France est passé ici 3 fois : la première en 1976 (étape Sainte-Foy-la-Grande–Tulle), la dernière en 1996. <a href="#">↗ source</a>
+    <ul>
+     <li><b>15 juillet 1976</b> : étape Sainte-Foy-la-Grande–Tulle · 220 km · arrivée</li>
+     <li><b>16 juillet 1976</b> : étape Tulle–puy de Dôme · 220 km · départ</li>
+     <li><b>14 juillet 1996</b> : étape Besse-et-Saint-Anastaise–Tulle · 185 km · arrivée</li>
+    </ul>
+    <small>Wikidata (CC0) : étapes du Tour de France</small></div></div>
+   <div class="hrow add"><span>👪</span><div><span class="badge new">nouveau</span> En 1976, <b>Jean MAZAUD</b> avait 12 ans et vivait à 7 km (Gimel-les-Cascades). Maillot jaune cette année-là : Lucien Van Impe.</div></div>
+   <div class="hrow add"><span>🏆</span><div><span class="badge new">nouveau</span> <a href="#">Tout le Tour de France dans 🏆 Sport →</a><small>ouvre l’écran 3, filtré « près de Tulle »</small></div></div>
+  </div>
+ </div>
+ <div class="win sheet">
+  <div class="win-bar"><span class="eyebrow">Page de la personne › Jean MAZAUD</span><span class="mini">bloc « 🎡 Le monde de son village »</span></div>
+  <div class="win-body">
+   <div class="ph"><div><small>Né en 1964 à Tulle · vit à Gimel-les-Cascades</small><h4>👤 Jean MAZAUD</h4></div></div>
+   <div class="sec">🎡 Le monde de son village</div>
+   <div class="hrow"><span>🚲</span><div><span class="badge re">existe</span> Le Tour de France est passé à Tulle en 1976 (étape Sainte-Foy-la-Grande–Tulle) : il avait 12 ans. <a href="#">↗ source</a><small>Aujourd’hui : seulement parce que Tulle est sa ville de naissance (recherche à 3 km).</small></div></div>
+   <div class="hrow add"><span>🚲</span><div><span class="badge new">nouveau</span> Le Tour est arrivé à Tulle, <b>à 7 km de chez lui</b>, le 15 juillet 1976 : il avait 12 ans. <a href="#">↗ source</a><small>avec la recherche à 15 km : on trouve aussi les étapes près de Gimel</small></div></div>
+   <div class="hrow add"><span>🏆</span><div><span class="badge new">nouveau</span> L’année de sa naissance (1964), <b>Jacques Anquetil</b> gagnait le Tour de France. <a href="#">↗ source</a></div></div>
+   <p class="note">Même chose dans « Prendre depuis… » d’une enquête : 📋 Listes → 🏆 Sport ouvre cette liste <i>dans la fenêtre</i>, avec des cases à cocher (maquette « Prendre depuis »).</p>
+  </div>
+ </div>
+</div>
+
+<!-- ═══════════ 7 ═══════════ -->
+<h2 id="e7"><span class="num-b">7</span>Téléphone, 390 px : écrans 2, 3 et 4 (le deuxième en sombre)</h2>
+<p class="sub">Le tableau devient des cartes de deux ou trois lignes. 📎 et 🧺 restent à droite, assez grands pour le doigt. Dans une édition, pas de boutons par étape : tu touches l’étape pour l’ouvrir. Pour l’écran 4, je montre <b>1924</b> : la grande boucle de 15 étapes, avec l’arrivée à Nice chez Jeanne LACOMBE.</p>
+<div class="phones phones3">
+ <div>
+  <p class="cap">2 · Compétitions sportives</p>
+  <div class="phone">
+   <div class="ptop"><span>←</span><span>🏆 Sport</span><span class="sp"></span><span>⋯</span></div>
+   <div class="pbody">
+    <div class="lbar" style="margin-top:0"><span class="lsearch">🔍 Année, lieu, nom…</span></div>
+    <div class="chips scrollx" style="flex-wrap:nowrap;padding:4px 2px 8px"><span class="k on">Toutes</span><span class="k tap">🚲 Tour <i>114</i></span><span class="k soon">🏅 JO</span><span class="k soon">🎾 Roland-Garros</span></div>
+    <div class="pcard"><div><b>2025 · 🚲 Tour de France</b><small>Lille → Paris · Tadej Pogačar</small><div class="srcs"><a href="#">Wikidata ↗</a></div></div><div class="acts"><span class="ib">📎</span><span class="ib">🧺</span></div></div>
+    <div class="pcard"><div><b>2017 · 🚲 Tour de France</b><small>Düsseldorf → Paris · Chris Froome</small><small><span class="near">arrivée à Salon, chez les DURAND</span></small><div class="srcs"><a href="#">Wikidata ↗</a></div></div><div class="acts"><span class="ib">📎</span><span class="ib">🧺</span></div></div>
+    <div class="pcard"><div><b>1976 · 🚲 Tour de France</b><small>Saint-Jean-de-Monts → Paris · Lucien Van Impe</small><small><span class="fam"><span class="who">Jean MAZAUD, 12 ans</span></span></small><div class="srcs"><a href="#">Wikidata ↗</a></div></div><div class="acts"><span class="ib">📎</span><span class="ib">🧺</span></div></div>
+    <div class="pcard" style="opacity:.7"><div><b>1924 · 🏅 JO d’été</b><small>Paris · à venir</small></div><div class="acts"></div></div>
+    <div class="pcard"><div><b>1924 · 🚲 Tour de France</b><small>Paris → Paris · Ottavio Bottecchia</small><small><span class="fam"><span class="who">Jeanne LACOMBE, 52 ans</span></span></small><div class="srcs"><a href="#">Wikidata ↗</a></div></div><div class="acts"><span class="ib">📎</span><span class="ib">🧺</span></div></div>
+   </div>
+  </div>
+ </div>
+ <div>
+  <p class="cap">3 · Éditions · en sombre</p>
+  <div class="phone force-dark">
+   <div class="ptop"><span>←</span><span>🚲 Tour de France</span><span class="sp"></span><span>⋯</span></div>
+   <div class="pbody">
+    <span class="seg"><span class="on">Éditions</span><span>Étapes</span><span>🗺 Carte</span></span>
+    <div class="chips"><span class="k">👪 Près de la famille</span></div>
+    <div class="pcard"><div><b>2025</b><small>Tadej Pogačar · 21 étapes · 3 302 km</small></div><div class="acts"><span class="ib">📎</span><span class="ib">🧺</span></div></div>
+    <div class="pcard"><div><b>2017</b><small>Chris Froome · 21 étapes · 3 542 km</small><small><span class="near">arrivée chez les DURAND</span></small></div><div class="acts"><span class="ib">📎</span><span class="ib">🧺</span></div></div>
+    <div class="pcard"><div><b>1976</b><small>Lucien Van Impe · 22 étapes + prologue · 4 026 km</small><small><span class="near">Jean MAZAUD, 12 ans · à 7 km</span></small></div><div class="acts"><span class="ib">📎</span><span class="ib">🧺</span></div></div>
+    <div class="pcard"><div><b>1964</b><small>Jacques Anquetil · 22 étapes · 4 506 km</small><small>Jean MAZAUD naît cette année-là</small></div><div class="acts"><span class="ib">📎</span><span class="ib">🧺</span></div></div>
+    <div class="pcard tap"><div><b>1924</b><small>Ottavio Bottecchia · 15 étapes · 5 425 km</small><small><span class="near">Jeanne LACOMBE, 52 ans · chez elle</span></small></div><div class="acts"><span class="ib">📎</span><span class="ib">🧺</span></div></div>
+    <div class="pcard"><div><b>1903</b><small>Maurice Garin · 6 étapes · 2 428 km</small><small>Marseille, à 44 km des DURAND</small></div><div class="acts"><span class="ib">📎</span><span class="ib">🧺</span></div></div>
+    <p class="mini" style="margin:12px 0 0">114 éditions · 1903 → 2027</p>
+   </div>
+  </div>
+ </div>
+ <div>
+  <p class="cap">4 · Le Tour 1924</p>
+  <div class="phone">
+   <div class="ptop"><span>←</span><span>Tour de France 1924</span><span class="sp"></span><span>⋯</span></div>
+   <div class="pbody">
+    <p style="margin:0;font-size:13px"><b>22 juin → 20 juillet 1924</b> · 15 étapes · 5 425 km<br>Maillot jaune : <b>Ottavio Bottecchia</b></p>
+    <div class="pmap"><svg viewBox="0 0 600 510" role="img" aria-label="Schéma : la boucle du Tour 1924 et les lieux de la famille"><polygon points="311.1,20.3 345.2,38.4 412.2,68.6 450.4,103.2 551.9,133.4 525.6,209.7 466.4,285.5 501.4,302.0 493.2,356.9 530.1,400.8 521.9,418.4 501.4,431.0 456.2,455.7 434.4,444.7 402.7,436.5 374.0,433.7 341.1,461.2 344.0,491.9 283.6,483.1 213.7,472.2 140.5,441.4 162.3,370.0 164.4,318.4 166.4,287.7 123.3,226.7 69.9,200.4 19.3,184.5 29.2,165.3 53.4,148.2 131.5,151.0 152.1,151.5 147.9,115.3 134.0,92.2 162.3,96.6 199.3,115.3 217.8,104.9 258.1,81.3 279.5,36.8 289.7,24.7" fill="var(--paper)" stroke="var(--line2)" stroke-width="1.5"/><path d="" fill="none" stroke="var(--soft)" stroke-width="1.4" stroke-dasharray="3 5"/><path d="M310.4 139.6L218.1 104.6M218.1 104.6L147.9 97.0M147.9 97.0L29.3 165.2M29.3 165.2L140.4 269.0M140.4 269.0L153.0 434.1M153.0 434.1L238.1 472.7M238.1 472.7L332.7 477.8M332.7 477.8L457.4 454.3M486.4 357.1L462.6 278.2M462.6 278.2L532.3 155.2M532.3 155.2L467.5 125.2M467.5 125.2L311.4 19.9M311.4 19.9L310.4 139.6" fill="none" stroke="var(--yel)" stroke-width="3.2" stroke-linecap="round"/><path d="M457.4 454.3L512.4 422.6M512.4 422.6L486.4 357.1" fill="none" stroke="var(--blue)" stroke-width="5" stroke-linecap="round"/><g fill="var(--paper)" stroke="var(--yel-ink)" stroke-width="1.4"><circle cx="218.1" cy="104.6" r="3.2"/><circle cx="147.9" cy="97.0" r="3.2"/><circle cx="29.3" cy="165.2" r="3.2"/><circle cx="140.4" cy="269.0" r="3.2"/><circle cx="153.0" cy="434.1" r="3.2"/><circle cx="238.1" cy="472.7" r="3.2"/><circle cx="332.7" cy="477.8" r="3.2"/><circle cx="457.4" cy="454.3" r="3.2"/><circle cx="512.4" cy="422.6" r="3.2"/><circle cx="486.4" cy="357.1" r="3.2"/><circle cx="462.6" cy="278.2" r="3.2"/><circle cx="532.3" cy="155.2" r="3.2"/><circle cx="467.5" cy="125.2" r="3.2"/><circle cx="311.4" cy="19.9" r="3.2"/><circle cx="310.4" cy="139.6" r="3.2"/></g><circle cx="512.4" cy="422.6" r="8" fill="var(--green)" fill-opacity=".12" stroke="var(--green)" stroke-dasharray="4 3"/><rect x="506.4" y="416.6" width="12" height="12" fill="var(--blue)" stroke="var(--paper)" stroke-width="2"/><text x="524.4" y="456.6" font-size="26" font-weight="700" fill="var(--blue-ink)">Nice</text><rect x="280.5" y="330.7" width="12" height="12" fill="var(--blue)" stroke="var(--paper)" stroke-width="2"/><text x="298.5" y="344.7" font-size="26" font-weight="700" fill="var(--blue-ink)">Tulle</text><rect x="417.2" y="420.0" width="12" height="12" fill="var(--blue)" stroke="var(--paper)" stroke-width="2"/><text x="341.2" y="414.0" font-size="26" font-weight="700" fill="var(--blue-ink)">Salon</text><text x="322.4" y="147.6" font-size="24" fill="var(--muted)">Paris</text></svg></div>
+    <p class="mini" style="margin:0 0 8px"><b style="color:var(--blue)">■</b> Nice : LACOMBE · Salon : DURAND · Tulle : MAZAUD. La grande boucle autour de la France ; Tulle est à plus de 250 km du parcours cette année-là.</p>
+<div class="srow"><span class="n">1</span><div><b>Paris → Le Havre</b><small>22 juin · 381 km</small></div></div>
+<div class="srow"><span class="n">2</span><div><b>Le Havre → Cherbourg</b><small>24 juin · 371 km</small></div></div>
+<div class="srow"><span class="n">3</span><div><b>Cherbourg → Brest</b><small>26 juin · 405 km</small></div></div>
+<div class="srow"><span class="n">4</span><div><b>Brest → Les Sables-d&#x27;Olonne</b><small>28 juin · 412 km</small></div></div>
+<div class="srow"><span class="n">5</span><div><b>Les Sables-d&#x27;Olonne → Bayonne</b><small>30 juin · 482 km</small></div></div>
+<div class="srow"><span class="n">6</span><div><b>Bayonne → Bagnères-de-Luchon</b><small>2 juil. · 326 km</small></div></div>
+<div class="srow"><span class="n">7</span><div><b>Bagnères-de-Luchon → Perpignan</b><small>4 juil. · 323 km</small></div></div>
+<div class="srow"><span class="n">8</span><div><b>Perpignan → Toulon</b><small>6 juil. · 427 km</small><small>Toulon : 88 km des DURAND</small></div></div>
+<div class="srow hot"><span class="n">9</span><div><b>Toulon → Nice</b><small>8 juil. · 280 km</small><small><span class="near">arrivée chez Jeanne LACOMBE, 52 ans</span></small></div></div>
+<div class="srow hot"><span class="n">10</span><div><b>Nice → Briançon</b><small>10 juil. · 275 km</small><small><span class="near">départ de Nice, chez elle</span></small></div></div>
+<div class="srow"><span class="n">11</span><div><b>Briançon → Gex</b><small>12 juil. · 307 km</small></div></div>
+<div class="srow"><span class="n">12</span><div><b>Gex → Strasbourg</b><small>14 juil. · 360 km</small></div></div>
+<div class="srow"><span class="n">13</span><div><b>Strasbourg → Metz</b><small>16 juil. · 300 km</small></div></div>
+<div class="srow"><span class="n">14</span><div><b>Metz → Dunkerque</b><small>18 juil. · 433 km</small></div></div>
+<div class="srow"><span class="n">15</span><div><b>Dunkerque → Paris</b><small>20 juil. · 343 km</small></div></div>
+   </div>
+  </div>
+ </div>
+</div>
+<p class="note" style="text-align:center">Sur téléphone, « ← » revient toujours à l’écran d’avant, au même endroit de la liste.</p>
+
+<!-- ═══════════ 8 ═══════════ -->
+<h2 id="e8"><span class="num-b">8</span>Avant / après</h2>
+<div class="ba">
+ <div class="was">
+  <h4>Aujourd’hui</h4>
+  <ul>
+   <li>Deux entrées, dans <b>deux groupes différents</b> : « 🚲 Étapes du Tour de France (1903–2025) » dans <b>📍 Le lieu</b>, et « 🚲 Le Tour de France de cette année-là » dans <b>🌍 Le monde</b> (il faut taper une année).</li>
+   <li>Et une troisième, « Le Tour de France est passé ici », qui demande un lieu.</li>
+   <li><b>Pas de vainqueurs</b>, nulle part.</li>
+   <li>« Cette année-là » dit « 27 étapes » pour 1976 : il compte le prologue et les demi-étapes chacun pour une.</li>
+   <li>La famille : seulement si le départ ou l’arrivée est à 3 km d’un de ses lieux.</li>
+  </ul>
+ </div>
+ <div>
+  <h4>Après</h4>
+  <ul>
+   <li><b>Un seul endroit</b> : 🏆 Sport → Compétitions sportives → 🚲 Tour de France. La recherche « tour de france » y mène en un clic.</li>
+   <li><b>Éditions · Étapes · Carte</b> : « cette année-là » devient la vue Éditions, pour toutes les années à la fois.</li>
+   <li><b>Maillot jaune</b> sur chaque édition, vainqueur d’étape quand Wikidata le donne.</li>
+   <li>« 22 étapes + prologue », comme on le dit d’habitude.</li>
+   <li>La famille à 15 km, avec l’âge et la distance ; mêmes 📎 / 🧺 / ↗ que partout.</li>
+  </ul>
+ </div>
+</div>
+
+<!-- ═══════════ Questions ═══════════ -->
+<h2 id="eq"><span class="num-b">?</span>4 questions pour toi</h2>
+<ol class="qs">
+ <li><b>Pour aller au Tour : une pastille dans la liste réunie, ou une ligne « Tour de France » à ouvrir ?</b>
+  <div class="opt">A. Une pastille par compétition (écran 2), et la recherche la met toute seule. — B. Une première liste de compétitions (Tour, JO, Roland-Garros…), un clic pour ouvrir chacune.</div>
+  <div class="reco">Ma reco : <b>A</b>. Un clic de moins, et on voit tout de suite les vraies lignes, pas un sommaire.</div></li>
+ <li><b>Le Tour s’ouvre sur quelle vue ?</b>
+  <div class="opt">A. Éditions (une ligne par année, 114). — B. Étapes (2 446 lignes). — C. Carte.</div>
+  <div class="reco">Ma reco : <b>A</b>. On pense « le Tour de 1976 », pas « l’étape 19 » ; les étapes sont à un clic.</div></li>
+ <li><b>« Près de chez lui » : à quelle distance ?</b>
+  <div class="opt">A. 15 km du départ ou de l’arrivée, avec la distance écrite (« à 7 km »). — B. 30 km. — C. Rester à 3 km comme aujourd’hui.</div>
+  <div class="reco">Ma reco : <b>A</b>. Le fichier ne connaît que les villes de départ et d’arrivée : 15 km attrape le village d’à côté sans faire croire que le Tour est passé partout.</div></li>
+ <li><b>On ajoute les vainqueurs au fichier du Tour ?</b>
+  <div class="opt">A. Oui : maillot jaune de chaque édition et vainqueur d’étape quand Wikidata l’a (sinon « — »). — B. Seulement le maillot jaune. — C. Non.</div>
+  <div class="reco">Ma reco : <b>A</b>, depuis Wikidata (CC0), dans la même mise à jour de <code>l8c-tour</code>. Pour 1999 à 2005, on écrit « titre retiré », comme les sources.</div></li>
+</ol>
+
+<p class="note" style="margin:30px 0 10px">Données lues : <code>assets/data/l8c-tour.json.gz</code> (2 446 étapes, 114 éditions de 1903 à 2027, dont 2 404 jusqu’à 2025 ; champs q, y, d, no, a, b, km, ed…). Les étapes de 1924 et de 1976, les km, les villes et les dates de cette page viennent de ce fichier. Code lu : <code>assets/js/heritage-lot8-monde-village.js</code> (listes <code>l8c_tour</code>, <code>l8c_tour_annee</code>, bloc « Le Tour de France est passé ici », recherche à 3 km). Distances calculées à vol d’oiseau (Gimel-les-Cascades → Tulle ≈ 7 km). Personnes et âges : inventés.</p>
+</div>
+<script>
+(function(){var b=document.getElementById('tgl'),r=document.documentElement;function dark(){var t=r.getAttribute('data-theme');return t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches;}function lab(){b.textContent=dark()?'☀ Thème clair':'☾ Thème sombre';}b.addEventListener('click',function(){r.setAttribute('data-theme',dark()?'light':'dark');lab();});lab();})();
+</script>
+
+<section id="decisions" style="margin:32px auto;max-width:900px;padding:20px 24px;border:1px solid currentColor;border-radius:14px">
+<h2>✅ Décisions (validé le 2026-11-26)</h2>
+<ol>
+<li>Toutes les recommandations de cette maquette sont prises ; chaque choix par défaut (pastille de filtre, vue « Éditions », rayon 15 km, vainqueurs Wikidata avec « titre retiré ») peut se changer dans les Réglages.</li>
+<li><b>Prendre plusieurs éléments d'un coup</b>, dans toutes les listes (moteur commun) : une case à cocher au début de chaque ligne (visible au survol, toujours visible au doigt) ; « ☑ Tout cocher » (les lignes affichées) et « ☑ Tout ce qui correspond au filtre » ; Maj+clic pour une plage ; une barre calme en bas quand au moins une ligne est cochée : « N choisis · 📎 Insérer · 🧺 Mettre dans un panier · ⤓ Exporter · ✕ ». 📎 sur plusieurs lignes insère un bloc propre (liste ou tableau, chaque ligne avec sa source). Ouvrir une édition permet aussi « ☑ Toutes ses étapes ».</li>
+<li><b>📎 et 🧺 restent aussi au bout de chaque ligne</b> (prendre un seul élément en un clic) ; la case à cocher et la barre du bas s'y ajoutent, elles ne les remplacent pas.</li>
+</ol>
+</section>
+</body></html>

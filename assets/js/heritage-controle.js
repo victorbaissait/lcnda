@@ -28,7 +28,9 @@
 
     const SORTS = {dates: ['📅', 'Dates'], ages: ['🎂', 'Âges'], parents: ['👪', 'Parents'], doublons: ['👥', 'Doublons'], lieux: ['📍', 'Lieux'], socface: ['🧾', 'Recensement SocFace']};
     const LEVELS = {red: ['🔴', 'Impossible'], orange: ['🟠', 'À vérifier'], yellow: ['🟡', 'Curieux']};
-    const SUBS = {misplaced: 'Lieux mal placés', journeys: 'Voyages impossibles', baptism: 'Baptême loin', conflicting: 'Lieux contradictoires'};
+    const SUBS = {misplaced: 'Lieux mal placés', journeys: 'Voyages impossibles', baptism: 'Baptême loin', conflicting: 'Lieux contradictoires', anachro: 'Commune pas encore ou plus là', dup: 'Lieu en double probable'};
+    /** actions propres à une sorte d'alerte, ajoutées par d'autres fichiers : {match(a), html(a, i) → boutons, run(a, after)} (🏛 heritage-commune-histoire.js) */
+    const customAct = a => a && (ext.controleActions || []).find(x => { try { return x.match(a); } catch (_) { return false; } });
     const FKEY = 'lcnda-controle-filtres';
     const filt = () => ({sort: 'all', level: '', sub: '', ...ls(FKEY, {})});
     const setFilt = o => lsSet(FKEY, {...filt(), ...o});
@@ -50,6 +52,7 @@
         'misplaced': 'une commune homonyme d’un autre département, ou des coordonnées inversées.',
         'journey': 'deux homonymes confondus dans une seule fiche.',
         'baptism-far': 'une commune homonyme d’un autre département.',
+        'commune-anachro': 'le nom de la commune d’aujourd’hui mis pour un acte plus ancien, ou une commune homonyme. Regarde le nom écrit sur l’acte.',
         'sosa-sex': 'le sexe de la fiche mal saisi, ou la personne mise à la mauvaise place dans l’arbre.',
         'burial-before-death': 'les deux dates inversées.',
         'reversed-range': 'les deux années écrites dans le mauvais ordre : « entre 1800 et 1900 ».',
@@ -65,7 +68,7 @@
     /** Raisons proposées dans « Ce n'est pas une erreur », selon la sorte */
     const REASONS = {
         common: ['J’ai vérifié dans l’acte : c’est bien ça', 'C’est rare, mais c’est vrai (cas connu dans la famille)', 'La date est approximative (« vers… »)'],
-        doublons: ['Ce sont deux personnes différentes'], lieux: ['Le lieu est juste'], socface: ['J’ai regardé l’image : ma fiche est juste, SocFace a mal lu', 'Ce n’est pas la même personne (homonyme)', 'L’âge déclaré au recensement était approximatif'], journeys: ['Ce sont bien les mêmes dates et lieux'], parents: ['Enfant posthume'], ages: ['Remariage tardif'],
+        doublons: ['Ce sont deux personnes différentes'], lieux: ['Le lieu est juste', 'Je garde exprès le nom de la commune d’aujourd’hui'], socface: ['J’ai regardé l’image : ma fiche est juste, SocFace a mal lu', 'Ce n’est pas la même personne (homonyme)', 'L’âge déclaré au recensement était approximatif'], journeys: ['Ce sont bien les mêmes dates et lieux'], parents: ['Enfant posthume'], ages: ['Remariage tardif'],
     };
 
     /* ─── petits morceaux ─── */
@@ -149,7 +152,8 @@
         const [ic] = levelOf(a.level);
         const ppl = a.people.map(id => personChip(DATA.people[id])).join('');
         const checks = a.checks ? `<div class="ctl-checks">${a.checks.map(([k, t]) => `<span class="ctl-check is-${k === 'ok' ? 'ok' : k === 'no' ? 'no' : 'q'}">${k === 'ok' ? '✓' : k === 'no' ? '✗' : '?'} ${esc(t)}</span>`).join('')}</div>` : '';
-        const fixBtn = a.sort === 'doublons' ? `<button type="button" class="button small secondary" data-ctl-compare="${i}">⚖️ Comparer</button>`
+        const fixBtn = customAct(a) ? customAct(a).html(a, i)
+            : a.sort === 'doublons' ? `<button type="button" class="button small secondary" data-ctl-compare="${i}">⚖️ Comparer</button>`
             : a.check === 'misplaced' ? `<button type="button" class="button small secondary" data-ctl-place="${i}">✎ ${a.suggest ? 'Corriger' : 'Placer sur la carte'}</button>`
             : a.fix?.event_id ? `<button type="button" class="button small secondary" data-ctl-fix="${i}">✎ Corriger</button>`
             : a.socface?.census_id && window.LCNDA_EXT?.socface ? `<button type="button" class="button small secondary" data-sf-verify-census="${Number(a.socface.census_id)}" data-sf-member="${Number(a.socface.member_id)}">🔍 Vérifier la ligne</button>${a.socface.image_url ? `<a class="button small secondary" href="${esc(a.socface.image_url)}" target="_blank" rel="noopener noreferrer">${esc(window.LCNDA_SOCFACE?.imageLabel ? window.LCNDA_SOCFACE.imageLabel(a.socface.image_url) : '🖼 Image ↗')}</a>` : ''}${a.people[0] ? `<button type="button" class="button small secondary" data-open-person="${a.people[0]}">↗ Fiche</button>` : ''}`
@@ -168,11 +172,17 @@
             ${p.length || e.place ? `<div class="ctl-chips">${p.map(x => personChip(x)).join('')}${placeChip(e.place)}</div>` : ''}</div>
             <div class="ctl-row-acts">${open}<button type="button" class="button small secondary" data-ctl-again="${i}">↺ Signaler de nouveau</button></div></article>`;
     }
-    const cardsOf = (list) => UI().cardsHtml(list.map((a, i) => ({
+    const cardsOf = (list, ix = null) => UI().cardsHtml(list.map((a, k) => { const i = ix ? ix[k] : k; return {
         thumb: `<span class="ui-card-ico">${levelOf(a.level)[0]}</span>`, name: a.title, open: a.people[0] ? `data-open-person="${a.people[0]}"` : `data-ctl-dismiss="${i}"`, openLabel: a.people[0] ? '↗ Fiche' : 'Pas une erreur',
         lines: [a.detail || '', a.people.map(id => nm(DATA.people[id])).concat(a.place ? [a.place.name] : []).join(' · ')], badges: [{text: SORTS[a.sort][1], kind: 'grey'}],
         menu: [a.fix?.event_id ? `<button type="button" data-ctl-fix="${i}">✎ Corriger</button>` : '', `<button type="button" data-ctl-dismiss="${i}">Ce n’est pas une erreur</button>`].filter(Boolean),
-    })), {size: 's'});
+    }; }), {size: 's'});
+    /** 🗂 un cadre par personne (réglage genealogie-cadres) : une alerte à deux personnes va sous la première ; les numéros de ligne restent ceux de la liste */
+    const framed = (page, inner, word = ['chose à vérifier', 'choses à vérifier']) => UI().personCardsHtml(UI().groupByPerson(page.map((a, i) => ({a, i})), x => x.a.people[0]).map(g => {
+        const p = g.key ? DATA.people[g.key] : null;
+        return UI().personCardHtml({id: p ? p.id : 0, name: p ? nm(p) : i18n('Sans personne'), sub: p?.sosa ? `Sosa ${fmt(p.sosa)}` : '', life: p ? yrs(p) : '', count: plural(g.items.length, word[0], word[1]),
+            body: inner(g.items.map(x => x.a), g.items.map(x => x.i))});
+    }).join(''));
 
     let bar = null, current = [];
     function renderPage(token) {
@@ -184,7 +194,7 @@
         ws.innerHTML = `<section class="page ctl-page">${UI().pageHeader({title: 'Contrôle de la base', icon: '✅', attrs: 'data-ph-title',
             help: 'Ce qui semble impossible ou très rare dans tes fiches : souvent une faute de frappe, un homonyme ou de mauvais parents. Rien n’est changé sans toi.',
             primary: '<button type="button" class="button" data-ctl-one>▶ Une à une</button>',
-            actions: ['<button type="button" class="button secondary" data-ctl-csv>⤓ Exporter en CSV</button>'],
+            actions: ['<button type="button" class="button secondary" data-ctl-csv>⤓ Exporter</button>'],
             more: ['<button type="button" data-ctl-seuils>⚙️ Seuils du contrôle</button>', '<button type="button" data-ctl-print>🖨 Imprimer la liste</button>', '<button type="button" data-ctl-refresh>↻ Relancer le contrôle</button>', '<button type="button" data-ctl-stats>📊 Moyennes de la famille</button>']})}
             <div class="ui-filters ctl-pills" data-ctl-pills></div><div class="ctl-subpills" data-ctl-subs></div>
             <div data-ctl-bar></div><div class="ctl-checked" data-ctl-checked></div><div data-ctl-map></div><div class="ctl-list" data-ctl-list></div><div data-ctl-more></div></section>`;
@@ -215,13 +225,14 @@
                 const q = bar.state.q;
                 current = DATA.exceptions.filter(e => matchQ({title: e.title, detail: e.reason + ' ' + e.note, people: e.people, place: e.place}, q));
                 bar.setCount(current.length, 'exception');
-                list.innerHTML = current.length ? current.slice(0, shown).map(excRowHtml).join('') : A().emptyState({icon: '🙈', text: 'Aucune alerte écartée', hint: '« Ce n’est pas une erreur » sur une ligne la range ici, avec sa raison : tu pourras toujours la signaler de nouveau.'});
+                list.innerHTML = current.length ? (UI().framesOn?.() ? framed(current.slice(0, shown), (l, ix) => l.map((e, k) => excRowHtml(e, ix[k])).join(''), ['exception', 'exceptions']) : current.slice(0, shown).map(excRowHtml).join('')) : A().emptyState({icon: '🙈', text: 'Aucune alerte écartée', hint: '« Ce n’est pas une erreur » sur une ligne la range ici, avec sa raison : tu pourras toujours la signaler de nouveau.'});
                 A().$('[data-ctl-map]').innerHTML = '';
             } else {
                 current = sorted(applyPills(base, f2), bar.state.sort);
                 bar.setCount(current.length, 'chose à vérifier', 'choses à vérifier');
                 const page = current.slice(0, shown);
-                list.innerHTML = current.length ? (bar.state.view === 'cards' ? cardsOf(page) : page.map(rowHtml).join(''))
+                const cards = bar.state.view === 'cards';
+                list.innerHTML = current.length ? (UI().framesOn?.() ? framed(page, (l, ix) => (cards ? cardsOf(l, ix) : l.map((a, k) => rowHtml(a, ix[k])).join(''))) : cards ? cardsOf(page) : page.map(rowHtml).join(''))
                     : A().emptyState({icon: '✅', text: DATA.alerts.length ? 'Rien avec ces filtres' : 'Rien à vérifier', hint: DATA.alerts.length ? 'Retire un filtre pour revoir les autres alertes.' : 'Aucune incohérence trouvée dans tes fiches. Bravo !'});
                 // la carte des lieux, au-dessus de la liste, quand « 📍 Lieux » est choisi
                 const pts = f2.sort === 'lieux' ? current.filter(a => a.place && (a.place.lat || a.place.lon)).slice(0, 200).map(a => ({lat: a.place.lat, lon: a.place.lon, label: a.place.name, color: a.level === 'red' ? '#c62828' : '#b5523b'})) : [];
@@ -235,6 +246,8 @@
         renderPage.draw = draw;
     }
     function bindPage(ws, token) {
+        // #workspace reste le même d'une page à l'autre : un seul écouteur (sinon, après 3 visites, « Comparer » ouvrait 3 fenêtres)
+        if (ws.__ctlBound) return; ws.__ctlBound = true;
         const redraw = () => renderPage.draw?.();
         ws.addEventListener('click', async e => {
             const t = e.target.closest('button'); if (!t || !ws.contains(t)) return;
@@ -249,6 +262,7 @@
             if (d.ctlRefresh !== undefined) return ext.maintenance.controle(++S().workspaceToken, {fresh: true});
             if (d.ctlStats !== undefined) { S().graphStatsType = 'family_averages'; S().graphMode = 'stats'; return A().setModule('graphiques'); }
             if (d.ctlFix !== undefined) return correct(current[Number(d.ctlFix)]);
+            if (d.ctlCustom !== undefined) { const a = current[Number(d.ctlCustom)]; return customAct(a)?.run(a, () => ext.maintenance.controle(++S().workspaceToken, {keep: true})); }
             if (d.ctlPlace !== undefined) return fixPlace(current[Number(d.ctlPlace)], () => ext.maintenance.controle(++S().workspaceToken, {keep: true}));
             if (d.ctlCompare !== undefined) { const a = current[Number(d.ctlCompare)]; return compare(a.people[0], a.people[1]); }
             if (d.ctlEcompare !== undefined) { const x = current[Number(d.ctlEcompare)]; return compare(x.people[0], x.people[1]); }
@@ -352,6 +366,7 @@
         const rows = [['Gravité', 'Sorte', 'Contrôle', 'Détail', 'Fiches', 'Lieu', 'Écartée', 'Raison']];
         current.forEach(a => rows.push([exc ? '' : levelOf(a.level)[1], SORTS[a.sort]?.[1] || '', a.title, exc ? (a.note || '') : (a.detail || ''),
             a.people.map(id => `${nm(DATA.people[id])} (n° ${id})`).join(', '), a.place?.name || '', exc || a.returned ? 'oui' : 'non', exc ? a.reason : (a.dismissal?.reason || '')]));
+        if (window.LCNDA_UI?.exportRows) return window.LCNDA_UI.exportRows({title: i18n('Contrôle de la base'), name: `controle-de-la-base-${new Date().toISOString().slice(0, 10)}`, rows: () => rows, info: plural(current.length, 'ligne', 'lignes')}); // ⤓ la fenêtre d'export commune
         const csv = '﻿' + rows.map(r => r.map(cell).join(';')).join('\r\n');
         const url = URL.createObjectURL(new Blob([csv], {type: 'text/csv;charset=utf-8'}));
         const link = document.createElement('a'); link.href = url; link.download = `controle-de-la-base-${new Date().toISOString().slice(0, 10)}.csv`;
@@ -423,7 +438,7 @@
             inp.addEventListener('change', save);
         });
         function act(k) {
-            if (k === 'c') { const first = ws.querySelector('[data-ctl-date]'); if (first) { first.focus(); first.select(); return; } if (a.sort === 'doublons') return compare(a.people[0], a.people[1]); if (a.check === 'misplaced') return fixPlace(a, after); return correct(a); }
+            if (k === 'c') { if (customAct(a)) return customAct(a).run(a, after); const first = ws.querySelector('[data-ctl-date]'); if (first) { first.focus(); first.select(); return; } if (a.sort === 'doublons') return compare(a.people[0], a.people[1]); if (a.check === 'misplaced') return fixPlace(a, after); return correct(a); }
             if (k === 'n') return dismiss(a, async () => { oneStats.dismissed++; await after(); });
             if (k === 'l') { later.add(a.key); oneQueue.splice(oneIdx, 1); oneQueue.push(a.key); oneStats.later++; return renderOne(S().workspaceToken); }
             if (k === 'p' && oneIdx > 0) { oneIdx--; return renderOne(S().workspaceToken); }
@@ -518,7 +533,7 @@
         const n = list.length, lv = counts(list).levels;
         const box = document.createElement('section'); box.className = 'ctl-banner'; box.dataset.ctlBanner = String(pid);
         box.innerHTML = `<div class="ctl-banner-head"><span>⚠️ <b>${plural(n, 'chose à vérifier', 'choses à vérifier')}</b></span>${Object.entries(LEVELS).filter(([k]) => lv[k]).map(([k, [ic]]) => `<span class="ctl-banner-n is-${k}">${ic} ${lv[k]}</span>`).join('')}<span class="spacer"></span><button type="button" class="button small secondary" data-ctl-b-toggle aria-expanded="false">Voir ▾</button></div>
-            <div class="ctl-banner-body" hidden>${list.map((a, i) => `<div class="ctl-banner-row"><span>${levelOf(a.level)[0]} ${esc(a.view || a.title)}</span><span class="ctl-banner-acts">${a.sort === 'doublons' ? `<button type="button" class="button small secondary" data-ctl-b-cmp="${i}">⚖️ Comparer</button>` : a.fix?.event_id ? `<button type="button" class="button small secondary" data-ctl-b-fix="${i}">✎ Corriger</button>` : ''}<button type="button" class="button small secondary" data-ctl-b-dis="${i}">Pas une erreur</button></span></div>`).join('')}
+            <div class="ctl-banner-body" hidden>${list.map((a, i) => `<div class="ctl-banner-row"><span>${levelOf(a.level)[0]} ${esc(a.view || a.title)}</span><span class="ctl-banner-acts">${customAct(a) ? customAct(a).html(a, i).replace(/data-ctl-custom=/g, 'data-ctl-b-custom=') : a.sort === 'doublons' ? `<button type="button" class="button small secondary" data-ctl-b-cmp="${i}">⚖️ Comparer</button>` : a.fix?.event_id ? `<button type="button" class="button small secondary" data-ctl-b-fix="${i}">✎ Corriger</button>` : ''}<button type="button" class="button small secondary" data-ctl-b-dis="${i}">Pas une erreur</button></span></div>`).join('')}
             <button type="button" class="link-button ctl-banner-all" data-ctl-b-all>Tout voir dans « ✅ Contrôle de la base » →</button></div>`;
         hero.after(box);
         const rerender = () => A().selectPerson?.(pid);
@@ -526,6 +541,7 @@
             const b = e.target.closest('button'); if (!b) return;
             if (b.dataset.ctlBToggle !== undefined) { const body = box.querySelector('.ctl-banner-body'); body.hidden = !body.hidden; b.textContent = body.hidden ? 'Voir ▾' : 'Masquer ▴'; b.setAttribute('aria-expanded', String(!body.hidden)); return; }
             if (b.dataset.ctlBFix !== undefined) return correct(list[Number(b.dataset.ctlBFix)]);
+            if (b.dataset.ctlBCustom !== undefined) { const a = list[Number(b.dataset.ctlBCustom)]; return customAct(a)?.run(a, rerender); }
             if (b.dataset.ctlBCmp !== undefined) { const a = list[Number(b.dataset.ctlBCmp)]; return compare(a.people[0], a.people[1]); }
             if (b.dataset.ctlBDis !== undefined) return dismiss(list[Number(b.dataset.ctlBDis)], rerender);
             if (b.dataset.ctlBAll !== undefined) { try { const k = 'lcnda-listbar:maintenance:controle', st = ls(k, {}) || {}; lsSet(k, {...st, q: nm(d.people[pid] || detail.person)}); } catch (_) {} goControle({sort: 'all'}); }

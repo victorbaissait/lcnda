@@ -36,7 +36,8 @@
 
     /** chiffres « tenus à jour » : relus dans l'app à chaque affichage (une minute de mémoire) */
     const liveMem = new Map();
-    async function resolveLive(spec) {
+    async function resolveLive(spec, ro = {}) {
+        if (spec?.live?.data && ext.diagramData) { try { return await ext.diagramData.resolve(spec, ro); } catch (_) { return spec; } } // 📊 Partir des données : une liste, une question (heritage-diagram-donnees.js) ; ro.share : exporté, envoyé (sans les vivants, figé)
         if (spec?.live?.sheet && ext.sheetLink) { try { return await ext.sheetLink.resolve(spec); } catch (_) { return spec; } } // 🔗 une plage d'un classeur du Tableur (heritage-tableur-cibles.js)
         const kr = R().KINDS[spec?.kind]?.resolve; if (kr) { try { return await kr(spec); } catch (_) { return spec; } } // kind.resolve(spec) → Promise<spec> : une sorte qui prépare son dessin (fond de carte à charger, chiffres relus…) — heritage-diagram-cartes.js
         if (spec.live?.follow) return resolveFollow(spec);
@@ -86,22 +87,49 @@
     async function fillEmbed(box) {
         box.dataset.dgDone = '1';
         const d = await get(box.dataset.dgEmbed).catch(() => null);
-        if (!d) { box.innerHTML = '<p class="muted">Diagramme introuvable (supprimé ?).</p>'; return; }
+        if (!d) { const tr = await inTrash(box.dataset.dgEmbed); box.innerHTML = tr ? trashedHtml(tr) : '<p class="muted">Diagramme introuvable (supprimé ?).</p>'; return; }
         const shown = await resolveLive(specOf(d));
-        box.innerHTML = `<div class="h-dg-svg">${drawSpec(shown)}</div>${box.hasAttribute('data-dg-notools') ? '' : `<div class="h-dg-embedtools"><button type="button" class="link-button" data-dg-open="${d.id}" title="L’ouvrir en grand dans Graphiques">↗ Ouvrir</button><button type="button" class="link-button" data-dg-edit="${d.id}">✎ Modifier</button></div>`}`;
+        box.innerHTML = `<div class="h-dg-svg">${drawSpec(shown)}</div>${box.hasAttribute('data-dg-notools') ? '' : `<div class="h-dg-embedtools"><button type="button" class="link-button" data-dg-open="${d.id}" title="${esc(tabOn() ? i18n('L’ouvrir en grand dans 📈 Diagrammes') : 'L’ouvrir en grand dans Graphiques')}">↗ Ouvrir</button><button type="button" class="link-button" data-dg-edit="${d.id}">✎ Modifier</button></div>`}`;
         ext.diagramPerso?.mount(box.querySelector('.h-dg-svg'), shown); // ▶ curseur des années, si le diagramme le demande
+        ext.diagramData?.afterEmbed?.(box, shown); // 📊 les sources et leurs licences, avec ↗ vers la liste d'origine
     }
     const fillAll = () => document.querySelectorAll('[data-dg-embed]:not([data-dg-done])').forEach(b => fillEmbed(b).catch(() => {}));
     function refreshEmbeds(id) { document.querySelectorAll(`[data-dg-embed="${Number(id)}"]`).forEach(b => { delete b.dataset.dgDone; }); fillAll(); }
     let fillT = 0;
-    new MutationObserver(() => { if (!document.querySelector('[data-dg-embed]:not([data-dg-done]), [data-dg-host]:not([data-dg-filled]), [data-rc-host][data-rc-type="investigation"], [data-rc-host][data-rc-type="atelier_project"]')) return; clearTimeout(fillT); fillT = setTimeout(() => { fillAll(); fillHosts(); }, 60); }).observe(document.documentElement, {childList: true, subtree: true});
+    // ⏱ la page n'est relue que si des éléments sont arrivés, au plus une fois toutes les 60 ms (avant : toute la page à chaque changement, ≈ 1,5 s à l'ouverture)
+    const DG_SEL = '[data-dg-embed]:not([data-dg-done]), [data-dg-host]:not([data-dg-filled]), [data-rc-host][data-rc-type="investigation"], [data-rc-host][data-rc-type="atelier_project"]';
+    new MutationObserver(recs => {
+        if (fillT || !recs.some(r => [...r.addedNodes].some(n => n.nodeType === 1))) return;
+        fillT = setTimeout(() => { fillT = 0; if (document.querySelector(DG_SEL)) { fillAll(); fillHosts(); } }, 60);
+    }).observe(document.documentElement, {childList: true, subtree: true});
     document.addEventListener('click', e => {
-        const op = e.target.closest?.('[data-dg-open]'); if (op) { e.preventDefault(); openInGraphs(Number(op.dataset.dgOpen)); return; }
-        const ed = e.target.closest?.('[data-dg-edit]'); if (ed) { e.preventDefault(); openEditor(Number(ed.dataset.dgEdit)); }
+        const op = e.target.closest?.('[data-dg-open]'); if (op) { e.preventDefault(); openDiagram(Number(op.dataset.dgOpen)); return; }
+        const ed = e.target.closest?.('[data-dg-edit]'); if (ed) { e.preventDefault(); if (tabOn()) openDiagram(Number(ed.dataset.dgEdit)); else openEditor(Number(ed.dataset.dgEdit)); return; }
+        const rs = e.target.closest?.('[data-dg-restore]'); if (rs) { e.preventDefault(); restoreFromEmbed(Number(rs.dataset.dgRestore)); }
     });
+    /* 🗑 un diagramme posé ici mais mis à la corbeille (📈 l'onglet Diagrammes) : « Diagramme à la corbeille — Remettre » */
+    let trashMem = null;
+    async function inTrash(id) {
+        if (!trashMem || Date.now() - trashMem.t > 4000) trashMem = {t: Date.now(), p: api('diagrams', {trash: 1}).then(r => r.diagrams || []).catch(() => [])};
+        return (await trashMem.p).find(d => d.id === Number(id)) || null;
+    }
+    const isKiosk = () => document.body.classList.contains('is-kiosk') || document.documentElement.classList.contains('base-readonly');
+    const trashedHtml = d => `<p class="h-dg-trashed" data-dg-trashed="${d.id}"><span aria-hidden="true">🗑</span> ${esc(i18n('Diagramme à la corbeille'))}${isKiosk() ? '' : ` — <button type="button" class="link-button" data-dg-restore="${d.id}" title="${esc(i18n('Remettre « {name} »', {name: d.name}))}">${esc(i18n('Remettre'))}</button>`}</p>`;
+    async function restoreFromEmbed(id) {
+        try { await post('restore_diagrams', {ids: [id]}); trashMem = null; await list(true); refreshEmbeds(id); document.querySelectorAll('[data-dg-host][data-dg-filled]').forEach(h => { delete h.dataset.dgFilled; }); fillHosts(); ext.diagrammesOnglet?.refresh?.();
+            toast(i18n('↺ Diagramme remis à sa place.')); } catch (err) { toast(err.message, 'error'); }
+    }
+    ext.diagramTrashChanged = () => { trashMem = null; };
+    /** ces diagrammes ont changé de place (🗑 corbeille, ↺ remis) : leurs cases posées ailleurs se redessinent */
+    ext.diagramRefreshPlaced = ids => { trashMem = null; (ids || []).forEach(id => refreshEmbeds(id)); document.querySelectorAll('[data-dg-host][data-dg-filled]').forEach(h => { delete h.dataset.dgFilled; }); fillHosts(); };
+    /** 📈 l'onglet Diagrammes est-il allumé ? (app-diagrammes-onglet.js) */
+    const tabOn = () => !!ext.diagrammesOnglet?.on?.();
+    /** ouvrir un diagramme : dans 📈 Diagrammes si l'onglet est allumé, sinon dans Graphiques → Mes diagrammes (comme avant) */
+    function openDiagram(id, o = {}) { if (tabOn()) return ext.diagrammesOnglet.open(Number(id), o); return openInGraphs(Number(id)); }
     function openInGraphs(id) { document.querySelectorAll('dialog[open]').forEach(d => { if (!d.closest('.h-dg-dlg')) try { d.close(); } catch (_) {} }); const st = S(); st.graphMode = 'diagram'; st.graphDiagramId = id; st.graphTab = 'types'; A().setModule('graphiques'); }
     ext.diagramSvg = async id => { const d = await get(id); return d ? svgOf(d) : ''; };
-    ext.openDiagram = openInGraphs;
+    ext.openDiagram = openDiagram;
+    ext.openDiagramInGraphs = openInGraphs;
 
     /* ─── Images : PNG, JPG, SVG ─── */
     function svgToCanvas(svg, scale = 2, bg = '') {
@@ -123,7 +151,7 @@
     /** L1 : titre et légende, tableau des données dessous, ajuster à la page ou taille réelle */
     async function printSpec(name, spec) {
         const UI = window.LCNDA_UI; if (!UI?.openPrintDialog) throw new Error('la fenêtre « Imprimer » n’est pas chargée');
-        const live = await resolveLive(spec), full = drawSpec(live), bare = drawSpec(live.kind === '_missing' ? live : {...live, o: {...(live.o || {}), title: '', subtitle: '', source: '', legend: 'none'}});
+        const live = await resolveLive(spec, {share: true}), full = drawSpec(live), bare = drawSpec(live.kind === '_missing' ? live : {...live, o: {...(live.o || {}), title: '', subtitle: '', source: '', legend: 'none'}});
         const table = () => { const kind = R().KINDS[live.kind]; if (!kind) return ''; return kind.grids.map(g => { const cols = gridCols(g, live), rows = live[g.key] || []; return rows.length ? `<table><caption>${esc(g.label)}</caption><thead><tr>${cols.map(c => `<th>${esc(c.label)}</th>`).join('')}</tr></thead><tbody>${rows.map(r => `<tr>${cols.map(c => `<td>${esc(r[c.k] ?? '')}</td>`).join('')}</tr>`).join('')}</tbody></table>` : ''; }).join(''); };
         UI.openPrintDialog({title: name || 'Diagramme', key: 'diagramme', zone: 'Diagramme', photos: false, margin: 12, orientation: 'landscape',
             options: [{key: 'legend', label: 'Titre et légende', checked: true}, {key: 'data', label: 'Tableau des données dessous', checked: false},
@@ -132,10 +160,10 @@
     }
     async function exportAs(fmt, name, spec, o = {}) {
         if (R().KINDS[spec.kind]?.logExport) post('access_note', {what: 'map_export', kind: spec.kind, format: fmt}).catch(() => {}); // 📜 Qui a vu quoi : une carte exportée (lib/verrou.php)
-        const svg = drawSpec(await resolveLive(spec));
+        const svg = drawSpec(await resolveLive(spec, {share: true})); // ce qui sort de l'app : figé, sans les vivants
         if (fmt === 'svg') return download(new Blob([svg], {type: 'image/svg+xml'}), o.filename || fileName(name) + '.svg');
         if (fmt === 'csv') return download(new Blob(['﻿' + specCsv(spec.live?.follow ? await resolveLive(spec) : spec)], {type: 'text/csv;charset=utf-8'}), o.filename || fileName(name) + '.csv');
-        if (fmt === 'json') return download(new Blob([JSON.stringify({lcnda_diagram: 1, name, kind: spec.kind, spec}, null, 1)], {type: 'application/json'}), o.filename || fileName(name) + '.diagramme.json');
+        if (fmt === 'json') return download(new Blob([JSON.stringify({lcnda_diagram: 1, name, kind: spec.kind, spec: spec.live?.data && ext.diagramData ? await ext.diagramData.frozen(spec) : spec}, null, 1)], {type: 'application/json'}), o.filename || fileName(name) + '.diagramme.json');
         if (fmt === 'print') return printSpec(name, spec); // L1 : la fenêtre « Imprimer » commune
         const c = await svgToCanvas(svg, Math.max(0.5, Math.min(6, (Number(o.quality) || 192) / 96)), fmt === 'jpg' ? '#ffffff' : '');
         if (fmt === 'copy') { try { const b = await new Promise(r => c.toBlob(r, 'image/png')); await navigator.clipboard.write([new ClipboardItem({'image/png': b})]); toast('Image copiée : colle-la où tu veux (⌘V).'); } catch (_) { toast('Copie impossible ici : utilise « Image PNG ».', 'error'); } return; }
@@ -148,7 +176,7 @@
         const UI = window.LCNDA_UI; if (!UI?.openExportDialog) return exportAs('png', name, getSpec()).catch(e => toast(e.message, 'error'));
         const run = fmt => o => exportAs(fmt, name, getSpec(), o);
         UI.openExportDialog({title: name || 'Diagramme', defaultName: fileName(name), quality: 192, saveCopy: !!A().importMediaFile,
-            preview: async () => { const box = document.createElement('div'); box.className = 'h-dg-svg'; box.innerHTML = drawSpec(await resolveLive(getSpec())); return box; },
+            preview: async () => { const box = document.createElement('div'); box.className = 'h-dg-svg'; box.innerHTML = drawSpec(await resolveLive(getSpec(), {share: true})); return box; },
             formats: [{id: 'png', run: run('png')}, {id: 'jpg', run: run('jpg')}, {id: 'svg', hint: 'net à toutes les tailles', run: run('svg')},
                 {id: 'pdf', hint: i18n('par l’impression : « Enregistrer en PDF »'), ext: '', quality: false, run: run('print')}, {id: 'print', quality: false, run: run('print')},
                 {id: 'csv', label: '📄 CSV', hint: 'les chiffres, pour un tableur', ext: 'csv', quality: false, run: run('csv')},
@@ -238,8 +266,11 @@
     function optHtml(o, spec) {
         if (o.when && !o.when(spec)) return '';
         const v = spec.o?.[o.k], at = `data-opt="${esc(o.k)}"`;
-        if (o.type === 'link') { const h = o.href?.(spec) || ''; return h ? `<a class="button small secondary h-dg-optlink" href="${esc(h)}" target="_blank" rel="noopener noreferrer">${esc(o.label)}</a>` : (o.hint ? `<small class="ui-hint">${esc(o.hint)}</small>` : ''); } // un lien vers un site (ouvert dans le navigateur)
+        if (o.type === 'link') { const h = o.href?.(spec) || ''; return h ? `${window.LCNDA_UI.extLink(h, o.label, {cls: 'button small secondary h-dg-optlink'})}` : (o.hint ? `<small class="ui-hint">${esc(o.hint)}</small>` : ''); } // un lien vers un site (ouvert dans le navigateur)
         if (o.type === 'check') return `<label class="ui-toggle"><input type="checkbox" ${at} ${(v ?? o.def) ? 'checked' : ''}><i></i>${esc(o.label)}</label>`;
+        // une longue liste (les pays du monde) : rangée en groupes, avec une case pour chercher (filtrée par la sorte : heritage-diagram-cartes.js)
+        if (o.type === 'select' && typeof o.groups === 'function') { const opt = ([k, l]) => `<option value="${esc(k)}" ${String(v ?? o.def ?? '') === k ? 'selected' : ''}>${esc(l)}</option>`;
+            return `<label class="h-dg-optsearch">${esc(o.label)}${o.search ? `<input type="search" data-opt-filter="${esc(o.k)}" placeholder="${esc(o.search)}" aria-label="${esc(o.search)}" autocomplete="off" enterkeyhint="search">` : ''}<select ${at} data-i18n-off>${o.groups(spec).map(([g, ch]) => `<optgroup label="${esc(g)}">${ch.map(opt).join('')}</optgroup>`).join('')}</select></label>`; }
         if (o.type === 'select') return `<label>${esc(o.label)}<select ${at}>${o.choices.map(([k, l]) => `<option value="${esc(k)}" ${String(v ?? o.def ?? '') === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>`;
         const un = o.unit != null ? ` data-unit="${esc(o.unit)}"` : ''; // K17 : l'unité dans la case, pas dans le libellé
         if (o.type === 'range') return `<label>${esc(o.label)} <output>${esc(v ?? o.def ?? '')}</output><input type="range" ${at} min="${o.min}" max="${o.max}" step="${o.step || 1}" value="${esc(v ?? o.def ?? o.min)}"${un}></label>`;
@@ -270,58 +301,85 @@
             roles: [{role: 'Archives', color: '#9c755f'}, {role: 'En ligne', color: '#4e79a7'}, {role: 'Déplacement', color: '#f28e2b'}, {role: 'Écriture', color: '#59a14f'}], events: [{date: '2026-06-15', label: 'Rendez-vous', kind: 'autre'}]});
         return s;
     }
-    function chooseType({current = '', title = 'Nouveau diagramme'} = {}) {
+    /** host : 📈 l'onglet Diagrammes — la même galerie DANS la page (pas de fenêtre) ; suggest : les types ✨ conseillés montrés d'abord (puis « Tous ») */
+    function chooseType({current = '', title = 'Nouveau diagramme', host = null, suggest = null} = {}) {
         return new Promise(resolve => {
-            const dlg = document.createElement('dialog'); dlg.className = 'modal h-dg-gallery';
+            const inline = !!host;
+            const dlg = document.createElement(inline ? 'div' : 'dialog'); dlg.className = inline ? 'h-dg-gallery h-dg-inline' : 'modal h-dg-gallery';
+            let showAll = !(suggest && suggest.length);
+            const tileHtml = ([t, i]) => `<button type="button" class="h-dg-tile ${current === t.kind && !t.o && !t.preset ? 'is-current' : ''}" data-tpl="${i}"${R().KINDS[t.kind]?.help && !t.o && !t.preset ? ` title="${esc(R().KINDS[t.kind].help)}"` : ''}><span class="h-dg-mini">${R().svg({...presetSpec(t), o: {...presetSpec(t).o, title: '', subtitle: '', source: '', legend: 'none', scale: 1.6}}, 480)}</span><span>${esc(t.icon)} ${esc(t.label)}</span></button>`;
             const paint = () => {
                 // l'ordre, les types cachés et les groupes à soi : le ⚙️ de cette galerie (heritage-diagram-kinds.js)
                 const all = TEMPLATES(), groups = {};
                 if (ext.diagramCatalog) ext.diagramCatalog(all).forEach(([g, items]) => { groups[g] = items.map(t => [t, all.indexOf(t)]); });
                 else all.forEach((t, i) => { (groups[t.group] = groups[t.group] || []).push([t, i]); });
-                dlg.innerHTML = `<div class="h-dg-galhead"><div><span class="eyebrow">📊 DIAGRAMMES</span><h2>${esc(title)}</h2><p class="muted">Choisis un dessin : il arrive avec un exemple que tu remplaces par tes chiffres (à la main, collés d’un tableur, d’un CSV, ou pris dans l’app).</p></div><span>${ext.openDiagramKindsEditor ? '<button type="button" class="button small secondary" data-kinds-cfg title="Ordre, types montrés ou cachés, groupes à toi">⚙️ Ranger les types</button>' : ''}<button type="button" class="icon-button" data-close>×</button></span></div>
-                ${Object.entries(groups).map(([g, items]) => `<h4>${esc(g)}</h4><div class="h-dg-tiles">${items.map(([t, i]) => `<button type="button" class="h-dg-tile ${current === t.kind && !t.o && !t.preset ? 'is-current' : ''}" data-tpl="${i}"${R().KINDS[t.kind]?.help && !t.o && !t.preset ? ` title="${esc(R().KINDS[t.kind].help)}"` : ''}><span class="h-dg-mini">${R().svg({...presetSpec(t), o: {...presetSpec(t).o, title: '', subtitle: '', source: '', legend: 'none', scale: 1.6}}, 480)}</span><span>${esc(t.icon)} ${esc(t.label)}</span></button>`).join('')}</div>`).join('')}`;
+                const sug = (suggest || []).map(k => all.findIndex(t => t.kind === k && !t.o && !t.preset)).filter(i => i >= 0).map(i => [all[i], i]);
+                const nAll = Object.values(groups).reduce((n, g) => n + g.length, 0);
+                const seg = inline && sug.length ? window.LCNDA_UI.segmented({tag: 'div', cls: 'h-dg-galseg', label: i18n('Quels dessins'), items: [{on: !showAll, attrs: 'data-dg-galall="0"', html: `✨ ${esc(i18n('Conseillés ({n})', {n: sug.length}))}`}, {on: showAll, attrs: 'data-dg-galall="1"', html: esc(i18n('Tous ({n})', {n: nAll}))}]}) : '';
+                dlg.innerHTML = `<div class="h-dg-galhead"><div>${inline ? '' : `<span class="eyebrow">📊 DIAGRAMMES</span><h2>${esc(title)}</h2>`}<p class="muted">Choisis un dessin : il arrive avec un exemple que tu remplaces par tes chiffres (à la main, collés d’un tableur, d’un CSV, ou pris dans l’app).</p>${seg}</div><span>${ext.openDiagramKindsEditor ? '<button type="button" class="button small secondary" data-kinds-cfg title="Ordre, types montrés ou cachés, groupes à toi">⚙️ Ranger les types</button>' : ''}${inline ? '' : '<button type="button" class="icon-button" data-close>×</button>'}</span></div>
+                ${!showAll ? `<h4>✨ ${esc(i18n('Conseillés'))}</h4><div class="h-dg-tiles">${sug.map(tileHtml).join('')}</div>` : Object.entries(groups).map(([g, items]) => `<h4>${esc(g)}</h4><div class="h-dg-tiles">${items.map(tileHtml).join('')}</div>`).join('')}`;
+                if (inline) return; // dans l'onglet : 💬 et 📊 sont deux autres portes, à côté
+                if (ext.diagramData && !current) dlg.querySelector('.h-dg-galhead')?.insertAdjacentHTML('afterend', ext.diagramData.galleryTileHtml()); // 📊 Partir des données : une tuile qui ouvre le même écran (heritage-diagram-donnees.js)
+                if (ext.diagramAssistant) { dlg.querySelector('.h-dg-galhead')?.insertAdjacentHTML('afterend', ext.diagramAssistant.html()); ext.diagramAssistant.bind(dlg, pickd => done(pickd)); } // 💬 « Je veux représenter… » (heritage-diagram-assistant.js)
                 dlg.insertAdjacentHTML('beforeend', '<div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-close>Fermer</button></div>'); // K6 : le bas de fenêtre (K3 : « Fermer » seul, rien à valider)
             };
             paint();
-            document.body.appendChild(dlg);
-            const done = v => { dlg.close(); dlg.remove(); resolve(v); };
-            dlg.addEventListener('click', e => { if (e.target.closest('[data-close]')) return done(null); if (e.target.closest('[data-kinds-cfg]')) return ext.openDiagramKindsEditor({onSave: paint}); const b = e.target.closest('[data-tpl]'); if (b) done(TEMPLATES()[Number(b.dataset.tpl)]); });
+            if (inline) host.replaceChildren(dlg); else document.body.appendChild(dlg);
+            const done = v => { if (!inline) dlg.close(); dlg.remove(); resolve(v); };
+            if (inline) dlg.addEventListener('click', e => { const b = e.target.closest('[data-dg-galall]'); if (b) { showAll = b.dataset.dgGalall === '1'; paint(); } });
+            dlg.addEventListener('click', e => { if (e.target.closest('[data-close]')) return done(null); if (e.target.closest('[data-kinds-cfg]')) return ext.openDiagramKindsEditor({onSave: paint}); if (e.target.closest('[data-dg-fromdata]')) return done({kind: 'stacked', fromData: true}); const b = e.target.closest('[data-tpl]'); if (b) done(TEMPLATES()[Number(b.dataset.tpl)]); });
+            if (inline) return;
             dlg.addEventListener('cancel', e => { e.preventDefault(); done(null); });
             dlg.showModal();
         });
     }
 
     /* ─── L'éditeur ─── */
-    async function openEditor(id = null, {link = null, kind = null, onSave = null, onClose = null, spec: given = null, name: givenName = ''} = {}) {
-        let rec;
+    /** host : 📈 l'onglet Diagrammes — le même éditeur DANS la page (pleine largeur, enregistré tout seul, ↶ ↷, « ← Mes diagrammes ») au lieu d'une fenêtre ;
+     *  onCreated(id) : le premier enregistrement d'un nouveau ; onBack() : « ← Mes diagrammes » ; crumb : le fil d'Ariane (HTML) ; onRename(nom) */
+    async function openEditor(id = null, {link = null, kind = null, onSave = null, onClose = null, spec: given = null, name: givenName = '', data: startData0 = null, host = null, onCreated = null, onBack = null, crumb = '', onRename = null} = {}) {
+        let rec, startData = startData0; // data : {src: 'list'|'ask', list?, ask?} → l'onglet « 📊 Partir des données » déjà sur cette source (Listes → « 📊 Faire un diagramme »)
         if (!id && given && R().KINDS[given.kind]) rec = {id: 0, name: givenName || given.o?.title || R().KINDS[given.kind].label, spec: clone(given), links: link ? [link] : []}; // données déjà prêtes (statistique, import)
         else if (id) { const d = await get(id); if (!d) return toast('Diagramme introuvable.', 'error');
             // 📈 un de mes graphiques posé ici : on le modifie dans l'Éditeur de graphiques (il se met à jour partout)
             if (followId(d.spec)) { document.querySelectorAll('dialog[open]').forEach(x => { try { x.close(); } catch (_) {} }); if (ext.editMyGraph) ext.editMyGraph(followId(d.spec)); return null; }
             rec = {id: d.id, name: d.name, spec: specOf(d), links: clone(d.links || [])}; }
         else {
-            const t = kind ? {kind} : await chooseType(); if (!t) return null;
-            const spec = presetSpec(t);
+            const t = kind ? {kind} : await chooseType(host ? {host} : {}); if (!t) return null;
+            if (t.fromData) startData = {src: 'list'};
+            const spec = t.spec ? {o: {}, ...clone(t.spec)} : presetSpec(t); // 💬 l'assistant donne un diagramme tout fait
             rec = {id: 0, name: spec.o.title || R().KINDS[t.kind].label, spec, links: link ? [link] : []};
         }
-        let spec = rec.spec, tab = 'data', dirty = !rec.id, timer = 0;
+        let spec = rec.spec, tab = startData ? 'app' : 'data', dirty = !rec.id, timer = 0;
         const shownRows = {}; // C6 : combien de lignes chaque tableau montre (« Voir les suivantes », « Tout voir »)
-        const dlg = document.createElement('dialog'); dlg.className = 'modal h-dg-dlg'; dlg.dataset.ownClose = '1';
+        const inline = !!host;
+        const dlg = document.createElement(inline ? 'div' : 'dialog'); dlg.className = inline ? 'h-dg-dlg h-dg-inline' : 'modal h-dg-dlg'; dlg.dataset.ownClose = '1';
         const kindOf = () => R().KINDS[spec.kind] || R().KINDS.columns;
         dlg.innerHTML = `<div class="h-dg-shell">
+            ${inline ? `<div class="h-dg-inhead"><nav class="h-dg-crumb eyebrow" data-dg-crumb aria-label="${esc(i18n('Fil d’Ariane'))}">${crumb}</nav><button type="button" class="button small secondary" data-dg-back>${esc(i18n('← Mes diagrammes'))}</button></div>` : ''}
             <header class="h-dg-top"><span class="ui-topbar-icon" aria-hidden="true">📊</span><input class="h-dg-name" data-dg-name value="${esc(rec.name)}" maxlength="200" aria-label="Nom du diagramme"><button type="button" class="button small secondary" data-dg-type title="Changer de type de diagramme"></button>
-                <span class="h-dg-spacer"></span><span class="ui-status" data-ui-status></span><button type="button" class="button small secondary" data-dg-expdlg title="PNG, JPG, SVG, PDF, impression, CSV, fichier du diagramme">⤓ Exporter ▾</button><button type="button" class="button small" data-dg-save data-shortcut="⌘S" title="Enregistrer">💾 Enregistrer</button><button type="button" class="icon-button" data-dg-close title="Fermer" aria-label="Fermer">×</button></header>
-            <div class="h-dg-body"><aside class="h-dg-side"><nav class="segmented h-dg-tabs"><button type="button" data-dg-tab="data">Données</button><button type="button" data-dg-tab="opts">Réglages</button><button type="button" data-dg-tab="perso" title="Style, annotations, lignes de repère, petits multiples, lecture dans le temps">⚙️ Personnaliser</button><button type="button" data-dg-tab="app">Depuis l’app</button><button type="button" data-dg-tab="links">Relier</button></nav><div class="h-dg-pane"></div></aside>
+                <span class="h-dg-spacer"></span>${inline ? `<span class="h-dg-undo"><button type="button" class="button small secondary" data-dg-undo title="${esc(i18n('Défaire'))} (⌘Z)" aria-label="${esc(i18n('Défaire'))}" disabled>↶</button><button type="button" class="button small secondary" data-dg-redo title="${esc(i18n('Refaire'))} (⇧⌘Z)" aria-label="${esc(i18n('Refaire'))}" disabled>↷</button></span>` : ''}<span class="ui-status" data-ui-status></span><button type="button" class="button small secondary" data-dg-expdlg title="PNG, JPG, SVG, PDF, impression, CSV, fichier du diagramme">⤓ Exporter ▾</button><button type="button" class="button small" data-dg-save data-shortcut="⌘S" title="Enregistrer"${inline ? ' hidden' : ''}>💾 Enregistrer</button>${inline ? '' : '<button type="button" class="icon-button" data-dg-close title="Fermer" aria-label="Fermer">×</button>'}</header>
+            <div class="h-dg-body"><aside class="h-dg-side"><nav class="segmented h-dg-tabs"><button type="button" data-dg-tab="data">Données</button><button type="button" data-dg-tab="opts">Réglages</button><button type="button" data-dg-tab="perso" title="Style, annotations, lignes de repère, petits multiples, lecture dans le temps">⚙️ Personnaliser</button><button type="button" data-dg-tab="app" title="Mon arbre, une liste de données ou une question">📊 Partir des données</button><button type="button" data-dg-tab="links">Relier</button></nav><div class="h-dg-pane"></div></aside>
                 <main class="h-dg-preview"><p class="h-dg-sum" data-dg-sum aria-live="polite" hidden></p><div class="h-dg-svg" data-dg-preview></div></main></div></div>`;
-        document.body.appendChild(dlg);
+        if (inline) host.replaceChildren(dlg); else document.body.appendChild(dlg);
         const pane = dlg.querySelector('.h-dg-pane'), prev = dlg.querySelector('[data-dg-preview]');
+        /* 📈 dans l'onglet : enregistré tout seul (« ✓ Enregistré »), ↶ ↷ (un instantané du nom, des chiffres, des réglages et des liens) */
+        let autoT = 0, snapT = 0, ver = 0, saving = null;
+        const snapOf = () => JSON.stringify({name: rec.name, spec, links: rec.links});
+        const hist = [snapOf()]; let hi = 0;
+        const undoBtns = () => { const u = dlg.querySelector('[data-dg-undo]'), r = dlg.querySelector('[data-dg-redo]'); if (u) u.disabled = hi <= 0; if (r) r.disabled = hi >= hist.length - 1; };
+        const snap = () => { clearTimeout(snapT); const j = snapOf(); if (j === hist[hi]) return; hist.splice(hi + 1); hist.push(j); if (hist.length > 80) hist.shift(); hi = hist.length - 1; undoBtns(); };
+        const touched = () => { if (!inline) return; ver++; clearTimeout(snapT); snapT = setTimeout(snap, 350); clearTimeout(autoT); autoT = setTimeout(() => saveInline(), 800); };
+        const travel = d => { snap(); const j = hi + d; if (j < 0 || j >= hist.length) return; hi = j; const v = JSON.parse(hist[hi]); rec.name = v.name; spec = v.spec; rec.links = v.links; dlg.querySelector('[data-dg-name]').value = rec.name; onRename?.(rec.name); dirty = true; paint(); draw(); undoBtns(); ver++; clearTimeout(autoT); autoT = setTimeout(() => saveInline(), 300); };
         // « ✓ Enregistré » / « • modifié » au même endroit, sans toast (E1)
         const showStatus = () => window.LCNDA_UI?.savedStatus?.(dlg.querySelector('[data-ui-status]'), dirty ? 'dirty' : 'saved');
         const draw = async () => { showStatus(); const s = await resolveLive(spec); prev.innerHTML = R().svg(s); kindOf().afterDraw?.(prev, kindApi); ext.diagramPerso?.afterDraw(prev, s, kindApi); }; // ⚙️ Personnaliser : annotations à glisser, curseur ▶ des années (heritage-diagram-perso.js)
         // kind.afterDraw(aperçu, api) : une sorte qui se règle aussi dans l'aperçu (cadrage d'une carte à la souris) ; api.set({réglages}) change spec.o
         // kind.dataPane(onglet, api) : une sorte qui enrichit son tableau (champ « Zone » des cartes) ; api.changed() : spec modifié à la main, redessiner
         const kindApi = {spec: () => spec, redraw: () => draw(), set: patch => { spec.o = {...(spec.o || {}), ...patch}; later(); if (tab === 'opts') { const y = pane.scrollTop; paint(); pane.scrollTop = y; } }, changed: () => later()};
-        const later = () => { dirty = true; clearTimeout(timer); timer = setTimeout(draw, 90); };
+        const later = () => { dirty = true; clearTimeout(timer); timer = setTimeout(draw, 90); touched(); };
+        // 📊 Partir des données (heritage-diagram-donnees.js) : la source, les filtres et les champs changent le diagramme tout de suite
+        const dataApi = {spec: () => spec, setSpec: s => { spec = s; later(); }, setSum: t => setSum(t), dlg, id: () => rec.id, goTab: t => { tab = t; paint(); }, start: () => { const v = startData; startData = null; return v; }};
         const paint = () => {
             dlg.querySelector('[data-dg-type]').textContent = `${kindOf().icon} ${kindOf().label} ▾`;
             dlg.querySelectorAll('[data-dg-tab]').forEach(b => b.classList.toggle('is-active', b.dataset.dgTab === tab));
@@ -331,7 +389,7 @@
             else if (tab === 'perso') { pane.innerHTML = ''; if (ext.diagramPerso) ext.diagramPerso.pane(pane, kindApi); else pane.innerHTML = '<p class="muted">Personnaliser n’est pas chargé.</p>'; }
             else pane.innerHTML = linksHtml();
             showSum(tab === 'app' ? lastSum : spec.live?.sum || appSum); // la phrase du réglage au-dessus de l'aperçu (options de « Depuis l'app ») : celle des chiffres pris, tant qu'on ne les retouche pas
-            if (tab === 'app') bindAppPane(); if (tab === 'links') bindLinks();
+            if (tab === 'app') { bindAppPane(); ext.diagramData?.mount(pane, dataApi); } if (tab === 'links') bindLinks();
             if (tab === 'data') { sortBars(); kindOf().dataPane?.(pane, kindApi); }
         };
         // C6 : « N lignes · Trier : [menu] » au-dessus de chaque tableau : range les lignes (le dessin suit)
@@ -487,22 +545,22 @@
             const rel = (() => { try { return kindOf().relate?.(clone(spec)) || []; } catch (_) { return []; } })();
             if (rel.length && !pane.querySelector('[data-dg-relate]')) { const box = document.createElement('div'); box.className = 'h-dg-relate'; box.innerHTML = rel.map((r, i) => `<button type="button" class="button small secondary" data-dg-relate="${i}">${esc(r.label)}</button>`).join(' ');
                 pane.querySelector('.h-pr-links')?.prepend(box); box.addEventListener('click', e => { const b = e.target.closest('[data-dg-relate]'); if (b) rel[Number(b.dataset.dgRelate)]?.run?.(); }); }
-            pane.querySelector('.h-pr-linkchips').addEventListener('click', e => { const c = e.target.closest('[data-dg-unlink]')?.closest('.h-pr-lchip'); if (!c) return; rec.links = rec.links.filter(l => !(l.type === c.dataset.type && Number(l.id) === Number(c.dataset.id))); dirty = true; paint(); });
+            pane.querySelector('.h-pr-linkchips').addEventListener('click', e => { const c = e.target.closest('[data-dg-unlink]')?.closest('.h-pr-lchip'); if (!c) return; rec.links = rec.links.filter(l => !(l.type === c.dataset.type && Number(l.id) === Number(c.dataset.id))); dirty = true; touched(); paint(); });
             // personnes et enquêtes : le menu de choix unique (recherche mélangée)
             pane.querySelector('[data-dg-lpk]')?.addEventListener('picker-change', e => { const it = e.detail.item; if (!it?.id) return; const type = it.kind === 'investigation' ? 'investigation' : 'person';
-                if (!rec.links.some(l => l.type === type && Number(l.id) === Number(it.id))) rec.links.push({type, id: Number(it.id), name: it.title}); dirty = true; paint(); });
+                if (!rec.links.some(l => l.type === type && Number(l.id) === Number(it.id))) rec.links.push({type, id: Number(it.id), name: it.title}); dirty = true; touched(); paint(); });
             // parties d'enquête et projets de l'Atelier : pas encore dans le menu de choix unique, l'ancienne recherche reste pour eux
             input.addEventListener('input', () => { clearTimeout(t); const q = input.value.trim(), ql = q.toLowerCase(); if (q.length < 2) { sugg.hidden = true; return; } t = setTimeout(async () => {
                 let parts = [], projs = [];
                 await Promise.all([
                     api('periodical_link_search', {q}).then(r => { parts = r.items || []; }).catch(() => {}),
-                    (projCache ? Promise.resolve() : api('atelier_projects').then(r => { projCache = r.projects || []; })).then(() => { projs = (projCache || []).filter(p => String(p.title || '').toLowerCase().includes(ql)).slice(0, 6); }).catch(() => {}),
+                    (projCache ? Promise.resolve() : api('atelier_projects').then(r => { projCache = r.projects || []; })).then(() => { projs = (projCache || []).filter(p => (window.LCNDA_UI?.listMatch?.text || ((q, ...h) => h.join(' ').toLowerCase().includes(String(q).toLowerCase())))(ql, p.title)).slice(0, 6); }).catch(() => {}),
                 ]);
                 const b = (type, id, name) => `<button type="button" data-add-type="${type}" data-add-id="${Number(id)}" data-add-name="${esc(name)}">${LINK_IC[type]} ${esc(name)}</button>`;
                 sugg.innerHTML = [...parts.map(x => b('investigation_item', x.id, x.name)), ...projs.map(p => b('atelier_project', p.id, p.title))].join('') || '<small class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">Rien trouvé.</span></small>';
                 sugg.hidden = false; }, 220); });
             input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); sugg.querySelector('[data-add-type]')?.click(); } });
-            sugg.addEventListener('click', e => { const s = e.target.closest('[data-add-type]'); if (!s) return; if (!rec.links.some(l => l.type === s.dataset.addType && Number(l.id) === Number(s.dataset.addId))) rec.links.push({type: s.dataset.addType, id: Number(s.dataset.addId), name: s.dataset.addName}); dirty = true; paint(); pane.querySelector('[data-dg-lq]')?.focus(); });
+            sugg.addEventListener('click', e => { const s = e.target.closest('[data-add-type]'); if (!s) return; if (!rec.links.some(l => l.type === s.dataset.addType && Number(l.id) === Number(s.dataset.addId))) rec.links.push({type: s.dataset.addType, id: Number(s.dataset.addId), name: s.dataset.addName}); dirty = true; touched(); paint(); pane.querySelector('[data-dg-lq]')?.focus(); });
         }
         const grid = gi => kindOf().grids[Number(gi)];
         pane.addEventListener('input', e => {
@@ -581,10 +639,34 @@
         document.addEventListener('lcnda:workbook-saved', onBook);
         dlg.addEventListener('close', () => document.removeEventListener('lcnda:workbook-saved', onBook));
         const close = async () => { if (dirty && !await A().confirmBox('Fermer sans enregistrer les changements ?', {title: 'Changements non enregistrés', okLabel: 'Fermer sans enregistrer', danger: true})) return; dlg.close(); dlg.remove(); onClose?.(); };
-        dlg.addEventListener('cancel', e => { e.preventDefault(); close(); });
-        dlg.querySelector('[data-dg-close]').addEventListener('click', close);
-        dlg.querySelector('[data-dg-name]').addEventListener('input', e => { rec.name = e.target.value; dirty = true; showStatus(); });
+        if (!inline) { dlg.addEventListener('cancel', e => { e.preventDefault(); close(); }); dlg.querySelector('[data-dg-close]').addEventListener('click', close); }
+        else {
+            dlg.querySelector('[data-dg-back]').addEventListener('click', async () => { if (dirty) await saveInline(); onBack?.(); });
+            dlg.querySelector('[data-dg-undo]').addEventListener('click', () => travel(-1)); dlg.querySelector('[data-dg-redo]').addEventListener('click', () => travel(1));
+            dlg.addEventListener('keydown', e => { if (!(e.metaKey || e.ctrlKey) || e.key.toLowerCase() !== 'z' || e.target.matches?.('input, textarea, select, [contenteditable]')) return; e.preventDefault(); travel(e.shiftKey ? 1 : -1); });
+        }
+        dlg.querySelector('[data-dg-name]').addEventListener('input', e => { rec.name = e.target.value; dirty = true; showStatus(); touched(); onRename?.(rec.name); });
         dlg.addEventListener('keydown', e => { if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') { e.preventDefault(); e.stopPropagation(); dlg.querySelector('[data-dg-save]').click(); } });
+        /** 📈 l'enregistrement tout seul (onglet Diagrammes) : la fenêtre reste ouverte ; un nouveau reçoit son numéro (onCreated) */
+        async function saveInline() {
+            clearTimeout(autoT); if (!inline) return;
+            if (saving) { await saving; if (!dirty) return; }
+            const v0 = ver, wasNew = !rec.id;
+            saving = (async () => {
+                try {
+                    const {kind: k, ...rest} = spec;
+                    const r = await post('save_diagram', {id: rec.id || 0, name: rec.name.trim() || spec.o?.title || 'Mon diagramme', kind: k, spec: rest, links: rec.links.map(l => ({type: l.type, id: l.id}))});
+                    rec.id = Number(r.result?.id || r.id || rec.id); dirty = ver !== v0;
+                    await list(true); refreshEmbeds(rec.id);
+                    showStatus();
+                    if (wasNew) onCreated?.(rec.id);
+                    onSave?.(rec.id); afterSave(rec.id);
+                } catch (e) { toast(e.message, 'error'); }
+            })();
+            await saving; saving = null;
+            if (dirty) { clearTimeout(autoT); autoT = setTimeout(() => saveInline(), 800); }
+        }
+        rec.flush = () => (dirty ? saveInline() : Promise.resolve());
         dlg.querySelectorAll('[data-dg-tab]').forEach(b => b.addEventListener('click', () => { tab = b.dataset.dgTab; paint(); }));
         dlg.querySelector('[data-dg-type]').addEventListener('click', async () => {
             const t = await chooseType({current: spec.kind, title: 'Changer de type'}); if (!t) return;
@@ -594,11 +676,12 @@
             else { const hasData = (spec.rows || []).length; const keepO = {title: spec.o.title, subtitle: spec.o.subtitle, source: spec.o.source, palette: spec.o.palette, width: spec.o.width, bg: spec.o.bg};
                 if (hasData && !await A().confirmBox('Ce type ne lit pas le même tableau : l’exemple remplace tes données. Continuer ?', {title: 'Changer de type', okLabel: 'Remplacer mes données'})) return;
                 spec = presetSpec(t); Object.entries(keepO).forEach(([k, v]) => { if (v !== undefined && v !== '') spec.o[k] = v; }); }
-            dirty = true; paint(); draw();
+            dirty = true; touched(); paint(); draw();
         });
         dlg.querySelector('[data-dg-expdlg]').addEventListener('click', () => exportDialog(rec.name || spec.o?.title || 'Diagramme', () => spec));
         window.LCNDA_UI?.onPrintKey?.(dlg, () => printSpec(rec.name || spec.o?.title || 'Diagramme', spec)); // L1 : ⌘P
         dlg.querySelector('[data-dg-save]').addEventListener('click', async () => {
+            if (inline) return saveInline();
             const btn = dlg.querySelector('[data-dg-save]'); btn.disabled = true;
             try {
                 const {kind: k, ...rest} = spec;
@@ -610,12 +693,15 @@
                 onSave?.(rec.id); afterSave(rec.id);
             } catch (e) { toast(e.message, 'error'); } finally { btn.disabled = false; }
         });
-        paint(); draw(); dlg.showModal();
+        paint(); draw(); if (!inline) dlg.showModal();
+        if (inline && !rec.id) saveInline(); // un nouveau, dans l'onglet : il existe tout de suite (son adresse #diagrammes/N)
         return rec;
     }
-    ext.openDiagramEditor = (id, opts) => openEditor(id, opts);
+    // 📈 onglet Diagrammes allumé : ouvrir « pour rien » (sans réponse attendue) se fait DANS l'onglet ; un choix qui attend un numéro (onSave, onClose) garde sa fenêtre
+    ext.openDiagramEditor = (id, opts = {}) => (tabOn() && !opts?.host && !opts?.onSave && !opts?.onClose && ext.diagrammesOnglet?.edit ? ext.diagrammesOnglet.edit(id, opts) : openEditor(id, opts));
     function afterSave(id) {
         const st = S();
+        if (st.module === 'diagrammes') { ext.diagrammesOnglet?.saved?.(id); document.querySelectorAll('[data-dg-host][data-dg-filled]').forEach(h => { delete h.dataset.dgFilled; }); fillHosts(); return; } // 📈 l'onglet : seulement sa colonne (l'éditeur reste ouvert)
         if (st.module === 'graphiques') { if (st.graphMode !== 'diagram' || !st.graphDiagramId) { st.graphMode = 'diagram'; st.graphDiagramId = id; } A().setModule('graphiques'); }
         document.querySelectorAll('[data-dg-host][data-dg-filled]').forEach(h => { delete h.dataset.dgFilled; }); fillHosts();
     }
@@ -705,8 +791,9 @@
         if (!d) return;
         ws.querySelector('[data-dg-pexpdlg]').addEventListener('click', () => exportDialog(d.name, () => specOf(d)));
         ws.querySelector('[data-dg-dup]').addEventListener('click', async () => { try { const frozen = followId(d.spec) ? await resolveLive(specOf(d)) : null; if (frozen?.kind === '_missing') throw new Error('Rien à copier : le graphique est introuvable.'); const {kind: fk, live: _l, ...fspec} = frozen || {};
-            const r = await post('save_diagram', frozen ? {name: d.name + ' (copie)', kind: fk, spec: fspec} : {name: d.name + ' (copie)', kind: d.kind, spec: d.spec}); await list(true); S().graphDiagramId = Number(r.result?.id); A().setModule('graphiques'); toast('Copie créée.'); } catch (e) { toast(e.message, 'error'); } });
-        ws.querySelector('[data-dg-del]').addEventListener('click', async () => { if (!await A().confirmBox(i18n('Supprimer le diagramme « {name} » ? Il disparaît aussi des widgets, fiches et enquêtes où il est posé.', {name: d.name}), {title: i18n('Supprimer le diagramme'), okLabel: i18n('Supprimer le diagramme')})) return; try { await post('delete_diagram', {id: d.id}); window.LCNDA_SIDE_FOLDERS?.forget('diagram', d.id); await list(true); S().graphDiagramId = cache[0]?.id || 0; if (!cache.length) S().graphMode = 'diagram'; A().setModule('graphiques'); toast(i18n('Diagramme supprimé.')); } catch (e) { toast(e.message, 'error'); } });
+            const r = await post('save_diagram', frozen ? {name: d.name + ' (copie)', kind: fk, spec: fspec} : {name: d.name + ' (copie)', kind: d.kind, spec: d.spec}); await list(true); openDiagram(Number(r.result?.id)); toast('Copie créée.'); } catch (e) { toast(e.message, 'error'); } });
+        ws.querySelector('[data-dg-del]').addEventListener('click', async () => { if (tabOn() && ext.diagrammesOnglet?.trash) return ext.diagrammesOnglet.trash([d.id]); // 📈 onglet allumé : 🗑 Corbeille + ↶ Annuler, sans question
+            if (!await A().confirmBox(i18n('Supprimer le diagramme « {name} » ? Il disparaît aussi des widgets, fiches et enquêtes où il est posé.', {name: d.name}), {title: i18n('Supprimer le diagramme'), okLabel: i18n('Supprimer le diagramme')})) return; try { await post('delete_diagram', {id: d.id}); window.LCNDA_SIDE_FOLDERS?.forget('diagram', d.id); await list(true); S().graphDiagramId = cache[0]?.id || 0; if (!cache.length) S().graphMode = 'diagram'; A().setModule('graphiques'); toast(i18n('Diagramme supprimé.')); } catch (e) { toast(e.message, 'error'); } });
         ws.querySelector('[data-dg-dash]').addEventListener('click', () => addToDashboard(d));
         ws.querySelectorAll('[data-dg-golink]').forEach(b => b.addEventListener('click', () => { const [type, id, inv] = b.dataset.dgGolink.split(':'); goLink(type, Number(id), Number(inv)); }));
     }
@@ -725,7 +812,7 @@
         if (!file) return; if (file.size > 3e6) return toast('Fichier trop gros.', 'error');
         try { const j = JSON.parse(await file.text()); if (!j || !j.lcnda_diagram || !R().KINDS[j.kind]) throw new Error('Ce fichier n’est pas un diagramme.');
             const r = await post('save_diagram', {name: String(j.name || 'Diagramme importé').slice(0, 200), kind: j.kind, spec: j.spec && typeof j.spec === 'object' ? j.spec : {}});
-            await list(true); S().graphMode = 'diagram'; S().graphDiagramId = Number(r.result?.id); A().setModule('graphiques'); toast('Diagramme importé.'); }
+            await list(true); openDiagram(Number(r.result?.id)); toast('Diagramme importé.'); }
         catch (e) { toast(e.message, 'error'); }
     }
     ext.importDiagramFile = importFile;
@@ -737,8 +824,8 @@
         box.dataset.dgFilled = '1';
         const owner = box.dataset.dgOwner, key = Number(box.dataset.dgKey); if (!key) return;
         let rows = [];
-        try { rows = (await api('diagrams', {entity_type: owner, entity_id: key})).diagrams || []; } catch (_) { return; }
-        rows.forEach(d => { if (cache && !byId(d.id)) cache.push(d); });
+        try { rows = (await api('diagrams', {entity_type: owner, entity_id: key, with_trash: 1})).diagrams || []; } catch (_) { return; } // 🗑 à la corbeille : la case le dit (« Remettre »)
+        rows.forEach(d => { if (cache && !d.deleted_at && !byId(d.id)) cache.push(d); });
         const card = box.hasAttribute('data-dg-hidecard') ? box.closest('.card') : null;
         if (card) card.hidden = !rows.length;
         const add = `<button type="button" class="button small secondary" data-dg-hostadd>＋ Diagramme</button>`;
@@ -760,5 +847,6 @@
 
     // la liste est chargée tôt : la colonne de Graphiques la montre sans attendre
     setTimeout(() => { if (window.LCNDA_APP?.api) list().then(() => { if (S().module === 'graphiques') A().renderSidebar?.(); }).catch(() => {}); }, 400);
-    ext.diagramsInternals = {parseTable, pasteInto, fillFrom, gridCols, list, specCsv, TEMPLATES, presetSpec, openEditor, chooseType};
+    ext.diagramsInternals = {parseTable, pasteInto, fillFrom, gridCols, list, specCsv, TEMPLATES, presetSpec, openEditor, chooseType,
+        get, byId, specOf, resolveLive, drawSpec, svgOf, followId, exportDialog, exportAs, goLink, addToDashboard, importFile, openInGraphs, svgToCanvas}; // + 📈 l'onglet Diagrammes (app-diagrammes-onglet.js)
 })();

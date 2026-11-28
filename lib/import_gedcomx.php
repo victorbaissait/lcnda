@@ -16,7 +16,7 @@ const GEDCOMX_MAX_BYTES = 300 * 1048576;
 /** Vrai si un texte JSON ou XML ressemble à du GEDCOM-X. */
 function gedcomx_sniff(string $head): bool
 {
-    $h = substr($head, 0, 65536);
+    $h = preg_replace('/^\xEF\xBB\xBF/', '', substr($head, 0, 65536)) ?? ''; // marque UTF-8 (BOM) au début : enregistré ainsi par le Bloc-notes de Windows
     if (preg_match('/<gedcomx\b/i', $h)) { return true; }
     return (bool) preg_match('/^\s*[\[{]/', $h) && str_contains($h, '"persons"') && (str_contains($h, 'gedcomx.org') || str_contains($h, '"relationships"') || str_contains($h, '"nameForms"'));
 }

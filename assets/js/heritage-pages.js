@@ -159,7 +159,11 @@
         let box = document.getElementById('lightbox-pages');
         if (!box) { box = document.createElement('section'); box.id = 'lightbox-pages'; box.className = 'lb-pages'; const after = lb.querySelector('.lightbox-attachment-block'); if (after) after.after(box); else lb.querySelector('.lightbox-details')?.prepend(box); lbCtl = null; }
         const ro = !!A()?.state?.lightboxReadOnly || kiosk();
-        if (!lbCtl || lbCtl.ro !== ro) { lbCtl = mount(box, it.id, {ro, onOpen: (id, st) => lbGo(id, st)}); if (lbCtl) lbCtl.ro = ro; }
+        if (!lbCtl || lbCtl.ro !== ro) {
+            // un nouveau bloc à chaque nouveau montage : l'ancien contrôleur (lecture seule ou non) restait branché sur le même bloc
+            // et y redessinait les pages de l'image d'avant (ex. 4 pages affichées sous une image qui en a 2)
+            if (lbCtl) { const nb = box.cloneNode(false); box.replaceWith(nb); box = nb; }
+            lbCtl = mount(box, it.id, {ro, onOpen: (id, st) => lbGo(id, st)}); if (lbCtl) lbCtl.ro = ro; }
         else lbCtl.setMedia(it.id);
     }
     const lbWatch = () => { const lb = document.getElementById('lightbox'), im = document.getElementById('lightbox-image'); if (!lb || !im) return setTimeout(lbWatch, 500);

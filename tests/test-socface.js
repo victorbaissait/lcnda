@@ -414,7 +414,7 @@ echo 'ok';`], {cwd: appRoot, encoding: 'utf8', env: envFor(dir)});
                     assert.ok(rec.members.find(m => m.first === 'Baptiste').person_id === 4);
                 });
                 await t(`${name} : la fiche — pastille « À VÉRIFIER », écart en phrase, « Vérifié sur l’image »`, async () => {
-                    await p.evaluate(() => window.LCNDA_APP.openPersonById(4));
+                    await p.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; /* le bloc Recensements essayé en entier (le chargement à mesure : test-fiche-lazy.js) */ window.LCNDA_APP.openPersonById(4); });
                     await p.waitForSelector('.sf-rec', {state: 'attached', timeout: 15000});
                     // petit écran : sections repliées ou en onglets — on montre celle du bloc Recensements
                     await p.evaluate(() => { const el = document.querySelector('.sf-rec'); document.querySelector('[data-fsec-tab="__all"]')?.click(); const sec = el?.closest('.fsec'); if (sec?.classList.contains('is-folded')) sec.querySelector('[data-fsec-fold]')?.click(); });
@@ -424,10 +424,15 @@ echo 'ok';`], {cwd: appRoot, encoding: 'utf8', env: envFor(dir)});
                     await p.waitForFunction(() => /SocFace lit « né à Tulle », ta fiche dit Naves — l’IA a pu mal lire/.test(document.querySelector('[data-sf-ecarts]')?.textContent || ''), null, {timeout: 10000});
                     assert.ok(await p.$('[data-sf-search-person="4"]'), '« 🔍 Chercher dans les recensements (SocFace) » sur la fiche');
                     await noScroll(); await shot(p, `socface-fiche-${name}.png`);
-                    await p.click('.sf-rec [data-sf-verified]');
-                    await p.waitForTimeout(500);
-                    assert.match(await p.textContent('.sf-rec .ui-badge'), /Vérifié/i);
-                    await p.click('.sf-rec [data-sf-verified]'); await p.waitForTimeout(400);
+                    // le badge change quand le serveur a répondu (il sert d’abord les ~200 lectures de la fiche) : on attend ce changement, puis on remet « À vérifier »
+                    // (un foyer précis : chaque taille d'écran a importé le sien, la fiche en montre donc plusieurs)
+                    const R = `.sf-rec[data-sf-rec="${await p.getAttribute('.sf-rec', 'data-sf-rec')}"]`;
+                    const badge = done => p.waitForFunction(([sel, v]) => { const x = document.querySelector(`${sel} .ui-badge`)?.textContent || ''; return v ? /Vérifié/i.test(x) && !/À vérifier/i.test(x) : /À vérifier/i.test(x); }, [R, done], {timeout: 45000}).catch(() => {});
+                    await p.click(`${R} [data-sf-verified]`);
+                    await badge(true);
+                    assert.match(await p.textContent(`${R} .ui-badge`), /Vérifié/i); assert.doesNotMatch(await p.textContent(`${R} .ui-badge`), /À vérifier/i);
+                    await p.click(`${R} [data-sf-verified]`); await badge(false);
+                    assert.match(await p.textContent(`${R} .ui-badge`), /À vérifier/i);
                 });
                 await t(`${name} : Que manque-t-il ? — la ligne SocFace avec son lien prêt`, async () => {
                     await p.evaluate(() => { const A = window.LCNDA_APP; A.state.researchKind = 'gaps'; A.setModule('recherche'); });

@@ -160,6 +160,14 @@
         return a;
     };
     let P = null; // projet chargé : {project, folders, items, people}
+    /** 🧺 « Ici » pour « Prendre depuis… » / « Mettre dans… » (heritage-connexions.js) : le projet ouvert, l'élément choisi (sa date, son lieu) */
+    ext.atelierHere = () => {
+        const s = S(); if (s.module !== 'enquetes' || s.enquetesTab !== 'atelier' || Number(s.currentInvestigationId) || !P?.project) return null;
+        const v = st(); if (Number(v.project) !== Number(P.project.id)) return null;
+        const it = v.sel.length === 1 ? P.byId?.get(Number(v.sel[0])) : null, d = it?.data || {};
+        const date = String(d.date || d.due || '').match(/^\d{4}-\d{2}-\d{2}/)?.[0] || '';
+        return {project: Number(P.project.id), projectTitle: P.project.title, item: it ? Number(it.id) : 0, itemTitle: it?.title || '', folder: typeof v.node === 'number' ? v.node : 0, date, placeText: d.place?.text || ''};
+    };
     const load = async id => { P = await api('atelier_project', {id}); P.byId = new Map(P.items.map(i => [Number(i.id), i])); P.fById = new Map(P.folders.map(f => [Number(f.id), f])); return P; };
     const kids = parent => P.folders.filter(f => (f.parent_id === null ? 0 : Number(f.parent_id)) === parent).sort((a, b) => a.position - b.position || a.id - b.id);
     const descendants = id => { const out = [id]; kids(id).forEach(k => out.push(...descendants(Number(k.id)))); return out; };
@@ -317,7 +325,7 @@
         if (typeof node === 'string' && node.startsWith('v_')) items = viewFilter(navEntry(node)?.filter || {}, items);
         if (v.type) items = items.filter(i => tkey(i) === v.type);
         if (v.tags.length) items = items.filter(i => v.tags.every(t => (i.tags || []).includes(t)));
-        if (v.q) { const q = v.q.toLowerCase(); items = items.filter(i => [i.title, JSON.stringify(i.data), (i.tags || []).join(' ')].join(' ').toLowerCase().includes(q)); }
+        if (v.q) { const m = (window.LCNDA_UI?.listMatch?.text || ((q, ...h) => h.join(' ').toLowerCase().includes(String(q).toLowerCase()))); items = items.filter(i => m(v.q, i.title, JSON.stringify(i.data), (i.tags || []).join(' '))); } // C1 : sans accents ni majuscules
         const s = v.sort, key = i => s.col === 'creator' ? firstAuthor(i) || i.data?.creator || '' : s.col === 'year' ? dateKey(i) : s.col === 'type' ? tl(i) : s.col === 'added' ? i.created_at : i.title;
         return items.sort((a, b) => { const x = String(key(a) || ''), y = String(key(b) || ''); if (!x !== !y) return x ? -1 : 1; return x.localeCompare(y, 'fr', {numeric: true, sensitivity: 'base'}) * s.dir; });
     }
@@ -390,15 +398,11 @@
         return `${head}
             ${folder ? `<details class="h-at-fnotes" ${folder.notes ? 'open' : ''}><summary>${i18n('📝 Notes du dossier')}${folder.notes ? '' : ` <small class="muted">${i18n('(vides)')}</small>`}</summary><textarea data-at-fnotes rows="4" placeholder="Ce que ce dossier doit contenir, le plan de la section, les idées…">${esc(folder.notes || '')}</textarea></details>` : ''}
             ${sub.length ? `<div class="h-at-subs">${sub.map(f => `<button type="button" class="h-at-sub" data-at-go="${f.id}" data-at-folder-drop="${f.id}">${esc(f.icon || CFG.folders.closed)} ${esc(f.name)}</button>`).join('')}</div>` : ''}
-            <div class="h-at-toolbar">${trash ? (items.length ? '<button type="button" class="button small danger" data-at-emptytrash>Vider la corbeille</button>' : '') : `<div class="h-at-addmenu"><button type="button" class="button small" data-at-addmenu>＋ Ajouter ▾</button><div class="h-at-menu" hidden>${CFG.types.filter(t => !t.hidden).map(t => `<button type="button" data-at-add="${esc(t.key)}" title="${esc(t.help || '')}">${esc(t.icon)} ${esc(t.label)}</button>`).join('')}<button type="button" data-at-library title="Des numéros de revue, des articles, des livres, des chapitres, des documentaires et leurs moments">📚 Revues, livres, documentaires…</button><button type="button" class="h-at-menu-cfg" data-at-settings>⚙️ Réglages des sortes…</button></div></div>
+            <div class="h-at-toolbar">${trash ? (items.length ? '<button type="button" class="button small danger" data-at-emptytrash>Vider la corbeille</button>' : '') : `<div class="h-at-addmenu"><button type="button" class="button small" data-at-addmenu>＋ Ajouter ▾</button><div class="h-at-menu" hidden>${CFG.types.filter(t => !t.hidden).map(t => `<button type="button" data-at-add="${esc(t.key)}" title="${esc(t.help || '')}">${esc(t.icon)} ${esc(t.label)}</button>${t.key === 'app' && ext.atelierData ? `<button type="button" data-at-add="app_data" title="${esc(i18n('Une liste de données (séismes, guerres, Tour de France…) : quelques lignes ou toute la liste filtrée'))}">📊 ${esc(i18n('Données téléchargées'))}</button>` : ''}`).join('')}<button type="button" data-at-library title="Des numéros de revue, des articles, des livres, des chapitres, des documentaires et leurs moments">📚 Revues, livres, documentaires…</button>${ext.connexions?.enabled?.() !== false && ext.connexions ? `<button type="button" data-at-take title="${esc(i18n('Une fiche, un acte, une source, une donnée (météo d’un jour…), une ligne de liste, un fichier : dans ce projet, ou dans l’élément choisi'))}">📥 ${esc(i18n('Prendre depuis…'))}${ext.connexions.count?.() ? ` <small>· 🧺 ${ext.connexions.count()}</small>` : ''}</button>` : ''}<button type="button" class="h-at-menu-cfg" data-at-settings>⚙️ Réglages des sortes…</button></div></div>
                 <button type="button" class="button small secondary" data-at-import title="Zotero (.rdf), CSL JSON, EndNote (.xml), BibTeX (.bib), RIS (.ris)">⤒ Importer…</button>`}
                 ${folder && kids(node).length ? `<label class="ui-toggle h-at-deep"><input type="checkbox" data-at-deep ${v.deep ? 'checked' : ''}><i></i>avec les sous-dossiers</label>` : ''}
                 <select data-at-type><option value="">Toutes les sortes</option>${CFG.types.filter(t => !t.hidden || t.key === v.type).map(t => `<option value="${esc(t.key)}" ${v.type === t.key ? 'selected' : ''}>${esc(t.icon)} ${esc(t.label)}</option>`).join('')}</select>
                 <input type="search" data-at-q value="${esc(v.q)}" placeholder="Chercher (titre, auteur, texte, étiquette…)"></div>
-            ${v.sel.length > 1 ? `<div class="h-at-bulk"><strong>${plural(v.sel.length, 'élément choisi', 'éléments choisis')}</strong>
-                ${trash ? '<button type="button" class="button small" data-at-bulk="restore">Restaurer</button><button type="button" class="button small danger" data-at-bulk="delete">Supprimer définitivement</button>'
-                    : `<select data-at-bulkfolder><option value="">Ranger dans…</option>${folderOptions()}</select><button type="button" class="button small secondary" data-at-bulk="tag">🏷 Étiquette…</button><button type="button" class="button small secondary" data-at-bulk="star">⭐ Favoris</button>${folder ? '<button type="button" class="button small secondary" data-at-bulk="remove">Retirer de ce dossier</button>' : ''}<button type="button" class="button small secondary danger" data-at-bulk="trash">🗑 Corbeille</button>`}
-                <button type="button" class="link-button" data-at-unsel>Aucun</button></div>` : ''}
             ${items.length ? `<div data-at-sortbar data-count="${items.length}"></div><table class="data-table h-at-table"><thead><tr><th class="h-at-c-star"></th>${sortTh('type', '')}${sortTh('title', 'Titre')}${sortTh('creator', 'Auteur, créateur')}${sortTh('year', 'Date')}<th class="h-at-c-att" title="Fichiers joints">📎</th></tr></thead>
                 <tbody>${items.map(i => `<tr data-at-item="${i.id}" class="${v.sel.includes(Number(i.id)) ? 'is-sel' : ''} ${i.type === 'task' && Number(i.data.done) ? 'is-done' : ''}" draggable="true">
                     <td class="h-at-c-star"><button type="button" class="h-at-star ${Number(i.starred) ? 'is-on' : ''}" data-at-star="${i.id}" title="Favori">${Number(i.starred) ? '★' : '☆'}</button></td>
@@ -525,7 +529,7 @@
         const related = (d.related || []).map(id => P.byId.get(Number(id))).filter(Boolean);
         const backlinks = live().filter(x => (x.data?.related || []).map(Number).includes(Number(i.id)) && !related.includes(x));
         return `<div class="h-at-dhead"><span class="eyebrow">${ti(i)} ${esc(tl(i))}${Number(i.trashed) ? ' · ' + i18n('dans la corbeille') : ''}</span><h3>${esc(i.title)}</h3>
-            <div class="h-at-dactions">${Number(i.trashed) ? `<button type="button" class="button small" data-at-restore="${i.id}">Restaurer</button>` : `<button type="button" class="button small" data-at-edit="${i.id}">✎ Modifier</button>${i.type === 'reference' ? `<button type="button" class="button small secondary" data-at-copy="${i.id}" title="Copier la référence">📋 Citer</button>` : ''}<button type="button" class="button small secondary" data-at-dup="${i.id}" title="Dupliquer">⧉</button><button type="button" class="button small secondary danger" data-at-trash="${i.id}" title="Mettre à la corbeille">🗑</button>`}</div></div>
+            <div class="h-at-dactions">${Number(i.trashed) ? `<button type="button" class="button small" data-at-restore="${i.id}">Restaurer</button>` : `<button type="button" class="button small" data-at-edit="${i.id}">✎ Modifier</button>${i.type === 'reference' ? `<button type="button" class="button small secondary" data-at-copy="${i.id}" title="Copier la référence">📋 Citer</button>` : ''}<button type="button" class="button small secondary" data-at-dup="${i.id}" title="Dupliquer">⧉</button>${ext.connexions?.enabled?.() !== false && ext.connexions ? `<button type="button" class="button small secondary" data-at-takeinto="${i.id}" title="${esc(i18n('Prendre depuis… dans cet élément (ajouté à ses notes, avec la source)'))}">＋</button>` : ''}<button type="button" class="button small secondary danger" data-at-trash="${i.id}" title="Mettre à la corbeille">🗑</button>`}</div></div>
             ${body}
             ${i.media?.length && ext.thumbs ? `<h4>📎 Fichiers</h4>${ext.thumbs('at-' + i.id, i.media)}` : ''}
             ${d.notes ? `<h4>Notes</h4><div class="h-at-notetext">${nl(d.notes)}</div>` : ''}
@@ -579,7 +583,7 @@
     }
     /* ─── 🔗 Venant du logiciel : une fiche, un bloc, un village, une liste, un recueil… ─── */
     const APP_KINDS = {person: ['👤', 'Une fiche (personne)'], person_block: ['🧩', 'Un bloc d’une fiche'], village: ['🏘️', 'La fiche d’un village'], list: ['📋', 'Une liste'],
-        recueil: ['📚', 'Un recueil (ou quelques pages)'], investigation: ['🔍', 'Une enquête'], battue: ['🧭', 'Une battue'], media: ['🖼️', 'Une image, un son, une vidéo'], atelier_project: ['🗂️', 'Un autre projet de l’Atelier'], workbook: ['🧾', 'Un classeur (budget, planning, tableau des sources…)']};
+        recueil: ['📚', 'Un recueil (ou quelques pages)'], investigation: ['🔍', 'Une enquête'], battue: ['🔦', 'Une battue'], media: ['🖼️', 'Une image, un son, une vidéo'], atelier_project: ['🗂️', 'Un autre projet de l’Atelier'], workbook: ['🧾', 'Un classeur (budget, planning, tableau des sources…)'], data: ['📊', 'Une donnée téléchargée']}; // data : heritage-atelier-donnees.js
     // ces sortes se choisissent avec le menu de choix unique (docs/PICKER.md) ; villages, listes, recueils et projets gardent leur recherche
     const APP_PK = {person: 'person', person_block: 'person', investigation: 'investigation', battue: 'battue', media: 'media', workbook: 'workbook'};
     async function appSearch(kind, q) {
@@ -590,8 +594,9 @@
             const lq = q.toLowerCase(); return all.filter(x => !lq || x.label.toLowerCase().includes(lq)).slice(0, 60); }
         return [];
     }
-    function appDialog(item = null) {
-        const v = st(), d = item?.data || {};
+    function appDialog(item = null, preKind = '') {
+        const v = st(), d = item?.data || (preKind ? {kind: preKind} : {});
+        let dataForm = null; // 📊 Une donnée téléchargée : le choix commun (LCNDA_EXT.atelierData)
         let chosen = item ? {key: d.key, label: d.label, extra: d.extra} : null, pages = [];
         const blocks = (A().defaultPersonBlocks || []).filter(([k]) => !['person_exports'].includes(k));
         dialog({eyebrow: 'VENANT DU LOGICIEL', title: item ? 'Modifier' : 'Ajouter un élément du logiciel', wide: true, submitLabel: item ? 'Enregistrer' : 'Ajouter',
@@ -606,6 +611,8 @@
             onOpen: dl => {
                 const kindSel = dl.querySelector('[name=kind]'), q = dl.querySelector('[data-app-q]'), res = dl.querySelector('[data-app-res]'), more = dl.querySelector('[data-app-more]');
                 const drawMore = async () => { const k = kindSel.value;
+                    if (k !== 'data') dataForm = null;
+                    if (k === 'data') { if (!dataForm) dataForm = ext.atelierData?.appForm(more, d.kind === 'data' ? d.ds : null) || null; return; }
                     if (k === 'person_block') more.innerHTML = `<label>Quel bloc ?<select name="sub">${blocks.map(([bk, bl]) => `<option value="${esc(bk)}" ${d.sub === bk ? 'selected' : ''}>${esc(bl)}</option>`).join('')}</select></label>`;
                     else if (k === 'recueil' && chosen) { const rd = await api('recueil', {id: chosen.key}).catch(() => ({pages: []})); pages = rd.pages || [];
                         more.innerHTML = pages.length ? `<fieldset class="h-rc-modes"><legend>Quelles pages ?</legend><label class="checkbox-line"><input type="radio" name="scope" value="all" ${d.page_from ? '' : 'checked'}> Tout le recueil</label>
@@ -620,6 +627,8 @@
                 });
                 pk.addEventListener('picker-change', e => { const it = e.detail.item; chosen = it?.id ? {key: String(it.id), label: it.title, extra: it.short || ''} : null; drawMore(); });
                 const search = async () => {
+                    if (kindSel.value === 'data') { pk.hidden = true; pk.innerHTML = ''; res.hidden = true; res.innerHTML = ''; dl.querySelector('[data-app-qbox]').hidden = true; return; }
+                    res.hidden = false;
                     const pkKind = APP_PK[kindSel.value]; pk.hidden = !pkKind; dl.querySelector('[data-app-qbox]').hidden = !!pkKind;
                     res.hidden = !!pkKind;
                     if (pkKind) { res.innerHTML = ''; const val = chosen && APP_PK[d.kind] === pkKind ? {id: Number(chosen.key), title: chosen.label, short: chosen.extra || ''} : null;
@@ -634,6 +643,14 @@
                 search(); drawMore();
             },
             onSubmit: async form => {
+                if (form.kind.value === 'data') { // 📊 quelques lignes, ou toute la liste filtrée (le texte et la source, jamais le pack)
+                    let x = null; try { x = await dataForm?.collect(); } catch (e) { return window.LCNDA_UI.fail(form.querySelector('[data-atd-rows]') || form.querySelector('[data-app-more]'), e.message); }
+                    if (!x) return window.LCNDA_UI.fail(form.querySelector('[data-ld-ov-q]') || form.querySelector('[data-app-more]'), i18n('Choisis une liste, ou pose une question.'));
+                    const f0 = Object.fromEntries(new FormData(form));
+                    const saved = await post('save_atelier_item', {id: item?.id || 0, project_id: P.project.id, type: 'app', title: (f0.title || '').trim() || x.label, data: {kind: 'data', key: x.key, sub: '', label: x.label, extra: x.extra, ds: x.ds, notes: f0.notes, related: d.related || []}, tags: item?.tags || [],
+                        folder_ids: item ? item.folders : (typeof v.node === 'number' ? [v.node] : []), starred: item ? Number(item.starred) : 0});
+                    v.sel = [Number(saved.result.id)]; toast(item ? 'Enregistré.' : 'Ajouté.'); await reload(); return;
+                }
                 const tplKey = form.wb_tpl?.value || '';
                 if (!chosen && !(form.kind.value === 'workbook' && tplKey)) return window.LCNDA_UI.fail(form.querySelector('.pk') || form.querySelector('[data-app-q]'), 'Choisis dans la liste.');
                 const f = Object.fromEntries(new FormData(form)), kind = f.kind;
@@ -655,6 +672,7 @@
     /** Ouvre dans le logiciel ce que montre un élément « Venant du logiciel ». */
     function openApp(i) {
         const d = i.data || {}, s = S();
+        if (d.kind === 'data') return ext.atelierData?.open({...(d.ds?.cfg || {}), src: d.ds?.list || d.key});
         if (d.kind === 'person' || d.kind === 'person_block') { s.currentPersonId = Number(d.key); A().setModule('personnes');
             if (d.kind === 'person_block' && d.sub) { let n = 0; const t = setInterval(() => { const el = document.querySelector(`[data-pblock="${CSS.escape(d.sub)}"]`); if (el || ++n > 40) { clearInterval(t); if (el) { el.scrollIntoView({behavior: 'smooth', block: 'start'}); el.classList.add('h-flash'); setTimeout(() => el.classList.remove('h-flash'), 2500); } } }, 100); } return; }
         if (d.kind === 'village') { s.listType = 'villages'; s.hVillage = d.key; return A().setModule('listes'); }
@@ -670,6 +688,7 @@
     async function fillAppPreview(i) {
         const box = document.querySelector(`[data-at-apppreview="${i.id}"]`); if (!box) return;
         const d = i.data || {}; let html = '';
+        if (d.kind === 'data') { if (ext.atelierData) await ext.atelierData.preview(box, d.ds); return; } // 📊 vivant : les lignes d'aujourd'hui, ↗ source
         try {
             if (d.kind === 'person' || d.kind === 'person_block') { const r = await api('person', {id: d.key}); const p = r.person || {};
                 const ev = (r.events || []).slice(0, 8);
@@ -689,6 +708,7 @@
     }
     function itemDialog(type, item = null, preset = {}) {
         if (type === 'app') return appDialog(item);
+        if (type === 'app_data') return appDialog(null, 'data'); // « ＋ Ajouter ▾ → 📊 Données téléchargées »
         if (type === 'custom' || !TYPES[type]) return customDialog(item ? item.data?.ctype : type, item);
         const v = st(), d = item?.data || preset.data || {}, isNew = !item;
         const people = P.people || {};
@@ -873,7 +893,7 @@
             else if (i.type === 'note') B.push({k: 'note', t: d.text || i.title});
             else if (i.type === 'quote') { const s = d.source_id ? P.byId.get(Number(d.source_id)) : null; if (s) refsUsed.set(s.id, s); B.push({k: 'quote', t: `« ${d.text || ''} »`, src: s ? `— ${shortCite(s)}${d.page ? ', ' + d.page : ''}` : ''}); }
             else if (i.type === 'reference') { refsUsed.set(i.id, i); B.push({k: 'li', t: cite(i, false)}); }
-            else B.push({k: 'li', t: `${i.title}${d.notes ? ' — ' + String(d.notes).replace(/\n/g, ' ') : ''}`});
+            else B.push({k: 'li', t: `${i.title}${i.type === 'app' && d.kind === 'data' && ext.atelierData ? ' — ' + ext.atelierData.exportText(d.ds) : ''}${d.notes ? ' — ' + String(d.notes).replace(/\n/g, ' ') : ''}`});
         };
         const walk = (parent, depth) => kids(parent).forEach(f => {
             B.push({k: 'h', lvl: Math.min(6, depth + 1), t: f.name}); if (f.notes) B.push({k: 'p', t: f.notes});
@@ -924,7 +944,7 @@
             if (i.type === 'note') return `\n> 📝 ${String(d.text || '').replace(/\n/g, '\n> ')}\n`;
             if (i.type === 'quote') { const s = d.source_id ? P.byId.get(Number(d.source_id)) : null; return `\n> « ${String(d.text || '').replace(/\n/g, '\n> ')} »${s ? `\n> — ${cite(s, false)}${d.page ? ', ' + d.page : ''}` : ''}\n`; }
             if (i.type === 'reference') return `- ${cite(i, 'md')}`;
-            return `- ${ti(i)} ${i.title}${d.notes ? ' — ' + d.notes.replace(/\n/g, ' ') : ''}`;
+            return `- ${ti(i)} ${i.title}${i.type === 'app' && d.kind === 'data' && ext.atelierData ? ' — ' + ext.atelierData.exportText(d.ds) : ''}${d.notes ? ' — ' + d.notes.replace(/\n/g, ' ') : ''}`;
         };
         const walk = (parent, depth) => kids(parent).forEach(f => {
             out.push('', `${'#'.repeat(Math.min(6, depth + 2))} ${f.name}`);
@@ -948,6 +968,27 @@
         ws.querySelector('[data-at-home]').addEventListener('click', () => { v.project = 0; P = null; ext.atelier(++S().workspaceToken); });
         ws.querySelector('[data-at-pedit]').addEventListener('click', () => projectDialog(P.project, P.kinds));
         ws.querySelector('[data-at-export]').addEventListener('click', exportDialog);
+        // ☑ cocher plusieurs éléments : la barre de sélection commune (app-selection.js), en accord avec le choix au clic (v.sel)
+        const SB = ext.selectionBar, tb = ws.querySelector('.h-at-table tbody');
+        if (SB && tb) {
+            const trash = v.node === 'trash', inFolder = typeof v.node === 'number', after = async (a) => { if (['trash', 'delete', 'restore', 'remove'].includes(a)) { v.sel = []; renderProject(S().workspaceToken, true); } };
+            const run = a => async (ids, extra = {}) => { await act(a, ids.map(Number), {folder_id: inFolder ? v.node : 0, ...extra}); await after(a); };
+            let ready = false;
+            const bar = SB({host: tb, rowSelector: 'tr[data-at-item]', idOf: r => r.dataset.atItem, what: [i18n('élément coché'), i18n('éléments cochés')], place: ws.querySelector('[data-at-sortbar]') || tb.closest('table'),
+                // une case : le choix suit, seul le panneau de droite est redessiné (la barre garde Maj+clic pour une suite)
+                onChange: ids => { if (!ready) return; const n = ids.map(Number); if (n.length === v.sel.length && n.every(x => v.sel.includes(x))) return; v.sel = n; const dt = ws.querySelector('.h-at-detail'); if (dt) { dt.innerHTML = detailView(); A().bindTableLinks?.(); } },
+                actions: trash ? [
+                    {id: 'restore', icon: '↩', label: i18n('Restaurer'), edit: true, run: ids => run('restore')(ids)},
+                    {id: 'delete', icon: '🗑', label: i18n('Supprimer définitivement'), edit: true, danger: true, run: async ids => { if (!await A().confirmBox(i18n('Supprimer définitivement {n} ?', {n: plural(ids.length, 'élément', 'éléments')}), {title: 'Supprimer définitivement', okLabel: 'Supprimer définitivement'})) return; await run('delete')(ids); }},
+                ] : [
+                    SB.choiceAction({id: 'file', icon: '📁', label: i18n('Ranger dans'), field: i18n('Dossier'), options: () => { const d = document.createElement('select'); d.innerHTML = folderOptions(); return [...d.options].map(o => [o.value, o.textContent]); }, run: async (ids, f) => { if (await act('add', ids.map(Number), {folder_id: Number(f)})) toast('Rangé.'); }}),
+                    {id: 'tag', icon: '🏷', label: i18n('Étiquette'), edit: true, run: async ids => { const tg = await A().askText({title: 'Étiquette', message: 'Étiquette à ajouter aux éléments choisis :', okLabel: 'Ajouter'}); if (tg?.trim()) await act('tag', ids.map(Number), {tag: tg.trim()}); }},
+                    {id: 'star', icon: '⭐', label: i18n('Favoris'), edit: true, run: ids => run('star')(ids)},
+                    ...(inFolder ? [{id: 'remove', icon: '−', label: i18n('Retirer de ce dossier'), edit: true, run: ids => run('remove')(ids)}] : []),
+                    {id: 'trash', icon: '🗑', label: i18n('Corbeille'), edit: true, danger: true, run: ids => run('trash')(ids)},
+                ]});
+            bar?.set(v.sel); ready = true;
+        }
         ws.addEventListener('click', async e => {
             const t = e.target;
             const q = sel => t.closest(sel);
@@ -960,6 +1001,7 @@
             if (q('[data-at-tagclear]')) { v.tags = []; return renderProject(S().workspaceToken, true); }
             if (q('[data-at-settings]')) return openSettings();
             if (q('[data-at-addmenu]')) { const m = q('.h-at-addmenu').querySelector('.h-at-menu'); m.hidden = !m.hidden; return; }
+            if (q('[data-at-take]')) { ws.querySelector('.h-at-menu')?.setAttribute('hidden', ''); return ext.connexions?.openTake?.(); } // 🧺 heritage-connexions.js
             if (q('[data-at-library]')) { ws.querySelector('.h-at-menu')?.setAttribute('hidden', ''); return ext.pickLibraryForAtelier?.(P.project.id, typeof v.node === 'number' ? v.node : 0, () => reload()); }
             if (q('[data-at-add]')) { ws.querySelector('.h-at-menu')?.setAttribute('hidden', ''); return itemDialog(q('[data-at-add]').dataset.atAdd); }
             if (q('[data-at-import]')) {
@@ -973,6 +1015,7 @@
             if (q('[data-at-wov]')) { setWidgetsInOverview(P.project.id, q('[data-at-wov]').checked); return; }
             if (q('[data-at-appopen]')) return openApp(P.byId.get(Number(q('[data-at-appopen]').dataset.atAppopen)));
             if (q('[data-at-edit]')) { const i = P.byId.get(Number(q('[data-at-edit]').dataset.atEdit)); return itemDialog(i.type, i); }
+            if (q('[data-at-takeinto]')) { st().sel = [Number(q('[data-at-takeinto]').dataset.atTakeinto)]; return ext.connexions?.openTake(); } // 📥 dans CET élément (ext.atelierHere : l'élément choisi)
             if (q('[data-at-write]')) { const i = P.byId.get(Number(q('[data-at-write]').dataset.atWrite)); return itemDialog(i.type, i); }
             if (q('[data-at-dup]')) { const i = P.byId.get(Number(q('[data-at-dup]').dataset.atDup)); try { const r = await post('save_atelier_item', {project_id: P.project.id, type: i.type, title: i.title + ' (copie)', data: i.data, tags: i.tags, folder_ids: i.folders}); v.sel = [Number(r.result.id)]; toast('Dupliqué (sans les fichiers joints).'); await reload(); } catch (error) { toast(error.message, 'error'); } return; }
             if (q('[data-at-copy]')) { const i = P.byId.get(Number(q('[data-at-copy]').dataset.atCopy)); try { await navigator.clipboard.writeText(cite(i, false)); toast('Référence copiée.'); } catch (_) { toast(cite(i, false)); } return; }
@@ -982,14 +1025,6 @@
             if (q('[data-at-unfile]')) return act('remove', v.sel, {folder_id: Number(q('[data-at-unfile]').dataset.atUnfile)});
             if (q('[data-at-unrel]')) { const i = P.byId.get(v.sel[0]); const rel = (i.data.related || []).filter(x => Number(x) !== Number(q('[data-at-unrel]').dataset.atUnrel)); return saveData(i, {related: rel}); }
             if (q('[data-at-emptytrash]')) { const ids = P.items.filter(i => Number(i.trashed)).map(i => Number(i.id)); if (await A().confirmBox(i18n('Supprimer définitivement {n} ?', {n: plural(ids.length, 'élément', 'éléments')}), {title: 'Vider la corbeille', okLabel: 'Supprimer définitivement'})) { await act('delete', ids); v.sel = []; } return; }
-            if (q('[data-at-unsel]')) { v.sel = []; return renderProject(S().workspaceToken, true); }
-            if (q('[data-at-bulk]')) {
-                const a = q('[data-at-bulk]').dataset.atBulk;
-                if (a === 'tag') { const tg = await A().askText({title: 'Étiquette', message: 'Étiquette à ajouter aux éléments choisis :', okLabel: 'Ajouter'}); if (tg?.trim()) await act('tag', v.sel, {tag: tg.trim()}); return; }
-                if (a === 'delete' && !await A().confirmBox(i18n('Supprimer définitivement {n} ?', {n: plural(v.sel.length, 'élément', 'éléments')}), {title: 'Supprimer définitivement', okLabel: 'Supprimer définitivement'})) return;
-                await act(a, v.sel, {folder_id: typeof v.node === 'number' ? v.node : 0}); if (['trash', 'delete', 'restore', 'remove'].includes(a)) { v.sel = []; renderProject(S().workspaceToken, true); }
-                return;
-            }
             if (q('[data-at-copybib]')) { const txt = ws.querySelector('[data-at-biblio]').innerText; try { await navigator.clipboard.writeText(txt); toast('Bibliographie copiée.'); } catch (_) { toast('Copie impossible : sélectionne le texte à la main.', 'error'); } return; }
             if (q('[data-at-printbib]')) { const bib = `<!doctype html><meta charset="utf-8"><title>Bibliographie</title><style>body{font:12pt/1.5 Georgia,serif;max-width:46rem;margin:2rem auto}li{margin:.3rem 0;list-style:none;text-indent:-1.5rem;padding-left:1.5rem}button{all:unset}</style><h1>${esc(P.project.title)}</h1>${ws.querySelector('[data-at-biblio]').innerHTML}`; if (window.LCNDA_UI?.openPrintDialog) { window.LCNDA_UI.openPrintDialog({title: 'Bibliographie', html: bib, photos: false}); return; } const w = window.open('', '_blank'); if (!w) return; w.document.write(bib); w.document.close(); w.print(); return; } // K13
             if (q('[data-at-exp]')) { const x = q('[data-at-exp]').dataset.atExp, refs = live().filter(i => i.type === 'reference'); ext.downloadText('references.' + x, x === 'bib' ? toBibtex(refs) : toRis(refs), 'text/plain'); return; }
@@ -1012,14 +1047,13 @@
             if (t.matches('[data-at-q]')) { v.q = t.value.trim(); if (SPECIAL_VIEWS.includes(v.node)) v.node = 'all'; return renderProject(S().workspaceToken, true); }
             if (t.matches('[data-at-biblioscope]')) { v.biblioScope = Number(t.value) || 0; return renderProject(S().workspaceToken, true); }
             if (t.matches('[data-at-taskdone]')) { const i = P.byId.get(Number(t.dataset.atTaskdone)); return saveData(i, {done: t.checked ? 1 : 0}); }
-            if (t.matches('[data-at-bulkfolder]') && t.value) { if (await act('add', v.sel, {folder_id: Number(t.value)})) toast('Rangé.'); return; }
             if (t.matches('[data-at-file]') && t.value) return act('add', v.sel, {folder_id: Number(t.value)});
             if (t.matches('[data-at-addtag]') && t.value.trim()) return act('tag', v.sel, {tag: t.value.trim()});
             if (t.matches('[data-at-relq]') && t.value) { const m = t.value.match(/#(\d+)$/); if (!m) return; const i = P.byId.get(v.sel[0]); return saveData(i, {related: [...new Set([...(i.data.related || []), Number(m[1])])]}); }
             if (t.matches('[data-at-fnotes]')) { try { await post('save_atelier_folder', {id: v.node, notes: t.value}); P.fById.get(v.node).notes = t.value; toast('Notes du dossier enregistrées.'); } catch (error) { toast(error.message, 'error'); } }
         });
         ws.querySelector('[data-at-q]')?.addEventListener('search', e => { v.q = e.target.value.trim(); renderProject(S().workspaceToken, true); });
-        ws.querySelector('[data-at-tagq]')?.addEventListener('input', e => { const q = e.target.value.toLowerCase(); ws.querySelectorAll('[data-at-tag]').forEach(b => { b.hidden = q && !b.dataset.atTag.toLowerCase().includes(q); }); });
+        ws.querySelector('[data-at-tagq]')?.addEventListener('input', e => { const q = e.target.value.toLowerCase(); ws.querySelectorAll('[data-at-tag]').forEach(b => { b.hidden = !!q && !(window.LCNDA_UI?.listMatch?.text || ((q, ...h) => h.join(' ').toLowerCase().includes(String(q).toLowerCase())))(q, b.dataset.atTag); }); });
         ws.querySelector('[data-at-addtag]')?.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); e.target.dispatchEvent(new Event('change', {bubbles: true})); } });
         // Glisser-déposer : éléments → dossier ; dossier → dossier (ou racine)
         let drag = null;

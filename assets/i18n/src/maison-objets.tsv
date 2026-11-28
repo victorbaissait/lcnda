@@ -1,0 +1,710 @@
+fr ¦ en ¦ es ¦ de ¦ it ¦ pt ¦ pl ¦ nl
+# 🏠 Plan de maison : les objets en plus, les styles, le choix « 🎨 Style » (heritage-house-objets.js, heritage-house-lib.js)
+Meubles de style ¦ Style furniture ¦ Muebles de estilo ¦ Stilmöbel ¦ Mobili in stile ¦ Móveis de estilo ¦ Meble stylowe ¦ Stijlmeubels
+🎨 Tous les styles ¦ 🎨 All styles ¦ 🎨 Todos los estilos ¦ 🎨 Alle Stile ¦ 🎨 Tutti gli stili ¦ 🎨 Todos os estilos ¦ 🎨 Wszystkie style ¦ 🎨 Alle stijlen
+Sans les meubles de style ¦ Without style furniture ¦ Sin los muebles de estilo ¦ Ohne Stilmöbel ¦ Senza i mobili in stile ¦ Sem os móveis de estilo ¦ Bez mebli stylowych ¦ Zonder stijlmeubels
+D’ailleurs ¦ From elsewhere ¦ De otros lugares ¦ Aus aller Welt ¦ D’altrove ¦ De outros lugares ¦ Z innych stron ¦ Van elders
+Modernes ¦ Modern ¦ Modernos ¦ Modern ¦ Moderni ¦ Modernos ¦ Nowoczesne ¦ Modern
+Rien dans le style « {s} » ici : choisis « 🎨 Tous les styles ». ¦ Nothing in the “{s}” style here: choose “🎨 All styles”. ¦ Aquí no hay nada del estilo «{s}»: elige «🎨 Todos los estilos». ¦ Hier gibt es nichts im Stil „{s}“: wähle „🎨 Alle Stile“. ¦ Qui non c’è niente nello stile «{s}»: scegli «🎨 Tutti gli stili». ¦ Nada no estilo «{s}» aqui: escolhe «🎨 Todos os estilos». ¦ Brak tu czegokolwiek w stylu „{s}”: wybierz „🎨 Wszystkie style”. ¦ Niets in de stijl ‘{s}’ hier: kies ‘🎨 Alle stijlen’.
+Louis XIII ¦ Louis XIII ¦ Luis XIII ¦ Louis-treize ¦ Luigi XIII ¦ Luís XIII ¦ Ludwik XIII ¦ Lodewijk XIII
+Louis XIV ¦ Louis XIV ¦ Luis XIV ¦ Louis-quatorze ¦ Luigi XIV ¦ Luís XIV ¦ Ludwik XIV ¦ Lodewijk XIV
+Régence ¦ Régence ¦ Regencia ¦ Régence ¦ Reggenza ¦ Regência ¦ Regencja ¦ Régence
+Louis XV ¦ Louis XV ¦ Luis XV ¦ Louis-quinze ¦ Luigi XV ¦ Luís XV ¦ Ludwik XV ¦ Lodewijk XV
+Louis XVI ¦ Louis XVI ¦ Luis XVI ¦ Louis-seize ¦ Luigi XVI ¦ Luís XVI ¦ Ludwik XVI ¦ Lodewijk XVI
+Directoire ¦ Directoire ¦ Directorio ¦ Directoire ¦ Direttorio ¦ Diretório ¦ Dyrektoriat ¦ Directoire
+Empire ¦ Empire ¦ Imperio ¦ Empire ¦ Impero ¦ Império ¦ Empire ¦ Empire
+Restauration ¦ Restoration ¦ Restauración ¦ Restauration ¦ Restaurazione ¦ Restauração ¦ Restauracja ¦ Restauratie
+Charles X ¦ Charles X ¦ Carlos X ¦ Charles X ¦ Carlo X ¦ Carlos X ¦ Karol X ¦ Karel X
+Louis-Philippe ¦ Louis-Philippe ¦ Luis Felipe ¦ Louis-Philippe ¦ Luigi Filippo ¦ Luís Filipe ¦ Ludwik Filip ¦ Louis-Philippe
+Napoléon III ¦ Napoleon III ¦ Napoleón III ¦ Napoleon III. ¦ Napoleone III ¦ Napoleão III ¦ Napoleon III ¦ Napoleon III
+Art nouveau ¦ Art Nouveau ¦ Art nouveau ¦ Jugendstil ¦ Liberty ¦ Arte Nova ¦ Secesja ¦ Art nouveau
+Art déco ¦ Art Deco ¦ Art déco ¦ Art déco ¦ Art déco ¦ Art déco ¦ Art déco ¦ Art deco
+Henri II ¦ Henri II ¦ Enrique II ¦ Henri II ¦ Enrico II ¦ Henrique II ¦ Henryk II ¦ Hendrik II
+Renaissance ¦ Renaissance ¦ Renacimiento ¦ Renaissance ¦ Rinascimento ¦ Renascença ¦ Renesans ¦ Renaissance
+Biedermeier ¦ Biedermeier ¦ Biedermeier ¦ Biedermeier ¦ Biedermeier ¦ Biedermeier ¦ Biedermeier ¦ Biedermeier
+victorien ¦ Victorian ¦ victoriano ¦ viktorianisch ¦ vittoriano ¦ vitoriano ¦ wiktoriański ¦ Victoriaans
+Chippendale ¦ Chippendale ¦ Chippendale ¦ Chippendale ¦ Chippendale ¦ Chippendale ¦ Chippendale ¦ Chippendale
+Queen Anne ¦ Queen Anne ¦ Queen Anne ¦ Queen Anne ¦ Queen Anne ¦ Queen Anne ¦ Queen Anne ¦ Queen Anne
+gustavien ¦ Gustavian ¦ gustaviano ¦ gustavianisch ¦ gustaviano ¦ gustaviano ¦ gustawiański ¦ Gustaviaans
+shaker ¦ Shaker ¦ shaker ¦ Shaker ¦ shaker ¦ shaker ¦ shakerski ¦ Shaker
+colonial ¦ Colonial ¦ colonial ¦ kolonial ¦ coloniale ¦ colonial ¦ kolonialny ¦ Koloniaal
+marocain ¦ Moroccan ¦ marroquí ¦ marokkanisch ¦ marocchino ¦ marroquino ¦ marokański ¦ Marokkaans
+japonais ¦ Japanese ¦ japonés ¦ japanisch ¦ giapponese ¦ japonês ¦ japoński ¦ Japans
+chinois laqué ¦ Chinese lacquer ¦ lacado chino ¦ chinesisch lackiert ¦ laccato cinese ¦ lacado chinês ¦ chiński lakierowany ¦ Chinees gelakt
+Thonet ¦ Thonet ¦ Thonet ¦ Thonet ¦ Thonet ¦ Thonet ¦ Thonet ¦ Thonet
+vénitien ¦ Venetian ¦ veneciano ¦ venezianisch ¦ veneziano ¦ veneziano ¦ wenecki ¦ Venetiaans
+normand ¦ Norman ¦ normando ¦ normannisch ¦ normanno ¦ normando ¦ normandzki ¦ Normandisch
+breton ¦ Breton ¦ bretón ¦ bretonisch ¦ bretone ¦ bretão ¦ bretoński ¦ Bretons
+basque ¦ Basque ¦ vasco ¦ baskisch ¦ basco ¦ basco ¦ baskijski ¦ Baskisch
+alsacien ¦ Alsatian ¦ alsaciano ¦ elsässisch ¦ alsaziano ¦ alsaciano ¦ alzacki ¦ Elzasser
+savoyard ¦ Savoyard ¦ saboyano ¦ savoyisch ¦ savoiardo ¦ saboiano ¦ sabaudzki ¦ Savoyaards
+auvergnat ¦ Auvergnat ¦ auvernés ¦ auvergnatisch ¦ alverniate ¦ auvernês ¦ owernijski ¦ Auvergnaats
+bressan ¦ Bresse ¦ de Bresse ¦ aus der Bresse ¦ della Bresse ¦ de Bresse ¦ z Bresse ¦ Uit de Bresse
+lorrain ¦ Lorraine ¦ loreno ¦ lothringisch ¦ lorenese ¦ lorenês ¦ lotaryński ¦ Lotharings
+landais ¦ Landes ¦ landés ¦ aus den Landes ¦ delle Landes ¦ das Landes ¦ landyjski ¦ Uit de Landes
+vendéen ¦ Vendée ¦ vendeano ¦ aus der Vendée ¦ vandeano ¦ da Vendeia ¦ wandejski ¦ Uit de Vendée
+limousin ¦ Limousin ¦ lemosín ¦ limousinisch ¦ limosino ¦ limusino ¦ limuzyński ¦ Limousins
+bourguignon ¦ Burgundian ¦ borgoñón ¦ burgundisch ¦ borgognone ¦ borgonhês ¦ burgundzki ¦ Bourgondisch
+catalan ¦ Catalan ¦ catalán ¦ katalanisch ¦ catalano ¦ catalão ¦ kataloński ¦ Catalaans
+corse ¦ Corsican ¦ corso ¦ korsisch ¦ corso ¦ corso ¦ korsykański ¦ Corsicaans
+champenois ¦ Champagne ¦ de Champaña ¦ aus der Champagne ¦ della Champagne ¦ de Champagne ¦ szampański ¦ Uit de Champagne
+flamand ¦ Flemish ¦ flamenco ¦ flämisch ¦ fiammingo ¦ flamengo ¦ flamandzki ¦ Vlaams
+franc-comtois ¦ Franc-Comtois ¦ del Franco Condado ¦ aus der Franche-Comté ¦ della Franca Contea ¦ do Franco-Condado ¦ z Franche-Comté ¦ Uit de Franche-Comté
+béarnais ¦ Béarnais ¦ bearnés ¦ béarnais ¦ bearnese ¦ bearnês ¦ bearneński ¦ Béarnees
+dauphinois ¦ Dauphinois ¦ delfinés ¦ aus der Dauphiné ¦ delfinatese ¦ delfinês ¦ z Delfinatu ¦ Uit de Dauphiné
+picard ¦ Picard ¦ picardo ¦ pikardisch ¦ piccardo ¦ picardo ¦ pikardyjski ¦ Picardisch
+gascon ¦ Gascon ¦ gascón ¦ gascognisch ¦ guascone ¦ gascão ¦ gaskoński ¦ Gascons
+années 1930 ¦ 1930s ¦ años 30 ¦ 1930er-Jahre ¦ anni ’30 ¦ anos 30 ¦ lata 30. ¦ Jaren 30
+années 1950 ¦ 1950s ¦ años 50 ¦ 1950er-Jahre ¦ anni ’50 ¦ anos 50 ¦ lata 50. ¦ Jaren 50
+années 1960 ¦ 1960s ¦ años 60 ¦ 1960er-Jahre ¦ anni ’60 ¦ anos 60 ¦ lata 60. ¦ Jaren 60
+années 1970 ¦ 1970s ¦ años 70 ¦ 1970er-Jahre ¦ anni ’70 ¦ anos 70 ¦ lata 70. ¦ Jaren 70
+années 1980 ¦ 1980s ¦ años 80 ¦ 1980er-Jahre ¦ anni ’80 ¦ anos 80 ¦ lata 80. ¦ Jaren 80
+scandinave ¦ Scandinavian ¦ escandinavo ¦ skandinavisch ¦ scandinavo ¦ escandinavo ¦ skandynawski ¦ Scandinavisch
+industriel ¦ Industrial ¦ industrial ¦ Industrial ¦ industriale ¦ industrial ¦ industrialny ¦ Industrieel
+contemporain ¦ Contemporary ¦ contemporáneo ¦ zeitgenössisch ¦ contemporaneo ¦ contemporâneo ¦ współczesny ¦ Hedendaags
+laqué blanc ¦ White lacquered ¦ lacado en blanco ¦ weiß lackiert ¦ laccato bianco ¦ lacado a branco ¦ lakierowany na biało ¦ Wit gelakt
+en pin ¦ Pine ¦ de pino ¦ Kiefer ¦ in pino ¦ de pinho ¦ sosnowy ¦ Grenen
+en chêne clair ¦ Light oak ¦ de roble claro ¦ helle Eiche ¦ in rovere chiaro ¦ de carvalho claro ¦ z jasnego dębu ¦ Licht eiken
+en merisier ¦ Cherry wood ¦ de cerezo ¦ Kirschbaum ¦ in ciliegio ¦ de cerejeira ¦ czereśniowy ¦ Kersenhout
+en noyer ¦ Walnut ¦ de nogal ¦ Nussbaum ¦ in noce ¦ de nogueira ¦ orzechowy ¦ Notenhout
+en acajou ¦ Mahogany ¦ de caoba ¦ Mahagoni ¦ in mogano ¦ de mogno ¦ mahoniowy ¦ Mahonie
+en rotin ¦ Rattan ¦ de ratán ¦ Rattan ¦ in rattan ¦ de rotim ¦ rattanowy ¦ Rotan
+en bambou ¦ Bamboo ¦ de bambú ¦ Bambus ¦ in bambù ¦ de bambu ¦ bambusowy ¦ Bamboe
+en métal ¦ Metal ¦ de metal ¦ Metall ¦ in metallo ¦ de metal ¦ metalowy ¦ Metaal
+patiné (shabby chic) ¦ Distressed (shabby chic) ¦ envejecido (shabby chic) ¦ patiniert (Shabby Chic) ¦ patinato (shabby chic) ¦ envelhecido (shabby chic) ¦ patynowany (shabby chic) ¦ Gepatineerd (shabby chic)
+bohème ¦ Boho ¦ bohemio ¦ Boho ¦ boho ¦ boho ¦ boho ¦ Boho
+en teck ¦ Teak ¦ de teca ¦ Teak ¦ in teak ¦ de teca ¦ tekowy ¦ Teak
+Chiffonnier ¦ Lingerie chest ¦ Sifonier ¦ Wäschekommode ¦ Settimanale ¦ Cómoda alta estreita ¦ Szyfoniera ¦ Ladekast
+Table de salle à manger ¦ Dining table ¦ Mesa de comedor ¦ Esstisch ¦ Tavolo da pranzo ¦ Mesa de jantar ¦ Stół do jadalni ¦ Eettafel
+Pendule ¦ Mantel clock ¦ Reloj de sobremesa ¦ Kaminuhr ¦ Pendola da camino ¦ Relógio de lareira ¦ Zegar kominkowy ¦ Pendule
+Bonnetière ¦ Bonnet cupboard ¦ Armario ropero estrecho ¦ Haubenschrank ¦ Armadietto a un’anta ¦ Armário de touca ¦ Szafa na bieliznę ¦ Linnenkast
+Desserte ¦ Sideboard server ¦ Aparador auxiliar ¦ Anrichte ¦ Carrello servitore ¦ Aparador auxiliar ¦ Kredens pomocniczy ¦ Dientafel
+Buffet de cuisine ¦ Kitchen dresser ¦ Alacena de cocina ¦ Küchenbuffet ¦ Credenza da cucina ¦ Guarda-louça de cozinha ¦ Kredens kuchenny ¦ Keukenbuffet
+Table de toilette ¦ Washstand ¦ Tocador con lavamanos ¦ Waschtisch ¦ Toeletta con lavabo ¦ Toucador com lavatório ¦ Toaletka z miednicą ¦ Wastafelmeubel
+Horloge de parquet ¦ Grandfather clock ¦ Reloj de pie ¦ Standuhr ¦ Orologio a pendolo ¦ Relógio de pé alto ¦ Zegar stojący ¦ Staande klok
+Pommier ¦ Apple tree ¦ Manzano ¦ Apfelbaum ¦ Melo ¦ Macieira ¦ Jabłoń ¦ Appelboom
+Poirier ¦ Pear tree ¦ Peral ¦ Birnbaum ¦ Pero ¦ Pereira ¦ Grusza ¦ Perenboom
+Cerisier ¦ Cherry tree ¦ Cerezo ¦ Kirschbaum ¦ Ciliegio ¦ Cerejeira ¦ Wiśnia ¦ Kersenboom
+Prunier ¦ Plum tree ¦ Ciruelo ¦ Pflaumenbaum ¦ Susino ¦ Ameixeira ¦ Śliwa ¦ Pruimenboom
+Pêcher ¦ Peach tree ¦ Melocotonero ¦ Pfirsichbaum ¦ Pesco ¦ Pessegueiro ¦ Brzoskwinia ¦ Perzikboom
+Abricotier ¦ Apricot tree ¦ Albaricoquero ¦ Aprikosenbaum ¦ Albicocco ¦ Damasqueiro ¦ Morela ¦ Abrikozenboom
+Cognassier ¦ Quince tree ¦ Membrillero ¦ Quittenbaum ¦ Cotogno ¦ Marmeleiro ¦ Pigwa ¦ Kweepeer
+Châtaignier ¦ Chestnut tree ¦ Castaño ¦ Esskastanie ¦ Castagno ¦ Castanheiro ¦ Kasztan jadalny ¦ Tamme kastanje
+Figuier ¦ Fig tree ¦ Higuera ¦ Feigenbaum ¦ Fico ¦ Figueira ¦ Figowiec ¦ Vijgenboom
+Olivier ¦ Olive tree ¦ Olivo ¦ Olivenbaum ¦ Olivo ¦ Oliveira ¦ Drzewo oliwne ¦ Olijfboom
+Citronnier en bac ¦ Lemon tree in a planter ¦ Limonero en maceta ¦ Zitronenbaum im Kübel ¦ Limone in vaso ¦ Limoeiro em vaso ¦ Cytryna w donicy ¦ Citroenboompje in bak
+Oranger en bac ¦ Orange tree in a planter ¦ Naranjo en maceta ¦ Orangenbaum im Kübel ¦ Arancio in vaso ¦ Laranjeira em vaso ¦ Pomarańcza w donicy ¦ Sinaasappelboompje in bak
+Noisetier ¦ Hazel tree ¦ Avellano ¦ Haselnussstrauch ¦ Nocciolo ¦ Aveleira ¦ Leszczyna ¦ Hazelaar
+Mûrier ¦ Mulberry tree ¦ Morera ¦ Maulbeerbaum ¦ Gelso ¦ Amoreira ¦ Morwa ¦ Moerbeiboom
+Tilleul ¦ Linden tree ¦ Tilo ¦ Linde ¦ Tiglio ¦ Tília ¦ Lipa ¦ Linde
+Platane ¦ Plane tree ¦ Plátano de sombra ¦ Platane ¦ Platano ¦ Plátano ¦ Platan ¦ Plataan
+Marronnier ¦ Horse chestnut ¦ Castaño de Indias ¦ Rosskastanie ¦ Ippocastano ¦ Castanheiro-da-índia ¦ Kasztanowiec ¦ Paardenkastanje
+Hêtre ¦ Beech ¦ Haya ¦ Buche ¦ Faggio ¦ Faia ¦ Buk ¦ Beuk
+Frêne ¦ Ash tree ¦ Fresno ¦ Esche ¦ Frassino ¦ Freixo ¦ Jesion ¦ Es
+Saule pleureur ¦ Weeping willow ¦ Sauce llorón ¦ Trauerweide ¦ Salice piangente ¦ Salgueiro-chorão ¦ Wierzba płacząca ¦ Treurwilg
+Peuplier ¦ Poplar ¦ Álamo ¦ Pappel ¦ Pioppo ¦ Choupo ¦ Topola ¦ Populier
+Érable ¦ Maple ¦ Arce ¦ Ahorn ¦ Acero ¦ Ácer ¦ Klon ¦ Esdoorn
+Magnolia ¦ Magnolia ¦ Magnolio ¦ Magnolie ¦ Magnolia ¦ Magnólia ¦ Magnolia ¦ Magnolia
+Lilas ¦ Lilac ¦ Lila ¦ Flieder ¦ Lillà ¦ Lilás ¦ Bez ¦ Sering
+Cerisier du Japon ¦ Japanese cherry ¦ Cerezo japonés ¦ Japanische Kirsche ¦ Ciliegio giapponese ¦ Cerejeira japonesa ¦ Wiśnia japońska ¦ Japanse sierkers
+Orme ¦ Elm ¦ Olmo ¦ Ulme ¦ Olmo ¦ Ulmeiro ¦ Wiąz ¦ Iep
+Acacia ¦ Acacia ¦ Acacia ¦ Akazie ¦ Acacia ¦ Acácia ¦ Akacja ¦ Acacia
+Charme ¦ Hornbeam ¦ Carpe ¦ Hainbuche ¦ Carpino ¦ Carpa ¦ Grab ¦ Haagbeuk
+Sureau ¦ Elder ¦ Saúco ¦ Holunder ¦ Sambuco ¦ Sabugueiro ¦ Bez czarny ¦ Vlier
+Tilleul de la Liberté ¦ Liberty tree (linden) ¦ Tilo de la Libertad ¦ Freiheitslinde ¦ Tiglio della Libertà ¦ Tília da Liberdade ¦ Lipa Wolności ¦ Vrijheidslinde
+Sapin ¦ Fir tree ¦ Abeto ¦ Tanne ¦ Abete ¦ Abeto ¦ Jodła ¦ Zilverspar
+Épicéa ¦ Spruce ¦ Pícea ¦ Fichte ¦ Abete rosso ¦ Espruce ¦ Świerk ¦ Fijnspar
+Pin parasol ¦ Umbrella pine ¦ Pino piñonero ¦ Pinie ¦ Pino domestico ¦ Pinheiro-manso ¦ Sosna pinia ¦ Parasoldenneboom
+Pin sylvestre ¦ Scots pine ¦ Pino silvestre ¦ Waldkiefer ¦ Pino silvestre ¦ Pinheiro-silvestre ¦ Sosna zwyczajna ¦ Grove den
+Cyprès ¦ Cypress ¦ Ciprés ¦ Zypresse ¦ Cipresso ¦ Cipreste ¦ Cyprys ¦ Cipres
+If ¦ Yew ¦ Tejo ¦ Eibe ¦ Tasso ¦ Teixo ¦ Cis ¦ Taxus
+Cèdre ¦ Cedar ¦ Cedro ¦ Zeder ¦ Cedro ¦ Cedro ¦ Cedr ¦ Ceder
+Thuya ¦ Thuja ¦ Tuya ¦ Thuja ¦ Tuia ¦ Tuia ¦ Żywotnik ¦ Thuja
+Rosier ¦ Rosebush ¦ Rosal ¦ Rosenstock ¦ Rosaio ¦ Roseira ¦ Krzew róży ¦ Rozenstruik
+Rosier grimpant ¦ Climbing rose ¦ Rosal trepador ¦ Kletterrose ¦ Rosa rampicante ¦ Roseira trepadeira ¦ Róża pnąca ¦ Klimroos
+Hortensia ¦ Hydrangea ¦ Hortensia ¦ Hortensie ¦ Ortensia ¦ Hortênsia ¦ Hortensja ¦ Hortensia
+Lavande ¦ Lavender ¦ Lavanda ¦ Lavendel ¦ Lavanda ¦ Alfazema ¦ Lawenda ¦ Lavendel
+Romarin ¦ Rosemary ¦ Romero ¦ Rosmarin ¦ Rosmarino ¦ Alecrim ¦ Rozmaryn ¦ Rozemarijn
+Thym ¦ Thyme ¦ Tomillo ¦ Thymian ¦ Timo ¦ Tomilho ¦ Tymianek ¦ Tijm
+Buis taillé en boule ¦ Boxwood ball ¦ Boj recortado en bola ¦ Buchskugel ¦ Bosso potato a palla ¦ Buxo podado em bola ¦ Bukszpan formowany w kulę ¦ Buxusbol
+Forsythia ¦ Forsythia ¦ Forsythia ¦ Forsythie ¦ Forsizia ¦ Forsítia ¦ Forsycja ¦ Forsythia
+Laurier-sauce ¦ Bay laurel ¦ Laurel ¦ Lorbeer ¦ Alloro ¦ Loureiro ¦ Wawrzyn szlachetny ¦ Laurier
+Laurier-rose ¦ Oleander ¦ Adelfa ¦ Oleander ¦ Oleandro ¦ Loendro ¦ Oleander ¦ Oleander
+Buddleia ¦ Buddleia ¦ Budleya ¦ Sommerflieder ¦ Buddleja ¦ Budleia ¦ Budleja ¦ Vlinderstruik
+Camélia ¦ Camellia ¦ Camelia ¦ Kamelie ¦ Camelia ¦ Camélia ¦ Kamelia ¦ Camelia
+Rhododendron ¦ Rhododendron ¦ Rododendro ¦ Rhododendron ¦ Rododendro ¦ Rododendro ¦ Różanecznik ¦ Rododendron
+Azalée ¦ Azalea ¦ Azalea ¦ Azalee ¦ Azalea ¦ Azálea ¦ Azalia ¦ Azalea
+Houx ¦ Holly ¦ Acebo ¦ Stechpalme ¦ Agrifoglio ¦ Azevinho ¦ Ostrokrzew ¦ Hulst
+Cassissier ¦ Blackcurrant bush ¦ Grosellero negro ¦ Schwarze Johannisbeere ¦ Ribes nero ¦ Groselheira-negra ¦ Czarna porzeczka ¦ Zwarte bes
+Groseillier ¦ Redcurrant bush ¦ Grosellero ¦ Rote Johannisbeere ¦ Ribes rosso ¦ Groselheira ¦ Porzeczka ¦ Aalbes
+Framboisier ¦ Raspberry bush ¦ Frambueso ¦ Himbeerstrauch ¦ Lampone ¦ Framboeseira ¦ Malina ¦ Framboos
+Pied de vigne ¦ Grapevine ¦ Cepa de vid ¦ Weinstock ¦ Vite ¦ Pé de videira ¦ Krzew winorośli ¦ Wijnstok
+Bambou ¦ Bamboo ¦ Bambú ¦ Bambus ¦ Bambù ¦ Bambu ¦ Bambus ¦ Bamboe
+Bananier ¦ Banana tree ¦ Platanera ¦ Bananenstaude ¦ Banano ¦ Bananeira ¦ Bananowiec ¦ Bananenplant
+Palmier ¦ Palm tree ¦ Palmera ¦ Palme ¦ Palma ¦ Palmeira ¦ Palma ¦ Palm
+Herbes de la pampa ¦ Pampas grass ¦ Hierba de las pampas ¦ Pampasgras ¦ Erba della pampa ¦ Erva-das-pampas ¦ Trawa pampasowa ¦ Pampasgras
+Graminées ¦ Ornamental grasses ¦ Gramíneas ¦ Ziergräser ¦ Graminacee ¦ Gramíneas ¦ Trawy ozdobne ¦ Siergrassen
+Fuchsia ¦ Fuchsia ¦ Fucsia ¦ Fuchsie ¦ Fucsia ¦ Fúcsia ¦ Fuksja ¦ Fuchsia
+Glycine ¦ Wisteria ¦ Glicinia ¦ Glyzinie ¦ Glicine ¦ Glicínia ¦ Glicynia ¦ Blauweregen
+Lierre ¦ Ivy ¦ Hiedra ¦ Efeu ¦ Edera ¦ Hera ¦ Bluszcz ¦ Klimop
+Fougère ¦ Fern ¦ Helecho ¦ Farn ¦ Felce ¦ Feto ¦ Paproć ¦ Varen
+Massif de géraniums ¦ Geranium bed ¦ Macizo de geranios ¦ Geranienbeet ¦ Aiuola di gerani ¦ Canteiro de gerânios ¦ Rabata pelargonii ¦ Perk met geraniums
+Massif de tournesols ¦ Sunflower bed ¦ Macizo de girasoles ¦ Sonnenblumenbeet ¦ Aiuola di girasoli ¦ Canteiro de girassóis ¦ Rabata słoneczników ¦ Perk met zonnebloemen
+Massif de tulipes ¦ Tulip bed ¦ Macizo de tulipanes ¦ Tulpenbeet ¦ Aiuola di tulipani ¦ Canteiro de túlipas ¦ Rabata tulipanów ¦ Perk met tulpen
+Massif de jonquilles ¦ Daffodil bed ¦ Macizo de narcisos ¦ Narzissenbeet ¦ Aiuola di narcisi ¦ Canteiro de narcisos ¦ Rabata żonkili ¦ Perk met narcissen
+Massif d’iris ¦ Iris bed ¦ Macizo de lirios ¦ Irisbeet ¦ Aiuola di iris ¦ Canteiro de íris ¦ Rabata irysów ¦ Perk met irissen
+Massif de dahlias ¦ Dahlia bed ¦ Macizo de dalias ¦ Dahlienbeet ¦ Aiuola di dalie ¦ Canteiro de dálias ¦ Rabata dalii ¦ Perk met dahlia's
+Massif de soucis ¦ Marigold bed ¦ Macizo de caléndulas ¦ Ringelblumenbeet ¦ Aiuola di calendule ¦ Canteiro de calêndulas ¦ Rabata nagietków ¦ Perk met goudsbloemen
+Massif de pivoines ¦ Peony bed ¦ Macizo de peonías ¦ Pfingstrosenbeet ¦ Aiuola di peonie ¦ Canteiro de peónias ¦ Rabata piwonii ¦ Perk met pioenen
+Massif de marguerites ¦ Daisy bed ¦ Macizo de margaritas ¦ Margeritenbeet ¦ Aiuola di margherite ¦ Canteiro de margaridas ¦ Rabata margerytek ¦ Perk met margrieten
+Carré de fraisiers ¦ Strawberry patch ¦ Bancal de fresas ¦ Erdbeerbeet ¦ Aiuola di fragole ¦ Canteiro de morangueiros ¦ Grządka truskawek ¦ Aardbeienbed
+Rang de pommes de terre ¦ Row of potatoes ¦ Hilera de patatas ¦ Kartoffelreihe ¦ Filare di patate ¦ Fileira de batatas ¦ Rząd ziemniaków ¦ Rij aardappelen
+Rang de salades ¦ Row of lettuces ¦ Hilera de lechugas ¦ Salatreihe ¦ Filare di insalata ¦ Fileira de alfaces ¦ Rząd sałaty ¦ Rij sla
+Rang de tomates ¦ Row of tomatoes ¦ Hilera de tomates ¦ Tomatenreihe ¦ Filare di pomodori ¦ Fileira de tomates ¦ Rząd pomidorów ¦ Rij tomaten
+Rang de carottes ¦ Row of carrots ¦ Hilera de zanahorias ¦ Karottenreihe ¦ Filare di carote ¦ Fileira de cenouras ¦ Rząd marchwi ¦ Rij wortels
+Rang de poireaux ¦ Row of leeks ¦ Hilera de puerros ¦ Lauchreihe ¦ Filare di porri ¦ Fileira de alhos-franceses ¦ Rząd pora ¦ Rij prei
+Rang de haricots à rames ¦ Row of pole beans ¦ Hilera de judías de enrame ¦ Stangenbohnenreihe ¦ Filare di fagioli rampicanti ¦ Fileira de feijão de trepar ¦ Rząd fasoli tycznej ¦ Rij stokbonen
+Rang de choux ¦ Row of cabbages ¦ Hilera de coles ¦ Kohlreihe ¦ Filare di cavoli ¦ Fileira de couves ¦ Rząd kapusty ¦ Rij kool
+Planche de courges ¦ Squash bed ¦ Bancal de calabazas ¦ Kürbisbeet ¦ Aiuola di zucche ¦ Canteiro de abóboras ¦ Grządka dyni ¦ Bed met pompoenen
+Planche d’oignons ¦ Onion bed ¦ Bancal de cebollas ¦ Zwiebelbeet ¦ Aiuola di cipolle ¦ Canteiro de cebolas ¦ Grządka cebuli ¦ Bed met uien
+Carré d’aromatiques ¦ Herb patch ¦ Bancal de aromáticas ¦ Kräuterbeet ¦ Aiuola di erbe aromatiche ¦ Canteiro de aromáticas ¦ Grządka ziół ¦ Kruidenbed
+Pelouse ¦ Lawn ¦ Césped ¦ Rasen ¦ Prato ¦ Relvado ¦ Trawnik ¦ Gazon
+Prairie fleurie ¦ Wildflower meadow ¦ Pradera florida ¦ Blumenwiese ¦ Prato fiorito ¦ Prado florido ¦ Kwietna łąka ¦ Bloemenweide
+Pot de géraniums ¦ Geranium pot ¦ Maceta de geranios ¦ Geranientopf ¦ Vaso di gerani ¦ Vaso de gerânios ¦ Doniczka z pelargoniami ¦ Pot met geraniums
+Jardinière de fleurs ¦ Flower box ¦ Jardinera de flores ¦ Blumenkasten ¦ Fioriera ¦ Floreira ¦ Skrzynka z kwiatami ¦ Bloembak
+Agapanthe en pot ¦ Potted agapanthus ¦ Agapanto en maceta ¦ Schmucklilie im Topf ¦ Agapanto in vaso ¦ Agapanto em vaso ¦ Agapant w donicy ¦ Agapanthus in pot
+Buis en pot ¦ Potted boxwood ¦ Boj en maceta ¦ Buchs im Topf ¦ Bosso in vaso ¦ Buxo em vaso ¦ Bukszpan w donicy ¦ Buxus in pot
+Pot de basilic ¦ Basil pot ¦ Maceta de albahaca ¦ Basilikumtopf ¦ Vaso di basilico ¦ Vaso de manjericão ¦ Doniczka z bazylią ¦ Pot met basilicum
+Bac à fleurs en zinc ¦ Zinc planter ¦ Jardinera de zinc ¦ Pflanzkübel aus Zink ¦ Fioriera in zinco ¦ Floreira de zinco ¦ Cynkowa skrzynka na kwiaty ¦ Zinken bloembak
+Pot en terre d’Anduze ¦ Anduze clay pot ¦ Maceta de barro de Anduze ¦ Tontopf aus Anduze ¦ Vaso in terracotta di Anduze ¦ Vaso de barro de Anduze ¦ Donica z Anduze ¦ Pot van Anduze-aardewerk
+Grande jarre provençale ¦ Large Provençal jar ¦ Gran tinaja provenzal ¦ Große provenzalische Amphore ¦ Grande giara provenzale ¦ Grande jarra provençal ¦ Duży dzban prowansalski ¦ Grote Provençaalse kruik
+Yucca ¦ Yucca ¦ Yuca ¦ Yucca ¦ Yucca ¦ Iúca ¦ Juka ¦ Yucca
+Plante grasse (aloe) ¦ Succulent (aloe) ¦ Planta crasa (aloe) ¦ Sukkulente (Aloe) ¦ Pianta grassa (aloe) ¦ Planta suculenta (aloé) ¦ Sukulent (aloes) ¦ Vetplant (aloë)
+Cactus colonne ¦ Column cactus ¦ Cactus columnar ¦ Säulenkaktus ¦ Cactus colonnare ¦ Cato colunar ¦ Kaktus kolumnowy ¦ Zuilcactus
+Kentia ¦ Kentia palm ¦ Kentia ¦ Kentia-Palme ¦ Kenzia ¦ Kentia ¦ Kencja ¦ Kentiapalm
+Sansevieria ¦ Snake plant ¦ Sansevieria ¦ Bogenhanf ¦ Sansevieria ¦ Sansevéria ¦ Sansewieria ¦ Sansevieria
+Pothos suspendu ¦ Hanging pothos ¦ Potos colgante ¦ Hängende Efeutute ¦ Pothos pendente ¦ Potos suspenso ¦ Wiszący epipremnum ¦ Hangende pothos
+Oiseau de paradis (strelitzia) ¦ Bird of paradise (strelitzia) ¦ Ave del paraíso (strelitzia) ¦ Paradiesvogelblume (Strelitzie) ¦ Uccello del paradiso (strelitzia) ¦ Ave-do-paraíso (estrelícia) ¦ Strelicja ¦ Paradijsvogelbloem (strelitzia)
+Bonsaï sur sellette ¦ Bonsai on a stand ¦ Bonsái sobre pedestal ¦ Bonsai auf Ständer ¦ Bonsai su sgabello ¦ Bonsai em pedestal ¦ Bonsai na postumencie ¦ Bonsai op plantentafel
+Poinsettia ¦ Poinsettia ¦ Flor de Pascua ¦ Weihnachtsstern ¦ Stella di Natale ¦ Poinsétia ¦ Gwiazda betlejemska ¦ Kerstster
+Plante aromatique sur rebord ¦ Herb pot on a windowsill ¦ Planta aromática en el alféizar ¦ Kräutertopf auf der Fensterbank ¦ Pianta aromatica sul davanzale ¦ Planta aromática no parapeito ¦ Zioła na parapecie ¦ Kruidenplant op de vensterbank
+Palmier d’intérieur ¦ Indoor palm ¦ Palmera de interior ¦ Zimmerpalme ¦ Palma da interno ¦ Palmeira de interior ¦ Palma pokojowa ¦ Kamerpalm
+Banc de jardin en bois et fonte ¦ Wood and cast-iron garden bench ¦ Banco de jardín de madera y hierro fundido ¦ Gartenbank aus Holz und Gusseisen ¦ Panchina da giardino in legno e ghisa ¦ Banco de jardim de madeira e ferro fundido ¦ Ławka ogrodowa z drewna i żeliwa ¦ Tuinbank van hout en gietijzer
+Banc de jardin en bois ¦ Wooden garden bench ¦ Banco de jardín de madera ¦ Gartenbank aus Holz ¦ Panchina da giardino in legno ¦ Banco de jardim de madeira ¦ Drewniana ławka ogrodowa ¦ Houten tuinbank
+Banc en pierre sculpté ¦ Carved stone bench ¦ Banco de piedra tallada ¦ Gemeißelte Steinbank ¦ Panca in pietra scolpita ¦ Banco de pedra esculpida ¦ Rzeźbiona kamienna ławka ¦ Gebeeldhouwde stenen bank
+Table de bistrot en fer ¦ Iron bistro table ¦ Mesa de bistró de hierro ¦ Bistrotisch aus Eisen ¦ Tavolino da bistrot in ferro ¦ Mesa de bistrô de ferro ¦ Żelazny stolik bistro ¦ IJzeren bistrotafel
+Table de jardin ronde en résine ¦ Round resin garden table ¦ Mesa de jardín redonda de resina ¦ Runder Gartentisch aus Kunststoff ¦ Tavolo da giardino rotondo in resina ¦ Mesa de jardim redonda de resina ¦ Okrągły stół ogrodowy z tworzywa ¦ Ronde kunststof tuintafel
+Table de jardin en teck ¦ Teak garden table ¦ Mesa de jardín de teca ¦ Gartentisch aus Teak ¦ Tavolo da giardino in teak ¦ Mesa de jardim de teca ¦ Tekowy stół ogrodowy ¦ Teakhouten tuintafel
+Table de pique-nique ¦ Picnic table ¦ Mesa de pícnic ¦ Picknicktisch ¦ Tavolo da picnic ¦ Mesa de piquenique ¦ Stół piknikowy ¦ Picknicktafel
+Chaise longue ¦ Lounge chair ¦ Tumbona ¦ Liegestuhl ¦ Chaise longue ¦ Espreguiçadeira ¦ Leżak ¦ Ligstoel
+Transat de plage rayé ¦ Striped deck chair ¦ Hamaca de playa a rayas ¦ Gestreifter Strandliegestuhl ¦ Sdraio da spiaggia a righe ¦ Cadeira de praia às riscas ¦ Pasiasty leżak plażowy ¦ Gestreepte strandstoel
+Bain de soleil en résine ¦ Resin sun lounger ¦ Tumbona de resina ¦ Sonnenliege aus Kunststoff ¦ Lettino in resina ¦ Espreguiçadeira de resina ¦ Leżanka z tworzywa ¦ Kunststof ligbed
+Portique de jeux ¦ Swing set ¦ Columpio ¦ Spielgerüst ¦ Altalena ¦ Baloiço ¦ Huśtawka ogrodowa ze stelażem ¦ Speeltoestel met schommel
+Grand toboggan ¦ Big slide ¦ Tobogán grande ¦ Große Rutsche ¦ Grande scivolo ¦ Escorrega grande ¦ Duża zjeżdżalnia ¦ Grote glijbaan
+Bac à sable couvert ¦ Covered sandbox ¦ Arenero cubierto ¦ Abgedeckter Sandkasten ¦ Sabbiera coperta ¦ Caixa de areia coberta ¦ Zakryta piaskownica ¦ Afgedekte zandbak
+Petit trampoline ¦ Small trampoline ¦ Cama elástica pequeña ¦ Kleines Trampolin ¦ Piccolo trampolino ¦ Trampolim pequeno ¦ Mała trampolina ¦ Kleine trampoline
+Hamac sur pied ¦ Hammock with stand ¦ Hamaca con soporte ¦ Hängematte mit Gestell ¦ Amaca con supporto ¦ Rede com suporte ¦ Hamak na stelażu ¦ Hangmat met standaard
+Tonnelle de jardin ¦ Garden arbor ¦ Cenador de jardín ¦ Gartenlaube ¦ Gazebo da giardino ¦ Caramanchão de jardim ¦ Altana ogrodowa ¦ Tuinprieel
+Pergola en bois ¦ Wooden pergola ¦ Pérgola de madera ¦ Holzpergola ¦ Pergolato in legno ¦ Pérgula de madeira ¦ Drewniana pergola ¦ Houten pergola
+Pergola bioclimatique ¦ Bioclimatic pergola ¦ Pérgola bioclimática ¦ Bioklimatische Pergola ¦ Pergola bioclimatica ¦ Pérgula bioclimática ¦ Pergola bioklimatyczna ¦ Bioklimatische pergola
+Parasol déporté ¦ Cantilever umbrella ¦ Sombrilla de brazo lateral ¦ Ampelschirm ¦ Ombrellone a braccio laterale ¦ Guarda-sol de braço lateral ¦ Parasol na wysięgniku ¦ Zweefparasol
+Parasol rouge de terrasse ¦ Red patio umbrella ¦ Sombrilla roja de terraza ¦ Roter Terrassenschirm ¦ Ombrellone rosso da terrazza ¦ Guarda-sol vermelho de esplanada ¦ Czerwony parasol tarasowy ¦ Rode terrasparasol
+Fontaine en pierre ¦ Stone fountain ¦ Fuente de piedra ¦ Steinbrunnen ¦ Fontana in pietra ¦ Fonte de pedra ¦ Kamienna fontanna ¦ Stenen fontein
+Fontaine murale ¦ Wall fountain ¦ Fuente de pared ¦ Wandbrunnen ¦ Fontana a muro ¦ Fonte de parede ¦ Fontanna ścienna ¦ Muurfontein
+Bassin rond ¦ Round pond ¦ Estanque redondo ¦ Runder Teich ¦ Laghetto rotondo ¦ Lago redondo ¦ Okrągłe oczko wodne ¦ Ronde vijver
+Bassin aux nénuphars ¦ Water lily pond ¦ Estanque con nenúfares ¦ Seerosenteich ¦ Laghetto con ninfee ¦ Lago com nenúfares ¦ Oczko wodne z liliami ¦ Vijver met waterlelies
+Piscine rectangulaire ¦ Rectangular pool ¦ Piscina rectangular ¦ Rechteckiger Pool ¦ Piscina rettangolare ¦ Piscina retangular ¦ Prostokątny basen ¦ Rechthoekig zwembad
+Petite piscine ¦ Small pool ¦ Piscina pequeña ¦ Kleiner Pool ¦ Piccola piscina ¦ Piscina pequena ¦ Mały basen ¦ Klein zwembad
+Piscine hors-sol ronde ¦ Round above-ground pool ¦ Piscina elevada redonda ¦ Runder Aufstellpool ¦ Piscina fuori terra rotonda ¦ Piscina elevada redonda ¦ Okrągły basen naziemny ¦ Rond opzetzwembad
+Spa d’extérieur ¦ Outdoor hot tub ¦ Spa de exterior ¦ Außenwhirlpool ¦ Spa da esterno ¦ Spa de exterior ¦ Jacuzzi ogrodowe ¦ Buitenjacuzzi
+Barbecue au charbon ¦ Charcoal barbecue ¦ Barbacoa de carbón ¦ Holzkohlegrill ¦ Barbecue a carbone ¦ Churrasqueira a carvão ¦ Grill węglowy ¦ Houtskoolbarbecue
+Plancha sur chariot ¦ Plancha griddle on a cart ¦ Plancha con carro ¦ Plancha auf Rollwagen ¦ Plancha su carrello ¦ Plancha com carrinho ¦ Plancha na wózku ¦ Plancha op onderstel
+Four à pizza ¦ Pizza oven ¦ Horno de pizza ¦ Pizzaofen ¦ Forno per pizza ¦ Forno de pizza ¦ Piec do pizzy ¦ Pizzaoven
+Brasero en acier ¦ Steel fire pit ¦ Brasero de acero ¦ Feuerschale aus Stahl ¦ Braciere in acciaio ¦ Braseiro de aço ¦ Stalowe palenisko ¦ Stalen vuurkorf
+Composteur en bois ¦ Wooden composter ¦ Compostador de madera ¦ Holzkomposter ¦ Compostiera in legno ¦ Compostor de madeira ¦ Drewniany kompostownik ¦ Houten compostbak
+Potager surélevé ¦ Raised vegetable bed ¦ Huerto elevado ¦ Hochbeet ¦ Orto rialzato ¦ Horta elevada ¦ Podwyższona grządka ¦ Verhoogde moestuinbak
+Serre de jardin ¦ Greenhouse ¦ Invernadero de jardín ¦ Gewächshaus ¦ Serra da giardino ¦ Estufa de jardim ¦ Szklarnia ogrodowa ¦ Tuinkas
+Petite serre adossée ¦ Small lean-to greenhouse ¦ Pequeño invernadero adosado ¦ Kleines Anlehngewächshaus ¦ Piccola serra addossata ¦ Pequena estufa encostada ¦ Mała szklarnia przyścienna ¦ Kleine muurkas
+Mangeoire à oiseaux ¦ Bird feeder ¦ Comedero para pájaros ¦ Vogelfutterhaus ¦ Mangiatoia per uccelli ¦ Comedouro para pássaros ¦ Karmnik dla ptaków ¦ Vogelvoederhuisje
+Cadran solaire sur colonne ¦ Sundial on a column ¦ Reloj de sol sobre columna ¦ Sonnenuhr auf Säule ¦ Meridiana su colonna ¦ Relógio de sol em coluna ¦ Zegar słoneczny na kolumnie ¦ Zonnewijzer op zuil
+Enrouleur de tuyau ¦ Hose reel ¦ Enrollador de manguera ¦ Schlauchtrommel ¦ Avvolgitubo ¦ Enrolador de mangueira ¦ Zwijacz węża ¦ Slanghaspel
+Lanterne de jardin ¦ Garden lantern ¦ Farol de jardín ¦ Gartenlaterne ¦ Lanterna da giardino ¦ Lanterna de jardim ¦ Latarnia ogrodowa ¦ Tuinlantaarn
+Mât de drapeau ¦ Flagpole ¦ Mástil de bandera ¦ Fahnenmast ¦ Pennone ¦ Mastro de bandeira ¦ Maszt flagowy ¦ Vlaggenmast
+Clôture en bois ¦ Wooden fence ¦ Valla de madera ¦ Holzzaun ¦ Recinzione in legno ¦ Cerca de madeira ¦ Drewniany płot ¦ Houten schutting
+Grillage rigide ¦ Rigid wire fencing ¦ Malla rígida ¦ Stabmattenzaun ¦ Recinzione in rete rigida ¦ Rede rígida ¦ Panel ogrodzeniowy ¦ Stijf draadgaas
+Barrière blanche ¦ White fence ¦ Valla blanca ¦ Weißer Zaun ¦ Staccionata bianca ¦ Vedação branca ¦ Biały płotek ¦ Wit hekje
+Haie de lauriers ¦ Laurel hedge ¦ Seto de laureles ¦ Lorbeerhecke ¦ Siepe di lauro ¦ Sebe de loureiros ¦ Żywopłot z wawrzynu ¦ Laurierhaag
+Haie de charmille ¦ Hornbeam hedge ¦ Seto de carpe ¦ Hainbuchenhecke ¦ Siepe di carpino ¦ Sebe de carpa ¦ Żywopłot grabowy ¦ Haagbeukenhaag
+Muret en pierres sèches ¦ Dry stone wall ¦ Muro de piedra seca ¦ Trockenmauer ¦ Muretto a secco ¦ Muro de pedra seca ¦ Murek z suchego kamienia ¦ Droogstenen muurtje
+Portail en fer forgé ¦ Wrought-iron gate ¦ Portón de hierro forjado ¦ Schmiedeeisernes Tor ¦ Cancello in ferro battuto ¦ Portão de ferro forjado ¦ Brama z kutego żelaza ¦ Smeedijzeren poort
+Portail en bois ¦ Wooden gate ¦ Portón de madera ¦ Holztor ¦ Cancello in legno ¦ Portão de madeira ¦ Drewniana brama ¦ Houten poort
+Portillon ¦ Wicket gate ¦ Portillo ¦ Gartentürchen ¦ Cancelletto ¦ Cancela ¦ Furtka ¦ Tuinhekje
+Abri à bûches ¦ Log store ¦ Leñero ¦ Brennholzunterstand ¦ Legnaia ¦ Abrigo para lenha ¦ Drewutnia ¦ Houtopslag
+Éolienne de pompage ¦ Wind pump ¦ Molino de bombeo ¦ Windpumpe ¦ Mulino a vento per pompaggio ¦ Moinho de bombagem ¦ Wiatrak pompujący ¦ Windmolen voor waterpomp
+Puits couvert ¦ Covered well ¦ Pozo cubierto ¦ Überdachter Brunnen ¦ Pozzo coperto ¦ Poço coberto ¦ Zadaszona studnia ¦ Overdekte waterput
+Abreuvoir en pierre ¦ Stone water trough ¦ Abrevadero de piedra ¦ Steintränke ¦ Abbeveratoio in pietra ¦ Bebedouro de pedra ¦ Kamienne poidło ¦ Stenen drinkbak
+Abri de jardin en bois ¦ Wooden garden shed ¦ Caseta de jardín de madera ¦ Gartenhaus aus Holz ¦ Casetta da giardino in legno ¦ Abrigo de jardim de madeira ¦ Drewniany domek narzędziowy ¦ Houten tuinhuisje
+Abri de jardin en métal ¦ Metal garden shed ¦ Caseta de jardín de metal ¦ Gerätehaus aus Metall ¦ Casetta da giardino in metallo ¦ Abrigo de jardim de metal ¦ Metalowy domek narzędziowy ¦ Metalen tuinhuisje
+Cabane dans les arbres ¦ Treehouse ¦ Casa en el árbol ¦ Baumhaus ¦ Casa sull’albero ¦ Casa na árvore ¦ Domek na drzewie ¦ Boomhut
+Carport ¦ Carport ¦ Cochera ¦ Carport ¦ Posto auto coperto ¦ Telheiro para carro ¦ Wiata garażowa ¦ Carport
+Kiosque de jardin ¦ Garden gazebo ¦ Quiosco de jardín ¦ Gartenpavillon ¦ Chiosco da giardino ¦ Quiosque de jardim ¦ Altana-pawilon ¦ Tuinpaviljoen
+Cabane de jardin pour enfants ¦ Children’s playhouse ¦ Casita de jardín infantil ¦ Spielhaus für Kinder ¦ Casetta da gioco per bambini ¦ Casinha de jardim para crianças ¦ Domek ogrodowy dla dzieci ¦ Speelhuisje voor kinderen
+Allée en gravier ¦ Gravel path ¦ Camino de grava ¦ Kiesweg ¦ Vialetto di ghiaia ¦ Caminho de gravilha ¦ Żwirowa ścieżka ¦ Grindpad
+Terrasse dallée ¦ Paved patio ¦ Terraza enlosada ¦ Gepflasterte Terrasse ¦ Terrazza lastricata ¦ Terraço lajeado ¦ Taras z płyt ¦ Terras met tegels
+Terrasse en bois ¦ Wooden deck ¦ Terraza de madera ¦ Holzterrasse ¦ Terrazza in legno ¦ Deck de madeira ¦ Drewniany taras ¦ Houten terras
+Bac à compost ouvert ¦ Open compost bin ¦ Compostador abierto ¦ Offener Komposthaufen ¦ Compostiera aperta ¦ Compostor aberto ¦ Otwarta skrzynia kompostowa ¦ Open compostbak
+Jardin japonais ¦ Japanese garden ¦ Jardín japonés ¦ Japanischer Garten ¦ Giardino giapponese ¦ Jardim japonês ¦ Ogród japoński ¦ Japanse tuin
+Rocaille ¦ Rock garden ¦ Rocalla ¦ Steingarten ¦ Giardino roccioso ¦ Jardim de pedras ¦ Skalniak ¦ Rotstuin
+Vasque de jardin ¦ Garden urn ¦ Pila de jardín ¦ Gartenschale ¦ Vasca da giardino ¦ Taça de jardim ¦ Misa ogrodowa ¦ Tuinschaal
+Statue de jardin ¦ Garden statue ¦ Estatua de jardín ¦ Gartenstatue ¦ Statua da giardino ¦ Estátua de jardim ¦ Posąg ogrodowy ¦ Tuinbeeld
+Lion en pierre ¦ Stone lion ¦ León de piedra ¦ Steinlöwe ¦ Leone di pietra ¦ Leão de pedra ¦ Kamienny lew ¦ Stenen leeuw
+Boule décorative ¦ Decorative ball ¦ Bola decorativa ¦ Dekokugel ¦ Sfera decorativa ¦ Bola decorativa ¦ Kula dekoracyjna ¦ Decoratieve bol
+Nichoir à mésanges ¦ Tit nest box ¦ Caja nido para carboneros ¦ Meisennistkasten ¦ Nido per cinciallegre ¦ Ninho para chapins ¦ Budka lęgowa dla sikor ¦ Mezenkastje
+Hôtel à insectes ¦ Insect hotel ¦ Hotel de insectos ¦ Insektenhotel ¦ Hotel per insetti ¦ Hotel de insetos ¦ Hotel dla owadów ¦ Insectenhotel
+Boîte à livres ¦ Little free library ¦ Caja de libros ¦ Bücherschrank ¦ Casetta dei libri ¦ Caixa de livros ¦ Biblioteczka plenerowa ¦ Minibieb
+Ruche kenyane ¦ Kenyan top-bar hive ¦ Colmena keniana ¦ Kenianischer Bienenstock ¦ Arnia kenyota ¦ Colmeia queniana ¦ Ul kenijski ¦ Kenia-bijenkast
+Pompe d’arrosage ¦ Garden water pump ¦ Bomba de riego ¦ Gartenpumpe ¦ Pompa per irrigazione ¦ Bomba de rega ¦ Pompa ogrodowa ¦ Tuinpomp
+Arroseur oscillant ¦ Oscillating sprinkler ¦ Aspersor oscilante ¦ Viereckregner ¦ Irrigatore oscillante ¦ Aspersor oscilante ¦ Zraszacz wahadłowy ¦ Zwenksproeier
+Arrosoir en zinc ¦ Zinc watering can ¦ Regadera de zinc ¦ Gießkanne aus Zink ¦ Annaffiatoio in zinco ¦ Regador de zinco ¦ Cynkowa konewka ¦ Zinken gieter
+Tondeuse hélicoïdale ¦ Reel mower ¦ Cortacésped helicoidal ¦ Spindelmäher ¦ Tosaerba elicoidale ¦ Corta-relva helicoidal ¦ Kosiarka bębnowa ¦ Kooimaaier
+Motoculteur ¦ Rotary tiller ¦ Motocultor ¦ Motorhacke ¦ Motocoltivatore ¦ Motocultivador ¦ Glebogryzarka ¦ Motorfrees
+Débroussailleuse ¦ Brush cutter ¦ Desbrozadora ¦ Freischneider ¦ Decespugliatore ¦ Roçadora ¦ Podkaszarka ¦ Bosmaaier
+Souffleur à feuilles ¦ Leaf blower ¦ Soplador de hojas ¦ Laubbläser ¦ Soffiatore di foglie ¦ Soprador de folhas ¦ Dmuchawa do liści ¦ Bladblazer
+Réverbère ancien ¦ Old street lamp ¦ Farola antigua ¦ Alte Straßenlaterne ¦ Lampione antico ¦ Candeeiro de rua antigo ¦ Zabytkowa latarnia uliczna ¦ Oude straatlantaarn
+Enseigne de commerce ¦ Shop sign ¦ Letrero de tienda ¦ Ladenschild ¦ Insegna di negozio ¦ Letreiro de loja ¦ Szyld sklepowy ¦ Uithangbord
+Vache normande ¦ Normande cow ¦ Vaca normanda ¦ Normannische Kuh ¦ Mucca normanna ¦ Vaca normanda ¦ Krowa rasy normandzkiej ¦ Normandische koe
+Vache limousine ¦ Limousin cow ¦ Vaca lemosina ¦ Limousin-Kuh ¦ Mucca limosina ¦ Vaca limusina ¦ Krowa rasy limousine ¦ Limousin-koe
+Vache charolaise ¦ Charolais cow ¦ Vaca charolesa ¦ Charolais-Kuh ¦ Mucca charolaise ¦ Vaca charolesa ¦ Krowa rasy charolaise ¦ Charolais-koe
+Vache bretonne pie noir ¦ Breton Pie Noir cow ¦ Vaca bretona pía negra ¦ Bretonische schwarzbunte Kuh ¦ Mucca bretone pezzata nera ¦ Vaca bretã malhada de preto ¦ Krowa bretońska czarno-biała ¦ Bretonse zwartbonte koe
+Vache montbéliarde ¦ Montbéliarde cow ¦ Vaca montbéliarde ¦ Montbéliarde-Kuh ¦ Mucca montbéliarde ¦ Vaca montbéliarde ¦ Krowa rasy montbéliarde ¦ Montbéliarde-koe
+Veau ¦ Calf ¦ Ternero ¦ Kalb ¦ Vitello ¦ Vitelo ¦ Cielę ¦ Kalf
+Bœuf de trait ¦ Draft ox ¦ Buey de tiro ¦ Zugochse ¦ Bue da tiro ¦ Boi de tração ¦ Wół pociągowy ¦ Trekos
+Cheval de trait (percheron) ¦ Draft horse (Percheron) ¦ Caballo de tiro (percherón) ¦ Kaltblut (Percheron) ¦ Cavallo da tiro (percheron) ¦ Cavalo de tração (percheron) ¦ Koń pociągowy (perszeron) ¦ Trekpaard (percheron)
+Cheval de trait breton ¦ Breton draft horse ¦ Caballo de tiro bretón ¦ Bretonisches Kaltblut ¦ Cavallo da tiro bretone ¦ Cavalo de tração bretão ¦ Bretoński koń pociągowy ¦ Bretons trekpaard
+Cheval de selle ¦ Saddle horse ¦ Caballo de silla ¦ Reitpferd ¦ Cavallo da sella ¦ Cavalo de sela ¦ Koń wierzchowy ¦ Rijpaard
+Poney ¦ Pony ¦ Poni ¦ Pony ¦ Pony ¦ Pónei ¦ Kucyk ¦ Pony
+Mulet ¦ Mule ¦ Mulo ¦ Maultier ¦ Mulo ¦ Mula ¦ Muł ¦ Muildier
+Poulain ¦ Foal ¦ Potro ¦ Fohlen ¦ Puledro ¦ Potro ¦ Źrebię ¦ Veulen
+Brebis ¦ Ewe ¦ Oveja ¦ Mutterschaf ¦ Pecora ¦ Ovelha ¦ Owca ¦ Ooi
+Agneau ¦ Lamb ¦ Cordero ¦ Lamm ¦ Agnello ¦ Cordeiro ¦ Jagnię ¦ Lam
+Bélier ¦ Ram ¦ Carnero ¦ Widder ¦ Montone ¦ Carneiro ¦ Baran ¦ Ram
+Chevreau ¦ Kid goat ¦ Cabrito ¦ Zicklein ¦ Capretto ¦ Cabrito ¦ Koźlę ¦ Bokje
+Truie ¦ Sow ¦ Cerda ¦ Sau ¦ Scrofa ¦ Porca ¦ Locha ¦ Zeug
+Porcelet ¦ Piglet ¦ Lechón ¦ Ferkel ¦ Maialino ¦ Leitão ¦ Prosię ¦ Big
+Coq ¦ Rooster ¦ Gallo ¦ Hahn ¦ Gallo ¦ Galo ¦ Kogut ¦ Haan
+Poule blanche ¦ White hen ¦ Gallina blanca ¦ Weißes Huhn ¦ Gallina bianca ¦ Galinha branca ¦ Biała kura ¦ Witte kip
+Poussin ¦ Chick ¦ Pollito ¦ Küken ¦ Pulcino ¦ Pintainho ¦ Kurczątko ¦ Kuiken
+Canard ¦ Duck ¦ Pato ¦ Ente ¦ Anatra ¦ Pato ¦ Kaczka ¦ Eend
+Dindon ¦ Turkey ¦ Pavo ¦ Truthahn ¦ Tacchino ¦ Peru ¦ Indyk ¦ Kalkoen
+Pintade ¦ Guinea fowl ¦ Pintada ¦ Perlhuhn ¦ Faraona ¦ Galinha-d’angola ¦ Perliczka ¦ Parelhoen
+Pigeon ¦ Pigeon ¦ Paloma ¦ Taube ¦ Piccione ¦ Pombo ¦ Gołąb ¦ Duif
+Lapin ¦ Rabbit ¦ Conejo ¦ Kaninchen ¦ Coniglio ¦ Coelho ¦ Królik ¦ Konijn
+Chien de berger ¦ Sheepdog ¦ Perro pastor ¦ Hütehund ¦ Cane da pastore ¦ Cão pastor ¦ Pies pasterski ¦ Herdershond
+Grand chien ¦ Big dog ¦ Perro grande ¦ Großer Hund ¦ Cane grande ¦ Cão grande ¦ Duży pies ¦ Grote hond
+Petit chien ¦ Small dog ¦ Perro pequeño ¦ Kleiner Hund ¦ Cane piccolo ¦ Cão pequeno ¦ Mały pies ¦ Kleine hond
+Chat roux ¦ Ginger cat ¦ Gato pelirrojo ¦ Rote Katze ¦ Gatto rosso ¦ Gato ruivo ¦ Rudy kot ¦ Rode kat
+Chat noir ¦ Black cat ¦ Gato negro ¦ Schwarze Katze ¦ Gatto nero ¦ Gato preto ¦ Czarny kot ¦ Zwarte kat
+Chat tigré ¦ Tabby cat ¦ Gato atigrado ¦ Getigerte Katze ¦ Gatto tigrato ¦ Gato tigrado ¦ Pręgowany kot ¦ Cyperse kat
+Chat endormi en boule ¦ Cat curled up asleep ¦ Gato dormido hecho un ovillo ¦ Zusammengerollt schlafende Katze ¦ Gatto addormentato acciambellato ¦ Gato a dormir enroscado ¦ Kot śpiący w kłębek ¦ Opgerolde slapende kat
+Lama ¦ Llama ¦ Llama ¦ Lama ¦ Lama ¦ Lama ¦ Lama ¦ Lama
+Cerf ¦ Deer ¦ Ciervo ¦ Hirsch ¦ Cervo ¦ Veado ¦ Jeleń ¦ Hert
+Sanglier ¦ Wild boar ¦ Jabalí ¦ Wildschwein ¦ Cinghiale ¦ Javali ¦ Dzik ¦ Wild zwijn
+Renard ¦ Fox ¦ Zorro ¦ Fuchs ¦ Volpe ¦ Raposa ¦ Lis ¦ Vos
+Tortue ¦ Tortoise ¦ Tortuga ¦ Schildkröte ¦ Tartaruga ¦ Tartaruga ¦ Żółw ¦ Schildpad
+Héron ¦ Heron ¦ Garza ¦ Reiher ¦ Airone ¦ Garça ¦ Czapla ¦ Reiger
+Cygne ¦ Swan ¦ Cisne ¦ Schwan ¦ Cigno ¦ Cisne ¦ Łabędź ¦ Zwaan
+Cage à oiseaux en osier ¦ Wicker birdcage ¦ Jaula de mimbre para pájaros ¦ Vogelkäfig aus Weide ¦ Gabbia per uccelli in vimini ¦ Gaiola de vime para pássaros ¦ Wiklinowa klatka dla ptaków ¦ Rieten vogelkooi
+Cage à canaris ¦ Canary cage ¦ Jaula para canarios ¦ Kanarienkäfig ¦ Gabbia per canarini ¦ Gaiola para canários ¦ Klatka dla kanarków ¦ Kanariekooi
+Poulailler en bois ¦ Wooden henhouse ¦ Gallinero de madera ¦ Hühnerstall aus Holz ¦ Pollaio in legno ¦ Galinheiro de madeira ¦ Drewniany kurnik ¦ Houten kippenhok
+Niche en bois ¦ Wooden doghouse ¦ Caseta de perro de madera ¦ Hundehütte aus Holz ¦ Cuccia in legno ¦ Casota de madeira ¦ Drewniana buda ¦ Houten hondenhok
+Abri pour moutons ¦ Sheep shelter ¦ Refugio para ovejas ¦ Schafunterstand ¦ Riparo per pecore ¦ Abrigo para ovelhas ¦ Wiata dla owiec ¦ Schapenstal
+Box à cheval ¦ Horse stall ¦ Box para caballo ¦ Pferdebox ¦ Box per cavallo ¦ Boxe para cavalo ¦ Boks dla konia ¦ Paardenbox
+Ruche Dadant ¦ Dadant beehive ¦ Colmena Dadant ¦ Dadant-Bienenbeute ¦ Arnia Dadant ¦ Colmeia Dadant ¦ Ul Dadanta ¦ Dadant-bijenkast
+Ruche Langstroth ¦ Langstroth beehive ¦ Colmena Langstroth ¦ Langstroth-Bienenbeute ¦ Arnia Langstroth ¦ Colmeia Langstroth ¦ Ul Langstrotha ¦ Langstroth-bijenkast
+Ruche en paille tressée ¦ Straw skep ¦ Colmena de paja trenzada ¦ Bienenkorb aus Stroh ¦ Arnia di paglia intrecciata ¦ Colmeia de palha entrançada ¦ Słomiany ul ¦ Gevlochten strokorf
+Stalle de vache ¦ Cow stall ¦ Establo para vaca ¦ Kuhstand ¦ Posta per mucca ¦ Estábulo para vaca ¦ Stanowisko dla krowy ¦ Koeienstand
+Box de veau ¦ Calf pen ¦ Box para ternero ¦ Kälberbox ¦ Box per vitello ¦ Boxe para vitelo ¦ Kojec dla cielęcia ¦ Kalverbox
+Mangeoire à foin ¦ Hay rack ¦ Pesebre de heno ¦ Heuraufe ¦ Rastrelliera per fieno ¦ Manjedoura de feno ¦ Paśnik na siano ¦ Hooiruif
+Tonneaux de cidre ¦ Cider barrels ¦ Barriles de sidra ¦ Mostfässer ¦ Botti di sidro ¦ Barris de sidra ¦ Beczki cydru ¦ Cidervaten
+Cuve à lait ¦ Milk tank ¦ Tanque de leche ¦ Milchtank ¦ Cisterna per il latte ¦ Tanque de leite ¦ Zbiornik na mleko ¦ Melktank
+Barrique de vin ¦ Wine barrel ¦ Barrica de vino ¦ Weinfass ¦ Barrique di vino ¦ Barrica de vinho ¦ Beczka wina ¦ Wijnvat
+Brabant ¦ Brabant plow ¦ Arado Brabant ¦ Brabanter Pflug ¦ Aratro Brabant ¦ Arado Brabant ¦ Pług Brabant ¦ Brabantse ploeg
+Herse en bois ¦ Wooden harrow ¦ Grada de madera ¦ Holzegge ¦ Erpice in legno ¦ Grade de madeira ¦ Drewniana brona ¦ Houten eg
+Charrette à foin ¦ Hay cart ¦ Carro de heno ¦ Heuwagen ¦ Carro da fieno ¦ Carroça de feno ¦ Wóz do siana ¦ Hooiwagen
+Char à bancs ¦ Wagonette ¦ Charabán ¦ Kremser ¦ Carrozza a panche ¦ Charrete de bancos ¦ Bryczka z ławkami ¦ Bankenwagen
+Chariot à ridelles ¦ Rack wagon ¦ Carro de adrales ¦ Leiterwagen ¦ Carro a sponde ¦ Carro de taipais ¦ Wóz drabiniasty ¦ Ladderwagen
+Tracteur rouge des années 1950 ¦ Red 1950s tractor ¦ Tractor rojo de los años 50 ¦ Roter Traktor aus den 1950ern ¦ Trattore rosso anni ’50 ¦ Trator vermelho dos anos 50 ¦ Czerwony traktor z lat 50. ¦ Rode tractor uit de jaren 50
+Tracteur vert ¦ Green tractor ¦ Tractor verde ¦ Grüner Traktor ¦ Trattore verde ¦ Trator verde ¦ Zielony traktor ¦ Groene tractor
+Petit tracteur gris (Ferguson) ¦ Little grey tractor (Ferguson) ¦ Tractorcito gris (Ferguson) ¦ Kleiner grauer Traktor (Ferguson) ¦ Piccolo trattore grigio (Ferguson) ¦ Pequeno trator cinzento (Ferguson) ¦ Mały szary traktor (Ferguson) ¦ Kleine grijze tractor (Ferguson)
+Faneuse ¦ Hay tedder ¦ Henificadora ¦ Heuwender ¦ Voltafieno ¦ Revolvedor de feno ¦ Przetrząsacz ¦ Schudder
+Moissonneuse-lieuse ¦ Reaper-binder ¦ Segadora-atadora ¦ Mähbinder ¦ Mietilegatrice ¦ Ceifeira-atadeira ¦ Snopowiązałka ¦ Zelfbinder
+Batteuse ¦ Threshing machine ¦ Trilladora ¦ Dreschmaschine ¦ Trebbiatrice ¦ Debulhadora ¦ Młockarnia ¦ Dorsmachine
+Andaineur ¦ Hay rake ¦ Hilerador ¦ Schwader ¦ Ranghinatore ¦ Juntador de feno ¦ Zgrabiarka ¦ Hark
+Alambic de bouilleur de cru ¦ Home distiller’s still ¦ Alambique de destilador casero ¦ Brennblase eines Hausbrenners ¦ Alambicco da distillatore domestico ¦ Alambique de destilador caseiro ¦ Alembik do bimbru ¦ Distilleerketel van een huisstoker
+Seau à traire ¦ Milking pail ¦ Cubo de ordeño ¦ Melkeimer ¦ Secchio per mungere ¦ Balde de ordenha ¦ Wiadro do dojenia ¦ Melkemmer
+Chèvre angora ¦ Angora goat ¦ Cabra de angora ¦ Angoraziege ¦ Capra d’angora ¦ Cabra angorá ¦ Koza angorska ¦ Angorageit
+Cochon noir gascon ¦ Gascon black pig ¦ Cerdo negro gascón ¦ Schwarzes Gascogne-Schwein ¦ Maiale nero guascone ¦ Porco preto gascão ¦ Czarna świnia gaskońska ¦ Zwart Gascons varken
+Vache salers ¦ Salers cow ¦ Vaca salers ¦ Salers-Kuh ¦ Mucca salers ¦ Vaca salers ¦ Krowa rasy salers ¦ Salers-koe
+Vache aubrac ¦ Aubrac cow ¦ Vaca aubrac ¦ Aubrac-Kuh ¦ Mucca aubrac ¦ Vaca aubrac ¦ Krowa rasy aubrac ¦ Aubrac-koe
+Vache jersiaise ¦ Jersey cow ¦ Vaca jersey ¦ Jersey-Kuh ¦ Mucca jersey ¦ Vaca jersey ¦ Krowa rasy jersey ¦ Jerseykoe
+Mouton noir ¦ Black sheep ¦ Oveja negra ¦ Schwarzes Schaf ¦ Pecora nera ¦ Ovelha negra ¦ Czarna owca ¦ Zwart schaap
+Mouton mérinos ¦ Merino sheep ¦ Oveja merina ¦ Merinoschaf ¦ Pecora merinos ¦ Ovelha merino ¦ Owca merynos ¦ Merinoschaap
+Poule noire ¦ Black hen ¦ Gallina negra ¦ Schwarzes Huhn ¦ Gallina nera ¦ Galinha preta ¦ Czarna kura ¦ Zwarte kip
+Poule rousse ¦ Red hen ¦ Gallina roja ¦ Rotbraunes Huhn ¦ Gallina rossa ¦ Galinha ruiva ¦ Ruda kura ¦ Rode kip
+Poule naine ¦ Bantam hen ¦ Gallina enana ¦ Zwerghuhn ¦ Gallina nana ¦ Galinha anã ¦ Kura miniaturka ¦ Krielkip
+Paon blanc ¦ White peacock ¦ Pavo real blanco ¦ Weißer Pfau ¦ Pavone bianco ¦ Pavão branco ¦ Biały paw ¦ Witte pauw
+Paon ¦ Peacock ¦ Pavo real ¦ Pfau ¦ Pavone ¦ Pavão ¦ Paw ¦ Pauw
+Lapin blanc ¦ White rabbit ¦ Conejo blanco ¦ Weißes Kaninchen ¦ Coniglio bianco ¦ Coelho branco ¦ Biały królik ¦ Wit konijn
+Cochon d’Inde ¦ Guinea pig ¦ Cobaya ¦ Meerschweinchen ¦ Porcellino d’India ¦ Porquinho-da-índia ¦ Świnka morska ¦ Cavia
+Hamster ¦ Hamster ¦ Hámster ¦ Hamster ¦ Criceto ¦ Hamster ¦ Chomik ¦ Hamster
+Perroquet ¦ Parrot ¦ Loro ¦ Papagei ¦ Pappagallo ¦ Papagaio ¦ Papuga ¦ Papegaai
+Canari ¦ Canary ¦ Canario ¦ Kanarienvogel ¦ Canarino ¦ Canário ¦ Kanarek ¦ Kanarie
+Cheval blanc ¦ White horse ¦ Caballo blanco ¦ Schimmel ¦ Cavallo bianco ¦ Cavalo branco ¦ Biały koń ¦ Wit paard
+Cheval noir ¦ Black horse ¦ Caballo negro ¦ Rappe ¦ Cavallo nero ¦ Cavalo preto ¦ Czarny koń ¦ Zwart paard
+Chien terre-neuve ¦ Newfoundland dog ¦ Perro terranova ¦ Neufundländer ¦ Cane terranova ¦ Cão terra-nova ¦ Pies nowofundland ¦ Newfoundlander
+Chien labrador ¦ Labrador dog ¦ Perro labrador ¦ Labrador ¦ Cane labrador ¦ Cão labrador ¦ Pies labrador ¦ Labrador
+Chien beauceron ¦ Beauceron dog ¦ Perro beauceron ¦ Beauceron ¦ Cane beauceron ¦ Cão beauceron ¦ Pies beauceron ¦ Beauceron
+Chien teckel ¦ Dachshund ¦ Perro teckel ¦ Dackel ¦ Cane bassotto ¦ Cão teckel ¦ Pies jamnik ¦ Teckel
+Volière ¦ Aviary ¦ Pajarera ¦ Voliere ¦ Voliera ¦ Viveiro de pássaros ¦ Woliera ¦ Volière
+Cage à lapin d’intérieur ¦ Indoor rabbit cage ¦ Jaula de conejo de interior ¦ Kaninchenkäfig für drinnen ¦ Gabbia per coniglio da interno ¦ Gaiola de coelho de interior ¦ Klatka dla królika ¦ Konijnenkooi voor binnen
+Panier pour chien ¦ Dog bed ¦ Cama para perro ¦ Hundekorb ¦ Cuccia per cane ¦ Cama para cão ¦ Legowisko dla psa ¦ Hondenmand
+Corbeille pour chat ¦ Cat basket ¦ Cesta para gato ¦ Katzenkorb ¦ Cesta per gatto ¦ Cesto para gato ¦ Koszyk dla kota ¦ Kattenmand
+Arbre à chat ¦ Cat tree ¦ Rascador para gatos ¦ Kratzbaum ¦ Tiragraffi ad albero ¦ Arranhador para gatos ¦ Drapak dla kota ¦ Krabpaal
+Gamelles ¦ Pet bowls ¦ Comederos ¦ Futternäpfe ¦ Ciotole ¦ Tigelas ¦ Miski ¦ Voerbakjes
+Abreuvoir automatique ¦ Automatic waterer ¦ Bebedero automático ¦ Selbsttränke ¦ Abbeveratoio automatico ¦ Bebedouro automático ¦ Automatyczne poidło ¦ Automatische drinkbak
+Tonneau de pluie en chêne ¦ Oak rain barrel ¦ Barril de lluvia de roble ¦ Regentonne aus Eiche ¦ Botte per l’acqua piovana in rovere ¦ Barril de água da chuva em carvalho ¦ Dębowa beczka na deszczówkę ¦ Eiken regenton
+Cuve à vendange ¦ Grape vat ¦ Cuba de vendimia ¦ Lesebottich ¦ Tino da vendemmia ¦ Dorna de vindima ¦ Kadź do winobrania ¦ Druivenkuip
+Pot à lait en fer-blanc ¦ Tin milk can ¦ Lechera de hojalata ¦ Milchkanne aus Weißblech ¦ Bidone del latte in latta ¦ Bilha de leite de folha de flandres ¦ Blaszana bańka na mleko ¦ Blikken melkbus
+Charrette à bras ¦ Handcart ¦ Carretilla de mano ¦ Handkarren ¦ Carretto a mano ¦ Carrinho de mão ¦ Ręczny wózek ¦ Handkar
+Diligence ¦ Stagecoach ¦ Diligencia ¦ Postkutsche ¦ Diligenza ¦ Diligência ¦ Dyliżans ¦ Postkoets
+Roulotte ¦ Horse-drawn caravan ¦ Carromato ¦ Planwagen ¦ Carrozzone ¦ Carroça-casa ¦ Wóz cygański ¦ Woonwagen
+Râteau-faneur à cheval ¦ Horse-drawn hay rake ¦ Rastrillo henificador de caballo ¦ Pferderechen ¦ Rastrello voltafieno a cavallo ¦ Ancinho de feno a cavalo ¦ Konne grabie ¦ Paardenhooihark
+Botteleuse ¦ Baler ¦ Empacadora ¦ Ballenpresse ¦ Imballatrice ¦ Enfardadeira ¦ Prasa do słomy ¦ Balenpers
+Semoir ¦ Seed drill ¦ Sembradora ¦ Sämaschine ¦ Seminatrice ¦ Semeador ¦ Siewnik ¦ Zaaimachine
+Pulvérisateur ¦ Sprayer ¦ Pulverizador ¦ Feldspritze ¦ Irroratrice ¦ Pulverizador ¦ Opryskiwacz ¦ Sproeier
+Bouilloire électrique ¦ Electric kettle ¦ Hervidor eléctrico ¦ Wasserkocher ¦ Bollitore elettrico ¦ Chaleira elétrica ¦ Czajnik elektryczny ¦ Waterkoker
+Machine à expresso ¦ Espresso machine ¦ Cafetera espresso ¦ Espressomaschine ¦ Macchina per espresso ¦ Máquina de café expresso ¦ Ekspres do espresso ¦ Espressomachine
+Machine à café à levier ¦ Lever coffee machine ¦ Cafetera de palanca ¦ Siebträgermaschine mit Hebel ¦ Macchina da caffè a leva ¦ Máquina de café de alavanca ¦ Ekspres kolbowy z dźwignią ¦ Hendel-espressomachine
+Cafetière à dosettes ¦ Pod coffee maker ¦ Cafetera de cápsulas ¦ Kapselmaschine ¦ Macchina da caffè a capsule ¦ Máquina de café de cápsulas ¦ Ekspres na kapsułki ¦ Padkoffiezetapparaat
+Presse-agrumes ¦ Citrus juicer ¦ Exprimidor ¦ Zitruspresse ¦ Spremiagrumi ¦ Espremedor de citrinos ¦ Wyciskarka do cytrusów ¦ Citruspers
+Four à micro-ondes encastrable ¦ Built-in microwave ¦ Microondas integrado ¦ Einbau-Mikrowelle ¦ Microonde da incasso ¦ Micro-ondas de encastrar ¦ Kuchenka mikrofalowa do zabudowy ¦ Inbouwmagnetron
+Corbeille de fruits ¦ Fruit bowl ¦ Frutero ¦ Obstkorb ¦ Fruttiera ¦ Fruteira ¦ Kosz owoców ¦ Fruitschaal
+Corbeille à pain sur pied ¦ Bread basket on a stand ¦ Panera con pie ¦ Brotkorb mit Fuß ¦ Portapane con piede ¦ Cesto de pão com pé ¦ Stojący kosz na chleb ¦ Staande broodmand
+Étagère à épices ¦ Spice rack ¦ Especiero ¦ Gewürzregal ¦ Portaspezie ¦ Prateleira de especiarias ¦ Półka na przyprawy ¦ Kruidenrek
+Desserte de cuisine en bois ¦ Wooden kitchen trolley ¦ Carrito de cocina de madera ¦ Küchenwagen aus Holz ¦ Carrello da cucina in legno ¦ Carrinho de cozinha de madeira ¦ Drewniany wózek kuchenny ¦ Houten keukentrolley
+Bar de cuisine ¦ Kitchen bar ¦ Barra de cocina ¦ Küchentheke ¦ Bancone da cucina ¦ Balcão de cozinha ¦ Barek kuchenny ¦ Keukenbar
+Plaque vitrocéramique ¦ Ceramic cooktop ¦ Placa vitrocerámica ¦ Glaskeramik-Kochfeld ¦ Piano in vetroceramica ¦ Placa vitrocerâmica ¦ Płyta ceramiczna ¦ Keramische kookplaat
+Grande plaque à induction ¦ Large induction hob ¦ Placa de inducción grande ¦ Großes Induktionskochfeld ¦ Grande piano a induzione ¦ Placa de indução grande ¦ Duża płyta indukcyjna ¦ Grote inductiekookplaat
+Table de cuisson au gaz (5 feux) ¦ Gas cooktop (5 burners) ¦ Encimera de gas (5 fuegos) ¦ Gaskochfeld (5 Flammen) ¦ Piano cottura a gas (5 fuochi) ¦ Placa a gás (5 bicos) ¦ Płyta gazowa (5 palników) ¦ Gaskookplaat (5 pitten)
+Hotte en inox ¦ Stainless steel hood ¦ Campana de acero inoxidable ¦ Edelstahl-Dunstabzugshaube ¦ Cappa in acciaio inox ¦ Exaustor em inox ¦ Okap ze stali nierdzewnej ¦ RVS-afzuigkap
+Lave-vaisselle compact ¦ Compact dishwasher ¦ Lavavajillas compacto ¦ Kompakter Geschirrspüler ¦ Lavastoviglie compatta ¦ Máquina de lavar loiça compacta ¦ Kompaktowa zmywarka ¦ Compacte vaatwasser
+Réfrigérateur rétro vert d’eau ¦ Retro mint-green fridge ¦ Frigorífico retro verde agua ¦ Retro-Kühlschrank in Mintgrün ¦ Frigorifero rétro verde acqua ¦ Frigorífico retro verde-água ¦ Lodówka retro w kolorze miętowym ¦ Watergroene retrokoelkast
+Réfrigérateur rétro orange ¦ Retro orange fridge ¦ Frigorífico retro naranja ¦ Retro-Kühlschrank in Orange ¦ Frigorifero rétro arancione ¦ Frigorífico retro laranja ¦ Pomarańczowa lodówka retro ¦ Oranje retrokoelkast
+Évier à deux bacs en céramique ¦ Double ceramic sink ¦ Fregadero doble de cerámica ¦ Keramik-Doppelspüle ¦ Lavello a due vasche in ceramica ¦ Lava-loiça duplo em cerâmica ¦ Ceramiczny zlew dwukomorowy ¦ Keramische dubbele spoelbak
+Évier timbre d’office ¦ Butler sink ¦ Fregadero de cerámica tipo office ¦ Keramik-Spülstein ¦ Lavello in ceramica da office ¦ Pia de cerâmica de copa ¦ Głęboki zlew ceramiczny ¦ Diepe keramische spoelbak
+Évier en pierre à potager ¦ Stone scullery sink ¦ Fregadero de piedra ¦ Steinspüle ¦ Acquaio in pietra ¦ Pia de pedra ¦ Kamienny zlew ¦ Stenen gootsteen
+Cuisinière à charbon ¦ Coal-fired stove ¦ Cocina de carbón ¦ Kohleherd ¦ Cucina economica a carbone ¦ Fogão a carvão ¦ Kuchnia węglowa ¦ Kolenfornuis
+Buffet de cuisine en formica ¦ Formica kitchen dresser ¦ Alacena de cocina de formica ¦ Küchenbuffet aus Resopal ¦ Credenza da cucina in formica ¦ Guarda-louça de cozinha em fórmica ¦ Kredens kuchenny z formiki ¦ Formica keukenbuffet
+Buffet de cuisine bleu ciel ¦ Sky-blue kitchen dresser ¦ Alacena de cocina azul cielo ¦ Himmelblaues Küchenbuffet ¦ Credenza da cucina azzurra ¦ Guarda-louça de cozinha azul-celeste ¦ Błękitny kredens kuchenny ¦ Hemelsblauw keukenbuffet
+Table en formica ¦ Formica table ¦ Mesa de formica ¦ Resopaltisch ¦ Tavolo in formica ¦ Mesa de fórmica ¦ Stół z formiki ¦ Formica tafel
+Chaise en formica ¦ Formica chair ¦ Silla de formica ¦ Resopalstuhl ¦ Sedia in formica ¦ Cadeira de fórmica ¦ Krzesło z formiki ¦ Formica stoel
+Tabouret de cuisine ¦ Kitchen stool ¦ Taburete de cocina ¦ Küchenhocker ¦ Sgabello da cucina ¦ Banco de cozinha ¦ Taboret kuchenny ¦ Keukenkruk
+Cruche en grès ¦ Stoneware jug ¦ Cántaro de gres ¦ Steinzeugkrug ¦ Brocca in gres ¦ Cântaro de grés ¦ Kamionkowy dzban ¦ Stenen kruik
+Fontaine à eau en grès ¦ Stoneware water fountain ¦ Fuente de agua de gres ¦ Wasserspender aus Steinzeug ¦ Fontanella d’acqua in gres ¦ Fonte de água de grés ¦ Kamionkowy pojemnik na wodę ¦ Stenen waterfontein
+Balance de cuisine Roberval ¦ Roberval kitchen scale ¦ Balanza de cocina Roberval ¦ Roberval-Küchenwaage ¦ Bilancia da cucina Roberval ¦ Balança de cozinha Roberval ¦ Waga kuchenna Roberval ¦ Roberval-keukenweegschaal
+Batterie de casseroles en cuivre ¦ Copper saucepan set ¦ Batería de cazos de cobre ¦ Kupfertopf-Set ¦ Batteria di pentole in rame ¦ Trem de panelas de cobre ¦ Komplet miedzianych garnków ¦ Set koperen pannen
+Égouttoir à vaisselle ¦ Dish rack ¦ Escurreplatos ¦ Abtropfgestell ¦ Scolapiatti ¦ Escorredor de loiça ¦ Suszarka do naczyń ¦ Afdruiprek
+Poubelles de tri ¦ Recycling bins ¦ Cubos de reciclaje ¦ Mülltrennungsbehälter ¦ Bidoni per la differenziata ¦ Caixotes de reciclagem ¦ Kosze do segregacji ¦ Afvalscheidingsbakken
+Planche à découper ¦ Chopping board ¦ Tabla de cortar ¦ Schneidebrett ¦ Tagliere ¦ Tábua de cortar ¦ Deska do krojenia ¦ Snijplank
+Bassine à confiture en cuivre ¦ Copper jam pan ¦ Cazo de mermelada de cobre ¦ Kupferner Marmeladentopf ¦ Paiolo per marmellata in rame ¦ Tacho de compota em cobre ¦ Miedziany rondel do konfitur ¦ Koperen jampan
+Pot-au-feu en fonte ¦ Cast-iron stew pot ¦ Olla de hierro fundido ¦ Gusseiserner Schmortopf ¦ Pentola in ghisa ¦ Panela de ferro fundido ¦ Żeliwny garnek ¦ Gietijzeren stoofpot
+Service à vaisselle ¦ Dinner set ¦ Vajilla ¦ Geschirrservice ¦ Servizio di piatti ¦ Serviço de loiça ¦ Serwis obiadowy ¦ Serviesset
+Soupière en faïence ¦ Earthenware soup tureen ¦ Sopera de loza ¦ Suppenterrine aus Fayence ¦ Zuppiera in maiolica ¦ Terrina de faiança ¦ Fajansowa waza ¦ Aardewerken soepterrine
+Panier de légumes ¦ Vegetable basket ¦ Cesta de verduras ¦ Gemüsekorb ¦ Cesto di verdure ¦ Cesto de legumes ¦ Kosz warzyw ¦ Groentemand
+Bocaux de conserves ¦ Preserving jars ¦ Tarros de conservas ¦ Einmachgläser ¦ Barattoli di conserve ¦ Frascos de conserva ¦ Słoiki z przetworami ¦ Weckpotten
+Stérilisateur à bocaux ¦ Jar sterilizer ¦ Esterilizador de tarros ¦ Einkochtopf ¦ Sterilizzatore per barattoli ¦ Esterilizador de frascos ¦ Pasteryzator do słoików ¦ Weckketel
+Moulin à légumes ¦ Food mill ¦ Pasapurés ¦ Flotte Lotte ¦ Passaverdure ¦ Passe-vite ¦ Przecierak do warzyw ¦ Roerzeef
+Crêpière ¦ Crêpe maker ¦ Crepera ¦ Crêpes-Platte ¦ Crepiera ¦ Crepeira ¦ Naleśnikarka ¦ Crêpeplaat
+Appareil à fondue ¦ Fondue set ¦ Aparato de fondue ¦ Fondue-Set ¦ Set per fonduta ¦ Aparelho de fondue ¦ Zestaw do fondue ¦ Fondueset
+Extracteur de jus ¦ Juicer ¦ Licuadora ¦ Entsafter ¦ Estrattore di succo ¦ Extrator de sumos ¦ Wyciskarka do soków ¦ Slowjuicer
+Cafetière italienne ¦ Moka pot ¦ Cafetera italiana ¦ Espressokocher ¦ Moka ¦ Cafeteira italiana ¦ Kawiarka ¦ Italiaanse percolator
+Samovar ¦ Samovar ¦ Samovar ¦ Samowar ¦ Samovar ¦ Samovar ¦ Samowar ¦ Samowaar
+Étagère à confitures ¦ Jam shelf ¦ Estante de mermeladas ¦ Marmeladenregal ¦ Mensola delle marmellate ¦ Prateleira de compotas ¦ Półka na konfitury ¦ Jamrek
+Chariot de cuisine à roulettes ¦ Kitchen trolley on wheels ¦ Carrito de cocina con ruedas ¦ Küchenwagen auf Rollen ¦ Carrello da cucina con ruote ¦ Carrinho de cozinha com rodas ¦ Kuchenny wózek na kółkach ¦ Keukentrolley op wieltjes
+Garde-manger grillagé ¦ Wire-mesh pantry cupboard ¦ Fresquera de malla ¦ Fliegenschrank ¦ Moscaiola ¦ Guarda-comida de rede ¦ Spiżarka z siatką ¦ Vliegenkast
+Coffre à bois de cuisine ¦ Kitchen wood box ¦ Cajón de leña de cocina ¦ Holzkiste für die Küche ¦ Cassa per la legna da cucina ¦ Caixa de lenha de cozinha ¦ Kuchenna skrzynia na drewno ¦ Keukenhoutkist
+Baignoire en fonte sur pieds de lion ¦ Clawfoot cast-iron bathtub ¦ Bañera de hierro fundido con patas de león ¦ Gusseiserne Badewanne auf Löwenfüßen ¦ Vasca in ghisa con piedi a zampa di leone ¦ Banheira de ferro fundido com pés de leão ¦ Żeliwna wanna na lwich łapach ¦ Gietijzeren bad op leeuwenpootjes
+Baignoire îlot moderne ¦ Modern freestanding bathtub ¦ Bañera exenta moderna ¦ Moderne freistehende Badewanne ¦ Vasca freestanding moderna ¦ Banheira de ilha moderna ¦ Nowoczesna wanna wolnostojąca ¦ Modern vrijstaand bad
+Meuble double vasque ¦ Double vanity unit ¦ Mueble de doble lavabo ¦ Doppelwaschtisch ¦ Mobile con doppio lavabo ¦ Móvel de lavatório duplo ¦ Szafka z dwiema umywalkami ¦ Badmeubel met dubbele wastafel
+Vasque à poser sur plan bois ¦ Countertop basin on wooden top ¦ Lavabo sobre encimera de madera ¦ Aufsatzwaschbecken auf Holzplatte ¦ Lavabo d’appoggio su piano in legno ¦ Lavatório de pousar em bancada de madeira ¦ Umywalka nablatowa na drewnianym blacie ¦ Opzetwaskom op houten blad
+Meuble vasque suspendu ¦ Wall-hung vanity unit ¦ Mueble de lavabo suspendido ¦ Hängender Waschtischunterschrank ¦ Mobile lavabo sospeso ¦ Móvel de lavatório suspenso ¦ Wisząca szafka pod umywalkę ¦ Zwevend wastafelmeubel
+WC à chasse haute ¦ High-tank toilet ¦ Inodoro de cisterna alta ¦ WC mit Hochspülkasten ¦ WC con cassetta alta ¦ Sanita de autoclismo alto ¦ WC z wysoko zawieszoną spłuczką ¦ Toilet met hooghangend reservoir
+WC rehaussé ¦ Raised toilet ¦ Inodoro elevado ¦ Erhöhtes WC ¦ WC rialzato ¦ Sanita elevada ¦ Podwyższone WC ¦ Verhoogd toilet
+Miroir lumineux ¦ Illuminated mirror ¦ Espejo con luz ¦ Beleuchteter Spiegel ¦ Specchio luminoso ¦ Espelho iluminado ¦ Podświetlane lustro ¦ Verlichte spiegel
+Panier à linge en osier ¦ Wicker laundry basket ¦ Cesto de ropa de mimbre ¦ Wäschekorb aus Weide ¦ Cesta portabiancheria in vimini ¦ Cesto de roupa de vime ¦ Wiklinowy kosz na pranie ¦ Rieten wasmand
+Broc et cuvette en faïence ¦ Earthenware jug and basin ¦ Jarra y palangana de loza ¦ Waschkrug und Schüssel aus Fayence ¦ Brocca e catino in maiolica ¦ Jarro e bacia de faiança ¦ Fajansowy dzbanek z miską ¦ Aardewerken lampetkan en kom
+Tub en zinc ¦ Zinc tub ¦ Tina de zinc ¦ Zinkwanne ¦ Tinozza in zinco ¦ Tina de zinco ¦ Cynkowa balia ¦ Zinken teil
+Échelle porte-serviettes ¦ Towel ladder ¦ Toallero escalera ¦ Handtuchleiter ¦ Scaletta portasciugamani ¦ Toalheiro escada ¦ Drabinka na ręczniki ¦ Handdoekladder
+Tapis de bain ¦ Bath mat ¦ Alfombra de baño ¦ Badematte ¦ Tappetino da bagno ¦ Tapete de banho ¦ Dywanik łazienkowy ¦ Badmat
+Panier à linge en tissu ¦ Fabric laundry basket ¦ Cesto de ropa de tela ¦ Wäschekorb aus Stoff ¦ Cesta portabiancheria in tessuto ¦ Cesto de roupa de tecido ¦ Materiałowy kosz na pranie ¦ Stoffen wasmand
+Colonne de salle de bain ¦ Bathroom tall cabinet ¦ Columna de baño ¦ Badezimmer-Hochschrank ¦ Colonna da bagno ¦ Coluna de casa de banho ¦ Słupek łazienkowy ¦ Badkamerkolomkast
+Étagère de douche ¦ Shower shelf ¦ Estante de ducha ¦ Duschregal ¦ Mensola per doccia ¦ Prateleira de duche ¦ Półka prysznicowa ¦ Doucherek
+Vasque en pierre ¦ Stone basin ¦ Lavabo de piedra ¦ Steinwaschbecken ¦ Lavabo in pietra ¦ Lavatório de pedra ¦ Kamienna umywalka ¦ Stenen waskom
+Baignoire noire ¦ Black bathtub ¦ Bañera negra ¦ Schwarze Badewanne ¦ Vasca nera ¦ Banheira preta ¦ Czarna wanna ¦ Zwart bad
+Paroi de douche en verre ¦ Glass shower screen ¦ Mampara de ducha de vidrio ¦ Duschwand aus Glas ¦ Parete doccia in vetro ¦ Resguardo de duche em vidro ¦ Szklana ścianka prysznicowa ¦ Glazen douchewand
+WC avec abattant bois ¦ Toilet with wooden seat ¦ Inodoro con tapa de madera ¦ WC mit Holzsitz ¦ WC con sedile in legno ¦ Sanita com tampo de madeira ¦ WC z drewnianą deską ¦ Toilet met houten bril
+Meuble vasque en bois ¦ Wooden vanity unit ¦ Mueble de lavabo de madera ¦ Waschtisch aus Holz ¦ Mobile lavabo in legno ¦ Móvel de lavatório de madeira ¦ Drewniana szafka pod umywalkę ¦ Houten wastafelmeubel
+Lave-mains ¦ Hand basin ¦ Lavamanos ¦ Handwaschbecken ¦ Lavamani ¦ Lava-mãos ¦ Umywalka do rąk ¦ Fonteintje
+Lave-linge hublot ¦ Front-loading washing machine ¦ Lavadora de carga frontal ¦ Frontlader-Waschmaschine ¦ Lavatrice a carica frontale ¦ Máquina de lavar roupa de carga frontal ¦ Pralka ładowana od frontu ¦ Voorlader-wasmachine
+Bac à laver ¦ Laundry tub ¦ Pila de lavar ¦ Waschtrog ¦ Lavatoio ¦ Tanque de lavar ¦ Balia do prania ¦ Wastobbe
+Table à repasser ¦ Ironing board ¦ Tabla de planchar ¦ Bügelbrett ¦ Asse da stiro ¦ Tábua de engomar ¦ Deska do prasowania ¦ Strijkplank
+Fil à linge ¦ Clothesline ¦ Tendedero ¦ Wäscheleine ¦ Filo per stendere ¦ Estendal ¦ Sznur na pranie ¦ Waslijn
+Essoreuse à rouleaux ¦ Wringer ¦ Escurridor de rodillos ¦ Wäschemangel ¦ Strizzatoio a rulli ¦ Espremedor de rolos ¦ Wyżymaczka z wałkami ¦ Wringer met rollen
+Machine à laver à manivelle ¦ Hand-crank washing machine ¦ Lavadora de manivela ¦ Waschmaschine mit Kurbel ¦ Lavatrice a manovella ¦ Máquina de lavar de manivela ¦ Pralka na korbę ¦ Wasmachine met slinger
+Balai et pelle ¦ Broom and dustpan ¦ Escoba y recogedor ¦ Besen und Kehrschaufel ¦ Scopa e paletta ¦ Vassoura e pá ¦ Miotła i szufelka ¦ Bezem en blik
+Nettoyeur vapeur ¦ Steam cleaner ¦ Limpiadora de vapor ¦ Dampfreiniger ¦ Pulitore a vapore ¦ Limpador a vapor ¦ Parownica ¦ Stoomreiniger
+Vestiaire d’entrée ¦ Hall coat rack ¦ Perchero de entrada ¦ Garderobe ¦ Appendiabiti d’ingresso ¦ Bengaleiro de entrada ¦ Szafa w przedpokoju ¦ Halkapstok
+Patère murale ¦ Wall hook ¦ Colgador de pared ¦ Wandhaken ¦ Gancio a muro ¦ Cabide de parede ¦ Wieszak ścienny ¦ Wandkapstok
+Boîte à clés ¦ Key box ¦ Caja para llaves ¦ Schlüsselkasten ¦ Cassetta portachiavi ¦ Caixa de chaves ¦ Skrzynka na klucze ¦ Sleutelkastje
+Console avec miroir ¦ Console with mirror ¦ Consola con espejo ¦ Konsole mit Spiegel ¦ Consolle con specchio ¦ Consola com espelho ¦ Konsola z lustrem ¦ Wandtafel met spiegel
+Valet de nuit ¦ Valet stand ¦ Galán de noche ¦ Herrendiener ¦ Servomuto ¦ Cabide de quarto ¦ Wieszak nocny na ubrania ¦ Dressboy
+Fauteuil ergonomique ¦ Ergonomic chair ¦ Silla ergonómica ¦ Ergonomischer Bürostuhl ¦ Sedia ergonomica ¦ Cadeira ergonómica ¦ Fotel ergonomiczny ¦ Ergonomische bureaustoel
+Bureau d’angle ¦ Corner desk ¦ Escritorio esquinero ¦ Eckschreibtisch ¦ Scrivania angolare ¦ Secretária de canto ¦ Biurko narożne ¦ Hoekbureau
+Petit bureau d’écolier ¦ Small school desk ¦ Pupitre escolar pequeño ¦ Kleiner Schülerschreibtisch ¦ Piccolo banco da scolaro ¦ Pequena carteira escolar ¦ Małe biurko szkolne ¦ Klein schoolbureau
+Ordinateur de bureau et écran ¦ Desktop computer and monitor ¦ Ordenador de sobremesa y pantalla ¦ Desktop-PC mit Bildschirm ¦ Computer fisso e monitor ¦ Computador de secretária e monitor ¦ Komputer stacjonarny z monitorem ¦ Desktopcomputer met scherm
+Deux écrans ¦ Two monitors ¦ Dos pantallas ¦ Zwei Bildschirme ¦ Due monitor ¦ Dois monitores ¦ Dwa monitory ¦ Twee schermen
+Imprimante multifonction ¦ Multifunction printer ¦ Impresora multifunción ¦ Multifunktionsdrucker ¦ Stampante multifunzione ¦ Impressora multifunções ¦ Urządzenie wielofunkcyjne ¦ Multifunctionele printer
+Destructeur de papier ¦ Paper shredder ¦ Destructora de papel ¦ Aktenvernichter ¦ Distruggidocumenti ¦ Destruidora de papel ¦ Niszczarka ¦ Papierversnipperaar
+Armoire à classeurs ¦ Filing cabinet ¦ Archivador ¦ Aktenschrank ¦ Schedario ¦ Arquivador ¦ Szafa na segregatory ¦ Archiefkast
+Caisson à roulettes ¦ Rolling drawer unit ¦ Cajonera con ruedas ¦ Rollcontainer ¦ Cassettiera con ruote ¦ Bloco de gavetas com rodas ¦ Kontener na kółkach ¦ Ladeblok op wieltjes
+Tableau en liège ¦ Cork board ¦ Tablón de corcho ¦ Korkpinnwand ¦ Bacheca in sughero ¦ Quadro de cortiça ¦ Tablica korkowa ¦ Prikbord van kurk
+Téléphone de bureau ¦ Desk phone ¦ Teléfono de oficina ¦ Bürotelefon ¦ Telefono da ufficio ¦ Telefone de escritório ¦ Telefon biurowy ¦ Bureautelefoon
+Globe terrestre de bureau ¦ Desk globe ¦ Globo terráqueo de escritorio ¦ Schreibtischglobus ¦ Mappamondo da scrivania ¦ Globo terrestre de secretária ¦ Globus na biurko ¦ Bureauglobe
+Globe terrestre sur pied ¦ Floor globe ¦ Globo terráqueo de pie ¦ Standglobus ¦ Mappamondo con piedistallo ¦ Globo terrestre de pé ¦ Globus na stojaku ¦ Staande globe
+Pupitre de lecture ¦ Reading lectern ¦ Atril de lectura ¦ Lesepult ¦ Leggio da lettura ¦ Atril de leitura ¦ Pulpit do czytania ¦ Leeslessenaar
+Lampe de banquier ¦ Banker’s lamp ¦ Lámpara de banquero ¦ Bankerlampe ¦ Lampada da banchiere ¦ Candeeiro de banqueiro ¦ Lampa bankierska ¦ Bankierslamp
+Albums de famille ¦ Family albums ¦ Álbumes de familia ¦ Familienalben ¦ Album di famiglia ¦ Álbuns de família ¦ Albumy rodzinne ¦ Familiealbums
+Console de jeux ¦ Game console ¦ Videoconsola ¦ Spielkonsole ¦ Console per videogiochi ¦ Consola de jogos ¦ Konsola do gier ¦ Spelcomputer
+Scanner de documents ¦ Document scanner ¦ Escáner de documentos ¦ Dokumentenscanner ¦ Scanner per documenti ¦ Digitalizador de documentos ¦ Skaner dokumentów ¦ Documentscanner
+Carte de France ancienne ¦ Antique map of France ¦ Mapa antiguo de Francia ¦ Alte Frankreichkarte ¦ Antica carta della Francia ¦ Mapa antigo de França ¦ Dawna mapa Francji ¦ Oude kaart van Frankrijk
+Carte de Cassini encadrée ¦ Framed Cassini map ¦ Mapa de Cassini enmarcado ¦ Gerahmte Cassini-Karte ¦ Carta di Cassini incorniciata ¦ Mapa de Cassini emoldurado ¦ Mapa Cassiniego w ramie ¦ Ingelijste Cassinikaart
+Lutrin d’archives ¦ Archive lectern ¦ Atril de archivos ¦ Archivpult ¦ Leggio per archivi ¦ Atril de arquivo ¦ Pulpit archiwalny ¦ Archieflessenaar
+Loupe sur pied ¦ Magnifier on a stand ¦ Lupa de pie ¦ Standlupe ¦ Lente d’ingrandimento su supporto ¦ Lupa de pé ¦ Lupa na statywie ¦ Loep op standaard
+Lecteur de microfilms ¦ Microfilm reader ¦ Lector de microfilmes ¦ Mikrofilm-Lesegerät ¦ Lettore di microfilm ¦ Leitor de microfilmes ¦ Czytnik mikrofilmów ¦ Microfilmlezer
+Couffin en osier ¦ Wicker Moses basket ¦ Moisés de mimbre ¦ Mosesweidenkorb ¦ Culla di vimini ¦ Alcofa de vime ¦ Wiklinowy kosz Mojżesza ¦ Rieten mozesmandje
+Berceau en fer ¦ Iron cradle ¦ Cuna de hierro ¦ Eisenwiege ¦ Culla in ferro ¦ Berço de ferro ¦ Żelazna kołyska ¦ IJzeren wieg
+Lit mezzanine ¦ Loft bed ¦ Cama alta ¦ Hochbett ¦ Letto a soppalco ¦ Cama alta ¦ Łóżko na antresoli ¦ Hoogslaper
+Poussette ¦ Stroller ¦ Cochecito de bebé ¦ Kinderwagen ¦ Passeggino ¦ Carrinho de bebé ¦ Wózek dziecięcy ¦ Kinderwagen
+Parc pour bébé ¦ Playpen ¦ Parque infantil ¦ Laufstall ¦ Box per bambini ¦ Parque para bebé ¦ Kojec dla dziecka ¦ Babybox
+Cuisine pour enfant ¦ Play kitchen ¦ Cocinita de juguete ¦ Kinderküche ¦ Cucina giocattolo ¦ Cozinha de brincar ¦ Kuchnia dla dzieci ¦ Speelkeukentje
+Ours en peluche géant ¦ Giant teddy bear ¦ Oso de peluche gigante ¦ Riesiger Teddybär ¦ Orsacchiotto gigante ¦ Urso de peluche gigante ¦ Olbrzymi pluszowy miś ¦ Reuzenteddybeer
+Poupée en porcelaine ¦ Porcelain doll ¦ Muñeca de porcelana ¦ Porzellanpuppe ¦ Bambola di porcellana ¦ Boneca de porcelana ¦ Porcelanowa lalka ¦ Porseleinen pop
+Cubes de construction ¦ Building blocks ¦ Cubos de construcción ¦ Bauklötze ¦ Cubi da costruzione ¦ Cubos de construção ¦ Klocki ¦ Bouwblokken
+Théâtre de marionnettes ¦ Puppet theater ¦ Teatro de marionetas ¦ Kasperletheater ¦ Teatrino delle marionette ¦ Teatro de marionetas ¦ Teatrzyk kukiełkowy ¦ Poppenkast
+Luge ¦ Sled ¦ Trineo ¦ Schlitten ¦ Slittino ¦ Trenó ¦ Sanki ¦ Slee
+Table de jeux de société ¦ Board game table ¦ Mesa de juegos de mesa ¦ Spieletisch ¦ Tavolo per giochi da tavolo ¦ Mesa de jogos de tabuleiro ¦ Stół do gier planszowych ¦ Speltafel
+Petite table d’enfant ¦ Small children’s table ¦ Mesita infantil ¦ Kleiner Kindertisch ¦ Tavolino per bambini ¦ Mesinha de criança ¦ Mały stolik dziecięcy ¦ Klein kindertafeltje
+Chevalet de peinture ¦ Painting easel ¦ Caballete de pintura ¦ Malstaffelei ¦ Cavalletto da pittura ¦ Cavalete de pintura ¦ Sztaluga malarska ¦ Schildersezel
+Pupitre d’écolier double ¦ Double school desk ¦ Pupitre escolar doble ¦ Doppelschulbank ¦ Banco di scuola doppio ¦ Carteira escolar dupla ¦ Dwuosobowa ławka szkolna ¦ Dubbele schoolbank
+Tableau noir d’école ¦ School blackboard ¦ Pizarra escolar ¦ Schultafel ¦ Lavagna scolastica ¦ Quadro preto escolar ¦ Szkolna tablica ¦ Schoolbord
+Coiffeuse d’enfant ¦ Children’s vanity ¦ Tocador infantil ¦ Kinderfrisiertisch ¦ Toeletta per bambini ¦ Toucador de criança ¦ Toaletka dziecięca ¦ Kaptafeltje voor kinderen
+Marchande ¦ Toy shop stall ¦ Tiendita de juguete ¦ Kaufladen ¦ Negozietto giocattolo ¦ Lojinha de brincar ¦ Sklepik dziecięcy ¦ Speelwinkeltje
+Circuit de voitures ¦ Race car track ¦ Circuito de coches ¦ Autorennbahn ¦ Pista per macchinine ¦ Pista de carros ¦ Tor samochodowy ¦ Racebaan
+Arche de Noé en bois ¦ Wooden Noah’s ark ¦ Arca de Noé de madera ¦ Arche Noah aus Holz ¦ Arca di Noè in legno ¦ Arca de Noé de madeira ¦ Drewniana arka Noego ¦ Houten ark van Noach
+Toupie ¦ Spinning top ¦ Peonza ¦ Kreisel ¦ Trottola ¦ Pião ¦ Bąk ¦ Tol
+Tapis d’éveil ¦ Baby play mat ¦ Alfombra de actividades ¦ Krabbeldecke ¦ Tappeto gioco ¦ Tapete de atividades ¦ Mata edukacyjna ¦ Speelmat
+Piscine à balles ¦ Ball pit ¦ Piscina de bolas ¦ Bällebad ¦ Piscina di palline ¦ Piscina de bolas ¦ Basen z piłkami ¦ Ballenbak
+Tipi d’enfant ¦ Children’s teepee ¦ Tipi infantil ¦ Kindertipi ¦ Tenda indiana per bambini ¦ Tenda índia de criança ¦ Tipi dziecięce ¦ Speeltipi
+Draisienne ¦ Balance bike ¦ Bicicleta sin pedales ¦ Laufrad ¦ Bici senza pedali ¦ Bicicleta de equilíbrio ¦ Rowerek biegowy ¦ Loopfiets
+Voiture à pédales ¦ Pedal car ¦ Coche de pedales ¦ Tretauto ¦ Macchinina a pedali ¦ Carro de pedais ¦ Samochodzik na pedały ¦ Trapauto
+Cheval sur roulettes ¦ Horse on wheels ¦ Caballito con ruedas ¦ Pferd auf Rollen ¦ Cavallo a rotelle ¦ Cavalo com rodas ¦ Konik na kółkach ¦ Hobbelpaard op wieltjes
+Bureau d’écolier réglable ¦ Adjustable school desk ¦ Pupitre escolar regulable ¦ Höhenverstellbarer Schülerschreibtisch ¦ Scrivania regolabile per scolari ¦ Carteira escolar regulável ¦ Regulowane biurko szkolne ¦ Verstelbaar schoolbureau
+Tabouret d’enfant ¦ Children’s stool ¦ Taburete infantil ¦ Kinderhocker ¦ Sgabello per bambini ¦ Banco de criança ¦ Taborecik dziecięcy ¦ Kinderkrukje
+Suspension trois globes ¦ Three-globe pendant light ¦ Lámpara colgante de tres globos ¦ Pendelleuchte mit drei Kugeln ¦ Lampadario a tre sfere ¦ Candeeiro suspenso de três globos ¦ Lampa wisząca z trzema kloszami ¦ Hanglamp met drie bollen
+Lampe Tiffany ¦ Tiffany lamp ¦ Lámpara Tiffany ¦ Tiffany-Lampe ¦ Lampada Tiffany ¦ Candeeiro Tiffany ¦ Lampa Tiffany ¦ Tiffanylamp
+Lampe en opaline ¦ Opaline glass lamp ¦ Lámpara de opalina ¦ Opalglaslampe ¦ Lampada in opalina ¦ Candeeiro de opalina ¦ Lampa z opalinowego szkła ¦ Opaline lamp
+Lampe à poser en céramique ¦ Ceramic table lamp ¦ Lámpara de mesa de cerámica ¦ Keramik-Tischlampe ¦ Lampada da tavolo in ceramica ¦ Candeeiro de mesa de cerâmica ¦ Ceramiczna lampa stołowa ¦ Keramische tafellamp
+Lampadaire trépied en bois ¦ Wooden tripod floor lamp ¦ Lámpara de pie trípode de madera ¦ Dreibein-Stehlampe aus Holz ¦ Lampada da terra treppiede in legno ¦ Candeeiro de pé tripé de madeira ¦ Drewniana lampa podłogowa na trójnogu ¦ Houten driepootvloerlamp
+Lampadaire arc en marbre ¦ Marble arc floor lamp ¦ Lámpara de arco de mármol ¦ Bogenlampe mit Marmorfuß ¦ Lampada ad arco in marmo ¦ Candeeiro de arco de mármore ¦ Łukowa lampa podłogowa z marmurem ¦ Booglamp met marmeren voet
+Liseuse sur pied ¦ Floor reading lamp ¦ Lámpara de lectura de pie ¦ Stehende Leseleuchte ¦ Lampada da lettura da terra ¦ Candeeiro de leitura de pé ¦ Lampa podłogowa do czytania ¦ Staande leeslamp
+Réglette néon ¦ Fluorescent tube light ¦ Regleta de neón ¦ Neonröhre ¦ Plafoniera al neon ¦ Calha de néon ¦ Świetlówka ¦ TL-balk
+Lanterne à bougie ¦ Candle lantern ¦ Farol de vela ¦ Kerzenlaterne ¦ Lanterna portacandela ¦ Lanterna de vela ¦ Lampion na świecę ¦ Kaarslantaarn
+Lampe à pétrole en cuivre ¦ Copper oil lamp ¦ Lámpara de petróleo de cobre ¦ Kupferne Petroleumlampe ¦ Lampada a petrolio in rame ¦ Candeeiro a petróleo de cobre ¦ Mosiężna lampa naftowa ¦ Koperen olielamp
+Lampe à huile romaine ¦ Roman oil lamp ¦ Lámpara de aceite romana ¦ Römische Öllampe ¦ Lucerna romana ¦ Lucerna romana ¦ Rzymska lampka oliwna ¦ Romeins olielampje
+Bougies sur plateau ¦ Candles on a tray ¦ Velas en bandeja ¦ Kerzen auf Tablett ¦ Candele su vassoio ¦ Velas em tabuleiro ¦ Świece na tacy ¦ Kaarsen op dienblad
+Chandelier à trois branches ¦ Three-branch candlestick ¦ Candelabro de tres brazos ¦ Dreiarmiger Kerzenleuchter ¦ Candelabro a tre bracci ¦ Candelabro de três braços ¦ Trójramienny świecznik ¦ Driearmige kandelaar
+Borne lumineuse ¦ Light bollard ¦ Baliza luminosa ¦ Pollerleuchte ¦ Paletto luminoso ¦ Baliza luminosa ¦ Słupek oświetleniowy ¦ Tuinpaalverlichting
+Mur de cadres photos ¦ Photo frame wall ¦ Pared de marcos de fotos ¦ Bilderwand ¦ Parete di cornici ¦ Parede de molduras ¦ Ściana z ramkami na zdjęcia ¦ Fotowand
+Portrait d’ancêtre ¦ Ancestor’s portrait ¦ Retrato de antepasado ¦ Ahnenporträt ¦ Ritratto di antenato ¦ Retrato de antepassado ¦ Portret przodka ¦ Portret van een voorouder
+Tableau de paysage ¦ Landscape painting ¦ Cuadro de paisaje ¦ Landschaftsgemälde ¦ Quadro di paesaggio ¦ Quadro de paisagem ¦ Obraz z pejzażem ¦ Landschapsschilderij
+Marine ¦ Seascape painting ¦ Marina ¦ Seestück ¦ Marina ¦ Marinha ¦ Obraz z motywem morskim ¦ Zeegezicht
+Cadre photo sur pied ¦ Photo frame on a stand ¦ Portarretratos de sobremesa ¦ Bilderrahmen zum Aufstellen ¦ Cornice portafoto da appoggio ¦ Moldura de pé ¦ Stojąca ramka na zdjęcie ¦ Staand fotolijstje
+Trophée de chasse ¦ Hunting trophy ¦ Trofeo de caza ¦ Jagdtrophäe ¦ Trofeo di caccia ¦ Troféu de caça ¦ Trofeum myśliwskie ¦ Jachttrofee
+Maquette de bateau ¦ Model ship ¦ Maqueta de barco ¦ Schiffsmodell ¦ Modellino di nave ¦ Maqueta de barco ¦ Model statku ¦ Scheepsmodel
+Sculpture sur socle ¦ Sculpture on a plinth ¦ Escultura sobre pedestal ¦ Skulptur auf Sockel ¦ Scultura su piedistallo ¦ Escultura em pedestal ¦ Rzeźba na cokole ¦ Beeld op sokkel
+Buste en plâtre ¦ Plaster bust ¦ Busto de yeso ¦ Gipsbüste ¦ Busto in gesso ¦ Busto de gesso ¦ Gipsowe popiersie ¦ Gipsen buste
+Statuette en bronze ¦ Bronze statuette ¦ Estatuilla de bronce ¦ Bronzestatuette ¦ Statuetta in bronzo ¦ Estatueta de bronze ¦ Brązowa figurka ¦ Bronzen beeldje
+Grand vase en terre ¦ Large terracotta vase ¦ Jarrón grande de barro ¦ Große Tonvase ¦ Grande vaso in terracotta ¦ Vaso grande de barro ¦ Duży gliniany wazon ¦ Grote aardewerken vaas
+Bouquet de fleurs ¦ Bouquet of flowers ¦ Ramo de flores ¦ Blumenstrauß ¦ Mazzo di fiori ¦ Ramo de flores ¦ Bukiet kwiatów ¦ Bos bloemen
+Horloge de gare ¦ Station clock ¦ Reloj de estación ¦ Bahnhofsuhr ¦ Orologio da stazione ¦ Relógio de estação ¦ Zegar dworcowy ¦ Stationsklok
+Coucou de la Forêt-Noire ¦ Black Forest cuckoo clock ¦ Reloj de cuco de la Selva Negra ¦ Schwarzwälder Kuckucksuhr ¦ Orologio a cucù della Foresta Nera ¦ Relógio de cuco da Floresta Negra ¦ Zegar z kukułką ze Schwarzwaldu ¦ Koekoeksklok uit het Zwarte Woud
+Rideaux ¦ Curtains ¦ Cortinas ¦ Vorhänge ¦ Tende ¦ Cortinados ¦ Zasłony ¦ Gordijnen
+Grand tapis persan ¦ Large Persian rug ¦ Gran alfombra persa ¦ Großer Perserteppich ¦ Grande tappeto persiano ¦ Grande tapete persa ¦ Duży dywan perski ¦ Groot Perzisch tapijt
+Tapis berbère à losanges ¦ Diamond-pattern Berber rug ¦ Alfombra bereber de rombos ¦ Berberteppich mit Rautenmuster ¦ Tappeto berbero a losanghe ¦ Tapete berbere de losangos ¦ Berberyjski dywan w romby ¦ Berbertapijt met ruiten
+Kilim ¦ Kilim ¦ Kilim ¦ Kelim ¦ Kilim ¦ Kilim ¦ Kilim ¦ Kelim
+Tapis rond en jute ¦ Round jute rug ¦ Alfombra redonda de yute ¦ Runder Juteteppich ¦ Tappeto rotondo in iuta ¦ Tapete redondo de juta ¦ Okrągły dywan z juty ¦ Rond juten vloerkleed
+Paravent japonais ¦ Japanese folding screen ¦ Biombo japonés ¦ Japanischer Paravent ¦ Paravento giapponese ¦ Biombo japonês ¦ Japoński parawan ¦ Japans kamerscherm
+Panier à journaux ¦ Magazine basket ¦ Revistero de mimbre ¦ Zeitungskorb ¦ Portariviste ¦ Cesto para jornais ¦ Kosz na gazety ¦ Lectuurmand
+Grand panier en osier ¦ Large wicker basket ¦ Cesta grande de mimbre ¦ Großer Weidenkorb ¦ Grande cesto di vimini ¦ Cesto grande de vime ¦ Duży wiklinowy kosz ¦ Grote rieten mand
+Garde-feu en laiton ¦ Brass fire screen ¦ Pantalla de chimenea de latón ¦ Messing-Funkenschutz ¦ Parafuoco in ottone ¦ Guarda-fogo de latão ¦ Mosiężna osłona kominka ¦ Koperen haardscherm
+Terrarium ¦ Terrarium ¦ Terrario ¦ Terrarium ¦ Terrario ¦ Terrário ¦ Terrarium ¦ Terrarium
+Diplôme encadré ¦ Framed diploma ¦ Diploma enmarcado ¦ Gerahmtes Diplom ¦ Diploma incorniciato ¦ Diploma emoldurado ¦ Dyplom w ramie ¦ Ingelijst diploma
+Photo de classe encadrée ¦ Framed class photo ¦ Foto de clase enmarcada ¦ Gerahmtes Klassenfoto ¦ Foto di classe incorniciata ¦ Fotografia de turma emoldurada ¦ Zdjęcie klasowe w ramie ¦ Ingelijste klassenfoto
+Livret de famille sous verre ¦ Family record book under glass ¦ Libro de familia bajo cristal ¦ Familienstammbuch unter Glas ¦ Libretto di famiglia sotto vetro ¦ Livrete de família sob vidro ¦ Książeczka rodzinna za szkłem ¦ Trouwboekje achter glas
+Canevas brodé ¦ Embroidered canvas ¦ Bordado en cañamazo ¦ Gesticktes Stramin-Bild ¦ Ricamo su canovaccio ¦ Bordado em talagarça ¦ Haftowana kanwa ¦ Geborduurd stramien
+Tapisserie murale ¦ Wall tapestry ¦ Tapiz de pared ¦ Wandteppich ¦ Arazzo da parete ¦ Tapeçaria de parede ¦ Gobelin ścienny ¦ Wandtapijt
+Médaillon de famille ¦ Family locket ¦ Medallón familiar ¦ Familienmedaillon ¦ Medaglione di famiglia ¦ Medalhão de família ¦ Rodzinny medalion ¦ Familiemedaillon
+Trophée sportif ¦ Sports trophy ¦ Trofeo deportivo ¦ Sportpokal ¦ Trofeo sportivo ¦ Troféu desportivo ¦ Trofeum sportowe ¦ Sporttrofee
+Buste de Marianne ¦ Bust of Marianne ¦ Busto de Marianne ¦ Marianne-Büste ¦ Busto di Marianne ¦ Busto de Marianne ¦ Popiersie Marianny ¦ Buste van Marianne
+Vase de Gien ¦ Gien vase ¦ Jarrón de Gien ¦ Vase aus Gien ¦ Vaso di Gien ¦ Vaso de Gien ¦ Wazon z Gien ¦ Vaas uit Gien
+Vase de Sèvres ¦ Sèvres vase ¦ Jarrón de Sèvres ¦ Sèvres-Vase ¦ Vaso di Sèvres ¦ Vaso de Sèvres ¦ Wazon z Sèvres ¦ Sèvres-vaas
+Potiche chinoise ¦ Chinese vase ¦ Jarrón chino ¦ Chinesische Deckelvase ¦ Vaso cinese ¦ Vaso chinês ¦ Chiński wazon ¦ Chinese pot
+Vase en étain ¦ Pewter vase ¦ Jarrón de peltre ¦ Zinnvase ¦ Vaso in peltro ¦ Vaso de estanho ¦ Cynowy wazon ¦ Tinnen vaas
+Bouquet de fleurs séchées ¦ Dried flower bouquet ¦ Ramo de flores secas ¦ Trockenblumenstrauß ¦ Mazzo di fiori secchi ¦ Ramo de flores secas ¦ Bukiet suszonych kwiatów ¦ Bos droogbloemen
+Sapin de Noël décoré ¦ Decorated Christmas tree ¦ Árbol de Navidad decorado ¦ Geschmückter Weihnachtsbaum ¦ Albero di Natale decorato ¦ Árvore de Natal decorada ¦ Ubrana choinka ¦ Versierde kerstboom
+Couronne de porte ¦ Door wreath ¦ Corona de puerta ¦ Türkranz ¦ Ghirlanda da porta ¦ Coroa de porta ¦ Wieniec na drzwi ¦ Deurkrans
+Photophores ¦ Tealight holders ¦ Portavelas ¦ Windlichter ¦ Portacandele ¦ Porta-velas ¦ Lampiony ¦ Windlichtjes
+Bateau en bouteille ¦ Ship in a bottle ¦ Barco en una botella ¦ Buddelschiff ¦ Nave in bottiglia ¦ Barco na garrafa ¦ Statek w butelce ¦ Schip in een fles
+Maquette de locomotive ¦ Model locomotive ¦ Maqueta de locomotora ¦ Lokomotivmodell ¦ Modellino di locomotiva ¦ Maqueta de locomotiva ¦ Model lokomotywy ¦ Modellocomotief
+Collection de dés à coudre ¦ Thimble collection ¦ Colección de dedales ¦ Fingerhutsammlung ¦ Collezione di ditali ¦ Coleção de dedais ¦ Kolekcja naparstków ¦ Vingerhoedverzameling
+Vitrine de minéraux ¦ Mineral display case ¦ Vitrina de minerales ¦ Mineralienvitrine ¦ Vetrina di minerali ¦ Vitrine de minerais ¦ Gablota z minerałami ¦ Vitrine met mineralen
+Collection de papillons ¦ Butterfly collection ¦ Colección de mariposas ¦ Schmetterlingssammlung ¦ Collezione di farfalle ¦ Coleção de borboletas ¦ Kolekcja motyli ¦ Vlinderverzameling
+Boîte à musique ¦ Music box ¦ Caja de música ¦ Spieldose ¦ Carillon ¦ Caixa de música ¦ Pozytywka ¦ Muziekdoos
+Baromètre ¦ Barometer ¦ Barómetro ¦ Barometer ¦ Barometro ¦ Barómetro ¦ Barometr ¦ Barometer
+Thermomètre ancien ¦ Antique thermometer ¦ Termómetro antiguo ¦ Altes Thermometer ¦ Termometro antico ¦ Termómetro antigo ¦ Dawny termometr ¦ Oude thermometer
+Voilages ¦ Sheer curtains ¦ Visillos ¦ Gardinen ¦ Tende velate ¦ Cortinas transparentes ¦ Firanki ¦ Vitrage
+Rideaux de velours ¦ Velvet curtains ¦ Cortinas de terciopelo ¦ Samtvorhänge ¦ Tende di velluto ¦ Cortinados de veludo ¦ Aksamitne zasłony ¦ Fluwelen gordijnen
+Store bateau ¦ Roman blind ¦ Estor plegable ¦ Raffrollo ¦ Tenda a pacchetto ¦ Estore de pregas ¦ Roleta rzymska ¦ Vouwgordijn
+Tapis moderne ¦ Modern rug ¦ Alfombra moderna ¦ Moderner Teppich ¦ Tappeto moderno ¦ Tapete moderno ¦ Nowoczesny dywan ¦ Modern vloerkleed
+Tapis en peau de mouton ¦ Sheepskin rug ¦ Alfombra de piel de oveja ¦ Schaffellteppich ¦ Tappeto di pelle di pecora ¦ Tapete de pele de ovelha ¦ Dywanik z owczej skóry ¦ Schapenvacht
+Poêle à granulés rouge ¦ Red pellet stove ¦ Estufa de pellets roja ¦ Roter Pelletofen ¦ Stufa a pellet rossa ¦ Salamandra a pellets vermelha ¦ Czerwony piecyk na pellet ¦ Rode pelletkachel
+Poêle Godin ¦ Godin stove ¦ Estufa Godin ¦ Godin-Ofen ¦ Stufa Godin ¦ Salamandra Godin ¦ Piec Godin ¦ Godin-kachel
+Radiateur vertical design ¦ Designer vertical radiator ¦ Radiador vertical de diseño ¦ Vertikaler Designheizkörper ¦ Radiatore verticale di design ¦ Radiador vertical de design ¦ Designerski grzejnik pionowy ¦ Verticale designradiator
+Chauffe-eau ¦ Water heater ¦ Calentador de agua ¦ Warmwasserspeicher ¦ Scaldabagno ¦ Esquentador ¦ Podgrzewacz wody ¦ Boiler
+Téléviseur sur meuble ¦ TV on a stand ¦ Televisor sobre mueble ¦ Fernseher auf Möbel ¦ Televisore su mobile ¦ Televisor sobre móvel ¦ Telewizor na szafce ¦ Televisie op meubel
+Téléviseur au mur ¦ Wall-mounted TV ¦ Televisor en la pared ¦ Wandfernseher ¦ Televisore a parete ¦ Televisor na parede ¦ Telewizor na ścianie ¦ Televisie aan de muur
+Téléviseur à tube ¦ CRT television ¦ Televisor de tubo ¦ Röhrenfernseher ¦ Televisore a tubo catodico ¦ Televisor de tubo ¦ Telewizor kineskopowy ¦ Beeldbuistelevisie
+Chaîne hi-fi ¦ Hi-fi system ¦ Equipo de alta fidelidad ¦ Stereoanlage ¦ Impianto hi-fi ¦ Aparelhagem hi-fi ¦ Wieża stereo ¦ Stereo-installatie
+Enceintes colonnes ¦ Tower speakers ¦ Altavoces de columna ¦ Standlautsprecher ¦ Casse a colonna ¦ Colunas de chão ¦ Kolumny głośnikowe ¦ Zuilluidsprekers
+Radiocassette ¦ Radio cassette player ¦ Radiocasete ¦ Radiorekorder ¦ Radioregistratore ¦ Rádio-cassete ¦ Radiomagnetofon ¦ Radiocassettespeler
+Magnétoscope ¦ VCR ¦ Vídeo VHS ¦ Videorekorder ¦ Videoregistratore ¦ Videogravador ¦ Magnetowid ¦ Videorecorder
+Ventilateur de plafond ¦ Ceiling fan ¦ Ventilador de techo ¦ Deckenventilator ¦ Ventilatore da soffitto ¦ Ventoinha de teto ¦ Wentylator sufitowy ¦ Plafondventilator
+Ventilateur de table ¦ Desk fan ¦ Ventilador de mesa ¦ Tischventilator ¦ Ventilatore da tavolo ¦ Ventoinha de mesa ¦ Wentylator biurkowy ¦ Tafelventilator
+Radiateur soufflant ¦ Fan heater ¦ Calefactor de aire ¦ Heizlüfter ¦ Termoventilatore ¦ Termoventilador ¦ Termowentylator ¦ Ventilatorkachel
+Convecteur électrique ¦ Electric convector heater ¦ Convector eléctrico ¦ Elektrischer Konvektor ¦ Convettore elettrico ¦ Convetor elétrico ¦ Grzejnik konwektorowy ¦ Elektrische convector
+Poêle à bois moderne ¦ Modern wood stove ¦ Estufa de leña moderna ¦ Moderner Holzofen ¦ Stufa a legna moderna ¦ Salamandra a lenha moderna ¦ Nowoczesny piecyk na drewno ¦ Moderne houtkachel
+Cuisinière à bois moderne ¦ Modern wood-burning range ¦ Cocina de leña moderna ¦ Moderner Holzherd ¦ Cucina a legna moderna ¦ Fogão a lenha moderno ¦ Nowoczesna kuchnia na drewno ¦ Modern houtfornuis
+Pompe à chaleur ¦ Heat pump ¦ Bomba de calor ¦ Wärmepumpe ¦ Pompa di calore ¦ Bomba de calor ¦ Pompa ciepła ¦ Warmtepomp
+Chaudière au fioul ¦ Oil-fired boiler ¦ Caldera de gasóleo ¦ Ölheizkessel ¦ Caldaia a gasolio ¦ Caldeira a gasóleo ¦ Kocioł olejowy ¦ Stookolieketel
+Chaudière à gaz murale ¦ Wall-mounted gas boiler ¦ Caldera de gas mural ¦ Gas-Wandtherme ¦ Caldaia a gas murale ¦ Caldeira a gás mural ¦ Wiszący kocioł gazowy ¦ Gaswandketel
+Cuve à fioul ¦ Heating oil tank ¦ Depósito de gasóleo ¦ Heizöltank ¦ Serbatoio del gasolio ¦ Depósito de gasóleo ¦ Zbiornik na olej opałowy ¦ Stookolietank
+Robot tondeuse ¦ Robot lawnmower ¦ Robot cortacésped ¦ Mähroboter ¦ Robot tagliaerba ¦ Robô corta-relva ¦ Robot koszący ¦ Robotmaaier
+Téléviseur portatif années 70 ¦ 1970s portable TV ¦ Televisor portátil de los años 70 ¦ Tragbarer Fernseher aus den 70ern ¦ Televisore portatile anni ’70 ¦ Televisor portátil dos anos 70 ¦ Przenośny telewizor z lat 70. ¦ Draagbare tv uit de jaren 70
+Lecteur CD ¦ CD player ¦ Reproductor de CD ¦ CD-Player ¦ Lettore CD ¦ Leitor de CD ¦ Odtwarzacz CD ¦ Cd-speler
+Magnétophone à bandes ¦ Reel-to-reel tape recorder ¦ Magnetófono de bobinas ¦ Tonbandgerät ¦ Registratore a bobine ¦ Gravador de bobinas ¦ Magnetofon szpulowy ¦ Bandrecorder
+Enceinte connectée ¦ Smart speaker ¦ Altavoz inteligente ¦ Smart Speaker ¦ Altoparlante smart ¦ Coluna inteligente ¦ Inteligentny głośnik ¦ Slimme speaker
+Piano droit noir ¦ Black upright piano ¦ Piano vertical negro ¦ Schwarzes Klavier ¦ Pianoforte verticale nero ¦ Piano vertical preto ¦ Czarne pianino ¦ Zwarte buffetpiano
+Piano droit en acajou ¦ Mahogany upright piano ¦ Piano vertical de caoba ¦ Klavier aus Mahagoni ¦ Pianoforte verticale in mogano ¦ Piano vertical de mogno ¦ Mahoniowe pianino ¦ Mahoniehouten buffetpiano
+Piano demi-queue ¦ Baby grand piano ¦ Piano de media cola ¦ Stutzflügel ¦ Pianoforte a mezza coda ¦ Piano de meia cauda ¦ Fortepian gabinetowy ¦ Halve vleugel
+Piano à queue de concert ¦ Concert grand piano ¦ Piano de cola de concierto ¦ Konzertflügel ¦ Pianoforte a coda da concerto ¦ Piano de cauda de concerto ¦ Fortepian koncertowy ¦ Concertvleugel
+Épinette ¦ Spinet ¦ Espineta ¦ Spinett ¦ Spinetta ¦ Espineta ¦ Szpinet ¦ Spinet
+Orgue de salon ¦ Parlor organ ¦ Órgano de salón ¦ Harmonium ¦ Organo da salotto ¦ Órgão de sala ¦ Fisharmonia ¦ Harmonium
+Clavier électronique ¦ Electronic keyboard ¦ Teclado electrónico ¦ Keyboard ¦ Tastiera elettronica ¦ Teclado eletrónico ¦ Keyboard ¦ Keyboard
+Guitare classique ¦ Classical guitar ¦ Guitarra clásica ¦ Konzertgitarre ¦ Chitarra classica ¦ Guitarra clássica ¦ Gitara klasyczna ¦ Klassieke gitaar
+Banjo ¦ Banjo ¦ Banjo ¦ Banjo ¦ Banjo ¦ Banjo ¦ Banjo ¦ Banjo
+Mandoline ¦ Mandolin ¦ Mandolina ¦ Mandoline ¦ Mandolino ¦ Bandolim ¦ Mandolina ¦ Mandoline
+Violon sur pupitre ¦ Violin on a music stand ¦ Violín sobre atril ¦ Geige auf Notenständer ¦ Violino sul leggio ¦ Violino na estante ¦ Skrzypce na pulpicie ¦ Viool op lessenaar
+Bandonéon ¦ Bandoneon ¦ Bandoneón ¦ Bandoneon ¦ Bandoneón ¦ Bandoneón ¦ Bandoneon ¦ Bandoneon
+Trompette sur pied ¦ Trumpet on a stand ¦ Trompeta sobre soporte ¦ Trompete auf Ständer ¦ Tromba su supporto ¦ Trompete em suporte ¦ Trąbka na stojaku ¦ Trompet op standaard
+Saxophone sur pied ¦ Saxophone on a stand ¦ Saxofón sobre soporte ¦ Saxophon auf Ständer ¦ Sassofono su supporto ¦ Saxofone em suporte ¦ Saksofon na stojaku ¦ Saxofoon op standaard
+Cor de chasse ¦ Hunting horn ¦ Trompa de caza ¦ Jagdhorn ¦ Corno da caccia ¦ Trompa de caça ¦ Róg myśliwski ¦ Jachthoorn
+Clarinette sur pied ¦ Clarinet on a stand ¦ Clarinete sobre soporte ¦ Klarinette auf Ständer ¦ Clarinetto su supporto ¦ Clarinete em suporte ¦ Klarnet na stojaku ¦ Klarinet op standaard
+Pupitre de musique ¦ Music stand ¦ Atril de música ¦ Notenständer ¦ Leggio musicale ¦ Estante de música ¦ Pulpit na nuty ¦ Muziekstandaard
+Gramophone à pavillon ¦ Horn gramophone ¦ Gramófono de bocina ¦ Trichtergrammophon ¦ Grammofono a tromba ¦ Gramofone de campânula ¦ Gramofon z tubą ¦ Hoorngrammofoon
+Cornemuse (biniou) ¦ Bagpipe (biniou) ¦ Gaita (biniou) ¦ Dudelsack (Biniou) ¦ Cornamusa (biniou) ¦ Gaita de foles (biniou) ¦ Dudy (biniou) ¦ Doedelzak (biniou)
+Timbales ¦ Timpani ¦ Timbales ¦ Pauken ¦ Timpani ¦ Tímpanos ¦ Kotły ¦ Pauken
+Xylophone ¦ Xylophone ¦ Xilófono ¦ Xylophon ¦ Xilofono ¦ Xilofone ¦ Ksylofon ¦ Xylofoon
+Marimba ¦ Marimba ¦ Marimba ¦ Marimba ¦ Marimba ¦ Marimba ¦ Marimba ¦ Marimba
+Cithare ¦ Zither ¦ Cítara ¦ Zither ¦ Cetra ¦ Cítara ¦ Cytra ¦ Citer
+Ukulélé ¦ Ukulele ¦ Ukelele ¦ Ukulele ¦ Ukulele ¦ Ukulele ¦ Ukulele ¦ Ukelele
+Luth ¦ Lute ¦ Laúd ¦ Laute ¦ Liuto ¦ Alaúde ¦ Lutnia ¦ Luit
+Flûte traversière sur support ¦ Flute on a stand ¦ Flauta travesera sobre soporte ¦ Querflöte auf Ständer ¦ Flauto traverso su supporto ¦ Flauta transversal em suporte ¦ Flet poprzeczny na stojaku ¦ Dwarsfluit op standaard
+Flûte à bec ¦ Recorder ¦ Flauta dulce ¦ Blockflöte ¦ Flauto dolce ¦ Flauta de bisel ¦ Flet prosty ¦ Blokfluit
+Trombone sur pied ¦ Trombone on a stand ¦ Trombón sobre soporte ¦ Posaune auf Ständer ¦ Trombone su supporto ¦ Trombone em suporte ¦ Puzon na stojaku ¦ Trombone op standaard
+Hautbois sur support ¦ Oboe on a stand ¦ Oboe sobre soporte ¦ Oboe auf Ständer ¦ Oboe su supporto ¦ Oboé em suporte ¦ Obój na stojaku ¦ Hobo op standaard
+Harmonica et pupitre ¦ Harmonica and stand ¦ Armónica y atril ¦ Mundharmonika und Notenpult ¦ Armonica e leggio ¦ Harmónica e estante ¦ Harmonijka i pulpit ¦ Mondharmonica en lessenaar
+Meuble à partitions ¦ Sheet music cabinet ¦ Mueble para partituras ¦ Notenschrank ¦ Mobile portaspartiti ¦ Móvel para partituras ¦ Szafka na nuty ¦ Bladmuziekkast
+Table de mixage ¦ Mixing console ¦ Mesa de mezclas ¦ Mischpult ¦ Mixer ¦ Mesa de mistura ¦ Mikser audio ¦ Mengpaneel
+Rayonnage de cave ¦ Cellar shelving ¦ Estantería de bodega ¦ Kellerregal ¦ Scaffale da cantina ¦ Estante de cave ¦ Regał piwniczny ¦ Kelderstelling
+Cartons de déménagement ¦ Moving boxes ¦ Cajas de mudanza ¦ Umzugskartons ¦ Scatoloni da trasloco ¦ Caixas de mudança ¦ Kartony przeprowadzkowe ¦ Verhuisdozen
+Étagère d’archives familiales ¦ Family archive shelf ¦ Estantería de archivos familiares ¦ Regal mit Familienarchiv ¦ Scaffale dell’archivio di famiglia ¦ Estante de arquivos de família ¦ Regał na archiwum rodzinne ¦ Rek met familiearchief
+Coffret à bijoux ¦ Jewelry box ¦ Joyero ¦ Schmuckkästchen ¦ Portagioie ¦ Caixa de joias ¦ Szkatułka na biżuterię ¦ Juwelenkistje
+Portant à vêtements ¦ Clothes rack ¦ Burro para ropa ¦ Kleiderständer ¦ Stender per abiti ¦ Arara de roupa ¦ Wieszak na ubrania ¦ Kledingrek
+Dressing d’angle ¦ Corner walk-in closet ¦ Vestidor esquinero ¦ Begehbarer Eckkleiderschrank ¦ Cabina armadio angolare ¦ Closet de canto ¦ Narożna garderoba ¦ Hoekinloopkast
+Meuble à cases (cubes) ¦ Cube storage unit ¦ Estantería de cubos ¦ Würfelregal ¦ Mobile a cubi ¦ Estante de cubos ¦ Regał z przegródkami (kostki) ¦ Vakkenkast (kubussen)
+Étagère de cellier ¦ Pantry shelf ¦ Estantería de despensa ¦ Vorratsregal ¦ Scaffale da dispensa ¦ Estante de despensa ¦ Regał spiżarniany ¦ Voorraadrek
+Boîtes de rangement en plastique ¦ Plastic storage boxes ¦ Cajas de almacenaje de plástico ¦ Kunststoff-Aufbewahrungsboxen ¦ Contenitori in plastica ¦ Caixas de arrumação de plástico ¦ Plastikowe pojemniki do przechowywania ¦ Plastic opbergboxen
+Caisses en bois ¦ Wooden crates ¦ Cajas de madera ¦ Holzkisten ¦ Cassette di legno ¦ Caixotes de madeira ¦ Drewniane skrzynki ¦ Houten kisten
+Panier à pique-nique ¦ Picnic basket ¦ Cesta de pícnic ¦ Picknickkorb ¦ Cesto da picnic ¦ Cesto de piquenique ¦ Kosz piknikowy ¦ Picknickmand
+Boîte à couture ¦ Sewing box ¦ Costurero ¦ Nähkästchen ¦ Scatola da cucito ¦ Caixa de costura ¦ Przybornik do szycia ¦ Naaidoos
+Housse à vêtements ¦ Garment bag ¦ Funda para ropa ¦ Kleidersack ¦ Custodia per abiti ¦ Capa para roupa ¦ Pokrowiec na ubrania ¦ Kledinghoes
+Crucifix mural ¦ Wall crucifix ¦ Crucifijo de pared ¦ Wandkruzifix ¦ Crocifisso da parete ¦ Crucifixo de parede ¦ Krucyfiks ścienny ¦ Wandkruisbeeld
+Crèche provençale et santons ¦ Provençal nativity scene with santons ¦ Belén provenzal con santons ¦ Provenzalische Krippe mit Santons ¦ Presepe provenzale con santons ¦ Presépio provençal com santons ¦ Szopka prowansalska z figurkami santons ¦ Provençaalse kerststal met santons
+Chapelet ¦ Rosary ¦ Rosario ¦ Rosenkranz ¦ Rosario ¦ Terço ¦ Różaniec ¦ Rozenkrans
+Coin du souvenir (photos et bougie) ¦ Remembrance corner (photos and candle) ¦ Rincón del recuerdo (fotos y vela) ¦ Erinnerungsecke (Fotos und Kerze) ¦ Angolo dei ricordi (foto e candela) ¦ Canto da memória (fotos e vela) ¦ Kącik pamięci (zdjęcia i świeca) ¦ Herdenkingshoekje (foto's en kaars)
+Boîte à lettres d’amour ¦ Love letter box ¦ Caja de cartas de amor ¦ Liebesbriefkästchen ¦ Scatola delle lettere d’amore ¦ Caixa de cartas de amor ¦ Pudełko z listami miłosnymi ¦ Doos met liefdesbrieven
+Vitrine de médailles ¦ Medal display case ¦ Vitrina de medallas ¦ Medaillenvitrine ¦ Vetrina di medaglie ¦ Vitrine de medalhas ¦ Gablota z medalami ¦ Medaillevitrine
+Bouquet de mariée sous globe ¦ Bridal bouquet under a glass dome ¦ Ramo de novia bajo campana de cristal ¦ Brautstrauß unter Glasglocke ¦ Bouquet da sposa sotto campana di vetro ¦ Ramo de noiva sob redoma ¦ Bukiet ślubny pod kloszem ¦ Bruidsboeket onder stolp
+Bénitier mural ¦ Wall holy water font ¦ Pila de agua bendita de pared ¦ Weihwasserbecken an der Wand ¦ Acquasantiera da parete ¦ Pia de água benta de parede ¦ Kropielniczka ścienna ¦ Wijwaterbakje
+Icône orthodoxe ¦ Orthodox icon ¦ Icono ortodoxo ¦ Orthodoxe Ikone ¦ Icona ortodossa ¦ Ícone ortodoxo ¦ Ikona prawosławna ¦ Orthodoxe icoon
+Rameau de buis bénit ¦ Blessed boxwood sprig ¦ Ramo de boj bendecido ¦ Gesegneter Buchsbaumzweig ¦ Rametto di bosso benedetto ¦ Raminho de buxo benzido ¦ Gałązka poświęconego bukszpanu ¦ Gewijde palmtak (buxus)
+Statue de saint ¦ Statue of a saint ¦ Estatua de santo ¦ Heiligenfigur ¦ Statua di santo ¦ Estátua de santo ¦ Figura świętego ¦ Heiligenbeeld
+Plaque de communion encadrée ¦ Framed communion plaque ¦ Placa de comunión enmarcada ¦ Gerahmte Kommunionsurkunde ¦ Ricordo della comunione incorniciato ¦ Placa de comunhão emoldurada ¦ Pamiątka komunii w ramie ¦ Ingelijst communieplaatje
+Livre de prières ancien ¦ Old prayer book ¦ Libro de oraciones antiguo ¦ Altes Gebetbuch ¦ Antico libro di preghiere ¦ Livro de orações antigo ¦ Dawny modlitewnik ¦ Oud gebedenboek
+Scie circulaire sur table ¦ Table saw ¦ Sierra circular de mesa ¦ Tischkreissäge ¦ Sega circolare da banco ¦ Serra circular de mesa ¦ Stołowa piła tarczowa ¦ Tafelcirkelzaag
+Scie à onglets ¦ Miter saw ¦ Ingletadora ¦ Kappsäge ¦ Troncatrice ¦ Serra de esquadria ¦ Ukośnica ¦ Afkortzaag
+Forge et soufflet ¦ Forge and bellows ¦ Fragua y fuelle ¦ Schmiede mit Blasebalg ¦ Forgia e mantice ¦ Forja e fole ¦ Kuźnia z miechem ¦ Smidse met blaasbalg
+Établi de mécanicien ¦ Mechanic’s workbench ¦ Banco de trabajo de mecánico ¦ Mechanikerwerkbank ¦ Banco da meccanico ¦ Bancada de mecânico ¦ Stół warsztatowy mechanika ¦ Werkbank van een monteur
+Établi d’horloger ¦ Watchmaker’s bench ¦ Banco de relojero ¦ Uhrmacherwerkbank ¦ Banco da orologiaio ¦ Bancada de relojoeiro ¦ Stół warsztatowy zegarmistrza ¦ Werkbank van een horlogemaker
+Table de cordonnier ¦ Cobbler’s bench ¦ Mesa de zapatero ¦ Schustertisch ¦ Banco da calzolaio ¦ Banca de sapateiro ¦ Stół szewski ¦ Schoenmakerstafel
+Table de coupe de tailleur ¦ Tailor’s cutting table ¦ Mesa de corte de sastre ¦ Zuschneidetisch des Schneiders ¦ Tavolo da taglio da sarto ¦ Mesa de corte de alfaiate ¦ Krawiecki stół do krojenia ¦ Snijtafel van een kleermaker
+Paillasse de laboratoire ¦ Laboratory bench ¦ Mesa de laboratorio ¦ Labortisch ¦ Banco da laboratorio ¦ Bancada de laboratório ¦ Stół laboratoryjny ¦ Laboratoriumtafel
+Scie à ruban ¦ Band saw ¦ Sierra de cinta ¦ Bandsäge ¦ Sega a nastro ¦ Serra de fita ¦ Piła taśmowa ¦ Lintzaag
+Tour à métaux ¦ Metal lathe ¦ Torno para metales ¦ Metalldrehbank ¦ Tornio per metalli ¦ Torno para metais ¦ Tokarka do metalu ¦ Metaaldraaibank
+Surjeteuse ¦ Serger ¦ Remalladora ¦ Overlock-Nähmaschine ¦ Taglia e cuci ¦ Corta-e-cose ¦ Overlock ¦ Lockmachine
+Métier à broder ¦ Embroidery frame ¦ Bastidor de bordar ¦ Stickrahmen ¦ Telaio da ricamo ¦ Bastidor de bordar ¦ Tamborek do haftu ¦ Borduurraam
+Petite citadine ¦ Small city car ¦ Utilitario pequeño ¦ Kleinwagen ¦ Piccola utilitaria ¦ Pequeno citadino ¦ Małe auto miejskie ¦ Kleine stadsauto
+Voiture familiale ¦ Family car ¦ Coche familiar ¦ Familienauto ¦ Auto familiare ¦ Carro familiar ¦ Samochód rodzinny ¦ Gezinsauto
+Voiture ancienne (années 30) ¦ Vintage car (1930s) ¦ Coche antiguo (años 30) ¦ Oldtimer (1930er) ¦ Auto d’epoca (anni ’30) ¦ Carro antigo (anos 30) ¦ Zabytkowy samochód (lata 30.) ¦ Oldtimer (jaren 30)
+Deux-chevaux ¦ Citroën 2CV ¦ Citroën 2CV ¦ Citroën 2CV (Ente) ¦ Citroën 2CV ¦ Citroën 2CV ¦ Citroën 2CV ¦ Citroën 2CV (Lelijke Eend)
+Coccinelle ¦ VW Beetle ¦ Volkswagen Escarabajo ¦ VW Käfer ¦ Maggiolino Volkswagen ¦ Carocha Volkswagen ¦ Garbus (VW) ¦ Volkswagen Kever
+Fourgonnette ¦ Small van ¦ Furgoneta pequeña ¦ Kleintransporter ¦ Furgoncino ¦ Furgoneta pequena ¦ Furgonetka ¦ Bestelwagen
+Mobylette ¦ Moped ¦ Ciclomotor ¦ Mofa ¦ Motorino ¦ Motorizada ¦ Motorower ¦ Brommer
+Vélo de course ¦ Racing bike ¦ Bicicleta de carreras ¦ Rennrad ¦ Bici da corsa ¦ Bicicleta de corrida ¦ Rower szosowy ¦ Racefiets
+Vélo hollandais ¦ Dutch bike ¦ Bicicleta holandesa ¦ Hollandrad ¦ Bici olandese ¦ Bicicleta holandesa ¦ Rower holenderski ¦ Omafiets
+Vélo cargo ¦ Cargo bike ¦ Bicicleta de carga ¦ Lastenrad ¦ Cargo bike ¦ Bicicleta de carga ¦ Rower towarowy ¦ Bakfiets
+Pneus empilés ¦ Stacked tires ¦ Neumáticos apilados ¦ Gestapelte Reifen ¦ Pneumatici impilati ¦ Pneus empilhados ¦ Stos opon ¦ Gestapelde banden
+Échelle double ¦ Stepladder ¦ Escalera de tijera ¦ Stehleiter ¦ Scala doppia ¦ Escadote ¦ Drabina rozstawna ¦ Trapladder
+Second congélateur ¦ Second freezer ¦ Segundo congelador ¦ Zweite Gefriertruhe ¦ Secondo congelatore ¦ Segunda arca congeladora ¦ Druga zamrażarka ¦ Tweede vriezer
+Voiture tout-terrain ¦ Off-road vehicle ¦ Todoterreno ¦ Geländewagen ¦ Fuoristrada ¦ Todo-o-terreno ¦ Samochód terenowy ¦ Terreinwagen
+Voiture de sport ¦ Sports car ¦ Coche deportivo ¦ Sportwagen ¦ Auto sportiva ¦ Carro desportivo ¦ Samochód sportowy ¦ Sportwagen
+Voiture électrique ¦ Electric car ¦ Coche eléctrico ¦ Elektroauto ¦ Auto elettrica ¦ Carro elétrico ¦ Samochód elektryczny ¦ Elektrische auto
+Camping-car ¦ Motorhome ¦ Autocaravana ¦ Wohnmobil ¦ Camper ¦ Autocaravana ¦ Kamper ¦ Camper
+Moto ancienne avec side-car ¦ Vintage motorcycle with sidecar ¦ Moto antigua con sidecar ¦ Altes Motorrad mit Beiwagen ¦ Moto d’epoca con sidecar ¦ Mota antiga com sidecar ¦ Zabytkowy motocykl z koszem ¦ Oude motor met zijspan
+Vélo ancien ¦ Vintage bicycle ¦ Bicicleta antigua ¦ Altes Fahrrad ¦ Bicicletta d’epoca ¦ Bicicleta antiga ¦ Zabytkowy rower ¦ Oude fiets
+VTT ¦ Mountain bike ¦ Bicicleta de montaña ¦ Mountainbike ¦ Mountain bike ¦ Bicicleta de montanha ¦ Rower górski ¦ Mountainbike
+Borne de recharge ¦ Charging station ¦ Punto de recarga ¦ Ladestation ¦ Colonnina di ricarica ¦ Posto de carregamento ¦ Stacja ładowania ¦ Laadpaal
+Armoire à outils ¦ Tool cabinet ¦ Armario de herramientas ¦ Werkzeugschrank ¦ Armadio portautensili ¦ Armário de ferramentas ¦ Szafa narzędziowa ¦ Gereedschapskast
+Chariot de pneus ¦ Tire trolley ¦ Carro para neumáticos ¦ Reifenwagen ¦ Carrello portapneumatici ¦ Carrinho de pneus ¦ Wózek na opony ¦ Bandenwagen
+Caisse à outils ¦ Toolbox ¦ Caja de herramientas ¦ Werkzeugkiste ¦ Cassetta degli attrezzi ¦ Caixa de ferramentas ¦ Skrzynka narzędziowa ¦ Gereedschapskist
+Chargeur de batterie ¦ Battery charger ¦ Cargador de baterías ¦ Batterieladegerät ¦ Caricabatterie ¦ Carregador de baterias ¦ Prostownik ¦ Acculader

@@ -1,0 +1,27 @@
+/* LCNDA — 🏘 Histoire du lieu (assets/js/heritage-histoire.js). Couleurs : variables de l'app (--ink, --muted, --blue-bright,
+ * --blue-soft, --card-bg) ; le mode sombre suit tout seul. */
+.hist-life { display: grid; gap: 10px; }
+.hist-row { display: flex; gap: 10px; align-items: flex-start; }
+.hist-i { font-size: 20px; line-height: 1.3; flex: none; width: 26px; text-align: center; }
+.hist-t { min-width: 0; flex: 1; }
+.hist-t p { margin: 0; line-height: 1.45; }
+.hist-src { display: block; color: var(--muted); font-size: 11.5px; margin-top: 2px; }
+.hist-hyp { display: block; font-size: 11.5px; margin-top: 3px; line-height: 1.4; }
+.hist-ul { margin: 3px 0 0; padding-left: 18px; line-height: 1.45; }
+.hist-ul li + li { margin-top: 2px; }
+.hist-curve { display: block; width: 100%; max-width: 320px; height: auto; margin-top: 4px; color: var(--blue-bright, #055dff); }
+.hist-curve .hist-dot { fill: var(--card-bg, #fff); stroke: currentColor; stroke-width: 2; }
+.hist-curve .hist-ax { font: 10px system-ui, sans-serif; fill: var(--muted, #667); }
+.hist-act { margin: 4px 0 0; }
+.hist-card { margin-top: 12px; }
+.hist-data-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; padding: 10px 0; border-bottom: 1px solid rgba(0, 0, 0, .08); }
+.hist-data-row > span:first-child { flex: 1 1 320px; min-width: 0; }
+.hist-data-row small { display: block; color: var(--muted); line-height: 1.4; }
+.hist-acts { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.hist-dl { display: inline-flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.hist-prog { display: inline-block; width: 160px; height: 8px; border: 1.5px solid var(--ink, #111); background: var(--card-bg, #fff); }
+.hist-prog i { display: block; height: 100%; background: var(--blue-bright, #055dff); }
+.hist-about .hist-body { padding: 14px 18px; }
+.hist-scroll { overflow-x: auto; }
+.hist-tbl td, .hist-tbl th { vertical-align: top; font-size: 13px; }
+.hist-lic { min-width: 220px; }

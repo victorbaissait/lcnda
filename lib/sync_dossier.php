@@ -316,6 +316,7 @@ function sd_media_copy(string $name, string $fromDir, string $toDir): bool
 {
     $name = str_replace('\\', '/', trim($name));
     if ($name === '' || preg_match('#^(https?:|/|[A-Za-z]:)#i', $name) || str_contains('/' . $name . '/', '/../') || str_contains($name, "\0") || preg_match('#(^|/)\.#', $name)) { return false; }
+    if (function_exists('media_import_name_ok') && !media_import_name_ok($name)) { return false; } // 🔒 une photo, un son, un document : jamais « .php », « .svg », « .js »
     $from = $fromDir . '/' . $name; $to = $toDir . '/' . $name;
     if (!is_file($from) || is_file($to) || (int) @filesize($from) > SD_MAX_MEDIA) { return false; }
     if (!is_dir(dirname($to)) && !@mkdir(dirname($to), 0775, true)) { return false; }

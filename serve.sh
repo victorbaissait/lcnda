@@ -7,6 +7,12 @@
 cd "$(dirname "$0")" || exit 1
 PORT="${1:-8080}"
 trap 'echo; echo "Arrêt du serveur."; exit 0' INT TERM
+# Plusieurs requêtes en parallèle : sans cela, « php -S » les traite une par une et la cinquantaine d'appels du
+# lancement (tableau de bord) attendent chacun la fin du précédent, un calcul lent bloquant tout le reste.
+# Les sessions sont refermées tout de suite (lib/bootstrap.php) et SQLite est en mode WAL : sans risque.
+# PHP_CLI_SERVER_WORKERS=1 ./serve.sh pour revenir à un seul processus.
+PHP_CLI_SERVER_WORKERS="${PHP_CLI_SERVER_WORKERS:-4}"
+export PHP_CLI_SERVER_WORKERS
 
 echo "Application disponible sur http://127.0.0.1:${PORT}   (Ctrl+C pour arrêter)"
 # - max_input_time=-1 : pas de minuteur séparé pour la lecture de la requête (certains php.ini,

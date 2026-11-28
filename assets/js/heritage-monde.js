@@ -64,6 +64,7 @@
         const list = cur === 'local' ? local : cur ? d.events.filter(e => e.cat === cur) : d.events;
         const btn = (k, l, n) => `<button type="button" class="${cur === k ? 'is-active' : ''}" data-world-cat="${k}">${l} (${n})</button>`;
         host.innerHTML = `<p class="h-world-lead">De ${d.span[0]} à ${d.span[1]} : ${A().plural(d.events.length, 'événement')} pendant la vie de ${esc(d.person.first)}${local.length ? `, dont ${A().plural(local.length, 'événement')} de l’histoire locale` : ''}.</p>
+            <div data-mv-person="${pid}" data-mv-first="${esc(d.person.first)}"></div>
             ${frise(d, list)}
             <div class="h-world-bar"><div class="ui-filters" role="toolbar" aria-label="Sortes d’événements">${btn('', 'Tout', d.events.length)}${local.length ? btn('local', '📍 Histoire locale', local.length) : ''}${Object.entries(counts).map(([k, n]) => btn(k, `${catOf(k).icon} ${catOf(k).label}`, n)).join('')}</div>
                 <label class="ui-toggle"><input type="checkbox" data-world-level ${st.level >= 2 ? 'checked' : ''}><i></i>Plus de détails</label></div>
@@ -73,16 +74,19 @@
     const refreshBlocks = () => document.querySelectorAll('[data-world-host]').forEach(h => fill(h));
 
     /* ─────────── mes événements : fenêtre ─────────── */
-    async function editEvent(row = null, after = refreshBlocks) {
+    /* 🦠 opts.crisis : depuis « Épidémies, guerres, hivers terribles » — seulement les sortes de crises, « Épidémie » d'abord */
+    const CRISIS_CATS = ['épidémie', 'famine', 'hiver', 'guerre', 'crise'];
+    async function editEvent(row = null, after = refreshBlocks, opts = {}) {
         const P = window.LCNDA_PICKER || A();
         if (!Object.keys(CATS).length) { try { CATS = (await api('world_events', {own: 1})).cats || {}; } catch (_) {} }
-        const v = row || {from_year: '', to_year: '', reach: 'commune', category: 'société'};
-        ext.openDialog({eyebrow: 'LE MONDE AUTOUR', title: row ? 'Modifier l’événement' : 'Nouvel événement', body: `<div class="form-grid">
+        const v = row || {from_year: '', to_year: '', reach: 'commune', category: opts.crisis ? 'épidémie' : 'société'};
+        const cats = Object.entries(CATS).filter(([k]) => !opts.crisis || CRISIS_CATS.includes(k));
+        ext.openDialog({eyebrow: opts.crisis ? 'ÉPIDÉMIES, GUERRES, HIVERS TERRIBLES' : 'LE MONDE AUTOUR', title: row ? (opts.crisis ? 'Modifier la crise' : 'Modifier l’événement') : (opts.crisis ? 'Nouvelle crise' : 'Nouvel événement'), body: `<div class="form-grid">
                 <label class="span-2">Titre<input name="title" required maxlength="200" value="${esc(v.title || '')}" placeholder="Incendie de l’église, grande crue de la Vézère, foire aux chevaux…" data-error="Donne un titre à l’événement."></label>
                 <label>Année de début<input name="from_year" type="number" min="1000" max="2100" required value="${esc(v.from_year || '')}" data-error="Donne l’année (entre 1000 et 2100)."></label>
                 <label>Année de fin <small>(si ça a duré)</small><input name="to_year" type="number" min="1000" max="2100" value="${esc(v.to_year && v.to_year !== v.from_year ? v.to_year : '')}"></label>
                 <label>Date précise <small>(facultatif)</small><input name="date_text" maxlength="80" value="${esc(v.date_text || '')}" placeholder="7 mai 1925, vers 1784…"></label>
-                <label>Sorte<select name="category">${Object.entries(CATS).map(([k, c]) => `<option value="${esc(k)}" ${k === v.category ? 'selected' : ''}>${c.icon} ${esc(c.label)}</option>`).join('')}</select></label>
+                <label>Sorte<select name="category">${cats.map(([k, c]) => `<option value="${esc(k)}" ${k === v.category ? 'selected' : ''}>${c.icon} ${esc(c.label)}</option>`).join('')}</select></label>
                 <div class="span-2"><span class="pk-lab">Commune</span>${P.pickerField({name: 'place_id', kind: 'place', value: v.place_id ? Number(v.place_id) : null})}</div>
                 <label>Qui est concerné ?<select name="reach">${REACH.map(([k, l]) => `<option value="${k}" ${k === v.reach ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 <label class="span-2">Pour la phrase « Jean a 19 ans quand … » <small>(facultatif)</small><input name="quand" maxlength="200" value="${esc(v.quand || '')}" placeholder="l’église du village brûle"></label>
@@ -192,5 +196,5 @@
         const L = A()?.defaultListTypes; if (Array.isArray(L) && !L.some(x => x[0] === 'world_events')) { const i = L.findIndex(x => x[0] === 'historical_context'); L.splice(i < 0 ? L.length : i, 0, ['world_events', '34a', '🌍 Le monde autour']); }
     };
     boot(); document.addEventListener('DOMContentLoaded', boot, {once: true});
-    ext.world = {editEvent, deleteEvent, rowHtml};
+    ext.world = {editEvent, deleteEvent, rowHtml, ownRow, CRISIS_CATS};
 })();

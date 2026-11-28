@@ -1,0 +1,33 @@
+/* 📜 Monographie de commune : ⚙︎ Personnaliser et parties ajoutées (assets/js/heritage-monographie-plus.js) */
+.mp-panel{border:var(--line, 1px solid rgba(127,127,127,.3));background:var(--white, #fff);box-shadow:var(--shadow-small, none);padding:12px 14px;margin:12px 0 18px}
+.mp-panel-head{display:flex;align-items:center;gap:8px}
+.mp-panel-head .spacer{flex:1}
+.mp-panel h4{margin:.8em 0 .3em;font-size:.9em}
+.mp-list{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.mp-list li{display:flex;align-items:center;gap:8px;padding:4px 8px;border:1px solid rgba(127,127,127,.22);border-radius:6px;background:var(--white, #fff)}
+.mp-list li[draggable="true"]{cursor:grab}
+.mp-list li.is-drag{opacity:.5;outline:2px dashed var(--blue, #2b5d8a)}
+.mp-list li.is-off{opacity:.55}
+.mp-list li.is-off span{text-decoration:line-through}
+.mp-list li.is-none small{font-style:italic}
+.mp-list li .checkbox-line{flex:1;min-width:0}
+.mp-grip{cursor:grab;opacity:.6;user-select:none}
+.mp-moves{display:inline-flex;gap:2px;margin-left:auto}
+.mp-local{display:block;margin:.4em 0}
+.mp-sec .mp-body{padding:12px 15px}
+.mp-sec .mp-body>p:first-child{margin-top:0}
+.mp-src{margin:0;padding:0 15px 12px;font-size:.82em;opacity:.75}
+.mp-more summary{cursor:pointer;font-size:.9em}
+.mp-table{margin-top:6px}
+.mp-table td,.mp-table th{text-align:right}
+.mp-table td:first-child,.mp-table th:first-child{text-align:left}
+.mp-names,.mp-mv{list-style:none;margin:.4em 0;padding:0;display:grid;gap:4px}
+.mp-names details{display:inline}
+.mp-map{position:relative;overflow:hidden;height:300px}
+.mp-map .h-village-map{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);max-width:none;border:0}
+.mp-wx{display:grid;gap:4px}
+.mp-wx-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.mp-wx-row .wx-line{margin:0}
+.mp-sec .el-list{margin-top:6px}
+@media(max-width:640px){.mp-list li{flex-wrap:wrap}.mp-map{height:220px}}
+@media print{.mp-panel,[data-mp-custom]{display:none!important}}

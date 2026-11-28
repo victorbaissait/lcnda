@@ -1,0 +1,88 @@
+fr ¦ tr
+# 📑 Sommaire d’un recueil, messages du serveur (heritage-recueil-sommaire.js, lib/recueil_toc.php, lib/recueil_etat.php, lib/recueils.php)
+haut de ¦ üst:
+milieu de ¦ orta:
+bas de ¦ alt:
+p. ¦ s.
+pages pas dites ¦ sayfalar belirtilmemiş
+{d} sur {n} pages finies ou relues ¦ {n} sayfadan {d} tanesi bitti veya gözden geçirildi
+Chargement du sommaire… ¦ İçindekiler yükleniyor…
+Le sommaire ne s’ouvre pas ¦ İçindekiler açılmıyor
+« {a} » et « {b} » se chevauchent ({p} {x}–{y}). ¦ “{a}” ve “{b}” çakışıyor ({p} {x}–{y}).
+{p} {n} : un acte « {k} » dans « {t} ». ¦ {p} {n}: “{t}” içinde “{k}” türünde bir belge.
+{p} {n} : un acte de {y} dans « {t} ». ¦ {p} {n}: “{t}” içinde {y} yılından bir belge.
+Tout ouvrir ¦ Tümünü aç
+Tout fermer ¦ Tümünü kapat
+Niveaux montrés ¦ Gösterilen düzeyler
+Niveau 1 ¦ Düzey 1
++ passages ¦ + pasajlar
+Chercher dans le sommaire… ¦ İçindekilerde ara…
+Chercher dans le sommaire ¦ İçindekilerde ara
+Chapitre… ¦ Bölüm…
+Passage… ¦ Pasaj…
+Proposer le découpage ¦ Bölümlemeyi öner
+Ranger par… ¦ Şuna göre sırala…
+Mode lecture ¦ Okuma modu
+Pas encore de sommaire ¦ Henüz içindekiler yok
+« ＋ Chapitre… » : un titre, de telle page à telle page (ex. « Mariages 1870 », pages 15 à 19). Ou « ✨ Proposer le découpage » d’après les actes déjà transcrits. ¦ “＋ Bölüm…”: bir başlık, şu sayfadan şu sayfaya (ör. “Evlilikler 1870”, sayfa 15 ile 19 arası). Ya da zaten yazıya geçirilmiş belgelere göre “✨ Bölümlemeyi öner”.
+Un clic sur un titre : sa première page. Un passage décrit (« du milieu de la page 5 au milieu de la page 7 : mariage… ») ne crée pas de fiche. ¦ Bir başlığa tıkla: ilk sayfası açılır. Tanımlanan bir pasaj (“5. sayfanın ortasından 7. sayfanın ortasına: evlilik…”) kart oluşturmaz.
+Modifier… ¦ Düzenle…
+Sous-chapitre… ¦ Alt bölüm…
+Passage dans ce chapitre… ¦ Bu bölümde pasaj…
+Proposer le découpage de ce chapitre ¦ Bu bölümün bölümlenmesini öner
+Supprimer (avec ce qu’il contient) ¦ Sil (içerdikleriyle birlikte)
+« {t} » retiré du sommaire ¦ “{t}” içindekilerden çıkarıldı
+toute la page ¦ tüm sayfa
+Nouveau passage ¦ Yeni pasaj
+Modifier le passage ¦ Pasajı düzenle
+Modifier le chapitre ¦ Bölümü düzenle
+📑 SOMMAIRE ¦ 📑 İÇİNDEKİLER
+Ce que c’est (sans créer de fiche) ¦ Ne olduğu (kart oluşturmadan)
+ex. Mariage de Louis LACOMBE et Anne MAZAUD ¦ ör. Louis LACOMBE ile Anne MAZAUD’un evliliği
+ex. Mariages 1870 ¦ ör. Evlilikler 1870
+— au premier niveau — ¦ — en üst düzeyde —
+— pas dit — ¦ — belirtilmemiş —
+Endroit ¦ Konum
+À la page ¦ Sayfada
+— la même — ¦ — aynısı —
+Sorte d’acte (facultatif) ¦ Belge türü (isteğe bağlı)
+— toutes — ¦ — tümü —
+Années (facultatif) ¦ Yıllar (isteğe bağlı)
+Description, résumé, ce qu’on y apprend ¦ Açıklama, özet, ondan öğrenilenler
+Note (facultatif) ¦ Not (isteğe bağlı)
+Un passage décrit sert à retrouver ce qu’il y a dans le recueil ; « 👤 » sur les fiches reste possible depuis l’Atelier. ¦ Tanımlanan bir pasaj, derlemede ne olduğunu bulmana yarar; kartlardaki “👤” Atölye’den hâlâ kullanılabilir.
+Un chapitre peut contenir des sous-chapitres et des passages. La sorte et les années servent à repérer ce qui n’est pas à sa place. ¦ Bir bölüm alt bölümler ve pasajlar içerebilir. Tür ve yıllar, yerinde olmayanları fark etmeye yarar.
+« {t} » ajouté au sommaire ¦ “{t}” içindekilere eklendi
+« {t} » modifié ¦ “{t}” düzenlendi
+Rien à proposer : aucun acte repéré sur ces pages. ¦ Önerilecek bir şey yok: bu sayfalarda hiç belge bulunmadı.
+Découper « {t} » ¦ “{t}” bölümle
+✨ Proposer le découpage ¦ ✨ Bölümlemeyi öner
+Ajouter au sommaire ¦ İçindekilere ekle
+D’après les actes déjà transcrits dans l’Atelier (leur sorte et leur année), page par page. Décoche ce qui ne va pas, corrige les titres : rien n’est ajouté avant que tu acceptes. ¦ Atölye’de zaten yazıya geçirilmiş belgelere göre (türleri ve yılları), sayfa sayfa. Uymayanların işaretini kaldır, başlıkları düzelt: sen kabul etmeden hiçbir şey eklenmez.
+Déjà dans cet ordre. ¦ Zaten bu sırada.
+Pièces rangées ({x}) ¦ Parçalar sıralandı ({x})
+par sorte ¦ türe göre
+par cote ¦ arşiv numarasına göre
+Par date (de l’acte, sinon du document) ¦ Tarihe göre (kaydın, yoksa belgenin)
+Par sorte d’acte ¦ Belge türüne göre
+Ranger les pièces ¦ Parçaları sırala
+Tout le sommaire ¦ Tüm içindekiler
+Pas encore de sommaire. ¦ Henüz içindekiler yok.
+Faire le sommaire ¦ İçindekileri oluştur
+=chapitre ajouté au sommaire ¦ bölüm içindekilere eklendi|bölüm içindekilere eklendi
+Document militaire ¦ Askerî belge
+Choisis au moins une page. ¦ En az bir sayfa seç.
+Trop de pages d’un coup. ¦ Bir seferde çok fazla sayfa.
+Une de ces pages n’est pas dans ce recueil. ¦ Bu sayfalardan biri bu derlemede değil.
+Donne le nom des pages à poser (400 au plus). ¦ Eklenecek sayfaların adını ver (en fazla 400).
+Une de ces pages a déjà une photo : retire-la à la main. ¦ Bu sayfalardan birinin zaten fotoğrafı var: onu elle kaldır.
+Ligne du sommaire introuvable. ¦ İçindekiler satırı bulunamadı.
+La première page n’est pas dans ce recueil. ¦ İlk sayfa bu derlemede değil.
+La dernière page n’est pas dans ce recueil. ¦ Son sayfa bu derlemede değil.
+Dis sur quelle page commence ce passage. ¦ Bu pasajın hangi sayfada başladığını söyle.
+Le chapitre parent n’est pas dans ce recueil. ¦ Üst bölüm bu derlemede değil.
+Un passage décrit ne peut pas contenir de chapitre : choisis un chapitre. ¦ Tanımlanan bir pasaj bölüm içeremez: bir bölüm seç.
+Un chapitre ne peut pas être dans lui-même. ¦ Bir bölüm kendi içinde olamaz.
+Le sommaire suit l’ordre des pages : change plutôt les pages de ce chapitre. ¦ İçindekiler sayfaların sırasını izler: bunun yerine bu bölümün sayfalarını değiştir.
+Trop de documents d’un coup (2000 au plus). ¦ Bir seferde çok fazla belge (en fazla 2000).
+Un recueil se fait avec des images (photos de pages) : aucun de ces documents n’en est une. ¦ Bir derleme görüntülerle (sayfa fotoğraflarıyla) yapılır: bu belgelerin hiçbiri görüntü değil.

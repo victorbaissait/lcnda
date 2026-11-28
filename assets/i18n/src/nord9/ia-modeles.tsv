@@ -1,0 +1,35 @@
+fr ¦ lb
+# 🔬 Lecture approfondie : les modèles d’IA (avantages, inconvénients, « à l’essai », avancé) — lib/transcription_actes.php, heritage-transcribe-acte.js
+ia|Modèle ¦ Modell
+conseillé pour cet ordinateur ({n} Go) ¦ recommandéiert fir dëse Computer ({n} GB)
+à l’essai ¦ fir ze probéieren
+≈ {x} Go à télécharger ¦ ≈ {x} GB fir erofzelueden
+{n} Go de mémoire conseillés ¦ {n} GB Späicher recommandéiert
+trop gros pour cet ordinateur ¦ ze grouss fir dëse Computer
+Autres modèles à essayer ({n}) ¦ Aner Modeller fir ze probéieren ({n})
+Pas encore essayés par l’app sur des actes : compare-les sur tes actes (« Les deux lectures côte à côte ») avant de t’y fier. ¦ Nach net vun der App op Akten ausprobéiert: vergläich se op dengen Akten („Déi zwou Liesungen nieweneen“), ier s de dech drop verléiss.
+Avancé : autre modèle (Ollama) ¦ Erweidert: anert Modell (Ollama)
+Les modèles déjà installés dans Ollama sur cet ordinateur. Un modèle qui ne sait pas lire une image ne peut pas lire l’acte. Pas essayé par l’app : vérifie toujours le texte. ¦ D’Modeller, déi schonn an Ollama op dësem Computer installéiert sinn. E Modell, dat kee Bild liese kann, kann den Akt net liesen. Net vun der App ausprobéiert: kontrolléier ëmmer den Text.
+lit les images ¦ liest Biller
+ne lit pas les images ¦ liest keng Biller
+Aucun autre modèle installé. Dans un terminal : « ollama pull » suivi du nom du modèle. ¦ Keen anert Modell installéiert. An engem Terminal: „ollama pull“ an dann den Numm vum Modell.
+cet ordinateur : {n} Go · chaque modèle se télécharge une seule fois ¦ dëse Computer: {n} GB · all Modell gëtt nëmmen eemol erofgelueden
+Ce modèle ne sait pas lire une image : choisis un modèle « vision ». ¦ Dëst Modell kann kee Bild liesen: wiel e „Vision“-Modell.
+le meilleur essayé sur les actes anciens, bon en français et en latin ¦ dee beschten op alen Akten ausprobéiert, gutt op Franséisch a Latäin
+16 Go de mémoire conseillés ¦ 16 GB Späicher recommandéiert
+léger et rapide, pour un ordinateur modeste ¦ liicht a séier, fir e bescheidene Computer
+se trompe plus souvent sur les noms et les écritures difficiles ¦ ierrt sech méi dacks bei Nimm a schwéierege Schrëften
+pour les ordinateurs puissants (64 Go) : la même famille que le conseillé, plus précise sur les écritures difficiles ¦ fir staark Computeren (64 GB): déi selwecht Famill wéi dat recommandéiert, méi genee bei schwéierege Schrëften
+lent, gros téléchargement ¦ lues, groussen Download
+le plus gros qui tienne dans 64 Go ¦ dat gréisst, dat an 64 GB passt
+très lent, très gros téléchargement, licence moins ouverte ¦ ganz lues, ganz groussen Download, manner oppe Lizenz
+fort en français, bon pour comprendre l’acte ¦ staark op Franséisch, versteet den Akt gutt
+32 Go de mémoire conseillés, plus lent ¦ 32 GB Späicher recommandéiert, méi lues
+bon dans les langues européennes ¦ gutt an europäesche Sproochen
+licence de Google moins ouverte, moins précis sur l’écriture à la main ¦ manner oppe Lizenz vu Google, manner genee bei Handschrëft
+léger, plusieurs langues ¦ liicht, e puer Sproochen
+licence de Google, se trompe souvent sur les noms ¦ Lizenz vu Google, ierrt sech dacks bei Nimm
+annoncé bon en écriture manuscrite ¦ soll gutt bei Handschrëft sinn
+moins connu, résultats à comparer ¦ manner bekannt, Resultater ze vergläichen
+très léger, fait pour les documents, ordinateurs modestes ¦ ganz liicht, fir Dokumenter gemaach, bescheide Computeren
+faible sur l’écriture à la main ancienne ¦ schwaach bei aler Handschrëft

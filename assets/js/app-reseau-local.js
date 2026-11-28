@@ -203,7 +203,7 @@
             const v = x.type === 'checkbox' ? (x.checked ? x.dataset.on : x.dataset.off) : x.type === 'number' ? Number(x.value) : x.value;
             try { const r = await A().api('inbox_write', {}, {method: 'POST', body: {op: 'settings', settings: {[key]: v}}}); twSet = r.settings;
                 if (String(r.settings[key]) !== String(v)) toast(i18n('Valeur refusée : réglage inchangé.'), 'error');
-                else toast(i18n('Réglage enregistré'), 'success', {action: {label: i18n('↶ Annuler'), run: async () => { await A().api('inbox_write', {}, {method: 'POST', body: {op: 'settings', settings: {[key]: prev}}}).catch(() => {}); refresh(); }}});
+                else toast(i18n('Réglage enregistré'), '', {kind: 'undo', action: {label: i18n('↶ Annuler'), run: async () => { await A().api('inbox_write', {}, {method: 'POST', body: {op: 'settings', settings: {[key]: prev}}}).catch(() => {}); refresh(); }}});
             } catch (e) { toast(e.message, 'error'); }
             const open = root.querySelector('[data-rl-tw]')?.open; refresh(); if (open) setTimeout(() => { const d = document.querySelector('[data-rl-tw]'); if (d) d.open = true; }, 300);
         }));
@@ -216,14 +216,14 @@
             const r = await run(() => NET().remove(b.dataset.rlRemove));
             if (r && r.ok) {
                 const id = b.dataset.rlRemove;
-                toast(i18n('✓ « {name} » retiré : il ne peut plus se connecter.', {name: r.name}), 'success', {duration: 10000, action: {label: i18n('↶ Annuler'), run: async () => { await run(() => NET().undoRemove(id), i18n('« {name} » peut de nouveau se connecter.', {name: r.name})); refresh(); }}});
+                toast(i18n('✓ « {name} » retiré : il ne peut plus se connecter.', {name: r.name}), '', {kind: 'undo', action: {label: i18n('↶ Annuler'), run: async () => { await run(() => NET().undoRemove(id), i18n('« {name} » peut de nouveau se connecter.', {name: r.name})); refresh(); }}});
             }
             refresh();
         });
         root.querySelectorAll('[data-rl-set]').forEach(x => x.addEventListener('change', async () => {
             const key = x.dataset.rlSet, prev = st.settings[key];
             const r = await run(() => NET().setSettings({[key]: x.value}));
-            if (r && r.ok) toast(i18n('Réglage enregistré'), 'success', {action: {label: i18n('↶ Annuler'), run: async () => { await NET().setSettings({[key]: prev}); refresh(); }}});
+            if (r && r.ok) toast(i18n('Réglage enregistré'), '', {kind: 'undo', action: {label: i18n('↶ Annuler'), run: async () => { await NET().setSettings({[key]: prev}); refresh(); }}});
             refresh();
         }));
     }
@@ -237,7 +237,7 @@
         const r = await run(() => NET().accept(id, kind || proposedKind(req)));
         if (r && r.ok) {
             const dev = r.device;
-            toast(dev.kind === 'terrain' ? i18n('✓ « {name} » autorisé, 📱 téléphone de terrain.', {name: dev.name}) : i18n('✓ « {name} » autorisé, en lecture seule.', {name: dev.name}), 'success', {duration: 10000, action: {label: i18n('↶ Annuler'), run: async () => { await NET().remove(dev.id); refresh(); }}});
+            toast(dev.kind === 'terrain' ? i18n('✓ « {name} » autorisé, 📱 téléphone de terrain.', {name: dev.name}) : i18n('✓ « {name} » autorisé, en lecture seule.', {name: dev.name}), '', {kind: 'undo', action: {label: i18n('↶ Annuler'), run: async () => { await NET().remove(dev.id); refresh(); }}});
         }
         refresh();
     }
@@ -299,7 +299,7 @@
             if (e.type === 'request') { Promise.all([readName(), twSet ? null : twLoad()]).finally(() => requestDialog(e)); }
             if (e.type === 'request-gone') dialogs.get(e.id)?.close();
             if (e.type === 'network-changed') {
-                toast(i18n('Le réseau a changé : tout a été coupé.'), '', e.policy === 'demander' ? {duration: 15000, action: {label: i18n('🖧 Rouvrir sur ce réseau'), run: async () => { await run(() => NET().open()); onChange(); }}} : {});
+                toast(i18n('Le réseau a changé : tout a été coupé.'), '', e.policy === 'demander' ? {action: {label: i18n('🖧 Rouvrir sur ce réseau'), run: async () => { await run(() => NET().open()); onChange(); }}} : {});
             }
             if (e.type === 'reopen-failed') toast(errText(e.error), 'error');
             onChange();

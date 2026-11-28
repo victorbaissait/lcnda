@@ -115,6 +115,26 @@
                     why: [['👍', '<b>On reconnaît les visages</b> ; sans photo, des initiales à la couleur du genre.'], ['👎', 'Cases plus hautes : moins de générations à l’écran.']]},
                 {k: 'mini', t: 'Mini', sub: 'le nom seul', d: {tw: 120, m: K7_DEF.m, f: K7_DEF.f, links: 'droits', dates: false, sosa: false},
                     why: [['👍', '<b>Beaucoup de générations</b> d’un coup : idéal pour les grands arbres et les petits écrans.'], ['👎', 'Les dates n’apparaissent qu’au survol (sauf si tu les remets).']]},
+                {k: 'parchemin', t: '📜 Parchemin', sub: 'papier ancien, lettres à empattements', d: {tw: 180, m: K7_DEF.m, f: K7_DEF.f, links: 'arrondis', dates: true, sosa: false},
+                    why: [['👍', '<b>Un air d’archives</b> : fond crème, double filet, belle écriture.'], ['👎', 'Moins contrasté à l’écran ; à l’impression, prévois une imprimante couleur.']]},
+                {k: 'medaillon', t: '🖼 Médaillon', sub: 'une case ovale, centrée', d: {tw: 165, m: K7_DEF.m, f: K7_DEF.f, links: 'arrondis', dates: true, sosa: false},
+                    why: [['👍', '<b>Élégant</b> : comme un portrait encadré au mur.'], ['👎', 'Les noms très longs passent sur deux lignes.']]},
+                {k: 'ecusson', t: '🛡 Écusson', sub: 'une case en forme de blason', d: {tw: 165, m: K7_DEF.m, f: K7_DEF.f, links: 'droits', dates: true, sosa: false},
+                    why: [['👍', '<b>Noble et lisible</b> : la pointe guide l’œil vers la génération suivante.'], ['👎', 'Un peu plus haute ; le bas de la case est plus étroit.']]},
+                {k: 'postale', t: '✉️ Carte postale', sub: 'un timbre dans le coin, filet pointillé', d: {tw: 185, m: K7_DEF.m, f: K7_DEF.f, links: 'arrondis', dates: true, sosa: false},
+                    why: [['👍', '<b>Rétro et chaleureux</b>, idéal pour une affiche de cousinade.'], ['👎', 'Plus large que les autres.']]},
+                {k: 'timbre', t: '📮 Timbre-poste', sub: 'bords dentelés', d: {tw: 150, m: K7_DEF.m, f: K7_DEF.f, links: 'droits', dates: true, sosa: false},
+                    why: [['👍', '<b>Amusant</b> : chaque ancêtre devient un petit timbre de collection.'], ['👎', 'Les bords dentelés prennent un peu de place.']]},
+                {k: 'polaroid', t: '📷 Polaroïd', sub: 'cadre blanc, un peu penché', d: {tw: 165, m: K7_DEF.m, f: K7_DEF.f, links: 'arrondis', dates: true, sosa: false},
+                    why: [['👍', '<b>Vivant</b> : comme des photos posées sur une table.'], ['👎', 'Les cases penchées sont moins sages pour un document officiel.']]},
+                {k: 'musee', t: '🏛 Étiquette de musée', sub: 'bandeau noir, petites capitales', d: {tw: 180, m: K7_DEF.m, f: K7_DEF.f, links: 'droits', dates: true, sosa: true},
+                    why: [['👍', '<b>Très net</b> : le nom en capitales, les dates dessous, comme un cartel.'], ['👎', 'Assez sévère pour les arbres de famille joyeux.']]},
+                {k: 'pastel', t: '🎨 Pastel par génération', sub: 'une couleur douce par génération', d: {tw: 170, m: K7_DEF.m, f: K7_DEF.f, links: 'arrondis', dates: true, sosa: false},
+                    why: [['👍', '<b>On suit les générations</b> d’un coup d’œil, sans regarder les dates.'], ['👎', 'Les couleurs ne disent plus homme ou femme (une petite bande le garde).']]},
+                {k: 'trait', t: '✏️ Trait seul', sub: 'juste un contour fin', d: {tw: 170, m: K7_DEF.m, f: K7_DEF.f, links: 'droits', dates: true, sosa: false},
+                    why: [['👍', '<b>Le plus léger</b> : parfait à imprimer et à annoter au crayon.'], ['👎', 'Moins de repères visuels sur un grand arbre.']]},
+                {k: 'nuit', t: '🌙 Nuit dorée', sub: 'fond sombre, filet doré', d: {tw: 175, m: K7_DEF.m, f: K7_DEF.f, links: 'arrondis', dates: true, sosa: false},
+                    why: [['👍', '<b>Chic</b>, et doux pour les yeux en mode sombre.'], ['👎', 'Sombre aussi en mode clair : à éviter pour imprimer.']]},
             ],
             settings: [
                 {k: 'tw', type: 'range', label: 'Largeur des cases', min: 100, max: 240, step: 5, unit: 'px', why: 'Des cases larges montrent les noms en entier ; étroites, l’arbre tient sur l’écran.'},
@@ -588,7 +608,9 @@
     function treeCards(root, G) {
         root.querySelectorAll('.tree-card .lc-tree-sosa').forEach(x => x.remove());
         const on = isOn(G, 'a5');
+        const pastel = on && G.a5.v === 'pastel';
         root.querySelectorAll('.tree-card').forEach(c => {
+            if (pastel) { let n = 0, e = c.parentElement; while (e && e !== root) { if (e.classList?.contains('tree-node-shell')) n++; e = e.parentElement; } c.dataset.lcGen = String((n - 1 + 60) % 6); } else if (c.dataset.lcGen) delete c.dataset.lcGen;
             const sm = c.querySelector(':scope > small');
             if (on && !G.a5.dates && sm && !c.title) { c.title = sm.textContent.trim(); c.dataset.lcTitle = '1'; }
             else if ((!on || G.a5.dates) && c.dataset.lcTitle) { c.removeAttribute('title'); delete c.dataset.lcTitle; }
@@ -608,6 +630,7 @@
     const icMode = new WeakMap(); // la façon dont les icônes de chaque page sont dessinées
     /** tout ce qui se dessine sur l'écran d'un réglage, sur une page ou un aperçu */
     function decorate(root, G, ctx = {}) {
+        everDecorated = true;
         if (!root) return;
         const iconsOn = isOn(G, 'a3');
         const want = iconsOn ? G.a3.v : '';
@@ -620,9 +643,10 @@
         if (ctx.detail) decorateHero(root.querySelector('.person-hero'), ctx.detail, G);
     }
     // sur la page : un seul passage par image, seulement quand un réglage le demande
-    let queued = false, mo = null, busy = false;
+    let queued = false, mo = null, busy = false, everDecorated = false;
+    // ⏱ la page n'est relue (décorations à enlever) que si elle a déjà été décorée : avant, toute la page à chaque image (≈ 0,4 s à l'ouverture)
     const needsWork = G => isOn(G, 'a3') || (isOn(G, 'a8') && G.a8.av) || isOn(G, 'a5') || (isOn(G, 'a7') && !G.a7.bar)
-        || document.querySelector('.lc-ic, .lc-row-av, .lc-tree-sosa, .lc-toast-s, [data-lc-title]');
+        || (everDecorated && document.querySelector('.lc-ic, .lc-row-av, .lc-tree-sosa, .lc-toast-s, [data-lc-title]'));
     function scheduleDecorate() {
         if (queued || typeof requestAnimationFrame !== 'function') return; queued = true;
         requestAnimationFrame(() => {
@@ -784,8 +808,67 @@
     /* ── une petite page d'aperçu ── */
     const DARK = {blue: '#4d9fff', bg: '#1a1a1a', paper: '#1a1a1a', card: '#242424', cardHead: '#2e2e2e'};
     const LIGHT = {blue: '#0066cc', bg: '#ffffff', paper: '#ffffff', card: '#ffffff', cardHead: '#fafafa'};
-    function frameDocHtml(inner, W) {
-        const links = [...document.querySelectorAll('link[rel="stylesheet"]')].map(l => `<link rel="stylesheet" href="${esc(l.href)}"${l.id ? ` id="${esc(l.id)}"` : ''} media="${esc(l.getAttribute('media') || 'all')}">`).join('');
+    /* Les feuilles de l'app (≈ 145 fichiers, 4 Mo) : avant, chaque aperçu les redemandait toutes (des milliers de requêtes sur
+     * la page, « ERR_INSUFFICIENT_RESOURCES », une page Apparence lente). Leur texte est maintenant lu UNE fois (depuis le cache
+     * du navigateur, quelques-unes à la fois) et mis bout à bout, dans le même ordre, dans quelques fichiers en mémoire (blob:)
+     * que tous les aperçus partagent. Le texte d'origine, pas celui relu par le navigateur (cssText perd des choses, ex. des
+     * dégradés en couleurs relatives). Les feuilles qui ont un id (lc-frame-css, lc-designs-gen : allumées par applyTo dans
+     * l'aperçu) restent à part, à leur place ; une feuille illisible garde son vrai fichier. */
+    const sheetText = new Map(); // href → Promise du texte prêt à recoller (null : illisible, on garde le vrai fichier)
+    const sheetBlobs = new Map(); // suite de href → URL blob:
+    let sheetBusy = 0;
+    const sheetWaiting = [];
+    const sheetSlot = () => (sheetBusy < 6 ? (sheetBusy++, Promise.resolve()) : new Promise(res => sheetWaiting.push(res)));
+    const sheetDone = () => { const n = sheetWaiting.shift(); if (n) n(); else sheetBusy--; };
+    /** le texte d'une feuille : les url() relatives (polices…) partaient de son dossier, on les écrit en entier ; on referme
+     *  un commentaire ou une accolade restés ouverts, pour ne pas avaler la feuille suivante */
+    function fixSheet(css, href) {
+        const abs = u => { if (!u || /^([a-z][a-z0-9+.-]*:|\/\/|#)/i.test(u)) return u; try { return new URL(u, href).href; } catch (_) { return u; } };
+        let out = css.replace(/@charset\s+"[^"]*"\s*;/gi, '').replace(/url\(\s*(?:"((?:[^"\\\n]|\\.)*)"|'((?:[^'\\\n]|\\.)*)'|([^)\s"']*))\s*\)/g, (m, a, b, c) => { const u = a ?? b ?? c ?? ''; const v = abs(u); return v === u ? m : `url("${v.replace(/"/g, '%22')}")`; });
+        const bare = out.replace(/\/\*[\s\S]*?\*\/|"(?:[^"\\\n]|\\.)*"|'(?:[^'\\\n]|\\.)*'/g, '');
+        if (bare.includes('/*')) out += '\n*/';
+        const open = (bare.match(/\{/g) || []).length - (bare.match(/\}/g) || []).length;
+        if (open > 0) out += '\n' + '}'.repeat(open);
+        return out;
+    }
+    function loadSheet(href) {
+        if (!sheetText.has(href)) sheetText.set(href, sheetSlot().then(() => fetch(href, {cache: 'force-cache', credentials: 'same-origin'}))
+            .then(r => (r.ok ? r.text() : null)).then(t => (t == null ? null : fixSheet(t, href)), () => null).finally(sheetDone));
+        return sheetText.get(href);
+    }
+    function sheetBlob(key, css) {
+        if (sheetBlobs.has(key)) return sheetBlobs.get(key);
+        let u = null;
+        try { u = URL.createObjectURL(new Blob([css], {type: 'text/css'})); } catch (_) { u = null; }
+        if (u) sheetBlobs.set(key, u);
+        return u;
+    }
+    /** les <link> d'un aperçu (Promise) : quelques blob: partagés au lieu d'une requête par feuille et par aperçu */
+    function frameLinks() {
+        const ls = [...document.querySelectorAll('link[rel="stylesheet"]')];
+        const tag = (href, l, media) => `<link rel="stylesheet" href="${esc(href)}"${l && l.id ? ` id="${esc(l.id)}"` : ''} media="${esc(media || 'all')}">`;
+        const own = l => tag(l.href, l, l.getAttribute('media'));
+        if (typeof fetch !== 'function' || typeof Blob === 'undefined' || !URL.createObjectURL) return Promise.resolve(ls.map(own).join(''));
+        return Promise.all(ls.map(l => loadSheet(l.href))).then(texts => {
+            const out = []; let run = [];
+            const flush = () => {
+                if (!run.length) return;
+                const key = run.map(({l}) => `${l.href}|${l.getAttribute('media') || ''}`).join('\n');
+                const u = sheetBlobs.get(key) || sheetBlob(key, run.map(({l, txt}) => { const m = (l.getAttribute('media') || '').trim(); return m && m !== 'all' ? `@media ${m} {\n${txt}\n}` : txt; }).join('\n'));
+                out.push(u ? tag(u, null, 'all') : run.map(({l}) => own(l)).join(''));
+                run = [];
+            };
+            ls.forEach((l, i) => {
+                const txt = texts[i];
+                if (txt == null) { flush(); out.push(own(l)); return; }
+                if (l.id) { flush(); const u = sheetBlob(l.href, txt); out.push(u ? tag(u, l, l.getAttribute('media')) : own(l)); return; }
+                run.push({l, txt});
+            });
+            flush();
+            return out.join('');
+        });
+    }
+    function frameDocHtml(inner, W, links) {
         const styles = [...document.head.querySelectorAll('style')].map(s => `<style>${s.textContent.replace(/<\/style/gi, '<\\/style')}</style>`).join('');
         return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><base href="${esc(location.href.split('#')[0])}">${links}${styles}<style>html,body{overflow:hidden!important;height:auto!important;min-height:0!important}body{margin:0;background:var(--paper)}.lcd-pv-root{width:${W}px;box-sizing:border-box;padding:14px}:root[data-lc-fz] .lcd-pv-root{width:calc(${W}px / var(--lc-fz))}</style></head><body class="lcd-pv-body"><div class="lcd-pv-root">${inner}</div></body></html>`;
     }
@@ -795,8 +878,8 @@
         r.style.cssText = src.style.cssText;
         VARS.forEach(n => r.style.removeProperty(n));
         const isDark = src.dataset.theme === 'dark';
-        if (dark && !isDark) { r.dataset.theme = 'dark'; ['--blue', '--bg', '--paper', '--card-bg', '--card-head-bg'].forEach((k, i) => r.style.setProperty(k, [DARK.blue, DARK.bg, DARK.paper, DARK.card, DARK.cardHead][i])); r.classList.remove('lc-frame'); r.style.removeProperty('--ink'); }
-        if (!dark && isDark) { r.removeAttribute('data-theme'); ['--blue', '--bg', '--paper', '--card-bg', '--card-head-bg'].forEach((k, i) => r.style.setProperty(k, [LIGHT.blue, LIGHT.bg, LIGHT.paper, LIGHT.card, LIGHT.cardHead][i])); r.classList.remove('lc-frame'); r.style.removeProperty('--ink'); }
+        if (dark && !isDark) { r.dataset.theme = 'dark'; ['--blue', '--bg', '--paper', '--card-bg', '--card-head-bg'].forEach((k, i) => r.style.setProperty(k, [DARK.blue, DARK.bg, DARK.paper, DARK.card, DARK.cardHead][i])); r.style.setProperty('--on-blue', '#111111'); r.classList.remove('lc-frame'); r.style.removeProperty('--ink'); }
+        if (!dark && isDark) { r.removeAttribute('data-theme'); ['--blue', '--bg', '--paper', '--card-bg', '--card-head-bg'].forEach((k, i) => r.style.setProperty(k, [LIGHT.blue, LIGHT.bg, LIGHT.paper, LIGHT.card, LIGHT.cardHead][i])); r.style.setProperty('--on-blue', '#ffffff'); r.classList.remove('lc-frame'); r.style.removeProperty('--ink'); }
     }
     const fitAll = new Set();
     const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(entries => entries.forEach(e => e.target.lcdFit?.())) : null;
@@ -828,8 +911,11 @@
                 setTimeout(() => { if (f.isConnected) { measure(); slot.lcdFit(); } }, 350); // les polices et les images arrivent
             });
         }, {once: true});
-        f.srcdoc = frameDocHtml(inner, W);
-        slot.appendChild(f);
+        frameLinks().then(links => { // les feuilles partagées : prêtes tout de suite après le premier aperçu
+            if (slot.lcdToken !== token) return;
+            f.srcdoc = frameDocHtml(inner, W, links);
+            slot.appendChild(f);
+        });
         if (ro && !slot.lcdObs) { slot.lcdObs = true; ro.observe(slot); }
     }
 
@@ -1220,7 +1306,7 @@
     }
     let snapTimer = 0;
     if (typeof document !== 'undefined' && typeof MutationObserver !== 'undefined') {
-        const watchWs = () => { const ws = document.getElementById('workspace'); if (!ws) return false; new MutationObserver(() => { clearTimeout(snapTimer); snapTimer = setTimeout(snapshot, 900); }).observe(ws, {childList: true, subtree: true}); return true; };
+        const watchWs = () => { const ws = document.getElementById('workspace'); if (!ws) return false; new MutationObserver(() => { clearTimeout(snapTimer); snapTimer = setTimeout(() => (window.LCNDA_PERF?.idle || (f => f()))(snapshot), 900); }).observe(ws, {childList: true, subtree: true}); return true; };
         if (!watchWs()) document.addEventListener?.('DOMContentLoaded', watchWs, {once: true});
     }
     // si le réglage change dans un autre onglet du navigateur

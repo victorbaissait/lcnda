@@ -26,7 +26,7 @@ const js = f => path.join(appRoot, 'assets/js', f);
 const AR = require(js('app-archives-en-ligne-core.js'));
 const REGS = {1: require(js('app-sources-ouvertes-core.js')), 2: require(js('app-sources-ouvertes-2-core.js')), 3: require(js('app-sources-ouvertes-3-core.js')),
     4: require(js('app-sources-ouvertes-4-core.js')), 5: require(js('app-sources-ouvertes-5-core.js')), 6: require(js('app-sources-ouvertes-6-core.js')),
-    7: require(js('app-sources-ouvertes-7-core.js')), 8: require(js('app-sources-ouvertes-8-core.js')), socface: require(js('app-socface-core.js'))};
+    7: require(js('app-sources-ouvertes-7-core.js')), 8: require(js('app-sources-ouvertes-8-core.js')), 27: require(js('app-liens-archives-core.js')), socface: require(js('app-socface-core.js'))};
 const SHOTS = process.env.SHOTS || '';
 const HOSTS = /memoiredeshommes|culture\.gouv|gallica|retronews|europeana|francearchives|archives-nationales|maitron|familysearch|wikitree|archivesportaleurope|idref|bnf\.fr|freebmd|antenati|google\.com|archion|ancestry|myheritage|filae|geneanet/;
 
@@ -109,7 +109,7 @@ const fakeLS = (init = {}) => { const m = new Map(Object.entries(init)); return 
         assert.ok(l2.find(e => e.id === 'so7_ape').hidden && l2.find(e => e.id === 'so3_freebmd').hidden);
         assert.ok(l2.some(e => e.id === 'so7_m1' && e.mine), '« Mes sites » du lot 7');
         assert.equal(AR.url(l2.find(e => e.id === 'so7_m1'), P, REGS), 'https://m.example/?n=Dupont');
-        assert.deepEqual(AR.STORE_KEYS, ['genealogie-sources-ouvertes-sites', ...[2, 3, 4, 5, 6, 7, 8].map(n => `genealogie-sources-ouvertes-${n}-sites`)]);
+        assert.deepEqual(AR.STORE_KEYS, ['genealogie-sources-ouvertes-sites', ...[2, 3, 4, 5, 6, 7, 8, 27].map(n => `genealogie-sources-ouvertes-${n}-sites`)]);
     });
 
     /* ═════ 2. le code ═════ */
@@ -148,7 +148,7 @@ const fakeLS = (init = {}) => { const m = new Map(Object.entries(init)); return 
     if (!pw || process.env.NO_BROWSER) { console.log('— navigateur : sauté'); return finish(); }
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'carnet-ael-'));
     const dir = path.join(tmp, 'a'); fs.mkdirSync(path.join(dir, 'media'), {recursive: true});
-    const envFor = d => ({...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1'});
+    const envFor = d => ({...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4'});
     const r = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', String.raw`
 require 'lib/paths.php';
 $p = new PDO('sqlite:'.DATA_DIR.'/genealogy.sqlite'); $p->exec(file_get_contents(APP_ROOT.'/data/schema.sql')); $p = null;

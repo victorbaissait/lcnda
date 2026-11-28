@@ -1,0 +1,393 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rapports et traitements</title>
+<style>
+:root{--bg:#f4f5f7;--paper:#fff;--ink:#111;--muted:#555;--soft:#777;--line:#eceef2;--line2:#c9ced8;--blue:#055dff;--blue-bg:#eef4ff;--blue-ink:#1a3d8f;--green:#1a7f37;--green-bg:#eaf6ee;--yel:#d4a800;--yel-bg:#fff8d6;--yel-ink:#7a5d00;--red:#c62828;--red-bg:#fdecec;--vio:#6929c4;--vio-bg:#f3ecff;--grey-bg:#f1f2f4;--shadow:rgba(5,93,255,.25);--bar:#141414;--bar-ink:#fff;--sheet:#fffdf8}
+@media (prefers-color-scheme:dark){:root{--bg:#121417;--paper:#1c1f24;--ink:#eceef2;--muted:#b4b9c3;--soft:#9aa0aa;--line:#2c3038;--line2:#454b55;--blue:#5b93ff;--blue-bg:#18233a;--blue-ink:#a9c4ff;--green:#4cc070;--green-bg:#15281c;--yel:#e0b93a;--yel-bg:#2c2612;--yel-ink:#f0d276;--red:#ff6b6b;--red-bg:#331a1a;--vio:#b48cff;--vio-bg:#261d38;--grey-bg:#262a31;--shadow:rgba(91,147,255,.22);--bar:#000;--bar-ink:#eceef2;--sheet:#23262b}}
+*{box-sizing:border-box}
+body{background:var(--bg);padding:28px;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);margin:0;line-height:1.45}
+h1{font-size:24px;margin:0 0 4px}h2{font-size:19px;margin:36px 0 6px}
+.wrap{max-width:1240px;margin:0 auto}
+.eyebrow{font:800 12px system-ui;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin:0 0 6px}
+.part{font:800 12px system-ui;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin:46px 0 0;border-top:3px solid var(--ink);padding-top:10px}
+.sub{color:var(--muted);margin:0 0 18px;font-size:14px;max-width:1000px}
+.simple{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:14px 18px;font-size:14px;max-width:1100px}
+.simple p{margin:0 0 8px}.simple p:last-child{margin:0}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:12px}
+.three>div{border:2px solid var(--ink);background:var(--paper);padding:10px 12px;font-size:13px}
+.three h4{margin:0 0 4px;font-size:13px;font:800 11px system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--blue)}
+.badge{font:700 10.5px/1.2 system-ui;border:1.5px solid var(--ink);padding:3px 6px;letter-spacing:.03em;display:inline-block;text-transform:uppercase;white-space:nowrap;vertical-align:middle}
+.badge.new{border-color:var(--blue);color:#fff;background:var(--blue)}
+.badge.re{border-color:var(--green);color:var(--green);background:var(--green-bg)}
+.badge.warn{border-color:var(--yel);color:var(--yel-ink);background:var(--yel-bg)}
+.badge.red{border-color:var(--red);color:var(--red);background:var(--red-bg)}
+.badge.violet{border-color:var(--vio);color:var(--vio);background:var(--vio-bg)}
+.badge.grey{border-color:#8a8f99;color:var(--muted);background:var(--grey-bg)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{font:700 11px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);text-align:left;padding:8px;border-bottom:2px solid var(--ink)}
+td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+td.num,th.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+code{font:11.5px ui-monospace,Menlo,Consolas,monospace;color:var(--muted);word-break:break-word}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 26px}
+.wide{grid-column:1 / -1}.grid>*{min-width:0}
+.case{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:16px 18px 18px;min-width:0}
+.case .head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.case .tag{font:700 11px/1 system-ui;letter-spacing:.1em;color:var(--blue);text-transform:uppercase}
+.num-b{display:inline-block;background:var(--blue);color:#fff;font:800 12px system-ui;padding:3px 7px;margin-right:6px}
+.case h3{margin:8px 0 10px;font-size:17px}
+.note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+.msg{border-left:4px solid var(--blue);background:var(--blue-bg);padding:9px 12px;font-size:13px;margin:12px 0}
+.msg.warn{border-color:var(--yel);background:var(--yel-bg)}.msg.ok{border-color:var(--green);background:var(--green-bg)}.msg.red{border-color:var(--red);background:var(--red-bg)}
+.btn{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--ink);background:var(--paper);font:700 13px system-ui;padding:7px 11px;box-shadow:3px 3px 0 var(--shadow);color:var(--ink);white-space:nowrap;cursor:pointer}
+.btn.blue{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.small{font-size:12px;padding:4px 8px;box-shadow:none}
+.btn.ghost{border-color:var(--line2);box-shadow:none;color:var(--muted)}
+.btn.red{border-color:var(--red);color:var(--red);box-shadow:none}
+.btn.green{border-color:var(--green);color:var(--green);box-shadow:none}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.lab{display:block;font-weight:700;font-size:13px;margin:12px 0 6px}
+.input{border:1.5px solid var(--line2);padding:5px 8px;font-size:13.5px;background:var(--paper);width:100%;min-height:30px;color:var(--ink)}
+.seg{display:inline-flex;border:2px solid var(--ink);flex-wrap:wrap;max-width:100%}.seg span{padding:5px 9px;font:700 12px system-ui;border-right:1.5px solid var(--ink);background:var(--paper);cursor:pointer}.seg span:last-child{border-right:0}.seg span.on{background:var(--blue);color:#fff}
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+.scrollx>table{min-width:720px}
+.mini{font-size:12px;color:var(--muted)}
+.win{border:2px solid var(--ink);background:var(--paper);min-width:0}
+.win-bar{display:flex;align-items:center;gap:10px;padding:7px 10px;border-bottom:2px solid var(--ink);background:var(--grey-bg);flex-wrap:wrap;justify-content:space-between}
+.win-bar .ey{font:700 10.5px system-ui;letter-spacing:.12em;color:var(--soft);text-transform:uppercase}
+.win-bar b{font-size:14px}
+.win-body{padding:12px;min-width:0}
+.win-foot{display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;border-top:2px solid var(--ink);flex-wrap:wrap}
+.sw{display:inline-block;width:34px;height:18px;border-radius:9px;background:var(--line2);position:relative;vertical-align:middle;flex:none;cursor:pointer}
+.sw:after{content:"";position:absolute;left:2px;top:2px;width:14px;height:14px;border-radius:50%;background:#fff}
+.sw.on{background:var(--green)}.sw.on:after{left:18px}
+.set{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px;align-items:center}
+.set small{display:block;color:var(--muted);font-size:12px}
+.pill{display:inline-block;font:700 11px/1.2 system-ui;padding:2px 6px;border:1.5px solid var(--line2);background:var(--grey-bg);color:var(--muted);white-space:nowrap}
+.pill.ok{border-color:var(--green);background:var(--green-bg);color:var(--green)}
+.pill.q{border-color:var(--yel);background:var(--yel-bg);color:var(--yel-ink)}
+.pill.red{border-color:var(--red);background:var(--red-bg);color:var(--red)}
+.pill.blue{border-color:var(--blue);background:var(--blue-bg);color:var(--blue-ink)}
+.pill.vio{border-color:var(--vio);background:var(--vio-bg);color:var(--vio)}
+.cb{width:14px;height:14px;border:2px solid var(--ink);display:inline-block;flex:none;vertical-align:-2px}
+.cb.on{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--paper)}
+.qs{background:var(--paper);border:2px solid var(--vio);box-shadow:6px 6px 0 rgba(105,41,196,.22);padding:14px 18px}
+.qs ol{margin:0;padding-left:22px}
+.qs li{margin:0 0 12px;font-size:13.5px}
+.qs li b.q{display:block;font-size:14px}
+.qs .opts{display:flex;gap:6px;flex-wrap:wrap;margin:5px 0}
+.qs .opts span{border:1.5px solid var(--line2);padding:2px 7px;font-size:12px;background:var(--grey-bg)}
+.qs .opts span.rec{border-color:var(--green);background:var(--green-bg);color:var(--green);font-weight:700}
+.qs .why{font-size:12.5px;color:var(--muted)}
+.reuse{background:var(--paper);border:2px solid var(--green);box-shadow:6px 6px 0 rgba(26,127,55,.22);padding:12px 16px}
+.reuse ul{margin:0;padding-left:18px;font-size:13px}.reuse li{margin:5px 0}
+.reuse code{color:var(--green)}
+.topbar{display:flex;align-items:center;gap:10px;background:var(--bar);color:var(--bar-ink);padding:8px 10px;flex-wrap:wrap;font:700 12.5px system-ui}
+.topbar .sp{flex:1}
+.topbar .who{border:1.5px solid var(--bar-ink);padding:2px 8px;font-weight:700}
+.topbar .on{background:var(--blue);padding:2px 8px}
+.av{display:inline-flex;width:24px;height:24px;border-radius:50%;background:var(--vio);color:#fff;font:800 11px/24px system-ui;justify-content:center;flex:none}
+.av.b{background:var(--blue)}.av.g{background:var(--green)}.av.y{background:var(--yel);color:#111}.av.k{background:var(--ink);color:var(--paper)}
+.hid{color:var(--soft);font-style:italic}
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:10px}
+.flow>div{border:2px solid var(--ink);background:var(--paper);padding:8px 10px;font-size:12.5px}
+.flow>div b{display:block;font-size:13px;margin-bottom:2px}
+.flow>div .n{display:inline-block;background:var(--blue);color:#fff;font:800 11px system-ui;padding:1px 6px;margin-bottom:4px}
+.flow>div small{color:var(--muted)}
+.toc{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 0}
+.toc a{border:1.5px solid var(--ink);background:var(--paper);padding:3px 8px;font:700 12px system-ui;color:var(--ink);text-decoration:none}
+.toc a:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+a{color:var(--blue)}
+@media (max-width:980px){.three{grid-template-columns:1fr}.flow{grid-template-columns:1fr 1fr}}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+@media (max-width:760px){body{padding:14px 16px}.case{padding:12px}.flow{grid-template-columns:1fr}h1{font-size:21px}}
+
+/* — propre à cette maquette — */
+.builder{display:grid;grid-template-columns:330px minmax(0,1fr);gap:0;border:2px solid var(--ink);background:var(--paper)}
+.builder>*{min-width:0}
+.bside{border-right:2px solid var(--ink);padding:10px 12px;font-size:13px}
+.bstep{border-bottom:1px solid var(--line);padding:8px 0}
+.bstep:last-child{border-bottom:0}
+.bstep h5{margin:0 0 6px;font-size:13px;display:flex;gap:6px;align-items:center}
+.bstep h5 i{font-style:normal;background:var(--blue);color:#fff;font:800 11px system-ui;padding:1px 6px}
+.chips{display:flex;gap:4px;flex-wrap:wrap}
+.chips span{border:1.5px solid var(--blue);background:var(--blue-bg);color:var(--blue-ink);font:700 11.5px system-ui;padding:2px 6px;white-space:nowrap}
+.chips span.add{border-style:dashed;background:none;color:var(--soft);border-color:var(--line2)}
+.chips span.f{border-color:var(--vio);background:var(--vio-bg);color:var(--vio)}
+.rule{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:4px;margin:4px 0}
+.rule span{border:1.5px solid var(--line2);padding:3px 6px;font-size:12px;background:var(--paper);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bmain{padding:12px;background:var(--grey-bg)}
+.sheet{background:var(--sheet);border:1.5px solid var(--line2);box-shadow:0 2px 10px rgba(0,0,0,.12);padding:20px 24px;font:12.5px/1.45 Georgia,"Times New Roman",serif;color:var(--ink);max-width:760px;margin:0 auto}
+.sheet h5{font:700 17px Georgia,serif;margin:0;text-align:center}
+.sheet .c{text-align:center;font-size:11.5px;color:var(--muted);margin:2px 0 12px}
+.sheet h6{font:700 13px Georgia,serif;margin:12px 0 3px;border-bottom:1.5px solid var(--ink);padding-bottom:2px;display:flex;justify-content:space-between}
+.sheet table{font:12px Georgia,serif}
+.sheet td{padding:3px 6px}
+.sheet .tot td{border-top:1px solid var(--ink);font-style:italic}
+.sheet a{color:var(--blue)}
+.sheet .fx{font:700 11px system-ui;color:var(--vio)}
+.tpl{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.tpl>div{border:2px solid var(--ink);background:var(--paper);padding:9px 11px;font-size:12.5px;box-shadow:4px 4px 0 var(--shadow)}
+.tpl b{display:block;font-size:13.5px}
+.tpl small{color:var(--muted)}
+.tpl .mine{border-color:var(--vio);box-shadow:4px 4px 0 rgba(105,41,196,.22)}
+.rec{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.rec>div{border:2px solid var(--line2);background:var(--paper);padding:8px 10px;font-size:12.5px}
+.rec>div.on{border-color:var(--blue);background:var(--blue-bg)}
+.rec b{display:block;font-size:13px}
+.rec small{color:var(--muted)}
+.pv td .old{color:var(--red);text-decoration:line-through}
+.pv td .new{color:var(--green);font-weight:700}
+.pv tr.off td{opacity:.45}
+.chain{list-style:none;margin:0;padding:0;font-size:13px;counter-reset:c}
+.chain li{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:8px;align-items:center;border:2px solid var(--ink);background:var(--paper);padding:6px 8px;margin-bottom:-2px}
+.chain li:before{counter-increment:c;content:counter(c);background:var(--blue);color:#fff;font:800 12px/22px system-ui;text-align:center;width:22px;height:22px}
+.fbox{border:2px solid var(--vio);background:var(--paper);font:13px ui-monospace,Menlo,Consolas,monospace;padding:8px 10px;overflow-x:auto;white-space:nowrap}
+.fbox .fn{color:var(--vio);font-weight:700}.fbox .fld{color:var(--blue);font-weight:700}.fbox .str{color:var(--green)}
+.ac{border:2px solid var(--ink);background:var(--paper);box-shadow:6px 6px 0 rgba(0,0,0,.14);font-size:12.5px;max-width:420px;margin-top:-2px}
+.ac div{padding:5px 9px;border-bottom:1px solid var(--line)}
+.ac div.on{background:var(--blue-bg)}
+.ac small{color:var(--muted);display:block}
+.vs td:first-child{font-weight:700;white-space:nowrap}
+.vs .y{color:var(--green);font-weight:800}.vs .n{color:var(--red);font-weight:800}
+.nope{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:10px}
+.nope>div{border:2px dashed var(--red);background:var(--red-bg);padding:8px 10px;font-size:12.5px}
+.nope b{display:block;color:var(--red)}
+.have{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
+.have>div{border:1.5px solid var(--line2);background:var(--grey-bg);padding:8px 10px;font-size:12.5px;color:var(--muted)}
+.have b{color:var(--ink);display:block}
+.have .plus{display:block;color:var(--blue-ink);margin-top:4px;font-weight:700}
+@media (max-width:1000px){.builder{grid-template-columns:1fr}.bside{border-right:0;border-bottom:2px solid var(--ink)}.nope{grid-template-columns:1fr 1fr}}
+@media (max-width:760px){.sheet{padding:12px;overflow-x:auto}.sheet td:nth-child(5),.sheet th:nth-child(5){display:none}.sheet td,.sheet th{padding:3px}.nope{grid-template-columns:1fr}.chain li{grid-template-columns:24px minmax(0,1fr)}.chain li>.btn{grid-column:2;justify-self:start}}
+</style></head><body><div class="wrap">
+
+<p class="eyebrow">Maquette · grosse fonction n°2 · rien n'est encore construit</p>
+<h1>🧮 Écrire ses propres rapports et traitements — sans risque</h1>
+<p class="sub">Ce que GEDKeeper, LifeLines ou TreeMonk font avec des scripts, mais avec des briques qu'on assemble à la souris : rien ne peut abîmer la base ni l'ordinateur.</p>
+
+<div class="simple">
+ <p><b>Ce que c'est.</b> Trois outils pour faire « à ta façon » ce que l'app ne fait pas toute seule : <b>① un constructeur de rapports</b> (tu choisis les personnes, les colonnes, le tri, les regroupements, la mise en page, puis tu exportes en PDF, HTML ou CSV) ; <b>② des traitements en lot</b> (« remplacer “St” par “Saint” dans tous les lieux », « mettre les noms en majuscules ») toujours montrés avant, ligne par ligne, et annulables avec ↶ ; <b>③ un mode avancé avec des formules</b>, les mêmes que dans le tableur de l'app.</p>
+ <p><b>Pour qui.</b> Pour toi quand tu veux une liste précise à imprimer pour une cousinade, un dossier pour les archives, un relevé pour une association ; et pour remettre de l'ordre dans des données importées d'un autre logiciel.</p>
+ <p><b>Ce que ça change.</b> Les autres logiciels laissent écrire du code. C'est puissant, mais un script trouvé sur un forum peut effacer des fiches ou lire des fichiers de l'ordinateur. Ici, <b>pas de code</b> : un rapport ne fait que <i>lire</i> ; un traitement ne fait que des gestes connus, montrés d'abord, enregistrés dans le journal, avec une sauvegarde juste avant.</p>
+</div>
+<div class="three">
+ <div><h4>① Rapports</h4>Lire seulement. Filtres, colonnes, tri, regroupements, totaux, mise en page, export.</div>
+ <div><h4>② Traitements en lot</h4>Écrire, mais prudemment : aperçu, cases à décocher, sauvegarde avant, ↶.</div>
+ <div><h4>③ Formules</h4>Pour les colonnes calculées et les conditions fines. Calcul fermé : ni fichier, ni Internet, ni écriture.</div>
+</div>
+
+<nav class="toc"><a href="#deja">0. Déjà là / nouveau</a><a href="#rapport">1. Constructeur de rapports</a><a href="#modeles">2. Modèles</a><a href="#lot">3. Traitements en lot</a><a href="#formules">4. Formules</a><a href="#pourquoi">5. Pourquoi pas de scripts</a><a href="#questions">Questions pour toi</a><a href="#existe">Ce qui existe déjà</a></nav>
+
+<!-- ═════════ 0 ═════════ -->
+<p class="part" id="deja">0 · Ce qui est déjà là, et ce qui est vraiment nouveau</p>
+<h2>On ne refait pas ce qui existe</h2>
+<p class="sub">Plusieurs morceaux existent déjà. Cette maquette ne montre que ce qui manque entre eux.</p>
+<div class="have">
+ <div><b>🔁 Chercher et remplacer</b>prénoms, métiers, lieux, notes ; aperçu ligne par ligne ; ↶<span class="plus">＋ enchaîner plusieurs remplacements dans une « recette » réutilisable</span></div>
+ <div><b>🔎 Recherches enregistrées</b>critères, comparaison de deux recherches<span class="plus">＋ servent de point de départ d'un rapport</span></div>
+ <div><b>📋 Mes listes</b>critères ET / OU, colonnes, colonnes à soi<span class="plus">＋ regroupements, totaux, mise en page, PDF</span></div>
+ <div><b>🧾 Tableur</b>formules en français, lien avec la base<span class="plus">＋ ses formules utilisables dans un rapport</span></div>
+ <div><b>🏷 Règles d'étiquettes</b>« Poilu » à tout homme né 1870–1900<span class="plus">＋ d'autres gestes que l'étiquette</span></div>
+ <div><b>🔁 Remplacer un lieu par un autre</b>Modifications groupées<span class="plus">＋ découper, normaliser, compléter les lieux en lot</span></div>
+</div>
+
+<!-- ═════════ 1 ═════════ -->
+<p class="part" id="rapport">1 · Le constructeur de rapports</p>
+<h2>Outils → 🧮 Mes rapports → Nouveau rapport</h2>
+<p class="sub">À gauche, cinq étapes qu'on remplit dans l'ordre (ou pas). À droite, l'aperçu se met à jour tout de suite, tel qu'il sera imprimé.</p>
+<div class="builder">
+ <div class="bside">
+  <div class="bstep"><h5><i>1</i> Qui ?</h5>
+   <div class="seg" style="margin-bottom:6px"><span class="on">personnes</span><span>événements</span><span>lieux</span><span>sources</span></div>
+   <div class="mini">Partir de : <b>🔎 « Mes ancêtres »</b> (recherche enregistrée) ▾</div>
+   <div class="rule"><span>Naissance · lieu</span><span>dans</span><span>Corrèze (19)</span></div>
+   <div class="rule"><span>Naissance · année</span><span>avant</span><span>1850</span></div>
+   <div class="chips"><span class="add">＋ condition</span><span class="add">＋ condition en formule</span></div>
+  </div>
+  <div class="bstep"><h5><i>2</i> Colonnes</h5>
+   <div class="chips"><span>Sosa</span><span>Nom, prénoms</span><span>Naissance</span><span>Décès</span><span>Métier</span><span class="f">ƒ Âge au décès</span><span>Sources (nombre)</span><span class="add">＋ colonne</span></div>
+  </div>
+  <div class="bstep"><h5><i>3</i> Tri et regroupement</h5>
+   <div class="rule"><span>Regrouper par</span><span>:</span><span>Commune de naissance</span></div>
+   <div class="rule"><span>Trier par</span><span>:</span><span>Naissance ↑</span></div>
+   <div class="row mini"><span class="cb on"></span> sous-total par groupe <span class="cb on"></span> total général</div>
+  </div>
+  <div class="bstep"><h5><i>4</i> Mise en forme</h5>
+   <div class="mini">Titre : <b>Nos ancêtres corréziens</b> · format A4 portrait · police « livre »</div>
+   <div class="row mini" style="margin-top:4px"><span class="cb on"></span> nouvelle page à chaque groupe <span class="cb"></span> photo</div>
+   <div class="row mini" style="margin-top:4px"><span class="cb on"></span> colorer : <span class="pill red">sans source</span></div>
+  </div>
+  <div class="bstep"><h5><i>5</i> Vie privée et export</h5>
+   <div class="mini">Vivants : <b>retirés</b> · fiches 🔒 : <b>retirées</b></div>
+   <div class="row" style="margin-top:6px"><span class="btn small blue">PDF</span><span class="btn small">HTML</span><span class="btn small">CSV</span><span class="btn small">→ 🧾 Tableur</span><span class="btn small">💾 Enregistrer</span></div>
+  </div>
+ </div>
+ <div class="bmain">
+  <div class="row" style="justify-content:space-between;margin-bottom:8px"><span class="mini"><b>Aperçu</b> · 47 personnes · 9 communes · calculé en 0,2 s</span><span class="seg"><span class="on">page</span><span>tableau</span></span></div>
+  <div class="sheet">
+   <h5>Nos ancêtres corréziens</h5>
+   <p class="c">nés en Corrèze avant 1850 · regroupés par commune de naissance · 25 novembre 2026</p>
+   <h6><span>Naves</span><span>12 personnes</span></h6>
+   <table><thead><tr><th>Sosa</th><th>Nom</th><th>Naissance</th><th>Décès</th><th>Métier</th><th class="num">Âge <span class="fx">ƒ</span></th></tr></thead><tbody>
+    <tr><td>32</td><td><a href="#">LAVERGNE Jean</a></td><td>1772</td><td>1839</td><td>laboureur</td><td class="num">67</td></tr>
+    <tr><td>33</td><td><a href="#">CHASSAGNE Marie</a></td><td>1776</td><td>1851</td><td>—</td><td class="num">75</td></tr>
+    <tr><td>16</td><td><a href="#">LAVERGNE Pierre</a></td><td>1801</td><td>1866</td><td>cultivateur</td><td class="num">65</td></tr>
+    <tr style="background:var(--red-bg)"><td>17</td><td><a href="#">VIALLE Anne</a></td><td>vers 1805</td><td>?</td><td>—</td><td class="num">—</td></tr>
+    <tr class="tot"><td colspan="5">Âge moyen au décès (Naves)</td><td class="num">62</td></tr>
+   </tbody></table>
+   <h6><span>Tulle</span><span>8 personnes</span></h6>
+   <table><tbody>
+    <tr><td>40</td><td><a href="#">BORIE Léonard</a></td><td>1768</td><td>1820</td><td>armurier</td><td class="num">52</td></tr>
+    <tr><td>41</td><td><a href="#">SOLEILHAVOUP Catherine</a></td><td>1771</td><td>1830</td><td>—</td><td class="num">59</td></tr>
+    <tr><td colspan="6" style="color:var(--soft);font-style:italic">… 6 autres</td></tr>
+   </tbody></table>
+   <h6><span>Total</span><span>47 personnes</span></h6>
+  </div>
+ </div>
+</div>
+<p class="note">Dans le PDF et le HTML, les noms restent des liens vers les fiches (HTML) ou portent leur numéro (PDF). Le CSV ouvre dans n'importe quel tableur.</p>
+
+<!-- ═════════ 2 ═════════ -->
+<p class="part" id="modeles">2 · Modèles prêts et rapports enregistrés</p>
+<h2>🧮 Mes rapports</h2>
+<p class="sub">Des modèles tout faits, à ouvrir et à changer ; les tiens à côté. Un rapport s'enregistre et peut s'échanger en petit fichier <code>.lcnda-rapport</code> : <b>des réglages, pas du code</b>. Un rapport reçu d'un cousin ne peut donc rien faire d'autre que lire ta base, avec tes propres règles de vie privée.</p>
+<div class="tpl">
+ <div><b>📜 Ancêtres par génération</b><small>Sosa, nom, dates, lieux ; un titre par génération ; % trouvés</small></div>
+ <div><b>⚡ Liste éclair</b><small>chaque nom de famille, ses lieux et ses années (pour les forums et les cousinades)</small></div>
+ <div><b>📚 Ce qui manque de sources</b><small>naissances, mariages, décès sans source, par branche</small></div>
+ <div><b>🎂 Anniversaires du mois</b><small>naissances, mariages, décès des ancêtres ce mois-ci</small></div>
+ <div><b>⏳ Âge au décès par siècle</b><small>regroupé par siècle et par sexe, avec moyenne et médiane</small></div>
+ <div><b>🎖 Les Poilus de la famille</b><small>hommes nés 1865–1900, matricule, sort, Mort pour la France</small></div>
+ <div><b>🏘 Qui vivait où</b><small>par commune : personnes, périodes, métiers</small></div>
+ <div><b>🧭 Fiches à compléter</b><small>par ordre de priorité (proche de toi, beaucoup de trous)</small></div>
+ <div class="mine"><b>🟣 Nos ancêtres corréziens</b><small>à toi · modifié le 25 nov. · PDF A4</small></div>
+ <div class="mine"><b>🟣 Pour l'association du Bas-Limousin</b><small>à toi · CSV au format qu'ils demandent</small></div>
+</div>
+
+<!-- ═════════ 3 ═════════ -->
+<p class="part" id="lot">3 · Les traitements en lot</p>
+<h2>Outils de modification → 🧹 Traitements en lot</h2>
+<p class="sub">Des gestes connus, à choisir dans une liste. Chacun se déroule pareil : <b>régler → voir l'aperçu ligne par ligne → décocher les exceptions → appliquer</b> (sauvegarde automatique juste avant) <b>→ ↶ possible</b>.</p>
+<div class="case" style="margin-bottom:18px">
+ <div class="head"><span class="tag">Choisir un traitement</span></div>
+ <div class="rec" style="margin-top:8px">
+  <div class="on"><b>📍 Développer une abréviation dans les lieux</b><small>« St » → « Saint », « Ste » → « Sainte »…</small></div>
+  <div><b>📍 Découper un lieu</b><small>« Naves, Corrèze, France » → commune + département + pays</small></div>
+  <div><b>🔠 Noms en majuscules</b><small>« Lavergne » → « LAVERGNE », prénoms laissés</small></div>
+  <div><b>📅 Mettre d'accord les dates approximatives</b><small>« env. 1784 », « ca 1784 », « ~1784 » → « vers 1784 »</small></div>
+  <div><b>⚥ Compléter le sexe d'après le prénom</b><small>avec la liste des prénoms de l'INSEE ; « Camille », « Dominique » laissés</small></div>
+  <div><b>🏷 Étiqueter / retirer une étiquette</b><small>à toutes les personnes d'un rapport ou d'une recherche</small></div>
+  <div><b>🔗 Relier une source à plusieurs événements</b><small>« recensement 1906 de Naves » à tous ceux qui y figurent</small></div>
+  <div><b>🧽 Nettoyer les espaces et la ponctuation</b><small>doubles espaces, virgules en trop, majuscules en début</small></div>
+ </div>
+</div>
+<div class="grid">
+<div class="win wide">
+ <div class="win-bar"><b>📍 Développer une abréviation dans les lieux</b><span class="row"><span class="mini">Remplacer</span><span class="input" style="width:70px">St</span><span class="mini">par</span><span class="input" style="width:100px">Saint</span><span class="mini">mot entier, suivi d'un tiret ou d'un espace</span></span></div>
+ <div class="win-body scrollx">
+  <table class="pv"><thead><tr><th></th><th>Lieu actuel</th><th>Deviendra</th><th class="num">Événements</th><th>Remarque</th></tr></thead><tbody>
+   <tr><td><span class="cb on"></span></td><td><span class="old">St</span>-Priest-de-Gimel</td><td><span class="new">Saint</span>-Priest-de-Gimel</td><td class="num">23</td><td></td></tr>
+   <tr><td><span class="cb on"></span></td><td><span class="old">St</span> Martial-de-Gimel</td><td><span class="new">Saint</span>-Martial-de-Gimel</td><td class="num">9</td><td class="mini">tiret ajouté (nom officiel)</td></tr>
+   <tr><td><span class="cb on"></span></td><td><span class="old">St</span>-Hilaire-Peyroux</td><td><span class="new">Saint</span>-Hilaire-Peyroux</td><td class="num">14</td><td class="mini">⚠ « Saint-Hilaire-Peyroux » existe déjà : les deux lieux seront <b>fusionnés</b></td></tr>
+   <tr class="off"><td><span class="cb"></span></td><td>Rue <span class="old">St</span>-Pierre, Tulle</td><td>Rue <span class="new">Saint</span>-Pierre, Tulle</td><td class="num">1</td><td class="mini">décoché par toi</td></tr>
+   <tr><td colspan="5" class="mini">… 37 autres lieux · <b>41 lieux, 212 événements</b> seront changés</td></tr>
+  </tbody></table>
+ </div>
+ <div class="win-foot"><span class="mini" style="margin-right:auto">💾 Une sauvegarde est faite juste avant. Le traitement est noté dans le journal.</span><span class="btn ghost">Annuler</span><span class="btn">💾 Garder comme recette</span><span class="btn blue">Appliquer à 41 lieux</span></div>
+</div>
+<div class="case">
+ <div class="head"><span class="tag">Après</span></div>
+ <h3>Fait — et réversible</h3>
+ <div class="msg ok">✓ 41 lieux changés, 1 fusion. <span class="btn small">↶ Tout annuler</span></div>
+ <p class="note">« ↶ » remet exactement l'ancien texte, mais seulement là où personne n'a rien changé depuis (comme le chercher-remplacer d'aujourd'hui). Une ligne déjà retouchée est signalée au lieu d'être écrasée.</p>
+</div>
+<div class="case">
+ <div class="head"><span class="tag">Recettes</span><span class="badge new">nouveau</span></div>
+ <h3>Une suite de traitements, rejouée en un clic</h3>
+ <p class="mini" style="margin-top:0">Utile après chaque import d'un fichier GEDCOM d'un cousin.</p>
+ <ol class="chain">
+  <li><span>📍 « St » → « Saint » dans les lieux</span><span class="btn small ghost">✎</span></li>
+  <li><span>📅 dates approximatives → « vers »</span><span class="btn small ghost">✎</span></li>
+  <li><span>🔠 noms en majuscules</span><span class="btn small ghost">✎</span></li>
+  <li><span>🏷 étiquette « Import Paul 2026 »</span><span class="btn small ghost">✎</span></li>
+ </ol>
+ <div class="row" style="margin-top:10px"><span class="mini">Sur :</span><span class="pill blue">les personnes du dernier import</span><span class="btn small blue">Voir l'aperçu des 4 étapes</span></div>
+</div>
+</div>
+
+<!-- ═════════ 4 ═════════ -->
+<p class="part" id="formules">4 · Le mode avancé : des formules sûres</p>
+<h2>Une colonne calculée, une condition fine</h2>
+<p class="sub">Pour qui veut aller plus loin, sans écrire de programme : les <b>formules du tableur de l'app</b> (SI, ET, NB.SI, ANNEE, AGE, DATEDIF, CONCATENER…, en français), avec les champs de la fiche en plus. On les tape dans une colonne ou une condition d'un rapport. Le tableur ne connaît ni « eval » ni accès aux fichiers : une formule ne peut <b>que calculer une valeur</b>.</p>
+<div class="grid">
+<div class="case">
+ <div class="head"><span class="tag">Colonne calculée « Remarque »</span><span class="badge re">moteur du tableur</span></div>
+ <label class="lab">Formule</label>
+ <div class="fbox">=<span class="fn">SI</span>(<span class="fn">ET</span>(<span class="fld">[Décès.année]</span>-<span class="fld">[Naissance.année]</span>&gt;90; <span class="fld">[Sources]</span>=0); <span class="str">"très âgé, sans source"</span>; <span class="str">""</span>)</div>
+ <div class="ac">
+  <div class="on"><b>[Décès.année]</b><small>l'année du décès (vide si inconnue)</small></div>
+  <div><b>[Décès.lieu]</b><small>le lieu du décès, tel qu'écrit</small></div>
+  <div><b>[Décès.âge]</b><small>calculé seulement si les deux dates sont sûres</small></div>
+ </div>
+ <div class="msg">Résultat sur les 47 lignes : <b>2</b> « très âgé, sans source ». <a href="#">Voir les lignes</a></div>
+</div>
+<div class="case">
+ <div class="head"><span class="tag">Condition « Qui ? » en formule</span></div>
+ <label class="lab">Garder la personne si…</label>
+ <div class="fbox">=<span class="fn">ET</span>(<span class="fn">NB.SI</span>(<span class="fld">[Métiers]</span>; <span class="str">"tisser*"</span>)&gt;0; <span class="fld">[Enfants.nombre]</span>&gt;=8)</div>
+ <div class="msg red"><b>Erreur expliquée</b>, comme dans le tableur : « <code>[Metier]</code> n'existe pas. Voulais-tu dire <b>[Métiers]</b> ? »</div>
+ <p class="note">Bornes : 8 000 caractères, 100 niveaux, temps de calcul limité. Une formule qui tourne en rond s'arrête avec un message, l'app ne gèle pas.</p>
+</div>
+</div>
+<div class="nope">
+ <div><b>✕ Écrire dans la base</b>Une formule calcule, elle ne modifie rien. Écrire passe par un traitement en lot (aperçu + ↶).</div>
+ <div><b>✕ Lire ou écrire des fichiers</b>Ni ceux de l'ordinateur, ni ceux de l'app.</div>
+ <div><b>✕ Aller sur Internet</b>Aucune adresse, aucun envoi.</div>
+ <div><b>✕ Lancer un programme</b>Pas de commande, pas de code caché dans un rapport reçu.</div>
+</div>
+
+<!-- ═════════ 5 ═════════ -->
+<p class="part" id="pourquoi">5 · Pourquoi pas de vrais scripts</p>
+<h2>Script libre ou briques sûres</h2>
+<div class="scrollx"><table class="vs"><thead><tr><th></th><th>Script libre (GEDKeeper en Lua, LifeLines…)</th><th>Ce qu'on propose</th></tr></thead><tbody>
+ <tr><td>Puissance</td><td class="y">tout est possible</td><td>presque tout ce qu'on demande vraiment : listes, totaux, mises en page, nettoyages</td></tr>
+ <tr><td>Risque pour la base</td><td class="n">un script peut tout effacer d'un coup</td><td class="y">aperçu, sauvegarde avant, ↶</td></tr>
+ <tr><td>Risque pour l'ordinateur</td><td class="n">un script trouvé sur Internet peut lire tes fichiers</td><td class="y">aucun accès hors de la base</td></tr>
+ <tr><td>Vie privée</td><td class="n">à la charge de celui qui écrit</td><td class="y">vivants et fiches 🔒 retirés d'office à l'export</td></tr>
+ <tr><td>Pour toi</td><td class="n">il faut apprendre un langage</td><td class="y">souris + quelques formules si on veut</td></tr>
+ <tr><td>Échanger avec un cousin</td><td>un fichier de code à croire sur parole</td><td class="y">un fichier de réglages, lisible, inoffensif</td></tr>
+</tbody></table></div>
+
+<!-- ═════════ Questions ═════════ -->
+<p class="part" id="questions">Questions pour toi</p>
+<h2>Ce qu'il faut trancher avant de construire</h2>
+<div class="qs"><ol>
+ <li><b class="q">Le constructeur de rapports : un nouvel outil, ou « Mes listes » qui grandit ?</b><div class="opts"><span class="rec">« Mes listes » gagne un bouton « 🖨 En faire un rapport » + un outil Mes rapports qui réutilise ses critères ✓</span><span>tout dans Mes listes</span><span>outil séparé de zéro</span></div><span class="why">Recommandé : partager les critères et les colonnes de Mes listes (déjà testés), et ajouter la partie « page » (regroupements, totaux, mise en forme, PDF) dans un écran à part. Une liste qu'on remplit à la main et un rapport qu'on imprime ne servent pas au même moment.</span></li>
+ <li><b class="q">Le mode avancé avec formules : maintenant ou plus tard ?</b><div class="opts"><span>maintenant</span><span class="rec">dans un second temps ✓</span><span>jamais</span></div><span class="why">Recommandé : plus tard. Le constructeur et les modèles couvrent l'essentiel ; les formules arrivent ensuite, quand on saura quels champs manquent.</span></li>
+ <li><b class="q">Quels traitements en lot en premier ?</b><div class="opts"><span class="rec">lieux (abréviations, découpage), dates « vers », noms en majuscules, nettoyage ✓</span><span>autre liste</span></div><span class="why">Recommandé : ceux qui servent après chaque import GEDCOM. Dis-moi s'il te manque un geste que tu fais souvent à la main.</span></li>
+ <li><b class="q">Les recettes (suites de traitements) ?</b><div class="opts"><span class="rec">oui ✓</span><span>non, un traitement à la fois</span></div><span class="why">Recommandé : oui, c'est peu de travail en plus et ça évite de refaire 4 fois les mêmes réglages.</span></li>
+ <li><b class="q">Échanger des rapports avec d'autres (fichier .lcnda-rapport) ?</b><div class="opts"><span class="rec">oui, réglages seulement ✓</span><span>non</span></div><span class="why">Recommandé : oui ; comme il n'y a pas de code dedans, c'est sans danger.</span></li>
+ <li><b class="q">Quel PDF ?</b><div class="opts"><span class="rec">celui de l'app (impression de la page, comme les autres exports) ✓</span><span>un moteur PDF en plus</span></div><span class="why">Recommandé : réutiliser l'impression existante ; pas de nouvelle bibliothèque à surveiller.</span></li>
+</ol></div>
+
+<!-- ═════════ Existe ═════════ -->
+<p class="part" id="existe">Ce qui existe déjà dans l'app et sera réutilisé</p>
+<div class="reuse"><ul>
+ <li><b>🔁 Chercher et remplacer</b> avec aperçu et ↶ (<code>lib/recherche_outils.php</code> : <code>ro_replace_preview</code>, <code>ro_replace_apply</code>, table <code>ro_undo</code>, <code>ro_set_if</code> qui n'écrase pas ce qui a changé depuis) : la base de tous les traitements en lot.</li>
+ <li><b>🔁 Remplacer un lieu par un autre</b> (<code>ro_place_replace_*</code>) et les <b>🏷 règles d'étiquettes</b> (<code>ro_label_rule_*</code>).</li>
+ <li><b>🔎 Recherches enregistrées</b> (<code>saved_search_criteria</code>, <code>run_saved_search</code> dans <code>lib/heritage.php</code>) et <b>🧬 recherche par lien de parenté</b> (<code>ro_kinship</code>).</li>
+ <li><b>📋 Mes listes</b> (<code>lib/my_lists.php</code>) : critères ET/OU, colonnes de personnes et d'événements.</li>
+ <li><b>🧾 Tableur</b> : le moteur de formules sûr (<code>assets/js/app-tableur-engine.js</code> : pas d'eval, limites de taille et de profondeur, erreurs expliquées) et le lien avec la base (<code>lib/sheet_link.php</code>).</li>
+ <li><b>Vie privée des exports</b> : <code>gedcom_share_hidden()</code>. <b>Sauvegarde automatique</b> (<code>lib/sauvegarde_auto.php</code>). <b>Journal</b> : <code>log_change()</code>.</li>
+ <li><b>Prénoms de l'INSEE</b> (pour « compléter le sexe »), <b>impression</b> des exports existants pour le PDF.</li>
+</ul></div>
+<p class="note" style="margin-bottom:40px">Maquette statique : seuls les sélecteurs réagissent.</p>
+</div>
+<script>document.addEventListener('click',function(e){
+ var s=e.target.closest('.seg span');
+ if(s){var p=s.parentNode;p.querySelectorAll('span').forEach(function(x){x.classList.toggle('on',x===s)});
+  var g=p.getAttribute('data-group');if(g){document.querySelectorAll('[data-pane^="'+g+':"]').forEach(function(el){el.hidden=el.getAttribute('data-pane')!==g+':'+s.getAttribute('data-v')})}}
+ var sw=e.target.closest('.sw');if(sw)sw.classList.toggle('on');
+ var a=e.target.closest('[data-act]');if(a){var r=a.closest('[data-state]');if(r)r.setAttribute('data-state',a.getAttribute('data-act'))}
+ var t=e.target.closest('[data-toggle]');if(t){var el=document.getElementById(t.getAttribute('data-toggle'));if(el)el.hidden=!el.hidden}
+});
+</script>
+</body></html>

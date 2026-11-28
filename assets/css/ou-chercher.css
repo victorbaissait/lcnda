@@ -67,10 +67,10 @@
 .ouc-chip { font: inherit; font-size: 13px; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--line, #d6dae0); background: var(--surface, #fff); color: var(--ink, #111); cursor: pointer; white-space: nowrap; }
 .ouc-chip small { color: var(--muted, #666); margin-left: 2px; }
 .ouc-chip:hover { border-color: var(--blue, #055dff); }
-.ouc-chip.is-on, .ouc-chip.is-profile { background: var(--blue, #055dff); border-color: var(--blue, #055dff); color: #fff; }
+.ouc-chip.is-on, .ouc-chip.is-profile { background: var(--blue, #055dff); border-color: var(--blue, #055dff); color: var(--on-blue, #fff); }
 .ouc-chip.is-on small, .ouc-chip.is-profile small { color: #fff; }
 .ouc-chip.is-zero { border-style: dashed; color: var(--muted, #666); background: transparent; }
-.ouc-chip.is-zero.is-on { color: #fff; background: var(--blue, #055dff); }
+.ouc-chip.is-zero.is-on { color: var(--on-blue, #fff); background: var(--blue, #055dff); }
 .ouc-chip.is-more { font-weight: 600; }
 .ouc-chip:focus-visible { outline: 2px solid var(--blue, #055dff); outline-offset: 2px; }
 .ouc-from { margin: -4px 0 8px; font-size: 13px; }

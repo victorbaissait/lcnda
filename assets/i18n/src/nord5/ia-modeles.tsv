@@ -1,0 +1,35 @@
+fr ¦ hr ¦ sl
+# 🔬 Lecture approfondie : les modèles d’IA (avantages, inconvénients, « à l’essai », avancé) — lib/transcription_actes.php, heritage-transcribe-acte.js
+ia|Modèle ¦ Model ¦ Model
+conseillé pour cet ordinateur ({n} Go) ¦ preporučeno za ovo računalo ({n} GB) ¦ priporočeno za ta računalnik ({n} GB)
+à l’essai ¦ za isprobati ¦ za preizkus
+≈ {x} Go à télécharger ¦ ≈ {x} GB za preuzimanje ¦ ≈ {x} GB za prenos
+{n} Go de mémoire conseillés ¦ preporučeno {n} GB memorije ¦ priporočeno {n} GB pomnilnika
+trop gros pour cet ordinateur ¦ prevelik za ovo računalo ¦ prevelik za ta računalnik
+Autres modèles à essayer ({n}) ¦ Drugi modeli za isprobati ({n}) ¦ Drugi modeli za preizkus ({n})
+Pas encore essayés par l’app sur des actes : compare-les sur tes actes (« Les deux lectures côte à côte ») avant de t’y fier. ¦ Aplikacija ih još nije isprobala na ispravama: usporedi ih na svojim ispravama („Dva čitanja jedno uz drugo“) prije nego što im povjeruješ. ¦ Aplikacija jih še ni preizkusila na listinah: primerjaj jih na svojih listinah (»Branji drugo ob drugem«), preden se zaneseš nanje.
+Avancé : autre modèle (Ollama) ¦ Napredno: drugi model (Ollama) ¦ Napredno: drug model (Ollama)
+Les modèles déjà installés dans Ollama sur cet ordinateur. Un modèle qui ne sait pas lire une image ne peut pas lire l’acte. Pas essayé par l’app : vérifie toujours le texte. ¦ Modeli već instalirani u Ollami na ovom računalu. Model koji ne zna čitati sliku ne može pročitati ispravu. Aplikacija ga nije isprobala: uvijek provjeri tekst. ¦ Modeli, ki so že nameščeni v Ollami na tem računalniku. Model, ki ne zna brati slike, ne more prebrati listine. Aplikacija ga ni preizkusila: besedilo vedno preveri.
+lit les images ¦ čita slike ¦ bere slike
+ne lit pas les images ¦ ne čita slike ¦ ne bere slik
+Aucun autre modèle installé. Dans un terminal : « ollama pull » suivi du nom du modèle. ¦ Nema drugih instaliranih modela. U terminalu: „ollama pull“ pa naziv modela. ¦ Ni drugih nameščenih modelov. V terminalu: »ollama pull« in ime modela.
+cet ordinateur : {n} Go · chaque modèle se télécharge une seule fois ¦ ovo računalo: {n} GB · svaki model preuzima se samo jednom ¦ ta računalnik: {n} GB · vsak model se prenese samo enkrat
+Ce modèle ne sait pas lire une image : choisis un modèle « vision ». ¦ Ovaj model ne zna čitati sliku: odaberi model „vision“. ¦ Ta model ne zna brati slike: izberi model »vision«.
+le meilleur essayé sur les actes anciens, bon en français et en latin ¦ najbolji isproban na starim ispravama, dobar na francuskom i latinskom ¦ najboljši, preizkušen na starih listinah, dober v francoščini in latinščini
+16 Go de mémoire conseillés ¦ preporučeno 16 GB memorije ¦ priporočeno 16 GB pomnilnika
+léger et rapide, pour un ordinateur modeste ¦ lagan i brz, za skromno računalo ¦ lahek in hiter, za skromen računalnik
+se trompe plus souvent sur les noms et les écritures difficiles ¦ češće griješi kod imena i teškog rukopisa ¦ pogosteje se zmoti pri imenih in težki pisavi
+pour les ordinateurs puissants (64 Go) : la même famille que le conseillé, plus précise sur les écritures difficiles ¦ za snažna računala (64 GB): ista obitelj kao preporučeni, precizniji kod teškog rukopisa ¦ za zmogljive računalnike (64 GB): ista družina kot priporočeni, natančnejša pri težki pisavi
+lent, gros téléchargement ¦ spor, veliko preuzimanje ¦ počasen, velik prenos
+le plus gros qui tienne dans 64 Go ¦ najveći koji stane u 64 GB ¦ največji, ki gre v 64 GB
+très lent, très gros téléchargement, licence moins ouverte ¦ vrlo spor, vrlo veliko preuzimanje, manje otvorena licenca ¦ zelo počasen, zelo velik prenos, manj odprta licenca
+fort en français, bon pour comprendre l’acte ¦ jak na francuskom, dobro razumije ispravu ¦ močan v francoščini, dobro razume listino
+32 Go de mémoire conseillés, plus lent ¦ preporučeno 32 GB memorije, sporiji ¦ priporočeno 32 GB pomnilnika, počasnejši
+bon dans les langues européennes ¦ dobar u europskim jezicima ¦ dober v evropskih jezikih
+licence de Google moins ouverte, moins précis sur l’écriture à la main ¦ manje otvorena Googleova licenca, manje precizan kod rukopisa ¦ manj odprta Googlova licenca, manj natančen pri rokopisu
+léger, plusieurs langues ¦ lagan, više jezika ¦ lahek, več jezikov
+licence de Google, se trompe souvent sur les noms ¦ Googleova licenca, često griješi kod imena ¦ Googlova licenca, se pogosto zmoti pri imenih
+annoncé bon en écriture manuscrite ¦ navodno dobar u rukopisu ¦ menda dober v rokopisu
+moins connu, résultats à comparer ¦ manje poznat, rezultate treba usporediti ¦ manj znan, rezultate je treba primerjati
+très léger, fait pour les documents, ordinateurs modestes ¦ vrlo lagan, napravljen za dokumente, skromna računala ¦ zelo lahek, narejen za dokumente, skromni računalniki
+faible sur l’écriture à la main ancienne ¦ slab na starom rukopisu ¦ šibek pri starem rokopisu

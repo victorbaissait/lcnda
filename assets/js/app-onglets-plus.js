@@ -31,6 +31,9 @@
         {k: 'documents', g: 1, icon: '📄', name: 'Documents', desc: 'Tes photos, actes, lettres de A à Z, rangés en dossiers.', module: 'documents', rec: 'RPPRRYRRRY', words: 'document photo acte lettre papier'},
         {k: 'tresors', g: 1, icon: '✨', name: 'Trésors de famille', desc: 'Lettres à ouvrir plus tard, recettes, musée de famille.', module: 'tresors', rec: 'RPNRPYPPYN', words: 'trésor souvenir recette musée'},
         {k: 'fiches', g: 1, icon: '📒', name: 'Fiches', desc: 'Fiches thématiques : un métier, une guerre, un village.', module: 'fiches', rec: 'RPPRPRRRPP', words: 'fiche thème métier guerre village'},
+        {k: 'paniers', g: 1, icon: '🧺', name: 'Paniers', desc: 'Tes paniers rangés en dossiers, des idées à y mettre, et une recherche qui crée un panier. La pastille 🧺 reste là, même onglet éteint.', module: 'paniers', rec: 'RPPRPRRRPR', isNew: true, words: 'panier dossier recherche idée rassembler collecter'},
+        {k: 'diagrammes', g: 1, icon: '📈', name: 'Diagrammes', desc: 'Hémicycles, frises de vies, pyramides des âges, flux… tous tes diagrammes au même endroit, sans quitter l’onglet.', module: 'diagrammes', after: 'graphiques', rec: 'RPPRPRRPRR', isNew: true, words: 'diagramme graphique frise pyramide hémicycle camembert dessin'},
+        {k: 'donnees', g: 1, icon: '📊', name: 'Données', desc: 'Le récap des listes de données, la question en français et les 20 thèmes, dans le menu du haut. Le même écran que Listes → 🧰 Données, pas une copie.', module: 'donnees', rec: 'RPPRPRRPRR', isNew: true, words: 'données liste récap question thème séisme bataille musée'},
         {k: 'adn', g: 1, icon: '🧬', name: 'ADN', desc: 'Tes correspondances ADN et leurs liens.', module: 'adn', rec: 'PNNNNNRNPP', words: 'adn dna correspondance'},
         {k: 'catalogue', g: 1, icon: '🎨', name: 'Catalogue raisonné', desc: 'Les œuvres d’un artiste, albums, expositions.', module: 'catalogue', rec: 'PNNPYRNPPN', words: 'artiste œuvre oeuvre exposition album'},
         {k: 'animaux', g: 1, icon: '🐾', name: 'Animaux', desc: 'Pedigree, portées. (Suivi des animaux : à part.)', module: 'animaux', rec: 'PYYPNNNNPN', words: 'animal chien chat cheval pedigree portée'},
@@ -66,7 +69,7 @@
         {k: 'outil_assembler', g: 3, icon: '🧷', name: 'Assembler des photos', desc: 'Coller plusieurs photos d’un registre en une.', target: 'tool:assembler', where: 'Listes → Outils de modification', rec: 'PPPPPRPPPP', words: 'assembler coller photos registre'},
     ];
     const GROUPS = {1: ['Des parties de l’app, cachées au départ', 'Elles existent déjà : cocher les montre dans le menu.'], 2: ['Un raccourci vers une liste', 'Il devient un « onglet à soi » (Éditeur d’onglets).'], 3: ['Un raccourci vers un outil', '']};
-    const FLAGGED = ['animaux', 'suivi', 'documents', 'catalogue', 'tresors', 'successoral', 'fiches', 'adn']; // cachés au départ tant que leur repère n'est pas posé (app.js, menuHiddenKeys)
+    const FLAGGED = ['animaux', 'suivi', 'documents', 'catalogue', 'tresors', 'successoral', 'fiches', 'paniers', 'donnees', 'diagrammes', 'adn']; // cachés au départ tant que leur repère n'est pas posé (app.js, menuHiddenKeys)
     /** pour les usages allumés : 'shown' (déjà montré par l'usage), 'rec' (conseillé), 'ok' (possible), 'off' (absent du catalogue) */
     function status(item, usages) {
         const set = (Array.isArray(usages) && usages.length ? usages : ['genealogie']).map(u => USAGE_ORDER.indexOf(u)).filter(i => i >= 0);
@@ -117,6 +120,8 @@
             if (!own.has(key) && ownLast()) while (at > 0 && own.has(o[at - 1])) at--;
             o.splice(at, 0, key); ls.put('genealogie-menu-order', JSON.stringify(o)); A()?.applyMenuOrder?.();
         };
+        /** 📈 un onglet qui va à côté d'un autre (Diagrammes après Graphiques), pas à la fin */
+        const toAfter = (key, after) => { const o = menuKeys().filter(k => k !== key), i = o.indexOf(after); if (i < 0) return toEnd(key); o.splice(i + 1, 0, key); ls.put('genealogie-menu-order', JSON.stringify(o)); A()?.applyMenuOrder?.(); };
         /** ⤓ mes onglets regroupés à la fin (avant Réglages s'il est dernier), dans l'ordre où ils sont */
         const ownGrouped = order => { const own = new Set(ownTabs().map(t => t.id)), mine = order.filter(k => own.has(k)), rest = order.filter(k => !own.has(k)), m = rest.indexOf('maintenance'); rest.splice(m >= 0 && m === rest.length - 1 ? m : rest.length, 0, ...mine); return rest; };
         const label = item => `${item.icon} ${i18n(item.name)}`;
@@ -131,7 +136,7 @@
                 added = on ? [...new Set([...added, item.module])] : added.filter(k => k !== item.module);
                 ls.put('genealogie-menu-added', JSON.stringify(added));
                 A()?.applyMenuOrder?.();
-                if (on) toEnd(item.module);
+                if (on) { if (item.after) toAfter(item.module, item.after); else toEnd(item.module); }
             } else {
                 const list = ownTabs().map(t => ({...t}));
                 const same = list.filter(t => t.kind === 'screen' && t.target === item.target);
@@ -201,7 +206,7 @@
         const usageName = () => { const list = ext.premierLancement?.usages?.() || []; return usages().map(k => { const u = list.find(x => x.k === k); return u ? `${u.ic} ${i18n(u.short)}` : k; }).join(' · '); };
         function cardHtml(item, st) {
             const on = inMenu(item);
-            const tags = [st === 'rec' ? `<span class="tp-tag is-rec">${esc(i18n('conseillé pour toi'))}</span>` : '', st === 'shown' ? `<span class="tp-tag is-shown">${esc(i18n('montré par ton usage'))}</span>` : '', item.pro ? `<span class="tp-tag is-pro">${esc(i18n('métier'))}</span>` : ''].join('');
+            const tags = [st === 'rec' ? `<span class="tp-tag is-rec">${esc(i18n('conseillé pour toi'))}</span>` : '', st === 'shown' ? `<span class="tp-tag is-shown">${esc(i18n('montré par ton usage'))}</span>` : '', item.pro ? `<span class="tp-tag is-pro">${esc(i18n('métier'))}</span>` : '', item.isNew ? `<span class="tp-tag is-new">${esc(i18n('nouveau'))}</span>` : ''].join('');
             return `<label class="tp-card${on ? ' is-on' : ''}" data-tp-card="${esc(item.k)}"><input type="checkbox" data-tp-item="${esc(item.k)}" ${on ? 'checked' : ''}><span class="tp-ico" aria-hidden="true">${item.icon}</span><span class="tp-txt"><b>${esc(i18n(item.name))}</b><small>${esc(i18n(item.desc))}</small>${item.where ? `<small class="tp-where">${esc(i18n(item.where))}</small>` : ''}${tags ? `<span class="tp-tags">${tags}</span>` : ''}</span></label>`;
         }
         function ownCardHtml(t) {
@@ -244,6 +249,7 @@
                 <div class="segmented tp-filter" role="tablist">${[['all', i18n('Tous')], ['rec', i18n('Conseillés ({n})', {n: rec.length})], ['menu', i18n('Déjà dans le menu ({n})', {n: shown.length + ownOn})], ['order', i18n('⠿ Ordre du menu')]].map(([k, l]) => `<button type="button" role="tab" data-tp-filter="${k}" class="${f === k ? 'is-active' : ''}" aria-selected="${f === k}">${esc(l)}</button>`).join('')}</div>
                 <div class="tp-list">${groups || `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">${esc(i18n('Aucun onglet ne correspond.'))}</span></p>`}</div>
                 ${f === 'order' ? '' : `<p class="ui-hint">${esc(i18n('Une carte cochée = l’onglet est dans le menu. Cocher l’ajoute à la fin du menu ; décocher le cache (un raccourci est caché, pas effacé).'))}</p>`}
+                <p class="tp-own"><button type="button" class="button small secondary" data-tp-newpage="web">${esc(i18n('🌐 Une page web (archives en ligne) et mes notes…'))}</button> <button type="button" class="button small secondary" data-tp-newpage="fiche">${esc(i18n('📒 Une Fiche comme onglet…'))}</button></p>
                 <p><button type="button" class="link-button" data-tp-editor>${esc(i18n('↗ Faire un onglet à moi (Éditeur d’onglets)'))}</button></p>`;
         }
         function openCatalog() {
@@ -267,6 +273,7 @@
                         const f = e.target.closest('[data-tp-filter]'); if (f) { dlgState.filter = f.dataset.tpFilter; return refreshDialog(); }
                         const mo = e.target.closest('[data-tp-more]'); if (mo) { addMore(mo.dataset.tpMore); return; }
                         if (e.target.closest('[data-tp-own-group]')) { const snap = snapshot(); ls.put('genealogie-menu-order', JSON.stringify(ownGrouped(menuKeys()))); A()?.applyMenuOrder?.(); paintPlus(); orderChanged = true; refreshDialog(); A()?.undoToast?.(i18n('Tes onglets sont regroupés à la fin du menu'), {undo: () => { restore(snap); refreshDialog(); }}); return; }
+                        const np = e.target.closest('[data-tp-newpage]'); if (np) { dlg.close(); return ext.tabsEditorStart ? ext.tabsEditorStart(np.dataset.tpNewpage) : null; } // 🌐 📒 heritage-tabs.js (audit §18)
                         if (e.target.closest('[data-tp-editor]')) { dlg.close(); return A()?.openCustomScreen ? A().openCustomScreen('maint:tabs_editor') : (A().state.maintenanceTab = 'tabs_editor', A().setModule('maintenance')); }
                         if (e.target.closest('[data-tp-usage]')) { dlg.close(); A().state.maintenanceTab = 'nav_menus'; A().setModule('maintenance'); setTimeout(() => doc.getElementById('lc-usage')?.scrollIntoView({block: 'start'}), 900); }
                     });

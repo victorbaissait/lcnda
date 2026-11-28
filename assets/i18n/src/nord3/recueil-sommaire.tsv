@@ -1,0 +1,88 @@
+fr ¦ ro
+# 📑 Sommaire d’un recueil, messages du serveur (heritage-recueil-sommaire.js, lib/recueil_toc.php, lib/recueil_etat.php, lib/recueils.php)
+haut de ¦ sus pe
+milieu de ¦ la mijlocul
+bas de ¦ jos pe
+p. ¦ p.
+pages pas dites ¦ pagini nespecificate
+{d} sur {n} pages finies ou relues ¦ {d} din {n} pagini terminate sau recitite
+Chargement du sommaire… ¦ Se încarcă cuprinsul…
+Le sommaire ne s’ouvre pas ¦ Cuprinsul nu se deschide
+« {a} » et « {b} » se chevauchent ({p} {x}–{y}). ¦ „{a}” și „{b}” se suprapun ({p} {x}–{y}).
+{p} {n} : un acte « {k} » dans « {t} ». ¦ {p} {n}: un act „{k}” în „{t}”.
+{p} {n} : un acte de {y} dans « {t} ». ¦ {p} {n}: un act din {y} în „{t}”.
+Tout ouvrir ¦ Deschide tot
+Tout fermer ¦ Închide tot
+Niveaux montrés ¦ Niveluri afișate
+Niveau 1 ¦ Nivelul 1
++ passages ¦ + pasaje
+Chercher dans le sommaire… ¦ Caută în cuprins…
+Chercher dans le sommaire ¦ Caută în cuprins
+Chapitre… ¦ Capitol…
+Passage… ¦ Pasaj…
+Proposer le découpage ¦ Propune împărțirea
+Ranger par… ¦ Ordonează după…
+Mode lecture ¦ Mod citire
+Pas encore de sommaire ¦ Încă nu există cuprins
+« ＋ Chapitre… » : un titre, de telle page à telle page (ex. « Mariages 1870 », pages 15 à 19). Ou « ✨ Proposer le découpage » d’après les actes déjà transcrits. ¦ „＋ Capitol…”: un titlu, de la o pagină la alta (ex. „Căsătorii 1870”, paginile 15–19). Sau „✨ Propune împărțirea” pe baza actelor deja transcrise.
+Un clic sur un titre : sa première page. Un passage décrit (« du milieu de la page 5 au milieu de la page 7 : mariage… ») ne crée pas de fiche. ¦ Un clic pe un titlu deschide prima lui pagină. Un pasaj descris („de la mijlocul paginii 5 la mijlocul paginii 7: căsătoria…”) nu creează nicio fișă.
+Modifier… ¦ Modifică…
+Sous-chapitre… ¦ Subcapitol…
+Passage dans ce chapitre… ¦ Pasaj în acest capitol…
+Proposer le découpage de ce chapitre ¦ Propune împărțirea acestui capitol
+Supprimer (avec ce qu’il contient) ¦ Șterge (cu tot ce conține)
+« {t} » retiré du sommaire ¦ „{t}” scos din cuprins
+toute la page ¦ toată pagina
+Nouveau passage ¦ Pasaj nou
+Modifier le passage ¦ Modifică pasajul
+Modifier le chapitre ¦ Modifică capitolul
+📑 SOMMAIRE ¦ 📑 CUPRINS
+Ce que c’est (sans créer de fiche) ¦ Ce este (fără a crea o fișă)
+ex. Mariage de Louis LACOMBE et Anne MAZAUD ¦ ex. Căsătoria lui Louis LACOMBE cu Anne MAZAUD
+ex. Mariages 1870 ¦ ex. Căsătorii 1870
+— au premier niveau — ¦ — la primul nivel —
+— pas dit — ¦ — nespecificat —
+Endroit ¦ Poziție
+À la page ¦ Până la pagina
+— la même — ¦ — aceeași —
+Sorte d’acte (facultatif) ¦ Tip de act (opțional)
+— toutes — ¦ — toate —
+Années (facultatif) ¦ Ani (opțional)
+Description, résumé, ce qu’on y apprend ¦ Descriere, rezumat, ce afli din el
+Note (facultatif) ¦ Notă (opțional)
+Un passage décrit sert à retrouver ce qu’il y a dans le recueil ; « 👤 » sur les fiches reste possible depuis l’Atelier. ¦ Un pasaj descris te ajută să regăsești ce conține culegerea; „👤” pe fișe rămâne posibil din Atelier.
+Un chapitre peut contenir des sous-chapitres et des passages. La sorte et les années servent à repérer ce qui n’est pas à sa place. ¦ Un capitol poate conține subcapitole și pasaje. Tipul și anii ajută la depistarea a ceea ce nu e la locul lui.
+« {t} » ajouté au sommaire ¦ „{t}” adăugat în cuprins
+« {t} » modifié ¦ „{t}” modificat
+Rien à proposer : aucun acte repéré sur ces pages. ¦ Nimic de propus: niciun act găsit pe aceste pagini.
+Découper « {t} » ¦ Împarte „{t}”
+✨ Proposer le découpage ¦ ✨ Propune împărțirea
+Ajouter au sommaire ¦ Adaugă în cuprins
+D’après les actes déjà transcrits dans l’Atelier (leur sorte et leur année), page par page. Décoche ce qui ne va pas, corrige les titres : rien n’est ajouté avant que tu acceptes. ¦ Pe baza actelor deja transcrise în Atelier (tipul și anul lor), pagină cu pagină. Debifează ce nu e bine, corectează titlurile: nimic nu se adaugă până nu accepți.
+Déjà dans cet ordre. ¦ Deja în această ordine.
+Pièces rangées ({x}) ¦ Piese ordonate ({x})
+par sorte ¦ după tip
+par cote ¦ după cotă
+Par date (de l’acte, sinon du document) ¦ După dată (a actului, altfel a documentului)
+Par sorte d’acte ¦ După tipul actului
+Ranger les pièces ¦ Ordonează piesele
+Tout le sommaire ¦ Tot cuprinsul
+Pas encore de sommaire. ¦ Încă nu există cuprins.
+Faire le sommaire ¦ Creează cuprinsul
+=chapitre ajouté au sommaire ¦ capitol adăugat în cuprins|capitole adăugate în cuprins|de capitole adăugate în cuprins
+Document militaire ¦ Document militar
+Choisis au moins une page. ¦ Alege cel puțin o pagină.
+Trop de pages d’un coup. ¦ Prea multe pagini deodată.
+Une de ces pages n’est pas dans ce recueil. ¦ Una dintre aceste pagini nu este în această culegere.
+Donne le nom des pages à poser (400 au plus). ¦ Dă numele paginilor de adăugat (cel mult 400).
+Une de ces pages a déjà une photo : retire-la à la main. ¦ Una dintre aceste pagini are deja o fotografie: scoate-o manual.
+Ligne du sommaire introuvable. ¦ Rândul din cuprins nu a fost găsit.
+La première page n’est pas dans ce recueil. ¦ Prima pagină nu este în această culegere.
+La dernière page n’est pas dans ce recueil. ¦ Ultima pagină nu este în această culegere.
+Dis sur quelle page commence ce passage. ¦ Spune pe ce pagină începe acest pasaj.
+Le chapitre parent n’est pas dans ce recueil. ¦ Capitolul părinte nu este în această culegere.
+Un passage décrit ne peut pas contenir de chapitre : choisis un chapitre. ¦ Un pasaj descris nu poate conține un capitol: alege un capitol.
+Un chapitre ne peut pas être dans lui-même. ¦ Un capitol nu poate fi în el însuși.
+Le sommaire suit l’ordre des pages : change plutôt les pages de ce chapitre. ¦ Cuprinsul urmează ordinea paginilor: schimbă mai bine paginile acestui capitol.
+Trop de documents d’un coup (2000 au plus). ¦ Prea multe documente deodată (cel mult 2000).
+Un recueil se fait avec des images (photos de pages) : aucun de ces documents n’en est une. ¦ O culegere se face din imagini (fotografii de pagini): niciunul dintre aceste documente nu este o imagine.

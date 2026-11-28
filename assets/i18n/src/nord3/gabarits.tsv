@@ -1,0 +1,51 @@
+fr ¦ ro
+# 🧩 Atelier de transcription, vague 3 (3b) : les gabarits d’actes (heritage-transcribe-gabarit.js)
+Choisis la sorte d’acte (en haut) : chaque sorte a ses cases. ¦ Alege felul actului (sus): fiecare fel are căsuțele lui.
+On dirait : {x}. Utiliser ce gabarit ? ¦ Pare: {x}. Folosești acest șablon?
+Cases remplies : {a}/{b} · vérifiées : {c} ¦ Căsuțe completate: {a}/{b} · verificate: {c}
+Gabarit ¦ Șablon
+Vert : rempli par « 🧭 Repérer », à vérifier · Entrée : ✓ vérifié · un clic sur « l. 3 » montre le passage. ¦ Verde: completat de „🧭 Găsește”, de verificat · Enter: ✓ verificat · un clic pe „r. 3” arată pasajul.
+Date du baptême ¦ Data botezului
+Père, métier ¦ Tată, meserie
+Officier de l’état civil ¦ Ofițer de stare civilă
+Parents de l’époux ¦ Părinții mirelui
+Parents de l’épouse ¦ Părinții miresei
+Contrat de mariage ¦ Contract de căsătorie
+Publications ¦ Publicații
+Décédé le ¦ Decedat la
+Déclarants ¦ Declaranți
+Date d’inhumation ¦ Data înmormântării
+Parties ¦ Părți
+Juge ou notaire ¦ Judecător sau notar
+Personne concernée ¦ Persoana în cauză
+Ce qui est attesté ¦ Ce se atestă
+Rue ou maison ¦ Stradă sau casă
+Ménage ¦ Gospodărie
+Matricule ¦ Număr matricol
+Classe ¦ Contingent
+Régiment ¦ Regiment
+Campagnes ¦ Campanii
+Blessures ¦ Răni
+page {n}, l. {line} ¦ pagina {n}, r. {line}
+l. {n} ¦ r. {n}
+🧩 Gabarit à cases (conseillé) ¦ 🧩 Șablon cu căsuțe (recomandat)
+Texte à trous (comme avant) ¦ Text cu goluri (ca înainte)
+Remplir à nouveau ¦ Completează din nou
+Coller le texte à trous ¦ Lipește textul cu goluri
+Repris du gabarit (cases vérifiées ou écrites par toi) : ¦ Preluat din șablon (căsuțe verificate sau scrise de tine):
+Retirer cette case ¦ Scoate această căsuță
+Ajouter une case ¦ Adaugă o căsuță
+Nom de la case (ex. Profession du parrain) ¦ Numele căsuței (ex. Meseria nașului)
+Nom de la case ¦ Numele căsuței
+Case retirée ¦ Căsuță scoasă
+Mes gabarits… ¦ Șabloanele mele…
+Mes gabarits ¦ Șabloanele mele
+Tableur de tous les actes « {x} » ¦ Foaie de calcul cu toate actele „{x}”
+Les cases cochées se montrent dans le gabarit de chaque acte de cette sorte. Gardé sur cet ordinateur. ¦ Căsuțele bifate apar în șablonul fiecărui act de acest fel. Păstrat pe acest calculator.
+Aucun acte de cette sorte pour l’instant. ¦ Încă niciun act de acest fel.
+gabarits ¦ șabloane
+Tableur : {x} ¦ Foaie de calcul: {x}
+Pas encore relié : le relier dans l’Atelier ¦ Încă nelegat: leagă-l în atelier
+Numéros de ligne ¦ Numere de rând
+Transcription faite avec LCNDA (Le Carnet numérique des ancêtres). ¦ Transcriere făcută cu LCNDA (Le Carnet numérique des ancêtres).
+XML des chercheurs et des archives (lignes, zones, personnes) ¦ XML al cercetătorilor și arhivelor (rânduri, zone, persoane)

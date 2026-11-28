@@ -1,0 +1,35 @@
+fr ¦ is
+# 🔬 Lecture approfondie : les modèles d’IA (avantages, inconvénients, « à l’essai », avancé) — lib/transcription_actes.php, heritage-transcribe-acte.js
+ia|Modèle ¦ Líkan
+conseillé pour cet ordinateur ({n} Go) ¦ mælt með fyrir þessa tölvu ({n} GB)
+à l’essai ¦ til prófunar
+≈ {x} Go à télécharger ¦ ≈ {x} GB að sækja
+{n} Go de mémoire conseillés ¦ {n} GB minni mælt með
+trop gros pour cet ordinateur ¦ of stórt fyrir þessa tölvu
+Autres modèles à essayer ({n}) ¦ Önnur líkön til að prófa ({n})
+Pas encore essayés par l’app sur des actes : compare-les sur tes actes (« Les deux lectures côte à côte ») avant de t’y fier. ¦ Appið hefur ekki prófað þau á skjölum enn: berðu þau saman á þínum skjölum („Lestrarnir tveir hlið við hlið“) áður en þú treystir þeim.
+Avancé : autre modèle (Ollama) ¦ Ítarlegt: annað líkan (Ollama)
+Les modèles déjà installés dans Ollama sur cet ordinateur. Un modèle qui ne sait pas lire une image ne peut pas lire l’acte. Pas essayé par l’app : vérifie toujours le texte. ¦ Líkönin sem eru þegar uppsett í Ollama á þessari tölvu. Líkan sem getur ekki lesið mynd getur ekki lesið skjalið. Ekki prófað af appinu: athugaðu alltaf textann.
+lit les images ¦ les myndir
+ne lit pas les images ¦ les ekki myndir
+Aucun autre modèle installé. Dans un terminal : « ollama pull » suivi du nom du modèle. ¦ Ekkert annað líkan uppsett. Í skipanalínu: „ollama pull“ og síðan heiti líkansins.
+cet ordinateur : {n} Go · chaque modèle se télécharge une seule fois ¦ þessi tölva: {n} GB · hvert líkan er sótt aðeins einu sinni
+Ce modèle ne sait pas lire une image : choisis un modèle « vision ». ¦ Þetta líkan getur ekki lesið mynd: veldu „vision“-líkan.
+le meilleur essayé sur les actes anciens, bon en français et en latin ¦ það besta sem prófað hefur verið á gömlum skjölum, gott á frönsku og latínu
+16 Go de mémoire conseillés ¦ 16 GB minni mælt með
+léger et rapide, pour un ordinateur modeste ¦ létt og hratt, fyrir hógværa tölvu
+se trompe plus souvent sur les noms et les écritures difficiles ¦ gerir oftar villur í nöfnum og erfiðri rithönd
+pour les ordinateurs puissants (64 Go) : la même famille que le conseillé, plus précise sur les écritures difficiles ¦ fyrir öflugar tölvur (64 GB): sama fjölskylda og það sem mælt er með, nákvæmara á erfiða rithönd
+lent, gros téléchargement ¦ hægt, stórt niðurhal
+le plus gros qui tienne dans 64 Go ¦ það stærsta sem kemst í 64 GB
+très lent, très gros téléchargement, licence moins ouverte ¦ mjög hægt, mjög stórt niðurhal, minna opið leyfi
+fort en français, bon pour comprendre l’acte ¦ sterkt á frönsku, gott í að skilja skjalið
+32 Go de mémoire conseillés, plus lent ¦ 32 GB minni mælt með, hægara
+bon dans les langues européennes ¦ gott í evrópskum málum
+licence de Google moins ouverte, moins précis sur l’écriture à la main ¦ minna opið leyfi frá Google, ónákvæmara á rithönd
+léger, plusieurs langues ¦ létt, nokkur mál
+licence de Google, se trompe souvent sur les noms ¦ leyfi frá Google, gerir oft villur í nöfnum
+annoncé bon en écriture manuscrite ¦ sagt gott í rithönd
+moins connu, résultats à comparer ¦ minna þekkt, bera þarf saman niðurstöður
+très léger, fait pour les documents, ordinateurs modestes ¦ mjög létt, gert fyrir skjöl, hógværar tölvur
+faible sur l’écriture à la main ancienne ¦ veikt á gamla rithönd

@@ -53,6 +53,16 @@ h = hits(/(updated_at|created_at) \|\| ''\)\.slice\(0, 1[06]\)/g); ok(!h.length,
 // (« Aucun : … » / « Aucun critère : … » expliquent un réglage ; un élément data-… est un compteur réécrit par le code : pas des listes vides)
 h = hits(/<(p|div|li|small|span)(?![^>]*data-)[^>]*class="(muted|cell-muted|label-list-empty)[^"]*"[^>]*>(?!Aucune? :|Aucun critère)(Aucun|Aucune|Pas encore|Rien (trouvé|ne correspond|pour l’instant|ici|à venir|de prévu|d’écrit))/g, ['museum-viewer.js']);
 ok(!h.length, `K10 ${h.length} phrase(s) « Aucun… » hors composant : ` + h.slice(0, 8).join(' | '));
+// la même phrase passée par la traduction (« <p class="muted">${esc(T('Aucun…'))}</p> ») : la petite ligne aussi (window.LCNDA_APP.empty)
+h = hits(/<p class="muted">\$\{(?:esc|escapeHtml)\((?:T|i18n)\('(?!Aucune? :|Aucun critère|Pas encore là :)(Aucun|Aucune|Pas encore|Rien (trouvé|ne correspond|pour l’instant|ici|à venir|de prévu|d’écrit))/g, ['museum-viewer.js']);
+ok(!h.length, `K10 ${h.length} phrase(s) traduite(s) « Aucun… » hors composant : ` + h.slice(0, 8).join(' | '));
+ok(files.reduce((n, f) => n + (all[f].match(/\$\{window\.LCNDA_APP\.empty\((T|i18n)\('/g) || []).length, 0) >= 40, 'K10 les phrases traduites passent par la petite ligne');
+// harmonisation.md (Apparence 5) : les derniers « rien ici » faits à la main (puces, petites phrases, boîte des Diagrammes, racine Sosa / d'Aboville)
+h = hits(/<(li|small)( class="(muted|label-field-empty)")?>(\$\{(esc|escapeHtml)?\(?(T|i18n)\(')?(?!Aucune? :|Aucun critère)(Aucun|Aucune|Rien trouvé)|class="dgo-empty"|:'Aucune personne racine définie/g, ['museum-viewer.js', 'app-picker.js', 'ia-serveur.js']); // (un champ choisi vide, une phrase dans un message : pas des listes)
+ok(!h.length, `K10 ${h.length} « rien ici » en puce ou petite phrase hors composant : ` + h.slice(0, 8).join(' | '));
+ok((all['app.js'].match(/empty\('Aucune personne racine définie pour le moment',\{icon:'👤',action:\{label:'⭐ Choisir la personne de départ'/g) || []).length === 2
+    && (all['app-listes.js'].match(/empty\('Aucune personne racine définie',\{icon:'👤',action:\{label:'⭐ Choisir la personne de départ'/g) || []).length === 2, 'K10 Sosa / d’Aboville : « ⭐ Choisir la personne de départ »');
+ok(/A\(\)\.emptyState\(\{icon: nF\(\) \? '🔍' : '📈'/.test(all['app-diagrammes-onglet.js']), 'K10 📈 Diagrammes : la grande boîte avec « ＋ Nouveau diagramme »');
 ok(!/class="map-empty-overlay">Aucun/.test(all['app-carte.js']), 'K10 Carte : plus de boîte à part');
 ok(!/<section class="empty-state">/.test(all['app-recherche.js']), 'K10 Recherche : plus de texte centré à part');
 ok(/function empty\(text, o = \{\}\) \{ return emptyState\(\{size: 'small'/.test(app), 'K10 empty() = la petite ligne');

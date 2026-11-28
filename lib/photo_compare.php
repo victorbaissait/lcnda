@@ -205,9 +205,10 @@ function photo_cmp_delete(PDO $pdo, array $d): array
     $id = safe_int($d['id'] ?? 0);
     $before = photo_cmp_row($pdo, $id);
     if (!$before) { throw new RuntimeException('Comparaison introuvable.'); }
+    $undo = function_exists('project_undo_keep') ? project_undo_keep($pdo, 'photo_comparisons', $id) : ''; // ↶ Annuler (restore_project)
     $pdo->prepare('DELETE FROM photo_comparisons WHERE id=?')->execute([$id]);
     log_change($pdo, 'photo_comparison', $id, 'delete', 'Comparaison de photos supprimée : ' . $before['title'], $before, null); // ligne entière : « ↶ Annuler »
-    return ['id' => $id];
+    return ['id' => $id, 'undo' => $undo];
 }
 
 function photo_cmp_dispatch(PDO $pdo, string $action, bool $isWrite, array $payload): never

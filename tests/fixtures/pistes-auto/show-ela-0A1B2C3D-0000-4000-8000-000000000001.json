@@ -1,0 +1,10 @@
+{"_note": "Réponse de https://api.openarch.nl/1.1/records/show.json (forme A2A relevée le 25/11/2026), noms fictifs.",
+ "Person": [
+  {"@pid": "Person900000101", "PersonName": {"PersonNameFirstName": "Jan", "PersonNameLastName": "Mazaud"}, "Gender": "Man"},
+  {"@pid": "Person900000102", "PersonName": {"PersonNameFirstName": "Pieter", "PersonNameLastName": "Mazaud"}, "Gender": "Man", "Profession": "timmerman"},
+  {"@pid": "Person900000103", "PersonName": {"PersonNameFirstName": "Maria", "PersonNameLastName": "Lacombe"}, "Gender": "Vrouw"}],
+ "Event": {"@eid": "Event1", "EventType": "Geboorte", "EventDate": {"Year": "1850", "Month": "09", "Day": "04"}, "EventPlace": {"Place": "Leiden"}},
+ "RelationEP": [{"PersonKeyRef": "Person900000101", "EventKeyRef": "Event1", "RelationType": "Kind"}, {"PersonKeyRef": "Person900000102", "EventKeyRef": "Event1", "RelationType": "Vader"}, {"PersonKeyRef": "Person900000103", "EventKeyRef": "Event1", "RelationType": "Moeder"}],
+ "Source": {"SourcePlace": {"Place": "Leiden", "Country": "Nederland"}, "SourceDate": {"Year": "1850", "Month": "09", "Day": "05"}, "SourceType": "BS Geboorte",
+  "SourceReference": {"Place": "Leiden", "InstitutionName": "Erfgoed Leiden en Omstreken", "Archive": "0516", "Collection": "Burgerlijke Stand Leiden", "Book": "Geboorten 1850", "DocumentNumber": "1234"},
+  "SourceAvailableScans": {"Scan": {"OrderSequenceNumber": "1", "UriViewer": "https://www.erfgoedleiden.nl/scan/fictif-1"}}}}

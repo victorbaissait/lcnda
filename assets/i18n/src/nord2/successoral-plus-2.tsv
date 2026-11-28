@@ -425,7 +425,7 @@ Les pistes sont montrées à partir de ce score (sur 100). Plus haut : moins de 
 Après chaque nouvel import du fichier INSEE : vérifier les dossiers en cours tout seul (jamais de changement sans ton clic). ¦ Po každom novom importe súboru INSEE: overiť rozpracované spisy samo (nikdy zmena bez tvojho kliknutia). ¦ Etter hver ny import av INSEE-filen: kontroller de pågående sakene selv (aldri en endring uten ditt klikk).
 Automatique, dans la cloche ¦ Automaticky, v zvončeku ¦ Automatisk, i klokken
 Seulement à la main ¦ Len ručne ¦ Bare manuelt
-📋 Questionnaire ¦ 📋 Dotazník ¦ 📋 Spørreskjema
+📝 Questionnaire ¦ 📝 Dotazník ¦ 📝 Spørreskjema
 Ce que l’héritier te renvoie après avoir rempli le questionnaire. ¦ Čo ti dedič pošle späť po vyplnení dotazníka. ¦ Det arvingen sender deg tilbake etter utfylling.
 Un petit fichier .json ¦ Malý súbor .json ¦ En liten .json-fil
 La page .html remplie ¦ Vyplnená stránka .html ¦ Den utfylte .html-siden

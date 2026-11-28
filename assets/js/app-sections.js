@@ -184,7 +184,7 @@
         const one = (key, index) => {
             try {
                 const block = renderers[key](index);
-                return block ? A().applyBlockWidth(String(block).replace('<section class="card', `<section data-pblock="${esc(key)}" class="card`), m.widths?.[key]) : '';
+                return block ? A().applyBlockWidth(String(block).replace(/<section( hidden)? class="card/, (x, h) => `<section data-pblock="${esc(key)}"${h || ''} class="card`), m.widths?.[key]) : ''; // (aussi un bloc caché tant qu'il est vide)
             } catch (error) {
                 console.error(`Erreur dans le bloc personne "${key}"`, error);
                 const label = defaults.find(row => row[0] === key)?.[1] || key;
@@ -236,6 +236,20 @@
         const sec = id === '__all' ? {id} : model(wrap.dataset.fsecKind, pid).sections.find(s => s.id === id);
         if (sec) A().setSheetRoute?.(pid, secSlug(sec));
     }
+    /** on descend à la section demandée, et on y reste pendant que la fiche finit de se dessiner (blocs qui arrivent, fiche redessinée) :
+     *  3 s au plus, et plus du tout dès qu'on fait défiler, clique ou tape soi-même */
+    let KEEP = null; // {id, pid, until, stop} : la fiche redessinée juste après (données arrivées) y retourne aussi
+    function keepInView(id, pid = 0, again = false) {
+        if (!again) { const k = KEEP = {id, pid, until: Date.now() + 10000, stop: false}; ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(e => window.addEventListener(e, () => { k.stop = true; }, {once: true, capture: true, passive: true})); }
+        const k = KEEP; let n = 0;
+        const tick = () => {
+            if (!k || k.stop || KEEP !== k || ++n > 12) return;
+            const cur = document.querySelector(`#workspace .person-page .fsec-wrap > .fsec[data-fsec="${CSS.escape(id)}"]`);
+            if (cur && !cur.classList.contains('is-folded')) { const r = cur.getBoundingClientRect(); if (r.top >= innerHeight || r.bottom <= 0 || (n === 1 && Math.abs(r.top) > 4)) { try { cur.scrollIntoView({block: 'start'}); } catch (_) {} } }
+            setTimeout(tick, 250);
+        };
+        setTimeout(tick, 80);
+    }
     /** l'adresse demande une section (lien copié, rechargement, ← →) : son onglet ; sinon on la déplie et on y descend */
     function applyRoute() {
         const st = A().state || {}, wrap = document.querySelector('#workspace .person-page .fsec-wrap'); if (!wrap) return false;
@@ -247,10 +261,11 @@
             if (tabs) { if (id && wrap.querySelector(`[data-fsec-tab="${CSS.escape(id)}"]`)) showTab(wrap, id); }
             else if (id && id !== '__all') {
                 const sec = wrap.querySelector(`:scope > .fsec[data-fsec="${CSS.escape(id)}"]`);
-                if (sec) { if (sec.classList.contains('is-folded')) fold(sec, false); setTimeout(() => { try { sec.scrollIntoView({block: 'start'}); } catch (_) {} }, 80); }
+                if (sec) { if (sec.classList.contains('is-folded')) fold(sec, false); window.LCNDA_SHEET_LAZY?.show?.(sec); keepInView(id, pid); } // la section demandée : ses blocs tout de suite
             }
             if (!id) A().setSheetRoute?.(pid, ''); // section inconnue : l'onglet par défaut, l'adresse sans section
         }
+        else if (!tabs && KEEP && !KEEP.stop && KEEP.pid === pid && Date.now() < KEEP.until) keepInView(KEEP.id, pid, true); // redessinée : on y retourne
         if (tabs) routeTo(wrap);
         return true;
     }
@@ -723,7 +738,37 @@
         return dlg;
     }
 
-    /* ═════════════════════════ La fiche : « ⋯ » de l'en-tête (⚙️ Ranger les sections…) ═════════════════════════ */
+    /* ═════════════════════════ La fiche : « ⋯ » de l'en-tête (⚙️ Ranger les sections…) ═════════════════════════
+     * ext.personMenuItems(detail) : toutes les actions du menu, chacune avec une clé stable (item.key donnée par le module,
+     * sinon tirée de son nom). Réglages → « Ordre et visibilité des boutons » (app-apparence.js) en fait des boutons carrés :
+     * une action montrée en bouton n'est plus répétée dans le menu (ext.personHeadHas). */
+    const keyOf = s => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'action';
+    function personMenuItems(detail) {
+        const p = detail?.person || {};
+        const base = [
+            Number(p.is_locked) ? null : {key: 'edit', icon: '✎', label: 'Modifier la fiche', run: () => document.querySelector('#workspace [data-edit-person-inline]')?.click()},
+            {key: 'print', icon: '🖨', label: 'Imprimer', run: () => { const b = document.querySelector('#workspace [data-print-person]'); if (b) b.click(); else UI().printPage?.(A().personName?.(p) || ''); }},
+            '-',
+            {key: 'arrange', icon: '⚙️', label: 'Ranger les sections…', run: () => openArrangeDialog()},
+            {key: 'head-buttons', icon: '⚙️', label: 'Boutons de l’en-tête…', run: () => openSheetsPage('lc-person-header')},
+            '-',
+            ext.readingAid ? {key: 'reading-aid', icon: '📜', label: 'Aide à la lecture des actes…', run: () => ext.readingAid.open()} : null, // heritage-lecture-autrefois.js
+            ext.autrefois ? {key: 'autrefois', icon: '🪙', label: 'Convertisseur d’autrefois…', run: () => ext.autrefois.open()} : null,
+            p.kind === 'animal' && detail?.heritage?.animal?.id && ext.suivi?.openShare ? {key: 'share-suivi', icon: '📤', label: 'Partager le suivi…', run: () => ext.suivi.openShare({scope: 'pets', ids: [Number(detail.heritage.animal.id)]})} : null,
+        ];
+        const used = new Set(base.filter(x => x && x.key).map(x => x.key));
+        const more = (ext.personMoreItems || []).map(fn => { try { return fn(detail); } catch (_) { return null; } }) // 🧬 Arbre des métiers, 🗺 Carte de la vie…
+            .filter(x => x && x.label && typeof x.run === 'function')
+            .map(x => { let k = String(x.key || keyOf(x.label)), n = 2; while (used.has(k)) k = `${x.key || keyOf(x.label)}-${n++}`; used.add(k); return {...x, key: k}; });
+        return [...base, ...(more.length ? ['-', ...more] : [])].filter(Boolean);
+    }
+    ext.personMenuItems = personMenuItems;
+    /** le menu ⋯ sans les actions déjà montrées en bouton (et sans trait de séparation en trop) */
+    function menuLeft(detail) {
+        const list = personMenuItems(detail).filter(x => x === '-' || !ext.personHeadHas?.(x.key));
+        return list.filter((x, i) => x !== '-' || (i > 0 && list[i - 1] !== '-' && i < list.length - 1));
+    }
+    ext.personMenuLeft = menuLeft;
     ext.afterPerson = ext.afterPerson || [];
     ext.afterPerson.push(() => applyRoute()); // 🔗 la section de l'adresse
     ext.afterPerson.push(detail => {
@@ -731,21 +776,10 @@
         bar.insertAdjacentHTML('beforeend', '<button type="button" class="icon-action fsec-hero-more" data-fsec-hero-more title="Plus d’actions sur la fiche" aria-label="Plus d’actions sur la fiche">⋯</button>');
         bar.querySelector('[data-fsec-hero-more]').addEventListener('click', e => {
             const p = detail?.person || {};
-            UI().menuAt?.(e.currentTarget, [
-                Number(p.is_locked) ? null : {icon: '✎', label: 'Modifier la fiche', run: () => document.querySelector('#workspace [data-edit-person-inline]')?.click()},
-                {icon: '🖨', label: 'Imprimer', run: () => { const b = document.querySelector('#workspace [data-print-person]'); if (b) b.click(); else UI().printPage?.(A().personName?.(p) || ''); }},
-                '-',
-                {icon: '⚙️', label: 'Ranger les sections…', run: () => openArrangeDialog()},
-                {icon: '⚙️', label: 'Boutons de l’en-tête…', run: () => openSheetsPage('lc-person-header')},
-                '-',
-                ext.readingAid ? {icon: '📜', label: 'Aide à la lecture des actes…', run: () => ext.readingAid.open()} : null, // heritage-lecture-autrefois.js
-                ext.autrefois ? {icon: '🪙', label: 'Convertisseur d’autrefois…', run: () => ext.autrefois.open()} : null,
-                p.kind === 'animal' && detail?.heritage?.animal?.id && ext.suivi?.openShare ? {icon: '📤', label: 'Partager le suivi…', run: () => ext.suivi.openShare({scope: 'pets', ids: [Number(detail.heritage.animal.id)]})} : null,
-                ...(() => { const more = (ext.personMoreItems || []).map(fn => { try { return fn(detail); } catch (_) { return null; } }).filter(Boolean); return more.length ? ['-', ...more] : []; })(), // 🧬 Arbre des métiers, 🗺 Carte de la vie…
-            ].filter(Boolean), {title: A().personName?.(p) || 'La fiche'});
+            UI().menuAt?.(e.currentTarget, menuLeft(detail), {title: A().personName?.(p) || 'La fiche'});
         });
     });
 
-    window.LCNDA_SECTIONS = {OPT_KEY, FOLD_KEY, TAB_KEY, OPT0, SEC0, STYLES, PLACES, opts, saveOpts, cleanOpts, cleanSections, derive, model, groups, save, renderSheet, revealBlock, showTab, editorHtml, mountEditor, presPanelHtml, sectionsPanelHtml, blocksPanelHtml, previewHtml, refreshLive, slugOf, secFromSlug, applyRoute, arrangeSheetsPage, openArrangeDialog, openSheetsPage, migratePetLayout, numText, hasException,
+    window.LCNDA_SECTIONS = {OPT_KEY, FOLD_KEY, TAB_KEY, OPT0, SEC0, STYLES, PLACES, opts, saveOpts, cleanOpts, cleanSections, derive, model, groups, save, renderSheet, revealBlock, showTab, editorHtml, mountEditor, presPanelHtml, sectionsPanelHtml, blocksPanelHtml, previewHtml, refreshLive, slugOf, secFromSlug, applyRoute, arrangeSheetsPage, openArrangeDialog, openSheetsPage, personMenuItems, migratePetLayout, numText, hasException,
         _resetPetLayout: () => { petLayoutDone = false; }, _liveReset: () => { LIVE.pick = {}; LIVE.cache.clear(); }};
 })();

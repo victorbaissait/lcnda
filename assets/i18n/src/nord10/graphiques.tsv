@@ -653,7 +653,7 @@ Pas installé ¦ I painstaluar ¦ Mhux installat
 L’historique officiel des communes de l’INSEE (depuis 1943) : chaque commune disparue avec sa date et sa commune d’aujourd’hui. Livré avec l’app (5,5 Mo, Licence Ouverte 2.0 de l’INSEE) : installé tout seul, sans Internet. Les anciens noms aident aussi le menu de choix des lieux (« anc. « … » »). ¦ Historiku zyrtar i komunave të INSEE (që nga 1943): çdo komunë e zhdukur me datën e saj dhe komunën e sotme. Vjen me aplikacionin (5,5 MB, Licence Ouverte 2.0 e INSEE): instalohet vetë, pa internet. Emrat e vjetër ndihmojnë edhe menynë e zgjedhjes së vendeve («anc. «…»»). ¦ L-istorja uffiċjali tal-komuni tal-INSEE (mill-1943): kull komun li sparixxa bid-data tiegħu u l-komun tal-lum. Tiġi mal-app (5.5 MB, Licence Ouverte 2.0 tal-INSEE): tiġi installata waħedha, mingħajr Internet. L-ismijiet il-qodma jgħinu wkoll il-menu tal-għażla tal-postijiet (“anc. “…””).
 ⤓ Télécharger de nouveau (mise à jour) ¦ ⤓ Shkarko përsëri (përditësim) ¦ ⤓ Erġa’ niżżel (aġġornament)
 🗑 Retirer ¦ 🗑 Hiq ¦ 🗑 Neħħi
-⤓ Installer les frontières anciennes ¦ ⤓ Instalo kufijtë e vjetër ¦ ⤓ Installa l-fruntieri antiki
+📦 Installer les frontières anciennes ¦ 📦 Instalo kufijtë e vjetër ¦ 📦 Installa l-fruntieri antiki
 (taille…) ¦ (madhësia…) ¦ (daqs…)
 dossier des données ¦ dosja e të dhënave ¦ folder tad-data
 Rangé dans le {name}, commun à toutes tes généalogies. ¦ Ruhet në {name}, e përbashkët për të gjitha gjenealogjitë e tua. ¦ Maħżun fil-{name}, komuni għall-ġenealoġiji kollha tiegħek.
@@ -1672,7 +1672,7 @@ Jusqu’à l’année ¦ Deri në vitin ¦ Sas-sena
 Départ ¦ Nisja ¦ Tluq
 Arrivée ¦ Mbërritja ¦ Wasla
 📍 Les lieux du tableau ¦ 📍 Vendet e tabelës ¦ 📍 Il-postijiet tat-tabella
-🔎 Retrouver les lieux sans position ¦ 🔎 Gjej vendet pa pozicion ¦ 🔎 Sib il-postijiet mingħajr pożizzjoni
+🔍 Retrouver les lieux sans position ¦ 🔍 Gjej vendet pa pozicion ¦ 🔍 Sib il-postijiet mingħajr pożizzjoni
 Choisis d’abord une sorte d’événement. ¦ Zgjidh fillimisht një lloj ngjarjeje. ¦ L-ewwel agħżel tip ta’ avveniment.
 Choisis une sorte d’événement. ¦ Zgjidh një lloj ngjarjeje. ¦ Agħżel tip ta’ avveniment.
 Aucun lieu retrouvé : choisis-les un par un. ¦ Asnjë vend nuk u gjet: zgjidhi një nga një. ¦ Ma nstab l-ebda post: agħżilhom wieħed wieħed.

@@ -68,9 +68,10 @@ function delete_vector_doc(PDO $pdo, array $data): array
     vector_ensure($pdo);
     $id = safe_int($data['id'] ?? 0);
     if ($id <= 0) { throw new RuntimeException('Dessin introuvable.'); }
+    $undo = project_undo_keep($pdo, 'vector_docs', $id); // ↶ Annuler (restore_project)
     $pdo->prepare('DELETE FROM vector_docs WHERE id=?')->execute([$id]);
     log_change($pdo, 'meta', 0, 'delete', 'Dessin supprimé');
-    return ['id' => $id];
+    return ['id' => $id, 'undo' => $undo];
 }
 
 /**

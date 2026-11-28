@@ -1,0 +1,51 @@
+fr ¦ cs ¦ sv ¦ da
+# 🧩 Atelier de transcription, vague 3 (3b) : les gabarits d’actes (heritage-transcribe-gabarit.js)
+Choisis la sorte d’acte (en haut) : chaque sorte a ses cases. ¦ Vyber druh záznamu (nahoře): každý druh má svá pole. ¦ Välj typ av handling (överst): varje typ har sina egna rutor. ¦ Vælg dokumenttypen (øverst): hver type har sine egne felter.
+On dirait : {x}. Utiliser ce gabarit ? ¦ Vypadá to na: {x}. Použít tuto šablonu? ¦ Det ser ut som: {x}. Använda den här mallen? ¦ Det ligner: {x}. Bruge denne skabelon?
+Cases remplies : {a}/{b} · vérifiées : {c} ¦ Vyplněná pole: {a}/{b} · ověřená: {c} ¦ Ifyllda rutor: {a}/{b} · kontrollerade: {c} ¦ Udfyldte felter: {a}/{b} · kontrolleret: {c}
+Gabarit ¦ Šablona ¦ Mall ¦ Skabelon
+Vert : rempli par « 🧭 Repérer », à vérifier · Entrée : ✓ vérifié · un clic sur « l. 3 » montre le passage. ¦ Zelené: vyplněno funkcí „🧭 Najít“, k ověření · Enter: ✓ ověřeno · kliknutí na „ř. 3“ ukáže místo v textu. ¦ Grönt: ifyllt av ”🧭 Hitta”, ska kontrolleras · Enter: ✓ kontrollerat · ett klick på ”r. 3” visar stället. ¦ Grønt: udfyldt af »🧭 Find«, skal kontrolleres · Enter: ✓ kontrolleret · et klik på »l. 3« viser stedet.
+Date du baptême ¦ Datum křtu ¦ Dopdatum ¦ Dåbsdato
+Père, métier ¦ Otec, povolání ¦ Far, yrke ¦ Far, erhverv
+Officier de l’état civil ¦ Matrikář ¦ Registerförare ¦ Personregisterfører
+Parents de l’époux ¦ Rodiče ženicha ¦ Brudgummens föräldrar ¦ Brudgommens forældre
+Parents de l’épouse ¦ Rodiče nevěsty ¦ Brudens föräldrar ¦ Brudens forældre
+Contrat de mariage ¦ Manželská smlouva ¦ Äktenskapsförord ¦ Ægtepagt
+Publications ¦ Ohlášky ¦ Lysning ¦ Lysning
+Décédé le ¦ Zemřel dne ¦ Död den ¦ Død den
+Déclarants ¦ Oznamovatelé ¦ Anmälare ¦ Anmeldere
+Date d’inhumation ¦ Datum pohřbu ¦ Begravningsdatum ¦ Begravelsesdato
+Parties ¦ Strany ¦ Parter ¦ Parter
+Juge ou notaire ¦ Soudce nebo notář ¦ Domare eller notarie ¦ Dommer eller notar
+Personne concernée ¦ Dotčená osoba ¦ Berörd person ¦ Berørt person
+Ce qui est attesté ¦ Co se dosvědčuje ¦ Det som intygas ¦ Det, der bevidnes
+Rue ou maison ¦ Ulice nebo dům ¦ Gata eller hus ¦ Gade eller hus
+Ménage ¦ Domácnost ¦ Hushåll ¦ Husstand
+Matricule ¦ Matriční číslo ¦ Stamrullenummer ¦ Stamrullenummer
+Classe ¦ Ročník ¦ Årsklass ¦ Årgang
+Régiment ¦ Pluk ¦ Regemente ¦ Regiment
+Campagnes ¦ Tažení ¦ Fälttåg ¦ Felttog
+Blessures ¦ Zranění ¦ Sår ¦ Sår
+page {n}, l. {line} ¦ strana {n}, ř. {line} ¦ sida {n}, r. {line} ¦ side {n}, l. {line}
+l. {n} ¦ ř. {n} ¦ r. {n} ¦ l. {n}
+🧩 Gabarit à cases (conseillé) ¦ 🧩 Šablona s poli (doporučeno) ¦ 🧩 Mall med rutor (rekommenderas) ¦ 🧩 Skabelon med felter (anbefalet)
+Texte à trous (comme avant) ¦ Text s mezerami (jako dřív) ¦ Lucktext (som förut) ¦ Tekst med huller (som før)
+Remplir à nouveau ¦ Vyplnit znovu ¦ Fyll i igen ¦ Udfyld igen
+Coller le texte à trous ¦ Vložit text s mezerami ¦ Klistra in lucktexten ¦ Indsæt teksten med huller
+Repris du gabarit (cases vérifiées ou écrites par toi) : ¦ Převzato ze šablony (pole ověřená nebo napsaná tebou): ¦ Hämtat från mallen (rutor som du kontrollerat eller skrivit): ¦ Hentet fra skabelonen (felter, du har kontrolleret eller skrevet):
+Retirer cette case ¦ Odebrat toto pole ¦ Ta bort den här rutan ¦ Fjern dette felt
+Ajouter une case ¦ Přidat pole ¦ Lägg till en ruta ¦ Tilføj et felt
+Nom de la case (ex. Profession du parrain) ¦ Název pole (např. Povolání kmotra) ¦ Rutans namn (t.ex. Gudfaderns yrke) ¦ Feltets navn (f.eks. Gudfarens erhverv)
+Nom de la case ¦ Název pole ¦ Rutans namn ¦ Feltets navn
+Case retirée ¦ Pole odebráno ¦ Rutan borttagen ¦ Felt fjernet
+Mes gabarits… ¦ Moje šablony… ¦ Mina mallar … ¦ Mine skabeloner …
+Mes gabarits ¦ Moje šablony ¦ Mina mallar ¦ Mine skabeloner
+Tableur de tous les actes « {x} » ¦ Tabulka všech záznamů „{x}“ ¦ Kalkylblad med alla handlingar ”{x}” ¦ Regneark med alle dokumenter »{x}«
+Les cases cochées se montrent dans le gabarit de chaque acte de cette sorte. Gardé sur cet ordinateur. ¦ Zaškrtnutá pole se zobrazí v šabloně každého záznamu tohoto druhu. Uloženo v tomto počítači. ¦ Ikryssade rutor visas i mallen för varje handling av den här typen. Sparas på den här datorn. ¦ Afkrydsede felter vises i skabelonen for hvert dokument af denne type. Gemt på denne computer.
+Aucun acte de cette sorte pour l’instant. ¦ Zatím žádný záznam tohoto druhu. ¦ Ännu ingen handling av den här typen. ¦ Endnu intet dokument af denne type.
+gabarits ¦ šablony ¦ mallar ¦ skabeloner
+Tableur : {x} ¦ Tabulka: {x} ¦ Kalkylblad: {x} ¦ Regneark: {x}
+Pas encore relié : le relier dans l’Atelier ¦ Zatím nepropojeno: propojit v dílně ¦ Inte kopplad än: koppla i verkstaden ¦ Endnu ikke knyttet: knyt i værkstedet
+Numéros de ligne ¦ Čísla řádků ¦ Radnummer ¦ Linjenumre
+Transcription faite avec LCNDA (Le Carnet numérique des ancêtres). ¦ Přepis vytvořený v LCNDA (Le Carnet numérique des ancêtres). ¦ Transkription gjord med LCNDA (Le Carnet numérique des ancêtres). ¦ Transskription lavet med LCNDA (Le Carnet numérique des ancêtres).
+XML des chercheurs et des archives (lignes, zones, personnes) ¦ XML badatelů a archivů (řádky, zóny, osoby) ¦ XML för forskare och arkiv (rader, zoner, personer) ¦ XML til forskere og arkiver (linjer, zoner, personer)

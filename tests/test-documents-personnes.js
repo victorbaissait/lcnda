@@ -105,7 +105,7 @@ echo json_encode(['ids' => $ids, 'P' => $P]);`], {cwd: root, encoding: 'utf8', e
             await page.click('#sidebar-content [data-ong-under]');
             await page.waitForSelector('.ui-actmenu .ui-actmenu-i');
             const items = await page.$$eval('.ui-actmenu .ui-actmenu-i', b => b.map(x => x.textContent.replace(/\s+/g, ' ').trim()));
-            assert.equal(items.length, 3); assert.match(items[0], /^✓.*conseillé/, items[0]);
+            assert.equal(items.length, 5, 'les 3 choix « Sous le titre », puis les 2 façons de ranger (A, B)'); assert.match(items[0], /^✓.*conseillé/, items[0]); assert.match(items[3], /^●.*6 cases/, items[3]); assert.match(items[4], /4 cases/, items[4]);
             await page.locator('.ui-actmenu .ui-actmenu-i', {hasText: 'La date et le lieu'}).click();
             let lettre = await rowText(page, 'Lettre de Jean à Marie');
             assert.doesNotMatch(lettre, /MAZAUD/, lettre); assert.match(lettre, /12 mars 1916/);
@@ -203,7 +203,7 @@ echo json_encode(['ids' => $ids, 'P' => $P]);`], {cwd: root, encoding: 'utf8', e
             await o.page.waitForSelector('#sidebar-content .ong-ph');
             await o.page.waitForTimeout(800);
             const txt = await o.page.$eval('#sidebar-content', c => c.textContent);
-            assert.match(txt, /No person/); assert.match(txt, /By person/);
+            assert.match(txt, /No person/); assert.match(txt, /👤 People/, 'la case « 👤 Personnes » (6 façons de ranger)');
             await o.page.click('#sidebar-content [data-ong-under]');
             await o.page.waitForSelector('.ui-actmenu .ui-actmenu-i');
             const items = await o.page.$$eval('.ui-actmenu .ui-actmenu-i', b => b.map(x => x.textContent));

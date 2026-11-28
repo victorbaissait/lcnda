@@ -12,6 +12,7 @@
     const A = () => window.LCNDA_APP;
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const esc = value => A().escapeHtml(value ?? '');
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     let seq = 0;
     const uid = p => p + Date.now().toString(36) + (seq++).toString(36);
 
@@ -83,16 +84,30 @@
             q('[data-rt-addcol]').addEventListener('click', () => { const g = range(), at = g ? g.c1 + 1 : t.cols.length; mergesInsert('c', at); t.cols.splice(at, 0, {id: uid('c'), name: ''}); sel = null; changed(); paint(); box.querySelector(`[data-rt-colname="${at}"]`)?.focus(); });
             q('[data-rt-merge]').addEventListener('click', merge);
             q('[data-rt-unmerge]').addEventListener('click', () => { const g = range(); const drop = new Set(spans().filter(x => x.r >= g.r0 && x.r <= g.r1 && x.c >= g.c0 && x.c <= g.c1).map(x => x.m)); t.merges = t.merges.filter(m => !drop.has(m)); changed(); paint(); });
-            q('[data-rt-delrow]').addEventListener('click', async () => {
+            q('[data-rt-delrow]').addEventListener('click', async () => { // H7 : supprimées tout de suite, « ↶ Annuler » les remet (avec leur rattachement à la fiche)
                 const g = range(); const gone = t.rows.slice(g.r0, g.r1 + 1);
-                if (gone.some(r => Object.values(r.c).some(v => String(v).trim()) || r.person) && !await A().confirmBox(`Supprimer ${gone.length > 1 ? `ces ${gone.length} lignes` : 'cette ligne'} ?${gone.some(r => r.person) ? '\n\nLe rattachement à la fiche sera retiré.' : ''}`, {title: 'Supprimer des lignes', okLabel: 'Supprimer'})) return;
-                for (const r of gone) if (r.person) await onPerson?.(r, null);
+                const merges0 = JSON.parse(JSON.stringify(t.merges || [])), people0 = gone.map(r => (r.person ? {...r.person} : null));
+                for (const r of gone) if (r.person) await onPerson?.(r, 'drop');
                 mergesRemove('r', g.r0, gone.length); t.rows.splice(g.r0, gone.length); sel = null; changed(); paint();
+                const n = t.rows.length;
+                A().undoToast?.(gone.length > 1 ? i18n('{n} lignes supprimées', {n: gone.length}) : i18n('Ligne supprimée'), {undo: async () => {
+                    if (gone.some(r => t.rows.includes(r))) return {already: true};
+                    t.rows.splice(Math.min(g.r0, t.rows.length), 0, ...gone); if (t.rows.length === n + gone.length) t.merges = merges0;
+                    for (const [k, r] of gone.entries()) if (people0[k]) await onPerson?.(r, 'restore', people0[k]);
+                    sel = null; changed(); paint();
+                }});
             });
-            q('[data-rt-delcol]').addEventListener('click', async () => {
+            q('[data-rt-delcol]').addEventListener('click', () => { // H7 : idem pour les colonnes et leur contenu
                 const g = range(); const gone = t.cols.slice(g.c0, g.c1 + 1);
-                if (gone.some(c => t.rows.some(r => String(r.c[c.id] || '').trim())) && !await A().confirmBox(`Supprimer ${gone.length > 1 ? `ces ${gone.length} colonnes` : `la colonne « ${gone[0].name || g.c0 + 1} »`} et leur contenu ?`, {title: 'Supprimer des colonnes', okLabel: 'Supprimer'})) return;
+                const merges0 = JSON.parse(JSON.stringify(t.merges || [])), cells0 = t.rows.map(r => [r, Object.fromEntries(gone.map(c => [c.id, r.c[c.id]]).filter(([, v]) => v != null))]);
                 gone.forEach(c => t.rows.forEach(r => delete r.c[c.id])); mergesRemove('c', g.c0, gone.length); t.cols.splice(g.c0, gone.length); sel = null; changed(); paint();
+                const n = t.cols.length;
+                A().undoToast?.(gone.length > 1 ? i18n('{n} colonnes supprimées', {n: gone.length}) : i18n('Colonne « {name} » supprimée', {name: gone[0].name || String(g.c0 + 1)}), {undo: () => {
+                    if (gone.some(c => t.cols.includes(c))) return {already: true};
+                    t.cols.splice(Math.min(g.c0, t.cols.length), 0, ...gone); if (t.cols.length === n + gone.length) t.merges = merges0;
+                    for (const [r, vals] of cells0) Object.assign(r.c, vals);
+                    sel = null; changed(); paint();
+                }});
             });
             q('[data-rt-csv]').addEventListener('click', csv);
             q('[data-rt-sheet]')?.addEventListener('click', () => ext.openSheetEditor({target: 'recueil', data: JSON.parse(JSON.stringify(t)), name: 'Tableau de la page', onSave: async v => {

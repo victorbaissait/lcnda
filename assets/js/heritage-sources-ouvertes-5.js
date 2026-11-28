@@ -281,7 +281,7 @@
     const importBtn = (pid, kind = '') => `<button type="button" class="button small secondary" data-so5-import="${esc(kind)}" data-pid="${Number(pid) || 0}" title="Range le document trouvé, crée la source et propose ce qu’il dit">⤒ Importer…</button>`;
     const geneawikiLinks = (commune, county, insee = '') => {
         const u1 = commune ? S5().url('geneawiki', {place: commune, insee}, custom()) : ''; const u2 = county ? S5().url('geneawiki', {county}, custom()) : '';
-        return u1 || u2 ? `<p class="so-row so5-row so5-geneawiki">${u1 ? `<a class="button small secondary" href="${esc(u1)}" target="_blank" rel="noopener noreferrer" title="La page de la commune sur Geneawiki : registres, archives, histoire">📖 Geneawiki : ${esc(commune)}</a>` : ''}${u2 ? `<a class="button small secondary" href="${esc(u2)}" target="_blank" rel="noopener noreferrer">📖 Geneawiki : ${esc(county)}</a>` : ''}</p>` : '';
+        return u1 || u2 ? `<p class="so-row so5-row so5-geneawiki">${u1 ? `${window.LCNDA_UI.extLink(u1, `Geneawiki : ${commune}`, {cls: 'button small secondary', title: 'La page de la commune sur Geneawiki : registres, archives, histoire'})}` : ''}${u2 ? `${window.LCNDA_UI.extLink(u2, `Geneawiki : ${county}`, {cls: 'button small secondary'})}` : ''}</p>` : '';
     };
     document.addEventListener('click', e => {
         const s = e.target.closest('[data-so5-search]'); if (s) { e.preventDefault(); openSearch({personId: Number(s.dataset.pid) || 0, where: s.dataset.so5Search || 'fiche', place: s.dataset.place || '', employer: s.dataset.employer || ''}); return; }
@@ -294,6 +294,8 @@
     });
     const BLOCK_WHERE = {voyages: 'emigration', military: 'militaire', awards: 'recompense'};
     const BLOCK_KIND = {voyages: 'passager', military: 'medaille_sh', awards: 'medaille_sh'};
+    // ⚙️ « Organiser la fiche » d'un village (heritage-more.js) : cette partie y est rangée, masquée, à la largeur choisie
+    (ext.villageSectionDefs = ext.villageSectionDefs || []).push({id: 'so_links', host: '.so-row', collect: true, icon: '🔗', label: 'Chercher ce lieu en ligne (archives, Geneawiki, bibliothèques)', group: 'Données téléchargées'});
     function decorate(root = document) {
         const ws = root.querySelector?.('#workspace') || root; if (!ws?.querySelectorAll || !S5()) return;
         const cur = A()?.state?.currentPerson?.person; const pid = Number(cur?.id) || 0;

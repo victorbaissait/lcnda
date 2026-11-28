@@ -6,7 +6,9 @@
  * lister les navigateurs installés et y ouvrir une page de l’application (aperçu en direct d’un site ; adresse vérifiée) ;
  * regarder s’il existe une nouvelle version, la télécharger (vérifiée par empreinte) et l’ouvrir ; 🖧 ouvrir ou couper la porte du
  * wifi, accepter ou refuser un appareil, le retirer (seulement des identifiants : ni jeton, ni empreinte, ni adresse choisie).
- * Elle ne voit jamais de chemin et ne peut pas en désigner un elle-même.
+ * Elle ne voit jamais de chemin et ne peut pas en désigner un elle-même, sauf 📁 le dossier qu'on vient de choisir dans la
+ * fenêtre système pour une recherche sans résultat (Enquêtes) : elle le garde comme texte et demande ensuite à l'ouvrir ;
+ * l'ouverture vérifie que c'est bien un dossier existant (jamais un fichier ni un programme).
  */
 const { contextBridge, ipcRenderer } = require('electron');
 const deskOpts = (o) => (o && typeof o === 'object' ? { onTop: o.onTop === true, label: String(o.label || '').slice(0, 60), date: String(o.date || '').slice(0, 10) } : {});
@@ -32,6 +34,10 @@ contextBridge.exposeInMainWorld('lcnda', {
     close: (kind) => ipcRenderer.invoke('lcnda:desk-widgets', 'close', String(kind || ''), {}),
     autostart: (on) => ipcRenderer.invoke('lcnda:desk-widgets', 'autostart', '', { on: on === true }),
   },
+  /** 📁 Choisir un dossier de l'ordinateur (fenêtre système) : {canceled: true} | {dir, name}. Rien n'est copié. */
+  chooseFolder: () => ipcRenderer.invoke('lcnda:choose-folder'),
+  /** 📁 Ouvrir ce dossier dans l'explorateur de fichiers (seulement un dossier existant) : {ok, error?} */
+  openFolder: (dir) => ipcRenderer.invoke('lcnda:open-folder', String(dir || '').slice(0, 1000)),
   /** 🌐 Navigateurs installés : [{id: 'safari'|'chrome'|'firefox'|'edge'|'brave'|'opera'|'chromium', name, installed}] */
   listBrowsers: () => ipcRenderer.invoke('lcnda:browsers'),
   /** Ouvre une page de l'application (http://127.0.0.1:port/… : l'aperçu en direct) dans ce navigateur ('default' : celui du système).

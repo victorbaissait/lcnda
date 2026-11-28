@@ -234,7 +234,7 @@ echo json_encode($o, JSON_UNESCAPED_UNICODE);`));
                 await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-cmd="detect"]').click());
                 await p.waitForFunction(() => document.querySelector('.h-txa-cta'), null, { timeout: 10000 }); await sleep(300);
                 await shot('txa-C0-carte.png');
-                await p.evaluate(() => document.querySelector('.h-txa-cta [data-tx-cmd="found"]').click());
+                await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-pane="add"] [data-tx-cmd="found"]').click()); // atelier-etapes : le seul « ✓ Ajouter à la généalogie… », dans l'étape Ajouter
                 await p.waitForFunction(() => document.querySelector('.h-txa-pers'), null, { timeout: 30000 }); await sleep(500);
                 out.found = await p.evaluate(() => [...document.querySelectorAll('.h-txa-pers')].map(r => [r.querySelector('.h-txa-role').textContent, r.querySelector('b').textContent, r.querySelector('.h-txa-seg .is-on')?.textContent || '']));
                 out.srcInputs = await p.evaluate(() => Object.fromEntries([...document.querySelectorAll('[data-txa-src]')].map(i => [i.dataset.txaSrc, i.value])));
@@ -250,6 +250,12 @@ echo json_encode($o, JSON_UNESCAPED_UNICODE);`));
                 await p.evaluate(() => [...document.querySelectorAll('dialog[open] button[type=submit]')].at(-1).click()); await sleep(300);
                 await p.evaluate(() => document.querySelector('[data-txa-recap]').scrollIntoView()); await shot('txa-F-recap.png');
                 out.cb = counts();
+                // 🔴 3 (audit) : une fiche du même nom déjà dans la base n'est jamais doublée par défaut : « ⇆ à trancher », ✓ Ajouter grisé
+                // tant que ce n'est pas choisi ; ici on choisit « ＋ Créer » pour chacune (comme le faisait l'ancien choix par défaut)
+                out.undecided = await p.evaluate(() => [...document.querySelectorAll('dialog.h-txa-dlg .h-txa-pers')].filter(r => r.querySelector('.h-txa-seg .is-on')?.dataset.txaAct.endsWith(':compare')).map(r => r.dataset.txaP));
+                out.blocked = await p.evaluate(() => document.querySelector('dialog.h-txa-dlg button[type=submit]').disabled);
+                for (const k of out.undecided) await p.evaluate(k2 => document.querySelector(`dialog.h-txa-dlg [data-txa-act="${k2}:create"]`).click(), k);
+                await sleep(100);
                 await p.evaluate(() => document.querySelector('dialog.h-txa-dlg button[type=submit]').click());
                 await p.waitForFunction(() => [...document.querySelectorAll('.toast, [class*=toast]')].some(t => /Acte ajouté/.test(t.textContent)), null, { timeout: 15000 }); await sleep(400);
                 out.toast = await p.evaluate(() => [...document.querySelectorAll('.toast, [class*=toast]')].map(t => t.textContent).find(t => /Acte ajouté/.test(t)) || '');
@@ -317,7 +323,8 @@ echo json_encode($o, JSON_UNESCAPED_UNICODE);`));
             assert.match(urls.base, /cet ordinateur/); assert.match(urls.local, /^http:\/\/127\.0\.0\.1:11434$/);
         }],
         ['lecture approfondie : Ollama trouvé, modèles ouverts (Apache 2.0) proposés, lecture refusée avant le téléchargement', () => {
-            assert.equal(out.st0.running, true); assert.deepEqual(out.st0.models.map(m => [m.tag, m.license, m.present]), [['qwen3-vl:8b-instruct', 'Apache 2.0', false], ['qwen3-vl:4b-instruct', 'Apache 2.0', false]]);
+            assert.equal(out.st0.running, true); const ms = out.st0.models.map(m => [m.tag, m.license, m.present]); // la liste a grandi (9 modèles, commit 122d9fb) : les deux conseillés d'abord, aucun présent avant le téléchargement
+            assert.deepEqual(ms.slice(0, 2), [['qwen3-vl:8b-instruct', 'Apache 2.0', false], ['qwen3-vl:4b-instruct', 'Apache 2.0', false]]); assert.equal(ms.length, 9); assert.ok(ms.every(m => m[1] && m[2] === false), JSON.stringify(ms));
             assert.equal(out.readBefore.status, 422); assert.match(err(out.readBefore), /pas encore téléchargé/); assert.equal(out.pullBad.status, 422);
         }],
         ['lecture approfondie : téléchargement en arrière-plan avec sa progression, puis modèle présent', () => {
@@ -378,6 +385,7 @@ echo json_encode($o, JSON_UNESCAPED_UNICODE);`));
             assert.match(out.toast, /Acte ajouté/); assert.ok(out.ca.persons > out.cb.persons && out.ca.events > out.cb.events);
             assert.equal(out.cu.persons, out.cb.persons); assert.equal(out.cu.events, out.cb.events); assert.equal(out.cu.families, out.cb.families); assert.equal(out.cu.source_links, out.cb.source_links);
             assert.ok(out.txPeople >= 5);
+            assert.equal(out.blocked, out.undecided.length > 0, 'à trancher : ✓ Ajouter grisé (' + out.undecided.join(',') + ')');
         }],
         ['navigateur : à 390 px, rien ne déborde', () => assert.equal(out.narrow, true)],
         ['navigateur : aucune erreur JS', () => assert.deepEqual(out.errs, [])],

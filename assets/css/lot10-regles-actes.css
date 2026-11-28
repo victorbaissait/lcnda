@@ -1,0 +1,23 @@
+/* ⚖️ Les règles de sa vie / 🔍 Aider à lire les actes (lot 10) — assets/js/heritage-lot10-regles-actes.js
+   Presque tout reprend les classes des blocs voisins (cplus-*, tr-*, l9-*) ; ici seulement le petit reste. */
+.l10r-block .l10r-line + .l10r-line { margin-top: .55rem; padding-top: .55rem; border-top: 1px solid var(--line, rgba(127, 127, 127, .18)); }
+.l10r-quote { margin: .2rem 0; }
+.l10r-quote > summary { cursor: pointer; color: var(--muted, #666); list-style: none; display: inline; }
+.l10r-quote > summary::-webkit-details-marker { display: none; }
+.l10r-quote blockquote { margin: .3rem 0 .2rem; padding: .35rem .6rem; border-left: 3px solid var(--accent, #8d5a2b); font-style: italic; }
+.l10r-facts { margin: .3rem 0; padding-left: 1.2rem; }
+.l10r-facts li { margin: .2rem 0; }
+.l10r-maps .tr-photo img, .l10r-ecr .tr-photo img { max-height: 220px; object-fit: contain; }
+.l10r-ecr { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: .6rem; }
+.l10r-capp { width: 100%; }
+.l10r-capp td:first-child { font-family: Georgia, 'Times New Roman', serif; }
+.l10r-capp-page img { max-width: 100%; height: auto; }
+.l10r-year { display: inline-flex; align-items: center; gap: .4rem; margin: 0 0 .5rem; }
+.l10r-year input { width: 6.5rem; }
+/* 💒 mariages par mois : de petites barres, les mois des temps clos un peu plus sombres */
+.l10r-bars { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 3px; align-items: end; height: 96px; margin: .4rem 0; max-width: 520px; }
+.l10r-bar { display: flex; flex-direction: column; justify-content: flex-end; height: 100%; text-align: center; }
+.l10r-bar span { display: block; background: var(--accent, #8d5a2b); opacity: .75; border-radius: 3px 3px 0 0; min-height: 1px; }
+.l10r-bar.is-clos span { opacity: .4; }
+.l10r-bar small { font-size: .68rem; color: var(--muted, #666); }
+@media (max-width: 560px) { .l10r-ecr { grid-template-columns: 1fr 1fr; } .l10r-bars { height: 72px; } }

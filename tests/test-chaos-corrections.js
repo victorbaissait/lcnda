@@ -33,7 +33,7 @@ const finish = () => { console.log(`\n${count} réussi(s), ${failed} échec(s)`)
             assert.doesNotMatch(s, /return this\.save\(\{[^}]*force: true\}\)/, `${f} : « Enregistrer quand même » ne repasse pas par la file`);
         }
         for (const f of ['heritage-vector.js', 'heritage-transcribe.js', 'heritage-house.js', 'heritage-keynote.js', 'heritage-slideshow.js', 'heritage-layout.js'])
-            assert.match(js(f), /if \((saving|savingP)\) return (saving|savingP);|if \(saving\) \{ const p = saving;/, f);
+            assert.match(js(f), /if \((saving|savingP)\) return (saving|savingP);|if \(saving\) \{ const p = saving;|if \(saving\) \{ await saving\.catch\(\(\) => \{\}\); if \(!dirty\) return; \}/, f); // transcription : le second attend le premier, puis n'enregistre que s'il reste du nouveau
     });
     await t('statique : Imprimer (pages mesurées, page qui n’existe pas, 50 exemplaires), 7 familles, livre grisé', () => {
         const a = js('app-actions.js');

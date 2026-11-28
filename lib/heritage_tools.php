@@ -41,6 +41,90 @@ function sealed_media_sql(PDO $pdo, string $col = 'm.id'): string
 
 function kiosk_path(): string { return DATA_DIR . '/consultation.json'; }
 
+/* ─── 🔒 Événements confidentiels (events.is_private, migration 111) ─── */
+
+/** Ce qui sort de l'app pour d'autres (exports, partage, site, livre, rapport, musée, synchronisation) : sans les événements confidentiels. */
+// (sync_export s'en charge lui-même : il pose d'abord les uid, lib/heritage_tools.php sync_export)
+const PRIVATE_EVENT_EXPORT_ACTIONS = ['export_gedcom', 'export_json', 'export_plus', 'export_csv', 'export_csv_global', 'export_family_book', 'sources_export', // ⤓ RIS / BibTeX : pas une source jointe seulement à un événement confidentiel
+    'export_research_report', 'museum_export', 'export_my_list', 'compl_export', 'family_share_preview', 'family_share_export',
+    'website_preview', 'website_export', 'website_export_check', 'website_render', 'website_map_points', 'website_publish',
+    'website_live', 'website_php_run', 'layout_family_data', 'layout_tree_data']; // 📐 la mise en page : un livre qui s'imprime et s'exporte
+
+/** La requête doit-elle se faire sans les événements confidentiels ? Les exports pour d'autres toujours ; tout ce qui se lit en consultation. */
+function private_events_hidden_for(string $action, bool $isWrite): bool
+{
+    if (in_array($action, PRIVATE_EVENT_EXPORT_ACTIONS, true)) { return true; }
+    return !$isWrite && function_exists('kiosk_state') && !empty(kiosk_state()['on']);
+}
+
+/** Les événements confidentiels sont-ils cachés pour cette requête (private_events_shadow) ? */
+function private_events_masked(?bool $set = null): bool
+{
+    static $on = false;
+    if ($set !== null) { $on = $set; }
+    return $on;
+}
+
+/**
+ * Le temps d'une requête : des vues temporaires du même nom (events, event_witnesses, notes, media_links, source_links, media,
+ * sources, evidence_records, hypotheses, investigation_items) cachent les événements confidentiels et ce qui leur est joint
+ * (sources, notes, médias, témoins, preuves, hypothèses, pistes d'enquête). SQLite lit l'objet
+ * temporaire avant la vraie table (comme le filtre ⚖️ succ_shadow_filter) : chaque export, le site, le partage et les écrans
+ * de consultation passent par là sans rien changer à leurs requêtes. Un média ou une source qui n'est joint qu'à un événement
+ * confidentiel disparaît aussi ; joint aussi ailleurs, il reste. Rien n'est écrit dans la base. false : le masquage a échoué.
+ */
+function private_events_shadow(PDO $pdo): bool
+{
+    private_events_masked(true);
+    try {
+        $cols = array_column($pdo->query('PRAGMA main.table_info(events)')->fetchAll(PDO::FETCH_ASSOC), 'name');
+        if (!in_array('is_private', $cols, true)) { return true; } // base d'avant la structure 111 : aucun événement confidentiel
+        if (!$pdo->query('SELECT 1 FROM main.events WHERE is_private=1 LIMIT 1')->fetchColumn()) { return true; } // aucun : rien à cacher
+        $temp = array_flip($pdo->query("SELECT name FROM temp.sqlite_master WHERE type IN ('table','view')")->fetchAll(PDO::FETCH_COLUMN));
+        $has = static function (string $t) use ($pdo): bool { return (bool) $pdo->query("SELECT 1 FROM main.sqlite_master WHERE type='table' AND name=" . $pdo->quote($t))->fetchColumn(); };
+        $priv = '(SELECT id FROM main.events WHERE is_private=1)';
+        $notPriv = "NOT (entity_type='event' AND entity_id IN $priv)";
+        $views = [
+            'events' => 'SELECT * FROM main.events WHERE COALESCE(is_private,0)=0',
+            'event_witnesses' => "SELECT * FROM main.event_witnesses WHERE event_id NOT IN $priv",
+            'notes' => "SELECT * FROM main.notes WHERE $notPriv",
+            'media_links' => "SELECT * FROM main.media_links WHERE $notPriv",
+            'source_links' => "SELECT * FROM main.source_links WHERE $notPriv",
+            'media' => "SELECT * FROM main.media WHERE id NOT IN (SELECT media_id FROM main.media_links WHERE entity_type='event' AND entity_id IN $priv)"
+                . " OR id IN (SELECT media_id FROM main.media_links WHERE $notPriv) OR id IN (SELECT portrait_media_id FROM main.persons WHERE portrait_media_id IS NOT NULL)",
+            'sources' => "SELECT * FROM main.sources WHERE id NOT IN (SELECT source_record_id FROM main.source_links WHERE entity_type='event' AND entity_id IN $priv)"
+                . " OR id IN (SELECT source_record_id FROM main.source_links WHERE $notPriv)",
+            // 🔎 les preuves, hypothèses et pistes d'enquête rattachées à l'événement
+            'evidence_records' => "SELECT * FROM main.evidence_records WHERE event_id IS NULL OR event_id NOT IN $priv",
+            'hypotheses' => "SELECT * FROM main.hypotheses WHERE event_id IS NULL OR event_id NOT IN $priv",
+            'investigation_items' => "SELECT * FROM main.investigation_items WHERE COALESCE(linked_event_id,0) NOT IN $priv",
+            'investigation_item_links' => "SELECT * FROM main.investigation_item_links WHERE $notPriv", // 🧺 les pièces d'une piste (lib/connexions.php)
+        ];
+        foreach ($views as $t => $sql) {
+            if (!$has($t)) { continue; }
+            if (in_array($t, ['evidence_records', 'hypotheses', 'investigation_items'], true)
+                && !in_array($t === 'investigation_items' ? 'linked_event_id' : 'event_id', array_column($pdo->query("PRAGMA main.table_info($t)")->fetchAll(PDO::FETCH_ASSOC), 'name'), true)) { continue; }
+            if (isset($temp[$t])) {
+                // ⚖️ déjà une copie filtrée (succ_shadow_filter) : on en retire ce qui est confidentiel
+                $where = match ($t) {
+                    'events' => "COALESCE(is_private,0)=1",
+                    'event_witnesses', 'evidence_records', 'hypotheses' => "event_id IN $priv",
+                    'investigation_items' => "linked_event_id IN $priv",
+                    'media', 'sources' => '0',
+                    default => "entity_type='event' AND entity_id IN $priv",
+                };
+                $pdo->exec("DELETE FROM temp.$t WHERE $where");
+                continue;
+            }
+            $pdo->exec("CREATE TEMP VIEW $t AS $sql");
+        }
+        return true;
+    } catch (Throwable $e) {
+        error_log('LCNDA : événements confidentiels non masqués : ' . $e->getMessage());
+        return false;
+    }
+}
+
 function kiosk_state(): array
 {
     // 🖧 un appareil invité (lib/reseau_local.php) : lecture seule, avec les mêmes règles que le mode consultation (kiosk_blocks)
@@ -70,7 +154,8 @@ function kiosk_blocks(string $action, bool $isWrite): bool
 {
     // backup_sqlite : seulement la sauvegarde automatique dans le dossier de l'app (vérifié dans api.php)
     $allowedWrites = ['kiosk_exit', 'save_settings', 'backup_sqlite', 'offsite_copy_now', 'museum_sign']; // le livre d'or du musée se signe aussi en consultation
-    $blockedReads = ['export_csv', 'export_csv_global', 'export_gedcom', 'export_plus', 'export_json', 'export_sqlite', 'export_full_backup', 'export_research_report', 'export_family_book', 'sync_export', 'vault_download', 'museum_export', 'export_my_list', 'export_custom_block_def', 'family_share_preview', 'family_share_export', 'website_export', 'desk_widget_file', 'compl_export'];
+    $blockedReads = ['export_csv', 'export_csv_global', 'export_gedcom', 'export_plus', 'export_json', 'export_sqlite', 'export_full_backup', 'export_research_report', 'export_family_book', 'sync_export', 'vault_download', 'museum_export', 'export_my_list', 'export_custom_block_def', 'family_share_preview', 'family_share_export', 'website_export', 'desk_widget_file', 'compl_export',
+        'sources_export']; // ⤓ toutes les sources en RIS / BibTeX (lib/imports_plus.php) : un export comme les autres
     return ($isWrite && !in_array($action, $allowedWrites, true)) || (!$isWrite && in_array($action, $blockedReads, true)) || in_array($action, ['switch_database', 'delete_database', 'clone_database'], true);
 }
 
@@ -698,7 +783,16 @@ function sync_export(PDO $pdo): never
 {
     $s = sync_settings($pdo);
     if ($s['base_uid'] === '') { json_response(['error' => 'Le travail à deux n’est pas commencé sur cette base.'], 422); }
-    $changes = sync_diff($pdo);
+    // 🔒 le paquet part chez quelqu'un d'autre : sans les événements confidentiels ni ce qui leur est joint. Les uid sont posés
+    // avant (les vues temporaires ne s'écrivent pas) ; une ligne cachée mais toujours là n'est pas envoyée comme « supprimée »,
+    // et elle reste hors de la photo : rendue publique, elle partira comme un ajout.
+    sync_assign_uids($pdo);
+    if (!private_events_shadow($pdo)) { json_response(['error' => 'Export impossible : les événements confidentiels n’ont pas pu être retirés. Réessaie dans un instant.'], 503); }
+    $changes = array_values(array_filter(sync_diff($pdo), static function (array $c) use ($pdo): bool {
+        if (($c['op'] ?? '') !== 'delete' || !in_array($c['tbl'] ?? '', SYNC_TABLES, true)) { return true; }
+        $q = $pdo->prepare('SELECT 1 FROM main.' . $c['tbl'] . ' WHERE uid=?'); $q->execute([(string) $c['uid']]);
+        return !$q->fetchColumn();
+    }));
     if (!$changes) { json_response(['error' => 'Aucune modification depuis le dernier paquet.'], 422); }
     $package = sync_build_package($pdo, $changes);
     header('Content-Type: application/json; charset=utf-8');

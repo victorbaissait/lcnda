@@ -1,0 +1,835 @@
+fr ¦ ru ¦ uk
+Le texte est vide : écris ou lis d’abord l’acte. ¦ Текст пуст: сначала напиши или прочитай запись. ¦ Текст порожній: спочатку напиши або прочитай запис.
+Aucune personne repérée dans le texte pour l’instant. ¦ В тексте пока не найдено ни одного человека. ¦ У тексті поки не знайдено жодної людини.
+Personnes — {t} ¦ Люди — {t} ¦ Люди — {t}
+L’envoi vers les autres outils n’est pas chargé. ¦ Отправка в другие инструменты не загружена. ¦ Надсилання в інші інструменти не завантажено.
+L’image de l’acte ¦ Изображение записи ¦ Зображення запису
+Le texte de la transcription ¦ Текст расшифровки ¦ Текст транскрипції
+Les personnes repérées (tableau) ¦ Найденные люди (таблица) ¦ Знайдені люди (таблиця)
+Envoyer vers… ¦ Отправить в… ¦ Надіслати до…
+Transcription — {t} ¦ Расшифровка — {t} ¦ Транскрипція — {t}
+Signature — {t} ¦ Подпись — {t} ¦ Підпис — {t}
+L’export Word n’est pas chargé. ¦ Экспорт в Word не загружен. ¦ Експорт у Word не завантажено.
+Éclaircir / restaurer l’image ¦ Осветлить / восстановить изображение ¦ Освітлити / відновити зображення
+le texte mis en page, à ouvrir dans Word ou LibreOffice (.docx) ¦ свёрстанный текст, чтобы открыть в Word или LibreOffice (.docx) ¦ зверстаний текст, щоб відкрити у Word або LibreOffice (.docx)
+Ouvrir cette signature dans « Signatures et sceaux » : le papier s’efface, l’encre devient un tracé net ¦ Открыть эту подпись в « Подписи и печати »: бумага исчезает, чернила становятся чёткой линией ¦ Відкрити цей підпис у « Підписи та печатки »: папір зникає, чорнило стає чіткою лінією
+Détourer la signature ¦ Вырезать подпись ¦ Вирізати підпис
++ {n} autres : zoome pour les voir. ¦ + ещё {n}: приблизь, чтобы увидеть. ¦ + ще {n}: наблизь, щоб побачити.
+1 case repérée ¦ 1 отмеченная клетка ¦ 1 позначена клітинка
+1 lieu pas sur la carte ¦ 1 место не на карте ¦ 1 місце не на мапі
+Affiche d’abord un arbre. ¦ Сначала покажи дерево. ¦ Спочатку покажи дерево.
+Ajouter la mère ¦ Добавить мать ¦ Додати матір
+Ajouter le père ¦ Добавить отца ¦ Додати батька
+Ajouter l’autre parent ¦ Добавить другого родителя ¦ Додати іншого з батьків
+Aller à un lieu… ¦ Перейти к месту… ¦ Перейти до місця…
+Ancêtres (Sosa) ¦ Предки (Соса) ¦ Предки (Соса)
+Ancêtres (Sosa) sur {n} générations ¦ Предки (Соса) за {n} поколений ¦ Предки (Соса) за {n} поколінь
+Ascendants de {nm} ¦ Предки {nm} ¦ Предки {nm}
+Au zoom faible, les points proches deviennent une pastille avec leur nombre ¦ При малом масштабе близкие точки становятся кружком с их числом ¦ При малому масштабі близькі точки стають кружечком з їх кількістю
+Aucune carte à exporter. ¦ Нет карты для экспорта. ¦ Немає мапи для експорту.
+Aucune donnée. ¦ Нет данных. ¦ Немає даних.
+Aucune naissance d’ancêtre n’a de lieu placé sur la carte. ¦ Ни у одного рождения предка нет места на карте. ¦ У жодного народження предка немає місця на мапі.
+Branche : {x} ¦ Ветвь: {x} ¦ Гілка: {x}
+CARTE · {x} ¦ КАРТА · {x} ¦ МАПА · {x}
+Centre de gravité (G1 = la personne de départ) ¦ Центр тяжести (G1 = исходный человек) ¦ Центр ваги (G1 = вихідна особа)
+Centrer la carte sur un lieu et ouvrir sa bulle ¦ Центрировать карту на месте и открыть его подсказку ¦ Центрувати мапу на місці й відкрити його підказку
+Chargement du graphique… ¦ Загрузка графика… ¦ Завантаження графіка…
+Choisis d’abord la personne de départ (Sosa 1). ¦ Сначала выбери исходного человека (Соса 1). ¦ Спочатку вибери вихідну особу (Соса 1).
+Colorer les cases : une étiquette, une branche, ou les fiches sans source ¦ Раскрасить клетки: метка, ветвь или карточки без источника ¦ Розфарбувати клітинки: мітка, гілка або картки без джерела
+Dans cette zone ¦ В этой области ¦ У цій області
+Dans la fenêtre d’impression, choisis « Enregistrer en PDF ». ¦ В окне печати выбери « Сохранить как PDF ». ¦ У вікні друку вибери « Зберегти як PDF ».
+De {a} à {b} ¦ С {a} по {b} ¦ З {a} по {b}
+Depuis {a} ¦ С {a} ¦ З {a}
+Famille de {nm} ¦ Семья {nm} ¦ Родина {nm}
+Feuilles en largeur ¦ Листов в ширину ¦ Аркушів завширшки
+GRAPHIQUES ¦ ГРАФИКИ ¦ ГРАФІКИ
+Grand arbre à assembler ¦ Большое дерево для склейки ¦ Велике дерево для склеювання
+Génération {g} : {n}{y} ¦ Поколение {g}: {n}{y} ¦ Покоління {g}: {n}{y}
+Image impossible avec ce fond de carte : choisis PDF. ¦ С этой подложкой карты изображение невозможно: выбери PDF. ¦ З цією підкладкою мапи зображення неможливе: вибери PDF.
+Imprime à 100 % (sans « ajuster à la page »). ¦ Печатай в масштабе 100 % (без « по размеру страницы »). ¦ Друкуй у масштабі 100 % (без « за розміром сторінки »).
+Imprimer ce graphique (⌘P) ¦ Напечатать этот график (⌘P) ¦ Надрукувати цей графік (⌘P)
+Imprimer la carte affichée (⌘P) ¦ Напечатать показанную карту (⌘P) ¦ Надрукувати показану мапу (⌘P)
+Imprimer l’arbre en grand, sur plusieurs feuilles A4 ou A3 à assembler ¦ Напечатать дерево крупно, на нескольких листах A4 или A3 для склейки ¦ Надрукувати дерево великим, на кількох аркушах A4 або A3 для склеювання
+Inhumations ¦ Погребения ¦ Поховання
+Jusqu’à {b} ¦ До {b} ¦ До {b}
+La liste des événements visibles, qui suit la carte ¦ Список видимых событий, следующий за картой ¦ Список видимих подій, що слідує за мапою
+La photo de la fiche dans chaque case ¦ Фото карточки в каждой клетке ¦ Фото картки в кожній клітинці
+Latitude ¦ Широта ¦ Широта
+Les chiffres : {t} ¦ Цифры: {t} ¦ Цифри: {t}
+Les couleurs des sortes d’événements et la période ¦ Цвета видов событий и период ¦ Кольори видів подій і період
+Les {n} premiers. ¦ Первые {n}. ¦ Перші {n}.
+Longitude ¦ Долгота ¦ Довгота
+L’arbre est découpé en feuilles qui se recouvrent un peu : coupe, pose sur la voisine en faisant coïncider les croix, colle. ¦ Дерево разрезано на листы, которые немного перекрываются: отрежь, положи на соседний лист, совместив крестики, и приклей. ¦ Дерево розрізане на аркуші, що трохи перекриваються: відріж, поклади на сусідній аркуш, сумістивши хрестики, і приклей.
+L’impression en feuilles n’est pas disponible ici. ¦ Печать листами здесь недоступна. ¦ Друк аркушами тут недоступний.
+Masquer cette branche ¦ Скрыть эту ветвь ¦ Сховати цю гілку
+Montrer cette branche ¦ Показать эту ветвь ¦ Показати цю гілку
+Même échelle des deux côtés (le plus grand = {m}). ¦ Одинаковый масштаб с обеих сторон (наибольшее = {m}). ¦ Однаковий масштаб з обох боків (найбільше = {m}).
+Nom : {x} ¦ Имя: {x} ¦ Ім’я: {x}
+PNG, JPG, PDF ou CSV de la carte affichée ¦ PNG, JPG, PDF или CSV показанной карты ¦ PNG, JPG, PDF або CSV показаної мапи
+Plan d’assemblage ¦ Схема сборки ¦ Схема складання
+Plan d’assemblage en première page ¦ Схема сборки на первой странице ¦ Схема складання на першій сторінці
+Pose les feuilles dans l’ordre du plan : A1 en haut à gauche. ¦ Разложи листы по порядку схемы: A1 вверху слева. ¦ Розклади аркуші за порядком схеми: A1 вгорі ліворуч.
+Pose-la sur sa voisine jusqu’au pointillé, en faisant coïncider les croix ⊕, puis colle. ¦ Положи его на соседний лист до пунктира, совместив крестики ⊕, затем приклей. ¦ Поклади його на сусідній аркуш до пунктиру, сумістивши хрестики ⊕, потім приклей.
+Période : {a} – {b} ¦ Период: {a} – {b} ¦ Період: {a} – {b}
+Recentrer l’arbre ici ¦ Перецентрировать дерево здесь ¦ Перецентрувати дерево тут
+Recouvrement ¦ Перекрытие ¦ Перекриття
+Repères de collage (✂, pointillés, croix) ¦ Метки для склейки (✂, пунктир, крестики) ¦ Мітки для склеювання (✂, пунктир, хрестики)
+Rien dans le cadre : déplace la carte ou dézoome. ¦ В рамке ничего нет: сдвинь карту или отдали. ¦ У рамці нічого немає: зсунь мапу або віддали.
+Rien à imprimer. ¦ Нечего печатать. ¦ Нічого друкувати.
+Sans source (en rouge) ¦ Без источника (красным) ¦ Без джерела (червоним)
+Sosa et côtés : depuis la personne de départ. ¦ Соса и стороны: от исходного человека. ¦ Соса і сторони: від вихідної особи.
+Sur chaque feuille qui n’est pas dans la première colonne ou la première rangée, coupe la marge blanche le long du trait ✂. ¦ На каждом листе не из первого столбца и не из первого ряда отрежь белое поле по линии ✂. ¦ На кожному аркуші не з першого стовпця і не з першого ряду відріж біле поле по лінії ✂.
+Un point par génération d’ancêtres (la moyenne des lieux de naissance), reliés par une flèche ¦ Одна точка на поколение предков (среднее мест рождения), соединённые стрелкой ¦ Одна точка на покоління предків (середнє місць народження), з’єднані стрілкою
+Une personne… ¦ Человек… ¦ Особа…
+Voir tous les points (⌘0) ¦ Показать все точки (⌘0) ¦ Показати всі точки (⌘0)
+Vue d’ensemble : glisse le cadre pour te déplacer ¦ Обзор: перетаскивай рамку, чтобы перемещаться ¦ Огляд: перетягуй рамку, щоб переміщатися
+au-dessus : {x} ¦ сверху: {x} ¦ зверху: {x}
+deux périodes ¦ два периода ¦ два періоди
+elle seule ¦ только она ¦ лише вона
+les hommes et les femmes ¦ мужчины и женщины ¦ чоловіки й жінки
+les événements visibles ¦ видимые события ¦ видимі події
+rangée {r}, colonne {c} ¦ ряд {r}, столбец {c} ¦ ряд {r}, стовпець {c}
+ses ascendants ¦ её предки ¦ її предки
+{e} sans position : clique pour placer leurs lieux ¦ {e} без положения: нажми, чтобы разместить их места ¦ {e} без розташування: натисни, щоб розмістити їхні місця
+{e} · {p} ¦ {e} · {p} ¦ {e} · {p}
+{n} cases repérées ¦ Отмечено клеток: {n} ¦ Позначено клітинок: {n}
+{n} feuilles : {c} en largeur, {r} en hauteur. Affiche finie : {w} × {h} cm. ¦ Листов: {n} — {c} в ширину, {r} в высоту. Готовый плакат: {w} × {h} см. ¦ Аркушів: {n} — {c} завширшки, {r} заввишки. Готовий плакат: {w} × {h} см.
+{n} lieux pas sur la carte ¦ Мест не на карте: {n} ¦ Місць не на мапі: {n}
+{n} événements ¦ Событий: {n} ¦ Подій: {n}
+{n} événements dans {p} lieux : clique pour zoomer ¦ Событий: {n}, мест: {p} — нажми, чтобы приблизить ¦ Подій: {n}, місць: {p} — натисни, щоб наблизити
+{what} de {nm} (créer la fiche ou relier une fiche) ¦ {what} — {nm} (создать карточку или связать карточку) ¦ {what} — {nm} (створити картку або пов’язати картку)
+{x} se pose ici ¦ {x} ставится сюда ¦ {x} ставиться сюди
+© contributeurs OpenStreetMap ¦ © участники OpenStreetMap ¦ © учасники OpenStreetMap
+« {x} » n’a pas encore de position sur la carte. ¦ У « {x} » ещё нет положения на карте. ¦ « {x} » ще не має розташування на мапі.
+Âge {a} – {b} ¦ Возраст {a} – {b} ¦ Вік {a} – {b}
+Étiquette : {x} ¦ Метка: {x} ¦ Мітка: {x}
+à gauche : {x} ¦ слева: {x} ¦ ліворуч: {x}
+↔ Comparer ¦ ↔ Сравнить ¦ ↔ Порівняти
+↔ Comparer deux statistiques ¦ ↔ Сравнить две статистики ¦ ↔ Порівняти дві статистики
+⤓ CSV ¦ ⤓ CSV ¦ ⤓ CSV
+⧉ Copier ¦ ⧉ Копировать ¦ ⧉ Копіювати
+👁 Montrer les branches masquées ({n}) ¦ 👁 Показать скрытые ветви ({n}) ¦ 👁 Показати сховані гілки ({n})
+📊 CSV ¦ 📊 CSV ¦ 📊 CSV
+🖼 Portraits ¦ 🖼 Портреты ¦ 🖼 Портрети
+🧩 Grand format à assembler ¦ 🧩 Большой формат для склейки ¦ 🧩 Великий формат для склеювання
+🧮 Voir les chiffres ¦ 🧮 Показать цифры ¦ 🧮 Показати цифри
+🧷 Repères ¦ 🧷 Метки ¦ 🧷 Мітки
+moins d’un an ¦ меньше года ¦ менше року
+Âge à cet événement ¦ Возраст при этом событии ¦ Вік під час цієї події
+Ajoute des dates aux événements des fiches, ou montre d’autres sortes d’événements. ¦ Добавь даты к событиям карточек или покажи другие виды событий. ¦ Додай дати до подій карток або покажи інші види подій.
+Voir plus d’années ¦ Показать больше лет ¦ Показати більше років
+Agrandir une période ¦ Увеличить период ¦ Збільшити період
+⌘ ou Ctrl + molette : agrandir là où est la souris. ¦ ⌘ или Ctrl + колёсико: увеличить там, где мышь. ¦ ⌘ або Ctrl + коліщатко: збільшити там, де миша.
+1 génération ¦ 1 поколение ¦ 1 покоління
+Partir de ¦ Начать с ¦ Почати з
+Barres de vie ¦ Полосы жизни ¦ Смуги життя
+Âge à chaque événement ¦ Возраст при каждом событии ¦ Вік під час кожної події
+Anomalies en rouge ¦ Аномалии красным ¦ Аномалії червоним
+Aucune vue pour l’instant : règle la frise, puis « 💾 Enregistrer la vue ». ¦ Пока нет видов: настрой ленту времени, затем « 💾 Сохранить вид ». ¦ Поки немає видів: налаштуй стрічку часу, потім « 💾 Зберегти вигляд ».
+Le monde autour… ¦ Мир вокруг… ¦ Світ навколо…
+Chercher dans la frise… (nom, lieu, année) ¦ Искать на ленте времени… (имя, место, год) ¦ Шукати на стрічці часу… (ім’я, місце, рік)
+Chronologie de {x} ¦ Хронология: {x} ¦ Хронологія: {x}
+Vue « {name} » affichée. ¦ Вид « {name} » показан. ¦ Вигляд « {name} » показано.
+Vue « {name} » supprimée ¦ Вид « {name} » удалён ¦ Вигляд « {name} » видалено
+Partir de cette personne ¦ Начать с этого человека ¦ Почати з цієї особи
+Comparer avec la personne de départ ¦ Сравнить с исходным человеком ¦ Порівняти з вихідною особою
+Copier la ligne ¦ Копировать строку ¦ Копіювати рядок
+Supprimer l’événement ¦ Удалить событие ¦ Видалити подію
+Événement supprimé ¦ Событие удалено ¦ Подію видалено
+La frise n’a pas pu se charger. ¦ Не удалось загрузить ленту времени. ¦ Не вдалося завантажити стрічку часу.
+Choisis un lieu dans la colonne de gauche. ¦ Выбери место в левом столбце. ¦ Вибери місце в лівому стовпці.
+Tout ce qui s’y est passé : naissances, mariages, décès, domiciles… familles comprises. ¦ Всё, что там происходило: рождения, браки, смерти, места жительства… включая семьи. ¦ Усе, що там відбувалося: народження, шлюби, смерті, місця проживання… разом із родинами.
+PERSONNE {l} ¦ ЧЕЛОВЕК {l} ¦ ОСОБА {l}
+{n} frises parallèles ¦ Параллельных лент времени: {n} ¦ Паралельних стрічок часу: {n}
+{a} événements sur {b} ¦ {a} событий из {b} ¦ {a} подій із {b}
+Tout ce qui s’est passé à {x}, familles comprises. ¦ Всё, что происходило в {x}, включая семьи. ¦ Усе, що відбувалося в {x}, разом із родинами.
+Événements connus autour de {x}, classés sans modifier la formulation originale des dates. ¦ Известные события вокруг {x}, упорядоченные без изменения исходной записи дат. ¦ Відомі події навколо {x}, упорядковані без зміни початкового запису дат.
+Exporter la frise (⌘E) ¦ Экспортировать ленту времени (⌘E) ¦ Експортувати стрічку часу (⌘E)
+Imprimer la frise (⌘P) ¦ Напечатать ленту времени (⌘P) ¦ Надрукувати стрічку часу (⌘P)
+Enregistrer la vue ¦ Сохранить вид ¦ Зберегти вигляд
+Rien à exporter. ¦ Нечего экспортировать. ¦ Нічого експортувати.
+Ce navigateur ne sait pas faire une image de la frise : choisis PDF. ¦ Этот браузер не умеет делать изображение ленты времени: выбери PDF. ¦ Цей браузер не вміє робити зображення стрічки часу: вибери PDF.
+Image impossible : la frise est trop grande. ¦ Изображение невозможно: лента времени слишком большая. ¦ Зображення неможливе: стрічка часу завелика.
+tableur ¦ электронная таблица ¦ електронна таблиця
+👶 Naissances et baptêmes ¦ 👶 Рождения и крещения ¦ 👶 Народження і хрещення
+💍 Mariages et unions ¦ 💍 Браки и союзы ¦ 💍 Шлюби та союзи
+✝️ Décès et sépultures ¦ ✝️ Смерти и погребения ¦ ✝️ Смерті та поховання
+🔨 Métiers ¦ 🔨 Профессии ¦ 🔨 Професії
+🏠 Domiciles et départs ¦ 🏠 Места жительства и отъезды ¦ 🏠 Місця проживання та від’їзди
+🎖 Militaire ¦ 🎖 Военная служба ¦ 🎖 Військова служба
+🏠 Recensements ¦ 🏠 Переписи ¦ 🏠 Переписи
+📌 Autres ¦ 📌 Другое ¦ 📌 Інше
+Aucune vue pour l’instant : choisis les fiches, puis « 💾 Enregistrer la vue ». ¦ Пока нет видов: выбери карточки, затем « 💾 Сохранить вид ». ¦ Поки немає видів: вибери картки, потім « 💾 Зберегти вигляд ».
+Choisir {x} ¦ Выбрать {x} ¦ Вибрати {x}
+Inverser A et B ¦ Поменять местами A и B ¦ Поміняти місцями A і B
+L’acte transcrit ¦ Расшифрованная запись ¦ Транскрибований запис
+Choisir un acte… ¦ Выбрать запись… ¦ Вибрати запис…
+Aucun acte transcrit pour l’instant. ¦ Пока нет расшифрованных записей. ¦ Поки немає транскрибованих записів.
+Personne {l} ¦ Человек {l} ¦ Особа {l}
+Retirer cette fiche de la comparaison ¦ Убрать эту карточку из сравнения ¦ Прибрати цю картку з порівняння
+Ajouter une fiche ({l}) ¦ Добавить карточку ({l}) ¦ Додати картку ({l})
+Les actes viennent de Listes → Transcriptions d’actes. ¦ Записи берутся из Списки → Расшифровки записей. ¦ Записи беруться зі Списки → Транскрипції записів.
+naissance : {a} / {b} ¦ рождение: {a} / {b} ¦ народження: {a} / {b}
+décès : {a} / {b} ¦ смерть: {a} / {b} ¦ смерть: {a} / {b}
+Parents en commun ¦ Общие родители ¦ Спільні батьки
+Chargement de la comparaison… ¦ Загрузка сравнения… ¦ Завантаження порівняння…
+Exporter la comparaison (⌘E) ¦ Экспортировать сравнение (⌘E) ¦ Експортувати порівняння (⌘E)
+Imprimer la comparaison (⌘P) ¦ Напечатать сравнение (⌘P) ¦ Надрукувати порівняння (⌘P)
+Garder une seule fiche : choisis la valeur de A ou de B ligne à ligne ¦ Оставить одну карточку: выбирай значение A или B построчно ¦ Залишити одну картку: вибирай значення A або B рядок за рядком
+Fusionner… ¦ Объединить… ¦ Об’єднати…
+Comparer des fiches ¦ Сравнить карточки ¦ Порівняти картки
+Pour décider si deux fiches sont des doublons, des homonymes ou deux branches distinctes. ¦ Чтобы решить, являются ли две карточки дубликатами, однофамильцами или двумя разными ветвями. ¦ Щоб вирішити, чи дві картки — дублікати, однофамільці чи дві різні гілки.
+Sans doute la même personne ¦ Скорее всего, один и тот же человек ¦ Найімовірніше, та сама особа
+Peut-être la même personne ¦ Возможно, один и тот же человек ¦ Можливо, та сама особа
+Sans doute deux personnes différentes ¦ Скорее всего, два разных человека ¦ Найімовірніше, дві різні особи
+rien à comparer ¦ нечего сравнивать ¦ нічого порівнювати
+Sexes différents ¦ Разный пол ¦ Різна стать
+Une aide pour décider, pas une preuve : regarde aussi les sources. ¦ Помощь для решения, а не доказательство: смотри также источники. ¦ Допомога для рішення, а не доказ: дивись також джерела.
+Choisis cette personne dans la colonne de gauche. ¦ Выбери этого человека в левом столбце. ¦ Вибери цю особу в лівому стовпці.
+Ressemblance avec A : {n} % ¦ Сходство с A: {n} % ¦ Схожість з A: {n} %
+Naissance en face de naissance, décès en face de décès ; les lignes différentes sont marquées. ¦ Рождение напротив рождения, смерть напротив смерти; различающиеся строки отмечены. ¦ Народження навпроти народження, смерть навпроти смерті; різні рядки позначено.
+Parents : {x} ¦ Родители: {x} ¦ Батьки: {x}
+Conjoints : {x} ¦ Супруги: {x} ¦ Подружжя: {x}
+Enfants : {x} ¦ Дети: {x} ¦ Діти: {x}
+Fusionner ces deux fiches ¦ Объединить эти две карточки ¦ Об’єднати ці дві картки
+Pour chaque ligne, choisis la valeur à garder. Les sources, médias, notes, liens de famille des deux fiches sont tous gardés. ¦ Для каждой строки выбери значение, которое оставить. Источники, медиафайлы, заметки, семейные связи обеих карточек сохраняются. ¦ Для кожного рядка вибери значення, яке залишити. Джерела, медіафайли, нотатки, родинні зв’язки обох карток зберігаються.
+Fiche gardée : ¦ Остающаяся карточка: ¦ Картка, що залишається:
+Rien à choisir : les deux fiches ne se contredisent pas. ¦ Выбирать нечего: две карточки не противоречат друг другу. ¦ Вибирати нічого: дві картки не суперечать одна одній.
+{n} événement(s) présent(s) sur une seule fiche : gardé(s) tel(s) quel(s). ¦ Событий только в одной карточке: {n} — сохранены как есть. ¦ Подій лише в одній картці: {n} — збережено як є.
+Fusionner les deux fiches ? ¦ Объединить две карточки? ¦ Об’єднати дві картки?
+« {b} » sera fusionnée dans « {a} » : tout ce qui la concerne passe sur « {a} », puis elle disparaît. Une fusion ne peut pas être annulée. ¦ « {b} » будет объединена с « {a} »: всё, что её касается, переходит на « {a} », затем она исчезает. Объединение нельзя отменить. ¦ « {b} » буде об’єднано з « {a} »: усе, що її стосується, переходить на « {a} », потім вона зникає. Об’єднання не можна скасувати.
+🔀 Fusionner ¦ 🔀 Объединить ¦ 🔀 Об’єднати
+Fusion faite, mais une valeur n’a pas pu être reprise : {err} ¦ Объединение выполнено, но одно значение не удалось перенести: {err} ¦ Об’єднання виконано, але одне значення не вдалося перенести: {err}
+Fiches fusionnées : {n} événement(s) en double retiré(s) ¦ Карточки объединены: убрано повторяющихся событий: {n} ¦ Картки об’єднано: прибрано подій, що повторюються: {n}
+événements en double remis ¦ повторяющиеся события возвращены ¦ події, що повторюються, повернуто
+Fiches fusionnées. ¦ Карточки объединены. ¦ Картки об’єднано.
+Comparer avec un acte ¦ Сравнить с записью ¦ Порівняти із записом
+Cet acte parle-t-il de cette personne ? Les noms, années et lieux de la fiche sont cherchés dans le texte. ¦ Говорит ли эта запись об этом человеке? Имена, годы и места из карточки ищутся в тексте. ¦ Чи говорить цей запис про цю особу? Імена, роки й місця з картки шукаються в тексті.
+Concordance {n} % ¦ Совпадение {n} % ¦ Збіг {n} %
+Cet acte parle sans doute de cette personne ¦ Эта запись, скорее всего, об этом человеке ¦ Цей запис, найімовірніше, про цю особу
+Cet acte parle peut-être de cette personne ¦ Эта запись, возможно, об этом человеке ¦ Цей запис, можливо, про цю особу
+Peu d’indices dans cet acte ¦ В этой записи мало зацепок ¦ У цьому записі мало зачіпок
+Texte vide. ¦ Текст пуст. ¦ Текст порожній.
+Choisis un acte transcrit dans la colonne de gauche. ¦ Выбери расшифрованную запись в левом столбце. ¦ Вибери транскрибований запис у лівому стовпці.
+Année de l’acte dans sa vie ¦ Год записи в его жизни ¦ Рік запису в її житті
+acte de {y}, fiche {a}–{b} ¦ запись {y} года, карточка {a}–{b} ¦ запис {y} року, картка {a}–{b}
+acte sans année ¦ запись без года ¦ запис без року
+Même année qu’un événement ¦ Тот же год, что и у события ¦ Той самий рік, що й у події
+Choisis un média à gauche pour {x}. ¦ Выбери медиафайл слева для {x}. ¦ Вибери медіафайл ліворуч для {x}.
+Place du rideau ¦ Положение шторки ¦ Положення шторки
+Image retirée de la comparaison ¦ Изображение убрано из сравнения ¦ Зображення прибрано з порівняння
+Image A ¦ Изображение A ¦ Зображення A
+Image B ¦ Изображение B ¦ Зображення B
+{a} et un acte ¦ {a} и запись ¦ {a} і запис
+Comparaison de deux images ¦ Сравнение двух изображений ¦ Порівняння двох зображень
+Comparaison avec un acte ¦ Сравнение с записью ¦ Порівняння із записом
+Comparaison : {x} ¦ Сравнение: {x} ¦ Порівняння: {x}
+Ressemblance A–B ¦ Сходство A–B ¦ Схожість A–B
+, une carte ¦ , открытка ¦ , листівка
+12/05/1882, vers 1880… ¦ 12/05/1882, около 1880… ¦ 12/05/1882, близько 1880…
+7 derniers jours ¦ Последние 7 дней ¦ Останні 7 днів
+Ajoute la date de mariage de {a} et {b}. ¦ Добавь дату брака {a} и {b}. ¦ Додай дату шлюбу {a} і {b}.
+Ajoute la naissance de {a}. ¦ Добавь рождение {a}. ¦ Додай народження {a}.
+Aucun objectif pour l’instant ¦ Пока нет целей ¦ Поки немає цілей
+Aucun trésor ne correspond ¦ Ни одно сокровище не подходит ¦ Жоден скарб не підходить
+Bilan du {date} ¦ Итоги на {date} ¦ Підсумок на {date}
+Cacher ce trésor ¦ Скрыть это сокровище ¦ Сховати цей скарб
+Ce jour-là, le {day} ¦ В тот день, {day} ¦ Того дня, {day}
+Ce qui est arrivé à la famille ce jour du calendrier : naissances, mariages, décès… en une carte à partager. ¦ Что случилось с семьёй в этот день календаря: рождения, браки, смерти… в одной открытке, чтобы поделиться. ¦ Що сталося з родиною цього дня календаря: народження, шлюби, смерті… в одній листівці, щоб поділитися.
+Cette page montre seulement : <b>{what}</b> ¦ Эта страница показывает только: <b>{what}</b> ¦ Ця сторінка показує лише: <b>{what}</b>
+Chasse supprimée. ¦ Охота удалена. ¦ Полювання видалено.
+Chercher un trésor ¦ Искать сокровище ¦ Шукати скарб
+Chercher un trésor… ¦ Искать сокровище… ¦ Шукати скарб…
+Choisis au moins une question. ¦ Выбери хотя бы один вопрос. ¦ Вибери хоча б одне питання.
+Choisis d’abord quoi montrer. ¦ Сначала выбери, что показывать. ¦ Спочатку вибери, що показувати.
+Choisis un widget dans la colonne de gauche (+). ¦ Выбери виджет в левом столбце (+). ¦ Вибери віджет у лівому стовпці (+).
+Combien ¦ Сколько ¦ Скільки
+Copier vers… ¦ Копировать в… ¦ Копіювати до…
+Croissance ¦ Рост ¦ Зростання
+Croissance de la base mois par mois ¦ Рост базы по месяцам ¦ Зростання бази за місяцями
+Croissance indisponible. ¦ Рост недоступен. ¦ Зростання недоступне.
+Dans la fenêtre, « ⤓ PDF » ¦ В окне « ⤓ PDF » ¦ У вікні « ⤓ PDF »
+Date butoir ¦ Крайний срок ¦ Крайній термін
+De cujus (ses ancêtres et descendants) ¦ De cujus (его предки и потомки) ¦ De cujus (його предки й нащадки)
+Des objectifs au long cours (« 8 générations complètes d’ici décembre », « 100 actes transcrits ») avec une barre de progression calculée sur la base et une date butoir. ¦ Долгосрочные цели (« 8 полных поколений к декабрю », « 100 расшифрованных записей ») с полосой прогресса по базе и крайним сроком. ¦ Довгострокові цілі (« 8 повних поколінь до грудня », « 100 транскрибованих записів ») зі смугою прогресу за базою та крайнім терміном.
+Des questions sur un ancêtre envoyées en un fichier à un proche ; ses réponses reviennent dans les fiches. ¦ Вопросы о предке, отправленные родственнику одним файлом; ответы возвращаются в карточки. ¦ Питання про предка, надіслані родичеві одним файлом; відповіді повертаються в картки.
+Dossier (enquête) ¦ Досье (расследование) ¦ Досьє (розслідування)
+Démarre le chronomètre quand tu te mets à chercher : le temps passé est rangé par jour et par sujet. ¦ Запускай секундомер, когда начинаешь искать: время раскладывается по дням и темам. ¦ Запускай секундомір, коли починаєш шукати: час розкладається за днями й темами.
+En plein écran : le portrait, chaque étape avec sa date et son lieu, les photos, la carte. Espace = pause, flèches = avant / après, Échap = fin. ¦ На весь экран: портрет, каждый этап с датой и местом, фото, карта. Пробел = пауза, стрелки = назад / вперёд, Esc = конец. ¦ На весь екран: портрет, кожен етап з датою і місцем, фото, мапа. Пробіл = пауза, стрілки = назад / вперед, Esc = кінець.
+Entretien supprimé (le son reste dans les médias). ¦ Интервью удалено (звук остаётся в медиафайлах). ¦ Інтерв’ю видалено (звук лишається в медіафайлах).
+Essaie le lendemain, ou complète les dates exactes des actes. ¦ Попробуй следующий день или дополни точные даты записей. ¦ Спробуй наступний день або доповни точні дати записів.
+Essaie un autre mot : « lettre », « carte », « jeu »… ¦ Попробуй другое слово: « письмо », « открытка », « игра »… ¦ Спробуй інше слово: « лист », « листівка », « гра »…
+Et toi, que sais-tu encore de {name} ? ¦ А что ты ещё знаешь о {name}? ¦ А що ти ще знаєш про {name}?
+Ex. : 8 générations complètes d’ici décembre, 100 actes transcrits. ¦ Напр.: 8 полных поколений к декабрю, 100 расшифрованных записей. ¦ Напр.: 8 повних поколінь до грудня, 100 транскрибованих записів.
+Exporter ce widget (PDF) ¦ Экспортировать этот виджет (PDF) ¦ Експортувати цей віджет (PDF)
+Favori ¦ Избранное ¦ Обране
+Filtre retiré : toute la base. ¦ Фильтр снят: вся база. ¦ Фільтр знято: уся база.
+Général ¦ Общее ¦ Загальне
+Ils ont {n}, mais pas encore de mariage noté. ¦ У них {n}, но брак ещё не записан. ¦ У них {n}, але шлюб ще не записано.
+Image de la carte (PNG) ¦ Изображение карты (PNG) ¦ Зображення мапи (PNG)
+La courbe mois par mois des fiches, événements, sources et médias ajoutés, d’après le journal des modifications. ¦ Кривая по месяцам добавленных карточек, событий, источников и медиафайлов по журналу изменений. ¦ Крива за місяцями доданих карток, подій, джерел і медіафайлів за журналом змін.
+La vie de ¦ Жизнь ¦ Життя
+Le jour ¦ День ¦ День
+Lendemain › ¦ Следующий день › ¦ Наступний день ›
+Les questionnaires n’ont pas pu être lus. ¦ Не удалось прочитать анкеты. ¦ Не вдалося прочитати анкети.
+Lettre supprimée. ¦ Письмо удалено. ¦ Лист видалено.
+L’import des réponses n’est pas encore prêt. ¦ Импорт ответов ещё не готов. ¦ Імпорт відповідей ще не готовий.
+L’impression n’est pas encore prête : réessaie dans un instant. ¦ Печать ещё не готова: попробуй через мгновение. ¦ Друк ще не готовий: спробуй за мить.
+Mes questionnaires ¦ Мои анкеты ¦ Мої анкети
+Mettre dans une autre page du tableau de bord… ¦ Поместить на другую страницу панели управления… ¦ Перемістити на іншу сторінку панелі керування…
+Mettre en favori ¦ Добавить в избранное ¦ Додати до обраного
+Ni naissance ni baptême sur sa fiche. ¦ В карточке нет ни рождения, ни крещения. ¦ У картці немає ні народження, ні хрещення.
+Objectif ¦ Цель ¦ Мета
+Objectif ajouté. ¦ Цель добавлена. ¦ Мету додано.
+Objectif en pause. ¦ Цель приостановлена. ¦ Мету призупинено.
+Objectif repris. ¦ Цель возобновлена. ¦ Мету відновлено.
+Objectif supprimé. ¦ Цель удалена. ¦ Мету видалено.
+PDF (bilan imprimable) ¦ PDF (итоги для печати) ¦ PDF (підсумок для друку)
+Page enregistrée. ¦ Страница сохранена. ¦ Сторінку збережено.
+Page filtrée : {what}. ¦ Страница отфильтрована: {what}. ¦ Сторінку відфільтровано: {what}.
+Page web (.html) ¦ Веб-страница (.html) ¦ Вебсторінка (.html)
+Page « {name} » supprimée, avec {widgets}. ¦ Страница « {name} » удалена вместе с {widgets}. ¦ Сторінку « {name} » видалено разом із {widgets}.
+Page « {name} » supprimée. ¦ Страница « {name} » удалена. ¦ Сторінку « {name} » видалено.
+Pas assez d’éléments pour un diaporama. ¦ Недостаточно элементов для слайд-шоу. ¦ Недостатньо елементів для слайд-шоу.
+Pas encore de mariage noté pour ce couple. ¦ Для этой пары брак ещё не записан. ¦ Для цієї пари шлюб ще не записано.
+Passeport supprimé. ¦ Паспорт удалён. ¦ Паспорт видалено.
+Passer › ¦ Пропустить › ¦ Пропустити ›
+Pour qui (le proche qui répond) ¦ Для кого (родственник, который отвечает) ¦ Для кого (родич, який відповідає)
+Prépare-en un ci-dessus : il part en un seul fichier, les réponses reviennent dans les fiches. ¦ Подготовь её выше: она уходит одним файлом, ответы возвращаются в карточки. ¦ Підготуй її вище: вона йде одним файлом, відповіді повертаються в картки.
+Quelle page ? ¦ Какая страница? ¦ Яка сторінка?
+Questionnaire aux anciens ¦ Анкета для старших ¦ Анкета для старших
+Questionnaire noté comme envoyé. ¦ Анкета отмечена как отправленная. ¦ Анкету позначено як надіслану.
+Retirer des favoris ¦ Убрать из избранного ¦ Прибрати з обраного
+Rien de noté ce jour-là dans la famille ¦ В этот день в семье ничего не записано ¦ Цього дня в родині нічого не записано
+Rien d’urgent : tout ce que je sais vérifier est rempli. ¦ Ничего срочного: всё, что я умею проверять, заполнено. ¦ Нічого термінового: усе, що я вмію перевіряти, заповнено.
+Secondes par image ¦ Секунд на изображение ¦ Секунд на зображення
+Succession ¦ Наследство ¦ Спадщина
+Sur combien de mois ? ¦ За сколько месяцев? ¦ За скільки місяців?
+Sur quel ancêtre ? ¦ О каком предке? ¦ Про якого предка?
+Sur quoi ? ¦ О чём? ¦ Про що?
+Tableau des chiffres (.csv) ¦ Таблица цифр (.csv) ¦ Таблиця цифр (.csv)
+Tableau enregistré. ¦ Таблица сохранена. ¦ Таблицю збережено.
+Tante Lucie ¦ Тётя Люси ¦ Тітка Люсі
+Te souviens-tu de sa maison ? ¦ Ты помнишь её дом? ¦ Ти пам’ятаєш її дім?
+Tes souvenirs de famille ¦ Твои семейные воспоминания ¦ Твої родинні спогади
+Tous les widgets de la page ne montrent que les fiches choisies (les chiffres clés aussi). ¦ Все виджеты страницы показывают только выбранные карточки (ключевые цифры тоже). ¦ Усі віджети сторінки показують лише вибрані картки (ключові цифри теж).
+Tulle ¦ Тюль ¦ Тюль
+Un bilan imprimable de la page (A4, ⤓ PDF) ¦ Итоги страницы для печати (A4, ⤓ PDF) ¦ Підсумок сторінки для друку (A4, ⤓ PDF)
+Un chronomètre de séance : démarre-le quand tu cherches, le temps est rangé par jour et par sujet (une branche, une enquête). Montre aussi le temps des Successions et de l’Atelier. ¦ Секундомер сеанса: запускай, когда ищешь, время раскладывается по дням и темам (ветвь, расследование). Показывает и время Наследств и Мастерской. ¦ Секундомір сеансу: запускай, коли шукаєш, час розкладається за днями й темами (гілка, розслідування). Показує також час Спадщин і Майстерні.
+Un nombre plus grand que zéro. ¦ Число больше нуля. ¦ Число більше за нуль.
+Un seul fichier à envoyer par e-mail ; il le remplit chez lui et te renvoie ses réponses. ¦ Один файл для отправки по e-mail; он заполняет его дома и присылает тебе ответы. ¦ Один файл для надсилання e-mail; він заповнює його вдома й надсилає тобі відповіді.
+Une personne, et le diaporama est prêt : son portrait, chaque étape avec sa date et son lieu, ses photos, la carte de sa vie, une musique douce. ¦ Один человек — и слайд-шоу готово: портрет, каждый этап с датой и местом, фото, карта жизни, тихая музыка. ¦ Одна особа — і слайд-шоу готове: портрет, кожен етап з датою і місцем, фото, мапа життя, тиха музика.
+Une seule chose concrète à faire, remplie dans le widget : la date de mariage d’un couple, la naissance d’un ancêtre… puis ✓. ¦ Одно конкретное дело, заполняется прямо в виджете: дата брака пары, рождение предка… затем ✓. ¦ Одна конкретна справа, заповнюється просто у віджеті: дата шлюбу пари, народження предка… потім ✓.
+Une vie en diaporama ¦ Жизнь в слайд-шоу ¦ Життя у слайд-шоу
+Widget ¦ Виджет ¦ Віджет
+Widget copié vers « {name} ». ¦ Виджет скопирован в « {name} ». ¦ Віджет скопійовано до « {name} ».
+Widget dupliqué. ¦ Виджет продублирован. ¦ Віджет продубльовано.
+Widget « {name} » supprimé. ¦ Виджет « {name} » удалён. ¦ Віджет « {name} » видалено.
+actes transcrits ¦ расшифрованных записей ¦ транскрибованих записів
+ajoutés sur {n} mois ¦ добавлено за {n} мес. ¦ додано за {n} міс.
+ancêtres Sosa ¦ предков Соса ¦ предків Соса
+ce mois-ci : +{p} fiches, +{e} événements ¦ в этом месяце: +{p} карточек, +{e} событий ¦ цього місяця: +{p} карток, +{e} подій
+ce qui est ajouté chaque mois ¦ что добавляется каждый месяц ¦ що додається щомісяця
+date dépassée ¦ срок прошёл ¦ термін минув
+d’ici le {date} ¦ к {date} ¦ до {date}
+générations complètes ¦ полных поколений ¦ повних поколінь
+le total, mois après mois ¦ итог, месяц за месяцем ¦ підсумок, місяць за місяцем
+sources ¦ источники ¦ джерела
+trésor ¦ сокровище ¦ скарб
+{n} images : {e} étapes, {ph} photos{map}. ¦ Изображений: {n} — этапов: {e}, фото: {ph}{map}. ¦ Зображень: {n} — етапів: {e}, фото: {ph}{map}.
+{n} questions ¦ Вопросов: {n} ¦ Питань: {n}
+{n} réponses ¦ Ответов: {n} ¦ Відповідей: {n}
+{t} aujourd’hui ¦ {t} сегодня ¦ {t} сьогодні
+{v} sur {t} {what} ¦ {v} из {t} {what} ¦ {v} із {t} {what}
+{what} : {who} ¦ {what}: {who} ¦ {what}: {who}
+{who} a été baptisé ¦ {who} крещён ¦ {who} охрещений
+{who} a été baptisée ¦ {who} крещена ¦ {who} охрещена
+{who} a été inhumé ¦ {who} погребён ¦ {who} похований
+{who} a été inhumée ¦ {who} погребена ¦ {who} похована
+{who} est mort ¦ {who} умер ¦ {who} помер
+{who} est morte ¦ {who} умерла ¦ {who} померла
+{who} est né ¦ {who} родился ¦ {who} народився
+{who} est née ¦ {who} родилась ¦ {who} народилася
+{who} se sont mariés ¦ {who} поженились ¦ {who} одружилися
+« {title} » caché (⚙️ Réglages pour le remontrer). ¦ « {title} » скрыт (⚙️ Настройки, чтобы показать снова). ¦ « {title} » сховано (⚙️ Налаштування, щоб показати знову).
+« {title} » retiré des favoris. ¦ « {title} » убран из избранного. ¦ « {title} » прибрано з обраного.
+« {title} » supprimé. ¦ « {title} » удалён. ¦ « {title} » видалено.
+À ouvrir ou envoyer tel quel ¦ Открыть или отправить как есть ¦ Відкрити або надіслати як є
+Écris la date (même approximative). ¦ Напиши дату (даже приблизительную). ¦ Напиши дату (навіть приблизну).
+Écris le nom du proche. ¦ Напиши имя родственника. ¦ Напиши ім’я родича.
+à {n} ans ¦ в {n} лет ¦ у {n} років
+‹ Veille ¦ ‹ Накануне ¦ ‹ Напередодні
+↕ Réordonner les widgets ¦ ↕ Переупорядочить виджеты ¦ ↕ Змінити порядок віджетів
+⏱ C’est parti : « {s} ». ¦ ⏱ Поехали: « {s} ». ¦ ⏱ Почали: « {s} ».
+⏱ Temps de recherche ¦ ⏱ Время поиска ¦ ⏱ Час пошуку
+⏱ {t} rangées dans « {s} ». ¦ ⏱ {t} записано в « {s} ». ¦ ⏱ {t} записано в « {s} ».
+▶ Démarrer ¦ ▶ Запустить ¦ ▶ Запустити
+✉ Envoyé ¦ ✉ Отправлено ¦ ✉ Надіслано
+✓ Mariage ajouté. ¦ ✓ Брак добавлен. ¦ ✓ Шлюб додано.
+✓ Naissance ajoutée. ¦ ✓ Рождение добавлено. ¦ ✓ Народження додано.
+✕ Tout montrer ¦ ✕ Показать всё ¦ ✕ Показати все
+⭐ Favoris ¦ ⭐ Избранное ¦ ⭐ Обране
+⭐ « {title} » dans les favoris. ¦ ⭐ « {title} » в избранном. ¦ ⭐ « {title} » в обраному.
+＋ Ajouter un widget ¦ ＋ Добавить виджет ¦ ＋ Додати віджет
+＋ Objectif ¦ ＋ Цель ¦ ＋ Мета
+🎞 Lancer le diaporama ¦ 🎞 Запустить слайд-шоу ¦ 🎞 Запустити слайд-шоу
+🎯 Mes objectifs ¦ 🎯 Мои цели ¦ 🎯 Мої цілі
+📈 Croissance de la base ¦ 📈 Рост базы ¦ 📈 Зростання бази
+📌 « {block} » de {name} mis dans le tableau de bord, page « {page} ». ¦ 📌 « {block} » ({name}) помещён на панель управления, страница « {page} ». ¦ 📌 « {block} » ({name}) розміщено на панелі керування, сторінка « {page} ».
+📚 Atelier ¦ 📚 Мастерская ¦ 📚 Майстерня
+📮 Préparer et télécharger ¦ 📮 Подготовить и скачать ¦ 📮 Підготувати й завантажити
+🔎 Filtrer cette page ¦ 🔎 Фильтровать эту страницу ¦ 🔎 Фільтрувати цю сторінку
+🔎 Filtrer cette page… ¦ 🔎 Фильтровать эту страницу… ¦ 🔎 Фільтрувати цю сторінку…
+🕘 Récents ¦ 🕘 Недавние ¦ 🕘 Нещодавні
+🧭 Prochaine action ¦ 🧭 Следующее действие ¦ 🧭 Наступна дія
+(inconnus : {list}) ¦ (неизвестные: {list}) ¦ (невідомі: {list})
+AVANCEMENT ¦ ХОД РАБОТЫ ¦ ПОСТУП
+Acte de naissance ou de baptême ¦ Запись о рождении или крещении ¦ Запис про народження або хрещення
+Affichage des pistes ¦ Показ зацепок ¦ Показ зачіпок
+Ajouter en note sur la fiche ¦ Добавить заметкой в карточку ¦ Додати нотаткою в картку
+Années parcourues ¦ Просмотренные годы ¦ Переглянуті роки
+Années parcourues : de ¦ Просмотренные годы: с ¦ Переглянуті роки: з
+Argument de preuve ¦ Доказательное рассуждение ¦ Доказове міркування
+Arrêter le chronomètre ¦ Остановить секундомер ¦ Зупинити секундомір
+Aucun groupe. ¦ Нет групп. ¦ Немає груп.
+Aucun test. ¦ Нет тестов. ¦ Немає тестів.
+Aucune piste dans cette enquête. ¦ В этом расследовании нет зацепок. ¦ У цьому розслідуванні немає зачіпок.
+Aucune piste. ¦ Нет зацепок. ¦ Немає зачіпок.
+Battue « {title} » supprimée ¦ Облава « {title} » удалена ¦ Облаву « {title} » видалено
+CONCLUSION ¦ ЗАКЛЮЧЕНИЕ ¦ ВИСНОВОК
+Ce que l’enquête a établi ¦ Что установило расследование ¦ Що встановило розслідування
+Ce qui est reconstitué ¦ Что восстановлено ¦ Що відновлено
+Chargement de la battue… ¦ Загрузка облавы… ¦ Завантаження облави…
+Chargement de l’enquête… ¦ Загрузка расследования… ¦ Завантаження розслідування…
+Chargement des battues… ¦ Загрузка облав… ¦ Завантаження облав…
+Chargement des enquêtes… ¦ Загрузка расследований… ¦ Завантаження розслідувань…
+Chercher dans cette page… ¦ Искать на этой странице… ¦ Шукати на цій сторінці…
+Chercher une rubrique… ¦ Искать раздел… ¦ Шукати розділ…
+Choisis la personne cherchée. ¦ Выбери разыскиваемого человека. ¦ Вибери особу, яку шукаєш.
+Chronologie des pistes ¦ Хронология зацепок ¦ Хронологія зачіпок
+Clic sur un morceau : changer son grand-parent ou le retirer. ¦ Нажми на фрагмент: сменить его деда/бабушку или убрать его. ¦ Натисни на фрагмент: змінити його діда/бабусю або прибрати його.
+Coller des correspondances partagées ¦ Вставить общие совпадения ¦ Вставити спільні збіги
+Commune de départ ¦ Исходная коммуна ¦ Вихідна громада
+Communes terminées ¦ Завершённые коммуны ¦ Завершені громади
+Comprendre et régler ¦ Понять и настроить ¦ Зрозуміти й налаштувати
+Conclue le {d} ¦ Завершено {d} ¦ Завершено {d}
+Conclure l’enquête ¦ Завершить расследование ¦ Завершити розслідування
+Conclusion : {title} ¦ Заключение: {title} ¦ Висновок: {title}
+Conclusion ajoutée sur la fiche de {name} ¦ Заключение добавлено в карточку {name} ¦ Висновок додано до картки {name}
+Conclusion enregistrée ¦ Заключение сохранено ¦ Висновок збережено
+Contrat de mariage chez le notaire ¦ Брачный договор у нотариуса ¦ Шлюбний договір у нотаріуса
+Correspondance supprimée ¦ Совпадение удалено ¦ Збіг видалено
+Correspondance « {name} » supprimée ¦ Совпадение « {name} » удалено ¦ Збіг « {name} » видалено
+Correspondances ADN ¦ Совпадения ДНК ¦ Збіги ДНК
+Correspondances introuvables. ¦ Совпадения не найдены. ¦ Збіги не знайдено.
+Correspondances montrées ¦ Показанные совпадения ¦ Показані збіги
+Correspondances partagées ¦ Общие совпадения ¦ Спільні збіги
+Corrigé pour l’endogamie ¦ С поправкой на эндогамию ¦ З поправкою на ендогамію
+Couleurs de la carte ¦ Цвета карты ¦ Кольори мапи
+Crée un phasage, puis ajoute les frères et sœurs testés. ¦ Создай фазирование, затем добавь протестированных братьев и сестёр. ¦ Створи фазування, потім додай протестованих братів і сестер.
+Créer l’enquête ¦ Создать расследование ¦ Створити розслідування
+Créée le ¦ Создано ¦ Створено
+Dans quelle unité {name} a-t-il servi, où, et que lui est-il arrivé ? ¦ В какой части служил {name}, где и что с ним случилось? ¦ У якій частині служив {name}, де і що з ним сталося?
+Date de relance invalide. ¦ Неверная дата напоминания. ¦ Неправильна дата нагадування.
+Depuis un modèle… ¦ Из шаблона… ¦ З шаблону…
+Donne au moins la cote ou le fonds parcouru. ¦ Укажи хотя бы шифр или просмотренный фонд. ¦ Вкажи хоча б шифр або переглянутий фонд.
+Donner à : {gp} ¦ Отдать: {gp} ¦ Віддати: {gp}
+Dossier de recherche sur ¦ Исследовательское досье о ¦ Дослідницьке досьє про
+Dossier « {name} » supprimé ¦ Досье « {name} » удалено ¦ Досьє « {name} » видалено
+Dupliquer l’enquête ¦ Дублировать расследование ¦ Дублювати розслідування
+Déjà parcouru : ¦ Уже просмотрено: ¦ Уже переглянуто:
+D’après l’enquête « {title} ». ¦ По расследованию « {title} ». ¦ За розслідуванням « {title} ».
+ENQUÊTE ¦ РАССЛЕДОВАНИЕ ¦ РОЗСЛІДУВАННЯ
+En cours : a répondu ¦ В процессе: ответил ¦ Триває: відповів
+En cours : arbre échangé ¦ В процессе: деревьями обменялись ¦ Триває: деревами обмінялися
+En cours : contacté ¦ В процессе: связались ¦ Триває: зв’язалися
+En pause : pas de réponse ¦ На паузе: нет ответа ¦ На паузі: немає відповіді
+Enquête dupliquée ¦ Расследование продублировано ¦ Розслідування продубльовано
+Enquête supprimée ¦ Расследование удалено ¦ Розслідування видалено
+Enquête sur {name} ¦ Расследование о {name} ¦ Розслідування про {name}
+Enquête vide ¦ Пустое расследование ¦ Порожнє розслідування
+Enquête « {title} » créée ¦ Расследование « {title} » создано ¦ Розслідування « {title} » створено
+Enquête « {title} » supprimée ¦ Расследование « {title} » удалено ¦ Розслідування « {title} » видалено
+Enregistrer la conclusion ¦ Сохранить заключение ¦ Зберегти висновок
+Ex. AD de la Corrèze, registres paroissiaux de Naves ¦ Напр. архив департамента Коррез, приходские книги Нава ¦ Напр. архів департаменту Коррез, парафіяльні книги Нава
+Ex. Jean DURAND est le fils de Pierre DURAND et de Marie LACOMBE. ¦ Напр. Жан ДЮРАН — сын Пьера ДЮРАНА и Мари ЛАКОМБ. ¦ Напр. Жан ДЮРАН — син П’єра ДЮРАНА і Марі ЛАКОМБ.
+Exploré avec doute ¦ Изучено с сомнением ¦ Досліджено із сумнівом
+Exporter le rapport… ¦ Экспортировать отчёт… ¦ Експортувати звіт…
+Exporter ses segments pour DNA Painter ¦ Экспортировать его сегменты для DNA Painter ¦ Експортувати його сегменти для DNA Painter
+Fonds ou archives ¦ Фонд или архив ¦ Фонд або архів
+Force de l’endogamie ¦ Степень эндогамии ¦ Ступінь ендогамії
+Frères et sœurs testés ¦ Протестированные братья и сёстры ¦ Протестовані брати й сестри
+Glisse une piste ici ¦ Перетащи зацепку сюда ¦ Перетягни зачіпку сюди
+Groupe « {name} » supprimé ¦ Группа « {name} » удалена ¦ Групу « {name} » видалено
+Il en faut au moins trois pour un phasage fiable. ¦ Для надёжного фазирования нужно не меньше трёх. ¦ Для надійного фазування потрібно щонайменше троє.
+Impasse ¦ Тупик ¦ Глухий кут
+Imprimer le rapport ¦ Напечатать отчёт ¦ Надрукувати звіт
+La fin doit être après le début. ¦ Конец должен быть после начала. ¦ Кінець має бути після початку.
+Lancer le chronomètre : le temps passé sur cette enquête ¦ Запустить секундомер: время, потраченное на это расследование ¦ Запустити секундомір: час, витрачений на це розслідування
+Le départ de {name} ¦ Отъезд {name} ¦ Від’їзд {name}
+Le parcours militaire de {name} ¦ Военный путь {name} ¦ Військовий шлях {name}
+Les parents de {name} ¦ Родители {name} ¦ Батьки {name}
+Lignées et origines ¦ Линии и происхождение ¦ Лінії та походження
+Livret militaire, lettres, photos de famille ¦ Военный билет, письма, семейные фото ¦ Військовий квиток, листи, родинні фото
+L’enquête de ce dossier n’existe plus. ¦ Расследования этого досье больше нет. ¦ Розслідування цього досьє більше немає.
+L’enquête de cette recherche n’existe plus. ¦ Расследования этого поиска больше нет. ¦ Розслідування цього пошуку більше немає.
+L’enquête est terminée. Mettre la conclusion sur la fiche de {name} ? ¦ Расследование завершено. Поместить заключение в карточку {name}? ¦ Розслідування завершено. Помістити висновок у картку {name}?
+Mes données ¦ Мои данные ¦ Мої дані
+Mettre dans « {col} » ¦ Поместить в « {col} » ¦ Помістити в « {col} »
+Mettre l’enquête dans « Terminées » ¦ Поместить расследование в « Завершённые » ¦ Помістити розслідування в « Завершені »
+Modifier la recherche sans résultat ¦ Изменить поиск без результата ¦ Змінити пошук без результату
+Morceau attribué ¦ Фрагмент назначен ¦ Фрагмент призначено
+Morceau changé ¦ Фрагмент изменён ¦ Фрагмент змінено
+Morceau retiré ¦ Фрагмент убран ¦ Фрагмент прибрано
+Média retiré de la piste ¦ Медиафайл убран из зацепки ¦ Медіафайл прибрано із зачіпки
+Média retiré de l’enquête ¦ Медиафайл убран из расследования ¦ Медіафайл прибрано з розслідування
+Mémoire des hommes : morts pour la France, journaux des unités ¦ Mémoire des hommes: погибшие за Францию, журналы частей ¦ Mémoire des hommes: загиблі за Францію, журнали частин
+MémorialGenWeb : monuments aux morts ¦ MémorialGenWeb: памятники погибшим ¦ MémorialGenWeb: пам’ятники загиблим
+Naturalisation dans le pays d’arrivée ¦ Натурализация в стране прибытия ¦ Натуралізація в країні прибуття
+Note ici chaque registre parcouru sans rien trouver : l’app te prévient avant de le refaire. ¦ Записывай сюда каждый просмотренный без результата реестр: приложение предупредит, прежде чем ты повторишь. ¦ Записуй сюди кожен переглянутий без результату реєстр: застосунок попередить, перш ніж ти повториш.
+Nouveau phasage ¦ Новое фазирование ¦ Нове фазування
+Nouvelle enquête depuis un modèle ¦ Новое расследование из шаблона ¦ Нове розслідування з шаблону
+Nouvelle enquête depuis un modèle… ¦ Новое расследование из шаблона… ¦ Нове розслідування з шаблону…
+Parcouru le ¦ Просмотрено ¦ Переглянуто
+Partagé entre frères et sœurs ¦ Общее у братьев и сестёр ¦ Спільне для братів і сестер
+Partagées ¦ Общие ¦ Спільні
+Pas de relance ¦ Без напоминания ¦ Без нагадування
+Pas encore de conclusion : quand tu as la réponse, écris-la avec l’argument qui la prouve et les sources retenues. ¦ Заключения пока нет: когда будет ответ, запиши его с доказывающим рассуждением и выбранными источниками. ¦ Висновку поки немає: коли буде відповідь, запиши її з доказовим міркуванням і вибраними джерелами.
+Pas encore de conclusion. ¦ Заключения пока нет. ¦ Висновку поки немає.
+Personne cherchée ¦ Разыскиваемый человек ¦ Особа, яку шукають
+Phasage ¦ Фазирование ¦ Фазування
+Phasage introuvable. ¦ Фазирование не найдено. ¦ Фазування не знайдено.
+Phasage visuel ¦ Визуальное фазирование ¦ Візуальне фазування
+Phasage « {name} » supprimé ¦ Фазирование « {name} » удалено ¦ Фазування « {name} » видалено
+Piste « {title} » : {col} ¦ Зацепка « {title} »: {col} ¦ Зачіпка « {title} »: {col}
+Plus de relance pour « {name} » ¦ Больше не напоминать о « {name} » ¦ Більше не нагадувати про « {name} »
+Point de recombinaison ajouté ¦ Точка рекомбинации добавлена ¦ Точку рекомбінації додано
+Presse locale et courriers de la famille restée au pays ¦ Местная пресса и письма семьи, оставшейся на родине ¦ Місцева преса й листи родини, що лишилася на батьківщині
+Quand et par où {name} est-il parti, et où s’est-il installé ? ¦ Когда и каким путём {name} уехал и где обосновался? ¦ Коли і яким шляхом {name} поїхав і де оселився?
+Question, chronologie des pistes, pièces, conclusion : à envoyer à un cousin ou à une association. ¦ Вопрос, хронология зацепок, документы, заключение: чтобы отправить кузену или в общество. ¦ Питання, хронологія зачіпок, документи, висновок: щоб надіслати кузенові або товариству.
+Qui sont le père et la mère de {name} ? Où et quand se sont-ils mariés ? ¦ Кто отец и мать {name}? Где и когда они поженились? ¦ Хто батько й мати {name}? Де і коли вони одружилися?
+RIEN TROUVÉ ¦ НИЧЕГО НЕ НАЙДЕНО ¦ НІЧОГО НЕ ЗНАЙДЕНО
+Rapport : {t} ¦ Отчёт: {t} ¦ Звіт: {t}
+Rapport fait le {d} ¦ Отчёт составлен {d} ¦ Звіт складено {d}
+Recensements : le foyer et ses voisins ¦ Переписи: семья и её соседи ¦ Переписи: родина та її сусіди
+Recensements du pays d’arrivée ¦ Переписи страны прибытия ¦ Переписи країни прибуття
+Recherche commune par commune : les registres parcourus, ville par ville. ¦ Поиск по коммунам: просмотренные реестры, город за городом. ¦ Пошук за громадами: переглянуті реєстри, місто за містом.
+Recherche introuvable. ¦ Поиск не найден. ¦ Пошук не знайдено.
+Recherche sans résultat ¦ Поиск без результата ¦ Пошук без результату
+Recherche sans résultat notée. ¦ Поиск без результата записан. ¦ Пошук без результату записано.
+Recherche sans résultat supprimée ¦ Поиск без результата удалён ¦ Пошук без результату видалено
+Recherches sans résultat ¦ Поиски без результата ¦ Пошуки без результату
+Registres des consulats ¦ Реестры консульств ¦ Реєстри консульств
+Registres parcourus ¦ Просмотренные реестры ¦ Переглянуті реєстри
+Regrouper et placer ¦ Сгруппировать и разместить ¦ Згрупувати й розмістити
+Relance de « {name} » le {d} ¦ Напоминание о « {name} » {d} ¦ Нагадування про « {name} » {d}
+Relancer dans {n} jours ¦ Напомнить через {n} дн. ¦ Нагадати через {n} дн.
+Relancer {name} (ADN) ¦ Напомнить {name} (ДНК) ¦ Нагадати {name} (ДНК)
+Remettre le temps à zéro ¦ Обнулить время ¦ Обнулити час
+Retirer ce morceau ¦ Убрать этот фрагмент ¦ Прибрати цей фрагмент
+Retrouver un soldat ¦ Найти солдата ¦ Знайти солдата
+Rien de prérempli ¦ Ничего не заполнено заранее ¦ Нічого не заповнено заздалегідь
+Rien à relancer : sur une correspondance « Contactée », « 🔔 Relancer dans 30 jours ». ¦ Напоминать не о чем: у совпадения « Связались » — « 🔔 Напомнить через 30 дней ». ¦ Нагадувати нема про що: у збігу « Зв’язалися » — « 🔔 Нагадати через 30 днів ».
+Rubriques de l’ADN ¦ Разделы ДНК ¦ Розділи ДНК
+Segment supprimé ¦ Сегмент удалён ¦ Сегмент видалено
+Sources retenues ¦ Выбранные источники ¦ Вибрані джерела
+Sépultures de guerre et nécropoles ¦ Военные захоронения и некрополи ¦ Військові поховання та некрополі
+Tables décennales autour de la naissance ¦ Десятилетние указатели вокруг рождения ¦ Десятирічні покажчики навколо народження
+Temps remis à zéro ¦ Время обнулено ¦ Час обнулено
+Terminé : placé dans l’arbre ✓ ¦ Готово: помещён в дерево ✓ ¦ Готово: розміщено в дереві ✓
+Test « {name} » supprimé ¦ Тест « {name} » удалён ¦ Тест « {name} » видалено
+Tests entièrement endogames ¦ Полностью эндогамные тесты ¦ Повністю ендогамні тести
+Trouver les parents de… ¦ Найти родителей… ¦ Знайти батьків…
+Un point de recombinaison à la position « De » ¦ Точка рекомбинации в позиции « С » ¦ Точка рекомбінації в позиції « З »
+Une question à résoudre : ses pistes, ses pièces, sa conclusion. ¦ Вопрос, который надо решить: его зацепки, документы, заключение. ¦ Питання, яке треба розв’язати: його зачіпки, документи, висновок.
+Voir ses correspondances ¦ Посмотреть его совпадения ¦ Переглянути його збіги
+années non notées ¦ годы не записаны ¦ роки не записано
+aussi : {list} ¦ также: {list} ¦ також: {list}
+la page affichée ¦ показанная страница ¦ показана сторінка
+ouverte le {d} ¦ открыто {d} ¦ відкрито {d}
+paire notée ¦ записанная пара ¦ записана пара
+paires notées ¦ записанных пар ¦ записаних пар
+partagé : {a}–{b} Mb, {cm} cM ¦ общее: {a}–{b} Мб, {cm} сМ ¦ спільне: {a}–{b} Мб, {cm} сМ
+un fichier .html à envoyer ¦ файл .html для отправки ¦ файл .html для надсилання
+{cote} ({years}) le {d}, enquête « {title} » ¦ {cote} ({years}) {d}, расследование « {title} » ¦ {cote} ({years}) {d}, розслідування « {title} »
+{m} min ¦ {m} мин ¦ {m} хв
+{n} ajoutées ¦ добавлено: {n} ¦ додано: {n}
+{n} commencées ¦ начато: {n} ¦ розпочато: {n}
+{n} correspondances supprimées ¦ Удалено совпадений: {n} ¦ Видалено збігів: {n}
+{n} entre {lo} et {hi} cM ; {pairs} ¦ {n} между {lo} и {hi} сМ; {pairs} ¦ {n} між {lo} і {hi} сМ; {pairs}
+{n} pistes préparées ¦ Подготовлено зацепок: {n} ¦ Підготовлено зачіпок: {n}
+{n} sur {all} ¦ {n} из {all} ¦ {n} із {all}
+{n}/{all} ({pct} %) ¦ {n}/{all} ({pct} %) ¦ {n}/{all} ({pct} %)
+{n}/{all} registres parcourus ¦ {n}/{all} реестров просмотрено ¦ {n}/{all} реєстрів переглянуто
+{raw} cM comptés comme {cm} cM ¦ {raw} сМ считаются как {cm} сМ ¦ {raw} сМ рахуються як {cm} сМ
+« Enregistrer en PDF » dans la fenêtre d’impression ¦ « Сохранить как PDF » в окне печати ¦ « Зберегти як PDF » у вікні друку
+« Trouver les parents de… », « Retrouver un soldat », « Émigré » : questions et pistes préparées ¦ « Найти родителей… », « Найти солдата », « Эмигрант »: готовые вопросы и зацепки ¦ « Знайти батьків… », « Знайти солдата », « Емігрант »: готові питання й зачіпки
+« {a} » et « {b} » ne se correspondent plus ¦ « {a} » и « {b} » больше не совпадают ¦ « {a} » і « {b} » більше не збігаються
+« {a} » et « {b} » se correspondent ¦ « {a} » и « {b} » совпадают ¦ « {a} » і « {b} » збігаються
+« {name} » a répondu ¦ « {name} » ответил ¦ « {name} » відповів
+À explorer → En cours → Explorée → Impasse : glisse les pistes d’une colonne à l’autre ¦ Изучить → В процессе → Изучена → Тупик: перетаскивай зацепки из столбца в столбец ¦ Дослідити → Триває → Досліджена → Глухий кут: перетягуй зачіпки зі стовпця в стовпець
+À faire : contacter ¦ Сделать: связаться ¦ Зробити: зв’язатися
+Écris la conclusion. ¦ Напиши заключение. ¦ Напиши висновок.
+Émigré : retrouver le départ et l’arrivée ¦ Эмигрант: найти отъезд и прибытие ¦ Емігрант: знайти від’їзд і прибуття
+État de la commune ¦ Состояние коммуны ¦ Стан громади
+Événement retiré de la piste ¦ Событие убрано из зацепки ¦ Подію прибрано із зачіпки
+à relancer depuis le {d} ¦ напомнить с {d} ¦ нагадати з {d}
+⏱ Chronomètre lancé. ¦ ⏱ Секундомер запущен. ¦ ⏱ Секундомір запущено.
+⏱ Temps gardé : {t}. ¦ ⏱ Время сохранено: {t}. ¦ ⏱ Час збережено: {t}.
+✂ Point de recombinaison ¦ ✂ Точка рекомбинации ¦ ✂ Точка рекомбінації
+✅ Conclue ¦ ✅ Завершено ¦ ✅ Завершено
+✅ Conclure l’enquête ¦ ✅ Завершить расследование ¦ ✅ Завершити розслідування
+✎ Modifier la conclusion ¦ ✎ Изменить заключение ¦ ✎ Змінити висновок
+✓ A répondu ¦ ✓ Ответил ¦ ✓ Відповів
+⤒ Coller une liste ¦ ⤒ Вставить список ¦ ⤒ Вставити список
+＋ Attribuer ¦ ＋ Назначить ¦ ＋ Призначити
+＋ Frère ou sœur ¦ ＋ Брат или сестра ¦ ＋ Брат або сестра
+＋ Nouveau phasage ¦ ＋ Новое фазирование ¦ ＋ Нове фазування
+＋ Recherche sans résultat ¦ ＋ Поиск без результата ¦ ＋ Пошук без результату
+🌐 Page web ¦ 🌐 Веб-страница ¦ 🌐 Вебсторінка
+💾 Fichier ¦ 💾 Файл ¦ 💾 Файл
+📈 Branche endogame (cM × {f}) ¦ 📈 Эндогамная ветвь (сМ × {f}) ¦ 📈 Ендогамна гілка (сМ × {f})
+📈 Branche endogame : {raw} cM comptés comme {cm} cM. ¦ 📈 Эндогамная ветвь: {raw} сМ считаются как {cm} сМ. ¦ 📈 Ендогамна гілка: {raw} сМ рахуються як {cm} сМ.
+📈 Endogamie ¦ 📈 Эндогамия ¦ 📈 Ендогамія
+📊 Tableur ¦ 📊 Электронная таблица ¦ 📊 Електронна таблиця
+🔔 Relancer le ¦ 🔔 Напомнить ¦ 🔔 Нагадати
+🔔 « Relancer dans… » propose ¦ 🔔 « Напомнить через… » предлагает ¦ 🔔 « Нагадати через… » пропонує
+🔔 À relancer ¦ 🔔 Напомнить ¦ 🔔 Нагадати
+🗂 Ranger en groupes… ¦ 🗂 Разложить по группам… ¦ 🗂 Розкласти за групами…
+🗑 Supprimer ce phasage ¦ 🗑 Удалить это фазирование ¦ 🗑 Видалити це фазування
+(pourquoi c’est sûr : les sources qui s’accordent, les contradictions levées) ¦ (почему это точно: согласующиеся источники, снятые противоречия) ¦ (чому це точно: джерела, що узгоджуються, зняті суперечності)
+A répondu (plus de relance) ¦ Ответил (больше не напоминать) ¦ Відповів (більше не нагадувати)
+Acte de décès (âge, parents, témoins) ¦ Запись о смерти (возраст, родители, свидетели) ¦ Запис про смерть (вік, батьки, свідки)
+Acte de mariage (il nomme les parents) ¦ Запись о браке (в ней названы родители) ¦ Запис про шлюб (у ньому названо батьків)
+Aucune correspondance dans cette fourchette : importe tes correspondances (👥 Correspondances). ¦ В этом диапазоне нет совпадений: импортируй свои совпадения (👥 Совпадения). ¦ У цьому діапазоні немає збігів: імпортуй свої збіги (👥 Збіги).
+Avec trois frères et sœurs testés (ou plus) : attribue chaque morceau de chromosome à l’un des quatre grands-parents, chromosome par chromosome. Les comparaisons entre frères et sœurs (segments partagés) aident à placer les points de recombinaison. ¦ С тремя протестированными братьями и сёстрами (или больше): назначь каждый фрагмент хромосомы одному из четырёх дедушек и бабушек, хромосома за хромосомой. Сравнения между братьями и сёстрами (общие сегменты) помогают расставить точки рекомбинации. ¦ З трьома протестованими братами й сестрами (або більше): признач кожен фрагмент хромосоми одному з чотирьох дідусів і бабусь, хромосома за хромосомою. Порівняння між братами й сестрами (спільні сегменти) допомагають розставити точки рекомбінації.
+Branches endogames (groupes) ¦ Эндогамные ветви (группы) ¦ Ендогамні гілки (групи)
+CSV (Excel, Numbers, LibreOffice) ¦ CSV (Excel, Numbers, LibreOffice) ¦ CSV (Excel, Numbers, LibreOffice)
+Chercher une battue… (nom, commune, cible) ¦ Искать облаву… (название, коммуна, цель) ¦ Шукати облаву… (назва, громада, ціль)
+Chercher une enquête… (personne, acte, lieu) ¦ Искать расследование… (человек, запись, место) ¦ Шукати розслідування… (особа, запис, місце)
+Dans une branche endogame (village fermé, île, communauté), on partage plus d’ADN qu’attendu : les cM de ces correspondances sont corrigés avant d’estimer la relation. ¦ В эндогамной ветви (замкнутая деревня, остров, община) общей ДНК больше, чем ожидается: сМ этих совпадений корректируются до оценки родства. ¦ В ендогамній гілці (замкнене село, острів, громада) спільної ДНК більше, ніж очікується: сМ цих збігів коригуються до оцінки спорідненості.
+Donne la position (De). ¦ Укажи позицию (С). ¦ Вкажи позицію (З).
+Ex. 3 E 145/2 ¦ Напр. 3 E 145/2 ¦ Напр. 3 E 145/2
+Exporter (CSV) ¦ Экспорт (CSV) ¦ Експорт (CSV)
+Exporter les annotations (CSV) ¦ Экспортировать пометки (CSV) ¦ Експортувати позначки (CSV)
+Fiche matricule (registres matricules des archives départementales) ¦ Учётная карточка (матрикульные реестры архивов департаментов) ¦ Облікова картка (матрикульні реєстри архівів департаментів)
+Forte (île, communauté très fermée) ¦ Сильная (остров, очень замкнутая община) ¦ Сильна (острів, дуже замкнена громада)
+Journal des marches et opérations (JMO) de son régiment ¦ Журнал боевых действий (JMO) его полка ¦ Журнал бойових дій (JMO) його полку
+Listes de passagers (port de départ, port d’arrivée) ¦ Списки пассажиров (порт отправления, порт прибытия) ¦ Списки пасажирів (порт відправлення, порт прибуття)
+Légère (quelques mariages entre cousins) ¦ Слабая (несколько браков между кузенами) ¦ Слабка (кілька шлюбів між кузенами)
+Moyenne (village ou vallée assez fermés) ¦ Средняя (довольно замкнутая деревня или долина) ¦ Середня (досить замкнене село або долина)
+Nom du phasage (ex. « Fratrie DURAND ») ¦ Название фазирования (напр. « Братья и сёстры ДЮРАН ») ¦ Назва фазування (напр. « Брати й сестри ДЮРАН »)
+Passeports et registres de départ (archives départementales, série M) ¦ Паспорта и реестры отъезда (архивы департаментов, серия M) ¦ Паспорти й реєстри від’їзду (архіви департаментів, серія M)
+Phasage visuel (frères et sœurs) ¦ Визуальное фазирование (братья и сёстры) ¦ Візуальне фазування (брати й сестри)
+Reconstitué (tous) ¦ Восстановлено (все) ¦ Відновлено (усі)
+cM corrigés (endogamie) ¦ Скорректированные сМ (эндогамия) ¦ Скориговані сМ (ендогамія)
+la page affichée (« Enregistrer en PDF ») ¦ показанная страница (« Сохранить как PDF ») ¦ показана сторінка (« Зберегти як PDF »)
+pat. ¦ отц. ¦ батьк.
+mat. ¦ матер. ¦ матер.
+à (Mb) ¦ до (Мб) ¦ до (Мб)
+jours ¦ дней ¦ днів
+Toutes les battues ¦ Все облавы ¦ Усі облави
+prioritaire ¦ приоритетно ¦ пріоритетно
+Code ¦ Код ¦ Код
+Fiche de {name} ¦ Карточка {name} ¦ Картка {name}
+tout l’ADN (JSON) ¦ вся ДНК (JSON) ¦ уся ДНК (JSON)
+Aucune paire « Nom A ; Nom B ». ¦ Нет ни одной пары « Имя A ; Имя B ». ¦ Немає жодної пари « Ім’я A ; Ім’я B ».
+Une paire par ligne : « Nom A ; Nom B » (ou une tabulation, une virgule). Les noms tels que sur le site du test. ¦ Одна пара на строку: « Имя A ; Имя B » (или табуляция, запятая). Имена как на сайте теста. ¦ Одна пара на рядок: « Ім’я A ; Ім’я B » (або табуляція, кома). Імена як на сайті тесту.
+Qui correspond avec qui : la base des regroupements (Leeds, grappes). Une case pleine, A et B se correspondent. Clique une case pour l’ajouter ou la retirer ; ou colle la liste « en commun » donnée par la société. ¦ Кто с кем совпадает: основа группировок (Leeds, кластеры). Заполненная клетка — A и B совпадают. Нажми на клетку, чтобы добавить или убрать её; или вставь список « общих » от компании. ¦ Хто з ким збігається: основа групувань (Leeds, кластери). Заповнена клітинка — A і B збігаються. Натисни на клітинку, щоб додати або прибрати її; або встав список « спільних » від компанії.
+rubriques ¦ разделы ¦ розділи
+＋ Correspondances ¦ ＋ Совпадения ¦ ＋ Збіги
+ligne cochée ¦ отмеченная строка ¦ позначений рядок
+lignes cochées ¦ отмеченных строк ¦ позначених рядків
+✕ Décocher ¦ ✕ Снять отметки ¦ ✕ Зняти позначки
+Cocher cette ligne ¦ Отметить эту строку ¦ Позначити цей рядок
+Étiqueter ¦ Пометить ¦ Позначити міткою
+Poser une étiquette sur toutes les lignes cochées ¦ Поставить метку на все отмеченные строки ¦ Поставити мітку на всі позначені рядки
+ÉTIQUETER ¦ ПОМЕТИТЬ ¦ ПОЗНАЧИТИ МІТКОЮ
+Une étiquette pour {n} ¦ Метка для {n} ¦ Мітка для {n}
+Étiquette existante ¦ Существующая метка ¦ Наявна мітка
+— Une nouvelle — ¦ — Новая — ¦ — Нова —
+Ou une nouvelle étiquette ¦ Или новая метка ¦ Або нова мітка
+ex. À vérifier aux archives ¦ напр. Проверить в архиве ¦ напр. Перевірити в архіві
+Étiquette posée sur {n} ¦ Метка поставлена: {n} ¦ Мітку поставлено: {n}
+({n} verrouillées laissées de côté) ¦ (заблокированных пропущено: {n}) ¦ (заблокованих пропущено: {n})
+Ajouter à Mes listes ¦ Добавить в Мои списки ¦ Додати до Мої списки
+Ajouter les fiches cochées à une de « Mes listes » ¦ Добавить отмеченные карточки в один из « Мои списки » ¦ Додати позначені картки до одного з « Мої списки »
+Aucune de « Mes listes » ne contient des personnes : crée-en une dans Listes → Mes listes. ¦ Ни один из « Мои списки » не содержит людей: создай его в Списки → Мои списки. ¦ Жоден із « Мої списки » не містить людей: створи його в Списки → Мої списки.
+MES LISTES ¦ МОИ СПИСКИ ¦ МОЇ СПИСКИ
+Ajouter {n} à une liste ¦ Добавить {n} в список ¦ Додати {n} до списку
+{n} ajoutées à « {list} » ¦ Добавлено в « {list} »: {n} ¦ Додано до « {list} »: {n}
+Plus rien ne pourra changer sur ces fiches tant qu’elles sont verrouillées ¦ Пока эти карточки заблокированы, в них ничего нельзя изменить ¦ Поки ці картки заблоковані, у них нічого не можна змінити
+Ces fiches pourront de nouveau être modifiées ¦ Эти карточки снова можно будет изменять ¦ Ці картки знову можна буде змінювати
+{n} verrouillées ¦ Заблокировано: {n} ¦ Заблоковано: {n}
+{n} déverrouillées ¦ Разблокировано: {n} ¦ Розблоковано: {n}
+Les lignes cochées dans un fichier CSV (tableur) ¦ Отмеченные строки в файле CSV (электронная таблица) ¦ Позначені рядки у файлі CSV (електронна таблиця)
+{n} exportées. ¦ Экспортировано: {n}. ¦ Експортовано: {n}.
+Supprime les fiches cochées ; « ↶ Annuler » les remet ¦ Удаляет отмеченные карточки; « ↶ Отменить » возвращает их ¦ Видаляє позначені картки; « ↶ Відмінити » повертає їх
+Supprime les lignes cochées ; « ↶ Annuler » les remet ¦ Удаляет отмеченные строки; « ↶ Отменить » возвращает их ¦ Видаляє позначені рядки; « ↶ Відмінити » повертає їх
+{n} laissées de côté : {why} ¦ Пропущено: {n} — {why} ¦ Пропущено: {n} — {why}
+{n} supprimées ¦ Удалено: {n} ¦ Видалено: {n}
+{n} supprimés ¦ Удалено: {n} ¦ Видалено: {n}
+Plus d’actions pour « {name} » ¦ Другие действия для « {name} » ¦ Інші дії для « {name} »
+Copie impossible : choisis le texte et copie-le à la main. ¦ Копирование невозможно: выдели текст и скопируй вручную. ¦ Копіювання неможливе: виділи текст і скопіюй вручну.
+Toutes les sources de ta généalogie : où elles sont gardées, combien de fois elles sont citées, sur quelles fiches. Ouvre une source pour son modèle de citation, ses doublons et « Où est-elle citée ? ». ¦ Все источники твоей генеалогии: где они хранятся, сколько раз цитируются, в каких карточках. Открой источник, чтобы увидеть его шаблон цитирования, дубликаты и « Где он цитируется? ». ¦ Усі джерела твоєї генеалогії: де вони зберігаються, скільки разів цитуються, у яких картках. Відкрий джерело, щоб побачити його шаблон цитування, дублікати й « Де воно цитується? ».
+＋ Nouvelle source ¦ ＋ Новый источник ¦ ＋ Нове джерело
+Chercher une source… (titre, auteur, dépôt, cote) ¦ Искать источник… (название, автор, хранилище, шифр) ¦ Шукати джерело… (назва, автор, сховище, шифр)
+Doublons possibles ({n}) ¦ Возможные дубликаты ({n}) ¦ Можливі дублікати ({n})
+Doublons possibles ¦ Возможные дубликаты ¦ Можливі дублікати
+Jamais citées ({n}) ¦ Ни разу не цитировались ({n}) ¦ Жодного разу не цитувалися ({n})
+Jamais citées ¦ Ни разу не цитировались ¦ Жодного разу не цитувалися
+Sans modèle de citation ¦ Без шаблона цитирования ¦ Без шаблону цитування
+Sans modèle ¦ Без шаблона ¦ Без шаблону
+Tous les dépôts ¦ Все хранилища ¦ Усі сховища
+Z → A ¦ Я → А ¦ Я → А
+Les moins citées ¦ Наименее цитируемые ¦ Найменш цитовані
+{n} sur {t} ¦ {n} из {t} ¦ {n} із {t}
+Les sources s’ajoutent depuis une fiche (bloc Sources) ou ici avec « ＋ Nouvelle source ». ¦ Источники добавляются из карточки (блок Источники) или здесь через « ＋ Новый источник ». ¦ Джерела додаються з картки (блок Джерела) або тут через « ＋ Нове джерело ».
+Aucune source ne correspond ¦ Ни один источник не подходит ¦ Жодне джерело не підходить
+Citations ¦ Цитирования ¦ Цитування
+Même titre ou même lien qu’une autre source ¦ То же название или та же ссылка, что у другого источника ¦ Та сама назва або те саме посилання, що в іншого джерела
+doublon ? ¦ дубликат? ¦ дублікат?
+source cochée ¦ отмеченный источник ¦ позначене джерело
+sources cochées ¦ отмеченных источников ¦ позначених джерел
+Garder une seule des sources cochées : les citations des autres passent dans celle-là ¦ Оставить только один из отмеченных источников: цитирования остальных переходят в него ¦ Залишити лише одне з позначених джерел: цитування інших переходять до нього
+Supprime les sources cochées et leurs citations ; « ↶ Annuler » les remet ¦ Удаляет отмеченные источники и их цитирования; « ↶ Отменить » возвращает их ¦ Видаляє позначені джерела та їх цитування; « ↶ Відмінити » повертає їх
+FUSIONNER DES SOURCES ¦ ОБЪЕДИНИТЬ ИСТОЧНИКИ ¦ ОБ’ЄДНАТИ ДЖЕРЕЛА
+Garder une seule source ¦ Оставить один источник ¦ Залишити одне джерело
+⇄ Fusionner ¦ ⇄ Объединить ¦ ⇄ Об’єднати
+Les citations, étiquettes, médias et notes des autres passent dans la source gardée ; ses cases vides sont complétées. « ↶ Annuler » remet tout comme avant. ¦ Цитирования, метки, медиафайлы и заметки остальных переходят в оставленный источник; его пустые поля дополняются. « ↶ Отменить » возвращает всё как было. ¦ Цитування, мітки, медіафайли й нотатки інших переходять до залишеного джерела; його порожні поля доповнюються. « ↶ Відмінити » повертає все як було.
+{n} fusionnées dans une seule ¦ Объединено в один: {n} ¦ Об’єднано в одне: {n}
+Fusionner avec ses doublons ¦ Объединить с его дубликатами ¦ Об’єднати з його дублікатами
+{n} sources se ressemblent ¦ Похожих источников: {n} ¦ Схожих джерел: {n}
+Copier la citation ¦ Копировать цитату ¦ Копіювати цитату
+Le style classique, à la française ¦ Классический стиль, на французский манер ¦ Класичний стиль, на французький манер
+Exporter (RIS, BibTeX) ¦ Экспорт (RIS, BibTeX) ¦ Експорт (RIS, BibTeX)
+« ↶ Annuler » la remet ¦ « ↶ Отменить » возвращает его ¦ « ↶ Відмінити » повертає його
+Entrée de la liste des sources ¦ Запись в списке источников ¦ Запис у списку джерел
+Première note ¦ Первая сноска ¦ Перша виноска
+Note suivante ¦ Следующая сноска ¦ Наступна виноска
+Choisis un modèle : la citation s’écrit toute seule, à la manière d’Evidence Explained. ¦ Выбери шаблон: цитата пишется сама, в манере Evidence Explained. ¦ Вибери шаблон: цитата пишеться сама, у манері Evidence Explained.
+Toutes les sources ¦ Все источники ¦ Усі джерела
+{c} · {p} ¦ {c} · {p} ¦ {c} · {p}
+Dépôt (service d’archives) ¦ Хранилище (архивная служба) ¦ Сховище (архівна служба)
+— Aucun — ¦ — Нет — ¦ — Немає —
+Dépôt écrit à la main ¦ Хранилище, введённое вручную ¦ Сховище, введене вручну
+Publication ¦ Публикация ¦ Публікація
+Modèle de citation ¦ Шаблон цитирования ¦ Шаблон цитування
+— Pas de modèle — ¦ — Без шаблона — ¦ — Без шаблону —
+La citation, prête à coller ¦ Цитата, готовая для вставки ¦ Цитата, готова до вставлення
+Autres styles (classique, Chicago, forum…) ¦ Другие стили (классический, Chicago, форум…) ¦ Інші стилі (класичний, Chicago, форум…)
+Où est-elle citée ? ¦ Где он цитируется? ¦ Де воно цитується?
+Citée nulle part pour l’instant. ¦ Пока нигде не цитируется. ¦ Поки ніде не цитується.
+Médias rattachés ¦ Прикреплённые медиафайлы ¦ Прикріплені медіафайли
+Fusionner dans celle-ci ¦ Объединить в этот ¦ Об’єднати в це
+💍 Familles et couples ¦ 💍 Семьи и пары ¦ 💍 Родини та пари
+Chaque couple : le mariage (date, lieu), les enfants, une séparation, les sources. ¦ Каждая пара: брак (дата, место), дети, расставание, источники. ¦ Кожна пара: шлюб (дата, місце), діти, розлучення, джерела.
+Chercher un couple… (nom, lieu, année) ¦ Искать пару… (имя, место, год) ¦ Шукати пару… (ім’я, місце, рік)
+Sans date de mariage ¦ Без даты брака ¦ Без дати шлюбу
+Avec des enfants ¦ С детьми ¦ З дітьми
+Sans enfant connu ¦ Без известных детей ¦ Без відомих дітей
+Séparés, divorcés ¦ Расставшиеся, разведённые ¦ Розійшлися, розлучені
+Mariage : les plus anciens ¦ Брак: самые давние ¦ Шлюб: найдавніші
+Mariage : les plus récents ¦ Брак: самые недавние ¦ Шлюб: найновіші
+Le plus d’enfants ¦ Больше всего детей ¦ Найбільше дітей
+Aucun couple ne correspond ¦ Ни одна пара не подходит ¦ Жодна пара не підходить
+Aucun couple pour l’instant ¦ Пока нет пар ¦ Поки немає пар
+Un couple se crée sur une fiche, en ajoutant un conjoint. ¦ Пара создаётся в карточке добавлением супруга. ¦ Пара створюється в картці додаванням чоловіка чи дружини.
+Ouvrir la fiche de {name} ¦ Открыть карточку {name} ¦ Відкрити картку {name}
+🔤 Noms de famille ¦ 🔤 Фамилии ¦ 🔤 Прізвища
+Chaque nom de famille : combien de personnes le portent, à quelle époque, où, ses autres orthographes. Un clic : les personnes de ce nom. ¦ Каждая фамилия: сколько людей её носят, в какую эпоху, где, другие написания. Один щелчок: люди с этой фамилией. ¦ Кожне прізвище: скільки людей його носять, у яку епоху, де, інші написання. Одне натискання: люди з цим прізвищем.
+Chercher un nom… (ex. Mazaud, Tulle) ¦ Искать фамилию… (напр. Mazaud, Tulle) ¦ Шукати прізвище… (напр. Mazaud, Tulle)
+Portés par au moins 2 personnes ¦ Носят не менее 2 человек ¦ Носять щонайменше 2 особи
+Avec des variantes ¦ С вариантами ¦ З варіантами
+Les plus portés ¦ Самые распространённые ¦ Найпоширеніші
+Aucun nom de famille pour l’instant ¦ Пока нет фамилий ¦ Поки немає прізвищ
+Porteurs ¦ Носители ¦ Носії
+Variantes ¦ Варианты ¦ Варіанти
+Tous les noms ¦ Все фамилии ¦ Усі прізвища
+Personne ne porte ce nom ¦ Никто не носит эту фамилию ¦ Ніхто не носить це прізвище
+fiche cochée ¦ отмеченная карточка ¦ позначена картка
+fiches cochées ¦ отмеченных карточек ¦ позначених карток
+Toutes les notes écrites sur les fiches, les événements, les couples et les sources. La recherche lit tout le texte. ¦ Все заметки, написанные в карточках, событиях, парах и источниках. Поиск читает весь текст. ¦ Усі нотатки, написані в картках, подіях, парах і джерелах. Пошук читає весь текст.
+Chercher dans les notes… (ex. moulin, Tulle, 1870) ¦ Искать в заметках… (напр. мельница, Tulle, 1870) ¦ Шукати в нотатках… (напр. млин, Tulle, 1870)
+Rattachées à ¦ Привязаны к ¦ Прив’язані до
+Aucune note ne contient ces mots ¦ Ни одна заметка не содержит этих слов ¦ Жодна нотатка не містить цих слів
+Essaie un autre mot, ou une partie du mot. ¦ Попробуй другое слово или часть слова. ¦ Спробуй інше слово або частину слова.
+Les notes s’écrivent sur les fiches, les événements et les sources. ¦ Заметки пишутся в карточках, событиях и источниках. ¦ Нотатки пишуться в картках, подіях і джерелах.
+Voir plus ¦ Показать ещё ¦ Показати ще
+note cochée ¦ отмеченная заметка ¦ позначена нотатка
+notes cochées ¦ отмеченных заметок ¦ позначених нотаток
+notes ¦ заметки ¦ нотатки
+« ↶ Annuler » les remet ¦ « ↶ Отменить » возвращает их ¦ « ↶ Відмінити » повертає їх
+NOTE ¦ ЗАМЕТКА ¦ НОТАТКА
+SOURCES ¦ ИСТОЧНИКИ ¦ ДЖЕРЕЛА
+Nouvelle source ¦ Новый источник ¦ Нове джерело
+ex. État civil de Tulle, naissances 1823 ¦ напр. Акты гражданского состояния Тюля, рождения 1823 ¦ напр. Акти цивільного стану Тюля, народження 1823
+ex. Archives de la Corrèze ¦ напр. Архив Корреза ¦ напр. Архів Корреза
+Source ajoutée ¦ Источник добавлен ¦ Джерело додано
+Enregistrer ces filtres sous un nom, ou rappeler des filtres enregistrés ¦ Сохранить эти фильтры под именем или вызвать сохранённые фильтры ¦ Зберегти ці фільтри під назвою або викликати збережені фільтри
+{n} filtre(s) ¦ Фильтров: {n} ¦ Фільтрів: {n}
+La recherche, les filtres et le tri de maintenant, sous un nom ¦ Текущие поиск, фильтры и сортировка под одним именем ¦ Поточні пошук, фільтри й сортування під однією назвою
+Choisis d’abord une recherche ou un filtre ¦ Сначала выбери поиск или фильтр ¦ Спочатку вибери пошук або фільтр
+Un nom pour retrouver cette liste filtrée d’un clic. ¦ Имя, чтобы найти этот отфильтрованный список одним щелчком. ¦ Назва, щоб знайти цей відфільтрований список одним натисканням.
+ex. Les Mazaud nés à Tulle ¦ напр. Мазо, родившиеся в Тюле ¦ напр. Мазо, народжені в Тюлі
+Filtres gardés sous « {name} ». ¦ Фильтры сохранены как « {name} ». ¦ Фільтри збережено як « {name} ».
+Oublier « {name} » ¦ Забыть « {name} » ¦ Забути « {name} »
+Filtres « {name} » oubliés ¦ Фильтры « {name} » забыты ¦ Фільтри « {name} » забуто
+Filtres enregistrés ¦ Сохранённые фильтры ¦ Збережені фільтри
+événement coché ¦ отмеченное событие ¦ позначена подія
+événements cochés ¦ отмеченных событий ¦ позначених подій
+Double-clic pour corriger ¦ Двойной щелчок, чтобы исправить ¦ Подвійне натискання, щоб виправити
+Corriger la date ¦ Исправить дату ¦ Виправити дату
+Ou double-clic sur la case ¦ Или двойной щелчок по ячейке ¦ Або подвійне натискання на клітинку
+Nouvelle valeur ¦ Новое значение ¦ Нове значення
+Corrigé : « {v} » ¦ Исправлено: « {v} » ¦ Виправлено: « {v} »
+✓ Terminée le {date} ¦ ✓ Выполнено {date} ¦ ✓ Виконано {date}
+À faire (date passée) ¦ Сделать (срок прошёл) ¦ Зробити (термін минув)
+À faire ({n}) ¦ Сделать ({n}) ¦ Зробити ({n})
+✓ Terminées ({n}) ¦ ✓ Выполненные ({n}) ¦ ✓ Виконані ({n})
+✓ Terminées ¦ ✓ Выполненные ¦ ✓ Виконані
+Date passée, pas faites ({n}) ¦ Срок прошёл, не сделано ({n}) ¦ Термін минув, не зроблено ({n})
+Date passée ¦ Срок прошёл ¦ Термін минув
+Cote retirée de la visite. ¦ Шифр убран из визита. ¦ Шифр прибрано з візиту.
+Donne un titre à la source. ¦ Дай источнику название. ¦ Дай джерелу назву.
+Adresse internet invalide (elle doit commencer par https://). ¦ Неверный интернет-адрес (он должен начинаться с https://). ¦ Неправильна інтернет-адреса (вона має починатися з https://).
+Source à garder introuvable. ¦ Оставляемый источник не найден. ¦ Джерело, яке треба залишити, не знайдено.
+Choisis au moins une autre source à fusionner. ¦ Выбери хотя бы ещё один источник для объединения. ¦ Вибери хоча б ще одне джерело для об’єднання.
+Choisis une étiquette ou écris son nom. ¦ Выбери метку или напиши её название. ¦ Вибери мітку або напиши її назву.
+Cette liste ne contient pas des personnes. ¦ Этот список не содержит людей. ¦ Цей список не містить людей.
+Cette case ne se modifie pas ici. ¦ Эту ячейку здесь не изменить. ¦ Цю клітинку тут не змінити.
+La feuille de mission n’existe plus. ¦ Листа задания больше нет. ¦ Аркуша завдання більше немає.
+Acte d’état civil ¦ Запись акта гражданского состояния ¦ Актовий запис цивільного стану
+Registre (ex. Naissances) ¦ Реестр (напр. Рождения) ¦ Реєстр (напр. Народження)
+Année(s) ¦ Год(ы) ¦ Рік (роки)
+N° de l’acte ¦ № записи ¦ № запису
+Qui (personne de l’acte) ¦ Кто (человек из записи) ¦ Хто (особа із запису)
+Lien de la vue ¦ Ссылка на скан ¦ Посилання на скан
+Paroisse ¦ Приход ¦ Парафія
+Registre (ex. Baptêmes, mariages, sépultures) ¦ Реестр (напр. Крещения, браки, погребения) ¦ Реєстр (напр. Хрещення, шлюби, поховання)
+Quartier, rue ¦ Квартал, улица ¦ Квартал, вулиця
+Page ou folio ¦ Страница или лист ¦ Сторінка або аркуш
+Foyer de ¦ Семья ¦ Родина
+Résidence du notaire ¦ Местопребывание нотариуса ¦ Місце перебування нотаріуса
+Nature de l’acte ¦ Вид акта ¦ Вид акта
+Bureau de recrutement ¦ Призывной пункт ¦ Призовний пункт
+N° matricule ¦ Матрикульный № ¦ Матрикульний №
+Soldat ¦ Солдат ¦ Солдат
+Livre, revue ¦ Книга, журнал ¦ Книга, журнал
+Page(s) ¦ Страница(ы) ¦ Сторінка(и)
+Page internet, base en ligne ¦ Интернет-страница, онлайн-база ¦ Інтернет-сторінка, онлайн-база
+Auteur ou organisme ¦ Автор или организация ¦ Автор або організація
+Titre de la page ¦ Название страницы ¦ Назва сторінки
+Site n° {n} ¦ Участок № {n} ¦ Ділянка № {n}
+Sans site ¦ Без участка ¦ Без ділянки
+revus l’année suivante ({b} sur {n}) ¦ повторно замечены через год ({b} из {n}) ¦ повторно помічені наступного року ({b} із {n})
+Cohorte ¦ Когорта ¦ Когорта
+Site ¦ Участок ¦ Ділянка
+Revus l’année suivante ¦ Повторно замечены через год ¦ Повторно помічені наступного року
+Pas encore assez d’années d’observations pour calculer les retours. ¦ Пока недостаточно лет наблюдений, чтобы подсчитать возвраты. ¦ Поки недостатньо років спостережень, щоб підрахувати повернення.
+cohorte ¦ когорта ¦ когорта
+délai : {n} ¦ срок: {n} ¦ термін: {n}
+jamais vu ¦ ни разу не замечен ¦ жодного разу не помічений
+Délais par espèce ¦ Сроки по видам ¦ Терміни за видами
+Tous ont été revus à temps. ¦ Все были повторно замечены вовремя. ¦ Усіх повторно помічено вчасно.
+🔔 Délais par espèce ¦ 🔔 Сроки по видам ¦ 🔔 Терміни за видами

@@ -1,0 +1,85 @@
+# 🏆 Sport et Expositions (lot M) : refaire assets/data/ts-*.json.gz et tx-*.json.gz, puis les enregistrer dans la branche lancée.
+#  - 🏆 ts-competitions, 🚲 ts-etapes : Wikidata (CC0) ; listes de vainqueurs de Wikipédia (CC BY-SA 4.0) ; finales martj42 (CC0).
+#  - ⚽ ts-matchs : martj42/international_results (CC0 ; le script s'arrête si le fichier LICENSE n'est plus CC0).
+#  - 🏅 ts-jo, 🏃 ts-athletes : Wikidata (CC0).
+#  - 🎪 tx-expos : Wikidata (CC0) ; Wikipédia (CC BY-SA 4.0) ; Internet Archive (liens vers les catalogues seulement).
+# Tout se fabrique aussi sur un ordinateur ; ce travail sert à les remettre à jour (une saison de plus, un vainqueur ajouté à Wikidata).
+# Le service de requêtes de Wikidata est lent et limité : une requête à la fois, avec des pauses (scripts/telech-m/wm.py).
+# Puis le sommaire assets/data/manifest.json (Réglages → 🗂 Données : « ↻ Vérifier » voit la nouvelle version).
+#
+# Lancer : onglet « Actions » → « Sport et Expositions (lot M) » → « Run workflow » (choisir ce qu'on refait).
+
+name: Sport et Expositions (lot M)
+
+on:
+  workflow_dispatch:
+    inputs:
+      quoi:
+        description: 'tout, competitions, matchs, athletes ou expos'
+        required: false
+        default: 'tout'
+  push:
+    branches: ['claude/**']
+    paths: ['.github/workflows/telech-m.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: telech-m-donnees
+  cancel-in-progress: false
+
+jobs:
+  donnees:
+    # le « push » sert seulement à faire connaître ce travail à GitHub : il ne fabrique rien
+    if: github.event_name != 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    env:
+      QUOI: ${{ github.event.inputs.quoi || 'tout' }}
+    steps:
+      - name: Dossier de travail
+        run: echo "TM_RAW=$RUNNER_TEMP/tm-cache" >> "$GITHUB_ENV"
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: "Préférer IPv4 (pas d’IPv6 sur la machine GitHub, « Network is unreachable »)"
+        run: echo 'precedence ::ffff:0:0/96 100' | sudo tee -a /etc/gai.conf
+      - name: Reprendre les réponses déjà téléchargées
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ env.TM_RAW }}
+          key: telech-m-${{ github.run_id }}
+          restore-keys: telech-m-
+      - name: "🏆 🚲 Compétitions, vainqueurs, étapes du Tour (Wikidata, Wikipédia)"
+        if: env.QUOI == 'tout' || env.QUOI == 'competitions'
+        run: python3 -I scripts/telech-m/build_competitions.py assets/data
+      - name: "⚽ Matchs internationaux de football (martj42, CC0)"
+        if: env.QUOI == 'tout' || env.QUOI == 'matchs'
+        run: python3 -I scripts/telech-m/build_matchs.py assets/data
+      - name: "🏅 🏃 Médailles olympiques et sportifs nés en France (Wikidata)"
+        if: env.QUOI == 'tout' || env.QUOI == 'athletes'
+        run: python3 -I scripts/telech-m/build_athletes.py assets/data
+      - name: "🎪 Expositions du monde (Wikidata, Wikipédia, Internet Archive)"
+        if: env.QUOI == 'tout' || env.QUOI == 'expos'
+        run: python3 -I scripts/telech-m/build_expos.py assets/data
+      - name: Garder les réponses pour la prochaine fois
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ env.TM_RAW }}
+          key: telech-m-${{ github.run_id }}
+      - name: Sommaire des données
+        run: node scripts/donnees-manifest.js
+      - name: Enregistrer dans la branche
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/data/ts-*.json.gz assets/data/tx-*.json.gz assets/data/manifest.json
+          git diff --cached --quiet && { echo "rien de neuf"; exit 0; }
+          git commit -m "Sport et Expositions (lot M) : données refaites sur GitHub (Wikidata CC0, martj42 CC0, Wikipédia CC BY-SA 4.0)"
+          for i in 1 2 3; do git pull --rebase origin "$GITHUB_REF_NAME" && git push origin "HEAD:$GITHUB_REF_NAME" && break; sleep 10; done

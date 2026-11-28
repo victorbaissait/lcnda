@@ -1,0 +1,155 @@
+fr ¦ lb
+# 🏛 Fiche d’identité, vue des fonds, ce qu’on y trouve, réglages des recueils (heritage-recueil-fiche.js, heritage-recueil-fonds.js, heritage-recueil-sens.js, lib/recueil_fiche.php)
+pièce {n} ¦ Stéck {n}
+vue {n} ¦ Bild {n}
+Citer ¦ Zitéieren
+Copie le texte : ¦ Kopéier den Text:
+Communicable ¦ Zougänglech
+le délai est passé ({y}) ¦ d’Frist ass eriwwer ({y})
+acte le plus récent : {y} ; délai {d} ans ¦ neiste Akt: {y}; Frist {d} Joer
+Réservé jusqu’en {y} ¦ Gespaart bis {y}
+acte le plus récent : {y} ; délai {d} ans ({k}) ¦ neiste Akt: {y}; Frist {d} Joer ({k})
+sorte d’acte pas dite : 75 ans par prudence ¦ Aktenzort net uginn: 75 Joer aus Virsiicht
+Sur autorisation ¦ Mat Autorisatioun
+écris les années du recueil (ou fais son sommaire) pour que l’app calcule ¦ schreif d’Joere vun der Sammlung (oder maach hiren Inhaltsverzeechnes), fir datt d’App rechne kann
+Où il est, qui peut le voir ¦ Wou se ass, wien se gesi kann
+service d’archives, fonds, liens, communicabilité, support… ¦ Archivservice, Fong, Linken, Zougänglechkeet, Trägermaterial…
+Dans la liste de Réglages › Services d’archives ; « Lieu de conservation » reste pour un texte libre. ¦ An der Lëscht vun Astellungen › Archivsservicer; „Opbewaarungsplaz“ bleift fir e fräien Text.
+Fonds ¦ Fong
+ex. Fonds de la paroisse de Sancoins ¦ z. B. Fong vun der Por vu Sancoins
+Série · sous-série ¦ Serie · Ënnerserie
+ex. E · 3 E (état civil) ¦ z. B. E · 3 E (Etat civil)
+Lien en ligne du recueil ¦ Online-Link vun der Sammlung
+Lien d’une vue ({n} = numéro de la vue) ¦ Link vun engem Bild ({n} = Nummer vum Bild)
+Vue = page + … ¦ Bild = Säit + …
+ex. 2 si la vue 1 est la couverture et la vue 2 une page blanche ¦ z. B. 2, wann d’Bild 1 den Deckel ass an d’Bild 2 eng eidel Säit
+Autre exemplaire (un autre recueil) ¦ Anert Exemplar (eng aner Sammlung)
+… ou décrit ¦ … oder beschriwwen
+ex. Collection du greffe, AD 18, 3 E 1235 ¦ z. B. Kollektioun vum Greffe, AD 18, 3 E 1235
+Communicabilité ¦ Zougänglechkeet
+Calculée d’après les années et les sortes d’actes (conseillé) ¦ Gerechent no de Joeren an den Aktenzorten (ugeroden)
+Réservée jusqu’en… ¦ Gespaart bis…
+Réutilisation ¦ Weiderverwendung
+Support ¦ Trägermaterial
+État matériel ¦ Materiellen Zoustand
+Numérisé par ¦ Digitaliséiert vun
+ex. AD 18 (2009), moi (2026) ¦ z. B. AD 18 (2009), ech (2026)
+Provenance ¦ Hierkonft
+ex. Dépôt de la commune, 1952 ¦ z. B. Depot vun der Gemeng, 1952
+vue = page + {n} ¦ Bild = Säit + {n}
+Pas encore dit : « Modifier » → « 🏛 Où il est, qui peut le voir ». ¦ Nach net uginn: „Änneren“ → „🏛 Wou se ass, wien se gesi kann“.
+Citer : ¦ Zitéieren:
+Mode consultation : cacher les recueils non communicables (conseillé) ¦ Liesmodus: net zougänglech Sammlunge verstoppen (ugeroden)
+En mode consultation, les recueils non communicables sont cachés. ¦ Am Liesmodus sinn net zougänglech Sammlunge verstoppt.
+En mode consultation, tous les recueils sont montrés. ¦ Am Liesmodus gi all Sammlunge gewisen.
+Vue {n} en ligne ¦ Bild {n} online
+Citer cette page ¦ Dës Säit zitéieren
+Recueils chez eux ¦ Sammlungen do
+{p} pages · {d} finies ou relues · {a} absentes ¦ {p} Säiten · {d} fäerdeg oder nogekuckt · {a} feelen
+Fonds · série ¦ Fong · Serie
+Transcrit · relu ¦ Transkribéiert · nogekuckt
+Aucun recueil relié à ce service : dans un recueil, « Modifier » → « 🏛 Où il est » → Service d’archives. ¦ Keng Sammlung mat dësem Service verbonnen: an enger Sammlung „Änneren“ → „🏛 Wou se ass“ → Archivservice.
+Lacunes ({n}) ¦ Lücken ({n})
+Licence ouverte (Etalab) ¦ Fräi Lizenz (Etalab)
+CC BY ¦ CC BY
+CC BY-SA ¦ CC BY-SA
+CC BY-NC ¦ CC BY-NC
+Domaine public ¦ Ëffentlech Domän
+Tous droits réservés ¦ All Rechter reservéiert
+À demander au service ¦ Beim Service ze froen
+Microfilm ¦ Mikrofilm
+Bon ¦ Gutt
+Abîmé ¦ Beschiedegt
+Fragile (ne pas manipuler) ¦ Fragil (net upaken)
+Restauré ¦ Restauréiert
+{n} à transcrire ¦ {n} ze transkribéieren
+{n} à relire ¦ {n} nozekucken
+{n} absentes ¦ {n} feelen
+{n} à photographier ¦ {n} ze fotograféieren
+pas en ligne ¦ net online
+Chargement des fonds… ¦ Fonge ginn gelueden…
+La vue des fonds ne s’ouvre pas ¦ D’Fongenusiicht geet net op
+Sans service d’archives ¦ Ouni Archivservice
+Sans fonds ¦ Ouni Fong
+{n} · {t} % transcrit · {r} % relu ¦ {n} · {t} % transkribéiert · {r} % nogekuckt
+recueils · {s} ¦ Sammlungen · {s}
+pages attendues ¦ erwaart Säiten
+photographiées ¦ fotograféiert
+transcrites · {r} % relues ¦ transkribéiert · {r} % nogekuckt
+pages absentes · {g} ¦ feelend Säiten · {g}
+Montrer : ¦ Weisen:
+Colonnes… ¦ Kolonnen…
+État des fonds ¦ Iwwersiicht vun de Fongen
+Aucun recueil ne correspond ¦ Keng Sammlung passt
+Change « Montrer » ou les mots cherchés. ¦ Änner „Weisen“ oder d’Sichwierder.
+Crée un recueil, puis dis où il est : « Modifier » → « 🏛 Où il est ». ¦ Maach eng Sammlung, a so dann, wou se ass: „Änneren“ → „🏛 Wou se ass“.
+Chaque groupe se replie. Un clic sur « Reste » ouvre l’état du recueil. Un recueil sans service d’archives va dans « Sans service d’archives » : « Modifier » → « 🏛 Où il est ». ¦ All Grupp klappt zou. E Klick op „Bleift“ mécht den Zoustand vun der Sammlung op. Eng Sammlung ouni Archivservice kënnt an „Ouni Archivservice“: „Änneren“ → „🏛 Wou se ass“.
+🏛 VUE DES FONDS ¦ 🏛 FONGENUSIICHT
+Coche les colonnes à montrer (le recueil est toujours là). ¦ Kräiz d’Kolonnen un, déi gewise solle ginn (d’Sammlung ass ëmmer do).
+Les recueils n’ont pas pu être lus. ¦ D’Sammlunge konnten net gelies ginn.
+Rien ne reste à faire dans tes recueils. ¦ An denge Sammlungen ass näischt méi ze maachen.
+Registres : reste à faire ¦ Registeren: bleift ze maachen
+Vue des fonds ¦ Fongenusiicht
+=recueil ¦ Sammlung|Sammlungen
+=service ¦ Service|Servicer
+=lacune ¦ Lück|Lücken
+Photographié ¦ Fotograféiert
+Reste ¦ Bleift
+Numérotation ¦ Nummeréierung
+Reste à transcrire ¦ Bleift ze transkribéieren
+Reste à relire ¦ Bleift nozekucken
+Avec des pages absentes ¦ Mat feelende Säiten
+📚 RECUEILS ¦ 📚 SAMMLUNGEN
+Réglages des recueils ¦ Astellunge vun de Sammlungen
+Ma généalogie (conseillé) ¦ Meng Genealogie (ugeroden)
+Centre d’archives, association ¦ Archivzentrum, Associatioun
+Centre d’archives : la vue des fonds en premier, les colonnes support, état matériel, langue et réutilisation, et la fiche (« Où il est », « Qui peut le voir ») en tête du résumé des nouveaux recueils. Rien n’est caché pour de bon : on change d’avis quand on veut. ¦ Archivzentrum: d’Fongenusiicht als éischt, d’Kolonnen Trägermaterial, materiellen Zoustand, Sprooch a Weiderverwendung, an d’Fiche („Wou se ass“, „Wien se gesi kann“) uewen am Resumé vun den neie Sammlungen. Näischt ass fir ëmmer verstoppt: du kanns all Moment deng Meenung änneren.
+Me signaler les trous de numérotation (conseillé) ¦ Mir d’Lächer an der Nummeréierung mellen (ugeroden)
+Montrer la fiabilité de la lecture sur chaque page (conseillé) ¦ D’Zouverlässegkeet vum Liesen op all Säit weisen (ugeroden)
+Montrer les remarques « à vérifier » (années sans acte, pics de décès) (conseillé) ¦ D’Bemierkungen „ze kontrolléieren“ weisen (Joren ouni Akt, Spëtze vun Doudesfäll) (ugeroden)
+Réglages des recueils enregistrés. ¦ Astellunge vun de Sammlunge gespäichert.
+Rien à montrer pour l’instant : transcris des actes dans l’Atelier (sur les photos des pages), l’app en tire les années, les noms, les métiers, les lieux. ¦ Fir de Moment näischt ze weisen: transkribéier Akten am Atelier (op de Fotoe vun de Säiten), d’App zitt d’Joren, d’Nimm, d’Beruffer, d’Plazen dovunner eraus.
+Actes par année, de {a} à {b} ¦ Akten pro Joer, vun {a} bis {b}
+{y} : aucun acte ¦ {y}: keen Akt
+{a}-{b} : aucun acte ¦ {a}-{b}: keen Akt
+registre perdu, ailleurs, ou pas encore transcrit ? ¦ Register verluer, soss enzwousch oder nach net transkribéiert?
+Marquer une lacune ¦ Eng Lück markéieren
+{y} : {n} décès ou sépultures ¦ {y}: {n} Doudesfäll oder Begriefnisser
+au moins deux fois plus que d’habitude ({m}) : épidémie, disette, guerre ? À vérifier. ¦ mindestens duebel esou vill wéi soss ({m}): Epidemie, Hongersnout, Krich? Ze kontrolléieren.
+{n} ({l} reliées à une fiche) ¦ {n} ({l} mat enger Fiche verbonnen)
+{p} % signent ({s} sur {t} actes qui le disent) ¦ {p} % ënnerschreiwen ({s} vun {t} Akten, déi et soen)
+sans acte : {x} ¦ ouni Akt: {x}
+Calculé depuis les actes transcrits dans l’Atelier : ce n’est jamais affirmé, c’est à vérifier. ¦ Gerechent aus den Akten, déi am Atelier transkribéiert goufen: dat ass ni sécher, et muss kontrolléiert ginn.
+{w} : aucun acte en {y} ¦ {w}: keen Akt am Joer {y}
+Lacune ajoutée : Recherche › Suivi des registres › Lacunes d’archives. ¦ Lück derbäigesat: Recherche › Suivi vun de Registeren › Lücken an den Archiver.
+Lacune notée ¦ Lück notéiert
+Calcul… ¦ Gëtt gerechent…
+Ce qu’on trouve chez eux ¦ Wat een do fënnt
+Règle (Code du patrimoine, L213-2) : tout de suite dans le cas général et pour les actes de décès ; 50 ans (vie privée, documents militaires) ; 75 ans (naissances, mariages, notaires, recensements) ; 100 ans si des mineurs sont concernés ; 120 ans après la naissance pour les dossiers médicaux. L’app propose, tu corriges : le service d’archives a le dernier mot. ¦ Regel (franséische Code du patrimoine, L213-2): direkt am allgemenge Fall a fir Doudesakten; 50 Joer (Privatliewen, militäresch Dokumenter); 75 Joer (Gebuerten, Hochzäiten, Notairen, Vollekszielungen); 100 Joer, wa Mannerjäreg betraff sinn; 120 Joer no der Gebuert fir medezinesch Dossieren. D’App proposéiert, du korrigéiers: den Archivservice huet dat lescht Wuert.
+Alsacien ¦ Elsässesch
+Catalan ¦ Katalanesch
+Flamand ¦ Flämesch
+Basque ¦ Baskesch
+Cursive moderne ¦ Modern Kursivschrëft
+Cursive XVIIIᵉ ¦ Kursivschrëft vum 18. Joerhonnert
+Écriture secrétaire ¦ Sekretärschrëft
+Gothique ¦ Gotesch Schrëft
+Kurrent (allemande) ¦ Kurrent (däitsch)
+Imprimé ¦ Gedréckt
+Dactylographié ¦ Mat der Maschinn geschriwwen
+Par fonds ¦ No Fong
+Façon de montrer les recueils ¦ Wéi d’Sammlunge gewise ginn
+Où il est ¦ Wou se ass
+Service d’archives, fonds, cote, liens, citation ¦ Archivservice, Fong, Cote, Linken, Zitat
+Qui peut le voir ¦ Wien se gesi kann
+Communicabilité, réutilisation, support, état ¦ Zougänglechkeet, Weiderverwendung, Trägermaterial, Zoustand
+Ce qu’on y trouve ¦ Wat een do fënnt
+Actes par année, noms, métiers, lieux, remarques à vérifier ¦ Akten pro Joer, Nimm, Beruffer, Plazen, Bemierkungen ze kontrolléieren
+🗂 Registres : reste à faire ¦ 🗂 Registeren: bleift ze maachen
+Les recueils (registres, liasses) où il reste des pages à transcrire, à relire, absentes ou à photographier. ¦ D’Sammlungen (Registeren, Bëndelen), wou nach Säite bleiwen ze transkribéieren, nozekucken, déi feelen oder ze fotograféieren sinn.
+Le lien doit commencer par http:// ou https://. ¦ De Link muss mat http:// oder https:// ufänken.
+Le lien d’une vue doit contenir {n} à la place du numéro de la vue. ¦ De Link vun engem Bild muss {n} amplaz vun der Nummer vum Bild enthalen.
+Ce lien n’est pas une adresse valide. ¦ Dëse Link ass keng gëlteg Adress.
+Un recueil ne peut pas être son propre autre exemplaire. ¦ Eng Sammlung kann net hiert eegent anert Exemplar sinn.
+Mode consultation : ce recueil n’est pas communicable. ¦ Liesmodus: dës Sammlung ass net zougänglech.
+archives|Cote ¦ Cote

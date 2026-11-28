@@ -187,7 +187,7 @@
     /* ═════════ Les menus du haut (E1) : chaque ligne a sa commande (data-xl-cmd), réglable dans les raccourcis ═════════ */
     const M = (cmd, label, key = '') => ({cmd, label, key});
     const MENUS = [
-        ['Fichier', [M('new', '＋ Nouveau classeur'), M('template', '📋 Partir d’un modèle…'), '-', M('save', '💾 Enregistrer', '⌘S'), M('saveas', 'Enregistrer une copie…'), M('savetpl', 'Enregistrer comme modèle…'), '-', M('import', '⤒ Importer un tableau…', '⌘O'), M('export', '⤓ Exporter…', '⇧⌘E'), M('print', '🖨 Imprimer…', '⌘P'), '-', M('settings', '⚙️ Réglages du tableur…'), M('close', 'Fermer')]],
+        ['Fichier', [M('new', '＋ Nouveau classeur'), M('template', '🧩 Partir d’un modèle…'), '-', M('save', '💾 Enregistrer', '⌘S'), M('saveas', 'Enregistrer une copie…'), M('savetpl', 'Enregistrer comme modèle…'), '-', M('import', '⤒ Importer un tableau…', '⌘O'), M('export', '⤓ Exporter…', '⇧⌘E'), M('print', '🖨 Imprimer…', '⌘P'), M('sendto', '📤 Envoyer vers…'), '-', M('settings', '⚙️ Réglages du tableur…'), M('close', 'Fermer')]],
         ['Édition', [M('undo', '↶ Annuler', '⌘Z'), M('redo', '↷ Rétablir', '⇧⌘Z'), '-', M('cut', 'Couper', '⌘X'), M('copy', 'Copier', '⌘C'), M('paste', 'Coller', '⌘V'), M('pastevalues', 'Coller les valeurs seulement', '⇧⌘V'), '-', M('clear', 'Effacer le contenu', '⌫'), M('clearall', 'Effacer tout (contenu et mise en forme)'), M('selectall', 'Tout sélectionner', '⌘A'), '-', M('filldown', 'Recopier vers le bas', '⌘D'), M('fillright', 'Recopier vers la droite', '⌘R'), M('find', '🔍 Rechercher et remplacer…', '⌘F')]],
         ['Insertion', [M('rowabove', 'Ligne au-dessus'), M('rowbelow', 'Ligne en dessous'), M('colleft', 'Colonne à gauche'), M('colright', 'Colonne à droite'), M('newsheet', '＋ Nouvelle feuille'), '-', M('fn', 'ƒ Fonction…', '⇧F3'), M('autosum', 'Σ Somme automatique', '⌥='), M('today', '📅 Date du jour', '⌘;'), M('name', 'Nom pour la plage…'), M('comment', '💬 Note sur la cellule…'), '-', M('person', '👤 Une personne de la base', '⌘K'), M('place', '📍 Un lieu de la base'), '-', M('chart', '📊 Graphique depuis la sélection')]],
         ['Format', [M('bold', 'Gras', '⌘B'), M('italic', 'Italique', '⌘I'), M('underline', 'Souligné', '⌘U'), M('strike', 'Barré'), M('font', 'Aa Police…'), M('fontsize', 'Taille du texte…'), '-', ...FORMATS.map(([k, l]) => M('fmt:' + k, l)), M('dec+', 'Une décimale de plus'), M('dec-', 'Une décimale de moins'), '-', M('wrap', '↵ Renvoi à la ligne'), M('merge', '⊞ Fusionner / séparer'), M('al:left', 'Aligner à gauche'), M('al:center', 'Centrer'), M('al:right', 'Aligner à droite'), '-', M('bd:all', '▦ Bordures : tout'), M('bd:out', '▭ Bordures : contour'), M('bd:bottom', '▁ Bordure du bas'), M('bd:none', 'Sans bordure'), '-', M('colwidth', 'Largeur de colonne…'), M('rowheight', 'Hauteur de ligne…'), M('autofit', 'Ajuster la largeur au contenu'), M('hiderows', 'Masquer les lignes'), M('hidecols', 'Masquer les colonnes'), M('showall', 'Tout remontrer'), '-', M('cf', 'Mise en forme conditionnelle…'), M('zebra', 'Une ligne sur deux'), M('clearfmt', 'Effacer la mise en forme')]],
@@ -1525,10 +1525,10 @@
         },
     });
 
-    /* ═════════ « 📋 Partir d'un modèle » (modèles fournis + Mes modèles) ═════════ */
+    /* ═════════ « 🧩 Partir d'un modèle » (modèles fournis + Mes modèles) ═════════ */
     async function chooseTemplate(ctx = {}) {
         let mine = []; try { mine = (await api('workbooks', {kind: 'template'})).items || []; } catch (_) {}
-        ext.openDialog({eyebrow: i18n('TABLEUR'), title: i18n('📋 Partir d’un modèle'), wide: true,
+        ext.openDialog({eyebrow: i18n('TABLEUR'), title: i18n('🧩 Partir d’un modèle'), wide: true,
             body: `<div class="xl-tpls">${TEMPLATES.map(t => `<button type="button" class="xl-tpl" data-tpl="${t.key}"><b>${t.icon} ${esc(i18n(t.name))}</b><small>${esc(i18n(t.hint))}</small></button>`).join('')}</div>
                 <h4>${esc(i18n('Mes modèles'))}</h4>${mine.length ? `<div class="xl-tpls">${mine.map(t => `<button type="button" class="xl-tpl" data-mine="${t.id}"><b>🧾 ${esc(t.name)}</b><small>${esc(plural(t.info?.sheets || 1, 'feuille'))} · ${UI()?.whenText ? esc(UI().whenText(t.updated_at, {label: i18n('Modifié')})) : ''}</small></button>`).join('')}</div>` : A().empty(i18n('Pas encore de modèle à toi : dans un classeur, Fichier → « Enregistrer comme modèle… ».'), {icon: '📋'})}`,
             onOpen: d => d.addEventListener('click', async e => {
@@ -1554,8 +1554,8 @@
         open: (id, again) => openWorkbook({id, onSaved: again, onClose: again}),
         create: again => openWorkbook({onSaved: again, onClose: again}),
         rename: (id, name) => post('rename_workbook', {id, name}),
-        remove: id => post('delete_workbook', {id}), createLabel: i18n('＋ Nouveau classeur'),
-        extra: `<button type="button" class="button secondary" data-et-x="tpl" title="${esc(i18n('Relevé de recensement, registre paroissial, budget de la recherche, suivi des courriers…'))}">${esc(i18n('📋 Partir d’un modèle'))}</button><button type="button" class="button secondary" data-et-x="import" title="CSV, TSV, Excel (.xlsx), LibreOffice (.ods), JSON">${esc(i18n('⤒ Importer…'))}</button>`,
+        remove: id => (ext.projectDelUndo ? ext.projectDelUndo('delete_workbook')(id) : post('delete_workbook', {id})), undo: true, createLabel: i18n('＋ Nouveau classeur'),
+        extra: `<button type="button" class="button secondary" data-et-x="tpl" title="${esc(i18n('Relevé de recensement, registre paroissial, budget de la recherche, suivi des courriers…'))}">${esc(i18n('🧩 Partir d’un modèle'))}</button><button type="button" class="button secondary" data-et-x="import" title="CSV, TSV, Excel (.xlsx), LibreOffice (.ods), JSON">${esc(i18n('⤒ Importer…'))}</button>`,
         onExtra: (k, again) => { if (k === 'tpl') return chooseTemplate({onSaved: again, onClose: again}); if (k === 'import') return importNew(again); }});
     ext.tableurInternals = {Editor, TEMPLATES, openWorkbook, chooseTemplate}; // pour les essais
 })();

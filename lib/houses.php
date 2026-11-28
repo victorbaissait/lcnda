@@ -224,8 +224,10 @@ function save_house(PDO $pdo, array $data): array
 function delete_house(PDO $pdo, array $data): array
 {
     houses_ensure($pdo);
-    $pdo->prepare('DELETE FROM houses WHERE id=?')->execute([safe_int($data['id'] ?? 0)]);
-    return ['ok' => true];
+    $id = safe_int($data['id'] ?? 0);
+    $undo = project_undo_keep($pdo, 'houses', $id); // ↶ Annuler (restore_project)
+    $pdo->prepare('DELETE FROM houses WHERE id=?')->execute([$id]);
+    return ['ok' => true, 'undo' => $undo];
 }
 
 function rename_house(PDO $pdo, array $data): array

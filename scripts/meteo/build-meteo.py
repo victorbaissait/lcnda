@@ -9,12 +9,19 @@ Mode d'emploi pas à pas, en français simple : docs/METEO.md. En bref :
     python3 scripts/meteo/build-meteo.py europe        # le pack Europe (≈ 2 Go, une nuit ou plus)
     python3 scripts/meteo/build-meteo.py tout          # les trois
     python3 scripts/meteo/build-meteo.py altitudes     # seulement la grille des altitudes (≈ 2–3 Mo, rangée dans le socle ; faite aussi avec « socle »)
+    python3 scripts/meteo/build-meteo.py monde-asie    # un pack du monde (GHCN-Daily, NOAA) : monde-amerique-nord, monde-amerique-sud,
+                                                       # monde-afrique, monde-asie, monde-oceanie, monde-europe (hors pack Europe) ;
+                                                       # « monde » : les six (plusieurs heures chacun)
+    python3 scripts/meteo/build-meteo.py plus-neige    # un complément Copernicus (clé Copernicus obligatoire) : plus-neige (ERA5-Land),
+                                                       # plus-ressenti (UTCI), plus-rivieres (GloFAS), plus-cerra (CERRA),
+                                                       # plus-anciennes (relevés d'avant 1836) — voir meteo_plus.py
 
 Options utiles :
     --dossier meteo-sortie     où tout est rangé (téléchargements, travail, fichiers finis) — par défaut ./meteo-sortie
     --sans-era5 / --sans-20cr  sans les réanalyses (pas besoin de compte Copernicus ni de netCDF4)
     --sans-altitudes           sans la grille des altitudes (Copernicus DEM GLO-90) ; --altitudes-europe : aussi celle de l'Europe (pack Europe)
     --stations 300             combien de stations dans le socle
+    --stations-monde 500       combien de stations au plus dans un pack du monde
     --hors-ligne DOSSIER       ne télécharge rien : lit les fichiers déjà posés dans DOSSIER (essais, tests)
     --meteolux-csv FICHIER     le fichier de MeteoLux (Findel) téléchargé à la main, si l'adresse automatique ne marche plus
     --depuis 1836 / --jusqu-a 2025   les années à fabriquer
@@ -60,6 +67,10 @@ CH_STAC_COLLECTION = 'https://data.geo.admin.ch/api/stac/v1/collections/ch.meteo
 IRM_WFS = 'https://opendata.meteo.be/service/aws/ows'
 IRM_STATIONS = IRM_WFS + '?service=WFS&version=2.0.0&request=GetFeature&typenames=aws:aws_station&outputFormat=csv'
 IRM_DAILY = IRM_WFS + '?service=WFS&version=2.0.0&request=GetFeature&typenames=aws:aws_1day&outputFormat=csv&count={count}&startIndex={start}'
+# le serveur (GeoServer) refuse (HTTP 400) une page « startIndex » sans ordre fixe : on demande l'ordre (sortBy), sinon une année à la fois
+IRM_DAILY_SORTED = IRM_DAILY + '&sortBy={sort}'
+IRM_DAILY_YEAR = IRM_WFS + '?service=WFS&version=2.0.0&request=GetFeature&typenames=aws:aws_1day&outputFormat=csv&CQL_FILTER={cql}'
+IRM_FIRST_YEAR = 1995
 # MeteoLux : Luxembourg-Findel (data.public.lu, CC0)
 LU_DATASET_API = 'https://data.public.lu/api/1/datasets/climatological-daily-data-luxembourg-findel/'
 LU_FINDEL = ('Luxembourg – Findel', 49.6266, 6.2045, 376.0)
@@ -111,8 +122,7 @@ C20_OPENDAP = 'https://psl.noaa.gov/thredds/dodsC/Datasets/20thC_ReanV3/Dailies/
 C20_HTTP = 'https://downloads.psl.noaa.gov/Datasets/20thC_ReanV3/Dailies/'
 C20_FILES = {'TN': ('2mSI/tmin.2m.{year}.nc', 'tmin'), 'TX': ('2mSI/tmax.2m.{year}.nc', 'tmax'),
              'RR': ('sfcSI/prate.{year}.nc', 'prate'), 'NN': ('miscSI/tcdc.eatm.{year}.nc', 'tcdc')}
-# ERA5 (Copernicus CDS) : bibliothèque cdsapi + clé dans ~/.cdsapirc
-ERA5_DAILY_DATASET = 'derived-era5-single-levels-daily-statistics'
+# ERA5 (Copernicus CDS) : bibliothèque cdsapi (et ecmwf-datastores-client) + clé dans ~/.cdsapirc
 ERA5_HOURLY_DATASET = 'reanalysis-era5-single-levels'
 
 # Les boîtes (nord, ouest, sud, est)
@@ -120,7 +130,7 @@ BOX_4 = (51.6, -5.5, 41.2, 10.6)          # France, Belgique, Suisse, Luxembourg
 BOX_EUROPE = (71.5, -25.0, 34.0, 45.0)
 COUNTRY_BOXES = {'FR': (51.1, -5.2, 41.3, 9.6), 'BE': (51.55, 2.5, 49.45, 6.45), 'CH': (47.85, 5.9, 45.8, 10.5), 'LU': (50.2, 5.7, 49.4, 6.55)}
 DEPARTEMENTS = [f'{i:02d}' for i in range(1, 96) if i != 20] + ['2A', '2B'] + ['971', '972', '973', '974', '975', '976', '984', '985', '986', '987', '988']
-UA = 'LCNDA-meteo/1.0 (+https://github.com ; fabricant des données météo d’une app de généalogie)'
+UA = 'LCNDA-meteo/1.0 (+https://github.com/victorbaissait/lcnda ; meteo data builder for a genealogy app)'  # en ASCII seulement : un en-tête HTTP n'accepte pas les accents ni ’
 
 
 class Stop(Exception):
@@ -149,7 +159,7 @@ class Net:
     def path(self, name):
         return os.path.join(self.offline or self.cache, name)
 
-    def get(self, url, name, what='', binary=True, missing_ok=False, headers=None):
+    def get(self, url, name, what='', binary=True, missing_ok=False, headers=None, fail_fast=()):
         """télécharge une fois (reprise d'un fichier .part) → chemin du fichier gardé ; missing_ok : None si la source n'a pas ce fichier"""
         dest = self.path(name)
         if os.path.exists(dest) and os.path.getsize(dest) > 0:
@@ -178,6 +188,8 @@ class Net:
                 if missing_ok and e.code in (403, 404):
                     open(dest + '.absent', 'w').close()
                     return None
+                if e.code in fail_fast:  # une demande refusée telle quelle : inutile de réessayer la même
+                    raise Stop(f'{what or name} : demande refusée (erreur {e.code}).\n  Adresse : {url}')
                 if e.code in (404, 410):
                     raise Stop(f'{what or name} : l’adresse n’existe plus (erreur {e.code}).\n  Adresse : {url}\n'
                                '  La source a peut-être déménagé : corrige l’adresse en haut de build-meteo.py (constantes en MAJUSCULES).')
@@ -887,16 +899,12 @@ def do_meteoswiss(net, work, years, only=None):
     work.mark('ch')
 
 
-def do_irm(net, work, years, test=False):
-    if work.done('be'):
-        return
-    st_text = open_text(net.get(IRM_STATIONS, 'irm-aws_station.csv', 'IRM (stations)'))
-    texts = []
-    start, count = 0, 20000
+def irm_pages(net, url_for, prefix, count, test=False):
+    """les pages d'une demande WFS (startIndex) → textes CSV ; Stop si le serveur refuse la première"""
+    texts, start = [], 0
     while True:
-        name = f'irm-aws_1day-{start}.csv'
         try:
-            p = net.get(IRM_DAILY.format(count=count, start=start), name, 'IRM (relevés quotidiens)')
+            p = net.get(url_for(count, start), f'{prefix}-{start}.csv', 'IRM (relevés quotidiens)', fail_fast=(400,))
         except Stop:
             if net.offline and start:
                 break
@@ -906,6 +914,34 @@ def do_irm(net, work, years, test=False):
         if test or t.count('\n') < count:
             break
         start += count
+    return texts
+
+
+def do_irm(net, work, years, test=False):
+    """IRM / KMI : les relevés quotidiens par pages triées (sortBy) ; si le serveur refuse, une année à la fois (CQL_FILTER)"""
+    if work.done('be'):
+        return
+    st_text = open_text(net.get(IRM_STATIONS, 'irm-aws_station.csv', 'IRM (stations)'))
+    texts, errors = None, []
+    tries = [('irm-aws_1day', lambda c, s0: IRM_DAILY.format(count=c, start=s0)),  # l'ancienne demande (fichiers déjà gardés, essais hors ligne)
+             ('irm-aws_1day-tri', lambda c, s0: IRM_DAILY_SORTED.format(count=c, start=s0, sort=urllib.parse.quote('code ASC,timestamp ASC'))),
+             ('irm-aws_1day-tri-ts', lambda c, s0: IRM_DAILY_SORTED.format(count=c, start=s0, sort=urllib.parse.quote('timestamp ASC')))]
+    for prefix, url_for in tries:
+        try:
+            texts = irm_pages(net, url_for, prefix, 10000, test)
+            break
+        except Stop as e:
+            errors.append(str(e).splitlines()[0])
+            if net.offline:
+                raise
+    if texts is None:  # dernier essai : une année à la fois, sans pages (≈ 30 stations × 366 jours)
+        texts = []
+        for y in range(max(IRM_FIRST_YEAR, years[0]), years[1] + 1):
+            cql = urllib.parse.quote(f"timestamp >= '{y}-01-01T00:00:00Z' AND timestamp < '{y + 1}-01-01T00:00:00Z'")
+            try:
+                texts.append(open_text(net.get(IRM_DAILY_YEAR.format(cql=cql), f'irm-aws_1day-{y}.csv', f'IRM (relevés {y})', fail_fast=(400,))))
+            except Stop as e:
+                raise Stop('IRM : le serveur refuse toutes les demandes des relevés quotidiens.\n  ' + '\n  '.join(errors + [str(e).splitlines()[0]]))
     data = {}
     for t in texts:
         for code, st in parse_irm(st_text, t).items():
@@ -1218,6 +1254,233 @@ def europe_sources(net, work, years, a):
     return done
 
 
+# ═══════════════════════ Les packs du monde (GHCN-Daily, NOAA) : un pack par continent ═══════════════════════
+# Une station GHCN = un fichier by_station/<ID>.csv.gz (toutes les années, tous les éléments). On prend les plus longues séries
+# de TMAX, bien réparties (pas deux stations trop proches), en laissant de côté ce qui est déjà dans les autres packs :
+#   - France, Belgique, Suisse, Luxembourg (socle et pack complet : toutes les stations), Allemagne et Pays-Bas (pack Europe :
+#     DWD et KNMI, presque toutes les longues séries) ;
+#   - les stations GHCN déjà prises par le pack Europe (Italie, Portugal, Slovaquie : do_ghcn, même choix refait ici).
+# L'app saute aussi, à la lecture, une station d'un pack du monde à moins de 3 km d'une station d'un autre pack (lib/meteo.php).
+# Code FIPS de GHCN (2 premières lettres de l'identifiant) → (pays ISO, continent) ; « - » : pas pris.
+GHCN_FIPS = {
+    'AC': ('AG', 'amerique-nord'), 'AE': ('AE', 'asie'), 'AF': ('AF', 'asie'), 'AG': ('DZ', 'afrique'), 'AJ': ('AZ', 'asie'), 'AL': ('AL', 'europe'),
+    'AM': ('AM', 'asie'), 'AO': ('AO', 'afrique'), 'AQ': ('AS', 'oceanie'), 'AR': ('AR', 'amerique-sud'), 'AS': ('AU', 'oceanie'), 'AU': ('AT', 'europe'),
+    'AY': ('AQ', '-'), 'BA': ('BH', 'asie'), 'BB': ('BB', 'amerique-nord'), 'BC': ('BW', 'afrique'), 'BD': ('BM', 'amerique-nord'), 'BE': ('BE', '-'),
+    'BF': ('BS', 'amerique-nord'), 'BG': ('BD', 'asie'), 'BH': ('BZ', 'amerique-nord'), 'BK': ('BA', 'europe'), 'BL': ('BO', 'amerique-sud'), 'BM': ('MM', 'asie'),
+    'BN': ('BJ', 'afrique'), 'BO': ('BY', 'europe'), 'BP': ('SB', 'oceanie'), 'BR': ('BR', 'amerique-sud'), 'BU': ('BG', 'europe'), 'BX': ('BN', 'asie'),
+    'BY': ('BI', 'afrique'), 'CA': ('CA', 'amerique-nord'), 'CB': ('KH', 'asie'), 'CD': ('TD', 'afrique'), 'CE': ('LK', 'asie'), 'CF': ('CG', 'afrique'),
+    'CG': ('CD', 'afrique'), 'CH': ('CN', 'asie'), 'CI': ('CL', 'amerique-sud'), 'CJ': ('KY', 'amerique-nord'), 'CK': ('CC', 'oceanie'), 'CM': ('CM', 'afrique'),
+    'CO': ('CO', 'amerique-sud'), 'CQ': ('MP', 'oceanie'), 'CS': ('CR', 'amerique-nord'), 'CT': ('CF', 'afrique'), 'CU': ('CU', 'amerique-nord'), 'CV': ('CV', 'afrique'),
+    'CW': ('CK', 'oceanie'), 'CY': ('CY', 'europe'), 'DA': ('DK', 'europe'), 'DO': ('DM', 'amerique-nord'), 'DR': ('DO', 'amerique-nord'), 'EC': ('EC', 'amerique-sud'),
+    'EG': ('EG', 'afrique'), 'EI': ('IE', 'europe'), 'EK': ('GQ', 'afrique'), 'EN': ('EE', 'europe'), 'ER': ('ER', 'afrique'), 'ES': ('SV', 'amerique-nord'),
+    'ET': ('ET', 'afrique'), 'EU': ('TF', 'afrique'), 'EZ': ('CZ', 'europe'), 'FG': ('GF', 'amerique-sud'), 'FI': ('FI', 'europe'), 'FJ': ('FJ', 'oceanie'),
+    'FK': ('FK', 'amerique-sud'), 'FM': ('FM', 'oceanie'), 'FP': ('PF', 'oceanie'), 'FR': ('FR', '-'), 'FS': ('TF', '-'), 'GA': ('GM', 'afrique'),
+    'GB': ('GA', 'afrique'), 'GG': ('GE', 'asie'), 'GH': ('GH', 'afrique'), 'GI': ('GI', 'europe'), 'GL': ('GL', 'amerique-nord'), 'GM': ('DE', '-'),
+    'GP': ('GP', 'amerique-nord'), 'GQ': ('GU', 'oceanie'), 'GR': ('GR', 'europe'), 'GT': ('GT', 'amerique-nord'), 'GV': ('GN', 'afrique'), 'GY': ('GY', 'amerique-sud'),
+    'HO': ('HN', 'amerique-nord'), 'HR': ('HR', 'europe'), 'HU': ('HU', 'europe'), 'IC': ('IS', 'europe'), 'ID': ('ID', 'asie'), 'IN': ('IN', 'asie'),
+    'IO': ('IO', 'asie'), 'IR': ('IR', 'asie'), 'IS': ('IL', 'asie'), 'IT': ('IT', 'europe'), 'IV': ('CI', 'afrique'), 'IZ': ('IQ', 'asie'),
+    'JA': ('JP', 'asie'), 'JM': ('JM', 'amerique-nord'), 'JN': ('SJ', 'europe'), 'JO': ('JO', 'asie'), 'JQ': ('UM', 'oceanie'), 'JU': ('TF', 'afrique'),
+    'KE': ('KE', 'afrique'), 'KG': ('KG', 'asie'), 'KN': ('KP', 'asie'), 'KR': ('KI', 'oceanie'), 'KS': ('KR', 'asie'), 'KT': ('CX', 'oceanie'),
+    'KU': ('KW', 'asie'), 'KZ': ('KZ', 'asie'), 'LA': ('LA', 'asie'), 'LE': ('LB', 'asie'), 'LG': ('LV', 'europe'), 'LH': ('LT', 'europe'),
+    'LI': ('LR', 'afrique'), 'LO': ('SK', 'europe'), 'LQ': ('UM', 'oceanie'), 'LT': ('LS', 'afrique'), 'LU': ('LU', '-'), 'LY': ('LY', 'afrique'),
+    'MA': ('MG', 'afrique'), 'MB': ('MQ', 'amerique-nord'), 'MC': ('MO', 'asie'), 'MD': ('MD', 'europe'), 'MF': ('YT', 'afrique'), 'MG': ('MN', 'asie'),
+    'MI': ('MW', 'afrique'), 'MJ': ('ME', 'europe'), 'MK': ('MK', 'europe'), 'ML': ('ML', 'afrique'), 'MO': ('MA', 'afrique'), 'MP': ('MU', 'afrique'),
+    'MQ': ('UM', 'oceanie'), 'MR': ('MR', 'afrique'), 'MT': ('MT', 'europe'), 'MU': ('OM', 'asie'), 'MV': ('MV', 'asie'), 'MX': ('MX', 'amerique-nord'),
+    'MY': ('MY', 'asie'), 'MZ': ('MZ', 'afrique'), 'NC': ('NC', 'oceanie'), 'NE': ('NU', 'oceanie'), 'NF': ('NF', 'oceanie'), 'NG': ('NE', 'afrique'),
+    'NH': ('VU', 'oceanie'), 'NI': ('NG', 'afrique'), 'NL': ('NL', '-'), 'NN': ('SX', 'amerique-nord'), 'NO': ('NO', 'europe'), 'NP': ('NP', 'asie'),
+    'NS': ('SR', 'amerique-sud'), 'NU': ('NI', 'amerique-nord'), 'NZ': ('NZ', 'oceanie'), 'PA': ('PY', 'amerique-sud'), 'PC': ('PN', 'oceanie'), 'PE': ('PE', 'amerique-sud'),
+    'PK': ('PK', 'asie'), 'PL': ('PL', 'europe'), 'PM': ('PA', 'amerique-nord'), 'PO': ('PT', 'europe'), 'PP': ('PG', 'oceanie'), 'PS': ('PW', 'oceanie'),
+    'PU': ('GW', 'afrique'), 'QA': ('QA', 'asie'), 'RE': ('RE', 'afrique'), 'RI': ('RS', 'europe'), 'RM': ('MH', 'oceanie'), 'RO': ('RO', 'europe'),
+    'RP': ('PH', 'asie'), 'RQ': ('PR', 'amerique-nord'), 'RS': ('RU', 'europe'), 'RW': ('RW', 'afrique'), 'SA': ('SA', 'asie'), 'SB': ('PM', 'amerique-nord'),
+    'SE': ('SC', 'afrique'), 'SF': ('ZA', 'afrique'), 'SG': ('SN', 'afrique'), 'SH': ('SH', 'afrique'), 'SI': ('SI', 'europe'), 'SL': ('SL', 'afrique'),
+    'SN': ('SG', 'asie'), 'SP': ('ES', 'europe'), 'ST': ('LC', 'amerique-nord'), 'SU': ('SD', 'afrique'), 'SV': ('SJ', 'europe'), 'SW': ('SE', 'europe'),
+    'SX': ('GS', 'amerique-sud'), 'SY': ('SY', 'asie'), 'SZ': ('CH', '-'), 'TD': ('TT', 'amerique-nord'), 'TE': ('TF', 'afrique'), 'TH': ('TH', 'asie'),
+    'TI': ('TJ', 'asie'), 'TL': ('TK', 'oceanie'), 'TN': ('TO', 'oceanie'), 'TO': ('TG', 'afrique'), 'TS': ('TN', 'afrique'), 'TU': ('TR', 'asie'),
+    'TV': ('TV', 'oceanie'), 'TX': ('TM', 'asie'), 'TZ': ('TZ', 'afrique'), 'UC': ('CW', 'amerique-nord'), 'UG': ('UG', 'afrique'), 'UK': ('GB', 'europe'),
+    'UP': ('UA', 'europe'), 'US': ('US', 'amerique-nord'), 'UV': ('BF', 'afrique'), 'UY': ('UY', 'amerique-sud'), 'UZ': ('UZ', 'asie'), 'VE': ('VE', 'amerique-sud'),
+    'VM': ('VN', 'asie'), 'VQ': ('VI', 'amerique-nord'), 'WA': ('NA', 'afrique'), 'WF': ('WF', 'oceanie'), 'WI': ('EH', 'afrique'), 'WQ': ('UM', 'oceanie'),
+    'WZ': ('SZ', 'afrique'), 'ZA': ('ZM', 'afrique'), 'ZI': ('ZW', 'afrique'),
+}
+WORLD_URAL_LON = 60.0  # Russie : à l'ouest de l'Oural → Europe, à l'est → Asie
+# région → (titre, combien de stations au plus, distance minimale entre deux stations en km, années de TMAX au moins)
+# (la taille d'un pack : ≈ 1,2 Ko par station et par année ; voir la ligne de chaque pack dans heritage-meteo.js)
+WORLD_REGIONS = {
+    'amerique-nord': ('Amérique du Nord', 2500, 45.0, 30),
+    'amerique-sud': ('Amérique du Sud', 800, 35.0, 15),
+    'afrique': ('Afrique', 800, 35.0, 15),
+    'asie': ('Asie', 1800, 40.0, 20),
+    'oceanie': ('Océanie', 1000, 35.0, 20),
+    'europe': ('Europe (hors pack Europe)', 1200, 30.0, 20),
+}
+WORLD_KINDS = ['monde-' + r for r in WORLD_REGIONS]
+# éléments GHCN → colonnes ; WT** (phénomènes du jour) → bits de WW
+GHCN_WT_BITS = {'WT01': F.WW_FOG, 'WT02': F.WW_FOG, 'WT21': F.WW_FOG, 'WT22': F.WW_FOG, 'WT03': F.WW_STORM, 'WT04': F.WW_HAIL, 'WT05': F.WW_HAIL,
+                'WT18': F.WW_SNOW, 'WT06': F.WW_ICE, 'WT15': F.WW_ICE, 'WT17': F.WW_ICE, 'WT13': F.WW_MIST}
+
+
+def ghcn_region(sid, lon):
+    """la région d'une station GHCN (None : pas dans les packs du monde)"""
+    iso, reg = GHCN_FIPS.get(sid[:2], ('', '-'))
+    if sid[:2] == 'RS':
+        reg = 'europe' if lon < WORLD_URAL_LON else 'asie'
+    return None if reg == '-' else reg
+
+
+def parse_ghcn_world(text):
+    """comme parse_ghcn, avec en plus : la neige tombée (SNOW) quand la hauteur au sol (SNWD) manque, les nuages (ACMH),
+    et les phénomènes (WT** : brouillard, orage, grêle, neige, verglas, brume)"""
+    days = {}
+    fresh = {}
+    for r in csv.reader(io.StringIO(text)):
+        if len(r) < 4 or not re.match(r'^\d{8}$', r[1]) or (len(r) > 5 and r[5].strip()):
+            continue
+        el = r[2]
+        try:
+            v = int(r[3])
+        except ValueError:
+            continue
+        d = int(r[1])
+        k = {'TMAX': 'TX', 'TMIN': 'TN', 'PRCP': 'RR', 'SNWD': 'SN', 'TSUN': 'SS', 'WSFG': 'FX', 'ACMH': 'NN'}.get(el)
+        if k:
+            if k in ('TX', 'TN') and not -900 <= v <= 650:  # au-delà de −90 °C / +65 °C : une erreur de saisie
+                continue
+            days.setdefault(d, {})[k] = v // 10 if k == 'SN' else v
+        elif el == 'SNOW':
+            fresh[d] = v
+            if v > 0:
+                x = days.setdefault(d, {})
+                x['WW'] = (x.get('WW') or 0) | F.WW_SNOW
+        elif el in GHCN_WT_BITS and v:
+            x = days.setdefault(d, {})
+            x['WW'] = (x.get('WW') or 0) | GHCN_WT_BITS[el]
+    for d, v in fresh.items():  # neige tombée en mm → cm, seulement quand la hauteur au sol n'est pas donnée
+        x = days.setdefault(d, {})
+        if x.get('SN') is None:
+            x['SN'] = v // 10
+    return days
+
+
+def europe_ghcn_ids(metas, inv):
+    """les stations GHCN que le pack Europe prend déjà (même choix que do_ghcn, hors essai)"""
+    out = set()
+    for fips, (iso, howmany) in GHCN_COUNTRIES.items():
+        ids = sorted([i for i in metas if i.startswith(fips) and i in inv], key=lambda i: inv[i], reverse=True)[:howmany]
+        out.update(ids)
+    return out
+
+
+def ghcn_world_candidates(stations_text, inventory_text, region, min_years):
+    """les stations d'une région → [(ID, pays ISO, lat, lon, années de TMAX, première année)], plus longue série d'abord"""
+    span, first = {}, {}
+    for l in inventory_text.splitlines():
+        p = l.split()
+        if len(p) >= 6 and p[3] == 'TMAX':
+            span[p[0]] = int(p[5]) - int(p[4]) + 1
+            first[p[0]] = int(p[4])
+    eu = europe_ghcn_ids(parse_ghcn_stations(stations_text, {k: v[0] for k, v in GHCN_COUNTRIES.items()}), span)
+    rows, metas = [], {}
+    for l in stations_text.splitlines():
+        sid = l[0:11].strip()
+        if sid not in span or span[sid] < min_years or sid in eu:
+            continue
+        try:
+            lat, lon = float(l[12:20]), float(l[21:30])
+        except ValueError:
+            continue
+        if ghcn_region(sid, lon) != region:
+            continue
+        iso = GHCN_FIPS[sid[:2]][0]
+        metas[sid] = {'code': sid, 'lat': lat, 'lon': lon, 'alt': (None if num(l[31:37]) in (None, -999.9) else num(l[31:37])), 'nom': l[41:71].strip().title(), 'pays': iso}
+        rows.append((sid, iso, lat, lon, span[sid], first[sid]))
+    rows.sort(key=lambda r: (-(r[4] + max(0, 1900 - r[5]) * 0.5), r[0]))
+    return rows, metas
+
+
+def select_spread(rows, n, min_km):
+    """les n meilleures (rows déjà rangées, meilleure d'abord), sans deux stations à moins de min_km ; la distance baisse
+    (× 0,7) tant qu'il en manque. Recherche des voisines par cases de 1° (rapide même pour 20 000 stations)."""
+    picked, taken = [], set()
+    cells = {}
+
+    def near(lat, lon, d):
+        dl = int(d / 111.0) + 1
+        dlo = int(d / max(5.0, 111.0 * math.cos(math.radians(lat)))) + 1
+        ci, cj = int(math.floor(lat)), int(math.floor(lon))
+        for i in range(ci - dl, ci + dl + 1):
+            for j in range(cj - dlo, cj + dlo + 1):
+                for (a, b) in cells.get((i, ((j + 180) % 360) - 180), ()):
+                    if haversine(lat, lon, a, b) < d:
+                        return True
+        return False
+    d = min_km
+    while len(picked) < n and d >= 3:
+        for r in rows:
+            if len(picked) >= n:
+                break
+            if r[0] in taken or near(r[2], r[3], d):
+                continue
+            picked.append(r)
+            taken.add(r[0])
+            cells.setdefault((int(math.floor(r[2])), int(math.floor(r[3]))), []).append((r[2], r[3]))
+        d *= 0.7
+    return [r[0] for r in picked]
+
+
+def do_world(net, work, region, years, n=None, test=False):
+    """les stations GHCN d'une région : choisies, téléchargées une à une (reprise), lues, puis le fichier est effacé
+    (il n'en reste que les blocs : le dossier de travail reste petit, même pour 2 500 stations)"""
+    title, howmany, min_km, min_years = WORLD_REGIONS[region]
+    step = 'monde-' + region
+    st_text = open_text(net.get(GHCN_BASE + 'ghcnd-stations.txt', 'ghcnd-stations.txt', 'GHCN (stations)'))
+    inv_text = open_text(net.get(GHCN_BASE + 'ghcnd-inventory.txt', 'ghcnd-inventory.txt', 'GHCN (inventaire)'))
+    rows, metas = ghcn_world_candidates(st_text, inv_text, region, 1 if test else min_years)
+    ids = select_spread(rows, 3 if test else (n or howmany), min_km)
+    say(f'   {title} : {plural(len(rows), "station")} avec ≥ {min_years} ans de températures, {len(ids)} choisies')
+    got = 0
+    for k, sid in enumerate(ids):
+        if work.done('ghcn-' + sid):
+            got += 1
+            continue
+        p = net.get(f'{GHCN_BASE}by_station/{sid}.csv.gz', f'ghcn-{sid}.csv.gz', f'GHCN {metas[sid]["nom"]}', missing_ok=True)
+        if p:
+            if work.add_daily('ghcn', metas[sid], parse_ghcn_world(open_text(p)), years):
+                got += 1
+            work.db.commit()
+            if not net.offline:
+                os.remove(p)
+        work.mark('ghcn-' + sid)
+        if (k + 1) % 100 == 0:
+            say(f'   … {k + 1} / {len(ids)}')
+    say(f'   • GHCN-Daily ({title}) : {plural(got, "station")}')
+    work.mark(step)
+    return ids
+
+
+def build_world(net, out, region, years, a):
+    """meteo-monde-<région>.sqlite puis meteo-pack-monde-<région>.lcmeteo"""
+    kind = 'monde-' + region
+    title = WORLD_REGIONS[region][0]
+    work = Work(os.path.join(out, 'travail', f'stations-{kind}.sqlite'))
+    ids = do_world(net, work, region, years, a.stations_monde, a.test)
+    work.compute_scores()
+    # seulement les stations qui ont au moins un an de températures en tout (l'inventaire promet parfois plus qu'il n'y a)
+    want = set(ids)
+    keep = [sid for sid, code in work.db.execute('SELECT s.id, s.code FROM stations s JOIN score c ON c.station_id=s.id WHERE c.good >= 365 ORDER BY s.id') if code in want]
+    path = os.path.join(out, f'meteo-{kind}.sqlite')
+    if os.path.exists(path):
+        os.remove(path)
+    db = F.open_db(path, kind, title)
+    pays = sorted({r[0] for r in work.db.execute(f'SELECT DISTINCT pays FROM stations WHERE id IN ({",".join(str(i) for i in keep) or "0"})')})
+    F.set_meta(db, countries=kind.upper(), station_countries=','.join(pays), region=region)
+    F.add_sources(db, ['ghcn'], a.until)
+    db.execute("UPDATE sources SET contenu=?, annees=? WHERE id='ghcn'", (f'Les plus longues séries de stations ({title}), chaque jour : températures, pluie, neige', '≈ 1760 → aujourd’hui'))
+    copy_stations(work.db, db, keep)
+    write_normals(db, 'station', 'daily', 'station_id')
+    db.close()
+    say(f'   {plural(len(keep), "station")} dans le pack, {len(pays)} pays')
+    finish(path, out, kind, page_size=16384)
+
+
 # ═══════════════════════ Les réanalyses (facultatives) ═══════════════════════
 def need_netcdf(what):
     try:
@@ -1258,30 +1521,49 @@ def do_20cr(db, years, boxes, test=False, net=None):
         lats = lons = None
         for k, (path, var) in C20_FILES.items():
             url = C20_OPENDAP + path.format(year=y)
-            try:
-                ds = nc.Dataset(url)
-            except OSError:
+
+            def open_full():
                 # sans OPeNDAP : le fichier entier (≈ 50 Mo) dans les téléchargements
                 if net is None:
                     raise Stop(f'20CR {y} : fichier inaccessible ({url}).')
-                p = net.get(C20_HTTP + path.format(year=y), f'20cr-{var}-{y}.nc', f'20CR {var} {y}')
-                ds = nc.Dataset(p)
-            la = ds.variables['lat'][:]
-            lo = ds.variables['lon'][:]
-            li = [i for i, x in enumerate(la) if s_ - 1 <= x <= n_ + 1]
-            oi = [i for i, x in enumerate(lo) if (w_ - 1) % 360 <= x <= 360 or x <= e_ + 1] if w_ < 0 else [i for i, x in enumerate(lo) if w_ - 1 <= x <= e_ + 1]
-            # seulement la boîte (par morceaux de longitudes contiguës : par OPeNDAP, seul ce morceau voyage)
+                return nc.Dataset(net.get(C20_HTTP + path.format(year=y), f'20cr-{var}-{y}.nc', f'20CR {var} {y}'))
             import numpy as np  # livré avec netCDF4
-            runs, start = [], oi[0]
-            for prev, cur in zip(oi, oi[1:] + [None]):
-                if cur != prev + 1:
-                    runs.append((start, prev)); start = cur
-            v = ds.variables[var]
-            data = np.concatenate([v[:, min(li):max(li) + 1, r0:r1 + 1] for r0, r1 in runs], axis=2)
+
+            def read(ds):
+                la = ds.variables['lat'][:]
+                lo = ds.variables['lon'][:]
+                li = [i for i, x in enumerate(la) if s_ - 1 <= x <= n_ + 1]
+                oi = [i for i, x in enumerate(lo) if (w_ - 1) % 360 <= x <= 360 or x <= e_ + 1] if w_ < 0 else [i for i, x in enumerate(lo) if w_ - 1 <= x <= e_ + 1]
+                # seulement la boîte (par morceaux de longitudes contiguës : par OPeNDAP, seul ce morceau voyage)
+                runs, start = [], oi[0]
+                for prev, cur in zip(oi, oi[1:] + [None]):
+                    if cur != prev + 1:
+                        runs.append((start, prev)); start = cur
+                v = ds.variables[var]
+                return la, lo, li, oi, np.concatenate([v[:, min(li):max(li) + 1, r0:r1 + 1] for r0, r1 in runs], axis=2)
+            # le serveur OPeNDAP coupe parfois (« NetCDF: Access failure ») : 3 essais par OPeNDAP, puis le fichier entier
+            got = None
+            for essai in range(5):
+                ds = None
+                try:
+                    ds = nc.Dataset(url) if essai < 3 else open_full()
+                    got = read(ds)
+                    break
+                except (RuntimeError, OSError) as err:
+                    print(f'   … 20CR {y} {var} : lecture coupée ({err}) — nouvel essai', flush=True)
+                    time.sleep(10 * (essai + 1))
+                finally:
+                    if ds is not None:
+                        try:
+                            ds.close()
+                        except Exception:
+                            pass
+            if got is None:
+                raise Stop(f'20CR {y} : lecture impossible après plusieurs essais ({url}).')
+            la, lo, li, oi, data = got
             lats = [float(la[i]) for i in range(min(li), max(li) + 1)]
             lons = [float(lo[i]) for i in oi]
             cols[k] = (data, list(range(len(oi))))
-            ds.close()
         nd = F.days_in_year(y)
         for a, lat in enumerate(lats):
             for b, lon360 in enumerate(lons):
@@ -1308,14 +1590,20 @@ def do_20cr(db, years, boxes, test=False, net=None):
 
 
 def cds_client():
+    """le client du Climate Data Store (bibliothèque ecmwf-datastores-client, installée avec cdsapi) : il sait déposer une
+    demande SANS l'attendre, puis la retrouver par son numéro (même d'une fabrication à l'autre)"""
     try:
-        import cdsapi
+        from ecmwf.datastores import Client
     except ImportError:
-        raise Stop('ERA5 a besoin de la bibliothèque cdsapi : tape « pip3 install cdsapi netCDF4 », crée ton compte Copernicus et ta clé (docs/METEO.md), puis relance (ou ajoute --sans-era5).')
-    try:
-        return cdsapi.Client(quiet=True)
-    except Exception as e:  # noqa: BLE001
-        raise Stop(f'ERA5 : la clé Copernicus manque ou est fausse ({e}). Suis l’étape « Le compte Copernicus » de docs/METEO.md (fichier .cdsapirc).')
+        raise Stop('ERA5 a besoin de la bibliothèque cdsapi (avec ecmwf-datastores-client) : tape « pip3 install cdsapi netCDF4 », crée ton compte Copernicus et ta clé (docs/METEO.md), puis relance (ou ajoute --sans-era5).')
+    import meteo_plus as P
+    url, key = P.read_rc()
+    if not key:
+        raise Stop('ERA5 : la clé Copernicus manque. Suis l’étape « Le compte Copernicus » de docs/METEO.md (fichier .cdsapirc).')
+    try:  # quelques essais seulement en cas de panne du serveur : la boucle des demandes réessaie d'elle-même plus tard
+        return Client(url=url, key=key, progress=False, maximum_tries=6, retry_after=30, sleep_max=60)
+    except Exception as e:  # noqa: BLE001 — le message ne contient jamais la clé
+        raise Stop(f'ERA5 : la clé Copernicus manque ou est fausse ({type(e).__name__}). Suis l’étape « Le compte Copernicus » de docs/METEO.md (fichier .cdsapirc).')
 
 
 def nc_var(ds, *names):
@@ -1325,16 +1613,254 @@ def nc_var(ds, *names):
     raise Stop('ERA5 : variable introuvable (' + ', '.join(names) + ') — le format de Copernicus a peut-être changé.')
 
 
-def do_era5(db, years, box, boxes, cache, hours_step=6, test=False):
-    """ERA5 : chaque jour (min, max, pluie, rafales, nuages, neige) et des heures (toutes les hours_step heures), carreaux sur terre seulement"""
+# ERA5 : les heures de « reanalysis-era5-single-levels » (rapide à servir), les statistiques du jour calculées ici
+# (min., max., moyenne des 24 heures 00–23 UTC : exactement ce que fait « derived-era5-single-levels-daily-statistics »,
+# dont chaque demande attendait des heures dans la file de Copernicus).
+ERA5_VARS = {'t2m': ('2m_temperature', ('t2m',)), 'fg': ('10m_wind_gust_since_previous_post_processing', ('fg10', 'i10fg')),
+             'tp': ('total_precipitation', ('tp',)), 'tcc': ('total_cloud_cover', ('tcc',)), 'sf': ('snowfall', ('sf',))}
+ERA5_DAILY = (('TN', 't2m', 'min'), ('TX', 't2m', 'max'), ('FX', 'fg', 'max'), ('RR', 'tp', 'mean'), ('SN', 'sf', 'mean'), ('NN', 'tcc', 'mean'))
+ERA5_HOURLY = (('T', 't2m'), ('RR', 'tp'), ('FX', 'fg'), ('NN', 'tcc'))
+ERA5_STATE = 'era5-demandes.json'
+
+
+class Era5Queue:
+    """les demandes ERA5 déposées chez Copernicus, sans les attendre une à une :
+    - leur numéro est écrit dans <cache>/era5-demandes.json dès le dépôt : une fabrication coupée (6 h de GitHub) les retrouve
+      à la suivante, déjà avancées ou finies dans la file, au lieu de les redéposer en dernière position ;
+    - au plus `in_flight` demandes à la fois ; une demande encore en file après `stale_s` ne garde plus sa place : la suivante
+      part quand même (au plus `in_flight_max` en tout) ;
+    - toutes les `log_s` secondes, une ligne dit où en est chaque demande (en file / en cours, depuis combien de temps) ;
+    - « trop gros » pour Copernicus → les demandes suivantes portent sur moins de mois."""
+
+    def __init__(self, client, cache, months_per=3, in_flight=6, in_flight_max=12, stale_s=90 * 60, poll_s=60, log_s=600,
+                 clock=time.time, sleep=time.sleep):
+        self.c, self.cache = client, cache
+        self.in_flight, self.in_flight_max, self.stale_s, self.poll_s, self.log_s = in_flight, in_flight_max, stale_s, poll_s, log_s
+        self.clock, self.sleep = clock, sleep
+        self.path = os.path.join(cache, ERA5_STATE)
+        st = {}
+        if os.path.exists(self.path):
+            try:
+                with open(self.path, encoding='utf-8') as f:
+                    st = json.load(f)
+            except (OSError, ValueError):
+                st = {}
+        self.months_per = int(st.get('mois') or months_per)
+        self.jobs = st.get('demandes') or {}   # étiquette → {id, depuis, jeu, annee, mois}
+        self.tries = st.get('essais') or {}    # étiquette → combien de fois déposée (oublié une fois le fichier reçu)
+        self.remotes, self.status, self.last_log = {}, {}, 0.0
+
+    def save(self):
+        tmp = self.path + '.part'
+        with open(tmp, 'w', encoding='utf-8') as f:
+            json.dump({'mois': self.months_per, 'demandes': self.jobs, 'essais': self.tries}, f, indent=1)
+        os.replace(tmp, self.path)
+
+    def submit(self, label, dataset, req, extra=None):
+        r = self.c.submit(dataset, req)
+        self.jobs[label] = dict(extra or {}, id=r.request_id, depuis=self.clock(), jeu=dataset)
+        self.tries[label] = self.tries.get(label, 0) + 1
+        self.remotes[label] = r
+        self.status[label] = 'accepted'
+        self.save()
+        say(f'     ERA5 {label} : demande déposée chez Copernicus')
+
+    def remote(self, label):
+        if label not in self.remotes:
+            self.remotes[label] = self.c.get_remote(self.jobs[label]['id'])
+        return self.remotes[label]
+
+    def forget(self, label, done=False):
+        if done:
+            self.tries.pop(label, None)
+        self.jobs.pop(label, None)
+        self.remotes.pop(label, None)
+        self.status.pop(label, None)
+        self.save()
+
+    def active(self):
+        """les demandes qui comptent pour une place : en cours chez Copernicus, ou en file depuis moins de stale_s"""
+        now = self.clock()
+        return [k for k, j in self.jobs.items() if self.status.get(k) == 'running' or now - j['depuis'] < self.stale_s]
+
+    def has_room(self):
+        return len(self.jobs) < self.in_flight_max and len(self.active()) < self.in_flight
+
+    def poll(self, label):
+        """→ 'successful' / 'accepted' / 'running' / 'gone' (à redéposer) / ('failed', message)"""
+        try:
+            r = self.remote(label)
+            s = r.status
+        except Exception as e:  # noqa: BLE001
+            code = getattr(getattr(e, 'response', None), 'status_code', None)
+            if code in (404, 410):
+                return 'gone'
+            say(f'     ERA5 {label} : Copernicus ne répond pas ({type(e).__name__}) — on réessaiera')
+            self.remotes.pop(label, None)
+            return self.status.get(label, 'accepted')
+        self.status[label] = s
+        if s in ('failed', 'rejected'):
+            try:
+                r.results_ready
+                msg = s
+            except Exception as e:  # noqa: BLE001
+                msg = str(e)
+            return ('failed', msg)
+        if s in ('dismissed', 'deleted'):
+            return 'gone'
+        return s
+
+    def download(self, label, target):
+        r = self.remote(label)
+        r.download(target + '.part')
+        os.replace(target + '.part', target)
+        try:  # le résultat est chez nous : Copernicus peut l'effacer
+            r.delete()
+        except Exception:  # noqa: BLE001
+            pass
+
+    def report(self, force=False):
+        now = self.clock()
+        if not self.jobs or (not force and now - self.last_log < self.log_s):
+            return
+        self.last_log = now
+        words = {'accepted': 'en file', 'running': 'en cours', 'successful': 'prête'}
+        parts = [f'{k} {words.get(self.status.get(k, "accepted"), self.status.get(k))} ({int((now - j["depuis"]) // 60)} min)'
+                 for k, j in sorted(self.jobs.items())]
+        say('     ERA5 chez Copernicus : ' + ' · '.join(parts))
+
+    def wait_one(self, label, dataset, req, target):
+        """une petite demande attendue tout de suite (la carte terre/mer), avec la même reprise par numéro"""
+        while not os.path.exists(target):
+            if label not in self.jobs:
+                self.submit(label, dataset, req)
+            s = self.poll(label)
+            if s == 'successful':
+                self.download(label, target)
+                self.forget(label, done=True)
+            elif s == 'gone':
+                self.forget(label)
+            elif isinstance(s, tuple):
+                raise Stop(f'ERA5 : Copernicus refuse la demande {label} : {s[1]}')
+            else:
+                self.report()
+                self.sleep(self.poll_s)
+
+
+def era5_month_groups(months, per):
+    """[1..12], 3 → [[1,2,3],[4,5,6],…] (des mois qui se suivent)"""
+    out, cur = [], []
+    for m in months:
+        if cur and (m != cur[-1] + 1 or len(cur) >= per):
+            out.append(cur)
+            cur = []
+        cur.append(m)
+    if cur:
+        out.append(cur)
+    return out
+
+
+def era5_label(y, ms):
+    return f'{y}-{ms[0]:02d}-{ms[-1]:02d}'
+
+
+def era5_reduce(nc, raw, y, ms, pts, nlat, nlon, hours_step, out):
+    """un fichier reçu (des mois d'une année, toutes les heures) → pour les carreaux gardés : les 6 valeurs de chaque jour et les
+    4 valeurs toutes les hours_step heures, dans <out> (.npz, quelques Mo) ; le gros fichier est ensuite effacé"""
+    import numpy as np
+    import warnings
+    import meteo_plus as P
+    t0 = datetime.datetime(y, ms[0], 1)
+    t1 = datetime.datetime(y + 1, 1, 1) if ms[-1] == 12 else datetime.datetime(y, ms[-1] + 1, 1)
+    nh = int((t1 - t0).total_seconds() // 3600)
+    A, Bx = np.array([p[0] for p in pts], dtype=int), np.array([p[1] for p in pts], dtype=int)
+    got = {k: np.full((nh, len(pts)), np.nan, dtype='f4') for k in ERA5_VARS}
+    seen = set()
+    files = [f for f in P.unpack(raw, raw + '.d') if f.lower().endswith('.nc') or not os.path.splitext(f)[1]]
+    for fp in files:
+        ds = nc.Dataset(fp)
+        try:
+            tv = next((ds.variables[n] for n in ('valid_time', 'time') if n in ds.variables), None)
+            if tv is None:
+                raise Stop('ERA5 : pas d’axe du temps dans le fichier reçu — le format de Copernicus a peut-être changé.')
+            times = nc.num2date(tv[:], tv.units, getattr(tv, 'calendar', 'standard'), only_use_cftime_datetimes=False, only_use_python_datetimes=True)
+            idx = np.array([int(round((datetime.datetime(t.year, t.month, t.day, t.hour) - t0).total_seconds() / 3600)) for t in times], dtype=int)
+            ok = (idx >= 0) & (idx < nh)
+            for k, (_, names) in ERA5_VARS.items():
+                v = next((ds.variables[n] for n in names if n in ds.variables), None)
+                if v is None:
+                    continue
+                if len(ds.variables[next(n for n in ('latitude', 'lat') if n in ds.variables)]) != nlat or \
+                        len(ds.variables[next(n for n in ('longitude', 'lon') if n in ds.variables)]) != nlon:
+                    raise Stop('ERA5 : la grille reçue n’est pas celle de la carte terre/mer — le format de Copernicus a peut-être changé.')
+                a = np.ma.filled(v[:].astype('f4'), np.nan)
+                if a.ndim == 4:  # ancien format : une dimension « expver » (ERA5 / ERA5T) → la valeur présente
+                    b = a[:, 0]
+                    for e in range(1, a.shape[1]):
+                        b = np.where(np.isnan(b), a[:, e], b)
+                    a = b
+                got[k][idx[ok]] = a[ok][:, A, Bx]
+                seen.add(k)
+        finally:
+            ds.close()
+    miss = [ERA5_VARS[k][0] for k in ERA5_VARS if k not in seen]
+    if miss:
+        raise Stop('ERA5 : variable introuvable dans le fichier reçu (' + ', '.join(miss) + ') — le format de Copernicus a peut-être changé.')
+    nd = nh // 24
+    with warnings.catch_warnings():
+        warnings.simplefilter('ignore', RuntimeWarning)  # un jour sans aucune valeur → NaN (écrit « pas de valeur »)
+        f = {'min': np.nanmin, 'max': np.nanmax, 'mean': np.nanmean}
+        daily = np.stack([f[op](got[k].reshape(nd, 24, len(pts)), axis=1) for _, k, op in ERA5_DAILY]).astype('f4')
+    hourly = np.stack([got[k][::hours_step] for _, k in ERA5_HOURLY]).astype('f4')
+    with open(out + '.part', 'wb') as fh:
+        np.savez_compressed(fh, daily=daily, hourly=hourly, months=np.array(ms))
+    os.replace(out + '.part', out)
+    shutil.rmtree(raw + '.d', ignore_errors=True)
+    os.remove(raw)
+
+
+def era5_write_year(db, y, ids, parts, hours_step, test):
+    """les morceaux réduits d'une année (dans l'ordre des mois) → les blocs du jour et des heures de chaque carreau"""
+    import numpy as np
+    daily = np.concatenate([p['daily'] for p in parts], axis=1)
+    hourly = np.concatenate([p['hourly'] for p in parts], axis=1)
+    nd = daily.shape[1]
+    nrows = F.days_in_year(y) if not test else nd
+    hrows = nrows * (24 // hours_step)
+    conv_d = {'TN': lambda v: (v - 273.15) * 10, 'TX': lambda v: (v - 273.15) * 10, 'FX': lambda v: v * 10,
+              'RR': lambda v: v * 24 * 1000 * 10, 'SN': lambda v: v * 24 * 1000 / 10, 'NN': lambda v: v * 100}
+    conv_h = {'T': lambda v: (v - 273.15) * 10, 'RR': lambda v: v * 1000 * 10 * hours_step, 'FX': lambda v: v * 10, 'NN': lambda v: v * 100}
+    D = {c: np.rint(conv_d[c](daily[i].astype('f8'))) for i, (c, _, _) in enumerate(ERA5_DAILY)}
+    H = {c: np.rint(conv_h[c](hourly[i].astype('f8'))) for i, (c, _) in enumerate(ERA5_HOURLY)}
+    order = {'TN': 0, 'TX': 1, 'RR': 2, 'SN': 3, 'FX': 4, 'NN': 5}  # l'ordre des colonnes d'avant
+    col = lambda arr, j, n: ([None if x != x else int(x) for x in arr[:, j].tolist()] + [None] * n)[:n]
+    for j, gid in enumerate(ids):
+        d = [(c, col(D[c], j, nrows)) for c in sorted(D, key=order.get)]
+        db.execute('INSERT OR REPLACE INTO grid_daily(grid_id, annee, blob) VALUES(?,?,?)', (gid, y, F.encode(d)))
+        h = [(c, col(H[c], j, hrows)) for c, _ in ERA5_HOURLY]
+        db.execute('INSERT OR REPLACE INTO grid_hourly(grid_id, annee, blob) VALUES(?,?,?)', (gid, y, F.encode(h, step=hours_step)))
+    db.execute("UPDATE grid SET debut=MIN(COALESCE(debut, ?), ?), fin=MAX(COALESCE(fin, ?), ?), heures_debut=MIN(COALESCE(heures_debut, ?), ?) WHERE source='era5'", (y, y, y, y, y, y))
+    F.set_meta(db, **{f'era5-{y}': 'ok'})
+    db.commit()
+
+
+def do_era5(db, years, box, boxes, cache, hours_step=6, test=False, client=None, queue_opts=None):
+    """ERA5 : chaque jour (min, max, pluie, rafales, nuages, neige) et des heures (toutes les hours_step heures), carreaux sur terre
+    seulement. Les heures de plusieurs mois et des 5 variables viennent d'une seule demande ; plusieurs demandes attendent en même
+    temps chez Copernicus ; chaque année finie est rangée tout de suite et ses fichiers effacés (rien n'est redemandé)."""
+    import glob as _glob
+    import numpy as np
+    import meteo_plus as P
     nc = need_netcdf('ERA5')
-    c = cds_client()
     os.makedirs(cache, exist_ok=True)
+    big = (box[0] - box[2]) * (box[3] - box[1]) > 400 or hours_step == 1  # le pack Europe : un mois par demande
+    q = Era5Queue(client or cds_client(), cache, **dict({'months_per': 1 if big else 3}, **(queue_opts or {})))
     area = [box[0], box[1], box[2], box[3]]
+    for old in _glob.glob(os.path.join(cache, 'era5-*-daily_*.nc')) + _glob.glob(os.path.join(cache, 'era5-*-heures*.nc')):
+        os.remove(old)  # les fichiers de l'ancienne façon (une demande par statistique du jour) : plus lus
     lsm_p = os.path.join(cache, 'era5-lsm.nc')
-    if not os.path.exists(lsm_p):
-        c.retrieve(ERA5_HOURLY_DATASET, {'product_type': ['reanalysis'], 'variable': ['land_sea_mask', 'geopotential'], 'year': ['2000'], 'month': ['01'], 'day': ['01'],
-                                         'time': ['00:00'], 'area': area, 'data_format': 'netcdf', 'download_format': 'unarchived'}, lsm_p)
+    q.wait_one('terre-mer', ERA5_HOURLY_DATASET, {'product_type': ['reanalysis'], 'variable': ['land_sea_mask', 'geopotential'], 'year': ['2000'], 'month': ['01'],
+                                                        'day': ['01'], 'time': ['00:00'], 'area': area, 'data_format': 'netcdf', 'download_format': 'unarchived'}, lsm_p)
     ds = nc.Dataset(lsm_p)
     lats = [float(x) for x in nc_var(ds, 'latitude', 'lat')[:]]
     lons = [float(x) for x in nc_var(ds, 'longitude', 'lon')[:]]
@@ -1343,56 +1869,110 @@ def do_era5(db, years, box, boxes, cache, hours_step=6, test=False):
     keep = [(a, b) for a in range(len(lats)) for b in range(len(lons)) if float(lsm[a, b]) > 0.2 and in_boxes(lats[a], lons[b], boxes)]
     ds.close()
     g = Grid(db, 'era5', 0.25)
-    ids = {(a, b): g.id(lats[a], lons[b], round(float(zz[a, b]) / 9.80665)) for a, b in keep}
+    ids = [g.id(lats[a], lons[b], round(float(zz[a, b]) / 9.80665)) for a, b in keep]
     say(f'   • ERA5 : {len(ids)} carreaux sur terre')
-    for y in range(max(1940, years[0]), min(years[1], datetime.date.today().year - 1) + 1):
-        if db.execute('SELECT 1 FROM meta WHERE key=?', (f'era5-{y}',)).fetchone():
-            continue
-        months = ['01'] if test else [f'{m:02d}' for m in range(1, 13)]
-        files = {}
-        for stat, vars_ in (('daily_minimum', ['2m_temperature']), ('daily_maximum', ['2m_temperature', '10m_wind_gust_since_previous_post_processing']),
-                            ('daily_mean', ['total_precipitation', 'total_cloud_cover', 'snowfall'])):
-            p = os.path.join(cache, f'era5-{y}-{stat}.nc')
-            if not os.path.exists(p):
-                say(f'     ERA5 {y} : {stat}… (la file d’attente de Copernicus peut prendre du temps)')
-                c.retrieve(ERA5_DAILY_DATASET, {'product_type': 'reanalysis', 'variable': vars_, 'year': str(y), 'month': months, 'day': [f'{d:02d}' for d in range(1, 32)],
-                                                'daily_statistic': stat, 'time_zone': 'utc+00:00', 'frequency': '1_hourly', 'area': area}, p + '.part')
-                os.replace(p + '.part', p)
-            files[stat] = p
-        ph = os.path.join(cache, f'era5-{y}-heures.nc')
-        if not os.path.exists(ph):
-            c.retrieve(ERA5_HOURLY_DATASET, {'product_type': ['reanalysis'], 'variable': ['2m_temperature', 'total_precipitation', '10m_wind_gust_since_previous_post_processing', 'total_cloud_cover'],
-                                             'year': [str(y)], 'month': months, 'day': [f'{d:02d}' for d in range(1, 32)], 'time': [f'{h:02d}:00' for h in range(0, 24, hours_step)],
-                                             'area': area, 'data_format': 'netcdf', 'download_format': 'unarchived'}, ph + '.part')
-            os.replace(ph + '.part', ph)
-        dmin, dmax, dmean, hh = (nc.Dataset(files['daily_minimum']), nc.Dataset(files['daily_maximum']), nc.Dataset(files['daily_mean']), nc.Dataset(ph))
-        tn, tx = nc_var(dmin, 't2m')[:], nc_var(dmax, 't2m')[:]
-        fx = nc_var(dmax, 'fg10', 'i10fg')[:]
-        tp, tcc, sf = nc_var(dmean, 'tp')[:], nc_var(dmean, 'tcc')[:], nc_var(dmean, 'sf')[:]
-        ht, hrr, hfx, hnn = nc_var(hh, 't2m')[:], nc_var(hh, 'tp')[:], nc_var(hh, 'fg10', 'i10fg')[:], nc_var(hh, 'tcc')[:]
-        nd = tn.shape[0]
-        nrows = F.days_in_year(y) if not test else nd
-        for (a, b), gid in ids.items():
-            pad = lambda xs: xs + [None] * (nrows - len(xs))
-            daily = [('TN', pad([int(round((float(v) - 273.15) * 10)) for v in tn[:, a, b]])), ('TX', pad([int(round((float(v) - 273.15) * 10)) for v in tx[:, a, b]])),
-                     ('RR', pad([int(round(float(v) * 24 * 1000 * 10)) for v in tp[:, a, b]])), ('SN', pad([int(round(float(v) * 24 * 1000 / 10)) for v in sf[:, a, b]])),
-                     ('FX', pad([int(round(float(v) * 10)) for v in fx[:, a, b]])), ('NN', pad([int(round(float(v) * 100)) for v in tcc[:, a, b]]))]
-            db.execute('INSERT OR REPLACE INTO grid_daily(grid_id, annee, blob) VALUES(?,?,?)', (gid, y, F.encode(daily)))
-            per = 24 // hours_step
-            hrows = nrows * per
-            hp = lambda xs: xs + [None] * (hrows - len(xs))
-            hourly = [('T', hp([int(round((float(v) - 273.15) * 10)) for v in ht[:, a, b]])), ('RR', hp([int(round(float(v) * 1000 * 10 * hours_step)) for v in hrr[:, a, b]])),
-                      ('FX', hp([int(round(float(v) * 10)) for v in hfx[:, a, b]])), ('NN', hp([int(round(float(v) * 100)) for v in hnn[:, a, b]]))]
-            db.execute('INSERT OR REPLACE INTO grid_hourly(grid_id, annee, blob) VALUES(?,?,?)', (gid, y, F.encode(hourly, step=hours_step)))
-        for d in (dmin, dmax, dmean, hh):
-            d.close()
-        db.execute("UPDATE grid SET debut=MIN(COALESCE(debut, ?), ?), fin=MAX(COALESCE(fin, ?), ?), heures_debut=MIN(COALESCE(heures_debut, ?), ?) WHERE source='era5'", (y, y, y, y, y, y))
-        F.set_meta(db, **{f'era5-{y}': 'ok'})
-        db.commit()
-        say(f'   • ERA5 {y}')
-        if test:
-            break
+    first, last = max(1940, years[0]), min(years[1], datetime.date.today().year - 1)
+    todo = [y for y in range(first, last + 1) if not db.execute('SELECT 1 FROM meta WHERE key=?', (f'era5-{y}',)).fetchone()]
+    if test:
+        todo = todo[:1]
+    say(f'   ERA5 : {plural(len(todo), "année")} à faire ({first}–{last}), {q.months_per} mois par demande, {q.in_flight} demandes à la fois')
+    all_months = [1] if test else list(range(1, 13))
+    days = [f'{d:02d}' for d in range(1, 32)]
+    hours = [f'{h:02d}:00' for h in range(24)]
 
+    def reduced(y):
+        """les morceaux déjà réduits d'une année : {premier mois: (mois, fichier)}"""
+        out = {}
+        for p in _glob.glob(os.path.join(cache, f'era5-{y}-??-??.npz')):
+            m0, m1 = (int(x) for x in os.path.basename(p)[10:15].split('-'))
+            out[m0] = (list(range(m0, m1 + 1)), p)
+        return out
+
+    def plan():
+        """les morceaux qui restent à demander, dans l'ordre des années"""
+        asked = {(j['annee'], m) for j in q.jobs.values() if 'annee' in j for m in j['mois']}
+        out = []
+        for y in todo:
+            have = {m for ms, _ in reduced(y).values() for m in ms}
+            left = [m for m in all_months if m not in have and (y, m) not in asked]
+            out += [(y, ms) for ms in era5_month_groups(left, q.months_per)]
+        return out
+
+    def finish_years():
+        for y in list(todo):
+            parts = reduced(y)
+            if sorted(m for ms, _ in parts.values() for m in ms) != all_months:
+                continue
+            loaded = []
+            for m0 in sorted(parts):
+                with np.load(parts[m0][1]) as z:
+                    loaded.append({'daily': z['daily'], 'hourly': z['hourly']})
+            era5_write_year(db, y, ids, loaded, hours_step, test)
+            for _, p in parts.values():
+                os.remove(p)
+            todo.remove(y)
+            say(f'   • ERA5 {y} ({plural(len(todo), "année")} encore)')
+
+    finish_years()
+    while todo:
+        busy = False
+        for y, ms in plan():
+            if not q.has_room():
+                break
+            req = {'product_type': ['reanalysis'], 'variable': [v for v, _ in ERA5_VARS.values()], 'year': [str(y)], 'month': [f'{m:02d}' for m in ms],
+                   'day': days, 'time': hours, 'area': area, 'data_format': 'netcdf', 'download_format': 'unarchived'}
+            try:
+                q.submit(era5_label(y, ms), ERA5_HOURLY_DATASET, req, {'annee': y, 'mois': ms})
+            except Exception as e:  # noqa: BLE001 — Copernicus peut refuser dès le dépôt (« cost limits exceeded »)
+                msg = f'{e} {getattr(getattr(e, "response", None), "text", "") or ""}'
+                if P.TOO_LARGE.search(msg) and q.months_per > 1:
+                    q.months_per = max(1, q.months_per // 2)
+                    q.save()
+                    say(f'     ERA5 {era5_label(y, ms)} : « trop gros » pour Copernicus → {q.months_per} mois par demande désormais')
+                    busy = True
+                elif P.TOO_LARGE.search(msg):
+                    raise Stop(f'ERA5 : Copernicus refuse même un mois de demande ({era5_label(y, ms)}) : {msg.strip()[:300]}')
+                else:
+                    say(f'     ERA5 {era5_label(y, ms)} : dépôt impossible pour l’instant ({type(e).__name__}) — on réessaiera')
+                break
+            busy = True
+        for label in sorted(q.jobs):
+            j = q.jobs[label]
+            if 'annee' not in j:
+                continue
+            s = q.poll(label)
+            if s == 'successful':
+                raw = os.path.join(cache, f'era5-{label}.nc')
+                say(f'     ERA5 {label} : prête, téléchargement…')
+                try:
+                    q.download(label, raw)
+                except Exception as e:  # noqa: BLE001 — coupure : le résultat reste chez Copernicus, on le reprendra
+                    say(f'     ERA5 {label} : téléchargement interrompu ({type(e).__name__}) — on réessaiera')
+                    q.remotes.pop(label, None)
+                    continue
+                era5_reduce(nc, raw, j['annee'], j['mois'], keep, len(lats), len(lons), hours_step, os.path.join(cache, f'era5-{label}.npz'))
+                q.forget(label, done=True)
+                finish_years()
+                busy = True
+            elif s == 'gone':
+                say(f'     ERA5 {label} : Copernicus ne la connaît plus — redemandée')
+                q.forget(label)
+                busy = True
+            elif isinstance(s, tuple):
+                msg = s[1].strip().splitlines()[0][:300] if s[1].strip() else 'échec'
+                if P.TOO_LARGE.search(s[1]) and q.months_per > 1:
+                    q.months_per = max(1, q.months_per // 2)
+                    say(f'     ERA5 {label} : « trop gros » pour Copernicus → {q.months_per} mois par demande désormais')
+                elif q.tries.get(label, 1) >= 3:
+                    q.save()
+                    raise Stop(f'ERA5 : Copernicus refuse la demande {label} trois fois : {msg}')
+                else:
+                    say(f'     ERA5 {label} : échec chez Copernicus ({msg}) — redemandée plus tard')
+                q.forget(label)
+                busy = True
+        q.report()
+        if not busy:
+            q.sleep(q.poll_s)
 
 # ═══════════════════════ Les altitudes (Copernicus DEM GLO-90 → grille de 30″) ═══════════════════════
 import struct  # noqa: E402
@@ -1687,10 +2267,12 @@ def copy_stations(src, dst, ids, hourly=False):
     dst.commit()
 
 
-def finish(path, out_dir, kind, wrap=True):
+def finish(path, out_dir, kind, wrap=True, page_size=None):
     db = sqlite3.connect(path)
     F.set_meta(db, built=datetime.date.today().isoformat())
     db.commit()
+    if page_size:  # des pages plus grandes : les blocs (≈ 700 octets) se rangent sans place perdue (pack du monde ≈ 2,4 fois plus petit)
+        db.execute(f'PRAGMA page_size={int(page_size)}')
     db.execute('VACUUM')
     db.close()
     say(f'   ✓ {os.path.basename(path)} : {size_text(os.path.getsize(path))}')
@@ -1702,7 +2284,7 @@ def finish(path, out_dir, kind, wrap=True):
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description='Fabrique les données de la « Météo d’autrefois » de LCNDA (voir docs/METEO.md).')
-    ap.add_argument('quoi', nargs='?', default='socle', choices=['socle', 'complet', 'europe', 'altitudes', 'tout'])
+    ap.add_argument('quoi', nargs='?', default='socle', choices=['socle', 'complet', 'europe', 'altitudes', 'tout', 'monde'] + WORLD_KINDS + PLUS_KINDS)
     ap.add_argument('--test', action='store_true', help='essai rapide : le Gers (32), une année, quelques stations')
     ap.add_argument('--dossier', default='meteo-sortie')
     ap.add_argument('--hors-ligne', dest='offline')
@@ -1711,7 +2293,7 @@ def main(argv=None):
     ap.add_argument('--sans-altitudes', action='store_true', help='sans la grille des altitudes (Copernicus DEM)')
     ap.add_argument('--altitudes-europe', action='store_true', help='aussi la grille des altitudes de toute l’Europe dans le pack Europe (long : ≈ 2 600 carrés à lire)')
     ap.add_argument('--stations', type=int, default=300)
-    ap.add_argument('--depuis', type=int, default=1836)
+    ap.add_argument('--depuis', type=int, default=None, help='première année (1836 ; 1750 pour les packs du monde)')
     ap.add_argument('--jusqu-a', dest='until', type=int, default=datetime.date.today().year)
     ap.add_argument('--departements', default='')
     ap.add_argument('--meteolux-csv')
@@ -1720,7 +2302,13 @@ def main(argv=None):
     ap.add_argument('--aemet-cle', default='', help='la clé AEMET OpenData (sinon la variable AEMET_API_KEY)')
     ap.add_argument('--ceda-jeton', default='', help='le jeton CEDA pour MIDAS-Open (sinon la variable CEDA_TOKEN)')
     ap.add_argument('--dmi-cle', default='', help='la clé DMI si elle est demandée (sinon la variable DMI_API_KEY)')
+    ap.add_argument('--stations-monde', type=int, default=0, help='combien de stations au plus dans un pack du monde (sinon : le nombre prévu pour la région)')
     a = ap.parse_args(argv)
+    if a.quoi in PLUS_KINDS:  # les compléments Copernicus : des packs à part (scripts/meteo/meteo_plus.py), le socle n'est pas touché
+        return build_plus(a)
+    world = WORLD_KINDS if a.quoi == 'monde' else [a.quoi] if a.quoi in WORLD_KINDS else []
+    if a.depuis is None:
+        a.depuis = 1750 if world else 1836
     if a.test:
         a.departements = a.departements or '32'
         a.depuis = max(a.depuis, a.until - 1)
@@ -1730,11 +2318,14 @@ def main(argv=None):
     os.makedirs(os.path.join(out, 'travail'), exist_ok=True)
     years = (a.depuis, a.until)
     deps = [d.strip() for d in a.departements.split(',') if d.strip()] or DEPARTEMENTS
-    kinds = ['socle', 'complet', 'europe'] if a.quoi == 'tout' else [a.quoi]
+    kinds = ['socle', 'complet', 'europe'] if a.quoi == 'tout' else world if world else [a.quoi]
     t0 = time.time()
     try:
         say(f'🌦 Météo d’autrefois — fabrication : {", ".join(kinds)}{" (essai)" if a.test else ""}\n   dossier : {out}')
-        work = Work(os.path.join(out, 'travail', 'stations.sqlite'))
+        for k in world:
+            say(f'Pack du monde : {WORLD_REGIONS[k[6:]][0]} (GHCN-Daily, NOAA)')
+            build_world(net, out, k[6:], years, a)
+        work = Work(os.path.join(out, 'travail', 'stations.sqlite')) if not world else None
         if {'socle', 'complet'} & set(kinds):
             say('1. Les stations (France, Suisse, Belgique, Luxembourg)')
             do_meteofrance(net, work, deps, years, hourly='complet' in kinds)
@@ -1742,9 +2333,13 @@ def main(argv=None):
                 try:
                     fn(*args)
                 except Stop as e:
-                    if not a.offline:
+                    if a.offline:
+                        say(f'   (hors ligne : {fn.__name__[3:]} ignoré — {str(e).splitlines()[0]})')
+                    elif fn in (do_irm, do_meteolux):  # sources facultatives : le pack se fabrique sans elles (relancer plus tard pour les ajouter)
+                        say(f'   ⚠️ {fn.__name__[3:]} sauté : {str(e).splitlines()[0]}\n      Le pack se fabrique sans lui ; relance plus tard pour l’ajouter (le reste ne sera pas refait).')
+                        print(f'::warning::{fn.__name__[3:]} sauté : {str(e).splitlines()[0]}', flush=True)
+                    else:
                         raise
-                    say(f'   (hors ligne : {fn.__name__[3:]} ignoré — {str(e).splitlines()[0]})')
             work.compute_scores()
         if 'europe' in kinds:
             say('1b. Les stations d’Europe (DWD, KNMI, DMI, MIDAS-Open, AEMET, IMGW, ČHMÚ, GHCN)')
@@ -1760,7 +2355,8 @@ def main(argv=None):
                 os.remove(path)
             db = F.open_db(path, 'socle', 'Socle')
             F.set_meta(db, countries='FR,BE,CH,LU')
-            F.add_sources(db, ['meteofrance', 'meteoswiss', 'irm', 'meteolux'], a.until)
+            got = {r[0] for r in work.db.execute(f'SELECT DISTINCT source FROM stations WHERE id IN ({",".join(str(i) for i in chosen) or "0"})')}
+            F.add_sources(db, [x for x in ['meteofrance', 'meteoswiss', 'irm', 'meteolux'] if x in got], a.until)
             copy_stations(work.db, db, chosen)
             write_normals(db, 'station', 'daily', 'station_id')
             boxes = list(COUNTRY_BOXES.values())
@@ -1807,7 +2403,8 @@ def main(argv=None):
                 os.remove(path)
             db = F.open_db(path, 'complet', 'Pack complet')
             F.set_meta(db, countries='FR,BE,CH,LU')
-            F.add_sources(db, ['meteofrance', 'meteoswiss', 'irm', 'meteolux'], a.until)
+            got = {r[0] for r in work.db.execute("SELECT DISTINCT source FROM stations WHERE pays IN ('FR','BE','CH','LU')")}
+            F.add_sources(db, [x for x in ['meteofrance', 'meteoswiss', 'irm', 'meteolux'] if x in got], a.until)
             ids = [r[0] for r in work.db.execute("SELECT id FROM stations WHERE pays IN ('FR','BE','CH','LU')")]
             copy_stations(work.db, db, ids, hourly=True)
             write_normals(db, 'station', 'daily', 'station_id')
@@ -1853,6 +2450,29 @@ def main(argv=None):
         return 130
     m = int(time.time() - t0)
     say(f'\n✓ Fini en {m // 3600} h {m % 3600 // 60:02d} min. Les fichiers sont dans {out}.\n  Le socle : copie meteo-socle.sqlite dans le dossier data-meteo de l’app ; un pack (.lcmeteo) : Réglages → 🌦 Météo d’autrefois → « ⤒ Importer le fichier… ».')
+    return 0
+
+
+# ═══════════════════════ Les compléments Copernicus (packs « plus-… », facultatifs) ═══════════════════════
+PLUS_KINDS = ['plus-neige', 'plus-ressenti', 'plus-rivieres', 'plus-cerra', 'plus-anciennes']
+
+
+def build_plus(a):
+    import meteo_plus as P
+    out = os.path.abspath(a.dossier + ('-test' if a.test and a.dossier == 'meteo-sortie' else ''))
+    os.makedirs(out, exist_ok=True)
+    t0 = time.time()
+    try:
+        say(f'🌦 Météo d’autrefois — complément : {a.quoi}{" (essai)" if a.test else ""}\n   dossier : {out}')
+        P.build(a.quoi, out, (a.depuis or 0, a.until), a.offline, a.test)
+    except (P.Stop, Stop) as e:
+        say(f'\n⛔ {e}\n')
+        return 2
+    except KeyboardInterrupt:
+        say('\n⏸ Arrêté. Relance la même commande : le programme reprendra où il en était.')
+        return 130
+    m = int(time.time() - t0)
+    say(f'\n✓ Fini en {m // 3600} h {m % 3600 // 60:02d} min. Le pack : {out}/meteo-pack-{a.quoi}.lcmeteo (Réglages → 🌦 Météo d’autrefois → « ⤒ Importer un fichier… »).')
     return 0
 
 

@@ -233,6 +233,8 @@
         const links = lib.mine.map(s => `<a class="button small secondary" href="${esc(S6().url(s.key, p, cu))}" target="_blank" rel="noopener noreferrer" data-so6-go="${esc(s.key)}" title="${esc(s.note)}">📚 ${esc(s.label.split(' — ')[0])} ↗</a>`).join('');
         return `<p class="so-row so6-row so6-place" data-so6-region="${esc(lib.region?.key || '')}">${links}${btn(0, {group: 'fr_bn', place: o.name, placeOnly: true, placeId: o.placeId, county: o.county, state: o.state, insee: o.insee, country: o.country, label: lib.mine.length ? '📚 Autres bibliothèques…' : '📚 Livres et journaux sur ce lieu…'})}${o.placeId && !o.ro ? `<button type="button" class="button small secondary" data-so6-import="document" data-pid="0" data-place-id="${Number(o.placeId)}" data-place="${esc(o.name)}" title="Range la page trouvée et crée la source, reliées à ce lieu">⤒ Importer…</button>` : ''}${lib.region ? ` <small class="muted">${esc(lib.region.label)}</small>` : ''}</p>`;
     }
+    // ⚙️ « Organiser la fiche » d'un village (heritage-more.js) : cette partie y est rangée, masquée, à la largeur choisie
+    (ext.villageSectionDefs = ext.villageSectionDefs || []).push({id: 'so_links', host: '.so-row', collect: true, icon: '🔗', label: 'Chercher ce lieu en ligne (archives, Geneawiki, bibliothèques)', group: 'Données téléchargées'});
     function decorate(root = document) {
         const ws = root.querySelector?.('#workspace') || root; if (!ws?.querySelectorAll || !S6()) return;
         const cur = A()?.state?.currentPerson?.person; const pid = Number(cur?.id) || 0;
@@ -288,12 +290,12 @@
                 if ((paid || partly) && !sp.querySelector('.so6-paid')) { a.insertAdjacentHTML('afterend', paidBadge(!paid, paid ? PAID_TITLE(key) : partly)); if (paid) { sp.classList.add('is-paid'); a.title = PAID_TITLE(key); } }
                 if (!paid) return;
                 const cb = sp.querySelector('[data-ws-pick], [data-ws-pick-off]');
-                sp.hidden = free; if (free) hidden++;
+                if (sp.hidden !== free) sp.hidden = free; if (free) hidden++; // ⏱ seulement si ça change (sinon chaque passage réveille les observateurs : une boucle toutes les 80 ms)
                 if (cb) { if (free) { cb.checked = false; if (cb.hasAttribute('data-ws-pick')) { cb.dataset.wsPickOff = cb.getAttribute('data-ws-pick'); cb.removeAttribute('data-ws-pick'); } } else if (cb.hasAttribute('data-ws-pick-off')) { cb.setAttribute('data-ws-pick', cb.dataset.wsPickOff); cb.removeAttribute('data-ws-pick-off'); } }
                 const links = sp.parentElement; if (links && !free && sp !== links.lastElementChild && links.classList.contains('web-search-links')) links.appendChild(sp); // les payants à la fin de leur rubrique
             });
-            panel.querySelectorAll('.web-search-group').forEach(g => { const all = g.querySelectorAll('.web-search-site'); if (!all.length) return; g.hidden = [...all].every(s => s.hidden); });
-            const c = panel.querySelector('[data-so6-free-count]'); if (c) c.textContent = hidden ? `${hidden} site${hidden > 1 ? 's' : ''} payant${hidden > 1 ? 's' : ''} caché${hidden > 1 ? 's' : ''}` : '';
+            panel.querySelectorAll('.web-search-group').forEach(g => { const all = g.querySelectorAll('.web-search-site'); if (!all.length) return; const h = [...all].every(s => s.hidden); if (g.hidden !== h) g.hidden = h; });
+            const c = panel.querySelector('[data-so6-free-count]'), ct = hidden ? `${hidden} site${hidden > 1 ? 's' : ''} payant${hidden > 1 ? 's' : ''} caché${hidden > 1 ? 's' : ''}` : ''; if (c && c.textContent !== ct) c.textContent = ct;
         });
         root.querySelectorAll?.('.web-search-editor').forEach(ed => {
             const list = ed.querySelector('.order-list'); if (!list) return;
@@ -302,7 +304,7 @@
                 const key = r.dataset.orderKey || '';
                 const paid = S6().isPaidKey(key), partly = S6().PARTLY_PAID[key];
                 if ((paid || partly) && !r.querySelector('.so6-paid')) (r.querySelector('b, strong, span') || r).insertAdjacentHTML('afterend', ' ' + paidBadge(!paid, partly || PAID_TITLE(key)));
-                if (paid) { r.classList.add('is-paid'); r.hidden = free; }
+                if (paid) { r.classList.add('is-paid'); if (r.hidden !== free) r.hidden = free; }
             });
         });
     }

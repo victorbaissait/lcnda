@@ -27,7 +27,7 @@ const phpPath = findPhp([devBundledPhp()]);
 if (!phpPath) { console.log('— PHP absent : test sauté'); process.exit(0); }
 const SHOTS = process.env.SHOTS || '';
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'carnet-controle-'));
-const envFor = d => ({ ...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1' });
+const envFor = d => ({ ...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4' });
 const freePort = () => new Promise(res => { const s = net.createServer(); s.listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => res(p)); }); });
 const seed = (dir, php) => {
     fs.mkdirSync(path.join(dir, 'media'), { recursive: true });
@@ -285,15 +285,16 @@ const startServer = async dir => {
                     const pills = await p.$$eval('[data-ctl-pills] button', b => b.map(x => x.textContent.replace(/\s+/g, ' ').trim()));
                     assert.ok(pills[0].startsWith('Tout ('), pills.join(' | '));
                     assert.ok(pills.some(x => /Parents \(\d+\)/.test(x)) && pills.some(x => /Exceptions \(\d+\)/.test(x)), pills.join(' | '));
-                    const n = await p.$$eval('.ctl-row', r => r.length);
+                    // le cadre « 🧩 Branches isolées » (heritage-branches-isolees.js) a des lignes au même style : elles ne sont pas des résultats du contrôle
+                    const n = await p.$$eval('.ctl-row:not(.bis-row)', r => r.length);
                     assert.ok(n >= 7, `lignes : ${n}`);
-                    assert.ok(await p.$('.ctl-row .pk-chip [data-open-person]'), 'pastilles « ↗ Fiche »');
+                    assert.ok(await p.$('.ctl-row:not(.bis-row) .pk-chip [data-open-person]'), 'pastilles « ↗ Fiche »');
                     await p.click('[data-ctl-sort="parents"]'); await p.waitForTimeout(200);
-                    const titles = await p.$$eval('.ctl-row h3', h => h.map(x => x.textContent));
+                    const titles = await p.$$eval('.ctl-row:not(.bis-row) h3', h => h.map(x => x.textContent));
                     assert.ok(titles.length >= 1 && titles.every(x => /PARENTS/i.test(x)), titles.join(' | '));
                     await p.click('[data-ctl-sort="all"]');
                     await p.fill('.ctl-page .ui-listbar input', 'Marguerite'); await p.waitForTimeout(600);
-                    const found = await p.$$eval('.ctl-row h3', h => h.map(x => x.textContent));
+                    const found = await p.$$eval('.ctl-row:not(.bis-row) h3', h => h.map(x => x.textContent));
                     assert.ok(found.length >= 1 && found.length < n, found.join(' | '));
                     await p.fill('.ctl-page .ui-listbar input', ''); await p.waitForTimeout(600);
                     await noScroll(p);
@@ -301,14 +302,15 @@ const startServer = async dir => {
                 });
                 if (name === '1440') {
                     await t('⤓ CSV : la liste filtrée, cellules protégées', async () => {
-                        const [dl] = await Promise.all([p.waitForEvent('download'), p.click('[data-ctl-csv]')]);
+                        await p.click('[data-ctl-csv]'); await p.waitForSelector('dialog.ui-export[open]'); // ⤓ la fenêtre d'export commune
+                        const [dl] = await Promise.all([p.waitForEvent('download'), p.click('dialog.ui-export [data-ui-go]')]);
                         const txt = fs.readFileSync(await dl.path(), 'utf8');
                         assert.match(txt, /Gravité;Sorte;Contrôle;Détail;Fiches;Lieu;Écartée;Raison/);
                         assert.match(txt, /Marguerite FAURE \(n° 3\)/);
                     });
                     await t('« Ce n’est pas une erreur » : fenêtre de raison, puis 🙈 Exceptions et « ↺ Signaler de nouveau »', async () => {
-                        const i = await p.$$eval('.ctl-row h3', h => h.findIndex(x => /Mère de 57 ans/.test(x.textContent)));
-                        await p.click(`.ctl-row:nth-child(${i + 1}) [data-ctl-dismiss]`);
+                        const i = await p.$$eval('.ctl-row:not(.bis-row) h3', h => h.findIndex(x => /Mère de 57 ans/.test(x.textContent)));
+                        await p.locator('.ctl-row:not(.bis-row)').nth(i).locator('[data-ctl-dismiss]').click();
                         await p.waitForSelector('dialog.ctl-dismiss[open]');
                         const reasons = await p.$$eval('dialog.ctl-dismiss .ctl-reason', r => r.map(x => x.textContent.trim()));
                         assert.ok(reasons.includes('J’ai vérifié dans l’acte : c’est bien ça') && reasons.includes('Autre raison…'), reasons.join(' | '));
@@ -317,15 +319,15 @@ const startServer = async dir => {
                         await p.click('dialog.ctl-dismiss button[type=submit]');
                         await p.waitForFunction(() => !document.querySelector('dialog.ctl-dismiss'));
                         await p.waitForTimeout(800);
-                        assert.ok(!(await p.$$eval('.ctl-row h3', h => h.some(x => /Mère de 57 ans/.test(x.textContent)))));
+                        assert.ok(!(await p.$$eval('.ctl-row:not(.bis-row) h3', h => h.some(x => /Mère de 57 ans/.test(x.textContent)))));
                         await p.click('[data-ctl-sort="exceptions"]'); await p.waitForTimeout(300);
                         const ex = await p.$$eval('.ctl-row.is-exc', r => r.map(x => x.textContent));
                         assert.ok(ex.some(x => /Mère de 57 ans/.test(x) && /acte n° 42/.test(x)), ex.join(' | '));
                         await shot(p, 'controle-exceptions.png');
                         const j = await p.$$eval('.ctl-row.is-exc', r => r.findIndex(x => /Mère de 57 ans/.test(x.textContent)));
-                        await p.click(`.ctl-row.is-exc:nth-child(${j + 1}) [data-ctl-again]`); await p.waitForTimeout(800);
+                        await p.locator('.ctl-row.is-exc').nth(j).locator('[data-ctl-again]').click(); await p.waitForTimeout(800);
                         await p.click('[data-ctl-sort="all"]'); await p.waitForTimeout(300);
-                        assert.ok(await p.$$eval('.ctl-row h3', h => h.some(x => /Mère de 57 ans/.test(x.textContent))));
+                        assert.ok(await p.$$eval('.ctl-row:not(.bis-row) h3', h => h.some(x => /Mère de 57 ans/.test(x.textContent))));
                     });
                     await t('▶ Une à une : en grand, frise, famille, clavier ; date corrigée sur place', async () => {
                         await p.click('[data-ctl-one]'); await p.waitForSelector('.ctl-one-card');

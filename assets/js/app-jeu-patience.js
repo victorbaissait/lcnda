@@ -1,4 +1,4 @@
-/* LCNDA — 🂠 Patiences (Jeux de la famille, app-jeu-famille.js) : l'écran de jeu des 131 patiences.
+/* LCNDA — 🂠 Patiences (Jeux de la famille, app-jeu-famille.js) : l'écran de jeu des 233 patiences.
  * Les règles sont dans app-jeu-patience-regles.js (LCNDA_PATIENCES, sans écran) ; ici : la table, les cartes, la souris et le clavier.
  * Jouer : glisser une carte (ou une suite) sur une autre pile, ou cliquer la carte puis la pile où la poser ; double-clic : sur une
  * fondation ; clic sur la pioche : piocher. Jeux à paires (Pyramide, Onze, Monte-Carlo…) : cliquer les cartes qui vont ensemble.
@@ -15,7 +15,7 @@
         P().FAMILIES.forEach(f => { f[1] = i18n(f[1]); f[2] = i18n(f[2]); }); })();
     const SUIT = ['♥', '♦', '♠', '♣'], SUIT_NAME = ['cœur', 'carreau', 'pique', 'trèfle'];
     const RANK = ['', 'A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'V', 'D', 'R'], RANK_NAME = ['', 'As', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Valet', 'Dame', 'Roi'];
-    const BACKS = [['bleu', 'Bleu'], ['rouge', 'Rouge'], ['vert', 'Vert'], ['sepia', 'Sépia']];
+    const CB = () => J().cardBack; // 🂠 le dos des cartes : 4 couleurs, une couleur au choix, une photo de l'app ou une image de l'ordinateur (app-jeu-famille.js)
     const escH = v => String(v ?? '').replace(/[&<>"']/g, ch => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[ch]));
     /** une partie relue (localStorage, ↶ Annuler) : JSON écrit « Infinity » (pioche sans limite) comme null */
     const revive = st => { if (st && (st.redeals == null || Number.isNaN(st.redeals))) st.redeals = Infinity; return st; };
@@ -37,25 +37,25 @@
         namePh: 'Ex : Ma patience du soir', fieldsTitle: 'Le jeu',
         scope: false, players: {min: 1, max: 1, def: 1},
         defaults: () => ({game: 'klondike1', auto: true, back: 'bleu'}),
-        clean: c => ({...c, game: P().get(c.game) ? c.game : 'klondike1', auto: c.auto !== false, back: BACKS.some(b => b[0] === c.back) ? c.back : 'bleu'}),
+        clean: c => ({...c, game: P().get(c.game) ? c.game : 'klondike1', auto: c.auto !== false, ...CB().clean(c)}),
         ready: [{k: 'kl', name: 'Klondike', hint: 'le classique, pioche d’une carte', cfg: {game: 'klondike1'}}, {k: 'fc', name: 'FreeCell', hint: 'tout est visible, 4 cases libres', cfg: {game: 'freecell'}},
             {k: 'sp', name: 'Araignée', hint: 'une couleur, pour commencer', cfg: {game: 'spider1'}}, {k: 'yk', name: 'Yukon', hint: 'on déplace tout groupe visible', cfg: {game: 'yukon'}},
             {k: 'py', name: 'La pyramide', hint: 'des paires qui font 13', cfg: {game: 'pyramid'}}, {k: 'gf', name: 'Golf', hint: 'au plus ou au moins un', cfg: {game: 'golf'}}],
         fieldsHtml: (c, h) => `<label class="jfp-pick">${h.esc(i18n('Le jeu ({n} patiences)', {n: P().GAMES.length}))}<select data-jfp-game>${gameOptions(h.esc, c.game)}</select></label>
             <p class="jfp-desc" data-jfp-desc>${descHtml(h.esc, c.game)}</p>
             <div class="jf-checks">${h.toggle('data-jfp-auto', c.auto, i18n('⬆ À la fin, monter tout seul les cartes sur les fondations'))}</div>
-            <div class="jfp-backs"><span>${h.esc(i18n('Dos des cartes'))}</span>${h.seg('back', BACKS.map(([k, l]) => [k, h.esc(i18n(l))]), c.back)}</div>`,
+            ${CB().fieldHtml(c)}`,
+        bindFields: (form, c, save) => CB().bind(form, c, save),
         onChange(t, c, form) {
             if (t.matches('[data-jfp-game]')) { c.game = P().get(t.value) ? t.value : 'klondike1'; const d = form.querySelector('[data-jfp-desc]'); if (d) d.innerHTML = descHtml(escH, c.game); }
             if (t.matches('[data-jfp-auto]')) c.auto = t.checked;
         },
-        onSeg(name, v, c) { if (name === 'back') c.back = v; },
         start(c, src, prev) {
             const seed = `${c.seed}${prev ? 'r' + ((prev.round || 1) + 1) : ''}`;
             return {st: P().deal(c.game, seed), dealSeed: seed, ms: 0, startAt: Date.now(), won: false, round: (prev?.round || 0) + 1, status: gameOf(c.game).name};
         },
         mount(host, g, api) {
-            revive(g.st);
+            revive(g.st); CB().apply(host, g.cfg); // les variables du dos (couleur, image) : une fois, la table se redessine dedans
             const {esc} = api, c = g.cfg, def = gameOf(g.st.k), multi = P().isMulti(g.st.k);
             let sel = null, picks = [], hintMv = null, timer = 0, drag = null, cw = 70, ch = 98, stacked = false;
             const fix = [0, 0]; // l'écart mesuré entre la place estimée et la vraie (bordures, marges), panneau à côté / dessous
@@ -99,7 +99,7 @@
                 return {pos, W: maxX * cw, H: H + 8};
             }
             const faceHtml = card => `<span class="pc-c">${RANK[card.r]}<i>${SUIT[card.s]}</i></span><span class="pc-mid">${card.r > 10 ? `<b>${RANK[card.r]}</b>` : SUIT[card.s]}</span><span class="pc-c pc-c2">${RANK[card.r]}<i>${SUIT[card.s]}</i></span>`;
-            const slotLabel = p => p.type === 'found' ? (st().base === 1 ? 'A' : RANK[st().base] || '') : p.type === 'stock' ? (st().redeals > 0 && pile('waste')?.cards.length ? '↻' : '') : p.type === 'cell' ? '□' : p.type === 'tab' ? '' : '';
+            const slotLabel = p => p.type === 'found' ? (p.down ? 'R' : st().base === 1 ? 'A' : RANK[st().base] || '') : p.type === 'stock' ? (st().redeals > 0 && pile('waste')?.cards.length ? '↻' : '') : p.type === 'cell' ? '□' : p.type === 'tab' ? '' : '';
 
             function draw() {
                 const {pos, W, H} = layout(), S = st(), stuck = !S.won && P().stuck(S);
@@ -120,7 +120,7 @@
                 const limited = !def.mode && Number.isFinite(P().norm(def).stock.redeals) && ['waste', 'shuffle'].includes(P().norm(def).stock.to); // les passes ne comptent que pour une pioche qui repasse
                 const redeals = limited || (def.mode && Number.isFinite(S.redeals) && S.redeals > 0 && S.redeals < 50) ? ` · ${esc(api.plural(Math.max(0, S.redeals), 'passe restante', 'passes restantes'))}` : '';
                 const B = bests()[S.k];
-                host.innerHTML = `<div class="goose-game-layout jfp${stacked ? ' is-stacked' : ''}" data-back="${esc(c.back)}"><div class="goose-board-wrap"><div class="pc-board${S.won ? ' is-won' : ''}" style="width:${W}px;height:${Math.max(H, S.hand ? ch * 5.4 : 0)}px;--cw:${cw}px;--ch:${ch}px" role="application" aria-label="${esc(i18n('La table : {name}', {name: def.name}))}">${slots}${cards.join('')}</div></div>
+                host.innerHTML = `<div class="goose-game-layout jfp${stacked ? ' is-stacked' : ''}" data-back="${esc(CB().key(c))}"><div class="goose-board-wrap"><div class="pc-board${S.won ? ' is-won' : ''}" style="width:${W}px;height:${Math.max(H, S.hand ? ch * 5.4 : 0)}px;--cw:${cw}px;--ch:${ch}px" role="application" aria-label="${esc(i18n('La table : {name}', {name: def.name}))}">${slots}${cards.join('')}</div></div>
                   <aside class="goose-panel"><p class="goose-status jf-big" role="status">${esc(S.won ? i18n('🎉 Gagné en {moves} et {time} !', {moves: api.plural(S.moves, 'coup'), time: fmt(g.ms)}) : stuck ? i18n('😕 Plus aucun coup possible') : i18n('{a} / {b} cartes montées', {a: inFound(), b: total()}))}</p>
                     <p>${api.plural(S.moves, 'coup')} · ⏱ <span data-jfp-time>${fmt(S.won ? g.ms : g.ms + Date.now() - g.startAt)}</span>${redeals}${B ? `<br><span class="muted">${esc(i18n('Record : {time}, {moves}', {time: fmt(B.ms), moves: api.plural(B.moves, 'coup')}))}</span>` : ''}</p>
                     ${stuck ? `<div class="jfp-stuck">${api.notice('warn', i18n('La partie est bloquée : annule quelques coups, ou rejoue la même donne.'))}</div>` : ''}

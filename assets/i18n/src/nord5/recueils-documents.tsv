@@ -1,0 +1,55 @@
+fr ¦ hr ¦ sl
+# 📚 Recueils depuis Documents, chercher par recueil, sorte d’acte, lieu et rayon (heritage-recueil-docs.js, heritage-onglets-documents.js)
+{n} déjà dans ce recueil ¦ {n} već u ovoj zbirci ¦ {n} že v tej zbirki
+pas des images, laissés de côté : {n} ¦ nisu slike, izostavljeno: {n} ¦ niso slike, izpuščeno: {n}
+Choisis au moins un document. ¦ Odaberi barem jedan dokument. ¦ Izberi vsaj en dokument.
+📚 RECUEIL ¦ 📚 ZBIRKA ¦ 📚 ZBIRKA
+📚 Faire le recueil ¦ 📚 Napravi zbirku ¦ 📚 Naredi zbirko
+Les documents restent à leur place dans Documents : le recueil les regroupe, il ne les déplace pas. Un document en plusieurs pages y entre avec toutes ses pages. ¦ Dokumenti ostaju na svojem mjestu u Dokumentima: zbirka ih grupira, ne premješta ih. Dokument s više stranica ulazi sa svim svojim stranicama. ¦ Dokumenti ostanejo na svojem mestu v Dokumentih: zbirka jih združi, ne premakne jih. Dokument z več stranmi pride vanjo z vsemi stranmi.
+Nom du recueil ¦ Naziv zbirke ¦ Ime zbirke
+ex. Registre de Sancoins, 1870-1872 ¦ npr. Matica iz Sancoinsa, 1870.-1872. ¦ npr. Matična knjiga iz Sancoinsa, 1870–1872
+ex. 3 E 1234 ¦ npr. 3 E 1234 ¦ npr. 3 E 1234
+ex. Sancoins ¦ npr. Sancoins ¦ npr. Sancoins
+ex. 1870-1872 ¦ npr. 1870.-1872. ¦ npr. 1870–1872
+L’ordre des pages ¦ Redoslijed stranica ¦ Vrstni red strani
+glisse ⠿ ou utilise ↑ ↓ ¦ povuci ⠿ ili koristi ↑ ↓ ¦ povleci ⠿ ali uporabi ↑ ↓
+Recueil « {t} » fait : {x} ¦ Zbirka „{t}“ napravljena: {x} ¦ Zbirka »{t}« narejena: {x}
+Recueil « {t} » ¦ Zbirka „{t}“ ¦ Zbirka »{t}«
+Ajouter {x} à un recueil ¦ Dodaj {x} u zbirku ¦ Dodaj {x} v zbirko
+Ajouter « {t} » à un recueil ¦ Dodaj „{t}“ u zbirku ¦ Dodaj »{t}« v zbirko
+Les pages vont à la fin du recueil, dans l’ordre ; un document déjà dans ce recueil n’est pas remis. ¦ Stranice idu na kraj zbirke, redom; dokument koji je već u ovoj zbirci ne dodaje se ponovno. ¦ Strani gredo na konec zbirke, po vrsti; dokument, ki je že v tej zbirki, se ne doda znova.
+Chercher un recueil… ¦ Traži zbirku… ¦ Poišči zbirko …
+Nouveau recueil avec ces documents… ¦ Nova zbirka s ovim dokumentima… ¦ Nova zbirka s temi dokumenti …
+Choisis un recueil. ¦ Odaberi zbirku. ¦ Izberi zbirko.
+Rien à ajouter : {x} ¦ Nema se što dodati: {x} ¦ Ni česa dodati: {x}
+Ajouté à « {t} » : {x} ¦ Dodano u „{t}“: {x} ¦ Dodano v »{t}«: {x}
+page {n} ¦ stranica {n} ¦ stran {n}
+Dans les recueils ¦ U zbirkama ¦ V zbirkah
+Dans le recueil ¦ U zbirci ¦ V zbirki
+page {n} sur {t} ¦ stranica {n} od {t} ¦ stran {n} od {t}
+(une autre page de ce document) ¦ (druga stranica ovog dokumenta) ¦ (druga stran tega dokumenta)
+📚 Ouvrir le recueil ¦ 📚 Otvori zbirku ¦ 📚 Odpri zbirko
+à {n} km autour ¦ u krugu od {n} km ¦ v polmeru {n} km
+« {x} » n’a pas encore de coordonnées : seuls les documents de ce lieu sont montrés (ajoute-les dans Lieux pour chercher autour). ¦ „{x}“ još nema koordinate: prikazani su samo dokumenti s tog mjesta (dodaj ih u Mjestima da tražiš u okolici). ¦ »{x}« še nima koordinat: prikazani so samo dokumenti s tega kraja (dodaj jih v Krajih in išči tudi v okolici).
+Dans aucun recueil ¦ Ni u jednoj zbirci ¦ V nobeni zbirki
+p. {n} ¦ str. {n} ¦ str. {n}
+choisi n° {n} ¦ odabrano br. {n} ¦ izbrano št. {n}
+{x}, dans l’ordre des clics ¦ {x}, redoslijedom klikova ¦ {x}, v vrstnem redu klikov
+Clique sur les documents à prendre, dans l’ordre des pages. ¦ Klikni dokumente koje želiš uzeti, redoslijedom stranica. ¦ Klikni dokumente, ki jih želiš vzeti, v vrstnem redu strani.
+📚 Faire un recueil avec {x} ¦ 📚 Napravi zbirku s {x} ¦ 📚 Naredi zbirko z {x}
+📚 Faire un recueil ¦ 📚 Napravi zbirku ¦ 📚 Naredi zbirko
+📚 Ajouter à un recueil… ¦ 📚 Dodaj u zbirku… ¦ 📚 Dodaj v zbirko …
+Tout choisir (ceux montrés) ¦ Odaberi sve (prikazane) ¦ Izberi vse (prikazane)
+☑ Choisir plusieurs ¦ ☑ Odaberi više ¦ ☑ Izberi več
+Les recueils ne sont pas encore chargés : réessaie dans un instant. ¦ Zbirke još nisu učitane: pokušaj ponovno za trenutak. ¦ Zbirke še niso naložene: poskusi znova čez trenutek.
+Ville ou lieu ¦ Grad ili mjesto ¦ Mesto ali kraj
+Dans un rayon de (km) ¦ U krugu od (km) ¦ V polmeru (km)
+ex. 20 (vide : le lieu seul) ¦ npr. 20 (prazno: samo mjesto) ¦ npr. 20 (prazno: samo kraj)
+ex. Registre de Sancoins ¦ npr. Matica iz Sancoinsa ¦ npr. Matična knjiga iz Sancoinsa
+Actes de notoriété ¦ Akti o poznatosti ¦ Listine o notoričnosti
+Documents militaires ¦ Vojni dokumenti ¦ Vojaški dokumenti
+📚 Dans un recueil ¦ 📚 U zbirci ¦ 📚 V zbirki
+📚 Recueils ¦ 📚 Zbirke ¦ 📚 Zbirke
+Les médias et pièces d’archives de ta base, comme les personnes : la liste à gauche (A → Z, 👤 par personne, 📚 par recueil ou en 📁 dossiers), la fiche à droite. ¦ Mediji i arhivski predmeti iz tvoje baze, kao osobe: popis lijevo (A → Ž, 👤 po osobi, 📚 po zbirci ili u 📁 mapama), zapis desno. ¦ Mediji in arhivsko gradivo iz tvoje baze, kot osebe: seznam levo (A → Ž, 👤 po osebi, 📚 po zbirki ali v 📁 mapah), zapis desno.
+=document choisi ¦ odabrani dokument|odabrana dokumenta|odabranih dokumenata ¦ izbrani dokument|izbrana dokumenta|izbrani dokumenti|izbranih dokumentov
+Montrer « Dans aucun recueil » ¦ Prikaži „Ni u jednoj zbirci“ ¦ Prikaži »V nobeni zbirki«

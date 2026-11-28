@@ -1,0 +1,28 @@
+/* LCNDA — 🧭 Mémoire et vieux papiers, 🌐 Traduction hors ligne (assets/js/heritage-telech-d*.js) : le reste vient de histoire.css (hist-row…) */
+.td-life { display: grid; gap: 12px; }
+.td-ul li { margin-bottom: 6px; }
+.td-quote { display: block; margin: 2px 0; padding-left: 8px; border-left: 3px solid var(--border, rgba(127, 127, 127, .35)); color: var(--muted); font-size: 12.5px; quotes: "« " " »"; }
+.td-src-link { font-size: 12px; white-space: nowrap; }
+.td-more > summary { cursor: pointer; color: var(--accent, inherit); font-size: 12.5px; margin-top: 2px; }
+.td-thumbs { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; margin: 6px 0; }
+.td-thumb { display: flex; flex-direction: column; gap: 4px; font-size: 12px; text-decoration: none; color: inherit; }
+.td-thumb img { width: 100%; height: 90px; object-fit: cover; border-radius: 4px; background: var(--chip-bg, rgba(127, 127, 127, .14)); }
+.td-thumb span { overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.td-dlg { width: var(--modal-m); max-height: calc(100vh - 48px); padding: 16px; border-radius: 10px; border: 1px solid var(--border, rgba(127, 127, 127, .35)); background: var(--surface, #fff); color: inherit; }
+.td-dlg-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 0 0 8px; }
+.td-dlg-head h3 { margin: 0; font-size: 17px; }
+.td-wiki-body { max-height: 60vh; overflow: auto; line-height: 1.5; }
+.td-wiki-body h4 { margin: 14px 0 4px; }
+.td-wiki-body h5 { margin: 10px 0 4px; font-size: 14px; }
+.td-wiki-body p { margin: 0 0 8px; }
+.td-wiki-foot { margin-top: 8px; font-size: 12px; }
+.td-tr { display: grid; gap: 8px; padding: 8px 0; }
+.td-tr h4 { margin: 0; }
+.td-tr-out { width: 100%; box-sizing: border-box; font: inherit; line-height: 1.45; }
+.td-tr-actions { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0; }
+.td-tr-src { max-height: 140px; overflow: auto; white-space: pre-line; font-size: 12.5px; }
+.td-tr-free textarea { width: 100%; box-sizing: border-box; font: inherit; }
+.td-note-tr { margin-left: 4px; }
+.td-latin input { width: 100%; box-sizing: border-box; margin-bottom: 6px; }
+@media (max-width: 600px) { .td-thumbs { grid-template-columns: repeat(2, 1fr); } }
+@media print { .td-more:not([open]) { display: none; } .td-note-tr { display: none; } }

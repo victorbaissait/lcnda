@@ -36,7 +36,7 @@
             <span class="tools"><button type="button" data-p-mv="-1" title="Monter" ${i ? '' : 'disabled'}>↑</button><button type="button" data-p-mv="1" title="Descendre" ${i < n - 1 ? '' : 'disabled'}>↓</button>${f.custom ? `<button type="button" data-p-ren="${esc(f.key)}" title="Renommer">✎</button><button type="button" data-p-del="${esc(f.key)}" title="Enlever ce champ (il se remet avec « Remettre un champ enlevé »)">🗑</button>` : ''}</span></div>`;
         function paint() {
             const store = C.store, def = ART.defs[st.kind]; if (!def) return close();
-            const L = ART.layout(store, st.kind, st.tab), match = f => !q || `${f.label} ${f.key}`.toLowerCase().includes(q);
+            const L = ART.layout(store, st.kind, st.tab), match = f => !q || (window.LCNDA_UI?.listMatch?.text || ((q, ...h) => h.join(' ').toLowerCase().includes(String(q).toLowerCase())))(q, f.label, f.key);
             const removed = (kcfg(store.global || {}, st.kind).removed || []).concat(store.personSet ? (kcfg(store.personSet, st.kind).removed || []) : []);
             let list;
             if (st.tab === 'fiche') list = L.groups.map((g, gi) => { const fs = g.fields.filter(match); if (q && !fs.length) return '';

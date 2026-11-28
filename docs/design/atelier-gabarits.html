@@ -1,0 +1,177 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gabarits d’actes</title>
+<style>
+:root{--bg:#f4f5f7;--paper:#fff;--ink:#111;--muted:#555;--soft:#777;--line:#eceef2;--line2:#c9ced8;--blue:#055dff;--blue-bg:#eef4ff;--blue-ink:#1a3d8f;--green:#1a7f37;--green-bg:#eaf6ee;--yel:#d4a800;--yel-bg:#fff8d6;--yel-ink:#7a5d00;--red:#c62828;--red-bg:#fdecec;--vio:#6929c4;--vio-bg:#f3ecff;--grey-bg:#f1f2f4;--shadow:rgba(5,93,255,.25);--bar:#141414;--bar-ink:#fff;--sheet:#fffdf8;--parch:#e8d6ae;--parch-ink:#4a3218;--stage:#3a3d44}
+@media (prefers-color-scheme:dark){:root{--bg:#121417;--paper:#1c1f24;--ink:#eceef2;--muted:#b4b9c3;--soft:#9aa0aa;--line:#2c3038;--line2:#454b55;--blue:#5b93ff;--blue-bg:#18233a;--blue-ink:#a9c4ff;--green:#4cc070;--green-bg:#15281c;--yel:#e0b93a;--yel-bg:#2c2612;--yel-ink:#f0d276;--red:#ff6b6b;--red-bg:#331a1a;--vio:#b48cff;--vio-bg:#261d38;--grey-bg:#262a31;--shadow:rgba(91,147,255,.22);--bar:#000;--bar-ink:#eceef2;--sheet:#23262b;--parch:#c9b48a;--parch-ink:#2e1f0e;--stage:#0d0f12}}
+*{box-sizing:border-box}
+body{background:var(--bg);padding:28px;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);margin:0;line-height:1.45}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:19px;margin:40px 0 6px}
+.part{font:800 12px system-ui;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin:46px 0 0;border-top:3px solid var(--ink);padding-top:10px}
+.sub{color:var(--muted);margin:0 0 18px;font-size:14px;max-width:1000px}
+.wrap{max-width:1240px;margin:0 auto}
+.simple{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:12px 16px;font-size:14px;max-width:1000px}
+.simple p{margin:0 0 8px}.simple p:last-child{margin:0}
+.toc{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+.toc a{background:var(--paper);border:2px solid var(--ink);padding:8px 14px;box-shadow:4px 4px 0 var(--shadow);color:var(--ink);text-decoration:none;font-size:13px}
+.toc a b{display:block;font-size:16px}
+.badge{font:700 10.5px/1.2 system-ui;border:1.5px solid var(--ink);padding:3px 6px;letter-spacing:.03em;display:inline-block;text-transform:uppercase;white-space:nowrap;vertical-align:middle}
+.badge.new{border-color:var(--blue);color:#fff;background:var(--blue)}
+.badge.have{border-color:#8a8f99;color:var(--muted);background:var(--grey-bg)}
+.badge.ok{border-color:var(--green);color:var(--green);background:var(--green-bg)}.badge.warn{border-color:var(--yel);color:var(--yel-ink);background:var(--yel-bg)}.badge.red{border-color:var(--red);color:var(--red);background:var(--red-bg)}.badge.blue{border-color:var(--blue);color:var(--blue)}.badge.vio{border-color:var(--vio);color:var(--vio);background:var(--vio-bg)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{font:700 11px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);text-align:left;padding:8px;border-bottom:2px solid var(--ink)}
+td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+code{font:11.5px ui-monospace,Menlo,Consolas,monospace;color:var(--muted);word-break:break-word}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 26px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.wide{grid-column:1 / -1}
+.grid>*,.grid3>*{min-width:0}
+.case{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:16px 18px 18px;min-width:0}
+.case .head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.case .tag{font:700 11px/1 system-ui;letter-spacing:.1em;color:var(--blue);text-transform:uppercase}
+.num-b{display:inline-block;background:var(--blue);color:#fff;font:800 12px system-ui;padding:3px 7px;margin-right:6px;letter-spacing:0}
+.case h3{margin:8px 0 10px;font-size:17px}
+.note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+.msg{border-left:4px solid var(--blue);background:var(--blue-bg);padding:9px 12px;font-size:13px;margin:12px 0}
+.msg.warn{border-color:var(--yel);background:var(--yel-bg)}.msg.ok{border-color:var(--green);background:var(--green-bg)}.msg.red{border-color:var(--red);background:var(--red-bg)}
+.meta{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 0;font-size:12px}
+.meta span{border:1.5px solid var(--line2);padding:2px 7px;background:var(--grey-bg)}
+.meta .p1{border-color:var(--red);color:var(--red);background:var(--red-bg);font-weight:800}
+.meta .p2{border-color:var(--yel);color:var(--yel-ink);background:var(--yel-bg);font-weight:800}
+.meta .p3{border-color:#8a8f99;color:var(--muted);font-weight:800}
+.why{font-size:13px;margin:0 0 10px}
+.btn{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--ink);background:var(--paper);font:700 13px system-ui;padding:7px 11px;box-shadow:3px 3px 0 var(--shadow);color:var(--ink);white-space:nowrap}
+.btn.blue{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.small{font-size:12px;padding:4px 8px;box-shadow:none}
+.btn.ghost{border-color:var(--line2);box-shadow:none;color:var(--muted)}
+.row{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.mini{font-size:12px;color:var(--muted)}
+.input{border:1.5px solid var(--line2);padding:4px 8px;font-size:12.5px;background:var(--paper);min-height:28px;display:inline-flex;align-items:center;color:var(--ink)}
+.pill{display:inline-block;font:700 11px/1.2 system-ui;padding:2px 6px;border:1.5px solid var(--line2);background:var(--grey-bg);color:var(--muted);white-space:nowrap}
+.pill.ok{border-color:var(--green);background:var(--green-bg);color:var(--green)}
+.pill.q{border-color:var(--yel);background:var(--yel-bg);color:var(--yel-ink)}
+.pill.blue{border-color:var(--blue);background:var(--blue-bg);color:var(--blue-ink)}
+.seg{display:inline-flex;border:2px solid var(--ink);flex-wrap:wrap;max-width:100%}.seg span{padding:4px 9px;font:700 12px system-ui;border-right:1.5px solid var(--ink);background:var(--paper)}.seg span:last-child{border-right:0}.seg span.on{background:var(--blue);color:#fff}
+.tg{display:inline-flex;align-items:center;gap:7px;font-size:12.5px}.tg i{width:30px;height:17px;border-radius:9px;background:var(--blue);position:relative;flex:none}.tg i:after{content:"";position:absolute;right:2px;top:2px;width:13px;height:13px;border-radius:50%;background:#fff}
+.tg.off i{background:var(--line2)}.tg.off i:after{right:auto;left:2px}
+.scrollx{overflow-x:auto;max-width:100%}
+.cb{width:14px;height:14px;border:2px solid var(--ink);display:inline-block;flex:none;vertical-align:-2px}.cb.on{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--paper)}
+.scrollx>table{min-width:720px}
+/* gabarit */
+.fld{display:grid;grid-template-columns:120px minmax(0,1fr) auto;gap:6px 8px;font-size:12.5px;align-items:center}
+.fld .k{color:var(--muted)}
+.fld .v{border:1.5px solid var(--line2);padding:3px 7px;background:var(--paper);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fld .v.empty{color:var(--soft);font-style:italic;border-style:dashed}
+.fld .v.got{border-color:var(--green);background:var(--green-bg)}
+/* gabarits 3b */
+.atl{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:0;border:2px solid var(--ink);background:var(--paper);box-shadow:6px 6px 0 var(--shadow);min-width:0}
+.atl .img{background:#2a2c31;min-height:360px;position:relative;overflow:hidden}
+.atl .img .paperimg{position:absolute;inset:18px;background:#e9dfc9;opacity:.92}
+.atl .img .ln{position:absolute;left:34px;right:40px;height:12px;background:repeating-linear-gradient(90deg,#5b4a32 0 34px,transparent 34px 44px);opacity:.55}
+.atl .img .hl{position:absolute;left:28px;right:30px;height:22px;border:2px solid var(--blue);background:rgba(5,93,255,.12)}
+.atl .side{border-left:2px solid var(--ink);display:flex;flex-direction:column;min-width:0}
+.tabs{display:flex;border-bottom:2px solid var(--ink);flex-wrap:wrap}
+.tabs span{padding:8px 12px;font:700 12.5px system-ui;border-right:1.5px solid var(--line2);color:var(--muted)}
+.tabs span.on{background:var(--blue-bg);color:var(--blue-ink);box-shadow:inset 0 -3px 0 var(--blue)}
+.pane{padding:12px 14px;display:grid;gap:10px;min-width:0}
+.ghead{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ghead b{font-size:15px}
+.fld{display:grid;grid-template-columns:118px minmax(0,1fr) auto;gap:6px 8px;font-size:12.5px;align-items:center}
+.fld .k{color:var(--muted)}
+.fld .v{border:1.5px solid var(--line2);padding:3px 7px;background:var(--paper);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fld .v.empty{color:var(--soft);font-style:italic;border-style:dashed}
+.fld .v.got{border-color:var(--green);background:var(--green-bg)}
+.fld .v.sure{border-color:var(--ink);background:var(--paper);font-weight:600}
+.fld .v.q{border-color:var(--yel);background:var(--yel-bg)}
+.fld .a{font:700 11px system-ui;color:var(--muted);white-space:nowrap}
+.fld .a a{color:var(--blue);text-decoration:none}
+.foot{border-top:2px solid var(--ink);padding:10px 14px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:auto}
+.kinds{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.kind{background:var(--paper);border:2px solid var(--ink);padding:10px 12px;font-size:12.5px}
+.kind b{display:block;font-size:13.5px;margin-bottom:4px}
+.kind span{color:var(--muted)}
+.dq{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:14px 16px;margin:14px 0;max-width:1000px}
+.dq h3{margin:0 0 8px;font-size:16px}
+.opt{border-left:4px solid var(--line2);padding:6px 10px;margin:6px 0;font-size:13px}
+.opt.rec{border-left-color:var(--blue);background:var(--blue-bg)}
+.opt b{display:block}
+@media (max-width:820px){.atl{grid-template-columns:1fr}.atl .side{border-left:0;border-top:2px solid var(--ink)}.grid{grid-template-columns:1fr}body{padding:16px}.fld{grid-template-columns:96px minmax(0,1fr) auto}}
+</style></head><body><div class="wrap">
+<span class="part" style="border:0;margin:0;padding:0">Atelier de transcription · vague 3 · 3b</span>
+<h1>🧩 Les gabarits : des cases à remplir pour chaque sorte d’acte</h1>
+<p class="sub">Maquette à valider avant de coder. Rien n’est encore dans l’app. Les noms (MAZAUD, LACOMBE, DURAND) sont inventés.</p>
+
+<div class="simple">
+<p><b>En une phrase :</b> aujourd’hui, « 🧩 Modèle » colle un texte à trous (« L’an [année], le [jour]… »), et rien ne s’en sert ensuite. Un <b>gabarit</b>, ce sont les <b>cases qu’un généalogiste relève</b> pour cette sorte d’acte (date, enfant, père, mère, parrain…).</p>
+<p><b>🧭 Repérer les remplit tout seul</b> à partir de ton texte, tu corriges, et c’est <b>exactement ce qui part</b> dans « ✓ Ajouter à la généalogie ». Chaque case montre d’où elle vient dans le texte (« l. 2 », ou « page 2, l. 3 »).</p>
+<p>Comme tu l’as décidé (décision 6) : <b>au choix dans les Réglages</b>, gabarit à cases (conseillé) ou texte à trous comme aujourd’hui.</p>
+</div>
+
+<div class="part">1 · Dans l’Atelier</div>
+<h2>Un onglet « 🧩 Gabarit » à côté de « Ce que l’app a trouvé »</h2>
+<p class="sub">Exemple : un baptême de 1790, déjà lu et repéré. Vert = rempli par Repérer (à vérifier), gras = vérifié par toi (✓), jaune = l’app hésite, pointillés = rien trouvé.</p>
+<div class="atl">
+  <div class="img" aria-label="image de l’acte"><div class="paperimg"></div>
+    <div class="ln" style="top:52px"></div><div class="ln" style="top:82px"></div><div class="hl" style="top:105px"></div><div class="ln" style="top:110px"></div><div class="ln" style="top:140px"></div><div class="ln" style="top:170px"></div><div class="ln" style="top:200px"></div><div class="ln" style="top:230px"></div><div class="ln" style="top:260px;right:120px"></div>
+  </div>
+  <div class="side">
+    <div class="tabs"><span>📝 Texte</span><span>🧾 Ce que l’app a trouvé</span><span class="on">🧩 Gabarit</span></div>
+    <div class="pane">
+      <div class="ghead"><b>Baptême</b><span class="pill blue">sorte devinée</span><span class="mini">7 cases sur 9 remplies · 2 vérifiées</span><span style="flex:1"></span><span class="btn small ghost">⋯</span></div>
+      <div class="fld">
+        <span class="k">Date du baptême</span><span class="v sure">23 mars 1790</span><span class="a">✓ <a href="#">l. 1</a></span>
+        <span class="k">Enfant</span><span class="v sure">Jean MAZAUD</span><span class="a">✓ <a href="#">l. 2</a></span>
+        <span class="k">Né le</span><span class="v got">22 mars 1790 <small class="mini">« né d’hier »</small></span><span class="a"><a href="#">l. 2</a></span>
+        <span class="k">Père, métier</span><span class="v got">Pierre MAZAUD, laboureur</span><span class="a"><a href="#">l. 3</a></span>
+        <span class="k">Mère</span><span class="v got">Marie LACOMBE</span><span class="a"><a href="#">l. 3</a></span>
+        <span class="k">Parrain</span><span class="v got">Jean DURAND</span><span class="a"><a href="#">l. 4</a></span>
+        <span class="k">Marraine</span><span class="v q">Anne MAZAUD ?</span><span class="a"><a href="#">l. 5</a></span>
+        <span class="k">Curé</span><span class="v empty">à remplir</span><span class="a">—</span>
+        <span class="k">Signatures</span><span class="v empty">aucune / parrain / …</span><span class="a">—</span>
+      </div>
+      <p class="mini" style="margin:0">Clic sur « l. 3 » : le passage est surligné dans le texte et sur l’image. Clic dans une case : tu écris. Entrée : ✓ vérifié.</p>
+      <div class="row"><span class="btn small">＋ Ajouter une case</span><span class="btn small ghost">🧭 Remplir à nouveau</span></div>
+    </div>
+    <div class="foot"><span class="mini">« ✓ Ajouter à la généalogie » reprend ces cases</span><span style="flex:1"></span><span class="btn blue">✓ Ajouter à la généalogie…</span></div>
+  </div>
+</div>
+<p class="note">Sur téléphone, « 🧩 Gabarit » devient un 4e onglet à côté de Image / Texte / Personnes. Avec plusieurs pages, la case dit « page 2, l. 3 » et le clic ouvre la bonne page.</p>
+
+<div class="part">2 · Les sortes d’actes</div>
+<h2>9 gabarits prêts, et les tiens</h2>
+<div class="kinds">
+<div class="kind"><b>Baptême</b><span>date, enfant, né le, père (métier), mère, parrain, marraine, curé, signatures</span></div>
+<div class="kind"><b>Naissance (état civil)</b><span>date de l’acte, heure, enfant, sexe, né le, lieu, père (âge, métier, domicile), mère, témoins, officier</span></div>
+<div class="kind"><b>Mariage</b><span>date, époux (âge, métier, origine, parents), épouse (idem), contrat, témoins, publications, signatures</span></div>
+<div class="kind"><b>Décès</b><span>date de l’acte, défunt, âge, décédé le, lieu, domicile, conjoint, parents, déclarants</span></div>
+<div class="kind"><b>Sépulture</b><span>date, défunt, âge, décédé le, conjoint ou parents, témoins, curé</span></div>
+<div class="kind"><b>Acte notarié</b><span>date, notaire, lieu, sorte (vente, contrat de mariage…), parties, objet, prix, témoins</span></div>
+<div class="kind"><b>Acte de notoriété</b><span>date, juge ou notaire, personne concernée, ce qui est attesté, témoins (âge, métier, domicile)</span></div>
+<div class="kind"><b>Recensement</b><span>commune, année, rue / maison, ménage : nom, prénom, âge, métier, lien avec le chef</span></div>
+<div class="kind"><b>Registre militaire</b><span>nom, matricule, classe, né le, lieu, signalement, campagnes, blessures, régiment</span></div>
+</div>
+<p class="note">« À préciser » : pas de gabarit, l’onglet propose la sorte devinée (« On dirait un baptême : utiliser ce gabarit ? »). Réglages → Atelier → « 🧩 Mes gabarits » : modifier les cases d’une sorte, ou en créer une (ex. « Rôle de capitation »).</p>
+
+<div class="part">3 · Le réglage</div>
+<h2>Réglages → Atelier de transcription → « Modèle d’acte »</h2>
+<div class="simple"><div class="row" style="gap:10px"><span class="mini">Modèle d’acte</span><span class="input">🧩 Gabarit à cases (conseillé) ▾</span><span class="mini">ou « Texte à trous (comme aujourd’hui) »</span></div>
+<p class="mini" style="margin-top:8px">Choix unique, gardé. Le texte à trous reste disponible dans les deux cas (menu ⋯ du gabarit → « Coller le texte à trous »).</p></div>
+
+<div class="part">4 · Ce que tu décides</div>
+<div class="dq"><h3>1 · Où mettre le gabarit ?</h3>
+<div class="opt rec"><b>A · Un onglet « 🧩 Gabarit » à côté de « Ce que l’app a trouvé » (conseillé)</b>Les deux restent : « trouvé » pour tout ce qui est repéré, le gabarit pour les cases attendues.</div>
+<div class="opt"><b>B · Le gabarit en haut de « Ce que l’app a trouvé »</b>Un seul endroit, mais une colonne plus longue.</div></div>
+<div class="dq"><h3>2 · Quand se remplit-il ?</h3>
+<div class="opt rec"><b>A · Tout seul à chaque « 🧭 Repérer » (conseillé)</b>Sans jamais écraser une case que tu as vérifiée (✓) ou écrite toi-même.</div>
+<div class="opt"><b>B · Seulement avec le bouton « 🧭 Remplir »</b></div></div>
+<div class="dq"><h3>3 · « ✓ Ajouter à la généalogie »</h3>
+<div class="opt rec"><b>A · Part des cases du gabarit, avec un aperçu avant d’accepter (conseillé)</b>Rien n’est écrit sans ton accord ; c’est aussi le « relevé automatique » de la liste.</div>
+<div class="opt"><b>B · Reste comme aujourd’hui</b>(le gabarit ne sert qu’à relire et à exporter).</div></div>
+<div class="dq"><h3>4 · Tes propres cases et tes propres gabarits</h3>
+<div class="opt rec"><b>A · Oui : « ＋ Ajouter une case » dans l’acte, et « 🧩 Mes gabarits » dans les Réglages (conseillé)</b></div>
+<div class="opt"><b>B · Non : seulement les 9 gabarits prêts</b></div></div>
+<div class="dq"><h3>5 · Export</h3>
+<div class="opt rec"><b>A · Le gabarit sort aussi : tableau dans l’impression / le PDF, et « ⤓ Tableur » de tous les actes d’une même sorte (conseillé)</b>Pratique pour un relevé de paroisse.</div>
+<div class="opt"><b>B · Pas d’export du gabarit</b></div></div>
+<p class="note">Effort : gros. Ordre proposé : l’onglet et les 9 gabarits avec Repérer (étape 1), puis « Ajouter à la généalogie » depuis les cases (étape 2), puis Mes gabarits et l’export (étape 3) — avec un point entre chaque étape.</p>
+</div></body></html>

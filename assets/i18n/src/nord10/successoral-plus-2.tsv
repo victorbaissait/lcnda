@@ -425,7 +425,7 @@ Les pistes sont montrées à partir de ce score (sur 100). Plus haut : moins de 
 Après chaque nouvel import du fichier INSEE : vérifier les dossiers en cours tout seul (jamais de changement sans ton clic). ¦ Pas çdo importi të ri të skedarit INSEE: kontrollo vetë dosjet në vazhdim (kurrë ndryshim pa klikimin tënd). ¦ Wara kull importazzjoni ġdida tal-fajl INSEE: iċċekkja l-fajls għaddejjin waħedha (qatt bidla mingħajr il-klikk tiegħek).
 Automatique, dans la cloche ¦ Automatikisht, në zile ¦ Awtomatikament, fil-qanpiena
 Seulement à la main ¦ Vetëm me dorë ¦ Manwalment biss
-📋 Questionnaire ¦ 📋 Pyetësor ¦ 📋 Kwestjonarju
+📝 Questionnaire ¦ 📝 Pyetësor ¦ 📝 Kwestjonarju
 Ce que l’héritier te renvoie après avoir rempli le questionnaire. ¦ Çfarë të kthen trashëgimtari pasi e plotëson. ¦ X’jibagħtlek lura l-werriet wara li jimlieh.
 Un petit fichier .json ¦ Një skedar i vogël .json ¦ Fajl .json żgħir
 La page .html remplie ¦ Faqja .html e plotësuar ¦ Il-paġna .html mimlija

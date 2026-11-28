@@ -29,7 +29,7 @@ const PICKER_KINDS = ['person', 'place', 'source', 'media', 'investigation', 'ba
     'citation']; // 🔖 citations de sources (source_links : source, page, ce qui est cité — ⚖️ dossiers de preuve, lib/preuve.php)
 const PICKER_LABELS = [
     'person' => '👤 Personnes', 'place' => '📍 Lieux', 'source' => '📚 Sources', 'media' => '🖼 Médias',
-    'investigation' => '🔍 Enquêtes', 'battue' => '🧭 Battues', 'label' => '🏷 Étiquettes', 'house' => '🏠 Maisons',
+    'investigation' => '🔍 Enquêtes', 'battue' => '🔦 Battues', 'label' => '🏷 Étiquettes', 'house' => '🏠 Maisons',
     'periodical' => '📰 Revues', 'employer' => '🏭 Employeurs', 'census' => '📋 Recensements',
     'artwork' => '🎨 Œuvres', 'graph' => '📈 Graphiques',
     'sheet' => '📒 Fiches', 'atelier' => '📚 Atelier', 'board' => '🧩 Tableaux', 'layout' => '📐 Mises en page', 'diagram' => '🏛️ Diagrammes', 'oldmap' => '🗺️ Cartes', 'act' => '📜 Transcriptions',
@@ -131,7 +131,8 @@ function picker_search(PDO $pdo, array $get): array
         'portraits' => (string) ($get['portraits'] ?? '') === '1', 'recent' => (string) ($get['recent'] ?? '') === '1',
         'recent_ids' => array_slice(array_map('intval', explode(',', (string) ($get['recent_ids'] ?? ''))), 0, 60),
         'media_flag' => in_array($get['media_flag'] ?? '', ['notr', 'tr', 'sig'], true) ? $get['media_flag'] : '',
-        'with_text' => (string) ($get['with_text'] ?? '') === '1']; // avec la transcription (relecture d'un média choisi)
+        'with_text' => (string) ($get['with_text'] ?? '') === '1', // avec la transcription (relecture d'un média choisi)
+        'year_from' => (int) ($get['year_from'] ?? 0), 'year_to' => (int) ($get['year_to'] ?? 0)]; // 📥 « Prendre depuis… » : une période (événements)
     // 🎨 fiches des catalogues d'artistes : sortes (« release,master ») et artiste
     $opts['art_kind'] = (string) preg_replace('/[^a-z0-9_,]/', '', strtolower(scalar_text($get['art_kind'] ?? '', 'art_kind')));
     $opts['art_person'] = max(0, (int) ($get['art_person'] ?? 0));
@@ -271,6 +272,17 @@ function picker_text_where(array $columns, string $q, array &$params, string $pr
     return '(' . implode(' OR ', $parts) . ')';
 }
 
+/** Plusieurs mots (« LACOMBE Chamberet », « naissance Treignac ») : chaque mot doit se trouver dans une des colonnes (pas forcément la même).
+ *  Un seul mot : comme picker_text_where. */
+function picker_words_where(array $columns, string $q, array &$params, string $prefix = 'w'): string
+{
+    $words = array_values(array_filter(preg_split('/\s+/u', trim($q)) ?: [], static fn($w) => $w !== ''));
+    if (count($words) < 2 || picker_ids()) { return picker_text_where($columns, $q, $params, $prefix); }
+    $all = [];
+    foreach (array_slice($words, 0, 6) as $i => $w) { $all[] = picker_text_where($columns, $w, $params, $prefix . $i); }
+    return '(' . implode(' AND ', $all) . ')';
+}
+
 // ─── 📅 Événements ──────────────────────────────────────────────────────────
 /** Un événement : son titre (ou sa sorte), la personne ou le couple, la date et le lieu ; on cherche aussi par nom de la personne */
 function picker_events(PDO $pdo, string $q, int $offset, int $limit, array $opts = []): array
@@ -278,16 +290,21 @@ function picker_events(PDO $pdo, string $q, int $offset, int $limit, array $opts
     $params = [];
     $who = "COALESCE(p.first_name,'') || ' ' || COALESCE(p.last_name,'')";
     $couple = "COALESCE(p1.first_name,'') || ' ' || COALESCE(p1.last_name,'') || ' et ' || COALESCE(p2.first_name,'') || ' ' || COALESCE(p2.last_name,'')";
-    $where = picker_text_where(['e.title', 't.label', 'e.date_text', 'pl.name', $who, $couple], $q, $params);
+    $where = picker_words_where(['e.title', 't.label', 'e.date_text', 'pl.name', $who, $couple], $q, $params); // « LACOMBE Chamberet » : chaque mot quelque part
     // filter.person_id : les événements d'une personne et de ses couples (⏳ Une journée dans la vie de…)
     if (!empty($opts['person_id'])) { $pid = (int) $opts['person_id']; $where = "({$where}) AND (e.person_id={$pid} OR f.partner1_id={$pid} OR f.partner2_id={$pid})"; }
-    [$total, $rows] = picker_page($pdo, "SELECT e.id, e.title, e.date_text, e.year, t.label, pl.name AS place, e.scope, {$who} AS who, {$couple} AS couple",
+    if (!empty($opts['year_from']) && !empty($opts['year_to'])) { $where = "({$where}) AND e.year BETWEEN " . (int) $opts['year_from'] . ' AND ' . (int) $opts['year_to']; } // « Treignac 1780-1800 »
+    $src = picker_table_exists($pdo, 'source_links') ? "(SELECT count(*) FROM source_links sl WHERE sl.entity_type='event' AND sl.entity_id=e.id)" : '0'; // 📥 « Prendre depuis… » : nombre de sources
+    [$total, $rows] = picker_page($pdo, "SELECT e.id, e.title, e.date_text, e.year, t.label, t.gedcom_tag AS tag, pl.name AS place, e.scope, e.person_id, {$who} AS who, {$couple} AS couple, {$src} AS n_src",
         "FROM events e LEFT JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id LEFT JOIN persons p ON p.id=e.person_id LEFT JOIN families f ON f.id=e.family_id LEFT JOIN persons p1 ON p1.id=f.partner1_id LEFT JOIN persons p2 ON p2.id=f.partner2_id WHERE {$where}",
         'e.year IS NULL, e.year, e.id', $params, $offset, $limit);
     return ['total' => $total, 'items' => array_map(static fn($r) => [
         'kind' => 'event', 'id' => (int) $r['id'], 'title' => trim((string) ($r['title'] ?: $r['label'] ?: 'Événement')),
         'meta' => implode(' · ', array_filter([trim((string) ($r['scope'] === 'family' ? $r['couple'] : $r['who'])), trim((string) $r['date_text']), trim((string) $r['place'])])),
         'badge' => $r['year'] ? (string) $r['year'] : '', 'badge_style' => '', 'group' => 'event', 'icon' => '📅', 'short' => (string) ($r['year'] ?? ''),
+        // 📥 « Prendre depuis… » : chaque morceau à part (qui, quand, où, sorte, sources)
+        'who' => trim((string) ($r['scope'] === 'family' ? $r['couple'] : $r['who'])), 'date_text' => trim((string) $r['date_text']), 'place' => trim((string) $r['place']),
+        'type' => trim((string) $r['label']), 'tag' => (string) ($r['tag'] ?? ''), 'person_id' => (int) ($r['person_id'] ?? 0), 'year' => $r['year'] ? (int) $r['year'] : null, 'sources' => (int) $r['n_src'],
     ], $rows)];
 }
 
@@ -531,6 +548,7 @@ function picker_places(PDO $pdo, string $q, int $offset, int $limit, array $opts
         if ($chosen['world_rows'] === null) { $chosen['world_rows'] = picker_world_rows($pdo, $chosen['name'], $chosen['rest']); $groups['world']['total'] = count($chosen['world_rows']); }
         $more = $offset + $limit < $all + count($chosen['world_rows']);
     }
+    if ($groups['base']['items']) { require_once __DIR__ . '/lieux_doublons.php'; ld_picker_hints($pdo, $groups['base']['items']); } // « ≈ même lieu que Pernay (Indre-et-Loire) ? »
     picker_place_dedupe_titles($groups);
     return ['groups' => $mixed ? [$groups['base']] : array_values($groups), 'more' => $more];
 }
@@ -972,7 +990,7 @@ function picker_battues(PDO $pdo, string $q, int $offset, int $limit): array
     return ['total' => $total, 'items' => array_map(static fn($r) => [
         'kind' => 'battue', 'id' => (int) $r['id'], 'title' => (string) $r['title'],
         'meta' => implode(' · ', array_filter(['Battue', trim((string) $r['target_text']), mb_strtolower($status[$r['status']] ?? (string) $r['status'])])),
-        'badge' => $status[$r['status']] ?? '', 'badge_style' => $r['status'] === 'open' ? 'blue' : '', 'group' => 'battue', 'icon' => '🧭', 'short' => trim((string) $r['target_text']),
+        'badge' => $status[$r['status']] ?? '', 'badge_style' => $r['status'] === 'open' ? 'blue' : '', 'group' => 'battue', 'icon' => '🔦', 'short' => trim((string) $r['target_text']),
     ], $rows)];
 }
 

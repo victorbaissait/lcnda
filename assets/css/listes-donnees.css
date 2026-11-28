@@ -1,0 +1,104 @@
+/* LCNDA — 🧰 Listes → Données (assets/js/app-listes-donnees.js). Les boutons, pastilles et tableaux reprennent ceux des listes
+ * (.ui-listbar-btn, .ui-listbar-chip, .data-table) ; ici seulement la mise en place. Couleurs : variables de l'app, le mode sombre suit. */
+.ld-page { min-width: 0; }
+.ld-source { margin: -4px 0 10px; }
+.ld-bar { display: grid; gap: 8px; margin: 0 0 12px; }
+.ld-bar-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.ld-q { flex: 1 1 220px; min-width: 0; max-width: 420px; }
+.ld-view button.is-active { font-weight: 700; }
+.ld-chips { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; min-height: 1.6em; }
+.ld-count { font-weight: 700; margin-right: 4px; }
+.ld-editor { border: 1.5px solid var(--line, rgba(0, 0, 0, .15)); border-radius: 10px; padding: 10px 12px; background: var(--card-bg, #fff); max-width: 640px; }
+.ld-ed-form { display: grid; gap: 8px; }
+.ld-ed-row { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; }
+.ld-ed-row input[type="number"] { width: 7.5em; }
+.ld-ed-row input:not([type]), .ld-ed-row input[name="v"] { flex: 1 1 180px; min-width: 0; }
+.ld-ed-list { max-height: 260px; overflow: auto; display: grid; gap: 2px; }
+.ld-ed-list.is-choice { max-height: none; overflow: visible; display: block; } /* la liste de choix commune a sa propre hauteur (app-ui.js choiceList) */
+.ld-ed-actions { display: flex; gap: 6px; justify-content: flex-end; }
+.ld-pk { min-width: 0; max-width: 420px; }
+.ld-saved { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 0 0 8px; }
+.ld-saved-lab { color: var(--muted, #667); font-size: 13px; }
+.ld-saved-it { display: inline-flex; align-items: stretch; border: 1.5px solid var(--blue-bright, #055dff); border-radius: 999px; overflow: hidden; }
+.ld-saved-it button { border: 0; background: transparent; color: inherit; font: inherit; font-size: 13px; padding: 2px 10px; cursor: pointer; }
+.ld-saved-go:hover, .ld-saved-x:hover { background: var(--blue-soft, rgba(5, 93, 255, .08)); }
+.ld-saved-x { padding: 2px 8px !important; border-left: 1px solid var(--blue-bright, #055dff) !important; }
+.ld-table-wrap { overflow-x: auto; max-width: 100%; }
+.ld-table td { max-width: 320px; overflow: hidden; text-overflow: ellipsis; vertical-align: top; }
+.ld-table .ld-num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.ld-table .ld-links a { text-decoration: none; padding: 0 3px; }
+.ld-sort { border: 0; background: none; font: inherit; font-weight: 700; color: inherit; cursor: pointer; padding: 0; text-align: left; }
+.ld-more-host { margin-top: 10px; }
+.ld-install { display: grid; gap: 10px; justify-items: start; padding: 14px; border: 1.5px dashed var(--line, rgba(0, 0, 0, .2)); border-radius: 10px; max-width: 640px; }
+.ld-overview .ld-q { margin: 0 0 14px; width: 100%; }
+.ld-group { margin: 0 0 18px; }
+.ld-group h3 { margin: 0 0 8px; font-size: 16px; }
+.ld-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 8px; }
+.ld-card { display: flex; gap: 10px; align-items: center; text-align: left; padding: 10px 12px; border: 1.5px solid var(--line, rgba(0, 0, 0, .15)); border-radius: 10px; background: var(--card-bg, #fff); color: inherit; font: inherit; cursor: pointer; min-width: 0; }
+.ld-card:hover, .ld-card:focus-visible { border-color: var(--blue-bright, #055dff); }
+.ld-card-ico { font-size: 22px; flex: none; }
+.ld-card-txt { display: grid; min-width: 0; flex: 1; }
+.ld-card-txt small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ld-card-state { flex: none; }
+.ld-results .h-map-point[data-ld-map-row] { cursor: pointer; }
+@media (max-width: 600px) {
+  .ld-bar-row > * { flex: 1 1 auto; }
+  .ld-q { flex-basis: 100%; max-width: none; }
+  .ld-cards { grid-template-columns: 1fr; }
+  .ld-table td { max-width: 200px; }
+}
+/* 🗺 la carte (heritage-mini-carte.js) : ce qu'elle montre, et « Charger les points de cette zone » */
+.ld-map-note { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; margin: 6px 0 0; font-size: 13px; }
+.ld-results .h-map-point[role="button"]:focus-visible circle { stroke: #111; stroke-width: 3.5; }
+/* 📍 GPS : les coordonnées, et au survol / au clavier : ⧉ Copier · 🗺 Voir sur la carte · ↗ OpenStreetMap */
+.ld-table td.ld-gps-td { max-width: none; overflow: visible; min-width: 13em; }
+.ld-gps-v { white-space: nowrap; }
+.ld-gps { position: relative; display: inline-flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+.ld-gps-v { border: 0; background: none; padding: 0; font: inherit; color: inherit; cursor: pointer; font-variant-numeric: tabular-nums; text-decoration: underline dotted; }
+.ld-gps-act { display: none; gap: 4px; flex-wrap: wrap; }
+.ld-gps:hover .ld-gps-act, .ld-gps:focus-within .ld-gps-act { display: inline-flex; }
+.ld-gps-act button, .ld-gps-act a { border: 1.5px solid var(--line, rgba(0, 0, 0, .25)); background: var(--card-bg, #fff); color: inherit; font: inherit; font-size: 12px; padding: 1px 6px; cursor: pointer; text-decoration: none; white-space: nowrap; }
+.ld-gps-act button:hover, .ld-gps-act a:hover { border-color: var(--blue-bright, #055dff); }
+:root[data-theme="dark"] .ld-gps-act button, :root[data-theme="dark"] .ld-gps-act a { background: #1d1d1d; border-color: #555; }
+.ld-cols-list { max-height: 320px; }
+/* 🗺 la fiche d'un point (assets/js/app-carte-fiche.js) : une bulle sur le point, 📌 un panneau à droite, une feuille en bas sur téléphone — toujours dans le cadre de la carte */
+.cf-card { position: absolute; z-index: 6; width: min(300px, calc(100% - 16px)); max-height: calc(100% - 16px); overflow: auto; box-sizing: border-box; padding: 10px 12px 12px; background: var(--card-bg, #fff); color: var(--ink, #111); border: 1.5px solid var(--ink, #111); box-shadow: 0 6px 22px rgba(0, 0, 0, .18); font-size: 13.5px; line-height: 1.4; cursor: auto; touch-action: auto; -webkit-user-select: text; user-select: text; text-align: left; }
+.cf-card:focus { outline: none; }
+.cf-card:focus-visible { outline: 3px solid var(--blue-bright, #055dff); outline-offset: 1px; }
+.cf-card.cf-panel { top: 8px; right: 8px; bottom: 24px; left: auto !important; width: min(320px, 46%); max-height: none; }
+.cf-card.cf-sheet { left: 8px !important; right: 8px; bottom: 8px; top: auto !important; width: auto; max-height: min(62%, 340px); }
+.person-map-stage.cf-has-panel .mm-ctl { right: auto; left: 8px; align-items: flex-start; }
+.cf-head { display: flex; gap: 6px; align-items: flex-start; margin: 0 0 6px; }
+.cf-title { flex: 1 1 auto; min-width: 0; font-size: 14.5px; overflow-wrap: anywhere; }
+.cf-tools { display: inline-flex; gap: 4px; flex: none; }
+.cf-ico { min-width: 30px; height: 30px; padding: 0 6px; border: 1.5px solid var(--line, rgba(0, 0, 0, .25)); background: transparent; color: inherit; font: inherit; font-size: 14px; line-height: 1; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 4px; }
+.cf-ico:hover { border-color: var(--blue-bright, #055dff); }
+.cf-ico:focus-visible { outline: 3px solid var(--blue-bright, #055dff); outline-offset: 1px; }
+.cf-ico[aria-pressed="true"] { background: var(--blue-soft, #eaf1ff); border-color: var(--blue-bright, #055dff); }
+.cf-lab { font-size: 12px; font-weight: 600; }
+.cf-sheet .cf-lab { display: none; }
+.cf-sub { margin: -2px 0 6px; font-size: 12.5px; }
+.cf-lines { display: grid; gap: 2px; margin: 0 0 6px; }
+.cf-lines > div { display: grid; grid-template-columns: minmax(70px, 38%) 1fr; gap: 8px; }
+.cf-lines dt { color: var(--muted, #667); font-size: 12.5px; }
+.cf-lines dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.cf-lines dd small { display: block; color: var(--muted, #667); }
+.cf-fam { margin: 0 0 6px; padding: 5px 8px; background: rgba(46, 125, 50, .09); border-left: 3px solid #2e7d32; }
+.cf-src { margin: 0 0 8px; overflow-wrap: anywhere; }
+.cf-src a { white-space: nowrap; }
+.cf-acts { display: flex; flex-wrap: wrap; gap: 6px; }
+.cf-list { list-style: none; margin: 0 0 6px; padding: 0; display: grid; gap: 2px; }
+.cf-list button { width: 100%; display: grid; gap: 1px; text-align: left; border: 0; border-bottom: 1px solid var(--line, rgba(0, 0, 0, .12)); background: transparent; color: inherit; font: inherit; padding: 5px 4px; cursor: pointer; }
+.cf-list button:hover { background: var(--blue-soft, rgba(5, 93, 255, .08)); }
+.cf-list button:focus-visible { outline: 3px solid var(--blue-bright, #055dff); outline-offset: -3px; }
+.cf-list small { font-size: 12px; }
+.cf-more { margin: 0 0 8px; font-size: 12.5px; }
+.ld-row-hl > td { background: var(--blue-soft, rgba(5, 93, 255, .1)) !important; transition: background 1.2s; }
+.ld-back-map { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 8px; }
+:root[data-theme="dark"] .cf-card { background: #1d1d1d; color: #eee; border-color: #777; box-shadow: 0 6px 22px rgba(0, 0, 0, .55); }
+:root[data-theme="dark"] .cf-ico { border-color: #555; }
+:root[data-theme="dark"] .cf-ico[aria-pressed="true"] { background: #23324d; border-color: #6ea0ff; }
+:root[data-theme="dark"] .cf-lines dt, :root[data-theme="dark"] .cf-lines dd small { color: #aaa; }
+:root[data-theme="dark"] .cf-fam { background: rgba(102, 187, 106, .14); border-left-color: #66bb6a; }
+:root[data-theme="dark"] .cf-list button { border-bottom-color: #333; }
+@media print { .cf-card { display: none !important; } }

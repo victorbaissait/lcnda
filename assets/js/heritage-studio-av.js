@@ -945,6 +945,24 @@
         return blob;
     }
 
+    /** 🎞 GIF animé du montage (sans son) : chaque image est posée à son moment (pas en temps réel), puis l'encodeur GIF (LZW)
+     *  du Studio d'animation (ext.animExport.gif, heritage-anim-export.js) en fait le fichier. Petit : 480 px de large au plus,
+     *  10 images par seconde (moins pour un long film : 300 images au plus). */
+    async function recordMontageGif(P, onStep, {maxSide = 480, fps = 10, maxFrames = 300} = {}) {
+        const EX = ext.animExport; if (!EX?.gif) throw new Error(i18n('Le fabricant de GIF n’est pas chargé.'));
+        const first = P.sources[P.v1[0]?.s] || P.sources[P.v2[0]?.s] || {w: 1280, h: 720}, turn = P.fx.rotate % 180 !== 0, ad = aspectDims(P.aspect);
+        const W0 = first.w || 1280, H0 = first.h || 720, Wn = ad ? ad[0] : turn ? H0 : W0, Hn = ad ? ad[1] : turn ? W0 : H0, sc = Math.min(1, maxSide / Math.max(Wn, Hn));
+        const cv = document.createElement('canvas'); cv.width = Math.max(2, Math.round(Wn * sc)); cv.height = Math.max(2, Math.round(Hn * sc));
+        const g = cv.getContext('2d', {willReadFrequently: true}); // le moteur reprend ce même contexte
+        const T = montageEnd(P), rate = Math.max(0.5, Math.min(fps, maxFrames / T)), n = Math.max(1, Math.min(maxFrames, Math.round(T * rate))), frames = [];
+        const eng = montageEngine(P, cv, {out: 'record'});
+        try { for (let i = 0; i < n; i++) { await eng.seek(Math.min(T - 0.01, i / rate)); frames.push(g.getImageData(0, 0, cv.width, cv.height).data.slice()); onStep?.(i / n * 0.9); } }
+        finally { eng.destroy(); }
+        onStep?.(0.95);
+        const bytes = EX.gif({w: cv.width, h: cv.height, frames, delay: Math.max(2, Math.round(100 / rate)), loop: true});
+        return new Blob([bytes], {type: 'image/gif'});
+    }
+
     /** Le son seul du montage (musiques, voix, son des vidéos, avec leurs réglages), rejoué en temps réel puis encodé en MP3 ou WAV */
     async function recordMontageAudio(P, onStep, level = 1) {
         const T = montageEnd(P), cv = document.createElement('canvas'); cv.width = 2; cv.height = 2;
@@ -1214,7 +1232,7 @@
         const beatsHtml = c => { const job = beatJob?.id === c.id, n = (c.beats || []).filter(b => b >= c.from && b <= c.to).length;
             return `<details class="h-mt-isec h-mt-beats" open><summary><b>🥁 Temps de la musique</b><span data-help="Repère les battements (les temps) de la musique : ils s’affichent en petits traits sur le son, dans la frise ; un élément qu’on glisse s’y colle (🧲 Aimanter). On peut aussi couper la vidéo de la piste 1 sur les temps, pour un montage en rythme."></span></summary>
                 ${job ? '<p class="muted" data-mt-beatprog>Écoute de la musique…</p>' : c.beats ? `<p class="muted" data-mt-beatinfo>${c.bpm ? i18n('{n} temps repérés · environ {bpm} battements par minute.', {n, bpm: String(c.bpm).replace('.', ',')}) : i18n('{n} temps repérés.', {n})}</p>` : ''}
-                <div class="h-mt-quick"><button type="button" data-mt-beats ${job ? 'disabled' : ''}>🥁 ${c.beats ? 'Repérer de nouveau' : 'Repérer les temps'}</button>${c.beats ? '<button type="button" data-mt-beatsdel>Effacer les temps</button>' : ''}</div>
+                <div class="h-mt-quick"><button type="button" data-mt-beats ${job ? 'disabled' : ''}>🥁 ${c.beats ? 'Repérer de nouveau' : 'Repérer les temps'}</button>${c.beats ? '<button type="button" data-mt-beatsdel>Supprimer les temps</button>' : ''}</div>
                 ${c.beats?.length ? `<div class="h-avx-row">✂️ Couper la vidéo (piste 1) <select data-mt-beatevery aria-label="Tous les combien de temps">${[1, 2, 4, 8].map(v => `<option value="${v}" ${beatEvery === v ? 'selected' : ''}>${v === 1 ? i18n('sur chaque temps') : i18n('tous les {n} temps', {n: v})}</option>`).join('')}</select><button type="button" class="button small secondary" data-mt-beatcut title="Coupe les morceaux de la piste Vidéo 1 aux temps de cette musique (coupes franches)">Couper</button></div>` : ''}</details>`; };
         /* Inspecteur (façon Final Cut) : Composition, Transformer, Recadrer, Distorsion, Adaptation ; ◇ = image clé au moment de la tête de lecture */
         const localOf = c => { const t = eng?.t || 0; if (sel?.track === 'v1') { const x = layoutV1(P).find(y => y.c === c); if (!x) return c.from; return Math.max(c.from, Math.min(c.to, c.from + (t - x.at) * spd(c))); } return Math.max(c.from, Math.min(c.to, c.from + (t - (c.at || 0)) * spd(c))); };
@@ -2012,6 +2030,32 @@
         }
         $('[data-mt-saveproj]').addEventListener('click', () => saveProject());
         $('[data-avx-name]')?.addEventListener('input', () => { dirty = true; showProjName(); });
+        // 📤 Envoyer vers… (heritage-envoyer.js) : la vidéo du montage, rangée dans les médias, vers les outils qui la reçoivent (le site).
+        // Déjà exportée dans les médias et pas changée depuis : celle-là ; sinon elle est fabriquée d'abord (rejouée en temps réel).
+        let lastVideo = null; // {key (l'état du montage), media}
+        async function sendVideo(anchor) {
+            if (!ext.sendTo) return toast(i18n('L’envoi vers les autres outils n’est pas chargé.'), 'error');
+            eng?.pause(); const nm = ($('[data-avx-name]')?.value || projName || media.title || 'Montage').trim(), key = snapP();
+            if (!lastVideo || lastVideo.key !== key) {
+                if (!P.v1.length && !P.v2.length) return toast('Le montage est vide : ajoute une vidéo.', 'error');
+                const t = recordTypes()[0]; if (!t) return toast(i18n('Ce navigateur ne sait pas enregistrer de vidéo.'), 'error');
+                if (!await A().confirmBox(i18n('La vidéo est d’abord fabriquée (le film est rejoué en entier, laisse la fenêtre ouverte), puis rangée dans les médias.'), {title: i18n('Fabriquer la vidéo pour l’envoyer ?'), okLabel: i18n('Fabriquer et envoyer')})) return;
+                const pd = document.createElement('dialog'); pd.className = 'modal small-modal h-mt-sendwait'; pd.innerHTML = `<div class="modal-head"><div><span class="eyebrow">📤 ${esc(i18n('ENVOYER'))}</span><h2>${esc(i18n('Fabrication de la vidéo…'))}</h2></div></div><p data-mt-sendp>0 %</p>`;
+                pd.addEventListener('cancel', e => e.preventDefault()); document.body.appendChild(pd); pd.showModal();
+                const MP2 = montagePrefs(), say = x => { const el = pd.querySelector('[data-mt-sendp]'); if (el) el.textContent = x; };
+                eng?.destroy(); eng = null;
+                try {
+                    const level = await levelFor(P, MP2.lufs, say);
+                    const blob = await recordMontage(P, t[0], x => say(`${Math.round(x * 100)} %`), {height: Number(MP2.height) || 0, quality: Number(MP2.quality) || 5, fps: Number(MP2.fps) || 30, abr: Number(MP2.abr) || 128, level});
+                    say(i18n('Rangement dans les médias…'));
+                    const r = await uploadResult({kind: 'video'}, blob, t[1], {mode: 'new', duration: montageEnd(P), title: nm});
+                    if (!r?.media_id || !r?.filename) throw new Error(i18n('La vidéo n’a pas pu être rangée dans les médias.'));
+                    lastVideo = {key, media: {id: Number(r.media_id), filename: r.filename, title: nm}}; onDone?.();
+                } catch (err) { toast(err.message || String(err), 'error'); return; }
+                finally { pd.close(); pd.remove(); await rebuild(); drawTl(); }
+            }
+            return ext.sendTo('video', {media: lastVideo.media}, {anchor, title: nm, exclude: ['montage-new', 'montage']});
+        }
         // ⤓ Exporter (E3, la fenêtre commune) : un fichier MP4 / WebM avec les réglages de départ (Réglages), une copie dans les médias si on veut ;
         // « 💾 Dans les médias… » garde la fenêtre complète (plusieurs formats d'image, nouvelle version…)
         $('[data-mt-export]').addEventListener('click', async () => {
@@ -2024,7 +2068,7 @@
                 try { const level = await levelFor(P, MP2.lufs, x => { if (go) go.textContent = x; });
                     const blob = await recordMontage(P, t[0], x => { if (go) go.textContent = `Enregistrement… ${Math.round(x * 100)} %`; }, {height: Number(MP2.height) || 0, quality: Number(MP2.quality) || 5, fps: Number(MP2.fps) || 30, abr: Number(MP2.abr) || 128, level});
                     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = o.filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 60000);
-                    if (o.saveCopy) { await uploadResult(media, blob, t[1], {mode: 'copy', duration: T, title: nm}); toast('Vidéo téléchargée, et une copie est rangée dans les médias.'); onDone?.(); } }
+                    if (o.saveCopy) { const key = snapP(), r = await uploadResult(media, blob, t[1], {mode: 'copy', duration: T, title: nm}); if (r?.media_id && r?.filename) lastVideo = {key, media: {id: Number(r.media_id), filename: r.filename, title: nm}}; toast('Vidéo téléchargée, et une copie est rangée dans les médias.'); onDone?.(); } }
                 finally { release(); await rebuild(); drawTl(); }
             };
             const formats = types.map(t => ({id: t[1], label: t[1] === 'mp4' ? '🎬 MP4' : '🎞 WebM', hint: t[1] === 'mp4' ? 'lu partout' : 'léger (navigateurs, VLC)', ext: t[1], run: vid(t)}));
@@ -2038,6 +2082,14 @@
                     if (o.saveCopy) { await uploadResult({kind: 'audio'}, blob, f, {mode: 'new', duration: T, title: `${nm} (son)`}); toast('Son téléchargé, et une copie est rangée dans les médias (un nouveau son).'); onDone?.(); } }
                 finally { release(); await rebuild(); drawTl(); }
             };
+            formats.push({id: 'gif', label: i18n('🎞 GIF animé'), hint: i18n('sans son, petit, tourne en boucle'), ext: 'gif', run: async o => {
+                if (!P.v1.length && !P.v2.length && !P.texts.length) throw new Error(i18n('le montage est vide'));
+                const go = document.querySelector('dialog.ui-export[open] [data-ui-go]'), release = holdOpen(go?.closest('dialog')); eng.destroy(); eng = null;
+                try { const blob = await recordMontageGif(P, x => { if (go) go.textContent = i18n('GIF… {n} %', {n: Math.round(x * 100)}); });
+                    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = o.filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 60000);
+                }
+                finally { release(); await rebuild(); drawTl(); }
+            }, copy: false}); // les médias ne gardent pas les GIF (JPG, PNG, WebP seulement) : téléchargé seulement
             formats.push({id: 'mp3', label: '🎵 Son seul (MP3)', hint: 'musiques, voix et son des vidéos', ext: 'mp3', run: aud('mp3')}, {id: 'wav', label: '🎚 Son seul (WAV)', hint: 'sans perte', ext: 'wav', run: aud('wav')});
             formats.push({id: 'srt', label: '💬 Sous-titres', hint: 'fichier .srt', ext: '', run: async () => exportSubs()}, {id: 'base', label: '💾 Dans les médias…', hint: 'plusieurs formats, nouvelle version', ext: '', run: async () => { setTimeout(() => $('[data-avx-save]').click(), 50); }});
             await UIx().openExportDialog({title: nm, defaultName: nm, quality: false, saveCopy: true, value: MP2.fmt, info: `${fmt(T, false)} · ${MP2.lufs ? i18n('rejoué en temps réel pour être enregistré (laisse la fenêtre ouverte) · taille, qualité, images par seconde et volume (📢 {n} LUFS) : Réglages → Montage', {n: String(MP2.lufs).replace('-', '−')}) : i18n('rejoué en temps réel pour être enregistré (laisse la fenêtre ouverte) · taille, qualité, images par seconde et volume standard : Réglages → Montage')}`, formats});
@@ -2057,9 +2109,9 @@
         };
         // ── Un menu en haut, à côté du titre (comme la Retouche) : tout ce que fait le montage ──
         const MT_MENUS = [
-            ['Fichier', [['proj', '💾 Enregistrer le projet', '⌘S'], ['projas', 'Enregistrer le projet sous un autre nom…', '⇧⌘S'], ['projects', '📂 Projets…'], ['-'], ['export', '⤓ Exporter la vidéo (MP4 / WebM, plusieurs formats)…'], ['subexport', '⤓ Exporter les sous-titres (.srt)'], ['chapcopy', '🔖 Copier les chapitres (pour YouTube)'], ['-'], ['versions', '🕘 Versions…'], ['-'], ['close', 'Fermer']]],
+            ['Fichier', [['proj', '💾 Enregistrer le projet', '⌘S'], ['projas', 'Enregistrer le projet sous un autre nom…', '⇧⌘S'], ['projects', '📂 Projets…'], ['-'], ['export', '⤓ Exporter la vidéo (MP4 / WebM, plusieurs formats)…'], ['subexport', '⤓ Exporter les sous-titres (.srt)'], ['chapcopy', '🔖 Copier les chapitres (pour YouTube)'], ...(ext.sendTo ? [['sendto', i18n('📤 Envoyer vers…')]] : []), ['-'], ['versions', '🕘 Versions…'], ['-'], ['close', 'Fermer']]],
             ['Édition', [['undo', '↶ Annuler', '⌘Z'], ['redo', '↷ Rétablir', '⇧⌘Z'], ['-'], ['op:split', '✂️ Couper ici', 'B'], ['op:start', '⟦ Commence ici'], ['op:end', '⟧ Finit ici'], ['op:left', '← Avancer le morceau'], ['op:right', 'Reculer le morceau →'], ['-'], ['op:detach', '🔊 Séparer le son de l’image'], ['op:del', '🗑 Enlever l’élément choisi', '⌫'], ['-'], ['keys', '⌨️ Raccourcis du montage…']]],
-            ['Ajouter', [['import', '⤒ Importer des rushes (vidéos, photos, sons)…'], ['multicam', '🎥 Plusieurs caméras (calées par le son)…'], ['base', '🗂 Un rush de la base…'], ['-'], ['op:addv1', '＋ Vidéo / photo à la suite'], ['op:addv2', '＋ Incrustation'], ['op:addtext', '＋ Titre / texte'], ['op:adda', '＋ Son / musique'], ['-'], ['op:voice', '🎙 Enregistrer une voix off'], ['op:sub', '💬 Sous-titre ici'], ['subimport', '⤒ Importer des sous-titres (.srt, .vtt)…'], ['op:chapter', '🔖 Chapitre ici'], ['-'], ['tpl:life', '🪄 Modèle « La vie de… »'], ['tpl:family', '🪄 Modèle « Une famille »']]],
+            ['Ajouter', [['import', '⤒ Importer des rushes (vidéos, photos, sons)…'], ['multicam', '🎥 Plusieurs caméras (calées par le son)…'], ['base', '🗂 Un rush de la base…'], ...(ext.openAnimStudio ? [['anim', '🎞 Une carte ou un graphique animé (Studio d’animation)…']] : []), ['-'], ['op:addv1', '＋ Vidéo / photo à la suite'], ['op:addv2', '＋ Incrustation'], ['op:addtext', '＋ Titre / texte'], ['op:adda', '＋ Son / musique'], ['-'], ['op:voice', '🎙 Enregistrer une voix off'], ['op:sub', '💬 Sous-titre ici'], ['subimport', '⤒ Importer des sous-titres (.srt, .vtt)…'], ['op:chapter', '🔖 Chapitre ici'], ['-'], ['tpl:life', '🪄 Modèle « La vie de… »'], ['tpl:family', '🪄 Modèle « Une famille »']]],
             ['Pistes', [['track:v', '＋ Piste vidéo'], ['track:t', '＋ Piste texte'], ['track:a', '＋ Piste son']]],
             ['Lecture', [['play', '▶ Lire / pause', 'Espace'], ['home', '⏮ Au début'], ['-'], ['op:kfprev', '◀ ◆ Image clé précédente'], ['op:kfnext', '◆ ▶ Image clé suivante'], ['-'], ['snap', '🧲 Aimanter (marche / arrêt)']]],
             ['Affichage', [['tab:rush', '🎞️ Rushes'], ['tab:item', '🎯 Élément choisi'], ['tab:color', '🎨 Couleurs du film'], ['tab:sound', '🔊 Son du film'], ['tab:film', '🎞️ Le film (rotation, fondus)'], ['scope', '🎯 Vectorscope et histogramme'], ['-'], ['zoom:in', 'Zoom avant sur la frise', '⌘+'], ['zoom:out', 'Zoom arrière sur la frise', '⌘−'], ['zoom:0', 'Zoom de départ', '⌘0'], ['-'], ['tbtn:up', 'Boutons des pistes : plus grands'], ['tbtn:down', 'Boutons des pistes : plus petits'], ['tbtn:0', 'Boutons des pistes : taille de départ'], ['tbtn:s', i18n('Boutons des pistes : petits')], ['tbtn:l', i18n('Boutons des pistes : grands')], ['-'], ['secreset', i18n('Sections du panneau de droite : ↺ Remettre comme au départ')], ['-'], ['full', '⛶ Plein écran']]],
@@ -2079,6 +2131,7 @@
             if (k === 'projects') return q('[data-mt-projects]'); if (k === 'export') return q('[data-mt-export]'); if (k === 'close') return q('[data-avx-close]');
             if (k === 'undo') return undoTo(hpos - 1); if (k === 'redo') return undoTo(hpos + 1);
             if (a === 'op') return q(`[data-mt-op="${v}"]`);
+            if (k === 'anim') return ext.openAnimStudio({toMontage: async m => { const i = await pushSource({src: url(m.filename), title: m.title || m.filename, kind: 'video', media: {...m, kind: 'video', exists: true}}, 'video'); if (i !== null && i !== undefined) placeRush(i, 'v1'); drawTl(); toast(i18n('🎞 Animation ajoutée à la fin du film.')); }}); // 🎞 heritage-anim-studio.js : fabriquée, rangée dans les médias, posée au bout
             if (k === 'import') return q('[data-mt-rimport]'); if (k === 'base') { q('[data-mt-tab="rush"]'); return q('[data-mt-rbase]'); }
             if (a === 'track') return q(`[data-mt-addtrack="${v}"]`);
             if (k === 'play') return q('[data-mt-play]'); if (k === 'home') return q('[data-mt-home]'); if (k === 'snap') return q('[data-mt-snap]');
@@ -2098,6 +2151,7 @@
                 return A().undoLocalChange(i18n('Sections du panneau de droite remises comme au départ'), [PANEL_KEY], () => { try { localStorage.removeItem(PANEL_KEY); } catch (_) {} drawPane(); }, () => drawPane()); }
             if (k === 'scope') return ext.montageScope?.(dl, cv);
             if (k === 'subexport') return exportSubs();
+            if (k === 'sendto') return sendVideo(dl.querySelector('.h-mt-menubar') || b);
             if (k === 'chapcopy') { if (!(P.chapters || []).length) return toast('Aucun chapitre : « 🔖 Chapitre ici ».', 'error'); const txt = chaptersText(); navigator.clipboard?.writeText(txt).then(() => toast('Chapitres copiés.'), () => prompt('Copie ce texte :', txt)); return; }
             if (k === 'subimport') { const inp = document.createElement('input'); inp.type = 'file'; inp.accept = '.srt,.vtt,text/vtt,application/x-subrip'; inp.onchange = async () => { const fl = inp.files?.[0]; if (fl) importSubs(await fl.text()); }; inp.click(); return; }
             if (a === 'tpl') return templateDialog(v);
@@ -2156,7 +2210,19 @@
                 if (!r?.filename) return; so.src = url(r.filename); if (r.media_id) so.mediaId = r.media_id; dirty = true; await rebuild(); drawTl(); drawRush(); toast(i18n('« {name} » est revenu du Studio son, nettoyé.', {name: so.title})); }});
         });
         // le Studio son ouvre un nouveau montage avec son son déjà posé (Fichier → 🎬 Ouvrir dans le montage)
-        if (ext._montageSeed && !proj) { const sd = ext._montageSeed; ext._montageSeed = null; const si = await pushSource({src: url(sd.filename), title: sd.title, media: {id: sd.mediaId}}, 'audio'); if (si !== null) placeRush(si, 'a', 0); drawTl(); }
+        if (ext._montageSeedVisual) { // 📤 une image (ou plusieurs : {list}) envoyée par un autre outil (heritage-envoyer.js)
+            const sd = ext._montageSeedVisual; ext._montageSeedVisual = null;
+            if (Array.isArray(sd.list)) { // les images l'une après l'autre sur Vidéo 1, quelques secondes chacune, avec un lent zoom (Ken Burns)
+                let n = 0; for (const it of sd.list) { if (!it?.filename) continue; const si = await pushSource({src: url(it.filename), title: it.title || it.filename, media: {id: it.mediaId || it.id}}, 'image'); if (si === null) continue; placeRush(si, 'v1', null); const k = P.v1.at(-1); if (k && k.s === si) k.kb = 'auto'; n++; }
+                if (n) { await touch(1); toast(i18n('{what} au montage, l’une après l’autre.', {what: A().plural(n, 'image ajoutée', 'images ajoutées')})); }
+            } else { const si = await pushSource({src: url(sd.filename), title: sd.title, media: {id: sd.mediaId}}, 'image'); if (si !== null) placeRush(si, 'v1', null); drawTl(); toast(i18n('« {t} » ajoutée au montage.', {t: sd.title})); }
+        }
+        if (ext._montageSeed && !proj) { const sd = ext._montageSeed; ext._montageSeed = null; const si = await pushSource({src: url(sd.filename), title: sd.title, media: {id: sd.mediaId || sd.id}}, 'audio'); if (si !== null) placeRush(si, 'a', 0); drawTl(); }
+        if (ext._montageSeedSubs && !proj) { // 💬 la transcription horodatée du Studio son : sur la piste « Sous-titres »
+            const cues = ext._montageSeedSubs.filter(c => c && String(c.text || '').trim() && Number.isFinite(Number(c.start))); ext._montageSeedSubs = null;
+            cues.forEach(c => P.texts.push(subItem(Math.max(0, Number(c.start)), Math.max(0.3, (Number(c.end) || Number(c.start) + 3) - Number(c.start)), String(c.text).trim())));
+            if (cues.length) { await touch(0); toast(i18n('{what} sur la piste « Sous-titres ».', {what: A().plural(cues.length, 'sous-titre ajouté', 'sous-titres ajoutés')})); }
+        }
         dl.addEventListener('change', schedHist); dl.addEventListener('pointerup', schedHist); // images clés, glisser sur la frise…
         if (start === 'add' || (proj && !P.v1.length)) $('[data-mt-tab="rush"]')?.click(); // un nouveau montage commence par ses rushes
     }
@@ -2369,7 +2435,9 @@
             try {
                 if (b.dataset.open) { const p = list.find(x => x.id === Number(b.dataset.open)); if (await onOpen?.(p) === false) return; dlg.close(); return; }
                 if (b.dataset.ren) { const p = list.find(x => x.id === Number(b.dataset.ren)), n = await A().askText({title: 'Renommer le projet', message: 'Nouveau nom :', value: p.name, okLabel: 'Renommer'}); if (!n?.trim()) return; const full = await A().api('montage_project', {id: p.id}); await A().api('save_montage_project', {}, {method: 'POST', body: {id: p.id, name: n.trim(), project: full.project}}); p.name = n.trim().slice(0, 160); return draw(); }
-                if (b.dataset.del) { const p = list.find(x => x.id === Number(b.dataset.del)); if (!await A().confirmBox('Les vidéos, photos et sons restent dans les Médias.', {title: `Supprimer le projet « ${p.name} » ?`, okLabel: 'Supprimer le projet'})) return; await A().api('delete_montage_project', {}, {method: 'POST', body: {id: p.id}}); list = list.filter(x => x !== p); return draw(); }
+                if (b.dataset.del) { const p = list.find(x => x.id === Number(b.dataset.del)); if (!p) return; const at = list.indexOf(p); // H7 : supprimé tout de suite, « ↶ Annuler » le remet
+                    if (ext.deleteProjectWithUndo) return await ext.deleteProjectWithUndo({action: 'delete_montage_project', id: p.id, name: p.name, onGone: () => { list = list.filter(x => x !== p); if (dlg.isConnected) draw(); }, onBack: () => { if (!list.includes(p)) list.splice(at, 0, p); if (dlg.isConnected) draw(); }});
+                    if (!await A().confirmBox('Les vidéos, photos et sons restent dans les Médias.', {title: `Supprimer le projet « ${p.name} » ?`, okLabel: 'Supprimer le projet'})) return; await A().api('delete_montage_project', {}, {method: 'POST', body: {id: p.id}}); list = list.filter(x => x !== p); return draw(); }
             } catch (err) { toast(err.message, 'error'); }
         });
     }
@@ -2394,7 +2462,9 @@
             try {
                 if (b.dataset.open) { const p = list.find(x => x.id === Number(b.dataset.open)); if (await onOpen?.(p) === false) return; dlg.close(); return; }
                 if (b.dataset.ren) { const p = list.find(x => x.id === Number(b.dataset.ren)), n = await A().askText({title: 'Renommer le projet', message: 'Nouveau nom :', value: p.name, okLabel: 'Renommer'}); if (!n?.trim()) return; const r = await A().api('rename_audio_project', {}, {method: 'POST', body: {id: p.id, name: n}}); p.name = r.result.name; return draw(); }
-                if (b.dataset.del) { const p = list.find(x => x.id === Number(b.dataset.del)); if (!await A().confirmBox('Le son de départ reste dans les Médias.', {title: `Supprimer le projet « ${p.name} » ?`, okLabel: 'Supprimer le projet'})) return; await A().api('delete_audio_project', {}, {method: 'POST', body: {id: p.id}}); list = list.filter(x => x !== p); return draw(); }
+                if (b.dataset.del) { const p = list.find(x => x.id === Number(b.dataset.del)); if (!p) return; const at = list.indexOf(p); // H7 : supprimé tout de suite, « ↶ Annuler » le remet
+                    if (ext.deleteProjectWithUndo) return await ext.deleteProjectWithUndo({action: 'delete_audio_project', id: p.id, name: p.name, onGone: () => { list = list.filter(x => x !== p); if (dlg.isConnected) draw(); }, onBack: () => { if (!list.includes(p)) list.splice(at, 0, p); if (dlg.isConnected) draw(); }});
+                    if (!await A().confirmBox('Le son de départ reste dans les Médias.', {title: `Supprimer le projet « ${p.name} » ?`, okLabel: 'Supprimer le projet'})) return; await A().api('delete_audio_project', {}, {method: 'POST', body: {id: p.id}}); list = list.filter(x => x !== p); return draw(); }
             } catch (err) { toast(err.message, 'error'); }
         });
     }
@@ -2408,7 +2478,8 @@
     ext.newAudioProject = async onDone => { const o = await pickOther('audio'); if (!o) return; const m = o.media ? {...o.media, media_type: 'audio'} : {id: 0, title: o.title || 'Son', media_type: 'audio', src: o.src}; return ext.openAudioStudio ? ext.openAudioStudio(m, {onDone}) : openAudio(m, onDone); }; // « ＋ Nouveau projet son » ouvre le Studio
     ext.openAudioProjects = onDone => audioProjectsDialog({onOpen: p => ext.openAudioProject(p.id, onDone), onNew: () => ext.newAudioProject(onDone)});
     ext.openMontageProject = (id, onDone) => openProject(id, onDone);
-    ext.newMontage = (onDone, seed = null) => { if (seed?.audio?.filename) ext._montageSeed = seed.audio; return openVideo({id: 0, title: 'Nouveau montage', media_type: 'video'}, onDone, 'add'); };
+    // seed : {audio: {mediaId|id, filename, title}, subs: [{start, end, text}] (secondes)} — un son et ses sous-titres (Studio son, 📤 Envoyer vers…)
+    ext.newMontage = (onDone, seed = null) => { if (seed?.audio?.filename) ext._montageSeed = {...seed.audio, mediaId: seed.audio.mediaId || seed.audio.id}; ext._montageSeedSubs = Array.isArray(seed?.subs) && seed.subs.length ? seed.subs : null; return openVideo({id: 0, title: 'Nouveau montage', media_type: 'video'}, onDone, 'add'); };
     ext.openMontageProjects = onDone => projectsDialog({onOpen: p => openProject(p.id, onDone), onNew: () => openVideo({id: 0, title: 'Nouveau montage', media_type: 'video'}, onDone, 'add')});
     ext.openMontage = async (kind, onDone) => {
         if (kind === 'video') { let has = false; try { has = ((await A().api('montage_projects')).projects || []).length > 0; } catch (_) {} if (has) return ext.openMontageProjects(onDone); return openVideo({id: 0, title: 'Nouveau montage', media_type: 'video'}, onDone, 'add'); }

@@ -21,7 +21,83 @@ function diagrams_ensure(PDO $pdo): void
         spec_json TEXT NOT NULL DEFAULT '{}', position INTEGER NOT NULL DEFAULT 0, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)");
     $pdo->exec("CREATE TABLE IF NOT EXISTS diagram_links (diagram_id INTEGER NOT NULL, entity_type TEXT NOT NULL, entity_id INTEGER NOT NULL, PRIMARY KEY (diagram_id, entity_type, entity_id))");
     $pdo->exec("CREATE INDEX IF NOT EXISTS idx_diagram_links_e ON diagram_links(entity_type, entity_id)");
+    // 📈 l'onglet Diagrammes (app-diagrammes-onglet.js) : ⭐ favori, 🗑 corbeille (30 jours), 🕘 ouvert récemment — migration douce des bases d'avant
+    $cols = array_column($pdo->query("PRAGMA table_info(diagrams)")->fetchAll(PDO::FETCH_ASSOC), 'name');
+    if (!in_array('favorite', $cols, true)) { $pdo->exec('ALTER TABLE diagrams ADD COLUMN favorite INTEGER NOT NULL DEFAULT 0'); }
+    if (!in_array('deleted_at', $cols, true)) { $pdo->exec('ALTER TABLE diagrams ADD COLUMN deleted_at TEXT'); }
+    if (!in_array('opened_at', $cols, true)) { $pdo->exec('ALTER TABLE diagrams ADD COLUMN opened_at TEXT'); }
     $done = true;
+}
+
+const DIAGRAM_TRASH_DAYS = 30;
+
+/** 🗑 la corbeille se vide toute seule : ce qui y est depuis plus de 30 jours part pour de bon (au chargement de la liste) */
+function diagrams_purge_trash(PDO $pdo): int
+{
+    $ids = $pdo->query("SELECT id FROM diagrams WHERE deleted_at IS NOT NULL AND deleted_at < datetime('now', '-" . DIAGRAM_TRASH_DAYS . " days')")->fetchAll(PDO::FETCH_COLUMN);
+    foreach ($ids as $id) { diagram_erase($pdo, (int) $id); }
+    return count($ids);
+}
+
+/** effacer pour de bon : le diagramme, ses liens, ses étiquettes */
+function diagram_erase(PDO $pdo, int $id): void
+{
+    $pdo->prepare('DELETE FROM diagram_links WHERE diagram_id=?')->execute([$id]);
+    $pdo->prepare('DELETE FROM diagrams WHERE id=?')->execute([$id]);
+    if (function_exists('set_label_links')) { set_label_links($pdo, ['entity_type' => 'diagram', 'entity_id' => $id, 'label_ids' => []]); }
+}
+
+function diagram_ids_of(array $data): array
+{
+    $ids = is_array($data['ids'] ?? null) ? $data['ids'] : [$data['id'] ?? 0];
+    return array_values(array_unique(array_filter(array_map('intval', array_slice($ids, 0, 2000)), static fn($x) => $x > 0)));
+}
+
+/** 🗑 mettre à la corbeille (rien n'est effacé ; « Remettre » ou ↶ Annuler le rend) */
+function trash_diagrams(PDO $pdo, array $data): array
+{
+    diagrams_ensure($pdo);
+    $ids = diagram_ids_of($data); if (!$ids) { throw new RuntimeException('Diagramme introuvable.'); }
+    $s = $pdo->prepare("UPDATE diagrams SET deleted_at=datetime('now') WHERE id=? AND deleted_at IS NULL");
+    $done = [];
+    foreach ($ids as $id) { $s->execute([$id]); if ($s->rowCount()) { $done[] = $id; } }
+    if ($done) { log_change($pdo, 'meta', 0, 'delete', count($done) > 1 ? count($done) . ' diagrammes mis à la corbeille' : 'Diagramme mis à la corbeille'); }
+    return ['ids' => $done];
+}
+
+function restore_diagrams(PDO $pdo, array $data): array
+{
+    diagrams_ensure($pdo);
+    $ids = diagram_ids_of($data);
+    $s = $pdo->prepare('UPDATE diagrams SET deleted_at=NULL WHERE id=? AND deleted_at IS NOT NULL');
+    $done = [];
+    foreach ($ids as $id) { $s->execute([$id]); if ($s->rowCount()) { $done[] = $id; } }
+    if ($done) { log_change($pdo, 'meta', 0, 'update', count($done) > 1 ? count($done) . ' diagrammes remis' : 'Diagramme remis de la corbeille'); }
+    return ['ids' => $done];
+}
+
+/** vider la corbeille (ou seulement ids) : effacé pour de bon */
+function empty_diagram_trash(PDO $pdo, array $data): array
+{
+    diagrams_ensure($pdo);
+    $ids = array_key_exists('ids', $data) ? diagram_ids_of($data) : array_map('intval', $pdo->query('SELECT id FROM diagrams WHERE deleted_at IS NOT NULL')->fetchAll(PDO::FETCH_COLUMN));
+    $s = $pdo->prepare('SELECT 1 FROM diagrams WHERE id=? AND deleted_at IS NOT NULL');
+    $done = [];
+    foreach ($ids as $id) { $s->execute([$id]); if ($s->fetchColumn()) { diagram_erase($pdo, $id); $done[] = $id; } }
+    if ($done) { log_change($pdo, 'meta', 0, 'delete', 'Corbeille des diagrammes vidée'); }
+    return ['ids' => $done];
+}
+
+/** ⭐ favori, 🕘 ouvert (ne change pas la date de modification) */
+function diagram_meta(PDO $pdo, array $data): array
+{
+    diagrams_ensure($pdo);
+    $ids = diagram_ids_of($data); if (!$ids) { throw new RuntimeException('Diagramme introuvable.'); }
+    foreach ($ids as $id) {
+        if (array_key_exists('favorite', $data)) { $pdo->prepare('UPDATE diagrams SET favorite=? WHERE id=?')->execute([!empty($data['favorite']) ? 1 : 0, $id]); }
+        if (!empty($data['opened'])) { $pdo->prepare("UPDATE diagrams SET opened_at=datetime('now') WHERE id=? AND deleted_at IS NULL")->execute([$id]); }
+    }
+    return ['ids' => $ids];
 }
 
 function diagram_links_map(PDO $pdo, array $ids): array
@@ -48,20 +124,25 @@ function diagram_links_map(PDO $pdo, array $ids): array
 function diagrams_all(PDO $pdo, array $q = []): array
 {
     diagrams_ensure($pdo);
+    diagrams_purge_trash($pdo); // 🗑 plus de 30 jours dans la corbeille : effacé (au chargement)
     $type = (string) ($q['entity_type'] ?? ''); $eid = safe_int($q['entity_id'] ?? 0);
+    // la corbeille est à part : ?trash=1 ne rend qu'elle ; ?with_trash=1 (là où un diagramme est posé) la rend aussi, marquée deleted_at
+    $trash = !empty($q['trash']); $withTrash = !empty($q['with_trash']);
+    $live = $trash ? 'd.deleted_at IS NOT NULL' : ($withTrash ? '1' : 'd.deleted_at IS NULL');
     if ($type !== '' && array_key_exists($type, DIAGRAM_LINK_TYPES) && $eid > 0) {
-        $s = $pdo->prepare('SELECT d.* FROM diagrams d WHERE d.id IN (SELECT diagram_id FROM diagram_links WHERE entity_type=? AND entity_id=?)
-            OR (?=\'investigation\' AND d.id IN (SELECT dl.diagram_id FROM diagram_links dl JOIN investigation_items ii ON ii.id=dl.entity_id WHERE dl.entity_type=\'investigation_item\' AND ii.investigation_id=?))
-            ORDER BY d.position, d.name COLLATE NOCASE');
+        $s = $pdo->prepare("SELECT d.* FROM diagrams d WHERE $live AND (d.id IN (SELECT diagram_id FROM diagram_links WHERE entity_type=? AND entity_id=?)
+            OR (?='investigation' AND d.id IN (SELECT dl.diagram_id FROM diagram_links dl JOIN investigation_items ii ON ii.id=dl.entity_id WHERE dl.entity_type='investigation_item' AND ii.investigation_id=?)))
+            ORDER BY d.position, d.name COLLATE NOCASE");
         $s->execute([$type, $eid, $type, $eid]);
     } else {
-        $s = $pdo->query('SELECT * FROM diagrams ORDER BY position, name COLLATE NOCASE');
+        $s = $pdo->query("SELECT d.* FROM diagrams d WHERE $live ORDER BY " . ($trash ? 'd.deleted_at DESC' : 'd.position, d.name COLLATE NOCASE'));
     }
     $rows = $s->fetchAll();
     $links = diagram_links_map($pdo, array_map(static fn($r) => (int) $r['id'], $rows));
     $labels = labels_for_entities($pdo, 'diagram', array_map(static fn($r) => (int) $r['id'], $rows));
     return ['diagrams' => array_map(static fn($r) => ['id' => (int) $r['id'], 'name' => $r['name'], 'kind' => $r['kind'], 'spec' => json_decode((string) $r['spec_json'], true) ?: new stdClass(),
-        'updated_at' => $r['updated_at'], 'links' => $links[(int) $r['id']] ?? [], 'labels' => $labels[(int) $r['id']] ?? []], $rows)];
+        'updated_at' => $r['updated_at'], 'created_at' => $r['created_at'] ?? '', 'favorite' => (int) ($r['favorite'] ?? 0), 'opened_at' => $r['opened_at'] ?? null, 'deleted_at' => $r['deleted_at'] ?? null,
+        'links' => $links[(int) $r['id']] ?? [], 'labels' => $labels[(int) $r['id']] ?? []], $rows)];
 }
 
 function save_diagram(PDO $pdo, array $data): array
@@ -123,9 +204,7 @@ function delete_diagram(PDO $pdo, array $data): array
         $pdo->prepare('DELETE FROM diagram_links WHERE diagram_id=? AND entity_type=? AND entity_id=?')->execute([$id, (string) ($l['type'] ?? ''), safe_int($l['id'] ?? 0)]);
         return ['id' => $id];
     }
-    $pdo->prepare('DELETE FROM diagram_links WHERE diagram_id=?')->execute([$id]);
-    $pdo->prepare('DELETE FROM diagrams WHERE id=?')->execute([$id]);
-    if (function_exists('set_label_links')) { set_label_links($pdo, ['entity_type' => 'diagram', 'entity_id' => $id, 'label_ids' => []]); }
+    diagram_erase($pdo, $id);
     log_change($pdo, 'meta', 0, 'delete', 'Diagramme supprimé');
     return ['id' => $id];
 }

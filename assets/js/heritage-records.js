@@ -242,7 +242,7 @@
         const firstDate = d.fields.find(x => x.type === 'date');
         const stepWord = (d.fields.find(x => x.type === 'steps' && x.checkable !== false)?.item || 'ligne').toLowerCase();
         let rows = data.rows.filter(rec => v.filter === 'all' || !r.status || (v.filter === 'done' ? rec.status === 'done' : rec.status !== 'done'));
-        if (v.q) { const q = v.q.toLowerCase(); rows = rows.filter(rec => [...Object.values(rec.cells || {}), ...(rec.labels || []).map(l => l.name)].join(' ').toLowerCase().includes(q)); }
+        if (v.q) { const m = (window.LCNDA_UI?.listMatch?.text || ((q, ...h) => h.join(' ').toLowerCase().includes(String(q).toLowerCase()))); rows = rows.filter(rec => m(v.q, ...Object.values(rec.cells || {}), ...(rec.labels || []).map(l => l.name))); } // C1 : sans accents ni majuscules
         if (r.sort === 'title') rows.sort((a, b) => titleOf(a).localeCompare(titleOf(b), 'fr', {numeric: true}));
         if (r.sort === 'date' && firstDate) rows.sort((a, b) => String(a.data[firstDate.key] || '9999').localeCompare(String(b.data[firstDate.key] || '9999')));
         const placesOf = rec => { const pts = [], t = titleOf(rec);
@@ -255,7 +255,7 @@
         const editing = v.edit !== null && v.edit !== undefined ? (v.edit ? data.rows.find(x => x.id === v.edit) : {id: 0, data: {}, media: [], labels: [], status: 'todo'}) : null;
         const ws = A().$('#workspace');
         ws.innerHTML = `<section class="page collection-page h-recs">${header(inLists ? 'LISTES' : 'ÉDITEUR DE LISTES', (L.icon || '📇') + ' ' + L.name, esc(L.description || '') + (L.labels?.length ? '<br>' + ext.labelChips(L.labels) : ''),
-                `${inLists ? '' : '<button type="button" class="button secondary" data-rv-back>← Éditeur de listes</button>'}<button type="button" class="button secondary" data-rv-csv>Exporter (CSV)</button><button type="button" class="button secondary" data-rv-print>Imprimer</button>${tools('data-rv-edit', 'data-rv-del', 'cette liste')}`)}
+                `${inLists ? '' : '<button type="button" class="button secondary" data-rv-back>← Éditeur de listes</button>'}<button type="button" class="button secondary" data-rv-csv>⤓ Exporter</button><button type="button" class="button secondary" data-rv-print>Imprimer</button>${tools('data-rv-edit', 'data-rv-del', 'cette liste')}`)}
             <div class="collection-toolbar"><button type="button" class="button" data-rv-new>${esc(r.new || '＋ Nouvelle fiche')}</button>
                 ${r.status ? `<div class="segmented-filter" role="group">${[['todo', `${r.todo} (${counts.todo})`], ['done', `${r.done} (${counts.done})`], ['all', `Tous (${counts.todo + counts.done})`]].map(([k, l]) => `<button type="button" class="button small ${v.filter === k ? '' : 'secondary'}" data-rv-filter="${k}" aria-pressed="${v.filter === k}">${esc(l)}</button>`).join('')}</div>` : ''}
                 ${data.rows.length > 5 ? `<input type="search" class="h-rec-search" data-rv-q value="${esc(v.q || '')}" placeholder="Chercher dans les fiches…">` : ''}</div>
@@ -275,17 +275,16 @@
         const go = () => reload();
         ws.querySelector('[data-rv-back]')?.addEventListener('click', back);
         ws.querySelector('[data-rv-edit]').addEventListener('click', goEdit);
-        ws.querySelector('[data-rv-del]').addEventListener('click', async () => {
-            if (!await A().confirmBox(`Supprimer la liste « ${L.name} » et ses ${plural(data.rows.length, 'fiche', 'fiches')} ?`, {title: 'Supprimer la liste', okLabel: 'Supprimer la liste'})) return;
-            await api('delete_my_list', {}, {method: 'POST', body: {id}}); S().hListOpen = 0; S().hRec = {};
-            ext.afterListDeleted?.(inLists);
-        });
+        ws.querySelector('[data-rv-del]').addEventListener('click', () => ext.deleteMyList(id, L.name, inLists)); // H7 : la liste et ses fiches reviennent avec ↶ Annuler
         ws.querySelector('[data-rv-print]').addEventListener('click', () => (window.LCNDA_UI?.printPage ? window.LCNDA_UI.printPage('') : window.print())); // K13
         ws.querySelector('[data-rv-csv]').addEventListener('click', () => {
             const cols = d.fields.filter(x => !['heading', 'media'].includes(x.type));
             const q = val => '"' + (A().csvSafe || (x => String(x ?? '')))(val).replace(/"/g, '""') + '"'; // pas de formule glissée dans un tableur
             const stepTxt = (x, items) => (items || []).map((it, i) => `${x.item} ${i + 1}${it.done ? ' ✔' : ''} : ` + x.fields.map(sf => textOf(sf, it[sf.key], people)).filter(Boolean).join(', ')).join(' | ');
-            const lines = [[...cols.map(x => x.label), ...(r.status ? ['Suivi'] : [])].map(q).join(';'), ...rows.map(rec => [...cols.map(x => x.type === 'steps' ? stepTxt(x, rec.data[x.key]) : x.type === 'date' ? rec.data[x.key] : textOf(x, rec.data[x.key], people)), ...(r.status ? [rec.status === 'done' ? r.done : r.todo] : [])].map(q).join(';'))];
+            const line = rec => [...cols.map(x => x.type === 'steps' ? stepTxt(x, rec.data[x.key]) : x.type === 'date' ? rec.data[x.key] : textOf(x, rec.data[x.key], people)), ...(r.status ? [rec.status === 'done' ? r.done : r.todo] : [])];
+            const head = [...cols.map(x => x.label), ...(r.status ? ['Suivi'] : [])];
+            if (window.LCNDA_UI?.exportRows) return window.LCNDA_UI.exportRows({quote: 'always', title: L.name || 'Liste', name: L.name || 'liste', rows: () => [head, ...rows.map(line)], all: () => [head, ...data.rows.map(line)]}); // ⤓ la fenêtre d'export commune : ce qu'on voit ou toute la liste
+            const lines = [head.map(q).join(';'), ...rows.map(rec => line(rec).map(q).join(';'))];
             const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['﻿' + lines.join('\n')], {type: 'text/csv'})); a.download = (L.name || 'liste').replace(/[^\p{L}\p{N}]+/gu, '-') + '.csv'; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
         });
         ws.querySelector('[data-rv-new]').addEventListener('click', () => { v.edit = 0; go(); });
@@ -362,7 +361,7 @@
         ws.querySelector('[data-rd-edit]').addEventListener('click', () => { v.open = 0; v.edit = rec.id; reload(); });
         ws.querySelector('[data-rd-print]').addEventListener('click', () => (window.LCNDA_UI?.printPage ? window.LCNDA_UI.printPage('') : window.print())); // K13
         ws.querySelector('[data-rd-status]')?.addEventListener('click', async e => { await api('set_my_list_record_status', {}, {method: 'POST', body: {id: rec.id, status: e.currentTarget.dataset.rdStatus}}); reload(); });
-        ws.querySelector('[data-rd-del]').addEventListener('click', async () => { if (!await A().confirmBox(`Supprimer « ${title} » ?`, {title: 'Supprimer la fiche', okLabel: 'Supprimer la fiche'})) return; await api('delete_my_list_record', {}, {method: 'POST', body: {id: rec.id}}); toast('Fiche supprimée.'); v.open = 0; reload(); });
+        ws.querySelector('[data-rd-del]').addEventListener('click', () => A().deleteWithUndo({action: 'delete_my_list_record', body: {id: rec.id}, type: 'my_list_record', id: rec.id, message: (window.LCNDA_I18N ? window.LCNDA_I18N.t('Fiche « {name} » supprimée', {name: title}) : `Fiche « ${title} » supprimée`), after: how => { v.open = how === 'undo' ? rec.id : 0; reload(); }})); // H7
         ws.querySelectorAll('[data-rd-step]').forEach(c => c.addEventListener('change', async () => {
             try { await api('set_my_list_record_step', {}, {method: 'POST', body: {id: rec.id, field: c.dataset.rdStep, index: Number(c.dataset.i), done: c.checked ? 1 : 0}}); reload(); }
             catch (error) { toast(error.message, 'error'); c.checked = !c.checked; }

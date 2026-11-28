@@ -125,7 +125,7 @@
             ['cut', '✂️ Couper (dans le presse-papiers)'], ['copy', 'Copier'], ['paste', 'Coller'], ['del', 'Supprimer la sélection'], ['keep', 'Garder seulement la sélection'], ['silence', 'Silence'], ['selall', 'Tout sélectionner'], ['insert', 'Insérer un son…'], ['mono', 'Mono'], ['bake', 'Appliquer le rack pour de bon'],
             ['zoomsel', 'Zoom sur la sélection'], ['zoomfit', 'Tout voir'], ['zoomin', 'Zoom avant'], ['zoomout', 'Zoom arrière'], ['vzin', 'Zoom vertical +'], ['vzout', 'Zoom vertical −'], ['spectrum', 'Spectre : montrer / cacher'], ['wave', '〰️ Forme d’onde'], ['multi', '🎛️ Multipiste'],
             ['tool:sel', '⌶ Sélection'], ['tool:brush', '🖌 Pinceau de réparation'], ['tool:lasso', '➰ Lasso de réparation'], ['tool:marker', '🚩 Poser des marqueurs'], ['tool:razor', '✂️ Couper un morceau (multipiste)'], ['repair', '🩹 Réparer'], ['clearpaint', 'Effacer le dessin'],
-            ['quick', '⚡ Son rapide'], ['projects', '📂 Projets…'], ['saveproj', '💾 Enregistrer le projet'], ['saveas', 'Enregistrer le projet sous…'], ['show', 'Enregistrer et afficher cette version'], ['keepv', 'Enregistrer sans l’afficher'], ['copyv', 'Copie séparée'], ['export', '⤓ Exporter…'], ['montage', '🎬 Ouvrir dans le montage'], ['close', 'Fermer'],
+            ['quick', '⚡ Son rapide'], ['projects', '📂 Projets…'], ['saveproj', '💾 Enregistrer le projet'], ['saveas', 'Enregistrer le projet sous…'], ['show', 'Enregistrer et afficher cette version'], ['keepv', 'Enregistrer sans l’afficher'], ['copyv', 'Copie séparée'], ['export', '⤓ Exporter…'], ['montage', '🎬 Ouvrir dans le montage'], ['sendto', '📤 Envoyer vers…'], ['close', 'Fermer'],
             ['win:transcript', '📝 Transcription'], ['win:history', '🕘 Historique'], ['win:info', 'ℹ️ Infos du son'], ['win:rack', '🎛️ Rack d’effets'], ['tstamp', '⏱ Insérer l’heure'], ['slow', '🐢 Lire à 75 %']];
         dl.innerHTML = `<div class="h-as-bar ui-topbar"><span class="ui-topbar-icon" aria-hidden="true">🎚️</span><input class="ui-topbar-name h-as-name" data-as-name value="${esc(carry?.name || projName || media.title || media.filename || 'Son')}" maxlength="160" aria-label="Nom du projet son">
                 <nav class="h-as-menus" data-as-menus data-tbg="as-menus" data-tbg-label="Menus du haut"></nav>
@@ -183,7 +183,7 @@
         const fxMenu = () => Object.entries(E.FX).filter(([, d]) => !d.hidden).map(([k, d]) => ({icon: d.icon, label: d.label, run: () => addFx(k)}));
         const M = c => () => runCmd(c);
         const MENUS = {
-            Fichier: () => [{icon: '⚡', label: 'Son rapide', run: M('quick')}, {icon: '📂', label: 'Projets…', run: M('projects')}, '-', {icon: '💾', label: 'Enregistrer le projet', shortcut: '⌘S', run: M('saveproj')}, {label: 'Enregistrer le projet sous…', shortcut: '⇧⌘S', run: M('saveas')}, ...(media.id ? [{label: 'Enregistrer et afficher cette version', run: M('show')}, {label: 'Enregistrer sans l’afficher', run: M('keepv')}, {icon: '⧉', label: 'Copie séparée', run: M('copyv')}, '-', {icon: '🕘', label: 'Versions…', run: M('versions')}] : [{label: 'Enregistrer dans les médias', run: M('show')}]), '-', {icon: '⤓', label: 'Exporter…', run: M('export')}, {icon: '🎬', label: 'Ouvrir dans le montage', run: M('montage')}, '-', {label: 'Fermer', run: M('close')}],
+            Fichier: () => [{icon: '⚡', label: 'Son rapide', run: M('quick')}, {icon: '📂', label: 'Projets…', run: M('projects')}, '-', {icon: '💾', label: 'Enregistrer le projet', shortcut: '⌘S', run: M('saveproj')}, {label: 'Enregistrer le projet sous…', shortcut: '⇧⌘S', run: M('saveas')}, ...(media.id ? [{label: 'Enregistrer et afficher cette version', run: M('show')}, {label: 'Enregistrer sans l’afficher', run: M('keepv')}, {icon: '⧉', label: 'Copie séparée', run: M('copyv')}, '-', {icon: '🕘', label: 'Versions…', run: M('versions')}] : [{label: 'Enregistrer dans les médias', run: M('show')}]), '-', {icon: '⤓', label: 'Exporter…', run: M('export')}, {icon: '🎬', label: 'Ouvrir dans le montage', run: M('montage')}, ...(ext.sendTo ? [{icon: '📤', label: i18n('Envoyer vers…'), run: M('sendto')}] : []), '-', {label: 'Fermer', run: M('close')}],
             'Édition': () => [{icon: '↶', label: 'Annuler', shortcut: '⌘Z', disabled: hpos <= 0, run: M('undo')}, {icon: '↷', label: 'Rétablir', shortcut: '⇧⌘Z', disabled: hpos >= hist.length - 1, run: M('redo')}, '-', {label: 'Couper', shortcut: '⌘X', disabled: !sel, run: M('cut')}, {icon: '📋', label: 'Copier', shortcut: '⌘C', disabled: !sel, run: M('copy')}, {icon: '📋', label: 'Coller', shortcut: '⌘V', disabled: !clipboard, run: M('paste')}, {label: 'Supprimer la sélection', shortcut: '⌫', disabled: !sel, run: M('del')}, {label: 'Garder seulement la sélection', disabled: !sel, run: M('keep')}, {label: 'Silence', disabled: !sel, run: M('silence')}, '-', {label: 'Tout sélectionner', shortcut: '⌘A', run: M('selall')}, {icon: '＋', label: 'Insérer un son…', run: M('insert')}, {label: 'Mono', run: M('mono')}, '-', {label: 'Appliquer le rack pour de bon', disabled: !st.rack.length, run: M('bake')}],
             Effets: () => [...fxMenu(), '-', {label: 'Appliquer le rack pour de bon', disabled: !st.rack.length, run: M('bake')}],
             Marqueurs: () => [{icon: '🚩', label: 'Marqueur ici', shortcut: 'M', run: M('marker')}, {icon: '＋', label: 'Nouvelle zone (la sélection)', disabled: !sel, run: M('zone')}, {icon: '🔗', label: 'Relier la zone à une personne…', disabled: !curRegion(), run: () => linkPick('person')}, {icon: '📅', label: 'Relier la zone à un événement…', disabled: !curRegion(), run: () => linkPick('event')}],
@@ -664,6 +664,36 @@
             const res = await saveTo(media.id ? 'copyv' : 'new'); if (!res) return;
             dl.close(); ext.newMontage(onDone, {audio: {mediaId: res.media_id, filename: res.filename, title: nameNow()}});
         }
+        // ── 📤 Envoyer vers… (heritage-envoyer.js) : le son (et sa transcription en sous-titres) ou la transcription (texte) ──
+        /** la transcription à la main → sous-titres {start, end, text} (secondes) : chaque ligne dure jusqu'à la suivante (10 s au plus) */
+        const transcriptSubs = () => { const L = st.transcript.filter(l => String(l.text || '').trim() && Number.isFinite(Number(l.t))).slice().sort((a, b) => a.t - b.t);
+            return L.map((l, i) => { const t = Number(l.t), nx = Number(L[i + 1]?.t ?? base.duration); return {start: t, end: Math.max(t + 0.5, Math.min(nx, t + 10)), text: (l.who ? `${l.who} : ` : '') + String(l.text).trim()}; }); };
+        /** la transcription en HTML : l'heure (et qui parle) en petit titre, puis ce qui est dit */
+        const transcriptHtml = () => `<h1>${esc(nameNow())}</h1>` + st.transcript.filter(l => String(l.text || '').trim()).slice().sort((a, b) => a.t - b.t)
+            .map(l => `<h4>${esc(fmt(l.t))}${l.who ? ` — ${esc(l.who)}` : ''}</h4><p>${esc(String(l.text).trim()).replace(/\n/g, '<br>')}</p>`).join('');
+        async function sendSound(anchor) {
+            stopPlay(); let m = null;
+            // le son tel quel, déjà dans les médias : envoyé directement ; sinon, le son fini est d'abord rangé dans les médias (une copie)
+            if (pristine && srcFile && media.id && !st.rack.some(x => x.on !== false) && mode === 'wave') m = {id: Number(media.id), filename: srcFile, title: nameNow()};
+            else {
+                if (!await A().confirmBox(i18n('Le son fini est rangé dans les médias (une copie), puis envoyé.'), {title: i18n('Envoyer le son ?'), okLabel: i18n('Ranger et envoyer')})) return;
+                const res = await saveTo(media.id ? 'copyv' : 'new'); if (!res?.media_id || !res?.filename) return;
+                m = {id: Number(res.media_id), filename: res.filename, title: nameNow()};
+            }
+            const subs = transcriptSubs();
+            return ext.sendTo('audio', {media: m, ...(subs.length ? {subs} : {})}, {anchor, title: nameNow()});
+        }
+        function sendTranscript(anchor) {
+            if (!st.transcript.some(l => String(l.text || '').trim())) { openSec('as-text'); return toast(i18n('Pas encore de transcription : « ⏱ Insérer l’heure » (⌘T), puis tape ce qui est dit.'), 'error'); }
+            return ext.sendTo('text', {html: transcriptHtml(), name: i18n('Transcription — {name}', {name: nameNow()})}, {anchor, title: nameNow()});
+        }
+        function sendMenu() {
+            if (!ext.sendTo) return toast(i18n('L’envoi vers les autres outils n’est pas chargé.'), 'error');
+            const anchor = $('[data-as-menus]') || dl, has = st.transcript.some(l => String(l.text || '').trim());
+            const items = [{icon: '🎧', label: i18n('Le son') + (has ? i18n(' (avec la transcription en sous-titres)') : ''), run: () => sendSound(anchor)},
+                {icon: '📝', label: i18n('La transcription (texte)'), disabled: !has, help: has ? '' : i18n('Pas encore de transcription.'), run: () => sendTranscript(anchor)}];
+            if (UI().menuAt) UI().menuAt(anchor, items, {title: i18n('Envoyer vers…')}); else sendSound(anchor);
+        }
         const close = async () => { if (!saved && !await A().confirmBox('Les modifications du son seront perdues.', {title: 'Fermer sans enregistrer ?', okLabel: 'Fermer sans enregistrer', danger: true})) return; saved = true; stopPlay(); dl.close(); };
 
         // ── les commandes (barre, menus, raccourcis à soi) ──
@@ -682,7 +712,7 @@
                 versions: () => { if (!media.id || !UI().openMediaVersions) return toast('Ce son n’est pas encore dans les médias : pas de versions.'); stopPlay(); UI().openMediaVersions(media, {kind: 'audio', tool: 'Studio son', onShown: () => onDone?.()}); }, // L3
                 saveproj: () => saveProj(false), saveas: () => saveProj(true), show: () => saveTo(media.id ? 'show' : 'new'), keepv: () => saveTo('keepv'), copyv: () => saveTo('copyv'),
                 export: () => { stopPlay(); ext.audioExport({title: nameNow(), media, getBuffer: finalBuf, getSelection: () => mode === 'wave' ? sel : null, regions: st.regions, lines: st.transcript, sourceDuration: base.duration, tracks: mode === 'multi' ? multi?.tracks() : null, getTrack: id => multi.mix(id), toMedia: () => MENUS_SAVE(), onDone}); },
-                montage: toMontage, close,
+                montage: toMontage, close, sendto: sendMenu,
                 'win:transcript': () => openSec('as-text'), 'win:history': () => openSec('as-hist'), 'win:info': () => { openSec('as-info'); paintInfo(); }, 'win:rack': () => openSec('as-rack'),
                 tstamp: insertTime, slow: () => { slow = !slow; dl.querySelectorAll('[data-as-cmd="slow"]').forEach(b => b.classList.toggle('is-active', slow)); if (playing) startPlay(curTime()); },
             };
@@ -732,7 +762,7 @@
         view = {start: 0, dur: base.duration}; invalidate(); drawAll();
         if (st.multi?.tracks?.length && data.mode === 'studio' && (st.multi.tracks.some(t => t.clips?.some(c => c.key !== 'main')))) setMode('multi');
         // pour les essais
-        dl._as = {st, base: () => base, rendered: () => renderNow(), sel: v => { if (v !== undefined) { sel = v; drawAll(); } return sel; }, cursor: v => { if (v !== undefined) cursor = v; return cursor; }, addFx, runCmd, hist: () => hist.map(h => h.label), hpos: () => hpos, goHist, addRegion, setMode, multi: () => multi, finalBuf, paintMasks: m => { paintMasks = m; }, repairNow, pristine: () => pristine, saveProj, saveTo, linkPick, setBypass, files};
+        dl._as = {st, base: () => base, rendered: () => renderNow(), sel: v => { if (v !== undefined) { sel = v; drawAll(); } return sel; }, cursor: v => { if (v !== undefined) cursor = v; return cursor; }, addFx, runCmd, hist: () => hist.map(h => h.label), hpos: () => hpos, goHist, addRegion, setMode, multi: () => multi, finalBuf, paintMasks: m => { paintMasks = m; }, repairNow, pristine: () => pristine, saveProj, saveTo, linkPick, setBypass, files, sendSound, sendTranscript, transcriptSubs};
         return dl;
     }
     ext.openAudioStudio = openAudioStudio;

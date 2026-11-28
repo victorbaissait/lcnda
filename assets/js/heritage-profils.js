@@ -553,7 +553,7 @@
     const segHtml = (C, view) => { const cfg = PF.allCfg(C.store), ks = cfg.profOrder.filter(k => !cfg.profHidden.has(k));
         return `<nav class="segmented pf-seg" aria-label="Profils"><button type="button" class="${view === 'all' ? 'is-active' : ''}" data-pf-view="all">Tout mélangé</button>${ks.map(k => `<button type="button" class="${view === k ? 'is-active' : ''}" data-pf-view="${esc(k)}">${esc(ART.profiles[k].icon)} ${esc(ART.profiles[k].short || ART.profiles[k].label)}</button>`).join('')}</nav>`; };
     const photoHtml = st => { const p = st.person; return window.LCNDA_UI?.avatarOn?.() ? window.LCNDA_UI.avatar({...p, name: st.name, photo: p.photo ? `media/${encodeURIComponent(p.photo)}` : ''}, 88) : p.photo ? `<span class="ar-hero-ph" style="background-image:url('media/${encodeURIComponent(p.photo)}')"></span>` : `<span class="ar-hero-ph ${{male: 'm', female: 'f'}[p.gender] || 'u'}">${esc(U.initials(st.name))}</span>`; };
-    const linksHtml = links => (links || []).filter(l => /^https?:\/\//i.test(l.url || '')).map(l => `<a class="ar-ochip is-link" href="${esc(l.url)}" target="_blank" rel="noopener noreferrer"><i>${esc(l.icon || '🌐')}</i>${esc(l.label || l.url.replace(/^https?:\/\/(www\.)?/, '').split('/')[0])}</a>`).join('');
+    const linksHtml = links => (links || []).filter(l => /^https?:\/\//i.test(l.url || '')).map(l => `<a class="ar-ochip is-link" href="${esc(l.url)}" target="_blank" rel="noopener noreferrer" title="${esc(l.url)}"><i aria-hidden="true">↗</i>${esc(l.label || window.LCNDA_UI?.siteName?.(l.url) || l.url)}</a>`).join('');
     PF.linksHtml = linksHtml;
     function heroAll(C, view) {
         const st = C.store, keys = PF.allCfg(st).profOrder;

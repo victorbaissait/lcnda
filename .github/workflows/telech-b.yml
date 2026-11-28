@@ -1,0 +1,98 @@
+# ✝️ ⛲ 🍞 🪨 🐑 🕍 🍇 Lot B « la vie du village et la nature » : fabriquer assets/data/tb-*.json.gz avec scripts/telech-b/build.py,
+# refaire le sommaire assets/data/manifest.json (Réglages → 🗂 Données), et les enregistrer dans la branche lancée.
+#   · osm       calvaires, croix, oratoires, lavoirs, fontaines, puits, fours, pigeonniers, bornes, octrois, douanes, cabanes et
+#               drailles, temples et synagogues — OpenStreetMap (ODbL 1.0, « © les contributeurs d’OpenStreetMap »).
+#               ⚠ D'abord .github/workflows/osm-france.yml (extrait Geofabrik + osmium, sans Overpass, quoi = b) ; ici, « osm »
+#               questionne le service Overpass (souvent en panne pour toute la France) et ne reste qu'en secours.
+#   · wikidata  les mêmes sujets et les cépages — Wikidata (CC0 1.0)
+# Seulement des questions polies (une à la fois, pause entre deux), User-Agent du script, rien de personnel.
+#
+# Lancer : onglet « Actions » → « Lot B : village et nature » → « Run workflow ».
+
+name: 'Lot B : village et nature'
+
+on:
+  workflow_dispatch:
+    inputs:
+      quoi:
+        description: 'Quoi refaire : wikidata, osm (Overpass, secours : voir osm-france.yml) (séparés par des virgules)'
+        type: string
+        default: 'wikidata'
+  push:
+    branches: ['claude/**']
+    paths: ['.github/workflows/telech-b.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: telech-b-donnees
+  cancel-in-progress: false
+
+jobs:
+  donnees:
+    # le « push » sert seulement à faire connaître ce travail à GitHub : il ne fabrique rien
+    if: github.event_name != 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # les dates git des fichiers sans « built » (scripts/donnees-manifest.js)
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: "Préférer IPv4 (pas d’IPv6 sur la machine GitHub, « Network is unreachable »)"
+        run: echo 'precedence ::ffff:0:0/96 100' | sudo tee -a /etc/gai.conf
+      - name: Reprendre les réponses déjà téléchargées
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ runner.temp }}/tb-raw
+          key: telech-b-${{ github.run_id }}
+          restore-keys: telech-b-
+      - name: Fabriquer (plusieurs essais)
+        timeout-minutes: 280
+        env:
+          QUOI: ${{ inputs.quoi }}
+          TB_RAW: ${{ runner.temp }}/tb-raw
+        run: |
+          case "$QUOI" in *[!a-z,]*) echo "refusé : $QUOI"; exit 1;; esac
+          for w in $(echo "$QUOI" | tr ',' ' '); do
+            case "$w" in osm|wikidata) ;; *) echo "inconnu : $w"; exit 1;; esac
+            ok=0
+            for i in 1 2 3 4 5; do
+              srv=https://overpass-api.de/api/interpreter; [ $((i % 2)) -eq 0 ] && srv=https://overpass.kumi.systems/api/interpreter
+              python3 scripts/telech-b/build.py "$w" --overpass "$srv" && { ok=1; break; }
+              echo "essai $i raté, nouvel essai dans 60 s"; sleep 60
+            done
+            [ "$ok" = 1 ] || exit 1
+          done
+          ls -l assets/data/tb-*.json.gz
+      - name: Garder les réponses téléchargées pour la prochaine fois
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ runner.temp }}/tb-raw
+          key: telech-b-${{ github.run_id }}
+      - name: Le sommaire des données (assets/data/manifest.json)
+        run: node scripts/donnees-manifest.js --branch "$GITHUB_REF_NAME"
+      - name: Enregistrer dans la branche
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/data/tb-*.json.gz assets/data/manifest.json
+          git diff --cached --quiet && { echo "rien de neuf"; exit 0; }
+          git commit -m "Lot B (village et nature) : données OpenStreetMap (ODbL) / Wikidata (CC0) fabriquées sur GitHub, et leur sommaire"
+          ok=
+          for i in 1 2 3 4 5; do
+            if ! git pull --rebase origin "$GITHUB_REF_NAME"; then
+              # le sommaire a changé entre-temps (un autre atelier) : on garde celui de la branche et on le refait par-dessus
+              git checkout --ours assets/data/manifest.json && node scripts/donnees-manifest.js --branch "$GITHUB_REF_NAME" \
+                && git add assets/data/manifest.json && GIT_EDITOR=true git rebase --continue || { git rebase --abort; sleep 15; continue; }
+            fi
+            git push origin "HEAD:$GITHUB_REF_NAME" && { ok=1; break; }; sleep 15
+          done
+          [ -n "$ok" ] || { echo "::error::pas enregistré dans la branche"; exit 1; }
