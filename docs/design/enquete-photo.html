@@ -273,6 +273,7 @@ a{color:inherit}
   <a href="#s2">2 · L'écran d'enquête <small>image, calques, questions</small></a>
   <a href="#s2b">2 bis · Plusieurs images en une <small>série, recto-verso, lettre</small></a>
   <a href="#s3">3 · Indices et certitude <small>pour, contre, conclusion</small></a>
+  <a href="#s3b">3 bis · 🔤 Deviner un texte <small>avec une police</small></a>
   <a href="#s4">4 · L'IA, en option <small>sans inventer</small></a>
   <a href="#s5">5 · Recherches proposées <small>selon la photo</small></a>
   <a href="#s5b">5 bis · ☀️ Calcul d'ombre <small>heure, saison, orientation</small></a>
@@ -394,7 +395,7 @@ a{color:inherit}
                 <input class="fld" value="HÔTEL DE LA POSTE" aria-label="Texte lu">
                 <div><span class="lbl">Langue :</span> <span class="ui-listbar-chip">français · probable (mots « hôtel », « poste »)</span></div>
                 <div><span class="lbl">Sûr de la lecture ?</span><div class="cert"><button class="p">Prouvé</button><button>Probable</button><button>Supposé</button></div></div>
-                <div class="choices"><button>＋ Un autre texte</button><button>📜 Lire avec l'atelier</button><button>🤖 Demander à l'IA</button><button>Pas de texte</button></div>
+                <div class="choices"><button>🔤 Essayer une police</button><button>＋ Un autre texte</button><button>📜 Lire avec l'atelier</button><button>🤖 Demander à l'IA</button><button>Pas de texte</button></div>
               </div>
             </details>
             <details class="step"><summary><span class="n">4</span>Le lieu : un bâtiment, un paysage remarquable ?<span class="st"></span></summary>
@@ -461,6 +462,36 @@ a{color:inherit}
       </div>
       <p class="small muted">« Mettre ce lieu sur la photo » remplit le lieu et la date de l'image, avec la certitude et un lien vers l'enquête comme source. ↶ Annuler.</p>
     </div>
+  </div>
+</section>
+
+<!-- ══════════ 3 bis ══════════ -->
+<section class="sec" id="s3b">
+  <div class="sec-h"><span class="eyebrow">3 bis</span><h2>🔤 Deviner un texte avec une police</h2>
+    <p>Une enseigne à moitié cachée ou floue : on tape ce qu'on croit lire, on choisit une police qui ressemble, et on la pose en transparence sur la photo. Si les lettres visibles tombent pile dessous, l'hypothèse tient ; sinon, on essaie un autre mot.</p></div>
+  <div class="inv">
+    <div>
+      <div class="photo" style="aspect-ratio:3/1">
+        <svg viewBox="0 0 600 200" aria-label="Exemple : enseigne peinte à moitié cachée, avec le mot deviné posé dessus en transparence">
+          <rect width="600" height="200" fill="#d9d4c8"/>
+          <rect x="20" y="40" width="560" height="120" fill="#ece8de" stroke="#555"/>
+          <text x="60" y="110" font-size="58" font-family="Georgia,serif" fill="#2b2b2b" letter-spacing="6">G. D</text>
+          <text x="330" y="110" font-size="58" font-family="Georgia,serif" fill="#2b2b2b" letter-spacing="6">AND</text>
+          <text x="60" y="145" font-size="20" font-family="Georgia,serif" fill="#2b2b2b" letter-spacing="4">S. BATHI</text>
+          <circle cx="250" cy="150" r="70" fill="#5b554b"/><circle cx="480" cy="160" r="60" fill="#6e675c"/>
+          <text x="60" y="110" font-size="58" font-family="Georgia,serif" fill="#1c7ed6" opacity=".55" letter-spacing="6">G. DURAND</text>
+        </svg>
+      </div>
+      <p class="small muted">En bleu, le texte deviné posé sur l'enseigne. « Clignoter » alterne photo et texte pour mieux comparer.</p>
+    </div>
+    <div class="card"><div class="card-head"><h3>Essai 1 · « G. DURAND »</h3><span class="lvl s">Supposé</span></div><div class="card-body" style="display:grid;gap:9px;font-size:13.5px">
+      <div><span class="lbl">Ce que je crois lire :</span> <input class="fld" value="G. DUR?ND" aria-label="Texte deviné"><small class="muted">« ? » = lettre incertaine</small></div>
+      <div><span class="lbl">Style de lettres :</span> <div class="segmented sm" role="group"><button aria-pressed="true">Capitales à empattements</button><button aria-pressed="false">Égyptienne</button><button aria-pressed="false">Bâton</button><button aria-pressed="false">Écrite</button><button aria-pressed="false">Pochoir</button><button aria-pressed="false">Art déco</button></div></div>
+      <div style="display:flex;gap:8px 14px;flex-wrap:wrap"><span class="lbl">Taille</span><span class="lbl">Espacement</span><span class="lbl">Étirer</span><span class="lbl">Pencher</span><span class="lbl">Perspective (4 coins)</span><span class="lbl">Transparence</span><label class="ui-toggle"><input type="checkbox" checked><i></i>Clignoter</label></div>
+      <div><span class="lbl">Ça colle ?</span><div class="cert"><button class="p">Colle bien</button><button>À moitié</button><button>Ne colle pas</button></div></div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap"><button class="button secondary small">＋ Un autre essai</button><button class="button secondary small">Comparer les essais</button><button class="button secondary small">🧰 Chercher ce nom dans les données</button></div>
+      <div class="why">Un essai de police reste au plus « Supposé ». Il passe à « Probable » seulement si le même nom est retrouvé ailleurs (annuaire, autre photo, lettre).</div>
+    </div></div>
   </div>
 </section>
 
