@@ -81,7 +81,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/sections.css?v=5">
     <link rel="stylesheet" href="assets/css/transcribe.css?v=29">
     <link rel="stylesheet" href="assets/css/atelier-idees.css?v=4">
-    <link rel="stylesheet" href="assets/css/enquete-photo.css?v=2">
+    <link rel="stylesheet" href="assets/css/enquete-photo.css?v=3">
     <link rel="stylesheet" href="assets/css/photomaps.css?v=9">
     <link rel="stylesheet" href="assets/css/shortcuts.css?v=4">
     <link rel="stylesheet" href="assets/css/meteo.css?v=5">

@@ -184,3 +184,13 @@
 :root[data-theme="dark"] .ep-because{color:#a9e5ba}
 :root[data-theme="dark"] .ep-fh{background:#212121}
 /* ═════ fin du mode sombre automatique ═════ */
+[data-ep-side] { container: ep-side / inline-size; }
+/* onglets du panneau de droite : toujours sur une seule ligne, 4 cases égales (2 × 2 sur un petit écran), jamais de case vide */
+.ep-tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); width: 100%; }
+.ep-tabs > button { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: center; padding-left: 6px; padding-right: 6px; border-right: 2px solid var(--ui-ink); }
+.ep-tabs > button:last-child { border-right: 0; }
+@container ep-side (max-width: 460px) {
+    .ep-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .ep-tabs > button:nth-child(2) { border-right: 0; }
+    .ep-tabs > button:nth-child(-n+2) { border-bottom: 2px solid var(--ui-ink); }
+}
