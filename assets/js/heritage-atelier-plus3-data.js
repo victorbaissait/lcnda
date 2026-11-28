@@ -289,7 +289,18 @@
         let mo = MO.findIndex(m => s.includes(m)) + 1; const rb = s.match(/\b([789x]|10)bre\b/); if (rb) mo = {7: 9, 8: 10, 9: 11, x: 12, 10: 12}[rb[1]];
         const num = s.match(/\b(\d{1,2})[/.\-](\d{1,2})[/.\-](\d{4})\b/); if (num) return `${num[3]}-${num[2].padStart(2, '0')}-${num[1].padStart(2, '0')}`;
         const iso = s.match(/\b(\d{4})-(\d{2})-(\d{2})\b/); if (iso) return iso[0];
-        const d = s.match(/\b(\d{1,2})(?:er)?\s+[a-z]/)?.[1] || ''; return [y, mo ? String(mo).padStart(2, '0') : '', d ? d.padStart(2, '0') : ''].filter(Boolean).join('-'); };
+        const d = s.match(/\b(\d{1,2})(?:er)?\s+(?:[a-z]|[789x]bre|10bre)/)?.[1] || ''; return [y, mo ? String(mo).padStart(2, '0') : '', d ? d.padStart(2, '0') : ''].filter(Boolean).join('-'); };
+    /** ma ligne de relevé complétée par ce que l'app lit dans le texte (extractAct) quand le gabarit et les personnes gardées ne disent rien */
+    function rowFromEx(ex, base = {}) {
+        const out = {...base}, ps = (ex?.people || []).filter(p => p.name && !p.unnamed).map(p => ({...p, r: roleOf(p, ex)}));
+        const one = roles => ps.find(p => roles.includes(p.r)), all = roles => ps.filter(p => roles.includes(p.r)).map(p => p.name).join(' ; ');
+        const put = (k, v) => { if (!String(out[k] ?? '').trim() && v) out[k] = v; };
+        const main = one(ex?.kind === 'mariage' ? ['epoux'] : ['sujet', 'defunt']) || one(['epoux', 'sujet', 'defunt']);
+        if (main) { const n = main.given || main.surname ? {given: main.given || '', surname: main.surname || ''} : splitName(main.name); put('nom', n.surname); put('prenom', n.given); }
+        put('pere', one(['pere', 'pere_epoux', 'pere_defunt'])?.name); put('mere', one(['mere', 'mere_epoux', 'mere_defunt'])?.name);
+        put('conjoint', one(ex?.kind === 'mariage' ? ['epouse'] : ['conjoint'])?.name); put('parrain', one(['parrain'])?.name); put('marraine', one(['marraine'])?.name); put('temoins', all(['temoin']));
+        return out;
+    }
     /**
      * map : la case de chaque valeur ; cells : les valeurs ; mine : ma ligne de relevé (txp2_releve_row) ; body : mon texte
      * → [{field, label, theirs, mine, state: same | diff | theirs | mine, inText}] (inText : la valeur du relevé se lit dans mon texte)
@@ -317,5 +328,5 @@
 
     return {fold, OUTLINE, anchorOf, isLong, suggestOutline, resolveOutline, mergeOutline, cleanOutline, ROLES, roleOf, roleLabel, sameName, peopleRows, splitName,
         sketchLayout, sketchSvg, MARKS, scanMarks, wrapMark, readingText, teiInline, scanDoubts, dictationPlan,
-        FIELDS, FIELD_KEYS, fieldLabel, parseReleve, fieldOf, guessMapping, compareReleve, dateNorm, TWIN_RELS, twinLabel, cleanTwins};
+        FIELDS, FIELD_KEYS, fieldLabel, parseReleve, fieldOf, guessMapping, compareReleve, rowFromEx, dateNorm, TWIN_RELS, twinLabel, cleanTwins};
 });

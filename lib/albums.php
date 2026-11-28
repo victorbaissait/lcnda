@@ -97,7 +97,7 @@ function albums_range(array $a, array $items): array
     $auto = $ys ? [min($ys), max($ys)] : [null, null];
     $f = $from ?? $auto[0]; $t = $to ?? $auto[1];
     $text = trim((string) $a['date_text']);
-    if ($text === '' && $f) { $text = $t && $t !== $f ? "$f–$t" : (string) $f; }
+    if ($text === '' && $f) { $text = $t && $t !== $f ? "{$f}–{$t}" : (string) $f; }
     return ['from' => $f, 'to' => $t, 'text' => $text, 'auto' => $from === null && $to === null && trim((string) $a['date_text']) === ''];
 }
 function albums_out(PDO $pdo, array $a, array $items, int $hidden = 0): array
@@ -295,7 +295,8 @@ function albums_dispatch(PDO $pdo, string $action, bool $isWrite, array $payload
         }
         if ($isWrite && $action === 'albums_write') {
             if (albums_kiosk()) { throw new LcndaBadInput(i18n_t('Mode consultation : rien ne peut être modifié.')); }
-            $own = !$pdo->inTransaction(); if ($own) { $pdo->beginTransaction(); }
+            // le verrou d'écriture tout de suite (api.php begin_write_transaction) : deux envois en même temps s'attendent au lieu d'échouer
+            $own = !$pdo->inTransaction(); if ($own) { if (function_exists('begin_write_transaction')) { begin_write_transaction($pdo); } else { $pdo->beginTransaction(); } }
             try {
                 $res = match ((string) ($payload['op'] ?? '')) {
                     'create' => albums_create($pdo, $payload),

@@ -213,7 +213,7 @@
                 : emptyLine(q ? i18n('Aucun mot pour « {q} ».', {q}) : i18n('Aucun mot douteux : pas de « ? », de « … » ni de [illisible] dans tes actes.'), '❓');
         };
         const dg = ext.openDialog({eyebrow: i18n('TOUS LES ACTES'), title: `❓ ${i18n('Mots douteux à revoir')}`, wide: true, submitLabel: 'Fermer', onSubmit: () => true,
-            body: `<p class="ap3-d-sum" role="status">${esc(i18n('{words} dans {acts}', {words: pl(R.total, 'mot douteux'), acts: pl(R.acts, 'acte')}))}${R.more ? ` · ${esc(i18n('les {n} premiers', {n: items.length}))}` : ''}</p>
+            body: `<p class="ap3-d-sum" role="status">${esc(i18n('{words} dans {acts}', {words: pl(R.total, 'mot douteux', 'mots douteux'), acts: pl(R.acts, 'acte')}))}${R.more ? ` · ${esc(i18n('les {n} premiers', {n: items.length}))}` : ''}</p>
                 <input type="search" class="ap2-q" data-ap3-dq placeholder="${esc(i18n('Filtrer (un mot, un acte)'))}" aria-label="${esc(i18n('Filtrer (un mot, un acte)'))}">
                 <div class="ap3-d-list" data-ap3-dlist>${draw()}</div>
                 <p class="ui-hint">${esc(i18n('Chaque correction garde le texte d’avant dans 🕘 Versions de l’acte.'))}</p>`,
@@ -315,6 +315,7 @@
     async function openReleveCmp(plug) {
         if (!ro() && (plug.isDirty() || !plug.t.id)) { await plug.save(); }
         let mine = {}; if (plug.t.id) { try { mine = (await A().api('atelier_plus2', {op: 'releve', scope: 'act', act_id: plug.t.id, private: 1})).rows?.[0] || {}; } catch (_) {} }
+        mine = D().rowFromEx(extractNow(plug), {date: plug.$('[data-tx="date_text"]')?.value || '', lieu: plug.$('[data-tx="place"]')?.value || '', ...Object.fromEntries(Object.entries(mine).filter(([, v]) => String(v ?? '').trim()))});
         let P = {header: null, cells: [], sep: ';'}, map = [];
         const X = D(), sym = {same: '✓', diff: '≠', theirs: '＋', mine: '−'}, word = {same: 'pareil', diff: 'différent', theirs: 'seulement dans le relevé', mine: 'seulement chez moi'};
         const mapHtml = () => (P.cells.length ? `<div class="ap3-r-map">${P.cells.map((c, i) => `<label class="ap3-r-cell"><span data-i18n-off>${esc(c || '—')}</span><select data-ap3-rmap="${i}" aria-label="${esc(i18n('Case du relevé'))}"><option value="">${esc(i18n('(ignorer)'))}</option>${X.FIELDS.map(([k]) => `<option value="${k}" ${map[i] === k ? 'selected' : ''}>${esc(X.fieldLabel(k))}</option>`).join('')}</select></label>`).join('')}</div>` : '');

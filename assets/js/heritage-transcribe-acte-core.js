@@ -135,7 +135,7 @@
             const parentCtx = /\b(?:fils|fille|enfant)\s+(?:(?:majeure?|mineure?|legitimes?|naturel(?:le)?|en legitime mariage)\s+)*(?:de|du|d')\s*(?:feue?\s+|defunte?\s+|sieur\s+|sr\s+|honnete\s+homme\s+|maitre\s+)?$/.test(before);
             const motherCtx = lastParent && /\bet\s+(?:de\s+|d')\s*(?:feue?\s+|defunte?\s+|dame\s+|demoiselle\s+)?$/.test(before);
             const spouseCtx = before.match(/\b(veuve|veuf|epouse|femme|mari|epoux)\s+(?:en\s+(?:premieres|secondes)\s+noces\s+)?(?:de|du|d')\s*(?:feu\s+|defunt\s+)?$/);
-            const godCtx = before.match(/\b(parrain|marraine)\b[^.;]{0,30}$/);
+            const godCtx = before.match(/\b(parrain|marraine)\b(?![^.;]*\b(?:parrain|marraine)\b)[^.;]{0,30}$/); // le dernier mot (« parrain Jean DURAND, marraine Anne » : marraine)
             if (parentCtx && lastParentOf) { role = 'parent'; rel = {type: 'parent_of', of: lastParentOf.key}; if (!sex) sex = /\bfille naturelle\b/.test(before) ? 'f' : 'm'; }
             else if (motherCtx) { role = 'parent'; rel = {type: 'parent_of', of: lastParent.of}; if (!sex || sex === 'm' && !sexOfGiven(given)) sex = 'f'; }
             else if (spouseCtx && lastPrincipal) { role = 'conjoint'; rel = {type: 'spouse_of', of: lastPrincipal.key}; if (!sex) sex = /veuve|epouse|femme/.test(spouseCtx[1]) ? 'm' : 'f'; if (/veu/.test(spouseCtx[1])) attrs.deceased = true; }

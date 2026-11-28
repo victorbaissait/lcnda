@@ -1629,7 +1629,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-albums.js?v=1" defer></script>
 <script src="assets/js/heritage-onglets-catalogue.js?v=6" defer></script>
 <script src="assets/js/heritage-transcribe-view.js?v=15" defer></script>
-<script src="assets/js/heritage-transcribe-acte-core.js?v=5" defer></script>
+<script src="assets/js/heritage-transcribe-acte-core.js?v=6" defer></script>
 <script src="assets/js/heritage-transcribe-acte.js?v=25" defer></script>
 <script src="assets/js/heritage-transcribe-trouve.js?v=6" defer></script>
 <script src="assets/js/heritage-transcribe-relecture.js?v=7" defer></script>
