@@ -138,11 +138,22 @@
         return !!w && [d.place, ...geo.map(g => g.name)].some(n => placeWord(n) === w || fold(n).includes(w));
     }
     const SORT_OPTS = [['az', 'A → Z'], ['za', 'Z → A'], ['recent', 'Les plus récents'], ['old', 'Les plus anciens'], ['cote', 'Par cote'], ['date', 'Par date du document']];
+    /* 🔎 les images qui ont une enquête photo (pour la colonne de gauche en mode « 🔎 Enquêtes photo ») ; null : pas encore lues */
+    let epIds = null, epLoading = null;
+    function loadEpIds(force = false) {
+        const EP = ext.enquetePhoto; if (!EP?.loadCounts) { epIds = new Set(); return Promise.resolve(); }
+        if (epLoading && !force) return epLoading;
+        epLoading = EP.loadCounts(force).then(c => { const before = epIds ? [...epIds].sort().join() : null; epIds = new Set(Object.keys(c?.by || {}).filter(k => Number(c.by[k]) > 0).map(Number)); epLoading = null;
+            if (modeOf() === 'inquiries' && before !== [...epIds].sort().join()) paintList(); });
+        return epLoading;
+    }
     function filtered() {
         const st = bar?.state || {q: '', filters: {}, sort: 'az'}, f = st.filters || {};
         const q = fold(st.q).trim(), words = q.split(/\s+/).filter(Boolean);
         const y1 = Number(String(f.from || '').match(/\d{3,4}/)?.[0]) || 0, y2 = Number(String(f.to || '').match(/\d{3,4}/)?.[0]) || 0;
         const pid = f.person && typeof f.person === 'object' ? Number(f.person.id) : 0, pname = !pid && f.person ? fold(String(f.person).replace(/^txt:/, '')) : '';
+        const epOnly = modeOf() === 'inquiries';
+        if (epOnly && !epIds) { loadEpIds(); return []; }
         let list = (docs || []).filter(d => {
             if (words.length) { const hay = fold([d.title, d.cote, d.date_text, d.place, d.series, ...(d.people || []).map(p => p.name), ...recNames(d), ...(d.geo || []).map(g => g.name), ...kindsOf(d).map(k => AKINDS.find(x => x[0] === k)?.[1] || ''), ...labelsOf(d).map(l => l.name)].join(' ')); if (!words.every(w => hay.includes(w))) return false; }
             if (Array.isArray(f.sort) && f.sort.length && !f.sort.includes(d.sort)) return false;
@@ -158,6 +169,7 @@
             if (pid && !(d.people || []).some(p => p.id === pid)) return false;
             if (pname && !(d.people || []).some(p => fold(p.name).includes(pname))) return false;
             if (f.loose && d.links) return false;
+            if (epOnly && !epIds.has(Number(d.id))) return false; // 🔎 Enquêtes photo : seulement les images qui ont une enquête
             return true;
         });
         const t = d => fold(d.title), num = s => Number(String(s || '').match(/\d+/)?.[0]) || 0;
@@ -368,6 +380,7 @@
                 .replace('<div class="sf-loose" data-sf-loose>', `<div class="sf-loose" data-sf-loose><div class="section-label ong-loose-label">Sans dossier</div>`) : '';
             return;
         }
+        if (mode === 'inquiries' && !list.length) { box.innerHTML = A().empty ? A().empty(epIds ? T('Aucune image n’a encore d’enquête photo.') : T('On cherche les images qui ont une enquête…'), {icon: '🔎'}) : ''; if (letters) letters.innerHTML = ''; return; }
         const all = entries(list, mode, st);
         if (letters && mode !== 'places' && mode !== 'years') {
             const have = new Set(all.filter(e => e.lh).map(e => e.lh));
@@ -709,6 +722,7 @@
     async function paintInquiries(box) {
         const EP = ext.enquetePhoto;
         if (!EP?._get) { box.innerHTML = A().emptyState({icon: '🔎', text: T('L’enquête photo n’est pas chargée.')}); return; }
+        loadEpIds(true);
         let L = [];
         try { L = (await EP._get('list')).inquiries || []; } catch (e) { box.innerHTML = A().emptyState({icon: '🔎', text: e.message}); return; }
         if (!box.isConnected || modeOf() !== 'inquiries') return;

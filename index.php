@@ -1621,7 +1621,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-blocs-school.js?v=3" defer></script>
 <script src="assets/js/heritage-creations.js?v=5" defer></script>
 <script src="assets/js/app-correspondances-core.js?v=2" defer></script>
-<script src="assets/js/heritage-onglets-documents.js?v=32" defer></script>
+<script src="assets/js/heritage-onglets-documents.js?v=33" defer></script>
 <script src="assets/js/heritage-onglets-catalogue.js?v=6" defer></script>
 <script src="assets/js/heritage-transcribe-view.js?v=14" defer></script>
 <script src="assets/js/heritage-transcribe-acte-core.js?v=5" defer></script>
