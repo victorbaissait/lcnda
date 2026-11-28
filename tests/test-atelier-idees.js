@@ -155,7 +155,7 @@ echo json_encode(['m' => $m, 'a1' => $a1, 'a2' => $a2, 'a3' => $a3, 't1' => $t1,
         out.nextIds = nextId; const a1b = nextId.find(i => i !== seed.a1);
         out.nextSaved = (await api('act_transcription', { id: a1b })).data.reg;
         out.regInfoNext = await api('atelier_idees', { op: 'reg', act_id: a1b });
-        out.regOnly = await api('atelier_idees', { op: 'search', q: 'de', reg_of: seed.a1 }); out.regAll = await api('atelier_idees', { op: 'search', q: 'de' }); out.regIds = [seed.a1, a1b];
+        out.regOnly = await api('atelier_idees', { op: 'search', q: 'Léonard', reg_of: seed.a1 }); out.regAll = await api('atelier_idees', { op: 'search', q: 'Léonard' }); out.regIds = [seed.a1, a1b];
         // ◀ : l'acte d'avant
         await p.click(`${D} [data-ais-go="prev"]`); await p.waitForFunction(([d, t]) => document.querySelector(`${d} [data-tx="title"]`)?.value === t, [D, 'Baptême de Jean MAZAUD'], { timeout: 15000 }); await sleep(300);
         out.backTitle = await p.evaluate(d => document.querySelector(`${d} [data-tx="title"]`).value, D);

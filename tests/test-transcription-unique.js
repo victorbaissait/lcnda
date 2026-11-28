@@ -216,7 +216,7 @@ echo json_encode($o, JSON_UNESCAPED_UNICODE);`);
         await t('fiche de Pierre DURAND (1440 et 390) : bloc « 📜 Actes et transcriptions » ; fiche de Jean : « relevé, à relier », Relier puis ↶ Annuler', async () => {
             for (const vp of [{width: 1440, height: 900}, {width: 390, height: 844}]) {
                 const {ctx, pg, errs} = await open(vp);
-                await pg.evaluate(() => window.LCNDA_APP.openPersonById(1));
+                await pg.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; /* le bloc 📜 essayé en entier (le chargement à mesure : test-fiche-lazy.js) */ return window.LCNDA_APP.openPersonById(1); });
                 await pg.waitForSelector('.h-pacts [data-pacts-row]', {timeout: 30000, state: 'attached'}); await pg.evaluate(() => { const s = document.querySelector('.h-pacts')?.closest('[data-fsec]'); const b = s && document.querySelector(`[data-fsec-tab="${s.dataset.fsec}"]`); if (b && !b.classList.contains('is-active')) b.click(); if (s?.classList.contains('is-folded')) s.querySelector('[data-fsec-fold]')?.click(); }); await pg.waitForTimeout(400); await pg.evaluate(() => document.querySelector('.h-pacts')?.scrollIntoView({block: 'center'})); await pg.waitForTimeout(300);
                 assert.match(await pg.textContent('.h-pacts'), /Registre militaire · Pierre DURAND/);
                 assert.match(await pg.textContent('.h-pacts'), /sujet/);
@@ -229,7 +229,7 @@ echo json_encode($o, JSON_UNESCAPED_UNICODE);`);
                 assert.deepEqual(errs, []); await ctx.close();
             }
             const {ctx, pg, errs} = await open({width: 1440, height: 900});
-            await pg.evaluate(() => window.LCNDA_APP.openPersonById(2));
+            await pg.evaluate(() => { window.LCNDA_SHEET_LAZY_OFF = true; return window.LCNDA_APP.openPersonById(2); });
             await pg.waitForSelector('.h-pacts [data-pacts-link]', {timeout: 30000, state: 'attached'}); await pg.evaluate(() => { const s = document.querySelector('.h-pacts')?.closest('[data-fsec]'); const b = s && document.querySelector(`[data-fsec-tab="${s.dataset.fsec}"]`); if (b && !b.classList.contains('is-active')) b.click(); if (s?.classList.contains('is-folded')) s.querySelector('[data-fsec-fold]')?.click(); }); await pg.waitForTimeout(400); await pg.evaluate(() => document.querySelector('.h-pacts')?.scrollIntoView({block: 'center'})); await pg.waitForTimeout(300);
             assert.match(await pg.textContent('.h-pacts'), /à relier/);
             await pg.click('.h-pacts [data-pacts-link]');

@@ -107,7 +107,7 @@ echo json_encode($I);`], {cwd: root, encoding: 'utf8', env});
         await boot();
         const api = (x, q = {}) => p.evaluate(([y, z]) => window.LCNDA_APP.api(y, z).catch(e => ({error: e.message})), [x, q]);
         const post = (a, b) => p.evaluate(async ([x, y]) => { try { const r = await window.LCNDA_APP.api(x, {}, {method: 'POST', body: y}); return r.result || r; } catch (e) { return {error: e.message}; } }, [a, b]);
-        const openPerson = async id => { await p.evaluate(i => window.LCNDA_APP.openPersonById(i), id); await p.waitForFunction(i => window.LCNDA_APP.state.currentPerson?.person?.id === i && document.querySelector('.person-page h2'), id, {timeout: 20000}); };
+        const openPerson = async id => { await p.evaluate(i => { window.LCNDA_SHEET_LAZY_OFF = true; /* les blocs (arbres, courbe de poids…) essayés en entier (le chargement à mesure : test-fiche-lazy.js) */ return window.LCNDA_APP.openPersonById(i); }, id); await p.waitForFunction(i => window.LCNDA_APP.state.currentPerson?.person?.id === i && document.querySelector('.person-page h2'), id, {timeout: 20000}); };
         const clickToast = async label => { await p.waitForFunction(l => [...document.querySelectorAll('.ui-toast button')].some(b => b.textContent.includes(l)), label, {timeout: 10000}); await p.evaluate(l => [...document.querySelectorAll('.ui-toast button')].reverse().find(b => b.textContent.includes(l)).click(), label); };
 
         await t('serveur : 🧭 ton lien (sang, « par … », alliance, aucun)', async () => {

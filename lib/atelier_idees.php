@@ -425,7 +425,7 @@ function txi_search(PDO $pdo, string $q, bool $near, int $limit = 60, int $regOf
     if (!$toks) { return ['hits' => [], 'acts' => 0, 'lines' => 0, 'indexed' => $indexed, 'q' => $q]; }
     $exactQ = implode(' AND ', array_map(static fn($t) => 'text : "' . str_replace('"', '', $t) . '"*', array_slice($toks, 0, 8)));
     $only = $regOf > 0 ? txi_register_acts($pdo, $regOf) : null;
-    $in = $only !== null ? ' AND f.act_id IN (' . implode(',', array_map('intval', $only ?: [0])) . ')' : '';
+    $in = $only !== null ? ' AND CAST(f.act_id AS INTEGER) IN (' . implode(',', array_map('intval', $only ?: [0])) . ')' : '';
     $sel = 'SELECT f.rowid AS rid, f.text, f.act_id, f.line, f.layer, f.s, f.e FROM atelier_fts f WHERE atelier_fts MATCH ?' . $in . ' ORDER BY f.act_id, f.layer, f.line LIMIT ' . ($limit * 3);
     $st = $pdo->prepare($sel);
     $st->execute([$exactQ]); $exact = $st->fetchAll(PDO::FETCH_ASSOC);
