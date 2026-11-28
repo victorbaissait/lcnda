@@ -220,3 +220,21 @@ tr.dp-mine > td { background: color-mix(in srgb, var(--dp-green) 7%, transparent
 @media (hover: hover) { tr:not(:hover):not(:focus-within) .dp-ra .dp-ib:not(.is-on) { opacity: .45; } }
 /* 📖 📝 ⚠️ de la première case : l'icône est dessinée ici, pas dans le texte de la ligne */
 .dp-ib[data-ic]::before { content: attr(data-ic); }
+
+/* 🗺 Tout autour d'un lieu (app-autour-lieu.js) : 📊 Données (fenêtre) et 🔍 Recherche (page) */
+.dp-around-cta { margin: 6px 0 4px; }
+.al-tool .al-opts { gap: 8px 14px; }
+.al-tool .al-period input { width: 5.2em; }
+.al-tool .al-acts { display: inline-flex; gap: 6px; margin-left: auto; flex-wrap: wrap; }
+.al-tool .al-note { margin: 4px 0 8px; font-size: 13px; padding: 6px 10px; border-radius: 6px; background: var(--blue-soft, #eaf2ff); color: var(--ink, #111); }
+.al-tool .al-note .link-button { margin-left: 6px; }
+.al-tool .al-tbl td:first-child, .al-tool .al-tbl td:nth-child(2) { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.al-tool .al-sub { display: block; }
+.al-tool .al-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; margin-right: 6px; vertical-align: middle; }
+.al-tool .al-more { margin: 8px 0; text-align: center; }
+.al-tool .dp-chip.off { opacity: .5; text-decoration: line-through; }
+@media (max-width: 640px) {
+    .al-tool .al-acts { margin-left: 0; }
+    .al-tool .al-tbl th:nth-child(5), .al-tool .al-tbl td:nth-child(5) { display: none; }
+    .al-tool .data-table-wrap { overflow-x: auto; }
+}
