@@ -253,6 +253,179 @@
     function matrix(clues, images) {
         return (clues || []).map(c => ({clue: c, cells: (images || []).map(im => (c.images || {})[im.id] || '')}));
     }
+    /* ═════════ 🎨 canaux de couleur, 🔦 lumière rasante (pixels RGBA, sur l'ordinateur) ═════════ */
+    /** un canal seul (r, g, b), le négatif (neg), le gris (gray), sur place ; contrast en % (100 = tel quel) */
+    function channel(px, mode, contrast = 100) {
+        const k = Math.max(0.2, Number(contrast) || 100) / 100;
+        for (let i = 0; i < px.length; i += 4) {
+            const r = px[i], g = px[i + 1], b = px[i + 2];
+            let v = mode === 'r' ? r : mode === 'g' ? g : mode === 'b' ? b : mode === 'gray' ? 0.299 * r + 0.587 * g + 0.114 * b : null;
+            if (mode === 'neg') { px[i] = clamp(128 + (255 - r - 128) * k, 0, 255); px[i + 1] = clamp(128 + (255 - g - 128) * k, 0, 255); px[i + 2] = clamp(128 + (255 - b - 128) * k, 0, 255); continue; }
+            if (v == null) { px[i] = clamp(128 + (r - 128) * k, 0, 255); px[i + 1] = clamp(128 + (g - 128) * k, 0, 255); px[i + 2] = clamp(128 + (b - 128) * k, 0, 255); continue; }
+            v = clamp(128 + (v - 128) * k, 0, 255); px[i] = px[i + 1] = px[i + 2] = v;
+        }
+        return px;
+    }
+    /** 🔦 lumière rasante simulée (relief) : la pente du gris dans la direction de la lumière (az en degrés, 0 = vient du haut), renforcée */
+    function emboss(src, w, h, az = 315, strength = 3) {
+        const out = new Uint8ClampedArray(src.length), gray = new Float32Array(w * h);
+        for (let i = 0, j = 0; i < src.length; i += 4, j++) gray[j] = 0.299 * src[i] + 0.587 * src[i + 1] + 0.114 * src[i + 2];
+        const dx = Math.sin(az * RAD), dy = -Math.cos(az * RAD), s = Number(strength) || 3;
+        for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+            const x0 = Math.max(0, x - 1), x1 = Math.min(w - 1, x + 1), y0 = Math.max(0, y - 1), y1 = Math.min(h - 1, y + 1);
+            const gx = gray[y * w + x1] - gray[y * w + x0], gy = gray[y1 * w + x] - gray[y0 * w + x];
+            const v = clamp(128 + (gx * dx + gy * dy) * s, 0, 255), o = (y * w + x) * 4;
+            out[o] = out[o + 1] = out[o + 2] = v; out[o + 3] = 255;
+        }
+        return out;
+    }
+
+    /* ═════════ 📏 mesurer d'après une taille connue ═════════ */
+    /** segs : [{len (en points de l'image)}] ; ref : index du segment connu, size (en m), tol (marge de la taille connue, 0–1).
+     *  → [{i, value, lo, hi, rel}] : la règle de trois, et sa marge (taille connue + 3 points de tracé à chaque bout) */
+    function measure(segs, ref, size, tol = 0.1, px = 3) {
+        const r = segs?.[ref], L = Number(r?.len); if (!(L > 0) || !(Number(size) > 0)) return [];
+        return segs.map((s, i) => {
+            const l = Number(s.len); if (!(l > 0)) return null;
+            const value = size * l / L, rel = i === ref ? Number(tol) : Number(tol) + px / L + px / l;
+            return {i, value, lo: value * (1 - rel), hi: value * (1 + rel), rel};
+        }).filter(Boolean);
+    }
+    /** les tailles connues proposées (en m) et leur marge */
+    const SIZES = [{k: 'porte', size: 2, tol: 0.1}, {k: 'brique', size: 0.22, tol: 0.05}, {k: 'moi', size: 0, tol: 0.05}];
+
+    /* ═════════ 🧭 la boussole : le point du photographe, sa direction, le cône de vue ═════════ */
+    /** cap de a vers b (degrés, 0 = nord, 90 = est) */
+    function bearing(a, b) {
+        const p1 = a.lat * RAD, p2 = b.lat * RAD, dl = (b.lon - a.lon) * RAD;
+        return (Math.atan2(Math.sin(dl) * Math.cos(p2), Math.cos(p1) * Math.sin(p2) - Math.sin(p1) * Math.cos(p2) * Math.cos(dl)) / RAD + 360) % 360;
+    }
+    /** le point à d km de (lat, lon) vers az */
+    function destPoint(lat, lon, az, d) {
+        const r = d / 6371, p1 = lat * RAD, l1 = lon * RAD, t = az * RAD;
+        const p2 = Math.asin(Math.sin(p1) * Math.cos(r) + Math.cos(p1) * Math.sin(r) * Math.cos(t));
+        const l2 = l1 + Math.atan2(Math.sin(t) * Math.sin(r) * Math.cos(p1), Math.cos(r) - Math.sin(p1) * Math.sin(p2));
+        return {lat: p2 / RAD, lon: ((l2 / RAD + 540) % 360) - 180};
+    }
+    /** le contour du cône de vue : [[lat, lon], …] fermé (pour la carte) */
+    function cone(c, steps = 12) {
+        const half = (Number(c.fov) || 50) / 2, out = [[c.lat, c.lon]];
+        for (let i = 0; i <= steps; i++) { const p = destPoint(c.lat, c.lon, c.az - half + (2 * half) * i / steps, Number(c.km) || 1); out.push([p.lat, p.lon]); }
+        out.push([c.lat, c.lon]);
+        return out;
+    }
+    /** un point est-il dans le cône ? → {inside, km, bearing, off (écart à l'axe, degrés)} */
+    function inCone(c, p) {
+        const d = km(c, p); if (d == null) return {inside: false, km: null};
+        const b = bearing(c, p), off = Math.abs(((b - c.az + 540) % 360) - 180);
+        return {inside: d <= (Number(c.km) || 1) && off <= (Number(c.fov) || 50) / 2, km: d, bearing: b, off};
+    }
+
+    /* ═════════ 🏗 dates de construction ou de démolition d'un bâtiment reconnu ═════════ */
+    /** {built, gone, dates (texte)} → {from, to} : vu sur la photo, il existait déjà (« pas avant »), il n'était pas encore démoli (« pas après ») */
+    function buildingDates(b) {
+        const y = v => (Number.isFinite(Number(v)) && Number(v) > 1000 ? Number(v) : null);
+        let from = y(b?.built) ?? y(b?.from); if (from == null && b?.dates) from = yearOf(b.dates);
+        return {from, to: y(b?.gone) ?? y(b?.to)};
+    }
+    const STOP = new Set(['dans', 'avec', 'pour', 'sans', 'sous', 'vers', 'chez', 'entre', 'ancien', 'ancienne', 'grand', 'grande', 'petit', 'petite', 'notre', 'saint', 'sainte']);
+    const fold = s => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
+    const words = s => fold(s).split(' ').filter(w => w.length >= 4 && !STOP.has(w));
+    /** les indices qui ressemblent à un bâtiment des données (mots en commun) → [{clue, b, score, from, to}] (le plus ressemblant d'abord) */
+    function matchBuildings(clues, buildings) {
+        const out = [];
+        (clues || []).filter(c => c && c.certainty !== 'refuted').forEach(c => {
+            const cw = new Set(words(c.text)); if (!cw.size) return;
+            (buildings || []).forEach(b => {
+                const bw = words(b.name), hit = bw.filter(w => cw.has(w)).length; if (!hit) return;
+                const d = buildingDates(b); if (d.from == null && d.to == null) return;
+                out.push({clue: c, b, score: hit / Math.max(1, bw.length), ...d});
+            });
+        });
+        return out.sort((a, b) => b.score - a.score || (a.b.km ?? 0) - (b.b.km ?? 0));
+    }
+
+    /* ═════════ 👪 qui pourrait-ce être ? (l'âge apparent, la date, le lieu ; jamais le visage) ═════════ */
+    /** p : {birth, death, gender, km (le plus près de ses lieux au lieu supposé), close} ; ctx : {age, spread, from, to, gender, maxKm}
+     *  → {fit, score, yes: [{k, …}], no: [{k, …}]} (clés de phrases, traduites à l'écran) */
+    function whoFits(p, ctx) {
+        const yes = [], no = [], from = Number(ctx.from) || null, to = Number(ctx.to) || from, age = Number(ctx.age), spread = Number(ctx.spread) || 3, maxKm = Number(ctx.maxKm) || 30;
+        if (p.birth != null && from) {
+            const a = from - p.birth, b = to - p.birth;
+            if (b < 0) no.push({k: 'unborn', y: p.birth});
+            else if (Number.isFinite(age) && ctx.age !== '' && ctx.age != null) { if (b >= age - spread && a <= age + spread) yes.push({k: 'age', a: Math.max(0, a), b}); else no.push({k: 'age', a: Math.max(0, a), b}); }
+        } else no.push({k: 'nobirth'});
+        if (p.death != null && from && p.death < from) no.push({k: 'dead', y: p.death});
+        if (ctx.gender && p.gender && ['male', 'female'].includes(p.gender) && p.gender !== ctx.gender) no.push({k: 'gender'});
+        if (p.km != null) { if (p.km <= maxKm) yes.push({k: 'place', km: Math.round(p.km)}); else no.push({k: 'far', km: Math.round(p.km)}); }
+        else if (ctx.hasPlace) no.push({k: 'noplace'});
+        if (p.close) yes.push({k: 'close'});
+        const hard = no.some(x => ['unborn', 'dead', 'age', 'gender'].includes(x.k));
+        return {fit: !hard && yes.some(x => x.k === 'age'), score: yes.length * 2 - no.length - (hard ? 5 : 0), yes, no};
+    }
+    /** 👤 une proposition de l'outil Visages : « Supposé » seule ; « Probable » seulement confirmée par un autre indice ; jamais « Prouvé » */
+    function capFace(c, confirmed) { if (c === 'refuted') return 'refuted'; return confirmed && (c === 'proven' || c === 'probable') ? 'probable' : 'supposed'; }
+
+    /* ═════════ 👶 ranger une série d'après l'âge des enfants ═════════ */
+    /** rows : [{who, ages: {imageId: âge}}] → {order: [imageId…], t: {imageId: années depuis la 1ʳᵉ}, spread (désaccord en années), used} */
+    function growthOrder(rows, imageIds) {
+        const ids = (imageIds || []).map(String), sum = {}, n = {}, dev = [];
+        const has = (r, id) => r?.ages && r.ages[id] !== '' && r.ages[id] != null && Number.isFinite(Number(r.ages[id]));
+        (rows || []).forEach(r => {
+            const pts = ids.filter(id => has(r, id)).map(id => [id, Number(r.ages[id])]);
+            if (pts.length < 2) return;
+            const mean = pts.reduce((s, [, a]) => s + a, 0) / pts.length;
+            pts.forEach(([id, a]) => { sum[id] = (sum[id] || 0) + (a - mean); n[id] = (n[id] || 0) + 1; });
+        });
+        const used = ids.filter(id => n[id]);
+        const t0 = {}; used.forEach(id => { t0[id] = sum[id] / n[id]; });
+        // le désaccord : pour chaque enfant, l'écart entre ses âges et le temps commun
+        (rows || []).forEach(r => { const pts = used.filter(id => has(r, id)); if (pts.length < 2) return;
+            const off = pts.map(id => Number(r.ages[id]) - t0[id]), m = off.reduce((s, x) => s + x, 0) / off.length; off.forEach(x => dev.push(Math.abs(x - m))); });
+        const order = used.slice().sort((a, b) => t0[a] - t0[b]), min = order.length ? t0[order[0]] : 0, t = {};
+        order.forEach(id => { t[id] = Math.round((t0[id] - min) * 10) / 10; });
+        return {order, t, spread: dev.length ? Math.round(Math.max(...dev) * 10) / 10 : 0, used: used.length};
+    }
+
+    /* ═════════ ☑ « Ai-je tout regardé ? », 🌡 niveau, 😈 avocat du diable ═════════ */
+    const CHECKLIST = ['coins', 'fond', 'reflets', 'dos', 'bords', 'ombres', 'mains', 'habits', 'textes', 'ciel'];
+    function checklistProgress(settings) { const c = settings?.checklist || {}; const done = CHECKLIST.filter(k => c[k]).length; return {done, total: CHECKLIST.length, all: done === CHECKLIST.length}; }
+    const LEVELS = ['debutee', 'avancee', 'resolue', 'impossible'];
+    /** le niveau choisi, sinon celui que l'enquête semble avoir */
+    function levelOf(inq) {
+        const l = inq?.settings?.level; if (LEVELS.includes(l)) return {level: l, chosen: true};
+        const c = inq?.conclusion || {}, ok = x => x && ['proven', 'probable'].includes(x.certainty);
+        const n = (inq?.clues || []).filter(x => x.certainty !== 'refuted').length;
+        return {level: ok(c.place) && ok(c.date) ? 'resolue' : n >= 3 ? 'avancee' : 'debutee', chosen: false};
+    }
+    /** une durée en secondes → « 1 h 05 », « 12 min », « moins d'une minute » (clé pour le dernier) */
+    function fmtDur(sec) { const s = Math.max(0, Math.round(Number(sec) || 0)); if (s < 60) return ''; const m = Math.floor(s / 60); if (m < 60) return `${m} min`; return `${Math.floor(m / 60)} h ${String(m % 60).padStart(2, '0')}`; }
+    /** les conclusions à attaquer : lieu, date, la meilleure hypothèse, les indices « Prouvé » ou « Probable » — sauf celles qui ont déjà leur « à chercher » */
+    function devilTargets(inq) {
+        const out = [], c = inq?.conclusion || {}, done = new Set((inq?.clues || []).filter(x => x.data?.todo).map(x => String(x.data.against)));
+        if (c.place?.name || c.place?.place_id) out.push({k: 'place', label: c.place.name || '', certainty: c.place.certainty});
+        if (c.date?.text) out.push({k: 'date', label: c.date.text, certainty: c.date.certainty});
+        ['lieu', 'date'].forEach(kind => { const hs = (inq?.hypotheses || []).filter(h => h.kind === kind).map(h => ({h, s: hypScore(h, inq.clues || [])})).sort((a, b) => b.s.score - a.s.score); if (hs[0]) out.push({k: `h${hs[0].h.id}`, label: hs[0].h.label, certainty: 'supposed', hyp: true}); });
+        (inq?.clues || []).filter(x => ['proven', 'probable'].includes(x.certainty) && !x.data?.todo).slice(0, 6).forEach(x => out.push({k: `c${x.id}`, label: x.text, certainty: x.certainty, num: x.num}));
+        return out.map(t => ({...t, done: done.has(t.k)}));
+    }
+    /** 🗺 la couleur d'une certitude (carte des enquêtes) */
+    const CERT_COLOR = {proven: '#1a7f37', probable: '#055dff', supposed: '#bf8700', refuted: '#d1242f'};
+
+    /* ═════════ 🏘 le profil des toits : comparer deux lignes de toits ═════════ */
+    /** une ligne tracée [[x, y]…] (0–1) → 48 hauteurs, mises à l'échelle de sa boîte (0 = le haut, 1 = le bas) */
+    function normLine(pts, n = 48) {
+        const P = (pts || []).filter(p => Array.isArray(p) && Number.isFinite(p[0]) && Number.isFinite(p[1])).slice().sort((a, b) => a[0] - b[0]); if (P.length < 2) return null;
+        const x0 = P[0][0], x1 = P[P.length - 1][0], ys = P.map(p => p[1]), y0 = Math.min(...ys), y1 = Math.max(...ys); if (x1 - x0 < 1e-6) return null;
+        const out = []; let j = 0;
+        for (let i = 0; i < n; i++) { const x = x0 + (x1 - x0) * i / (n - 1); while (j < P.length - 2 && P[j + 1][0] < x) j++; const a = P[j], b = P[j + 1], k = b[0] - a[0] > 1e-9 ? (x - a[0]) / (b[0] - a[0]) : 0; out.push(((a[1] + (b[1] - a[1]) * clamp(k, 0, 1)) - y0) / Math.max(1e-6, y1 - y0)); }
+        return out;
+    }
+    /** l'écart moyen entre deux profils (0 = identiques, 1 = rien à voir) */
+    function lineGap(a, b) { if (!a || !b || a.length !== b.length) return null; return Math.round(a.reduce((s, v, i) => s + Math.abs(v - b[i]), 0) / a.length * 100) / 100; }
+
     return {declination, sunAlt, sunAz, elevationFrom, noonAlt, windows, shadowMonths, shadowOnDate, facing, compass, hhmm, agree, doy,
-        readExif, dateWindow, bump, capAi, hypScore, QUESTIONS, questionDone, missing, tenMinutes, km, yearOf, dayOf, matrix, CERT_ORDER, WEIGHT};
+        readExif, dateWindow, bump, capAi, hypScore, QUESTIONS, questionDone, missing, tenMinutes, km, yearOf, dayOf, matrix, CERT_ORDER, WEIGHT,
+        channel, emboss, measure, SIZES, bearing, destPoint, cone, inCone, buildingDates, matchBuildings, whoFits, capFace, growthOrder,
+        CHECKLIST, checklistProgress, LEVELS, levelOf, fmtDur, devilTargets, CERT_COLOR, normLine, lineGap};
 });

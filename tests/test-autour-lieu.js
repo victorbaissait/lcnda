@@ -35,7 +35,7 @@ const root = path.join(__dirname, '..');
             echo 'ok';`);
         assert.strictEqual(ok.split('\n').pop(), 'ok');
 
-        // des listes de données FABRIQUÉES autour de Chamberet (thème guerres) : 7 combats et 600 bornes (pour la limite de la carte)
+        // des listes de données FABRIQUÉES autour de Chamberet : 5 combats (thème guerres) et 600 bornes (thème ciel : pour la limite de la carte)
         const addLists = () => p.evaluate(() => {
             const E = window.LCNDA_EXT; if (E.dataLists.some(d => d.id === 'test_combats')) return;
             const rows = [{name: 'Combat du Pont-Vieux', y: 1760, lat: 45.585, lon: 1.72, lieu: 'Chamberet'}, {name: 'Siège de la Tour', y: 1765, lat: 45.57, lon: 1.70, lieu: 'Chamberet'},
@@ -44,8 +44,8 @@ const root = path.join(__dirname, '..');
             E.dataLists.push({id: 'test_combats', icon: '⚔️', label: 'Combats d’essai', group: 'Le monde', theme: 'guerres', source: 'Jeu d’essai (CC0)', load: async () => rows, fields,
                 period: r => [r.y, r.y], geo: r => [r.lat, r.lon], rowKey: r => r.name, familyColumn: true});
             const many = Array.from({length: 600}, (_, i) => ({name: `Borne n° ${i + 1}`, y: 1700 + (i % 200), lat: 45.58 + (i % 30) / 1000, lon: 1.71 + Math.floor(i / 30) / 1000, lieu: 'Chamberet'}));
-            E.dataLists.push({id: 'test_bornes', icon: '🪨', label: 'Bornes d’essai', group: 'Le monde', theme: 'guerres', source: 'Jeu d’essai (CC0)', load: async () => many, fields,
-                period: r => [r.y, r.y], geo: r => [r.lat, r.lon], rowKey: r => r.name});
+            E.dataLists.push({id: 'test_bornes', icon: '🪨', label: 'Bornes d’essai', group: 'Le monde', theme: 'ciel', source: 'Jeu d’essai (CC0)', load: async () => many, fields,
+                period: r => [r.y, r.y], geo: r => [r.lat, r.lon], rowKey: r => r.name, familyColumn: true});
             E.donneesPlus.resetCache();
         });
         await addLists(); await sleep(300);
@@ -95,7 +95,7 @@ const root = path.join(__dirname, '..');
             assert.ok(await p.$(`${W} [data-dp-map] svg, ${W} [data-dp-map] .mini-map, ${W} [data-dp-map] *`), 'une carte');
             assert.ok(await p.isHidden(`${W} [data-al-note]`), '1 500 : pas de limite atteinte (moins de 1 500 lignes)');
             await p.click(`${W} [data-al-custom]`); await p.click('.ui-actmenu button:has-text("500 points")'); await sleep(300);
-            assert.ok(await p.isVisible(`${W} [data-al-note]`)); assert.match(await p.textContent(`${W} [data-al-note]`), /500 premiers sur [\d  ]+ — voir le tableau/);
+            assert.ok(await p.isVisible(`${W} [data-al-note]`)); assert.match(await p.textContent(`${W} [data-al-note]`), /500 premiers sur [\d\s\u00a0\u202f]+ — voir le tableau/);
             await p.click(`${W} [data-al-note] [data-al-totable]`); await p.waitForSelector(`${W} [data-al-table] tbody tr[data-al-row]`, {timeout: 10000});
             assert.strictEqual(await pressed(W, 'data-al-view'), 'table');
             await p.click(`${W} [data-al-custom]`); await p.click('.ui-actmenu button:has-text("1 500 points")'); await sleep(200);
@@ -151,7 +151,8 @@ const root = path.join(__dirname, '..');
             await p.click(`${W} [data-al-custom]`); await p.click('.ui-actmenu button:has-text("sans date")'); await sleep(300);
             assert.strictEqual((await col(W, 1)).filter(x => x === '—').length, undated);
             await seg(W, 'data-al-quoi', 'donnees'); await sleep(1500);
-            const yd = (await col(W, 1)).filter(x => /^\d/.test(x)).map(Number); assert.ok(yd.length > 10 && yd.every(y => y >= 1780 && y <= 1790), 'données dans la période');
+            const yd = (await col(W, 1)).filter(x => /^\d/.test(x)); assert.ok(yd.length > 10, 'des données'); assert.ok(yd.every(x => Number(x.slice(0, 4)) <= 1790 && Number(x.slice(-4)) >= 1780), 'données dans la période : ' + yd.slice(0, 8));
+            assert.ok(yd.includes('1785') && !yd.includes('1700'), 'les bornes de la période seulement');
             await p.fill(`${W} [data-al-y0]`, ''); await p.fill(`${W} [data-al-y1]`, ''); await p.press(`${W} [data-al-y1]`, 'Tab'); await sleep(300);
         });
         await t('une ligne s’ouvre : la fiche de la personne ; ☑ cocher → 🧺 Au panier (les vrais éléments : événement)', async () => {
@@ -159,10 +160,9 @@ const root = path.join(__dirname, '..');
             await p.click(`${W} [data-al-table] tbody tr[data-al-row]:first-child input[data-sel-check]`);
             assert.ok(await p.$('.sel-bar [data-sel-act]'), 'la barre de sélection');
             const labels = await p.$$eval('.sel-bar [data-sel-act]', a => a.map(x => x.textContent)); assert.ok(labels.some(x => /Au panier/.test(x)), 'Au panier : ' + labels);
-            await p.evaluate(() => { const C = window.LCNDA_EXT.connexions; C.__t = C.take; window.__took = null; C.take = items => { window.__took = items; return Promise.resolve(); }; });
-            await p.click('.sel-bar [data-sel-act]:has-text("Au panier")'); await sleep(300);
-            const took = await p.evaluate(() => window.__took); assert.ok(took && took.length === 1 && ['event', 'media', 'investigation'].includes(took[0].kind) && took[0].ref_id > 0, JSON.stringify(took));
-            await p.evaluate(() => { const C = window.LCNDA_EXT.connexions; C.take = C.__t; });
+            const [req] = await Promise.all([p.waitForRequest(r => r.url().includes('cx_write') && r.method() === 'POST' && (r.postDataJSON() || {}).op === 'basket_add', {timeout: 15000}), p.click('.sel-bar [data-sel-act]:has-text("Au panier")')]);
+            const took = req.postDataJSON().items; assert.ok(took && took.length === 1 && ['event', 'media', 'investigation'].includes(took[0].kind) && took[0].ref_id > 0, JSON.stringify(took));
+            await sleep(500); await p.evaluate(() => document.querySelectorAll('.ui-actmenu, .cx-pop').forEach(x => x.remove()));
             await p.click('.sel-bar [data-sel-clear]').catch(() => {});
             const pid = await p.$eval(`${W} [data-al-table] tbody [data-open-person]`, b => Number(b.dataset.openPerson));
             await p.click(`${W} [data-al-table] tbody [data-open-person]`); await p.waitForFunction(x => window.LCNDA_APP.state.module === 'personnes' && Number(window.LCNDA_APP.state.currentPersonId) === x, pid, {timeout: 15000});

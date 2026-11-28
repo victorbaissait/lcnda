@@ -23,7 +23,7 @@ declare(strict_types=1);
  * autre fichier appelée ici doit faire « $own = !$pdo->inTransaction() » avant d'ouvrir la sienne.
  */
 
-const SCHEMA_VERSION = 113;
+const SCHEMA_VERSION = 114;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -142,6 +142,7 @@ function migration_steps(): array
         111 => 'schema_v111',
         112 => 'schema_v112',
         113 => 'schema_v113',
+        114 => 'schema_v114',
     ];
 }
 
@@ -2864,6 +2865,14 @@ function schema_v113(PDO $pdo): void
 {
     if (!function_exists('ep_install')) { require_once __DIR__ . '/enquete_photo.php'; }
     ep_install($pdo);
+}
+
+/** 114 : 🔎 Enquête photo — 📮 les décors de studio d'un photographe (photo_photographers.backdrops, lib/enquete_photo.php) */
+function schema_v114(PDO $pdo): void
+{
+    if (!function_exists('ep_install_114')) { require_once __DIR__ . '/enquete_photo.php'; }
+    if (!$pdo->query("SELECT 1 FROM sqlite_master WHERE type='table' AND name='photo_photographers'")->fetchColumn()) { ep_install($pdo); }
+    ep_install_114($pdo);
 }
 
 /** 109 : ➕ recueils — l'avancement dans le temps (recueil_progress), « confiée à » d'une page, l'objectif d'un recueil */
