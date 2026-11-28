@@ -271,13 +271,14 @@ a{color:inherit}
 <nav class="toc" aria-label="Sommaire">
   <a href="#s1">1 · Le bouton, partout <small>où il y a une image</small></a>
   <a href="#s2">2 · L'écran d'enquête <small>image, calques, questions</small></a>
+  <a href="#s2b">2 bis · Plusieurs images en une <small>série, recto-verso, lettre</small></a>
   <a href="#s3">3 · Indices et certitude <small>pour, contre, conclusion</small></a>
   <a href="#s4">4 · L'IA, en option <small>sans inventer</small></a>
   <a href="#s5">5 · Recherches proposées <small>selon la photo</small></a>
   <a href="#s5b">5 bis · ☀️ Calcul d'ombre <small>heure, saison, orientation</small></a>
   <a href="#s6">6 · Comparer en ligne <small>seulement si on veut</small></a>
   <a href="#s7">7 · Rattacher <small>à ce qu'on veut</small></a>
-  <a href="#s7b">7 bis · Encore plus <small>35 aides</small></a>
+  <a href="#s7b">7 bis · Encore plus <small>46 aides</small></a>
   <a href="#s7c">7 ter · Fouiller dans les données</a>
   <a href="#s7d">7 quater · Données ouvertes</a>
   <a href="#s8">8 · À décider</a>
@@ -410,6 +411,30 @@ a{color:inherit}
     </div>
     <div class="modal-actions"><button class="button secondary small">🤖 L'IA regarde aussi</button><span class="spacer"></span><button class="button secondary">⤓ Exporter le dossier</button><button class="button">Terminer pour l'instant</button></div>
   </div>
+</section>
+
+<!-- ══════════ 2 bis ══════════ -->
+<section class="sec" id="s2b">
+  <div class="sec-h"><span class="eyebrow">2 bis</span><h2>Une enquête, plusieurs photos et documents</h2>
+    <p>On peut réunir dans une même enquête plusieurs photos et documents : une série d'un même album, une carte postale et la lettre qui en parle, le recto et le verso, deux vues du même lieu. Chaque indice dit à quelles images il s'applique, et ce qu'on trouve sur l'une profite aux autres.</p></div>
+  <div class="card"><div class="card-head"><h3>🔎 Enquête « La place de Brive » <small>4 images · 9 indices</small></h3>
+    <div style="display:flex;gap:6px;flex-wrap:wrap"><button class="button secondary small">＋ Ajouter une photo ou un document…</button><button class="button secondary small">Glisser-déposer ici</button></div></div>
+    <div class="card-body">
+      <div class="mini">
+        <div class="thumb" style="outline:3px solid var(--ui-blue)"><div class="photo" style="aspect-ratio:4/3"><svg viewBox="0 0 120 90" aria-hidden="true"><rect width="120" height="90" fill="#cfc6b3"/><rect x="15" y="35" width="40" height="30" fill="#a99f88"/><rect x="80" y="25" width="14" height="40" fill="#8b8270"/><ellipse cx="87" cy="22" rx="8" ry="7" fill="#6f6758"/></svg></div><span class="badge-inv">A</span><p>img004 · carte postale (recto)</p></div>
+        <div class="thumb"><div class="photo" style="aspect-ratio:4/3"><svg viewBox="0 0 120 90" aria-hidden="true"><rect width="120" height="90" fill="#efe9dc"/><path d="M60 8 V82" stroke="#999"/><path d="M10 20 H52 M10 30 H50 M10 40 H45" stroke="#555"/><rect x="88" y="10" width="20" height="24" fill="none" stroke="#555"/></svg></div><span class="badge-inv">B</span><p>img004 · verso</p></div>
+        <div class="thumb"><div class="photo" style="aspect-ratio:4/3"><svg viewBox="0 0 120 90" aria-hidden="true"><rect width="120" height="90" fill="#c9c1ae"/><rect x="40" y="30" width="16" height="45" fill="#8b8270"/><ellipse cx="48" cy="27" rx="9" ry="8" fill="#6f6758"/><rect x="65" y="50" width="45" height="25" fill="#a99f88"/></svg></div><span class="badge-inv">C</span><p>img011 · même clocher, autre angle</p></div>
+        <div class="thumb"><div class="photo" style="aspect-ratio:4/3"><svg viewBox="0 0 120 90" aria-hidden="true"><rect width="120" height="90" fill="#f3efe4"/><path d="M12 18 H100 M12 28 H95 M12 38 H105 M12 48 H90 M12 58 H98" stroke="#3a352c"/></svg></div><span class="badge-inv">D</span><p>Lettre de Jean, 1912 (transcrite)</p></div>
+      </div>
+      <table class="data-table" style="margin-top:12px"><thead><tr><th>Indice</th><th>A</th><th>B</th><th>C</th><th>D</th><th>Certitude</th></tr></thead><tbody>
+        <tr><td>Clocher à bulbe</td><td>●</td><td></td><td>●</td><td></td><td><span class="lvl pr">Probable</span><small>vu sur 2 images : monte d'un cran</small></td></tr>
+        <tr><td>« Hôtel de la Poste »</td><td>●</td><td></td><td></td><td>●</td><td><span class="lvl p">Prouvé</span><small>lu sur la photo et dans la lettre</small></td></tr>
+        <tr><td>Éditeur « J. Lacombe, Brive »</td><td></td><td>●</td><td></td><td></td><td><span class="lvl pr">Probable</span></td></tr>
+        <tr><td>Date 1905-1915</td><td>●</td><td>●</td><td>○</td><td>●</td><td><span class="lvl pr">Probable</span><small>○ : pas encore vérifié sur C</small></td></tr>
+      </tbody></table>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px"><div class="segmented sm" role="group" aria-label="Vue"><button aria-pressed="true">Une image à la fois</button><button aria-pressed="false">Côte à côte (loupe liée)</button><button aria-pressed="false">Toutes en mosaïque</button></div></div>
+      <p class="small muted" style="margin:10px 0 0">Les images restent à leur place dans Documents : l'enquête les relie, elle ne les déplace pas. Une image peut appartenir à plusieurs enquêtes. ✂ « Séparer » sort une image de l'enquête avec ses indices (↶ Annuler). Un document en plusieurs pages (recto, verso, annexes) arrive avec toutes ses pages. Depuis Documents : cocher plusieurs images → « 🔎 Enquêter sur ces images ».</p>
+    </div></div>
 </section>
 
 <!-- ══════════ 3 ══════════ -->
@@ -640,6 +665,20 @@ a{color:inherit}
     <div><b>🧩 Photos sœurs</b>Même photographe, même tirage, même décor de studio (tapis, balustrade).</div>
     <div><b>📖 Raconter l'enquête</b>Une page « Comment on a retrouvé ce lieu » pour le livre ou le site familial.</div>
     <div><b>🛡 Partager sans risque</b>Export avec les visages des vivants floutés et les données privées retirées.</div>
+  </div>
+  <h3 style="margin:18px 0 8px;font-size:17px">✨ Et encore</h3>
+  <div class="where" style="margin:0">
+    <div><b>✉️ Le papier de la carte postale</b>Case du timbre (« Place du timbre »), mentions imprimées au dos : une époque.</div>
+    <div><b>📮 Timbre et oblitération</b>Timbre, tarif de l'époque, cachet de la poste avec sa ville et sa date.</div>
+    <div><b>☀️ Ombres de plusieurs photos</b>Même jour, même heure ? Pour relier une série.</div>
+    <div><b>🪧 Panneaux et langue</b>Panneaux en allemand en Alsace-Moselle (1871-1918), etc.</div>
+    <div><b>🚩 Drapeaux</b>Leur forme, et les drapeaux étrangers (occupation, fête).</div>
+    <div><b>📯 Uniformes civils</b>Facteur, garde champêtre, gendarme, pompier, cheminot, infirmière, reliés aux métiers de l'arbre.</div>
+    <div><b>🏫 Photo de classe</b>Année scolaire, âge des enfants, enfants de l'arbre scolarisés là.</div>
+    <div><b>📍 Mes photos proches</b>Les photos déjà situées à moins de 2 km.</div>
+    <div><b>📏 Frise de la photo</b>Chaque indice réduit la fenêtre de dates : « pas avant 1904 », « pas après 1915 ».</div>
+    <div><b>📒 Carnet de repères</b>Un clocher reconnu une fois devient un repère proposé pour les photos suivantes.</div>
+    <div><b>⏱ Mode « 10 minutes »</b>Trois questions, les plus utiles, pour avancer vite sur une pile de photos.</div>
   </div>
 </section>
 
