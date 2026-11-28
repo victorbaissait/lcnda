@@ -3,7 +3,9 @@
  * cours : sa zone, un peu agrandie en haut et en bas pour les jambages. Elle suit le curseur du texte (Entrée en fin de ligne : elle
  * descend) ; sur l'image, ↑ ↓ la déplacent et mettent le curseur sur la ligne correspondante. Ligne sans zone : la hauteur de la ligne
  * d'avant, posée juste dessous ; on peut la faire glisser. La force du voile : le petit curseur qui apparaît avec elle.
- * Retenu sur cet ordinateur : genealogie-tx-regle (allumée), genealogie-tx-regle-force (0,2 à 0,9).
+ * Retenu sur cet ordinateur : genealogie-tx-regle (allumée), genealogie-tx-regle-force (0,2 à 0,9), genealogie-tx-regle-haut (la hauteur de la
+ * bande, 0,7 à 2,5 fois celle d'avant : le 2e curseur). Un acte sans aucune zone : une bande libre, à la hauteur d'une ligne estimée
+ * (l'image ÷ 28), qui descend d'une ligne à chaque ligne du texte ; on la fait glisser pour la caler (gardé pour toutes les lignes).
  * Branché par ext.txPlugins / ext.txMenus (heritage-transcribe.js) ; essai : tests/test-atelier-idees.js.
  */
 (() => {
@@ -11,11 +13,12 @@
     const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s).replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m)));
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
-    const KEY = 'genealogie-tx-regle', FORCE_KEY = 'genealogie-tx-regle-force';
+    const KEY = 'genealogie-tx-regle', FORCE_KEY = 'genealogie-tx-regle-force', HAUT_KEY = 'genealogie-tx-regle-haut';
     const ls = (k, d = '') => { try { const v = localStorage.getItem(k); return v == null ? d : v; } catch (_) { return d; } };
     const lsSet = (k, v) => { try { localStorage.setItem(k, v); } catch (_) {} };
     const isOn = () => ls(KEY) === '1';
     const force = () => { const v = Number(ls(FORCE_KEY, '0.55')); return Number.isFinite(v) ? Math.min(.9, Math.max(.2, v)) : .55; };
+    const haut = () => { const v = Number(ls(HAUT_KEY, '1')); return Number.isFinite(v) ? Math.min(2.5, Math.max(.7, v)) : 1; };
     const NS = 'http://www.w3.org/2000/svg';
     const SKIP = ['skip', 'note'];
 
@@ -35,7 +38,11 @@
         while (s > 0 && k < 40) { const P = lineAt(text, s - 1); k++; const pz = zoneFor(zones, P.s, P.e); if (pz) return {x: pz.x, y: pz.y + pz.h * k, w: pz.w, h: pz.h, est: true}; s = P.s; }
         return null;
     }
-    ext.txRegle = {bandOf, lineAt}; // pour les essais
+    /** sans aucune zone : la bande libre de la ligne n (0…) du texte, à la hauteur d'une ligne estimée */
+    const freeBand = (imgW, imgH, n) => { const h = Math.max(12, imgH / 28); return {x: 0, y: Math.min(imgH - h, imgH * .06 + n * h), w: imgW, h, est: true, free: true}; };
+    /** la bande peinte autour de la ligne : 1,5 fois sa hauteur (× le réglage « hauteur »), centrée */
+    const padOf = (h, k = 1) => Math.max(0, h * (.75 * k - .5));
+    ext.txRegle = {bandOf, lineAt, freeBand, padOf}; // pour les essais
 
     function init(plug) {
         const {dlg, area, $} = plug, world = $('[data-tx-world]'), zonesG = $('[data-tx-zones]'), stage = $('[data-tx-stage]');
@@ -49,7 +56,7 @@
         btn.type = 'button'; btn.dataset.aipRegle = ''; btn.textContent = '📏'; btn.title = i18n('Règle de lecture : assombrit l’image sauf la ligne en cours (↑ ↓ sur l’image pour changer de ligne)'); btn.setAttribute('aria-label', i18n('Règle de lecture'));
         rail?.appendChild(btn);
         const pill = document.createElement('div'); pill.className = 'aip-pill'; pill.hidden = true;
-        pill.innerHTML = `<span aria-hidden="true">📏</span><label>${esc(i18n('assombrir'))} <input type="range" min="20" max="90" step="5" data-aip-force value="${Math.round(force() * 100)}" aria-label="${esc(i18n('Force de l’assombrissement'))}"></label><button type="button" class="aip-pill-x" data-aip-off title="${esc(i18n('Éteindre la règle'))}" aria-label="${esc(i18n('Éteindre la règle'))}">×</button>`;
+        pill.innerHTML = `<span aria-hidden="true">📏</span><label>${esc(i18n('assombrir'))} <input type="range" min="20" max="90" step="5" data-aip-force value="${Math.round(force() * 100)}" aria-label="${esc(i18n('Force de l’assombrissement'))}"></label><label>${esc(i18n('hauteur'))} <input type="range" min="70" max="250" step="10" data-aip-haut value="${Math.round(haut() * 100)}" aria-label="${esc(i18n('Hauteur de la bande de lecture'))}"></label><button type="button" class="aip-pill-x" data-aip-off title="${esc(i18n('Éteindre la règle'))}" aria-label="${esc(i18n('Éteindre la règle'))}">×</button>`;
         stage.appendChild(pill);
         let on = isOn(), drag = null, manual = null; // manual : {key, dy} — la bande estimée déplacée à la main (ligne sans zone)
         const paintBtn = () => { btn.classList.toggle('is-active', on); btn.setAttribute('aria-pressed', String(on)); pill.hidden = !on; dlg.dataset.txRegle = on ? '1' : ''; };
@@ -57,23 +64,24 @@
             const G = plug.geo(); g.setAttribute('transform', zonesG.getAttribute('transform') || '');
             if (!on || !G.imgW) { g.style.display = 'none'; return; }
             const zones = (plug.t.data.zones || []).filter(z => plug.onHere(z));
-            const b = bandOf(area.value, zones, area.selectionStart);
+            const L = lineAt(area.value, area.selectionStart);
+            let b = bandOf(area.value, zones, area.selectionStart), key = `${L.s}`;
+            if (!b && !zones.some(z => z.e > z.s && !SKIP.includes(z.kind))) { b = freeBand(G.imgW, G.imgH, area.value.slice(0, L.s).split('\n').filter(x => x.trim()).length); key = 'free'; } // aucune zone : la bande libre
             if (!b) { g.style.display = 'none'; dlg.dataset.txRegleBand = ''; return; }
-            const L = lineAt(area.value, area.selectionStart), key = `${L.s}`;
             if (b.est && manual?.key === key) b.y += manual.dy;
-            const pad = b.h * .25, y = Math.max(0, b.y - pad), h = Math.min(G.imgH - y, b.h + 2 * pad), x = Math.max(0, b.x - b.h * .2), w = Math.min(G.imgW - x, b.w + b.h * .4);
+            const pad = padOf(b.h, haut()), y = Math.max(0, b.y - pad), h = Math.min(G.imgH - y, b.h + 2 * pad), x = Math.max(0, b.x - b.h * .2), w = Math.min(G.imgW - x, b.w + b.h * .4);
             veil.setAttribute('d', `M0 0H${G.imgW}V${G.imgH}H0Z M${x} ${y}H${x + w}V${y + h}H${x}Z`);
             veil.style.fillOpacity = String(force());
             Object.entries({x, y, width: w, height: h}).forEach(([k, v]) => band.setAttribute(k, v));
-            band.classList.toggle('is-est', b.est); band.style.strokeWidth = String(1.5 / (G.zoom || 1));
-            g.style.display = ''; dlg.dataset.txRegleBand = JSON.stringify({x: Math.round(x), y: Math.round(y), w: Math.round(w), h: Math.round(h), est: b.est});
+            band.classList.toggle('is-est', b.est); band.classList.toggle('is-free', !!b.free); band.style.strokeWidth = String(1.5 / (G.zoom || 1));
+            g.style.display = ''; dlg.dataset.txRegleBand = JSON.stringify({x: Math.round(x), y: Math.round(y), w: Math.round(w), h: Math.round(h), est: b.est, ...(b.free ? {free: true} : {})});
             return {x, y, w, h};
         }
         let raf = 0; const soon = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; paint(); }); };
         const set = v => { on = v; lsSet(KEY, v ? '1' : '0'); paintBtn(); paint(); };
         plug.regle = {toggle: () => set(!on), set, paint, isOn: () => on};
         btn.addEventListener('click', () => set(!on));
-        pill.addEventListener('input', e => { if (!e.target.matches('[data-aip-force]')) return; lsSet(FORCE_KEY, String(Number(e.target.value) / 100)); paint(); });
+        pill.addEventListener('input', e => { if (e.target.matches('[data-aip-haut]')) { lsSet(HAUT_KEY, String(Number(e.target.value) / 100)); paint(); return; } if (!e.target.matches('[data-aip-force]')) return; lsSet(FORCE_KEY, String(Number(e.target.value) / 100)); paint(); });
         pill.addEventListener('click', e => { if (e.target.closest('[data-aip-off]')) set(false); });
         ['select', 'keyup', 'mouseup', 'input', 'focus'].forEach(ev => area.addEventListener(ev, soon));
         document.addEventListener('selectionchange', soon);
@@ -86,7 +94,7 @@
                 const pos = d > 0 ? L.e + 1 : L.s - 1; if (pos < 0 || pos > v.length || (d > 0 && L.e >= v.length)) return false;
                 L = lineAt(v, pos); if (v.slice(L.s, L.e).trim()) break;
             }
-            area.setSelectionRange(L.s, L.s); manual = null;
+            area.setSelectionRange(L.s, L.s); if (manual?.key !== 'free') manual = null;
             const r = paint(); if (r) plug.reveal({x: r.x, y: r.y, w: r.w, h: r.h});
             return true;
         }
@@ -98,7 +106,7 @@
         };
         window.addEventListener('keydown', onKey, true);
         // glisser la bande estimée (ligne sans zone)
-        band.addEventListener('pointerdown', e => { if (!band.classList.contains('is-est')) return; e.stopPropagation(); e.preventDefault(); const L = lineAt(area.value, area.selectionStart); drag = {y0: e.clientY, dy0: manual?.key === `${L.s}` ? manual.dy : 0, key: `${L.s}`}; band.setPointerCapture?.(e.pointerId); });
+        band.addEventListener('pointerdown', e => { if (!band.classList.contains('is-est')) return; e.stopPropagation(); e.preventDefault(); const L = lineAt(area.value, area.selectionStart), k = band.classList.contains('is-free') ? 'free' : `${L.s}`; drag = {y0: e.clientY, dy0: manual?.key === k ? manual.dy : 0, key: k}; band.setPointerCapture?.(e.pointerId); });
         band.addEventListener('pointermove', e => { if (!drag) return; const z = plug.geo().zoom || 1; manual = {key: drag.key, dy: drag.dy0 + (e.clientY - drag.y0) / z}; paint(); });
         band.addEventListener('pointerup', () => { drag = null; });
         new MutationObserver(() => { if (!dlg.isConnected) { window.removeEventListener('keydown', onKey, true); document.removeEventListener('selectionchange', soon); } }).observe(document.body, {childList: true});

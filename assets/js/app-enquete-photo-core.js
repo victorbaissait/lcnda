@@ -424,8 +424,83 @@
     /** l'écart moyen entre deux profils (0 = identiques, 1 = rien à voir) */
     function lineGap(a, b) { if (!a || !b || a.length !== b.length) return null; return Math.round(a.reduce((s, v, i) => s + Math.abs(v - b[i]), 0) / a.length * 100) / 100; }
 
+    /* ═════════ la suite (heritage-enquete-photo-suite.js) ═════════ */
+    /** 🔍🔍 double loupe : la zone vue (0–1) autour du centre, pour un grossissement k et une loupe w × h (points) sur une image W × H */
+    function lensRect(cx, cy, k, W, H, w, h) {
+        const kk = clamp(Number(k) || 4, 1, 16), sw = Math.min(1, w / kk / Math.max(1, W)), sh = Math.min(1, h / kk / Math.max(1, H));
+        return {x: clamp(cx - sw / 2, 0, 1 - sw), y: clamp(cy - sh / 2, 0, 1 - sh), w: sw, h: sh};
+    }
+    /** la position liée : le même point sur l'autre image, avec le décalage choisi (pour deux tirages un peu décalés) */
+    function linkedPoint(p, off) { return {x: clamp(p.x + (Number(off?.dx) || 0), 0, 1), y: clamp(p.y + (Number(off?.dy) || 0), 0, 1)}; }
+    /** ▦ la grille de lecture : 3 × 3, 4 × 4 ou 6 × 6 ; les cases regardées → {done, total, all} */
+    const GRID_SIZES = [3, 4, 6];
+    function gridProgress(g) {
+        const n = GRID_SIZES.includes(Number(g?.n)) ? Number(g.n) : 3, total = n * n;
+        const done = [...new Set((g?.done || []).map(Number).filter(i => Number.isInteger(i) && i >= 0 && i < total))].length;
+        return {n, done, total, all: done === total};
+    }
+    /** la case (0…n²−1) d'un point (0–1) */
+    function gridCell(x, y, n) { const k = GRID_SIZES.includes(Number(n)) ? Number(n) : 3; return clamp(Math.floor(y * k), 0, k - 1) * k + clamp(Math.floor(x * k), 0, k - 1); }
+    /** 1 2 3 : la légende des personnes numérotées. markers [{n, label, person_id, certainty}] ; people {id: {name, private}} ;
+     *  safe : partage sans risque ou mode consultation → un vivant ou une fiche confidentielle n'est jamais nommé (même écrit à la main) */
+    function legendLines(markers, {people = {}, safe = false, privNames = [], t = s => s} = {}) {
+        const hidden = (privNames || []).filter(n => n && n.length >= 3).map(n => fold(n));
+        return (markers || []).slice().sort((a, b) => a.n - b.n).map(m => {
+            const p = m.person_id ? people[m.person_id] : null;
+            let name = String(m.label || '').trim() || (p ? p.name : '') || t('inconnu');
+            const priv = (p && p.private) || hidden.some(n => fold(name).includes(n));
+            if (safe && priv) name = t('Personne confidentielle');
+            const unknown = !m.person_id && (!m.label || [fold('inconnu'), fold(t('inconnu'))].includes(fold(m.label))); // « inconnu » : rien à douter
+            const sure = m.certainty === 'proven' || unknown;
+            return {n: m.n, text: `${name}${sure || (safe && priv) ? '' : ' ?'}`, private: !!priv, person_id: safe && priv ? 0 : (m.person_id || 0), certainty: m.certainty || 'supposed'};
+        });
+    }
+    /** le prochain numéro libre */
+    function nextNumber(markers) { const used = new Set((markers || []).map(m => m.n)); let n = 1; while (used.has(n)) n++; return n; }
+    /** 👻 silhouette : la boîte d'un contour [[x, y]…] (0–1) */
+    function polyBox(pts) {
+        const P = (pts || []).filter(p => Array.isArray(p) && Number.isFinite(p[0]) && Number.isFinite(p[1])); if (P.length < 3) return null;
+        const xs = P.map(p => p[0]), ys = P.map(p => p[1]), x = Math.min(...xs), y = Math.min(...ys);
+        return {x, y, w: Math.max(...xs) - x, h: Math.max(...ys) - y};
+    }
+    /** le contour posé sur l'autre image : déplacé (dx, dy en 0–1), agrandi (k), en gardant les proportions des deux images
+     *  (ratio = (hauteur A / largeur A) / (hauteur B / largeur B)) → les points sur B et la hauteur sur B (part de la hauteur de B) */
+    function ghostOn(pts, {dx = 0, dy = 0, k = 1, ratio = 1} = {}) {
+        const b = polyBox(pts); if (!b) return null;
+        const cx = b.x + b.w / 2, cy = b.y + b.h / 2;
+        const out = pts.map(([x, y]) => [cx + (x - cx) * k + dx, cy + (y - cy) * k * ratio + dy]);
+        return {pts: out, h: b.h * k * ratio, box: polyBox(out)};
+    }
+    /** 🗺 la tournée d'un photographe : ses photos rangées par année (les années inconnues à la fin) */
+    function byYear(photos) {
+        const m = new Map(); (photos || []).forEach(p => { const y = Number.isFinite(Number(p.year)) && p.year ? Number(p.year) : null; if (!m.has(y)) m.set(y, []); m.get(y).push(p); });
+        return [...m.entries()].sort((a, b) => (a[0] == null) - (b[0] == null) || (a[0] ?? 0) - (b[0] ?? 0)).map(([year, list]) => ({year, photos: list}));
+    }
+    /** ✍ « En une phrase » : la prudence suit la certitude (Prouvé → rien, Probable → « sans doute », Supposé → « peut-être ») */
+    const HEDGE = {proven: '', probable: 'sans doute', supposed: 'peut-être'};
+    const RANK = {proven: 3, probable: 2, supposed: 1};
+    function whenText(text, t) {
+        const s = String(text || '').trim(); if (!s) return '';
+        if (/^\d{4}$/.test(s)) return t('en {y}').replace('{y}', s);
+        if (/^\d{1,2}(er)?\s+\S+\s+\d{4}$/.test(s) || /^\d{4}-\d{2}-\d{2}$/.test(s) || /^\d{1,2}\/\d{1,2}\/\d{4}$/.test(s)) return t('le {d}').replace('{d}', s);
+        return s;
+    }
+    function sentence(conc, {t = s => s} = {}) {
+        const p = conc?.place && (conc.place.name || '').trim() ? conc.place : null, d = conc?.date && (conc.date.text || '').trim() ? conc.date : null;
+        if (!p && !d) return '';
+        const cert = x => (RANK[x?.certainty] ? x.certainty : 'supposed'), main = cert(p || d);
+        const parts = [];
+        if (p) parts.push(t('à {lieu}').replace('{lieu}', p.name.trim()));
+        if (d) { const w = whenText(d.text, t); parts.push(p && RANK[cert(d)] < RANK[main] ? `, ${t(HEDGE[cert(d)])} ${w}` : `${p ? ' ' : ''}${w}`); }
+        const tpl = {proven: 'Cette photo a été prise {rest}.', probable: 'Cette photo a sans doute été prise {rest}.', supposed: 'Cette photo a peut-être été prise {rest}.'}[main];
+        return t(tpl).replace('{rest}', parts.join(''));
+    }
+    /** 📜 « Ce qui a changé ma conclusion » : les lignes « ⚖ … » du journal, de la plus ancienne à la plus récente */
+    function conclusionHistory(journal) { return (journal || []).filter(j => /^⚖/.test(String(j.what || ''))).slice().sort((a, b) => String(a.created_at).localeCompare(String(b.created_at)) || a.id - b.id); }
+
     return {declination, sunAlt, sunAz, elevationFrom, noonAlt, windows, shadowMonths, shadowOnDate, facing, compass, hhmm, agree, doy,
         readExif, dateWindow, bump, capAi, hypScore, QUESTIONS, questionDone, missing, tenMinutes, km, yearOf, dayOf, matrix, CERT_ORDER, WEIGHT,
         channel, emboss, measure, SIZES, bearing, destPoint, cone, inCone, buildingDates, matchBuildings, whoFits, capFace, growthOrder,
-        CHECKLIST, checklistProgress, LEVELS, levelOf, fmtDur, devilTargets, CERT_COLOR, normLine, lineGap};
+        CHECKLIST, checklistProgress, LEVELS, levelOf, fmtDur, devilTargets, CERT_COLOR, normLine, lineGap,
+        lensRect, linkedPoint, GRID_SIZES, gridProgress, gridCell, legendLines, nextNumber, polyBox, ghostOn, byYear, HEDGE, sentence, conclusionHistory};
 });

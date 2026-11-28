@@ -37,6 +37,11 @@ declare(strict_types=1);
  * Les 26 aides de heritage-enquete-photo-plus.js gardent leur état dans settings_json (provenance, inscriptions, ☑ liste, niveau,
  * temps passé, décor, boussole, âges des enfants) ; GET ep&op= candidates · face_people · buildings · local_events · map · races ·
  * family_places ; 📮 photographes : leurs décors de studio (colonne backdrops, structure n°114).
+ * La suite (heritage-enquete-photo-suite.js) : GET ep&op= that_day (📅 ce jour-là dans l'arbre) · occupations (👔 tenues de métier) ·
+ * occasions (🎞 occasions de photo dans la fenêtre de dates) · photographer_route (🗺 tournée d'un photographe) ; « reopen » dans list et
+ * get (🔔 du nouveau pour une enquête terminée, calculé à la demande) ; les changements de conclusion et de certitude vont au journal
+ * (lignes « ⚖ ») ; settings_json garde la ▦ grille de lecture (grids) et les 🔢 personnes numérotées (people : jamais nommées en
+ * consultation si vivantes ou confidentielles). Pas de table de plus.
  */
 
 const EP_CERT = ['proven', 'probable', 'supposed', 'refuted'];
@@ -206,11 +211,14 @@ function ep_list(PDO $pdo): array
         (SELECT i.media_id FROM photo_inquiry_images i WHERE i.inquiry_id=q.id ORDER BY i.position, i.id LIMIT 1) AS first_media FROM photo_inquiries q ORDER BY q.updated_at DESC, q.id DESC LIMIT 500")->fetchAll(PDO::FETCH_ASSOC);
     $out = [];
     $thumb = $pdo->prepare('SELECT filename, thumbnail FROM media WHERE id=?');
+    $packs = null;
     foreach ($rows as $r) {
         $c = ep_dec($r['conclusion_json']); $th = '';
         if ($r['first_media']) { $thumb->execute([(int) $r['first_media']]); $m = $thumb->fetch(PDO::FETCH_ASSOC); $th = $m ? (string) ($m['thumbnail'] ?: $m['filename']) : ''; }
+        // ↺ du nouveau pour une enquête terminée : calculé ici, à la demande
+        $re = []; if ((string) $r['status'] === 'done') { try { $packs ??= ep_packs(); $re = ep_reopen_hints($pdo, $r, $packs); } catch (Throwable $_) { $re = []; } }
         $out[] = ['id' => (int) $r['id'], 'title' => (string) $r['title'], 'status' => (string) $r['status'], 'n_images' => (int) $r['n_images'], 'n_clues' => (int) $r['n_clues'],
-            'place' => $c['place'] ?? null, 'date' => $c['date'] ?? null, 'thumb' => $th, 'updated_at' => (string) $r['updated_at'], 'created_at' => (string) $r['created_at'], 'is_private' => (int) $r['is_private']];
+            'place' => $c['place'] ?? null, 'date' => $c['date'] ?? null, 'thumb' => $th, 'updated_at' => (string) $r['updated_at'], 'created_at' => (string) $r['created_at'], 'is_private' => (int) $r['is_private'], 'reopen' => $re];
     }
     return ['inquiries' => $out];
 }
@@ -251,7 +259,23 @@ function ep_get(PDO $pdo, int $id): array
     $jr = $pdo->prepare('SELECT id, what, result, created_at FROM photo_inquiry_journal WHERE inquiry_id=? ORDER BY id DESC LIMIT 200'); $jr->execute([$id]);
     $conclusion = ep_dec($q['conclusion_json']);
     if (!empty($conclusion['place']['place_id'])) { $s = $pdo->prepare('SELECT name, latitude, longitude FROM places WHERE id=?'); $s->execute([(int) $conclusion['place']['place_id']]); if ($p = $s->fetch(PDO::FETCH_ASSOC)) { $conclusion['place']['name'] = $conclusion['place']['name'] ?: (string) $p['name']; $conclusion['place']['lat'] = $p['latitude'] !== null ? (float) $p['latitude'] : null; $conclusion['place']['lon'] = $p['longitude'] !== null ? (float) $p['longitude'] : null; } }
-    return ['inquiry' => ['id' => (int) $q['id'], 'title' => (string) $q['title'], 'status' => (string) $q['status'], 'notes' => (string) $q['notes'], 'settings' => ep_dec($q['settings_json']),
+    // 🔢 les personnes numérotées (settings.people) : en consultation, un vivant ou une fiche confidentielle n'y est jamais nommé,
+    //    ni par le lien vers sa fiche ni par un nom écrit à la main ; hors consultation, leurs noms servent au « partage sans risque »
+    $settings = ep_dec($q['settings_json']); $privNames = [];
+    try {
+        $pids = []; foreach ((is_array($settings['people'] ?? null) ? $settings['people'] : []) as $list) { foreach ((array) $list as $m) { if (is_array($m) && !empty($m['person_id'])) { $pids[] = (int) $m['person_id']; } } }
+        $priv = array_filter(ep_persons($pdo, array_merge($pids, ep_people_of($pdo, array_column($images, 'media_id'), $id))), static fn($p) => $p['private']);
+        $privNames = array_values(array_filter(array_map(static fn($p) => $p['name'], $priv), static fn($n) => mb_strlen($n) >= 3));
+        if (ep_kiosk() && is_array($settings['people'] ?? null)) {
+            $folded = array_map('ep_fold', $privNames);
+            foreach ($settings['people'] as $k => $list) { foreach ((array) $list as $i => $m) { if (!is_array($m)) { continue; }
+                $hit = (!empty($m['person_id']) && isset($priv[(int) $m['person_id']])) || array_filter($folded, static fn($n) => $n !== '' && str_contains(ep_fold((string) ($m['label'] ?? '')), $n));
+                if ($hit) { $settings['people'][$k][$i] = ['label' => '', 'person_id' => 0, 'priv' => 1] + $m; $settings['people'][$k][$i]['label'] = ''; $settings['people'][$k][$i]['person_id'] = 0; } } }
+            $privNames = [];
+        }
+    } catch (Throwable $_) {}
+    return ['inquiry' => ['id' => (int) $q['id'], 'title' => (string) $q['title'], 'status' => (string) $q['status'], 'notes' => (string) $q['notes'], 'settings' => $settings, 'private_names' => $privNames,
+        'reopen' => (static function () use ($pdo, $q) { try { return ep_reopen_hints($pdo, $q); } catch (Throwable $_) { return []; } })(),
         'conclusion' => $conclusion, 'is_private' => (int) $q['is_private'], 'created_at' => (string) $q['created_at'], 'updated_at' => (string) $q['updated_at'],
         'images' => $images, 'clues' => $clues, 'hypotheses' => $hyps, 'links' => ep_links($pdo, $id), 'journal' => $jr->fetchAll(PDO::FETCH_ASSOC)],
         'privacy' => ep_privacy($pdo, $id), 'kiosk' => ep_kiosk()];
@@ -651,6 +675,184 @@ function ep_family_places(PDO $pdo): array
     return ['places' => array_map(static fn($r) => ['id' => (int) $r['id'], 'name' => (string) $r['name'], 'lat' => $r['latitude'] !== null ? (float) $r['latitude'] : null, 'lon' => $r['longitude'] !== null ? (float) $r['longitude'] : null, 'n' => (int) $r['n']], $rows)];
 }
 
+/* ═════════ la suite (heritage-enquete-photo-suite.js) : ce jour-là, métiers, occasions, tournée, du nouveau ═════════ */
+
+/** une date au jour près dans un texte (« 14 JUL 1911 », « 14 juillet 1911 », « 1911-07-14 », « 14/07/1911 ») → [an, mois, jour] */
+function ep_day_of(string $t): ?array
+{
+    $t = mb_strtolower(trim($t));
+    if (preg_match('/\b(\d{4})-(\d{1,2})-(\d{1,2})\b/', $t, $m)) { return [(int) $m[1], (int) $m[2], (int) $m[3]]; }
+    if (preg_match('~\b(\d{1,2})[/.](\d{1,2})[/.](\d{4})\b~', $t, $m)) { return [(int) $m[3], (int) $m[2], (int) $m[1]]; }
+    $months = ['jan' => 1, 'janv' => 1, 'janvier' => 1, 'feb' => 2, 'fev' => 2, 'févr' => 2, 'février' => 2, 'fevrier' => 2, 'mar' => 3, 'mars' => 3, 'apr' => 4, 'avr' => 4, 'avril' => 4, 'may' => 5, 'mai' => 5,
+        'jun' => 6, 'juin' => 6, 'jul' => 7, 'juil' => 7, 'juillet' => 7, 'aug' => 8, 'aout' => 8, 'août' => 8, 'sep' => 9, 'sept' => 9, 'septembre' => 9, 'oct' => 10, 'octobre' => 10, 'nov' => 11, 'novembre' => 11, 'dec' => 12, 'déc' => 12, 'décembre' => 12, 'decembre' => 12];
+    if (preg_match('/\b(\d{1,2})(?:er)?\s+([a-zéû]+)\.?\s+(\d{4})\b/u', $t, $m) && isset($months[$m[2]])) { return [(int) $m[3], $months[$m[2]], (int) $m[1]]; }
+    return null;
+}
+
+/** 📅 « Ce jour-là » : les événements de l'arbre ce jour-là (même date) et ce mois-là (même mois, même année) — vivants et fiches
+ *  confidentielles retirés en consultation */
+function ep_that_day(PDO $pdo, array $g): array
+{
+    $dt = ep_day_of((string) ($g['date'] ?? ''));
+    if (!$dt || !checkdate($dt[1], $dt[2], $dt[0])) { throw new LcndaBadInput(i18n_t('Choisis une date au jour près.')); }
+    [$y, $mo, $d] = $dt; $kiosk = ep_kiosk();
+    $rows = $pdo->prepare("SELECT e.id, e.person_id, e.date_text, e.year, t.label, t.gedcom_tag, f.partner1_id, f.partner2_id, p.name AS place FROM events e JOIN event_types t ON t.id=e.event_type_id
+        LEFT JOIN families f ON f.id=e.family_id LEFT JOIN places p ON p.id=e.place_id WHERE e.year=? LIMIT 3000");
+    $rows->execute([$y]);
+    $hits = [];
+    foreach ($rows->fetchAll(PDO::FETCH_ASSOC) as $r) { $x = ep_day_of((string) $r['date_text']); if ($x && $x[1] === $mo) { $r['_d'] = $x[2]; $hits[] = $r; } }
+    $pp = ep_persons($pdo, array_filter(array_merge(array_column($hits, 'person_id'), array_column($hits, 'partner1_id'), array_column($hits, 'partner2_id'))));
+    $day = []; $month = [];
+    foreach ($hits as $r) {
+        $who = array_values(array_filter(array_map(static fn($x) => $pp[(int) $x] ?? null, [$r['person_id'], $r['partner1_id'], $r['partner2_id']])));
+        if ($kiosk && array_filter($who, static fn($p) => $p['private'])) { continue; }
+        $row = ['id' => (int) $r['id'], 'label' => (string) $r['label'], 'tag' => (string) $r['gedcom_tag'], 'date' => (string) $r['date_text'], 'day' => (int) $r['_d'], 'place' => (string) ($r['place'] ?? ''),
+            'who' => array_map(static fn($p) => ['id' => $p['id'], 'name' => $p['name'], 'private' => $p['private']], $who)];
+        if ((int) $r['_d'] === $d) { $day[] = $row; } else { $month[] = $row; }
+    }
+    usort($month, static fn($a, $b) => $a['day'] <=> $b['day']);
+    return ['date' => sprintf('%04d-%02d-%02d', $y, $mo, $d), 'day' => array_slice($day, 0, 30), 'month' => array_slice($month, 0, 40)];
+}
+
+/** 👔 les métiers de l'arbre qui contiennent un de ces mots (événements « profession » OCCU, recensements) */
+function ep_occupations(PDO $pdo, array $g): array
+{
+    $words = array_values(array_filter(array_map(static fn($w) => ep_fold(ep_text($w, 40)), explode('|', (string) ($g['words'] ?? ''))), static fn($w) => mb_strlen($w) >= 3));
+    $words = array_slice($words, 0, 60); if (!$words) { return ['people' => []]; }
+    $kiosk = ep_kiosk(); $found = [];
+    $match = static function (string $txt) use ($words): string { $f = ' ' . ep_fold($txt) . ' '; foreach ($words as $w) { if (str_contains($f, ' ' . $w)) { return $w; } } return ''; };
+    try { foreach ($pdo->query("SELECT e.person_id, COALESCE(NULLIF(e.description,''), e.title) AS occ FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE t.gedcom_tag='OCCU' AND e.person_id IS NOT NULL LIMIT 20000") as $r) {
+        if (($w = $match((string) $r['occ'])) !== '') { $found[(int) $r['person_id']] ??= ['occupation' => (string) $r['occ'], 'word' => $w]; } } } catch (Throwable $_) {}
+    try { foreach ($pdo->query("SELECT person_id, occupation FROM census_members WHERE person_id IS NOT NULL AND COALESCE(occupation,'')<>'' LIMIT 20000") as $r) { // les recensements
+        if (($w = $match((string) $r['occupation'])) !== '') { $found[(int) $r['person_id']] ??= ['occupation' => (string) $r['occupation'], 'word' => $w]; } } } catch (Throwable $_) {}
+    $out = [];
+    foreach (ep_persons($pdo, array_slice(array_keys($found), 0, 400)) as $p) {
+        if ($kiosk && $p['private']) { continue; }
+        $out[] = ['id' => $p['id'], 'name' => $p['name'], 'birth' => $p['birth'], 'death' => $p['death'], 'private' => $p['private']] + $found[$p['id']];
+    }
+    usort($out, static fn($a, $b) => strcmp($a['name'], $b['name']));
+    return ['people' => array_slice($out, 0, 200)];
+}
+
+/** 🎞 les occasions de photo : les événements de l'arbre dans la fenêtre de dates (mariage, communion, baptême, décès, service),
+ *  les noces d'or (mariage + 50 ans) et les conscrits (garçons nés 20 ans avant) — les proches des gens de la photo d'abord */
+function ep_occasions(PDO $pdo, int $id, array $g): array
+{
+    ep_inquiry_row($pdo, $id);
+    $from = ep_year($g['from'] ?? null); $to = ep_year($g['to'] ?? null) ?? $from; $from = $from ?? $to;
+    if (!$from) { throw new LcndaBadInput(i18n_t('Il faut d’abord une fourchette de dates (la frise de la photo).')); }
+    if ($to - $from > 60) { $to = $from + 60; }
+    $kiosk = ep_kiosk();
+    $s = $pdo->prepare('SELECT media_id FROM photo_inquiry_images WHERE inquiry_id=?'); $s->execute([$id]);
+    $onPhoto = ep_people_of($pdo, $s->fetchAll(PDO::FETCH_COLUMN), $id); $near = ep_family_of($pdo, $onPhoto) + array_fill_keys($onPhoto, 'photo');
+    $q = static function (array $tags, int $a, int $b) use ($pdo): array {
+        $in = implode(',', array_map(static fn($t) => $pdo->quote($t), $tags));
+        return $pdo->query("SELECT e.id, e.person_id, e.year, e.date_text, t.gedcom_tag, t.label, f.partner1_id, f.partner2_id FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN families f ON f.id=e.family_id
+            WHERE t.gedcom_tag IN ($in) AND e.year BETWEEN $a AND $b ORDER BY e.year LIMIT 1500")->fetchAll(PDO::FETCH_ASSOC);
+    };
+    $sets = ['mariage' => [$q(['MARR'], $from, $to), 0], 'noces' => [$q(['MARR'], $from - 50, $to - 50), 50], 'communion' => [$q(['FCOM', 'CONF'], $from, $to), 0], 'bapteme' => [$q(['BAPM', 'CHR'], $from, $to), 0],
+        'deces' => [$q(['DEAT', 'BURI'], $from, $to), 0], 'service' => [$q(['_MILT'], $from, $to), 0], 'conscrits' => [$q(['BIRT'], $from - 21, $to - 20), 20]];
+    $ids = []; foreach ($sets as [$rows]) { foreach ($rows as $r) { foreach (['person_id', 'partner1_id', 'partner2_id'] as $k) { if ($r[$k]) { $ids[] = (int) $r[$k]; } } } }
+    $pp = ep_persons($pdo, $ids); $out = [];
+    foreach ($sets as $k => [$rows, $add]) {
+        $list = [];
+        foreach ($rows as $r) {
+            $who = array_values(array_filter(array_map(static fn($x) => $pp[(int) $x] ?? null, [$r['person_id'], $r['partner1_id'], $r['partner2_id']])));
+            if (!$who || ($kiosk && array_filter($who, static fn($p) => $p['private']))) { continue; }
+            if ($k === 'conscrits' && ($who[0]['gender'] ?? '') !== 'male') { continue; }
+            $close = (bool) array_filter($who, static fn($p) => isset($near[$p['id']]));
+            $list[] = ['id' => (int) $r['id'], 'year' => (int) $r['year'] + $add, 'event_year' => (int) $r['year'], 'date' => (string) $r['date_text'], 'label' => (string) $r['label'], 'close' => $close,
+                'who' => array_map(static fn($p) => ['id' => ep_person_out($p)['id'], 'name' => ep_person_out($p)['name'], 'private' => $p['private']], $who)];
+        }
+        usort($list, static fn($a, $b) => [$b['close'], $a['year']] <=> [$a['close'], $b['year']]);
+        $out[$k] = array_slice($list, 0, 25);
+    }
+    return ['from' => $from, 'to' => $to, 'occasions' => $out, 'family' => (bool) $onPhoto];
+}
+
+/** 🗺 la tournée d'un photographe de la liste : ses photos placées (indices « photographe » des enquêtes, éditeur des cartes
+ *  postales), avec leur année — regroupées par année sur la mini-carte */
+function ep_photographer_route(PDO $pdo, array $g): array
+{
+    $pid = safe_int($g['pid'] ?? 0);
+    $s = $pdo->prepare('SELECT * FROM photo_photographers WHERE id=?'); $s->execute([$pid]); $ph = $s->fetch(PDO::FETCH_ASSOC);
+    if (!$ph) { throw new RuntimeException(i18n_t('Introuvable.')); }
+    $name = ep_fold((string) $ph['name']); $short = trim((string) preg_replace('/^(phot|photo|photographie|cliche|edit|ed)\s+/', '', $name));
+    $kiosk = ep_kiosk(); $hasPlace = (bool) $pdo->query("SELECT 1 FROM pragma_table_info('media') WHERE name='place_id'")->fetchColumn();
+    $same = static fn(string $n) => ($f = ep_fold($n)) !== '' && ($f === $name || ($short !== '' && mb_strlen($short) >= 4 && str_contains($f, $short)));
+    $media = []; // media_id => [inquiry_id, year]
+    $cl = $pdo->query("SELECT c.inquiry_id, c.data_json, c.date_from, c.date_to, q.conclusion_json, q.is_private FROM photo_inquiry_clues c JOIN photo_inquiries q ON q.id=c.inquiry_id WHERE c.certainty<>'refuted' AND (c.data_json LIKE '%\"photographer\"%' OR c.data_json LIKE '%\"publisher\"%' OR c.data_json LIKE '%\"studio\"%') LIMIT 5000");
+    $im = $pdo->prepare('SELECT media_id FROM photo_inquiry_images WHERE inquiry_id=?');
+    foreach ($cl->fetchAll(PDO::FETCH_ASSOC) as $c) {
+        if ($kiosk && (int) $c['is_private'] === 1) { continue; }
+        $d = ep_dec($c['data_json']); $hit = false; foreach (['photographer', 'publisher', 'studio'] as $k) { if (is_string($d[$k] ?? null) && $same($d[$k])) { $hit = true; } } if (!$hit) { continue; }
+        $conc = ep_dec($c['conclusion_json']); $y = ep_year($conc['date']['from'] ?? null) ?? ep_year($conc['date']['to'] ?? null);
+        $im->execute([(int) $c['inquiry_id']]); foreach ($im->fetchAll(PDO::FETCH_COLUMN) as $m) { $media[(int) $m] ??= ['inquiry_id' => (int) $c['inquiry_id'], 'year' => $y, 'place_id' => (int) ($conc['place']['place_id'] ?? 0) ?: null]; }
+    }
+    try { foreach ($pdo->query("SELECT media_id, publisher, sent_date FROM postcards WHERE COALESCE(publisher,'')<>'' LIMIT 20000") as $r) { if ($r['media_id'] && $same((string) $r['publisher'])) { $media[(int) $r['media_id']] ??= ['inquiry_id' => 0, 'year' => null, 'place_id' => null]; } } } catch (Throwable $_) {}
+    $out = []; $pl = $pdo->prepare('SELECT name, latitude, longitude FROM places WHERE id=? AND latitude IS NOT NULL AND longitude IS NOT NULL');
+    foreach (array_slice($media, 0, 600, true) as $mid => $x) {
+        try { $m = ep_media_row($pdo, $mid); } catch (Throwable $_) { continue; }
+        $placeId = $x['place_id'] ?: ($hasPlace && !empty($m['place_id']) ? (int) $m['place_id'] : null); if (!$placeId) { continue; }
+        $pl->execute([$placeId]); $p = $pl->fetch(PDO::FETCH_ASSOC); if (!$p) { continue; }
+        $y = $x['year'] ?? (preg_match('/\b(1[5-9]\d\d|20\d\d)\b/', (string) $m['date_text'], $mm) ? (int) $mm[1] : null);
+        $out[] = ['media_id' => $mid, 'title' => (string) $m['title'], 'filename' => (string) ($m['thumbnail'] ?: $m['filename']), 'place' => (string) $p['name'], 'lat' => (float) $p['latitude'], 'lon' => (float) $p['longitude'], 'year' => $y, 'inquiry_id' => $x['inquiry_id']];
+    }
+    return ['photographer' => ['id' => (int) $ph['id'], 'name' => (string) $ph['name'], 'city' => (string) $ph['city'], 'year_from' => $ph['year_from'] !== null ? (int) $ph['year_from'] : null, 'year_to' => $ph['year_to'] !== null ? (int) $ph['year_to'] : null], 'photos' => $out, 'unplaced' => count($media) - count($out)];
+}
+
+/** ↺ du nouveau pour une enquête terminée (calculé à la demande, sans tâche de fond) : une autre enquête au même photographe
+ *  ou au même lieu a reçu une image depuis, un pack de données a été installé depuis, un événement de l'arbre dans la fenêtre
+ *  de dates a été ajouté depuis → [{k, label}] */
+function ep_reopen_hints(PDO $pdo, array $q, ?array $packs = null): array
+{
+    if ((string) $q['status'] !== 'done') { return []; }
+    $since = (string) $q['updated_at']; $sinceTs = strtotime($since . ' UTC') ?: 0; $id = (int) $q['id']; $out = [];
+    // le photographe et les lieux de l'enquête
+    $names = []; $places = [];
+    $s = $pdo->prepare("SELECT data_json, place_id, date_from, date_to FROM photo_inquiry_clues WHERE inquiry_id=? AND certainty<>'refuted'"); $s->execute([$id]); $clues = $s->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($clues as $c) { $d = ep_dec($c['data_json']); foreach (['photographer', 'publisher', 'studio'] as $k) { if (is_string($d[$k] ?? null) && ($f = ep_fold($d[$k])) !== '') { $names[$f] = (string) $d[$k]; } } if ($c['place_id']) { $places[(int) $c['place_id']] = 1; } }
+    $conc = ep_dec($q['conclusion_json']); if (!empty($conc['place']['place_id'])) { $places[(int) $conc['place']['place_id']] = 1; }
+    if ($names || $places) {
+        $o = $pdo->prepare("SELECT DISTINCT i.inquiry_id, q.title FROM photo_inquiry_images i JOIN photo_inquiries q ON q.id=i.inquiry_id WHERE i.inquiry_id<>? AND i.added_at>? LIMIT 200"); $o->execute([$id, $since]);
+        foreach ($o->fetchAll(PDO::FETCH_ASSOC) as $r) {
+            $oc = $pdo->prepare("SELECT data_json, place_id FROM photo_inquiry_clues WHERE inquiry_id=? AND certainty<>'refuted'"); $oc->execute([(int) $r['inquiry_id']]); $hit = '';
+            foreach ($oc->fetchAll(PDO::FETCH_ASSOC) as $c) { $d = ep_dec($c['data_json']); foreach (['photographer', 'publisher', 'studio'] as $k) { if (is_string($d[$k] ?? null) && isset($names[ep_fold($d[$k])])) { $hit = 'photographer'; } } if ($c['place_id'] && isset($places[(int) $c['place_id']])) { $hit = $hit ?: 'place'; } }
+            $oq = $pdo->prepare('SELECT conclusion_json FROM photo_inquiries WHERE id=?'); $oq->execute([(int) $r['inquiry_id']]); $op = (int) (ep_dec((string) $oq->fetchColumn())['place']['place_id'] ?? 0); if ($op && isset($places[$op])) { $hit = $hit ?: 'place'; }
+            if ($hit) { $out[] = ['k' => 'photo', 'label' => $hit === 'photographer' ? i18n_t('Une nouvelle photo du même photographe (« {t} »)', ['t' => (string) $r['title']]) : i18n_t('Une nouvelle photo du même lieu (« {t} »)', ['t' => (string) $r['title']]), 'inquiry_id' => (int) $r['inquiry_id']]; break; }
+        }
+    }
+    // un pack de données installé depuis
+    foreach ($packs ?? ep_packs() as $p) { if ($p['mtime'] > $sinceTs) { $out[] = ['k' => 'pack', 'label' => i18n_t('Des données installées depuis : {p}', ['p' => $p['label']])]; break; } }
+    // un événement de l'arbre ajouté depuis, dans la fenêtre de dates (pour les gens de la photo et leurs proches, ou aux lieux de l'enquête)
+    $from = null; $to = null; foreach ($clues as $c) { if ($c['date_from'] !== null && ($from === null || (int) $c['date_from'] > $from)) { $from = (int) $c['date_from']; } if ($c['date_to'] !== null && ($to === null || (int) $c['date_to'] < $to)) { $to = (int) $c['date_to']; } }
+    $from = $from ?? ep_year($conc['date']['from'] ?? null); $to = $to ?? ep_year($conc['date']['to'] ?? null) ?? $from; $from = $from ?? $to;
+    if ($from) {
+        $im = $pdo->prepare('SELECT media_id FROM photo_inquiry_images WHERE inquiry_id=?'); $im->execute([$id]);
+        $onPhoto = ep_people_of($pdo, $im->fetchAll(PDO::FETCH_COLUMN), $id); $ids = array_keys(ep_family_of($pdo, $onPhoto) + array_flip($onPhoto));
+        $or = [];
+        if ($ids) { $in = implode(',', array_map('intval', $ids)); $or[] = "e.person_id IN ($in) OR f.partner1_id IN ($in) OR f.partner2_id IN ($in)"; }
+        if ($places) { $or[] = 'e.place_id IN (' . implode(',', array_map('intval', array_keys($places))) . ')'; }
+        $where = $or ? '(' . implode(' OR ', $or) . ')' : '';
+        if ($where !== '') {
+            $e = $pdo->prepare("SELECT t.label, e.date_text FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN families f ON f.id=e.family_id WHERE $where AND e.year BETWEEN ? AND ? AND e.created_at>? ORDER BY e.id DESC LIMIT 1");
+            $e->execute([$from - 1, $to + 1, $since]);
+            if ($r = $e->fetch(PDO::FETCH_ASSOC)) { $out[] = ['k' => 'event', 'label' => i18n_t('Un nouvel événement dans l’arbre : {e}', ['e' => trim($r['label'] . ' ' . $r['date_text'])])]; }
+        }
+    }
+    return $out;
+}
+/** les packs de données installés et leur date (météo d'autrefois, patrimoine, lieux-dits, histoire locale) */
+function ep_packs(): array
+{
+    static $memo = null; if ($memo !== null) { return $memo; }
+    $out = [];
+    try { require_once __DIR__ . '/meteo.php'; foreach (meteo_files() as $f) { $out[] = ['label' => i18n_t('🌦 Météo d’autrefois'), 'mtime' => (int) $f['mtime']]; } } catch (Throwable $_) {}
+    try { require_once __DIR__ . '/lieux_patrimoine.php'; foreach (glob(lp_dir() . '/*.sqlite') ?: [] as $f) { $out[] = ['label' => str_starts_with(basename($f), 'patrimoine') ? i18n_t('⛪ Patrimoine') : i18n_t('🏷 Lieux-dits'), 'mtime' => (int) filemtime($f)]; } } catch (Throwable $_) {}
+    try { require_once __DIR__ . '/histoire.php'; $p = hist_pack_path(); if (is_file($p)) { $out[] = ['label' => i18n_t('🗓 Histoire locale'), 'mtime' => (int) filemtime($p)]; } } catch (Throwable $_) {}
+    return $memo = $out;
+}
+
 /** 🧱 toutes les photos sans lieu ou sans date, rangées par avancement (nombre d'indices) */
 function ep_wall(PDO $pdo): array
 {
@@ -826,6 +1028,7 @@ function ep_clue_save(PDO $pdo, array $d): array
     if ($v['place_id']) { $s = $pdo->prepare('SELECT 1 FROM places WHERE id=?'); $s->execute([$v['place_id']]); if (!$s->fetchColumn()) { $v['place_id'] = null; } }
     if ($old) {
         $pdo->prepare('UPDATE photo_inquiry_clues SET ' . implode(',', array_map(static fn($k) => "$k=?", array_keys($v))) . ', updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([...array_values($v), $cid]);
+        if ((string) $old['certainty'] !== $cert) { ep_journal_add($pdo, $id, i18n_t('⚖ Certitude de l’indice {n}', ['n' => (int) $old['num']]), ep_cert_label((string) $old['certainty']) . ' → ' . ep_cert_label($cert) . ' · « ' . mb_substr($v['text'], 0, 120) . ' »'); }
     } else {
         $num = (int) $pdo->query('SELECT COALESCE(MAX(num), 0) + 1 FROM photo_inquiry_clues WHERE inquiry_id=' . $id)->fetchColumn();
         $cols = ['inquiry_id', 'num', ...array_keys($v)];
@@ -902,7 +1105,7 @@ function ep_link_delete(PDO $pdo, array $d): array
 
 function ep_conclusion(PDO $pdo, array $d): array
 {
-    $id = safe_int($d['id'] ?? 0); ep_inquiry_row($pdo, $id);
+    $id = safe_int($d['id'] ?? 0); $before = ep_dec(ep_inquiry_row($pdo, $id)['conclusion_json']);
     $c = is_array($d['conclusion'] ?? null) ? $d['conclusion'] : [];
     $out = [];
     if (is_array($c['place'] ?? null)) { $p = $c['place']; $pid = safe_int($p['place_id'] ?? 0);
@@ -914,7 +1117,26 @@ function ep_conclusion(PDO $pdo, array $d): array
         if ($out['date']['certainty'] === 'refuted') { $out['date']['certainty'] = 'supposed'; } }
     if (isset($c['text'])) { $out['text'] = ep_text($c['text'], 4000, true); }
     $pdo->prepare('UPDATE photo_inquiries SET conclusion_json=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([ep_json($out), $id]);
+    ep_journal_conclusion($pdo, $id, $before, $out, safe_int($d['because'] ?? 0));
     return ['ok' => true, 'conclusion' => $out];
+}
+/** 📜 « Ce qui a changé ma conclusion » : chaque changement du lieu, de la date ou de leur certitude va au journal de l'enquête
+ *  (« ⚖ … » : de → à, et l'indice qui l'a fait changer) — pas de table de plus */
+function ep_cert_label(string $c): string { return i18n_t(['proven' => 'Prouvé', 'probable' => 'Probable', 'supposed' => 'Supposé', 'refuted' => 'Réfuté'][$c] ?? 'Supposé'); }
+function ep_journal_conclusion(PDO $pdo, int $id, array $old, array $new, int $because = 0): void
+{
+    $clue = '';
+    if ($because) { $s = $pdo->prepare('SELECT num, text FROM photo_inquiry_clues WHERE id=? AND inquiry_id=?'); $s->execute([$because, $id]); if ($c = $s->fetch(PDO::FETCH_ASSOC)) { $clue = i18n_t('à cause de l’indice {n} « {t} »', ['n' => (int) $c['num'], 't' => mb_substr((string) $c['text'], 0, 120)]); } }
+    $pname = static function (?array $p) use ($pdo): string { if (!$p) { return ''; } $n = (string) ($p['name'] ?? ''); if ($n === '' && !empty($p['place_id'])) { $s = $pdo->prepare('SELECT name FROM places WHERE id=?'); $s->execute([(int) $p['place_id']]); $n = (string) $s->fetchColumn(); } return $n; };
+    $side = static fn(string $label, string $cert) => $label === '' ? i18n_t('rien') : $label . ' (' . ep_cert_label($cert) . ')';
+    foreach (['place' => i18n_t('⚖ Conclusion : le lieu'), 'date' => i18n_t('⚖ Conclusion : la date')] as $k => $what) {
+        $a = is_array($old[$k] ?? null) ? $old[$k] : null; $b = is_array($new[$k] ?? null) ? $new[$k] : null;
+        $la = $k === 'place' ? $pname($a) : (string) ($a['text'] ?? ''); $lb = $k === 'place' ? $pname($b) : (string) ($b['text'] ?? '');
+        $ca = (string) ($a['certainty'] ?? ''); $cb = (string) ($b['certainty'] ?? '');
+        $same = ($k === 'place' ? (int) ($a['place_id'] ?? 0) === (int) ($b['place_id'] ?? 0) && $la === $lb : $la === $lb) && $ca === $cb;
+        if ($same || ($la === '' && $lb === '')) { continue; }
+        ep_journal_add($pdo, $id, $what, $side($la, $ca) . ' → ' . $side($lb, $cb) . ($clue !== '' ? ' · ' . $clue : ''));
+    }
 }
 
 /** 📍 « Mettre ce lieu sur la photo » : le lieu et la date de chaque image, avec la certitude et l'enquête comme source (hypothèse
@@ -1108,6 +1330,10 @@ function ep_dispatch(PDO $pdo, string $action, bool $isWrite, array $payload): n
                 'family_places' => ep_family_places($pdo),
                 'person' => ep_for_person($pdo, safe_int($_GET['person_id'] ?? 0)),
                 'place' => ep_for_place($pdo, safe_int($_GET['place_id'] ?? 0)),
+                'that_day' => ep_that_day($pdo, $_GET),
+                'occupations' => ep_occupations($pdo, $_GET),
+                'occasions' => ep_occasions($pdo, safe_int($_GET['id'] ?? 0), $_GET),
+                'photographer_route' => ep_photographer_route($pdo, $_GET),
                 default => throw new LcndaBadInput('Opération inconnue.'),
             });
         }

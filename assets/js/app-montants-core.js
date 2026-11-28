@@ -5,6 +5,7 @@
  *   scan(texte)               [{s, e, type: 'money' | 'measure', raw, norm}] : « la somme de trois cents livres tournois »,
  *                             « douze livres dix sols », « un arpent et demi de pré », « cinq pieds deux pouces »
  *   explain(trouvé, {year, region, wageSols, calendarMore}) → {title, lines: [texte], source, url, convert: {tab, value}}
+ *                             (une mesure qui variait d'une région à l'autre : une ligne le dit, avec la région prise)
  *   prices(année, prix)       les prix sourcés de assets/data/prix-reference.json qui tombent cette année-là
  *   loadPrices()              lit ce fichier (livré avec l'app) une fois → LCNDA_EXT.prixReference
  * Un mot comme « livre » suivi de « de pain », « de beurre »… est un poids : il n'est pas pris pour une somme.
@@ -97,6 +98,8 @@
         const lines = [i18n('{a} = {m}', {a: m.label, m: m.metric}) + (m.approx ? ' ' + i18n('(environ)') : '')];
         if (m.fromRegion) lines.push(i18n('Mesure de : {r}', {r: m.fromRegion}));
         (m.elsewhere || []).slice(0, 2).forEach(x => lines.push(`${x.label} (${x.region}) : ${x.metric}`));
+        // la même unité ne valait pas pareil partout : on le dit (la région prise : celle du lieu de l'acte, sinon celle du Convertisseur)
+        if ((m.elsewhere || []).length) lines.push(i18n('Cette mesure changeait d’une région à l’autre : la valeur donnée est celle de « {r} ».', {r: m.fromRegion || m.region}));
         return {title: m.label, lines, source: m.src || '', url: m.url || '', convert: {tab: 'mesures', value: hit.norm}, base: m.base, kind: m.kind};
     }
 

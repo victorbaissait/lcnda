@@ -174,11 +174,14 @@
                 ${sec('abc', `🔤 ${esc(i18n('Alphabet de l’époque'))}`, '')}
                 ${sec('glo', `📖 ${esc(i18n('Mon glossaire'))}`, '')}
                 ${sec('sign', `✍️ ${esc(i18n('Signatures'))}`, '')}
+                ${(ext.txAidesMore || []).map(x => sec(x.id, `${x.icon} ${esc(x.title())}`, '')).join('')}
                 ${sec('prog', `📊 ${esc(i18n('Ma progression'))}`, '')}`;
             paintModel(); paintGlo();
         }
         const setOpen = on => { panel.hidden = !on; btn.classList.toggle('is-active', on); btn.setAttribute('aria-pressed', String(on)); try { localStorage.setItem(OPEN_KEY, on ? '1' : '0'); } catch (_) {} if (on) paintPanel(); };
-        plug.aides = {toggle: () => setOpen(panel.hidden), isOn: () => !panel.hidden, open: () => setOpen(true)};
+        plug.aides = {toggle: () => setOpen(panel.hidden), isOn: () => !panel.hidden, open: () => setOpen(true),
+            /** une section ouverte (les autres repliées), le panneau ouvert ; elle se redessine */
+            openSec: id => { if (panel.hidden) setOpen(true); const d = panel.querySelector(`[data-txh-sec="${id}"]`); if (!d) return null; if (d.open) d.dispatchEvent(new Event('toggle')); else d.open = true; d.scrollIntoView?.({block: 'nearest'}); return d; }, panel};
         btn.addEventListener('click', () => plug.aides.toggle());
         panel.addEventListener('toggle', e => {
             const d = e.target; if (!d.open || !d.matches?.('[data-txh-sec]')) return;
@@ -186,6 +189,7 @@
             if (id === 'abc' && !box.dataset.done && ext.readingAid?.mount) { box.dataset.done = '1'; ext.readingAid.mount(box, {tab: 'lettres', year: String(curYear() || '')}); }
             if (id === 'abc' && !ext.readingAid?.mount) box.innerHTML = `<p class="ui-hint">${esc(i18n('Outils → Aide à la lecture → Les lettres.'))}</p>`;
             if (id === 'sign') paintSigns(); if (id === 'prog') paintProgress(); if (id === 'glo') paintGlo();
+            const more = (ext.txAidesMore || []).find(x => x.id === id); if (more) { try { more.paint(box, plug); } catch (err) { console.error(err); } } // 🧰 sections en plus (heritage-atelier-plus2.js)
         }, true);
         panel.addEventListener('change', e => {
             if (e.target.matches('[data-txh-era]')) { era = e.target.value; paintModel(); }

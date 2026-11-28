@@ -80,6 +80,9 @@ $pdo->exec("INSERT INTO persons(id,first_name,last_name,gender,living_status) VA
 $tag = function ($t) use ($pdo) { $s = $pdo->prepare('SELECT id FROM event_types WHERE gedcom_tag=? ORDER BY id LIMIT 1'); $s->execute([$t]); return (int) $s->fetchColumn(); };
 $ev = $pdo->prepare("INSERT INTO events(scope, person_id, event_type_id, year, date_text, place_id) VALUES('person',?,?,?,?,?)");
 foreach ([[4, 'BIRT', 1904, 1], [4, 'DEAT', 1980, 2], [5, 'BIRT', 1850, 2], [5, 'DEAT', 1900, 2], [3, 'BIRT', 1902, 2], [3, 'DEAT', 1970, 2]] as [$pid, $t, $y, $pl]) { $ev->execute([$pid, $tag($t), $y, (string) $y, $pl]); }
+// la suite : 📅 Lucie DURAND baptisée le 14 juillet 1911 à Brive (ce jour-là, occasions) ; 👔 Paul DURAND, forgeron (tenues de métier)
+$pdo->exec("INSERT INTO persons(id,first_name,last_name,gender,living_status) VALUES(6,'Lucie','DURAND','female','deceased')");
+$ev->execute([6, $tag('CHR'), 1911, '14 JUL 1911', 1]); $ev->execute([3, $tag('OCCU'), 1925, '1925', 2]); $pdo->exec("UPDATE events SET description='Forgeron' WHERE id=" . (int) $pdo->lastInsertId());
 // 🏗 🧭 une fiche d'édifice datée, un peu à l'est de Brive (≈ 0,8 km)
 require_once 'lib/edifices.php'; ed_tables($pdo);
 $pdo->exec("INSERT INTO sites(kind, name, place_id, lat, lon, built_from) VALUES('eglise', 'Gare de Brive', 1, 45.16, 1.54, 1860)");
@@ -291,9 +294,105 @@ echo json_encode(['m' => $m]);`.replace('getenv(\'EXIF_JPG\')', `'${jpegWithExif
         // chaque aide de plus s'ouvre sans erreur
         for (const k of ['deuxtirages', 'g:grain', 'g:interieur', 'g:toits', 'decor', 'animaux', 'distances', 'histoire', 'habit', 'provenance', 'mains', 'atelier', 'croissance', 'rapport', 'carte', 'tableau', 'mesurer', 'profil', 'canaux', 'relief']) { await PL(k); await sleep(450); await closeSub(); await sleep(100); }
         await p.evaluate(() => { window.LCNDA_EXT.enquetePhoto.current.togglePanel(false); window.LCNDA_EXT.enquetePhoto.current.setTool('hand'); });
+
+        /* ═════ la suite (heritage-enquete-photo-suite.js) : les 11 aides ═════ */
+        out.suite = {};
+        const curImgId = () => p.evaluate(() => window.LCNDA_EXT.enquetePhoto.current.img.id);
+        const canvasSig = sel => p.evaluate(s2 => { const c = document.querySelector(s2); if (!c) return ''; const d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data; let h = 0, n = 0; for (let i = 0; i < d.length; i += 97) { h = (h * 31 + d[i]) % 1000000007; if (d[i]) n++; } return `${h}:${n}`; }, sel);
+        // 1. 🔍 double loupe : la même zone sur A et B ; promener la loupe sur A déplace aussi celle de B (positions liées) ; un indice « compare »
+        await PL('loupe2'); await p.waitForSelector('dialog.h-modal[open] [data-l2lens="b"]'); await sleep(900);
+        out.suite.loupe = { canvases: await p.evaluate(() => document.querySelectorAll('dialog.h-modal[open] .ep2-loupes canvas').length), b0: await canvasSig('dialog.h-modal[open] [data-l2lens="b"]') };
+        { const r = await p.$eval('dialog.h-modal[open] [data-l2over="a"]', e => { const q = e.getBoundingClientRect(); return { x: q.left, y: q.top, w: q.width, h: q.height }; }); await p.mouse.click(r.x + r.w * 0.82, r.y + r.h * 0.3); await sleep(300); }
+        out.suite.loupe.b1 = await canvasSig('dialog.h-modal[open] [data-l2lens="b"]');
+        await p.click('dialog.h-modal[open] [data-l2r]'); await sleep(900); await closeSub();
+        // 2. ▦ grille de lecture : 3 × 3, deux cases cochées, gardées avec l'image ; 4 × 4 → 16 cases
+        await PL('grille'); await sleep(500);
+        out.suite.grid = { cells: await p.evaluate(d => document.querySelectorAll(`${d} .ep-view.is-cur .ep2-cell`).length, D) };
+        await p.click(`${D} .ep-view.is-cur [data-ep2-cell="0"]`); await sleep(150); await p.click(`${D} .ep-view.is-cur [data-ep2-cell="4"]`); await sleep(900);
+        out.suite.grid.bar = await p.evaluate(d => document.querySelector(`${d} .ep2-bar .ep2-gp`)?.textContent || '', D);
+        { const g = (await api('get', { id: inqId })).inquiry, id = await curImgId(); out.suite.grid.saved = g.settings.grids?.[id]; }
+        await p.click(`${D} .ep2-bar [data-ep2-n="4"]`); await sleep(300);
+        out.suite.grid.cells4 = await p.evaluate(d => document.querySelectorAll(`${d} .ep-view.is-cur .ep2-cell`).length, D);
+        await p.evaluate(d => document.querySelector(`${d} [data-ep2-gclose]`)?.click(), D); await sleep(300);
+        out.suite.grid.off = await p.evaluate(d => !document.querySelector(`${d} .ep2-cell`), D);
+        // 3. 🔢 numéroter : deux clics sur la photo → 1 et 2, la légende dessous ; le 2 relié à Marie LACOMBE (vivante) ; PNG avec légende
+        await PL('numeros'); await sleep(300);
+        { const r = await p.$eval(`${D} .ep-view.is-cur img.ep-photo`, e => { const q = e.getBoundingClientRect(); return { x: q.left, y: q.top, w: q.width, h: q.height }; });
+            await p.mouse.click(r.x + r.w * 0.3, r.y + r.h * 0.5); await sleep(500); await p.mouse.click(r.x + r.w * 0.6, r.y + r.h * 0.5); await sleep(500); }
+        out.suite.people = { pins: await p.evaluate(d => [...document.querySelectorAll(`${d} .ep-view.is-cur .ep2-pin`)].map(b => b.textContent), D), rows: await p.evaluate(d => document.querySelectorAll(`${d} [data-ep2-legend] [data-ep2-row]`).length, D) };
+        await p.fill(`${D} [data-ep2-legend] li:nth-child(1) [data-ep2-lab]`, 'inconnu'); await p.press(`${D} [data-ep2-legend] li:nth-child(1) [data-ep2-lab]`, 'Tab');
+        await p.fill(`${D} [data-ep2-legend] li:nth-child(2) [data-ep2-lab]`, 'Jean MAZAUD'); await p.press(`${D} [data-ep2-legend] li:nth-child(2) [data-ep2-lab]`, 'Tab'); await sleep(900);
+        out.suite.people.legendText = await p.evaluate(async () => { const S = window.LCNDA_EXT.enquetePhotoSuite, api = window.LCNDA_EXT.enquetePhoto.current.api(); return window.LCNDA_EP_CORE.legendLines((api.inq.settings.people[api.img.id] || []), {}).map(l => `${l.n} : ${l.text}`); });
+        // le 3 : Marie LACOMBE (vivante), reliée à sa fiche — jamais nommée en partage sans risque
+        await p.evaluate(async () => { const t = window.LCNDA_EXT.enquetePhoto.current, api = t.api(), id = api.img.id, L = (api.inq.settings.people[id] || []).slice(); L.push({ id: 'pm3', n: 3, x: 0.8, y: 0.4, label: '', person_id: 2, certainty: 'probable' }); api.inq.settings.people = { ...api.inq.settings.people, [id]: L }; await api.post('update', { id: api.inq.id, settings: api.inq.settings }); });
+        out.suite.people.png = await p.evaluate(async () => { const S = window.LCNDA_EXT.enquetePhotoSuite, api = window.LCNDA_EXT.enquetePhoto.current.api(), im = api.img; const cv = await S.legendCanvas(api, im, true); const a = await api.composite(im, { layers: false }); return { taller: cv.height > a.height, w: cv.width === a.width }; });
+        out.suite.people.safe = await p.evaluate(async () => { const api = window.LCNDA_EXT.enquetePhoto.current.api(), inq = (await api.get('get')).inquiry; const r = await api.get('face_people', { ids: '2' });
+            return window.LCNDA_EP_CORE.legendLines(inq.settings.people[api.img.id], { people: r.people, safe: true, privNames: inq.private_names }).map(l => l.text); });
+        out.suite.people.privNames = (await api('get', { id: inqId })).inquiry.private_names;
+        await p.evaluate(() => window.LCNDA_EXT.enquetePhotoSuite.togglePeople(window.LCNDA_EXT.enquetePhoto.current.api(), false)); await sleep(200);
+        // 4. 👻 silhouette : un contour à main levée sur A (gardé sur le calque « 👻 Silhouettes »), posé sur B, à sa taille
+        await PL('silhouette'); await p.waitForSelector('dialog.h-modal[open] [data-g2a]'); await sleep(900);
+        { const r = await p.$eval('dialog.h-modal[open] [data-g2a]', e => { const q = e.getBoundingClientRect(); return { x: q.left, y: q.top, w: q.width, h: q.height }; });
+            await p.mouse.move(r.x + r.w * 0.4, r.y + r.h * 0.3); await p.mouse.down(); for (const [fx, fy] of [[0.5, 0.3], [0.55, 0.6], [0.45, 0.75], [0.38, 0.5]]) await p.mouse.move(r.x + r.w * fx, r.y + r.h * fy, { steps: 4 }); await p.mouse.up(); await sleep(900); }
+        out.suite.ghost = { h: await p.$eval('dialog.h-modal[open] [data-g2h]', e => e.textContent), b: await canvasSig('dialog.h-modal[open] [data-g2b]') };
+        await p.click('dialog.h-modal[open] [data-g2r]'); await sleep(900); await closeSub(); await sleep(700);
+        out.suite.ghost.layer = await p.evaluate(() => { const t = window.LCNDA_EXT.enquetePhoto.current; const l = t.images.map(im => t.layersOf(im).find(x => x.id === 'ghost')).find(Boolean); return l ? l.shapes.map(s => (s.pts || []).length) : []; });
+        // 5. 📅 ce jour-là : 14 juillet 1911 → la lune, la météo (pas installée ici), Lucie DURAND baptisée ce jour-là
+        await PL('cejour'); await p.waitForSelector('dialog.h-modal[open] [name="day"]');
+        await p.fill('dialog.h-modal[open] [name="day"]', '1911-07-14'); await p.$eval('dialog.h-modal[open] [name="day"]', e => e.dispatchEvent(new Event('change', { bubbles: true }))); await sleep(1500);
+        out.suite.day = await p.evaluate(() => { const c = document.querySelector('dialog.h-modal[open] .ep2-card'); return { text: (c?.textContent || '').replace(/\s+/g, ' '), moon: !!c?.querySelector('[data-d2m] p'), family: !!c?.querySelector('[data-d2f] [data-d2p]') }; });
+        out.suite.dayApi = await api('that_day', { date: '1911-07-14' });
+        await closeSub();
+        // 6. 🗺 tournée : « Phot. J. LACOMBE » (Brive), noté comme photographe d'une enquête placée à Brive → sur la mini-carte, par année
+        const ph = await post('photographer_save', { name: 'Phot. J. LACOMBE', city: 'Brive', year_from: 1900, year_to: 1925 });
+        await post('clue_save', { inquiry_id: inqId, kind: 'support', text: 'Photographe : Phot. J. LACOMBE', certainty: 'probable', data: { photographer: 'Phot. J. LACOMBE' } });
+        out.suite.route = await api('photographer_route', { pid: ph.r.id });
+        await p.evaluate(id => window.LCNDA_EXT.enquetePhotoSuite.route(null, id), ph.r.id); await p.waitForSelector('dialog.h-modal[open] .ep2-route li', { timeout: 8000 }).catch(() => null);
+        out.suite.routeUi = await p.evaluate(() => ({ groups: document.querySelectorAll('dialog.h-modal[open] .ep2-route li').length, text: document.querySelector('dialog.h-modal[open] .ep2-route')?.textContent.replace(/\s+/g, ' ') || '', map: !!document.querySelector('dialog.h-modal[open] [data-r2] svg, dialog.h-modal[open] [data-r2] .mini-map, dialog.h-modal[open] [data-r2] canvas') }));
+        await closeSub();
+        // 7. 👔 tenues de métier : chaque fait a sa source ↗ ; Paul DURAND, forgeron, proposé depuis l'arbre
+        await p.evaluate(() => window.LCNDA_EXT.enquetePhotoAides.guide('metiers', window.LCNDA_EXT.enquetePhoto.current.api())); await p.waitForSelector('dialog.h-modal[open] .ep2-tree h4', { timeout: 8000 }).catch(() => null);
+        out.suite.jobs = await p.evaluate(() => { const d = document.querySelector('dialog.h-modal[open]'), items = [...d.querySelectorAll('.ep-guide')[0].querySelectorAll(':scope > li')]; return { n: items.length, sourced: items.every(li => /wikipedia\.org/.test(li.querySelector('a')?.href || '')), tree: d.querySelector('.ep2-tree')?.textContent.replace(/\s+/g, ' ') || '' }; });
+        await closeSub();
+        // 8. 🎞 occasions : sourcées ; le baptême de Lucie DURAND (1911) proposé dans la fenêtre ; ＋ Indice → « Supposé »
+        await p.evaluate(() => window.LCNDA_EXT.enquetePhotoAides.guide('occasions', window.LCNDA_EXT.enquetePhoto.current.api())); await p.waitForSelector('dialog.h-modal[open] .ep2-tree h4', { timeout: 8000 }).catch(() => null);
+        out.suite.occ = await p.evaluate(() => { const d = document.querySelector('dialog.h-modal[open]'), items = [...d.querySelectorAll('.ep-guide')[0].querySelectorAll(':scope > li')]; return { n: items.length, sourced: items.every(li => /wikipedia\.org/.test(li.querySelector('a')?.href || '')), tree: d.querySelector('.ep2-tree')?.textContent.replace(/\s+/g, ' ') || '' }; });
+        await p.evaluate(() => document.querySelector('dialog.h-modal[open] [data-o2^="bapteme"]')?.click()); await sleep(900); await closeSub();
+        // 9. ✍ en une phrase : « sans doute » pour une conclusion Probable ; ＋ Ajouter comme note à la fiche de Jean MAZAUD
+        await post('link_save', { inquiry_id: inqId, kind: 'person', ref_id: 1 }); await p.evaluate(() => window.LCNDA_EXT.enquetePhoto.current.reload()); await sleep(600);
+        await PL('phrase'); await p.waitForSelector('dialog.h-modal[open] [name="s"]');
+        out.suite.phrase = { text: await p.$eval('dialog.h-modal[open] [name="s"]', e => e.value) };
+        await p.click('dialog.h-modal[open] [data-p2note]'); await sleep(300);
+        out.suite.phrase.menu = await p.evaluate(() => [...document.querySelectorAll('.ui-menu [role="menuitem"], .ui-menu button, [class*="menu"] [role="menuitem"]')].map(b => b.textContent.trim()).filter(Boolean));
+        await p.evaluate(() => { const b = [...document.querySelectorAll('[role="menuitem"], .ui-menu button')].find(x => /MAZAUD/.test(x.textContent)); b?.click(); }); await sleep(1200);
+        out.suite.phrase.notes = await p.evaluate(() => window.LCNDA_APP.api('person', { id: 1 }).then(r => JSON.stringify(r.notes || r.person?.notes || r.result?.notes || r).includes('Cette photo a'), () => null));
+        out.suite.phrase.toast = await p.evaluate(() => [...document.querySelectorAll('.toast, [class*="toast"]')].map(t => t.textContent).join(' | '));
+        await closeSub();
+        // 10. 📜 ce qui a changé ma conclusion : Probable → Prouvé à cause d'un indice ; une certitude d'indice changée ; tout au journal
+        { const g = (await api('get', { id: inqId })).inquiry, c0 = g.clues.find(c => /HÔTEL DE LA POSTE/.test(c.text));
+            await post('conclusion', { id: inqId, conclusion: { ...g.conclusion, place: { ...g.conclusion.place, certainty: 'proven' } }, because: c0.id });
+            const c4b = g.clues.find(c => /képi/.test(c.text)); await post('clue_save', { id: c4b.id, certainty: 'supposed' });
+            const g2b = (await api('get', { id: inqId })).inquiry; out.suite.hist = C.conclusionHistory(g2b.journal).map(j => `${j.what} | ${j.result}`); out.suite.phrase2 = C.sentence(g2b.conclusion);
+            await post('conclusion', { id: inqId, conclusion: g.conclusion }); await post('clue_save', { id: c4b.id, certainty: c4b.certainty }); } // remis comme avant pour la suite de l’essai
+        await p.evaluate(() => window.LCNDA_EXT.enquetePhoto.current.reload()); await sleep(500);
+        await PL('historique'); await p.waitForSelector('dialog.h-modal[open] .ep2-hist li', { timeout: 5000 }).catch(() => null);
+        out.suite.histUi = await p.evaluate(() => document.querySelectorAll('dialog.h-modal[open] .ep2-hist li').length); await closeSub();
+        out.suite.because = await p.evaluate(d => { const t = window.LCNDA_EXT.enquetePhoto.current; t.st.openQ = 'conclusion'; t.st.panel = 'questions'; t.renderSide(); return !!document.querySelector(`${d} [name="c_because"]`); }, D);
+        // ⚙️ Personnaliser : la taille de la grille et le grossissement de la loupe
+        await p.evaluate(() => window.LCNDA_EXT.enquetePhoto.current.openPrefs()); await sleep(300);
+        out.suite.prefs = await p.evaluate(() => ({ grid: !!document.querySelector('dialog.h-modal[open] [data-pf="gridSize"]'), loupe: !!document.querySelector('dialog.h-modal[open] [data-pf="loupeZoom"]') }));
+        await closeSub();
+        // la grille des aides : les 11 de la suite s'ouvrent depuis l'onglet « Aides »
+        out.suite.aides = await p.evaluate(d => { const t = window.LCNDA_EXT.enquetePhoto.current; t.st.panel = 'aides'; t.renderSide(); return ['loupe2', 'grille', 'numeros', 'silhouette', 'cejour', 'tournee', 'g:metiers', 'g:occasions', 'phrase', 'historique', 'nouveau'].filter(k => document.querySelector(`${d} [data-ep-aidek="${k}"]`)); }, D);
+        await PL('nouveau'); await sleep(300); await closeSub();
+        await p.evaluate(() => { const t = window.LCNDA_EXT.enquetePhoto.current; t.st.panel = 'questions'; t.renderSide(); });
         out.plusErr = await p.evaluate(() => window.__epErr || []);
         out.report = await p.evaluate(() => window.LCNDA_EXT.enquetePhotoPlus.reportHtml(window.LCNDA_EXT.enquetePhoto.current.api()).then(h => ({ q: /Nos questions précises/.test(h), todo: /À chercher/.test(h), img: /<img src="data:image/.test(h) })));
         const g5 = (await api('get', { id: inqId })).inquiry;
+        out.suite.loupeClue = g5.clues.find(c => c.data?.loupe && c.source === 'compare' && c.certainty === 'supposed') || null;
+        out.suite.ghostClue = g5.clues.find(c => c.data?.ghost && c.certainty === 'supposed') || null;
+        out.suite.occClue = g5.clues.find(c => c.data?.occasion) || null;
+        out.suite.noteJournal = g5.journal.some(j => /Conclusion ajoutée comme note/.test(j.what));
         out.plusSaved = { checklist: Object.keys(g5.settings.checklist || {}).sort(), level: g5.settings.level, todo: g5.clues.filter(c => c.data?.todo).map(c => [c.text, c.certainty, c.data.against]), who: g5.clues.filter(c => c.data?.who).map(c => [c.text, c.certainty, c.source]), built: g5.clues.filter(c => c.data?.building).map(c => [c.date_from, c.certainty]) };
         await p.evaluate(() => document.querySelectorAll('.toast, [class*="toast"]').forEach(t => { if (t.querySelector('button')) t.remove(); }));
 
@@ -375,6 +474,13 @@ echo json_encode(['m' => $m]);`.replace('getenv(\'EXIF_JPG\')', `'${jpegWithExif
         out.overflowPlus = await p.evaluate(() => { const dl = document.querySelector('dialog.h-modal[open]'); return dl.scrollWidth - dl.clientWidth; });
         await p.evaluate(() => { [...document.querySelectorAll('dialog[open]')].filter(x => !x.classList.contains('ep-dlg')).forEach(x => x.close()); }); await sleep(150);
         await p.evaluate(() => window.LCNDA_EXT.enquetePhoto.current.betterSee()); await sleep(300);
+        await p.evaluate(() => window.LCNDA_EXT.enquetePhoto.current.togglePanel(false));
+        await p.evaluate(() => window.LCNDA_EXT.enquetePhotoPlus.open('loupe2', window.LCNDA_EXT.enquetePhoto.current.api())); await p.waitForSelector('dialog.h-modal[open] .ep2-loupes'); await sleep(600);
+        out.overflowSuite = { loupe: await p.evaluate(() => { const dl = document.querySelector('dialog.h-modal[open]'); return dl.scrollWidth - dl.clientWidth; }) };
+        await p.evaluate(() => { [...document.querySelectorAll('dialog[open]')].filter(x => !x.classList.contains('ep-dlg')).forEach(x => x.close()); window.LCNDA_EXT.enquetePhotoSuite.toggleGrid(window.LCNDA_EXT.enquetePhoto.current.api(), true); }); await sleep(400);
+        out.overflowSuite.bar = await p.evaluate(d => { const b = document.querySelector(`${d} .ep2-bar`), r = b?.getBoundingClientRect(); return r ? { left: Math.round(r.left), right: Math.round(r.right), vw: innerWidth } : null; }, D);
+        out.overflowSuite.legend = await p.evaluate(d => { const l = document.querySelector(`${d} [data-ep2-legend]`); return l ? l.scrollWidth - l.clientWidth : -1; }, D);
+        await p.evaluate(() => window.LCNDA_EXT.enquetePhotoSuite.toggleGrid(window.LCNDA_EXT.enquetePhoto.current.api(), false));
         out.overflowBetter = await p.evaluate(d => { const pn = document.querySelector(`${d} [data-ep-better] [data-tx-panel]`), r = pn?.getBoundingClientRect(); return r ? { left: Math.round(r.left), right: Math.round(r.right), vw: innerWidth } : null; }, D);
         await shot('ep-390.png');
         await p.evaluate(() => document.querySelector('dialog.ep-dlg')?.close()); await sleep(300);
@@ -388,6 +494,20 @@ echo json_encode(['m' => $m]);`.replace('getenv(\'EXIF_JPG\')', `'${jpegWithExif
         out.restored = (await api('list')).inquiries.some(q => q.id === free.r.id);
         await p.evaluate(() => document.querySelector('dialog.ep-dlg')?.close()); await sleep(300);
 
+        /* ═════ 11. 🔔 du nouveau pour une enquête terminée (calculé à la demande) : terminée « avant » le baptême de Lucie DURAND et la
+         *        nouvelle photo du même photographe ; une enquête terminée sans rien de neuf : pas de pastille ═════ */
+        await post('update', { id: inqId, status: 'done' });
+        php(`require 'lib/bootstrap.php'; db()->exec("UPDATE photo_inquiries SET updated_at='2000-01-01 00:00:00' WHERE id=${inqId}");`);
+        out.suite.reopen = (await api('list')).inquiries.find(q => q.id === inqId)?.reopen || [];
+        await post('update', { id: free.r.id, status: 'done' });
+        out.suite.reopenNone = (await api('list')).inquiries.find(q => q.id === free.r.id)?.reopen || null;
+        await post('update', { id: free.r.id, status: 'open' });
+        php(`require 'lib/bootstrap.php'; db()->exec("UPDATE photo_inquiries SET updated_at='2000-01-01 00:00:00' WHERE id=${inqId}");`);
+        await p.evaluate(id => window.LCNDA_EXT.enquetePhoto.open(id), inqId); await p.waitForSelector(`${D} .ep-chip`); await sleep(500);
+        out.suite.reopenNotice = await p.evaluate(d => document.querySelector(`${d} .ep2-reopen`)?.textContent.replace(/\s+/g, ' ') || '', D);
+        await p.evaluate(() => { window.LCNDA_EXT.enquetePhoto.current.t0 = Date.now(); document.querySelector('dialog.ep-dlg')?.close(); }); await sleep(400);
+        php(`require 'lib/bootstrap.php'; db()->exec("UPDATE photo_inquiries SET updated_at='2000-01-01 00:00:00' WHERE id=${inqId}");`);
+
         /* ═════ 📄 Documents → « Façon de ranger » → 🔎 Enquêtes photo : les cartes, ouvrir, 🗑 supprimer (↶ Annuler), vide ═════ */
         await p.evaluate(() => { try { localStorage.setItem('genealogie-menu-documents', '1'); localStorage.setItem('genealogie-menu-hidden', '[]'); } catch (_) {} location.hash = '#documents'; });
         await p.waitForSelector('#sidebar-content [data-ong-mode="inquiries"]', { timeout: 15000 }).catch(() => null);
@@ -398,6 +518,8 @@ echo json_encode(['m' => $m]);`.replace('getenv(\'EXIF_JPG\')', `'${jpegWithExif
             const listNow = (await api('list')).inquiries;
             out.docs.cards = await p.evaluate(() => [...document.querySelectorAll('#workspace [data-ong-cards] [data-ong-ep]')].map(c => ({ id: Number(c.dataset.ongEp), name: c.querySelector('.ui-card-name')?.textContent.trim(), line: c.querySelector('.ui-card-body small')?.textContent.trim() || '' })));
             out.docs.count = listNow.length;
+            out.docs.reopenBadge = await p.evaluate(id => document.querySelector(`#workspace [data-ong-ep="${id}"]`)?.textContent.includes('🔔') || false, inqId);
+            out.docs.otherBadge = await p.evaluate(id => [...document.querySelectorAll('#workspace [data-ong-ep]')].filter(c => Number(c.dataset.ongEp) !== id && c.textContent.includes('🔔')).length, inqId);
             out.docs.lineOk = out.docs.cards.every(c => /\d+ images? · \d+ indices?/.test(c.line));
             out.docs.title = out.docs.cards.some(c => c.name === 'Photo numérique');
             await p.click(`#workspace [data-ong-epopen="${free.r.id}"]`); await p.waitForSelector(`${D} .ep-chip`, { timeout: 8000 }).catch(() => null);
@@ -422,6 +544,10 @@ echo json_encode(['m' => $m]);`.replace('getenv(\'EXIF_JPG\')', `'${jpegWithExif
         await p.evaluate(id => window.LCNDA_EXT.enquetePhoto.open(id), inqId); await p.waitForSelector(`${D} .ep-chip`); await sleep(500);
         out.kiosk = { entered: kin, circleDisabled: await p.$eval(`${D} [data-ep-tool="circle"]`, b => b.disabled), status: await p.$eval(`${D} [data-ui-status]`, e => e.textContent), add: await p.evaluate(d => !!document.querySelector(`${d} [data-ep-add]`), D), x: await p.evaluate(d => !!document.querySelector(`${d} [data-ep-imgx], ${d} [data-ep-delinq]`), D) };
         out.kioskWrite = await post('clue_save', { inquiry_id: inqId, text: 'test', certainty: 'supposed' });
+        // 🔢 en consultation : la personne vivante reliée au n° 3 n'est jamais nommée (ni la fiche, ni le serveur) ; la légende le dit
+        { const g = (await api('get', { id: inqId })).inquiry, e = Object.entries(g.settings.people || {}).find(([, L]) => L.some(x => x.id === 'pm3'));
+            out.suite.kiosk = { m3: e ? e[1].find(x => x.id === 'pm3') : null, privNames: g.private_names };
+            if (e) { out.suite.kiosk.legend = await p.evaluate(([d, iid]) => { const t = window.LCNDA_EXT.enquetePhoto.current; t.st.cur = t.images.findIndex(x => x.id === Number(iid)); t.renderStage(); return new Promise(r => setTimeout(() => r(document.querySelector(`${d} [data-ep2-legend]`)?.textContent.replace(/\s+/g, ' ') || ''), 900)); }, [D, e[0]]); } }
         await p.evaluate(() => document.querySelector('dialog.ep-dlg')?.close());
         await p.evaluate(() => window.LCNDA_APP.api('kiosk_exit', {}, { method: 'POST', body: { password: 'secret-1234' } }).catch(() => null));
         out.errs = errs;
@@ -466,6 +592,25 @@ echo json_encode(['m' => $m]);`.replace('getenv(\'EXIF_JPG\')', `'${jpegWithExif
             assert.equal(r.length, 1); assert.equal(r[0].from, 1860); assert.deepEqual(C.buildingDates({ built: 1890, gone: 1950 }), { from: 1890, to: 1950 }); assert.equal(C.buildingDates({ dates: 'vers 1880' }).from, 1880); }],
         ['👶 croissance : deux enfants, trois images → l’ordre B, A, C et les écarts en années', () => { const g = C.growthOrder([{ ages: { 1: 8, 2: 3, 3: 12 } }, { ages: { 1: 5, 2: 0, 3: 9 } }], [1, 2, 3]); assert.deepEqual(g.order, ['2', '1', '3']); assert.deepEqual(g.t, { 1: 5, 2: 0, 3: 9 }); assert.equal(g.spread, 0); }],
         ['🏙 profil des toits : la même ligne à une autre échelle → écart 0', () => { assert.equal(C.lineGap(C.normLine([[0, 0.5], [0.5, 0.2], [1, 0.6]]), C.normLine([[0, 0.25], [1, 0.1], [2, 0.3]])), 0); assert.ok(C.lineGap(C.normLine([[0, 0], [1, 1]]), C.normLine([[0, 1], [1, 0]])) > 0.4); }],
+        // la suite (heritage-enquete-photo-suite.js), sans navigateur
+        ['✍ en une phrase : la prudence suit la certitude (Prouvé → rien, Probable → « sans doute », Supposé → « peut-être »)', () => {
+            assert.equal(C.sentence({ place: { name: 'Brive', certainty: 'proven' }, date: { text: '1910', certainty: 'proven' } }), 'Cette photo a été prise à Brive en 1910.');
+            assert.equal(C.sentence({ place: { name: 'Brive', certainty: 'probable' }, date: { text: 'vers 1910', certainty: 'probable' } }), 'Cette photo a sans doute été prise à Brive vers 1910.');
+            assert.equal(C.sentence({ place: { name: 'Tulle', certainty: 'proven' }, date: { text: 'vers 1910', certainty: 'supposed' } }), 'Cette photo a été prise à Tulle, peut-être vers 1910.');
+            assert.equal(C.sentence({ date: { text: '14 juillet 1911', certainty: 'supposed' } }), 'Cette photo a peut-être été prise le 14 juillet 1911.'); assert.equal(C.sentence({}), ''); }],
+        ['🔢 légende : « 1 : inconnu, 2 : Jean MAZAUD ? » ; un vivant relié ou écrit à la main n’est pas nommé en partage sans risque', () => {
+            assert.deepEqual(C.legendLines([{ n: 2, label: 'Jean MAZAUD', certainty: 'supposed' }, { n: 1 }]).map(l => `${l.n} : ${l.text}`), ['1 : inconnu', '2 : Jean MAZAUD ?']);
+            const safe = C.legendLines([{ n: 1, person_id: 2, certainty: 'probable' }, { n: 2, label: 'Marie LACOMBE ?' }, { n: 3, label: 'Paul DURAND', certainty: 'proven' }], { people: { 2: { name: 'Marie LACOMBE', private: true } }, safe: true, privNames: ['Marie LACOMBE'] });
+            assert.deepEqual(safe.map(l => l.text), ['Personne confidentielle', 'Personne confidentielle', 'Paul DURAND']); assert.equal(safe[0].person_id, 0); assert.equal(C.nextNumber([{ n: 1 }, { n: 3 }]), 2); }],
+        ['▦ grille : 3 × 3, 4 × 4, 6 × 6 ; les cases cochées comptées une fois ; la case d’un point', () => {
+            assert.deepEqual(C.GRID_SIZES, [3, 4, 6]); assert.deepEqual(C.gridProgress({ n: 3, done: [0, 4, 4, 12] }), { n: 3, done: 2, total: 9, all: false }); assert.equal(C.gridProgress({ n: 4, done: [...Array(16).keys()] }).all, true);
+            assert.equal(C.gridProgress({ n: 5 }).n, 3); assert.equal(C.gridCell(0.99, 0.99, 6), 35); assert.equal(C.gridCell(0.5, 0.1, 3), 1); }],
+        ['🔍 double loupe : la zone vue reste dans l’image ; la position liée suit le décalage choisi', () => {
+            const r = C.lensRect(0.99, 0.5, 4, 1000, 800, 320, 320); assert.ok(r.x + r.w <= 1 + 1e-9 && Math.abs(r.w - 0.08) < 1e-9, JSON.stringify(r)); assert.deepEqual(C.linkedPoint({ x: 0.5, y: 0.5 }, { dx: 0.1, dy: -0.6 }), { x: 0.6, y: 0 }); }],
+        ['👻 silhouette : le contour posé sur une autre image, agrandi, aux proportions de l’autre image', () => {
+            const g = C.ghostOn([[0.4, 0.2], [0.6, 0.2], [0.5, 0.6]], { k: 1.5, ratio: 0.5, dx: 0.1 }); assert.ok(Math.abs(g.h - 0.3) < 1e-9, String(g.h)); assert.ok(Math.abs(g.box.x - 0.45) < 1e-9); assert.equal(C.ghostOn([[0, 0], [1, 1]]), null); }],
+        ['🗺 tournée : les photos par année, les années inconnues à la fin', () => assert.deepEqual(C.byYear([{ year: 1912 }, { year: null }, { year: 1905 }, { year: 1912 }]).map(g => [g.year, g.photos.length]), [[1905, 1], [1912, 2], [null, 1]])],
+        ['📜 ce qui a changé : seulement les lignes « ⚖ » du journal, dans l’ordre', () => assert.deepEqual(C.conclusionHistory([{ id: 3, what: '⚖ Conclusion : le lieu', created_at: '2026-02-01' }, { id: 2, what: 'Indice 1 ajouté', created_at: '2026-01-01' }, { id: 1, what: '⚖ Certitude de l’indice 1', created_at: '2026-01-15' }]).map(j => j.id), [1, 3])],
     ];
     if (chromium) {
         try { await browserPart(out); } catch (e) { console.error(e); out.fatal = e.message; }
@@ -511,6 +656,25 @@ echo json_encode(['m' => $m]);`.replace('getenv(\'EXIF_JPG\')', `'${jpegWithExif
             ['× sur chaque image : sort l’image de l’enquête (le média reste) ; ↶ Annuler la remet', () => { assert.match(out.chipX.title, /Retirer cette image de l’enquête/); assert.equal(out.chipX.after, 0); assert.equal(out.chipX.media, true); assert.ok(out.chipX.undo); assert.equal(out.chipX.back, 1); }],
             ['🗑 Supprimer l’enquête : visible au pied du panneau, à gauche de « Terminer pour l’instant » ; tout de suite, ↶ Annuler la remet', () => { assert.ok(out.delBtn && /Supprimer l’enquête/.test(out.delBtn.text) && out.delBtn.before, JSON.stringify(out.delBtn)); assert.equal(out.delBtn.gone, true); assert.ok(out.delBtn.undo); assert.equal(out.delBtn.restored, true); }],
             ['390 px : une fenêtre d’aide et le panneau « Mieux voir » ne débordent pas', () => { assert.ok(out.overflowPlus <= 1, String(out.overflowPlus)); assert.ok(out.overflowBetter && out.overflowBetter.left >= -1 && out.overflowBetter.right <= out.overflowBetter.vw + 1, JSON.stringify(out.overflowBetter)); }],
+            ['1. 🔍 double loupe : deux vignettes et deux loupes ; promener la loupe sur A déplace celle de B (liées) ; un indice « comparaison »', () => { const L = out.suite.loupe; assert.equal(L.canvases, 4); assert.ok(L.b0 && L.b1 && L.b0 !== L.b1, JSON.stringify(L)); assert.ok(out.suite.loupeClue, JSON.stringify(out.suite.loupeClue)); }],
+            ['2. ▦ grille de lecture : 3 × 3, deux cases cochées gardées avec l’image (« 2 sur 9 ») ; 4 × 4 → 16 cases ; × la cache', () => { const G = out.suite.grid; assert.equal(G.cells, 9); assert.match(G.bar, /2 sur 9/); assert.deepEqual(G.saved, { n: 3, done: [0, 4] }); assert.equal(G.cells4, 16); assert.ok(G.off); }],
+            ['3. 🔢 numéroter : deux clics → 1 et 2, la légende dessous (« 1 : inconnu », « 2 : Jean MAZAUD ? ») ; PNG avec la légende sous la photo', () => { const P = out.suite.people; assert.deepEqual(P.pins, ['1', '2']); assert.equal(P.rows, 2); assert.deepEqual(P.legendText, ['1 : inconnu', '2 : Jean MAZAUD ?']); assert.ok(P.png.taller && P.png.w, JSON.stringify(P.png)); }],
+            ['3. 🔢 vie privée : Marie LACOMBE (vivante) jamais nommée en partage sans risque ; en consultation, le serveur ne la nomme pas non plus', () => { const P = out.suite.people; assert.ok(P.privNames.includes('Marie LACOMBE'), JSON.stringify(P.privNames)); assert.ok(P.safe.includes('Personne confidentielle') && !P.safe.some(t => /LACOMBE/.test(t)), JSON.stringify(P.safe));
+                const K = out.suite.kiosk; assert.ok(K && K.m3 && K.m3.person_id === 0 && K.m3.priv === 1 && K.m3.label === '', JSON.stringify(K)); assert.deepEqual(K.privNames, []); assert.ok(/Personne confidentielle/.test(K.legend || '') && !/LACOMBE/.test(K.legend || ''), K.legend); }],
+            ['4. 👻 silhouette : un contour à main levée gardé sur son calque « 👻 Silhouettes », posé sur B (taille en %), un indice « Supposé »', () => { const G = out.suite.ghost; assert.ok(G.layer.length >= 1 && G.layer[0] >= 4, JSON.stringify(G)); assert.match(G.h, /\d+ % de la hauteur/); assert.ok(out.suite.ghostClue, JSON.stringify(out.suite.ghostClue)); }],
+            ['5. 📅 ce jour-là (14 juillet 1911) : la lune, la météo d’autrefois (absente ici, dit), Lucie DURAND baptisée ce jour-là', () => { const Dy = out.suite.day; assert.ok(Dy.moon && Dy.family, JSON.stringify(Dy)); assert.match(Dy.text, /Lucie DURAND/); assert.match(Dy.text, /éclairée/); assert.match(Dy.text, /météo/i);
+                assert.ok(out.suite.dayApi.day.some(e => e.who.some(w => /Lucie/.test(w.name))), JSON.stringify(out.suite.dayApi)); }],
+            ['6. 🗺 tournée : « Phot. J. LACOMBE » → ses photos placées (Brive) sur la mini-carte, regroupées par année', () => { const R = out.suite.route; assert.ok(R.photos.length >= 1 && R.photos.every(x => x.place === 'Brive-la-Gaillarde'), JSON.stringify(R)); assert.ok(R.photos.some(x => x.year === 1905), JSON.stringify(R.photos)); assert.ok(out.suite.routeUi.groups >= 1 && /1905/.test(out.suite.routeUi.text) && out.suite.routeUi.map, JSON.stringify(out.suite.routeUi)); }],
+            ['7. 👔 tenues de métier : chaque fait avec sa source Wikipédia ; Paul DURAND, forgeron, trouvé dans l’arbre', () => { const J = out.suite.jobs; assert.ok(J.n >= 6 && J.sourced, JSON.stringify(J)); assert.match(J.tree, /Paul DURAND/); assert.match(J.tree, /Forgeron/); }],
+            ['8. 🎞 occasions : sourcées ; le baptême de Lucie DURAND (1911) proposé dans la fenêtre ; ＋ Indice → « Supposé »', () => { const O = out.suite.occ; assert.ok(O.n >= 6 && O.sourced, JSON.stringify(O)); assert.match(O.tree, /Lucie DURAND/); assert.ok(out.suite.occClue && out.suite.occClue.certainty === 'supposed' && out.suite.occClue.data.occasion === 'bapteme', JSON.stringify(out.suite.occClue)); }],
+            ['9. ✍ en une phrase : « sans doute » pour un lieu Probable ; ⧉ ; ＋ Ajouter comme note à la fiche reliée (Jean MAZAUD) ; Prouvé → sans prudence', () => { const P = out.suite.phrase; assert.match(P.text, /^Cette photo a sans doute été prise à Brive-la-Gaillarde/); assert.ok(P.menu.some(t => /MAZAUD/.test(t)), JSON.stringify(P.menu)); assert.match(P.toast, /Note ajoutée à la fiche/);
+                assert.ok(out.suite.noteJournal, 'journal'); assert.match(out.suite.phrase2, /^Cette photo a été prise à Brive-la-Gaillarde, sans doute entre 1905 et 1915\./); }],
+            ['10. 📜 ce qui a changé ma conclusion : « Probable → Prouvé » à cause de l’indice « HÔTEL DE LA POSTE », la certitude d’un indice changée ; dans le journal, sans table de plus', () => { const H = out.suite.hist; assert.ok(H.some(h => /^⚖ Conclusion : le lieu/.test(h) && /Probable\) → .*Prouvé\)/.test(h) && /à cause de l’indice \d+ « Enseigne « HÔTEL DE LA POSTE/.test(h)), JSON.stringify(H));
+                assert.ok(H.some(h => /^⚖ Certitude de l’indice \d+ \| Probable → Supposé/.test(h)), JSON.stringify(H)); assert.ok(out.suite.histUi >= 2); assert.ok(out.suite.because); }],
+            ['11. 🔔 du nouveau pour une enquête terminée : un événement de l’arbre dans la fenêtre ; dans l’enquête (↺ Reprendre) et sur sa carte de Documents ; rien pour une enquête sans nouveau', () => { assert.ok(out.suite.reopen.some(r => r.k === 'event' && /Baptême|BAPM/i.test(r.label)), JSON.stringify(out.suite.reopen)); assert.deepEqual(out.suite.reopenNone, []);
+                assert.match(out.suite.reopenNotice, /Du nouveau qui pourrait aider/); assert.ok(out.docs.reopenBadge, JSON.stringify(out.docs)); assert.equal(out.docs.otherBadge, 0); }],
+            ['la suite : les 11 aides dans la grille des aides ; ⚙️ Personnaliser (grille, loupe) ; 390 px sombre : la loupe et la barre de la grille ne débordent pas', () => { assert.equal(out.suite.aides.length, 11, JSON.stringify(out.suite.aides)); assert.ok(out.suite.prefs.grid && out.suite.prefs.loupe);
+                assert.ok(out.overflowSuite.loupe <= 1, JSON.stringify(out.overflowSuite)); assert.ok(out.overflowSuite.bar && out.overflowSuite.bar.left >= -1 && out.overflowSuite.bar.right <= out.overflowSuite.bar.vw + 1, JSON.stringify(out.overflowSuite)); }],
             ['aucune erreur JS', () => assert.deepEqual(out.errs, [], JSON.stringify(out.errs))],
         );
     } else console.log('  (Playwright absent : la partie navigateur n’est pas vérifiée)');

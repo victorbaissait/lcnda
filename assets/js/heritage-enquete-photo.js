@@ -12,7 +12,8 @@
  *       « quel indice pour quelle image », ✂ Séparer (↶ Annuler).
  *  § 3  indices et certitude (Prouvé · Probable · Supposé · Réfuté, barré) ; conclusion ; « 📍 Mettre ce lieu sur la photo » (↶ Annuler).
  *  § 7  relier à une personne, un lieu, un événement, une enquête 🕵️, une source, un tableau ; 🧺 panier ; « Ce qui le concerne ».
- * Réglage : genealogie-enquete-photo (⚙️ Personnaliser : l'IA éteinte au départ, tolérance de l'ombre, vue, questions guidées).
+ * Réglage : genealogie-enquete-photo (⚙️ Personnaliser : l'IA éteinte au départ, tolérance de l'ombre, vue, questions guidées ;
+ * grille de lecture et double loupe : heritage-enquete-photo-suite.js, qui se pose aussi sur la scène, la conclusion et les questions).
  * Mode consultation et appareils invités : lecture seule, rien ne part sur Internet.
  */
 (() => {
@@ -358,6 +359,7 @@
             }).join('');
             stage.querySelectorAll('img.ep-photo').forEach(imgEl => { const done = () => { this.paintShapes(this.imgById(imgEl.closest('[data-ep-view-img]').dataset.epViewImg)); this.applyZoom(); }; if (imgEl.complete && imgEl.naturalWidth) done(); else imgEl.addEventListener('load', done, {once: true}); });
             this.applyFilter(); this.applyZoom(); this.bindStage(stage);
+            ext.enquetePhotoSuite?.onStage?.(this.api(), stage); // ▦ grille de lecture, 🔢 personnes numérotées (heritage-enquete-photo-suite.js)
         }
         viewOf(im) { return this.dlg.querySelector(`[data-ep-view-img="${im?.id}"]`); }
         applyZoom() { const z = this.st.zoom; this.dlg.querySelectorAll('.ep-view .ep-canvas').forEach(c => { c.style.transform = `translate(${z.x}px, ${z.y}px) scale(${z.k})`; }); }
@@ -579,8 +581,8 @@
                 <label class="ui-toggle"><input type="checkbox" data-pf="numbers" ${p.numbers ? 'checked' : ''}><i></i>${esc(T('Numéroter les zones entourées'))}</label>
                 <label class="ui-toggle"><input type="checkbox" data-pf="tenMinutes" ${p.tenMinutes ? 'checked' : ''}><i></i>${esc(T('⏱ Mode « 10 minutes » : trois questions, les plus utiles'))}</label>
                 <label>${esc(T('Marge de l’ombre (degrés)'))} <input type="number" min="1" max="20" step="1" value="${p.tol}" data-pf="tol"></label>
-                <p class="ui-hint">${esc(T('Une ombre mesurée sur une photo n’est jamais exacte : 6° conseillés.'))}</p>`,
-                onOpen: dg => { const save = () => { const g = k => dg.querySelector(`[data-pf="${k}"]`); setPrefs({ai: g('ai').checked, guided: g('guided').checked, numbers: g('numbers').checked, tenMinutes: g('tenMinutes').checked, tol: Math.max(1, Math.min(20, Number(g('tol').value) || 6))}); this.renderSide(); this.images.forEach(im => this.paintShapes(im)); };
+                <p class="ui-hint">${esc(T('Une ombre mesurée sur une photo n’est jamais exacte : 6° conseillés.'))}</p>${ext.enquetePhotoSuite?.prefsHtml?.(p) || ''}`,
+                onOpen: dg => { const save = () => { const g = k => dg.querySelector(`[data-pf="${k}"]`); setPrefs({ai: g('ai').checked, guided: g('guided').checked, numbers: g('numbers').checked, tenMinutes: g('tenMinutes').checked, tol: Math.max(1, Math.min(20, Number(g('tol').value) || 6)), ...(ext.enquetePhotoSuite?.prefsRead?.(dg) || {})}); this.renderSide(); this.images.forEach(im => this.paintShapes(im)); };
                     if (UI().autoSaveDialog) UI().autoSaveDialog(dg, {keys: [KEY], save, reload: () => {}}); else dg.addEventListener('change', save); dg.addEventListener('change', save); },
                 onSubmit: () => true});
         }
@@ -609,7 +611,7 @@
             const cur = this.st.openQ || (Q.find(q => !done(q) && (!only || only.includes(q.k)))?.k) || 'conclusion';
             // 🗂 une photo de groupe sans verso n'a pas d'étape « dos »
             const list = Q.filter(q => (q.k !== 'dos' || this.images.some(i => i.side === 'verso') || this.images.length === 1 && /carte|postale|verso|dos/i.test(this.img?.media?.title || '') || marks.dos) && (!only || only.includes(q.k) || q.k === 'conclusion'));
-            pane.innerHTML = `${only ? `<p class="ui-notice ep-ten">⏱ ${esc(T('Mode « 10 minutes » : les trois questions les plus utiles.'))} <button type="button" class="link-button" data-ep-ten-next>${esc(T('Photo suivante sans enquête →'))}</button></p>` : ''}
+            pane.innerHTML = `${ext.enquetePhotoSuite?.reopenNotice?.(this.api()) || ''}${only ? `<p class="ui-notice ep-ten">⏱ ${esc(T('Mode « 10 minutes » : les trois questions les plus utiles.'))} <button type="button" class="link-button" data-ep-ten-next>${esc(T('Photo suivante sans enquête →'))}</button></p>` : ''}
                 <ol class="ep-qs">${list.map((q, i) => { const d = done(q), on = q.k === cur, sum = this.qSummary(q.k);
                     return `<li class="ep-q${on ? ' is-open' : ''}${d ? ' is-done' : ''}" data-ep-q="${q.k}"><button type="button" class="ep-qh" data-ep-qopen="${q.k}" aria-expanded="${on}"><span class="ep-qn">${d ? '✓' : i + 1}</span><span class="ep-qt">${esc(titles[q.k])}</span>${!on && sum ? `<small class="ep-qs-sum">${esc(sum)}</small>` : ''}${on && !d ? `<small class="ep-qs-sum">${esc(T('en cours'))}</small>` : ''}</button>
                         ${on ? `<div class="ep-qb">${this.qBody(q.k)}</div>` : ''}</li>`; }).join('')}</ol>
@@ -825,6 +827,7 @@
                 <div><span class="pk-lab">📅 ${esc(T('Date'))}</span><input name="c_date" value="${esc(c.date?.text || (w.from || w.to ? T('entre {a} et {b}', {a: w.from || '…', b: w.to || '…'}) : ''))}" placeholder="${esc(T('vers 1910, entre 1905 et 1915…'))}" data-ep-cdate ${this.ro ? 'readonly' : ''}><small class="ui-hint" data-ep-cdate-ok></small>${certSeg('c_dcert', c.date?.certainty || 'probable')}
                     <label>${esc(T('Pourquoi'))}<input name="c_dwhy" value="${esc(c.date?.why || w.steps.map(s => `${s.text}${s.from ? ` (${T('après {y}', {y: s.from})})` : ''}${s.to ? ` (${T('avant {y}', {y: s.to})})` : ''}`).join(' · '))}" ${this.ro ? 'readonly' : ''}></label></div>
                 ${miss.length ? `<p class="ui-notice">❓ ${esc(T('Pour aller plus loin :'))} ${miss.map(esc).join(' ')}</p>` : ''}
+                ${ext.enquetePhotoSuite?.becauseHtml?.(this.api()) || ''}
                 ${this.ro ? '' : `<div class="ep-row"><button type="button" class="button small secondary" data-ep-csave>✎ ${esc(T('Enregistrer la conclusion'))}</button><button type="button" class="button small" data-ep-apply>📍 ${esc(T('Mettre ce lieu sur la photo'))}</button></div>
                 <p class="ui-hint">${esc(T('« Mettre ce lieu sur la photo » remplit le lieu et la date de l’image, avec la certitude et un lien vers l’enquête comme source. ↶ Annuler.'))}</p>`}
                 <div data-ep-linksmini>${this.linksHtml()}</div></div>`;
@@ -846,7 +849,7 @@
         }
         async saveConclusion(pane) {
             const before = this.inq.conclusion || {}, conc = this.collectConclusion(pane);
-            try { const r = await post('conclusion', {id: this.inq.id, conclusion: conc}); this.inq.conclusion = r.conclusion; await this.reload(); undoToast(T('Conclusion enregistrée'), {undo: async () => { await post('conclusion', {id: this.inq.id, conclusion: before}); await this.reload(); }}); return true; }
+            try { const r = await post('conclusion', {id: this.inq.id, conclusion: conc, because: Number(pane.querySelector('[name="c_because"]')?.value) || 0}); this.inq.conclusion = r.conclusion; await this.reload(); undoToast(T('Conclusion enregistrée'), {undo: async () => { await post('conclusion', {id: this.inq.id, conclusion: before}); await this.reload(); }}); return true; }
             catch (e) { toast(e.message, 'error'); return false; }
         }
         async applyConclusion() {
@@ -953,7 +956,7 @@
     function refreshLists() { listeners.forEach(f => { try { f(); } catch (_) {} }); }
     (ext.editToolsExtra = ext.editToolsExtra || []).push({key: 'enquete_photo', icon: '🔎', label: 'Enquête photo', what: 'enquête',
         load: async () => ((await get('list')).inquiries || []).map(q => ({id: q.id, name: q.title, date: q.updated_at, thumb: q.thumb ? `<img src="${esc(mediaSrc({filename: q.thumb}))}" alt="">` : '<span class="h-et-ico">🔎</span>',
-            info: [plural(q.n_images, 'image'), plural(q.n_clues, 'indice'), q.place?.name ? `🗺 ${q.place.name}` : '', q.date?.text ? `📅 ${q.date.text}` : '', q.status === 'done' ? T('terminée pour l’instant') : ''].filter(Boolean).join(' · ')})),
+            info: [plural(q.n_images, 'image'), plural(q.n_clues, 'indice'), q.place?.name ? `🗺 ${q.place.name}` : '', q.date?.text ? `📅 ${q.date.text}` : '', q.status === 'done' ? T('terminée pour l’instant') : '', (q.reopen || []).length ? `🔔 ${T('Du nouveau')} : ${q.reopen[0].label}` : ''].filter(Boolean).join(' · ')})),
         open: (id, again) => { listeners.add(again); return open(id, {onClose: again}); },
         create: async again => { listeners.add(again); const P = window.LCNDA_PICKER; const it = await P?.openMediaPicker?.({multiple: true, eyebrow: T('🔎 ENQUÊTE PHOTO'), title: T('Sur quelles images enquêter ?')}); if (it && it.length) { await create(it.map(x => x.id)); again?.(); } },
         rename: (id, name) => post('update', {id, title: name}),

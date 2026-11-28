@@ -421,7 +421,8 @@ function act_transcription_clean_data(PDO $pdo, $data): array
     $about = mb_substr(safe_text(is_string($data['about'] ?? null) ? $data['about'] : ''), 0, 600);
     return ['zones' => $zones, 'people' => $people, 'view' => $cleanView, 'status' => $status] + ($reason ? ['reason' => $reason] : []) + ($about !== '' ? ['about' => $about] : []) + (count($pages) >= 2 ? ['pages' => $pages] : []) + ($pageViews ? ['pageViews' => $pageViews] : []) + ($gabarit ? ['gabarit' => $gabarit] : []) + ($frame !== '' ? ['frame_text' => $frame] : []) + ($translation !== '' ? ['translation' => $translation] : []) + ($reviewed ? ['reviewed' => $reviewed] : [])
         + (safe_int($data['hinted'] ?? 0) > 0 ? ['hinted' => min(99, safe_int($data['hinted']))] : []) // 🧠 le texte vient d'une lecture faite avec N indices de « Aider l'IA » (ses mots [?] : « lu avec un indice »)
-        + ((require_once __DIR__ . '/atelier_idees_data.php') ? txi_idees_clean_extra($data) : []); // ⏭ 🌐 le registre (reg) et 🔤 la version modernisée (modern) : lib/atelier_idees_data.php
+        + ((require_once __DIR__ . '/atelier_idees_data.php') ? txi_idees_clean_extra($data) : []) // ⏭ 🌐 le registre (reg) et 🔤 la version modernisée (modern) : lib/atelier_idees_data.php
+        + ((require_once __DIR__ . '/atelier_plus2_data.php') ? txp2_clean_extra($data) : []); // 🧾 le résumé (summary) et ✍️ les lettres du scribe (letters) : lib/atelier_plus2_data.php
 }
 
 function save_act_transcription(PDO $pdo, array $data): array

@@ -351,6 +351,10 @@ try {
         require_once __DIR__ . '/lib/enquete_photo.php';
         ep_dispatch($pdo, (string) $action, $isWrite, is_array($payload) ? $payload : []);
     }
+    if ($action === 'atelier_plus2' || $action === 'atelier_plus2_write') { // 📜 Atelier, outils en plus (2) : lettres du scribe, résumé, relevé, pile (lib/atelier_plus2.php)
+        require_once __DIR__ . '/lib/atelier_plus2.php';
+        txp2_dispatch($pdo, (string) $action, $isWrite, is_array($payload) ? $payload : []);
+    }
     if ($action === 'atelier_idees' || $action === 'atelier_idees_write') { // 📜 Atelier, idées 35 à 40 : registre, IIIF, recherche, deux couches, entraîner (lib/atelier_idees.php)
         require_once __DIR__ . '/lib/atelier_idees.php';
         txi_idees_dispatch($pdo, (string) $action, $isWrite, $payload);

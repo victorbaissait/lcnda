@@ -81,7 +81,8 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/sections.css?v=5">
     <link rel="stylesheet" href="assets/css/transcribe.css?v=29">
     <link rel="stylesheet" href="assets/css/atelier-idees.css?v=4">
-    <link rel="stylesheet" href="assets/css/enquete-photo.css?v=4">
+    <link rel="stylesheet" href="assets/css/atelier-plus2.css?v=1">
+    <link rel="stylesheet" href="assets/css/enquete-photo.css?v=5">
     <link rel="stylesheet" href="assets/css/photomaps.css?v=9">
     <link rel="stylesheet" href="assets/css/shortcuts.css?v=4">
     <link rel="stylesheet" href="assets/css/meteo.css?v=5">
@@ -1345,7 +1346,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/aide-langues/ar.js?v=1" defer></script>
 <!-- aide-langues : fin -->
 <script src="assets/js/app-autrefois-engine.js?v=2" defer></script>
-<script src="assets/js/app-montants-core.js?v=1" defer></script>
+<script src="assets/js/app-montants-core.js?v=2" defer></script>
 <script src="assets/js/app-calculette-engine.js?v=2" defer></script>
 <script src="assets/js/app-texte-engine.js?v=2" defer></script>
 <script src="assets/js/app-texte-formats.js?v=5" defer></script>
@@ -1621,9 +1622,9 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-blocs-school.js?v=3" defer></script>
 <script src="assets/js/heritage-creations.js?v=5" defer></script>
 <script src="assets/js/app-correspondances-core.js?v=2" defer></script>
-<script src="assets/js/heritage-onglets-documents.js?v=33" defer></script>
+<script src="assets/js/heritage-onglets-documents.js?v=34" defer></script>
 <script src="assets/js/heritage-onglets-catalogue.js?v=6" defer></script>
-<script src="assets/js/heritage-transcribe-view.js?v=14" defer></script>
+<script src="assets/js/heritage-transcribe-view.js?v=15" defer></script>
 <script src="assets/js/heritage-transcribe-acte-core.js?v=5" defer></script>
 <script src="assets/js/heritage-transcribe-acte.js?v=25" defer></script>
 <script src="assets/js/heritage-transcribe-trouve.js?v=6" defer></script>
@@ -1638,17 +1639,19 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-transcribe-compare.js?v=5" defer></script>
 <script src="assets/js/heritage-transcribe-xml.js?v=1" defer></script>
 <script src="assets/js/heritage-transcribe-contexte.js?v=7" defer></script>
-<script src="assets/js/heritage-transcribe.js?v=97" defer></script>
+<script src="assets/js/heritage-transcribe.js?v=98" defer></script>
 <script src="assets/js/heritage-photomaps-time.js?v=2" defer></script>
 <script src="assets/js/heritage-photomaps.js?v=15" defer></script>
 <script src="assets/js/heritage-transcribe-list.js?v=9" defer></script>
-<script src="assets/js/heritage-atelier-regle.js?v=1" defer></script>
+<script src="assets/js/heritage-atelier-regle.js?v=2" defer></script>
 <script src="assets/js/heritage-atelier-suivant.js?v=3" defer></script>
 <script src="assets/js/heritage-atelier-iiif.js?v=3" defer></script>
 <script src="assets/js/heritage-atelier-recherche.js?v=3" defer></script>
 <script src="assets/js/heritage-atelier-couches.js?v=1" defer></script>
 <script src="assets/js/heritage-atelier-entrainer.js?v=1" defer></script>
-<script src="assets/js/heritage-atelier-aides.js?v=2" defer></script>
+<script src="assets/js/heritage-atelier-aides.js?v=3" defer></script>
+<script src="assets/js/heritage-atelier-plus2-data.js?v=1" defer></script>
+<script src="assets/js/heritage-atelier-plus2.js?v=1" defer></script><!-- 📜 Atelier, outils en plus (2) : mots d’autrefois, latin, lettres du scribe, voix, résumé, seconde lecture, relevé, objectif (lib/atelier_plus2.php) -->
 <script src="assets/js/heritage-slideshow.js?v=27" defer></script>
 <script src="assets/js/heritage-keynote.js?v=30" defer></script>
 <script src="assets/js/heritage-tableur.js?v=16" defer></script>
@@ -1819,10 +1822,11 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-comptes-famille.js?v=3" defer></script>
 <script src="assets/js/app-htr-correction.js?v=2" defer></script>
 <script src="assets/js/app-lignes-alignement.js?v=2" defer></script>
-<script src="assets/js/app-enquete-photo-core.js?v=2" defer></script>
-<script src="assets/js/heritage-enquete-photo.js?v=2" defer></script>
-<script src="assets/js/heritage-enquete-photo-aides.js?v=2" defer></script>
+<script src="assets/js/app-enquete-photo-core.js?v=3" defer></script>
+<script src="assets/js/heritage-enquete-photo.js?v=3" defer></script>
+<script src="assets/js/heritage-enquete-photo-aides.js?v=3" defer></script>
 <script src="assets/js/heritage-enquete-photo-plus.js?v=1" defer></script>
+<script src="assets/js/heritage-enquete-photo-suite.js?v=2" defer></script>
 <script>
 (function () {
     var toggle = document.getElementById('lightbox-tag-toggle');

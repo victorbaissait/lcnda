@@ -353,6 +353,7 @@
         if (!ctx.id && ctx.mediaId) { try { const o = await api('act_page_owner', {media_id: ctx.mediaId}); if (o?.id) ctx = {...ctx, id: Number(o.id), page: Number(ctx.mediaId)}; } catch (_) {} } // 📑
         if (ctx.id) { try { const r = await api('act_transcription', {id: ctx.id}); t = {...t, ...r, data: {...t.data, ...(r.data || {})}}; t.data.view = TV.viewOf(r.data?.view); if (!['todo', 'doing', 'checked', 'done'].includes(t.data.status)) t.data.status = String(t.body || '').trim() ? 'doing' : 'todo'; } catch (e) { return toast(e.message, 'error'); } }
         else if (ctx.mediaId) { t.media_id = Number(ctx.mediaId); t.filename = ctx.filename || ''; t.title = fileLikeTitle(ctx.title, ctx.filename) ? '' : (ctx.title || ''); t.body = ctx.text || ''; if (KINDS.some(k => k[0] === ctx.kind)) t.kind = ctx.kind; } // kind : ex. « lettre » pour le dos d'une carte postale
+        if (!ctx.id && ctx.atelierNext?.view) t.data.view = TV.viewOf(ctx.atelierNext.view); // 📚 registre entier : les réglages « Mieux voir » repris d'un acte à l'autre (heritage-atelier-plus2.js)
         t.data.zones = Array.isArray(t.data.zones) ? t.data.zones : []; t.data.people = Array.isArray(t.data.people) ? t.data.people : [];
         t.body = normBody(t.body, [t.data.zones, t.data.people]); // 🧲 \r\n → \n : la case le ferait de toute façon, les zones suivent
         let dirty = false, tool = 'pan', fitMode = 'page', fitOn = true, zoom = 1, panX = 0, panY = 0, selZone = null, found = [], imgW = 0, imgH = 0, matchCache = new Map();
@@ -791,7 +792,9 @@
         /* ─── « 🎚️ Mieux voir » : filtre CSS rapide, ou calcul pixel par pixel dans un Web Worker ─── */
         let enh = null, enhFor = '', srcEl = null, processed = false, loupeImg = null, srcP = null, srcFailed = '';
         const origSrc = () => `media/${encodeURIComponent(t.filename)}`;
-        const setHref = u => { if (img.getAttribute('href') !== u) img.setAttribute('href', u); if (loupeImg?.dataset.u !== u) { loupeImg = new Image(); loupeImg.dataset.u = u; loupeImg.src = u; } };
+        /** 🔍 « Mieux voir seulement dans la loupe » (⚙️ Personnaliser, heritage-atelier-plus2.js) : l'image reste telle quelle, la loupe montre les réglages */
+        const loupeOnly = () => { try { return localStorage.getItem('genealogie-tx-loupe-seule') === '1'; } catch (_) { return false; } };
+        const setHref = u => { const main = loupeOnly() && t.filename ? origSrc() : u; if (img.getAttribute('href') !== main) img.setAttribute('href', main); if (loupeImg?.dataset.u !== u) { loupeImg = new Image(); loupeImg.dataset.u = u; loupeImg.src = u; } };
         const getEnh = () => enh || (enh = TV.enhancer((u, info) => { if (!TV.needsPixels(t.data.view)) return; processed = true; img.style.filter = ''; setHref(u); dlg.dataset.txMs = String(Math.round(info.ms)); dlg.dataset.txRender = info.preview ? 'preview' : 'full'; dlg.dataset.txRenders = String(Number(dlg.dataset.txRenders || 0) + 1); }));
         /** l'image de l'acte préparée dans le worker, une seule fois (plusieurs curseurs bougés pendant la préparation l'attendent) ; false : impossible */
         function ensureSource() {
@@ -814,7 +817,7 @@
                     if (srcFailed !== t.filename) { srcFailed = t.filename; toast(i18n('« Mieux voir » : cette image n’a pas pu être préparée (trop grande ou abîmée) ; seuls contraste, luminosité, négatif et gris s’appliquent.'), 'error'); }
                 } else if (!enh.ok && !applyImage.warned) { applyImage.warned = true; toast(i18n('Ce navigateur ne sait pas calculer ces réglages : seuls contraste, luminosité, négatif et gris s’appliquent.'), 'error'); }
             }
-            processed = false; setHref(origSrc()); img.style.filter = TV.cssFilter(v); paintBadge();
+            processed = false; setHref(origSrc()); img.style.filter = loupeOnly() ? '' : TV.cssFilter(v); paintBadge();
         }
         /** un réglage de l'image a changé (curseur : aperçu rapide pendant qu'on le bouge) */
         function setView(k, val, {preview = false} = {}) {
@@ -891,7 +894,7 @@
         let findHits = [], findCur = -1, abbrevs = [], hintW = [];
         const decos = () => [...hintW.map((f, i) => ({s: f.s, e: f.e, o: `<span class="h-tx-hintw" data-hw="${i}">`, c: '</span>', w: 3})),...findHits.map((f, i) => ({s: f.s, e: f.e, o: `<span class="h-tx-hit${i === findCur ? ' is-cur' : ''}">`, c: '</span>', w: 0})),
             ...txFix.map(f => ({s: f.s, e: f.e, o: `<u class="h-tx-fix${f.sure ? ' is-sure' : ''}">`, c: '</u>', w: 1})),
-            ...abbrevs.map((f, i) => ({s: f.s, e: f.e, o: `<span class="h-tx-ab${f.amount ? ' is-amount' : ''}" data-ab="${i}">`, c: '</span>', w: 2}))].sort((x, y) => x.s - y.s || x.w - y.w);
+            ...abbrevs.map((f, i) => ({s: f.s, e: f.e, o: `<span class="h-tx-ab${f.amount ? ' is-amount' : ''}${f.cls ? ` ${f.cls}` : ''}" data-ab="${i}">`, c: '</span>', w: 2}))].sort((x, y) => x.s - y.s || x.w - y.w);
         let curDecos = [];
         const fixSeg = (text, a, b) => { let h = '', q = a; curDecos.filter(f => f.e > a && f.s < b).forEach(f => { const s0 = Math.max(a, f.s), e0 = Math.min(b, f.e); if (s0 < q) return; h += esc(text.slice(q, s0)) + f.o + esc(text.slice(s0, e0)) + f.c; q = e0; }); return h + esc(text.slice(q, b)); };
         async function runFix({quiet = false} = {}) {
@@ -945,6 +948,10 @@
             const text = area.value, marks = []; abbrevs = TV.abbrevOn?.() && window.LCNDA_AIDE_LECTURE?.abbrevs ? window.LCNDA_AIDE_LECTURE.abbrevs(text, aideLang($('[data-tx-lang]')?.value || '')) : [];
             // 💰📏 les sommes et les mesures anciennes (app-montants-core.js) : soulignées comme les abréviations, leur valeur au survol
             if (TV.amountsOn?.() && window.LCNDA_MONTANTS) { const am = window.LCNDA_MONTANTS.scan(text).filter(h => !abbrevs.some(a => h.s < a.e && h.e > a.s)); abbrevs = [...abbrevs, ...am.map(h => ({s: h.s, e: h.e, word: h.raw, amount: h}))].sort((x, y) => x.s - y.s); }
+            // 📖 🏛 les mots d'autrefois, le latin des registres et mes mots (heritage-atelier-plus2.js : ext.txHoverMore) ; mes mots passent avant tout
+            if (ext.txHoverMore?.length) { const more = ext.txHoverMore.flatMap(f => { try { return f(text, {lang: $('[data-tx-lang]')?.value || ''}) || []; } catch (_) { return []; } }), pr = more.filter(h => h.prio);
+                abbrevs = [...abbrevs.filter(a => !pr.some(h => h.s < a.e && h.e > a.s)), ...pr]; const rest = more.filter(h => !h.prio && !abbrevs.some(a => h.s < a.e && h.e > a.s)).filter((h, i, l) => !l.slice(0, i).some(o => h.s < o.e && h.e > o.s));
+                abbrevs = [...abbrevs, ...rest].sort((x, y) => x.s - y.s); }
             hintW = Number(t.data.hinted) > 0 && ext.txCtx?.doubtWords ? ext.txCtx.doubtWords(text) : []; // 🧠 les mots [?] d'une lecture faite avec des indices
             curDecos = decos();
             t.data.zones.forEach((z, i) => { if (z.e > z.s) marks.push({s: z.s, e: z.e, c: colorOf(z, i), on: selZone === z.id}); });
@@ -1171,7 +1178,7 @@
             status(e2 > s ? i18n('Zone reliée au passage choisi') : i18n('Zone posée : choisis son passage dans le texte, puis « 🔗 Au passage choisi »'));
         };
         svg.addEventListener('pointerup', endPointer); svg.addEventListener('pointercancel', endPointer);
-        stage.addEventListener('wheel', e => { e.preventDefault(); if (loupe.on && !lc.hidden) { loupe.mag = clamp(loupe.mag * Math.exp(-e.deltaY * .002), 1.5, 12); paintLoupe(e.clientX, e.clientY); return; } const r = svg.getBoundingClientRect(), cx = e.clientX - r.left, cy = e.clientY - r.top; if (e.ctrlKey || e.metaKey || !e.deltaX) zoomAt(zoom * Math.exp(-e.deltaY * .0022), cx, cy); else { panX -= e.deltaX; panY -= e.deltaY; applyView(); } }, {passive: false});
+        stage.addEventListener('wheel', e => { e.preventDefault(); if (loupe.on && !lc.hidden) { loupe.mag = clamp(loupe.mag * Math.exp(-e.deltaY * .002), 1.5, 12); paintLoupe(e.clientX, e.clientY); clearTimeout(loupeMagT); loupeMagT = setTimeout(() => { try { localStorage.setItem('genealogie-tx-loupe-zoom', loupe.mag.toFixed(2)); } catch (_) {} }, 400); return; } const r = svg.getBoundingClientRect(), cx = e.clientX - r.left, cy = e.clientY - r.top; if (e.ctrlKey || e.metaKey || !e.deltaX) zoomAt(zoom * Math.exp(-e.deltaY * .0022), cx, cy); else { panX -= e.deltaX; panY -= e.deltaY; applyView(); } }, {passive: false});
         /** clavier sur la zone choisie : flèches = déplacer, Maj + flèches = redimensionner (côté droit / bas), Alt = au point près */
         let keyEdit = 0;
         function nudgeZone(key, resize, fine) {
@@ -1441,7 +1448,7 @@
         async function openCompare(pick = null, mode = '') {
             if (!ext.txCompare) return toast(i18n('La comparaison des lectures n’est pas chargée.'), 'error');
             if (!t.id) { await save(); if (!t.id) return; }
-            ext.txCompare.open({actId: t.id, title: $('[data-tx="title"]').value || i18n('Acte'), current: () => area.value, api, post, pick: Array.isArray(pick) ? pick : null, mode: mode === 'line' ? 'line' : '', // ⚖️ « Comparer avec ma version » : ces lectures cochées
+            ext.txCompare.open({actId: t.id, title: $('[data-tx="title"]').value || i18n('Acte'), current: () => area.value, api, post, pick: Array.isArray(pick) ? pick : null, mode: mode === 'line' || mode === 'word' ? mode : '', // 👥 « Seconde lecture » : mot à mot // ⚖️ « Comparer avec ma version » : ces lectures cochées
                 images: PAGES.length > 1 ? PAGES.map((p, i) => ({src: `media/${encodeURIComponent(p.filename)}`, label: pageName(p, i)})) : t.filename ? [{src: origSrc()}] : [], // 🖼 l'image de l'acte à côté des lectures
                 apply: (txt, label) => { versionBefore(label); const was = snapText(), to = {...was, body: txt + (txt.endsWith('\n') ? '' : '\n')}; putText(to); status(i18n('Texte fusionné (à relire)'));
                     A().undoToast?.(i18n('Lectures fusionnées dans le texte.'), {undo: () => putText(was), redo: () => putText(to)}); }});
@@ -1558,6 +1565,7 @@
             const sp = mirror.querySelector(`.h-tx-ab[data-ab="${i}"]`); if (!sp) return;
             if (a.amount) { const x = amountInfo(a.amount); if (!x) return hideAb();
                 abTip.innerHTML = `<b>${a.amount.type === 'money' ? '💰' : '📏'} ${esc(x.title)}</b>${x.lines.map(l => `<span class="h-tx-amline">${esc(l)}</span>`).join('')}${x.source ? `<small>${esc(i18n('Source'))} : ${x.url ? `<a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">${esc(x.source)} ↗</a>` : esc(x.source)}</small>` : ''}<button type="button" class="link-button" data-tx-abopen>${esc(i18n('Voir le calcul dans 🪙 le Convertisseur d’autrefois'))}</button>`; }
+            else if (a.tip) abTip.innerHTML = a.tip; // 📖 🏛 (heritage-atelier-plus2.js) : sa bulle toute faite
             else abTip.innerHTML = `<b data-i18n-off>${esc(a.word)}</b> = <span data-i18n-off>${esc(a.item.d)}</span>${a.item.ex ? `<small data-i18n-off>${esc(a.item.ex)}</small>` : ''}<button type="button" class="link-button" data-tx-abopen>${esc(i18n('Ouvrir dans 📖 Aide à la lecture'))}</button>`;
             abTip.hidden = false; const ed = $('[data-tx-editor]').getBoundingClientRect(), r = sp.getClientRects()[0] || sp.getBoundingClientRect(), w = abTip.offsetWidth, h = abTip.offsetHeight;
             const left = Math.max(4, Math.min(ed.width - w - 4, r.left - ed.left)), below = r.bottom - ed.top + 4; abTip.style.left = `${left}px`; abTip.style.top = `${below + h > ed.height ? Math.max(4, r.top - ed.top - h - 4) : below}px`;
@@ -1578,7 +1586,7 @@
         area.addEventListener('mousemove', e => { if (!abbrevs.length && !hintW.length) return; cancelAnimationFrame(abRaf); abRaf = requestAnimationFrame(() => { const i = abbrevs.length ? abAt(e.clientX, e.clientY) : -1; if (i >= 0) return showAb(i); const h = hintW.length ? hwAt(e.clientX, e.clientY) : -1; if (h >= 0) return showHint(h); if (!abTip.hidden) { clearTimeout(abHide); abHide = setTimeout(hideAb, 350); } }); });
         area.addEventListener('mouseleave', () => { clearTimeout(abHide); abHide = setTimeout(hideAb, 350); });
         abTip.addEventListener('mouseenter', () => clearTimeout(abHide)); abTip.addEventListener('mouseleave', () => { abHide = setTimeout(hideAb, 250); });
-        abTip.addEventListener('click', e => { if (!e.target.closest('[data-tx-abopen]')) return; const a = abShown < 1e6 ? abbrevs[abShown] : null; hideAb(); if (a?.amount) { const x = amountInfo(a.amount); if (x) ext.autrefois?.open({tab: x.convert.tab, value: x.convert.value, year: x.convert.year}); return; } if (a) ext.readingAid?.open({q: String(a.item.t).split(',')[0].trim(), lang: aideLang($('[data-tx-lang]').value)}); });
+        abTip.addEventListener('click', e => { if (!e.target.closest('[data-tx-abopen]')) return; const a = abShown < 1e6 ? abbrevs[abShown] : null; hideAb(); if (a?.open) { a.open(); return; } if (a?.amount) { const x = amountInfo(a.amount); if (x) ext.autrefois?.open({tab: x.convert.tab, value: x.convert.value, year: x.convert.year}); return; } if (a) ext.readingAid?.open({q: String(a.item.t).split(',')[0].trim(), lang: aideLang($('[data-tx-lang]').value)}); });
         // au toucher (ou un clic) : le mot touché montre sa bulle (sauf s'il a une correction proposée : son menu passe d'abord)
         area.addEventListener('click', () => { if (!abbrevs.length || area.selectionStart !== area.selectionEnd) return hideAb(); const c = area.selectionStart; if (txFix.some(f => c >= f.s && c <= f.e)) return; const i = abbrevs.findIndex(a => c >= a.s && c <= a.e); if (i >= 0) showAb(i); else hideAb(); });
         area.addEventListener('input', hideAb); area.addEventListener('scroll', hideAb);
@@ -2221,7 +2229,7 @@
         const numbered = text => { const L = String(text).split('\n'), w = String(L.length).length; return L.map((l, i) => `${String(i + 1).padStart(w, ' ')}  ${l}`).join('\n'); };
         const peopleText = () => (t.data.people || []).filter(p => p.name).map(p => `- ${p.name}${p.role ? ` — ${i18n(p.role)}` : ''}`).join('\n');
         const namedText = (o = {}) => { const body = multiPages() ? pageParts().map(q => `— ${q.name} —\n${o.ln ? numbered(q.text) : q.text}`).join('\n\n') : (o.ln ? numbered(area.value) : area.value);
-            const pp = o.people ? peopleText() : ''; return pp ? `${body}\n\n${i18n('Personnes')}\n${pp}\n` : body; };
+            const pp = o.people ? peopleText() : '', sm = ext.txSummaryText?.(t) || ''; const out = pp ? `${body}\n\n${i18n('Personnes')}\n${pp}\n` : body; return sm ? `${out.replace(/\n+$/, '')}\n\n${i18n('Résumé')}\n${sm}\n` : out; }; // 🧾 le résumé de l'acte (heritage-atelier-plus2.js)
         /** les cases remplies du gabarit, dans l'ordre : [[nom, valeur]] (impression, PDF) */
         const gabRows = () => { const g = GB(), gb = t.data.gabarit; if (!g || !gb || gb.kind !== kindNow()) return []; return g.fieldsOf(kindNow(), gb).filter(([k]) => gb.fields?.[k]?.v).map(([k, l]) => [l, gb.fields[k].v + (gb.fields[k].ok ? ' ✓' : '')]); };
         /**
@@ -2426,12 +2434,14 @@ ${gb.map(([l, v]) => `        <interp n="${x(l)}">${x(v)}</interp>`).join('\n')}
         const roBar = new ResizeObserver(() => { if (dlg.isConnected && isNarrow() !== narrow) renderBar(); }); roBar.observe($('.h-tx-left'));
         const onBar = () => { renderBar(); $('[data-tx-editor]')?.classList.toggle('has-ln', TV.lineNos()); paintMirror(); paintFlow(); }; window.addEventListener('lcnda-txbar-change', onBar);
         /* ─── 🔍 Loupe : suit la souris ; la molette change le grossissement ─── */
-        const loupe = {on: false, mag: 3}, lc = $('[data-tx-loupe]');
+        // ⚙️ Personnaliser (heritage-atelier-plus2.js) : la taille (auto : un tiers de l'image, entre 140 et 240 px) et le grossissement retenus
+        const loupePref = (k, d) => { try { const v = Number(localStorage.getItem(k)); return Number.isFinite(v) && v > 0 ? v : d; } catch (_) { return d; } };
+        const loupe = {on: false, mag: clamp(loupePref('genealogie-tx-loupe-zoom', 3), 1.5, 12)}, lc = $('[data-tx-loupe]'); let loupeMagT = 0;
         const paintLoupeBtn = () => { const b = $('[data-tx-cmd="loupe"]'); if (b) { b.classList.toggle('is-active', loupe.on); b.setAttribute('aria-pressed', String(loupe.on)); } };
         let lastPt = null;
         function paintLoupe(cx = lastPt?.[0], cy = lastPt?.[1]) {
             if (cx == null) return; lastPt = [cx, cy];
-            const r = stage.getBoundingClientRect(), sx = cx - r.left, sy = cy - r.top, S = Math.min(240, Math.max(140, Math.round(r.width / 3)));
+            const r = stage.getBoundingClientRect(), sx = cx - r.left, sy = cy - r.top, S = loupePref('genealogie-tx-loupe-taille', 0) ? clamp(loupePref('genealogie-tx-loupe-taille', 0), 100, Math.max(100, Math.min(420, r.width - 8))) : Math.min(240, Math.max(140, Math.round(r.width / 3)));
             if (!loupe.on || !imgW || !loupeImg?.naturalWidth || sx < 0 || sy < 0 || sx > r.width || sy > r.height) { lc.hidden = true; return; }
             const dpr = devicePixelRatio || 1; if (lc.width !== Math.round(S * dpr)) { lc.width = lc.height = Math.round(S * dpr); lc.style.width = lc.style.height = `${S}px`; }
             lc.hidden = false; lc.style.left = `${sx - S / 2}px`; lc.style.top = `${sy - S / 2}px`;
@@ -2585,7 +2595,7 @@ ${gb.map(([l, v]) => `        <interp n="${x(l)}">${x(v)}</interp>`).join('\n')}
             ext.retouchMedia ? {icon: '🎚️', label: i18n('Éclaircir / restaurer l’image'), disabled: !curMedia(), run: retouchImage} : null].filter(Boolean);
         /* 🧩 idées 35 à 40 (heritage-atelier-*.js) : ext.txPlugins (f(plug) à l'ouverture), ext.txMenus (f(menu, plug) → [items], mis avant le dernier groupe) */
         const plug = {dlg, ctx, get t() { return t; }, area, $, touch, save, status, drawZones, gotoRange, selectText, setTool, onHere, kindNow, curPid, isDirty: () => dirty, findDates,
-            geo: () => ({zoom, panX, panY, imgW, imgH, rotPt, unrot, stage}), reveal: z => reveal(z), runHtr: (o = {}) => runHtr(o),
+            geo: () => ({zoom, panX, panY, imgW, imgH, rotPt, unrot, stage}), reveal: z => reveal(z), runHtr: (o = {}) => runHtr(o), openCompare: (pick, mode) => openCompare(pick, mode), applyImage: () => applyImage(), versionsSoon: () => VS?.soon(),
             switchTo: async next => { if (dirty) { await save(); if (dirty) return; } switching = true; teardown(); return open({...next, onClose: ctx.onClose, onSaved: ctx.onSaved}); }};
         const txPlugMenus = defs => Object.fromEntries(Object.entries(defs).map(([k, f]) => [k, () => { const base = f(), more = (ext.txMenus || []).flatMap(g => { try { return g(k, plug) || []; } catch (_) { return []; } }).filter(Boolean);
             if (!more.length) return base; const i = base.lastIndexOf('-'); return i < 0 ? [...base, '-', ...more] : [...base.slice(0, i), '-', ...more, ...base.slice(i)]; }]));

@@ -733,6 +733,7 @@
             name: q.title || T('Enquête photo'), open: `data-ong-epopen="${q.id}"`, openLabel: T('Ouvrir l’enquête'), attrs: `data-ong-ep="${q.id}"`,
             lines: [[plural(q.n_images, 'image'), plural(q.n_clues, 'indice')].join(' · '), [q.place?.name ? `🗺 ${q.place.name}` : '', q.date?.text ? `📅 ${q.date.text}` : '', q.status === 'done' ? T('terminée pour l’instant') : ''].filter(Boolean).join(' · ')],
             date: q.updated_at,
+            badges: (q.reopen || []).length ? [{text: `🔔 ${T('Du nouveau')}`, kind: 'blue', title: q.reopen.map(r => r.label).join(' · ')}] : [], // ↺ une enquête terminée que du nouveau pourrait aider (lib/enquete_photo.php, calculé à la demande)
             menu: ro ? [] : [`<button type="button" role="menuitem" data-ong-epdel="${q.id}">🗑 ${esc(T('Supprimer l’enquête'))}</button>`]
         })))}</div>`;
         box.onclick = async e => {
